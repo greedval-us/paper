@@ -1,0 +1,538 @@
+{
+    "runAtUtc": "2026-10-11T21:08:38.6603921Z",
+    "unityVersion": "6000.5.7f1",
+    "strategy": "Before each wave, choose DeepInk if offered. Visit radii 3,4,6,7,8,9 around the base in W,E,S,N,SW,SE,NW,NE order. Skip occupied cells. Buy three pencil mortars then one pencil piercer, repeating by cumulative successful purchase count. Stop purchasing when ink is below 90, including before a piercer. Launch immediately. Spend only the default starting ink, passive supply, kills, wave grants, and bounded early-launch grants.",
+    "phase": "Victory",
+    "seed": 1337,
+    "maxTicksPerWave": 18000,
+    "startingInk": 360,
+    "starterStructures": 14,
+    "expectedKills": 3180,
+    "kills": 3180,
+    "purchasedWeapons": 44,
+    "survivingStructures": 58,
+    "ink": 2161,
+    "fixedDeltaSeconds": 0.03333333507180214,
+    "startingBaseHealth": 250.0,
+    "baseHealth": 250.0,
+    "elapsedSeconds": 332.4403991699219,
+    "wallTimeMilliseconds": 1761.5577,
+    "passed": true,
+    "radii": [
+        3,
+        4,
+        6,
+        7,
+        8,
+        9
+    ],
+    "upgradeAfterWaves": [
+        2,
+        4,
+        6
+    ],
+    "waves": [
+        {
+            "wave": 1,
+            "kills": 80,
+            "purchasedWeapons": 4,
+            "survivingStructures": 18,
+            "ink": 255,
+            "ticks": 788,
+            "title": "Каракули с запада",
+            "phase": "Intermission",
+            "baseHealth": 250.0,
+            "elapsedSeconds": 26.26660919189453,
+            "timedOut": false
+        },
+        {
+            "wave": 2,
+            "kills": 200,
+            "purchasedWeapons": 6,
+            "survivingStructures": 20,
+            "ink": 339,
+            "ticks": 892,
+            "title": "Бегуны с востока",
+            "phase": "Intermission",
+            "baseHealth": 250.0,
+            "elapsedSeconds": 55.999488830566409,
+            "timedOut": false
+        },
+        {
+            "wave": 3,
+            "kills": 380,
+            "purchasedWeapons": 10,
+            "survivingStructures": 24,
+            "ink": 360,
+            "ticks": 1018,
+            "title": "Первые грызуны · запад / север",
+            "phase": "Intermission",
+            "baseHealth": 250.0,
+            "elapsedSeconds": 89.93230438232422,
+            "timedOut": false
+        },
+        {
+            "wave": 4,
+            "kills": 640,
+            "purchasedWeapons": 14,
+            "survivingStructures": 28,
+            "ink": 515,
+            "ticks": 1247,
+            "title": "Два фронта · восток / юг",
+            "phase": "Intermission",
+            "baseHealth": 250.0,
+            "elapsedSeconds": 131.49913024902345,
+            "timedOut": false
+        },
+        {
+            "wave": 5,
+            "kills": 1000,
+            "purchasedWeapons": 20,
+            "survivingStructures": 34,
+            "ink": 664,
+            "ticks": 1357,
+            "title": "Чернильный прилив · запад / восток",
+            "phase": "Intermission",
+            "baseHealth": 250.0,
+            "elapsedSeconds": 176.74212646484376,
+            "timedOut": false
+        },
+        {
+            "wave": 6,
+            "kills": 1500,
+            "purchasedWeapons": 27,
+            "survivingStructures": 41,
+            "ink": 900,
+            "ticks": 1371,
+            "title": "Штурм полей · север / юг",
+            "phase": "Intermission",
+            "baseHealth": 250.0,
+            "elapsedSeconds": 222.45188903808595,
+            "timedOut": false
+        },
+        {
+            "wave": 7,
+            "kills": 2180,
+            "purchasedWeapons": 37,
+            "survivingStructures": 51,
+            "ink": 1180,
+            "ticks": 1540,
+            "title": "Со всех сторон",
+            "phase": "Intermission",
+            "baseHealth": 250.0,
+            "elapsedSeconds": 273.7880554199219,
+            "timedOut": false
+        },
+        {
+            "wave": 8,
+            "kills": 3180,
+            "purchasedWeapons": 44,
+            "survivingStructures": 58,
+            "ink": 2161,
+            "ticks": 1760,
+            "title": "Финальная осада · 1000 каракуль",
+            "phase": "Victory",
+            "baseHealth": 250.0,
+            "elapsedSeconds": 332.4403991699219,
+            "timedOut": false
+        }
+    ],
+    "purchases": [
+        {
+            "beforeWave": 1,
+            "x": 29,
+            "y": 20,
+            "cost": 90,
+            "inkAfter": 270,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 1,
+            "x": 35,
+            "y": 20,
+            "cost": 90,
+            "inkAfter": 180,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 1,
+            "x": 32,
+            "y": 17,
+            "cost": 90,
+            "inkAfter": 90,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 1,
+            "x": 32,
+            "y": 23,
+            "cost": 65,
+            "inkAfter": 25,
+            "kind": "Piercer",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 2,
+            "x": 28,
+            "y": 20,
+            "cost": 90,
+            "inkAfter": 165,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 2,
+            "x": 36,
+            "y": 20,
+            "cost": 90,
+            "inkAfter": 75,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 3,
+            "x": 32,
+            "y": 16,
+            "cost": 90,
+            "inkAfter": 249,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 3,
+            "x": 32,
+            "y": 24,
+            "cost": 65,
+            "inkAfter": 184,
+            "kind": "Piercer",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 3,
+            "x": 28,
+            "y": 16,
+            "cost": 90,
+            "inkAfter": 94,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 3,
+            "x": 36,
+            "y": 16,
+            "cost": 90,
+            "inkAfter": 4,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 4,
+            "x": 28,
+            "y": 24,
+            "cost": 90,
+            "inkAfter": 270,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 4,
+            "x": 36,
+            "y": 24,
+            "cost": 65,
+            "inkAfter": 205,
+            "kind": "Piercer",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 4,
+            "x": 26,
+            "y": 20,
+            "cost": 90,
+            "inkAfter": 115,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 4,
+            "x": 38,
+            "y": 20,
+            "cost": 90,
+            "inkAfter": 25,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 5,
+            "x": 32,
+            "y": 14,
+            "cost": 90,
+            "inkAfter": 425,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 5,
+            "x": 32,
+            "y": 26,
+            "cost": 65,
+            "inkAfter": 360,
+            "kind": "Piercer",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 5,
+            "x": 26,
+            "y": 14,
+            "cost": 90,
+            "inkAfter": 270,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 5,
+            "x": 38,
+            "y": 14,
+            "cost": 90,
+            "inkAfter": 180,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 5,
+            "x": 26,
+            "y": 26,
+            "cost": 90,
+            "inkAfter": 90,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 5,
+            "x": 38,
+            "y": 26,
+            "cost": 65,
+            "inkAfter": 25,
+            "kind": "Piercer",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 6,
+            "x": 25,
+            "y": 20,
+            "cost": 90,
+            "inkAfter": 574,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 6,
+            "x": 39,
+            "y": 20,
+            "cost": 90,
+            "inkAfter": 484,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 6,
+            "x": 32,
+            "y": 13,
+            "cost": 90,
+            "inkAfter": 394,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 6,
+            "x": 32,
+            "y": 27,
+            "cost": 65,
+            "inkAfter": 329,
+            "kind": "Piercer",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 6,
+            "x": 25,
+            "y": 13,
+            "cost": 90,
+            "inkAfter": 239,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 6,
+            "x": 39,
+            "y": 13,
+            "cost": 90,
+            "inkAfter": 149,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 6,
+            "x": 25,
+            "y": 27,
+            "cost": 90,
+            "inkAfter": 59,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 7,
+            "x": 39,
+            "y": 27,
+            "cost": 65,
+            "inkAfter": 835,
+            "kind": "Piercer",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 7,
+            "x": 24,
+            "y": 20,
+            "cost": 90,
+            "inkAfter": 745,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 7,
+            "x": 40,
+            "y": 20,
+            "cost": 90,
+            "inkAfter": 655,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 7,
+            "x": 32,
+            "y": 12,
+            "cost": 90,
+            "inkAfter": 565,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 7,
+            "x": 32,
+            "y": 28,
+            "cost": 65,
+            "inkAfter": 500,
+            "kind": "Piercer",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 7,
+            "x": 24,
+            "y": 12,
+            "cost": 90,
+            "inkAfter": 410,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 7,
+            "x": 40,
+            "y": 12,
+            "cost": 90,
+            "inkAfter": 320,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 7,
+            "x": 24,
+            "y": 28,
+            "cost": 90,
+            "inkAfter": 230,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 7,
+            "x": 40,
+            "y": 28,
+            "cost": 65,
+            "inkAfter": 165,
+            "kind": "Piercer",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 7,
+            "x": 23,
+            "y": 20,
+            "cost": 90,
+            "inkAfter": 75,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 8,
+            "x": 41,
+            "y": 20,
+            "cost": 90,
+            "inkAfter": 1090,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 8,
+            "x": 32,
+            "y": 11,
+            "cost": 90,
+            "inkAfter": 1000,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 8,
+            "x": 32,
+            "y": 29,
+            "cost": 65,
+            "inkAfter": 935,
+            "kind": "Piercer",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 8,
+            "x": 23,
+            "y": 11,
+            "cost": 90,
+            "inkAfter": 845,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 8,
+            "x": 41,
+            "y": 11,
+            "cost": 90,
+            "inkAfter": 755,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 8,
+            "x": 23,
+            "y": 29,
+            "cost": 90,
+            "inkAfter": 665,
+            "kind": "Mortar",
+            "tier": "Pencil"
+        },
+        {
+            "beforeWave": 8,
+            "x": 41,
+            "y": 29,
+            "cost": 65,
+            "inkAfter": 600,
+            "kind": "Piercer",
+            "tier": "Pencil"
+        }
+    ]
+}

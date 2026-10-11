@@ -1,0 +1,6 @@
+{
+  "name": "PaperDefense.Validation",
+  "rootNamespace": "PaperDefense.Validation",
+  "references": ["PaperDefense.Core", "PaperDefense.Application", "PaperDefense.Presentation"],
+  "autoReferenced": true
+}

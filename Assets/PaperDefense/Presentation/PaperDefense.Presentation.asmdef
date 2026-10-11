@@ -1,0 +1,6 @@
+{
+  "name": "PaperDefense.Presentation",
+  "rootNamespace": "PaperDefense.Presentation",
+  "references": ["PaperDefense.Core", "PaperDefense.Application", "Unity.InputSystem", "Unity.ugui"],
+  "autoReferenced": true
+}

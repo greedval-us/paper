@@ -1,0 +1,8 @@
+{
+  "name": "PaperDefense.Core.Tests",
+  "rootNamespace": "PaperDefense.Tests",
+  "references": ["PaperDefense.Core"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "autoReferenced": false
+}

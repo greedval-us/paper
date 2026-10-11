@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "fingerprint": "1d472183ea174cbc",
+  "expectedFingerprint": "1d472183ea174cbc",
+  "normalFile": "player-pressure-x1.json",
+  "fastFile": "player-pressure-x2.json",
+  "normalDiscardedSeconds": 0.0,
+  "fastDiscardedSeconds": 0.0
+}

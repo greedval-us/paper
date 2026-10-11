@@ -1,0 +1,7 @@
+{
+  "name": "PaperDefense.Editor",
+  "rootNamespace": "PaperDefense.Editor",
+  "references": ["PaperDefense.Core", "PaperDefense.Application", "PaperDefense.Presentation", "PaperDefense.Validation"],
+  "includePlatforms": ["Editor"],
+  "autoReferenced": true
+}

@@ -1,0 +1,6 @@
+{
+  "name": "PaperDefense.Application",
+  "rootNamespace": "PaperDefense.Application",
+  "references": ["PaperDefense.Core"],
+  "autoReferenced": true
+}

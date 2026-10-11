@@ -1,0 +1,6 @@
+{
+  "name": "PaperDefense.Core",
+  "rootNamespace": "PaperDefense.Core",
+  "autoReferenced": true,
+  "noEngineReferences": true
+}

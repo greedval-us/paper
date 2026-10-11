@@ -1,0 +1,5 @@
+totalImpacts=639 maxInOneTick=36 maxTick=1401 breachImpactOverlapTicks=0
+breach tick=1250 impacts=0
+breach tick=1321 impacts=0
+breach tick=1549 impacts=0
+breach tick=1713 impacts=0

@@ -1,0 +1,2 @@
+active=3000; renderers=4; vertices=172491; CPU mesh rebuild ms=10,1499866666667
+Editor Play Mode: warmed CPU DrawWorld mesh rebuild/upload only; excludes GPU, UI, effects and simulation. Not an FPS benchmark.

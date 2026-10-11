@@ -1,0 +1,14 @@
+{
+    "enemyTarget": 3000,
+    "peakActive": 3000,
+    "activeAtEnd": 3000,
+    "shots": 145,
+    "killed": 0,
+    "structuresDestroyedByEnemies": 2,
+    "structuresDamagedAtEnd": 29,
+    "simulationSeconds": 20.0,
+    "wallClockMilliseconds": 188.9314,
+    "averageTickMilliseconds": 0.3148856666666667,
+    "unity": "6000.5.7f1",
+    "scope": "Editor: Core simulation, weighted navigation, construction, breach and combat. Rendering excluded; no target hardware guarantee."
+}
