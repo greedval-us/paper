@@ -24,7 +24,9 @@ namespace PaperDefense.Core
 
     public enum MaterialTier { Pencil, Ink, Marker }
     public enum StructureKind { Wall, Gun, Piercer, Mortar, Spikes }
-    public enum EnemyKind { Doodle, Runner, Gnawer }
+    public enum EnemyKind { Doodle, Runner, Gnawer, Spitter }
+    public enum DrawingTier { Sketch, Outlined, Hatched }
+    public enum InkColor { None, Red, Blue, Green }
     public enum RunPhase { Planning, Assault, Intermission, Victory, Defeat }
     public enum TargetPriority { Nearest, Strongest, Siege }
     public enum RunUpgrade { RapidFire, DeepInk, Salvage }
@@ -47,13 +49,14 @@ namespace PaperDefense.Core
     {
         public EnemyKind Kind;
         public float MaxHealth, Speed, Damage, AttackInterval;
+        public float Range = 12.5f, WindupSeconds = .8f, ProjectileSeconds = .65f;
         public int Reward;
     }
 
     public sealed class WaveDefinition
     {
         public int Count = 80;
-        public float SpawnInterval = 0.14f, RunnerFraction, GnawerFraction;
+        public float SpawnInterval = 0.14f, RunnerFraction, GnawerFraction, SpitterFraction, OutlinedFraction, HatchedFraction;
         /// <summary>Spawn edges: west 1, east 2, north 4, south 8.</summary>
         public int Sides = 1;
         public string Title = "Первые каракули";
@@ -68,6 +71,10 @@ namespace PaperDefense.Core
         public int MaxEarlyLaunchInk = 30, WaveInkGrant = 75;
         public float SimulationStep = 1f / 30f;
         public int MaxEnemiesPerCell = 6;
+        public bool EnableEnemyMechanics, EnableInkWells;
+        public float BlotLifetime = 8, BlotBuffSeconds = 4, BlotSpeedBonus = .15f, BlotReduction = .15f;
+        public int BlotterCost = 8, WellActivationCost = 45, WellInkPerWave = 12, WaveGold = 8, VictoryGold = 30;
+        public float BlotterCooldown = 3, BlotterRadius = 3, WellHealth = 160;
         public List<StructureDefinition> StructureDefinitions = new List<StructureDefinition>
         {
             new StructureDefinition { Kind = StructureKind.Wall, Cost = 3, MaxHealth = 65, BuildSeconds = 0.35f },
@@ -86,7 +93,8 @@ namespace PaperDefense.Core
         {
             new EnemyDefinition { Kind = EnemyKind.Doodle, MaxHealth = 22, Speed = 2.1f, Damage = 6, AttackInterval = 1.1f, Reward = 1 },
             new EnemyDefinition { Kind = EnemyKind.Runner, MaxHealth = 14, Speed = 3.6f, Damage = 3, AttackInterval = 0.8f, Reward = 1 },
-            new EnemyDefinition { Kind = EnemyKind.Gnawer, MaxHealth = 95, Speed = 1.25f, Damage = 18, AttackInterval = 0.9f, Reward = 3 }
+            new EnemyDefinition { Kind = EnemyKind.Gnawer, MaxHealth = 95, Speed = 1.25f, Damage = 18, AttackInterval = 0.9f, Reward = 3 },
+            new EnemyDefinition { Kind = EnemyKind.Spitter, MaxHealth = 35, Speed = 1.7f, Damage = 10, AttackInterval = 2.4f, Reward = 2 }
         };
         public List<WaveDefinition> Waves = new List<WaveDefinition>
         {
@@ -124,6 +132,10 @@ namespace PaperDefense.Core
         public bool IsComplete, WaitingForClearance;
         public Point2 Aim;
         public TargetPriority Priority;
+        public TowerBlueprint Blueprint;
+        public InkColor Color;
+        internal float SecondaryCooldown, AcquisitionRemaining;
+        internal int TargetId;
         internal int PaidInk;
         internal int FrontageUsed;
     }
@@ -134,6 +146,15 @@ namespace PaperDefense.Core
         public EnemyKind Kind;
         public Point2 Position;
         public float Health, MaxHealth;
+        public DrawingTier DrawingTier;
+        public float BlotRemaining, RedRemaining, BlueRemaining, GreenRemaining, WindupRemaining;
+        internal float RedTickRemaining;
+        internal StructureKind RedSourceWeapon;
+        internal int ObjectiveIndex = -1;
+        internal int RangedObjectiveIndex = -1;
+        internal Point2 RangedTarget;
+        internal float RangedCooldown;
+        internal bool WindingUp;
         internal float AttackCooldown;
         internal float SpeedScale = 1;
         internal Point2 Destination;

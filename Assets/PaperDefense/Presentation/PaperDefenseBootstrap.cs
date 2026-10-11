@@ -19,7 +19,7 @@ namespace PaperDefense.Presentation
             if (worldCamera == null)
             { var go = new GameObject("Notebook Camera"); worldCamera = go.AddComponent<Camera>(); go.tag = "MainCamera"; }
             Controller = Child("Application — Run").AddComponent<RunController>(); Controller.balanceAsset = balance;
-            Controller.Initialize();
+            Controller.InitializeWorkshop();
             var background=Child("Paper background camera").AddComponent<Camera>();background.depth=-10;background.cullingMask=0;
             background.clearFlags=CameraClearFlags.SolidColor;background.backgroundColor=new Color(.975f,.961f,.9f);
             ConfigureCamera();
@@ -27,6 +27,7 @@ namespace PaperDefense.Presentation
             View.WorldCamera = worldCamera; View.Initialize(Controller.Session);
             Drawing = Child("Presentation — Drawing input").AddComponent<DrawingInput>(); Drawing.Initialize(Controller,View,worldCamera);
             Child("Presentation — Interface").AddComponent<NotebookHud>().Initialize(Controller,Drawing);
+            Child("Presentation — Workshop").AddComponent<WorkshopHud>().Initialize(Controller);
             if (EventSystem.current == null)
             { var go=Child("UI Event System");go.AddComponent<EventSystem>();go.AddComponent<InputSystemUIInputModule>(); }
             Controller.SessionChanged += OnSessionChanged;

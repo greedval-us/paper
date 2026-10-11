@@ -28,7 +28,7 @@ namespace PaperDefense.Tests
             var camera=new GameObject("Integration camera",typeof(Camera));camera.transform.SetParent(root.transform);
             game.worldCamera=camera.GetComponent<Camera>();
             mouse=InputSystem.AddDevice<Mouse>("NotebookTestMouse");mouse.MakeCurrent();
-            root.SetActive(true);game.Controller.TogglePause();yield return null;yield return null;
+            root.SetActive(true);game.Controller.Initialize();game.Controller.TogglePause();yield return null;yield return null;
         }
         [UnityTearDown] public IEnumerator TearDown()
         {if(mouse!=null && mouse.added) InputSystem.RemoveDevice(mouse);Object.Destroy(root);Object.Destroy(asset);yield return null;}

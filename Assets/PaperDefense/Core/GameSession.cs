@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PaperDefense.Core
 {
-    public sealed class GameSession
+    public sealed partial class GameSession
     {
         public GameBalance Balance { get; }
         public IReadOnlyList<StructureState> Structures => structures;
@@ -64,6 +64,7 @@ namespace PaperDefense.Core
             reservedFrontline = new bool[grid.Length * 3];
             weapons = new WeaponSystem(balance);
             random = new Random(seed);
+            InitializeObjectives();
             if (starterDefenses) AddStarterDefenses();
         }
 
@@ -89,6 +90,7 @@ namespace PaperDefense.Core
                     invalid = "Оставьте внешнее поле для появления врагов.";
                 else if (Math.Abs(cell.X - BaseCell.X) <= 1 && Math.Abs(cell.Y - BaseCell.Y) <= 1)
                     invalid = "Центр тетради нужно оставить свободным.";
+                else if (ReservedObjective(cell)) invalid = "Оставьте место для чернильницы.";
                 else if (StructureAt(cell) != null)
                 {
                     var existing = StructureAt(cell);
@@ -149,16 +151,16 @@ namespace PaperDefense.Core
             if (structure.Tier == MaterialTier.Marker) { reason = "Это уже самый прочный материал."; return false; }
             if (!structure.IsComplete) { reason = "Дождитесь завершения рисунка."; return false; }
             var nextTier = (MaterialTier)((int)structure.Tier + 1);
-            int difference = Math.Max(0, BuildCost(structure.Kind, nextTier) - BuildCost(structure.Kind, structure.Tier));
+            int difference = Math.Max(0, StructureBuildCost(structure, nextTier) - StructureBuildCost(structure, structure.Tier));
             if (difference > Ink) { reason = "Не хватает штрихов: нужно " + difference + "."; return false; }
             Ink -= difference;
             structure.PaidInk += difference;
             Statistics.RecordUpgrade(difference);
             float fraction = Clamp(structure.Health / Math.Max(1, structure.MaxHealth), 0, 1);
             structure.Tier = nextTier;
-            structure.MaxHealth = Balance.Structure(structure.Kind).MaxHealth * Balance.Material(nextTier).HealthMultiplier * healthMultiplier;
+            structure.MaxHealth = StructureHealth(structure, nextTier);
             structure.Health = structure.MaxHealth * fraction;
-            structure.BuildRemaining = Math.Max(0, Balance.Structure(structure.Kind).BuildSeconds * Balance.Material(nextTier).BuildTimeMultiplier);
+            structure.BuildRemaining = Math.Max(0, StructureBuildSeconds(structure, nextTier));
             structure.IsComplete = structure.BuildRemaining <= 0;
             structure.WaitingForClearance = false;
             MarkStructureChanged(structure, true);
@@ -232,6 +234,7 @@ namespace PaperDefense.Core
         {
             TickIndex++;
             Elapsed += delta;
+            TickEnemyMechanics(delta);
             crowd.Rebuild(enemies);
             supplyRemainder += Math.Max(0, Balance.PassiveInkPerSecond) * supplyMultiplier * delta;
             int supplied = (int)Math.Floor(supplyRemainder + 0.000001);
@@ -255,6 +258,7 @@ namespace PaperDefense.Core
                     }
                 }
                 structure.Cooldown = Math.Max(0, structure.Cooldown - delta);
+                structure.SecondaryCooldown = Math.Max(0, structure.SecondaryCooldown - delta);
                 structure.FrontageUsed = 0;
                 RefreshHealthBand(structure);
             }
@@ -270,6 +274,7 @@ namespace PaperDefense.Core
                 var profile = Balance.Enemy(EnemyKind.Doodle);
                 long rebuildStarted = System.Diagnostics.Stopwatch.GetTimestamp();
                 flow.Rebuild(BaseCell, grid, profile.Speed, Math.Max(0.01f, profile.Damage) / Math.Max(0.05f, profile.AttackInterval));
+                RebuildWellFlows(profile);
                 Statistics.RecordNavigation((System.Diagnostics.Stopwatch.GetTimestamp() - rebuildStarted) *
                     1000.0 / System.Diagnostics.Stopwatch.Frequency);
                 flowDirty = false;
@@ -280,7 +285,7 @@ namespace PaperDefense.Core
             if (BaseHealth <= 0) { BaseHealth = 0; Phase = RunPhase.Defeat; return; }
             weapons.Fire(structures, enemies, shots, fireMultiplier, damageMultiplier, delta, TickIndex, Statistics, EventBuffer);
             RemoveDeadEnemies();
-            if (RemainingToSpawn == 0 && enemies.Count == 0 && !weapons.HasPendingProjectiles) CompleteWave();
+            if (RemainingToSpawn == 0 && enemies.Count == 0 && !weapons.HasPendingProjectiles && EnemyProjectiles.Count == 0) CompleteWave();
         }
 
         private void SpawnEnemies(float delta)
@@ -293,7 +298,9 @@ namespace PaperDefense.Core
                 double roll = random.NextDouble();
                 float gnawers = Clamp(wave.GnawerFraction, 0, 1);
                 float runners = Clamp(wave.RunnerFraction, 0, 1 - gnawers);
-                EnemyKind kind = roll < gnawers ? EnemyKind.Gnawer : roll < gnawers + runners ? EnemyKind.Runner : EnemyKind.Doodle;
+                float spitters = Balance.EnableEnemyMechanics ? Clamp(wave.SpitterFraction, 0, 1 - gnawers - runners) : 0;
+                EnemyKind kind = roll < gnawers ? EnemyKind.Gnawer : roll < gnawers + runners ? EnemyKind.Runner :
+                    roll < gnawers + runners + spitters ? EnemyKind.Spitter : EnemyKind.Doodle;
                 var definition = Balance.Enemy(kind);
                 int sideCount = 0;
                 for (int bit = 1; bit <= 8; bit <<= 1) if ((wave.Sides & bit) != 0) sideCount++;
@@ -319,12 +326,20 @@ namespace PaperDefense.Core
                 spawnClock += interval;
                 RemainingToSpawn--;
                 Point2 position = crowd.Add(spawnCell);
-                float lateScale = 1 + Math.Max(0, WaveIndex - 3) * 0.06f;
+                DrawingTier drawing = DrawingTier.Sketch;
+                if (Balance.EnableEnemyMechanics)
+                {
+                    double tierRoll = random.NextDouble();
+                    drawing = tierRoll < Clamp(wave.HatchedFraction,0,1) ? DrawingTier.Hatched :
+                        tierRoll < Clamp(wave.HatchedFraction + wave.OutlinedFraction,0,1) ? DrawingTier.Outlined : DrawingTier.Sketch;
+                }
+                float lateScale = Balance.EnableEnemyMechanics ? EnemyEffects.DrawingHealthMultiplier(drawing) : 1 + Math.Max(0, WaveIndex - 3) * 0.06f;
                 enemies.Add(new EnemyState
                 {
                     Id = nextEnemyId++, Kind = kind, Position = position,
                     Health = Math.Max(1, definition.MaxHealth * lateScale), MaxHealth = Math.Max(1, definition.MaxHealth * lateScale),
-                    SpeedScale = 0.92f + (float)random.NextDouble() * 0.16f, AttackCooldown = 0
+                    SpeedScale = 0.92f + (float)random.NextDouble() * 0.16f, AttackCooldown = 0,
+                    DrawingTier = drawing, ObjectiveIndex = ChooseObjective()
                 });
                 Statistics.ObserveEnemies(enemies.Count);
             }
@@ -341,7 +356,7 @@ namespace PaperDefense.Core
                     enemy.HasDestination = false;
                 if (!enemy.HasDestination)
                 {
-                    enemy.Destination = Center(flow.Next(CellOf(enemy.Position)));
+                    enemy.Destination = Center(EnemyFlow(enemy).Next(CellOf(enemy.Position)));
                     enemy.HasDestination = true;
                 }
             }
@@ -361,10 +376,11 @@ namespace PaperDefense.Core
                 if (enemy.Health <= 0) continue;
                 var definition = Balance.Enemy(enemy.Kind);
                 enemy.AttackCooldown = Math.Max(0, enemy.AttackCooldown - delta);
-                if (DistanceSquared(enemy.Position, basePoint) <= 1.15f * 1.15f)
+                if (TryRangedAttack(enemy, delta)) continue;
+                if (DistanceSquared(enemy.Position, TargetPoint(enemy)) <= 1.15f * 1.15f)
                 {
                     if (enemy.AttackCooldown <= 0)
-                    { BaseHealth -= Math.Max(0, definition.Damage); enemy.AttackCooldown = Math.Max(0.05f, definition.AttackInterval); }
+                    { DamageObjective(enemy.ObjectiveIndex, Math.Max(0, definition.Damage)); enemy.AttackCooldown = Math.Max(0.05f, definition.AttackInterval); }
                     continue;
                 }
                 Cell destination = CellOf(enemy.Destination);
@@ -389,7 +405,7 @@ namespace PaperDefense.Core
                 }
                 float dx = enemy.Destination.X - enemy.Position.X, dy = enemy.Destination.Y - enemy.Position.Y;
                 float distance = (float)Math.Sqrt(dx * dx + dy * dy);
-                float movement = Math.Max(0, definition.Speed) * enemy.SpeedScale * delta;
+                float movement = Math.Max(0, definition.Speed) * enemy.SpeedScale * EnemyEffects.MovementMultiplier(enemy, Balance.BlotSpeedBonus) * delta;
                 bool reached = distance <= movement + 0.00001f;
                 var nextPosition = reached ? enemy.Destination : distance > 0.00001f ?
                     new Point2(enemy.Position.X + dx / distance * movement, enemy.Position.Y + dy / distance * movement) : enemy.Position;
@@ -454,13 +470,14 @@ namespace PaperDefense.Core
             {
                 var enemy = enemies[read];
                 if (enemy.Health > 0) enemies[write++] = enemy;
-                else { Kills++; Ink += Math.Max(0, Balance.Enemy(enemy.Kind).Reward); }
+                else { OnEnemyDeath(enemy); Kills++; Ink += Math.Max(0, Balance.Enemy(enemy.Kind).Reward); }
             }
             if (write < enemies.Count) enemies.RemoveRange(write, enemies.Count - write);
         }
 
         private void CompleteWave()
         {
+            AwardWaveResources();
             Ink += Math.Max(0, Balance.WaveInkGrant);
             if (WaveIndex >= Balance.Waves.Count) { Phase = RunPhase.Victory; Countdown = 0; return; }
             Phase = RunPhase.Intermission;

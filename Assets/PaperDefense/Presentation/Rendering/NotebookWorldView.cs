@@ -34,6 +34,7 @@ namespace PaperDefense.Presentation
         StructureKind previewKind;
         MaterialTier previewTier;
         bool previewValid;
+        float previewRange = -1;
         int paperWidth, paperHeight;
         int visualVersion = -1, topologyVersion = -1, castleHealthBand = -1;
         RunPhase renderedPhase;
@@ -80,10 +81,10 @@ namespace PaperDefense.Presentation
             previewPen.Clear(); previewPen.Upload();
         }
 
-        public void SetPreview(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier, bool valid)
+        public void SetPreview(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier, bool valid, float range = -1)
         {
             int count = cells == null ? 0 : cells.Count;
-            bool changed = previewKind != kind || previewTier != tier || previewValid != valid || previewCells.Count != count;
+            bool changed = previewKind != kind || previewTier != tier || previewValid != valid || previewCells.Count != count || previewRange != range;
             for (int i = 0; !changed && i < count; i++) changed = previewCells[i] != cells[i];
             if (!changed) return;
             previewCells.Clear();
@@ -92,6 +93,7 @@ namespace PaperDefense.Presentation
             previewKind = kind;
             previewTier = tier;
             previewValid = valid;
+            previewRange = range;
             if (previewPen != null && session != null) DrawPreview();
         }
 
@@ -254,6 +256,8 @@ namespace PaperDefense.Presentation
                 {
                     StructureView structure = session.Structures[i];
                     float range = session.Balance.Structure(structure.Kind).Range;
+                    if (structure.Blueprint != null && structure.Blueprint.SecondWeapon.HasValue)
+                        range = Mathf.Max(range, session.Balance.Structure(structure.Blueprint.SecondWeapon.Value).Range);
                     if (range <= 1) continue;
                     p.Ring(new Vector2(structure.Cell.X + .5f, structure.Cell.Y + .5f), range, .035f,
                            MeshPen.Alpha(DoodleGlyphs.TierColor(structure.Tier), .16f), 96, 1, structure.Id, true);
@@ -282,6 +286,7 @@ namespace PaperDefense.Presentation
         {
             MeshPen p = worldPen;
             p.Clear();
+            for (int i = 0; i < session.Wells.Count; i++) DrawWell(p, session.Wells[i]);
             for (int i = 0; i < session.Structures.Count; i++)
             {
                 var structure = session.Structures[i];
@@ -304,11 +309,48 @@ namespace PaperDefense.Presentation
             }
             p.Upload();
         }
+        static void DrawWell(MeshPen p, InkWellView well)
+        {
+            Vector2 at = new Vector2(well.Cell.X + .5f, well.Cell.Y + .5f);
+            Color color = DoodleGlyphs.InkTone(well.Color);
+            Color ink = well.Active ? color : MeshPen.Alpha(color, .42f);
+            p.Disc(at, 1.1f, MeshPen.Alpha(color, well.Active ? .13f : .06f), 24, .85f);
+            p.Box(at, new Vector2(.95f, .85f), NotebookPalette.Paper, NotebookPalette.Navy, .075f, well.Id);
+            p.Disc(at, .36f, ink, 16, .73f);
+            p.Ring(at + new Vector2(0, .33f), .35f, .07f, color, 16, .5f, well.Id);
+            p.Line(at + new Vector2(-.55f, -.64f), at + new Vector2(.55f, -.64f), .07f, MeshPen.Alpha(NotebookPalette.Navy, .2f));
+            p.Line(at + new Vector2(-.55f, -.64f), at + new Vector2(-.55f + 1.1f * Mathf.Clamp01(well.Health / Mathf.Max(1, well.MaxHealth)), -.64f), .07f, color);
+            if (well.Threatened)
+            {
+                float pulse = .55f + .45f * Mathf.Sin(Time.unscaledTime * 8);
+                p.Ring(at, 1.35f, .08f, MeshPen.Alpha(NotebookPalette.Red, pulse), 24, 1, well.Id, true);
+                p.Star(at + Vector2.up, .3f, NotebookPalette.Red, .06f, 5);
+            }
+        }
 
         void DrawEffects()
         {
             MeshPen p = effectsPen;
             p.Clear();
+            for (int i = 0; i < session.Blots.Count; i++)
+            {
+                var blot = session.Blots[i]; Vector2 center = new Vector2(blot.Cell.X + .5f, blot.Cell.Y + .5f);
+                float fade = Mathf.Clamp01(blot.Remaining / Mathf.Max(.01f, session.Balance.BlotLifetime));
+                Color color = MeshPen.Alpha(NotebookPalette.Marker, .12f + fade * .38f);
+                p.Disc(center, .42f, color, 9, .65f);
+                p.Disc(center + new Vector2(.21f, .08f), .2f, color, 7, .7f);
+                p.Disc(center + new Vector2(-.23f, -.12f), .14f, color, 7);
+            }
+            for (int i = 0; i < session.EnemyProjectiles.Count; i++)
+            {
+                var glob = session.EnemyProjectiles[i];
+                Vector2 from = new Vector2(glob.From.X, glob.From.Y), to = new Vector2(glob.To.X, glob.To.Y);
+                float progress = Mathf.Clamp01(1 - glob.Remaining / Mathf.Max(.001f, glob.Duration));
+                Vector2 point = Vector2.Lerp(from, to, progress);
+                p.Line(Vector2.Lerp(from, to, Mathf.Max(0, progress - .12f)), point, .09f, MeshPen.Alpha(NotebookPalette.Marker, .55f));
+                p.Disc(point, .14f, NotebookPalette.Navy, 8); p.Disc(point, .09f, NotebookPalette.Marker, 7);
+                p.Ring(to, .36f, .035f, MeshPen.Alpha(NotebookPalette.Red, .5f), 12, 1, glob.Id, true);
+            }
             for (int i = 0; i < session.Projectiles.Count; i++)
             {
                 var projectile = session.Projectiles[i];
@@ -392,7 +434,7 @@ namespace PaperDefense.Presentation
             if (previewCells.Count == 1 && previewKind != StructureKind.Wall && previewKind != StructureKind.Spikes)
             {
                 Cell cell = previewCells[0];
-                float range = session.Balance.Structure(previewKind).Range;
+                float range = previewRange >= 0 ? previewRange : session.Balance.Structure(previewKind).Range;
                 p.Ring(new Vector2(cell.X + .5f, cell.Y + .5f), range, .045f, MeshPen.Alpha(color, .38f), 120, 1, 117, true);
             }
             p.Upload();

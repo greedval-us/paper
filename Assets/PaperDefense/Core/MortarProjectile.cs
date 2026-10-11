@@ -14,5 +14,6 @@ namespace PaperDefense.Core
         public float Radius { get; internal set; }
         public float Damage { get; internal set; }
         public StructureKind Weapon { get; internal set; }
+        public InkColor Color { get; internal set; }
     }
 }

@@ -1,10 +1,10 @@
 {
-    "runAtUtc": "2026-10-11T21:08:38.6572169Z",
+    "runAtUtc": "2026-10-11T22:30:51.7353396Z",
     "unityVersion": "6000.5.7f1",
     "scope": "Headless core replay in Editor. The second run groups two unchanged fixed steps per simulated rendering frame; it does not measure Player performance.",
     "passed": true,
     "identicalState": true,
-    "wallTimeMilliseconds": 6489.9609,
+    "wallTimeMilliseconds": 6512.4112000000005,
     "configuration": {
         "Seed": 1337,
         "Width": 96,
@@ -131,6 +131,14 @@
                     "Speed": 0.800000011920929,
                     "Damage": 18.0,
                     "AttackInterval": 0.8999999761581421
+                },
+                {
+                    "Kind": 3,
+                    "Reward": 2,
+                    "MaxHealth": 35.0,
+                    "Speed": 1.7000000476837159,
+                    "Damage": 10.0,
+                    "AttackInterval": 2.4000000953674318
                 }
             ],
             "Materials": [

@@ -33,42 +33,71 @@ namespace PaperDefense.Core
             foreach (var structure in structures)
             {
                 if (structure.Health <= 0 || !structure.IsComplete || structure.BuildRemaining > 0 || structure.Kind == StructureKind.Wall) continue;
-                var definition = balance.Structure(structure.Kind);
                 Point2 origin = new Point2(structure.Cell.X + 0.5f, structure.Cell.Y + 0.5f);
-                float range = structure.Kind == StructureKind.Spikes ? Math.Max(0.5f, definition.Radius) : Math.Max(0, definition.Range);
-                spatial.Query(origin, range, targets);
-                EnemyState target = PickTarget(structure, origin, targets);
-                // Idle means no live target in range, including time spent cooling down.
-                if (target == null) { statistics.RecordIdle(structure.Kind, delta); continue; }
-                if (structure.Cooldown > 0) continue;
-                float damage = Math.Max(0, definition.Damage * balance.Material(structure.Tier).DamageMultiplier * damageMultiplier);
-                structure.Cooldown = Math.Max(0.05f, definition.ShotInterval / Math.Max(0.01f, fireMultiplier));
-                structure.Aim = target.Position;
-                statistics.RecordLaunch(structure.Kind);
-                switch (structure.Kind)
+                TowerBlueprint blueprint = structure.Blueprint;
+                bool acquired = true;
+                if (blueprint != null)
                 {
-                    case StructureKind.Piercer:
-                        FirePiercer(origin, target.Position, range, Math.Max(0.2f, definition.Radius),
-                            Math.Max(1, definition.MaxPierce), damage, statistics);
-                        break;
-                    case StructureKind.Mortar:
-                        LaunchMortar(origin, target.Position, definition, damage, tick, events);
-                        continue;
-                    case StructureKind.Spikes:
-                        foreach (var victim in targets) ApplyDamage(victim, damage, structure.Kind, statistics);
-                        break;
-                    default:
-                        ApplyDamage(target, damage, structure.Kind, statistics);
-                        break;
+                    float acquisitionRange = Math.Max(0, balance.Structure(blueprint.FirstWeapon).Range);
+                    if (blueprint.SecondWeapon.HasValue) acquisitionRange = Math.Max(acquisitionRange, balance.Structure(blueprint.SecondWeapon.Value).Range);
+                    spatial.Query(origin, acquisitionRange, targets);
+                    EnemyState candidate = PickTarget(structure, origin, targets);
+                    if (candidate == null) { structure.TargetId = 0; structure.AcquisitionRemaining = 0; }
+                    else
+                    {
+                        if (structure.TargetId != candidate.Id)
+                        { structure.TargetId = candidate.Id; structure.AcquisitionRemaining = TowerCatalog.AcquisitionSeconds(blueprint); }
+                        structure.AcquisitionRemaining = Math.Max(0, structure.AcquisitionRemaining - delta);
+                        acquired = structure.AcquisitionRemaining <= 0.000001f;
+                    }
                 }
-                Point2 shotEnd = structure.Kind == StructureKind.Piercer ? RayEnd(origin, structure.Aim, range) : structure.Aim;
-                shots.Add(new ShotEvent(origin, shotEnd, structure.Kind, definition.Radius));
-                events.Publish(tick, SimulationEventKind.Shot, origin, shotEnd, structure.Kind,
-                    definition.Radius, structure.Id);
+                float feed = blueprint == null ? 1 : TowerCatalog.FeedMultiplier(blueprint);
+                FireMount(structure, origin, blueprint?.FirstWeapon ?? structure.Kind, false, acquired, shots,
+                    fireMultiplier * feed, damageMultiplier, delta, tick, statistics, events);
+                if (blueprint != null && blueprint.SecondWeapon.HasValue)
+                    FireMount(structure, origin, blueprint.SecondWeapon.Value, true, acquired, shots,
+                        fireMultiplier * feed, damageMultiplier, delta, tick, statistics, events);
             }
         }
 
-        private void LaunchMortar(Point2 from, Point2 to, StructureDefinition definition, float damage,
+        private void FireMount(StructureState structure, Point2 origin, StructureKind kind, bool secondary, bool acquired,
+            List<ShotEvent> shots, float fireMultiplier, float damageMultiplier, float delta, long tick,
+            RunStatistics statistics, SimulationEventBuffer events)
+        {
+            var definition = balance.Structure(kind);
+            float range = kind == StructureKind.Spikes ? Math.Max(.5f, definition.Radius) : Math.Max(0, definition.Range);
+            spatial.Query(origin, range, targets);
+            EnemyState target = PickTarget(structure, origin, targets);
+            if (target == null) { statistics.RecordIdle(kind, delta); return; }
+            if (!acquired) return;
+            if ((secondary ? structure.SecondaryCooldown : structure.Cooldown) > 0) return;
+            float damage = Math.Max(0, definition.Damage * balance.Material(structure.Tier).DamageMultiplier * damageMultiplier);
+            float cooldown = Math.Max(.05f, definition.ShotInterval / Math.Max(.01f, fireMultiplier));
+            if (secondary) structure.SecondaryCooldown = cooldown; else structure.Cooldown = cooldown;
+            structure.Aim = target.Position;
+            statistics.RecordLaunch(kind);
+            switch (kind)
+            {
+                case StructureKind.Piercer:
+                    FirePiercer(origin, target.Position, range, Math.Max(.2f, definition.Radius),
+                        Math.Max(1, definition.MaxPierce), damage, structure.Color, statistics);
+                    break;
+                case StructureKind.Mortar:
+                    LaunchMortar(origin, target.Position, definition, damage, structure.Color, tick, events);
+                    return;
+                case StructureKind.Spikes:
+                    foreach (var victim in targets) ApplyDamage(victim, damage, kind, structure.Color, statistics);
+                    break;
+                default:
+                    ApplyDamage(target, damage, kind, structure.Color, statistics);
+                    break;
+            }
+            Point2 shotEnd = kind == StructureKind.Piercer ? RayEnd(origin, structure.Aim, range) : structure.Aim;
+            shots.Add(new ShotEvent(origin, shotEnd, kind, definition.Radius));
+            events.Publish(tick, SimulationEventKind.Shot, origin, shotEnd, kind, definition.Radius, structure.Id);
+        }
+
+        private void LaunchMortar(Point2 from, Point2 to, StructureDefinition definition, float damage, InkColor color,
             long tick, SimulationEventBuffer events)
         {
             float duration = Math.Max(0, definition.FlightSeconds);
@@ -76,7 +105,7 @@ namespace PaperDefense.Core
             {
                 Id = nextProjectileId++, From = from, To = to, Duration = duration,
                 Remaining = duration, Radius = Math.Max(0, definition.Radius),
-                Damage = damage, Weapon = StructureKind.Mortar
+                Damage = damage, Weapon = StructureKind.Mortar, Color = color
             };
             projectiles.Add(projectile);
             events.Publish(tick, SimulationEventKind.ProjectileLaunched, from, to, projectile.Weapon,
@@ -93,16 +122,18 @@ namespace PaperDefense.Core
                 if (projectile.Remaining > 0.000001f) { projectiles[write++] = projectile; continue; }
                 spatial.Query(projectile.To, projectile.Radius, splashTargets);
                 foreach (var victim in splashTargets)
-                    ApplyDamage(victim, projectile.Damage, projectile.Weapon, statistics);
+                    ApplyDamage(victim, projectile.Damage, projectile.Weapon, projectile.Color, statistics);
                 events.Publish(tick, SimulationEventKind.ProjectileImpact, projectile.From, projectile.To,
                     projectile.Weapon, projectile.Radius, projectile.Id);
             }
             if (write < projectiles.Count) projectiles.RemoveRange(write, projectiles.Count - write);
         }
 
-        private static void ApplyDamage(EnemyState victim, float damage, StructureKind weapon, RunStatistics statistics)
+        private void ApplyDamage(EnemyState victim, float damage, StructureKind weapon, InkColor color, RunStatistics statistics)
         {
             if (victim.Health <= 0 || damage <= 0) return;
+            if (balance.EnableEnemyMechanics || color != InkColor.None)
+            { EnemyEffects.ApplyHit(victim, damage, color, statistics, weapon, balance.BlotReduction); return; }
             float actualDamage = Math.Min(victim.Health, damage);
             victim.Health -= actualDamage;
             statistics.RecordDamage(weapon, actualDamage);
@@ -131,7 +162,7 @@ namespace PaperDefense.Core
         }
 
         private void FirePiercer(Point2 origin, Point2 target, float range, float radius, int maxPierce,
-            float damage, RunStatistics statistics)
+            float damage, InkColor color, RunStatistics statistics)
         {
             float dx = target.X - origin.X, dy = target.Y - origin.Y;
             float length = (float)Math.Sqrt(dx * dx + dy * dy);
@@ -152,7 +183,7 @@ namespace PaperDefense.Core
                 return comparison != 0 ? comparison : a.Id.CompareTo(b.Id);
             });
             for (int i = 0; i < splashTargets.Count && i < maxPierce; i++)
-                ApplyDamage(splashTargets[i], damage, StructureKind.Piercer, statistics);
+                ApplyDamage(splashTargets[i], damage, StructureKind.Piercer, color, statistics);
         }
 
         private static float DistanceSquared(Point2 a, Point2 b)

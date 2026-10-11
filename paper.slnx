@@ -2,8 +2,8 @@
   <Project Path="PaperDefense.Core.csproj" />
   <Project Path="PaperDefense.Editor.csproj" />
   <Project Path="PaperDefense.Integration.Tests.csproj" />
+  <Project Path="PaperDefense.Validation.csproj" />
   <Project Path="PaperDefense.Presentation.csproj" />
   <Project Path="PaperDefense.Application.csproj" />
-  <Project Path="PaperDefense.Validation.csproj" />
   <Project Path="PaperDefense.Core.Tests.csproj" />
 </Solution>

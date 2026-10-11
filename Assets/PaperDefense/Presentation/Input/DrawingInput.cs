@@ -8,12 +8,14 @@ using UnityEngine.InputSystem;
 
 namespace PaperDefense.Presentation
 {
-    public enum DrawingMode { Build, Erase, Upgrade }
+    public enum DrawingMode { Build, Erase, Upgrade, Blotter, Paint }
 
     public sealed class DrawingInput : MonoBehaviour
     {
         public StructureKind Tool { get; private set; } = StructureKind.Wall;
         public MaterialTier Tier { get; private set; } = MaterialTier.Pencil;
+        public InkColor Color { get; private set; } = InkColor.None;
+        public int BlueprintSlot { get; private set; } = -1;
         public DrawingMode Mode { get; private set; }
         public string Message { get; private set; } = "Зажми ЛКМ и нарисуй первую стену. Отпусти — начнётся стройка.";
         public int PreviewCost { get; private set; }
@@ -39,12 +41,25 @@ namespace PaperDefense.Presentation
         public void Initialize(RunController controller, NotebookWorldView world, Camera camera)
         { run = controller; view = world; worldCamera = camera; CameraCenter=new Vector2(run.Session.Balance.Width*.5f,run.Session.Balance.Height*.5f); run.SessionChanged += OnRestart; }
         void OnDestroy() { if (run != null) run.SessionChanged -= OnRestart; }
-        void OnRestart(IRunReadModel session) { Cancel(); Zoom=1;CameraCenter=new Vector2(session.Balance.Width*.5f,session.Balance.Height*.5f); Message = "Чистый лист. Попробуй другую оборону!"; }
+        void OnRestart(IRunReadModel session)
+        {
+            Cancel(); Zoom = 1; CameraCenter = new Vector2(session.Balance.Width * .5f, session.Balance.Height * .5f);
+            if (BlueprintSlot >= 0 && BlueprintSlot < run.Workshop.Loadout.Count) Tool = run.Workshop.Loadout[BlueprintSlot].FirstWeapon;
+            Message = "Чистый лист. Попробуй другую оборону!";
+        }
 
         public void SelectTool(StructureKind kind)
-        { Cancel(); Tool = kind; Mode = DrawingMode.Build; SelectionChanged?.Invoke(); }
+        { Cancel(); BlueprintSlot = -1; Tool = kind; Mode = DrawingMode.Build; SelectionChanged?.Invoke(); }
+        public void SelectSlot(int slot)
+        {
+            if (run == null || slot < 0 || slot >= run.Workshop.Loadout.Count) return;
+            Cancel(); BlueprintSlot = slot; Tool = run.Workshop.Loadout[slot].FirstWeapon;
+            Mode = DrawingMode.Build; SelectionChanged?.Invoke();
+        }
         public void SelectTier(MaterialTier tier)
         { Cancel(); Tier = tier; SelectionChanged?.Invoke(); }
+        public void SelectColor(InkColor color)
+        { Cancel(); Color = color; SelectionChanged?.Invoke(); }
         public void SelectMode(DrawingMode mode)
         { Cancel(); Mode = mode; SelectionChanged?.Invoke(); }
         public void SetMessage(string message) { Message = message; }
@@ -52,6 +67,7 @@ namespace PaperDefense.Presentation
         void Update()
         {
             if (run == null || run.Session == null) return;
+            if (run.InWorkshop) { Cancel(); HasHover = false; return; }
             ReadKeys();
             if (run.Session.PendingUpgrade || run.Session.Phase == RunPhase.Victory || run.Session.Phase == RunPhase.Defeat)
             { Cancel(); HasHover=false; return; }
@@ -67,6 +83,10 @@ namespace PaperDefense.Presentation
                 if (Mode == DrawingMode.Upgrade)
                 { Message = run.Upgrade(cell, out var reason) ? "Обведено! Постройка стала прочнее и мощнее." : reason; }
                 else if (Mode == DrawingMode.Erase) Erase(cell);
+                else if (Mode == DrawingMode.Blotter)
+                { Message = run.Blotter(cell, out var reason) ? "Промокашка очистила участок." : reason; }
+                else if (Mode == DrawingMode.Paint)
+                { Message = run.Paint(cell, Color, out var reason) ? "Картридж заменён. Цвет оплачивается один раз, не за выстрел." : reason; }
                 else { drawing = true; stroke.Clear(); visited.Clear(); last = cell; Add(cell); }
             }
             if (mouse.leftButton.isPressed && HasHover)
@@ -83,18 +103,20 @@ namespace PaperDefense.Presentation
             {
                 if (HasHover)
                 {
-                    bool success = run.Build(stroke, Tool, Tier, out var reason);
+                    string reason;
+                    bool success = BlueprintSlot >= 0 ? run.BuildBlueprint(stroke, BlueprintSlot, Tier, Color, out reason) : run.Build(stroke, Tool, Tier, out reason);
                     Message = success ? (run.Paused ? "Чертёж принят. Стройка продолжится после паузы." : "Штрих принят — строим!") : reason;
                 }
                 Cancel();
             }
             if (!HasHover || Mode != DrawingMode.Build) { view.ClearPreview(); PreviewCost = 0; PreviewReason = ""; return; }
             hoverPreview[0] = cell;
-            IReadOnlyList<Cell> cells = drawing ? stroke : hoverPreview;
-            var quote = run.Session.QuoteBuild(cells, Tool, Tier);
+            IReadOnlyList<Cell> cells = drawing ? (IReadOnlyList<Cell>)stroke : hoverPreview;
+            var quote = BlueprintSlot >= 0 ? run.QuoteBlueprint(cells, BlueprintSlot, Tier, Color) : run.Session.QuoteBuild(cells, Tool, Tier);
             PreviewCost = quote.Cost;
             PreviewReason = quote.Valid ? "" : quote.Reason;
-            view.SetPreview(quote.Cells, Tool, Tier, quote.Valid);
+            float range = BlueprintSlot >= 0 ? run.PreviewBlueprint(run.Workshop.Loadout[BlueprintSlot], Tier).Range : -1;
+            view.SetPreview(quote.Cells, Tool, Tier, quote.Valid, range);
         }
 
         void Navigate(Mouse mouse,Vector2 screen)
@@ -135,6 +157,12 @@ namespace PaperDefense.Presentation
             }
         }
         public void Cancel() { drawing = false; stroke.Clear(); visited.Clear(); PreviewCost = 0; PreviewReason = ""; if (view != null) view.ClearPreview(); }
+        public void Focus(Cell cell)
+        {
+            Cancel(); Zoom = Mathf.Max(1.5f, Zoom);
+            CameraCenter = new Vector2(cell.X + .5f, cell.Y + .5f);
+            if (worldCamera != null) worldCamera.transform.position = new Vector3(CameraCenter.x, CameraCenter.y, -10);
+        }
 
         bool TryCell(Vector2 screen, out Cell cell)
         {
@@ -163,13 +191,16 @@ namespace PaperDefense.Presentation
         {
             var k = Keyboard.current;
             if (k == null) return;
-            if (k.digit1Key.wasPressedThisFrame) SelectTool(StructureKind.Wall);
-            if (k.digit2Key.wasPressedThisFrame) SelectTool(StructureKind.Gun);
-            if (k.digit3Key.wasPressedThisFrame) SelectTool(StructureKind.Piercer);
-            if (k.digit4Key.wasPressedThisFrame) SelectTool(StructureKind.Mortar);
-            if (k.digit5Key.wasPressedThisFrame) SelectTool(StructureKind.Spikes);
+            if (k.digit1Key.wasPressedThisFrame) SelectSlot(0);
+            if (k.digit2Key.wasPressedThisFrame) SelectSlot(1);
+            if (k.digit3Key.wasPressedThisFrame) SelectSlot(2);
+            if (k.digit4Key.wasPressedThisFrame) SelectSlot(3);
+            if (k.digit5Key.wasPressedThisFrame) SelectTool(StructureKind.Wall);
+            if (k.digit6Key.wasPressedThisFrame) SelectTool(StructureKind.Spikes);
             if (k.eKey.wasPressedThisFrame) SelectMode(DrawingMode.Erase);
             if (k.uKey.wasPressedThisFrame) SelectMode(DrawingMode.Upgrade);
+            if (k.bKey.wasPressedThisFrame) SelectMode(DrawingMode.Blotter);
+            if (k.cKey.wasPressedThisFrame) SelectMode(DrawingMode.Paint);
             if (k.qKey.wasPressedThisFrame) SelectTier((MaterialTier)(((int)Tier + 1) % 3));
             if (k.spaceKey.wasPressedThisFrame) run.TogglePause();
             if (k.nKey.wasPressedThisFrame) run.NextWave();
