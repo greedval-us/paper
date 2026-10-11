@@ -1,0 +1,306 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "2b691210338d4f57826dbc48f5beb168",
+    "status": "succeeded",
+    "mode": "PlayMode",
+    "started_unix_ms": 1791760176207,
+    "finished_unix_ms": 1791760184833,
+    "last_update_unix_ms": 1791760184833,
+    "progress": {
+      "completed": 29,
+      "total": 29,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": null,
+      "last_finished_test_full_name": "PaperDefense.Tests.WorkshopPersistenceTests.WorkshopPresentationOnlyExposesImmutableAssembliesAndReadOnlyCollections",
+      "last_finished_unix_ms": 1791760184813,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "run_in_background": false,
+      "focus_nudge_attempts": null,
+      "focus_nudge_limit": null,
+      "focus_nudge_status": null,
+      "blocked_reason": null,
+      "failures_so_far": [],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "PlayMode",
+      "summary": {
+        "total": 29,
+        "passed": 29,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 2.6802879,
+        "resultState": "Passed"
+      },
+      "results": [
+        {
+          "name": "DoubleSpeedUsesTwiceAsManyUnchangedSteps",
+          "fullName": "PaperDefense.Tests.FixedStepClockTests.DoubleSpeedUsesTwiceAsManyUnchangedSteps",
+          "state": "Passed",
+          "durationSeconds": 0.0006943,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PauseDropsFractionalDebtAndAccumulatesNothing",
+          "fullName": "PaperDefense.Tests.FixedStepClockTests.PauseDropsFractionalDebtAndAccumulatesNothing",
+          "state": "Passed",
+          "durationSeconds": 0.0001251,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SlowFrameDiscardsExcessAndNeverLeavesUnboundedDebt",
+          "fullName": "PaperDefense.Tests.FixedStepClockTests.SlowFrameDiscardsExcessAndNeverLeavesUnboundedDebt",
+          "state": "Passed",
+          "durationSeconds": 0.0002552,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CompletedWaveGoldIsBankedOnceAndSurvivesDefeatAndNewWorkshop",
+          "fullName": "PaperDefense.Tests.GoldPayoutTests.CompletedWaveGoldIsBankedOnceAndSurvivesDefeatAndNewWorkshop",
+          "state": "Passed",
+          "durationSeconds": 0.0200101,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "VictoryAddsOnlyCompletedWaveAndOneVictoryBonus",
+          "fullName": "PaperDefense.Tests.GoldPayoutTests.VictoryAddsOnlyCompletedWaveAndOneVictoryBonus",
+          "state": "Passed",
+          "durationSeconds": 0.0052986,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FastMouseStrokeFillsEveryCellAndPauseKeepsItUnbuilt",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.FastMouseStrokeFillsEveryCellAndPauseKeepsItUnbuilt",
+          "state": "Passed",
+          "durationSeconds": 0.9989348,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HudClickStartsWaveWithoutDrawingThroughButton",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.HudClickStartsWaveWithoutDrawingThroughButton",
+          "state": "Passed",
+          "durationSeconds": 0.1762093,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MortarLaunchDoesNotCreateAnExplosionAndVisualMarksAreBounded",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.MortarLaunchDoesNotCreateAnExplosionAndVisualMarksAreBounded",
+          "state": "Passed",
+          "durationSeconds": 0.077481,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RestartRebindsPresentationAndKeepsOneHud",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.RestartRebindsPresentationAndKeepsOneHud",
+          "state": "Passed",
+          "durationSeconds": 0.1272979,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ScriptableBalanceCopiesSettingsWithoutSharingSessionDefinitions",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.ScriptableBalanceCopiesSettingsWithoutSharingSessionDefinitions",
+          "state": "Passed",
+          "durationSeconds": 0.0730365,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UnchangedPreviewAndStaticBasesDoNotUploadEveryRenderFrame",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.UnchangedPreviewAndStaticBasesDoNotUploadEveryRenderFrame",
+          "state": "Passed",
+          "durationSeconds": 0.1595604,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CatchUpFrameForwardsEventsFromEveryStepExactlyOnce",
+          "fullName": "PaperDefense.Tests.RunControllerTests.CatchUpFrameForwardsEventsFromEveryStepExactlyOnce",
+          "state": "Passed",
+          "durationSeconds": 0.0046143,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PauseAcceptsBlueprintAndNeverAdvancesItsConstruction",
+          "fullName": "PaperDefense.Tests.RunControllerTests.PauseAcceptsBlueprintAndNeverAdvancesItsConstruction",
+          "state": "Passed",
+          "durationSeconds": 0.0006194,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PresentationContractContainsOnlyReadAccessAndValueViews",
+          "fullName": "PaperDefense.Tests.RunControllerTests.PresentationContractContainsOnlyReadAccessAndValueViews",
+          "state": "Passed",
+          "durationSeconds": 0.001472,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RenderCadencePreservesStateForCommandsAtTheSameSimulationTicks",
+          "fullName": "PaperDefense.Tests.RunControllerTests.RenderCadencePreservesStateForCommandsAtTheSameSimulationTicks",
+          "state": "Passed",
+          "durationSeconds": 0.0858514,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RestartClearsSelectedUpgradeBonusesAndStatistics",
+          "fullName": "PaperDefense.Tests.RunControllerTests.RestartClearsSelectedUpgradeBonusesAndStatistics",
+          "state": "Passed",
+          "durationSeconds": 0.0017265,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ComposerShowsRealLoadAndRejectsOverloadedArmor",
+          "fullName": "PaperDefense.Tests.WorkshopIntegrationTests.ComposerShowsRealLoadAndRejectsOverloadedArmor",
+          "state": "Passed",
+          "durationSeconds": 0.1087789,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LockedTrialShowsAnExplanationWithoutThrowing",
+          "fullName": "PaperDefense.Tests.WorkshopIntegrationTests.LockedTrialShowsAnExplanationWithoutThrowing",
+          "state": "Passed",
+          "durationSeconds": 0.1127612,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NormalBootOpensWorkshopAndStartUsesFourBlueprints",
+          "fullName": "PaperDefense.Tests.WorkshopIntegrationTests.NormalBootOpensWorkshopAndStartUsesFourBlueprints",
+          "state": "Passed",
+          "durationSeconds": 0.1238974,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SavedDraftAndFieldPlacementAreIndependentOfLaterEditing",
+          "fullName": "PaperDefense.Tests.WorkshopIntegrationTests.SavedDraftAndFieldPlacementAreIndependentOfLaterEditing",
+          "state": "Passed",
+          "durationSeconds": 0.1125998,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WorkshopDrawingsAndRecordedLanesUploadRealGeometry",
+          "fullName": "PaperDefense.Tests.WorkshopIntegrationTests.WorkshopDrawingsAndRecordedLanesUploadRealGeometry",
+          "state": "Passed",
+          "durationSeconds": 0.2291998,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CorruptVersionOrSyntaxReturnsUsableStarterProfile(\"{\\\"Version\\\":999,\\\"Gold\\\":10000}\")",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.CorruptVersionOrSyntaxReturnsUsableStarterProfile(\"{\\\"Version\\\":999,\\\"Gold\\\":10000}\")",
+          "state": "Passed",
+          "durationSeconds": 0.0070807,
+          "message": null,
+          "stackTrace": null,
+          "output": "Не удалось прочитать альбом: Неизвестная версия профиля.\r\n"
+        },
+        {
+          "name": "CorruptVersionOrSyntaxReturnsUsableStarterProfile(\"this is not json\")",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.CorruptVersionOrSyntaxReturnsUsableStarterProfile(\"this is not json\")",
+          "state": "Passed",
+          "durationSeconds": 0.0042927,
+          "message": null,
+          "stackTrace": null,
+          "output": "Не удалось прочитать альбом: JSON parse error: Invalid value.\r\n"
+        },
+        {
+          "name": "DiskRoundTripPreservesPaidUnlocksSavedAssemblyAndFourSlots",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.DiskRoundTripPreservesPaidUnlocksSavedAssemblyAndFourSlots",
+          "state": "Passed",
+          "durationSeconds": 0.0076103,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InvalidWeaponPreviewReturnsTheCoreRejectionReason",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.InvalidWeaponPreviewReturnsTheCoreRejectionReason",
+          "state": "Passed",
+          "durationSeconds": 0.0011367,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NegativeGoldAndBrokenSelectionAreRepairedWithoutGrantingLockedParts",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.NegativeGoldAndBrokenSelectionAreRepairedWithoutGrantingLockedParts",
+          "state": "Passed",
+          "durationSeconds": 0.0019054,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "StartingRunFreezesAssemblySelectionAndRejectsAllWorkshopEdits",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.StartingRunFreezesAssemblySelectionAndRejectsAllWorkshopEdits",
+          "state": "Passed",
+          "durationSeconds": 0.0016238,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TrialNeverSpendsRunInkOrGrantsGoldOrAdvancesTheBattle",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.TrialNeverSpendsRunInkOrGrantsGoldOrAdvancesTheBattle",
+          "state": "Passed",
+          "durationSeconds": 0.0729298,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WorkshopPresentationOnlyExposesImmutableAssembliesAndReadOnlyCollections",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.WorkshopPresentationOnlyExposesImmutableAssembliesAndReadOnlyCollections",
+          "state": "Passed",
+          "durationSeconds": 0.0016552,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}
