@@ -73,6 +73,7 @@ namespace PaperDefense.Core
     public sealed partial class GameBalance
     {
         public GameBalancePreset Preset;
+        public MechanicsConfiguration Mechanics = new MechanicsConfiguration();
         public TowerConstructionRules Construction = new TowerConstructionRules();
         public int Width = 64, Height = 40, StartingInk = 360;
         public float BaseHealth = 250, PlanningSeconds = 35, IntermissionSeconds = 20;
@@ -133,6 +134,7 @@ namespace PaperDefense.Core
         {
             // Copy scalar tuning together, including future scalar fields added by another partial.
             var copy = (GameBalance)MemberwiseClone();
+            copy.Mechanics = Mechanics.CreateSnapshot();
             copy.Construction = Construction.CreateSnapshot();
             copy.Effects = Effects.CreateSnapshot();
             copy.Progression = Progression.CreateSnapshot();

@@ -17,6 +17,8 @@ namespace PaperDefense.Application
         [Range(1,16)] public int maxEnemiesPerCell = 6;
         [Header("Мастерская и чернильные рубежи")]
         public bool enemyMechanics = true, inkWells = true, generateNewThreats = true;
+        [Header("Механики · конфигурация разработчика")]
+        public MechanicsConfiguration mechanics = new MechanicsConfiguration();
         [Min(64)] public int workshopWidth = GameBalancePresets.DefaultWorkshopWidth;
         [Min(40)] public int workshopHeight = GameBalancePresets.DefaultWorkshopHeight;
         [Min(0)] public int workshopStartingInk = GameBalancePresets.DefaultWorkshopStartingInk;
@@ -50,6 +52,7 @@ namespace PaperDefense.Application
             Finite(passiveInkPerSecond, nameof(passiveInkPerSecond)); Finite(earlyLaunchInkPerSecond, nameof(earlyLaunchInkPerSecond));
             Finite(drawingMinimumRate, nameof(drawingMinimumRate)); Finite(drawingMaximumRate, nameof(drawingMaximumRate));
             var result = GameBalance.CreateDefault();
+            result.Mechanics = (mechanics ?? new MechanicsConfiguration()).CreateSnapshot();
             result.Construction = (construction ?? new TowerConstructionRules()).CreateSnapshot();
             result.Effects = (effects ?? new EffectsRules()).CreateSnapshot();
             result.Progression = (progression ?? new ProgressionRules()).CreateSnapshot();
@@ -172,6 +175,7 @@ namespace PaperDefense.Application
         public void ResetToDefaults()
         {
             var b = GameBalance.CreateDefault();
+            mechanics = b.Mechanics.CreateSnapshot();
             useTargetWorkshopPreset = false; targetSettings = new TargetPresetSettings();
             construction = b.Construction.CreateSnapshot(); effects = b.Effects.CreateSnapshot(); progression = b.Progression.CreateSnapshot();
             width = b.Width; height = b.Height; startingInk = b.StartingInk; baseHealth = b.BaseHealth;

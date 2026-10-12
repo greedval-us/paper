@@ -16,6 +16,8 @@ namespace PaperDefense.Core
                 return new BuildQuote{Cells=Array.Empty<Cell>(),Reason="Неизвестный цвет."};
             if (!Enum.IsDefined(typeof(MaterialTier),material))
                 return new BuildQuote{Cells=Array.Empty<Cell>(),Reason="Неизвестный инструмент."};
+            if (color != InkColor.None && !Mechanics.ColorCartridges)
+                return new BuildQuote{Cells=Array.Empty<Cell>(),Reason="Цветные картриджи недоступны на этом листе."};
             var quote=QuoteBuild(cells,blueprint.FirstWeapon,material,TowerCatalog.Cost(blueprint,Balance,material));
             // Occupancy and resource failures stay atomic, using the assembly's complete price.
             if (!quote.Valid) return quote;
@@ -53,6 +55,7 @@ namespace PaperDefense.Core
             reason="";
             if(Phase==RunPhase.Victory||Phase==RunPhase.Defeat){reason="Эта страница уже закончена.";return false;}
             if(!Enum.IsDefined(typeof(InkColor),color)){reason="Неизвестный цвет.";return false;}
+            if(color!=InkColor.None&&!Mechanics.ColorCartridges){reason="Цветные картриджи недоступны на этом листе.";return false;}
             var tower=StructureAt(cell);
             if(tower==null||tower.Kind==StructureKind.Wall||tower.Kind==StructureKind.Spikes)
             {reason="Выберите башню для картриджа.";return false;}

@@ -21,12 +21,12 @@ namespace PaperDefense.Presentation
         Font font;
         GameObject canvasObject;
         RectTransform root;
-        Text hp, ink, wave, threats, forecast, message, toolHint, launchText, pauseText, speedText, progress, inspect, blotterPrice;
+        Text hp, ink, wave, threats, forecast, message, toolHint, launchText, pauseText, speedText, progress, inspect, blotterPrice, wellTitle, navigationHint;
         Image hpFill;
         Button launch;
         readonly Button[] tools = new Button[PaintToolIndex + 1];
         readonly Text[] toolPrices = new Text[SpikesToolIndex + 1], toolNames = new Text[PaintToolIndex + 1], wellLabels = new Text[3], colorLabels = new Text[4];
-        readonly Button[] wellActions = new Button[3], colors = new Button[4];
+        readonly Button[] wellActions = new Button[3], wellFocus = new Button[3], colors = new Button[4];
         readonly Button[] tiers = new Button[3];
         GameObject upgradePanel, outcomePanel, pauseBadge;
         Text outcomeTitle, outcomeBody;
@@ -83,18 +83,18 @@ namespace PaperDefense.Presentation
         {
             var note = Panel(root, "Field notes", new Rect(35, 166, 232, 390), new Color(1,.98f,.86f));
             note.localEulerAngles = new Vector3(0,0,2);
-            Label(note, "ЧЕРНИЛЬНИЦЫ", new Rect(14,12,210,35), 23, Navy, FontStyle.Bold);
+            wellTitle = Label(note, "ЧЕРНИЛЬНИЦЫ", new Rect(14,12,210,35), 23, Navy, FontStyle.Bold);
             for (int i = 0; i < 3; i++)
             {
                 int index = i;
                 wellLabels[i] = Label(note, "", new Rect(14, 56 + i * 98, 203, 44), 16, Navy);
                 wellActions[i] = MakeButton(note, "Activate well " + i, new Rect(14, 103 + i * 98, 137, 31), "ЗАХВАТИТЬ", 13, Blue,
                     () => { if (index < run.Session.Wells.Count) input.SetMessage(run.ActivateWell(run.Session.Wells[index].Id, out var reason) ? "Чернильница активна. Защити её до конца волны для цветной порции." : reason); }, out _);
-                MakeButton(note, "Focus well " + i, new Rect(157, 103 + i * 98, 60, 31), "→", 18, Navy,
+                wellFocus[i] = MakeButton(note, "Focus well " + i, new Rect(157, 103 + i * 98, 60, 31), "→", 18, Navy,
                     () => { if (index < run.Session.Wells.Count) input.Focus(run.Session.Wells[index].Cell); }, out _);
             }
             MakeButton(note, "Focus base", new Rect(14, 351, 203, 28), "К БАЗЕ  →", 15, Navy, () => input.Focus(run.Session.BaseCell), out _);
-            Label(root, "Цвет — за окраску,\nне за каждую пулю.\n\nКолёсико — ближе\nСКМ — двигать лист", new Rect(43,574,225,140), 17, Blue);
+            navigationHint = Label(root, "", new Rect(43,574,225,140), 17, Blue);
             var danger = Panel(root, "Forecast", new Rect(1335,170,231,222), new Color(1,.95f,.74f));
             danger.localEulerAngles = new Vector3(0,0,-2);
             Label(danger, "СЛЕДОМ ИДУТ…", new Rect(13,8,215,35), 22, Red, FontStyle.Bold);
@@ -170,7 +170,10 @@ namespace PaperDefense.Presentation
         void RefreshSelection()
         {
             if (run == null || run.Session == null) return;
+            var mechanics = run.Session.Balance.Mechanics;
             var loadout = run.Workshop.Loadout;
+            tools[BlotterToolIndex].gameObject.SetActive(mechanics.CorpseBlots);
+            tools[PaintToolIndex].gameObject.SetActive(mechanics.ColorCartridges);
             blotterPrice.text = run.Session.Balance.BlotterCost + " штр. / R " + run.Session.Balance.BlotterRadius.ToString("0");
             for (int i=0;i<tools.Length;i++)
             {
@@ -183,7 +186,7 @@ namespace PaperDefense.Presentation
             for (int i=0;i<3;i++) tiers[i].GetComponent<Image>().color = (int)input.Tier == i ? new Color(.89f,.84f,.98f) : Paper;
             string[] colorNames = { "БЕЗ ЦВЕТА", "КРАСНЫЕ", "СИНИЕ", "ЗЕЛЁНЫЕ" };
             for (int i = 0; i < colors.Length; i++)
-            { colors[i].GetComponent<Image>().color = (int)input.Color == i ? new Color(.82f,.9f,.84f) : Paper; colorLabels[i].text = colorNames[i] + (i == 0 ? "" : " " + run.Session.ColoredInk((InkColor)i)); }
+            { colors[i].gameObject.SetActive(mechanics.ColorCartridges); colors[i].GetComponent<Image>().color = (int)input.Color == i ? new Color(.82f,.9f,.84f) : Paper; colorLabels[i].text = colorNames[i] + (i == 0 ? "" : " " + run.Session.ColoredInk((InkColor)i)); }
             for (int i=0;i<toolPrices.Length;i++)
             {
                 if (i < ProfileLimits.LoadoutSlotCount)
@@ -205,10 +208,13 @@ namespace PaperDefense.Presentation
         {
             if (run == null || run.Session == null || hp == null) return;
             var s = run.Session;
+            var mechanics = s.Balance.Mechanics;
+            wellTitle.text = mechanics.InkWells ? "ЧЕРНИЛЬНИЦЫ" : "НАВИГАЦИЯ";
+            navigationHint.text = (mechanics.ColorCartridges ? "Цвет — за окраску,\nне за каждую пулю.\n\n" : "") + "Колёсико — ближе\nСКМ — двигать лист";
             for (int i = 0; i < wellLabels.Length; i++)
             {
-                bool exists = i < s.Wells.Count;
-                wellLabels[i].gameObject.SetActive(exists); wellActions[i].gameObject.SetActive(exists);
+                bool exists = mechanics.InkWells && i < s.Wells.Count;
+                wellLabels[i].gameObject.SetActive(exists); wellActions[i].gameObject.SetActive(exists); wellFocus[i].gameObject.SetActive(exists);
                 if (!exists) continue;
                 var well = s.Wells[i];
                 wellLabels[i].text = WorkshopHud.ColorName(well.Color).ToUpperInvariant() + "  " + Mathf.CeilToInt(well.Health) + " / " + Mathf.CeilToInt(well.MaxHealth) +
@@ -231,8 +237,8 @@ namespace PaperDefense.Presentation
                 string directions = ((w.Sides&1)!=0 ? "ЗАПАД  " : "") + ((w.Sides&2)!=0 ? "ВОСТОК  " : "") +
                     ((w.Sides&4)!=0 ? "СЕВЕР  " : "") + ((w.Sides&8)!=0 ? "ЮГ" : "");
                 forecast.text = w.Title + "\n" + directions + "\n" + w.Count + " врагов\n" +
-                    (w.SpitterFraction > 0 ? "Плевуны: следи за замахом!" : w.GnawerFraction>0 ? "Есть грызуны стен!" : w.RunnerFraction>0 ? "Берегись бегунов!" : "Каракули идут толпой") +
-                    (w.HatchedFraction > 0 ? "\nПлотная штриховка" : w.OutlinedFraction > 0 ? "\nЕсть обведённые" : "");
+                    (mechanics.RangedEnemies && w.SpitterFraction > 0 ? "Плевуны: следи за замахом!" : w.GnawerFraction>0 ? "Есть грызуны стен!" : w.RunnerFraction>0 ? "Берегись бегунов!" : "Каракули идут толпой") +
+                    (mechanics.EnemyDrawingTiers ? (w.HatchedFraction > 0 ? "\nПлотная штриховка" : w.OutlinedFraction > 0 ? "\nЕсть обведённые" : "") : "");
             }
             else forecast.text = "Лист закончен.\nКаждый штрих\nимел значение.";
             launch.interactable = (s.Phase == RunPhase.Planning || s.Phase == RunPhase.Intermission) && !s.PendingUpgrade;
@@ -258,11 +264,11 @@ namespace PaperDefense.Presentation
                 else if (st.HasValue && !st.Value.IsComplete)
                     inspect.text = "СТРОИТСЯ\nДо готовности: " + st.Value.BuildRemaining.ToString("0.0") + " с\nНа паузе стройка ждёт.";
                 else if (st.HasValue && st.Value.Kind != StructureKind.Wall && st.Value.Kind != StructureKind.Spikes)
-                    inspect.text = (st.Value.Blueprint != null ? st.Value.Blueprint.Name : "Орудие") + ": " + Mathf.CeilToInt(st.Value.Health) + " HP\nЦвет: " + WorkshopHud.ColorName(st.Value.Color) + "\n[P] " + (st.Value.Priority==TargetPriority.Nearest ? "ближайшие" : st.Value.Priority==TargetPriority.Strongest ? "прочные" : "грызуны");
+                    inspect.text = (st.Value.Blueprint != null ? st.Value.Blueprint.Name : "Орудие") + ": " + Mathf.CeilToInt(st.Value.Health) + " HP" + (mechanics.ColorCartridges ? "\nЦвет: " + WorkshopHud.ColorName(st.Value.Color) : "") + "\n[P] " + (st.Value.Priority==TargetPriority.Nearest ? "ближайшие" : st.Value.Priority==TargetPriority.Strongest ? "прочные" : "грызуны");
                 else inspect.text = "Наведи на орудие.\n[P] — приоритет\n[Tab] — радиус";
             }
             else inspect.text = "Наведи на орудие.\n[P] — приоритет\n[Tab] — радиус";
-            upgradePanel.SetActive(s.PendingUpgrade);
+            upgradePanel.SetActive(mechanics.RunUpgrades && s.PendingUpgrade);
             bool finished = s.Phase == RunPhase.Victory || s.Phase == RunPhase.Defeat;
             outcomePanel.SetActive(finished);
             if (finished)

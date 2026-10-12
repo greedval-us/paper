@@ -5,110 +5,76 @@ namespace PaperDefense.Core
 {
     public sealed partial class GameSession
     {
-        private readonly List<BlotState> blots = new List<BlotState>(256);
+        private CorpseBlotSystem corpseBlots;
         private readonly List<EnemyGlob> enemyGlobs = new List<EnemyGlob>(64);
-        private BlotState[] blotCells;
         private int nextEnemyGlobId = 1;
-        public IReadOnlyList<BlotState> Blots => blots;
+        public IReadOnlyList<BlotState> Blots => corpseBlots == null ? (IReadOnlyList<BlotState>)Array.Empty<BlotState>() : corpseBlots.Blots;
         public IReadOnlyList<EnemyGlob> EnemyProjectiles => enemyGlobs;
         public float BlotterCooldownRemaining { get; private set; }
-        internal IBlotContext CreateBlotContext() => new SessionBlotContext(this);
+        internal IBlotContext CreateBlotContext() => Mechanics.CorpseBlots ? GetCorpseBlots() : null;
 
-        sealed class SessionBlotContext : IBlotContext
+        private CorpseBlotSystem GetCorpseBlots()
         {
-            readonly GameSession session;
-            internal SessionBlotContext(GameSession session) { this.session = session; }
-            public bool TryFindNearest(Point2 origin, float range, out Cell cell)
-                => BlotQueries.TryFindNearest(session.blots, origin, range, out cell);
-            public int Clear(Cell center, float radius)
-            {
-                int cleared = BlotQueries.Clear(session.blots, center, radius);
-                session.CompactBlots();
-                return cleared;
-            }
+            if (corpseBlots == null) corpseBlots = new CorpseBlotSystem(Balance.Width, Balance.Height);
+            return corpseBlots;
         }
 
         public bool TryBlotter(Cell cell, out string reason)
         {
             reason = "";
-            if (!Balance.EnableEnemyMechanics) { reason = "Промокашка недоступна на этом листе."; return false; }
+            if (!Mechanics.CorpseBlots) { reason = "Промокашка недоступна на этом листе."; return false; }
             if (!Inside(cell)) { reason = "Выберите клетку на листе."; return false; }
             if (Phase == RunPhase.Victory || Phase == RunPhase.Defeat) { reason = "Эта страница уже закончена."; return false; }
             if (BlotterCooldownRemaining > 0) { reason = "Промокашке нужно высохнуть."; return false; }
             int cost = Math.Max(0, Balance.BlotterCost);
             if (Ink < cost) { reason = "Не хватает штрихов: нужно " + cost + "."; return false; }
-            float radius = Math.Max(0, Balance.BlotterRadius), radiusSquared = radius * radius;
-            bool found = false;
-            for (int i = 0; i < blots.Count; i++)
-            {
-                var blot = blots[i];
-                float dx = blot.Cell.X - cell.X, dy = blot.Cell.Y - cell.Y;
-                if (blot.Remaining > 0 && dx * dx + dy * dy <= radiusSquared) { found = true; break; }
-            }
-            if (!found) { reason = "В этом радиусе нет клякс."; return false; }
+            float radius = Math.Max(0, Balance.BlotterRadius);
+            var system = GetCorpseBlots();
+            if (!system.HasManualTarget(cell, radius)) { reason = "В этом радиусе нет клякс."; return false; }
             Ink -= cost;
             BlotterCooldownRemaining = Math.Max(0, Balance.BlotterCooldown);
-            for (int i = 0; i < blots.Count; i++)
-            {
-                var blot = blots[i];
-                float dx = blot.Cell.X - cell.X, dy = blot.Cell.Y - cell.Y;
-                if (dx * dx + dy * dy <= radiusSquared) blot.Remaining = 0;
-            }
-            CompactBlots();
+            system.ClearManual(cell, radius);
             return true;
         }
 
-        private void TickEnemyMechanics(float delta)
+        private void TickEnemyStatuses(float delta)
         {
             if (delta <= 0) return;
-            if (Balance.EnableEnemyMechanics && blotCells == null) blotCells = new BlotState[grid.Length];
-            BlotterCooldownRemaining = Math.Max(0, BlotterCooldownRemaining - delta);
-            for (int i = 0; i < blots.Count; i++) blots[i].Remaining = Math.Max(0, blots[i].Remaining - delta);
             for (int i = 0; i < enemies.Count; i++)
             {
                 var enemy = enemies[i];
                 if (enemy.Health <= 0) continue;
                 if (enemy.BlotRemaining > 0 || enemy.RedRemaining > 0 || enemy.BlueRemaining > 0 || enemy.GreenRemaining > 0)
-                    EnemyEffects.Advance(enemy, delta, Statistics, Balance.Effects, Balance.BlotReduction);
-                if (enemy.Health <= 0) continue;
-                if (!Balance.EnableEnemyMechanics) continue;
-                var cell = CellOf(enemy.Position);
-                if (!Inside(cell)) continue;
-                var blot = blotCells[cell.Y * Balance.Width + cell.X];
-                if (blot == null || blot.Remaining <= 0) continue;
-                blot.Remaining = 0;
-                enemy.BlotRemaining = Math.Max(enemy.BlotRemaining, Math.Max(0, Balance.BlotBuffSeconds));
+                    EnemyEffects.Advance(enemy, delta, Statistics, enemyEffects, Mechanics.CorpseBlots ? Balance.BlotReduction : 0);
             }
-            CompactBlots();
-            AdvanceEnemyGlobs(delta);
         }
 
-        private void CompactBlots()
+        private void TickCorpseBlots(float delta)
         {
-            int write = 0;
-            for (int read = 0; read < blots.Count; read++)
-                if (blots[read].Remaining > 0) blots[write++] = blots[read];
-            if (write < blots.Count) blots.RemoveRange(write, blots.Count - write);
+            if (!Mechanics.CorpseBlots || delta <= 0) return;
+            BlotterCooldownRemaining = Math.Max(0, BlotterCooldownRemaining - delta);
+            var system = GetCorpseBlots();
+            system.Advance(delta);
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                var enemy = enemies[i];
+                if (enemy.Health <= 0) continue;
+                if (system.TryConsume(CellOf(enemy.Position)))
+                    enemy.BlotRemaining = Math.Max(enemy.BlotRemaining, Math.Max(0, Balance.BlotBuffSeconds));
+            }
+            system.FinishStep();
         }
 
         private void OnEnemyDeath(EnemyState enemy)
         {
             enemy.WindingUp = false; enemy.WindupRemaining = 0;
-            if (!Balance.EnableEnemyMechanics || Balance.BlotLifetime <= 0) return;
-            var cell = CellOf(enemy.Position);
-            if (!Inside(cell)) return;
-            if (blotCells == null) blotCells = new BlotState[grid.Length];
-            int index = cell.Y * Balance.Width + cell.X;
-            var blot = blotCells[index];
-            if (blot == null) blotCells[index] = blot = new BlotState { Cell = cell };
-            if (blot.Remaining <= 0) blots.Add(blot);
-            // One ordinary corpse mark per cell: buffed corpses never strengthen the next buff.
-            blot.Remaining = Math.Max(0, Balance.BlotLifetime);
+            if (!Mechanics.CorpseBlots || Balance.BlotLifetime <= 0) return;
+            GetCorpseBlots().Add(CellOf(enemy.Position), Balance.BlotLifetime);
         }
 
         private bool TryRangedAttack(EnemyState enemy, float delta)
         {
-            if (!Balance.EnableEnemyMechanics || enemy.Kind != EnemyKind.Spitter) return false;
+            if (!Mechanics.RangedEnemies || enemy.Kind != EnemyKind.Spitter) return false;
             var definition = Balance.Enemy(EnemyKind.Spitter);
             enemy.RangedCooldown = Math.Max(0, enemy.RangedCooldown - delta);
             if (enemy.WindingUp)
@@ -146,9 +112,6 @@ namespace PaperDefense.Core
             }
             return true;
         }
-
-        private float MovementEffect(EnemyState enemy) => Balance.EnableEnemyMechanics ?
-            EnemyEffects.MovementMultiplier(enemy, Balance.Effects, Balance.BlotSpeedBonus) : 1;
 
         private void AdvanceEnemyGlobs(float delta)
         {

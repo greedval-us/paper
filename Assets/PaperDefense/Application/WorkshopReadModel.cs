@@ -25,7 +25,7 @@ namespace PaperDefense.Application
         public readonly float DrawingQuality,QualityMultiplier;
         public readonly bool Valid;
         public readonly string Reason;
-        internal TowerPreview(TowerBlueprint bp,GameBalance balance,MaterialTier material)
+        internal TowerPreview(TowerBlueprint bp,GameBalance balance,MaterialTier material,MechanicsAvailability? mechanics=null)
         {
             DrawingQuality=0;QualityMultiplier=1;Defense=0;
             Valid=TowerCatalog.Validate(bp,balance,out string reason);Reason=reason;
@@ -34,7 +34,7 @@ namespace PaperDefense.Application
             {Load=Capacity=Cost=ColorCost=0;Health=BuildSeconds=FireRate=Range=FeedMultiplier=0;return;}
             DrawingQuality=bp.Origin==DrawingOrigin.LegacyStandard?100:bp.Assessment.Quality;
             Defense=DamageRules.EffectiveDefense(TowerCatalog.Defense(bp,balance),balance.Effects.MaximumDefense);
-            QualityMultiplier=TowerCatalog.QualityMultiplier(bp,balance);
+            QualityMultiplier=TowerCatalog.QualityMultiplier(bp,balance,(mechanics??MechanicsAvailability.Resolve(balance)).DrawingQuality);
             Load=TowerCatalog.Load(bp,balance);Capacity=TowerCatalog.Capacity(bp,balance);Cost=TowerCatalog.Cost(bp,balance,material);
             ColorCost=TowerCatalog.ColorCost(bp,balance);Health=TowerCatalog.Health(bp,balance,material);
             BuildSeconds=TowerCatalog.BuildSeconds(bp,balance,material);FeedMultiplier=TowerCatalog.FeedMultiplier(bp,balance);

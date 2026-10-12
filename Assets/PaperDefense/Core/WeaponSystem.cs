@@ -10,6 +10,8 @@ namespace PaperDefense.Core
     internal sealed class WeaponSystem
     {
         private readonly GameBalance balance;
+        private readonly MechanicsAvailability mechanics;
+        private readonly EffectsRules effects;
         private readonly float? qualityOverride;
         private readonly IBlotContext blotContext;
         private readonly EnemySpatialIndex spatial;
@@ -25,7 +27,15 @@ namespace PaperDefense.Core
         internal bool HasPendingProjectiles => projectiles.Count != 0;
 
         internal WeaponSystem(GameBalance balance, float? qualityOverride = null, IBlotContext blotContext = null)
-        { this.balance = balance; this.qualityOverride = qualityOverride; this.blotContext=blotContext; spatial = new EnemySpatialIndex(balance.Width, balance.Height); }
+        {
+            this.balance = balance;
+            mechanics = MechanicsAvailability.Resolve(balance);
+            effects = balance.Effects.ForEnemyDrawingTiers(mechanics.EnemyDrawingTiers);
+            this.qualityOverride = qualityOverride;
+            // An injected fixture may provide marks without campaign corpse generation.
+            this.blotContext = balance.Mechanics.CorpseBlots ? blotContext : null;
+            spatial = new EnemySpatialIndex(balance.Width, balance.Height);
+        }
 
         internal void Fire(List<StructureState> structures, List<EnemyState> enemies, List<ShotEvent> shots,
             float fireMultiplier, float damageMultiplier, float delta, long tick,
@@ -50,7 +60,7 @@ namespace PaperDefense.Core
                 }
                 float feed = blueprint == null ? 1 : TowerCatalog.FeedMultiplier(blueprint, balance, activeMounts);
                 float quality = QualityMultiplier(blueprint);
-                ColorEffectPayload payload = ColorEffectPayload.Capture(structure.Color, balance.Effects);
+                ColorEffectPayload payload = mechanics.ColorCartridges ? ColorEffectPayload.Capture(structure.Color, effects) : default;
                 TowerColorBudget colorBudget = null;
                 if (balance.Effects.LimitTowerColor && payload.Color != InkColor.None)
                 {
@@ -69,8 +79,13 @@ namespace PaperDefense.Core
         static bool CanOperate(StructureState structure)
             => structure.Health > 0 && structure.IsComplete && structure.BuildRemaining <= 0 && structure.Kind != StructureKind.Wall;
 
-        float QualityMultiplier(TowerBlueprint blueprint) => qualityOverride.HasValue
-            ? TowerCatalog.QualityMultiplier(qualityOverride.Value, balance) : TowerCatalog.QualityMultiplier(blueprint, balance);
+        float QualityMultiplier(TowerBlueprint blueprint)
+        {
+            if (!mechanics.DrawingQuality) return 1;
+            float quality = qualityOverride ?? (blueprint == null || blueprint.Origin == DrawingOrigin.LegacyStandard ? 100 : blueprint.Assessment.Quality);
+            if (!qualityOverride.HasValue && (blueprint == null || blueprint.Origin == DrawingOrigin.LegacyStandard)) return 1;
+            return DrawingEvaluator.FireMultiplier(quality, balance.DrawingMinimumRate, balance.DrawingMaximumRate);
+        }
 
         // Production is shared by unfinished reloads and acquired working mounts. A ready idle
         // mount releases its share. This preview never mutates tracking: each barrel revalidates
@@ -344,10 +359,10 @@ namespace PaperDefense.Core
             TowerColorBudget colorBudget, RunStatistics statistics)
         {
             if (victim.Health <= 0 || damage <= 0) return;
-            if (balance.EnableEnemyMechanics || payload.Color != InkColor.None)
+            if (mechanics.EnemyDrawingTiers || mechanics.CorpseBlots || payload.Color != InkColor.None)
             {
                 if (payload.Color != InkColor.None && colorBudget != null && !colorBudget.TryApply(victim.Id, clockSeconds)) payload = default;
-                EnemyEffects.ApplyHit(victim, damage, payload, statistics, weapon, balance.Effects, balance.BlotReduction); return;
+                EnemyEffects.ApplyHit(victim, damage, payload, statistics, weapon, effects, mechanics.CorpseBlots ? balance.BlotReduction : 0); return;
             }
             float actualDamage = Math.Min(victim.Health, damage);
             victim.Health -= actualDamage;

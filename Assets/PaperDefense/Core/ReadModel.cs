@@ -107,7 +107,7 @@ namespace PaperDefense.Core
         public RunReadModel(GameSession source)
         {
             this.source=source??throw new ArgumentNullException(nameof(source));
-            Balance=new GameBalanceView(source.Balance);Statistics=new RunStatisticsView(source.Statistics);
+            Balance=new GameBalanceView(source.Balance, source.Mechanics);Statistics=new RunStatisticsView(source.Statistics);
             Structures=new ProjectedList<StructureState,StructureView>(source.Structures,s=>new StructureView(s));
             Enemies=new ProjectedList<EnemyState,EnemyView>(source.Enemies,e=>new EnemyView(e));
             Projectiles=new ProjectedList<MortarProjectile,ProjectileView>(source.Projectiles,p=>new ProjectileView(p));
@@ -165,8 +165,10 @@ namespace PaperDefense.Core
     public sealed class GameBalanceView
     {
         readonly GameBalance source;
+        public MechanicsAvailability Mechanics {get;}
         public IReadOnlyList<WaveView> Waves {get;}
-        internal GameBalanceView(GameBalance source){this.source=source;Waves=new ProjectedList<WaveDefinition,WaveView>(source.Waves,w=>new WaveView(w));}
+        internal GameBalanceView(GameBalance source, MechanicsAvailability? mechanics = null)
+        {this.source=source;Mechanics=mechanics??MechanicsAvailability.Resolve(source);Waves=new ProjectedList<WaveDefinition,WaveView>(source.Waves,w=>new WaveView(w));}
         public int Width=>source.Width;public int Height=>source.Height;public int StartingInk=>source.StartingInk;
         public float BaseHealth=>source.BaseHealth;public float PlanningSeconds=>source.PlanningSeconds;public float IntermissionSeconds=>source.IntermissionSeconds;
         public float SimulationStep=>source.SimulationStep;public int MaxEnemiesPerCell=>source.MaxEnemiesPerCell;

@@ -60,6 +60,9 @@ namespace PaperDefense.Core
             if (!Enum.IsDefined(typeof(TrialScenario), scenario)) throw new ArgumentOutOfRangeException(nameof(scenario));
             if (!Enum.IsDefined(typeof(InkColor), color)) throw new ArgumentOutOfRangeException(nameof(color));
             if (budget < 0 || budget > TrialScenarioDefinition.MaximumBudget) throw new ArgumentOutOfRangeException(nameof(budget));
+            var mechanics = MechanicsAvailability.Resolve(balance);
+            var effects = balance.Effects.ForEnemyDrawingTiers(mechanics.EnemyDrawingTiers);
+            if (!mechanics.ColorCartridges) color = InkColor.None;
             int unitCost = Math.Max(1, TowerCatalog.Cost(blueprint, balance, MaterialTier.Pencil));
             int copies = budget / unitCost;
             var towers = new List<StructureState>(copies);
@@ -77,7 +80,9 @@ namespace PaperDefense.Core
                 DrawingQuality = qualityOverride ?? (blueprint.Origin == DrawingOrigin.LegacyStandard ? 100 : blueprint.Assessment.Quality),
                 QualityMultiplier = qualityOverride.HasValue ? TowerCatalog.QualityMultiplier(qualityOverride.Value, balance) : TowerCatalog.QualityMultiplier(blueprint, balance) };
             var random = new Random(seed);
-            TrialBlotContext blotContext = scenario == TrialScenario.Blots ? new TrialBlotContext(random) : null;
+            TrialBlotContext blotContext = scenario == TrialScenario.Blots && balance.Mechanics.CorpseBlots ? new TrialBlotContext(random) : null;
+            if (scenario == TrialScenario.Blots && blotContext == null)
+                report.Scope = "Corpse blots are disabled in developer configuration; no marks are created in this fixture.";
             if (blotContext != null)
                 report.Scope = "60-second finite seeded blot fixture; complete pencil towers at fixed grid positions. " +
                     "48 fixed marks persist until cleaned and never respawn. No enemies, counterfire, construction delay, walls, gold or permanent rewards.";
@@ -100,7 +105,7 @@ namespace PaperDefense.Core
                 {
                     enemies.Add(new EnemyState { Id = ++spawned, Kind = fixture.EnemyKind,
                         Position = new Point2(10, 10.5f + (float)random.NextDouble() * 8), Health = fixture.Health, MaxHealth = fixture.Health,
-                        DrawingTier = fixture.DrawingTier });
+                        DrawingTier = mechanics.EnemyDrawingTiers ? fixture.DrawingTier : DrawingTier.Sketch });
                     spawnClock += fixture.SpawnInterval;
                 }
                 foreach (StructureState tower in towers)
@@ -108,9 +113,9 @@ namespace PaperDefense.Core
                     { tower.Cooldown = Math.Max(0, tower.Cooldown - delta); tower.SecondaryCooldown = Math.Max(0, tower.SecondaryCooldown - delta); }
                 foreach (EnemyState enemy in enemies)
                 {
-                    EnemyEffects.Advance(enemy, delta, stats, balance.Effects, balance.BlotReduction);
+                    EnemyEffects.Advance(enemy, delta, stats, effects, mechanics.CorpseBlots ? balance.BlotReduction : 0);
                     if (enemy.Health <= 0) continue;
-                    enemy.Position = new Point2(enemy.Position.X + fixture.Speed * EnemyEffects.MovementMultiplier(enemy, balance.Effects, balance.BlotSpeedBonus) * delta, enemy.Position.Y);
+                    enemy.Position = new Point2(enemy.Position.X + fixture.Speed * EnemyEffects.MovementMultiplier(enemy, effects, mechanics.CorpseBlots ? balance.BlotSpeedBonus : 0) * delta, enemy.Position.Y);
                     enemy.AttackCooldown = Math.Max(0, enemy.AttackCooldown - delta);
                     if (counterfire && enemy.AttackCooldown <= 0)
                     {

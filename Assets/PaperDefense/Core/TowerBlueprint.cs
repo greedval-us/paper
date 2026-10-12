@@ -86,9 +86,12 @@ namespace PaperDefense.Core
         public static int ToolCost(GameBalance balance, StructureKind kind, MaterialTier tier) =>
             (int)Math.Ceiling(Math.Max(0, balance.Structure(kind).Cost) * Math.Max(0, balance.Material(tier).CostMultiplier));
         public static float QualityMultiplier(TowerBlueprint blueprint, GameBalance balance)
-            => blueprint == null || blueprint.Origin == DrawingOrigin.LegacyStandard ? 1 : QualityMultiplier(blueprint.Assessment.Quality, balance);
+            => QualityMultiplier(blueprint, balance, balance.Mechanics.DrawingQuality);
+        public static float QualityMultiplier(TowerBlueprint blueprint, GameBalance balance, bool enabled)
+            => !enabled || blueprint == null || blueprint.Origin == DrawingOrigin.LegacyStandard ? 1 :
+                DrawingEvaluator.FireMultiplier(blueprint.Assessment.Quality, balance.DrawingMinimumRate, balance.DrawingMaximumRate);
         internal static float QualityMultiplier(float quality, GameBalance balance)
-            => DrawingEvaluator.FireMultiplier(quality, balance.DrawingMinimumRate, balance.DrawingMaximumRate);
+            => balance.Mechanics.DrawingQuality ? DrawingEvaluator.FireMultiplier(quality, balance.DrawingMinimumRate, balance.DrawingMaximumRate) : 1;
         public static float ActionInterval(StructureDefinition definition, float productionMultiplier, float qualityMultiplier)
         {
             if (qualityMultiplier <= 0 || qualityMultiplier > 1 || float.IsNaN(qualityMultiplier) || float.IsInfinity(qualityMultiplier))

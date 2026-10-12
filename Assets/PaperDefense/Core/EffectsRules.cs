@@ -22,6 +22,14 @@ namespace PaperDefense.Core
             return (EffectsRules)MemberwiseClone();
         }
 
+        internal EffectsRules ForEnemyDrawingTiers(bool enabled)
+        {
+            if (enabled) return this;
+            var copy = CreateSnapshot();
+            copy.OutlinedDefense = copy.HatchedDefense = 0;
+            return copy;
+        }
+
         internal void Validate()
         {
             Positive(OutlinedHealthMultiplier, nameof(OutlinedHealthMultiplier));

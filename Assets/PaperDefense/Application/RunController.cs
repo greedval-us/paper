@@ -260,7 +260,7 @@ namespace PaperDefense.Application
             WorkshopChanged?.Invoke();
         }
         public TowerPreview PreviewBlueprint(TowerBlueprint blueprint,MaterialTier material=MaterialTier.Pencil)
-            =>new TowerPreview(blueprint,session.Balance,material);
+            =>new TowerPreview(blueprint,session.Balance,material,session.Mechanics);
         public BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,int slot,MaterialTier material,InkColor color)
         {
             if(slot<0||slot>=runLoadout.Count)return new BuildQuote{Cells=Array.Empty<Cell>(),Reason="Выберите чертёж."};

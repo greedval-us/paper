@@ -26,7 +26,7 @@ namespace PaperDefense.Core
 
         void InitializeObjectives()
         {
-            if(!Balance.EnableInkWells)return;
+            if(!Mechanics.InkWells)return;
             var cells=new[]{new Cell(Balance.Width/5,Balance.Height/4),new Cell(Balance.Width*4/5,Balance.Height/4),
                 new Cell(Balance.Width/2,Balance.Height*5/6)};
             wellFlows=new WeightedFlowField[cells.Length];
@@ -93,7 +93,7 @@ namespace PaperDefense.Core
                 if(well.Active)wellFlows[well.Id].Rebuild(well.Cell,grid,profile.Speed,
                     Math.Max(.01f,profile.Damage)/Math.Max(.05f,profile.AttackInterval));
         }
-        private void AwardWaveResources()
+        private void AwardWellResources()
         {
             foreach(var well in wells)
             {
@@ -101,9 +101,6 @@ namespace PaperDefense.Core
                     coloredInk[(int)well.Color]=(int)Math.Min(int.MaxValue,(long)coloredInk[(int)well.Color]+Math.Max(0,Balance.WellInkPerWave));
                 well.Threatened=false;
             }
-            GoldEarned=(int)Math.Min(int.MaxValue,(long)GoldEarned+Math.Max(0,Balance.WaveGold));
-            if(WaveIndex>=Balance.Waves.Count)
-                GoldEarned=(int)Math.Min(int.MaxValue,(long)GoldEarned+Math.Max(0,Balance.VictoryGold));
         }
     }
 }

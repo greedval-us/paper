@@ -26,6 +26,8 @@ namespace PaperDefense.Presentation
         public MortarFootprintPanel MortarFootprintEditor { get; private set; }
         WorkshopMapSketch map;
         readonly Button[] footprintButtons = new Button[2];
+        readonly Button[] trialScenarioButtons = new Button[4];
+        Button qualityModeButton;
         TrialLaneSketch trialDiagramFirst, trialDiagramSecond;
         readonly Button[] albumButtons = new Button[AlbumRowsPerPage];
         readonly Text[] albumLabels = new Text[AlbumRowsPerPage], slotLabels = new Text[ProfileLimits.LoadoutSlotCount];
@@ -205,12 +207,12 @@ namespace PaperDefense.Presentation
             trialConditions = Label(trialPanel.transform, "", new Rect(30, 81, 1060, 54), 17, NotebookPalette.Navy);
             string[] names = { "ТОЛПА", "БЕГУНЫ", "БРОНЯ", "КЛЯКСЫ" };
             for (int i = 0; i < names.Length; i++)
-            { int scenario = i; Button(trialPanel.transform, "Trial " + i, new Rect(30 + i * 204, 145, 191, 48), names[i], () => { trialScenario = (TrialScenario)scenario; RefreshTrialSettings(); }); }
+            { int scenario = i; trialScenarioButtons[i] = Button(trialPanel.transform, "Trial " + i, new Rect(30 + i * 204, 145, 191, 48), names[i], () => { trialScenario = (TrialScenario)scenario; RefreshTrialSettings(); }); }
             Button(trialPanel.transform, "Counterfire", new Rect(858, 145, 230, 48), "ОБРАТНЫЙ ОГОНЬ", () => { counterfire = !counterfire; RefreshTrialSettings(); });
             int[] budgets = { 200, 400, 800 };
             for (int i = 0; i < budgets.Length; i++)
             { int budget = budgets[i]; Button(trialPanel.transform, "Trial budget " + budget, new Rect(30 + i * 188, 209, 175, 42), budget + " ШТРИХОВ", () => { trialBudget = budget; RefreshTrialSettings(); }); }
-            Button(trialPanel.transform, "Trial quality mode", new Rect(602, 209, 486, 42), "", () => { qualityTrial = !qualityTrial; RefreshTrialSettings(); }, out qualityModeLabel);
+            qualityModeButton = Button(trialPanel.transform, "Trial quality mode", new Rect(602, 209, 486, 42), "", () => { qualityTrial = !qualityTrial; RefreshTrialSettings(); }, out qualityModeLabel);
             trialSettings = Label(trialPanel.transform, "", new Rect(30, 270, 1058, 50), 21, NotebookPalette.Navy, true);
             trialPlayback = Label(trialPanel.transform, "ЗАПИСЬ ИСПЫТАНИЯ ×4  ·  нажми «Провести тест»", new Rect(30, 314, 1058, 27), 17, NotebookPalette.Blue);
             trialDiagramFirst = LaneDiagram(trialPanel.transform, "Blueprint test lane", new Rect(30, 347, 505, 153));
@@ -245,7 +247,9 @@ namespace PaperDefense.Presentation
             if (Draft.Origin == DrawingOrigin.LegacyStandard) text += "Стандартный рисунок: сохранён прежний темп. Для нового варианта нарисуй собственные линии.\n";
             foreach (var part in assessment.PartFeedback)
                 text += DrawingEditorPanel.Name(part.Part) + ": " + part.Quality.ToString("0") + " / 100\n" + part.Message + "\n";
-            text += "\nКачество меняет только интервал действий после общей подачи. Цена, урон, прочность, защита и дальность от рисунка не меняются.";
+            text += run.Session.Balance.Mechanics.DrawingQuality
+                ? "\nКачество меняет только интервал действий после общей подачи. Цена, урон, прочность, защита и дальность от рисунка не меняются."
+                : "\nНа этом листе оценка рисунка сохраняется в альбоме, а темп действий остаётся одинаковым при любом качестве.";
             qualityExplanation.text = text; qualityShade.SetActive(true); qualityPanel.SetActive(true);
         }
 
@@ -277,6 +281,12 @@ namespace PaperDefense.Presentation
             gold.text = "ЗОЛОТО  " + run.Workshop.Gold;
             albumPage = Mathf.Clamp(albumPage, 0, Mathf.Max(0, (run.Workshop.Album.Count - 1) / AlbumRowsPerPage));
             var balance = run.Session.Balance;
+            var mechanics = balance.Mechanics;
+            trialScenarioButtons[(int)TrialScenario.Blots].gameObject.SetActive(mechanics.CorpseBlots);
+            trialScenarioButtons[(int)TrialScenario.Armored].GetComponentInChildren<Text>().text = mechanics.EnemyDrawingTiers ? "БРОНЯ" : "ГРЫЗУНЫ";
+            qualityModeButton.gameObject.SetActive(mechanics.DrawingQuality);
+            if ((!mechanics.CorpseBlots && trialScenario == TrialScenario.Blots) || (!mechanics.DrawingQuality && qualityTrial))
+                RefreshTrialSettings();
             chassisButtons[0].GetComponentInChildren<Text>().text = "ОБЫЧНОЕ  /  " + balance.ChassisCapacity(ChassisKind.Standard);
             chassisButtons[1].GetComponentInChildren<Text>().text = "ТЯЖЁЛОЕ  /  " + balance.ChassisCapacity(ChassisKind.Heavy);
             moduleButtons[0].GetComponentInChildren<Text>().text = "БРОНЯ  +" + balance.ModuleLoad(TowerModules.Armor);
@@ -295,8 +305,8 @@ namespace PaperDefense.Presentation
                 "\nПостройка: " + preview.BuildSeconds.ToString("0.0") + " с    Дальность: " + preview.Range.ToString("0.0") +
                 "\nТемп: " + preview.FireRate.ToString("0.00") + " действий/с · подача " + (preview.FeedMultiplier * 100).ToString("0") + "%" +
                 "\nКачество: " + preview.DrawingQuality.ToString("0") + "/100 · темп " + (preview.QualityMultiplier * 100).ToString("0") + "%" +
-                "\nОкраска: " + preview.ColorCost + " чернил" + (run.Session.Balance.LimitTowerColor ?
-                    " · цвет ≤" + run.Session.Balance.ColorTargetsPerWindow + " цели / " + run.Session.Balance.ColorWindowSeconds.ToString("0.#") + " с" : "") +
+                (mechanics.ColorCartridges ? "\nОкраска: " + preview.ColorCost + " чернил" + (balance.LimitTowerColor ?
+                    " · цвет ≤" + balance.ColorTargetsPerWindow + " цели / " + balance.ColorWindowSeconds.ToString("0.#") + " с" : "") : "") +
                 (preview.Valid ? "" : "\n" + preview.Reason);
             stats.color = preview.Valid ? NotebookPalette.Navy : NotebookPalette.Red;
             sketch.SetBlueprint(Draft);
@@ -341,13 +351,13 @@ namespace PaperDefense.Presentation
             map.SetSession(run.Session);
             bool runners=false,gnawers=false,spitters=false;
             foreach(var wave in run.Session.Balance.Waves)
-            {runners|=wave.RunnerFraction>0;gnawers|=wave.GnawerFraction>0;spitters|=wave.SpitterFraction>0;}
+            {runners|=wave.RunnerFraction>0;gnawers|=wave.GnawerFraction>0;spitters|=mechanics.RangedEnemies&&wave.SpitterFraction>0;}
             string enemies="каракули"+(runners?", бегуны":"")+(gnawers?", грызуны":"")+(spitters?", плевуны":"");
-            briefing.text = "КАРТА " + run.Session.Balance.Width + " × " + run.Session.Balance.Height + "  ·  База в центре  ·  Точки: " + wells +
-                "\nУгрозы партии: "+enemies+". Стены перехватывают прямые сгустки."+
+            briefing.text = "КАРТА " + balance.Width + " × " + balance.Height + "  ·  База в центре" + (mechanics.InkWells ? "  ·  Точки: " + wells : "") +
+                "\nУгрозы партии: "+enemies+"."+(spitters ? " Стены перехватывают прямые сгустки." : "")+
                 (run.Session.Balance.Preset == GameBalancePreset.Target ?
-                    "\nСтарт: " + run.Session.Balance.StartingInk + " штрихов · ожидание не даёт штрихов · доход за врагов и волны. Точки открывают фронт." :
-                    "\nНачало: " + threat + ". Активация точки открывает дополнительный фронт.");
+                    "\nСтарт: " + balance.StartingInk + " штрихов · ожидание не даёт штрихов · доход за врагов и волны." + (mechanics.InkWells ? " Точки открывают фронт." : "") :
+                    "\nНачало: " + threat + "." + (mechanics.InkWells ? " Активация точки открывает дополнительный фронт." : ""));
         }
         void RefreshSaveStatus()
         {
@@ -367,8 +377,11 @@ namespace PaperDefense.Presentation
         void SetTrial(bool visible) { trialShade.SetActive(visible); trialPanel.SetActive(visible); }
         void RefreshTrialSettings()
         {
+            var mechanics = run.Session.Balance.Mechanics;
+            if (!mechanics.CorpseBlots && trialScenario == TrialScenario.Blots) trialScenario = TrialScenario.Crowd;
+            if (!mechanics.DrawingQuality) qualityTrial = false;
             bool blotTraining = trialScenario == TrialScenario.Blots;
-            trialSettings.text = "Сценарий: " + (blotTraining ? "кляксы" : trialScenario == TrialScenario.Crowd ? "толпа" : trialScenario == TrialScenario.Fast ? "бегуны" : "броня") + "    Бюджет: " + trialBudget + "    Ответный огонь: " + (blotTraining ? "НЕТ ВРАГОВ" : counterfire ? "ДА" : "НЕТ");
+            trialSettings.text = "Сценарий: " + (blotTraining ? "кляксы" : trialScenario == TrialScenario.Crowd ? "толпа" : trialScenario == TrialScenario.Fast ? "бегуны" : mechanics.EnemyDrawingTiers ? "броня" : "грызуны") + "    Бюджет: " + trialBudget + "    Ответный огонь: " + (blotTraining ? "НЕТ ВРАГОВ" : counterfire ? "ДА" : "НЕТ");
             trialConditions.text = "Готовые карандашные башни, фиксированные позиции, без стен и наград. " +
                 (blotTraining ? "Заданные кляксы: конечный запас, без врагов и новых пятен. До очистки или 60 с." : "Без клякс. Ответный огонь: 10 урона / 2,4 с в радиусе 12,5.");
             qualityModeLabel.text = qualityTrial ? "СРАВНЕНИЕ: ТВОЁ И 100% КАЧЕСТВА" : "СРАВНЕНИЕ: С ОДИНОЧНЫМИ ПУЛЕМЁТАМИ";

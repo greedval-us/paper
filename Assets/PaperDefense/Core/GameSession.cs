@@ -6,6 +6,7 @@ namespace PaperDefense.Core
     public sealed partial class GameSession
     {
         public GameBalance Balance { get; }
+        public MechanicsAvailability Mechanics { get; }
         public IReadOnlyList<StructureState> Structures => structures;
         public IReadOnlyList<EnemyState> Enemies => enemies;
         public IReadOnlyList<ShotEvent> Shots => shots;
@@ -32,12 +33,14 @@ namespace PaperDefense.Core
         private readonly StructureState[] grid;
         private readonly WeightedFlowField flow;
         private readonly WeaponSystem weapons;
+        private readonly EffectsRules enemyEffects;
         private readonly EnemyCrowdGrid crowd;
         private readonly int[] navigationBands;
         private readonly EnemyState[] frontline;
         private readonly float[] frontlineDistances;
         private readonly bool[] reservedFrontline;
         private readonly Random random;
+        private readonly bool legacyEnemyHealthGrowth;
         private int nextStructureId = 1, nextEnemyId = 1;
         private float spawnClock;
         private double supplyRemainder;
@@ -50,6 +53,9 @@ namespace PaperDefense.Core
         {
             BalanceValidation.Validate(balance);
             Balance = balance;
+            Mechanics = MechanicsAvailability.Resolve(balance);
+            legacyEnemyHealthGrowth = !balance.EnableEnemyMechanics;
+            enemyEffects = balance.Effects.ForEnemyDrawingTiers(Mechanics.EnemyDrawingTiers);
             BaseCell = new Cell(balance.Width / 2, balance.Height / 2);
             BaseHealth = Math.Max(1, balance.BaseHealth);
             Ink = Math.Max(0, balance.StartingInk);
@@ -195,34 +201,6 @@ namespace PaperDefense.Core
             Phase = RunPhase.Assault;
         }
 
-        public void ChooseUpgrade(RunUpgrade upgrade)
-        {
-            if (!PendingUpgrade || !Enum.IsDefined(typeof(RunUpgrade), upgrade)) return;
-            PendingUpgrade = false;
-            Statistics.RecordUpgradeChoice(upgrade);
-            switch (upgrade)
-            {
-                case RunUpgrade.RapidFire: fireMultiplier *= Balance.Progression.RapidFireMultiplier; break;
-                case RunUpgrade.DeepInk:
-                    damageMultiplier *= Balance.Progression.DeepInkDamageMultiplier;
-                    healthMultiplier *= Balance.Progression.DeepInkHealthMultiplier;
-                    foreach (var structure in structures)
-                    {
-                        structure.Health *= Balance.Progression.DeepInkHealthMultiplier;
-                        structure.MaxHealth *= Balance.Progression.DeepInkHealthMultiplier;
-                    }
-                    flowDirty = true;
-                    StructureVisualVersion++;
-                    break;
-                case RunUpgrade.Salvage:
-                    salvageBonus += Balance.Progression.SalvageRefundBonus;
-                    supplyMultiplier *= Balance.Progression.SalvageSupplyMultiplier;
-                    waveRewardMultiplier *= Balance.Progression.SalvageWaveRewardMultiplier;
-                    CreditInk(Balance.Progression.SalvageImmediateInk);
-                    break;
-            }
-        }
-
         /// <summary>Zero delta is a real pause. Large deltas are subdivided to prevent tunnelling.</summary>
         public void Tick(float delta)
         {
@@ -243,7 +221,10 @@ namespace PaperDefense.Core
         {
             TickIndex++;
             Elapsed += delta;
-            TickEnemyMechanics(delta);
+            // Status lifetimes are shared by independent sources, including the stapler.
+            TickEnemyStatuses(delta);
+            TickCorpseBlots(delta);
+            AdvanceEnemyGlobs(delta);
             crowd.Rebuild(enemies);
             supplyRemainder += Math.Max(0, Balance.PassiveInkPerSecond) * supplyMultiplier * delta;
             int supplied = (int)Math.Floor(supplyRemainder + 0.000001);
@@ -314,7 +295,7 @@ namespace PaperDefense.Core
                 double roll = random.NextDouble();
                 float gnawers = Clamp(wave.GnawerFraction, 0, 1);
                 float runners = Clamp(wave.RunnerFraction, 0, 1 - gnawers);
-                float spitters = Balance.EnableEnemyMechanics ? Clamp(wave.SpitterFraction, 0, 1 - gnawers - runners) : 0;
+                float spitters = Mechanics.RangedEnemies ? Clamp(wave.SpitterFraction, 0, 1 - gnawers - runners) : 0;
                 EnemyKind kind = roll < gnawers ? EnemyKind.Gnawer : roll < gnawers + runners ? EnemyKind.Runner :
                     roll < gnawers + runners + spitters ? EnemyKind.Spitter : EnemyKind.Doodle;
                 var definition = Balance.Enemy(kind);
@@ -343,14 +324,15 @@ namespace PaperDefense.Core
                 RemainingToSpawn--;
                 Point2 position = crowd.Add(spawnCell);
                 DrawingTier drawing = DrawingTier.Sketch;
-                if (Balance.EnableEnemyMechanics)
+                if (Mechanics.EnemyDrawingTiers)
                 {
                     double tierRoll = random.NextDouble();
                     drawing = tierRoll < Clamp(wave.HatchedFraction,0,1) ? DrawingTier.Hatched :
                         tierRoll < Clamp(wave.HatchedFraction + wave.OutlinedFraction,0,1) ? DrawingTier.Outlined : DrawingTier.Sketch;
                 }
-                float lateScale = Balance.EnableEnemyMechanics ? EnemyEffects.DrawingHealthMultiplier(drawing, Balance.Effects) :
-                    1 + Math.Max(0, WaveIndex - Balance.Progression.LegacyHealthGrowthStartsAfterWave) * Balance.Progression.LegacyHealthGrowthPerWave;
+                float lateScale = legacyEnemyHealthGrowth ?
+                    1 + Math.Max(0, WaveIndex - Balance.Progression.LegacyHealthGrowthStartsAfterWave) * Balance.Progression.LegacyHealthGrowthPerWave :
+                    EnemyEffects.DrawingHealthMultiplier(drawing, Balance.Effects);
                 enemies.Add(new EnemyState
                 {
                     Id = nextEnemyId++, Kind = kind, Position = position,
@@ -425,7 +407,7 @@ namespace PaperDefense.Core
                 float dx = enemy.Destination.X - enemy.Position.X, dy = enemy.Destination.Y - enemy.Position.Y;
                 float distance = (float)Math.Sqrt(dx * dx + dy * dy);
                 float movement = Math.Max(0, definition.Speed) * enemy.SpeedScale *
-                    EnemyEffects.MovementMultiplier(enemy, Balance.Effects, Balance.BlotSpeedBonus) * delta;
+                    EnemyEffects.MovementMultiplier(enemy, enemyEffects, Mechanics.CorpseBlots ? Balance.BlotSpeedBonus : 0) * delta;
                 bool reached = distance <= movement + 0.00001f;
                 var nextPosition = reached ? enemy.Destination : distance > 0.00001f ?
                     new Point2(enemy.Position.X + dx / distance * movement, enemy.Position.Y + dy / distance * movement) : enemy.Position;
@@ -498,19 +480,6 @@ namespace PaperDefense.Core
                 }
             }
             if (write < enemies.Count) enemies.RemoveRange(write, enemies.Count - write);
-        }
-
-        private void CompleteWave()
-        {
-            AwardWaveResources();
-            int configuredGrant = Balance.Waves[WaveIndex - 1].InkGrant;
-            int grant = configuredGrant >= 0 ? configuredGrant : Balance.WaveInkGrant;
-            CreditInk((int)Math.Min(int.MaxValue, Math.Floor(Math.Max(0, grant) * (double)waveRewardMultiplier)));
-            if (WaveIndex >= Balance.Waves.Count) { Phase = RunPhase.Victory; Countdown = 0; return; }
-            Phase = RunPhase.Intermission;
-            Countdown = Math.Max(0, Balance.IntermissionSeconds);
-            PendingUpgrade = Balance.Progression.UpgradeEveryWaves > 0 && WaveIndex <= Balance.Progression.LastUpgradeWave &&
-                WaveIndex % Balance.Progression.UpgradeEveryWaves == 0;
         }
 
         private void AddStarterDefenses()

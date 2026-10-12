@@ -4,6 +4,8 @@ Tower defense на тетрадном листе, **Unity 6000.5.7f1**. Собе
 
 ## Запуск
 
+Для разработки: [контракты и отключение механик](docs/Mechanics-Contracts.md), [Excel механик и баланса](docs/balance/PaperDefense-Mechanics-Balance.xlsx), [обновление Excel](Tools/BalanceWorkbook/README.md).
+
 Открой существующую сцену `Assets/PaperDefense/Scenes/PaperDefense.unity` и нажми **Play**. Начальный экран — мастерская. Пересоздавать сцену через меню не требуется.
 
 Текущая Windows development-сборка: `Builds/CoreRefactor/PaperDefense.exe`. Запускай её вместе с соседними файлами и папками. Для пробы без чтения и записи своего профиля добавь `-paper-memory-only`.

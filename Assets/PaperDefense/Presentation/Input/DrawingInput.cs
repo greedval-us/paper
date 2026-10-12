@@ -39,13 +39,15 @@ namespace PaperDefense.Presentation
         Cell last;
 
         public void Initialize(RunController controller, NotebookWorldView world, Camera camera)
-        { run = controller; view = world; worldCamera = camera; CameraCenter=new Vector2(run.Session.Balance.Width*.5f,run.Session.Balance.Height*.5f); run.SessionChanged += OnRestart; }
+        { run = controller; view = world; worldCamera = camera; CameraCenter=new Vector2(run.Session.Balance.Width*.5f,run.Session.Balance.Height*.5f); ResetUnavailableSelections(); run.SessionChanged += OnRestart; }
         void OnDestroy() { if (run != null) run.SessionChanged -= OnRestart; }
         void OnRestart(IRunReadModel session)
         {
             Cancel(); Zoom = 1; CameraCenter = new Vector2(session.Balance.Width * .5f, session.Balance.Height * .5f);
+            ResetUnavailableSelections();
             if (BlueprintSlot >= 0 && BlueprintSlot < run.Workshop.Loadout.Count) Tool = run.Workshop.Loadout[BlueprintSlot].FirstWeapon;
             Message = "Чистый лист. Попробуй другую оборону!";
+            SelectionChanged?.Invoke();
         }
 
         public void SelectTool(StructureKind kind)
@@ -59,9 +61,32 @@ namespace PaperDefense.Presentation
         public void SelectTier(MaterialTier tier)
         { Cancel(); Tier = tier; SelectionChanged?.Invoke(); }
         public void SelectColor(InkColor color)
-        { Cancel(); Color = color; SelectionChanged?.Invoke(); }
+        {
+            if (!Enum.IsDefined(typeof(InkColor), color)) return;
+            if (color != InkColor.None && run != null && run.Session != null && !run.Session.Balance.Mechanics.ColorCartridges)
+            { Message = "Цветные картриджи недоступны на этом листе."; return; }
+            Cancel(); Color = color; SelectionChanged?.Invoke();
+        }
         public void SelectMode(DrawingMode mode)
-        { Cancel(); Mode = mode; SelectionChanged?.Invoke(); }
+        {
+            if (!Enum.IsDefined(typeof(DrawingMode), mode)) return;
+            if (run != null && run.Session != null)
+            {
+                var mechanics = run.Session.Balance.Mechanics;
+                if (mode == DrawingMode.Blotter && !mechanics.CorpseBlots)
+                { Message = "Промокашка недоступна на этом листе."; return; }
+                if (mode == DrawingMode.Paint && !mechanics.ColorCartridges)
+                { Message = "Цветные картриджи недоступны на этом листе."; return; }
+            }
+            Cancel(); Mode = mode; SelectionChanged?.Invoke();
+        }
+        void ResetUnavailableSelections()
+        {
+            var mechanics = run.Session.Balance.Mechanics;
+            if (!mechanics.ColorCartridges) Color = InkColor.None;
+            if ((Mode == DrawingMode.Paint && !mechanics.ColorCartridges) ||
+                (Mode == DrawingMode.Blotter && !mechanics.CorpseBlots)) Mode = DrawingMode.Build;
+        }
         public void SetMessage(string message) { Message = message; }
 
         void Update()

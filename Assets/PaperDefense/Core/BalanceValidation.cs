@@ -9,6 +9,7 @@ namespace PaperDefense.Core
         public static void Validate(GameBalance balance)
         {
             if (balance == null) throw new ArgumentNullException(nameof(balance));
+            MechanicsAvailability.Resolve(balance);
             if (balance.Width < 10 || balance.Height < 10 || (long)balance.Width * balance.Height > int.MaxValue / 3)
                 throw new ArgumentOutOfRangeException(nameof(balance), "Поле должно вмещаться в сетку и быть не меньше 10 × 10 клеток.");
             if (!Enum.IsDefined(typeof(GameBalancePreset), balance.Preset)) throw new ArgumentOutOfRangeException(nameof(balance.Preset));

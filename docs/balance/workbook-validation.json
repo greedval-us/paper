@@ -1,0 +1,76 @@
+{
+  "GeneratedAtUtc": "2026-10-12T15:23:42.694Z",
+  "BalanceDataSha256": "cc342ab73d1737828ba44df781b6e7c5cfaea9c6c972bdbac0d2966ffc141334",
+  "WorkbookSha256": "1cb285a58f87376552183675c756bd0c333e1c419bf8e9773b6b04f122a91b04",
+  "Sheets": [
+    "Механики",
+    "Расчеты",
+    "Оружие",
+    "Детали",
+    "Материалы и враги",
+    "Волны",
+    "Параметры",
+    "Источники"
+  ],
+  "Parameters": 387,
+  "RuntimeReferenceChecks": 104,
+  "VerificationEvidence": [
+    {
+      "Path": "docs/validation/mechanics-editmode-results.json",
+      "Sha256": "0e83cbea6c1e389e5a43567e0788dd5061aa41b2feec3f12f26f0d6ed8fdc9c9"
+    },
+    {
+      "Path": "docs/validation/mechanics-playmode-results.json",
+      "Sha256": "5958a8e6b98dd31e64255653497d70ffd1b1816b34c2125cf8a8cf6f4ccd419d"
+    }
+  ],
+  "FormulaChecksPassed": true,
+  "FormulaErrorScan": "{\"kind\":\"notice\",\"message\":\"Cell search matched 0 entries.\"}",
+  "VisualPreviews": [
+    {
+      "sheet": "Механики",
+      "range": "A1:G14"
+    },
+    {
+      "sheet": "Расчеты",
+      "range": "A1:J24"
+    },
+    {
+      "sheet": "Расчеты",
+      "range": "A25:J44"
+    },
+    {
+      "sheet": "Расчеты",
+      "range": "A45:J51"
+    },
+    {
+      "sheet": "Оружие",
+      "range": "A1:J15"
+    },
+    {
+      "sheet": "Детали",
+      "range": "A1:H15"
+    },
+    {
+      "sheet": "Материалы и враги",
+      "range": "A1:I27"
+    },
+    {
+      "sheet": "Волны",
+      "range": "A1:L14"
+    },
+    {
+      "sheet": "Параметры",
+      "range": "A1:E20"
+    },
+    {
+      "sheet": "Источники",
+      "range": "A1:C22"
+    },
+    {
+      "sheet": "Источники",
+      "range": "A24:B32"
+    }
+  ],
+  "Engine": "@oai/artifact-tool. Native Microsoft Excel execution has not been performed."
+}
