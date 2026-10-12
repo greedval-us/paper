@@ -13,6 +13,7 @@ namespace PaperDefense.Presentation
     public sealed class DrawingInput : MonoBehaviour
     {
         public UserTextResolver TextResolver { get; set; }
+        public bool ConstructionOnly { get; set; }
         string Resolve(string value) => GameText.Resolve(TextResolver, value);
         public StructureKind Tool { get; private set; } = StructureKind.Wall;
         public MaterialTier Tier { get; private set; } = MaterialTier.Pencil;
@@ -59,9 +60,13 @@ namespace PaperDefense.Presentation
         }
 
         public void SelectTool(StructureKind kind)
-        { Cancel(); BlueprintSlot = -1; Tool = kind; Mode = DrawingMode.Build; SelectionChanged?.Invoke(); }
+        {
+            if (ConstructionOnly && kind != StructureKind.Wall && kind != StructureKind.Spikes) return;
+            Cancel(); BlueprintSlot = -1; Tool = kind; Mode = DrawingMode.Build; SelectionChanged?.Invoke();
+        }
         public void SelectSlot(int slot)
         {
+            if (ConstructionOnly) return;
             if (run == null || slot < 0 || slot >= run.Workshop.Loadout.Count) return;
             if (run.Workshop.Loadout[slot] == null) { Message = UserText.Message("copy.39c29e0231f823f1"); return; }
             Cancel(); BlueprintSlot = slot; Tool = run.Workshop.Loadout[slot].FirstWeapon;
@@ -71,6 +76,7 @@ namespace PaperDefense.Presentation
         { Cancel(); Tier = tier; SelectionChanged?.Invoke(); }
         public void SelectColor(InkColor color)
         {
+            if (ConstructionOnly && color != InkColor.None) return;
             if (!Enum.IsDefined(typeof(InkColor), color)) return;
             if (color != InkColor.None && run != null && run.Session != null && !run.Session.Balance.Mechanics.ColorCartridges)
             { Message = UserText.Message("copy.0a21e662d398deaa"); return; }
@@ -78,6 +84,7 @@ namespace PaperDefense.Presentation
         }
         public void SelectMode(DrawingMode mode)
         {
+            if (ConstructionOnly && mode != DrawingMode.Build && mode != DrawingMode.Erase && mode != DrawingMode.Upgrade) return;
             if (!Enum.IsDefined(typeof(DrawingMode), mode)) return;
             if (run != null && run.Session != null)
             {
@@ -225,6 +232,18 @@ namespace PaperDefense.Presentation
         {
             var k = Keyboard.current;
             if (k == null) return;
+            if (ConstructionOnly)
+            {
+                if (k.digit5Key.wasPressedThisFrame) SelectTool(StructureKind.Wall);
+                if (k.digit6Key.wasPressedThisFrame) SelectTool(StructureKind.Spikes);
+                if (k.eKey.wasPressedThisFrame) SelectMode(DrawingMode.Erase);
+                if (k.uKey.wasPressedThisFrame) SelectMode(DrawingMode.Upgrade);
+                if (k.qKey.wasPressedThisFrame) SelectTier((MaterialTier)(((int)Tier + 1) % 3));
+                if (k.spaceKey.wasPressedThisFrame) run.TogglePause();
+                if (k.escapeKey.wasPressedThisFrame) Cancel();
+                if (k.tabKey.wasPressedThisFrame) { ShowRanges = !ShowRanges; view.ShowRanges = ShowRanges; }
+                return;
+            }
             if (k.digit1Key.wasPressedThisFrame) SelectSlot(0);
             if (k.digit2Key.wasPressedThisFrame) SelectSlot(1);
             if (k.digit3Key.wasPressedThisFrame) SelectSlot(2);

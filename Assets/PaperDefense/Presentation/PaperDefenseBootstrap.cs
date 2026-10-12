@@ -16,6 +16,9 @@ namespace PaperDefense.Presentation
         public bool standMode;
         public bool showBattleHud = true;
         public bool showWorkshopHud = true;
+        public WorkshopHudMode workshopHudMode;
+        public bool enableDrawingInput = true;
+        public bool constructionInputOnly;
         public TextResourcesAsset textResources;
         [NonSerialized] public IWorkshopProfileStore ProfileStore;
         [NonSerialized] public Action<RunController> PrepareController;
@@ -57,7 +60,9 @@ namespace PaperDefense.Presentation
             View.WorldCamera = worldCamera; View.Initialize(Controller.Session);
             Drawing = Child("Presentation — Drawing input").AddComponent<DrawingInput>();
             Drawing.TextResolver = TextResolver;
+            Drawing.ConstructionOnly = constructionInputOnly;
             Drawing.Initialize(Controller,View,worldCamera);
+            Drawing.enabled = enableDrawingInput;
             if (showBattleHud)
             {
                 var hud = Child("Presentation — Interface").AddComponent<NotebookHud>();
@@ -66,7 +71,8 @@ namespace PaperDefense.Presentation
             if (showWorkshopHud)
             {
                 var workshop = Child("Presentation — Workshop").AddComponent<WorkshopHud>();
-                workshop.TextResolver = TextResolver; workshop.ReserveStandControls = standMode; workshop.Initialize(Controller);
+                workshop.TextResolver = TextResolver; workshop.ReserveStandControls = standMode;
+                workshop.Mode = workshopHudMode; workshop.Initialize(Controller);
             }
             if (EventSystem.current == null)
             { var go=Child("UI Event System");go.AddComponent<EventSystem>();go.AddComponent<InputSystemUIInputModule>(); }
@@ -91,9 +97,13 @@ namespace PaperDefense.Presentation
         {
             float scale=Mathf.Min(Screen.width/1600f,Screen.height/1000f);
             float x=(Screen.width-1600*scale)*.5f,y=(Screen.height-1000*scale)*.5f;
-            worldCamera.rect = standMode && !showBattleHud && !showWorkshopHud
-                ? new Rect(.22f,.04f,.76f,.92f)
-                : new Rect((x+32*scale)/Screen.width,(y+205*scale)/Screen.height,1536*scale/Screen.width,640*scale/Screen.height);
+            if (standMode && !showBattleHud && !showWorkshopHud)
+            {
+                float standScale = Mathf.Max(.65f, Mathf.Min(Screen.width / 1280f, Screen.height / 800f));
+                float bottom = Mathf.Max(.04f, (60 * standScale + 12) / Screen.height);
+                worldCamera.rect = new Rect(.22f, bottom, .76f, Mathf.Max(.1f, .96f - bottom));
+            }
+            else worldCamera.rect = new Rect((x+32*scale)/Screen.width,(y+205*scale)/Screen.height,1536*scale/Screen.width,640*scale/Screen.height);
             var b=Controller.Session.Balance;worldCamera.orthographicSize=Mathf.Max(b.Height*.5f+1,b.Width*.5f/worldCamera.aspect+1)/(Drawing!=null ? Drawing.Zoom : 1);
             if(Drawing!=null) worldCamera.transform.position=new Vector3(Drawing.CameraCenter.x,Drawing.CameraCenter.y,-10);
         }

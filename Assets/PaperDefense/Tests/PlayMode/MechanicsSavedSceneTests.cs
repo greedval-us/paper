@@ -29,7 +29,7 @@ namespace PaperDefense.Tests
             h.enabled = false; // Drive exact frame durations without a concurrent Unity Update.
             var c = h.Controller;
             Assert.That(c.StartRun(out string reason), Is.True, reason);
-            if (h.Paused) h.TogglePause();
+            Assert.That(h.Paused, Is.EqualTo(c.Paused), "The stand and HUD must share one pause state after starting a run.");
             long tick = c.Session.TickIndex;
             c.TogglePause();
             Assert.That(h.AdvanceFrame(FixedStepClock.Step * 3), Is.Zero);

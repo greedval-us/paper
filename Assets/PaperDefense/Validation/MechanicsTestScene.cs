@@ -22,7 +22,7 @@ namespace PaperDefense.Validation
         public int ProfileLoadCalls => fixture?.LoadCalls ?? 0;
         public int ProfileSaveCalls => fixture?.SaveCalls ?? 0;
         public TrialComparison QualityComparison { get; private set; }
-        public bool Paused { get; private set; }
+        public bool Paused => Controller != null && Controller.Paused;
         public int SimulationDriverCount => Prepared && !Controller.AutomaticSimulation ? 1 : 0;
         UserTextResolver texts;
         GameObject runtimeRoot;
@@ -49,7 +49,9 @@ namespace PaperDefense.Validation
                 texts = scenario.textResources.CreateResolver();
                 texts.RequireKeys(new[] { scenario.titleKey, scenario.instructionsKey, "test.status", "test.reset", "test.pause", "test.step",
                     "test.blueprint_name", "test.tower_counters", "test.mount_counters", "test.target_counters", "test.color_counters",
-                    "test.well_counters", "test.economy_counters", "test.profile_counters", "test.pressure_counters", "test.active", "test.inactive" });
+                    "test.well_counters", "test.economy_counters", "test.profile_counters", "test.pressure_counters", "test.active", "test.inactive",
+                    "test.focus_status", "test.target_health", "test.target_windup", "test.target_colors", "test.target_blot", "test.ink",
+                    "test.base_health", "test.mount_tracking", "test.mount_reload", "test.ranges" });
                 texts.RequireKeys(scenario.observationKeys);
                 var balance = scenario.CreateBalance();
                 if (scenario.focus == MechanicsTestFocus.Profile)
@@ -71,11 +73,17 @@ namespace PaperDefense.Validation
                 Bootstrap.ProfileStore = scenario.focus == MechanicsTestFocus.Profile ? fixture : null;
                 Bootstrap.standMode = true; Bootstrap.showBattleHud = scenario.focus == MechanicsTestFocus.Integration;
                 Bootstrap.showWorkshopHud = scenario.workshopMode;
+                Bootstrap.workshopHudMode = scenario.focus == MechanicsTestFocus.Assembly ? WorkshopHudMode.Assembly :
+                    scenario.focus == MechanicsTestFocus.Drawing ? WorkshopHudMode.Drawing :
+                    scenario.focus == MechanicsTestFocus.Profile ? WorkshopHudMode.Profile : WorkshopHudMode.Full;
+                Bootstrap.enableDrawingInput = scenario.focus == MechanicsTestFocus.Construction || scenario.focus == MechanicsTestFocus.Integration;
+                Bootstrap.constructionInputOnly = scenario.focus == MechanicsTestFocus.Construction;
                 Bootstrap.PrepareController = PrepareController;
                 runtimeRoot.SetActive(true);
                 if (Bootstrap.Controller == null || Bootstrap.View == null || Bootstrap.Drawing == null)
                     throw new InvalidOperationException("mechanics.scene: bootstrap preparation did not complete.");
-                Paused = scenario.startPaused; clock.Reset(); ResetGeneration++; Prepared = true;
+                if (Controller.Paused != scenario.startPaused) Controller.TogglePause();
+                clock.Reset(); ResetGeneration++; Prepared = true;
             }
             catch (Exception error)
             {
@@ -150,7 +158,7 @@ namespace PaperDefense.Validation
         public int AdvanceFrame(float realDelta)
         {
             if (!Prepared || Controller.InWorkshop) return 0;
-            bool paused = Paused || Controller.Paused;
+            bool paused = Controller.Paused;
             // Ordinary fixtures use the controller's clock so the full HUD pause/speed controls
             // have exactly the same behavior as production. Pressure retains its own driver.
             if (pressure == null) return Controller.AdvanceFrame(realDelta, paused, Controller.Speed);
@@ -160,8 +168,8 @@ namespace PaperDefense.Validation
         }
         public void TogglePause()
         {
-            Paused = !Paused; clock.ClearDebt();
-            if (Prepared && pressure == null) Controller.AdvanceFrame(0, true, Controller.Speed);
+            if (Controller == null) return;
+            Controller.TogglePause(); clock.ClearDebt();
         }
         public void Step() { if (Prepared && !Controller.InWorkshop) { clock.ClearDebt(); AdvanceOneTick(); } }
         void AdvanceOneTick()
@@ -176,8 +184,9 @@ namespace PaperDefense.Validation
         }
         public void CompareDrawing()
         {
-            if (Prepared && Controller.Workshop.Album.Count > 0)
-                QualityComparison = Controller.RunQualityTrial(Controller.Workshop.Loadout[0], TrialScenario.Crowd);
+            if (!Prepared || scenario.focus != MechanicsTestFocus.Drawing) return;
+            var workshop = Bootstrap.GetComponentInChildren<WorkshopHud>();
+            if (workshop != null) QualityComparison = workshop.CompareDrawingQuality();
         }
         public bool SaveProfileVariant()
         {
@@ -210,8 +219,11 @@ namespace PaperDefense.Validation
             else if (compact)
             {
                 var session = Controller.Session;
-                GUILayout.Label(Text("test.status", session.TickIndex, session.Ink, session.Enemies.Count, session.Kills,
-                    session.Statistics.TotalDamage, Launches(session), session.Blots.Count, session.BaseHealth), wrapped);
+                GUILayout.Label(Text("test.focus_status", session.TickIndex, Launches(session), session.Statistics.TotalDamage), wrapped);
+                if (scenario.focus == MechanicsTestFocus.Economy || scenario.focus == MechanicsTestFocus.Construction ||
+                    scenario.focus == MechanicsTestFocus.Wells) GUILayout.Label(Text("test.ink", session.Ink), wrapped);
+                if (scenario.focus == MechanicsTestFocus.Ranged || scenario.focus == MechanicsTestFocus.Wells ||
+                    scenario.focus == MechanicsTestFocus.Pressure) GUILayout.Label(Text("test.base_health", session.BaseHealth), wrapped);
                 DrawObservations(session, wrapped);
                 if (!string.IsNullOrEmpty(status)) GUILayout.Label(texts.Resolve(status));
             }
@@ -219,8 +231,14 @@ namespace PaperDefense.Validation
             GUILayout.BeginArea(new Rect(12, Screen.height / scale - 60, width - 24, 52), GUI.skin.box);
             GUILayout.BeginHorizontal();
             if (GUILayout.Button(Text("test.reset"))) ResetScenario();
-            if (GUILayout.Button(Text("test.pause"))) TogglePause();
-            if (GUILayout.Button(Text("test.step"))) Step();
+            bool simulationControls = !scenario.workshopMode || scenario.focus == MechanicsTestFocus.Integration &&
+                Prepared && !Controller.InWorkshop;
+            if (simulationControls)
+            {
+                if (GUILayout.Button(Text("test.pause"))) TogglePause();
+                if (GUILayout.Button(Text("test.step"))) Step();
+                if (Prepared && GUILayout.Button(Text("test.ranges"))) Bootstrap.View.ShowRanges = !Bootstrap.View.ShowRanges;
+            }
             if (Prepared)
             {
                 if (scenario.focus == MechanicsTestFocus.Feed || scenario.focus == MechanicsTestFocus.Color)
@@ -283,15 +301,22 @@ namespace PaperDefense.Validation
                 foreach (var mount in structure.Blueprint.WeaponMounts)
                 {
                     var state = structure.GetMountState(mount.SlotIndex);
-                    GUILayout.Label(Text("test.mount_counters", mount.SlotIndex + 1, state.TargetId,
-                        state.AcquisitionRemaining, state.ActionRemaining), style);
+                    if (scenario.focus == MechanicsTestFocus.Tracking)
+                        GUILayout.Label(Text("test.mount_tracking", mount.SlotIndex + 1, state.TargetId, state.AcquisitionRemaining), style);
+                    else if (scenario.focus == MechanicsTestFocus.Feed)
+                        GUILayout.Label(Text("test.mount_reload", mount.SlotIndex + 1, state.TargetId, state.ActionRemaining), style);
                 }
             }
             for (int i = 0; i < Math.Min(5, session.Enemies.Count); i++)
             {
                 var target = session.Enemies[i];
-                GUILayout.Label(Text("test.target_counters", target.Id, target.Health, target.MaxHealth, target.WindupRemaining,
-                    target.RedRemaining, target.BlueRemaining, target.GreenRemaining, target.BlotRemaining), style);
+                GUILayout.Label(Text("test.target_health", target.Id, target.Health, target.MaxHealth), style);
+                if (scenario.focus == MechanicsTestFocus.Ranged || scenario.focus == MechanicsTestFocus.Armor)
+                    GUILayout.Label(Text("test.target_windup", target.Id, target.WindupRemaining), style);
+                if (scenario.focus == MechanicsTestFocus.Color)
+                    GUILayout.Label(Text("test.target_colors", target.Id, target.RedRemaining, target.BlueRemaining, target.GreenRemaining), style);
+                if (scenario.focus == MechanicsTestFocus.Blots)
+                    GUILayout.Label(Text("test.target_blot", target.Id, target.BlotRemaining), style);
             }
             if (scenario.mechanics.ColorCartridges)
                 GUILayout.Label(Text("test.color_counters", session.ColoredInk(InkColor.Red), session.ColoredInk(InkColor.Blue),
