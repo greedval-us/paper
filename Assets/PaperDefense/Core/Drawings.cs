@@ -7,6 +7,35 @@ namespace PaperDefense.Core
     // Values are persistent part identifiers. Never reorder or reuse them for another part.
     public enum DrawingPartKey { Base = 0, Mount0 = 1, Mount1 = 2, Armor = 3, Feed = 4, Tracking = 5, Decoration = 6, Rail = 7 }
 
+    /// <summary>Persistent assembly slots, independent of the content selected in them.</summary>
+    public static class DrawingBindings
+    {
+        public const string Base = "base", Mount0 = "mount.0", Mount1 = "mount.1", Decoration = "decoration";
+        static readonly string[] legacy = { Base, Mount0, Mount1, "module.armor", "module.feed", "module.tracking", Decoration, "module.rail" };
+        public static string For(DrawingPartKey key)
+        {
+            int index = (int)key;
+            if (index < 0 || index >= legacy.Length) throw new ArgumentOutOfRangeException(nameof(key));
+            return legacy[index];
+        }
+        public static bool TryLegacy(string binding, out DrawingPartKey key)
+        {
+            for (int i = 0; i < legacy.Length; i++) if (legacy[i] == binding) { key = (DrawingPartKey)i; return true; }
+            key = (DrawingPartKey)(-1); return false;
+        }
+        public static string Module(string instanceId)
+        {
+            Validate(instanceId, nameof(instanceId));
+            return "module." + instanceId;
+        }
+        public static void Validate(string value, string field = "bindingId")
+        {
+            if (string.IsNullOrWhiteSpace(value) || value != value.Trim() || value.Length > 160)
+                throw new ArgumentException(field + ": требуется непустой устойчивый ID длиной до 160 знаков.");
+            foreach (char c in value) if (char.IsControl(c)) throw new ArgumentException(field + ": управляющие знаки запрещены.");
+        }
+    }
+
     /// <summary>Part-local coordinates; +Y is the weapon's forward axis. Fixed precision keeps saves and hashes stable.</summary>
     public readonly struct DrawingPoint : IEquatable<DrawingPoint>
     {
@@ -48,15 +77,20 @@ namespace PaperDefense.Core
     public sealed class DrawingPart
     {
         public DrawingPartKey Key { get; }
+        public string BindingId { get; }
         public IReadOnlyList<DrawingStroke> Strokes { get; }
 
         public DrawingPart(DrawingPartKey key, IReadOnlyList<DrawingStroke> strokes)
+            : this(DrawingBindings.For(key), strokes) { }
+
+        public DrawingPart(string bindingId, IReadOnlyList<DrawingStroke> strokes)
         {
-            if (!Enum.IsDefined(typeof(DrawingPartKey), key)) throw new ArgumentOutOfRangeException(nameof(key));
+            DrawingBindings.Validate(bindingId);
             if (strokes == null) throw new ArgumentNullException(nameof(strokes));
             if (strokes.Count > DrawingSnapshot.MaxStrokes)
                 throw new ArgumentException("На странице помещается не более " + DrawingSnapshot.MaxStrokes + " штрихов.", nameof(strokes));
-            Key = key;
+            BindingId = bindingId;
+            DrawingBindings.TryLegacy(bindingId, out DrawingPartKey key); Key = key;
             var owned = new DrawingStroke[strokes.Count];
             for (int i = 0; i < owned.Length; i++)
             {
@@ -70,33 +104,42 @@ namespace PaperDefense.Core
     /// <summary>Canonical owned source data. Thumbnails, meshes and assessments are derived from this snapshot.</summary>
     public sealed class DrawingSnapshot
     {
-        public const int CurrentFormatVersion = 2, CurrentBindingVersion = 1;
+        public const int CurrentFormatVersion = 3, CurrentBindingVersion = 2;
+        public const int LegacyFormatVersion = 2, LegacyBindingVersion = 1, LegacyPartCount = 8, MaximumParts = 128;
         public const int MaxStrokes = 128, MaxPoints = 2048;
         public static DrawingSnapshot Empty { get; } = new DrawingSnapshot(Array.Empty<DrawingPart>());
-        public int FormatVersion => CurrentFormatVersion;
-        public int BindingVersion => CurrentBindingVersion;
+        public int FormatVersion { get; }
+        public int BindingVersion { get; }
         public string GeometryHash { get; }
         public IReadOnlyList<DrawingPart> Parts { get; }
         public int StrokeCount { get; }
         public int PointCount { get; }
         public bool IsEmpty { get; }
+        readonly Dictionary<string, DrawingPart> byBinding;
 
         public DrawingSnapshot(IReadOnlyList<DrawingPart> parts)
         {
             if (parts == null) throw new ArgumentNullException(nameof(parts));
-            const int partCount = 8;
-            if (parts.Count > partCount) throw new ArgumentException("В рисунке не более восьми частей.", nameof(parts));
-            var owned = new DrawingPart[partCount];
+            if (parts.Count > MaximumParts) throw new ArgumentException("В рисунке слишком много привязок частей.", nameof(parts));
+            var owned = new DrawingPart[LegacyPartCount];
+            var extra = new SortedDictionary<string, DrawingPart>(StringComparer.Ordinal);
             int strokes = 0, points = 0;
             bool hasVisibleSegment = false;
             for (int i = 0; i < parts.Count; i++)
             {
                 DrawingPart source = parts[i];
                 if (source == null) throw new ArgumentException("Часть рисунка не может быть пустой ссылкой.", nameof(parts));
-                int key = (int)source.Key;
-                if (key < 0 || key >= partCount) throw new ArgumentException("Неизвестная часть рисунка.", nameof(parts));
-                if (owned[key] != null) throw new ArgumentException("Часть рисунка повторяется.", nameof(parts));
-                owned[key] = new DrawingPart(source.Key, source.Strokes);
+                if (DrawingBindings.TryLegacy(source.BindingId, out DrawingPartKey legacyKey))
+                {
+                    int key = (int)legacyKey;
+                    if (owned[key] != null) throw new ArgumentException("Часть рисунка повторяется.", nameof(parts));
+                    owned[key] = new DrawingPart(source.BindingId, source.Strokes);
+                }
+                else
+                {
+                    if (extra.ContainsKey(source.BindingId)) throw new ArgumentException("Привязка части рисунка повторяется.", nameof(parts));
+                    extra.Add(source.BindingId, new DrawingPart(source.BindingId, source.Strokes));
+                }
                 strokes += source.Strokes.Count;
                 foreach (DrawingStroke stroke in source.Strokes)
                 {
@@ -109,9 +152,15 @@ namespace PaperDefense.Core
             }
             for (int i = 0; i < owned.Length; i++)
                 if (owned[i] == null) owned[i] = new DrawingPart((DrawingPartKey)i, Array.Empty<DrawingStroke>());
+            var all = new List<DrawingPart>(owned); all.AddRange(extra.Values);
+            if (all.Count > MaximumParts) throw new ArgumentException("В рисунке слишком много привязок частей.", nameof(parts));
+            FormatVersion = extra.Count == 0 ? LegacyFormatVersion : CurrentFormatVersion;
+            BindingVersion = extra.Count == 0 ? LegacyBindingVersion : CurrentBindingVersion;
+            byBinding = new Dictionary<string, DrawingPart>(StringComparer.Ordinal);
+            foreach (DrawingPart part in all) byBinding.Add(part.BindingId, part);
             StrokeCount = strokes; PointCount = points; IsEmpty = !hasVisibleSegment;
-            Parts = Array.AsReadOnly(owned);
-            GeometryHash = Hash(owned).ToString("x16", CultureInfo.InvariantCulture);
+            Parts = all.AsReadOnly();
+            GeometryHash = Hash(Parts, FormatVersion, BindingVersion).ToString("x16", CultureInfo.InvariantCulture);
         }
 
         public DrawingPart GetPart(DrawingPartKey key)
@@ -120,15 +169,23 @@ namespace PaperDefense.Core
             return Parts[(int)key];
         }
 
+        public DrawingPart GetPart(string bindingId)
+        {
+            DrawingBindings.Validate(bindingId);
+            return byBinding.TryGetValue(bindingId, out DrawingPart part) ? part : new DrawingPart(bindingId, Array.Empty<DrawingStroke>());
+        }
+
         public DrawingSnapshot DeepCopy() => new DrawingSnapshot(Parts);
 
-        static ulong Hash(IReadOnlyList<DrawingPart> parts)
+        static ulong Hash(IReadOnlyList<DrawingPart> parts, int format, int binding)
         {
             ulong hash = 14695981039346656037UL;
-            Add(ref hash, CurrentFormatVersion); Add(ref hash, CurrentBindingVersion);
+            Add(ref hash, format); Add(ref hash, binding);
             foreach (DrawingPart part in parts)
             {
-                Add(ref hash, (int)part.Key); Add(ref hash, part.Strokes.Count);
+                if (format == LegacyFormatVersion) Add(ref hash, (int)part.Key);
+                else { foreach (char c in part.BindingId) Add(ref hash, c); Add(ref hash, 0); }
+                Add(ref hash, part.Strokes.Count);
                 foreach (DrawingStroke stroke in part.Strokes)
                 {
                     Add(ref hash, stroke.Points.Count);

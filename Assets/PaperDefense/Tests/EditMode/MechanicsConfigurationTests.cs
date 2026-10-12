@@ -100,13 +100,13 @@ namespace PaperDefense.Tests
         }
 
         [Test]
-        public void SessionAndReadModelFreezeAvailabilityWithoutChangingBalanceOwnership()
+        public void SessionAndReadModelOwnFrozenRulesAndAvailability()
         {
             var balance = Balance(); var session = new GameSession(balance, starterDefenses: false);
             var readModel = new RunReadModel(session);
             SetConfiguration(balance.Mechanics, false);
             balance.EnableEnemyMechanics = balance.EnableInkWells = false;
-            Assert.That(session.Balance, Is.SameAs(balance), "The existing balance ownership contract remains explicit.");
+            Assert.That(session.Balance, Is.Not.SameAs(balance), "Preparation owns its complete balance snapshot.");
             AssertAll(session.Mechanics, true);
             AssertAll(readModel.Balance.Mechanics, true);
             AssertAll(new GameSession(balance, starterDefenses: false).Mechanics, false);

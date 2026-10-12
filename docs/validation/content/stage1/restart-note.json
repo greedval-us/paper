@@ -1,0 +1,9 @@
+{
+  "Reason": "Stage 1 A–E runner passed. Full PlayMode found a test-only UI selector using a stable ID where legacy button object names intentionally remain historical. The generic selector was corrected; all 256 PlayMode tests then passed. Test content was reset to the base catalog before a new freeze and will be copied back as a separate data-only stage.",
+  "ChangedSourceFiles": [
+    "Assets/PaperDefense/Tests/PlayMode/DataDrivenWorkshopUiTests.cs"
+  ],
+  "RuntimeSourceChanges": 0,
+  "OriginalEvidencePreserved": true,
+  "FinalStageStartsFromBaseParts": 13
+}

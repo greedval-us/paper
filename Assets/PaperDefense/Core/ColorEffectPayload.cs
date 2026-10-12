@@ -27,5 +27,13 @@ namespace PaperDefense.Core
 
         internal static ColorEffectPayload Slow(float multiplier, float duration)
             => new ColorEffectPayload(InkColor.Blue, duration, multiplier, 0, false);
+        public static ColorEffectPayload Capture(InkColor color,ContentCatalogSnapshot catalog)
+        {
+            if(color==InkColor.None)return default;
+            if(!Enum.IsDefined(typeof(InkColor),color))throw new ArgumentOutOfRangeException(nameof(color));
+            return Capture(catalog.GetEffect(color==InkColor.Red?catalog.RedEffectId:color==InkColor.Blue?catalog.BlueEffectId:catalog.GreenEffectId));
+        }
+        public static ColorEffectPayload Capture(EffectDefinition effect)
+            =>new ColorEffectPayload(effect.Kind==EffectKind.DamageOverTime?InkColor.Red:effect.Kind==EffectKind.Slow?InkColor.Blue:InkColor.Green,effect.Duration,effect.Strength,effect.TickSeconds,effect.IgnoresDefense);
     }
 }

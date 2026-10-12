@@ -47,16 +47,14 @@ namespace PaperDefense.Presentation
             Color fill = Color.Lerp(NotebookPalette.Paper, color, .22f);
             if (building) fill.a = .7f;
             bool authored = state.Blueprint != null && state.Blueprint.Origin == DrawingOrigin.PlayerDrawing;
-            if (authored)
+            if (authored || ReferenceDrawingCache.UsesTemplateVisual(state.Blueprint))
             {
-                var geometry = AuthoredGeometryCache.For(state.Blueprint.Drawing);
-                for (int i = 0; i < geometry.Parts.Count; i++)
+                var geometry = AuthoredGeometryCache.For(ReferenceDrawingCache.VisibleDrawing(state.Blueprint));
+                foreach (var template in DrawingTemplateCatalog.Create(state.Blueprint))
                 {
-                    var part = geometry.Parts[i];
-                    if (part.Key == DrawingPartKey.Mount0 || part.Key == DrawingPartKey.Mount1) continue;
-                    if (!DrawingTemplateCatalog.IsEnabled(state.Blueprint, part.Key)) continue;
-                    var pivot = DrawingTemplateCatalog.Pivot(state.Blueprint, part.Key);
-                    pen.Append(part, p + new Vector2(pivot.X, pivot.Y), 0, color);
+                    if (template.Role == DrawingPartRole.Mount) continue;
+                    var pivot = template.Pivot;
+                    pen.Append(geometry.GetPart(template.BindingId), p + new Vector2(pivot.X, pivot.Y), 0, color);
                 }
             }
             else
@@ -127,9 +125,9 @@ namespace PaperDefense.Presentation
             if (state.Blueprint != null)
             {
                 bool dual = state.Blueprint.SecondWeapon.HasValue;
-                if (state.Blueprint.Origin == DrawingOrigin.PlayerDrawing)
+                if (state.Blueprint.Origin == DrawingOrigin.PlayerDrawing || ReferenceDrawingCache.UsesTemplateVisual(state.Blueprint))
                 {
-                    var geometry = AuthoredGeometryCache.For(state.Blueprint.Drawing);
+                    var geometry = AuthoredGeometryCache.For(ReferenceDrawingCache.VisibleDrawing(state.Blueprint));
                     DrawAuthoredMount(pen, geometry, state.Blueprint, DrawingPartKey.Mount0, p, state.PrimaryAim, color);
                     if (dual) DrawAuthoredMount(pen, geometry, state.Blueprint, DrawingPartKey.Mount1, p, state.SecondaryAim, color);
                 }

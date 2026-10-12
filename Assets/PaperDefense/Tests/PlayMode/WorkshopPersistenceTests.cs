@@ -39,7 +39,7 @@ namespace PaperDefense.Tests
             var root = new GameObject("Manual workshop persistence controller");
             root.SetActive(false); roots.Add(root);
             var controller = root.AddComponent<RunController>();
-            controller.InitializeWorkshop(false);
+            controller.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
             return controller;
         }
 

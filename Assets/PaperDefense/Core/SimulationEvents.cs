@@ -12,12 +12,13 @@ namespace PaperDefense.Core
         public readonly SimulationEventKind Kind;
         public readonly Point2 From, To;
         public readonly StructureKind Weapon;
+        public readonly string WeaponId;
         public readonly float Radius, TravelSeconds;
         public readonly int EntityId;
         public readonly FootprintGeometry? ImpactFootprint;
         internal SimulationEvent(long sequence,long tick,SimulationEventKind kind,Point2 from,Point2 to,
-            StructureKind weapon,float radius,int entityId,float travelSeconds,FootprintGeometry? impactFootprint = null)
-        {Sequence=sequence;Tick=tick;Kind=kind;From=from;To=to;Weapon=weapon;Radius=radius;EntityId=entityId;TravelSeconds=travelSeconds;ImpactFootprint=impactFootprint;}
+            StructureKind weapon,float radius,int entityId,float travelSeconds,FootprintGeometry? impactFootprint = null,string weaponId=null)
+        {Sequence=sequence;Tick=tick;Kind=kind;From=from;To=to;Weapon=weapon;WeaponId=weaponId??LegacyContentIds.Weapon(weapon);Radius=radius;EntityId=entityId;TravelSeconds=travelSeconds;ImpactFootprint=impactFootprint;}
     }
 
     /// <summary>Bounded visual history. Losing old marks never changes simulation outcomes.</summary>
@@ -33,9 +34,9 @@ namespace PaperDefense.Core
         public SimulationEvent this[int index]
         {get {if(index<0||index>=count)throw new ArgumentOutOfRangeException(nameof(index));return items[(start+index)%items.Length];}}
         public void Publish(long tick,SimulationEventKind kind,Point2 from,Point2 to,StructureKind weapon,
-            float radius=0,int entityId=0,float travelSeconds=0,FootprintGeometry? impactFootprint = null)
+            float radius=0,int entityId=0,float travelSeconds=0,FootprintGeometry? impactFootprint = null,string weaponId=null)
         {
-            var value=new SimulationEvent(++LatestSequence,tick,kind,from,to,weapon,radius,entityId,travelSeconds,impactFootprint);
+            var value=new SimulationEvent(++LatestSequence,tick,kind,from,to,weapon,radius,entityId,travelSeconds,impactFootprint,weaponId);
             if(count<items.Length) items[(start+count++)%items.Length]=value;
             else {items[start]=value;start=(start+1)%items.Length;}
         }

@@ -59,10 +59,12 @@ namespace PaperDefense.Core
             if (!TowerCatalog.Validate(blueprint, balance, out string reason)) throw new ArgumentException(reason, nameof(blueprint));
             if (!Enum.IsDefined(typeof(TrialScenario), scenario)) throw new ArgumentOutOfRangeException(nameof(scenario));
             if (!Enum.IsDefined(typeof(InkColor), color)) throw new ArgumentOutOfRangeException(nameof(color));
-            if (budget < 0 || budget > TrialScenarioDefinition.MaximumBudget) throw new ArgumentOutOfRangeException(nameof(budget));
+            if (budget < 0 || budget > TrialRules.MaximumBudget) throw new ArgumentOutOfRangeException(nameof(budget));
             var mechanics = MechanicsAvailability.Resolve(balance);
             var effects = balance.Effects.ForEnemyDrawingTiers(mechanics.EnemyDrawingTiers);
             if (!mechanics.ColorCartridges) color = InkColor.None;
+            var trial = balance.Trials;
+            if (balance.Content != null) blueprint = blueprint.WithContent(balance.Content);
             int unitCost = Math.Max(1, TowerCatalog.Cost(blueprint, balance, MaterialTier.Pencil));
             int copies = budget / unitCost;
             var towers = new List<StructureState>(copies);
@@ -70,7 +72,7 @@ namespace PaperDefense.Core
             {
                 float health = TowerCatalog.Health(blueprint, balance, MaterialTier.Pencil);
                 // Keep the small-budget battery near the lane and assign every extra copy a unique cell.
-                Cell cell = i < 48 ? new Cell(32 + i % 4 * 2, 10 + i / 4 * 2) : new Cell(1 + (i - 48) % 60, 1 + (i - 48) / 60);
+                Cell cell = i < trial.CloseTowerCount ? new Cell(trial.CloseTowerX + i % trial.CloseTowerColumns * trial.CloseTowerSpacing, trial.CloseTowerY + i / trial.CloseTowerColumns * trial.CloseTowerSpacing) : new Cell(trial.OverflowTowerX + (i - trial.CloseTowerCount) % trial.OverflowTowerColumns, trial.OverflowTowerY + (i - trial.CloseTowerCount) / trial.OverflowTowerColumns);
                 towers.Add(new StructureState { Id = i + 1, Cell = cell,
                     Kind = blueprint.FirstWeapon, Blueprint = blueprint, Color = color, IsComplete = true,
                     Health = health, MaxHealth = health, Tier = MaterialTier.Pencil });
@@ -79,32 +81,32 @@ namespace PaperDefense.Core
                 Seed = seed, Counterfire = counterfire, Color = color, Copies = copies, Cost = copies * unitCost,
                 DrawingQuality = qualityOverride ?? (blueprint.Origin == DrawingOrigin.LegacyStandard ? 100 : blueprint.Assessment.Quality),
                 QualityMultiplier = qualityOverride.HasValue ? TowerCatalog.QualityMultiplier(qualityOverride.Value, balance) : TowerCatalog.QualityMultiplier(blueprint, balance) };
+            report.Scope = FormattableString.Invariant($"{trial.MaximumTicks * trial.StepSeconds:0.###}-second headless lane; complete pencil towers at fixed grid positions; identical seeded spawn stream. Counterfire is a direct {trial.CounterfireDamage:0.###}-damage shot every {trial.CounterfireInterval:0.###} seconds within {trial.CounterfireRange:0.###} cells. No construction delay, walls, blots, gold or permanent rewards.");
             var random = new Random(seed);
-            TrialBlotContext blotContext = scenario == TrialScenario.Blots && balance.Mechanics.CorpseBlots ? new TrialBlotContext(random) : null;
+            TrialBlotContext blotContext = scenario == TrialScenario.Blots && balance.Mechanics.CorpseBlots ? new TrialBlotContext(random, trial) : null;
             if (scenario == TrialScenario.Blots && blotContext == null)
                 report.Scope = "Corpse blots are disabled in developer configuration; no marks are created in this fixture.";
             if (blotContext != null)
-                report.Scope = "60-second finite seeded blot fixture; complete pencil towers at fixed grid positions. " +
-                    "48 fixed marks persist until cleaned and never respawn. No enemies, counterfire, construction delay, walls, gold or permanent rewards.";
+                report.Scope = FormattableString.Invariant($"{trial.MaximumTicks * trial.StepSeconds:0.###}-second finite seeded blot fixture; complete pencil towers at fixed grid positions. {trial.BlotCount} fixed marks persist until cleaned and never respawn. No enemies, counterfire, construction delay, walls, gold or permanent rewards.");
             var weapons = new WeaponSystem(balance, qualityOverride, blotContext); var stats = new RunStatistics();
             var events = new SimulationEventBuffer(32); var shots = new List<ShotEvent>();
             var enemies = new List<EnemyState>(256);
-            var frames = new List<TrialFrame>(181);
+            var frames = new List<TrialFrame>(trial.MaximumTicks / TrialRules.RecordingStrideTicks + 1);
             var frameShots = new List<ShotEvent>();
             var frameImpacts = new List<SimulationEvent>();
             frames.Add(new TrialFrame(0, enemies, towers, weapons.Projectiles, frameShots, blotContext?.Marks));
-            TrialScenarioDefinition fixture = TrialScenarioDefinition.For(scenario);
+            TrialScenarioDefinition fixture = trial.For(scenario);
             int count = fixture.Count;
-            const float delta = TrialScenarioDefinition.StepSeconds;
+            float delta = trial.StepSeconds;
             float spawnClock = 0; int spawned = 0;
-            for (int tick = 0; tick < TrialScenarioDefinition.MaximumTicks; tick++)
+            for (int tick = 0; tick < trial.MaximumTicks; tick++)
             {
                 report.DurationSeconds = (tick + 1) * delta;
                 spawnClock -= delta;
                 while (spawned < count && spawnClock <= 0)
                 {
                     enemies.Add(new EnemyState { Id = ++spawned, Kind = fixture.EnemyKind,
-                        Position = new Point2(10, 10.5f + (float)random.NextDouble() * 8), Health = fixture.Health, MaxHealth = fixture.Health,
+                        Position = new Point2(trial.SpawnX, trial.SpawnY + (float)random.NextDouble() * trial.SpawnYVariation), Health = fixture.Health, MaxHealth = fixture.Health,
                         DrawingTier = mechanics.EnemyDrawingTiers ? fixture.DrawingTier : DrawingTier.Sketch });
                     spawnClock += fixture.SpawnInterval;
                 }
@@ -119,7 +121,7 @@ namespace PaperDefense.Core
                     enemy.AttackCooldown = Math.Max(0, enemy.AttackCooldown - delta);
                     if (counterfire && enemy.AttackCooldown <= 0)
                     {
-                        StructureState nearest = null; float nearestSquared = TrialScenarioDefinition.CounterfireRange * TrialScenarioDefinition.CounterfireRange;
+                        StructureState nearest = null; float nearestSquared = trial.CounterfireRange * trial.CounterfireRange;
                         foreach (StructureState tower in towers)
                         {
                             if (tower.Health <= 0) continue;
@@ -129,8 +131,8 @@ namespace PaperDefense.Core
                         }
                         if (nearest != null)
                         {
-                            nearest.Health = Math.Max(0, nearest.Health - DamageRules.StructureDamage(TrialScenarioDefinition.CounterfireDamage, nearest, balance));
-                            enemy.AttackCooldown = TrialScenarioDefinition.CounterfireInterval;
+                            nearest.Health = Math.Max(0, nearest.Health - DamageRules.StructureDamage(trial.CounterfireDamage, nearest, balance));
+                            enemy.AttackCooldown = trial.CounterfireInterval;
                         }
                     }
                 }
@@ -140,19 +142,19 @@ namespace PaperDefense.Core
                     if (impact.Tick == tick + 1 && impact.Kind == SimulationEventKind.ProjectileImpact && frameImpacts.Count < 128)
                         frameImpacts.Add(impact);
                 // Visual trails are bounded independently from damage and the live shot list.
-                for (int i = 0; i < shots.Count && frameShots.Count < TrialScenarioDefinition.MaximumFrameShots; i++) frameShots.Add(shots[i]);
+                for (int i = 0; i < shots.Count && frameShots.Count < TrialRules.MaximumFrameShots; i++) frameShots.Add(shots[i]);
                 int write = 0;
                 for (int read = 0; read < enemies.Count; read++)
                 {
                     EnemyState enemy = enemies[read];
                     if (enemy.Health <= 0) continue;
-                    if (enemy.Position.X >= TrialScenarioDefinition.ExitX) { report.Leaks++; continue; }
+                    if (enemy.Position.X >= trial.ExitX) { report.Leaks++; continue; }
                     enemies[write++] = enemy;
                 }
                 if (write < enemies.Count) enemies.RemoveRange(write, enemies.Count - write);
                 bool finished = spawned == count && enemies.Count == 0 && !weapons.HasPendingProjectiles &&
                     (blotContext == null || blotContext.Marks.Count == 0);
-                if ((tick + 1) % TrialScenarioDefinition.RecordingStrideTicks == 0 || finished || tick == TrialScenarioDefinition.MaximumTicks - 1)
+                if ((tick + 1) % TrialRules.RecordingStrideTicks == 0 || finished || tick == trial.MaximumTicks - 1)
                 {
                     frames.Add(new TrialFrame(report.DurationSeconds, enemies, towers, weapons.Projectiles, frameShots, blotContext?.Marks, frameImpacts));
                     frameShots.Clear();
@@ -165,34 +167,33 @@ namespace PaperDefense.Core
             report.BlotsCleared = stats.BlotsCleared;
             report.UnresolvedBlots = blotContext?.Marks.Count ?? 0;
             foreach (StructureState tower in towers) if (tower.Health > 0) report.SurvivingTowers++;
-            foreach (StructureKind kind in Enum.GetValues(typeof(StructureKind)))
-            { report.Damage += stats.Damage(kind); report.IdleSeconds += stats.IdleSeconds(kind); }
+            report.Damage = stats.TotalDamage; report.IdleSeconds = stats.TotalIdleSeconds;
             report.Frames = frames.AsReadOnly();
             return report;
         }
 
         sealed class TrialBlotContext : IBlotContext
         {
-            const int MarkCount = 48;
-            readonly List<BlotState> marks = new List<BlotState>(MarkCount);
+            readonly List<BlotState> marks = new List<BlotState>();
             internal IReadOnlyList<BlotState> Marks => marks;
 
-            internal TrialBlotContext(Random random)
+            internal TrialBlotContext(Random random, TrialRules trial)
             {
-                Cell nearFirstTower = new Cell(33, 10);
-                marks.Add(new BlotState { Cell = nearFirstTower, Remaining = 60 });
+                if (trial.BlotCount == 0) return;
+                Cell nearFirstTower = new Cell(trial.FirstBlotX, trial.FirstBlotY);
+                marks.Add(new BlotState { Cell = nearFirstTower, Remaining = trial.BlotLifetime });
                 var candidates = new List<Cell>(280);
-                for (int y = 8; y < 28; y++)
-                    for (int x = 29; x < 43; x++)
+                for (int y = trial.BlotMinY; y < trial.BlotMaxY; y++)
+                    for (int x = trial.BlotMinX; x < trial.BlotMaxX; x++)
                     {
                         Cell cell = new Cell(x, y);
                         if (cell != nearFirstTower) candidates.Add(cell);
                     }
                 // Sampling without replacement gives a bounded, identical page for every battery size.
-                for (int i = 1; i < MarkCount; i++)
+                for (int i = 1; i < trial.BlotCount; i++)
                 {
                     int chosen = random.Next(candidates.Count);
-                    marks.Add(new BlotState { Cell = candidates[chosen], Remaining = 60 });
+                    marks.Add(new BlotState { Cell = candidates[chosen], Remaining = trial.BlotLifetime });
                     candidates[chosen] = candidates[candidates.Count - 1];
                     candidates.RemoveAt(candidates.Count - 1);
                 }
@@ -222,7 +223,7 @@ namespace PaperDefense.Core
         public float DrawingQuality { get; internal set; }
         public float QualityMultiplier { get; internal set; } = 1;
         public string BlueprintId;
-        public string Scope = "60-second headless lane; complete pencil towers at fixed grid positions; identical seeded spawn stream. Counterfire is a direct 10-damage shot every 2.4 seconds within 12.5 cells. No construction delay, walls, blots, gold or permanent rewards.";
+        public string Scope;
         public TrialScenario Scenario;
         public InkColor Color;
         public int Budget, Seed, Cost, Copies, Leaks, SurvivingTowers, UnresolvedEnemies;

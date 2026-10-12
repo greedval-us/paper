@@ -16,7 +16,7 @@ namespace PaperDefense.Tests
         [SetUp] public void SetUp()
         {
             root = new GameObject("Isolated quality HUD"); root.SetActive(false);
-            run = root.AddComponent<RunController>(); run.InitializeWorkshop(false);
+            run = root.AddComponent<RunController>(); run.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
             hud = root.AddComponent<WorkshopHud>(); hud.Initialize(run);
         }
         [TearDown] public void TearDown() => Object.DestroyImmediate(root);

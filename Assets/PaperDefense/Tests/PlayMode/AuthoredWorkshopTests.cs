@@ -27,7 +27,8 @@ namespace PaperDefense.Tests
         void CreateSession(GameBalanceAsset asset = null)
         {
             root = new GameObject("Isolated authored workshop"); root.SetActive(false);
-            run = root.AddComponent<RunController>(); run.balanceAsset = asset; run.InitializeWorkshop(new WorkshopProfileStore(path));
+            run = root.AddComponent<RunController>(); run.balanceAsset = asset;
+            run.InitializeWorkshop(new WorkshopProfileStore(path), allowLegacyFixtureDefaults: asset == null);
             hud = root.AddComponent<WorkshopHud>(); hud.Initialize(run);
         }
         [TearDown] public void TearDown()
@@ -68,7 +69,7 @@ namespace PaperDefense.Tests
             var loaded = new WorkshopProfileStore(path).Load();
             Assert.That(loaded.Source, Is.EqualTo(ProfileLoadSource.Primary));
             Assert.That(loaded.Profile.Album.Single(p => p.Id == id).Drawing.GeometryHash, Is.EqualTo(drawing.GeometryHash));
-            run.InitializeWorkshop(new WorkshopProfileStore(path));
+            run.InitializeWorkshop(new WorkshopProfileStore(path), allowLegacyFixtureDefaults: true);
             Assert.That(run.StartRun(out _), Is.True);
             Assert.That(run.BuildBlueprint(new[] { new Cell(20, 20), new Cell(22, 20) }, 0, MaterialTier.Pencil, InkColor.None, out var reason), Is.True, reason);
             var first = run.Session.StructureAt(new Cell(20, 20)).Value;

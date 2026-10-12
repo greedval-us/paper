@@ -22,7 +22,13 @@ namespace PaperDefense.Core
         public static float StructureDamage(float raw, StructureState structure, GameBalance balance)
         {
             if (balance == null) throw new ArgumentNullException(nameof(balance));
-            return Apply(raw, structure == null ? 0 : TowerCatalog.Defense(structure.Blueprint, balance), balance.Effects.MaximumDefense);
+            float defense=0;
+            if(structure?.Blueprint!=null)
+            {
+                if(structure.Assembly==null)structure.Assembly=TowerCatalog.Resolve(structure.Blueprint,balance);
+                defense=structure.Assembly.Modify(ModifierStat.FoundationDefense,0);
+            }
+            return Apply(raw,defense,balance.Effects.MaximumDefense);
         }
     }
 }

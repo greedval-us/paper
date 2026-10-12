@@ -1,5 +1,6 @@
 using System.Collections;
 using NUnit.Framework;
+using PaperDefense.Application;
 using PaperDefense.Core;
 using PaperDefense.Presentation;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace PaperDefense.Tests
     {
         GameObject root;
         PaperDefenseBootstrap game;
+        GameBalanceAsset fixtureBalance;
 
         [UnitySetUp] public IEnumerator SetUp()
         {
@@ -20,6 +22,10 @@ namespace PaperDefense.Tests
             root = new GameObject("Workshop integration");
             root.SetActive(false);
             game = root.AddComponent<PaperDefenseBootstrap>();
+            fixtureBalance = ScriptableObject.CreateInstance<GameBalanceAsset>();
+            fixtureBalance.ResetToDefaults(); fixtureBalance.useTargetWorkshopPreset = true;
+            fixtureBalance.baseHealth = 250; fixtureBalance.planningSeconds = 35; fixtureBalance.intermissionSeconds = 20;
+            game.balance = fixtureBalance;
             game.memoryOnlyProfile = true;
             var camera = new GameObject("Workshop camera", typeof(Camera));
             camera.transform.SetParent(root.transform);
@@ -30,7 +36,7 @@ namespace PaperDefense.Tests
         }
 
         [UnityTearDown] public IEnumerator TearDown()
-        { Object.Destroy(root); yield return null; }
+        { Object.Destroy(root); Object.Destroy(fixtureBalance); yield return null; }
 
         Button Button(string name)
         {

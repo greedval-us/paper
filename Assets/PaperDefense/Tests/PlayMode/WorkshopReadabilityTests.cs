@@ -15,7 +15,7 @@ namespace PaperDefense.Tests
         [SetUp] public void SetUp()
         {
             root = new GameObject("Isolated workshop text readability"); root.SetActive(false);
-            var run = root.AddComponent<RunController>(); run.InitializeWorkshop(false);
+            var run = root.AddComponent<RunController>(); run.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
             var hud = root.AddComponent<WorkshopHud>(); hud.Initialize(run);
         }
 

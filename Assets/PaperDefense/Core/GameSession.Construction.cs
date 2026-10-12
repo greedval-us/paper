@@ -6,11 +6,11 @@ namespace PaperDefense.Core
     public sealed partial class GameSession
     {
         public int ColorCost(TowerBlueprint blueprint,MaterialTier material)
-            => blueprint==null?Math.Max(2,(BuildCost(StructureKind.Gun,MaterialTier.Pencil)+7)/8):TowerCatalog.ColorCost(blueprint,Balance);
+            => blueprint==null?(int)Math.Max(rules.Construction.ColorMinimum,((long)BuildCost(StructureKind.Gun,MaterialTier.Pencil)+rules.Construction.ColorCostDivisor-1)/rules.Construction.ColorCostDivisor):TowerCatalog.ColorCost(blueprint,rules);
 
         public BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,TowerBlueprint blueprint,MaterialTier material,InkColor color)
         {
-            if (!TowerCatalog.Validate(blueprint,Balance,out string invalid))
+            if (!TowerCatalog.Validate(blueprint,rules,out string invalid))
                 return new BuildQuote{Cells=Array.Empty<Cell>(),Reason=invalid};
             if (!Enum.IsDefined(typeof(InkColor),color))
                 return new BuildQuote{Cells=Array.Empty<Cell>(),Reason="Неизвестный цвет."};
@@ -18,10 +18,10 @@ namespace PaperDefense.Core
                 return new BuildQuote{Cells=Array.Empty<Cell>(),Reason="Неизвестный инструмент."};
             if (color != InkColor.None && !Mechanics.ColorCartridges)
                 return new BuildQuote{Cells=Array.Empty<Cell>(),Reason="Цветные картриджи недоступны на этом листе."};
-            var quote=QuoteBuild(cells,blueprint.FirstWeapon,material,TowerCatalog.Cost(blueprint,Balance,material));
+            var quote=QuoteBuild(cells,blueprint.FirstWeapon,material,TowerCatalog.Cost(blueprint,rules,material));
             // Occupancy and resource failures stay atomic, using the assembly's complete price.
             if (!quote.Valid) return quote;
-            long cost=(long)TowerCatalog.Cost(blueprint,Balance,material)*quote.Cells.Count;
+            long cost=(long)TowerCatalog.Cost(blueprint,rules,material)*quote.Cells.Count;
             quote.Cost=(int)Math.Min(int.MaxValue,cost);
             if (cost>Ink){quote.Valid=false;quote.Reason="Не хватает штрихов: нужно "+cost+".";return quote;}
             if (color!=InkColor.None && (long)ColorCost(blueprint,material)*quote.Cells.Count>ColoredInk(color))
@@ -35,18 +35,20 @@ namespace PaperDefense.Core
             if(!quote.Valid)return false;
             Ink-=quote.Cost;
             if(color!=InkColor.None)coloredInk[(int)color]-=ColorCost(blueprint,material)*quote.Cells.Count;
-            int cost=TowerCatalog.Cost(blueprint,Balance,material);
+            int cost=TowerCatalog.Cost(blueprint,rules,material);
+            blueprint=blueprint.WithContent(rules.Content);
+            var assembly=TowerCatalog.Resolve(blueprint,rules.Content);
             foreach(var cell in quote.Cells)
             {
-                AddStructure(cell,blueprint.FirstWeapon,material,cost,false);
-                var structure=StructureAt(cell);structure.Blueprint=blueprint;structure.Color=color;
-                structure.MaxHealth=TowerCatalog.Health(blueprint,Balance,material)*healthMultiplier;
+                AddStructure(cell,blueprint.FirstWeapon,material,cost,false,assembly.First.Numeric,assembly.First.Id);
+                var structure=StructureAt(cell);structure.Blueprint=blueprint;structure.Assembly=assembly;structure.Color=color;
+                structure.MaxHealth=TowerCatalog.Health(blueprint,rules,material)*healthMultiplier;
                 structure.Health=structure.MaxHealth;
-                structure.BuildRemaining=TowerCatalog.BuildSeconds(blueprint,Balance,material);
+                structure.BuildRemaining=TowerCatalog.BuildSeconds(blueprint,rules,material);
                 structure.IsComplete=structure.BuildRemaining<=0;
                 MarkStructureChanged(structure,structure.IsComplete);
             }
-            Statistics.RecordBuild(quote.Cost,quote.Cells.Count,blueprint.FirstWeapon,material);
+            Statistics.RecordBuild(quote.Cost,quote.Cells.Count,blueprint.FirstWeaponId,material);
             return true;
         }
 
@@ -68,12 +70,12 @@ namespace PaperDefense.Core
         }
 
         private int StructureBuildCost(StructureState structure,MaterialTier material)
-            => structure.Blueprint==null?BuildCost(structure.Kind,material):TowerCatalog.Cost(structure.Blueprint,Balance,material);
+            => structure.Blueprint==null?BuildCost(structure.Kind,material):TowerCatalog.Cost(structure.Blueprint,rules,material);
         private float StructureHealth(StructureState structure,MaterialTier material)
-            => (structure.Blueprint==null?Balance.Structure(structure.Kind).MaxHealth*Balance.Material(material).HealthMultiplier:
-                TowerCatalog.Health(structure.Blueprint,Balance,material))*healthMultiplier;
+            => (structure.Blueprint==null?rules.Structure(structure.Kind).MaxHealth*rules.Material(material).HealthMultiplier:
+                TowerCatalog.Health(structure.Blueprint,rules,material))*healthMultiplier;
         private float StructureBuildSeconds(StructureState structure,MaterialTier material)
-            => structure.Blueprint==null?Balance.Structure(structure.Kind).BuildSeconds*Balance.Material(material).BuildTimeMultiplier:
-                TowerCatalog.BuildSeconds(structure.Blueprint,Balance,material);
+            => structure.Blueprint==null?rules.Structure(structure.Kind).BuildSeconds*rules.Material(material).BuildTimeMultiplier:
+                TowerCatalog.BuildSeconds(structure.Blueprint,rules,material);
     }
 }

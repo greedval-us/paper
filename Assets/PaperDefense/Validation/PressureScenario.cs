@@ -28,10 +28,10 @@ namespace PaperDefense.Validation
         public PressureScenarioReport Report { get; } = new PressureScenarioReport();
         public bool Finished => Report.Completed;
 
-        public PressureScenario(PressureScenarioConfig config = null)
+        public PressureScenario(PressureScenarioConfig config = null, GameBalance configuredBalance = null)
         {
             Config = config ?? new PressureScenarioConfig();
-            var balance = GameBalance.CreateDefault();
+            var balance = configuredBalance == null ? GameBalance.CreateDefault() : configuredBalance.CreateSnapshot();
             balance.Width = Config.Width; balance.Height = Config.Height;
             balance.StartingInk = Config.StartingInk; balance.BaseHealth = Config.BaseHealth;
             balance.PlanningSeconds = Config.PlanningSeconds;

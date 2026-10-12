@@ -15,6 +15,7 @@ namespace PaperDefense.Core
         {
             internal ColorEffectPayload Payload;
             internal StructureKind Weapon;
+            internal string WeaponId;
             internal float Remaining, TickRemaining;
         }
 
@@ -25,7 +26,8 @@ namespace PaperDefense.Core
         internal ColorEffectPayload Active => Strongest()?.Payload ?? default;
         internal StructureKind Weapon => Strongest()?.Weapon ?? StructureKind.Gun;
 
-        internal bool TryApply(ColorEffectPayload payload, StructureKind weapon)
+        internal string WeaponId=>Strongest()?.WeaponId;
+        internal bool TryApply(ColorEffectPayload payload, StructureKind weapon,string weaponId=null)
         {
             Validate(payload);
             if (payload.Color != color) throw new ArgumentException("Разные виды эффекта должны храниться отдельно.", nameof(payload));
@@ -35,7 +37,7 @@ namespace PaperDefense.Core
                 if (SameStrength(entry.Payload, payload))
                 {
                     entry.Remaining = Math.Max(entry.Remaining, payload.Duration);
-                    entry.Weapon = weapon;
+                    entry.Weapon = weapon;entry.WeaponId=weaponId??LegacyContentIds.Weapon(weapon);
                     return true;
                 }
                 if (Compare(entry.Payload, payload) >= 0 && entry.Remaining >= payload.Duration) return true;
@@ -43,7 +45,7 @@ namespace PaperDefense.Core
             for (int i = entries.Count - 1; i >= 0; i--)
                 if (Compare(payload, entries[i].Payload) >= 0 && payload.Duration >= entries[i].Remaining) entries.RemoveAt(i);
             if (entries.Count >= MaximumStrengths) return false;
-            entries.Add(new Entry { Payload = payload, Weapon = weapon, Remaining = payload.Duration, TickRemaining = payload.TickSeconds });
+            entries.Add(new Entry { Payload = payload, Weapon = weapon,WeaponId=weaponId??LegacyContentIds.Weapon(weapon), Remaining = payload.Duration, TickRemaining = payload.TickSeconds });
             return true;
         }
 
@@ -71,7 +73,7 @@ namespace PaperDefense.Core
                         DamageRules.Apply(raw, EnemyEffects.Defense(enemy, rules, blotReduction), rules.MaximumDefense);
                     float actual = Math.Min(enemy.Health, damage);
                     enemy.Health = Math.Max(0, enemy.Health - actual);
-                    statistics?.RecordDamage(active.Weapon, actual);
+                    statistics?.RecordDamage(active.WeaponId, actual);
                 }
                 foreach (Entry entry in entries)
                     if (entry.TickRemaining <= Epsilon) entry.TickRemaining += entry.Payload.TickSeconds;

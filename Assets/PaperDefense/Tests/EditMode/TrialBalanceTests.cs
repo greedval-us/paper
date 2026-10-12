@@ -24,7 +24,18 @@ namespace PaperDefense.Tests
         {
             Assert.That(copy, Is.Not.SameAs(source));
             foreach (FieldInfo field in source.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance))
-                Assert.That(field.GetValue(copy), Is.EqualTo(field.GetValue(source)), field.Name);
+            {
+                object original=field.GetValue(source), copied=field.GetValue(copy);
+                if (original is IList list)
+                {
+                    var owned=(IList)copied; Assert.That(owned,Is.Not.SameAs(list),field.Name); Assert.That(owned.Count,Is.EqualTo(list.Count),field.Name);
+                    for(int i=0;i<list.Count;i++)
+                        if(list[i]!=null && list[i].GetType().IsClass && !(list[i] is string)) AssertCopiedFields(list[i],owned[i]);
+                        else Assert.That(owned[i],Is.EqualTo(list[i]),field.Name);
+                }
+                else if(original!=null && original.GetType().IsClass && !(original is string)) AssertCopiedFields(original,copied);
+                else Assert.That(copied,Is.EqualTo(original),field.Name);
+            }
         }
 
         [Test]

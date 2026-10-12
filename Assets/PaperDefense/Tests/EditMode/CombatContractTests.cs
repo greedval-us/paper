@@ -67,9 +67,9 @@ namespace PaperDefense.Tests
         public void RunnerLeavingMortarDestinationBeforeImpactTakesNoDamage()
         {
             var balance = Balance();
+            balance.Enemy(EnemyKind.Runner).Speed = 4;
             var game = SpawnTarget(balance);
             game.Enemies[0].Kind = EnemyKind.Runner;
-            balance.Enemy(EnemyKind.Runner).Speed = 4;
             BuildMortar(game);
             game.Tick(0.02f);
             game.Tick(1);

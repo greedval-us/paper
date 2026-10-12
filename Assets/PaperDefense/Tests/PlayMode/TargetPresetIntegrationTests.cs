@@ -36,12 +36,12 @@ namespace PaperDefense.Tests
             }
             finally { Object.DestroyImmediate(asset); }
         }
-        [Test] public void NoAssetWorkshopUsesFiniteTargetAndArmorPreviewShowsDefense()
+        [Test] public void ExplicitLegacyFixtureUsesFiniteTargetAndArmorPreviewShowsDefense()
         {
             var root = new GameObject("Target no-asset controller"); root.SetActive(false);
             try
             {
-                var run = root.AddComponent<RunController>(); run.InitializeWorkshop(false);
+                var run = root.AddComponent<RunController>(); run.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
                 var armor = run.Workshop.Album.Single(b => b.Id == "starter.mortar"); var preview = run.PreviewBlueprint(armor);
                 Assert.That(preview.Defense, Is.EqualTo(.25f)); Assert.That(preview.Health, Is.EqualTo(55));
                 Assert.That(run.StartRun(out string reason), Is.True, reason);

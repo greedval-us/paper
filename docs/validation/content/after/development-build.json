@@ -1,0 +1,37 @@
+{
+  "Success": true,
+  "Result": "Succeeded",
+  "UnityVersion": "6000.5.7f1",
+  "OutputPath": "D:/Projekt Unity/paper/Builds/ContentAcceptance-20261012/PaperDefense.exe",
+  "Platform": "StandaloneWindows64",
+  "Options": "ForceOptimizeScriptCompilation, Il2CPP, CompressTextures, StripDebugSymbols, ShaderLivelinkSupport, Development, DetailedBuildReport",
+  "StartedUtc": "2026-10-12T18:00:28.7936384Z",
+  "FinishedUtc": "2026-10-12T18:00:52.5552734Z",
+  "DurationSeconds": 23.761635,
+  "TotalBytes": 208368753,
+  "Errors": 0,
+  "Warnings": 485,
+  "WarningMessagesInSteps": 485,
+  "WarningGroups": {
+    "com.unity.ai.inference PixelShaders (package path present in warning)": 25,
+    "com.unity.ai.inference ConvGeneric.compute (resolved package source)": 460
+  },
+  "WarningSamples": [
+    "Shader warning in 'Hidden/Sentis/Pad': integer modulus may be much slower, try using uints if possible. at Packages/com.unity.ai.inference/Runtime/Core/Resources/Sentis/PixelShaders/Pad.shader(55) (on d3d11)",
+    "Shader warning in 'Hidden/Sentis/ConvTranspose': integer modulus may be much slower, try using uints if possible. at Packages/com.unity.ai.inference/Runtime/Core/Resources/Sentis/PixelShaders/ConvTranspose.shader(215) (on d3d11)",
+    "Shader warning in 'Hidden/Sentis/ConvTranspose': integer modulus may be much slower, try using uints if possible. at Packages/com.unity.ai.inference/Runtime/Core/Resources/Sentis/PixelShaders/ConvTranspose.shader(218) (on d3d11)",
+    "Shader warning in 'Hidden/Sentis/ConvTranspose': integer modulus may be much slower, try using uints if possible. at Packages/com.unity.ai.inference/Runtime/Core/Resources/Sentis/PixelShaders/ConvTranspose.shader(256) (on d3d11)",
+    "Shader warning in 'Hidden/Sentis/ConvTranspose': integer modulus may be much slower, try using uints if possible. at Packages/com.unity.ai.inference/Runtime/Core/Resources/Sentis/PixelShaders/ConvTranspose.shader(259) (on d3d11)",
+    "Shader warning in 'Hidden/Sentis/ConvTranspose': integer modulus may be much slower, try using uints if possible. at Packages/com.unity.ai.inference/Runtime/Core/Resources/Sentis/PixelShaders/ConvTranspose.shader(296) (on d3d11)"
+  ],
+  "Scenes": [
+    "Assets/PaperDefense/Content/Acceptance/ContentAcceptance.unity",
+    "Assets/PaperDefense/Scenes/PaperDefense.unity"
+  ],
+  "PlayerSmokeReport": "docs/validation/content/after/player-acceptance.json",
+  "PlayerExitCode": 0,
+  "SmokeNotes": "The first low-integrity Windows sandbox launch could not save its isolated temporary profile. The identical frozen executable and data succeeded outside the sandbox with explicit command approval; no code or assets changed between launches. Only temporary acceptance profiles were used and removed.",
+  "BuildReportDurationSeconds": 23.6720597,
+  "ConvGenericSource": "Library/PackageCache/com.unity.ai.inference@9a123aee5df7/Runtime/Core/Resources/Sentis/ComputeShaders/ConvGeneric.compute",
+  "TimingSource": "manage_build job build-d80bfbabb4; BuildReport duration also retained separately."
+}

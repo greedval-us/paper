@@ -19,13 +19,13 @@ namespace PaperDefense.Tests
             readonly SimulationEventBuffer events = new SimulationEventBuffer();
             long tick;
 
-            internal Fixture(bool dynamic = true, StructureKind? second = null, TowerModules modules = TowerModules.None)
+            internal Fixture(bool dynamic = true, StructureKind? second = null, TowerModules modules = TowerModules.None,float mortarRange=5)
             {
                 Balance.Construction.DynamicFeed = dynamic;
                 Balance.Construction.AcquisitionSeconds = .25f;
                 Balance.Construction.TrackingAcquisitionSeconds = .08f;
                 Balance.Structure(StructureKind.Gun).Range = 2;
-                Balance.Structure(StructureKind.Mortar).Range = 5;
+                Balance.Structure(StructureKind.Mortar).Range = mortarRange;
                 Tower = new StructureState { Id = 1, Cell = new Cell(10, 10), Kind = StructureKind.Gun,
                     Health = 100, IsComplete = true, Tier = MaterialTier.Pencil, Priority = TargetPriority.Strongest,
                     Blueprint = new TowerBlueprint("readiness", "Readiness", ChassisKind.Heavy, StructureKind.Gun, second, modules) };
@@ -79,8 +79,7 @@ namespace PaperDefense.Tests
 
         [Test] public void FinishedIdleReloadReleasesSupplyToTheWorkingMount()
         {
-            var f = new Fixture(second: StructureKind.Mortar); f.AcquireAndFire();
-            f.Balance.Structure(StructureKind.Mortar).Range = 0;
+            var f = new Fixture(second: StructureKind.Mortar,mortarRange:0); f.AcquireAndFire();
             f.Tower.PrimaryActionRemaining = 1; f.Tower.SecondaryActionRemaining = 0;
             f.Step(.1f);
             Assert.That(f.Tower.PrimaryActionRemaining, Is.EqualTo(1 - .1f / .42f).Within(.00001f));

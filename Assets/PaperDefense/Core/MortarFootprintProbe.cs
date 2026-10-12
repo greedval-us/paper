@@ -27,27 +27,30 @@ namespace PaperDefense.Core
         {
             BalanceValidation.Validate(balance);
             if (!TowerCatalog.Validate(blueprint,balance,out string reason)) throw new ArgumentException(reason,nameof(blueprint));
+            var rules=balance.CreateSnapshot();
+            blueprint=blueprint.WithContent(rules.ResolveContent());
             blueprint.GetMortarFootprint(mount);
             if(first==null) throw new ArgumentNullException(nameof(first));
             if(second==null) throw new ArgumentNullException(nameof(second));
             if(!Enum.IsDefined(typeof(FootprintFormation),formation)) throw new ArgumentOutOfRangeException(nameof(formation));
-            var rules=balance.CreateSnapshot();
+            var weapon=rules.ResolveContent().GetWeapon(mount==0?blueprint.FirstWeaponId:blueprint.SecondWeaponId);
+            if(first.AspectRatio>weapon.MaximumFootprintAspectRatio||second.AspectRatio>weapon.MaximumFootprintAspectRatio)throw new ArgumentException("Геометрия области превышает предел оружия.");
             float quality=blueprint.Origin==DrawingOrigin.LegacyStandard?100:blueprint.Assessment.Quality;
             int cost=TowerCatalog.Cost(blueprint,rules,MaterialTier.Pencil);
-            return new FootprintProbeComparison(Run(blueprint,first,rules,formation,cost,quality),Run(blueprint,second,rules,formation,cost,quality));
+            return new FootprintProbeComparison(Run(blueprint,mount,first,rules,formation,cost,quality),Run(blueprint,mount,second,rules,formation,cost,quality));
         }
 
-        static FootprintProbeReport Run(TowerBlueprint source,MortarFootprint footprint,GameBalance balance,FootprintFormation formation,int cost,float quality)
+        static FootprintProbeReport Run(TowerBlueprint source,int mount,MortarFootprint footprint,GameBalance balance,FootprintFormation formation,int cost,float quality)
         {
             // Isolate the selected barrel while retaining equipment and art. Its re-evaluated
             // drawing assessment must not change cadence: use the source page's quality.
-            var isolated=new TowerBlueprint(source.Id,source.Name,source.Chassis,StructureKind.Mortar,
-                modules:source.Modules,drawing:source.Drawing,origin:source.Origin,firstFootprint:footprint);
+            var isolated=source.WithMortarFootprint(mount,footprint);
+            var selected=balance.ResolveContent().GetWeapon(mount==0?source.FirstWeaponId:source.SecondWeaponId);
             float health=TowerCatalog.Health(source,balance,MaterialTier.Pencil);
-            var towers=new List<StructureState> { new StructureState { Id=1,Cell=new Cell(10,10),Kind=StructureKind.Mortar,
+            var towers=new List<StructureState> { new StructureState { Id=1,Cell=new Cell(10,10),Kind=isolated.FirstWeapon,ContentId=isolated.FirstWeaponId,
                 Blueprint=isolated,Tier=MaterialTier.Pencil,Color=InkColor.None,IsComplete=true,Health=health,MaxHealth=health } };
             var enemies=new List<EnemyState>(9);
-            float radius=balance.Structure(StructureKind.Mortar).Radius;
+            float radius=selected.Stats.Radius;
             // Central nearest anchor naturally wins ordinary nearest-target acquisition.
             var anchor=new Point2(14.5f,10.5f);
             for(int i=0;i<9;i++)
@@ -67,7 +70,7 @@ namespace PaperDefense.Core
             for(int tick=1;tick<=600;tick++)
             {
                 shots.Clear();
-                weapons.Fire(towers,enemies,shots,1,1,delta,tick,stats,events,tick*delta);
+                weapons.FireIsolatedMount(towers.Count==0?null:towers[0],mount,enemies,shots,delta,tick,stats,events,tick*delta);
                 foreach(var value in events)
                     if(value.Tick==tick && value.Kind==SimulationEventKind.ProjectileImpact) impacts.Add(value);
                 frames.Add(new TrialFrame(tick*delta,enemies,towers,weapons.Projectiles,shots,impacts:impacts));

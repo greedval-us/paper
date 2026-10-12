@@ -45,6 +45,7 @@ namespace PaperDefense.Presentation
             public Vector2 From, To;
             public SimulationEventKind EventKind;
             public StructureKind Weapon;
+            public AttackKind Attack;
             public float Radius, Born;
             public FootprintGeometry? ImpactFootprint;
         }
@@ -114,7 +115,9 @@ namespace PaperDefense.Presentation
             {
                 From = new Vector2(item.From.X, item.From.Y),
                 To = new Vector2(item.To.X, item.To.Y),
-                EventKind = item.Kind, Weapon = item.Weapon, Radius = item.Radius, Born = Time.unscaledTime,
+                EventKind = item.Kind, Weapon = item.Weapon,
+                Attack = session != null && session.Balance.Content.TryGetWeapon(item.WeaponId, out var weapon) ? weapon.Attack : LegacyContentCatalog.Attack(item.Weapon),
+                Radius = item.Radius, Born = Time.unscaledTime,
                 ImpactFootprint = item.ImpactFootprint
             });
         }
@@ -257,9 +260,10 @@ namespace PaperDefense.Presentation
                 for (int i = 0; i < session.Structures.Count; i++)
                 {
                     StructureView structure = session.Structures[i];
-                    float range = session.Balance.WeaponRange(structure.Blueprint, structure.Kind);
-                    if (structure.Blueprint != null && structure.Blueprint.SecondWeapon.HasValue)
-                        range = Mathf.Max(range, session.Balance.WeaponRange(structure.Blueprint, structure.Blueprint.SecondWeapon.Value));
+                    float range = structure.Blueprint == null ? session.Balance.WeaponRange(null, structure.Kind) :
+                        session.Balance.WeaponRange(structure.Blueprint, structure.Blueprint.FirstWeaponId);
+                    if (structure.Blueprint != null && structure.Blueprint.SecondWeaponId != null)
+                        range = Mathf.Max(range, session.Balance.WeaponRange(structure.Blueprint, structure.Blueprint.SecondWeaponId, 1));
                     if (range <= 1) continue;
                     p.Ring(new Vector2(structure.Cell.X + .5f, structure.Cell.Y + .5f), range, .035f,
                            MeshPen.Alpha(DoodleGlyphs.TierColor(structure.Tier), .16f), 96, 1, structure.Id, true);
@@ -379,7 +383,7 @@ namespace PaperDefense.Presentation
                 if (age >= duration) { firingMarks.RemoveAt(i); continue; }
                 float t = Mathf.Clamp01(age / duration);
                 float fade = 1 - t;
-                Color color = mark.Weapon == StructureKind.Piercer ? NotebookPalette.Marker : NotebookPalette.Blue;
+                Color color = mark.Attack == AttackKind.Line ? NotebookPalette.Marker : NotebookPalette.Blue;
                 color.a = fade * .85f;
                 if (destroyed)
                 {
@@ -396,7 +400,7 @@ namespace PaperDefense.Presentation
                     if (!mark.ImpactFootprint.HasValue || mark.ImpactFootprint.Value.ForwardRadius == mark.ImpactFootprint.Value.SideRadius)
                         p.Star(mark.To, radius * (.4f + t * .6f), orange, .045f, 9, i * .83f);
                 }
-                else if (mark.Weapon == StructureKind.Blotter)
+                else if (mark.Attack == AttackKind.Cleanup)
                 {
                     Color clean = MeshPen.Alpha(NotebookPalette.Green, fade * .75f);
                     p.Line(mark.From, mark.To, .025f, clean);
@@ -404,7 +408,7 @@ namespace PaperDefense.Presentation
                 }
                 else
                 {
-                    float width = mark.Weapon == StructureKind.Piercer ? .075f : .044f;
+                    float width = mark.Attack == AttackKind.Line ? .075f : .044f;
                     p.Line(mark.From, mark.To, width, color);
                     p.Star(mark.To, .22f + t * .2f, color, .035f, 5, i * 1.3f);
                     if (t < .55f) p.Star(mark.From, .17f, MeshPen.Alpha(color, fade), .035f, 4, .4f);

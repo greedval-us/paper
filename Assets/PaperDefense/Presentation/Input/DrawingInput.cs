@@ -45,7 +45,12 @@ namespace PaperDefense.Presentation
         {
             Cancel(); Zoom = 1; CameraCenter = new Vector2(session.Balance.Width * .5f, session.Balance.Height * .5f);
             ResetUnavailableSelections();
-            if (BlueprintSlot >= 0 && BlueprintSlot < run.Workshop.Loadout.Count) Tool = run.Workshop.Loadout[BlueprintSlot].FirstWeapon;
+            if (BlueprintSlot >= 0)
+            {
+                if (BlueprintSlot < run.Workshop.Loadout.Count && run.Workshop.Loadout[BlueprintSlot] != null)
+                    Tool = run.Workshop.Loadout[BlueprintSlot].FirstWeapon;
+                else { BlueprintSlot = -1; Tool = StructureKind.Wall; }
+            }
             Message = "Чистый лист. Попробуй другую оборону!";
             SelectionChanged?.Invoke();
         }
@@ -55,6 +60,7 @@ namespace PaperDefense.Presentation
         public void SelectSlot(int slot)
         {
             if (run == null || slot < 0 || slot >= run.Workshop.Loadout.Count) return;
+            if (run.Workshop.Loadout[slot] == null) { Message = "Назначь чертёж в этот слот в мастерской."; return; }
             Cancel(); BlueprintSlot = slot; Tool = run.Workshop.Loadout[slot].FirstWeapon;
             Mode = DrawingMode.Build; SelectionChanged?.Invoke();
         }

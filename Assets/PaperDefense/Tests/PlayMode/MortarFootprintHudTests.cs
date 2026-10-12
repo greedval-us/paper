@@ -42,7 +42,7 @@ namespace PaperDefense.Tests
             {
                 var store = new WorkshopProfileStore(path); var initial = new WorkshopProfile(); initial.GrantGold(1000);
                 Assert.That(initial.Unlock("chassis.heavy",out var unlockReason),Is.True,unlockReason); Assert.That(store.Save(initial).Success,Is.True);
-                var run = host.AddComponent<RunController>(); run.InitializeWorkshop(store);
+                var run = host.AddComponent<RunController>(); run.InitializeWorkshop(store, allowLegacyFixtureDefaults: true);
                 var hud = host.AddComponent<WorkshopHud>(); hud.Initialize(run);
                 Action<string> click = name => host.GetComponentsInChildren<Button>(true).Single(b => b.name == name).onClick.Invoke();
                 click("New blueprint"); click("Chassis Heavy"); click("First Mortar"); click("Second Mortar"); click("Open drawing editor");
@@ -80,6 +80,8 @@ namespace PaperDefense.Tests
             host.SetActive(false);
             var balanceAsset = ScriptableObject.CreateInstance<GameBalanceAsset>();
             balanceAsset.construction.StandardCapacity = capacity;
+            // Keep the armored starter valid while testing the unchanged load of one versus two bare mortars.
+            balanceAsset.construction.ArmorLoad = 0;
             try
             {
                 var run = host.AddComponent<RunController>();
@@ -139,7 +141,7 @@ namespace PaperDefense.Tests
             try
             {
                 var run = host.AddComponent<RunController>();
-                run.InitializeWorkshop(false);
+                run.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
                 var hud = host.AddComponent<WorkshopHud>();
                 hud.Initialize(run);
                 Action<string> click = name => host.GetComponentsInChildren<Button>(true)
@@ -170,7 +172,7 @@ namespace PaperDefense.Tests
             var host = new GameObject("Isolated legacy footprint workshop"); host.SetActive(false);
             try
             {
-                var run=host.AddComponent<RunController>();run.InitializeWorkshop(false);
+                var run=host.AddComponent<RunController>();run.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
                 var hud=host.AddComponent<WorkshopHud>();hud.Initialize(run);
                 var source=hud.Draft;
                 host.GetComponentsInChildren<Button>(true).Single(b=>b.name=="Save blueprint as new").onClick.Invoke();

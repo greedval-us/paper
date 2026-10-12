@@ -32,7 +32,7 @@ namespace PaperDefense.Core
     public enum RunUpgrade { RapidFire = 0, DeepInk = 1, Salvage = 2 }
     public enum GameBalancePreset { Historical = 0, Target = 1 }
 
-    public sealed class StructureDefinition
+    [Serializable] public sealed class StructureDefinition
     {
         public StructureKind Kind;
         public int Cost;
@@ -44,13 +44,13 @@ namespace PaperDefense.Core
         public float SlowSpeedMultiplier = 1, SlowDuration;
     }
 
-    public sealed class MaterialDefinition
+    [Serializable] public sealed class MaterialDefinition
     {
         public float CostMultiplier = 1, HealthMultiplier = 1, DamageMultiplier = 1;
         public float RefundFraction = 0.8f, BuildTimeMultiplier = 1;
     }
 
-    public sealed class EnemyDefinition
+    [Serializable] public sealed class EnemyDefinition
     {
         public EnemyKind Kind;
         public float MaxHealth, Speed, Damage, AttackInterval;
@@ -59,7 +59,7 @@ namespace PaperDefense.Core
         public int Reward;
     }
 
-    public sealed class WaveDefinition
+    [Serializable] public sealed class WaveDefinition
     {
         public int InkGrant = -1;
         public int Count = 80;
@@ -72,6 +72,8 @@ namespace PaperDefense.Core
     /// <summary>Mutable tuning data. Configure before constructing a session.</summary>
     public sealed partial class GameBalance
     {
+        [NonSerialized] public ContentCatalogSnapshot Content;
+        public ContentCatalogSnapshot ResolveContent() => Content ?? LegacyContentCatalog.Create(this);
         public GameBalancePreset Preset;
         public MechanicsConfiguration Mechanics = new MechanicsConfiguration();
         public TowerConstructionRules Construction = new TowerConstructionRules();
@@ -138,6 +140,10 @@ namespace PaperDefense.Core
             copy.Construction = Construction.CreateSnapshot();
             copy.Effects = Effects.CreateSnapshot();
             copy.Progression = Progression.CreateSnapshot();
+            copy.Content = Content;
+            copy.Combat = Combat.CreateSnapshot();
+            copy.Trials = Trials.CreateSnapshot();
+            copy.WellPlacements = WellPlacements.ConvertAll(item => item.CreateSnapshot());
             copy.StructureDefinitions = StructureDefinitions.ConvertAll(definition => new StructureDefinition
             {
                 Kind = definition.Kind, Cost = definition.Cost, MaxHealth = definition.MaxHealth,
@@ -190,6 +196,8 @@ namespace PaperDefense.Core
         public int Id;
         public Cell Cell;
         public StructureKind Kind;
+        public string ContentId;
+        internal ResolvedTowerAssembly Assembly;
         public MaterialTier Tier;
         public float Health, MaxHealth, BuildRemaining, Cooldown;
         public bool IsComplete, WaitingForClearance;
@@ -218,6 +226,7 @@ namespace PaperDefense.Core
         public float BlotRemaining, RedRemaining, BlueRemaining, GreenRemaining, WindupRemaining;
         internal float RedTickRemaining;
         internal StructureKind RedSourceWeapon;
+        internal string RedSourceWeaponId;
         internal int RewardBudget = -1;
         internal TimedEffectState RedEffect, BlueEffect, GreenEffect;
         internal int ObjectiveIndex = -1;
@@ -235,9 +244,12 @@ namespace PaperDefense.Core
     {
         public readonly Point2 From, To;
         public readonly StructureKind Kind;
+        public readonly string WeaponId;
         public readonly float Radius;
         public ShotEvent(Point2 from, Point2 to, StructureKind kind, float radius)
-        { From = from; To = to; Kind = kind; Radius = radius; }
+        { From = from; To = to; Kind = kind; Radius = radius; WeaponId = LegacyContentIds.Weapon(kind); }
+        public ShotEvent(Point2 from,Point2 to,StructureKind kind,float radius,string weaponId)
+        {From=from;To=to;Kind=kind;Radius=radius;WeaponId=weaponId;}
     }
 
     public sealed class BuildQuote

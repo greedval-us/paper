@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 namespace PaperDefense.Core
 {
     /// <summary>Stable part identity and role. Numeric tuning remains in TowerConstructionRules.</summary>
-    public sealed class WorkshopPartDefinition
+    public class WorkshopPartDefinition
     {
         public string Id { get; }
         public string Name { get; }
@@ -18,6 +18,24 @@ namespace PaperDefense.Core
         public StructureKind? MountKind { get; }
         public TowerModules Module { get; }
         public ChassisKind? Chassis { get; }
+        public PartCategory Category { get; }
+        public bool Enabled { get; } = true;
+        public int Order { get; }
+        public int UnlockGold { get; }
+        public string TemplateId { get; }
+        public DrawingVisualStyle VisualStyle { get; }
+
+        protected WorkshopPartDefinition(PartDefinitionInput input, PartCategory category, bool combatMount = false,
+            StructureKind? mountKind = null, TowerModules module = TowerModules.None, ChassisKind? chassis = null)
+        {
+            if (input == null) throw new ArgumentException("catalog: пустая запись");
+            Id = ContentValidation.Id(input.Id,"part.id");
+            if (string.IsNullOrWhiteSpace(input.Name)) throw new ArgumentException(Id + ".name: требуется имя");
+            ContentValidation.NonNegative(input.UnlockGold,Id + ".unlockGold");
+            Name=input.Name;Description=input.Description ?? "";ButtonLabel=input.ButtonLabel ?? input.Name;UnlockLabel=input.UnlockLabel ?? input.Name;
+            TemplateId=input.TemplateId;Enabled=input.Enabled;Order=input.Order;UnlockGold=input.UnlockGold;InitiallyUnlocked=input.InitiallyUnlocked;VisualStyle=input.VisualStyle;
+            Category=category;IsCombatMount=combatMount;MountKind=mountKind;Module=module;Chassis=chassis;
+        }
 
         internal WorkshopPartDefinition(string id, string name, string buttonLabel, string unlockLabel, string description,
             bool initiallyUnlocked = false, bool availableInVersionTwo = false, bool combatMount = false,
@@ -26,6 +44,7 @@ namespace PaperDefense.Core
             Id = id; Name = name; ButtonLabel = buttonLabel; UnlockLabel = unlockLabel; Description = description;
             InitiallyUnlocked = initiallyUnlocked; AvailableInVersionTwo = availableInVersionTwo; IsCombatMount = combatMount;
             MountKind = mountKind; Module = module; Chassis = chassis;
+            Category = chassis.HasValue ? PartCategory.Chassis : module != TowerModules.None ? PartCategory.Module : PartCategory.Weapon;
         }
     }
 
@@ -111,7 +130,12 @@ namespace PaperDefense.Core
         }
 
         public static IReadOnlyList<PartUnlock> CreateParts(GameBalance balance)
-            => balance == null ? historicalParts : CreateParts(balance.Construction);
+        {
+            if (balance?.Content == null) return balance == null ? historicalParts : CreateParts(balance.Construction);
+            var result = new List<PartUnlock>();
+            foreach (var item in balance.Content.AllParts) if (item.Enabled) result.Add(new PartUnlock(item.Id,item.Name,item.UnlockGold,item.Description));
+            return result.AsReadOnly();
+        }
         static ReadOnlyCollection<PartUnlock> CreateParts(TowerConstructionRules rules)
         {
             var result = new PartUnlock[definitions.Count];

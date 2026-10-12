@@ -24,7 +24,7 @@ namespace PaperDefense.Tests
             var profile = new WorkshopProfile(); profile.GrantGold(200);
             Assert.That(profile.SaveBlueprint(NewBlueprint("custom", "Existing page"), out _), Is.True);
             store = new FakeStore(profile);
-            run.InitializeWorkshop(store);
+            run.InitializeWorkshop(store, allowLegacyFixtureDefaults: true);
         }
 
         [TearDown] public void TearDown()
@@ -96,7 +96,7 @@ namespace PaperDefense.Tests
         [Test] public void ProtectedLoadRejectsRetryTransactionsAndQuitWithoutStoreWrites()
         {
             store = new FakeStore(new WorkshopProfile(), ProfileLoadSource.RecoveryRequired, false);
-            run.InitializeWorkshop(store);
+            run.InitializeWorkshop(store, allowLegacyFixtureDefaults: true);
             Assert.That(run.Workshop.SaveState, Is.EqualTo(ProfileSaveState.RecoveryRequired));
             Assert.That(run.SaveBlueprint(NewBlueprint("draft", "Protected"), out _), Is.False);
             Assert.That(run.RetrySave(out _), Is.False);
@@ -108,7 +108,7 @@ namespace PaperDefense.Tests
         [Test] public void NewProfileIsDirtyAndIsSavedOnQuitWithoutChangingTheRealProfilePath()
         {
             store = new FakeStore(new WorkshopProfile(), ProfileLoadSource.NewProfile);
-            run.InitializeWorkshop(store);
+            run.InitializeWorkshop(store, allowLegacyFixtureDefaults: true);
             Assert.That(run.Workshop.SaveState, Is.EqualTo(ProfileSaveState.Unsaved));
             Assert.That(run.Workshop.HasUnsavedChanges, Is.True);
             root.SetActive(true);
@@ -119,7 +119,7 @@ namespace PaperDefense.Tests
 
         [Test] public void MemoryOnlyModeAllowsEditsAndClearlyReportsItsScope()
         {
-            run.InitializeWorkshop(false);
+            run.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
             Assert.That(run.SaveBlueprint(NewBlueprint("memory", "Local experiment"), out _), Is.True);
             Assert.That(run.Workshop.SaveState, Is.EqualTo(ProfileSaveState.MemoryOnly));
             Assert.That(run.RetrySave(out var reason), Is.False);

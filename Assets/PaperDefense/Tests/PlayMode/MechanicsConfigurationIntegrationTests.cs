@@ -90,15 +90,41 @@ namespace PaperDefense.Tests
                 asset.enemyMechanics = asset.inkWells = true; asset.generateNewThreats = false;
                 var run = root.AddComponent<RunController>(); run.balanceAsset = asset; run.InitializeWorkshop(false);
                 var firstPage = run.Workshop.Album[0]; int pages = run.Workshop.Album.Count;
+                var profileField = typeof(RunController).GetField("profile", BindingFlags.Instance | BindingFlags.NonPublic);
+                Assert.That(profileField, Is.Not.Null);
+                var profile = (WorkshopProfile)profileField.GetValue(run);
+                var storedPage = profile.Album[0];
                 DisableAll(asset.mechanics);
                 Assert.That(run.StartRun(out string reason), Is.True, reason);
                 AssertDisabled(run.Session.Balance.Mechanics);
                 Assert.That(run.Workshop.Album.Count, Is.EqualTo(pages));
-                Assert.That(run.Workshop.Album[0], Is.SameAs(firstPage));
+                Assert.That(profile.Album[0], Is.SameAs(storedPage));
+                var prepared = run.Workshop.Loadout[0];
+                Assert.That(run.Workshop.Album[0].Id, Is.EqualTo(firstPage.Id));
+                Assert.That(prepared.Id, Is.EqualTo(firstPage.Id));
+                Assert.That(prepared.ChassisId, Is.EqualTo(firstPage.ChassisId));
+                Assert.That(prepared.FirstWeaponId, Is.EqualTo(firstPage.FirstWeaponId));
+                Assert.That(prepared.SecondWeaponId, Is.EqualTo(firstPage.SecondWeaponId));
+                Assert.That(prepared.Drawing.GeometryHash, Is.EqualTo(firstPage.Drawing.GeometryHash));
+                Assert.That(prepared.EvaluationStamp.RuleVersion, Is.EqualTo(firstPage.EvaluationStamp.RuleVersion));
+                Assert.That(prepared.EvaluationStamp.ReferenceSignature, Is.EqualTo(firstPage.EvaluationStamp.ReferenceSignature));
+                Assert.That(prepared.EvaluationStamp.ConstructionHash, Is.EqualTo(firstPage.EvaluationStamp.ConstructionHash));
+                Assert.That(prepared.EvaluationStamp.Quality, Is.EqualTo(firstPage.EvaluationStamp.Quality));
+                Assert.That(prepared.Content, Is.SameAs(run.Content));
+                var loadoutField = typeof(RunController).GetField("runLoadout", BindingFlags.Instance | BindingFlags.NonPublic);
+                Assert.That(loadoutField, Is.Not.Null);
+                var actualLoadout = (System.Collections.Generic.IReadOnlyList<TowerBlueprint>)loadoutField.GetValue(run);
+                Assert.That(actualLoadout[0].Content, Is.SameAs(run.Content));
+                Assert.That(actualLoadout[0].Drawing.GeometryHash, Is.EqualTo(storedPage.Drawing.GeometryHash));
                 Assert.That(run.Session.Wells, Is.Empty);
+                float frozenRange = run.Content.GetWeapon(prepared.FirstWeaponId).Stats.Range;
+                asset.weapons = new[] { new GameBalanceAsset.WeaponSettings { kind = StructureKind.Gun, cost = 40,
+                    health = 55, range = frozenRange + 19, damage = 12, shotInterval = .42f } };
                 asset.mechanics.InkWells = asset.mechanics.RunUpgrades = true;
                 Assert.That(run.Session.Balance.Mechanics.InkWells, Is.False);
                 Assert.That(run.Session.Balance.Mechanics.RunUpgrades, Is.False);
+                Assert.That(run.Content.GetWeapon(prepared.FirstWeaponId).Stats.Range, Is.EqualTo(frozenRange));
+                Assert.That(actualLoadout[0].Content.GetWeapon(prepared.FirstWeaponId).Stats.Range, Is.EqualTo(frozenRange));
             }
             finally { Object.DestroyImmediate(root); Object.DestroyImmediate(asset); }
         }

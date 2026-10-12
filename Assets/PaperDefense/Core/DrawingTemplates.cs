@@ -1,19 +1,119 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace PaperDefense.Core
 {
+    public enum DrawingPartRole { Base, Mount, Module, Decoration }
+    public enum DrawingVisualStyle { Template = 0, Legacy = 1 }
     public sealed class DrawingPartTemplate
     {
         public DrawingPartKey Key { get; }
+        public string BindingId { get; }
+        public DrawingPartRole Role { get; }
+        public string DisplayName { get; }
+        public float Weight { get; }
+        public string ReferenceSignature { get; }
         public Point2 Pivot { get; }
         public IReadOnlyList<DrawingStroke> Contours { get; }
         internal DrawingPartTemplate(DrawingPartKey key, Point2 pivot, IReadOnlyList<DrawingStroke> contours)
-        { Key = key; Pivot = pivot; Contours = new DrawingPart(key, contours).Strokes; }
+            : this(DrawingBindings.For(key), LegacyRole(key), LegacyName(key), pivot, contours,
+                key == DrawingPartKey.Decoration ? 0 : (int)key <= 2 ? 25 : 5, "legacy.v2." + key) { }
+        internal DrawingPartTemplate(string bindingId, DrawingPartRole role, string displayName, Point2 pivot,
+            IReadOnlyList<DrawingStroke> contours, float weight, string referenceSignature)
+        {
+            BindingId = bindingId; DrawingBindings.TryLegacy(bindingId, out DrawingPartKey key); Key = key;
+            Role = role; DisplayName = displayName; Pivot = pivot;
+            Contours = new DrawingPart(bindingId, contours).Strokes; Weight = weight; ReferenceSignature = referenceSignature;
+        }
+        static DrawingPartRole LegacyRole(DrawingPartKey key) => key == DrawingPartKey.Base ? DrawingPartRole.Base :
+            key == DrawingPartKey.Mount0 || key == DrawingPartKey.Mount1 ? DrawingPartRole.Mount :
+            key == DrawingPartKey.Decoration ? DrawingPartRole.Decoration : DrawingPartRole.Module;
+        static string LegacyName(DrawingPartKey key)
+        {
+            switch (key)
+            {
+                case DrawingPartKey.Base: return "Основание";
+                case DrawingPartKey.Mount0: return "Ствол 1";
+                case DrawingPartKey.Mount1: return "Ствол 2";
+                case DrawingPartKey.Armor: return "Бронепластины";
+                case DrawingPartKey.Feed: return "Подача";
+                case DrawingPartKey.Tracking: return "Наведение";
+                case DrawingPartKey.Rail: return "Направляющая";
+                default: return "Украшения";
+            }
+        }
     }
 
     /// <summary>Reference outlines and assembly bindings. Player strokes never determine mounts or physical geometry.</summary>
     public static class DrawingTemplateCatalog
+    {
+        static readonly ConditionalWeakTable<TowerBlueprint, IReadOnlyList<DrawingPartTemplate>> cache = new ConditionalWeakTable<TowerBlueprint, IReadOnlyList<DrawingPartTemplate>>();
+        public static bool IsEnabled(TowerBlueprint blueprint, DrawingPartKey key) => DrawingPartPolicy.IsEnabled(blueprint, key);
+        public static bool IsEnabled(TowerBlueprint blueprint, string bindingId) => DrawingPartPolicy.IsEnabled(blueprint, bindingId);
+        public static IReadOnlyList<DrawingPartKey> EnabledKeys(TowerBlueprint blueprint)
+        {
+            var keys = new List<DrawingPartKey>();
+            foreach (var template in Create(blueprint)) if ((int)template.Key >= 0) keys.Add(template.Key);
+            return keys.AsReadOnly();
+        }
+        public static IReadOnlyList<string> EnabledBindings(TowerBlueprint blueprint)
+        {
+            var keys = new List<string>(); foreach (var part in Create(blueprint)) keys.Add(part.BindingId); return keys.AsReadOnly();
+        }
+        public static Point2 Pivot(TowerBlueprint blueprint, DrawingPartKey key) => Pivot(blueprint, DrawingBindings.For(key));
+        public static Point2 Pivot(TowerBlueprint blueprint, string bindingId)
+        {
+            foreach (var template in Create(blueprint)) if (template.BindingId == bindingId) return template.Pivot;
+            // Disabled legacy parts are retained in the drawing but never rendered.
+            if ((blueprint.Content == null || blueprint.Content.IsLegacyAdapter) && DrawingBindings.TryLegacy(bindingId, out var key)) return LegacyDrawingTemplates.Pivot(blueprint, key);
+            throw new ArgumentException("Часть рисунка отсутствует в этой сборке: " + bindingId, nameof(bindingId));
+        }
+        public static IReadOnlyList<DrawingPartTemplate> Create(TowerBlueprint blueprint)
+        {
+            if (blueprint == null) throw new ArgumentNullException(nameof(blueprint));
+            return cache.GetValue(blueprint, Resolve);
+        }
+        static IReadOnlyList<DrawingPartTemplate> Resolve(TowerBlueprint blueprint)
+        {
+            if (blueprint.Content == null || blueprint.Content.IsLegacyAdapter)
+            {
+                if (!Enum.IsDefined(typeof(ChassisKind), blueprint.Chassis) || !Enum.IsDefined(typeof(StructureKind), blueprint.FirstWeapon) ||
+                    (blueprint.SecondWeaponId != null && (!blueprint.SecondWeapon.HasValue || !Enum.IsDefined(typeof(StructureKind), blueprint.SecondWeapon.Value)))) return Array.Empty<DrawingPartTemplate>();
+                foreach (var selected in blueprint.ModuleSelections) if (LegacyContentIds.Module(selected.DefinitionId) == TowerModules.None) return Array.Empty<DrawingPartTemplate>();
+                return LegacyDrawingTemplates.Create(blueprint);
+            }
+            var content = blueprint.Content;
+            var result = new List<DrawingPartTemplate>();
+            if (!content.TryGetChassis(blueprint.ChassisId, out _) || !content.TryGetWeapon(blueprint.FirstWeaponId, out _) ||
+                (blueprint.SecondWeaponId != null && !content.TryGetWeapon(blueprint.SecondWeaponId, out _))) return Array.Empty<DrawingPartTemplate>();
+            foreach (var selected in blueprint.ModuleSelections) if (!content.TryGetModule(selected.DefinitionId, out _)) return Array.Empty<DrawingPartTemplate>();
+            var chassis = content.GetChassis(blueprint.ChassisId);
+            Add(result, content.GetTemplate(chassis.TemplateId), DrawingBindings.Base, DrawingPartRole.Base, chassis.Name, null);
+            var first = content.GetWeapon(blueprint.FirstWeaponId);
+            Add(result, content.GetTemplate(first.TemplateId), DrawingBindings.Mount0, DrawingPartRole.Mount,
+                "Ствол 1 · " + first.Name, blueprint.SecondWeaponId == null ? chassis.PrimaryMountPivot : chassis.PrimaryDualMountPivot);
+            if (blueprint.SecondWeaponId != null)
+            {
+                var second = content.GetWeapon(blueprint.SecondWeaponId);
+                Add(result, content.GetTemplate(second.TemplateId), DrawingBindings.Mount1, DrawingPartRole.Mount,
+                    "Ствол 2 · " + second.Name, chassis.SecondaryMountPivot);
+            }
+            foreach (var selected in blueprint.ModuleSelections)
+            {
+                var module = content.GetModule(selected.DefinitionId);
+                Add(result, content.GetTemplate(module.TemplateId), DrawingBindings.Module(selected.InstanceId), DrawingPartRole.Module, module.Name, null);
+            }
+            result.Add(new DrawingPartTemplate(DrawingBindings.Decoration, DrawingPartRole.Decoration, "Украшения", new Point2(0, 0),
+                Array.Empty<DrawingStroke>(), 0, "decoration.v1"));
+            return result.AsReadOnly();
+        }
+        static void Add(List<DrawingPartTemplate> result, DrawingTemplateDefinition template, string binding, DrawingPartRole role, string name, Point2? pivot)
+            => result.Add(new DrawingPartTemplate(binding, role, name, pivot ?? template.Pivot, template.Contours, template.Weight, template.Signature));
+    }
+
+    /// <summary>Archived v1/v2 reference geometry used exclusively by legacy pages and migration.</summary>
+    public static class LegacyDrawingTemplates
     {
         static readonly DrawingPartKey[] partOrder = { DrawingPartKey.Base, DrawingPartKey.Mount0, DrawingPartKey.Mount1,
             DrawingPartKey.Armor, DrawingPartKey.Feed, DrawingPartKey.Tracking, DrawingPartKey.Rail, DrawingPartKey.Decoration };

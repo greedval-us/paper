@@ -55,7 +55,7 @@ namespace PaperDefense.Tests
             DrawingSnapshot first = new DrawingSnapshot(new[] { Part(DrawingPartKey.Mount1), Part(DrawingPartKey.Base) });
             DrawingSnapshot second = new DrawingSnapshot(new[] { Part(DrawingPartKey.Base), Part(DrawingPartKey.Mount1) });
             Assert.That(first.GeometryHash, Is.EqualTo(second.GeometryHash));
-            Assert.That(first.FormatVersion, Is.EqualTo(DrawingSnapshot.CurrentFormatVersion));
+            Assert.That(first.FormatVersion, Is.EqualTo(DrawingSnapshot.LegacyFormatVersion));
             Assert.That(first.BindingVersion, Is.EqualTo(1));
             Assert.That(new DrawingPoint(.1000001f, 0).X, Is.EqualTo(new DrawingPoint(.1000002f, 0).X));
             Assert.That(DrawingSnapshot.Empty.IsEmpty, Is.True);

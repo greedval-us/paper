@@ -1,7 +1,7 @@
 {
-  "GeneratedAtUtc": "2026-10-12T15:23:42.694Z",
-  "BalanceDataSha256": "cc342ab73d1737828ba44df781b6e7c5cfaea9c6c972bdbac0d2966ffc141334",
-  "WorkbookSha256": "1cb285a58f87376552183675c756bd0c333e1c419bf8e9773b6b04f122a91b04",
+  "GeneratedAtUtc": "2026-10-12T18:06:51.541Z",
+  "BalanceDataSha256": "2b98f6f346e8c6d2bb142284a5f71a3b5279d34cffd7d043abeebe47420002e6",
+  "WorkbookSha256": "af5d33fa5523be2510910eaa5c8752fa414c8ac569b4dd8010c76ec2a25d919a",
   "Sheets": [
     "Механики",
     "Расчеты",
@@ -10,18 +10,50 @@
     "Материалы и враги",
     "Волны",
     "Параметры",
+    "Каталог данных",
     "Источники"
   ],
-  "Parameters": 387,
+  "Parameters": 478,
+  "CatalogFields": 2020,
+  "Parts": [
+    {
+      "Configuration": "NotebookBalance",
+      "Count": 13
+    },
+    {
+      "Configuration": "TargetNotebookBalance",
+      "Count": 13
+    }
+  ],
   "RuntimeReferenceChecks": 104,
   "VerificationEvidence": [
     {
-      "Path": "docs/validation/mechanics-editmode-results.json",
-      "Sha256": "0e83cbea6c1e389e5a43567e0788dd5061aa41b2feec3f12f26f0d6ed8fdc9c9"
+      "Path": "docs/validation/content/after/editmode-tests.json",
+      "Sha256": "f1b330b3fb87660aafdbc6149981bfb14d32acb5f4f23c76806ed94bb82acf49"
     },
     {
-      "Path": "docs/validation/mechanics-playmode-results.json",
-      "Sha256": "5958a8e6b98dd31e64255653497d70ffd1b1816b34c2125cf8a8cf6f4ccd419d"
+      "Path": "docs/validation/content/after/playmode-tests.json",
+      "Sha256": "fc8617f69a2826aa0fb9dd93dfd36489159f6795f4561d1630722cbbc05d368c"
+    },
+    {
+      "Path": "docs/validation/content/after/baseline-comparison.json",
+      "Sha256": "134f31f6e49b90c4071a542ab0f7d65e2da2bfa1dd287f493f23481b362c5261"
+    },
+    {
+      "Path": "docs/validation/content/after/editor-acceptance.json",
+      "Sha256": "2971783f5afcb2bd7f0ff381d02a25cf465b409488018267417550146d8728dd"
+    },
+    {
+      "Path": "docs/validation/content/after/player-acceptance.json",
+      "Sha256": "b48143bb55eea2807d49eb97867b2095abed8f7922fcd1df021f5aeaba08ac8d"
+    },
+    {
+      "Path": "docs/validation/content/after/development-build.json",
+      "Sha256": "ce5f899b2c0e1c8c3eeaa0d0ac85c8122471bd50d795ea43d0188571af6568fd"
+    },
+    {
+      "Path": "docs/validation/content/data-only-diff.json",
+      "Sha256": "fcb8bec9bd35ded851587ec4ab3e137306325c377886a817dba9b7a239711d0f"
     }
   ],
   "FormulaChecksPassed": true,
@@ -41,7 +73,7 @@
     },
     {
       "sheet": "Расчеты",
-      "range": "A45:J51"
+      "range": "A45:K51"
     },
     {
       "sheet": "Оружие",
@@ -50,6 +82,18 @@
     {
       "sheet": "Детали",
       "range": "A1:H15"
+    },
+    {
+      "sheet": "Детали",
+      "range": "A35:H53"
+    },
+    {
+      "sheet": "Детали",
+      "range": "A56:H81"
+    },
+    {
+      "sheet": "Детали",
+      "range": "A84:H96"
     },
     {
       "sheet": "Материалы и враги",
@@ -64,12 +108,16 @@
       "range": "A1:E20"
     },
     {
+      "sheet": "Каталог данных",
+      "range": "A1:H18"
+    },
+    {
       "sheet": "Источники",
       "range": "A1:C22"
     },
     {
       "sheet": "Источники",
-      "range": "A24:B32"
+      "range": "A33:B41"
     }
   ],
   "Engine": "@oai/artifact-tool. Native Microsoft Excel execution has not been performed."

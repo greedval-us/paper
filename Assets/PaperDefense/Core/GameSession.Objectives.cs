@@ -27,14 +27,14 @@ namespace PaperDefense.Core
         void InitializeObjectives()
         {
             if(!Mechanics.InkWells)return;
-            var cells=new[]{new Cell(Balance.Width/5,Balance.Height/4),new Cell(Balance.Width*4/5,Balance.Height/4),
-                new Cell(Balance.Width/2,Balance.Height*5/6)};
+            var cells=new Cell[rules.WellPlacements.Count];
+            for(int i=0;i<cells.Length;i++) cells[i]=rules.WellPlacements[i].Resolve(rules.Width,rules.Height);
             wellFlows=new WeightedFlowField[cells.Length];
             for(int i=0;i<cells.Length;i++)
             {
-                wells.Add(new InkWellState{Id=i,Cell=cells[i],Color=(InkColor)(i+1),Health=Balance.WellHealth,
-                    MaxHealth=Balance.WellHealth});
-                wellFlows[i]=new WeightedFlowField(Balance.Width,Balance.Height);
+                wells.Add(new InkWellState{Id=i,Cell=cells[i],Color=rules.WellPlacements[i].Color,Health=rules.WellHealth,
+                    MaxHealth=rules.WellHealth});
+                wellFlows[i]=new WeightedFlowField(rules.Width,rules.Height);
             }
         }
 
@@ -45,7 +45,7 @@ namespace PaperDefense.Core
             if(index<0||index>=wells.Count){reason="Чернильница не найдена.";return false;}
             var well=wells[index];
             if(well.Active){reason="Эта точка уже защищается.";return false;}
-            int price=Math.Max(0,Balance.WellActivationCost);
+            int price=Math.Max(0,rules.WellActivationCost);
             if(Ink<price){reason="Не хватает штрихов: нужно "+price+".";return false;}
             Ink-=price;well.Active=true;well.Health=Math.Max(1,well.MaxHealth);
             // An assault already in progress cannot be counted as a fully protected wave.
@@ -69,7 +69,11 @@ namespace PaperDefense.Core
 
         private bool ReservedObjective(Cell cell)
         {
-            foreach(var well in wells)if(Math.Abs(cell.X-well.Cell.X)<=1&&Math.Abs(cell.Y-well.Cell.Y)<=1)return true;
+            foreach(var well in wells)
+            {
+                int radius=rules.WellPlacements[well.Id].ReservedRadius;
+                if(Math.Abs(cell.X-well.Cell.X)<=radius&&Math.Abs(cell.Y-well.Cell.Y)<=radius)return true;
+            }
             return false;
         }
         private Point2 TargetPoint(EnemyState enemy)
@@ -80,7 +84,7 @@ namespace PaperDefense.Core
 
         private int ChooseObjective()
         {
-            if(wells.Count==0||random.NextDouble()>=Clamp(Balance.Progression.WellThreatFraction,0,1))return -1;
+            if(wells.Count==0||random.NextDouble()>=Clamp(rules.Progression.WellThreatFraction,0,1))return -1;
             int active=0;foreach(var well in wells)if(well.Active)active++;
             if(active==0)return -1;
             int selection=random.Next(active);
@@ -91,14 +95,14 @@ namespace PaperDefense.Core
         {
             foreach(var well in wells)
                 if(well.Active)wellFlows[well.Id].Rebuild(well.Cell,grid,profile.Speed,
-                    Math.Max(.01f,profile.Damage)/Math.Max(.05f,profile.AttackInterval));
+                    Math.Max(rules.Combat.MinimumPathDamage,profile.Damage)/Math.Max(rules.Combat.MinimumActionInterval,profile.AttackInterval));
         }
         private void AwardWellResources()
         {
             foreach(var well in wells)
             {
                 if(well.Active&&well.EligibleWave<=WaveIndex)
-                    coloredInk[(int)well.Color]=(int)Math.Min(int.MaxValue,(long)coloredInk[(int)well.Color]+Math.Max(0,Balance.WellInkPerWave));
+                    coloredInk[(int)well.Color]=(int)Math.Min(int.MaxValue,(long)coloredInk[(int)well.Color]+Math.Max(0,rules.WellInkPerWave));
                 well.Threatened=false;
             }
         }

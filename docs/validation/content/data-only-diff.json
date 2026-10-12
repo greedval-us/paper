@@ -1,0 +1,40 @@
+{
+  "FreezeUtc": "2026-10-12T17:58:43.5024196Z",
+  "VerifiedUtc": "2026-10-12T18:06:02.4364520Z",
+  "Head": "b7591827ccb64ebbc0f0960fedeef0babd43a669",
+  "CodeFileCount": 207,
+  "CodeUnchanged": true,
+  "AssetChanges": [
+    {
+      "Path": "Assets/PaperDefense/Content/Acceptance/AcceptanceContent.asset",
+      "Before": "ff82f2144bb4ea550b18f051a18f9ce10316a6d6a28ba012cb382c8bcf6e7f4d",
+      "After": "4287732adac69c06bb1d6decda84c10c740ff54233cc1eb76f9b445d0fbe8b24"
+    },
+    {
+      "Path": "Assets/PaperDefense/Content/Acceptance/AcceptancePreset.asset",
+      "Before": "a295f7272077e6bc90a2c2a443615348a9b4aac2ca139766ef4b293c9e7f8f07",
+      "After": "baf985cf9676a996c21f6c3ec9294f1a61e46f3a6307c61186f2fc1389c6b134"
+    },
+    {
+      "Path": "Assets/PaperDefense/Content/Acceptance/ContentAcceptanceManifest.asset",
+      "Before": null,
+      "After": "4323735a4da45cc0c77eb6cca973e853b8364e7201cddbb304ad07d0cebff558"
+    },
+    {
+      "Path": "Assets/PaperDefense/Content/Acceptance/ContentAcceptanceManifest.asset.meta",
+      "Before": null,
+      "After": "cc8240f31b607fe5080af86d49f6012b579218dbd0c9fff629e63332b15033cb"
+    },
+    {
+      "Path": "Assets/PaperDefense/Content/Acceptance/Stage1Manifest.asset.meta",
+      "Before": "cc8240f31b607fe5080af86d49f6012b579218dbd0c9fff629e63332b15033cb",
+      "After": null
+    },
+    {
+      "Path": "Assets/PaperDefense/Content/Acceptance/Stage1Manifest.asset",
+      "Before": "eb2e2d6ed6c9c57913b11078a77f00434519f4e046324fa1cfaedb122512482f",
+      "After": null
+    }
+  ],
+  "Note": "Only serialized acceptance content/scene assets changed. Report generation and build products are outside the authoring source."
+}

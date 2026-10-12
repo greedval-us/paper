@@ -1,0 +1,53 @@
+{
+  "job_id": "e54a4913ffac4b9c8c9a80f7028b6d88",
+  "status": "failed",
+  "mode": "PlayMode",
+  "started_unix_ms": 1791827670320,
+  "finished_unix_ms": 1791827686754,
+  "last_update_unix_ms": 1791827686754,
+  "progress": {
+    "completed": 256,
+    "total": 256,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": null,
+    "last_finished_test_full_name": "PaperDefense.Tests.WorkshopStoreTests.ValidPrimaryIgnoresBrokenBackup",
+    "last_finished_unix_ms": 1791827686705,
+    "stuck_suspected": false,
+    "editor_is_focused": true,
+    "run_in_background": false,
+    "focus_nudge_attempts": null,
+    "focus_nudge_limit": null,
+    "focus_nudge_status": null,
+    "blocked_reason": null,
+    "failures_so_far": [
+      {
+        "full_name": "PaperDefense.Tests.DataDrivenWorkshopUiTests.PersistedAcceptanceManifestProvidesReachableCardsPricesUnlocksAndGenericSelections",
+        "message": "System.InvalidOperationException : Sequence contains no matching element"
+      }
+    ],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "PlayMode",
+    "summary": {
+      "total": 256,
+      "passed": 255,
+      "failed": 1,
+      "skipped": 0,
+      "durationSeconds": 10.4961227,
+      "resultState": "Failed(Child)"
+    },
+    "results": [
+      {
+        "name": "PersistedAcceptanceManifestProvidesReachableCardsPricesUnlocksAndGenericSelections",
+        "fullName": "PaperDefense.Tests.DataDrivenWorkshopUiTests.PersistedAcceptanceManifestProvidesReachableCardsPricesUnlocksAndGenericSelections",
+        "state": "Failed:Error",
+        "durationSeconds": 0.0243952,
+        "message": "System.InvalidOperationException : Sequence contains no matching element",
+        "stackTrace": "  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <fe644d7ad1cf499ebe4e7ad937bc03bf>:0 \r\n  at PaperDefense.Tests.DataDrivenWorkshopUiTests.Button (System.String name) [0x0000d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\DataDrivenWorkshopUiTests.cs:56 \r\n  at PaperDefense.Tests.DataDrivenWorkshopUiTests.PersistedAcceptanceManifestProvidesReachableCardsPricesUnlocksAndGenericSelections () [0x000ea] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\DataDrivenWorkshopUiTests.cs:120 \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ",
+        "output": ""
+      }
+    ]
+  }
+}

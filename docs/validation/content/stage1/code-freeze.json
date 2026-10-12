@@ -1,0 +1,2652 @@
+{
+  "Utc": "2026-10-12T17:49:10.0332872Z",
+  "Head": "b7591827ccb64ebbc0f0960fedeef0babd43a669",
+  "Code": [
+    {
+      "Path": "Assets/PaperDefense/Application/AssemblyInfo.cs",
+      "Sha256": "458f6aa1c773253bd160c480692e5076c8f8be9853e12034ba7eaa391f1b80b1"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/BalancePresetAsset.cs",
+      "Sha256": "085b089672196a8cddcab5b2acf688e55a491a0539eeedce74dba663a0d16786"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/ContentAcceptanceManifestAsset.cs",
+      "Sha256": "588212e1c792ee53d82123f8861c2121348caedae21f2c6fb84ff0d9c16c1a3b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/ContentAcceptanceProbe.cs",
+      "Sha256": "9913dd5afee44abac5b49556be855a103c30a0af441d55a620759ea548c58ec2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/ContentAcceptanceRunner.cs",
+      "Sha256": "4e697ad6ed4b93545eadaca1f2fa67215b0aeb3798e2998dce4d9bd1f0d16931"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/ContentDatabaseAsset.cs",
+      "Sha256": "0439618a73e33fc5cf571cc117800b3e2ec46fd655192df8707e428f4503931d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/FixedStepClock.cs",
+      "Sha256": "a9742b653308ebeb72a6bc03abdce1c4fbbeb45e857c9fab9dde32b5fa0f8f92"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/GameBalanceAsset.cs",
+      "Sha256": "5d6468aa449f242edcd41f4792c4622c68bf578c5c9e7acc8aaf8de647be768d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/GlobalBalanceSettings.cs",
+      "Sha256": "e17147a73f3ca54a36cdd9d8b06c6edfa652f7414ed169cbcf9fb4291c180c38"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/PaperDefense.Application.asmdef",
+      "Sha256": "d1c8fff3d6d2254d91b5914c2c32a3d4429dbbf97dca2ae8fdacd431c976ec22"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/ProfileSaveState.cs",
+      "Sha256": "6f212d0d6498a365209316ea04bd3f942abb97bc9d484900ea3875a152b654d2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/RunController.cs",
+      "Sha256": "32419bcf648cac216d9e76fe503972a4bf01d47df568040cefcbcfc3e50eae5a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/WorkshopPersistence.cs",
+      "Sha256": "e1dc990369bd5e1587d1b688e5cc35bb1a7f647f61dad38ca570585f03bc3898"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/WorkshopProfileStore.cs",
+      "Sha256": "5a18b588c63935bb9c8091dff8299783940caf6c4e748e90912be5258145d653"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/WorkshopReadModel.cs",
+      "Sha256": "186fb73410ae964d5fbbc9d55ae15262b0b600f7ddfe330f34cfe12bfe42a725"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/AssemblyInfo.cs",
+      "Sha256": "15130caf1ad71f8f356a96e3935b80da93bd48e1fa6beb048be4b17fb3d394d3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/BalanceValidation.cs",
+      "Sha256": "1b4bdae44ece17e22c4a87649b82c386749831159ac48e9ef68a2afbfee286b8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/BlotContext.cs",
+      "Sha256": "197a382a1f0ff8f47194a4c054d193533f83a5b60384ea6e39e75eb096bfa920"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/BlueprintData.cs",
+      "Sha256": "5cc4743b919f3ce81a4f0e47a0f53c43aa1a7fb52f8108df2143ebb3f0fbc097"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ColorEffectPayload.cs",
+      "Sha256": "d288df2e209802baf86fe3a88c0642bc8e5970a73ab9b613fa5e7635a867b04b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ContentCatalog.cs",
+      "Sha256": "d2f4f8fa42922319c06ed901011751fbd10fc7865a0aad3e9bbeee8d0abcad9e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ContentCombatProbe.cs",
+      "Sha256": "1568902054886786268e6abd571650f35f6f8cf0ad1bdc46dbf320dbfa2b142e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ContentDefinitions.cs",
+      "Sha256": "9757ef07ce269a0403b33569820dd50a68242923e8f73ada874117e3d1ebd622"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ContentInputCopy.cs",
+      "Sha256": "9b35c97c9c7ba8605546d07c7ed96eea02188296757cd1694bb4a74e95184bf0"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/CorpseBlotSystem.cs",
+      "Sha256": "100c3fd462dd065a8740cf8f4b78f4f0f7d7d71c0c5c5d634ae4a70cfac37b8b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DamageRules.cs",
+      "Sha256": "ddfb85af53b897b036304c25f441808ab96e29a946d7cebbcc1dc116463815e4"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DrawingAssessment.cs",
+      "Sha256": "4797d19d02d74f8ac84ec87f5d0b102bcf436a6a198101e50c4b7de68fcf9bff"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DrawingContentDefinitions.cs",
+      "Sha256": "eb666832dc74f3320b95172a6fca377e6df250ec08c3e2327b9fd8c9b674c27b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DrawingEditSession.cs",
+      "Sha256": "c6748bb4e7dd657ddcee946f3a14e35e0b9a8d2924dddf4fe783cbffbec7eb78"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DrawingPartPolicy.cs",
+      "Sha256": "9cc27ad3edf45e23b5cc29bf584fb87501b2ea8fb6da53cd72c011e8761fae71"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/Drawings.cs",
+      "Sha256": "3e4d0d984a13db753068b7110a4d65cf1005c8c31fdacf6bf473da7b21ec0e56"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DrawingTemplates.cs",
+      "Sha256": "f54bf4148365f7ac157e3f03df39a92f1fc1a444263bde3b654cf251f7521219"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EffectsRules.cs",
+      "Sha256": "063908ac5ad17133a08b6a48e0678d76d44a5c8f08622e2589cdc8bc919d21f0"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EnemyCrowdGrid.cs",
+      "Sha256": "fc56c1c30ff18e5e5ab9418ff60a83fde026a0cf3869c7167541c579ffe9414b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EnemyEffects.cs",
+      "Sha256": "9afad7c416f7fc9581cd5660d9bf74774bf5ce048932dd24a5124c2583aa76db"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EnemyMechanicsTypes.cs",
+      "Sha256": "07062f33eb858cb2cbad5d180c8050b4b3731e9d2630e5f15db3b2e5aa4d5665"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EnemyRewardBudget.cs",
+      "Sha256": "50346650ae37271901947d3b516b8a31fb74998f64e1f55471e73e6093bb0cb9"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EnemySpatialIndex.cs",
+      "Sha256": "7aa36c444164bb16bbb2011775214a64eef2029264638a5c0278279dd08ea70c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/FootprintGeometry.cs",
+      "Sha256": "1f9190c44a050408490fce2703b470c1f8867815f3e9a9f8615f1e2a5158b138"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameBalance.RuntimeTuning.cs",
+      "Sha256": "845fe1ce5f2102957195c2ff217fdbe17d5218deab2bad5ed618298a6028217f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameBalancePresets.cs",
+      "Sha256": "b7123f41823b7ef2f09d6382fe2f82e530a546ea33b8d08f03b638a7bd31dc20"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameSession.Construction.cs",
+      "Sha256": "148a4ce00d18960ebda288c92897fcf816e74a99accc943e13f366e73e4b8fb6"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameSession.cs",
+      "Sha256": "3f668a5d61ce603f2a3376b9bfc417a281516ac723924df1a690f8a38f11d9b9"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameSession.Enemies.cs",
+      "Sha256": "76991637ccc4d6c1767a18e7c3e6840ce6e7c6aea3f8d3f0a0ec0b29cb099462"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameSession.Objectives.cs",
+      "Sha256": "1278a0dafca06079628559b0705402dffe4f64a8aed367fbf47fba96d5c95cf5"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameSession.Progression.cs",
+      "Sha256": "b418a1826be223c0db13fdbf0fd6074b84d73222dd868af56e5743e25579a55d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameTypes.cs",
+      "Sha256": "2c1dc5dc3839135eeb22ab9ffc7e85c34059e700c5aa30a75bab755c9c8f7c5b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/LegacyContentCatalog.cs",
+      "Sha256": "7aacca2429e8a1e4888b6b0870019beded117ecd84fd065ee439876fdb891672"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/MechanicsConfiguration.cs",
+      "Sha256": "e0204584142111c98461b8cf0b108be10c533ea2c608c1d2290488b3c0514d40"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/MortarFootprint.cs",
+      "Sha256": "7dcdd84c8209a647ee25ea09e847b0ee6c55907bae2815c8072b712bf4f07f93"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/MortarFootprintProbe.cs",
+      "Sha256": "5c7e3b82dbf959b081d13c2c27a02b7fc48f15aa737090bcdcb2e5a4cb23a942"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/MortarProjectile.cs",
+      "Sha256": "7d7a07b0080b2d4ff499465db9c3f43bcf6dbb627a72d41756c343e6996abd1c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/PaperDefense.Core.asmdef",
+      "Sha256": "b007373190829721ec134649f56f7286f46a6b0ecef4bc7448d9dfdc8c31a0ee"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/PartCatalog.cs",
+      "Sha256": "8bc96e6d0397518a965ac63cbf22bf445ee71b1804db098f05460f7978e8fca8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ProfileLimits.cs",
+      "Sha256": "8fb14ccb2038331595bcafd2f94117d23dcb4f46bff18065b4905c4f78ce4e2d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ProgressionRules.cs",
+      "Sha256": "0a5b7e5ebae811a76f1071d456accd258c1f7b08dec247a6afbb7840a4b272bb"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ReadModel.cs",
+      "Sha256": "a36b909f9f91b16b2baf9964a8a13a52e91eee76a4bcfe75de386b04f7132441"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ResolvedTowerAssembly.cs",
+      "Sha256": "2ad56be6f3d295904e97cba4601820d417ca253115800604b5bd686a43e42bee"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/RunStatistics.cs",
+      "Sha256": "0b581525fd654163a64aa0e8f6de3ae98663a79a2314063bed940cff3963cde3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/SimulationEvents.cs",
+      "Sha256": "365f2a7fbae602a7b9b249d60eef6460aff9c6f03eaf2fb44e8a33fd74400b99"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TargetPresetSettings.cs",
+      "Sha256": "534327c8579ac61e9282545664be75e0ab620699f6df426f7e3669a5fe499563"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TimedEffectState.cs",
+      "Sha256": "f3efb2511cbc855074fdeee6c340d7bcbbcb5d1a88a3deb0692248c52e998d0f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TowerBlueprint.cs",
+      "Sha256": "959292ea9f4ae5c42c3d412324198fc0b9181958cba5c25cff8582e8139ea233"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TowerColorBudget.cs",
+      "Sha256": "d9e0d85247f5eaf2be69b0a45ebe8792583dd234f03c78415d178a054bb6d39a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TowerConstructionRules.cs",
+      "Sha256": "147087f8ba3825e2922d464cd450667dddf96fccb1e4a36fe1de2e45aef36767"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TrialRunner.cs",
+      "Sha256": "94f6a789e11817c80011874e8b84e0de9456f59d5f97157341804846a8307900"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TrialScenarioDefinition.cs",
+      "Sha256": "6c218fdcc2ea7349fbe5ca9326dd42d60a1db51b7155b669d649d78ab04306de"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/WeaponSystem.cs",
+      "Sha256": "36d682da3a5d5bee90d9983167131afba163593623030d5823b705cc2d4fe99e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/WeightedFlowField.cs",
+      "Sha256": "41238a7deab67f2eaff9504363134521a7aaa14e28127095ca9b98959b6b96a7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/WorkshopProfile.cs",
+      "Sha256": "d510d4718288b08e9803cda6c9bad3bca50c6acdc15836236fba9b2747f2769b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/BalanceWorkbookExport.cs",
+      "Sha256": "a670961c786026a3fcdbceabe21dec91040fd9a96abc68fbe4c1bd6ce3b5b1b7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/CampaignValidation.cs",
+      "Sha256": "0623746d8fb30b273646072f97435356bdab3a6db0e663b33fb2e31c5d1fe813"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/ContentAcceptanceBuild.cs",
+      "Sha256": "5b4cd385afed941dfa64910a46836cc85bfc1668e3b5bb8e86ed09d87a233023"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/ContentDatabaseMigration.cs",
+      "Sha256": "2b33dcfb2baaa3753a1316ab69a58f77294ab14377d76c7d2ff9a8d193c3b584"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/ExpandedCatalogAssetTools.cs",
+      "Sha256": "10f9e4e25c851d43423a2383389a55b678ee262ddd2e0899795c3f454e4c8ab2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/FullLoopValidation.cs",
+      "Sha256": "8804d8eff00d8dfb40f2a5c0aa19134f8f8638c94b7bcbc7ee59f01782ce3d3c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/InkLoopValidation.cs",
+      "Sha256": "33c9b212e64aa71f8b0a4c20cf5225e856ea726c2b8586a7c688d9990f0fd1dc"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/PaperDefense.Editor.asmdef",
+      "Sha256": "8fb53d07ff0682448d0022094d4735dc34f29fd44184778508ef2b289a716858"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/PaperDefenseSetup.cs",
+      "Sha256": "7d1a217eca89b9b49ac6089febed0be339464f2e1e3e8300f68faf0abec9621c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/PressureValidation.cs",
+      "Sha256": "d13c93cc60f7c853f38682f63e1061783903fc0e05c7252403419e28639579d8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/RefactorValidation.cs",
+      "Sha256": "2057ae73617936cc09ec117f3ea76f5c0ab4861448906f847199868faa9dfd69"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/WeaponDefinitionDrawer.cs",
+      "Sha256": "51020e0a81ac5622f186ca4e4fcb7c09ad5ee6366d41d63939b728b9f9755b53"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Input/DrawingInput.cs",
+      "Sha256": "1ff1c95f3f76e2af8a925e49bea0aaf5839bb66a572a2007353f84d3e285adfb"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/PaperDefense.Presentation.asmdef",
+      "Sha256": "06284ea74543fbf3260fca65cca0b019cdb6f506176bf5aaf8702cc10c2f52cd"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/PaperDefenseBootstrap.cs",
+      "Sha256": "796be4befa0d23d15cf1aa1224fe902cd2ac662a09d54160c392dbda5ba3426f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/AuthoredGeometryCache.cs",
+      "Sha256": "17d206d6247e0e140840b902bf4c2bf0880cc470da2bdb85a919ba10cbe26ef4"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/DoodleGlyphs.cs",
+      "Sha256": "da0d88a9d695fb1d688713f5aedec4f44bcd6f317659b2431ebb041fbfa92491"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/MeshPen.cs",
+      "Sha256": "8e47132981e0fc9ac1fc8afed509ef1ea7e2fe1f9d2cf53fda730164ad39d018"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/NotebookWorldView.cs",
+      "Sha256": "b4ab1e6d85e60533042762dde46e16104334a8324b9cb783e33c10d8a5f4b52d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/ReferenceDrawingCache.cs",
+      "Sha256": "bfb4aa5d2448a51630f360a6234820b8cef86873695eaee730129d63bf1de692"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/CatalogScrollList.cs",
+      "Sha256": "8b309ba67a1bdebc82ba59e04bd7ef4c345f1851e33813cdc6aeb48cc7e7975c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/DrawingEditorPanel.cs",
+      "Sha256": "28a05a8e638c2f33a5ea0b4431dbeafed8a050e4f071eae25da4a1d370959f56"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/FootprintProbeSketch.cs",
+      "Sha256": "7a58dc5a3e445aa9e2a51f86a76bc395024e42b3d1f54c79494c708e15955a6f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/MortarFootprintPanel.cs",
+      "Sha256": "f91a3e5f4b35821519486186bdee7f7283344ecdcdf1e459a5ee337a5071aa91"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/NotebookHud.cs",
+      "Sha256": "bbb70df672fa4b5720e6b1aadefb4491902261677ef30d86892d9885209c229d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/WorkshopHud.cs",
+      "Sha256": "9fea6574f56cc7e99251ddcaa21e295723c23b728b2e3bae0f33fcd05ec89a67"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/BalanceBoundaryTests.cs",
+      "Sha256": "ba2da54e5fcb62992b8256445ed36e49a3b52623dd9b0e293bcc7c55cfc5f3b4"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/BlotterCatalogTests.cs",
+      "Sha256": "abcb464abd841c39cc9d5021c55677a0d3da783a396e9df2c94211cea49ed1b0"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/BlotterTrialTests.cs",
+      "Sha256": "279d32fe54765231f1ebd521f9e065c87608d141d1c5227fdd619200d0c49f6c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/BlotterWeaponTests.cs",
+      "Sha256": "b1cc13c09bbb4f851394657e04764cb416de3b07a5cdad24ead78592e662b909"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/CombatContractTests.cs",
+      "Sha256": "6dc9414071c031d6ff530d0ee9fe633511580774e3d695672b1051882aff3f70"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/ConstructionRulesTests.cs",
+      "Sha256": "6eac653203d0e2a5b55995a4a9c7a565af18151c06e70d80393bf4ef0e9321c7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DataDrawingBindingTests.cs",
+      "Sha256": "fa845596be2c85b5c8ce6e022bf3e7b90ae700545501fce15a48dd7b7b59ed3b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DataDrivenCombatTests.cs",
+      "Sha256": "0c17352d0535e391a6f547afc4ebec05c23045d1d7389de7459007761f51c105"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DataDrivenProfileTests.cs",
+      "Sha256": "858c2fc337748b108598fad86ea1fd8277215fad009c06419af9b50929c39cba"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DefenseStatusTests.cs",
+      "Sha256": "df7728236839a1beedb5f2af362571899f6d90258188b211bdabde694ec21fab"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DrawingAssessmentTests.cs",
+      "Sha256": "3e819ee9235be7a4d774a09ada4305086dee0997be41d9d00bdd20e395dc2a33"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DrawingCombatQualityTests.cs",
+      "Sha256": "b7821fde24e1427015f6726c6b76cbe0e85a591d7cce4481479d2877bd10f16d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DrawingPolicyContractTests.cs",
+      "Sha256": "09aba3e827b8728293343560ae42fe447acfa4ca7cdd082641020ee7dcf628e2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DrawingTests.cs",
+      "Sha256": "8ac2c1f2eb367c3e0008a9901a0a33ac7bc4f83ae3158b7e05fedd4e5ec89c0b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/EffectsRulesTests.cs",
+      "Sha256": "7fa89694b06988550b01b7aca4a21b08654772d21c89378662ebaca4798a580c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/EnemyMechanicsTests.cs",
+      "Sha256": "438a33c604d69c93f377e82688a9d869f71416df14c2d30ceb6c7664fc8a3eac"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/ExtendedDrawingCatalogTests.cs",
+      "Sha256": "cf880253c2282a89ef31f618ffa3021159d1c82e52f0b554a2144ab5178ec148"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/FanCatalogTests.cs",
+      "Sha256": "b009aa678194460f6c5d61cbbe132c0dad25263b364cd5e3247754bbe632279c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/FanWeaponTests.cs",
+      "Sha256": "4dffc558be31470686b33a45f47e7253242c71b6050758f5ac72db80ff4ae3a8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/FiniteEconomyTests.cs",
+      "Sha256": "f2f7e2e6dc657277313237e0c713ae2730b94ce9093878ae754ebe4036bd95c4"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/GameSessionTests.cs",
+      "Sha256": "725cf9e5f39c3dc09523b0f4b42f4fdd97f308372a167e54149cc715dbe984d2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/HistoricalCatalogTestData.cs",
+      "Sha256": "90cd979a0c91b995a15844c9d7ceaf0233cc1e51ee064fddfe1b4e5c7e5bc503"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/IndependentMountAimTests.cs",
+      "Sha256": "368600d555b2e3a67eb65d01c43e1c6b3e550c6ca4f436520c84ff3162c22810"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/InkLoopReportTests.cs",
+      "Sha256": "03fe065eec5c22656b3fc5d75e17e07234d7049288687795bfcf93cf9324232a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/InkLoopTests.cs",
+      "Sha256": "f8bc9471199cc42510a2727f655ce1b66035a07f434e46424aee2ce3fb171eff"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MechanicsConfigurationTests.cs",
+      "Sha256": "fc8e2f6f29ff033a14a9c4b668c2551a65e8cc2af906be1ef2dad324e098bd3b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MechanicsFallbackTests.cs",
+      "Sha256": "e563599254e377f0643ca9d91ffba5654d8cedf9cc253d69e5e1d16a232a1c00"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MortarFootprintBlueprintTests.cs",
+      "Sha256": "10bced861b8c166d71f84d044e5e78e41f13f7dfae36a545a5748f3506358876"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MortarFootprintCombatTests.cs",
+      "Sha256": "a992f3b9ea692d82fc7b9cd37aac2e0a79030f5902804e2fd9e48506a604a7a3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MortarFootprintProbeTests.cs",
+      "Sha256": "72024605f45713b2cbf341ab79075e7f0cd8dce07129090af22d23fc1d723e50"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MountReadinessTests.cs",
+      "Sha256": "8395b705f430c7e70766b8db9d2e9cd7d3206bfbf388925195348f0f8e610de4"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/NavigationTests.cs",
+      "Sha256": "5b6918b3531816836a7124294ba2342b18b0bcc7ac4792c8b64ede5a28cce22a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/PaperDefense.Core.Tests.asmdef",
+      "Sha256": "16fe12edcdde4d031e0a355f7a52e2719af623c7fd46adf58111e565d163c5a5"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/PartCatalogCharacterizationTests.cs",
+      "Sha256": "2834c5890cfed514faea63566e9cfa8dfe5c57a6d654ba5d96240b42b1a1e442"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/ProgressionRulesTests.cs",
+      "Sha256": "4776f3a42b5d00b9dca221d9e7f431d97adca3a2330c3d7d2e618c145fd4b760"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/RailCatalogTests.cs",
+      "Sha256": "6e29dea87a62d880c0e4cade47531b58d0423e5f4b5bdd2e8567b2f89ac5e3be"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/RailDrawingTests.cs",
+      "Sha256": "327f7dc1146b6ecf77befce5bfb218eb5a5484c2e113db2b3f6a62379c27c788"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/RailWeaponTests.cs",
+      "Sha256": "d6823744a7a544ccfcae60fd045b8fc7a9ed9a339806fd3d2719135ccb2337b7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/RicochetCatalogTests.cs",
+      "Sha256": "a7e8b7514719c9da91e3dc774c439a07f230dd7f43e6bcf63058a773a61c1f98"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/RicochetWeaponTests.cs",
+      "Sha256": "4c1d68386a01e1be9d74367739380204955460d541aefd5fa0b462d009fb2760"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/SharedTowerProductionTests.cs",
+      "Sha256": "e8a57c2f4393e2f86fdd5c5ce191f192fb8fdcd055f1a9aee998b651752cab3f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/StaplerCatalogTests.cs",
+      "Sha256": "eedf7c676ceaceff47940cf46401254708fcdf5cd8f98aca321e3d9fdc83670f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/StaplerWeaponTests.cs",
+      "Sha256": "024c8720e7fd27a09b29212fa44b355d0921ef9f4b9d718f07978ca5c84b733f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/TargetPresetTests.cs",
+      "Sha256": "6eba1fa71808dcf70d6eaa942e377402227d6cf3d644bb71f8f777d2714f0a66"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/TrialBalanceTests.cs",
+      "Sha256": "8d6ee4b86b7ad6010a825dd35d2f139bcb79a0045045ef51a5f9d65e8b2bf3db"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/TrialCounterfireDefenseTests.cs",
+      "Sha256": "ca38281d5b4a24fba3260c45e13efa3dde399db1d2cb3876dacbe37c6f62ef3b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/TrialTests.cs",
+      "Sha256": "c8cada89bde3a37f0caff8cdca3fd089e5dd9a6a7308f8b6acd89ffa74685575"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/WeaponPublicationContractTests.cs",
+      "Sha256": "9d39e9f90cc62f7d0e5550efce2d82d02a155d974aee66eeb06eac2e299fff76"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/WellPlacementDefinitionTests.cs",
+      "Sha256": "f3f932885bf73bafe195ab82ccc8620be92d55fd681c974dd2f129d8b9e61acf"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/WorkshopTests.cs",
+      "Sha256": "ca475fb58439eb48d705555056caf765e6566d8e0afed16b1b5e02c19f80980f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/Editor/ContentAssetBoundaryTests.cs",
+      "Sha256": "9391a89dbb05e3c18305edb38e1eb91c30af3a2abde097002ca573ac3da96705"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/Editor/ExpandedCatalogAssetTests.cs",
+      "Sha256": "bef55a3d28e357fd91a6364a791ff2483961133066ca2708d739ed2609acd273"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/Editor/PaperDefense.Editor.Tests.asmdef",
+      "Sha256": "d6a8098bb45bdfb283419efd36fdfc47523cf32da3b14bb50df6d7920909a4fa"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/AuthoredRenderingTests.cs",
+      "Sha256": "4705fc3ad62451a31174dc38f0e909a7f540fba3b5fbef01fcb0489e6f1604d7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/AuthoredWorkshopTests.cs",
+      "Sha256": "7fba64932361800748f3379ff81628636785b85d604c5606cdc602f1c293dae2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/BlotterPersistenceTests.cs",
+      "Sha256": "2a799aa56363a61d75df8afb4229c2e718a395046474470dd7195a0c76a28513"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/BootstrapProfileIsolationTests.cs",
+      "Sha256": "4c8d8fd41ed47379f25a5d7814b62469c56e37c5d42306879998ccde0d1b345e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/CatalogHudTests.cs",
+      "Sha256": "9dd92369071344b4dbdce49e421e2febe68e26226ac671bdb22ac0c81eed9b39"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ConstructionRulesIntegrationTests.cs",
+      "Sha256": "0e6c942568c90c75a419b7f6400326c2bcfff418de8e2196b24c91dceb1d5819"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ContentConfigurationBoundaryIntegrationTests.cs",
+      "Sha256": "905f0ce1da0c4165d1b1b24662812df316eb845b80458911d5a8e50fe395389e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ContentDataOnlyAcceptanceTests.cs",
+      "Sha256": "2cb19f22e48d107ee312f228df29fa9f5ca521a2d1b9e37af5b0a99811313fb8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/DataDrivenProfilePersistenceTests.cs",
+      "Sha256": "dc5b7c3283190ccd18f3e1257d6a7b43f44c0bda16b3850dd403b510d166de19"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/DataDrivenWorkshopUiTests.cs",
+      "Sha256": "dd9cbfbc955397e8d2dde25716af146fd094eb49af955bcf59f8a0dfda9adb2f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/DrawingEditorFeedbackTests.cs",
+      "Sha256": "85530393fd7e412415f24d15a41fc74743b202604e1419219c11194f07a67d7e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/DrawingQualityHudTests.cs",
+      "Sha256": "db99933ba2c8c44bd4c0aa321e723c9a70d55cbe249f264a028f715a7f34afbe"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/DrawingQualityIntegrationTests.cs",
+      "Sha256": "bc9701beac853e82ad2e0ac81ed0f989f4e08075cc65b70c8c3f1647e2c02345"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/EffectsRulesIntegrationTests.cs",
+      "Sha256": "dce8002b68488c15c196f6f925dc1ec2a98c0a4835a7db4224ad13da832a945a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ExpandedCatalogHudTests.cs",
+      "Sha256": "4de055c177e6a5f2bed52aaa3af5d2bf347fec9103493db400009fd2917296c1"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ExpandedMountRenderingTests.cs",
+      "Sha256": "1494f67920bc2b47d5403fd83db6ef086b4ca038856746cb4645dcb9fb1a2ce3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ExpandedTrialHudTests.cs",
+      "Sha256": "900917bc1da23b7b3f5b33d3a3ffed1b025caeab6b583bfefd6e81d2edc8c85e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/FanPersistenceTests.cs",
+      "Sha256": "444f9d40ba1a6e900549d632596fc23e8563f7506893da16a7b4da8988f3ed3b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/FixedStepClockTests.cs",
+      "Sha256": "2f9983db520b290cf667820063e55fbda7441dd6fd787dd119ac0ad89db32104"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/GameBalanceBoundaryIntegrationTests.cs",
+      "Sha256": "b0f7e724f82719b173b7daa2789912268a196ec1e31139ddaea55c39dbb168bc"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/GoldPayoutTests.cs",
+      "Sha256": "b2ddb68d81f64a4de792d6531d884322aa768d44677804d1f280f6da3d5490ff"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/HistoricalProfileTestData.cs",
+      "Sha256": "af6201938b5a2c9d6fb6bfa10792adc834203803d5e4add3d595e1fc109195fc"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MechanicsConfigurationIntegrationTests.cs",
+      "Sha256": "4545134464631cde0fcb6a9f530b34f61109d06591a861823fc7b5c0cb56d136"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MechanicsHudBoundaryTests.cs",
+      "Sha256": "fe6699b32aed646ddf46fe724e6a9b864ff71be20139753f28246681155bcc2f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintHudTests.cs",
+      "Sha256": "9d9cd0fb739c22f5fe399b1fdb7ac50894fac5df16979f74c6d532e343914570"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintPersistenceTests.cs",
+      "Sha256": "9557d252485914ed99ac6d353912f756f70e3f5e0cb66b221a72039eabd68d70"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintProbeIntegrationTests.cs",
+      "Sha256": "1dbaeb968c54efb68ae181a6031e9981d9741b1b4bfef117be34b5f8e78de571"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintRenderingTests.cs",
+      "Sha256": "1e64cb31087e4e40412035d7fbcfbc8ee0a8320f89128c566908cb5c4f8bc324"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/NotebookIntegrationTests.cs",
+      "Sha256": "24ed760b578c6c7bdfce582f541ae3e02fd00202267acaf44869c15b2d38be6c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/PaperDefense.Integration.Tests.asmdef",
+      "Sha256": "2fc8961c3e1395a1e869002aa95267924c755ad6042f4a5bf52b979dc0f152f3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/RailPersistenceTests.cs",
+      "Sha256": "c680f46b7a14a68b6ba7cdae20fb51ef230e07f4aff093e816f0b78489df4ae3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/RailPresentationTests.cs",
+      "Sha256": "0faab56be467a7f8814b33f921931c24534afa0aaeedc10d901a74011be39fed"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/RicochetPersistenceTests.cs",
+      "Sha256": "4bbd3fcf9c66a2c9dd26b1a1442b04a4dd0c691b8d11698e4ab18b0f72489cec"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/RunControllerTests.cs",
+      "Sha256": "d06e2a73699143cf3a491ef30e6531bb0600654e190cb4e9e98ebc6964643d90"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/SharedTowerProductionIntegrationTests.cs",
+      "Sha256": "8e3498308c6d4d083278d40dcbda49497281b9b1ca4417d5b48012865b8c4bcd"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/StaplerPersistenceTests.cs",
+      "Sha256": "78ba5d06d72c6c62479a6dd4f0b48b762b1dc54ae507b362aac8e0ecc311ec3b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/TargetPresetIntegrationTests.cs",
+      "Sha256": "b1ad524d0457efa6707ac919404fa4ee913367445165699ffe17dcd58d0971a3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ToolPriceConsistencyTests.cs",
+      "Sha256": "fe7750b05f38249aa7444e80df2a737a56e60e77e7452ed2d7f6931adf120dc3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/TrialBalanceIntegrationTests.cs",
+      "Sha256": "b279dde69b9f1e519e05c839e662afdb9e6f08a01f68615da8d5ad7b99c2f2a3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopDrawingPersistenceTests.cs",
+      "Sha256": "98770520553ad6cf7a9975efd2a19208f0371803b9bc8ee2c1e331f8e89c5dcd"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopIntegrationTests.cs",
+      "Sha256": "e3e3f5191b4d919a998c57a3241c6b6c60d3affd7e19c34e7a2ac45332df034c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopPersistenceTests.cs",
+      "Sha256": "9245b56645c877439f53130202a3c707f1f3df9fc6a9d628b3c0629c0ee16eac"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopReadabilityTests.cs",
+      "Sha256": "b150830ac1ffba3b1df60c0a584c5ce78436e2acc2b4cada4296130bd7406fd5"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopSaveFailureTests.cs",
+      "Sha256": "aa73350358aa13a76c77d1f8dc38c76ee04f704e24f96569c295adbbdadb39aa"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopStoreTests.cs",
+      "Sha256": "9a04389771eef558046a018e559f1d223d4e7a9a0a99da9cac81a3ec8684a609"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation/BalanceComparisonScenario.cs",
+      "Sha256": "ad4181249d833f6911d4520d966343d8bdaff8262e13adf1814045870c195d69"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation/InkLoopScenario.cs",
+      "Sha256": "e5f75c6d57569fe318f9c74fec942907785f87d92ec02351713d099d288fabc8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation/PaperDefense.Validation.asmdef",
+      "Sha256": "8b5306cf1588ffdf609319fb6a90099f99831dd35096957583792b86e4299caf"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation/PressurePlayerProbe.cs",
+      "Sha256": "d6be33b609aefbbf1d87901f50755e517c6ffcb7599962e0054fa5115de6ae3f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation/PressureScenario.cs",
+      "Sha256": "fff9effe2783f11f2a2cac84f32c08a2c9075b7394354a31c40085a54918d653"
+    },
+    {
+      "Path": "tools/BalanceWorkbook/build.mjs",
+      "Sha256": "4c182fe83c76ff53203505ef93255f8a7fca9ac206989629520b8f7f28ad88ac"
+    },
+    {
+      "Path": "tools/BalanceWorkbook/Build.ps1",
+      "Sha256": "930e6584318d22b59a9996a6a7abd86dce3f1810fa9cdbb8f19a3b243498b942"
+    },
+    {
+      "Path": "tools/Measure-Pressure.ps1",
+      "Sha256": "fe63988ec869a52a2d46deaf2b81dd60793aa8c9b6f7580b5abaa2058aaa2f09"
+    },
+    {
+      "Path": "tools/OriginalCoreValidation/OldBaselineBridge.cs.txt",
+      "Sha256": "05e1efbb6328d6fec1ceecc7157667b1035bbf61433ddf992c3c2eeee108995c"
+    },
+    {
+      "Path": "tools/OriginalCoreValidation/PressureScenario.adaptation.txt",
+      "Sha256": "227bccaf507b65235593c6916152f054459f692110c0256f6e549dacc17530bf"
+    },
+    {
+      "Path": "tools/Reconstruct-OriginalCoreBaseline.ps1",
+      "Sha256": "e0d24564e278ff9c6c919b16a4a4e0cc9d6a3f9b990772dcbf1d9faf40e65f05"
+    },
+    {
+      "Path": "tools/Run-FullAlbumPressure.ps1",
+      "Sha256": "fd5b5adb9b0f67b9c836c6336fb0efc14066df7dc73c32693b0d0551c27b23ed"
+    },
+    {
+      "Path": "tools/Validate-ContentDataOnly.ps1",
+      "Sha256": "e35da61eb3188b5500a90ae0315bff83a36ada60c17b2d87b9693a9fc27f1e29"
+    }
+  ],
+  "Assets": [
+    {
+      "Path": "Assets/PaperDefense.meta",
+      "Sha256": "b08ae8a9e3e5847fd1fc457d7a396a41abdc02b03506829e4841bf61643d7796"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application.meta",
+      "Sha256": "f4a85fca31e78cc9ffebaa5634c41286af314689e0d0f406eb7a1a31d6da5a08"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/AssemblyInfo.cs",
+      "Sha256": "458f6aa1c773253bd160c480692e5076c8f8be9853e12034ba7eaa391f1b80b1"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/AssemblyInfo.cs.meta",
+      "Sha256": "b4fd8d97b9cbc9cec818950bf23dae6479ee37307dba6924aa1f7ee03524ae27"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/BalancePresetAsset.cs",
+      "Sha256": "085b089672196a8cddcab5b2acf688e55a491a0539eeedce74dba663a0d16786"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/BalancePresetAsset.cs.meta",
+      "Sha256": "feee43224f3a01b0859b4d410d120f651a36ecd5b06511d6479c30ae1f1a053c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/ContentAcceptanceManifestAsset.cs",
+      "Sha256": "588212e1c792ee53d82123f8861c2121348caedae21f2c6fb84ff0d9c16c1a3b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/ContentAcceptanceManifestAsset.cs.meta",
+      "Sha256": "d74de7ad5938c56694d216af99795b9bfa9f83988f37c943569a587a14d4cc6f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/ContentAcceptanceProbe.cs",
+      "Sha256": "9913dd5afee44abac5b49556be855a103c30a0af441d55a620759ea548c58ec2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/ContentAcceptanceProbe.cs.meta",
+      "Sha256": "cf89e6fbef4f9ef6dd76ca25f2725d070ae668143900d8aef8e44b3666e5aacf"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/ContentAcceptanceRunner.cs",
+      "Sha256": "4e697ad6ed4b93545eadaca1f2fa67215b0aeb3798e2998dce4d9bd1f0d16931"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/ContentAcceptanceRunner.cs.meta",
+      "Sha256": "69e51512667b67c12ad59ab27733ecaac05361136e5a7cf90ad75b47240617c6"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/ContentDatabaseAsset.cs",
+      "Sha256": "0439618a73e33fc5cf571cc117800b3e2ec46fd655192df8707e428f4503931d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/ContentDatabaseAsset.cs.meta",
+      "Sha256": "f22a2d0df0e44f90b850d44f45c1d95872bc21231edfbaedb44f98cb2a70ef46"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/FixedStepClock.cs",
+      "Sha256": "a9742b653308ebeb72a6bc03abdce1c4fbbeb45e857c9fab9dde32b5fa0f8f92"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/FixedStepClock.cs.meta",
+      "Sha256": "1959fa30028457951f81cb46445f3cbe7e31c25facab7a6619552c07ab8dd925"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/GameBalanceAsset.cs",
+      "Sha256": "5d6468aa449f242edcd41f4792c4622c68bf578c5c9e7acc8aaf8de647be768d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/GameBalanceAsset.cs.meta",
+      "Sha256": "e68660d9335635955712c58fc219e9237749a824161c2c10d6a565a729d590e7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/GlobalBalanceSettings.cs",
+      "Sha256": "e17147a73f3ca54a36cdd9d8b06c6edfa652f7414ed169cbcf9fb4291c180c38"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/GlobalBalanceSettings.cs.meta",
+      "Sha256": "6f81ab3cc87a3a40a8671df2c7c1f052826ef70997d80abd950bd367f0f52f0a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/PaperDefense.Application.asmdef",
+      "Sha256": "d1c8fff3d6d2254d91b5914c2c32a3d4429dbbf97dca2ae8fdacd431c976ec22"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/PaperDefense.Application.asmdef.meta",
+      "Sha256": "78c249e28b725c2dc8b1e649b46d63c751ce0698c60e6c062a56b9c97047b5ff"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/ProfileSaveState.cs",
+      "Sha256": "6f212d0d6498a365209316ea04bd3f942abb97bc9d484900ea3875a152b654d2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/ProfileSaveState.cs.meta",
+      "Sha256": "e85d3111853d8f7e2fd80e0539d867ffa2fde68d00e253e3fd973796acbf93c9"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/RunController.cs",
+      "Sha256": "32419bcf648cac216d9e76fe503972a4bf01d47df568040cefcbcfc3e50eae5a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/RunController.cs.meta",
+      "Sha256": "40d42c0d9dcc4076baadaefd8f85541defdf47a43cb74d42d4009bb44d1c3dbc"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/WorkshopPersistence.cs",
+      "Sha256": "e1dc990369bd5e1587d1b688e5cc35bb1a7f647f61dad38ca570585f03bc3898"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/WorkshopPersistence.cs.meta",
+      "Sha256": "c142b9966f68eb0f53d187ebfb13b79c184bbb418dc353960cdd97952be132eb"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/WorkshopProfileStore.cs",
+      "Sha256": "5a18b588c63935bb9c8091dff8299783940caf6c4e748e90912be5258145d653"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/WorkshopProfileStore.cs.meta",
+      "Sha256": "313fdc376fa1209cb43c863bd62e05102f82ab3ac2d320d9cac4bbcdbbe5077c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/WorkshopReadModel.cs",
+      "Sha256": "186fb73410ae964d5fbbc9d55ae15262b0b600f7ddfe330f34cfe12bfe42a725"
+    },
+    {
+      "Path": "Assets/PaperDefense/Application/WorkshopReadModel.cs.meta",
+      "Sha256": "c89357928338bc52a3261b2c89814af4ea7cca7d89f527d207fddacd297d0367"
+    },
+    {
+      "Path": "Assets/PaperDefense/Configuration.meta",
+      "Sha256": "3b8e9ab76d145260d71195829284e506bb7d4c85195a5f478624382dfe78317c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Configuration/Content.meta",
+      "Sha256": "c4744f38fbe2e640fdf56080ad9c3d3bc0108df0f7ff80457de2fd8cd53dc2c6"
+    },
+    {
+      "Path": "Assets/PaperDefense/Configuration/Content/Historical.asset",
+      "Sha256": "a5af037a1bd9bb6c55470413b64285fcad18a8e011de19a54e53d16564cc6e35"
+    },
+    {
+      "Path": "Assets/PaperDefense/Configuration/Content/Historical.asset.meta",
+      "Sha256": "5eea91737989d8ace8684061688bcfd6af2ae1b584128647832cf5be6558652a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Configuration/Content/NotebookContent.asset",
+      "Sha256": "74637099ad3c860e8000d9c6b98ce883b1bc48046f8c8b95caee817e9c6b3dfc"
+    },
+    {
+      "Path": "Assets/PaperDefense/Configuration/Content/NotebookContent.asset.meta",
+      "Sha256": "83cbf539cf0232b7ed672dce9037d80b97ff789783cf8f6453a3b4bf6a52638a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Configuration/Content/Target.asset",
+      "Sha256": "d5cfb09bfc531f02b13be1c7c087c6e99b07eb9c2e85fb85893bd24241d1c779"
+    },
+    {
+      "Path": "Assets/PaperDefense/Configuration/Content/Target.asset.meta",
+      "Sha256": "77db8fd0d12bcd485c77c485c88d314ccb6d1aa855a18e951da03df5dbb9e278"
+    },
+    {
+      "Path": "Assets/PaperDefense/Configuration/NotebookBalance.asset",
+      "Sha256": "b7b82e842cf917891e4c7b2c95e25cfb7aac7f04aa5828a28e57257edde5cb5b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Configuration/NotebookBalance.asset.meta",
+      "Sha256": "ed749be66d00a34f491a88b297963bdcc46b2282a244568675ad81f2d6d9aa2a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Configuration/TargetNotebookBalance.asset",
+      "Sha256": "324417a7bfe590d030843e43632ac8b86f43fb283eb3198d5156839fa0248916"
+    },
+    {
+      "Path": "Assets/PaperDefense/Configuration/TargetNotebookBalance.asset.meta",
+      "Sha256": "6d3d603f02c71d2e7d3fc8eca0ffe05ebf201ad9d1e7c393b91174123fd1ff0d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core.meta",
+      "Sha256": "656fbc1a772eb40bc619c008888d235e3f260cdf796b57896eb93df505ce4aae"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/AssemblyInfo.cs",
+      "Sha256": "15130caf1ad71f8f356a96e3935b80da93bd48e1fa6beb048be4b17fb3d394d3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/AssemblyInfo.cs.meta",
+      "Sha256": "8b47854d0b2b85d263b621fe29b9db200500f66696400c99242ef242e74fdcb9"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/BalanceValidation.cs",
+      "Sha256": "1b4bdae44ece17e22c4a87649b82c386749831159ac48e9ef68a2afbfee286b8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/BalanceValidation.cs.meta",
+      "Sha256": "af2d7c7bba5d7b52db7c15bc92b94634eef10023ee34ac01595b5fa67f286b2b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/BlotContext.cs",
+      "Sha256": "197a382a1f0ff8f47194a4c054d193533f83a5b60384ea6e39e75eb096bfa920"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/BlotContext.cs.meta",
+      "Sha256": "c918f7aef06392af872f217c103a4f6e1e18569d0b8019ef3a8a5693c02f2a63"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/BlueprintData.cs",
+      "Sha256": "5cc4743b919f3ce81a4f0e47a0f53c43aa1a7fb52f8108df2143ebb3f0fbc097"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/BlueprintData.cs.meta",
+      "Sha256": "19b9b87573b9ad4f4190ca9ce8758df5f6cc65ab500a719c46dfec55f745214b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ColorEffectPayload.cs",
+      "Sha256": "d288df2e209802baf86fe3a88c0642bc8e5970a73ab9b613fa5e7635a867b04b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ColorEffectPayload.cs.meta",
+      "Sha256": "043bbaf92dfc8df1904d477fdb99e3da41be833f139cce8aa708444f83c2610e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ContentCatalog.cs",
+      "Sha256": "d2f4f8fa42922319c06ed901011751fbd10fc7865a0aad3e9bbeee8d0abcad9e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ContentCatalog.cs.meta",
+      "Sha256": "af5be2649b5b0d866d1055700b544ff2c882e3d29818c5ead267995593643914"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ContentCombatProbe.cs",
+      "Sha256": "1568902054886786268e6abd571650f35f6f8cf0ad1bdc46dbf320dbfa2b142e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ContentCombatProbe.cs.meta",
+      "Sha256": "1f1e0f10d8cbe66dd32cc3e1a930d1036f44ab0035fdbcdd52f447a6ab91ac22"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ContentDefinitions.cs",
+      "Sha256": "9757ef07ce269a0403b33569820dd50a68242923e8f73ada874117e3d1ebd622"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ContentDefinitions.cs.meta",
+      "Sha256": "8db223396248caaf503bd4d2de3ce55beec1ec22f4d2d91b102a526bee88bc42"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ContentInputCopy.cs",
+      "Sha256": "9b35c97c9c7ba8605546d07c7ed96eea02188296757cd1694bb4a74e95184bf0"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ContentInputCopy.cs.meta",
+      "Sha256": "77390fdf0158c8cac83d0d612d256daaf5b62fad4b6723578e3d35e43456fd05"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/CorpseBlotSystem.cs",
+      "Sha256": "100c3fd462dd065a8740cf8f4b78f4f0f7d7d71c0c5c5d634ae4a70cfac37b8b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/CorpseBlotSystem.cs.meta",
+      "Sha256": "9f0e586e9ca4401ffd6435a81a6a701eb2265263eba2d3a635e1511282ffed74"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DamageRules.cs",
+      "Sha256": "ddfb85af53b897b036304c25f441808ab96e29a946d7cebbcc1dc116463815e4"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DamageRules.cs.meta",
+      "Sha256": "9b2bc1a921f81ba8d6424a1f2674a695d4630fd9502165968492c393dc8b6b18"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DrawingAssessment.cs",
+      "Sha256": "4797d19d02d74f8ac84ec87f5d0b102bcf436a6a198101e50c4b7de68fcf9bff"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DrawingAssessment.cs.meta",
+      "Sha256": "13f1cefb9188c5627b7af5bb8033d2d9b080b5a2e5ceb7ddcaa7782d921511a5"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DrawingContentDefinitions.cs",
+      "Sha256": "eb666832dc74f3320b95172a6fca377e6df250ec08c3e2327b9fd8c9b674c27b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DrawingContentDefinitions.cs.meta",
+      "Sha256": "a8cb6867402dd7d3a5514ad4058a7d6a875d47bcb3306a7f7f8ae31d243a065f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DrawingEditSession.cs",
+      "Sha256": "c6748bb4e7dd657ddcee946f3a14e35e0b9a8d2924dddf4fe783cbffbec7eb78"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DrawingEditSession.cs.meta",
+      "Sha256": "fc1d38892410216251b475fb88eaa999309f457300f2a64cc779c83d68efa8ad"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DrawingPartPolicy.cs",
+      "Sha256": "9cc27ad3edf45e23b5cc29bf584fb87501b2ea8fb6da53cd72c011e8761fae71"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DrawingPartPolicy.cs.meta",
+      "Sha256": "9b07e1e27d3b2bda6bf68c252fa653cc7d3ec03a2b4cc832763b82fb9ac982b9"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/Drawings.cs",
+      "Sha256": "3e4d0d984a13db753068b7110a4d65cf1005c8c31fdacf6bf473da7b21ec0e56"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/Drawings.cs.meta",
+      "Sha256": "c8dd72d739a30711d14869751cae872f9c9d75e132c77ad0add8b62e25886a50"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DrawingTemplates.cs",
+      "Sha256": "f54bf4148365f7ac157e3f03df39a92f1fc1a444263bde3b654cf251f7521219"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/DrawingTemplates.cs.meta",
+      "Sha256": "795a819ce63e7bcf0d4e37368f17018a8030b7f0e7d8515f32e2080ed781c153"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EffectsRules.cs",
+      "Sha256": "063908ac5ad17133a08b6a48e0678d76d44a5c8f08622e2589cdc8bc919d21f0"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EffectsRules.cs.meta",
+      "Sha256": "a044e6871d39b9799d0ba717ea917966bd0ce9a357ec4415c8a718fe6e8e398d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EnemyCrowdGrid.cs",
+      "Sha256": "fc56c1c30ff18e5e5ab9418ff60a83fde026a0cf3869c7167541c579ffe9414b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EnemyCrowdGrid.cs.meta",
+      "Sha256": "a9238253b9cdce83cd90b88431c7b8552bd1ccaa4781ddd1841f535842ca3f8e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EnemyEffects.cs",
+      "Sha256": "9afad7c416f7fc9581cd5660d9bf74774bf5ce048932dd24a5124c2583aa76db"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EnemyEffects.cs.meta",
+      "Sha256": "50b5094ff069dbd1b14103c0389ff5a4b875bb3a500da3e5f73ffbdedc320f13"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EnemyMechanicsTypes.cs",
+      "Sha256": "07062f33eb858cb2cbad5d180c8050b4b3731e9d2630e5f15db3b2e5aa4d5665"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EnemyMechanicsTypes.cs.meta",
+      "Sha256": "0c1ee42355866daec1907378d4de65640cadef057b4f213c2618c159dc0d2dbf"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EnemyRewardBudget.cs",
+      "Sha256": "50346650ae37271901947d3b516b8a31fb74998f64e1f55471e73e6093bb0cb9"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EnemyRewardBudget.cs.meta",
+      "Sha256": "d4d9ab96d914b13d10590123cff76416dda6a78b2e1ab3d380c7887e40d01793"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EnemySpatialIndex.cs",
+      "Sha256": "7aa36c444164bb16bbb2011775214a64eef2029264638a5c0278279dd08ea70c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/EnemySpatialIndex.cs.meta",
+      "Sha256": "6e43c97d8781307864db151e3fa6d2afb2292d3bf1cc74e91d93d6517cde6840"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/FootprintGeometry.cs",
+      "Sha256": "1f9190c44a050408490fce2703b470c1f8867815f3e9a9f8615f1e2a5158b138"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/FootprintGeometry.cs.meta",
+      "Sha256": "7b89dc28c4dd2a64716b7d7595ad75259a96d6d4fe15948342d51eed010a9729"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameBalance.RuntimeTuning.cs",
+      "Sha256": "845fe1ce5f2102957195c2ff217fdbe17d5218deab2bad5ed618298a6028217f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameBalance.RuntimeTuning.cs.meta",
+      "Sha256": "69227568ce071fe061d8dbca52c4c1c46a539b95c95b74754ffefd58f48ef805"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameBalancePresets.cs",
+      "Sha256": "b7123f41823b7ef2f09d6382fe2f82e530a546ea33b8d08f03b638a7bd31dc20"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameBalancePresets.cs.meta",
+      "Sha256": "bb67982be57931680d4541ab4ce15726338f9ec8bdfc3ad81a742111c16561a7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameSession.Construction.cs",
+      "Sha256": "148a4ce00d18960ebda288c92897fcf816e74a99accc943e13f366e73e4b8fb6"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameSession.Construction.cs.meta",
+      "Sha256": "4bcc68908eb1ce7a5cf913070c42ec51c8f3937dcda5b817202f24c83520c10a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameSession.cs",
+      "Sha256": "3f668a5d61ce603f2a3376b9bfc417a281516ac723924df1a690f8a38f11d9b9"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameSession.cs.meta",
+      "Sha256": "a34c9bd3c09c782e2b967491b07811ba1b57b41002ca4f3e15ae2134b0f5d5b0"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameSession.Enemies.cs",
+      "Sha256": "76991637ccc4d6c1767a18e7c3e6840ce6e7c6aea3f8d3f0a0ec0b29cb099462"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameSession.Enemies.cs.meta",
+      "Sha256": "460fc6023a8dd2f72dfca6ccb2659ad508c90c4ff5bf57f4c784361ee2a75852"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameSession.Objectives.cs",
+      "Sha256": "1278a0dafca06079628559b0705402dffe4f64a8aed367fbf47fba96d5c95cf5"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameSession.Objectives.cs.meta",
+      "Sha256": "b573dcb63fde6a3fe1aff95516547da265579b58707411c27ceb465ca374e64f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameSession.Progression.cs",
+      "Sha256": "b418a1826be223c0db13fdbf0fd6074b84d73222dd868af56e5743e25579a55d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameSession.Progression.cs.meta",
+      "Sha256": "4344fbbfbee6a0c04e84630eb885e916b0c0dd382bbe0bbd7e521a57fd667c2b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameTypes.cs",
+      "Sha256": "2c1dc5dc3839135eeb22ab9ffc7e85c34059e700c5aa30a75bab755c9c8f7c5b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/GameTypes.cs.meta",
+      "Sha256": "280aec6828506dee8b39fb60b5d8a6126805b012c3b53a6e2a2068ba669215f2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/LegacyContentCatalog.cs",
+      "Sha256": "7aacca2429e8a1e4888b6b0870019beded117ecd84fd065ee439876fdb891672"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/LegacyContentCatalog.cs.meta",
+      "Sha256": "2c1f5b894fda96b434fcb89dd07ca6346226809d978b277428f8d77b62e1d41a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/MechanicsConfiguration.cs",
+      "Sha256": "e0204584142111c98461b8cf0b108be10c533ea2c608c1d2290488b3c0514d40"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/MechanicsConfiguration.cs.meta",
+      "Sha256": "2163d8deba27086492180a798d6b20f6d2150b7652ca91a84783f19e03c3fc79"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/MortarFootprint.cs",
+      "Sha256": "7dcdd84c8209a647ee25ea09e847b0ee6c55907bae2815c8072b712bf4f07f93"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/MortarFootprint.cs.meta",
+      "Sha256": "f088ed38a6c68df3db520132956a23d23a672349c3559447790c060e3e5e0fd2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/MortarFootprintProbe.cs",
+      "Sha256": "5c7e3b82dbf959b081d13c2c27a02b7fc48f15aa737090bcdcb2e5a4cb23a942"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/MortarFootprintProbe.cs.meta",
+      "Sha256": "332731b22a59ee73bbfe5cfab086d2848be6b904a6d2d31e8e9ed0a3df98cb8e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/MortarProjectile.cs",
+      "Sha256": "7d7a07b0080b2d4ff499465db9c3f43bcf6dbb627a72d41756c343e6996abd1c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/MortarProjectile.cs.meta",
+      "Sha256": "f18ba06d90ae7f7fa0a93bfaff4448a500d1d7155bd7fc3a3802abcc996a6fce"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/PaperDefense.Core.asmdef",
+      "Sha256": "b007373190829721ec134649f56f7286f46a6b0ecef4bc7448d9dfdc8c31a0ee"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/PaperDefense.Core.asmdef.meta",
+      "Sha256": "f22b0891939c7bc6e2da013331d87f7e199efea765c6d5d37a166299a81cbffb"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/PartCatalog.cs",
+      "Sha256": "8bc96e6d0397518a965ac63cbf22bf445ee71b1804db098f05460f7978e8fca8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/PartCatalog.cs.meta",
+      "Sha256": "6b6d195951b4010f12d7630cf761ebfc8d83a8c77b2314210084109b7ae84a13"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ProfileLimits.cs",
+      "Sha256": "8fb14ccb2038331595bcafd2f94117d23dcb4f46bff18065b4905c4f78ce4e2d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ProfileLimits.cs.meta",
+      "Sha256": "08d8aa91ce53bcd47c34bf47b31f5865e54cd7840336c5c0c5da5b74f7b535bf"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ProgressionRules.cs",
+      "Sha256": "0a5b7e5ebae811a76f1071d456accd258c1f7b08dec247a6afbb7840a4b272bb"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ProgressionRules.cs.meta",
+      "Sha256": "3fb3fd3775cb76c5332bd3191504fd4dc946cee87e107d2680e345ee21c4ac67"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ReadModel.cs",
+      "Sha256": "a36b909f9f91b16b2baf9964a8a13a52e91eee76a4bcfe75de386b04f7132441"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ReadModel.cs.meta",
+      "Sha256": "15c4b0663756cefa974f240cf3e4698c5d8fa0f48b006a7bc10d86fdf75bf7ea"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ResolvedTowerAssembly.cs",
+      "Sha256": "2ad56be6f3d295904e97cba4601820d417ca253115800604b5bd686a43e42bee"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/ResolvedTowerAssembly.cs.meta",
+      "Sha256": "0843d9d4950466c1d76273bc98e1c167e2d6c4b998dcb76b7865cd42ff7433ae"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/RunStatistics.cs",
+      "Sha256": "0b581525fd654163a64aa0e8f6de3ae98663a79a2314063bed940cff3963cde3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/RunStatistics.cs.meta",
+      "Sha256": "95d17a729edb7ab0520b30e526889fe147d0bae9ac401d06fed3425fe9a4f931"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/SimulationEvents.cs",
+      "Sha256": "365f2a7fbae602a7b9b249d60eef6460aff9c6f03eaf2fb44e8a33fd74400b99"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/SimulationEvents.cs.meta",
+      "Sha256": "7916b8aab1176aa75d2dbbb1c278359b7f6b655627c569c7520c55cb0b23fd0d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TargetPresetSettings.cs",
+      "Sha256": "534327c8579ac61e9282545664be75e0ab620699f6df426f7e3669a5fe499563"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TargetPresetSettings.cs.meta",
+      "Sha256": "05fdf2f9b9af78ca2cb231b60474cf7afd8e4b0d4ac171f1bdba2b4c6a5a1e5c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TimedEffectState.cs",
+      "Sha256": "f3efb2511cbc855074fdeee6c340d7bcbbcb5d1a88a3deb0692248c52e998d0f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TimedEffectState.cs.meta",
+      "Sha256": "c24187e27b6a59ae18c8c04ecfdc2f435cf7d9162b35dd45493950b7d616bf53"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TowerBlueprint.cs",
+      "Sha256": "959292ea9f4ae5c42c3d412324198fc0b9181958cba5c25cff8582e8139ea233"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TowerBlueprint.cs.meta",
+      "Sha256": "fa53dc81686399be022c649c00bbd077e1a75d4a06c96c74b0f5a25c7bc06ba6"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TowerColorBudget.cs",
+      "Sha256": "d9e0d85247f5eaf2be69b0a45ebe8792583dd234f03c78415d178a054bb6d39a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TowerColorBudget.cs.meta",
+      "Sha256": "027a9c3e328425f92079eb6c9824cfac39a4af0a86da1e18d2e24d25daf11663"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TowerConstructionRules.cs",
+      "Sha256": "147087f8ba3825e2922d464cd450667dddf96fccb1e4a36fe1de2e45aef36767"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TowerConstructionRules.cs.meta",
+      "Sha256": "05c75e916c971f255752701f01eeca1848d07195cdfb7040fcf1cde088e53ff3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TrialRunner.cs",
+      "Sha256": "94f6a789e11817c80011874e8b84e0de9456f59d5f97157341804846a8307900"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TrialRunner.cs.meta",
+      "Sha256": "5d666be6f2a08fa8cf4aab168b4baaa082c55658f6bbb5e4f7906f5ee9f7fa6a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TrialScenarioDefinition.cs",
+      "Sha256": "6c218fdcc2ea7349fbe5ca9326dd42d60a1db51b7155b669d649d78ab04306de"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/TrialScenarioDefinition.cs.meta",
+      "Sha256": "a74795bb1ddaacf11de8ed2a25368bbef3064f81bad2973d7c98eec1e5c1332b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/WeaponSystem.cs",
+      "Sha256": "36d682da3a5d5bee90d9983167131afba163593623030d5823b705cc2d4fe99e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/WeaponSystem.cs.meta",
+      "Sha256": "5b4951205a91ddfdcc67889e1d0ec1dbe95aaf7d7b372b3eddb94f0d4d615ebf"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/WeightedFlowField.cs",
+      "Sha256": "41238a7deab67f2eaff9504363134521a7aaa14e28127095ca9b98959b6b96a7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/WeightedFlowField.cs.meta",
+      "Sha256": "7c61bc5204c6512706b130c38280e9ddeaf9808def18da9bcc4fcd60a28604b3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/WorkshopProfile.cs",
+      "Sha256": "d510d4718288b08e9803cda6c9bad3bca50c6acdc15836236fba9b2747f2769b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Core/WorkshopProfile.cs.meta",
+      "Sha256": "88527edeccfbca1e9543bed7688718997984759f0bbee34e869f44f080623f6e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor.meta",
+      "Sha256": "05285d570549bb4e53b1e3e30539216e7a86ddc826d8a760b26275ed2fbe09df"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/BalanceWorkbookExport.cs",
+      "Sha256": "a670961c786026a3fcdbceabe21dec91040fd9a96abc68fbe4c1bd6ce3b5b1b7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/BalanceWorkbookExport.cs.meta",
+      "Sha256": "139b9c7feb382744227d40de703e2564eb304700bea99a59d3af8b7ff16f6ea7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/CampaignValidation.cs",
+      "Sha256": "0623746d8fb30b273646072f97435356bdab3a6db0e663b33fb2e31c5d1fe813"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/CampaignValidation.cs.meta",
+      "Sha256": "5df3e84bd3e36d0a93929082ad324c7a7c1893b3463f290b8fc9d0d71639a5ba"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/ContentAcceptanceBuild.cs",
+      "Sha256": "5b4cd385afed941dfa64910a46836cc85bfc1668e3b5bb8e86ed09d87a233023"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/ContentAcceptanceBuild.cs.meta",
+      "Sha256": "8e6ca9f0187116f6cacc4b4bccc4295c8fcdeedf3a099e657607ddeb7966a65b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/ContentDatabaseMigration.cs",
+      "Sha256": "2b33dcfb2baaa3753a1316ab69a58f77294ab14377d76c7d2ff9a8d193c3b584"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/ContentDatabaseMigration.cs.meta",
+      "Sha256": "81d0d63598b1a9f03809d260e4edceb4f3b0691b30814643cf0debb9c12c14d3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/ExpandedCatalogAssetTools.cs",
+      "Sha256": "10f9e4e25c851d43423a2383389a55b678ee262ddd2e0899795c3f454e4c8ab2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/ExpandedCatalogAssetTools.cs.meta",
+      "Sha256": "54eb3f809c9a0ba775fc2c893dfe28e6afb0e08b593113687f5177d032bbd1e6"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/FullLoopValidation.cs",
+      "Sha256": "8804d8eff00d8dfb40f2a5c0aa19134f8f8638c94b7bcbc7ee59f01782ce3d3c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/FullLoopValidation.cs.meta",
+      "Sha256": "8797fbbfbd2074799e6dc3764ba560216bd201b9738ed0330f586174ad445770"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/InkLoopValidation.cs",
+      "Sha256": "33c9b212e64aa71f8b0a4c20cf5225e856ea726c2b8586a7c688d9990f0fd1dc"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/InkLoopValidation.cs.meta",
+      "Sha256": "b8837982ea0594dd512be461cec0eba5ba9837651b64a7f28f81405ecdd7d5ee"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/PaperDefense.Editor.asmdef",
+      "Sha256": "8fb53d07ff0682448d0022094d4735dc34f29fd44184778508ef2b289a716858"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/PaperDefense.Editor.asmdef.meta",
+      "Sha256": "de0d7e1058372a2db9723ad1eceddd25fa9625318632a3c97b4465ff6ba01f5f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/PaperDefenseSetup.cs",
+      "Sha256": "7d1a217eca89b9b49ac6089febed0be339464f2e1e3e8300f68faf0abec9621c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/PaperDefenseSetup.cs.meta",
+      "Sha256": "63799cbab1fe2e6180df256e2e012775eaca8068314bb1e4f5ef968c6b1b3b47"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/PressureValidation.cs",
+      "Sha256": "d13c93cc60f7c853f38682f63e1061783903fc0e05c7252403419e28639579d8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/PressureValidation.cs.meta",
+      "Sha256": "8b09639bdfe639d27f856a0c46028f8cda072fad9af804a1244045fb013bf530"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/RefactorValidation.cs",
+      "Sha256": "2057ae73617936cc09ec117f3ea76f5c0ab4861448906f847199868faa9dfd69"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/RefactorValidation.cs.meta",
+      "Sha256": "dae50d3667c3f3c28387e3fda0e9f662ad600c7b34ef762ad046393a301521c7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/WeaponDefinitionDrawer.cs",
+      "Sha256": "51020e0a81ac5622f186ca4e4fcb7c09ad5ee6366d41d63939b728b9f9755b53"
+    },
+    {
+      "Path": "Assets/PaperDefense/Editor/WeaponDefinitionDrawer.cs.meta",
+      "Sha256": "cf4b1c94e1fab356409cf8c15df76f9407e9e6574e8b7fdcbedcc35435ec02f5"
+    },
+    {
+      "Path": "Assets/PaperDefense/Prefabs.meta",
+      "Sha256": "554a1a6a85e98680abd2fd5d477ac29b7e4e429f1655ec1df99509ff8d0813f0"
+    },
+    {
+      "Path": "Assets/PaperDefense/Prefabs/NotebookGame.prefab",
+      "Sha256": "f53126003c783723c1e03b47e4d235e7099c3815a59b6804836e77594e2c655a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Prefabs/NotebookGame.prefab.meta",
+      "Sha256": "5a1ea2017710649c787c6670732b5e74cc4ad2a6880af4183cbbe9d510a029a8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation.meta",
+      "Sha256": "1c5ca4edd0d6c6600ea07e01867e47b15bcc9003bbced81a46ef9a38d244480b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Input.meta",
+      "Sha256": "ca38788688b4821d9bcc936a31693d600989fb23db51d3f7497fb40b29e5cbed"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Input/DrawingInput.cs",
+      "Sha256": "1ff1c95f3f76e2af8a925e49bea0aaf5839bb66a572a2007353f84d3e285adfb"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Input/DrawingInput.cs.meta",
+      "Sha256": "3bc3bea57617ffab0c9cab16fe3ec87eb6c3d823ce7cb2a98a31a0d62a3e5af6"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/PaperDefense.Presentation.asmdef",
+      "Sha256": "06284ea74543fbf3260fca65cca0b019cdb6f506176bf5aaf8702cc10c2f52cd"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/PaperDefense.Presentation.asmdef.meta",
+      "Sha256": "e0b56354241ff65727777821a35f0fdefb2a85c6a960cfa963b4ed5cb47d2266"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/PaperDefenseBootstrap.cs",
+      "Sha256": "796be4befa0d23d15cf1aa1224fe902cd2ac662a09d54160c392dbda5ba3426f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/PaperDefenseBootstrap.cs.meta",
+      "Sha256": "a58afb7aee83d15073eec7062c76258b8d41777bc70073400b720e8b6997f66a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering.meta",
+      "Sha256": "7a07b961c0815b5b490b7630d311061b5e72579a5c7ee9c850b3e548a5789d9e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/AuthoredGeometryCache.cs",
+      "Sha256": "17d206d6247e0e140840b902bf4c2bf0880cc470da2bdb85a919ba10cbe26ef4"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/AuthoredGeometryCache.cs.meta",
+      "Sha256": "8d458cb7a2859b195516aaec990177dd7aa349682e599119e76c3a9382f02594"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/DoodleGlyphs.cs",
+      "Sha256": "da0d88a9d695fb1d688713f5aedec4f44bcd6f317659b2431ebb041fbfa92491"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/DoodleGlyphs.cs.meta",
+      "Sha256": "e752569162c37f99ef6d730ea563c7806871c85cf7795d27b90b84b761790916"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/MeshPen.cs",
+      "Sha256": "8e47132981e0fc9ac1fc8afed509ef1ea7e2fe1f9d2cf53fda730164ad39d018"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/MeshPen.cs.meta",
+      "Sha256": "795c2bf3cf40df14b2d7a57f2991c60da711e3244d74c81619f14233192a92a9"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/NotebookWorldView.cs",
+      "Sha256": "b4ab1e6d85e60533042762dde46e16104334a8324b9cb783e33c10d8a5f4b52d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/NotebookWorldView.cs.meta",
+      "Sha256": "9c3f00c5eb63112d785443d223524b0b55a65ef2fe26f3c7cb8bcd685cb40eed"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/ReferenceDrawingCache.cs",
+      "Sha256": "bfb4aa5d2448a51630f360a6234820b8cef86873695eaee730129d63bf1de692"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/ReferenceDrawingCache.cs.meta",
+      "Sha256": "a88ac708f9511979674f832de727aa387be949dcea8dd2688e32586ea0629bb0"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/Resources.meta",
+      "Sha256": "97180df8dba6d3f01d23251b3143d2d32a47f4773c744825ba5efc8b06a168fa"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/Resources/NotebookInk.shader",
+      "Sha256": "fdec8d6e480c835f0b5012bbf21a8d040fe8397e8e55daaf7318e9f272906f82"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/Rendering/Resources/NotebookInk.shader.meta",
+      "Sha256": "1848e28e0f739bec6ddf0b908d233f0d0a19ce27ff27a9ddbef01afc65139dd9"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI.meta",
+      "Sha256": "06ab25115f42a90006069adad44626019d6db5811a4a0d80ded051f0e6b617af"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/CatalogScrollList.cs",
+      "Sha256": "8b309ba67a1bdebc82ba59e04bd7ef4c345f1851e33813cdc6aeb48cc7e7975c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/CatalogScrollList.cs.meta",
+      "Sha256": "1e05b92e31cc3d4c19e77a618a0c62da769bc5312966c1970b779402acf0673c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/DrawingEditorPanel.cs",
+      "Sha256": "28a05a8e638c2f33a5ea0b4431dbeafed8a050e4f071eae25da4a1d370959f56"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/DrawingEditorPanel.cs.meta",
+      "Sha256": "5fd26620f49929e90a0202e0826cb96b93d5f39730f2e1e53a13b1bab20f7470"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/FootprintProbeSketch.cs",
+      "Sha256": "7a58dc5a3e445aa9e2a51f86a76bc395024e42b3d1f54c79494c708e15955a6f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/FootprintProbeSketch.cs.meta",
+      "Sha256": "bd6f553a55d9384a584eb88658eefcc98b2141eaa02d367b177b7da7c762c069"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/MortarFootprintPanel.cs",
+      "Sha256": "f91a3e5f4b35821519486186bdee7f7283344ecdcdf1e459a5ee337a5071aa91"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/MortarFootprintPanel.cs.meta",
+      "Sha256": "b78e65f41900af9b5efe7b02178444bf93d1f1235eb5f7dddbffd5cd91de208c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/NotebookHud.cs",
+      "Sha256": "bbb70df672fa4b5720e6b1aadefb4491902261677ef30d86892d9885209c229d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/NotebookHud.cs.meta",
+      "Sha256": "1054412380ae44ec6d17b45c6fd8d2603244d78d0efbd987ce1feeddae9f30ac"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/WorkshopHud.cs",
+      "Sha256": "9fea6574f56cc7e99251ddcaa21e295723c23b728b2e3bae0f33fcd05ec89a67"
+    },
+    {
+      "Path": "Assets/PaperDefense/Presentation/UI/WorkshopHud.cs.meta",
+      "Sha256": "79972e757a9fa7a7cbeffdb641f5dc947c36c2a44c5ff5f2738e746b4a675ef0"
+    },
+    {
+      "Path": "Assets/PaperDefense/Resources.meta",
+      "Sha256": "579be3f493a145cce7b1782ebfa56b61394509a01d606c5c629b21654706066d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Resources/NotebookHand.ttf",
+      "Sha256": "fc7fbc3fb456a363f1f719b0ec62ae093c78124bb6da046006ae7e217a6b8575"
+    },
+    {
+      "Path": "Assets/PaperDefense/Resources/NotebookHand.ttf.meta",
+      "Sha256": "9f7ce46e4567eb01dc736bc5fc9788bca7350f46c74310790eb59306d490fb4d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Scenes.meta",
+      "Sha256": "8d493b01a205a2bde0876b3d204a107e44c5f9731d957ddfbcf15289097944f4"
+    },
+    {
+      "Path": "Assets/PaperDefense/Scenes/PaperDefense.unity",
+      "Sha256": "d26bdc7ff4c1a514c732158d2337101c158b1467f9d7eb193ade943a965df5b4"
+    },
+    {
+      "Path": "Assets/PaperDefense/Scenes/PaperDefense.unity.meta",
+      "Sha256": "4509d3e189109313da72c7a0a7e7e69f3f8ba75c5bc794d97669ed1d7fac6a74"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests.meta",
+      "Sha256": "5ae225a41bc2958dcb1807e0441eec87ac191144636e505cbd028a67cd975e73"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode.meta",
+      "Sha256": "153070306210a8ed1f3a7e20b90e3b7b2d933af44ebc8e3558311c036ab5d14e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/BalanceBoundaryTests.cs",
+      "Sha256": "ba2da54e5fcb62992b8256445ed36e49a3b52623dd9b0e293bcc7c55cfc5f3b4"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/BalanceBoundaryTests.cs.meta",
+      "Sha256": "ec10de7c96ac41f44b1a50cbb9e2736710527b2e2b334d55dffe46802db01565"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/BlotterCatalogTests.cs",
+      "Sha256": "abcb464abd841c39cc9d5021c55677a0d3da783a396e9df2c94211cea49ed1b0"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/BlotterCatalogTests.cs.meta",
+      "Sha256": "dfc0776869034e3719bfdcc8727b304be30f927afaee31d0b24afd9f678ed5ef"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/BlotterTrialTests.cs",
+      "Sha256": "279d32fe54765231f1ebd521f9e065c87608d141d1c5227fdd619200d0c49f6c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/BlotterTrialTests.cs.meta",
+      "Sha256": "af3178ddd76a523bfe3943d16b861d16e198bcfef2e1ee2dc93c57cd2d777de1"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/BlotterWeaponTests.cs",
+      "Sha256": "b1cc13c09bbb4f851394657e04764cb416de3b07a5cdad24ead78592e662b909"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/BlotterWeaponTests.cs.meta",
+      "Sha256": "dbb23498556e4e86365730940326d14095fd668d52e1fffb7e9fd8c84f5e0bd4"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/CombatContractTests.cs",
+      "Sha256": "6dc9414071c031d6ff530d0ee9fe633511580774e3d695672b1051882aff3f70"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/CombatContractTests.cs.meta",
+      "Sha256": "6f85193cc33a02da3fe94133e90dfb397826559791d20c67d34476b3927564fb"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/ConstructionRulesTests.cs",
+      "Sha256": "6eac653203d0e2a5b55995a4a9c7a565af18151c06e70d80393bf4ef0e9321c7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/ConstructionRulesTests.cs.meta",
+      "Sha256": "9d8449e66f2c3e274515f452125bf8a199a6e838ffccfe18f3f5f3d71e0540ee"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DataDrawingBindingTests.cs",
+      "Sha256": "fa845596be2c85b5c8ce6e022bf3e7b90ae700545501fce15a48dd7b7b59ed3b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DataDrawingBindingTests.cs.meta",
+      "Sha256": "4f94b2b6dc40c1bee0acbf73a10d54526d492f0ccfed2693b593007c7d92e31a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DataDrivenCombatTests.cs",
+      "Sha256": "0c17352d0535e391a6f547afc4ebec05c23045d1d7389de7459007761f51c105"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DataDrivenCombatTests.cs.meta",
+      "Sha256": "b9094ac3b3bc1a9c0ff513f9cc876a8091e2651279d72e0d7dfa26ec4302210e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DataDrivenProfileTests.cs",
+      "Sha256": "858c2fc337748b108598fad86ea1fd8277215fad009c06419af9b50929c39cba"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DataDrivenProfileTests.cs.meta",
+      "Sha256": "6bf1c4141c838bccbd8f7e26758c3e4342fabcb18a4a30ab0bd6809111e6049e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DefenseStatusTests.cs",
+      "Sha256": "df7728236839a1beedb5f2af362571899f6d90258188b211bdabde694ec21fab"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DefenseStatusTests.cs.meta",
+      "Sha256": "16e58d0e1c6893fd09913e727205fb2923a96ab92c43d63ef2985d4877b5aa5c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DrawingAssessmentTests.cs",
+      "Sha256": "3e819ee9235be7a4d774a09ada4305086dee0997be41d9d00bdd20e395dc2a33"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DrawingAssessmentTests.cs.meta",
+      "Sha256": "f4bb0fc1d4185c3d78a1b59028a1b02639954e7dd7cd47d9cd96f45c145662e6"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DrawingCombatQualityTests.cs",
+      "Sha256": "b7821fde24e1427015f6726c6b76cbe0e85a591d7cce4481479d2877bd10f16d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DrawingCombatQualityTests.cs.meta",
+      "Sha256": "94b18fcc80901ff17b0d7115753ac9b85a733eb8f6658211b56edb5429b41db0"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DrawingPolicyContractTests.cs",
+      "Sha256": "09aba3e827b8728293343560ae42fe447acfa4ca7cdd082641020ee7dcf628e2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DrawingPolicyContractTests.cs.meta",
+      "Sha256": "7bcea5513f008db5cb7508a3bbfe792df0130b0b35aa76f25037963e5402b7d4"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DrawingTests.cs",
+      "Sha256": "8ac2c1f2eb367c3e0008a9901a0a33ac7bc4f83ae3158b7e05fedd4e5ec89c0b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/DrawingTests.cs.meta",
+      "Sha256": "5e1d19352ba4673e996272c65a2787775cd50afb69b8c87009b89a30049bb3f6"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/EffectsRulesTests.cs",
+      "Sha256": "7fa89694b06988550b01b7aca4a21b08654772d21c89378662ebaca4798a580c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/EffectsRulesTests.cs.meta",
+      "Sha256": "0cc59cdfc54efe05b38dfa046548019d6047aa358d5eaaeca63b6aeaf677a721"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/EnemyMechanicsTests.cs",
+      "Sha256": "438a33c604d69c93f377e82688a9d869f71416df14c2d30ceb6c7664fc8a3eac"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/EnemyMechanicsTests.cs.meta",
+      "Sha256": "2a8f69d607cb62577c5377c6598a62e566b0890f002d6d94c3793cc1f8372445"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/ExtendedDrawingCatalogTests.cs",
+      "Sha256": "cf880253c2282a89ef31f618ffa3021159d1c82e52f0b554a2144ab5178ec148"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/ExtendedDrawingCatalogTests.cs.meta",
+      "Sha256": "98cf3ada488918c43e456ef94cd5c59305cfeefd87c6b59db5ce7e67976127bd"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/FanCatalogTests.cs",
+      "Sha256": "b009aa678194460f6c5d61cbbe132c0dad25263b364cd5e3247754bbe632279c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/FanCatalogTests.cs.meta",
+      "Sha256": "a2f9f56f00d1f594d0e4efcf5925802e92a65cd6c2359a8165288dd4fd30d395"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/FanWeaponTests.cs",
+      "Sha256": "4dffc558be31470686b33a45f47e7253242c71b6050758f5ac72db80ff4ae3a8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/FanWeaponTests.cs.meta",
+      "Sha256": "52da0839f38f636cd2ee376739d4ba976a2b023b8d4affed94267265762f41b8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/FiniteEconomyTests.cs",
+      "Sha256": "f2f7e2e6dc657277313237e0c713ae2730b94ce9093878ae754ebe4036bd95c4"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/FiniteEconomyTests.cs.meta",
+      "Sha256": "78066f9f328722155168165e9f94f5afb0d7cfb039b3c2be62c388e0f8c52765"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/GameSessionTests.cs",
+      "Sha256": "725cf9e5f39c3dc09523b0f4b42f4fdd97f308372a167e54149cc715dbe984d2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/GameSessionTests.cs.meta",
+      "Sha256": "d1f6a7c8786bab57a0281ef4e3d95f3ab3aa3bb9a2230a352ae3ca30fb85a1a7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/HistoricalCatalogTestData.cs",
+      "Sha256": "90cd979a0c91b995a15844c9d7ceaf0233cc1e51ee064fddfe1b4e5c7e5bc503"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/HistoricalCatalogTestData.cs.meta",
+      "Sha256": "95887fb36e5420cea122400dc6ff45f7a4772c238ce296d44b986fe231a6459d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/IndependentMountAimTests.cs",
+      "Sha256": "368600d555b2e3a67eb65d01c43e1c6b3e550c6ca4f436520c84ff3162c22810"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/IndependentMountAimTests.cs.meta",
+      "Sha256": "24ab807c861f4660ef4e55dcc10edf941093c894f24745e30f8253db931a73b8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/InkLoopReportTests.cs",
+      "Sha256": "03fe065eec5c22656b3fc5d75e17e07234d7049288687795bfcf93cf9324232a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/InkLoopReportTests.cs.meta",
+      "Sha256": "8c2cdfdabed623cfef24ea24a3ec5f0aa3349c02ffef3b9927b066e8944881bf"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/InkLoopTests.cs",
+      "Sha256": "f8bc9471199cc42510a2727f655ce1b66035a07f434e46424aee2ce3fb171eff"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/InkLoopTests.cs.meta",
+      "Sha256": "9dabb36c19914e00e65d649fd9939ffdbf3c5c4a8b05bd2d11421a4dba866c78"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MechanicsConfigurationTests.cs",
+      "Sha256": "fc8e2f6f29ff033a14a9c4b668c2551a65e8cc2af906be1ef2dad324e098bd3b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MechanicsConfigurationTests.cs.meta",
+      "Sha256": "7b05a004055fefd347080a572a4836aea9e7adf69060caf55f2f74c624d4be31"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MechanicsFallbackTests.cs",
+      "Sha256": "e563599254e377f0643ca9d91ffba5654d8cedf9cc253d69e5e1d16a232a1c00"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MechanicsFallbackTests.cs.meta",
+      "Sha256": "f446a2efa7597222291f7ed2e5681dc432ad900ff71584ac7d6ed3d20ab1c9d7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MortarFootprintBlueprintTests.cs",
+      "Sha256": "10bced861b8c166d71f84d044e5e78e41f13f7dfae36a545a5748f3506358876"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MortarFootprintBlueprintTests.cs.meta",
+      "Sha256": "15b9208b8739cf1ee8322b5528e0eee5a8f4b66ab2834a49b56caf600e433b94"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MortarFootprintCombatTests.cs",
+      "Sha256": "a992f3b9ea692d82fc7b9cd37aac2e0a79030f5902804e2fd9e48506a604a7a3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MortarFootprintCombatTests.cs.meta",
+      "Sha256": "2e7a0573d04372a1986f695b1a693731a8808add259c5714491a63999baadf38"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MortarFootprintProbeTests.cs",
+      "Sha256": "72024605f45713b2cbf341ab79075e7f0cd8dce07129090af22d23fc1d723e50"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MortarFootprintProbeTests.cs.meta",
+      "Sha256": "0722bcddba59aba70657fb592b74f0347998dca53411b3619f3023cca06ce750"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MountReadinessTests.cs",
+      "Sha256": "8395b705f430c7e70766b8db9d2e9cd7d3206bfbf388925195348f0f8e610de4"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/MountReadinessTests.cs.meta",
+      "Sha256": "8ff1280c53d912043a78b5e5c768dd4d7496520cb8f3285b1f5f8245358a1eaa"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/NavigationTests.cs",
+      "Sha256": "5b6918b3531816836a7124294ba2342b18b0bcc7ac4792c8b64ede5a28cce22a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/NavigationTests.cs.meta",
+      "Sha256": "eecea2d7e937d733813e6f0dc33d249769c311a961d55e783f3be4a28652ce3f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/PaperDefense.Core.Tests.asmdef",
+      "Sha256": "16fe12edcdde4d031e0a355f7a52e2719af623c7fd46adf58111e565d163c5a5"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/PaperDefense.Core.Tests.asmdef.meta",
+      "Sha256": "7a4feea6c2da9d4a1bd549755bb452e10a61a5e6ffea081373731d8d64fbb2cb"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/PartCatalogCharacterizationTests.cs",
+      "Sha256": "2834c5890cfed514faea63566e9cfa8dfe5c57a6d654ba5d96240b42b1a1e442"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/PartCatalogCharacterizationTests.cs.meta",
+      "Sha256": "bbeda18960e304e55ff318b0f2791b12c6133e18e2618bcf6a21cdf5cfec8c73"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/ProgressionRulesTests.cs",
+      "Sha256": "4776f3a42b5d00b9dca221d9e7f431d97adca3a2330c3d7d2e618c145fd4b760"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/ProgressionRulesTests.cs.meta",
+      "Sha256": "09e5268998b0906f4a145f426921b44309f042066b98bd3649a6619feb286183"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/RailCatalogTests.cs",
+      "Sha256": "6e29dea87a62d880c0e4cade47531b58d0423e5f4b5bdd2e8567b2f89ac5e3be"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/RailCatalogTests.cs.meta",
+      "Sha256": "17b40f254abd70d2b73417e875a5ef568ab8fd4ae18d1bfbfada402e8c69b92e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/RailDrawingTests.cs",
+      "Sha256": "327f7dc1146b6ecf77befce5bfb218eb5a5484c2e113db2b3f6a62379c27c788"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/RailDrawingTests.cs.meta",
+      "Sha256": "50c285d1190ee5d74d0226cd4831dec6fef837bcd6ca8c6a9198ed9584eb13e2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/RailWeaponTests.cs",
+      "Sha256": "d6823744a7a544ccfcae60fd045b8fc7a9ed9a339806fd3d2719135ccb2337b7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/RailWeaponTests.cs.meta",
+      "Sha256": "6dc00651541a3045523eeffe3b6c85ba420e019b4e78f706d0329ac05acf7ac7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/RicochetCatalogTests.cs",
+      "Sha256": "a7e8b7514719c9da91e3dc774c439a07f230dd7f43e6bcf63058a773a61c1f98"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/RicochetCatalogTests.cs.meta",
+      "Sha256": "174b382fcb58c8967f439a0b98793f2cf3e69c3777995cb649dbd02eace67f5f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/RicochetWeaponTests.cs",
+      "Sha256": "4c1d68386a01e1be9d74367739380204955460d541aefd5fa0b462d009fb2760"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/RicochetWeaponTests.cs.meta",
+      "Sha256": "af19e71280d8dd06c7ea5f6eca38f19e5cc08555648c29bfe35867ed136dbf2a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/SharedTowerProductionTests.cs",
+      "Sha256": "e8a57c2f4393e2f86fdd5c5ce191f192fb8fdcd055f1a9aee998b651752cab3f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/SharedTowerProductionTests.cs.meta",
+      "Sha256": "644f9f16de8f4d6f4150fca02cfe5a9b77aa564377ecce53595c86f0d3a855f7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/StaplerCatalogTests.cs",
+      "Sha256": "eedf7c676ceaceff47940cf46401254708fcdf5cd8f98aca321e3d9fdc83670f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/StaplerCatalogTests.cs.meta",
+      "Sha256": "073a14ef88471caf82ebff0fba90520f4cfd9e591e1afcf46a33f9c54c958101"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/StaplerWeaponTests.cs",
+      "Sha256": "024c8720e7fd27a09b29212fa44b355d0921ef9f4b9d718f07978ca5c84b733f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/StaplerWeaponTests.cs.meta",
+      "Sha256": "26d462b29836350303f5d5a20185c3223e08de7ce2e20f1d05a074488d58cf2a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/TargetPresetTests.cs",
+      "Sha256": "6eba1fa71808dcf70d6eaa942e377402227d6cf3d644bb71f8f777d2714f0a66"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/TargetPresetTests.cs.meta",
+      "Sha256": "7980d69083262c6ea61650117685b2133f8547ab21783c98d160080ce36cdd67"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/TrialBalanceTests.cs",
+      "Sha256": "8d6ee4b86b7ad6010a825dd35d2f139bcb79a0045045ef51a5f9d65e8b2bf3db"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/TrialBalanceTests.cs.meta",
+      "Sha256": "fd294d6c06805338c10dbf66afa78c4f87ef5b2bd7c9f7f14bee8d9efc935bb7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/TrialCounterfireDefenseTests.cs",
+      "Sha256": "ca38281d5b4a24fba3260c45e13efa3dde399db1d2cb3876dacbe37c6f62ef3b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/TrialCounterfireDefenseTests.cs.meta",
+      "Sha256": "6162662568e51292ed265d2c47a958ed70269354c9d6db6931a1d8b8ab428bc0"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/TrialTests.cs",
+      "Sha256": "c8cada89bde3a37f0caff8cdca3fd089e5dd9a6a7308f8b6acd89ffa74685575"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/TrialTests.cs.meta",
+      "Sha256": "f5af95baf7d551cb6b72f3f06e4a00a73e27567c361b933254b1e6a7e198ed34"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/WeaponPublicationContractTests.cs",
+      "Sha256": "9d39e9f90cc62f7d0e5550efce2d82d02a155d974aee66eeb06eac2e299fff76"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/WeaponPublicationContractTests.cs.meta",
+      "Sha256": "4aa89a030a7658c8d8bf7c36c1bb6d085ecfb09ebc1bdf30ea6a4457342a3c5a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/WellPlacementDefinitionTests.cs",
+      "Sha256": "f3f932885bf73bafe195ab82ccc8620be92d55fd681c974dd2f129d8b9e61acf"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/WellPlacementDefinitionTests.cs.meta",
+      "Sha256": "a5526bcfa245d7a3e7ac8ca747dc915d657c5ad66f2a502cbb2fef90e042bf8c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/WorkshopTests.cs",
+      "Sha256": "ca475fb58439eb48d705555056caf765e6566d8e0afed16b1b5e02c19f80980f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/EditMode/WorkshopTests.cs.meta",
+      "Sha256": "fd089a4fa715d7619f38e6d2bb2ab18e4534f9849b3246d69fef11cee258cdb6"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/Editor.meta",
+      "Sha256": "6a8a1bf01ad093fa258093982a2d15d799a759cb2fb61c8e940a402eeaefb3ef"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/Editor/ContentAssetBoundaryTests.cs",
+      "Sha256": "9391a89dbb05e3c18305edb38e1eb91c30af3a2abde097002ca573ac3da96705"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/Editor/ContentAssetBoundaryTests.cs.meta",
+      "Sha256": "12772c5b4fea90e6d8b2e042c8892a3d55325b2d7fc9491bcb757a0d7652a9b7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/Editor/ExpandedCatalogAssetTests.cs",
+      "Sha256": "bef55a3d28e357fd91a6364a791ff2483961133066ca2708d739ed2609acd273"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/Editor/ExpandedCatalogAssetTests.cs.meta",
+      "Sha256": "c472e5759afd10a592a04c31a76c78c0d8d06d63fa65f63c211c12c1c265e28d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/Editor/PaperDefense.Editor.Tests.asmdef",
+      "Sha256": "d6a8098bb45bdfb283419efd36fdfc47523cf32da3b14bb50df6d7920909a4fa"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/Editor/PaperDefense.Editor.Tests.asmdef.meta",
+      "Sha256": "90c530643c174ceb2cb1929693d985575e25ee7f746eb875781f4d263c3b49e9"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode.meta",
+      "Sha256": "65316a1307626529359061813ebade6057b183a3ec67887a0aab54c6dcc63f5b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/AuthoredRenderingTests.cs",
+      "Sha256": "4705fc3ad62451a31174dc38f0e909a7f540fba3b5fbef01fcb0489e6f1604d7"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/AuthoredRenderingTests.cs.meta",
+      "Sha256": "951a06ea83d7d984c2f2275fb2427dcaf9fbbbf438dc506f305c1af1e1a9247c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/AuthoredWorkshopTests.cs",
+      "Sha256": "7fba64932361800748f3379ff81628636785b85d604c5606cdc602f1c293dae2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/AuthoredWorkshopTests.cs.meta",
+      "Sha256": "ffc9d620d78bc2eb8d49a48bcd6fcc10b36c4826296b39acfa7f9d5fad0f74cd"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/BlotterPersistenceTests.cs",
+      "Sha256": "2a799aa56363a61d75df8afb4229c2e718a395046474470dd7195a0c76a28513"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/BlotterPersistenceTests.cs.meta",
+      "Sha256": "b45805771a4467ec8ba0e8aa7a08b317d88153533a25f7060f70e5d65526bdb0"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/BootstrapProfileIsolationTests.cs",
+      "Sha256": "4c8d8fd41ed47379f25a5d7814b62469c56e37c5d42306879998ccde0d1b345e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/BootstrapProfileIsolationTests.cs.meta",
+      "Sha256": "683c86a0b395f4fd65c46368ff19927c05a312fa68f3bffe1c0718da0c78743f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/CatalogHudTests.cs",
+      "Sha256": "9dd92369071344b4dbdce49e421e2febe68e26226ac671bdb22ac0c81eed9b39"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/CatalogHudTests.cs.meta",
+      "Sha256": "9b46cea5d91797b2c07179114e2c83ec67f10c1b30ccbee61c316b42b2708d9e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ConstructionRulesIntegrationTests.cs",
+      "Sha256": "0e6c942568c90c75a419b7f6400326c2bcfff418de8e2196b24c91dceb1d5819"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ConstructionRulesIntegrationTests.cs.meta",
+      "Sha256": "01d05b407857a62ecda10fd5aaecdc2830949b2a8b58545e493d0a02887d5b9a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ContentConfigurationBoundaryIntegrationTests.cs",
+      "Sha256": "905f0ce1da0c4165d1b1b24662812df316eb845b80458911d5a8e50fe395389e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ContentConfigurationBoundaryIntegrationTests.cs.meta",
+      "Sha256": "ecbb470c48dcab11dbfb315d4cba0fec975975030b15b8719ebeb834a619896a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ContentDataOnlyAcceptanceTests.cs",
+      "Sha256": "2cb19f22e48d107ee312f228df29fa9f5ca521a2d1b9e37af5b0a99811313fb8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ContentDataOnlyAcceptanceTests.cs.meta",
+      "Sha256": "3b01af991bc6adf3cfcbc3a5ae88113d269a2419c4e3811973ce01589665f452"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/DataDrivenProfilePersistenceTests.cs",
+      "Sha256": "dc5b7c3283190ccd18f3e1257d6a7b43f44c0bda16b3850dd403b510d166de19"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/DataDrivenProfilePersistenceTests.cs.meta",
+      "Sha256": "621061dfe4b2955d15452f9d984ced835b021ba94bbb2433d47a90556f895446"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/DataDrivenWorkshopUiTests.cs",
+      "Sha256": "dd9cbfbc955397e8d2dde25716af146fd094eb49af955bcf59f8a0dfda9adb2f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/DataDrivenWorkshopUiTests.cs.meta",
+      "Sha256": "9fa4ce70287366dacef8eef303b7266af10957b34b94523eafad06ba542e0e88"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/DrawingEditorFeedbackTests.cs",
+      "Sha256": "85530393fd7e412415f24d15a41fc74743b202604e1419219c11194f07a67d7e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/DrawingEditorFeedbackTests.cs.meta",
+      "Sha256": "133550bd4a78598673e1499daefa26c7a660e1b06d076aed112d23e41ec05bb5"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/DrawingQualityHudTests.cs",
+      "Sha256": "db99933ba2c8c44bd4c0aa321e723c9a70d55cbe249f264a028f715a7f34afbe"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/DrawingQualityHudTests.cs.meta",
+      "Sha256": "f6cde63d6511c7f1cc5295f71e92e5bcfd5e8908a4b92fbf1f6710e2614f1d72"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/DrawingQualityIntegrationTests.cs",
+      "Sha256": "bc9701beac853e82ad2e0ac81ed0f989f4e08075cc65b70c8c3f1647e2c02345"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/DrawingQualityIntegrationTests.cs.meta",
+      "Sha256": "719eaf79d53beafe612fb7eb8a78b99f91d836998b76e2d043ac57d34612a3cb"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/EffectsRulesIntegrationTests.cs",
+      "Sha256": "dce8002b68488c15c196f6f925dc1ec2a98c0a4835a7db4224ad13da832a945a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/EffectsRulesIntegrationTests.cs.meta",
+      "Sha256": "7d26947c5c046d733f56fd57d0c0a24b986ef7fa2aec6bfe40e652d8e11e8e41"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ExpandedCatalogHudTests.cs",
+      "Sha256": "4de055c177e6a5f2bed52aaa3af5d2bf347fec9103493db400009fd2917296c1"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ExpandedCatalogHudTests.cs.meta",
+      "Sha256": "cf5f9185df7c4e539e05a31d61051a314c2aa7eb39c0d4aeefc743d88cc6dc7a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ExpandedMountRenderingTests.cs",
+      "Sha256": "1494f67920bc2b47d5403fd83db6ef086b4ca038856746cb4645dcb9fb1a2ce3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ExpandedMountRenderingTests.cs.meta",
+      "Sha256": "05a668c933f3104fec0f5f55f7f18df5abec3bb291ffc9ef4eba1b3103baff95"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ExpandedTrialHudTests.cs",
+      "Sha256": "900917bc1da23b7b3f5b33d3a3ffed1b025caeab6b583bfefd6e81d2edc8c85e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ExpandedTrialHudTests.cs.meta",
+      "Sha256": "f5b13d6e2326fdc90c1364886a959a3a2ae62a21d4651d8f3ac0df1133ddf26b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/FanPersistenceTests.cs",
+      "Sha256": "444f9d40ba1a6e900549d632596fc23e8563f7506893da16a7b4da8988f3ed3b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/FanPersistenceTests.cs.meta",
+      "Sha256": "c32ff271c346f441aa25066f1560680d5329507a15ea021d767916b38af1f199"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/FixedStepClockTests.cs",
+      "Sha256": "2f9983db520b290cf667820063e55fbda7441dd6fd787dd119ac0ad89db32104"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/FixedStepClockTests.cs.meta",
+      "Sha256": "377c8185f1cec460407219b9ecb2cd474d55e97358ccaf54223f96e9d23b1dc0"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/GameBalanceBoundaryIntegrationTests.cs",
+      "Sha256": "b0f7e724f82719b173b7daa2789912268a196ec1e31139ddaea55c39dbb168bc"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/GameBalanceBoundaryIntegrationTests.cs.meta",
+      "Sha256": "428add84a50a1ab331672d7089e8f51fd02c842e0a47d39687260e22d728c7a9"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/GoldPayoutTests.cs",
+      "Sha256": "b2ddb68d81f64a4de792d6531d884322aa768d44677804d1f280f6da3d5490ff"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/GoldPayoutTests.cs.meta",
+      "Sha256": "a5329e746a75e96f6142c2674a220740c0dbb8f2a313686ac3a1f6432e87e915"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/HistoricalProfileTestData.cs",
+      "Sha256": "af6201938b5a2c9d6fb6bfa10792adc834203803d5e4add3d595e1fc109195fc"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/HistoricalProfileTestData.cs.meta",
+      "Sha256": "cada42a255144d8852fbadc01d39bfe29181e2f4364122728411ada6973a9f3b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MechanicsConfigurationIntegrationTests.cs",
+      "Sha256": "4545134464631cde0fcb6a9f530b34f61109d06591a861823fc7b5c0cb56d136"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MechanicsConfigurationIntegrationTests.cs.meta",
+      "Sha256": "3fcf85f7a70371c4a778d89cecfede9003f270c7d72dc98cdc037ec2d646735c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MechanicsHudBoundaryTests.cs",
+      "Sha256": "fe6699b32aed646ddf46fe724e6a9b864ff71be20139753f28246681155bcc2f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MechanicsHudBoundaryTests.cs.meta",
+      "Sha256": "c58d9ff1c141ed488e22feee55b8929a736c9841bebcda1a50504753e3dd578e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintHudTests.cs",
+      "Sha256": "9d9cd0fb739c22f5fe399b1fdb7ac50894fac5df16979f74c6d532e343914570"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintHudTests.cs.meta",
+      "Sha256": "4f9d9a50ded76615840940d4268235575262dc106e2bb1f667bab89cda865d3b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintPersistenceTests.cs",
+      "Sha256": "9557d252485914ed99ac6d353912f756f70e3f5e0cb66b221a72039eabd68d70"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintPersistenceTests.cs.meta",
+      "Sha256": "46ed140e2d3d9e96d5a5d9736fd5d62210cb7896863089a33ca9997100fd1045"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintProbeIntegrationTests.cs",
+      "Sha256": "1dbaeb968c54efb68ae181a6031e9981d9741b1b4bfef117be34b5f8e78de571"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintProbeIntegrationTests.cs.meta",
+      "Sha256": "d01ce85c55ac17409b45666722ef11c9cd162dda4facaa7544e0d20a3794fe26"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintRenderingTests.cs",
+      "Sha256": "1e64cb31087e4e40412035d7fbcfbc8ee0a8320f89128c566908cb5c4f8bc324"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintRenderingTests.cs.meta",
+      "Sha256": "f00e217c419e9595f6bcae36fccf4c84c8b6195c056c5b827b79d6f22e284cd2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/NotebookIntegrationTests.cs",
+      "Sha256": "24ed760b578c6c7bdfce582f541ae3e02fd00202267acaf44869c15b2d38be6c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/NotebookIntegrationTests.cs.meta",
+      "Sha256": "939465edbe8513fa4e900192da3b96e0e7bd5a315fdd785a99a8e88bde5e7405"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/PaperDefense.Integration.Tests.asmdef",
+      "Sha256": "2fc8961c3e1395a1e869002aa95267924c755ad6042f4a5bf52b979dc0f152f3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/PaperDefense.Integration.Tests.asmdef.meta",
+      "Sha256": "cac806f7de5cdf895c5185ac9d2dcfa45fe2e22d9820f4515001854acc5f9b0b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/RailPersistenceTests.cs",
+      "Sha256": "c680f46b7a14a68b6ba7cdae20fb51ef230e07f4aff093e816f0b78489df4ae3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/RailPersistenceTests.cs.meta",
+      "Sha256": "5fa0ead769452895f46101b9acdb8f36c94b91a88b8da574b5671809fc028ddf"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/RailPresentationTests.cs",
+      "Sha256": "0faab56be467a7f8814b33f921931c24534afa0aaeedc10d901a74011be39fed"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/RailPresentationTests.cs.meta",
+      "Sha256": "51fcb4c215352bf72c11dc07bcd6f38426c0c808347baf2bbb561c6521027884"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/RicochetPersistenceTests.cs",
+      "Sha256": "4bbd3fcf9c66a2c9dd26b1a1442b04a4dd0c691b8d11698e4ab18b0f72489cec"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/RicochetPersistenceTests.cs.meta",
+      "Sha256": "6cea0e14c478595330b9f2deae982cd06d2b72d6d98256aa66b7a94f70705040"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/RunControllerTests.cs",
+      "Sha256": "d06e2a73699143cf3a491ef30e6531bb0600654e190cb4e9e98ebc6964643d90"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/RunControllerTests.cs.meta",
+      "Sha256": "977a7944d92ed05d7c21778c552de70f3357d4e75f457a7eb96b7986adc24256"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/SharedTowerProductionIntegrationTests.cs",
+      "Sha256": "8e3498308c6d4d083278d40dcbda49497281b9b1ca4417d5b48012865b8c4bcd"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/SharedTowerProductionIntegrationTests.cs.meta",
+      "Sha256": "b334f9dae49e572752f99f37540a2a697b23dc7323b02fa36b64f3704da0c4f8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/StaplerPersistenceTests.cs",
+      "Sha256": "78ba5d06d72c6c62479a6dd4f0b48b762b1dc54ae507b362aac8e0ecc311ec3b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/StaplerPersistenceTests.cs.meta",
+      "Sha256": "44f710fe85270f37c0a03688bdab898de1b19945aed496a3411695acaee02ad2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/TargetPresetIntegrationTests.cs",
+      "Sha256": "b1ad524d0457efa6707ac919404fa4ee913367445165699ffe17dcd58d0971a3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/TargetPresetIntegrationTests.cs.meta",
+      "Sha256": "b26a8b2b3dd584a09e97b4810fc09a0bf56126445468fdca204adab59318a8c1"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ToolPriceConsistencyTests.cs",
+      "Sha256": "fe7750b05f38249aa7444e80df2a737a56e60e77e7452ed2d7f6931adf120dc3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/ToolPriceConsistencyTests.cs.meta",
+      "Sha256": "edbe942a9e8b24f1963b7c709b685cb4097eec7cba64c44dc2d6bdd95c0ed8df"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/TrialBalanceIntegrationTests.cs",
+      "Sha256": "b279dde69b9f1e519e05c839e662afdb9e6f08a01f68615da8d5ad7b99c2f2a3"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/TrialBalanceIntegrationTests.cs.meta",
+      "Sha256": "421ff1924d5c4fe5578441ac73d1a15e442d1b5c440c100d8683419a1cc3646e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopDrawingPersistenceTests.cs",
+      "Sha256": "98770520553ad6cf7a9975efd2a19208f0371803b9bc8ee2c1e331f8e89c5dcd"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopDrawingPersistenceTests.cs.meta",
+      "Sha256": "9fbb0f6b5cb5cf6cf434cd4b88cbce2b79b0923a37c4c97a2a5c5a947b17b845"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopIntegrationTests.cs",
+      "Sha256": "e3e3f5191b4d919a998c57a3241c6b6c60d3affd7e19c34e7a2ac45332df034c"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopIntegrationTests.cs.meta",
+      "Sha256": "db45eb8a03199b0b9770c2bbc43a4fc9153bd96cfdca63115141f432c198dd83"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopPersistenceTests.cs",
+      "Sha256": "9245b56645c877439f53130202a3c707f1f3df9fc6a9d628b3c0629c0ee16eac"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopPersistenceTests.cs.meta",
+      "Sha256": "c15bceebf33663684c10dd0447ac2056027f96833a426c36a01fb133d81a379b"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopReadabilityTests.cs",
+      "Sha256": "b150830ac1ffba3b1df60c0a584c5ce78436e2acc2b4cada4296130bd7406fd5"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopReadabilityTests.cs.meta",
+      "Sha256": "673bac5b79635dcc20bbebafa9d1261bc242a9b468d2db3c14eba76a9c77fc9e"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopSaveFailureTests.cs",
+      "Sha256": "aa73350358aa13a76c77d1f8dc38c76ee04f704e24f96569c295adbbdadb39aa"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopSaveFailureTests.cs.meta",
+      "Sha256": "45ec5039ba4d8ad2c0d095b7117c021fd821de7edf3f68168d13735b2fed1389"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopStoreTests.cs",
+      "Sha256": "9a04389771eef558046a018e559f1d223d4e7a9a0a99da9cac81a3ec8684a609"
+    },
+    {
+      "Path": "Assets/PaperDefense/Tests/PlayMode/WorkshopStoreTests.cs.meta",
+      "Sha256": "e463bbdaee5f53bc40807882ff534d76e9ff6aa29b7d4def1711b88760eec8c2"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation.meta",
+      "Sha256": "7aa7f64c067d7c94222f02564818ed629cdb5896f39bd347fc7170bedf352287"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation/BalanceComparisonScenario.cs",
+      "Sha256": "ad4181249d833f6911d4520d966343d8bdaff8262e13adf1814045870c195d69"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation/BalanceComparisonScenario.cs.meta",
+      "Sha256": "5e78c8445a44e7cc32aae495101f73fbe33004fa27f030c8a7922cc10b60a666"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation/InkLoopScenario.cs",
+      "Sha256": "e5f75c6d57569fe318f9c74fec942907785f87d92ec02351713d099d288fabc8"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation/InkLoopScenario.cs.meta",
+      "Sha256": "1039f79297f29a3ed2e5331b47c0bad00fbc24327d10c4b7efa0647bb9d04c9a"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation/PaperDefense.Validation.asmdef",
+      "Sha256": "8b5306cf1588ffdf609319fb6a90099f99831dd35096957583792b86e4299caf"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation/PaperDefense.Validation.asmdef.meta",
+      "Sha256": "e825f116f1981d306aebcf1e61c5876d37c79799d992d76f5b3033f2e916422d"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation/PressurePlayerProbe.cs",
+      "Sha256": "d6be33b609aefbbf1d87901f50755e517c6ffcb7599962e0054fa5115de6ae3f"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation/PressurePlayerProbe.cs.meta",
+      "Sha256": "0a534c891e321e97eef0e218c513ced13c771d82dc4909e1acdbc896688db665"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation/PressureScenario.cs",
+      "Sha256": "fff9effe2783f11f2a2cac84f32c08a2c9075b7394354a31c40085a54918d653"
+    },
+    {
+      "Path": "Assets/PaperDefense/Validation/PressureScenario.cs.meta",
+      "Sha256": "4c61cdcfae309138ad3f22d1e1382720eda4823f01f836d7b2e2a44376da6c3c"
+    },
+    {
+      "Path": "Assets/Scenes.meta",
+      "Sha256": "a80a7b316e7d7ce80c8a01ecb374702a04e91228a0729629c894c70250baea5d"
+    },
+    {
+      "Path": "Assets/Scenes/SampleScene.unity",
+      "Sha256": "387d8216a517be775b6ecc2ab55b97ece687c3372322da2ba027a96908014912"
+    },
+    {
+      "Path": "Assets/Scenes/SampleScene.unity.meta",
+      "Sha256": "204f446bc13539151c15af875550a7fa6f791662e967572a1b4b06fd0005dad1"
+    },
+    {
+      "Path": "Assets/Settings.meta",
+      "Sha256": "0b5ba35daae66cbfcfa17bf61091aeab7f3bed07681f8db7bed3fb72d178c2d4"
+    },
+    {
+      "Path": "Assets/Settings/DefaultVolumeProfile.asset",
+      "Sha256": "4789b43834dd5efb32eec4c3b436baf0895c9f8cf2a0624121da8dd812ee984a"
+    },
+    {
+      "Path": "Assets/Settings/DefaultVolumeProfile.asset.meta",
+      "Sha256": "037700fc76ee8e15bf57a6608bf0229b50b9ba78a1095a943fe0add01a6bf5c5"
+    },
+    {
+      "Path": "Assets/Settings/InputSystem_Actions.inputactions",
+      "Sha256": "1c6cbb519d65ecfe19a29231735b7f54741a20ac1a8ad4f46a18e1bfb28a3c39"
+    },
+    {
+      "Path": "Assets/Settings/InputSystem_Actions.inputactions.meta",
+      "Sha256": "e2df3de96691137dc24b37bd9009e7be17040f3e5cd6d5401b2cd9d8ae2c9c1d"
+    },
+    {
+      "Path": "Assets/Settings/Lit2DSceneTemplate.scenetemplate",
+      "Sha256": "ca928761bf976c878d54df524a3742c5f1bca53a013b4061abd2c752c8a212aa"
+    },
+    {
+      "Path": "Assets/Settings/Lit2DSceneTemplate.scenetemplate.meta",
+      "Sha256": "d4cc0f73332c3228945aa64f9c5019f1c1950d77703728c5e9674a0367c5e4d1"
+    },
+    {
+      "Path": "Assets/Settings/Renderer2D.asset",
+      "Sha256": "900455794d0d788504847c3aa54e03a0374fd3635afa295ed05c2f646f974705"
+    },
+    {
+      "Path": "Assets/Settings/Renderer2D.asset.meta",
+      "Sha256": "9689252004910cfad653e8a8d09b8c96befb560e1fb583033630db0f5bb76420"
+    },
+    {
+      "Path": "Assets/Settings/Scenes.meta",
+      "Sha256": "705b24f629af6836450c9fd2085f781fe11d8633bcaa0c7b3197058b93a766e5"
+    },
+    {
+      "Path": "Assets/Settings/Scenes/URP2DSceneTemplate.unity",
+      "Sha256": "f6fb3e91aaa90417e2920b7f903066833b3b9aea72ddcb5e46b91afa729c2e90"
+    },
+    {
+      "Path": "Assets/Settings/Scenes/URP2DSceneTemplate.unity.meta",
+      "Sha256": "e7391ff924b7defdf30e0b0b235f8113618481c93f567e0c699c8895a9534579"
+    },
+    {
+      "Path": "Assets/Settings/UniversalRenderPipelineGlobalSettings.asset",
+      "Sha256": "2fd2767ec9c9b0d926c3c499c8c02463879e62ee2a810be20ac93bbdcd9f0080"
+    },
+    {
+      "Path": "Assets/Settings/UniversalRenderPipelineGlobalSettings.asset.meta",
+      "Sha256": "746a38b93f8f49b644ff6893456cf24db401e5c342aaae3864e91560d37c5422"
+    },
+    {
+      "Path": "Assets/Settings/UniversalRP.asset",
+      "Sha256": "2defc3c74f9757f7b801f994d10cd813757b09a39ee075af79fa514661206afa"
+    },
+    {
+      "Path": "Assets/Settings/UniversalRP.asset.meta",
+      "Sha256": "8b7653265c1a9a054461264fc7b03bdbafc030149949fce5bf9e85924fb565a5"
+    }
+  ]
+}

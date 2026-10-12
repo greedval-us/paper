@@ -4,9 +4,13 @@ using UnityEngine;
 
 namespace PaperDefense.Application
 {
-    [CreateAssetMenu(menuName = "Paper Defense/Баланс забега", fileName = "NotebookBalance")]
+    [CreateAssetMenu(menuName = "Paper Defense/Compatibility/Legacy Balance Adapter", fileName = "LegacyBalance")]
     public sealed class GameBalanceAsset : ScriptableObject
     {
+        [Tooltip("Источник подготовленного каталога и правил. Старые поля ниже используются только ассетами без ссылки, для миграции v1–v4 и legacy fixtures.")]
+        public BalancePresetAsset dataPreset;
+        [Tooltip("Явный адаптер старых fixtures/миграции. Для рабочих мигрированных ассетов выключен: потерянная ссылка на пресет — ошибка.")]
+        public bool legacyAuthoringAdapter = true;
         [Header("Страница")]
         [Min(20)] public int width = 64;
         [Min(16)] public int height = 40;
@@ -48,6 +52,8 @@ namespace PaperDefense.Application
 
         public GameBalance CreateBalance()
         {
+            if (dataPreset != null) return dataPreset.CreateBalance();
+            if (!legacyAuthoringAdapter) throw new ArgumentException(name + ".dataPreset: отсутствует обязательный пресет контента.");
             Finite(baseHealth, nameof(baseHealth)); Finite(planningSeconds, nameof(planningSeconds)); Finite(intermissionSeconds, nameof(intermissionSeconds));
             Finite(passiveInkPerSecond, nameof(passiveInkPerSecond)); Finite(earlyLaunchInkPerSecond, nameof(earlyLaunchInkPerSecond));
             Finite(drawingMinimumRate, nameof(drawingMinimumRate)); Finite(drawingMaximumRate, nameof(drawingMaximumRate));
@@ -143,6 +149,8 @@ namespace PaperDefense.Application
 
         public GameBalance CreateWorkshopBalance()
         {
+            if (dataPreset != null) return dataPreset.CreateBalance();
+            if (!legacyAuthoringAdapter) throw new ArgumentException(name + ".dataPreset: отсутствует обязательный пресет контента.");
             Finite(wellHealth, nameof(wellHealth)); Finite(blotterRadius, nameof(blotterRadius)); Finite(blotterCooldown, nameof(blotterCooldown));
             Finite(blotLifetime, nameof(blotLifetime)); Finite(blotBuffSeconds, nameof(blotBuffSeconds));
             Finite(blotSpeedBonus, nameof(blotSpeedBonus)); Finite(blotReduction, nameof(blotReduction));
@@ -174,6 +182,8 @@ namespace PaperDefense.Application
 
         public void ResetToDefaults()
         {
+            dataPreset = null;
+            legacyAuthoringAdapter = true;
             var b = GameBalance.CreateDefault();
             mechanics = b.Mechanics.CreateSnapshot();
             useTargetWorkshopPreset = false; targetSettings = new TargetPresetSettings();

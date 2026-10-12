@@ -11,7 +11,7 @@ namespace PaperDefense.Tests
             var root=new GameObject("Isolated footprint probe"); root.SetActive(false);
             try
             {
-                var controller=root.AddComponent<RunController>(); controller.InitializeWorkshop(false);
+                var controller=root.AddComponent<RunController>(); controller.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
                 int gold=controller.Workshop.Gold,ink=controller.Session.Ink,album=controller.Workshop.Album.Count;
                 long tick=controller.Session.TickIndex;
                 var selected=controller.Workshop.Loadout[3];

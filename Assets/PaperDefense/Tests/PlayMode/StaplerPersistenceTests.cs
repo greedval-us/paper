@@ -44,8 +44,8 @@ namespace PaperDefense.Tests
             Assert.That(restored.SecondWeapon, Is.EqualTo(StructureKind.Stapler));
             Assert.That(restored.Origin, Is.EqualTo(DrawingOrigin.PlayerDrawing));
             Assert.That(restored.Drawing.GeometryHash, Is.EqualTo(drawing.GeometryHash));
-            Assert.That(restored.Drawing.FormatVersion, Is.EqualTo(DrawingSnapshot.CurrentFormatVersion)); Assert.That(restored.Drawing.BindingVersion, Is.EqualTo(1));
-            Assert.That(loaded.Profile.ToData().Version, Is.EqualTo(4));
+            Assert.That(restored.Drawing.FormatVersion, Is.EqualTo(DrawingSnapshot.LegacyFormatVersion)); Assert.That(restored.Drawing.BindingVersion, Is.EqualTo(1));
+            Assert.That(loaded.Profile.ToData().Version, Is.EqualTo(5));
         }
 
         [Test] public void AssetResetAndMappingKeepTheConfiguredStaplerSlowIndependent()

@@ -50,9 +50,9 @@ namespace PaperDefense.Tests
             Assert.That(copy.Structure(StructureKind.Fan).ConeAngleDegrees, Is.EqualTo(42));
             Assert.That(copy.Structure(StructureKind.Fan).MaxTargets, Is.EqualTo(3));
         }
-        [Test] public void CurrentProfilesWriteVersionFourAndHistoricalVersionTwoCannotClaimNewKinds()
+        [Test] public void CurrentProfilesWriteVersionFiveAndHistoricalVersionTwoCannotClaimNewKinds()
         {
-            var profile = new WorkshopProfile(); Assert.That(profile.ToData().Version, Is.EqualTo(4));
+            var profile = new WorkshopProfile(); Assert.That(profile.ToData().Version, Is.EqualTo(5));
             var historical = HistoricalCatalogTestData.VersionTwo(); historical.Album[0].FirstWeapon = StructureKind.Fan;
             Assert.That(() => WorkshopProfile.FromData(historical), Throws.InstanceOf<ArgumentException>());
         }
@@ -71,7 +71,11 @@ namespace PaperDefense.Tests
         {
             var balance = GameBalance.CreateDefault(); var read = new RunReadModel(new GameSession(balance, starterDefenses: false));
             Assert.That(read.Balance.Waves[0].InkGrant, Is.EqualTo(-1));
-            balance.Waves[0].InkGrant = 321; Assert.That(read.Balance.Waves[0].InkGrant, Is.EqualTo(321));
+            balance.Waves[0].InkGrant = 321;
+            read = new RunReadModel(new GameSession(balance, starterDefenses: false));
+            Assert.That(read.Balance.Waves[0].InkGrant, Is.EqualTo(321));
+            balance.Waves[0].InkGrant = 22;
+            Assert.That(read.Balance.Waves[0].InkGrant, Is.EqualTo(321), "A prepared run owns the original reward configuration.");
             var target = new RunReadModel(new GameSession(GameBalancePresets.CreateTargetWorkshop(), starterDefenses: false));
             Assert.That(target.Balance.Waves[0].InkGrant, Is.EqualTo(140));
         }

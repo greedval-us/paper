@@ -7,11 +7,50 @@ namespace PaperDefense.Core
     public readonly struct DrawingPartFeedback
     {
         public readonly DrawingPartKey Part;
+        public readonly string BindingId;
         public readonly float Quality, Coverage, Precision;
         public readonly int IncompleteContour;
         public readonly string Message;
         internal DrawingPartFeedback(DrawingPartKey part, float quality, float coverage, float precision, int incompleteContour, string message)
-        { Part = part; Quality = quality; Coverage = coverage; Precision = precision; IncompleteContour = incompleteContour; Message = message; }
+            : this(DrawingBindings.For(part), quality, coverage, precision, incompleteContour, message) { }
+        public DrawingPartFeedback(string bindingId, float quality, float coverage, float precision, int incompleteContour, string message)
+        {
+            DrawingBindings.Validate(bindingId); DrawingTemplateDefinition.Finite(quality, bindingId + ".quality");
+            DrawingTemplateDefinition.Finite(coverage, bindingId + ".coverage"); DrawingTemplateDefinition.Finite(precision, bindingId + ".precision");
+            if (quality < 0 || quality > 100 || coverage < 0 || coverage > 1 || precision < 0 || precision > 1 || incompleteContour < 0)
+                throw new ArgumentException(bindingId + ": неверная оценка контура.");
+            BindingId = bindingId; DrawingBindings.TryLegacy(bindingId, out DrawingPartKey key); Part = key;
+            Quality = quality; Coverage = coverage; Precision = precision; IncompleteContour = incompleteContour; Message = message ?? "";
+        }
+    }
+
+    /// <summary>A saved assessment result, tied to authored geometry and selected slots, never to mutable assets.</summary>
+    public sealed class DrawingEvaluationStamp
+    {
+        public int RuleVersion { get; }
+        public string ReferenceSignature { get; }
+        public string DrawingHash { get; }
+        public string ConstructionHash { get; }
+        public float Quality { get; }
+        public IReadOnlyList<DrawingPartFeedback> PartFeedback { get; }
+        public DrawingEvaluationStamp(int ruleVersion, string referenceSignature, string drawingHash, string constructionHash,
+            float quality, IReadOnlyList<DrawingPartFeedback> feedback = null)
+        {
+            if (ruleVersion < 1 || string.IsNullOrEmpty(referenceSignature) || string.IsNullOrEmpty(drawingHash) || string.IsNullOrEmpty(constructionHash))
+                throw new ArgumentException("У оценки отсутствуют версия или подпись рисунка/сборки.");
+            DrawingTemplateDefinition.Finite(quality, "drawingEvaluation.quality");
+            if (quality < 0 || quality > 100) throw new ArgumentException("drawingEvaluation.quality: допустимо 0…100.");
+            if (feedback != null && feedback.Count > DrawingSnapshot.MaximumParts) throw new ArgumentException("Слишком много оценок частей.");
+            var owned = new DrawingPartFeedback[feedback?.Count ?? 0]; var seen = new HashSet<string>(StringComparer.Ordinal);
+            for (int i = 0; i < owned.Length; i++)
+            {
+                var part = feedback[i];
+                if (part.BindingId == null || !seen.Add(part.BindingId)) throw new ArgumentException("Оценка содержит повторяющуюся или пустую привязку.");
+                owned[i] = new DrawingPartFeedback(part.BindingId, part.Quality, part.Coverage, part.Precision, part.IncompleteContour, part.Message);
+            }
+            RuleVersion = ruleVersion; ReferenceSignature = referenceSignature; DrawingHash = drawingHash;
+            ConstructionHash = constructionHash; Quality = quality; PartFeedback = Array.AsReadOnly(owned);
+        }
     }
 
     public sealed class DrawingAssessment
@@ -20,15 +59,19 @@ namespace PaperDefense.Core
         public string DrawingHash { get; }
         public string ConstructionHash { get; }
         public float Quality { get; }
+        public string ReferenceSignature { get; }
+        public bool IsArchived { get; }
         public IReadOnlyList<DrawingPartFeedback> PartFeedback { get; }
         internal DrawingAssessment(int ruleVersion, string drawingHash, string constructionHash, float quality,
-            IReadOnlyList<DrawingPartFeedback> feedback)
+            IReadOnlyList<DrawingPartFeedback> feedback, string referenceSignature = "legacy.rules.v2", bool isArchived = false)
         {
             RuleVersion = ruleVersion; DrawingHash = drawingHash; ConstructionHash = constructionHash; Quality = quality;
+            ReferenceSignature = referenceSignature; IsArchived = isArchived;
             var owned = new DrawingPartFeedback[feedback.Count];
             for (int i = 0; i < owned.Length; i++) owned[i] = feedback[i];
             PartFeedback = Array.AsReadOnly(owned);
         }
+        public DrawingEvaluationStamp ToStamp() => new DrawingEvaluationStamp(RuleVersion, ReferenceSignature, DrawingHash, ConstructionHash, Quality, PartFeedback);
     }
 
     public static class DrawingEvaluator
@@ -40,16 +83,34 @@ namespace PaperDefense.Core
         static readonly object cacheGate = new object();
         static readonly Dictionary<string, DrawingAssessment> cache = new Dictionary<string, DrawingAssessment>();
         static readonly Queue<string> cacheOrder = new Queue<string>();
-        static readonly Cell[] toleranceOffsets = ToleranceOffsets();
+        static readonly DrawingAssessmentSettings legacySettings = new DrawingAssessmentSettingsInput().CreateSnapshot();
 
-        public static DrawingAssessment Evaluate(TowerBlueprint blueprint)
+        public static DrawingAssessment Evaluate(TowerBlueprint blueprint, DrawingEvaluationStamp stamp = null)
         {
             if (blueprint == null) throw new ArgumentNullException(nameof(blueprint));
             string constructionHash = ConstructionHash(blueprint);
-            string key = CurrentRuleVersion.ToString(CultureInfo.InvariantCulture) + ":" + (int)blueprint.Origin + ":" +
-                blueprint.Drawing.GeometryHash + ":" + constructionHash;
+            DrawingAssessmentSettings settings = blueprint.Content?.Assessment ?? legacySettings;
+            IReadOnlyList<DrawingPartTemplate> templates;
+            try { templates = DrawingTemplateCatalog.Create(blueprint); }
+            catch (ArgumentException)
+            {
+                if (stamp != null) return RestoreStamp(blueprint, constructionHash, stamp, "unavailable");
+                return new DrawingAssessment(settings.Revision, blueprint.Drawing.GeometryHash, constructionHash,
+                    blueprint.Origin == DrawingOrigin.LegacyStandard ? 100 : 0, Array.Empty<DrawingPartFeedback>());
+            }
+            string referenceSignature = ReferenceSignature(settings, templates);
+            string key = referenceSignature + ":" + (int)blueprint.Origin + ":" + blueprint.Drawing.GeometryHash + ":" + constructionHash;
+            if (stamp != null)
+            {
+                DrawingAssessment restored = RestoreStamp(blueprint, constructionHash, stamp, referenceSignature);
+                lock (cacheGate)
+                    if (cache.TryGetValue(key, out DrawingAssessment cachedSaved) && !restored.IsArchived &&
+                        cachedSaved.Quality == stamp.Quality && cachedSaved.RuleVersion == stamp.RuleVersion)
+                        return cachedSaved;
+                return restored;
+            }
             lock (cacheGate) if (cache.TryGetValue(key, out DrawingAssessment cachedInitial)) return cachedInitial;
-            DrawingAssessment result = Assess(blueprint, constructionHash);
+            DrawingAssessment result = Assess(blueprint, constructionHash, settings, templates, referenceSignature);
             lock (cacheGate)
             {
                 if (cache.TryGetValue(key, out DrawingAssessment cachedExisting)) return cachedExisting;
@@ -70,42 +131,46 @@ namespace PaperDefense.Core
             return minimum + (maximum - minimum) * Math.Max(0, Math.Min(100, quality)) / 100;
         }
 
-        static DrawingAssessment Assess(TowerBlueprint blueprint, string constructionHash)
+        static DrawingAssessment RestoreStamp(TowerBlueprint blueprint, string constructionHash, DrawingEvaluationStamp stamp, string referenceSignature)
+        {
+            if (stamp.DrawingHash != blueprint.Drawing.GeometryHash || stamp.ConstructionHash != constructionHash)
+                throw new ArgumentException("Сохранённая оценка относится к другому рисунку или составу страницы.");
+            return new DrawingAssessment(stamp.RuleVersion, stamp.DrawingHash, stamp.ConstructionHash, stamp.Quality,
+                stamp.PartFeedback, stamp.ReferenceSignature, stamp.ReferenceSignature != referenceSignature);
+        }
+
+        static DrawingAssessment Assess(TowerBlueprint blueprint, string constructionHash, DrawingAssessmentSettings settings,
+            IReadOnlyList<DrawingPartTemplate> templates, string referenceSignature)
         {
             if (blueprint.Origin == DrawingOrigin.LegacyStandard)
-                return new DrawingAssessment(CurrentRuleVersion, blueprint.Drawing.GeometryHash, constructionHash, 100,
-                    Array.Empty<DrawingPartFeedback>());
+                return new DrawingAssessment(settings.Revision, blueprint.Drawing.GeometryHash, constructionHash, 100,
+                    Array.Empty<DrawingPartFeedback>(), referenceSignature);
             var feedback = new List<DrawingPartFeedback>();
             float weightedQuality = 0, totalWeight = 0;
-            IReadOnlyList<DrawingPartTemplate> templates;
-            try { templates = DrawingTemplateCatalog.Create(blueprint); }
-            catch (ArgumentException)
-            {
-                return new DrawingAssessment(CurrentRuleVersion, blueprint.Drawing.GeometryHash, constructionHash, 0, feedback);
-            }
+            Cell[] toleranceOffsets = ToleranceOffsets(settings.Tolerance);
             foreach (DrawingPartTemplate template in templates)
             {
-                float weight = Weight(template.Key);
+                float weight = template.Weight;
                 if (weight == 0) continue;
                 bool[] reference = Raster(template.Contours);
-                bool[] authored = Raster(blueprint.Drawing.GetPart(template.Key).Strokes);
-                bool[] nearReference = Dilate(reference), nearAuthored = Dilate(authored);
+                bool[] authored = Raster(blueprint.Drawing.GetPart(template.BindingId).Strokes);
+                bool[] nearReference = Dilate(reference, toleranceOffsets), nearAuthored = Dilate(authored, toleranceOffsets);
                 float coverage = FractionMatched(reference, nearAuthored);
                 float precision = FractionMatched(authored, nearReference);
                 float quality = coverage + precision > 0 ? 200 * coverage * precision / (coverage + precision) : 0;
                 int unfinished = 0;
                 for (int contour = 0; contour < template.Contours.Count; contour++)
-                    if (FractionMatched(Raster(new[] { template.Contours[contour] }), nearAuthored) < .95f)
+                    if (FractionMatched(Raster(new[] { template.Contours[contour] }), nearAuthored) < settings.CompletionThreshold)
                     { unfinished = contour + 1; break; }
-                string name = PartName(template.Key);
+                string name = template.DisplayName;
                 string message = unfinished > 0 ? name + ": контур " + unfinished + " ещё не завершён." :
-                    precision < .95f ? name + ": много линий в стороне от образца." : name + ": контуры читаются уверенно.";
-                feedback.Add(new DrawingPartFeedback(template.Key, quality, coverage, precision, unfinished, message));
+                    precision < settings.PrecisionThreshold ? name + ": много линий в стороне от образца." : name + ": контуры читаются уверенно.";
+                feedback.Add(new DrawingPartFeedback(template.BindingId, quality, coverage, precision, unfinished, message));
                 weightedQuality += quality * weight; totalWeight += weight;
             }
             float overall = totalWeight > 0 ? weightedQuality / totalWeight : 0;
-            return new DrawingAssessment(CurrentRuleVersion, blueprint.Drawing.GeometryHash, constructionHash,
-                Math.Max(0, Math.Min(100, overall)), feedback);
+            return new DrawingAssessment(settings.Revision, blueprint.Drawing.GeometryHash, constructionHash,
+                Math.Max(0, Math.Min(100, overall)), feedback, referenceSignature);
         }
 
         static float Weight(DrawingPartKey key)
@@ -189,15 +254,15 @@ namespace PaperDefense.Core
         static void Mark(bool[] cells, int x, int y)
         { if (x >= 0 && y >= 0 && x < GridSize && y < GridSize) cells[y * GridSize + x] = true; }
 
-        static Cell[] ToleranceOffsets()
+        static Cell[] ToleranceOffsets(float tolerance)
         {
             var offsets = new List<Cell>();
-            float radius = Tolerance * GridScale; int bound = (int)Math.Ceiling(radius);
+            float radius = tolerance * GridScale; int bound = (int)Math.Ceiling(radius);
             for (int y = -bound; y <= bound; y++) for (int x = -bound; x <= bound; x++)
                 if (x * x + y * y <= radius * radius) offsets.Add(new Cell(x, y));
             return offsets.ToArray();
         }
-        static bool[] Dilate(bool[] source)
+        static bool[] Dilate(bool[] source, Cell[] toleranceOffsets)
         {
             var near = new bool[source.Length];
             for (int i = 0; i < source.Length; i++)
@@ -218,11 +283,37 @@ namespace PaperDefense.Core
         static string ConstructionHash(TowerBlueprint blueprint)
         {
             ulong hash = 14695981039346656037UL;
-            AddHash(ref hash, DrawingSnapshot.CurrentBindingVersion); AddHash(ref hash, (int)blueprint.Chassis);
-            AddHash(ref hash, (int)blueprint.FirstWeapon); AddHash(ref hash, blueprint.SecondWeapon.HasValue ? (int)blueprint.SecondWeapon.Value : -1);
-            AddHash(ref hash, (int)blueprint.Modules);
+            bool legacy = Enum.IsDefined(typeof(ChassisKind), blueprint.Chassis) && Enum.IsDefined(typeof(StructureKind), blueprint.FirstWeapon) &&
+                (blueprint.SecondWeaponId == null || (blueprint.SecondWeapon.HasValue && Enum.IsDefined(typeof(StructureKind), blueprint.SecondWeapon.Value)));
+            foreach (var selected in blueprint.ModuleSelections)
+                legacy &= DrawingBindings.TryLegacy(DrawingBindings.Module(selected.InstanceId), out _) && selected.DefinitionId == "module." + selected.InstanceId;
+            if (legacy)
+            {
+                AddHash(ref hash, DrawingSnapshot.LegacyBindingVersion); AddHash(ref hash, (int)blueprint.Chassis);
+                AddHash(ref hash, (int)blueprint.FirstWeapon); AddHash(ref hash, blueprint.SecondWeapon.HasValue ? (int)blueprint.SecondWeapon.Value : -1);
+                AddHash(ref hash, (int)blueprint.Modules);
+            }
+            else
+            {
+                AddHash(ref hash, DrawingSnapshot.CurrentBindingVersion); AddHash(ref hash, blueprint.ChassisId);
+                AddHash(ref hash, blueprint.FirstWeaponId); AddHash(ref hash, blueprint.SecondWeaponId ?? "");
+                var modules = new List<ModuleSelection>(blueprint.ModuleSelections);
+                modules.Sort((a, b) => string.CompareOrdinal(a.InstanceId, b.InstanceId));
+                foreach (var selected in modules) { AddHash(ref hash, selected.InstanceId); AddHash(ref hash, selected.DefinitionId); }
+            }
             return hash.ToString("x16", CultureInfo.InvariantCulture);
         }
+        static string ReferenceSignature(DrawingAssessmentSettings settings, IReadOnlyList<DrawingPartTemplate> templates)
+        {
+            ulong hash = 14695981039346656037UL; AddHash(ref hash, settings.Signature);
+            foreach (var template in templates)
+            {
+                AddHash(ref hash, template.BindingId); AddHash(ref hash, template.ReferenceSignature);
+                AddHash(ref hash, template.Pivot.X.ToString("R", CultureInfo.InvariantCulture)); AddHash(ref hash, template.Pivot.Y.ToString("R", CultureInfo.InvariantCulture));
+            }
+            return hash.ToString("x16", CultureInfo.InvariantCulture);
+        }
+        static void AddHash(ref ulong hash, string value) { foreach (char c in value) AddHash(ref hash, c); AddHash(ref hash, 0); }
         static void AddHash(ref ulong hash, int value)
         {
             unchecked

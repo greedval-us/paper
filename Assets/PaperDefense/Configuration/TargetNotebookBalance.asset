@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95aeebf1fa6e2341b81aa387f077e6c, type: 3}
   m_Name: TargetNotebookBalance
   m_EditorClassIdentifier: PaperDefense.Application::PaperDefense.Application.GameBalanceAsset
+  dataPreset: {fileID: 11400000, guid: 77e93b8077208204abeafd5367b8f0eb, type: 2}
+  legacyAuthoringAdapter: 0
   width: 64
   height: 40
   startingInk: 360
@@ -22,6 +24,14 @@ MonoBehaviour:
   enemyMechanics: 1
   inkWells: 1
   generateNewThreats: 1
+  mechanics:
+    EnemyDrawingTiers: 1
+    CorpseBlots: 1
+    RangedEnemies: 1
+    InkWells: 1
+    ColorCartridges: 1
+    RunUpgrades: 1
+    DrawingQuality: 1
   workshopWidth: 96
   workshopHeight: 64
   workshopStartingInk: 720

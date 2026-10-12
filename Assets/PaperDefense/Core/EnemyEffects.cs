@@ -7,7 +7,7 @@ namespace PaperDefense.Core
         static readonly EffectsRules Historical = new EffectsRules();
 
         public static float ApplyHit(EnemyState enemy, float raw, ColorEffectPayload payload, RunStatistics statistics,
-            StructureKind weapon, EffectsRules defenseRules, float blotReduction = .15f)
+            StructureKind weapon, EffectsRules defenseRules, float blotReduction = .15f,string weaponId=null)
         {
             if (defenseRules == null) throw new ArgumentNullException(nameof(defenseRules));
             if (enemy == null || enemy.Health <= 0 || raw < 0 || float.IsNaN(raw) || float.IsInfinity(raw)) return 0;
@@ -15,23 +15,23 @@ namespace PaperDefense.Core
             {
                 case InkColor.Red:
                     if (enemy.RedEffect == null) enemy.RedEffect = new TimedEffectState(InkColor.Red);
-                    enemy.RedEffect.TryApply(payload, weapon);
+                    enemy.RedEffect.TryApply(payload, weapon,weaponId);
                     SyncRed(enemy);
                     break;
                 case InkColor.Blue:
                     if (enemy.BlueEffect == null) enemy.BlueEffect = new TimedEffectState(InkColor.Blue);
-                    enemy.BlueEffect.TryApply(payload, weapon);
+                    enemy.BlueEffect.TryApply(payload, weapon,weaponId);
                     enemy.BlueRemaining = enemy.BlueEffect.Remaining;
                     break;
                 case InkColor.Green:
                     if (enemy.GreenEffect == null) enemy.GreenEffect = new TimedEffectState(InkColor.Green);
-                    enemy.GreenEffect.TryApply(payload, weapon);
+                    enemy.GreenEffect.TryApply(payload, weapon,weaponId);
                     enemy.GreenRemaining = enemy.GreenEffect.Remaining;
                     break;
             }
             float actual = Math.Min(enemy.Health, DamageRules.Apply(raw, Defense(enemy, defenseRules, blotReduction), defenseRules.MaximumDefense));
             enemy.Health = Math.Max(0, enemy.Health - actual);
-            statistics?.RecordDamage(weapon, actual);
+            statistics?.RecordDamage(weaponId??LegacyContentIds.Weapon(weapon), actual);
             return actual;
         }
 
@@ -127,7 +127,7 @@ namespace PaperDefense.Core
                     if (!rules.RedIgnoresDefense) raw = DamageRules.Apply(raw, Defense(enemy, rules, blotReduction), rules.MaximumDefense);
                     float actual = Math.Min(raw, enemy.Health);
                     enemy.Health = Math.Max(0, enemy.Health - actual);
-                    statistics?.RecordDamage(enemy.RedSourceWeapon, actual);
+                    statistics?.RecordDamage(enemy.RedSourceWeaponId??LegacyContentIds.Weapon(enemy.RedSourceWeapon), actual);
                     enemy.RedTickRemaining += rules.RedTickSeconds;
                 }
             }
@@ -140,6 +140,7 @@ namespace PaperDefense.Core
             enemy.RedRemaining = enemy.RedEffect.Remaining;
             enemy.RedTickRemaining = enemy.RedEffect.TickRemaining;
             enemy.RedSourceWeapon = enemy.RedEffect.Weapon;
+            enemy.RedSourceWeaponId = enemy.RedEffect.WeaponId;
         }
     }
 }

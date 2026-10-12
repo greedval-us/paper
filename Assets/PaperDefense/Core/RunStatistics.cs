@@ -10,10 +10,11 @@ namespace PaperDefense.Core
         public readonly long Tick;
         public readonly float Elapsed;
         public readonly StructureKind Kind;
+        public readonly string ContentId;
         public readonly MaterialTier Tier;
         public readonly int Investment;
-        public BreachRecord(Cell cell,long tick,float elapsed,StructureKind kind,MaterialTier tier,int investment)
-        {Cell=cell;Tick=tick;Elapsed=elapsed;Kind=kind;Tier=tier;Investment=investment;}
+        public BreachRecord(Cell cell,long tick,float elapsed,StructureKind kind,MaterialTier tier,int investment,string contentId=null)
+        {ContentId=contentId??LegacyContentIds.Weapon(kind);Cell=cell;Tick=tick;Elapsed=elapsed;Kind=kind;Tier=tier;Investment=investment;}
     }
 
     /// <summary>Fixed-size aggregates plus the last 32 breaches, never a per-hit journal.</summary>
@@ -28,11 +29,18 @@ namespace PaperDefense.Core
             NavigationTotalMilliseconds += milliseconds;
             NavigationMaxMilliseconds = Math.Max(NavigationMaxMilliseconds, milliseconds);
         }
-        static readonly int KindCount=Enum.GetValues(typeof(StructureKind)).Length;
-        static readonly int MaterialCount=Enum.GetValues(typeof(MaterialTier)).Length;
-        readonly float[] damage=new float[KindCount],idle=new float[KindCount];
-        readonly int[] launches=new int[KindCount];
-        readonly int[] built=new int[KindCount*MaterialCount];
+        sealed class WeaponMetrics { internal float Damage,Idle;internal int Launches;internal readonly Dictionary<MaterialTier,int> Built=new Dictionary<MaterialTier,int>(); }
+        readonly Dictionary<string,WeaponMetrics> metrics=new Dictionary<string,WeaponMetrics>(StringComparer.Ordinal);
+        readonly List<string> weaponIds=new List<string>();
+        public IReadOnlyList<string> WeaponIds=>weaponIds.AsReadOnly();
+        public float TotalDamage {get;private set;} public float TotalIdleSeconds {get;private set;}
+        WeaponMetrics Metrics(string id,bool create)
+        {
+            if(id==null)return null;
+            if(metrics.TryGetValue(id,out var value))return value;
+            if(!create)return null;
+            value=new WeaponMetrics();metrics.Add(id,value);weaponIds.Add(id);return value;
+        }
         readonly List<BreachRecord> breaches=new List<BreachRecord>(32);
         readonly List<RunUpgrade> upgrades=new List<RunUpgrade>(3);
         readonly ReadOnlyCollection<BreachRecord> breachView;
@@ -50,22 +58,30 @@ namespace PaperDefense.Core
         public IReadOnlyList<BreachRecord> Breaches=>breachView;
         public IReadOnlyList<RunUpgrade> Upgrades=>upgradeView;
         public RunStatistics(){breachView=breaches.AsReadOnly();upgradeView=upgrades.AsReadOnly();}
-        public float Damage(StructureKind kind)=>damage[(int)kind];
-        public float IdleSeconds(StructureKind kind)=>idle[(int)kind];
-        public int Launches(StructureKind kind)=>launches[(int)kind];
-        public int BuiltCount(StructureKind kind,MaterialTier tier)=>built[(int)kind*MaterialCount+(int)tier];
-        public void RecordDamage(StructureKind kind,float amount){if(amount>0&&!float.IsNaN(amount)&&!float.IsInfinity(amount))damage[(int)kind]+=amount;}
-        public void RecordIdle(StructureKind kind,float seconds){if(seconds>0&&!float.IsNaN(seconds)&&!float.IsInfinity(seconds))idle[(int)kind]+=seconds;}
-        public void RecordLaunch(StructureKind kind)=>launches[(int)kind]++;
-        public void RecordBuild(int cost,int segments,StructureKind kind=StructureKind.Wall,MaterialTier tier=MaterialTier.Pencil)
-        {BuildInvestment+=Math.Max(0,cost);segments=Math.Max(0,segments);TotalStructuresBuilt+=segments;built[(int)kind*MaterialCount+(int)tier]+=segments;}
+        public float Damage(StructureKind kind)=>Damage(LegacyContentIds.Weapon(kind));
+        public float Damage(string id)=>Metrics(id,false)?.Damage??0;
+        public float IdleSeconds(StructureKind kind)=>IdleSeconds(LegacyContentIds.Weapon(kind));
+        public float IdleSeconds(string id)=>Metrics(id,false)?.Idle??0;
+        public int Launches(StructureKind kind)=>Launches(LegacyContentIds.Weapon(kind));
+        public int Launches(string id)=>Metrics(id,false)?.Launches??0;
+        public int BuiltCount(StructureKind kind,MaterialTier tier)=>BuiltCount(LegacyContentIds.Weapon(kind),tier);
+        public int BuiltCount(string id,MaterialTier tier){var value=Metrics(id,false);return value!=null&&value.Built.TryGetValue(tier,out int count)?count:0;}
+        public void RecordDamage(StructureKind kind,float amount)=>RecordDamage(LegacyContentIds.Weapon(kind),amount);
+        public void RecordDamage(string id,float amount){if(amount>0&&!float.IsNaN(amount)&&!float.IsInfinity(amount)){var value=Metrics(id,true);if(value!=null){value.Damage+=amount;TotalDamage+=amount;}}}
+        public void RecordIdle(StructureKind kind,float seconds)=>RecordIdle(LegacyContentIds.Weapon(kind),seconds);
+        public void RecordIdle(string id,float seconds){if(seconds>0&&!float.IsNaN(seconds)&&!float.IsInfinity(seconds)){var value=Metrics(id,true);if(value!=null){value.Idle+=seconds;TotalIdleSeconds+=seconds;}}}
+        public void RecordLaunch(StructureKind kind)=>RecordLaunch(LegacyContentIds.Weapon(kind));
+        public void RecordLaunch(string id){var value=Metrics(id,true);if(value!=null)value.Launches++;}
+        public void RecordBuild(int cost,int segments,StructureKind kind=StructureKind.Wall,MaterialTier tier=MaterialTier.Pencil)=>RecordBuild(cost,segments,LegacyContentIds.Weapon(kind),tier);
+        public void RecordBuild(int cost,int segments,string id,MaterialTier tier)
+        {BuildInvestment+=Math.Max(0,cost);segments=Math.Max(0,segments);TotalStructuresBuilt+=segments;var value=Metrics(id,true);if(value!=null){value.Built.TryGetValue(tier,out int count);value.Built[tier]=count+segments;}}
         public void RecordUpgrade(int cost)=>UpgradeInvestment+=Math.Max(0,cost);
         public void RecordRefund(int refund)=>RefundedInk+=Math.Max(0,refund);
-        public void RecordLoss(Cell cell,long tick,float elapsed,StructureKind kind,MaterialTier tier,int investment)
+        public void RecordLoss(Cell cell,long tick,float elapsed,StructureKind kind,MaterialTier tier,int investment,string contentId=null)
         {
             LostInvestment+=Math.Max(0,investment);DestroyedStructures++;
             if(breaches.Count==32)breaches.RemoveAt(0);
-            breaches.Add(new BreachRecord(cell,tick,elapsed,kind,tier,Math.Max(0,investment)));
+            breaches.Add(new BreachRecord(cell,tick,elapsed,kind,tier,Math.Max(0,investment),contentId));
         }
         public void RecordUpgradeChoice(RunUpgrade upgrade){if(upgrades.Count<16)upgrades.Add(upgrade);}
         public void ObserveEnemies(int alive)=>PeakAliveEnemies=Math.Max(PeakAliveEnemies,alive);
@@ -88,6 +104,10 @@ namespace PaperDefense.Core
         public double NavigationMaxMilliseconds=>source.NavigationMaxMilliseconds;
         public IReadOnlyList<BreachRecord> Breaches=>source.Breaches;
         public IReadOnlyList<RunUpgrade> Upgrades=>source.Upgrades;
+        public IReadOnlyList<string> WeaponIds=>source.WeaponIds;
+        public float TotalDamage=>source.TotalDamage;public float TotalIdleSeconds=>source.TotalIdleSeconds;
+        public float Damage(string id)=>source.Damage(id);public float IdleSeconds(string id)=>source.IdleSeconds(id);public int Launches(string id)=>source.Launches(id);
+        public int BuiltCount(string id,MaterialTier tier)=>source.BuiltCount(id,tier);
         public float Damage(StructureKind kind)=>source.Damage(kind);
         public float IdleSeconds(StructureKind kind)=>source.IdleSeconds(kind);
         public int Launches(StructureKind kind)=>source.Launches(kind);

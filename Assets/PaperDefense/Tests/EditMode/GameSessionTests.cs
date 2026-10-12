@@ -114,7 +114,7 @@ namespace PaperDefense.Tests
             game.Enemies[0].Position = new Point2(6.5f, 8.5f);
             game.Tick(0.6f);
             Assert.That(game.Enemies[0].Position.X, Is.GreaterThan(7));
-            balance.Enemy(EnemyKind.Doodle).Speed = 0;
+            game.Enemies[0].SpeedScale = 0;
             game.Enemies[0].Position = new Point2(7.5f, 8.5f);
             game.Tick(0.3f);
             Assert.That(game.StructureAt(cell).BuildRemaining, Is.Zero);
@@ -130,12 +130,17 @@ namespace PaperDefense.Tests
         public void DiscountedUpgradeRefundUsesOnlyActualInvestment()
         {
             var balance = Balance();
+            int historicalInvestment=TowerCatalog.ToolCost(balance,StructureKind.Wall,MaterialTier.Pencil);
             balance.Material(MaterialTier.Ink).RefundFraction = 0.95f;
+            balance.Material(MaterialTier.Pencil).CostMultiplier = 0.1f;
+            balance.Material(MaterialTier.Ink).CostMultiplier = 0.2f;
+            // Restore the budget and recorded payment of a prior purchase under today's discounted configuration.
+            int currentPrice=TowerCatalog.ToolCost(balance,StructureKind.Wall,MaterialTier.Pencil);
+            balance.StartingInk -= historicalInvestment-currentPrice;
             var game = new GameSession(balance, starterDefenses: false);
             var cell = new Cell(3, 3);
             game.TryBuild(new[] { cell }, StructureKind.Wall, MaterialTier.Pencil, out _);
-            balance.Material(MaterialTier.Pencil).CostMultiplier = 0.1f;
-            balance.Material(MaterialTier.Ink).CostMultiplier = 0.2f;
+            game.StructureAt(cell).PaidInk = historicalInvestment;
             Assert.That(game.TryUpgrade(cell, out _), Is.True);
             Assert.That(game.TryErase(cell, out int refund), Is.True);
             Assert.That(refund, Is.EqualTo(10));

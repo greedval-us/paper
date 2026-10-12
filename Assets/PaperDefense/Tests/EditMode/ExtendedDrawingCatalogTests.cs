@@ -91,7 +91,7 @@ namespace PaperDefense.Tests
                 StructureKind.Gun)).GetPart(DrawingPartKey.Mount0);
             Assert.That(MaximumX(mount), Is.GreaterThan(MaximumX(gun)));
             Assert.That(draft.WithDrawing(reference).Assessment.Quality, Is.EqualTo(100));
-            Assert.That(reference.FormatVersion, Is.EqualTo(DrawingSnapshot.CurrentFormatVersion));
+            Assert.That(reference.FormatVersion, Is.EqualTo(DrawingSnapshot.LegacyFormatVersion));
             Assert.That(reference.BindingVersion, Is.EqualTo(1));
         }
 
@@ -153,7 +153,7 @@ namespace PaperDefense.Tests
             Assert.That(MaximumX(mount), Is.GreaterThan(.1f).And.LessThan(.2f));
             Assert.That(PartHash(mount), Is.Not.EqualTo(PartHash(Reference(FanDraft).GetPart(DrawingPartKey.Mount0))));
             Assert.That(draft.WithDrawing(reference).Assessment.Quality, Is.EqualTo(100));
-            Assert.That(reference.FormatVersion, Is.EqualTo(DrawingSnapshot.CurrentFormatVersion));
+            Assert.That(reference.FormatVersion, Is.EqualTo(DrawingSnapshot.LegacyFormatVersion));
             Assert.That(reference.BindingVersion, Is.EqualTo(1));
         }
 
@@ -218,7 +218,7 @@ namespace PaperDefense.Tests
             Assert.That(MaximumY(mount), Is.GreaterThan(.4f));
             Assert.That(PartHash(mount), Is.Not.EqualTo(PartHash(Reference(FanDraft).GetPart(DrawingPartKey.Mount0))));
             Assert.That(draft.WithDrawing(reference).Assessment.Quality, Is.EqualTo(100));
-            Assert.That(reference.FormatVersion, Is.EqualTo(DrawingSnapshot.CurrentFormatVersion));
+            Assert.That(reference.FormatVersion, Is.EqualTo(DrawingSnapshot.LegacyFormatVersion));
             Assert.That(reference.BindingVersion, Is.EqualTo(1));
         }
 
@@ -283,7 +283,7 @@ namespace PaperDefense.Tests
             Assert.That(mount.Strokes.Count, Is.GreaterThanOrEqualTo(3));
             Assert.That(PartHash(mount), Is.Not.EqualTo(PartHash(Reference(FanDraft).GetPart(DrawingPartKey.Mount0))));
             Assert.That(draft.WithDrawing(reference).Assessment.Quality, Is.EqualTo(100));
-            Assert.That(reference.FormatVersion, Is.EqualTo(DrawingSnapshot.CurrentFormatVersion));
+            Assert.That(reference.FormatVersion, Is.EqualTo(DrawingSnapshot.LegacyFormatVersion));
             Assert.That(reference.BindingVersion, Is.EqualTo(1));
         }
 

@@ -153,12 +153,12 @@ namespace PaperDefense.Tests
             balance.Progression.SalvageSupplyMultiplier = 2;
             balance.Progression.SalvageRefundBonus = .03f;
             balance.Material(MaterialTier.Pencil).RefundFraction = .2f;
+            balance.PassiveInkPerSecond = 4;
             var session = new GameSession(balance, starterDefenses: false);
             ReachUpgrade(session);
             int before = session.Ink;
             session.ChooseUpgrade(RunUpgrade.Salvage);
             Assert.That(session.Ink, Is.EqualTo(before + 17));
-            balance.PassiveInkPerSecond = 4;
             session.Tick(1);
             Assert.That(session.Ink, Is.EqualTo(before + 25));
             StructureState tower = BuildGun(session);

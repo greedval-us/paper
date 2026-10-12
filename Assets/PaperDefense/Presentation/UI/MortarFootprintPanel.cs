@@ -12,6 +12,8 @@ namespace PaperDefense.Presentation
         readonly Func<TowerBlueprint, int, MortarFootprint, MortarFootprint, FootprintFormation, FootprintProbeComparison> compare;
         readonly FootprintProbeSketch first, second;
         readonly UnityEngine.UI.Text summary;
+        readonly UnityEngine.UI.Text instructions, aspectLabel;
+        float maximumAspect = MortarFootprint.MaximumAspectRatio;
         TowerBlueprint blueprint;
         FootprintFormation formation;
         float started;
@@ -42,15 +44,15 @@ namespace PaperDefense.Presentation
             Place(sheet.GetComponent<RectTransform>(), new Rect(90, 115, 1420, 770));
             sheet.GetComponent<UnityEngine.UI.Image>().color = NotebookPalette.Paper;
             Text(font, "СЛЕД ВЫСТРЕЛА  ·  один залп выбранной мортиры", new Rect(30, 20, 1350, 50), 28);
-            Text(font, "Центр закреплён · +Y вперёд\nТяни точку: q от 1 до 3; площадь постоянна", new Rect(30, 85, 390, 65), 19);
+            instructions = Text(font, "", new Rect(30, 85, 390, 65), 19);
             var axis = new GameObject("Footprint axis", typeof(RectTransform), typeof(CanvasRenderer), typeof(FootprintAxisGraphic));
             axis.transform.SetParent(sheet.transform, false);
             Place(axis.GetComponent<RectTransform>(), new Rect(30, 160, 390, 400));
             Axis = axis.GetComponent<FootprintAxisGraphic>();
             Axis.Configure(BeginDrag, Commit);
-            var aspectLabel = Text(font, "q = 1.00 · пределы 1—3", new Rect(30, 575, 390, 45), 22);
+            aspectLabel = Text(font, "", new Rect(30, 575, 390, 45), 22);
             aspectLabel.name = "Footprint aspect ratio";
-            Axis.AspectChanged = q => aspectLabel.text = "q = " + q.ToString("0.00") + " · пределы 1—3";
+            Axis.AspectChanged = q => aspectLabel.text = "q = " + q.ToString("0.00") + " · пределы 1—" + maximumAspect.ToString("0.##");
             Text(font, "A · зафиксированный след", new Rect(460, 95, 440, 35), 21);
             Text(font, "B · текущий черновик", new Rect(940, 95, 440, 35), 21);
             first = Sketch("Footprint replay A", new Rect(460, 150, 440, 360));
@@ -76,6 +78,10 @@ namespace PaperDefense.Presentation
             value.GetMortarFootprint(mount);
             blueprint = value;
             Mount = mount;
+            string weaponId = mount == 0 ? value.FirstWeaponId : value.SecondWeaponId;
+            maximumAspect = value.Content?.GetWeapon(weaponId).MaximumFootprintAspectRatio ?? MortarFootprint.MaximumAspectRatio;
+            instructions.text = "Центр закреплён · +Y вперёд\nТяни точку: q от 1 до " + maximumAspect.ToString("0.##") + "; площадь постоянна";
+            Axis.SetMaximum(maximumAspect);
             Baseline = value.GetMortarFootprint(mount);
             IsDragging = false;
             Axis.SetAspect(Baseline.AspectRatio);
@@ -121,7 +127,7 @@ namespace PaperDefense.Presentation
                 return;
             }
             IsDragging = false;
-            blueprint = blueprint.WithMortarFootprint(Mount, new MortarFootprint(q));
+            blueprint = blueprint.WithMortarFootprint(Mount, new MortarFootprint(q, maximumAspect));
             changeDraft(blueprint);
             Axis.SetAspect(q);
             Record();
@@ -207,8 +213,11 @@ namespace PaperDefense.Presentation
         bool dragging;
         int pointerId;
         const float Radius = 82;
+        float maximumAspect = MortarFootprint.MaximumAspectRatio;
+        float DisplayRadius => Mathf.Min(Radius, rectTransform.rect.height * .43f / Mathf.Sqrt(maximumAspect));
         public float AspectRatio { get; private set; } = 1;
-        public Vector2 Endpoint => rectTransform.rect.center + Vector2.up * Radius * Mathf.Sqrt(AspectRatio);
+        public Vector2 Endpoint => rectTransform.rect.center + Vector2.up * DisplayRadius * Mathf.Sqrt(AspectRatio);
+        internal void SetMaximum(float maximum) { maximumAspect = maximum; SetVerticesDirty(); }
         public Vector2 LocalPointToScreen(Vector2 local) => RectTransformUtility.WorldToScreenPoint(null, rectTransform.TransformPoint(local));
         internal void Configure(Action start, Action<float> end)
         {
@@ -249,8 +258,8 @@ namespace PaperDefense.Presentation
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, data.position, data.pressEventCamera, out var p))
             {
                 float forwardDistance = Mathf.Max(0, p.y - rectTransform.rect.center.y);
-                float q = Mathf.Pow(forwardDistance / Radius, 2);
-                SetAspect(Mathf.Clamp(q, 1, 3));
+                float q = Mathf.Pow(forwardDistance / DisplayRadius, 2);
+                SetAspect(Mathf.Clamp(q, 1, maximumAspect));
             }
         }
         public void OnPointerUp(PointerEventData data)
@@ -266,8 +275,8 @@ namespace PaperDefense.Presentation
         {
             vh.Clear();
             var c = rectTransform.rect.center;
-            float along = Radius * Mathf.Sqrt(AspectRatio);
-            float across = Radius / Mathf.Sqrt(AspectRatio);
+            float along = DisplayRadius * Mathf.Sqrt(AspectRatio);
+            float across = DisplayRadius / Mathf.Sqrt(AspectRatio);
             for (int i = 0; i<64; i++)
             {
                 float a = i * Mathf.PI / 32, b = (i + 1) * Mathf.PI / 32;
@@ -279,8 +288,8 @@ namespace PaperDefense.Presentation
             BlueprintSketch.Line(vh, tip, tip + new Vector2(9, -14), 2, NotebookPalette.Navy);
             BlueprintSketch.Ring(vh, c, 5, 3, NotebookPalette.Navy);
             BlueprintSketch.Ring(vh, Endpoint, 9, 5, NotebookPalette.Red);
-            BlueprintSketch.Ring(vh, c + Vector2.up * Radius, 3, 2, NotebookPalette.Navy);
-            BlueprintSketch.Ring(vh, c + Vector2.up * Radius * Mathf.Sqrt(3), 3, 2, NotebookPalette.Navy);
+            BlueprintSketch.Ring(vh, c + Vector2.up * DisplayRadius, 3, 2, NotebookPalette.Navy);
+            BlueprintSketch.Ring(vh, c + Vector2.up * DisplayRadius * Mathf.Sqrt(maximumAspect), 3, 2, NotebookPalette.Navy);
         }
     }
 }

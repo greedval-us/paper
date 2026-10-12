@@ -38,6 +38,7 @@ namespace PaperDefense.Core
         public readonly int Id;
         public readonly Cell Cell;
         public readonly StructureKind Kind;
+        public readonly string ContentId;
         public readonly MaterialTier Tier;
         public readonly float Health,MaxHealth,BuildRemaining,Cooldown;
         public readonly bool IsComplete,WaitingForClearance;
@@ -48,7 +49,7 @@ namespace PaperDefense.Core
         public readonly TowerBlueprint Blueprint;
         public readonly InkColor Color;
         internal StructureView(StructureState s)
-        {Id=s.Id;Cell=s.Cell;Kind=s.Kind;Tier=s.Tier;Health=s.Health;MaxHealth=s.MaxHealth;BuildRemaining=s.BuildRemaining;
+        {Id=s.Id;Cell=s.Cell;Kind=s.Kind;ContentId=s.ContentId??LegacyContentIds.Weapon(s.Kind);Tier=s.Tier;Health=s.Health;MaxHealth=s.MaxHealth;BuildRemaining=s.BuildRemaining;
             Cooldown=s.Cooldown;IsComplete=s.IsComplete;WaitingForClearance=s.WaitingForClearance;Aim=s.Aim;Priority=s.Priority;
             Blueprint=s.Blueprint;Color=s.Color;PrimaryAim=s.PrimaryAim;SecondaryAim=s.SecondaryAim;
             PrimaryTargetId=s.PrimaryTargetId;SecondaryTargetId=s.SecondaryTargetId;}
@@ -88,9 +89,10 @@ namespace PaperDefense.Core
         public readonly Point2 From,To;
         public readonly float Remaining,Duration,Radius;
         public readonly StructureKind Weapon;
+        public readonly string WeaponId;
         public readonly FootprintGeometry? ImpactFootprint;
         internal ProjectileView(MortarProjectile p)
-        {Id=p.Id;From=p.From;To=p.To;Remaining=p.Remaining;Duration=p.Duration;Radius=p.Radius;Weapon=p.Weapon;ImpactFootprint=p.ImpactFootprint;}
+        {Id=p.Id;From=p.From;To=p.To;Remaining=p.Remaining;Duration=p.Duration;Radius=p.Radius;Weapon=p.Weapon;WeaponId=p.WeaponId;ImpactFootprint=p.ImpactFootprint;}
     }
 
     public sealed class RunReadModel : IRunReadModel
@@ -107,7 +109,7 @@ namespace PaperDefense.Core
         public RunReadModel(GameSession source)
         {
             this.source=source??throw new ArgumentNullException(nameof(source));
-            Balance=new GameBalanceView(source.Balance, source.Mechanics);Statistics=new RunStatisticsView(source.Statistics);
+            Balance=new GameBalanceView(source.OwnedBalance, source.Mechanics);Statistics=new RunStatisticsView(source.Statistics);
             Structures=new ProjectedList<StructureState,StructureView>(source.Structures,s=>new StructureView(s));
             Enemies=new ProjectedList<EnemyState,EnemyView>(source.Enemies,e=>new EnemyView(e));
             Projectiles=new ProjectedList<MortarProjectile,ProjectileView>(source.Projectiles,p=>new ProjectileView(p));
@@ -166,9 +168,11 @@ namespace PaperDefense.Core
     {
         readonly GameBalance source;
         public MechanicsAvailability Mechanics {get;}
+        public ContentCatalogSnapshot Content {get;}
+        public TrialRules Trials {get;}
         public IReadOnlyList<WaveView> Waves {get;}
         internal GameBalanceView(GameBalance source, MechanicsAvailability? mechanics = null)
-        {this.source=source;Mechanics=mechanics??MechanicsAvailability.Resolve(source);Waves=new ProjectedList<WaveDefinition,WaveView>(source.Waves,w=>new WaveView(w));}
+        {this.source=source;Content=source.ResolveContent();Trials=source.Trials.CreateSnapshot();Mechanics=mechanics??MechanicsAvailability.Resolve(source);Waves=new ProjectedList<WaveDefinition,WaveView>(source.Waves,w=>new WaveView(w));}
         public int Width=>source.Width;public int Height=>source.Height;public int StartingInk=>source.StartingInk;
         public float BaseHealth=>source.BaseHealth;public float PlanningSeconds=>source.PlanningSeconds;public float IntermissionSeconds=>source.IntermissionSeconds;
         public float SimulationStep=>source.SimulationStep;public int MaxEnemiesPerCell=>source.MaxEnemiesPerCell;
@@ -182,11 +186,13 @@ namespace PaperDefense.Core
         public bool LimitTowerColor=>source.Effects.LimitTowerColor;
         public float ColorWindowSeconds=>source.Effects.ColorWindowSeconds;
         public int ColorTargetsPerWindow=>source.Effects.ColorTargetsPerWindow;
-        public int ChassisCapacity(ChassisKind chassis)=>chassis==ChassisKind.Heavy?source.Construction.HeavyCapacity:source.Construction.StandardCapacity;
+        public int ChassisCapacity(ChassisKind chassis)=>Content.GetChassis(LegacyContentIds.Chassis(chassis)).Capacity;
+        public int ChassisCapacity(string chassisId)=>Content.GetChassis(chassisId).Capacity;
         public int ModuleLoad(TowerModules modules)=>source.Construction.ModuleLoad(modules);
         public int ToolCost(StructureKind kind, MaterialTier tier)=>TowerCatalog.ToolCost(source,kind,tier);
         public StructureSpec Structure(StructureKind kind)=>new StructureSpec(source.Structure(kind));
         public float WeaponRange(TowerBlueprint blueprint,StructureKind kind)=>TowerCatalog.WeaponRange(blueprint,source,kind);
+        public float WeaponRange(TowerBlueprint blueprint,string id,int mount=0)=>TowerCatalog.WeaponRange(blueprint,source,id,mount);
         public MaterialSpec Material(MaterialTier tier)=>new MaterialSpec(source.Material(tier));
         public EnemySpec Enemy(EnemyKind kind)=>new EnemySpec(source.Enemy(kind));
     }

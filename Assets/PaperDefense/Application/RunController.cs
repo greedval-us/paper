@@ -14,10 +14,13 @@ namespace PaperDefense.Application
         public int Speed { get; private set; } = 1;
         public bool InWorkshop {get;private set;}
         public WorkshopReadModel Workshop {get;private set;}
+        ContentCatalogSnapshot contentSnapshot;
+        public ContentCatalogSnapshot Content => contentSnapshot;
         public event Action WorkshopChanged;
         WorkshopProfile profile;
         IReadOnlyList<TowerBlueprint> runLoadout;
         bool workshopMode;
+        bool legacyFixtureDefaults;
         IWorkshopProfileStore profileStore;
         bool profileCanWrite, profileDirty;
         ProfileSaveState profileSaveState = ProfileSaveState.MemoryOnly;
@@ -30,27 +33,41 @@ namespace PaperDefense.Application
         public double DiscardedSimulationSeconds => clock.DiscardedSeconds;
         public long SkippedVisualEvents { get; private set; }
 
-        public void Initialize()
+        public void Initialize(bool allowLegacyFixtureDefaults = false)
         {
+            var preparedSession = new GameSession(CreateConfiguredBalance(false, allowLegacyFixtureDefaults));
+            var preparedProfile = new WorkshopProfile(preparedSession.Balance.Content, preparedSession.Balance);
+            legacyFixtureDefaults = allowLegacyFixtureDefaults;
             ResetPersistence();workshopMode=false;InWorkshop=false;
-            profile=new WorkshopProfile();Workshop=new WorkshopReadModel(profile);runLoadout=profile.GetLoadoutBlueprints();
-            Initialize(new GameSession(balanceAsset != null ? balanceAsset.CreateBalance() : GameBalance.CreateDefault()));
+            profile=preparedProfile;Workshop=new WorkshopReadModel(profile);runLoadout=profile.GetLoadoutBlueprints();
+            Initialize(preparedSession);
         }
 
-        public void InitializeWorkshop(bool persistent=true)
+        public void InitializeWorkshop(bool persistent=true, bool allowLegacyFixtureDefaults = false)
         {
-            if (persistent) { InitializeWorkshop(new WorkshopProfileStore(WorkshopPersistence.ProfilePath)); return; }
+            if (persistent)
+            {
+                if (allowLegacyFixtureDefaults) throw new ArgumentException("Legacy fixtures require memory mode or an explicitly isolated profile store.");
+                InitializeWorkshop(new WorkshopProfileStore(WorkshopPersistence.ProfilePath)); return;
+            }
+            var preparedSession = new GameSession(CreateConfiguredBalance(true, allowLegacyFixtureDefaults), starterDefenses:false);
+            var preparedProfile = new WorkshopProfile(preparedSession.Balance.Content, preparedSession.Balance);
+            legacyFixtureDefaults = allowLegacyFixtureDefaults;
             ResetPersistence();workshopMode=true;
-            profile=new WorkshopProfile();Workshop=new WorkshopReadModel(profile);
+            profile=preparedProfile;Workshop=new WorkshopReadModel(profile);
             runLoadout=profile.GetLoadoutBlueprints();
-            Initialize(new GameSession(CreateWorkshopBalance(),starterDefenses:false));
+            Initialize(preparedSession);
             InWorkshop=true;WorkshopChanged?.Invoke();
         }
 
-        public void InitializeWorkshop(IWorkshopProfileStore store)
+        public void InitializeWorkshop(IWorkshopProfileStore store, bool allowLegacyFixtureDefaults = false)
         {
             if (store == null) throw new ArgumentNullException(nameof(store));
+            // Reject missing/invalid configuration before reading any profile, including the real path.
+            var preparedSession = new GameSession(CreateConfiguredBalance(true, allowLegacyFixtureDefaults), starterDefenses:false);
+            var freshProfile = new WorkshopProfile(preparedSession.Balance.Content, preparedSession.Balance);
             var loaded = store.Load();
+            legacyFixtureDefaults = allowLegacyFixtureDefaults;
             profileStore=store;workshopMode=true;
             profileCanWrite=loaded.CanWrite&&loaded.Source!=ProfileLoadSource.RecoveryRequired;
             profileDirty=profileCanWrite&&(loaded.Source==ProfileLoadSource.NewProfile||loaded.Source==ProfileLoadSource.Backup);
@@ -58,9 +75,10 @@ namespace PaperDefense.Application
             profileSaveState=!profileCanWrite?ProfileSaveState.RecoveryRequired:profileDirty?ProfileSaveState.Unsaved:ProfileSaveState.Saved;
             profileSaveMessage=loaded.Message;
             if(string.IsNullOrEmpty(profileSaveMessage))profileSaveMessage=profileDirty?"Профиль ещё не записан.":"Профиль сохранён.";
-            profile=loaded.Profile??new WorkshopProfile();Workshop=new WorkshopReadModel(profile);RefreshSaveInfo();
+            profile=loaded.Source==ProfileLoadSource.NewProfile ? freshProfile : loaded.Profile??freshProfile;
+            Workshop=new WorkshopReadModel(profile);RefreshSaveInfo();
             runLoadout=profile.GetLoadoutBlueprints();
-            Initialize(new GameSession(CreateWorkshopBalance(),starterDefenses:false));
+            Initialize(preparedSession);
             InWorkshop=true;WorkshopChanged?.Invoke();
         }
 
@@ -117,9 +135,13 @@ namespace PaperDefense.Application
             reason=profileSaveMessage;return true;
         }
 
-        GameBalance CreateWorkshopBalance()
+        GameBalance CreateWorkshopBalance() => CreateConfiguredBalance(true, legacyFixtureDefaults);
+
+        GameBalance CreateConfiguredBalance(bool workshop, bool allowLegacyFixtureDefaults)
         {
-            if(balanceAsset!=null)return balanceAsset.CreateWorkshopBalance();
+            if(balanceAsset!=null)return workshop ? balanceAsset.CreateWorkshopBalance() : balanceAsset.CreateBalance();
+            if(!allowLegacyFixtureDefaults)throw new ArgumentException("RunController.balanceAsset: назначьте конфигурацию перед подготовкой партии.");
+            if(!workshop)return GameBalance.CreateDefault();
             var balance=GameBalancePresets.CreateTargetWorkshop();GameBalanceAsset.AddWorkshopThreats(balance);
             return balance;
         }
@@ -128,11 +150,18 @@ namespace PaperDefense.Application
         internal void Initialize(GameSession replay)
         {
             session = replay ?? throw new ArgumentNullException(nameof(replay));
+            contentSnapshot = session.Balance.ResolveContent();
             InWorkshop=false;
             if(profile==null){profile=new WorkshopProfile();Workshop=new WorkshopReadModel(profile);runLoadout=profile.GetLoadoutBlueprints();}
+            if (profile.ConfigureContent(contentSnapshot) && profileStore != null && profileCanWrite)
+            {
+                profileDirty = true; profileSaveState = ProfileSaveState.Unsaved;
+                profileSaveMessage = "Новые стартовые открытия ещё не сохранены.";
+            }
             depositedGold=0;
             Session = new RunReadModel(session);
             Workshop.Refresh(session.Balance);
+            RefreshSaveInfo();
             Paused = false; Speed = 1; clock.Reset();
             lastEventSequence = 0; SkippedVisualEvents = 0;
             SessionChanged?.Invoke(Session);
@@ -174,7 +203,7 @@ namespace PaperDefense.Application
         public void TogglePause() { Paused = !Paused; clock.ClearDebt(); }
         public void ToggleSpeed() => Speed = Speed == 1 ? 2 : 1;
         public void NextWave() { if (session != null && !InWorkshop) session.StartNextWave(); }
-        public void Restart() {if(workshopMode)OpenWorkshop();else Initialize();}
+        public void Restart() {if(workshopMode)OpenWorkshop();else Initialize(legacyFixtureDefaults);}
         public bool Build(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier, out string reason)
         {
             if(InWorkshop){reason="Сначала начните партию.";return false;}
@@ -244,18 +273,30 @@ namespace PaperDefense.Application
         public bool StartRun(out string reason)
         {
             if(!Editing(out reason))return false;
-            var balance=CreateWorkshopBalance();
-            var selection=profile.GetLoadoutBlueprints();
-            foreach(var blueprint in selection)if(!profile.ValidateOwned(blueprint,out reason,balance))return false;
-            runLoadout=selection;InWorkshop=false;
-            Initialize(new GameSession(balance,starterDefenses:false));
+            GameBalance balance;
+            try { balance=CreateWorkshopBalance(); }
+            catch (ArgumentException error) { reason="Ошибка конфигурации: "+error.Message;return false; }
+            var candidate = profile.CreateWorkingCopy();
+            var preparedContent = balance.ResolveContent();
+            balance.Content = preparedContent;
+            candidate.ConfigureContent(preparedContent);
+            var selection=candidate.GetLoadoutBlueprints();
+            foreach(var blueprint in selection)if(!candidate.ValidateOwned(blueprint,out reason,balance))return false;
+            var prepared = new TowerBlueprint[selection.Count];
+            for (int i = 0; i < prepared.Length; i++) prepared[i] = selection[i].WithContent(preparedContent);
+            GameSession preparedSession;
+            try { preparedSession=new GameSession(balance,starterDefenses:false); }
+            catch (ArgumentException error) { reason="Ошибка конфигурации: "+error.Message;return false; }
+            runLoadout=Array.AsReadOnly(prepared);InWorkshop=false;
+            Initialize(preparedSession);
             reason="";WorkshopChanged?.Invoke();return true;
         }
         public void OpenWorkshop()
         {
+            var preparedSession = new GameSession(CreateWorkshopBalance(),starterDefenses:false);
             if(session!=null)DepositGold();
             workshopMode=true;InWorkshop=true;
-            Initialize(new GameSession(CreateWorkshopBalance(),starterDefenses:false));
+            Initialize(preparedSession);
             InWorkshop=true;
             WorkshopChanged?.Invoke();
         }
@@ -284,7 +325,8 @@ namespace PaperDefense.Application
         public TrialComparison RunTrial(TowerBlueprint blueprint,TrialScenario scenario,bool counterfire=false,int budget=400)
         {
             if(!InWorkshop||!profile.ValidateOwned(blueprint,out _,session.Balance))return null;
-            var baseline=new TowerBlueprint("trial.baseline","Одиночные пулемёты",ChassisKind.Standard,StructureKind.Gun);
+            var trials=session.Balance.Trials;
+            var baseline=new TowerBlueprint("trial.baseline","Базовая сборка",trials.BaselineChassisId,trials.BaselineWeaponId,content:contentSnapshot);
             return TrialRunner.Compare(blueprint,baseline,session.Balance,scenario,budget,1337,counterfire);
         }
         public TrialComparison RunQualityTrial(TowerBlueprint blueprint,TrialScenario scenario,bool counterfire=false,int budget=400)

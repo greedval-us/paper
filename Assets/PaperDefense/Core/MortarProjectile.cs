@@ -15,6 +15,8 @@ namespace PaperDefense.Core
         public FootprintGeometry? ImpactFootprint { get; internal set; }
         public float Damage { get; internal set; }
         public StructureKind Weapon { get; internal set; }
+        public string WeaponId { get; internal set; }
+        internal WeaponDefinition Definition;
         public InkColor Color { get; internal set; }
         internal ColorEffectPayload EffectPayload;
         internal TowerColorBudget ColorBudget;

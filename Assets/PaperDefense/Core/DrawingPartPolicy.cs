@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace PaperDefense.Core
 {
@@ -16,6 +17,37 @@ namespace PaperDefense.Core
                     TowerModules module = ModuleFor(key);
                     return module != TowerModules.None && (blueprint.Modules & module) != 0;
             }
+        }
+
+        public static bool IsEnabled(TowerBlueprint blueprint, string bindingId)
+        {
+            if (blueprint == null || bindingId == null) return false;
+            if (bindingId == DrawingBindings.Base || bindingId == DrawingBindings.Mount0 || bindingId == DrawingBindings.Decoration) return true;
+            if (bindingId == DrawingBindings.Mount1) return blueprint.SecondWeaponId != null;
+            foreach (var module in blueprint.ModuleSelections)
+                if (DrawingBindings.Module(module.InstanceId) == bindingId) return true;
+            return false;
+        }
+
+        public static bool ShouldRetain(string bindingId, TowerBlueprint before, string afterChassis,
+            string afterFirstWeapon, string afterSecondWeapon, IEnumerable<ModuleSelection> afterModules)
+        {
+            if (before == null) throw new ArgumentNullException(nameof(before));
+            if (bindingId == DrawingBindings.Base) return before.ChassisId == afterChassis;
+            if (bindingId == DrawingBindings.Mount0) return before.FirstWeaponId == afterFirstWeapon;
+            if (bindingId == DrawingBindings.Mount1) return afterSecondWeapon != null && before.SecondWeaponId == afterSecondWeapon;
+            if (bindingId == DrawingBindings.Decoration) return true;
+            foreach (var old in before.ModuleSelections)
+                if (DrawingBindings.Module(old.InstanceId) == bindingId && afterModules != null)
+                    foreach (var next in afterModules)
+                        if (next.InstanceId == old.InstanceId && next.DefinitionId == old.DefinitionId) return true;
+            return false;
+        }
+
+        public static bool ShouldRetain(string bindingId, TowerBlueprint before, TowerBlueprint after)
+        {
+            if (after == null) throw new ArgumentNullException(nameof(after));
+            return ShouldRetain(bindingId, before, after.ChassisId, after.FirstWeaponId, after.SecondWeaponId, after.ModuleSelections);
         }
 
         public static bool ShouldRetain(DrawingPartKey key, TowerBlueprint before, ChassisKind afterChassis,

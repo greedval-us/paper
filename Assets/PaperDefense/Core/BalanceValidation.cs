@@ -30,11 +30,16 @@ namespace PaperDefense.Core
             if (balance.Construction == null || balance.Effects == null || balance.Progression == null)
                 throw new ArgumentException("Отсутствует набор правил конструкции, эффектов или развития.", nameof(balance));
             balance.Construction.Validate(); balance.Effects.Validate(); ValidateProgression(balance.Progression);
-            ValidateStructures(balance.StructureDefinitions); ValidateMaterials(balance.MaterialDefinitions);
+            if(balance.Combat==null)throw new ArgumentException("balance.combat: отсутствуют боевые правила");
+            if(balance.Trials==null)throw new ArgumentException("balance.trials: отсутствуют условия испытаний");
+            if(balance.WellPlacements==null)throw new ArgumentException("balance.wellPlacements: отсутствует список целей");
+            balance.Combat.CreateSnapshot();balance.Trials.CreateSnapshot();
+            for(int i=0;i<balance.WellPlacements.Count;i++){var well=balance.WellPlacements[i];if(well==null)throw new ArgumentException("balance.wellPlacements["+i+"]: пустая запись");well.CreateSnapshot();}
+            ValidateStructures(balance.StructureDefinitions,balance.Content==null); ValidateMaterials(balance.MaterialDefinitions);
             ValidateEnemies(balance.EnemyDefinitions); ValidateWaves(balance.Waves);
         }
 
-        static void ValidateStructures(List<StructureDefinition> definitions)
+        static void ValidateStructures(List<StructureDefinition> definitions,bool requireLegacy)
         {
             if (definitions == null) throw new ArgumentException("Отсутствуют определения построек.", nameof(definitions));
             var seen = new HashSet<StructureKind>();
@@ -53,7 +58,8 @@ namespace PaperDefense.Core
                 NonNegative(item.JumpRange, name + nameof(item.JumpRange)); Fraction(item.SlowSpeedMultiplier, name + nameof(item.SlowSpeedMultiplier));
                 NonNegative(item.SlowDuration, name + nameof(item.SlowDuration));
             }
-            if (seen.Count != Enum.GetValues(typeof(StructureKind)).Length) throw new ArgumentException("Неполный каталог построек.", nameof(definitions));
+            if(requireLegacy&&seen.Count != Enum.GetValues(typeof(StructureKind)).Length)throw new ArgumentException("Неполный каталог построек.", nameof(definitions));
+            if(!seen.Contains(StructureKind.Wall)||!seen.Contains(StructureKind.Spikes))throw new ArgumentException("StructureDefinitions: требуются инструменты Wall и Spikes");
         }
 
         static void ValidateMaterials(List<MaterialDefinition> definitions)

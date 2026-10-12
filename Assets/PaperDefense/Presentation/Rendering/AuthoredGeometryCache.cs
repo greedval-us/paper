@@ -52,7 +52,7 @@ namespace PaperDefense.Presentation
                     AddQuad(vertices, indices, from - side, to - side, to + side, from + side);
                 }
             }
-            return new AuthoredPartGeometry(part.Key, vertices.ToArray(), indices.ToArray());
+            return new AuthoredPartGeometry(part.BindingId, vertices.ToArray(), indices.ToArray());
         }
 
         static void AddQuad(List<Vector2> vertices, List<int> indices, Vector2 a, Vector2 b, Vector2 c, Vector2 d)
@@ -77,15 +77,18 @@ namespace PaperDefense.Presentation
         public IReadOnlyList<AuthoredPartGeometry> Parts { get; }
         internal AuthoredDrawingGeometry(AuthoredPartGeometry[] parts) { Parts = Array.AsReadOnly(parts); }
         public AuthoredPartGeometry GetPart(DrawingPartKey key)
-        { for (int i = 0; i < Parts.Count; i++) if (Parts[i].Key == key) return Parts[i]; return null; }
+            => GetPart(DrawingBindings.For(key));
+        public AuthoredPartGeometry GetPart(string bindingId)
+        { for (int i = 0; i < Parts.Count; i++) if (Parts[i].BindingId == bindingId) return Parts[i]; return null; }
     }
 
     public sealed class AuthoredPartGeometry
     {
         public DrawingPartKey Key { get; }
+        public string BindingId { get; }
         public IReadOnlyList<Vector2> Vertices { get; }
         public IReadOnlyList<int> Indices { get; }
-        internal AuthoredPartGeometry(DrawingPartKey key, Vector2[] vertices, int[] indices)
-        { Key = key; Vertices = Array.AsReadOnly(vertices); Indices = Array.AsReadOnly(indices); }
+        internal AuthoredPartGeometry(string bindingId, Vector2[] vertices, int[] indices)
+        { BindingId = bindingId; DrawingBindings.TryLegacy(bindingId, out var key); Key = key; Vertices = Array.AsReadOnly(vertices); Indices = Array.AsReadOnly(indices); }
     }
 }

@@ -32,16 +32,19 @@ namespace PaperDefense.Editor
                 if (asset == null) throw new FileNotFoundException("Balance asset not found", assetPath);
                 var balance = asset.CreateWorkshopBalance();
                 BalanceValidation.Validate(balance);
-                configurations.Add(CreateConfiguration(assetPath, balance));
+                configurations.Add(CreateConfiguration(assetPath, asset, balance));
             }
             var sourcePaths = new List<string> {
                 "Assets/PaperDefense/Application/GameBalanceAsset.cs",
-                "Assets/PaperDefense/Editor/BalanceWorkbookExport.cs" };
-            sourcePaths.AddRange(Directory.GetFiles(Path.Combine(root, "Assets/PaperDefense/Core"), "*.cs")
-                .Select(path => Relative(root, path)));
+                "Assets/PaperDefense/Editor/BalanceWorkbookExport.cs",
+                "Tools/BalanceWorkbook/build.mjs" };
+            foreach (string directory in new[] { "Core", "Application" })
+                sourcePaths.AddRange(Directory.GetFiles(Path.Combine(root, "Assets/PaperDefense/" + directory), "*.cs").Select(path => Relative(root, path)));
             sourcePaths.AddRange(configurations.Select(item => item.AssetPath));
+            sourcePaths.AddRange(AssetDatabase.GetDependencies(configurations.Select(item => item.AssetPath).ToArray(), true)
+                .Where(path => path.StartsWith("Assets/PaperDefense/", StringComparison.Ordinal) && File.Exists(Path.Combine(root, path))));
             var export = new ExportRecord {
-                SchemaVersion = 1,
+                SchemaVersion = 2,
                 ExportedAtUtc = DateTime.UtcNow.ToString("O", CultureInfo.InvariantCulture),
                 UnityVersion = UnityEngine.Application.unityVersion,
                 Mode = "GameBalanceAsset.CreateWorkshopBalance()",
@@ -56,11 +59,14 @@ namespace PaperDefense.Editor
             return pathOut;
         }
 
-        static ConfigurationRecord CreateConfiguration(string assetPath, GameBalance balance)
+        static ConfigurationRecord CreateConfiguration(string assetPath, GameBalanceAsset asset, GameBalance balance)
         {
             var mechanics = MechanicsAvailability.Resolve(balance);
+            var content = balance.ResolveContent();
             var record = new ConfigurationRecord {
                 Id = Path.GetFileNameWithoutExtension(assetPath), AssetPath = assetPath, Preset = balance.Preset.ToString(),
+                CatalogAssetPath = asset.dataPreset != null ? AssetDatabase.GetAssetPath(asset.dataPreset.database) : "",
+                PresetAssetPath = asset.dataPreset != null ? AssetDatabase.GetAssetPath(asset.dataPreset) : "",
                 Parameters = Flatten(balance),
                 Construction = Flatten(balance.Construction), Effects = Flatten(balance.Effects), Progression = Flatten(balance.Progression),
                 Structures = balance.StructureDefinitions.Select((item, index) => Row(item.Kind.ToString(), index, item)).ToArray(),
@@ -68,10 +74,13 @@ namespace PaperDefense.Editor
                 Enemies = balance.EnemyDefinitions.Select((item, index) => Row(item.Kind.ToString(), index, item)).ToArray(),
                 Waves = balance.Waves.Select((item, index) => new WaveRecord { Index = index + 1, Values = Flatten(item),
                     ResolvedInkGrant = item.InkGrant < 0 ? balance.WaveInkGrant : item.InkGrant }).ToArray(),
-                Parts = PartCatalog.All.Select(item => new PartRecord { Id = item.Id, Name = item.Name, Description = item.Description,
+                Parts = content.AllParts.Select(item => new PartRecord { Id = item.Id, Name = item.Name, Description = item.Description,
+                    Category = item.Category.ToString(), ButtonLabel = item.ButtonLabel, UnlockLabel = item.UnlockLabel, TemplateId = item.TemplateId,
+                    Enabled = item.Enabled, Order = item.Order, VisualStyle = item.VisualStyle.ToString(),
                     InitiallyUnlocked = item.InitiallyUnlocked, IsCombatMount = item.IsCombatMount,
                     Mount = item.MountKind?.ToString() ?? "", Module = item.Module.ToString(), Chassis = item.Chassis?.ToString() ?? "",
-                    UnlockGold = PartCatalog.GetUnlockGold(item, balance.Construction) }).ToArray(),
+                    UnlockGold = item.UnlockGold }).ToArray(),
+                Catalog = CatalogRows(content, asset.dataPreset),
                 Mechanics = new[] {
                     Capability("EnemyDrawingTiers", balance.Mechanics.EnemyDrawingTiers, mechanics.EnemyDrawingTiers),
                     Capability("CorpseBlots", balance.Mechanics.CorpseBlots, mechanics.CorpseBlots),
@@ -81,16 +90,87 @@ namespace PaperDefense.Editor
                     Capability("RunUpgrades", balance.Mechanics.RunUpgrades, mechanics.RunUpgrades),
                     Capability("DrawingQuality", balance.Mechanics.DrawingQuality, mechanics.DrawingQuality) },
                 References = ReferenceRows(balance),
-                Footprints = new[] { MortarFootprint.Circle.AspectRatio, MortarFootprint.MaximumAspectRatio }.Select(aspect => {
-                    float radius = balance.Structure(StructureKind.Mortar).Radius;
-                    var shape = FootprintGeometry.Resolve(new MortarFootprint(aspect), radius, new Point2(0, 0), new Point2(1, 0));
-                    return new FootprintRecord { Radius = radius, AspectRatio = aspect, MaximumAspectRatio = MortarFootprint.MaximumAspectRatio,
+                Footprints = content.Weapons.Where(weapon => weapon.SupportsFootprint).SelectMany(weapon => new[] { 1f, weapon.MaximumFootprintAspectRatio }.Distinct().Select(aspect => {
+                    float radius = weapon.Stats.Radius;
+                    var shape = FootprintGeometry.Resolve(new MortarFootprint(aspect, weapon.MaximumFootprintAspectRatio), radius, new Point2(0, 0), new Point2(1, 0));
+                    return new FootprintRecord { WeaponId = weapon.Id, Name = weapon.Name, Radius = radius, AspectRatio = aspect, MaximumAspectRatio = weapon.MaximumFootprintAspectRatio,
                         ForwardRadius = shape.ForwardRadius, SideRadius = shape.SideRadius };
-                }).ToArray()
+                })).ToArray()
             };
             record.Fingerprint = Hash(Encoding.UTF8.GetBytes(JsonUtility.ToJson(record)));
             return record;
         }
+
+        // These rows read the resolved, immutable definitions. Overrides are already applied by CreateWorkshopBalance.
+        static CatalogRecord[] CatalogRows(ContentCatalogSnapshot content, BalancePresetAsset preset)
+        {
+            var rows = new List<CatalogRecord>();
+            foreach (var item in content.Chassis)
+            {
+                var values = new List<ParameterRecord>();
+                Add(values, "Capacity", item.Capacity); Add(values, "BaseCost", item.BaseCost); Add(values, "MountCount", item.MountCount);
+                Add(values, "BaseHealth", item.BaseHealth); Add(values, "HealthMultiplier", item.HealthMultiplier); Add(values, "BuildSeconds", item.BuildSeconds); Add(values, "SecondaryBuildSeconds", item.SecondaryBuildSeconds);
+                Add(values, "PrimaryMountPivot.X", item.PrimaryMountPivot.X); Add(values, "PrimaryMountPivot.Y", item.PrimaryMountPivot.Y);
+                Add(values, "PrimaryDualMountPivot.X", item.PrimaryDualMountPivot.X); Add(values, "PrimaryDualMountPivot.Y", item.PrimaryDualMountPivot.Y);
+                Add(values, "SecondaryMountPivot.X", item.SecondaryMountPivot.X); Add(values, "SecondaryMountPivot.Y", item.SecondaryMountPivot.Y);
+                rows.Add(CatalogRow(item.Id, item.Name, "Chassis", values, preset, preset?.overrides?.Chassis.Any(value => value.Id == item.Id) == true));
+            }
+            foreach (var item in content.Weapons)
+            {
+                var values = new List<ParameterRecord>(); var stats = item.Stats;
+                Add(values, "Attack", item.Attack); Add(values, "Load", item.Load); Add(values, "AssemblyCredit", item.AssemblyCredit);
+                Add(values, "MinimumLineRadius", item.MinimumLineRadius); Add(values, "MinimumRadialRange", item.MinimumRadialRange); Add(values, "MaximumFootprintAspectRatio", item.MaximumFootprintAspectRatio);
+                Add(values, "Stats.Cost", stats.Cost); Add(values, "Stats.MaxHealth", stats.MaxHealth); Add(values, "Stats.BuildSeconds", stats.BuildSeconds);
+                Add(values, "Stats.Range", stats.Range); Add(values, "Stats.Damage", stats.Damage); Add(values, "Stats.ShotInterval", stats.ShotInterval);
+                Add(values, "Stats.Radius", stats.Radius); Add(values, "Stats.FlightSeconds", stats.FlightSeconds); Add(values, "Stats.MaxPierce", stats.MaxPierce);
+                Add(values, "Stats.ConeAngleDegrees", stats.ConeAngleDegrees); Add(values, "Stats.MaxTargets", stats.MaxTargets); Add(values, "Stats.JumpRange", stats.JumpRange);
+                Add(values, "Stats.SlowSpeedMultiplier", stats.SlowSpeedMultiplier); Add(values, "Stats.SlowDuration", stats.SlowDuration);
+                for (int i = 0; i < item.EffectIds.Count; i++) Add(values, "EffectIds[" + i + "]", item.EffectIds[i]);
+                rows.Add(CatalogRow(item.Id, item.Name, "Weapon", values, preset, preset?.overrides?.Weapons.Any(value => value.Id == item.Id) == true));
+            }
+            foreach (var item in content.Modules)
+            {
+                var values = new List<ParameterRecord>();
+                Add(values, "Load", item.Load); Add(values, "Cost", item.Cost); Add(values, "BuildSeconds", item.BuildSeconds); Add(values, "Repeatable", item.Repeatable); Add(values, "ExclusiveGroup", item.ExclusiveGroup);
+                for (int i = 0; i < item.AllowedChassisIds.Count; i++) Add(values, "AllowedChassisIds[" + i + "]", item.AllowedChassisIds[i]);
+                for (int i = 0; i < item.AllowedAttacks.Count; i++) Add(values, "AllowedAttacks[" + i + "]", item.AllowedAttacks[i]);
+                for (int i = 0; i < item.Modifiers.Count; i++)
+                { var modifier = item.Modifiers[i]; string path = "Modifiers[" + i + "]."; Add(values, path + "Stat", modifier.Stat); Add(values, path + "Operation", modifier.Operation); Add(values, path + "Scope", modifier.Scope); Add(values, path + "MountIndex", modifier.MountIndex); Add(values, path + "Value", modifier.Value); }
+                rows.Add(CatalogRow(item.Id, item.Name, "Module", values, preset, preset?.overrides?.Modules.Any(value => value.Id == item.Id) == true));
+            }
+            foreach (var item in content.Effects)
+            {
+                var values = new List<ParameterRecord>(); Add(values, "Kind", item.Kind); Add(values, "Duration", item.Duration); Add(values, "Strength", item.Strength); Add(values, "TickSeconds", item.TickSeconds); Add(values, "IgnoresDefense", item.IgnoresDefense);
+                rows.Add(CatalogRow(item.Id, item.Id, "Effect", values, preset, preset?.overrides?.Effects.Any(value => value.Id == item.Id) == true));
+            }
+            foreach (var item in content.Templates)
+            {
+                var values = new List<ParameterRecord>(); Add(values, "Revision", item.Revision); Add(values, "Weight", item.Weight); Add(values, "Pivot.X", item.Pivot.X); Add(values, "Pivot.Y", item.Pivot.Y); Add(values, "Signature", item.Signature); Add(values, "ContourCount", item.Contours.Count);
+                for (int stroke = 0; stroke < item.Contours.Count; stroke++)
+                    for (int point = 0; point < item.Contours[stroke].Points.Count; point++)
+                    { var coordinate = item.Contours[stroke].Points[point]; string path = "Contours[" + stroke + "][" + point + "]."; Add(values, path + "X", coordinate.X); Add(values, path + "Y", coordinate.Y); }
+                rows.Add(CatalogRow(item.Id, item.DisplayName, "Template", values, preset, preset?.overrides?.Templates.Any(value => value.Id == item.Id) == true));
+            }
+            foreach (var page in content.StartupBlueprints)
+            {
+                var values = new List<ParameterRecord>();
+                Add(values, "ChassisId", page.ChassisId); Add(values, "FirstWeaponId", page.FirstWeaponId);
+                if (page.SecondWeaponId != null) Add(values, "SecondWeaponId", page.SecondWeaponId);
+                for (int i = 0; i < page.ModuleSelections.Count; i++)
+                { Add(values, "Modules[" + i + "].InstanceId", page.ModuleSelections[i].InstanceId); Add(values, "Modules[" + i + "].DefinitionId", page.ModuleSelections[i].DefinitionId); }
+                for (int i = 0; i < content.StartupSlotIds.Count; i++) if (content.StartupSlotIds[i] == page.Id) Add(values, "Slot", i);
+                rows.Add(CatalogRow(page.Id, page.Name, "StartingPage", values, preset, false));
+            }
+            var assessment = new List<ParameterRecord>();
+            Add(assessment, "Revision", content.Assessment.Revision); Add(assessment, "Tolerance", content.Assessment.Tolerance); Add(assessment, "CompletionThreshold", content.Assessment.CompletionThreshold); Add(assessment, "PrecisionThreshold", content.Assessment.PrecisionThreshold);
+            Add(assessment, "RedEffectId", content.RedEffectId); Add(assessment, "BlueEffectId", content.BlueEffectId); Add(assessment, "GreenEffectId", content.GreenEffectId);
+            rows.Add(CatalogRow("catalog.rules", "Правила оценки и цветные эффекты", "Catalog", assessment, preset, false));
+            return rows.ToArray();
+        }
+        static CatalogRecord CatalogRow(string id, string name, string category, List<ParameterRecord> values, BalancePresetAsset preset, bool isOverride)
+            => new CatalogRecord { Id = id, Name = name, Category = category, IsOverride = isOverride, Values = values.ToArray(),
+                SourceAssetPath = preset == null ? "Legacy adapter" : AssetDatabase.GetAssetPath(isOverride ? (UnityEngine.Object)preset : preset.database) };
+        static void Add(List<ParameterRecord> values, string path, object value) => Visit(value, path, values);
 
         static ReferenceRecord[] ReferenceRows(GameBalance balance)
         {
@@ -151,7 +231,12 @@ namespace PaperDefense.Editor
             { for (int i = 0; i < list.Count; i++) Visit(list[i], path + "[" + i + "]", result); return; }
             var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance).OrderBy(item => item.Name, StringComparer.Ordinal).ToArray();
             if (fields.Length == 0) throw new InvalidOperationException("Unsupported export type: " + type.FullName);
-            foreach (FieldInfo field in fields) Visit(field.GetValue(value), path.Length == 0 ? field.Name : path + "." + field.Name, result);
+            foreach (FieldInfo field in fields)
+            {
+                // The immutable content graph has an explicit stable-ID export above, separate from legacy balance fields.
+                if (type == typeof(GameBalance) && field.Name == nameof(GameBalance.Content)) continue;
+                Visit(field.GetValue(value), path.Length == 0 ? field.Name : path + "." + field.Name, result);
+            }
         }
 
         static string Unit(string path)
@@ -189,14 +274,15 @@ namespace PaperDefense.Editor
         { public int SchemaVersion; public string ExportedAtUtc, UnityVersion, Mode, Scope; public ConfigurationRecord[] Configurations; public SourceRecord[] Sources; }
         [Serializable] public sealed class SourceRecord { public string Path, Sha256; }
         [Serializable] public sealed class ConfigurationRecord
-        { public string Id, AssetPath, Preset, Fingerprint; public ParameterRecord[] Parameters, Construction, Effects, Progression;
-            public ValueRecord[] Structures, Materials, Enemies; public WaveRecord[] Waves; public PartRecord[] Parts; public MechanicsRecord[] Mechanics; public ReferenceRecord[] References; public FootprintRecord[] Footprints; }
+        { public string Id, AssetPath, Preset, Fingerprint, CatalogAssetPath, PresetAssetPath; public ParameterRecord[] Parameters, Construction, Effects, Progression;
+            public ValueRecord[] Structures, Materials, Enemies; public WaveRecord[] Waves; public PartRecord[] Parts; public CatalogRecord[] Catalog; public MechanicsRecord[] Mechanics; public ReferenceRecord[] References; public FootprintRecord[] Footprints; }
         [Serializable] public sealed class ParameterRecord { public string Path, Kind, Text, Unit; public double Number; public bool Boolean; }
         [Serializable] public sealed class ValueRecord { public string Id; public int Index; public ParameterRecord[] Values; }
         [Serializable] public sealed class WaveRecord { public int Index, ResolvedInkGrant; public ParameterRecord[] Values; }
         [Serializable] public sealed class MechanicsRecord { public string Id; public bool Configured, Effective; }
         [Serializable] public sealed class PartRecord
-        { public string Id, Name, Description, Mount, Module, Chassis; public bool InitiallyUnlocked, IsCombatMount; public int UnlockGold; }
+        { public string Id, Name, Description, Mount, Module, Chassis, Category, ButtonLabel, UnlockLabel, TemplateId, VisualStyle; public bool InitiallyUnlocked, IsCombatMount, Enabled; public int UnlockGold, Order; }
+        [Serializable] public sealed class CatalogRecord { public string Id, Name, Category, SourceAssetPath; public bool IsOverride; public ParameterRecord[] Values; }
         [Serializable] public sealed class ReferenceRecord
         {
             public string Id, Name, Material;
@@ -204,6 +290,6 @@ namespace PaperDefense.Editor
             public float MaterialCost, FoundationHealth, ArmorHealthMultiplier, MaterialHealth, WeaponDamage, MaterialDamage,
                 ShotInterval, RefundFraction, MaximumRefundFraction, Health, Defense, BuildSeconds, DamagePerHit, ActionInterval;
         }
-        [Serializable] public sealed class FootprintRecord { public float Radius, AspectRatio, MaximumAspectRatio, ForwardRadius, SideRadius; }
+        [Serializable] public sealed class FootprintRecord { public string WeaponId, Name; public float Radius, AspectRatio, MaximumAspectRatio, ForwardRadius, SideRadius; }
     }
 }

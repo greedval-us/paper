@@ -19,7 +19,7 @@ namespace PaperDefense.Tests
             var root = new GameObject("Isolated expanded catalog"); root.SetActive(false);
             try
             {
-                var run = root.AddComponent<RunController>(); run.InitializeWorkshop(false);
+                var run = root.AddComponent<RunController>(); run.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
                 var hud = root.AddComponent<WorkshopHud>(); hud.Initialize(run);
                 var button = root.GetComponentsInChildren<Button>(true).SingleOrDefault(b => b.name == "First " + kind);
                 Assert.That(button, Is.Not.Null, "Every implemented mount must be selectable in the workshop.");

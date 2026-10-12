@@ -30,7 +30,7 @@ namespace PaperDefense.Tests
             Assert.That(result.First.Frames[0].Towers[0].Blueprint.Modules,Is.EqualTo(blueprint.Modules));
             Assert.That(result.First.Frames[0].Towers[0].Blueprint.Chassis,Is.EqualTo(blueprint.Chassis));
             Assert.That(result.First.Frames[0].Towers[0].Blueprint.Drawing,Is.SameAs(blueprint.Drawing));
-            Assert.That(result.First.Frames[0].Towers[0].Blueprint.SecondWeapon,Is.Null);
+            Assert.That(result.First.Frames[0].Towers[0].Blueprint.SecondWeaponId,Is.EqualTo(blueprint.SecondWeaponId));
             Assert.That(result.First.Frames,Is.Not.InstanceOf<TrialFrame[]>());
             int shells=0, impacts=0;
             foreach(var frame in result.Second.Frames) { shells=Math.Max(shells,frame.Projectiles.Count); impacts+=frame.Impacts.Count; }

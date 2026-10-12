@@ -48,14 +48,16 @@ namespace PaperDefense.Editor
             return JsonUtility.ToJson(result, true);
         }
 
-        public static string TrialsJson()
+        public static string TrialsJson(bool legacyFixture = false)
         {
             var result = new List<string>();
+            var balance = legacyFixture ? GameBalancePresets.CreateTargetWorkshop() :
+                AssetDatabase.LoadAssetAtPath<GameBalanceAsset>("Assets/PaperDefense/Configuration/TargetNotebookBalance.asset").CreateWorkshopBalance();
             foreach (var kind in new[] { StructureKind.Gun, StructureKind.Piercer, StructureKind.Mortar, StructureKind.Fan, StructureKind.Ricochet, StructureKind.Stapler, StructureKind.Blotter })
                 foreach (TrialScenario scenario in Enum.GetValues(typeof(TrialScenario)))
                 {
                     var blueprint = new TowerBlueprint("trial-contract", "trial-contract", ChassisKind.Standard, kind);
-                    var report = TrialRunner.Run(blueprint, GameBalancePresets.CreateTargetWorkshop(), scenario, 200, 1337, true, InkColor.Blue);
+                    var report = TrialRunner.Run(blueprint, balance, scenario, 200, 1337, true, InkColor.Blue);
                     var hash = new StableHash(); hash.Value(report);
                     result.Add(kind + "/" + scenario + ":" + hash.Hex);
                 }
@@ -63,18 +65,20 @@ namespace PaperDefense.Editor
         }
 
         // Keep expensive evidence off the editor tool's request timeout. Capture Unity assets on its thread first.
-        public static void StartReplay(bool target, string outputPath)
+        public static void StartReplay(bool target, string outputPath, bool legacyFixture = false, bool campaignReplay = false)
         {
-            var pressure = target ? null : new PressureScenario();
-            var campaign = target ? new InkLoopScenario(AssetDatabase.LoadAssetAtPath<GameBalanceAsset>(
-                "Assets/PaperDefense/Configuration/TargetNotebookBalance.asset").CreateWorkshopBalance()) : null;
+            bool campaignMode = target || campaignReplay;
+            var pressure = campaignMode ? null : new PressureScenario(null, legacyFixture ? null : AssetDatabase.LoadAssetAtPath<GameBalanceAsset>(
+                "Assets/PaperDefense/Configuration/NotebookBalance.asset").CreateWorkshopBalance());
+            var campaign = campaignMode ? new InkLoopScenario(AssetDatabase.LoadAssetAtPath<GameBalanceAsset>(
+                "Assets/PaperDefense/Configuration/" + (target ? "TargetNotebookBalance" : "NotebookBalance") + ".asset").CreateWorkshopBalance()) : null;
             System.Threading.ThreadPool.QueueUserWorkItem(_ =>
             {
                 try
                 {
-                    var trace = new TraceEvidence { scenario = target ? "target campaign seed1337" : "historical pressure seed1337" };
+                    var trace = new TraceEvidence { scenario = target ? "target campaign seed1337" : campaignMode ? "historical campaign seed1337" : "historical pressure seed1337" };
                     var hash = new StableHash(); long lastEvent = 0;
-                    if (target)
+                    if (campaignMode)
                     {
                         while (!campaign.Finished) { campaign.Step(); Observe(campaign.Session, hash, trace, ref lastEvent); }
                         trace.finalReport = JsonUtility.ToJson(campaign.Report);
@@ -173,8 +177,23 @@ namespace PaperDefense.Editor
             {
                 if (fields.TryGetValue(type, out var found)) return found;
                 found = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                // Freeze the pre-refactor observable schema (source archived under docs/validation/content/before).
+                // These newly added fields only reference content/IDs; all old fields, including private effects, remain hashed.
+                found = Array.FindAll(found, field => !AddedMetadata(type, field.Name));
                 Array.Sort(found, (a, b) => string.CompareOrdinal(a.Name, b.Name)); fields.Add(type, found); return found;
             }
+        }
+
+        static bool AddedMetadata(Type type, string name)
+        {
+            if (type==typeof(GameBalance)) return name=="Content" || name=="Combat" || name=="Trials" || name=="WellPlacements";
+            if (type==typeof(StructureState)) return name=="Assembly" || name=="ContentId";
+            if (type==typeof(StructureView)) return name=="ContentId";
+            if (type==typeof(ProjectileView)) return name=="WeaponId";
+            if (type==typeof(EnemyState)) return name=="RedSourceWeaponId";
+            if (type==typeof(ShotEvent) || type==typeof(SimulationEvent)) return name=="WeaponId";
+            if (type==typeof(MortarProjectile)) return name=="Definition" || name=="<WeaponId>k__BackingField";
+            return type.FullName=="PaperDefense.Core.TimedEffectState+Entry" && name=="WeaponId";
         }
 
         sealed class StableHash

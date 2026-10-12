@@ -14,7 +14,7 @@ namespace PaperDefense.Tests
             var root = new GameObject("Isolated blot training UI"); root.SetActive(false);
             try
             {
-                var run = root.AddComponent<RunController>(); run.InitializeWorkshop(false);
+                var run = root.AddComponent<RunController>(); run.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
                 var hud = root.AddComponent<WorkshopHud>(); hud.Initialize(run);
                 var buttons = root.GetComponentsInChildren<Button>(true);
                 buttons.Single(b => b.name == "Open trial").onClick.Invoke();

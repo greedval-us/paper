@@ -18,7 +18,7 @@ namespace PaperDefense.Tests
             var root = new GameObject("Isolated rail workshop"); root.SetActive(false);
             try
             {
-                var run = root.AddComponent<RunController>(); run.InitializeWorkshop(false);
+                var run = root.AddComponent<RunController>(); run.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
                 var hud = root.AddComponent<WorkshopHud>(); hud.Initialize(run);
                 var button = root.GetComponentsInChildren<Button>(true).SingleOrDefault(b => b.name == "Module Rail");
                 Assert.That(button, Is.Not.Null);

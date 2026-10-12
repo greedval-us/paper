@@ -12,12 +12,17 @@ const outputPath = path.resolve(project, process.argv[3] ?? 'docs/balance/PaperD
 const previewDir = path.join(project, 'Tools/BalanceWorkbook/.previews');
 const inputBytes = await fs.readFile(inputPath);
 const data = JSON.parse(inputBytes.toString('utf8').replace(/^\uFEFF/, ''));
-assert.equal(data.SchemaVersion, 1, 'Unsupported balance export schema');
+assert.equal(data.SchemaVersion, 2, 'Unsupported balance export schema. Export again in Unity.');
 assert.equal(data.Configurations.length, 2, 'Both configured balances are required');
 const configs = data.Configurations;
 const evidencePaths = [
-  'docs/validation/mechanics-editmode-results.json',
-  'docs/validation/mechanics-playmode-results.json',
+  'docs/validation/content/after/editmode-tests.json',
+  'docs/validation/content/after/playmode-tests.json',
+  'docs/validation/content/after/baseline-comparison.json',
+  'docs/validation/content/after/editor-acceptance.json',
+  'docs/validation/content/after/player-acceptance.json',
+  'docs/validation/content/after/development-build.json',
+  'docs/validation/content/data-only-diff.json',
 ];
 const names = { NotebookBalance: 'Notebook', TargetNotebookBalance: 'Target' };
 const name = config => names[config.Id] ?? config.Id;
@@ -39,10 +44,17 @@ for (const config of configs) {
   for (const parameter of config.Parameters) {
     if (parameter.Kind === 'number') assert.ok(Number.isFinite(parameter.Number), `Nonfinite ${parameter.Path}`);
   }
+  assert.ok(config.Catalog.length > 0, `Missing typed content export: ${config.Id}`);
+  assert.equal(new Set(config.Catalog.map(item => item.Id)).size, config.Catalog.length, 'Duplicate catalog record ID');
+  for (const record of config.Catalog) {
+    assert.equal(new Set(record.Values.map(item => item.Path)).size, record.Values.length, `Duplicate catalog field: ${record.Id}`);
+    for (const parameter of record.Values)
+      if (parameter.Kind === 'number') assert.ok(Number.isFinite(parameter.Number), `Nonfinite ${record.Id}/${parameter.Path}`);
+  }
 }
 
 const workbook = Workbook.create();
-const sheetNames = ['Механики', 'Расчеты', 'Оружие', 'Детали', 'Материалы и враги', 'Волны', 'Параметры', 'Источники'];
+const sheetNames = ['Механики', 'Расчеты', 'Оружие', 'Детали', 'Материалы и враги', 'Волны', 'Параметры', 'Каталог данных', 'Источники'];
 const sheets = Object.fromEntries(sheetNames.map(title => [title, workbook.worksheets.add(title)]));
 const palette = { ink: '#253348', accent: '#3E5975', light: '#EDF2F7', line: '#CBD5E1', formula: '#E9F0F7', muted: '#607185' };
 const formulaChecks = [];
@@ -124,7 +136,7 @@ note(main, 25, 'Target — текущая настройка баланса. Т�
 views.push([main.name, 'A1:G14']);
 
 const calc = sheets['Расчеты'];
-base(calc, 'Расчеты сборки и геометрии', [16, 16, 16, 16, 16, 16, 16, 18, 18, 16]);
+base(calc, 'Расчеты сборки и геометрии', [16, 16, 16, 16, 16, 16, 16, 18, 18, 16, 30]);
 note(calc, 4, 'Пример: обычное основание, один пулемёт и броня. Формулы Excel сверяются с TowerCatalog.', 'J');
 const references = configs.flatMap(c => c.References.map(ref => ({ ...ref, configuration: name(c) })));
 const costs = table(calc, 6, ['Пресет', 'Материал', 'Основание', 'Оружие', 'Кредит', 'Броня', 'Цена мат. ×', 'Цена Excel', 'Цена Core', 'Δ'],
@@ -168,8 +180,8 @@ references.forEach((ref, index) => {
 note(calc, refunds.end + 2, 'Возврат показан при полном HP и без Salvage. В игре он дополнительно умножается на текущую долю HP.', 'J');
 const footprintRow = refunds.end + 4;
 const footprints = configs.flatMap(c => c.Footprints.map(f => ({ ...f, configuration: name(c) })));
-const footprint = table(calc, footprintRow, ['Пресет', 'Радиус', 'Пропорция q', 'Вдоль Excel', 'Вдоль Core', 'Поперёк Excel', 'Поперёк Core', 'Площадь овала', 'Площадь круга', 'Δ площади'],
-  footprints.map(f => [f.configuration, f.Radius, f.AspectRatio, null, f.ForwardRadius, null, f.SideRadius, null, null, null]),
+const footprint = table(calc, footprintRow, ['Пресет', 'Радиус', 'Пропорция q', 'Вдоль Excel', 'Вдоль Core', 'Поперёк Excel', 'Поперёк Core', 'Площадь овала', 'Площадь круга', 'Δ площади', 'ID оружия'],
+  footprints.map(f => [f.configuration, f.Radius, f.AspectRatio, null, f.ForwardRadius, null, f.SideRadius, null, null, null, f.WeaponId]),
   { decimals: [1, 2, 3, 4, 5, 6, 7, 8, 9] });
 footprints.forEach((f, index) => {
   const r = footprint.start + index;
@@ -181,10 +193,10 @@ footprints.forEach((f, index) => {
 });
 for (const range of [`J${costs.start}:J${costs.end}`, `H${health.start}:H${health.end}`, `G${damage.start}:G${damage.end}`, `J${footprint.start}:J${footprint.end}`])
   calc.getRange(range).conditionalFormats.add('cellIs', { operator: 'notBetween', formula: [-0.0001, 0.0001], format: { fill: '#FCE7E7', font: { color: '#9F2323' } } });
-views.push([calc.name, 'A1:J24'], [calc.name, `A${damageRow - 1}:J${refunds.end + 2}`], [calc.name, `A${footprintRow - 1}:J${footprint.end + 1}`]);
+views.push([calc.name, 'A1:J24'], [calc.name, `A${damageRow - 1}:J${refunds.end + 2}`], [calc.name, `A${footprintRow - 1}:K${footprint.end + 1}`]);
 
 const weapons = sheets['Оружие'];
-base(weapons, 'Оружие и укрепления', [15, 22, 12, 12, 14, 14, 12, 14, 18, 58]);
+base(weapons, 'Оружие и укрепления', [15, 28, 12, 12, 14, 14, 12, 14, 18, 58, 17]);
 note(weapons, 4, 'Характеристики до материала, подачи, качества и улучшений. HP отдельного инструмента отличается от HP основания.', 'J');
 const weaponNotes = {
   Wall: 'Препятствие. Урона не наносит.', Gun: 'Одна цель.',
@@ -194,16 +206,25 @@ const weaponNotes = {
   Ricochet: 'Цепочка соседних целей без повторного попадания в одну цель.', Stapler: 'Собственное замедление действует отдельно от картриджа.',
   Blotter: 'Очищает кляксы. Урон врагам отсутствует. Цикл и цена не связаны с ручной очисткой.',
 };
-const weaponRows = configs.flatMap(c => c.Structures.map(item => {
-  const v = dict(item.Values);
-  return [name(c), item.Id, v.Cost, v.MaxHealth, v.BuildSeconds, v.Range, v.Damage, v.ShotInterval, null, weaponNotes[item.Id] ?? ''];
-}));
-const wt = table(weapons, 6, ['Пресет', 'Вид', 'Цена', 'HP', 'Стройка, с', 'Дальность', 'Урон', 'Интервал, с', 'DPS одной цели', 'Действие'], weaponRows,
-  { height: 43, numeric: [2, 3], decimals: [4, 5, 6, 7, 8] });
-weaponRows.forEach((row, index) => {
+const weaponRecords = configs.flatMap(c => {
+  const catalog = c.Catalog.filter(item => item.Category === 'Weapon').map(item => {
+    const v = dict(item.Values), part = c.Parts.find(part => part.Id === item.Id);
+    return { row: [name(c), item.Id, v['Stats.Cost'], v['Stats.MaxHealth'], v['Stats.BuildSeconds'], v['Stats.Range'], v['Stats.Damage'], v['Stats.ShotInterval'], null,
+      `${item.Name}. ${v.Attack}. ${part.Description}`, requireParameter(c, 'Combat.MinimumActionInterval')], noDamage: v.Attack === 'Cleanup' };
+  });
+  // Walls and floor spikes remain closed placement tools rather than workshop catalogue entries.
+  const tools = c.Structures.filter(item => ['Wall', 'Spikes'].includes(item.Id)).map(item => {
+    const v = dict(item.Values);
+    return { row: [name(c), item.Id, v.Cost, v.MaxHealth, v.BuildSeconds, v.Range, v.Damage, v.ShotInterval, null, weaponNotes[item.Id], requireParameter(c, 'Combat.MinimumActionInterval')], noDamage: item.Id === 'Wall' };
+  });
+  return [...catalog, ...tools];
+});
+const wt = table(weapons, 6, ['Пресет', 'Устойчивый ID', 'Цена', 'HP', 'Стройка, с', 'Дальность', 'Урон', 'Интервал, с', 'DPS одной цели', 'Действие', 'Мин. интервал, с'], weaponRecords.map(item => item.row),
+  { height: 58, numeric: [2, 3], decimals: [4, 5, 6, 7, 8, 10] });
+weaponRecords.forEach(({ row, noDamage }, index) => {
   const r = wt.start + index;
-  if (row[1] === 'Wall' || row[1] === 'Blotter') weapons.getRange(`I${r}`).values = [['не применяется']];
-  else formula(weapons, `I${r}`, `=G${r}/MAX(0.05,H${r})`, row[6] / Math.max(0.05, row[7]));
+  if (noDamage) weapons.getRange(`I${r}`).values = [['не применяется']];
+  else formula(weapons, `I${r}`, `=G${r}/MAX(K${r},H${r})`, row[6] / Math.max(row[10], row[7]));
 });
 weapons.freezePanes.freezeRows(6);
 views.push([weapons.name, 'A1:J15']);
@@ -211,11 +232,29 @@ const partsSheet = sheets['Детали'];
 base(partsSheet, 'Каталог деталей мастерской', [15, 27, 25, 18, 18, 12, 18, 62]);
 note(partsSheet, 4, 'Открытие оплачивается золотом один раз. Постройка каждого экземпляра оплачивается штрихами отдельно.', 'H');
 const partStart = 6;
-const parts = configs.flatMap(c => c.Parts.map(part => [name(c), part.Name, part.Id, part.Mount || (part.Module !== 'None' ? part.Module : part.Chassis),
+const parts = configs.flatMap(c => c.Parts.map(part => [name(c), part.Name, part.Id, part.Category,
   part.InitiallyUnlocked ? 'Да' : 'Нет', part.UnlockGold, part.IsCombatMount ? 'Боевое' : part.Mount ? 'Сервисное' : '', part.Description]));
-table(partsSheet, partStart, ['Пресет', 'Деталь', 'Устойчивый ID', 'Тип', 'Открыта сразу', 'Золото', 'Крепление', 'Описание'], parts, { height: 58, numeric: [5] });
+const partTable = table(partsSheet, partStart, ['Пресет', 'Деталь', 'Устойчивый ID', 'Категория', 'Открыта сразу', 'Золото', 'Крепление', 'Описание'], parts, { height: 58, numeric: [5] });
+const categoryRows = category => configs.flatMap(c => c.Catalog.filter(item => item.Category === category).map(item => ({ ...item, config: name(c), fields: dict(item.Values) })));
+const chassisRow = partTable.end + 4;
+note(partsSheet, chassisRow - 1, 'Основания. Координаты креплений и все ограничения приведены в «Каталог данных».', 'H');
+const chassisTable = table(partsSheet, chassisRow, ['Пресет', 'Основание', 'Устойчивый ID', 'Нагрузка', 'Цена', 'Базовые HP', 'HP ×', 'Стройка, с'], categoryRows('Chassis').map(item =>
+  [item.config, item.Name, item.Id, item.fields.Capacity, item.fields.BaseCost, item.fields.BaseHealth, item.fields.HealthMultiplier, item.fields.BuildSeconds]), { numeric: [3, 4], decimals: [5, 6, 7] });
+const moduleRow = chassisTable.end + 4;
+const moduleTable = table(partsSheet, moduleRow, ['Пресет', 'Модуль', 'Устойчивый ID', 'Нагрузка', 'Цена', 'Стройка, с', 'Повторяемый', 'Группа исключения'], categoryRows('Module').map(item =>
+  [item.config, item.Name, item.Id, item.fields.Load, item.fields.Cost, item.fields.BuildSeconds, item.fields.Repeatable ? 'Да' : 'Нет', item.fields.ExclusiveGroup]), { numeric: [3, 4], decimals: [5] });
+const modifierRows = categoryRows('Module').flatMap(item => Object.keys(item.fields).filter(key => /^Modifiers\[\d+\]\.Stat$/.test(key)).map(key => {
+  const prefix = key.slice(0, -4), v = item.fields;
+  return [item.config, item.Id, v[prefix + 'Stat'], v[prefix + 'Operation'], v[prefix + 'Scope'], v[prefix + 'MountIndex'], v[prefix + 'Value']];
+}));
+const modifierTable = table(partsSheet, moduleTable.end + 4, ['Пресет', 'ID модуля', 'Характеристика', 'Операция', 'Область', 'Крепление', 'Значение'], modifierRows, { height: 32, numeric: [5], decimals: [6] });
+const effectTable = table(partsSheet, modifierTable.end + 4, ['Пресет', 'ID эффекта', 'Тип', 'Длительность, с', 'Сила', 'Тик, с', 'Без защиты'], categoryRows('Effect').map(item =>
+  [item.config, item.Id, item.fields.Kind, item.fields.Duration, item.fields.Strength, item.fields.TickSeconds, item.fields.IgnoresDefense ? 'Да' : 'Нет']), { decimals: [3, 4, 5] });
+const templateTable = table(partsSheet, effectTable.end + 4, ['Пресет', 'Образец', 'Устойчивый ID', 'Версия', 'Вес', 'Опора X', 'Опора Y', 'Контуры'], categoryRows('Template').map(item =>
+  [item.config, item.Name, item.Id, item.fields.Revision, item.fields.Weight, item.fields['Pivot.X'], item.fields['Pivot.Y'], item.fields.ContourCount]), { height: 32, numeric: [3, 7], decimals: [4, 5, 6] });
 partsSheet.freezePanes.freezeRows(6);
-views.push([partsSheet.name, 'A1:H15']);
+views.push([partsSheet.name, 'A1:H15'], [partsSheet.name, `A${chassisRow - 1}:H${moduleTable.end + 1}`],
+  [partsSheet.name, `A${modifierTable.headers}:H${effectTable.end + 1}`], [partsSheet.name, `A${templateTable.headers}:H${Math.min(templateTable.end, templateTable.headers + 12)}`]);
 
 const entities = sheets['Материалы и враги'];
 base(entities, 'Материалы и противники', [16, 20, 16, 16, 17, 18, 18, 18, 18, 18]);
@@ -252,7 +291,7 @@ views.push([waves.name, 'A1:L14']);
 
 const parameters = sheets['Параметры'];
 base(parameters, 'Полный словарь эффективных параметров', [60, 22, 24, 24, 24]);
-note(parameters, 4, 'Каждое public-поле GameBalance экспортируется автоматически. Числа не переписываются из C# или YAML.', 'E');
+note(parameters, 4, 'Глобальные правила: бой, волны, испытания, экономика и механики. Каталог по ID приведён отдельно.', 'E');
 note(parameters, 5, 'Песочный цвет отмечает различия между эффективными конфигурациями.', 'E');
 const paramMaps = configs.map(c => new Map(c.Parameters.map(p => [p.Path, p])));
 const parameterPaths = [...new Set(configs.flatMap(c => c.Parameters.map(p => p.Path)))].sort();
@@ -279,6 +318,30 @@ parameterPaths.forEach((key, index) => {
 parameters.freezePanes.freezeRows(6);
 views.push([parameters.name, 'A1:E20']);
 
+const catalogSheet = sheets['Каталог данных'];
+base(catalogSheet, 'Каталог. Эффективные данные по устойчивым ID', [16, 15, 33, 29, 53, 36, 19, 72]);
+note(catalogSheet, 4, 'Значения уже включают переопределения пресета. Фильтр по ID показывает параметры, ограничения и контуры одной записи.', 'H');
+const catalogRows = configs.flatMap(c => c.Catalog.flatMap(item => {
+  const metadata = c.Parts.find(part => part.Id === item.Id);
+  const values = item.Values.map(parameter => [name(c), item.Category, item.Id, item.Name, parameter.Path,
+    parameter.Kind === 'bool' ? (value(parameter) ? 'Вкл.' : 'Выкл.') : value(parameter), parameter.Unit,
+    (item.IsOverride ? 'Переопределение: ' : 'База: ') + item.SourceAssetPath]);
+  if (metadata) for (const key of ['Enabled', 'Order', 'InitiallyUnlocked', 'UnlockGold', 'TemplateId', 'VisualStyle', 'ButtonLabel', 'UnlockLabel', 'Description'])
+    values.push([name(c), item.Category, item.Id, item.Name, key, typeof metadata[key] === 'boolean' ? (metadata[key] ? 'Вкл.' : 'Выкл.') : metadata[key],
+      key === 'UnlockGold' ? 'золото' : typeof metadata[key] === 'number' ? 'ед.' : 'текст', (item.IsOverride ? 'Переопределение: ' : 'База: ') + item.SourceAssetPath]);
+  return values;
+}));
+const ct = table(catalogSheet, 6, ['Пресет', 'Категория', 'Устойчивый ID', 'Название', 'Поле', 'Значение', 'Единица', 'Источник записи'], catalogRows, { height: 27, wrap: false });
+catalogSheet.getRange(`F${ct.start}:F${ct.end}`).setNumberFormat('0.0000');
+catalogRows.forEach((row, index) => {
+  const cell = catalogSheet.getRange(`F${ct.start + index}`);
+  if (typeof row[5] === 'number') { cell.format.horizontalAlignment = 'right'; if (Number.isInteger(row[5])) cell.setNumberFormat('#,##0'); }
+  else if (String(row[5]).length > 34) { cell.format.wrapText = true; cell.format.rowHeight = 54; }
+});
+catalogSheet.freezePanes.freezeRows(6);
+catalogSheet.freezePanes.freezeColumns(3);
+views.push([catalogSheet.name, 'A1:H18']);
+
 const sources = sheets['Источники'];
 base(sources, 'Источник и воспроизведение', [43, 96, 70]);
 const sourceRows = [
@@ -288,12 +351,13 @@ const sourceRows = [
   ['SHA256 JSON', sha256(inputBytes), ''],
   ['Данные', path.relative(project, inputPath).replaceAll('\\', '/'), ''],
   ...configs.map(c => [name(c), c.AssetPath, c.Fingerprint]),
+  ...configs.flatMap(c => [[name(c) + ': база деталей', c.CatalogAssetPath, ''], [name(c) + ': пресет', c.PresetAssetPath, 'Отсутствующая override-запись наследуется. Ноль и false сохраняются.']]),
   ['Обновление', 'Unity: Paper Defense > Export mechanics and balance JSON. Затем Tools/BalanceWorkbook/Build.ps1.', ''],
   ['Формулы', 'Сверка цены, HP и урона с runtime эталонами. Excel использует double, Core — float.', ''],
   ['Смысл DPS', 'Теоретический темп по одной цели. Массовые попадания, защита, промахи и захват исключены.', ''],
   ['Округление', 'Цена сборки: long × double. Цена отдельного инструмента сохраняет int × float.', ''],
   ['Сохранения', 'Developer configuration действует на новый запуск. Каталог и устойчивые ID остаются полными.', ''],
-  ['Отчет рефакторинга', 'docs/validation/verification-mechanics-boundaries-2026-10-12.md', 'Итоги тестов и проверки книги'],
+  ['Отчет рефакторинга', 'docs/validation/content', 'Повтор исходных сценариев и отдельная приёмка новых данных'],
   ...evidence.map(item => ['Проверка рефакторинга', item.Path, item.Sha256]),
 ];
 table(sources, 5, ['Запись', 'Значение', 'Fingerprint / примечание'], sourceRows, { height: 33 });
@@ -323,7 +387,7 @@ await fs.mkdir(path.dirname(outputPath), { recursive: true });
 await (await SpreadsheetFile.exportXlsx(workbook)).save(outputPath);
 await fs.writeFile(path.join(path.dirname(outputPath), 'workbook-validation.json'), JSON.stringify({
   GeneratedAtUtc: new Date().toISOString(), BalanceDataSha256: sha256(inputBytes), WorkbookSha256: sha256(await fs.readFile(outputPath)),
-  Sheets: sheetNames, Parameters: parameterPaths.length, RuntimeReferenceChecks: formulaChecks.length,
+  Sheets: sheetNames, Parameters: parameterPaths.length, CatalogFields: catalogRows.length, Parts: configs.map(c => ({ Configuration: c.Id, Count: c.Parts.length })), RuntimeReferenceChecks: formulaChecks.length,
   VerificationEvidence: evidence,
   FormulaChecksPassed: true, FormulaErrorScan: errors.ndjson, VisualPreviews: views.map(([sheet, range]) => ({ sheet, range })),
   Engine: '@oai/artifact-tool. Native Microsoft Excel execution has not been performed.',

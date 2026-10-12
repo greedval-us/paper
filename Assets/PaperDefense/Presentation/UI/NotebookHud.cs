@@ -30,6 +30,7 @@ namespace PaperDefense.Presentation
         readonly Button[] tiers = new Button[3];
         GameObject upgradePanel, outcomePanel, pauseBadge;
         Text outcomeTitle, outcomeBody;
+        CatalogScrollList outcomeScroll;
         float refresh;
 
         public void Initialize(RunController controller, DrawingInput drawing)
@@ -162,7 +163,8 @@ namespace PaperDefense.Presentation
             outcomePanel = Panel(root, "Run result", new Rect(420,260,760,420), Paper).gameObject;
             outcomePanel.GetComponent<Image>().raycastTarget=true;
             outcomeTitle = Label(outcomePanel.transform, "", new Rect(25,25,710,65), 42, Navy, FontStyle.Bold, TextAnchor.MiddleCenter);
-            outcomeBody = Label(outcomePanel.transform, "", new Rect(25,100,710,222), 19, Navy, FontStyle.Normal, TextAnchor.MiddleCenter);
+            outcomeScroll = new CatalogScrollList(outcomePanel.transform, "Run statistics", new Rect(25, 100, 710, 222), 0, 1, 25, 0);
+            outcomeBody = Label(outcomeScroll.Content, "", new Rect(0, 0, 704, 222), 19, Navy, FontStyle.Normal, TextAnchor.UpperCenter);
             MakeButton(outcomePanel.transform, "Try another defense", new Rect(140,340,480,61), "В МАСТЕРСКУЮ  →", 22, Blue, () => run.OpenWorkshop(), out _);
             outcomePanel.SetActive(false);
         }
@@ -191,7 +193,14 @@ namespace PaperDefense.Presentation
             {
                 if (i < ProfileLimits.LoadoutSlotCount)
                 {
-                    if (i >= loadout.Count) continue;
+                    bool assigned = i < loadout.Count && loadout[i] != null;
+                    tools[i].interactable = assigned;
+                    if (!assigned)
+                    {
+                        toolNames[i].text = (i + 1) + " ПУСТО";
+                        toolPrices[i].text = "назначь в мастерской";
+                        continue;
+                    }
                     var bp = loadout[i]; var preview = run.PreviewBlueprint(bp, input.Tier);
                     toolNames[i].text = (i + 1) + " " + bp.Name;
                     toolPrices[i].text = preview.Cost + " штр." + (input.Color == InkColor.None ? "" : " + " + preview.ColorCost + " цв.");
@@ -276,8 +285,13 @@ namespace PaperDefense.Presentation
                 outcomeTitle.text = s.Phase == RunPhase.Victory ? "ЛИНИЯ УДЕРЖАНА!" : "СТРАНИЦА НЕ СДАЁТСЯ";
                 outcomeTitle.color = s.Phase == RunPhase.Victory ? Blue : Red;
                 var stats = s.Statistics;
-                double idle = stats.IdleSeconds(StructureKind.Gun) + stats.IdleSeconds(StructureKind.Piercer)
-                            + stats.IdleSeconds(StructureKind.Mortar) + stats.IdleSeconds(StructureKind.Spikes);
+                double idle = stats.TotalIdleSeconds;
+                string damage = "";
+                foreach (string id in stats.WeaponIds)
+                {
+                    string name = s.Balance.Content.TryGetWeapon(id, out var weapon) ? weapon.Name : id;
+                    damage += (damage.Length == 0 ? "" : "\n") + name + ": " + stats.Damage(id).ToString("N0");
+                }
                 string breach = "Рубежи выдержали.";
                 if (stats.Breaches.Count > 0)
                 {
@@ -285,12 +299,14 @@ namespace PaperDefense.Presentation
                     breach = "Последний пролом: " + last.Cell + " на " + last.Elapsed.ToString("0.0") + " с.";
                 }
                 outcomeBody.text = "Волн: " + s.WaveIndex + "   ·   Остановлено: " + s.Kills + "   ·   Пик орды: " + stats.PeakAliveEnemies +
-                    "\nУрон: пулемёт " + stats.Damage(StructureKind.Gun).ToString("N0") + " / пробой " + stats.Damage(StructureKind.Piercer).ToString("N0") +
-                    " / мортира " + stats.Damage(StructureKind.Mortar).ToString("N0") + " / шипы " + stats.Damage(StructureKind.Spikes).ToString("N0") +
+                    "\nУрон: " + stats.TotalDamage.ToString("N0") + (damage.Length > 0 ? "\n" + damage : "") +
                     "\nПростой орудий без цели: " + idle.ToString("0.0") + " с." +
                     "\nВложено: " + (stats.BuildInvestment + stats.UpgradeInvestment) + "   ·   Возвращено: " + stats.RefundedInk + "   ·   Потеряно: " + stats.LostInvestment +
                     "\n" + breach + "   Улучшений: " + stats.Upgrades.Count + "   Золото: +" + s.GoldEarned +
                     "\n" + (s.Phase == RunPhase.Victory ? "Твой рисунок выдержал финальную осаду." : "Попробуй второй рубеж или другой прострел.");
+                float height = Mathf.Max(222, outcomeBody.preferredHeight);
+                outcomeBody.rectTransform.sizeDelta = new Vector2(704, height);
+                outcomeScroll.Content.sizeDelta = new Vector2(0, height);
             }
             RefreshSelection();
         }

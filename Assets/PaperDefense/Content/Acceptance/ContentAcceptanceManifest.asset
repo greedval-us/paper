@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2a46b468ba43c6af9b5dec8931601d, type: 3}
+  m_Name: ContentAcceptanceManifest
+  m_EditorClassIdentifier: PaperDefense.Application::PaperDefense.Application.ContentAcceptanceManifestAsset
+  preset: {fileID: 11400000, guid: e2fa4caa82f93f445832d8622ebdc585, type: 2}
+  newWeaponId: weapon.acceptance.precision
+  variantWeaponId: weapon.acceptance.wide-line
+  newModuleId: module.acceptance.long-range
+  newChassisId: chassis.acceptance.field
+  existingWeaponId: weapon.gun
+  changedEffectId: effect.color.blue
+  baselineChassisId: chassis.standard
+  expectedWeaponCost: 52
+  expectedWeaponLoad: 5
+  expectedWeaponUnlockGold: 23
+  expectedAssemblyCost: 52
+  expectedWeaponRange: 13.5
+  expectedWeaponInterval: 0.55
+  expectedModuleUnlockGold: 17
+  expectedModuleAssemblyCost: 63
+  expectedModuleRange: 16.2
+  expectedModuleInterval: 0.605
+  expectedChassisCapacity: 16
+  expectedChassisBaseCost: 22
+  expectedChassisAssemblyCost: 94
+  expectedChassisHealth: 73
+  expectedExistingWeaponCost: 47
+  expectedExistingWeaponDamage: 19
+  expectedEffectDuration: 4.75
+  expectedWaveInkGrant: 123
+  startingGold: 1000
+  trialBudget: 200
+  seed: 1337
+  probeCellX: 10
+  probeCellY: 10
+  probeMaximumTicks: 120
+  battleMaximumTicks: 6000
+  trialScenario: 0
+  effectColor: 2
+  probeStepSeconds: 0.033333335
+  probeTargetHealth: 1000
+  variantAspectRatio: 1
+  probeTargetOffset: {x: 5, y: 0}
+  variantTargets:
+  - {x: 5, y: 0}
+  - {x: 8, y: 0.7}
+  - {x: 8, y: 1.1}
+  variantExpectedHits: 010100
+  battleCellOffset: {x: -4, y: 0}

@@ -64,7 +64,7 @@ namespace PaperDefense.Tests
 
         [Test] public void VersionTwoCannotClaimRicochetWhileCurrentProfilesRemainVersionThree()
         {
-            var data = new WorkshopProfile().ToData(); Assert.That(data.Version, Is.EqualTo(4));
+            var data = new WorkshopProfile().ToData(); Assert.That(data.Version, Is.EqualTo(5));
             data = HistoricalCatalogTestData.VersionTwo(); data.Album[0].FirstWeapon = StructureKind.Ricochet;
             Assert.That(() => WorkshopProfile.FromData(data), Throws.InstanceOf<ArgumentException>());
         }

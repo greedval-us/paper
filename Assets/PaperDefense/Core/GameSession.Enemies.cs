@@ -15,7 +15,7 @@ namespace PaperDefense.Core
 
         private CorpseBlotSystem GetCorpseBlots()
         {
-            if (corpseBlots == null) corpseBlots = new CorpseBlotSystem(Balance.Width, Balance.Height);
+            if (corpseBlots == null) corpseBlots = new CorpseBlotSystem(rules.Width, rules.Height);
             return corpseBlots;
         }
 
@@ -26,13 +26,13 @@ namespace PaperDefense.Core
             if (!Inside(cell)) { reason = "Выберите клетку на листе."; return false; }
             if (Phase == RunPhase.Victory || Phase == RunPhase.Defeat) { reason = "Эта страница уже закончена."; return false; }
             if (BlotterCooldownRemaining > 0) { reason = "Промокашке нужно высохнуть."; return false; }
-            int cost = Math.Max(0, Balance.BlotterCost);
+            int cost = Math.Max(0, rules.BlotterCost);
             if (Ink < cost) { reason = "Не хватает штрихов: нужно " + cost + "."; return false; }
-            float radius = Math.Max(0, Balance.BlotterRadius);
+            float radius = Math.Max(0, rules.BlotterRadius);
             var system = GetCorpseBlots();
             if (!system.HasManualTarget(cell, radius)) { reason = "В этом радиусе нет клякс."; return false; }
             Ink -= cost;
-            BlotterCooldownRemaining = Math.Max(0, Balance.BlotterCooldown);
+            BlotterCooldownRemaining = Math.Max(0, rules.BlotterCooldown);
             system.ClearManual(cell, radius);
             return true;
         }
@@ -45,7 +45,7 @@ namespace PaperDefense.Core
                 var enemy = enemies[i];
                 if (enemy.Health <= 0) continue;
                 if (enemy.BlotRemaining > 0 || enemy.RedRemaining > 0 || enemy.BlueRemaining > 0 || enemy.GreenRemaining > 0)
-                    EnemyEffects.Advance(enemy, delta, Statistics, enemyEffects, Mechanics.CorpseBlots ? Balance.BlotReduction : 0);
+                    EnemyEffects.Advance(enemy, delta, Statistics, enemyEffects, Mechanics.CorpseBlots ? rules.BlotReduction : 0);
             }
         }
 
@@ -60,7 +60,7 @@ namespace PaperDefense.Core
                 var enemy = enemies[i];
                 if (enemy.Health <= 0) continue;
                 if (system.TryConsume(CellOf(enemy.Position)))
-                    enemy.BlotRemaining = Math.Max(enemy.BlotRemaining, Math.Max(0, Balance.BlotBuffSeconds));
+                    enemy.BlotRemaining = Math.Max(enemy.BlotRemaining, Math.Max(0, rules.BlotBuffSeconds));
             }
             system.FinishStep();
         }
@@ -68,21 +68,21 @@ namespace PaperDefense.Core
         private void OnEnemyDeath(EnemyState enemy)
         {
             enemy.WindingUp = false; enemy.WindupRemaining = 0;
-            if (!Mechanics.CorpseBlots || Balance.BlotLifetime <= 0) return;
-            GetCorpseBlots().Add(CellOf(enemy.Position), Balance.BlotLifetime);
+            if (!Mechanics.CorpseBlots || rules.BlotLifetime <= 0) return;
+            GetCorpseBlots().Add(CellOf(enemy.Position), rules.BlotLifetime);
         }
 
         private bool TryRangedAttack(EnemyState enemy, float delta)
         {
             if (!Mechanics.RangedEnemies || enemy.Kind != EnemyKind.Spitter) return false;
-            var definition = Balance.Enemy(EnemyKind.Spitter);
+            var definition = rules.Enemy(EnemyKind.Spitter);
             enemy.RangedCooldown = Math.Max(0, enemy.RangedCooldown - delta);
             if (enemy.WindingUp)
             {
                 enemy.WindupRemaining = Math.Max(0, enemy.WindupRemaining - delta);
                 if (enemy.WindupRemaining > .000001f) return true;
                 // Admission bounds live glob state even under extreme custom firing rates.
-                if (enemyGlobs.Count >= grid.Length * Math.Max(1, Balance.MaxEnemiesPerCell)) return true;
+                if (enemyGlobs.Count >= grid.Length * Math.Max(1, rules.MaxEnemiesPerCell)) return true;
                 float duration = Math.Max(0, definition.ProjectileSeconds);
                 enemyGlobs.Add(new EnemyGlob
                 {
@@ -91,7 +91,7 @@ namespace PaperDefense.Core
                     ObjectiveIndex = enemy.RangedObjectiveIndex
                 });
                 enemy.WindingUp = false;
-                enemy.RangedCooldown = Math.Max(.05f, definition.AttackInterval);
+                enemy.RangedCooldown = Math.Max(rules.Combat.MinimumActionInterval, definition.AttackInterval);
                 return true;
             }
             Point2 target = TargetPoint(enemy);
@@ -101,7 +101,7 @@ namespace PaperDefense.Core
                 target = Center(targetBlocker.Cell);
                 objective = int.MinValue;
             }
-            float range = Math.Max(1.2f, definition.Range);
+            float range = Math.Max(rules.Combat.MinimumRangedDistance, definition.Range);
             if (DistanceSquared(enemy.Position, target) > range * range) return false;
             if (enemy.RangedCooldown <= 0)
             {
@@ -126,7 +126,7 @@ namespace PaperDefense.Core
                 var to = LerpPoint(glob.From, glob.To, current);
                 if (TraceGlobBlocker(from, to, out var blocker))
                 {
-                    blocker.Health = Math.Max(0, blocker.Health - DamageRules.StructureDamage(glob.Damage, blocker, Balance));
+                    blocker.Health = Math.Max(0, blocker.Health - DamageRules.StructureDamage(glob.Damage, blocker, rules));
                     if (blocker.Health <= 0) RemoveStructure(blocker, true);
                     else RefreshHealthBand(blocker);
                     continue;
@@ -155,7 +155,7 @@ namespace PaperDefense.Core
             float deltaY = sy == 0 ? float.PositiveInfinity : Math.Abs(1 / dy);
             float nextX = sx == 0 ? float.PositiveInfinity : ((sx > 0 ? cell.X + 1 : cell.X) - from.X) / dx;
             float nextY = sy == 0 ? float.PositiveInfinity : ((sy > 0 ? cell.Y + 1 : cell.Y) - from.Y) / dy;
-            for (int visited = 0; visited <= Balance.Width + Balance.Height + 2; visited++)
+            for (int visited = 0; visited <= rules.Width + rules.Height + 2; visited++)
             {
                 var structure = StructureAt(cell);
                 if (IsBlocker(structure)) { blocker = structure; return true; }

@@ -21,6 +21,8 @@ namespace PaperDefense.Core
         }
 
         public bool AddStroke(DrawingPartKey part, IReadOnlyList<DrawingPoint> points, out string reason)
+            => AddStroke(DrawingBindings.For(part), points, out reason);
+        public bool AddStroke(string part, IReadOnlyList<DrawingPoint> points, out string reason)
         {
             reason = "";
             if (!Enabled(part)) { reason = "Эта часть отсутствует в выбранной конструкции."; return false; }
@@ -35,6 +37,8 @@ namespace PaperDefense.Core
         }
 
         public bool Erase(DrawingPartKey part, DrawingPoint point, float radius)
+            => Erase(DrawingBindings.For(part), point, radius);
+        public bool Erase(string part, DrawingPoint point, float radius)
         {
             if (!Enabled(part)) return false;
             if (float.IsNaN(radius) || float.IsInfinity(radius) || radius <= 0 || radius > 2)
@@ -48,6 +52,8 @@ namespace PaperDefense.Core
         }
 
         public bool ClearPart(DrawingPartKey part)
+            => ClearPart(DrawingBindings.For(part));
+        public bool ClearPart(string part)
         {
             DrawingPart current = Snapshot.GetPart(part);
             if (current.Strokes.Count == 0) return false;
@@ -71,21 +77,25 @@ namespace PaperDefense.Core
             if (SameAssembly(Blueprint, blueprint) && Blueprint.Id == blueprint.Id && Blueprint.Name == blueprint.Name) return false;
             var parts = new List<DrawingPart>(Snapshot.Parts.Count);
             foreach (DrawingPart part in Snapshot.Parts)
-                if (DrawingPartPolicy.ShouldRetain(part.Key, Blueprint, blueprint.Chassis, blueprint.FirstWeapon,
-                    blueprint.SecondWeapon, blueprint.Modules)) parts.Add(part);
+                if (DrawingPartPolicy.ShouldRetain(part.BindingId, Blueprint, blueprint.ChassisId, blueprint.FirstWeaponId,
+                    blueprint.SecondWeaponId, blueprint.ModuleSelections)) parts.Add(part);
             Commit(blueprint, new DrawingSnapshot(parts));
             return true;
         }
 
-        DrawingSnapshot WithPart(DrawingPartKey key, IReadOnlyList<DrawingStroke> strokes)
+        DrawingSnapshot WithPart(string key, IReadOnlyList<DrawingStroke> strokes)
         {
-            var parts = new DrawingPart[Snapshot.Parts.Count];
-            for (int i = 0; i < parts.Length; i++)
-                parts[i] = Snapshot.Parts[i].Key == key ? new DrawingPart(key, strokes) : Snapshot.Parts[i];
+            var parts = new List<DrawingPart>(Snapshot.Parts.Count); bool replaced = false;
+            for (int i = 0; i < Snapshot.Parts.Count; i++)
+            {
+                if (Snapshot.Parts[i].BindingId == key) { parts.Add(new DrawingPart(key, strokes)); replaced = true; }
+                else parts.Add(Snapshot.Parts[i]);
+            }
+            if (!replaced) parts.Add(new DrawingPart(key, strokes));
             return new DrawingSnapshot(parts);
         }
 
-        bool Enabled(DrawingPartKey key) => DrawingTemplateCatalog.IsEnabled(Blueprint, key);
+        bool Enabled(string key) => DrawingTemplateCatalog.IsEnabled(Blueprint, key);
 
         void Commit(TowerBlueprint blueprint, DrawingSnapshot snapshot)
         {
@@ -107,7 +117,12 @@ namespace PaperDefense.Core
         }
 
         static bool SameAssembly(TowerBlueprint first, TowerBlueprint second)
-            => first.Chassis == second.Chassis && first.FirstWeapon == second.FirstWeapon && first.SecondWeapon == second.SecondWeapon && first.Modules == second.Modules;
+        {
+            if (first.ChassisId != second.ChassisId || first.FirstWeaponId != second.FirstWeaponId || first.SecondWeaponId != second.SecondWeaponId || first.ModuleSelections.Count != second.ModuleSelections.Count) return false;
+            for (int i = 0; i < first.ModuleSelections.Count; i++)
+                if (first.ModuleSelections[i].InstanceId != second.ModuleSelections[i].InstanceId || first.ModuleSelections[i].DefinitionId != second.ModuleSelections[i].DefinitionId) return false;
+            return true;
+        }
 
         static bool Touches(DrawingStroke stroke, DrawingPoint point, float radius)
         {
