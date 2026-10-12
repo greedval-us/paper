@@ -12,12 +12,15 @@ namespace PaperDefense.Presentation
 
     public sealed class DrawingInput : MonoBehaviour
     {
+        public UserTextResolver TextResolver { get; set; }
+        string Resolve(string value) => GameText.Resolve(TextResolver, value);
         public StructureKind Tool { get; private set; } = StructureKind.Wall;
         public MaterialTier Tier { get; private set; } = MaterialTier.Pencil;
         public InkColor Color { get; private set; } = InkColor.None;
         public int BlueprintSlot { get; private set; } = -1;
         public DrawingMode Mode { get; private set; }
-        public string Message { get; private set; } = "Зажми ЛКМ и нарисуй первую стену. Отпусти — начнётся стройка.";
+        string message = UserText.Message("copy.462015bfa97612f9");
+        public string Message { get => Resolve(message); private set => message = value; }
         public int PreviewCost { get; private set; }
         public string PreviewReason { get; private set; } = "";
         public Cell HoverCell { get; private set; }
@@ -51,7 +54,7 @@ namespace PaperDefense.Presentation
                     Tool = run.Workshop.Loadout[BlueprintSlot].FirstWeapon;
                 else { BlueprintSlot = -1; Tool = StructureKind.Wall; }
             }
-            Message = "Чистый лист. Попробуй другую оборону!";
+            Message = UserText.Message("copy.330da6cb58f99c22");
             SelectionChanged?.Invoke();
         }
 
@@ -60,7 +63,7 @@ namespace PaperDefense.Presentation
         public void SelectSlot(int slot)
         {
             if (run == null || slot < 0 || slot >= run.Workshop.Loadout.Count) return;
-            if (run.Workshop.Loadout[slot] == null) { Message = "Назначь чертёж в этот слот в мастерской."; return; }
+            if (run.Workshop.Loadout[slot] == null) { Message = UserText.Message("copy.39c29e0231f823f1"); return; }
             Cancel(); BlueprintSlot = slot; Tool = run.Workshop.Loadout[slot].FirstWeapon;
             Mode = DrawingMode.Build; SelectionChanged?.Invoke();
         }
@@ -70,7 +73,7 @@ namespace PaperDefense.Presentation
         {
             if (!Enum.IsDefined(typeof(InkColor), color)) return;
             if (color != InkColor.None && run != null && run.Session != null && !run.Session.Balance.Mechanics.ColorCartridges)
-            { Message = "Цветные картриджи недоступны на этом листе."; return; }
+            { Message = UserText.Message("copy.0a21e662d398deaa"); return; }
             Cancel(); Color = color; SelectionChanged?.Invoke();
         }
         public void SelectMode(DrawingMode mode)
@@ -80,9 +83,9 @@ namespace PaperDefense.Presentation
             {
                 var mechanics = run.Session.Balance.Mechanics;
                 if (mode == DrawingMode.Blotter && !mechanics.CorpseBlots)
-                { Message = "Промокашка недоступна на этом листе."; return; }
+                { Message = UserText.Message("copy.babf0ea42d60454a"); return; }
                 if (mode == DrawingMode.Paint && !mechanics.ColorCartridges)
-                { Message = "Цветные картриджи недоступны на этом листе."; return; }
+                { Message = UserText.Message("copy.0a21e662d398deaa"); return; }
             }
             Cancel(); Mode = mode; SelectionChanged?.Invoke();
         }
@@ -112,12 +115,12 @@ namespace PaperDefense.Presentation
             if (mouse.leftButton.wasPressedThisFrame && HasHover && !run.Session.PendingUpgrade)
             {
                 if (Mode == DrawingMode.Upgrade)
-                { Message = run.Upgrade(cell, out var reason) ? "Обведено! Постройка стала прочнее и мощнее." : reason; }
+                { Message = run.Upgrade(cell, out var reason) ? UserText.Message("copy.c21e825dfc5ef9fd") : reason; }
                 else if (Mode == DrawingMode.Erase) Erase(cell);
                 else if (Mode == DrawingMode.Blotter)
-                { Message = run.Blotter(cell, out var reason) ? "Промокашка очистила участок." : reason; }
+                { Message = run.Blotter(cell, out var reason) ? UserText.Message("copy.1aa1c191d8f61cbe") : reason; }
                 else if (Mode == DrawingMode.Paint)
-                { Message = run.Paint(cell, Color, out var reason) ? "Картридж заменён. Цвет оплачивается один раз, не за выстрел." : reason; }
+                { Message = run.Paint(cell, Color, out var reason) ? UserText.Message("copy.d28731380a0c6a83") : reason; }
                 else { drawing = true; stroke.Clear(); visited.Clear(); last = cell; Add(cell); }
             }
             if (mouse.leftButton.isPressed && HasHover)
@@ -136,7 +139,7 @@ namespace PaperDefense.Presentation
                 {
                     string reason;
                     bool success = BlueprintSlot >= 0 ? run.BuildBlueprint(stroke, BlueprintSlot, Tier, Color, out reason) : run.Build(stroke, Tool, Tier, out reason);
-                    Message = success ? (run.Paused ? "Чертёж принят. Стройка продолжится после паузы." : "Штрих принят — строим!") : reason;
+                    Message = success ? (run.Paused ? UserText.Message("copy.5550d1f4c6ac852a") : UserText.Message("copy.6d7492b5fc3888c5")) : reason;
                 }
                 Cancel();
             }
@@ -147,7 +150,7 @@ namespace PaperDefense.Presentation
             PreviewCost = quote.Cost;
             PreviewReason = quote.Valid ? "" : quote.Reason;
             float range = BlueprintSlot >= 0 ? run.PreviewBlueprint(run.Workshop.Loadout[BlueprintSlot], Tier).Range : -1;
-            view.SetPreview(quote.Cells, Tool, Tier, quote.Valid, range);
+            view.SetPreview(quote.Cells, Tool, Tier, quote.Valid, range, blueprint: BlueprintSlot >= 0 ? run.Workshop.Loadout[BlueprintSlot] : null);
         }
 
         void Navigate(Mouse mouse,Vector2 screen)
@@ -172,7 +175,7 @@ namespace PaperDefense.Presentation
         }
 
         void Erase(Cell cell)
-        { if (run.Erase(cell, out int refund)) Message = $"Стерто. Возвращено штрихов: {refund}."; }
+        { if (run.Erase(cell, out int refund)) Message = UserText.Message("copy.5520b3d1e73f8b1d", refund); }
         void Add(Cell cell) { if (visited.Add(cell)) stroke.Add(cell); }
         void AddLine(Cell a, Cell b)
         {
@@ -245,7 +248,7 @@ namespace PaperDefense.Presentation
                 if (structure != null)
                 {
                     var priority = (TargetPriority)(((int)structure.Value.Priority + 1) % 3);
-                    if (run.SetPriority(HoverCell, priority)) Message = "Приоритет: " + (priority == TargetPriority.Nearest ? "ближайшие" : priority == TargetPriority.Strongest ? "прочные" : "грызуны");
+                    if (run.SetPriority(HoverCell, priority)) Message = UserText.Message("copy.3c108bd2fc41bdfe", (priority == TargetPriority.Nearest ? UserText.Message("copy.e8587d93da4cf0eb") : priority == TargetPriority.Strongest ? UserText.Message("copy.38d5a59f100989bb") : UserText.Message("copy.ae092c38e45a8570")));
                 }
             }
         }

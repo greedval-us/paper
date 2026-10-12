@@ -40,7 +40,7 @@ namespace PaperDefense.Tests
             var page = new TowerBlueprint("blotter", "Промокашка", ChassisKind.Standard, StructureKind.Blotter);
             Assert.That(profile.SaveBlueprint(page, out _, balance), Is.False);
             PartUnlock part = profile.GetParts(balance).Single(p => p.Id == "weapon.blotter");
-            Assert.That(part.GoldCost, Is.EqualTo(19)); Assert.That(part.Description, Does.Contain("клякс"));
+            Assert.That(part.GoldCost, Is.EqualTo(19)); Assert.That(TestText.Resolve(part.Description), Does.Contain("клякс"));
             Assert.That(profile.Unlock(part.Id, out string reason, balance), Is.True, reason);
             Assert.That(profile.Gold, Is.EqualTo(31));
             Assert.That(profile.Unlock(part.Id, out reason, balance), Is.True, reason);

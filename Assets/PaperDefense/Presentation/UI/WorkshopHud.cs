@@ -10,6 +10,9 @@ namespace PaperDefense.Presentation
     /// <summary>The album edits immutable drawings; a run receives four frozen choices.</summary>
     public sealed class WorkshopHud : MonoBehaviour
     {
+        public UserTextResolver TextResolver { get; set; }
+        public bool ReserveStandControls { get; set; }
+        string Resolve(string value) => GameText.Resolve(TextResolver, value);
         const int AlbumRowsPerPage = 8;
         RunController run;
         Font font;
@@ -18,20 +21,20 @@ namespace PaperDefense.Presentation
         Text gold, stats, status, briefing, trialResults, trialSettings, trialFirst, trialSecond, trialPlayback, trialConditions;
         Text profileSaveStatus;
         Button retryProfileSave;
-        Text qualityExplanation, trialFirstHeader, trialSecondHeader, qualityModeLabel;
+        Text qualityExplanation, trialFirstHeader, trialSecondHeader, qualityModeLabel, armorSlotsLabel, upgradeSlotsLabel;
         InputField title;
         BlueprintSketch sketch;
         readonly BlueprintSketch[] albumSketches = new BlueprintSketch[AlbumRowsPerPage];
         public DrawingEditorPanel DrawingEditor { get; private set; }
         public MortarFootprintPanel MortarFootprintEditor { get; private set; }
         WorkshopMapSketch map;
-        readonly Button[] footprintButtons = new Button[2];
+        readonly Button[] footprintButtons = new Button[3];
         readonly Button[] trialScenarioButtons = new Button[4];
         Button qualityModeButton;
         TrialLaneSketch trialDiagramFirst, trialDiagramSecond;
         readonly Button[] albumButtons = new Button[AlbumRowsPerPage];
         readonly Text[] albumLabels = new Text[AlbumRowsPerPage], slotLabels = new Text[ProfileLimits.LoadoutSlotCount];
-        Button[] partButtons, firstWeapons, secondWeapons, moduleButtons;
+        Button[] partButtons, firstWeapons, secondWeapons, thirdWeapons, moduleButtons;
         Button[] chassisButtons;
         Text[] partLabels;
         string[] partIds;
@@ -41,7 +44,8 @@ namespace PaperDefense.Presentation
         bool counterfire, qualityTrial;
         TrialScenario trialScenario;
         public TowerBlueprint Draft { get; private set; }
-        public string Status { get; private set; } = "Собирай свободно. Золото открывает деталь навсегда; экземпляры строятся за штрихи.";
+        string statusMessage = UserText.Message("copy.6ac1fcec14161a7a");
+        public string Status { get => Resolve(statusMessage); private set => statusMessage = value; }
 
         public void Initialize(RunController controller)
         {
@@ -59,7 +63,7 @@ namespace PaperDefense.Presentation
                 if (part.Category == PartCategory.Chassis) chassis.Add(part.Id);
                 if (!part.InitiallyUnlocked) unlocks.Add(part.Id);
             }
-            weaponIds = mounts.ToArray(); firstWeapons = new Button[weaponIds.Length]; secondWeapons = new Button[weaponIds.Length + 1];
+            weaponIds = mounts.ToArray(); firstWeapons = new Button[weaponIds.Length]; secondWeapons = new Button[weaponIds.Length + 1]; thirdWeapons = new Button[weaponIds.Length + 1];
             moduleIds = modules.ToArray(); moduleButtons = new Button[moduleIds.Length];
             chassisIds = chassis.ToArray(); chassisButtons = new Button[chassisIds.Length];
             partIds = unlocks.ToArray(); partButtons = new Button[partIds.Length]; partLabels = new Text[partIds.Length];
@@ -70,16 +74,18 @@ namespace PaperDefense.Presentation
             canvas.renderMode = RenderMode.ScreenSpaceOverlay; canvas.sortingOrder = 100;
             var scaler = canvasObject.GetComponent<CanvasScaler>();
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(1600, 1000); scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
+            scaler.referenceResolution = new Vector2(1600, ReserveStandControls ? 1200 : 1000); scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
             var board = new GameObject("Workshop paper", typeof(RectTransform), typeof(Image));
             board.transform.SetParent(canvasObject.transform, false); root = board.GetComponent<RectTransform>();
             root.anchorMin = root.anchorMax = root.pivot = new Vector2(.5f, .5f); root.sizeDelta = new Vector2(1600, 1000);
             board.GetComponent<Image>().color = NotebookPalette.Paper; board.GetComponent<Image>().raycastTarget = true;
             BuildComposer(); BuildAlbum(); BuildLoadout(); BuildTrial(); BuildQualityDetails();
-            MortarFootprintEditor = new MortarFootprintPanel(root, font, value => { Draft = value; Refresh(); }, run.CompareMortarFootprints, value => run.PreviewBlueprint(value).Reason);
-            DrawingEditor = new DrawingEditorPanel(root, font, drawing => { MortarFootprintEditor.Close(); Draft = Draft.WithDrawing(drawing); SetStatus("Авторские штрихи применены к черновику. Сохрани страницу в альбом."); });
-            Draft = run.Workshop.Album.Count > 0 ? run.Workshop.Album[0] : NewDrawing();
-            title.SetTextWithoutNotify(Draft.Name);
+            MortarFootprintEditor = new MortarFootprintPanel(root, font, value => { Draft = value; Refresh(); }, run.CompareMortarFootprints, value => run.PreviewBlueprint(value).Reason, TextResolver);
+            DrawingEditor = new DrawingEditorPanel(root, font, drawing => { MortarFootprintEditor.Close(); Draft = Draft.WithDrawing(drawing); SetStatus(UserText.Message("copy.65c92ef5c0dfe24a")); }, TextResolver);
+            Draft = ReserveStandControls && run.Workshop.Loadout[0] != null
+                ? run.Workshop.Loadout[0]
+                : run.Workshop.Album.Count > 0 ? run.Workshop.Album[0] : NewDrawing();
+            title.SetTextWithoutNotify(Resolve(Draft.Name));
             run.WorkshopChanged += Refresh;
             Refresh();
         }
@@ -94,14 +100,21 @@ namespace PaperDefense.Presentation
             if (refresh <= 0) { refresh = .15f; Refresh(); }
         }
 
-        TowerBlueprint NewDrawing() => new TowerBlueprint("drawing-" + Guid.NewGuid().ToString("N"), "Мой рисунок", chassisIds[0], weaponIds[0],
+        TowerBlueprint NewDrawing() => new TowerBlueprint("drawing-" + Guid.NewGuid().ToString("N"), Resolve(UserText.Message("copy.74a4cbe8134d0a38")), chassisIds[0], weaponIds[0],
             origin: DrawingOrigin.PlayerDrawing, content: run.Content);
-        void NewDraft() { MortarFootprintEditor.Close(); Draft = NewDrawing(); title.SetTextWithoutNotify(Draft.Name); SetStatus("Новый лист. Выбери шасси, до двух стволов и модули."); }
+        void NewDraft() { MortarFootprintEditor.Close(); Draft = NewDrawing(); title.SetTextWithoutNotify(Resolve(Draft.Name)); SetStatus(UserText.Message("copy.a2f3120b30cce36d")); }
         void SetDraft(string chassis, string first, string second, IEnumerable<ModuleSelection> modules, string selectedPart = null)
         {
             MortarFootprintEditor.Close();
             Draft = Draft.WithContent(run.Content).WithName(title.text).WithAssembly(chassis, first, second, modules);
             if (selectedPart != null) foreach (var part in run.Workshop.Parts) if (part.Id == selectedPart) { Status = part.Description; break; }
+            Refresh();
+        }
+        void SetWeaponMount(int mount, string weaponId)
+        {
+            MortarFootprintEditor.Close();
+            Draft = Draft.WithContent(run.Content).WithName(title.text).WithWeaponMount(mount, weaponId);
+            if (weaponId != null) Status = run.Content.GetWeapon(weaponId).Description;
             Refresh();
         }
         void ToggleModule(string definitionId)
@@ -135,74 +148,88 @@ namespace PaperDefense.Presentation
 
         void BuildComposer()
         {
-            Label(root, "МАСТЕРСКАЯ РИСУНКОВ", new Rect(35, 17, 1050, 57), 38, NotebookPalette.Navy, true);
+            Label(root, UserText.Message("copy.159b7c81e8a7413c"), new Rect(35, 17, 1050, 57), 38, NotebookPalette.Navy, true);
             gold = Label(root, "", new Rect(1170, 23, 395, 46), 27, NotebookPalette.Pencil, true, TextAnchor.MiddleRight);
-            Label(root, "Детали открываются навсегда. Собирай и испытывай бесплатно — за золото покупается право использовать деталь.", new Rect(37, 78, 1525, 31), 18, NotebookPalette.Navy);
+            Label(root, UserText.Message("copy.6dc47581f3429f71"), new Rect(37, 78, 1525, 31), 18, NotebookPalette.Navy);
             var left = Panel(root, "Composer", new Rect(28, 126, 532, 570), new Color(1, .985f, .91f));
-            Label(left, "01  СОБЕРИ ЧЕРТЁЖ", new Rect(18, 10, 490, 35), 25, NotebookPalette.Blue, true);
+            Label(left, UserText.Message("copy.453386ab17042692"), new Rect(18, 10, 490, 35), 25, NotebookPalette.Blue, true);
             title = Input(left, "Blueprint name", new Rect(18, 54, 490, 43));
             title.onEndEdit.AddListener(value => { if (Draft != null) SetDraft(Draft.ChassisId, Draft.FirstWeaponId, Draft.SecondWeaponId, Draft.ModuleSelections); });
-            Label(left, "Шасси · два крепления · один цвет в бою", new Rect(18, 107, 490, 29), 18, NotebookPalette.Navy);
+            Label(left, UserText.Message("workshop.chassis_hint"), new Rect(18, 107, 490, 29), 18, NotebookPalette.Navy);
             var chassisList = new CatalogScrollList(left, "Chassis catalogue", new Rect(18, 141, 490, 49), chassisIds.Length, 2, 44, 5);
             for (int i = 0; i < chassisIds.Length; i++)
             {
                 string id = chassisIds[i]; var definition = run.Content.GetChassis(id);
                 chassisButtons[i] = Button(chassisList.Content, "Chassis " + CatalogButtonName(definition), new Rect(i % 2 * 250, i / 2 * 49, 235, 44),
-                    definition.ButtonLabel + " / " + definition.Capacity, () => SetDraft(id, Draft.FirstWeaponId, Draft.SecondWeaponId, Draft.ModuleSelections, id));
+                    UserText.Message("workshop.chassis_button", definition.ButtonLabel, definition.Capacity), () => SetDraft(id, Draft.FirstWeaponId, Draft.SecondWeaponId, Draft.ModuleSelections, id));
                 chassisButtons[i].GetComponentInChildren<Text>().fontSize = 14;
             }
-            Label(left, "Первое крепление", new Rect(18, 196, 490, 24), 18, NotebookPalette.Navy, true);
-            var firstList = new CatalogScrollList(left, "First weapon catalogue", new Rect(18, 225, 490, 73), weaponIds.Length, 4, 32, 6);
-            var secondList = new CatalogScrollList(left, "Second weapon catalogue", new Rect(18, 335, 490, 73), weaponIds.Length + 1, 4, 32, 6);
+            Label(left, UserText.Message("copy.2557f70bf5dad935"), new Rect(18, 196, 490, 24), 18, NotebookPalette.Navy, true);
+            var firstList = new CatalogScrollList(left, "First weapon catalogue", new Rect(18, 221, 490, 45), weaponIds.Length, 4, 32, 6);
+            var secondList = new CatalogScrollList(left, "Second weapon catalogue", new Rect(18, 292, 490, 45), weaponIds.Length + 1, 4, 32, 6);
+            var thirdList = new CatalogScrollList(left, "Third weapon catalogue", new Rect(18, 363, 490, 45), weaponIds.Length + 1, 4, 32, 6);
             for (int i = 0; i < weaponIds.Length; i++)
             {
                 string id = weaponIds[i]; var definition = run.Content.GetWeapon(id);
                 firstWeapons[i] = Button(firstList.Content, "First " + CatalogButtonName(definition), new Rect(i % 4 * 123, i / 4 * 38, 115, 32), definition.ButtonLabel, () => SetDraft(Draft.ChassisId, id, Draft.SecondWeaponId, Draft.ModuleSelections, id));
                 secondWeapons[i] = Button(secondList.Content, "Second " + CatalogButtonName(definition), new Rect(i % 4 * 123, i / 4 * 38, 115, 32), definition.ButtonLabel, () => SetDraft(Draft.ChassisId, Draft.FirstWeaponId, id, Draft.ModuleSelections, id));
-                firstWeapons[i].GetComponentInChildren<Text>().fontSize = secondWeapons[i].GetComponentInChildren<Text>().fontSize = 13;
+                thirdWeapons[i] = Button(thirdList.Content, "Third " + CatalogButtonName(definition), new Rect(i % 4 * 123, i / 4 * 38, 115, 32), definition.ButtonLabel, () => SetWeaponMount(2, id));
+                firstWeapons[i].GetComponentInChildren<Text>().fontSize = secondWeapons[i].GetComponentInChildren<Text>().fontSize = thirdWeapons[i].GetComponentInChildren<Text>().fontSize = 13;
             }
-            Label(left, "Второе крепление · общая подача", new Rect(18, 306, 490, 24), 18, NotebookPalette.Navy, true);
+            Label(left, UserText.Message("copy.8fbc6e7635c25190"), new Rect(18, 267, 490, 24), 18, NotebookPalette.Navy, true);
+            Label(left, UserText.Message("workshop.third_mount"), new Rect(18, 338, 490, 24), 18, NotebookPalette.Navy, true);
             int emptyIndex = weaponIds.Length;
-            secondWeapons[emptyIndex] = Button(secondList.Content, "Second None", new Rect(emptyIndex % 4 * 123, emptyIndex / 4 * 38, 115, 32), "ПУСТО", () => SetDraft(Draft.ChassisId, Draft.FirstWeaponId, null, Draft.ModuleSelections));
+            secondWeapons[emptyIndex] = Button(secondList.Content, "Second None", new Rect(emptyIndex % 4 * 123, emptyIndex / 4 * 38, 115, 32), UserText.Message("copy.e12d011cadf1b6f4"), () => SetDraft(Draft.ChassisId, Draft.FirstWeaponId, null, Draft.ModuleSelections));
             secondWeapons[emptyIndex].GetComponentInChildren<Text>().fontSize = 13;
-            Label(left, "Оборудование · тоже занимает нагрузку", new Rect(18, 412, 490, 25), 18, NotebookPalette.Navy, true);
-            var modulesList = new CatalogScrollList(left, "Module catalogue", new Rect(18, 445, 490, 36), moduleIds.Length, 4, 33, 6);
+            thirdWeapons[emptyIndex] = Button(thirdList.Content, "Third None", new Rect(emptyIndex % 4 * 123, emptyIndex / 4 * 38, 115, 32), UserText.Message("copy.e12d011cadf1b6f4"), () => SetWeaponMount(2, null));
+            thirdWeapons[emptyIndex].GetComponentInChildren<Text>().fontSize = 13;
+            armorSlotsLabel = Label(left, "", new Rect(18, 412, 116, 25), 14, NotebookPalette.Navy, true);
+            upgradeSlotsLabel = Label(left, "", new Rect(147, 412, 360, 25), 14, NotebookPalette.Navy, true);
+            int armorCount = 0, upgradeCount = 0;
+            foreach (string id in moduleIds) if (run.Content.GetModule(id).SlotKind == ModuleSlotKind.Armor) armorCount++; else upgradeCount++;
+            var armorList = new CatalogScrollList(left, "Armor catalogue", new Rect(18, 445, 116, 36), armorCount, 1, 33, 6);
+            var modulesList = new CatalogScrollList(left, "Module catalogue", new Rect(147, 445, 360, 36), upgradeCount, 3, 33, 6);
+            int armorIndex = 0, upgradeIndex = 0;
             for (int i = 0; i < moduleIds.Length; i++)
             {
                 string id = moduleIds[i]; var part = run.Content.GetModule(id);
                 float width = part.Repeatable ? 85 : 115;
-                moduleButtons[i] = Button(modulesList.Content, "Module " + CatalogButtonName(part), new Rect(i % 4 * 123, i / 4 * 39, width, 33), part.ButtonLabel, () => ToggleModule(id));
+                bool armor = part.SlotKind == ModuleSlotKind.Armor;
+                int index = armor ? armorIndex++ : upgradeIndex++;
+                var moduleParent = armor ? armorList.Content : modulesList.Content;
+                int columns = armor ? 1 : 3;
+                moduleButtons[i] = Button(moduleParent, "Module " + CatalogButtonName(part), new Rect(index % columns * 123, index / columns * 39, width, 33), part.ButtonLabel, () => ToggleModule(id));
                 moduleButtons[i].GetComponentInChildren<Text>().fontSize = 12;
-                if (part.Repeatable) Button(modulesList.Content, "Remove module " + id, new Rect(i % 4 * 123 + 88, i / 4 * 39, 27, 33), "−", () => RemoveModule(id));
+                if (part.Repeatable) Button(moduleParent, "Remove module " + id, new Rect(index % columns * 123 + 88, index / columns * 39, 27, 33), UserText.Message("common.remove_symbol"), () => RemoveModule(id));
             }
-            Button(left, "New blueprint", new Rect(18, 487, 140, 43), "НОВЫЙ", NewDraft);
-            Button(left, "Save blueprint", new Rect(170, 487, 200, 43), "В АЛЬБОМ", SaveDraft);
-            Button(left, "Delete blueprint", new Rect(382, 487, 126, 43), "УДАЛИТЬ", () => { MortarFootprintEditor.Close(); SetStatus(run.DeleteBlueprint(Draft.Id, out var reason) ? "Рисунок удалён из альбома." : reason); });
-            Button(left, "Save blueprint as new", new Rect(18, 537, 490, 27), "СДЕЛАТЬ ВАРИАНТ", SaveAsNew);
+            Button(left, "New blueprint", new Rect(18, 487, 140, 43), UserText.Message("copy.c1e5de3d705e623d"), NewDraft);
+            Button(left, "Save blueprint", new Rect(170, 487, 200, 43), UserText.Message("copy.28760c1a5ec2d81f"), SaveDraft);
+            Button(left, "Delete blueprint", new Rect(382, 487, 126, 43), UserText.Message("copy.1669c94226115554"), () => { MortarFootprintEditor.Close(); SetStatus(run.DeleteBlueprint(Draft.Id, out var reason) ? UserText.Message("copy.5212a5c55afa3a20") : reason); });
+            Button(left, "Save blueprint as new", new Rect(18, 537, 490, 27), UserText.Message("copy.ec1a51e19086049c"), SaveAsNew);
 
             var center = Panel(root, "Live drawing", new Rect(578, 126, 475, 570), new Color(.97f, .97f, .91f));
-            Label(center, "02  НАРИСУЙ И ПРОВЕРЬ", new Rect(18, 10, 440, 35), 24, NotebookPalette.Blue, true);
+            Label(center, UserText.Message("copy.e67c0e47d45131bf"), new Rect(18, 10, 440, 35), 24, NotebookPalette.Blue, true);
             var illustration = new GameObject("Live blueprint sketch", typeof(RectTransform), typeof(CanvasRenderer), typeof(BlueprintSketch));
             illustration.transform.SetParent(center, false); Place(illustration.GetComponent<RectTransform>(), new Rect(30, 58, 415, 191));
             sketch = illustration.GetComponent<BlueprintSketch>(); sketch.raycastTarget = false;
-            Button(center, "Open drawing editor", new Rect(22, 251, 432, 42), "НАРИСОВАТЬ СВОИ ЛИНИИ  →", () =>
+            Button(center, "Open drawing editor", new Rect(22, 251, 432, 42), UserText.Message("copy.d7e0dfdd628b75da"), () =>
             {
                 MortarFootprintEditor.Close();
-                if (DrawingTemplateCatalog.Create(Draft).Count == 0) { SetStatus("Детали этой страницы недоступны в текущем каталоге. Авторские линии сохранены."); return; }
+                if (DrawingTemplateCatalog.Create(Draft).Count == 0) { SetStatus(UserText.Message("copy.b86b24244e915380")); return; }
                 DrawingEditor.Open(Draft);
             });
-            for (int mount = 0; mount < 2; mount++)
-            { int selected = mount; footprintButtons[mount] = Button(center, "Mortar footprint " + mount, new Rect(22 + mount * 220, 301, 212, 53), "След выстрела", () => MortarFootprintEditor.Open(Draft, selected)); }
+            for (int mount = 0; mount < 3; mount++)
+            { int selected = mount; footprintButtons[mount] = Button(center, "Mortar footprint " + mount, new Rect(22 + mount * 146, 301, 140, 53), UserText.Message("copy.b6caeb9a0b784643"), () => MortarFootprintEditor.Open(Draft, selected)); }
             stats = Label(center, "", new Rect(22, 365, 432, 121), 17, NotebookPalette.Navy);
-            Button(center, "Drawing quality details", new Rect(22, 487, 432, 30), "ПОЧЕМУ ТАКОЕ КАЧЕСТВО?", ShowQualityDetails);
-            Button(center, "Open trial", new Rect(22, 523, 432, 39), "ИСПЫТАТЬ НА ТЕСТОВОМ ЛИСТЕ  →", () => { SetTrial(true); RefreshTrialSettings(); });
+            Button(center, "Drawing quality details", new Rect(22, 487, 432, 30), UserText.Message("copy.43f9d3e836476314"), ShowQualityDetails);
+            Button(center, "Open trial", new Rect(22, 523, 432, 39), UserText.Message("copy.65e901944fe5438f"), () => { SetTrial(true); RefreshTrialSettings(); });
         }
 
         void BuildAlbum()
         {
             var album = Panel(root, "Blueprint album", new Rect(1071, 126, 500, 570), new Color(1, .98f, .86f));
-            Label(album, "03  АЛЬБОМ ЧЕРТЕЖЕЙ", new Rect(16, 10, 465, 35), 24, NotebookPalette.Blue, true);
-            Label(album, "Сохраняй много вариантов. В бой возьми четыре.", new Rect(18, 47, 460, 27), 17, NotebookPalette.Navy);
+            Label(album, UserText.Message("copy.c2e65d663e93fb11"), new Rect(16, 10, 465, 35), 24, NotebookPalette.Blue, true);
+            Label(album, UserText.Message("copy.3c36b01d56a8257a"), new Rect(18, 47, 460, 27), 17, NotebookPalette.Navy);
             for (int i = 0; i < albumButtons.Length; i++)
             {
                 int index = i;
@@ -212,13 +239,13 @@ namespace PaperDefense.Presentation
                 albumSketches[i] = thumb.GetComponent<BlueprintSketch>(); albumSketches[i].raycastTarget = false;
                 Place(albumLabels[i].rectTransform, new Rect(58, 1, 394, 39)); albumLabels[i].fontSize = 13;
             }
-            Button(album, "Album previous", new Rect(18, 435, 224, 33), "←  ПРЕДЫДУЩИЕ", () => { MortarFootprintEditor.Close(); albumPage = Mathf.Max(0, albumPage - 1); Refresh(); });
-            Button(album, "Album next", new Rect(254, 435, 224, 33), "СЛЕДУЮЩИЕ  →", () => { MortarFootprintEditor.Close(); albumPage = Mathf.Min(Mathf.Max(0, (run.Workshop.Album.Count - 1) / AlbumRowsPerPage), albumPage + 1); Refresh(); });
+            Button(album, "Album previous", new Rect(18, 435, 224, 33), UserText.Message("copy.ec67fe18caaef874"), () => { MortarFootprintEditor.Close(); albumPage = Mathf.Max(0, albumPage - 1); Refresh(); });
+            Button(album, "Album next", new Rect(254, 435, 224, 33), UserText.Message("copy.689b295f49461225"), () => { MortarFootprintEditor.Close(); albumPage = Mathf.Min(Mathf.Max(0, (run.Workshop.Album.Count - 1) / AlbumRowsPerPage), albumPage + 1); Refresh(); });
             var unlockList = new CatalogScrollList(album, "Unlock catalogue", new Rect(18, 483, 460, 78), partIds.Length, 4, 35, 4);
             for (int i = 0; i < partIds.Length; i++)
             {
                 int index = i;
-                partButtons[i] = Button(unlockList.Content, "Unlock " + partIds[i], new Rect(i % 4 * 117, i / 4 * 39, 109, 35), "", () => SetStatus(run.UnlockPart(partIds[index], out var reason) ? "Деталь открыта навсегда. Экземпляры не расходуют золото." : reason), out partLabels[i]);
+                partButtons[i] = Button(unlockList.Content, "Unlock " + partIds[i], new Rect(i % 4 * 117, i / 4 * 39, 109, 35), "", () => SetStatus(run.UnlockPart(partIds[index], out var reason) ? UserText.Message("copy.fca0caaef1b0ba96") : reason), out partLabels[i]);
                 Place(partLabels[i].rectTransform, new Rect(1, 1, 107, 33));
                 partLabels[i].fontSize = 11;
             }
@@ -226,13 +253,13 @@ namespace PaperDefense.Presentation
 
         void BuildLoadout()
         {
-            Label(root, "04  ЧЕТЫРЕ ЧЕРТЕЖА В БОЙ  ·  число экземпляров ограничено только штрихами и местом", new Rect(33, 708, 1528, 33), 23, NotebookPalette.Blue, true);
+            Label(root, UserText.Message("copy.488d9b0c997f1609"), new Rect(33, 708, 1528, 33), 23, NotebookPalette.Blue, true);
             for (int i = 0; i < slotLabels.Length; i++)
             {
                 int slot = i;
-                Button(root, "Assign slot " + i, new Rect(32 + i * 306, 748, 294, 74), "", () => SetStatus(run.AssignBlueprint(slot, Draft.Id, out var reason) ? "Рисунок назначен в слот " + (slot + 1) + "." : reason), out slotLabels[i]);
+                Button(root, "Assign slot " + i, new Rect(32 + i * 306, 748, 294, 74), "", () => SetStatus(run.AssignBlueprint(slot, Draft.Id, out var reason) ? UserText.Message("copy.70dd786b46cf9291", (slot + 1)) : reason), out slotLabels[i]);
             }
-            Button(root, "Start run", new Rect(1262, 748, 307, 74), "НАЧАТЬ ПАРТИЮ  →", () => SetStatus(run.StartRun(out var reason) ? "Чертежи взяты в бой. Детали менять можно после партии." : reason));
+            Button(root, "Start run", new Rect(1262, 748, 307, 74), UserText.Message("copy.bf1131aabeef6a41"), () => SetStatus(run.StartRun(out var reason) ? UserText.Message("copy.3eade8b0825d164d") : reason));
             var diagram = new GameObject("Pre-run map", typeof(RectTransform), typeof(CanvasRenderer), typeof(WorkshopMapSketch));
             diagram.transform.SetParent(root, false); Place(diagram.GetComponent<RectTransform>(), new Rect(35, 839, 295, 80));
             map = diagram.GetComponent<WorkshopMapSketch>(); map.raycastTarget = false;
@@ -240,8 +267,8 @@ namespace PaperDefense.Presentation
             profileSaveStatus = Label(root, "", new Rect(35, 909, 1205, 42), 15, NotebookPalette.Navy);
             profileSaveStatus.name = "Profile save status";
             status = Label(root, "", new Rect(35, 953, 1525, 35), 17, NotebookPalette.Blue, false, TextAnchor.MiddleLeft);
-            retryProfileSave = Button(root, "Retry profile save", new Rect(1262, 909, 307, 42), "ПОВТОРИТЬ ЗАПИСЬ", () =>
-                SetStatus(run.RetrySave(out var reason) ? reason : "Повтор записи: " + reason));
+            retryProfileSave = Button(root, "Retry profile save", new Rect(1262, 909, 307, 42), UserText.Message("copy.936aa189718b6d93"), () =>
+                SetStatus(run.RetrySave(out var reason) ? reason : UserText.Message("copy.0525c85d076db630", reason)));
         }
 
         void BuildTrial()
@@ -250,27 +277,27 @@ namespace PaperDefense.Presentation
             trialShade.GetComponent<Image>().raycastTarget = true;
             trialPanel = Panel(root, "Test sheet", new Rect(240, 100, 1120, 800), NotebookPalette.Paper).gameObject;
             trialPanel.GetComponent<Image>().raycastTarget = true;
-            Label(trialPanel.transform, "ТЕСТОВЫЙ ЛИСТ  /  ОДИНАКОВЫЙ БЮДЖЕТ", new Rect(28, 20, 1060, 46), 30, NotebookPalette.Blue, true);
+            Label(trialPanel.transform, UserText.Message("copy.70ddf1bc82ac3b25"), new Rect(28, 20, 1060, 46), 30, NotebookPalette.Blue, true);
             trialConditions = Label(trialPanel.transform, "", new Rect(30, 81, 1060, 54), 17, NotebookPalette.Navy);
             foreach (var scenario in run.Session.Balance.Trials.Scenarios)
-            { var selected = scenario.Scenario; int i = (int)selected; trialScenarioButtons[i] = Button(trialPanel.transform, "Trial " + i, new Rect(30 + i * 204, 145, 191, 48), scenario.Name.ToUpperInvariant(), () => { trialScenario = selected; RefreshTrialSettings(); }); }
-            Button(trialPanel.transform, "Counterfire", new Rect(858, 145, 230, 48), "ОБРАТНЫЙ ОГОНЬ", () => { counterfire = !counterfire; RefreshTrialSettings(); });
+            { var selected = scenario.Scenario; int i = (int)selected; trialScenarioButtons[i] = Button(trialPanel.transform, "Trial " + i, new Rect(30 + i * 204, 145, 191, 48), Resolve(scenario.Name).ToUpperInvariant(), () => { trialScenario = selected; RefreshTrialSettings(); }); }
+            Button(trialPanel.transform, "Counterfire", new Rect(858, 145, 230, 48), UserText.Message("copy.9d66625ddee13b15"), () => { counterfire = !counterfire; RefreshTrialSettings(); });
             var budgets = run.Session.Balance.Trials.BudgetChoices;
             var budgetList = new CatalogScrollList(trialPanel.transform, "Trial budgets", new Rect(30, 209, 560, 42), budgets.Count, 3, 42, 5);
             for (int i = 0; i < budgets.Count; i++)
-            { int budget = budgets[i]; Button(budgetList.Content, "Trial budget " + budget, new Rect(i % 3 * 188, i / 3 * 47, 175, 42), budget + " ШТРИХОВ", () => { trialBudget = budget; RefreshTrialSettings(); }); }
+            { int budget = budgets[i]; Button(budgetList.Content, "Trial budget " + budget, new Rect(i % 3 * 188, i / 3 * 47, 175, 42), UserText.Message("copy.386e5ceae5aa3494", budget), () => { trialBudget = budget; RefreshTrialSettings(); }); }
             qualityModeButton = Button(trialPanel.transform, "Trial quality mode", new Rect(602, 209, 486, 42), "", () => { qualityTrial = !qualityTrial; RefreshTrialSettings(); }, out qualityModeLabel);
             trialSettings = Label(trialPanel.transform, "", new Rect(30, 270, 1058, 50), 21, NotebookPalette.Navy, true);
-            trialPlayback = Label(trialPanel.transform, "ЗАПИСЬ ИСПЫТАНИЯ ×4  ·  нажми «Провести тест»", new Rect(30, 314, 1058, 27), 17, NotebookPalette.Blue);
+            trialPlayback = Label(trialPanel.transform, UserText.Message("copy.3f04ed6c12dba0c3"), new Rect(30, 314, 1058, 27), 17, NotebookPalette.Blue);
             trialDiagramFirst = LaneDiagram(trialPanel.transform, "Blueprint test lane", new Rect(30, 347, 505, 153));
             trialDiagramSecond = LaneDiagram(trialPanel.transform, "Reference test lane", new Rect(582, 347, 505, 153));
-            trialFirstHeader = Label(trialPanel.transform, "ТВОЙ РИСУНОК", new Rect(403, 517, 310, 29), 18, NotebookPalette.Blue, true, TextAnchor.MiddleCenter);
-            trialSecondHeader = Label(trialPanel.transform, "ОДИН ПУЛЕМЁТ", new Rect(740, 517, 348, 29), 18, NotebookPalette.Blue, true, TextAnchor.MiddleCenter);
-            trialResults = Label(trialPanel.transform, "Нажми «Провести тест».", new Rect(30, 552, 354, 166), 15, NotebookPalette.Navy);
+            trialFirstHeader = Label(trialPanel.transform, UserText.Message("copy.d5f1a2a73fcf51d5"), new Rect(403, 517, 310, 29), 18, NotebookPalette.Blue, true, TextAnchor.MiddleCenter);
+            trialSecondHeader = Label(trialPanel.transform, UserText.Message("copy.0d0e3e111b1f0f24"), new Rect(740, 517, 348, 29), 18, NotebookPalette.Blue, true, TextAnchor.MiddleCenter);
+            trialResults = Label(trialPanel.transform, UserText.Message("copy.8f02821e075dc0d1"), new Rect(30, 552, 354, 166), 15, NotebookPalette.Navy);
             trialFirst = Label(trialPanel.transform, "", new Rect(403, 552, 310, 166), 15, NotebookPalette.Navy, false, TextAnchor.UpperCenter);
             trialSecond = Label(trialPanel.transform, "", new Rect(740, 552, 348, 166), 15, NotebookPalette.Navy, false, TextAnchor.UpperCenter);
-            Button(trialPanel.transform, "Run trial", new Rect(30, 724, 503, 55), "ПРОВЕСТИ ТЕСТ", RunTest);
-            Button(trialPanel.transform, "Close trial", new Rect(557, 724, 531, 55), "ВЕРНУТЬСЯ К ЧЕРТЕЖУ", () => SetTrial(false));
+            Button(trialPanel.transform, "Run trial", new Rect(30, 724, 503, 55), UserText.Message("copy.5321cfaaab8a3477"), RunTest);
+            Button(trialPanel.transform, "Close trial", new Rect(557, 724, 531, 55), UserText.Message("copy.071e234de8bba5a1"), () => SetTrial(false));
             SetTrial(false);
         }
         void BuildQualityDetails()
@@ -279,96 +306,101 @@ namespace PaperDefense.Presentation
             qualityShade.GetComponent<Image>().raycastTarget = true;
             qualityPanel = Panel(root, "Drawing quality details panel", new Rect(330, 140, 940, 720), NotebookPalette.Paper).gameObject;
             qualityPanel.GetComponent<Image>().raycastTarget = true;
-            Label(qualityPanel.transform, "КАЧЕСТВО РИСУНКА", new Rect(28, 20, 884, 48), 30, NotebookPalette.Blue, true);
+            Label(qualityPanel.transform, UserText.Message("copy.9981e518516b62e5"), new Rect(28, 20, 884, 48), 30, NotebookPalette.Blue, true);
             qualityExplanation = Label(qualityPanel.transform, "", new Rect(28, 86, 884, 535), 21, NotebookPalette.Navy);
             qualityExplanation.name = "Drawing quality explanation";
-            Button(qualityPanel.transform, "Close quality details", new Rect(28, 644, 884, 48), "ВЕРНУТЬСЯ К ЧЕРТЕЖУ", () => { qualityPanel.SetActive(false); qualityShade.SetActive(false); });
+            Button(qualityPanel.transform, "Close quality details", new Rect(28, 644, 884, 48), UserText.Message("copy.071e234de8bba5a1"), () => { qualityPanel.SetActive(false); qualityShade.SetActive(false); });
             qualityPanel.SetActive(false); qualityShade.SetActive(false);
         }
         void ShowQualityDetails()
         {
             var assessment = Draft.Assessment;
             var preview = run.PreviewBlueprint(Draft);
-            string text = "Качество: " + assessment.Quality.ToString("0") + " / 100 · темп " + (preview.QualityMultiplier * 100).ToString("0") + "%\n";
-            text += "Оценка сравнивает контуры с образцом с допуском к дрожи руки. Повторные линии не добавляют баллов; украшения не оцениваются.\n\n";
-            if (Draft.Origin == DrawingOrigin.LegacyStandard) text += "Стандартный рисунок: сохранён прежний темп. Для нового варианта нарисуй собственные линии.\n";
+            string text = UserText.Message("copy.c524c57d052a0a88", assessment.Quality, (preview.QualityMultiplier * 100));
+            text += UserText.Message("copy.ba96f2ca52eddb03");
+            if (Draft.Origin == DrawingOrigin.LegacyStandard) text += UserText.Message("copy.d1ae9c8debd10e79");
             foreach (var part in assessment.PartFeedback)
-                text += DrawingEditorPanel.Name(Draft, part.BindingId) + ": " + part.Quality.ToString("0") + " / 100\n" + part.Message + "\n";
-            if (assessment.IsArchived) text += "\nСохранена оценка прежней версии образца. Редактирование линий создаст оценку по актуальному образцу.\n";
+                text += UserText.Message("workshop.part_quality", DrawingEditorPanel.Name(Draft, part.BindingId, TextResolver), part.Quality, part.Message);
+            if (assessment.IsArchived) text += UserText.Message("copy.5e68da129f7caadb");
             text += run.Session.Balance.Mechanics.DrawingQuality
-                ? "\nКачество меняет только интервал действий после общей подачи. Цена, урон, прочность, защита и дальность от рисунка не меняются."
-                : "\nНа этом листе оценка рисунка сохраняется в альбоме, а темп действий остаётся одинаковым при любом качестве.";
-            qualityExplanation.text = text; qualityShade.SetActive(true); qualityPanel.SetActive(true);
+                ? UserText.Message("copy.da823b72ab4cef52")
+                : UserText.Message("copy.daa49761a0e89302");
+            qualityExplanation.text = Resolve(text); qualityShade.SetActive(true); qualityPanel.SetActive(true);
         }
 
         void SaveDraft()
         {
             MortarFootprintEditor.Close();
             Draft = Draft.WithName(title.text);
-            SetStatus(run.SaveBlueprint(Draft, out var reason) ? "«" + Draft.Name + "» сохранён. Назначь его в один из четырёх слотов." : reason);
+            SetStatus(run.SaveBlueprint(Draft, out var reason) ? UserText.Message("copy.e048f17356f3c1ea", Draft.Name) : reason);
         }
         void SaveAsNew()
         {
             MortarFootprintEditor.Close();
             var candidate = Draft.AsVariant("drawing-" + Guid.NewGuid().ToString("N"), title.text);
             if (!run.SaveBlueprint(candidate, out var reason)) { SetStatus(reason); return; }
-            Draft = candidate; SetStatus("Копия сохранена на новой странице. Исходная страница сохранена отдельно.");
+            Draft = candidate; SetStatus(UserText.Message("copy.4c7b8b8a912d4e2b"));
         }
         void SelectAlbum(int index)
         {
             if (index < 0 || index >= run.Workshop.Album.Count) return;
             MortarFootprintEditor.Close();
-            Draft = run.Workshop.Album[index]; title.SetTextWithoutNotify(Draft.Name);
-            SetStatus("Открыт «" + Draft.Name + "». Изменения применятся после сохранения; партия берёт отдельный набор.");
+            Draft = run.Workshop.Album[index]; title.SetTextWithoutNotify(Resolve(Draft.Name));
+            SetStatus(UserText.Message("copy.fd2246577ecd4462", Draft.Name));
         }
         void Refresh()
         {
             if (run == null || Draft == null || gold == null) return;
-            for (int mount = 0; mount < 2; mount++)
-            { string id = mount == 0 ? Draft.FirstWeaponId : Draft.SecondWeaponId; bool mortar = id != null && run.Content.TryGetWeapon(id, out var weapon) && weapon.SupportsFootprint; footprintButtons[mount].gameObject.SetActive(mortar); if (mortar) footprintButtons[mount].GetComponentInChildren<Text>().text = "След выстрела " + (mount + 1) + " · q " + Draft.GetMortarFootprint(mount).AspectRatio.ToString("0.00"); }
-            gold.text = "ЗОЛОТО  " + run.Workshop.Gold;
+            for (int mount = 0; mount < 3; mount++)
+            { string id = Draft.GetWeaponId(mount); bool mortar = id != null && run.Content.TryGetWeapon(id, out var weapon) && weapon.SupportsFootprint; footprintButtons[mount].gameObject.SetActive(mortar); if (mortar) footprintButtons[mount].GetComponentInChildren<Text>().text = Resolve(UserText.Message("copy.65784a4e3ffc4d05", (mount + 1), Draft.GetMortarFootprint(mount).AspectRatio)); }
+            gold.text = Resolve(UserText.Message("copy.dfbc594044dd606d", run.Workshop.Gold));
             albumPage = Mathf.Clamp(albumPage, 0, Mathf.Max(0, (run.Workshop.Album.Count - 1) / AlbumRowsPerPage));
             var balance = run.Session.Balance;
             var mechanics = balance.Mechanics;
             trialScenarioButtons[(int)TrialScenario.Blots].gameObject.SetActive(mechanics.CorpseBlots);
-            trialScenarioButtons[(int)TrialScenario.Armored].GetComponentInChildren<Text>().text = mechanics.EnemyDrawingTiers ? balance.Trials.For(TrialScenario.Armored).Name.ToUpperInvariant() : "ГРЫЗУНЫ";
+            trialScenarioButtons[(int)TrialScenario.Armored].GetComponentInChildren<Text>().text = Resolve(mechanics.EnemyDrawingTiers ? Resolve(balance.Trials.For(TrialScenario.Armored).Name).ToUpperInvariant() : UserText.Message("copy.c8839f3bfabe7fc2"));
             qualityModeButton.gameObject.SetActive(mechanics.DrawingQuality);
             if ((!mechanics.CorpseBlots && trialScenario == TrialScenario.Blots) || (!mechanics.DrawingQuality && qualityTrial))
                 RefreshTrialSettings();
             for (int i = 0; i < chassisButtons.Length; i++)
             {
                 var definition = run.Content.GetChassis(chassisIds[i]);
-                chassisButtons[i].GetComponentInChildren<Text>().text = definition.ButtonLabel + " / " + definition.Capacity;
+                chassisButtons[i].GetComponentInChildren<Text>().text = Resolve(UserText.Message("workshop.chassis_button", definition.ButtonLabel, definition.Capacity));
                 Choice(chassisButtons[i], Draft.ChassisId == chassisIds[i]);
             }
             for (int i = 0; i < weaponIds.Length; i++)
             {
                 Choice(firstWeapons[i], Draft.FirstWeaponId == weaponIds[i]);
                 Choice(secondWeapons[i], Draft.SecondWeaponId == weaponIds[i]);
+                Choice(thirdWeapons[i], Draft.GetWeaponId(2) == weaponIds[i]);
+            }
+            int armorUsed = 0, upgradesUsed = 0;
+            foreach (var module in Draft.ModuleSelections)
+                if (run.Content.TryGetModule(module.DefinitionId, out var part)) { if (part.SlotKind == ModuleSlotKind.Armor) armorUsed++; else upgradesUsed++; }
+            if (run.Content.TryGetChassis(Draft.ChassisId, out var selectedChassis))
+            {
+                armorSlotsLabel.text = Resolve(UserText.Message("workshop.armor_slots", armorUsed, selectedChassis.ArmorSlotCount));
+                upgradeSlotsLabel.text = Resolve(UserText.Message("workshop.upgrade_slots", upgradesUsed, selectedChassis.UpgradeSlotCount));
+                for (int i = 0; i < weaponIds.Length; i++) { secondWeapons[i].interactable = selectedChassis.MountCount >= 2; thirdWeapons[i].interactable = selectedChassis.MountCount >= 3; }
             }
             for (int i = 0; i < moduleIds.Length; i++)
             {
                 var definition = run.Content.GetModule(moduleIds[i]);
-                moduleButtons[i].GetComponentInChildren<Text>().text = definition.ButtonLabel + " +" + definition.Load;
+                moduleButtons[i].GetComponentInChildren<Text>().text = Resolve(UserText.Message("workshop.module_button", definition.ButtonLabel, definition.Load));
                 Choice(moduleButtons[i], SelectedModule(moduleIds[i]));
             }
             Choice(secondWeapons[weaponIds.Length], Draft.SecondWeaponId == null);
+            Choice(thirdWeapons[weaponIds.Length], Draft.GetWeaponId(2) == null);
             var preview = run.PreviewBlueprint(Draft, MaterialTier.Pencil);
             int deficit = Mathf.Max(0, preview.Load - preview.Capacity);
-            stats.text = "НАГРУЗКА  " + preview.Load + " / " + preview.Capacity + (deficit > 0 ? "   НЕ ХВАТАЕТ " + deficit : "") +
-                "\nЦена: " + preview.Cost + " штр. · " + preview.Health.ToString("0") + " HP · защита " + (preview.Defense * 100).ToString("0") + "%" +
-                "\nПостройка: " + preview.BuildSeconds.ToString("0.0") + " с    Дальность: " + preview.Range.ToString("0.0") +
-                "\nТемп: " + preview.FireRate.ToString("0.00") + " действий/с · подача " + (preview.FeedMultiplier * 100).ToString("0") + "%" +
-                "\nКачество: " + preview.DrawingQuality.ToString("0") + "/100 · темп " + (preview.QualityMultiplier * 100).ToString("0") + "%" +
-                (mechanics.ColorCartridges ? "\nОкраска: " + preview.ColorCost + " чернил" + (balance.LimitTowerColor ?
-                    " · цвет ≤" + balance.ColorTargetsPerWindow + " цели / " + balance.ColorWindowSeconds.ToString("0.#") + " с" : "") : "") +
-                (preview.Valid ? "" : "\n" + preview.Reason);
+            stats.text = Resolve(UserText.Message("copy.154e011c15594a63", preview.Load, preview.Capacity, (deficit > 0 ? UserText.Message("copy.b60d6857f04f0a4f", deficit) : ""), preview.Cost, preview.Health, (preview.Defense * 100), preview.BuildSeconds, preview.Range, preview.FireRate, (preview.FeedMultiplier * 100), preview.DrawingQuality, (preview.QualityMultiplier * 100), (mechanics.ColorCartridges ? UserText.Message("copy.8e013f7d4704e587", preview.ColorCost, (balance.LimitTowerColor ?
+                    UserText.Message("copy.79f1620b4fb8d375", balance.ColorTargetsPerWindow, balance.ColorWindowSeconds) : "")) : ""), (preview.Valid ? "" : "\n" + preview.Reason)));
             stats.color = preview.Valid ? NotebookPalette.Navy : NotebookPalette.Red;
             sketch.SetBlueprint(Draft);
-            status.text = Status;
+            status.text = Resolve(Status);
             RefreshSaveStatus();
             if (trialPanel.activeSelf && trialDiagramFirst.HasRecording)
-                trialPlayback.text = "ЗАПИСЬ ИСПЫТАНИЯ ×4  ·  " + trialDiagramFirst.PlaybackSeconds.ToString("0.0") + " с  ·  реальные позиции, снаряды и выстрелы";
+                trialPlayback.text = Resolve(UserText.Message("copy.5b5aabf711c8afb0", trialDiagramFirst.PlaybackSeconds));
             for (int i = 0; i < albumButtons.Length; i++)
             {
                 int index = albumPage * AlbumRowsPerPage + i;
@@ -376,9 +408,7 @@ namespace PaperDefense.Presentation
                 if (index >= run.Workshop.Album.Count) continue;
                 var bp = run.Workshop.Album[index];
                 var albumPreview = run.PreviewBlueprint(bp);
-                albumLabels[i].text = bp.Name + " · " + (bp.Origin == DrawingOrigin.LegacyStandard ? "стандартный" : bp.Assessment.Quality.ToString("0") + "/100") +
-                    " · " + albumPreview.Cost + " штр.\n" + WeaponName(bp.FirstWeaponId) + (bp.SecondWeaponId != null ? "+" + WeaponName(bp.SecondWeaponId) : "") +
-                    " · " + albumPreview.Health.ToString("0") + " HP · " + albumPreview.FireRate.ToString("0.0") + "/с";
+                albumLabels[i].text = Resolve(UserText.Message("copy.2de8fa26b46862ac", bp.Name, (bp.Origin == DrawingOrigin.LegacyStandard ? UserText.Message("copy.2123de7cfc728c2c") : UserText.Message("workshop.quality_score", bp.Assessment.Quality)), albumPreview.Cost, WeaponSummary(bp), "", albumPreview.Health, albumPreview.FireRate));
                 albumLabels[i].fontSize = 13;
                 albumSketches[i].SetBlueprint(bp);
                 albumButtons[i].GetComponent<Image>().color = bp.Id == Draft.Id ? new Color(.8f, .87f, .94f) : Color.white;
@@ -386,7 +416,7 @@ namespace PaperDefense.Presentation
             var loadout = run.Workshop.Loadout;
             for (int i = 0; i < slotLabels.Length; i++)
             {
-                slotLabels[i].text = (i + 1) + "  " + (i < loadout.Count && loadout[i] != null ? loadout[i].Name : "пусто") + "\n↑ назначить выбранный рисунок";
+                slotLabels[i].text = Resolve(UserText.Message("copy.62773216378bce38", (i + 1), (i < loadout.Count && loadout[i] != null ? loadout[i].Name : UserText.Message("copy.67dc5403f9c82c31"))));
             }
             for (int i = 0; i < partIds.Length; i++)
             {
@@ -395,36 +425,34 @@ namespace PaperDefense.Presentation
                 string name = definition.UnlockLabel;
                 int price = 0;
                 foreach (var part in run.Workshop.Parts) if (part.Id == partIds[i]) price = part.GoldCost;
-                partLabels[i].text = name + "\n" + (unlocked ? "ОТКРЫТО ✓" : price + " золота");
+                partLabels[i].text = Resolve(UserText.Message("workshop.unlock_button", name, unlocked ? UserText.Message("copy.86417e741b0e18e4") : UserText.Message("copy.964f2bea7f75b5b6", price)));
                 partButtons[i].interactable = !unlocked;
             }
             string wells = "";
             if (run.Session != null)
                 for (int i = 0; i < run.Session.Wells.Count; i++)
                 { var well = run.Session.Wells[i]; wells += (i > 0 ? "   ·   " : "") + ColorName(well.Color) + " " + well.Cell; }
-            string threat = run.Session != null && run.Session.Balance.Waves.Count > 0 ? run.Session.Balance.Waves[0].Title : "Первый штурм с запада";
+            string threat = run.Session != null && run.Session.Balance.Waves.Count > 0 ? run.Session.Balance.Waves[0].Title : UserText.Message("copy.b5974db5e807bfce");
             map.SetSession(run.Session);
             bool runners=false,gnawers=false,spitters=false;
             foreach(var wave in run.Session.Balance.Waves)
             {runners|=wave.RunnerFraction>0;gnawers|=wave.GnawerFraction>0;spitters|=mechanics.RangedEnemies&&wave.SpitterFraction>0;}
-            string enemies="каракули"+(runners?", бегуны":"")+(gnawers?", грызуны":"")+(spitters?", плевуны":"");
-            briefing.text = "КАРТА " + balance.Width + " × " + balance.Height + "  ·  База в центре" + (mechanics.InkWells ? "  ·  Точки: " + wells : "") +
-                "\nУгрозы партии: "+enemies+"."+(spitters ? " Стены перехватывают прямые сгустки." : "")+
-                (run.Session.Balance.Preset == GameBalancePreset.Target ?
-                    "\nСтарт: " + balance.StartingInk + " штрихов · ожидание не даёт штрихов · доход за врагов и волны." + (mechanics.InkWells ? " Точки открывают фронт." : "") :
-                    "\nНачало: " + threat + "." + (mechanics.InkWells ? " Активация точки открывает дополнительный фронт." : ""));
+            string enemies=UserText.Message("copy.8834fdb6964a6838", (runners?UserText.Message("copy.84d971fcad33df9e"):""), (gnawers?UserText.Message("copy.ec0efac73a0bc3ab"):""), (spitters?UserText.Message("copy.9aa4314a8e7e2cf4"):""));
+            briefing.text = Resolve(UserText.Message("copy.851980894ad17adb", balance.Width, balance.Height, (mechanics.InkWells ? UserText.Message("copy.bd969a1552a7f8b0", wells) : ""), enemies, (spitters ? UserText.Message("copy.9f16585ff7173d3c") : ""), (run.Session.Balance.Preset == GameBalancePreset.Target ?
+                    UserText.Message("copy.9d7e64acad5dda4e", balance.StartingInk, (mechanics.InkWells ? UserText.Message("copy.01bea534f0c9cb02") : "")) :
+                    UserText.Message("copy.4f11dbcf3d576c90", threat, (mechanics.InkWells ? UserText.Message("copy.012fc5ef84805c4b") : "")))));
         }
         void RefreshSaveStatus()
         {
             var profile = run.Workshop;
             bool failed = profile.SaveState == ProfileSaveState.WriteFailed;
             bool protectedSource = profile.SaveState == ProfileSaveState.RecoveryRequired;
-            string scope = profile.SaveState == ProfileSaveState.MemoryOnly ? "ТОЛЬКО В ПАМЯТИ" :
-                protectedSource ? "ВОССТАНОВЛЕНИЕ ТРЕБУЕТ ВНИМАНИЯ" : failed ? "ОШИБКА ЗАПИСИ" :
-                profile.HasUnsavedChanges ? "ЕСТЬ НЕСОХРАНЁННЫЕ ДАННЫЕ" : "СОХРАНЕНО";
+            string scope = profile.SaveState == ProfileSaveState.MemoryOnly ? UserText.Message("copy.53121a816b260323") :
+                protectedSource ? UserText.Message("copy.91cbbe4d8a4fb25d") : failed ? UserText.Message("copy.268d7bcfe051e702") :
+                profile.HasUnsavedChanges ? UserText.Message("copy.d1770b2fff113f11") : UserText.Message("copy.72734ce7eccce5f3");
             string detail = profile.SaveMessage;
-            if (profile.HasUnsavedChanges) detail += " При аварийном закрытии несохранённые изменения могут потеряться.";
-            profileSaveStatus.text = scope + " · " + detail;
+            if (profile.HasUnsavedChanges) detail += UserText.Message("copy.48e94b4f89c58cc7");
+            profileSaveStatus.text = Resolve(UserText.Message("workshop.save_status", scope, detail));
             profileSaveStatus.color = failed || protectedSource ? NotebookPalette.Red : NotebookPalette.Navy;
             // Failed manual commands remain on their original buttons; retry never replays a purchase.
             retryProfileSave.gameObject.SetActive(profile.HasUnsavedChanges && !protectedSource);
@@ -437,40 +465,39 @@ namespace PaperDefense.Presentation
             if (!mechanics.DrawingQuality) qualityTrial = false;
             bool blotTraining = trialScenario == TrialScenario.Blots;
             var rules = run.Session.Balance.Trials;
-            string scenarioName = trialScenario == TrialScenario.Armored && !mechanics.EnemyDrawingTiers ? "грызуны" : rules.For(trialScenario).Name.ToLowerInvariant();
-            trialSettings.text = "Сценарий: " + scenarioName + "    Бюджет: " + trialBudget + "    Ответный огонь: " + (blotTraining ? "НЕТ ВРАГОВ" : counterfire ? "ДА" : "НЕТ");
-            trialConditions.text = "Готовые карандашные башни, фиксированные позиции, без стен и наград. " +
-                (blotTraining ? "Заданные кляксы: конечный запас, без врагов и новых пятен. До очистки или " + (rules.StepSeconds * rules.MaximumTicks).ToString("0.#") + " с." :
-                    "Без клякс. Ответный огонь: " + rules.CounterfireDamage.ToString("0.#") + " урона / " + rules.CounterfireInterval.ToString("0.#") + " с в радиусе " + rules.CounterfireRange.ToString("0.#") + ".");
-            qualityModeLabel.text = qualityTrial ? "СРАВНЕНИЕ: ТВОЁ И 100% КАЧЕСТВА" : "СРАВНЕНИЕ: С ОДИНОЧНЫМИ ПУЛЕМЁТАМИ";
-            trialFirstHeader.text = qualityTrial ? "ТВОЁ КАЧЕСТВО " + Draft.Assessment.Quality.ToString("0") : "ТВОЙ РИСУНОК";
-            trialSecondHeader.text = qualityTrial ? "100% качества · та же сборка" : "ОДИН ПУЛЕМЁТ";
+            string scenarioName = trialScenario == TrialScenario.Armored && !mechanics.EnemyDrawingTiers ? UserText.Message("copy.ae092c38e45a8570") : Resolve(rules.For(trialScenario).Name).ToLowerInvariant();
+            trialSettings.text = Resolve(UserText.Message("copy.4c14dc9bbbade9ed", scenarioName, trialBudget, (blotTraining ? UserText.Message("copy.5c541247ef6b3bec") : counterfire ? UserText.Message("copy.6e782106d7934d03") : UserText.Message("copy.73766e6851e92703"))));
+            trialConditions.text = Resolve(UserText.Message("copy.3f138ba9b66893d3", (blotTraining ? UserText.Message("copy.ac6f23c50da2aca7", (rules.StepSeconds * rules.MaximumTicks)) :
+                    UserText.Message("copy.6c080edef345b261", rules.CounterfireDamage, rules.CounterfireInterval, rules.CounterfireRange))));
+            qualityModeLabel.text = Resolve(qualityTrial ? UserText.Message("copy.8cf1dfea8e5d3b5c") : UserText.Message("copy.10b122043549cab7"));
+            trialFirstHeader.text = Resolve(qualityTrial ? UserText.Message("copy.034c4ac46d600a47", Draft.Assessment.Quality) : UserText.Message("copy.d5f1a2a73fcf51d5"));
+            trialSecondHeader.text = Resolve(qualityTrial ? UserText.Message("copy.195f11eb3d3b0a6f") : UserText.Message("copy.0d0e3e111b1f0f24"));
             ClearTrial();
         }
         void ClearTrial()
         {
             trialDiagramFirst.SetResult(null, 0, 1); trialDiagramSecond.SetResult(null, 0, 1);
-            trialFirst.text = trialSecond.text = ""; trialResults.text = "Нажми «Провести тест».";
-            trialPlayback.text = "ЗАПИСЬ ИСПЫТАНИЯ ×4  ·  готовый рисунок против одиночных пулемётов";
+            trialFirst.text = Resolve(trialSecond.text = Resolve("")); trialResults.text = Resolve(UserText.Message("copy.8f02821e075dc0d1"));
+            trialPlayback.text = Resolve(UserText.Message("copy.cfad8860edae4ba5"));
         }
         void RunTest()
         {
             var preview = run.PreviewBlueprint(Draft, MaterialTier.Pencil);
-            if (!preview.Valid) { ClearTrial(); trialResults.text = preview.Reason; return; }
+            if (!preview.Valid) { ClearTrial(); trialResults.text = Resolve(preview.Reason); return; }
             var comparison = qualityTrial ? run.RunQualityTrial(Draft, trialScenario, counterfire, trialBudget) : run.RunTrial(Draft, trialScenario, counterfire, trialBudget);
             if (comparison == null)
             {
-                SetStatus("Сначала откройте детали этой сборки. Испытание не расходует золото и штрихи.");
-                ClearTrial(); trialResults.text = Status; return;
+                SetStatus(UserText.Message("copy.b8c85b921b3e435e"));
+                ClearTrial(); trialResults.text = Resolve(Status); return;
             }
             var a = comparison.First; var b = comparison.Second;
-            trialResults.text = "Копий / потрачено штрихов\nФактический урон\nПрорывов\nВыжило башен\nПростой без цели, с\nДлительность, с\nНе завершили маршрут\nОчищено клякс\nНе очищены";
-            trialFirst.text = TrialValues(a); trialSecond.text = TrialValues(b);
+            trialResults.text = Resolve(UserText.Message("copy.20aa3fc90aec2cbe"));
+            trialFirst.text = Resolve(TrialValues(a)); trialSecond.text = Resolve(TrialValues(b));
             float started = Time.unscaledTime, duration = Mathf.Max(a.DurationSeconds, b.DurationSeconds);
             trialDiagramFirst.SetResult(a, started, duration); trialDiagramSecond.SetResult(b, started, duration);
         }
-        static string TrialValues(TrialReport report) => report.Copies + " / " + report.Cost + "\n" + report.Damage.ToString("0") + "\n" + report.Leaks + "\n" +
-            report.SurvivingTowers + "\n" + report.IdleSeconds.ToString("0.0") + "\n" + report.DurationSeconds.ToString("0.0") + "\n" + report.UnresolvedEnemies + "\n" + report.BlotsCleared + "\n" + report.UnresolvedBlots;
+        static string TrialValues(TrialReport report) => UserText.Message("workshop.trial_values", report.Copies, report.Cost, report.Damage, report.Leaks,
+            report.SurvivingTowers, report.IdleSeconds, report.DurationSeconds, report.UnresolvedEnemies, report.BlotsCleared, report.UnresolvedBlots);
         static void Choice(Button button, bool chosen) => button.GetComponent<Image>().color = chosen ? new Color(.8f, .87f, .94f) : Color.white;
         TrialLaneSketch LaneDiagram(Transform parent, string name, Rect box)
         {
@@ -479,8 +506,14 @@ namespace PaperDefense.Presentation
         }
         internal static string WeaponName(StructureKind kind)
             => PartCatalog.TryGetMount(kind, out var part) ? part.ButtonLabel : kind.ToString().ToUpperInvariant();
-        string WeaponName(string id) => run.Content.TryGetWeapon(id, out var part) ? part.ButtonLabel : "НЕДОСТУПНО: " + id;
-        internal static string ColorName(InkColor color) => color == InkColor.Red ? "красная" : color == InkColor.Blue ? "синяя" : color == InkColor.Green ? "зелёная" : "без цвета";
+        string WeaponName(string id) => run.Content.TryGetWeapon(id, out var part) ? part.ButtonLabel : UserText.Message("copy.28de2c7a9d82e464", id);
+        string WeaponSummary(TowerBlueprint blueprint)
+        {
+            string result = "";
+            foreach (var mount in blueprint.WeaponMounts) result = result.Length == 0 ? WeaponName(mount.WeaponId) : UserText.Message("workshop.weapon_pair", result, WeaponName(mount.WeaponId));
+            return result;
+        }
+        internal static string ColorName(InkColor color) => color == InkColor.Red ? UserText.Message("copy.bd395e180a485a0a") : color == InkColor.Blue ? UserText.Message("copy.3b6332e897ab71c4") : color == InkColor.Green ? UserText.Message("copy.05142bc07be813fc") : UserText.Message("copy.715c066d1a65e690");
 
         RectTransform Panel(Transform parent, string name, Rect box, Color color)
         {
@@ -492,7 +525,7 @@ namespace PaperDefense.Presentation
         Text Label(Transform parent, string text, Rect box, int size, Color color, bool bold = false, TextAnchor align = TextAnchor.UpperLeft)
         {
             var go = new GameObject("Text", typeof(RectTransform), typeof(Text)); go.transform.SetParent(parent, false); Place(go.GetComponent<RectTransform>(), box);
-            var label = go.GetComponent<Text>(); label.font = font; label.text = text; label.fontSize = size; label.fontStyle = bold ? FontStyle.Bold : FontStyle.Normal;
+            var label = go.GetComponent<Text>(); label.font = font; label.text = Resolve(text); label.fontSize = size; label.fontStyle = bold ? FontStyle.Bold : FontStyle.Normal;
             label.color = color; label.alignment = align; label.raycastTarget = false; label.horizontalOverflow = HorizontalWrapMode.Wrap; label.verticalOverflow = VerticalWrapMode.Truncate;
             return label;
         }
@@ -555,8 +588,12 @@ namespace PaperDefense.Presentation
                 if ((blueprint.Modules & TowerModules.Armor) != 0)
                 { Line(vh, center + new Vector2(side * (radius + 8), -39), center + new Vector2(side * (radius + 8), 40), 13, NotebookPalette.Navy); }
             }
-            Weapon(vh, center + (blueprint.SecondWeapon.HasValue ? Vector2.left * 28 : Vector2.zero), blueprint.FirstWeapon);
-            if (blueprint.SecondWeapon.HasValue) Weapon(vh, center + Vector2.right * 28, blueprint.SecondWeapon.Value);
+            foreach (var mount in blueprint.WeaponMounts)
+            {
+                Point2 pivot = blueprint.Content != null && blueprint.Content.TryGetChassis(blueprint.ChassisId, out var chassis)
+                    ? chassis.GetMountPivot(mount.SlotIndex, blueprint.WeaponMounts.Count) : new Point2((mount.SlotIndex - (blueprint.WeaponMounts.Count - 1) * .5f) * .28f, 0);
+                Weapon(vh, center + new Vector2(pivot.X, pivot.Y) * 190, LegacyContentIds.Weapon(mount.WeaponId));
+            }
             if ((blueprint.Modules & TowerModules.Feed) != 0) Ring(vh, center - Vector2.up * 22, 15, 5, NotebookPalette.Green);
             if ((blueprint.Modules & TowerModules.Tracking) != 0)
             { Ring(vh, center + new Vector2(radius + 24, 57), 15, 3, NotebookPalette.Red); Line(vh, center + new Vector2(radius, 26), center + new Vector2(radius + 24, 57), 3, NotebookPalette.Navy); }
@@ -681,8 +718,9 @@ namespace PaperDefense.Presentation
                 if (aim.sqrMagnitude < 1) aim = Vector2.left;
                 Vector2 end = at + aim.normalized * 9;
                 BlueprintSketch.Line(vh, at, end, 2, NotebookPalette.Blue);
-                if (tower.Blueprint != null && tower.Blueprint.SecondWeapon.HasValue)
-                    BlueprintSketch.Line(vh, at + Vector2.up * 3, end + Vector2.up * 3, 2, NotebookPalette.Blue);
+                if (tower.Blueprint != null)
+                    for (int mount = 1; mount < tower.Blueprint.WeaponMounts.Count; mount++)
+                        BlueprintSketch.Line(vh, at + Vector2.up * (mount * 3), end + Vector2.up * (mount * 3), 2, NotebookPalette.Blue);
                 if (tower.Blueprint != null && (tower.Blueprint.Modules & TowerModules.Armor) != 0)
                     BlueprintSketch.Line(vh, at + new Vector2(4, -4), at + new Vector2(4, 4), 3, NotebookPalette.Navy);
             }
@@ -716,7 +754,8 @@ namespace PaperDefense.Presentation
             {
                 var part = drawing.GetPart(template.BindingId); Point2 pivot = template.Pivot;
                 bool moving = template.Role == DrawingPartRole.Mount;
-                Point2 aim = template.BindingId == DrawingBindings.Mount1 ? tower.SecondaryAim : tower.PrimaryAim;
+                int mountIndex = template.BindingId == DrawingBindings.Mount1 ? 1 : template.BindingId == DrawingBindings.Mount(2) ? 2 : 0;
+                Point2 aim = tower.GetMountAim(mountIndex);
                 float angle = moving && (aim.X != 0 || aim.Y != 0)
                     ? Mathf.Atan2(aim.Y - origin.Y - pivot.Y, aim.X - origin.X - pivot.X) - Mathf.PI * .5f : 0;
                 float c = Mathf.Cos(angle), s = Mathf.Sin(angle);

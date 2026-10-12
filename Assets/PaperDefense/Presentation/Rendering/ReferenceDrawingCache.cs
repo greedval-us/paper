@@ -22,12 +22,14 @@ namespace PaperDefense.Presentation
             => blueprint != null && choices.GetValue(blueprint,createChoice).Template;
         static bool ComputeTemplateVisual(TowerBlueprint blueprint)
         {
+            if (blueprint != null && blueprint.WeaponMounts.Count > 2) return true;
             if (blueprint?.Content == null || blueprint.Content.IsLegacyAdapter) return false;
             if (!blueprint.Content.TryGetChassis(blueprint.ChassisId, out var chassis) || !blueprint.Content.TryGetWeapon(blueprint.FirstWeaponId, out var first)) return false;
             if (chassis.VisualStyle == DrawingVisualStyle.Template || first.VisualStyle == DrawingVisualStyle.Template ||
                 LegacyContentIds.Chassis(blueprint.ChassisId) == (ChassisKind)(-1) || LegacyContentIds.Weapon(blueprint.FirstWeaponId) == (StructureKind)(-1)) return true;
-            if (blueprint.SecondWeaponId != null && blueprint.Content.TryGetWeapon(blueprint.SecondWeaponId, out var second) &&
-                (second.VisualStyle == DrawingVisualStyle.Template || LegacyContentIds.Weapon(blueprint.SecondWeaponId) == (StructureKind)(-1))) return true;
+            foreach (var mount in blueprint.WeaponMounts)
+                if (blueprint.Content.TryGetWeapon(mount.WeaponId, out var weapon) &&
+                    (weapon.VisualStyle == DrawingVisualStyle.Template || LegacyContentIds.Weapon(mount.WeaponId) == (StructureKind)(-1))) return true;
             foreach (var selected in blueprint.ModuleSelections)
                 if (blueprint.Content.TryGetModule(selected.DefinitionId, out var module) &&
                     (module.VisualStyle == DrawingVisualStyle.Template || LegacyContentIds.Module(selected.DefinitionId) == TowerModules.None)) return true;

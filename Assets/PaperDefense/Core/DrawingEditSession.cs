@@ -25,7 +25,7 @@ namespace PaperDefense.Core
         public bool AddStroke(string part, IReadOnlyList<DrawingPoint> points, out string reason)
         {
             reason = "";
-            if (!Enabled(part)) { reason = "Эта часть отсутствует в выбранной конструкции."; return false; }
+            if (!Enabled(part)) { reason = UserText.Message("copy.7ebe71725a540755"); return false; }
             try
             {
                 var strokes = new List<DrawingStroke>(Snapshot.GetPart(part).Strokes);
@@ -77,8 +77,7 @@ namespace PaperDefense.Core
             if (SameAssembly(Blueprint, blueprint) && Blueprint.Id == blueprint.Id && Blueprint.Name == blueprint.Name) return false;
             var parts = new List<DrawingPart>(Snapshot.Parts.Count);
             foreach (DrawingPart part in Snapshot.Parts)
-                if (DrawingPartPolicy.ShouldRetain(part.BindingId, Blueprint, blueprint.ChassisId, blueprint.FirstWeaponId,
-                    blueprint.SecondWeaponId, blueprint.ModuleSelections)) parts.Add(part);
+                if (DrawingPartPolicy.ShouldRetain(part.BindingId, Blueprint, blueprint)) parts.Add(part);
             Commit(blueprint, new DrawingSnapshot(parts));
             return true;
         }
@@ -118,7 +117,9 @@ namespace PaperDefense.Core
 
         static bool SameAssembly(TowerBlueprint first, TowerBlueprint second)
         {
-            if (first.ChassisId != second.ChassisId || first.FirstWeaponId != second.FirstWeaponId || first.SecondWeaponId != second.SecondWeaponId || first.ModuleSelections.Count != second.ModuleSelections.Count) return false;
+            if (first.ChassisId != second.ChassisId || first.WeaponMounts.Count != second.WeaponMounts.Count || first.ModuleSelections.Count != second.ModuleSelections.Count) return false;
+            for(int i=0;i<first.WeaponMounts.Count;i++)
+                if(first.WeaponMounts[i].SlotIndex!=second.WeaponMounts[i].SlotIndex||first.WeaponMounts[i].WeaponId!=second.WeaponMounts[i].WeaponId||first.WeaponMounts[i].Footprint.AspectRatio!=second.WeaponMounts[i].Footprint.AspectRatio)return false;
             for (int i = 0; i < first.ModuleSelections.Count; i++)
                 if (first.ModuleSelections[i].InstanceId != second.ModuleSelections[i].InstanceId || first.ModuleSelections[i].DefinitionId != second.ModuleSelections[i].DefinitionId) return false;
             return true;

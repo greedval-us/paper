@@ -38,7 +38,7 @@ namespace PaperDefense.Tests
             Assert.That(profile.SaveBlueprint(page, out reason), Is.True, reason); Assert.That(profile.AssignSlot(0, page.Id, out reason), Is.True, reason);
             Assert.That(new WorkshopProfileStore(path).Save(profile).Success, Is.True);
             var data = JsonUtility.FromJson<WorkshopProfileData>(File.ReadAllText(path));
-            Assert.That(data.Version, Is.EqualTo(5)); Assert.That(data.Album[4].Drawing.FormatVersion, Is.EqualTo(2));
+            Assert.That(data.Version, Is.EqualTo(WorkshopProfile.CurrentVersion)); Assert.That(data.Album[4].Drawing.FormatVersion, Is.EqualTo(2));
             Assert.That(data.Album[4].Drawing.BindingVersion, Is.EqualTo(1)); Assert.That(data.Album[4].Drawing.Parts.Length, Is.EqualTo(8));
             var restored = new WorkshopProfileStore(path).Load(); Assert.That(restored.Source, Is.EqualTo(ProfileLoadSource.Primary));
             Assert.That(restored.Profile.Gold, Is.EqualTo(40)); Assert.That(restored.Profile.IsUnlocked("module.rail"), Is.True);

@@ -1,5 +1,6 @@
 using System.Linq;
 using NUnit.Framework;
+using PaperDefense.Application;
 using PaperDefense.Core;
 using PaperDefense.Presentation;
 using UnityEngine;
@@ -57,7 +58,11 @@ namespace PaperDefense.Tests
         };
 
         void Click(string name) => root.GetComponentsInChildren<Button>(true).Single(button => button.name == name).onClick.Invoke();
-        bool HasText(string value) => root.GetComponentsInChildren<Text>(true).Any(label => label.gameObject.activeInHierarchy && label.text.Contains(value));
+        bool HasText(string value)
+        {
+            string expected = TextResourcesAsset.Default.Resolve(value);
+            return root.GetComponentsInChildren<Text>(true).Any(label => label.gameObject.activeInHierarchy && label.text.Contains(expected));
+        }
         void AssertRejected()
         {
             Assert.That(rejection, Is.Not.Null.And.Not.Empty, "The real pointer stroke must be rejected.");

@@ -12,7 +12,7 @@ namespace PaperDefense.Application
         public ContentCatalogSnapshot Content { get; private set; }
         public IReadOnlyList<TowerBlueprint> Loadout {get;private set;}
         public ProfileSaveState SaveState { get; internal set; } = ProfileSaveState.MemoryOnly;
-        public string SaveMessage { get; internal set; } = "Только в памяти; профиль не записывается.";
+        public string SaveMessage { get; internal set; } = UserText.Message("copy.0780dfa419e08bc0");
         public bool HasUnsavedChanges { get; internal set; }
         public string LastWriteError { get; internal set; } = "";
         public bool IsUnlocked(string id)=>source.IsUnlocked(id);
@@ -29,9 +29,8 @@ namespace PaperDefense.Application
         }
         TowerBlueprint PreparePage(TowerBlueprint blueprint)
         {
-            if(blueprint==null||Content==null||!Content.TryGetChassis(blueprint.ChassisId,out _)||
-                !Content.TryGetWeapon(blueprint.FirstWeaponId,out _)||
-                (blueprint.SecondWeaponId!=null&&!Content.TryGetWeapon(blueprint.SecondWeaponId,out _)))return blueprint;
+            if(blueprint==null||Content==null||!Content.TryGetChassis(blueprint.ChassisId,out _))return blueprint;
+            foreach(var mount in blueprint.WeaponMounts)if(!Content.TryGetWeapon(mount.WeaponId,out _))return blueprint;
             foreach(var selection in blueprint.ModuleSelections)if(!Content.TryGetModule(selection.DefinitionId,out _))return blueprint;
             return blueprint.WithContent(Content);
         }
@@ -49,8 +48,8 @@ namespace PaperDefense.Application
             Valid=TowerCatalog.Validate(bp,balance,out string reason);Reason=reason;
             if(bp==null){Load=Capacity=Cost=ColorCost=0;Health=BuildSeconds=FireRate=Range=FeedMultiplier=0;return;}
             var content = balance.ResolveContent();
-            bool known=content.TryGetChassis(bp.ChassisId,out _)&&content.TryGetWeapon(bp.FirstWeaponId,out _)&&
-                (bp.SecondWeaponId==null||content.TryGetWeapon(bp.SecondWeaponId,out _));
+            bool known=content.TryGetChassis(bp.ChassisId,out _);
+            foreach(var mount in bp.WeaponMounts)known&=content.TryGetWeapon(mount.WeaponId,out _);
             foreach(var selection in bp.ModuleSelections) known &= content.TryGetModule(selection.DefinitionId,out _);
             if(!known)
             {Load=Capacity=Cost=ColorCost=0;Health=BuildSeconds=FireRate=Range=FeedMultiplier=0;return;}
@@ -61,8 +60,8 @@ namespace PaperDefense.Application
             Load=TowerCatalog.Load(bp,balance);Capacity=TowerCatalog.Capacity(bp,balance);Cost=TowerCatalog.Cost(bp,balance,material);
             ColorCost=TowerCatalog.ColorCost(bp,balance);Health=TowerCatalog.Health(bp,balance,material);
             BuildSeconds=TowerCatalog.BuildSeconds(bp,balance,material);FeedMultiplier=TowerCatalog.FeedMultiplier(bp,balance);
-            Range=TowerCatalog.WeaponRange(bp,balance,bp.FirstWeaponId);FireRate=1/TowerCatalog.ActionInterval(bp,balance,bp.FirstWeaponId,FeedMultiplier,QualityMultiplier);
-            if(bp.SecondWeaponId!=null){Range=System.Math.Max(Range,TowerCatalog.WeaponRange(bp,balance,bp.SecondWeaponId,1));FireRate+=1/TowerCatalog.ActionInterval(bp,balance,bp.SecondWeaponId,FeedMultiplier,QualityMultiplier,1);}
+            Range=FireRate=0;
+            foreach(var mount in bp.WeaponMounts){Range=System.Math.Max(Range,TowerCatalog.WeaponRange(bp,balance,mount.WeaponId,mount.SlotIndex));FireRate+=1/TowerCatalog.ActionInterval(bp,balance,mount.WeaponId,FeedMultiplier,QualityMultiplier,mount.SlotIndex);}
         }
     }
 }

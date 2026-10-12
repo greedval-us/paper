@@ -23,14 +23,18 @@ namespace PaperDefense.Validation
         public InkLoopReport Report {get;} = new InkLoopReport();
         public bool Finished => Report.Completed;
 
-        public InkLoopScenario(GameBalance balance, int seed = 1337)
+        public InkLoopScenario(GameBalance balance, int seed = 1337, IReadOnlyList<TowerBlueprint> suppliedLoadout = null)
         {
             Session = new GameSession(balance, seed, false);
-            loadout = new WorkshopProfile().GetLoadoutBlueprints();
+            loadout = suppliedLoadout == null ? new WorkshopProfile().GetLoadoutBlueprints() : PrepareLoadout(suppliedLoadout, Session.Balance);
             Report.Seed=seed;Report.Width=balance.Width;Report.Height=balance.Height;Report.Preset=balance.Preset.ToString();
             Report.Strategy=balance.Preset==GameBalancePreset.Target?"TargetProtectedPursuitV4":"HistoricalBattery";
             if(balance.Preset==GameBalancePreset.Target)
                 Report.Scope="Target workshop balance supplied by caller, unchanged; zero starter structures. Public commands only; default four blueprints. Compact mixed battery inside a repaired pencil wall ring. After spawning ends, a small enemy tail or an entirely ranged tail receives paid pursuit guns only for spitters outside every existing tower's range. Pursuit construction takes priority over recurring wall repairs. The blue point is initially exposed until actual enemy destruction, then recaptured only after fourteen base towers and a fully funded wall ring plus four cardinal dual-gun defenders and four diagonal mortars covering the ranged siege standoff. Missing well walls and paid intermission reactivation take priority over further base expansion. Additional towers use finite earned ink. One manual cleanup demonstrates the tool; blue cartridges use earned well payouts and are fitted to completed non-mortar towers with a living enemy in range. Every wave launches immediately. WaveInkGrant is only the historical fallback; each WaveTuning/Waves InkGrant resolves its ConfiguredInkGrant. This strategy chooses no Salvage reward multiplier. Fixed-step headless evidence; not a frame-time benchmark.";
+            if(suppliedLoadout!=null)Report.Scope=(Report.Scope??"Public commands only; default four blueprints.")
+                .Replace("default four blueprints.","caller-supplied four blueprints.")
+                .Replace("four cardinal dual-gun defenders and four diagonal mortars covering the ranged siege standoff","four cardinal slot-1 defenders and four diagonal slot-3 defenders")
+                .Replace("protected mortars/piercers/dual guns","caller-supplied tower pages");
             Report.StartingInk=balance.StartingInk;Report.StartingBaseHealth=balance.BaseHealth;
             Report.PassiveInkPerSecond=balance.PassiveInkPerSecond;Report.WaveInkGrant=balance.WaveInkGrant;
             Report.EarlyLaunchInkPerSecond=balance.EarlyLaunchInkPerSecond;Report.MaxEarlyLaunchInk=balance.MaxEarlyLaunchInk;
@@ -59,6 +63,23 @@ namespace PaperDefense.Validation
                 Activate("Activate initially exposed blue point");
             }
             Observe();
+        }
+
+        static IReadOnlyList<TowerBlueprint> PrepareLoadout(IReadOnlyList<TowerBlueprint> suppliedLoadout, GameBalance balance)
+        {
+            if(suppliedLoadout.Count!=ProfileLimits.LoadoutSlotCount)
+                throw new ArgumentException("suppliedLoadout must contain exactly four valid blueprint pages.",nameof(suppliedLoadout));
+            var owned=new TowerBlueprint[ProfileLimits.LoadoutSlotCount];
+            for(int i=0;i<owned.Length;i++)
+            {
+                var page=suppliedLoadout[i];
+                if(page==null)throw new ArgumentException("suppliedLoadout["+i+"] must not be null.",nameof(suppliedLoadout));
+                page=page.WithContent(balance.Content);
+                if(!TowerCatalog.Validate(page,balance,out string reason))
+                    throw new ArgumentException("suppliedLoadout["+i+"] is invalid: "+reason,nameof(suppliedLoadout));
+                owned[i]=page;
+            }
+            return Array.AsReadOnly(owned);
         }
 
         public void Step()
@@ -202,7 +223,8 @@ namespace PaperDefense.Validation
                 float dx=objective.X-enemy.Position.X,dy=objective.Y-enemy.Position.Y;
                 float distance=(float)Math.Sqrt(dx*dx+dy*dy);
                 if(distance<=.0001f)continue;
-                float range=TowerCatalog.WeaponRange(loadout[0],Session.Balance,loadout[0].FirstWeapon);
+                var balance=Session.Balance;
+                float range=TowerCatalog.WeaponRange(loadout[0],balance,loadout[0].FirstWeaponId,0);
                 if(range<=0)continue;
                 float advance=Math.Min(distance,Math.Min(6,range*.6f));
                 var center=new Cell((int)Math.Floor(enemy.Position.X+dx/distance*advance),
@@ -212,7 +234,7 @@ namespace PaperDefense.Validation
                     if(Math.Max(Math.Abs(x),Math.Abs(y))!=radius)continue;
                     var cell=new Cell(center.X+x,center.Y+y);
                     var origin=new Point2(cell.X+.5f,cell.Y+.5f);
-                    if(DistanceSquared(enemy.Position,origin)>range*range)continue;
+                    if(!MountCanReach(loadout[0],balance,origin,enemy.Position))continue;
                     if(!Session.QuoteBlueprint(new[]{cell},loadout[0],MaterialTier.Pencil,InkColor.None).Valid)continue;
                     if(Build(cell,0,"Paid pursuit gun for a surviving spitter outside every battery range"))
                         Report.PursuitTowersBuilt++;
@@ -223,14 +245,25 @@ namespace PaperDefense.Validation
 
         bool CoveredByTargetTower(Point2 enemy)
         {
+            var balance=Session.Balance;
             foreach(var tower in Session.Structures)
             {
                 if(tower.Blueprint==null||tower.Health<=0)continue;
-                float range=TowerCatalog.WeaponRange(tower.Blueprint,Session.Balance,tower.Blueprint.FirstWeapon);
-                if(tower.Blueprint.SecondWeapon.HasValue)
-                    range=Math.Max(range,TowerCatalog.WeaponRange(tower.Blueprint,Session.Balance,tower.Blueprint.SecondWeapon.Value));
                 // Pending construction also reserves coverage so one order cannot duplicate the response.
-                if(DistanceSquared(enemy,new Point2(tower.Cell.X+.5f,tower.Cell.Y+.5f))<=range*range)return true;
+                if(MountCanReach(tower.Blueprint,balance,new Point2(tower.Cell.X+.5f,tower.Cell.Y+.5f),enemy))return true;
+            }
+            return false;
+        }
+
+        static bool MountCanReach(TowerBlueprint blueprint,GameBalance balance,Point2 origin,Point2 target,bool forPaint=false)
+        {
+            float distance=DistanceSquared(origin,target);
+            foreach(var mount in blueprint.WeaponMounts)
+            {
+                var weapon=balance.Content.GetWeapon(mount.WeaponId);
+                if(!weapon.IsCombatMount||(forPaint&&weapon.Attack==AttackKind.AreaProjectile))continue;
+                float maximum=TowerCatalog.WeaponRange(blueprint,balance,mount.WeaponId,mount.SlotIndex);
+                if(maximum>0&&distance>=weapon.MinimumRange*weapon.MinimumRange&&distance<=maximum*maximum)return true;
             }
             return false;
         }
@@ -276,18 +309,16 @@ namespace PaperDefense.Validation
 
         void TargetPaintAndBlotter()
         {
+            var balance=Session.Balance;
             foreach(var tower in Session.Structures)
             {
-                if(tower.Blueprint==null||tower.Color!=InkColor.None||tower.Kind==StructureKind.Mortar||
+                if(tower.Blueprint==null||tower.Color!=InkColor.None||
                     tower.Health<=0||!tower.IsComplete||tower.BuildRemaining>0)continue;
                 if(Session.ColoredInk(InkColor.Blue)<Session.ColorCost(tower.Blueprint,tower.Tier))continue;
-                float range=TowerCatalog.WeaponRange(tower.Blueprint,Session.Balance,tower.Blueprint.FirstWeapon);
-                if(tower.Blueprint.SecondWeapon.HasValue)
-                    range=Math.Max(range,TowerCatalog.WeaponRange(tower.Blueprint,Session.Balance,tower.Blueprint.SecondWeapon.Value));
                 bool hasTarget=false;
                 Point2 origin=new Point2(tower.Cell.X+.5f,tower.Cell.Y+.5f);
                 foreach(var enemy in Session.Enemies)
-                    if(enemy.Health>0&&DistanceSquared(origin,enemy.Position)<=range*range){hasTarget=true;break;}
+                    if(enemy.Health>0&&MountCanReach(tower.Blueprint,balance,origin,enemy.Position,true)){hasTarget=true;break;}
                 if(!hasTarget)continue;
                 int before=Session.ColoredInk(InkColor.Blue);
                 bool success=Session.TryPaint(tower.Cell,InkColor.Blue,out string reason);

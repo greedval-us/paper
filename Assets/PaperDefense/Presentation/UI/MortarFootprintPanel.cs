@@ -6,6 +6,8 @@ namespace PaperDefense.Presentation
 {
     public sealed class MortarFootprintPanel
     {
+        readonly UserTextResolver textResolver;
+        string Resolve(string value) => GameText.Resolve(textResolver, value);
         readonly GameObject sheet;
         readonly Func<TowerBlueprint, string> validationReason;
         readonly Action<TowerBlueprint> changeDraft;
@@ -34,8 +36,9 @@ namespace PaperDefense.Presentation
 
         public MortarFootprintPanel(Transform parent, Font font, Action<TowerBlueprint> changeDraft,
             Func<TowerBlueprint, int, MortarFootprint, MortarFootprint, FootprintFormation, FootprintProbeComparison> compare,
-            Func<TowerBlueprint, string> validationReason)
+            Func<TowerBlueprint, string> validationReason, UserTextResolver textResolver = null)
         {
+            this.textResolver = textResolver;
             this.changeDraft = changeDraft;
             this.compare = compare;
             this.validationReason = validationReason;
@@ -43,7 +46,7 @@ namespace PaperDefense.Presentation
             sheet.transform.SetParent(parent, false);
             Place(sheet.GetComponent<RectTransform>(), new Rect(90, 115, 1420, 770));
             sheet.GetComponent<UnityEngine.UI.Image>().color = NotebookPalette.Paper;
-            Text(font, "СЛЕД ВЫСТРЕЛА  ·  один залп выбранной мортиры", new Rect(30, 20, 1350, 50), 28);
+            Text(font, UserText.Message("copy.90b777be2577be25"), new Rect(30, 20, 1350, 50), 28);
             instructions = Text(font, "", new Rect(30, 85, 390, 65), 19);
             var axis = new GameObject("Footprint axis", typeof(RectTransform), typeof(CanvasRenderer), typeof(FootprintAxisGraphic));
             axis.transform.SetParent(sheet.transform, false);
@@ -52,25 +55,25 @@ namespace PaperDefense.Presentation
             Axis.Configure(BeginDrag, Commit);
             aspectLabel = Text(font, "", new Rect(30, 575, 390, 45), 22);
             aspectLabel.name = "Footprint aspect ratio";
-            Axis.AspectChanged = q => aspectLabel.text = "q = " + q.ToString("0.00") + " · пределы 1—" + maximumAspect.ToString("0.##");
-            Text(font, "A · зафиксированный след", new Rect(460, 95, 440, 35), 21);
-            Text(font, "B · текущий черновик", new Rect(940, 95, 440, 35), 21);
+            Axis.AspectChanged = q => aspectLabel.text = Resolve(UserText.Message("copy.031804e2db29b843", q, maximumAspect));
+            Text(font, UserText.Message("copy.74f7ef7fd7c9851c"), new Rect(460, 95, 440, 35), 21);
+            Text(font, UserText.Message("copy.2a5e89a7fb3c531b"), new Rect(940, 95, 440, 35), 21);
             first = Sketch("Footprint replay A", new Rect(460, 150, 440, 360));
             second = Sketch("Footprint replay B", new Rect(940, 150, 440, 360));
             summary = Text(font, "", new Rect(460, 535, 920, 100), 20);
             summary.name = "Footprint probe feedback";
-            Button(font, "Footprint group", "Группа", new Rect(30, 650, 170, 50), () => {
+            Button(font, "Footprint group", UserText.Message("copy.907efbd4ce48253b"), new Rect(30, 650, 170, 50), () => {
                 formation = FootprintFormation.Group;
                 Record();
             });
-            Button(font, "Footprint column", "Колонна", new Rect(215, 650, 170, 50), () => {
+            Button(font, "Footprint column", UserText.Message("copy.322ef2503cd18ed7"), new Rect(215, 650, 170, 50), () => {
                 formation = FootprintFormation.Column;
                 Record();
             });
-            Button(font, "Footprint repeat", "Повторить", new Rect(400, 650, 190, 50), Record);
-            Button(font, "Footprint pin A", "Зафиксировать как A", new Rect(605, 650, 290, 50), PinBaseline);
-            Button(font, "Footprint circle", "Круг", new Rect(910, 650, 170, 50), SetCircle);
-            Button(font, "Close footprint", "Вернуться", new Rect(1095, 650, 285, 50), Close);
+            Button(font, "Footprint repeat", UserText.Message("copy.5189135a6110bd31"), new Rect(400, 650, 190, 50), Record);
+            Button(font, "Footprint pin A", UserText.Message("copy.d1ba6a8cc7a3945f"), new Rect(605, 650, 290, 50), PinBaseline);
+            Button(font, "Footprint circle", UserText.Message("copy.bbe6ba35fc18081c"), new Rect(910, 650, 170, 50), SetCircle);
+            Button(font, "Close footprint", UserText.Message("copy.6c99e7d8fbd8fa26"), new Rect(1095, 650, 285, 50), Close);
             sheet.SetActive(false);
         }
         public void Open(TowerBlueprint value, int mount)
@@ -78,9 +81,9 @@ namespace PaperDefense.Presentation
             value.GetMortarFootprint(mount);
             blueprint = value;
             Mount = mount;
-            string weaponId = mount == 0 ? value.FirstWeaponId : value.SecondWeaponId;
+            string weaponId = value.GetWeaponId(mount);
             maximumAspect = value.Content?.GetWeapon(weaponId).MaximumFootprintAspectRatio ?? MortarFootprint.MaximumAspectRatio;
-            instructions.text = "Центр закреплён · +Y вперёд\nТяни точку: q от 1 до " + maximumAspect.ToString("0.##") + "; площадь постоянна";
+            instructions.text = Resolve(UserText.Message("copy.c21bab5f45cb2479", maximumAspect));
             Axis.SetMaximum(maximumAspect);
             Baseline = value.GetMortarFootprint(mount);
             IsDragging = false;
@@ -137,7 +140,7 @@ namespace PaperDefense.Presentation
             Recording = null;
             first.SetRecording(null, () => 0);
             second.SetRecording(null, () => 0);
-            summary.text = "Настраивай ось; запись появится после отпускания.";
+            summary.text = Resolve(UserText.Message("copy.5d1f1f28bccfb4d6"));
         }
         void Record()
         {
@@ -149,20 +152,19 @@ namespace PaperDefense.Presentation
             if (!string.IsNullOrEmpty(reason))
             {
                 Clear();
-                summary.text = "Проба недоступна: " + reason;
+                summary.text = Resolve(UserText.Message("copy.e7e92489666048de", reason));
                 return;
             }
             Recording = compare(blueprint, Mount, Baseline, blueprint.GetMortarFootprint(Mount), formation);
             started = Time.unscaledTime;
             first.SetRecording(Recording.First, () => PlaybackSeconds);
             second.SetRecording(Recording.Second, () => PlaybackSeconds);
-            summary.text = Values("A", Recording.First) + "\n" + Values("B", Recording.Second);
+            summary.text = Resolve(Values(UserText.Message("common.replay_a"), Recording.First) + "\n" + Values(UserText.Message("common.replay_b"), Recording.Second));
         }
         static string Values(string name, FootprintProbeReport report)
         {
-            string result = name + ": поражено " + report.HitCount + " · вне отпечатка " + report.MissedCount +
-                " · цена " + report.Cost + " · качество " + report.DrawingQuality.ToString("0") + "%";
-            return report.Completed ? result : result + " · " + report.Message;
+            string result = UserText.Message("copy.9f7043ce99bb7fc9", name, report.HitCount, report.MissedCount, report.Cost, report.DrawingQuality);
+            return report.Completed ? result : UserText.Message("common.with_detail", result, report.Message);
         }
 
         FootprintProbeSketch Sketch(string name, Rect box)
@@ -182,7 +184,7 @@ namespace PaperDefense.Presentation
             var text = go.GetComponent<UnityEngine.UI.Text>();
             text.font = font;
             text.fontSize = size;
-            text.text = value;
+            text.text = Resolve(value);
             text.color = NotebookPalette.Navy;
             text.raycastTarget = false;
             return text;

@@ -26,14 +26,14 @@ namespace PaperDefense.Tests
             if (Directory.Exists(target)) Directory.Delete(target, true);
         }
 
-        [TestCase(1)] [TestCase(2)] [TestCase(3)] [TestCase(4)]
+        [TestCase(1)] [TestCase(2)] [TestCase(3)] [TestCase(4)] [TestCase(5)]
         public void EveryHistoricalRootVersionMigratesWithoutLosingProgressAndKeepsExactSourceBytes(int version)
         {
             var profile = new WorkshopProfile(); profile.GrantGold(321); profile.Unlock("module.tracking", out _);
             var data = HistoricalProfileTestData.Create(profile, version);
-            if (version == 4)
+            if (version >= 4)
             {
-                data = profile.ToData(); data.Version = 4;
+                data = profile.ToData(); data.Version = version;
             }
             File.WriteAllText(path, JsonUtility.ToJson(data, true), new UnicodeEncoding(false, true));
             byte[] source = File.ReadAllBytes(path);
@@ -44,7 +44,7 @@ namespace PaperDefense.Tests
             Assert.That(store.Save(loaded.Profile).Success, Is.True);
             Assert.That(File.ReadAllBytes(path + ".v" + version + "-original"), Is.EqualTo(source));
             var restored = new WorkshopProfileStore(path).Load();
-            Assert.That(restored.Profile.ToData().Version, Is.EqualTo(5));
+            Assert.That(restored.Profile.ToData().Version, Is.EqualTo(WorkshopProfile.CurrentVersion));
             Assert.That(restored.Profile.Gold, Is.EqualTo(profile.Gold));
             Assert.That(restored.Profile.Loadout, Is.EqualTo(profile.Loadout));
         }
@@ -52,7 +52,7 @@ namespace PaperDefense.Tests
         [TestCase(false)] [TestCase(true)]
         public void VersionFiveEmptyAndPartiallyAssignedAlbumsSurviveSaveRestartAndRewardWrite(bool assignOne)
         {
-            var data = new WorkshopProfile().ToData();
+            var data = new WorkshopProfile().ToData();data.Version=5;
             var page = data.Album[0];
             data.Album = assignOne ? new[] { page } : Array.Empty<BlueprintData>();
             data.Loadout = new string[ProfileLimits.LoadoutSlotCount];
@@ -119,7 +119,7 @@ namespace PaperDefense.Tests
             AssertProtected(data);
         }
 
-        [TestCase("root")] [TestCase("content")] [TestCase("evaluation")] [TestCase("drawing")] [TestCase("origin")]
+        [TestCase("root")] [TestCase("content")] [TestCase("evaluation")] [TestCase("drawing")] [TestCase("origin")] [TestCase("mounts")]
         public void FutureVersionFiveSchemaCannotOverwriteSourceOrRollBackToCompatibleBackup(string field)
         {
             var data = new WorkshopProfile().ToData();
@@ -128,6 +128,7 @@ namespace PaperDefense.Tests
             if (field == "evaluation") data.Album[0].EvaluationMetadataVersion = 2;
             if (field == "drawing") data.Album[0].Drawing.FormatVersion = 99;
             if (field == "origin") data.Album[0].Origin = (DrawingOrigin)99;
+            if (field == "mounts") data.Album[0].WeaponMountMetadataVersion=2;
             AssertProtected(data);
         }
 

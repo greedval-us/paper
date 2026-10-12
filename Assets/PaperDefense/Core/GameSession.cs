@@ -88,10 +88,10 @@ namespace PaperDefense.Core
             var unique = new List<Cell>();
             var quote = new BuildQuote { Cells = unique, Reason = "", Valid = false };
             if ((!unitPrice.HasValue && !Enum.IsDefined(typeof(StructureKind), kind)) || !Enum.IsDefined(typeof(MaterialTier), tier))
-            { quote.Reason = "Неизвестный инструмент."; return quote; }
+            { quote.Reason = UserText.Message("copy.cef60cd86a8db8c7"); return quote; }
             if (Phase == RunPhase.Victory || Phase == RunPhase.Defeat)
-            { quote.Reason = "Эта страница уже закончена."; return quote; }
-            if (cells == null || cells.Count == 0) { quote.Reason = "Нарисуйте хотя бы одну клетку."; return quote; }
+            { quote.Reason = UserText.Message("copy.850e91bbbd5c94d8"); return quote; }
+            if (cells == null || cells.Count == 0) { quote.Reason = UserText.Message("copy.2bda845eb8de3b76"); return quote; }
             var seen = new HashSet<Cell>();
             string invalid = "";
             int newSegments = 0;
@@ -101,15 +101,15 @@ namespace PaperDefense.Core
                 unique.Add(cell);
                 if (invalid.Length != 0) continue;
                 if (cell.X <= 0 || cell.Y <= 0 || cell.X >= rules.Width - 1 || cell.Y >= rules.Height - 1)
-                    invalid = "Оставьте внешнее поле для появления врагов.";
+                    invalid = UserText.Message("copy.4938873b1b576f02");
                 else if (Math.Abs(cell.X - BaseCell.X) <= 1 && Math.Abs(cell.Y - BaseCell.Y) <= 1)
-                    invalid = "Центр тетради нужно оставить свободным.";
-                else if (ReservedObjective(cell)) invalid = "Оставьте место для чернильницы.";
+                    invalid = UserText.Message("copy.de6ff12a6096d83f");
+                else if (ReservedObjective(cell)) invalid = UserText.Message("copy.3d5bb5922e409c4c");
                 else if (StructureAt(cell) != null)
                 {
                     var existing = StructureAt(cell);
                     if ((kind != StructureKind.Wall && kind != StructureKind.Spikes) || existing.Kind != kind || existing.Tier != tier)
-                        invalid = "Клетка уже занята несовместимым рисунком.";
+                        invalid = UserText.Message("copy.d85abdff9eafbb67");
                     continue;
                 }
                 newSegments++;
@@ -118,11 +118,11 @@ namespace PaperDefense.Core
             if (invalid.Length == 0 && newSegments > 0)
                 foreach (var enemy in enemies)
                     if (enemy.Health > 0 && seen.Contains(CellOf(enemy.Position)) && StructureAt(CellOf(enemy.Position)) == null)
-                    { invalid = "Здесь находится враг."; break; }
+                    { invalid = UserText.Message("copy.20f4659591475b68"); break; }
             long cost = (long)(unitPrice ?? BuildCost(kind, tier)) * newSegments;
             quote.Cost = (int)Math.Min(int.MaxValue, cost);
             if (invalid.Length != 0) { quote.Reason = invalid; return quote; }
-            if (cost > Ink) { quote.Reason = "Не хватает штрихов: нужно " + cost + "."; return quote; }
+            if (cost > Ink) { quote.Reason = UserText.Message("copy.d952db5ec0c442f9", cost); return quote; }
             quote.Valid = true;
             return quote;
         }
@@ -159,14 +159,14 @@ namespace PaperDefense.Core
         public bool TryUpgrade(Cell cell, out string reason)
         {
             reason = "";
-            if (Phase == RunPhase.Victory || Phase == RunPhase.Defeat) { reason = "Эта страница уже закончена."; return false; }
+            if (Phase == RunPhase.Victory || Phase == RunPhase.Defeat) { reason = UserText.Message("copy.850e91bbbd5c94d8"); return false; }
             var structure = StructureAt(cell);
-            if (structure == null) { reason = "Сначала выберите рисунок."; return false; }
-            if (structure.Tier == MaterialTier.Marker) { reason = "Это уже самый прочный материал."; return false; }
-            if (!structure.IsComplete) { reason = "Дождитесь завершения рисунка."; return false; }
+            if (structure == null) { reason = UserText.Message("copy.e60f6b7240c54994"); return false; }
+            if (structure.Tier == MaterialTier.Marker) { reason = UserText.Message("copy.f7a6e14c3b97d071"); return false; }
+            if (!structure.IsComplete) { reason = UserText.Message("copy.0fbbc427bf3169b9"); return false; }
             var nextTier = (MaterialTier)((int)structure.Tier + 1);
             int difference = Math.Max(0, StructureBuildCost(structure, nextTier) - StructureBuildCost(structure, structure.Tier));
-            if (difference > Ink) { reason = "Не хватает штрихов: нужно " + difference + "."; return false; }
+            if (difference > Ink) { reason = UserText.Message("copy.d952db5ec0c442f9", difference); return false; }
             Ink -= difference;
             structure.PaidInk += difference;
             Statistics.RecordUpgrade(difference);
@@ -253,8 +253,8 @@ namespace PaperDefense.Core
                 }
                 if (!rules.Construction.DynamicFeed)
                 {
-                    structure.Cooldown = Math.Max(0, structure.Cooldown - delta);
-                    structure.SecondaryCooldown = Math.Max(0, structure.SecondaryCooldown - delta);
+                    for(int mount=0;mount<TowerBlueprint.MaximumWeaponMounts;mount++)
+                    {var state=structure.GetMountState(mount);state.Cooldown=Math.Max(0,state.Cooldown-delta);}
                 }
                 structure.FrontageUsed = 0;
                 RefreshHealthBand(structure);

@@ -35,6 +35,7 @@ namespace PaperDefense.Presentation
         MaterialTier previewTier;
         bool previewValid;
         float previewRange = -1;
+        TowerBlueprint previewBlueprint;
         int paperWidth, paperHeight;
         int visualVersion = -1, topologyVersion = -1, castleHealthBand = -1;
         RunPhase renderedPhase;
@@ -63,6 +64,7 @@ namespace PaperDefense.Presentation
             session = newSession;
             firingMarks.Clear();
             previewCells.Clear();
+            previewBlueprint = null;
             staticDirty = true;
             visualVersion = topologyVersion = castleHealthBand = -1;
             if (session != null)
@@ -83,10 +85,12 @@ namespace PaperDefense.Presentation
             previewPen.Clear(); previewPen.Upload();
         }
 
-        public void SetPreview(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier, bool valid, float range = -1)
+        public void SetPreview(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier, bool valid, float range = -1,
+            TowerBlueprint blueprint = null)
         {
             int count = cells == null ? 0 : cells.Count;
-            bool changed = previewKind != kind || previewTier != tier || previewValid != valid || previewCells.Count != count || previewRange != range;
+            bool changed = previewKind != kind || previewTier != tier || previewValid != valid || previewCells.Count != count || previewRange != range
+                || !ReferenceEquals(previewBlueprint, blueprint);
             for (int i = 0; !changed && i < count; i++) changed = previewCells[i] != cells[i];
             if (!changed) return;
             previewCells.Clear();
@@ -96,6 +100,7 @@ namespace PaperDefense.Presentation
             previewTier = tier;
             previewValid = valid;
             previewRange = range;
+            previewBlueprint = blueprint;
             if (previewPen != null && session != null) DrawPreview();
         }
 
@@ -260,13 +265,23 @@ namespace PaperDefense.Presentation
                 for (int i = 0; i < session.Structures.Count; i++)
                 {
                     StructureView structure = session.Structures[i];
-                    float range = structure.Blueprint == null ? session.Balance.WeaponRange(null, structure.Kind) :
-                        session.Balance.WeaponRange(structure.Blueprint, structure.Blueprint.FirstWeaponId);
-                    if (structure.Blueprint != null && structure.Blueprint.SecondWeaponId != null)
-                        range = Mathf.Max(range, session.Balance.WeaponRange(structure.Blueprint, structure.Blueprint.SecondWeaponId, 1));
-                    if (range <= 1) continue;
-                    p.Ring(new Vector2(structure.Cell.X + .5f, structure.Cell.Y + .5f), range, .035f,
-                           MeshPen.Alpha(DoodleGlyphs.TierColor(structure.Tier), .16f), 96, 1, structure.Id, true);
+                    var origin = new Vector2(structure.Cell.X + .5f, structure.Cell.Y + .5f);
+                    if (structure.Blueprint == null)
+                    {
+                        float range = session.Balance.WeaponRange(null, structure.Kind);
+                        if (range > 1) p.Ring(origin, range, .035f,
+                            MeshPen.Alpha(DoodleGlyphs.TierColor(structure.Tier), .16f), 96, 1, structure.Id, true);
+                        continue;
+                    }
+                    foreach (var mount in structure.Blueprint.WeaponMounts)
+                    {
+                        float range = session.Balance.WeaponRange(structure.Blueprint, mount.WeaponId, mount.SlotIndex);
+                        float minimum = session.Balance.WeaponMinimumRange(structure.Blueprint, mount.WeaponId, mount.SlotIndex);
+                        if (range > 1) p.Ring(origin, range, .035f,
+                            MeshPen.Alpha(DoodleGlyphs.TierColor(structure.Tier), .16f), 96, 1, structure.Id + mount.SlotIndex, true);
+                        if (minimum > 0) p.Ring(origin, minimum, .055f,
+                            MeshPen.Alpha(NotebookPalette.Red, .35f), 72, 1, structure.Id + mount.SlotIndex, true);
+                    }
                 }
             for (int i = 0; i < session.Structures.Count; i++)
             {
@@ -296,8 +311,8 @@ namespace PaperDefense.Presentation
             for (int i = 0; i < session.Structures.Count; i++)
             {
                 var structure = session.Structures[i];
-                float duration = session.Balance.Structure(structure.Kind).BuildSeconds
-                               * session.Balance.Material(structure.Tier).BuildTimeMultiplier;
+                float duration = structure.Blueprint != null ? session.Balance.BuildSeconds(structure.Blueprint, structure.Tier)
+                    : session.Balance.Structure(structure.Kind).BuildSeconds * session.Balance.Material(structure.Tier).BuildTimeMultiplier;
                 DoodleGlyphs.StructureDynamic(p, structure, duration);
             }
             float time = Time.unscaledTime;
@@ -472,8 +487,23 @@ namespace PaperDefense.Presentation
             if (previewCells.Count == 1 && previewKind != StructureKind.Wall && previewKind != StructureKind.Spikes)
             {
                 Cell cell = previewCells[0];
-                float range = previewRange >= 0 ? previewRange : session.Balance.Structure(previewKind).Range;
-                p.Ring(new Vector2(cell.X + .5f, cell.Y + .5f), range, .045f, MeshPen.Alpha(color, .38f), 120, 1, 117, true);
+                Vector2 center = new Vector2(cell.X + .5f, cell.Y + .5f);
+                if (previewBlueprint != null)
+                {
+                    foreach (var mount in previewBlueprint.WeaponMounts)
+                    {
+                        float range = session.Balance.WeaponRange(previewBlueprint, mount.WeaponId, mount.SlotIndex);
+                        float minimum = session.Balance.WeaponMinimumRange(previewBlueprint, mount.WeaponId, mount.SlotIndex);
+                        p.Ring(center, range, .045f, MeshPen.Alpha(color, .38f), 120, 1, 117 + mount.SlotIndex, true);
+                        if (minimum > 0)
+                            p.Ring(center, minimum, .045f, MeshPen.Alpha(NotebookPalette.Red, .45f), 80, 1, 217 + mount.SlotIndex, true);
+                    }
+                }
+                else
+                {
+                    float range = previewRange >= 0 ? previewRange : session.Balance.Structure(previewKind).Range;
+                    p.Ring(center, range, .045f, MeshPen.Alpha(color, .38f), 120, 1, 117, true);
+                }
             }
             p.Upload();
             PreviewGeometryRefreshCount++;

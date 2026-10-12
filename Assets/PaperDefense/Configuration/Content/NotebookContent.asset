@@ -31,6 +31,9 @@ MonoBehaviour:
       Capacity: 10
       BaseCost: 16
       MountCount: 2
+      UpgradeSlotCount: 3
+      ArmorSlotCount: 1
+      FeedCapacity: 0
       BaseHealth: 55
       HealthMultiplier: 1
       BuildSeconds: 0
@@ -42,6 +45,7 @@ MonoBehaviour:
       SecondaryMountPivotX: 0.17
       SecondaryMountPivotY: 0.04
       LegacyKind: 0
+      MountPivots: []
     - Id: chassis.heavy
       Name: "\u0422\u044F\u0436\u0451\u043B\u043E\u0435 \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"
       Description: "\u0412\u043C\u0435\u0449\u0430\u0435\u0442 \u0431\u043E\u043B\u044C\u0448\u0443\u044E
@@ -58,6 +62,9 @@ MonoBehaviour:
       Capacity: 14
       BaseCost: 28
       MountCount: 2
+      UpgradeSlotCount: 3
+      ArmorSlotCount: 1
+      FeedCapacity: 0
       BaseHealth: 55
       HealthMultiplier: 1.3
       BuildSeconds: 0.45
@@ -69,6 +76,73 @@ MonoBehaviour:
       SecondaryMountPivotX: 0.17
       SecondaryMountPivotY: 0.04
       LegacyKind: 1
+      MountPivots: []
+    - Id: chassis.precision
+      Name: "\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0435
+        \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"
+      Description: "\u041E\u0434\u0438\u043D \u0441\u0442\u0432\u043E\u043B, \u0442\u0440\u0438
+        \u0443\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u044F \u0438 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u0430\u044F
+        \u0431\u0440\u043E\u043D\u044F. \u0422\u043E\u0447\u043D\u0430\u044F \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430
+        \u043E\u0434\u043D\u043E\u0433\u043E \u043E\u0440\u0443\u0436\u0438\u044F."
+      ButtonLabel: "\u0421\u041F\u0415\u0426\u0418\u0410\u041B\u0418\u0417\u0418\u0420."
+      UnlockLabel: "\u0421\u041F\u0415\u0426\u0418\u0410\u041B\u0418\u0417\u0418\u0420."
+      TemplateId: template.chassis.precision
+      Enabled: 0
+      InitiallyUnlocked: 0
+      Order: 20
+      UnlockGold: 90
+      VisualStyle: 0
+      Capacity: 16
+      BaseCost: 20
+      MountCount: 1
+      UpgradeSlotCount: 3
+      ArmorSlotCount: 1
+      FeedCapacity: 1
+      BaseHealth: 55
+      HealthMultiplier: 1
+      BuildSeconds: 0.25
+      SecondaryBuildSeconds: 0.4
+      PrimaryMountPivotX: 0
+      PrimaryMountPivotY: 0.04
+      PrimaryDualMountPivotX: -0.17
+      PrimaryDualMountPivotY: 0.04
+      SecondaryMountPivotX: 0.17
+      SecondaryMountPivotY: 0.04
+      LegacyKind: -1
+      MountPivots: []
+    - Id: chassis.battery
+      Name: "\u0411\u0430\u0442\u0430\u0440\u0435\u044F"
+      Description: "\u0422\u0440\u0438 \u043D\u0435\u0437\u0430\u0432\u0438\u0441\u0438\u043C\u044B\u0445
+        \u0441\u0442\u0432\u043E\u043B\u0430, \u043E\u0434\u043D\u043E \u0443\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435
+        \u0438 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u0430\u044F \u0431\u0440\u043E\u043D\u044F.
+        \u041E\u0440\u0443\u0436\u0438\u0435 \u0434\u0435\u043B\u0438\u0442 \u043E\u0431\u0449\u0443\u044E
+        \u043F\u043E\u0434\u0430\u0447\u0443."
+      ButtonLabel: "\u0411\u0410\u0422\u0410\u0420\u0415\u042F"
+      UnlockLabel: "\u0411\u0410\u0422\u0410\u0420\u0415\u042F"
+      TemplateId: template.chassis.battery
+      Enabled: 0
+      InitiallyUnlocked: 0
+      Order: 21
+      UnlockGold: 90
+      VisualStyle: 0
+      Capacity: 22
+      BaseCost: 34
+      MountCount: 3
+      UpgradeSlotCount: 1
+      ArmorSlotCount: 1
+      FeedCapacity: 1.8
+      BaseHealth: 55
+      HealthMultiplier: 1
+      BuildSeconds: 0.65
+      SecondaryBuildSeconds: 0.4
+      PrimaryMountPivotX: 0
+      PrimaryMountPivotY: 0.04
+      PrimaryDualMountPivotX: -0.17
+      PrimaryDualMountPivotY: 0.04
+      SecondaryMountPivotX: 0.17
+      SecondaryMountPivotY: 0.04
+      LegacyKind: -1
+      MountPivots: []
     Weapons:
     - Id: weapon.gun
       Name: "\u041F\u0443\u043B\u0435\u043C\u0451\u0442"
@@ -105,6 +179,7 @@ MonoBehaviour:
       AssemblyCredit: 16
       MinimumLineRadius: 0
       MinimumRadialRange: 0
+      MinimumRange: 0
       MaximumFootprintAspectRatio: 3
       EffectIds: []
       LegacyKind: 1
@@ -143,6 +218,7 @@ MonoBehaviour:
       AssemblyCredit: 16
       MinimumLineRadius: 0.2
       MinimumRadialRange: 0
+      MinimumRange: 0
       MaximumFootprintAspectRatio: 3
       EffectIds: []
       LegacyKind: 2
@@ -181,6 +257,7 @@ MonoBehaviour:
       AssemblyCredit: 16
       MinimumLineRadius: 0
       MinimumRadialRange: 0
+      MinimumRange: 0
       MaximumFootprintAspectRatio: 3
       EffectIds: []
       LegacyKind: 3
@@ -219,6 +296,7 @@ MonoBehaviour:
       AssemblyCredit: 16
       MinimumLineRadius: 0
       MinimumRadialRange: 0
+      MinimumRange: 0
       MaximumFootprintAspectRatio: 3
       EffectIds: []
       LegacyKind: 5
@@ -259,6 +337,7 @@ MonoBehaviour:
       AssemblyCredit: 16
       MinimumLineRadius: 0
       MinimumRadialRange: 0
+      MinimumRange: 0
       MaximumFootprintAspectRatio: 3
       EffectIds: []
       LegacyKind: 6
@@ -299,6 +378,7 @@ MonoBehaviour:
       AssemblyCredit: 16
       MinimumLineRadius: 0
       MinimumRadialRange: 0
+      MinimumRange: 0
       MaximumFootprintAspectRatio: 3
       EffectIds:
       - effect.stapler.slow
@@ -341,6 +421,7 @@ MonoBehaviour:
       AssemblyCredit: 16
       MinimumLineRadius: 0
       MinimumRadialRange: 0
+      MinimumRange: 0
       MaximumFootprintAspectRatio: 3
       EffectIds: []
       LegacyKind: 8
@@ -377,6 +458,7 @@ MonoBehaviour:
         MountIndex: 0
         Value: 0
       LegacyModule: 1
+      SlotKind: 1
     - Id: module.feed
       Name: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u043D\u0430\u044F \u043F\u043E\u0434\u0430\u0447\u0430"
       Description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
@@ -404,6 +486,7 @@ MonoBehaviour:
         MountIndex: 0
         Value: 1.15
       LegacyModule: 2
+      SlotKind: 0
     - Id: module.tracking
       Name: "\u0411\u044B\u0441\u0442\u0440\u043E\u0435 \u043D\u0430\u0432\u0435\u0434\u0435\u043D\u0438\u0435"
       Description: "\u0421\u043E\u043A\u0440\u0430\u0449\u0430\u0435\u0442 \u0432\u0440\u0435\u043C\u044F
@@ -431,6 +514,7 @@ MonoBehaviour:
         MountIndex: 0
         Value: 0.08
       LegacyModule: 4
+      SlotKind: 0
     - Id: module.rail
       Name: "\u041D\u0430\u043F\u0440\u0430\u0432\u043B\u044F\u044E\u0449\u0430\u044F"
       Description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
@@ -466,6 +550,7 @@ MonoBehaviour:
         MountIndex: 0
         Value: 1.2
       LegacyModule: 8
+      SlotKind: 0
     Effects:
     - Id: effect.stapler.slow
       Kind: 1
@@ -1183,6 +1268,85 @@ MonoBehaviour:
           Y: 0.13989258
         - X: 0.15991211
           Y: 0.13989258
+    - Id: template.chassis.precision
+      DisplayName: "\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0435
+        \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"
+      Revision: 1
+      PivotX: 0
+      PivotY: 0
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.43
+          Y: -0.32
+        - X: 0.43
+          Y: -0.32
+        - X: 0.49
+          Y: 0.06
+        - X: 0.28
+          Y: 0.36
+        - X: -0.28
+          Y: 0.36
+        - X: -0.49
+          Y: 0.06
+        - X: -0.43
+          Y: -0.32
+      - Points:
+        - X: -0.22
+          Y: -0.22
+        - X: -0.22
+          Y: 0.24
+        - X: 0.22
+          Y: 0.24
+        - X: 0.22
+          Y: -0.22
+      - Points:
+        - X: -0.33
+          Y: -0.1
+        - X: 0.33
+          Y: -0.1
+    - Id: template.chassis.battery
+      DisplayName: "\u0411\u0430\u0442\u0430\u0440\u0435\u044F"
+      Revision: 1
+      PivotX: 0
+      PivotY: 0
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.43
+          Y: -0.32
+        - X: 0.43
+          Y: -0.32
+        - X: 0.49
+          Y: 0.06
+        - X: 0.28
+          Y: 0.36
+        - X: -0.28
+          Y: 0.36
+        - X: -0.49
+          Y: 0.06
+        - X: -0.43
+          Y: -0.32
+      - Points:
+        - X: -0.4
+          Y: 0.02
+        - X: 0.4
+          Y: 0.02
+      - Points:
+        - X: -0.28
+          Y: -0.25
+        - X: -0.28
+          Y: 0.25
+      - Points:
+        - X: 0
+          Y: -0.25
+        - X: 0
+          Y: 0.25
+      - Points:
+        - X: 0.28
+          Y: -0.25
+        - X: 0.28
+          Y: 0.25
     StartingPages:
     - Id: starter.gun
       Name: "\u041F\u0443\u043B\u0435\u043C\u0451\u0442"
@@ -1190,6 +1354,7 @@ MonoBehaviour:
       FirstWeaponId: weapon.gun
       SecondWeaponId: 
       Modules: []
+      WeaponMounts: []
       Slot: 0
     - Id: starter.double
       Name: "\u0414\u0432\u043E\u0439\u043D\u043E\u0439 \u043F\u0443\u043B\u0435\u043C\u0451\u0442"
@@ -1197,6 +1362,7 @@ MonoBehaviour:
       FirstWeaponId: weapon.gun
       SecondWeaponId: weapon.gun
       Modules: []
+      WeaponMounts: []
       Slot: 1
     - Id: starter.piercer
       Name: "\u041F\u0440\u043E\u0431\u0438\u0432\u0430\u044E\u0449\u0430\u044F \u043F\u0443\u0448\u043A\u0430"
@@ -1204,6 +1370,7 @@ MonoBehaviour:
       FirstWeaponId: weapon.piercer
       SecondWeaponId: 
       Modules: []
+      WeaponMounts: []
       Slot: 2
     - Id: starter.mortar
       Name: "\u0417\u0430\u0449\u0438\u0449\u0451\u043D\u043D\u0430\u044F \u043C\u043E\u0440\u0442\u0438\u0440\u0430"
@@ -1213,6 +1380,7 @@ MonoBehaviour:
       Modules:
       - InstanceId: armor
         DefinitionId: module.armor
+      WeaponMounts: []
       Slot: 3
     Assessment:
       Revision: 2

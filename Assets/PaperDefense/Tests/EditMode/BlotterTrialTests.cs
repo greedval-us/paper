@@ -119,7 +119,7 @@ namespace PaperDefense.Tests
             Assert.That(report.Damage, Is.Zero);
             Assert.That(report.Leaks, Is.Zero);
             foreach (TrialFrame frame in report.Frames) Assert.That(frame.Enemies, Is.Empty);
-            StringAssert.Contains("finite", report.Scope);
+            StringAssert.Contains("не появляются повторно", TestText.Resolve(report.Scope));
         }
 
         [Test]

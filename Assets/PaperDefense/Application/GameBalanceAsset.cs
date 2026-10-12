@@ -53,7 +53,7 @@ namespace PaperDefense.Application
         public GameBalance CreateBalance()
         {
             if (dataPreset != null) return dataPreset.CreateBalance();
-            if (!legacyAuthoringAdapter) throw new ArgumentException(name + ".dataPreset: отсутствует обязательный пресет контента.");
+            if (!legacyAuthoringAdapter) throw new ArgumentException(UserText.Message("copy.7a045f879970f558", name));
             Finite(baseHealth, nameof(baseHealth)); Finite(planningSeconds, nameof(planningSeconds)); Finite(intermissionSeconds, nameof(intermissionSeconds));
             Finite(passiveInkPerSecond, nameof(passiveInkPerSecond)); Finite(earlyLaunchInkPerSecond, nameof(earlyLaunchInkPerSecond));
             Finite(drawingMinimumRate, nameof(drawingMinimumRate)); Finite(drawingMaximumRate, nameof(drawingMaximumRate));
@@ -77,7 +77,7 @@ namespace PaperDefense.Application
             result.DrawingMinimumRate = Mathf.Clamp(drawingMinimumRate, .01f, result.DrawingMaximumRate);
             foreach (var item in materials ?? Array.Empty<MaterialSettings>())
             {
-                if (item == null || !Enum.IsDefined(typeof(MaterialTier), item.tier)) throw new ArgumentException("Неизвестное или пустое определение материала.", nameof(materials));
+                if (item == null || !Enum.IsDefined(typeof(MaterialTier), item.tier)) throw new ArgumentException(UserText.Message("copy.81ef3bc14a14f203"), nameof(materials));
                 Finite(item.cost, nameof(item.cost)); Finite(item.health, nameof(item.health)); Finite(item.damage, nameof(item.damage));
                 Finite(item.refund, nameof(item.refund)); Finite(item.buildTime, nameof(item.buildTime));
                 var target = result.Material(item.tier);
@@ -89,7 +89,7 @@ namespace PaperDefense.Application
             }
             foreach (var item in weapons ?? Array.Empty<WeaponSettings>())
             {
-                if (item == null || !Enum.IsDefined(typeof(StructureKind), item.kind)) throw new ArgumentException("Неизвестное или пустое определение постройки.", nameof(weapons));
+                if (item == null || !Enum.IsDefined(typeof(StructureKind), item.kind)) throw new ArgumentException(UserText.Message("copy.f4e402cf5887131a"), nameof(weapons));
                 Finite(item.health, nameof(item.health)); Finite(item.buildSeconds, nameof(item.buildSeconds)); Finite(item.range, nameof(item.range));
                 Finite(item.damage, nameof(item.damage)); Finite(item.shotInterval, nameof(item.shotInterval)); Finite(item.radius, nameof(item.radius));
                 Finite(item.flightSeconds, nameof(item.flightSeconds)); Finite(item.coneAngleDegrees, nameof(item.coneAngleDegrees));
@@ -111,7 +111,7 @@ namespace PaperDefense.Application
             }
             foreach (var item in enemies ?? Array.Empty<EnemySettings>())
             {
-                if (item == null || !Enum.IsDefined(typeof(EnemyKind), item.kind)) throw new ArgumentException("Неизвестное или пустое определение врага.", nameof(enemies));
+                if (item == null || !Enum.IsDefined(typeof(EnemyKind), item.kind)) throw new ArgumentException(UserText.Message("copy.43725e3a4690712a"), nameof(enemies));
                 Finite(item.health, nameof(item.health)); Finite(item.speed, nameof(item.speed)); Finite(item.damage, nameof(item.damage));
                 Finite(item.attackInterval, nameof(item.attackInterval)); Finite(item.structureDamageMultiplier, nameof(item.structureDamageMultiplier));
                 Finite(item.range, nameof(item.range)); Finite(item.windupSeconds, nameof(item.windupSeconds)); Finite(item.projectileSeconds, nameof(item.projectileSeconds));
@@ -131,7 +131,7 @@ namespace PaperDefense.Application
                 result.Waves.Clear();
                 foreach (var item in waves)
                 {
-                    if (item == null) throw new ArgumentException("Пустое определение волны.", nameof(waves));
+                    if (item == null) throw new ArgumentException(UserText.Message("copy.74b59870962157a2"), nameof(waves));
                     Finite(item.spawnInterval, nameof(item.spawnInterval)); Finite(item.runners, nameof(item.runners)); Finite(item.gnawers, nameof(item.gnawers));
                     Finite(item.spitters, nameof(item.spitters)); Finite(item.outlined, nameof(item.outlined)); Finite(item.hatched, nameof(item.hatched));
                     result.Waves.Add(new WaveDefinition { Title = item.title, Count = Mathf.Max(1, item.count),
@@ -150,7 +150,7 @@ namespace PaperDefense.Application
         public GameBalance CreateWorkshopBalance()
         {
             if (dataPreset != null) return dataPreset.CreateBalance();
-            if (!legacyAuthoringAdapter) throw new ArgumentException(name + ".dataPreset: отсутствует обязательный пресет контента.");
+            if (!legacyAuthoringAdapter) throw new ArgumentException(UserText.Message("copy.7a045f879970f558", name));
             Finite(wellHealth, nameof(wellHealth)); Finite(blotterRadius, nameof(blotterRadius)); Finite(blotterCooldown, nameof(blotterCooldown));
             Finite(blotLifetime, nameof(blotLifetime)); Finite(blotBuffSeconds, nameof(blotBuffSeconds));
             Finite(blotSpeedBonus, nameof(blotSpeedBonus)); Finite(blotReduction, nameof(blotReduction));

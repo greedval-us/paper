@@ -26,7 +26,7 @@ namespace PaperDefense.Tests
             var balance = GameBalance.CreateDefault(); balance.Construction.FanUnlockGold = 17;
             var profile = new WorkshopProfile(); profile.GrantGold(50);
             var fan = new TowerBlueprint("fan", "Веер", ChassisKind.Standard, StructureKind.Fan);
-            Assert.That(profile.SaveBlueprint(fan, out string reason, balance), Is.False); Assert.That(reason, Does.Contain("откройте"));
+            Assert.That(profile.SaveBlueprint(fan, out string reason, balance), Is.False); Assert.That(TestText.Resolve(reason), Does.Contain("откройте"));
             Assert.That(profile.GetParts(balance).Single(p => p.Id == "weapon.fan").GoldCost, Is.EqualTo(17));
             Assert.That(profile.Unlock("weapon.fan", out reason, balance), Is.True, reason); Assert.That(profile.Gold, Is.EqualTo(33));
             Assert.That(profile.Unlock("weapon.fan", out reason, balance), Is.True, reason); Assert.That(profile.Gold, Is.EqualTo(33));
@@ -37,7 +37,7 @@ namespace PaperDefense.Tests
             var profile = new WorkshopProfile(); var balance = GameBalance.CreateDefault();
             foreach (PartUnlock part in profile.Parts)
             {
-                Assert.That(part.Description, Is.Not.Empty, part.Id);
+                Assert.That(TestText.Resolve(part.Description), Is.Not.Empty, part.Id);
                 Assert.That(profile.GetParts(balance).Single(p => p.Id == part.Id).Description, Is.EqualTo(part.Description));
             }
             Assert.That(typeof(PartUnlock).GetProperty(nameof(PartUnlock.Description)).GetSetMethod(true), Is.Null);
@@ -52,7 +52,7 @@ namespace PaperDefense.Tests
         }
         [Test] public void CurrentProfilesWriteVersionFiveAndHistoricalVersionTwoCannotClaimNewKinds()
         {
-            var profile = new WorkshopProfile(); Assert.That(profile.ToData().Version, Is.EqualTo(5));
+            var profile = new WorkshopProfile(); Assert.That(profile.ToData().Version, Is.EqualTo(WorkshopProfile.CurrentVersion));
             var historical = HistoricalCatalogTestData.VersionTwo(); historical.Album[0].FirstWeapon = StructureKind.Fan;
             Assert.That(() => WorkshopProfile.FromData(historical), Throws.InstanceOf<ArgumentException>());
         }

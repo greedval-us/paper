@@ -33,14 +33,14 @@ namespace PaperDefense.Core
         {
             switch (key)
             {
-                case DrawingPartKey.Base: return "Основание";
-                case DrawingPartKey.Mount0: return "Ствол 1";
-                case DrawingPartKey.Mount1: return "Ствол 2";
-                case DrawingPartKey.Armor: return "Бронепластины";
-                case DrawingPartKey.Feed: return "Подача";
-                case DrawingPartKey.Tracking: return "Наведение";
-                case DrawingPartKey.Rail: return "Направляющая";
-                default: return "Украшения";
+                case DrawingPartKey.Base: return UserText.Message("copy.0369683b41e6de45");
+                case DrawingPartKey.Mount0: return UserText.Message("copy.9e98735021c6b210");
+                case DrawingPartKey.Mount1: return UserText.Message("copy.375f6faa7a651fae");
+                case DrawingPartKey.Armor: return UserText.Message("copy.e41e849ff6126cff");
+                case DrawingPartKey.Feed: return UserText.Message("copy.d4a738612fc5e701");
+                case DrawingPartKey.Tracking: return UserText.Message("copy.41e4c92b11a67cdf");
+                case DrawingPartKey.Rail: return UserText.Message("copy.215d555ed53c9640");
+                default: return UserText.Message("copy.da593f54cbd9f76c");
             }
         }
     }
@@ -67,7 +67,7 @@ namespace PaperDefense.Core
             foreach (var template in Create(blueprint)) if (template.BindingId == bindingId) return template.Pivot;
             // Disabled legacy parts are retained in the drawing but never rendered.
             if ((blueprint.Content == null || blueprint.Content.IsLegacyAdapter) && DrawingBindings.TryLegacy(bindingId, out var key)) return LegacyDrawingTemplates.Pivot(blueprint, key);
-            throw new ArgumentException("Часть рисунка отсутствует в этой сборке: " + bindingId, nameof(bindingId));
+            throw new ArgumentException(UserText.Message("copy.7f4de9f87d912bac", bindingId), nameof(bindingId));
         }
         public static IReadOnlyList<DrawingPartTemplate> Create(TowerBlueprint blueprint)
         {
@@ -85,26 +85,23 @@ namespace PaperDefense.Core
             }
             var content = blueprint.Content;
             var result = new List<DrawingPartTemplate>();
-            if (!content.TryGetChassis(blueprint.ChassisId, out _) || !content.TryGetWeapon(blueprint.FirstWeaponId, out _) ||
-                (blueprint.SecondWeaponId != null && !content.TryGetWeapon(blueprint.SecondWeaponId, out _))) return Array.Empty<DrawingPartTemplate>();
+            if (!content.TryGetChassis(blueprint.ChassisId, out _)) return Array.Empty<DrawingPartTemplate>();
+            foreach(var mount in blueprint.WeaponMounts)if(!content.TryGetWeapon(mount.WeaponId,out _))return Array.Empty<DrawingPartTemplate>();
             foreach (var selected in blueprint.ModuleSelections) if (!content.TryGetModule(selected.DefinitionId, out _)) return Array.Empty<DrawingPartTemplate>();
             var chassis = content.GetChassis(blueprint.ChassisId);
             Add(result, content.GetTemplate(chassis.TemplateId), DrawingBindings.Base, DrawingPartRole.Base, chassis.Name, null);
-            var first = content.GetWeapon(blueprint.FirstWeaponId);
-            Add(result, content.GetTemplate(first.TemplateId), DrawingBindings.Mount0, DrawingPartRole.Mount,
-                "Ствол 1 · " + first.Name, blueprint.SecondWeaponId == null ? chassis.PrimaryMountPivot : chassis.PrimaryDualMountPivot);
-            if (blueprint.SecondWeaponId != null)
+            foreach(var mount in blueprint.WeaponMounts)
             {
-                var second = content.GetWeapon(blueprint.SecondWeaponId);
-                Add(result, content.GetTemplate(second.TemplateId), DrawingBindings.Mount1, DrawingPartRole.Mount,
-                    "Ствол 2 · " + second.Name, chassis.SecondaryMountPivot);
+                var weapon=content.GetWeapon(mount.WeaponId);
+                Add(result,content.GetTemplate(weapon.TemplateId),DrawingBindings.Mount(mount.SlotIndex),DrawingPartRole.Mount,
+                    UserText.Message("copy.ad1cfa5b44f2fff4", (mount.SlotIndex+1), weapon.Name),chassis.GetMountPivot(mount.SlotIndex,blueprint.WeaponMounts.Count));
             }
             foreach (var selected in blueprint.ModuleSelections)
             {
                 var module = content.GetModule(selected.DefinitionId);
                 Add(result, content.GetTemplate(module.TemplateId), DrawingBindings.Module(selected.InstanceId), DrawingPartRole.Module, module.Name, null);
             }
-            result.Add(new DrawingPartTemplate(DrawingBindings.Decoration, DrawingPartRole.Decoration, "Украшения", new Point2(0, 0),
+            result.Add(new DrawingPartTemplate(DrawingBindings.Decoration, DrawingPartRole.Decoration, UserText.Message("copy.da593f54cbd9f76c"), new Point2(0, 0),
                 Array.Empty<DrawingStroke>(), 0, "decoration.v1"));
             return result.AsReadOnly();
         }
@@ -145,7 +142,7 @@ namespace PaperDefense.Core
         public static IReadOnlyList<DrawingPartTemplate> Create(TowerBlueprint blueprint)
         {
             IReadOnlyList<DrawingPartKey> keys = EnabledKeys(blueprint);
-            var result = new DrawingPartTemplate[keys.Count];
+            var result = new DrawingPartTemplate[keys.Count+(blueprint.GetWeaponId(2)!=null?1:0)];
             for (int i = 0; i < keys.Count; i++)
             {
                 DrawingPartKey key = keys[i];
@@ -179,6 +176,8 @@ namespace PaperDefense.Core
                 }
                 result[i] = new DrawingPartTemplate(key, Pivot(blueprint, key), contours);
             }
+            if(blueprint.GetWeaponId(2)!=null)
+                result[result.Length-1]=new DrawingPartTemplate(DrawingBindings.Mount2,DrawingPartRole.Mount,UserText.Message("copy.3265cc01bf3a6da1"),new Point2(.24f,.04f),Weapon(LegacyContentIds.Weapon(blueprint.GetWeaponId(2))),25,"legacy.mount.2");
             return Array.AsReadOnly(result);
         }
 
@@ -209,7 +208,7 @@ namespace PaperDefense.Core
                         Line(-.24f, .25f, -.24f, .45f, .24f, .45f, .24f, .25f, .16f, .21f,
                             .08f, .25f, 0, .21f, -.08f, .25f, -.16f, .21f, -.24f, .25f),
                         Line(-.18f, .32f, .18f, .32f), Line(-.18f, .39f, .18f, .39f) };
-                default: throw new ArgumentOutOfRangeException(nameof(kind), "Для этой детали ещё нет образца рисунка.");
+                default: throw new ArgumentOutOfRangeException(nameof(kind), UserText.Message("copy.78527a4b8e411f70"));
             }
         }
 

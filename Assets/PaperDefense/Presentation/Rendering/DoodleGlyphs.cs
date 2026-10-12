@@ -14,7 +14,7 @@ namespace PaperDefense.Presentation
         internal static AuthoredPartGeometry StandardMount(StructureKind kind)
         {
             if (standardMounts.TryGetValue(kind, out var cached)) return cached;
-            var blueprint = new TowerBlueprint("standard-mount", "Стандартная деталь", ChassisKind.Standard, kind);
+            var blueprint = new TowerBlueprint("standard-mount", UserText.Message("copy.cb4d54cfa87bc552"), ChassisKind.Standard, kind);
             foreach (var part in DrawingTemplateCatalog.Create(blueprint))
                 if (part.Key == DrawingPartKey.Mount0)
                 {
@@ -124,17 +124,24 @@ namespace PaperDefense.Presentation
             Color edge = MeshPen.Alpha(NotebookPalette.Navy, color.a);
             if (state.Blueprint != null)
             {
-                bool dual = state.Blueprint.SecondWeapon.HasValue;
                 if (state.Blueprint.Origin == DrawingOrigin.PlayerDrawing || ReferenceDrawingCache.UsesTemplateVisual(state.Blueprint))
                 {
                     var geometry = AuthoredGeometryCache.For(ReferenceDrawingCache.VisibleDrawing(state.Blueprint));
-                    DrawAuthoredMount(pen, geometry, state.Blueprint, DrawingPartKey.Mount0, p, state.PrimaryAim, color);
-                    if (dual) DrawAuthoredMount(pen, geometry, state.Blueprint, DrawingPartKey.Mount1, p, state.SecondaryAim, color);
+                    foreach (var mount in state.Blueprint.WeaponMounts)
+                        DrawAuthoredMount(pen, geometry, state.Blueprint, "mount." + mount.SlotIndex,
+                            p, state.GetMountAim(mount.SlotIndex), color);
                 }
                 else
                 {
-                    DrawWeaponBarrel(pen, p + (dual ? Vector2.left * .17f : Vector2.zero), state.Blueprint.FirstWeapon, color, edge, state.PrimaryAim);
-                    if (dual) DrawWeaponBarrel(pen, p + Vector2.right * .17f, state.Blueprint.SecondWeapon.Value, color, edge, state.SecondaryAim);
+                    foreach (var mount in state.Blueprint.WeaponMounts)
+                    {
+                        Point2 pivot;
+                        if (state.Blueprint.Content != null && state.Blueprint.Content.TryGetChassis(state.Blueprint.ChassisId, out var chassis))
+                            pivot = chassis.GetMountPivot(mount.SlotIndex, state.Blueprint.WeaponMounts.Count);
+                        else pivot = new Point2(state.Blueprint.WeaponMounts.Count == 1 ? 0 : mount.SlotIndex == 0 ? -.17f : .17f, .04f);
+                        DrawWeaponBarrel(pen, p + new Vector2(pivot.X, pivot.Y - .04f),
+                            LegacyContentIds.Weapon(mount.WeaponId), color, edge, state.GetMountAim(mount.SlotIndex));
+                    }
                     if ((state.Blueprint.Modules & TowerModules.Feed) != 0) pen.Disc(p - Vector2.up * .18f, .08f, NotebookPalette.Green, 8);
                     if ((state.Blueprint.Modules & TowerModules.Tracking) != 0) pen.Ring(p + new Vector2(.38f, .29f), .1f, .025f, NotebookPalette.Red, 12);
                 }
@@ -153,13 +160,13 @@ namespace PaperDefense.Presentation
                      state.WaitingForClearance ? NotebookPalette.Red : color);
         }
         static void DrawAuthoredMount(MeshPen pen, AuthoredDrawingGeometry geometry, TowerBlueprint blueprint,
-            DrawingPartKey key, Vector2 position, Point2 aim, Color color)
+            string bindingId, Vector2 position, Point2 aim, Color color)
         {
-            var pivot = DrawingTemplateCatalog.Pivot(blueprint, key);
+            var pivot = DrawingTemplateCatalog.Pivot(blueprint, bindingId);
             Vector2 at = position + new Vector2(pivot.X, pivot.Y);
             Vector2 direction = Direction(aim, at);
             float angle = Mathf.Atan2(direction.y, direction.x) - Mathf.PI * .5f;
-            pen.Append(geometry.GetPart(key), at, angle, color);
+            pen.Append(geometry.GetPart(bindingId), at, angle, color);
         }
         static void DrawWeaponBarrel(MeshPen pen, Vector2 p, StructureKind kind, Color color, Color edge, Point2 aim)
         {

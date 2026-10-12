@@ -81,13 +81,14 @@ namespace PaperDefense.Core
                 Seed = seed, Counterfire = counterfire, Color = color, Copies = copies, Cost = copies * unitCost,
                 DrawingQuality = qualityOverride ?? (blueprint.Origin == DrawingOrigin.LegacyStandard ? 100 : blueprint.Assessment.Quality),
                 QualityMultiplier = qualityOverride.HasValue ? TowerCatalog.QualityMultiplier(qualityOverride.Value, balance) : TowerCatalog.QualityMultiplier(blueprint, balance) };
-            report.Scope = FormattableString.Invariant($"{trial.MaximumTicks * trial.StepSeconds:0.###}-second headless lane; complete pencil towers at fixed grid positions; identical seeded spawn stream. Counterfire is a direct {trial.CounterfireDamage:0.###}-damage shot every {trial.CounterfireInterval:0.###} seconds within {trial.CounterfireRange:0.###} cells. No construction delay, walls, blots, gold or permanent rewards.");
+            report.Scope = UserText.Message("trial.scope.lane", trial.MaximumTicks * trial.StepSeconds,
+                trial.CounterfireDamage, trial.CounterfireInterval, trial.CounterfireRange);
             var random = new Random(seed);
             TrialBlotContext blotContext = scenario == TrialScenario.Blots && balance.Mechanics.CorpseBlots ? new TrialBlotContext(random, trial) : null;
             if (scenario == TrialScenario.Blots && blotContext == null)
-                report.Scope = "Corpse blots are disabled in developer configuration; no marks are created in this fixture.";
+                report.Scope = UserText.Message("trial.scope.blots_disabled");
             if (blotContext != null)
-                report.Scope = FormattableString.Invariant($"{trial.MaximumTicks * trial.StepSeconds:0.###}-second finite seeded blot fixture; complete pencil towers at fixed grid positions. {trial.BlotCount} fixed marks persist until cleaned and never respawn. No enemies, counterfire, construction delay, walls, gold or permanent rewards.");
+                report.Scope = UserText.Message("trial.scope.blots", trial.MaximumTicks * trial.StepSeconds, trial.BlotCount);
             var weapons = new WeaponSystem(balance, qualityOverride, blotContext); var stats = new RunStatistics();
             var events = new SimulationEventBuffer(32); var shots = new List<ShotEvent>();
             var enemies = new List<EnemyState>(256);
@@ -112,7 +113,7 @@ namespace PaperDefense.Core
                 }
                 foreach (StructureState tower in towers)
                     if (!balance.Construction.DynamicFeed)
-                    { tower.Cooldown = Math.Max(0, tower.Cooldown - delta); tower.SecondaryCooldown = Math.Max(0, tower.SecondaryCooldown - delta); }
+                    { for(int mount=0;mount<TowerBlueprint.MaximumWeaponMounts;mount++){var state=tower.GetMountState(mount);state.Cooldown=Math.Max(0,state.Cooldown-delta);} }
                 foreach (EnemyState enemy in enemies)
                 {
                     EnemyEffects.Advance(enemy, delta, stats, effects, mechanics.CorpseBlots ? balance.BlotReduction : 0);
@@ -172,7 +173,7 @@ namespace PaperDefense.Core
             return report;
         }
 
-        sealed class TrialBlotContext : IBlotContext
+        sealed class TrialBlotContext : IBlotRangeContext
         {
             readonly List<BlotState> marks = new List<BlotState>();
             internal IReadOnlyList<BlotState> Marks => marks;
@@ -201,6 +202,8 @@ namespace PaperDefense.Core
 
             public bool TryFindNearest(Point2 origin, float range, out Cell cell)
                 => BlotQueries.TryFindNearest(marks, origin, range, out cell);
+            public bool TryFindNearest(Point2 origin,float minimumRange,float maximumRange,out Cell cell)
+                =>BlotQueries.TryFindNearest(marks,origin,minimumRange,maximumRange,out cell);
 
             public int Clear(Cell center, float radius)
             {

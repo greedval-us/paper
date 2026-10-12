@@ -10,7 +10,11 @@ namespace PaperDefense.Core
     /// <summary>Persistent assembly slots, independent of the content selected in them.</summary>
     public static class DrawingBindings
     {
-        public const string Base = "base", Mount0 = "mount.0", Mount1 = "mount.1", Decoration = "decoration";
+        public const string Base = "base", Mount0 = "mount.0", Mount1 = "mount.1", Mount2 = "mount.2", Decoration = "decoration";
+        public static string Mount(int slotIndex)
+        {if(slotIndex<0||slotIndex>=TowerBlueprint.MaximumWeaponMounts)throw new ArgumentOutOfRangeException(nameof(slotIndex));return slotIndex==0?Mount0:slotIndex==1?Mount1:Mount2;}
+        public static bool TryMount(string bindingId,out int slotIndex)
+        {for(int i=0;i<TowerBlueprint.MaximumWeaponMounts;i++)if(bindingId==Mount(i)){slotIndex=i;return true;}slotIndex=-1;return false;}
         static readonly string[] legacy = { Base, Mount0, Mount1, "module.armor", "module.feed", "module.tracking", Decoration, "module.rail" };
         public static string For(DrawingPartKey key)
         {
@@ -31,8 +35,8 @@ namespace PaperDefense.Core
         public static void Validate(string value, string field = "bindingId")
         {
             if (string.IsNullOrWhiteSpace(value) || value != value.Trim() || value.Length > 160)
-                throw new ArgumentException(field + ": требуется непустой устойчивый ID длиной до 160 знаков.");
-            foreach (char c in value) if (char.IsControl(c)) throw new ArgumentException(field + ": управляющие знаки запрещены.");
+                throw new ArgumentException(UserText.Message("copy.0f3ae477996b43f8", field));
+            foreach (char c in value) if (char.IsControl(c)) throw new ArgumentException(UserText.Message("copy.a315147ec8683d34", field));
         }
     }
 
@@ -45,9 +49,9 @@ namespace PaperDefense.Core
         public DrawingPoint(float x, float y)
         {
             if (float.IsNaN(x) || float.IsInfinity(x) || x < -1 || x > 1)
-                throw new ArgumentOutOfRangeException(nameof(x), "Координаты рисунка должны быть конечными и находиться между −1 и 1.");
+                throw new ArgumentOutOfRangeException(nameof(x), UserText.Message("copy.9c2448c4487812ec"));
             if (float.IsNaN(y) || float.IsInfinity(y) || y < -1 || y > 1)
-                throw new ArgumentOutOfRangeException(nameof(y), "Координаты рисунка должны быть конечными и находиться между −1 и 1.");
+                throw new ArgumentOutOfRangeException(nameof(y), UserText.Message("copy.9c2448c4487812ec"));
             X = (float)Math.Round(x * Quantization) / Quantization;
             Y = (float)Math.Round(y * Quantization) / Quantization;
         }
@@ -67,7 +71,7 @@ namespace PaperDefense.Core
         {
             if (points == null) throw new ArgumentNullException(nameof(points));
             if (points.Count < 2 || points.Count > DrawingSnapshot.MaxPoints)
-                throw new ArgumentException("Штрих должен содержать от 2 до " + DrawingSnapshot.MaxPoints + " точек.", nameof(points));
+                throw new ArgumentException(UserText.Message("copy.905749113a5f4a8b", DrawingSnapshot.MaxPoints), nameof(points));
             var owned = new DrawingPoint[points.Count];
             for (int i = 0; i < owned.Length; i++) owned[i] = new DrawingPoint(points[i].X, points[i].Y);
             Points = Array.AsReadOnly(owned);
@@ -88,13 +92,13 @@ namespace PaperDefense.Core
             DrawingBindings.Validate(bindingId);
             if (strokes == null) throw new ArgumentNullException(nameof(strokes));
             if (strokes.Count > DrawingSnapshot.MaxStrokes)
-                throw new ArgumentException("На странице помещается не более " + DrawingSnapshot.MaxStrokes + " штрихов.", nameof(strokes));
+                throw new ArgumentException(UserText.Message("copy.567d81689cd308c2", DrawingSnapshot.MaxStrokes), nameof(strokes));
             BindingId = bindingId;
             DrawingBindings.TryLegacy(bindingId, out DrawingPartKey key); Key = key;
             var owned = new DrawingStroke[strokes.Count];
             for (int i = 0; i < owned.Length; i++)
             {
-                if (strokes[i] == null) throw new ArgumentException("Штрих не может быть пустой ссылкой.", nameof(strokes));
+                if (strokes[i] == null) throw new ArgumentException(UserText.Message("copy.c3d0949fc6d833f5"), nameof(strokes));
                 owned[i] = new DrawingStroke(strokes[i].Points);
             }
             Strokes = Array.AsReadOnly(owned);
@@ -120,7 +124,7 @@ namespace PaperDefense.Core
         public DrawingSnapshot(IReadOnlyList<DrawingPart> parts)
         {
             if (parts == null) throw new ArgumentNullException(nameof(parts));
-            if (parts.Count > MaximumParts) throw new ArgumentException("В рисунке слишком много привязок частей.", nameof(parts));
+            if (parts.Count > MaximumParts) throw new ArgumentException(UserText.Message("copy.43755fc5c5f93d0d"), nameof(parts));
             var owned = new DrawingPart[LegacyPartCount];
             var extra = new SortedDictionary<string, DrawingPart>(StringComparer.Ordinal);
             int strokes = 0, points = 0;
@@ -128,16 +132,16 @@ namespace PaperDefense.Core
             for (int i = 0; i < parts.Count; i++)
             {
                 DrawingPart source = parts[i];
-                if (source == null) throw new ArgumentException("Часть рисунка не может быть пустой ссылкой.", nameof(parts));
+                if (source == null) throw new ArgumentException(UserText.Message("copy.3f6738a9ad1cee3f"), nameof(parts));
                 if (DrawingBindings.TryLegacy(source.BindingId, out DrawingPartKey legacyKey))
                 {
                     int key = (int)legacyKey;
-                    if (owned[key] != null) throw new ArgumentException("Часть рисунка повторяется.", nameof(parts));
+                    if (owned[key] != null) throw new ArgumentException(UserText.Message("copy.76bf65145939d2c1"), nameof(parts));
                     owned[key] = new DrawingPart(source.BindingId, source.Strokes);
                 }
                 else
                 {
-                    if (extra.ContainsKey(source.BindingId)) throw new ArgumentException("Привязка части рисунка повторяется.", nameof(parts));
+                    if (extra.ContainsKey(source.BindingId)) throw new ArgumentException(UserText.Message("copy.24c65e18873ac66e"), nameof(parts));
                     extra.Add(source.BindingId, new DrawingPart(source.BindingId, source.Strokes));
                 }
                 strokes += source.Strokes.Count;
@@ -148,12 +152,12 @@ namespace PaperDefense.Core
                         if (!stroke.Points[point].Equals(stroke.Points[point - 1])) hasVisibleSegment = true;
                 }
                 if (strokes > MaxStrokes || points > MaxPoints)
-                    throw new ArgumentException("На странице не более " + MaxStrokes + " штрихов и " + MaxPoints + " точек.", nameof(parts));
+                    throw new ArgumentException(UserText.Message("copy.c03e44ec7d70d6e1", MaxStrokes, MaxPoints), nameof(parts));
             }
             for (int i = 0; i < owned.Length; i++)
                 if (owned[i] == null) owned[i] = new DrawingPart((DrawingPartKey)i, Array.Empty<DrawingStroke>());
             var all = new List<DrawingPart>(owned); all.AddRange(extra.Values);
-            if (all.Count > MaximumParts) throw new ArgumentException("В рисунке слишком много привязок частей.", nameof(parts));
+            if (all.Count > MaximumParts) throw new ArgumentException(UserText.Message("copy.43755fc5c5f93d0d"), nameof(parts));
             FormatVersion = extra.Count == 0 ? LegacyFormatVersion : CurrentFormatVersion;
             BindingVersion = extra.Count == 0 ? LegacyBindingVersion : CurrentBindingVersion;
             byBinding = new Dictionary<string, DrawingPart>(StringComparer.Ordinal);

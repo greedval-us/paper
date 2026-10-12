@@ -163,7 +163,7 @@ namespace PaperDefense.Tests
                     missing = true;
                     Assert.That(feedback.Quality, Is.Zero);
                     Assert.That(feedback.IncompleteContour, Is.EqualTo(1));
-                    Assert.That(feedback.Message, Does.Contain("2").And.Contain("контур"));
+                    Assert.That(TestText.Resolve(feedback.Message), Does.Contain("2").And.Contain("контур"));
                 }
             Assert.That(missing, Is.True);
         }

@@ -21,10 +21,10 @@ namespace PaperDefense.Tests
             for (int i = 0; i < ids.Length; i++)
             {
                 Assert.That(profile.Parts[i].Id, Is.EqualTo(ids[i]));
-                Assert.That(profile.Parts[i].Name, Is.EqualTo(names[i]));
+                Assert.That(TestText.Resolve(profile.Parts[i].Name), Is.EqualTo(names[i]));
                 Assert.That(profile.Parts[i].GoldCost, Is.EqualTo(prices[i]));
                 Assert.That(profile.IsUnlocked(ids[i]), Is.EqualTo(i < 5));
-                Assert.That(profile.Parts[i].Description, Is.Not.Empty);
+                Assert.That(TestText.Resolve(profile.Parts[i].Description), Is.Not.Empty);
             }
         }
 
@@ -100,13 +100,13 @@ namespace PaperDefense.Tests
             for (int i = 0; i < mounts.Length; i++)
             {
                 Assert.That(PartCatalog.TryGetMount(mounts[i], out var part), Is.True);
-                Assert.That(part.Id, Is.EqualTo(ids[i])); Assert.That(part.ButtonLabel, Is.EqualTo(labels[i]));
+                Assert.That(part.Id, Is.EqualTo(ids[i])); Assert.That(TestText.Resolve(part.ButtonLabel), Is.EqualTo(labels[i]));
                 Assert.That(part.IsCombatMount, Is.EqualTo(i < 6));
                 Assert.That(PartCatalog.TryGet(ids[i], out var byId), Is.True);
                 Assert.That(byId, Is.SameAs(part));
             }
             Assert.That(PartCatalog.TryGetModule(TowerModules.Rail, out var rail), Is.True);
-            Assert.That(rail.ButtonLabel, Is.EqualTo("НАПРАВЛ.")); Assert.That(rail.UnlockLabel, Is.EqualTo("НАПРАВЛЯЮЩАЯ"));
+            Assert.That(TestText.Resolve(rail.ButtonLabel), Is.EqualTo("НАПРАВЛ.")); Assert.That(TestText.Resolve(rail.UnlockLabel), Is.EqualTo("НАПРАВЛЯЮЩАЯ"));
             Assert.That(PartCatalog.TryGet("unknown.future", out _), Is.False);
             Assert.That(PartCatalog.TryGetMount(StructureKind.Wall, out _), Is.False);
             Assert.That(PartCatalog.TryGetMount((StructureKind)999, out _), Is.False);

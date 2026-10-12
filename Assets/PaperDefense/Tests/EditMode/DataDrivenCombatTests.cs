@@ -113,9 +113,9 @@ namespace PaperDefense.Tests
         public void DuplicateAndInvalidReferencesRejectWholeCatalogWithFieldPath()
         {
             var balance=GameBalance.CreateDefault();var input=Catalog(balance);var weapon=AddWeapon(input,"weapon.test.invalid",AttackKind.Single);weapon.EffectIds.Add("effect.missing");
-            Assert.That(()=>input.CreateSnapshot(),Throws.ArgumentException.With.Message.Contains("effect.missing"));weapon.EffectIds.Clear();weapon.Stats.Damage=float.NaN;
-            Assert.That(()=>input.CreateSnapshot(),Throws.ArgumentException.With.Message.Contains("weapon.test.invalid.attack.damage"));weapon.Stats.Damage=0;input.Weapons.Add(weapon);
-            Assert.That(()=>input.CreateSnapshot(),Throws.ArgumentException.With.Message.Contains("повторяющийся ID"));
+            Assert.That(TestText.ExceptionMessage<ArgumentException>(() => input.CreateSnapshot()),Does.Contain("effect.missing"));weapon.EffectIds.Clear();weapon.Stats.Damage=float.NaN;
+            Assert.That(TestText.ExceptionMessage<ArgumentException>(() => input.CreateSnapshot()),Does.Contain("weapon.test.invalid.attack.damage"));weapon.Stats.Damage=0;input.Weapons.Add(weapon);
+            Assert.That(TestText.ExceptionMessage<ArgumentException>(() => input.CreateSnapshot()),Does.Contain("повторяющийся ID"));
         }
         [Test]
         public void UnknownSavedSelectionsArePreservedAndCannotSpendResources()
@@ -153,9 +153,9 @@ namespace PaperDefense.Tests
             var blueprint=Blueprint(balance,weapon.Id,modules:new[]{new ModuleSelection("tradeoff","module.test.add")});
             Assert.That(TowerCatalog.Validate(blueprint,balance,out var reason),Is.True,reason);Assert.That(TowerCatalog.WeaponRange(blueprint,balance,weapon.Id),Is.EqualTo(8));
             modifier.Stat=ModifierStat.FeedMultiplier;modifier.Value=2;
-            Assert.That(()=>input.CreateSnapshot(),Throws.ArgumentException.With.Message.Contains("module.test.add.modifiers[0].scope"));
+            Assert.That(TestText.ExceptionMessage<ArgumentException>(() => input.CreateSnapshot()),Does.Contain("module.test.add.modifiers[0].scope"));
             modifier.Stat=ModifierStat.WeaponRange;modifier.Value=-20;balance.Content=input.CreateSnapshot();
-            Assert.That(TowerCatalog.Validate(blueprint,balance,out reason),Is.False);Assert.That(reason,Does.Contain("WeaponRange"));
+            Assert.That(TowerCatalog.Validate(blueprint,balance,out reason),Is.False);Assert.That(TestText.Resolve(reason),Does.Contain("WeaponRange"));
         }
         [Test]
         public void AreaProbeRetainsNewSecondaryWeaponAndMountScopedRange()
@@ -193,7 +193,7 @@ namespace PaperDefense.Tests
             Assert.That(TowerCatalog.ActionInterval(blueprint,balance,weapon.Id,2,1),Is.EqualTo(balance.Combat.MinimumActionInterval));
             Assert.That(TowerCatalog.ActionInterval(blueprint,balance,weapon.Id,10,1),Is.EqualTo(balance.Combat.MinimumActionInterval));
             modifier.Operation=ModifierOperation.Set;modifier.Value=0;balance.Content=input.CreateSnapshot();
-            Assert.That(TowerCatalog.Validate(blueprint,balance,out reason),Is.False);Assert.That(reason,Does.Contain("ActionInterval"));
+            Assert.That(TowerCatalog.Validate(blueprint,balance,out reason),Is.False);Assert.That(TestText.Resolve(reason),Does.Contain("ActionInterval"));
         }
         [Test]
         public void RadialPreviewAndActualReachUseRadiusWithTheSameRangeModifiers()
@@ -216,7 +216,7 @@ namespace PaperDefense.Tests
             var allowed=Blueprint(balance,"weapon.gun",modules:selections);
             Assert.That(TowerCatalog.Validate(allowed,balance,out var reason),Is.True,reason);
             selections.Add(new ModuleSelection("instance.extra","module.test.binding-limit"));var oversized=Blueprint(balance,"weapon.gun",modules:selections);
-            Assert.That(TowerCatalog.ValidateParts(oversized,out _),Is.True);Assert.That(TowerCatalog.Validate(oversized,balance,out reason),Is.False);Assert.That(reason,Does.Contain("blueprint.modules"));
+            Assert.That(TowerCatalog.ValidateParts(oversized,out _),Is.True);Assert.That(TowerCatalog.Validate(oversized,balance,out reason),Is.False);Assert.That(TestText.Resolve(reason),Does.Contain("blueprint.modules"));
             var data=new WorkshopProfile(balance.Content).ToData();var pages=new List<BlueprintData>(data.Album);pages.Add(new BlueprintData(oversized));data.Album=pages.ToArray();
             var loaded=WorkshopProfile.FromData(data);var retained=loaded.Album[loaded.Album.Count-1];
             Assert.That(retained.Id,Is.EqualTo(oversized.Id));Assert.That(retained.ModuleSelections.Count,Is.EqualTo(TowerCatalog.MaximumGenericModuleBindings+1));

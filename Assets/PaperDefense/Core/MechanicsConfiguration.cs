@@ -43,7 +43,7 @@ namespace PaperDefense.Core
         public static MechanicsAvailability Resolve(GameBalance balance)
         {
             if (balance == null) throw new ArgumentNullException(nameof(balance));
-            if (balance.Mechanics == null) throw new ArgumentException("Отсутствует конфигурация механик.", nameof(balance));
+            if (balance.Mechanics == null) throw new ArgumentException(UserText.Message("copy.d5a038c4bfd1895a"), nameof(balance));
             return new MechanicsAvailability(balance);
         }
     }

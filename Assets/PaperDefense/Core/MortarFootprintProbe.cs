@@ -33,8 +33,8 @@ namespace PaperDefense.Core
             if(first==null) throw new ArgumentNullException(nameof(first));
             if(second==null) throw new ArgumentNullException(nameof(second));
             if(!Enum.IsDefined(typeof(FootprintFormation),formation)) throw new ArgumentOutOfRangeException(nameof(formation));
-            var weapon=rules.ResolveContent().GetWeapon(mount==0?blueprint.FirstWeaponId:blueprint.SecondWeaponId);
-            if(first.AspectRatio>weapon.MaximumFootprintAspectRatio||second.AspectRatio>weapon.MaximumFootprintAspectRatio)throw new ArgumentException("Геометрия области превышает предел оружия.");
+            var weapon=rules.ResolveContent().GetWeapon(blueprint.GetWeaponId(mount));
+            if(first.AspectRatio>weapon.MaximumFootprintAspectRatio||second.AspectRatio>weapon.MaximumFootprintAspectRatio)throw new ArgumentException(UserText.Message("copy.a630b0b26793f9fd"));
             float quality=blueprint.Origin==DrawingOrigin.LegacyStandard?100:blueprint.Assessment.Quality;
             int cost=TowerCatalog.Cost(blueprint,rules,MaterialTier.Pencil);
             return new FootprintProbeComparison(Run(blueprint,mount,first,rules,formation,cost,quality),Run(blueprint,mount,second,rules,formation,cost,quality));
@@ -45,14 +45,14 @@ namespace PaperDefense.Core
             // Isolate the selected barrel while retaining equipment and art. Its re-evaluated
             // drawing assessment must not change cadence: use the source page's quality.
             var isolated=source.WithMortarFootprint(mount,footprint);
-            var selected=balance.ResolveContent().GetWeapon(mount==0?source.FirstWeaponId:source.SecondWeaponId);
+            var selected=balance.ResolveContent().GetWeapon(source.GetWeaponId(mount));
             float health=TowerCatalog.Health(source,balance,MaterialTier.Pencil);
             var towers=new List<StructureState> { new StructureState { Id=1,Cell=new Cell(10,10),Kind=isolated.FirstWeapon,ContentId=isolated.FirstWeaponId,
                 Blueprint=isolated,Tier=MaterialTier.Pencil,Color=InkColor.None,IsComplete=true,Health=health,MaxHealth=health } };
             var enemies=new List<EnemyState>(9);
             float radius=selected.Stats.Radius;
             // Central nearest anchor naturally wins ordinary nearest-target acquisition.
-            var anchor=new Point2(14.5f,10.5f);
+            var anchor=new Point2(10.5f+Math.Max(4,selected.MinimumRange),10.5f);
             for(int i=0;i<9;i++)
             {
                 float x=formation==FootprintFormation.Group?(i/3)*.3f*radius:i*.2f*radius;
@@ -80,8 +80,8 @@ namespace PaperDefense.Core
             int hits=0;
             foreach(var enemy in enemies) if(enemy.Health<enemy.MaxHealth) hits++;
             return new FootprintProbeReport(frames,hits,cost,quality,completed,completed
-                ? "Один залп выбранной мортиры; цена исходной сборки."
-                : "Проба не завершена за 600 шагов: цель вне дальности или полёт слишком долгий.");
+                ? UserText.Message("copy.8d5b727e93d4fa3b")
+                : UserText.Message("copy.47ed21b8c7abce75"));
         }
     }
 }

@@ -33,13 +33,13 @@ namespace PaperDefense.Core
         public float BlotLifetime = 60;
         public List<TrialScenarioDefinition> Scenarios = new List<TrialScenarioDefinition>
         {
-            new TrialScenarioDefinition { Scenario = TrialScenario.Crowd, Name = "Толпа", Count = 240, SpawnInterval = .1f, Speed = 2.3f, Health = 22, EnemyKind = EnemyKind.Doodle, DrawingTier = DrawingTier.Sketch },
-            new TrialScenarioDefinition { Scenario = TrialScenario.Fast, Name = "Быстрые", Count = 160, SpawnInterval = .15f, Speed = 5, Health = 14, EnemyKind = EnemyKind.Runner, DrawingTier = DrawingTier.Sketch },
-            new TrialScenarioDefinition { Scenario = TrialScenario.Armored, Name = "Защищённые", Count = 80, SpawnInterval = .3f, Speed = 1.5f, Health = 140, EnemyKind = EnemyKind.Gnawer, DrawingTier = DrawingTier.Hatched },
-            new TrialScenarioDefinition { Scenario = TrialScenario.Blots, Name = "Кляксы", Count = 0, SpawnInterval = .3f, Speed = 2.3f, Health = 22, EnemyKind = EnemyKind.Doodle, DrawingTier = DrawingTier.Sketch }
+            new TrialScenarioDefinition { Scenario = TrialScenario.Crowd, Name = UserText.Message("copy.f26aff7048779ef3"), Count = 240, SpawnInterval = .1f, Speed = 2.3f, Health = 22, EnemyKind = EnemyKind.Doodle, DrawingTier = DrawingTier.Sketch },
+            new TrialScenarioDefinition { Scenario = TrialScenario.Fast, Name = UserText.Message("copy.362c076f3db4e870"), Count = 160, SpawnInterval = .15f, Speed = 5, Health = 14, EnemyKind = EnemyKind.Runner, DrawingTier = DrawingTier.Sketch },
+            new TrialScenarioDefinition { Scenario = TrialScenario.Armored, Name = UserText.Message("copy.1eb009085f0b5836"), Count = 80, SpawnInterval = .3f, Speed = 1.5f, Health = 140, EnemyKind = EnemyKind.Gnawer, DrawingTier = DrawingTier.Hatched },
+            new TrialScenarioDefinition { Scenario = TrialScenario.Blots, Name = UserText.Message("copy.e812913d3fd9d14e"), Count = 0, SpawnInterval = .3f, Speed = 2.3f, Health = 22, EnemyKind = EnemyKind.Doodle, DrawingTier = DrawingTier.Sketch }
         };
         public TrialScenarioDefinition For(TrialScenario scenario)
-        { foreach (var item in Scenarios) if (item.Scenario == scenario) return item; throw new ArgumentException("trial.scenario: не зарегистрировано испытание " + scenario); }
+        { foreach (var item in Scenarios) if (item.Scenario == scenario) return item; throw new ArgumentException(UserText.Message("copy.3bb0faaf496c4e4e", scenario)); }
         public TrialRules CreateSnapshot()
         {
             ContentValidation.Id(BaselineChassisId, "trial.baselineChassisId"); ContentValidation.Id(BaselineWeaponId, "trial.baselineWeaponId");
@@ -48,17 +48,17 @@ namespace PaperDefense.Core
             if (MaximumTicks <= 0 || MaximumTicks > MaximumSimulationTicks || DefaultBudget < 0 || DefaultBudget > MaximumBudget || CounterfireDamage < 0 || float.IsNaN(CounterfireDamage) || float.IsInfinity(CounterfireDamage) ||
                 CloseTowerCount < 0 || CloseTowerColumns <= 0 || CloseTowerSpacing <= 0 || OverflowTowerColumns <= 0 || BlotCount < 0 || BlotMinX >= BlotMaxX || BlotMinY >= BlotMaxY ||
                 BlotCount > (BlotMaxX - BlotMinX) * (BlotMaxY - BlotMinY) || FirstBlotX < BlotMinX || FirstBlotX >= BlotMaxX || FirstBlotY < BlotMinY || FirstBlotY >= BlotMaxY ||
-                SpawnYVariation < 0 || float.IsNaN(SpawnYVariation) || float.IsInfinity(SpawnYVariation)) throw new ArgumentException("trial: неверные границы испытания.");
-            foreach (float value in new[] { SpawnX, SpawnY, ExitX }) if (float.IsNaN(value) || float.IsInfinity(value)) throw new ArgumentException("trial.position: требуется конечное число.");
-            if (Scenarios == null || Scenarios.Count != Enum.GetValues(typeof(TrialScenario)).Length) throw new ArgumentException("trial.scenarios: требуется каждое поддерживаемое испытание.");
+                SpawnYVariation < 0 || float.IsNaN(SpawnYVariation) || float.IsInfinity(SpawnYVariation)) throw new ArgumentException(UserText.Message("copy.25cb235b26c9d4a0"));
+            foreach (float value in new[] { SpawnX, SpawnY, ExitX }) if (float.IsNaN(value) || float.IsInfinity(value)) throw new ArgumentException(UserText.Message("copy.bb947e44c38715be"));
+            if (Scenarios == null || Scenarios.Count != Enum.GetValues(typeof(TrialScenario)).Length) throw new ArgumentException(UserText.Message("copy.addb86f114c43278"));
             var seen = new HashSet<TrialScenario>();
             foreach (var item in Scenarios)
             {
-                if (item == null || !seen.Add(item.Scenario) || !Enum.IsDefined(typeof(TrialScenario), item.Scenario) || item.Count < 0 || item.Count > MaximumScenarioEnemies || !Enum.IsDefined(typeof(EnemyKind), item.EnemyKind) || !Enum.IsDefined(typeof(DrawingTier), item.DrawingTier)) throw new ArgumentException("trial.scenarios: неверное или повторное определение.");
+                if (item == null || !seen.Add(item.Scenario) || !Enum.IsDefined(typeof(TrialScenario), item.Scenario) || item.Count < 0 || item.Count > MaximumScenarioEnemies || !Enum.IsDefined(typeof(EnemyKind), item.EnemyKind) || !Enum.IsDefined(typeof(DrawingTier), item.DrawingTier)) throw new ArgumentException(UserText.Message("copy.59709b003195830a"));
                 CombatTuningRules.Positive(item.SpawnInterval, item.Scenario + ".spawnInterval"); CombatTuningRules.Positive(item.Speed, item.Scenario + ".speed"); CombatTuningRules.Positive(item.Health, item.Scenario + ".health");
             }
             if (BudgetChoices == null || BudgetChoices.Count == 0 || BudgetChoices.Exists(value => value < 0 || value > MaximumBudget) || new HashSet<int>(BudgetChoices).Count != BudgetChoices.Count || !BudgetChoices.Contains(DefaultBudget))
-                throw new ArgumentException("trial.budgetChoices: уникальные бюджеты должны включать бюджет по умолчанию.");
+                throw new ArgumentException(UserText.Message("copy.207d3ac6d35756ff"));
             var copy = (TrialRules)MemberwiseClone(); copy.Scenarios = Scenarios.ConvertAll(item => item.CreateSnapshot()); copy.BudgetChoices = new List<int>(BudgetChoices); return copy;
         }
     }

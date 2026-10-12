@@ -41,12 +41,12 @@ namespace PaperDefense.Core
         public bool TryActivateWell(int index,out string reason)
         {
             reason="";
-            if(Phase==RunPhase.Victory||Phase==RunPhase.Defeat){reason="Эта страница уже закончена.";return false;}
-            if(index<0||index>=wells.Count){reason="Чернильница не найдена.";return false;}
+            if(Phase==RunPhase.Victory||Phase==RunPhase.Defeat){reason=UserText.Message("copy.850e91bbbd5c94d8");return false;}
+            if(index<0||index>=wells.Count){reason=UserText.Message("copy.e59e78c138c420a2");return false;}
             var well=wells[index];
-            if(well.Active){reason="Эта точка уже защищается.";return false;}
+            if(well.Active){reason=UserText.Message("copy.b0b658758b517b85");return false;}
             int price=Math.Max(0,rules.WellActivationCost);
-            if(Ink<price){reason="Не хватает штрихов: нужно "+price+".";return false;}
+            if(Ink<price){reason=UserText.Message("copy.d952db5ec0c442f9", price);return false;}
             Ink-=price;well.Active=true;well.Health=Math.Max(1,well.MaxHealth);
             // An assault already in progress cannot be counted as a fully protected wave.
             well.EligibleWave=WaveIndex+1;well.Threatened=false;flowDirty=true;StructureVisualVersion++;

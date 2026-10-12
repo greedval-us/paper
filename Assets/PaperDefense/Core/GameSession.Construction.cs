@@ -13,19 +13,19 @@ namespace PaperDefense.Core
             if (!TowerCatalog.Validate(blueprint,rules,out string invalid))
                 return new BuildQuote{Cells=Array.Empty<Cell>(),Reason=invalid};
             if (!Enum.IsDefined(typeof(InkColor),color))
-                return new BuildQuote{Cells=Array.Empty<Cell>(),Reason="Неизвестный цвет."};
+                return new BuildQuote{Cells=Array.Empty<Cell>(),Reason=UserText.Message("copy.63ae8dc3a0c35f89")};
             if (!Enum.IsDefined(typeof(MaterialTier),material))
-                return new BuildQuote{Cells=Array.Empty<Cell>(),Reason="Неизвестный инструмент."};
+                return new BuildQuote{Cells=Array.Empty<Cell>(),Reason=UserText.Message("copy.cef60cd86a8db8c7")};
             if (color != InkColor.None && !Mechanics.ColorCartridges)
-                return new BuildQuote{Cells=Array.Empty<Cell>(),Reason="Цветные картриджи недоступны на этом листе."};
+                return new BuildQuote{Cells=Array.Empty<Cell>(),Reason=UserText.Message("copy.0a21e662d398deaa")};
             var quote=QuoteBuild(cells,blueprint.FirstWeapon,material,TowerCatalog.Cost(blueprint,rules,material));
             // Occupancy and resource failures stay atomic, using the assembly's complete price.
             if (!quote.Valid) return quote;
             long cost=(long)TowerCatalog.Cost(blueprint,rules,material)*quote.Cells.Count;
             quote.Cost=(int)Math.Min(int.MaxValue,cost);
-            if (cost>Ink){quote.Valid=false;quote.Reason="Не хватает штрихов: нужно "+cost+".";return quote;}
+            if (cost>Ink){quote.Valid=false;quote.Reason=UserText.Message("copy.d952db5ec0c442f9", cost);return quote;}
             if (color!=InkColor.None && (long)ColorCost(blueprint,material)*quote.Cells.Count>ColoredInk(color))
-            {quote.Valid=false;quote.Reason="Не хватает цветных чернил для всей сборки.";}
+            {quote.Valid=false;quote.Reason=UserText.Message("copy.cc5678934a13d506");}
             return quote;
         }
 
@@ -55,15 +55,15 @@ namespace PaperDefense.Core
         public bool TryPaint(Cell cell,InkColor color,out string reason)
         {
             reason="";
-            if(Phase==RunPhase.Victory||Phase==RunPhase.Defeat){reason="Эта страница уже закончена.";return false;}
-            if(!Enum.IsDefined(typeof(InkColor),color)){reason="Неизвестный цвет.";return false;}
-            if(color!=InkColor.None&&!Mechanics.ColorCartridges){reason="Цветные картриджи недоступны на этом листе.";return false;}
+            if(Phase==RunPhase.Victory||Phase==RunPhase.Defeat){reason=UserText.Message("copy.850e91bbbd5c94d8");return false;}
+            if(!Enum.IsDefined(typeof(InkColor),color)){reason=UserText.Message("copy.63ae8dc3a0c35f89");return false;}
+            if(color!=InkColor.None&&!Mechanics.ColorCartridges){reason=UserText.Message("copy.0a21e662d398deaa");return false;}
             var tower=StructureAt(cell);
             if(tower==null||tower.Kind==StructureKind.Wall||tower.Kind==StructureKind.Spikes)
-            {reason="Выберите башню для картриджа.";return false;}
+            {reason=UserText.Message("copy.a8ce8499831aa26c");return false;}
             if(tower.Color==color)return true;
             int cost=ColorCost(tower.Blueprint,tower.Tier);
-            if(color!=InkColor.None&&ColoredInk(color)<cost){reason="Не хватает цветных чернил: нужно "+cost+".";return false;}
+            if(color!=InkColor.None&&ColoredInk(color)<cost){reason=UserText.Message("copy.e9d0f96d16c02def", cost);return false;}
             if(color!=InkColor.None)coloredInk[(int)color]-=cost;
             tower.Color=color;StructureVisualVersion++;
             return true;

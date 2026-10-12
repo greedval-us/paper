@@ -1,0 +1,1404 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c49893887805814ea9a073c5bc1e37a, type: 3}
+  m_Name: Catalog
+  m_EditorClassIdentifier: PaperDefense.Application::PaperDefense.Application.ContentDatabaseAsset
+  catalog:
+    Chassis:
+    - Id: chassis.standard
+      Name: "\u041E\u0431\u044B\u0447\u043D\u043E\u0435 \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"
+      Description: "\u0414\u0432\u0430 \u043A\u0440\u0435\u043F\u043B\u0435\u043D\u0438\u044F
+        \u0434\u043B\u044F \u0434\u0435\u0442\u0430\u043B\u0435\u0439 \u0441 \u043E\u0431\u0449\u0435\u0439
+        \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u043D\u043E\u0439
+        \u043D\u0430\u0433\u0440\u0443\u0437\u043A\u043E\u0439."
+      ButtonLabel: "\u041E\u0411\u042B\u0427\u041D\u041E\u0415"
+      UnlockLabel: "\u041E\u0411\u042B\u0427\u041D\u041E\u0415"
+      TemplateId: template.chassis.standard
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 0
+      UnlockGold: 0
+      VisualStyle: 1
+      Capacity: 10
+      BaseCost: 16
+      MountCount: 2
+      UpgradeSlotCount: 2
+      ArmorSlotCount: 1
+      FeedCapacity: 1.6
+      BaseHealth: 55
+      HealthMultiplier: 1
+      BuildSeconds: 0
+      SecondaryBuildSeconds: 0.4
+      PrimaryMountPivotX: 0
+      PrimaryMountPivotY: 0.04
+      PrimaryDualMountPivotX: -0.17
+      PrimaryDualMountPivotY: 0.04
+      SecondaryMountPivotX: 0.17
+      SecondaryMountPivotY: 0.04
+      LegacyKind: 0
+      MountPivots: []
+    - Id: chassis.heavy
+      Name: "\u0422\u044F\u0436\u0451\u043B\u043E\u0435 \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"
+      Description: "\u0412\u043C\u0435\u0449\u0430\u0435\u0442 \u0431\u043E\u043B\u044C\u0448\u0443\u044E
+        \u043D\u0430\u0433\u0440\u0443\u0437\u043A\u0443; \u0434\u043E\u0440\u043E\u0436\u0435
+        \u0438 \u0434\u043E\u043B\u044C\u0448\u0435 \u0441\u0442\u0440\u043E\u0438\u0442\u0441\u044F."
+      ButtonLabel: "\u0422\u042F\u0416\u0401\u041B\u041E\u0415"
+      UnlockLabel: "\u0422\u042F\u0416\u0401\u041B\u041E\u0415"
+      TemplateId: template.chassis.heavy
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 5
+      UnlockGold: 90
+      VisualStyle: 1
+      Capacity: 14
+      BaseCost: 28
+      MountCount: 2
+      UpgradeSlotCount: 2
+      ArmorSlotCount: 1
+      FeedCapacity: 1.6
+      BaseHealth: 55
+      HealthMultiplier: 1.3
+      BuildSeconds: 0.45
+      SecondaryBuildSeconds: 0.4
+      PrimaryMountPivotX: 0
+      PrimaryMountPivotY: 0.04
+      PrimaryDualMountPivotX: -0.17
+      PrimaryDualMountPivotY: 0.04
+      SecondaryMountPivotX: 0.17
+      SecondaryMountPivotY: 0.04
+      LegacyKind: 1
+      MountPivots: []
+    - Id: chassis.precision
+      Name: "\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0435
+        \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"
+      Description: "\u041E\u0434\u0438\u043D \u0441\u0442\u0432\u043E\u043B, \u0442\u0440\u0438
+        \u0443\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u044F \u0438 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u0430\u044F
+        \u0431\u0440\u043E\u043D\u044F. \u0422\u043E\u0447\u043D\u0430\u044F \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430
+        \u043E\u0434\u043D\u043E\u0433\u043E \u043E\u0440\u0443\u0436\u0438\u044F."
+      ButtonLabel: "\u0421\u041F\u0415\u0426\u0418\u0410\u041B\u0418\u0417\u0418\u0420."
+      UnlockLabel: "\u0421\u041F\u0415\u0426\u0418\u0410\u041B\u0418\u0417\u0418\u0420."
+      TemplateId: template.chassis.precision
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 20
+      UnlockGold: 90
+      VisualStyle: 0
+      Capacity: 16
+      BaseCost: 20
+      MountCount: 1
+      UpgradeSlotCount: 3
+      ArmorSlotCount: 1
+      FeedCapacity: 1
+      BaseHealth: 55
+      HealthMultiplier: 1
+      BuildSeconds: 0.25
+      SecondaryBuildSeconds: 0.4
+      PrimaryMountPivotX: 0
+      PrimaryMountPivotY: 0.04
+      PrimaryDualMountPivotX: -0.17
+      PrimaryDualMountPivotY: 0.04
+      SecondaryMountPivotX: 0.17
+      SecondaryMountPivotY: 0.04
+      LegacyKind: -1
+      MountPivots: []
+    - Id: chassis.battery
+      Name: "\u0411\u0430\u0442\u0430\u0440\u0435\u044F"
+      Description: "\u0422\u0440\u0438 \u043D\u0435\u0437\u0430\u0432\u0438\u0441\u0438\u043C\u044B\u0445
+        \u0441\u0442\u0432\u043E\u043B\u0430, \u043E\u0434\u043D\u043E \u0443\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435
+        \u0438 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u0430\u044F \u0431\u0440\u043E\u043D\u044F.
+        \u041E\u0440\u0443\u0436\u0438\u0435 \u0434\u0435\u043B\u0438\u0442 \u043E\u0431\u0449\u0443\u044E
+        \u043F\u043E\u0434\u0430\u0447\u0443."
+      ButtonLabel: "\u0411\u0410\u0422\u0410\u0420\u0415\u042F"
+      UnlockLabel: "\u0411\u0410\u0422\u0410\u0420\u0415\u042F"
+      TemplateId: template.chassis.battery
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 21
+      UnlockGold: 90
+      VisualStyle: 0
+      Capacity: 22
+      BaseCost: 34
+      MountCount: 3
+      UpgradeSlotCount: 1
+      ArmorSlotCount: 1
+      FeedCapacity: 1.8
+      BaseHealth: 55
+      HealthMultiplier: 1
+      BuildSeconds: 0.65
+      SecondaryBuildSeconds: 0.4
+      PrimaryMountPivotX: 0
+      PrimaryMountPivotY: 0.04
+      PrimaryDualMountPivotX: -0.17
+      PrimaryDualMountPivotY: 0.04
+      SecondaryMountPivotX: 0.17
+      SecondaryMountPivotY: 0.04
+      LegacyKind: -1
+      MountPivots:
+      - SlotIndex: 0
+        X: -0.24
+        Y: 0.04
+      - SlotIndex: 1
+        X: 0
+        Y: 0.04
+      - SlotIndex: 2
+        X: 0.24
+        Y: 0.04
+    Weapons:
+    - Id: weapon.gun
+      Name: "\u041F\u0443\u043B\u0435\u043C\u0451\u0442"
+      Description: "\u0427\u0430\u0441\u0442\u044B\u0439 \u043E\u0434\u0438\u043D\u043E\u0447\u043D\u044B\u0439
+        \u043E\u0433\u043E\u043D\u044C. \u041A\u0430\u0436\u0434\u043E\u0435 \u043F\u043E\u043F\u0430\u0434\u0430\u043D\u0438\u0435
+        \u043F\u043E\u0440\u0430\u0436\u0430\u0435\u0442 \u043E\u0434\u043D\u0443
+        \u0446\u0435\u043B\u044C."
+      ButtonLabel: "\u041F\u0423\u041B\u0415\u041C\u0401\u0422"
+      UnlockLabel: "\u041F\u0423\u041B\u0415\u041C\u0401\u0422"
+      TemplateId: template.weapon.gun
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 1
+      UnlockGold: 0
+      VisualStyle: 1
+      Attack: 0
+      Stats:
+        Kind: 1
+        Cost: 40
+        MaxHealth: 55
+        BuildSeconds: 1.4
+        Range: 8
+        Damage: 12
+        ShotInterval: 0.42
+        Radius: 0.1
+        FlightSeconds: 0.8
+        MaxPierce: 1
+        ConeAngleDegrees: 90
+        MaxTargets: 8
+        JumpRange: 0
+        SlowSpeedMultiplier: 1
+        SlowDuration: 0
+      Load: 4
+      AssemblyCredit: 16
+      MinimumLineRadius: 0
+      MinimumRadialRange: 0
+      MinimumRange: 0
+      MaximumFootprintAspectRatio: 3
+      EffectIds: []
+      LegacyKind: 1
+    - Id: weapon.piercer
+      Name: "\u041F\u0440\u043E\u0431\u0438\u0432\u0430\u044E\u0449\u0430\u044F \u043F\u0443\u0448\u043A\u0430"
+      Description: "\u041B\u0438\u043D\u0435\u0439\u043D\u044B\u0439 \u0432\u044B\u0441\u0442\u0440\u0435\u043B
+        \u043F\u043E\u0440\u0430\u0436\u0430\u0435\u0442 \u043A\u043E\u043D\u0435\u0447\u043D\u043E\u0435
+        \u0447\u0438\u0441\u043B\u043E \u0446\u0435\u043B\u0435\u0439; \u0437\u0430\u0449\u0438\u0442\u0430
+        \u0443\u0447\u0438\u0442\u044B\u0432\u0430\u0435\u0442\u0441\u044F."
+      ButtonLabel: "\u041F\u0420\u041E\u0411\u041E\u0419"
+      UnlockLabel: "\u041F\u0420\u041E\u0411\u041E\u0419"
+      TemplateId: template.weapon.piercer
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 2
+      UnlockGold: 0
+      VisualStyle: 1
+      Attack: 1
+      Stats:
+        Kind: 2
+        Cost: 65
+        MaxHealth: 50
+        BuildSeconds: 1.9
+        Range: 12
+        Damage: 18
+        ShotInterval: 1.05
+        Radius: 0.38
+        FlightSeconds: 0.8
+        MaxPierce: 7
+        ConeAngleDegrees: 90
+        MaxTargets: 8
+        JumpRange: 0
+        SlowSpeedMultiplier: 1
+        SlowDuration: 0
+      Load: 6
+      AssemblyCredit: 16
+      MinimumLineRadius: 0.2
+      MinimumRadialRange: 0
+      MinimumRange: 0
+      MaximumFootprintAspectRatio: 3
+      EffectIds: []
+      LegacyKind: 2
+    - Id: weapon.mortar
+      Name: "\u041C\u043E\u0440\u0442\u0438\u0440\u0430"
+      Description: "\u0423\u0434\u0430\u0440 \u043F\u043E \u0437\u0430\u0444\u0438\u043A\u0441\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0439
+        \u0442\u043E\u0447\u043A\u0435 \u0441 \u0437\u0430\u0434\u0435\u0440\u0436\u043A\u043E\u0439.
+        \u0411\u044B\u0441\u0442\u0440\u0430\u044F \u0446\u0435\u043B\u044C \u043C\u043E\u0436\u0435\u0442
+        \u0443\u0439\u0442\u0438."
+      ButtonLabel: "\u041C\u041E\u0420\u0422\u0418\u0420\u0410"
+      UnlockLabel: "\u041C\u041E\u0420\u0422\u0418\u0420\u0410"
+      TemplateId: template.weapon.mortar
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 3
+      UnlockGold: 0
+      VisualStyle: 1
+      Attack: 2
+      Stats:
+        Kind: 3
+        Cost: 90
+        MaxHealth: 60
+        BuildSeconds: 2.4
+        Range: 18
+        Damage: 25
+        ShotInterval: 1.8
+        Radius: 2.4
+        FlightSeconds: 0.8
+        MaxPierce: 1
+        ConeAngleDegrees: 90
+        MaxTargets: 8
+        JumpRange: 0
+        SlowSpeedMultiplier: 1
+        SlowDuration: 0
+      Load: 7
+      AssemblyCredit: 16
+      MinimumLineRadius: 0
+      MinimumRadialRange: 0
+      MinimumRange: 6
+      MaximumFootprintAspectRatio: 3
+      EffectIds: []
+      LegacyKind: 3
+    - Id: weapon.fan
+      Name: "\u0412\u0435\u0435\u0440\u043D\u044B\u0439 \u0441\u0442\u0432\u043E\u043B"
+      Description: "\u041A\u043E\u0440\u043E\u0442\u043A\u0438\u0439 \u0448\u0438\u0440\u043E\u043A\u0438\u0439
+        \u043A\u043E\u043D\u0443\u0441 \u0441 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u043D\u044B\u043C
+        \u0447\u0438\u0441\u043B\u043E\u043C \u0446\u0435\u043B\u0435\u0439. \u0422\u0440\u0435\u0431\u0443\u0435\u0442
+        \u0431\u043B\u0438\u0437\u043A\u043E\u0433\u043E \u0440\u0430\u0437\u043C\u0435\u0449\u0435\u043D\u0438\u044F."
+      ButtonLabel: "\u0412\u0415\u0415\u0420"
+      UnlockLabel: "\u0412\u0415\u0415\u0420"
+      TemplateId: template.weapon.fan
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 8
+      UnlockGold: 60
+      VisualStyle: 1
+      Attack: 3
+      Stats:
+        Kind: 5
+        Cost: 70
+        MaxHealth: 55
+        BuildSeconds: 1.6
+        Range: 6
+        Damage: 10
+        ShotInterval: 1
+        Radius: 0.1
+        FlightSeconds: 0.8
+        MaxPierce: 1
+        ConeAngleDegrees: 90
+        MaxTargets: 8
+        JumpRange: 0
+        SlowSpeedMultiplier: 1
+        SlowDuration: 0
+      Load: 5
+      AssemblyCredit: 16
+      MinimumLineRadius: 0
+      MinimumRadialRange: 0
+      MinimumRange: 0
+      MaximumFootprintAspectRatio: 3
+      EffectIds: []
+      LegacyKind: 5
+    - Id: weapon.ricochet
+      Name: "\u0420\u0438\u043A\u043E\u0448\u0435\u0442"
+      Description: "\u0426\u0435\u043F\u043E\u0447\u043A\u0430 \u043F\u043E\u043F\u0430\u0434\u0430\u043D\u0438\u0439
+        \u043C\u0435\u0436\u0434\u0443 \u0431\u043B\u0438\u0437\u043A\u0438\u043C\u0438
+        \u0446\u0435\u043B\u044F\u043C\u0438. \u041A\u0430\u0436\u0434\u0430\u044F
+        \u0446\u0435\u043B\u044C \u043F\u043E\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F
+        \u043E\u0434\u0438\u043D \u0440\u0430\u0437; \u0437\u0430\u0449\u0438\u0442\u0430
+        \u0443\u0447\u0438\u0442\u044B\u0432\u0430\u0435\u0442\u0441\u044F."
+      ButtonLabel: "\u0420\u0418\u041A\u041E\u0428\u0415\u0422"
+      UnlockLabel: "\u0420\u0418\u041A\u041E\u0428\u0415\u0422"
+      TemplateId: template.weapon.ricochet
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 9
+      UnlockGold: 60
+      VisualStyle: 1
+      Attack: 4
+      Stats:
+        Kind: 6
+        Cost: 65
+        MaxHealth: 55
+        BuildSeconds: 1.6
+        Range: 10
+        Damage: 12
+        ShotInterval: 0.85
+        Radius: 0.1
+        FlightSeconds: 0.8
+        MaxPierce: 1
+        ConeAngleDegrees: 90
+        MaxTargets: 4
+        JumpRange: 3
+        SlowSpeedMultiplier: 1
+        SlowDuration: 0
+      Load: 5
+      AssemblyCredit: 16
+      MinimumLineRadius: 0
+      MinimumRadialRange: 0
+      MinimumRange: 0
+      MaximumFootprintAspectRatio: 3
+      EffectIds: []
+      LegacyKind: 6
+    - Id: weapon.stapler
+      Name: "\u0421\u0442\u0435\u043F\u043B\u0435\u0440"
+      Description: "\u041D\u0435\u0431\u043E\u043B\u044C\u0448\u043E\u0439 \u0443\u0440\u043E\u043D
+        \u0438 \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u0435
+        \u0437\u0430\u043C\u0435\u0434\u043B\u0435\u043D\u0438\u0435 \u0446\u0435\u043B\u0438.
+        \u0421 \u0441\u0438\u043D\u0438\u043C\u0438 \u0447\u0435\u0440\u043D\u0438\u043B\u0430\u043C\u0438
+        \u0434\u0435\u0439\u0441\u0442\u0432\u0443\u0435\u0442 \u0441\u0438\u043B\u044C\u043D\u0435\u0439\u0448\u0435\u0435
+        \u0437\u0430\u043C\u0435\u0434\u043B\u0435\u043D\u0438\u0435."
+      ButtonLabel: "\u0421\u041A\u0420\u0415\u041F\u041A\u0418"
+      UnlockLabel: "\u0421\u041A\u0420\u0415\u041F\u041A\u0418"
+      TemplateId: template.weapon.stapler
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 10
+      UnlockGold: 40
+      VisualStyle: 1
+      Attack: 0
+      Stats:
+        Kind: 7
+        Cost: 35
+        MaxHealth: 55
+        BuildSeconds: 1.2
+        Range: 9
+        Damage: 4
+        ShotInterval: 0.65
+        Radius: 0.1
+        FlightSeconds: 0.8
+        MaxPierce: 1
+        ConeAngleDegrees: 90
+        MaxTargets: 8
+        JumpRange: 0
+        SlowSpeedMultiplier: 0.8
+        SlowDuration: 2
+      Load: 3
+      AssemblyCredit: 16
+      MinimumLineRadius: 0
+      MinimumRadialRange: 0
+      MinimumRange: 0
+      MaximumFootprintAspectRatio: 3
+      EffectIds:
+      - effect.stapler.slow
+      LegacyKind: 7
+    - Id: weapon.blotter
+      Name: "\u041F\u0440\u043E\u043C\u043E\u043A\u0430\u0448\u043A\u0430"
+      Description: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438
+        \u043E\u0447\u0438\u0449\u0430\u0435\u0442 \u043A\u043B\u044F\u043A\u0441\u044B
+        \u0432 \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0439 \u043E\u0431\u043B\u0430\u0441\u0442\u0438.
+        \u041D\u0435 \u043D\u0430\u043D\u043E\u0441\u0438\u0442 \u0443\u0440\u043E\u043D
+        \u0432\u0440\u0430\u0433\u0430\u043C \u0438 \u0434\u0435\u0439\u0441\u0442\u0432\u0443\u0435\u0442
+        \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u043E \u043E\u0442 \u0440\u0443\u0447\u043D\u043E\u0439
+        \u043F\u0440\u043E\u043C\u043E\u043A\u0430\u0448\u043A\u0438."
+      ButtonLabel: "\u041F\u0420\u041E\u041C\u041E\u041A\u0410\u0428\u041A\u0410"
+      UnlockLabel: "\u041F\u0420\u041E\u041C\u041E\u041A\u0410\u0428\u041A\u0410"
+      TemplateId: template.weapon.blotter
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 11
+      UnlockGold: 40
+      VisualStyle: 1
+      Attack: 6
+      Stats:
+        Kind: 8
+        Cost: 30
+        MaxHealth: 55
+        BuildSeconds: 1.2
+        Range: 9
+        Damage: 0
+        ShotInterval: 2
+        Radius: 1.5
+        FlightSeconds: 0.8
+        MaxPierce: 1
+        ConeAngleDegrees: 90
+        MaxTargets: 8
+        JumpRange: 0
+        SlowSpeedMultiplier: 1
+        SlowDuration: 0
+      Load: 3
+      AssemblyCredit: 16
+      MinimumLineRadius: 0
+      MinimumRadialRange: 0
+      MinimumRange: 0
+      MaximumFootprintAspectRatio: 3
+      EffectIds: []
+      LegacyKind: 8
+    Modules:
+    - Id: module.armor
+      Name: "\u0411\u0440\u043E\u043D\u0435\u043F\u043B\u0430\u0441\u0442\u0438\u043D\u044B"
+      Description: "\u041F\u043E\u0432\u044B\u0448\u0430\u044E\u0442 \u0441\u0442\u043E\u0439\u043A\u043E\u0441\u0442\u044C
+        \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u044F \u043A \u0432\u0440\u0430\u0436\u0435\u0441\u043A\u043E\u043C\u0443
+        \u0443\u0440\u043E\u043D\u0443."
+      ButtonLabel: "\u0411\u0420\u041E\u041D\u042F"
+      UnlockLabel: "\u0411\u0420\u041E\u041D\u042F"
+      TemplateId: template.module.armor
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 4
+      UnlockGold: 0
+      VisualStyle: 1
+      Load: 3
+      Cost: 18
+      BuildSeconds: 0.25
+      Repeatable: 0
+      ExclusiveGroup: 
+      AllowedChassisIds: []
+      AllowedAttacks: 
+      Modifiers:
+      - Stat: 0
+        Operation: 2
+        Scope: 0
+        MountIndex: 0
+        Value: 1
+      - Stat: 1
+        Operation: 0
+        Scope: 0
+        MountIndex: 0
+        Value: 0.25
+      LegacyModule: 1
+      SlotKind: 1
+    - Id: module.feed
+      Name: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u043D\u0430\u044F \u043F\u043E\u0434\u0430\u0447\u0430"
+      Description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
+        \u043E\u0431\u0449\u0443\u044E \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C
+        \u043F\u043E\u0434\u0430\u0447\u0438 \u043A \u043E\u0440\u0443\u0436\u0438\u044E."
+      ButtonLabel: "\u041F\u041E\u0414\u0410\u0427\u0410"
+      UnlockLabel: "\u041F\u041E\u0414\u0410\u0427\u0410"
+      TemplateId: template.module.feed
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 6
+      UnlockGold: 60
+      VisualStyle: 1
+      Load: 2
+      Cost: 16
+      BuildSeconds: 0.25
+      Repeatable: 0
+      ExclusiveGroup: 
+      AllowedChassisIds: []
+      AllowedAttacks: 
+      Modifiers:
+      - Stat: 4
+        Operation: 2
+        Scope: 1
+        MountIndex: 0
+        Value: 1.15
+      LegacyModule: 2
+      SlotKind: 0
+    - Id: module.tracking
+      Name: "\u0411\u044B\u0441\u0442\u0440\u043E\u0435 \u043D\u0430\u0432\u0435\u0434\u0435\u043D\u0438\u0435"
+      Description: "\u0421\u043E\u043A\u0440\u0430\u0449\u0430\u0435\u0442 \u0432\u0440\u0435\u043C\u044F
+        \u0437\u0430\u0445\u0432\u0430\u0442\u0430 \u043D\u043E\u0432\u043E\u0439
+        \u0446\u0435\u043B\u0438."
+      ButtonLabel: "\u041D\u0410\u0412\u0415\u0414\u0415\u041D\u0418\u0415"
+      UnlockLabel: "\u041D\u0410\u0412\u0415\u0414\u0415\u041D\u0418\u0415"
+      TemplateId: template.module.tracking
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 7
+      UnlockGold: 60
+      VisualStyle: 1
+      Load: 2
+      Cost: 14
+      BuildSeconds: 0.25
+      Repeatable: 0
+      ExclusiveGroup: 
+      AllowedChassisIds: []
+      AllowedAttacks: 
+      Modifiers:
+      - Stat: 5
+        Operation: 0
+        Scope: 1
+        MountIndex: 0
+        Value: 0.08
+      LegacyModule: 4
+      SlotKind: 0
+    - Id: module.rail
+      Name: "\u041D\u0430\u043F\u0440\u0430\u0432\u043B\u044F\u044E\u0449\u0430\u044F"
+      Description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
+        \u0434\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u044C \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044B\u0445
+        \u0434\u0435\u0442\u0430\u043B\u0435\u0439, \u043D\u043E \u0443\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
+        \u0438\u043D\u0442\u0435\u0440\u0432\u0430\u043B \u043C\u0435\u0436\u0434\u0443
+        \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044F\u043C\u0438. \u0417\u0430\u043D\u0438\u043C\u0430\u0435\u0442
+        \u043D\u0430\u0433\u0440\u0443\u0437\u043A\u0443 \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u044F."
+      ButtonLabel: "\u041D\u0410\u041F\u0420\u0410\u0412\u041B."
+      UnlockLabel: "\u041D\u0410\u041F\u0420\u0410\u0412\u041B\u042F\u042E\u0429\u0410\u042F"
+      TemplateId: template.module.rail
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 12
+      UnlockGold: 60
+      VisualStyle: 1
+      Load: 2
+      Cost: 20
+      BuildSeconds: 0.25
+      Repeatable: 0
+      ExclusiveGroup: 
+      AllowedChassisIds: []
+      AllowedAttacks: 
+      Modifiers:
+      - Stat: 2
+        Operation: 2
+        Scope: 1
+        MountIndex: 0
+        Value: 1.25
+      - Stat: 3
+        Operation: 2
+        Scope: 1
+        MountIndex: 0
+        Value: 1.2
+      LegacyModule: 8
+      SlotKind: 0
+    Effects:
+    - Id: effect.stapler.slow
+      Kind: 1
+      Duration: 2
+      Strength: 0.8
+      TickSeconds: 0
+      IgnoresDefense: 0
+    - Id: effect.color.red
+      Kind: 0
+      Duration: 3
+      Strength: 1
+      TickSeconds: 0.25
+      IgnoresDefense: 1
+    - Id: effect.color.blue
+      Kind: 1
+      Duration: 3
+      Strength: 0.65
+      TickSeconds: 0
+      IgnoresDefense: 0
+    - Id: effect.color.green
+      Kind: 2
+      Duration: 3
+      Strength: 0.2
+      TickSeconds: 0
+      IgnoresDefense: 0
+    Templates:
+    - Id: template.chassis.standard
+      DisplayName: "\u041E\u0431\u044B\u0447\u043D\u043E\u0435 \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"
+      Revision: 1
+      PivotX: 0
+      PivotY: 0
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.3798828
+          Y: -0.26000977
+        - X: 0.3798828
+          Y: -0.26000977
+        - X: 0.3798828
+          Y: 0.26000977
+        - X: -0.3798828
+          Y: 0.26000977
+        - X: -0.3798828
+          Y: -0.26000977
+      - Points:
+        - X: -0.3100586
+          Y: -0.1899414
+        - X: 0.3100586
+          Y: -0.1899414
+        - X: 0.3100586
+          Y: 0.1899414
+        - X: -0.3100586
+          Y: 0.1899414
+        - X: -0.3100586
+          Y: -0.1899414
+    - Id: template.weapon.gun
+      DisplayName: "\u041F\u0443\u043B\u0435\u043C\u0451\u0442"
+      Revision: 1
+      PivotX: 0
+      PivotY: 0.04
+      Weight: 25
+      Contours:
+      - Points:
+        - X: 0.100097656
+          Y: 0
+        - X: 0.092285156
+          Y: 0.038330078
+        - X: 0.07080078
+          Y: 0.07080078
+        - X: 0.038330078
+          Y: 0.092285156
+        - X: 0
+          Y: 0.100097656
+        - X: -0.038330078
+          Y: 0.092285156
+        - X: -0.07080078
+          Y: 0.07080078
+        - X: -0.092285156
+          Y: 0.038330078
+        - X: -0.100097656
+          Y: 0
+        - X: -0.092285156
+          Y: -0.038330078
+        - X: -0.07080078
+          Y: -0.07080078
+        - X: -0.038330078
+          Y: -0.092285156
+        - X: 0
+          Y: -0.100097656
+        - X: 0.038330078
+          Y: -0.092285156
+        - X: 0.07080078
+          Y: -0.07080078
+        - X: 0.092285156
+          Y: -0.038330078
+        - X: 0.100097656
+          Y: 0
+      - Points:
+        - X: -0.05493164
+          Y: 0.020019531
+        - X: 0.05493164
+          Y: 0.020019531
+        - X: 0.05493164
+          Y: 0.44995117
+        - X: -0.05493164
+          Y: 0.44995117
+        - X: -0.05493164
+          Y: 0.020019531
+      - Points:
+        - X: -0.05493164
+          Y: 0.3400879
+        - X: 0.05493164
+          Y: 0.3400879
+    - Id: template.weapon.piercer
+      DisplayName: "\u041F\u0440\u043E\u0431\u0438\u0432\u0430\u044E\u0449\u0430\u044F
+        \u043F\u0443\u0448\u043A\u0430"
+      Revision: 1
+      PivotX: 0
+      PivotY: 0.04
+      Weight: 25
+      Contours:
+      - Points:
+        - X: 0.100097656
+          Y: 0
+        - X: 0.092285156
+          Y: 0.038330078
+        - X: 0.07080078
+          Y: 0.07080078
+        - X: 0.038330078
+          Y: 0.092285156
+        - X: 0
+          Y: 0.100097656
+        - X: -0.038330078
+          Y: 0.092285156
+        - X: -0.07080078
+          Y: 0.07080078
+        - X: -0.092285156
+          Y: 0.038330078
+        - X: -0.100097656
+          Y: 0
+        - X: -0.092285156
+          Y: -0.038330078
+        - X: -0.07080078
+          Y: -0.07080078
+        - X: -0.038330078
+          Y: -0.092285156
+        - X: 0
+          Y: -0.100097656
+        - X: 0.038330078
+          Y: -0.092285156
+        - X: 0.07080078
+          Y: -0.07080078
+        - X: 0.092285156
+          Y: -0.038330078
+        - X: 0.100097656
+          Y: 0
+      - Points:
+        - X: -0.064941406
+          Y: 0.010009766
+        - X: -0.064941406
+          Y: 0.3798828
+        - X: 0
+          Y: 0.5
+        - X: 0.064941406
+          Y: 0.3798828
+        - X: 0.064941406
+          Y: 0.010009766
+      - Points:
+        - X: 0
+          Y: 0.080078125
+        - X: 0
+          Y: 0.4099121
+    - Id: template.weapon.mortar
+      DisplayName: "\u041C\u043E\u0440\u0442\u0438\u0440\u0430"
+      Revision: 1
+      PivotX: 0
+      PivotY: 0.04
+      Weight: 25
+      Contours:
+      - Points:
+        - X: 0.12988281
+          Y: 0
+        - X: 0.12011719
+          Y: 0.049804688
+        - X: 0.092041016
+          Y: 0.092041016
+        - X: 0.049804688
+          Y: 0.12011719
+        - X: 0
+          Y: 0.12988281
+        - X: -0.049804688
+          Y: 0.12011719
+        - X: -0.092041016
+          Y: 0.092041016
+        - X: -0.12011719
+          Y: 0.049804688
+        - X: -0.12988281
+          Y: 0
+        - X: -0.12011719
+          Y: -0.049804688
+        - X: -0.092041016
+          Y: -0.092041016
+        - X: -0.049804688
+          Y: -0.12011719
+        - X: 0
+          Y: -0.12988281
+        - X: 0.049804688
+          Y: -0.12011719
+        - X: 0.092041016
+          Y: -0.092041016
+        - X: 0.12011719
+          Y: -0.049804688
+        - X: 0.12988281
+          Y: 0
+      - Points:
+        - X: -0.114990234
+          Y: 0.020019531
+        - X: 0.114990234
+          Y: 0.020019531
+        - X: 0.114990234
+          Y: 0.3100586
+        - X: -0.114990234
+          Y: 0.3100586
+        - X: -0.114990234
+          Y: 0.020019531
+      - Points:
+        - X: 0.114990234
+          Y: 0.3100586
+        - X: 0.10620117
+          Y: 0.3540039
+        - X: 0.08129883
+          Y: 0.39135742
+        - X: 0.043945312
+          Y: 0.41625977
+        - X: 0
+          Y: 0.42504883
+        - X: -0.043945312
+          Y: 0.41625977
+        - X: -0.08129883
+          Y: 0.39135742
+        - X: -0.10620117
+          Y: 0.3540039
+        - X: -0.114990234
+          Y: 0.3100586
+        - X: -0.10620117
+          Y: 0.26611328
+        - X: -0.08129883
+          Y: 0.22875977
+        - X: -0.043945312
+          Y: 0.20385742
+        - X: 0
+          Y: 0.19506836
+        - X: 0.043945312
+          Y: 0.20385742
+        - X: 0.08129883
+          Y: 0.22875977
+        - X: 0.10620117
+          Y: 0.26611328
+        - X: 0.114990234
+          Y: 0.3100586
+    - Id: template.module.armor
+      DisplayName: "\u0411\u0440\u043E\u043D\u0435\u043F\u043B\u0430\u0441\u0442\u0438\u043D\u044B"
+      Revision: 1
+      PivotX: 0
+      PivotY: -0.08
+      Weight: 5
+      Contours:
+      - Points:
+        - X: -0.3798828
+          Y: -0.12011719
+        - X: -0.2199707
+          Y: -0.19995117
+        - X: 0
+          Y: -0.14990234
+        - X: 0.2199707
+          Y: -0.19995117
+        - X: 0.3798828
+          Y: -0.12011719
+      - Points:
+        - X: -0.3798828
+          Y: 0.12011719
+        - X: -0.2199707
+          Y: 0.19995117
+        - X: 0
+          Y: 0.14990234
+        - X: 0.2199707
+          Y: 0.19995117
+        - X: 0.3798828
+          Y: 0.12011719
+    - Id: template.chassis.heavy
+      DisplayName: "\u0422\u044F\u0436\u0451\u043B\u043E\u0435 \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"
+      Revision: 1
+      PivotX: 0
+      PivotY: 0
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.4399414
+          Y: -0.32006836
+        - X: 0.4399414
+          Y: -0.32006836
+        - X: 0.4399414
+          Y: 0.32006836
+        - X: -0.4399414
+          Y: 0.32006836
+        - X: -0.4399414
+          Y: -0.32006836
+      - Points:
+        - X: -0.3701172
+          Y: -0.25
+        - X: 0.3701172
+          Y: -0.25
+        - X: 0.3701172
+          Y: 0.25
+        - X: -0.3701172
+          Y: 0.25
+        - X: -0.3701172
+          Y: -0.25
+    - Id: template.module.feed
+      DisplayName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u043D\u0430\u044F
+        \u043F\u043E\u0434\u0430\u0447\u0430"
+      Revision: 1
+      PivotX: 0
+      PivotY: -0.08
+      Weight: 5
+      Contours:
+      - Points:
+        - X: -0.12988281
+          Y: -0.12011719
+        - X: 0.12988281
+          Y: -0.12011719
+        - X: 0.12988281
+          Y: 0.12011719
+        - X: -0.12988281
+          Y: 0.12011719
+        - X: -0.12988281
+          Y: -0.12011719
+      - Points:
+        - X: -0.19995117
+          Y: -0.17993164
+        - X: -0.19995117
+          Y: 0.020019531
+        - X: -0.12988281
+          Y: 0.020019531
+      - Points:
+        - X: 0.19995117
+          Y: -0.17993164
+        - X: 0.19995117
+          Y: 0.020019531
+        - X: 0.12988281
+          Y: 0.020019531
+    - Id: template.module.tracking
+      DisplayName: "\u0411\u044B\u0441\u0442\u0440\u043E\u0435 \u043D\u0430\u0432\u0435\u0434\u0435\u043D\u0438\u0435"
+      Revision: 1
+      PivotX: 0
+      PivotY: -0.16
+      Weight: 5
+      Contours:
+      - Points:
+        - X: 0.12011719
+          Y: 0
+        - X: 0.110839844
+          Y: 0.045898438
+        - X: 0.08496094
+          Y: 0.08496094
+        - X: 0.045898438
+          Y: 0.110839844
+        - X: 0
+          Y: 0.12011719
+        - X: -0.045898438
+          Y: 0.110839844
+        - X: -0.08496094
+          Y: 0.08496094
+        - X: -0.110839844
+          Y: 0.045898438
+        - X: -0.12011719
+          Y: 0
+        - X: -0.110839844
+          Y: -0.045898438
+        - X: -0.08496094
+          Y: -0.08496094
+        - X: -0.045898438
+          Y: -0.110839844
+        - X: 0
+          Y: -0.12011719
+        - X: 0.045898438
+          Y: -0.110839844
+        - X: 0.08496094
+          Y: -0.08496094
+        - X: 0.110839844
+          Y: -0.045898438
+        - X: 0.12011719
+          Y: 0
+      - Points:
+        - X: -0.1899414
+          Y: 0
+        - X: -0.080078125
+          Y: 0
+      - Points:
+        - X: 0.080078125
+          Y: 0
+        - X: 0.1899414
+          Y: 0
+      - Points:
+        - X: 0
+          Y: -0.1899414
+        - X: 0
+          Y: -0.080078125
+      - Points:
+        - X: 0
+          Y: 0.080078125
+        - X: 0
+          Y: 0.1899414
+    - Id: template.weapon.fan
+      DisplayName: "\u0412\u0435\u0435\u0440\u043D\u044B\u0439 \u0441\u0442\u0432\u043E\u043B"
+      Revision: 1
+      PivotX: 0
+      PivotY: 0.04
+      Weight: 25
+      Contours:
+      - Points:
+        - X: 0.100097656
+          Y: 0
+        - X: 0.092285156
+          Y: 0.038330078
+        - X: 0.07080078
+          Y: 0.07080078
+        - X: 0.038330078
+          Y: 0.092285156
+        - X: 0
+          Y: 0.100097656
+        - X: -0.038330078
+          Y: 0.092285156
+        - X: -0.07080078
+          Y: 0.07080078
+        - X: -0.092285156
+          Y: 0.038330078
+        - X: -0.100097656
+          Y: 0
+        - X: -0.092285156
+          Y: -0.038330078
+        - X: -0.07080078
+          Y: -0.07080078
+        - X: -0.038330078
+          Y: -0.092285156
+        - X: 0
+          Y: -0.100097656
+        - X: 0.038330078
+          Y: -0.092285156
+        - X: 0.07080078
+          Y: -0.07080078
+        - X: 0.092285156
+          Y: -0.038330078
+        - X: 0.100097656
+          Y: 0
+      - Points:
+        - X: -0.05493164
+          Y: 0.020019531
+        - X: -0.19995117
+          Y: 0.35009766
+        - X: 0.19995117
+          Y: 0.35009766
+        - X: 0.05493164
+          Y: 0.020019531
+      - Points:
+        - X: -0.14501953
+          Y: 0.25
+        - X: 0.14501953
+          Y: 0.25
+    - Id: template.weapon.ricochet
+      DisplayName: "\u0420\u0438\u043A\u043E\u0448\u0435\u0442"
+      Revision: 1
+      PivotX: 0
+      PivotY: 0.04
+      Weight: 25
+      Contours:
+      - Points:
+        - X: 0.100097656
+          Y: 0
+        - X: 0.092285156
+          Y: 0.038330078
+        - X: 0.07080078
+          Y: 0.07080078
+        - X: 0.038330078
+          Y: 0.092285156
+        - X: 0
+          Y: 0.100097656
+        - X: -0.038330078
+          Y: 0.092285156
+        - X: -0.07080078
+          Y: 0.07080078
+        - X: -0.092285156
+          Y: 0.038330078
+        - X: -0.100097656
+          Y: 0
+        - X: -0.092285156
+          Y: -0.038330078
+        - X: -0.07080078
+          Y: -0.07080078
+        - X: -0.038330078
+          Y: -0.092285156
+        - X: 0
+          Y: -0.100097656
+        - X: 0.038330078
+          Y: -0.092285156
+        - X: 0.07080078
+          Y: -0.07080078
+        - X: 0.092285156
+          Y: -0.038330078
+        - X: 0.100097656
+          Y: 0
+      - Points:
+        - X: -0.05493164
+          Y: 0.020019531
+        - X: -0.14990234
+          Y: 0.13989258
+        - X: -0.044921875
+          Y: 0.25
+        - X: -0.14990234
+          Y: 0.36010742
+        - X: 0
+          Y: 0.5
+        - X: 0.14990234
+          Y: 0.36010742
+        - X: 0.044921875
+          Y: 0.25
+        - X: 0.14990234
+          Y: 0.13989258
+        - X: 0.05493164
+          Y: 0.020019531
+      - Points:
+        - X: -0.080078125
+          Y: 0.25
+        - X: 0.080078125
+          Y: 0.25
+    - Id: template.weapon.stapler
+      DisplayName: "\u0421\u0442\u0435\u043F\u043B\u0435\u0440"
+      Revision: 1
+      PivotX: 0
+      PivotY: 0.04
+      Weight: 25
+      Contours:
+      - Points:
+        - X: 0.100097656
+          Y: 0
+        - X: 0.092285156
+          Y: 0.038330078
+        - X: 0.07080078
+          Y: 0.07080078
+        - X: 0.038330078
+          Y: 0.092285156
+        - X: 0
+          Y: 0.100097656
+        - X: -0.038330078
+          Y: 0.092285156
+        - X: -0.07080078
+          Y: 0.07080078
+        - X: -0.092285156
+          Y: 0.038330078
+        - X: -0.100097656
+          Y: 0
+        - X: -0.092285156
+          Y: -0.038330078
+        - X: -0.07080078
+          Y: -0.07080078
+        - X: -0.038330078
+          Y: -0.092285156
+        - X: 0
+          Y: -0.100097656
+        - X: 0.038330078
+          Y: -0.092285156
+        - X: 0.07080078
+          Y: -0.07080078
+        - X: 0.092285156
+          Y: -0.038330078
+        - X: 0.100097656
+          Y: 0
+      - Points:
+        - X: -0.07006836
+          Y: 0.020019531
+        - X: 0.07006836
+          Y: 0.020019531
+        - X: 0.07006836
+          Y: 0.30004883
+        - X: -0.07006836
+          Y: 0.30004883
+        - X: -0.07006836
+          Y: 0.020019531
+      - Points:
+        - X: -0.16992188
+          Y: 0.3400879
+        - X: -0.16992188
+          Y: 0.48999023
+        - X: 0.16992188
+          Y: 0.48999023
+        - X: 0.16992188
+          Y: 0.3400879
+      - Points:
+        - X: -0.09008789
+          Y: 0.3400879
+        - X: -0.09008789
+          Y: 0.41992188
+        - X: 0.09008789
+          Y: 0.41992188
+        - X: 0.09008789
+          Y: 0.3400879
+    - Id: template.weapon.blotter
+      DisplayName: "\u041F\u0440\u043E\u043C\u043E\u043A\u0430\u0448\u043A\u0430"
+      Revision: 1
+      PivotX: 0
+      PivotY: 0.04
+      Weight: 25
+      Contours:
+      - Points:
+        - X: 0.100097656
+          Y: 0
+        - X: 0.092285156
+          Y: 0.038330078
+        - X: 0.07080078
+          Y: 0.07080078
+        - X: 0.038330078
+          Y: 0.092285156
+        - X: 0
+          Y: 0.100097656
+        - X: -0.038330078
+          Y: 0.092285156
+        - X: -0.07080078
+          Y: 0.07080078
+        - X: -0.092285156
+          Y: 0.038330078
+        - X: -0.100097656
+          Y: 0
+        - X: -0.092285156
+          Y: -0.038330078
+        - X: -0.07080078
+          Y: -0.07080078
+        - X: -0.038330078
+          Y: -0.092285156
+        - X: 0
+          Y: -0.100097656
+        - X: 0.038330078
+          Y: -0.092285156
+        - X: 0.07080078
+          Y: -0.07080078
+        - X: 0.092285156
+          Y: -0.038330078
+        - X: 0.100097656
+          Y: 0
+      - Points:
+        - X: -0.064941406
+          Y: 0.020019531
+        - X: 0.064941406
+          Y: 0.020019531
+        - X: 0.064941406
+          Y: 0.23999023
+        - X: -0.064941406
+          Y: 0.23999023
+        - X: -0.064941406
+          Y: 0.020019531
+      - Points:
+        - X: -0.23999023
+          Y: 0.25
+        - X: -0.23999023
+          Y: 0.44995117
+        - X: 0.23999023
+          Y: 0.44995117
+        - X: 0.23999023
+          Y: 0.25
+        - X: 0.15991211
+          Y: 0.20996094
+        - X: 0.080078125
+          Y: 0.25
+        - X: 0
+          Y: 0.20996094
+        - X: -0.080078125
+          Y: 0.25
+        - X: -0.15991211
+          Y: 0.20996094
+        - X: -0.23999023
+          Y: 0.25
+      - Points:
+        - X: -0.17993164
+          Y: 0.32006836
+        - X: 0.17993164
+          Y: 0.32006836
+      - Points:
+        - X: -0.17993164
+          Y: 0.38989258
+        - X: 0.17993164
+          Y: 0.38989258
+    - Id: template.module.rail
+      DisplayName: "\u041D\u0430\u043F\u0440\u0430\u0432\u043B\u044F\u044E\u0449\u0430\u044F"
+      Revision: 1
+      PivotX: 0
+      PivotY: 0
+      Weight: 5
+      Contours:
+      - Points:
+        - X: -0.12011719
+          Y: -0.30004883
+        - X: -0.12011719
+          Y: 0.5800781
+      - Points:
+        - X: 0.12011719
+          Y: -0.30004883
+        - X: 0.12011719
+          Y: 0.5800781
+      - Points:
+        - X: -0.15991211
+          Y: -0.19995117
+        - X: 0.15991211
+          Y: -0.19995117
+      - Points:
+        - X: -0.15991211
+          Y: 0.13989258
+        - X: 0.15991211
+          Y: 0.13989258
+    - Id: template.chassis.precision
+      DisplayName: "\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0435
+        \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"
+      Revision: 1
+      PivotX: 0
+      PivotY: 0
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.43
+          Y: -0.32
+        - X: 0.43
+          Y: -0.32
+        - X: 0.49
+          Y: 0.06
+        - X: 0.28
+          Y: 0.36
+        - X: -0.28
+          Y: 0.36
+        - X: -0.49
+          Y: 0.06
+        - X: -0.43
+          Y: -0.32
+      - Points:
+        - X: -0.22
+          Y: -0.22
+        - X: -0.22
+          Y: 0.24
+        - X: 0.22
+          Y: 0.24
+        - X: 0.22
+          Y: -0.22
+      - Points:
+        - X: -0.33
+          Y: -0.1
+        - X: 0.33
+          Y: -0.1
+    - Id: template.chassis.battery
+      DisplayName: "\u0411\u0430\u0442\u0430\u0440\u0435\u044F"
+      Revision: 1
+      PivotX: 0
+      PivotY: 0
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.43
+          Y: -0.32
+        - X: 0.43
+          Y: -0.32
+        - X: 0.49
+          Y: 0.06
+        - X: 0.28
+          Y: 0.36
+        - X: -0.28
+          Y: 0.36
+        - X: -0.49
+          Y: 0.06
+        - X: -0.43
+          Y: -0.32
+      - Points:
+        - X: -0.4
+          Y: 0.02
+        - X: 0.4
+          Y: 0.02
+      - Points:
+        - X: -0.28
+          Y: -0.25
+        - X: -0.28
+          Y: 0.25
+      - Points:
+        - X: 0
+          Y: -0.25
+        - X: 0
+          Y: 0.25
+      - Points:
+        - X: 0.28
+          Y: -0.25
+        - X: 0.28
+          Y: 0.25
+    StartingPages:
+    - Id: fixture.start.0
+      Name: "\u0422\u0435\u0441\u0442\u043E\u0432\u044B\u0439 \u0447\u0435\u0440\u0442\u0451\u0436
+        1"
+      ChassisId: chassis.standard
+      FirstWeaponId: weapon.gun
+      SecondWeaponId: 
+      Modules: []
+      WeaponMounts: []
+      Slot: 0
+    - Id: fixture.start.1
+      Name: "\u0422\u0435\u0441\u0442\u043E\u0432\u044B\u0439 \u0447\u0435\u0440\u0442\u0451\u0436
+        2"
+      ChassisId: chassis.standard
+      FirstWeaponId: weapon.gun
+      SecondWeaponId: 
+      Modules: []
+      WeaponMounts: []
+      Slot: 1
+    - Id: fixture.start.2
+      Name: "\u0422\u0435\u0441\u0442\u043E\u0432\u044B\u0439 \u0447\u0435\u0440\u0442\u0451\u0436
+        3"
+      ChassisId: chassis.standard
+      FirstWeaponId: weapon.gun
+      SecondWeaponId: 
+      Modules: []
+      WeaponMounts: []
+      Slot: 2
+    - Id: fixture.start.3
+      Name: "\u0422\u0435\u0441\u0442\u043E\u0432\u044B\u0439 \u0447\u0435\u0440\u0442\u0451\u0436
+        4"
+      ChassisId: chassis.standard
+      FirstWeaponId: weapon.gun
+      SecondWeaponId: 
+      Modules: []
+      WeaponMounts: []
+      Slot: 3
+    Assessment:
+      Revision: 2
+      Tolerance: 0.06
+      CompletionThreshold: 0.95
+      PrecisionThreshold: 0.95
+    RedEffectId: effect.color.red
+    BlueEffectId: effect.color.blue
+    GreenEffectId: effect.color.green
+  presets: []

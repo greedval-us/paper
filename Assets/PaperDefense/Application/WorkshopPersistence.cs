@@ -23,14 +23,14 @@ namespace PaperDefense.Application
         {
             ProfileLoadResult result = Store(path).Load();
             LastError = result.CanWrite ? "" : result.Message;
-            if (!result.CanWrite) Debug.LogWarning("Не удалось прочитать альбом: " + result.Message);
+            if (!result.CanWrite) Debug.LogWarning(TextResourcesAsset.Default.Resolve(UserText.Message("copy.b1363f3e18799a09", result.Message)));
             return result.Profile;
         }
         public static bool Save(WorkshopProfile profile,string path=null)
         {
             ProfileSaveResult result = Store(path).Save(profile);
             LastError = result.Success ? "" : result.Message;
-            if (!result.Success) Debug.LogWarning("Не удалось сохранить альбом: " + result.Message);
+            if (!result.Success) Debug.LogWarning(TextResourcesAsset.Default.Resolve(UserText.Message("copy.a4a09f3638405683", result.Message)));
             return result.Success;
         }
     }

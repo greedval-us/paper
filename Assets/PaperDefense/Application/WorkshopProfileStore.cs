@@ -44,11 +44,12 @@ namespace PaperDefense.Application
         bool loaded, protectedSource;
         string protectionMessage = "";
         SourceRead compatibleSource;
+        public string LastDiagnostic { get; private set; }
         const int MaximumJsonBytes = 32 * 1024 * 1024;
 
         public WorkshopProfileStore(string path, IWorkshopProfileIO io = null)
         {
-            if (string.IsNullOrEmpty(path)) throw new ArgumentException("Нужен путь профиля.", nameof(path));
+            if (string.IsNullOrEmpty(path)) throw new ArgumentException(UserText.Message("copy.4f8c45706d1efa1c"), nameof(path));
             this.path = Path.GetFullPath(path);
             this.io = io ?? new WorkshopProfileFileIO();
         }
@@ -73,7 +74,7 @@ namespace PaperDefense.Application
         {
             if (!loaded) Load();
             if (protectedSource) return new ProfileSaveResult(false, protectionMessage);
-            if (profile == null) return new ProfileSaveResult(false, "Нет профиля для сохранения.");
+            if (profile == null) return new ProfileSaveResult(false, UserText.Message("copy.1d086d2bd6375b84"));
 
             string temporary = path + ".tmp-" + Guid.NewGuid().ToString("N");
             try
@@ -118,7 +119,9 @@ namespace PaperDefense.Application
             }
             catch (Exception error) when (IsExpectedFileError(error))
             {
-                return new ProfileSaveResult(false, "Не удалось сохранить альбом: " + error.Message);
+                LastDiagnostic = error.ToString();
+                return new ProfileSaveResult(false, UserText.Message(error is UnauthorizedAccessException
+                    ? "profile.error.write_access" : "profile.error.write"));
             }
             finally
             {
@@ -145,61 +148,65 @@ namespace PaperDefense.Application
                 compatibleSource = backup;
                 return new ProfileLoadResult(backup.Profile, ProfileLoadSource.Backup,
                     primary.Kind == SourceKind.Corrupt
-                        ? "Альбом восстановлен из резервной копии. Повреждённый исходник будет сохранён отдельно при записи."
-                        : "Основной файл отсутствует; альбом восстановлен из резервной копии.", true);
+                        ? UserText.Message("copy.080ccb22e8fd751f")
+                        : UserText.Message("copy.4faf04ac2281dfea"), true);
             }
             if (primary.Kind == SourceKind.Missing && backup.Kind == SourceKind.Missing)
                 return new ProfileLoadResult(new WorkshopProfile(), ProfileLoadSource.NewProfile, "", true);
-            return Recovery("Запись защищена: " + primary.Message + " " + backup.Message);
+            return Recovery(UserText.Message("copy.9a7f65a4cb32092f", primary.Message, backup.Message));
         }
 
         static ProfileLoadResult Recovery(string message) => new ProfileLoadResult(new WorkshopProfile(),
-            ProfileLoadSource.RecoveryRequired, string.IsNullOrEmpty(message) ? "Профиль требует восстановления; запись защищена." : message, false);
+            ProfileLoadSource.RecoveryRequired, string.IsNullOrEmpty(message) ? UserText.Message("copy.17e344fd85f0edd1") : message, false);
 
         SourceRead Read(string file)
         {
             string json;
             try { json = io.ReadAllText(file); }
-            catch (FileNotFoundException) { return new SourceRead(SourceKind.Missing, null, "Файл отсутствует."); }
-            catch (DirectoryNotFoundException) { return new SourceRead(SourceKind.Missing, null, "Каталог отсутствует."); }
+            catch (FileNotFoundException) { return new SourceRead(SourceKind.Missing, null, UserText.Message("copy.0120c5597f3a306e")); }
+            catch (DirectoryNotFoundException) { return new SourceRead(SourceKind.Missing, null, UserText.Message("copy.f73342db09eb3711")); }
             catch (Exception error) when (IsExpectedFileError(error))
-            { return new SourceRead(SourceKind.Failure, null, "Не удалось прочитать альбом; запись защищена: " + error.Message); }
+            {
+                LastDiagnostic = error.ToString();
+                return new SourceRead(SourceKind.Failure, null, UserText.Message(error is UnauthorizedAccessException
+                    ? "profile.error.read_access" : "profile.error.read"));
+            }
             if (json != null && Encoding.UTF8.GetByteCount(json) > MaximumJsonBytes)
-                return new SourceRead(SourceKind.Failure, null, "Профиль слишком большой для этой версии игры; запись защищена.");
+                return new SourceRead(SourceKind.Failure, null, UserText.Message("copy.6da2cfdd4088f27b"));
             try
             {
                 int version = ReadVersion(json);
                 if (version > WorkshopProfile.CurrentVersion)
-                    return new SourceRead(SourceKind.Future, null, "Альбом создан более новой версией игры; запись защищена.");
-                if (version < 1 || version > WorkshopProfile.CurrentVersion) throw new InvalidDataException("Неизвестная версия профиля.");
+                    return new SourceRead(SourceKind.Future, null, UserText.Message("copy.78db079a610f6075"));
+                if (version < 1 || version > WorkshopProfile.CurrentVersion) throw new InvalidDataException(UserText.Message("copy.0ecaed17b95a05bc"));
                 var data = JsonUtility.FromJson<WorkshopProfileData>(json);
-                if (data == null) throw new InvalidDataException("Пустые данные профиля.");
+                if (data == null) throw new InvalidDataException(UserText.Message("copy.46070c4c3dff7836"));
                 return new SourceRead(SourceKind.Valid, WorkshopProfile.FromData(data), "", version, json, file);
             }
             catch (NotSupportedException error)
-            { return new SourceRead(SourceKind.Future, null, "Более новый формат альбома; запись защищена: " + error.Message); }
+            { LastDiagnostic = error.ToString(); return new SourceRead(SourceKind.Future, null, UserText.Message("profile.error.future_schema")); }
             catch (Exception error) when (IsExpectedFileError(error))
-            { return new SourceRead(SourceKind.Corrupt, null, "Повреждённый альбом: " + error.Message); }
+            { LastDiagnostic = error.ToString(); return new SourceRead(SourceKind.Corrupt, null, UserText.Message("profile.error.corrupt")); }
         }
 
         static int ReadVersion(string json)
         {
             if (string.IsNullOrWhiteSpace(json) || Encoding.UTF8.GetByteCount(json) > MaximumJsonBytes)
-                throw new InvalidDataException("Профиль пуст или слишком большой.");
+                throw new InvalidDataException(UserText.Message("copy.c1ec68178b351e23"));
             string trimmed = json.Trim();
             if (trimmed[0] != '{' || trimmed[trimmed.Length - 1] != '}')
-                throw new InvalidDataException("Неверный формат профиля.");
+                throw new InvalidDataException(UserText.Message("copy.7cc1c8a34ac9f61d"));
             var version = JsonUtility.FromJson<VersionHeader>(json);
-            if (version == null) throw new InvalidDataException("Не указан формат профиля.");
+            if (version == null) throw new InvalidDataException(UserText.Message("copy.22aa0f221a9126a9"));
             return version.Version;
         }
 
         static void ValidateCandidate(string json, string expectedCanonical)
         {
-            if (ReadVersion(json) != WorkshopProfile.CurrentVersion) throw new InvalidDataException("Неверная версия кандидата профиля.");
+            if (ReadVersion(json) != WorkshopProfile.CurrentVersion) throw new InvalidDataException(UserText.Message("copy.2a929baad02aaaad"));
             var candidate = JsonUtility.FromJson<WorkshopProfileData>(json);
             if (candidate == null || JsonUtility.ToJson(candidate) != expectedCanonical)
-                throw new InvalidDataException("Проверка записанного кандидата профиля не пройдена.");
+                throw new InvalidDataException(UserText.Message("copy.5c3e3703a7f7927e"));
             WorkshopProfile.FromData(candidate);
         }
 
@@ -221,7 +228,7 @@ namespace PaperDefense.Application
                 io.Copy(source.File, temporaryOriginal);
                 string copied = io.ReadAllText(temporaryOriginal);
                 if (copied != source.Json || ReadVersion(copied) != source.Version)
-                    throw new InvalidDataException("Проверка исходной копии версии " + source.Version + " не пройдена.");
+                    throw new InvalidDataException(UserText.Message("copy.f3943c56f42d599a", source.Version));
                 io.Move(temporaryOriginal, original);
             }
             finally

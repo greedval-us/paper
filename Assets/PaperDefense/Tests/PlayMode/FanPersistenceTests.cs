@@ -46,7 +46,7 @@ namespace PaperDefense.Tests
             Assert.That(loaded.Profile.Album.Single(p => p.Id == "old-authored").Drawing.GeometryHash, Is.EqualTo(Lines().GeometryHash));
             Assert.That(store.Save(loaded.Profile).Success, Is.True);
             Assert.That(File.ReadAllBytes(path + ".v2-original"), Is.EqualTo(original));
-            Assert.That(JsonUtility.FromJson<WorkshopProfileData>(File.ReadAllText(path)).Version, Is.EqualTo(5));
+            Assert.That(JsonUtility.FromJson<WorkshopProfileData>(File.ReadAllText(path)).Version, Is.EqualTo(WorkshopProfile.CurrentVersion));
             loaded.Profile.GrantGold(1); Assert.That(store.Save(loaded.Profile).Success, Is.True);
             Assert.That(File.ReadAllBytes(path + ".v2-original"), Is.EqualTo(original));
             Assert.That(new WorkshopProfileStore(path).Load().Profile.Gold, Is.EqualTo(old.Gold + 1));

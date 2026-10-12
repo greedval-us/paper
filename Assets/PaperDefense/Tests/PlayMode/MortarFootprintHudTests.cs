@@ -100,7 +100,7 @@ namespace PaperDefense.Tests
                 click("Second Mortar");
                 var invalidPreview = run.PreviewBlueprint(hud.Draft);
                 Assert.That(invalidPreview.Valid, Is.False);
-                string reason = invalidPreview.Reason;
+                string reason = TextResourcesAsset.Default.Resolve(invalidPreview.Reason);
                 Assert.That(reason, Does.Contain("нагрузки"));
                 Assert.That(invalidPreview.Capacity, Is.EqualTo(capacity));
                 Assert.DoesNotThrow(() => click("Mortar footprint 0"));
@@ -151,7 +151,7 @@ namespace PaperDefense.Tests
                 var input = host.GetComponentsInChildren<InputField>(true).Single(field => field.name == "Blueprint name");
                 input.SetTextWithoutNotify("");
                 input.onEndEdit.Invoke("");
-                string reason = run.PreviewBlueprint(hud.Draft).Reason;
+                string reason = TextResourcesAsset.Default.Resolve(run.PreviewBlueprint(hud.Draft).Reason);
                 Assert.That(reason, Is.Not.Empty);
                 Assert.DoesNotThrow(() => click("Mortar footprint 0"));
                 Assert.That(hud.MortarFootprintEditor.Recording, Is.Null);

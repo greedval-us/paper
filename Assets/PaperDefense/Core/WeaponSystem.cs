@@ -68,8 +68,9 @@ namespace PaperDefense.Core
                 int activeMounts = 1;
                 if (dynamic && blueprint != null)
                 {
-                    activeMounts = ConsumesProduction(structure, origin, assembly.First, false, delta) ? 1 : 0;
-                    if (assembly.Second != null && ConsumesProduction(structure, origin, assembly.Second, true, delta)) activeMounts++;
+                    activeMounts=0;
+                    for(int mount=0;mount<assembly.Weapons.Length;mount++)
+                        if(assembly.Weapons[mount]!=null&&ConsumesProduction(structure,origin,assembly.Weapons[mount],mount,delta))activeMounts++;
                 }
                 float feed = blueprint == null ? 1 : TowerCatalog.FeedMultiplier(assembly, balance, activeMounts);
                 float quality = QualityMultiplier(blueprint);
@@ -81,11 +82,11 @@ namespace PaperDefense.Core
                         structure.ColorBudget = new TowerColorBudget(balance.Effects.ColorWindowSeconds, balance.Effects.ColorTargetsPerWindow);
                     colorBudget = structure.ColorBudget;
                 }
-                FireMount(structure, origin, assembly?.First ?? directWeapons[structure.Kind], false, shots,
-                    fireMultiplier * feed, quality, dynamic, damageMultiplier, payload, colorBudget, delta, tick, statistics, events);
-                if (assembly?.Second != null)
-                    FireMount(structure, origin, assembly.Second, true, shots,
+                if(assembly==null)FireMount(structure,origin,directWeapons[structure.Kind],0,shots,
                         fireMultiplier * feed, quality, dynamic, damageMultiplier, payload, colorBudget, delta, tick, statistics, events);
+                else for(int mount=0;mount<assembly.Weapons.Length;mount++)if(assembly.Weapons[mount]!=null)
+                    FireMount(structure,origin,assembly.Weapons[mount],mount,shots,
+                        fireMultiplier*feed,quality,dynamic,damageMultiplier,payload,colorBudget,delta,tick,statistics,events);
             }
         }
 
@@ -95,13 +96,13 @@ namespace PaperDefense.Core
         {
             clockSeconds=timeSeconds;spatial.Rebuild(enemies);AdvanceProjectiles(delta,tick,statistics,events);
             if(structure==null||!CanOperate(structure))return;
-            var assembly=Assembly(structure);var weapon=mount==0?assembly.First:assembly.Second;
+            var assembly=Assembly(structure);var weapon=mount>=0&&mount<assembly.Weapons.Length?assembly.Weapons[mount]:null;
             if(weapon==null)throw new ArgumentOutOfRangeException(nameof(mount));
             Point2 origin=new Point2(structure.Cell.X+.5f,structure.Cell.Y+.5f);
             bool dynamic=balance.Construction.DynamicFeed;
-            float feed=dynamic?TowerCatalog.FeedMultiplier(assembly,balance,ConsumesProduction(structure,origin,weapon,mount==1,delta)?1:0)
+            float feed=dynamic?TowerCatalog.FeedMultiplier(assembly,balance,ConsumesProduction(structure,origin,weapon,mount,delta)?1:0)
                 :Math.Min(balance.Construction.MaxFeedMultiplier,assembly.Modify(ModifierStat.FeedMultiplier,1));
-            FireMount(structure,origin,weapon,mount==1,shots,feed,QualityMultiplier(structure.Blueprint),dynamic,1,default,null,delta,tick,statistics,events);
+            FireMount(structure,origin,weapon,mount,shots,feed,QualityMultiplier(structure.Blueprint),dynamic,1,default,null,delta,tick,statistics,events);
         }
 
         static bool CanOperate(StructureState structure)
@@ -119,52 +120,49 @@ namespace PaperDefense.Core
         // Production is shared by unfinished reloads and acquired working mounts. A ready idle
         // mount releases its share. This preview never mutates tracking: each barrel revalidates
         // its actual target after the previous barrel has dealt damage or cleaned a blot.
-        private bool ConsumesProduction(StructureState structure, Point2 origin, WeaponDefinition weapon, bool secondary, float delta)
+        private bool ConsumesProduction(StructureState structure, Point2 origin, WeaponDefinition weapon, int mount, float delta)
         {
-            if ((secondary ? structure.SecondaryActionRemaining : structure.PrimaryActionRemaining) > 0) return true;
+            var state=structure.GetMountState(mount);
+            if (state.ActionRemaining > 0) return true;
             var definition = weapon.Numeric;
             StructureKind kind = weapon.LegacyKind ?? (StructureKind)(-1);
-            float range = MountRange(structure, weapon, secondary ? 1 : 0);
-            if(weapon.Attack==AttackKind.Cleanup) return blotContext!=null && blotContext.TryFindNearest(origin,range,out _);
+            float range = MountRange(structure, weapon, mount);
+            if(weapon.Attack==AttackKind.Cleanup) return TryFindBlot(origin,weapon.MinimumRange,range,out _);
             spatial.Query(origin, range, targets);
+            FilterRange(origin,weapon.MinimumRange,range,targets);
             EnemyState target = PickTarget(structure, origin, targets);
             if (target == null) return false;
-            int previousId = secondary ? structure.SecondaryTargetId : structure.PrimaryTargetId;
+            int previousId = state.TargetId;
             float remaining = previousId == target.Id
-                ? (secondary ? structure.SecondaryAcquisitionRemaining : structure.PrimaryAcquisitionRemaining)
-                : TowerCatalog.AcquisitionSeconds(Assembly(structure), balance, secondary ? 1 : 0);
+                ? state.AcquisitionRemaining
+                : TowerCatalog.AcquisitionSeconds(Assembly(structure), balance, mount);
             return remaining <= delta + .000001f;
         }
 
-        private void FireMount(StructureState structure, Point2 origin, WeaponDefinition weapon, bool secondary,
+        private void FireMount(StructureState structure, Point2 origin, WeaponDefinition weapon, int mount,
             List<ShotEvent> shots, float fireMultiplier, float qualityMultiplier, bool dynamic, float damageMultiplier,
             ColorEffectPayload payload, TowerColorBudget colorBudget, float delta, long tick,
             RunStatistics statistics, SimulationEventBuffer events)
         {
             var definition = weapon.Numeric;
             StructureKind kind = weapon.LegacyKind ?? (StructureKind)(-1);
-            float range = MountRange(structure, weapon, secondary ? 1 : 0);
-            float interval = TowerCatalog.ActionInterval(Assembly(structure),weapon,secondary ? 1 : 0,balance,fireMultiplier,qualityMultiplier);
-            if (dynamic) AdvanceReload(structure, secondary, interval, delta);
+            var state=structure.GetMountState(mount);
+            float range = MountRange(structure, weapon, mount);
+            float interval = TowerCatalog.ActionInterval(Assembly(structure),weapon,mount,balance,fireMultiplier,qualityMultiplier);
+            if (dynamic) AdvanceReload(structure, mount, interval, delta);
             if(weapon.Attack==AttackKind.Cleanup)
             {
-                FireBlotter(structure,origin,range,weapon,secondary,shots,interval,dynamic,delta,tick,statistics,events);
+                FireBlotter(structure,origin,range,weapon,mount,shots,interval,dynamic,delta,tick,statistics,events);
                 return;
             }
             spatial.Query(origin, range, targets);
+            FilterRange(origin,weapon.MinimumRange,range,targets);
             EnemyState target = PickTarget(structure, origin, targets);
-            bool acquired = TrackTarget(structure, target, secondary, delta);
-            if (secondary)
-            {
-                if (target != null) structure.SecondaryAim = target.Position;
-            }
-            else
-            {
-                if (target != null) structure.PrimaryAim = target.Position;
-            }
+            bool acquired = TrackTarget(structure, target, mount, delta);
+            if(target!=null)state.Aim=target.Position;
             if (target == null) { statistics.RecordIdle(weapon.Id, delta); return; }
             if (!acquired) return;
-            if(!TryBeginAction(structure,secondary,interval,dynamic)) return;
+            if(!TryBeginAction(structure,mount,interval,dynamic)) return;
             float damage = Math.Max(0, definition.Damage * balance.Material(structure.Tier).DamageMultiplier * damageMultiplier);
             structure.Aim = target.Position;
             statistics.RecordLaunch(weapon.Id);
@@ -176,7 +174,7 @@ namespace PaperDefense.Core
                     break;
                 case AttackKind.AreaProjectile:
                     LaunchMortar(origin, target.Position, weapon, damage, payload, colorBudget,
-                        structure.Blueprint == null ? MortarFootprint.Circle : secondary ? structure.Blueprint.SecondFootprint : structure.Blueprint.FirstFootprint, tick, events);
+                        structure.Blueprint == null ? MortarFootprint.Circle : structure.Blueprint.GetMortarFootprint(mount), tick, events);
                     return;
                 case AttackKind.Cone:
                     FireFan(structure, origin, target.Position, weapon, damage, payload, colorBudget, shots, tick, statistics, events);
@@ -211,25 +209,25 @@ namespace PaperDefense.Core
             events.Publish(tick,SimulationEventKind.Shot,from,to,legacy,radius,structureId,weaponId:weapon.Id);
         }
 
-        private bool TrackTarget(StructureState structure, EnemyState target, bool secondary, float delta)
+        private bool TrackTarget(StructureState structure, EnemyState target, int mount, float delta)
         {
-            int previousId = secondary ? structure.SecondaryTargetId : structure.PrimaryTargetId;
-            float remaining = secondary ? structure.SecondaryAcquisitionRemaining : structure.PrimaryAcquisitionRemaining;
+            var state=structure.GetMountState(mount);
+            int previousId = state.TargetId;
+            float remaining = state.AcquisitionRemaining;
             int id = target == null ? 0 : target.Id;
             if (target == null || structure.Blueprint == null) remaining = 0;
-            else if (previousId != id) remaining = TowerCatalog.AcquisitionSeconds(Assembly(structure), balance, secondary ? 1 : 0);
+            else if (previousId != id) remaining = TowerCatalog.AcquisitionSeconds(Assembly(structure), balance, mount);
             remaining = Math.Max(0, remaining - delta);
-            if (secondary) { structure.SecondaryTargetId = id; structure.SecondaryAcquisitionRemaining = remaining; }
-            else { structure.PrimaryTargetId = id; structure.PrimaryAcquisitionRemaining = remaining; }
+            state.TargetId=id;state.AcquisitionRemaining=remaining;
             return remaining <= .000001f;
         }
 
-        private static void AdvanceReload(StructureState structure, bool secondary, float interval, float delta)
+        private static void AdvanceReload(StructureState structure, int mount, float interval, float delta)
         {
-            float remaining = Math.Max(0, (secondary ? structure.SecondaryActionRemaining : structure.PrimaryActionRemaining) - delta / interval);
+            var state=structure.GetMountState(mount);
+            float remaining = Math.Max(0, state.ActionRemaining - delta / interval);
             if (remaining <= .000001f) remaining = 0;
-            if (secondary) { structure.SecondaryActionRemaining = remaining; structure.SecondaryCooldown = remaining * interval; }
-            else { structure.PrimaryActionRemaining = remaining; structure.Cooldown = remaining * interval; }
+            state.ActionRemaining=remaining;state.Cooldown=remaining*interval;
         }
 
         // Preparation advances readiness without running target searches, attacks or cleanup.
@@ -242,51 +240,61 @@ namespace PaperDefense.Core
                 if (!CanOperate(structure)) continue;
                 TowerBlueprint blueprint = structure.Blueprint;
                 ResolvedTowerAssembly assembly = Assembly(structure);
-                int pending = structure.PrimaryActionRemaining > 0 ? 1 : 0;
-                if (assembly?.Second != null && structure.SecondaryActionRemaining > 0) pending++;
+                int pending=0;for(int mount=0;mount<(assembly==null?1:assembly.Weapons.Length);mount++)
+                    if((assembly==null||assembly.Weapons[mount]!=null)&&structure.GetMountState(mount).ActionRemaining>0)pending++;
                 float production = fireMultiplier * (blueprint == null ? 1 : TowerCatalog.FeedMultiplier(assembly, balance, pending));
                 float quality = QualityMultiplier(blueprint);
-                AdvanceReload(structure, false, TowerCatalog.ActionInterval(assembly,assembly?.First ?? directWeapons[structure.Kind],0,balance,production,quality), delta);
-                if (assembly?.Second != null)
-                    AdvanceReload(structure, true, TowerCatalog.ActionInterval(assembly,assembly.Second,1,balance,production,quality), delta);
-                structure.PrimaryTargetId = structure.SecondaryTargetId = 0;
-                structure.PrimaryAcquisitionRemaining = structure.SecondaryAcquisitionRemaining = 0;
+                for(int mount=0;mount<(assembly==null?1:assembly.Weapons.Length);mount++)
+                {
+                    var weapon=assembly==null?directWeapons[structure.Kind]:assembly.Weapons[mount];if(weapon==null)continue;
+                    AdvanceReload(structure,mount,TowerCatalog.ActionInterval(assembly,weapon,mount,balance,production,quality),delta);
+                    var state=structure.GetMountState(mount);state.TargetId=0;state.AcquisitionRemaining=0;
+                }
             }
         }
 
-        private static bool TryBeginAction(StructureState structure, bool secondary, float cooldown, bool dynamic)
+        private static bool TryBeginAction(StructureState structure, int mount, float cooldown, bool dynamic)
         {
+            var state=structure.GetMountState(mount);
             if(dynamic)
             {
-                if((secondary?structure.SecondaryActionRemaining:structure.PrimaryActionRemaining)>0) return false;
-                if(secondary) structure.SecondaryActionRemaining=1; else structure.PrimaryActionRemaining=1;
+                if(state.ActionRemaining>0) return false;
+                state.ActionRemaining=1;
             }
-            else if((secondary?structure.SecondaryCooldown:structure.Cooldown)>0) return false;
-            if(secondary) structure.SecondaryCooldown=cooldown; else structure.Cooldown=cooldown;
+            else if(state.Cooldown>0) return false;
+            state.Cooldown=cooldown;
             return true;
         }
 
         private void FireBlotter(StructureState structure,Point2 origin,float range,WeaponDefinition weapon,
-            bool secondary,List<ShotEvent> shots,float interval,bool dynamic,float delta,
+            int mount,List<ShotEvent> shots,float interval,bool dynamic,float delta,
             long tick,RunStatistics statistics,SimulationEventBuffer events)
         {
             var definition=weapon.Numeric;
-            if(blotContext==null || !blotContext.TryFindNearest(origin,range,out Cell cell))
+            var state=structure.GetMountState(mount);
+            if(!TryFindBlot(origin,weapon.MinimumRange,range,out Cell cell))
             {
-                if(secondary) structure.SecondaryTargetId=0; else structure.PrimaryTargetId=0;
+                state.TargetId=0;state.AcquisitionRemaining=0;
                 statistics.RecordIdle(weapon.Id,delta); return;
             }
             Point2 target=new Point2(cell.X+.5f,cell.Y+.5f);
             int targetId=-(cell.Y*balance.Width+cell.X+1);
-            if(secondary) {structure.SecondaryTargetId=targetId;structure.SecondaryAim=target;}
-            else {structure.PrimaryTargetId=targetId;structure.PrimaryAim=target;}
-            if(!TryBeginAction(structure,secondary,interval,dynamic)) return;
+            state.TargetId=targetId;state.Aim=target;
+            if(!TryBeginAction(structure,mount,interval,dynamic)) return;
             float radius=Math.Max(0,definition.Radius);
             int cleared=blotContext.Clear(cell,radius);
             if(cleared<=0) return;
             structure.Aim=target;
             statistics.RecordBlotsCleared(cleared); statistics.RecordLaunch(weapon.Id);
             PublishShot(origin, target, weapon, radius, structure.Id, shots, tick, events);
+        }
+
+        bool TryFindBlot(Point2 origin,float minimumRange,float maximumRange,out Cell cell)
+        {
+            cell=default;if(blotContext==null||maximumRange<=0)return false;
+            if(blotContext is IBlotRangeContext ranged)return ranged.TryFindNearest(origin,minimumRange,maximumRange,out cell);
+            if(!blotContext.TryFindNearest(origin,maximumRange,out cell))return false;
+            var target=new Point2(cell.X+.5f,cell.Y+.5f);return DistanceSquared(origin,target)>=minimumRange*minimumRange;
         }
 
         private void LaunchMortar(Point2 from, Point2 to, WeaponDefinition weapon, float damage,
@@ -438,6 +446,20 @@ namespace PaperDefense.Core
                 if (preferred) { best = candidate; bestDistance = distance; }
             }
             return best;
+        }
+
+        static void FilterRange(Point2 origin,float minimum,float maximum,List<EnemyState> candidates)
+        {
+            if(maximum<=0){candidates.Clear();return;}
+            float minSquared=minimum*minimum,maxSquared=maximum*maximum;
+            int write=0;
+            for(int read=0;read<candidates.Count;read++)
+            {
+                var enemy=candidates[read];float distance=DistanceSquared(origin,enemy.Position);
+                if(distance<minSquared||distance>maxSquared)continue;
+                candidates[write++]=enemy;
+            }
+            if(write<candidates.Count)candidates.RemoveRange(write,candidates.Count-write);
         }
 
         private void FirePiercer(Point2 origin, Point2 target, float range, float radius, int maxPierce,

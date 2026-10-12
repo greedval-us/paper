@@ -30,7 +30,7 @@ namespace PaperDefense.Core
         internal bool TryApply(ColorEffectPayload payload, StructureKind weapon,string weaponId=null)
         {
             Validate(payload);
-            if (payload.Color != color) throw new ArgumentException("Разные виды эффекта должны храниться отдельно.", nameof(payload));
+            if (payload.Color != color) throw new ArgumentException(UserText.Message("copy.36d7a57dd7d85a7f"), nameof(payload));
             if (payload.Duration == 0) return true;
             foreach (Entry entry in entries)
             {

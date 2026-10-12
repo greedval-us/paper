@@ -20,7 +20,7 @@ namespace PaperDefense.Core
             return (CombatTuningRules)MemberwiseClone();
         }
         internal static void Positive(float value, string field)
-        { if (value <= 0 || float.IsNaN(value) || float.IsInfinity(value)) throw new ArgumentException(field + ": требуется положительное конечное число."); }
+        { if (value <= 0 || float.IsNaN(value) || float.IsInfinity(value)) throw new ArgumentException(UserText.Message("copy.d5fa0446bafc1d84", field)); }
     }
 
     [Serializable]
@@ -33,9 +33,9 @@ namespace PaperDefense.Core
         {Validate();return (WellPlacementDefinition)MemberwiseClone();}
         void Validate()
         {
-            if (Color == InkColor.None || !Enum.IsDefined(typeof(InkColor), Color)) throw new ArgumentException("well.color: требуется существующий цвет.");
+            if (Color == InkColor.None || !Enum.IsDefined(typeof(InkColor), Color)) throw new ArgumentException(UserText.Message("copy.f03877a94c16a152"));
             if (XDenominator <= 0 || YDenominator <= 0 || XNumerator <= 0 || XNumerator >= XDenominator || YNumerator <= 0 || YNumerator >= YDenominator || ReservedRadius < 0)
-                throw new ArgumentException("well.position: требуется точка внутри листа и неотрицательная резервная область.");
+                throw new ArgumentException(UserText.Message("copy.fe6c39e68cd08967"));
         }
         public Cell Resolve(int width, int height)
         {

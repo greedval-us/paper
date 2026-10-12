@@ -28,7 +28,7 @@ namespace PaperDefense.Core
                 }
                 else
                 {
-                    var d=new ModuleDefinitionInput{Load=rules.ModuleLoad(part.Module),LegacyModule=part.Module};
+                    var d=new ModuleDefinitionInput{Load=rules.ModuleLoad(part.Module),LegacyModule=part.Module,SlotKind=part.Module==TowerModules.Armor?ModuleSlotKind.Armor:ModuleSlotKind.Upgrade};
                     switch(part.Module)
                     {
                         case TowerModules.Armor:d.Cost=rules.ArmorCost;d.BuildSeconds=rules.ArmorBuildSeconds;d.Modifiers.Add(Modifier(ModifierStat.FoundationHealth,ModifierOperation.Multiply,ModifierScope.Foundation,rules.ArmorHealthMultiplier));d.Modifiers.Add(Modifier(ModifierStat.FoundationDefense,ModifierOperation.Set,ModifierScope.Foundation,rules.ArmorDefense));break;
@@ -43,10 +43,10 @@ namespace PaperDefense.Core
             input.Effects.Add(new EffectDefinitionInput{Id=input.RedEffectId,Kind=EffectKind.DamageOverTime,Duration=balance.Effects.RedDuration,Strength=balance.Effects.RedDamagePerTick,TickSeconds=balance.Effects.RedTickSeconds,IgnoresDefense=balance.Effects.RedIgnoresDefense});
             input.Effects.Add(new EffectDefinitionInput{Id=input.BlueEffectId,Kind=EffectKind.Slow,Duration=balance.Effects.BlueDuration,Strength=balance.Effects.BlueSpeedMultiplier});
             input.Effects.Add(new EffectDefinitionInput{Id=input.GreenEffectId,Kind=EffectKind.DefenseReduction,Duration=balance.Effects.GreenDuration,Strength=balance.Effects.GreenDefenseReduction});
-            input.StartingPages.Add(new StartingBlueprintDefinitionInput{Id="starter.gun",Name="Пулемёт",ChassisId="chassis.standard",FirstWeaponId="weapon.gun",Slot=0});
-            input.StartingPages.Add(new StartingBlueprintDefinitionInput{Id="starter.double",Name="Двойной пулемёт",ChassisId="chassis.standard",FirstWeaponId="weapon.gun",SecondWeaponId="weapon.gun",Slot=1});
-            input.StartingPages.Add(new StartingBlueprintDefinitionInput{Id="starter.piercer",Name="Пробивающая пушка",ChassisId="chassis.standard",FirstWeaponId="weapon.piercer",Slot=2});
-            var mortar=new StartingBlueprintDefinitionInput{Id="starter.mortar",Name="Защищённая мортира",ChassisId="chassis.standard",FirstWeaponId="weapon.mortar",Slot=3};
+            input.StartingPages.Add(new StartingBlueprintDefinitionInput{Id="starter.gun",Name=UserText.Message("copy.0455469e8acac5ad"),ChassisId="chassis.standard",FirstWeaponId="weapon.gun",Slot=0});
+            input.StartingPages.Add(new StartingBlueprintDefinitionInput{Id="starter.double",Name=UserText.Message("copy.fd5de0c30616fc84"),ChassisId="chassis.standard",FirstWeaponId="weapon.gun",SecondWeaponId="weapon.gun",Slot=1});
+            input.StartingPages.Add(new StartingBlueprintDefinitionInput{Id="starter.piercer",Name=UserText.Message("copy.bdf4c03725c66109"),ChassisId="chassis.standard",FirstWeaponId="weapon.piercer",Slot=2});
+            var mortar=new StartingBlueprintDefinitionInput{Id="starter.mortar",Name=UserText.Message("copy.edfbe04a7d9f1438"),ChassisId="chassis.standard",FirstWeaponId="weapon.mortar",Slot=3};
             mortar.Modules.Add(new StartingModuleDefinitionInput{InstanceId="armor",DefinitionId="module.armor"});input.StartingPages.Add(mortar);
             return input;
         }

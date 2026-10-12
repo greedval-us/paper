@@ -16,7 +16,7 @@ namespace PaperDefense.Core
     /// <summary>Permanent options, never a stockpile of consumable weapon instances.</summary>
     public sealed class WorkshopProfile
     {
-        public const int CurrentVersion = 5;
+        public const int CurrentVersion = 6;
         private static readonly IReadOnlyList<PartUnlock> parts = PartCatalog.HistoricalParts;
         private ContentCatalogSnapshot content;
         private readonly HashSet<string> unlocked = new HashSet<string>(StringComparer.Ordinal);
@@ -72,10 +72,10 @@ namespace PaperDefense.Core
         }
         private void AddStarters()
         {
-            AddStarter(new TowerBlueprint("starter.gun", "Пулемёт", ChassisKind.Standard, StructureKind.Gun));
-            AddStarter(new TowerBlueprint("starter.double", "Двойной пулемёт", ChassisKind.Standard, StructureKind.Gun, StructureKind.Gun));
-            AddStarter(new TowerBlueprint("starter.piercer", "Пробивающая пушка", ChassisKind.Standard, StructureKind.Piercer));
-            AddStarter(new TowerBlueprint("starter.mortar", "Защищённая мортира", ChassisKind.Standard, StructureKind.Mortar, modules: TowerModules.Armor));
+            AddStarter(new TowerBlueprint("starter.gun", UserText.Message("copy.0455469e8acac5ad"), ChassisKind.Standard, StructureKind.Gun));
+            AddStarter(new TowerBlueprint("starter.double", UserText.Message("copy.fd5de0c30616fc84"), ChassisKind.Standard, StructureKind.Gun, StructureKind.Gun));
+            AddStarter(new TowerBlueprint("starter.piercer", UserText.Message("copy.bdf4c03725c66109"), ChassisKind.Standard, StructureKind.Piercer));
+            AddStarter(new TowerBlueprint("starter.mortar", UserText.Message("copy.edfbe04a7d9f1438"), ChassisKind.Standard, StructureKind.Mortar, modules: TowerModules.Armor));
         }
         private void AddStarter(TowerBlueprint blueprint) { if (album.Count < ProfileLimits.MaximumAlbumPages && Find(blueprint.Id) == null) album.Add(blueprint); }
         public void GrantGold(int amount) { if (amount > 0) Gold = (int)Math.Min(int.MaxValue, (long)Gold + amount); }
@@ -87,10 +87,10 @@ namespace PaperDefense.Core
                 if (part.Id == id)
                 {
                     if (IsUnlocked(id)) return true;
-                    if (Gold < part.GoldCost) { reason = "Не хватает золота."; return false; }
+                    if (Gold < part.GoldCost) { reason = UserText.Message("copy.49e21f4e9cb1372b"); return false; }
                     Gold -= part.GoldCost; unlocked.Add(id); return true;
                 }
-            reason = "Неизвестная деталь."; return false;
+            reason = UserText.Message("copy.9280ff03f0e48a54"); return false;
         }
         public bool ValidateOwned(TowerBlueprint blueprint, out string reason, GameBalance balance = null)
         {
@@ -107,50 +107,51 @@ namespace PaperDefense.Core
         static bool Available(TowerBlueprint blueprint, ContentCatalogSnapshot catalog, out string reason)
         {
             reason = "";
-            if (!catalog.TryGet(blueprint.ChassisId, out var chassis) || !chassis.Enabled ||
-                !catalog.TryGet(blueprint.FirstWeaponId, out var first) || !first.Enabled ||
-                (blueprint.SecondWeaponId != null && (!catalog.TryGet(blueprint.SecondWeaponId, out var second) || !second.Enabled)))
-            { reason = "Сборка содержит недоступную деталь каталога."; return false; }
+            if (!catalog.TryGet(blueprint.ChassisId, out var chassis) || !chassis.Enabled)
+            { reason = UserText.Message("copy.7c2f080a8b98d9ab"); return false; }
+            foreach(var mount in blueprint.WeaponMounts)if(!catalog.TryGetWeapon(mount.WeaponId,out var weapon)||!weapon.Enabled)
+            {reason=UserText.Message("copy.7c2f080a8b98d9ab");return false;}
             foreach (var selection in blueprint.ModuleSelections)
                 if (!catalog.TryGet(selection.DefinitionId, out var module) || !module.Enabled)
-                { reason = "Сборка содержит недоступное оборудование каталога."; return false; }
+                { reason = UserText.Message("copy.15821194b52b152a"); return false; }
             return true;
         }
         bool ValidatePartRights(TowerBlueprint blueprint, out string reason)
         {
             reason = "";
-            if (!IsUnlocked(blueprint.ChassisId) || !IsUnlocked(blueprint.FirstWeaponId) ||
-                (blueprint.SecondWeaponId != null && !IsUnlocked(blueprint.SecondWeaponId)))
-            { reason = "Сначала откройте все детали сборки."; return false; }
+            if (!IsUnlocked(blueprint.ChassisId))
+            { reason = UserText.Message("copy.25d3314a1878879d"); return false; }
+            foreach(var mount in blueprint.WeaponMounts)if(!IsUnlocked(mount.WeaponId))
+            {reason=UserText.Message("copy.25d3314a1878879d");return false;}
             foreach (var selection in blueprint.ModuleSelections)
                 if (!IsUnlocked(selection.DefinitionId))
-                { reason = "Сначала откройте все детали сборки."; return false; }
+                { reason = UserText.Message("copy.25d3314a1878879d"); return false; }
             return true;
         }
         public bool SaveBlueprint(TowerBlueprint blueprint, out string reason, GameBalance balance = null)
         {
             if (!ValidateOwned(blueprint, out reason, balance)) return false;
             if (blueprint.Origin == DrawingOrigin.PlayerDrawing && blueprint.Drawing.IsEmpty)
-            { reason = "Пустая страница остаётся черновиком. Нарисуйте хотя бы один штрих."; return false; }
+            { reason = UserText.Message("copy.b9c49ccc73b9d0d4"); return false; }
             for (int i = 0; i < album.Count; i++) if (album[i].Id == blueprint.Id) { album[i] = blueprint; return true; }
-            if (album.Count >= ProfileLimits.MaximumAlbumPages) { reason = "В альбоме уже " + ProfileLimits.MaximumAlbumPages + " чертежа."; return false; }
+            if (album.Count >= ProfileLimits.MaximumAlbumPages) { reason = UserText.Message("copy.9b39b0e67017068e", ProfileLimits.MaximumAlbumPages); return false; }
             album.Add(blueprint); return true;
         }
         public bool RemoveBlueprint(string id, out string reason)
         {
             reason = "";
-            foreach (string selected in loadout) if (selected == id) { reason = "Сначала замените этот чертёж в наборе."; return false; }
+            foreach (string selected in loadout) if (selected == id) { reason = UserText.Message("copy.c254f33cb940ff85"); return false; }
             TowerBlueprint blueprint = Find(id);
-            if (blueprint == null) { reason = "Чертёж не найден."; return false; }
+            if (blueprint == null) { reason = UserText.Message("copy.5850704bbcf92fc2"); return false; }
             album.Remove(blueprint); return true;
         }
         public bool AssignSlot(int slot, string id, out string reason, GameBalance balance = null)
         {
             reason = "";
-            if (slot < 0 || slot >= loadout.Length) { reason = "Номер слота от 0 до " + (ProfileLimits.LoadoutSlotCount - 1) + "."; return false; }
+            if (slot < 0 || slot >= loadout.Length) { reason = UserText.Message("copy.8d55609b15f3fd7c", (ProfileLimits.LoadoutSlotCount - 1)); return false; }
             TowerBlueprint blueprint = Find(id);
-            if (blueprint == null || !ValidateOwned(blueprint, out reason, balance)) { if (reason.Length == 0) reason = "Чертёж не найден."; return false; }
-            for (int i = 0; i < loadout.Length; i++) if (i != slot && loadout[i] == id) { reason = "Этот чертёж уже взят в другой слот."; return false; }
+            if (blueprint == null || !ValidateOwned(blueprint, out reason, balance)) { if (reason.Length == 0) reason = UserText.Message("copy.5850704bbcf92fc2"); return false; }
+            for (int i = 0; i < loadout.Length; i++) if (i != slot && loadout[i] == id) { reason = UserText.Message("copy.3ea8d535669110d4"); return false; }
             loadout[slot] = id; return true;
         }
         private TowerBlueprint Find(string id) { foreach (TowerBlueprint blueprint in album) if (blueprint.Id == id) return blueprint; return null; }
@@ -181,8 +182,8 @@ namespace PaperDefense.Core
         public static WorkshopProfile FromData(WorkshopProfileData data)
         {
             if (data != null && data.Version >= 2 && data.Version <= CurrentVersion) return FromStrictData(data);
-            if (data != null && data.Version > CurrentVersion) throw new NotSupportedException("Профиль создан более новой версией игры.");
-            if (data != null && data.Version != 1) throw new ArgumentException("Неизвестная версия профиля.");
+            if (data != null && data.Version > CurrentVersion) throw new NotSupportedException(UserText.Message("copy.d4480b00d319b755"));
+            if (data != null && data.Version != 1) throw new ArgumentException(UserText.Message("copy.0ecaed17b95a05bc"));
             var profile = new WorkshopProfile();
             if (data == null) return profile;
             profile.Gold = Math.Max(0, data.Gold);
@@ -190,7 +191,7 @@ namespace PaperDefense.Core
             {
                 bool known = false;
                 foreach (PartUnlock part in parts) if (part.Id == id) { known = true; break; }
-                if (!known && !string.IsNullOrEmpty(id)) throw new NotSupportedException("Профиль содержит неизвестную этой версии игры деталь.");
+                if (!known && !string.IsNullOrEmpty(id)) throw new NotSupportedException(UserText.Message("copy.3ee1a23fb7b9494a"));
                 if (known && IsVersionTwoPart(id)) profile.unlocked.Add(id);
             }
             profile.album.Clear();
@@ -213,44 +214,44 @@ namespace PaperDefense.Core
         {
             if (data.Gold < 0 || data.Unlocked == null || data.Album == null || (data.Version < 5 && data.Album.Length < ProfileLimits.LoadoutSlotCount) ||
                 data.Album.Length > ProfileLimits.MaximumAlbumPages || data.Loadout == null || data.Loadout.Length != ProfileLimits.LoadoutSlotCount)
-                throw new ArgumentException("Повреждённые данные профиля версии " + data.Version + ".");
+                throw new ArgumentException(UserText.Message("copy.bed3d028a2c52df6", data.Version));
             var profile = new WorkshopProfile(); profile.Gold = data.Gold;
             profile.unlocked.Clear(); profile.album.Clear();
             foreach (string id in data.Unlocked)
             {
-                if (data.Version == 5)
+                if (data.Version >= 5)
                 {
                     ContentValidation.Id(id, "profile.unlocked");
                     if (!profile.unlocked.Add(id))
-                        throw new ArgumentException("Повреждённый список открытий.");
+                        throw new ArgumentException(UserText.Message("copy.ecf4d32d5b25b819"));
                     continue;
                 }
                 bool known = false; foreach (PartUnlock part in parts) if (part.Id == id) { known = true; break; }
                 if (!known && !string.IsNullOrEmpty(id))
-                    throw new NotSupportedException("Профиль содержит неизвестную этой версии игры деталь.");
-                if (!known || (data.Version == 2 && !IsVersionTwoPart(id)) || !profile.unlocked.Add(id)) throw new ArgumentException("Повреждённый список открытий.");
+                    throw new NotSupportedException(UserText.Message("copy.3ee1a23fb7b9494a"));
+                if (!known || (data.Version == 2 && !IsVersionTwoPart(id)) || !profile.unlocked.Add(id)) throw new ArgumentException(UserText.Message("copy.ecf4d32d5b25b819"));
             }
             if (data.Version < 5) foreach (var part in PartCatalog.All)
-                if (part.InitiallyUnlocked && !profile.IsUnlocked(part.Id)) throw new ArgumentException("Отсутствует базовая деталь.");
+                if (part.InitiallyUnlocked && !profile.IsUnlocked(part.Id)) throw new ArgumentException(UserText.Message("copy.5d5b9958756f67cd"));
             var ids = new HashSet<string>(StringComparer.Ordinal);
             foreach (BlueprintData saved in data.Album)
             {
-                if (saved == null) throw new ArgumentException("Пустая запись альбома.");
+                if (saved == null) throw new ArgumentException(UserText.Message("copy.fd4cbb1be5995da3"));
                 TowerBlueprint blueprint = saved.ToBlueprint(data.Version);
-                if (!ids.Add(blueprint.Id)) throw new ArgumentException("Страница альбома повторяется.");
+                if (!ids.Add(blueprint.Id)) throw new ArgumentException(UserText.Message("copy.38843999b54beb9a"));
                 if (!TowerCatalog.ValidateParts(blueprint, out string reason) ||
                     (data.Version < 5 && !profile.ValidatePartRights(blueprint, out reason)))
-                    throw new ArgumentException("Повреждённая страница альбома: " + reason);
+                    throw new ArgumentException(UserText.Message("copy.336691bac4dcc798", reason));
                 if (blueprint.Origin == DrawingOrigin.PlayerDrawing && blueprint.Drawing.IsEmpty)
-                    throw new ArgumentException("Пустой авторский чертёж в альбоме.");
+                    throw new ArgumentException(UserText.Message("copy.a78634b793113f25"));
                 profile.album.Add(blueprint);
             }
             var selected = new HashSet<string>(StringComparer.Ordinal);
             for (int i = 0; i < profile.loadout.Length; i++)
             {
                 string id = data.Loadout[i];
-                if (data.Version == 5 && string.IsNullOrEmpty(id)) { profile.loadout[i] = null; continue; }
-                if (id == null || profile.Find(id) == null || !selected.Add(id)) throw new ArgumentException("Повреждённый набор страниц.");
+                if (data.Version >= 5 && string.IsNullOrEmpty(id)) { profile.loadout[i] = null; continue; }
+                if (id == null || profile.Find(id) == null || !selected.Add(id)) throw new ArgumentException(UserText.Message("copy.dac3f5616ef85f95"));
                 profile.loadout[i] = id;
             }
             return profile;

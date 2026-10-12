@@ -24,7 +24,7 @@ namespace PaperDefense.Tests
                 if (mode == "ordinary") error = Assert.Catch<ArgumentException>(() => run.Initialize());
                 else if (mode == "memory") error = Assert.Catch<ArgumentException>(() => run.InitializeWorkshop(false));
                 else error = Assert.Catch<ArgumentException>(() => run.InitializeWorkshop(store));
-                Assert.That(error.Message, Does.Contain(invalidAsset ? "baseHealth" : "balanceAsset"));
+                Assert.That(TextResourcesAsset.Default.Resolve(error.Message), Does.Contain(invalidAsset ? "baseHealth" : "balanceAsset"));
                 Assert.That(store.Loads, Is.Zero); Assert.That(store.Saves, Is.Zero);
                 Assert.That(run.Session, Is.Null); Assert.That(run.Workshop, Is.Null); Assert.That(run.Content, Is.Null);
             }
@@ -46,7 +46,8 @@ namespace PaperDefense.Tests
                 asset.baseHealth = float.NaN;
                 Assert.Catch<ArgumentException>(() => run.InitializeWorkshop(rejected));
                 Assert.That(run.StartRun(out string reason), Is.False);
-                Assert.That(reason, Does.Contain("baseHealth"));
+                Assert.That(reason, Is.EqualTo(UserText.Message("run.error.configuration")));
+                Assert.That(run.LastConfigurationDiagnostic, Does.Contain("baseHealth"));
                 Assert.That(run.Session, Is.SameAs(session)); Assert.That(run.Workshop, Is.SameAs(workshop));
                 Assert.That(run.Content, Is.SameAs(content)); Assert.That(run.InWorkshop, Is.True);
                 Assert.That(run.Workshop.Album[0].Id, Is.EqualTo(firstPage)); Assert.That(run.Workshop.Gold, Is.EqualTo(gold));

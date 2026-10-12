@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cee66ffe9bdf21b49b03e0132e773a03, type: 3}
+  m_Name: Scenario
+  m_EditorClassIdentifier: PaperDefense.Validation::PaperDefense.Validation.MechanicsTestScenarioAsset
+  scenarioId: tracking
+  titleKey: test.scene.tracking.title
+  instructionsKey: test.scene.tracking.instructions
+  focus: 11
+  preset: {fileID: 11400000, guid: a44dc3173236b82439437f57ae683f07, type: 2}
+  textResources: {fileID: 11400000, guid: 65b7c519a9be45c4b55e357b6530ddb6, type: 2}
+  seed: 1337
+  startingInk: 600
+  startingColoredInk: 60
+  startPaused: 1
+  workshopMode: 0
+  mechanics:
+    EnemyDrawingTiers: 0
+    CorpseBlots: 0
+    RangedEnemies: 0
+    InkWells: 0
+    ColorCartridges: 0
+    RunUpgrades: 0
+    DrawingQuality: 0
+  placements:
+  - cell: {x: 18, y: 13}
+    chassisId: chassis.standard
+    weaponIds:
+    - weapon.gun
+    moduleIds: []
+    material: 0
+    color: 0
+  - cell: {x: 18, y: 19}
+    chassisId: chassis.standard
+    weaponIds:
+    - weapon.gun
+    moduleIds:
+    - module.tracking
+    material: 0
+    color: 0
+  targets:
+  - position: {x: 23.5, y: 13.5}
+    health: 8
+    kind: 0
+    drawingTier: 0
+    stationary: 1
+  - position: {x: 24.5, y: 13.5}
+    health: 8
+    kind: 0
+    drawingTier: 0
+    stationary: 1
+  - position: {x: 23.5, y: 19.5}
+    health: 8
+    kind: 0
+    drawingTier: 0
+    stationary: 1
+  - position: {x: 24.5, y: 19.5}
+    health: 8
+    kind: 0
+    drawingTier: 0
+    stationary: 1
+  blots: []
+  observationKeys:
+  - test.observe.tracking

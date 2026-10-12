@@ -125,8 +125,8 @@ namespace PaperDefense.Tests
             string before = JsonUtility.ToJson(database.catalog);
             string id = AddInvalidOverride(category, unknown);
             var error = Assert.Throws<ArgumentException>(() => preset.CreateBalance());
-            Assert.That(error.Message, Does.Contain(id));
-            Assert.That(error.Message, Does.Contain(category));
+            Assert.That(TextResourcesAsset.Default.Resolve(error.Message), Does.Contain(id));
+            Assert.That(TextResourcesAsset.Default.Resolve(error.Message), Does.Contain(category));
             Assert.That(JsonUtility.ToJson(database.catalog), Is.EqualTo(before));
             Assert.That(published.Content.GetWeapon("weapon.gun").Stats.Cost, Is.EqualTo(sourceDatabase.CreateSnapshot().GetWeapon("weapon.gun").Stats.Cost));
             preset.overrides = new ContentOverrides();
@@ -215,7 +215,7 @@ namespace PaperDefense.Tests
         {
             typeof(GlobalBalanceSettings).GetField(group).SetValue(preset.rules, null);
             var error = Assert.Throws<ArgumentException>(() => preset.CreateBalance());
-            Assert.That(error.Message, Does.Contain("preset.rules." + group));
+            Assert.That(TextResourcesAsset.Default.Resolve(error.Message), Does.Contain("preset.rules." + group));
         }
 
         [Test]
@@ -253,7 +253,7 @@ namespace PaperDefense.Tests
                 case "incompatible module": armor.AllowedChassisIds.Clear(); armor.AllowedChassisIds.Add("chassis.heavy"); break;
             }
             var error = Assert.Throws<ArgumentException>(() => preset.CreateBalance());
-            Assert.That(error.Message, Does.Contain("UnpublishedBoundaryCandidate.database.catalog.StartingPages"));
+            Assert.That(TextResourcesAsset.Default.Resolve(error.Message), Does.Contain("UnpublishedBoundaryCandidate.database.catalog.StartingPages"));
             Assert.That(published.Content.GetWeapon("weapon.gun").Enabled, Is.True);
             Assert.That(published.Content.GetChassis("chassis.standard").Capacity, Is.GreaterThan(0));
         }
@@ -278,7 +278,7 @@ namespace PaperDefense.Tests
             Assert.That(TowerCatalog.AcquisitionSeconds(profile.GetLoadoutBlueprints()[0], balance), Is.EqualTo(1));
             preset.rules.Construction.AcquisitionSeconds = .5f;
             var error = Assert.Throws<ArgumentException>(() => preset.CreateBalance());
-            Assert.That(error.Message, Does.Contain("StartingPages"));
+            Assert.That(TextResourcesAsset.Default.Resolve(error.Message), Does.Contain("StartingPages"));
             Assert.That(TowerCatalog.AcquisitionSeconds(profile.GetLoadoutBlueprints()[0], balance), Is.EqualTo(1));
         }
 
@@ -304,7 +304,7 @@ namespace PaperDefense.Tests
             if (category == "Chassis") foreach (var item in database.catalog.Chassis) item.Enabled = false;
             else foreach (var item in database.catalog.Weapons) item.Enabled = false;
             var error = Assert.Throws<ArgumentException>(() => preset.CreateBalance());
-            Assert.That(error.Message, Does.Contain("UnpublishedBoundaryCandidate.database.catalog." + category));
+            Assert.That(TextResourcesAsset.Default.Resolve(error.Message), Does.Contain("UnpublishedBoundaryCandidate.database.catalog." + category));
         }
 
         string AddInvalidOverride(string category, bool unknown)

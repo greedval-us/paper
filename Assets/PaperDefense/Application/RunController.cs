@@ -11,6 +11,7 @@ namespace PaperDefense.Application
         GameSession session;
         public IRunReadModel Session { get; private set; }
         public bool Paused { get; private set; }
+        public bool AutomaticSimulation { get; set; } = true;
         public int Speed { get; private set; } = 1;
         public bool InWorkshop {get;private set;}
         public WorkshopReadModel Workshop {get;private set;}
@@ -24,7 +25,7 @@ namespace PaperDefense.Application
         IWorkshopProfileStore profileStore;
         bool profileCanWrite, profileDirty;
         ProfileSaveState profileSaveState = ProfileSaveState.MemoryOnly;
-        string profileSaveMessage = "Только в памяти; профиль не записывается.", lastWriteError = "";
+        string profileSaveMessage = UserText.Message("copy.0780dfa419e08bc0"), lastWriteError = "";
         int depositedGold;
         public event Action<IRunReadModel> SessionChanged;
         public event Action<SimulationEvent> SimulationEventReceived;
@@ -32,6 +33,7 @@ namespace PaperDefense.Application
         long lastEventSequence;
         public double DiscardedSimulationSeconds => clock.DiscardedSeconds;
         public long SkippedVisualEvents { get; private set; }
+        public string LastConfigurationDiagnostic { get; private set; }
 
         public void Initialize(bool allowLegacyFixtureDefaults = false)
         {
@@ -74,7 +76,7 @@ namespace PaperDefense.Application
             lastWriteError="";
             profileSaveState=!profileCanWrite?ProfileSaveState.RecoveryRequired:profileDirty?ProfileSaveState.Unsaved:ProfileSaveState.Saved;
             profileSaveMessage=loaded.Message;
-            if(string.IsNullOrEmpty(profileSaveMessage))profileSaveMessage=profileDirty?"Профиль ещё не записан.":"Профиль сохранён.";
+            if(string.IsNullOrEmpty(profileSaveMessage))profileSaveMessage=profileDirty?UserText.Message("copy.251cfddd45554f35"):UserText.Message("copy.131e1e34691edbf8");
             profile=loaded.Source==ProfileLoadSource.NewProfile ? freshProfile : loaded.Profile??freshProfile;
             Workshop=new WorkshopReadModel(profile);RefreshSaveInfo();
             runLoadout=profile.GetLoadoutBlueprints();
@@ -84,7 +86,7 @@ namespace PaperDefense.Application
 
         public bool RetrySave(out string reason)
         {
-            if(profileStore==null){reason="Режим только в памяти: запись профиля отключена.";return false;}
+            if(profileStore==null){reason=UserText.Message("copy.694da7c7454199ef");return false;}
             if(!profileCanWrite){reason=profileSaveMessage;return false;}
             bool result=WriteProfile(profile,false,out reason);
             RefreshSaveInfo();
@@ -95,7 +97,7 @@ namespace PaperDefense.Application
         void ResetPersistence()
         {
             profileStore=null;profileCanWrite=false;profileDirty=false;lastWriteError="";
-            profileSaveState=ProfileSaveState.MemoryOnly;profileSaveMessage="Только в памяти; профиль не записывается.";
+            profileSaveState=ProfileSaveState.MemoryOnly;profileSaveMessage=UserText.Message("copy.0780dfa419e08bc0");
         }
 
         void RefreshSaveInfo()
@@ -112,26 +114,26 @@ namespace PaperDefense.Application
             var result=profileStore.Save(candidate);
             if(!result.Success)
             {
-                lastWriteError=string.IsNullOrEmpty(result.Message)?"Не удалось записать профиль.":result.Message;
+                lastWriteError=string.IsNullOrEmpty(result.Message)?UserText.Message("copy.9ceb493e00375e13"):result.Message;
                 // Load only re-reads source safety; never publish its fallback over earned memory data.
                 // The file store keeps protection sticky, including a future version discovered during Save.
                 var source=profileStore.Load();
                 if(!source.CanWrite||source.Source==ProfileLoadSource.RecoveryRequired)
                 {
                     profileCanWrite=false;profileSaveState=ProfileSaveState.RecoveryRequired;
-                    profileSaveMessage=(manual?"Изменение не применено. ":"")+
-                        (string.IsNullOrEmpty(source.Message)?"Профиль требует восстановления; запись защищена.":source.Message);
-                    if(profileDirty)profileSaveMessage+=" Несохранённые изменения остаются только в памяти.";
+                    profileSaveMessage=(manual?UserText.Message("copy.cd9a90bc886e9cfd"):"")+
+                        (string.IsNullOrEmpty(source.Message)?UserText.Message("copy.17e344fd85f0edd1"):source.Message);
+                    if(profileDirty)profileSaveMessage+=UserText.Message("copy.5686d674034d00da");
                     reason=profileSaveMessage;RefreshSaveInfo();return false;
                 }
                 profileSaveState=ProfileSaveState.WriteFailed;
-                profileSaveMessage=manual?"Изменение не применено. "+lastWriteError+" Повторите это действие.":
-                    "Запись не удалась. "+lastWriteError+(profileDirty?" Изменения остаются только в памяти до успешной записи.":"");
+                profileSaveMessage=manual?UserText.Message("copy.0563e105e83c1577", lastWriteError):
+                    UserText.Message("copy.f668b11e1c640cb6", lastWriteError, (profileDirty?UserText.Message("copy.f50f494fcc3d45a0"):""));
                 reason=profileSaveMessage;RefreshSaveInfo();return false;
             }
             bool rejectedManual=!profileDirty&&!string.IsNullOrEmpty(lastWriteError);
             profileDirty=false;lastWriteError="";profileSaveState=ProfileSaveState.Saved;
-            profileSaveMessage="Профиль сохранён."+(!manual&&rejectedManual?" Отклонённое действие повторите отдельно.":"");
+            profileSaveMessage=UserText.Message("copy.3d5411a4bb91f858", (!manual&&rejectedManual?UserText.Message("copy.627cced3972bf99b"):""));
             reason=profileSaveMessage;return true;
         }
 
@@ -140,7 +142,7 @@ namespace PaperDefense.Application
         GameBalance CreateConfiguredBalance(bool workshop, bool allowLegacyFixtureDefaults)
         {
             if(balanceAsset!=null)return workshop ? balanceAsset.CreateWorkshopBalance() : balanceAsset.CreateBalance();
-            if(!allowLegacyFixtureDefaults)throw new ArgumentException("RunController.balanceAsset: назначьте конфигурацию перед подготовкой партии.");
+            if(!allowLegacyFixtureDefaults)throw new ArgumentException(UserText.Message("copy.5243cc3304142438"));
             if(!workshop)return GameBalance.CreateDefault();
             var balance=GameBalancePresets.CreateTargetWorkshop();GameBalanceAsset.AddWorkshopThreats(balance);
             return balance;
@@ -156,7 +158,7 @@ namespace PaperDefense.Application
             if (profile.ConfigureContent(contentSnapshot) && profileStore != null && profileCanWrite)
             {
                 profileDirty = true; profileSaveState = ProfileSaveState.Unsaved;
-                profileSaveMessage = "Новые стартовые открытия ещё не сохранены.";
+                profileSaveMessage = UserText.Message("copy.f122ad5b22da3b62");
             }
             depositedGold=0;
             Session = new RunReadModel(session);
@@ -169,7 +171,23 @@ namespace PaperDefense.Application
 
         void Update()
         {
-            AdvanceFrame(Time.unscaledDeltaTime, Paused, Speed);
+            if (AutomaticSimulation) AdvanceFrame(Time.unscaledDeltaTime, Paused, Speed);
+        }
+
+        /// <summary>A validation stand owns time explicitly; one press advances exactly one simulation tick.</summary>
+        public int StepSimulation()
+        {
+            if (session == null || InWorkshop) return 0;
+            clock.ClearDebt();
+            session.Tick(FixedStepClock.Step);
+            DrainEvents();
+            DepositGold();
+            return 1;
+        }
+        internal void SynchronizeExternalStep()
+        {
+            DrainEvents();
+            DepositGold();
         }
 
         /// <summary>Same deterministic frame boundary used by Update and integration tests.</summary>
@@ -206,17 +224,17 @@ namespace PaperDefense.Application
         public void Restart() {if(workshopMode)OpenWorkshop();else Initialize(legacyFixtureDefaults);}
         public bool Build(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier, out string reason)
         {
-            if(InWorkshop){reason="Сначала начните партию.";return false;}
+            if(InWorkshop){reason=UserText.Message("copy.e6a1f147d46938e5");return false;}
             if(workshopMode&&kind!=StructureKind.Wall&&kind!=StructureKind.Spikes)
-            {reason="Башни строятся по одному из четырёх взятых чертежей.";return false;}
+            {reason=UserText.Message("copy.65fd0a869c823b56");return false;}
             return session.TryBuild(cells,kind,tier,out reason);
         }
         public bool Erase(Cell cell, out int refund) {refund=0;return !InWorkshop&&session.TryErase(cell,out refund);}
-        public bool Upgrade(Cell cell, out string reason) {reason="Сначала начните партию.";return !InWorkshop&&session.TryUpgrade(cell,out reason);}
+        public bool Upgrade(Cell cell, out string reason) {reason=UserText.Message("copy.e6a1f147d46938e5");return !InWorkshop&&session.TryUpgrade(cell,out reason);}
         public bool SetPriority(Cell cell, TargetPriority priority) => !InWorkshop&&session.SetPriority(cell, priority);
         public void ChooseUpgrade(RunUpgrade upgrade) {if(!InWorkshop)session.ChooseUpgrade(upgrade);}
 
-        bool Editing(out string reason){reason=InWorkshop?"":"Сборка меняется в мастерской перед новой партией.";return InWorkshop;}
+        bool Editing(out string reason){reason=InWorkshop?"":UserText.Message("copy.8873645dd56497ed");return InWorkshop;}
         bool CreateCandidate(out WorkshopProfile candidate,out string reason)
         {
             candidate=null;
@@ -275,7 +293,7 @@ namespace PaperDefense.Application
             if(!Editing(out reason))return false;
             GameBalance balance;
             try { balance=CreateWorkshopBalance(); }
-            catch (ArgumentException error) { reason="Ошибка конфигурации: "+error.Message;return false; }
+            catch (ArgumentException error) { LastConfigurationDiagnostic=error.ToString();reason=UserText.Message("run.error.configuration");return false; }
             var candidate = profile.CreateWorkingCopy();
             var preparedContent = balance.ResolveContent();
             balance.Content = preparedContent;
@@ -286,7 +304,7 @@ namespace PaperDefense.Application
             for (int i = 0; i < prepared.Length; i++) prepared[i] = selection[i].WithContent(preparedContent);
             GameSession preparedSession;
             try { preparedSession=new GameSession(balance,starterDefenses:false); }
-            catch (ArgumentException error) { reason="Ошибка конфигурации: "+error.Message;return false; }
+            catch (ArgumentException error) { LastConfigurationDiagnostic=error.ToString();reason=UserText.Message("run.error.configuration");return false; }
             runLoadout=Array.AsReadOnly(prepared);InWorkshop=false;
             Initialize(preparedSession);
             reason="";WorkshopChanged?.Invoke();return true;
@@ -304,21 +322,21 @@ namespace PaperDefense.Application
             =>new TowerPreview(blueprint,session.Balance,material,session.Mechanics);
         public BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,int slot,MaterialTier material,InkColor color)
         {
-            if(slot<0||slot>=runLoadout.Count)return new BuildQuote{Cells=Array.Empty<Cell>(),Reason="Выберите чертёж."};
+            if(slot<0||slot>=runLoadout.Count)return new BuildQuote{Cells=Array.Empty<Cell>(),Reason=UserText.Message("copy.48635af5e97f1a11")};
             return session.QuoteBlueprint(cells,runLoadout[slot],material,color);
         }
         public bool BuildBlueprint(IReadOnlyList<Cell> cells,int slot,MaterialTier material,InkColor color,out string reason)
         {
-            reason="Сначала начните партию.";if(InWorkshop)return false;
-            if(slot<0||slot>=runLoadout.Count){reason="Выберите чертёж.";return false;}
+            reason=UserText.Message("copy.e6a1f147d46938e5");if(InWorkshop)return false;
+            if(slot<0||slot>=runLoadout.Count){reason=UserText.Message("copy.48635af5e97f1a11");return false;}
             return session.TryBuildBlueprint(cells,runLoadout[slot],material,color,out reason);
         }
         public bool Paint(Cell cell,InkColor color,out string reason)
-        {reason="Сначала начните партию.";return !InWorkshop&&session.TryPaint(cell,color,out reason);}
+        {reason=UserText.Message("copy.e6a1f147d46938e5");return !InWorkshop&&session.TryPaint(cell,color,out reason);}
         public bool Blotter(Cell cell,out string reason)
-        {reason="Сначала начните партию.";return !InWorkshop&&session.TryBlotter(cell,out reason);}
+        {reason=UserText.Message("copy.e6a1f147d46938e5");return !InWorkshop&&session.TryBlotter(cell,out reason);}
         public bool ActivateWell(int index,out string reason)
-        {reason="Сначала начните партию.";return !InWorkshop&&session.TryActivateWell(index,out reason);}
+        {reason=UserText.Message("copy.e6a1f147d46938e5");return !InWorkshop&&session.TryActivateWell(index,out reason);}
         public FootprintProbeComparison CompareMortarFootprints(TowerBlueprint blueprint,int mount,MortarFootprint first,MortarFootprint second,FootprintFormation formation)
             => MortarFootprintProbe.Compare(blueprint,mount,first,second,session.Balance,formation);
 
@@ -326,7 +344,7 @@ namespace PaperDefense.Application
         {
             if(!InWorkshop||!profile.ValidateOwned(blueprint,out _,session.Balance))return null;
             var trials=session.Balance.Trials;
-            var baseline=new TowerBlueprint("trial.baseline","Базовая сборка",trials.BaselineChassisId,trials.BaselineWeaponId,content:contentSnapshot);
+            var baseline=new TowerBlueprint("trial.baseline",UserText.Message("copy.5c07091d535b3296"),trials.BaselineChassisId,trials.BaselineWeaponId,content:contentSnapshot);
             return TrialRunner.Compare(blueprint,baseline,session.Balance,scenario,budget,1337,counterfire);
         }
         public TrialComparison RunQualityTrial(TowerBlueprint blueprint,TrialScenario scenario,bool counterfire=false,int budget=400)

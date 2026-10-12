@@ -12,7 +12,7 @@ namespace PaperDefense.Application
         public BalancePresetAsset[] presets = Array.Empty<BalancePresetAsset>();
         public ContentCatalogSnapshot CreateSnapshot(ContentOverrides overrides = null)
         {
-            if (catalog == null) throw new ArgumentException(name + ".catalog: отсутствует база.");
+            if (catalog == null) throw new ArgumentException(UserText.Message("copy.bef2598cc49b8725", name));
             var candidate = catalog.CreateCopy();
             if (overrides != null) overrides.Apply(candidate);
             return candidate.CreateSnapshot();
@@ -39,15 +39,15 @@ namespace PaperDefense.Application
         }
         static void Replace<T>(List<T> target, List<T> replacements, Func<T, string> id, string field) where T : class
         {
-            if (target == null || replacements == null) throw new ArgumentException(field + ": отсутствует список.");
+            if (target == null || replacements == null) throw new ArgumentException(UserText.Message("copy.fd573191ffd72212", field));
             var seen = new HashSet<string>(StringComparer.Ordinal);
             foreach (var item in replacements)
             {
-                if (item == null) throw new ArgumentException(field + ": пустая запись.");
+                if (item == null) throw new ArgumentException(UserText.Message("copy.91407d8768e3608b", field));
                 string key = id(item);
-                if (!seen.Add(key ?? "")) throw new ArgumentException(field + "." + key + ": повторный ID.");
+                if (!seen.Add(key ?? "")) throw new ArgumentException(UserText.Message("copy.76cf7c205a3b6947", field, key));
                 int index = target.FindIndex(existing => existing != null && id(existing) == key);
-                if (index < 0) throw new ArgumentException(field + "." + key + ": переопределение неизвестной записи.");
+                if (index < 0) throw new ArgumentException(UserText.Message("copy.b77d635e2c99fd64", field, key));
                 target[index] = item;
             }
         }

@@ -45,7 +45,7 @@ namespace PaperDefense.Tests
             Assert.That(restored.Modules, Is.EqualTo(TowerModules.Armor));
             Assert.That(restored.Origin, Is.EqualTo(DrawingOrigin.PlayerDrawing));
             Assert.That(restored.Drawing.GeometryHash, Is.EqualTo(drawing.GeometryHash));
-            Assert.That(loaded.Profile.ToData().Version, Is.EqualTo(5));
+            Assert.That(loaded.Profile.ToData().Version, Is.EqualTo(WorkshopProfile.CurrentVersion));
         }
 
         [Test] public void AssetResetMapsCleanupRadiusAndKeepsManualBlotterIndependent()

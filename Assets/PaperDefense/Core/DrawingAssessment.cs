@@ -10,17 +10,18 @@ namespace PaperDefense.Core
         public readonly string BindingId;
         public readonly float Quality, Coverage, Precision;
         public readonly int IncompleteContour;
-        public readonly string Message;
+        public readonly string Message, ArchivedMessage;
         internal DrawingPartFeedback(DrawingPartKey part, float quality, float coverage, float precision, int incompleteContour, string message)
             : this(DrawingBindings.For(part), quality, coverage, precision, incompleteContour, message) { }
-        public DrawingPartFeedback(string bindingId, float quality, float coverage, float precision, int incompleteContour, string message)
+        public DrawingPartFeedback(string bindingId, float quality, float coverage, float precision, int incompleteContour, string message, string archivedMessage = null)
         {
             DrawingBindings.Validate(bindingId); DrawingTemplateDefinition.Finite(quality, bindingId + ".quality");
             DrawingTemplateDefinition.Finite(coverage, bindingId + ".coverage"); DrawingTemplateDefinition.Finite(precision, bindingId + ".precision");
             if (quality < 0 || quality > 100 || coverage < 0 || coverage > 1 || precision < 0 || precision > 1 || incompleteContour < 0)
-                throw new ArgumentException(bindingId + ": неверная оценка контура.");
+                throw new ArgumentException(UserText.Message("copy.0e0173ae1aa49e7e", bindingId));
             BindingId = bindingId; DrawingBindings.TryLegacy(bindingId, out DrawingPartKey key); Part = key;
             Quality = quality; Coverage = coverage; Precision = precision; IncompleteContour = incompleteContour; Message = message ?? "";
+            ArchivedMessage = archivedMessage ?? "";
         }
     }
 
@@ -37,16 +38,16 @@ namespace PaperDefense.Core
             float quality, IReadOnlyList<DrawingPartFeedback> feedback = null)
         {
             if (ruleVersion < 1 || string.IsNullOrEmpty(referenceSignature) || string.IsNullOrEmpty(drawingHash) || string.IsNullOrEmpty(constructionHash))
-                throw new ArgumentException("У оценки отсутствуют версия или подпись рисунка/сборки.");
+                throw new ArgumentException(UserText.Message("copy.a32aa2295733c329"));
             DrawingTemplateDefinition.Finite(quality, "drawingEvaluation.quality");
-            if (quality < 0 || quality > 100) throw new ArgumentException("drawingEvaluation.quality: допустимо 0…100.");
-            if (feedback != null && feedback.Count > DrawingSnapshot.MaximumParts) throw new ArgumentException("Слишком много оценок частей.");
+            if (quality < 0 || quality > 100) throw new ArgumentException(UserText.Message("copy.8e80e85c46e36428"));
+            if (feedback != null && feedback.Count > DrawingSnapshot.MaximumParts) throw new ArgumentException(UserText.Message("copy.8ba450993b9dedb5"));
             var owned = new DrawingPartFeedback[feedback?.Count ?? 0]; var seen = new HashSet<string>(StringComparer.Ordinal);
             for (int i = 0; i < owned.Length; i++)
             {
                 var part = feedback[i];
-                if (part.BindingId == null || !seen.Add(part.BindingId)) throw new ArgumentException("Оценка содержит повторяющуюся или пустую привязку.");
-                owned[i] = new DrawingPartFeedback(part.BindingId, part.Quality, part.Coverage, part.Precision, part.IncompleteContour, part.Message);
+                if (part.BindingId == null || !seen.Add(part.BindingId)) throw new ArgumentException(UserText.Message("copy.04ebb6ffcd5e4c59"));
+                owned[i] = new DrawingPartFeedback(part.BindingId, part.Quality, part.Coverage, part.Precision, part.IncompleteContour, part.Message, part.ArchivedMessage);
             }
             RuleVersion = ruleVersion; ReferenceSignature = referenceSignature; DrawingHash = drawingHash;
             ConstructionHash = constructionHash; Quality = quality; PartFeedback = Array.AsReadOnly(owned);
@@ -105,7 +106,8 @@ namespace PaperDefense.Core
                 DrawingAssessment restored = RestoreStamp(blueprint, constructionHash, stamp, referenceSignature);
                 lock (cacheGate)
                     if (cache.TryGetValue(key, out DrawingAssessment cachedSaved) && !restored.IsArchived &&
-                        cachedSaved.Quality == stamp.Quality && cachedSaved.RuleVersion == stamp.RuleVersion)
+                        cachedSaved.Quality == stamp.Quality && cachedSaved.RuleVersion == stamp.RuleVersion &&
+                        SameFeedback(cachedSaved.PartFeedback, stamp.PartFeedback))
                         return cachedSaved;
                 return restored;
             }
@@ -118,6 +120,19 @@ namespace PaperDefense.Core
                 cache.Add(key, result); cacheOrder.Enqueue(key);
             }
             return result;
+        }
+
+        static bool SameFeedback(IReadOnlyList<DrawingPartFeedback> first, IReadOnlyList<DrawingPartFeedback> second)
+        {
+            if (first.Count != second.Count) return false;
+            for (int i = 0; i < first.Count; i++)
+            {
+                var a = first[i]; var b = second[i];
+                if (a.BindingId != b.BindingId || a.Quality != b.Quality || a.Coverage != b.Coverage ||
+                    a.Precision != b.Precision || a.IncompleteContour != b.IncompleteContour ||
+                    a.Message != b.Message || a.ArchivedMessage != b.ArchivedMessage) return false;
+            }
+            return true;
         }
 
         /// <summary>The single efficiency formula; construction feed and external upgrades are applied separately.</summary>
@@ -134,7 +149,7 @@ namespace PaperDefense.Core
         static DrawingAssessment RestoreStamp(TowerBlueprint blueprint, string constructionHash, DrawingEvaluationStamp stamp, string referenceSignature)
         {
             if (stamp.DrawingHash != blueprint.Drawing.GeometryHash || stamp.ConstructionHash != constructionHash)
-                throw new ArgumentException("Сохранённая оценка относится к другому рисунку или составу страницы.");
+                throw new ArgumentException(UserText.Message("copy.9783048127d5ed7e"));
             return new DrawingAssessment(stamp.RuleVersion, stamp.DrawingHash, stamp.ConstructionHash, stamp.Quality,
                 stamp.PartFeedback, stamp.ReferenceSignature, stamp.ReferenceSignature != referenceSignature);
         }
@@ -163,8 +178,8 @@ namespace PaperDefense.Core
                     if (FractionMatched(Raster(new[] { template.Contours[contour] }), nearAuthored) < settings.CompletionThreshold)
                     { unfinished = contour + 1; break; }
                 string name = template.DisplayName;
-                string message = unfinished > 0 ? name + ": контур " + unfinished + " ещё не завершён." :
-                    precision < settings.PrecisionThreshold ? name + ": много линий в стороне от образца." : name + ": контуры читаются уверенно.";
+                string message = unfinished > 0 ? UserText.Message("copy.3cc592b5b09bbd9f", name, unfinished) :
+                    precision < settings.PrecisionThreshold ? UserText.Message("copy.5c24ada686c606b4", name) : UserText.Message("copy.e19aba16f8c4e47b", name);
                 feedback.Add(new DrawingPartFeedback(template.BindingId, quality, coverage, precision, unfinished, message));
                 weightedQuality += quality * weight; totalWeight += weight;
             }
@@ -187,14 +202,14 @@ namespace PaperDefense.Core
         {
             switch (key)
             {
-                case DrawingPartKey.Base: return "Основание";
-                case DrawingPartKey.Mount0: return "Орудие 1";
-                case DrawingPartKey.Mount1: return "Орудие 2";
-                case DrawingPartKey.Armor: return "Бронепластины";
-                case DrawingPartKey.Feed: return "Подача";
-                case DrawingPartKey.Tracking: return "Наведение";
-                case DrawingPartKey.Rail: return "Направляющая";
-                default: return "Декор";
+                case DrawingPartKey.Base: return UserText.Message("copy.0369683b41e6de45");
+                case DrawingPartKey.Mount0: return UserText.Message("copy.fc2e45f6e3ac7703");
+                case DrawingPartKey.Mount1: return UserText.Message("copy.c0e8f8688c74f19e");
+                case DrawingPartKey.Armor: return UserText.Message("copy.e41e849ff6126cff");
+                case DrawingPartKey.Feed: return UserText.Message("copy.d4a738612fc5e701");
+                case DrawingPartKey.Tracking: return UserText.Message("copy.41e4c92b11a67cdf");
+                case DrawingPartKey.Rail: return UserText.Message("copy.215d555ed53c9640");
+                default: return UserText.Message("copy.a26f1865b599b9c4");
             }
         }
 
@@ -283,7 +298,7 @@ namespace PaperDefense.Core
         static string ConstructionHash(TowerBlueprint blueprint)
         {
             ulong hash = 14695981039346656037UL;
-            bool legacy = Enum.IsDefined(typeof(ChassisKind), blueprint.Chassis) && Enum.IsDefined(typeof(StructureKind), blueprint.FirstWeapon) &&
+            bool legacy = blueprint.GetWeaponId(2)==null && Enum.IsDefined(typeof(ChassisKind), blueprint.Chassis) && Enum.IsDefined(typeof(StructureKind), blueprint.FirstWeapon) &&
                 (blueprint.SecondWeaponId == null || (blueprint.SecondWeapon.HasValue && Enum.IsDefined(typeof(StructureKind), blueprint.SecondWeapon.Value)));
             foreach (var selected in blueprint.ModuleSelections)
                 legacy &= DrawingBindings.TryLegacy(DrawingBindings.Module(selected.InstanceId), out _) && selected.DefinitionId == "module." + selected.InstanceId;
@@ -297,6 +312,7 @@ namespace PaperDefense.Core
             {
                 AddHash(ref hash, DrawingSnapshot.CurrentBindingVersion); AddHash(ref hash, blueprint.ChassisId);
                 AddHash(ref hash, blueprint.FirstWeaponId); AddHash(ref hash, blueprint.SecondWeaponId ?? "");
+                if(blueprint.GetWeaponId(2)!=null){AddHash(ref hash,DrawingBindings.Mount2);AddHash(ref hash,blueprint.GetWeaponId(2));}
                 var modules = new List<ModuleSelection>(blueprint.ModuleSelections);
                 modules.Sort((a, b) => string.CompareOrdinal(a.InstanceId, b.InstanceId));
                 foreach (var selected in modules) { AddHash(ref hash, selected.InstanceId); AddHash(ref hash, selected.DefinitionId); }

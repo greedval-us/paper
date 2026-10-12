@@ -57,13 +57,13 @@ namespace PaperDefense.Tests
                 default: success = run.UnlockPart("module.feed", out reason); break;
             }
             Assert.That(success, Is.False);
-            Assert.That(reason, Does.Contain(FakeStore.WriteError));
+            Assert.That(TextResourcesAsset.Default.Resolve(reason), Does.Contain(FakeStore.WriteError));
             Assert.That(store.SaveCalls, Is.EqualTo(1));
             Assert.That(State(), Is.EqualTo(before));
             Assert.That(published, Is.Zero, "A rejected candidate is never published.");
             Assert.That(run.Workshop.SaveState, Is.EqualTo(ProfileSaveState.WriteFailed));
             Assert.That(run.Workshop.HasUnsavedChanges, Is.False, "Rejected manual changes are not dirty profile data.");
-            Assert.That(run.Workshop.LastWriteError, Does.Contain(FakeStore.WriteError));
+            Assert.That(TextResourcesAsset.Default.Resolve(run.Workshop.LastWriteError), Does.Contain(FakeStore.WriteError));
         }
 
         [Test] public void RetryWritesCurrentProfileWithoutReplayingRejectedPurchase()
@@ -209,7 +209,7 @@ namespace PaperDefense.Tests
             Assert.That(run.Workshop.HasUnsavedChanges, Is.True);
             Assert.That(run.Workshop.Gold, Is.EqualTo(208));
             Assert.That(run.Workshop.IsUnlocked("module.feed"), Is.False);
-            Assert.That(reason, Does.Contain("Recovery required"));
+            Assert.That(TextResourcesAsset.Default.Resolve(reason), Does.Contain("Recovery required"));
             int writes = store.SaveCalls;
             Assert.That(run.RetrySave(out _), Is.False);
             root.SetActive(true);

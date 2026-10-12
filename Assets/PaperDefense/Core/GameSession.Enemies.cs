@@ -22,15 +22,15 @@ namespace PaperDefense.Core
         public bool TryBlotter(Cell cell, out string reason)
         {
             reason = "";
-            if (!Mechanics.CorpseBlots) { reason = "Промокашка недоступна на этом листе."; return false; }
-            if (!Inside(cell)) { reason = "Выберите клетку на листе."; return false; }
-            if (Phase == RunPhase.Victory || Phase == RunPhase.Defeat) { reason = "Эта страница уже закончена."; return false; }
-            if (BlotterCooldownRemaining > 0) { reason = "Промокашке нужно высохнуть."; return false; }
+            if (!Mechanics.CorpseBlots) { reason = UserText.Message("copy.babf0ea42d60454a"); return false; }
+            if (!Inside(cell)) { reason = UserText.Message("copy.9517113b967397be"); return false; }
+            if (Phase == RunPhase.Victory || Phase == RunPhase.Defeat) { reason = UserText.Message("copy.850e91bbbd5c94d8"); return false; }
+            if (BlotterCooldownRemaining > 0) { reason = UserText.Message("copy.c52b7a817b7ba26e"); return false; }
             int cost = Math.Max(0, rules.BlotterCost);
-            if (Ink < cost) { reason = "Не хватает штрихов: нужно " + cost + "."; return false; }
+            if (Ink < cost) { reason = UserText.Message("copy.d952db5ec0c442f9", cost); return false; }
             float radius = Math.Max(0, rules.BlotterRadius);
             var system = GetCorpseBlots();
-            if (!system.HasManualTarget(cell, radius)) { reason = "В этом радиусе нет клякс."; return false; }
+            if (!system.HasManualTarget(cell, radius)) { reason = UserText.Message("copy.a7dd42a018cce2b9"); return false; }
             Ink -= cost;
             BlotterCooldownRemaining = Math.Max(0, rules.BlotterCooldown);
             system.ClearManual(cell, radius);

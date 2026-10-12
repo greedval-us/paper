@@ -12,10 +12,10 @@ namespace PaperDefense.Validation
             var rows = new List<BalanceComparisonRow>();
             var pages = new[]
             {
-                new TowerBlueprint("compare-single", "Один пулемёт", ChassisKind.Standard, StructureKind.Gun),
-                new TowerBlueprint("compare-double", "Два пулемёта", ChassisKind.Standard, StructureKind.Gun, StructureKind.Gun),
-                new TowerBlueprint("compare-line", "Пулемёт + линия", ChassisKind.Standard, StructureKind.Gun, StructureKind.Piercer),
-                new TowerBlueprint("compare-mortar", "Мортира + подача", ChassisKind.Standard, StructureKind.Mortar, modules: TowerModules.Feed)
+                new TowerBlueprint("compare-single", UserText.Message("copy.285d0432d031dec6"), ChassisKind.Standard, StructureKind.Gun),
+                new TowerBlueprint("compare-double", UserText.Message("copy.f32e6591c784b007"), ChassisKind.Standard, StructureKind.Gun, StructureKind.Gun),
+                new TowerBlueprint("compare-line", UserText.Message("copy.585e2c4c9f48cee1"), ChassisKind.Standard, StructureKind.Gun, StructureKind.Piercer),
+                new TowerBlueprint("compare-mortar", UserText.Message("copy.1a8fe86ca03d1b8f"), ChassisKind.Standard, StructureKind.Mortar, modules: TowerModules.Feed)
             };
             foreach (var page in pages)
                 foreach (TrialScenario scenario in Enum.GetValues(typeof(TrialScenario)))
@@ -30,7 +30,7 @@ namespace PaperDefense.Validation
                         });
                     }
             var materials = new List<MaterialComparisonRow>();
-            var armored = new TowerBlueprint("compare-armor", "Пулемёт + броня", ChassisKind.Standard, StructureKind.Gun, modules: TowerModules.Armor);
+            var armored = new TowerBlueprint("compare-armor", UserText.Message("copy.6c483a5e388e346f"), ChassisKind.Standard, StructureKind.Gun, modules: TowerModules.Armor);
             foreach (MaterialTier tier in Enum.GetValues(typeof(MaterialTier)))
                 materials.Add(new MaterialComparisonRow
                 {

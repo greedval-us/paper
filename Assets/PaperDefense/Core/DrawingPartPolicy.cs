@@ -22,8 +22,8 @@ namespace PaperDefense.Core
         public static bool IsEnabled(TowerBlueprint blueprint, string bindingId)
         {
             if (blueprint == null || bindingId == null) return false;
-            if (bindingId == DrawingBindings.Base || bindingId == DrawingBindings.Mount0 || bindingId == DrawingBindings.Decoration) return true;
-            if (bindingId == DrawingBindings.Mount1) return blueprint.SecondWeaponId != null;
+            if (bindingId == DrawingBindings.Base || bindingId == DrawingBindings.Decoration) return true;
+            if (DrawingBindings.TryMount(bindingId,out int mount))return blueprint.GetWeaponId(mount)!=null;
             foreach (var module in blueprint.ModuleSelections)
                 if (DrawingBindings.Module(module.InstanceId) == bindingId) return true;
             return false;
@@ -47,6 +47,7 @@ namespace PaperDefense.Core
         public static bool ShouldRetain(string bindingId, TowerBlueprint before, TowerBlueprint after)
         {
             if (after == null) throw new ArgumentNullException(nameof(after));
+            if (DrawingBindings.TryMount(bindingId,out int mount))return after.GetWeaponId(mount)!=null&&before.GetWeaponId(mount)==after.GetWeaponId(mount);
             return ShouldRetain(bindingId, before, after.ChassisId, after.FirstWeaponId, after.SecondWeaponId, after.ModuleSelections);
         }
 

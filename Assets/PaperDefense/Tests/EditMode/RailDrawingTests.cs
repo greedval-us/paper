@@ -108,7 +108,7 @@ namespace PaperDefense.Tests
                     found = true;
                     Assert.That(feedback.Quality, Is.Zero);
                     Assert.That(feedback.IncompleteContour, Is.EqualTo(1));
-                    Assert.That(feedback.Message, Does.Contain("Направляющая").And.Contain("контур"));
+                    Assert.That(TestText.Resolve(feedback.Message), Does.Contain("Направляющая").And.Contain("контур"));
                 }
             Assert.That(found, Is.True);
             Assert.That(rail.Assessment.Quality, Is.Zero);
@@ -129,7 +129,7 @@ namespace PaperDefense.Tests
             var editor = new DrawingEditSession(page);
             string before = editor.Snapshot.GeometryHash;
             Assert.That(editor.AddStroke(DrawingPartKey.Rail, Mark.Points, out string reason), Is.False);
-            Assert.That(reason, Is.Not.Empty);
+            Assert.That(TestText.Resolve(reason), Is.Not.Empty);
             Assert.That(editor.Snapshot.GeometryHash, Is.EqualTo(before));
         }
 

@@ -37,7 +37,7 @@ namespace PaperDefense.Tests
         {
             Assert.That(TowerCatalog.Validate(Blueprint(StructureKind.Gun, StructureKind.Gun, TowerModules.Armor),
                 out string reason), Is.False);
-            Assert.That(reason, Does.Contain("1 ед."));
+            Assert.That(TestText.Resolve(reason), Does.Contain("1 ед."));
         }
 
         [Test]

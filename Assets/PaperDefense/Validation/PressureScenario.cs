@@ -45,7 +45,7 @@ namespace PaperDefense.Validation
             {
                 new WaveDefinition { Count = Config.EnemyCount, SpawnInterval = Config.SpawnInterval,
                     Sides = 15, RunnerFraction = Config.RunnerFraction, GnawerFraction = Config.GnawerFraction,
-                    Title = "Пролом внешнего рубежа · 3000 одновременно" }
+                    Title = UserText.Message("copy.b66dab71e0295f6c") }
             };
             Config.Balance = new PressureBalanceSnapshot(balance);
             Session = new GameSession(balance, Config.Seed, false);

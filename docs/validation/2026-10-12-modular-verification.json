@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-12",
+  "unity": "6000.5.7f1",
+  "editMode": {
+    "jobId": "149c7702cb5d4db48078d9b3f291aac2",
+    "total": 748,
+    "passed": 748,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 14.4817732,
+    "resultState": "Passed"
+  },
+  "playMode": {
+    "jobId": "dc66885aa38844458e3c0681454b0ca9",
+    "total": 266,
+    "passed": 266,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 21.7470593,
+    "resultState": "Passed"
+  },
+  "extractor": {
+    "tests": 4,
+    "passed": 4
+  },
+  "savedScenes": 23,
+  "textEntries": 763,
+  "balanceTrials": {
+    "baseline": 162,
+    "counterfireAndColors": 216,
+    "pairedSurvival": 18
+  },
+  "productionScene": "Assets/PaperDefense/Scenes/PaperDefense.unity",
+  "productionSceneGuid": "b0aec587e9651544797876987443b45f",
+  "note": "Editor/core verification. No new Player build or CPU/GPU frame-time claim."
+}

@@ -33,6 +33,13 @@ namespace PaperDefense.Core
         BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,TowerBlueprint blueprint,MaterialTier tier,InkColor color);
     }
 
+    public readonly struct WeaponMountView
+    {
+        public readonly Point2 Aim;
+        public readonly int TargetId;
+        public readonly float Cooldown,ActionRemaining,AcquisitionRemaining;
+        internal WeaponMountView(WeaponMountState state){Aim=state.Aim;TargetId=state.TargetId;Cooldown=state.Cooldown;ActionRemaining=state.ActionRemaining;AcquisitionRemaining=state.AcquisitionRemaining;}
+    }
     public readonly struct StructureView
     {
         public readonly int Id;
@@ -48,11 +55,16 @@ namespace PaperDefense.Core
         public readonly TargetPriority Priority;
         public readonly TowerBlueprint Blueprint;
         public readonly InkColor Color;
+        readonly WeaponMountView mount0,mount1,mount2;
+        public WeaponMountView GetMountState(int mount)=>mount==0?mount0:mount==1?mount1:mount==2?mount2:throw new ArgumentOutOfRangeException(nameof(mount));
+        public Point2 GetMountAim(int mount)=>GetMountState(mount).Aim;
+        public int GetMountTargetId(int mount)=>GetMountState(mount).TargetId;
         internal StructureView(StructureState s)
         {Id=s.Id;Cell=s.Cell;Kind=s.Kind;ContentId=s.ContentId??LegacyContentIds.Weapon(s.Kind);Tier=s.Tier;Health=s.Health;MaxHealth=s.MaxHealth;BuildRemaining=s.BuildRemaining;
             Cooldown=s.Cooldown;IsComplete=s.IsComplete;WaitingForClearance=s.WaitingForClearance;Aim=s.Aim;Priority=s.Priority;
             Blueprint=s.Blueprint;Color=s.Color;PrimaryAim=s.PrimaryAim;SecondaryAim=s.SecondaryAim;
-            PrimaryTargetId=s.PrimaryTargetId;SecondaryTargetId=s.SecondaryTargetId;}
+            PrimaryTargetId=s.PrimaryTargetId;SecondaryTargetId=s.SecondaryTargetId;
+            mount0=new WeaponMountView(s.GetMountState(0));mount1=new WeaponMountView(s.GetMountState(1));mount2=new WeaponMountView(s.GetMountState(2));}
     }
     public readonly struct EnemyView
     {
@@ -193,6 +205,8 @@ namespace PaperDefense.Core
         public StructureSpec Structure(StructureKind kind)=>new StructureSpec(source.Structure(kind));
         public float WeaponRange(TowerBlueprint blueprint,StructureKind kind)=>TowerCatalog.WeaponRange(blueprint,source,kind);
         public float WeaponRange(TowerBlueprint blueprint,string id,int mount=0)=>TowerCatalog.WeaponRange(blueprint,source,id,mount);
+        public float WeaponMinimumRange(TowerBlueprint blueprint,string id,int mount=0)=>Content.GetWeapon(id).MinimumRange;
+        public float BuildSeconds(TowerBlueprint blueprint,MaterialTier tier)=>TowerCatalog.BuildSeconds(blueprint,source,tier);
         public MaterialSpec Material(MaterialTier tier)=>new MaterialSpec(source.Material(tier));
         public EnemySpec Enemy(EnemyKind kind)=>new EnemySpec(source.Enemy(kind));
     }

@@ -66,7 +66,7 @@ namespace PaperDefense.Core
         public float SpawnInterval = 0.14f, RunnerFraction, GnawerFraction, SpitterFraction, OutlinedFraction, HatchedFraction;
         /// <summary>Spawn edges: west 1, east 2, north 4, south 8.</summary>
         public int Sides = 1;
-        public string Title = "Первые каракули";
+        public string Title = UserText.Message("copy.a2d0b3c493f760f6");
     }
 
     /// <summary>Mutable tuning data. Configure before constructing a session.</summary>
@@ -119,14 +119,14 @@ namespace PaperDefense.Core
         };
         public List<WaveDefinition> Waves = new List<WaveDefinition>
         {
-            new WaveDefinition { Count = 80, Sides = 1, Title = "Каракули с запада" },
-            new WaveDefinition { Count = 120, Sides = 2, SpawnInterval = 0.12f, RunnerFraction = 0.22f, Title = "Бегуны с востока" },
-            new WaveDefinition { Count = 180, Sides = 5, SpawnInterval = 0.10f, RunnerFraction = 0.25f, GnawerFraction = 0.08f, Title = "Первые грызуны · запад / север" },
-            new WaveDefinition { Count = 260, Sides = 10, SpawnInterval = 0.085f, RunnerFraction = 0.32f, GnawerFraction = 0.10f, Title = "Два фронта · восток / юг" },
-            new WaveDefinition { Count = 360, Sides = 3, SpawnInterval = 0.075f, RunnerFraction = 0.3f, GnawerFraction = 0.13f, Title = "Чернильный прилив · запад / восток" },
-            new WaveDefinition { Count = 500, Sides = 12, SpawnInterval = 0.065f, RunnerFraction = 0.35f, GnawerFraction = 0.15f, Title = "Штурм полей · север / юг" },
-            new WaveDefinition { Count = 680, Sides = 15, SpawnInterval = 0.055f, RunnerFraction = 0.36f, GnawerFraction = 0.18f, Title = "Со всех сторон" },
-            new WaveDefinition { Count = 1000, Sides = 15, SpawnInterval = 0.045f, RunnerFraction = 0.38f, GnawerFraction = 0.20f, Title = "Финальная осада · 1000 каракуль" }
+            new WaveDefinition { Count = 80, Sides = 1, Title = UserText.Message("copy.b57031491fd45312") },
+            new WaveDefinition { Count = 120, Sides = 2, SpawnInterval = 0.12f, RunnerFraction = 0.22f, Title = UserText.Message("copy.15133dadc79c441f") },
+            new WaveDefinition { Count = 180, Sides = 5, SpawnInterval = 0.10f, RunnerFraction = 0.25f, GnawerFraction = 0.08f, Title = UserText.Message("copy.72d13cd7a4c9d0b6") },
+            new WaveDefinition { Count = 260, Sides = 10, SpawnInterval = 0.085f, RunnerFraction = 0.32f, GnawerFraction = 0.10f, Title = UserText.Message("copy.5f2dcf576cec2ddf") },
+            new WaveDefinition { Count = 360, Sides = 3, SpawnInterval = 0.075f, RunnerFraction = 0.3f, GnawerFraction = 0.13f, Title = UserText.Message("copy.2f4e9f83bb8177ea") },
+            new WaveDefinition { Count = 500, Sides = 12, SpawnInterval = 0.065f, RunnerFraction = 0.35f, GnawerFraction = 0.15f, Title = UserText.Message("copy.aadf0337b265d332") },
+            new WaveDefinition { Count = 680, Sides = 15, SpawnInterval = 0.055f, RunnerFraction = 0.36f, GnawerFraction = 0.18f, Title = UserText.Message("copy.a917970b5bdd9f78") },
+            new WaveDefinition { Count = 1000, Sides = 15, SpawnInterval = 0.045f, RunnerFraction = 0.38f, GnawerFraction = 0.20f, Title = UserText.Message("copy.6d8146012bcec7d3") }
         };
 
         public static GameBalance CreateDefault() => new GameBalance();
@@ -191,6 +191,13 @@ namespace PaperDefense.Core
         }
     }
 
+    public sealed class WeaponMountState
+    {
+        public Point2 Aim;
+        public int TargetId;
+        public float Cooldown,AcquisitionRemaining,ActionRemaining;
+    }
+
     public sealed class StructureState
     {
         public int Id;
@@ -199,18 +206,26 @@ namespace PaperDefense.Core
         public string ContentId;
         internal ResolvedTowerAssembly Assembly;
         public MaterialTier Tier;
-        public float Health, MaxHealth, BuildRemaining, Cooldown;
+        public float Health, MaxHealth, BuildRemaining;
         public bool IsComplete, WaitingForClearance;
         public Point2 Aim;
-        public Point2 PrimaryAim, SecondaryAim;
-        public int PrimaryTargetId, SecondaryTargetId;
+        readonly WeaponMountState[] mounts={new WeaponMountState(),new WeaponMountState(),new WeaponMountState()};
+        public WeaponMountState GetMountState(int mount)
+        {if(mount<0||mount>=mounts.Length)throw new ArgumentOutOfRangeException(nameof(mount));return mounts[mount];}
+        public Point2 PrimaryAim {get=>mounts[0].Aim;set=>mounts[0].Aim=value;}
+        public Point2 SecondaryAim {get=>mounts[1].Aim;set=>mounts[1].Aim=value;}
+        public int PrimaryTargetId {get=>mounts[0].TargetId;set=>mounts[0].TargetId=value;}
+        public int SecondaryTargetId {get=>mounts[1].TargetId;set=>mounts[1].TargetId=value;}
+        public float Cooldown {get=>mounts[0].Cooldown;set=>mounts[0].Cooldown=value;}
         public TargetPriority Priority;
         public TowerBlueprint Blueprint;
         public InkColor Color;
-        internal float SecondaryCooldown;
+        internal float SecondaryCooldown {get=>mounts[1].Cooldown;set=>mounts[1].Cooldown=value;}
         // Acquisition and normalized reload belong to each mount; zero action remaining is one ready action.
-        internal float PrimaryAcquisitionRemaining, SecondaryAcquisitionRemaining;
-        internal float PrimaryActionRemaining, SecondaryActionRemaining;
+        internal float PrimaryAcquisitionRemaining {get=>mounts[0].AcquisitionRemaining;set=>mounts[0].AcquisitionRemaining=value;}
+        internal float SecondaryAcquisitionRemaining {get=>mounts[1].AcquisitionRemaining;set=>mounts[1].AcquisitionRemaining=value;}
+        internal float PrimaryActionRemaining {get=>mounts[0].ActionRemaining;set=>mounts[0].ActionRemaining=value;}
+        internal float SecondaryActionRemaining {get=>mounts[1].ActionRemaining;set=>mounts[1].ActionRemaining=value;}
         internal TowerColorBudget ColorBudget;
         internal int PaidInk;
         internal int FrontageUsed;

@@ -25,23 +25,23 @@ namespace PaperDefense.Application
 
         public GameBalance CreateBalance()
         {
-            if (Mechanics==null) throw new ArgumentException("preset.rules.Mechanics: отсутствует обязательная группа правил.");
-            if (Construction==null) throw new ArgumentException("preset.rules.Construction: отсутствует обязательная группа правил.");
-            if (Effects==null) throw new ArgumentException("preset.rules.Effects: отсутствует обязательная группа правил.");
-            if (Progression==null) throw new ArgumentException("preset.rules.Progression: отсутствует обязательная группа правил.");
-            if (Combat==null) throw new ArgumentException("preset.rules.Combat: отсутствует обязательная группа правил.");
-            if (Trials==null) throw new ArgumentException("preset.rules.Trials: отсутствует обязательная группа правил.");
-            if (WellPlacements==null) throw new ArgumentException("preset.rules.WellPlacements: отсутствует обязательная группа правил.");
-            if (StructureDefinitions==null) throw new ArgumentException("preset.rules.StructureDefinitions: отсутствует обязательная группа правил.");
-            if (MaterialDefinitions==null) throw new ArgumentException("preset.rules.MaterialDefinitions: отсутствует обязательная группа правил.");
-            if (EnemyDefinitions==null) throw new ArgumentException("preset.rules.EnemyDefinitions: отсутствует обязательная группа правил.");
-            if (Waves==null) throw new ArgumentException("preset.rules.Waves: отсутствует обязательная группа правил.");
+            if (Mechanics==null) throw new ArgumentException(UserText.Message("copy.8481552fe31cf37d"));
+            if (Construction==null) throw new ArgumentException(UserText.Message("copy.49d432b5407be4f3"));
+            if (Effects==null) throw new ArgumentException(UserText.Message("copy.2b81d3b860f2f90a"));
+            if (Progression==null) throw new ArgumentException(UserText.Message("copy.6ef80603a4d81702"));
+            if (Combat==null) throw new ArgumentException(UserText.Message("copy.c5d44fea95970023"));
+            if (Trials==null) throw new ArgumentException(UserText.Message("copy.aca79a09555fbb87"));
+            if (WellPlacements==null) throw new ArgumentException(UserText.Message("copy.ff80972eaf69620c"));
+            if (StructureDefinitions==null) throw new ArgumentException(UserText.Message("copy.7a88309ae81f2aa2"));
+            if (MaterialDefinitions==null) throw new ArgumentException(UserText.Message("copy.880a8db227050152"));
+            if (EnemyDefinitions==null) throw new ArgumentException(UserText.Message("copy.aa2de19d486ebb8b"));
+            if (Waves==null) throw new ArgumentException(UserText.Message("copy.81624d8adc610cfd"));
             var b=new GameBalance(); b.Preset=this.Preset; b.Width=this.Width; b.Height=this.Height; b.StartingInk=this.StartingInk; b.MaxEarlyLaunchInk=this.MaxEarlyLaunchInk; b.WaveInkGrant=this.WaveInkGrant; b.MaxEnemiesPerCell=this.MaxEnemiesPerCell; b.BlotterCost=this.BlotterCost; b.WellActivationCost=this.WellActivationCost; b.WellInkPerWave=this.WellInkPerWave; b.WaveGold=this.WaveGold; b.VictoryGold=this.VictoryGold; b.BaseHealth=this.BaseHealth; b.PlanningSeconds=this.PlanningSeconds; b.IntermissionSeconds=this.IntermissionSeconds; b.PassiveInkPerSecond=this.PassiveInkPerSecond; b.EarlyLaunchInkPerSecond=this.EarlyLaunchInkPerSecond; b.SimulationStep=this.SimulationStep; b.BlotLifetime=this.BlotLifetime; b.BlotBuffSeconds=this.BlotBuffSeconds; b.BlotSpeedBonus=this.BlotSpeedBonus; b.BlotReduction=this.BlotReduction; b.BlotterCooldown=this.BlotterCooldown; b.BlotterRadius=this.BlotterRadius; b.WellHealth=this.WellHealth; b.DrawingMinimumRate=this.DrawingMinimumRate; b.DrawingMaximumRate=this.DrawingMaximumRate; b.EnableEnemyMechanics=this.EnableEnemyMechanics; b.EnableInkWells=this.EnableInkWells;
             b.Mechanics=Mechanics; Construction.Apply(b.Construction); Effects.Apply(b.Effects); b.Progression=Progression;
             b.Combat=Combat; b.Trials=Trials; b.WellPlacements=WellPlacements; b.StructureDefinitions=StructureDefinitions;
             b.MaterialDefinitions=MaterialDefinitions; b.EnemyDefinitions=EnemyDefinitions; b.Waves=Waves;
             if (StructureDefinitions.Exists(item=>item==null || (item.Kind!=StructureKind.Wall && item.Kind!=StructureKind.Spikes)))
-                throw new ArgumentException("preset.rules.StructureDefinitions: только непосредственные инструменты Wall/Spikes; оружие задаётся каталогом.");
+                throw new ArgumentException(UserText.Message("copy.de49bacab0a6e523"));
             return b.CreateSnapshot();
         }
 

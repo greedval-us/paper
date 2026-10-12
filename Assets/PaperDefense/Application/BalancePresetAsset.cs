@@ -15,8 +15,8 @@ namespace PaperDefense.Application
         public ContentOverrides overrides = new ContentOverrides();
         public GameBalance CreateBalance()
         {
-            if (database == null) throw new ArgumentException(name + ".database: назначьте базу контента.");
-            if (rules == null) throw new ArgumentException(name + ".rules: отсутствуют глобальные правила.");
+            if (database == null) throw new ArgumentException(UserText.Message("copy.de1a8a9825d89d36", name));
+            if (rules == null) throw new ArgumentException(UserText.Message("copy.2af4b2dcf19816a2", name));
             var result = rules.CreateBalance();
             result.Content = database.CreateSnapshot(overrides);
             result.Content.GetChassis(result.Trials.BaselineChassisId); result.Content.GetWeapon(result.Trials.BaselineWeaponId);
@@ -25,9 +25,9 @@ namespace PaperDefense.Application
             var cells = new HashSet<Cell>();
             foreach (var placement in result.WellPlacements)
             {
-                if (placement == null) throw new ArgumentException(name + ".wellPlacements: пустая запись.");
+                if (placement == null) throw new ArgumentException(UserText.Message("copy.8b3d5bd5d9478c20", name));
                 placement.CreateSnapshot();
-                if (!cells.Add(placement.Resolve(result.Width, result.Height))) throw new ArgumentException(name + ".wellPlacements: точки совпадают.");
+                if (!cells.Add(placement.Resolve(result.Width, result.Height))) throw new ArgumentException(UserText.Message("copy.9e9a2c80f3e49b46", name));
             }
             BalanceValidation.Validate(result);
             ValidateStartup(result);
@@ -39,8 +39,8 @@ namespace PaperDefense.Application
             bool enabledChassis = false, enabledWeapon = false;
             foreach (var chassis in balance.Content.Chassis) enabledChassis |= chassis.Enabled;
             foreach (var weapon in balance.Content.Weapons) enabledWeapon |= weapon.Enabled;
-            if (!enabledChassis) throw new ArgumentException(name + ".database.catalog.Chassis: требуется доступное основание для мастерской.");
-            if (!enabledWeapon) throw new ArgumentException(name + ".database.catalog.Weapons: требуется доступное оружие для мастерской.");
+            if (!enabledChassis) throw new ArgumentException(UserText.Message("copy.66b3d3441e520b7c", name));
+            if (!enabledWeapon) throw new ArgumentException(UserText.Message("copy.5e38f420fc63b0fb", name));
             foreach (var blueprint in balance.Content.StartupBlueprints)
                 if (!TowerCatalog.Validate(blueprint, balance, out string reason))
                     throw new ArgumentException(name + ".database.catalog.StartingPages." + blueprint.Id + ": " + reason);
