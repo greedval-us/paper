@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using PaperDefense.Application;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,9 +11,21 @@ namespace PaperDefense.Presentation
     {
         public GameBalanceAsset balance;
         public Camera worldCamera;
+        public bool memoryOnlyProfile;
         public RunController Controller { get; private set; }
         public DrawingInput Drawing { get; private set; }
         public NotebookWorldView View { get; private set; }
+        internal Func<string[]> ArgumentProvider=Environment.GetCommandLineArgs;
+        internal IWorkshopProfileStore ProfileStoreOverride;
+
+        internal static bool ShouldUseMemoryOnlyProfile(bool configured,IReadOnlyList<string> arguments)
+        {
+            if(configured) return true;
+            if(arguments!=null)
+                for(int i=0;i<arguments.Count;i++)
+                    if(arguments[i]=="-paper-memory-only" || arguments[i]=="-paper-pressure") return true;
+            return false;
+        }
 
         void Awake()
         {
@@ -19,7 +33,9 @@ namespace PaperDefense.Presentation
             if (worldCamera == null)
             { var go = new GameObject("Notebook Camera"); worldCamera = go.AddComponent<Camera>(); go.tag = "MainCamera"; }
             Controller = Child("Application — Run").AddComponent<RunController>(); Controller.balanceAsset = balance;
-            Controller.InitializeWorkshop();
+            bool isolateProfile=ShouldUseMemoryOnlyProfile(memoryOnlyProfile,ArgumentProvider());
+            if(!isolateProfile && ProfileStoreOverride!=null) Controller.InitializeWorkshop(ProfileStoreOverride);
+            else Controller.InitializeWorkshop(!isolateProfile);
             var background=Child("Paper background camera").AddComponent<Camera>();background.depth=-10;background.cullingMask=0;
             background.clearFlags=CameraClearFlags.SolidColor;background.backgroundColor=new Color(.975f,.961f,.9f);
             ConfigureCamera();

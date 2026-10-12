@@ -1,0 +1,100 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "2aa637654705456b86375b0ad203879d",
+      "status": "failed",
+      "mode": "PlayMode",
+      "started_unix_ms": 1791799355693,
+      "finished_unix_ms": 1791799361000,
+      "last_update_unix_ms": 1791799361000,
+      "progress": {
+        "completed": 4,
+        "total": 4,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.WorkshopReadabilityTests.LockedPartButtonsRenderTheirGoldPriceBelowThePartName",
+        "last_finished_unix_ms": 1791799360974,
+        "stuck_suspected": false,
+        "editor_is_focused": true,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [
+          {
+            "full_name": "PaperDefense.Tests.WorkshopReadabilityTests.AlbumCardsRenderCompositionHealthAndFireRateBelowTheirNames",
+            "message": "  Album drawing 0: Пулемёт · стандартный · 40 штр.|ПУЛЕМЁТ · 55 HP · 2,4/с loses glyphs when confined to its actual rectangle\r\n  Expected: 176\r\n  But was:  128\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.WorkshopReadabilityTests.CompactActionCaptionRendersCompletelyInsideItsButton(\"Save blueprint as new\")",
+            "message": "  Save blueprint as new: СОХРАНИТЬ КОПИЮ НА НОВОЙ СТРАНИЦЕ loses glyphs when confined to its actual rectangle\r\n  Expected: 116\r\n  But was:  0\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.WorkshopReadabilityTests.CompactActionCaptionRendersCompletelyInsideItsButton(\"Drawing quality details\")",
+            "message": "  Drawing quality details: ПОЧЕМУ ТАКОЕ КАЧЕСТВО? loses glyphs when confined to its actual rectangle\r\n  Expected: 80\r\n  But was:  0\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.WorkshopReadabilityTests.LockedPartButtonsRenderTheirGoldPriceBelowThePartName",
+            "message": "  Unlock chassis.heavy: ТЯЖЁЛОЕ|90 золота loses glyphs when confined to its actual rectangle\r\n  Expected: 60\r\n  But was:  32\r\n"
+          }
+        ],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "PlayMode",
+        "summary": {
+          "total": 4,
+          "passed": 0,
+          "failed": 4,
+          "skipped": 0,
+          "durationSeconds": 0.2035579,
+          "resultState": "Failed(Child)"
+        },
+        "results": [
+          {
+            "name": "AlbumCardsRenderCompositionHealthAndFireRateBelowTheirNames",
+            "fullName": "PaperDefense.Tests.WorkshopReadabilityTests.AlbumCardsRenderCompositionHealthAndFireRateBelowTheirNames",
+            "state": "Failed",
+            "durationSeconds": 0.0806268,
+            "message": "  Album drawing 0: Пулемёт · стандартный · 40 штр.|ПУЛЕМЁТ · 55 HP · 2,4/с loses glyphs when confined to its actual rectangle\r\n  Expected: 176\r\n  But was:  128\r\n",
+            "stackTrace": "at PaperDefense.Tests.WorkshopReadabilityTests.AssertFits (UnityEngine.UI.Text label) [0x0009d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopReadabilityTests.cs:72\r\nat PaperDefense.Tests.WorkshopReadabilityTests.AlbumCardsRenderCompositionHealthAndFireRateBelowTheirNames () [0x000cf] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopReadabilityTests.cs:41\r\n",
+            "output": ""
+          },
+          {
+            "name": "CompactActionCaptionRendersCompletelyInsideItsButton(\"Save blueprint as new\")",
+            "fullName": "PaperDefense.Tests.WorkshopReadabilityTests.CompactActionCaptionRendersCompletelyInsideItsButton(\"Save blueprint as new\")",
+            "state": "Failed",
+            "durationSeconds": 0.0123215,
+            "message": "  Save blueprint as new: СОХРАНИТЬ КОПИЮ НА НОВОЙ СТРАНИЦЕ loses glyphs when confined to its actual rectangle\r\n  Expected: 116\r\n  But was:  0\r\n",
+            "stackTrace": "at PaperDefense.Tests.WorkshopReadabilityTests.AssertFits (UnityEngine.UI.Text label) [0x0009d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopReadabilityTests.cs:72\r\nat PaperDefense.Tests.WorkshopReadabilityTests.CompactActionCaptionRendersCompletelyInsideItsButton (System.String name) [0x00000] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopReadabilityTests.cs:27\r\n",
+            "output": ""
+          },
+          {
+            "name": "CompactActionCaptionRendersCompletelyInsideItsButton(\"Drawing quality details\")",
+            "fullName": "PaperDefense.Tests.WorkshopReadabilityTests.CompactActionCaptionRendersCompletelyInsideItsButton(\"Drawing quality details\")",
+            "state": "Failed",
+            "durationSeconds": 0.0110988,
+            "message": "  Drawing quality details: ПОЧЕМУ ТАКОЕ КАЧЕСТВО? loses glyphs when confined to its actual rectangle\r\n  Expected: 80\r\n  But was:  0\r\n",
+            "stackTrace": "at PaperDefense.Tests.WorkshopReadabilityTests.AssertFits (UnityEngine.UI.Text label) [0x0009d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopReadabilityTests.cs:72\r\nat PaperDefense.Tests.WorkshopReadabilityTests.CompactActionCaptionRendersCompletelyInsideItsButton (System.String name) [0x00000] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopReadabilityTests.cs:27\r\n",
+            "output": ""
+          },
+          {
+            "name": "LockedPartButtonsRenderTheirGoldPriceBelowThePartName",
+            "fullName": "PaperDefense.Tests.WorkshopReadabilityTests.LockedPartButtonsRenderTheirGoldPriceBelowThePartName",
+            "state": "Failed",
+            "durationSeconds": 0.0149478,
+            "message": "  Unlock chassis.heavy: ТЯЖЁЛОЕ|90 золота loses glyphs when confined to its actual rectangle\r\n  Expected: 60\r\n  But was:  32\r\n",
+            "stackTrace": "at PaperDefense.Tests.WorkshopReadabilityTests.AssertFits (UnityEngine.UI.Text label) [0x0009d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopReadabilityTests.cs:72\r\nat PaperDefense.Tests.WorkshopReadabilityTests.LockedPartButtonsRenderTheirGoldPriceBelowThePartName () [0x0009f] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopReadabilityTests.cs:55\r\n",
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

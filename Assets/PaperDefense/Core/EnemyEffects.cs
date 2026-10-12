@@ -4,69 +4,142 @@ namespace PaperDefense.Core
 {
     public static class EnemyEffects
     {
-        public static float DrawingHealthMultiplier(DrawingTier tier) =>
-            tier == DrawingTier.Hatched ? 1.7f : tier == DrawingTier.Outlined ? 1.3f : 1;
+        static readonly EffectsRules Historical = new EffectsRules();
 
-        public static float Defense(EnemyState enemy, float blotReduction = .15f)
+        public static float ApplyHit(EnemyState enemy, float raw, ColorEffectPayload payload, RunStatistics statistics,
+            StructureKind weapon, EffectsRules defenseRules, float blotReduction = .15f)
         {
-            if (enemy == null) return 0;
-            float defense = enemy.DrawingTier == DrawingTier.Hatched ? .15f :
-                enemy.DrawingTier == DrawingTier.Outlined ? .08f : 0;
-            if (enemy.BlotRemaining > 0) defense += Math.Max(0, blotReduction);
-            if (enemy.GreenRemaining > 0) defense -= .2f;
-            return Math.Max(0, Math.Min(.95f, defense));
-        }
-
-        public static float MovementMultiplier(EnemyState enemy, float blotSpeedBonus = .15f)
-        {
-            if (enemy == null) return 1;
-            float multiplier = enemy.BlotRemaining > 0 ? 1 + Math.Max(0, blotSpeedBonus) : 1;
-            return enemy.BlueRemaining > 0 ? Math.Min(multiplier, .65f) : multiplier;
-        }
-
-        public static float ApplyHit(EnemyState enemy, float raw, InkColor color, RunStatistics statistics,
-            StructureKind weapon, float blotReduction = .15f)
-        {
+            if (defenseRules == null) throw new ArgumentNullException(nameof(defenseRules));
             if (enemy == null || enemy.Health <= 0 || raw < 0 || float.IsNaN(raw) || float.IsInfinity(raw)) return 0;
-            switch (color)
+            switch (payload.Color)
             {
                 case InkColor.Red:
-                    if (enemy.RedRemaining <= 0) enemy.RedTickRemaining = .25f;
-                    enemy.RedRemaining = 3;
-                    enemy.RedSourceWeapon = weapon;
+                    if (enemy.RedEffect == null) enemy.RedEffect = new TimedEffectState(InkColor.Red);
+                    enemy.RedEffect.TryApply(payload, weapon);
+                    SyncRed(enemy);
                     break;
-                case InkColor.Blue: enemy.BlueRemaining = 3; break;
-                case InkColor.Green: enemy.GreenRemaining = 3; break;
+                case InkColor.Blue:
+                    if (enemy.BlueEffect == null) enemy.BlueEffect = new TimedEffectState(InkColor.Blue);
+                    enemy.BlueEffect.TryApply(payload, weapon);
+                    enemy.BlueRemaining = enemy.BlueEffect.Remaining;
+                    break;
+                case InkColor.Green:
+                    if (enemy.GreenEffect == null) enemy.GreenEffect = new TimedEffectState(InkColor.Green);
+                    enemy.GreenEffect.TryApply(payload, weapon);
+                    enemy.GreenRemaining = enemy.GreenEffect.Remaining;
+                    break;
             }
-            float actual = Math.Min(enemy.Health, raw * (1 - Defense(enemy, blotReduction)));
+            float actual = Math.Min(enemy.Health, DamageRules.Apply(raw, Defense(enemy, defenseRules, blotReduction), defenseRules.MaximumDefense));
             enemy.Health = Math.Max(0, enemy.Health - actual);
             statistics?.RecordDamage(weapon, actual);
             return actual;
         }
 
-        /// <summary>Each status has one refreshed timer. Red pulses do not apply further colors.</summary>
-        public static void Advance(EnemyState enemy, float delta, RunStatistics statistics)
+        public static void ApplySlow(EnemyState enemy, float speedMultiplier, float duration)
         {
+            ColorEffectPayload payload = ColorEffectPayload.Slow(speedMultiplier, duration);
+            TimedEffectState.Validate(payload);
+            if (enemy == null || enemy.Health <= 0) return;
+            if (enemy.BlueEffect == null) enemy.BlueEffect = new TimedEffectState(InkColor.Blue);
+            enemy.BlueEffect.TryApply(payload, StructureKind.Gun);
+            enemy.BlueRemaining = enemy.BlueEffect.Remaining;
+        }
+
+        public static float DrawingHealthMultiplier(DrawingTier tier) => DrawingHealthMultiplier(tier, Historical);
+        public static float DrawingHealthMultiplier(DrawingTier tier, EffectsRules rules)
+        {
+            if (rules == null) throw new ArgumentNullException(nameof(rules));
+            return tier == DrawingTier.Hatched ? rules.HatchedHealthMultiplier :
+                tier == DrawingTier.Outlined ? rules.OutlinedHealthMultiplier : 1;
+        }
+
+        public static float Defense(EnemyState enemy, float blotReduction = .15f)
+            => Defense(enemy, Historical, blotReduction);
+        public static float Defense(EnemyState enemy, EffectsRules rules, float blotReduction = .15f)
+        {
+            if (rules == null) throw new ArgumentNullException(nameof(rules));
+            if (enemy == null) return 0;
+            float defense = enemy.DrawingTier == DrawingTier.Hatched ? rules.HatchedDefense :
+                enemy.DrawingTier == DrawingTier.Outlined ? rules.OutlinedDefense : 0;
+            if (enemy.BlotRemaining > 0) defense += Math.Max(0, blotReduction);
+            if (enemy.GreenEffect != null)
+            { if (enemy.GreenEffect.HasActive) defense -= enemy.GreenEffect.Active.Strength; }
+            else if (enemy.GreenRemaining > 0) defense -= rules.GreenDefenseReduction;
+            return DamageRules.EffectiveDefense(defense, rules.MaximumDefense);
+        }
+
+        public static float MovementMultiplier(EnemyState enemy, float blotSpeedBonus = .15f)
+            => MovementMultiplier(enemy, Historical, blotSpeedBonus);
+        public static float MovementMultiplier(EnemyState enemy, EffectsRules rules, float blotSpeedBonus = .15f)
+        {
+            if (rules == null) throw new ArgumentNullException(nameof(rules));
+            if (enemy == null) return 1;
+            float multiplier = enemy.BlotRemaining > 0 ? 1 + Math.Max(0, blotSpeedBonus) : 1;
+            if (enemy.BlueEffect != null)
+                return enemy.BlueEffect.HasActive ? Math.Min(multiplier, enemy.BlueEffect.Active.Strength) : multiplier;
+            return enemy.BlueRemaining > 0 ? Math.Min(multiplier, rules.BlueSpeedMultiplier) : multiplier;
+        }
+
+        public static float ApplyHit(EnemyState enemy, float raw, InkColor color, RunStatistics statistics,
+            StructureKind weapon, float blotReduction = .15f)
+            => ApplyHit(enemy, raw, color, statistics, weapon, Historical, blotReduction);
+        public static float ApplyHit(EnemyState enemy, float raw, InkColor color, RunStatistics statistics,
+            StructureKind weapon, EffectsRules rules, float blotReduction = .15f)
+            => ApplyHit(enemy, raw, ColorEffectPayload.Capture(color, rules), statistics, weapon, rules, blotReduction);
+
+        /// <summary>Different strengths keep independent timers; only the strongest acts.</summary>
+        public static void Advance(EnemyState enemy, float delta, RunStatistics statistics)
+            => Advance(enemy, delta, statistics, Historical);
+        public static void Advance(EnemyState enemy, float delta, RunStatistics statistics, EffectsRules rules,
+            float blotReduction = .15f)
+        {
+            if (rules == null) throw new ArgumentNullException(nameof(rules));
             if (enemy == null || delta <= 0 || float.IsNaN(delta) || float.IsInfinity(delta)) return;
             float redActiveSeconds = Math.Min(delta, Math.Max(0, enemy.RedRemaining));
             enemy.BlotRemaining = Math.Max(0, enemy.BlotRemaining - delta);
-            enemy.BlueRemaining = Math.Max(0, enemy.BlueRemaining - delta);
-            enemy.GreenRemaining = Math.Max(0, enemy.GreenRemaining - delta);
+            if (enemy.BlueEffect != null)
+            {
+                enemy.BlueEffect.Advance(delta, enemy, rules, statistics, blotReduction);
+                enemy.BlueRemaining = enemy.BlueEffect.Remaining;
+            }
+            else enemy.BlueRemaining = Math.Max(0, enemy.BlueRemaining - delta);
+            if (enemy.GreenEffect != null)
+            {
+                enemy.GreenEffect.Advance(delta, enemy, rules, statistics, blotReduction);
+                enemy.GreenRemaining = enemy.GreenEffect.Remaining;
+            }
+            else enemy.GreenRemaining = Math.Max(0, enemy.GreenRemaining - delta);
+            if (enemy.RedEffect != null)
+            {
+                enemy.RedEffect.Advance(delta, enemy, rules, statistics, blotReduction);
+                SyncRed(enemy);
+                return;
+            }
+            // Directly initialized historical fixtures still use their explicit scalar timers.
             enemy.RedRemaining = Math.Max(0, enemy.RedRemaining - delta);
             if (redActiveSeconds > 0 && enemy.Health > 0)
             {
-                if (enemy.RedTickRemaining <= 0) enemy.RedTickRemaining = .25f;
+                if (enemy.RedTickRemaining <= 0) enemy.RedTickRemaining = rules.RedTickSeconds;
                 enemy.RedTickRemaining -= redActiveSeconds;
                 while (enemy.RedTickRemaining <= .000001f && enemy.Health > 0)
                 {
-                    float actual = Math.Min(1, enemy.Health);
+                    float raw = rules.RedDamagePerTick;
+                    if (!rules.RedIgnoresDefense) raw = DamageRules.Apply(raw, Defense(enemy, rules, blotReduction), rules.MaximumDefense);
+                    float actual = Math.Min(raw, enemy.Health);
                     enemy.Health = Math.Max(0, enemy.Health - actual);
                     statistics?.RecordDamage(enemy.RedSourceWeapon, actual);
-                    enemy.RedTickRemaining += .25f;
+                    enemy.RedTickRemaining += rules.RedTickSeconds;
                 }
             }
             if (enemy.Health <= 0) enemy.RedRemaining = 0;
             if (enemy.RedRemaining <= 0) enemy.RedTickRemaining = 0;
+        }
+
+        static void SyncRed(EnemyState enemy)
+        {
+            enemy.RedRemaining = enemy.RedEffect.Remaining;
+            enemy.RedTickRemaining = enemy.RedEffect.TickRemaining;
+            enemy.RedSourceWeapon = enemy.RedEffect.Weapon;
         }
     }
 }

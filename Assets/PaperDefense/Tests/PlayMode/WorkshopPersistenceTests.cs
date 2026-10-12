@@ -83,6 +83,7 @@ namespace PaperDefense.Tests
         [Test] public void NegativeGoldAndBrokenSelectionAreRepairedWithoutGrantingLockedParts()
         {
             var data = new WorkshopProfile().ToData();
+            data.Version = 1; // Legacy sanitisation; v2 drawing pages are loaded strictly.
             data.Gold = -100;
             data.Album = new[] { new BlueprintData { Id = "locked", Name = "Locked", Chassis = ChassisKind.Heavy,
                 FirstWeapon = StructureKind.Gun, Modules = TowerModules.Tracking } };

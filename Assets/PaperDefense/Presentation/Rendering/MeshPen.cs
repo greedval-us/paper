@@ -68,6 +68,19 @@ namespace PaperDefense.Presentation
             Quad(from - side, to - side, to + side, from + side, color);
         }
 
+        /// <summary>Append cached author lines with only a rigid transform; no wobble or silhouette replacement.</summary>
+        public void Append(AuthoredPartGeometry geometry, Vector2 pivot, float radians, Color color)
+        {
+            if (geometry == null) return;
+            int start = vertices.Count; float cosine = Mathf.Cos(radians), sine = Mathf.Sin(radians);
+            for (int i = 0; i < geometry.Vertices.Count; i++)
+            {
+                var point = geometry.Vertices[i];
+                Vertex(pivot + new Vector2(cosine * point.x - sine * point.y, sine * point.x + cosine * point.y), color);
+            }
+            for (int i = 0; i < geometry.Indices.Count; i++) indices.Add(start + geometry.Indices[i]);
+        }
+
         public void Stroke(Vector2 from, Vector2 to, float width, Color color, int seed = 0, float wobble = .018f)
         {
             Vector2 delta = to - from;

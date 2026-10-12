@@ -28,9 +28,11 @@ namespace PaperDefense.Core
             NavigationTotalMilliseconds += milliseconds;
             NavigationMaxMilliseconds = Math.Max(NavigationMaxMilliseconds, milliseconds);
         }
-        readonly float[] damage=new float[5],idle=new float[5];
-        readonly int[] launches=new int[5];
-        readonly int[] built=new int[15];
+        static readonly int KindCount=Enum.GetValues(typeof(StructureKind)).Length;
+        static readonly int MaterialCount=Enum.GetValues(typeof(MaterialTier)).Length;
+        readonly float[] damage=new float[KindCount],idle=new float[KindCount];
+        readonly int[] launches=new int[KindCount];
+        readonly int[] built=new int[KindCount*MaterialCount];
         readonly List<BreachRecord> breaches=new List<BreachRecord>(32);
         readonly List<RunUpgrade> upgrades=new List<RunUpgrade>(3);
         readonly ReadOnlyCollection<BreachRecord> breachView;
@@ -42,18 +44,21 @@ namespace PaperDefense.Core
         public int PeakAliveEnemies {get;private set;}
         public int TotalStructuresBuilt {get;private set;}
         public int DestroyedStructures {get;private set;}
+        public int BlotsCleared {get;private set;}
+        public void RecordBlotsCleared(int count)
+        {if(count>0) BlotsCleared=(int)Math.Min(int.MaxValue,(long)BlotsCleared+count);}
         public IReadOnlyList<BreachRecord> Breaches=>breachView;
         public IReadOnlyList<RunUpgrade> Upgrades=>upgradeView;
         public RunStatistics(){breachView=breaches.AsReadOnly();upgradeView=upgrades.AsReadOnly();}
         public float Damage(StructureKind kind)=>damage[(int)kind];
         public float IdleSeconds(StructureKind kind)=>idle[(int)kind];
         public int Launches(StructureKind kind)=>launches[(int)kind];
-        public int BuiltCount(StructureKind kind,MaterialTier tier)=>built[(int)kind*3+(int)tier];
+        public int BuiltCount(StructureKind kind,MaterialTier tier)=>built[(int)kind*MaterialCount+(int)tier];
         public void RecordDamage(StructureKind kind,float amount){if(amount>0&&!float.IsNaN(amount)&&!float.IsInfinity(amount))damage[(int)kind]+=amount;}
         public void RecordIdle(StructureKind kind,float seconds){if(seconds>0&&!float.IsNaN(seconds)&&!float.IsInfinity(seconds))idle[(int)kind]+=seconds;}
         public void RecordLaunch(StructureKind kind)=>launches[(int)kind]++;
         public void RecordBuild(int cost,int segments,StructureKind kind=StructureKind.Wall,MaterialTier tier=MaterialTier.Pencil)
-        {BuildInvestment+=Math.Max(0,cost);segments=Math.Max(0,segments);TotalStructuresBuilt+=segments;built[(int)kind*3+(int)tier]+=segments;}
+        {BuildInvestment+=Math.Max(0,cost);segments=Math.Max(0,segments);TotalStructuresBuilt+=segments;built[(int)kind*MaterialCount+(int)tier]+=segments;}
         public void RecordUpgrade(int cost)=>UpgradeInvestment+=Math.Max(0,cost);
         public void RecordRefund(int refund)=>RefundedInk+=Math.Max(0,refund);
         public void RecordLoss(Cell cell,long tick,float elapsed,StructureKind kind,MaterialTier tier,int investment)
@@ -77,6 +82,7 @@ namespace PaperDefense.Core
         public int PeakAliveEnemies=>source.PeakAliveEnemies;
         public int TotalStructuresBuilt=>source.TotalStructuresBuilt;
         public int DestroyedStructures=>source.DestroyedStructures;
+        public int BlotsCleared=>source.BlotsCleared;
         public int NavigationRebuilds=>source.NavigationRebuilds;
         public double NavigationTotalMilliseconds=>source.NavigationTotalMilliseconds;
         public double NavigationMaxMilliseconds=>source.NavigationMaxMilliseconds;

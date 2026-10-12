@@ -20,6 +20,7 @@ namespace PaperDefense.Tests
             root = new GameObject("Workshop integration");
             root.SetActive(false);
             game = root.AddComponent<PaperDefenseBootstrap>();
+            game.memoryOnlyProfile = true;
             var camera = new GameObject("Workshop camera", typeof(Camera));
             camera.transform.SetParent(root.transform);
             game.worldCamera = camera.GetComponent<Camera>();
@@ -77,6 +78,10 @@ namespace PaperDefense.Tests
             Button("New blueprint").onClick.Invoke();
             Button("First Gun").onClick.Invoke();
             Button("Second Gun").onClick.Invoke();
+            Button("Open drawing editor").onClick.Invoke();
+            Assert.That(workshop.DrawingEditor.Session.AddStroke(DrawingPartKey.Mount0,
+                new[] { new DrawingPoint(0, 0), new DrawingPoint(0, .4f) }, out _), Is.True);
+            Button("Apply drawing").onClick.Invoke();
             var saved = workshop.Draft;
             Button("Save blueprint").onClick.Invoke();
             Button("Assign slot 0").onClick.Invoke();

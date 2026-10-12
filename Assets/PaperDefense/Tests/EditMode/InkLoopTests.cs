@@ -98,5 +98,17 @@ namespace PaperDefense.Tests
             Assert.That(enemy.Health,Is.EqualTo(88).Within(.01f));
             Assert.That(enemy.RedRemaining,Is.Zero);Assert.That(enemy.BlueRemaining,Is.Zero);Assert.That(enemy.GreenRemaining,Is.Zero);
         }
+        [TestCase(0f, -1)]
+        [TestCase(1f, 0)]
+        public void ConfiguredWellThreatShareControlsObjectives(float share, int objective)
+        {
+            var balance = Balance(); balance.Progression.WellThreatFraction = share;
+            balance.Waves = new List<WaveDefinition> { new WaveDefinition { Count = 32, SpawnInterval = .005f } };
+            var game = new GameSession(balance, starterDefenses: false);
+            Assert.That(game.TryActivateWell(0, out _), Is.True);
+            game.StartNextWave(); game.Tick(.2f);
+            Assert.That(game.Enemies.Count, Is.EqualTo(32));
+            foreach (var enemy in game.Enemies) Assert.That(enemy.ObjectiveIndex, Is.EqualTo(objective));
+        }
     }
 }

@@ -43,6 +43,7 @@ namespace PaperDefense.Core
         private double supplyRemainder;
         private float fireMultiplier = 1, damageMultiplier = 1, healthMultiplier = 1, salvageBonus;
         private float supplyMultiplier = 1;
+        private float waveRewardMultiplier = 1;
         private bool flowDirty = true;
 
         public GameSession(GameBalance balance, int seed = 1337, bool starterDefenses = true)
@@ -62,7 +63,7 @@ namespace PaperDefense.Core
             frontline = new EnemyState[grid.Length * 3];
             frontlineDistances = new float[grid.Length * 3];
             reservedFrontline = new bool[grid.Length * 3];
-            weapons = new WeaponSystem(balance);
+            weapons = new WeaponSystem(balance, null, CreateBlotContext());
             random = new Random(seed);
             InitializeObjectives();
             if (starterDefenses) AddStarterDefenses();
@@ -70,6 +71,10 @@ namespace PaperDefense.Core
 
         /// <summary>Quotes a deduplicated stroke. A single invalid cell rejects the entire order.</summary>
         public BuildQuote QuoteBuild(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier)
+            => QuoteBuild(cells, kind, tier, null);
+
+        // Placement stays shared; an assembly supplies its complete price before affordability is checked.
+        private BuildQuote QuoteBuild(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier, int? unitPrice)
         {
             var unique = new List<Cell>();
             var quote = new BuildQuote { Cells = unique, Reason = "", Valid = false };
@@ -105,7 +110,7 @@ namespace PaperDefense.Core
                 foreach (var enemy in enemies)
                     if (enemy.Health > 0 && seen.Contains(CellOf(enemy.Position)) && StructureAt(CellOf(enemy.Position)) == null)
                     { invalid = "Здесь находится враг."; break; }
-            long cost = (long)BuildCost(kind, tier) * newSegments;
+            long cost = (long)(unitPrice ?? BuildCost(kind, tier)) * newSegments;
             quote.Cost = (int)Math.Min(int.MaxValue, cost);
             if (invalid.Length != 0) { quote.Reason = invalid; return quote; }
             if (cost > Ink) { quote.Reason = "Не хватает штрихов: нужно " + cost + "."; return quote; }
@@ -134,9 +139,9 @@ namespace PaperDefense.Core
             var structure = StructureAt(cell);
             if (structure == null) return false;
             float fraction = Clamp(structure.Health / Math.Max(1, structure.MaxHealth), 0, 1);
-            float rate = Clamp(Balance.Material(structure.Tier).RefundFraction + salvageBonus, 0, 0.95f);
+            float rate = Clamp(Balance.Material(structure.Tier).RefundFraction + salvageBonus, 0, Balance.Progression.MaximumRefundFraction);
             refund = (int)Math.Floor(structure.PaidInk * fraction * rate + 0.00001f);
-            Ink += refund;
+            CreditInk(refund);
             Statistics.RecordRefund(refund);
             RemoveStructure(structure);
             return true;
@@ -182,7 +187,7 @@ namespace PaperDefense.Core
         {
             if ((Phase != RunPhase.Planning && Phase != RunPhase.Intermission) || PendingUpgrade) return;
             if (WaveIndex >= Balance.Waves.Count) { Phase = RunPhase.Victory; return; }
-            Ink += Math.Min(Math.Max(0, Balance.MaxEarlyLaunchInk), (int)Math.Floor(Math.Max(0, Countdown) * Math.Max(0, Balance.EarlyLaunchInkPerSecond)));
+            CreditInk(Math.Min(Math.Max(0, Balance.MaxEarlyLaunchInk), (int)Math.Floor(Math.Max(0, Countdown) * Math.Max(0, Balance.EarlyLaunchInkPerSecond))));
             WaveIndex++;
             var wave = Balance.Waves[WaveIndex - 1];
             RemainingToSpawn = Math.Max(0, wave.Count);
@@ -198,18 +203,23 @@ namespace PaperDefense.Core
             Statistics.RecordUpgradeChoice(upgrade);
             switch (upgrade)
             {
-                case RunUpgrade.RapidFire: fireMultiplier *= 1.22f; break;
+                case RunUpgrade.RapidFire: fireMultiplier *= Balance.Progression.RapidFireMultiplier; break;
                 case RunUpgrade.DeepInk:
-                    damageMultiplier *= 1.18f;
-                    healthMultiplier *= 1.25f;
-                    foreach (var structure in structures) { structure.Health *= 1.25f; structure.MaxHealth *= 1.25f; }
+                    damageMultiplier *= Balance.Progression.DeepInkDamageMultiplier;
+                    healthMultiplier *= Balance.Progression.DeepInkHealthMultiplier;
+                    foreach (var structure in structures)
+                    {
+                        structure.Health *= Balance.Progression.DeepInkHealthMultiplier;
+                        structure.MaxHealth *= Balance.Progression.DeepInkHealthMultiplier;
+                    }
                     flowDirty = true;
                     StructureVisualVersion++;
                     break;
                 case RunUpgrade.Salvage:
-                    salvageBonus += 0.12f;
-                    supplyMultiplier *= 1.25f;
-                    Ink += 60;
+                    salvageBonus += Balance.Progression.SalvageRefundBonus;
+                    supplyMultiplier *= Balance.Progression.SalvageSupplyMultiplier;
+                    waveRewardMultiplier *= Balance.Progression.SalvageWaveRewardMultiplier;
+                    CreditInk(Balance.Progression.SalvageImmediateInk);
                     break;
             }
         }
@@ -238,7 +248,7 @@ namespace PaperDefense.Core
             crowd.Rebuild(enemies);
             supplyRemainder += Math.Max(0, Balance.PassiveInkPerSecond) * supplyMultiplier * delta;
             int supplied = (int)Math.Floor(supplyRemainder + 0.000001);
-            Ink += supplied;
+            CreditInk(supplied);
             supplyRemainder -= supplied;
             foreach (var structure in structures)
             {
@@ -257,8 +267,11 @@ namespace PaperDefense.Core
                         }
                     }
                 }
-                structure.Cooldown = Math.Max(0, structure.Cooldown - delta);
-                structure.SecondaryCooldown = Math.Max(0, structure.SecondaryCooldown - delta);
+                if (!Balance.Construction.DynamicFeed)
+                {
+                    structure.Cooldown = Math.Max(0, structure.Cooldown - delta);
+                    structure.SecondaryCooldown = Math.Max(0, structure.SecondaryCooldown - delta);
+                }
                 structure.FrontageUsed = 0;
                 RefreshHealthBand(structure);
             }
@@ -283,7 +296,7 @@ namespace PaperDefense.Core
             }
             MoveEnemies(delta);
             if (BaseHealth <= 0) { BaseHealth = 0; Phase = RunPhase.Defeat; return; }
-            weapons.Fire(structures, enemies, shots, fireMultiplier, damageMultiplier, delta, TickIndex, Statistics, EventBuffer);
+            weapons.Fire(structures, enemies, shots, fireMultiplier, damageMultiplier, delta, TickIndex, Statistics, EventBuffer, Elapsed);
             RemoveDeadEnemies();
             if (RemainingToSpawn == 0 && enemies.Count == 0 && !weapons.HasPendingProjectiles && EnemyProjectiles.Count == 0) CompleteWave();
         }
@@ -333,13 +346,15 @@ namespace PaperDefense.Core
                     drawing = tierRoll < Clamp(wave.HatchedFraction,0,1) ? DrawingTier.Hatched :
                         tierRoll < Clamp(wave.HatchedFraction + wave.OutlinedFraction,0,1) ? DrawingTier.Outlined : DrawingTier.Sketch;
                 }
-                float lateScale = Balance.EnableEnemyMechanics ? EnemyEffects.DrawingHealthMultiplier(drawing) : 1 + Math.Max(0, WaveIndex - 3) * 0.06f;
+                float lateScale = Balance.EnableEnemyMechanics ? EnemyEffects.DrawingHealthMultiplier(drawing, Balance.Effects) :
+                    1 + Math.Max(0, WaveIndex - Balance.Progression.LegacyHealthGrowthStartsAfterWave) * Balance.Progression.LegacyHealthGrowthPerWave;
                 enemies.Add(new EnemyState
                 {
                     Id = nextEnemyId++, Kind = kind, Position = position,
                     Health = Math.Max(1, definition.MaxHealth * lateScale), MaxHealth = Math.Max(1, definition.MaxHealth * lateScale),
-                    SpeedScale = 0.92f + (float)random.NextDouble() * 0.16f, AttackCooldown = 0,
-                    DrawingTier = drawing, ObjectiveIndex = ChooseObjective()
+                    SpeedScale = Balance.Progression.EnemySpeedScaleMinimum +
+                        (float)random.NextDouble() * Balance.Progression.EnemySpeedScaleVariation, AttackCooldown = 0,
+                    DrawingTier = drawing, ObjectiveIndex = ChooseObjective(), RewardBudget = Math.Max(0, definition.Reward)
                 });
                 Statistics.ObserveEnemies(enemies.Count);
             }
@@ -394,8 +409,9 @@ namespace PaperDefense.Core
                         obstacle.FrontageUsed++;
                         if (enemy.AttackCooldown <= 0)
                         {
-                            float siege = enemy.Kind == EnemyKind.Gnawer ? 1.5f : 1;
-                            obstacle.Health = Math.Max(0, obstacle.Health - Math.Max(0, definition.Damage) * siege);
+                            float siege = Math.Max(0, definition.StructureDamageMultiplier);
+                            float damage = DamageRules.StructureDamage(Math.Max(0, definition.Damage) * siege, obstacle, Balance);
+                            obstacle.Health = Math.Max(0, obstacle.Health - damage);
                             enemy.AttackCooldown = Math.Max(0.05f, definition.AttackInterval);
                             if (obstacle.Health <= 0) RemoveStructure(obstacle, true);
                             else RefreshHealthBand(obstacle);
@@ -405,7 +421,8 @@ namespace PaperDefense.Core
                 }
                 float dx = enemy.Destination.X - enemy.Position.X, dy = enemy.Destination.Y - enemy.Position.Y;
                 float distance = (float)Math.Sqrt(dx * dx + dy * dy);
-                float movement = Math.Max(0, definition.Speed) * enemy.SpeedScale * EnemyEffects.MovementMultiplier(enemy, Balance.BlotSpeedBonus) * delta;
+                float movement = Math.Max(0, definition.Speed) * enemy.SpeedScale *
+                    EnemyEffects.MovementMultiplier(enemy, Balance.Effects, Balance.BlotSpeedBonus) * delta;
                 bool reached = distance <= movement + 0.00001f;
                 var nextPosition = reached ? enemy.Destination : distance > 0.00001f ?
                     new Point2(enemy.Position.X + dx / distance * movement, enemy.Position.Y + dy / distance * movement) : enemy.Position;
@@ -470,7 +487,12 @@ namespace PaperDefense.Core
             {
                 var enemy = enemies[read];
                 if (enemy.Health > 0) enemies[write++] = enemy;
-                else { OnEnemyDeath(enemy); Kills++; Ink += Math.Max(0, Balance.Enemy(enemy.Kind).Reward); }
+                else
+                {
+                    OnEnemyDeath(enemy);
+                    Kills++;
+                    CreditInk(EnemyRewardBudget.Consume(enemy, Balance.Enemy(enemy.Kind).Reward, Balance.Progression.RequireAssignedEnemyRewards));
+                }
             }
             if (write < enemies.Count) enemies.RemoveRange(write, enemies.Count - write);
         }
@@ -478,11 +500,14 @@ namespace PaperDefense.Core
         private void CompleteWave()
         {
             AwardWaveResources();
-            Ink += Math.Max(0, Balance.WaveInkGrant);
+            int configuredGrant = Balance.Waves[WaveIndex - 1].InkGrant;
+            int grant = configuredGrant >= 0 ? configuredGrant : Balance.WaveInkGrant;
+            CreditInk((int)Math.Min(int.MaxValue, Math.Floor(Math.Max(0, grant) * (double)waveRewardMultiplier)));
             if (WaveIndex >= Balance.Waves.Count) { Phase = RunPhase.Victory; Countdown = 0; return; }
             Phase = RunPhase.Intermission;
             Countdown = Math.Max(0, Balance.IntermissionSeconds);
-            PendingUpgrade = WaveIndex == 2 || WaveIndex == 4 || WaveIndex == 6;
+            PendingUpgrade = Balance.Progression.UpgradeEveryWaves > 0 && WaveIndex <= Balance.Progression.LastUpgradeWave &&
+                WaveIndex % Balance.Progression.UpgradeEveryWaves == 0;
         }
 
         private void AddStarterDefenses()
@@ -557,6 +582,7 @@ namespace PaperDefense.Core
 
         private int BuildCost(StructureKind kind, MaterialTier tier) =>
             (int)Math.Ceiling(Math.Max(0, Balance.Structure(kind).Cost) * Math.Max(0, Balance.Material(tier).CostMultiplier));
+        private void CreditInk(int amount) => Ink = (int)Math.Min(int.MaxValue, (long)Ink + Math.Max(0, amount));
         private bool Inside(Cell cell) => cell.X >= 0 && cell.Y >= 0 && cell.X < Balance.Width && cell.Y < Balance.Height;
         private static Cell CellOf(Point2 point) => new Cell((int)Math.Floor(point.X), (int)Math.Floor(point.Y));
         private static Point2 Center(Cell cell) => new Point2(cell.X + 0.5f, cell.Y + 0.5f);

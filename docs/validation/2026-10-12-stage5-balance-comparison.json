@@ -1,0 +1,930 @@
+{
+  "Conditions": "Seed1337; 60s; complete pencil towers at fixed positions; blue color; simplified counterfire; budget ceiling200/400/800. Legacy-standard geometry keeps quality100 in both presets. No profile or live battle is changed.",
+  "Rows": [
+    {
+      "Blueprint": "Один пулемёт",
+      "Scenario": "Crowd",
+      "Budget": 200,
+      "Historical": {
+        "Cost": 200,
+        "Copies": 5,
+        "Leaks": 237,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 78,
+        "IdleSeconds": 31.5665283203125
+      },
+      "Target": {
+        "Cost": 200,
+        "Copies": 5,
+        "Leaks": 237,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 78,
+        "IdleSeconds": 31.26653289794922
+      }
+    },
+    {
+      "Blueprint": "Один пулемёт",
+      "Scenario": "Crowd",
+      "Budget": 400,
+      "Historical": {
+        "Cost": 400,
+        "Copies": 10,
+        "Leaks": 227,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 310,
+        "IdleSeconds": 67.06598663330078
+      },
+      "Target": {
+        "Cost": 400,
+        "Copies": 10,
+        "Leaks": 233,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 226,
+        "IdleSeconds": 66.29933166503906
+      }
+    },
+    {
+      "Blueprint": "Один пулемёт",
+      "Scenario": "Crowd",
+      "Budget": 800,
+      "Historical": {
+        "Cost": 800,
+        "Copies": 20,
+        "Leaks": 192,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 1068,
+        "IdleSeconds": 154.9041290283203
+      },
+      "Target": {
+        "Cost": 800,
+        "Copies": 20,
+        "Leaks": 207,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 762,
+        "IdleSeconds": 143.6350555419922
+      }
+    },
+    {
+      "Blueprint": "Один пулемёт",
+      "Scenario": "Fast",
+      "Budget": 200,
+      "Historical": {
+        "Cost": 200,
+        "Copies": 5,
+        "Leaks": 152,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 136,
+        "IdleSeconds": 16.40009307861328
+      },
+      "Target": {
+        "Cost": 200,
+        "Copies": 5,
+        "Leaks": 155,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 106,
+        "IdleSeconds": 15.733429908752441
+      }
+    },
+    {
+      "Blueprint": "Один пулемёт",
+      "Scenario": "Fast",
+      "Budget": 400,
+      "Historical": {
+        "Cost": 400,
+        "Copies": 10,
+        "Leaks": 131,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 430,
+        "IdleSeconds": 34.866477966308594
+      },
+      "Target": {
+        "Cost": 400,
+        "Copies": 10,
+        "Leaks": 142,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 252,
+        "IdleSeconds": 33.49983215332031
+      }
+    },
+    {
+      "Blueprint": "Один пулемёт",
+      "Scenario": "Fast",
+      "Budget": 800,
+      "Historical": {
+        "Cost": 800,
+        "Copies": 20,
+        "Leaks": 62,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 1420,
+        "IdleSeconds": 100.73213958740234
+      },
+      "Target": {
+        "Cost": 800,
+        "Copies": 20,
+        "Leaks": 105,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 794,
+        "IdleSeconds": 75.86585235595703
+      }
+    },
+    {
+      "Blueprint": "Один пулемёт",
+      "Scenario": "Armored",
+      "Budget": 200,
+      "Historical": {
+        "Cost": 200,
+        "Copies": 5,
+        "Leaks": 80,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 152.99998474121094,
+        "IdleSeconds": 49.799583435058594
+      },
+      "Target": {
+        "Cost": 200,
+        "Copies": 5,
+        "Leaks": 80,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 152.99998474121094,
+        "IdleSeconds": 49.266258239746094
+      }
+    },
+    {
+      "Blueprint": "Один пулемёт",
+      "Scenario": "Armored",
+      "Budget": 400,
+      "Historical": {
+        "Cost": 400,
+        "Copies": 10,
+        "Leaks": 77,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 664.8004760742188,
+        "IdleSeconds": 103.49876403808594
+      },
+      "Target": {
+        "Cost": 400,
+        "Copies": 10,
+        "Leaks": 77,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 613.8004150390625,
+        "IdleSeconds": 102.09878540039062
+      }
+    },
+    {
+      "Blueprint": "Один пулемёт",
+      "Scenario": "Armored",
+      "Budget": 800,
+      "Historical": {
+        "Cost": 800,
+        "Copies": 20,
+        "Leaks": 64,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 2545.994140625,
+        "IdleSeconds": 223.85218811035156
+      },
+      "Target": {
+        "Cost": 800,
+        "Copies": 20,
+        "Leaks": 67,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 2054.5966796875,
+        "IdleSeconds": 220.5181427001953
+      }
+    },
+    {
+      "Blueprint": "Два пулемёта",
+      "Scenario": "Crowd",
+      "Budget": 200,
+      "Historical": {
+        "Cost": 192,
+        "Copies": 3,
+        "Leaks": 237,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 66,
+        "IdleSeconds": 36.266456604003906
+      },
+      "Target": {
+        "Cost": 192,
+        "Copies": 3,
+        "Leaks": 237,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 66,
+        "IdleSeconds": 36.266456604003906
+      }
+    },
+    {
+      "Blueprint": "Два пулемёта",
+      "Scenario": "Crowd",
+      "Budget": 400,
+      "Historical": {
+        "Cost": 384,
+        "Copies": 6,
+        "Leaks": 230,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 220,
+        "IdleSeconds": 77.59915924072266
+      },
+      "Target": {
+        "Cost": 384,
+        "Copies": 6,
+        "Leaks": 233,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 154,
+        "IdleSeconds": 76.73250579833984
+      }
+    },
+    {
+      "Blueprint": "Два пулемёта",
+      "Scenario": "Crowd",
+      "Budget": 800,
+      "Historical": {
+        "Cost": 768,
+        "Copies": 12,
+        "Leaks": 210,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 660,
+        "IdleSeconds": 178.40914916992188
+      },
+      "Target": {
+        "Cost": 768,
+        "Copies": 12,
+        "Leaks": 218,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 484,
+        "IdleSeconds": 171.20761108398438
+      }
+    },
+    {
+      "Blueprint": "Два пулемёта",
+      "Scenario": "Fast",
+      "Budget": 200,
+      "Historical": {
+        "Cost": 192,
+        "Copies": 3,
+        "Leaks": 155,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 70,
+        "IdleSeconds": 18.26673126220703
+      },
+      "Target": {
+        "Cost": 192,
+        "Copies": 3,
+        "Leaks": 156,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 56,
+        "IdleSeconds": 17.93340301513672
+      }
+    },
+    {
+      "Blueprint": "Два пулемёта",
+      "Scenario": "Fast",
+      "Budget": 400,
+      "Historical": {
+        "Cost": 384,
+        "Copies": 6,
+        "Leaks": 140,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 280,
+        "IdleSeconds": 42.79969024658203
+      },
+      "Target": {
+        "Cost": 384,
+        "Copies": 6,
+        "Leaks": 148,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 168,
+        "IdleSeconds": 40.199729919433594
+      }
+    },
+    {
+      "Blueprint": "Два пулемёта",
+      "Scenario": "Fast",
+      "Budget": 800,
+      "Historical": {
+        "Cost": 768,
+        "Copies": 12,
+        "Leaks": 103,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 798,
+        "IdleSeconds": 119.4651870727539
+      },
+      "Target": {
+        "Cost": 768,
+        "Copies": 12,
+        "Leaks": 123,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 518,
+        "IdleSeconds": 92.4655990600586
+      }
+    },
+    {
+      "Blueprint": "Два пулемёта",
+      "Scenario": "Armored",
+      "Budget": 200,
+      "Historical": {
+        "Cost": 192,
+        "Copies": 3,
+        "Leaks": 80,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 163.19998168945312,
+        "IdleSeconds": 56.999473571777344
+      },
+      "Target": {
+        "Cost": 192,
+        "Copies": 3,
+        "Leaks": 80,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 142.79998779296875,
+        "IdleSeconds": 56.266151428222656
+      }
+    },
+    {
+      "Blueprint": "Два пулемёта",
+      "Scenario": "Armored",
+      "Budget": 400,
+      "Historical": {
+        "Cost": 384,
+        "Copies": 6,
+        "Leaks": 78,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 422.8001708984375,
+        "IdleSeconds": 119.06519317626953
+      },
+      "Target": {
+        "Cost": 384,
+        "Copies": 6,
+        "Leaks": 78,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 402.400146484375,
+        "IdleSeconds": 117.99854278564453
+      }
+    },
+    {
+      "Blueprint": "Два пулемёта",
+      "Scenario": "Armored",
+      "Budget": 800,
+      "Historical": {
+        "Cost": 768,
+        "Copies": 12,
+        "Leaks": 74,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 1451.9990234375,
+        "IdleSeconds": 265.2901306152344
+      },
+      "Target": {
+        "Cost": 768,
+        "Copies": 12,
+        "Leaks": 76,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 1253.599853515625,
+        "IdleSeconds": 261.0911560058594
+      }
+    },
+    {
+      "Blueprint": "Пулемёт + линия",
+      "Scenario": "Crowd",
+      "Budget": 200,
+      "Historical": {
+        "Cost": 178,
+        "Copies": 2,
+        "Leaks": 238,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 80,
+        "IdleSeconds": 20.066707611083984
+      },
+      "Target": {
+        "Cost": 178,
+        "Copies": 2,
+        "Leaks": 238,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 80,
+        "IdleSeconds": 20.100040435791016
+      }
+    },
+    {
+      "Blueprint": "Пулемёт + линия",
+      "Scenario": "Crowd",
+      "Budget": 400,
+      "Historical": {
+        "Cost": 356,
+        "Copies": 4,
+        "Leaks": 234,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 222,
+        "IdleSeconds": 49.86659240722656
+      },
+      "Target": {
+        "Cost": 356,
+        "Copies": 4,
+        "Leaks": 235,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 176,
+        "IdleSeconds": 49.7999267578125
+      }
+    },
+    {
+      "Blueprint": "Пулемёт + линия",
+      "Scenario": "Crowd",
+      "Budget": 800,
+      "Historical": {
+        "Cost": 712,
+        "Copies": 8,
+        "Leaks": 221,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 634,
+        "IdleSeconds": 106.63239288330078
+      },
+      "Target": {
+        "Cost": 712,
+        "Copies": 8,
+        "Leaks": 226,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 398,
+        "IdleSeconds": 103.2324447631836
+      }
+    },
+    {
+      "Blueprint": "Пулемёт + линия",
+      "Scenario": "Fast",
+      "Budget": 200,
+      "Historical": {
+        "Cost": 178,
+        "Copies": 2,
+        "Leaks": 155,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 94,
+        "IdleSeconds": 10.299993515014648
+      },
+      "Target": {
+        "Cost": 178,
+        "Copies": 2,
+        "Leaks": 157,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 54,
+        "IdleSeconds": 10.033327102661133
+      }
+    },
+    {
+      "Blueprint": "Пулемёт + линия",
+      "Scenario": "Fast",
+      "Budget": 400,
+      "Historical": {
+        "Cost": 356,
+        "Copies": 4,
+        "Leaks": 145,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 210,
+        "IdleSeconds": 26.466793060302734
+      },
+      "Target": {
+        "Cost": 356,
+        "Copies": 4,
+        "Leaks": 152,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 136,
+        "IdleSeconds": 25.733449935913086
+      }
+    },
+    {
+      "Blueprint": "Пулемёт + линия",
+      "Scenario": "Fast",
+      "Budget": 800,
+      "Historical": {
+        "Cost": 712,
+        "Copies": 8,
+        "Leaks": 124,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 516,
+        "IdleSeconds": 75.69953155517578
+      },
+      "Target": {
+        "Cost": 712,
+        "Copies": 8,
+        "Leaks": 136,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 348,
+        "IdleSeconds": 57.76647186279297
+      }
+    },
+    {
+      "Blueprint": "Пулемёт + линия",
+      "Scenario": "Armored",
+      "Budget": 200,
+      "Historical": {
+        "Cost": 178,
+        "Copies": 2,
+        "Leaks": 80,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 188.70001220703125,
+        "IdleSeconds": 31.5001220703125
+      },
+      "Target": {
+        "Cost": 178,
+        "Copies": 2,
+        "Leaks": 80,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 178.50001525878906,
+        "IdleSeconds": 31.53345489501953
+      }
+    },
+    {
+      "Blueprint": "Пулемёт + линия",
+      "Scenario": "Armored",
+      "Budget": 400,
+      "Historical": {
+        "Cost": 356,
+        "Copies": 4,
+        "Leaks": 80,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 362.1000061035156,
+        "IdleSeconds": 77.59950256347656
+      },
+      "Target": {
+        "Cost": 356,
+        "Copies": 4,
+        "Leaks": 80,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 351.9000244140625,
+        "IdleSeconds": 77.59950256347656
+      }
+    },
+    {
+      "Blueprint": "Пулемёт + линия",
+      "Scenario": "Armored",
+      "Budget": 800,
+      "Historical": {
+        "Cost": 712,
+        "Copies": 8,
+        "Leaks": 77,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 868.7997436523438,
+        "IdleSeconds": 158.49826049804688
+      },
+      "Target": {
+        "Cost": 712,
+        "Copies": 8,
+        "Leaks": 77,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 787.1997680664062,
+        "IdleSeconds": 158.36492919921875
+      }
+    },
+    {
+      "Blueprint": "Мортира + подача",
+      "Scenario": "Crowd",
+      "Budget": 200,
+      "Historical": {
+        "Cost": 106,
+        "Copies": 1,
+        "Leaks": 217,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 506,
+        "IdleSeconds": 2.833332061767578
+      },
+      "Target": {
+        "Cost": 106,
+        "Copies": 1,
+        "Leaks": 217,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 506,
+        "IdleSeconds": 2.833332061767578
+      }
+    },
+    {
+      "Blueprint": "Мортира + подача",
+      "Scenario": "Crowd",
+      "Budget": 400,
+      "Historical": {
+        "Cost": 318,
+        "Copies": 3,
+        "Leaks": 201,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 858,
+        "IdleSeconds": 13.90007209777832
+      },
+      "Target": {
+        "Cost": 318,
+        "Copies": 3,
+        "Leaks": 208,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 704,
+        "IdleSeconds": 13.700069427490234
+      }
+    },
+    {
+      "Blueprint": "Мортира + подача",
+      "Scenario": "Crowd",
+      "Budget": 800,
+      "Historical": {
+        "Cost": 742,
+        "Copies": 7,
+        "Leaks": 182,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 1276,
+        "IdleSeconds": 35.03314208984375
+      },
+      "Target": {
+        "Cost": 742,
+        "Copies": 7,
+        "Leaks": 173,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 1474,
+        "IdleSeconds": 34.933143615722656
+      }
+    },
+    {
+      "Blueprint": "Мортира + подача",
+      "Scenario": "Fast",
+      "Budget": 200,
+      "Historical": {
+        "Cost": 106,
+        "Copies": 1,
+        "Leaks": 159,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 14,
+        "IdleSeconds": 1.3000000715255737
+      },
+      "Target": {
+        "Cost": 106,
+        "Copies": 1,
+        "Leaks": 159,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 14,
+        "IdleSeconds": 1.3000000715255737
+      }
+    },
+    {
+      "Blueprint": "Мортира + подача",
+      "Scenario": "Fast",
+      "Budget": 400,
+      "Historical": {
+        "Cost": 318,
+        "Copies": 3,
+        "Leaks": 159,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 14,
+        "IdleSeconds": 5.099996566772461
+      },
+      "Target": {
+        "Cost": 318,
+        "Copies": 3,
+        "Leaks": 159,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 14,
+        "IdleSeconds": 5.099996566772461
+      }
+    },
+    {
+      "Blueprint": "Мортира + подача",
+      "Scenario": "Fast",
+      "Budget": 800,
+      "Historical": {
+        "Cost": 742,
+        "Copies": 7,
+        "Leaks": 156,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 56,
+        "IdleSeconds": 12.700056076049805
+      },
+      "Target": {
+        "Cost": 742,
+        "Copies": 7,
+        "Leaks": 156,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 56,
+        "IdleSeconds": 12.700056076049805
+      }
+    },
+    {
+      "Blueprint": "Мортира + подача",
+      "Scenario": "Armored",
+      "Budget": 200,
+      "Historical": {
+        "Cost": 106,
+        "Copies": 1,
+        "Leaks": 80,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 488.75,
+        "IdleSeconds": 4.366663932800293
+      },
+      "Target": {
+        "Cost": 106,
+        "Copies": 1,
+        "Leaks": 80,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 318.75,
+        "IdleSeconds": 4.366663932800293
+      }
+    },
+    {
+      "Blueprint": "Мортира + подача",
+      "Scenario": "Armored",
+      "Budget": 400,
+      "Historical": {
+        "Cost": 318,
+        "Copies": 3,
+        "Leaks": 76,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 1303.75,
+        "IdleSeconds": 18.166732788085938
+      },
+      "Target": {
+        "Cost": 318,
+        "Copies": 3,
+        "Leaks": 76,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 1112.5,
+        "IdleSeconds": 18.166732788085938
+      }
+    },
+    {
+      "Blueprint": "Мортира + подача",
+      "Scenario": "Armored",
+      "Budget": 800,
+      "Historical": {
+        "Cost": 742,
+        "Copies": 7,
+        "Leaks": 65,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 2312.5,
+        "IdleSeconds": 48.33293914794922
+      },
+      "Target": {
+        "Cost": 742,
+        "Copies": 7,
+        "Leaks": 66,
+        "Unresolved": 0,
+        "Survivors": 0,
+        "Damage": 2342.5,
+        "IdleSeconds": 47.432952880859375
+      }
+    }
+  ],
+  "HistoricalRules": {
+    "Preset": "Historical",
+    "StartingInk": 720,
+    "PassiveInkPerSecond": 1.7999999523162842,
+    "EarlyLaunchInkPerSecond": 0.800000011920929,
+    "DynamicFeedCapacity": 1.600000023841858,
+    "MaximumDefense": 0.949999988079071,
+    "ColorWindowSeconds": 1,
+    "DynamicFeed": false,
+    "LimitTowerColor": false,
+    "ColorTargetsPerWindow": 3,
+    "WaveGrants": [
+      75,
+      75,
+      75,
+      75,
+      75,
+      75,
+      75,
+      75
+    ]
+  },
+  "TargetRules": {
+    "Preset": "Target",
+    "StartingInk": 720,
+    "PassiveInkPerSecond": 0,
+    "EarlyLaunchInkPerSecond": 0,
+    "DynamicFeedCapacity": 1.600000023841858,
+    "MaximumDefense": 0.6000000238418579,
+    "ColorWindowSeconds": 1,
+    "DynamicFeed": true,
+    "LimitTowerColor": true,
+    "ColorTargetsPerWindow": 3,
+    "WaveGrants": [
+      140,
+      160,
+      180,
+      200,
+      220,
+      240,
+      260,
+      280
+    ]
+  },
+  "ArmoredSingleMaterials": [
+    {
+      "Material": "Pencil",
+      "Historical": {
+        "Cost": 58,
+        "Health": 82.5,
+        "Defense": 0,
+        "DamagePerHit": 12,
+        "BuildSeconds": 1.649999976158142
+      },
+      "Target": {
+        "Cost": 58,
+        "Health": 55,
+        "Defense": 0.25,
+        "DamagePerHit": 12,
+        "BuildSeconds": 1.649999976158142
+      }
+    },
+    {
+      "Material": "Ink",
+      "Historical": {
+        "Cost": 105,
+        "Health": 173.24998474121094,
+        "Defense": 0,
+        "DamagePerHit": 15,
+        "BuildSeconds": 2.1449999809265137
+      },
+      "Target": {
+        "Cost": 105,
+        "Health": 115.49999237060547,
+        "Defense": 0.25,
+        "DamagePerHit": 12,
+        "BuildSeconds": 2.1449999809265137
+      }
+    },
+    {
+      "Material": "Marker",
+      "Historical": {
+        "Cost": 186,
+        "Health": 346.4999694824219,
+        "Defense": 0,
+        "DamagePerHit": 19.200000762939453,
+        "BuildSeconds": 2.887500047683716
+      },
+      "Target": {
+        "Cost": 186,
+        "Health": 230.99998474121094,
+        "Defense": 0.25,
+        "DamagePerHit": 12,
+        "BuildSeconds": 2.887500047683716
+      }
+    }
+  ]
+}

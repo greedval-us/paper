@@ -1,4 +1,5 @@
 using PaperDefense.Core;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PaperDefense.Presentation
@@ -6,6 +7,20 @@ namespace PaperDefense.Presentation
     /// <summary>Small, deliberately imperfect ink silhouettes used by the batched world view.</summary>
     internal static class DoodleGlyphs
     {
+        static readonly Dictionary<StructureKind, AuthoredPartGeometry> standardMounts = new Dictionary<StructureKind, AuthoredPartGeometry>();
+        internal static AuthoredPartGeometry StandardMount(StructureKind kind)
+        {
+            if (standardMounts.TryGetValue(kind, out var cached)) return cached;
+            var blueprint = new TowerBlueprint("standard-mount", "Стандартная деталь", ChassisKind.Standard, kind);
+            foreach (var part in DrawingTemplateCatalog.Create(blueprint))
+                if (part.Key == DrawingPartKey.Mount0)
+                {
+                    var source = new DrawingSnapshot(new[] { new DrawingPart(DrawingPartKey.Mount0, part.Contours) });
+                    cached = AuthoredGeometryCache.For(source).GetPart(DrawingPartKey.Mount0);
+                    standardMounts.Add(kind, cached); return cached;
+                }
+            return null;
+        }
         public static Color TierColor(MaterialTier tier)
         {
             switch (tier)
@@ -28,22 +43,43 @@ namespace PaperDefense.Presentation
             Color edge = MeshPen.Alpha(NotebookPalette.Navy, alpha);
             Color fill = Color.Lerp(NotebookPalette.Paper, color, .22f);
             if (building) fill.a = .7f;
-            pen.Disc(p + new Vector2(.055f, -.065f), .46f, MeshPen.Alpha(NotebookPalette.Navy, .07f), 12, .8f);
-
-            switch (state.Kind)
+            bool authored = state.Blueprint != null && state.Blueprint.Origin == DrawingOrigin.PlayerDrawing;
+            if (authored)
             {
-                case StructureKind.Wall: Wall(pen, p, color, edge, fill, state.Id); break;
-                case StructureKind.Spikes: Spikes(pen, p, color, edge, fill, state.Id); break;
-                case StructureKind.Piercer: Piercer(pen, p, color, edge, fill, state.Id); break;
-                case StructureKind.Mortar: Mortar(pen, p, color, edge, fill, state.Id); break;
-                default: Gun(pen, p, color, edge, fill, state.Id); break;
+                var geometry = AuthoredGeometryCache.For(state.Blueprint.Drawing);
+                for (int i = 0; i < geometry.Parts.Count; i++)
+                {
+                    var part = geometry.Parts[i];
+                    if (part.Key == DrawingPartKey.Mount0 || part.Key == DrawingPartKey.Mount1) continue;
+                    if (!DrawingTemplateCatalog.IsEnabled(state.Blueprint, part.Key)) continue;
+                    var pivot = DrawingTemplateCatalog.Pivot(state.Blueprint, part.Key);
+                    pen.Append(part, p + new Vector2(pivot.X, pivot.Y), 0, color);
+                }
             }
-            if (state.Blueprint != null)
+            else
             {
-                if (state.Blueprint.Chassis == ChassisKind.Heavy) pen.Ring(p, .46f, .075f, edge, 12, 1, state.Id);
-                if ((state.Blueprint.Modules & TowerModules.Armor) != 0)
-                    for (int side = -1; side <= 1; side += 2)
-                        pen.Box(p + new Vector2(side * .39f, 0), new Vector2(.14f, .52f), fill, edge, .055f, state.Id + side);
+                pen.Disc(p + new Vector2(.055f, -.065f), .46f, MeshPen.Alpha(NotebookPalette.Navy, .07f), 12, .8f);
+                switch (state.Kind)
+                {
+                    case StructureKind.Wall: Wall(pen, p, color, edge, fill, state.Id); break;
+                    case StructureKind.Spikes: Spikes(pen, p, color, edge, fill, state.Id); break;
+                    case StructureKind.Piercer: Piercer(pen, p, color, edge, fill, state.Id); break;
+                    case StructureKind.Mortar: Mortar(pen, p, color, edge, fill, state.Id); break;
+                    default: Gun(pen, p, color, edge, fill, state.Id); break;
+                }
+                if (state.Blueprint != null)
+                {
+                    if (state.Blueprint.Chassis == ChassisKind.Heavy) pen.Ring(p, .46f, .075f, edge, 12, 1, state.Id);
+                    if ((state.Blueprint.Modules & TowerModules.Armor) != 0)
+                        for (int side = -1; side <= 1; side += 2)
+                            pen.Box(p + new Vector2(side * .39f, 0), new Vector2(.14f, .52f), fill, edge, .055f, state.Id + side);
+                    if ((state.Blueprint.Modules & TowerModules.Rail) != 0)
+                    {
+                        pen.Line(p + new Vector2(-.28f, -.24f), p + new Vector2(.28f, -.24f), .035f, edge);
+                        pen.Line(p + new Vector2(-.28f, -.34f), p + new Vector2(.28f, -.34f), .035f, edge);
+                        for (int i = -2; i <= 2; i++) pen.Line(p + new Vector2(i * .12f, -.21f), p + new Vector2(i * .12f, -.37f), .02f, color);
+                    }
+                }
             }
             if (state.Color != InkColor.None)
             {
@@ -88,13 +124,22 @@ namespace PaperDefense.Presentation
             if (state.Blueprint != null)
             {
                 bool dual = state.Blueprint.SecondWeapon.HasValue;
-                DrawWeaponBarrel(pen, p + (dual ? Vector2.left * .17f : Vector2.zero), state.Blueprint.FirstWeapon, color, edge, state.Aim);
-                if (dual) DrawWeaponBarrel(pen, p + Vector2.right * .17f, state.Blueprint.SecondWeapon.Value, color, edge, state.Aim);
-                if ((state.Blueprint.Modules & TowerModules.Feed) != 0) pen.Disc(p - Vector2.up * .18f, .08f, NotebookPalette.Green, 8);
-                if ((state.Blueprint.Modules & TowerModules.Tracking) != 0) pen.Ring(p + new Vector2(.38f, .29f), .1f, .025f, NotebookPalette.Red, 12);
+                if (state.Blueprint.Origin == DrawingOrigin.PlayerDrawing)
+                {
+                    var geometry = AuthoredGeometryCache.For(state.Blueprint.Drawing);
+                    DrawAuthoredMount(pen, geometry, state.Blueprint, DrawingPartKey.Mount0, p, state.PrimaryAim, color);
+                    if (dual) DrawAuthoredMount(pen, geometry, state.Blueprint, DrawingPartKey.Mount1, p, state.SecondaryAim, color);
+                }
+                else
+                {
+                    DrawWeaponBarrel(pen, p + (dual ? Vector2.left * .17f : Vector2.zero), state.Blueprint.FirstWeapon, color, edge, state.PrimaryAim);
+                    if (dual) DrawWeaponBarrel(pen, p + Vector2.right * .17f, state.Blueprint.SecondWeapon.Value, color, edge, state.SecondaryAim);
+                    if ((state.Blueprint.Modules & TowerModules.Feed) != 0) pen.Disc(p - Vector2.up * .18f, .08f, NotebookPalette.Green, 8);
+                    if ((state.Blueprint.Modules & TowerModules.Tracking) != 0) pen.Ring(p + new Vector2(.38f, .29f), .1f, .025f, NotebookPalette.Red, 12);
+                }
             }
-            else if (state.Kind == StructureKind.Gun) GunBarrel(pen, p, color, edge, state.Aim);
-            else if (state.Kind == StructureKind.Piercer) PiercerBarrel(pen, p, color, edge, state.Aim);
+            else if (state.Kind == StructureKind.Gun) GunBarrel(pen, p, color, edge, state.PrimaryAim);
+            else if (state.Kind == StructureKind.Piercer) PiercerBarrel(pen, p, color, edge, state.PrimaryAim);
             if (state.IsComplete) return;
             float progress = Mathf.Repeat(Time.unscaledTime * .45f + state.Id * .13f, 1);
             float angle = progress * Mathf.PI * 2;
@@ -106,15 +151,32 @@ namespace PaperDefense.Presentation
             pen.Line(p + new Vector2(-.35f, -.6f), p + new Vector2(-.35f + .7f * fraction, -.6f), .06f,
                      state.WaitingForClearance ? NotebookPalette.Red : color);
         }
+        static void DrawAuthoredMount(MeshPen pen, AuthoredDrawingGeometry geometry, TowerBlueprint blueprint,
+            DrawingPartKey key, Vector2 position, Point2 aim, Color color)
+        {
+            var pivot = DrawingTemplateCatalog.Pivot(blueprint, key);
+            Vector2 at = position + new Vector2(pivot.X, pivot.Y);
+            Vector2 direction = Direction(aim, at);
+            float angle = Mathf.Atan2(direction.y, direction.x) - Mathf.PI * .5f;
+            pen.Append(geometry.GetPart(key), at, angle, color);
+        }
         static void DrawWeaponBarrel(MeshPen pen, Vector2 p, StructureKind kind, Color color, Color edge, Point2 aim)
         {
+            if ((int)kind >= (int)StructureKind.Fan && TowerCatalog.IsMountPart(kind))
+            {
+                Vector2 pivot = p + Vector2.up * .04f;
+                Vector2 forward = Direction(aim, pivot);
+                pen.Append(StandardMount(kind), pivot, Mathf.Atan2(forward.y, forward.x) - Mathf.PI * .5f, color);
+                return;
+            }
             if (kind == StructureKind.Gun) GunBarrel(pen, p, color, edge, aim);
             else if (kind == StructureKind.Piercer) PiercerBarrel(pen, p, color, edge, aim);
             else
             {
-                pen.Disc(p + Vector2.up * .11f, .17f, edge, 12, .8f);
-                pen.Ring(p + Vector2.up * .11f, .15f, .05f, color, 12, .8f);
-                pen.Line(p - Vector2.up * .12f, p + Vector2.up * .08f, .17f, color);
+                Vector2 direction = Direction(aim, p);
+                pen.Disc(p + direction * .11f, .17f, edge, 12, .8f);
+                pen.Ring(p + direction * .11f, .15f, .05f, color, 12, .8f);
+                pen.Line(p - direction * .12f, p + direction * .08f, .17f, color);
             }
         }
 

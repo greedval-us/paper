@@ -115,6 +115,7 @@ namespace PaperDefense.Tests
             var profile = new WorkshopProfile();
             Assert.That(profile.SaveBlueprint(Blueprint(StructureKind.Gun, modules: TowerModules.Tracking), out _), Is.False);
             var data = profile.ToData();
+            data.Version = 1; // Exercise the legacy loader's repair contract.
             data.Album = new[] { new BlueprintData { Id = "cheat", Name = "Locked", Chassis = ChassisKind.Heavy,
                 FirstWeapon = StructureKind.Gun, Modules = TowerModules.Tracking } };
             data.Loadout = new[] { "cheat", "cheat", "missing", "" };

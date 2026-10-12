@@ -80,7 +80,7 @@ namespace PaperDefense.Core
 
         private int ChooseObjective()
         {
-            if(wells.Count==0||random.NextDouble()>=.3)return -1;
+            if(wells.Count==0||random.NextDouble()>=Clamp(Balance.Progression.WellThreatFraction,0,1))return -1;
             int active=0;foreach(var well in wells)if(well.Active)active++;
             if(active==0)return -1;
             int selection=random.Next(active);

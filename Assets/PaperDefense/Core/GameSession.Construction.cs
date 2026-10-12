@@ -10,12 +10,14 @@ namespace PaperDefense.Core
 
         public BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,TowerBlueprint blueprint,MaterialTier material,InkColor color)
         {
-            if (!TowerCatalog.Validate(blueprint,out string invalid))
+            if (!TowerCatalog.Validate(blueprint,Balance,out string invalid))
                 return new BuildQuote{Cells=Array.Empty<Cell>(),Reason=invalid};
             if (!Enum.IsDefined(typeof(InkColor),color))
                 return new BuildQuote{Cells=Array.Empty<Cell>(),Reason="Неизвестный цвет."};
-            var quote=QuoteBuild(cells,blueprint.FirstWeapon,material);
-            // Occupancy and resource failures stay atomic. Assembly costs never undercut the first mount.
+            if (!Enum.IsDefined(typeof(MaterialTier),material))
+                return new BuildQuote{Cells=Array.Empty<Cell>(),Reason="Неизвестный инструмент."};
+            var quote=QuoteBuild(cells,blueprint.FirstWeapon,material,TowerCatalog.Cost(blueprint,Balance,material));
+            // Occupancy and resource failures stay atomic, using the assembly's complete price.
             if (!quote.Valid) return quote;
             long cost=(long)TowerCatalog.Cost(blueprint,Balance,material)*quote.Cells.Count;
             quote.Cost=(int)Math.Min(int.MaxValue,cost);

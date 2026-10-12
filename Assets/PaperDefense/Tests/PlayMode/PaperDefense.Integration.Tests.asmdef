@@ -1,5 +1,5 @@
 {
   "name": "PaperDefense.Integration.Tests",
-  "references": ["PaperDefense.Core", "PaperDefense.Application", "PaperDefense.Presentation", "Unity.InputSystem", "Unity.ugui"],
+  "references": ["PaperDefense.Core", "PaperDefense.Application", "PaperDefense.Presentation", "PaperDefense.Validation", "Unity.InputSystem", "Unity.ugui"],
   "optionalUnityReferences": ["TestAssemblies"]
 }

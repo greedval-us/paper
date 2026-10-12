@@ -42,13 +42,16 @@ namespace PaperDefense.Core
         public readonly float Health,MaxHealth,BuildRemaining,Cooldown;
         public readonly bool IsComplete,WaitingForClearance;
         public readonly Point2 Aim;
+        public readonly Point2 PrimaryAim, SecondaryAim;
+        public readonly int PrimaryTargetId, SecondaryTargetId;
         public readonly TargetPriority Priority;
         public readonly TowerBlueprint Blueprint;
         public readonly InkColor Color;
         internal StructureView(StructureState s)
         {Id=s.Id;Cell=s.Cell;Kind=s.Kind;Tier=s.Tier;Health=s.Health;MaxHealth=s.MaxHealth;BuildRemaining=s.BuildRemaining;
             Cooldown=s.Cooldown;IsComplete=s.IsComplete;WaitingForClearance=s.WaitingForClearance;Aim=s.Aim;Priority=s.Priority;
-            Blueprint=s.Blueprint;Color=s.Color;}
+            Blueprint=s.Blueprint;Color=s.Color;PrimaryAim=s.PrimaryAim;SecondaryAim=s.SecondaryAim;
+            PrimaryTargetId=s.PrimaryTargetId;SecondaryTargetId=s.SecondaryTargetId;}
     }
     public readonly struct EnemyView
     {
@@ -136,10 +139,11 @@ namespace PaperDefense.Core
 
     public readonly struct StructureSpec
     {
-        public readonly StructureKind Kind;public readonly int Cost,MaxPierce;
-        public readonly float MaxHealth,BuildSeconds,Range,Damage,ShotInterval,Radius,FlightSeconds;
+        public readonly StructureKind Kind;public readonly int Cost,MaxPierce,MaxTargets;
+        public readonly float MaxHealth,BuildSeconds,Range,Damage,ShotInterval,Radius,FlightSeconds,ConeAngleDegrees,JumpRange,SlowSpeedMultiplier,SlowDuration;
         internal StructureSpec(StructureDefinition d){Kind=d.Kind;Cost=d.Cost;MaxPierce=d.MaxPierce;MaxHealth=d.MaxHealth;
-            BuildSeconds=d.BuildSeconds;Range=d.Range;Damage=d.Damage;ShotInterval=d.ShotInterval;Radius=d.Radius;FlightSeconds=d.FlightSeconds;}
+            BuildSeconds=d.BuildSeconds;Range=d.Range;Damage=d.Damage;ShotInterval=d.ShotInterval;Radius=d.Radius;FlightSeconds=d.FlightSeconds;
+            ConeAngleDegrees=d.ConeAngleDegrees;MaxTargets=d.MaxTargets;JumpRange=d.JumpRange;SlowSpeedMultiplier=d.SlowSpeedMultiplier;SlowDuration=d.SlowDuration;}
     }
     public readonly struct MaterialSpec
     {
@@ -149,13 +153,13 @@ namespace PaperDefense.Core
     }
     public readonly struct EnemySpec
     {
-        public readonly EnemyKind Kind;public readonly float MaxHealth,Speed,Damage,AttackInterval,Range,WindupSeconds,ProjectileSeconds;public readonly int Reward;
-        internal EnemySpec(EnemyDefinition d){Kind=d.Kind;MaxHealth=d.MaxHealth;Speed=d.Speed;Damage=d.Damage;AttackInterval=d.AttackInterval;Reward=d.Reward;Range=d.Range;WindupSeconds=d.WindupSeconds;ProjectileSeconds=d.ProjectileSeconds;}
+        public readonly EnemyKind Kind;public readonly float MaxHealth,Speed,Damage,AttackInterval,Range,WindupSeconds,ProjectileSeconds,StructureDamageMultiplier;public readonly int Reward;
+        internal EnemySpec(EnemyDefinition d){Kind=d.Kind;MaxHealth=d.MaxHealth;Speed=d.Speed;Damage=d.Damage;AttackInterval=d.AttackInterval;Reward=d.Reward;Range=d.Range;WindupSeconds=d.WindupSeconds;ProjectileSeconds=d.ProjectileSeconds;StructureDamageMultiplier=d.StructureDamageMultiplier;}
     }
     public readonly struct WaveView
     {
-        public readonly int Count,Sides;public readonly float SpawnInterval,RunnerFraction,GnawerFraction,SpitterFraction,OutlinedFraction,HatchedFraction;public readonly string Title;
-        internal WaveView(WaveDefinition d){Count=d.Count;Sides=d.Sides;SpawnInterval=d.SpawnInterval;RunnerFraction=d.RunnerFraction;GnawerFraction=d.GnawerFraction;SpitterFraction=d.SpitterFraction;OutlinedFraction=d.OutlinedFraction;HatchedFraction=d.HatchedFraction;Title=d.Title;}
+        public readonly int Count,Sides,InkGrant;public readonly float SpawnInterval,RunnerFraction,GnawerFraction,SpitterFraction,OutlinedFraction,HatchedFraction;public readonly string Title;
+        internal WaveView(WaveDefinition d){Count=d.Count;Sides=d.Sides;InkGrant=d.InkGrant;SpawnInterval=d.SpawnInterval;RunnerFraction=d.RunnerFraction;GnawerFraction=d.GnawerFraction;SpitterFraction=d.SpitterFraction;OutlinedFraction=d.OutlinedFraction;HatchedFraction=d.HatchedFraction;Title=d.Title;}
     }
     public sealed class GameBalanceView
     {
@@ -170,7 +174,15 @@ namespace PaperDefense.Core
         public float BlotterCooldown=>source.BlotterCooldown;public float BlotLifetime=>source.BlotLifetime;
         public int WellActivationCost=>source.WellActivationCost;public int WellInkPerWave=>source.WellInkPerWave;
         public bool EnableEnemyMechanics=>source.EnableEnemyMechanics;public bool EnableInkWells=>source.EnableInkWells;
+        public GameBalancePreset Preset=>source.Preset;
+        public bool DynamicFeed=>source.Construction.DynamicFeed;
+        public bool LimitTowerColor=>source.Effects.LimitTowerColor;
+        public float ColorWindowSeconds=>source.Effects.ColorWindowSeconds;
+        public int ColorTargetsPerWindow=>source.Effects.ColorTargetsPerWindow;
+        public int ChassisCapacity(ChassisKind chassis)=>chassis==ChassisKind.Heavy?source.Construction.HeavyCapacity:source.Construction.StandardCapacity;
+        public int ModuleLoad(TowerModules modules)=>source.Construction.ModuleLoad(modules);
         public StructureSpec Structure(StructureKind kind)=>new StructureSpec(source.Structure(kind));
+        public float WeaponRange(TowerBlueprint blueprint,StructureKind kind)=>TowerCatalog.WeaponRange(blueprint,source,kind);
         public MaterialSpec Material(MaterialTier tier)=>new MaterialSpec(source.Material(tier));
         public EnemySpec Enemy(EnemyKind kind)=>new EnemySpec(source.Enemy(kind));
     }

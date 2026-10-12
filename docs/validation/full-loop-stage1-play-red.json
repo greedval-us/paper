@@ -1,0 +1,686 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "4d0a98e6554a4fa7b43c6a83201de8d1",
+    "status": "failed",
+    "mode": "PlayMode",
+    "started_unix_ms": 1791761928189,
+    "finished_unix_ms": 1791761937066,
+    "last_update_unix_ms": 1791761937066,
+    "progress": {
+      "completed": 60,
+      "total": 60,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": null,
+      "last_finished_test_full_name": "PaperDefense.Tests.WorkshopStoreTests.ValidPrimaryIgnoresBrokenBackup",
+      "last_finished_unix_ms": 1791761937051,
+      "stuck_suspected": false,
+      "editor_is_focused": true,
+      "run_in_background": false,
+      "focus_nudge_attempts": null,
+      "focus_nudge_limit": null,
+      "focus_nudge_status": null,
+      "blocked_reason": null,
+      "failures_so_far": [
+        {
+          "full_name": "PaperDefense.Tests.TrialBalanceIntegrationTests.ChangedTrialBalanceStillLeavesProfileRunTickAndCurrencyUntouched",
+          "message": "  Expected: 396\r\n  But was:  400\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.TrialBalanceIntegrationTests.PreviewTrialAndBattleConstructionUseTheSameConfiguredPriceAndMaterialHealth",
+          "message": "  Expected: 4\r\n  But was:  10\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredShotInterval",
+          "message": "  Expected: less than 768.0f\r\n  But was:  768.0f\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredWeaponDamageAndRange(\"damage\")",
+          "message": "  Expected: 0\r\n  But was:  768.0f\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredWeaponDamageAndRange(\"range\")",
+          "message": "  Expected: 0\r\n  But was:  768.0f\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialMortarUsesConfiguredRadiusAndFlightDuration",
+          "message": "  Expected: 3.70000005f\r\n  But was:  2.4000001f\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialPiercerUsesConfiguredTargetLimit",
+          "message": "  Expected: greater than 1962.0f\r\n  But was:  1962.0f\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(\"save\")",
+          "message": "  Expected: False\r\n  But was:  True\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(\"delete\")",
+          "message": "  Expected: False\r\n  But was:  True\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(\"assign\")",
+          "message": "  Expected: False\r\n  But was:  True\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(\"unlock\")",
+          "message": "  Expected: False\r\n  But was:  True\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopSaveFailureTests.FailedRewardWriteKeepsGoldOnceAcrossRetryWorkshopAndNewRun",
+          "message": "  Expected: True\r\n  But was:  False\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopSaveFailureTests.NewProfileIsDirtyAndIsSavedOnQuitWithoutChangingTheRealProfilePath",
+          "message": "  Expected: Unsaved\r\n  But was:  MemoryOnly\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopSaveFailureTests.ProtectedLoadRejectsRetryTransactionsAndQuitWithoutStoreWrites",
+          "message": "  Expected: RecoveryRequired\r\n  But was:  MemoryOnly\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopSaveFailureTests.PurchaseCommitsPreviouslyUnsavedRewardAndItsOwnCostExactlyOnce",
+          "message": "  Expected: False\r\n  But was:  True\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopSaveFailureTests.RetryWritesCurrentProfileWithoutReplayingRejectedPurchase",
+          "message": "  Expected: False\r\n  But was:  True\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopSaveFailureTests.WorkshopKeepsDraftAndDisplaysTheWriteFailure",
+          "message": "  Expected: not equal to \"My crooked draft\"\r\n  But was:  \"My crooked draft\"\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopStoreTests.AccessFailureIsProtectedRatherThanTreatedAsMissingOrBackupRecovery",
+          "message": "  Expected: RecoveryRequired\r\n  But was:  Primary\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopStoreTests.CompleteAlbumAndWorkingCopyPreserveExactlyTheCurrentPagesWithoutAddingStarters",
+          "message": "  Expected: 4\r\n  But was:  8\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopStoreTests.CorruptPrimaryRecoversValidBackupAndSubsequentSavesPreserveRecoverableData",
+          "message": "  Expected: Backup\r\n  But was:  Primary\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopStoreTests.DamagedOrFutureSourcesRemainByteForByteProtected(\"bad primary\",\"bad backup\")",
+          "message": "  Expected: RecoveryRequired\r\n  But was:  Primary\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopStoreTests.DamagedOrFutureSourcesRemainByteForByteProtected(\"{\\\"Version\\\":999,\\\"Gold\\\":9999}\",\"VALID_BACKUP\")",
+          "message": "  Expected: RecoveryRequired\r\n  But was:  Primary\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopStoreTests.DamagedOrFutureSourcesRemainByteForByteProtected(\"bad primary\",\"{\\\"Version\\\":999,\\\"Gold\\\":9999}\")",
+          "message": "  Expected: RecoveryRequired\r\n  But was:  Primary\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopStoreTests.FailureBeforeCommitPreservesBothExistingFiles(\"write\")",
+          "message": "  Expected: False\r\n  But was:  True\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.WorkshopStoreTests.FailureBeforeCommitPreservesBothExistingFiles(\"replace\")",
+          "message": "  Expected: False\r\n  But was:  True\r\n"
+        }
+      ],
+      "failures_capped": true
+    },
+    "error": null,
+    "result": {
+      "mode": "PlayMode",
+      "summary": {
+        "total": 60,
+        "passed": 32,
+        "failed": 28,
+        "skipped": 0,
+        "durationSeconds": 3.3640894,
+        "resultState": "Failed(Child)"
+      },
+      "results": [
+        {
+          "name": "DoubleSpeedUsesTwiceAsManyUnchangedSteps",
+          "fullName": "PaperDefense.Tests.FixedStepClockTests.DoubleSpeedUsesTwiceAsManyUnchangedSteps",
+          "state": "Passed",
+          "durationSeconds": 0.0008214,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PauseDropsFractionalDebtAndAccumulatesNothing",
+          "fullName": "PaperDefense.Tests.FixedStepClockTests.PauseDropsFractionalDebtAndAccumulatesNothing",
+          "state": "Passed",
+          "durationSeconds": 0.0001424,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SlowFrameDiscardsExcessAndNeverLeavesUnboundedDebt",
+          "fullName": "PaperDefense.Tests.FixedStepClockTests.SlowFrameDiscardsExcessAndNeverLeavesUnboundedDebt",
+          "state": "Passed",
+          "durationSeconds": 0.0002508,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CompletedWaveGoldIsBankedOnceAndSurvivesDefeatAndNewWorkshop",
+          "fullName": "PaperDefense.Tests.GoldPayoutTests.CompletedWaveGoldIsBankedOnceAndSurvivesDefeatAndNewWorkshop",
+          "state": "Passed",
+          "durationSeconds": 0.0207777,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "VictoryAddsOnlyCompletedWaveAndOneVictoryBonus",
+          "fullName": "PaperDefense.Tests.GoldPayoutTests.VictoryAddsOnlyCompletedWaveAndOneVictoryBonus",
+          "state": "Passed",
+          "durationSeconds": 0.0053019,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FastMouseStrokeFillsEveryCellAndPauseKeepsItUnbuilt",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.FastMouseStrokeFillsEveryCellAndPauseKeepsItUnbuilt",
+          "state": "Passed",
+          "durationSeconds": 0.990466,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HudClickStartsWaveWithoutDrawingThroughButton",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.HudClickStartsWaveWithoutDrawingThroughButton",
+          "state": "Passed",
+          "durationSeconds": 0.1718113,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MortarLaunchDoesNotCreateAnExplosionAndVisualMarksAreBounded",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.MortarLaunchDoesNotCreateAnExplosionAndVisualMarksAreBounded",
+          "state": "Passed",
+          "durationSeconds": 0.0735128,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RestartRebindsPresentationAndKeepsOneHud",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.RestartRebindsPresentationAndKeepsOneHud",
+          "state": "Passed",
+          "durationSeconds": 0.1230377,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ScriptableBalanceCopiesSettingsWithoutSharingSessionDefinitions",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.ScriptableBalanceCopiesSettingsWithoutSharingSessionDefinitions",
+          "state": "Passed",
+          "durationSeconds": 0.0721715,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UnchangedPreviewAndStaticBasesDoNotUploadEveryRenderFrame",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.UnchangedPreviewAndStaticBasesDoNotUploadEveryRenderFrame",
+          "state": "Passed",
+          "durationSeconds": 0.1569722,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CatchUpFrameForwardsEventsFromEveryStepExactlyOnce",
+          "fullName": "PaperDefense.Tests.RunControllerTests.CatchUpFrameForwardsEventsFromEveryStepExactlyOnce",
+          "state": "Passed",
+          "durationSeconds": 0.0046537,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PauseAcceptsBlueprintAndNeverAdvancesItsConstruction",
+          "fullName": "PaperDefense.Tests.RunControllerTests.PauseAcceptsBlueprintAndNeverAdvancesItsConstruction",
+          "state": "Passed",
+          "durationSeconds": 0.0006415,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PresentationContractContainsOnlyReadAccessAndValueViews",
+          "fullName": "PaperDefense.Tests.RunControllerTests.PresentationContractContainsOnlyReadAccessAndValueViews",
+          "state": "Passed",
+          "durationSeconds": 0.0019152,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RenderCadencePreservesStateForCommandsAtTheSameSimulationTicks",
+          "fullName": "PaperDefense.Tests.RunControllerTests.RenderCadencePreservesStateForCommandsAtTheSameSimulationTicks",
+          "state": "Passed",
+          "durationSeconds": 0.0847508,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RestartClearsSelectedUpgradeBonusesAndStatistics",
+          "fullName": "PaperDefense.Tests.RunControllerTests.RestartClearsSelectedUpgradeBonusesAndStatistics",
+          "state": "Passed",
+          "durationSeconds": 0.0019777,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ChangedTrialBalanceStillLeavesProfileRunTickAndCurrencyUntouched",
+          "fullName": "PaperDefense.Tests.TrialBalanceIntegrationTests.ChangedTrialBalanceStillLeavesProfileRunTickAndCurrencyUntouched",
+          "state": "Failed",
+          "durationSeconds": 0.0346627,
+          "message": "  Expected: 396\r\n  But was:  400\r\n",
+          "stackTrace": "at PaperDefense.Tests.TrialBalanceIntegrationTests.ChangedTrialBalanceStillLeavesProfileRunTickAndCurrencyUntouched () [0x00070] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\TrialBalanceIntegrationTests.cs:140\r\n",
+          "output": ""
+        },
+        {
+          "name": "PreviewTrialAndBattleConstructionUseTheSameConfiguredPriceAndMaterialHealth",
+          "fullName": "PaperDefense.Tests.TrialBalanceIntegrationTests.PreviewTrialAndBattleConstructionUseTheSameConfiguredPriceAndMaterialHealth",
+          "state": "Failed",
+          "durationSeconds": 0.1292747,
+          "message": "  Expected: 4\r\n  But was:  10\r\n",
+          "stackTrace": "at PaperDefense.Tests.TrialBalanceIntegrationTests.PreviewTrialAndBattleConstructionUseTheSameConfiguredPriceAndMaterialHealth () [0x000e0] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\TrialBalanceIntegrationTests.cs:58\r\n",
+          "output": ""
+        },
+        {
+          "name": "TrialFireUsesConfiguredShotInterval",
+          "fullName": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredShotInterval",
+          "state": "Failed",
+          "durationSeconds": 0.0936456,
+          "message": "  Expected: less than 768.0f\r\n  But was:  768.0f\r\n",
+          "stackTrace": "at PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredShotInterval () [0x00074] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\TrialBalanceIntegrationTests.cs:92\r\n",
+          "output": ""
+        },
+        {
+          "name": "TrialFireUsesConfiguredWeaponDamageAndRange(\"damage\")",
+          "fullName": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredWeaponDamageAndRange(\"damage\")",
+          "state": "Failed",
+          "durationSeconds": 0.0445125,
+          "message": "  Expected: 0\r\n  But was:  768.0f\r\n",
+          "stackTrace": "at PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredWeaponDamageAndRange (System.String parameter) [0x0005a] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\TrialBalanceIntegrationTests.cs:80\r\n",
+          "output": ""
+        },
+        {
+          "name": "TrialFireUsesConfiguredWeaponDamageAndRange(\"range\")",
+          "fullName": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredWeaponDamageAndRange(\"range\")",
+          "state": "Failed",
+          "durationSeconds": 0.0436283,
+          "message": "  Expected: 0\r\n  But was:  768.0f\r\n",
+          "stackTrace": "at PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredWeaponDamageAndRange (System.String parameter) [0x0005a] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\TrialBalanceIntegrationTests.cs:80\r\n",
+          "output": ""
+        },
+        {
+          "name": "TrialMortarUsesConfiguredRadiusAndFlightDuration",
+          "fullName": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialMortarUsesConfiguredRadiusAndFlightDuration",
+          "state": "Failed",
+          "durationSeconds": 0.1089372,
+          "message": "  Expected: 3.70000005f\r\n  But was:  2.4000001f\r\n",
+          "stackTrace": "at PaperDefense.Tests.TrialBalanceIntegrationTests.TrialMortarUsesConfiguredRadiusAndFlightDuration () [0x0007c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\TrialBalanceIntegrationTests.cs:125\r\n",
+          "output": ""
+        },
+        {
+          "name": "TrialPiercerUsesConfiguredTargetLimit",
+          "fullName": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialPiercerUsesConfiguredTargetLimit",
+          "state": "Failed",
+          "durationSeconds": 0.0952159,
+          "message": "  Expected: greater than 1962.0f\r\n  But was:  1962.0f\r\n",
+          "stackTrace": "at PaperDefense.Tests.TrialBalanceIntegrationTests.TrialPiercerUsesConfiguredTargetLimit () [0x000a3] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\TrialBalanceIntegrationTests.cs:109\r\n",
+          "output": ""
+        },
+        {
+          "name": "ComposerShowsRealLoadAndRejectsOverloadedArmor",
+          "fullName": "PaperDefense.Tests.WorkshopIntegrationTests.ComposerShowsRealLoadAndRejectsOverloadedArmor",
+          "state": "Passed",
+          "durationSeconds": 0.1074524,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LockedTrialShowsAnExplanationWithoutThrowing",
+          "fullName": "PaperDefense.Tests.WorkshopIntegrationTests.LockedTrialShowsAnExplanationWithoutThrowing",
+          "state": "Passed",
+          "durationSeconds": 0.1068633,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NormalBootOpensWorkshopAndStartUsesFourBlueprints",
+          "fullName": "PaperDefense.Tests.WorkshopIntegrationTests.NormalBootOpensWorkshopAndStartUsesFourBlueprints",
+          "state": "Passed",
+          "durationSeconds": 0.127432,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SavedDraftAndFieldPlacementAreIndependentOfLaterEditing",
+          "fullName": "PaperDefense.Tests.WorkshopIntegrationTests.SavedDraftAndFieldPlacementAreIndependentOfLaterEditing",
+          "state": "Passed",
+          "durationSeconds": 0.1086162,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WorkshopDrawingsAndRecordedLanesUploadRealGeometry",
+          "fullName": "PaperDefense.Tests.WorkshopIntegrationTests.WorkshopDrawingsAndRecordedLanesUploadRealGeometry",
+          "state": "Passed",
+          "durationSeconds": 0.2838623,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CorruptVersionOrSyntaxReturnsUsableStarterProfile(\"{\\\"Version\\\":999,\\\"Gold\\\":10000}\")",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.CorruptVersionOrSyntaxReturnsUsableStarterProfile(\"{\\\"Version\\\":999,\\\"Gold\\\":10000}\")",
+          "state": "Passed",
+          "durationSeconds": 0.0065413,
+          "message": null,
+          "stackTrace": null,
+          "output": "Не удалось прочитать альбом: Неизвестная версия профиля.\r\n"
+        },
+        {
+          "name": "CorruptVersionOrSyntaxReturnsUsableStarterProfile(\"this is not json\")",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.CorruptVersionOrSyntaxReturnsUsableStarterProfile(\"this is not json\")",
+          "state": "Passed",
+          "durationSeconds": 0.0022826,
+          "message": null,
+          "stackTrace": null,
+          "output": "Не удалось прочитать альбом: JSON parse error: Invalid value.\r\n"
+        },
+        {
+          "name": "DiskRoundTripPreservesPaidUnlocksSavedAssemblyAndFourSlots",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.DiskRoundTripPreservesPaidUnlocksSavedAssemblyAndFourSlots",
+          "state": "Passed",
+          "durationSeconds": 0.0065002,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InvalidWeaponPreviewReturnsTheCoreRejectionReason",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.InvalidWeaponPreviewReturnsTheCoreRejectionReason",
+          "state": "Passed",
+          "durationSeconds": 0.0012238,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NegativeGoldAndBrokenSelectionAreRepairedWithoutGrantingLockedParts",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.NegativeGoldAndBrokenSelectionAreRepairedWithoutGrantingLockedParts",
+          "state": "Passed",
+          "durationSeconds": 0.0021227,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "StartingRunFreezesAssemblySelectionAndRejectsAllWorkshopEdits",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.StartingRunFreezesAssemblySelectionAndRejectsAllWorkshopEdits",
+          "state": "Passed",
+          "durationSeconds": 0.0015036,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TrialNeverSpendsRunInkOrGrantsGoldOrAdvancesTheBattle",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.TrialNeverSpendsRunInkOrGrantsGoldOrAdvancesTheBattle",
+          "state": "Passed",
+          "durationSeconds": 0.0724829,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WorkshopPresentationOnlyExposesImmutableAssembliesAndReadOnlyCollections",
+          "fullName": "PaperDefense.Tests.WorkshopPersistenceTests.WorkshopPresentationOnlyExposesImmutableAssembliesAndReadOnlyCollections",
+          "state": "Passed",
+          "durationSeconds": 0.0015802,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(\"save\")",
+          "fullName": "PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(\"save\")",
+          "state": "Failed",
+          "durationSeconds": 0.002952,
+          "message": "  Expected: False\r\n  But was:  True\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged (System.String command) [0x000bd] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopSaveFailureTests.cs:59\r\n",
+          "output": ""
+        },
+        {
+          "name": "FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(\"delete\")",
+          "fullName": "PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(\"delete\")",
+          "state": "Failed",
+          "durationSeconds": 0.0006111,
+          "message": "  Expected: False\r\n  But was:  True\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged (System.String command) [0x000bd] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopSaveFailureTests.cs:59\r\n",
+          "output": ""
+        },
+        {
+          "name": "FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(\"assign\")",
+          "fullName": "PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(\"assign\")",
+          "state": "Failed",
+          "durationSeconds": 0.0004103,
+          "message": "  Expected: False\r\n  But was:  True\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged (System.String command) [0x000bd] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopSaveFailureTests.cs:59\r\n",
+          "output": ""
+        },
+        {
+          "name": "FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(\"unlock\")",
+          "fullName": "PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(\"unlock\")",
+          "state": "Failed",
+          "durationSeconds": 0.0005683,
+          "message": "  Expected: False\r\n  But was:  True\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged (System.String command) [0x000bd] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopSaveFailureTests.cs:59\r\n",
+          "output": ""
+        },
+        {
+          "name": "FailedRewardWriteKeepsGoldOnceAcrossRetryWorkshopAndNewRun",
+          "fullName": "PaperDefense.Tests.WorkshopSaveFailureTests.FailedRewardWriteKeepsGoldOnceAcrossRetryWorkshopAndNewRun",
+          "state": "Failed",
+          "durationSeconds": 0.0042343,
+          "message": "  Expected: True\r\n  But was:  False\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopSaveFailureTests.FailedRewardWriteKeepsGoldOnceAcrossRetryWorkshopAndNewRun () [0x0003c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopSaveFailureTests.cs:154\r\n",
+          "output": ""
+        },
+        {
+          "name": "MemoryOnlyModeAllowsEditsAndClearlyReportsItsScope",
+          "fullName": "PaperDefense.Tests.WorkshopSaveFailureTests.MemoryOnlyModeAllowsEditsAndClearlyReportsItsScope",
+          "state": "Passed",
+          "durationSeconds": 0.000996,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NewProfileIsDirtyAndIsSavedOnQuitWithoutChangingTheRealProfilePath",
+          "fullName": "PaperDefense.Tests.WorkshopSaveFailureTests.NewProfileIsDirtyAndIsSavedOnQuitWithoutChangingTheRealProfilePath",
+          "state": "Failed",
+          "durationSeconds": 0.0010195,
+          "message": "  Expected: Unsaved\r\n  But was:  MemoryOnly\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopSaveFailureTests.NewProfileIsDirtyAndIsSavedOnQuitWithoutChangingTheRealProfilePath () [0x00023] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopSaveFailureTests.cs:111\r\n",
+          "output": ""
+        },
+        {
+          "name": "ProtectedLoadRejectsRetryTransactionsAndQuitWithoutStoreWrites",
+          "fullName": "PaperDefense.Tests.WorkshopSaveFailureTests.ProtectedLoadRejectsRetryTransactionsAndQuitWithoutStoreWrites",
+          "state": "Failed",
+          "durationSeconds": 0.0006805,
+          "message": "  Expected: RecoveryRequired\r\n  But was:  MemoryOnly\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopSaveFailureTests.ProtectedLoadRejectsRetryTransactionsAndQuitWithoutStoreWrites () [0x00023] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopSaveFailureTests.cs:100\r\n",
+          "output": ""
+        },
+        {
+          "name": "PurchaseCommitsPreviouslyUnsavedRewardAndItsOwnCostExactlyOnce",
+          "fullName": "PaperDefense.Tests.WorkshopSaveFailureTests.PurchaseCommitsPreviouslyUnsavedRewardAndItsOwnCostExactlyOnce",
+          "state": "Failed",
+          "durationSeconds": 0.0041195,
+          "message": "  Expected: False\r\n  But was:  True\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopSaveFailureTests.PurchaseCommitsPreviouslyUnsavedRewardAndItsOwnCostExactlyOnce () [0x00023] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopSaveFailureTests.cs:172\r\n",
+          "output": ""
+        },
+        {
+          "name": "RetryWritesCurrentProfileWithoutReplayingRejectedPurchase",
+          "fullName": "PaperDefense.Tests.WorkshopSaveFailureTests.RetryWritesCurrentProfileWithoutReplayingRejectedPurchase",
+          "state": "Failed",
+          "durationSeconds": 0.0005951,
+          "message": "  Expected: False\r\n  But was:  True\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopSaveFailureTests.RetryWritesCurrentProfileWithoutReplayingRejectedPurchase () [0x0000c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopSaveFailureTests.cs:72\r\n",
+          "output": ""
+        },
+        {
+          "name": "WorkshopKeepsDraftAndDisplaysTheWriteFailure",
+          "fullName": "PaperDefense.Tests.WorkshopSaveFailureTests.WorkshopKeepsDraftAndDisplaysTheWriteFailure",
+          "state": "Failed",
+          "durationSeconds": 0.0080293,
+          "message": "  Expected: not equal to \"My crooked draft\"\r\n  But was:  \"My crooked draft\"\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopSaveFailureTests.WorkshopKeepsDraftAndDisplaysTheWriteFailure () [0x00092] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopSaveFailureTests.cs:91\r\n",
+          "output": ""
+        },
+        {
+          "name": "AccessFailureIsProtectedRatherThanTreatedAsMissingOrBackupRecovery",
+          "fullName": "PaperDefense.Tests.WorkshopStoreTests.AccessFailureIsProtectedRatherThanTreatedAsMissingOrBackupRecovery",
+          "state": "Failed",
+          "durationSeconds": 0.0077217,
+          "message": "  Expected: RecoveryRequired\r\n  But was:  Primary\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopStoreTests.AccessFailureIsProtectedRatherThanTreatedAsMissingOrBackupRecovery () [0x00051] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopStoreTests.cs:96\r\n",
+          "output": ""
+        },
+        {
+          "name": "CompleteAlbumAndWorkingCopyPreserveExactlyTheCurrentPagesWithoutAddingStarters",
+          "fullName": "PaperDefense.Tests.WorkshopStoreTests.CompleteAlbumAndWorkingCopyPreserveExactlyTheCurrentPagesWithoutAddingStarters",
+          "state": "Failed",
+          "durationSeconds": 0.0015531,
+          "message": "  Expected: 4\r\n  But was:  8\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopStoreTests.CompleteAlbumAndWorkingCopyPreserveExactlyTheCurrentPagesWithoutAddingStarters () [0x000a2] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopStoreTests.cs:165\r\n",
+          "output": ""
+        },
+        {
+          "name": "CorruptPrimaryRecoversValidBackupAndSubsequentSavesPreserveRecoverableData",
+          "fullName": "PaperDefense.Tests.WorkshopStoreTests.CorruptPrimaryRecoversValidBackupAndSubsequentSavesPreserveRecoverableData",
+          "state": "Failed",
+          "durationSeconds": 0.0057475,
+          "message": "  Expected: Backup\r\n  But was:  Primary\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopStoreTests.CorruptPrimaryRecoversValidBackupAndSubsequentSavesPreserveRecoverableData () [0x00044] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopStoreTests.cs:45\r\n",
+          "output": "Не удалось прочитать альбом: JSON parse error: Invalid value.\r\n"
+        },
+        {
+          "name": "DamagedOrFutureSourcesRemainByteForByteProtected(\"bad primary\",\"bad backup\")",
+          "fullName": "PaperDefense.Tests.WorkshopStoreTests.DamagedOrFutureSourcesRemainByteForByteProtected(\"bad primary\",\"bad backup\")",
+          "state": "Failed",
+          "durationSeconds": 0.0063913,
+          "message": "  Expected: RecoveryRequired\r\n  But was:  Primary\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopStoreTests.DamagedOrFutureSourcesRemainByteForByteProtected (System.String primary, System.String backup) [0x0004e] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopStoreTests.cs:80\r\n",
+          "output": "Не удалось прочитать альбом: JSON parse error: Invalid value.\r\n"
+        },
+        {
+          "name": "DamagedOrFutureSourcesRemainByteForByteProtected(\"{\\\"Version\\\":999,\\\"Gold\\\":9999}\",\"VALID_BACKUP\")",
+          "fullName": "PaperDefense.Tests.WorkshopStoreTests.DamagedOrFutureSourcesRemainByteForByteProtected(\"{\\\"Version\\\":999,\\\"Gold\\\":9999}\",\"VALID_BACKUP\")",
+          "state": "Failed",
+          "durationSeconds": 0.0060251,
+          "message": "  Expected: RecoveryRequired\r\n  But was:  Primary\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopStoreTests.DamagedOrFutureSourcesRemainByteForByteProtected (System.String primary, System.String backup) [0x0004e] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopStoreTests.cs:80\r\n",
+          "output": "Не удалось прочитать альбом: Неизвестная версия профиля.\r\n"
+        },
+        {
+          "name": "DamagedOrFutureSourcesRemainByteForByteProtected(\"bad primary\",\"{\\\"Version\\\":999,\\\"Gold\\\":9999}\")",
+          "fullName": "PaperDefense.Tests.WorkshopStoreTests.DamagedOrFutureSourcesRemainByteForByteProtected(\"bad primary\",\"{\\\"Version\\\":999,\\\"Gold\\\":9999}\")",
+          "state": "Failed",
+          "durationSeconds": 0.0024547,
+          "message": "  Expected: RecoveryRequired\r\n  But was:  Primary\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopStoreTests.DamagedOrFutureSourcesRemainByteForByteProtected (System.String primary, System.String backup) [0x0004e] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopStoreTests.cs:80\r\n",
+          "output": "Не удалось прочитать альбом: JSON parse error: Invalid value.\r\n"
+        },
+        {
+          "name": "FailureBeforeCommitPreservesBothExistingFiles(\"write\")",
+          "fullName": "PaperDefense.Tests.WorkshopStoreTests.FailureBeforeCommitPreservesBothExistingFiles(\"write\")",
+          "state": "Failed",
+          "durationSeconds": 0.0108766,
+          "message": "  Expected: False\r\n  But was:  True\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopStoreTests.FailureBeforeCommitPreservesBothExistingFiles (System.String operation) [0x00060] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopStoreTests.cs:131\r\n",
+          "output": ""
+        },
+        {
+          "name": "FailureBeforeCommitPreservesBothExistingFiles(\"replace\")",
+          "fullName": "PaperDefense.Tests.WorkshopStoreTests.FailureBeforeCommitPreservesBothExistingFiles(\"replace\")",
+          "state": "Failed",
+          "durationSeconds": 0.0035392,
+          "message": "  Expected: False\r\n  But was:  True\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopStoreTests.FailureBeforeCommitPreservesBothExistingFiles (System.String operation) [0x00060] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopStoreTests.cs:131\r\n",
+          "output": ""
+        },
+        {
+          "name": "MalformedTemporaryCandidateIsRejectedBeforeCommit",
+          "fullName": "PaperDefense.Tests.WorkshopStoreTests.MalformedTemporaryCandidateIsRejectedBeforeCommit",
+          "state": "Failed",
+          "durationSeconds": 0.0049644,
+          "message": "  Expected: False\r\n  But was:  True\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopStoreTests.MalformedTemporaryCandidateIsRejectedBeforeCommit () [0x00042] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopStoreTests.cs:141\r\n",
+          "output": ""
+        },
+        {
+          "name": "MissingPrimaryRecoversBackupWithoutReplacingItWithStarterData",
+          "fullName": "PaperDefense.Tests.WorkshopStoreTests.MissingPrimaryRecoversBackupWithoutReplacingItWithStarterData",
+          "state": "Failed",
+          "durationSeconds": 0.0017484,
+          "message": "  Expected: Backup\r\n  But was:  Primary\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopStoreTests.MissingPrimaryRecoversBackupWithoutReplacingItWithStarterData () [0x00032] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopStoreTests.cs:66\r\n",
+          "output": ""
+        },
+        {
+          "name": "NoSourcesCreatesWritableNewProfileAndARealFirstSave",
+          "fullName": "PaperDefense.Tests.WorkshopStoreTests.NoSourcesCreatesWritableNewProfileAndARealFirstSave",
+          "state": "Failed",
+          "durationSeconds": 0.000803,
+          "message": "  Expected: NewProfile\r\n  But was:  Primary\r\n",
+          "stackTrace": "at PaperDefense.Tests.WorkshopStoreTests.NoSourcesCreatesWritableNewProfileAndARealFirstSave () [0x00013] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopStoreTests.cs:107\r\n",
+          "output": ""
+        },
+        {
+          "name": "OptionalCleanupFailureCannotReportFailureAfterConfirmedCommit",
+          "fullName": "PaperDefense.Tests.WorkshopStoreTests.OptionalCleanupFailureCannotReportFailureAfterConfirmedCommit",
+          "state": "Passed",
+          "durationSeconds": 0.0038209,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ValidPrimaryIgnoresBrokenBackup",
+          "fullName": "PaperDefense.Tests.WorkshopStoreTests.ValidPrimaryIgnoresBrokenBackup",
+          "state": "Passed",
+          "durationSeconds": 0.0020091,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

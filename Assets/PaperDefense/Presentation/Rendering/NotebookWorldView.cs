@@ -255,9 +255,9 @@ namespace PaperDefense.Presentation
                 for (int i = 0; i < session.Structures.Count; i++)
                 {
                     StructureView structure = session.Structures[i];
-                    float range = session.Balance.Structure(structure.Kind).Range;
+                    float range = session.Balance.WeaponRange(structure.Blueprint, structure.Kind);
                     if (structure.Blueprint != null && structure.Blueprint.SecondWeapon.HasValue)
-                        range = Mathf.Max(range, session.Balance.Structure(structure.Blueprint.SecondWeapon.Value).Range);
+                        range = Mathf.Max(range, session.Balance.WeaponRange(structure.Blueprint, structure.Blueprint.SecondWeapon.Value));
                     if (range <= 1) continue;
                     p.Ring(new Vector2(structure.Cell.X + .5f, structure.Cell.Y + .5f), range, .035f,
                            MeshPen.Alpha(DoodleGlyphs.TierColor(structure.Tier), .16f), 96, 1, structure.Id, true);
@@ -390,6 +390,12 @@ namespace PaperDefense.Presentation
                     p.Ring(mark.To, radius * (.6f + t * .4f), .065f * fade + .025f, orange, 32, 1, i * 13);
                     p.Ring(mark.To, radius * (.45f + t * .4f), .035f, MeshPen.Alpha(orange, fade * .35f), 32, 1, i * 19);
                     p.Star(mark.To, radius * (.4f + t * .6f), orange, .045f, 9, i * .83f);
+                }
+                else if (mark.Weapon == StructureKind.Blotter)
+                {
+                    Color clean = MeshPen.Alpha(NotebookPalette.Green, fade * .75f);
+                    p.Line(mark.From, mark.To, .025f, clean);
+                    p.Ring(mark.To, Mathf.Max(.2f, mark.Radius) * (.65f + t * .35f), .035f, clean, 24);
                 }
                 else
                 {

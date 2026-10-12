@@ -12,6 +12,22 @@ namespace PaperDefense.Core
         public IReadOnlyList<BlotState> Blots => blots;
         public IReadOnlyList<EnemyGlob> EnemyProjectiles => enemyGlobs;
         public float BlotterCooldownRemaining { get; private set; }
+        internal IBlotContext CreateBlotContext() => new SessionBlotContext(this);
+
+        sealed class SessionBlotContext : IBlotContext
+        {
+            readonly GameSession session;
+            internal SessionBlotContext(GameSession session) { this.session = session; }
+            public bool TryFindNearest(Point2 origin, float range, out Cell cell)
+                => BlotQueries.TryFindNearest(session.blots, origin, range, out cell);
+            public int Clear(Cell center, float radius)
+            {
+                int cleared = BlotQueries.Clear(session.blots, center, radius);
+                session.CompactBlots();
+                return cleared;
+            }
+        }
+
         public bool TryBlotter(Cell cell, out string reason)
         {
             reason = "";
@@ -53,7 +69,7 @@ namespace PaperDefense.Core
                 var enemy = enemies[i];
                 if (enemy.Health <= 0) continue;
                 if (enemy.BlotRemaining > 0 || enemy.RedRemaining > 0 || enemy.BlueRemaining > 0 || enemy.GreenRemaining > 0)
-                    EnemyEffects.Advance(enemy, delta, Statistics);
+                    EnemyEffects.Advance(enemy, delta, Statistics, Balance.Effects, Balance.BlotReduction);
                 if (enemy.Health <= 0) continue;
                 if (!Balance.EnableEnemyMechanics) continue;
                 var cell = CellOf(enemy.Position);
@@ -132,7 +148,7 @@ namespace PaperDefense.Core
         }
 
         private float MovementEffect(EnemyState enemy) => Balance.EnableEnemyMechanics ?
-            EnemyEffects.MovementMultiplier(enemy, Balance.BlotSpeedBonus) : 1;
+            EnemyEffects.MovementMultiplier(enemy, Balance.Effects, Balance.BlotSpeedBonus) : 1;
 
         private void AdvanceEnemyGlobs(float delta)
         {
@@ -147,7 +163,7 @@ namespace PaperDefense.Core
                 var to = LerpPoint(glob.From, glob.To, current);
                 if (TraceGlobBlocker(from, to, out var blocker))
                 {
-                    blocker.Health = Math.Max(0, blocker.Health - glob.Damage);
+                    blocker.Health = Math.Max(0, blocker.Health - DamageRules.StructureDamage(glob.Damage, blocker, Balance));
                     if (blocker.Health <= 0) RemoveStructure(blocker, true);
                     else RefreshHealthBand(blocker);
                     continue;

@@ -143,8 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab8ba64e01616c47a61b14f31a6cdc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PaperDefense.Presentation::PaperDefense.Presentation.PaperDefenseBootstrap
-  balance: {fileID: 11400000, guid: b6a21ad3817db83478f610d3ed61693a, type: 2}
+  balance: {fileID: 11400000, guid: 3494708e9b1ece94d9eaaec07df5e086, type: 2}
   worldCamera: {fileID: 3094945070024422641}
+  memoryOnlyProfile: 0
 --- !u!1 &6656701941596788811
 GameObject:
   m_ObjectHideFlags: 0
