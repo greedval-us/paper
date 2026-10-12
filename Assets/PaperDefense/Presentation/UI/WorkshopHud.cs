@@ -10,6 +10,7 @@ namespace PaperDefense.Presentation
     /// <summary>The album edits immutable drawings; a run receives four frozen choices.</summary>
     public sealed class WorkshopHud : MonoBehaviour
     {
+        const int AlbumRowsPerPage = 8;
         RunController run;
         Font font;
         GameObject canvasObject, trialPanel, trialShade, qualityPanel, qualityShade;
@@ -20,18 +21,18 @@ namespace PaperDefense.Presentation
         Text qualityExplanation, trialFirstHeader, trialSecondHeader, qualityModeLabel;
         InputField title;
         BlueprintSketch sketch;
-        readonly BlueprintSketch[] albumSketches = new BlueprintSketch[8];
+        readonly BlueprintSketch[] albumSketches = new BlueprintSketch[AlbumRowsPerPage];
         public DrawingEditorPanel DrawingEditor { get; private set; }
         WorkshopMapSketch map;
         TrialLaneSketch trialDiagramFirst, trialDiagramSecond;
-        readonly Button[] albumButtons = new Button[8];
-        readonly Text[] albumLabels = new Text[8], slotLabels = new Text[4];
+        readonly Button[] albumButtons = new Button[AlbumRowsPerPage];
+        readonly Text[] albumLabels = new Text[AlbumRowsPerPage], slotLabels = new Text[ProfileLimits.LoadoutSlotCount];
         Button[] partButtons, firstWeapons, secondWeapons, moduleButtons;
         readonly Button[] chassisButtons = new Button[2];
         Text[] partLabels;
         string[] partIds;
         StructureKind[] mountKinds;
-        readonly TowerModules[] moduleKinds = { TowerModules.Armor, TowerModules.Feed, TowerModules.Tracking, TowerModules.Rail };
+        TowerModules[] moduleKinds;
         int albumPage, trialBudget = 400;
         float refresh;
         bool counterfire, qualityTrial;
@@ -43,12 +44,17 @@ namespace PaperDefense.Presentation
         {
             run = controller;
             var mounts = new List<StructureKind>();
-            foreach (StructureKind kind in Enum.GetValues(typeof(StructureKind))) if (TowerCatalog.IsMountPart(kind)) mounts.Add(kind);
-            mountKinds = mounts.ToArray(); firstWeapons = new Button[mountKinds.Length]; secondWeapons = new Button[mountKinds.Length + 1];
-            moduleButtons = new Button[moduleKinds.Length];
+            var modules = new List<TowerModules>();
             var unlocks = new List<string>();
-            foreach (var part in run.Workshop.Parts)
-                if (part.Id != "chassis.standard" && part.Id != "weapon.gun" && part.Id != "weapon.piercer" && part.Id != "weapon.mortar" && part.Id != "module.armor") unlocks.Add(part.Id);
+            foreach (var part in PartCatalog.All)
+            {
+                if (part.MountKind.HasValue) mounts.Add(part.MountKind.Value);
+                if (part.Module != TowerModules.None) modules.Add(part.Module);
+                if (!part.InitiallyUnlocked) unlocks.Add(part.Id);
+            }
+            mountKinds = mounts.ToArray(); firstWeapons = new Button[mountKinds.Length]; secondWeapons = new Button[mountKinds.Length + 1];
+            moduleKinds = modules.ToArray();
+            moduleButtons = new Button[moduleKinds.Length];
             partIds = unlocks.ToArray(); partButtons = new Button[partIds.Length]; partLabels = new Text[partIds.Length];
             font = Resources.Load<Font>("NotebookHand") ?? Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             canvasObject = new GameObject("Workshop HUD", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
@@ -105,7 +111,7 @@ namespace PaperDefense.Presentation
             Label(left, "Первое крепление", new Rect(18, 196, 490, 24), 18, NotebookPalette.Navy, true);
             for (int i = 0; i < mountKinds.Length; i++)
             {
-                var kind = mountKinds[i]; string partId = "weapon." + kind.ToString().ToLowerInvariant();
+                var kind = mountKinds[i]; string partId = PartCatalog.GetMountId(kind);
                 firstWeapons[i] = Button(left, "First " + kind, new Rect(18 + i % 4 * 123, 225 + i / 4 * 38, 115, 32), WeaponName(kind), () => SetDraft(Draft.Chassis, kind, Draft.SecondWeapon, Draft.Modules, partId));
                 secondWeapons[i] = Button(left, "Second " + kind, new Rect(18 + i % 4 * 123, 335 + i / 4 * 38, 115, 32), WeaponName(kind), () => SetDraft(Draft.Chassis, Draft.FirstWeapon, kind, Draft.Modules, partId));
                 firstWeapons[i].GetComponentInChildren<Text>().fontSize = secondWeapons[i].GetComponentInChildren<Text>().fontSize = 13;
@@ -115,11 +121,11 @@ namespace PaperDefense.Presentation
             secondWeapons[emptyIndex] = Button(left, "Second None", new Rect(18 + emptyIndex % 4 * 123, 335 + emptyIndex / 4 * 38, 115, 32), "ПУСТО", () => SetDraft(Draft.Chassis, Draft.FirstWeapon, null, Draft.Modules));
             secondWeapons[emptyIndex].GetComponentInChildren<Text>().fontSize = 13;
             Label(left, "Оборудование · тоже занимает нагрузку", new Rect(18, 412, 490, 25), 18, NotebookPalette.Navy, true);
-            string[] names = { "БРОНЯ", "ПОДАЧА", "НАВЕДЕНИЕ", "НАПРАВЛ." };
             for (int i = 0; i < moduleKinds.Length; i++)
             {
                 var module = moduleKinds[i];
-                moduleButtons[i] = Button(left, "Module " + module, new Rect(18 + i * 123, 445, 115, 33), names[i], () => SetDraft(Draft.Chassis, Draft.FirstWeapon, Draft.SecondWeapon, Draft.Modules ^ module, "module." + module.ToString().ToLowerInvariant()));
+                PartCatalog.TryGetModule(module, out var part);
+                moduleButtons[i] = Button(left, "Module " + module, new Rect(18 + i * 123, 445, 115, 33), part.ButtonLabel, () => SetDraft(Draft.Chassis, Draft.FirstWeapon, Draft.SecondWeapon, Draft.Modules ^ module, part.Id));
                 moduleButtons[i].GetComponentInChildren<Text>().fontSize = 12;
             }
             Button(left, "New blueprint", new Rect(18, 487, 140, 43), "НОВЫЙ", NewDraft);
@@ -146,14 +152,14 @@ namespace PaperDefense.Presentation
             for (int i = 0; i < albumButtons.Length; i++)
             {
                 int index = i;
-                albumButtons[i] = Button(album, "Album drawing " + i, new Rect(18, 82 + i * 43, 460, 41), "", () => SelectAlbum(albumPage * 8 + index), out albumLabels[i]);
+                albumButtons[i] = Button(album, "Album drawing " + i, new Rect(18, 82 + i * 43, 460, 41), "", () => SelectAlbum(albumPage * AlbumRowsPerPage + index), out albumLabels[i]);
                 var thumb = new GameObject("Album thumbnail " + i, typeof(RectTransform), typeof(CanvasRenderer), typeof(BlueprintSketch));
                 thumb.transform.SetParent(albumButtons[i].transform, false); Place(thumb.GetComponent<RectTransform>(), new Rect(4, 1, 48, 35));
                 albumSketches[i] = thumb.GetComponent<BlueprintSketch>(); albumSketches[i].raycastTarget = false;
                 Place(albumLabels[i].rectTransform, new Rect(58, 1, 394, 39)); albumLabels[i].fontSize = 13;
             }
             Button(album, "Album previous", new Rect(18, 435, 224, 33), "←  ПРЕДЫДУЩИЕ", () => { albumPage = Mathf.Max(0, albumPage - 1); Refresh(); });
-            Button(album, "Album next", new Rect(254, 435, 224, 33), "СЛЕДУЮЩИЕ  →", () => { albumPage = Mathf.Min(Mathf.Max(0, (run.Workshop.Album.Count - 1) / 8), albumPage + 1); Refresh(); });
+            Button(album, "Album next", new Rect(254, 435, 224, 33), "СЛЕДУЮЩИЕ  →", () => { albumPage = Mathf.Min(Mathf.Max(0, (run.Workshop.Album.Count - 1) / AlbumRowsPerPage), albumPage + 1); Refresh(); });
             for (int i = 0; i < partIds.Length; i++)
             {
                 int index = i;
@@ -166,7 +172,7 @@ namespace PaperDefense.Presentation
         void BuildLoadout()
         {
             Label(root, "04  ЧЕТЫРЕ ЧЕРТЕЖА В БОЙ  ·  число экземпляров ограничено только штрихами и местом", new Rect(33, 708, 1528, 33), 23, NotebookPalette.Blue, true);
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < slotLabels.Length; i++)
             {
                 int slot = i;
                 Button(root, "Assign slot " + i, new Rect(32 + i * 306, 748, 294, 74), "", () => SetStatus(run.AssignBlueprint(slot, Draft.Id, out var reason) ? "Рисунок назначен в слот " + (slot + 1) + "." : reason), out slotLabels[i]);
@@ -258,7 +264,7 @@ namespace PaperDefense.Presentation
         {
             if (run == null || Draft == null || gold == null) return;
             gold.text = "ЗОЛОТО  " + run.Workshop.Gold;
-            albumPage = Mathf.Clamp(albumPage, 0, Mathf.Max(0, (run.Workshop.Album.Count - 1) / 8));
+            albumPage = Mathf.Clamp(albumPage, 0, Mathf.Max(0, (run.Workshop.Album.Count - 1) / AlbumRowsPerPage));
             var balance = run.Session.Balance;
             chassisButtons[0].GetComponentInChildren<Text>().text = "ОБЫЧНОЕ  /  " + balance.ChassisCapacity(ChassisKind.Standard);
             chassisButtons[1].GetComponentInChildren<Text>().text = "ТЯЖЁЛОЕ  /  " + balance.ChassisCapacity(ChassisKind.Heavy);
@@ -289,7 +295,7 @@ namespace PaperDefense.Presentation
                 trialPlayback.text = "ЗАПИСЬ ИСПЫТАНИЯ ×4  ·  " + trialDiagramFirst.PlaybackSeconds.ToString("0.0") + " с  ·  реальные позиции, снаряды и выстрелы";
             for (int i = 0; i < albumButtons.Length; i++)
             {
-                int index = albumPage * 8 + i;
+                int index = albumPage * AlbumRowsPerPage + i;
                 albumButtons[i].gameObject.SetActive(index < run.Workshop.Album.Count);
                 if (index >= run.Workshop.Album.Count) continue;
                 var bp = run.Workshop.Album[index];
@@ -302,14 +308,15 @@ namespace PaperDefense.Presentation
                 albumButtons[i].GetComponent<Image>().color = bp.Id == Draft.Id ? new Color(.8f, .87f, .94f) : Color.white;
             }
             var loadout = run.Workshop.Loadout;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < slotLabels.Length; i++)
             {
                 slotLabels[i].text = (i + 1) + "  " + (i < loadout.Count ? loadout[i].Name : "пусто") + "\n↑ назначить выбранный рисунок";
             }
             for (int i = 0; i < partIds.Length; i++)
             {
                 bool unlocked = run.Workshop.IsUnlocked(partIds[i]);
-                string name = partIds[i] == "chassis.heavy" ? "ТЯЖЁЛОЕ" : partIds[i] == "module.feed" ? "ПОДАЧА" : partIds[i] == "module.tracking" ? "НАВЕДЕНИЕ" : partIds[i] == "module.rail" ? "НАПРАВЛЯЮЩАЯ" : WeaponName(ParsePartWeapon(partIds[i]));
+                PartCatalog.TryGet(partIds[i], out var definition);
+                string name = definition.UnlockLabel;
                 int price = 0;
                 foreach (var part in run.Workshop.Parts) if (part.Id == partIds[i]) price = part.GoldCost;
                 partLabels[i].text = name + "\n" + (unlocked ? "ОТКРЫТО ✓" : price + " золота");
@@ -388,21 +395,8 @@ namespace PaperDefense.Presentation
             var diagram = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(TrialLaneSketch)); diagram.transform.SetParent(parent, false);
             Place(diagram.GetComponent<RectTransform>(), box); var graphic = diagram.GetComponent<TrialLaneSketch>(); graphic.raycastTarget = false; return graphic;
         }
-        static StructureKind ParsePartWeapon(string id) { StructureKind kind; return Enum.TryParse(id.Substring(id.IndexOf('.') + 1), true, out kind) ? kind : StructureKind.Gun; }
         internal static string WeaponName(StructureKind kind)
-        {
-            switch (kind)
-            {
-                case StructureKind.Gun: return "ПУЛЕМЁТ";
-                case StructureKind.Piercer: return "ПРОБОЙ";
-                case StructureKind.Mortar: return "МОРТИРА";
-                case StructureKind.Fan: return "ВЕЕР";
-                case StructureKind.Ricochet: return "РИКОШЕТ";
-                case StructureKind.Stapler: return "СКРЕПКИ";
-                case StructureKind.Blotter: return "ПРОМОКАШКА";
-                default: return kind.ToString().ToUpperInvariant();
-            }
-        }
+            => PartCatalog.TryGetMount(kind, out var part) ? part.ButtonLabel : kind.ToString().ToUpperInvariant();
         internal static string ColorName(InkColor color) => color == InkColor.Red ? "красная" : color == InkColor.Blue ? "синяя" : color == InkColor.Green ? "зелёная" : "без цвета";
 
         RectTransform Panel(Transform parent, string name, Rect box, Color color)
@@ -494,7 +488,7 @@ namespace PaperDefense.Presentation
         }
         static void Weapon(VertexHelper vh, Vector2 origin, StructureKind kind)
         {
-            if ((int)kind >= (int)StructureKind.Fan && TowerCatalog.IsMountPart(kind))
+            if (DoodleGlyphs.UsesTemplateMount(kind))
             {
                 var geometry = DoodleGlyphs.StandardMount(kind);
                 int start = vh.currentVertCount;

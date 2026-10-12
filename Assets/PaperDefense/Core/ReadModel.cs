@@ -181,6 +181,7 @@ namespace PaperDefense.Core
         public int ColorTargetsPerWindow=>source.Effects.ColorTargetsPerWindow;
         public int ChassisCapacity(ChassisKind chassis)=>chassis==ChassisKind.Heavy?source.Construction.HeavyCapacity:source.Construction.StandardCapacity;
         public int ModuleLoad(TowerModules modules)=>source.Construction.ModuleLoad(modules);
+        public int ToolCost(StructureKind kind, MaterialTier tier)=>TowerCatalog.ToolCost(source,kind,tier);
         public StructureSpec Structure(StructureKind kind)=>new StructureSpec(source.Structure(kind));
         public float WeaponRange(TowerBlueprint blueprint,StructureKind kind)=>TowerCatalog.WeaponRange(blueprint,source,kind);
         public MaterialSpec Material(MaterialTier tier)=>new MaterialSpec(source.Material(tier));

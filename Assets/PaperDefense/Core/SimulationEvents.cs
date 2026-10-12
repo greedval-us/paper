@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace PaperDefense.Core
 {
-    public enum SimulationEventKind { Shot, ProjectileLaunched, ProjectileImpact, StructureDestroyed }
+    public enum SimulationEventKind { Shot = 0, ProjectileLaunched = 1, ProjectileImpact = 2, StructureDestroyed = 3 }
 
     public readonly struct SimulationEvent
     {

@@ -22,15 +22,15 @@ namespace PaperDefense.Core
         public override string ToString() => $"({X:0.00}, {Y:0.00})";
     }
 
-    public enum MaterialTier { Pencil, Ink, Marker }
+    public enum MaterialTier { Pencil = 0, Ink = 1, Marker = 2 }
     public enum StructureKind { Wall = 0, Gun = 1, Piercer = 2, Mortar = 3, Spikes = 4, Fan = 5, Ricochet = 6, Stapler = 7, Blotter = 8 }
-    public enum EnemyKind { Doodle, Runner, Gnawer, Spitter }
-    public enum DrawingTier { Sketch, Outlined, Hatched }
-    public enum InkColor { None, Red, Blue, Green }
-    public enum RunPhase { Planning, Assault, Intermission, Victory, Defeat }
-    public enum TargetPriority { Nearest, Strongest, Siege }
-    public enum RunUpgrade { RapidFire, DeepInk, Salvage }
-    public enum GameBalancePreset { Historical, Target }
+    public enum EnemyKind { Doodle = 0, Runner = 1, Gnawer = 2, Spitter = 3 }
+    public enum DrawingTier { Sketch = 0, Outlined = 1, Hatched = 2 }
+    public enum InkColor { None = 0, Red = 1, Blue = 2, Green = 3 }
+    public enum RunPhase { Planning = 0, Assault = 1, Intermission = 2, Victory = 3, Defeat = 4 }
+    public enum TargetPriority { Nearest = 0, Strongest = 1, Siege = 2 }
+    public enum RunUpgrade { RapidFire = 0, DeepInk = 1, Salvage = 2 }
+    public enum GameBalancePreset { Historical = 0, Target = 1 }
 
     public sealed class StructureDefinition
     {

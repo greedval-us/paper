@@ -71,7 +71,8 @@ namespace PaperDefense.Core
             if (SameAssembly(Blueprint, blueprint) && Blueprint.Id == blueprint.Id && Blueprint.Name == blueprint.Name) return false;
             var parts = new List<DrawingPart>(Snapshot.Parts.Count);
             foreach (DrawingPart part in Snapshot.Parts)
-                if (RetainPart(part.Key, Blueprint, blueprint)) parts.Add(part);
+                if (DrawingPartPolicy.ShouldRetain(part.Key, Blueprint, blueprint.Chassis, blueprint.FirstWeapon,
+                    blueprint.SecondWeapon, blueprint.Modules)) parts.Add(part);
             Commit(blueprint, new DrawingSnapshot(parts));
             return true;
         }
@@ -107,21 +108,6 @@ namespace PaperDefense.Core
 
         static bool SameAssembly(TowerBlueprint first, TowerBlueprint second)
             => first.Chassis == second.Chassis && first.FirstWeapon == second.FirstWeapon && first.SecondWeapon == second.SecondWeapon && first.Modules == second.Modules;
-
-        static bool RetainPart(DrawingPartKey key, TowerBlueprint before, TowerBlueprint after)
-        {
-            switch (key)
-            {
-                case DrawingPartKey.Base: return before.Chassis == after.Chassis;
-                case DrawingPartKey.Mount0: return before.FirstWeapon == after.FirstWeapon;
-                case DrawingPartKey.Mount1: return before.SecondWeapon == after.SecondWeapon && after.SecondWeapon.HasValue;
-                case DrawingPartKey.Armor: return (before.Modules & after.Modules & TowerModules.Armor) != 0;
-                case DrawingPartKey.Feed: return (before.Modules & after.Modules & TowerModules.Feed) != 0;
-                case DrawingPartKey.Tracking: return (before.Modules & after.Modules & TowerModules.Tracking) != 0;
-                case DrawingPartKey.Rail: return (before.Modules & after.Modules & TowerModules.Rail) != 0;
-                default: return true;
-            }
-        }
 
         static bool Touches(DrawingStroke stroke, DrawingPoint point, float radius)
         {

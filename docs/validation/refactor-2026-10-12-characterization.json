@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "cb649d64b9af4344976881b956f64068",
+    "status": "failed",
+    "mode": "EditMode",
+    "started_unix_ms": 1791803427454,
+    "finished_unix_ms": 1791803428021,
+    "last_update_unix_ms": 1791803428021,
+    "progress": {
+      "completed": 31,
+      "total": 31,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": null,
+      "last_finished_test_full_name": "PaperDefense.Tests.WeaponPublicationContractTests.ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Stapler,1,4,1)",
+      "last_finished_unix_ms": 1791803427996,
+      "stuck_suspected": false,
+      "editor_is_focused": true,
+      "run_in_background": false,
+      "focus_nudge_attempts": null,
+      "focus_nudge_limit": null,
+      "focus_nudge_status": null,
+      "blocked_reason": null,
+      "failures_so_far": [
+        {
+          "full_name": "PaperDefense.Tests.PartCatalogCharacterizationTests.LegacyToolAndAssemblyKeepTheirDifferentFloatingPointPriceOrder",
+          "message": "  Expected: 128\r\n  But was:  129\r\n"
+        }
+      ],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "EditMode",
+      "summary": {
+        "total": 31,
+        "passed": 30,
+        "failed": 1,
+        "skipped": 0,
+        "durationSeconds": 0.092748,
+        "resultState": "Failed(Child)"
+      },
+      "results": [
+        {
+          "name": "AssemblyReplacementRetainsUnsavedEditorStrokesRatherThanBlueprintDrawing",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.AssemblyReplacementRetainsUnsavedEditorStrokesRatherThanBlueprintDrawing",
+          "state": "Passed",
+          "durationSeconds": 0.016242,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlueprintIdentifierAndNameLimitsMatchSavedPageContract(64,48,True)",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BlueprintIdentifierAndNameLimitsMatchSavedPageContract(64,48,True)",
+          "state": "Passed",
+          "durationSeconds": 0.0013882,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlueprintIdentifierAndNameLimitsMatchSavedPageContract(65,48,False)",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BlueprintIdentifierAndNameLimitsMatchSavedPageContract(65,48,False)",
+          "state": "Passed",
+          "durationSeconds": 0.0000518,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlueprintIdentifierAndNameLimitsMatchSavedPageContract(64,49,False)",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BlueprintIdentifierAndNameLimitsMatchSavedPageContract(64,49,False)",
+          "state": "Passed",
+          "durationSeconds": 0.000028,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"chassis\",Base,\"a06d66b6d7fd7891\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"chassis\",Base,\"a06d66b6d7fd7891\")",
+          "state": "Passed",
+          "durationSeconds": 0.00644,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"first\",Mount0,\"92b6bb72a4ceb3db\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"first\",Mount0,\"92b6bb72a4ceb3db\")",
+          "state": "Passed",
+          "durationSeconds": 0.0009489,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"second\",Mount1,\"f0ef550f27e73105\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"second\",Mount1,\"f0ef550f27e73105\")",
+          "state": "Passed",
+          "durationSeconds": 0.0009025,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"remove-second\",Mount1,\"f0ef550f27e73105\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"remove-second\",Mount1,\"f0ef550f27e73105\")",
+          "state": "Passed",
+          "durationSeconds": 0.0007712,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"armor\",Armor,\"4f184c1b7ba8f7ff\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"armor\",Armor,\"4f184c1b7ba8f7ff\")",
+          "state": "Passed",
+          "durationSeconds": 0.0007816,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"feed\",Feed,\"bd1ffbfff8865229\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"feed\",Feed,\"bd1ffbfff8865229\")",
+          "state": "Passed",
+          "durationSeconds": 0.0007718,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"tracking\",Tracking,\"e583295cebaec9ab\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"tracking\",Tracking,\"e583295cebaec9ab\")",
+          "state": "Passed",
+          "durationSeconds": 0.0007659,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"rail\",Rail,\"899949a009d7430f\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"rail\",Rail,\"899949a009d7430f\")",
+          "state": "Passed",
+          "durationSeconds": 0.0007911,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EachOptionalPartUsesItsOwnModuleBinding(Armor,Armor)",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.EachOptionalPartUsesItsOwnModuleBinding(Armor,Armor)",
+          "state": "Passed",
+          "durationSeconds": 0.0007512,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EachOptionalPartUsesItsOwnModuleBinding(Feed,Feed)",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.EachOptionalPartUsesItsOwnModuleBinding(Feed,Feed)",
+          "state": "Passed",
+          "durationSeconds": 0.0004438,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EachOptionalPartUsesItsOwnModuleBinding(Tracking,Tracking)",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.EachOptionalPartUsesItsOwnModuleBinding(Tracking,Tracking)",
+          "state": "Passed",
+          "durationSeconds": 0.0004352,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EachOptionalPartUsesItsOwnModuleBinding(Rail,Rail)",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.EachOptionalPartUsesItsOwnModuleBinding(Rail,Rail)",
+          "state": "Passed",
+          "durationSeconds": 0.0004266,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EnabledPartsKeepTemplateOrderAndIgnoreDormantSavedLines",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.EnabledPartsKeepTemplateOrderAndIgnoreDormantSavedLines",
+          "state": "Passed",
+          "durationSeconds": 0.0010502,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ExactNoOpKeepsDormantSavedPartsWithoutAddingHistory",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.ExactNoOpKeepsDormantSavedPartsWithoutAddingHistory",
+          "state": "Passed",
+          "durationSeconds": 0.0003094,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FullAlbumStillAllowsReplacementButRejectsSixtyFifthPageAndFifthSlot",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.FullAlbumStillAllowsReplacementButRejectsSixtyFifthPageAndFifthSlot",
+          "state": "Passed",
+          "durationSeconds": 0.0041059,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InstallingModuleClearsDormantLinesWhileKeepingExistingActiveParts",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.InstallingModuleClearsDormantLinesWhileKeepingExistingActiveParts",
+          "state": "Passed",
+          "durationSeconds": 0.0005446,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LegacyNoOpAndRenameKeepOriginButAssemblyChangeStartsAnEmptyAuthoredDraft",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.LegacyNoOpAndRenameKeepOriginButAssemblyChangeStartsAnEmptyAuthoredDraft",
+          "state": "Passed",
+          "durationSeconds": 0.0004533,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SavedIdentifiersAndDensePartIndexContractStayCompatible",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.SavedIdentifiersAndDensePartIndexContractStayCompatible",
+          "state": "Passed",
+          "durationSeconds": 0.0007125,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredUnlockPricesOverrideOnlyTheirDefinitions",
+          "fullName": "PaperDefense.Tests.PartCatalogCharacterizationTests.ConfiguredUnlockPricesOverrideOnlyTheirDefinitions",
+          "state": "Passed",
+          "durationSeconds": 0.0008065,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HistoricalPartsKeepTheirStableOrderPricesAndInitialRights",
+          "fullName": "PaperDefense.Tests.PartCatalogCharacterizationTests.HistoricalPartsKeepTheirStableOrderPricesAndInitialRights",
+          "state": "Passed",
+          "durationSeconds": 0.0017599,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LegacyToolAndAssemblyKeepTheirDifferentFloatingPointPriceOrder",
+          "fullName": "PaperDefense.Tests.PartCatalogCharacterizationTests.LegacyToolAndAssemblyKeepTheirDifferentFloatingPointPriceOrder",
+          "state": "Failed",
+          "durationSeconds": 0.0058172,
+          "message": "  Expected: 128\r\n  But was:  129\r\n",
+          "stackTrace": "at PaperDefense.Tests.PartCatalogCharacterizationTests.LegacyToolAndAssemblyKeepTheirDifferentFloatingPointPriceOrder () [0x00068] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\PartCatalogCharacterizationTests.cs:60\r\n",
+          "output": ""
+        },
+        {
+          "name": "SerializedEnumsKeepTheirOriginalNumericContracts",
+          "fullName": "PaperDefense.Tests.PartCatalogCharacterizationTests.SerializedEnumsKeepTheirOriginalNumericContracts",
+          "state": "Passed",
+          "durationSeconds": 0.0012005,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Gun,1,12,1)",
+          "fullName": "PaperDefense.Tests.WeaponPublicationContractTests.ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Gun,1,12,1)",
+          "state": "Passed",
+          "durationSeconds": 0.0024583,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Piercer,1,36,2)",
+          "fullName": "PaperDefense.Tests.WeaponPublicationContractTests.ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Piercer,1,36,2)",
+          "state": "Passed",
+          "durationSeconds": 0.0001762,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Fan,3,30,3)",
+          "fullName": "PaperDefense.Tests.WeaponPublicationContractTests.ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Fan,3,30,3)",
+          "state": "Passed",
+          "durationSeconds": 0.0001431,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Ricochet,3,36,3)",
+          "fullName": "PaperDefense.Tests.WeaponPublicationContractTests.ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Ricochet,3,36,3)",
+          "state": "Passed",
+          "durationSeconds": 0.0001326,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Stapler,1,4,1)",
+          "fullName": "PaperDefense.Tests.WeaponPublicationContractTests.ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Stapler,1,4,1)",
+          "state": "Passed",
+          "durationSeconds": 0.0001331,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

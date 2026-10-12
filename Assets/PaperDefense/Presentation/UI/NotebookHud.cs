@@ -8,6 +8,9 @@ namespace PaperDefense.Presentation
 {
     public sealed class NotebookHud : MonoBehaviour
     {
+        const int WallToolIndex = ProfileLimits.LoadoutSlotCount, SpikesToolIndex = WallToolIndex + 1;
+        const int EraseToolIndex = SpikesToolIndex + 1, UpgradeToolIndex = EraseToolIndex + 1;
+        const int BlotterToolIndex = UpgradeToolIndex + 1, PaintToolIndex = BlotterToolIndex + 1;
         static readonly Color Navy = new Color(.09f, .16f, .30f);
         static readonly Color Paper = new Color(.98f, .96f, .87f);
         static readonly Color Red = new Color(.78f, .15f, .17f);
@@ -21,8 +24,8 @@ namespace PaperDefense.Presentation
         Text hp, ink, wave, threats, forecast, message, toolHint, launchText, pauseText, speedText, progress, inspect, blotterPrice;
         Image hpFill;
         Button launch;
-        readonly Button[] tools = new Button[10];
-        readonly Text[] toolPrices = new Text[6], toolNames = new Text[10], wellLabels = new Text[3], colorLabels = new Text[4];
+        readonly Button[] tools = new Button[PaintToolIndex + 1];
+        readonly Text[] toolPrices = new Text[SpikesToolIndex + 1], toolNames = new Text[PaintToolIndex + 1], wellLabels = new Text[3], colorLabels = new Text[4];
         readonly Button[] wellActions = new Button[3], colors = new Button[4];
         readonly Button[] tiers = new Button[3];
         GameObject upgradePanel, outcomePanel, pauseBadge;
@@ -124,15 +127,15 @@ namespace PaperDefense.Presentation
             {
                 int index = i;
                 tools[i] = MakeButton(footer, "Tool " + i, new Rect(18 + i*152,54,143,91), "", 17, Navy, () => {
-                    if (index < 4) input.SelectSlot(index);
-                    else if (index == 4) input.SelectTool(StructureKind.Wall);
-                    else if (index == 5) input.SelectTool(StructureKind.Spikes);
-                    else input.SelectMode(index == 6 ? DrawingMode.Erase : index == 7 ? DrawingMode.Upgrade : index == 8 ? DrawingMode.Blotter : DrawingMode.Paint);
+                    if (index < ProfileLimits.LoadoutSlotCount) input.SelectSlot(index);
+                    else if (index == WallToolIndex) input.SelectTool(StructureKind.Wall);
+                    else if (index == SpikesToolIndex) input.SelectTool(StructureKind.Spikes);
+                    else input.SelectMode(index == EraseToolIndex ? DrawingMode.Erase : index == UpgradeToolIndex ? DrawingMode.Upgrade : index == BlotterToolIndex ? DrawingMode.Blotter : DrawingMode.Paint);
                 }, out _);
                 toolNames[i] = Label(tools[i].transform, names[i], new Rect(5,1,133,33), 14, Navy, FontStyle.Bold, TextAnchor.MiddleCenter);
                 Label(tools[i].transform, descriptions[i], new Rect(5,36,133,23), 12, Navy, FontStyle.Normal, TextAnchor.MiddleCenter);
                 var price = Label(tools[i].transform, "", new Rect(5,62,133,24), 14, Blue, FontStyle.Normal, TextAnchor.MiddleCenter);
-                if (i < 6) toolPrices[i] = price; else if (i == 8) blotterPrice = price; else price.text = i == 6 ? "с учётом износа" : i == 7 ? "доплата разницы" : "один картридж";
+                if (i < toolPrices.Length) toolPrices[i] = price; else if (i == BlotterToolIndex) blotterPrice = price; else price.text = i == EraseToolIndex ? "с учётом износа" : i == UpgradeToolIndex ? "доплата разницы" : "один картридж";
             }
             toolHint = Label(footer, "", new Rect(20,151,1230,28), 16, Navy);
             Label(footer, "ПКМ / Esc — отменить", new Rect(1262,151,273,28), 16, Navy, FontStyle.Normal, TextAnchor.MiddleRight);
@@ -171,19 +174,19 @@ namespace PaperDefense.Presentation
             blotterPrice.text = run.Session.Balance.BlotterCost + " штр. / R " + run.Session.Balance.BlotterRadius.ToString("0");
             for (int i=0;i<tools.Length;i++)
             {
-                bool selected = i < 4 ? input.Mode == DrawingMode.Build && input.BlueprintSlot == i :
-                    i == 4 ? input.Mode == DrawingMode.Build && input.BlueprintSlot < 0 && input.Tool == StructureKind.Wall :
-                    i == 5 ? input.Mode == DrawingMode.Build && input.BlueprintSlot < 0 && input.Tool == StructureKind.Spikes :
-                    i == 6 ? input.Mode == DrawingMode.Erase : i == 7 ? input.Mode == DrawingMode.Upgrade : i == 8 ? input.Mode == DrawingMode.Blotter : input.Mode == DrawingMode.Paint;
+                bool selected = i < ProfileLimits.LoadoutSlotCount ? input.Mode == DrawingMode.Build && input.BlueprintSlot == i :
+                    i == WallToolIndex ? input.Mode == DrawingMode.Build && input.BlueprintSlot < 0 && input.Tool == StructureKind.Wall :
+                    i == SpikesToolIndex ? input.Mode == DrawingMode.Build && input.BlueprintSlot < 0 && input.Tool == StructureKind.Spikes :
+                    i == EraseToolIndex ? input.Mode == DrawingMode.Erase : i == UpgradeToolIndex ? input.Mode == DrawingMode.Upgrade : i == BlotterToolIndex ? input.Mode == DrawingMode.Blotter : input.Mode == DrawingMode.Paint;
                 tools[i].GetComponent<Image>().color = selected ? new Color(.78f,.87f,.95f) : Paper;
             }
             for (int i=0;i<3;i++) tiers[i].GetComponent<Image>().color = (int)input.Tier == i ? new Color(.89f,.84f,.98f) : Paper;
             string[] colorNames = { "БЕЗ ЦВЕТА", "КРАСНЫЕ", "СИНИЕ", "ЗЕЛЁНЫЕ" };
             for (int i = 0; i < colors.Length; i++)
             { colors[i].GetComponent<Image>().color = (int)input.Color == i ? new Color(.82f,.9f,.84f) : Paper; colorLabels[i].text = colorNames[i] + (i == 0 ? "" : " " + run.Session.ColoredInk((InkColor)i)); }
-            for (int i=0;i<6;i++)
+            for (int i=0;i<toolPrices.Length;i++)
             {
-                if (i < 4)
+                if (i < ProfileLimits.LoadoutSlotCount)
                 {
                     if (i >= loadout.Count) continue;
                     var bp = loadout[i]; var preview = run.PreviewBlueprint(bp, input.Tier);
@@ -192,8 +195,7 @@ namespace PaperDefense.Presentation
                 }
                 else
                 {
-                    var d = run.Session.Balance.Structure(i == 4 ? StructureKind.Wall : StructureKind.Spikes);
-                    int cost = Mathf.CeilToInt(d.Cost * run.Session.Balance.Material(input.Tier).CostMultiplier);
+                    int cost = run.Session.Balance.ToolCost(i == WallToolIndex ? StructureKind.Wall : StructureKind.Spikes, input.Tier);
                     toolPrices[i].text = cost + " штр. / клетка";
                 }
             }

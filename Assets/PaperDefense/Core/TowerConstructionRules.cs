@@ -27,6 +27,11 @@ namespace PaperDefense.Core
         public int HeavyUnlockGold = 90, FeedUnlockGold = 60, TrackingUnlockGold = 60;
         public TowerConstructionRules CreateSnapshot()
         {
+            Validate();
+            return (TowerConstructionRules)MemberwiseClone();
+        }
+        internal void Validate()
+        {
             NonNegative(StandardCapacity, nameof(StandardCapacity)); NonNegative(HeavyCapacity, nameof(HeavyCapacity));
             NonNegative(GunLoad, nameof(GunLoad)); NonNegative(PiercerLoad, nameof(PiercerLoad)); NonNegative(MortarLoad, nameof(MortarLoad));
             NonNegative(FanLoad, nameof(FanLoad)); NonNegative(FanUnlockGold, nameof(FanUnlockGold));
@@ -54,7 +59,6 @@ namespace PaperDefense.Core
             if (ColorCostDivisor <= 0) throw new ArgumentOutOfRangeException(nameof(ColorCostDivisor));
             NonNegative(HeavyUnlockGold, nameof(HeavyUnlockGold)); NonNegative(FeedUnlockGold, nameof(FeedUnlockGold));
             NonNegative(TrackingUnlockGold, nameof(TrackingUnlockGold));
-            return (TowerConstructionRules)MemberwiseClone();
         }
         static void NonNegative(float value, string name)
         { if (value < 0 || float.IsNaN(value) || float.IsInfinity(value)) throw new ArgumentOutOfRangeException(name); }
@@ -64,6 +68,6 @@ namespace PaperDefense.Core
         public int ModuleLoad(TowerModules modules) => (int)Math.Min(int.MaxValue, ((modules & TowerModules.Armor) != 0 ? (long)ArmorLoad : 0) +
             ((modules & TowerModules.Feed) != 0 ? FeedLoad : 0) + ((modules & TowerModules.Tracking) != 0 ? TrackingLoad : 0) +
             ((modules & TowerModules.Rail) != 0 ? RailLoad : 0));
-        public int UnlockGold(string id) => id == "chassis.heavy" ? HeavyUnlockGold : id == "module.feed" ? FeedUnlockGold : id == "module.tracking" ? TrackingUnlockGold : id == "weapon.fan" ? FanUnlockGold : id == "weapon.ricochet" ? RicochetUnlockGold : id == "weapon.stapler" ? StaplerUnlockGold : id == "weapon.blotter" ? BlotterUnlockGold : id == "module.rail" ? RailUnlockGold : 0;
+        public int UnlockGold(string id) => PartCatalog.TryGet(id, out var definition) ? PartCatalog.GetUnlockGold(definition, this) : 0;
     }
 }

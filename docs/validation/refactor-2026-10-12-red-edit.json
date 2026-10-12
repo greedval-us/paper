@@ -1,0 +1,540 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "6ded34d5654c470abf9893ceb1df987b",
+    "status": "failed",
+    "mode": "EditMode",
+    "started_unix_ms": 1791803074187,
+    "finished_unix_ms": 1791803079143,
+    "last_update_unix_ms": 1791803079143,
+    "progress": {
+      "completed": 46,
+      "total": 46,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": null,
+      "last_finished_test_full_name": "PaperDefense.Tests.PartCatalogCharacterizationTests.SerializedEnumsKeepTheirOriginalNumericContracts",
+      "last_finished_unix_ms": 1791803078917,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "run_in_background": false,
+      "focus_nudge_attempts": null,
+      "focus_nudge_limit": null,
+      "focus_nudge_status": null,
+      "blocked_reason": null,
+      "failures_so_far": [
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"missing weapon\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"duplicate weapon\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"unknown weapon\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"null weapon\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"missing material\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"null material\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"missing enemy\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"duplicate enemy\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"unknown enemy\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"null wave\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"null construction\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"base health\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"simulation step\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"drawing rate\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"weapon damage\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"material cost\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"enemy speed\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"wave interval\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"progression rate\")",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.BalanceBoundaryTests.TrialRejectsNonfiniteDefinitionsBeforeRunningTheLane",
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n"
+        }
+      ],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "EditMode",
+      "summary": {
+        "total": 46,
+        "passed": 26,
+        "failed": 20,
+        "skipped": 0,
+        "durationSeconds": 1.1935842,
+        "resultState": "Failed(Child)"
+      },
+      "results": [
+        {
+          "name": "BoundaryKeepsStationaryEnemiesEmptyWavesAndZeroDamageFixturesValid",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.BoundaryKeepsStationaryEnemiesEmptyWavesAndZeroDamageFixturesValid",
+          "state": "Passed",
+          "durationSeconds": 0.0350387,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"missing weapon\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"missing weapon\")",
+          "state": "Failed",
+          "durationSeconds": 0.0083753,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation (System.String defect) [0x00280] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:62\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"duplicate weapon\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"duplicate weapon\")",
+          "state": "Failed",
+          "durationSeconds": 0.0002619,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation (System.String defect) [0x00280] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:62\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"unknown weapon\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"unknown weapon\")",
+          "state": "Failed",
+          "durationSeconds": 0.0001735,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation (System.String defect) [0x00280] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:62\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"null weapon\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"null weapon\")",
+          "state": "Failed",
+          "durationSeconds": 0.0001558,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation (System.String defect) [0x00280] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:62\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"missing material\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"missing material\")",
+          "state": "Failed",
+          "durationSeconds": 0.000156,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation (System.String defect) [0x00280] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:62\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"null material\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"null material\")",
+          "state": "Failed",
+          "durationSeconds": 0.0001578,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation (System.String defect) [0x00280] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:62\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"missing enemy\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"missing enemy\")",
+          "state": "Failed",
+          "durationSeconds": 0.0001584,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation (System.String defect) [0x00280] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:62\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"duplicate enemy\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"duplicate enemy\")",
+          "state": "Failed",
+          "durationSeconds": 0.0005817,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation (System.String defect) [0x00280] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:62\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"unknown enemy\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"unknown enemy\")",
+          "state": "Failed",
+          "durationSeconds": 0.000604,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation (System.String defect) [0x00280] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:62\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"null wave\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"null wave\")",
+          "state": "Failed",
+          "durationSeconds": 0.000237,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation (System.String defect) [0x00280] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:62\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"null construction\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation(\"null construction\")",
+          "state": "Failed",
+          "durationSeconds": 0.0001744,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsIncompleteOrAmbiguousDefinitionsBeforeAllocation (System.String defect) [0x00280] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:62\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsNonfiniteRulesAtItsBoundary(\"base health\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"base health\")",
+          "state": "Failed",
+          "durationSeconds": 0.001303,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary (System.String field) [0x001d8] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:31\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsNonfiniteRulesAtItsBoundary(\"simulation step\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"simulation step\")",
+          "state": "Failed",
+          "durationSeconds": 0.0004923,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary (System.String field) [0x001d8] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:31\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsNonfiniteRulesAtItsBoundary(\"drawing rate\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"drawing rate\")",
+          "state": "Failed",
+          "durationSeconds": 0.0003004,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary (System.String field) [0x001d8] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:31\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsNonfiniteRulesAtItsBoundary(\"weapon damage\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"weapon damage\")",
+          "state": "Failed",
+          "durationSeconds": 0.0002546,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary (System.String field) [0x001d8] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:31\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsNonfiniteRulesAtItsBoundary(\"material cost\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"material cost\")",
+          "state": "Failed",
+          "durationSeconds": 0.0002435,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary (System.String field) [0x001d8] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:31\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsNonfiniteRulesAtItsBoundary(\"enemy speed\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"enemy speed\")",
+          "state": "Failed",
+          "durationSeconds": 0.0003818,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary (System.String field) [0x001d8] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:31\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsNonfiniteRulesAtItsBoundary(\"wave interval\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"wave interval\")",
+          "state": "Failed",
+          "durationSeconds": 0.0004131,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary (System.String field) [0x001d8] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:31\r\n",
+          "output": ""
+        },
+        {
+          "name": "SessionRejectsNonfiniteRulesAtItsBoundary(\"progression rate\")",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary(\"progression rate\")",
+          "state": "Failed",
+          "durationSeconds": 0.0001656,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.SessionRejectsNonfiniteRulesAtItsBoundary (System.String field) [0x001d8] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:31\r\n",
+          "output": ""
+        },
+        {
+          "name": "TrialRejectsNonfiniteDefinitionsBeforeRunningTheLane",
+          "fullName": "PaperDefense.Tests.BalanceBoundaryTests.TrialRejectsNonfiniteDefinitionsBeforeRunningTheLane",
+          "state": "Failed",
+          "durationSeconds": 0.0162248,
+          "message": "  Expected: instance of <System.ArgumentException>\r\n  But was:  no exception thrown\r\n",
+          "stackTrace": "at PaperDefense.Tests.BalanceBoundaryTests.TrialRejectsNonfiniteDefinitionsBeforeRunningTheLane () [0x00049] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\BalanceBoundaryTests.cs:87\r\n",
+          "output": ""
+        },
+        {
+          "name": "AssemblyReplacementRetainsUnsavedEditorStrokesRatherThanBlueprintDrawing",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.AssemblyReplacementRetainsUnsavedEditorStrokesRatherThanBlueprintDrawing",
+          "state": "Passed",
+          "durationSeconds": 0.0154761,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlueprintIdentifierAndNameLimitsMatchSavedPageContract(64,48,True)",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BlueprintIdentifierAndNameLimitsMatchSavedPageContract(64,48,True)",
+          "state": "Passed",
+          "durationSeconds": 0.0034277,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlueprintIdentifierAndNameLimitsMatchSavedPageContract(65,48,False)",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BlueprintIdentifierAndNameLimitsMatchSavedPageContract(65,48,False)",
+          "state": "Passed",
+          "durationSeconds": 0.0002055,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlueprintIdentifierAndNameLimitsMatchSavedPageContract(64,49,False)",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BlueprintIdentifierAndNameLimitsMatchSavedPageContract(64,49,False)",
+          "state": "Passed",
+          "durationSeconds": 0.0000986,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"chassis\",Base,\"a06d66b6d7fd7891\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"chassis\",Base,\"a06d66b6d7fd7891\")",
+          "state": "Passed",
+          "durationSeconds": 0.004163,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"first\",Mount0,\"92b6bb72a4ceb3db\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"first\",Mount0,\"92b6bb72a4ceb3db\")",
+          "state": "Passed",
+          "durationSeconds": 0.0011628,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"second\",Mount1,\"f0ef550f27e73105\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"second\",Mount1,\"f0ef550f27e73105\")",
+          "state": "Passed",
+          "durationSeconds": 0.0009471,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"remove-second\",Mount1,\"f0ef550f27e73105\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"remove-second\",Mount1,\"f0ef550f27e73105\")",
+          "state": "Passed",
+          "durationSeconds": 0.0008467,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"armor\",Armor,\"4f184c1b7ba8f7ff\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"armor\",Armor,\"4f184c1b7ba8f7ff\")",
+          "state": "Passed",
+          "durationSeconds": 0.0008353,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"feed\",Feed,\"bd1ffbfff8865229\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"feed\",Feed,\"bd1ffbfff8865229\")",
+          "state": "Passed",
+          "durationSeconds": 0.0008109,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"tracking\",Tracking,\"e583295cebaec9ab\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"tracking\",Tracking,\"e583295cebaec9ab\")",
+          "state": "Passed",
+          "durationSeconds": 0.0008116,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BothAssemblyEditorsClearOnlyTheChangedPart(\"rail\",Rail,\"899949a009d7430f\")",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.BothAssemblyEditorsClearOnlyTheChangedPart(\"rail\",Rail,\"899949a009d7430f\")",
+          "state": "Passed",
+          "durationSeconds": 0.0007965,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EachOptionalPartUsesItsOwnModuleBinding(Armor,Armor)",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.EachOptionalPartUsesItsOwnModuleBinding(Armor,Armor)",
+          "state": "Passed",
+          "durationSeconds": 0.0020166,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EachOptionalPartUsesItsOwnModuleBinding(Feed,Feed)",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.EachOptionalPartUsesItsOwnModuleBinding(Feed,Feed)",
+          "state": "Passed",
+          "durationSeconds": 0.001002,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EachOptionalPartUsesItsOwnModuleBinding(Tracking,Tracking)",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.EachOptionalPartUsesItsOwnModuleBinding(Tracking,Tracking)",
+          "state": "Passed",
+          "durationSeconds": 0.0006235,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EachOptionalPartUsesItsOwnModuleBinding(Rail,Rail)",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.EachOptionalPartUsesItsOwnModuleBinding(Rail,Rail)",
+          "state": "Passed",
+          "durationSeconds": 0.0004912,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EnabledPartsKeepTemplateOrderAndIgnoreDormantSavedLines",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.EnabledPartsKeepTemplateOrderAndIgnoreDormantSavedLines",
+          "state": "Passed",
+          "durationSeconds": 0.0012019,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ExactNoOpKeepsDormantSavedPartsWithoutAddingHistory",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.ExactNoOpKeepsDormantSavedPartsWithoutAddingHistory",
+          "state": "Passed",
+          "durationSeconds": 0.0003754,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FullAlbumStillAllowsReplacementButRejectsSixtyFifthPageAndFifthSlot",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.FullAlbumStillAllowsReplacementButRejectsSixtyFifthPageAndFifthSlot",
+          "state": "Passed",
+          "durationSeconds": 0.0042773,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InstallingModuleClearsDormantLinesWhileKeepingExistingActiveParts",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.InstallingModuleClearsDormantLinesWhileKeepingExistingActiveParts",
+          "state": "Passed",
+          "durationSeconds": 0.0005932,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LegacyNoOpAndRenameKeepOriginButAssemblyChangeStartsAnEmptyAuthoredDraft",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.LegacyNoOpAndRenameKeepOriginButAssemblyChangeStartsAnEmptyAuthoredDraft",
+          "state": "Passed",
+          "durationSeconds": 0.0004844,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SavedIdentifiersAndDensePartIndexContractStayCompatible",
+          "fullName": "PaperDefense.Tests.DrawingPolicyContractTests.SavedIdentifiersAndDensePartIndexContractStayCompatible",
+          "state": "Passed",
+          "durationSeconds": 0.0008291,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredUnlockPricesOverrideOnlyTheirDefinitions",
+          "fullName": "PaperDefense.Tests.PartCatalogCharacterizationTests.ConfiguredUnlockPricesOverrideOnlyTheirDefinitions",
+          "state": "Passed",
+          "durationSeconds": 0.0023962,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HistoricalPartsKeepTheirStableOrderPricesAndInitialRights",
+          "fullName": "PaperDefense.Tests.PartCatalogCharacterizationTests.HistoricalPartsKeepTheirStableOrderPricesAndInitialRights",
+          "state": "Passed",
+          "durationSeconds": 0.0017539,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SerializedEnumsKeepTheirOriginalNumericContracts",
+          "fullName": "PaperDefense.Tests.PartCatalogCharacterizationTests.SerializedEnumsKeepTheirOriginalNumericContracts",
+          "state": "Passed",
+          "durationSeconds": 0.0016962,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

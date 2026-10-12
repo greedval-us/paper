@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PaperDefense.Core
 {
-    public enum TrialScenario { Crowd, Fast, Armored, Blots }
+    public enum TrialScenario { Crowd = 0, Fast = 1, Armored = 2, Blots = 3 }
 
     /// <summary>A bounded firing-lane fixture using production targeting, projectiles and effects. No profile or rewards.</summary>
     public static class TrialRunner
@@ -11,7 +11,7 @@ namespace PaperDefense.Core
         public static TrialComparison CompareQuality(TowerBlueprint blueprint, GameBalance balance, TrialScenario scenario,
             int budget = 400, int seed = 1337, bool counterfire = false, InkColor color = InkColor.None)
         {
-            if (balance == null) throw new ArgumentNullException(nameof(balance));
+            BalanceValidation.Validate(balance);
             var rules = balance.CreateSnapshot();
             return new TrialComparison
             {
@@ -31,7 +31,7 @@ namespace PaperDefense.Core
         public static TrialComparison Compare(TowerBlueprint first, TowerBlueprint second, GameBalance balance,
             TrialScenario scenario, int budget = 400, int seed = 1337, bool counterfire = false, InkColor color = InkColor.None)
         {
-            if (balance == null) throw new ArgumentNullException(nameof(balance));
+            BalanceValidation.Validate(balance);
             GameBalance rules = balance.CreateSnapshot();
             return new TrialComparison { First = RunFixture(first, rules, scenario, budget, seed, counterfire, color),
                 Second = RunFixture(second, rules, scenario, budget, seed, counterfire, color) };
@@ -41,7 +41,7 @@ namespace PaperDefense.Core
         public static TrialReport Run(TowerBlueprint blueprint, GameBalance balance, TrialScenario scenario,
             int budget = 400, int seed = 1337, bool counterfire = false, InkColor color = InkColor.None)
         {
-            if (balance == null) throw new ArgumentNullException(nameof(balance));
+            BalanceValidation.Validate(balance);
             return RunFixture(blueprint, balance.CreateSnapshot(), scenario, budget, seed, counterfire, color);
         }
 
@@ -59,7 +59,7 @@ namespace PaperDefense.Core
             if (!TowerCatalog.Validate(blueprint, balance, out string reason)) throw new ArgumentException(reason, nameof(blueprint));
             if (!Enum.IsDefined(typeof(TrialScenario), scenario)) throw new ArgumentOutOfRangeException(nameof(scenario));
             if (!Enum.IsDefined(typeof(InkColor), color)) throw new ArgumentOutOfRangeException(nameof(color));
-            if (budget < 0 || budget > 20000) throw new ArgumentOutOfRangeException(nameof(budget));
+            if (budget < 0 || budget > TrialScenarioDefinition.MaximumBudget) throw new ArgumentOutOfRangeException(nameof(budget));
             int unitCost = Math.Max(1, TowerCatalog.Cost(blueprint, balance, MaterialTier.Pencil));
             int copies = budget / unitCost;
             var towers = new List<StructureState>(copies);
@@ -87,23 +87,20 @@ namespace PaperDefense.Core
             var frames = new List<TrialFrame>(181);
             var frameShots = new List<ShotEvent>();
             frames.Add(new TrialFrame(0, enemies, towers, weapons.Projectiles, frameShots, blotContext?.Marks));
-            int count = scenario == TrialScenario.Blots ? 0 : scenario == TrialScenario.Crowd ? 240 : scenario == TrialScenario.Fast ? 160 : 80;
-            float interval = scenario == TrialScenario.Crowd ? .1f : scenario == TrialScenario.Fast ? .15f : .3f;
-            float speed = scenario == TrialScenario.Fast ? 5 : scenario == TrialScenario.Armored ? 1.5f : 2.3f;
-            float healthPerEnemy = scenario == TrialScenario.Armored ? 140 : scenario == TrialScenario.Fast ? 14 : 22;
-            const float delta = 1f / 30;
+            TrialScenarioDefinition fixture = TrialScenarioDefinition.For(scenario);
+            int count = fixture.Count;
+            const float delta = TrialScenarioDefinition.StepSeconds;
             float spawnClock = 0; int spawned = 0;
-            for (int tick = 0; tick < 1800; tick++)
+            for (int tick = 0; tick < TrialScenarioDefinition.MaximumTicks; tick++)
             {
                 report.DurationSeconds = (tick + 1) * delta;
                 spawnClock -= delta;
                 while (spawned < count && spawnClock <= 0)
                 {
-                    enemies.Add(new EnemyState { Id = ++spawned, Kind = scenario == TrialScenario.Fast ? EnemyKind.Runner :
-                        scenario == TrialScenario.Armored ? EnemyKind.Gnawer : EnemyKind.Doodle,
-                        Position = new Point2(10, 10.5f + (float)random.NextDouble() * 8), Health = healthPerEnemy, MaxHealth = healthPerEnemy,
-                        DrawingTier = scenario == TrialScenario.Armored ? DrawingTier.Hatched : DrawingTier.Sketch });
-                    spawnClock += interval;
+                    enemies.Add(new EnemyState { Id = ++spawned, Kind = fixture.EnemyKind,
+                        Position = new Point2(10, 10.5f + (float)random.NextDouble() * 8), Health = fixture.Health, MaxHealth = fixture.Health,
+                        DrawingTier = fixture.DrawingTier });
+                    spawnClock += fixture.SpawnInterval;
                 }
                 foreach (StructureState tower in towers)
                     if (!balance.Construction.DynamicFeed)
@@ -112,11 +109,11 @@ namespace PaperDefense.Core
                 {
                     EnemyEffects.Advance(enemy, delta, stats, balance.Effects, balance.BlotReduction);
                     if (enemy.Health <= 0) continue;
-                    enemy.Position = new Point2(enemy.Position.X + speed * EnemyEffects.MovementMultiplier(enemy, balance.Effects, balance.BlotSpeedBonus) * delta, enemy.Position.Y);
+                    enemy.Position = new Point2(enemy.Position.X + fixture.Speed * EnemyEffects.MovementMultiplier(enemy, balance.Effects, balance.BlotSpeedBonus) * delta, enemy.Position.Y);
                     enemy.AttackCooldown = Math.Max(0, enemy.AttackCooldown - delta);
                     if (counterfire && enemy.AttackCooldown <= 0)
                     {
-                        StructureState nearest = null; float nearestSquared = 12.5f * 12.5f;
+                        StructureState nearest = null; float nearestSquared = TrialScenarioDefinition.CounterfireRange * TrialScenarioDefinition.CounterfireRange;
                         foreach (StructureState tower in towers)
                         {
                             if (tower.Health <= 0) continue;
@@ -126,27 +123,27 @@ namespace PaperDefense.Core
                         }
                         if (nearest != null)
                         {
-                            nearest.Health = Math.Max(0, nearest.Health - DamageRules.StructureDamage(10, nearest, balance));
-                            enemy.AttackCooldown = 2.4f;
+                            nearest.Health = Math.Max(0, nearest.Health - DamageRules.StructureDamage(TrialScenarioDefinition.CounterfireDamage, nearest, balance));
+                            enemy.AttackCooldown = TrialScenarioDefinition.CounterfireInterval;
                         }
                     }
                 }
                 shots.Clear();
                 weapons.Fire(towers, enemies, shots, 1, 1, delta, tick + 1, stats, events, report.DurationSeconds);
                 // Visual trails are bounded independently from damage and the live shot list.
-                for (int i = 0; i < shots.Count && frameShots.Count < 1024; i++) frameShots.Add(shots[i]);
+                for (int i = 0; i < shots.Count && frameShots.Count < TrialScenarioDefinition.MaximumFrameShots; i++) frameShots.Add(shots[i]);
                 int write = 0;
                 for (int read = 0; read < enemies.Count; read++)
                 {
                     EnemyState enemy = enemies[read];
                     if (enemy.Health <= 0) continue;
-                    if (enemy.Position.X >= 48) { report.Leaks++; continue; }
+                    if (enemy.Position.X >= TrialScenarioDefinition.ExitX) { report.Leaks++; continue; }
                     enemies[write++] = enemy;
                 }
                 if (write < enemies.Count) enemies.RemoveRange(write, enemies.Count - write);
                 bool finished = spawned == count && enemies.Count == 0 && !weapons.HasPendingProjectiles &&
                     (blotContext == null || blotContext.Marks.Count == 0);
-                if ((tick + 1) % 10 == 0 || finished || tick == 1799)
+                if ((tick + 1) % TrialScenarioDefinition.RecordingStrideTicks == 0 || finished || tick == TrialScenarioDefinition.MaximumTicks - 1)
                 {
                     frames.Add(new TrialFrame(report.DurationSeconds, enemies, towers, weapons.Projectiles, frameShots, blotContext?.Marks));
                     frameShots.Clear();

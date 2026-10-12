@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PaperDefense.Core
 {
-    public enum ChassisKind { Standard, Heavy }
+    public enum ChassisKind { Standard = 0, Heavy = 1 }
     // Zero is deliberately invalid: missing JSON origin metadata cannot become a legacy page.
     public enum DrawingOrigin { LegacyStandard = 1, PlayerDrawing = 2 }
     [Flags] public enum TowerModules { None = 0, Armor = 1, Feed = 2, Tracking = 4, Rail = 8 }
@@ -44,17 +44,7 @@ namespace PaperDefense.Core
                 return NewDraft(Id, Name, chassis, firstWeapon, secondWeapon, modules);
             var retained = new List<DrawingPart>();
             foreach (DrawingPart part in Drawing.Parts)
-            {
-                bool keep = part.Key == DrawingPartKey.Decoration ||
-                    (part.Key == DrawingPartKey.Base && chassis == Chassis) ||
-                    (part.Key == DrawingPartKey.Mount0 && firstWeapon == FirstWeapon) ||
-                    (part.Key == DrawingPartKey.Mount1 && secondWeapon.HasValue && secondWeapon == SecondWeapon) ||
-                    (part.Key == DrawingPartKey.Armor && (modules & Modules & TowerModules.Armor) != 0) ||
-                    (part.Key == DrawingPartKey.Feed && (modules & Modules & TowerModules.Feed) != 0) ||
-                    (part.Key == DrawingPartKey.Tracking && (modules & Modules & TowerModules.Tracking) != 0) ||
-                    (part.Key == DrawingPartKey.Rail && (modules & Modules & TowerModules.Rail) != 0);
-                if (keep) retained.Add(part);
-            }
+                if (DrawingPartPolicy.ShouldRetain(part.Key, this, chassis, firstWeapon, secondWeapon, modules)) retained.Add(part);
             return new TowerBlueprint(Id, Name, chassis, firstWeapon, secondWeapon, modules,
                 new DrawingSnapshot(retained), DrawingOrigin.PlayerDrawing);
         }
@@ -66,6 +56,9 @@ namespace PaperDefense.Core
     {
         static readonly TowerConstructionRules historicalRules = new TowerConstructionRules();
         static TowerConstructionRules Rules(GameBalance balance) => balance == null ? historicalRules : balance.Construction;
+        /// <summary>Historical direct-tool price; retain its int/float operation order separately from assembly Cost.</summary>
+        public static int ToolCost(GameBalance balance, StructureKind kind, MaterialTier tier) =>
+            (int)Math.Ceiling(Math.Max(0, balance.Structure(kind).Cost) * Math.Max(0, balance.Material(tier).CostMultiplier));
         public static float QualityMultiplier(TowerBlueprint blueprint, GameBalance balance)
             => blueprint == null || blueprint.Origin == DrawingOrigin.LegacyStandard ? 1 : QualityMultiplier(blueprint.Assessment.Quality, balance);
         internal static float QualityMultiplier(float quality, GameBalance balance)
@@ -93,7 +86,7 @@ namespace PaperDefense.Core
                 (blueprint.SecondWeapon.HasValue ? rules.WeaponLoad(blueprint.SecondWeapon.Value) : 0) + rules.ModuleLoad(blueprint.Modules);
             return (int)Math.Min(int.MaxValue, load);
         }
-        public static bool IsMountPart(StructureKind kind) => kind == StructureKind.Gun || kind == StructureKind.Piercer || kind == StructureKind.Mortar || kind == StructureKind.Fan || kind == StructureKind.Ricochet || kind == StructureKind.Stapler || kind == StructureKind.Blotter;
+        public static bool IsMountPart(StructureKind kind) => PartCatalog.TryGetMount(kind, out _);
         static bool IsWeapon(StructureKind kind) => IsMountPart(kind);
         public static float WeaponRange(TowerBlueprint blueprint, GameBalance balance, StructureKind kind) => balance.Structure(kind).Range *
             (blueprint != null && (blueprint.Modules & TowerModules.Rail) != 0 ? Rules(balance).RailRangeMultiplier : 1);
@@ -102,8 +95,9 @@ namespace PaperDefense.Core
         {
             reason = "";
             if (blueprint == null) reason = "Выберите чертёж.";
-            else if (blueprint.Id.Length == 0 || blueprint.Id.Length > 64 || blueprint.Name.Length == 0 || blueprint.Name.Length > 48)
-                reason = "Нужны идентификатор и название до 48 знаков.";
+            else if (blueprint.Id.Length == 0 || blueprint.Id.Length > ProfileLimits.MaximumBlueprintIdLength ||
+                blueprint.Name.Length == 0 || blueprint.Name.Length > ProfileLimits.MaximumBlueprintNameLength)
+                reason = "Нужны идентификатор и название до " + ProfileLimits.MaximumBlueprintNameLength + " знаков.";
             else if (!Enum.IsDefined(typeof(ChassisKind), blueprint.Chassis)) reason = "Неизвестное основание.";
             else if ((blueprint.Modules & ~(TowerModules.Armor | TowerModules.Feed | TowerModules.Tracking | TowerModules.Rail)) != 0) reason = "Неизвестный модуль.";
             else if (!IsWeapon(blueprint.FirstWeapon) || (blueprint.SecondWeapon.HasValue && !IsWeapon(blueprint.SecondWeapon.Value))) reason = "Крепления принимают только оружейные детали каталога.";

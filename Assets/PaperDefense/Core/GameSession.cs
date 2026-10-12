@@ -48,8 +48,7 @@ namespace PaperDefense.Core
 
         public GameSession(GameBalance balance, int seed = 1337, bool starterDefenses = true)
         {
-            if (balance == null) throw new ArgumentNullException(nameof(balance));
-            if (balance.Width < 10 || balance.Height < 10) throw new ArgumentException("Поле должно быть не меньше 10 × 10 клеток.", nameof(balance));
+            BalanceValidation.Validate(balance);
             Balance = balance;
             BaseCell = new Cell(balance.Width / 2, balance.Height / 2);
             BaseHealth = Math.Max(1, balance.BaseHealth);
@@ -580,8 +579,7 @@ namespace PaperDefense.Core
             if (structure.IsComplete && structure.Kind != StructureKind.Spikes) flowDirty = true;
         }
 
-        private int BuildCost(StructureKind kind, MaterialTier tier) =>
-            (int)Math.Ceiling(Math.Max(0, Balance.Structure(kind).Cost) * Math.Max(0, Balance.Material(tier).CostMultiplier));
+        private int BuildCost(StructureKind kind, MaterialTier tier) => TowerCatalog.ToolCost(Balance, kind, tier);
         private void CreditInk(int amount) => Ink = (int)Math.Min(int.MaxValue, (long)Ink + Math.Max(0, amount));
         private bool Inside(Cell cell) => cell.X >= 0 && cell.Y >= 0 && cell.X < Balance.Width && cell.Y < Balance.Height;
         private static Cell CellOf(Point2 point) => new Cell((int)Math.Floor(point.X), (int)Math.Floor(point.Y));

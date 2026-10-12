@@ -46,6 +46,9 @@ namespace PaperDefense.Application
 
         public GameBalance CreateBalance()
         {
+            Finite(baseHealth, nameof(baseHealth)); Finite(planningSeconds, nameof(planningSeconds)); Finite(intermissionSeconds, nameof(intermissionSeconds));
+            Finite(passiveInkPerSecond, nameof(passiveInkPerSecond)); Finite(earlyLaunchInkPerSecond, nameof(earlyLaunchInkPerSecond));
+            Finite(drawingMinimumRate, nameof(drawingMinimumRate)); Finite(drawingMaximumRate, nameof(drawingMaximumRate));
             var result = GameBalance.CreateDefault();
             result.Construction = (construction ?? new TowerConstructionRules()).CreateSnapshot();
             result.Effects = (effects ?? new EffectsRules()).CreateSnapshot();
@@ -65,6 +68,9 @@ namespace PaperDefense.Application
             result.DrawingMinimumRate = Mathf.Clamp(drawingMinimumRate, .01f, result.DrawingMaximumRate);
             foreach (var item in materials ?? Array.Empty<MaterialSettings>())
             {
+                if (item == null || !Enum.IsDefined(typeof(MaterialTier), item.tier)) throw new ArgumentException("Неизвестное или пустое определение материала.", nameof(materials));
+                Finite(item.cost, nameof(item.cost)); Finite(item.health, nameof(item.health)); Finite(item.damage, nameof(item.damage));
+                Finite(item.refund, nameof(item.refund)); Finite(item.buildTime, nameof(item.buildTime));
                 var target = result.Material(item.tier);
                 target.CostMultiplier = Mathf.Max(.1f, item.cost);
                 target.HealthMultiplier = Mathf.Max(.1f, item.health);
@@ -74,6 +80,11 @@ namespace PaperDefense.Application
             }
             foreach (var item in weapons ?? Array.Empty<WeaponSettings>())
             {
+                if (item == null || !Enum.IsDefined(typeof(StructureKind), item.kind)) throw new ArgumentException("Неизвестное или пустое определение постройки.", nameof(weapons));
+                Finite(item.health, nameof(item.health)); Finite(item.buildSeconds, nameof(item.buildSeconds)); Finite(item.range, nameof(item.range));
+                Finite(item.damage, nameof(item.damage)); Finite(item.shotInterval, nameof(item.shotInterval)); Finite(item.radius, nameof(item.radius));
+                Finite(item.flightSeconds, nameof(item.flightSeconds)); Finite(item.coneAngleDegrees, nameof(item.coneAngleDegrees));
+                Finite(item.jumpRange, nameof(item.jumpRange)); Finite(item.slowSpeedMultiplier, nameof(item.slowSpeedMultiplier)); Finite(item.slowDuration, nameof(item.slowDuration));
                 var target = result.Structure(item.kind);
                 target.Cost = Mathf.Max(1, item.cost);
                 target.MaxHealth = Mathf.Max(1, item.health);
@@ -91,6 +102,10 @@ namespace PaperDefense.Application
             }
             foreach (var item in enemies ?? Array.Empty<EnemySettings>())
             {
+                if (item == null || !Enum.IsDefined(typeof(EnemyKind), item.kind)) throw new ArgumentException("Неизвестное или пустое определение врага.", nameof(enemies));
+                Finite(item.health, nameof(item.health)); Finite(item.speed, nameof(item.speed)); Finite(item.damage, nameof(item.damage));
+                Finite(item.attackInterval, nameof(item.attackInterval)); Finite(item.structureDamageMultiplier, nameof(item.structureDamageMultiplier));
+                Finite(item.range, nameof(item.range)); Finite(item.windupSeconds, nameof(item.windupSeconds)); Finite(item.projectileSeconds, nameof(item.projectileSeconds));
                 var target = result.Enemy(item.kind);
                 target.MaxHealth = Mathf.Max(1, item.health);
                 target.Speed = Mathf.Max(.1f, item.speed);
@@ -106,6 +121,10 @@ namespace PaperDefense.Application
             {
                 result.Waves.Clear();
                 foreach (var item in waves)
+                {
+                    if (item == null) throw new ArgumentException("Пустое определение волны.", nameof(waves));
+                    Finite(item.spawnInterval, nameof(item.spawnInterval)); Finite(item.runners, nameof(item.runners)); Finite(item.gnawers, nameof(item.gnawers));
+                    Finite(item.spitters, nameof(item.spitters)); Finite(item.outlined, nameof(item.outlined)); Finite(item.hatched, nameof(item.hatched));
                     result.Waves.Add(new WaveDefinition { Title = item.title, Count = Mathf.Max(1, item.count),
                         InkGrant = Mathf.Max(-1, item.inkGrant),
                         SpawnInterval = Mathf.Max(.005f, item.spawnInterval), RunnerFraction = Mathf.Clamp01(item.runners),
@@ -113,12 +132,17 @@ namespace PaperDefense.Application
                         SpitterFraction=Mathf.Clamp(item.spitters,0,1-Mathf.Clamp01(item.runners)-Mathf.Clamp(item.gnawers,0,1-Mathf.Clamp01(item.runners))),
                         OutlinedFraction=Mathf.Clamp01(item.outlined),HatchedFraction=Mathf.Clamp(item.hatched,0,1-Mathf.Clamp01(item.outlined)),
                         Sides = item.sides == 0 ? 15 : item.sides });
+                }
             }
+            BalanceValidation.Validate(result);
             return result;
         }
 
         public GameBalance CreateWorkshopBalance()
         {
+            Finite(wellHealth, nameof(wellHealth)); Finite(blotterRadius, nameof(blotterRadius)); Finite(blotterCooldown, nameof(blotterCooldown));
+            Finite(blotLifetime, nameof(blotLifetime)); Finite(blotBuffSeconds, nameof(blotBuffSeconds));
+            Finite(blotSpeedBonus, nameof(blotSpeedBonus)); Finite(blotReduction, nameof(blotReduction));
             var result=CreateBalance();
             result.Width=Mathf.Clamp(workshopWidth,64,160);result.Height=Mathf.Clamp(workshopHeight,40,100);
             result.StartingInk=Mathf.Max(0,workshopStartingInk);result.EnableEnemyMechanics=enemyMechanics;result.EnableInkWells=inkWells;
@@ -129,7 +153,9 @@ namespace PaperDefense.Application
             result.BlotBuffSeconds=Mathf.Max(.1f,blotBuffSeconds);result.BlotSpeedBonus=Mathf.Clamp(blotSpeedBonus,0,.5f);
             result.BlotReduction=Mathf.Clamp(blotReduction,0,.5f);
             if(generateNewThreats)AddWorkshopThreats(result);
-            return useTargetWorkshopPreset ? GameBalancePresets.ApplyTargetWorkshop(result,targetSettings) : result;
+            if (useTargetWorkshopPreset) result = GameBalancePresets.ApplyTargetWorkshop(result,targetSettings);
+            BalanceValidation.Validate(result);
+            return result;
         }
 
         internal static void AddWorkshopThreats(GameBalance balance)
@@ -154,20 +180,20 @@ namespace PaperDefense.Application
             passiveInkPerSecond=b.PassiveInkPerSecond;waveInkGrant=b.WaveInkGrant;
             earlyLaunchInkPerSecond=b.EarlyLaunchInkPerSecond;maxEarlyLaunchInk=b.MaxEarlyLaunchInk;
             drawingMinimumRate=b.DrawingMinimumRate;drawingMaximumRate=b.DrawingMaximumRate;
-            materials = new MaterialSettings[3];
+            materials = new MaterialSettings[b.MaterialDefinitions.Count];
             for (int i = 0; i < materials.Length; i++)
             { var d = b.Material((MaterialTier)i); materials[i] = new MaterialSettings { tier = (MaterialTier)i, cost = d.CostMultiplier,
                 health = d.HealthMultiplier, damage = d.DamageMultiplier, refund = d.RefundFraction, buildTime = d.BuildTimeMultiplier }; }
             weapons = new WeaponSettings[b.StructureDefinitions.Count];
             for (int i = 0; i < weapons.Length; i++)
-            { var d = b.Structure((StructureKind)i); weapons[i] = new WeaponSettings {kind = (StructureKind)i, cost = d.Cost,
+            { var d = b.StructureDefinitions[i]; weapons[i] = new WeaponSettings {kind = d.Kind, cost = d.Cost,
                 health = d.MaxHealth, buildSeconds = d.BuildSeconds, range = d.Range, damage = d.Damage,
                 shotInterval = d.ShotInterval, radius = d.Radius, pierce = d.MaxPierce, flightSeconds = d.FlightSeconds,
                 coneAngleDegrees=d.ConeAngleDegrees,maxTargets=d.MaxTargets,jumpRange=d.JumpRange,
                 slowSpeedMultiplier=d.SlowSpeedMultiplier,slowDuration=d.SlowDuration }; }
-            enemies = new EnemySettings[4];
+            enemies = new EnemySettings[b.EnemyDefinitions.Count];
             for (int i = 0; i < enemies.Length; i++)
-            { var d = b.Enemy((EnemyKind)i); enemies[i] = new EnemySettings {kind = (EnemyKind)i, health = d.MaxHealth,
+            { var d = b.EnemyDefinitions[i]; enemies[i] = new EnemySettings {kind = d.Kind, health = d.MaxHealth,
                 speed = d.Speed, damage = d.Damage, attackInterval = d.AttackInterval, reward = d.Reward,
                 range=d.Range,windupSeconds=d.WindupSeconds,projectileSeconds=d.ProjectileSeconds,
                 structureDamageMultiplier=d.StructureDamageMultiplier}; }
@@ -176,6 +202,12 @@ namespace PaperDefense.Application
             {var d = b.Waves[i]; waves[i] = new WaveSettings {title = d.Title, count = d.Count, spawnInterval = d.SpawnInterval, inkGrant=d.InkGrant,
                 runners = d.RunnerFraction, gnawers = d.GnawerFraction, spitters=d.SpitterFraction,
                 outlined=d.OutlinedFraction,hatched=d.HatchedFraction,sides = d.Sides};}
+        }
+
+        // Reject nonfinite source values before clamps could disguise an invalid Inspector configuration.
+        static void Finite(float value, string name)
+        {
+            if (float.IsNaN(value) || float.IsInfinity(value)) throw new ArgumentOutOfRangeException(name);
         }
 
         [Serializable] public sealed class MaterialSettings

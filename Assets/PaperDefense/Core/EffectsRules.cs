@@ -18,6 +18,12 @@ namespace PaperDefense.Core
 
         public EffectsRules CreateSnapshot()
         {
+            Validate();
+            return (EffectsRules)MemberwiseClone();
+        }
+
+        internal void Validate()
+        {
             Positive(OutlinedHealthMultiplier, nameof(OutlinedHealthMultiplier));
             Positive(HatchedHealthMultiplier, nameof(HatchedHealthMultiplier));
             Fraction(OutlinedDefense, nameof(OutlinedDefense));
@@ -33,7 +39,6 @@ namespace PaperDefense.Core
             Fraction(GreenDefenseReduction, nameof(GreenDefenseReduction));
             Positive(ColorWindowSeconds, nameof(ColorWindowSeconds));
             if (ColorTargetsPerWindow <= 0) throw new ArgumentOutOfRangeException(nameof(ColorTargetsPerWindow));
-            return (EffectsRules)MemberwiseClone();
         }
 
         static void NonNegative(float value, string name)

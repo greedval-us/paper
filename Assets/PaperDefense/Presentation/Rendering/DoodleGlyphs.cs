@@ -7,6 +7,9 @@ namespace PaperDefense.Presentation
     /// <summary>Small, deliberately imperfect ink silhouettes used by the batched world view.</summary>
     internal static class DoodleGlyphs
     {
+        internal static bool UsesTemplateMount(StructureKind kind) => kind == StructureKind.Fan ||
+            kind == StructureKind.Ricochet || kind == StructureKind.Stapler || kind == StructureKind.Blotter;
+
         static readonly Dictionary<StructureKind, AuthoredPartGeometry> standardMounts = new Dictionary<StructureKind, AuthoredPartGeometry>();
         internal static AuthoredPartGeometry StandardMount(StructureKind kind)
         {
@@ -162,7 +165,7 @@ namespace PaperDefense.Presentation
         }
         static void DrawWeaponBarrel(MeshPen pen, Vector2 p, StructureKind kind, Color color, Color edge, Point2 aim)
         {
-            if ((int)kind >= (int)StructureKind.Fan && TowerCatalog.IsMountPart(kind))
+            if (UsesTemplateMount(kind))
             {
                 Vector2 pivot = p + Vector2.up * .04f;
                 Vector2 forward = Direction(aim, pivot);

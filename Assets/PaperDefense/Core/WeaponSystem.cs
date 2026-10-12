@@ -88,7 +88,7 @@ namespace PaperDefense.Core
         private bool HasTarget(StructureState structure, Point2 origin, StructureKind kind)
         {
             var definition = balance.Structure(kind);
-            float range = kind == StructureKind.Spikes ? Math.Max(.5f, definition.Radius) : Math.Max(0, TowerCatalog.WeaponRange(structure.Blueprint, balance, kind));
+            float range = MountRange(structure.Blueprint, definition);
             if(kind==StructureKind.Blotter) return blotContext!=null && blotContext.TryFindNearest(origin,range,out _);
             spatial.Query(origin, range, targets);
             return PickTarget(structure, origin, targets) != null;
@@ -100,7 +100,7 @@ namespace PaperDefense.Core
             RunStatistics statistics, SimulationEventBuffer events)
         {
             var definition = balance.Structure(kind);
-            float range = kind == StructureKind.Spikes ? Math.Max(.5f, definition.Radius) : Math.Max(0, TowerCatalog.WeaponRange(structure.Blueprint, balance, kind));
+            float range = MountRange(structure.Blueprint, definition);
             if(kind==StructureKind.Blotter)
             {
                 FireBlotter(structure,origin,range,definition,secondary,shots,fireMultiplier,qualityMultiplier,dynamic,delta,tick,statistics,events);
@@ -152,8 +152,19 @@ namespace PaperDefense.Core
                     break;
             }
             Point2 shotEnd = kind == StructureKind.Piercer ? RayEnd(origin, structure.Aim, range) : structure.Aim;
-            shots.Add(new ShotEvent(origin, shotEnd, kind, definition.Radius));
-            events.Publish(tick, SimulationEventKind.Shot, origin, shotEnd, kind, definition.Radius, structure.Id);
+            PublishShot(origin, shotEnd, kind, definition.Radius, structure.Id, shots, tick, events);
+        }
+
+        float MountRange(TowerBlueprint blueprint, StructureDefinition definition)
+            => definition.Kind == StructureKind.Spikes ? Math.Max(.5f, definition.Radius) :
+                Math.Max(0, TowerCatalog.WeaponRange(blueprint, balance, definition.Kind));
+
+        // A visible immediate shot has both playback and live-event representations. Launch/impact stay separate.
+        static void PublishShot(Point2 from, Point2 to, StructureKind kind, float radius, int structureId,
+            List<ShotEvent> shots, long tick, SimulationEventBuffer events)
+        {
+            shots.Add(new ShotEvent(from, to, kind, radius));
+            events.Publish(tick, SimulationEventKind.Shot, from, to, kind, radius, structureId);
         }
 
         private bool TryBeginAction(StructureState structure,StructureDefinition definition,bool secondary,
@@ -192,8 +203,7 @@ namespace PaperDefense.Core
             if(cleared<=0) return;
             structure.Aim=target;
             statistics.RecordBlotsCleared(cleared); statistics.RecordLaunch(StructureKind.Blotter);
-            shots.Add(new ShotEvent(origin,target,StructureKind.Blotter,radius));
-            events.Publish(tick,SimulationEventKind.Shot,origin,target,StructureKind.Blotter,radius,structure.Id);
+            PublishShot(origin, target, StructureKind.Blotter, radius, structure.Id, shots, tick, events);
         }
 
         private void LaunchMortar(Point2 from, Point2 to, StructureDefinition definition, float damage,
@@ -232,8 +242,7 @@ namespace PaperDefense.Core
                 float distance = (float)Math.Sqrt(vx * vx + vy * vy);
                 if (distance > .00001f && (vx * dx + vy * dy) / distance + .000001f < cosine) continue;
                 ApplyDamage(victim, damage, StructureKind.Fan, payload, colorBudget, statistics);
-                shots.Add(new ShotEvent(origin, victim.Position, StructureKind.Fan, 0));
-                events.Publish(tick, SimulationEventKind.Shot, origin, victim.Position, StructureKind.Fan, 0, structure.Id);
+                PublishShot(origin, victim.Position, StructureKind.Fan, 0, structure.Id, shots, tick, events);
                 hit++;
             }
         }
@@ -251,8 +260,7 @@ namespace PaperDefense.Core
                 ricochetVictims.Add(victim.Id);
                 Point2 impact=victim.Position;
                 ApplyDamage(victim,damage,StructureKind.Ricochet,payload,colorBudget,statistics);
-                shots.Add(new ShotEvent(from,impact,StructureKind.Ricochet,0));
-                events.Publish(tick,SimulationEventKind.Shot,from,impact,StructureKind.Ricochet,0,structure.Id);
+                PublishShot(from, impact, StructureKind.Ricochet, 0, structure.Id, shots, tick, events);
                 if(hit+1>=limit) break;
                 spatial.Query(impact,jumpRange,splashTargets);
                 EnemyState next=null; float nearest=float.MaxValue;

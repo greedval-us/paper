@@ -79,7 +79,7 @@ namespace PaperDefense.Presentation
             var assessment = Session.Blueprint.WithDrawing(Session.Snapshot).Assessment;
             string feedback = "Украшения не участвуют в оценке.";
             foreach (var part in assessment.PartFeedback) if (part.Part == Canvas.SelectedPart) feedback = part.Message;
-            message.text = "Качество " + assessment.Quality.ToString("0") + "/100 · " + Session.Snapshot.PointCount + "/2048 точек\n" + feedback;
+            message.text = "Качество " + assessment.Quality.ToString("0") + "/100 · " + Session.Snapshot.PointCount + "/" + DrawingSnapshot.MaxPoints + " точек\n" + feedback;
             Canvas.SetVerticesDirty();
         }
         public static string Name(DrawingPartKey part)
@@ -156,7 +156,7 @@ namespace PaperDefense.Presentation
             if (!Point(e, out point))
             { if (pending.Count > 0) FinishStroke(); return; }
             if (Eraser) { session.Erase(selected, point, .045f / zoom); Changed?.Invoke(); return; }
-            if (pending.Count >= 2048) { Rejected?.Invoke("Лимит точек штриха. Закончи его и удали лишнее."); return; }
+            if (pending.Count >= DrawingSnapshot.MaxPoints) { Rejected?.Invoke("Лимит точек штриха. Закончи его и удали лишнее."); return; }
             if (pending.Count > 0)
             { var last = pending[pending.Count - 1]; float dx = last.X - point.X, dy = last.Y - point.Y; if (dx * dx + dy * dy < .000016f) return; }
             pending.Add(point); SetVerticesDirty();

@@ -18,20 +18,7 @@ namespace PaperDefense.Core
         static readonly DrawingPartKey[] partOrder = { DrawingPartKey.Base, DrawingPartKey.Mount0, DrawingPartKey.Mount1,
             DrawingPartKey.Armor, DrawingPartKey.Feed, DrawingPartKey.Tracking, DrawingPartKey.Rail, DrawingPartKey.Decoration };
 
-        public static bool IsEnabled(TowerBlueprint blueprint, DrawingPartKey key)
-        {
-            if (blueprint == null) return false;
-            switch (key)
-            {
-                case DrawingPartKey.Base: case DrawingPartKey.Mount0: case DrawingPartKey.Decoration: return true;
-                case DrawingPartKey.Mount1: return blueprint.SecondWeapon.HasValue;
-                case DrawingPartKey.Armor: return (blueprint.Modules & TowerModules.Armor) != 0;
-                case DrawingPartKey.Feed: return (blueprint.Modules & TowerModules.Feed) != 0;
-                case DrawingPartKey.Tracking: return (blueprint.Modules & TowerModules.Tracking) != 0;
-                case DrawingPartKey.Rail: return (blueprint.Modules & TowerModules.Rail) != 0;
-                default: return false;
-            }
-        }
+        public static bool IsEnabled(TowerBlueprint blueprint, DrawingPartKey key) => DrawingPartPolicy.IsEnabled(blueprint, key);
 
         public static IReadOnlyList<DrawingPartKey> EnabledKeys(TowerBlueprint blueprint)
         {
