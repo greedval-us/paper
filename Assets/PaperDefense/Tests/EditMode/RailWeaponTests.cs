@@ -11,7 +11,7 @@ namespace PaperDefense.Tests
             =>new TowerBlueprint("rail","Rail",ChassisKind.Heavy,kind,dual?(StructureKind?)kind:null,modules);
         static StructureState Tower(TowerBlueprint blueprint)
             =>new StructureState {Id=1,Cell=new Cell(10,10),Kind=blueprint?.FirstWeapon??StructureKind.Gun,
-                Blueprint=blueprint,Health=55,MaxHealth=55,IsComplete=true,Tier=MaterialTier.Pencil,TargetId=1};
+                Blueprint=blueprint,Health=55,MaxHealth=55,IsComplete=true,Tier=MaterialTier.Pencil,PrimaryTargetId=1,SecondaryTargetId=1};
         static EnemyState Enemy(int id=1,float x=11.5f)
             =>new EnemyState {Id=id,Position=new Point2(x,10.5f),Health=100000,MaxHealth=100000};
         static RunStatistics Run(GameBalance balance,StructureState tower,int ticks,float quality)

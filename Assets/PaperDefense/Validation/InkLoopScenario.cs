@@ -28,9 +28,9 @@ namespace PaperDefense.Validation
             Session = new GameSession(balance, seed, false);
             loadout = new WorkshopProfile().GetLoadoutBlueprints();
             Report.Seed=seed;Report.Width=balance.Width;Report.Height=balance.Height;Report.Preset=balance.Preset.ToString();
-            Report.Strategy=balance.Preset==GameBalancePreset.Target?"TargetProtectedPursuitV3":"HistoricalBattery";
+            Report.Strategy=balance.Preset==GameBalancePreset.Target?"TargetProtectedPursuitV4":"HistoricalBattery";
             if(balance.Preset==GameBalancePreset.Target)
-                Report.Scope="Target workshop balance supplied by caller, unchanged; zero starter structures. Public commands only; default four blueprints. Compact mixed battery inside a repaired pencil wall ring. After spawning ends, a small enemy tail or an entirely ranged tail receives paid pursuit guns only for spitters outside every existing tower's range. Pursuit construction takes priority over recurring wall repairs. The blue point is initially exposed until actual enemy destruction, then recaptured only after fourteen base towers and a fully funded wall ring plus four cardinal dual-gun defenders and four diagonal mortars covering the ranged siege standoff. Missing well walls and paid intermission reactivation take priority over further base expansion. Additional towers use finite earned ink. One manual cleanup demonstrates the tool; blue cartridges use earned well payouts and are fitted before the next launch. Every wave launches immediately. WaveInkGrant is only the historical fallback; each WaveTuning/Waves InkGrant resolves its ConfiguredInkGrant. This strategy chooses no Salvage reward multiplier. Fixed-step headless evidence; not a frame-time benchmark.";
+                Report.Scope="Target workshop balance supplied by caller, unchanged; zero starter structures. Public commands only; default four blueprints. Compact mixed battery inside a repaired pencil wall ring. After spawning ends, a small enemy tail or an entirely ranged tail receives paid pursuit guns only for spitters outside every existing tower's range. Pursuit construction takes priority over recurring wall repairs. The blue point is initially exposed until actual enemy destruction, then recaptured only after fourteen base towers and a fully funded wall ring plus four cardinal dual-gun defenders and four diagonal mortars covering the ranged siege standoff. Missing well walls and paid intermission reactivation take priority over further base expansion. Additional towers use finite earned ink. One manual cleanup demonstrates the tool; blue cartridges use earned well payouts and are fitted to completed non-mortar towers with a living enemy in range. Every wave launches immediately. WaveInkGrant is only the historical fallback; each WaveTuning/Waves InkGrant resolves its ConfiguredInkGrant. This strategy chooses no Salvage reward multiplier. Fixed-step headless evidence; not a frame-time benchmark.";
             Report.StartingInk=balance.StartingInk;Report.StartingBaseHealth=balance.BaseHealth;
             Report.PassiveInkPerSecond=balance.PassiveInkPerSecond;Report.WaveInkGrant=balance.WaveInkGrant;
             Report.EarlyLaunchInkPerSecond=balance.EarlyLaunchInkPerSecond;Report.MaxEarlyLaunchInk=balance.MaxEarlyLaunchInk;
@@ -278,11 +278,20 @@ namespace PaperDefense.Validation
         {
             foreach(var tower in Session.Structures)
             {
-                if(tower.Blueprint==null||tower.Color!=InkColor.None||tower.Kind==StructureKind.Mortar)continue;
+                if(tower.Blueprint==null||tower.Color!=InkColor.None||tower.Kind==StructureKind.Mortar||
+                    tower.Health<=0||!tower.IsComplete||tower.BuildRemaining>0)continue;
                 if(Session.ColoredInk(InkColor.Blue)<Session.ColorCost(tower.Blueprint,tower.Tier))continue;
+                float range=TowerCatalog.WeaponRange(tower.Blueprint,Session.Balance,tower.Blueprint.FirstWeapon);
+                if(tower.Blueprint.SecondWeapon.HasValue)
+                    range=Math.Max(range,TowerCatalog.WeaponRange(tower.Blueprint,Session.Balance,tower.Blueprint.SecondWeapon.Value));
+                bool hasTarget=false;
+                Point2 origin=new Point2(tower.Cell.X+.5f,tower.Cell.Y+.5f);
+                foreach(var enemy in Session.Enemies)
+                    if(enemy.Health>0&&DistanceSquared(origin,enemy.Position)<=range*range){hasTarget=true;break;}
+                if(!hasTarget)continue;
                 int before=Session.ColoredInk(InkColor.Blue);
                 bool success=Session.TryPaint(tower.Cell,InkColor.Blue,out string reason);
-                Record("Paint",success,0,"Blue cartridge paid from a completed wave's well payout",tower.Cell,"Blue",reason);
+                Record("Paint",success,0,"Blue cartridge from a completed wave's well payout for a tower with a living target in range",tower.Cell,"Blue",reason);
                 if(success)
                 {int spent=before-Session.ColoredInk(InkColor.Blue);Report.ColoredInkSpent+=spent;Report.Commands[Report.Commands.Count-1].ColoredInkSpent=spent;}
                 break;

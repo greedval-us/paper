@@ -9,7 +9,7 @@ namespace PaperDefense.Tests
         static StructureState Tower() => new StructureState
         {
             Id = 1, Cell = new Cell(10, 10), Kind = StructureKind.Gun, Tier = MaterialTier.Pencil,
-            Health = 55, MaxHealth = 55, IsComplete = true, TargetId = 1,
+            Health = 55, MaxHealth = 55, IsComplete = true,
             Blueprint = new TowerBlueprint("mixed", "Gun and pen", ChassisKind.Standard, StructureKind.Gun, StructureKind.Piercer)
         };
         static EnemyState Enemy(int id, float x, float y, float hp) => new EnemyState
@@ -17,6 +17,8 @@ namespace PaperDefense.Tests
 
         static void Fire(GameBalance balance, StructureState tower, List<EnemyState> enemies)
         {
+            // These assertions isolate selected directions, including a kill before the second mount aims.
+            balance.Construction.AcquisitionSeconds = 0;
             var weapons = new WeaponSystem(balance);
             weapons.Fire(new List<StructureState> { tower }, enemies, new List<ShotEvent>(),
                 1, 1, 1f / 30, 1, new RunStatistics(), new SimulationEventBuffer());

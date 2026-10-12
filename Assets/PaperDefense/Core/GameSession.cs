@@ -279,7 +279,11 @@ namespace PaperDefense.Core
                 Countdown = Math.Max(0, Countdown - delta);
                 if (Countdown <= 0 && !PendingUpgrade) StartNextWave();
             }
-            if (Phase != RunPhase.Assault) return;
+            if (Phase != RunPhase.Assault)
+            {
+                weapons.ReloadWithoutTargets(structures, fireMultiplier, delta);
+                return;
+            }
             SpawnEnemies(delta);
             if (flowDirty)
             {

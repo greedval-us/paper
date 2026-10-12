@@ -17,10 +17,12 @@ namespace PaperDefense.Tests
             =>new EnemyState {Id=id,Kind=kind,Position=new Point2(x,y),Health=100,MaxHealth=100};
         static StructureState Tower(TowerBlueprint blueprint=null)
             =>new StructureState {Id=1,Cell=new Cell(10,10),Kind=StructureKind.Ricochet,
-                Health=55,IsComplete=true,Tier=MaterialTier.Pencil,TargetId=1,
+                Health=55,IsComplete=true,Tier=MaterialTier.Pencil,
                 Blueprint=blueprint??new TowerBlueprint("ricochet","Ricochet",ChassisKind.Standard,StructureKind.Ricochet)};
         static RunStatistics Fire(GameBalance balance,StructureState tower,List<EnemyState> enemies,out List<ShotEvent> shots)
         {
+            // Geometry and effect assertions begin with both mounts ready to aim and fire.
+            balance.Construction.AcquisitionSeconds=0;
             var stats=new RunStatistics(); shots=new List<ShotEvent>();
             new WeaponSystem(balance).Fire(new List<StructureState>{tower},enemies,shots,
                 1,1,1f/30,1,stats,new SimulationEventBuffer());

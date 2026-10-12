@@ -18,7 +18,7 @@ namespace PaperDefense.Tests
         {
             blueprint=blueprint??new TowerBlueprint("blotter","Blotter",ChassisKind.Standard,StructureKind.Blotter);
             return new StructureState {Id=1,Cell=new Cell(10,10),Kind=blueprint.FirstWeapon,Blueprint=blueprint,
-                Health=55,MaxHealth=55,IsComplete=true,Tier=MaterialTier.Pencil,TargetId=1};
+                Health=55,MaxHealth=55,IsComplete=true,Tier=MaterialTier.Pencil};
         }
         static EnemyState Enemy()=>new EnemyState {Id=1,Position=new Point2(11.5f,10.5f),Health=100000,MaxHealth=100000};
         static RunStatistics Fire(GameBalance balance,StructureState tower,IBlotContext context,List<EnemyState> enemies,out List<ShotEvent> shots)
@@ -57,9 +57,9 @@ namespace PaperDefense.Tests
         {
             var balance=Balance(); balance.Construction.AcquisitionSeconds=5; balance.Construction.DynamicFeed=true;
             var blueprint=new TowerBlueprint("gun-blotter","Gun and blotter",ChassisKind.Standard,StructureKind.Gun,StructureKind.Blotter);
-            var tower=Tower(blueprint); tower.TargetId=0;
+            var tower=Tower(blueprint);
             var stats=Fire(balance,tower,new BlotFixture(new Cell(12,10)),new List<EnemyState>{Enemy()},out var shots);
-            Assert.That(tower.AcquisitionRemaining,Is.GreaterThan(4)); Assert.That(stats.Launches(StructureKind.Gun),Is.Zero);
+            Assert.That(tower.PrimaryAcquisitionRemaining,Is.GreaterThan(4)); Assert.That(stats.Launches(StructureKind.Gun),Is.Zero);
             Assert.That(stats.Launches(StructureKind.Blotter),Is.EqualTo(1)); Assert.That(stats.BlotsCleared,Is.EqualTo(1));
             Assert.That(tower.SecondaryAim.X,Is.EqualTo(12.5f)); Assert.That(tower.SecondaryCooldown,Is.EqualTo(2).Within(.00001f));
             Assert.That(shots.Count,Is.EqualTo(1));
@@ -131,6 +131,21 @@ namespace PaperDefense.Tests
             var stats=Fire(Balance(),Tower(),null,new List<EnemyState>{Enemy()},out var shots);
             Assert.That(stats.BlotsCleared,Is.Zero); Assert.That(stats.Launches(StructureKind.Blotter),Is.Zero);
             Assert.That(stats.Damage(StructureKind.Blotter),Is.Zero); Assert.That(shots.Count,Is.Zero);
+        }
+
+        [Test] public void BlotterReloadFinishesWhileItsSheetIsClean()
+        {
+            var balance=Balance(); balance.Construction.DynamicFeed=true;
+            var tower=Tower(); var context=new BlotFixture(new Cell(12,10));
+            var weapons=new WeaponSystem(balance,null,context); var stats=new RunStatistics();
+            var towers=new List<StructureState>{tower}; var enemies=new List<EnemyState>();
+            var shots=new List<ShotEvent>(); var events=new SimulationEventBuffer();
+            weapons.Fire(towers,enemies,shots,1,1,1f/30,1,stats,events);
+            Assert.That(stats.Launches(StructureKind.Blotter),Is.EqualTo(1));
+            for(int i=0;i<90;i++) weapons.Fire(towers,enemies,shots,1,1,1f/30,i+2,stats,events);
+            Assert.That(tower.PrimaryActionRemaining,Is.Zero);
+            Assert.That(tower.Cooldown,Is.Zero);
+            Assert.That(stats.Launches(StructureKind.Blotter),Is.EqualTo(1));
         }
 
         sealed class BlotFixture:IBlotContext

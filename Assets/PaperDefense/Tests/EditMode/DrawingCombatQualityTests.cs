@@ -18,7 +18,7 @@ namespace PaperDefense.Tests
         {
             var balance = GameBalance.CreateDefault();
             var tower = new StructureState { Id = 1, Cell = new Cell(10, 10), Kind = StructureKind.Gun,
-                IsComplete = true, Health = 55, MaxHealth = 55, Blueprint = Authored(dual), TargetId = 1 };
+                IsComplete = true, Health = 55, MaxHealth = 55, Blueprint = Authored(dual), PrimaryTargetId = 1, SecondaryTargetId = 1 };
             var enemies = new List<EnemyState> { new EnemyState { Id = 1, Kind = EnemyKind.Doodle,
                 Position = new Point2(11.5f, 10.5f), Health = 100000, MaxHealth = 100000 } };
             var weapons = new WeaponSystem(balance, quality); var statistics = new RunStatistics();
@@ -64,7 +64,7 @@ namespace PaperDefense.Tests
             Assert.That(TowerCatalog.BuildSeconds(authored, balance, MaterialTier.Marker), Is.EqualTo(TowerCatalog.BuildSeconds(legacy, balance, MaterialTier.Marker)));
             var target = new EnemyState { Id = 1, Position = new Point2(11.5f, 10.5f), Health = 100, MaxHealth = 100 };
             var tower = new StructureState { Id = 1, Cell = new Cell(10, 10), IsComplete = true, Health = 55,
-                Kind = StructureKind.Gun, Blueprint = authored, TargetId = 1 };
+                Kind = StructureKind.Gun, Blueprint = authored, PrimaryTargetId = 1, SecondaryTargetId = 1 };
             new WeaponSystem(balance).Fire(new List<StructureState> { tower }, new List<EnemyState> { target }, new List<ShotEvent>(),
                 1, 1, 1f / 30, 1, new RunStatistics(), new SimulationEventBuffer());
             Assert.That(target.Health, Is.EqualTo(76), "Two normal 12-damage hits; quality affects cooldown only.");

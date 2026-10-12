@@ -12,7 +12,7 @@ namespace PaperDefense.Presentation
     {
         readonly GameObject shade, panel;
         readonly Action<DrawingSnapshot> apply;
-        readonly Text message, partLabel;
+        readonly Text message, rejectionMessage, partLabel;
         readonly Dictionary<DrawingPartKey, Button> parts = new Dictionary<DrawingPartKey, Button>();
         public DrawingEditSession Session { get; private set; }
         public DrawingCanvasGraphic Canvas { get; }
@@ -25,13 +25,14 @@ namespace PaperDefense.Presentation
             panel = Box(parent, "Authored drawing editor", new Rect(90, 60, 1420, 880), NotebookPalette.Paper).gameObject;
             Label(panel.transform, font, "НАРИСУЙ СВОЮ БАШНЮ", new Rect(28, 16, 1300, 48), 32, NotebookPalette.Blue);
             Label(panel.transform, font, "Выбери часть. Голубой контур — образец; тёмные линии — твой рисунок. Каждый ствол хранится отдельно.", new Rect(30, 68, 1350, 50), 20, NotebookPalette.Navy);
-            var sheet = Box(panel.transform, "Drawing viewport", new Rect(285, 130, 1095, 620), new Color(1, .99f, .93f));
+            var sheet = Box(panel.transform, "Drawing viewport", new Rect(285, 130, 1095, 574), new Color(1, .99f, .93f));
             sheet.gameObject.AddComponent<RectMask2D>();
             var go = new GameObject("Drawing canvas", typeof(RectTransform), typeof(CanvasRenderer), typeof(DrawingCanvasGraphic));
-            go.transform.SetParent(sheet, false); Place(go.GetComponent<RectTransform>(), new Rect(0, 0, 1095, 620));
+            go.transform.SetParent(sheet, false); Place(go.GetComponent<RectTransform>(), new Rect(0, 0, 1095, 574));
             Canvas = go.GetComponent<DrawingCanvasGraphic>(); Canvas.raycastTarget = true;
             Canvas.Changed += Refresh;
-            Canvas.Rejected += reason => message.text = reason;
+            Canvas.Edited += ClearRejection;
+            Canvas.Rejected += reason => rejectionMessage.text = reason;
             var keys = new[] { DrawingPartKey.Base, DrawingPartKey.Mount0, DrawingPartKey.Mount1,
                 DrawingPartKey.Armor, DrawingPartKey.Feed, DrawingPartKey.Tracking, DrawingPartKey.Decoration, DrawingPartKey.Rail };
             for (int i = 0; i < keys.Length; i++)
@@ -43,11 +44,12 @@ namespace PaperDefense.Presentation
             partLabel = Label(panel.transform, font, "", new Rect(28, 507, 234, 60), 18, NotebookPalette.Blue);
             Button(panel.transform, font, "Drawing pencil", new Rect(28, 575, 112, 44), "КАРАНДАШ", () => { Canvas.Eraser = false; Refresh(); });
             Button(panel.transform, font, "Drawing eraser", new Rect(147, 575, 112, 44), "ЛАСТИК", () => { Canvas.Eraser = true; Refresh(); });
-            Button(panel.transform, font, "Drawing undo", new Rect(28, 631, 112, 44), "↶ НАЗАД", () => { Canvas.FinishStroke(); Session.Undo(); Refresh(); });
-            Button(panel.transform, font, "Drawing redo", new Rect(147, 631, 112, 44), "ВПЕРЁД ↷", () => { Canvas.FinishStroke(); Session.Redo(); Refresh(); });
-            Button(panel.transform, font, "Clear drawing part", new Rect(28, 689, 231, 44), "ОЧИСТИТЬ ЧАСТЬ", () => { Canvas.FinishStroke(); Session.ClearPart(Canvas.SelectedPart); Refresh(); });
+            Button(panel.transform, font, "Drawing undo", new Rect(28, 631, 112, 44), "↶ НАЗАД", () => { Canvas.FinishStroke(); if (Session.Undo()) ClearRejection(); Refresh(); });
+            Button(panel.transform, font, "Drawing redo", new Rect(147, 631, 112, 44), "ВПЕРЁД ↷", () => { Canvas.FinishStroke(); if (Session.Redo()) ClearRejection(); Refresh(); });
+            Button(panel.transform, font, "Clear drawing part", new Rect(28, 689, 231, 44), "ОЧИСТИТЬ ЧАСТЬ", () => { Canvas.FinishStroke(); if (Session.ClearPart(Canvas.SelectedPart)) ClearRejection(); Refresh(); });
             Button(panel.transform, font, "Drawing zoom out", new Rect(291, 760, 160, 40), "− МАСШТАБ", () => Canvas.Zoom *= .8f);
             Button(panel.transform, font, "Drawing zoom in", new Rect(460, 760, 160, 40), "+ МАСШТАБ", () => Canvas.Zoom *= 1.25f);
+            rejectionMessage = Label(panel.transform, font, "", new Rect(291, 710, 1089, 43), 17, NotebookPalette.Red);
             message = Label(panel.transform, font, "", new Rect(645, 759, 722, 43), 17, NotebookPalette.Navy);
             Button(panel.transform, font, "Cancel drawing", new Rect(30, 813, 450, 47), "ОТМЕНИТЬ ИЗМЕНЕНИЯ", () => Close(false));
             Button(panel.transform, font, "Apply drawing", new Rect(510, 813, 870, 47), "ПРИМЕНИТЬ К ЧЕРНОВИКУ  →", () => Close(true));
@@ -55,6 +57,7 @@ namespace PaperDefense.Presentation
         }
         public void Open(TowerBlueprint blueprint)
         {
+            ClearRejection();
             Session = new DrawingEditSession(blueprint, blueprint.Drawing);
             Canvas.Bind(Session); Canvas.SelectedPart = DrawingPartKey.Base; Canvas.Zoom = 1;
             shade.SetActive(true); panel.SetActive(true); Refresh();
@@ -64,6 +67,7 @@ namespace PaperDefense.Presentation
             if (commit && Session != null) { Canvas.FinishStroke(); apply(Session.Snapshot); }
             shade.SetActive(false); panel.SetActive(false);
         }
+        void ClearRejection() => rejectionMessage.text = "";
         void Refresh()
         {
             if (Session == null) return;
@@ -124,6 +128,8 @@ namespace PaperDefense.Presentation
         DrawingPartKey selected;
         float zoom = 1;
         public event Action Changed;
+        /// <summary>A committed edit, distinct from redraws and rejected or empty input.</summary>
+        public event Action Edited;
         public event Action<string> Rejected;
         public bool Eraser { get; set; }
         public DrawingPartKey SelectedPart { get => selected; set { selected = value; SetVerticesDirty(); } }
@@ -155,7 +161,7 @@ namespace PaperDefense.Presentation
             DrawingPoint point;
             if (!Point(e, out point))
             { if (pending.Count > 0) FinishStroke(); return; }
-            if (Eraser) { session.Erase(selected, point, .045f / zoom); Changed?.Invoke(); return; }
+            if (Eraser) { if (session.Erase(selected, point, .045f / zoom)) Edited?.Invoke(); Changed?.Invoke(); return; }
             if (pending.Count >= DrawingSnapshot.MaxPoints) { Rejected?.Invoke("Лимит точек штриха. Закончи его и удали лишнее."); return; }
             if (pending.Count > 0)
             { var last = pending[pending.Count - 1]; float dx = last.X - point.X, dy = last.Y - point.Y; if (dx * dx + dy * dy < .000016f) return; }
@@ -164,7 +170,7 @@ namespace PaperDefense.Presentation
         public void FinishStroke()
         {
             if (session != null && pending.Count >= 2)
-            { string reason; if (!session.AddStroke(selected, pending, out reason)) Rejected?.Invoke(reason); }
+            { string reason; if (session.AddStroke(selected, pending, out reason)) Edited?.Invoke(); else Rejected?.Invoke(reason); }
             pending.Clear(); Changed?.Invoke(); SetVerticesDirty();
         }
         protected override void OnPopulateMesh(VertexHelper vh)

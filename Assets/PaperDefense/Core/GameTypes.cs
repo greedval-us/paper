@@ -197,10 +197,11 @@ namespace PaperDefense.Core
         public TargetPriority Priority;
         public TowerBlueprint Blueprint;
         public InkColor Color;
-        internal float SecondaryCooldown, AcquisitionRemaining;
+        internal float SecondaryCooldown;
+        // Acquisition and normalized reload belong to each mount; zero action remaining is one ready action.
+        internal float PrimaryAcquisitionRemaining, SecondaryAcquisitionRemaining;
         internal float PrimaryActionRemaining, SecondaryActionRemaining;
         internal TowerColorBudget ColorBudget;
-        internal int TargetId;
         internal int PaidInk;
         internal int FrontageUsed;
     }

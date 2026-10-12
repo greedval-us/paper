@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "message": "Build Succeeded.",
+  "data": {
+    "job_id": "build-a68c05ad9b",
+    "result": "succeeded",
+    "platform": "StandaloneWindows64",
+    "output_path": "Builds/CombatAndDrawingFixes/PaperDefense.exe",
+    "started_at": "2026-10-12T13:00:30.6147493Z",
+    "duration_seconds": 17.137657,
+    "completed_at": "2026-10-12T13:00:47.7524063Z",
+    "total_size_mb": 198.51,
+    "errors": 0,
+    "warnings": 0
+  }
+}

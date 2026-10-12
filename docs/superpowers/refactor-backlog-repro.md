@@ -1,5 +1,7 @@
 # Separate behavior decisions confirmed during the refactor
 
+**Follow-up authorized on 2026-10-12:** all three decisions below are now implemented by the [combat and drawing fixes plan](plans/2026-10-12-combat-drawing-fixes.md). Reload completes without targets up to one ready action, each barrel acquires independently, and rejection remains until a successful edit/new session. The observations and local harness below remain historical evidence of the previous implementation; the current regression fixtures are `MountReadinessTests`, `BlotterWeaponTests.BlotterReloadFinishesWhileItsSheetIsClean` and `DrawingEditorFeedbackTests`.
+
 These are follow-up tasks, not fixes included in the behavior-preserving refactor. The observations describe existing behavior; the intended product rules remain decisions for a separate change.
 
 ## Reproduction harness

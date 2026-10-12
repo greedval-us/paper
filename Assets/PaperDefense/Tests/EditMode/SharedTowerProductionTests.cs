@@ -9,7 +9,7 @@ namespace PaperDefense.Tests
     {
         static StructureState Tower(StructureKind second = StructureKind.Gun, InkColor color = InkColor.None)
             => new StructureState { Id = 1, Cell = new Cell(10, 10), Kind = StructureKind.Gun,
-                Tier = MaterialTier.Pencil, IsComplete = true, Health = 100, MaxHealth = 100, Color = color, TargetId = 1,
+                Tier = MaterialTier.Pencil, IsComplete = true, Health = 100, MaxHealth = 100, Color = color, PrimaryTargetId = 1, SecondaryTargetId = 1,
                 Blueprint = new TowerBlueprint("shared", "Shared production", ChassisKind.Heavy, StructureKind.Gun, second) };
         static EnemyState Enemy(int id = 1, float y = 10.5f) => new EnemyState
         { Id = id, Position = new Point2(11.5f, y), Health = 100000, MaxHealth = 100000 };
@@ -62,7 +62,7 @@ namespace PaperDefense.Tests
             var structures = new List<StructureState> { tower }; var enemies = new List<EnemyState>();
             var stats = new RunStatistics(); var shots = new List<ShotEvent>(); var events = new SimulationEventBuffer();
             for (int i = 0; i < 1000; i++) weapons.Fire(structures, enemies, shots, 1, 1, 1, i, stats, events, i);
-            enemies.Add(Enemy()); tower.TargetId = 1;
+            enemies.Add(Enemy()); tower.PrimaryTargetId = tower.SecondaryTargetId = 1;
             weapons.Fire(structures, enemies, shots, 1, 1, 1f / 30, 1001, stats, events, 1001);
             Assert.That(stats.Launches(StructureKind.Gun), Is.EqualTo(2));
             weapons.Fire(structures, enemies, shots, 1, 1, 1f / 30, 1002, stats, events, 1001 + 1d / 30);
@@ -87,7 +87,7 @@ namespace PaperDefense.Tests
             for (int i = 0; i < enemies.Count; i++)
             {
                 if (i > 0) enemies[i - 1].Position = new Point2(50, 30);
-                enemies[i].Position = new Point2(11.5f, 10.5f); tower.TargetId = enemies[i].Id;
+                enemies[i].Position = new Point2(11.5f, 10.5f); tower.PrimaryTargetId = tower.SecondaryTargetId = enemies[i].Id;
                 tower.Cooldown = tower.SecondaryCooldown = 0;
                 weapons.Fire(structures, enemies, shots, 1, 1, .1f, i + 1, stats, events, i * .1);
                 Assert.That(enemies[i].BlueRemaining, Is.EqualTo(i < 3 ? 3 : 0));
@@ -118,7 +118,7 @@ namespace PaperDefense.Tests
             var balance = GameBalance.CreateDefault(); balance.Effects.LimitTowerColor = true;
             var mortar = balance.Structure(StructureKind.Mortar); mortar.Damage = 5; mortar.FlightSeconds = .8f;
             var tower = new StructureState { Id = 1, Cell = new Cell(10, 10), Kind = StructureKind.Mortar,
-                Tier = MaterialTier.Pencil, Health = 100, IsComplete = true, Color = InkColor.Blue, TargetId = 1,
+                Tier = MaterialTier.Pencil, Health = 100, IsComplete = true, Color = InkColor.Blue, PrimaryTargetId = 1, SecondaryTargetId = 1,
                 Blueprint = new TowerBlueprint("dual-mortar", "Two shells", ChassisKind.Heavy, StructureKind.Mortar, StructureKind.Mortar) };
             var weapons = new WeaponSystem(balance); var structures = new List<StructureState> { tower };
             var enemies = new List<EnemyState>(); for (int i = 0; i < 5; i++) enemies.Add(Enemy(i + 1, 10.5f + i * .1f));

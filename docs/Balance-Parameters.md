@@ -82,9 +82,9 @@
 | `FoundationHealth`, `HeavyHealthMultiplier`, `ArmorHealthMultiplier` | HP >0 / множители >0 | Прочность вне зависимости от порядка стволов; target armor использует защиту |
 | `SecondaryBuildSeconds`, `HeavyBuildSeconds`, `ArmorBuildSeconds`, `FeedBuildSeconds`, `TrackingBuildSeconds` | секунды ≥0 | Добавки длительности сборки |
 | `DualFeedMultiplier`, `FeedModuleMultiplier`, `MaxFeedMultiplier` | множители >0 | Историческая подача и ограничение конечного темпа |
-| `DynamicFeed`, `DynamicFeedCapacity` | bool / множитель >0 | В целевом пресете работающие крепления делят1.6: min(потолок одного, вместимость / число действующих). Feed увеличивает оба предела. Крепление без подходящей цели не занимает долю |
+| `DynamicFeed`, `DynamicFeedCapacity` | bool / множитель >0 | В целевом пресете крепления делят1.6: min(потолок одного, вместимость / число действующих). Feed увеличивает оба предела. Долю занимает незавершённая перезарядка либо захваченная подходящая цель; готовое крепление без цели освобождает долю |
 | `ArmorDefense` | доля [0,1] | Целевые бронепластины дают.25 защиты при `ArmorHealthMultiplier=1`; итог ограничен общим пределом |
-| `AcquisitionSeconds`, `TrackingAcquisitionSeconds` | секунды ≥0 | Захват цели; наведение не изменяет дальность |
+| `AcquisitionSeconds`, `TrackingAcquisitionSeconds` | секунды ≥0 | Каждое боевое крепление независимо захватывает свою фактическую цель; смена цели одного не задерживает другое. Наведение не изменяет дальность; перезарядка продолжается во время захвата |
 | `ColorMinimum`, `ColorCostDivisor` | целый минимум ≥0 / делитель ≥1 | Одна оплата окраски по составу |
 | `HeavyUnlockGold`, `FeedUnlockGold`, `TrackingUnlockGold` | целое золото ≥0 | Вечное право использовать деталь; UI и транзакция берут одну цену |
 
