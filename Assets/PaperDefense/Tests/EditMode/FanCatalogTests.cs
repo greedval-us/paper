@@ -50,9 +50,9 @@ namespace PaperDefense.Tests
             Assert.That(copy.Structure(StructureKind.Fan).ConeAngleDegrees, Is.EqualTo(42));
             Assert.That(copy.Structure(StructureKind.Fan).MaxTargets, Is.EqualTo(3));
         }
-        [Test] public void CurrentProfilesWriteVersionThreeAndHistoricalVersionTwoCannotClaimNewKinds()
+        [Test] public void CurrentProfilesWriteVersionFourAndHistoricalVersionTwoCannotClaimNewKinds()
         {
-            var profile = new WorkshopProfile(); Assert.That(profile.ToData().Version, Is.EqualTo(3));
+            var profile = new WorkshopProfile(); Assert.That(profile.ToData().Version, Is.EqualTo(4));
             var historical = HistoricalCatalogTestData.VersionTwo(); historical.Album[0].FirstWeapon = StructureKind.Fan;
             Assert.That(() => WorkshopProfile.FromData(historical), Throws.InstanceOf<ArgumentException>());
         }

@@ -129,7 +129,8 @@ namespace PaperDefense.Core
                         Math.Max(1, definition.MaxPierce), damage, payload, colorBudget, statistics);
                     break;
                 case StructureKind.Mortar:
-                    LaunchMortar(origin, target.Position, definition, damage, payload, colorBudget, tick, events);
+                    LaunchMortar(origin, target.Position, definition, damage, payload, colorBudget,
+                        structure.Blueprint?.GetMortarFootprint(secondary ? 1 : 0) ?? MortarFootprint.Circle, tick, events);
                     return;
                 case StructureKind.Fan:
                     FireFan(structure, origin, target.Position, definition, damage, payload, colorBudget, shots, tick, statistics, events);
@@ -242,7 +243,7 @@ namespace PaperDefense.Core
         }
 
         private void LaunchMortar(Point2 from, Point2 to, StructureDefinition definition, float damage,
-            ColorEffectPayload payload, TowerColorBudget colorBudget,
+            ColorEffectPayload payload, TowerColorBudget colorBudget, MortarFootprint footprint,
             long tick, SimulationEventBuffer events)
         {
             float duration = Math.Max(0, definition.FlightSeconds);
@@ -251,11 +252,12 @@ namespace PaperDefense.Core
                 Id = nextProjectileId++, From = from, To = to, Duration = duration,
                 Remaining = duration, Radius = Math.Max(0, definition.Radius),
                 Damage = damage, Weapon = StructureKind.Mortar, Color = payload.Color,
-                EffectPayload = payload, ColorBudget = colorBudget
+                EffectPayload = payload, ColorBudget = colorBudget,
+                ImpactFootprint = FootprintGeometry.Resolve(footprint, definition.Radius, from, to)
             };
             projectiles.Add(projectile);
             events.Publish(tick, SimulationEventKind.ProjectileLaunched, from, to, projectile.Weapon,
-                projectile.Radius, projectile.Id, duration);
+                projectile.Radius, projectile.Id, duration, projectile.ImpactFootprint);
         }
 
         private void FireFan(StructureState structure, Point2 origin, Point2 aim, StructureDefinition definition,
@@ -318,12 +320,22 @@ namespace PaperDefense.Core
                 var projectile = projectiles[read];
                 projectile.Remaining = Math.Max(0, projectile.Remaining - delta);
                 if (projectile.Remaining > 0.000001f) { projectiles[write++] = projectile; continue; }
-                spatial.Query(projectile.To, projectile.Radius, splashTargets);
+                FootprintGeometry? geometry = projectile.ImpactFootprint;
+                bool ellipse = geometry.HasValue && geometry.Value.ForwardRadius != geometry.Value.SideRadius;
+                // Contains includes a small normalized boundary tolerance. Keep the broad phase
+                // conservative under world-coordinate rounding, without changing circle queries.
+                float queryRadius = ellipse
+                    ? (float)Math.Min(float.MaxValue, (double)geometry.Value.BoundingRadius * 1.000001)
+                    : projectile.Radius;
+                spatial.Query(projectile.To, queryRadius, splashTargets);
                 if (projectile.ColorBudget != null) SortTargets(projectile.To, splashTargets);
                 foreach (var victim in splashTargets)
+                {
+                    if (ellipse && !geometry.Value.Contains(projectile.To, victim.Position)) continue;
                     ApplyDamage(victim, projectile.Damage, projectile.Weapon, projectile.EffectPayload, projectile.ColorBudget, statistics);
+                }
                 events.Publish(tick, SimulationEventKind.ProjectileImpact, projectile.From, projectile.To,
-                    projectile.Weapon, projectile.Radius, projectile.Id);
+                    projectile.Weapon, projectile.Radius, projectile.Id, impactFootprint: projectile.ImpactFootprint);
             }
             if (write < projectiles.Count) projectiles.RemoveRange(write, projectiles.Count - write);
         }

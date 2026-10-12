@@ -1,0 +1,92 @@
+{
+  "job_id": "17e96f419d5b4219a42046c49c11a62e",
+  "status": "failed",
+  "mode": "EditMode",
+  "started_unix_ms": 1791812962228,
+  "finished_unix_ms": 1791812962851,
+  "last_update_unix_ms": 1791812962851,
+  "progress": {
+    "completed": 4,
+    "total": 4,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": null,
+    "last_finished_test_full_name": "PaperDefense.Tests.MortarFootprintProbeTests.ProductionShotHasExpectedCoverageAndOwnedDeterministicFrames(Column,6,9)",
+    "last_finished_unix_ms": 1791812962827,
+    "stuck_suspected": false,
+    "editor_is_focused": true,
+    "run_in_background": false,
+    "focus_nudge_attempts": null,
+    "focus_nudge_limit": null,
+    "focus_nudge_status": null,
+    "blocked_reason": null,
+    "failures_so_far": [
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintProbeTests.FlightCapReportsIncompleteAndDoesNotInventAnImpact",
+        "message": "System.NotImplementedException : The method or operation is not implemented."
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintProbeTests.LongTrialRecordsBoundedOwnedRealMortarImpacts",
+        "message": "  Expected: greater than 0\r\n  But was:  0\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintProbeTests.ProductionShotHasExpectedCoverageAndOwnedDeterministicFrames(Group,9,3)",
+        "message": "System.NotImplementedException : The method or operation is not implemented."
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintProbeTests.ProductionShotHasExpectedCoverageAndOwnedDeterministicFrames(Column,6,9)",
+        "message": "System.NotImplementedException : The method or operation is not implemented."
+      }
+    ],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "EditMode",
+    "summary": {
+      "total": 4,
+      "passed": 0,
+      "failed": 4,
+      "skipped": 0,
+      "durationSeconds": 0.1091445,
+      "resultState": "Failed(Child)"
+    },
+    "results": [
+      {
+        "name": "FlightCapReportsIncompleteAndDoesNotInventAnImpact",
+        "fullName": "PaperDefense.Tests.MortarFootprintProbeTests.FlightCapReportsIncompleteAndDoesNotInventAnImpact",
+        "state": "Failed:Error",
+        "durationSeconds": 0.0107823,
+        "message": "System.NotImplementedException : The method or operation is not implemented.",
+        "stackTrace": "  at PaperDefense.Tests.MortarFootprintProbeTests.FlightCapReportsIncompleteAndDoesNotInventAnImpact () [0x00017] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MortarFootprintProbeTests.cs:48 \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ",
+        "output": ""
+      },
+      {
+        "name": "LongTrialRecordsBoundedOwnedRealMortarImpacts",
+        "fullName": "PaperDefense.Tests.MortarFootprintProbeTests.LongTrialRecordsBoundedOwnedRealMortarImpacts",
+        "state": "Failed",
+        "durationSeconds": 0.0515466,
+        "message": "  Expected: greater than 0\r\n  But was:  0\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintProbeTests.LongTrialRecordsBoundedOwnedRealMortarImpacts () [0x000f5] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MortarFootprintProbeTests.cs:43\r\n",
+        "output": ""
+      },
+      {
+        "name": "ProductionShotHasExpectedCoverageAndOwnedDeterministicFrames(Group,9,3)",
+        "fullName": "PaperDefense.Tests.MortarFootprintProbeTests.ProductionShotHasExpectedCoverageAndOwnedDeterministicFrames(Group,9,3)",
+        "state": "Failed:Error",
+        "durationSeconds": 0.0009412,
+        "message": "System.NotImplementedException : The method or operation is not implemented.",
+        "stackTrace": "  at PaperDefense.Tests.MortarFootprintProbeTests.ProductionShotHasExpectedCoverageAndOwnedDeterministicFrames (PaperDefense.Core.FootprintFormation formation, System.Int32 circle, System.Int32 oval) [0x00023] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MortarFootprintProbeTests.cs:14 \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ",
+        "output": ""
+      },
+      {
+        "name": "ProductionShotHasExpectedCoverageAndOwnedDeterministicFrames(Column,6,9)",
+        "fullName": "PaperDefense.Tests.MortarFootprintProbeTests.ProductionShotHasExpectedCoverageAndOwnedDeterministicFrames(Column,6,9)",
+        "state": "Failed:Error",
+        "durationSeconds": 0.0001059,
+        "message": "System.NotImplementedException : The method or operation is not implemented.",
+        "stackTrace": "  at PaperDefense.Tests.MortarFootprintProbeTests.ProductionShotHasExpectedCoverageAndOwnedDeterministicFrames (PaperDefense.Core.FootprintFormation formation, System.Int32 circle, System.Int32 oval) [0x00023] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MortarFootprintProbeTests.cs:14 \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ",
+        "output": ""
+      }
+    ]
+  }
+}

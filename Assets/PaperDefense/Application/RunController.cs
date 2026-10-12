@@ -278,6 +278,9 @@ namespace PaperDefense.Application
         {reason="Сначала начните партию.";return !InWorkshop&&session.TryBlotter(cell,out reason);}
         public bool ActivateWell(int index,out string reason)
         {reason="Сначала начните партию.";return !InWorkshop&&session.TryActivateWell(index,out reason);}
+        public FootprintProbeComparison CompareMortarFootprints(TowerBlueprint blueprint,int mount,MortarFootprint first,MortarFootprint second,FootprintFormation formation)
+            => MortarFootprintProbe.Compare(blueprint,mount,first,second,session.Balance,formation);
+
         public TrialComparison RunTrial(TowerBlueprint blueprint,TrialScenario scenario,bool counterfire=false,int budget=400)
         {
             if(!InWorkshop||!profile.ValidateOwned(blueprint,out _,session.Balance))return null;

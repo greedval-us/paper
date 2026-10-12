@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-12",
+  "method": "Unity Editor actual UGUI controls and endpoint PointerDown/Drag/Up in temporary isolated scene configured MemoryOnly before Awake",
+  "memoryOnly": true,
+  "editor": {
+    "aspectRatio": 3,
+    "otherMountAspectRatio": 1,
+    "frozenBaselineAspectRatio": 1,
+    "group": {
+      "firstHits": 9,
+      "secondHits": 3
+    },
+    "column": {
+      "firstHits": 6,
+      "secondHits": 9
+    },
+    "costBoth": 176,
+    "drawingQualityBoth": 100
+  },
+  "field": {
+    "method": "Normal SaveBlueprint, AssignBlueprint, StartRun, BuildBlueprint, NextWave and controlled real simulation ticks",
+    "projectiles": 2,
+    "axes": [
+      {
+        "forward": 4.15692234,
+        "side": 1.38564074
+      },
+      {
+        "forward": 2.4,
+        "side": 2.4
+      }
+    ],
+    "from": {
+      "x": 40.5,
+      "y": 32.5
+    },
+    "to": {
+      "x": 25.3256378,
+      "y": 29.5
+    }
+  },
+  "restored": {
+    "scene": "Assets/PaperDefense/Scenes/PaperDefense.unity",
+    "dirty": false,
+    "runInBackground": false,
+    "preloaded": [
+      "Assets/Settings/InputSystem_Actions.inputactions"
+    ]
+  },
+  "verifiedScreenshots": [
+    "screenshots/mortar-footprint-column-live.png",
+    "screenshots/mortar-footprint-group-verified.png",
+    "screenshots/mortar-footprint-field-verified.png"
+  ]
+}

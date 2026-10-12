@@ -1,0 +1,162 @@
+{
+  "job_id": "324f395e4c5e4d5899182e79b932ba3f",
+  "status": "failed",
+  "mode": "EditMode",
+  "started_unix_ms": 1791811774954,
+  "finished_unix_ms": 1791811779937,
+  "last_update_unix_ms": 1791811779937,
+  "progress": {
+    "completed": 10,
+    "total": 10,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": null,
+    "last_finished_test_full_name": "PaperDefense.Tests.MortarFootprintBlueprintTests.ShapeEditPreservesArtOriginAssessmentAndEconomy",
+    "last_finished_unix_ms": 1791811779709,
+    "stuck_suspected": false,
+    "editor_is_focused": false,
+    "run_in_background": false,
+    "focus_nudge_attempts": null,
+    "focus_nudge_limit": null,
+    "focus_nudge_status": null,
+    "blocked_reason": null,
+    "failures_so_far": [
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintBlueprintTests.CopiesRetainShapesAndOnlyReplacedWeaponResets",
+        "message": "  Expected: 2\r\n  But was:  1.0f\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintBlueprintTests.InvalidRatiosAreRejected(float.NaN)",
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintBlueprintTests.InvalidRatiosAreRejected(float.PositiveInfinity)",
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintBlueprintTests.InvalidRatiosAreRejected(float.NegativeInfinity)",
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintBlueprintTests.InvalidRatiosAreRejected(0.0f)",
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintBlueprintTests.InvalidRatiosAreRejected(3.01f)",
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintBlueprintTests.MountMustContainMortarAndFootprintMustExist",
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintBlueprintTests.ShapeEditPreservesArtOriginAssessmentAndEconomy",
+        "message": "  Expected: 3\r\n  But was:  1.0f\r\n"
+      }
+    ],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "EditMode",
+    "summary": {
+      "total": 10,
+      "passed": 2,
+      "failed": 8,
+      "skipped": 0,
+      "durationSeconds": 0.7463295,
+      "resultState": "Failed(Child)"
+    },
+    "results": [
+      {
+        "name": "CopiesRetainShapesAndOnlyReplacedWeaponResets",
+        "fullName": "PaperDefense.Tests.MortarFootprintBlueprintTests.CopiesRetainShapesAndOnlyReplacedWeaponResets",
+        "state": "Failed",
+        "durationSeconds": 0.0475009,
+        "message": "  Expected: 2\r\n  But was:  1.0f\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintBlueprintTests.CopiesRetainShapesAndOnlyReplacedWeaponResets () [0x00078] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MortarFootprintBlueprintTests.cs:31\r\n",
+        "output": ""
+      },
+      {
+        "name": "EndpointsAreAccepted(1.0f)",
+        "fullName": "PaperDefense.Tests.MortarFootprintBlueprintTests.EndpointsAreAccepted(1.0f)",
+        "state": "Passed",
+        "durationSeconds": 0.0040948,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EndpointsAreAccepted(3.0f)",
+        "fullName": "PaperDefense.Tests.MortarFootprintBlueprintTests.EndpointsAreAccepted(3.0f)",
+        "state": "Passed",
+        "durationSeconds": 0.0002296,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "InvalidRatiosAreRejected(float.NaN)",
+        "fullName": "PaperDefense.Tests.MortarFootprintBlueprintTests.InvalidRatiosAreRejected(float.NaN)",
+        "state": "Failed",
+        "durationSeconds": 0.0080498,
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintBlueprintTests.InvalidRatiosAreRejected (System.Single q) [0x0000c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MortarFootprintBlueprintTests.cs:12\r\n",
+        "output": ""
+      },
+      {
+        "name": "InvalidRatiosAreRejected(float.PositiveInfinity)",
+        "fullName": "PaperDefense.Tests.MortarFootprintBlueprintTests.InvalidRatiosAreRejected(float.PositiveInfinity)",
+        "state": "Failed",
+        "durationSeconds": 0.0004119,
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintBlueprintTests.InvalidRatiosAreRejected (System.Single q) [0x0000c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MortarFootprintBlueprintTests.cs:12\r\n",
+        "output": ""
+      },
+      {
+        "name": "InvalidRatiosAreRejected(float.NegativeInfinity)",
+        "fullName": "PaperDefense.Tests.MortarFootprintBlueprintTests.InvalidRatiosAreRejected(float.NegativeInfinity)",
+        "state": "Failed",
+        "durationSeconds": 0.000234,
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintBlueprintTests.InvalidRatiosAreRejected (System.Single q) [0x0000c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MortarFootprintBlueprintTests.cs:12\r\n",
+        "output": ""
+      },
+      {
+        "name": "InvalidRatiosAreRejected(0.0f)",
+        "fullName": "PaperDefense.Tests.MortarFootprintBlueprintTests.InvalidRatiosAreRejected(0.0f)",
+        "state": "Failed",
+        "durationSeconds": 0.0001617,
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintBlueprintTests.InvalidRatiosAreRejected (System.Single q) [0x0000c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MortarFootprintBlueprintTests.cs:12\r\n",
+        "output": ""
+      },
+      {
+        "name": "InvalidRatiosAreRejected(3.01f)",
+        "fullName": "PaperDefense.Tests.MortarFootprintBlueprintTests.InvalidRatiosAreRejected(3.01f)",
+        "state": "Failed",
+        "durationSeconds": 0.0001294,
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintBlueprintTests.InvalidRatiosAreRejected (System.Single q) [0x0000c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MortarFootprintBlueprintTests.cs:12\r\n",
+        "output": ""
+      },
+      {
+        "name": "MountMustContainMortarAndFootprintMustExist",
+        "fullName": "PaperDefense.Tests.MortarFootprintBlueprintTests.MountMustContainMortarAndFootprintMustExist",
+        "state": "Failed",
+        "durationSeconds": 0.0006355,
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintBlueprintTests.MountMustContainMortarAndFootprintMustExist () [0x00054] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MortarFootprintBlueprintTests.cs:40\r\n",
+        "output": ""
+      },
+      {
+        "name": "ShapeEditPreservesArtOriginAssessmentAndEconomy",
+        "fullName": "PaperDefense.Tests.MortarFootprintBlueprintTests.ShapeEditPreservesArtOriginAssessmentAndEconomy",
+        "state": "Failed",
+        "durationSeconds": 0.0008265,
+        "message": "  Expected: 3\r\n  But was:  1.0f\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintBlueprintTests.ShapeEditPreservesArtOriginAssessmentAndEconomy () [0x0002c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MortarFootprintBlueprintTests.cs:17\r\n",
+        "output": ""
+      }
+    ]
+  }
+}

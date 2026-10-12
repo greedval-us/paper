@@ -20,13 +20,35 @@ namespace PaperDefense.Core
         public DrawingSnapshot Drawing { get; }
         public DrawingOrigin Origin { get; }
         public DrawingAssessment Assessment { get; }
+        public MortarFootprint FirstFootprint { get; }
+        public MortarFootprint SecondFootprint { get; }
+        public MortarFootprint GetMortarFootprint(int mount)
+        {
+            if (mount == 0 && FirstWeapon == StructureKind.Mortar) return FirstFootprint;
+            if (mount == 1 && SecondWeapon == StructureKind.Mortar) return SecondFootprint;
+            throw new ArgumentOutOfRangeException(nameof(mount), "Mount must contain a mortar.");
+        }
+        public TowerBlueprint WithMortarFootprint(int mount, MortarFootprint footprint)
+        {
+            GetMortarFootprint(mount);
+            if (footprint == null) throw new ArgumentNullException(nameof(footprint));
+            return new TowerBlueprint(Id, Name, Chassis, FirstWeapon, SecondWeapon, Modules, Drawing, Origin,
+                mount == 0 ? footprint : FirstFootprint, mount == 1 ? footprint : SecondFootprint);
+        }
+        public TowerBlueprint AsVariant(string id, string name) => new TowerBlueprint(id, name, Chassis, FirstWeapon,
+            SecondWeapon, Modules, Drawing.DeepCopy(), Origin, FirstFootprint, SecondFootprint);
         public TowerBlueprint(string id, string name, ChassisKind chassis, StructureKind firstWeapon,
             StructureKind? secondWeapon = null, TowerModules modules = TowerModules.None,
-            DrawingSnapshot drawing = null, DrawingOrigin origin = DrawingOrigin.LegacyStandard)
+            DrawingSnapshot drawing = null, DrawingOrigin origin = DrawingOrigin.LegacyStandard,
+            MortarFootprint firstFootprint = null, MortarFootprint secondFootprint = null)
         {
             if (!Enum.IsDefined(typeof(DrawingOrigin), origin)) throw new ArgumentOutOfRangeException(nameof(origin));
             Id = id?.Trim() ?? ""; Name = name?.Trim() ?? ""; Chassis = chassis; FirstWeapon = firstWeapon; SecondWeapon = secondWeapon; Modules = modules;
             Drawing = drawing ?? DrawingSnapshot.Empty; Origin = origin;
+            FirstFootprint = firstFootprint ?? MortarFootprint.Circle; SecondFootprint = secondFootprint ?? MortarFootprint.Circle;
+            if ((firstWeapon != StructureKind.Mortar && FirstFootprint.AspectRatio != 1) ||
+                (secondWeapon != StructureKind.Mortar && SecondFootprint.AspectRatio != 1))
+                throw new ArgumentException("Only mortar mounts may have a noncircular footprint.");
             if (origin == DrawingOrigin.LegacyStandard && !Drawing.IsEmpty)
                 throw new ArgumentException("Авторские линии требуют пометки PlayerDrawing.", nameof(origin));
             Assessment = DrawingEvaluator.Evaluate(this);
@@ -34,22 +56,26 @@ namespace PaperDefense.Core
         public static TowerBlueprint NewDraft(string id, string name, ChassisKind chassis, StructureKind firstWeapon,
             StructureKind? secondWeapon = null, TowerModules modules = TowerModules.None)
             => new TowerBlueprint(id, name, chassis, firstWeapon, secondWeapon, modules, DrawingSnapshot.Empty, DrawingOrigin.PlayerDrawing);
-        public TowerBlueprint WithName(string name) => new TowerBlueprint(Id, name, Chassis, FirstWeapon, SecondWeapon, Modules, Drawing, Origin);
+        public TowerBlueprint WithName(string name) => new TowerBlueprint(Id, name, Chassis, FirstWeapon, SecondWeapon, Modules, Drawing, Origin, FirstFootprint, SecondFootprint);
         public TowerBlueprint WithDrawing(DrawingSnapshot drawing) => new TowerBlueprint(Id, Name, Chassis, FirstWeapon, SecondWeapon, Modules,
-            drawing ?? throw new ArgumentNullException(nameof(drawing)), DrawingOrigin.PlayerDrawing);
+            drawing ?? throw new ArgumentNullException(nameof(drawing)), DrawingOrigin.PlayerDrawing, FirstFootprint, SecondFootprint);
         public TowerBlueprint WithAssembly(ChassisKind chassis, StructureKind firstWeapon, StructureKind? secondWeapon, TowerModules modules)
         {
             if (chassis == Chassis && firstWeapon == FirstWeapon && secondWeapon == SecondWeapon && modules == Modules) return this;
+            MortarFootprint first = firstWeapon == FirstWeapon ? FirstFootprint : MortarFootprint.Circle;
+            MortarFootprint second = secondWeapon == SecondWeapon ? SecondFootprint : MortarFootprint.Circle;
             if (Origin == DrawingOrigin.LegacyStandard)
-                return NewDraft(Id, Name, chassis, firstWeapon, secondWeapon, modules);
+                return new TowerBlueprint(Id, Name, chassis, firstWeapon, secondWeapon, modules, DrawingSnapshot.Empty,
+                    DrawingOrigin.PlayerDrawing, first, second);
             var retained = new List<DrawingPart>();
             foreach (DrawingPart part in Drawing.Parts)
                 if (DrawingPartPolicy.ShouldRetain(part.Key, this, chassis, firstWeapon, secondWeapon, modules)) retained.Add(part);
             return new TowerBlueprint(Id, Name, chassis, firstWeapon, secondWeapon, modules,
-                new DrawingSnapshot(retained), DrawingOrigin.PlayerDrawing);
+                new DrawingSnapshot(retained), DrawingOrigin.PlayerDrawing, first, second);
         }
         public TowerBlueprint AsNew(string id, string name) => new TowerBlueprint(id, name, Chassis, FirstWeapon, SecondWeapon, Modules,
-            Origin == DrawingOrigin.PlayerDrawing ? Drawing.DeepCopy() : DrawingSnapshot.Empty, DrawingOrigin.PlayerDrawing);
+            Origin == DrawingOrigin.PlayerDrawing ? Drawing.DeepCopy() : DrawingSnapshot.Empty, DrawingOrigin.PlayerDrawing,
+            FirstFootprint, SecondFootprint);
     }
 
     public static class TowerCatalog
@@ -175,15 +201,20 @@ namespace PaperDefense.Core
         public bool HasSecondWeapon;
         public TowerModules Modules;
         public int DrawingMetadataVersion;
+        public int FootprintMetadataVersion;
+        public float FirstFootprintAspect, SecondFootprintAspect;
         public DrawingOrigin Origin = (DrawingOrigin)(-1);
         public DrawingData Drawing;
         public BlueprintData() { }
         public BlueprintData(TowerBlueprint blueprint)
         { Id = blueprint.Id; Name = blueprint.Name; Chassis = blueprint.Chassis; FirstWeapon = blueprint.FirstWeapon;
             HasSecondWeapon = blueprint.SecondWeapon.HasValue; SecondWeapon = blueprint.SecondWeapon ?? StructureKind.Gun; Modules = blueprint.Modules;
-            DrawingMetadataVersion = 1; Origin = blueprint.Origin; Drawing = new DrawingData(blueprint.Drawing); }
+            DrawingMetadataVersion = 1; Origin = blueprint.Origin; Drawing = new DrawingData(blueprint.Drawing);
+            FootprintMetadataVersion = 1; FirstFootprintAspect = blueprint.FirstFootprint.AspectRatio; SecondFootprintAspect = blueprint.SecondFootprint.AspectRatio; }
         public TowerBlueprint ToBlueprint(int profileVersion = WorkshopProfile.CurrentVersion)
         {
+            if (profileVersion > WorkshopProfile.CurrentVersion) throw new NotSupportedException("Newer profile version.");
+            if (profileVersion < 1) throw new ArgumentException("Unknown profile version.");
             if (profileVersion == 1)
                 return new TowerBlueprint(Id, Name, Chassis, FirstWeapon, HasSecondWeapon ? SecondWeapon : (StructureKind?)null, Modules);
             if (profileVersion >= 3 &&
@@ -200,8 +231,15 @@ namespace PaperDefense.Core
                 throw new ArgumentException("У страницы отсутствуют данные происхождения рисунка.");
             if (profileVersion == 2 && Drawing.FormatVersion > 1)
                 throw new NotSupportedException("Профиль версии 2 содержит более новый формат рисунка.");
+            MortarFootprint first = MortarFootprint.Circle, second = MortarFootprint.Circle;
+            if (profileVersion == 4)
+            {
+                if (FootprintMetadataVersion > 1) throw new NotSupportedException("Newer footprint metadata.");
+                if (FootprintMetadataVersion != 1) throw new ArgumentException("Missing footprint metadata.");
+                first = new MortarFootprint(FirstFootprintAspect); second = new MortarFootprint(SecondFootprintAspect);
+            }
             return new TowerBlueprint(Id, Name, Chassis, FirstWeapon, HasSecondWeapon ? SecondWeapon : (StructureKind?)null,
-                Modules, Drawing.ToSnapshot(), Origin);
+                Modules, Drawing.ToSnapshot(), Origin, first, second);
         }
         static bool HistoricalWeapon(StructureKind kind) => kind == StructureKind.Gun || kind == StructureKind.Piercer || kind == StructureKind.Mortar;
     }

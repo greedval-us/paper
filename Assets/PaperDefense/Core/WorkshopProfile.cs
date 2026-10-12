@@ -16,7 +16,7 @@ namespace PaperDefense.Core
     /// <summary>Permanent options, never a stockpile of consumable weapon instances.</summary>
     public sealed class WorkshopProfile
     {
-        public const int CurrentVersion = 3;
+        public const int CurrentVersion = 4;
         private static readonly IReadOnlyList<PartUnlock> parts = PartCatalog.HistoricalParts;
         private readonly HashSet<string> unlocked = new HashSet<string>(StringComparer.Ordinal);
         private readonly List<TowerBlueprint> album = new List<TowerBlueprint>();
@@ -126,7 +126,7 @@ namespace PaperDefense.Core
         }
         public static WorkshopProfile FromData(WorkshopProfileData data)
         {
-            if (data != null && (data.Version == 2 || data.Version == CurrentVersion)) return FromStrictData(data);
+            if (data != null && (data.Version == 2 || data.Version == 3 || data.Version == 4)) return FromStrictData(data);
             if (data != null && data.Version > CurrentVersion) throw new NotSupportedException("Профиль создан более новой версией игры.");
             if (data != null && data.Version != 1) throw new ArgumentException("Неизвестная версия профиля.");
             var profile = new WorkshopProfile();

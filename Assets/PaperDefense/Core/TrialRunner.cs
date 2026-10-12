@@ -86,6 +86,7 @@ namespace PaperDefense.Core
             var enemies = new List<EnemyState>(256);
             var frames = new List<TrialFrame>(181);
             var frameShots = new List<ShotEvent>();
+            var frameImpacts = new List<SimulationEvent>();
             frames.Add(new TrialFrame(0, enemies, towers, weapons.Projectiles, frameShots, blotContext?.Marks));
             TrialScenarioDefinition fixture = TrialScenarioDefinition.For(scenario);
             int count = fixture.Count;
@@ -130,6 +131,9 @@ namespace PaperDefense.Core
                 }
                 shots.Clear();
                 weapons.Fire(towers, enemies, shots, 1, 1, delta, tick + 1, stats, events, report.DurationSeconds);
+                foreach (var impact in events)
+                    if (impact.Tick == tick + 1 && impact.Kind == SimulationEventKind.ProjectileImpact && frameImpacts.Count < 128)
+                        frameImpacts.Add(impact);
                 // Visual trails are bounded independently from damage and the live shot list.
                 for (int i = 0; i < shots.Count && frameShots.Count < TrialScenarioDefinition.MaximumFrameShots; i++) frameShots.Add(shots[i]);
                 int write = 0;
@@ -145,8 +149,9 @@ namespace PaperDefense.Core
                     (blotContext == null || blotContext.Marks.Count == 0);
                 if ((tick + 1) % TrialScenarioDefinition.RecordingStrideTicks == 0 || finished || tick == TrialScenarioDefinition.MaximumTicks - 1)
                 {
-                    frames.Add(new TrialFrame(report.DurationSeconds, enemies, towers, weapons.Projectiles, frameShots, blotContext?.Marks));
+                    frames.Add(new TrialFrame(report.DurationSeconds, enemies, towers, weapons.Projectiles, frameShots, blotContext?.Marks, frameImpacts));
                     frameShots.Clear();
+                    frameImpacts.Clear();
                 }
                 if (finished) break;
             }
@@ -231,9 +236,10 @@ namespace PaperDefense.Core
         public IReadOnlyList<ProjectileView> Projectiles { get; }
         public IReadOnlyList<ShotEvent> Shots { get; }
         public IReadOnlyList<BlotView> Blots { get; }
+        public IReadOnlyList<SimulationEvent> Impacts { get; }
 
         internal TrialFrame(float seconds, IReadOnlyList<EnemyState> enemies, IReadOnlyList<StructureState> towers,
-            IReadOnlyList<MortarProjectile> projectiles, IReadOnlyList<ShotEvent> shots, IReadOnlyList<BlotState> blots = null)
+            IReadOnlyList<MortarProjectile> projectiles, IReadOnlyList<ShotEvent> shots, IReadOnlyList<BlotState> blots = null, IReadOnlyList<SimulationEvent> impacts = null)
         {
             Seconds = seconds;
             var enemyValues = new EnemyView[enemies.Count];
@@ -251,6 +257,9 @@ namespace PaperDefense.Core
             Projectiles = Array.AsReadOnly(projectileValues);
             Shots = Array.AsReadOnly(shotValues);
             Blots = Array.AsReadOnly(blotValues);
+            var impactValues = new SimulationEvent[impacts?.Count ?? 0];
+            for (int i = 0; i < impactValues.Length; i++) impactValues[i] = impacts[i];
+            Impacts = Array.AsReadOnly(impactValues);
         }
     }
 }

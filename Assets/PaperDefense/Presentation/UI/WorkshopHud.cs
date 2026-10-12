@@ -23,7 +23,9 @@ namespace PaperDefense.Presentation
         BlueprintSketch sketch;
         readonly BlueprintSketch[] albumSketches = new BlueprintSketch[AlbumRowsPerPage];
         public DrawingEditorPanel DrawingEditor { get; private set; }
+        public MortarFootprintPanel MortarFootprintEditor { get; private set; }
         WorkshopMapSketch map;
+        readonly Button[] footprintButtons = new Button[2];
         TrialLaneSketch trialDiagramFirst, trialDiagramSecond;
         readonly Button[] albumButtons = new Button[AlbumRowsPerPage];
         readonly Text[] albumLabels = new Text[AlbumRowsPerPage], slotLabels = new Text[ProfileLimits.LoadoutSlotCount];
@@ -69,7 +71,8 @@ namespace PaperDefense.Presentation
             root.anchorMin = root.anchorMax = root.pivot = new Vector2(.5f, .5f); root.sizeDelta = new Vector2(1600, 1000);
             board.GetComponent<Image>().color = NotebookPalette.Paper; board.GetComponent<Image>().raycastTarget = true;
             BuildComposer(); BuildAlbum(); BuildLoadout(); BuildTrial(); BuildQualityDetails();
-            DrawingEditor = new DrawingEditorPanel(root, font, drawing => { Draft = Draft.WithDrawing(drawing); SetStatus("Авторские штрихи применены к черновику. Сохрани страницу в альбом."); });
+            MortarFootprintEditor = new MortarFootprintPanel(root, font, value => { Draft = value; Refresh(); }, run.CompareMortarFootprints, value => run.PreviewBlueprint(value).Reason);
+            DrawingEditor = new DrawingEditorPanel(root, font, drawing => { MortarFootprintEditor.Close(); Draft = Draft.WithDrawing(drawing); SetStatus("Авторские штрихи применены к черновику. Сохрани страницу в альбом."); });
             Draft = run.Workshop.Album.Count > 0 ? run.Workshop.Album[0] : NewDrawing();
             title.SetTextWithoutNotify(Draft.Name);
             run.WorkshopChanged += Refresh;
@@ -81,15 +84,16 @@ namespace PaperDefense.Presentation
         {
             if (run == null) return;
             canvasObject.SetActive(run.InWorkshop);
-            if (!run.InWorkshop) return;
+            if (!run.InWorkshop) { MortarFootprintEditor.Close(); return; }
             refresh -= Time.unscaledDeltaTime;
             if (refresh <= 0) { refresh = .15f; Refresh(); }
         }
 
         TowerBlueprint NewDrawing() => TowerBlueprint.NewDraft("drawing-" + Guid.NewGuid().ToString("N"), "Мой рисунок", ChassisKind.Standard, StructureKind.Gun);
-        void NewDraft() { Draft = NewDrawing(); title.SetTextWithoutNotify(Draft.Name); SetStatus("Новый лист. Выбери шасси, до двух стволов и модули."); }
+        void NewDraft() { MortarFootprintEditor.Close(); Draft = NewDrawing(); title.SetTextWithoutNotify(Draft.Name); SetStatus("Новый лист. Выбери шасси, до двух стволов и модули."); }
         void SetDraft(ChassisKind chassis, StructureKind first, StructureKind? second, TowerModules modules, string selectedPart = null)
         {
+            MortarFootprintEditor.Close();
             Draft = Draft.WithName(title.text).WithAssembly(chassis, first, second, modules);
             if (selectedPart != null) foreach (var part in run.Workshop.Parts) if (part.Id == selectedPart) { Status = part.Description; break; }
             Refresh();
@@ -130,16 +134,18 @@ namespace PaperDefense.Presentation
             }
             Button(left, "New blueprint", new Rect(18, 487, 140, 43), "НОВЫЙ", NewDraft);
             Button(left, "Save blueprint", new Rect(170, 487, 200, 43), "В АЛЬБОМ", SaveDraft);
-            Button(left, "Delete blueprint", new Rect(382, 487, 126, 43), "УДАЛИТЬ", () => SetStatus(run.DeleteBlueprint(Draft.Id, out var reason) ? "Рисунок удалён из альбома." : reason));
-            Button(left, "Save blueprint as new", new Rect(18, 537, 490, 27), "СОХРАНИТЬ КОПИЮ НА НОВОЙ СТРАНИЦЕ", SaveAsNew);
+            Button(left, "Delete blueprint", new Rect(382, 487, 126, 43), "УДАЛИТЬ", () => { MortarFootprintEditor.Close(); SetStatus(run.DeleteBlueprint(Draft.Id, out var reason) ? "Рисунок удалён из альбома." : reason); });
+            Button(left, "Save blueprint as new", new Rect(18, 537, 490, 27), "СДЕЛАТЬ ВАРИАНТ", SaveAsNew);
 
             var center = Panel(root, "Live drawing", new Rect(578, 126, 475, 570), new Color(.97f, .97f, .91f));
             Label(center, "02  НАРИСУЙ И ПРОВЕРЬ", new Rect(18, 10, 440, 35), 24, NotebookPalette.Blue, true);
             var illustration = new GameObject("Live blueprint sketch", typeof(RectTransform), typeof(CanvasRenderer), typeof(BlueprintSketch));
             illustration.transform.SetParent(center, false); Place(illustration.GetComponent<RectTransform>(), new Rect(30, 58, 415, 191));
             sketch = illustration.GetComponent<BlueprintSketch>(); sketch.raycastTarget = false;
-            Button(center, "Open drawing editor", new Rect(22, 251, 432, 42), "НАРИСОВАТЬ СВОИ ЛИНИИ  →", () => DrawingEditor.Open(Draft));
-            stats = Label(center, "", new Rect(22, 305, 432, 181), 17, NotebookPalette.Navy);
+            Button(center, "Open drawing editor", new Rect(22, 251, 432, 42), "НАРИСОВАТЬ СВОИ ЛИНИИ  →", () => { MortarFootprintEditor.Close(); DrawingEditor.Open(Draft); });
+            for (int mount = 0; mount < 2; mount++)
+            { int selected = mount; footprintButtons[mount] = Button(center, "Mortar footprint " + mount, new Rect(22 + mount * 220, 301, 212, 53), "След выстрела", () => MortarFootprintEditor.Open(Draft, selected)); }
+            stats = Label(center, "", new Rect(22, 365, 432, 121), 17, NotebookPalette.Navy);
             Button(center, "Drawing quality details", new Rect(22, 487, 432, 30), "ПОЧЕМУ ТАКОЕ КАЧЕСТВО?", ShowQualityDetails);
             Button(center, "Open trial", new Rect(22, 523, 432, 39), "ИСПЫТАТЬ НА ТЕСТОВОМ ЛИСТЕ  →", () => { SetTrial(true); RefreshTrialSettings(); });
         }
@@ -158,8 +164,8 @@ namespace PaperDefense.Presentation
                 albumSketches[i] = thumb.GetComponent<BlueprintSketch>(); albumSketches[i].raycastTarget = false;
                 Place(albumLabels[i].rectTransform, new Rect(58, 1, 394, 39)); albumLabels[i].fontSize = 13;
             }
-            Button(album, "Album previous", new Rect(18, 435, 224, 33), "←  ПРЕДЫДУЩИЕ", () => { albumPage = Mathf.Max(0, albumPage - 1); Refresh(); });
-            Button(album, "Album next", new Rect(254, 435, 224, 33), "СЛЕДУЮЩИЕ  →", () => { albumPage = Mathf.Min(Mathf.Max(0, (run.Workshop.Album.Count - 1) / AlbumRowsPerPage), albumPage + 1); Refresh(); });
+            Button(album, "Album previous", new Rect(18, 435, 224, 33), "←  ПРЕДЫДУЩИЕ", () => { MortarFootprintEditor.Close(); albumPage = Mathf.Max(0, albumPage - 1); Refresh(); });
+            Button(album, "Album next", new Rect(254, 435, 224, 33), "СЛЕДУЮЩИЕ  →", () => { MortarFootprintEditor.Close(); albumPage = Mathf.Min(Mathf.Max(0, (run.Workshop.Album.Count - 1) / AlbumRowsPerPage), albumPage + 1); Refresh(); });
             for (int i = 0; i < partIds.Length; i++)
             {
                 int index = i;
@@ -245,24 +251,29 @@ namespace PaperDefense.Presentation
 
         void SaveDraft()
         {
+            MortarFootprintEditor.Close();
             Draft = Draft.WithName(title.text);
             SetStatus(run.SaveBlueprint(Draft, out var reason) ? "«" + Draft.Name + "» сохранён. Назначь его в один из четырёх слотов." : reason);
         }
         void SaveAsNew()
         {
-            var candidate = Draft.AsNew("drawing-" + Guid.NewGuid().ToString("N"), title.text);
+            MortarFootprintEditor.Close();
+            var candidate = Draft.AsVariant("drawing-" + Guid.NewGuid().ToString("N"), title.text);
             if (!run.SaveBlueprint(candidate, out var reason)) { SetStatus(reason); return; }
             Draft = candidate; SetStatus("Копия сохранена на новой странице. Исходная страница сохранена отдельно.");
         }
         void SelectAlbum(int index)
         {
             if (index < 0 || index >= run.Workshop.Album.Count) return;
+            MortarFootprintEditor.Close();
             Draft = run.Workshop.Album[index]; title.SetTextWithoutNotify(Draft.Name);
             SetStatus("Открыт «" + Draft.Name + "». Изменения применятся после сохранения; партия берёт отдельный набор.");
         }
         void Refresh()
         {
             if (run == null || Draft == null || gold == null) return;
+            for (int mount = 0; mount < 2; mount++)
+            { bool mortar = mount == 0 ? Draft.FirstWeapon == StructureKind.Mortar : Draft.SecondWeapon == StructureKind.Mortar; footprintButtons[mount].gameObject.SetActive(mortar); if (mortar) footprintButtons[mount].GetComponentInChildren<Text>().text = "След выстрела " + (mount + 1) + " · q " + Draft.GetMortarFootprint(mount).AspectRatio.ToString("0.00"); }
             gold.text = "ЗОЛОТО  " + run.Workshop.Gold;
             albumPage = Mathf.Clamp(albumPage, 0, Mathf.Max(0, (run.Workshop.Album.Count - 1) / AlbumRowsPerPage));
             var balance = run.Session.Balance;

@@ -12,6 +12,7 @@ namespace PaperDefense.Core
         public float Remaining { get; internal set; }
         public float Duration { get; internal set; }
         public float Radius { get; internal set; }
+        public FootprintGeometry? ImpactFootprint { get; internal set; }
         public float Damage { get; internal set; }
         public StructureKind Weapon { get; internal set; }
         public InkColor Color { get; internal set; }

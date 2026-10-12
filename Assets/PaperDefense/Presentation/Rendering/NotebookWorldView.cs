@@ -46,6 +46,7 @@ namespace PaperDefense.Presentation
             public SimulationEventKind EventKind;
             public StructureKind Weapon;
             public float Radius, Born;
+            public FootprintGeometry? ImpactFootprint;
         }
 
         public void Initialize(IRunReadModel newSession)
@@ -113,7 +114,8 @@ namespace PaperDefense.Presentation
             {
                 From = new Vector2(item.From.X, item.From.Y),
                 To = new Vector2(item.To.X, item.To.Y),
-                EventKind = item.Kind, Weapon = item.Weapon, Radius = item.Radius, Born = Time.unscaledTime
+                EventKind = item.Kind, Weapon = item.Weapon, Radius = item.Radius, Born = Time.unscaledTime,
+                ImpactFootprint = item.ImpactFootprint
             });
         }
 
@@ -363,8 +365,8 @@ namespace PaperDefense.Presentation
                 p.Line(trail, point, .045f, MeshPen.Alpha(NotebookPalette.Marker, .6f));
                 p.Disc(point, .1f, NotebookPalette.Navy, 10);
                 p.Disc(point + new Vector2(-.025f, .025f), .035f, NotebookPalette.Paper, 6);
-                p.Ring(to, Mathf.Max(.4f, projectile.Radius), .025f,
-                       MeshPen.Alpha(NotebookPalette.Marker, .2f), 24, 1, projectile.Id, true);
+                DrawFootprint(p, to, projectile.ImpactFootprint, Mathf.Max(.4f, projectile.Radius), 1, .025f,
+                    MeshPen.Alpha(NotebookPalette.Marker, .2f), 24, projectile.Id, true);
             }
             float time = Time.unscaledTime;
             for (int i = firingMarks.Count - 1; i >= 0; i--)
@@ -387,9 +389,12 @@ namespace PaperDefense.Presentation
                 {
                     float radius = Mathf.Max(.65f, mark.Radius);
                     Color orange = new Color(.85f, .46f, .2f, fade * .75f);
-                    p.Ring(mark.To, radius * (.6f + t * .4f), .065f * fade + .025f, orange, 32, 1, i * 13);
-                    p.Ring(mark.To, radius * (.45f + t * .4f), .035f, MeshPen.Alpha(orange, fade * .35f), 32, 1, i * 19);
-                    p.Star(mark.To, radius * (.4f + t * .6f), orange, .045f, 9, i * .83f);
+                    if (mark.ImpactFootprint.HasValue && mark.ImpactFootprint.Value.ForwardRadius != mark.ImpactFootprint.Value.SideRadius)
+                        DrawFootprint(p, mark.To, mark.ImpactFootprint, radius, 1, .025f, orange, 32, i * 23);
+                    DrawFootprint(p, mark.To, mark.ImpactFootprint, radius, .6f + t * .4f, .065f * fade + .025f, orange, 32, i * 13);
+                    DrawFootprint(p, mark.To, mark.ImpactFootprint, radius, .45f + t * .4f, .035f, MeshPen.Alpha(orange, fade * .35f), 32, i * 19);
+                    if (!mark.ImpactFootprint.HasValue || mark.ImpactFootprint.Value.ForwardRadius == mark.ImpactFootprint.Value.SideRadius)
+                        p.Star(mark.To, radius * (.4f + t * .6f), orange, .045f, 9, i * .83f);
                 }
                 else if (mark.Weapon == StructureKind.Blotter)
                 {
@@ -406,6 +411,29 @@ namespace PaperDefense.Presentation
                 }
             }
             p.Upload();
+        }
+
+        // Build each perimeter point in world space; axis direction comes from the shell snapshot.
+        static void DrawFootprint(MeshPen pen, Vector2 center, FootprintGeometry? footprint,
+            float fallbackRadius, float scale, float width, Color color, int segments, int seed, bool dashed = false)
+        {
+            if (!footprint.HasValue || footprint.Value.ForwardRadius == footprint.Value.SideRadius)
+            {
+                pen.Ring(center, fallbackRadius * scale, width, color, segments, 1, seed, dashed);
+                return;
+            }
+            FootprintGeometry geometry = footprint.Value;
+            Vector2 forward = new Vector2(geometry.Forward.X, geometry.Forward.Y);
+            Vector2 side = new Vector2(-forward.y, forward.x);
+            Vector2 previous = center + forward * (geometry.ForwardRadius * scale);
+            for (int i = 1; i <= segments; i++)
+            {
+                float angle = i * Mathf.PI * 2 / segments;
+                Vector2 next = center + forward * (Mathf.Cos(angle) * geometry.ForwardRadius * scale)
+                    + side * (Mathf.Sin(angle) * geometry.SideRadius * scale);
+                if (!dashed || i % 3 != 0) pen.Line(previous, next, width, color);
+                previous = next;
+            }
         }
 
         static Vector2 FlightPoint(Vector2 from, Vector2 to, float t, float height)
