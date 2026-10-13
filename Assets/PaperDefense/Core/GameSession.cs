@@ -259,10 +259,10 @@ namespace PaperDefense.Core
                 structure.FrontageUsed = 0;
                 RefreshHealthBand(structure);
             }
-            if (Phase == RunPhase.Planning || Phase == RunPhase.Intermission)
+            if ((Phase == RunPhase.Planning || Phase == RunPhase.Intermission) && !PendingUpgrade)
             {
                 Countdown = Math.Max(0, Countdown - delta);
-                if (Countdown <= 0 && !PendingUpgrade) StartNextWave();
+                if (Countdown <= 0) StartNextWave();
             }
             if (Phase != RunPhase.Assault)
             {

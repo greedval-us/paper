@@ -33,26 +33,70 @@ namespace PaperDefense.Presentation
         RunController run;
         NotebookWorldView view;
         Camera worldCamera;
-        readonly List<Cell> stroke = new List<Cell>();
-        readonly HashSet<Cell> visited = new HashSet<Cell>();
+        readonly ConstructionGesture gesture = new ConstructionGesture();
         readonly List<RaycastResult> uiHits = new List<RaycastResult>();
         readonly Cell[] hoverPreview = new Cell[1];
         EventSystem pointerEventSystem;
         PointerEventData pointerEventData;
-        bool drawing;
-        Cell last;
+        int erasedCells;
+        InputAction constructionPress;
+        InputSettings pointerSettings;
+        Mouse pressMouse;
+        Vector2 pressPosition;
+        bool hasPressOrigin;
+
+        void OnEnable()
+        {
+            pointerSettings = PointerEventPolicy.Acquire();
+            if (constructionPress == null)
+            {
+                constructionPress = new InputAction("Construction press", InputActionType.Button, "<Mouse>/leftButton");
+                constructionPress.performed += CapturePressOrigin;
+            }
+            constructionPress.Enable();
+        }
+
+        void CapturePressOrigin(InputAction.CallbackContext context)
+        {
+            pressMouse = context.control.device as Mouse;
+            hasPressOrigin = pressMouse != null;
+            if (hasPressOrigin) pressPosition = pressMouse.position.ReadValue();
+        }
 
         public void Initialize(RunController controller, NotebookWorldView world, Camera camera)
-        { run = controller; view = world; worldCamera = camera; CameraCenter=new Vector2(run.Session.Balance.Width*.5f,run.Session.Balance.Height*.5f); ResetUnavailableSelections(); run.SessionChanged += OnRestart; }
-        void OnDestroy() { if (run != null) run.SessionChanged -= OnRestart; }
+        {
+            if (run != null) run.SessionChanged -= OnRestart;
+            Cancel();
+            run = controller; view = world; worldCamera = camera;
+            CameraCenter = new Vector2(run.Session.Balance.Width * .5f, run.Session.Balance.Height * .5f);
+            ResetUnavailableSelections();
+            run.SessionChanged += OnRestart;
+        }
+        void OnDestroy()
+        {
+            if (run != null) run.SessionChanged -= OnRestart;
+            if (constructionPress != null)
+            {
+                constructionPress.performed -= CapturePressOrigin;
+                constructionPress.Dispose();
+            }
+        }
+        void OnDisable()
+        {
+            constructionPress?.Disable();
+            PointerEventPolicy.Release(pointerSettings);
+            pointerSettings = null;
+            Cancel(); HasHover = false;
+        }
+        void OnApplicationFocus(bool focused) { if (!focused) { Cancel(); HasHover = false; } }
         void OnRestart(IRunReadModel session)
         {
             Cancel(); Zoom = 1; CameraCenter = new Vector2(session.Balance.Width * .5f, session.Balance.Height * .5f);
             ResetUnavailableSelections();
             if (BlueprintSlot >= 0)
             {
-                if (BlueprintSlot < run.Workshop.Loadout.Count && run.Workshop.Loadout[BlueprintSlot] != null)
-                    Tool = run.Workshop.Loadout[BlueprintSlot].FirstWeapon;
+                if (BlueprintSlot < run.BuildLoadout.Count && run.BuildLoadout[BlueprintSlot] != null)
+                    Tool = run.BuildLoadout[BlueprintSlot].FirstWeapon;
                 else { BlueprintSlot = -1; Tool = StructureKind.Wall; }
             }
             Message = UserText.Message("copy.330da6cb58f99c22");
@@ -67,9 +111,9 @@ namespace PaperDefense.Presentation
         public void SelectSlot(int slot)
         {
             if (ConstructionOnly) return;
-            if (run == null || slot < 0 || slot >= run.Workshop.Loadout.Count) return;
-            if (run.Workshop.Loadout[slot] == null) { Message = UserText.Message("copy.39c29e0231f823f1"); return; }
-            Cancel(); BlueprintSlot = slot; Tool = run.Workshop.Loadout[slot].FirstWeapon;
+            if (run == null || slot < 0 || slot >= run.BuildLoadout.Count) return;
+            if (run.BuildLoadout[slot] == null) { Message = UserText.Message("copy.39c29e0231f823f1"); return; }
+            Cancel(); BlueprintSlot = slot; Tool = run.BuildLoadout[slot].FirstWeapon;
             Mode = DrawingMode.Build; SelectionChanged?.Invoke();
         }
         public void SelectTier(MaterialTier tier)
@@ -109,55 +153,60 @@ namespace PaperDefense.Presentation
         {
             if (run == null || run.Session == null) return;
             if (run.InWorkshop) { Cancel(); HasHover = false; return; }
-            ReadKeys();
-            if (run.Session.PendingUpgrade || run.Session.Phase == RunPhase.Victory || run.Session.Phase == RunPhase.Defeat)
-            { Cancel(); HasHover=false; return; }
             var mouse = Mouse.current;
-            if (mouse == null) return;
-            if (mouse.rightButton.wasPressedThisFrame) { Cancel(); return; }
-            Vector2 screen = mouse.position.ReadValue();
-            Navigate(mouse,screen);
-            HasHover = TryCell(screen, out var cell) && !OverUi(screen);
+            Vector2 screen = mouse != null ? mouse.position.ReadValue() : default;
+            Cell cell = default;
+            HasHover = mouse != null && TryCell(screen, out cell) && !OverUi(screen);
             if (HasHover) HoverCell = cell;
-            if (mouse.leftButton.wasPressedThisFrame && HasHover && !run.Session.PendingUpgrade)
+            ReadKeys();
+            if (run.InWorkshop || run.Session.PendingUpgrade || run.Session.Phase == RunPhase.Victory || run.Session.Phase == RunPhase.Defeat)
+            { Cancel(); HasHover=false; return; }
+            if (mouse == null) { Cancel(); HasHover = false; return; }
+            if (mouse.rightButton.wasPressedThisFrame) { Cancel(); return; }
+            Navigate(mouse,screen);
+            HasHover = TryCell(screen, out cell) && !OverUi(screen);
+            if (HasHover) HoverCell = cell;
+            if (!HasHover) Cancel();
+            // Button callbacks preserve the down position even when several pointer events arrive in one frame.
+            if (mouse.leftButton.wasPressedThisFrame && HasHover && hasPressOrigin && pressMouse == mouse &&
+                TryCell(pressPosition, out var startCell) && !OverUi(pressPosition))
             {
                 if (Mode == DrawingMode.Upgrade)
-                { Message = run.Upgrade(cell, out var reason) ? UserText.Message("copy.c21e825dfc5ef9fd") : reason; }
-                else if (Mode == DrawingMode.Erase) Erase(cell);
+                { Message = run.Upgrade(startCell, out var reason) ? UserText.Message("copy.c21e825dfc5ef9fd") : reason; }
+                else if (Mode == DrawingMode.Erase) { erasedCells = 0; gesture.Begin(startCell, continuous: true); }
                 else if (Mode == DrawingMode.Blotter)
-                { Message = run.Blotter(cell, out var reason) ? UserText.Message("copy.1aa1c191d8f61cbe") : reason; }
+                { Message = run.Blotter(startCell, out var reason) ? UserText.Message("copy.1aa1c191d8f61cbe") : reason; }
                 else if (Mode == DrawingMode.Paint)
-                { Message = run.Paint(cell, Color, out var reason) ? UserText.Message("copy.d28731380a0c6a83") : reason; }
-                else { drawing = true; stroke.Clear(); visited.Clear(); last = cell; Add(cell); }
+                { Message = run.Paint(startCell, Color, out var reason) ? UserText.Message("copy.d28731380a0c6a83") : reason; }
+                else gesture.Begin(startCell, Tool == StructureKind.Wall || Tool == StructureKind.Spikes);
             }
-            if (mouse.leftButton.isPressed && HasHover)
+            hasPressOrigin = false;
+            if (gesture.Active && HasHover && (mouse.leftButton.isPressed || mouse.leftButton.wasReleasedThisFrame))
             {
-                if (Mode == DrawingMode.Erase) Erase(cell);
-                if (drawing)
-                {
-                    if (Tool == StructureKind.Wall || Tool == StructureKind.Spikes) AddLine(last, cell);
-                    else { stroke.Clear(); visited.Clear(); Add(cell); }
-                    last = cell;
-                }
+                gesture.Move(cell);
+                if (Mode == DrawingMode.Erase)
+                    while (erasedCells < gesture.Cells.Count) Erase(gesture.Cells[erasedCells++]);
             }
-            if (drawing && mouse.leftButton.wasReleasedThisFrame)
+            if (gesture.Active && mouse.leftButton.wasReleasedThisFrame)
             {
-                if (HasHover)
+                if (HasHover && Mode == DrawingMode.Build)
                 {
                     string reason;
-                    bool success = BlueprintSlot >= 0 ? run.BuildBlueprint(stroke, BlueprintSlot, Tier, Color, out reason) : run.Build(stroke, Tool, Tier, out reason);
+                    bool success = BlueprintSlot >= 0 ? run.BuildBlueprint(gesture.Cells, BlueprintSlot, Tier, Color, out reason) : run.Build(gesture.Cells, Tool, Tier, out reason);
                     Message = success ? (run.Paused ? UserText.Message("copy.5550d1f4c6ac852a") : UserText.Message("copy.6d7492b5fc3888c5")) : reason;
                 }
                 Cancel();
             }
+            if (!mouse.leftButton.isPressed && !mouse.leftButton.wasReleasedThisFrame) Cancel();
             if (!HasHover || Mode != DrawingMode.Build) { view.ClearPreview(); PreviewCost = 0; PreviewReason = ""; return; }
             hoverPreview[0] = cell;
-            IReadOnlyList<Cell> cells = drawing ? (IReadOnlyList<Cell>)stroke : hoverPreview;
-            var quote = BlueprintSlot >= 0 ? run.QuoteBlueprint(cells, BlueprintSlot, Tier, Color) : run.Session.QuoteBuild(cells, Tool, Tier);
+            IReadOnlyList<Cell> cells = gesture.Active ? gesture.Cells : hoverPreview;
+            var quote = BlueprintSlot >= 0 ? run.QuoteBlueprint(cells, BlueprintSlot, Tier, Color) : run.QuoteBuild(cells, Tool, Tier);
             PreviewCost = quote.Cost;
             PreviewReason = quote.Valid ? "" : quote.Reason;
-            float range = BlueprintSlot >= 0 ? run.PreviewBlueprint(run.Workshop.Loadout[BlueprintSlot], Tier).Range : -1;
-            view.SetPreview(quote.Cells, Tool, Tier, quote.Valid, range, blueprint: BlueprintSlot >= 0 ? run.Workshop.Loadout[BlueprintSlot] : null);
+            var blueprint = BlueprintSlot >= 0 && BlueprintSlot < run.BuildLoadout.Count ? run.BuildLoadout[BlueprintSlot] : null;
+            float range = blueprint != null ? run.PreviewBlueprint(blueprint, Tier).Range : -1;
+            view.SetPreview(quote.Cells, Tool, Tier, quote.Valid, range, blueprint: blueprint);
         }
 
         void Navigate(Mouse mouse,Vector2 screen)
@@ -183,21 +232,7 @@ namespace PaperDefense.Presentation
 
         void Erase(Cell cell)
         { if (run.Erase(cell, out int refund)) Message = UserText.Message("copy.5520b3d1e73f8b1d", refund); }
-        void Add(Cell cell) { if (visited.Add(cell)) stroke.Add(cell); }
-        void AddLine(Cell a, Cell b)
-        {
-            int x = a.X, y = a.Y, dx = Math.Abs(b.X - x), sx = x < b.X ? 1 : -1;
-            int dy = -Math.Abs(b.Y - y), sy = y < b.Y ? 1 : -1, err = dx + dy;
-            while (true)
-            {
-                Add(new Cell(x, y));
-                if (x == b.X && y == b.Y) break;
-                int e2 = err * 2;
-                if (e2 >= dy) { err += dy; x += sx; }
-                if (e2 <= dx) { err += dx; y += sy; }
-            }
-        }
-        public void Cancel() { drawing = false; stroke.Clear(); visited.Clear(); PreviewCost = 0; PreviewReason = ""; if (view != null) view.ClearPreview(); }
+        public void Cancel() { gesture.Cancel(); erasedCells = 0; hasPressOrigin = false; PreviewCost = 0; PreviewReason = ""; if (view != null) view.ClearPreview(); }
         public void Focus(Cell cell)
         {
             Cancel(); Zoom = Mathf.Max(1.5f, Zoom);

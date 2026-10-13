@@ -20,12 +20,11 @@ namespace PaperDefense.Application
         public event Action WorkshopChanged;
         WorkshopProfile profile;
         IReadOnlyList<TowerBlueprint> runLoadout;
+        public IReadOnlyList<TowerBlueprint> BuildLoadout =>
+            (InWorkshop ? Workshop?.Loadout : runLoadout) ?? Array.Empty<TowerBlueprint>();
         bool workshopMode;
         bool legacyFixtureDefaults;
-        IWorkshopProfileStore profileStore;
-        bool profileCanWrite, profileDirty;
-        ProfileSaveState profileSaveState = ProfileSaveState.MemoryOnly;
-        string profileSaveMessage = UserText.Message("copy.0780dfa419e08bc0"), lastWriteError = "";
+        readonly ProfileSaveCoordinator persistence = new ProfileSaveCoordinator();
         int depositedGold;
         public event Action<IRunReadModel> SessionChanged;
         public event Action<SimulationEvent> SimulationEventReceived;
@@ -40,7 +39,7 @@ namespace PaperDefense.Application
             var preparedSession = new GameSession(CreateConfiguredBalance(false, allowLegacyFixtureDefaults));
             var preparedProfile = new WorkshopProfile(preparedSession.Balance.Content, preparedSession.Balance);
             legacyFixtureDefaults = allowLegacyFixtureDefaults;
-            ResetPersistence();workshopMode=false;InWorkshop=false;
+            persistence.Reset();workshopMode=false;InWorkshop=false;
             profile=preparedProfile;Workshop=new WorkshopReadModel(profile);runLoadout=profile.GetLoadoutBlueprints();
             Initialize(preparedSession);
         }
@@ -55,7 +54,7 @@ namespace PaperDefense.Application
             var preparedSession = new GameSession(CreateConfiguredBalance(true, allowLegacyFixtureDefaults), starterDefenses:false);
             var preparedProfile = new WorkshopProfile(preparedSession.Balance.Content, preparedSession.Balance);
             legacyFixtureDefaults = allowLegacyFixtureDefaults;
-            ResetPersistence();workshopMode=true;
+            persistence.Reset();workshopMode=true;
             profile=preparedProfile;Workshop=new WorkshopReadModel(profile);
             runLoadout=profile.GetLoadoutBlueprints();
             Initialize(preparedSession);
@@ -70,13 +69,7 @@ namespace PaperDefense.Application
             var freshProfile = new WorkshopProfile(preparedSession.Balance.Content, preparedSession.Balance);
             var loaded = store.Load();
             legacyFixtureDefaults = allowLegacyFixtureDefaults;
-            profileStore=store;workshopMode=true;
-            profileCanWrite=loaded.CanWrite&&loaded.Source!=ProfileLoadSource.RecoveryRequired;
-            profileDirty=profileCanWrite&&(loaded.Source==ProfileLoadSource.NewProfile||loaded.Source==ProfileLoadSource.Backup);
-            lastWriteError="";
-            profileSaveState=!profileCanWrite?ProfileSaveState.RecoveryRequired:profileDirty?ProfileSaveState.Unsaved:ProfileSaveState.Saved;
-            profileSaveMessage=loaded.Message;
-            if(string.IsNullOrEmpty(profileSaveMessage))profileSaveMessage=profileDirty?UserText.Message("copy.251cfddd45554f35"):UserText.Message("copy.131e1e34691edbf8");
+            persistence.Attach(store, loaded);workshopMode=true;
             profile=loaded.Source==ProfileLoadSource.NewProfile ? freshProfile : loaded.Profile??freshProfile;
             Workshop=new WorkshopReadModel(profile);RefreshSaveInfo();
             runLoadout=profile.GetLoadoutBlueprints();
@@ -86,56 +79,13 @@ namespace PaperDefense.Application
 
         public bool RetrySave(out string reason)
         {
-            if(profileStore==null){reason=UserText.Message("copy.694da7c7454199ef");return false;}
-            if(!profileCanWrite){reason=profileSaveMessage;return false;}
-            bool result=WriteProfile(profile,false,out reason);
+            bool result=persistence.Retry(profile,out reason);
             RefreshSaveInfo();
             if(result)WorkshopChanged?.Invoke();
             return result;
         }
 
-        void ResetPersistence()
-        {
-            profileStore=null;profileCanWrite=false;profileDirty=false;lastWriteError="";
-            profileSaveState=ProfileSaveState.MemoryOnly;profileSaveMessage=UserText.Message("copy.0780dfa419e08bc0");
-        }
-
-        void RefreshSaveInfo()
-        {
-            if(Workshop==null)return;
-            Workshop.SaveState=profileSaveState;Workshop.SaveMessage=profileSaveMessage;
-            Workshop.HasUnsavedChanges=profileDirty;Workshop.LastWriteError=lastWriteError;
-        }
-
-        // A failed manual candidate never becomes the current profile. Earned gold is already current.
-        bool WriteProfile(WorkshopProfile candidate,bool manual,out string reason)
-        {
-            if(!profileCanWrite){reason=profileSaveMessage;return false;}
-            var result=profileStore.Save(candidate);
-            if(!result.Success)
-            {
-                lastWriteError=string.IsNullOrEmpty(result.Message)?UserText.Message("copy.9ceb493e00375e13"):result.Message;
-                // Load only re-reads source safety; never publish its fallback over earned memory data.
-                // The file store keeps protection sticky, including a future version discovered during Save.
-                var source=profileStore.Load();
-                if(!source.CanWrite||source.Source==ProfileLoadSource.RecoveryRequired)
-                {
-                    profileCanWrite=false;profileSaveState=ProfileSaveState.RecoveryRequired;
-                    profileSaveMessage=(manual?UserText.Message("copy.cd9a90bc886e9cfd"):"")+
-                        (string.IsNullOrEmpty(source.Message)?UserText.Message("copy.17e344fd85f0edd1"):source.Message);
-                    if(profileDirty)profileSaveMessage+=UserText.Message("copy.5686d674034d00da");
-                    reason=profileSaveMessage;RefreshSaveInfo();return false;
-                }
-                profileSaveState=ProfileSaveState.WriteFailed;
-                profileSaveMessage=manual?UserText.Message("copy.0563e105e83c1577", lastWriteError):
-                    UserText.Message("copy.f668b11e1c640cb6", lastWriteError, (profileDirty?UserText.Message("copy.f50f494fcc3d45a0"):""));
-                reason=profileSaveMessage;RefreshSaveInfo();return false;
-            }
-            bool rejectedManual=!profileDirty&&!string.IsNullOrEmpty(lastWriteError);
-            profileDirty=false;lastWriteError="";profileSaveState=ProfileSaveState.Saved;
-            profileSaveMessage=UserText.Message("copy.3d5411a4bb91f858", (!manual&&rejectedManual?UserText.Message("copy.627cced3972bf99b"):""));
-            reason=profileSaveMessage;return true;
-        }
+        void RefreshSaveInfo() => persistence.CopyStatusTo(Workshop);
 
         GameBalance CreateWorkshopBalance() => CreateConfiguredBalance(true, legacyFixtureDefaults);
 
@@ -155,11 +105,7 @@ namespace PaperDefense.Application
             contentSnapshot = session.Balance.ResolveContent();
             InWorkshop=false;
             if(profile==null){profile=new WorkshopProfile();Workshop=new WorkshopReadModel(profile);runLoadout=profile.GetLoadoutBlueprints();}
-            if (profile.ConfigureContent(contentSnapshot) && profileStore != null && profileCanWrite)
-            {
-                profileDirty = true; profileSaveState = ProfileSaveState.Unsaved;
-                profileSaveMessage = UserText.Message("copy.f122ad5b22da3b62");
-            }
+            if (profile.ConfigureContent(contentSnapshot)) persistence.ContentChanged();
             depositedGold=0;
             Session = new RunReadModel(session);
             Workshop.Refresh(session.Balance);
@@ -224,11 +170,22 @@ namespace PaperDefense.Application
         public void Restart() {if(workshopMode)OpenWorkshop();else Initialize(legacyFixtureDefaults);}
         public bool Build(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier, out string reason)
         {
-            if(InWorkshop){reason=UserText.Message("copy.e6a1f147d46938e5");return false;}
-            if(workshopMode&&kind!=StructureKind.Wall&&kind!=StructureKind.Spikes)
-            {reason=UserText.Message("copy.65fd0a869c823b56");return false;}
+            if (!CanBuildTool(kind, out reason)) return false;
             return session.TryBuild(cells,kind,tier,out reason);
         }
+        public BuildQuote QuoteBuild(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier)
+            => CanBuildTool(kind, out var reason) ? session.QuoteBuild(cells, kind, tier) : RejectedQuote(reason);
+
+        bool CanBuildTool(StructureKind kind, out string reason)
+        {
+            reason = "";
+            if (session == null || InWorkshop) { reason = UserText.Message("copy.e6a1f147d46938e5"); return false; }
+            if (workshopMode && kind != StructureKind.Wall && kind != StructureKind.Spikes)
+            { reason = UserText.Message("copy.65fd0a869c823b56"); return false; }
+            return true;
+        }
+
+        static BuildQuote RejectedQuote(string reason) => new BuildQuote { Cells = Array.Empty<Cell>(), Reason = reason };
         public bool Erase(Cell cell, out int refund) {refund=0;return !InWorkshop&&session.TryErase(cell,out refund);}
         public bool Upgrade(Cell cell, out string reason) {reason=UserText.Message("copy.e6a1f147d46938e5");return !InWorkshop&&session.TryUpgrade(cell,out reason);}
         public bool SetPriority(Cell cell, TargetPriority priority) => !InWorkshop&&session.SetPriority(cell, priority);
@@ -239,33 +196,26 @@ namespace PaperDefense.Application
         {
             candidate=null;
             if(!Editing(out reason))return false;
-            if(profileStore!=null&&!profileCanWrite){reason=profileSaveMessage;return false;}
+            if(!persistence.CanEdit(out reason))return false;
             candidate=profile.CreateWorkingCopy();return true;
         }
         bool CommitCandidate(WorkshopProfile candidate,out string reason)
         {
             reason="";
-            if(profileStore!=null&&!WriteProfile(candidate,true,out reason))return false;
+            if(!persistence.SaveCandidate(candidate,out reason)){RefreshSaveInfo();return false;}
             profile=candidate;Workshop=new WorkshopReadModel(profile,session.Balance);RefreshSaveInfo();
             WorkshopChanged?.Invoke();return true;
         }
         void OnApplicationQuit()
         {
-            if(profileStore==null||!profileCanWrite||!profileDirty||profile==null)return;
-            WriteProfile(profile,false,out _);RefreshSaveInfo();
+            persistence.Flush(profile);RefreshSaveInfo();
         }
         void DepositGold()
         {
             int reward=session.GoldEarned-depositedGold;if(reward<=0)return;
             // Advance this cursor before IO so retry/transition cannot replay the award.
             profile.GrantGold(reward);depositedGold=session.GoldEarned;
-            if(profileStore!=null)
-            {
-                profileDirty=true;
-                if(profileCanWrite)
-                {profileSaveState=ProfileSaveState.Unsaved;WriteProfile(profile,false,out _);}
-                else profileSaveState=ProfileSaveState.RecoveryRequired;
-            }
+            persistence.SaveEarnedReward(profile);
             RefreshSaveInfo();WorkshopChanged?.Invoke();
         }
         public bool SaveBlueprint(TowerBlueprint blueprint,out string reason)
@@ -322,12 +272,13 @@ namespace PaperDefense.Application
             =>new TowerPreview(blueprint,session.Balance,material,session.Mechanics);
         public BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,int slot,MaterialTier material,InkColor color)
         {
+            if (session == null || InWorkshop) return RejectedQuote(UserText.Message("copy.e6a1f147d46938e5"));
             if(slot<0||slot>=runLoadout.Count)return new BuildQuote{Cells=Array.Empty<Cell>(),Reason=UserText.Message("copy.48635af5e97f1a11")};
             return session.QuoteBlueprint(cells,runLoadout[slot],material,color);
         }
         public bool BuildBlueprint(IReadOnlyList<Cell> cells,int slot,MaterialTier material,InkColor color,out string reason)
         {
-            reason=UserText.Message("copy.e6a1f147d46938e5");if(InWorkshop)return false;
+            reason=UserText.Message("copy.e6a1f147d46938e5");if(session == null || InWorkshop)return false;
             if(slot<0||slot>=runLoadout.Count){reason=UserText.Message("copy.48635af5e97f1a11");return false;}
             return session.TryBuildBlueprint(cells,runLoadout[slot],material,color,out reason);
         }

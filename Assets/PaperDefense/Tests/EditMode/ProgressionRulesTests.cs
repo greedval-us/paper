@@ -42,6 +42,22 @@ namespace PaperDefense.Tests
             return session.StructureAt(cell);
         }
 
+        [Test] public void UpgradeChoicePreservesTheWholePreparationCountdown()
+        {
+            var balance = RulesBalance();
+            balance.IntermissionSeconds = 2;
+            var session = new GameSession(balance, starterDefenses: false);
+            ReachUpgrade(session);
+            session.Tick(5);
+            Assert.That(session.Countdown, Is.EqualTo(2), "Reading upgrade choices must not consume preparation time.");
+            session.ChooseUpgrade(RunUpgrade.RapidFire);
+            session.Tick(.5f);
+            Assert.That(session.WaveIndex, Is.EqualTo(2));
+            Assert.That(session.Countdown, Is.EqualTo(1.5f).Within(.001f));
+            session.Tick(1.6f);
+            Assert.That(session.WaveIndex, Is.EqualTo(3));
+        }
+
         static EnemyState AddTarget(GameSession session, StructureState tower)
         {
             var enemy = new EnemyState

@@ -175,7 +175,7 @@ namespace PaperDefense.Presentation
         {
             if (run == null || run.Session == null) return;
             var mechanics = run.Session.Balance.Mechanics;
-            var loadout = run.Workshop.Loadout;
+            var loadout = run.BuildLoadout;
             tools[BlotterToolIndex].gameObject.SetActive(mechanics.CorpseBlots);
             tools[PaintToolIndex].gameObject.SetActive(mechanics.ColorCartridges);
             blotterPrice.text = Resolve(UserText.Message("copy.ff7fd18d051ba682", run.Session.Balance.BlotterCost, run.Session.Balance.BlotterRadius));
