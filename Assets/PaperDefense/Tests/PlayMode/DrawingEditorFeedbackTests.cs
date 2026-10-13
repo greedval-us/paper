@@ -67,7 +67,7 @@ namespace PaperDefense.Tests
         {
             Assert.That(rejection, Is.Not.Null.And.Not.Empty, "The real pointer stroke must be rejected.");
             Assert.That(HasText(rejection), Is.True, "A refresh must preserve the rejected-stroke explanation.");
-            Assert.That(HasText("Качество "), Is.True, "Quality feedback remains available beside the error.");
+            Assert.That(HasText("Качество "), Is.False, "Freeform editing must not grade tracing accuracy.");
         }
 
         [Test] public void RejectedStrokeSurvivesRefreshControlsAndNoOpEdits()
@@ -98,7 +98,7 @@ namespace PaperDefense.Tests
             Stroke(DrawingPartKey.Base);
             Assert.That(editor.Session.Snapshot.StrokeCount, Is.EqualTo(1));
             Assert.That(HasText(rejection), Is.False);
-            Assert.That(HasText("Качество "), Is.True);
+            Assert.That(HasText("Качество "), Is.False);
         }
 
         [Test] public void SuccessfulUndoClearsEarlierRejection()
@@ -154,7 +154,49 @@ namespace PaperDefense.Tests
             AssertRejected();
             Open(0);
             Assert.That(HasText(rejection), Is.False);
-            Assert.That(HasText("Качество "), Is.True);
+            Assert.That(HasText("Качество "), Is.False);
+        }
+        [Test] public void OpeningLegacyDrawingConvertsOnlyThePrivateEditSession()
+        {
+            var legacy = TowerBlueprint.NewDraft("legacy", "Legacy", ChassisKind.Standard, StructureKind.Gun);
+            editor.Open(legacy);
+            Assert.That(editor.Session.Blueprint.IsFreeform, Is.True);
+            Assert.That(legacy.IsFreeform, Is.False);
+            Assert.That(editor.Session.Snapshot.GeometryHash, Is.EqualTo(legacy.Drawing.GeometryHash));
+            Assert.That(root.GetComponentsInChildren<Button>(true).Single(b => b.name == "Apply drawing").interactable, Is.False);
+        }
+
+        [Test] public void IncompleteDrawingCannotBeAppliedEvenByDirectCloseCommand()
+        {
+            Open(0);
+            editor.Close(true);
+            Assert.That(editor.IsOpen, Is.True);
+            Assert.That(HasText(editor.Session.Blueprint.FreeformDesign.Message), Is.True);
+        }
+
+        [Test] public void CanvasStartsWithAnchorAndForwardCueWithoutTemplateContours()
+        {
+            Open(0);
+            editor.Canvas.SelectedBinding = DrawingBindings.Mount0;
+            editor.Canvas.ShowGrid = false;
+            Canvas.ForceUpdateCanvases();
+            using (var vertices = new VertexHelper())
+            {
+                typeof(DrawingCanvasGraphic).GetMethod("OnPopulateMesh", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic, null, new[] { typeof(VertexHelper) }, null)
+                    .Invoke(editor.Canvas, new object[] { vertices });
+                Assert.That(vertices.currentVertCount, Is.EqualTo(36), "The workbench adds a four-line page boundary to the anchor and forward arrow, without template contours.");
+            }
+        }
+        [Test] public void DefaultCanvasContainsEntireAllowedDrawingAreaAndKeepsFeedbackSeparate()
+        {
+            Open(0);
+            var canvasRect = editor.Canvas.GetComponent<RectTransform>();
+            foreach (var point in new[] { new Vector2(-1, -1), new Vector2(1, 1) })
+                Assert.That(RectTransformUtility.RectangleContainsScreenPoint(canvasRect, editor.Canvas.LocalPointToScreen(point)), Is.True);
+            var rejection = root.GetComponentsInChildren<Text>(true).Single(t => t.name == "Drawing rejection").rectTransform;
+            var liveStats = root.GetComponentsInChildren<Text>(true).Single(t => t.name == "Drawing live stats").rectTransform;
+            Assert.That(rejection.anchoredPosition.x + rejection.rect.width, Is.LessThan(liveStats.anchoredPosition.x));
+            Assert.That(liveStats.rect.height, Is.GreaterThanOrEqualTo(70), "Whole-tower stats have a separate block from selected-mount stats.");
         }
     }
 }

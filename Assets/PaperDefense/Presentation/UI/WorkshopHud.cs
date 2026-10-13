@@ -19,12 +19,12 @@ namespace PaperDefense.Presentation
         const int AlbumRowsPerPage = 8;
         RunController run;
         Font font;
-        GameObject canvasObject, trialPanel, trialShade, qualityPanel, qualityShade;
+        GameObject canvasObject, trialPanel, trialShade;
         RectTransform root;
         Text gold, stats, status, briefing, trialResults, trialSettings, trialFirst, trialSecond, trialPlayback, trialConditions;
         Text profileSaveStatus;
         Button retryProfileSave;
-        Text qualityExplanation, trialFirstHeader, trialSecondHeader, qualityModeLabel, armorSlotsLabel, upgradeSlotsLabel;
+        Text trialFirstHeader, trialSecondHeader, armorSlotsLabel, upgradeSlotsLabel;
         InputField title;
         BlueprintSketch sketch;
         readonly BlueprintSketch[] albumSketches = new BlueprintSketch[AlbumRowsPerPage];
@@ -33,7 +33,6 @@ namespace PaperDefense.Presentation
         WorkshopMapSketch map;
         readonly Button[] footprintButtons = new Button[3];
         readonly Button[] trialScenarioButtons = new Button[4];
-        Button qualityModeButton;
         TrialLaneSketch trialDiagramFirst, trialDiagramSecond;
         readonly Button[] albumButtons = new Button[AlbumRowsPerPage];
         readonly Text[] albumLabels = new Text[AlbumRowsPerPage], slotLabels = new Text[ProfileLimits.LoadoutSlotCount];
@@ -44,7 +43,7 @@ namespace PaperDefense.Presentation
         string[] weaponIds, moduleIds, chassisIds;
         int albumPage, trialBudget = 400;
         float refresh;
-        bool counterfire, qualityTrial;
+        bool counterfire;
         TrialScenario trialScenario;
         public TowerBlueprint Draft { get; private set; }
         TowerBlueprint initialDraft;
@@ -92,12 +91,13 @@ namespace PaperDefense.Presentation
                 case WorkshopHudMode.Assembly: BuildAssembly(); break;
                 case WorkshopHudMode.Drawing: BuildDrawing(); break;
                 case WorkshopHudMode.Profile: BuildProfile(); break;
-                default: BuildComposer(); BuildAlbum(); BuildLoadout(); BuildTrial(); BuildQualityDetails(); break;
+                default: BuildComposer(); BuildAlbum(); BuildLoadout(); BuildTrial(); break;
             }
             if (Mode == WorkshopHudMode.Full || Mode == WorkshopHudMode.Drawing)
             {
                 MortarFootprintEditor = new MortarFootprintPanel(root, font, value => { Draft = value; Refresh(); }, run.CompareMortarFootprints, value => run.PreviewBlueprint(value).Reason, TextResolver);
-                DrawingEditor = new DrawingEditorPanel(root, font, drawing => { MortarFootprintEditor.Close(); Draft = Draft.WithDrawing(drawing); SetStatus(UserText.Message(Mode == WorkshopHudMode.Drawing ? "workshop.drawing_hint" : "copy.65c92ef5c0dfe24a")); }, TextResolver);
+                DrawingEditor = new DrawingEditorPanel(root, font, drawing => { MortarFootprintEditor.Close(); Draft = Draft.WithFreeformDrawing(drawing); SetStatus(UserText.Message(Mode == WorkshopHudMode.Drawing ? "workshop.drawing_hint" : "copy.65c92ef5c0dfe24a")); }, TextResolver,
+                    context: new DrawingEditorContext { Preview = candidate => run.PreviewBlueprint(candidate), Workshop = () => run.Workshop, Purchase = run.UnlockDrawingAid });
             }
             if (title != null) title.SetTextWithoutNotify(Resolve(Draft.Name));
             run.WorkshopChanged += Refresh;
@@ -115,7 +115,7 @@ namespace PaperDefense.Presentation
         }
 
         TowerBlueprint NewDrawing() => new TowerBlueprint("drawing-" + Guid.NewGuid().ToString("N"), Resolve(UserText.Message("copy.74a4cbe8134d0a38")), chassisIds[0], weaponIds[0],
-            origin: DrawingOrigin.PlayerDrawing, content: run.Content);
+            origin: DrawingOrigin.Freeform, content: run.Content);
         void NewDraft() { MortarFootprintEditor?.Close(); Draft = NewDrawing(); if (title != null) title.SetTextWithoutNotify(Resolve(Draft.Name)); SetStatus(UserText.Message("copy.a2f3120b30cce36d")); }
         void ResetDraft() { MortarFootprintEditor?.Close(); Draft = initialDraft; if (title != null) title.SetTextWithoutNotify(Resolve(Draft.Name)); SetStatus(UserText.Message("workshop.reset_done")); }
         void SetDraft(string chassis, string first, string second, IEnumerable<ModuleSelection> modules, string selectedPart = null)
@@ -258,11 +258,10 @@ namespace PaperDefense.Presentation
                 footprintButtons[mount] = Button(controls, "Mortar footprint " + mount, new Rect(30 + mount * 240, 239, 231, 67),
                     UserText.Message("copy.b6caeb9a0b784643"), () => MortarFootprintEditor.Open(Draft, selected));
             }
-            Button(controls, "Drawing quality details", new Rect(30, 337, 711, 61), UserText.Message("copy.43f9d3e836476314"), ShowQualityDetails);
-            Button(controls, "Compare drawing quality", new Rect(30, 428, 711, 67), UserText.Message("workshop.compare_quality"), () => CompareDrawingQuality());
+            Button(controls, "Open trial", new Rect(30, 428, 711, 67), UserText.Message("copy.65e901944fe5438f"), () => RunDrawingTrial());
             Label(controls, UserText.Message("workshop.comparison_hint"), new Rect(30, 529, 711, 160), 23, NotebookPalette.Navy);
-            qualityTrial = true;
-            BuildDrawingComparison(); BuildQualityDetails();
+            BuildDrawingComparison();
+
         }
         void BuildDrawingComparison()
         {
@@ -270,18 +269,18 @@ namespace PaperDefense.Presentation
             trialShade.GetComponent<Image>().raycastTarget = true;
             trialPanel = Panel(root, "Test sheet", new Rect(180, 100, 1240, 800), NotebookPalette.Paper).gameObject;
             trialPanel.GetComponent<Image>().raycastTarget = true;
-            Label(trialPanel.transform, UserText.Message("workshop.comparison_title"), new Rect(28, 20, 1184, 46), 30, NotebookPalette.Blue, true);
+            Label(trialPanel.transform, UserText.Message("freeform.trial_title"), new Rect(28, 20, 1184, 46), 30, NotebookPalette.Blue, true);
             trialConditions = Label(trialPanel.transform, UserText.Message("workshop.comparison_hint"), new Rect(30, 81, 1180, 70), 21, NotebookPalette.Navy);
             trialSettings = Label(trialPanel.transform, "", new Rect(30, 156, 1180, 45), 20, NotebookPalette.Navy);
             trialPlayback = Label(trialPanel.transform, "", new Rect(30, 205, 1180, 30), 18, NotebookPalette.Blue);
             trialDiagramFirst = LaneDiagram(trialPanel.transform, "Blueprint test lane", new Rect(30, 250, 570, 230));
-            trialDiagramSecond = LaneDiagram(trialPanel.transform, "Reference test lane", new Rect(640, 250, 570, 230));
+            trialDiagramSecond = LaneDiagram(trialPanel.transform, "Budget test lane", new Rect(640, 250, 570, 230));
             trialFirstHeader = Label(trialPanel.transform, "", new Rect(403, 497, 350, 35), 19, NotebookPalette.Blue, true, TextAnchor.MiddleCenter);
             trialSecondHeader = Label(trialPanel.transform, "", new Rect(790, 497, 420, 35), 19, NotebookPalette.Blue, true, TextAnchor.MiddleCenter);
             trialResults = Label(trialPanel.transform, UserText.Message("copy.8f02821e075dc0d1"), new Rect(30, 541, 354, 166), 15, NotebookPalette.Navy);
             trialFirst = Label(trialPanel.transform, "", new Rect(403, 541, 350, 166), 16, NotebookPalette.Navy, false, TextAnchor.UpperCenter);
             trialSecond = Label(trialPanel.transform, "", new Rect(790, 541, 420, 166), 16, NotebookPalette.Navy, false, TextAnchor.UpperCenter);
-            Button(trialPanel.transform, "Run trial", new Rect(30, 724, 570, 55), UserText.Message("workshop.compare_quality"), () => CompareDrawingQuality());
+            Button(trialPanel.transform, "Run trial", new Rect(30, 724, 570, 55), UserText.Message("copy.65e901944fe5438f"), () => RunDrawingTrial());
             Button(trialPanel.transform, "Close trial", new Rect(640, 724, 570, 55), UserText.Message("copy.071e234de8bba5a1"), () => SetTrial(false));
             SetTrial(false);
         }
@@ -392,7 +391,6 @@ namespace PaperDefense.Presentation
             for (int mount = 0; mount < 3; mount++)
             { int selected = mount; footprintButtons[mount] = Button(center, "Mortar footprint " + mount, new Rect(22 + mount * 146, 301, 140, 53), UserText.Message("copy.b6caeb9a0b784643"), () => MortarFootprintEditor.Open(Draft, selected)); }
             stats = Label(center, "", new Rect(22, 365, 432, 121), 17, NotebookPalette.Navy);
-            Button(center, "Drawing quality details", new Rect(22, 487, 432, 30), UserText.Message("copy.43f9d3e836476314"), ShowQualityDetails);
             Button(center, "Open trial", new Rect(22, 523, 432, 39), UserText.Message("copy.65e901944fe5438f"), () => { SetTrial(true); RefreshTrialSettings(); });
         }
 
@@ -457,11 +455,10 @@ namespace PaperDefense.Presentation
             var budgetList = new CatalogScrollList(trialPanel.transform, "Trial budgets", new Rect(30, 209, 560, 42), budgets.Count, 3, 42, 5);
             for (int i = 0; i < budgets.Count; i++)
             { int budget = budgets[i]; Button(budgetList.Content, "Trial budget " + budget, new Rect(i % 3 * 188, i / 3 * 47, 175, 42), UserText.Message("copy.386e5ceae5aa3494", budget), () => { trialBudget = budget; RefreshTrialSettings(); }); }
-            qualityModeButton = Button(trialPanel.transform, "Trial quality mode", new Rect(602, 209, 486, 42), "", () => { qualityTrial = !qualityTrial; RefreshTrialSettings(); }, out qualityModeLabel);
             trialSettings = Label(trialPanel.transform, "", new Rect(30, 270, 1058, 50), 21, NotebookPalette.Navy, true);
             trialPlayback = Label(trialPanel.transform, UserText.Message("copy.3f04ed6c12dba0c3"), new Rect(30, 314, 1058, 27), 17, NotebookPalette.Blue);
             trialDiagramFirst = LaneDiagram(trialPanel.transform, "Blueprint test lane", new Rect(30, 347, 505, 153));
-            trialDiagramSecond = LaneDiagram(trialPanel.transform, "Reference test lane", new Rect(582, 347, 505, 153));
+            trialDiagramSecond = LaneDiagram(trialPanel.transform, "Budget test lane", new Rect(582, 347, 505, 153));
             trialFirstHeader = Label(trialPanel.transform, UserText.Message("copy.d5f1a2a73fcf51d5"), new Rect(403, 517, 310, 29), 18, NotebookPalette.Blue, true, TextAnchor.MiddleCenter);
             trialSecondHeader = Label(trialPanel.transform, UserText.Message("copy.0d0e3e111b1f0f24"), new Rect(740, 517, 348, 29), 18, NotebookPalette.Blue, true, TextAnchor.MiddleCenter);
             trialResults = Label(trialPanel.transform, UserText.Message("copy.8f02821e075dc0d1"), new Rect(30, 552, 354, 166), 15, NotebookPalette.Navy);
@@ -471,34 +468,6 @@ namespace PaperDefense.Presentation
             Button(trialPanel.transform, "Close trial", new Rect(557, 724, 531, 55), UserText.Message("copy.071e234de8bba5a1"), () => SetTrial(false));
             SetTrial(false);
         }
-        void BuildQualityDetails()
-        {
-            qualityShade = Panel(root, "Drawing quality shade", new Rect(0, 0, 1600, 1000), new Color(.12f, .18f, .28f, .4f)).gameObject;
-            qualityShade.GetComponent<Image>().raycastTarget = true;
-            qualityPanel = Panel(root, "Drawing quality details panel", new Rect(330, 140, 940, 720), NotebookPalette.Paper).gameObject;
-            qualityPanel.GetComponent<Image>().raycastTarget = true;
-            Label(qualityPanel.transform, UserText.Message("copy.9981e518516b62e5"), new Rect(28, 20, 884, 48), 30, NotebookPalette.Blue, true);
-            qualityExplanation = Label(qualityPanel.transform, "", new Rect(28, 86, 884, 535), 21, NotebookPalette.Navy);
-            qualityExplanation.name = "Drawing quality explanation";
-            Button(qualityPanel.transform, "Close quality details", new Rect(28, 644, 884, 48), UserText.Message("copy.071e234de8bba5a1"), () => { qualityPanel.SetActive(false); qualityShade.SetActive(false); });
-            qualityPanel.SetActive(false); qualityShade.SetActive(false);
-        }
-        void ShowQualityDetails()
-        {
-            var assessment = Draft.Assessment;
-            var preview = run.PreviewBlueprint(Draft);
-            string text = UserText.Message("copy.c524c57d052a0a88", assessment.Quality, (preview.QualityMultiplier * 100));
-            text += UserText.Message("copy.ba96f2ca52eddb03");
-            if (Draft.Origin == DrawingOrigin.LegacyStandard) text += UserText.Message("copy.d1ae9c8debd10e79");
-            foreach (var part in assessment.PartFeedback)
-                text += UserText.Message("workshop.part_quality", DrawingEditorPanel.Name(Draft, part.BindingId, TextResolver), part.Quality, part.Message);
-            if (assessment.IsArchived) text += UserText.Message("copy.5e68da129f7caadb");
-            text += run.Session.Balance.Mechanics.DrawingQuality
-                ? UserText.Message("copy.da823b72ab4cef52")
-                : UserText.Message("copy.daa49761a0e89302");
-            qualityExplanation.text = Resolve(text); qualityShade.SetActive(true); qualityPanel.SetActive(true);
-        }
-
         void SaveDraft()
         {
             MortarFootprintEditor?.Close();
@@ -580,7 +549,7 @@ namespace PaperDefense.Presentation
             var preview = run.PreviewBlueprint(Draft, MaterialTier.Pencil);
             int deficit = Mathf.Max(0, preview.Load - preview.Capacity);
             stats.text = Resolve(UserText.Message("copy.154e011c15594a63", preview.Load, preview.Capacity, deficit > 0 ? UserText.Message("copy.b60d6857f04f0a4f", deficit) : "",
-                preview.Cost, preview.Health, preview.Defense * 100, preview.BuildSeconds, preview.Range, preview.FireRate, preview.FeedMultiplier * 100, preview.DrawingQuality, preview.QualityMultiplier * 100,
+                preview.Cost, preview.Health, preview.Defense * 100, preview.BuildSeconds, preview.Range, preview.FireRate, preview.FeedMultiplier * 100,
                 balance.Mechanics.ColorCartridges ? UserText.Message("copy.8e013f7d4704e587", preview.ColorCost, balance.LimitTowerColor ? UserText.Message("copy.79f1620b4fb8d375", balance.ColorTargetsPerWindow, balance.ColorWindowSeconds) : "") : "",
                 preview.Valid ? "" : "\n" + preview.Reason));
             stats.color = preview.Valid ? NotebookPalette.Navy : NotebookPalette.Red;
@@ -596,7 +565,7 @@ namespace PaperDefense.Presentation
                 if (index >= run.Workshop.Album.Count) continue;
                 var bp = run.Workshop.Album[index];
                 var preview = run.PreviewBlueprint(bp);
-                albumLabels[i].text = Resolve(UserText.Message("copy.2de8fa26b46862ac", bp.Name, bp.Origin == DrawingOrigin.LegacyStandard ? UserText.Message("copy.2123de7cfc728c2c") : UserText.Message("workshop.quality_score", bp.Assessment.Quality), preview.Cost, WeaponSummary(bp), "", preview.Health, preview.FireRate));
+                albumLabels[i].text = Resolve(UserText.Message("copy.2de8fa26b46862ac", bp.Name, bp.Origin == DrawingOrigin.LegacyStandard ? UserText.Message("copy.2123de7cfc728c2c") : UserText.Message("freeform.authored"), preview.Cost, WeaponSummary(bp), "", preview.Health, preview.FireRate));
                 albumSketches[i].SetBlueprint(bp);
                 Choice(albumButtons[i], bp.Id == Draft.Id);
             }
@@ -612,8 +581,7 @@ namespace PaperDefense.Presentation
             var mechanics = balance.Mechanics;
             trialScenarioButtons[(int)TrialScenario.Blots].gameObject.SetActive(mechanics.CorpseBlots);
             trialScenarioButtons[(int)TrialScenario.Armored].GetComponentInChildren<Text>().text = Resolve(mechanics.EnemyDrawingTiers ? Resolve(balance.Trials.For(TrialScenario.Armored).Name).ToUpperInvariant() : UserText.Message("copy.c8839f3bfabe7fc2"));
-            qualityModeButton.gameObject.SetActive(mechanics.DrawingQuality);
-            if ((!mechanics.CorpseBlots && trialScenario == TrialScenario.Blots) || (!mechanics.DrawingQuality && qualityTrial))
+            if (!mechanics.CorpseBlots && trialScenario == TrialScenario.Blots)
                 RefreshTrialSettings();
             for (int i = 0; i < chassisButtons.Length; i++)
             {
@@ -646,7 +614,7 @@ namespace PaperDefense.Presentation
             Choice(thirdWeapons[weaponIds.Length], Draft.GetWeaponId(2) == null);
             var preview = run.PreviewBlueprint(Draft, MaterialTier.Pencil);
             int deficit = Mathf.Max(0, preview.Load - preview.Capacity);
-            stats.text = Resolve(UserText.Message("copy.154e011c15594a63", preview.Load, preview.Capacity, (deficit > 0 ? UserText.Message("copy.b60d6857f04f0a4f", deficit) : ""), preview.Cost, preview.Health, (preview.Defense * 100), preview.BuildSeconds, preview.Range, preview.FireRate, (preview.FeedMultiplier * 100), preview.DrawingQuality, (preview.QualityMultiplier * 100), (mechanics.ColorCartridges ? UserText.Message("copy.8e013f7d4704e587", preview.ColorCost, (balance.LimitTowerColor ?
+            stats.text = Resolve(UserText.Message("copy.154e011c15594a63", preview.Load, preview.Capacity, (deficit > 0 ? UserText.Message("copy.b60d6857f04f0a4f", deficit) : ""), preview.Cost, preview.Health, (preview.Defense * 100), preview.BuildSeconds, preview.Range, preview.FireRate, (preview.FeedMultiplier * 100), (mechanics.ColorCartridges ? UserText.Message("copy.8e013f7d4704e587", preview.ColorCost, (balance.LimitTowerColor ?
                     UserText.Message("copy.79f1620b4fb8d375", balance.ColorTargetsPerWindow, balance.ColorWindowSeconds) : "")) : ""), (preview.Valid ? "" : "\n" + preview.Reason)));
             stats.color = preview.Valid ? NotebookPalette.Navy : NotebookPalette.Red;
             sketch.SetBlueprint(Draft);
@@ -661,7 +629,7 @@ namespace PaperDefense.Presentation
                 if (index >= run.Workshop.Album.Count) continue;
                 var bp = run.Workshop.Album[index];
                 var albumPreview = run.PreviewBlueprint(bp);
-                albumLabels[i].text = Resolve(UserText.Message("copy.2de8fa26b46862ac", bp.Name, (bp.Origin == DrawingOrigin.LegacyStandard ? UserText.Message("copy.2123de7cfc728c2c") : UserText.Message("workshop.quality_score", bp.Assessment.Quality)), albumPreview.Cost, WeaponSummary(bp), "", albumPreview.Health, albumPreview.FireRate));
+                albumLabels[i].text = Resolve(UserText.Message("copy.2de8fa26b46862ac", bp.Name, (bp.Origin == DrawingOrigin.LegacyStandard ? UserText.Message("copy.2123de7cfc728c2c") : UserText.Message("freeform.authored")), albumPreview.Cost, WeaponSummary(bp), "", albumPreview.Health, albumPreview.FireRate));
                 albumLabels[i].fontSize = 13;
                 albumSketches[i].SetBlueprint(bp);
                 albumButtons[i].GetComponent<Image>().color = bp.Id == Draft.Id ? new Color(.8f, .87f, .94f) : Color.white;
@@ -717,25 +685,23 @@ namespace PaperDefense.Presentation
             if (trialPanel == null) return;
             if (Mode == WorkshopHudMode.Drawing)
             {
-                qualityTrial = true; trialScenario = TrialScenario.Crowd; counterfire = false;
+                trialScenario = TrialScenario.Crowd; counterfire = false;
                 trialSettings.text = Resolve(UserText.Message("copy.4c14dc9bbbade9ed", Resolve(run.Session.Balance.Trials.For(trialScenario).Name).ToLowerInvariant(), trialBudget, UserText.Message("copy.73766e6851e92703")));
-                trialFirstHeader.text = Resolve(UserText.Message("copy.034c4ac46d600a47", Draft.Assessment.Quality));
-                trialSecondHeader.text = Resolve(UserText.Message("copy.195f11eb3d3b0a6f"));
+                trialFirstHeader.text = Resolve(UserText.Message("copy.d5f1a2a73fcf51d5"));
+                trialSecondHeader.text = Resolve(UserText.Message("copy.0d0e3e111b1f0f24"));
                 ClearTrial();
                 return;
             }
             var mechanics = run.Session.Balance.Mechanics;
             if (!mechanics.CorpseBlots && trialScenario == TrialScenario.Blots) trialScenario = TrialScenario.Crowd;
-            if (!mechanics.DrawingQuality) qualityTrial = false;
             bool blotTraining = trialScenario == TrialScenario.Blots;
             var rules = run.Session.Balance.Trials;
             string scenarioName = trialScenario == TrialScenario.Armored && !mechanics.EnemyDrawingTiers ? UserText.Message("copy.ae092c38e45a8570") : Resolve(rules.For(trialScenario).Name).ToLowerInvariant();
             trialSettings.text = Resolve(UserText.Message("copy.4c14dc9bbbade9ed", scenarioName, trialBudget, (blotTraining ? UserText.Message("copy.5c541247ef6b3bec") : counterfire ? UserText.Message("copy.6e782106d7934d03") : UserText.Message("copy.73766e6851e92703"))));
             trialConditions.text = Resolve(UserText.Message("copy.3f138ba9b66893d3", (blotTraining ? UserText.Message("copy.ac6f23c50da2aca7", (rules.StepSeconds * rules.MaximumTicks)) :
                     UserText.Message("copy.6c080edef345b261", rules.CounterfireDamage, rules.CounterfireInterval, rules.CounterfireRange))));
-            qualityModeLabel.text = Resolve(qualityTrial ? UserText.Message("copy.8cf1dfea8e5d3b5c") : UserText.Message("copy.10b122043549cab7"));
-            trialFirstHeader.text = Resolve(qualityTrial ? UserText.Message("copy.034c4ac46d600a47", Draft.Assessment.Quality) : UserText.Message("copy.d5f1a2a73fcf51d5"));
-            trialSecondHeader.text = Resolve(qualityTrial ? UserText.Message("copy.195f11eb3d3b0a6f") : UserText.Message("copy.0d0e3e111b1f0f24"));
+            trialFirstHeader.text = Resolve(UserText.Message("copy.d5f1a2a73fcf51d5"));
+            trialSecondHeader.text = Resolve(UserText.Message("copy.0d0e3e111b1f0f24"));
             ClearTrial();
         }
         void ClearTrial()
@@ -745,12 +711,12 @@ namespace PaperDefense.Presentation
             trialFirst.text = Resolve(trialSecond.text = Resolve("")); trialResults.text = Resolve(UserText.Message("copy.8f02821e075dc0d1"));
             trialPlayback.text = Resolve(UserText.Message("copy.cfad8860edae4ba5"));
         }
-        public TrialComparison CompareDrawingQuality()
+        public TrialComparison CompareDrawingQuality() => RunDrawingTrial();
+        public TrialComparison RunDrawingTrial()
         {
             if (trialPanel == null || Draft == null) return null;
             MortarFootprintEditor?.Close();
             if (title != null) Draft = Draft.WithName(title.text);
-            qualityTrial = true;
             SetTrial(true); RefreshTrialSettings();
             return RunTest();
         }
@@ -758,7 +724,7 @@ namespace PaperDefense.Presentation
         {
             var preview = run.PreviewBlueprint(Draft, MaterialTier.Pencil);
             if (!preview.Valid) { ClearTrial(); trialResults.text = Resolve(preview.Reason); return null; }
-            var comparison = qualityTrial ? run.RunQualityTrial(Draft, trialScenario, counterfire, trialBudget) : run.RunTrial(Draft, trialScenario, counterfire, trialBudget);
+            var comparison = run.RunTrial(Draft, trialScenario, counterfire, trialBudget);
             if (comparison == null)
             {
                 SetStatus(UserText.Message("copy.b8c85b921b3e435e"));
@@ -844,7 +810,7 @@ namespace PaperDefense.Presentation
         {
             vh.Clear(); if (blueprint == null || DrawingTemplateCatalog.Create(blueprint).Count == 0) return;
             Vector2 center = rectTransform.rect.center;
-            if (!ShowReference && (blueprint.Origin == DrawingOrigin.PlayerDrawing || NotebookTowerComposition.UsesResourceArt(blueprint)))
+            if (!ShowReference && (blueprint.HasPlayerDrawing || NotebookTowerComposition.UsesResourceArt(blueprint)))
             {
                 float size = Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .68f;
                 if (previewAnimation != null)
@@ -852,7 +818,7 @@ namespace PaperDefense.Presentation
                 else NotebookTowerComposition.DrawUI(vh, blueprint, center, size);
                 return;
             }
-            if (ShowReference || blueprint.Origin == DrawingOrigin.PlayerDrawing || ReferenceDrawingCache.UsesTemplateVisual(blueprint))
+            if (ShowReference || blueprint.HasPlayerDrawing || ReferenceDrawingCache.UsesTemplateVisual(blueprint))
             {
                 float scale = Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .68f;
                 var drawing = ShowReference ? ReferenceDrawingCache.For(blueprint) : ReferenceDrawingCache.VisibleDrawing(blueprint);

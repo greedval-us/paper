@@ -16,7 +16,7 @@ namespace PaperDefense.Core
     /// <summary>Permanent options, never a stockpile of consumable weapon instances.</summary>
     public sealed class WorkshopProfile
     {
-        public const int CurrentVersion = 6;
+        public const int CurrentVersion = 7;
         private static readonly IReadOnlyList<PartUnlock> parts = PartCatalog.HistoricalParts;
         private ContentCatalogSnapshot content;
         private readonly HashSet<string> unlocked = new HashSet<string>(StringComparer.Ordinal);
@@ -68,6 +68,7 @@ namespace PaperDefense.Core
             if (catalog == null) return false;
             bool changed = false;
             foreach (var part in catalog.AllParts) if (part.InitiallyUnlocked) changed |= unlocked.Add(part.Id);
+            foreach (var drawing in catalog.DrawingUnlocks) if (drawing.InitiallyUnlocked) changed |= unlocked.Add(drawing.Id);
             return changed;
         }
         private void AddStarters()
@@ -80,6 +81,25 @@ namespace PaperDefense.Core
         private void AddStarter(TowerBlueprint blueprint) { if (album.Count < ProfileLimits.MaximumAlbumPages && Find(blueprint.Id) == null) album.Add(blueprint); }
         public void GrantGold(int amount) { if (amount > 0) Gold = (int)Math.Min(int.MaxValue, (long)Gold + amount); }
         public bool IsUnlocked(string id) => id != null && unlocked.Contains(id);
+        public IReadOnlyList<DrawingUnlockDefinition> GetDrawingUnlocks(GameBalance balance=null)
+            => (balance?.ResolveContent()??content??LegacyContentCatalog.Create(GameBalance.CreateDefault())).DrawingUnlocks;
+        public bool IsDrawingUnlocked(string id,GameBalance balance=null)
+        {
+            foreach(var definition in GetDrawingUnlocks(balance))if(definition.Id==id)return definition.InitiallyUnlocked||IsUnlocked(id);
+            return false;
+        }
+        public bool UnlockDrawingAid(string id,out string reason,GameBalance balance=null)
+        {
+            reason="";
+            foreach(var definition in GetDrawingUnlocks(balance))if(definition.Id==id)
+            {
+                if(IsUnlocked(id))return true;
+                if(definition.InitiallyUnlocked){unlocked.Add(id);return true;}
+                if(Gold<definition.GoldCost){reason=UserText.Message("copy.49e21f4e9cb1372b");return false;}
+                Gold-=definition.GoldCost;unlocked.Add(id);return true;
+            }
+            reason=UserText.Message("drawing.unlock.unknown");return false;
+        }
         public bool Unlock(string id, out string reason, GameBalance balance = null)
         {
             reason = "";
@@ -131,7 +151,7 @@ namespace PaperDefense.Core
         public bool SaveBlueprint(TowerBlueprint blueprint, out string reason, GameBalance balance = null)
         {
             if (!ValidateOwned(blueprint, out reason, balance)) return false;
-            if (blueprint.Origin == DrawingOrigin.PlayerDrawing && blueprint.Drawing.IsEmpty)
+            if (blueprint.HasPlayerDrawing && blueprint.Drawing.IsEmpty)
             { reason = UserText.Message("copy.b9c49ccc73b9d0d4"); return false; }
             for (int i = 0; i < album.Count; i++) if (album[i].Id == blueprint.Id) { album[i] = blueprint; return true; }
             if (album.Count >= ProfileLimits.MaximumAlbumPages) { reason = UserText.Message("copy.9b39b0e67017068e", ProfileLimits.MaximumAlbumPages); return false; }
@@ -242,8 +262,10 @@ namespace PaperDefense.Core
                 if (!TowerCatalog.ValidateParts(blueprint, out string reason) ||
                     (data.Version < 5 && !profile.ValidatePartRights(blueprint, out reason)))
                     throw new ArgumentException(UserText.Message("copy.336691bac4dcc798", reason));
-                if (blueprint.Origin == DrawingOrigin.PlayerDrawing && blueprint.Drawing.IsEmpty)
+                if (blueprint.HasPlayerDrawing && blueprint.Drawing.IsEmpty)
                     throw new ArgumentException(UserText.Message("copy.a78634b793113f25"));
+                // Gameplay thresholds and ink allowances belong to the chosen content snapshot.
+                // Keep historical geometry editable even when current/default tuning rejects its use.
                 profile.album.Add(blueprint);
             }
             var selected = new HashSet<string>(StringComparer.Ordinal);

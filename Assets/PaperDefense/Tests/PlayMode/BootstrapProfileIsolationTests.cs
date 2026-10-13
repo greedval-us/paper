@@ -26,7 +26,7 @@ namespace PaperDefense.Tests
             bootstrap=root.AddComponent<PaperDefenseBootstrap>();bootstrap.balance=balance;
             var camera=new GameObject("Isolated launch camera",typeof(Camera));camera.transform.SetParent(root.transform);
             bootstrap.worldCamera=camera.GetComponent<Camera>();
-            store=new CountingStore();bootstrap.ProfileStoreOverride=store;
+            store=new CountingStore(balance.CreateWorkshopBalance().ResolveContent());bootstrap.ProfileStoreOverride=store;
         }
 
         [UnityTearDown] public IEnumerator TearDown()
@@ -86,10 +86,14 @@ namespace PaperDefense.Tests
 
         sealed class CountingStore:IWorkshopProfileStore
         {
+            readonly ContentCatalogSnapshot content;
+            internal CountingStore(ContentCatalogSnapshot content){this.content=content;}
             internal int LoadCalls,SaveCalls;
             public ProfileLoadResult Load()
             {
                 LoadCalls++;var profile=new WorkshopProfile();profile.GrantGold(321);
+                // Model a profile already saved with this catalog's permanent initial grants.
+                profile.ConfigureContent(content);
                 return new ProfileLoadResult(profile,ProfileLoadSource.Primary,"Only an injected in-memory store",true);
             }
             public ProfileSaveResult Save(WorkshopProfile profile)

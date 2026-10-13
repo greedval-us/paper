@@ -24,6 +24,7 @@ namespace PaperDefense.Core
         public float FirstFootprintAspect, SecondFootprintAspect;
         public DrawingOrigin Origin = (DrawingOrigin)(-1);
         public DrawingData Drawing;
+        public int FreeformRuleVersion;
         public BlueprintData() { }
         public BlueprintData(TowerBlueprint blueprint)
         { Id = blueprint.Id; Name = blueprint.Name; Chassis = blueprint.Chassis; FirstWeapon = blueprint.FirstWeapon;
@@ -35,11 +36,18 @@ namespace PaperDefense.Core
             for (int i = 0; i < ModuleSelections.Length; i++) ModuleSelections[i] = new ModuleSelectionData(blueprint.ModuleSelections[i]);
             EvaluationMetadataVersion = 1; Evaluation = new DrawingEvaluationData(blueprint.Assessment.ToStamp());
             DrawingMetadataVersion = 1; Origin = blueprint.Origin; Drawing = new DrawingData(blueprint.Drawing);
+            FreeformRuleVersion = blueprint.IsFreeform ? FreeformTowerDesign.RuleVersion : 0;
             FootprintMetadataVersion = 1; FirstFootprintAspect = blueprint.FirstFootprint.AspectRatio; SecondFootprintAspect = blueprint.SecondFootprint.AspectRatio; }
         public TowerBlueprint ToBlueprint(int profileVersion = WorkshopProfile.CurrentVersion)
         {
             if (profileVersion > WorkshopProfile.CurrentVersion) throw new NotSupportedException("Newer profile version.");
             if (profileVersion < 1) throw new ArgumentException("Unknown profile version.");
+            if (Origin == DrawingOrigin.Freeform)
+            {
+                if (profileVersion < 7) throw new ArgumentException("Freeform drawings require profile version 7.");
+                if (FreeformRuleVersion > FreeformTowerDesign.RuleVersion) throw new NotSupportedException("Newer freeform drawing rules.");
+                if (FreeformRuleVersion != FreeformTowerDesign.RuleVersion) throw new ArgumentException("Missing freeform drawing rules.");
+            }
             if (profileVersion >= 5) return ToContentBlueprint(profileVersion);
             if (!Enum.IsDefined(typeof(ChassisKind), Chassis) || !Enum.IsDefined(typeof(StructureKind), FirstWeapon) ||
                 (HasSecondWeapon && !Enum.IsDefined(typeof(StructureKind), SecondWeapon)) ||

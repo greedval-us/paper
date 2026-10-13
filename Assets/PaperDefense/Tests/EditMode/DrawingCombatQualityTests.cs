@@ -33,10 +33,10 @@ namespace PaperDefense.Tests
             return statistics.Launches(StructureKind.Gun);
         }
 
-        [TestCase(0, .85f, 60, 96)]
-        [TestCase(60, .94f, 65, 106)]
+        [TestCase(0, 1, 70, 114)]
+        [TestCase(60, 1, 70, 114)]
         [TestCase(100, 1, 70, 114)]
-        public void QualityChangesOnlyFinalTempoAndMatchesDiscreteFixedSteps(float quality, float factor, int single, int dual)
+        public void HistoricalQualityScoresNoLongerChangeCombatTempo(float quality, float factor, int single, int dual)
         {
             var balance = GameBalance.CreateDefault();
             Assert.That(TowerCatalog.QualityMultiplier(quality, balance), Is.EqualTo(factor).Within(.00001f));
@@ -56,7 +56,7 @@ namespace PaperDefense.Tests
         {
             var balance = GameBalance.CreateDefault(); var authored = Authored(true);
             var legacy = new TowerBlueprint("legacy", "Legacy double", ChassisKind.Standard, StructureKind.Gun, StructureKind.Gun);
-            Assert.That(TowerCatalog.QualityMultiplier(authored, balance), Is.EqualTo(.85f).Within(.00001f));
+            Assert.That(TowerCatalog.QualityMultiplier(authored, balance), Is.EqualTo(1));
             Assert.That(TowerCatalog.QualityMultiplier(legacy, balance), Is.EqualTo(1));
             Assert.That(TowerCatalog.Cost(authored, balance, MaterialTier.Marker), Is.EqualTo(TowerCatalog.Cost(legacy, balance, MaterialTier.Marker)));
             Assert.That(TowerCatalog.Health(authored, balance, MaterialTier.Marker), Is.EqualTo(TowerCatalog.Health(legacy, balance, MaterialTier.Marker)));
@@ -69,7 +69,7 @@ namespace PaperDefense.Tests
                 1, 1, 1f / 30, 1, new RunStatistics(), new SimulationEventBuffer());
             Assert.That(target.Health, Is.EqualTo(76), "Two normal 12-damage hits; quality affects cooldown only.");
             Assert.That(balance.Structure(StructureKind.Gun).Range, Is.EqualTo(11));
-            Assert.That(tower.Cooldown, Is.EqualTo(.42f / .8f / .85f).Within(.000001f));
+            Assert.That(tower.Cooldown, Is.EqualTo(.42f / .8f).Within(.000001f));
             Assert.That(tower.SecondaryCooldown, Is.EqualTo(tower.Cooldown));
         }
 
@@ -78,7 +78,7 @@ namespace PaperDefense.Tests
             var blueprint = Authored(true); var balance = GameBalance.CreateDefault();
             var result = TrialRunner.CompareQuality(blueprint, balance, TrialScenario.Fast, 400, 99);
             Assert.That(result.First.DrawingQuality, Is.EqualTo(0)); Assert.That(result.Second.DrawingQuality, Is.EqualTo(100));
-            Assert.That(result.First.QualityMultiplier, Is.EqualTo(.85f).Within(.00001f)); Assert.That(result.Second.QualityMultiplier, Is.EqualTo(1));
+            Assert.That(result.First.QualityMultiplier, Is.EqualTo(1)); Assert.That(result.Second.QualityMultiplier, Is.EqualTo(1));
             Assert.That(result.First.Cost, Is.EqualTo(result.Second.Cost)); Assert.That(result.First.Copies, Is.EqualTo(result.Second.Copies));
             Assert.That(result.First.Seed, Is.EqualTo(result.Second.Seed));
             Assert.That(result.First.Frames[0].Towers[0].Blueprint, Is.SameAs(blueprint));

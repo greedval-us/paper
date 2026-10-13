@@ -25,7 +25,7 @@ namespace PaperDefense.Tests
             {
                 foreach (var pair in TextResourcesAsset.Default.Entries) asset.entries.Add(new TextResourcesAsset.Entry(pair.Key, pair.Value));
                 Replace(asset, "copy.159b7c81e8a7413c", "WORKSHOP SENTINEL");
-                Replace(asset, Key("НАРИСУЙ СВОЮ БАШНЮ"), "DRAWING SENTINEL");
+                Replace(asset, "drawing.workbench.title", "DRAWING SENTINEL");
                 Replace(asset, "copy.90b777be2577be25", "MORTAR SENTINEL");
                 Replace(asset, "copy.a8ce8499831aa26c", "CORE SENTINEL");
                 var resolver = asset.CreateResolver();

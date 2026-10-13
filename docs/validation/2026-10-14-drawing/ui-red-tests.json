@@ -1,0 +1,100 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "aa5729e5e41e440dbd03d0531976561c",
+      "status": "failed",
+      "mode": "PlayMode",
+      "started_unix_ms": 1791927930993,
+      "finished_unix_ms": 1791927936551,
+      "last_update_unix_ms": 1791927936551,
+      "progress": {
+        "completed": 4,
+        "total": 4,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.DrawingWorkbenchTests.StrayDragWithoutPointerDownDoesNotCreateGeometry",
+        "last_finished_unix_ms": 1791927936527,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [
+          {
+            "full_name": "PaperDefense.Tests.DrawingWorkbenchTests.CompleteOverBudgetDrawingCannotApplyThroughDirectClose",
+            "message": "  Expected: True\r\n  But was:  False\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.DrawingWorkbenchTests.DisableDiscardsPendingGestureBeforeCanvasIsReenabled",
+            "message": "  Expected: 0\r\n  But was:  1\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.DrawingWorkbenchTests.PointerReleaseIncludesItsFinalPointAndHasOneUndoStep",
+            "message": "  Expected: 0.300000012f +/- 0.00200000009f\r\n  But was:  0.100097656f\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.DrawingWorkbenchTests.StrayDragWithoutPointerDownDoesNotCreateGeometry",
+            "message": "  Expected: 0\r\n  But was:  1\r\n"
+          }
+        ],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "PlayMode",
+        "summary": {
+          "total": 4,
+          "passed": 0,
+          "failed": 4,
+          "skipped": 0,
+          "durationSeconds": 0.202205,
+          "resultState": "Failed(Child)"
+        },
+        "results": [
+          {
+            "name": "CompleteOverBudgetDrawingCannotApplyThroughDirectClose",
+            "fullName": "PaperDefense.Tests.DrawingWorkbenchTests.CompleteOverBudgetDrawingCannotApplyThroughDirectClose",
+            "state": "Failed",
+            "durationSeconds": 0.1004059,
+            "message": "  Expected: True\r\n  But was:  False\r\n",
+            "stackTrace": "at PaperDefense.Tests.DrawingWorkbenchTests.CompleteOverBudgetDrawingCannotApplyThroughDirectClose () [0x000b1] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\DrawingWorkbenchTests.cs:75\r\n",
+            "output": ""
+          },
+          {
+            "name": "DisableDiscardsPendingGestureBeforeCanvasIsReenabled",
+            "fullName": "PaperDefense.Tests.DrawingWorkbenchTests.DisableDiscardsPendingGestureBeforeCanvasIsReenabled",
+            "state": "Failed",
+            "durationSeconds": 0.010179,
+            "message": "  Expected: 0\r\n  But was:  1\r\n",
+            "stackTrace": "at PaperDefense.Tests.DrawingWorkbenchTests.DisableDiscardsPendingGestureBeforeCanvasIsReenabled () [0x0008c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\DrawingWorkbenchTests.cs:66\r\n",
+            "output": ""
+          },
+          {
+            "name": "PointerReleaseIncludesItsFinalPointAndHasOneUndoStep",
+            "fullName": "PaperDefense.Tests.DrawingWorkbenchTests.PointerReleaseIncludesItsFinalPointAndHasOneUndoStep",
+            "state": "Failed",
+            "durationSeconds": 0.0059042,
+            "message": "  Expected: 0.300000012f +/- 0.00200000009f\r\n  But was:  0.100097656f\r\n",
+            "stackTrace": "at PaperDefense.Tests.DrawingWorkbenchTests.PointerReleaseIncludesItsFinalPointAndHasOneUndoStep () [0x000a3] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\DrawingWorkbenchTests.cs:43\r\n",
+            "output": ""
+          },
+          {
+            "name": "StrayDragWithoutPointerDownDoesNotCreateGeometry",
+            "fullName": "PaperDefense.Tests.DrawingWorkbenchTests.StrayDragWithoutPointerDownDoesNotCreateGeometry",
+            "state": "Failed",
+            "durationSeconds": 0.0035354,
+            "message": "  Expected: 0\r\n  But was:  1\r\n",
+            "stackTrace": "at PaperDefense.Tests.DrawingWorkbenchTests.StrayDragWithoutPointerDownDoesNotCreateGeometry () [0x00060] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\DrawingWorkbenchTests.cs:55\r\n",
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

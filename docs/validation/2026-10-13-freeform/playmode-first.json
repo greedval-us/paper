@@ -1,0 +1,112 @@
+{
+  "mode": "PlayMode",
+  "summary": {
+    "total": 317,
+    "passed": 306,
+    "failed": 11,
+    "skipped": 0,
+    "durationSeconds": 73.7888658,
+    "resultState": "Failed(Child)"
+  },
+  "results": [
+    {
+      "name": "LeavingViewportEndsStrokeAndOutsideEraserCannotChangeDrawing",
+      "fullName": "PaperDefense.Tests.AuthoredWorkshopTests.LeavingViewportEndsStrokeAndOutsideEraserCannotChangeDrawing",
+      "state": "Failed",
+      "durationSeconds": 0.0849348,
+      "message": "  Expected: False\r\n  But was:  True\r\n",
+      "stackTrace": "at PaperDefense.Tests.AuthoredWorkshopTests.LeavingViewportEndsStrokeAndOutsideEraserCannotChangeDrawing () [0x000ab] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\AuthoredWorkshopTests.cs:186\r\n",
+      "output": ""
+    },
+    {
+      "name": "RealHudRestartPreservesPointerDrawingProgressAndSharesQualityWithTrialAndBattle",
+      "fullName": "PaperDefense.Tests.AuthoredWorkshopTests.RealHudRestartPreservesPointerDrawingProgressAndSharesQualityWithTrialAndBattle",
+      "state": "Failed",
+      "durationSeconds": 0.6796619,
+      "message": "  Expected: 0.550291359f +/- 9.99999975E-06f\r\n  But was:  0.555626392f\r\n",
+      "stackTrace": "at PaperDefense.Tests.AuthoredWorkshopTests.RealHudRestartPreservesPointerDrawingProgressAndSharesQualityWithTrialAndBattle () [0x00831] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\AuthoredWorkshopTests.cs:146\r\n",
+      "output": ""
+    },
+    {
+      "name": "CanvasStartsWithAnchorAndForwardCueWithoutTemplateContours",
+      "fullName": "PaperDefense.Tests.DrawingEditorFeedbackTests.CanvasStartsWithAnchorAndForwardCueWithoutTemplateContours",
+      "state": "Failed:Error",
+      "durationSeconds": 0.0094132,
+      "message": "System.Reflection.AmbiguousMatchException : Ambiguous match found.",
+      "stackTrace": "  at System.RuntimeType.GetMethodImplCommon (System.String name, System.Int32 genericParameterCount, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Reflection.CallingConventions callConv, System.Type[] types, System.Reflection.ParameterModifier[] modifiers) [0x00050] in <816f70bc2a9c4332b0bd119906a8d40e>:0 \r\n  at System.RuntimeType.GetMethodImpl (System.String name, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Reflection.CallingConventions callConv, System.Type[] types, System.Reflection.ParameterModifier[] modifiers) [0x00000] in <816f70bc2a9c4332b0bd119906a8d40e>:0 \r\n  at System.Type.GetMethod (System.String name, System.Reflection.BindingFlags bindingAttr) [0x0000e] in <816f70bc2a9c4332b0bd119906a8d40e>:0 \r\n  at PaperDefense.Tests.DrawingEditorFeedbackTests.CanvasStartsWithAnchorAndForwardCueWithoutTemplateContours () [0x00027] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\DrawingEditorFeedbackTests.cs:184 \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ",
+      "output": ""
+    },
+    {
+      "name": "DrawingSceneEditsThirdLayerAndFootprintWithoutAssemblyAlbumOrBattle",
+      "fullName": "PaperDefense.Tests.FocusedWorkshopSceneTests.DrawingSceneEditsThirdLayerAndFootprintWithoutAssemblyAlbumOrBattle",
+      "state": "Failed",
+      "durationSeconds": 0.400929,
+      "message": "  Apply drawing\r\n  Expected: True\r\n  But was:  False\r\n",
+      "stackTrace": "at PaperDefense.Tests.FocusedWorkshopSceneTests.Click (System.String name) [0x0002b] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\FocusedWorkshopSceneTests.cs:48\r\nat PaperDefense.Tests.FocusedWorkshopSceneTests+<DrawingSceneEditsThirdLayerAndFootprintWithoutAssemblyAlbumOrBattle>d__12.MoveNext () [0x00202] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\FocusedWorkshopSceneTests.cs:134\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@1405238725ab\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:44\r\n",
+      "output": ""
+    },
+    {
+      "name": "BlankNameDraftExplainsUnavailableProbeAndRecoversAfterRename",
+      "fullName": "PaperDefense.Tests.MortarFootprintHudTests.BlankNameDraftExplainsUnavailableProbeAndRecoversAfterRename",
+      "state": "Failed",
+      "durationSeconds": 0.0206349,
+      "message": "  Expected: not null\r\n  But was:  null\r\n",
+      "stackTrace": "at PaperDefense.Tests.MortarFootprintHudTests.BlankNameDraftExplainsUnavailableProbeAndRecoversAfterRename () [0x00197] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintHudTests.cs:163\r\n",
+      "output": ""
+    },
+    {
+      "name": "OverloadedDraftExplainsUnavailableProbeClearsRecordingAndRecovers(10)",
+      "fullName": "PaperDefense.Tests.MortarFootprintHudTests.OverloadedDraftExplainsUnavailableProbeClearsRecordingAndRecovers(10)",
+      "state": "Failed",
+      "durationSeconds": 0.0177179,
+      "message": "  Expected: not null\r\n  But was:  null\r\n",
+      "stackTrace": "at PaperDefense.Tests.MortarFootprintHudTests.OverloadedDraftExplainsUnavailableProbeClearsRecordingAndRecovers (System.Int32 capacity) [0x000b8] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintHudTests.cs:97\r\n",
+      "output": ""
+    },
+    {
+      "name": "OverloadedDraftExplainsUnavailableProbeClearsRecordingAndRecovers(8)",
+      "fullName": "PaperDefense.Tests.MortarFootprintHudTests.OverloadedDraftExplainsUnavailableProbeClearsRecordingAndRecovers(8)",
+      "state": "Failed",
+      "durationSeconds": 0.0159317,
+      "message": "  Expected: not null\r\n  But was:  null\r\n",
+      "stackTrace": "at PaperDefense.Tests.MortarFootprintHudTests.OverloadedDraftExplainsUnavailableProbeClearsRecordingAndRecovers (System.Int32 capacity) [0x000b8] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintHudTests.cs:97\r\n",
+      "output": ""
+    },
+    {
+      "name": "TowerSceneShowsFifteenSelectablePartsAndFiveValidCompositions",
+      "fullName": "PaperDefense.Tests.NotebookArtStandSceneTests.TowerSceneShowsFifteenSelectablePartsAndFiveValidCompositions",
+      "state": "Failed",
+      "durationSeconds": 0.4432867,
+      "message": "  Apply drawing\r\n  Expected: True\r\n  But was:  False\r\n",
+      "stackTrace": "at PaperDefense.Tests.NotebookArtStandSceneTests.Click (System.String name) [0x0002b] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookArtStandSceneTests.cs:89\r\nat PaperDefense.Tests.NotebookArtStandSceneTests.VerifyOwnDrawingPreview (PaperDefense.Presentation.BlueprintSketch sketch) [0x000f9] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookArtStandSceneTests.cs:237\r\nat PaperDefense.Tests.NotebookArtStandSceneTests+<TowerSceneShowsFifteenSelectablePartsAndFiveValidCompositions>d__16.MoveNext () [0x002a5] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookArtStandSceneTests.cs:170\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@1405238725ab\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:44\r\n",
+      "output": ""
+    },
+    {
+      "name": "WorkshopExplainsRangeTradeoffAndOffersSeparateDrawingLayer",
+      "fullName": "PaperDefense.Tests.RailPresentationTests.WorkshopExplainsRangeTradeoffAndOffersSeparateDrawingLayer",
+      "state": "Failed",
+      "durationSeconds": 0.0273899,
+      "message": "  Expected: not null\r\n  But was:  null\r\n",
+      "stackTrace": "at PaperDefense.Tests.RailPresentationTests.WorkshopExplainsRangeTradeoffAndOffersSeparateDrawingLayer () [0x000e7] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\RailPresentationTests.cs:30\r\n",
+      "output": ""
+    },
+    {
+      "name": "InstanceOverrideChangesHudNestedPanelsAndRealCoreReasonWithoutLeakingToOtherHud",
+      "fullName": "PaperDefense.Tests.TextResourceIntegrationTests.InstanceOverrideChangesHudNestedPanelsAndRealCoreReasonWithoutLeakingToOtherHud",
+      "state": "Failed:Error",
+      "durationSeconds": 0.0014337,
+      "message": "System.InvalidOperationException : Sequence contains no matching element",
+      "stackTrace": "  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <fe644d7ad1cf499ebe4e7ad937bc03bf>:0 \r\n  at PaperDefense.Tests.TextResourceIntegrationTests.Key (System.String template) [0x0000d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\TextResourceIntegrationTests.cs:141 \r\n  at PaperDefense.Tests.TextResourceIntegrationTests.InstanceOverrideChangesHudNestedPanelsAndRealCoreReasonWithoutLeakingToOtherHud () [0x0008b] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\TextResourceIntegrationTests.cs:28 \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ",
+      "output": ""
+    },
+    {
+      "name": "LockedTrialShowsAnExplanationWithoutThrowing",
+      "fullName": "PaperDefense.Tests.WorkshopIntegrationTests.LockedTrialShowsAnExplanationWithoutThrowing",
+      "state": "Failed",
+      "durationSeconds": 0.1101121,
+      "message": "  Expected: String containing \"откройте\"\r\n  But was:  \"Увеличивает общую производительность подачи к оружию.\"\r\n",
+      "stackTrace": "at PaperDefense.Tests.WorkshopIntegrationTests+<LockedTrialShowsAnExplanationWithoutThrowing>d__9.MoveNext () [0x0007e] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopIntegrationTests.cs:112\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@1405238725ab\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:44\r\n",
+      "output": ""
+    }
+  ]
+}

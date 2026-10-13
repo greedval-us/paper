@@ -90,6 +90,10 @@ namespace PaperDefense.Core
         {
             if (blueprint == null) throw new ArgumentNullException(nameof(blueprint));
             string constructionHash = ConstructionHash(blueprint);
+            // Historical stamps stay readable, but free construction never invokes template matching.
+            if (blueprint.IsFreeform)
+                return new DrawingAssessment(FreeformTowerDesign.RuleVersion, blueprint.Drawing.GeometryHash, constructionHash,
+                    100, Array.Empty<DrawingPartFeedback>(), "freeform.v1");
             DrawingAssessmentSettings settings = blueprint.Content?.Assessment ?? legacySettings;
             IReadOnlyList<DrawingPartTemplate> templates;
             try { templates = DrawingTemplateCatalog.Create(blueprint); }

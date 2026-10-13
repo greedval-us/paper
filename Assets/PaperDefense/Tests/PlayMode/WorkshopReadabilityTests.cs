@@ -22,7 +22,7 @@ namespace PaperDefense.Tests
         [TearDown] public void TearDown() => Object.DestroyImmediate(root);
 
         [TestCase("Save blueprint as new")]
-        [TestCase("Drawing quality details")]
+        [TestCase("Open drawing editor")]
         public void CompactActionCaptionRendersCompletelyInsideItsButton(string name)
         {
             AssertFits(Button(name).GetComponentInChildren<Text>(true));
@@ -38,12 +38,12 @@ namespace PaperDefense.Tests
                 new[] { new DrawingPoint(0, 0), new DrawingPoint(0, .4f) }, out _), Is.True);
             Assert.That(editor.Session.AddStroke(DrawingPartKey.Mount1,
                 new[] { new DrawingPoint(.1f, 0), new DrawingPoint(.1f, .4f) }, out _), Is.True);
-            Button("Apply drawing").onClick.Invoke();
+            FreeformUiTestDrawing.Complete(editor.Session); Button("Apply drawing").onClick.Invoke();
             Button("Save blueprint").onClick.Invoke();
             var cards = root.GetComponentsInChildren<Button>(true)
                 .Where(b => b.name.StartsWith("Album drawing ") && b.gameObject.activeSelf).ToArray();
             Assert.That(cards.Length, Is.EqualTo(5), "Both standard pages and the saved author drawing must be checked");
-            Assert.That(cards.Select(b => b.GetComponentInChildren<Text>(true).text), Has.Some.Contains("/100"));
+            Assert.That(cards.Select(b => b.GetComponentInChildren<Text>(true).text), Has.None.Contains("/100"));
             foreach (var card in cards)
             {
                 var label = card.GetComponentInChildren<Text>(true);

@@ -36,7 +36,7 @@ namespace PaperDefense.Tests
                 .WithMortarFootprint(0, new MortarFootprint(2)).WithMortarFootprint(1, new MortarFootprint(3));
             var restored = new BlueprintData(page).ToBlueprint(4);
             Assert.That(restored.FirstFootprint.AspectRatio, Is.EqualTo(2)); Assert.That(restored.SecondFootprint.AspectRatio, Is.EqualTo(3));
-            Assert.That(WorkshopProfile.CurrentVersion, Is.EqualTo(6));
+            Assert.That(WorkshopProfile.CurrentVersion, Is.EqualTo(7));
         }
         [TestCase(1)] [TestCase(2)] [TestCase(3)] public void HistoricalVersionsRestoreCircle(int version)
         {

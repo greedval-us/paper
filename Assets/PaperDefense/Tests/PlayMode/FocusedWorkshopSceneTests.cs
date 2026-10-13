@@ -117,13 +117,21 @@ namespace PaperDefense.Tests
         [UnityTest] public IEnumerator DrawingSceneEditsThirdLayerAndFootprintWithoutAssemblyAlbumOrBattle()
         {
             yield return Open("02_Drawing.unity");
-            float baselineQuality = harness.Controller.PreviewBlueprint(harness.Controller.Workshop.Loadout[0]).DrawingQuality;
+
             Assert.That(hud.Draft.WeaponMounts.Count, Is.EqualTo(3));
             Click("Open drawing editor");
             Assert.That(hud.DrawingEditor.IsOpen, Is.True);
             Click("Draw part mount.2");
-            Assert.That(hud.DrawingEditor.Session.AddStroke(DrawingBindings.Mount2,
-                new[] { new DrawingPoint(-.1f, 0), new DrawingPoint(.1f, .3f) }, out string reason), Is.True, reason);
+            var session = hud.DrawingEditor.Session;
+            foreach (var part in session.Snapshot.Parts) session.ClearPart(part.BindingId);
+            Assert.That(session.AddStroke(DrawingBindings.Base, new[] {
+                new DrawingPoint(-.4f, -.4f), new DrawingPoint(.4f, -.4f),
+                new DrawingPoint(.4f, .4f), new DrawingPoint(-.4f, .4f), new DrawingPoint(-.4f, -.4f) }, out _), Is.True);
+            for (int slot = 0; slot < 3; slot++)
+                Assert.That(session.AddStroke(DrawingBindings.Mount(slot), new[] {
+                    new DrawingPoint(-.08f, 0), new DrawingPoint(-.08f, .6f),
+                    new DrawingPoint(.08f, .6f), new DrawingPoint(.08f, 0) }, out string reason), Is.True, reason);
+            hud.DrawingEditor.Canvas.FinishStroke();
             Click("Apply drawing");
             Assert.That(hud.Draft.Drawing.GetPart(DrawingBindings.Mount2).Strokes.Count, Is.GreaterThan(0));
             Click("Mortar footprint 2");
@@ -131,17 +139,20 @@ namespace PaperDefense.Tests
             Click("Close footprint");
             harness.CompareDrawing();
             Assert.That(harness.QualityComparison, Is.Not.Null);
-            Assert.That(harness.QualityComparison.First.DrawingQuality, Is.EqualTo(hud.Draft.Assessment.Quality).Within(.001f));
-            Assert.That(harness.QualityComparison.First.DrawingQuality, Is.Not.EqualTo(baselineQuality));
+            Assert.That(hud.Draft.IsFreeform, Is.True);
+            Assert.That(hud.Draft.FreeformDesign.IsComplete, Is.True);
+            Assert.That(harness.QualityComparison.First.QualityMultiplier, Is.EqualTo(1));
+            Assert.That(Active("Open trial"), Is.True);
+            Assert.That(hud.GetComponentsInChildren<Text>(true).Any(t => t.gameObject.activeInHierarchy && t.text.Contains("Качество:")), Is.False);
             Assert.That(Active("Test sheet"), Is.True);
             var lanes = hud.GetComponentsInChildren<TrialLaneSketch>(true);
             Assert.That(lanes.Length, Is.EqualTo(2));
             Assert.That(lanes.All(value => value.gameObject.activeInHierarchy && value.HasRecording), Is.True,
-                "Both results must display recordings from the quality comparison.");
+                "Both results must display recordings from the construction trial.");
             Assert.That(harness.Bootstrap.Drawing.enabled, Is.False);
             NoObjects("Chassis catalogue", "First weapon catalogue", "Second weapon catalogue", "Third weapon catalogue",
                 "Armor catalogue", "Module catalogue", "Blueprint album", "Assign slot 0", "Assign slot 1", "Assign slot 2", "Assign slot 3",
-                "Pre-run map", "Start run", "Save blueprint", "Save blueprint as new", "Delete blueprint", "Profile save status", "Retry profile save", "Open trial");
+                "Pre-run map", "Start run", "Save blueprint", "Save blueprint as new", "Delete blueprint", "Profile save status", "Retry profile save", "Drawing quality details", "Compare drawing quality");
         }
 
         [UnityTest] public IEnumerator ProfileSceneSavesAlbumCopyWithoutAssemblyDrawingTrialsOrBattle()

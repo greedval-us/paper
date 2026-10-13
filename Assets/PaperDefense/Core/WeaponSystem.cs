@@ -15,7 +15,6 @@ namespace PaperDefense.Core
         private readonly MechanicsAvailability mechanics;
         private readonly EffectsRules effects;
         private readonly ColorEffectPayload redPayload,bluePayload,greenPayload;
-        private readonly float? qualityOverride;
         private readonly IBlotContext blotContext;
         private readonly EnemySpatialIndex spatial;
         private readonly List<EnemyState> targets = new List<EnemyState>(128);
@@ -46,7 +45,6 @@ namespace PaperDefense.Core
             mechanics = MechanicsAvailability.Resolve(balance);
             effects = balance.Effects.ForEnemyDrawingTiers(mechanics.EnemyDrawingTiers);
             redPayload=ColorEffectPayload.Capture(InkColor.Red,catalog);bluePayload=ColorEffectPayload.Capture(InkColor.Blue,catalog);greenPayload=ColorEffectPayload.Capture(InkColor.Green,catalog);
-            this.qualityOverride = qualityOverride;
             // An injected fixture may provide marks without campaign corpse generation.
             this.blotContext = balance.Mechanics.CorpseBlots ? blotContext : null;
             spatial = new EnemySpatialIndex(balance.Width, balance.Height);
@@ -69,7 +67,7 @@ namespace PaperDefense.Core
                 TowerBlueprint blueprint = structure.Blueprint;
                 ResolvedTowerAssembly assembly = Assembly(structure);
                 bool dynamic = balance.Construction.DynamicFeed;
-                int activeMounts = 1;
+                int activeMounts = blueprint?.WeaponMounts.Count ?? 1;
                 if (dynamic && blueprint != null)
                 {
                     activeMounts=0;
@@ -109,16 +107,14 @@ namespace PaperDefense.Core
             FireMount(structure,origin,weapon,mount,shots,feed,QualityMultiplier(structure.Blueprint),dynamic,1,default,null,delta,tick,statistics,events);
         }
 
-        static bool CanOperate(StructureState structure)
-            => structure.Health > 0 && structure.IsComplete && structure.BuildRemaining <= 0 && structure.Kind != StructureKind.Wall;
+        bool CanOperate(StructureState structure)
+            => structure.Health > 0 && structure.IsComplete && structure.BuildRemaining <= 0 && structure.Kind != StructureKind.Wall
+                && (structure.Blueprint==null || (Assembly(structure).FreeformDesign?.IsUsable ?? true));
         ColorEffectPayload ColorPayload(InkColor color)=>color==InkColor.Red?redPayload:color==InkColor.Blue?bluePayload:color==InkColor.Green?greenPayload:default;
 
         float QualityMultiplier(TowerBlueprint blueprint)
         {
-            if (!mechanics.DrawingQuality) return 1;
-            float quality = qualityOverride ?? (blueprint == null || blueprint.Origin == DrawingOrigin.LegacyStandard ? 100 : blueprint.Assessment.Quality);
-            if (!qualityOverride.HasValue && (blueprint == null || blueprint.Origin == DrawingOrigin.LegacyStandard)) return 1;
-            return DrawingEvaluator.FireMultiplier(quality, balance.DrawingMinimumRate, balance.DrawingMaximumRate);
+            return 1;
         }
 
         // Production is shared by unfinished reloads and acquired working mounts. A ready idle
@@ -166,7 +162,8 @@ namespace PaperDefense.Core
             if (!acquired) return;
             if(!TryBeginAction(structure,mount,interval,dynamic)) return;
             BeginVisualAction(structure,mount,origin,target.Position,weapon,tick,events);
-            float damage = Math.Max(0, definition.Damage * balance.Material(structure.Tier).DamageMultiplier * damageMultiplier);
+            float damage = TowerCatalog.FiniteStat(Math.Max(0,definition.Damage*balance.Material(structure.Tier).DamageMultiplier*damageMultiplier
+                *(Assembly(structure)?.FreeformDesign?.GetBarrel(mount)?.DamageMultiplier??1)),"damage");
             structure.Aim = target.Position;
             statistics.RecordLaunch(weapon.Id);
             switch (weapon.Attack)

@@ -87,14 +87,14 @@ namespace PaperDefense.Tests
             Assert.That(context.Contains(new Cell(14,10)),Is.True); Assert.That(shots.Count,Is.EqualTo(2));
         }
 
-        [Test] public void QualityChangesOnlyCleanupCadenceAndIsAppliedOnce()
+        [Test] public void RetiredQualityDoesNotChangeCleanupCadence()
         {
             var balance=Balance(); balance.Structure(StructureKind.Blotter).Range=100; balance.Structure(StructureKind.Blotter).Radius=0;
             var cells=new Cell[20]; for(int i=0;i<cells.Length;i++) cells[i]=new Cell(i,5);
             var low=Run(balance,Tower(),new BlotFixture(cells),new List<EnemyState>(),900,0);
             var perfect=Run(balance,Tower(),new BlotFixture(cells),new List<EnemyState>(),900,100);
-            Assert.That(low.BlotsCleared,Is.EqualTo(13)); Assert.That(perfect.BlotsCleared,Is.EqualTo(15));
-            Assert.That(low.Launches(StructureKind.Blotter),Is.EqualTo(13)); Assert.That(perfect.Launches(StructureKind.Blotter),Is.EqualTo(15));
+            Assert.That(low.BlotsCleared,Is.EqualTo(15)); Assert.That(perfect.BlotsCleared,Is.EqualTo(15));
+            Assert.That(low.Launches(StructureKind.Blotter),Is.EqualTo(15)); Assert.That(perfect.Launches(StructureKind.Blotter),Is.EqualTo(15));
             Assert.That(low.Damage(StructureKind.Blotter),Is.Zero); Assert.That(perfect.Damage(StructureKind.Blotter),Is.Zero);
             Assert.That(balance.Structure(StructureKind.Blotter).Radius,Is.Zero);
         }

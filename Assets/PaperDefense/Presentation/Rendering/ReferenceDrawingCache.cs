@@ -36,6 +36,6 @@ namespace PaperDefense.Presentation
             return false;
         }
         public static DrawingSnapshot VisibleDrawing(TowerBlueprint blueprint)
-            => blueprint.Origin == DrawingOrigin.PlayerDrawing ? blueprint.Drawing : For(blueprint);
+            => blueprint.HasPlayerDrawing ? blueprint.Drawing : For(blueprint);
     }
 }

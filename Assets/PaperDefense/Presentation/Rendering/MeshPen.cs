@@ -14,6 +14,10 @@ namespace PaperDefense.Presentation
         readonly List<int> indices;
         readonly Mesh mesh;
 
+        // VertexHelper rejects 65,000 vertices. Keep each slice triangle-aligned and strictly below it.
+        internal const int MaximumUiBatchVertices = 64998;
+        internal int UiBatchCount => indices.Count == 0 ? 0 : (indices.Count - 1) / MaximumUiBatchVertices + 1;
+
         public MeshPen(Mesh target, int capacity = 8192)
         {
             mesh = target;
@@ -167,6 +171,27 @@ namespace PaperDefense.Presentation
                 target.AddVert(origin + new Vector2(vertices[i].x, vertices[i].y) * scale, colors[i], Vector2.zero);
             for (int i = 0; i < indices.Count; i += 3)
                 target.AddTriangle(start + indices[i], start + indices[i + 1], start + indices[i + 2]);
+        }
+
+        /// <summary>
+        /// Copy one consecutive triangle slice without changing winding or draw order. Expanding corners
+        /// also handles triangles sharing vertices across a boundary, without per-frame remap buffers.
+        /// </summary>
+        internal void CopyUiBatchTo(VertexHelper target, Vector2 origin, float scale, int batchIndex)
+        {
+            int first = batchIndex * MaximumUiBatchVertices;
+            int end = Math.Min(first + MaximumUiBatchVertices, indices.Count);
+            for (int i = first; i < end; i += 3)
+            {
+                int start = target.currentVertCount;
+                for (int corner = 0; corner < 3; corner++)
+                {
+                    int source = indices[i + corner];
+                    target.AddVert(origin + new Vector2(vertices[source].x, vertices[source].y) * scale,
+                        colors[source], Vector2.zero);
+                }
+                target.AddTriangle(start, start + 1, start + 2);
+            }
         }
 
         public static Color Alpha(Color color, float alpha) { color.a = alpha; return color; }

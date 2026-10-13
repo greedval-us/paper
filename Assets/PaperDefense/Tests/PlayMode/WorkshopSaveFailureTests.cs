@@ -22,6 +22,8 @@ namespace PaperDefense.Tests
             root = new GameObject("Isolated workshop save failures"); root.SetActive(false);
             run = root.AddComponent<RunController>();
             var profile = new WorkshopProfile(); profile.GrantGold(200);
+            // This fixture represents an already-prepared saved profile; new initial rights are a separate migration.
+            profile.ConfigureContent(LegacyContentCatalog.Create(GameBalancePresets.CreateTargetWorkshop()));
             Assert.That(profile.SaveBlueprint(NewBlueprint("custom", "Existing page"), out _), Is.True);
             store = new FakeStore(profile);
             run.InitializeWorkshop(store, allowLegacyFixtureDefaults: true);

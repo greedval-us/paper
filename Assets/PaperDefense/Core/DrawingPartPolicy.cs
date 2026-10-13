@@ -47,6 +47,7 @@ namespace PaperDefense.Core
         public static bool ShouldRetain(string bindingId, TowerBlueprint before, TowerBlueprint after)
         {
             if (after == null) throw new ArgumentNullException(nameof(after));
+            if (before.IsFreeform && after.IsFreeform) return IsEnabled(after, bindingId);
             if (DrawingBindings.TryMount(bindingId,out int mount))return after.GetWeaponId(mount)!=null&&before.GetWeaponId(mount)==after.GetWeaponId(mount);
             return ShouldRetain(bindingId, before, after.ChassisId, after.FirstWeaponId, after.SecondWeaponId, after.ModuleSelections);
         }

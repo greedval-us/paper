@@ -163,7 +163,7 @@ namespace PaperDefense.Presentation
         }
         static string Values(string name, FootprintProbeReport report)
         {
-            string result = UserText.Message("copy.9f7043ce99bb7fc9", name, report.HitCount, report.MissedCount, report.Cost, report.DrawingQuality);
+            string result = UserText.Message("copy.9f7043ce99bb7fc9", name, report.HitCount, report.MissedCount, report.Cost);
             return report.Completed ? result : UserText.Message("common.with_detail", result, report.Message);
         }
 

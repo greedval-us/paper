@@ -47,8 +47,8 @@ namespace PaperDefense.Tests
             int count = run.Workshop.Album.Count;
             Click("New blueprint"); Click("Save blueprint");
             Assert.That(run.Workshop.Album.Count, Is.EqualTo(count));
-            Assert.That(hud.Draft.Origin, Is.EqualTo(DrawingOrigin.PlayerDrawing));
-            Assert.That(hud.Status, Does.Contain("штрих"));
+            Assert.That(hud.Draft.Origin, Is.EqualTo(DrawingOrigin.Freeform));
+            Assert.That(hud.Status, Does.Contain("корпус"));
         }
 
         [Test] public void MouseStrokesSurviveEditorAlbumReloadAndSeveralFieldCopies()
@@ -59,7 +59,7 @@ namespace PaperDefense.Tests
             root.SetActive(true); Canvas.ForceUpdateCanvases();
             Stroke(editor.Canvas, DrawingPartKey.Mount0, new Vector2(-.03f, .03f), new Vector2(.02f, .24f), new Vector2(-.08f, .42f));
             Stroke(editor.Canvas, DrawingPartKey.Mount1, new Vector2(.04f, .01f), new Vector2(.12f, .18f), new Vector2(.07f, .39f));
-            Click("Apply drawing");
+            FreeformUiTestDrawing.Complete(hud.DrawingEditor.Session); Click("Apply drawing");
             var drawing = hud.Draft.Drawing;
             Assert.That(drawing.GetPart(DrawingPartKey.Mount0).Strokes[0].Points[1].X,
                 Is.Not.EqualTo(drawing.GetPart(DrawingPartKey.Mount1).Strokes[0].Points[1].X));
@@ -103,10 +103,10 @@ namespace PaperDefense.Tests
                 root.SetActive(true); Canvas.ForceUpdateCanvases();
                 Stroke(hud.DrawingEditor.Canvas, DrawingPartKey.Mount0, new Vector2(-.03f, .03f), new Vector2(.02f, .24f), new Vector2(-.08f, .42f));
                 Stroke(hud.DrawingEditor.Canvas, DrawingPartKey.Mount1, new Vector2(.04f, .01f), new Vector2(.12f, .18f), new Vector2(.07f, .39f));
-                Click("Apply drawing"); Click("Save blueprint"); string id = hud.Draft.Id; Click("Assign slot 0");
+                FreeformUiTestDrawing.Complete(hud.DrawingEditor.Session); Click("Apply drawing"); Click("Save blueprint"); string id = hud.Draft.Id; Click("Assign slot 0");
                 string hash = hud.Draft.Drawing.GeometryHash;
                 float quality = hud.Draft.Assessment.Quality; var beforeRestart = run.PreviewBlueprint(hud.Draft);
-                Assert.That(quality, Is.LessThan(100));
+                Assert.That(hud.Draft.FreeformDesign.IsComplete, Is.True);
                 var oldRun = run; var oldHud = hud;
                 UnityEngine.Object.DestroyImmediate(root);
                 Assert.That(oldRun == null && oldHud == null, Is.True, "The old controller and HUD must actually be destroyed.");
@@ -123,7 +123,7 @@ namespace PaperDefense.Tests
                 var preview = run.PreviewBlueprint(hud.Draft);
                 Assert.That(preview.DrawingQuality, Is.EqualTo(quality)); Assert.That(preview.QualityMultiplier, Is.EqualTo(beforeRestart.QualityMultiplier));
                 byte[] saved = File.ReadAllBytes(path); int ink = run.Session.Ink; long tick = run.Session.TickIndex;
-                var trial = run.RunQualityTrial(hud.Draft, TrialScenario.Crowd);
+                var trial = run.RunTrial(hud.Draft, TrialScenario.Crowd);
                 Assert.That(trial.First.DrawingQuality, Is.EqualTo(quality)); Assert.That(trial.First.QualityMultiplier, Is.EqualTo(preview.QualityMultiplier));
                 Assert.That(run.Session.Ink, Is.EqualTo(ink)); Assert.That(run.Session.TickIndex, Is.EqualTo(tick));
                 Assert.That(File.ReadAllBytes(path), Is.EqualTo(saved)); Assert.That(run.Workshop.Gold, Is.EqualTo(290));
@@ -143,7 +143,7 @@ namespace PaperDefense.Tests
                         observedCooldown = run.Session.StructureAt(cells[0]).Value.Cooldown;
                 };
                 run.NextWave(); for (int i = 0; i < 12; i++) run.AdvanceFrame(1f / 30, false, 1);
-                Assert.That(observedCooldown, Is.EqualTo(2 / preview.FireRate).Within(.00001f));
+                Assert.That(observedCooldown, Is.EqualTo(TowerCatalog.ActionInterval(hud.Draft, asset.CreateWorkshopBalance(), hud.Draft.FirstWeaponId, preview.FeedMultiplier, 1, 0)).Within(.00001f));
                 var deployedBattle = run.Session;
                 run.OpenWorkshop(); Click("First Piercer"); Click("Save blueprint");
                 Assert.That(run.Workshop.Album.Single(p => p.Id == id).FirstWeapon, Is.EqualTo(StructureKind.Piercer));
@@ -164,38 +164,55 @@ namespace PaperDefense.Tests
             var e = hud.DrawingEditor;
             Assert.That(e.Session.AddStroke(DrawingPartKey.Mount0, new[] { new DrawingPoint(0, 0), new DrawingPoint(0, .4f) }, out _), Is.True);
             Assert.That(e.Session.AddStroke(DrawingPartKey.Mount1, new[] { new DrawingPoint(.1f, 0), new DrawingPoint(.1f, .4f) }, out _), Is.True);
-            Click("Apply drawing"); Click("Save blueprint");
+            FreeformUiTestDrawing.Complete(hud.DrawingEditor.Session); Click("Apply drawing"); Click("Save blueprint");
             string originalId = hud.Draft.Id, originalHash = hud.Draft.Drawing.GeometryHash;
             Click("Save blueprint as new");
             Assert.That(hud.Draft.Id, Is.Not.EqualTo(originalId));
             Assert.That(run.Workshop.Album.Single(p => p.Id == originalId).Drawing.GeometryHash, Is.EqualTo(originalHash));
             Click("First Piercer");
-            Assert.That(hud.Draft.Drawing.GetPart(DrawingPartKey.Mount0).Strokes.Count, Is.Zero);
+            Assert.That(hud.Draft.Drawing.GetPart(DrawingPartKey.Mount0).Strokes.Count, Is.EqualTo(1), "Changing ammunition preserves the invented barrel contour.");
             Assert.That(hud.Draft.Drawing.GetPart(DrawingPartKey.Mount1).Strokes.Count, Is.EqualTo(1));
         }
 
-        [Test] public void LeavingViewportEndsStrokeAndOutsideEraserCannotChangeDrawing()
+        [Test] public void LeavingViewportCancelsUntilFreshPressAndOutsideEraserCannotChangeDrawing()
         {
             Click("New blueprint"); Click("Open drawing editor");
             root.SetActive(true); Canvas.ForceUpdateCanvases();
             var editor = hud.DrawingEditor; var canvas = editor.Canvas;
+            string initial = editor.Session.Snapshot.GeometryHash;
+            Assert.That(editor.Session.CanUndo, Is.False);
             var pointer = new PointerEventData(EventSystem.current) { button = PointerEventData.InputButton.Left };
             pointer.position = canvas.LocalPointToScreen(new Vector2(.1f, .2f)); canvas.OnPointerDown(pointer);
             pointer.position = canvas.LocalPointToScreen(new Vector2(.1f, .3f)); canvas.OnDrag(pointer);
-            pointer.position = canvas.LocalPointToScreen(new Vector2(.1f, .9f));
+            pointer.position = canvas.LocalPointToScreen(new Vector2(.1f, 1.3f));
             Assert.That(RectTransformUtility.RectangleContainsScreenPoint(canvas.rectTransform, pointer.position, null), Is.False);
             canvas.OnDrag(pointer);
             pointer.position = canvas.LocalPointToScreen(new Vector2(.3f, .3f)); canvas.OnDrag(pointer);
             pointer.position = canvas.LocalPointToScreen(new Vector2(.4f, .3f)); canvas.OnDrag(pointer); canvas.OnPointerUp(pointer);
+            Assert.That(editor.Session.Snapshot.GeometryHash, Is.EqualTo(initial), "Leaving the sheet cancels the whole pending gesture; re-entry cannot start a stroke without a fresh press.");
+            Assert.That(editor.Session.Snapshot.StrokeCount, Is.Zero);
+            Assert.That(editor.Session.CanUndo, Is.False);
+            Assert.That(editor.Session.CanRedo, Is.False);
+            Assert.That(canvas.HasPendingGesture, Is.False);
+            pointer.position = canvas.LocalPointToScreen(new Vector2(.3f, .3f)); canvas.OnPointerDown(pointer);
+            pointer.position = canvas.LocalPointToScreen(new Vector2(.4f, .3f)); canvas.OnDrag(pointer); canvas.OnPointerUp(pointer);
             var strokes = editor.Session.Snapshot.GetPart(DrawingPartKey.Base).Strokes;
-            Assert.That(strokes.Count, Is.EqualTo(2), "Re-entry must begin a separate stroke.");
-            Assert.That(strokes.All(s => s.Points.Count == 2), Is.True);
+            Assert.That(strokes.Count, Is.EqualTo(1), "Only the fresh press creates a stroke.");
+            Assert.That(strokes[0].Points, Is.EqualTo(new[] { new DrawingPoint(.3f, .3f), new DrawingPoint(.4f, .3f) }));
+            string freshStroke = editor.Session.Snapshot.GeometryHash;
+            Assert.That(editor.Session.Undo(), Is.True);
+            Assert.That(editor.Session.Snapshot.GeometryHash, Is.EqualTo(initial));
+            Assert.That(editor.Session.CanUndo, Is.False, "The fresh gesture creates exactly one command.");
+            Assert.That(editor.Session.Redo(), Is.True);
+            Assert.That(editor.Session.Snapshot.GeometryHash, Is.EqualTo(freshStroke));
             // Imported local geometry may lie outside the current zoomed viewport.
             Assert.That(editor.Session.AddStroke(DrawingPartKey.Base, new[] { new DrawingPoint(.1f, .88f), new DrawingPoint(.1f, .92f) }, out _), Is.True);
             string before = editor.Session.Snapshot.GeometryHash;
-            canvas.Eraser = true; pointer.position = canvas.LocalPointToScreen(new Vector2(.1f, .9f));
+            canvas.Zoom = 2; canvas.Eraser = true; pointer.position = canvas.LocalPointToScreen(new Vector2(.1f, .9f));
             canvas.OnPointerDown(pointer); canvas.OnDrag(pointer); canvas.OnPointerUp(pointer);
             Assert.That(editor.Session.Snapshot.GeometryHash, Is.EqualTo(before));
+            Assert.That(editor.Session.Undo(), Is.True);
+            Assert.That(editor.Session.Snapshot.GeometryHash, Is.EqualTo(freshStroke), "Outside erasing must not add history: undo removes only the imported stroke.");
         }
 
         void Stroke(DrawingCanvasGraphic canvas, DrawingPartKey part, params Vector2[] points)

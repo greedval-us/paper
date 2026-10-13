@@ -47,7 +47,7 @@ namespace PaperDefense.Tests
                 Action<string> click = name => host.GetComponentsInChildren<Button>(true).Single(b => b.name == name).onClick.Invoke();
                 click("New blueprint"); click("Chassis Heavy"); click("First Mortar"); click("Second Mortar"); click("Open drawing editor");
                 Assert.That(hud.DrawingEditor.Session.AddStroke(DrawingPartKey.Mount0,new[] { new DrawingPoint(0,0),new DrawingPoint(0,.4f) },out _), Is.True);
-                click("Apply drawing"); click("Save blueprint"); var source = hud.Draft;
+                FreeformUiTestDrawing.Complete(hud.DrawingEditor.Session); click("Apply drawing"); click("Save blueprint"); var source = hud.Draft;
                 Assert.That(run.Workshop.Album.Any(p=>p.Id==source.Id),Is.True,hud.Status);
                 Assert.That(source.Drawing.IsEmpty, Is.False);
                 click("Mortar footprint 0"); Assert.That(hud.MortarFootprintEditor.IsOpen, Is.True);
@@ -93,11 +93,17 @@ namespace PaperDefense.Tests
                     .Single(button => button.name == name).onClick.Invoke();
                 click("New blueprint");
                 click("First Mortar");
+                click("Open drawing editor");
+                FreeformUiTestDrawing.Complete(hud.DrawingEditor.Session, .224f);
+                hud.DrawingEditor.Close(true);
                 click("Mortar footprint 0");
                 Assert.That(hud.MortarFootprintEditor.Recording, Is.Not.Null);
                 hud.MortarFootprintEditor.Close();
 
                 click("Second Mortar");
+                click("Open drawing editor");
+                FreeformUiTestDrawing.Complete(hud.DrawingEditor.Session, .224f);
+                hud.DrawingEditor.Close(true);
                 var invalidPreview = run.PreviewBlueprint(hud.Draft);
                 Assert.That(invalidPreview.Valid, Is.False);
                 string reason = TextResourcesAsset.Default.Resolve(invalidPreview.Reason);
@@ -123,7 +129,7 @@ namespace PaperDefense.Tests
                 Assert.That(feedback.text, Does.Contain("поражено"));
                 Assert.That(feedback.text, Does.Contain("вне отпечатка"));
                 Assert.That(feedback.text, Does.Contain("цена"));
-                Assert.That(feedback.text, Does.Contain("качество"));
+                Assert.That(feedback.text, Does.Not.Contain("качество"));
                 Assert.That(feedback.text.IndexOf('\uFFFD'), Is.EqualTo(-1),
                     "Visible feedback must contain no replacement code points.");
                 Assert.That(hud.MortarFootprintEditor.PlaybackSeconds, Is.LessThan(.1f));
@@ -148,6 +154,9 @@ namespace PaperDefense.Tests
                     .Single(button => button.name == name).onClick.Invoke();
                 click("New blueprint");
                 click("First Mortar");
+                click("Open drawing editor");
+                FreeformUiTestDrawing.Complete(hud.DrawingEditor.Session);
+                hud.DrawingEditor.Close(true);
                 var input = host.GetComponentsInChildren<InputField>(true).Single(field => field.name == "Blueprint name");
                 input.SetTextWithoutNotify("");
                 input.onEndEdit.Invoke("");

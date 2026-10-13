@@ -7,12 +7,13 @@ namespace PaperDefense.Core
     {
         internal readonly ContentCatalogSnapshot Content;
         internal readonly TowerBlueprint Blueprint;
+        internal readonly FreeformTowerDesign FreeformDesign;
         internal readonly ChassisDefinition Chassis;
         internal readonly WeaponDefinition First,Second;
         internal readonly WeaponDefinition[] Weapons=new WeaponDefinition[TowerBlueprint.MaximumWeaponMounts];
         internal readonly IReadOnlyList<ModuleDefinition> Modules;
         internal ResolvedTowerAssembly(TowerBlueprint blueprint,ContentCatalogSnapshot content)
-        {Blueprint=blueprint??throw new ArgumentNullException(nameof(blueprint));Content=content;Chassis=content.GetChassis(blueprint.ChassisId);foreach(var mount in blueprint.WeaponMounts)Weapons[mount.SlotIndex]=content.GetWeapon(mount.WeaponId);First=Weapons[0];Second=Weapons[1];var list=new List<ModuleDefinition>();foreach(var item in blueprint.ModuleSelections)list.Add(content.GetModule(item.DefinitionId));Modules=list.AsReadOnly();}
+        {Blueprint=blueprint??throw new ArgumentNullException(nameof(blueprint));Content=content;FreeformDesign=blueprint.IsFreeform?(ReferenceEquals(blueprint.Content,content)?blueprint.FreeformDesign:new FreeformTowerDesign(blueprint,content.FreeformRules)):null;Chassis=content.GetChassis(blueprint.ChassisId);foreach(var mount in blueprint.WeaponMounts)Weapons[mount.SlotIndex]=content.GetWeapon(mount.WeaponId);First=Weapons[0];Second=Weapons[1];var list=new List<ModuleDefinition>();foreach(var item in blueprint.ModuleSelections)list.Add(content.GetModule(item.DefinitionId));Modules=list.AsReadOnly();}
         internal void Validate(GameBalance balance)
         {
             int genericBindings=0;foreach(var selection in Blueprint.ModuleSelections)if(!DrawingBindings.TryLegacy(DrawingBindings.Module(selection.InstanceId),out _))genericBindings++;
@@ -44,6 +45,14 @@ namespace PaperDefense.Core
             ValidateValue(ModifierStat.FoundationDefense,0);
             ValidateValue(ModifierStat.FeedMultiplier,1);
             for(int mount=0;mount<Weapons.Length;mount++)if(Weapons[mount]!=null)ValidateWeapon(Weapons[mount],mount,balance);
+            // Configured geometry, materials and module operations must also produce finite final values.
+            for(int material=0;material<balance.MaterialDefinitions.Count;material++)
+            {
+                var tier=(MaterialTier)material;
+                TowerCatalog.Health(this,balance,tier);
+                TowerCatalog.BuildSeconds(this,balance,tier);
+                for(int mount=0;mount<Weapons.Length;mount++)if(Weapons[mount]!=null)TowerCatalog.WeaponDamage(this,Weapons[mount],balance,tier,mount);
+            }
         }
         void ValidateWeapon(WeaponDefinition weapon,int mount,GameBalance balance)
         {
@@ -51,6 +60,9 @@ namespace PaperDefense.Core
             ValidateValue(ModifierStat.WeaponRange,weapon.Attack==AttackKind.Radial?Math.Max(weapon.MinimumRadialRange,weapon.Stats.Radius):weapon.Stats.Range,mount,support);
             if(weapon.MinimumRange>0&&TowerCatalog.WeaponRange(this,weapon,mount)<=weapon.MinimumRange)throw new ArgumentException(UserText.Message("copy.c51135965fbecb05", weapon.Id));
             ValidateValue(ModifierStat.ActionInterval,Math.Max(balance.Combat.MinimumActionInterval,weapon.Stats.ShotInterval),mount,support);
+            TowerCatalog.WeaponRange(this,weapon,mount);
+            // The production floor is the largest possible interval before module operations.
+            TowerCatalog.ActionInterval(this,weapon,mount,balance,0,1);
             ValidateValue(ModifierStat.AcquisitionSeconds,balance.Construction.AcquisitionSeconds,mount,support);
         }
         void ValidateValue(ModifierStat stat,float initial,int mount=0,bool support=false)

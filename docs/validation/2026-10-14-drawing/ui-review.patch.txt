@@ -1,0 +1,1432 @@
+--- a/Assets/PaperDefense/Core/UserTextContracts.Generated.cs
++++ b/Assets/PaperDefense/Core/UserTextContracts.Generated.cs
+@@ -766,6 +766,73 @@
+             resolver.RequireContract("drawing.stencil.sniper.description", 0, Array.Empty<int>());
+             resolver.RequireContract("drawing.stencil.sniper.name", 0, Array.Empty<int>());
+             resolver.RequireContract("drawing.unlock.unknown", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.apply", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.barrel_goal", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.beginner", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.body_goal", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.buy", 1, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.cancel", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.clear", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.decoration_goal", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.ellipse", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.eraser", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.eraser_hint", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.feed", 1, new[] { 0 });
++            resolver.RequireFormatContract("drawing.workbench.feed", 0, "0.00");
++            resolver.RequireContract("drawing.workbench.fit", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.gold", 1, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.gold_source", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.grid", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.height", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.ink", 3, new[] { 0, 1 });
++            resolver.RequireFormatContract("drawing.workbench.ink", 0, "0.0");
++            resolver.RequireFormatContract("drawing.workbench.ink", 1, "0.0");
++            resolver.RequireContract("drawing.workbench.ink_fit", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.ink_note", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.ink_over", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.ink_title", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.insert", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.insert_note", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.intro", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.larger", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.line", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.locked", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.mirror", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.mount_stats", 5, new[] { 1, 2, 3, 4 });
++            resolver.RequireFormatContract("drawing.workbench.mount_stats", 1, "0.0");
++            resolver.RequireFormatContract("drawing.workbench.mount_stats", 2, "0.0");
++            resolver.RequireFormatContract("drawing.workbench.mount_stats", 3, "0.00");
++            resolver.RequireFormatContract("drawing.workbench.mount_stats", 4, "0.00");
++            resolver.RequireContract("drawing.workbench.move", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.move_hint", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.no_stencils", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.owned", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.parts", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.pencil", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.pencil_hint", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.purchased", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.rectangle", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.redo", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.select_mount", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.selected", 2, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.shape_hint", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.shop_offline", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.shortcuts", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.smaller", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.snap", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.stats", 7, new[] { 0, 4, 5, 6 });
++            resolver.RequireFormatContract("drawing.workbench.stats", 0, "0");
++            resolver.RequireFormatContract("drawing.workbench.stats", 4, "0.0");
++            resolver.RequireFormatContract("drawing.workbench.stats", 5, "0.0");
++            resolver.RequireFormatContract("drawing.workbench.stats", 6, "0.00");
++            resolver.RequireContract("drawing.workbench.stats_title", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.stencils", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.title", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.tools", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.undo", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.width", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.workbench.zoom", 1, new[] { 0 });
++            resolver.RequireFormatContract("drawing.workbench.zoom", 0, "0");
+             resolver.RequireContract("editor.mechanics.generate", 0, Array.Empty<int>());
+             resolver.RequireContract("editor.mechanics.generated", 1, Array.Empty<int>());
+             resolver.RequireContract("freeform.authored", 0, Array.Empty<int>());
+--- a/Assets/PaperDefense/Presentation/UI/DrawingCanvasGraphic.cs
++++ b/Assets/PaperDefense/Presentation/UI/DrawingCanvasGraphic.cs
+@@ -0,0 +1,229 @@
++using System;
++using System.Collections.Generic;
++using PaperDefense.Core;
++using UnityEngine;
++using UnityEngine.EventSystems;
++using UnityEngine.InputSystem;
++using UnityEngine.UI;
++
++namespace PaperDefense.Presentation
++{
++    public enum DrawingTool { Pencil, Line, Rectangle, Ellipse, Eraser, Move }
++
++    /// <summary>One Graphic and one event receiver. Pending gestures never mutate the saved snapshot.</summary>
++    public sealed class DrawingCanvasGraphic : MaskableGraphic, IPointerDownHandler, IDragHandler, IPointerUpHandler, IScrollHandler
++    {
++        DrawingEditSession session;
++        readonly List<DrawingPoint> pending = new List<DrawingPoint>();
++        readonly List<DrawingPoint> shape = new List<DrawingPoint>(33);
++        string selected = DrawingBindings.Base;
++        DrawingTool tool;
++        float zoom = 1;
++        bool grid = true, snap, drawing, panning;
++        int pointerId;
++        Vector2 pan, panStart, pointerStart;
++        InputSettings inputSettings;
++        public event Action Changed;
++        public event Action Edited;
++        public event Action<string> Rejected;
++        public event Action EscapeRequested;
++        public bool HasPendingGesture => drawing || panning;
++        public DrawingTool Tool { get => tool; set { if (tool == value) return; CancelGesture(); tool = value; Changed?.Invoke(); } }
++        public bool Eraser { get => Tool == DrawingTool.Eraser; set => Tool = value ? DrawingTool.Eraser : DrawingTool.Pencil; }
++        public bool ShowGrid { get => grid; set { grid = value; SetVerticesDirty(); Changed?.Invoke(); } }
++        public bool SnapToGrid { get => snap; set { CancelGesture(); snap = value; Changed?.Invoke(); } }
++        public DrawingPartKey SelectedPart { get { DrawingBindings.TryLegacy(selected, out var key); return key; } set => SelectedBinding = DrawingBindings.For(value); }
++        public string SelectedBinding
++        {
++            get => selected;
++            set { DrawingBindings.Validate(value); if (selected == value) return; CancelGesture(); selected = value; Changed?.Invoke(); SetVerticesDirty(); }
++        }
++        public float Zoom
++        {
++            get => zoom;
++            set { CancelGesture(); zoom = Mathf.Clamp(value, .6f, 3f); SetVerticesDirty(); Changed?.Invoke(); }
++        }
++        public Vector2 Pan => pan;
++        float Scale => Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .44f * zoom;
++        Vector2 Center => rectTransform.rect.center + pan;
++
++        public void Bind(DrawingEditSession value)
++        { CancelGesture(); session = value; tool = DrawingTool.Pencil; selected = DrawingBindings.Base; zoom = 1; pan = Vector2.zero; SetVerticesDirty(); }
++        public void Fit() { CancelGesture(); zoom = 1; pan = Vector2.zero; SetVerticesDirty(); Changed?.Invoke(); }
++        public Vector2 LocalPointToScreen(Vector2 local) => RectTransformUtility.WorldToScreenPoint(null, rectTransform.TransformPoint(Center + local * Scale));
++
++        protected override void OnEnable() { base.OnEnable(); inputSettings = PointerEventPolicy.Acquire(); }
++        protected override void OnDisable() { CancelGesture(); PointerEventPolicy.Release(inputSettings); inputSettings = null; base.OnDisable(); }
++        void OnApplicationFocus(bool focused) { if (!focused) CancelGesture(); }
++        void OnApplicationPause(bool paused) { if (paused) CancelGesture(); }
++
++        void Update()
++        {
++            var keyboard = Keyboard.current;
++            if (keyboard == null || session == null) return;
++            var focused = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
++            if (focused != null && (focused.GetComponentInParent<UnityEngine.UI.InputField>() != null || focused.GetComponent("TMP_InputField") != null)) return;
++            if (keyboard.escapeKey.wasPressedThisFrame)
++            { if (HasPendingGesture) CancelGesture(); else EscapeRequested?.Invoke(); return; }
++            if (!keyboard.ctrlKey.isPressed && !keyboard.leftMetaKey.isPressed && !keyboard.rightMetaKey.isPressed) return;
++            if (keyboard.yKey.wasPressedThisFrame || (keyboard.shiftKey.isPressed && keyboard.zKey.wasPressedThisFrame)) Redo();
++            else if (keyboard.zKey.wasPressedThisFrame) Undo();
++        }
++
++        public void Undo() { CancelGesture(); if (session != null && session.Undo()) Edited?.Invoke(); Changed?.Invoke(); SetVerticesDirty(); }
++        public void Redo() { CancelGesture(); if (session != null && session.Redo()) Edited?.Invoke(); Changed?.Invoke(); SetVerticesDirty(); }
++        public void CancelGesture() { drawing = panning = false; pending.Clear(); SetVerticesDirty(); }
++
++        bool Local(PointerEventData e, out Vector2 local) => RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, e.position, e.pressEventCamera, out local);
++        bool Point(PointerEventData e, bool allowOutside, out DrawingPoint point)
++        {
++            point = default;
++            if (!Local(e, out var local)) return false;
++            local = (local - Center) / Mathf.Max(1, Scale);
++            if (Mathf.Abs(local.x) > 1 || Mathf.Abs(local.y) > 1 || (!allowOutside && !RectTransformUtility.RectangleContainsScreenPoint(rectTransform, e.position, e.pressEventCamera))) return false;
++            if (snap && tool != DrawingTool.Eraser) local = new Vector2(Mathf.Round(local.x * 20) / 20, Mathf.Round(local.y * 20) / 20);
++            point = new DrawingPoint(local.x, local.y); return true;
++        }
++        public void OnPointerDown(PointerEventData e)
++        {
++            if (!isActiveAndEnabled || session == null || (e.button != PointerEventData.InputButton.Left && e.button != PointerEventData.InputButton.Middle)) return;
++            CancelGesture(); pointerId = e.pointerId;
++            if (e.button == PointerEventData.InputButton.Middle)
++            { if (!Local(e, out pointerStart)) return; panning = true; panStart = pan; return; }
++            if (!Point(e, false, out var point)) return;
++            drawing = true; pending.Add(point); SetVerticesDirty();
++        }
++        public void OnDrag(PointerEventData e)
++        {
++            if (!isActiveAndEnabled || e.pointerId != pointerId) return;
++            if (panning && e.button == PointerEventData.InputButton.Middle && Local(e, out var local))
++            {
++                pan = panStart + local - pointerStart;
++                pan.x = Mathf.Clamp(pan.x, -rectTransform.rect.width, rectTransform.rect.width);
++                pan.y = Mathf.Clamp(pan.y, -rectTransform.rect.height, rectTransform.rect.height);
++                SetVerticesDirty(); return;
++            }
++            if (drawing && e.button == PointerEventData.InputButton.Left) AddPoint(e, false);
++        }
++        public void OnPointerUp(PointerEventData e)
++        {
++            if (!isActiveAndEnabled || e.pointerId != pointerId) return;
++            if (panning && e.button == PointerEventData.InputButton.Middle) { OnDrag(e); panning = false; return; }
++            if (!drawing || e.button != PointerEventData.InputButton.Left) return;
++            AddPoint(e, true); FinishStroke();
++        }
++        public void OnScroll(PointerEventData e)
++        { if (e.scrollDelta.y != 0) Zoom *= Mathf.Pow(1.12f, e.scrollDelta.y); }
++
++        void AddPoint(PointerEventData e, bool final)
++        {
++            if (!Point(e, tool == DrawingTool.Move, out var point))
++            { CancelGesture(); Rejected?.Invoke(UserText.Message("drawing.command.bounds")); return; }
++            if (tool != DrawingTool.Pencil && tool != DrawingTool.Eraser)
++            { if (pending.Count == 1) pending.Add(point); else pending[1] = point; SetVerticesDirty(); return; }
++            var last = pending[pending.Count - 1];
++            float dx = last.X - point.X, dy = last.Y - point.Y;
++            if (dx * dx + dy * dy < (final ? .000000001f : .000016f)) return;
++            if (pending.Count >= DrawingSnapshot.MaxPoints)
++            { CancelGesture(); Rejected?.Invoke(UserText.Message("copy.2bd5dc0f361ed385")); return; }
++            pending.Add(point); SetVerticesDirty();
++        }
++
++        public void FinishStroke()
++        {
++            if (!drawing || session == null) return;
++            bool edited = false; string reason = "";
++            if (tool == DrawingTool.Eraser) edited = session.ErasePath(selected, pending, .045f / zoom, out reason);
++            else if (pending.Count >= 2)
++            {
++                var start = pending[0]; var end = pending[pending.Count - 1];
++                switch (tool)
++                {
++                    case DrawingTool.Pencil: edited = session.AddStroke(selected, pending, out reason); break;
++                    case DrawingTool.Line: edited = session.AddLine(selected, start, end, out reason); break;
++                    case DrawingTool.Rectangle: edited = session.AddRectangle(selected, start, end, out reason); break;
++                    case DrawingTool.Ellipse: edited = session.AddEllipse(selected, start, end, out reason); break;
++                    case DrawingTool.Move: edited = session.TranslatePart(selected, end.X - start.X, end.Y - start.Y, out reason); break;
++                }
++            }
++            CancelGesture();
++            if (edited) Edited?.Invoke(); else if (!string.IsNullOrEmpty(reason)) Rejected?.Invoke(reason);
++            Changed?.Invoke();
++        }
++
++        protected override void OnPopulateMesh(VertexHelper vh)
++        {
++            vh.Clear(); if (session == null) return;
++            var center = Center; float scale = Scale;
++            if (grid)
++            {
++                for (int n = -10; n <= 10; n++)
++                {
++                    float p = n * .1f * scale;
++                    var ink = new Color(.28f, .51f, .68f, n == 0 ? .25f : .085f);
++                    BlueprintSketch.Line(vh, center + new Vector2(-scale, p), center + new Vector2(scale, p), 1, ink);
++                    BlueprintSketch.Line(vh, center + new Vector2(p, -scale), center + new Vector2(p, scale), 1, ink);
++                }
++            }
++            var border = new Color(.28f, .51f, .68f, .23f);
++            BlueprintSketch.Line(vh, center + new Vector2(-scale, -scale), center + new Vector2(scale, -scale), 1, border);
++            BlueprintSketch.Line(vh, center + new Vector2(-scale, scale), center + new Vector2(scale, scale), 1, border);
++            BlueprintSketch.Line(vh, center + new Vector2(-scale, -scale), center + new Vector2(-scale, scale), 1, border);
++            BlueprintSketch.Line(vh, center + new Vector2(scale, -scale), center + new Vector2(scale, scale), 1, border);
++            Point2 activePivot = DrawingTemplateCatalog.Pivot(session.Blueprint, selected);
++            Vector2 move = Vector2.zero;
++            bool moving = drawing && tool == DrawingTool.Move && pending.Count > 1;
++            if (moving) move = new Vector2(pending[1].X - pending[0].X, pending[1].Y - pending[0].Y);
++            bool outside = false;
++            if (moving) foreach (var stroke in session.Snapshot.GetPart(selected).Strokes) foreach (var p in stroke.Points)
++                if (Mathf.Abs(p.X + move.x) > 1 || Mathf.Abs(p.Y + move.y) > 1) outside = true;
++            foreach (var part in session.Snapshot.Parts)
++            {
++                if (!DrawingTemplateCatalog.IsEnabled(session.Blueprint, part.BindingId)) continue;
++                Point2 pivot = DrawingTemplateCatalog.Pivot(session.Blueprint, part.BindingId);
++                Vector2 offset = new Vector2(pivot.X - activePivot.X, pivot.Y - activePivot.Y);
++                bool active = part.BindingId == selected;
++                foreach (var stroke in part.Strokes)
++                {
++                    if (active && moving) Draw(vh, stroke.Points, center + offset * scale, scale, new Color(.2f, .35f, .5f, .18f), .009f);
++                    Draw(vh, stroke.Points, center + (offset + (active ? move : Vector2.zero)) * scale, scale,
++                        active ? (moving ? (outside ? NotebookPalette.Red : NotebookPalette.Blue) : NotebookPalette.Navy) : new Color(.22f, .35f, .5f, .24f), active ? .012f : .009f);
++                }
++            }
++            if (drawing && !moving)
++            {
++                BuildShape();
++                Draw(vh, shape, center, scale, tool == DrawingTool.Eraser ? new Color(.8f, .24f, .22f, .45f) : NotebookPalette.Blue, tool == DrawingTool.Eraser ? .035f / zoom : .01f);
++            }
++            var axis = new Color(.25f, .45f, .67f, .65f);
++            BlueprintSketch.Line(vh, center + Vector2.left * 8, center + Vector2.right * 8, 1.5f, axis);
++            BlueprintSketch.Line(vh, center + Vector2.down * 8, center + Vector2.up * 8, 1.5f, axis);
++            if (DrawingBindings.TryMount(selected, out _))
++            {
++                var tip = center + Vector2.up * 38;
++                BlueprintSketch.Line(vh, center, tip, 1.5f, NotebookPalette.Blue);
++                BlueprintSketch.Line(vh, tip, tip + new Vector2(-5, -8), 1.5f, NotebookPalette.Blue);
++                BlueprintSketch.Line(vh, tip, tip + new Vector2(5, -8), 1.5f, NotebookPalette.Blue);
++            }
++        }
++        void BuildShape()
++        {
++            shape.Clear(); if (pending.Count == 0) return;
++            var a = pending[0]; var b = pending[pending.Count - 1];
++            if (tool == DrawingTool.Rectangle)
++            { shape.Add(a); shape.Add(new DrawingPoint(b.X, a.Y)); shape.Add(b); shape.Add(new DrawingPoint(a.X, b.Y)); shape.Add(a); }
++            else if (tool == DrawingTool.Ellipse)
++            {
++                for (int i = 0; i <= 32; i++)
++                { float angle = i * Mathf.PI / 16; shape.Add(new DrawingPoint((a.X + b.X) * .5f + Mathf.Abs(b.X - a.X) * .5f * Mathf.Cos(angle), (a.Y + b.Y) * .5f + Mathf.Abs(b.Y - a.Y) * .5f * Mathf.Sin(angle))); }
++            }
++            else shape.AddRange(pending);
++        }
++        internal static void Draw(VertexHelper vh, IReadOnlyList<DrawingPoint> points, Vector2 center, float scale, Color color, float width)
++        {
++            for (int i = 1; i < points.Count; i++)
++                BlueprintSketch.Line(vh, center + new Vector2(points[i - 1].X, points[i - 1].Y) * scale,
++                    center + new Vector2(points[i].X, points[i].Y) * scale, Mathf.Max(1, width * scale), color);
++        }
++    }
++}
+--- a/Assets/PaperDefense/Presentation/UI/DrawingEditorPanel.cs
++++ b/Assets/PaperDefense/Presentation/UI/DrawingEditorPanel.cs
+@@ -2,70 +2,98 @@
+ using System.Collections.Generic;
+ using PaperDefense.Core;
+ using UnityEngine;
+-using UnityEngine.EventSystems;
+-using UnityEngine.UI;
+ 
+ namespace PaperDefense.Presentation
+ {
+-    /// <summary>Workshop-only editor. Commands edit a private working drawing, never an album page.</summary>
++    /// <summary>Workshop orchestration. Geometry belongs to the session; purchases belong to Application callbacks.</summary>
+     public sealed class DrawingEditorPanel
+     {
+         readonly UserTextResolver textResolver;
+-        string Resolve(string value) => GameText.Resolve(textResolver, value);
++        readonly DrawingWorkbenchUi ui;
+         readonly GameObject shade, panel;
+         readonly Action<DrawingSnapshot> apply;
+-        readonly Text message, rejectionMessage, partLabel;
+-        readonly Dictionary<string, Button> parts = new Dictionary<string, Button>(StringComparer.Ordinal);
+-        readonly Font font;
+         readonly Func<TowerBlueprint, string> preview;
+-        readonly Button applyButton;
++        readonly DrawingEditorContext context;
++        readonly UnityEngine.UI.Text message, rejectionMessage, partLabel, inkLabel, selectedStats, goal, help, zoomLabel;
++        readonly UnityEngine.UI.Button applyButton, undo, redo, grid, snap;
++        readonly RectTransform inkFill;
++        readonly Dictionary<string, UnityEngine.UI.Button> parts = new Dictionary<string, UnityEngine.UI.Button>(StringComparer.Ordinal);
++        readonly Dictionary<DrawingTool, UnityEngine.UI.Button> tools = new Dictionary<DrawingTool, UnityEngine.UI.Button>();
++        readonly DrawingStencilBrowser stencils;
+         GameObject partList;
+         string partListSignature;
+         public DrawingEditSession Session { get; private set; }
+         public DrawingCanvasGraphic Canvas { get; }
+         public bool IsOpen => panel.activeSelf;
++        string Resolve(string value) => ui.Resolve(value);
++        static string Copy(string key) => UserText.Message("drawing.workbench." + key);
+ 
+-        public DrawingEditorPanel(Transform parent, Font font, Action<DrawingSnapshot> apply, UserTextResolver textResolver = null, Func<TowerBlueprint, string> preview = null)
+-        {
+-            this.textResolver = textResolver;
+-            this.apply = apply;
+-            this.preview = preview;
+-            this.font = font;
+-            shade = Box(parent, "Drawing editor shade", new Rect(0, 0, 1600, 1000), new Color(.12f, .18f, .28f, .4f)).gameObject;
+-            panel = Box(parent, "Authored drawing editor", new Rect(90, 60, 1420, 880), NotebookPalette.Paper).gameObject;
+-            Label(panel.transform, font, UserText.Message("copy.d03ddd55c6674120"), new Rect(28, 16, 1300, 48), 32, NotebookPalette.Blue);
+-            Label(panel.transform, font, UserText.Message("copy.579cb9fc5f9505d7"), new Rect(30, 68, 1350, 50), 20, NotebookPalette.Navy);
+-            var sheet = Box(panel.transform, "Drawing viewport", new Rect(285, 130, 1095, 500), new Color(1, .99f, .93f));
+-            sheet.gameObject.AddComponent<RectMask2D>();
+-            var go = new GameObject("Drawing canvas", typeof(RectTransform), typeof(CanvasRenderer), typeof(DrawingCanvasGraphic));
+-            go.transform.SetParent(sheet, false); Place(go.GetComponent<RectTransform>(), new Rect(0, 0, 1095, 500));
+-            Canvas = go.GetComponent<DrawingCanvasGraphic>(); Canvas.raycastTarget = true;
+-            Canvas.Changed += Refresh;
+-            Canvas.Edited += ClearRejection;
+-            Canvas.Rejected += reason => rejectionMessage.text = Resolve(reason);
+-            partLabel = Label(panel.transform, font, "", new Rect(28, 507, 234, 60), 18, NotebookPalette.Blue);
+-            Button(panel.transform, font, "Drawing pencil", new Rect(28, 575, 112, 44), UserText.Message("copy.559092614df376b0"), () => { Canvas.Eraser = false; Refresh(); });
+-            Button(panel.transform, font, "Drawing eraser", new Rect(147, 575, 112, 44), UserText.Message("copy.0d542afd89d31791"), () => { Canvas.Eraser = true; Refresh(); });
+-            Button(panel.transform, font, "Drawing undo", new Rect(28, 631, 112, 44), UserText.Message("copy.48cedcfac4577882"), () => { Canvas.FinishStroke(); if (Session.Undo()) ClearRejection(); Refresh(); });
+-            Button(panel.transform, font, "Drawing redo", new Rect(147, 631, 112, 44), UserText.Message("copy.81efb1b9163cd409"), () => { Canvas.FinishStroke(); if (Session.Redo()) ClearRejection(); Refresh(); });
+-            Button(panel.transform, font, "Clear drawing part", new Rect(28, 689, 231, 44), UserText.Message("copy.c45251a21dd7c722"), () => { Canvas.FinishStroke(); if (Session.ClearPart(Canvas.SelectedBinding)) ClearRejection(); Refresh(); });
+-            Button(panel.transform, font, "Drawing zoom out", new Rect(291, 760, 160, 40), UserText.Message("copy.dd5b419fddef29c4"), () => Canvas.Zoom *= .8f);
+-            Button(panel.transform, font, "Drawing zoom in", new Rect(460, 760, 160, 40), UserText.Message("copy.5ec88e9254b0c9e8"), () => Canvas.Zoom *= 1.25f);
+-            rejectionMessage = Label(panel.transform, font, "", new Rect(291, 650, 329, 100), 17, NotebookPalette.Red);
+-            message = Label(panel.transform, font, "", new Rect(645, 650, 735, 150), 17, NotebookPalette.Navy);
+-            rejectionMessage.name = "Drawing rejection";
+-            message.name = "Drawing live stats";
+-            Button(panel.transform, font, "Cancel drawing", new Rect(30, 813, 450, 47), UserText.Message("copy.0c15f710385de156"), () => Close(false));
+-            applyButton = Button(panel.transform, font, "Apply drawing", new Rect(510, 813, 870, 47), UserText.Message("copy.1455e65ce5c81160"), () => Close(true));
++        public DrawingEditorPanel(Transform parent, Font font, Action<DrawingSnapshot> apply, UserTextResolver textResolver = null,
++            Func<TowerBlueprint, string> preview = null, DrawingEditorContext context = null)
++        {
++            this.textResolver = textResolver; this.apply = apply; this.preview = preview; this.context = context;
++            ui = new DrawingWorkbenchUi(font, textResolver);
++            shade = DrawingWorkbenchUi.Box(parent, "Drawing editor shade", new Rect(0, 0, 1600, 1000), new Color(.12f, .18f, .28f, .4f), true).gameObject;
++            panel = DrawingWorkbenchUi.Box(parent, "Authored drawing editor", new Rect(20, 30, 1560, 940), NotebookPalette.Paper, true).gameObject;
++            DrawingWorkbenchUi.Box(panel.transform, "Drawing header rule", new Rect(24, 96, 1512, 2), new Color(.35f, .5f, .65f, .3f));
++            ui.Label(panel.transform, "Drawing title", Copy("title"), new Rect(24, 13, 1512, 42), 33, NotebookPalette.Blue);
++            ui.Label(panel.transform, "Drawing introduction", Copy("intro"), new Rect(24, 57, 1512, 31), 22);
++            ui.Label(panel.transform, "Drawing part heading", Copy("parts"), new Rect(24, 111, 218, 28), 21, NotebookPalette.Blue);
++            ui.Label(panel.transform, "Drawing tool heading", Copy("tools"), new Rect(24, 295, 218, 28), 21, NotebookPalette.Blue);
++            for (int i = 0; i < 6; i++)
++            {
++                var tool = (DrawingTool)i;
++                tools.Add(tool, ui.Button(panel.transform, "Drawing " + tool.ToString().ToLowerInvariant(), new Rect(24, 332 + i * 44, 218, 38), ToolName(tool), () => Canvas.Tool = tool));
++            }
++            undo = ui.Button(panel.transform, "Drawing undo", new Rect(24, 608, 105, 40), Copy("undo"), () => Canvas.Undo());
++            redo = ui.Button(panel.transform, "Drawing redo", new Rect(137, 608, 105, 40), Copy("redo"), () => Canvas.Redo());
++            ui.Button(panel.transform, "Drawing mirror", new Rect(24, 660, 218, 40), Copy("mirror"), Mirror).GetComponentInChildren<UnityEngine.UI.Text>().fontSize = 17;
++            ui.Label(panel.transform, "Drawing width label", Copy("width"), new Rect(24, 715, 115, 30), 20);
++            ui.Button(panel.transform, "Drawing width smaller", new Rect(140, 708, 46, 38), Copy("smaller"), () => Resize(.9f, 1));
++            ui.Button(panel.transform, "Drawing width larger", new Rect(196, 708, 46, 38), Copy("larger"), () => Resize(1.1f, 1));
++            ui.Label(panel.transform, "Drawing height label", Copy("height"), new Rect(24, 761, 115, 30), 20);
++            ui.Button(panel.transform, "Drawing height smaller", new Rect(140, 754, 46, 38), Copy("smaller"), () => Resize(1, .9f));
++            ui.Button(panel.transform, "Drawing height larger", new Rect(196, 754, 46, 38), Copy("larger"), () => Resize(1, 1.1f));
++            ui.Button(panel.transform, "Clear drawing part", new Rect(24, 807, 218, 40), Copy("clear"), () =>
++            { Canvas.CancelGesture(); if (Session.ClearPart(Canvas.SelectedBinding)) ClearRejection(); Refresh(); });
++            grid = ui.Button(panel.transform, "Drawing grid", new Rect(264, 112, 119, 40), Copy("grid"), () => Canvas.ShowGrid = !Canvas.ShowGrid);
++            snap = ui.Button(panel.transform, "Drawing snap", new Rect(391, 112, 136, 40), Copy("snap"), () => Canvas.SnapToGrid = !Canvas.SnapToGrid);
++            ui.Button(panel.transform, "Drawing zoom out", new Rect(679, 112, 44, 40), Copy("smaller"), () => Canvas.Zoom *= .8f);
++            zoomLabel = ui.Label(panel.transform, "Drawing zoom value", "", new Rect(732, 112, 95, 40), 21); zoomLabel.alignment = TextAnchor.MiddleCenter;
++            ui.Button(panel.transform, "Drawing zoom in", new Rect(836, 112, 44, 40), Copy("larger"), () => Canvas.Zoom *= 1.25f);
++            ui.Button(panel.transform, "Drawing fit", new Rect(888, 112, 184, 40), Copy("fit"), () => Canvas.Fit());
++            var sheet = DrawingWorkbenchUi.Box(panel.transform, "Drawing viewport", new Rect(264, 165, 808, 607), new Color(1, .995f, .95f));
++            sheet.gameObject.AddComponent<UnityEngine.UI.RectMask2D>();
++            var canvas = new GameObject("Drawing canvas", typeof(RectTransform), typeof(CanvasRenderer), typeof(DrawingCanvasGraphic));
++            canvas.transform.SetParent(sheet, false); DrawingWorkbenchUi.Place(canvas.GetComponent<RectTransform>(), new Rect(0, 0, 808, 607));
++            Canvas = canvas.GetComponent<DrawingCanvasGraphic>(); Canvas.raycastTarget = true;
++            partLabel = ui.Label(panel.transform, "Drawing selected part and tool", "", new Rect(264, 780, 808, 29), 21, NotebookPalette.Blue);
++            rejectionMessage = ui.Label(panel.transform, "Drawing rejection", "", new Rect(264, 814, 808, 43), 19, NotebookPalette.Red);
++            help = ui.Label(panel.transform, "Drawing gesture help", "", new Rect(264, 858, 808, 28), 17);
++            ui.Label(panel.transform, "Drawing ink heading", Copy("ink_title"), new Rect(1096, 111, 440, 29), 22, NotebookPalette.Blue);
++            inkLabel = ui.Label(panel.transform, "Drawing ink usage", "", new Rect(1096, 146, 440, 27), 21);
++            var inkTrack = DrawingWorkbenchUi.Box(panel.transform, "Drawing ink capacity", new Rect(1096, 180, 440, 12), new Color(.25f, .42f, .61f, .15f));
++            inkFill = DrawingWorkbenchUi.Box(inkTrack, "Drawing ink used", new Rect(0, 0, 0, 12), NotebookPalette.Blue);
++            ui.Label(panel.transform, "Drawing ink explanation", Copy("ink_note"), new Rect(1096, 199, 440, 25), 17);
++            ui.Label(panel.transform, "Drawing stats heading", Copy("stats_title"), new Rect(1096, 231, 440, 29), 22, NotebookPalette.Blue);
++            message = ui.Label(panel.transform, "Drawing live stats", "", new Rect(1096, 266, 440, 78), 20);
++            selectedStats = ui.Label(panel.transform, "Drawing selected mount stats", "", new Rect(1096, 346, 440, 86), 18);
++            goal = ui.Label(panel.transform, "Drawing goal guidance", "", new Rect(1096, 439, 440, 88), 19);
++            stencils = new DrawingStencilBrowser(panel.transform, ui, context, Insert, Feedback);
++            ui.Button(panel.transform, "Cancel drawing", new Rect(24, 894, 218, 34), Copy("cancel"), () => Close(false));
++            applyButton = ui.Button(panel.transform, "Apply drawing", new Rect(754, 894, 318, 34), Copy("apply"), () => Close(true), true);
++            ui.Label(panel.transform, "Drawing shortcut hint", Copy("shortcuts"), new Rect(264, 892, 480, 41), 15);
++            Canvas.Changed += Refresh; Canvas.Edited += ClearRejection; Canvas.Rejected += Feedback; Canvas.EscapeRequested += () => Close(false);
+             Close(false);
+         }
+         public void Open(TowerBlueprint blueprint)
+         {
+             ClearRejection();
+-            blueprint = blueprint.AsFreeform();
+-            Session = new DrawingEditSession(blueprint, blueprint.Drawing);
+-            Canvas.Bind(Session); Canvas.SelectedBinding = DrawingBindings.Base; Canvas.Zoom = 1;
++            var content = context?.Workshop?.Invoke()?.Content ?? blueprint.Content;
++            blueprint = (content == null ? blueprint : blueprint.WithContent(content)).AsFreeform();
++            Session = new DrawingEditSession(blueprint, blueprint.Drawing); Canvas.Bind(Session);
+             RebuildParts();
++            stencils.Bind((blueprint.Content ?? GameBalance.CreateDefault().ResolveContent()).DrawingUnlocks);
+             shade.SetActive(true); panel.SetActive(true); Refresh();
+         }
+         public void Close(bool commit)
+@@ -74,55 +102,84 @@
+             {
+                 Canvas.FinishStroke();
+                 var candidate = Session.Blueprint.WithFreeformDrawing(Session.Snapshot);
+-                if (!candidate.FreeformDesign.IsComplete) { rejectionMessage.text = Resolve(candidate.FreeformDesign.Message); return; }
+-                apply(Session.Snapshot);
+-            }
+-            shade.SetActive(false); panel.SetActive(false);
+-        }
+-        void ClearRejection() => rejectionMessage.text = Resolve("");
++                var resolved = context?.Preview?.Invoke(candidate);
++                var design = resolved?.FreeformDesign ?? candidate.FreeformDesign;
++                if (!design.IsUsable) { Feedback(design.Message); Refresh(); return; }
++                apply?.Invoke(Session.Snapshot);
++            }
++            Canvas.CancelGesture(); shade.SetActive(false); panel.SetActive(false);
++        }
++        void ClearRejection() { rejectionMessage.text = ""; PositionHelp(); }
++        void Feedback(string reason) { rejectionMessage.text = Resolve(reason); PositionHelp(); }
++        void PositionHelp()
++        {
++            if (help == null) return;
++            DrawingWorkbenchUi.Place(help.rectTransform, string.IsNullOrEmpty(rejectionMessage.text) ? new Rect(264, 814, 808, 73) : new Rect(264, 858, 808, 28));
++        }
++        void Mirror()
++        { Canvas.CancelGesture(); Command(Session.MirrorPartHorizontal(Canvas.SelectedBinding, out string reason), reason); }
++        void Resize(float x, float y)
++        { Canvas.CancelGesture(); Command(Session.ScalePart(Canvas.SelectedBinding, x, y, out string reason), reason); }
++        void Insert(DrawingUnlockDefinition definition)
++        { Canvas.CancelGesture(); Command(Session.ReplaceFromStencil(Canvas.SelectedBinding, definition, out string reason), reason); }
++        void Command(bool changed, string reason)
++        { if (changed) ClearRejection(); else if (!string.IsNullOrEmpty(reason)) Feedback(reason); Refresh(); }
+         void Refresh()
+         {
+             if (Session == null) return;
+-            var enabled = DrawingTemplateCatalog.EnabledBindings(Session.Blueprint);
+-            string signature = string.Join("|", enabled);
++            string signature = string.Join("|", DrawingTemplateCatalog.EnabledBindings(Session.Blueprint));
+             if (signature != partListSignature) RebuildParts();
+-            foreach (var pair in parts)
+-            {
+-                bool present = pair.Key == DrawingBindings.Decoration;
+-                foreach (var key in enabled) if (key == pair.Key) present = true;
+-                pair.Value.interactable = present;
+-                pair.Value.GetComponent<Image>().color = Canvas.SelectedBinding == pair.Key ? new Color(.78f, .87f, .96f) : Color.white;
+-            }
+-            partLabel.text = Resolve(UserText.Message("drawing.part_tool", Name(Session.Blueprint, Canvas.SelectedBinding, textResolver), Canvas.Eraser ? UserText.Message("copy.22d6e4d15d44f98f") : UserText.Message("copy.499984333ff3564d")));
++            foreach (var pair in parts) pair.Value.GetComponent<UnityEngine.UI.Image>().color = Canvas.SelectedBinding == pair.Key ? DrawingWorkbenchUi.Selection : Color.white;
++            foreach (var pair in tools) pair.Value.GetComponent<UnityEngine.UI.Image>().color = Canvas.Tool == pair.Key ? DrawingWorkbenchUi.Selection : Color.white;
++            grid.GetComponent<UnityEngine.UI.Image>().color = Canvas.ShowGrid ? DrawingWorkbenchUi.Selection : Color.white;
++            snap.GetComponent<UnityEngine.UI.Image>().color = Canvas.SnapToGrid ? DrawingWorkbenchUi.Selection : Color.white;
++            zoomLabel.text = Resolve(UserText.Message("drawing.workbench.zoom", Canvas.Zoom * 100));
++            partLabel.text = Resolve(UserText.Message("drawing.workbench.selected", Name(Session.Blueprint, Canvas.SelectedBinding, textResolver), ToolName(Canvas.Tool)));
++            undo.interactable = Session.CanUndo; redo.interactable = Session.CanRedo;
+             var candidate = Session.Blueprint.WithFreeformDrawing(Session.Snapshot);
+-            applyButton.interactable = candidate.FreeformDesign.IsComplete;
+-            string detail = preview != null ? preview(candidate) : candidate.FreeformDesign.Message;
+-            if (DrawingBindings.TryMount(Canvas.SelectedBinding, out int slot))
+-            {
+-                var barrel = candidate.FreeformDesign.GetBarrel(slot);
+-                if (barrel != null) detail += UserText.Message("freeform.barrel_stats", barrel.RangeMultiplier, barrel.IntervalMultiplier, barrel.DamageMultiplier);
+-            }
+-            message.text = Resolve(detail);
+-            Canvas.SetVerticesDirty();
++            var resolved = context?.Preview?.Invoke(candidate);
++            var design = resolved?.FreeformDesign ?? candidate.FreeformDesign;
++            applyButton.interactable = design.IsUsable;
++            inkLabel.text = Resolve(UserText.Message("drawing.workbench.ink", design.InkUsed, design.InkBudget, Copy(design.IsWithinBudget ? "ink_fit" : "ink_over")));
++            inkLabel.color = design.IsWithinBudget ? NotebookPalette.Navy : NotebookPalette.Red;
++            inkFill.sizeDelta = new Vector2(440 * Mathf.Clamp01(design.InkUsed / Mathf.Max(.01f, design.InkBudget)), 12);
++            inkFill.GetComponent<UnityEngine.UI.Image>().color = design.IsWithinBudget ? NotebookPalette.Blue : NotebookPalette.Red;
++            selectedStats.text = Resolve(Copy("select_mount"));
++            if (resolved.HasValue)
++            {
++                var stats = resolved.Value;
++                message.text = Resolve(UserText.Message("drawing.workbench.stats", stats.Health, stats.Load, stats.Capacity, stats.Cost, stats.BuildSeconds, stats.Range, stats.FireRate));
++                if (DrawingBindings.TryMount(Canvas.SelectedBinding, out int slot) && stats.Weapons != null)
++                    foreach (var mount in stats.Weapons) if (mount.SlotIndex == slot)
++                        selectedStats.text = Resolve(UserText.Message("drawing.workbench.mount_stats", slot + 1, mount.Damage, mount.Range, mount.FireRate, mount.Interval));
++                if (stats.FeedMultiplier > 0 && stats.FeedMultiplier < .999f)
++                    selectedStats.text += "\n" + Resolve(UserText.Message("drawing.workbench.feed", stats.FeedMultiplier));
++            }
++            else { message.text = Resolve(preview != null ? preview(candidate) : design.Message); }
++            goal.text = Resolve(Copy(Canvas.SelectedBinding == DrawingBindings.Base ? "body_goal" : DrawingBindings.TryMount(Canvas.SelectedBinding, out _) ? "barrel_goal" : "decoration_goal"));
++            help.text = Resolve(Copy(Canvas.Tool == DrawingTool.Pencil ? "pencil_hint" : Canvas.Tool == DrawingTool.Eraser ? "eraser_hint" : Canvas.Tool == DrawingTool.Move ? "move_hint" : "shape_hint"));
++            if (!design.IsUsable) help.text = Resolve(Session.Snapshot.StrokeCount == 0 ? Copy("beginner") : design.Message);
++            stencils.Refresh(Canvas.SelectedBinding); Canvas.SetVerticesDirty();
+         }
+         void RebuildParts()
+         {
+             if (partList != null) UnityEngine.Object.DestroyImmediate(partList);
+             parts.Clear(); var templates = DrawingTemplateCatalog.Create(Session.Blueprint);
+-            var list = new CatalogScrollList(panel.transform, "Drawing parts", new Rect(28, 132, 231, 354), templates.Count, 1, 38, 6);
++            var list = new CatalogScrollList(panel.transform, "Drawing parts", new Rect(24, 146, 218, 132), templates.Count, 1, 36, 6);
+             partList = list.Scroll.gameObject; int i = 0;
+             foreach (var template in templates)
+             {
+                 string binding = template.BindingId;
+                 if (binding != DrawingBindings.Base && binding != DrawingBindings.Decoration && !DrawingBindings.TryMount(binding, out _)) continue;
+                 string suffix = DrawingBindings.TryLegacy(binding, out var key) ? key.ToString() : binding;
+-                var button = Button(list.Content, font, "Draw part " + suffix, new Rect(0, i++ * 44, 225, 38), Name(Session.Blueprint, binding, textResolver), () =>
+-                { Canvas.FinishStroke(); Canvas.SelectedBinding = binding; Refresh(); });
+-                button.GetComponentInChildren<Text>().fontSize = 13; parts.Add(binding, button);
+-            }
++                var button = ui.Button(list.Content, "Draw part " + suffix, new Rect(0, i++ * 42, 210, 36), Name(Session.Blueprint, binding, textResolver), () => Canvas.SelectedBinding = binding);
++                parts.Add(binding, button);
++            }
++            list.Content.sizeDelta = new Vector2(0, Mathf.Max(132, i * 42 - 6));
+             partListSignature = string.Join("|", DrawingTemplateCatalog.EnabledBindings(Session.Blueprint));
+             if (!parts.ContainsKey(Canvas.SelectedBinding)) Canvas.SelectedBinding = DrawingBindings.Base;
+         }
++        static string ToolName(DrawingTool tool) => Copy(tool.ToString().ToLowerInvariant());
+         public static string Name(TowerBlueprint blueprint, string binding, UserTextResolver resolver = null)
+         {
+             if (binding == DrawingBindings.Base) return GameText.Resolve(resolver, UserText.Message("freeform.body"));
+@@ -143,109 +200,5 @@
+                 default: return UserText.Message("copy.cab08f8099c1ba76");
+             }
+         }
+-        static RectTransform Box(Transform parent, string name, Rect box, Color color)
+-        {
+-            var go = new GameObject(name, typeof(RectTransform), typeof(Image)); go.transform.SetParent(parent, false);
+-            var rect = go.GetComponent<RectTransform>(); Place(rect, box); var image = go.GetComponent<Image>(); image.color = color; image.raycastTarget = true; return rect;
+-        }
+-        Text Label(Transform parent, Font font, string value, Rect box, int size, Color color)
+-        {
+-            var go = new GameObject("Drawing label", typeof(RectTransform), typeof(Text)); go.transform.SetParent(parent, false); Place(go.GetComponent<RectTransform>(), box);
+-            var text = go.GetComponent<Text>(); text.font = font; text.text = Resolve(value); text.fontSize = size; text.color = color; text.raycastTarget = false;
+-            text.verticalOverflow = VerticalWrapMode.Truncate; return text;
+-        }
+-        Button Button(Transform parent, Font font, string name, Rect box, string caption, Action action)
+-        {
+-            var rect = Box(parent, name, box, Color.white); var button = rect.gameObject.AddComponent<Button>(); button.onClick.AddListener(() => action());
+-            var text = Label(rect, font, caption, new Rect(4, 2, box.width - 8, box.height - 4), 16, NotebookPalette.Navy); text.alignment = TextAnchor.MiddleCenter; return button;
+-        }
+-        static void Place(RectTransform rect, Rect box)
+-        { rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0, 1); rect.anchoredPosition = new Vector2(box.x, -box.y); rect.sizeDelta = box.size; }
+-    }
+-
+-    /// <summary>One Graphic and one event receiver for the entire drawing, independent of stroke count.</summary>
+-    public sealed class DrawingCanvasGraphic : MaskableGraphic, IPointerDownHandler, IDragHandler, IPointerUpHandler, IScrollHandler
+-    {
+-        DrawingEditSession session;
+-        readonly List<DrawingPoint> pending = new List<DrawingPoint>();
+-        string selected = DrawingBindings.Base;
+-        float zoom = 1;
+-        public event Action Changed;
+-        /// <summary>A committed edit, distinct from redraws and rejected or empty input.</summary>
+-        public event Action Edited;
+-        public event Action<string> Rejected;
+-        public bool Eraser { get; set; }
+-        public DrawingPartKey SelectedPart { get { DrawingBindings.TryLegacy(selected, out var key); return key; } set => SelectedBinding = DrawingBindings.For(value); }
+-        public string SelectedBinding { get => selected; set { DrawingBindings.Validate(value); selected = value; SetVerticesDirty(); } }
+-        public float Zoom { get => zoom; set { zoom = Mathf.Clamp(value, .6f, 2.5f); SetVerticesDirty(); } }
+-        float Scale => Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .44f * zoom;
+-        public void Bind(DrawingEditSession value) { session = value; pending.Clear(); Eraser = false; SetVerticesDirty(); }
+-        public Vector2 LocalPointToScreen(Vector2 local) => RectTransformUtility.WorldToScreenPoint(null, rectTransform.TransformPoint(rectTransform.rect.center + local * Scale));
+-        bool Point(PointerEventData e, out DrawingPoint point)
+-        {
+-            if (!RectTransformUtility.RectangleContainsScreenPoint(rectTransform, e.position, e.pressEventCamera))
+-            { point = default(DrawingPoint); return false; }
+-            Vector2 local;
+-            bool found = RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, e.position, e.pressEventCamera, out local);
+-            local = (local - rectTransform.rect.center) / Mathf.Max(1, Scale);
+-            if (!found || Mathf.Abs(local.x) > 1 || Mathf.Abs(local.y) > 1) { point = default(DrawingPoint); return false; }
+-            point = new DrawingPoint(local.x, local.y);
+-            return true;
+-        }
+-        public void OnPointerDown(PointerEventData e)
+-        {
+-            if (session == null || e.button != PointerEventData.InputButton.Left) return;
+-            pending.Clear(); AddPoint(e);
+-        }
+-        public void OnDrag(PointerEventData e) { if (session != null && e.button == PointerEventData.InputButton.Left) AddPoint(e); }
+-        public void OnPointerUp(PointerEventData e) { if (e.button == PointerEventData.InputButton.Left) FinishStroke(); }
+-        public void OnScroll(PointerEventData e) { FinishStroke(); Zoom *= e.scrollDelta.y > 0 ? 1.12f : .89f; }
+-        void AddPoint(PointerEventData e)
+-        {
+-            DrawingPoint point;
+-            if (!Point(e, out point))
+-            { if (pending.Count > 0) FinishStroke(); return; }
+-            if (Eraser) { if (session.Erase(selected, point, .045f / zoom)) Edited?.Invoke(); Changed?.Invoke(); return; }
+-            if (pending.Count >= DrawingSnapshot.MaxPoints) { Rejected?.Invoke(UserText.Message("copy.2bd5dc0f361ed385")); return; }
+-            if (pending.Count > 0)
+-            { var last = pending[pending.Count - 1]; float dx = last.X - point.X, dy = last.Y - point.Y; if (dx * dx + dy * dy < .000016f) return; }
+-            pending.Add(point); SetVerticesDirty();
+-        }
+-        public void FinishStroke()
+-        {
+-            if (session != null && pending.Count >= 2)
+-            { string reason; if (session.AddStroke(selected, pending, out reason)) Edited?.Invoke(); else Rejected?.Invoke(reason); }
+-            pending.Clear(); Changed?.Invoke(); SetVerticesDirty();
+-        }
+-        protected override void OnPopulateMesh(VertexHelper vh)
+-        {
+-            vh.Clear(); if (session == null) return;
+-            Vector2 center = rectTransform.rect.center; float scale = Scale;
+-            Point2 activePivot = DrawingTemplateCatalog.Pivot(session.Blueprint, selected);
+-            foreach (var part in session.Snapshot.Parts)
+-            {
+-                if (!DrawingTemplateCatalog.IsEnabled(session.Blueprint, part.BindingId)) continue;
+-                Point2 pivot = DrawingTemplateCatalog.Pivot(session.Blueprint, part.BindingId);
+-                Vector2 offset = new Vector2(pivot.X - activePivot.X, pivot.Y - activePivot.Y);
+-                foreach (var stroke in part.Strokes) Draw(vh, stroke.Points, center + offset * scale, scale,
+-                    part.BindingId == selected ? NotebookPalette.Navy : new Color(.22f, .35f, .5f, .35f), .018f);
+-            }
+-            Draw(vh, pending, center, scale, NotebookPalette.Navy, .018f);
+-            if (DrawingBindings.TryMount(selected, out _))
+-            {
+-                var tip = center + Vector2.up * 35;
+-                BlueprintSketch.Line(vh, center, tip, 1, NotebookPalette.Blue);
+-                BlueprintSketch.Line(vh, tip, tip + new Vector2(-5, -8), 1, NotebookPalette.Blue);
+-                BlueprintSketch.Line(vh, tip, tip + new Vector2(5, -8), 1, NotebookPalette.Blue);
+-            }
+-            BlueprintSketch.Line(vh, center + Vector2.left * 7, center + Vector2.right * 7, 1, new Color(.3f, .5f, .7f, .5f));
+-            BlueprintSketch.Line(vh, center + Vector2.down * 7, center + Vector2.up * 7, 1, new Color(.3f, .5f, .7f, .5f));
+-        }
+-        internal static void Draw(VertexHelper vh, IReadOnlyList<DrawingPoint> points, Vector2 center, float scale, Color color, float width)
+-        {
+-            for (int i = 1; i < points.Count; i++)
+-                BlueprintSketch.Line(vh, center + new Vector2(points[i - 1].X, points[i - 1].Y) * scale,
+-                    center + new Vector2(points[i].X, points[i].Y) * scale, Mathf.Max(1, width * scale), color);
+-        }
+     }
+ }
+--- a/Assets/PaperDefense/Presentation/UI/DrawingStencilBrowser.cs
++++ b/Assets/PaperDefense/Presentation/UI/DrawingStencilBrowser.cs
+@@ -0,0 +1,122 @@
++using System;
++using System.Collections.Generic;
++using PaperDefense.Core;
++using UnityEngine;
++
++namespace PaperDefense.Presentation
++{
++    /// <summary>Reusable stencil cards. Buying grants access; only Insert changes the drawing.</summary>
++    internal sealed class DrawingStencilBrowser
++    {
++        sealed class Card
++        {
++            public DrawingUnlockDefinition Definition;
++            public RectTransform Root;
++            public UnityEngine.UI.Button Buy, Insert;
++            public UnityEngine.UI.Text BuyLabel;
++        }
++        readonly DrawingWorkbenchUi ui;
++        readonly DrawingEditorContext context;
++        readonly Action<DrawingUnlockDefinition> insert;
++        readonly Action<string> feedback;
++        readonly RectTransform content;
++        readonly UnityEngine.UI.Text gold, note, empty;
++        readonly UnityEngine.UI.ScrollRect scroll;
++        readonly List<Card> cards = new List<Card>();
++        IReadOnlyList<DrawingUnlockDefinition> definitions;
++        DrawingStencilRole? currentRole;
++
++        public DrawingStencilBrowser(Transform parent, DrawingWorkbenchUi ui, DrawingEditorContext context, Action<DrawingUnlockDefinition> insert, Action<string> feedback)
++        {
++            this.ui = ui; this.context = context; this.insert = insert; this.feedback = feedback;
++            ui.Label(parent, "Drawing stencil heading", UserText.Message("drawing.workbench.stencils"), new Rect(1096, 535, 440, 29), 22, NotebookPalette.Blue);
++            gold = ui.Label(parent, "Drawing stencil gold", "", new Rect(1096, 565, 440, 28), 21);
++            note = ui.Label(parent, "Drawing gold source", UserText.Message("drawing.workbench.gold_source"), new Rect(1096, 595, 440, 44), 17);
++            var root = DrawingWorkbenchUi.Box(parent, "Drawing stencils", new Rect(1096, 646, 440, 202), new Color(.92f, .94f, .93f), true);
++            scroll = root.gameObject.AddComponent<UnityEngine.UI.ScrollRect>();
++            var viewport = DrawingWorkbenchUi.Box(root, "Stencil viewport", new Rect(0, 0, 430, 202), Color.white, true);
++            var mask = viewport.gameObject.AddComponent<UnityEngine.UI.Mask>(); mask.showMaskGraphic = false;
++            content = new GameObject("Stencil content", typeof(RectTransform)).GetComponent<RectTransform>(); content.SetParent(viewport, false);
++            content.anchorMin = new Vector2(0, 1); content.anchorMax = Vector2.one; content.pivot = new Vector2(0, 1); content.sizeDelta = Vector2.zero;
++            var layout = content.gameObject.AddComponent<UnityEngine.UI.VerticalLayoutGroup>(); layout.spacing = 8;
++            layout.childControlWidth = layout.childControlHeight = true; layout.childForceExpandWidth = true; layout.childForceExpandHeight = false;
++            var fitter = content.gameObject.AddComponent<UnityEngine.UI.ContentSizeFitter>(); fitter.verticalFit = UnityEngine.UI.ContentSizeFitter.FitMode.PreferredSize;
++            scroll.content = content; scroll.viewport = viewport; scroll.horizontal = false; scroll.vertical = true;
++            scroll.movementType = UnityEngine.UI.ScrollRect.MovementType.Clamped; scroll.inertia = false; scroll.scrollSensitivity = 42;
++            var track = DrawingWorkbenchUi.Box(root, "Stencil scrollbar", new Rect(432, 0, 8, 202), new Color(.2f, .4f, .6f, .12f), true);
++            var handle = DrawingWorkbenchUi.Box(track, "Handle", new Rect(0, 0, 8, 60), NotebookPalette.Blue, true);
++            handle.anchorMin = Vector2.zero; handle.anchorMax = Vector2.one; handle.sizeDelta = Vector2.zero;
++            var scrollbar = track.gameObject.AddComponent<UnityEngine.UI.Scrollbar>(); scrollbar.handleRect = handle; scrollbar.targetGraphic = handle.GetComponent<UnityEngine.UI.Image>();
++            scrollbar.direction = UnityEngine.UI.Scrollbar.Direction.BottomToTop; scroll.verticalScrollbar = scrollbar;
++            empty = ui.Label(root, "Drawing decoration stencil hint", UserText.Message("drawing.workbench.no_stencils"), new Rect(15, 30, 400, 120), 20);
++            ui.Label(parent, "Drawing stencil replacement note", UserText.Message("drawing.workbench.insert_note"), new Rect(1096, 855, 440, 62), 16);
++        }
++
++        public void Bind(IReadOnlyList<DrawingUnlockDefinition> catalog)
++        {
++            if (ReferenceEquals(definitions, catalog)) return;
++            definitions = catalog; currentRole = null;
++            foreach (var card in cards) UnityEngine.Object.DestroyImmediate(card.Root.gameObject);
++            cards.Clear();
++            foreach (var definition in catalog)
++            {
++                var box = DrawingWorkbenchUi.Box(content, "Stencil " + definition.Id, new Rect(0, 0, 430, 158), new Color(1, .995f, .96f));
++                var layout = box.gameObject.AddComponent<UnityEngine.UI.LayoutElement>(); layout.preferredHeight = 158; layout.minHeight = 158;
++                var thumb = new GameObject("Stencil preview " + definition.Id, typeof(RectTransform), typeof(CanvasRenderer), typeof(DrawingStencilGraphic));
++                thumb.transform.SetParent(box, false); DrawingWorkbenchUi.Place(thumb.GetComponent<RectTransform>(), new Rect(8, 8, 76, 94));
++                var graphic = thumb.GetComponent<DrawingStencilGraphic>(); graphic.Strokes = definition.Strokes; graphic.raycastTarget = false;
++                ui.Label(box, "Stencil name", definition.Name, new Rect(96, 6, 321, 29), 21, NotebookPalette.Blue);
++                ui.Label(box, "Stencil description", definition.Description, new Rect(96, 38, 321, 66), 17);
++                var card = new Card { Definition = definition, Root = box };
++                card.Buy = ui.Button(box, "Buy stencil " + definition.Id, new Rect(8, 113, 249, 36), "", () => Purchase(card));
++                card.BuyLabel = card.Buy.GetComponentInChildren<UnityEngine.UI.Text>(); card.BuyLabel.fontSize = 18;
++                card.Insert = ui.Button(box, "Insert stencil " + definition.Id, new Rect(269, 113, 151, 36), UserText.Message("drawing.workbench.insert"), () => Insert(card));
++                cards.Add(card);
++            }
++        }
++        public void Refresh(string binding)
++        {
++            DrawingStencilRole? role = binding == DrawingBindings.Base ? DrawingStencilRole.Body : DrawingBindings.TryMount(binding, out _) ? DrawingStencilRole.Barrel : (DrawingStencilRole?)null;
++            if (role != currentRole) { currentRole = role; content.anchoredPosition = Vector2.zero; }
++            var workshop = context?.Workshop?.Invoke();
++            gold.text = ui.Resolve(workshop == null ? UserText.Message("drawing.workbench.shop_offline") : UserText.Message("drawing.workbench.gold", workshop.Gold));
++            empty.gameObject.SetActive(!role.HasValue);
++            foreach (var card in cards)
++            {
++                card.Root.gameObject.SetActive(role.HasValue && card.Definition.Role == role.Value);
++                bool owned = Owned(card.Definition);
++                card.BuyLabel.text = ui.Resolve(owned ? UserText.Message("drawing.workbench.owned") : UserText.Message("drawing.workbench.buy", card.Definition.GoldCost));
++                card.Buy.interactable = !owned && workshop != null && context?.Purchase != null && workshop.Gold >= card.Definition.GoldCost;
++                card.Insert.interactable = owned;
++            }
++        }
++        bool Owned(DrawingUnlockDefinition definition) => context?.Workshop?.Invoke()?.IsDrawingUnlocked(definition.Id) ?? definition.InitiallyUnlocked;
++        void Purchase(Card card)
++        {
++            if (Owned(card.Definition)) return;
++            if (context?.Purchase == null || context.Workshop?.Invoke() == null) { feedback(UserText.Message("drawing.workbench.shop_offline")); return; }
++            if (context.Purchase(card.Definition.Id, out string reason)) feedback(UserText.Message("drawing.workbench.purchased")); else feedback(reason);
++            Refresh(currentRole == DrawingStencilRole.Body ? DrawingBindings.Base : currentRole == DrawingStencilRole.Barrel ? DrawingBindings.Mount0 : DrawingBindings.Decoration);
++        }
++        void Insert(Card card)
++        {
++            if (!Owned(card.Definition)) { feedback(UserText.Message("drawing.workbench.locked")); return; }
++            insert(card.Definition);
++        }
++    }
++
++    public sealed class DrawingStencilGraphic : UnityEngine.UI.MaskableGraphic
++    {
++        public IReadOnlyList<DrawingStroke> Strokes { get; set; }
++        protected override void OnPopulateMesh(UnityEngine.UI.VertexHelper vh)
++        {
++            vh.Clear(); if (Strokes == null) return;
++            var min = new Vector2(1, 1); var max = new Vector2(-1, -1);
++            foreach (var stroke in Strokes) foreach (var point in stroke.Points)
++            { min = Vector2.Min(min, new Vector2(point.X, point.Y)); max = Vector2.Max(max, new Vector2(point.X, point.Y)); }
++            float scale = Mathf.Min((rectTransform.rect.width - 14) / Mathf.Max(.05f, max.x - min.x), (rectTransform.rect.height - 14) / Mathf.Max(.05f, max.y - min.y));
++            var center = rectTransform.rect.center - (min + max) * .5f * scale;
++            foreach (var stroke in Strokes) DrawingCanvasGraphic.Draw(vh, stroke.Points, center, scale, NotebookPalette.Navy, .012f);
++        }
++    }
++}
+--- a/Assets/PaperDefense/Presentation/UI/DrawingWorkbenchUi.cs
++++ b/Assets/PaperDefense/Presentation/UI/DrawingWorkbenchUi.cs
+@@ -0,0 +1,48 @@
++using System;
++using PaperDefense.Application;
++using PaperDefense.Core;
++using UnityEngine;
++
++namespace PaperDefense.Presentation
++{
++    public delegate bool DrawingAidPurchase(string id, out string reason);
++
++    /// <summary>Application callbacks are queried afresh: successful transactions may replace the read model.</summary>
++    public sealed class DrawingEditorContext
++    {
++        public Func<TowerBlueprint, TowerPreview> Preview { get; set; }
++        public Func<WorkshopReadModel> Workshop { get; set; }
++        public DrawingAidPurchase Purchase { get; set; }
++    }
++
++    internal sealed class DrawingWorkbenchUi
++    {
++        readonly Font font;
++        readonly UserTextResolver resolver;
++        internal static readonly Color Selection = new Color(.79f, .88f, .96f);
++        public DrawingWorkbenchUi(Font font, UserTextResolver resolver) { this.font = font; this.resolver = resolver; }
++        public string Resolve(string value) => GameText.Resolve(resolver, value);
++        public static RectTransform Box(Transform parent, string name, Rect box, Color color, bool raycast = false)
++        {
++            var go = new GameObject(name, typeof(RectTransform), typeof(UnityEngine.UI.Image)); go.transform.SetParent(parent, false);
++            var rect = go.GetComponent<RectTransform>(); Place(rect, box);
++            var image = go.GetComponent<UnityEngine.UI.Image>(); image.color = color; image.raycastTarget = raycast; return rect;
++        }
++        public UnityEngine.UI.Text Label(Transform parent, string name, string value, Rect box, int size = 20, Color? color = null)
++        {
++            var go = new GameObject(name, typeof(RectTransform), typeof(UnityEngine.UI.Text)); go.transform.SetParent(parent, false); Place(go.GetComponent<RectTransform>(), box);
++            var text = go.GetComponent<UnityEngine.UI.Text>(); text.font = font; text.text = Resolve(value); text.fontSize = size; text.color = color ?? NotebookPalette.Navy;
++            text.raycastTarget = false; text.verticalOverflow = VerticalWrapMode.Truncate; return text;
++        }
++        public UnityEngine.UI.Button Button(Transform parent, string name, Rect box, string caption, Action action, bool primary = false)
++        {
++            var rect = Box(parent, name, box, primary ? NotebookPalette.Blue : Color.white, true);
++            var button = rect.gameObject.AddComponent<UnityEngine.UI.Button>(); button.onClick.AddListener(() => action());
++            var colors = button.colors; colors.disabledColor = new Color(.8f, .81f, .8f, .62f); button.colors = colors;
++            var text = Label(rect, name + " label", caption, new Rect(6, 2, box.width - 12, box.height - 4), 19, primary ? Color.white : NotebookPalette.Navy);
++            text.alignment = TextAnchor.MiddleCenter; return button;
++        }
++        public static void Place(RectTransform rect, Rect box)
++        { rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0, 1); rect.anchoredPosition = new Vector2(box.x, -box.y); rect.sizeDelta = box.size; }
++    }
++}
+--- a/Assets/PaperDefense/Presentation/UI/WorkshopHud.cs
++++ b/Assets/PaperDefense/Presentation/UI/WorkshopHud.cs
+@@ -96,7 +96,8 @@
+             if (Mode == WorkshopHudMode.Full || Mode == WorkshopHudMode.Drawing)
+             {
+                 MortarFootprintEditor = new MortarFootprintPanel(root, font, value => { Draft = value; Refresh(); }, run.CompareMortarFootprints, value => run.PreviewBlueprint(value).Reason, TextResolver);
+-                DrawingEditor = new DrawingEditorPanel(root, font, drawing => { MortarFootprintEditor.Close(); Draft = Draft.WithFreeformDrawing(drawing); SetStatus(UserText.Message(Mode == WorkshopHudMode.Drawing ? "workshop.drawing_hint" : "copy.65c92ef5c0dfe24a")); }, TextResolver, candidate => { var p = run.PreviewBlueprint(candidate); return UserText.Message("freeform.stats", p.Health, p.Capacity, p.Cost, p.BuildSeconds, p.Range, p.FireRate, p.Reason); });
++                DrawingEditor = new DrawingEditorPanel(root, font, drawing => { MortarFootprintEditor.Close(); Draft = Draft.WithFreeformDrawing(drawing); SetStatus(UserText.Message(Mode == WorkshopHudMode.Drawing ? "workshop.drawing_hint" : "copy.65c92ef5c0dfe24a")); }, TextResolver,
++                    context: new DrawingEditorContext { Preview = candidate => run.PreviewBlueprint(candidate), Workshop = () => run.Workshop, Purchase = run.UnlockDrawingAid });
+             }
+             if (title != null) title.SetTextWithoutNotify(Resolve(Draft.Name));
+             run.WorkshopChanged += Refresh;
+--- a/Assets/PaperDefense/Resources/Text/ru.asset
++++ b/Assets/PaperDefense/Resources/Text/ru.asset
+@@ -1457,6 +1457,116 @@
+     value: "Дальнобойный ствол"
+   - key: "drawing.unlock.unknown"
+     value: "Такого инструмента рисования нет в каталоге."
++  - key: "drawing.workbench.apply"
++    value: "Применить рисунок →"
++  - key: "drawing.workbench.barrel_goal"
++    value: "Темп: короткий узкий ствол. Дальность: длинный узкий, но медленнее. Сильный удар: широкий, но ближе и реже."
++  - key: "drawing.workbench.beginner"
++    value: "Начните с прямоугольника или бесплатного трафарета корпуса. Затем выберите каждый ствол и задайте его контур вверх от оси."
++  - key: "drawing.workbench.body_goal"
++    value: "Больше корпус → выше прочность и вместимость, но больше чернил, цена и время постройки."
++  - key: "drawing.workbench.buy"
++    value: "Открыть · {0} зол."
++  - key: "drawing.workbench.cancel"
++    value: "Отмена"
++  - key: "drawing.workbench.clear"
++    value: "Очистить деталь"
++  - key: "drawing.workbench.decoration_goal"
++    value: "Декор меняет только вид. Он не влияет на характеристики и не занимает чернила конструкции."
++  - key: "drawing.workbench.ellipse"
++    value: "Эллипс"
++  - key: "drawing.workbench.eraser"
++    value: "Ластик"
++  - key: "drawing.workbench.eraser_hint"
++    value: "Проведите по лишним штрихам: они удалятся целиком. Одно движение — одна отмена."
++  - key: "drawing.workbench.feed"
++    value: "Общая подача ограничивает темп: ×{0:0.00}."
++  - key: "drawing.workbench.fit"
++    value: "Весь лист"
++  - key: "drawing.workbench.gold"
++    value: "Золото: {0}"
++  - key: "drawing.workbench.gold_source"
++    value: "Золото дают пройденные волны и победа.\nРисование и полигон золота не дают."
++  - key: "drawing.workbench.grid"
++    value: "Сетка"
++  - key: "drawing.workbench.height"
++    value: "Высота"
++  - key: "drawing.workbench.ink"
++    value: "{0:0.0} / {1:0.0} · {2}"
++  - key: "drawing.workbench.ink_fit"
++    value: "вмещается"
++  - key: "drawing.workbench.ink_note"
++    value: "Это предел формы, а не плата за попытку."
++  - key: "drawing.workbench.ink_over"
++    value: "уменьшите детали"
++  - key: "drawing.workbench.ink_title"
++    value: "ЧЕРНИЛА В КОНСТРУКЦИИ"
++  - key: "drawing.workbench.insert"
++    value: "Вставить"
++  - key: "drawing.workbench.insert_note"
++    value: "Вставка заменяет выбранную деталь; её можно отменить. Покупка только открывает доступ."
++  - key: "drawing.workbench.intro"
++    value: "Рисуйте и исправляйте бесплатно. Форма корпуса и стволов меняет характеристики башни."
++  - key: "drawing.workbench.larger"
++    value: "+"
++  - key: "drawing.workbench.line"
++    value: "Линия"
++  - key: "drawing.workbench.locked"
++    value: "Сначала откройте трафарет"
++  - key: "drawing.workbench.mirror"
++    value: "Отразить по горизонтали"
++  - key: "drawing.workbench.mount_stats"
++    value: "СТВОЛ {0}\nУрон за попадание: {1:0.0} · дальность: {2:0.0}\n{3:0.00} выстр./с · интервал {4:0.00} с"
++  - key: "drawing.workbench.move"
++    value: "Сдвиг детали"
++  - key: "drawing.workbench.move_hint"
++    value: "Потяните, чтобы сдвинуть выбранную деталь. Вне границ листа сдвиг не применяется."
++  - key: "drawing.workbench.no_stencils"
++    value: "Для декора трафареты не нужны.\nРисуйте свободно карандашом и фигурами."
++  - key: "drawing.workbench.owned"
++    value: "Открыт навсегда"
++  - key: "drawing.workbench.parts"
++    value: "ДЕТАЛИ БАШНИ"
++  - key: "drawing.workbench.pencil"
++    value: "Карандаш"
++  - key: "drawing.workbench.pencil_hint"
++    value: "Зажмите левую кнопку и рисуйте контур. Попытки бесплатны."
++  - key: "drawing.workbench.purchased"
++    value: "Трафарет открыт навсегда. Нажмите «Вставить», чтобы заменить выбранную деталь."
++  - key: "drawing.workbench.rectangle"
++    value: "Прямоугольник"
++  - key: "drawing.workbench.redo"
++    value: "Вперёд ↷"
++  - key: "drawing.workbench.select_mount"
++    value: "Выберите ствол, чтобы увидеть урон за попадание и его темп стрельбы."
++  - key: "drawing.workbench.selected"
++    value: "{0} · {1}"
++  - key: "drawing.workbench.shape_hint"
++    value: "Потяните от первой точки к последней. Отпустите, чтобы добавить фигуру."
++  - key: "drawing.workbench.shop_offline"
++    value: "Покупки доступны в мастерской профиля."
++  - key: "drawing.workbench.shortcuts"
++    value: "Колесо: масштаб · средняя кнопка: сдвиг листа\nCtrl+Z / Ctrl+Y: история · Esc: отмена жеста"
++  - key: "drawing.workbench.smaller"
++    value: "−"
++  - key: "drawing.workbench.snap"
++    value: "Привязка"
++  - key: "drawing.workbench.stats"
++    value: "{0:0} HP · нагрузка {1} / {2}\nПостройка: {3} чернил · {4:0.0} с\nДальность: {5:0.0} · всего {6:0.00} выстр./с"
++  - key: "drawing.workbench.stats_title"
++    value: "ХАРАКТЕРИСТИКИ БАШНИ"
++  - key: "drawing.workbench.stencils"
++    value: "ТРАФАРЕТЫ · МНОГОРАЗОВЫЕ"
++  - key: "drawing.workbench.title"
++    value: "МАСТЕРСКАЯ РИСУНКА"
++  - key: "drawing.workbench.tools"
++    value: "ИНСТРУМЕНТЫ"
++  - key: "drawing.workbench.undo"
++    value: "↶ Назад"
++  - key: "drawing.workbench.width"
++    value: "Ширина"
++  - key: "drawing.workbench.zoom"
++    value: "{0:0}%"
+   - key: "editor.mechanics.generate"
+     value: "Создать отсутствующие сцены механик"
+   - key: "editor.mechanics.generated"
+--- a/Assets/PaperDefense/Tests/PlayMode/BootstrapProfileIsolationTests.cs
++++ b/Assets/PaperDefense/Tests/PlayMode/BootstrapProfileIsolationTests.cs
+@@ -26,7 +26,7 @@
+             bootstrap=root.AddComponent<PaperDefenseBootstrap>();bootstrap.balance=balance;
+             var camera=new GameObject("Isolated launch camera",typeof(Camera));camera.transform.SetParent(root.transform);
+             bootstrap.worldCamera=camera.GetComponent<Camera>();
+-            store=new CountingStore();bootstrap.ProfileStoreOverride=store;
++            store=new CountingStore(balance.CreateWorkshopBalance().ResolveContent());bootstrap.ProfileStoreOverride=store;
+         }
+ 
+         [UnityTearDown] public IEnumerator TearDown()
+@@ -86,10 +86,14 @@
+ 
+         sealed class CountingStore:IWorkshopProfileStore
+         {
++            readonly ContentCatalogSnapshot content;
++            internal CountingStore(ContentCatalogSnapshot content){this.content=content;}
+             internal int LoadCalls,SaveCalls;
+             public ProfileLoadResult Load()
+             {
+                 LoadCalls++;var profile=new WorkshopProfile();profile.GrantGold(321);
++                // Model a profile already saved with this catalog's permanent initial grants.
++                profile.ConfigureContent(content);
+                 return new ProfileLoadResult(profile,ProfileLoadSource.Primary,"Only an injected in-memory store",true);
+             }
+             public ProfileSaveResult Save(WorkshopProfile profile)
+--- a/Assets/PaperDefense/Tests/PlayMode/DrawingEditorFeedbackTests.cs
++++ b/Assets/PaperDefense/Tests/PlayMode/DrawingEditorFeedbackTests.cs
+@@ -178,12 +178,13 @@
+         {
+             Open(0);
+             editor.Canvas.SelectedBinding = DrawingBindings.Mount0;
++            editor.Canvas.ShowGrid = false;
+             Canvas.ForceUpdateCanvases();
+             using (var vertices = new VertexHelper())
+             {
+                 typeof(DrawingCanvasGraphic).GetMethod("OnPopulateMesh", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic, null, new[] { typeof(VertexHelper) }, null)
+                     .Invoke(editor.Canvas, new object[] { vertices });
+-                Assert.That(vertices.currentVertCount, Is.EqualTo(20), "Only the anchor and three-line forward arrow should be drawn.");
++                Assert.That(vertices.currentVertCount, Is.EqualTo(36), "The workbench adds a four-line page boundary to the anchor and forward arrow, without template contours.");
+             }
+         }
+         [Test] public void DefaultCanvasContainsEntireAllowedDrawingAreaAndKeepsFeedbackSeparate()
+@@ -195,7 +196,7 @@
+             var rejection = root.GetComponentsInChildren<Text>(true).Single(t => t.name == "Drawing rejection").rectTransform;
+             var liveStats = root.GetComponentsInChildren<Text>(true).Single(t => t.name == "Drawing live stats").rectTransform;
+             Assert.That(rejection.anchoredPosition.x + rejection.rect.width, Is.LessThan(liveStats.anchoredPosition.x));
+-            Assert.That(liveStats.rect.height, Is.GreaterThanOrEqualTo(140));
++            Assert.That(liveStats.rect.height, Is.GreaterThanOrEqualTo(70), "Whole-tower stats have a separate block from selected-mount stats.");
+         }
+     }
+ }
+--- a/Assets/PaperDefense/Tests/PlayMode/DrawingWorkbenchTests.cs
++++ b/Assets/PaperDefense/Tests/PlayMode/DrawingWorkbenchTests.cs
+@@ -0,0 +1,329 @@
++using System.Collections;
++using System.Linq;
++using NUnit.Framework;
++using PaperDefense.Application;
++using PaperDefense.Core;
++using PaperDefense.Presentation;
++using UnityEngine;
++using UnityEngine.EventSystems;
++using UnityEngine.InputSystem;
++using UnityEngine.InputSystem.LowLevel;
++using UnityEngine.TestTools;
++
++namespace PaperDefense.Tests
++{
++    public sealed class DrawingWorkbenchTests
++    {
++        GameObject root, events, controllerRoot;
++        DrawingEditorPanel editor;
++        int applied;
++
++        [SetUp] public void SetUp()
++        {
++            root = new GameObject("Isolated drawing workbench", typeof(RectTransform), typeof(Canvas));
++            root.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
++            events = new GameObject("Isolated workbench events", typeof(EventSystem));
++            editor = new DrawingEditorPanel(root.transform, Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"), _ => applied++);
++            editor.Open(TowerBlueprint.NewDraft("workbench", "Workbench", ChassisKind.Standard, StructureKind.Gun));
++            Canvas.ForceUpdateCanvases();
++        }
++
++        [TearDown] public void Cleanup() { Object.DestroyImmediate(root); Object.DestroyImmediate(events); if (controllerRoot != null) Object.DestroyImmediate(controllerRoot); }
++
++        UnityEngine.UI.Button Button(string name) => root.GetComponentsInChildren<UnityEngine.UI.Button>(true).Single(b => b.name == name && b.gameObject.activeInHierarchy);
++        UnityEngine.UI.Text Text(string name) => root.GetComponentsInChildren<UnityEngine.UI.Text>(true).Single(t => t.name == name && t.gameObject.activeInHierarchy);
++
++        PointerEventData Pointer(float x, float y) => new PointerEventData(events.GetComponent<EventSystem>())
++        {
++            button = PointerEventData.InputButton.Left,
++            position = editor.Canvas.LocalPointToScreen(new Vector2(x, y))
++        };
++
++        [Test] public void PointerReleaseIncludesItsFinalPointAndHasOneUndoStep()
++        {
++            var pointer = Pointer(-.2f, -.2f);
++            editor.Canvas.OnPointerDown(pointer);
++            pointer.position = Pointer(.1f, .1f).position;
++            editor.Canvas.OnDrag(pointer);
++            pointer.position = Pointer(.3f, .3f).position;
++            editor.Canvas.OnPointerUp(pointer);
++            var points = editor.Session.Snapshot.GetPart(DrawingBindings.Base).Strokes.Single().Points;
++            Assert.That(points.Last().X, Is.EqualTo(.3f).Within(.002f));
++            Assert.That(points.Last().Y, Is.EqualTo(.3f).Within(.002f));
++            Assert.That(editor.Session.Undo(), Is.True);
++            Assert.That(editor.Session.Snapshot.StrokeCount, Is.Zero);
++            Assert.That(editor.Session.CanUndo, Is.False);
++        }
++
++        [Test] public void StrayDragWithoutPointerDownDoesNotCreateGeometry()
++        {
++            editor.Canvas.OnDrag(Pointer(-.2f, -.2f));
++            editor.Canvas.OnDrag(Pointer(.2f, .2f));
++            editor.Canvas.OnPointerUp(Pointer(.3f, .3f));
++            Assert.That(editor.Session.Snapshot.StrokeCount, Is.Zero);
++            Assert.That(editor.Session.CanUndo, Is.False);
++        }
++
++        [Test] public void DisableDiscardsPendingGestureBeforeCanvasIsReenabled()
++        {
++            editor.Canvas.OnPointerDown(Pointer(-.2f, -.2f));
++            editor.Canvas.OnDrag(Pointer(.2f, .2f));
++            editor.Canvas.gameObject.SetActive(false);
++            editor.Canvas.gameObject.SetActive(true);
++            editor.Canvas.OnPointerUp(Pointer(.3f, .3f));
++            Assert.That(editor.Session.Snapshot.StrokeCount, Is.Zero);
++        }
++
++        [Test] public void FocusLossDiscardsPendingGestureAndReopenNeverReplaysIt()
++        {
++            editor.Canvas.OnPointerDown(Pointer(-.2f, -.2f)); editor.Canvas.OnDrag(Pointer(.2f, .2f));
++            editor.Canvas.SendMessage("OnApplicationFocus", false);
++            editor.Canvas.SendMessage("OnApplicationFocus", true);
++            editor.Canvas.OnPointerUp(Pointer(.3f, .3f));
++            Assert.That(editor.Session.Snapshot.StrokeCount, Is.Zero);
++            editor.Canvas.OnPointerDown(Pointer(-.2f, -.2f)); editor.Canvas.OnDrag(Pointer(.2f, .2f));
++            var blueprint = editor.Session.Blueprint;
++            editor.Close(false); editor.Open(blueprint);
++            editor.Canvas.OnPointerUp(Pointer(.3f, .3f));
++            Assert.That(editor.Session.Snapshot.StrokeCount, Is.Zero);
++            Assert.That(editor.Session.CanUndo, Is.False);
++        }
++
++        [UnityTest] public IEnumerator KeyboardHistorySkipsTextFieldsAndEscapeCancelsGestureBeforeClosing()
++        {
++            var original = InputSystem.settings;
++            var settings = Object.Instantiate(original); settings.hideFlags = HideFlags.HideAndDontSave;
++            settings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
++            settings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
++            var flags = original.hideFlags;
++            if (flags == HideFlags.HideAndDontSave) original.hideFlags = HideFlags.None;
++            try { InputSystem.settings = settings; } finally { original.hideFlags = flags; }
++            var keyboard = InputSystem.AddDevice<Keyboard>("DrawingWorkbenchKeyboard"); keyboard.MakeCurrent();
++            try
++            {
++                yield return null;
++                editor.Session.AddRectangle(DrawingBindings.Base, new DrawingPoint(-.2f, -.2f), new DrawingPoint(.2f, .2f), out _);
++                yield return Keys(keyboard, Key.LeftCtrl, Key.Z); Assert.That(editor.Session.Snapshot.StrokeCount, Is.Zero);
++                yield return Keys(keyboard, Key.LeftCtrl, Key.LeftShift, Key.Z); Assert.That(editor.Session.Snapshot.StrokeCount, Is.EqualTo(1));
++                yield return Keys(keyboard, Key.LeftCtrl, Key.Z); Assert.That(editor.Session.Snapshot.StrokeCount, Is.Zero);
++                yield return Keys(keyboard, Key.LeftCtrl, Key.Y); Assert.That(editor.Session.Snapshot.StrokeCount, Is.EqualTo(1));
++                var field = new GameObject("Focused input", typeof(RectTransform), typeof(UnityEngine.UI.InputField)); field.transform.SetParent(root.transform, false);
++                events.GetComponent<EventSystem>().SetSelectedGameObject(field);
++                yield return Keys(keyboard, Key.LeftCtrl, Key.Z);
++                Assert.That(editor.Session.Snapshot.StrokeCount, Is.EqualTo(1), "Typing must not trigger drawing history.");
++                events.GetComponent<EventSystem>().SetSelectedGameObject(null);
++                editor.Canvas.OnPointerDown(Pointer(-.2f, -.2f)); editor.Canvas.OnDrag(Pointer(.2f, .2f));
++                yield return Keys(keyboard, Key.Escape);
++                Assert.That(editor.Canvas.HasPendingGesture, Is.False); Assert.That(editor.IsOpen, Is.True);
++                Assert.That(editor.Session.Snapshot.StrokeCount, Is.EqualTo(1));
++                yield return Keys(keyboard, Key.Escape); Assert.That(editor.IsOpen, Is.False);
++            }
++            finally
++            {
++                if (keyboard.added) InputSystem.RemoveDevice(keyboard);
++                InputSystem.settings = original; Object.DestroyImmediate(settings);
++            }
++        }
++        static IEnumerator Keys(Keyboard keyboard, params Key[] keys)
++        {
++            keyboard.MakeCurrent(); InputSystem.QueueStateEvent(keyboard, new KeyboardState(keys));
++            yield return null; yield return null;
++            InputSystem.QueueStateEvent(keyboard, new KeyboardState()); yield return null; yield return null;
++        }
++
++        [Test] public void CompleteOverBudgetDrawingCannotApplyThroughDirectClose()
++        {
++            editor.Session.AddRectangle(DrawingBindings.Base, new DrawingPoint(-.9f, -.9f), new DrawingPoint(.9f, .9f), out _);
++            editor.Session.AddRectangle(DrawingBindings.Mount0, new DrawingPoint(-.2f, 0), new DrawingPoint(.2f, .9f), out _);
++            Assert.That(editor.Session.Blueprint.WithFreeformDrawing(editor.Session.Snapshot).FreeformDesign.IsComplete, Is.True);
++            editor.Close(true);
++            Assert.That(editor.IsOpen, Is.True);
++            Assert.That(applied, Is.Zero);
++            Assert.That(Button("Apply drawing").interactable, Is.False);
++            Assert.That(Text("Drawing ink usage").color.r, Is.GreaterThan(Text("Drawing ink usage").color.b));
++        }
++
++        [TestCase(DrawingTool.Line, 2)]
++        [TestCase(DrawingTool.Rectangle, 5)]
++        [TestCase(DrawingTool.Ellipse, 33)]
++        public void ShapeHasGhostBeforeReleaseThenOneAtomicCommand(DrawingTool tool, int count)
++        {
++            editor.Canvas.Tool = tool;
++            var pointer = Pointer(-.2f, -.3f); editor.Canvas.OnPointerDown(pointer);
++            pointer.position = Pointer(.2f, .3f).position; editor.Canvas.OnDrag(pointer);
++            Assert.That(editor.Canvas.HasPendingGesture, Is.True);
++            Assert.That(editor.Session.Snapshot.StrokeCount, Is.Zero);
++            Assert.That(editor.Session.CanUndo, Is.False);
++            pointer.position = Pointer(.4f, .5f).position; editor.Canvas.OnPointerUp(pointer);
++            var points = editor.Session.Snapshot.GetPart(DrawingBindings.Base).Strokes.Single().Points;
++            Assert.That(points.Count, Is.EqualTo(count));
++            Assert.That(points.Max(p => p.X), Is.EqualTo(.4f).Within(.002f));
++            Assert.That(points.Max(p => p.Y), Is.EqualTo(.5f).Within(.002f));
++            Assert.That(editor.Session.Undo(), Is.True);
++            Assert.That(editor.Session.CanUndo, Is.False);
++        }
++
++        [Test] public void SweptWholeStrokeEraserCommitsOnceAndUndoesEveryTouchedStroke()
++        {
++            editor.Session.AddLine(DrawingBindings.Base, new DrawingPoint(-.3f, -.2f), new DrawingPoint(-.3f, .2f), out _);
++            editor.Session.AddLine(DrawingBindings.Base, new DrawingPoint(.3f, -.2f), new DrawingPoint(.3f, .2f), out _);
++            string original = editor.Session.Snapshot.GeometryHash;
++            editor.Canvas.Tool = DrawingTool.Eraser;
++            var pointer = Pointer(-.6f, 0); editor.Canvas.OnPointerDown(pointer);
++            pointer.position = Pointer(.6f, 0).position; editor.Canvas.OnDrag(pointer);
++            Assert.That(editor.Session.Snapshot.GeometryHash, Is.EqualTo(original));
++            editor.Canvas.OnPointerUp(pointer);
++            Assert.That(editor.Session.Snapshot.StrokeCount, Is.Zero);
++            Assert.That(editor.Session.Undo(), Is.True);
++            Assert.That(editor.Session.Snapshot.GeometryHash, Is.EqualTo(original));
++        }
++
++        [TestCase("tool")]
++        [TestCase("part")]
++        [TestCase("zoom")]
++        [TestCase("cancel")]
++        public void ContextChangesDiscardPendingGestureWithoutJoiningItToAnotherPart(string change)
++        {
++            editor.Canvas.OnPointerDown(Pointer(-.2f, -.2f)); editor.Canvas.OnDrag(Pointer(.2f, .2f));
++            switch (change)
++            {
++                case "tool": editor.Canvas.Tool = DrawingTool.Eraser; break;
++                case "part": editor.Canvas.SelectedBinding = DrawingBindings.Mount0; break;
++                case "zoom": editor.Canvas.Zoom = 1.4f; break;
++                default: editor.Canvas.CancelGesture(); break;
++            }
++            editor.Canvas.OnPointerUp(Pointer(.3f, .3f));
++            Assert.That(editor.Session.Snapshot.StrokeCount, Is.Zero);
++            Assert.That(editor.Session.CanUndo, Is.False);
++        }
++
++        [Test] public void MovePreviewCommitsOnceAndOutOfBoundsMoveRejectsWithoutClipping()
++        {
++            editor.Session.AddRectangle(DrawingBindings.Base, new DrawingPoint(-.2f, -.2f), new DrawingPoint(.2f, .2f), out _);
++            string original = editor.Session.Snapshot.GeometryHash;
++            editor.Canvas.Tool = DrawingTool.Move;
++            var pointer = Pointer(0, 0); editor.Canvas.OnPointerDown(pointer);
++            pointer.position = Pointer(.5f, .2f).position; editor.Canvas.OnDrag(pointer);
++            Assert.That(editor.Session.Snapshot.GeometryHash, Is.EqualTo(original));
++            editor.Canvas.OnPointerUp(pointer);
++            string moved = editor.Session.Snapshot.GeometryHash;
++            Assert.That(moved, Is.Not.EqualTo(original));
++            pointer = Pointer(0, 0); editor.Canvas.OnPointerDown(pointer);
++            pointer.position = Pointer(.5f, 0).position; editor.Canvas.OnPointerUp(pointer);
++            Assert.That(editor.Session.Snapshot.GeometryHash, Is.EqualTo(moved));
++            Assert.That(Text("Drawing rejection").text, Is.Not.Empty);
++            Assert.That(editor.Session.Undo(), Is.True);
++            Assert.That(editor.Session.Snapshot.GeometryHash, Is.EqualTo(original));
++        }
++
++        [Test] public void PanZoomAndFitOnlyChangeTheViewAndSnapChangesTheCommittedEndpoint()
++        {
++            var pointer = Pointer(0, 0); pointer.button = PointerEventData.InputButton.Middle;
++            editor.Canvas.OnPointerDown(pointer); pointer.position = Pointer(.2f, .2f).position;
++            editor.Canvas.OnDrag(pointer); editor.Canvas.OnPointerUp(pointer);
++            Assert.That(editor.Canvas.Pan.sqrMagnitude, Is.GreaterThan(0));
++            editor.Canvas.Zoom = 1.5f; editor.Canvas.Fit();
++            Assert.That(editor.Canvas.Pan, Is.EqualTo(Vector2.zero));
++            Assert.That(editor.Canvas.Zoom, Is.EqualTo(1));
++            Assert.That(editor.Session.CanUndo, Is.False);
++            editor.Canvas.SnapToGrid = true; editor.Canvas.Tool = DrawingTool.Line;
++            editor.Canvas.OnPointerDown(Pointer(.02f, .02f)); editor.Canvas.OnPointerUp(Pointer(.13f, .23f));
++            var end = editor.Session.Snapshot.GetPart(DrawingBindings.Base).Strokes.Single().Points.Last();
++            Assert.That(end.X, Is.EqualTo(.15f).Within(.002f)); Assert.That(end.Y, Is.EqualTo(.25f).Within(.002f));
++        }
++
++        [Test] public void FreeStencilsGiveAnEmptyCanvasABeginnerPathAndRemainUndoable()
++        {
++            Assert.That(Text("Drawing gesture help").text, Does.Contain("трафарета"));
++            Button("Insert stencil drawing.body.basic").onClick.Invoke();
++            editor.Canvas.SelectedBinding = DrawingBindings.Mount0;
++            Button("Insert stencil drawing.barrel.basic").onClick.Invoke();
++            Assert.That(Button("Apply drawing").interactable, Is.True);
++            Assert.That(editor.Session.Blueprint.WithFreeformDrawing(editor.Session.Snapshot).FreeformDesign.IsUsable, Is.True);
++            editor.Canvas.Undo(); Assert.That(Button("Apply drawing").interactable, Is.False);
++            editor.Close(false); Assert.That(applied, Is.Zero);
++        }
++
++        [Test] public void FailedPurchasePreservesGoldAndGeometryAndRetryDoesNotInsertUntilRequested()
++        {
++            var profile = new WorkshopProfile(); profile.GrantGold(100); var store = new Store(profile) { Fail = true };
++            var run = Connected(store); editor.Canvas.SelectedBinding = DrawingBindings.Mount0;
++            string before = editor.Session.Snapshot.GeometryHash;
++            Button("Buy stencil drawing.sniper").onClick.Invoke();
++            Assert.That(run.Workshop.Gold, Is.EqualTo(100)); Assert.That(run.Workshop.IsDrawingUnlocked("drawing.sniper"), Is.False);
++            Assert.That(editor.Session.Snapshot.GeometryHash, Is.EqualTo(before));
++            Assert.That(Text("Drawing rejection").text, Is.Not.Empty);
++            store.Fail = false; Button("Buy stencil drawing.sniper").onClick.Invoke();
++            Assert.That(run.Workshop.Gold, Is.EqualTo(68)); Assert.That(run.Workshop.IsDrawingUnlocked("drawing.sniper"), Is.True);
++            Assert.That(editor.Session.Snapshot.GeometryHash, Is.EqualTo(before));
++            Assert.That(Button("Insert stencil drawing.sniper").interactable, Is.True);
++            Button("Insert stencil drawing.sniper").onClick.Invoke();
++            Assert.That(editor.Session.Snapshot.GeometryHash, Is.Not.EqualTo(before));
++            Assert.That(run.Workshop.Gold, Is.EqualTo(68));
++            editor.Canvas.Undo(); Assert.That(editor.Session.Snapshot.GeometryHash, Is.EqualTo(before));
++            editor.Close(false); Assert.That(applied, Is.Zero); Assert.That(run.Workshop.IsDrawingUnlocked("drawing.sniper"), Is.True);
++        }
++
++        [Test] public void PaidStencilsAreDisabledWithoutAnApplicationProfile()
++        {
++            editor.Canvas.SelectedBinding = DrawingBindings.Mount0;
++            Assert.That(Button("Buy stencil drawing.sniper").interactable, Is.False);
++            Assert.That(Button("Insert stencil drawing.sniper").interactable, Is.False);
++            Button("Insert stencil drawing.sniper").onClick.Invoke();
++            Assert.That(editor.Session.Snapshot.StrokeCount, Is.Zero);
++            Assert.That(Text("Drawing stencil gold").text, Does.Contain("профиля"));
++        }
++
++        [Test] public void SelectedMountDisplaysResolvedStatsAndRefreshesImmediatelyAfterResizing()
++        {
++            var run = Connected(new Store(new WorkshopProfile()));
++            Button("Insert stencil drawing.body.basic").onClick.Invoke(); editor.Canvas.SelectedBinding = DrawingBindings.Mount0;
++            Button("Insert stencil drawing.barrel.basic").onClick.Invoke();
++            var candidate = editor.Session.Blueprint.WithFreeformDrawing(editor.Session.Snapshot);
++            var stats = run.PreviewBlueprint(candidate).Weapons.Single();
++            var expected = TextResourcesAsset.Default.Resolve(UserText.Message("drawing.workbench.mount_stats", 1, stats.Damage, stats.Range, stats.FireRate, stats.Interval));
++            Assert.That(Text("Drawing selected mount stats").text, Does.StartWith(expected));
++            string old = Text("Drawing selected mount stats").text;
++            Button("Drawing height larger").onClick.Invoke();
++            Assert.That(Text("Drawing selected mount stats").text, Is.Not.EqualTo(old));
++        }
++
++        [Test] public void VisibleWorkbenchRegionsDoNotOverlapAndStayInsideThePanel()
++        {
++            string[] names = { "Drawing viewport", "Drawing parts", "Drawing live stats", "Drawing selected mount stats", "Drawing goal guidance", "Drawing stencils", "Drawing rejection", "Apply drawing", "Cancel drawing" };
++            var regions = root.GetComponentsInChildren<RectTransform>().Where(r => names.Contains(r.name)).ToArray();
++            Assert.That(regions.Length, Is.EqualTo(names.Length));
++            var board = root.GetComponentsInChildren<RectTransform>().Single(r => r.name == "Authored drawing editor");
++            for (int i = 0; i < regions.Length; i++)
++            {
++                var a = Bounds(regions[i], board);
++                Assert.That(a.xMin, Is.GreaterThanOrEqualTo(board.rect.xMin)); Assert.That(a.xMax, Is.LessThanOrEqualTo(board.rect.xMax));
++                Assert.That(a.yMin, Is.GreaterThanOrEqualTo(board.rect.yMin)); Assert.That(a.yMax, Is.LessThanOrEqualTo(board.rect.yMax));
++                for (int j = i + 1; j < regions.Length; j++) Assert.That(a.Overlaps(Bounds(regions[j], board)), Is.False, regions[i].name + " overlaps " + regions[j].name);
++            }
++        }
++        static Rect Bounds(RectTransform element, RectTransform parent)
++        {
++            var corners = new Vector3[4]; element.GetWorldCorners(corners);
++            var min = parent.InverseTransformPoint(corners[0]); var max = parent.InverseTransformPoint(corners[2]);
++            return Rect.MinMaxRect(min.x, min.y, max.x, max.y);
++        }
++        RunController Connected(Store store)
++        {
++            editor.Close(false); controllerRoot = new GameObject("Isolated stencil controller"); controllerRoot.SetActive(false);
++            var run = controllerRoot.AddComponent<RunController>(); run.InitializeWorkshop(store, allowLegacyFixtureDefaults: true);
++            editor = new DrawingEditorPanel(root.transform, Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"), _ => applied++, context:
++                new DrawingEditorContext { Preview = bp => run.PreviewBlueprint(bp), Workshop = () => run.Workshop, Purchase = run.UnlockDrawingAid });
++            editor.Open(TowerBlueprint.NewDraft("connected", "Connected", ChassisKind.Standard, StructureKind.Gun).WithContent(run.Content));
++            Canvas.ForceUpdateCanvases(); return run;
++        }
++        sealed class Store : IWorkshopProfileStore
++        {
++            WorkshopProfileData saved; public bool Fail;
++            public Store(WorkshopProfile profile) { saved = profile.ToData(); }
++            public ProfileLoadResult Load() => new ProfileLoadResult(WorkshopProfile.FromData(saved), ProfileLoadSource.Primary, "Isolated", true);
++            public ProfileSaveResult Save(WorkshopProfile candidate)
++            { if (Fail) return new ProfileSaveResult(false, "Injected failure"); saved = JsonUtility.FromJson<WorkshopProfileData>(JsonUtility.ToJson(candidate.ToData())); return new ProfileSaveResult(true, ""); }
++        }
++    }
++}
+--- a/Tools/user-texts.json
++++ b/Tools/user-texts.json
+@@ -720,6 +720,61 @@
+   "drawing.stencil.sniper.description": "Длинный узкий ствол увеличивает дальность, но снижает темп стрельбы.",
+   "drawing.stencil.sniper.name": "Дальнобойный ствол",
+   "drawing.unlock.unknown": "Такого инструмента рисования нет в каталоге.",
++  "drawing.workbench.apply": "Применить рисунок →",
++  "drawing.workbench.barrel_goal": "Темп: короткий узкий ствол. Дальность: длинный узкий, но медленнее. Сильный удар: широкий, но ближе и реже.",
++  "drawing.workbench.beginner": "Начните с прямоугольника или бесплатного трафарета корпуса. Затем выберите каждый ствол и задайте его контур вверх от оси.",
++  "drawing.workbench.body_goal": "Больше корпус → выше прочность и вместимость, но больше чернил, цена и время постройки.",
++  "drawing.workbench.buy": "Открыть · {0} зол.",
++  "drawing.workbench.cancel": "Отмена",
++  "drawing.workbench.clear": "Очистить деталь",
++  "drawing.workbench.decoration_goal": "Декор меняет только вид. Он не влияет на характеристики и не занимает чернила конструкции.",
++  "drawing.workbench.ellipse": "Эллипс",
++  "drawing.workbench.eraser": "Ластик",
++  "drawing.workbench.eraser_hint": "Проведите по лишним штрихам: они удалятся целиком. Одно движение — одна отмена.",
++  "drawing.workbench.feed": "Общая подача ограничивает темп: ×{0:0.00}.",
++  "drawing.workbench.fit": "Весь лист",
++  "drawing.workbench.gold": "Золото: {0}",
++  "drawing.workbench.gold_source": "Золото дают пройденные волны и победа.\nРисование и полигон золота не дают.",
++  "drawing.workbench.grid": "Сетка",
++  "drawing.workbench.height": "Высота",
++  "drawing.workbench.ink": "{0:0.0} / {1:0.0} · {2}",
++  "drawing.workbench.ink_fit": "вмещается",
++  "drawing.workbench.ink_note": "Это предел формы, а не плата за попытку.",
++  "drawing.workbench.ink_over": "уменьшите детали",
++  "drawing.workbench.ink_title": "ЧЕРНИЛА В КОНСТРУКЦИИ",
++  "drawing.workbench.insert": "Вставить",
++  "drawing.workbench.insert_note": "Вставка заменяет выбранную деталь; её можно отменить. Покупка только открывает доступ.",
++  "drawing.workbench.intro": "Рисуйте и исправляйте бесплатно. Форма корпуса и стволов меняет характеристики башни.",
++  "drawing.workbench.larger": "+",
++  "drawing.workbench.line": "Линия",
++  "drawing.workbench.locked": "Сначала откройте трафарет",
++  "drawing.workbench.mirror": "Отразить по горизонтали",
++  "drawing.workbench.mount_stats": "СТВОЛ {0}\nУрон за попадание: {1:0.0} · дальность: {2:0.0}\n{3:0.00} выстр./с · интервал {4:0.00} с",
++  "drawing.workbench.move": "Сдвиг детали",
++  "drawing.workbench.move_hint": "Потяните, чтобы сдвинуть выбранную деталь. Вне границ листа сдвиг не применяется.",
++  "drawing.workbench.no_stencils": "Для декора трафареты не нужны.\nРисуйте свободно карандашом и фигурами.",
++  "drawing.workbench.owned": "Открыт навсегда",
++  "drawing.workbench.parts": "ДЕТАЛИ БАШНИ",
++  "drawing.workbench.pencil": "Карандаш",
++  "drawing.workbench.pencil_hint": "Зажмите левую кнопку и рисуйте контур. Попытки бесплатны.",
++  "drawing.workbench.purchased": "Трафарет открыт навсегда. Нажмите «Вставить», чтобы заменить выбранную деталь.",
++  "drawing.workbench.rectangle": "Прямоугольник",
++  "drawing.workbench.redo": "Вперёд ↷",
++  "drawing.workbench.select_mount": "Выберите ствол, чтобы увидеть урон за попадание и его темп стрельбы.",
++  "drawing.workbench.selected": "{0} · {1}",
++  "drawing.workbench.shape_hint": "Потяните от первой точки к последней. Отпустите, чтобы добавить фигуру.",
++  "drawing.workbench.shop_offline": "Покупки доступны в мастерской профиля.",
++  "drawing.workbench.shortcuts": "Колесо: масштаб · средняя кнопка: сдвиг листа\nCtrl+Z / Ctrl+Y: история · Esc: отмена жеста",
++  "drawing.workbench.smaller": "−",
++  "drawing.workbench.snap": "Привязка",
++  "drawing.workbench.stats": "{0:0} HP · нагрузка {1} / {2}\nПостройка: {3} чернил · {4:0.0} с\nДальность: {5:0.0} · всего {6:0.00} выстр./с",
++  "drawing.workbench.stats_title": "ХАРАКТЕРИСТИКИ БАШНИ",
++  "drawing.workbench.stencils": "ТРАФАРЕТЫ · МНОГОРАЗОВЫЕ",
++  "drawing.workbench.title": "МАСТЕРСКАЯ РИСУНКА",
++  "drawing.workbench.tools": "ИНСТРУМЕНТЫ",
++  "drawing.workbench.undo": "↶ Назад",
++  "drawing.workbench.width": "Ширина",
++  "drawing.workbench.zoom": "{0:0}%",
+   "editor.mechanics.generate": "Создать отсутствующие сцены механик",
+   "editor.mechanics.generated": "Подготовлено тестовых сцен: {0}. Существующие сцены сохранены без изменений.",
+   "freeform.authored": "Авторский рисунок",

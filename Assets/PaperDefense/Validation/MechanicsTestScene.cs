@@ -187,7 +187,7 @@ namespace PaperDefense.Validation
         {
             if (!Prepared || scenario.focus != MechanicsTestFocus.Drawing) return;
             var workshop = Bootstrap.GetComponentInChildren<WorkshopHud>();
-            if (workshop != null) QualityComparison = workshop.CompareDrawingQuality();
+            if (workshop != null) QualityComparison = workshop.RunDrawingTrial();
         }
         public bool SaveProfileVariant()
         {

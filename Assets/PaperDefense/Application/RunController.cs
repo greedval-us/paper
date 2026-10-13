@@ -220,6 +220,7 @@ namespace PaperDefense.Application
         }
         public bool SaveBlueprint(TowerBlueprint blueprint,out string reason)
         {
+            blueprint=blueprint?.WithContent(contentSnapshot);
             if(!CreateCandidate(out var candidate,out reason)||!candidate.SaveBlueprint(blueprint,out reason,session.Balance))return false;
             return CommitCandidate(candidate,out reason);
         }
@@ -236,6 +237,12 @@ namespace PaperDefense.Application
         public bool UnlockPart(string id,out string reason)
         {
             if(!CreateCandidate(out var candidate,out reason)||!candidate.Unlock(id,out reason,session.Balance))return false;
+            return CommitCandidate(candidate,out reason);
+        }
+        public bool UnlockDrawingAid(string id,out string reason)
+        {
+            if(!CreateCandidate(out var candidate,out reason)||!candidate.UnlockDrawingAid(id,out reason,session.Balance))return false;
+            if(profile.IsDrawingUnlocked(id,session.Balance))return true;
             return CommitCandidate(candidate,out reason);
         }
         public bool StartRun(out string reason)
@@ -293,6 +300,7 @@ namespace PaperDefense.Application
 
         public TrialComparison RunTrial(TowerBlueprint blueprint,TrialScenario scenario,bool counterfire=false,int budget=400)
         {
+            blueprint=blueprint?.WithContent(contentSnapshot);
             if(!InWorkshop||!profile.ValidateOwned(blueprint,out _,session.Balance))return null;
             var trials=session.Balance.Trials;
             var baseline=new TowerBlueprint("trial.baseline",UserText.Message("copy.5c07091d535b3296"),trials.BaselineChassisId,trials.BaselineWeaponId,content:contentSnapshot);
@@ -300,6 +308,7 @@ namespace PaperDefense.Application
         }
         public TrialComparison RunQualityTrial(TowerBlueprint blueprint,TrialScenario scenario,bool counterfire=false,int budget=400)
         {
+            blueprint=blueprint?.WithContent(contentSnapshot);
             if(!InWorkshop||!profile.ValidateOwned(blueprint,out _,session.Balance))return null;
             return TrialRunner.CompareQuality(blueprint,session.Balance,scenario,budget,1337,counterfire);
         }

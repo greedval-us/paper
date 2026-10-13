@@ -84,11 +84,9 @@ namespace PaperDefense.Tests
             Assert.That(TextField(hud, "stats"), Does.Not.Contain("Окраска:"));
             Assert.That(TextField(hud, "briefing"), Does.Not.Contain("плевуны").And.Not.Contain("сгустки").And.Not.Contain("Точки:"));
             Assert.That(Button("Trial 3").gameObject.activeSelf, Is.False);
-            Assert.That(Button("Trial quality mode").gameObject.activeSelf, Is.False);
+            Assert.That(root.GetComponentsInChildren<Button>(true).Any(b => b.name == "Trial quality mode"), Is.False);
             Assert.That(Button("Trial 2").GetComponentInChildren<Text>().text, Is.EqualTo("ГРЫЗУНЫ"));
-            Button("Drawing quality details").onClick.Invoke();
-            Assert.That(TextField(hud, "qualityExplanation"), Does.Contain("темп действий остаётся одинаковым"));
-            Button("Close quality details").onClick.Invoke();
+            Assert.That(root.GetComponentsInChildren<Button>(true).Any(b => b.name == "Drawing quality details"), Is.False);
             Button("Open trial").onClick.Invoke(); Button("Run trial").onClick.Invoke();
             Assert.That(TextField(hud, "trialFirst"), Is.Not.Empty, "The normal trial remains usable.");
             Assert.That(run.Session.TickIndex, Is.Zero); Assert.That(run.Workshop.Gold, Is.Zero);

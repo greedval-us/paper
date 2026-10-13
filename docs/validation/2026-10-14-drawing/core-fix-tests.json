@@ -1,0 +1,248 @@
+{
+  "fixRed": {
+    "result": {
+      "success": true,
+      "message": "Test job status retrieved.",
+      "error": null,
+      "data": {
+        "job_id": "e67cb82998314c6ba3acb74c5c509550",
+        "status": "failed",
+        "mode": "EditMode",
+        "started_unix_ms": 1791927343469,
+        "finished_unix_ms": 1791927348469,
+        "last_update_unix_ms": 1791927348469,
+        "progress": {
+          "completed": 7,
+          "total": 7,
+          "current_test_full_name": null,
+          "current_test_started_unix_ms": null,
+          "last_finished_test_full_name": "PaperDefense.Tests.DrawingWorkshopRulesTests.NewInitialDrawingGrantMarksContentPreparationChangedExactlyOnce",
+          "last_finished_unix_ms": 1791927348296,
+          "stuck_suspected": false,
+          "editor_is_focused": false,
+          "run_in_background": false,
+          "focus_nudge_attempts": null,
+          "focus_nudge_limit": null,
+          "focus_nudge_status": null,
+          "blocked_reason": null,
+          "failures_so_far": [
+            {
+              "full_name": "PaperDefense.Tests.DrawingWorkshopRulesTests.FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics(\"health\")",
+              "message": "  Final health arithmetic must remain finite, including low production and material multipliers\r\n  Expected: False\r\n  But was:  True\r\n"
+            },
+            {
+              "full_name": "PaperDefense.Tests.DrawingWorkshopRulesTests.FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics(\"damage\")",
+              "message": "  Final damage arithmetic must remain finite, including low production and material multipliers\r\n  Expected: False\r\n  But was:  True\r\n"
+            },
+            {
+              "full_name": "PaperDefense.Tests.DrawingWorkshopRulesTests.FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics(\"range\")",
+              "message": "  Final range arithmetic must remain finite, including low production and material multipliers\r\n  Expected: False\r\n  But was:  True\r\n"
+            },
+            {
+              "full_name": "PaperDefense.Tests.DrawingWorkshopRulesTests.FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics(\"interval\")",
+              "message": "  Final interval arithmetic must remain finite, including low production and material multipliers\r\n  Expected: False\r\n  But was:  True\r\n"
+            },
+            {
+              "full_name": "PaperDefense.Tests.DrawingWorkshopRulesTests.FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics(\"build\")",
+              "message": "  Final build arithmetic must remain finite, including low production and material multipliers\r\n  Expected: False\r\n  But was:  True\r\n"
+            },
+            {
+              "full_name": "PaperDefense.Tests.DrawingWorkshopRulesTests.InitialDrawingGrantIsPermanentAcrossReloadAndCatalogChange",
+              "message": "  Expected: collection containing \"drawing.sniper\"\r\n  But was:  < \"chassis.standard\", \"module.armor\", \"weapon.gun\", \"weapon.mortar\", \"weapon.piercer\" >\r\n"
+            },
+            {
+              "full_name": "PaperDefense.Tests.DrawingWorkshopRulesTests.NewInitialDrawingGrantMarksContentPreparationChangedExactlyOnce",
+              "message": "  Expected: True\r\n  But was:  False\r\n"
+            }
+          ],
+          "failures_capped": false
+        },
+        "error": null,
+        "result": {
+          "mode": "EditMode",
+          "summary": {
+            "total": 7,
+            "passed": 0,
+            "failed": 7,
+            "skipped": 0,
+            "durationSeconds": 0.6507278,
+            "resultState": "Failed(Child)"
+          },
+          "results": [
+            {
+              "name": "FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics(\"health\")",
+              "fullName": "PaperDefense.Tests.DrawingWorkshopRulesTests.FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics(\"health\")",
+              "state": "Failed",
+              "durationSeconds": 0.0402914,
+              "message": "  Final health arithmetic must remain finite, including low production and material multipliers\r\n  Expected: False\r\n  But was:  True\r\n",
+              "stackTrace": "at PaperDefense.Tests.DrawingWorkshopRulesTests.FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics (System.String statistic) [0x000f4] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\DrawingWorkshopRulesTests.cs:151\r\n",
+              "output": ""
+            },
+            {
+              "name": "FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics(\"damage\")",
+              "fullName": "PaperDefense.Tests.DrawingWorkshopRulesTests.FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics(\"damage\")",
+              "state": "Failed",
+              "durationSeconds": 0.0008234,
+              "message": "  Final damage arithmetic must remain finite, including low production and material multipliers\r\n  Expected: False\r\n  But was:  True\r\n",
+              "stackTrace": "at PaperDefense.Tests.DrawingWorkshopRulesTests.FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics (System.String statistic) [0x000f4] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\DrawingWorkshopRulesTests.cs:151\r\n",
+              "output": ""
+            },
+            {
+              "name": "FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics(\"range\")",
+              "fullName": "PaperDefense.Tests.DrawingWorkshopRulesTests.FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics(\"range\")",
+              "state": "Failed",
+              "durationSeconds": 0.0006051,
+              "message": "  Final range arithmetic must remain finite, including low production and material multipliers\r\n  Expected: False\r\n  But was:  True\r\n",
+              "stackTrace": "at PaperDefense.Tests.DrawingWorkshopRulesTests.FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics (System.String statistic) [0x000f4] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\DrawingWorkshopRulesTests.cs:151\r\n",
+              "output": ""
+            },
+            {
+              "name": "FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics(\"interval\")",
+              "fullName": "PaperDefense.Tests.DrawingWorkshopRulesTests.FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics(\"interval\")",
+              "state": "Failed",
+              "durationSeconds": 0.0006251,
+              "message": "  Final interval arithmetic must remain finite, including low production and material multipliers\r\n  Expected: False\r\n  But was:  True\r\n",
+              "stackTrace": "at PaperDefense.Tests.DrawingWorkshopRulesTests.FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics (System.String statistic) [0x000f4] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\DrawingWorkshopRulesTests.cs:151\r\n",
+              "output": ""
+            },
+            {
+              "name": "FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics(\"build\")",
+              "fullName": "PaperDefense.Tests.DrawingWorkshopRulesTests.FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics(\"build\")",
+              "state": "Failed",
+              "durationSeconds": 0.0006476,
+              "message": "  Final build arithmetic must remain finite, including low production and material multipliers\r\n  Expected: False\r\n  But was:  True\r\n",
+              "stackTrace": "at PaperDefense.Tests.DrawingWorkshopRulesTests.FiniteCoefficientsCannotDeployNonFiniteResolvedStatistics (System.String statistic) [0x000f4] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\DrawingWorkshopRulesTests.cs:151\r\n",
+              "output": ""
+            },
+            {
+              "name": "InitialDrawingGrantIsPermanentAcrossReloadAndCatalogChange",
+              "fullName": "PaperDefense.Tests.DrawingWorkshopRulesTests.InitialDrawingGrantIsPermanentAcrossReloadAndCatalogChange",
+              "state": "Failed",
+              "durationSeconds": 0.007238,
+              "message": "  Expected: collection containing \"drawing.sniper\"\r\n  But was:  < \"chassis.standard\", \"module.armor\", \"weapon.gun\", \"weapon.mortar\", \"weapon.piercer\" >\r\n",
+              "stackTrace": "at PaperDefense.Tests.DrawingWorkshopRulesTests.InitialDrawingGrantIsPermanentAcrossReloadAndCatalogChange () [0x00085] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\DrawingWorkshopRulesTests.cs:125\r\n",
+              "output": ""
+            },
+            {
+              "name": "NewInitialDrawingGrantMarksContentPreparationChangedExactlyOnce",
+              "fullName": "PaperDefense.Tests.DrawingWorkshopRulesTests.NewInitialDrawingGrantMarksContentPreparationChangedExactlyOnce",
+              "state": "Failed",
+              "durationSeconds": 0.0008701,
+              "message": "  Expected: True\r\n  But was:  False\r\n",
+              "stackTrace": "at PaperDefense.Tests.DrawingWorkshopRulesTests.NewInitialDrawingGrantMarksContentPreparationChangedExactlyOnce () [0x00048] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\DrawingWorkshopRulesTests.cs:134\r\n",
+              "output": ""
+            }
+          ]
+        }
+      },
+      "hint": null
+    }
+  },
+  "fixEdit": {
+    "result": {
+      "success": true,
+      "message": "Test job status retrieved.",
+      "error": null,
+      "data": {
+        "job_id": "d55b13520f194437b4172223734a374e",
+        "status": "succeeded",
+        "mode": "EditMode",
+        "started_unix_ms": 1791927576470,
+        "finished_unix_ms": 1791927607248,
+        "last_update_unix_ms": 1791927607248,
+        "progress": {
+          "completed": 818,
+          "total": 818,
+          "current_test_full_name": null,
+          "current_test_started_unix_ms": null,
+          "last_finished_test_full_name": "PaperDefense.Tests.NotebookArtImportTests.SelfIntersectingPentagramAndRepeatedPolygonVerticesAreRejected",
+          "last_finished_unix_ms": 1791927607032,
+          "stuck_suspected": false,
+          "editor_is_focused": false,
+          "run_in_background": false,
+          "focus_nudge_attempts": null,
+          "focus_nudge_limit": null,
+          "focus_nudge_status": null,
+          "blocked_reason": null,
+          "failures_so_far": [],
+          "failures_capped": false
+        },
+        "error": null,
+        "result": {
+          "mode": "EditMode",
+          "summary": {
+            "total": 818,
+            "passed": 818,
+            "failed": 0,
+            "skipped": 0,
+            "durationSeconds": 26.2872122,
+            "resultState": "Passed"
+          },
+          "results": []
+        }
+      },
+      "hint": null
+    }
+  },
+  "fixPlay": {
+    "result": {
+      "success": true,
+      "message": "Test job status retrieved.",
+      "error": null,
+      "data": {
+        "job_id": "12a25967a99f439a88609e85dae74c21",
+        "status": "failed",
+        "mode": "PlayMode",
+        "started_unix_ms": 1791927617997,
+        "finished_unix_ms": 1791927705465,
+        "last_update_unix_ms": 1791927705465,
+        "progress": {
+          "completed": 321,
+          "total": 321,
+          "current_test_full_name": null,
+          "current_test_started_unix_ms": null,
+          "last_finished_test_full_name": "PaperDefense.Tests.WorkshopStoreTests.ValidPrimaryIgnoresBrokenBackup",
+          "last_finished_unix_ms": 1791927705422,
+          "stuck_suspected": false,
+          "editor_is_focused": false,
+          "run_in_background": false,
+          "focus_nudge_attempts": null,
+          "focus_nudge_limit": null,
+          "focus_nudge_status": null,
+          "blocked_reason": null,
+          "failures_so_far": [
+            {
+              "full_name": "PaperDefense.Tests.BootstrapProfileIsolationTests.OrdinaryLaunchStillLoadsItsConfiguredProfileStoreExactlyOnce",
+              "message": "  Expected: Saved\r\n  But was:  Unsaved\r\n"
+            }
+          ],
+          "failures_capped": false
+        },
+        "error": null,
+        "result": {
+          "mode": "PlayMode",
+          "summary": {
+            "total": 321,
+            "passed": 320,
+            "failed": 1,
+            "skipped": 0,
+            "durationSeconds": 81.9703046,
+            "resultState": "Failed(Child)"
+          },
+          "results": [
+            {
+              "name": "OrdinaryLaunchStillLoadsItsConfiguredProfileStoreExactlyOnce",
+              "fullName": "PaperDefense.Tests.BootstrapProfileIsolationTests.OrdinaryLaunchStillLoadsItsConfiguredProfileStoreExactlyOnce",
+              "state": "Failed",
+              "durationSeconds": 0.0545892,
+              "message": "  Expected: Saved\r\n  But was:  Unsaved\r\n",
+              "stackTrace": "at PaperDefense.Tests.BootstrapProfileIsolationTests.OrdinaryLaunchStillLoadsItsConfiguredProfileStoreExactlyOnce () [0x0005d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\BootstrapProfileIsolationTests.cs:76\r\n",
+              "output": ""
+            }
+          ]
+        }
+      },
+      "hint": null
+    }
+  }
+}

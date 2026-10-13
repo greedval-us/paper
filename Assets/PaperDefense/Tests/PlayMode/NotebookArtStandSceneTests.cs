@@ -232,19 +232,20 @@ namespace PaperDefense.Tests
             Assert.That(editor.Canvas.SelectedBinding, Is.EqualTo(DrawingBindings.Mount2));
             var points = new[] { new DrawingPoint(-.11f, -.07f), new DrawingPoint(.02f, .09f), new DrawingPoint(.13f, .3f) };
             Assert.That(editor.Session.AddStroke(DrawingBindings.Mount2, points, out string reason), Is.True, reason);
+            FreeformUiTestDrawing.Complete(editor.Session);
+            editor.Canvas.FinishStroke();
             var drawing = editor.Session.Snapshot;
             Click("Apply drawing");
             Assert.That(editor.IsOpen, Is.False);
             var blueprint = Field<TowerBlueprint>(sketch, "blueprint");
-            Assert.That(blueprint.Origin, Is.EqualTo(DrawingOrigin.PlayerDrawing));
+            Assert.That(blueprint.Origin, Is.EqualTo(DrawingOrigin.Freeform));
             Assert.That(blueprint.Drawing, Is.SameAs(drawing));
-            Assert.That(drawing.PointCount, Is.EqualTo(3));
+            Assert.That(blueprint.FreeformDesign.IsComplete, Is.True);
             foreach (string binding in new[] { DrawingBindings.Base, DrawingBindings.Mount0, DrawingBindings.Mount1 })
-                Assert.That(drawing.GetPart(binding).Strokes, Is.Empty, binding);
+                Assert.That(drawing.GetPart(binding).Strokes, Is.Not.Empty, binding);
             Assert.That(drawing.GetPart(DrawingBindings.Mount2).Strokes.Count, Is.EqualTo(1));
             var ownVertices = RenderedVertices(sketch);
-            Assert.That(ownVertices.Length, Is.EqualTo(AuthoredGeometryCache.For(drawing).GetPart(DrawingBindings.Mount2).Vertices.Count),
-                "A partial authored tower must render only its own stroke; empty layers must receive no reference art.");
+            Assert.That(ownVertices.Length, Is.GreaterThan(0), "A complete freeform tower renders its authored functional parts.");
             string hash = drawing.GeometryHash;
             var stamp = blueprint.EvaluationStamp;
             int builds = AuthoredGeometryCache.BuildCount;
@@ -265,21 +266,14 @@ namespace PaperDefense.Tests
 
             Click("Combination 0"); Click("Combination 4");
             Assert.That(Field<TowerBlueprint>(sketch, "blueprint").Drawing, Is.SameAs(drawing), "Each combination must keep its own memory-only drawing.");
-            Click("Draw tower"); Click("Draw part mount.2"); Click("Clear drawing part"); Click("Apply drawing");
-            var empty = Field<TowerBlueprint>(sketch, "blueprint");
-            Assert.That(empty.Origin, Is.EqualTo(DrawingOrigin.PlayerDrawing));
-            Assert.That(empty.Drawing.PointCount, Is.Zero);
-            string emptyHash = empty.Drawing.GeometryHash;
-            var emptyStamp = empty.EvaluationStamp;
-            for (int frame = 0; frame < 3; frame++)
-            {
-                stand.Advance(.1f);
-                Assert.That(RenderedMesh(sketch).vertexCount, Is.Zero, "An empty authored tower must stay empty during animation.");
-                Assert.That(Field<TowerBlueprint>(sketch, "blueprint"), Is.SameAs(empty));
-                Assert.That(empty.Drawing.GeometryHash, Is.EqualTo(emptyHash));
-                Assert.That(empty.EvaluationStamp, Is.SameAs(emptyStamp));
-            }
-            Assert.That(drawing.GeometryHash, Is.EqualTo(hash), "Clearing the editor working copy must not alter the applied earlier snapshot.");
+            var restored = Field<TowerBlueprint>(sketch, "blueprint");
+            Click("Draw tower"); Click("Draw part mount.2"); Click("Clear drawing part");
+            Assert.That(!stand.GetComponentsInChildren<Button>(true).Single(b => b.name == "Apply drawing").interactable, Is.True);
+            editor.Close(true);
+            Assert.That(editor.IsOpen, Is.True, "Removing a required barrel must reject apply and keep the editor open.");
+            Assert.That(Field<TowerBlueprint>(sketch, "blueprint"), Is.SameAs(restored));
+            Assert.That(drawing.GeometryHash, Is.EqualTo(hash), "Rejected incomplete edits must not alter the applied snapshot.");
+            editor.Close(false);
             Click("Reference tower");
             Assert.That(Field<TowerBlueprint>(sketch, "blueprint").Origin, Is.EqualTo(DrawingOrigin.LegacyStandard));
             RenderedVertices(sketch);

@@ -35,9 +35,9 @@ namespace PaperDefense.Tests
         }
 
         [TestCase(false,100,57)]
-        [TestCase(false,0,50)]
+        [TestCase(false,0,57)]
         [TestCase(true,100,57)]
-        [TestCase(true,0,50)]
+        [TestCase(true,0,57)]
         public void RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(bool dynamic,float quality,int launches)
         {
             var balance=GameBalance.CreateDefault();balance.Construction.DynamicFeed=dynamic;
@@ -48,16 +48,16 @@ namespace PaperDefense.Tests
         }
 
         [TestCase(false)] [TestCase(true)]
-        public void DualRailUsesSharedFeedQualityAndIntervalPenaltyExactlyOnce(bool dynamic)
+        public void DualRailUsesSharedFeedAndIntervalPenaltyWithoutDrawingGrade(bool dynamic)
         {
             var balance=GameBalance.CreateDefault();balance.Construction.DynamicFeed=dynamic;
             var tower=Tower(Blueprint(dual:true));
             Run(balance,tower,1,0);
-            float expected=.42f/.8f/.85f*1.2f;
+            float expected=.42f/.8f*1.2f;
             Assert.That(tower.Cooldown,Is.EqualTo(expected).Within(.000001f));
             Assert.That(tower.SecondaryCooldown,Is.EqualTo(expected).Within(.000001f));
             Assert.That(TowerCatalog.FeedMultiplier(tower.Blueprint,balance,2),Is.EqualTo(.8f));
-            Assert.That(Run(balance,Tower(tower.Blueprint),900,0).Launches(StructureKind.Gun),Is.EqualTo(80));
+            Assert.That(Run(balance,Tower(tower.Blueprint),900,0).Launches(StructureKind.Gun),Is.EqualTo(96));
         }
 
         [Test] public void RailExpandsTheActualCombatQueryUpToItsRangeBoundary()

@@ -79,11 +79,10 @@ namespace PaperDefense.Tests
             hud.DrawingEditor.Open(hud.Draft);
             var first = hud.Draft.ModuleSelections[0]; var second = hud.Draft.ModuleSelections[1];
             string firstBinding = DrawingBindings.Module(first.InstanceId), secondBinding = DrawingBindings.Module(second.InstanceId);
-            Button("Draw part " + firstBinding).onClick.Invoke();
-            Assert.That(hud.DrawingEditor.Canvas.SelectedBinding, Is.EqualTo(firstBinding));
+            Assert.That(root.GetComponentsInChildren<Button>(true).Any(b => b.name == "Draw part " + firstBinding), Is.False, "Equipment is not a functional drawing role.");
             Assert.That(hud.DrawingEditor.Session.AddStroke(firstBinding, new[] { new DrawingPoint(0, 0), new DrawingPoint(.1f, .3f) }, out _), Is.True);
             Assert.That(hud.DrawingEditor.Session.Snapshot.GetPart(secondBinding).Strokes, Is.Empty);
-            Button("Apply drawing").onClick.Invoke(); Button("Save blueprint as new").onClick.Invoke();
+            FreeformUiTestDrawing.Complete(hud.DrawingEditor.Session); Button("Apply drawing").onClick.Invoke(); Button("Save blueprint as new").onClick.Invoke();
             Assert.That(run.Workshop.Album.Last().Drawing.GetPart(firstBinding).Strokes.Count, Is.EqualTo(1));
             Assert.That(run.Workshop.Album.Last().ModuleSelections.Select(value => value.InstanceId), Is.EquivalentTo(new[] { first.InstanceId, second.InstanceId }));
         }
@@ -173,7 +172,7 @@ namespace PaperDefense.Tests
             hud.DrawingEditor.Open(hud.Draft);
             Assert.That(hud.DrawingEditor.Session.AddStroke(DrawingBindings.Mount0,
                 new[]{new DrawingPoint(-.1f,0),new DrawingPoint(.1f,.4f)},out var reason),Is.True,reason);
-            Button("Apply drawing").onClick.Invoke();
+            FreeformUiTestDrawing.Complete(hud.DrawingEditor.Session); Button("Apply drawing").onClick.Invoke();
             Assert.That(hud.Draft.Drawing.GetPart(DrawingBindings.Mount0).Strokes.Count,Is.EqualTo(1));
         }
 
@@ -210,7 +209,7 @@ namespace PaperDefense.Tests
             Button("Open drawing editor").onClick.Invoke();
             Assert.That(hud.DrawingEditor.Session.AddStroke(DrawingBindings.Mount0,
                 new[] { new DrawingPoint(-.1f, 0), new DrawingPoint(.1f, .3f) }, out var reason), Is.True, reason);
-            Button("Apply drawing").onClick.Invoke();
+            FreeformUiTestDrawing.Complete(hud.DrawingEditor.Session); Button("Apply drawing").onClick.Invoke();
             Button("Save blueprint").onClick.Invoke();
             Assert.That(run.Workshop.Album.Count, Is.EqualTo(assignOne ? 2 : 1), hud.Status);
             Button("Assign slot 0").onClick.Invoke();

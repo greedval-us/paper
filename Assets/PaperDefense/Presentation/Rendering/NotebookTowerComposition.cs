@@ -10,11 +10,11 @@ namespace PaperDefense.Presentation
     {
         static readonly MeshPen uiPen = new MeshPen(null, 4096);
         public static bool UsesResourceArt(TowerBlueprint blueprint)
-            => blueprint != null && blueprint.Origin != DrawingOrigin.PlayerDrawing && blueprint.Content != null
+            => blueprint != null && !blueprint.HasPlayerDrawing && blueprint.Content != null
                 && !blueprint.Content.IsLegacyAdapter && ReferenceDrawingCache.UsesTemplateVisual(blueprint)
                 && NotebookVisualThemeAsset.Default != null;
         internal static bool UsesComposition(TowerBlueprint blueprint)
-            => blueprint != null && (blueprint.Origin == DrawingOrigin.PlayerDrawing || UsesResourceArt(blueprint));
+            => blueprint != null && (blueprint.HasPlayerDrawing || UsesResourceArt(blueprint));
 
         public static void DrawUI(VertexHelper target, TowerBlueprint blueprint, Vector2 center, float scale,
             MaterialTier tier = MaterialTier.Ink, InkColor ink = InkColor.None)
@@ -43,7 +43,7 @@ namespace PaperDefense.Presentation
             InkColor ink, float opacity = 1, NotebookVisualThemeAsset theme = null)
         {
             Color tint = MeshPen.Alpha(DoodleGlyphs.TierColor(tier), opacity);
-            bool authored = blueprint.Origin == DrawingOrigin.PlayerDrawing;
+            bool authored = blueprint.HasPlayerDrawing;
             var geometry = authored ? AuthoredGeometryCache.For(blueprint.Drawing) : null;
             theme = theme ?? NotebookVisualThemeAsset.Default;
             foreach (var template in DrawingTemplateCatalog.Create(blueprint))
@@ -66,9 +66,9 @@ namespace PaperDefense.Presentation
             double seconds, float opacity = 1, NotebookVisualThemeAsset theme = null, Func<int, Point2> overrideAim = null)
         {
             theme = theme ?? NotebookVisualThemeAsset.Default;
-            Color tint = MeshPen.Alpha(blueprint.Origin == DrawingOrigin.PlayerDrawing || ink == InkColor.None
+            Color tint = MeshPen.Alpha(blueprint.HasPlayerDrawing || ink == InkColor.None
                 ? DoodleGlyphs.TierColor(tier) : DoodleGlyphs.InkTone(ink), opacity);
-            var authored = blueprint.Origin == DrawingOrigin.PlayerDrawing ? AuthoredGeometryCache.For(blueprint.Drawing) : null;
+            var authored = blueprint.HasPlayerDrawing ? AuthoredGeometryCache.For(blueprint.Drawing) : null;
             foreach (var mount in blueprint.WeaponMounts)
             {
                 Point2 local = DrawingTemplateCatalog.Pivot(blueprint, DrawingBindings.Mount(mount.SlotIndex));
@@ -94,6 +94,11 @@ namespace PaperDefense.Presentation
             string weapon = structure.Blueprint?.GetWeaponId(slot) ?? structure.ContentId;
             var recoil = theme?.FindRecoil(weapon);
             Vector2 muzzle = recoil == null ? new Vector2(0, .5f) : recoil.Muzzle;
+            if (structure.Blueprint?.IsFreeform == true)
+            {
+                var barrel = structure.Blueprint.FreeformDesign.GetBarrel(slot);
+                if (barrel != null) muzzle = new Vector2(barrel.MuzzleOffset.X, barrel.MuzzleOffset.Y);
+            }
             return pivot + side * muzzle.x + forward * (muzzle.y + (animation?.Recoil(structure.Id, slot, seconds, theme) ?? 0));
         }
         internal static Vector2 SegmentOrigin(StructureView structure, int slot, Point2 aim, Vector2 recordedFrom,

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using PaperDefense.Core;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,12 +7,13 @@ namespace PaperDefense.Presentation
 {
     /// <summary>Trial playback uses simulation timestamps, the shared composition and recorded interval events.</summary>
     [RequireComponent(typeof(CanvasRenderer))]
-    public sealed class TrialLaneSketch : Graphic
+    public sealed class TrialLaneSketch : MaskableGraphic
     {
         readonly NotebookTrialPlayback playback = new NotebookTrialPlayback();
         readonly MeshPen pen = new MeshPen(null, 8192);
+        readonly List<TrialLaneBatchGraphic> batches = new List<TrialLaneBatchGraphic>();
         float started, duration, offset, lastSeconds = -1;
-        bool playbackPaused;
+        bool playbackPaused, geometryDirty = true;
         public bool HasRecording => playback.Report != null && playback.Report.Frames.Count > 0;
         public NotebookTrialPlayback Playback => playback;
         public float PlaybackSpeed { get; set; } = 4;
@@ -24,23 +26,99 @@ namespace PaperDefense.Presentation
         public void SetResult(TrialReport value, float startTime, float totalDuration)
         {
             playback.Bind(value); started = startTime; duration = totalDuration; offset = 0;
-            lastSeconds = -1; playbackPaused = false; SetVerticesDirty();
+            lastSeconds = -1; playbackPaused = false; geometryDirty = true;
+            RefreshGeometry();
         }
-        void Update()
+
+        protected override void OnEnable()
         {
-            if (!HasRecording) return;
+            base.OnEnable();
+            geometryDirty = true;
+            RefreshGeometry();
+        }
+
+        protected override void OnDisable()
+        {
+            // Disabling just this component does not disable child GameObjects.
+            foreach (var batch in batches) if (batch != null) batch.enabled = false;
+            base.OnDisable();
+        }
+
+        protected override void OnDestroy()
+        {
+            foreach (var batch in batches)
+            {
+                if (batch == null) continue;
+                if (UnityEngine.Application.isPlaying) Destroy(batch.gameObject);
+                else DestroyImmediate(batch.gameObject);
+            }
+            batches.Clear();
+            base.OnDestroy();
+        }
+
+        void Update() => RefreshGeometry();
+
+        void RefreshGeometry()
+        {
+            // Pool mutations and dirty registration belong outside the Canvas rebuild. Every Graphic
+            // reads the same already-prepared pose; none rebuilds another Graphic in OnPopulateMesh.
+            if (!IsActive() || CanvasUpdateRegistry.IsRebuildingGraphics() || CanvasUpdateRegistry.IsRebuildingLayout())
+                return;
             float seconds = PlaybackSeconds;
-            if (seconds == lastSeconds) return;
-            playback.Seek(seconds); lastSeconds = seconds; SetVerticesDirty();
+            if (!geometryDirty && (!HasRecording || seconds == lastSeconds))
+            {
+                SyncBatchAppearance();
+                return;
+            }
+            if (HasRecording)
+            {
+                playback.Seek(seconds);
+                NotebookTrialRenderer.Draw(pen, playback);
+            }
+            else pen.Clear();
+            lastSeconds = seconds; geometryDirty = false;
+
+            int overflowCount = Mathf.Max(0, pen.UiBatchCount - 1);
+            while (batches.Count < overflowCount)
+            {
+                var child = new GameObject("Trial geometry batch " + (batches.Count + 1), typeof(RectTransform));
+                child.layer = gameObject.layer;
+                child.SetActive(false);
+                child.transform.SetParent(transform, false);
+                var batch = child.AddComponent<TrialLaneBatchGraphic>();
+                batch.Initialize(this, batches.Count + 1);
+                batches.Add(batch);
+                child.SetActive(true);
+            }
+            for (int i = 0; i < batches.Count; i++)
+            {
+                var batch = batches[i];
+                batch.enabled = i < overflowCount;
+                if (!batch.enabled) continue;
+                batch.SetVerticesDirty();
+            }
+            SyncBatchAppearance();
+            SetVerticesDirty();
         }
-        protected override void OnPopulateMesh(VertexHelper target)
+
+        void SyncBatchAppearance()
         {
-            target.Clear(); if (!HasRecording) return;
-            playback.Seek(PlaybackSeconds);
-            NotebookTrialRenderer.Draw(pen, playback);
-            Rect rect = rectTransform.rect;
+            foreach (var batch in batches)
+            {
+                batch.material = material;
+                batch.maskable = maskable;
+            }
+        }
+
+        protected override void OnPopulateMesh(VertexHelper target)
+            => PopulateBatch(target, rectTransform.rect, 0);
+
+        internal void PopulateBatch(VertexHelper target, Rect rect, int batchIndex)
+        {
+            target.Clear();
+            if (!isActiveAndEnabled || !HasRecording) return;
             float scale = Mathf.Max(.1f, Mathf.Min((rect.width - 16) / 42, (rect.height - 14) / 28));
-            pen.CopyTo(target, rect.center - new Vector2(29, 22) * scale, scale);
+            pen.CopyUiBatchTo(target, rect.center - new Vector2(29, 22) * scale, scale, batchIndex);
         }
     }
 }

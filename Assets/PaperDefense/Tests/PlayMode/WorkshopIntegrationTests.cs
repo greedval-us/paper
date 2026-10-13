@@ -87,7 +87,7 @@ namespace PaperDefense.Tests
             Button("Open drawing editor").onClick.Invoke();
             Assert.That(workshop.DrawingEditor.Session.AddStroke(DrawingPartKey.Mount0,
                 new[] { new DrawingPoint(0, 0), new DrawingPoint(0, .4f) }, out _), Is.True);
-            Button("Apply drawing").onClick.Invoke();
+            FreeformUiTestDrawing.Complete(workshop.DrawingEditor.Session); Button("Apply drawing").onClick.Invoke();
             var saved = workshop.Draft;
             Button("Save blueprint").onClick.Invoke();
             Button("Assign slot 0").onClick.Invoke();
@@ -107,6 +107,10 @@ namespace PaperDefense.Tests
             var workshop = root.GetComponentInChildren<WorkshopHud>(true);
             Button("New blueprint").onClick.Invoke();
             Button("Module Feed").onClick.Invoke();
+            Button("Open drawing editor").onClick.Invoke();
+            FreeformUiTestDrawing.Complete(workshop.DrawingEditor.Session);
+            workshop.DrawingEditor.Close(true);
+            Assert.That(workshop.Draft.FreeformDesign.IsComplete, Is.True);
             Button("Open trial").onClick.Invoke();
             Assert.DoesNotThrow(() => Button("Run trial").onClick.Invoke());
             Assert.That(workshop.Status, Does.Contain("откройте"));

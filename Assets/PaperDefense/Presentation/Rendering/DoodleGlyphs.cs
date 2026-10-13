@@ -46,7 +46,7 @@ namespace PaperDefense.Presentation
             Color edge = MeshPen.Alpha(NotebookPalette.Navy, alpha);
             Color fill = Color.Lerp(NotebookPalette.Paper, color, .22f);
             if (building) fill.a = .7f;
-            bool authored = state.Blueprint != null && state.Blueprint.Origin == DrawingOrigin.PlayerDrawing;
+            bool authored = state.Blueprint != null && state.Blueprint.HasPlayerDrawing;
             if (NotebookTowerComposition.UsesComposition(state.Blueprint))
                 NotebookTowerComposition.DrawStatic(pen, state.Blueprint, p, state.Tier, state.Color, alpha, theme);
             else if (state.Kind == StructureKind.Wall && NotebookArtRenderer.Draw(pen,
@@ -134,7 +134,7 @@ namespace PaperDefense.Presentation
                 if (NotebookTowerComposition.UsesComposition(state.Blueprint))
                     NotebookTowerComposition.DrawMounts(pen, state.Blueprint, p, state.Tier, state.Color,
                         state, true, animation, state.Id, seconds, state.IsComplete ? 1 : .48f, theme);
-                else if (state.Blueprint.Origin == DrawingOrigin.PlayerDrawing || ReferenceDrawingCache.UsesTemplateVisual(state.Blueprint))
+                else if (state.Blueprint.HasPlayerDrawing || ReferenceDrawingCache.UsesTemplateVisual(state.Blueprint))
                 {
                     var geometry = AuthoredGeometryCache.For(ReferenceDrawingCache.VisibleDrawing(state.Blueprint));
                     foreach (var mount in state.Blueprint.WeaponMounts)

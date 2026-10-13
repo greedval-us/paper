@@ -2366,6 +2366,194 @@ MonoBehaviour:
       Modules: []
       WeaponMounts: []
       Slot: 3
+    FreeformRules:
+      BodyAreaReference: 0.8
+      MinimumBodyArea: 0.06
+      BarrelLengthReference: 0.9
+      BarrelWidthReference: 0.5
+      MinimumBarrelLength: 0.12
+      MinimumMuzzleForward: 0.1
+      HealthBase: 0.6
+      HealthSize: 1.2
+      CapacityBase: 0.6
+      CapacitySize: 0.8
+      CostBase: 0.75
+      CostSize: 0.45
+      CostBarrelLength: 0.12
+      CostBarrelWidth: 0.15
+      BuildBase: 0.8
+      BuildSize: 0.4
+      RangeBase: 0.65
+      RangeLength: 0.75
+      RangeWidthPenalty: 0.2
+      IntervalBase: 0.75
+      IntervalLength: 0.55
+      IntervalWidth: 0.35
+      DamageBase: 0.75
+      DamageWidth: 0.75
+      BaseInkBudget: 65.0
+      ExtraMountInkBudget: 35.0
+      BodyAreaInk: 50.0
+      BarrelLengthInk: 25.0
+      BarrelWidthInk: 35.0
+    DrawingUnlocks:
+    - Id: drawing.body.basic
+      Name: "\u001ePD1:GWRyYXdpbmcuc3RlbmNpbC5ib2R5Lm5hbWUAAAAA\u001f"
+      Description: "\u001ePD1:IGRyYXdpbmcuc3RlbmNpbC5ib2R5LmRlc2NyaXB0aW9uAAAAAA==\u001f"
+      GoldCost: 0
+      InitiallyUnlocked: 1
+      Role: 0
+      Contours:
+      - Points:
+        - X: -0.32
+          Y: -0.35
+        - X: 0.32
+          Y: -0.35
+        - X: 0.4
+          Y: -0.27
+        - X: 0.4
+          Y: 0.27
+        - X: 0.32
+          Y: 0.35
+        - X: -0.32
+          Y: 0.35
+        - X: -0.4
+          Y: 0.27
+        - X: -0.4
+          Y: -0.27
+        - X: -0.32
+          Y: -0.35
+    - Id: drawing.barrel.basic
+      Name: "\u001ePD1:G2RyYXdpbmcuc3RlbmNpbC5iYXJyZWwubmFtZQAAAAA=\u001f"
+      Description: "\u001ePD1:ImRyYXdpbmcuc3RlbmNpbC5iYXJyZWwuZGVzY3JpcHRpb24AAAAA\u001f"
+      GoldCost: 0
+      InitiallyUnlocked: 1
+      Role: 1
+      Contours:
+      - Points:
+        - X: -0.1
+          Y: 0.0
+        - X: 0.1
+          Y: 0.0
+        - X: 0.07
+          Y: 0.6
+        - X: -0.07
+          Y: 0.6
+        - X: -0.1
+          Y: 0.0
+    - Id: drawing.sniper
+      Name: "\u001ePD1:G2RyYXdpbmcuc3RlbmNpbC5zbmlwZXIubmFtZQAAAAA=\u001f"
+      Description: "\u001ePD1:ImRyYXdpbmcuc3RlbmNpbC5zbmlwZXIuZGVzY3JpcHRpb24AAAAA\u001f"
+      GoldCost: 32
+      InitiallyUnlocked: 0
+      Role: 1
+      Contours:
+      - Points:
+        - X: -0.055
+          Y: 0.0
+        - X: 0.055
+          Y: 0.0
+        - X: 0.055
+          Y: 0.18
+        - X: 0.033
+          Y: 0.22
+        - X: 0.033
+          Y: 0.92
+        - X: -0.033
+          Y: 0.92
+        - X: -0.033
+          Y: 0.22
+        - X: -0.055
+          Y: 0.18
+        - X: -0.055
+          Y: 0.0
+      - Points:
+        - X: -0.055
+          Y: 0.12
+        - X: 0.055
+          Y: 0.12
+      - Points:
+        - X: -0.033
+          Y: 0.82
+        - X: 0.033
+          Y: 0.82
+    - Id: drawing.rapid
+      Name: "\u001ePD1:GmRyYXdpbmcuc3RlbmNpbC5yYXBpZC5uYW1lAAAAAA==\u001f"
+      Description: "\u001ePD1:IWRyYXdpbmcuc3RlbmNpbC5yYXBpZC5kZXNjcmlwdGlvbgAAAAA=\u001f"
+      GoldCost: 24
+      InitiallyUnlocked: 0
+      Role: 1
+      Contours:
+      - Points:
+        - X: -0.055
+          Y: 0.0
+        - X: 0.055
+          Y: 0.0
+        - X: 0.055
+          Y: 0.24
+        - X: 0.038
+          Y: 0.3
+        - X: -0.038
+          Y: 0.3
+        - X: -0.055
+          Y: 0.24
+        - X: -0.055
+          Y: 0.0
+      - Points:
+        - X: -0.055
+          Y: 0.1
+        - X: 0.055
+          Y: 0.1
+      - Points:
+        - X: -0.055
+          Y: 0.16
+        - X: 0.055
+          Y: 0.16
+      - Points:
+        - X: -0.055
+          Y: 0.22
+        - X: 0.055
+          Y: 0.22
+    - Id: drawing.heavy
+      Name: "\u001ePD1:GmRyYXdpbmcuc3RlbmNpbC5oZWF2eS5uYW1lAAAAAA==\u001f"
+      Description: "\u001ePD1:IWRyYXdpbmcuc3RlbmNpbC5oZWF2eS5kZXNjcmlwdGlvbgAAAAA=\u001f"
+      GoldCost: 40
+      InitiallyUnlocked: 0
+      Role: 1
+      Contours:
+      - Points:
+        - X: -0.12
+          Y: 0.0
+        - X: 0.12
+          Y: 0.0
+        - X: 0.12
+          Y: 0.3
+        - X: 0.23
+          Y: 0.4
+        - X: 0.23
+          Y: 0.5
+        - X: 0.17
+          Y: 0.56
+        - X: -0.17
+          Y: 0.56
+        - X: -0.23
+          Y: 0.5
+        - X: -0.23
+          Y: 0.4
+        - X: -0.12
+          Y: 0.3
+        - X: -0.12
+          Y: 0.0
+      - Points:
+        - X: -0.23
+          Y: 0.44
+        - X: 0.23
+          Y: 0.44
+      - Points:
+        - X: -0.12
+          Y: 0.16
+        - X: 0.12
+          Y: 0.16
     Assessment:
       Revision: 2
       Tolerance: 0.06

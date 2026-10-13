@@ -12,6 +12,8 @@ namespace PaperDefense.Core
         public List<DrawingTemplateDefinitionInput> Templates = new List<DrawingTemplateDefinitionInput>();
         public List<StartingBlueprintDefinitionInput> StartingPages = new List<StartingBlueprintDefinitionInput>();
         public DrawingAssessmentSettingsInput Assessment = new DrawingAssessmentSettingsInput();
+        public FreeformRulesInput FreeformRules = new FreeformRulesInput();
+        public List<DrawingUnlockDefinitionInput> DrawingUnlocks = DrawingUnlockDefaults.Create();
         public string RedEffectId, BlueEffectId, GreenEffectId;
         public ContentCatalogSnapshot CreateSnapshot() => new ContentCatalogSnapshot(this,false);
         public ContentCatalogInput CreateCopy() => ContentInputCopy.Copy(this);
@@ -24,6 +26,7 @@ namespace PaperDefense.Core
         readonly Dictionary<string,ModuleDefinition> modules = new Dictionary<string,ModuleDefinition>(StringComparer.Ordinal);
         readonly Dictionary<string,EffectDefinition> effects = new Dictionary<string,EffectDefinition>(StringComparer.Ordinal);
         readonly Dictionary<string,DrawingTemplateDefinition> templates = new Dictionary<string,DrawingTemplateDefinition>(StringComparer.Ordinal);
+        readonly Dictionary<string,DrawingUnlockDefinition> drawingUnlocks = new Dictionary<string,DrawingUnlockDefinition>(StringComparer.Ordinal);
         public IReadOnlyList<WorkshopPartDefinition> AllParts { get; }
         public IReadOnlyList<ChassisDefinition> Chassis { get; }
         public IReadOnlyList<WeaponDefinition> Weapons { get; }
@@ -33,6 +36,8 @@ namespace PaperDefense.Core
         public IReadOnlyList<TowerBlueprint> StartupBlueprints { get; }
         public IReadOnlyList<string> StartupSlotIds { get; }
         public DrawingAssessmentSettings Assessment { get; }
+        public FreeformRules FreeformRules { get; }
+        public IReadOnlyList<DrawingUnlockDefinition> DrawingUnlocks { get; }
         public bool IsLegacyAdapter { get; }
         public string RedEffectId { get; } public string BlueEffectId { get; } public string GreenEffectId { get; }
         internal ContentCatalogSnapshot(ContentCatalogInput input,bool legacy)
@@ -49,6 +54,11 @@ namespace PaperDefense.Core
             if(!legacy)foreach(var def in parts.Values)if(string.IsNullOrWhiteSpace(def.TemplateId)||!templates.ContainsKey(def.TemplateId))throw new ArgumentException(UserText.Message("copy.1704413c67567e8d", def.Id, def.TemplateId));
             RedEffectId=ValidateColorBinding(input.RedEffectId,EffectKind.DamageOverTime,"redEffectId");BlueEffectId=ValidateColorBinding(input.BlueEffectId,EffectKind.Slow,"blueEffectId");GreenEffectId=ValidateColorBinding(input.GreenEffectId,EffectKind.DefenseReduction,"greenEffectId");
             Assessment=(input.Assessment ?? throw new ArgumentException(UserText.Message("copy.325ec8802f5b6699"))).CreateSnapshot();
+            FreeformRules=(input.FreeformRules??throw new ArgumentException("catalog.freeformRules: required")).CreateSnapshot();
+            if(input.DrawingUnlocks==null)throw new ArgumentException("catalog.drawingUnlocks: required");
+            var drawingList=new List<DrawingUnlockDefinition>();
+            foreach(var item in input.DrawingUnlocks){var def=new DrawingUnlockDefinition(item);if(parts.ContainsKey(def.Id))throw new ArgumentException("catalog.drawingUnlocks: id collides with equipment");AddUnique(drawingUnlocks,def.Id,def,"drawingUnlocks");drawingList.Add(def);}
+            DrawingUnlocks=drawingList.AsReadOnly();
             chassisList.Sort(Compare);weaponList.Sort(Compare);moduleList.Sort(Compare);
             var all=new List<WorkshopPartDefinition>();all.AddRange(chassisList);all.AddRange(weaponList);all.AddRange(moduleList);all.Sort(Compare);
             AllParts=all.AsReadOnly();Chassis=chassisList.AsReadOnly();Weapons=weaponList.AsReadOnly();Modules=moduleList.AsReadOnly();Effects=effectList.AsReadOnly();Templates=templateList.AsReadOnly();
@@ -91,6 +101,7 @@ namespace PaperDefense.Core
         public bool TryGetWeapon(string id,out WeaponDefinition value){if(id==null){value=null;return false;}return weapons.TryGetValue(id,out value);}
         public bool TryGetModule(string id,out ModuleDefinition value){if(id==null){value=null;return false;}return modules.TryGetValue(id,out value);}
         public bool TryGetTemplate(string id,out DrawingTemplateDefinition value){if(id==null){value=null;return false;}return templates.TryGetValue(id,out value);}
+        public bool TryGetDrawingUnlock(string id,out DrawingUnlockDefinition value){if(id==null){value=null;return false;}return drawingUnlocks.TryGetValue(id,out value);}
         public ChassisDefinition GetChassis(string id)=>TryGetChassis(id,out var value)?value:throw new ArgumentException(UserText.Message("copy.c12b7f46a553fdd9", id));
         public WeaponDefinition GetWeapon(string id)=>TryGetWeapon(id,out var value)?value:throw new ArgumentException(UserText.Message("copy.0853f64b9754c827", id));
         public ModuleDefinition GetModule(string id)=>TryGetModule(id,out var value)?value:throw new ArgumentException(UserText.Message("copy.37e1a6467f128485", id));

@@ -165,7 +165,7 @@ namespace PaperDefense.Tests
                 var session = (GameSession)sessionField.GetValue(run);
                 session.Balance.Mechanics.DrawingQuality = !enabled;
                 var after = run.PreviewBlueprint(blueprint);
-                Assert.That(after.QualityMultiplier, Is.EqualTo(enabled ? .85f : 1).Within(.0001f));
+                Assert.That(after.QualityMultiplier, Is.EqualTo(1));
                 Assert.That(after.QualityMultiplier, Is.EqualTo(before.QualityMultiplier));
                 Assert.That(after.FireRate, Is.EqualTo(before.FireRate));
                 Assert.That(run.Session.Balance.Mechanics.DrawingQuality, Is.EqualTo(enabled));

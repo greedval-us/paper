@@ -1,0 +1,1824 @@
+Task 1 core/config/economy review. Includes prior uncommitted freeform baseline; use brief/report as scope.
+
+diff --git a/Assets/PaperDefense/Application/RunController.cs b/Assets/PaperDefense/Application/RunController.cs
+index 4e30842..c7207de 100644
+--- a/Assets/PaperDefense/Application/RunController.cs
++++ b/Assets/PaperDefense/Application/RunController.cs
+@@ -218,10 +218,11 @@ namespace PaperDefense.Application
+             persistence.SaveEarnedReward(profile);
+             RefreshSaveInfo();WorkshopChanged?.Invoke();
+         }
+         public bool SaveBlueprint(TowerBlueprint blueprint,out string reason)
+         {
++            blueprint=blueprint?.WithContent(contentSnapshot);
+             if(!CreateCandidate(out var candidate,out reason)||!candidate.SaveBlueprint(blueprint,out reason,session.Balance))return false;
+             return CommitCandidate(candidate,out reason);
+         }
+         public bool DeleteBlueprint(string id,out string reason)
+         {
+@@ -236,10 +237,16 @@ namespace PaperDefense.Application
+         public bool UnlockPart(string id,out string reason)
+         {
+             if(!CreateCandidate(out var candidate,out reason)||!candidate.Unlock(id,out reason,session.Balance))return false;
+             return CommitCandidate(candidate,out reason);
+         }
++        public bool UnlockDrawingAid(string id,out string reason)
++        {
++            if(!CreateCandidate(out var candidate,out reason)||!candidate.UnlockDrawingAid(id,out reason,session.Balance))return false;
++            if(profile.IsDrawingUnlocked(id,session.Balance))return true;
++            return CommitCandidate(candidate,out reason);
++        }
+         public bool StartRun(out string reason)
+         {
+             if(!Editing(out reason))return false;
+             GameBalance balance;
+             try { balance=CreateWorkshopBalance(); }
+@@ -291,17 +298,19 @@ namespace PaperDefense.Application
+         public FootprintProbeComparison CompareMortarFootprints(TowerBlueprint blueprint,int mount,MortarFootprint first,MortarFootprint second,FootprintFormation formation)
+             => MortarFootprintProbe.Compare(blueprint,mount,first,second,session.Balance,formation);
+ 
+         public TrialComparison RunTrial(TowerBlueprint blueprint,TrialScenario scenario,bool counterfire=false,int budget=400)
+         {
++            blueprint=blueprint?.WithContent(contentSnapshot);
+             if(!InWorkshop||!profile.ValidateOwned(blueprint,out _,session.Balance))return null;
+             var trials=session.Balance.Trials;
+             var baseline=new TowerBlueprint("trial.baseline",UserText.Message("copy.5c07091d535b3296"),trials.BaselineChassisId,trials.BaselineWeaponId,content:contentSnapshot);
+             return TrialRunner.Compare(blueprint,baseline,session.Balance,scenario,budget,1337,counterfire);
+         }
+         public TrialComparison RunQualityTrial(TowerBlueprint blueprint,TrialScenario scenario,bool counterfire=false,int budget=400)
+         {
++            blueprint=blueprint?.WithContent(contentSnapshot);
+             if(!InWorkshop||!profile.ValidateOwned(blueprint,out _,session.Balance))return null;
+             return TrialRunner.CompareQuality(blueprint,session.Balance,scenario,budget,1337,counterfire);
+         }
+     }
+ }
+diff --git a/Assets/PaperDefense/Application/WorkshopReadModel.cs b/Assets/PaperDefense/Application/WorkshopReadModel.cs
+index db55de2..71fa45f 100644
+--- a/Assets/PaperDefense/Application/WorkshopReadModel.cs
++++ b/Assets/PaperDefense/Application/WorkshopReadModel.cs
+@@ -7,21 +7,24 @@ namespace PaperDefense.Application
+     {
+         readonly WorkshopProfile source;
+         public int Gold=>source.Gold;
+         public IReadOnlyList<TowerBlueprint> Album { get; private set; }
+         public IReadOnlyList<PartUnlock> Parts { get; private set; }
++        public IReadOnlyList<DrawingUnlockDefinition> DrawingUnlocks { get; private set; }
+         public ContentCatalogSnapshot Content { get; private set; }
+         public IReadOnlyList<TowerBlueprint> Loadout {get;private set;}
+         public ProfileSaveState SaveState { get; internal set; } = ProfileSaveState.MemoryOnly;
+         public string SaveMessage { get; internal set; } = UserText.Message("copy.0780dfa419e08bc0");
+         public bool HasUnsavedChanges { get; internal set; }
+         public string LastWriteError { get; internal set; } = "";
+         public bool IsUnlocked(string id)=>source.IsUnlocked(id);
++        public bool IsDrawingUnlocked(string id)
++        {foreach(var definition in DrawingUnlocks)if(definition.Id==id)return definition.InitiallyUnlocked||source.IsUnlocked(id);return false;}
+         internal WorkshopReadModel(WorkshopProfile profile, GameBalance balance=null){source=profile;Refresh(balance);}
+         internal void Refresh(GameBalance balance=null)
+         {
+-            Content=balance?.ResolveContent(); Parts=source.GetParts(balance);
++            Content=balance?.ResolveContent(); Parts=source.GetParts(balance);DrawingUnlocks=source.GetDrawingUnlocks(balance);
+             var album=new TowerBlueprint[source.Album.Count];
+             for(int i=0;i<album.Length;i++)album[i]=PreparePage(source.Album[i]);
+             Album=System.Array.AsReadOnly(album);
+             var selected=source.GetLoadoutBlueprints();var loadout=new TowerBlueprint[selected.Count];
+             for(int i=0;i<loadout.Length;i++)loadout[i]=PreparePage(selected[i]);
+@@ -40,28 +43,47 @@ namespace PaperDefense.Application
+         public readonly int Load,Capacity,Cost,ColorCost;
+         public readonly float Health,Defense,BuildSeconds,FireRate,Range,FeedMultiplier;
+         public readonly float DrawingQuality,QualityMultiplier;
+         public readonly bool Valid;
+         public readonly string Reason;
++        public readonly IReadOnlyList<WeaponPreview> Weapons;
++        public readonly FreeformTowerDesign FreeformDesign;
+         internal TowerPreview(TowerBlueprint bp,GameBalance balance,MaterialTier material,MechanicsAvailability? mechanics=null)
+         {
+-            DrawingQuality=0;QualityMultiplier=1;Defense=0;
++            DrawingQuality=0;QualityMultiplier=1;Defense=0;Weapons=System.Array.Empty<WeaponPreview>();FreeformDesign=null;
+             Valid=TowerCatalog.Validate(bp,balance,out string reason);Reason=reason;
+             if(bp==null){Load=Capacity=Cost=ColorCost=0;Health=BuildSeconds=FireRate=Range=FeedMultiplier=0;return;}
+             var content = balance.ResolveContent();
+             bool known=content.TryGetChassis(bp.ChassisId,out _);
+             foreach(var mount in bp.WeaponMounts)known&=content.TryGetWeapon(mount.WeaponId,out _);
+             foreach(var selection in bp.ModuleSelections) known &= content.TryGetModule(selection.DefinitionId,out _);
+             if(!known)
+             {Load=Capacity=Cost=ColorCost=0;Health=BuildSeconds=FireRate=Range=FeedMultiplier=0;return;}
+             bp=bp.WithContent(content);
++            Valid=TowerCatalog.Validate(bp,balance,out reason);Reason=reason;
++            FreeformDesign=bp.FreeformDesign;
+             DrawingQuality=bp.Origin==DrawingOrigin.LegacyStandard?100:bp.Assessment.Quality;
+             Defense=DamageRules.EffectiveDefense(TowerCatalog.Defense(bp,balance),balance.Effects.MaximumDefense);
+             QualityMultiplier=TowerCatalog.QualityMultiplier(bp,balance,(mechanics??MechanicsAvailability.Resolve(balance)).DrawingQuality);
+             Load=TowerCatalog.Load(bp,balance);Capacity=TowerCatalog.Capacity(bp,balance);Cost=TowerCatalog.Cost(bp,balance,material);
+             ColorCost=TowerCatalog.ColorCost(bp,balance);Health=TowerCatalog.Health(bp,balance,material);
+             BuildSeconds=TowerCatalog.BuildSeconds(bp,balance,material);FeedMultiplier=TowerCatalog.FeedMultiplier(bp,balance);
+             Range=FireRate=0;
+-            foreach(var mount in bp.WeaponMounts){Range=System.Math.Max(Range,TowerCatalog.WeaponRange(bp,balance,mount.WeaponId,mount.SlotIndex));FireRate+=1/TowerCatalog.ActionInterval(bp,balance,mount.WeaponId,FeedMultiplier,QualityMultiplier,mount.SlotIndex);}
++            var weapons=new List<WeaponPreview>();
++            foreach(var mount in bp.WeaponMounts)
++            {
++                float range=TowerCatalog.WeaponRange(bp,balance,mount.WeaponId,mount.SlotIndex);
++                float interval=TowerCatalog.ActionInterval(bp,balance,mount.WeaponId,FeedMultiplier,QualityMultiplier,mount.SlotIndex);
++                weapons.Add(new WeaponPreview(mount.SlotIndex,range,interval,TowerCatalog.WeaponDamage(bp,balance,mount.WeaponId,material,mount.SlotIndex),FeedMultiplier));
++                Range=System.Math.Max(Range,range);FireRate+=1/interval;
++            }
++            Weapons=weapons.AsReadOnly();
+         }
+     }
++    public readonly struct WeaponPreview
++    {
++        public readonly int SlotIndex;
++        public readonly float Damage,Range,FireRate,Interval,FeedMultiplier;
++        internal WeaponPreview(int slot,float range,float interval,float damage,float feed)
++        {SlotIndex=slot;Range=range;Interval=interval;Damage=damage;FeedMultiplier=feed;FireRate=1/interval;}
++    }
+ }
+diff --git a/Assets/PaperDefense/Configuration/Content/NotebookContent.asset b/Assets/PaperDefense/Configuration/Content/NotebookContent.asset
+index 0e38f48..1b6b703 100644
+--- a/Assets/PaperDefense/Configuration/Content/NotebookContent.asset
++++ b/Assets/PaperDefense/Configuration/Content/NotebookContent.asset
+@@ -1380,10 +1380,198 @@ MonoBehaviour:
+       Modules:
+       - InstanceId: armor
+         DefinitionId: module.armor
+       WeaponMounts: []
+       Slot: 3
++    FreeformRules:
++      BodyAreaReference: 0.8
++      MinimumBodyArea: 0.06
++      BarrelLengthReference: 0.9
++      BarrelWidthReference: 0.5
++      MinimumBarrelLength: 0.12
++      MinimumMuzzleForward: 0.1
++      HealthBase: 0.6
++      HealthSize: 1.2
++      CapacityBase: 0.6
++      CapacitySize: 0.8
++      CostBase: 0.75
++      CostSize: 0.45
++      CostBarrelLength: 0.12
++      CostBarrelWidth: 0.15
++      BuildBase: 0.8
++      BuildSize: 0.4
++      RangeBase: 0.65
++      RangeLength: 0.75
++      RangeWidthPenalty: 0.2
++      IntervalBase: 0.75
++      IntervalLength: 0.55
++      IntervalWidth: 0.35
++      DamageBase: 0.75
++      DamageWidth: 0.75
++      BaseInkBudget: 65.0
++      ExtraMountInkBudget: 35.0
++      BodyAreaInk: 50.0
++      BarrelLengthInk: 25.0
++      BarrelWidthInk: 35.0
++    DrawingUnlocks:
++    - Id: drawing.body.basic
++      Name: "\u001ePD1:GWRyYXdpbmcuc3RlbmNpbC5ib2R5Lm5hbWUAAAAA\u001f"
++      Description: "\u001ePD1:IGRyYXdpbmcuc3RlbmNpbC5ib2R5LmRlc2NyaXB0aW9uAAAAAA==\u001f"
++      GoldCost: 0
++      InitiallyUnlocked: 1
++      Role: 0
++      Contours:
++      - Points:
++        - X: -0.32
++          Y: -0.35
++        - X: 0.32
++          Y: -0.35
++        - X: 0.4
++          Y: -0.27
++        - X: 0.4
++          Y: 0.27
++        - X: 0.32
++          Y: 0.35
++        - X: -0.32
++          Y: 0.35
++        - X: -0.4
++          Y: 0.27
++        - X: -0.4
++          Y: -0.27
++        - X: -0.32
++          Y: -0.35
++    - Id: drawing.barrel.basic
++      Name: "\u001ePD1:G2RyYXdpbmcuc3RlbmNpbC5iYXJyZWwubmFtZQAAAAA=\u001f"
++      Description: "\u001ePD1:ImRyYXdpbmcuc3RlbmNpbC5iYXJyZWwuZGVzY3JpcHRpb24AAAAA\u001f"
++      GoldCost: 0
++      InitiallyUnlocked: 1
++      Role: 1
++      Contours:
++      - Points:
++        - X: -0.1
++          Y: 0.0
++        - X: 0.1
++          Y: 0.0
++        - X: 0.07
++          Y: 0.6
++        - X: -0.07
++          Y: 0.6
++        - X: -0.1
++          Y: 0.0
++    - Id: drawing.sniper
++      Name: "\u001ePD1:G2RyYXdpbmcuc3RlbmNpbC5zbmlwZXIubmFtZQAAAAA=\u001f"
++      Description: "\u001ePD1:ImRyYXdpbmcuc3RlbmNpbC5zbmlwZXIuZGVzY3JpcHRpb24AAAAA\u001f"
++      GoldCost: 32
++      InitiallyUnlocked: 0
++      Role: 1
++      Contours:
++      - Points:
++        - X: -0.055
++          Y: 0.0
++        - X: 0.055
++          Y: 0.0
++        - X: 0.055
++          Y: 0.18
++        - X: 0.033
++          Y: 0.22
++        - X: 0.033
++          Y: 0.92
++        - X: -0.033
++          Y: 0.92
++        - X: -0.033
++          Y: 0.22
++        - X: -0.055
++          Y: 0.18
++        - X: -0.055
++          Y: 0.0
++      - Points:
++        - X: -0.055
++          Y: 0.12
++        - X: 0.055
++          Y: 0.12
++      - Points:
++        - X: -0.033
++          Y: 0.82
++        - X: 0.033
++          Y: 0.82
++    - Id: drawing.rapid
++      Name: "\u001ePD1:GmRyYXdpbmcuc3RlbmNpbC5yYXBpZC5uYW1lAAAAAA==\u001f"
++      Description: "\u001ePD1:IWRyYXdpbmcuc3RlbmNpbC5yYXBpZC5kZXNjcmlwdGlvbgAAAAA=\u001f"
++      GoldCost: 24
++      InitiallyUnlocked: 0
++      Role: 1
++      Contours:
++      - Points:
++        - X: -0.055
++          Y: 0.0
++        - X: 0.055
++          Y: 0.0
++        - X: 0.055
++          Y: 0.24
++        - X: 0.038
++          Y: 0.3
++        - X: -0.038
++          Y: 0.3
++        - X: -0.055
++          Y: 0.24
++        - X: -0.055
++          Y: 0.0
++      - Points:
++        - X: -0.055
++          Y: 0.1
++        - X: 0.055
++          Y: 0.1
++      - Points:
++        - X: -0.055
++          Y: 0.16
++        - X: 0.055
++          Y: 0.16
++      - Points:
++        - X: -0.055
++          Y: 0.22
++        - X: 0.055
++          Y: 0.22
++    - Id: drawing.heavy
++      Name: "\u001ePD1:GmRyYXdpbmcuc3RlbmNpbC5oZWF2eS5uYW1lAAAAAA==\u001f"
++      Description: "\u001ePD1:IWRyYXdpbmcuc3RlbmNpbC5oZWF2eS5kZXNjcmlwdGlvbgAAAAA=\u001f"
++      GoldCost: 40
++      InitiallyUnlocked: 0
++      Role: 1
++      Contours:
++      - Points:
++        - X: -0.12
++          Y: 0.0
++        - X: 0.12
++          Y: 0.0
++        - X: 0.12
++          Y: 0.3
++        - X: 0.23
++          Y: 0.4
++        - X: 0.23
++          Y: 0.5
++        - X: 0.17
++          Y: 0.56
++        - X: -0.17
++          Y: 0.56
++        - X: -0.23
++          Y: 0.5
++        - X: -0.23
++          Y: 0.4
++        - X: -0.12
++          Y: 0.3
++        - X: -0.12
++          Y: 0.0
++      - Points:
++        - X: -0.23
++          Y: 0.44
++        - X: 0.23
++          Y: 0.44
++      - Points:
++        - X: -0.12
++          Y: 0.16
++        - X: 0.12
++          Y: 0.16
+     Assessment:
+       Revision: 2
+       Tolerance: 0.06
+       CompletionThreshold: 0.95
+       PrecisionThreshold: 0.95
+diff --git a/Assets/PaperDefense/Configuration/Tests/drawing/Catalog.asset b/Assets/PaperDefense/Configuration/Tests/drawing/Catalog.asset
+index e68a61c..ae41282 100644
+--- a/Assets/PaperDefense/Configuration/Tests/drawing/Catalog.asset
++++ b/Assets/PaperDefense/Configuration/Tests/drawing/Catalog.asset
+@@ -2364,10 +2364,198 @@ MonoBehaviour:
+       FirstWeaponId: weapon.gun
+       SecondWeaponId: 
+       Modules: []
+       WeaponMounts: []
+       Slot: 3
++    FreeformRules:
++      BodyAreaReference: 0.8
++      MinimumBodyArea: 0.06
++      BarrelLengthReference: 0.9
++      BarrelWidthReference: 0.5
++      MinimumBarrelLength: 0.12
++      MinimumMuzzleForward: 0.1
++      HealthBase: 0.6
++      HealthSize: 1.2
++      CapacityBase: 0.6
++      CapacitySize: 0.8
++      CostBase: 0.75
++      CostSize: 0.45
++      CostBarrelLength: 0.12
++      CostBarrelWidth: 0.15
++      BuildBase: 0.8
++      BuildSize: 0.4
++      RangeBase: 0.65
++      RangeLength: 0.75
++      RangeWidthPenalty: 0.2
++      IntervalBase: 0.75
++      IntervalLength: 0.55
++      IntervalWidth: 0.35
++      DamageBase: 0.75
++      DamageWidth: 0.75
++      BaseInkBudget: 65.0
++      ExtraMountInkBudget: 35.0
++      BodyAreaInk: 50.0
++      BarrelLengthInk: 25.0
++      BarrelWidthInk: 35.0
++    DrawingUnlocks:
++    - Id: drawing.body.basic
++      Name: "\u001ePD1:GWRyYXdpbmcuc3RlbmNpbC5ib2R5Lm5hbWUAAAAA\u001f"
++      Description: "\u001ePD1:IGRyYXdpbmcuc3RlbmNpbC5ib2R5LmRlc2NyaXB0aW9uAAAAAA==\u001f"
++      GoldCost: 0
++      InitiallyUnlocked: 1
++      Role: 0
++      Contours:
++      - Points:
++        - X: -0.32
++          Y: -0.35
++        - X: 0.32
++          Y: -0.35
++        - X: 0.4
++          Y: -0.27
++        - X: 0.4
++          Y: 0.27
++        - X: 0.32
++          Y: 0.35
++        - X: -0.32
++          Y: 0.35
++        - X: -0.4
++          Y: 0.27
++        - X: -0.4
++          Y: -0.27
++        - X: -0.32
++          Y: -0.35
++    - Id: drawing.barrel.basic
++      Name: "\u001ePD1:G2RyYXdpbmcuc3RlbmNpbC5iYXJyZWwubmFtZQAAAAA=\u001f"
++      Description: "\u001ePD1:ImRyYXdpbmcuc3RlbmNpbC5iYXJyZWwuZGVzY3JpcHRpb24AAAAA\u001f"
++      GoldCost: 0
++      InitiallyUnlocked: 1
++      Role: 1
++      Contours:
++      - Points:
++        - X: -0.1
++          Y: 0.0
++        - X: 0.1
++          Y: 0.0
++        - X: 0.07
++          Y: 0.6
++        - X: -0.07
++          Y: 0.6
++        - X: -0.1
++          Y: 0.0
++    - Id: drawing.sniper
++      Name: "\u001ePD1:G2RyYXdpbmcuc3RlbmNpbC5zbmlwZXIubmFtZQAAAAA=\u001f"
++      Description: "\u001ePD1:ImRyYXdpbmcuc3RlbmNpbC5zbmlwZXIuZGVzY3JpcHRpb24AAAAA\u001f"
++      GoldCost: 32
++      InitiallyUnlocked: 0
++      Role: 1
++      Contours:
++      - Points:
++        - X: -0.055
++          Y: 0.0
++        - X: 0.055
++          Y: 0.0
++        - X: 0.055
++          Y: 0.18
++        - X: 0.033
++          Y: 0.22
++        - X: 0.033
++          Y: 0.92
++        - X: -0.033
++          Y: 0.92
++        - X: -0.033
++          Y: 0.22
++        - X: -0.055
++          Y: 0.18
++        - X: -0.055
++          Y: 0.0
++      - Points:
++        - X: -0.055
++          Y: 0.12
++        - X: 0.055
++          Y: 0.12
++      - Points:
++        - X: -0.033
++          Y: 0.82
++        - X: 0.033
++          Y: 0.82
++    - Id: drawing.rapid
++      Name: "\u001ePD1:GmRyYXdpbmcuc3RlbmNpbC5yYXBpZC5uYW1lAAAAAA==\u001f"
++      Description: "\u001ePD1:IWRyYXdpbmcuc3RlbmNpbC5yYXBpZC5kZXNjcmlwdGlvbgAAAAA=\u001f"
++      GoldCost: 24
++      InitiallyUnlocked: 0
++      Role: 1
++      Contours:
++      - Points:
++        - X: -0.055
++          Y: 0.0
++        - X: 0.055
++          Y: 0.0
++        - X: 0.055
++          Y: 0.24
++        - X: 0.038
++          Y: 0.3
++        - X: -0.038
++          Y: 0.3
++        - X: -0.055
++          Y: 0.24
++        - X: -0.055
++          Y: 0.0
++      - Points:
++        - X: -0.055
++          Y: 0.1
++        - X: 0.055
++          Y: 0.1
++      - Points:
++        - X: -0.055
++          Y: 0.16
++        - X: 0.055
++          Y: 0.16
++      - Points:
++        - X: -0.055
++          Y: 0.22
++        - X: 0.055
++          Y: 0.22
++    - Id: drawing.heavy
++      Name: "\u001ePD1:GmRyYXdpbmcuc3RlbmNpbC5oZWF2eS5uYW1lAAAAAA==\u001f"
++      Description: "\u001ePD1:IWRyYXdpbmcuc3RlbmNpbC5oZWF2eS5kZXNjcmlwdGlvbgAAAAA=\u001f"
++      GoldCost: 40
++      InitiallyUnlocked: 0
++      Role: 1
++      Contours:
++      - Points:
++        - X: -0.12
++          Y: 0.0
++        - X: 0.12
++          Y: 0.0
++        - X: 0.12
++          Y: 0.3
++        - X: 0.23
++          Y: 0.4
++        - X: 0.23
++          Y: 0.5
++        - X: 0.17
++          Y: 0.56
++        - X: -0.17
++          Y: 0.56
++        - X: -0.23
++          Y: 0.5
++        - X: -0.23
++          Y: 0.4
++        - X: -0.12
++          Y: 0.3
++        - X: -0.12
++          Y: 0.0
++      - Points:
++        - X: -0.23
++          Y: 0.44
++        - X: 0.23
++          Y: 0.44
++      - Points:
++        - X: -0.12
++          Y: 0.16
++        - X: 0.12
++          Y: 0.16
+     Assessment:
+       Revision: 2
+       Tolerance: 0.06
+       CompletionThreshold: 0.95
+       PrecisionThreshold: 0.95
+diff --git a/Assets/PaperDefense/Core/BlueprintData.cs b/Assets/PaperDefense/Core/BlueprintData.cs
+index 094ecdc..ebc024e 100644
+--- a/Assets/PaperDefense/Core/BlueprintData.cs
++++ b/Assets/PaperDefense/Core/BlueprintData.cs
+@@ -22,10 +22,11 @@ namespace PaperDefense.Core
+         public int DrawingMetadataVersion;
+         public int FootprintMetadataVersion;
+         public float FirstFootprintAspect, SecondFootprintAspect;
+         public DrawingOrigin Origin = (DrawingOrigin)(-1);
+         public DrawingData Drawing;
++        public int FreeformRuleVersion;
+         public BlueprintData() { }
+         public BlueprintData(TowerBlueprint blueprint)
+         { Id = blueprint.Id; Name = blueprint.Name; Chassis = blueprint.Chassis; FirstWeapon = blueprint.FirstWeapon;
+             HasSecondWeapon = blueprint.SecondWeapon.HasValue; SecondWeapon = blueprint.SecondWeapon ?? StructureKind.Gun; Modules = blueprint.Modules;
+             ContentMetadataVersion = 1; ChassisId = blueprint.ChassisId; FirstWeaponId = blueprint.FirstWeaponId; SecondWeaponId = blueprint.SecondWeaponId;
+@@ -33,15 +34,22 @@ namespace PaperDefense.Core
+             WeaponMountMetadataVersion=1;WeaponMounts=new WeaponMountSelectionData[blueprint.WeaponMounts.Count];
+             for(int i=0;i<WeaponMounts.Length;i++)WeaponMounts[i]=new WeaponMountSelectionData(blueprint.WeaponMounts[i]);
+             for (int i = 0; i < ModuleSelections.Length; i++) ModuleSelections[i] = new ModuleSelectionData(blueprint.ModuleSelections[i]);
+             EvaluationMetadataVersion = 1; Evaluation = new DrawingEvaluationData(blueprint.Assessment.ToStamp());
+             DrawingMetadataVersion = 1; Origin = blueprint.Origin; Drawing = new DrawingData(blueprint.Drawing);
++            FreeformRuleVersion = blueprint.IsFreeform ? FreeformTowerDesign.RuleVersion : 0;
+             FootprintMetadataVersion = 1; FirstFootprintAspect = blueprint.FirstFootprint.AspectRatio; SecondFootprintAspect = blueprint.SecondFootprint.AspectRatio; }
+         public TowerBlueprint ToBlueprint(int profileVersion = WorkshopProfile.CurrentVersion)
+         {
+             if (profileVersion > WorkshopProfile.CurrentVersion) throw new NotSupportedException("Newer profile version.");
+             if (profileVersion < 1) throw new ArgumentException("Unknown profile version.");
++            if (Origin == DrawingOrigin.Freeform)
++            {
++                if (profileVersion < 7) throw new ArgumentException("Freeform drawings require profile version 7.");
++                if (FreeformRuleVersion > FreeformTowerDesign.RuleVersion) throw new NotSupportedException("Newer freeform drawing rules.");
++                if (FreeformRuleVersion != FreeformTowerDesign.RuleVersion) throw new ArgumentException("Missing freeform drawing rules.");
++            }
+             if (profileVersion >= 5) return ToContentBlueprint(profileVersion);
+             if (!Enum.IsDefined(typeof(ChassisKind), Chassis) || !Enum.IsDefined(typeof(StructureKind), FirstWeapon) ||
+                 (HasSecondWeapon && !Enum.IsDefined(typeof(StructureKind), SecondWeapon)) ||
+                 (Modules & ~(TowerModules.Armor | TowerModules.Feed | TowerModules.Tracking | TowerModules.Rail)) != 0)
+                 throw new NotSupportedException(UserText.Message("copy.428a6194712aa364"));
+diff --git a/Assets/PaperDefense/Core/ContentCatalog.cs b/Assets/PaperDefense/Core/ContentCatalog.cs
+index 8c2332f..ec83397 100644
+--- a/Assets/PaperDefense/Core/ContentCatalog.cs
++++ b/Assets/PaperDefense/Core/ContentCatalog.cs
+@@ -10,10 +10,12 @@ namespace PaperDefense.Core
+         public List<ModuleDefinitionInput> Modules = new List<ModuleDefinitionInput>();
+         public List<EffectDefinitionInput> Effects = new List<EffectDefinitionInput>();
+         public List<DrawingTemplateDefinitionInput> Templates = new List<DrawingTemplateDefinitionInput>();
+         public List<StartingBlueprintDefinitionInput> StartingPages = new List<StartingBlueprintDefinitionInput>();
+         public DrawingAssessmentSettingsInput Assessment = new DrawingAssessmentSettingsInput();
++        public FreeformRulesInput FreeformRules = new FreeformRulesInput();
++        public List<DrawingUnlockDefinitionInput> DrawingUnlocks = DrawingUnlockDefaults.Create();
+         public string RedEffectId, BlueEffectId, GreenEffectId;
+         public ContentCatalogSnapshot CreateSnapshot() => new ContentCatalogSnapshot(this,false);
+         public ContentCatalogInput CreateCopy() => ContentInputCopy.Copy(this);
+     }
+     public sealed class ContentCatalogSnapshot
+@@ -22,19 +24,22 @@ namespace PaperDefense.Core
+         readonly Dictionary<string,ChassisDefinition> chassis = new Dictionary<string,ChassisDefinition>(StringComparer.Ordinal);
+         readonly Dictionary<string,WeaponDefinition> weapons = new Dictionary<string,WeaponDefinition>(StringComparer.Ordinal);
+         readonly Dictionary<string,ModuleDefinition> modules = new Dictionary<string,ModuleDefinition>(StringComparer.Ordinal);
+         readonly Dictionary<string,EffectDefinition> effects = new Dictionary<string,EffectDefinition>(StringComparer.Ordinal);
+         readonly Dictionary<string,DrawingTemplateDefinition> templates = new Dictionary<string,DrawingTemplateDefinition>(StringComparer.Ordinal);
++        readonly Dictionary<string,DrawingUnlockDefinition> drawingUnlocks = new Dictionary<string,DrawingUnlockDefinition>(StringComparer.Ordinal);
+         public IReadOnlyList<WorkshopPartDefinition> AllParts { get; }
+         public IReadOnlyList<ChassisDefinition> Chassis { get; }
+         public IReadOnlyList<WeaponDefinition> Weapons { get; }
+         public IReadOnlyList<ModuleDefinition> Modules { get; }
+         public IReadOnlyList<EffectDefinition> Effects { get; }
+         public IReadOnlyList<DrawingTemplateDefinition> Templates { get; }
+         public IReadOnlyList<TowerBlueprint> StartupBlueprints { get; }
+         public IReadOnlyList<string> StartupSlotIds { get; }
+         public DrawingAssessmentSettings Assessment { get; }
++        public FreeformRules FreeformRules { get; }
++        public IReadOnlyList<DrawingUnlockDefinition> DrawingUnlocks { get; }
+         public bool IsLegacyAdapter { get; }
+         public string RedEffectId { get; } public string BlueEffectId { get; } public string GreenEffectId { get; }
+         internal ContentCatalogSnapshot(ContentCatalogInput input,bool legacy)
+         {
+             if(input==null)throw new ArgumentNullException(nameof(input)); IsLegacyAdapter=legacy;
+@@ -47,10 +52,15 @@ namespace PaperDefense.Core
+             if(chassisList.Count==0||weaponList.Count==0)throw new ArgumentException(UserText.Message("copy.a3cf41cbfcc72b12"));
+             foreach(var def in moduleList)foreach(string id in def.AllowedChassisIds)if(!chassis.ContainsKey(id))throw new ArgumentException(UserText.Message("copy.ec5a4d91cd4a39f9", def.Id, id));
+             if(!legacy)foreach(var def in parts.Values)if(string.IsNullOrWhiteSpace(def.TemplateId)||!templates.ContainsKey(def.TemplateId))throw new ArgumentException(UserText.Message("copy.1704413c67567e8d", def.Id, def.TemplateId));
+             RedEffectId=ValidateColorBinding(input.RedEffectId,EffectKind.DamageOverTime,"redEffectId");BlueEffectId=ValidateColorBinding(input.BlueEffectId,EffectKind.Slow,"blueEffectId");GreenEffectId=ValidateColorBinding(input.GreenEffectId,EffectKind.DefenseReduction,"greenEffectId");
+             Assessment=(input.Assessment ?? throw new ArgumentException(UserText.Message("copy.325ec8802f5b6699"))).CreateSnapshot();
++            FreeformRules=(input.FreeformRules??throw new ArgumentException("catalog.freeformRules: required")).CreateSnapshot();
++            if(input.DrawingUnlocks==null)throw new ArgumentException("catalog.drawingUnlocks: required");
++            var drawingList=new List<DrawingUnlockDefinition>();
++            foreach(var item in input.DrawingUnlocks){var def=new DrawingUnlockDefinition(item);if(parts.ContainsKey(def.Id))throw new ArgumentException("catalog.drawingUnlocks: id collides with equipment");AddUnique(drawingUnlocks,def.Id,def,"drawingUnlocks");drawingList.Add(def);}
++            DrawingUnlocks=drawingList.AsReadOnly();
+             chassisList.Sort(Compare);weaponList.Sort(Compare);moduleList.Sort(Compare);
+             var all=new List<WorkshopPartDefinition>();all.AddRange(chassisList);all.AddRange(weaponList);all.AddRange(moduleList);all.Sort(Compare);
+             AllParts=all.AsReadOnly();Chassis=chassisList.AsReadOnly();Weapons=weaponList.AsReadOnly();Modules=moduleList.AsReadOnly();Effects=effectList.AsReadOnly();Templates=templateList.AsReadOnly();
+             var startup=new List<TowerBlueprint>();var pageIds=new HashSet<string>(StringComparer.Ordinal);var slots=new string[ProfileLimits.LoadoutSlotCount];
+             for(int i=0;i<input.StartingPages.Count;i++)
+@@ -89,10 +99,11 @@ namespace PaperDefense.Core
+         public bool TryGet(string id,out WorkshopPartDefinition value){if(id==null){value=null;return false;}return parts.TryGetValue(id,out value);}
+         public bool TryGetChassis(string id,out ChassisDefinition value){if(id==null){value=null;return false;}return chassis.TryGetValue(id,out value);}
+         public bool TryGetWeapon(string id,out WeaponDefinition value){if(id==null){value=null;return false;}return weapons.TryGetValue(id,out value);}
+         public bool TryGetModule(string id,out ModuleDefinition value){if(id==null){value=null;return false;}return modules.TryGetValue(id,out value);}
+         public bool TryGetTemplate(string id,out DrawingTemplateDefinition value){if(id==null){value=null;return false;}return templates.TryGetValue(id,out value);}
++        public bool TryGetDrawingUnlock(string id,out DrawingUnlockDefinition value){if(id==null){value=null;return false;}return drawingUnlocks.TryGetValue(id,out value);}
+         public ChassisDefinition GetChassis(string id)=>TryGetChassis(id,out var value)?value:throw new ArgumentException(UserText.Message("copy.c12b7f46a553fdd9", id));
+         public WeaponDefinition GetWeapon(string id)=>TryGetWeapon(id,out var value)?value:throw new ArgumentException(UserText.Message("copy.0853f64b9754c827", id));
+         public ModuleDefinition GetModule(string id)=>TryGetModule(id,out var value)?value:throw new ArgumentException(UserText.Message("copy.37e1a6467f128485", id));
+         public DrawingTemplateDefinition GetTemplate(string id)=>TryGetTemplate(id,out var value)?value:throw new ArgumentException(UserText.Message("copy.8e472dce99cbd82e", id));
+         public EffectDefinition GetEffect(string id)=>id!=null&&effects.TryGetValue(id,out var value)?value:throw new ArgumentException(UserText.Message("copy.eba03185092b0ee3", id));
+diff --git a/Assets/PaperDefense/Core/ContentInputCopy.cs b/Assets/PaperDefense/Core/ContentInputCopy.cs
+index 217e181..80bff42 100644
+--- a/Assets/PaperDefense/Core/ContentInputCopy.cs
++++ b/Assets/PaperDefense/Core/ContentInputCopy.cs
+@@ -5,10 +5,11 @@ namespace PaperDefense.Core
+     internal static class ContentInputCopy
+     {
+         internal static ContentCatalogInput Copy(ContentCatalogInput source)
+         {
+             var result=new ContentCatalogInput{RedEffectId=source.RedEffectId,BlueEffectId=source.BlueEffectId,GreenEffectId=source.GreenEffectId,
++                FreeformRules=source.FreeformRules?.CreateCopy(),DrawingUnlocks=source.DrawingUnlocks?.ConvertAll(item=>item?.CreateCopy()),
+                 Assessment=source.Assessment==null?null:new DrawingAssessmentSettingsInput{Revision=source.Assessment.Revision,Tolerance=source.Assessment.Tolerance,CompletionThreshold=source.Assessment.CompletionThreshold,PrecisionThreshold=source.Assessment.PrecisionThreshold}};
+             if(source.Chassis==null)result.Chassis=null;else foreach(var d in source.Chassis)result.Chassis.Add(d==null?null:Meta(d,new ChassisDefinitionInput{Capacity=d.Capacity,BaseCost=d.BaseCost,MountCount=d.MountCount,UpgradeSlotCount=d.UpgradeSlotCount,ArmorSlotCount=d.ArmorSlotCount,FeedCapacity=d.FeedCapacity,BaseHealth=d.BaseHealth,HealthMultiplier=d.HealthMultiplier,BuildSeconds=d.BuildSeconds,SecondaryBuildSeconds=d.SecondaryBuildSeconds,PrimaryMountPivotX=d.PrimaryMountPivotX,PrimaryMountPivotY=d.PrimaryMountPivotY,PrimaryDualMountPivotX=d.PrimaryDualMountPivotX,PrimaryDualMountPivotY=d.PrimaryDualMountPivotY,SecondaryMountPivotX=d.SecondaryMountPivotX,SecondaryMountPivotY=d.SecondaryMountPivotY,LegacyKind=d.LegacyKind,MountPivots=d.MountPivots==null?null:d.MountPivots.ConvertAll(p=>p==null?null:new MountPivotInput{SlotIndex=p.SlotIndex,X=p.X,Y=p.Y})}));
+             if(source.Weapons==null)result.Weapons=null;else foreach(var d in source.Weapons)result.Weapons.Add(d==null?null:Meta(d,new WeaponDefinitionInput{Attack=d.Attack,Stats=d.Stats==null?null:WeaponDefinition.CopyStats(d.Stats),Load=d.Load,AssemblyCredit=d.AssemblyCredit,MinimumLineRadius=d.MinimumLineRadius,MinimumRadialRange=d.MinimumRadialRange,MinimumRange=d.MinimumRange,MaximumFootprintAspectRatio=d.MaximumFootprintAspectRatio,EffectIds=d.EffectIds==null?null:new List<string>(d.EffectIds),LegacyKind=d.LegacyKind}));
+             if(source.Modules==null)result.Modules=null;else foreach(var d in source.Modules)
+             {
+diff --git a/Assets/PaperDefense/Core/DrawingAssessment.cs b/Assets/PaperDefense/Core/DrawingAssessment.cs
+index 285997a..c0ded9f 100644
+--- a/Assets/PaperDefense/Core/DrawingAssessment.cs
++++ b/Assets/PaperDefense/Core/DrawingAssessment.cs
+@@ -88,10 +88,14 @@ namespace PaperDefense.Core
+ 
+         public static DrawingAssessment Evaluate(TowerBlueprint blueprint, DrawingEvaluationStamp stamp = null)
+         {
+             if (blueprint == null) throw new ArgumentNullException(nameof(blueprint));
+             string constructionHash = ConstructionHash(blueprint);
++            // Historical stamps stay readable, but free construction never invokes template matching.
++            if (blueprint.IsFreeform)
++                return new DrawingAssessment(FreeformTowerDesign.RuleVersion, blueprint.Drawing.GeometryHash, constructionHash,
++                    100, Array.Empty<DrawingPartFeedback>(), "freeform.v1");
+             DrawingAssessmentSettings settings = blueprint.Content?.Assessment ?? legacySettings;
+             IReadOnlyList<DrawingPartTemplate> templates;
+             try { templates = DrawingTemplateCatalog.Create(blueprint); }
+             catch (ArgumentException)
+             {
+diff --git a/Assets/PaperDefense/Core/DrawingEditSession.cs b/Assets/PaperDefense/Core/DrawingEditSession.cs
+index c793fea..617839e 100644
+--- a/Assets/PaperDefense/Core/DrawingEditSession.cs
++++ b/Assets/PaperDefense/Core/DrawingEditSession.cs
+@@ -34,10 +34,110 @@ namespace PaperDefense.Core
+                 return true;
+             }
+             catch (ArgumentException exception) { reason = exception.Message; return false; }
+         }
+ 
++        public bool AddLine(string part,DrawingPoint from,DrawingPoint to,out string reason)
++        {
++            reason="";
++            if(from.Equals(to)){reason=UserText.Message("drawing.command.empty_shape");return false;}
++            return AddStroke(part,new[]{from,to},out reason);
++        }
++        public bool AddRectangle(string part,DrawingPoint from,DrawingPoint to,out string reason)
++        {
++            reason="";
++            if(from.X==to.X||from.Y==to.Y){reason=UserText.Message("drawing.command.empty_shape");return false;}
++            return AddStroke(part,new[]{from,new DrawingPoint(to.X,from.Y),to,new DrawingPoint(from.X,to.Y),from},out reason);
++        }
++        public bool AddEllipse(string part,DrawingPoint from,DrawingPoint to,out string reason)
++        {
++            reason="";
++            if(from.X==to.X||from.Y==to.Y){reason=UserText.Message("drawing.command.empty_shape");return false;}
++            const int segments=32;var points=new DrawingPoint[segments+1];
++            float x=(from.X+to.X)*.5f,y=(from.Y+to.Y)*.5f,rx=Math.Abs(to.X-from.X)*.5f,ry=Math.Abs(to.Y-from.Y)*.5f;
++            for(int i=0;i<segments;i++){double angle=i*Math.PI*2/segments;points[i]=new DrawingPoint((float)(x+rx*Math.Cos(angle)),(float)(y+ry*Math.Sin(angle)));}
++            points[segments]=points[0];return AddStroke(part,points,out reason);
++        }
++        public bool ReplaceFromStencil(string part,DrawingUnlockDefinition stencil,out string reason)
++        {
++            reason="";
++            if(stencil==null){reason=UserText.Message("drawing.unlock.unknown");return false;}
++            if((stencil.Role==DrawingStencilRole.Body&&part!=DrawingBindings.Base)||(stencil.Role==DrawingStencilRole.Barrel&&!DrawingBindings.TryMount(part,out _)))
++            {reason=UserText.Message("drawing.command.stencil_role");return false;}
++            return ReplacePart(part,stencil.Strokes,out reason);
++        }
++        public bool TranslatePart(string part,float dx,float dy,out string reason)
++            => TransformPart(part,1,1,dx,dy,out reason);
++        /// <summary>Scale around the part-local origin (the mount pivot for barrels), never clip points.</summary>
++        public bool ScalePart(string part,float scaleX,float scaleY,out string reason)
++        {
++            if(!Finite(scaleX)||!Finite(scaleY)||scaleX<=0||scaleY<=0){reason=UserText.Message("drawing.command.invalid_scale");return false;}
++            return TransformPart(part,scaleX,scaleY,0,0,out reason);
++        }
++        public bool MirrorPartHorizontal(string part,out string reason)=>TransformPart(part,-1,1,0,0,out reason);
++        bool TransformPart(string part,float sx,float sy,float dx,float dy,out string reason)
++        {
++            reason="";
++            if(!Enabled(part)){reason=UserText.Message("copy.7ebe71725a540755");return false;}
++            if(!Finite(dx)||!Finite(dy)){reason=UserText.Message("drawing.command.bounds");return false;}
++            var transformed=new List<DrawingStroke>();
++            foreach(var stroke in Snapshot.GetPart(part).Strokes)
++            {
++                var points=new DrawingPoint[stroke.Points.Count];
++                for(int i=0;i<points.Length;i++)
++                {
++                    double x=(double)stroke.Points[i].X*sx+dx,y=(double)stroke.Points[i].Y*sy+dy;
++                    if(x< -1||x>1||y< -1||y>1){reason=UserText.Message("drawing.command.bounds");return false;}
++                    points[i]=new DrawingPoint((float)x,(float)y);
++                }
++                transformed.Add(new DrawingStroke(points));
++            }
++            return ReplacePart(part,transformed,out reason);
++        }
++        static bool Finite(float value)=>!float.IsNaN(value)&&!float.IsInfinity(value);
++        bool ReplacePart(string part,IReadOnlyList<DrawingStroke> strokes,out string reason)
++        {
++            reason="";
++            if(!Enabled(part)){reason=UserText.Message("copy.7ebe71725a540755");return false;}
++            try
++            {
++                var changed=WithPart(part,strokes);
++                if(changed.GeometryHash==Snapshot.GeometryHash)return false;
++                Commit(Blueprint,changed);return true;
++            }
++            catch(ArgumentException error){reason=error.Message;return false;}
++        }
++        /// <summary>Erase whole strokes swept by the pointer path in one history step.</summary>
++        public bool ErasePath(string part,IReadOnlyList<DrawingPoint> path,float radius,out string reason)
++        {
++            reason="";
++            if(!Enabled(part)){reason=UserText.Message("copy.7ebe71725a540755");return false;}
++            if(path==null||path.Count==0)return false;
++            if(path.Count>DrawingSnapshot.MaxPoints||!Finite(radius)||radius<=0||radius>2){reason=UserText.Message("drawing.command.bounds");return false;}
++            var retained=new List<DrawingStroke>();
++            foreach(var stroke in Snapshot.GetPart(part).Strokes)
++                if(!TouchesPath(stroke,path,radius))retained.Add(stroke);
++            return ReplacePart(part,retained,out reason);
++        }
++        static bool TouchesPath(DrawingStroke stroke,IReadOnlyList<DrawingPoint> path,float radius)
++        {
++            foreach(var point in path)if(Touches(stroke,point,radius))return true;
++            for(int p=1;p<path.Count;p++)
++            {
++                var a=path[p-1];var b=path[p];
++                var sweep=new DrawingStroke(new[]{a,b});
++                foreach(var point in stroke.Points)if(Touches(sweep,point,radius))return true;
++                for(int i=1;i<stroke.Points.Count;i++)
++                {
++                    var c=stroke.Points[i-1];var d=stroke.Points[i];
++                    if(Cross(a,b,c)*Cross(a,b,d)<0&&Cross(c,d,a)*Cross(c,d,b)<0)return true;
++                }
++            }
++            return false;
++        }
++        static double Cross(DrawingPoint a,DrawingPoint b,DrawingPoint c)=>(double)(b.X-a.X)*(c.Y-a.Y)-(double)(b.Y-a.Y)*(c.X-a.X);
++
+         public bool Erase(DrawingPartKey part, DrawingPoint point, float radius)
+             => Erase(DrawingBindings.For(part), point, radius);
+         public bool Erase(string part, DrawingPoint point, float radius)
+         {
+             if (!Enabled(part)) return false;
+diff --git a/Assets/PaperDefense/Core/DrawingPartPolicy.cs b/Assets/PaperDefense/Core/DrawingPartPolicy.cs
+index 37171ac..d55a8f4 100644
+--- a/Assets/PaperDefense/Core/DrawingPartPolicy.cs
++++ b/Assets/PaperDefense/Core/DrawingPartPolicy.cs
+@@ -45,10 +45,11 @@ namespace PaperDefense.Core
+         }
+ 
+         public static bool ShouldRetain(string bindingId, TowerBlueprint before, TowerBlueprint after)
+         {
+             if (after == null) throw new ArgumentNullException(nameof(after));
++            if (before.IsFreeform && after.IsFreeform) return IsEnabled(after, bindingId);
+             if (DrawingBindings.TryMount(bindingId,out int mount))return after.GetWeaponId(mount)!=null&&before.GetWeaponId(mount)==after.GetWeaponId(mount);
+             return ShouldRetain(bindingId, before, after.ChassisId, after.FirstWeaponId, after.SecondWeaponId, after.ModuleSelections);
+         }
+ 
+         public static bool ShouldRetain(DrawingPartKey key, TowerBlueprint before, ChassisKind afterChassis,
+diff --git a/Assets/PaperDefense/Core/ResolvedTowerAssembly.cs b/Assets/PaperDefense/Core/ResolvedTowerAssembly.cs
+index a54aa1a..4d16c4b 100644
+--- a/Assets/PaperDefense/Core/ResolvedTowerAssembly.cs
++++ b/Assets/PaperDefense/Core/ResolvedTowerAssembly.cs
+@@ -5,16 +5,17 @@ namespace PaperDefense.Core
+ {
+     internal sealed class ResolvedTowerAssembly
+     {
+         internal readonly ContentCatalogSnapshot Content;
+         internal readonly TowerBlueprint Blueprint;
++        internal readonly FreeformTowerDesign FreeformDesign;
+         internal readonly ChassisDefinition Chassis;
+         internal readonly WeaponDefinition First,Second;
+         internal readonly WeaponDefinition[] Weapons=new WeaponDefinition[TowerBlueprint.MaximumWeaponMounts];
+         internal readonly IReadOnlyList<ModuleDefinition> Modules;
+         internal ResolvedTowerAssembly(TowerBlueprint blueprint,ContentCatalogSnapshot content)
+-        {Blueprint=blueprint??throw new ArgumentNullException(nameof(blueprint));Content=content;Chassis=content.GetChassis(blueprint.ChassisId);foreach(var mount in blueprint.WeaponMounts)Weapons[mount.SlotIndex]=content.GetWeapon(mount.WeaponId);First=Weapons[0];Second=Weapons[1];var list=new List<ModuleDefinition>();foreach(var item in blueprint.ModuleSelections)list.Add(content.GetModule(item.DefinitionId));Modules=list.AsReadOnly();}
++        {Blueprint=blueprint??throw new ArgumentNullException(nameof(blueprint));Content=content;FreeformDesign=blueprint.IsFreeform?(ReferenceEquals(blueprint.Content,content)?blueprint.FreeformDesign:new FreeformTowerDesign(blueprint,content.FreeformRules)):null;Chassis=content.GetChassis(blueprint.ChassisId);foreach(var mount in blueprint.WeaponMounts)Weapons[mount.SlotIndex]=content.GetWeapon(mount.WeaponId);First=Weapons[0];Second=Weapons[1];var list=new List<ModuleDefinition>();foreach(var item in blueprint.ModuleSelections)list.Add(content.GetModule(item.DefinitionId));Modules=list.AsReadOnly();}
+         internal void Validate(GameBalance balance)
+         {
+             int genericBindings=0;foreach(var selection in Blueprint.ModuleSelections)if(!DrawingBindings.TryLegacy(DrawingBindings.Module(selection.InstanceId),out _))genericBindings++;
+             if(Blueprint.GetWeaponId(2)!=null)genericBindings++;
+             if(genericBindings>TowerCatalog.MaximumGenericModuleBindings)throw new ArgumentException(UserText.Message("copy.e6cf169bb9c337b8", TowerCatalog.MaximumGenericModuleBindings));
+diff --git a/Assets/PaperDefense/Core/TowerBlueprint.cs b/Assets/PaperDefense/Core/TowerBlueprint.cs
+index 33de087..3cdd85d 100644
+--- a/Assets/PaperDefense/Core/TowerBlueprint.cs
++++ b/Assets/PaperDefense/Core/TowerBlueprint.cs
+@@ -2,11 +2,11 @@ using System;
+ using System.Collections.Generic;
+ 
+ namespace PaperDefense.Core
+ {
+     public enum ChassisKind { Standard = 0, Heavy = 1 }
+-    public enum DrawingOrigin { LegacyStandard = 1, PlayerDrawing = 2 }
++    public enum DrawingOrigin { LegacyStandard = 1, PlayerDrawing = 2, Freeform = 3 }
+     [Flags] public enum TowerModules { None = 0, Armor = 1, Feed = 2, Tracking = 4, Rail = 8 }
+ 
+     public sealed class WeaponMountSelection
+     {
+         public int SlotIndex { get; }
+@@ -31,10 +31,13 @@ namespace PaperDefense.Core
+         public StructureKind FirstWeapon { get; }
+         public StructureKind? SecondWeapon { get; }
+         public TowerModules Modules { get; }
+         internal bool LegacyAssembly { get; }
+         public DrawingSnapshot Drawing { get; } public DrawingOrigin Origin { get; }
++        public bool IsFreeform => Origin == DrawingOrigin.Freeform;
++        public bool HasPlayerDrawing => Origin != DrawingOrigin.LegacyStandard;
++        public FreeformTowerDesign FreeformDesign { get; }
+         public DrawingAssessment Assessment { get; } public DrawingEvaluationStamp EvaluationStamp { get; }
+         public MortarFootprint FirstFootprint { get; } public MortarFootprint SecondFootprint { get; }
+         public TowerBlueprint(string id,string name,string chassisId,string firstWeaponId,string secondWeaponId=null,
+             IEnumerable<ModuleSelection> modules=null,DrawingSnapshot drawing=null,DrawingOrigin origin=DrawingOrigin.LegacyStandard,
+             MortarFootprint firstFootprint=null,MortarFootprint secondFootprint=null,ContentCatalogSnapshot content=null,DrawingEvaluationStamp evaluationStamp=null)
+@@ -62,10 +65,11 @@ namespace PaperDefense.Core
+             if(modules!=null)foreach(var module in modules){if(module==null||!instances.Add(module.InstanceId))throw new ArgumentException(UserText.Message("copy.14b33da5d4fa66a2"));if(owned.Count>=DrawingSnapshot.MaximumParts)throw new ArgumentException(UserText.Message("copy.64b9875afd6f3520"));owned.Add(new ModuleSelection(module.InstanceId,module.DefinitionId));}
+             ModuleSelections=owned.AsReadOnly();Content=content;Chassis=LegacyContentIds.Chassis(chassisId);FirstWeapon=LegacyContentIds.Weapon(FirstWeaponId);SecondWeapon=SecondWeaponId==null?(StructureKind?)null:LegacyContentIds.Weapon(SecondWeaponId);
+             foreach(var module in owned)Modules|=LegacyContentIds.Module(module.DefinitionId);
+             Drawing=drawing??DrawingSnapshot.Empty;Origin=origin;FirstFootprint=GetWeaponMount(0).Footprint;SecondFootprint=GetWeaponMount(1)?.Footprint??MortarFootprint.Circle;
+             if(origin==DrawingOrigin.LegacyStandard&&!Drawing.IsEmpty)throw new ArgumentException(UserText.Message("copy.b343fa86244c62b6"),nameof(origin));
++            FreeformDesign=IsFreeform?new FreeformTowerDesign(this):null;
+             Assessment=DrawingEvaluator.Evaluate(this,evaluationStamp);EvaluationStamp=Assessment.ToStamp();
+         }
+         public TowerBlueprint(string id,string name,ChassisKind chassis,StructureKind firstWeapon,StructureKind? secondWeapon=null,TowerModules modules=TowerModules.None,
+             DrawingSnapshot drawing=null,DrawingOrigin origin=DrawingOrigin.LegacyStandard,MortarFootprint firstFootprint=null,MortarFootprint secondFootprint=null,DrawingEvaluationStamp evaluationStamp=null)
+             :this(id,name,LegacyContentIds.Chassis(chassis)??"legacy.invalid.chassis."+(int)chassis,LegacyContentIds.Weapon(firstWeapon)??"legacy.invalid.weapon."+(int)firstWeapon,
+@@ -84,13 +88,15 @@ namespace PaperDefense.Core
+         {GetMortarFootprint(mount);if(footprint==null)throw new ArgumentNullException(nameof(footprint));var selected=new List<WeaponMountSelection>();foreach(var item in WeaponMounts)selected.Add(item.SlotIndex==mount?new WeaponMountSelection(mount,item.WeaponId,footprint):item);return new TowerBlueprint(Id,Name,ChassisId,selected,ModuleSelections,Drawing,Origin,Content,EvaluationStamp);}
+         TowerBlueprint Copy(string id,string name,DrawingSnapshot drawing,DrawingOrigin origin,ContentCatalogSnapshot content,DrawingEvaluationStamp stamp)
+             =>new TowerBlueprint(id,name,ChassisId,WeaponMounts,ModuleSelections,drawing,origin,content,stamp);
+         public TowerBlueprint WithContent(ContentCatalogSnapshot content)=>ReferenceEquals(Content,content)?this:Copy(Id,Name,Drawing,Origin,content,EvaluationStamp);
+         public TowerBlueprint WithName(string name)=>Copy(Id,name,Drawing,Origin,Content,EvaluationStamp);
+-        public TowerBlueprint WithDrawing(DrawingSnapshot drawing)=>Copy(Id,Name,drawing??throw new ArgumentNullException(nameof(drawing)),DrawingOrigin.PlayerDrawing,Content,Origin==DrawingOrigin.PlayerDrawing&&drawing.GeometryHash==Drawing.GeometryHash?EvaluationStamp:null);
++        public TowerBlueprint WithDrawing(DrawingSnapshot drawing)=>Copy(Id,Name,drawing??throw new ArgumentNullException(nameof(drawing)),IsFreeform?DrawingOrigin.Freeform:DrawingOrigin.PlayerDrawing,Content,HasPlayerDrawing&&drawing.GeometryHash==Drawing.GeometryHash?EvaluationStamp:null);
++        public TowerBlueprint WithFreeformDrawing(DrawingSnapshot drawing)=>Copy(Id,Name,drawing??throw new ArgumentNullException(nameof(drawing)),DrawingOrigin.Freeform,Content,null);
++        public TowerBlueprint AsFreeform()=>IsFreeform?this:WithFreeformDrawing(Drawing);
+         public TowerBlueprint AsVariant(string id,string name)=>Copy(id,name,Drawing.DeepCopy(),Origin,Content,EvaluationStamp);
+-        public TowerBlueprint AsNew(string id,string name)=>Copy(id,name,Origin==DrawingOrigin.PlayerDrawing?Drawing.DeepCopy():DrawingSnapshot.Empty,DrawingOrigin.PlayerDrawing,Content,Origin==DrawingOrigin.PlayerDrawing?EvaluationStamp:null);
++        public TowerBlueprint AsNew(string id,string name)=>Copy(id,name,HasPlayerDrawing?Drawing.DeepCopy():DrawingSnapshot.Empty,IsFreeform?DrawingOrigin.Freeform:DrawingOrigin.PlayerDrawing,Content,HasPlayerDrawing?EvaluationStamp:null);
+         public static TowerBlueprint NewDraft(string id,string name,ChassisKind chassis,StructureKind firstWeapon,StructureKind? secondWeapon=null,TowerModules modules=TowerModules.None)=>new TowerBlueprint(id,name,chassis,firstWeapon,secondWeapon,modules,DrawingSnapshot.Empty,DrawingOrigin.PlayerDrawing);
+         public static TowerBlueprint NewDraft(string id,string name,string chassis,string firstWeapon,string secondWeapon=null,IEnumerable<ModuleSelection> modules=null,ContentCatalogSnapshot content=null)=>new TowerBlueprint(id,name,chassis,firstWeapon,secondWeapon,modules,DrawingSnapshot.Empty,DrawingOrigin.PlayerDrawing,content:content);
+         public TowerBlueprint WithAssembly(ChassisKind chassis,StructureKind first,StructureKind? second,TowerModules modules)=>WithAssembly(LegacyContentIds.Chassis(chassis),LegacyContentIds.Weapon(first),second.HasValue?LegacyContentIds.Weapon(second.Value):null,LegacyContentIds.Modules(modules));
+         public TowerBlueprint WithAssembly(string chassis,string first,string second,IEnumerable<ModuleSelection> modules)
+         {
+@@ -112,11 +118,11 @@ namespace PaperDefense.Core
+             var selected=new List<ModuleSelection>(modules??Array.Empty<ModuleSelection>());
+             bool same=chassis==ChassisId&&mounts.Count==WeaponMounts.Count&&selected.Count==ModuleSelections.Count;
+             for(int i=0;same&&i<mounts.Count;i++)same=mounts[i].SlotIndex==WeaponMounts[i].SlotIndex&&mounts[i].WeaponId==WeaponMounts[i].WeaponId&&mounts[i].Footprint.AspectRatio==WeaponMounts[i].Footprint.AspectRatio;
+             for(int i=0;same&&i<selected.Count;i++)same=selected[i].InstanceId==ModuleSelections[i].InstanceId&&selected[i].DefinitionId==ModuleSelections[i].DefinitionId;
+             if(same)return this;
+-            var candidate=new TowerBlueprint(Id,Name,chassis,mounts,selected,DrawingSnapshot.Empty,DrawingOrigin.PlayerDrawing,Content);
++            var candidate=new TowerBlueprint(Id,Name,chassis,mounts,selected,DrawingSnapshot.Empty,IsFreeform?DrawingOrigin.Freeform:DrawingOrigin.PlayerDrawing,Content);
+             if(Origin==DrawingOrigin.LegacyStandard)return candidate;
+             var retained=new List<DrawingPart>();foreach(var part in Drawing.Parts)if(DrawingPartPolicy.ShouldRetain(part.BindingId,this,candidate))retained.Add(part);
+             return candidate.WithDrawing(new DrawingSnapshot(retained));
+         }
+     }
+diff --git a/Assets/PaperDefense/Core/TowerCatalog.cs b/Assets/PaperDefense/Core/TowerCatalog.cs
+index c346d58..505c0af 100644
+--- a/Assets/PaperDefense/Core/TowerCatalog.cs
++++ b/Assets/PaperDefense/Core/TowerCatalog.cs
+@@ -22,29 +22,30 @@ namespace PaperDefense.Core
+         internal static ResolvedTowerAssembly Resolve(TowerBlueprint blueprint,GameBalance balance)=>Resolve(blueprint,Content(blueprint,balance));
+         internal static ResolvedTowerAssembly Resolve(TowerBlueprint blueprint,ContentCatalogSnapshot content)
+             =>content.IsLegacyAdapter?new ResolvedTowerAssembly(blueprint,content):assemblyCaches.GetValue(blueprint,createCache).Resolve(content);
+         public static int ToolCost(GameBalance balance,StructureKind kind,MaterialTier tier)=>(int)Math.Ceiling(Math.Max(0,balance.Structure(kind).Cost)*Math.Max(0,balance.Material(tier).CostMultiplier));
+         public static float QualityMultiplier(TowerBlueprint blueprint,GameBalance balance)=>QualityMultiplier(blueprint,balance,balance.Mechanics.DrawingQuality);
+-        public static float QualityMultiplier(TowerBlueprint blueprint,GameBalance balance,bool enabled)=>!enabled||blueprint==null||blueprint.Origin==DrawingOrigin.LegacyStandard?1:DrawingEvaluator.FireMultiplier(blueprint.Assessment.Quality,balance.DrawingMinimumRate,balance.DrawingMaximumRate);
+-        internal static float QualityMultiplier(float quality,GameBalance balance)=>balance.Mechanics.DrawingQuality?DrawingEvaluator.FireMultiplier(quality,balance.DrawingMinimumRate,balance.DrawingMaximumRate):1;
++        // Kept as a compatibility seam for old callers and saved trial reports. Drawing accuracy is no longer a mechanic.
++        public static float QualityMultiplier(TowerBlueprint blueprint,GameBalance balance,bool enabled)=>1;
++        internal static float QualityMultiplier(float quality,GameBalance balance)=>1;
+         public static float ActionInterval(StructureDefinition definition,float productionMultiplier,float qualityMultiplier)=>ActionInterval(definition.ShotInterval,productionMultiplier,qualityMultiplier,historicalBalance);
+         static float ActionInterval(float seconds,float production,float quality,GameBalance balance)
+         {if(quality<=0||quality>1||float.IsNaN(quality)||float.IsInfinity(quality))throw new ArgumentOutOfRangeException(nameof(quality));return Math.Max(balance.Combat.MinimumActionInterval,seconds/Math.Max(balance.Combat.MinimumProductionMultiplier,production))/quality;}
+         internal static float ActionInterval(ResolvedTowerAssembly assembly,WeaponDefinition weapon,int mount,GameBalance balance,float production,float quality)
+         // New additive modifiers obey the configured floor after supply and quality have been applied.
+-        {float interval=ActionInterval(weapon.Stats.ShotInterval,production,quality,balance);return assembly==null?interval:Math.Max(balance.Combat.MinimumActionInterval,assembly.Modify(ModifierStat.ActionInterval,interval,mount,weapon.Attack==AttackKind.Cleanup));}
++        {float geometry=assembly?.FreeformDesign?.GetBarrel(mount)?.IntervalMultiplier??1;float interval=ActionInterval(weapon.Stats.ShotInterval*geometry,production,quality,balance);return assembly==null?interval:Math.Max(balance.Combat.MinimumActionInterval,assembly.Modify(ModifierStat.ActionInterval,interval,mount,weapon.Attack==AttackKind.Cleanup));}
+         public static float ActionInterval(TowerBlueprint blueprint,GameBalance balance,StructureKind kind,float production,float quality)
+         {
+             if(blueprint==null)return ActionInterval(balance.Structure(kind).ShotInterval,production,quality,balance);
+             var assembly=Resolve(blueprint,balance);
+             var weapon=assembly.Content.GetWeapon(LegacyContentIds.Weapon(kind));
+             return ActionInterval(assembly,weapon,FindWeaponMount(blueprint,weapon.Id),balance,production,quality);
+         }
+         public static float ActionInterval(TowerBlueprint blueprint,GameBalance balance,string weaponId,float production,float quality,int mount=0){var a=Resolve(blueprint,balance);return ActionInterval(a,a.Content.GetWeapon(weaponId),mount,balance,production,quality);}
+         public static int Capacity(ChassisKind chassis)=>Capacity(chassis,null); public static int Capacity(TowerBlueprint blueprint)=>Capacity(blueprint,null);
+         public static int Capacity(ChassisKind chassis,GameBalance balance)=>Content(null,balance).GetChassis(LegacyContentIds.Chassis(chassis)).Capacity;
+-        public static int Capacity(TowerBlueprint blueprint,GameBalance balance)=>Resolve(blueprint,balance).Chassis.Capacity;
++        public static int Capacity(TowerBlueprint blueprint,GameBalance balance){var a=Resolve(blueprint,balance);return (int)Math.Min(int.MaxValue,Math.Floor(a.Chassis.Capacity*(double)(a.FreeformDesign?.CapacityMultiplier??1)));}
+         public static int Load(TowerBlueprint blueprint)=>Load(blueprint,null);
+         public static int Load(TowerBlueprint blueprint,GameBalance balance){var a=Resolve(blueprint,balance);long load=0;foreach(var weapon in a.Weapons)if(weapon!=null)load+=weapon.Load;foreach(var m in a.Modules)load+=m.Load;return (int)Math.Min(int.MaxValue,load);}
+         public static bool IsMountPart(StructureKind kind)=>PartCatalog.TryGetMount(kind,out _);
+         public static float WeaponRange(TowerBlueprint blueprint,GameBalance balance,StructureKind kind)
+         {
+@@ -65,31 +66,33 @@ namespace PaperDefense.Core
+             var assembly=blueprint==null?null:Resolve(blueprint,balance);
+             var weapon=(assembly?.Content??Content(null,balance)).GetWeapon(id);
+             return WeaponRange(assembly,weapon,mount);
+         }
+         internal static float WeaponRange(ResolvedTowerAssembly assembly,WeaponDefinition weapon,int mount)
+-        {float initial=weapon.Attack==AttackKind.Radial?Math.Max(weapon.MinimumRadialRange,weapon.Stats.Radius):weapon.Stats.Range;return Math.Max(0,assembly?.Modify(ModifierStat.WeaponRange,initial,mount,weapon.Attack==AttackKind.Cleanup)??initial);}
++        {float initial=weapon.Attack==AttackKind.Radial?Math.Max(weapon.MinimumRadialRange,weapon.Stats.Radius):weapon.Stats.Range;initial*=assembly?.FreeformDesign?.GetBarrel(mount)?.RangeMultiplier??1;return Math.Max(0,assembly?.Modify(ModifierStat.WeaponRange,initial,mount,weapon.Attack==AttackKind.Cleanup)??initial);}
++        public static float WeaponDamage(TowerBlueprint blueprint,GameBalance balance,string id,MaterialTier tier,int mount=0)
++        {var a=blueprint==null?null:Resolve(blueprint,balance);var weapon=(a?.Content??Content(null,balance)).GetWeapon(id);return Math.Max(0,weapon.Stats.Damage*balance.Material(tier).DamageMultiplier*(a?.FreeformDesign?.GetBarrel(mount)?.DamageMultiplier??1));}
+         public static bool ValidateParts(TowerBlueprint blueprint,out string reason)
+         {
+             reason="";if(blueprint==null)reason=UserText.Message("copy.48635af5e97f1a11");
+             else if(blueprint.Id.Length==0||blueprint.Id.Length>ProfileLimits.MaximumBlueprintIdLength||blueprint.Name.Length==0||blueprint.Name.Length>ProfileLimits.MaximumBlueprintNameLength)reason=UserText.Message("copy.756c5dc332b8c7ff", ProfileLimits.MaximumBlueprintNameLength);
+             else if(blueprint.LegacyAssembly&&(!Enum.IsDefined(typeof(ChassisKind),blueprint.Chassis)||(blueprint.Modules&~(TowerModules.Armor|TowerModules.Feed|TowerModules.Tracking|TowerModules.Rail))!=0||!IsMountPart(blueprint.FirstWeapon)||(blueprint.SecondWeapon.HasValue&&!IsMountPart(blueprint.SecondWeapon.Value))))reason=UserText.Message("copy.e7785425d35b8c85");
+             return reason.Length==0;
+         }
+         public static bool Validate(TowerBlueprint blueprint,out string reason)=>Validate(blueprint,null,out reason);
+         public static bool Validate(TowerBlueprint blueprint,GameBalance balance,out string reason)
+-        {if(!ValidateParts(blueprint,out reason))return false;try{var a=Resolve(blueprint,balance);a.Validate(Balance(balance));int excess=Load(blueprint,balance)-a.Chassis.Capacity;if(excess>0)reason=UserText.Message("copy.b6c9a1b5ca87c2e3", excess);}catch(ArgumentException ex){reason=ex.Message;}return reason.Length==0;}
++        {if(!ValidateParts(blueprint,out reason))return false;try{var a=Resolve(blueprint,balance);a.Validate(Balance(balance));if(a.FreeformDesign!=null&&!a.FreeformDesign.IsUsable){reason=a.FreeformDesign.Message;return false;}int excess=Load(blueprint,balance)-Capacity(blueprint,balance);if(excess>0)reason=UserText.Message("copy.b6c9a1b5ca87c2e3", excess);}catch(ArgumentException ex){reason=ex.Message;}return reason.Length==0;}
+         public static int Cost(TowerBlueprint blueprint,GameBalance balance,MaterialTier tier)
+-        {var a=Resolve(blueprint,balance);long cost=a.Chassis.BaseCost;foreach(var weapon in a.Weapons)if(weapon!=null)cost+=Math.Max(0,weapon.Stats.Cost-weapon.AssemblyCredit);foreach(var m in a.Modules)cost+=m.Cost;return(int)Math.Min(int.MaxValue,Math.Ceiling(cost*(double)Math.Max(0,balance.Material(tier).CostMultiplier)));}
+-        public static float Health(TowerBlueprint blueprint,GameBalance balance,MaterialTier tier){var a=Resolve(blueprint,balance);float health=a.Chassis.BaseHealth*a.Chassis.HealthMultiplier;health=a.Modify(ModifierStat.FoundationHealth,health);return Math.Max(1,health*balance.Material(tier).HealthMultiplier);}
++        {var a=Resolve(blueprint,balance);long cost=a.Chassis.BaseCost;foreach(var weapon in a.Weapons)if(weapon!=null)cost+=Math.Max(0,weapon.Stats.Cost-weapon.AssemblyCredit);foreach(var m in a.Modules)cost+=m.Cost;return(int)Math.Min(int.MaxValue,Math.Ceiling(cost*(double)Math.Max(0,balance.Material(tier).CostMultiplier)*(a.FreeformDesign?.CostMultiplier??1)));}
++        public static float Health(TowerBlueprint blueprint,GameBalance balance,MaterialTier tier){var a=Resolve(blueprint,balance);float health=a.Chassis.BaseHealth*a.Chassis.HealthMultiplier;health=a.Modify(ModifierStat.FoundationHealth,health);return Math.Max(1,health*balance.Material(tier).HealthMultiplier*(a.FreeformDesign?.HealthMultiplier??1));}
+         public static float Defense(TowerBlueprint blueprint,GameBalance balance)=>blueprint==null?0:Resolve(blueprint,balance).Modify(ModifierStat.FoundationDefense,0);
+         public static int ColorCost(TowerBlueprint blueprint,GameBalance balance)=>(int)Math.Max(balance.Construction.ColorMinimum,((long)Cost(blueprint,balance,MaterialTier.Pencil)+balance.Construction.ColorCostDivisor-1)/balance.Construction.ColorCostDivisor);
+-        public static float BuildSeconds(TowerBlueprint blueprint,GameBalance balance,MaterialTier tier){var a=Resolve(blueprint,balance);float seconds=0;foreach(var weapon in a.Weapons)if(weapon!=null)seconds=Math.Max(seconds,weapon.Stats.BuildSeconds);seconds+=(a.Blueprint.WeaponMounts.Count-1)*a.Chassis.SecondaryBuildSeconds;seconds+=a.Chassis.BuildSeconds;foreach(var m in a.Modules)seconds+=m.BuildSeconds;return Math.Max(0,seconds*balance.Material(tier).BuildTimeMultiplier);}
++        public static float BuildSeconds(TowerBlueprint blueprint,GameBalance balance,MaterialTier tier){var a=Resolve(blueprint,balance);float seconds=0;foreach(var weapon in a.Weapons)if(weapon!=null)seconds=Math.Max(seconds,weapon.Stats.BuildSeconds);seconds+=(a.Blueprint.WeaponMounts.Count-1)*a.Chassis.SecondaryBuildSeconds;seconds+=a.Chassis.BuildSeconds;foreach(var m in a.Modules)seconds+=m.BuildSeconds;return Math.Max(0,seconds*balance.Material(tier).BuildTimeMultiplier*(a.FreeformDesign?.BuildMultiplier??1));}
+         public static float FeedMultiplier(TowerBlueprint blueprint)=>FeedMultiplier(blueprint,null); public static float AcquisitionSeconds(TowerBlueprint blueprint)=>AcquisitionSeconds(blueprint,null);
+         public static float FeedMultiplier(TowerBlueprint blueprint,GameBalance balance,int activeMounts)=>FeedMultiplier(Resolve(blueprint,balance),Balance(balance),activeMounts);
+         internal static float FeedMultiplier(ResolvedTowerAssembly a,GameBalance balance,int activeMounts)
+-        {var r=balance.Construction;float module=a.Modify(ModifierStat.FeedMultiplier,1);if(r.DynamicFeed){if(activeMounts<=0)return 0;return Math.Min(r.MaxFeedMultiplier,Math.Min(module,(a.Chassis.FeedCapacity>0?a.Chassis.FeedCapacity:r.DynamicFeedCapacity)*module/activeMounts));}return Math.Min(r.MaxFeedMultiplier,(a.Blueprint.WeaponMounts.Count>1?r.DualFeedMultiplier:1)*module);}
++        {var r=balance.Construction;float module=a.Modify(ModifierStat.FeedMultiplier,1);if(r.DynamicFeed||a.Blueprint.IsFreeform){if(activeMounts<=0)return 0;return Math.Min(r.MaxFeedMultiplier,Math.Min(module,(a.Chassis.FeedCapacity>0?a.Chassis.FeedCapacity:r.DynamicFeedCapacity)*module/activeMounts));}return Math.Min(r.MaxFeedMultiplier,(a.Blueprint.WeaponMounts.Count>1?r.DualFeedMultiplier:1)*module);}
+         public static float FeedMultiplier(TowerBlueprint blueprint,GameBalance balance)=>FeedMultiplier(blueprint,balance,blueprint.WeaponMounts.Count);
+         public static float AcquisitionSeconds(TowerBlueprint blueprint,GameBalance balance)=>AcquisitionSeconds(Resolve(blueprint,balance),Balance(balance));
+         internal static float AcquisitionSeconds(ResolvedTowerAssembly a,GameBalance balance,int mount=0)=>a.Modify(ModifierStat.AcquisitionSeconds,balance.Construction.AcquisitionSeconds,mount,a.Weapons[mount]?.Attack==AttackKind.Cleanup);
+     }
+ }
+diff --git a/Assets/PaperDefense/Core/UserTextContracts.Generated.cs b/Assets/PaperDefense/Core/UserTextContracts.Generated.cs
+index 2bdc966..3fa523e 100644
+--- a/Assets/PaperDefense/Core/UserTextContracts.Generated.cs
++++ b/Assets/PaperDefense/Core/UserTextContracts.Generated.cs
+@@ -149,19 +149,17 @@ namespace PaperDefense.Core
+             resolver.RequireContract("copy.146f1f40157f1f06", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.14b33da5d4fa66a2", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.1512687a1bee5d82", 1, Array.Empty<int>());
+             resolver.RequireContract("copy.15133dadc79c441f", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.154530d633298c9b", 0, Array.Empty<int>());
+-            resolver.RequireContract("copy.154e011c15594a63", 14, new[] { 4, 5, 6, 7, 8, 9, 10, 11 });
++            resolver.RequireContract("copy.154e011c15594a63", 12, new[] { 4, 5, 6, 7, 8, 9 });
+             resolver.RequireFormatContract("copy.154e011c15594a63", 4, "0");
+             resolver.RequireFormatContract("copy.154e011c15594a63", 5, "0");
+             resolver.RequireFormatContract("copy.154e011c15594a63", 6, "0.0");
+             resolver.RequireFormatContract("copy.154e011c15594a63", 7, "0.0");
+             resolver.RequireFormatContract("copy.154e011c15594a63", 8, "0.00");
+             resolver.RequireFormatContract("copy.154e011c15594a63", 9, "0");
+-            resolver.RequireFormatContract("copy.154e011c15594a63", 10, "0");
+-            resolver.RequireFormatContract("copy.154e011c15594a63", 11, "0");
+             resolver.RequireContract("copy.1560b116b94f7915", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.15821194b52b152a", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.159b7c81e8a7413c", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.1669c94226115554", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.1704413c67567e8d", 2, Array.Empty<int>());
+@@ -523,12 +521,11 @@ namespace PaperDefense.Core
+             resolver.RequireContract("copy.9e98735021c6b210", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.9e9a2c80f3e49b46", 1, Array.Empty<int>());
+             resolver.RequireContract("copy.9f16585ff7173d3c", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.9f531e82b2c135cd", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.9f5f5f21b84b9bff", 0, Array.Empty<int>());
+-            resolver.RequireContract("copy.9f7043ce99bb7fc9", 5, new[] { 4 });
+-            resolver.RequireFormatContract("copy.9f7043ce99bb7fc9", 4, "0");
++            resolver.RequireContract("copy.9f7043ce99bb7fc9", 4, Array.Empty<int>());
+             resolver.RequireContract("copy.a26f1865b599b9c4", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.a2c452514b532e1d", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.a2d0b3c493f760f6", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.a2f3120b30cce36d", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.a315147ec8683d34", 1, Array.Empty<int>());
+@@ -746,18 +743,53 @@ namespace PaperDefense.Core
+             resolver.RequireContract("copy.fe6c39e68cd08967", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.ff6266cb2f14b37e", 0, Array.Empty<int>());
+             resolver.RequireContract("copy.ff7fd18d051ba682", 2, new[] { 1 });
+             resolver.RequireFormatContract("copy.ff7fd18d051ba682", 1, "0");
+             resolver.RequireContract("copy.ff80972eaf69620c", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.command.bounds", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.command.empty_shape", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.command.invalid_scale", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.command.stencil_role", 0, Array.Empty<int>());
+             resolver.RequireContract("drawing.feedback.archived", 4, new[] { 1, 2, 3 });
+             resolver.RequireFormatContract("drawing.feedback.archived", 1, "0.#");
+             resolver.RequireFormatContract("drawing.feedback.archived", 2, "P0");
+             resolver.RequireFormatContract("drawing.feedback.archived", 3, "P0");
+             resolver.RequireContract("drawing.feedback.part", 0, Array.Empty<int>());
+             resolver.RequireContract("drawing.part_tool", 2, Array.Empty<int>());
++            resolver.RequireContract("drawing.stencil.barrel.description", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.stencil.barrel.name", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.stencil.body.description", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.stencil.body.name", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.stencil.heavy.description", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.stencil.heavy.name", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.stencil.rapid.description", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.stencil.rapid.name", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.stencil.sniper.description", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.stencil.sniper.name", 0, Array.Empty<int>());
++            resolver.RequireContract("drawing.unlock.unknown", 0, Array.Empty<int>());
+             resolver.RequireContract("editor.mechanics.generate", 0, Array.Empty<int>());
+             resolver.RequireContract("editor.mechanics.generated", 1, Array.Empty<int>());
++            resolver.RequireContract("freeform.authored", 0, Array.Empty<int>());
++            resolver.RequireContract("freeform.barrel", 1, Array.Empty<int>());
++            resolver.RequireContract("freeform.barrel_stats", 3, new[] { 0, 1, 2 });
++            resolver.RequireFormatContract("freeform.barrel_stats", 0, "0.##");
++            resolver.RequireFormatContract("freeform.barrel_stats", 1, "0.##");
++            resolver.RequireFormatContract("freeform.barrel_stats", 2, "0.##");
++            resolver.RequireContract("freeform.body", 0, Array.Empty<int>());
++            resolver.RequireContract("freeform.decoration", 0, Array.Empty<int>());
++            resolver.RequireContract("freeform.missing_barrel", 1, Array.Empty<int>());
++            resolver.RequireContract("freeform.missing_body", 0, Array.Empty<int>());
++            resolver.RequireContract("freeform.over_budget", 2, new[] { 0, 1 });
++            resolver.RequireFormatContract("freeform.over_budget", 0, "0.0");
++            resolver.RequireFormatContract("freeform.over_budget", 1, "0.0");
++            resolver.RequireContract("freeform.ready", 0, Array.Empty<int>());
++            resolver.RequireContract("freeform.stats", 7, new[] { 0, 3, 4, 5 });
++            resolver.RequireFormatContract("freeform.stats", 0, "0");
++            resolver.RequireFormatContract("freeform.stats", 3, "0.0");
++            resolver.RequireFormatContract("freeform.stats", 4, "0.0");
++            resolver.RequireFormatContract("freeform.stats", 5, "0.00");
++            resolver.RequireContract("freeform.trial_title", 0, Array.Empty<int>());
+             resolver.RequireContract("hub.all", 0, Array.Empty<int>());
+             resolver.RequireContract("hub.back", 0, Array.Empty<int>());
+             resolver.RequireContract("hub.count", 2, Array.Empty<int>());
+             resolver.RequireContract("hub.failed", 1, Array.Empty<int>());
+             resolver.RequireContract("hub.group.art", 0, Array.Empty<int>());
+diff --git a/Assets/PaperDefense/Core/WeaponSystem.cs b/Assets/PaperDefense/Core/WeaponSystem.cs
+index 29936df..9d68dc0 100644
+--- a/Assets/PaperDefense/Core/WeaponSystem.cs
++++ b/Assets/PaperDefense/Core/WeaponSystem.cs
+@@ -13,11 +13,10 @@ namespace PaperDefense.Core
+         private readonly ContentCatalogSnapshot catalog;
+         private readonly Dictionary<StructureKind,WeaponDefinition> directWeapons = new Dictionary<StructureKind,WeaponDefinition>();
+         private readonly MechanicsAvailability mechanics;
+         private readonly EffectsRules effects;
+         private readonly ColorEffectPayload redPayload,bluePayload,greenPayload;
+-        private readonly float? qualityOverride;
+         private readonly IBlotContext blotContext;
+         private readonly EnemySpatialIndex spatial;
+         private readonly List<EnemyState> targets = new List<EnemyState>(128);
+         private readonly List<EnemyState> splashTargets = new List<EnemyState>(64);
+         private readonly List<MortarProjectile> projectiles = new List<MortarProjectile>(32);
+@@ -44,11 +43,10 @@ namespace PaperDefense.Core
+                 else directWeapons.Add(stats.Kind,new WeaponDefinition(new WeaponDefinitionInput { Id=id,Name=stats.Kind.ToString(),Stats=stats,Attack=LegacyContentCatalog.Attack(stats.Kind),LegacyKind=stats.Kind,MinimumRadialRange=balance.Combat.MinimumRadialRange }));
+             }
+             mechanics = MechanicsAvailability.Resolve(balance);
+             effects = balance.Effects.ForEnemyDrawingTiers(mechanics.EnemyDrawingTiers);
+             redPayload=ColorEffectPayload.Capture(InkColor.Red,catalog);bluePayload=ColorEffectPayload.Capture(InkColor.Blue,catalog);greenPayload=ColorEffectPayload.Capture(InkColor.Green,catalog);
+-            this.qualityOverride = qualityOverride;
+             // An injected fixture may provide marks without campaign corpse generation.
+             this.blotContext = balance.Mechanics.CorpseBlots ? blotContext : null;
+             spatial = new EnemySpatialIndex(balance.Width, balance.Height);
+         }
+ 
+@@ -67,11 +65,11 @@ namespace PaperDefense.Core
+                 if (!CanOperate(structure)) continue;
+                 Point2 origin = new Point2(structure.Cell.X + 0.5f, structure.Cell.Y + 0.5f);
+                 TowerBlueprint blueprint = structure.Blueprint;
+                 ResolvedTowerAssembly assembly = Assembly(structure);
+                 bool dynamic = balance.Construction.DynamicFeed;
+-                int activeMounts = 1;
++                int activeMounts = blueprint?.WeaponMounts.Count ?? 1;
+                 if (dynamic && blueprint != null)
+                 {
+                     activeMounts=0;
+                     for(int mount=0;mount<assembly.Weapons.Length;mount++)
+                         if(assembly.Weapons[mount]!=null&&ConsumesProduction(structure,origin,assembly.Weapons[mount],mount,delta))activeMounts++;
+@@ -107,20 +105,18 @@ namespace PaperDefense.Core
+             float feed=dynamic?TowerCatalog.FeedMultiplier(assembly,balance,ConsumesProduction(structure,origin,weapon,mount,delta)?1:0)
+                 :Math.Min(balance.Construction.MaxFeedMultiplier,assembly.Modify(ModifierStat.FeedMultiplier,1));
+             FireMount(structure,origin,weapon,mount,shots,feed,QualityMultiplier(structure.Blueprint),dynamic,1,default,null,delta,tick,statistics,events);
+         }
+ 
+-        static bool CanOperate(StructureState structure)
+-            => structure.Health > 0 && structure.IsComplete && structure.BuildRemaining <= 0 && structure.Kind != StructureKind.Wall;
++        bool CanOperate(StructureState structure)
++            => structure.Health > 0 && structure.IsComplete && structure.BuildRemaining <= 0 && structure.Kind != StructureKind.Wall
++                && (structure.Blueprint==null || (Assembly(structure).FreeformDesign?.IsUsable ?? true));
+         ColorEffectPayload ColorPayload(InkColor color)=>color==InkColor.Red?redPayload:color==InkColor.Blue?bluePayload:color==InkColor.Green?greenPayload:default;
+ 
+         float QualityMultiplier(TowerBlueprint blueprint)
+         {
+-            if (!mechanics.DrawingQuality) return 1;
+-            float quality = qualityOverride ?? (blueprint == null || blueprint.Origin == DrawingOrigin.LegacyStandard ? 100 : blueprint.Assessment.Quality);
+-            if (!qualityOverride.HasValue && (blueprint == null || blueprint.Origin == DrawingOrigin.LegacyStandard)) return 1;
+-            return DrawingEvaluator.FireMultiplier(quality, balance.DrawingMinimumRate, balance.DrawingMaximumRate);
++            return 1;
+         }
+ 
+         // Production is shared by unfinished reloads and acquired working mounts. A ready idle
+         // mount releases its share. This preview never mutates tracking: each barrel revalidates
+         // its actual target after the previous barrel has dealt damage or cleaned a blot.
+@@ -164,11 +160,12 @@ namespace PaperDefense.Core
+             if(target!=null)state.Aim=target.Position;
+             if (target == null) { statistics.RecordIdle(weapon.Id, delta); return; }
+             if (!acquired) return;
+             if(!TryBeginAction(structure,mount,interval,dynamic)) return;
+             BeginVisualAction(structure,mount,origin,target.Position,weapon,tick,events);
+-            float damage = Math.Max(0, definition.Damage * balance.Material(structure.Tier).DamageMultiplier * damageMultiplier);
++            float damage = Math.Max(0, definition.Damage * balance.Material(structure.Tier).DamageMultiplier * damageMultiplier
++                * (Assembly(structure)?.FreeformDesign?.GetBarrel(mount)?.DamageMultiplier ?? 1));
+             structure.Aim = target.Position;
+             statistics.RecordLaunch(weapon.Id);
+             switch (weapon.Attack)
+             {
+                 case AttackKind.Line:
+diff --git a/Assets/PaperDefense/Core/WorkshopProfile.cs b/Assets/PaperDefense/Core/WorkshopProfile.cs
+index 841813e..cfdec86 100644
+--- a/Assets/PaperDefense/Core/WorkshopProfile.cs
++++ b/Assets/PaperDefense/Core/WorkshopProfile.cs
+@@ -14,11 +14,11 @@ namespace PaperDefense.Core
+     }
+ 
+     /// <summary>Permanent options, never a stockpile of consumable weapon instances.</summary>
+     public sealed class WorkshopProfile
+     {
+-        public const int CurrentVersion = 6;
++        public const int CurrentVersion = 7;
+         private static readonly IReadOnlyList<PartUnlock> parts = PartCatalog.HistoricalParts;
+         private ContentCatalogSnapshot content;
+         private readonly HashSet<string> unlocked = new HashSet<string>(StringComparer.Ordinal);
+         private readonly List<TowerBlueprint> album = new List<TowerBlueprint>();
+         private readonly string[] loadout = new string[ProfileLimits.LoadoutSlotCount];
+@@ -78,10 +78,28 @@ namespace PaperDefense.Core
+             AddStarter(new TowerBlueprint("starter.mortar", UserText.Message("copy.edfbe04a7d9f1438"), ChassisKind.Standard, StructureKind.Mortar, modules: TowerModules.Armor));
+         }
+         private void AddStarter(TowerBlueprint blueprint) { if (album.Count < ProfileLimits.MaximumAlbumPages && Find(blueprint.Id) == null) album.Add(blueprint); }
+         public void GrantGold(int amount) { if (amount > 0) Gold = (int)Math.Min(int.MaxValue, (long)Gold + amount); }
+         public bool IsUnlocked(string id) => id != null && unlocked.Contains(id);
++        public IReadOnlyList<DrawingUnlockDefinition> GetDrawingUnlocks(GameBalance balance=null)
++            => (balance?.ResolveContent()??content??LegacyContentCatalog.Create(GameBalance.CreateDefault())).DrawingUnlocks;
++        public bool IsDrawingUnlocked(string id,GameBalance balance=null)
++        {
++            foreach(var definition in GetDrawingUnlocks(balance))if(definition.Id==id)return definition.InitiallyUnlocked||IsUnlocked(id);
++            return false;
++        }
++        public bool UnlockDrawingAid(string id,out string reason,GameBalance balance=null)
++        {
++            reason="";
++            foreach(var definition in GetDrawingUnlocks(balance))if(definition.Id==id)
++            {
++                if(definition.InitiallyUnlocked||IsUnlocked(id))return true;
++                if(Gold<definition.GoldCost){reason=UserText.Message("copy.49e21f4e9cb1372b");return false;}
++                Gold-=definition.GoldCost;unlocked.Add(id);return true;
++            }
++            reason=UserText.Message("drawing.unlock.unknown");return false;
++        }
+         public bool Unlock(string id, out string reason, GameBalance balance = null)
+         {
+             reason = "";
+             foreach (PartUnlock part in GetParts(balance))
+                 if (part.Id == id)
+@@ -129,11 +147,11 @@ namespace PaperDefense.Core
+             return true;
+         }
+         public bool SaveBlueprint(TowerBlueprint blueprint, out string reason, GameBalance balance = null)
+         {
+             if (!ValidateOwned(blueprint, out reason, balance)) return false;
+-            if (blueprint.Origin == DrawingOrigin.PlayerDrawing && blueprint.Drawing.IsEmpty)
++            if (blueprint.HasPlayerDrawing && blueprint.Drawing.IsEmpty)
+             { reason = UserText.Message("copy.b9c49ccc73b9d0d4"); return false; }
+             for (int i = 0; i < album.Count; i++) if (album[i].Id == blueprint.Id) { album[i] = blueprint; return true; }
+             if (album.Count >= ProfileLimits.MaximumAlbumPages) { reason = UserText.Message("copy.9b39b0e67017068e", ProfileLimits.MaximumAlbumPages); return false; }
+             album.Add(blueprint); return true;
+         }
+@@ -240,12 +258,14 @@ namespace PaperDefense.Core
+                 TowerBlueprint blueprint = saved.ToBlueprint(data.Version);
+                 if (!ids.Add(blueprint.Id)) throw new ArgumentException(UserText.Message("copy.38843999b54beb9a"));
+                 if (!TowerCatalog.ValidateParts(blueprint, out string reason) ||
+                     (data.Version < 5 && !profile.ValidatePartRights(blueprint, out reason)))
+                     throw new ArgumentException(UserText.Message("copy.336691bac4dcc798", reason));
+-                if (blueprint.Origin == DrawingOrigin.PlayerDrawing && blueprint.Drawing.IsEmpty)
++                if (blueprint.HasPlayerDrawing && blueprint.Drawing.IsEmpty)
+                     throw new ArgumentException(UserText.Message("copy.a78634b793113f25"));
++                // Gameplay thresholds and ink allowances belong to the chosen content snapshot.
++                // Keep historical geometry editable even when current/default tuning rejects its use.
+                 profile.album.Add(blueprint);
+             }
+             var selected = new HashSet<string>(StringComparer.Ordinal);
+             for (int i = 0; i < profile.loadout.Length; i++)
+             {
+
+
+NEW FILE Assets/PaperDefense/Core/DrawingUnlockDefinitions.cs
+
+using System;
+using System.Collections.Generic;
+
+namespace PaperDefense.Core
+{
+    public enum DrawingStencilRole { Body = 0, Barrel = 1 }
+    [Serializable] public sealed class DrawingUnlockDefinitionInput
+    {
+        public string Id, Name, Description;
+        public int GoldCost;
+        public bool InitiallyUnlocked;
+        public DrawingStencilRole Role;
+        public List<DrawingContourInput> Contours = new List<DrawingContourInput>();
+        public DrawingUnlockDefinition CreateSnapshot() => new DrawingUnlockDefinition(this);
+        public DrawingUnlockDefinitionInput CreateCopy()
+        {
+            var copy=new DrawingUnlockDefinitionInput{Id=Id,Name=Name,Description=Description,GoldCost=GoldCost,InitiallyUnlocked=InitiallyUnlocked,Role=Role};
+            if(Contours==null){copy.Contours=null;return copy;}
+            foreach(var contour in Contours)
+            {
+                if(contour==null){copy.Contours.Add(null);continue;}
+                var owned=new DrawingContourInput();
+                if(contour.Points==null)owned.Points=null;
+                else foreach(var point in contour.Points)owned.Points.Add(point==null?null:new DrawingCoordinateInput(point.X,point.Y));
+                copy.Contours.Add(owned);
+            }
+            return copy;
+        }
+    }
+    /// <summary>Reusable authoring geometry. Owning a stencil never changes combat statistics.</summary>
+    public sealed class DrawingUnlockDefinition
+    {
+        public string Id { get; }
+        public string Name { get; }
+        public string Description { get; }
+        public int GoldCost { get; }
+        public bool InitiallyUnlocked { get; }
+        public DrawingStencilRole Role { get; }
+        public IReadOnlyList<DrawingStroke> Strokes { get; }
+        internal DrawingUnlockDefinition(DrawingUnlockDefinitionInput input)
+        {
+            if(input==null)throw new ArgumentNullException(nameof(input));
+            Id=ContentValidation.Id(input.Id,"drawingUnlock.id");
+            if(string.IsNullOrWhiteSpace(input.Name))throw new ArgumentException("drawingUnlock.name: required");
+            if(input.GoldCost<0)throw new ArgumentException("drawingUnlock.goldCost: must be nonnegative");
+            ContentValidation.EnumValue(input.Role,"drawingUnlock.role");
+            var template=new DrawingTemplateDefinitionInput{Id=Id,DisplayName=input.Name,Weight=1,Contours=input.Contours}.CreateSnapshot();
+            var shape=FreeformGeometry.For(new DrawingSnapshot(new[]{new DrawingPart(input.Role==DrawingStencilRole.Body?DrawingBindings.Base:DrawingBindings.Mount0,template.Contours)})).Part(input.Role==DrawingStencilRole.Body?DrawingBindings.Base:DrawingBindings.Mount0);
+            if(input.Role==DrawingStencilRole.Body?shape.Area<=0:shape.Length<=0 || shape.MuzzleOffset.Y<=0)throw new ArgumentException("drawingUnlock: stencil must have usable role geometry");
+            Name=input.Name;Description=input.Description??"";GoldCost=input.GoldCost;InitiallyUnlocked=input.InitiallyUnlocked;Role=input.Role;Strokes=template.Contours;
+        }
+    }
+    public static class DrawingUnlockDefaults
+    {
+        public static List<DrawingUnlockDefinitionInput> Create() => new List<DrawingUnlockDefinitionInput>{
+            Shape("drawing.body.basic","body",DrawingStencilRole.Body,0,true,new[]{-.32f,-.35f,.32f,-.35f,.4f,-.27f,.4f,.27f,.32f,.35f,-.32f,.35f,-.4f,.27f,-.4f,-.27f,-.32f,-.35f}),
+            Shape("drawing.barrel.basic","barrel",DrawingStencilRole.Barrel,0,true,new[]{-.1f,0,.1f,0,.07f,.6f,-.07f,.6f,-.1f,0}),
+            Shape("drawing.sniper","sniper",DrawingStencilRole.Barrel,32,false,new[]{-.055f,0,.055f,0,.055f,.18f,.033f,.22f,.033f,.92f,-.033f,.92f,-.033f,.22f,-.055f,.18f,-.055f,0},new[]{-.055f,.12f,.055f,.12f},new[]{-.033f,.82f,.033f,.82f}),
+            Shape("drawing.rapid","rapid",DrawingStencilRole.Barrel,24,false,new[]{-.055f,0,.055f,0,.055f,.24f,.038f,.3f,-.038f,.3f,-.055f,.24f,-.055f,0},new[]{-.055f,.10f,.055f,.10f},new[]{-.055f,.16f,.055f,.16f},new[]{-.055f,.22f,.055f,.22f}),
+            Shape("drawing.heavy","heavy",DrawingStencilRole.Barrel,40,false,new[]{-.12f,0,.12f,0,.12f,.3f,.23f,.4f,.23f,.5f,.17f,.56f,-.17f,.56f,-.23f,.5f,-.23f,.4f,-.12f,.3f,-.12f,0},new[]{-.23f,.44f,.23f,.44f},new[]{-.12f,.16f,.12f,.16f})};
+        static DrawingUnlockDefinitionInput Shape(string id,string text,DrawingStencilRole role,int cost,bool initial,params float[][] contours)
+        {
+            var result=new DrawingUnlockDefinitionInput{Id=id,Name=UserText.Message("drawing.stencil."+text+".name"),Description=UserText.Message("drawing.stencil."+text+".description"),Role=role,GoldCost=cost,InitiallyUnlocked=initial};
+            foreach(var coordinates in contours)
+            {
+                var contour=new DrawingContourInput();
+                for(int i=0;i<coordinates.Length;i+=2)contour.Points.Add(new DrawingCoordinateInput(coordinates[i],coordinates[i+1]));
+                result.Contours.Add(contour);
+            }
+            return result;
+        }
+    }
+}
+
+
+NEW FILE Assets/PaperDefense/Core/FreeformGeometry.cs
+
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+namespace PaperDefense.Core
+{
+    /// <summary>Exact vector envelopes of connected strokes. Retracing and collinear subdivision never add mass.
+    /// Small gaps are welded without changing the points; remote components do not inflate the main shape.</summary>
+    internal sealed class FreeformGeometry
+    {
+        const double WeldDistance = .0625, WeldSquared = WeldDistance * WeldDistance;
+        static readonly ConditionalWeakTable<DrawingSnapshot, FreeformGeometry> cache = new ConditionalWeakTable<DrawingSnapshot, FreeformGeometry>();
+        readonly Dictionary<string, Shape> parts = new Dictionary<string, Shape>(StringComparer.Ordinal);
+        internal static FreeformGeometry For(DrawingSnapshot drawing) => cache.GetValue(drawing, value => new FreeformGeometry(value));
+        internal Shape Part(string binding) => parts.TryGetValue(binding, out var shape) ? shape : default;
+        FreeformGeometry(DrawingSnapshot drawing)
+        {
+            foreach (var part in drawing.Parts)
+                if (part.BindingId == DrawingBindings.Base || DrawingBindings.TryMount(part.BindingId, out _))
+                    parts[part.BindingId] = Measure(part);
+        }
+        internal readonly struct Shape
+        {
+            internal readonly float Area, Width, Length;
+            internal readonly Point2 MuzzleOffset;
+            internal Shape(float area, float width, float length, Point2 muzzleOffset)
+            { Area = area; Width = width; Length = length; MuzzleOffset = muzzleOffset; }
+        }
+        static Shape Measure(DrawingPart part)
+        {
+            int count = part.Strokes.Count;
+            var roots = new int[count];
+            for (int i = 0; i < count; i++) roots[i] = i;
+            for (int i = 0; i < count; i++) for (int j = 0; j < i; j++)
+                if (Root(roots,i) != Root(roots,j) && Touches(part.Strokes[i], part.Strokes[j]))
+                    roots[Root(roots,i)] = Root(roots,j);
+            var groups = new Dictionary<int, HashSet<DrawingPoint>>();
+            for (int i = 0; i < count; i++)
+            {
+                int root = Root(roots,i);
+                if (!groups.TryGetValue(root,out var points)) groups[root] = points = new HashSet<DrawingPoint>();
+                foreach (var point in part.Strokes[i].Points) points.Add(point);
+            }
+            Shape best = default;
+            bool body = part.BindingId == DrawingBindings.Base;
+            foreach (var points in groups.Values)
+            {
+                var candidate = Envelope(points);
+                float score = body ? candidate.Area : candidate.Length, previous = body ? best.Area : best.Length;
+                if (score > previous || (score == previous && (candidate.Area > best.Area ||
+                    (candidate.Area == best.Area && (candidate.Width > best.Width ||
+                    (candidate.Width == best.Width && (candidate.MuzzleOffset.Y > best.MuzzleOffset.Y ||
+                    (candidate.MuzzleOffset.Y == best.MuzzleOffset.Y && candidate.MuzzleOffset.X < best.MuzzleOffset.X)))))))) best = candidate;
+            }
+            return best;
+        }
+        static int Root(int[] roots,int index)
+        { while (roots[index] != index) { roots[index] = roots[roots[index]]; index = roots[index]; } return index; }
+        static bool Touches(DrawingStroke first, DrawingStroke second)
+        {
+            for (int i=1;i<first.Points.Count;i++) for (int j=1;j<second.Points.Count;j++)
+            {
+                var a=first.Points[i-1];var b=first.Points[i];var c=second.Points[j-1];var d=second.Points[j];
+                if (Math.Min(a.X,b.X)>Math.Max(c.X,d.X)+WeldDistance || Math.Min(c.X,d.X)>Math.Max(a.X,b.X)+WeldDistance ||
+                    Math.Min(a.Y,b.Y)>Math.Max(c.Y,d.Y)+WeldDistance || Math.Min(c.Y,d.Y)>Math.Max(a.Y,b.Y)+WeldDistance) continue;
+                // A proper intersection, or endpoint proximity (also covers collinear/degenerate segments).
+                if (Cross(a,b,c)*Cross(a,b,d)<0 && Cross(c,d,a)*Cross(c,d,b)<0) return true;
+                if (Distance(a,c,d)<=WeldSquared || Distance(b,c,d)<=WeldSquared ||
+                    Distance(c,a,b)<=WeldSquared || Distance(d,a,b)<=WeldSquared) return true;
+            }
+            return false;
+        }
+        static double Distance(DrawingPoint point, DrawingPoint a, DrawingPoint b)
+        {
+            double dx=b.X-a.X,dy=b.Y-a.Y, length=dx*dx+dy*dy;
+            double t=length==0?0:Math.Max(0,Math.Min(1,((point.X-a.X)*dx+(point.Y-a.Y)*dy)/length));
+            double x=point.X-a.X-t*dx,y=point.Y-a.Y-t*dy;return x*x+y*y;
+        }
+        static Shape Envelope(HashSet<DrawingPoint> unique)
+        {
+            if (unique.Count<2) return default;
+            var points=new List<DrawingPoint>(unique);
+            points.Sort((a,b)=>a.X==b.X?a.Y.CompareTo(b.Y):a.X.CompareTo(b.X));
+            float minX=1,maxX=-1,minY=1,maxY=-1;
+            foreach(var point in points){minX=Math.Min(minX,point.X);maxX=Math.Max(maxX,point.X);minY=Math.Min(minY,point.Y);maxY=Math.Max(maxY,point.Y);}
+            var hull=new List<DrawingPoint>();
+            foreach(var point in points){while(hull.Count>=2&&Cross(hull[hull.Count-2],hull[hull.Count-1],point)<=0)hull.RemoveAt(hull.Count-1);hull.Add(point);}
+            int lower=hull.Count;
+            for(int i=points.Count-2;i>=0;i--){var point=points[i];while(hull.Count>lower&&Cross(hull[hull.Count-2],hull[hull.Count-1],point)<=0)hull.RemoveAt(hull.Count-1);hull.Add(point);}
+            double twiceArea=0;
+            for(int i=1;i<hull.Count;i++)twiceArea+=(double)hull[i-1].X*hull[i].Y-(double)hull[i].X*hull[i-1].Y;
+            float tipLeft=1,tipRight=-1;
+            foreach(var point in hull)if(point.Y==maxY){tipLeft=Math.Min(tipLeft,point.X);tipRight=Math.Max(tipRight,point.X);}
+            return new Shape((float)(Math.Abs(twiceArea)*.5),maxX-minX,maxY-minY,new Point2((tipLeft+tipRight)*.5f,maxY));
+        }
+        static double Cross(DrawingPoint a,DrawingPoint b,DrawingPoint c) => (double)(b.X-a.X)*(c.Y-a.Y)-(double)(b.Y-a.Y)*(c.X-a.X);
+    }
+}
+
+
+NEW FILE Assets/PaperDefense/Core/FreeformRules.cs
+
+using System;
+
+namespace PaperDefense.Core
+{
+    /// <summary>Authoring coefficients; geometry interpretation remains separately versioned by FreeformTowerDesign.RuleVersion.</summary>
+    [Serializable] public sealed class FreeformRulesInput
+    {
+        public float BodyAreaReference = .8f;
+        public float MinimumBodyArea = .06f;
+        public float BarrelLengthReference = .9f;
+        public float BarrelWidthReference = .5f;
+        public float MinimumBarrelLength = .12f;
+        public float MinimumMuzzleForward = .1f;
+        public float HealthBase = .6f;
+        public float HealthSize = 1.2f;
+        public float CapacityBase = .6f;
+        public float CapacitySize = .8f;
+        public float CostBase = .75f;
+        public float CostSize = .45f;
+        public float CostBarrelLength = .12f;
+        public float CostBarrelWidth = .15f;
+        public float BuildBase = .8f;
+        public float BuildSize = .4f;
+        public float RangeBase = .65f;
+        public float RangeLength = .75f;
+        public float RangeWidthPenalty = .2f;
+        public float IntervalBase = .75f;
+        public float IntervalLength = .55f;
+        public float IntervalWidth = .35f;
+        public float DamageBase = .75f;
+        public float DamageWidth = .75f;
+        public float BaseInkBudget = 65;
+        public float ExtraMountInkBudget = 35;
+        public float BodyAreaInk = 50;
+        public float BarrelLengthInk = 25;
+        public float BarrelWidthInk = 35;
+        public FreeformRules CreateSnapshot() => new FreeformRules(this);
+        public FreeformRulesInput CreateCopy() => (FreeformRulesInput)MemberwiseClone();
+    }
+    public sealed class FreeformRules
+    {
+        public static FreeformRules Default { get; } = new FreeformRulesInput().CreateSnapshot();
+        public float BodyAreaReference { get; }
+        public float MinimumBodyArea { get; }
+        public float BarrelLengthReference { get; }
+        public float BarrelWidthReference { get; }
+        public float MinimumBarrelLength { get; }
+        public float MinimumMuzzleForward { get; }
+        public float HealthBase { get; }
+        public float HealthSize { get; }
+        public float CapacityBase { get; }
+        public float CapacitySize { get; }
+        public float CostBase { get; }
+        public float CostSize { get; }
+        public float CostBarrelLength { get; }
+        public float CostBarrelWidth { get; }
+        public float BuildBase { get; }
+        public float BuildSize { get; }
+        public float RangeBase { get; }
+        public float RangeLength { get; }
+        public float RangeWidthPenalty { get; }
+        public float IntervalBase { get; }
+        public float IntervalLength { get; }
+        public float IntervalWidth { get; }
+        public float DamageBase { get; }
+        public float DamageWidth { get; }
+        public float BaseInkBudget { get; }
+        public float ExtraMountInkBudget { get; }
+        public float BodyAreaInk { get; }
+        public float BarrelLengthInk { get; }
+        public float BarrelWidthInk { get; }
+        internal FreeformRules(FreeformRulesInput input)
+        {
+            if(input==null)throw new ArgumentNullException(nameof(input));
+            ContentValidation.Positive(input.BodyAreaReference,"freeform.BodyAreaReference"); BodyAreaReference=input.BodyAreaReference;
+            ContentValidation.Positive(input.MinimumBodyArea,"freeform.MinimumBodyArea"); MinimumBodyArea=input.MinimumBodyArea;
+            ContentValidation.Positive(input.BarrelLengthReference,"freeform.BarrelLengthReference"); BarrelLengthReference=input.BarrelLengthReference;
+            ContentValidation.Positive(input.BarrelWidthReference,"freeform.BarrelWidthReference"); BarrelWidthReference=input.BarrelWidthReference;
+            ContentValidation.Positive(input.MinimumBarrelLength,"freeform.MinimumBarrelLength"); MinimumBarrelLength=input.MinimumBarrelLength;
+            ContentValidation.Positive(input.MinimumMuzzleForward,"freeform.MinimumMuzzleForward"); MinimumMuzzleForward=input.MinimumMuzzleForward;
+            ContentValidation.Positive(input.HealthBase,"freeform.HealthBase"); HealthBase=input.HealthBase;
+            ContentValidation.NonNegative(input.HealthSize,"freeform.HealthSize"); HealthSize=input.HealthSize;
+            ContentValidation.Positive(input.CapacityBase,"freeform.CapacityBase"); CapacityBase=input.CapacityBase;
+            ContentValidation.NonNegative(input.CapacitySize,"freeform.CapacitySize"); CapacitySize=input.CapacitySize;
+            ContentValidation.Positive(input.CostBase,"freeform.CostBase"); CostBase=input.CostBase;
+            ContentValidation.NonNegative(input.CostSize,"freeform.CostSize"); CostSize=input.CostSize;
+            ContentValidation.NonNegative(input.CostBarrelLength,"freeform.CostBarrelLength"); CostBarrelLength=input.CostBarrelLength;
+            ContentValidation.NonNegative(input.CostBarrelWidth,"freeform.CostBarrelWidth"); CostBarrelWidth=input.CostBarrelWidth;
+            ContentValidation.Positive(input.BuildBase,"freeform.BuildBase"); BuildBase=input.BuildBase;
+            ContentValidation.NonNegative(input.BuildSize,"freeform.BuildSize"); BuildSize=input.BuildSize;
+            ContentValidation.Positive(input.RangeBase,"freeform.RangeBase"); RangeBase=input.RangeBase;
+            ContentValidation.NonNegative(input.RangeLength,"freeform.RangeLength"); RangeLength=input.RangeLength;
+            ContentValidation.NonNegative(input.RangeWidthPenalty,"freeform.RangeWidthPenalty"); RangeWidthPenalty=input.RangeWidthPenalty;
+            ContentValidation.Positive(input.IntervalBase,"freeform.IntervalBase"); IntervalBase=input.IntervalBase;
+            ContentValidation.NonNegative(input.IntervalLength,"freeform.IntervalLength"); IntervalLength=input.IntervalLength;
+            ContentValidation.NonNegative(input.IntervalWidth,"freeform.IntervalWidth"); IntervalWidth=input.IntervalWidth;
+            ContentValidation.Positive(input.DamageBase,"freeform.DamageBase"); DamageBase=input.DamageBase;
+            ContentValidation.NonNegative(input.DamageWidth,"freeform.DamageWidth"); DamageWidth=input.DamageWidth;
+            ContentValidation.Positive(input.BaseInkBudget,"freeform.BaseInkBudget"); BaseInkBudget=input.BaseInkBudget;
+            ContentValidation.NonNegative(input.ExtraMountInkBudget,"freeform.ExtraMountInkBudget"); ExtraMountInkBudget=input.ExtraMountInkBudget;
+            ContentValidation.NonNegative(input.BodyAreaInk,"freeform.BodyAreaInk"); BodyAreaInk=input.BodyAreaInk;
+            ContentValidation.NonNegative(input.BarrelLengthInk,"freeform.BarrelLengthInk"); BarrelLengthInk=input.BarrelLengthInk;
+            ContentValidation.NonNegative(input.BarrelWidthInk,"freeform.BarrelWidthInk"); BarrelWidthInk=input.BarrelWidthInk;
+            if(RangeBase<=RangeWidthPenalty)throw new ArgumentException("freeform: range width penalty must leave positive range");
+            if(MinimumBodyArea>4 || MinimumBarrelLength>2 || MinimumMuzzleForward>1)throw new ArgumentException("freeform: minimum geometry exceeds drawing bounds");
+            // Protect arithmetic as well as individual scalars from invalid authoring.
+            ContentValidation.Finite(BaseInkBudget+2*ExtraMountInkBudget,"freeform.totalBudget");
+            ContentValidation.Finite(4*BodyAreaInk+6*BarrelLengthInk+6*BarrelWidthInk,"freeform.totalInk");
+            ContentValidation.Finite(HealthBase+HealthSize+CapacityBase+CapacitySize+CostBase+CostSize+CostBarrelLength+CostBarrelWidth+BuildBase+BuildSize+RangeBase+RangeLength+IntervalBase+IntervalLength+IntervalWidth+DamageBase+DamageWidth,"freeform.totalCoefficients");
+        }
+    }
+}
+
+
+
+NEW FILE Assets/PaperDefense/Core/FreeformTowerDesign.cs
+
+using System;
+
+namespace PaperDefense.Core
+{
+    /// <summary>Versioned, immutable construction rules derived from functional strokes, never template accuracy.</summary>
+    public sealed class FreeformTowerDesign
+    {
+        public const int RuleVersion = 1;
+        readonly FreeformBarrel[] barrels = new FreeformBarrel[TowerBlueprint.MaximumWeaponMounts];
+        public float BodyArea { get; }
+        public float HealthMultiplier { get; }
+        public float CapacityMultiplier { get; }
+        public float CostMultiplier { get; }
+        public float BuildMultiplier { get; }
+        public bool IsComplete { get; }
+        public float InkUsed { get; }
+        public float InkBudget { get; }
+        public bool IsWithinBudget => InkUsed <= InkBudget;
+        public bool IsUsable => IsComplete && IsWithinBudget;
+        public string Message { get; }
+        public FreeformBarrel GetBarrel(int slot)
+        {
+            if (slot < 0 || slot >= barrels.Length) throw new ArgumentOutOfRangeException(nameof(slot));
+            return barrels[slot];
+        }
+        internal FreeformTowerDesign(TowerBlueprint blueprint, FreeformRules rules = null)
+        {
+            rules=rules??blueprint.Content?.FreeformRules??FreeformRules.Default;
+            var geometry = FreeformGeometry.For(blueprint.Drawing);
+            BodyArea = geometry.Part(DrawingBindings.Base).Area;
+            float size = Unit((float)Math.Sqrt(BodyArea / rules.BodyAreaReference));
+            HealthMultiplier = rules.HealthBase + rules.HealthSize * size;
+            CapacityMultiplier = rules.CapacityBase + rules.CapacitySize * size;
+            bool complete = BodyArea >= rules.MinimumBodyArea;
+            string message = complete ? "" : UserText.Message("freeform.missing_body");
+            float barrelCost = 0;
+            InkBudget=rules.BaseInkBudget+rules.ExtraMountInkBudget*(blueprint.WeaponMounts.Count-1);
+            InkUsed=BodyArea*rules.BodyAreaInk;
+            foreach (var mount in blueprint.WeaponMounts)
+            {
+                var shape = geometry.Part(DrawingBindings.Mount(mount.SlotIndex));
+                var barrel = new FreeformBarrel(shape.Width, shape.Length, shape.MuzzleOffset,rules);
+                barrels[mount.SlotIndex] = barrel;
+                barrelCost += rules.CostBarrelLength * Unit(barrel.Length / rules.BarrelLengthReference) + rules.CostBarrelWidth * Unit(barrel.Width / rules.BarrelWidthReference);
+                InkUsed+=barrel.Length*rules.BarrelLengthInk+barrel.Width*rules.BarrelWidthInk;
+                if (!barrel.IsComplete && complete)
+                { complete = false; message = UserText.Message("freeform.missing_barrel", mount.SlotIndex + 1); }
+            }
+            CostMultiplier = rules.CostBase + rules.CostSize * size + barrelCost / blueprint.WeaponMounts.Count;
+            BuildMultiplier = rules.BuildBase + rules.BuildSize * size;
+            IsComplete = complete;
+            Message = !complete ? message : !IsWithinBudget ? UserText.Message("freeform.over_budget",InkUsed,InkBudget) : UserText.Message("freeform.ready");
+        }
+        internal static float Unit(float value) => Math.Max(0, Math.Min(1, value));
+    }
+
+    public sealed class FreeformBarrel
+    {
+        public float Length { get; }
+        public float Width { get; }
+        public float RangeMultiplier { get; }
+        public float IntervalMultiplier { get; }
+        public float DamageMultiplier { get; }
+        public Point2 MuzzleOffset { get; }
+        public bool IsComplete { get; }
+        internal FreeformBarrel(float width, float length, Point2 muzzleOffset,FreeformRules rules)
+        {
+            Width = width; Length = length; MuzzleOffset = muzzleOffset;
+            IsComplete=length>=rules.MinimumBarrelLength&&muzzleOffset.Y>=rules.MinimumMuzzleForward;
+            float reach = FreeformTowerDesign.Unit(length / rules.BarrelLengthReference), bore = FreeformTowerDesign.Unit(width / rules.BarrelWidthReference);
+            RangeMultiplier = rules.RangeBase + rules.RangeLength * reach - rules.RangeWidthPenalty * bore;
+            IntervalMultiplier = rules.IntervalBase + rules.IntervalLength * reach + rules.IntervalWidth * bore;
+            DamageMultiplier = rules.DamageBase + rules.DamageWidth * bore;
+        }
+    }
+
+}
+
+
+NEW FILE Assets/PaperDefense/Tests/EditMode/DrawingWorkshopRulesTests.cs
+
+using System;
+using System.Collections.Generic;
+using NUnit.Framework;
+using PaperDefense.Core;
+
+namespace PaperDefense.Tests
+{
+    public sealed class DrawingWorkshopRulesTests
+    {
+        static DrawingStroke Box(float left,float bottom,float right,float top) => new DrawingStroke(new[]{new DrawingPoint(left,bottom),new DrawingPoint(right,bottom),new DrawingPoint(right,top),new DrawingPoint(left,top),new DrawingPoint(left,bottom)});
+        static TowerBlueprint Tower(float halfBody=.4f,float width=.2f,float length=.6f) => new TowerBlueprint("ink.test","Ink test",ChassisKind.Standard,StructureKind.Gun,drawing:new DrawingSnapshot(new[]{new DrawingPart(DrawingBindings.Base,new[]{Box(-halfBody,-halfBody,halfBody,halfBody)}),new DrawingPart(DrawingBindings.Mount0,new[]{Box(-width/2,0,width/2,length)})}),origin:DrawingOrigin.Freeform);
+        [Test] public void FullCanvasFunctionalGeometryCannotBeSavedOrBuilt()
+        {
+            var tower=Tower(.98f,1.9f,.98f);
+            Assert.That(tower.FreeformDesign.IsComplete,Is.True);
+            Assert.That(TowerCatalog.Validate(tower,out var reason),Is.False,"Complete geometry must still obey construction ink allowance");
+            Assert.That(reason,Is.Not.Empty);
+            Assert.That(new WorkshopProfile().SaveBlueprint(tower,out _),Is.False);
+        }
+        static ContentCatalogInput Input()
+        {
+            var input=LegacyContentCatalog.CreateInput(GameBalance.CreateDefault());
+            input.Templates.Add(new DrawingTemplateDefinitionInput{Id="test.drawing",DisplayName="Drawing",Weight=0});
+            foreach(var part in input.Chassis)part.TemplateId="test.drawing";
+            foreach(var part in input.Weapons)part.TemplateId="test.drawing";
+            foreach(var part in input.Modules)part.TemplateId="test.drawing";
+            return input;
+        }
+        [Test] public void BudgetUsesGeometryAndIgnoresDecorationAndRetracing()
+        {
+            var tower=Tower(.5f,.25f,.5f);var design=tower.FreeformDesign;
+            Assert.That(design.InkUsed,Is.EqualTo(71.25f).Within(.01f));
+            var duplicated=tower.WithFreeformDrawing(new DrawingSnapshot(new[]{new DrawingPart(DrawingBindings.Base,new[]{tower.Drawing.GetPart(DrawingBindings.Base).Strokes[0],tower.Drawing.GetPart(DrawingBindings.Base).Strokes[0]}),tower.Drawing.GetPart(DrawingBindings.Mount0),new DrawingPart(DrawingBindings.Decoration,new[]{Box(-1,-1,1,1)})}));
+            Assert.That(duplicated.FreeformDesign.InkUsed,Is.EqualTo(design.InkUsed));
+            Assert.That(Tower(.75f,.25f,.5f).FreeformDesign.InkUsed,Is.GreaterThan(design.InkUsed));
+            Assert.That(Tower(.5f,.5f,.5f).FreeformDesign.InkUsed,Is.GreaterThan(design.InkUsed));
+            Assert.That(Tower(.5f,.25f,.75f).FreeformDesign.InkUsed,Is.GreaterThan(design.InkUsed));
+            Assert.That(tower.WithWeaponMount(1,tower.FirstWeaponId).FreeformDesign.InkBudget,Is.EqualTo(100));
+            Assert.That(tower.WithWeaponMount(1,tower.FirstWeaponId).WithWeaponMount(2,tower.FirstWeaponId).FreeformDesign.InkBudget,Is.EqualTo(135));
+        }
+        [Test] public void ConfigSnapshotsAndCopiesOwnRulesAndStencilCoordinates()
+        {
+            var input=Input();var snapshot=input.CreateSnapshot();var copy=input.CreateCopy();
+            input.FreeformRules.BaseInkBudget=1;input.DrawingUnlocks[0].Contours[0].Points[0].X=.9f;
+            Assert.That(Tower().WithContent(snapshot).FreeformDesign.IsWithinBudget,Is.True);
+            Assert.That(copy.FreeformRules.BaseInkBudget,Is.EqualTo(65));
+            Assert.That(snapshot.DrawingUnlocks[0].Strokes[0].Points[0].X,Is.LessThan(0));
+            Assert.That(copy.DrawingUnlocks[0].Contours[0].Points[0].X,Is.LessThan(0));
+        }
+        [Test] public void SaturatingEveryBonusExceedsBudgetButEveryStarterStencilFits()
+        {
+            Assert.That(Tower(.45f,.5f,.9f).FreeformDesign.IsWithinBudget,Is.False);
+            var content=Input().CreateSnapshot();var tower=Tower().WithContent(content);
+            foreach(var definition in content.DrawingUnlocks)
+            {
+                if(definition.Role!=DrawingStencilRole.Barrel)continue;
+                var session=new DrawingEditSession(tower);Assert.That(session.ReplaceFromStencil(DrawingBindings.Base,content.DrawingUnlocks[0],out _),Is.True);
+                Assert.That(session.ReplaceFromStencil(DrawingBindings.Mount0,definition,out _),Is.True);
+                Assert.That(tower.WithFreeformDrawing(session.Snapshot).FreeformDesign.IsUsable,Is.True,definition.Id);
+            }
+        }
+        [Test] public void BonusSaturationDoesNotStopFullGeometryConsumingInk()
+        {
+            var saturated=Tower(.5f,.5f,.9f);var larger=Tower(.6f,.7f,1);
+            Assert.That(larger.FreeformDesign.HealthMultiplier,Is.EqualTo(saturated.FreeformDesign.HealthMultiplier));
+            Assert.That(larger.FreeformDesign.GetBarrel(0).DamageMultiplier,Is.EqualTo(saturated.FreeformDesign.GetBarrel(0).DamageMultiplier));
+            Assert.That(larger.FreeformDesign.InkUsed,Is.GreaterThan(saturated.FreeformDesign.InkUsed));
+        }
+        [Test] public void InvalidConfigCannotCreateSnapshot()
+        {
+            var input=Input();input.FreeformRules.BarrelWidthReference=float.NaN;Assert.Throws<ArgumentException>(()=>input.CreateSnapshot());
+            input=Input();input.FreeformRules.BodyAreaReference=0;Assert.Throws<ArgumentException>(()=>input.CreateSnapshot());
+            input=Input();input.FreeformRules.BaseInkBudget=-1;Assert.Throws<ArgumentException>(()=>input.CreateSnapshot());
+            input=Input();input.DrawingUnlocks[0].GoldCost=-1;Assert.Throws<ArgumentException>(()=>input.CreateSnapshot());
+            input=Input();input.DrawingUnlocks[0].Contours[0].Points[0].X=2;Assert.Throws<ArgumentException>(()=>input.CreateSnapshot());
+            input=Input();input.DrawingUnlocks[1].Id=input.DrawingUnlocks[0].Id;Assert.Throws<ArgumentException>(()=>input.CreateSnapshot());
+        }
+        [Test] public void LowerCurrentAllowanceBlocksUseWithoutDiscardingHistoricalPage()
+        {
+            var profile=new WorkshopProfile();var tower=Tower();Assert.That(profile.SaveBlueprint(tower,out _),Is.True);
+            var input=Input();input.FreeformRules.BaseInkBudget=1;var content=input.CreateSnapshot();
+            var restored=WorkshopProfile.FromData(profile.ToData());restored.ConfigureContent(content);
+            Assert.That(restored.Album.Count,Is.EqualTo(profile.Album.Count));
+            var rebound=tower.WithContent(content);
+            Assert.That(rebound.FreeformDesign.IsComplete,Is.True);Assert.That(rebound.FreeformDesign.IsUsable,Is.False);
+            Assert.That(restored.ValidateOwned(rebound,out _),Is.False);
+        }
+        [Test] public void CustomMinimumGeometrySurvivesReloadAndRemainsEditableUnderStricterRules()
+        {
+            var input=Input();input.FreeformRules.MinimumBodyArea=.001f;input.FreeformRules.MinimumBarrelLength=.01f;input.FreeformRules.MinimumMuzzleForward=.01f;
+            var content=input.CreateSnapshot();var profile=new WorkshopProfile(content);var tower=Tower(.05f,.04f,.05f).WithContent(content);
+            Assert.That(profile.SaveBlueprint(tower,out var reason),Is.True,reason);
+            var restored=WorkshopProfile.FromData(profile.ToData());TowerBlueprint saved=null;
+            foreach(var page in restored.Album)if(page.Id==tower.Id)saved=page;
+            Assert.That(saved,Is.Not.Null);Assert.That(saved.Drawing.GeometryHash,Is.EqualTo(tower.Drawing.GeometryHash));
+            Assert.That(TowerCatalog.Validate(saved,out _),Is.False,"Default minimum geometry is stricter than the authoring catalog");
+            Assert.That(TowerCatalog.Validate(saved.WithContent(content),out _),Is.True);
+            var edit=new DrawingEditSession(saved);Assert.That(edit.ScalePart(DrawingBindings.Base,4,4,out _),Is.True);
+        }
+        [Test] public void ExplicitBalanceContentControlsAllResolvedStatsAndBudget()
+        {
+            var tower=Tower();var balance=GameBalance.CreateDefault();float health=TowerCatalog.Health(tower,balance,MaterialTier.Pencil);
+            var input=Input();input.FreeformRules.HealthBase=4;input.FreeformRules.DamageBase=3;input.FreeformRules.BaseInkBudget=1;balance.Content=input.CreateSnapshot();
+            Assert.That(TowerCatalog.Health(tower,balance,MaterialTier.Pencil),Is.GreaterThan(health));
+            Assert.That(TowerCatalog.WeaponDamage(tower,balance,tower.FirstWeaponId,MaterialTier.Pencil),Is.GreaterThan(balance.Structure(StructureKind.Gun).Damage*3));
+            Assert.That(TowerCatalog.Validate(tower,balance,out _),Is.False);
+        }
+        [Test] public void DrawingPurchasesAreIdempotentPersistentAndSeparateFromEquipment()
+        {
+            var content=Input().CreateSnapshot();var profile=new WorkshopProfile(content);string id="drawing.sniper";
+            Assert.That(profile.UnlockDrawingAid(id,out _),Is.False);Assert.That(profile.IsDrawingUnlocked(id),Is.False);
+            profile.GrantGold(1000);Assert.That(profile.UnlockDrawingAid(id,out _),Is.True);int gold=profile.Gold;
+            Assert.That(profile.UnlockDrawingAid(id,out _),Is.True);Assert.That(profile.Gold,Is.EqualTo(gold));
+            Assert.That(profile.UnlockDrawingAid("drawing.unknown",out _),Is.False);
+            foreach(var part in profile.Parts)Assert.That(part.Id,Is.Not.EqualTo(id));
+            var restored=WorkshopProfile.FromData(profile.ToData());restored.ConfigureContent(content);Assert.That(restored.IsDrawingUnlocked(id),Is.True);
+            Assert.That(restored.IsDrawingUnlocked("drawing.body.basic"),Is.True);
+        }
+        [Test] public void GeneratedShapesTransformsAndStampAreAtomicAndUndoable()
+        {
+            var session=new DrawingEditSession(Tower());string original=session.Snapshot.GeometryHash;
+            Assert.That(session.AddRectangle(DrawingBindings.Decoration,new DrawingPoint(-.2f,-.2f),new DrawingPoint(.2f,.2f),out _),Is.True);
+            string rectangle=session.Snapshot.GeometryHash;Assert.That(session.Undo(),Is.True);Assert.That(session.Snapshot.GeometryHash,Is.EqualTo(original));Assert.That(session.Redo(),Is.True);
+            Assert.That(session.TranslatePart(DrawingBindings.Decoration,.1f,0,out _),Is.True);
+            Assert.That(session.ScalePart(DrawingBindings.Decoration,2,1,out _),Is.True);
+            Assert.That(session.MirrorPartHorizontal(DrawingBindings.Decoration,out _),Is.True);
+            string mirrored=session.Snapshot.GeometryHash;Assert.That(session.TranslatePart(DrawingBindings.Decoration,2,0,out var reason),Is.False);Assert.That(reason,Is.Not.Empty);Assert.That(session.Snapshot.GeometryHash,Is.EqualTo(mirrored));
+            Assert.That(session.TranslatePart(DrawingBindings.Decoration,0,0,out _),Is.False);
+            Assert.That(session.Undo(),Is.True);Assert.That(session.Undo(),Is.True);Assert.That(session.Undo(),Is.True);Assert.That(session.Snapshot.GeometryHash,Is.EqualTo(rectangle));
+            var stencil=Input().CreateSnapshot().DrawingUnlocks[0];Assert.That(session.ReplaceFromStencil(DrawingBindings.Base,stencil,out _),Is.True);
+            Assert.That(session.Snapshot.GetPart(DrawingBindings.Decoration).Strokes.Count,Is.EqualTo(1));
+            Assert.That(session.ReplaceFromStencil(DrawingBindings.Mount0,stencil,out _),Is.False);
+            Assert.That(session.Undo(),Is.True);Assert.That(session.Snapshot.GeometryHash,Is.EqualTo(rectangle));
+        }
+        [Test] public void LineEllipseAndSweptEraserRespectOneOperationHistory()
+        {
+            var session=new DrawingEditSession(Tower());
+            Assert.That(session.AddLine(DrawingBindings.Decoration,new DrawingPoint(0,-.7f),new DrawingPoint(0,.7f),out _),Is.True);
+            Assert.That(session.AddEllipse(DrawingBindings.Decoration,new DrawingPoint(-.3f,-.3f),new DrawingPoint(.3f,.3f),out _),Is.True);string before=session.Snapshot.GeometryHash;
+            Assert.That(session.ErasePath(DrawingBindings.Decoration,new[]{new DrawingPoint(-.8f,0),new DrawingPoint(.8f,0)},.02f,out _),Is.True);
+            Assert.That(session.Snapshot.GetPart(DrawingBindings.Decoration).Strokes,Is.Empty);
+            Assert.That(session.Undo(),Is.True);Assert.That(session.Snapshot.GeometryHash,Is.EqualTo(before));
+            Assert.That(session.ScalePart(DrawingBindings.Decoration,float.NaN,1,out _),Is.False);
+        }
+    }
+}
+
+
+NEW FILE Assets/PaperDefense/Tests/PlayMode/DrawingUnlockTransactionTests.cs
+
+using NUnit.Framework;
+using PaperDefense.Application;
+using PaperDefense.Core;
+using UnityEngine;
+using Object=UnityEngine.Object;
+
+namespace PaperDefense.Tests
+{
+    public sealed class DrawingUnlockTransactionTests
+    {
+        GameObject root;
+        RunController Controller(IWorkshopProfileStore store)
+        {
+            root=new GameObject("Isolated drawing purchases");root.SetActive(false);
+            var run=root.AddComponent<RunController>();run.InitializeWorkshop(store,allowLegacyFixtureDefaults:true);return run;
+        }
+        [TearDown] public void Cleanup(){if(root!=null)Object.DestroyImmediate(root);}
+        [Test] public void FailedPurchasePublishesNothingAndSuccessfulRetrySurvivesReload()
+        {
+            var profile=new WorkshopProfile();profile.GrantGold(200);var store=new Store(profile){Fail=true};var run=Controller(store);
+            int events=0;run.WorkshopChanged+=()=>events++;
+            Assert.That(run.UnlockDrawingAid("drawing.sniper",out var reason),Is.False);Assert.That(reason,Is.Not.Empty);
+            Assert.That(run.Workshop.Gold,Is.EqualTo(200));Assert.That(run.Workshop.IsDrawingUnlocked("drawing.sniper"),Is.False);Assert.That(events,Is.Zero);
+            store.Fail=false;Assert.That(run.UnlockDrawingAid("drawing.sniper",out reason),Is.True,reason);
+            Assert.That(run.Workshop.Gold,Is.EqualTo(168));Assert.That(events,Is.EqualTo(1));
+            Assert.That(run.UnlockDrawingAid("drawing.sniper",out reason),Is.True,reason);Assert.That(run.Workshop.Gold,Is.EqualTo(168));Assert.That(events,Is.EqualTo(1));
+            Object.DestroyImmediate(root);root=null;
+            var reloaded=Controller(store);Assert.That(reloaded.Workshop.Gold,Is.EqualTo(168));Assert.That(reloaded.Workshop.IsDrawingUnlocked("drawing.sniper"),Is.True);
+            Assert.That(reloaded.UnlockDrawingAid("drawing.missing",out _),Is.False);
+        }
+        [Test] public void OverBudgetPreviewCannotSaveTrialOrBuild()
+        {
+            var run=Controller(new Store(new WorkshopProfile()));
+            var session=new DrawingEditSession(new TowerBlueprint("too.large","Large",ChassisKind.Standard,StructureKind.Gun).AsFreeform());
+            Assert.That(session.AddRectangle(DrawingBindings.Base,new DrawingPoint(-.9f,-.9f),new DrawingPoint(.9f,.9f),out _),Is.True);
+            Assert.That(session.AddRectangle(DrawingBindings.Mount0,new DrawingPoint(-.3f,0),new DrawingPoint(.3f,.9f),out _),Is.True);
+            var tower=session.Blueprint.WithFreeformDrawing(session.Snapshot);var preview=run.PreviewBlueprint(tower);
+            Assert.That(preview.FreeformDesign.IsComplete,Is.True);Assert.That(preview.FreeformDesign.IsWithinBudget,Is.False);Assert.That(preview.Valid,Is.False);
+            Assert.That(preview.Weapons.Count,Is.EqualTo(1));Assert.That(preview.Weapons[0].Damage,Is.GreaterThan(0));
+            Assert.That(preview.Weapons[0].FireRate,Is.EqualTo(preview.FireRate));
+            Assert.That(run.SaveBlueprint(tower,out _),Is.False);Assert.That(run.RunTrial(tower,TrialScenario.Crowd),Is.Null);
+            var balance=GameBalance.CreateDefault();balance.StartingInk=2000;
+            var game=new GameSession(balance,starterDefenses:false);
+            Assert.That(game.TryBuildBlueprint(new[]{new Cell(30,20)},tower,MaterialTier.Pencil,InkColor.None,out _),Is.False);
+        }
+        sealed class Store:IWorkshopProfileStore
+        {
+            WorkshopProfileData saved;public bool Fail;
+            public Store(WorkshopProfile initial){saved=initial.ToData();}
+            public ProfileLoadResult Load()=>new ProfileLoadResult(WorkshopProfile.FromData(saved),ProfileLoadSource.Primary,"Isolated store",true);
+            public ProfileSaveResult Save(WorkshopProfile candidate)
+            {if(Fail)return new ProfileSaveResult(false,"Injected failure");saved=JsonUtility.FromJson<WorkshopProfileData>(JsonUtility.ToJson(candidate.ToData()));return new ProfileSaveResult(true,"");}
+        }
+    }
+}

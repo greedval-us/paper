@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PaperDefense.Core
 {
     public enum ChassisKind { Standard = 0, Heavy = 1 }
-    public enum DrawingOrigin { LegacyStandard = 1, PlayerDrawing = 2 }
+    public enum DrawingOrigin { LegacyStandard = 1, PlayerDrawing = 2, Freeform = 3 }
     [Flags] public enum TowerModules { None = 0, Armor = 1, Feed = 2, Tracking = 4, Rail = 8 }
 
     public sealed class WeaponMountSelection
@@ -33,6 +33,9 @@ namespace PaperDefense.Core
         public TowerModules Modules { get; }
         internal bool LegacyAssembly { get; }
         public DrawingSnapshot Drawing { get; } public DrawingOrigin Origin { get; }
+        public bool IsFreeform => Origin == DrawingOrigin.Freeform;
+        public bool HasPlayerDrawing => Origin != DrawingOrigin.LegacyStandard;
+        public FreeformTowerDesign FreeformDesign { get; }
         public DrawingAssessment Assessment { get; } public DrawingEvaluationStamp EvaluationStamp { get; }
         public MortarFootprint FirstFootprint { get; } public MortarFootprint SecondFootprint { get; }
         public TowerBlueprint(string id,string name,string chassisId,string firstWeaponId,string secondWeaponId=null,
@@ -64,6 +67,7 @@ namespace PaperDefense.Core
             foreach(var module in owned)Modules|=LegacyContentIds.Module(module.DefinitionId);
             Drawing=drawing??DrawingSnapshot.Empty;Origin=origin;FirstFootprint=GetWeaponMount(0).Footprint;SecondFootprint=GetWeaponMount(1)?.Footprint??MortarFootprint.Circle;
             if(origin==DrawingOrigin.LegacyStandard&&!Drawing.IsEmpty)throw new ArgumentException(UserText.Message("copy.b343fa86244c62b6"),nameof(origin));
+            FreeformDesign=IsFreeform?new FreeformTowerDesign(this):null;
             Assessment=DrawingEvaluator.Evaluate(this,evaluationStamp);EvaluationStamp=Assessment.ToStamp();
         }
         public TowerBlueprint(string id,string name,ChassisKind chassis,StructureKind firstWeapon,StructureKind? secondWeapon=null,TowerModules modules=TowerModules.None,
@@ -86,9 +90,11 @@ namespace PaperDefense.Core
             =>new TowerBlueprint(id,name,ChassisId,WeaponMounts,ModuleSelections,drawing,origin,content,stamp);
         public TowerBlueprint WithContent(ContentCatalogSnapshot content)=>ReferenceEquals(Content,content)?this:Copy(Id,Name,Drawing,Origin,content,EvaluationStamp);
         public TowerBlueprint WithName(string name)=>Copy(Id,name,Drawing,Origin,Content,EvaluationStamp);
-        public TowerBlueprint WithDrawing(DrawingSnapshot drawing)=>Copy(Id,Name,drawing??throw new ArgumentNullException(nameof(drawing)),DrawingOrigin.PlayerDrawing,Content,Origin==DrawingOrigin.PlayerDrawing&&drawing.GeometryHash==Drawing.GeometryHash?EvaluationStamp:null);
+        public TowerBlueprint WithDrawing(DrawingSnapshot drawing)=>Copy(Id,Name,drawing??throw new ArgumentNullException(nameof(drawing)),IsFreeform?DrawingOrigin.Freeform:DrawingOrigin.PlayerDrawing,Content,HasPlayerDrawing&&drawing.GeometryHash==Drawing.GeometryHash?EvaluationStamp:null);
+        public TowerBlueprint WithFreeformDrawing(DrawingSnapshot drawing)=>Copy(Id,Name,drawing??throw new ArgumentNullException(nameof(drawing)),DrawingOrigin.Freeform,Content,null);
+        public TowerBlueprint AsFreeform()=>IsFreeform?this:WithFreeformDrawing(Drawing);
         public TowerBlueprint AsVariant(string id,string name)=>Copy(id,name,Drawing.DeepCopy(),Origin,Content,EvaluationStamp);
-        public TowerBlueprint AsNew(string id,string name)=>Copy(id,name,Origin==DrawingOrigin.PlayerDrawing?Drawing.DeepCopy():DrawingSnapshot.Empty,DrawingOrigin.PlayerDrawing,Content,Origin==DrawingOrigin.PlayerDrawing?EvaluationStamp:null);
+        public TowerBlueprint AsNew(string id,string name)=>Copy(id,name,HasPlayerDrawing?Drawing.DeepCopy():DrawingSnapshot.Empty,IsFreeform?DrawingOrigin.Freeform:DrawingOrigin.PlayerDrawing,Content,HasPlayerDrawing?EvaluationStamp:null);
         public static TowerBlueprint NewDraft(string id,string name,ChassisKind chassis,StructureKind firstWeapon,StructureKind? secondWeapon=null,TowerModules modules=TowerModules.None)=>new TowerBlueprint(id,name,chassis,firstWeapon,secondWeapon,modules,DrawingSnapshot.Empty,DrawingOrigin.PlayerDrawing);
         public static TowerBlueprint NewDraft(string id,string name,string chassis,string firstWeapon,string secondWeapon=null,IEnumerable<ModuleSelection> modules=null,ContentCatalogSnapshot content=null)=>new TowerBlueprint(id,name,chassis,firstWeapon,secondWeapon,modules,DrawingSnapshot.Empty,DrawingOrigin.PlayerDrawing,content:content);
         public TowerBlueprint WithAssembly(ChassisKind chassis,StructureKind first,StructureKind? second,TowerModules modules)=>WithAssembly(LegacyContentIds.Chassis(chassis),LegacyContentIds.Weapon(first),second.HasValue?LegacyContentIds.Weapon(second.Value):null,LegacyContentIds.Modules(modules));
@@ -114,7 +120,7 @@ namespace PaperDefense.Core
             for(int i=0;same&&i<mounts.Count;i++)same=mounts[i].SlotIndex==WeaponMounts[i].SlotIndex&&mounts[i].WeaponId==WeaponMounts[i].WeaponId&&mounts[i].Footprint.AspectRatio==WeaponMounts[i].Footprint.AspectRatio;
             for(int i=0;same&&i<selected.Count;i++)same=selected[i].InstanceId==ModuleSelections[i].InstanceId&&selected[i].DefinitionId==ModuleSelections[i].DefinitionId;
             if(same)return this;
-            var candidate=new TowerBlueprint(Id,Name,chassis,mounts,selected,DrawingSnapshot.Empty,DrawingOrigin.PlayerDrawing,Content);
+            var candidate=new TowerBlueprint(Id,Name,chassis,mounts,selected,DrawingSnapshot.Empty,IsFreeform?DrawingOrigin.Freeform:DrawingOrigin.PlayerDrawing,Content);
             if(Origin==DrawingOrigin.LegacyStandard)return candidate;
             var retained=new List<DrawingPart>();foreach(var part in Drawing.Parts)if(DrawingPartPolicy.ShouldRetain(part.BindingId,this,candidate))retained.Add(part);
             return candidate.WithDrawing(new DrawingSnapshot(retained));

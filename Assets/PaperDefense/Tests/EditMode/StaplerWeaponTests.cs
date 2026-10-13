@@ -84,11 +84,11 @@ namespace PaperDefense.Tests
             Assert.That(EnemyEffects.MovementMultiplier(second,balance.Effects),Is.EqualTo(.8f));
         }
 
-        [Test] public void DrawingQualityChangesStaplerCadenceOnceAndLeavesDamageAndSlowParametersIntact()
+        [Test] public void HistoricalDrawingQualityDoesNotChangeStaplerCadenceDamageOrSlow()
         {
             var balance=Balance(); var slowTower=Tower(); var perfectTower=Tower(); var slowEnemy=Enemy(); var perfectEnemy=Enemy();
             Fire(balance,slowTower,slowEnemy,0); Fire(balance,perfectTower,perfectEnemy,100);
-            Assert.That(slowTower.Cooldown,Is.EqualTo(.65f/.85f).Within(.00001f));
+            Assert.That(slowTower.Cooldown,Is.EqualTo(.65f).Within(.00001f));
             Assert.That(perfectTower.Cooldown,Is.EqualTo(.65f).Within(.00001f));
             Assert.That(slowEnemy.Health,Is.EqualTo(perfectEnemy.Health));
             Assert.That(EnemyEffects.MovementMultiplier(slowEnemy,balance.Effects),Is.EqualTo(.8f));

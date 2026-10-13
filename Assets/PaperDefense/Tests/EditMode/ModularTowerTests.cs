@@ -44,7 +44,7 @@ namespace PaperDefense.Tests
             page=page.WithMortarFootprint(2,new MortarFootprint(2));
             var restored=new BlueprintData(page).ToBlueprint();
             Assert.That(restored.GetMortarFootprint(2).AspectRatio,Is.EqualTo(2));
-            Assert.That(WorkshopProfile.CurrentVersion,Is.EqualTo(6));
+            Assert.That(WorkshopProfile.CurrentVersion,Is.EqualTo(7));
         }
 
         [TestCase(TargetPriority.Nearest)] [TestCase(TargetPriority.Strongest)] [TestCase(TargetPriority.Siege)]
@@ -208,12 +208,12 @@ namespace PaperDefense.Tests
             Assert.That(system.Projectiles,Is.Empty);Assert.That(stats.Damage("weapon.mortar"),Is.GreaterThan(0));
         }
 
-        [Test] public void OldVersionFiveAssessmentAndDrawingHashesStayExactAfterVersionSixMigration()
+        [Test] public void OldVersionFiveAssessmentAndDrawingHashesStayExactAfterCurrentMigration()
         {
             var profile=new WorkshopProfile();var old=profile.ToData();old.Version=5;
             foreach(var page in old.Album){page.WeaponMountMetadataVersion=0;page.WeaponMounts=null;}
             var restored=WorkshopProfile.FromData(old).ToData();
-            Assert.That(restored.Version,Is.EqualTo(6));
+            Assert.That(restored.Version,Is.EqualTo(WorkshopProfile.CurrentVersion));
             for(int i=0;i<old.Album.Length;i++)
             {
                 Assert.That(restored.Album[i].Evaluation.ConstructionHash,Is.EqualTo(old.Album[i].Evaluation.ConstructionHash));

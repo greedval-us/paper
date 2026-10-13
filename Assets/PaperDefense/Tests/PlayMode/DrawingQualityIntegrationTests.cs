@@ -7,7 +7,7 @@ namespace PaperDefense.Tests
 {
     public sealed class DrawingQualityIntegrationTests
     {
-        [Test] public void PreviewTrialAndBattleShareTheConfiguredQualityRulesWithoutSpendingProfile()
+        [Test] public void PreviewTrialAndBattleIgnoreRetiredQualityPenaltyWithoutSpendingProfile()
         {
             var root = new GameObject("Isolated quality application"); root.SetActive(false);
             var asset = ScriptableObject.CreateInstance<GameBalanceAsset>();
@@ -27,8 +27,8 @@ namespace PaperDefense.Tests
                 var preview = run.PreviewBlueprint(blueprint); long tick = run.Session.TickIndex;
                 int gold = run.Workshop.Gold, ink = run.Session.Ink;
                 Assert.That(preview.DrawingQuality, Is.EqualTo(0));
-                Assert.That(preview.QualityMultiplier, Is.EqualTo(.9f).Within(.000001f));
-                Assert.That(preview.FireRate, Is.EqualTo(2 / (.42f / .8f / .9f)).Within(.00001f));
+                Assert.That(preview.QualityMultiplier, Is.EqualTo(1));
+                Assert.That(preview.FireRate, Is.EqualTo(2 / (.42f / .8f)).Within(.00001f));
                 var trial = run.RunQualityTrial(blueprint, TrialScenario.Crowd);
                 Assert.That(trial.First.QualityMultiplier, Is.EqualTo(preview.QualityMultiplier));
                 Assert.That(trial.Second.DrawingQuality, Is.EqualTo(100));

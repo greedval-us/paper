@@ -18,6 +18,25 @@ namespace PaperDefense.Tests
             new DrawingPart(DrawingPartKey.Decoration, new[] { Stroke(new DrawingPoint(-.3f, .2f), new DrawingPoint(-.2f, .3f)) })
         });
 
+        [TestCase(.25f)] [TestCase(.75f)]
+        public void FreeformProjectileOriginFollowsTheDrawnBarrelTip(float length)
+        {
+            var balance = GameBalance.CreateDefault(); balance.StartingInk = 1000;
+            var drawing = new DrawingSnapshot(new[] {
+                new DrawingPart(DrawingBindings.Base, new[] { Stroke(new DrawingPoint(-.4f, -.4f), new DrawingPoint(.4f, -.4f), new DrawingPoint(.4f, .4f), new DrawingPoint(-.4f, .4f), new DrawingPoint(-.4f, -.4f)) }),
+                new DrawingPart(DrawingBindings.Mount0, new[] { Stroke(new DrawingPoint(0, 0), new DrawingPoint(0, length)) }) });
+            var blueprint = TowerBlueprint.NewDraft("muzzle", "Muzzle", ChassisKind.Standard, StructureKind.Gun).WithFreeformDrawing(drawing);
+            var game = new GameSession(balance, starterDefenses: false);
+            var cell = new Cell(10, 10);
+            Assert.That(game.TryBuildBlueprint(new[] { cell }, blueprint, MaterialTier.Pencil, InkColor.None, out var reason), Is.True, reason);
+            var view = new RunReadModel(game).Structures[0];
+            var method = typeof(NotebookTowerComposition).GetMethod("Muzzle", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
+            var rendered = (Vector2)method.Invoke(null, new object[] { view, 0, default(Point2), 0d, null, null });
+            var pivot = DrawingTemplateCatalog.Pivot(blueprint, DrawingBindings.Mount0);
+            Assert.That(rendered.x, Is.EqualTo(cell.X + .5f + pivot.X).Within(.00001f));
+            Assert.That(rendered.y, Is.EqualTo(cell.Y + .5f + pivot.Y + new DrawingPoint(0, length).Y).Within(.00001f), "Rendered shot origin must follow the short or long invented barrel, not the catalog muzzle.");
+        }
+
         [SetUp] public void SetUp() { AuthoredGeometryCache.Clear(); }
 
         [Test] public void RepeatedCopiesAndDeepCopiesShareOnePreparedGeometryWithoutMutableStorage()

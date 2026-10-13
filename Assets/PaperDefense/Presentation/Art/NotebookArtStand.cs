@@ -139,7 +139,7 @@ namespace PaperDefense.Presentation
             selection = Graphic(panel, "Selected part", new Rect(150, 639, 200, 70), "weapon.gun");
             selectionLabel = Label(panel, PartName("weapon.gun"), new Rect(18, 709, 464, 33), 18, true);
             drawingEditor = new DrawingEditorPanel(page, font, drawing => {
-                authored[combination] = drawing; previewBlueprint = previewBlueprint.WithDrawing(drawing); assembled.SetBlueprint(previewBlueprint);
+                authored[combination] = drawing; previewBlueprint = previewBlueprint.WithFreeformDrawing(drawing); assembled.SetBlueprint(previewBlueprint);
             }, text);
             ShowCombination(3);
         }
@@ -157,7 +157,7 @@ namespace PaperDefense.Presentation
             if (variant == 2) { modules.Add(new ModuleSelection("feed", "module.feed")); modules.Add(new ModuleSelection("tracking", "module.tracking")); modules.Add(new ModuleSelection("rail", "module.rail")); }
             if (variant == 3) modules.Add(new ModuleSelection("tracking", "module.tracking"));
             var blueprint = new TowerBlueprint("art.combo." + variant, T("art.combo." + variant), "chassis." + chassis, mounts, modules, content: balance.Content);
-            previewBlueprint = authored.TryGetValue(variant, out var drawing) ? blueprint.WithDrawing(drawing) : blueprint;
+            previewBlueprint = authored.TryGetValue(variant, out var drawing) ? blueprint.WithFreeformDrawing(drawing) : blueprint;
             assembled.SetBlueprint(previewBlueprint); ResetPreviewAnimation(); Advance(0);
         }
         void BuildEnemies()

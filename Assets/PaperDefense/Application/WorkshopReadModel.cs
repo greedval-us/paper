@@ -9,6 +9,7 @@ namespace PaperDefense.Application
         public int Gold=>source.Gold;
         public IReadOnlyList<TowerBlueprint> Album { get; private set; }
         public IReadOnlyList<PartUnlock> Parts { get; private set; }
+        public IReadOnlyList<DrawingUnlockDefinition> DrawingUnlocks { get; private set; }
         public ContentCatalogSnapshot Content { get; private set; }
         public IReadOnlyList<TowerBlueprint> Loadout {get;private set;}
         public ProfileSaveState SaveState { get; internal set; } = ProfileSaveState.MemoryOnly;
@@ -16,10 +17,12 @@ namespace PaperDefense.Application
         public bool HasUnsavedChanges { get; internal set; }
         public string LastWriteError { get; internal set; } = "";
         public bool IsUnlocked(string id)=>source.IsUnlocked(id);
+        public bool IsDrawingUnlocked(string id)
+        {foreach(var definition in DrawingUnlocks)if(definition.Id==id)return definition.InitiallyUnlocked||source.IsUnlocked(id);return false;}
         internal WorkshopReadModel(WorkshopProfile profile, GameBalance balance=null){source=profile;Refresh(balance);}
         internal void Refresh(GameBalance balance=null)
         {
-            Content=balance?.ResolveContent(); Parts=source.GetParts(balance);
+            Content=balance?.ResolveContent(); Parts=source.GetParts(balance);DrawingUnlocks=source.GetDrawingUnlocks(balance);
             var album=new TowerBlueprint[source.Album.Count];
             for(int i=0;i<album.Length;i++)album[i]=PreparePage(source.Album[i]);
             Album=System.Array.AsReadOnly(album);
@@ -42,9 +45,11 @@ namespace PaperDefense.Application
         public readonly float DrawingQuality,QualityMultiplier;
         public readonly bool Valid;
         public readonly string Reason;
+        public readonly IReadOnlyList<WeaponPreview> Weapons;
+        public readonly FreeformTowerDesign FreeformDesign;
         internal TowerPreview(TowerBlueprint bp,GameBalance balance,MaterialTier material,MechanicsAvailability? mechanics=null)
         {
-            DrawingQuality=0;QualityMultiplier=1;Defense=0;
+            DrawingQuality=0;QualityMultiplier=1;Defense=0;Weapons=System.Array.Empty<WeaponPreview>();FreeformDesign=null;
             Valid=TowerCatalog.Validate(bp,balance,out string reason);Reason=reason;
             if(bp==null){Load=Capacity=Cost=ColorCost=0;Health=BuildSeconds=FireRate=Range=FeedMultiplier=0;return;}
             var content = balance.ResolveContent();
@@ -54,14 +59,39 @@ namespace PaperDefense.Application
             if(!known)
             {Load=Capacity=Cost=ColorCost=0;Health=BuildSeconds=FireRate=Range=FeedMultiplier=0;return;}
             bp=bp.WithContent(content);
+            Valid=TowerCatalog.Validate(bp,balance,out reason);Reason=reason;
+            FreeformDesign=bp.FreeformDesign;
             DrawingQuality=bp.Origin==DrawingOrigin.LegacyStandard?100:bp.Assessment.Quality;
+            try
+            {
             Defense=DamageRules.EffectiveDefense(TowerCatalog.Defense(bp,balance),balance.Effects.MaximumDefense);
             QualityMultiplier=TowerCatalog.QualityMultiplier(bp,balance,(mechanics??MechanicsAvailability.Resolve(balance)).DrawingQuality);
             Load=TowerCatalog.Load(bp,balance);Capacity=TowerCatalog.Capacity(bp,balance);Cost=TowerCatalog.Cost(bp,balance,material);
             ColorCost=TowerCatalog.ColorCost(bp,balance);Health=TowerCatalog.Health(bp,balance,material);
             BuildSeconds=TowerCatalog.BuildSeconds(bp,balance,material);FeedMultiplier=TowerCatalog.FeedMultiplier(bp,balance);
             Range=FireRate=0;
-            foreach(var mount in bp.WeaponMounts){Range=System.Math.Max(Range,TowerCatalog.WeaponRange(bp,balance,mount.WeaponId,mount.SlotIndex));FireRate+=1/TowerCatalog.ActionInterval(bp,balance,mount.WeaponId,FeedMultiplier,QualityMultiplier,mount.SlotIndex);}
+            var weapons=new List<WeaponPreview>();
+            foreach(var mount in bp.WeaponMounts)
+            {
+                float range=TowerCatalog.WeaponRange(bp,balance,mount.WeaponId,mount.SlotIndex);
+                float interval=TowerCatalog.ActionInterval(bp,balance,mount.WeaponId,FeedMultiplier,QualityMultiplier,mount.SlotIndex);
+                weapons.Add(new WeaponPreview(mount.SlotIndex,range,interval,TowerCatalog.WeaponDamage(bp,balance,mount.WeaponId,material,mount.SlotIndex),FeedMultiplier));
+                Range=System.Math.Max(Range,range);FireRate+=1/interval;
+            }
+            Weapons=weapons.AsReadOnly();
+            }
+            catch(System.ArgumentException error)
+            {
+                Valid=false;Reason=error.Message;Weapons=System.Array.Empty<WeaponPreview>();
+                Load=Capacity=Cost=ColorCost=0;Health=Defense=BuildSeconds=FireRate=Range=FeedMultiplier=0;
+            }
         }
+    }
+    public readonly struct WeaponPreview
+    {
+        public readonly int SlotIndex;
+        public readonly float Damage,Range,FireRate,Interval,FeedMultiplier;
+        internal WeaponPreview(int slot,float range,float interval,float damage,float feed)
+        {SlotIndex=slot;Range=range;Interval=interval;Damage=damage;FeedMultiplier=feed;FireRate=1/interval;}
     }
 }
