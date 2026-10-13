@@ -80,7 +80,7 @@ namespace PaperDefense.Editor
                     InitiallyUnlocked = item.InitiallyUnlocked, IsCombatMount = item.IsCombatMount,
                     Mount = item.MountKind?.ToString() ?? "", Module = item.Module.ToString(), Chassis = item.Chassis?.ToString() ?? "",
                     UnlockGold = item.UnlockGold }).ToArray(),
-                Catalog = CatalogRows(content, asset.dataPreset),
+                Catalog = CatalogRows(content, asset.dataPreset, balance),
                 Mechanics = new[] {
                     Capability("EnemyDrawingTiers", balance.Mechanics.EnemyDrawingTiers, mechanics.EnemyDrawingTiers),
                     Capability("CorpseBlots", balance.Mechanics.CorpseBlots, mechanics.CorpseBlots),
@@ -102,17 +102,24 @@ namespace PaperDefense.Editor
         }
 
         // These rows read the resolved, immutable definitions. Overrides are already applied by CreateWorkshopBalance.
-        static CatalogRecord[] CatalogRows(ContentCatalogSnapshot content, BalancePresetAsset preset)
+        static CatalogRecord[] CatalogRows(ContentCatalogSnapshot content, BalancePresetAsset preset, GameBalance balance)
         {
             var rows = new List<CatalogRecord>();
             foreach (var item in content.Chassis)
             {
                 var values = new List<ParameterRecord>();
                 Add(values, "Capacity", item.Capacity); Add(values, "BaseCost", item.BaseCost); Add(values, "MountCount", item.MountCount);
+                Add(values, "UpgradeSlotCount", item.UpgradeSlotCount); Add(values, "ArmorSlotCount", item.ArmorSlotCount); Add(values, "FeedCapacity", item.FeedCapacity);
                 Add(values, "BaseHealth", item.BaseHealth); Add(values, "HealthMultiplier", item.HealthMultiplier); Add(values, "BuildSeconds", item.BuildSeconds); Add(values, "SecondaryBuildSeconds", item.SecondaryBuildSeconds);
                 Add(values, "PrimaryMountPivot.X", item.PrimaryMountPivot.X); Add(values, "PrimaryMountPivot.Y", item.PrimaryMountPivot.Y);
                 Add(values, "PrimaryDualMountPivot.X", item.PrimaryDualMountPivot.X); Add(values, "PrimaryDualMountPivot.Y", item.PrimaryDualMountPivot.Y);
                 Add(values, "SecondaryMountPivot.X", item.SecondaryMountPivot.X); Add(values, "SecondaryMountPivot.Y", item.SecondaryMountPivot.Y);
+                for (int i = 0; i < item.MountCount; i++)
+                {
+                    Add(values, "MountPivots[" + i + "].X", item.MountPivots[i].X); Add(values, "MountPivots[" + i + "].Y", item.MountPivots[i].Y);
+                    var pivot = item.GetMountPivot(i, item.MountCount);
+                    Add(values, "FullMountPivots[" + i + "].X", pivot.X); Add(values, "FullMountPivots[" + i + "].Y", pivot.Y);
+                }
                 rows.Add(CatalogRow(item.Id, item.Name, "Chassis", values, preset, preset?.overrides?.Chassis.Any(value => value.Id == item.Id) == true));
             }
             foreach (var item in content.Weapons)
@@ -120,6 +127,7 @@ namespace PaperDefense.Editor
                 var values = new List<ParameterRecord>(); var stats = item.Stats;
                 Add(values, "Attack", item.Attack); Add(values, "Load", item.Load); Add(values, "AssemblyCredit", item.AssemblyCredit);
                 Add(values, "MinimumLineRadius", item.MinimumLineRadius); Add(values, "MinimumRadialRange", item.MinimumRadialRange); Add(values, "MaximumFootprintAspectRatio", item.MaximumFootprintAspectRatio);
+                Add(values, "MinimumRange", item.MinimumRange); Add(values, "WeaponRange", TowerCatalog.WeaponRange(null, balance, item.Id));
                 Add(values, "Stats.Cost", stats.Cost); Add(values, "Stats.MaxHealth", stats.MaxHealth); Add(values, "Stats.BuildSeconds", stats.BuildSeconds);
                 Add(values, "Stats.Range", stats.Range); Add(values, "Stats.Damage", stats.Damage); Add(values, "Stats.ShotInterval", stats.ShotInterval);
                 Add(values, "Stats.Radius", stats.Radius); Add(values, "Stats.FlightSeconds", stats.FlightSeconds); Add(values, "Stats.MaxPierce", stats.MaxPierce);
@@ -131,7 +139,7 @@ namespace PaperDefense.Editor
             foreach (var item in content.Modules)
             {
                 var values = new List<ParameterRecord>();
-                Add(values, "Load", item.Load); Add(values, "Cost", item.Cost); Add(values, "BuildSeconds", item.BuildSeconds); Add(values, "Repeatable", item.Repeatable); Add(values, "ExclusiveGroup", item.ExclusiveGroup);
+                Add(values, "Load", item.Load); Add(values, "Cost", item.Cost); Add(values, "BuildSeconds", item.BuildSeconds); Add(values, "Repeatable", item.Repeatable); Add(values, "ExclusiveGroup", item.ExclusiveGroup); Add(values, "SlotKind", item.SlotKind);
                 for (int i = 0; i < item.AllowedChassisIds.Count; i++) Add(values, "AllowedChassisIds[" + i + "]", item.AllowedChassisIds[i]);
                 for (int i = 0; i < item.AllowedAttacks.Count; i++) Add(values, "AllowedAttacks[" + i + "]", item.AllowedAttacks[i]);
                 for (int i = 0; i < item.Modifiers.Count; i++)
@@ -156,6 +164,11 @@ namespace PaperDefense.Editor
                 var values = new List<ParameterRecord>();
                 Add(values, "ChassisId", page.ChassisId); Add(values, "FirstWeaponId", page.FirstWeaponId);
                 if (page.SecondWeaponId != null) Add(values, "SecondWeaponId", page.SecondWeaponId);
+                for (int i = 0; i < page.WeaponMounts.Count; i++)
+                {
+                    var mount = page.WeaponMounts[i]; string path = "WeaponMounts[" + i + "].";
+                    Add(values, path + "SlotIndex", mount.SlotIndex); Add(values, path + "WeaponId", mount.WeaponId); Add(values, path + "Footprint.AspectRatio", mount.Footprint.AspectRatio);
+                }
                 for (int i = 0; i < page.ModuleSelections.Count; i++)
                 { Add(values, "Modules[" + i + "].InstanceId", page.ModuleSelections[i].InstanceId); Add(values, "Modules[" + i + "].DefinitionId", page.ModuleSelections[i].DefinitionId); }
                 for (int i = 0; i < content.StartupSlotIds.Count; i++) if (content.StartupSlotIds[i] == page.Id) Add(values, "Slot", i);

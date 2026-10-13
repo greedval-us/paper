@@ -82,7 +82,6 @@ namespace PaperDefense.Core
         }
         private Point2 TargetPoint(EnemyState enemy)
             => Center(enemy.ObjectiveIndex>=0&&enemy.ObjectiveIndex<wells.Count?wells[enemy.ObjectiveIndex].Cell:BaseCell);
-        private Cell TargetObjectiveCell(int index)=>index>=0&&index<wells.Count?wells[index].Cell:BaseCell;
         private WeightedFlowField EnemyFlow(EnemyState enemy)
             => enemy.ObjectiveIndex>=0&&enemy.ObjectiveIndex<wells.Count&&wells[enemy.ObjectiveIndex].Active?wellFlows[enemy.ObjectiveIndex]:flow;
 

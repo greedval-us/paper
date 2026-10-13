@@ -101,7 +101,7 @@ namespace PaperDefense.Core
                     Id = nextEnemyGlobId++, From = enemy.Position, To = enemy.RangedTarget,
                     Remaining = duration, Duration = duration, Damage = Math.Max(0, definition.Damage),
                     ObjectiveIndex = enemy.RangedObjectiveIndex,
-                    SourceEnemyId=enemy.Id,SourceEnemyKind=enemy.Kind,SourceEnemyDrawingTier=enemy.DrawingTier
+                    SourceEnemyKind=enemy.Kind,SourceEnemyDrawingTier=enemy.DrawingTier
                 };
                 enemyGlobs.Add(glob);
                 PublishEnemyAttack(enemy,glob.To);

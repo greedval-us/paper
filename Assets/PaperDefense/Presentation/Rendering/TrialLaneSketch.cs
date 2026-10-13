@@ -26,11 +26,6 @@ namespace PaperDefense.Presentation
             playback.Bind(value); started = startTime; duration = totalDuration; offset = 0;
             lastSeconds = -1; playbackPaused = false; SetVerticesDirty();
         }
-        public void SeekPlayback(float seconds)
-        {
-            offset = Mathf.Clamp(seconds, 0, Mathf.Max(0, duration)); started = Time.unscaledTime;
-            playback.Seek(offset); lastSeconds = offset; SetVerticesDirty();
-        }
         void Update()
         {
             if (!HasRecording) return;

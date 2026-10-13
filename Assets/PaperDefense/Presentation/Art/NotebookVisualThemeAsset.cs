@@ -46,7 +46,6 @@ namespace PaperDefense.Presentation
             for (int i = Frames.Count - 1; i >= 0; i--) if (time >= Frames[i].Time) return Frames[i];
             return Frames[0];
         }
-        public string ShapeAt(float elapsed) => Sample(elapsed)?.ShapeId;
     }
     [Serializable] public sealed class NotebookRecoilKey
     {

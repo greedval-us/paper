@@ -223,7 +223,6 @@ namespace PaperDefense.Core
         internal float SecondaryCooldown {get=>mounts[1].Cooldown;set=>mounts[1].Cooldown=value;}
         // Acquisition and normalized reload belong to each mount; zero action remaining is one ready action.
         internal float PrimaryAcquisitionRemaining {get=>mounts[0].AcquisitionRemaining;set=>mounts[0].AcquisitionRemaining=value;}
-        internal float SecondaryAcquisitionRemaining {get=>mounts[1].AcquisitionRemaining;set=>mounts[1].AcquisitionRemaining=value;}
         internal float PrimaryActionRemaining {get=>mounts[0].ActionRemaining;set=>mounts[0].ActionRemaining=value;}
         internal float SecondaryActionRemaining {get=>mounts[1].ActionRemaining;set=>mounts[1].ActionRemaining=value;}
         internal TowerColorBudget ColorBudget;

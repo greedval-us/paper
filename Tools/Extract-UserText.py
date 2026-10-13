@@ -3,7 +3,7 @@
 Examples:
   python Tools/Extract-UserText.py --write Assets/PaperDefense/Presentation/UI
   python Tools/Extract-UserText.py --audit Assets/PaperDefense/Core
-  python Tools/Extract-UserText.py --merge Tools/scene-texts.json
+  python Tools/Extract-UserText.py --merge path/to/reviewed-texts.json
 
 The JSON manifest is canonical; keys are stable hashes of their original template.
 Technical strings, attributes, comments and exception/log diagnostics are excluded.

@@ -1,6 +1,6 @@
 # Контракты механик
 
-Механики настраивает разработчик в `GameBalanceAsset.mechanics` перед созданием партии. Игроку выбор систем не предоставляется. Значения по умолчанию сохраняют текущий режим.
+Механики рабочего пресета настраивает разработчик в `BalancePresetAsset.rules.Mechanics` перед созданием партии. `GameBalanceAsset.dataPreset` выбирает пресет; поле `GameBalanceAsset.mechanics` относится к явному legacy-адаптеру и при назначенном пресете не применяется. Игроку выбор систем не предоставляется. Полный состав систем — в [реестре действующих механик](Current-Mechanics.md).
 
 `MechanicsConfiguration` содержит разрешения, `MechanicsAvailability` фиксирует их с учётом прежних master gates. Партия, оружие и read model используют захваченные возможности. Изменение asset влияет на следующую партию. Горячая замена систем не поддерживается. Остальные поля `GameBalance` по прежнему контракту нельзя менять во время партии.
 
@@ -15,7 +15,7 @@
 | Цветные картриджи | Команды, `ColorEffectPayload` | `ColorCartridges=false`: цветные команды отклоняются атомарно; оружие передаёт пустой payload. Обычный урон и замедление скрепкострела сохраняются |
 | Улучшения партии | `GameSession.Progression` | `RunUpgrades=false`: выбор не появляется и не блокирует следующую волну. Награды волн и золото продолжают начисляться |
 | Влияние качества | `TowerCatalog`, оружие, preview, полигон | `DrawingQuality=false`: коэффициент темпа равен 1; рисунок, оценка, альбом и открытия сохраняются |
-| Подача двух стволов | `TowerConstructionRules`, `WeaponSystem` | Существующий `DynamicFeed=false` использует историческую фиксированную подачу |
+| Подача креплений | `TowerConstructionRules`, `WeaponSystem` | `Construction.DynamicFeed=false` использует историческую фиксированную подачу; текущий Target делит подачу основания между 1–3 действующими креплениями |
 | Запись профиля | `IWorkshopProfileStore`, Application | Существующий memory-only режим оставляет мастерскую и игру работоспособными без IO |
 
 Старый `EnableEnemyMechanics` ограничивает первые три системы одновременно; старый `EnableInkWells` ограничивает чернильницы. Для независимых отключений оставляйте master gates включёнными и меняйте отдельные разрешения. Target-пресет сохраняет developer configuration.
@@ -47,4 +47,4 @@
 
 ## Excel
 
-Книга `docs/balance/PaperDefense-Mechanics-Balance.xlsx` строится из `CreateWorkshopBalance()` обоих asset после применения Target и генерации угроз. Обновление: `Tools/BalanceWorkbook/README.md`. Формулы сверяются с `TowerCatalog`; редактирование книги автоматически не меняет игру.
+Книга `docs/balance/PaperDefense-Mechanics-Balance.xlsx` строится из `CreateWorkshopBalance()` обоих asset. Рабочие пресеты уже содержат конечные правила; повторное преобразование Target и генерация legacy-угроз не выполняются. Обновление: [руководство генератора](../Tools/BalanceWorkbook/README.md). Формулы сверяются с `TowerCatalog`; редактирование книги автоматически не меняет игру.

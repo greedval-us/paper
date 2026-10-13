@@ -15,7 +15,7 @@ const data = JSON.parse(inputBytes.toString('utf8').replace(/^\uFEFF/, ''));
 assert.equal(data.SchemaVersion, 2, 'Unsupported balance export schema. Export again in Unity.');
 assert.equal(data.Configurations.length, 2, 'Both configured balances are required');
 const configs = data.Configurations;
-const evidencePaths = [
+const historicalEvidencePaths = [
   'docs/validation/content/after/editmode-tests.json',
   'docs/validation/content/after/playmode-tests.json',
   'docs/validation/content/after/baseline-comparison.json',
@@ -24,6 +24,7 @@ const evidencePaths = [
   'docs/validation/content/after/development-build.json',
   'docs/validation/content/data-only-diff.json',
 ];
+const currentEvidencePaths = process.argv.slice(4);
 const names = { NotebookBalance: 'Notebook', TargetNotebookBalance: 'Target' };
 const name = config => names[config.Id] ?? config.Id;
 const value = p => p.Kind === 'number' ? p.Number : p.Kind === 'bool' ? p.Boolean : p.Text;
@@ -34,7 +35,10 @@ const requireParameter = (config, key) => {
   return value(found);
 };
 const sha256 = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
-const evidence = await Promise.all(evidencePaths.map(async file => ({ Path: file, Sha256: sha256(await fs.readFile(path.join(project, file))) })));
+const evidence = await Promise.all([
+  ...historicalEvidencePaths.map(Path => ({ Path, Scope: 'Исторический рефакторинг каталога 2026-10-12' })),
+  ...currentEvidencePaths.map(Path => ({ Path, Scope: 'Текущая проверка' })),
+].map(async item => ({ ...item, Sha256: sha256(await fs.readFile(path.resolve(project, item.Path))) })));
 for (const source of data.Sources) {
   assert.equal(sha256(await fs.readFile(path.join(project, source.Path))), source.Sha256,
     `Source changed after Unity export: ${source.Path}. Export again.`);
@@ -50,6 +54,12 @@ for (const config of configs) {
     assert.equal(new Set(record.Values.map(item => item.Path)).size, record.Values.length, `Duplicate catalog field: ${record.Id}`);
     for (const parameter of record.Values)
       if (parameter.Kind === 'number') assert.ok(Number.isFinite(parameter.Number), `Nonfinite ${record.Id}/${parameter.Path}`);
+    const required = record.Category === 'Chassis' ? ['MountCount', 'UpgradeSlotCount', 'ArmorSlotCount', 'FeedCapacity']
+      : record.Category === 'Weapon' ? ['MinimumRange', 'WeaponRange']
+      : record.Category === 'Module' ? ['SlotKind']
+      : record.Category === 'StartingPage' ? ['WeaponMounts[0].SlotIndex', 'WeaponMounts[0].WeaponId', 'WeaponMounts[0].Footprint.AspectRatio'] : [];
+    for (const field of required) assert.ok(record.Values.some(item => item.Path === field),
+      `Missing current catalog field: ${record.Id}/${field}. Export again in Unity.`);
   }
 }
 
@@ -196,8 +206,8 @@ for (const range of [`J${costs.start}:J${costs.end}`, `H${health.start}:H${healt
 views.push([calc.name, 'A1:J24'], [calc.name, `A${damageRow - 1}:J${refunds.end + 2}`], [calc.name, `A${footprintRow - 1}:K${footprint.end + 1}`]);
 
 const weapons = sheets['Оружие'];
-base(weapons, 'Оружие и укрепления', [15, 28, 12, 12, 14, 14, 12, 14, 18, 58, 17]);
-note(weapons, 4, 'Характеристики до материала, подачи, качества и улучшений. HP отдельного инструмента отличается от HP основания.', 'J');
+base(weapons, 'Оружие и укрепления', [15, 28, 12, 12, 14, 14, 12, 14, 18, 58, 17, 17, 17]);
+note(weapons, 4, 'Дистанции и характеристики до оборудования, материала, подачи, качества и улучшений. Stats.Range сохранён отдельно.', 'M');
 const weaponNotes = {
   Wall: 'Препятствие. Урона не наносит.', Gun: 'Одна цель.',
   Piercer: 'Линия. Radius — полуширина. MaxPierce — конечный предел целей.',
@@ -209,27 +219,28 @@ const weaponNotes = {
 const weaponRecords = configs.flatMap(c => {
   const catalog = c.Catalog.filter(item => item.Category === 'Weapon').map(item => {
     const v = dict(item.Values), part = c.Parts.find(part => part.Id === item.Id);
-    return { row: [name(c), item.Id, v['Stats.Cost'], v['Stats.MaxHealth'], v['Stats.BuildSeconds'], v['Stats.Range'], v['Stats.Damage'], v['Stats.ShotInterval'], null,
-      `${item.Name}. ${v.Attack}. ${part.Description}`, requireParameter(c, 'Combat.MinimumActionInterval')], noDamage: v.Attack === 'Cleanup' };
+    return { row: [name(c), item.Id, v['Stats.Cost'], v['Stats.MaxHealth'], v['Stats.BuildSeconds'], v.WeaponRange, v['Stats.Damage'], v['Stats.ShotInterval'], null,
+      `${item.Name}. ${v.Attack}. ${part.Description}`, requireParameter(c, 'Combat.MinimumActionInterval'), v.MinimumRange, v['Stats.Range']], noDamage: v.Attack === 'Cleanup' };
   });
   // Walls and floor spikes remain closed placement tools rather than workshop catalogue entries.
   const tools = c.Structures.filter(item => ['Wall', 'Spikes'].includes(item.Id)).map(item => {
     const v = dict(item.Values);
-    return { row: [name(c), item.Id, v.Cost, v.MaxHealth, v.BuildSeconds, v.Range, v.Damage, v.ShotInterval, null, weaponNotes[item.Id], requireParameter(c, 'Combat.MinimumActionInterval')], noDamage: item.Id === 'Wall' };
+    const range = item.Id === 'Wall' ? 0 : Math.max(requireParameter(c, 'Combat.MinimumRadialRange'), v.Radius);
+    return { row: [name(c), item.Id, v.Cost, v.MaxHealth, v.BuildSeconds, range, v.Damage, v.ShotInterval, null, weaponNotes[item.Id], requireParameter(c, 'Combat.MinimumActionInterval'), 0, v.Range], noDamage: item.Id === 'Wall' };
   });
   return [...catalog, ...tools];
 });
-const wt = table(weapons, 6, ['Пресет', 'Устойчивый ID', 'Цена', 'HP', 'Стройка, с', 'Дальность', 'Урон', 'Интервал, с', 'DPS одной цели', 'Действие', 'Мин. интервал, с'], weaponRecords.map(item => item.row),
-  { height: 58, numeric: [2, 3], decimals: [4, 5, 6, 7, 8, 10] });
+const wt = table(weapons, 6, ['Пресет', 'Устойчивый ID', 'Цена', 'HP', 'Стройка, с', 'Макс. дистанция', 'Урон', 'Интервал, с', 'DPS одной цели', 'Действие', 'Мин. интервал, с', 'Мин. дистанция', 'Stats.Range'], weaponRecords.map(item => item.row),
+  { height: 58, numeric: [2, 3], decimals: [4, 5, 6, 7, 8, 10, 11, 12] });
 weaponRecords.forEach(({ row, noDamage }, index) => {
   const r = wt.start + index;
   if (noDamage) weapons.getRange(`I${r}`).values = [['не применяется']];
   else formula(weapons, `I${r}`, `=G${r}/MAX(K${r},H${r})`, row[6] / Math.max(row[10], row[7]));
 });
 weapons.freezePanes.freezeRows(6);
-views.push([weapons.name, 'A1:J15']);
+views.push([weapons.name, 'A1:M15']);
 const partsSheet = sheets['Детали'];
-base(partsSheet, 'Каталог деталей мастерской', [15, 27, 25, 18, 18, 12, 18, 62]);
+base(partsSheet, 'Каталог деталей мастерской', [15, 27, 25, 18, 18, 12, 18, 62, 14, 18, 18, 16]);
 note(partsSheet, 4, 'Открытие оплачивается золотом один раз. Постройка каждого экземпляра оплачивается штрихами отдельно.', 'H');
 const partStart = 6;
 const parts = configs.flatMap(c => c.Parts.map(part => [name(c), part.Name, part.Id, part.Category,
@@ -237,12 +248,13 @@ const parts = configs.flatMap(c => c.Parts.map(part => [name(c), part.Name, part
 const partTable = table(partsSheet, partStart, ['Пресет', 'Деталь', 'Устойчивый ID', 'Категория', 'Открыта сразу', 'Золото', 'Крепление', 'Описание'], parts, { height: 58, numeric: [5] });
 const categoryRows = category => configs.flatMap(c => c.Catalog.filter(item => item.Category === category).map(item => ({ ...item, config: name(c), fields: dict(item.Values) })));
 const chassisRow = partTable.end + 4;
-note(partsSheet, chassisRow - 1, 'Основания. Координаты креплений и все ограничения приведены в «Каталог данных».', 'H');
-const chassisTable = table(partsSheet, chassisRow, ['Пресет', 'Основание', 'Устойчивый ID', 'Нагрузка', 'Цена', 'Базовые HP', 'HP ×', 'Стройка, с'], categoryRows('Chassis').map(item =>
-  [item.config, item.Name, item.Id, item.fields.Capacity, item.fields.BaseCost, item.fields.BaseHealth, item.fields.HealthMultiplier, item.fields.BuildSeconds]), { numeric: [3, 4], decimals: [5, 6, 7] });
+note(partsSheet, chassisRow - 1, 'Основания поддерживают 1–3 крепления. FeedCapacity=0 использует общий DynamicFeedCapacity. Координаты — в «Каталог данных».', 'L');
+const chassisTable = table(partsSheet, chassisRow, ['Пресет', 'Основание', 'Устойчивый ID', 'Нагрузка', 'Цена', 'Базовые HP', 'HP ×', 'Стройка, с', 'Крепления', 'Слоты улучшений', 'Слоты брони', 'Подача'], categoryRows('Chassis').map(item =>
+  [item.config, item.Name, item.Id, item.fields.Capacity, item.fields.BaseCost, item.fields.BaseHealth, item.fields.HealthMultiplier, item.fields.BuildSeconds,
+    item.fields.MountCount, item.fields.UpgradeSlotCount, item.fields.ArmorSlotCount, item.fields.FeedCapacity]), { numeric: [3, 4, 8, 9, 10], decimals: [5, 6, 7, 11] });
 const moduleRow = chassisTable.end + 4;
-const moduleTable = table(partsSheet, moduleRow, ['Пресет', 'Модуль', 'Устойчивый ID', 'Нагрузка', 'Цена', 'Стройка, с', 'Повторяемый', 'Группа исключения'], categoryRows('Module').map(item =>
-  [item.config, item.Name, item.Id, item.fields.Load, item.fields.Cost, item.fields.BuildSeconds, item.fields.Repeatable ? 'Да' : 'Нет', item.fields.ExclusiveGroup]), { numeric: [3, 4], decimals: [5] });
+const moduleTable = table(partsSheet, moduleRow, ['Пресет', 'Модуль', 'Устойчивый ID', 'Нагрузка', 'Цена', 'Стройка, с', 'Повторяемый', 'Группа исключения', 'Тип слота'], categoryRows('Module').map(item =>
+  [item.config, item.Name, item.Id, item.fields.Load, item.fields.Cost, item.fields.BuildSeconds, item.fields.Repeatable ? 'Да' : 'Нет', item.fields.ExclusiveGroup, item.fields.SlotKind]), { numeric: [3, 4], decimals: [5] });
 const modifierRows = categoryRows('Module').flatMap(item => Object.keys(item.fields).filter(key => /^Modifiers\[\d+\]\.Stat$/.test(key)).map(key => {
   const prefix = key.slice(0, -4), v = item.fields;
   return [item.config, item.Id, v[prefix + 'Stat'], v[prefix + 'Operation'], v[prefix + 'Scope'], v[prefix + 'MountIndex'], v[prefix + 'Value']];
@@ -253,7 +265,7 @@ const effectTable = table(partsSheet, modifierTable.end + 4, ['Пресет', 'I
 const templateTable = table(partsSheet, effectTable.end + 4, ['Пресет', 'Образец', 'Устойчивый ID', 'Версия', 'Вес', 'Опора X', 'Опора Y', 'Контуры'], categoryRows('Template').map(item =>
   [item.config, item.Name, item.Id, item.fields.Revision, item.fields.Weight, item.fields['Pivot.X'], item.fields['Pivot.Y'], item.fields.ContourCount]), { height: 32, numeric: [3, 7], decimals: [4, 5, 6] });
 partsSheet.freezePanes.freezeRows(6);
-views.push([partsSheet.name, 'A1:H15'], [partsSheet.name, `A${chassisRow - 1}:H${moduleTable.end + 1}`],
+views.push([partsSheet.name, 'A1:H15'], [partsSheet.name, `A${chassisRow - 1}:L${moduleTable.end + 1}`],
   [partsSheet.name, `A${modifierTable.headers}:H${effectTable.end + 1}`], [partsSheet.name, `A${templateTable.headers}:H${Math.min(templateTable.end, templateTable.headers + 12)}`]);
 
 const entities = sheets['Материалы и враги'];
@@ -357,8 +369,8 @@ const sourceRows = [
   ['Смысл DPS', 'Теоретический темп по одной цели. Массовые попадания, защита, промахи и захват исключены.', ''],
   ['Округление', 'Цена сборки: long × double. Цена отдельного инструмента сохраняет int × float.', ''],
   ['Сохранения', 'Developer configuration действует на новый запуск. Каталог и устойчивые ID остаются полными.', ''],
-  ['Отчет рефакторинга', 'docs/validation/content', 'Повтор исходных сценариев и отдельная приёмка новых данных'],
-  ...evidence.map(item => ['Проверка рефакторинга', item.Path, item.Sha256]),
+  ['Исторический отчет 2026-10-12', 'docs/validation/content', 'Сохранённые результаты рефакторинга каталога. Текущие проверки передаются отдельно при сборке книги.'],
+  ...evidence.map(item => [item.Scope, item.Path, item.Sha256]),
 ];
 table(sources, 5, ['Запись', 'Значение', 'Fingerprint / примечание'], sourceRows, { height: 33 });
 sources.getRange('B7').setNumberFormat('yyyy-mm-dd hh:mm:ss.000');

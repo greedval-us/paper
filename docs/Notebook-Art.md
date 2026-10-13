@@ -29,7 +29,7 @@
 
 **Generate art test scenes** создаёт только отсутствующие три художественных сцены. Сцены не добавляются в Build Settings автоматически.
 
-Палитру и геометрию можно назначить через `NotebookWorldView.VisualTheme`; по умолчанию используется ресурс `Art/NotebookVisualTheme`. Весь новый видимый текст находится в `Tools/art-texts.json`, общем `Tools/user-texts.json` и `Resources/Text/ru.asset`.
+Палитру и геометрию можно назначить через `NotebookWorldView.VisualTheme`; по умолчанию используется ресурс `Art/NotebookVisualTheme`. Канонический словарь видимого текста — `Tools/user-texts.json`; `Tools/Extract-UserText.py --write` обновляет `Resources/Text/ru.asset` и контракт ключей/аргументов.
 
 ## Рисунки и производительность
 

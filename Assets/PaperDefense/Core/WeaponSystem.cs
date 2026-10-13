@@ -128,8 +128,6 @@ namespace PaperDefense.Core
         {
             var state=structure.GetMountState(mount);
             if (state.ActionRemaining > 0) return true;
-            var definition = weapon.Numeric;
-            StructureKind kind = weapon.LegacyKind ?? (StructureKind)(-1);
             float range = MountRange(structure, weapon, mount);
             if(weapon.Attack==AttackKind.Cleanup) return TryFindBlot(origin,weapon.MinimumRange,range,out _);
             spatial.Query(origin, range, targets);
