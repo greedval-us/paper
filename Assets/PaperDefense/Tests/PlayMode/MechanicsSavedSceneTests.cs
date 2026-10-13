@@ -47,7 +47,16 @@ namespace PaperDefense.Tests
 
         [UnityTest] public IEnumerator EverySavedScenePreparesOneIsolatedDriverExercisesItsFocusAndResets()
         {
-            string[] paths = AssetDatabase.FindAssets("t:Scene", new[] { "Assets/PaperDefense/Scenes/Tests" });
+            string[] allScenes = AssetDatabase.FindAssets("t:Scene", new[] { "Assets/PaperDefense/Scenes/Tests" });
+            Assert.That(allScenes.Length, Is.EqualTo(26));
+            // Independent visual galleries are exercised by NotebookArtStandSceneTests;
+            // the original 23 scenes each still require their isolated simulation driver.
+            string[] paths = Array.FindAll(allScenes, guid => {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                return !path.EndsWith("/24_TowerArt.unity", StringComparison.Ordinal)
+                    && !path.EndsWith("/25_EnemyAnimation.unity", StringComparison.Ordinal)
+                    && !path.EndsWith("/26_InkEffects.unity", StringComparison.Ordinal);
+            });
             Assert.That(paths.Length, Is.EqualTo(23));
             Array.Sort(paths, (a, b) => StringComparer.Ordinal.Compare(AssetDatabase.GUIDToAssetPath(a), AssetDatabase.GUIDToAssetPath(b)));
             foreach (string guid in paths)

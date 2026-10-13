@@ -50,6 +50,8 @@ namespace PaperDefense.Core
             Ink-=price;well.Active=true;well.Health=Math.Max(1,well.MaxHealth);
             // An assault already in progress cannot be counted as a fully protected wave.
             well.EligibleWave=WaveIndex+1;well.Threatened=false;flowDirty=true;StructureVisualVersion++;
+            EventBuffer.Publish(TickIndex,SimulationEventKind.InkWellActivated,Center(well.Cell),Center(well.Cell),default,
+                entityId:well.Id,simulationSeconds:Elapsed);
             return true;
         }
 
@@ -57,9 +59,11 @@ namespace PaperDefense.Core
         {
             if(damage<=0||float.IsNaN(damage)||float.IsInfinity(damage))return;
             if(index < -1)return;
-            if(index==-1){BaseHealth=Math.Max(0,BaseHealth-damage);return;}
+            if(index==-1){BaseHealth=Math.Max(0,BaseHealth-damage);
+                EventBuffer.Publish(TickIndex,SimulationEventKind.BaseHit,Center(BaseCell),Center(BaseCell),default,simulationSeconds:Elapsed);return;}
             if(index>=wells.Count||!wells[index].Active)return;
             var well=wells[index];well.Health=Math.Max(0,well.Health-damage);
+            EventBuffer.Publish(TickIndex,SimulationEventKind.InkWellHit,Center(well.Cell),Center(well.Cell),default,entityId:well.Id,simulationSeconds:Elapsed);
             if(well.Health>0)return;
             well.Active=false;well.Threatened=false;well.EligibleWave=int.MaxValue;
             flowDirty=true;StructureVisualVersion++;

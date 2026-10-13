@@ -102,9 +102,11 @@ namespace PaperDefense.Core
         public readonly float Remaining,Duration,Radius;
         public readonly StructureKind Weapon;
         public readonly string WeaponId;
+        public readonly int SourceStructureId,MountSlotIndex;
+        public readonly long ActionId;
         public readonly FootprintGeometry? ImpactFootprint;
         internal ProjectileView(MortarProjectile p)
-        {Id=p.Id;From=p.From;To=p.To;Remaining=p.Remaining;Duration=p.Duration;Radius=p.Radius;Weapon=p.Weapon;WeaponId=p.WeaponId;ImpactFootprint=p.ImpactFootprint;}
+        {Id=p.Id;From=p.From;To=p.To;Remaining=p.Remaining;Duration=p.Duration;Radius=p.Radius;Weapon=p.Weapon;WeaponId=p.WeaponId;ImpactFootprint=p.ImpactFootprint;SourceStructureId=p.SourceStructureId;MountSlotIndex=p.MountSlotIndex;ActionId=p.ActionId;}
     }
 
     public sealed class RunReadModel : IRunReadModel

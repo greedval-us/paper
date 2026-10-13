@@ -24,8 +24,17 @@ namespace PaperDefense.Tests
                 string serialized = File.ReadAllText(path);
                 Assert.That(serialized, Does.Contain("scenario:"), path + " must bind scenario data.");
             }
+            foreach (string name in PaperDefense.Editor.NotebookArtSceneTools.SceneNames)
+            {
+                string path = "Assets/PaperDefense/Scenes/Tests/" + name + ".unity";
+                Assert.That(AssetDatabase.LoadAssetAtPath<SceneAsset>(path), Is.Not.Null, path);
+                string serialized = File.ReadAllText(path);
+                Assert.That(serialized, Does.Contain("preset:"), path + " must bind current tower content.");
+                Assert.That(serialized, Does.Contain("textResources:"), path + " must bind resource text.");
+                Assert.That(serialized, Does.Not.Contain("scenario:"), path + " is an independent art stand.");
+            }
             Assert.That(AssetDatabase.FindAssets("t:Scene", new[] { "Assets/PaperDefense/Scenes/Tests" }).Length,
-                Is.EqualTo(23));
+                Is.EqualTo(SceneNames.Length + PaperDefense.Editor.NotebookArtSceneTools.SceneNames.Length));
         }
     }
 }

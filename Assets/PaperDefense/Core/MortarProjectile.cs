@@ -16,6 +16,9 @@ namespace PaperDefense.Core
         public float Damage { get; internal set; }
         public StructureKind Weapon { get; internal set; }
         public string WeaponId { get; internal set; }
+        public int SourceStructureId { get; internal set; }
+        public int MountSlotIndex { get; internal set; } = -1;
+        public long ActionId { get; internal set; }
         internal WeaponDefinition Definition;
         public InkColor Color { get; internal set; }
         internal ColorEffectPayload EffectPayload;

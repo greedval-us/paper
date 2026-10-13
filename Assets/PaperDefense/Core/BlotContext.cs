@@ -37,7 +37,7 @@ namespace PaperDefense.Core
             return found;
         }
 
-        internal static int Clear(IReadOnlyList<BlotState> blots, Cell center, float radius)
+        internal static int Clear(IReadOnlyList<BlotState> blots, Cell center, float radius,System.Action<Cell> onCleared=null)
         {
             if (blots == null || !Finite(radius) || radius < 0) return 0;
             double radiusSquared = (double)radius * radius;
@@ -49,6 +49,7 @@ namespace PaperDefense.Core
                 double dx = (double)blot.Cell.X - center.X, dy = (double)blot.Cell.Y - center.Y;
                 if (dx * dx + dy * dy > radiusSquared) continue;
                 blot.Remaining = 0;
+                onCleared?.Invoke(blot.Cell);
                 count++;
             }
             return count;

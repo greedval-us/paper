@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using PaperDefense.Core;
 
@@ -262,6 +263,10 @@ namespace PaperDefense.Tests
             Assert.That(game.StructureAt(new Cell(14, 12)).IsComplete, Is.True);
             Assert.That(game.StructureAt(new Cell(14, 12)).Health, Is.EqualTo(90));
             Assert.That(game.BaseHealth, Is.EqualTo(500));
+            var impact=game.EventBuffer.Single(e=>e.Kind==SimulationEventKind.EnemyGlobImpact);
+            Assert.That(impact.To.X,Is.EqualTo(14).Within(.00001),"The visual impact belongs to the actual wall entry boundary.");
+            Assert.That(impact.To.Y,Is.EqualTo(12.5f).Within(.00001));
+            Assert.That(impact.EntityId,Is.EqualTo(game.EventBuffer.Single(e=>e.Kind==SimulationEventKind.EnemyGlobLaunched).EntityId));
         }
 
         [Test]

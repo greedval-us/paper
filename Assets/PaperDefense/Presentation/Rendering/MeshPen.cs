@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 namespace PaperDefense.Presentation
 {
@@ -19,8 +20,7 @@ namespace PaperDefense.Presentation
             vertices = new List<Vector3>(capacity);
             colors = new List<Color32>(capacity);
             indices = new List<int>(capacity * 3 / 2);
-            mesh.indexFormat = IndexFormat.UInt32;
-            mesh.MarkDynamic();
+            if (mesh != null) { mesh.indexFormat = IndexFormat.UInt32; mesh.MarkDynamic(); }
         }
 
         public void Clear()
@@ -150,12 +150,23 @@ namespace PaperDefense.Presentation
 
         public void Upload()
         {
+            if (mesh == null) return;
             mesh.Clear(false);
             if (vertices.Count == 0) return;
             mesh.SetVertices(vertices);
             mesh.SetColors(colors);
             mesh.SetTriangles(indices, 0, false);
             mesh.RecalculateBounds();
+        }
+
+        /// <summary>The UI uses the same composition, primitives and ordering as the world batch.</summary>
+        public void CopyTo(VertexHelper target, Vector2 origin, float scale)
+        {
+            int start = target.currentVertCount;
+            for (int i = 0; i < vertices.Count; i++)
+                target.AddVert(origin + new Vector2(vertices[i].x, vertices[i].y) * scale, colors[i], Vector2.zero);
+            for (int i = 0; i < indices.Count; i += 3)
+                target.AddTriangle(start + indices[i], start + indices[i + 1], start + indices[i + 2]);
         }
 
         public static Color Alpha(Color color, float alpha) { color.a = alpha; return color; }

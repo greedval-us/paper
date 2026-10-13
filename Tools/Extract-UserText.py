@@ -197,8 +197,40 @@ def chain(source, tokens, literal):
     return tokens[start].start(), tokens[end-1].end(), template, args
 
 
+def diagnostic_tokens(tokens):
+    """Bound diagnostic expressions by syntax tokens, rather than physical lines."""
+    code = [(index, token[0]) for index, token in enumerate(tokens)
+            if not token[0].startswith(('//', '/*'))]
+    diagnostic = set()
+    opening = {'(': ')', '[': ']', '{': '}'}
+    throw_boundaries = {';', ',', ':', ')', ']', '}'}
+    log_methods = {'Log', 'LogError', 'LogWarning', 'LogException'}
+    for position, (index, word) in enumerate(code):
+        if word == 'throw':
+            nesting = []
+            for item_index, item in code[position + 1:]:
+                if not nesting and item in throw_boundaries: break
+                diagnostic.add(item_index)
+                if item in opening: nesting.append(opening[item])
+                elif nesting and item == nesting[-1]: nesting.pop()
+        elif word in log_methods and position + 1 < len(code) and code[position + 1][1] == '(':
+            # Preserve bare diagnostic helpers and UnityEngine.Debug.Log* calls;
+            # unrelated UI/domain objects may also have a method named Log.
+            if position and code[position - 1][1] == '.':
+                if position < 2 or code[position - 2][1] != 'Debug': continue
+            depth = 0
+            for item_index, item in code[position + 1:]:
+                diagnostic.add(item_index)
+                if item == '(': depth += 1
+                elif item == ')':
+                    depth -= 1
+                    if depth == 0: break
+    return diagnostic
+
+
 def extract(source, entries, include_diagnostics=False):
     tokens = lex(source)
+    diagnostics = set() if include_diagnostics else diagnostic_tokens(tokens)
     replacements, skipped, consumed = [], [], -1
     for i, token in enumerate(tokens):
         raw = token[0]
@@ -210,7 +242,7 @@ def extract(source, entries, include_diagnostics=False):
         line = source[statement_start:token.start()]
         if re.search(r'\[\s*(?:Header|Tooltip|CreateAssetMenu|MenuItem|ContextMenu)\b', line):
             skipped.append((token.start(), 'attribute', value)); continue
-        if not include_diagnostics and re.search(r'\bthrow\b|\b(?:Debug\.)?Log(?:Error|Warning|Exception)?\s*\(', line):
+        if i in diagnostics:
             skipped.append((token.start(), 'diagnostic', value)); continue
         combined = None if interpolated else chain(source, tokens, i)
         # An earlier literal inside a nested operand may already own part of this span.

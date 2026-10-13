@@ -384,7 +384,7 @@ namespace PaperDefense.Core
                 if (DistanceSquared(enemy.Position, TargetPoint(enemy)) <= rules.Combat.ObjectiveContactDistance * rules.Combat.ObjectiveContactDistance)
                 {
                     if (enemy.AttackCooldown <= 0)
-                    { DamageObjective(enemy.ObjectiveIndex, Math.Max(0, definition.Damage)); enemy.AttackCooldown = Math.Max(rules.Combat.MinimumActionInterval, definition.AttackInterval); }
+                    { PublishEnemyAttack(enemy,TargetPoint(enemy)); DamageObjective(enemy.ObjectiveIndex, Math.Max(0, definition.Damage)); enemy.AttackCooldown = Math.Max(rules.Combat.MinimumActionInterval, definition.AttackInterval); }
                     continue;
                 }
                 Cell destination = CellOf(enemy.Destination);
@@ -400,6 +400,7 @@ namespace PaperDefense.Core
                         {
                             float siege = Math.Max(0, definition.StructureDamageMultiplier);
                             float damage = DamageRules.StructureDamage(Math.Max(0, definition.Damage) * siege, obstacle, rules);
+                            PublishEnemyAttack(enemy,Center(obstacle.Cell));
                             obstacle.Health = Math.Max(0, obstacle.Health - damage);
                             enemy.AttackCooldown = Math.Max(rules.Combat.MinimumActionInterval, definition.AttackInterval);
                             if (obstacle.Health <= 0) RemoveStructure(obstacle, true);
@@ -529,7 +530,7 @@ namespace PaperDefense.Core
             {
                 Statistics.RecordLoss(structure.Cell, TickIndex, Elapsed, structure.Kind, structure.Tier, structure.PaidInk,structure.ContentId);
                 EventBuffer.Publish(TickIndex, SimulationEventKind.StructureDestroyed, Center(structure.Cell), Center(structure.Cell),
-                    structure.Kind, entityId: structure.Id,weaponId:structure.ContentId);
+                    structure.Kind, entityId: structure.Id,weaponId:structure.ContentId,simulationSeconds:Elapsed);
             }
             grid[structure.Cell.Y * rules.Width + structure.Cell.X] = null;
             structures.Remove(structure);

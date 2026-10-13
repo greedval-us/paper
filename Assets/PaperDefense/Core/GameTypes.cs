@@ -253,6 +253,7 @@ namespace PaperDefense.Core
         internal float SpeedScale = 1;
         internal Point2 Destination;
         internal bool HasDestination;
+        internal bool VisualDeathPublished;
     }
 
     public readonly struct ShotEvent
@@ -261,10 +262,14 @@ namespace PaperDefense.Core
         public readonly StructureKind Kind;
         public readonly string WeaponId;
         public readonly float Radius;
+        public readonly int SourceStructureId, MountSlotIndex;
+        public readonly long ActionId;
+        public readonly double SimulationSeconds;
         public ShotEvent(Point2 from, Point2 to, StructureKind kind, float radius)
-        { From = from; To = to; Kind = kind; Radius = radius; WeaponId = LegacyContentIds.Weapon(kind); }
-        public ShotEvent(Point2 from,Point2 to,StructureKind kind,float radius,string weaponId)
-        {From=from;To=to;Kind=kind;Radius=radius;WeaponId=weaponId;}
+            : this(from,to,kind,radius,LegacyContentIds.Weapon(kind)) { }
+        public ShotEvent(Point2 from,Point2 to,StructureKind kind,float radius,string weaponId,
+            int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0,double simulationSeconds=0)
+        {From=from;To=to;Kind=kind;Radius=radius;WeaponId=weaponId;SourceStructureId=sourceStructureId;MountSlotIndex=mountSlotIndex;ActionId=actionId;SimulationSeconds=simulationSeconds;}
     }
 
     public sealed class BuildQuote

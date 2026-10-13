@@ -156,7 +156,7 @@ namespace PaperDefense.Tests
                 events.Publish(2,SimulationEventKind.ProjectileImpact,new Point2(1,1),new Point2(8,8),StructureKind.Mortar,2);
                 game.View.AddEvent(events[events.Count-1]);
             }
-            Assert.That(game.View.ActiveVisualEffects,Is.EqualTo(1024));
+            Assert.That(game.View.ActiveVisualEffects,Is.EqualTo(NotebookVisualThemeAsset.Default?.MaximumEffects ?? 256));
         }
 
         [Test] public void ScriptableBalanceCopiesSettingsWithoutSharingSessionDefinitions()

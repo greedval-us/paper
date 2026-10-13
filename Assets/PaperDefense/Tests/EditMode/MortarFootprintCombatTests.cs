@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using PaperDefense.Core;
 
@@ -70,7 +71,7 @@ namespace PaperDefense.Tests
             Assert.That(weapons.Projectiles[0].ImpactFootprint.Value.ForwardRadius, Is.EqualTo(2));
             Assert.That(weapons.Projectiles[1].ImpactFootprint.Value.ForwardRadius, Is.EqualTo(2 * Math.Sqrt(3)).Within(.000001));
             var snapshot = new ProjectileView(weapons.Projectiles[1]);
-            Assert.That(snapshot.ImpactFootprint, Is.EqualTo(events[1].ImpactFootprint));
+            Assert.That(snapshot.ImpactFootprint, Is.EqualTo(events.Where(e=>e.Kind==SimulationEventKind.ProjectileLaunched).Last().ImpactFootprint));
             enemies[1].Position = new Point2(10.5f, 16.5f); // ellipse only
             enemies[2].Position = new Point2(12.3f, 13.5f); // circle only
             enemies[3].Position = new Point2(12.5f, 15.5f); // bounding circle only
@@ -83,7 +84,7 @@ namespace PaperDefense.Tests
             Assert.That(enemies[3].Health, Is.EqualTo(100));
             Assert.That(stats.Damage(StructureKind.Mortar), Is.EqualTo(20));
             Assert.That(enemies.FindAll(e => e.BlueRemaining > 0).Count, Is.EqualTo(1));
-            Assert.That(events[3].ImpactFootprint, Is.EqualTo(snapshot.ImpactFootprint));
+            Assert.That(events.Where(e=>e.Kind==SimulationEventKind.ProjectileImpact).Last().ImpactFootprint, Is.EqualTo(snapshot.ImpactFootprint));
         }
         [Test] public void RealImpactIncludesTranslatedForwardAxisBoundary()
         {

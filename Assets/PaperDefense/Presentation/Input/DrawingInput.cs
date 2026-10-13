@@ -26,7 +26,7 @@ namespace PaperDefense.Presentation
         public string PreviewReason { get; private set; } = "";
         public Cell HoverCell { get; private set; }
         public bool HasHover { get; private set; }
-        public bool ShowRanges { get; private set; }
+        public bool ShowRanges => view != null && view.ShowRanges;
         public float Zoom { get; private set; } = 1;
         public Vector2 CameraCenter { get; private set; }
         public event Action SelectionChanged;
@@ -241,7 +241,7 @@ namespace PaperDefense.Presentation
                 if (k.qKey.wasPressedThisFrame) SelectTier((MaterialTier)(((int)Tier + 1) % 3));
                 if (k.spaceKey.wasPressedThisFrame) run.TogglePause();
                 if (k.escapeKey.wasPressedThisFrame) Cancel();
-                if (k.tabKey.wasPressedThisFrame) { ShowRanges = !ShowRanges; view.ShowRanges = ShowRanges; }
+                if (k.tabKey.wasPressedThisFrame) view.ShowRanges = !view.ShowRanges;
                 return;
             }
             if (k.digit1Key.wasPressedThisFrame) SelectSlot(0);
@@ -260,7 +260,7 @@ namespace PaperDefense.Presentation
             if (k.fKey.wasPressedThisFrame) run.ToggleSpeed();
             if (k.rKey.wasPressedThisFrame) run.Restart();
             if (k.escapeKey.wasPressedThisFrame) Cancel();
-            if (k.tabKey.wasPressedThisFrame) { ShowRanges = !ShowRanges; view.ShowRanges = ShowRanges; }
+            if (k.tabKey.wasPressedThisFrame) view.ShowRanges = !view.ShowRanges;
             if (k.pKey.wasPressedThisFrame && HasHover)
             {
                 var structure = run.Session.StructureAt(HoverCell);

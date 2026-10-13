@@ -15,9 +15,16 @@ namespace PaperDefense.Core
 
         private CorpseBlotSystem GetCorpseBlots()
         {
-            if (corpseBlots == null) corpseBlots = new CorpseBlotSystem(rules.Width, rules.Height);
+            if (corpseBlots == null) corpseBlots = new CorpseBlotSystem(rules.Width, rules.Height,PublishBlotEvent);
             return corpseBlots;
         }
+
+        private void PublishBlotEvent(SimulationEventKind kind,Cell cell)
+            => EventBuffer.Publish(TickIndex,kind,Center(cell),Center(cell),default,simulationSeconds:Elapsed);
+
+        private void PublishEnemyAttack(EnemyState enemy,Point2 to)
+            => EventBuffer.Publish(TickIndex,SimulationEventKind.EnemyAttack,enemy.Position,to,default,entityId:enemy.Id,
+                simulationSeconds:Elapsed,enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier);
 
         public bool TryBlotter(Cell cell, out string reason)
         {
@@ -45,7 +52,7 @@ namespace PaperDefense.Core
                 var enemy = enemies[i];
                 if (enemy.Health <= 0) continue;
                 if (enemy.BlotRemaining > 0 || enemy.RedRemaining > 0 || enemy.BlueRemaining > 0 || enemy.GreenRemaining > 0)
-                    EnemyEffects.Advance(enemy, delta, Statistics, enemyEffects, Mechanics.CorpseBlots ? rules.BlotReduction : 0);
+                    EnemyEffects.Advance(enemy, delta, Statistics, enemyEffects, Mechanics.CorpseBlots ? rules.BlotReduction : 0,EventBuffer,TickIndex,Elapsed);
             }
         }
 
@@ -60,7 +67,11 @@ namespace PaperDefense.Core
                 var enemy = enemies[i];
                 if (enemy.Health <= 0) continue;
                 if (system.TryConsume(CellOf(enemy.Position)))
+                {
                     enemy.BlotRemaining = Math.Max(enemy.BlotRemaining, Math.Max(0, rules.BlotBuffSeconds));
+                    EventBuffer.Publish(TickIndex,SimulationEventKind.BlotAbsorbed,Center(CellOf(enemy.Position)),enemy.Position,default,
+                        entityId:enemy.Id,simulationSeconds:Elapsed,enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier);
+                }
             }
             system.FinishStep();
         }
@@ -68,6 +79,7 @@ namespace PaperDefense.Core
         private void OnEnemyDeath(EnemyState enemy)
         {
             enemy.WindingUp = false; enemy.WindupRemaining = 0;
+            EnemyEffects.PublishDeath(enemy,EventBuffer,TickIndex,Elapsed);
             if (!Mechanics.CorpseBlots || rules.BlotLifetime <= 0) return;
             GetCorpseBlots().Add(CellOf(enemy.Position), rules.BlotLifetime);
         }
@@ -84,12 +96,17 @@ namespace PaperDefense.Core
                 // Admission bounds live glob state even under extreme custom firing rates.
                 if (enemyGlobs.Count >= grid.Length * Math.Max(1, rules.MaxEnemiesPerCell)) return true;
                 float duration = Math.Max(0, definition.ProjectileSeconds);
-                enemyGlobs.Add(new EnemyGlob
+                var glob=new EnemyGlob
                 {
                     Id = nextEnemyGlobId++, From = enemy.Position, To = enemy.RangedTarget,
                     Remaining = duration, Duration = duration, Damage = Math.Max(0, definition.Damage),
-                    ObjectiveIndex = enemy.RangedObjectiveIndex
-                });
+                    ObjectiveIndex = enemy.RangedObjectiveIndex,
+                    SourceEnemyId=enemy.Id,SourceEnemyKind=enemy.Kind,SourceEnemyDrawingTier=enemy.DrawingTier
+                };
+                enemyGlobs.Add(glob);
+                PublishEnemyAttack(enemy,glob.To);
+                EventBuffer.Publish(TickIndex,SimulationEventKind.EnemyGlobLaunched,glob.From,glob.To,default,
+                    entityId:glob.Id,travelSeconds:duration,simulationSeconds:Elapsed,enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier);
                 enemy.WindingUp = false;
                 enemy.RangedCooldown = Math.Max(rules.Combat.MinimumActionInterval, definition.AttackInterval);
                 return true;
@@ -124,8 +141,9 @@ namespace PaperDefense.Core
                 float current = glob.Duration <= .000001f ? 1 : 1 - glob.Remaining / glob.Duration;
                 var from = LerpPoint(glob.From, glob.To, previous);
                 var to = LerpPoint(glob.From, glob.To, current);
-                if (TraceGlobBlocker(from, to, out var blocker))
+                if (TraceGlobBlocker(from, to, out var blocker,out var impact))
                 {
+                    PublishGlobImpact(glob,impact);
                     blocker.Health = Math.Max(0, blocker.Health - DamageRules.StructureDamage(glob.Damage, blocker, rules));
                     if (blocker.Health <= 0) RemoveStructure(blocker, true);
                     else RefreshHealthBand(blocker);
@@ -133,6 +151,7 @@ namespace PaperDefense.Core
                 }
                 if (glob.Remaining <= .000001f)
                 {
+                    PublishGlobImpact(glob,glob.To);
                     if (!glob.TargetsStructure) DamageObjective(glob.ObjectiveIndex, glob.Damage);
                     continue;
                 }
@@ -141,13 +160,21 @@ namespace PaperDefense.Core
             if (write < enemyGlobs.Count) enemyGlobs.RemoveRange(write, enemyGlobs.Count - write);
         }
 
+        private void PublishGlobImpact(EnemyGlob glob,Point2 point)
+            =>EventBuffer.Publish(TickIndex,SimulationEventKind.EnemyGlobImpact,glob.From,point,default,entityId:glob.Id,
+                simulationSeconds:Elapsed,enemyKind:glob.SourceEnemyKind,enemyDrawingTier:glob.SourceEnemyDrawingTier);
+
         private static Point2 LerpPoint(Point2 from, Point2 to, float fraction) =>
             new Point2(from.X + (to.X - from.X) * fraction, from.Y + (to.Y - from.Y) * fraction);
 
         /// <summary>Grid DDA checks only cells crossed this step, including new interception walls.</summary>
         private bool TraceGlobBlocker(Point2 from, Point2 to, out StructureState blocker)
+            =>TraceGlobBlocker(from,to,out blocker,out _);
+
+        private bool TraceGlobBlocker(Point2 from, Point2 to, out StructureState blocker,out Point2 impact)
         {
             blocker = null;
+            impact=to;float entry=0;
             Cell cell = CellOf(from), end = CellOf(to);
             float dx = to.X - from.X, dy = to.Y - from.Y;
             int sx = dx > 0 ? 1 : dx < 0 ? -1 : 0, sy = dy > 0 ? 1 : dy < 0 ? -1 : 0;
@@ -158,16 +185,18 @@ namespace PaperDefense.Core
             for (int visited = 0; visited <= rules.Width + rules.Height + 2; visited++)
             {
                 var structure = StructureAt(cell);
-                if (IsBlocker(structure)) { blocker = structure; return true; }
+                if (IsBlocker(structure)) { blocker = structure;impact=LerpPoint(from,to,Math.Max(0,Math.Min(1,entry))); return true; }
                 if (cell == end) return false;
                 if (nextX < nextY)
                 {
                     if (nextX > 1.000001f) return false;
+                    entry=nextX;
                     cell = new Cell(cell.X + sx, cell.Y); nextX += deltaX;
                 }
                 else
                 {
                     if (nextY > 1.000001f) return false;
+                    entry=nextY;
                     cell = new Cell(cell.X, cell.Y + sy); nextY += deltaY;
                 }
             }

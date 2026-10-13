@@ -183,6 +183,7 @@ namespace PaperDefense.Presentation
                 string id = chassisIds[i]; var definition = run.Content.GetChassis(id);
                 chassisButtons[i] = Button(chassis, "Chassis " + CatalogButtonName(definition), new Rect(i % 2 * 485, i / 2 * 56, 475, 49),
                     UserText.Message("workshop.chassis_button", definition.ButtonLabel, definition.Capacity), () => SetDraft(id, Draft.FirstWeaponId, Draft.SecondWeaponId, Draft.ModuleSelections, id));
+                NotebookArtGraphic.Attach(chassisButtons[i], id);
             }
             string[] catalogueNames = { "First weapon catalogue", "Second weapon catalogue", "Third weapon catalogue" };
             string[] buttonPrefixes = { "First ", "Second ", "Third " };
@@ -198,6 +199,7 @@ namespace PaperDefense.Presentation
                     string id = weaponIds[i]; var definition = run.Content.GetWeapon(id);
                     buttons[i] = Button(catalogue, buttonPrefixes[mount] + CatalogButtonName(definition), new Rect(i % 2 * 157, i / 2 * 49, 149, 43), definition.ButtonLabel, () => SetWeaponMount(selectedMount, id));
                     buttons[i].GetComponentInChildren<Text>().fontSize = 16;
+                    NotebookArtGraphic.Attach(buttons[i], id);
                 }
                 if (mount > 0)
                 {
@@ -221,6 +223,7 @@ namespace PaperDefense.Presentation
                 float x = index % columns * 240, y = index / columns * 55;
                 moduleButtons[i] = Button(parent, "Module " + CatalogButtonName(part), new Rect(x, y, part.Repeatable ? 180 : 220, 47), part.ButtonLabel, () => ToggleModule(id));
                 moduleButtons[i].GetComponentInChildren<Text>().fontSize = 15;
+                NotebookArtGraphic.Attach(moduleButtons[i], id);
                 if (part.Repeatable) Button(parent, "Remove module " + id, new Rect(x + 187, y, 33, 47), UserText.Message("common.remove_symbol"), () => RemoveModule(id));
             }
             BuildFocusedPreview(new Rect(1046, 126, 525, 740), true);
@@ -328,6 +331,7 @@ namespace PaperDefense.Presentation
                 chassisButtons[i] = Button(chassisList.Content, "Chassis " + CatalogButtonName(definition), new Rect(i % 2 * 250, i / 2 * 49, 235, 44),
                     UserText.Message("workshop.chassis_button", definition.ButtonLabel, definition.Capacity), () => SetDraft(id, Draft.FirstWeaponId, Draft.SecondWeaponId, Draft.ModuleSelections, id));
                 chassisButtons[i].GetComponentInChildren<Text>().fontSize = 14;
+                NotebookArtGraphic.Attach(chassisButtons[i], id);
             }
             Label(left, UserText.Message("copy.2557f70bf5dad935"), new Rect(18, 196, 490, 24), 18, NotebookPalette.Navy, true);
             var firstList = new CatalogScrollList(left, "First weapon catalogue", new Rect(18, 221, 490, 45), weaponIds.Length, 4, 32, 6);
@@ -340,6 +344,7 @@ namespace PaperDefense.Presentation
                 secondWeapons[i] = Button(secondList.Content, "Second " + CatalogButtonName(definition), new Rect(i % 4 * 123, i / 4 * 38, 115, 32), definition.ButtonLabel, () => SetDraft(Draft.ChassisId, Draft.FirstWeaponId, id, Draft.ModuleSelections, id));
                 thirdWeapons[i] = Button(thirdList.Content, "Third " + CatalogButtonName(definition), new Rect(i % 4 * 123, i / 4 * 38, 115, 32), definition.ButtonLabel, () => SetWeaponMount(2, id));
                 firstWeapons[i].GetComponentInChildren<Text>().fontSize = secondWeapons[i].GetComponentInChildren<Text>().fontSize = thirdWeapons[i].GetComponentInChildren<Text>().fontSize = 13;
+                NotebookArtGraphic.Attach(firstWeapons[i], id); NotebookArtGraphic.Attach(secondWeapons[i], id); NotebookArtGraphic.Attach(thirdWeapons[i], id);
             }
             Label(left, UserText.Message("copy.8fbc6e7635c25190"), new Rect(18, 267, 490, 24), 18, NotebookPalette.Navy, true);
             Label(left, UserText.Message("workshop.third_mount"), new Rect(18, 338, 490, 24), 18, NotebookPalette.Navy, true);
@@ -365,6 +370,7 @@ namespace PaperDefense.Presentation
                 int columns = armor ? 1 : 3;
                 moduleButtons[i] = Button(moduleParent, "Module " + CatalogButtonName(part), new Rect(index % columns * 123, index / columns * 39, width, 33), part.ButtonLabel, () => ToggleModule(id));
                 moduleButtons[i].GetComponentInChildren<Text>().fontSize = 12;
+                NotebookArtGraphic.Attach(moduleButtons[i], id);
                 if (part.Repeatable) Button(moduleParent, "Remove module " + id, new Rect(index % columns * 123 + 88, index / columns * 39, 27, 33), UserText.Message("common.remove_symbol"), () => RemoveModule(id));
             }
             Button(left, "New blueprint", new Rect(18, 487, 140, 43), UserText.Message("copy.c1e5de3d705e623d"), NewDraft);
@@ -827,12 +833,25 @@ namespace PaperDefense.Presentation
     public sealed class BlueprintSketch : Graphic
     {
         TowerBlueprint blueprint;
+        NotebookAnimationState previewAnimation;
+        Func<int, Point2> previewAim;
+        double previewSeconds;
+        public void SetPreviewPose(NotebookAnimationState animation, double seconds, Func<int, Point2> aim)
+        { previewAnimation = animation; previewSeconds = seconds; previewAim = aim; SetVerticesDirty(); }
         public bool ShowReference { get; set; }
         public void SetBlueprint(TowerBlueprint value) { if (blueprint == value) return; blueprint = value; SetVerticesDirty(); }
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear(); if (blueprint == null || DrawingTemplateCatalog.Create(blueprint).Count == 0) return;
             Vector2 center = rectTransform.rect.center;
+            if (!ShowReference && (blueprint.Origin == DrawingOrigin.PlayerDrawing || NotebookTowerComposition.UsesResourceArt(blueprint)))
+            {
+                float size = Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .68f;
+                if (previewAnimation != null)
+                    NotebookTowerComposition.DrawPreviewUI(vh, blueprint, center, size, previewAnimation, 1, previewSeconds, previewAim);
+                else NotebookTowerComposition.DrawUI(vh, blueprint, center, size);
+                return;
+            }
             if (ShowReference || blueprint.Origin == DrawingOrigin.PlayerDrawing || ReferenceDrawingCache.UsesTemplateVisual(blueprint))
             {
                 float scale = Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .68f;
@@ -940,105 +959,4 @@ namespace PaperDefense.Presentation
         }
     }
 
-    /// <summary>Playback of value snapshots captured from the actual trial simulation.</summary>
-    [RequireComponent(typeof(CanvasRenderer))]
-    public sealed class TrialLaneSketch : Graphic
-    {
-        TrialReport report;
-        int frameIndex;
-        float started, duration;
-        public bool HasRecording => report != null && report.Frames.Count > 0;
-        public float PlaybackSeconds => Mathf.Repeat((Time.unscaledTime - started) * 4, Mathf.Max(.1f, duration + .5f));
-        public void SetResult(TrialReport value, float startTime, float totalDuration)
-        { report = value; started = startTime; duration = totalDuration; frameIndex = 0; SetVerticesDirty(); }
-        void Update()
-        {
-            if (!HasRecording) return;
-            float seconds = PlaybackSeconds;
-            int next = 0;
-            for (int i = 1; i < report.Frames.Count && report.Frames[i].Seconds <= seconds; i++) next = i;
-            if (next == frameIndex) return;
-            frameIndex = next; SetVerticesDirty();
-        }
-        protected override void OnPopulateMesh(VertexHelper vh)
-        {
-            vh.Clear(); if (!HasRecording) return;
-            Rect rect = rectTransform.rect;
-            Vector2 low = rect.min + new Vector2(8, 7), high = rect.max - new Vector2(8, 7);
-            for (int y = 8; y <= 36; y += 4)
-                BlueprintSketch.Line(vh, Point(8, y, low, high), Point(50, y, low, high), 1, MeshPen.Alpha(NotebookPalette.Blue, .12f));
-            for (int x = 8; x <= 50; x += 4)
-                BlueprintSketch.Line(vh, Point(x, 8, low, high), Point(x, 36, low, high), 1, MeshPen.Alpha(NotebookPalette.Blue, .12f));
-            BlueprintSketch.Line(vh, Point(48, 8, low, high), Point(48, 36, low, high), 2, MeshPen.Alpha(NotebookPalette.Red, .65f));
-            var frame = report.Frames[frameIndex];
-            foreach (var blot in frame.Blots)
-            {
-                Vector2 at = Point(blot.Cell.X + .5f, blot.Cell.Y + .5f, low, high);
-                BlueprintSketch.Ring(vh, at, 2.7f, 2, MeshPen.Alpha(NotebookPalette.Marker, .65f));
-            }
-            foreach (var tower in frame.Towers)
-            {
-                Vector2 at = Point(tower.Cell.X + .5f, tower.Cell.Y + .5f, low, high);
-                if (tower.Health <= 0)
-                { BlueprintSketch.Line(vh, at - Vector2.one * 3, at + Vector2.one * 3, 2, NotebookPalette.Red); continue; }
-                if (tower.Blueprint != null && (tower.Blueprint.Origin == DrawingOrigin.PlayerDrawing || ReferenceDrawingCache.UsesTemplateVisual(tower.Blueprint)))
-                { DrawAuthorTower(vh, tower, low, high); continue; }
-                BlueprintSketch.Ring(vh, at, 4, 2, NotebookPalette.Blue);
-                Vector2 aim = Point(tower.Aim.X, tower.Aim.Y, low, high) - at;
-                if (aim.sqrMagnitude < 1) aim = Vector2.left;
-                Vector2 end = at + aim.normalized * 9;
-                BlueprintSketch.Line(vh, at, end, 2, NotebookPalette.Blue);
-                if (tower.Blueprint != null)
-                    for (int mount = 1; mount < tower.Blueprint.WeaponMounts.Count; mount++)
-                        BlueprintSketch.Line(vh, at + Vector2.up * (mount * 3), end + Vector2.up * (mount * 3), 2, NotebookPalette.Blue);
-                if (tower.Blueprint != null && (tower.Blueprint.Modules & TowerModules.Armor) != 0)
-                    BlueprintSketch.Line(vh, at + new Vector2(4, -4), at + new Vector2(4, 4), 3, NotebookPalette.Navy);
-            }
-            foreach (var enemy in frame.Enemies)
-            {
-                if (enemy.Health <= 0) continue;
-                Vector2 at = Point(enemy.Position.X, enemy.Position.Y, low, high);
-                BlueprintSketch.Ring(vh, at, enemy.Kind == EnemyKind.Gnawer ? 3 : 2, 1.5f, NotebookPalette.Navy);
-                if (enemy.DrawingTier == DrawingTier.Hatched) BlueprintSketch.Line(vh, at - Vector2.one * 2, at + Vector2.one * 2, 1, NotebookPalette.Navy);
-            }
-            foreach (var shot in frame.Shots)
-            {
-                Vector2 from = Point(shot.From.X, shot.From.Y, low, high), to = Point(shot.To.X, shot.To.Y, low, high);
-                if (shot.Kind == StructureKind.Blotter)
-                { BlueprintSketch.Line(vh, from, to, 1, NotebookPalette.Green); BlueprintSketch.Ring(vh, to, Mathf.Max(3, shot.Radius * (high.y - low.y) / 28), 1, NotebookPalette.Green); }
-                else BlueprintSketch.Line(vh, from, to, 1, MeshPen.Alpha(NotebookPalette.Blue, .65f));
-            }
-            foreach (var projectile in frame.Projectiles)
-            {
-                float progress = Mathf.Clamp01(1 - projectile.Remaining / Mathf.Max(.001f, projectile.Duration));
-                Vector2 from = Point(projectile.From.X, projectile.From.Y, low, high), to = Point(projectile.To.X, projectile.To.Y, low, high);
-                Vector2 at = Vector2.Lerp(from, to, progress) + Vector2.up * Mathf.Sin(progress * Mathf.PI) * 15;
-                BlueprintSketch.Ring(vh, at, 2, 2, NotebookPalette.Marker);
-            }
-        }
-        static void DrawAuthorTower(VertexHelper vh, StructureView tower, Vector2 low, Vector2 high)
-        {
-            Point2 origin = new Point2(tower.Cell.X + .5f, tower.Cell.Y + .5f);
-            var drawing = ReferenceDrawingCache.VisibleDrawing(tower.Blueprint);
-            foreach (var template in DrawingTemplateCatalog.Create(tower.Blueprint))
-            {
-                var part = drawing.GetPart(template.BindingId); Point2 pivot = template.Pivot;
-                bool moving = template.Role == DrawingPartRole.Mount;
-                int mountIndex = template.BindingId == DrawingBindings.Mount1 ? 1 : template.BindingId == DrawingBindings.Mount(2) ? 2 : 0;
-                Point2 aim = tower.GetMountAim(mountIndex);
-                float angle = moving && (aim.X != 0 || aim.Y != 0)
-                    ? Mathf.Atan2(aim.Y - origin.Y - pivot.Y, aim.X - origin.X - pivot.X) - Mathf.PI * .5f : 0;
-                float c = Mathf.Cos(angle), s = Mathf.Sin(angle);
-                foreach (var stroke in part.Strokes)
-                    for (int i = 1; i < stroke.Points.Count; i++)
-                    {
-                        var a = stroke.Points[i - 1]; var b = stroke.Points[i];
-                        Vector2 from = Point(origin.X + pivot.X + a.X * c - a.Y * s, origin.Y + pivot.Y + a.X * s + a.Y * c, low, high);
-                        Vector2 to = Point(origin.X + pivot.X + b.X * c - b.Y * s, origin.Y + pivot.Y + b.X * s + b.Y * c, low, high);
-                        BlueprintSketch.Line(vh, from, to, 1, NotebookPalette.Blue);
-                    }
-            }
-        }
-        static Vector2 Point(float x, float y, Vector2 low, Vector2 high) => new Vector2(Mathf.Lerp(low.x, high.x, (x - 8) / 42), Mathf.Lerp(low.y, high.y, (y - 8) / 28));
-    }
 }

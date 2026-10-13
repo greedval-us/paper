@@ -7,7 +7,8 @@ namespace PaperDefense.Core
         static readonly EffectsRules Historical = new EffectsRules();
 
         public static float ApplyHit(EnemyState enemy, float raw, ColorEffectPayload payload, RunStatistics statistics,
-            StructureKind weapon, EffectsRules defenseRules, float blotReduction = .15f,string weaponId=null)
+            StructureKind weapon, EffectsRules defenseRules, float blotReduction = .15f,string weaponId=null,
+            SimulationEventBuffer events=null,long tick=0,double simulationSeconds=0,int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0)
         {
             if (defenseRules == null) throw new ArgumentNullException(nameof(defenseRules));
             if (enemy == null || enemy.Health <= 0 || raw < 0 || float.IsNaN(raw) || float.IsInfinity(raw)) return 0;
@@ -32,6 +33,7 @@ namespace PaperDefense.Core
             float actual = Math.Min(enemy.Health, DamageRules.Apply(raw, Defense(enemy, defenseRules, blotReduction), defenseRules.MaximumDefense));
             enemy.Health = Math.Max(0, enemy.Health - actual);
             statistics?.RecordDamage(weaponId??LegacyContentIds.Weapon(weapon), actual);
+            PublishDamage(enemy,enemy.Health+actual,events,tick,simulationSeconds,weapon,weaponId,sourceStructureId,mountSlotIndex,actionId);
             return actual;
         }
 
@@ -91,10 +93,11 @@ namespace PaperDefense.Core
         public static void Advance(EnemyState enemy, float delta, RunStatistics statistics)
             => Advance(enemy, delta, statistics, Historical);
         public static void Advance(EnemyState enemy, float delta, RunStatistics statistics, EffectsRules rules,
-            float blotReduction = .15f)
+            float blotReduction = .15f,SimulationEventBuffer events=null,long tick=0,double simulationSeconds=0)
         {
             if (rules == null) throw new ArgumentNullException(nameof(rules));
             if (enemy == null || delta <= 0 || float.IsNaN(delta) || float.IsInfinity(delta)) return;
+            float previousHealth=enemy.Health;
             float redActiveSeconds = Math.Min(delta, Math.Max(0, enemy.RedRemaining));
             enemy.BlotRemaining = Math.Max(0, enemy.BlotRemaining - delta);
             if (enemy.BlueEffect != null)
@@ -113,6 +116,7 @@ namespace PaperDefense.Core
             {
                 enemy.RedEffect.Advance(delta, enemy, rules, statistics, blotReduction);
                 SyncRed(enemy);
+                PublishDamage(enemy,previousHealth,events,tick,simulationSeconds,enemy.RedSourceWeapon,enemy.RedSourceWeaponId);
                 return;
             }
             // Directly initialized historical fixtures still use their explicit scalar timers.
@@ -133,6 +137,27 @@ namespace PaperDefense.Core
             }
             if (enemy.Health <= 0) enemy.RedRemaining = 0;
             if (enemy.RedRemaining <= 0) enemy.RedTickRemaining = 0;
+            PublishDamage(enemy,previousHealth,events,tick,simulationSeconds,enemy.RedSourceWeapon,enemy.RedSourceWeaponId);
+        }
+
+        internal static void PublishDamage(EnemyState enemy,float previousHealth,SimulationEventBuffer events,long tick,double simulationSeconds,
+            StructureKind weapon=default,string weaponId=null,int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0)
+        {
+            if(events==null||enemy==null||enemy.Health>=previousHealth)return;
+            events.Publish(tick,SimulationEventKind.EnemyHit,enemy.Position,enemy.Position,weapon,entityId:enemy.Id,weaponId:weaponId,
+                sourceStructureId:sourceStructureId,mountSlotIndex:mountSlotIndex,actionId:actionId,simulationSeconds:simulationSeconds,
+                enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier);
+            PublishDeath(enemy,events,tick,simulationSeconds,weapon,weaponId,sourceStructureId,mountSlotIndex,actionId);
+        }
+
+        internal static void PublishDeath(EnemyState enemy,SimulationEventBuffer events,long tick,double simulationSeconds,
+            StructureKind weapon=default,string weaponId=null,int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0)
+        {
+            if(events==null||enemy==null||enemy.Health>0||enemy.VisualDeathPublished)return;
+            enemy.VisualDeathPublished=true;
+            events.Publish(tick,SimulationEventKind.EnemyDied,enemy.Position,enemy.Position,weapon,entityId:enemy.Id,weaponId:weaponId,
+                sourceStructureId:sourceStructureId,mountSlotIndex:mountSlotIndex,actionId:actionId,simulationSeconds:simulationSeconds,
+                enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier);
         }
 
         static void SyncRed(EnemyState enemy)

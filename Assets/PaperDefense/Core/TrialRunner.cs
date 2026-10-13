@@ -8,6 +8,7 @@ namespace PaperDefense.Core
     /// <summary>A bounded firing-lane fixture using production targeting, projectiles and effects. No profile or rewards.</summary>
     public static class TrialRunner
     {
+        public const int MaximumFrameEvents = 512;
         public static TrialComparison CompareQuality(TowerBlueprint blueprint, GameBalance balance, TrialScenario scenario,
             int budget = 400, int seed = 1337, bool counterfire = false, InkColor color = InkColor.None)
         {
@@ -90,11 +91,14 @@ namespace PaperDefense.Core
             if (blotContext != null)
                 report.Scope = UserText.Message("trial.scope.blots", trial.MaximumTicks * trial.StepSeconds, trial.BlotCount);
             var weapons = new WeaponSystem(balance, qualityOverride, blotContext); var stats = new RunStatistics();
-            var events = new SimulationEventBuffer(32); var shots = new List<ShotEvent>();
+            var events = new SimulationEventBuffer(MaximumFrameEvents); var shots = new List<ShotEvent>();
+            if(blotContext!=null)blotContext.Events=events;
             var enemies = new List<EnemyState>(256);
             var frames = new List<TrialFrame>(trial.MaximumTicks / TrialRules.RecordingStrideTicks + 1);
             var frameShots = new List<ShotEvent>();
             var frameImpacts = new List<SimulationEvent>();
+            var frameEvents = new List<SimulationEvent>();
+            long eventCursor=0,frameDroppedEvents=0;
             frames.Add(new TrialFrame(0, enemies, towers, weapons.Projectiles, frameShots, blotContext?.Marks));
             TrialScenarioDefinition fixture = trial.For(scenario);
             int count = fixture.Count;
@@ -103,6 +107,7 @@ namespace PaperDefense.Core
             for (int tick = 0; tick < trial.MaximumTicks; tick++)
             {
                 report.DurationSeconds = (tick + 1) * delta;
+                if(blotContext!=null){blotContext.Tick=tick+1;blotContext.Seconds=report.DurationSeconds;}
                 spawnClock -= delta;
                 while (spawned < count && spawnClock <= 0)
                 {
@@ -116,7 +121,7 @@ namespace PaperDefense.Core
                     { for(int mount=0;mount<TowerBlueprint.MaximumWeaponMounts;mount++){var state=tower.GetMountState(mount);state.Cooldown=Math.Max(0,state.Cooldown-delta);} }
                 foreach (EnemyState enemy in enemies)
                 {
-                    EnemyEffects.Advance(enemy, delta, stats, effects, mechanics.CorpseBlots ? balance.BlotReduction : 0);
+                    EnemyEffects.Advance(enemy, delta, stats, effects, mechanics.CorpseBlots ? balance.BlotReduction : 0,events,tick+1,report.DurationSeconds);
                     if (enemy.Health <= 0) continue;
                     enemy.Position = new Point2(enemy.Position.X + fixture.Speed * EnemyEffects.MovementMultiplier(enemy, effects, mechanics.CorpseBlots ? balance.BlotSpeedBonus : 0) * delta, enemy.Position.Y);
                     enemy.AttackCooldown = Math.Max(0, enemy.AttackCooldown - delta);
@@ -132,34 +137,45 @@ namespace PaperDefense.Core
                         }
                         if (nearest != null)
                         {
+                            events.Publish(tick+1,SimulationEventKind.EnemyAttack,enemy.Position,new Point2(nearest.Cell.X+.5f,nearest.Cell.Y+.5f),default,
+                                entityId:enemy.Id,simulationSeconds:report.DurationSeconds,enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier);
                             nearest.Health = Math.Max(0, nearest.Health - DamageRules.StructureDamage(trial.CounterfireDamage, nearest, balance));
+                            if(nearest.Health<=0)events.Publish(tick+1,SimulationEventKind.StructureDestroyed,
+                                new Point2(nearest.Cell.X+.5f,nearest.Cell.Y+.5f),new Point2(nearest.Cell.X+.5f,nearest.Cell.Y+.5f),nearest.Kind,
+                                entityId:nearest.Id,weaponId:nearest.ContentId,simulationSeconds:report.DurationSeconds);
                             enemy.AttackCooldown = trial.CounterfireInterval;
                         }
                     }
                 }
                 shots.Clear();
                 weapons.Fire(towers, enemies, shots, 1, 1, delta, tick + 1, stats, events, report.DurationSeconds);
-                foreach (var impact in events)
-                    if (impact.Tick == tick + 1 && impact.Kind == SimulationEventKind.ProjectileImpact && frameImpacts.Count < 128)
-                        frameImpacts.Add(impact);
                 // Visual trails are bounded independently from damage and the live shot list.
                 for (int i = 0; i < shots.Count && frameShots.Count < TrialRules.MaximumFrameShots; i++) frameShots.Add(shots[i]);
                 int write = 0;
                 for (int read = 0; read < enemies.Count; read++)
                 {
                     EnemyState enemy = enemies[read];
-                    if (enemy.Health <= 0) continue;
+                    if (enemy.Health <= 0) {EnemyEffects.PublishDeath(enemy,events,tick+1,report.DurationSeconds);continue;}
                     if (enemy.Position.X >= trial.ExitX) { report.Leaks++; continue; }
                     enemies[write++] = enemy;
                 }
                 if (write < enemies.Count) enemies.RemoveRange(write, enemies.Count - write);
+                if(events.Count>0&&events[0].Sequence>eventCursor+1)frameDroppedEvents+=events[0].Sequence-eventCursor-1;
+                foreach(var value in events)
+                {
+                    if(value.Sequence<=eventCursor)continue;
+                    if(frameEvents.Count<MaximumFrameEvents)frameEvents.Add(value);else frameDroppedEvents++;
+                    if(value.Kind==SimulationEventKind.ProjectileImpact&&frameImpacts.Count<128)frameImpacts.Add(value);
+                    eventCursor=value.Sequence;
+                }
                 bool finished = spawned == count && enemies.Count == 0 && !weapons.HasPendingProjectiles &&
                     (blotContext == null || blotContext.Marks.Count == 0);
                 if ((tick + 1) % TrialRules.RecordingStrideTicks == 0 || finished || tick == trial.MaximumTicks - 1)
                 {
-                    frames.Add(new TrialFrame(report.DurationSeconds, enemies, towers, weapons.Projectiles, frameShots, blotContext?.Marks, frameImpacts));
+                    frames.Add(new TrialFrame(report.DurationSeconds, enemies, towers, weapons.Projectiles, frameShots, blotContext?.Marks, frameImpacts,frameEvents,frameDroppedEvents));
                     frameShots.Clear();
                     frameImpacts.Clear();
+                    frameEvents.Clear();frameDroppedEvents=0;
                 }
                 if (finished) break;
             }
@@ -177,6 +193,9 @@ namespace PaperDefense.Core
         {
             readonly List<BlotState> marks = new List<BlotState>();
             internal IReadOnlyList<BlotState> Marks => marks;
+            internal SimulationEventBuffer Events;
+            internal long Tick;
+            internal double Seconds;
 
             internal TrialBlotContext(Random random, TrialRules trial)
             {
@@ -207,13 +226,16 @@ namespace PaperDefense.Core
 
             public int Clear(Cell center, float radius)
             {
-                int count = BlotQueries.Clear(marks, center, radius);
+                int count = BlotQueries.Clear(marks, center, radius,OnCleared);
                 int write = 0;
                 for (int read = 0; read < marks.Count; read++)
                     if (marks[read].Remaining > 0) marks[write++] = marks[read];
                 if (write < marks.Count) marks.RemoveRange(write, marks.Count - write);
                 return count;
             }
+
+            void OnCleared(Cell cell)=>Events?.Publish(Tick,SimulationEventKind.BlotCleared,
+                new Point2(cell.X+.5f,cell.Y+.5f),new Point2(cell.X+.5f,cell.Y+.5f),default,simulationSeconds:Seconds);
         }
     }
 
@@ -246,9 +268,13 @@ namespace PaperDefense.Core
         public IReadOnlyList<ShotEvent> Shots { get; }
         public IReadOnlyList<BlotView> Blots { get; }
         public IReadOnlyList<SimulationEvent> Impacts { get; }
+        /// <summary>Events since the previous snapshot, each retaining its own simulation timestamp.</summary>
+        public IReadOnlyList<SimulationEvent> Events { get; }
+        public long DroppedEventCount { get; }
 
         internal TrialFrame(float seconds, IReadOnlyList<EnemyState> enemies, IReadOnlyList<StructureState> towers,
-            IReadOnlyList<MortarProjectile> projectiles, IReadOnlyList<ShotEvent> shots, IReadOnlyList<BlotState> blots = null, IReadOnlyList<SimulationEvent> impacts = null)
+            IReadOnlyList<MortarProjectile> projectiles, IReadOnlyList<ShotEvent> shots, IReadOnlyList<BlotState> blots = null, IReadOnlyList<SimulationEvent> impacts = null,
+            IReadOnlyList<SimulationEvent> events=null,long droppedEventCount=0)
         {
             Seconds = seconds;
             var enemyValues = new EnemyView[enemies.Count];
@@ -269,6 +295,9 @@ namespace PaperDefense.Core
             var impactValues = new SimulationEvent[impacts?.Count ?? 0];
             for (int i = 0; i < impactValues.Length; i++) impactValues[i] = impacts[i];
             Impacts = Array.AsReadOnly(impactValues);
+            var eventValues=new SimulationEvent[events?.Count??0];
+            for(int i=0;i<eventValues.Length;i++)eventValues[i]=events[i];
+            Events=Array.AsReadOnly(eventValues);DroppedEventCount=droppedEventCount;
         }
     }
 }

@@ -32,8 +32,9 @@ namespace PaperDefense.Validation
         PressureScenario pressure;
         readonly FixedStepClock clock = new FixedStepClock();
         string status;
+        MechanicsSceneNavigator navigator;
 
-        void Awake() => ResetScenario();
+        void Awake() { navigator = MechanicsSceneNavigator.Attach(gameObject); ResetScenario(); }
 
         public void ResetScenario() => Prepare(false);
         public void ReloadFixture() { if (scenario.focus == MechanicsTestFocus.Profile) Prepare(true); }
@@ -230,6 +231,7 @@ namespace PaperDefense.Validation
             GUILayout.EndArea();
             GUILayout.BeginArea(new Rect(12, Screen.height / scale - 60, width - 24, 52), GUI.skin.box);
             GUILayout.BeginHorizontal();
+            if (GUILayout.Button(Text("hub.back"), GUILayout.Width(150))) navigator.ReturnToHub();
             if (GUILayout.Button(Text("test.reset"))) ResetScenario();
             bool simulationControls = !scenario.workshopMode || scenario.focus == MechanicsTestFocus.Integration &&
                 Prepared && !Controller.InWorkshop;
@@ -282,6 +284,7 @@ namespace PaperDefense.Validation
                 GUILayout.EndHorizontal();
             }
             GUILayout.EndArea(); GUI.matrix = previous;
+            if (!string.IsNullOrEmpty(navigator.LastError)) GUI.Label(new Rect(12, Screen.height - 26, Screen.width - 24, 24), navigator.LastError);
         }
         void DrawObservations(IRunReadModel session, GUIStyle style)
         {

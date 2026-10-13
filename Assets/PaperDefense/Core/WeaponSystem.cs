@@ -25,6 +25,9 @@ namespace PaperDefense.Core
         private readonly EnemyDistanceComparer targetOrder = new EnemyDistanceComparer();
         private int nextProjectileId = 1;
         private double clockSeconds;
+        private long nextActionId, visualTick, visualActionId;
+        private int visualSourceStructureId, visualMountSlotIndex = -1;
+        private SimulationEventBuffer visualEvents;
 
         internal IReadOnlyList<MortarProjectile> Projectiles => projectiles;
         internal bool HasPendingProjectiles => projectiles.Count != 0;
@@ -54,6 +57,7 @@ namespace PaperDefense.Core
             RunStatistics statistics, SimulationEventBuffer events, double? timeSeconds = null)
         {
             clockSeconds = timeSeconds ?? clockSeconds + delta;
+            visualEvents=events;visualTick=tick;
             spatial.Rebuild(enemies);
             // Movement has already finished for this step. Resolve only shells launched on
             // earlier steps, so a newly launched shell retains its complete flight time.
@@ -94,7 +98,7 @@ namespace PaperDefense.Core
         internal void FireIsolatedMount(StructureState structure,int mount,List<EnemyState> enemies,List<ShotEvent> shots,
             float delta,long tick,RunStatistics statistics,SimulationEventBuffer events,double timeSeconds)
         {
-            clockSeconds=timeSeconds;spatial.Rebuild(enemies);AdvanceProjectiles(delta,tick,statistics,events);
+            clockSeconds=timeSeconds;visualEvents=events;visualTick=tick;spatial.Rebuild(enemies);AdvanceProjectiles(delta,tick,statistics,events);
             if(structure==null||!CanOperate(structure))return;
             var assembly=Assembly(structure);var weapon=mount>=0&&mount<assembly.Weapons.Length?assembly.Weapons[mount]:null;
             if(weapon==null)throw new ArgumentOutOfRangeException(nameof(mount));
@@ -163,6 +167,7 @@ namespace PaperDefense.Core
             if (target == null) { statistics.RecordIdle(weapon.Id, delta); return; }
             if (!acquired) return;
             if(!TryBeginAction(structure,mount,interval,dynamic)) return;
+            BeginVisualAction(structure,mount,origin,target.Position,weapon,tick,events);
             float damage = Math.Max(0, definition.Damage * balance.Material(structure.Tier).DamageMultiplier * damageMultiplier);
             structure.Aim = target.Position;
             statistics.RecordLaunch(weapon.Id);
@@ -202,11 +207,20 @@ namespace PaperDefense.Core
         }
         float MountRange(StructureState structure,WeaponDefinition weapon,int mount)
             => TowerCatalog.WeaponRange(Assembly(structure),weapon,mount);
-        static void PublishShot(Point2 from,Point2 to,WeaponDefinition weapon,float radius,int structureId,List<ShotEvent> shots,long tick,SimulationEventBuffer events)
+        void BeginVisualAction(StructureState structure,int mount,Point2 from,Point2 to,WeaponDefinition weapon,long tick,SimulationEventBuffer events)
+        {
+            visualSourceStructureId=structure.Id;visualMountSlotIndex=mount;visualActionId=++nextActionId;
+            events.Publish(tick,SimulationEventKind.WeaponActionStarted,from,to,weapon.LegacyKind??(StructureKind)(-1),
+                entityId:structure.Id,weaponId:weapon.Id,sourceStructureId:structure.Id,mountSlotIndex:mount,
+                actionId:visualActionId,simulationSeconds:clockSeconds);
+        }
+
+        void PublishShot(Point2 from,Point2 to,WeaponDefinition weapon,float radius,int structureId,List<ShotEvent> shots,long tick,SimulationEventBuffer events)
         {
             StructureKind legacy = weapon.LegacyKind ?? (StructureKind)(-1);
-            shots.Add(new ShotEvent(from,to,legacy,radius,weapon.Id));
-            events.Publish(tick,SimulationEventKind.Shot,from,to,legacy,radius,structureId,weaponId:weapon.Id);
+            shots.Add(new ShotEvent(from,to,legacy,radius,weapon.Id,structureId,visualMountSlotIndex,visualActionId,clockSeconds));
+            events.Publish(tick,SimulationEventKind.Shot,from,to,legacy,radius,structureId,weaponId:weapon.Id,
+                sourceStructureId:structureId,mountSlotIndex:visualMountSlotIndex,actionId:visualActionId,simulationSeconds:clockSeconds);
         }
 
         private bool TrackTarget(StructureState structure, EnemyState target, int mount, float delta)
@@ -284,6 +298,7 @@ namespace PaperDefense.Core
             float radius=Math.Max(0,definition.Radius);
             int cleared=blotContext.Clear(cell,radius);
             if(cleared<=0) return;
+            BeginVisualAction(structure,mount,origin,target,weapon,tick,events);
             structure.Aim=target;
             statistics.RecordBlotsCleared(cleared); statistics.RecordLaunch(weapon.Id);
             PublishShot(origin, target, weapon, radius, structure.Id, shots, tick, events);
@@ -309,11 +324,13 @@ namespace PaperDefense.Core
                 Remaining = duration, Radius = Math.Max(0, definition.Radius),
                 Damage = damage, Weapon = weapon.LegacyKind ?? (StructureKind)(-1), WeaponId = weapon.Id, Definition=weapon, Color = payload.Color,
                 EffectPayload = payload, ColorBudget = colorBudget,
+                SourceStructureId=visualSourceStructureId,MountSlotIndex=visualMountSlotIndex,ActionId=visualActionId,
                 ImpactFootprint = FootprintGeometry.Resolve(footprint, definition.Radius, from, to)
             };
             projectiles.Add(projectile);
             events.Publish(tick, SimulationEventKind.ProjectileLaunched, from, to, projectile.Weapon,
-                projectile.Radius, projectile.Id, duration, projectile.ImpactFootprint, projectile.WeaponId);
+                projectile.Radius, projectile.Id, duration, projectile.ImpactFootprint, projectile.WeaponId,
+                projectile.SourceStructureId,projectile.MountSlotIndex,projectile.ActionId,clockSeconds);
         }
 
         private void FireFan(StructureState structure, Point2 origin, Point2 aim, WeaponDefinition weapon,
@@ -378,6 +395,7 @@ namespace PaperDefense.Core
                 var projectile = projectiles[read];
                 projectile.Remaining = Math.Max(0, projectile.Remaining - delta);
                 if (projectile.Remaining > 0.000001f) { projectiles[write++] = projectile; continue; }
+                visualSourceStructureId=projectile.SourceStructureId;visualMountSlotIndex=projectile.MountSlotIndex;visualActionId=projectile.ActionId;
                 FootprintGeometry? geometry = projectile.ImpactFootprint;
                 bool ellipse = geometry.HasValue && geometry.Value.ForwardRadius != geometry.Value.SideRadius;
                 // Contains includes a small normalized boundary tolerance. Keep the broad phase
@@ -393,7 +411,8 @@ namespace PaperDefense.Core
                     ApplyDamage(victim, projectile.Damage, projectile.Definition, projectile.EffectPayload, projectile.ColorBudget, statistics);
                 }
                 events.Publish(tick, SimulationEventKind.ProjectileImpact, projectile.From, projectile.To,
-                    projectile.Weapon, projectile.Radius, projectile.Id, impactFootprint: projectile.ImpactFootprint,weaponId:projectile.WeaponId);
+                    projectile.Weapon, projectile.Radius, projectile.Id, impactFootprint: projectile.ImpactFootprint,weaponId:projectile.WeaponId,
+                    sourceStructureId:projectile.SourceStructureId,mountSlotIndex:projectile.MountSlotIndex,actionId:projectile.ActionId,simulationSeconds:clockSeconds);
             }
             if (write < projectiles.Count) projectiles.RemoveRange(write, projectiles.Count - write);
         }
@@ -407,12 +426,15 @@ namespace PaperDefense.Core
             if (mechanics.EnemyDrawingTiers || mechanics.CorpseBlots || payload.Color != InkColor.None)
             {
                 if (payload.Color != InkColor.None && colorBudget != null && !colorBudget.TryApply(victim.Id, clockSeconds)) payload = default;
-                EnemyEffects.ApplyHit(victim, damage, payload, statistics, weapon.LegacyKind ?? (StructureKind)(-1), effects, mechanics.CorpseBlots ? balance.BlotReduction : 0,weapon.Id);
+                EnemyEffects.ApplyHit(victim, damage, payload, statistics, weapon.LegacyKind ?? (StructureKind)(-1), effects, mechanics.CorpseBlots ? balance.BlotReduction : 0,weapon.Id,
+                    visualEvents,visualTick,clockSeconds,visualSourceStructureId,visualMountSlotIndex,visualActionId);
                 ApplyIntrinsicEffects(victim,weapon,statistics); return;
             }
             float actualDamage = Math.Min(victim.Health, damage);
             victim.Health -= actualDamage;
             statistics.RecordDamage(weapon.Id, actualDamage);
+            EnemyEffects.PublishDamage(victim,victim.Health+actualDamage,visualEvents,visualTick,clockSeconds,
+                weapon.LegacyKind??(StructureKind)(-1),weapon.Id,visualSourceStructureId,visualMountSlotIndex,visualActionId);
             ApplyIntrinsicEffects(victim,weapon,statistics);
         }
 

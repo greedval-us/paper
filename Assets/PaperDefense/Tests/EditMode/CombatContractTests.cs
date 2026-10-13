@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using PaperDefense.Core;
 
@@ -299,16 +300,16 @@ namespace PaperDefense.Tests
             var statistics = new RunStatistics();
             var events = new SimulationEventBuffer();
             weapons.Fire(structures, enemies, shots, 1, 1, 0.02f, 10, statistics, events);
-            Assert.That(events.Count, Is.EqualTo(1));
-            Assert.That(events[0].Kind, Is.EqualTo(SimulationEventKind.ProjectileLaunched));
-            Assert.That(events[0].TravelSeconds, Is.EqualTo(0.2f));
+            var launch=events.Single(e=>e.Kind==SimulationEventKind.ProjectileLaunched);
+            Assert.That(events.Count(e=>e.Kind==SimulationEventKind.ProjectileImpact),Is.Zero);
+            Assert.That(launch.TravelSeconds, Is.EqualTo(0.2f));
             Assert.That(shots, Is.Empty);
             weapons.Fire(structures, enemies, shots, 1, 1, 0.2f, 11, statistics, events);
-            Assert.That(events.Count, Is.EqualTo(2));
-            Assert.That(events[1].Kind, Is.EqualTo(SimulationEventKind.ProjectileImpact));
-            Assert.That(events[1].Tick, Is.EqualTo(11));
-            Assert.That(events[1].Sequence, Is.GreaterThan(events[0].Sequence));
-            Assert.That(events[1].EntityId, Is.EqualTo(events[0].EntityId));
+            var impact=events.Single(e=>e.Kind==SimulationEventKind.ProjectileImpact);
+            Assert.That(impact.Tick, Is.EqualTo(11));
+            Assert.That(impact.Sequence, Is.GreaterThan(launch.Sequence));
+            Assert.That(impact.EntityId, Is.EqualTo(launch.EntityId));
+            Assert.That(events.Count(e=>e.Kind==SimulationEventKind.WeaponActionStarted),Is.EqualTo(1));
         }
 
         [TestCase(1)]
@@ -329,7 +330,8 @@ namespace PaperDefense.Tests
                 events.Publish(1, SimulationEventKind.Shot, new Point2(), new Point2(), StructureKind.Gun);
             weapons.Fire(structures, enemies, shots, 1, 1, 0.2f, 2, statistics, events);
             Assert.That(events.Count, Is.EqualTo(eventCapacity));
-            Assert.That(events.LatestSequence, Is.EqualTo(522));
+            Assert.That(events.LatestSequence, Is.EqualTo(543));
+            Assert.That(events.DroppedEventCount,Is.EqualTo(events.LatestSequence-events.Count));
             Assert.That(statistics.Damage(StructureKind.Mortar), Is.EqualTo(70));
             Assert.That(enemies.TrueForAll(enemy => enemy.Health == 0), Is.True);
         }

@@ -85,6 +85,7 @@ namespace PaperDefense.Presentation
             if (Controller != null) {Controller.SessionChanged -= OnSessionChanged; if(View != null) Controller.SimulationEventReceived -= View.AddEvent;}
         }
         void OnSessionChanged(IRunReadModel session) {View.Bind(session); ConfigureCamera();}
+        void Update() {if(Controller!=null && View!=null) View.Paused=Controller.Paused;}
         void LateUpdate() {if(Controller!=null) FitCamera();}
         void ConfigureCamera()
         {
