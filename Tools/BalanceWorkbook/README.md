@@ -1,5 +1,9 @@
 # Excel механик и баланса
 
+[Инструменты проекта](../README.md) · [Словарь параметров](../../docs/Balance-Parameters.md) · [Каталог контента](../../docs/Content-Architecture.md)
+
+Книга экспортирует **Historical и Target**, а не отдельный игровой `Configuration/Game/PlayerRules.asset`. Значения PlayerRules сверяйте с самим asset и [отчётом числового баланса](../../docs/validation/2026-10-14-numeric-balance/report.md); их нельзя выводить из столбца Target.
+
 1. В Unity выполните `Paper Defense > Export mechanics and balance JSON` или вызовите `PaperDefense.Editor.BalanceWorkbookExport.Export()`.
 2. В корне проекта выполните `Tools/BalanceWorkbook/Build.ps1`.
 3. Проверьте `docs/balance/PaperDefense-Mechanics-Balance.xlsx`. `workbook-validation.json` сохраняет хэш данных, результат сверки формул и ограничения проверки.

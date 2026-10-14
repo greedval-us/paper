@@ -1,43 +1,40 @@
-# Notebook ink source
+# Исходники тетрадного оформления
 
-`notebook-theme.json` is the canonical visual source. Its coordinates, palette,
-strokes, fills, reference subsets, key poses, frame timing, muzzle anchors and
-weapon recoil curves are committed data. Runtime C# interprets this data; it does
-not generate silhouettes or decorative hatching.
+[Руководство оформления](../../docs/Notebook-Art.md) · [Ассеты игрока](../../docs/Player-Assets.md) · [Указатель документации](../../docs/README.md)
 
-`author_notebook.py` is the repeatable offline authoring recipe. Run it with
-Python 3 to regenerate the JSON and six SVG contact sheets in
-`Assets/PaperDefense/Art`. No packages are needed. Inspect the SVGs in any browser.
-The PNG sheets beside this file are visual review exports, not game textures.
+[notebook-theme.json](notebook-theme.json) — канонический визуальный источник: палитра, контуры, заливки, эталонные подмножества штрихов, позы, время кадров, точки выстрела и отдача. Текущий набор содержит **465 форм, 112 клипов и 7 кривых отдачи**. Runtime C# интерпретирует эти данные.
 
-In Unity choose **Paper Defense → Art → Import notebook art and current
-templates**, or invoke `PaperDefense.Editor.NotebookArtImportTools.ImportAll()`.
-The importer validates the entire candidate before replacing the last good
-`Resources/Art/NotebookVisualTheme.asset`. Invalid data reports its source path,
-shape/clip ID and reason. **Export notebook SVG contact sheets** writes SVGs from
-the exact validated data consumed by Unity.
+## Генерация и импорт
 
-Schema 1 supports polyline, convex polygon, circle and ring. Marks have a name,
-palette channel, normalized points or center/radius, width and alpha. Main
-drawable strokes carry `Reference: true`; fills, faces, fasteners, ink spots and
-hatching are decoration. The fifteen modular parts publish only reference marks
-to revision 3 of their existing drawing template ID. The importer preserves each
-template's pivot, weight and name and only opts current parts into the Template
-visual style. It never changes numeric combat data, historical source catalogs,
-legacy templates, saved drawings, evaluation stamps or player profiles.
+[author_notebook.py](author_notebook.py) — воспроизводимый рецепт; он вызывает [author_battlefield.py](author_battlefield.py) для расширения окружения. Нужен Python 3 без сторонних пакетов. Из корня проекта:
 
-Current template publication targets the main Target override and the materialized
-catalogs in `Configuration/Tests`. The shared `NotebookContent` and Historical
-assets remain archival. This prevents current art updates from rewriting old
-reference contours merely because both presets share a source database.
+```powershell
+python ArtSource/Notebook/author_notebook.py
+python -m unittest discover -s ArtSource/Notebook -p 'test_*.py'
+```
 
-All weapons face local +Y and rotate about (0,0). Their mounting offsets come from
-the chassis definition. Enemy artwork faces local +X. Wall masks use N=1, E=2,
-S=4, W=8. Frames store a shape ID, time in seconds and a rigid offset/rotation,
-uniform scale and alpha. Recoil is a piecewise linear curve with exact zero at
-both endpoints; it never modifies the underlying drawing geometry.
+Генерация **перезаписывает JSON и семь SVG-листов** в `Assets/PaperDefense/Art`. Ручные правки канонического JSON нужно перенести в рецепт или сохранить отдельно до запуска. PNG рядом с исходниками — изображения для просмотра, а не runtime-текстуры игры.
 
-The manifest covers 15 modular part shapes, 12 enemy appearances with five states
-and four authored frames each, 26 object variants, 22 semantic effect shapes and
-clips, and 25 UI icons. Shape IDs and completeness are validated by the importer;
-the actual catalog count includes pose frames and duplicated UI vectors.
+В Unity выполните **Paper Defense → Art → Import notebook art and current templates** или вызовите `PaperDefense.Editor.NotebookArtImportTools.ImportAll()`. Импорт проверяет весь кандидат до замены последнего рабочего ресурса [NotebookVisualTheme.asset](../../Assets/PaperDefense/Resources/Art/NotebookVisualTheme.asset). Ошибка содержит путь источника, ID формы/клипа и причину. **Export notebook SVG contact sheets** экспортирует SVG из проверенных данных, которые читает Unity. Обратного импорта SVG нет.
+
+| Контактный лист | Содержимое |
+|---|---|
+| [01-modular-parts.svg](../../Assets/PaperDefense/Art/01-modular-parts.svg) | 4 основания, 7 орудий, 4 модуля |
+| [02-enemy-families.svg](../../Assets/PaperDefense/Art/02-enemy-families.svg) | Семейства и уровни прорисовки врагов |
+| [03-enemy-key-poses.svg](../../Assets/PaperDefense/Art/03-enemy-key-poses.svg) | Ключевые позы |
+| [04-notebook-objects.svg](../../Assets/PaperDefense/Art/04-notebook-objects.svg) | Объекты и соединения стен |
+| [05-ink-effects.svg](../../Assets/PaperDefense/Art/05-ink-effects.svg) | Семантические эффекты |
+| [06-workshop-icons.svg](../../Assets/PaperDefense/Art/06-workshop-icons.svg) | Значки мастерской и инструментов |
+| [07-battlefield.svg](../../Assets/PaperDefense/Art/07-battlefield.svg) | Окружение, смола, ремонт, входы и отметки баррикад |
+
+## Формат и привязки
+
+Schema 1 поддерживает polyline, простой выпуклый polygon, circle и ring. Элемент хранит имя, канал палитры, нормализованные точки либо центр/радиус, толщину и alpha. Основные контуры имеют `Reference: true`; лица, крепёж, заливки, пятна и штриховка — декор.
+
+Пятнадцать модульных деталей публикуют только reference-штрихи в revision 3 существующего ID шаблона. Импорт сохраняет pivot, вес и имя шаблона; обновляет Target overrides и материализованные каталоги `Configuration/Tests`. Общий NotebookContent, Historical, отдельные PlayerContent/PlayerRules, профили и рисунки игрока этим инструментом не переписываются. Обновлённый общий визуальный ресурс доступен всем сценам.
+
+Оружие направлено по локальной +Y и вращается вокруг (0,0); смещения креплений принадлежат основанию. Враги направлены по локальной +X. Биты стен: N=1, E=2, S=4, W=8. Кадр хранит ID формы, секунды, жёсткое смещение/поворот, равномерный масштаб и alpha. Кривая отдачи кусочно-линейная, на обоих концах нулевая; она не меняет исходную геометрию рисунка.
+
+Шесть семейств врагов — дудл, бегун, грызун, плевун, громила и щитоносец — имеют три уровня прорисовки и состояния idle/walk/attack/hit/death. Число форм включает ключевые позы и UI-варианты, поэтому не равно числу игровых объектов. Полноту новых семейств и окружения проверяет [test_battlefield_art.py](test_battlefield_art.py).
+
+Свободные рисунки игрока используют правила геометрии; исторические эталоны и оценки сохраняются для совместимости. Точность обводки не даёт боевого бонуса. [Правила формы](../../docs/Freeform-Towers.md).
