@@ -19,6 +19,7 @@ namespace PaperDefense.Core
         public readonly Point2 From, To;
         public readonly StructureKind Weapon;
         public readonly string WeaponId;
+        public readonly AttackKind Attack;
         public readonly float Radius, TravelSeconds;
         public readonly int EntityId;
         public readonly int SourceStructureId, MountSlotIndex;
@@ -31,9 +32,9 @@ namespace PaperDefense.Core
         internal SimulationEvent(long sequence,long tick,SimulationEventKind kind,Point2 from,Point2 to,
             StructureKind weapon,float radius,int entityId,float travelSeconds,FootprintGeometry? impactFootprint = null,string weaponId=null,
             int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0,double simulationSeconds=0,
-            EnemyKind enemyKind=default,DrawingTier enemyDrawingTier=default,float enemyVisualScale=1)
+            EnemyKind enemyKind=default,DrawingTier enemyDrawingTier=default,float enemyVisualScale=1,AttackKind? attack=null)
         {Sequence=sequence;Tick=tick;Kind=kind;From=from;To=to;Weapon=weapon;WeaponId=weaponId??LegacyContentIds.Weapon(weapon);Radius=radius;EntityId=entityId;TravelSeconds=travelSeconds;ImpactFootprint=impactFootprint;
-            SourceStructureId=sourceStructureId;MountSlotIndex=mountSlotIndex;ActionId=actionId;SimulationSeconds=simulationSeconds;EnemyKind=enemyKind;EnemyDrawingTier=enemyDrawingTier;EnemyVisualScale=enemyVisualScale;}
+            SourceStructureId=sourceStructureId;MountSlotIndex=mountSlotIndex;ActionId=actionId;SimulationSeconds=simulationSeconds;EnemyKind=enemyKind;EnemyDrawingTier=enemyDrawingTier;EnemyVisualScale=enemyVisualScale;Attack=attack??LegacyContentCatalog.Attack(weapon);}
     }
 
     /// <summary>Bounded visual history. Losing old marks never changes simulation outcomes.</summary>
@@ -52,10 +53,10 @@ namespace PaperDefense.Core
         public void Publish(long tick,SimulationEventKind kind,Point2 from,Point2 to,StructureKind weapon,
             float radius=0,int entityId=0,float travelSeconds=0,FootprintGeometry? impactFootprint = null,string weaponId=null,
             int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0,double simulationSeconds=0,
-            EnemyKind enemyKind=default,DrawingTier enemyDrawingTier=default,float enemyVisualScale=1)
+            EnemyKind enemyKind=default,DrawingTier enemyDrawingTier=default,float enemyVisualScale=1,AttackKind? attack=null)
         {
             var value=new SimulationEvent(++LatestSequence,tick,kind,from,to,weapon,radius,entityId,travelSeconds,impactFootprint,weaponId,
-                sourceStructureId,mountSlotIndex,actionId,simulationSeconds,enemyKind,enemyDrawingTier,enemyVisualScale);
+                sourceStructureId,mountSlotIndex,actionId,simulationSeconds,enemyKind,enemyDrawingTier,enemyVisualScale,attack);
             if(count<items.Length) items[(start+count++)%items.Length]=value;
             else {items[start]=value;start=(start+1)%items.Length;DroppedEventCount++;}
         }

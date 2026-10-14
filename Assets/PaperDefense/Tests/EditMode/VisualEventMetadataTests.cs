@@ -89,6 +89,19 @@ namespace PaperDefense.Tests
             Assert.That(events.Count(e=>e.Kind==SimulationEventKind.EnemyHit),Is.EqualTo(1));
         }
 
+        [Test]
+        public void DamageOverTimeHitNamesTheSourceThatActuallyPulsedAfterAStrongerEffectExpired()
+        {
+            var enemy = Enemy(); var events = new SimulationEventBuffer();
+            var rules = new EffectsRules { RedDuration = .1f, RedDamagePerTick = 4, RedTickSeconds = .25f };
+            EnemyEffects.ApplyHit(enemy, 0, InkColor.Red, null, StructureKind.Mortar, rules);
+            rules.RedDuration = 1; rules.RedDamagePerTick = 1;
+            EnemyEffects.ApplyHit(enemy, 0, InkColor.Red, null, StructureKind.Gun, rules);
+            EnemyEffects.Advance(enemy, .3f, null, rules, events: events);
+            Assert.That(events.Single(e => e.Kind == SimulationEventKind.EnemyHit).WeaponId, Is.EqualTo("weapon.gun"));
+            Assert.That(enemy.Health, Is.EqualTo(999));
+        }
+
         [Test] public void FullSmallBufferReportsDropsAndPreservesCombatResult()
         {
             float Resolve(int capacity,out SimulationEventBuffer events)

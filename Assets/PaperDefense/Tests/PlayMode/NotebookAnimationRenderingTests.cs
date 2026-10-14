@@ -134,6 +134,76 @@ namespace PaperDefense.Tests
         static NotebookArtShape Shape(string id, params Vector2[] points) => new NotebookArtShape { Id = id,
             Marks = new List<NotebookArtMark> { new NotebookArtMark { Primitive = NotebookArtPrimitive.Polyline, Width = .04f, Points = points } } };
 
+        [TestCase(false)] [TestCase(true)]
+        public void TrialImpactPreservesCapturedMortarFootprint(bool vertical)
+        {
+            var footprint = FootprintGeometry.Resolve(new MortarFootprint(3), 2, default,
+                vertical ? new Point2(0, 1) : new Point2(1, 0));
+            var events = new SimulationEventBuffer();
+            events.Publish(1, SimulationEventKind.ProjectileImpact, default, new Point2(10, 10),
+                StructureKind.Mortar, 2, impactFootprint: footprint, simulationSeconds: .05);
+            var playback = new NotebookTrialPlayback();
+            playback.Bind(Recording(Frame(0), Frame(1, events: new[] { events[0] })));
+            playback.Seek(.05, theme);
+            var mesh = new Mesh();
+            try
+            {
+                var pen = new MeshPen(mesh); NotebookTrialRenderer.DrawEffects(pen, playback, theme); pen.Upload();
+                Assert.That(mesh.vertexCount, Is.GreaterThan(0), "The captured footprint must remain visible without a decorative asset.");
+                var size = mesh.bounds.size;
+                Assert.That(vertical ? size.y : size.x, Is.EqualTo(2 * footprint.ForwardRadius).Within(.14f));
+                Assert.That(vertical ? size.x : size.y, Is.EqualTo(2 * footprint.SideRadius).Within(.14f));
+            }
+            finally { Object.DestroyImmediate(mesh); }
+        }
+
+        [Test]
+        public void TrialEffectUsesTheAssignedThemePalette()
+        {
+            theme.Data.Palette = new[] { new Color(.91f, .07f, .83f, 1) };
+            theme.Data.Shapes.Add(Shape("fx.castle.hit", Vector2.zero, Vector2.up));
+            var events = new SimulationEventBuffer();
+            events.Publish(1, SimulationEventKind.BaseHit, default, new Point2(10, 10), default, simulationSeconds: .05);
+            var playback = new NotebookTrialPlayback();
+            playback.Bind(Recording(Frame(0), Frame(1, events: new[] { events[0] })));
+            playback.Seek(.05, theme);
+            var mesh = new Mesh();
+            try
+            {
+                var pen = new MeshPen(mesh); NotebookTrialRenderer.DrawEffects(pen, playback, theme); pen.Upload();
+                var expected = (Color32)theme.Color(NotebookInkChannel.Navy);
+                Assert.That(mesh.vertexCount, Is.GreaterThan(0));
+                Assert.That(mesh.colors32.All(c => c.r == expected.r && c.g == expected.g && c.b == expected.b), Is.True);
+            }
+            finally { Object.DestroyImmediate(mesh); }
+        }
+
+        [TestCase(.2f)] [TestCase(2f)]
+        public void CapturedCircularFootprintOwnsItsRadiusEvenWhenFallbackDiffers(float radius)
+        {
+            var footprint = FootprintGeometry.Resolve(new MortarFootprint(1), radius, default, new Point2(1, 0));
+            var mesh = new Mesh();
+            try
+            {
+                var pen = new MeshPen(mesh);
+                NotebookEffectRenderer.DrawFootprint(pen, Vector2.zero, footprint, 5, 1, .01f, Color.white, 32, 1);
+                pen.Upload();
+                Assert.That(mesh.bounds.size.x, Is.EqualTo(2 * radius).Within(.02f));
+                Assert.That(mesh.bounds.size.y, Is.EqualTo(2 * radius).Within(.02f));
+            }
+            finally { Object.DestroyImmediate(mesh); }
+        }
+
+        [TestCase(AttackKind.Cone, "fx.fan")] [TestCase(AttackKind.Line, "fx.piercer")]
+        [TestCase(AttackKind.Radial, "fx.stapler")] [TestCase(AttackKind.Cleanup, "fx.cleanup")]
+        public void EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(AttackKind attack, string effectId)
+        {
+            var events = new SimulationEventBuffer();
+            events.Publish(1, SimulationEventKind.Shot, default, default, (StructureKind)(-1),
+                weaponId: "weapon.custom", attack: attack);
+            Assert.That(NotebookEffectRenderer.EffectId(events[0]), Is.EqualTo(effectId));
+        }
+
         [Test] public void TrialDeathSuppressesTheStaleLiveSnapshotEvenAfterTheDeathTailExpiresAndSeekRestoresIt()
         {
             theme.Data.Shapes.Add(Shape("enemy.doodle.sketch.idle", Vector2.zero, Vector2.up));

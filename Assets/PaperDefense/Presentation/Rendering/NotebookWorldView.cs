@@ -36,7 +36,7 @@ namespace PaperDefense.Presentation
         MeshPen paperPen, structurePen, worldPen, effectsPen, previewPen;
         readonly List<Mesh> meshes = new List<Mesh>(5);
         readonly List<Cell> previewCells = new List<Cell>(128);
-        readonly List<FiringMark> firingMarks = new List<FiringMark>(256);
+        readonly List<SimulationEvent> firingMarks = new List<SimulationEvent>(256);
         readonly NotebookVisualClock visualClock = new NotebookVisualClock();
         readonly NotebookAnimationState animation = new NotebookAnimationState();
         readonly HashSet<Cell> wallCells = new HashSet<Cell>();
@@ -52,19 +52,6 @@ namespace PaperDefense.Presentation
         int visualVersion = -1, topologyVersion = -1, castleHealthBand = -1;
         RunPhase renderedPhase;
         bool staticDirty = true;
-
-        struct FiringMark
-        {
-            public Vector2 From, To;
-            public SimulationEventKind EventKind;
-            public StructureKind Weapon;
-            public AttackKind Attack;
-            public float Radius;
-            public double Born;
-            public int SourceStructureId, MountSlotIndex;
-            public string WeaponId;
-            public FootprintGeometry? ImpactFootprint;
-        }
 
         public void Initialize(IRunReadModel newSession)
         {
@@ -139,16 +126,7 @@ namespace PaperDefense.Presentation
                 || item.Kind == SimulationEventKind.EnemyDied) return;
             int maximum = Mathf.Max(1, Theme?.MaximumEffects ?? 256);
             if (firingMarks.Count >= maximum) { firingMarks.RemoveAt(0); DroppedVisualEffects++; }
-            firingMarks.Add(new FiringMark
-            {
-                From = new Vector2(item.From.X, item.From.Y),
-                To = new Vector2(item.To.X, item.To.Y),
-                EventKind = item.Kind, Weapon = item.Weapon,
-                Attack = session != null && session.Balance.Content.TryGetWeapon(item.WeaponId, out var weapon) ? weapon.Attack : LegacyContentCatalog.Attack(item.Weapon),
-                Radius = item.Radius, Born = item.SimulationSeconds,
-                SourceStructureId = item.SourceStructureId, MountSlotIndex = item.MountSlotIndex, WeaponId = item.WeaponId,
-                ImpactFootprint = item.ImpactFootprint
-            });
+            firingMarks.Add(item);
         }
 
         void EnsureMeshes()
@@ -498,77 +476,17 @@ namespace PaperDefense.Presentation
                     p.Disc(point, .1f, NotebookPalette.Navy, 10);
                     p.Disc(point + new Vector2(-.025f, .025f), .035f, NotebookPalette.Paper, 6);
                 }
-                DrawFootprint(p, to, projectile.ImpactFootprint, Mathf.Max(.4f, projectile.Radius), 1, .025f,
+                NotebookEffectRenderer.DrawFootprint(p, to, projectile.ImpactFootprint, projectile.Radius, 1, .025f,
                     MeshPen.Alpha(NotebookPalette.Marker, .2f), 24, projectile.Id, true);
             }
             double time = visualClock.Seconds;
             for (int i = firingMarks.Count - 1; i >= 0; i--)
             {
-                FiringMark mark = firingMarks[i];
-                float age = (float)(time - mark.Born);
-                bool impact = mark.EventKind == SimulationEventKind.ProjectileImpact;
-                bool destroyed = mark.EventKind == SimulationEventKind.StructureDestroyed;
-                string effectId = EffectId(mark);
-                var clip = Theme?.FindClip(effectId);
-                float duration = clip?.Duration ?? (impact || destroyed ? .46f : mark.EventKind == SimulationEventKind.Shot
-                    || mark.EventKind == SimulationEventKind.WeaponActionStarted ? .17f : .5f);
-                if (age >= duration) { firingMarks.RemoveAt(i); continue; }
-                if (age < 0) continue;
-                float t = Mathf.Clamp01(age / duration);
-                float fade = 1 - t;
-                Color color = mark.Attack == AttackKind.Line ? NotebookPalette.Marker : NotebookPalette.Blue;
-                color.a = fade * .85f;
-                Vector2 muzzle = VisualMuzzle(mark.SourceStructureId, mark.MountSlotIndex, new Point2(mark.To.x, mark.To.y), mark.From);
-                if (mark.EventKind == SimulationEventKind.WeaponActionStarted)
-                {
-                    DrawResourceEffect(p, Theme?.FindRecoil(mark.WeaponId)?.EffectId ?? effectId, muzzle, age, fade, 1);
-                    continue;
-                }
-                if (mark.EventKind != SimulationEventKind.Shot && !impact && !destroyed)
-                {
-                    DrawResourceEffect(p, effectId, mark.To, age, fade, .8f + t * .5f);
-                    continue;
-                }
-                if (destroyed) DrawResourceEffect(p, effectId, mark.To, age, fade, 1 + t * .5f);
-                else if (impact)
-                {
-                    if (mark.ImpactFootprint.HasValue)
-                    {
-                        var footprint = mark.ImpactFootprint.Value;
-                        float angle = Mathf.Atan2(footprint.Forward.Y, footprint.Forward.X) - Mathf.PI * .5f;
-                        DrawResourceEffect(p, effectId, mark.To, age, fade, 1, new Vector2(footprint.SideRadius, footprint.ForwardRadius), angle);
-                    }
-                    else DrawResourceEffect(p, effectId, mark.To, age, fade, Mathf.Max(1, mark.Radius));
-                }
-                if (destroyed)
-                {
-                    p.Star(mark.To, .4f + t * .45f, MeshPen.Alpha(NotebookPalette.Red, fade * .7f), .045f, 7, i);
-                }
-                else if (impact)
-                {
-                    float radius = Mathf.Max(.65f, mark.Radius);
-                    Color orange = new Color(.85f, .46f, .2f, fade * .75f);
-                    if (mark.ImpactFootprint.HasValue && mark.ImpactFootprint.Value.ForwardRadius != mark.ImpactFootprint.Value.SideRadius)
-                        DrawFootprint(p, mark.To, mark.ImpactFootprint, radius, 1, .025f, orange, 32, i * 23);
-                    DrawFootprint(p, mark.To, mark.ImpactFootprint, radius, .6f + t * .4f, .065f * fade + .025f, orange, 32, i * 13);
-                    DrawFootprint(p, mark.To, mark.ImpactFootprint, radius, .45f + t * .4f, .035f, MeshPen.Alpha(orange, fade * .35f), 32, i * 19);
-                    if (!mark.ImpactFootprint.HasValue || mark.ImpactFootprint.Value.ForwardRadius == mark.ImpactFootprint.Value.SideRadius)
-                        p.Star(mark.To, radius * (.4f + t * .6f), orange, .045f, 9, i * .83f);
-                }
-                else if (mark.Attack == AttackKind.Cleanup)
-                {
-                    Color clean = MeshPen.Alpha(NotebookPalette.Green, fade * .75f);
-                    p.Line(muzzle, mark.To, .025f, clean);
-                    p.Ring(mark.To, Mathf.Max(.2f, mark.Radius) * (.65f + t * .35f), .035f, clean, 24);
-                    DrawResourceEffect(p, effectId, mark.To, age, fade, 1);
-                }
-                else
-                {
-                    float width = mark.Attack == AttackKind.Line ? .075f : .044f;
-                    p.Line(muzzle, mark.To, width, color);
-                    p.Star(mark.To, .22f + t * .2f, color, .035f, 5, i * 1.3f);
-                    DrawResourceEffect(p, effectId, mark.To, age, fade, 1);
-                }
+                var mark = firingMarks[i];
+                float age = (float)(time - mark.SimulationSeconds);
+                if (age >= NotebookEffectRenderer.Duration(mark, Theme)) { firingMarks.RemoveAt(i); continue; }
+                Vector2 muzzle = VisualMuzzle(mark.SourceStructureId, mark.MountSlotIndex, mark.To, new Vector2(mark.From.X, mark.From.Y));
+                NotebookEffectRenderer.Draw(p, mark, muzzle, age, Theme);
             }
             p.Upload();
         }
@@ -581,62 +499,6 @@ namespace PaperDefense.Presentation
                     return NotebookTowerComposition.SegmentOrigin(session.Structures[i], slot, aim, fallback, visualClock.Seconds, animation, Theme);
             return fallback;
         }
-        internal static string EffectId(SimulationEvent item)
-            => EffectId(new FiringMark { EventKind = item.Kind, Weapon = item.Weapon,
-                Attack = LegacyContentCatalog.Attack(item.Weapon) });
-        static string EffectId(FiringMark mark)
-        {
-            switch (mark.EventKind)
-            {
-                case SimulationEventKind.WeaponActionStarted: return "fx.muzzle";
-                case SimulationEventKind.ProjectileImpact: return "fx.mortar.explosion";
-                case SimulationEventKind.StructureDestroyed: return "fx.structure.destroy";
-                case SimulationEventKind.BlotSpawned: return "fx.blot.birth";
-                case SimulationEventKind.BlotExpired: return "fx.blot.expire";
-                case SimulationEventKind.BlotCleared: return "fx.blot.cleanse";
-                case SimulationEventKind.BlotAbsorbed: return "fx.blot.absorb";
-                case SimulationEventKind.EnemyGlobImpact: return "fx.spitter.impact";
-                case SimulationEventKind.BaseHit: return "fx.castle.hit";
-                case SimulationEventKind.InkWellHit: return "fx.well.hit";
-                case SimulationEventKind.InkWellActivated: return "fx.well.activate";
-                case SimulationEventKind.Shot:
-                    return mark.Attack == AttackKind.Line ? "fx.piercer" : mark.Attack == AttackKind.Cone ? "fx.fan"
-                        : mark.Attack == AttackKind.Ricochet ? "fx.ricochet" : mark.Attack == AttackKind.Radial ? "fx.stapler"
-                        : mark.Attack == AttackKind.Cleanup ? "fx.cleanup" : "fx.tracer";
-                default: return null;
-            }
-        }
-        void DrawResourceEffect(MeshPen pen, string id, Vector2 at, float age, float fade, float scale,
-            Vector2? localScale = null, float radians = 0)
-        {
-            var clip = Theme?.FindClip(id); var frame = clip?.Sample(age);
-            NotebookArtRenderer.Draw(pen, Theme?.FindShape(frame?.ShapeId ?? id), at + (frame?.Offset ?? Vector2.zero),
-                scale * (frame?.Scale ?? 1), radians + (frame?.Rotation ?? 0), opacity: fade * (frame?.Alpha ?? 1), localScale: localScale, theme: Theme);
-        }
-
-        // Build each perimeter point in world space; axis direction comes from the shell snapshot.
-        static void DrawFootprint(MeshPen pen, Vector2 center, FootprintGeometry? footprint,
-            float fallbackRadius, float scale, float width, Color color, int segments, int seed, bool dashed = false)
-        {
-            if (!footprint.HasValue || footprint.Value.ForwardRadius == footprint.Value.SideRadius)
-            {
-                pen.Ring(center, fallbackRadius * scale, width, color, segments, 1, seed, dashed);
-                return;
-            }
-            FootprintGeometry geometry = footprint.Value;
-            Vector2 forward = new Vector2(geometry.Forward.X, geometry.Forward.Y);
-            Vector2 side = new Vector2(-forward.y, forward.x);
-            Vector2 previous = center + forward * (geometry.ForwardRadius * scale);
-            for (int i = 1; i <= segments; i++)
-            {
-                float angle = i * Mathf.PI * 2 / segments;
-                Vector2 next = center + forward * (Mathf.Cos(angle) * geometry.ForwardRadius * scale)
-                    + side * (Mathf.Sin(angle) * geometry.SideRadius * scale);
-                if (!dashed || i % 3 != 0) pen.Line(previous, next, width, color);
-                previous = next;
-            }
-        }
-
         static Vector2 FlightPoint(Vector2 from, Vector2 to, float t, float height)
             => Vector2.Lerp(from, to, t) + Vector2.up * (Mathf.Sin(t * Mathf.PI) * height);
 

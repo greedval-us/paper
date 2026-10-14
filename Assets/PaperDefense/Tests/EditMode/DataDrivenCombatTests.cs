@@ -29,6 +29,30 @@ namespace PaperDefense.Tests
         static void Fire(WeaponSystem system,StructureState tower,List<EnemyState> enemies,RunStatistics statistics,SimulationEventBuffer events,float delta=.25f,long tick=1)
             =>system.Fire(new List<StructureState>{tower},enemies,new List<ShotEvent>(),1,1,delta,tick,statistics,events);
 
+        [TestCase(AttackKind.Line)] [TestCase(AttackKind.Cone)] [TestCase(AttackKind.Ricochet)]
+        [TestCase(AttackKind.Radial)] [TestCase(AttackKind.AreaProjectile)]
+        public void VisualEventsCaptureTheRealAttackWithoutALegacyAlias(AttackKind attack)
+        {
+            var balance = GameBalance.CreateDefault(); var input = Catalog(balance);
+            var weapon = AddWeapon(input, "weapon.test.visual", attack);
+            if (attack == AttackKind.Radial) weapon.Stats.Radius = 4;
+            balance.Content = input.CreateSnapshot();
+            var events = new SimulationEventBuffer(); var system = new WeaponSystem(balance);
+            var enemies = new List<EnemyState> { Enemy(1, 12, 10.5f) };
+            Fire(system, Tower(Blueprint(balance, weapon.Id)), enemies, new RunStatistics(), events);
+            system.Fire(new List<StructureState>(), enemies, new List<ShotEvent>(), 1, 1, 1, 2, new RunStatistics(), events);
+            int actions = 0, results = 0;
+            foreach (var item in events)
+            {
+                if (item.Kind != SimulationEventKind.WeaponActionStarted && item.Kind != SimulationEventKind.Shot &&
+                    item.Kind != SimulationEventKind.ProjectileLaunched && item.Kind != SimulationEventKind.ProjectileImpact) continue;
+                Assert.That(item.Attack, Is.EqualTo(attack));
+                Assert.That(item.WeaponId, Is.EqualTo(weapon.Id));
+                if (item.Kind == SimulationEventKind.WeaponActionStarted) actions++; else results++;
+            }
+            Assert.That(actions, Is.EqualTo(1)); Assert.That(results, Is.GreaterThan(0));
+        }
+
         [Test]
         public void NewSingleWeaponUsesItsIdForRealDamageAndIndependentSlow()
         {

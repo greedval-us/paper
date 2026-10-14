@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using PaperDefense.Application;
 using PaperDefense.Core;
@@ -48,14 +49,16 @@ namespace PaperDefense.Tests
         [UnityTest] public IEnumerator EverySavedScenePreparesOneIsolatedDriverExercisesItsFocusAndResets()
         {
             string[] allScenes = AssetDatabase.FindAssets("t:Scene", new[] { "Assets/PaperDefense/Scenes/Tests" });
-            Assert.That(allScenes.Length, Is.EqualTo(26));
-            // Independent visual galleries are exercised by NotebookArtStandSceneTests;
+            Assert.That(allScenes.Select(AssetDatabase.GUIDToAssetPath),
+                Is.EquivalentTo(MechanicsSceneCatalog.Default.Scenes.Select(entry => entry.ScenePath)));
+            // Independent visual galleries are exercised by NotebookArtStandSceneTests and PlayerAssetStandTests;
             // the original 23 scenes each still require their isolated simulation driver.
             string[] paths = Array.FindAll(allScenes, guid => {
                 string path = AssetDatabase.GUIDToAssetPath(guid);
                 return !path.EndsWith("/24_TowerArt.unity", StringComparison.Ordinal)
                     && !path.EndsWith("/25_EnemyAnimation.unity", StringComparison.Ordinal)
-                    && !path.EndsWith("/26_InkEffects.unity", StringComparison.Ordinal);
+                    && !path.EndsWith("/26_InkEffects.unity", StringComparison.Ordinal)
+                    && !path.EndsWith("/27_PlayerAssets.unity", StringComparison.Ordinal);
             });
             Assert.That(paths.Length, Is.EqualTo(23));
             Array.Sort(paths, (a, b) => StringComparer.Ordinal.Compare(AssetDatabase.GUIDToAssetPath(a), AssetDatabase.GUIDToAssetPath(b)));

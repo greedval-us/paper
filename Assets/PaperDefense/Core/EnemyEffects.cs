@@ -97,30 +97,56 @@ namespace PaperDefense.Core
         {
             if (rules == null) throw new ArgumentNullException(nameof(rules));
             if (enemy == null || delta <= 0 || float.IsNaN(delta) || float.IsInfinity(delta)) return;
-            float previousHealth=enemy.Health;
-            float redActiveSeconds = Math.Min(delta, Math.Max(0, enemy.RedRemaining));
-            enemy.BlotRemaining = Math.Max(0, enemy.BlotRemaining - delta);
             if (enemy.BlueEffect != null)
             {
                 enemy.BlueEffect.Advance(delta, enemy, rules, statistics, blotReduction);
                 enemy.BlueRemaining = enemy.BlueEffect.Remaining;
             }
             else enemy.BlueRemaining = Math.Max(0, enemy.BlueRemaining - delta);
+
+            // Defense is piecewise constant. Resolve red pulses before expiring the
+            // defense that protected their interval, then continue with the next one.
+            // This is bounded by the stored defense strengths, not by frame duration.
+            double remaining = delta;
+            while (remaining > .0000001)
+            {
+                float step = (float)remaining;
+                if (enemy.GreenRemaining > 0) step = Math.Min(step, enemy.GreenRemaining);
+                if (enemy.BlotRemaining > 0) step = Math.Min(step, enemy.BlotRemaining);
+                AdvanceRed(enemy, step, statistics, rules, blotReduction, events, tick, simulationSeconds);
+                AdvanceDefense(enemy, step, statistics, rules, blotReduction);
+                remaining -= step;
+            }
+        }
+
+        static void AdvanceDefense(EnemyState enemy, float delta, RunStatistics statistics, EffectsRules rules, float blotReduction)
+        {
+            enemy.BlotRemaining = RemainingAfter(enemy.BlotRemaining, delta);
             if (enemy.GreenEffect != null)
             {
                 enemy.GreenEffect.Advance(delta, enemy, rules, statistics, blotReduction);
                 enemy.GreenRemaining = enemy.GreenEffect.Remaining;
             }
-            else enemy.GreenRemaining = Math.Max(0, enemy.GreenRemaining - delta);
+            else enemy.GreenRemaining = RemainingAfter(enemy.GreenRemaining, delta);
+        }
+
+        static float RemainingAfter(float remaining, float delta)
+            => remaining - delta <= .000001f ? 0 : remaining - delta;
+
+        static void AdvanceRed(EnemyState enemy, float delta, RunStatistics statistics, EffectsRules rules,
+            float blotReduction, SimulationEventBuffer events, long tick, double simulationSeconds)
+        {
+            float previousHealth = enemy.Health;
+            float redActiveSeconds = Math.Min(delta, Math.Max(0, enemy.RedRemaining));
             if (enemy.RedEffect != null)
             {
-                enemy.RedEffect.Advance(delta, enemy, rules, statistics, blotReduction);
+                var source = enemy.RedEffect.Advance(delta, enemy, rules, statistics, blotReduction);
                 SyncRed(enemy);
-                PublishDamage(enemy,previousHealth,events,tick,simulationSeconds,enemy.RedSourceWeapon,enemy.RedSourceWeaponId);
+                PublishDamage(enemy,previousHealth,events,tick,simulationSeconds,source.Weapon,source.WeaponId);
                 return;
             }
             // Directly initialized historical fixtures still use their explicit scalar timers.
-            enemy.RedRemaining = Math.Max(0, enemy.RedRemaining - delta);
+            enemy.RedRemaining = RemainingAfter(enemy.RedRemaining, delta);
             if (redActiveSeconds > 0 && enemy.Health > 0)
             {
                 if (enemy.RedTickRemaining <= 0) enemy.RedTickRemaining = rules.RedTickSeconds;

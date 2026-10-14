@@ -9,9 +9,11 @@ namespace PaperDefense.Tests
     /// <summary>Exercises the shipped configuration with a finite, reproducible construction plan.</summary>
     public sealed class TowerDefenseBalanceTests
     {
-        static GameBalance MainBalance()
+        static GameBalance MainBalance(bool player)
         {
-            var preset=AssetDatabase.LoadAssetAtPath<BalancePresetAsset>("Assets/PaperDefense/Configuration/Content/Target.asset");
+            var preset=AssetDatabase.LoadAssetAtPath<BalancePresetAsset>(player
+                ? "Assets/PaperDefense/Configuration/Game/PlayerRules.asset"
+                : "Assets/PaperDefense/Configuration/Content/Target.asset");
             Assert.That(preset,Is.Not.Null);
             var balance=preset.CreateBalance();
             // Tests launch deliberately; combat, costs, rewards and enemy rules are unchanged.
@@ -19,9 +21,10 @@ namespace PaperDefense.Tests
             return balance;
         }
 
-        [Test] public void ActualStarterWeaponsNeedSeveralHitsAndAffordableOpeningProtectsCastle()
+        [TestCase(false)] [TestCase(true)]
+        public void ActualStarterWeaponsNeedSeveralHitsAndAffordableOpeningProtectsCastle(bool player)
         {
-            var b=MainBalance();var profile=new WorkshopProfile(b.Content,b);var loadout=profile.GetLoadoutBlueprints();
+            var b=MainBalance(player);var profile=new WorkshopProfile(b.Content,b);var loadout=profile.GetLoadoutBlueprints();
             foreach(var bp in loadout)foreach(var mount in bp.WeaponMounts)
             {
                 float damage=TowerCatalog.WeaponDamage(bp,b,mount.WeaponId,MaterialTier.Pencil,mount.SlotIndex);
@@ -36,10 +39,10 @@ namespace PaperDefense.Tests
             Assert.That(game.Kills,Is.EqualTo(b.Waves[0].Count));Assert.That(game.BaseHealth,Is.EqualTo(b.BaseHealth));
         }
 
-        [TestCase(17)] [TestCase(41)]
-        public void ReinforcedMixedDefenseCanFinishAllEightWavesWithinEarnedInk(int seed)
+        [TestCase(17, false)] [TestCase(41, false)] [TestCase(17, true)] [TestCase(41, true)]
+        public void ReinforcedMixedDefenseCanFinishAllEightWavesWithinEarnedInk(int seed, bool player)
         {
-            var b=MainBalance();var loadout=new WorkshopProfile(b.Content,b).GetLoadoutBlueprints();var game=new GameSession(b,seed,false);
+            var b=MainBalance(player);var loadout=new WorkshopProfile(b.Content,b).GetLoadoutBlueprints();var game=new GameSession(b,seed,false);
             // A central perimeter covers all four sides; earned ink adds piercing weapons and artillery.
             int[] points={44,28,52,28,44,36,52,36,48,26,48,38,42,32,54,32,42,26,54,26,42,38,54,38,
                 40,28,56,28,40,36,56,36,44,24,52,24,44,40,52,40,40,24,56,24,40,40,56,40,

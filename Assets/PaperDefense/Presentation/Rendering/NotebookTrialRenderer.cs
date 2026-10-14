@@ -20,7 +20,7 @@ namespace PaperDefense.Presentation
             {
                 if (playback.IsBlotEnded(blot.Cell)) continue;
                 Vector2 at = new Vector2(blot.Cell.X + .5f, blot.Cell.Y + .5f);
-                if (!NotebookArtRenderer.Draw(pen, theme?.FindShape("object.blot"), at))
+                if (!NotebookArtRenderer.Draw(pen, theme?.FindShape("object.blot"), at, theme: theme))
                     pen.Ring(at, .3f, .08f, NotebookPalette.Marker, 12);
             }
             foreach (var tower in frame.Towers)
@@ -57,8 +57,10 @@ namespace PaperDefense.Presentation
                 Vector2 from = Muzzle(frame, launch, playback, theme), to = new Vector2(launch.To.X, launch.To.Y);
                 bool mortar = launch.Kind == SimulationEventKind.ProjectileLaunched;
                 Vector2 point = Vector2.Lerp(from, to, progress) + (mortar ? Vector2.up * Mathf.Sin(progress * Mathf.PI) * Mathf.Min(3, Vector2.Distance(from, to) * .22f) : Vector2.zero);
-                if (!NotebookArtRenderer.Draw(pen, theme?.FindShape(mortar ? "fx.mortar.projectile" : "fx.spitter.projectile"), point))
+                if (!NotebookArtRenderer.Draw(pen, theme?.FindShape(mortar ? "fx.mortar.projectile" : "fx.spitter.projectile"), point, theme: theme))
                     pen.Disc(point, .12f, NotebookPalette.Marker, 8);
+                if (mortar) NotebookEffectRenderer.DrawFootprint(pen, to, launch.ImpactFootprint, launch.Radius, 1, .025f,
+                    MeshPen.Alpha(NotebookPalette.Marker, .2f), 24, launch.EntityId, true);
             }
             // Historical recordings retain the snapshot path when they predate semantic launch events.
             foreach (var projectile in frame.Projectiles)
@@ -71,7 +73,9 @@ namespace PaperDefense.Presentation
                 float progress = Mathf.Clamp01(1 - (projectile.Remaining - (seconds - frame.Seconds)) / Mathf.Max(.001f, projectile.Duration));
                 Vector2 from = new Vector2(projectile.From.X, projectile.From.Y), to = new Vector2(projectile.To.X, projectile.To.Y);
                 Vector2 point = Vector2.Lerp(from, to, progress) + Vector2.up * Mathf.Sin(progress * Mathf.PI) * Mathf.Min(3, Vector2.Distance(from, to) * .22f);
-                NotebookArtRenderer.Draw(pen, theme?.FindShape("fx.mortar.projectile"), point);
+                NotebookArtRenderer.Draw(pen, theme?.FindShape("fx.mortar.projectile"), point, theme: theme);
+                NotebookEffectRenderer.DrawFootprint(pen, to, projectile.ImpactFootprint, projectile.Radius, 1, .025f,
+                    MeshPen.Alpha(NotebookPalette.Marker, .2f), 24, projectile.Id, true);
             }
         }
         internal static void DrawEffects(MeshPen pen, NotebookTrialPlayback playback, NotebookVisualThemeAsset theme = null)
@@ -80,16 +84,8 @@ namespace PaperDefense.Presentation
             var frame = playback.Report.Frames[playback.FrameIndex];
             foreach (var item in playback.Effects)
             {
-                string id = NotebookWorldView.EffectId(item);
                 float age = (float)(playback.Seconds - item.SimulationSeconds);
-                var clip = theme?.FindClip(id); var pose = clip?.Sample(age);
-                float fade = 1 - Mathf.Clamp01(age / (clip?.Duration ?? .5f));
-                Vector2 to = new Vector2(item.To.X, item.To.Y), from = Muzzle(frame, item, playback, theme);
-                if (item.Kind == SimulationEventKind.Shot)
-                    pen.Line(from, to, .045f, MeshPen.Alpha(item.Weapon == StructureKind.Blotter ? NotebookPalette.Green : NotebookPalette.Blue, fade));
-                Vector2 at = item.Kind == SimulationEventKind.WeaponActionStarted ? from : to;
-                NotebookArtRenderer.Draw(pen, theme?.FindShape(pose?.ShapeId ?? id), at + (pose?.Offset ?? Vector2.zero),
-                    pose?.Scale ?? 1, pose?.Rotation ?? 0, opacity: fade * (pose?.Alpha ?? 1));
+                NotebookEffectRenderer.Draw(pen, item, Muzzle(frame, item, playback, theme), age, theme);
             }
             if (frame.Events.Count == 0)
                 foreach (var shot in frame.Shots)

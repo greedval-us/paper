@@ -188,5 +188,45 @@ namespace PaperDefense.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => EnemyEffects.ApplySlow(enemy, .5f, float.NaN));
             Assert.That(enemy.BlueRemaining, Is.Zero);
         }
+
+        [TestCase(false, .6f, 970f)]
+        [TestCase(false, .75f, 965f)]
+        [TestCase(true, .6f, 970f)]
+        [TestCase(true, .75f, 965f)]
+        public void RedPulsesUseDefenseAtThePulseTimeIncludingSimultaneousExpiry(bool historical, float greenDuration, float expected)
+        {
+            var rules = new EffectsRules { HatchedDefense = .5f, GreenDefenseReduction = .5f,
+                GreenDuration = greenDuration, RedDuration = 1, RedDamagePerTick = 10,
+                RedTickSeconds = .25f, RedIgnoresDefense = false };
+            EnemyState Create()
+            {
+                var enemy = Enemy(); enemy.DrawingTier = DrawingTier.Hatched;
+                if (historical) { enemy.RedRemaining = 1; enemy.GreenRemaining = greenDuration; }
+                else
+                {
+                    EnemyEffects.ApplyHit(enemy, 0, InkColor.Green, null, StructureKind.Gun, rules);
+                    EnemyEffects.ApplyHit(enemy, 0, InkColor.Red, null, StructureKind.Gun, rules);
+                }
+                return enemy;
+            }
+            var whole = Create(); var split = Create();
+            EnemyEffects.Advance(whole, 1, null, rules);
+            for (int i = 0; i < 20; i++) EnemyEffects.Advance(split, .05f, null, rules);
+            Assert.That(whole.Health, Is.EqualTo(expected).Within(.001f), "Expired green cannot erase its earlier synergy with red.");
+            Assert.That(split.Health, Is.EqualTo(whole.Health).Within(.001f));
+            Assert.That(whole.GreenRemaining, Is.Zero);
+            Assert.That(whole.RedRemaining, Is.Zero);
+        }
+
+        [Test]
+        public void BlotDefenseProtectsOnlyPulsesBeforeItsExpiry()
+        {
+            var rules = new EffectsRules { RedDuration = 1, RedDamagePerTick = 10,
+                RedTickSeconds = .25f, RedIgnoresDefense = false };
+            var enemy = Enemy(); enemy.BlotRemaining = .6f;
+            EnemyEffects.ApplyHit(enemy, 0, InkColor.Red, null, StructureKind.Mortar, rules);
+            EnemyEffects.Advance(enemy, 1, null, rules, .5f);
+            Assert.That(enemy.Health, Is.EqualTo(970).Within(.001f), "Two protected pulses and two unprotected pulses.");
+        }
     }
 }

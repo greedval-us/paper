@@ -207,7 +207,7 @@ namespace PaperDefense.Core
             visualSourceStructureId=structure.Id;visualMountSlotIndex=mount;visualActionId=++nextActionId;
             events.Publish(tick,SimulationEventKind.WeaponActionStarted,from,to,weapon.LegacyKind??(StructureKind)(-1),
                 entityId:structure.Id,weaponId:weapon.Id,sourceStructureId:structure.Id,mountSlotIndex:mount,
-                actionId:visualActionId,simulationSeconds:clockSeconds);
+                actionId:visualActionId,simulationSeconds:clockSeconds,attack:weapon.Attack);
         }
 
         void PublishShot(Point2 from,Point2 to,WeaponDefinition weapon,float radius,int structureId,List<ShotEvent> shots,long tick,SimulationEventBuffer events)
@@ -215,7 +215,7 @@ namespace PaperDefense.Core
             StructureKind legacy = weapon.LegacyKind ?? (StructureKind)(-1);
             shots.Add(new ShotEvent(from,to,legacy,radius,weapon.Id,structureId,visualMountSlotIndex,visualActionId,clockSeconds));
             events.Publish(tick,SimulationEventKind.Shot,from,to,legacy,radius,structureId,weaponId:weapon.Id,
-                sourceStructureId:structureId,mountSlotIndex:visualMountSlotIndex,actionId:visualActionId,simulationSeconds:clockSeconds);
+                sourceStructureId:structureId,mountSlotIndex:visualMountSlotIndex,actionId:visualActionId,simulationSeconds:clockSeconds,attack:weapon.Attack);
         }
 
         private bool TrackTarget(StructureState structure, EnemyState target, int mount, float delta)
@@ -325,7 +325,7 @@ namespace PaperDefense.Core
             projectiles.Add(projectile);
             events.Publish(tick, SimulationEventKind.ProjectileLaunched, from, to, projectile.Weapon,
                 projectile.Radius, projectile.Id, duration, projectile.ImpactFootprint, projectile.WeaponId,
-                projectile.SourceStructureId,projectile.MountSlotIndex,projectile.ActionId,clockSeconds);
+                projectile.SourceStructureId,projectile.MountSlotIndex,projectile.ActionId,clockSeconds,attack:weapon.Attack);
         }
 
         private void FireFan(StructureState structure, Point2 origin, Point2 aim, WeaponDefinition weapon,
@@ -407,7 +407,7 @@ namespace PaperDefense.Core
                 }
                 events.Publish(tick, SimulationEventKind.ProjectileImpact, projectile.From, projectile.To,
                     projectile.Weapon, projectile.Radius, projectile.Id, impactFootprint: projectile.ImpactFootprint,weaponId:projectile.WeaponId,
-                    sourceStructureId:projectile.SourceStructureId,mountSlotIndex:projectile.MountSlotIndex,actionId:projectile.ActionId,simulationSeconds:clockSeconds);
+                    sourceStructureId:projectile.SourceStructureId,mountSlotIndex:projectile.MountSlotIndex,actionId:projectile.ActionId,simulationSeconds:clockSeconds,attack:AttackKind.AreaProjectile);
             }
             if (write < projectiles.Count) projectiles.RemoveRange(write, projectiles.Count - write);
         }

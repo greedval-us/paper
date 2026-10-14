@@ -49,13 +49,14 @@ namespace PaperDefense.Core
             return true;
         }
 
-        internal void Advance(float delta, EnemyState enemy, EffectsRules rules, RunStatistics statistics, float blotReduction)
+        internal (StructureKind Weapon, string WeaponId) Advance(float delta, EnemyState enemy, EffectsRules rules, RunStatistics statistics, float blotReduction)
         {
+            var source = (Weapon, WeaponId);
             if (color != InkColor.Red)
             {
                 foreach (Entry entry in entries) entry.Remaining = Math.Max(0, entry.Remaining - delta);
                 RemoveExpired();
-                return;
+                return source;
             }
 
             double remaining = delta;
@@ -74,6 +75,7 @@ namespace PaperDefense.Core
                     float actual = Math.Min(enemy.Health, damage);
                     enemy.Health = Math.Max(0, enemy.Health - actual);
                     statistics?.RecordDamage(active.WeaponId, actual);
+                    if (actual > 0) source = (active.Weapon, active.WeaponId);
                 }
                 foreach (Entry entry in entries)
                     if (entry.TickRemaining <= Epsilon) entry.TickRemaining += entry.Payload.TickSeconds;
@@ -81,6 +83,9 @@ namespace PaperDefense.Core
                 remaining -= step;
             }
             if (enemy.Health <= 0) entries.Clear();
+            // Aggregate hit feedback uses the last pulse's actual source, even if
+            // that source expired or killed the enemy before this advance ended.
+            return source;
         }
 
         Entry Strongest()

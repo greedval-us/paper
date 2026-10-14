@@ -75,14 +75,14 @@ namespace PaperDefense.Presentation
                     for (int i = projectiles.Count - 1; i >= 0; i--)
                         if (projectiles[i].EntityId == item.EntityId && (projectiles[i].Kind == SimulationEventKind.ProjectileLaunched
                             ? item.Kind == SimulationEventKind.ProjectileImpact : item.Kind == SimulationEventKind.EnemyGlobImpact)) projectiles.RemoveAt(i);
-                if (NotebookWorldView.EffectId(item) == null) continue;
+                if (NotebookEffectRenderer.EffectId(item, theme) == null) continue;
                 if (effects.Count >= maximum) effects.RemoveAt(0);
                 effects.Add(item);
             }
             for (int i = effects.Count - 1; i >= 0; i--)
             {
-                var clip = (theme ?? NotebookVisualThemeAsset.Default)?.FindClip(NotebookWorldView.EffectId(effects[i]));
-                if (seconds - effects[i].SimulationSeconds >= (clip?.Duration ?? .5f)) effects.RemoveAt(i);
+                float duration = NotebookEffectRenderer.Duration(effects[i], theme ?? NotebookVisualThemeAsset.Default);
+                if (seconds - effects[i].SimulationSeconds >= duration) effects.RemoveAt(i);
             }
             Animation.Prune(seconds, theme);
             for (int i = projectiles.Count - 1; i >= 0; i--)
