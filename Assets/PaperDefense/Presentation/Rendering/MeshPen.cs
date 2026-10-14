@@ -11,8 +11,12 @@ namespace PaperDefense.Presentation
     {
         readonly List<Vector3> vertices;
         readonly List<Color32> colors;
+        readonly List<Vector3> strokeData;
         readonly List<int> indices;
         readonly Mesh mesh;
+        // Opt-in for world rendering. UI and geometry inspection keep the exact authored widths.
+        internal float WorldUnitsPerPixel { get; set; }
+        internal float MinimumStrokePixels { get; set; } = 1.25f;
 
         // VertexHelper rejects 65,000 vertices. Keep each slice triangle-aligned and strictly below it.
         internal const int MaximumUiBatchVertices = 64998;
@@ -23,6 +27,7 @@ namespace PaperDefense.Presentation
             mesh = target;
             vertices = new List<Vector3>(capacity);
             colors = new List<Color32>(capacity);
+            strokeData = new List<Vector3>(capacity);
             indices = new List<int>(capacity * 3 / 2);
             if (mesh != null) { mesh.indexFormat = IndexFormat.UInt32; mesh.MarkDynamic(); }
         }
@@ -31,7 +36,18 @@ namespace PaperDefense.Presentation
         {
             vertices.Clear();
             colors.Clear();
+            strokeData.Clear();
             indices.Clear();
+        }
+
+        internal int VertexCount => vertices.Count;
+        internal void ScaleFrom(int firstVertex, Vector2 pivot, float scale)
+        {
+            for (int i = firstVertex; i < vertices.Count; i++)
+            {
+                vertices[i] = (Vector3)pivot + (vertices[i] - (Vector3)pivot) * scale;
+                var data = strokeData[i]; data.x *= Mathf.Abs(scale); data.y *= Mathf.Abs(scale); strokeData[i] = data;
+            }
         }
 
         int Vertex(Vector2 p, Color color)
@@ -39,6 +55,7 @@ namespace PaperDefense.Presentation
             int index = vertices.Count;
             vertices.Add(new Vector3(p.x, p.y, 0));
             colors.Add(color);
+            strokeData.Add(Vector3.zero);
             return index;
         }
 
@@ -68,8 +85,16 @@ namespace PaperDefense.Presentation
             Vector2 delta = to - from;
             float length = delta.magnitude;
             if (length < .0001f) return;
-            Vector2 side = new Vector2(-delta.y, delta.x) * (width * .5f / length);
+            float halfWidth = Mathf.Max(width, MinimumStrokePixels * WorldUnitsPerPixel) * .5f;
+            float extent = halfWidth + WorldUnitsPerPixel;
+            Vector2 side = new Vector2(-delta.y, delta.x) * (extent / length);
+            int first = vertices.Count;
             Quad(from - side, to - side, to + side, from + side, color);
+            if (WorldUnitsPerPixel > 0)
+            {
+                strokeData[first] = strokeData[first + 1] = new Vector3(halfWidth, -extent, 1);
+                strokeData[first + 2] = strokeData[first + 3] = new Vector3(halfWidth, extent, 1);
+            }
         }
 
         /// <summary>Append cached author lines with only a rigid transform; no wobble or silhouette replacement.</summary>
@@ -77,6 +102,19 @@ namespace PaperDefense.Presentation
         {
             if (geometry == null) return;
             int start = vertices.Count; float cosine = Mathf.Cos(radians), sine = Mathf.Sin(radians);
+            if (WorldUnitsPerPixel > 0)
+            {
+                // Cached authored geometry consists of one quad per stroke segment (or point).
+                // Keep endpoints/pivots unchanged while making its ink readable on screen.
+                for (int i = 0; i < geometry.Vertices.Count; i += 4)
+                {
+                    Vector2 a = (geometry.Vertices[i] + geometry.Vertices[i + 3]) * .5f;
+                    Vector2 b = (geometry.Vertices[i + 1] + geometry.Vertices[i + 2]) * .5f;
+                    float width = Vector2.Distance(geometry.Vertices[i], geometry.Vertices[i + 3]);
+                    Line(pivot + Rotate(a, cosine, sine), pivot + Rotate(b, cosine, sine), width, color);
+                }
+                return;
+            }
             for (int i = 0; i < geometry.Vertices.Count; i++)
             {
                 var point = geometry.Vertices[i];
@@ -84,6 +122,9 @@ namespace PaperDefense.Presentation
             }
             for (int i = 0; i < geometry.Indices.Count; i++) indices.Add(start + geometry.Indices[i]);
         }
+
+        static Vector2 Rotate(Vector2 point, float cosine, float sine)
+            => new Vector2(cosine * point.x - sine * point.y, sine * point.x + cosine * point.y);
 
         public void Stroke(Vector2 from, Vector2 to, float width, Color color, int seed = 0, float wobble = .018f)
         {
@@ -159,6 +200,7 @@ namespace PaperDefense.Presentation
             if (vertices.Count == 0) return;
             mesh.SetVertices(vertices);
             mesh.SetColors(colors);
+            mesh.SetUVs(0, strokeData);
             mesh.SetTriangles(indices, 0, false);
             mesh.RecalculateBounds();
         }

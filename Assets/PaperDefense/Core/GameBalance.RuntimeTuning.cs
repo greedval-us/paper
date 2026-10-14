@@ -50,6 +50,7 @@ namespace PaperDefense.Core
     public sealed partial class GameBalance
     {
         public CombatTuningRules Combat = new CombatTuningRules();
+        public CrowdMovementRules Crowd = new CrowdMovementRules();
         public TrialRules Trials = new TrialRules();
         public List<WellPlacementDefinition> WellPlacements = new List<WellPlacementDefinition>
         {

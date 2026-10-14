@@ -32,6 +32,9 @@ namespace PaperDefense.Validation
         {
             Config = config ?? new PressureScenarioConfig();
             var balance = configuredBalance == null ? GameBalance.CreateDefault() : configuredBalance.CreateSnapshot();
+            // This replay owns an open-field four-sided arena and a purchased closed wall ring.
+            // Keep configured combat/art tuning, but do not inherit a production road map.
+            balance.Battlefield = null;
             balance.Width = Config.Width; balance.Height = Config.Height;
             balance.StartingInk = Config.StartingInk; balance.BaseHealth = Config.BaseHealth;
             balance.PlanningSeconds = Config.PlanningSeconds;

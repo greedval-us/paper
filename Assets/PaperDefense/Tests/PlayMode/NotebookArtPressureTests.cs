@@ -46,7 +46,10 @@ namespace PaperDefense.Tests
             Assert.That(configured, Is.Not.Null);
             var theme = NotebookVisualThemeAsset.Default;
             Assert.That(theme, Is.Not.Null, "The pressure check requires the imported notebook art, not missing-resource fallback glyphs.");
-            var scenario = new PressureScenario(configuredBalance: configured.CreateBalance());
+            // Physical spacing needs enough arena area for 3000 full-size bodies.
+            var scenario = new PressureScenario(new PressureScenarioConfig { Width = 192, Height = 128 }, configured.CreateBalance());
+            Assert.That(scenario.ReadModel.Battlefield, Is.Null, "The dedicated four-sided ring benchmark owns its open-field arena.");
+            Assert.That(configured.CreateBalance().Battlefield, Is.Not.Null, "Preparing the benchmark must preserve the actual production map.");
             Assert.That(scenario.Report.FailedCommands, Is.Zero, "Configured Target rules must accept the pressure fixture's purchased outer wall ring.");
             while (scenario.ReadModel.Enemies.Count < 300 && !scenario.Finished && scenario.ReadModel.TickIndex < 1800) scenario.Step();
             Assert.That(scenario.ReadModel.Enemies.Count, Is.InRange(300, 1000), "First sample the detailed resource path before compact crowd rendering begins.");
@@ -70,20 +73,45 @@ namespace PaperDefense.Tests
                 var firstEnemy = scenario.ReadModel.Enemies[0];
                 var motion = view.AnimationState.Observe(firstEnemy, view.VisualSeconds, out float phase, theme);
                 Assert.That(motion, Is.EqualTo(NotebookEnemyMotion.Walk), "The detailed sample must exercise authored movement poses from real core motion.");
-                var expectedPen = new MeshPen(expectedMesh);
+                // Compare the same resource at the same screen-space ink width as the world batch.
+                var worldPen = (MeshPen)typeof(NotebookWorldView).GetField("worldPen",
+                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(view);
+                var expectedPen = new MeshPen(expectedMesh)
+                {
+                    WorldUnitsPerPixel = worldPen.WorldUnitsPerPixel,
+                    MinimumStrokePixels = worldPen.MinimumStrokePixels
+                };
                 Assert.That(DoodleGlyphs.DrawResourceEnemy(expectedPen, firstEnemy.Kind, firstEnemy.DrawingTier,
-                    new Vector2(firstEnemy.Position.X, firstEnemy.Position.Y), motion, phase, theme), Is.True);
+                    new Vector2(firstEnemy.Position.X, firstEnemy.Position.Y), motion, phase, theme, firstEnemy.VisualScale), Is.True);
                 expectedPen.Upload();
                 Assert.That(ContainsBody(WorldMesh(root).vertices, expectedMesh.vertices), Is.True,
                     "The world batch must contain the actual resource triangles for the sampled moving enemy.");
                 int detailedChildren = root.GetComponentsInChildren<Transform>(true).Length;
                 int detailedBatches = root.GetComponentsInChildren<MeshRenderer>(true).Length;
 
+                double coreMilliseconds = 0, maximumCoreMilliseconds = 0; int coreSamples = 0;
                 while (scenario.ReadModel.Enemies.Count < scenario.Config.EnemyCount && !scenario.Finished && scenario.ReadModel.TickIndex < 1800)
-                { scenario.Step(); DeliverEvents(scenario, view, ref cursor); }
+                {
+                    long started = System.Diagnostics.Stopwatch.GetTimestamp();
+                    scenario.Step();
+                    double milliseconds = (System.Diagnostics.Stopwatch.GetTimestamp() - started) * 1000.0 / System.Diagnostics.Stopwatch.Frequency;
+                    coreMilliseconds += milliseconds; maximumCoreMilliseconds = System.Math.Max(maximumCoreMilliseconds, milliseconds); coreSamples++;
+                    DeliverEvents(scenario, view, ref cursor);
+                }
                 Assert.That(scenario.ReadModel.Enemies.Count, Is.EqualTo(3000),
                     "The Target-configured pressure fixture must reach its natural live peak; no enemy state is injected or rewritten.");
                 Assert.That(scenario.Report.PeakAliveEnemies, Is.EqualTo(3000));
+                var crowdRules = scenario.Session.Balance.Crowd;
+                Assert.That(crowdRules.Enabled, Is.True, "The pressure fixture must exercise production crowd movement.");
+                for (int i = 0; i < scenario.Session.Enemies.Count; i++)
+                    for (int j = i + 1; j < scenario.Session.Enemies.Count; j++)
+                    {
+                        var a = scenario.Session.Enemies[i]; var b = scenario.Session.Enemies[j];
+                        float dx = a.Position.X - b.Position.X, dy = a.Position.Y - b.Position.Y;
+                        float minimum = (a.VisualScale + b.VisualScale) * crowdRules.RadiusPerVisualScale;
+                        if (dx * dx + dy * dy < minimum * minimum - .001f) Assert.Fail("Pressure bodies overlap: " + a.Id + "/" + b.Id);
+                    }
+                TestContext.WriteLine("Natural crowd core: samples={0}, average={1:F3}ms, max={2:F3}ms", coreSamples, coreMilliseconds / System.Math.Max(1, coreSamples), maximumCoreMilliseconds);
                 Assert.That(scenario.Report.FailedCommands, Is.Zero);
                 yield return null; yield return null; // Warm the compact path and any already-started effect shapes.
 

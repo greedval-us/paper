@@ -52,7 +52,7 @@ namespace PaperDefense.Core
         public static float WeaponRange(TowerBlueprint blueprint,GameBalance balance,StructureKind kind)
         {
             // Construction tools have no aiming range and are not weapon catalog entries.
-            if(kind==StructureKind.Wall||kind==StructureKind.Spikes)return 0;
+            if(ConstructionToolRules.IsTool(kind))return kind==StructureKind.RepairPost?Balance(balance).Structure(kind).Range:0;
             string weaponId=LegacyContentIds.Weapon(kind);
             return WeaponRange(blueprint,balance,weaponId,FindWeaponMount(blueprint,weaponId));
         }

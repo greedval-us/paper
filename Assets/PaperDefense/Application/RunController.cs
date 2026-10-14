@@ -180,7 +180,7 @@ namespace PaperDefense.Application
         {
             reason = "";
             if (session == null || InWorkshop) { reason = UserText.Message("copy.e6a1f147d46938e5"); return false; }
-            if (workshopMode && kind != StructureKind.Wall && kind != StructureKind.Spikes)
+            if (workshopMode && !ConstructionToolRules.IsTool(kind))
             { reason = UserText.Message("copy.65fd0a869c823b56"); return false; }
             return true;
         }

@@ -34,7 +34,7 @@ namespace PaperDefense.Core
             {
                 wells.Add(new InkWellState{Id=i,Cell=cells[i],Color=rules.WellPlacements[i].Color,Health=rules.WellHealth,
                     MaxHealth=rules.WellHealth});
-                wellFlows[i]=new WeightedFlowField(rules.Width,rules.Height);
+                wellFlows[i]=new WeightedFlowField(rules.Width,rules.Height,Battlefield);
             }
         }
 
@@ -85,9 +85,21 @@ namespace PaperDefense.Core
         private WeightedFlowField EnemyFlow(EnemyState enemy)
             => enemy.ObjectiveIndex>=0&&enemy.ObjectiveIndex<wells.Count&&wells[enemy.ObjectiveIndex].Active?wellFlows[enemy.ObjectiveIndex]:flow;
 
-        private int ChooseObjective()
+        private int ChooseObjective(Cell spawn)
         {
             if(wells.Count==0||random.NextDouble()>=Clamp(rules.Progression.WellThreatFraction,0,1))return -1;
+            if(Battlefield!=null&&!Battlefield.IsOpenTerrain)
+            {
+                // Fixed roads use one immutable forward route. Picking another branch's well
+                // would create opposing traffic on a single-cell road and can deadlock crowds.
+                var cell=spawn;
+                while(cell!=BaseCell)
+                {
+                    foreach(var well in wells)if(well.Active&&well.Cell==cell){well.Threatened=true;return well.Id;}
+                    var next=Battlefield.NextTowardCastle(cell);if(next==cell)break;cell=next;
+                }
+                return -1;
+            }
             int active=0;foreach(var well in wells)if(well.Active)active++;
             if(active==0)return -1;
             int selection=random.Next(active);

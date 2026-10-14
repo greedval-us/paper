@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1150" height="1130" viewBox="0 0 1150 1130">
+<svg xmlns="http://www.w3.org/2000/svg" width="1150" height="1550" viewBox="0 0 1150 1550">
 <defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#b7cddd" stroke-width=".55" opacity=".60"/></pattern></defs>
-<rect width="100%" height="100%" fill="#f9f4e6"/><rect width="100%" height="100%" fill="url(#grid)"/><path d="M30 0V1130" stroke="#d77b80" stroke-width="1"/>
+<rect width="100%" height="100%" fill="#f9f4e6"/><rect width="100%" height="100%" fill="url(#grid)"/><path d="M30 0V1550" stroke="#d77b80" stroke-width="1"/>
 <text x="52" y="38" fill="#1f3047" font-family="monospace" font-size="19">06-workshop-icons</text>
 <g transform="translate(115,165) scale(130)">
 <polygon points="-0.43,0.27 0.42,0.28 0.47,0.18 0.44,-0.22 0.3,-0.34 -0.31,-0.33 -0.46,-0.21" fill="#f9f4e6" opacity="1"/>
@@ -393,4 +393,79 @@
 <polyline points="-0.2,-0.34 -0.19832,-0.212 -0.20279,-0.084 -0.19713,0.044 -0.20181,0.172 -0.2,0.3 -0.13878,0.25146 -0.08128,0.19846 -0.02,0.15 0.02377,0.21638 0.06633,0.28355 0.11,0.35 0.16878,0.30816 0.23,0.27 0.18406,0.19952 0.13584,0.13055 0.09,0.06 0.16309,0.05063 0.23692,0.04942 0.31,0.04 0.20915,-0.03755 0.10411,-0.10946 0.00592,-0.19057 -0.0992,-0.26239 -0.2,-0.34" fill="none" stroke="#1f3047" stroke-width="0.027" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
 </g>
 <text x="1035" y="1090" text-anchor="middle" fill="#1f3047" font-family="monospace" font-size="11">ui.tool.select</text>
+<g transform="translate(115,1215) scale(130)">
+<ellipse cx="0" cy="0.1" rx="0.44" ry="0.24200000000000002" opacity="1" fill="#1f3047"/>
+<ellipse cx="0" cy="0.1" rx="0.48" ry="0.2784" opacity="1" fill="none" stroke="#1f3047" stroke-width="0.022"/>
+<polyline points="-0.29,0.09 -0.21015,0.05467 -0.13,0.02 -0.04093,0.04836 0.05,0.07" fill="none" stroke="#f9f4e6" stroke-width="0.019" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<ellipse cx="0.22" cy="0.09" rx="0.054" ry="0.054" opacity="1" fill="none" stroke="#f9f4e6" stroke-width="0.016"/>
+<polyline points="-0.25,-0.1 -0.2535,-0.185 -0.25,-0.27 -0.19706,-0.31752 -0.14,-0.36" fill="none" stroke="#1f3047" stroke-width="0.022" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<polyline points="0.06,-0.12 0.07706,-0.21562 0.1,-0.31 0.05747,-0.35747 0.01,-0.4" fill="none" stroke="#1f3047" stroke-width="0.022" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+</g>
+<text x="115" y="1300" text-anchor="middle" fill="#1f3047" font-family="monospace" font-size="11">ui.tool.tar</text>
+<g transform="translate(345,1215) scale(130)">
+<polygon points="-0.34,0.32 0.34,0.32 0.34,-0.08 -0.34,-0.08" fill="#f9f4e6" opacity="1"/>
+<polyline points="-0.34,0.32 -0.204,0.31902 -0.068,0.32147 0.068,0.31866 0.204,0.32075 0.34,0.32 0.33836,0.22 0.3422,0.12 0.33852,0.02 0.34,-0.08 0.204,-0.08082 0.068,-0.0788 -0.068,-0.08107 -0.204,-0.07942 -0.34,-0.08 -0.33768,0.02 -0.34323,0.12 -0.33776,0.22 -0.34,0.32" fill="none" stroke="#1f3047" stroke-width="0.027" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<polygon points="-0.22,-0.08 0.22,-0.08 0.22,-0.29 -0.22,-0.29" fill="#f9f4e6" opacity="1"/>
+<polyline points="-0.22,-0.08 -0.11,-0.08237 0.0,-0.07669 0.11,-0.0823 0.22,-0.08 0.21654,-0.185 0.22,-0.29 0.11,-0.29245 0.0,-0.28651 -0.11,-0.29247 -0.22,-0.29 -0.21816,-0.185 -0.22,-0.08" fill="none" stroke="#1f3047" stroke-width="0.027" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<polyline points="-0.24,-0.29 -0.16182,-0.35242 -0.07818,-0.40758 0,-0.47 0.0815,-0.412 0.15846,-0.34795 0.24,-0.29" fill="none" stroke="#1f3047" stroke-width="0.03" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<polyline points="-0.14,0.1 -0.04667,0.0979 0.04667,0.10201 0.14,0.1" fill="none" stroke="#40966e" stroke-width="0.069" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<polyline points="0,0.24 -0.0025,0.14667 0.00243,0.05333 0,-0.04" fill="none" stroke="#40966e" stroke-width="0.069" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<polyline points="-0.31,0.29 -0.28,0.2" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="-0.28,0.29 -0.25,0.2" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="-0.25,0.29 -0.22,0.2" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="-0.22,0.29 -0.19,0.2" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="-0.19,0.29 -0.16,0.2" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+</g>
+<text x="345" y="1300" text-anchor="middle" fill="#1f3047" font-family="monospace" font-size="11">ui.tool.repair</text>
+<g transform="translate(575,1215) scale(130)">
+<polyline points="-0.24,0.28 -0.23954,0.195 -0.24051,0.11 -0.23974,0.025 -0.24,-0.06 -0.33,-0.05866 -0.42,-0.06 -0.3351,-0.13298 -0.25353,-0.20973 -0.16641,-0.2802 -0.08502,-0.35716 0,-0.43 0.08481,-0.35692 0.16662,-0.28043 0.25345,-0.20965 0.33506,-0.13293 0.42,-0.06 0.33,-0.06196 0.24,-0.06 0.24124,0.025 0.23813,0.11 0.24141,0.195 0.24,0.28 0.144,0.27938 0.048,0.28087 -0.048,0.27926 -0.144,0.28037 -0.24,0.28" fill="none" stroke="#1f3047" stroke-width="0.033" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<polyline points="-0.24,0.4 -0.144,0.40193 -0.048,0.39692 0.048,0.40302 0.144,0.39817 0.24,0.4" fill="none" stroke="#387bbd" stroke-width="0.028" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+</g>
+<text x="575" y="1300" text-anchor="middle" fill="#1f3047" font-family="monospace" font-size="11">ui.tool.upgrade</text>
+<g transform="translate(805,1215) scale(130)">
+<polygon points="-0.24,-0.12 0.24,-0.12 0.24,-0.39 -0.24,-0.39" fill="#f9f4e6" opacity="1"/>
+<polyline points="-0.24,-0.12 -0.144,-0.11835 -0.048,-0.12258 0.048,-0.11751 0.144,-0.12148 0.24,-0.12 0.23989,-0.21 0.23999,-0.3 0.24,-0.39 0.144,-0.38959 0.048,-0.39081 -0.048,-0.38906 -0.144,-0.39066 -0.24,-0.39 -0.243,-0.3 -0.23699,-0.21 -0.24,-0.12" fill="none" stroke="#1f3047" stroke-width="0.027" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<polygon points="-0.08,0.11 0.08,0.11 0.08,-0.14 -0.08,-0.14" fill="#f9f4e6" opacity="1"/>
+<polyline points="-0.08,0.11 0.0,0.10939 0.08,0.11 0.07759,0.02667 0.08233,-0.05667 0.08,-0.14 0.0,-0.13669 -0.08,-0.14 -0.07707,-0.05667 -0.08296,0.02667 -0.08,0.11" fill="none" stroke="#1f3047" stroke-width="0.027" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<polyline points="-0.25,-0.16 -0.18,-0.13 -0.1,-0.17 -0.03,-0.13 0.04,-0.17 0.11,-0.13 0.18,-0.17 0.25,-0.15" fill="none" stroke="#1f3047" stroke-width="0.021" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<polyline points="-0.21,-0.32 -0.105,-0.31936 0.0,-0.32104 0.105,-0.31917 0.21,-0.32" fill="none" stroke="#1f3047" stroke-width="0.013" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<ellipse cx="0" cy="0.01" rx="0.045" ry="0.045" opacity="1" fill="none" stroke="#1f3047" stroke-width="0.014"/>
+<polyline points="-0.21,-0.18 -0.175,-0.28" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="-0.175,-0.18 -0.14,-0.28" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="-0.14,-0.18 -0.105,-0.28" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="-0.105,-0.18 -0.07,-0.28" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="-0.07,-0.18 -0.035,-0.28" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="-0.035,-0.18 0.0,-0.28" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="0.0,-0.18 0.035,-0.28" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="0.035,-0.18 0.07,-0.28" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="0.07,-0.18 0.105,-0.28" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="0.105,-0.18 0.14,-0.28" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="0.14,-0.18 0.175,-0.28" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="0.175,-0.18 0.21,-0.28" fill="none" stroke="#1f3047" stroke-width="0.009" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<ellipse cx="-0.16" cy="-0.35" rx="0.01" ry="0.01" opacity="0.78" fill="#57667a"/>
+<ellipse cx="-0.07" cy="-0.35" rx="0.01" ry="0.01" opacity="0.78" fill="#57667a"/>
+<ellipse cx="0.03" cy="-0.35" rx="0.01" ry="0.01" opacity="0.78" fill="#57667a"/>
+<ellipse cx="0.12" cy="-0.35" rx="0.01" ry="0.01" opacity="0.78" fill="#57667a"/>
+<ellipse cx="0.19" cy="-0.35" rx="0.01" ry="0.01" opacity="0.78" fill="#57667a"/>
+</g>
+<text x="805" y="1300" text-anchor="middle" fill="#1f3047" font-family="monospace" font-size="11">ui.tool.blotter</text>
+<g transform="translate(1035,1215) scale(130)">
+<polyline points="-0.22,0.34 -0.15429,0.23907 -0.09479,0.13425 -0.0252,0.03576 0.03426,-0.06909 0.1,-0.17 0.16405,-0.13324 0.23,-0.1 0.16544,0.00165 0.10301,0.10463 0.03688,0.2053 -0.02524,0.30847 -0.09,0.41 -0.15341,0.37205 -0.22,0.34" fill="none" stroke="#1f3047" stroke-width="0.029" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<polygon points="0.1,-0.17 0.2,-0.42 0.39,-0.32 0.23,-0.1" fill="#387bbd" opacity="1"/>
+<polyline points="0.1,-0.17 0.13053,-0.25445 0.16948,-0.33554 0.2,-0.42 0.29663,-0.37309 0.39,-0.32 0.33464,-0.24814 0.2853,-0.1719 0.23,-0.1" fill="none" stroke="#1f3047" stroke-width="0.025" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+</g>
+<text x="1035" y="1300" text-anchor="middle" fill="#1f3047" font-family="monospace" font-size="11">ui.tool.paint</text>
+<g transform="translate(115,1425) scale(130)">
+<polygon points="-0.23,0.33 0.34,0 -0.23,-0.33" fill="#387bbd" opacity="1"/>
+<polyline points="0.43,0.34 0.42796,0.204 0.43329,0.068 0.42674,-0.068 0.432,-0.204 0.43,-0.34" fill="none" stroke="#1f3047" stroke-width="0.033" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+</g>
+<text x="115" y="1510" text-anchor="middle" fill="#1f3047" font-family="monospace" font-size="11">ui.action.wave</text>
+<g transform="translate(345,1425) scale(130)">
+<polygon points="-0.37,0.31 0.37,0.31 0.37,-0.23 -0.37,-0.23" fill="#f9f4e6" opacity="1"/>
+<polyline points="-0.37,0.31 -0.222,0.31025 -0.074,0.30946 0.074,0.31067 0.222,0.3095 0.37,0.31 0.37025,0.202 0.36973,0.094 0.37013,-0.014 0.37,-0.122 0.37,-0.23 0.222,-0.22868 0.074,-0.23203 -0.074,-0.22808 -0.222,-0.23111 -0.37,-0.23 -0.36795,-0.122 -0.3733,-0.014 -0.36672,0.094 -0.37201,0.202 -0.37,0.31" fill="none" stroke="#1f3047" stroke-width="0.027" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<polyline points="-0.2,-0.23 -0.19698,-0.305 -0.2,-0.38 -0.1,-0.38239 0.0,-0.37659 0.1,-0.38243 0.2,-0.38 0.19955,-0.305 0.2,-0.23" fill="none" stroke="#1f3047" stroke-width="0.026" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<polyline points="-0.37,0.02 -0.222,0.01897 -0.074,0.02179 0.074,0.01809 0.222,0.02125 0.37,0.02" fill="none" stroke="#1f3047" stroke-width="0.02" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<polygon points="-0.07,0.08 0.07,0.08 0.07,-0.05 -0.07,-0.05" fill="#f9f4e6" opacity="1"/>
+</g>
+<text x="345" y="1510" text-anchor="middle" fill="#1f3047" font-family="monospace" font-size="11">ui.action.workshop</text>
 </svg>

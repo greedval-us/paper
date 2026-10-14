@@ -154,7 +154,7 @@ namespace PaperDefense.Editor
                 }
                 if (clip.Frames[0].Time != 0) throw Error(sourcePath, clip.Id, "first frame must start at zero");
             }
-            foreach (string family in new[] { "doodle", "runner", "gnawer", "spitter" })
+            foreach (string family in new[] { "doodle", "runner", "gnawer", "spitter", "brute", "bulwark" })
                 foreach (string tier in new[] { "sketch", "outlined", "hatched" })
                     foreach (string state in new[] { "idle", "walk", "attack", "hit", "death" })
                         if (!clips.Contains($"enemy.{family}.{tier}.{state}")) throw Error(sourcePath, $"enemy.{family}.{tier}.{state}", "required enemy clip missing");
@@ -264,6 +264,7 @@ namespace PaperDefense.Editor
             ExportSheet(source, "Imported-modular-parts", source.Shapes.Where(shape => !string.IsNullOrEmpty(shape.TemplateId)).ToList(), 5);
             ExportSheet(source, "Imported-enemies", source.Shapes.Where(shape => shape.Id.StartsWith("enemy.", StringComparison.Ordinal) && shape.Id.EndsWith(".idle", StringComparison.Ordinal)).ToList(), 3);
             ExportSheet(source, "Imported-objects", source.Shapes.Where(shape => shape.Id.StartsWith("object.", StringComparison.Ordinal)).ToList(), 5);
+            ExportSheet(source, "Imported-terrain", source.Shapes.Where(shape => shape.Id.StartsWith("terrain.", StringComparison.Ordinal)).ToList(), 3);
             ExportSheet(source, "Imported-effects", source.Shapes.Where(shape => shape.Id.StartsWith("fx.", StringComparison.Ordinal)).ToList(), 5);
         }
         static void ExportSheet(NotebookArtSource source, string name, List<NotebookArtShape> shapes, int columns)

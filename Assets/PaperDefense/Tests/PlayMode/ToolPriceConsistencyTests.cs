@@ -27,8 +27,8 @@ namespace PaperDefense.Tests
                 Assert.That(quote.Valid, Is.True, quote.Reason);
                 Assert.That(quote.Cost, Is.EqualTo(401), "Observed Unity Mono quote before the shared-formula extraction.");
                 var button = root.GetComponentsInChildren<Button>(true).Single(b => b.name == "Tool 4");
-                var price = button.GetComponentsInChildren<Text>().Single(t => t.text.Contains("штр. / клетка"));
-                Assert.That(price.text, Is.EqualTo(quote.Cost + " штр. / клетка"));
+                var price = button.GetComponentsInChildren<Text>().Single(t => t.text.Contains("черн."));
+                Assert.That(price.text, Is.EqualTo(quote.Cost + " черн."));
                 int before = run.Session.Ink;
                 Assert.That(run.Build(new[] { cell }, StructureKind.Wall, MaterialTier.Marker, out var reason), Is.True, reason);
                 Assert.That(before - run.Session.Ink, Is.EqualTo(quote.Cost));

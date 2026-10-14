@@ -33,6 +33,8 @@ namespace PaperDefense.Presentation
         RunController run;
         NotebookWorldView view;
         Camera worldCamera;
+        public NotebookViewSettingsAsset ViewSettings;
+        NotebookViewSettingsAsset CameraSettings => ViewSettings != null ? ViewSettings : NotebookViewSettingsAsset.Default;
         readonly ConstructionGesture gesture = new ConstructionGesture();
         readonly List<RaycastResult> uiHits = new List<RaycastResult>();
         readonly Cell[] hoverPreview = new Cell[1];
@@ -105,7 +107,9 @@ namespace PaperDefense.Presentation
 
         public void SelectTool(StructureKind kind)
         {
-            if (ConstructionOnly && kind != StructureKind.Wall && kind != StructureKind.Spikes) return;
+            if (!Enum.IsDefined(typeof(StructureKind), kind)) return;
+            if (ConstructionOnly && !ConstructionToolRules.IsTool(kind)) return;
+            if (run != null && run.Session != null && !run.Session.Balance.HasStructure(kind)) return;
             Cancel(); BlueprintSlot = -1; Tool = kind; Mode = DrawingMode.Build; SelectionChanged?.Invoke();
         }
         public void SelectSlot(int slot)
@@ -143,6 +147,7 @@ namespace PaperDefense.Presentation
         void ResetUnavailableSelections()
         {
             var mechanics = run.Session.Balance.Mechanics;
+            if (!run.Session.Balance.HasStructure(Tool)) { BlueprintSlot = -1; Tool = StructureKind.Wall; }
             if (!mechanics.ColorCartridges) Color = InkColor.None;
             if ((Mode == DrawingMode.Paint && !mechanics.ColorCartridges) ||
                 (Mode == DrawingMode.Blotter && !mechanics.CorpseBlots)) Mode = DrawingMode.Build;
@@ -178,7 +183,7 @@ namespace PaperDefense.Presentation
                 { Message = run.Blotter(startCell, out var reason) ? UserText.Message("copy.1aa1c191d8f61cbe") : reason; }
                 else if (Mode == DrawingMode.Paint)
                 { Message = run.Paint(startCell, Color, out var reason) ? UserText.Message("copy.d28731380a0c6a83") : reason; }
-                else gesture.Begin(startCell, Tool == StructureKind.Wall || Tool == StructureKind.Spikes);
+                else gesture.Begin(startCell, BlueprintSlot < 0 && ConstructionToolRules.IsTool(Tool));
             }
             hasPressOrigin = false;
             if (gesture.Active && HasHover && (mouse.leftButton.isPressed || mouse.leftButton.wasReleasedThisFrame))
@@ -212,17 +217,22 @@ namespace PaperDefense.Presentation
         void Navigate(Mouse mouse,Vector2 screen)
         {
             if (!worldCamera.pixelRect.Contains(screen) || OverUi(screen)) return;
-            float wheel=mouse.scroll.ReadValue().y;
-            if (Mathf.Abs(wheel)>.01f)
+            float wheel = ScrollNotches(mouse.scroll.ReadValue().y, InputSystem.settings.scrollDeltaBehavior, UnityEngine.Application.platform);
+            if (Mathf.Abs(wheel) > .00001f)
             {
                 var before=worldCamera.ScreenToWorldPoint(new Vector3(screen.x,screen.y,10));
-                float old=Zoom;Zoom=Mathf.Clamp(Zoom*Mathf.Exp(wheel*.0015f),1,3);
+                float old = Zoom; Zoom = CameraSettings.ZoomAfterScroll(Zoom, wheel);
                 worldCamera.orthographicSize*=old/Zoom;
                 var after=worldCamera.ScreenToWorldPoint(new Vector3(screen.x,screen.y,10));
                 CameraCenter+=new Vector2(before.x-after.x,before.y-after.y);
             }
             if(mouse.middleButton.isPressed)
                 CameraCenter-=mouse.delta.ReadValue()*(worldCamera.orthographicSize*2/worldCamera.pixelHeight);
+            ClampCamera();
+        }
+
+        void ClampCamera()
+        {
             float halfY=worldCamera.orthographicSize,halfX=halfY*worldCamera.aspect;
             var b=run.Session.Balance;
             CameraCenter=new Vector2(halfX>=b.Width*.5f ? b.Width*.5f : Mathf.Clamp(CameraCenter.x,halfX,b.Width-halfX),
@@ -230,14 +240,21 @@ namespace PaperDefense.Presentation
             worldCamera.transform.position=new Vector3(CameraCenter.x,CameraCenter.y,-10);
         }
 
+        internal static float ScrollNotches(float delta, InputSettings.ScrollDeltaBehavior behavior, RuntimePlatform platform)
+        {
+            // Modern Input System already returns notches. Legacy Windows input alone uses 120 units.
+            bool windows = platform == RuntimePlatform.WindowsEditor || platform == RuntimePlatform.WindowsPlayer;
+            return behavior == InputSettings.ScrollDeltaBehavior.KeepPlatformSpecificInputRange && windows ? delta / 120f : delta;
+        }
+
         void Erase(Cell cell)
         { if (run.Erase(cell, out int refund)) Message = UserText.Message("copy.5520b3d1e73f8b1d", refund); }
         public void Cancel() { gesture.Cancel(); erasedCells = 0; hasPressOrigin = false; PreviewCost = 0; PreviewReason = ""; if (view != null) view.ClearPreview(); }
         public void Focus(Cell cell)
         {
-            Cancel(); Zoom = Mathf.Max(1.5f, Zoom);
+            Cancel(); float old = Zoom; Zoom = Mathf.Clamp(Mathf.Max(1.5f, Zoom), 1, Mathf.Max(1, CameraSettings.MaximumZoom));
             CameraCenter = new Vector2(cell.X + .5f, cell.Y + .5f);
-            if (worldCamera != null) worldCamera.transform.position = new Vector3(CameraCenter.x, CameraCenter.y, -10);
+            if (worldCamera != null) { worldCamera.orthographicSize *= old / Zoom; ClampCamera(); }
         }
 
         bool TryCell(Vector2 screen, out Cell cell)
@@ -271,6 +288,8 @@ namespace PaperDefense.Presentation
             {
                 if (k.digit5Key.wasPressedThisFrame) SelectTool(StructureKind.Wall);
                 if (k.digit6Key.wasPressedThisFrame) SelectTool(StructureKind.Spikes);
+                if (k.digit7Key.wasPressedThisFrame) SelectTool(StructureKind.TarPit);
+                if (k.digit8Key.wasPressedThisFrame) SelectTool(StructureKind.RepairPost);
                 if (k.eKey.wasPressedThisFrame) SelectMode(DrawingMode.Erase);
                 if (k.uKey.wasPressedThisFrame) SelectMode(DrawingMode.Upgrade);
                 if (k.qKey.wasPressedThisFrame) SelectTier((MaterialTier)(((int)Tier + 1) % 3));
@@ -285,6 +304,8 @@ namespace PaperDefense.Presentation
             if (k.digit4Key.wasPressedThisFrame) SelectSlot(3);
             if (k.digit5Key.wasPressedThisFrame) SelectTool(StructureKind.Wall);
             if (k.digit6Key.wasPressedThisFrame) SelectTool(StructureKind.Spikes);
+            if (k.digit7Key.wasPressedThisFrame) SelectTool(StructureKind.TarPit);
+            if (k.digit8Key.wasPressedThisFrame) SelectTool(StructureKind.RepairPost);
             if (k.eKey.wasPressedThisFrame) SelectMode(DrawingMode.Erase);
             if (k.uKey.wasPressedThisFrame) SelectMode(DrawingMode.Upgrade);
             if (k.bKey.wasPressedThisFrame) SelectMode(DrawingMode.Blotter);

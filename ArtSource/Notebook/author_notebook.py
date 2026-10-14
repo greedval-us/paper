@@ -158,6 +158,24 @@ def enemy(family,tier,state,phase):
         marks += [poly(mouth,0),path(mouth+[mouth[0]],w=.019),path([(-.03,.08),(.02,.01),(.07,.10),(.12,.03),(.17,.11),(.22,.05),(.27,.12)],w=.016,ch=2)]
         marks += [path([(.00,-gap-.02),(.04,-gap+.03),(.09,-gap-.01),(.14,-gap+.035),(.20,-gap+.005),(.25,-gap+.055)],w=.014,ch=2),disc(.12,.23,.025),path([(.02,.28),(.17,.29)],w=.023)]
         marks += [path([(-.25,.15),(-.31,.21),(-.18,.19)],w=.017)]
+    elif family in ["brute", "bulwark"]:
+        # A broad horned ink ogre and a shield-bearing escort read differently
+        # even without color, and share the same authored key-pose pipeline.
+        shoulder=.38 if family=="brute" else .27
+        p=[(-shoulder,-.10),(-shoulder,.20),(-.20,.36),(.18,.36),(shoulder,.19),(shoulder,-.10),(.19,-.21),(-.18,-.21)]
+        marks += outline(p,False,.035)
+        marks += [path([(-.18,-.15),(-.23-stride*.5,-.32),(-.38-stride*.5,-.32)],w=.055),path([(.17,-.15),(.24+stride*.5,-.32),(.38+stride*.5,-.32)],w=.055)]
+        if family=="brute":
+            for sign in [-1,1]:
+                marks += outline([(sign*.16,.32),(sign*.33,.52),(sign*.31,.24)],False,.025)
+                reach=.15*math.sin(t*math.pi) if attack else 0
+                marks += [path([(sign*.31,.13),(sign*(.46+reach),-.05),(sign*(.40+reach),-.18)],w=.065)]
+            marks += [poly([(-.18,.01),(.18,.01),(.13,-.11),(-.13,-.11)],0),path([(-.10,.01),(-.08,-.05),(-.03,.01),(.02,-.05),(.08,.01)],w=.022,ch=2),path([(-.18,.25),(-.04,.21)],w=.035),path([(.04,.21),(.18,.25)],w=.035)]
+            marks += [disc(-.10,.17,.027,3),disc(.10,.17,.027,3)]+hatch(-.27,-.15,.48,.07,7)
+        else:
+            shield=[(-.12,.27),(.34,.27),(.40,.05),(.25,-.23),(.11,-.34),(-.06,-.22),(-.17,.05)]
+            marks += outline(shield,False,.033)+[path([(.10,.20),(.10,-.22)],w=.019,ch=4),path([(-.08,.06),(.29,.06)],w=.019,ch=4),ring(.10,.06,.065,w=.025),path([(-.23,.21),(-.08,.21)],w=.037),disc(-.14,.16,.022,3),path([(-.28,-.10),(-.39,.12),(-.41,.34)],w=.034)]
+            marks += [poly([(-.49,.34),(-.39,.49),(-.31,.34)],0)]
     else:
         p=[(-.27,-.12),(-.32,.04),(-.27,.23),(-.12,.33),(.07,.32),(.23,.23),(.29,.08),(.24,-.13),(.08,-.22),(-.14,-.22)]
         marks+=outline(p,False,.030)
@@ -196,8 +214,8 @@ def enemy(family,tier,state,phase):
         marks += [path([(-.32,-.29),(.38,-.29)],w=.015,ch=1,alpha=1-t*.6)]
     return marks
 
-durations={"doodle":(.9,.58,.36,.17,.50),"runner":(.7,.34,.28,.14,.42),"gnawer":(1,.66,.42,.18,.55),"spitter":(1.1,.72,.50,.20,.60)}
-for family in ["doodle","runner","gnawer","spitter"]:
+durations={"doodle":(.9,.58,.36,.17,.50),"runner":(.7,.34,.28,.14,.42),"gnawer":(1,.66,.42,.18,.55),"spitter":(1.1,.72,.50,.20,.60),"brute":(1.2,.95,.65,.24,.80),"bulwark":(1.1,.80,.50,.22,.68)}
+for family in durations:
     for tier in ["sketch","outlined","hatched"]:
         for state,duration in zip(["idle","walk","attack","hit","death"],durations[family]):
             id=f"enemy.{family}.{tier}.{state}"; frames=[]
@@ -298,7 +316,10 @@ add("ui.tool.spikes",copy.deepcopy(next(s for s in shapes if s["Id"]=="object.sp
 add("ui.tool.erase",[poly([(-.33,-.20),(-.10,-.36),(.34,.17),(.10,.35)],2),path([(-.33,-.20),(-.10,-.36),(.34,.17),(.10,.35),(-.33,-.20)],w=.027),path([(-.12,-.10),(.12,.10)],w=.020)])
 add("ui.tool.select",[path([(-.20,.34),(-.20,-.30),(-.02,-.15),(.11,-.35),(.23,-.27),(.09,-.06),(.31,-.04),(-.20,.34)],w=.027)])
 
-source={"SchemaVersion":1,"Revision":"notebook-ink-2026.10.13-r3","MaximumTerminalTailSeconds":1.2,"MaximumEffects":256,"MaximumDeaths":128,
+from author_battlefield import author_battlefield
+author_battlefield(add, path, poly, ring, disc, outline, rect, hatch, star, copy, shapes)
+
+source={"SchemaVersion":1,"Revision":"notebook-ink-2026.10.14-td1","MaximumTerminalTailSeconds":1.2,"MaximumEffects":256,"MaximumDeaths":128,
         "Palette":[dict(zip(["r","g","b","a"],c)) for c in PALETTE],"Shapes":shapes,"Clips":clips,"Recoils":recoils}
 with (ROOT/"ArtSource/Notebook/notebook-theme.json").open("w",encoding="utf-8") as f: json.dump(source,f,ensure_ascii=False,indent=2)
 
@@ -322,9 +343,10 @@ def sheet(name,ids,cols=5):
         out += [f'<g transform="translate({x},{y}) scale(130)">']+[svg_mark(m) for m in lookup[id]["Marks"]]+['</g>',f'<text x="{x}" y="{y+85}" text-anchor="middle" fill="#1f3047" font-family="monospace" font-size="11">{html.escape(id)}</text>']
     out.append('</svg>');(ART/(name+".svg")).write_text("\n".join(out),encoding="utf-8")
 sheet("01-modular-parts",[s["Id"] for s in shapes if s["TemplateId"]])
-sheet("02-enemy-families",[f"enemy.{family}.{tier}.idle" for family in ["doodle","runner","gnawer","spitter"] for tier in ["sketch","outlined","hatched"]],3)
-sheet("03-enemy-key-poses",[f"enemy.{family}.hatched.{state}"+(".2" if state in ["attack","death"] else "") for family in ["doodle","runner","gnawer","spitter"] for state in ["idle","walk","attack","hit","death"]],5)
+sheet("02-enemy-families",[f"enemy.{family}.{tier}.idle" for family in durations for tier in ["sketch","outlined","hatched"]],3)
+sheet("03-enemy-key-poses",[f"enemy.{family}.hatched.{state}"+(".2" if state in ["attack","death"] else "") for family in durations for state in ["idle","walk","attack","hit","death"]],5)
 sheet("04-notebook-objects",["object.castle","object.castle.damaged","object.spikes","object.blot","object.well.red","object.well.blue","object.well.green"]+[f"object.wall.{i}" for i in range(16)],5)
 sheet("05-ink-effects",["fx."+id for id in fx],5)
 sheet("06-workshop-icons",[s["Id"] for s in shapes if s["Id"].startswith("ui.")],5)
-print(f"Authored {len(shapes)} shapes, {len(clips)} clips, {len(recoils)} recoil curves; canonical JSON and six SVG contact sheets.")
+sheet("07-battlefield",[s["Id"] for s in shapes if s["Id"].startswith("terrain.") or s["Id"] in ["object.tar","object.repair","object.entrance","object.barricade-site"]],4)
+print(f"Authored {len(shapes)} shapes, {len(clips)} clips, {len(recoils)} recoil curves; canonical JSON and seven SVG contact sheets.")

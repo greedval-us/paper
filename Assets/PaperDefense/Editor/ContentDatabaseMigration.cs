@@ -22,7 +22,7 @@ namespace PaperDefense.Editor
             if (oldHistorical==null || oldTarget==null) throw new InvalidOperationException("Не найдены исходные ассеты баланса.");
             if (oldHistorical.dataPreset!=null || oldTarget.dataPreset!=null || AssetDatabase.LoadAssetAtPath<ContentDatabaseAsset>(DatabasePath)!=null)
                 throw new InvalidOperationException("Миграция уже выполнена: существующие данные не перезаписываются.");
-            var historical=oldHistorical.CreateWorkshopBalance(); var target=oldTarget.CreateWorkshopBalance();
+            var historical=oldHistorical.CreateWorkshopBalance(); var target=NotebookTowerDefensePreset.Apply(oldTarget.CreateWorkshopBalance());
             var input=LegacyContentCatalog.CreateInput(historical);
             string capture=Path.GetFullPath("docs/validation/content/before/templates.json");
             var templates=JsonUtility.FromJson<TemplateCapture>(File.ReadAllText(capture));

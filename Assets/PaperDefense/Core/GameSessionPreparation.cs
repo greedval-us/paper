@@ -63,7 +63,7 @@ namespace PaperDefense.Core
                 var definition = session.rules.Enemy(target.Kind);
                 session.enemies.Add(new EnemyState {
                     Id = session.nextEnemyId++, Position = target.Position, Health = target.Health, MaxHealth = target.Health,
-                    Kind = target.Kind, DrawingTier = target.DrawingTier, SpeedScale = target.Stationary ? 0 : 1,
+                    Kind = target.Kind, VisualScale=definition.VisualScale, DrawingTier = target.DrawingTier, SpeedScale = target.Stationary ? 0 : 1,
                     RewardBudget = Math.Max(0, definition.Reward), ObjectiveIndex = -1
                 });
             }

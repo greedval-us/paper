@@ -164,14 +164,14 @@ namespace PaperDefense.Presentation
         {
             string[] poses = { "idle", "walk", "attack", "hit", "death" };
             for (int i = 0; i < poses.Length; i++) { string pose = poses[i]; Button(content, "Pose " + pose, new Rect(i * 302, 0, 288, 43), T("art.pose." + pose), () => SetEnemyPose(pose)); }
-            string[] kinds = { "doodle", "runner", "gnawer", "spitter" }, tiers = { "sketch", "outlined", "hatched" };
+            string[] kinds = { "doodle", "runner", "gnawer", "spitter", "brute", "bulwark" }, tiers = { "sketch", "outlined", "hatched" };
             for (int row = 0; row < tiers.Length; row++)
                 for (int col = 0; col < kinds.Length; col++)
                 {
                     string prefix = "enemy." + kinds[col] + "." + tiers[row];
                     enemyPrefixes.Add(prefix);
                     Card(prefix + ".idle.0", T("art.enemy_variant", T("art.enemy." + kinds[col]), T("art.tier." + tiers[row])),
-                        new Rect(col * 382, 62 + row * 230, 368, 214), prefix + "." + enemyPose);
+                        new Rect(col * 254, 62 + row * 230, 240, 214), prefix + "." + enemyPose);
                 }
         }
         public void SetEnemyPose(string pose)

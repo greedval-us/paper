@@ -53,6 +53,9 @@ namespace PaperDefense.Presentation
                 (theme ?? NotebookVisualThemeAsset.Default)?.FindShape("object.wall." + wallMask), p, strokeTint: MeshPen.Alpha(color, 1), opacity: alpha, theme: theme)) { }
             else if (state.Kind == StructureKind.Spikes && NotebookArtRenderer.Draw(pen,
                 (theme ?? NotebookVisualThemeAsset.Default)?.FindShape("object.spikes"), p, strokeTint: MeshPen.Alpha(color, 1), opacity: alpha, theme: theme)) { }
+            else if ((state.Kind == StructureKind.TarPit || state.Kind == StructureKind.RepairPost) && NotebookArtRenderer.Draw(pen,
+                (theme ?? NotebookVisualThemeAsset.Default)?.FindShape(state.Kind == StructureKind.TarPit ? "object.tar" : "object.repair"),
+                p, strokeTint: MeshPen.Alpha(color, 1), opacity: alpha, theme: theme)) { }
             else if (authored || ReferenceDrawingCache.UsesTemplateVisual(state.Blueprint))
             {
                 var geometry = AuthoredGeometryCache.For(ReferenceDrawingCache.VisibleDrawing(state.Blueprint));
@@ -70,6 +73,13 @@ namespace PaperDefense.Presentation
                 {
                     case StructureKind.Wall: Wall(pen, p, color, edge, fill, state.Id); break;
                     case StructureKind.Spikes: Spikes(pen, p, color, edge, fill, state.Id); break;
+                    case StructureKind.TarPit:
+                        pen.Disc(p, .4f, MeshPen.Alpha(NotebookPalette.Navy, .55f), 11, .65f);
+                        pen.Ring(p, .4f, .05f, edge, 11, .65f, state.Id); break;
+                    case StructureKind.RepairPost:
+                        pen.Box(p, new Vector2(.65f, .65f), fill, edge, .05f, state.Id);
+                        pen.Line(p - Vector2.right * .2f, p + Vector2.right * .2f, .12f, NotebookPalette.Green);
+                        pen.Line(p - Vector2.up * .2f, p + Vector2.up * .2f, .12f, NotebookPalette.Green); break;
                     case StructureKind.Piercer: Piercer(pen, p, color, edge, fill, state.Id); break;
                     case StructureKind.Mortar: Mortar(pen, p, color, edge, fill, state.Id); break;
                     default: Gun(pen, p, color, edge, fill, state.Id); break;
@@ -291,25 +301,26 @@ namespace PaperDefense.Presentation
         public static void Enemy(MeshPen pen, EnemyView enemy, float time, bool compact = false,
             NotebookAnimationState animation = null, NotebookVisualThemeAsset theme = null, double sampleSeconds = double.NaN, float windupSeconds = 0)
         {
-            if (compact) { CompactEnemy(pen, enemy); EnemyMarks(pen, enemy, time); return; }
+            if (compact)
+            {
+                int first = pen.VertexCount;
+                CompactEnemy(pen, enemy);
+                pen.ScaleFrom(first, new Vector2(enemy.Position.X, enemy.Position.Y), VisualScale(enemy.VisualScale));
+                EnemyMarks(pen, enemy, time, theme); EnemyHealth(pen, enemy); return;
+            }
             float phase = time + enemy.Id * .137f;
             NotebookEnemyMotion motionKind = animation != null ? animation.Observe(enemy, time, out phase, theme, sampleSeconds, windupSeconds)
                 : enemy.WindupRemaining > 0 ? NotebookEnemyMotion.Attack : NotebookEnemyMotion.Idle;
-            if (DrawResourceEnemy(pen, enemy.Kind, enemy.DrawingTier, new Vector2(enemy.Position.X, enemy.Position.Y), motionKind, phase, theme))
+            if (DrawResourceEnemy(pen, enemy.Kind, enemy.DrawingTier, new Vector2(enemy.Position.X, enemy.Position.Y), motionKind, phase, theme, enemy.VisualScale))
             {
                 EnemyMarks(pen, enemy, time, theme);
-                float healthFraction = enemy.MaxHealth > 0 ? enemy.Health / enemy.MaxHealth : 1;
-                if (healthFraction < .95f)
-                {
-                    Vector2 at = new Vector2(enemy.Position.X, enemy.Position.Y) + Vector2.up * .62f;
-                    pen.Line(at - Vector2.right * .3f, at + Vector2.right * .3f, .035f, MeshPen.Alpha(NotebookPalette.Navy, .18f));
-                    pen.Line(at - Vector2.right * .3f, at + Vector2.right * (-.3f + .6f * healthFraction), .035f, NotebookPalette.Red);
-                }
+                EnemyHealth(pen, enemy);
                 return;
             }
+            int firstFallback = pen.VertexCount;
             Vector2 p = new Vector2(enemy.Position.X, enemy.Position.Y);
             float motion = motionKind == NotebookEnemyMotion.Walk ? Mathf.Sin(time * (enemy.Kind == EnemyKind.Runner ? 15 : 9) + enemy.Id * 1.37f) : 0;
-            float scale = enemy.Kind == EnemyKind.Gnawer ? .43f : enemy.Kind == EnemyKind.Runner ? .29f : .32f;
+            float scale = enemy.Kind == EnemyKind.Gnawer ? .43f : enemy.Kind == EnemyKind.Brute ? .46f : enemy.Kind == EnemyKind.Bulwark ? .4f : enemy.Kind == EnemyKind.Runner ? .29f : .32f;
             Color edge = MeshPen.Alpha(NotebookPalette.Navy, enemy.DrawingTier == DrawingTier.Sketch ? .73f : 1);
             float lineWidth = enemy.DrawingTier == DrawingTier.Hatched ? .078f : enemy.DrawingTier == DrawingTier.Outlined ? .059f : .04f;
             Color fill = enemy.Kind == EnemyKind.Spitter ? new Color(.78f, .83f, .82f) : new Color(.89f, .89f, .83f);
@@ -360,33 +371,46 @@ namespace PaperDefense.Presentation
                 pen.Line(p + new Vector2(-.26f, -.14f), p + new Vector2(-.4f, -.26f), .07f, edge);
                 pen.Line(p + new Vector2(.26f, -.14f), p + new Vector2(.4f, -.26f), .07f, edge);
             }
-            float health = enemy.MaxHealth > 0 ? enemy.Health / (float)enemy.MaxHealth : 1;
-            if (health < .95f)
-            {
-                pen.Line(p + new Vector2(-scale, scale + .2f), p + new Vector2(scale, scale + .2f), .042f, MeshPen.Alpha(edge, .15f));
-                pen.Line(p + new Vector2(-scale, scale + .2f), p + new Vector2(-scale + scale * 2 * health, scale + .2f), .042f, NotebookPalette.Red);
-            }
-            EnemyMarks(pen, enemy, time);
+            pen.ScaleFrom(firstFallback, new Vector2(enemy.Position.X, enemy.Position.Y), VisualScale(enemy.VisualScale));
+            EnemyMarks(pen, enemy, time, theme); EnemyHealth(pen, enemy);
+        }
+        internal static float VisualScale(float value) => float.IsNaN(value) || float.IsInfinity(value) || value <= 0 ? 1 : value;
+        internal static float EnemyHealthRatio(float health, float maximum)
+            => maximum > 0 && !float.IsNaN(health) && !float.IsNaN(maximum) ? Mathf.Clamp01(health / maximum) : 0;
+        static void EnemyHealth(MeshPen pen, EnemyView enemy)
+        {
+            float scale = VisualScale(enemy.VisualScale), width = Mathf.Max(.72f, .72f * scale);
+            float height = Mathf.Max(.24f, pen.WorldUnitsPerPixel * 2);
+            // Solid paper backing and a dark border remain readable above both terrain and ink art.
+            Vector2 at = new Vector2(enemy.Position.X, enemy.Position.Y) + Vector2.up * (.75f * scale + .13f);
+            pen.Rect(at.x - width * .5f - .06f, at.y - .06f, width + .12f, height + .12f, NotebookPalette.Paper);
+            pen.Rect(at.x - width * .5f - .025f, at.y - .025f, width + .05f, height + .05f, NotebookPalette.Navy);
+            pen.Rect(at.x - width * .5f, at.y, width, height, new Color(.77f, .75f, .69f));
+            float ratio = EnemyHealthRatio(enemy.Health, enemy.MaxHealth);
+            if (ratio > 0) pen.Rect(at.x - width * .5f, at.y, width * ratio, height,
+                ratio > .35f ? NotebookPalette.Green : NotebookPalette.Red);
         }
         internal static bool DrawResourceEnemy(MeshPen pen, EnemyKind kind, DrawingTier tier, Vector2 position,
-            NotebookEnemyMotion motion, float phase, NotebookVisualThemeAsset theme = null)
+            NotebookEnemyMotion motion, float phase, NotebookVisualThemeAsset theme = null, float visualScale = 1)
         {
             theme = theme ?? NotebookVisualThemeAsset.Default;
             if (theme == null) return false;
+            visualScale = VisualScale(visualScale);
             string id = NotebookAnimationState.EnemyId(kind, tier, motion);
             var clip = theme.FindClip(id);
             if (clip != null)
             {
                 var frame = clip.Sample(Mathf.Max(0, phase));
                 if (frame == null) return false;
-                return NotebookArtRenderer.Draw(pen, theme.FindShape(frame.ShapeId), position + frame.Offset,
-                    frame.Scale, frame.Rotation, opacity: frame.Alpha, theme: theme);
+                return NotebookArtRenderer.Draw(pen, theme.FindShape(frame.ShapeId), position + frame.Offset * visualScale,
+                    frame.Scale * visualScale, frame.Rotation, opacity: frame.Alpha, theme: theme);
             }
-            return NotebookArtRenderer.Draw(pen, theme.FindShape(id), position, theme: theme);
+            return NotebookArtRenderer.Draw(pen, theme.FindShape(id), position, scale: visualScale, theme: theme);
         }
 
         static void EnemyMarks(MeshPen pen, EnemyView enemy, float time, NotebookVisualThemeAsset theme = null)
         {
+            int firstMark = pen.VertexCount;
             Vector2 p = new Vector2(enemy.Position.X, enemy.Position.Y);
             if (enemy.DrawingTier == DrawingTier.Hatched)
                 for (int i = -1; i <= 1; i++) pen.Line(p + new Vector2(-.17f, i * .1f - .11f), p + new Vector2(.15f, i * .1f + .04f), .028f, NotebookPalette.Navy);
@@ -406,6 +430,7 @@ namespace PaperDefense.Presentation
                 pen.Line(p + new Vector2(0, .56f), p + new Vector2(0, .85f), .095f, NotebookPalette.Red);
                 pen.Disc(p + new Vector2(0, .48f), .05f, NotebookPalette.Red, 6);
             }
+            pen.ScaleFrom(firstMark, p, VisualScale(enemy.VisualScale));
         }
 
         // The mass-swarm glyph keeps the silhouette and red eyes at ~18–68 vertices,
@@ -415,7 +440,7 @@ namespace PaperDefense.Presentation
             Vector2 p = new Vector2(enemy.Position.X, enemy.Position.Y);
             Color ink = NotebookPalette.Navy;
             Color fill = new Color(.86f, .86f, .81f);
-            float scale = enemy.Kind == EnemyKind.Gnawer ? .43f : enemy.Kind == EnemyKind.Runner ? .29f : .32f;
+            float scale = enemy.Kind == EnemyKind.Gnawer ? .43f : enemy.Kind == EnemyKind.Brute ? .46f : enemy.Kind == EnemyKind.Bulwark ? .4f : enemy.Kind == EnemyKind.Runner ? .29f : .32f;
             if (enemy.Kind == EnemyKind.Runner)
             {
                 Vector2 a = new Vector2(-scale, -scale * .6f);
@@ -452,8 +477,9 @@ namespace PaperDefense.Presentation
 
         public static void Castle(MeshPen pen, Vector2 p, float healthFraction, float seconds = 0, NotebookVisualThemeAsset theme = null)
         {
+            // Resource art uses normalized icon coordinates; match the fallback landmark size.
             if (NotebookArtRenderer.Draw(pen, (theme ?? NotebookVisualThemeAsset.Default)?.FindShape(
-                healthFraction < .6f ? "object.castle.damaged" : "object.castle"), p, theme: theme)) return;
+                healthFraction < .6f ? "object.castle.damaged" : "object.castle"), p, scale: 3, theme: theme)) return;
             Color ink = NotebookPalette.Navy;
             Color blue = NotebookPalette.Blue;
             Color stone = new Color(.89f, .91f, .88f);

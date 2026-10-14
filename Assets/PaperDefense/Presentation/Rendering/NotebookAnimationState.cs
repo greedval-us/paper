@@ -35,8 +35,9 @@ namespace PaperDefense.Presentation
         public readonly DrawingTier Tier;
         public readonly Vector2 Position;
         public readonly double Born;
+        public readonly float VisualScale;
         public NotebookDeathVisual(SimulationEvent item)
-        { Id = item.EntityId; Kind = item.EnemyKind; Tier = item.EnemyDrawingTier; Position = new Vector2(item.To.X, item.To.Y); Born = item.SimulationSeconds; }
+        { Id = item.EntityId; Kind = item.EnemyKind; Tier = item.EnemyDrawingTier; Position = new Vector2(item.To.X, item.To.Y); Born = item.SimulationSeconds; VisualScale = item.EnemyVisualScale; }
     }
 
     /// <summary>Bounded presentation records. Events cannot cause gameplay or modify author geometry.</summary>
@@ -150,15 +151,16 @@ namespace PaperDefense.Presentation
                 if (now - deaths[i].Born >= ClipDuration(deaths[i].Kind, deaths[i].Tier, NotebookEnemyMotion.Death, theme)) deaths.RemoveAt(i);
         }
         internal static string EnemyId(EnemyKind kind, DrawingTier tier, NotebookEnemyMotion motion)
-            => enemyIds[Mathf.Clamp((int)kind, 0, 3), Mathf.Clamp((int)tier, 0, 2), Mathf.Clamp((int)motion, 0, 4)];
+            => enemyIds[Mathf.Clamp((int)kind, 0, enemyIds.GetLength(0) - 1), Mathf.Clamp((int)tier, 0, 2), Mathf.Clamp((int)motion, 0, 4)];
         static string[,,] CreateEnemyIds()
         {
-            var values = new string[4, 3, 5];
-            for (int kind = 0; kind < 4; kind++) for (int tier = 0; tier < 3; tier++) for (int motion = 0; motion < 5; motion++)
+            int families = Enum.GetValues(typeof(EnemyKind)).Length;
+            var values = new string[families, 3, 5];
+            for (int kind = 0; kind < families; kind++) for (int tier = 0; tier < 3; tier++) for (int motion = 0; motion < 5; motion++)
                 values[kind, tier, motion] = "enemy." + Family((EnemyKind)kind) + "." + Tier((DrawingTier)tier) + "." + Motion((NotebookEnemyMotion)motion);
             return values;
         }
-        static string Family(EnemyKind kind) => kind == EnemyKind.Runner ? "runner" : kind == EnemyKind.Gnawer ? "gnawer" : kind == EnemyKind.Spitter ? "spitter" : "doodle";
+        static string Family(EnemyKind kind) => kind == EnemyKind.Runner ? "runner" : kind == EnemyKind.Gnawer ? "gnawer" : kind == EnemyKind.Spitter ? "spitter" : kind == EnemyKind.Brute ? "brute" : kind == EnemyKind.Bulwark ? "bulwark" : "doodle";
         static string Tier(DrawingTier tier) => tier == DrawingTier.Hatched ? "hatched" : tier == DrawingTier.Outlined ? "outlined" : "sketch";
         static string Motion(NotebookEnemyMotion motion) => motion == NotebookEnemyMotion.Walk ? "walk" : motion == NotebookEnemyMotion.Attack ? "attack" : motion == NotebookEnemyMotion.Hit ? "hit" : motion == NotebookEnemyMotion.Death ? "death" : "idle";
         internal static float ClipDuration(EnemyKind kind, DrawingTier tier, NotebookEnemyMotion motion, NotebookVisualThemeAsset theme)

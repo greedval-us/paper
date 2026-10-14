@@ -43,7 +43,7 @@ namespace PaperDefense.Presentation
                     DoodleGlyphs.Enemy(pen, enemy, seconds, false, playback.Animation, theme, frame.Seconds);
             foreach (var death in playback.Animation.Deaths)
                 DoodleGlyphs.DrawResourceEnemy(pen, death.Kind, death.Tier, death.Position,
-                    NotebookEnemyMotion.Death, (float)(playback.Seconds - death.Born), theme);
+                    NotebookEnemyMotion.Death, (float)(playback.Seconds - death.Born), theme, death.VisualScale);
         }
         internal static void DrawProjectiles(MeshPen pen, NotebookTrialPlayback playback, NotebookVisualThemeAsset theme = null)
         {

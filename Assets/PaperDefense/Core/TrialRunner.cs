@@ -111,7 +111,7 @@ namespace PaperDefense.Core
                 spawnClock -= delta;
                 while (spawned < count && spawnClock <= 0)
                 {
-                    enemies.Add(new EnemyState { Id = ++spawned, Kind = fixture.EnemyKind,
+                    enemies.Add(new EnemyState { Id = ++spawned, Kind = fixture.EnemyKind, VisualScale=balance.Enemy(fixture.EnemyKind).VisualScale,
                         Position = new Point2(trial.SpawnX, trial.SpawnY + (float)random.NextDouble() * trial.SpawnYVariation), Health = fixture.Health, MaxHealth = fixture.Health,
                         DrawingTier = mechanics.EnemyDrawingTiers ? fixture.DrawingTier : DrawingTier.Sketch });
                     spawnClock += fixture.SpawnInterval;
@@ -138,7 +138,7 @@ namespace PaperDefense.Core
                         if (nearest != null)
                         {
                             events.Publish(tick+1,SimulationEventKind.EnemyAttack,enemy.Position,new Point2(nearest.Cell.X+.5f,nearest.Cell.Y+.5f),default,
-                                entityId:enemy.Id,simulationSeconds:report.DurationSeconds,enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier);
+                                entityId:enemy.Id,simulationSeconds:report.DurationSeconds,enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier,enemyVisualScale:enemy.VisualScale);
                             nearest.Health = Math.Max(0, nearest.Health - DamageRules.StructureDamage(trial.CounterfireDamage, nearest, balance));
                             if(nearest.Health<=0)events.Publish(tick+1,SimulationEventKind.StructureDestroyed,
                                 new Point2(nearest.Cell.X+.5f,nearest.Cell.Y+.5f),new Point2(nearest.Cell.X+.5f,nearest.Cell.Y+.5f),nearest.Kind,

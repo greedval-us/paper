@@ -19,9 +19,12 @@ namespace PaperDefense.Tests
         {
             var source = Source();
             Assert.That(source.Shapes.Count(shape => !string.IsNullOrEmpty(shape.TemplateId)), Is.EqualTo(15));
-            Assert.That(source.Clips.Count(clip => clip.Id.StartsWith("enemy.", StringComparison.Ordinal)), Is.EqualTo(60));
+            Assert.That(source.Clips.Count(clip => clip.Id.StartsWith("enemy.", StringComparison.Ordinal)), Is.EqualTo(90));
             Assert.That(source.Recoils.Count, Is.EqualTo(7));
             for (int mask = 0; mask < 16; mask++) Assert.That(source.Shapes.Any(shape => shape.Id == "object.wall." + mask), Is.True);
+            foreach (string id in new[] { "terrain.mountain", "terrain.ridge", "terrain.pine", "terrain.oak", "terrain.rock", "terrain.shrub",
+                "object.tar", "object.repair", "object.entrance", "object.barricade-site", "ui.tool.tar", "ui.tool.repair" })
+                Assert.That(source.Shapes.Any(shape => shape.Id == id), Is.True, id);
             foreach (var recoil in source.Recoils)
             {
                 Assert.That(recoil.Sample(0), Is.EqualTo(0));

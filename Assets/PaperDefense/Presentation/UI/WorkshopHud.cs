@@ -655,10 +655,12 @@ namespace PaperDefense.Presentation
                 { var well = run.Session.Wells[i]; wells += (i > 0 ? "   ·   " : "") + ColorName(well.Color) + " " + well.Cell; }
             string threat = run.Session != null && run.Session.Balance.Waves.Count > 0 ? run.Session.Balance.Waves[0].Title : UserText.Message("copy.b5974db5e807bfce");
             map.SetSession(run.Session);
-            bool runners=false,gnawers=false,spitters=false;
+            bool runners=false,gnawers=false,spitters=false,brutes=false,bulwarks=false;
             foreach(var wave in run.Session.Balance.Waves)
-            {runners|=wave.RunnerFraction>0;gnawers|=wave.GnawerFraction>0;spitters|=mechanics.RangedEnemies&&wave.SpitterFraction>0;}
+            {runners|=wave.RunnerFraction>0;gnawers|=wave.GnawerFraction>0;spitters|=mechanics.RangedEnemies&&wave.SpitterFraction>0;brutes|=wave.BruteFraction>0;bulwarks|=wave.BulwarkFraction>0;}
             string enemies=UserText.Message("copy.8834fdb6964a6838", (runners?UserText.Message("copy.84d971fcad33df9e"):""), (gnawers?UserText.Message("copy.ec0efac73a0bc3ab"):""), (spitters?UserText.Message("copy.9aa4314a8e7e2cf4"):""));
+            if (brutes || bulwarks) enemies = UserText.Message("hud.enemy_roster", enemies,
+                brutes ? UserText.Message("art.enemy.brute") : "", bulwarks ? UserText.Message("art.enemy.bulwark") : "");
             briefing.text = Resolve(UserText.Message("copy.851980894ad17adb", balance.Width, balance.Height, (mechanics.InkWells ? UserText.Message("copy.bd969a1552a7f8b0", wells) : ""), enemies, (spitters ? UserText.Message("copy.9f16585ff7173d3c") : ""), (run.Session.Balance.Preset == GameBalancePreset.Target ?
                     UserText.Message("copy.9d7e64acad5dda4e", balance.StartingInk, (mechanics.InkWells ? UserText.Message("copy.01bea534f0c9cb02") : "")) :
                     UserText.Message("copy.4f11dbcf3d576c90", threat, (mechanics.InkWells ? UserText.Message("copy.012fc5ef84805c4b") : "")))));
@@ -905,11 +907,37 @@ namespace PaperDefense.Presentation
             BlueprintSketch.Line(vh, low, new Vector2(low.x, high.y), 2, NotebookPalette.Navy);
             BlueprintSketch.Line(vh, high, new Vector2(high.x, low.y), 2, NotebookPalette.Navy);
             BlueprintSketch.Line(vh, high, new Vector2(low.x, high.y), 2, NotebookPalette.Navy);
+            var battlefield = session.Battlefield;
+            if (battlefield != null)
+            {
+                Vector2 cellSize = new Vector2((high.x - low.x) / session.Balance.Width, (high.y - low.y) / session.Balance.Height);
+                foreach (var prop in battlefield.Props)
+                {
+                    Vector2 at = Point(prop.Cell, low, high) - cellSize * .5f;
+                    Vector2 size = Vector2.Scale(cellSize, new Vector2(prop.Width, prop.Height));
+                    int start = vh.currentVertCount;
+                    Color tint = MeshPen.Alpha(prop.Kind == TerrainPropKind.Mountain || prop.Kind == TerrainPropKind.Rock ? NotebookPalette.Pencil : NotebookPalette.Green, .22f);
+                    vh.AddVert(at, tint, Vector2.zero); vh.AddVert(at + Vector2.right * size.x, tint, Vector2.zero);
+                    vh.AddVert(at + size, tint, Vector2.zero); vh.AddVert(at + Vector2.up * size.y, tint, Vector2.zero);
+                    vh.AddTriangle(start, start + 1, start + 2); vh.AddTriangle(start, start + 2, start + 3);
+                }
+                foreach (var cell in battlefield.Roads)
+                {
+                    Vector2 at = Point(cell, low, high);
+                    var east = new Cell(cell.X + 1, cell.Y); var north = new Cell(cell.X, cell.Y + 1);
+                    if (battlefield.IsRoad(east)) BlueprintSketch.Line(vh, at, Point(east, low, high), 4, NotebookPalette.Pencil);
+                    if (battlefield.IsRoad(north)) BlueprintSketch.Line(vh, at, Point(north, low, high), 4, NotebookPalette.Pencil);
+                }
+                foreach (var cell in battlefield.BarricadeSites)
+                    BlueprintSketch.Ring(vh, Point(cell, low, high), 3, 1.5f, NotebookPalette.Blue);
+                foreach (var cell in battlefield.Entrances)
+                    Arrow(vh, Point(cell, low, high), cell.X == 0 ? Vector2.right : cell.X == session.Balance.Width - 1 ? Vector2.left : cell.Y == 0 ? Vector2.up : Vector2.down);
+            }
             Vector2 home = Point(session.BaseCell, low, high);
             BlueprintSketch.Ring(vh, home, 7, 4, NotebookPalette.Navy);
             for (int i = 0; i < session.Wells.Count; i++)
             { var well = session.Wells[i]; BlueprintSketch.Ring(vh, Point(well.Cell, low, high), 5, 4, DoodleGlyphs.InkTone(well.Color)); }
-            int sides = session.Balance.Waves.Count > 0 ? session.Balance.Waves[0].Sides : 1;
+            int sides = battlefield != null ? 0 : session.Balance.Waves.Count > 0 ? session.Balance.Waves[0].Sides : 1;
             if ((sides & 1) != 0) Arrow(vh, new Vector2(low.x + 2, home.y), Vector2.right);
             if ((sides & 2) != 0) Arrow(vh, new Vector2(high.x - 2, home.y), Vector2.left);
             if ((sides & 4) != 0) Arrow(vh, new Vector2(home.x, high.y - 2), Vector2.down);

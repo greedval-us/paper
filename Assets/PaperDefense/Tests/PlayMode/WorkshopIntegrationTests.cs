@@ -120,8 +120,9 @@ namespace PaperDefense.Tests
         [UnityTest] public IEnumerator WorkshopDrawingsAndRecordedLanesUploadRealGeometry()
         {
             Canvas.ForceUpdateCanvases();
-            AssertRendered(root.GetComponentInChildren<BlueprintSketch>(true));
-            AssertRendered(root.GetComponentInChildren<WorkshopMapSketch>(true));
+            var workshop = root.GetComponentInChildren<WorkshopHud>(true);
+            AssertRendered(workshop.GetComponentInChildren<BlueprintSketch>());
+            AssertRendered(workshop.GetComponentInChildren<WorkshopMapSketch>());
 
             Button("Open trial").onClick.Invoke();
             Button("Run trial").onClick.Invoke();
@@ -130,6 +131,20 @@ namespace PaperDefense.Tests
             var lanes = root.GetComponentsInChildren<TrialLaneSketch>(true);
             Assert.That(lanes.Length, Is.EqualTo(2));
             foreach (var lane in lanes) AssertRendered(lane);
+        }
+
+        [UnityTest] public IEnumerator ActiveBattlePaletteUploadsBlueprintAndToolIconGeometry()
+        {
+            Assert.That(game.Controller.StartRun(out string reason), Is.True, reason);
+            yield return null; yield return null;
+            Canvas.ForceUpdateCanvases();
+            var hud = root.GetComponentInChildren<NotebookHud>(true);
+            var blueprints = hud.GetComponentsInChildren<BlueprintSketch>();
+            Assert.That(blueprints.Length, Is.EqualTo(ProfileLimits.LoadoutSlotCount));
+            foreach (var blueprint in blueprints) AssertRendered(blueprint);
+            var icons = hud.GetComponentsInChildren<NotebookArtGraphic>();
+            Assert.That(icons.Length, Is.GreaterThanOrEqualTo(4), "Every available construction/action card has visible art.");
+            foreach (var icon in icons) AssertRendered(icon);
         }
 
         static void AssertRendered(Graphic graphic)

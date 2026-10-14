@@ -309,12 +309,12 @@ namespace PaperDefense.Tests
             Assert.That(stand.Seconds, Is.Zero);
         }
 
-        [UnityTest] public IEnumerator EnemySceneBindsAllTwelveVariantsToFiveAnimatedResourcePoses()
+        [UnityTest] public IEnumerator EnemySceneBindsAllEighteenVariantsToFiveAnimatedResourcePoses()
         {
             yield return Open("25_EnemyAnimation.unity", NotebookArtStandMode.Enemies);
-            AssertCards(12);
+            AssertCards(18);
             var theme = NotebookVisualThemeAsset.Default;
-            string[] families = { "doodle", "runner", "gnawer", "spitter" };
+            string[] families = { "doodle", "runner", "gnawer", "spitter", "brute", "bulwark" };
             string[] tiers = { "sketch", "outlined", "hatched" };
             foreach (string pose in new[] { "idle", "walk", "attack", "hit", "death" })
             {

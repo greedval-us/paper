@@ -59,7 +59,7 @@ namespace PaperDefense.Core
             if(!Enum.IsDefined(typeof(InkColor),color)){reason=UserText.Message("copy.63ae8dc3a0c35f89");return false;}
             if(color!=InkColor.None&&!Mechanics.ColorCartridges){reason=UserText.Message("copy.0a21e662d398deaa");return false;}
             var tower=StructureAt(cell);
-            if(tower==null||tower.Kind==StructureKind.Wall||tower.Kind==StructureKind.Spikes)
+            if(tower==null||ConstructionToolRules.IsTool(tower.Kind))
             {reason=UserText.Message("copy.a8ce8499831aa26c");return false;}
             if(tower.Color==color)return true;
             int cost=ColorCost(tower.Blueprint,tower.Tier);

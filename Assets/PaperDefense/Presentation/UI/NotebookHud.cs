@@ -13,6 +13,7 @@ namespace PaperDefense.Presentation
         const int WallToolIndex = ProfileLimits.LoadoutSlotCount, SpikesToolIndex = WallToolIndex + 1;
         const int EraseToolIndex = SpikesToolIndex + 1, UpgradeToolIndex = EraseToolIndex + 1;
         const int BlotterToolIndex = UpgradeToolIndex + 1, PaintToolIndex = BlotterToolIndex + 1;
+        const int TarToolIndex = PaintToolIndex + 1, RepairToolIndex = TarToolIndex + 1;
         static readonly Color Navy = new Color(.09f, .16f, .30f);
         static readonly Color Paper = new Color(.98f, .96f, .87f);
         static readonly Color Red = new Color(.78f, .15f, .17f);
@@ -26,9 +27,10 @@ namespace PaperDefense.Presentation
         Text hp, ink, wave, threats, forecast, message, toolHint, launchText, pauseText, speedText, progress, inspect, blotterPrice, wellTitle, navigationHint;
         Image hpFill;
         Button launch;
-        readonly Button[] tools = new Button[PaintToolIndex + 1];
-        readonly Text[] toolPrices = new Text[SpikesToolIndex + 1], toolNames = new Text[PaintToolIndex + 1], wellLabels = new Text[3], colorLabels = new Text[4];
+        readonly Button[] tools = new Button[RepairToolIndex + 1];
+        readonly Text[] toolPrices = new Text[RepairToolIndex + 1], toolNames = new Text[RepairToolIndex + 1], wellLabels = new Text[3], colorLabels = new Text[4];
         readonly Button[] wellActions = new Button[3], wellFocus = new Button[3], colors = new Button[4];
+        readonly BlueprintSketch[] toolSketches = new BlueprintSketch[ProfileLimits.LoadoutSlotCount];
         readonly Button[] tiers = new Button[3];
         GameObject upgradePanel, outcomePanel, pauseBadge;
         Text outcomeTitle, outcomeBody;
@@ -124,24 +126,44 @@ namespace PaperDefense.Presentation
                 colorInks[i], () => input.SelectColor((InkColor)index), out colorLabels[i]); }
             MakeButton(footer, "Restart", new Rect(1152,8,179,34), UserText.Message("copy.d5335a42ec267095"), 15, Navy, () => run.Restart(), out _);
             MakeButton(footer, "Open workshop", new Rect(1342,8,188,34), UserText.Message("copy.b49ada27eb109bc1"), 15, Navy, () => run.OpenWorkshop(), out _);
-            string[] names = { UserText.Message("copy.226019f6d26b5a60"), UserText.Message("copy.bd1433c54109d167"), UserText.Message("copy.dca016865b8be4e4"), UserText.Message("copy.2e329e5d595cbcf7"), UserText.Message("copy.95a4ba0731bceb67"), UserText.Message("copy.d688530d0db50106"), UserText.Message("copy.e2469d7e62002b1f"), UserText.Message("copy.6e7d348fa6aaa5f3"), UserText.Message("copy.5bfd989be4eb52f0"), UserText.Message("copy.28c686dce839c9a7") };
-            string[] descriptions = { UserText.Message("copy.6321b5d4f30a6df6"), UserText.Message("copy.6321b5d4f30a6df6"), UserText.Message("copy.6321b5d4f30a6df6"), UserText.Message("copy.6321b5d4f30a6df6"), UserText.Message("copy.ad6690a91a49146d"), UserText.Message("copy.0ebef393a2d68744"), UserText.Message("copy.edf4c55bbb268c93"), UserText.Message("copy.107112179384a316"), UserText.Message("copy.dc893f11161b7057"), UserText.Message("copy.2a60bdafaf682544") };
+            string[] names = { UserText.Message("hud.tool.blueprint", 1), UserText.Message("hud.tool.blueprint", 2), UserText.Message("hud.tool.blueprint", 3), UserText.Message("hud.tool.blueprint", 4),
+                UserText.Message("copy.95a4ba0731bceb67"), UserText.Message("copy.d688530d0db50106"), UserText.Message("copy.e2469d7e62002b1f"),
+                UserText.Message("copy.6e7d348fa6aaa5f3"), UserText.Message("hud.tool.blotter"), UserText.Message("copy.28c686dce839c9a7"),
+                UserText.Message("hud.tool.tar"), UserText.Message("hud.tool.repair") };
             for (int i = 0; i < tools.Length; i++)
             {
                 int index = i;
-                tools[i] = MakeButton(footer, "Tool " + i, new Rect(18 + i*152,54,143,91), "", 17, Navy, () => {
+                // Keep stable object identities for old hotkeys and scene automation, group construction cards visually.
+                int column = i < 6 ? i : i >= TarToolIndex ? i - 4 : i + 2;
+                tools[i] = MakeButton(footer, "Tool " + i, new Rect(18 + column * 127, 52, 119, 94), "", 17, Navy, () => {
                     if (index < ProfileLimits.LoadoutSlotCount) input.SelectSlot(index);
-                    else if (index == WallToolIndex) input.SelectTool(StructureKind.Wall);
-                    else if (index == SpikesToolIndex) input.SelectTool(StructureKind.Spikes);
+                    else if (TryConstructionTool(index, out var kind)) input.SelectTool(kind);
                     else input.SelectMode(index == EraseToolIndex ? DrawingMode.Erase : index == UpgradeToolIndex ? DrawingMode.Upgrade : index == BlotterToolIndex ? DrawingMode.Blotter : DrawingMode.Paint);
                 }, out _);
-                toolNames[i] = Label(tools[i].transform, names[i], new Rect(5,1,133,33), 14, Navy, FontStyle.Bold, TextAnchor.MiddleCenter);
-                Label(tools[i].transform, descriptions[i], new Rect(5,36,133,23), 12, Navy, FontStyle.Normal, TextAnchor.MiddleCenter);
-                var price = Label(tools[i].transform, "", new Rect(5,62,133,24), 14, Blue, FontStyle.Normal, TextAnchor.MiddleCenter);
-                if (i < toolPrices.Length) toolPrices[i] = price; else if (i == BlotterToolIndex) blotterPrice = price; else price.text = Resolve(i == EraseToolIndex ? UserText.Message("copy.3337c8fa1eed04a4") : i == UpgradeToolIndex ? UserText.Message("copy.d7ba3d4cc2223633") : UserText.Message("copy.7e642f606c53837a"));
+                if (i < ProfileLimits.LoadoutSlotCount)
+                {
+                    var go = new GameObject("Blueprint illustration", typeof(RectTransform), typeof(CanvasRenderer), typeof(BlueprintSketch));
+                    go.transform.SetParent(tools[i].transform, false);
+                    Place(go.GetComponent<RectTransform>(), new Rect(34, 4, 51, 45));
+                    toolSketches[i] = go.GetComponent<BlueprintSketch>(); toolSketches[i].raycastTarget = false;
+                }
+                else
+                {
+                    var go = new GameObject("Tool illustration", typeof(RectTransform), typeof(CanvasRenderer), typeof(NotebookArtGraphic));
+                    go.transform.SetParent(tools[i].transform, false);
+                    Place(go.GetComponent<RectTransform>(), new Rect(37, 4, 45, 45));
+                    var art = go.GetComponent<NotebookArtGraphic>(); art.raycastTarget = false;
+                    string icon = i == WallToolIndex ? "wall" : i == SpikesToolIndex ? "spikes" : i == TarToolIndex ? "tar" :
+                        i == RepairToolIndex ? "repair" : i == EraseToolIndex ? "erase" : i == UpgradeToolIndex ? "upgrade" : i == BlotterToolIndex ? "blotter" : "paint";
+                    art.Bind("ui.tool." + icon);
+                }
+                toolNames[i] = Label(tools[i].transform, names[i], new Rect(3, 49, 113, 20), 14, Navy, FontStyle.Bold, TextAnchor.MiddleCenter);
+                toolNames[i].verticalOverflow = VerticalWrapMode.Truncate;
+                toolPrices[i] = Label(tools[i].transform, "", new Rect(3, 71, 113, 20), 13, Blue, FontStyle.Normal, TextAnchor.MiddleCenter);
+                if (i == BlotterToolIndex) blotterPrice = toolPrices[i];
+                else if (i >= EraseToolIndex && i <= PaintToolIndex) toolPrices[i].text = Resolve(i == EraseToolIndex ? UserText.Message("copy.3337c8fa1eed04a4") : i == UpgradeToolIndex ? UserText.Message("copy.d7ba3d4cc2223633") : UserText.Message("copy.7e642f606c53837a"));
             }
-            toolHint = Label(footer, "", new Rect(20,151,1230,28), 16, Navy);
-            Label(footer, UserText.Message("copy.c7c5693fff198d7c"), new Rect(1262,151,273,28), 16, Navy, FontStyle.Normal, TextAnchor.MiddleRight);
+            toolHint = Label(footer, "", new Rect(20, 151, 1512, 31), 16, Navy);
             message = Label(root, "", new Rect(270,748,1055,34), 19, Blue, FontStyle.Normal, TextAnchor.MiddleCenter);
         }
 
@@ -171,6 +193,36 @@ namespace PaperDefense.Presentation
             outcomePanel.SetActive(false);
         }
 
+        static bool TryConstructionTool(int index, out StructureKind kind)
+        {
+            kind = index == WallToolIndex ? StructureKind.Wall : index == SpikesToolIndex ? StructureKind.Spikes :
+                index == TarToolIndex ? StructureKind.TarPit : StructureKind.RepairPost;
+            return index == WallToolIndex || index == SpikesToolIndex || index == TarToolIndex || index == RepairToolIndex;
+        }
+
+        string BuildDescription()
+        {
+            var balance = run.Session.Balance;
+            if (input.BlueprintSlot >= 0 && input.BlueprintSlot < run.BuildLoadout.Count)
+            {
+                var bp = run.BuildLoadout[input.BlueprintSlot];
+                if (bp == null) return "";
+                var preview = run.PreviewBlueprint(bp, input.Tier);
+                return UserText.Message("hud.detail.blueprint", bp.Name, preview.Cost, preview.Range,
+                    balance.Battlefield != null && !balance.Battlefield.IsOpenTerrain ? UserText.Message("hud.ground.tower") : UserText.Message("hud.ground.free"));
+            }
+            if (!balance.HasStructure(input.Tool)) return "";
+            var spec = balance.Structure(input.Tool);
+            string placement = balance.Battlefield == null || balance.Battlefield.IsOpenTerrain ? UserText.Message("hud.ground.free") :
+                input.Tool == StructureKind.Wall ? UserText.Message("hud.ground.wall") : ConstructionToolRules.IsTrap(input.Tool) ?
+                    UserText.Message("hud.ground.road") : UserText.Message("hud.ground.tower");
+            string purpose = input.Tool == StructureKind.TarPit ? UserText.Message("hud.detail.tar", (1 - spec.SlowSpeedMultiplier) * 100) :
+                input.Tool == StructureKind.RepairPost ? UserText.Message("hud.detail.repair", spec.RepairPerSecond, spec.Range) :
+                input.Tool == StructureKind.Wall ? UserText.Message("hud.detail.wall", spec.MaxHealth * balance.Material(input.Tier).HealthMultiplier) :
+                    UserText.Message("hud.detail.spikes", spec.Damage);
+            return UserText.Message("hud.detail.tool", purpose, balance.ToolCost(input.Tool, input.Tier), placement);
+        }
+
         void RefreshSelection()
         {
             if (run == null || run.Session == null) return;
@@ -178,13 +230,16 @@ namespace PaperDefense.Presentation
             var loadout = run.BuildLoadout;
             tools[BlotterToolIndex].gameObject.SetActive(mechanics.CorpseBlots);
             tools[PaintToolIndex].gameObject.SetActive(mechanics.ColorCartridges);
-            blotterPrice.text = Resolve(UserText.Message("copy.ff7fd18d051ba682", run.Session.Balance.BlotterCost, run.Session.Balance.BlotterRadius));
+            blotterPrice.text = Resolve(UserText.Message("hud.tool.price", run.Session.Balance.BlotterCost));
             for (int i=0;i<tools.Length;i++)
             {
                 bool selected = i < ProfileLimits.LoadoutSlotCount ? input.Mode == DrawingMode.Build && input.BlueprintSlot == i :
                     i == WallToolIndex ? input.Mode == DrawingMode.Build && input.BlueprintSlot < 0 && input.Tool == StructureKind.Wall :
                     i == SpikesToolIndex ? input.Mode == DrawingMode.Build && input.BlueprintSlot < 0 && input.Tool == StructureKind.Spikes :
+                    i == TarToolIndex ? input.Mode == DrawingMode.Build && input.BlueprintSlot < 0 && input.Tool == StructureKind.TarPit :
+                    i == RepairToolIndex ? input.Mode == DrawingMode.Build && input.BlueprintSlot < 0 && input.Tool == StructureKind.RepairPost :
                     i == EraseToolIndex ? input.Mode == DrawingMode.Erase : i == UpgradeToolIndex ? input.Mode == DrawingMode.Upgrade : i == BlotterToolIndex ? input.Mode == DrawingMode.Blotter : input.Mode == DrawingMode.Paint;
+                if (TryConstructionTool(i, out var kind)) tools[i].gameObject.SetActive(run.Session.Balance.HasStructure(kind));
                 tools[i].GetComponent<Image>().color = selected ? new Color(.78f,.87f,.95f) : Paper;
             }
             for (int i=0;i<3;i++) tiers[i].GetComponent<Image>().color = (int)input.Tier == i ? new Color(.89f,.84f,.98f) : Paper;
@@ -199,18 +254,20 @@ namespace PaperDefense.Presentation
                     tools[i].interactable = assigned;
                     if (!assigned)
                     {
-                        toolNames[i].text = Resolve(UserText.Message("copy.cff724a36a5b8f04", (i + 1)));
+                        toolSketches[i].SetBlueprint(null);
+                        toolNames[i].text = Resolve(UserText.Message("hud.tool.blueprint", i + 1));
                         toolPrices[i].text = Resolve(UserText.Message("copy.dbf292d621b20c3c"));
                         continue;
                     }
                     var bp = loadout[i]; var preview = run.PreviewBlueprint(bp, input.Tier);
-                    toolNames[i].text = Resolve(UserText.Message("hud.blueprint_tool", i + 1, bp.Name));
+                    toolSketches[i].SetBlueprint(bp);
+                    toolNames[i].text = Resolve(UserText.Message("hud.tool.blueprint", i + 1));
                     toolPrices[i].text = Resolve(UserText.Message("copy.75ee45ea828ded7b", preview.Cost, (input.Color == InkColor.None ? "" : UserText.Message("copy.9a6907b592de7b89", preview.ColorCost))));
                 }
-                else
+                else if (TryConstructionTool(i, out var kind) && run.Session.Balance.HasStructure(kind))
                 {
-                    int cost = run.Session.Balance.ToolCost(i == WallToolIndex ? StructureKind.Wall : StructureKind.Spikes, input.Tier);
-                    toolPrices[i].text = Resolve(UserText.Message("copy.0a467cddfd16d6f2", cost));
+                    int cost = run.Session.Balance.ToolCost(kind, input.Tier);
+                    toolPrices[i].text = Resolve(UserText.Message("hud.tool.price", cost));
                 }
             }
         }
@@ -221,7 +278,10 @@ namespace PaperDefense.Presentation
             var s = run.Session;
             var mechanics = s.Balance.Mechanics;
             wellTitle.text = Resolve(mechanics.InkWells ? UserText.Message("copy.5b88c2e8e78d81dc") : UserText.Message("copy.6c0a36f0a82af27b"));
-            navigationHint.text = Resolve(UserText.Message("hud.navigation", mechanics.ColorCartridges ? UserText.Message("hud.color_navigation") : ""));
+            bool hasTar = s.Balance.HasStructure(StructureKind.TarPit), hasRepair = s.Balance.HasStructure(StructureKind.RepairPost);
+            string supportHelp = hasTar && hasRepair ? UserText.Message("hud.navigation.support") : hasTar ?
+                UserText.Message("hud.navigation.tar") : hasRepair ? UserText.Message("hud.navigation.repair") : "";
+            navigationHint.text = Resolve(UserText.Message("hud.navigation", (mechanics.ColorCartridges ? UserText.Message("hud.color_navigation") : "") + supportHelp));
             for (int i = 0; i < wellLabels.Length; i++)
             {
                 bool exists = mechanics.InkWells && i < s.Wells.Count;
@@ -247,7 +307,7 @@ namespace PaperDefense.Presentation
                 var w = s.Balance.Waves[next];
                 string directions = ((w.Sides&1)!=0 ? UserText.Message("copy.5df048b6711a3c36") : "") + ((w.Sides&2)!=0 ? UserText.Message("copy.1560b116b94f7915") : "") +
                     ((w.Sides&4)!=0 ? UserText.Message("copy.6b3d6f077552e970") : "") + ((w.Sides&8)!=0 ? UserText.Message("copy.fe10822f38def82b") : "");
-                forecast.text = Resolve(UserText.Message("copy.53c30c8509f69f84", w.Title, directions, w.Count, (mechanics.RangedEnemies && w.SpitterFraction > 0 ? UserText.Message("copy.0dc97464c8838d7d") : w.GnawerFraction>0 ? UserText.Message("copy.5fc321a6caf6a1ae") : w.RunnerFraction>0 ? UserText.Message("copy.807e868e6de58bea") : UserText.Message("copy.e5540bf1c3261b6e")), (mechanics.EnemyDrawingTiers ? (w.HatchedFraction > 0 ? UserText.Message("copy.861f99b195ee6f6f") : w.OutlinedFraction > 0 ? UserText.Message("copy.146f1f40157f1f06") : "") : "")));
+                forecast.text = Resolve(UserText.Message("copy.53c30c8509f69f84", w.Title, directions, w.Count, (w.BruteFraction > 0 ? UserText.Message("hud.threat.brute") : w.BulwarkFraction > 0 ? UserText.Message("hud.threat.bulwark") : mechanics.RangedEnemies && w.SpitterFraction > 0 ? UserText.Message("copy.0dc97464c8838d7d") : w.GnawerFraction>0 ? UserText.Message("copy.5fc321a6caf6a1ae") : w.RunnerFraction>0 ? UserText.Message("copy.807e868e6de58bea") : UserText.Message("copy.e5540bf1c3261b6e")), (mechanics.EnemyDrawingTiers ? (w.HatchedFraction > 0 ? UserText.Message("copy.861f99b195ee6f6f") : w.OutlinedFraction > 0 ? UserText.Message("copy.146f1f40157f1f06") : "") : "")));
             }
             else forecast.text = Resolve(UserText.Message("copy.01dd83e7e64f7ca1"));
             launch.interactable = (s.Phase == RunPhase.Planning || s.Phase == RunPhase.Intermission) && !s.PendingUpgrade;
@@ -260,7 +320,7 @@ namespace PaperDefense.Presentation
                 input.Mode == DrawingMode.Upgrade ? UserText.Message("copy.e269b19b30016bc5") :
                 input.Mode == DrawingMode.Blotter ? UserText.Message("copy.710ac373fff75b43", s.Balance.BlotterRadius, (s.BlotterCooldown > 0 ? UserText.Message("copy.4e3722729b4f917d", s.BlotterCooldown) : UserText.Message("copy.1abdee4640babd7e"))) :
                 input.Mode == DrawingMode.Paint ? UserText.Message("copy.49ccf98f60e87674") :
-                UserText.Message("copy.05fbcad68a787bce", (input.Tool == StructureKind.Wall || input.Tool == StructureKind.Spikes ? UserText.Message("copy.24912cebd2e5d175") : UserText.Message("copy.825772a61ae49807")), input.PreviewCost));
+                BuildDescription());
             if (input.Mode == DrawingMode.Build && input.PreviewReason.Length > 0)
                 toolHint.text = Resolve(UserText.Message("copy.2c037da520ce29a5", input.PreviewCost, input.PreviewReason));
             toolHint.color = input.PreviewReason.Length > 0 ? Red : Navy;
@@ -271,7 +331,7 @@ namespace PaperDefense.Presentation
                     inspect.text = Resolve(UserText.Message("copy.5f0e5acdafad2e95"));
                 else if (st.HasValue && !st.Value.IsComplete)
                     inspect.text = Resolve(UserText.Message("copy.19ea6da1c8952906", st.Value.BuildRemaining));
-                else if (st.HasValue && st.Value.Kind != StructureKind.Wall && st.Value.Kind != StructureKind.Spikes)
+                else if (st.HasValue && !ConstructionToolRules.IsTool(st.Value.Kind))
                     inspect.text = Resolve(UserText.Message("hud.inspect_tower", st.Value.Blueprint != null ? st.Value.Blueprint.Name : UserText.Message("copy.6a001d6a4f6a3ef2"), Mathf.CeilToInt(st.Value.Health), mechanics.ColorCartridges ? UserText.Message("copy.5539bfabca1b7c39", WorkshopHud.ColorName(st.Value.Color)) : "", st.Value.Priority==TargetPriority.Nearest ? UserText.Message("copy.e8587d93da4cf0eb") : st.Value.Priority==TargetPriority.Strongest ? UserText.Message("copy.38d5a59f100989bb") : UserText.Message("copy.ae092c38e45a8570")));
                 else inspect.text = Resolve(UserText.Message("copy.8bf6205579fddebb"));
             }

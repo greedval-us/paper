@@ -81,7 +81,7 @@ namespace PaperDefense.Editor
             });
             AssetDatabase.CreateAsset(database, folder + "/Catalog.asset");
             var preset = ScriptableObject.CreateInstance<BalancePresetAsset>();
-            preset.database = database; preset.rules = GlobalBalanceSettings.From(source.CreateBalance());
+            preset.database = database; preset.rules = GlobalBalanceSettings.From(GameBalancePresets.CreateTargetWorkshop());
             var rules = preset.rules;
             rules.Width = 48; rules.Height = 32; rules.StartingInk = 600;
             rules.PlanningSeconds = 3600; rules.IntermissionSeconds = 3600;
@@ -112,7 +112,7 @@ namespace PaperDefense.Editor
             rules.EnableInkWells = scenario.mechanics.InkWells;
             rules.StartingInk = scenario.startingInk;
             if (focus == MechanicsTestFocus.Integration || focus == MechanicsTestFocus.Pressure)
-            { preset.rules = GlobalBalanceSettings.From(source.CreateBalance()); preset.rules.Mechanics = scenario.mechanics.CreateSnapshot(); }
+            { preset.rules = GlobalBalanceSettings.From(GameBalancePresets.CreateTargetWorkshop()); preset.rules.Mechanics = scenario.mechanics.CreateSnapshot(); }
             scenario.observationKeys = new[] { "test.observe." + scenario.scenarioId };
             AssetDatabase.CreateAsset(preset, folder + "/Preset.asset");
             AssetDatabase.CreateAsset(scenario, folder + "/Scenario.asset");

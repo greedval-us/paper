@@ -8,6 +8,8 @@ namespace PaperDefense.Application
     [Serializable] public sealed class GlobalBalanceSettings
     {
         public GameBalancePreset Preset;
+        public BattlefieldDefinition Battlefield;
+        public float WaveHealthGrowth;
         public int Width, Height, StartingInk, MaxEarlyLaunchInk, WaveInkGrant, MaxEnemiesPerCell, BlotterCost, WellActivationCost, WellInkPerWave, WaveGold, VictoryGold;
         public float BaseHealth, PlanningSeconds, IntermissionSeconds, PassiveInkPerSecond, EarlyLaunchInkPerSecond, SimulationStep, BlotLifetime, BlotBuffSeconds, BlotSpeedBonus, BlotReduction, BlotterCooldown, BlotterRadius, WellHealth, DrawingMinimumRate, DrawingMaximumRate;
         public bool EnableEnemyMechanics, EnableInkWells;
@@ -16,6 +18,7 @@ namespace PaperDefense.Application
         public SharedEffectsSettings Effects;
         public ProgressionRules Progression;
         public CombatTuningRules Combat;
+        public CrowdMovementRules Crowd = new CrowdMovementRules();
         public TrialRules Trials;
         public List<WellPlacementDefinition> WellPlacements;
         public List<StructureDefinition> StructureDefinitions;
@@ -37,10 +40,12 @@ namespace PaperDefense.Application
             if (EnemyDefinitions==null) throw new ArgumentException(UserText.Message("copy.aa2de19d486ebb8b"));
             if (Waves==null) throw new ArgumentException(UserText.Message("copy.81624d8adc610cfd"));
             var b=new GameBalance(); b.Preset=this.Preset; b.Width=this.Width; b.Height=this.Height; b.StartingInk=this.StartingInk; b.MaxEarlyLaunchInk=this.MaxEarlyLaunchInk; b.WaveInkGrant=this.WaveInkGrant; b.MaxEnemiesPerCell=this.MaxEnemiesPerCell; b.BlotterCost=this.BlotterCost; b.WellActivationCost=this.WellActivationCost; b.WellInkPerWave=this.WellInkPerWave; b.WaveGold=this.WaveGold; b.VictoryGold=this.VictoryGold; b.BaseHealth=this.BaseHealth; b.PlanningSeconds=this.PlanningSeconds; b.IntermissionSeconds=this.IntermissionSeconds; b.PassiveInkPerSecond=this.PassiveInkPerSecond; b.EarlyLaunchInkPerSecond=this.EarlyLaunchInkPerSecond; b.SimulationStep=this.SimulationStep; b.BlotLifetime=this.BlotLifetime; b.BlotBuffSeconds=this.BlotBuffSeconds; b.BlotSpeedBonus=this.BlotSpeedBonus; b.BlotReduction=this.BlotReduction; b.BlotterCooldown=this.BlotterCooldown; b.BlotterRadius=this.BlotterRadius; b.WellHealth=this.WellHealth; b.DrawingMinimumRate=this.DrawingMinimumRate; b.DrawingMaximumRate=this.DrawingMaximumRate; b.EnableEnemyMechanics=this.EnableEnemyMechanics; b.EnableInkWells=this.EnableInkWells;
+            b.Battlefield=Battlefield;b.WaveHealthGrowth=WaveHealthGrowth;
+            b.Crowd = Crowd ?? new CrowdMovementRules();
             b.Mechanics=Mechanics; Construction.Apply(b.Construction); Effects.Apply(b.Effects); b.Progression=Progression;
             b.Combat=Combat; b.Trials=Trials; b.WellPlacements=WellPlacements; b.StructureDefinitions=StructureDefinitions;
             b.MaterialDefinitions=MaterialDefinitions; b.EnemyDefinitions=EnemyDefinitions; b.Waves=Waves;
-            if (StructureDefinitions.Exists(item=>item==null || (item.Kind!=StructureKind.Wall && item.Kind!=StructureKind.Spikes)))
+            if (StructureDefinitions.Exists(item=>item==null || (!ConstructionToolRules.IsTool(item.Kind))))
                 throw new ArgumentException(UserText.Message("copy.de49bacab0a6e523"));
             return b.CreateSnapshot();
         }
@@ -48,9 +53,11 @@ namespace PaperDefense.Application
         public static GlobalBalanceSettings From(GameBalance source)
         {
             var b=source.CreateSnapshot(); var input=new GlobalBalanceSettings(); input.Preset=b.Preset; input.Width=b.Width; input.Height=b.Height; input.StartingInk=b.StartingInk; input.MaxEarlyLaunchInk=b.MaxEarlyLaunchInk; input.WaveInkGrant=b.WaveInkGrant; input.MaxEnemiesPerCell=b.MaxEnemiesPerCell; input.BlotterCost=b.BlotterCost; input.WellActivationCost=b.WellActivationCost; input.WellInkPerWave=b.WellInkPerWave; input.WaveGold=b.WaveGold; input.VictoryGold=b.VictoryGold; input.BaseHealth=b.BaseHealth; input.PlanningSeconds=b.PlanningSeconds; input.IntermissionSeconds=b.IntermissionSeconds; input.PassiveInkPerSecond=b.PassiveInkPerSecond; input.EarlyLaunchInkPerSecond=b.EarlyLaunchInkPerSecond; input.SimulationStep=b.SimulationStep; input.BlotLifetime=b.BlotLifetime; input.BlotBuffSeconds=b.BlotBuffSeconds; input.BlotSpeedBonus=b.BlotSpeedBonus; input.BlotReduction=b.BlotReduction; input.BlotterCooldown=b.BlotterCooldown; input.BlotterRadius=b.BlotterRadius; input.WellHealth=b.WellHealth; input.DrawingMinimumRate=b.DrawingMinimumRate; input.DrawingMaximumRate=b.DrawingMaximumRate; input.EnableEnemyMechanics=b.EnableEnemyMechanics; input.EnableInkWells=b.EnableInkWells;
+            input.Battlefield=b.Battlefield;input.WaveHealthGrowth=b.WaveHealthGrowth;
+            input.Crowd = b.Crowd;
             input.Mechanics=b.Mechanics; input.Construction=SharedConstructionSettings.From(b.Construction); input.Effects=SharedEffectsSettings.From(b.Effects); input.Progression=b.Progression;
             input.Combat=b.Combat; input.Trials=b.Trials; input.WellPlacements=b.WellPlacements;
-            input.StructureDefinitions=b.StructureDefinitions.FindAll(item=>item.Kind==StructureKind.Wall || item.Kind==StructureKind.Spikes);
+            input.StructureDefinitions=b.StructureDefinitions.FindAll(item=>ConstructionToolRules.IsTool(item.Kind));
             input.MaterialDefinitions=b.MaterialDefinitions; input.EnemyDefinitions=b.EnemyDefinitions; input.Waves=b.Waves;
             return input;
         }

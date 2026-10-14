@@ -9,7 +9,13 @@ namespace PaperDefense.Presentation
     public static class NotebookArtRenderer
     {
         struct Vertex { public Vector2 Point; public NotebookInkChannel Channel; public float Alpha; }
-        sealed class Geometry { public readonly List<Vertex> Vertices = new List<Vertex>(); }
+        struct Command { public Vertex Ink; public Vector2 B, C; public float Width; }
+        sealed class Geometry
+        {
+            public readonly List<Vertex> Vertices = new List<Vertex>();
+            // Retain stroke intent for screen-space coverage, beside the exact UI triangles.
+            public readonly List<Command> Commands = new List<Command>();
+        }
         static readonly ConditionalWeakTable<NotebookArtShape, Geometry> cache = new ConditionalWeakTable<NotebookArtShape, Geometry>();
         public static int GeometryBuildCount { get; private set; }
 
@@ -21,6 +27,24 @@ namespace PaperDefense.Presentation
             float cosine = Mathf.Cos(radians), sine = Mathf.Sin(radians);
             theme = theme ?? NotebookVisualThemeAsset.Default;
             Vector2 stretch = localScale ?? Vector2.one;
+            if (pen.WorldUnitsPerPixel > 0)
+            {
+                foreach (var command in geometry.Commands)
+                {
+                    Vector2 a = Transform(Vector2.Scale(command.Ink.Point, stretch), pivot, scale, cosine, sine);
+                    Vector2 b = Transform(Vector2.Scale(command.B, stretch), pivot, scale, cosine, sine);
+                    Color color = Tone(theme, command.Ink, strokeTint, opacity);
+                    if (command.Width > 0)
+                    {
+                        Vector2 delta = command.B - command.Ink.Point;
+                        float stretchedLength = Vector2.Scale(delta, stretch).magnitude;
+                        float widthScale = stretchedLength > .00001f ? Mathf.Abs(scale * stretch.x * stretch.y) * delta.magnitude / stretchedLength : 0;
+                        pen.Line(a, b, command.Width * widthScale, color);
+                    }
+                    else pen.Triangle(a, b, Transform(Vector2.Scale(command.C, stretch), pivot, scale, cosine, sine), color);
+                }
+                return true;
+            }
             for (int i = 0; i < geometry.Vertices.Count; i += 3)
             {
                 var a = geometry.Vertices[i]; var b = geometry.Vertices[i + 1]; var c = geometry.Vertices[i + 2];
@@ -89,10 +113,12 @@ namespace PaperDefense.Presentation
             var delta = b - a;
             if (delta.sqrMagnitude < .0000001f) return;
             var side = new Vector2(-delta.y, delta.x).normalized * width * .5f;
-            Triangle(geometry, a - side, b - side, b + side, mark); Triangle(geometry, a - side, b + side, a + side, mark);
+            geometry.Commands.Add(new Command { Ink = new Vertex { Point = a, Channel = mark.Channel, Alpha = mark.Alpha }, B = b, Width = width });
+            Triangle(geometry, a - side, b - side, b + side, mark, false); Triangle(geometry, a - side, b + side, a + side, mark, false);
         }
-        static void Triangle(Geometry geometry, Vector2 a, Vector2 b, Vector2 c, NotebookArtMark mark)
+        static void Triangle(Geometry geometry, Vector2 a, Vector2 b, Vector2 c, NotebookArtMark mark, bool recordCommand = true)
         {
+            if (recordCommand) geometry.Commands.Add(new Command { Ink = new Vertex { Point = a, Channel = mark.Channel, Alpha = mark.Alpha }, B = b, C = c });
             geometry.Vertices.Add(new Vertex { Point = a, Channel = mark.Channel, Alpha = mark.Alpha });
             geometry.Vertices.Add(new Vertex { Point = b, Channel = mark.Channel, Alpha = mark.Alpha });
             geometry.Vertices.Add(new Vertex { Point = c, Channel = mark.Channel, Alpha = mark.Alpha });

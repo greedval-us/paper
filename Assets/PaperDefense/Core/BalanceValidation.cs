@@ -34,9 +34,20 @@ namespace PaperDefense.Core
             if(balance.Trials==null)throw new ArgumentException(UserText.Message("copy.573904e2527f28c1"));
             if(balance.WellPlacements==null)throw new ArgumentException(UserText.Message("copy.e3ab46a7759c9139"));
             balance.Combat.CreateSnapshot();balance.Trials.CreateSnapshot();
+            if (balance.Crowd == null) throw new ArgumentNullException(nameof(balance.Crowd));
+            balance.Crowd.CreateSnapshot();
             for(int i=0;i<balance.WellPlacements.Count;i++){var well=balance.WellPlacements[i];if(well==null)throw new ArgumentException(UserText.Message("copy.35a53b630b486440", i));well.CreateSnapshot();}
             ValidateStructures(balance.StructureDefinitions,balance.Content==null); ValidateMaterials(balance.MaterialDefinitions);
             ValidateEnemies(balance.EnemyDefinitions); ValidateWaves(balance.Waves);
+            NonNegative(balance.WaveHealthGrowth,nameof(balance.WaveHealthGrowth));
+            var map=balance.ResolveBattlefield();
+            foreach(var wave in balance.Waves)
+            {
+                if(wave.BruteFraction>0&&!balance.EnemyDefinitions.Exists(d=>d.Kind==EnemyKind.Brute))throw new ArgumentException("Wave needs Brute definition.");
+                if(wave.BulwarkFraction>0&&!balance.EnemyDefinitions.Exists(d=>d.Kind==EnemyKind.Bulwark))throw new ArgumentException("Wave needs Bulwark definition.");
+                int effectiveSides=wave.Sides==0?1:wave.Sides;
+                if(map!=null)for(int side=1;side<=8;side<<=1)if((effectiveSides&side)!=0&&!map.HasEntrance(side))throw new ArgumentException("Wave has no configured entrance for side "+side);
+            }
         }
 
         static void ValidateStructures(List<StructureDefinition> definitions,bool requireLegacy)
@@ -57,8 +68,10 @@ namespace PaperDefense.Core
                 if (item.ConeAngleDegrees > 360) throw new ArgumentOutOfRangeException(name + nameof(item.ConeAngleDegrees));
                 NonNegative(item.JumpRange, name + nameof(item.JumpRange)); Fraction(item.SlowSpeedMultiplier, name + nameof(item.SlowSpeedMultiplier));
                 NonNegative(item.SlowDuration, name + nameof(item.SlowDuration));
+                NonNegative(item.RepairPerSecond,name+nameof(item.RepairPerSecond));
+                if(item.Kind==StructureKind.TarPit&&item.SlowSpeedMultiplier<=0)throw new ArgumentException("Tar slow must remain above zero.");
             }
-            if(requireLegacy&&seen.Count != Enum.GetValues(typeof(StructureKind)).Length)throw new ArgumentException(UserText.Message("copy.098053010e0e41f4"), nameof(definitions));
+            if(requireLegacy&&(!seen.Contains(StructureKind.Gun)||!seen.Contains(StructureKind.Piercer)||!seen.Contains(StructureKind.Mortar)||!seen.Contains(StructureKind.Fan)||!seen.Contains(StructureKind.Ricochet)||!seen.Contains(StructureKind.Stapler)||!seen.Contains(StructureKind.Blotter)))throw new ArgumentException(UserText.Message("copy.098053010e0e41f4"), nameof(definitions));
             if(!seen.Contains(StructureKind.Wall)||!seen.Contains(StructureKind.Spikes))throw new ArgumentException(UserText.Message("copy.91afe21b045f3450"));
         }
 
@@ -91,8 +104,9 @@ namespace PaperDefense.Core
                 NonNegative(item.StructureDamageMultiplier, name + nameof(item.StructureDamageMultiplier)); NonNegative(item.Reward, name + nameof(item.Reward));
                 NonNegative(item.Range, name + nameof(item.Range)); NonNegative(item.WindupSeconds, name + nameof(item.WindupSeconds));
                 NonNegative(item.ProjectileSeconds, name + nameof(item.ProjectileSeconds));
+                Positive(item.VisualScale,name+nameof(item.VisualScale));
             }
-            if (seen.Count != Enum.GetValues(typeof(EnemyKind)).Length) throw new ArgumentException(UserText.Message("copy.076db89637ea666e"), nameof(definitions));
+            if (!seen.Contains(EnemyKind.Doodle)||!seen.Contains(EnemyKind.Runner)||!seen.Contains(EnemyKind.Gnawer)||!seen.Contains(EnemyKind.Spitter)) throw new ArgumentException(UserText.Message("copy.076db89637ea666e"), nameof(definitions));
         }
 
         static void ValidateWaves(List<WaveDefinition> definitions)
@@ -106,6 +120,7 @@ namespace PaperDefense.Core
                 Fraction(item.RunnerFraction, nameof(item.RunnerFraction)); Fraction(item.GnawerFraction, nameof(item.GnawerFraction));
                 Fraction(item.SpitterFraction, nameof(item.SpitterFraction)); Fraction(item.OutlinedFraction, nameof(item.OutlinedFraction));
                 Fraction(item.HatchedFraction, nameof(item.HatchedFraction));
+                Fraction(item.BruteFraction,nameof(item.BruteFraction));Fraction(item.BulwarkFraction,nameof(item.BulwarkFraction));
                 if ((item.Sides & ~15) != 0) throw new ArgumentOutOfRangeException(nameof(item.Sides));
                 // Overlapping fractions, zero sides and zero intervals keep the existing simulation clamps/priority.
             }

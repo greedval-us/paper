@@ -20,6 +20,7 @@ namespace PaperDefense.Presentation
         public bool enableDrawingInput = true;
         public bool constructionInputOnly;
         public TextResourcesAsset textResources;
+        public NotebookViewSettingsAsset viewSettings;
         [NonSerialized] public IWorkshopProfileStore ProfileStore;
         [NonSerialized] public Action<RunController> PrepareController;
         public UserTextResolver TextResolver { get; private set; }
@@ -57,9 +58,10 @@ namespace PaperDefense.Presentation
             background.clearFlags=CameraClearFlags.SolidColor;background.backgroundColor=new Color(.975f,.961f,.9f);
             ConfigureCamera();
             View = Child("Presentation — Notebook world").AddComponent<NotebookWorldView>();
-            View.WorldCamera = worldCamera; View.Initialize(Controller.Session);
+            View.WorldCamera = worldCamera; View.ViewSettings = viewSettings; View.Initialize(Controller.Session);
             Drawing = Child("Presentation — Drawing input").AddComponent<DrawingInput>();
             Drawing.TextResolver = TextResolver;
+            Drawing.ViewSettings = viewSettings;
             Drawing.ConstructionOnly = constructionInputOnly;
             Drawing.Initialize(Controller,View,worldCamera);
             Drawing.enabled = enableDrawingInput;

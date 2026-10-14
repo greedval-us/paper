@@ -108,7 +108,7 @@ namespace PaperDefense.Core
         }
 
         bool CanOperate(StructureState structure)
-            => structure.Health > 0 && structure.IsComplete && structure.BuildRemaining <= 0 && structure.Kind != StructureKind.Wall
+            => structure.Health > 0 && structure.IsComplete && structure.BuildRemaining <= 0 && structure.Kind != StructureKind.Wall && structure.Kind != StructureKind.TarPit && structure.Kind != StructureKind.RepairPost
                 && (structure.Blueprint==null || (Assembly(structure).FreeformDesign?.IsUsable ?? true));
         ColorEffectPayload ColorPayload(InkColor color)=>color==InkColor.Red?redPayload:color==InkColor.Blue?bluePayload:color==InkColor.Green?greenPayload:default;
 

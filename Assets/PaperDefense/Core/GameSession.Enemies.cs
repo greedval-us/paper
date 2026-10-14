@@ -24,7 +24,7 @@ namespace PaperDefense.Core
 
         private void PublishEnemyAttack(EnemyState enemy,Point2 to)
             => EventBuffer.Publish(TickIndex,SimulationEventKind.EnemyAttack,enemy.Position,to,default,entityId:enemy.Id,
-                simulationSeconds:Elapsed,enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier);
+                simulationSeconds:Elapsed,enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier,enemyVisualScale:enemy.VisualScale);
 
         public bool TryBlotter(Cell cell, out string reason)
         {
@@ -70,7 +70,7 @@ namespace PaperDefense.Core
                 {
                     enemy.BlotRemaining = Math.Max(enemy.BlotRemaining, Math.Max(0, rules.BlotBuffSeconds));
                     EventBuffer.Publish(TickIndex,SimulationEventKind.BlotAbsorbed,Center(CellOf(enemy.Position)),enemy.Position,default,
-                        entityId:enemy.Id,simulationSeconds:Elapsed,enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier);
+                        entityId:enemy.Id,simulationSeconds:Elapsed,enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier,enemyVisualScale:enemy.VisualScale);
                 }
             }
             system.FinishStep();
@@ -106,7 +106,7 @@ namespace PaperDefense.Core
                 enemyGlobs.Add(glob);
                 PublishEnemyAttack(enemy,glob.To);
                 EventBuffer.Publish(TickIndex,SimulationEventKind.EnemyGlobLaunched,glob.From,glob.To,default,
-                    entityId:glob.Id,travelSeconds:duration,simulationSeconds:Elapsed,enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier);
+                    entityId:glob.Id,travelSeconds:duration,simulationSeconds:Elapsed,enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier,enemyVisualScale:enemy.VisualScale);
                 enemy.WindingUp = false;
                 enemy.RangedCooldown = Math.Max(rules.Combat.MinimumActionInterval, definition.AttackInterval);
                 return true;

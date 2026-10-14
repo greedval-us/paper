@@ -23,8 +23,8 @@ namespace PaperDefense.Core
     }
 
     public enum MaterialTier { Pencil = 0, Ink = 1, Marker = 2 }
-    public enum StructureKind { Wall = 0, Gun = 1, Piercer = 2, Mortar = 3, Spikes = 4, Fan = 5, Ricochet = 6, Stapler = 7, Blotter = 8 }
-    public enum EnemyKind { Doodle = 0, Runner = 1, Gnawer = 2, Spitter = 3 }
+    public enum StructureKind { Wall = 0, Gun = 1, Piercer = 2, Mortar = 3, Spikes = 4, Fan = 5, Ricochet = 6, Stapler = 7, Blotter = 8, TarPit = 9, RepairPost = 10 }
+    public enum EnemyKind { Doodle = 0, Runner = 1, Gnawer = 2, Spitter = 3, Brute = 4, Bulwark = 5 }
     public enum DrawingTier { Sketch = 0, Outlined = 1, Hatched = 2 }
     public enum InkColor { None = 0, Red = 1, Blue = 2, Green = 3 }
     public enum RunPhase { Planning = 0, Assault = 1, Intermission = 2, Victory = 3, Defeat = 4 }
@@ -42,6 +42,7 @@ namespace PaperDefense.Core
         public int MaxTargets = 8;
         public float JumpRange;
         public float SlowSpeedMultiplier = 1, SlowDuration;
+        public float RepairPerSecond;
     }
 
     [Serializable] public sealed class MaterialDefinition
@@ -56,6 +57,7 @@ namespace PaperDefense.Core
         public float MaxHealth, Speed, Damage, AttackInterval;
         public float Range = 12.5f, WindupSeconds = .8f, ProjectileSeconds = .65f;
         public float StructureDamageMultiplier = 1;
+        public float VisualScale = 1;
         public int Reward;
     }
 
@@ -63,7 +65,7 @@ namespace PaperDefense.Core
     {
         public int InkGrant = -1;
         public int Count = 80;
-        public float SpawnInterval = 0.14f, RunnerFraction, GnawerFraction, SpitterFraction, OutlinedFraction, HatchedFraction;
+        public float SpawnInterval = 0.14f, RunnerFraction, GnawerFraction, SpitterFraction, BruteFraction, BulwarkFraction, OutlinedFraction, HatchedFraction;
         /// <summary>Spawn edges: west 1, east 2, north 4, south 8.</summary>
         public int Sides = 1;
         public string Title = UserText.Message("copy.a2d0b3c493f760f6");
@@ -102,7 +104,9 @@ namespace PaperDefense.Core
             new StructureDefinition { Kind = StructureKind.Stapler, Cost = 35, MaxHealth = 55, BuildSeconds = 1.2f, Range = 9,
                 Damage = 4, ShotInterval = .65f, SlowSpeedMultiplier = .8f, SlowDuration = 2, MaxPierce = 1 },
             new StructureDefinition { Kind = StructureKind.Blotter, Cost = 30, MaxHealth = 55, BuildSeconds = 1.2f, Range = 9,
-                Damage = 0, ShotInterval = 2, Radius = 1.5f, MaxPierce = 1 }
+                Damage = 0, ShotInterval = 2, Radius = 1.5f, MaxPierce = 1 },
+            new StructureDefinition { Kind = StructureKind.TarPit, Cost = 30, MaxHealth = 55, BuildSeconds = .8f, Radius = .7f, SlowSpeedMultiplier = .65f, SlowDuration = .3f },
+            new StructureDefinition { Kind = StructureKind.RepairPost, Cost = 80, MaxHealth = 70, BuildSeconds = 2, Range = 5, RepairPerSecond = 8 }
         };
         public List<MaterialDefinition> MaterialDefinitions = new List<MaterialDefinition>
         {
@@ -115,7 +119,9 @@ namespace PaperDefense.Core
             new EnemyDefinition { Kind = EnemyKind.Doodle, MaxHealth = 22, Speed = 2.1f, Damage = 6, AttackInterval = 1.1f, Reward = 1 },
             new EnemyDefinition { Kind = EnemyKind.Runner, MaxHealth = 14, Speed = 3.6f, Damage = 3, AttackInterval = 0.8f, Reward = 1 },
             new EnemyDefinition { Kind = EnemyKind.Gnawer, MaxHealth = 95, Speed = 1.25f, Damage = 18, AttackInterval = 0.9f, Reward = 3, StructureDamageMultiplier = 1.5f },
-            new EnemyDefinition { Kind = EnemyKind.Spitter, MaxHealth = 35, Speed = 1.7f, Damage = 10, AttackInterval = 2.4f, Reward = 2 }
+            new EnemyDefinition { Kind = EnemyKind.Spitter, MaxHealth = 35, Speed = 1.7f, Damage = 10, AttackInterval = 2.4f, Reward = 2 },
+            new EnemyDefinition { Kind = EnemyKind.Brute, MaxHealth = 420, Speed = 1.0f, Damage = 22, AttackInterval = 1.2f, Reward = 4 },
+            new EnemyDefinition { Kind = EnemyKind.Bulwark, MaxHealth = 260, Speed = 1.6f, Damage = 12, AttackInterval = 1.1f, Reward = 3 }
         };
         public List<WaveDefinition> Waves = new List<WaveDefinition>
         {
@@ -141,7 +147,9 @@ namespace PaperDefense.Core
             copy.Effects = Effects.CreateSnapshot();
             copy.Progression = Progression.CreateSnapshot();
             copy.Content = Content;
+            copy.Battlefield = Battlefield?.CreateSnapshot();
             copy.Combat = Combat.CreateSnapshot();
+            copy.Crowd = Crowd.CreateSnapshot();
             copy.Trials = Trials.CreateSnapshot();
             copy.WellPlacements = WellPlacements.ConvertAll(item => item.CreateSnapshot());
             copy.StructureDefinitions = StructureDefinitions.ConvertAll(definition => new StructureDefinition
@@ -151,7 +159,7 @@ namespace PaperDefense.Core
                 ShotInterval = definition.ShotInterval, Radius = definition.Radius,
                 FlightSeconds = definition.FlightSeconds, MaxPierce = definition.MaxPierce,
                 ConeAngleDegrees = definition.ConeAngleDegrees, MaxTargets = definition.MaxTargets, JumpRange = definition.JumpRange,
-                SlowSpeedMultiplier = definition.SlowSpeedMultiplier, SlowDuration = definition.SlowDuration
+                SlowSpeedMultiplier = definition.SlowSpeedMultiplier, SlowDuration = definition.SlowDuration, RepairPerSecond = definition.RepairPerSecond
             });
             copy.MaterialDefinitions = MaterialDefinitions.ConvertAll(definition => new MaterialDefinition
             {
@@ -163,7 +171,7 @@ namespace PaperDefense.Core
             {
                 Kind = definition.Kind, MaxHealth = definition.MaxHealth, Speed = definition.Speed,
                 Damage = definition.Damage, AttackInterval = definition.AttackInterval,
-                StructureDamageMultiplier = definition.StructureDamageMultiplier,
+                StructureDamageMultiplier = definition.StructureDamageMultiplier, VisualScale = definition.VisualScale,
                 Range = definition.Range, WindupSeconds = definition.WindupSeconds,
                 ProjectileSeconds = definition.ProjectileSeconds, Reward = definition.Reward
             });
@@ -172,7 +180,7 @@ namespace PaperDefense.Core
                 Count = definition.Count, SpawnInterval = definition.SpawnInterval,
                 InkGrant = definition.InkGrant,
                 RunnerFraction = definition.RunnerFraction, GnawerFraction = definition.GnawerFraction,
-                SpitterFraction = definition.SpitterFraction, OutlinedFraction = definition.OutlinedFraction,
+                SpitterFraction = definition.SpitterFraction, BruteFraction = definition.BruteFraction, BulwarkFraction = definition.BulwarkFraction, OutlinedFraction = definition.OutlinedFraction,
                 HatchedFraction = definition.HatchedFraction, Sides = definition.Sides, Title = definition.Title
             });
             return copy;
@@ -236,6 +244,7 @@ namespace PaperDefense.Core
         public EnemyKind Kind;
         public Point2 Position;
         public float Health, MaxHealth;
+        public float VisualScale = 1;
         public DrawingTier DrawingTier;
         public float BlotRemaining, RedRemaining, BlueRemaining, GreenRemaining, WindupRemaining;
         internal float RedTickRemaining;
@@ -251,6 +260,13 @@ namespace PaperDefense.Core
         internal float AttackCooldown;
         internal float SpeedScale = 1;
         internal Point2 Destination;
+        internal Point2 MovementDirection;
+        internal int AvoidanceNeighborId;
+        internal float AvoidanceSide;
+        internal Point2 NavigationDirection;
+        internal float NavigationCost;
+        internal bool YieldingToNeighbor;
+        internal bool CrowdHoldingPosition;
         internal bool HasDestination;
         internal bool VisualDeathPublished;
     }

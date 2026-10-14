@@ -60,7 +60,7 @@ namespace PaperDefense.Application
             var content = result.Content; var r = result.Construction;
             var definitions = new List<StructureDefinition>();
             foreach (var item in result.StructureDefinitions)
-                if (item.Kind == StructureKind.Wall || item.Kind == StructureKind.Spikes) definitions.Add(item);
+                if (ConstructionToolRules.IsTool(item.Kind)) definitions.Add(item);
             foreach (var weapon in content.Weapons)
                 if (weapon.LegacyKind.HasValue)
                 {

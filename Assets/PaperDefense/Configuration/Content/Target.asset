@@ -15,12 +15,178 @@ MonoBehaviour:
   database: {fileID: 11400000, guid: 4d973234bba75b94293622e4931bffda, type: 2}
   rules:
     Preset: 1
+    Battlefield:
+      Enabled: 1
+      Mode: 1
+      TowerRoadDistance: 6
+      Roads: []
+      Entrances:
+      - X: 0
+        Y: 8
+      - X: 95
+        Y: 8
+      - X: 0
+        Y: 24
+      - X: 95
+        Y: 24
+      - X: 0
+        Y: 40
+      - X: 95
+        Y: 40
+      - X: 0
+        Y: 56
+      - X: 95
+        Y: 56
+      - X: 12
+        Y: 63
+      - X: 12
+        Y: 0
+      - X: 36
+        Y: 63
+      - X: 36
+        Y: 0
+      - X: 60
+        Y: 63
+      - X: 60
+        Y: 0
+      - X: 84
+        Y: 63
+      - X: 84
+        Y: 0
+      BarricadeSites: []
+      Props:
+      - Kind: 0
+        X: 5
+        Y: 44
+        Width: 7
+        Height: 5
+      - Kind: 0
+        X: 14
+        Y: 49
+        Width: 6
+        Height: 5
+      - Kind: 0
+        X: 79
+        Y: 46
+        Width: 8
+        Height: 6
+      - Kind: 0
+        X: 84
+        Y: 39
+        Width: 6
+        Height: 5
+      - Kind: 1
+        X: 7
+        Y: 32
+        Width: 2
+        Height: 3
+      - Kind: 1
+        X: 10
+        Y: 35
+        Width: 2
+        Height: 3
+      - Kind: 1
+        X: 13
+        Y: 31
+        Width: 2
+        Height: 3
+      - Kind: 1
+        X: 23
+        Y: 39
+        Width: 2
+        Height: 3
+      - Kind: 1
+        X: 25
+        Y: 43
+        Width: 2
+        Height: 3
+      - Kind: 1
+        X: 65
+        Y: 50
+        Width: 2
+        Height: 3
+      - Kind: 1
+        X: 68
+        Y: 54
+        Width: 2
+        Height: 3
+      - Kind: 2
+        X: 7
+        Y: 7
+        Width: 3
+        Height: 3
+      - Kind: 2
+        X: 11
+        Y: 9
+        Width: 3
+        Height: 3
+      - Kind: 2
+        X: 25
+        Y: 7
+        Width: 3
+        Height: 3
+      - Kind: 2
+        X: 66
+        Y: 7
+        Width: 3
+        Height: 3
+      - Kind: 2
+        X: 83
+        Y: 7
+        Width: 3
+        Height: 3
+      - Kind: 2
+        X: 88
+        Y: 10
+        Width: 3
+        Height: 3
+      - Kind: 3
+        X: 28
+        Y: 35
+        Width: 2
+        Height: 1
+      - Kind: 3
+        X: 54
+        Y: 12
+        Width: 2
+        Height: 1
+      - Kind: 3
+        X: 69
+        Y: 36
+        Width: 2
+        Height: 1
+      - Kind: 3
+        X: 56
+        Y: 55
+        Width: 2
+        Height: 1
+      - Kind: 4
+        X: 30
+        Y: 12
+        Width: 1
+        Height: 1
+      - Kind: 4
+        X: 58
+        Y: 51
+        Width: 1
+        Height: 1
+      - Kind: 4
+        X: 70
+        Y: 22
+        Width: 1
+        Height: 1
+      - Kind: 4
+        X: 23
+        Y: 22
+        Width: 1
+        Height: 1
+    WaveHealthGrowth: 0.18
     Width: 96
     Height: 64
     StartingInk: 720
     MaxEarlyLaunchInk: 0
     WaveInkGrant: 75
-    MaxEnemiesPerCell: 6
+    MaxEnemiesPerCell: 3
     BlotterCost: 8
     WellActivationCost: 45
     WellInkPerWave: 12
@@ -96,6 +262,14 @@ MonoBehaviour:
       MinimumSpawnInterval: 0.005
       MinimumPathDamage: 0.01
       MinimumRadialRange: 0.5
+    Crowd:
+      Enabled: 1
+      EntranceHalfWidth: 6
+      RadiusPerVisualScale: 0.32
+      PersonalSpace: 0.35
+      SeparationWeight: 1.4
+      DirectionMemory: 0.25
+      ObstacleClearance: 0.08
     Trials:
       StepSeconds: 0.033333335
       MaximumTicks: 1800
@@ -180,8 +354,8 @@ MonoBehaviour:
       ReservedRadius: 1
     StructureDefinitions:
     - Kind: 0
-      Cost: 3
-      MaxHealth: 65
+      Cost: 14
+      MaxHealth: 240
       BuildSeconds: 0.35
       Range: 0
       Damage: 0
@@ -194,8 +368,9 @@ MonoBehaviour:
       JumpRange: 0
       SlowSpeedMultiplier: 1
       SlowDuration: 0
+      RepairPerSecond: 0
     - Kind: 4
-      Cost: 8
+      Cost: 22
       MaxHealth: 35
       BuildSeconds: 0.5
       Range: 0.7
@@ -209,6 +384,39 @@ MonoBehaviour:
       JumpRange: 0
       SlowSpeedMultiplier: 1
       SlowDuration: 0
+      RepairPerSecond: 0
+    - Kind: 9
+      Cost: 30
+      MaxHealth: 55
+      BuildSeconds: 0.8
+      Range: 0
+      Damage: 0
+      ShotInterval: 0
+      Radius: 0.7
+      FlightSeconds: 0.8
+      MaxPierce: 0
+      ConeAngleDegrees: 90
+      MaxTargets: 8
+      JumpRange: 0
+      SlowSpeedMultiplier: 0.65
+      SlowDuration: 0.3
+      RepairPerSecond: 0
+    - Kind: 10
+      Cost: 80
+      MaxHealth: 70
+      BuildSeconds: 2
+      Range: 5
+      Damage: 0
+      ShotInterval: 0
+      Radius: 0
+      FlightSeconds: 0.8
+      MaxPierce: 0
+      ConeAngleDegrees: 90
+      MaxTargets: 8
+      JumpRange: 0
+      SlowSpeedMultiplier: 1
+      SlowDuration: 0
+      RepairPerSecond: 8
     MaterialDefinitions:
     - CostMultiplier: 1
       HealthMultiplier: 1
@@ -227,7 +435,7 @@ MonoBehaviour:
       BuildTimeMultiplier: 1.75
     EnemyDefinitions:
     - Kind: 0
-      MaxHealth: 22
+      MaxHealth: 60
       Speed: 2.1
       Damage: 6
       AttackInterval: 1.1
@@ -235,9 +443,10 @@ MonoBehaviour:
       WindupSeconds: 0.8
       ProjectileSeconds: 0.65
       StructureDamageMultiplier: 1
+      VisualScale: 2.5
       Reward: 1
     - Kind: 1
-      MaxHealth: 14
+      MaxHealth: 42
       Speed: 3.6
       Damage: 3
       AttackInterval: 0.8
@@ -245,9 +454,10 @@ MonoBehaviour:
       WindupSeconds: 0.8
       ProjectileSeconds: 0.65
       StructureDamageMultiplier: 1
+      VisualScale: 2.3
       Reward: 1
     - Kind: 2
-      MaxHealth: 95
+      MaxHealth: 180
       Speed: 1.25
       Damage: 18
       AttackInterval: 0.9
@@ -255,9 +465,10 @@ MonoBehaviour:
       WindupSeconds: 0.8
       ProjectileSeconds: 0.65
       StructureDamageMultiplier: 1.5
+      VisualScale: 3
       Reward: 3
     - Kind: 3
-      MaxHealth: 35
+      MaxHealth: 110
       Speed: 1.7
       Damage: 10
       AttackInterval: 2.4
@@ -265,93 +476,127 @@ MonoBehaviour:
       WindupSeconds: 0.8
       ProjectileSeconds: 0.65
       StructureDamageMultiplier: 1
+      VisualScale: 2.8
       Reward: 2
+    - Kind: 4
+      MaxHealth: 420
+      Speed: 1
+      Damage: 22
+      AttackInterval: 1.2
+      Range: 12.5
+      WindupSeconds: 0.8
+      ProjectileSeconds: 0.65
+      StructureDamageMultiplier: 1
+      VisualScale: 4
+      Reward: 4
+    - Kind: 5
+      MaxHealth: 260
+      Speed: 1.6
+      Damage: 12
+      AttackInterval: 1.1
+      Range: 12.5
+      WindupSeconds: 0.8
+      ProjectileSeconds: 0.65
+      StructureDamageMultiplier: 1
+      VisualScale: 3.5
+      Reward: 3
     Waves:
     - InkGrant: 140
-      Count: 80
-      SpawnInterval: 0.14
+      Count: 28
+      SpawnInterval: 0.55
       RunnerFraction: 0
       GnawerFraction: 0
       SpitterFraction: 0
+      BruteFraction: 0
+      BulwarkFraction: 0
       OutlinedFraction: 0
       HatchedFraction: 0
-      Sides: 1
-      Title: "\u041A\u0430\u0440\u0430\u043A\u0443\u043B\u0438 \u0441 \u0437\u0430\u043F\u0430\u0434\u0430"
+      Sides: 15
+      Title: "\u041F\u0435\u0440\u0432\u044B\u0439 \u043D\u0430\u0442\u0438\u0441\u043A"
     - InkGrant: 160
-      Count: 120
-      SpawnInterval: 0.12
+      Count: 38
+      SpawnInterval: 0.505
       RunnerFraction: 0.22
       GnawerFraction: 0
       SpitterFraction: 0
-      OutlinedFraction: 0.08
+      BruteFraction: 0
+      BulwarkFraction: 0
+      OutlinedFraction: 0.06
       HatchedFraction: 0
-      Sides: 2
-      Title: "\u0411\u0435\u0433\u0443\u043D\u044B \u0441 \u0432\u043E\u0441\u0442\u043E\u043A\u0430"
+      Sides: 15
+      Title: "\u0411\u044B\u0441\u0442\u0440\u044B\u0439 \u043D\u0430\u043B\u0451\u0442"
     - InkGrant: 180
-      Count: 180
-      SpawnInterval: 0.1
-      RunnerFraction: 0.25
+      Count: 50
+      SpawnInterval: 0.46
+      RunnerFraction: 0.22
       GnawerFraction: 0.08
       SpitterFraction: 0.04
-      OutlinedFraction: 0.16
+      BruteFraction: 0
+      BulwarkFraction: 0
+      OutlinedFraction: 0.12
       HatchedFraction: 0
-      Sides: 5
-      Title: "\u041F\u0435\u0440\u0432\u044B\u0435 \u0433\u0440\u044B\u0437\u0443\u043D\u044B
-        \xB7 \u0437\u0430\u043F\u0430\u0434 / \u0441\u0435\u0432\u0435\u0440"
+      Sides: 15
+      Title: "\u0413\u0440\u044B\u0437\u0443\u043D\u044B \u043D\u0430\u0441\u0442\u0443\u043F\u0430\u044E\u0442"
     - InkGrant: 200
-      Count: 260
-      SpawnInterval: 0.085
-      RunnerFraction: 0.32
+      Count: 64
+      SpawnInterval: 0.415
+      RunnerFraction: 0.24
       GnawerFraction: 0.1
-      SpitterFraction: 0.08
-      OutlinedFraction: 0.24
+      SpitterFraction: 0.06
+      BruteFraction: 0.04
+      BulwarkFraction: 0
+      OutlinedFraction: 0.18
       HatchedFraction: 0
-      Sides: 10
-      Title: "\u0414\u0432\u0430 \u0444\u0440\u043E\u043D\u0442\u0430 \xB7 \u0432\u043E\u0441\u0442\u043E\u043A
-        / \u044E\u0433"
+      Sides: 15
+      Title: "\u0422\u044F\u0436\u0451\u043B\u0430\u044F \u043F\u043E\u0441\u0442\u0443\u043F\u044C"
     - InkGrant: 220
-      Count: 360
-      SpawnInterval: 0.075
-      RunnerFraction: 0.3
-      GnawerFraction: 0.13
-      SpitterFraction: 0.12
-      OutlinedFraction: 0.32
-      HatchedFraction: 0.05
-      Sides: 3
-      Title: "\u0427\u0435\u0440\u043D\u0438\u043B\u044C\u043D\u044B\u0439 \u043F\u0440\u0438\u043B\u0438\u0432
-        \xB7 \u0437\u0430\u043F\u0430\u0434 / \u0432\u043E\u0441\u0442\u043E\u043A"
+      Count: 80
+      SpawnInterval: 0.37
+      RunnerFraction: 0.25
+      GnawerFraction: 0.12
+      SpitterFraction: 0.08
+      BruteFraction: 0.05
+      BulwarkFraction: 0.06
+      OutlinedFraction: 0.24
+      HatchedFraction: 0.04
+      Sides: 15
+      Title: "\u0429\u0438\u0442\u043E\u043D\u043E\u0441\u0446\u044B"
     - InkGrant: 240
-      Count: 500
-      SpawnInterval: 0.065
-      RunnerFraction: 0.35
-      GnawerFraction: 0.15
-      SpitterFraction: 0.16
-      OutlinedFraction: 0.35
-      HatchedFraction: 0.1
-      Sides: 12
-      Title: "\u0428\u0442\u0443\u0440\u043C \u043F\u043E\u043B\u0435\u0439 \xB7
-        \u0441\u0435\u0432\u0435\u0440 / \u044E\u0433"
+      Count: 100
+      SpawnInterval: 0.325
+      RunnerFraction: 0.25
+      GnawerFraction: 0.13
+      SpitterFraction: 0.1
+      BruteFraction: 0.06
+      BulwarkFraction: 0.08
+      OutlinedFraction: 0.3
+      HatchedFraction: 0.08
+      Sides: 15
+      Title: "\u041A\u0440\u0443\u0433\u043E\u0432\u0430\u044F \u0430\u0442\u0430\u043A\u0430"
     - InkGrant: 260
-      Count: 680
-      SpawnInterval: 0.055
-      RunnerFraction: 0.36
-      GnawerFraction: 0.18
-      SpitterFraction: 0.16
+      Count: 125
+      SpawnInterval: 0.28
+      RunnerFraction: 0.25
+      GnawerFraction: 0.15
+      SpitterFraction: 0.12
+      BruteFraction: 0.08
+      BulwarkFraction: 0.1
       OutlinedFraction: 0.35
-      HatchedFraction: 0.15
+      HatchedFraction: 0.12
       Sides: 15
-      Title: "\u0421\u043E \u0432\u0441\u0435\u0445 \u0441\u0442\u043E\u0440\u043E\u043D"
+      Title: "\u0427\u0435\u0440\u043D\u0438\u043B\u044C\u043D\u044B\u0439 \u043D\u0430\u0442\u0438\u0441\u043A"
     - InkGrant: 280
-      Count: 1000
-      SpawnInterval: 0.045
-      RunnerFraction: 0.38
-      GnawerFraction: 0.2
-      SpitterFraction: 0.16
+      Count: 155
+      SpawnInterval: 0.235
+      RunnerFraction: 0.25
+      GnawerFraction: 0.16
+      SpitterFraction: 0.12
+      BruteFraction: 0.1
+      BulwarkFraction: 0.12
       OutlinedFraction: 0.35
-      HatchedFraction: 0.2
+      HatchedFraction: 0.16
       Sides: 15
-      Title: "\u0424\u0438\u043D\u0430\u043B\u044C\u043D\u0430\u044F \u043E\u0441\u0430\u0434\u0430
-        \xB7 1000 \u043A\u0430\u0440\u0430\u043A\u0443\u043B\u044C"
+      Title: "\u0424\u0438\u043D\u0430\u043B\u044C\u043D\u0430\u044F \u043E\u0441\u0430\u0434\u0430"
   overrides:
     Chassis:
     - Id: chassis.standard
@@ -524,6 +769,7 @@ MonoBehaviour:
         JumpRange: 0
         SlowSpeedMultiplier: 1
         SlowDuration: 0
+        RepairPerSecond: 0
       Load: 4
       AssemblyCredit: 16
       MinimumLineRadius: 0
@@ -563,6 +809,7 @@ MonoBehaviour:
         JumpRange: 0
         SlowSpeedMultiplier: 1
         SlowDuration: 0
+        RepairPerSecond: 0
       Load: 6
       AssemblyCredit: 16
       MinimumLineRadius: 0.2
@@ -602,6 +849,7 @@ MonoBehaviour:
         JumpRange: 0
         SlowSpeedMultiplier: 1
         SlowDuration: 0
+        RepairPerSecond: 0
       Load: 7
       AssemblyCredit: 16
       MinimumLineRadius: 0
@@ -641,6 +889,7 @@ MonoBehaviour:
         JumpRange: 0
         SlowSpeedMultiplier: 1
         SlowDuration: 0
+        RepairPerSecond: 0
       Load: 5
       AssemblyCredit: 16
       MinimumLineRadius: 0
@@ -682,6 +931,7 @@ MonoBehaviour:
         JumpRange: 3
         SlowSpeedMultiplier: 1
         SlowDuration: 0
+        RepairPerSecond: 0
       Load: 5
       AssemblyCredit: 16
       MinimumLineRadius: 0
@@ -723,6 +973,7 @@ MonoBehaviour:
         JumpRange: 0
         SlowSpeedMultiplier: 0.8
         SlowDuration: 2
+        RepairPerSecond: 0
       Load: 3
       AssemblyCredit: 16
       MinimumLineRadius: 0
@@ -766,6 +1017,7 @@ MonoBehaviour:
         JumpRange: 0
         SlowSpeedMultiplier: 1
         SlowDuration: 0
+        RepairPerSecond: 0
       Load: 3
       AssemblyCredit: 16
       MinimumLineRadius: 0
@@ -792,9 +1044,9 @@ MonoBehaviour:
       Cost: 18
       BuildSeconds: 0.25
       Repeatable: 0
-      ExclusiveGroup:
+      ExclusiveGroup: 
       AllowedChassisIds: []
-      AllowedAttacks:
+      AllowedAttacks: 
       Modifiers:
       - Stat: 0
         Operation: 2
@@ -825,9 +1077,9 @@ MonoBehaviour:
       Cost: 16
       BuildSeconds: 0.25
       Repeatable: 0
-      ExclusiveGroup:
+      ExclusiveGroup: 
       AllowedChassisIds: []
-      AllowedAttacks:
+      AllowedAttacks: 
       Modifiers:
       - Stat: 4
         Operation: 2
@@ -853,9 +1105,9 @@ MonoBehaviour:
       Cost: 14
       BuildSeconds: 0.25
       Repeatable: 0
-      ExclusiveGroup:
+      ExclusiveGroup: 
       AllowedChassisIds: []
-      AllowedAttacks:
+      AllowedAttacks: 
       Modifiers:
       - Stat: 5
         Operation: 0
@@ -884,9 +1136,9 @@ MonoBehaviour:
       Cost: 20
       BuildSeconds: 0.25
       Repeatable: 0
-      ExclusiveGroup:
+      ExclusiveGroup: 
       AllowedChassisIds: []
-      AllowedAttacks:
+      AllowedAttacks: 
       Modifiers:
       - Stat: 2
         Operation: 2

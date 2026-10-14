@@ -8,6 +8,7 @@ namespace PaperDefense.Core
         private readonly GameBalance rules;
         internal GameBalance OwnedBalance => rules;
         public GameBalance Balance => rules.CreateSnapshot();
+        public BattlefieldView Battlefield {get;}
         public MechanicsAvailability Mechanics { get; }
         public IReadOnlyList<StructureState> Structures => structures;
         public IReadOnlyList<EnemyState> Enemies => enemies;
@@ -66,8 +67,10 @@ namespace PaperDefense.Core
             Countdown = Math.Max(0, balance.PlanningSeconds);
             Phase = RunPhase.Planning;
             grid = new StructureState[balance.Width * balance.Height];
-            flow = new WeightedFlowField(balance.Width, balance.Height);
+            Battlefield=balance.ResolveBattlefield();
+            flow = new WeightedFlowField(balance.Width, balance.Height, Battlefield);
             crowd = new EnemyCrowdGrid(balance.Width, balance.Height, balance.MaxEnemiesPerCell);
+            if (rules.Crowd.Enabled) crowdMotion = new EnemyCrowdMotion(balance.Width, balance.Height, rules.Crowd);
             navigationBands = new int[grid.Length];
             frontline = new EnemyState[grid.Length * 3];
             frontlineDistances = new float[grid.Length * 3];
@@ -75,7 +78,7 @@ namespace PaperDefense.Core
             weapons = new WeaponSystem(balance, null, CreateBlotContext());
             random = new Random(seed);
             InitializeObjectives();
-            if (starterDefenses) AddStarterDefenses();
+            if (starterDefenses && Battlefield==null) AddStarterDefenses();
         }
 
         /// <summary>Quotes a deduplicated stroke. A single invalid cell rejects the entire order.</summary>
@@ -92,6 +95,8 @@ namespace PaperDefense.Core
             if (Phase == RunPhase.Victory || Phase == RunPhase.Defeat)
             { quote.Reason = UserText.Message("copy.850e91bbbd5c94d8"); return quote; }
             if (cells == null || cells.Count == 0) { quote.Reason = UserText.Message("copy.2bda845eb8de3b76"); return quote; }
+            if(!unitPrice.HasValue&&!rules.StructureDefinitions.Exists(d=>d.Kind==kind))
+            {quote.Reason=UserText.Message("td.tool.unavailable");return quote;}
             var seen = new HashSet<Cell>();
             string invalid = "";
             int newSegments = 0;
@@ -105,10 +110,12 @@ namespace PaperDefense.Core
                 else if (Math.Abs(cell.X - BaseCell.X) <= 1 && Math.Abs(cell.Y - BaseCell.Y) <= 1)
                     invalid = UserText.Message("copy.de6ff12a6096d83f");
                 else if (ReservedObjective(cell)) invalid = UserText.Message("copy.3d5bb5922e409c4c");
+                else if (Battlefield!=null&&!Battlefield.CanPlace(cell,unitPrice.HasValue?StructureKind.Gun:kind))
+                    invalid = Battlefield.IsOpenTerrain?UserText.Message("td.placement.terrain"):kind==StructureKind.Wall?UserText.Message("td.placement.barricade"):kind==StructureKind.Spikes||kind==StructureKind.TarPit?UserText.Message("td.placement.trap"):UserText.Message("td.placement.tower");
                 else if (StructureAt(cell) != null)
                 {
                     var existing = StructureAt(cell);
-                    if ((kind != StructureKind.Wall && kind != StructureKind.Spikes) || existing.Kind != kind || existing.Tier != tier)
+                    if ((kind != StructureKind.Wall && kind != StructureKind.Spikes && kind != StructureKind.TarPit) || existing.Kind != kind || existing.Tier != tier)
                         invalid = UserText.Message("copy.d85abdff9eafbb67");
                     continue;
                 }
@@ -117,7 +124,8 @@ namespace PaperDefense.Core
             // Retain only stroke cells. Previewing never copies a large horde into a temporary set.
             if (invalid.Length == 0 && newSegments > 0)
                 foreach (var enemy in enemies)
-                    if (enemy.Health > 0 && seen.Contains(CellOf(enemy.Position)) && StructureAt(CellOf(enemy.Position)) == null)
+                    if (enemy.Health > 0 && (crowdMotion != null ? EnemyTouchesConstruction(enemy, seen) :
+                        seen.Contains(CellOf(enemy.Position)) && StructureAt(CellOf(enemy.Position)) == null))
                     { invalid = UserText.Message("copy.20f4659591475b68"); break; }
             long cost = (long)(unitPrice ?? BuildCost(kind, tier)) * newSegments;
             quote.Cost = (int)Math.Min(int.MaxValue, cost);
@@ -230,6 +238,7 @@ namespace PaperDefense.Core
             TickCorpseBlots(delta);
             AdvanceEnemyGlobs(delta);
             crowd.Rebuild(enemies);
+            crowdMotion?.Rebuild(enemies);
             supplyRemainder += Math.Max(0, rules.PassiveInkPerSecond) * supplyMultiplier * delta;
             int supplied = (int)Math.Floor(supplyRemainder + 0.000001);
             CreditInk(supplied);
@@ -241,7 +250,8 @@ namespace PaperDefense.Core
                     structure.BuildRemaining = Math.Max(0, structure.BuildRemaining - delta);
                     if (structure.BuildRemaining <= 0)
                     {
-                        bool waiting = structure.Kind != StructureKind.Spikes && crowd.Count(structure.Cell) > 0;
+                        bool waiting = structure.Kind != StructureKind.Spikes && structure.Kind != StructureKind.TarPit &&
+                            (crowdMotion != null ? crowdMotion.OccupiesConstructionClearance(structure.Cell) : crowd.Count(structure.Cell) > 0);
                         if (structure.WaitingForClearance != waiting) StructureVisualVersion++;
                         structure.WaitingForClearance = waiting;
                         if (!waiting)
@@ -264,6 +274,7 @@ namespace PaperDefense.Core
                 Countdown = Math.Max(0, Countdown - delta);
                 if (Countdown <= 0) StartNextWave();
             }
+            ApplySupport(delta);
             if (Phase != RunPhase.Assault)
             {
                 weapons.ReloadWithoutTargets(structures, fireMultiplier, delta);
@@ -297,10 +308,12 @@ namespace PaperDefense.Core
             while (RemainingToSpawn > 0 && spawnClock <= 0)
             {
                 double roll = random.NextDouble();
-                float gnawers = Clamp(wave.GnawerFraction, 0, 1);
-                float runners = Clamp(wave.RunnerFraction, 0, 1 - gnawers);
-                float spitters = Mechanics.RangedEnemies ? Clamp(wave.SpitterFraction, 0, 1 - gnawers - runners) : 0;
-                EnemyKind kind = roll < gnawers ? EnemyKind.Gnawer : roll < gnawers + runners ? EnemyKind.Runner :
+                float brutes=Clamp(wave.BruteFraction,0,1),bulwarks=Clamp(wave.BulwarkFraction,0,1-brutes);
+                float gnawers = Clamp(wave.GnawerFraction, 0, 1-brutes-bulwarks);
+                float runners = Clamp(wave.RunnerFraction, 0, 1 - gnawers-brutes-bulwarks);
+                float spitters = Mechanics.RangedEnemies ? Clamp(wave.SpitterFraction, 0, 1 - gnawers - runners-brutes-bulwarks) : 0;
+                EnemyKind kind = roll < brutes?EnemyKind.Brute:roll < brutes+bulwarks?EnemyKind.Bulwark:
+                    (roll-=brutes+bulwarks) < gnawers ? EnemyKind.Gnawer : roll < gnawers + runners ? EnemyKind.Runner :
                     roll < gnawers + runners + spitters ? EnemyKind.Spitter : EnemyKind.Doodle;
                 var definition = rules.Enemy(kind);
                 int sideCount = 0;
@@ -312,11 +325,23 @@ namespace PaperDefense.Core
                     for (int bit = 1; bit <= 8; bit <<= 1)
                         if ((wave.Sides & bit) != 0 && sideIndex-- == 0) { side = bit; break; }
                 }
+                Cell mapSpawn=default;
+                Point2 crowdPosition = default;
+                bool naturalAdmission = crowdMotion != null && TryCrowdSpawn(side, definition.VisualScale, out crowdPosition);
+                if (crowdMotion != null && !naturalAdmission)
+                    for (int alternate = 1; alternate <= 8 && !naturalAdmission; alternate <<= 1)
+                        if (alternate != side && (wave.Sides & alternate) != 0)
+                            naturalAdmission = TryCrowdSpawn(alternate, definition.VisualScale, out crowdPosition);
+                if (crowdMotion != null && !naturalAdmission) { spawnClock = 0; return; }
+                if (naturalAdmission) mapSpawn = CellOf(crowdPosition);
+                bool mapAdmitted = naturalAdmission || (Battlefield!=null&&TryMapSpawn(side,out mapSpawn));
+                if(Battlefield!=null&&!mapAdmitted){spawnClock=0;return;}
                 int offset = side <= 2 ? random.Next(2, rules.Height - 2) : random.Next(2, rules.Width - 2);
                 int edgeLength = side <= 2 ? rules.Height - 4 : rules.Width - 4;
                 Cell spawnCell = default;
-                bool admitted = false;
-                for (int attempt = 0; attempt < edgeLength; attempt++)
+                bool admitted = mapAdmitted;
+                if(mapAdmitted)spawnCell=mapSpawn;
+                for (int attempt = 0; !naturalAdmission && Battlefield==null && attempt < edgeLength; attempt++)
                 {
                     int edgeOffset = 2 + (offset - 2 + attempt) % edgeLength;
                     spawnCell = side == 1 ? new Cell(0, edgeOffset) : side == 2 ? new Cell(rules.Width - 1, edgeOffset) :
@@ -327,6 +352,7 @@ namespace PaperDefense.Core
                 spawnClock += interval;
                 RemainingToSpawn--;
                 Point2 position = crowd.Add(spawnCell);
+                if (naturalAdmission) position = crowdPosition;
                 DrawingTier drawing = DrawingTier.Sketch;
                 if (Mechanics.EnemyDrawingTiers)
                 {
@@ -337,15 +363,17 @@ namespace PaperDefense.Core
                 float lateScale = legacyEnemyHealthGrowth ?
                     1 + Math.Max(0, WaveIndex - rules.Progression.LegacyHealthGrowthStartsAfterWave) * rules.Progression.LegacyHealthGrowthPerWave :
                     EnemyEffects.DrawingHealthMultiplier(drawing, rules.Effects);
+                lateScale*=1+Math.Max(0,WaveIndex-1)*rules.WaveHealthGrowth;
                 enemies.Add(new EnemyState
                 {
-                    Id = nextEnemyId++, Kind = kind, Position = position,
+                    Id = nextEnemyId++, Kind = kind, Position = position, VisualScale=definition.VisualScale,
                     Health = Math.Max(1, definition.MaxHealth * lateScale), MaxHealth = Math.Max(1, definition.MaxHealth * lateScale),
                     SpeedScale = rules.Progression.EnemySpeedScaleMinimum +
                         (float)random.NextDouble() * rules.Progression.EnemySpeedScaleVariation, AttackCooldown = 0,
-                    DrawingTier = drawing, ObjectiveIndex = ChooseObjective(), RewardBudget = Math.Max(0, definition.Reward)
+                    DrawingTier = drawing, ObjectiveIndex = ChooseObjective(spawnCell), RewardBudget = Math.Max(0, definition.Reward)
                 });
                 Statistics.ObserveEnemies(enemies.Count);
+                crowdMotion?.Add(enemies[enemies.Count - 1]);
             }
         }
 
@@ -358,10 +386,15 @@ namespace PaperDefense.Core
                 if (enemy.Health <= 0) continue;
                 if (enemy.HasDestination && DistanceSquared(enemy.Position, enemy.Destination) > rules.Combat.DestinationRepathDistanceSquared)
                     enemy.HasDestination = false;
-                if (!enemy.HasDestination)
+                if (!enemy.HasDestination || crowdMotion != null)
                 {
                     enemy.Destination = Center(EnemyFlow(enemy).Next(CellOf(enemy.Position)));
                     enemy.HasDestination = true;
+                }
+                if (crowdMotion != null)
+                {
+                    enemy.NavigationDirection = CrowdPreferredDirection(enemy);
+                    enemy.NavigationCost = EnemyFlow(enemy).Cost(CellOf(enemy.Position));
                 }
             }
             RetainFrontlineOwners();
@@ -379,10 +412,12 @@ namespace PaperDefense.Core
             {
                 if (enemy.Health <= 0) continue;
                 var definition = rules.Enemy(enemy.Kind);
+                enemy.CrowdHoldingPosition = definition.Speed <= 0 || enemy.SpeedScale <= 0;
                 enemy.AttackCooldown = Math.Max(0, enemy.AttackCooldown - delta);
-                if (TryRangedAttack(enemy, delta)) continue;
+                if (TryRangedAttack(enemy, delta)) { enemy.CrowdHoldingPosition = true; continue; }
                 if (DistanceSquared(enemy.Position, TargetPoint(enemy)) <= rules.Combat.ObjectiveContactDistance * rules.Combat.ObjectiveContactDistance)
                 {
+                    enemy.CrowdHoldingPosition = true;
                     if (enemy.AttackCooldown <= 0)
                     { PublishEnemyAttack(enemy,TargetPoint(enemy)); DamageObjective(enemy.ObjectiveIndex, Math.Max(0, definition.Damage)); enemy.AttackCooldown = Math.Max(rules.Combat.MinimumActionInterval, definition.AttackInterval); }
                     continue;
@@ -394,7 +429,7 @@ namespace PaperDefense.Core
                     float contactDistance = DistanceSquared(enemy.Position, Center(obstacle.Cell));
                     if (contactDistance <= rules.Combat.StructureContactDistance * rules.Combat.StructureContactDistance)
                     {
-                        if (!OwnsFrontage(obstacle, enemy)) continue;
+                        if (!OwnsFrontage(obstacle, enemy)) { enemy.CrowdHoldingPosition = true; continue; }
                         obstacle.FrontageUsed++;
                         if (enemy.AttackCooldown <= 0)
                         {
@@ -406,13 +441,14 @@ namespace PaperDefense.Core
                             if (obstacle.Health <= 0) RemoveStructure(obstacle, true);
                             else RefreshHealthBand(obstacle);
                         }
-                        if (obstacle.Health > 0) continue;
+                        if (obstacle.Health > 0) { enemy.CrowdHoldingPosition = true; continue; }
                     }
                 }
                 float dx = enemy.Destination.X - enemy.Position.X, dy = enemy.Destination.Y - enemy.Position.Y;
                 float distance = (float)Math.Sqrt(dx * dx + dy * dy);
                 float movement = Math.Max(0, definition.Speed) * enemy.SpeedScale *
                     EnemyEffects.MovementMultiplier(enemy, enemyEffects, Mechanics.CorpseBlots ? rules.BlotSpeedBonus : 0) * delta;
+                if (crowdMotion != null) { MoveInCrowd(enemy, movement); continue; }
                 bool reached = distance <= movement + 0.00001f;
                 var nextPosition = reached ? enemy.Destination : distance > 0.00001f ?
                     new Point2(enemy.Position.X + dx / distance * movement, enemy.Position.Y + dy / distance * movement) : enemy.Position;
@@ -542,12 +578,12 @@ namespace PaperDefense.Core
         }
 
         private static bool IsBlocker(StructureState structure) => structure != null && structure.IsComplete &&
-            structure.Health > 0 && structure.Kind != StructureKind.Spikes;
+            structure.Health > 0 && structure.Kind != StructureKind.Spikes && structure.Kind != StructureKind.TarPit;
 
         private void MarkStructureChanged(StructureState structure, bool topologyChanged)
         {
             StructureVisualVersion++;
-            if (topologyChanged && structure.Kind != StructureKind.Spikes) { TopologyVersion++; flowDirty = true; }
+            if (topologyChanged && structure.Kind != StructureKind.Spikes && structure.Kind != StructureKind.TarPit) { TopologyVersion++; flowDirty = true; }
             navigationBands[structure.Cell.Y * rules.Width + structure.Cell.X] = IsBlocker(structure) ? WeightedFlowField.HealthBand(structure) : 0;
         }
 
@@ -558,7 +594,7 @@ namespace PaperDefense.Core
             if (navigationBands[index] == band) return;
             navigationBands[index] = band;
             StructureVisualVersion++;
-            if (structure.IsComplete && structure.Kind != StructureKind.Spikes) flowDirty = true;
+            if (structure.IsComplete && structure.Kind != StructureKind.Spikes && structure.Kind != StructureKind.TarPit) flowDirty = true;
         }
 
         private int BuildCost(StructureKind kind, MaterialTier tier) => TowerCatalog.ToolCost(rules, kind, tier);
