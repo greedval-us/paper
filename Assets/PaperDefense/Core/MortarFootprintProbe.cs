@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 namespace PaperDefense.Core
 {
-    public enum FootprintFormation { Group, Column }
+    public enum FootprintFormation { Group, Column, Line }
     public sealed class FootprintProbeComparison
     {
         public FootprintProbeReport First { get; }
@@ -34,7 +34,7 @@ namespace PaperDefense.Core
             if(second==null) throw new ArgumentNullException(nameof(second));
             if(!Enum.IsDefined(typeof(FootprintFormation),formation)) throw new ArgumentOutOfRangeException(nameof(formation));
             var weapon=rules.ResolveContent().GetWeapon(blueprint.GetWeaponId(mount));
-            if(first.AspectRatio>weapon.MaximumFootprintAspectRatio||second.AspectRatio>weapon.MaximumFootprintAspectRatio)throw new ArgumentException(UserText.Message("copy.a630b0b26793f9fd"));
+            if(!first.FitsAspectLimit(weapon.MaximumFootprintAspectRatio)||!second.FitsAspectLimit(weapon.MaximumFootprintAspectRatio))throw new ArgumentException(UserText.Message("copy.a630b0b26793f9fd"));
             float quality=blueprint.Origin==DrawingOrigin.LegacyStandard?100:blueprint.Assessment.Quality;
             int cost=TowerCatalog.Cost(blueprint,rules,MaterialTier.Pencil);
             return new FootprintProbeComparison(Run(blueprint,mount,first,rules,formation,cost,quality),Run(blueprint,mount,second,rules,formation,cost,quality));
@@ -57,6 +57,7 @@ namespace PaperDefense.Core
             {
                 float x=formation==FootprintFormation.Group?(i/3)*.3f*radius:i*.2f*radius;
                 float y=formation==FootprintFormation.Group?(i%3-1)*.7f*radius:0;
+                if(formation==FootprintFormation.Line){x=0;y=(i==0?0:(i%2==1?1:-1)*((i+1)/2))*.4f*radius;}
                 enemies.Add(new EnemyState { Id=i+1,Position=new Point2(anchor.X+x,anchor.Y+y),Health=100,MaxHealth=100 });
             }
             var frames=new List<TrialFrame>(601);

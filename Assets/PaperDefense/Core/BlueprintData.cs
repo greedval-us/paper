@@ -36,17 +36,20 @@ namespace PaperDefense.Core
             for (int i = 0; i < ModuleSelections.Length; i++) ModuleSelections[i] = new ModuleSelectionData(blueprint.ModuleSelections[i]);
             EvaluationMetadataVersion = 1; Evaluation = new DrawingEvaluationData(blueprint.Assessment.ToStamp());
             DrawingMetadataVersion = 1; Origin = blueprint.Origin; Drawing = new DrawingData(blueprint.Drawing);
-            FreeformRuleVersion = blueprint.IsFreeform ? FreeformTowerDesign.RuleVersion : 0;
-            FootprintMetadataVersion = 1; FirstFootprintAspect = blueprint.FirstFootprint.AspectRatio; SecondFootprintAspect = blueprint.SecondFootprint.AspectRatio; }
+            FreeformRuleVersion = blueprint.FreeformRuleVersion;
+            FootprintMetadataVersion = 1;
+            foreach(var mount in blueprint.WeaponMounts)if(mount.Footprint.IsContour)FootprintMetadataVersion=2;
+            FirstFootprintAspect = blueprint.FirstFootprint.AspectRatio; SecondFootprintAspect = blueprint.SecondFootprint.AspectRatio; }
         public TowerBlueprint ToBlueprint(int profileVersion = WorkshopProfile.CurrentVersion)
         {
             if (profileVersion > WorkshopProfile.CurrentVersion) throw new NotSupportedException("Newer profile version.");
             if (profileVersion < 1) throw new ArgumentException("Unknown profile version.");
+            if(profileVersion<6&&FootprintMetadataVersion>1)throw new NotSupportedException("Contour footprints require mount metadata.");
             if (Origin == DrawingOrigin.Freeform)
             {
                 if (profileVersion < 7) throw new ArgumentException("Freeform drawings require profile version 7.");
                 if (FreeformRuleVersion > FreeformTowerDesign.RuleVersion) throw new NotSupportedException("Newer freeform drawing rules.");
-                if (FreeformRuleVersion != FreeformTowerDesign.RuleVersion) throw new ArgumentException("Missing freeform drawing rules.");
+                if (FreeformRuleVersion < 1) throw new ArgumentException("Missing freeform drawing rules.");
             }
             if (profileVersion >= 5) return ToContentBlueprint(profileVersion);
             if (!Enum.IsDefined(typeof(ChassisKind), Chassis) || !Enum.IsDefined(typeof(StructureKind), FirstWeapon) ||
@@ -80,12 +83,12 @@ namespace PaperDefense.Core
         }
         TowerBlueprint ToContentBlueprint(int profileVersion)
         {
-            if (ContentMetadataVersion > 1 || EvaluationMetadataVersion > 1 || DrawingMetadataVersion > 1 || FootprintMetadataVersion > 1)
+            if (ContentMetadataVersion > 1 || EvaluationMetadataVersion > 1 || DrawingMetadataVersion > 1 || FootprintMetadataVersion > 2)
                 throw new NotSupportedException(UserText.Message("copy.6c744cc68ecf81e5"));
             if (!Enum.IsDefined(typeof(DrawingOrigin), Origin) && (int)Origin > (int)DrawingOrigin.PlayerDrawing)
                 throw new NotSupportedException(UserText.Message("copy.05eba950435c3eca"));
             if (ContentMetadataVersion != 1 || EvaluationMetadataVersion != 1 || Evaluation == null ||
-                DrawingMetadataVersion != 1 || FootprintMetadataVersion != 1 || Drawing == null ||
+                DrawingMetadataVersion != 1 || (FootprintMetadataVersion != 1 && FootprintMetadataVersion != 2) || Drawing == null ||
                 !Enum.IsDefined(typeof(DrawingOrigin), Origin) || ModuleSelections == null || ModuleSelections.Length > DrawingSnapshot.MaximumParts)
                 throw new ArgumentException(UserText.Message("copy.1f79fe0daa674686"));
             if (string.IsNullOrWhiteSpace(ChassisId) || (profileVersion==5&&(string.IsNullOrWhiteSpace(FirstWeaponId) ||
@@ -107,9 +110,11 @@ namespace PaperDefense.Core
                 foreach(var mount in WeaponMounts)
                 {
                     if(mount==null||!slots.Add(mount.SlotIndex))throw new ArgumentException("Duplicate or empty weapon mount.");
-                    mounts.Add(new WeaponMountSelection(mount.SlotIndex,mount.WeaponId,MortarFootprint.CreateStored(mount.FootprintAspect)));
+                    var footprint=mount.ToFootprint();
+                    if(footprint.IsContour&&FootprintMetadataVersion!=2)throw new ArgumentException("Missing contour footprint metadata.");
+                    mounts.Add(new WeaponMountSelection(mount.SlotIndex,mount.WeaponId,footprint));
                 }
-                return new TowerBlueprint(Id,Name,ChassisId,mounts,modules,Drawing.ToSnapshot(),Origin,evaluationStamp:Evaluation.ToStamp());
+                return new TowerBlueprint(Id,Name,ChassisId,mounts,modules,Drawing.ToSnapshot(),Origin,evaluationStamp:Evaluation.ToStamp(),freeformRuleVersion:FreeformRuleVersion);
             }
             return new TowerBlueprint(Id, Name, ChassisId, FirstWeaponId, HasSecondWeapon ? SecondWeaponId : null, modules,
                 Drawing.ToSnapshot(), Origin, MortarFootprint.CreateStored(FirstFootprintAspect), MortarFootprint.CreateStored(SecondFootprintAspect),
@@ -122,9 +127,33 @@ namespace PaperDefense.Core
         public int SlotIndex;
         public string WeaponId;
         public float FootprintAspect=1;
+        public int FootprintContourVersion;
+        public DrawingPointData[] FootprintPoints;
         public WeaponMountSelectionData() { }
         public WeaponMountSelectionData(WeaponMountSelection selection)
-        {SlotIndex=selection.SlotIndex;WeaponId=selection.WeaponId;FootprintAspect=selection.Footprint.AspectRatio;}
+        {
+            SlotIndex=selection.SlotIndex;WeaponId=selection.WeaponId;FootprintAspect=selection.Footprint.AspectRatio;
+            if(selection.Footprint.IsContour)
+            {
+                FootprintContourVersion=1;FootprintPoints=new DrawingPointData[selection.Footprint.Authored.Count];
+                for(int i=0;i<FootprintPoints.Length;i++)FootprintPoints[i]=new DrawingPointData{X=selection.Footprint.Authored[i].X,Y=selection.Footprint.Authored[i].Y};
+            }
+        }
+        public MortarFootprint ToFootprint()
+        {
+            if(FootprintContourVersion>1)throw new NotSupportedException("Newer footprint contour rules.");
+            if(FootprintContourVersion==0&&(FootprintPoints==null||FootprintPoints.Length==0))return MortarFootprint.CreateStored(FootprintAspect);
+            if(FootprintContourVersion!=1||FootprintPoints==null||FootprintPoints.Length<3||FootprintPoints.Length>FootprintContour.MaximumPoints)throw new ArgumentException("Invalid footprint contour data.");
+            var points=new Point2[FootprintPoints.Length];
+            for(int i=0;i<points.Length;i++){var p=FootprintPoints[i]??throw new ArgumentException("Missing footprint point.");points[i]=new Point2(p.X,p.Y);}
+            return MortarFootprint.FromContour(points,MortarFootprint.StructuralMaximumAspectRatio);
+        }
+        internal WeaponMountSelectionData CreateCopy()
+        {
+            var copy=new WeaponMountSelectionData{SlotIndex=SlotIndex,WeaponId=WeaponId,FootprintAspect=FootprintAspect,FootprintContourVersion=FootprintContourVersion};
+            if(FootprintPoints!=null){copy.FootprintPoints=new DrawingPointData[FootprintPoints.Length];for(int i=0;i<FootprintPoints.Length;i++)if(FootprintPoints[i]!=null)copy.FootprintPoints[i]=new DrawingPointData{X=FootprintPoints[i].X,Y=FootprintPoints[i].Y};}
+            return copy;
+        }
     }
     [Serializable] public sealed class ModuleSelectionData
     {

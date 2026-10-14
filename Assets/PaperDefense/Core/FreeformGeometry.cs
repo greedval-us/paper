@@ -10,36 +10,41 @@ namespace PaperDefense.Core
     {
         const double WeldDistance = .0625, WeldSquared = WeldDistance * WeldDistance;
         static readonly ConditionalWeakTable<DrawingSnapshot, FreeformGeometry> cache = new ConditionalWeakTable<DrawingSnapshot, FreeformGeometry>();
+        static readonly ConditionalWeakTable<DrawingSnapshot, FreeformGeometry> legacyCache = new ConditionalWeakTable<DrawingSnapshot, FreeformGeometry>();
         readonly Dictionary<string, Shape> parts = new Dictionary<string, Shape>(StringComparer.Ordinal);
-        internal static FreeformGeometry For(DrawingSnapshot drawing) => cache.GetValue(drawing, value => new FreeformGeometry(value));
+        internal static FreeformGeometry For(DrawingSnapshot drawing, int version = FreeformTowerDesign.RuleVersion) => version == 1
+            ? legacyCache.GetValue(drawing, value => new FreeformGeometry(value, false))
+            : cache.GetValue(drawing, value => new FreeformGeometry(value, true));
         internal Shape Part(string binding) => parts.TryGetValue(binding, out var shape) ? shape : default;
-        FreeformGeometry(DrawingSnapshot drawing)
+        FreeformGeometry(DrawingSnapshot drawing, bool forwardOnly)
         {
             foreach (var part in drawing.Parts)
                 if (part.BindingId == DrawingBindings.Base || DrawingBindings.TryMount(part.BindingId, out _))
-                    parts[part.BindingId] = Measure(part);
+                    parts[part.BindingId] = Measure(part, forwardOnly && part.BindingId != DrawingBindings.Base);
         }
         internal readonly struct Shape
         {
             internal readonly float Area, Width, Length;
             internal readonly Point2 MuzzleOffset;
-            internal Shape(float area, float width, float length, Point2 muzzleOffset)
-            { Area = area; Width = width; Length = length; MuzzleOffset = muzzleOffset; }
+            internal readonly IReadOnlyList<DrawingPoint> Outline;
+            internal Shape(float area, float width, float length, Point2 muzzleOffset, IReadOnlyList<DrawingPoint> outline)
+            { Area = area; Width = width; Length = length; MuzzleOffset = muzzleOffset; Outline = outline; }
         }
-        static Shape Measure(DrawingPart part)
+        static Shape Measure(DrawingPart part, bool forwardOnly)
         {
-            int count = part.Strokes.Count;
+            var strokes = forwardOnly ? ForwardFragments(part.Strokes) : part.Strokes;
+            int count = strokes.Count;
             var roots = new int[count];
             for (int i = 0; i < count; i++) roots[i] = i;
             for (int i = 0; i < count; i++) for (int j = 0; j < i; j++)
-                if (Root(roots,i) != Root(roots,j) && Touches(part.Strokes[i], part.Strokes[j]))
+                if (Root(roots,i) != Root(roots,j) && Touches(strokes[i], strokes[j]))
                     roots[Root(roots,i)] = Root(roots,j);
             var groups = new Dictionary<int, HashSet<DrawingPoint>>();
             for (int i = 0; i < count; i++)
             {
                 int root = Root(roots,i);
                 if (!groups.TryGetValue(root,out var points)) groups[root] = points = new HashSet<DrawingPoint>();
-                foreach (var point in part.Strokes[i].Points) points.Add(point);
+                foreach (var point in strokes[i].Points) points.Add(point);
             }
             Shape best = default;
             bool body = part.BindingId == DrawingBindings.Base;
@@ -54,6 +59,33 @@ namespace PaperDefense.Core
             }
             return best;
         }
+        // Clip before connectivity: a rear bridge, even within one stroke, cannot join working regions.
+        static IReadOnlyList<DrawingStroke> ForwardFragments(IReadOnlyList<DrawingStroke> strokes)
+        {
+            var result = new List<DrawingStroke>();
+            foreach (var stroke in strokes)
+            {
+                var fragment = new List<DrawingPoint>();
+                for (int i = 1; i < stroke.Points.Count; i++)
+                {
+                    var a = stroke.Points[i - 1]; var b = stroke.Points[i];
+                    if (a.Y < 0 && b.Y < 0) continue;
+                    var from = a.Y < 0 ? Intersection(a, b) : a;
+                    var to = b.Y < 0 ? Intersection(a, b) : b;
+                    if (fragment.Count == 0) fragment.Add(from);
+                    if (!fragment[fragment.Count - 1].Equals(to)) fragment.Add(to);
+                    if (b.Y < 0)
+                    {
+                        if (fragment.Count >= 2) result.Add(new DrawingStroke(fragment));
+                        fragment.Clear();
+                    }
+                }
+                if (fragment.Count >= 2) result.Add(new DrawingStroke(fragment));
+            }
+            return result;
+        }
+        static DrawingPoint Intersection(DrawingPoint a, DrawingPoint b)
+            => new DrawingPoint((float)(a.X + (double)(b.X - a.X) * -a.Y / (b.Y - a.Y)), 0);
         static int Root(int[] roots,int index)
         { while (roots[index] != index) { roots[index] = roots[roots[index]]; index = roots[index]; } return index; }
         static bool Touches(DrawingStroke first, DrawingStroke second)
@@ -91,7 +123,7 @@ namespace PaperDefense.Core
             for(int i=1;i<hull.Count;i++)twiceArea+=(double)hull[i-1].X*hull[i].Y-(double)hull[i].X*hull[i-1].Y;
             float tipLeft=1,tipRight=-1;
             foreach(var point in hull)if(point.Y==maxY){tipLeft=Math.Min(tipLeft,point.X);tipRight=Math.Max(tipRight,point.X);}
-            return new Shape((float)(Math.Abs(twiceArea)*.5),maxX-minX,maxY-minY,new Point2((tipLeft+tipRight)*.5f,maxY));
+            return new Shape((float)(Math.Abs(twiceArea)*.5),maxX-minX,maxY-minY,new Point2((tipLeft+tipRight)*.5f,maxY),hull.AsReadOnly());
         }
         static double Cross(DrawingPoint a,DrawingPoint b,DrawingPoint c) => (double)(b.X-a.X)*(c.Y-a.Y)-(double)(b.Y-a.Y)*(c.X-a.X);
     }

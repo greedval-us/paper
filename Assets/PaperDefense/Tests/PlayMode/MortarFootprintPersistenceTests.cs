@@ -30,6 +30,35 @@ namespace PaperDefense.Tests
             Assert.That(loaded.Album.Single(p => p.Id == original.Id).FirstFootprint.AspectRatio, Is.EqualTo(1));
             Assert.That(variant.Origin, Is.EqualTo(DrawingOrigin.LegacyStandard));
         }
+        static MortarFootprint Contour() => MortarFootprint.FromContour(new[]{new Point2(-1,-.6f),new Point2(1,-.6f),new Point2(1,.6f),new Point2(-1,.6f)});
+        [Test] public void ContourSurvivesActualJsonStoreAndKeepsLegacySource()
+        {
+            var profile=new WorkshopProfile();var original=profile.Album.Single(p=>p.FirstWeapon==StructureKind.Mortar);
+            var variant=original.AsVariant("contour","Contour").WithMortarFootprint(0,Contour());
+            Assert.That(profile.SaveBlueprint(variant,out string reason),Is.True,reason);
+            var data=new BlueprintData(variant);Assert.That(data.FootprintMetadataVersion,Is.EqualTo(2));
+            Assert.Throws<NotSupportedException>(()=>data.ToBlueprint(5));
+            Assert.That(new WorkshopProfileStore(path).Save(profile).Success,Is.True);
+            var loaded=new WorkshopProfileStore(path).Load().Profile;
+            Assert.That(loaded.Album.Single(p=>p.Id==variant.Id).FirstFootprint.SameShape(variant.FirstFootprint),Is.True);
+            Assert.That(loaded.Album.Single(p=>p.Id==original.Id).FirstFootprint.IsCircle,Is.True);
+        }
+        [Test] public void FutureContourRulesProtectPrimaryAndBackup()
+        {
+            var profile=new WorkshopProfile();var original=profile.Album.Single(p=>p.FirstWeapon==StructureKind.Mortar);
+            profile.SaveBlueprint(original.AsVariant("future-contour","Future").WithMortarFootprint(0,Contour()),out _);
+            var data=profile.ToData();data.Album.Single(p=>p.Id=="future-contour").WeaponMounts[0].FootprintContourVersion=99;
+            File.WriteAllText(path,JsonUtility.ToJson(data));File.WriteAllText(path+".bak",JsonUtility.ToJson(new WorkshopProfile().ToData()));
+            byte[] primary=File.ReadAllBytes(path),backup=File.ReadAllBytes(path+".bak");var store=new WorkshopProfileStore(path);var loaded=store.Load();
+            Assert.That(loaded.CanWrite,Is.False);Assert.That(store.Save(loaded.Profile).Success,Is.False);
+            Assert.That(File.ReadAllBytes(path),Is.EqualTo(primary));Assert.That(File.ReadAllBytes(path+".bak"),Is.EqualTo(backup));
+        }
+        [Test] public void MalformedContourDoesNotSilentlyBecomeEllipse()
+        {
+            var data=new BlueprintData(new TowerBlueprint("m","M",ChassisKind.Standard,StructureKind.Mortar).WithMortarFootprint(0,Contour()));
+            data.WeaponMounts[0].FootprintPoints=null;Assert.Throws<ArgumentException>(()=>data.ToBlueprint());
+            data.WeaponMounts[0].FootprintContourVersion=99;Assert.Throws<NotSupportedException>(()=>data.ToBlueprint());
+        }
         [Test] public void VersionFourRoundTripsTwoDifferentShapes()
         {
             var page = new TowerBlueprint("two", "Two", ChassisKind.Heavy, StructureKind.Mortar, StructureKind.Mortar)

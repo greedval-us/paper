@@ -25,8 +25,8 @@ namespace PaperDefense.Core
                 var weapon=Weapons[mount.SlotIndex];
                 if(!weapon.Enabled)throw new ArgumentException(UserText.Message("copy.0dc61ba711cc3b92"));
                 if(mount.SlotIndex>=Chassis.MountCount)throw new ArgumentException(UserText.Message("copy.de42044c131147ed", Chassis.Id, (mount.SlotIndex+1)));
-                if(!weapon.SupportsFootprint&&mount.Footprint.AspectRatio!=1)throw new ArgumentException(UserText.Message("copy.ec26e9810b8fe03e"));
-                if(mount.Footprint.AspectRatio>weapon.MaximumFootprintAspectRatio)throw new ArgumentException(UserText.Message("copy.a630b0b26793f9fd"));
+                if(!weapon.SupportsFootprint&&!mount.Footprint.IsCircle)throw new ArgumentException(UserText.Message("copy.ec26e9810b8fe03e"));
+                if(!mount.Footprint.FitsAspectLimit(weapon.MaximumFootprintAspectRatio))throw new ArgumentException(UserText.Message("copy.a630b0b26793f9fd"));
             }
             var selected=new HashSet<string>(StringComparer.Ordinal);var groups=new HashSet<string>(StringComparer.Ordinal);
             int armor=0,upgrades=0;

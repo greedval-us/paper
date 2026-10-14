@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using PaperDefense.Core;
 using UnityEngine;
 namespace PaperDefense.Presentation
@@ -6,46 +7,54 @@ namespace PaperDefense.Presentation
     /// <summary>Two views share their owner's clock; world X and Y use one letterboxed scale.</summary>
     public sealed class FootprintProbeSketch : UnityEngine.UI.Graphic
     {
-        FootprintProbeReport report;
+        IReadOnlyList<TrialFrame> frames;
         Func<float> clock;
-        public float WorldScale => Mathf.Min((rectTransform.rect.width - 20) / 16, (rectTransform.rect.height - 20) / 12);
+        Rect world = new Rect(8,4.5f,16,12);
+        public float WorldScale => Mathf.Min((rectTransform.rect.width - 20) / world.width, (rectTransform.rect.height - 20) / world.height);
         public float PlaybackSeconds => clock?.Invoke() ?? 0;
         public void SetRecording(FootprintProbeReport value, Func<float> sharedClock)
         {
-            report = value;
+            SetFrames(value?.Frames,sharedClock,new Rect(8,4.5f,16,12));
+        }
+        public void SetFrames(IReadOnlyList<TrialFrame> value,Func<float> sharedClock,Rect bounds)
+        {
+            frames = value;
             clock = sharedClock;
+            world = bounds;
             SetVerticesDirty();
         }
         void Update()
         {
-            if (report != null)
+            if (frames != null)
             {
                 SetVerticesDirty();
             }
         }
-        Vector2 Point(float x, float y) => rectTransform.rect.center + new Vector2(x - 16, y - 10.5f) * WorldScale;
+        Vector2 Point(float x, float y) => rectTransform.rect.center + new Vector2(x-world.center.x,y-world.center.y) * WorldScale;
         protected override void OnPopulateMesh(UnityEngine.UI.VertexHelper vh)
         {
             vh.Clear();
-            if (report == null || report.Frames.Count == 0)
+            if (frames == null || frames.Count == 0)
             {
                 return;
             }
             int index = 0;
             float seconds = PlaybackSeconds;
-            for (int i = 1; i<report.Frames.Count && report.Frames[i].Seconds <= seconds; i++)
+            for (int i = 1; i<frames.Count && frames[i].Seconds <= seconds; i++)
             {
                 index = i;
             }
-            for (int x = 8; x <= 24; x+=2)
+            for (int x = 0; x <= 8; x++)
             {
-                BlueprintSketch.Line(vh, Point(x, 4.5f), Point(x, 16.5f), 1, MeshPen.Alpha(NotebookPalette.Blue, .14f));
+                float at=world.xMin+x*world.width/8;
+                BlueprintSketch.Line(vh, Point(at,world.yMin),Point(at,world.yMax),1,MeshPen.Alpha(NotebookPalette.Blue,.14f));
             }
-            for (float y = 4.5f; y <= 16.5f; y+=2)
+            for (int y = 0; y <= 6; y++)
             {
-                BlueprintSketch.Line(vh, Point(8, y), Point(24, y), 1, MeshPen.Alpha(NotebookPalette.Blue, .14f));
+                float at=world.yMin+y*world.height/6;
+                BlueprintSketch.Line(vh, Point(world.xMin,at),Point(world.xMax,at),1,MeshPen.Alpha(NotebookPalette.Blue,.14f));
             }
-            var frame = report.Frames[index];
+            var frame = frames[index];
             foreach (var tower in frame.Towers)
             {
                 BlueprintSketch.Ring(vh, Point(tower.Cell.X + .5f, tower.Cell.Y + .5f), 5, 3, NotebookPalette.Blue);
@@ -69,14 +78,20 @@ namespace PaperDefense.Presentation
                     continue;
                 }
                 var shape = impact.ImpactFootprint.Value;
-                var forward = new Vector2(shape.Forward.X, shape.Forward.Y);
-                var side = new Vector2(-forward.y, forward.x);
                 var center = Point(impact.To.X, impact.To.Y);
-                for (int i = 0; i<64; i++)
+                var from = Point(impact.From.X, impact.From.Y);
+                var direction = (center - from).normalized;
+                var normal = new Vector2(-direction.y, direction.x);
+                var arrow = center - direction * 12;
+                var ink = MeshPen.Alpha(NotebookPalette.Blue, .4f);
+                BlueprintSketch.Line(vh, from, arrow, 1, ink);
+                BlueprintSketch.Line(vh, arrow, arrow - direction * 7 + normal * 4, 1, ink);
+                BlueprintSketch.Line(vh, arrow, arrow - direction * 7 - normal * 4, 1, ink);
+                for (int i = 0; i < shape.OutlineCount; i++)
                 {
-                    float a = i * Mathf.PI / 32, b = (i + 1) * Mathf.PI / 32;
-                    var p = center + (forward * Mathf.Cos(a) * shape.ForwardRadius + side * Mathf.Sin(a) * shape.SideRadius) * WorldScale;
-                    var q = center + (forward * Mathf.Cos(b) * shape.ForwardRadius + side * Mathf.Sin(b) * shape.SideRadius) * WorldScale;
+                    var a = shape.OutlineOffset(i); var b = shape.OutlineOffset(i + 1);
+                    var p = center + new Vector2(a.X, a.Y) * WorldScale;
+                    var q = center + new Vector2(b.X, b.Y) * WorldScale;
                     BlueprintSketch.Line(vh, p, q, 2, NotebookPalette.Red);
                 }
             }

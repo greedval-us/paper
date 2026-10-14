@@ -297,6 +297,8 @@ namespace PaperDefense.Application
         {reason=UserText.Message("copy.e6a1f147d46938e5");return !InWorkshop&&session.TryActivateWell(index,out reason);}
         public FootprintProbeComparison CompareMortarFootprints(TowerBlueprint blueprint,int mount,MortarFootprint first,MortarFootprint second,FootprintFormation formation)
             => MortarFootprintProbe.Compare(blueprint,mount,first,second,session.Balance,formation);
+        public FootprintStudyReport CompareMortarForms(TowerBlueprint blueprint,int mount)
+            => FootprintStudy.Run(blueprint,mount,session.Balance);
 
         public TrialComparison RunTrial(TowerBlueprint blueprint,TrialScenario scenario,bool counterfire=false,int budget=400)
         {

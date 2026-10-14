@@ -27,6 +27,59 @@ namespace PaperDefense.Tests
             Assert.That(TowerCatalog.Capacity(large,balance),Is.GreaterThan(TowerCatalog.Capacity(small,balance)));
             Assert.That(TowerCatalog.Cost(large,balance,MaterialTier.Pencil),Is.GreaterThan(TowerCatalog.Cost(small,balance,MaterialTier.Pencil)));
         }
+        static TowerBlueprint WithBarrel(params DrawingStroke[] strokes)
+        {
+            var tower = Tower();
+            return tower.WithFreeformDrawing(new DrawingSnapshot(new[] {
+                tower.Drawing.GetPart(DrawingBindings.Base), new DrawingPart(DrawingBindings.Mount0, strokes) }));
+        }
+        [Test] public void RearExtensionCannotIncreaseRangeOrSpendWorkingInk()
+        {
+            var original = WithBarrel(Box(-.0625f, 0, .125f, .5f));
+            var extended = WithBarrel(Box(-.0625f, -.5f, .125f, 1f));
+            Assert.That(extended.FreeformDesign.GetBarrel(0).Length, Is.EqualTo(.5f));
+            Assert.That(extended.FreeformDesign.GetBarrel(0).RangeMultiplier, Is.EqualTo(original.FreeformDesign.GetBarrel(0).RangeMultiplier));
+            Assert.That(extended.FreeformDesign.InkUsed, Is.EqualTo(original.FreeformDesign.InkUsed));
+        }
+        [Test] public void RearCrossbarCannotIncreaseCaliberOrHitDamage()
+        {
+            var original = WithBarrel(Box(-.0625f, -.5f, .125f, 1f));
+            var extended = WithBarrel(Box(-.0625f, -.5f, .125f, 1f),
+                new DrawingStroke(new[] { new DrawingPoint(-.75f, -.5f), new DrawingPoint(.75f, -.5f) }));
+            Assert.That(extended.FreeformDesign.GetBarrel(0).Width, Is.EqualTo(.125f));
+            Assert.That(extended.FreeformDesign.GetBarrel(0).DamageMultiplier, Is.EqualTo(original.FreeformDesign.GetBarrel(0).DamageMultiplier));
+        }
+        [Test] public void WorkingWidthIncludesIntersectionOfSlantedStrokeWithMountPlane()
+        {
+            var tower = WithBarrel(new DrawingStroke(new[] { new DrawingPoint(-.75f, -.5f), new DrawingPoint(.25f, .5f) }));
+            Assert.That(tower.FreeformDesign.GetBarrel(0).Width, Is.EqualTo(.5f));
+            Assert.That(tower.FreeformDesign.GetBarrel(0).Length, Is.EqualTo(.5f));
+        }
+        [TestCase(false)]
+        [TestCase(true)]
+        public void ConnectionBehindMountCannotJoinSeparateWorkingBarrels(bool singleStroke)
+        {
+            var left = new DrawingStroke(new[] { new DrawingPoint(-.5f, -.5f), new DrawingPoint(-.5f, .5f) });
+            var right = new DrawingStroke(new[] { new DrawingPoint(.5f, -.5f), new DrawingPoint(.5f, .5f) });
+            var separate = WithBarrel(left, right);
+            var joined = singleStroke
+                ? WithBarrel(new DrawingStroke(new[] { new DrawingPoint(-.5f, .5f), new DrawingPoint(-.5f, -.5f), new DrawingPoint(.5f, -.5f), new DrawingPoint(.5f, .5f) }))
+                : WithBarrel(left, right, new DrawingStroke(new[] { new DrawingPoint(-.5f, -.5f), new DrawingPoint(.5f, -.5f) }));
+            Assert.That(joined.FreeformDesign.GetBarrel(0).Width, Is.EqualTo(separate.FreeformDesign.GetBarrel(0).Width));
+            Assert.That(joined.FreeformDesign.GetBarrel(0).MuzzleOffset.X, Is.EqualTo(-.5f));
+        }
+        [Test] public void HistoricalRulesSurviveCopiesAndSaveUntilExplicitDrawingApply()
+        {
+            var saved = new BlueprintData(WithBarrel(Box(-.0625f, -.5f, .125f, 1f)));
+            saved.FreeformRuleVersion = 1;
+            var historical = saved.ToBlueprint().WithName("Renamed").AsVariant("copy", "Copy").WithContent(GameBalance.CreateDefault().ResolveContent());
+            Assert.That(historical.FreeformDesign.GetBarrel(0).Length, Is.EqualTo(1f));
+            Assert.That(new BlueprintData(historical).FreeformRuleVersion, Is.EqualTo(1));
+            var revised = historical.WithFreeformDrawing(historical.Drawing);
+            Assert.That(revised.FreeformDesign.GetBarrel(0).Length, Is.EqualTo(.5f));
+            Assert.That(new BlueprintData(revised).FreeformRuleVersion, Is.GreaterThan(1));
+            Assert.That(historical.FreeformDesign.GetBarrel(0).Length, Is.EqualTo(1f));
+        }
         [Test] public void LongerBarrelTradesTempoForRange()
         {
             var shortBarrel=Tower(length:.3f);var longBarrel=Tower(length:.9f);var balance=GameBalance.CreateDefault();
@@ -121,7 +174,7 @@ namespace PaperDefense.Tests
             Assert.That(changed.AsNew("new","New").IsFreeform,Is.True);
         }
         [TestCase(0,typeof(ArgumentException))]
-        [TestCase(2,typeof(NotSupportedException))]
+        [TestCase(3,typeof(NotSupportedException))]
         public void UnknownOrMissingGeometryRulesNeverSilentlyReinterpretSave(int version,Type error)
         {
             var saved=new BlueprintData(Tower());saved.FreeformRuleVersion=version;

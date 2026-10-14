@@ -34,24 +34,25 @@ namespace PaperDefense.Core
         internal bool LegacyAssembly { get; }
         public DrawingSnapshot Drawing { get; } public DrawingOrigin Origin { get; }
         public bool IsFreeform => Origin == DrawingOrigin.Freeform;
+        public int FreeformRuleVersion { get; }
         public bool HasPlayerDrawing => Origin != DrawingOrigin.LegacyStandard;
         public FreeformTowerDesign FreeformDesign { get; }
         public DrawingAssessment Assessment { get; } public DrawingEvaluationStamp EvaluationStamp { get; }
         public MortarFootprint FirstFootprint { get; } public MortarFootprint SecondFootprint { get; }
         public TowerBlueprint(string id,string name,string chassisId,string firstWeaponId,string secondWeaponId=null,
             IEnumerable<ModuleSelection> modules=null,DrawingSnapshot drawing=null,DrawingOrigin origin=DrawingOrigin.LegacyStandard,
-            MortarFootprint firstFootprint=null,MortarFootprint secondFootprint=null,ContentCatalogSnapshot content=null,DrawingEvaluationStamp evaluationStamp=null)
-            :this(id,name,chassisId,LegacyMounts(firstWeaponId,secondWeaponId,firstFootprint,secondFootprint),modules,drawing,origin,content,evaluationStamp)
+            MortarFootprint firstFootprint=null,MortarFootprint secondFootprint=null,ContentCatalogSnapshot content=null,DrawingEvaluationStamp evaluationStamp=null,int freeformRuleVersion=FreeformTowerDesign.RuleVersion)
+            :this(id,name,chassisId,LegacyMounts(firstWeaponId,secondWeaponId,firstFootprint,secondFootprint),modules,drawing,origin,content,evaluationStamp,freeformRuleVersion)
         { }
         static IEnumerable<WeaponMountSelection> LegacyMounts(string first,string second,MortarFootprint firstFootprint,MortarFootprint secondFootprint)
         {
             yield return new WeaponMountSelection(0,first,firstFootprint);
             if(second!=null)yield return new WeaponMountSelection(1,second,secondFootprint);
-            else if(secondFootprint!=null&&secondFootprint.AspectRatio!=1)throw new ArgumentException("Only occupied mounts may have a noncircular footprint.");
+            else if(secondFootprint!=null&&!secondFootprint.IsCircle)throw new ArgumentException("Only occupied mounts may have a noncircular footprint.");
         }
         public TowerBlueprint(string id,string name,string chassisId,IEnumerable<WeaponMountSelection> weaponMounts,
             IEnumerable<ModuleSelection> modules=null,DrawingSnapshot drawing=null,DrawingOrigin origin=DrawingOrigin.LegacyStandard,
-            ContentCatalogSnapshot content=null,DrawingEvaluationStamp evaluationStamp=null)
+            ContentCatalogSnapshot content=null,DrawingEvaluationStamp evaluationStamp=null,int freeformRuleVersion=FreeformTowerDesign.RuleVersion)
         {
             if(!Enum.IsDefined(typeof(DrawingOrigin),origin))throw new ArgumentOutOfRangeException(nameof(origin));
             Id=id?.Trim()??"";Name=name?.Trim()??"";ChassisId=ContentValidation.Id(chassisId,"blueprint.chassisId");
@@ -66,17 +67,19 @@ namespace PaperDefense.Core
             ModuleSelections=owned.AsReadOnly();Content=content;Chassis=LegacyContentIds.Chassis(chassisId);FirstWeapon=LegacyContentIds.Weapon(FirstWeaponId);SecondWeapon=SecondWeaponId==null?(StructureKind?)null:LegacyContentIds.Weapon(SecondWeaponId);
             foreach(var module in owned)Modules|=LegacyContentIds.Module(module.DefinitionId);
             Drawing=drawing??DrawingSnapshot.Empty;Origin=origin;FirstFootprint=GetWeaponMount(0).Footprint;SecondFootprint=GetWeaponMount(1)?.Footprint??MortarFootprint.Circle;
+            if (IsFreeform && (freeformRuleVersion < 1 || freeformRuleVersion > FreeformTowerDesign.RuleVersion)) throw new ArgumentOutOfRangeException(nameof(freeformRuleVersion));
+            FreeformRuleVersion = IsFreeform ? freeformRuleVersion : 0;
             if(origin==DrawingOrigin.LegacyStandard&&!Drawing.IsEmpty)throw new ArgumentException(UserText.Message("copy.b343fa86244c62b6"),nameof(origin));
             FreeformDesign=IsFreeform?new FreeformTowerDesign(this):null;
             Assessment=DrawingEvaluator.Evaluate(this,evaluationStamp);EvaluationStamp=Assessment.ToStamp();
         }
         public TowerBlueprint(string id,string name,ChassisKind chassis,StructureKind firstWeapon,StructureKind? secondWeapon=null,TowerModules modules=TowerModules.None,
-            DrawingSnapshot drawing=null,DrawingOrigin origin=DrawingOrigin.LegacyStandard,MortarFootprint firstFootprint=null,MortarFootprint secondFootprint=null,DrawingEvaluationStamp evaluationStamp=null)
+            DrawingSnapshot drawing=null,DrawingOrigin origin=DrawingOrigin.LegacyStandard,MortarFootprint firstFootprint=null,MortarFootprint secondFootprint=null,DrawingEvaluationStamp evaluationStamp=null,int freeformRuleVersion=FreeformTowerDesign.RuleVersion)
             :this(id,name,LegacyContentIds.Chassis(chassis)??"legacy.invalid.chassis."+(int)chassis,LegacyContentIds.Weapon(firstWeapon)??"legacy.invalid.weapon."+(int)firstWeapon,
-                secondWeapon.HasValue?(LegacyContentIds.Weapon(secondWeapon.Value)??"legacy.invalid.weapon."+(int)secondWeapon.Value):null,LegacyContentIds.Modules(modules),drawing,origin,firstFootprint,secondFootprint,null,evaluationStamp)
+                secondWeapon.HasValue?(LegacyContentIds.Weapon(secondWeapon.Value)??"legacy.invalid.weapon."+(int)secondWeapon.Value):null,LegacyContentIds.Modules(modules),drawing,origin,firstFootprint,secondFootprint,null,evaluationStamp,freeformRuleVersion)
         {
             Chassis=chassis;FirstWeapon=firstWeapon;SecondWeapon=secondWeapon;Modules=modules;LegacyAssembly=true;
-            if((firstWeapon!=StructureKind.Mortar&&FirstFootprint.AspectRatio!=1)||(secondWeapon!=StructureKind.Mortar&&SecondFootprint.AspectRatio!=1))throw new ArgumentException("Only mortar mounts may have a noncircular footprint.");
+            if((firstWeapon!=StructureKind.Mortar&&!FirstFootprint.IsCircle)||(secondWeapon!=StructureKind.Mortar&&!SecondFootprint.IsCircle))throw new ArgumentException("Only mortar mounts may have a noncircular footprint.");
         }
         public bool SupportsFootprint(int mount)
         {string id=mount<0||mount>=MaximumWeaponMounts?null:GetWeaponId(mount);return id!=null&&(Content!=null&&Content.TryGetWeapon(id,out var weapon)?weapon.SupportsFootprint:LegacyContentIds.Weapon(id)==StructureKind.Mortar);}
@@ -85,13 +88,14 @@ namespace PaperDefense.Core
         public string GetWeaponId(int mount)=>GetWeaponMount(mount)?.WeaponId;
         public MortarFootprint GetMortarFootprint(int mount){if(!SupportsFootprint(mount))throw new ArgumentOutOfRangeException(nameof(mount),"Mount must support an area projectile footprint.");return GetWeaponMount(mount).Footprint;}
         public TowerBlueprint WithMortarFootprint(int mount,MortarFootprint footprint)
-        {GetMortarFootprint(mount);if(footprint==null)throw new ArgumentNullException(nameof(footprint));var selected=new List<WeaponMountSelection>();foreach(var item in WeaponMounts)selected.Add(item.SlotIndex==mount?new WeaponMountSelection(mount,item.WeaponId,footprint):item);return new TowerBlueprint(Id,Name,ChassisId,selected,ModuleSelections,Drawing,Origin,Content,EvaluationStamp);}
+        {GetMortarFootprint(mount);if(footprint==null)throw new ArgumentNullException(nameof(footprint));var selected=new List<WeaponMountSelection>();foreach(var item in WeaponMounts)selected.Add(item.SlotIndex==mount?new WeaponMountSelection(mount,item.WeaponId,footprint):item);return new TowerBlueprint(Id,Name,ChassisId,selected,ModuleSelections,Drawing,Origin,Content,EvaluationStamp,FreeformRuleVersion);}
         TowerBlueprint Copy(string id,string name,DrawingSnapshot drawing,DrawingOrigin origin,ContentCatalogSnapshot content,DrawingEvaluationStamp stamp)
-            =>new TowerBlueprint(id,name,ChassisId,WeaponMounts,ModuleSelections,drawing,origin,content,stamp);
+            =>new TowerBlueprint(id,name,ChassisId,WeaponMounts,ModuleSelections,drawing,origin,content,stamp,IsFreeform?FreeformRuleVersion:FreeformTowerDesign.RuleVersion);
         public TowerBlueprint WithContent(ContentCatalogSnapshot content)=>ReferenceEquals(Content,content)?this:Copy(Id,Name,Drawing,Origin,content,EvaluationStamp);
         public TowerBlueprint WithName(string name)=>Copy(Id,name,Drawing,Origin,Content,EvaluationStamp);
         public TowerBlueprint WithDrawing(DrawingSnapshot drawing)=>Copy(Id,Name,drawing??throw new ArgumentNullException(nameof(drawing)),IsFreeform?DrawingOrigin.Freeform:DrawingOrigin.PlayerDrawing,Content,HasPlayerDrawing&&drawing.GeometryHash==Drawing.GeometryHash?EvaluationStamp:null);
-        public TowerBlueprint WithFreeformDrawing(DrawingSnapshot drawing)=>Copy(Id,Name,drawing??throw new ArgumentNullException(nameof(drawing)),DrawingOrigin.Freeform,Content,null);
+        /// <summary>Explicitly applies current construction rules. Ordinary copies retain historical rules.</summary>
+        public TowerBlueprint WithFreeformDrawing(DrawingSnapshot drawing)=>new TowerBlueprint(Id,Name,ChassisId,WeaponMounts,ModuleSelections,drawing??throw new ArgumentNullException(nameof(drawing)),DrawingOrigin.Freeform,Content);
         public TowerBlueprint AsFreeform()=>IsFreeform?this:WithFreeformDrawing(Drawing);
         public TowerBlueprint AsVariant(string id,string name)=>Copy(id,name,Drawing.DeepCopy(),Origin,Content,EvaluationStamp);
         public TowerBlueprint AsNew(string id,string name)=>Copy(id,name,HasPlayerDrawing?Drawing.DeepCopy():DrawingSnapshot.Empty,IsFreeform?DrawingOrigin.Freeform:DrawingOrigin.PlayerDrawing,Content,HasPlayerDrawing?EvaluationStamp:null);
@@ -117,10 +121,10 @@ namespace PaperDefense.Core
             var mounts=new List<WeaponMountSelection>(weaponMounts??throw new ArgumentNullException(nameof(weaponMounts)));mounts.Sort((a,b)=>a.SlotIndex.CompareTo(b.SlotIndex));
             var selected=new List<ModuleSelection>(modules??Array.Empty<ModuleSelection>());
             bool same=chassis==ChassisId&&mounts.Count==WeaponMounts.Count&&selected.Count==ModuleSelections.Count;
-            for(int i=0;same&&i<mounts.Count;i++)same=mounts[i].SlotIndex==WeaponMounts[i].SlotIndex&&mounts[i].WeaponId==WeaponMounts[i].WeaponId&&mounts[i].Footprint.AspectRatio==WeaponMounts[i].Footprint.AspectRatio;
+            for(int i=0;same&&i<mounts.Count;i++)same=mounts[i].SlotIndex==WeaponMounts[i].SlotIndex&&mounts[i].WeaponId==WeaponMounts[i].WeaponId&&mounts[i].Footprint.SameShape(WeaponMounts[i].Footprint);
             for(int i=0;same&&i<selected.Count;i++)same=selected[i].InstanceId==ModuleSelections[i].InstanceId&&selected[i].DefinitionId==ModuleSelections[i].DefinitionId;
             if(same)return this;
-            var candidate=new TowerBlueprint(Id,Name,chassis,mounts,selected,DrawingSnapshot.Empty,IsFreeform?DrawingOrigin.Freeform:DrawingOrigin.PlayerDrawing,Content);
+            var candidate=new TowerBlueprint(Id,Name,chassis,mounts,selected,DrawingSnapshot.Empty,IsFreeform?DrawingOrigin.Freeform:DrawingOrigin.PlayerDrawing,Content,freeformRuleVersion:IsFreeform?FreeformRuleVersion:FreeformTowerDesign.RuleVersion);
             if(Origin==DrawingOrigin.LegacyStandard)return candidate;
             var retained=new List<DrawingPart>();foreach(var part in Drawing.Parts)if(DrawingPartPolicy.ShouldRetain(part.BindingId,this,candidate))retained.Add(part);
             return candidate.WithDrawing(new DrawingSnapshot(retained));

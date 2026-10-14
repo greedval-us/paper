@@ -28,7 +28,21 @@ namespace PaperDefense.Tests
             var bounds = Render(null, impact);
             Assert.That(bounds.size.x / bounds.size.y, Is.InRange(.95f, 1.05f));
         }
-        static Bounds Render(FootprintGeometry? geometry, bool impact)
+        [Test] public void SquareTelegraphKeepsEveryBoundaryRegardlessOfVertexCount()
+        {
+            var shape=MortarFootprint.FromContour(new[]{new Point2(-1,-1),new Point2(1,-1),new Point2(1,1),new Point2(-1,1)});
+            var geometry=FootprintGeometry.Resolve(shape,2,default,new Point2(1,0));
+            Render(geometry,false,vertices=>
+            {
+                for(int side=0;side<4;side++)
+                {
+                    var a=geometry.OutlineOffset(side);var b=geometry.OutlineOffset(side+1);
+                    var mid=new Vector2(10+(a.X+b.X)*.5f,10+(a.Y+b.Y)*.5f);
+                    Assert.That(System.Array.Exists(vertices,p=>Vector2.Distance(p,mid)<.4f),Is.True,"Missing telegraph edge "+side);
+                }
+            });
+        }
+        static Bounds Render(FootprintGeometry? geometry, bool impact, System.Action<Vector3[]> inspect = null)
         {
             var root = new GameObject("Isolated footprint renderer");
             try
@@ -56,6 +70,7 @@ namespace PaperDefense.Tests
                 var pen = typeof(NotebookWorldView).GetField("effectsPen", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(view);
                 var mesh = (Mesh)pen.GetType().GetField("mesh", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(pen);
                 Assert.That(mesh.vertexCount, Is.GreaterThan(0));
+                inspect?.Invoke(mesh.vertices);
                 return mesh.bounds;
             }
             finally { Object.DestroyImmediate(root); }

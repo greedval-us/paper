@@ -219,7 +219,7 @@ namespace PaperDefense.Core
         {
             if (first.ChassisId != second.ChassisId || first.WeaponMounts.Count != second.WeaponMounts.Count || first.ModuleSelections.Count != second.ModuleSelections.Count) return false;
             for(int i=0;i<first.WeaponMounts.Count;i++)
-                if(first.WeaponMounts[i].SlotIndex!=second.WeaponMounts[i].SlotIndex||first.WeaponMounts[i].WeaponId!=second.WeaponMounts[i].WeaponId||first.WeaponMounts[i].Footprint.AspectRatio!=second.WeaponMounts[i].Footprint.AspectRatio)return false;
+                if(first.WeaponMounts[i].SlotIndex!=second.WeaponMounts[i].SlotIndex||first.WeaponMounts[i].WeaponId!=second.WeaponMounts[i].WeaponId||!first.WeaponMounts[i].Footprint.SameShape(second.WeaponMounts[i].Footprint))return false;
             for (int i = 0; i < first.ModuleSelections.Count; i++)
                 if (first.ModuleSelections[i].InstanceId != second.ModuleSelections[i].InstanceId || first.ModuleSelections[i].DefinitionId != second.ModuleSelections[i].DefinitionId) return false;
             return true;

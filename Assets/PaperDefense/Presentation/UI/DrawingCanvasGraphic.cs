@@ -21,6 +21,8 @@ namespace PaperDefense.Presentation
         DrawingTool tool;
         float zoom = 1;
         bool grid = true, snap, drawing, panning;
+        bool showWorkingGeometry = true;
+        FreeformTowerDesign workingDesign;
         int pointerId;
         Vector2 pan, panStart, pointerStart;
         InputSettings inputSettings;
@@ -32,6 +34,8 @@ namespace PaperDefense.Presentation
         public DrawingTool Tool { get => tool; set { if (tool == value) return; CancelGesture(); tool = value; Changed?.Invoke(); } }
         public bool Eraser { get => Tool == DrawingTool.Eraser; set => Tool = value ? DrawingTool.Eraser : DrawingTool.Pencil; }
         public bool ShowGrid { get => grid; set { grid = value; SetVerticesDirty(); Changed?.Invoke(); } }
+        public bool ShowWorkingGeometry { get => showWorkingGeometry; set { showWorkingGeometry = value; SetVerticesDirty(); Changed?.Invoke(); } }
+        public void SetWorkingDesign(FreeformTowerDesign design) { workingDesign = design; SetVerticesDirty(); }
         public bool SnapToGrid { get => snap; set { CancelGesture(); snap = value; Changed?.Invoke(); } }
         public DrawingPartKey SelectedPart { get { DrawingBindings.TryLegacy(selected, out var key); return key; } set => SelectedBinding = DrawingBindings.For(value); }
         public string SelectedBinding
@@ -176,6 +180,7 @@ namespace PaperDefense.Presentation
             Point2 activePivot = DrawingTemplateCatalog.Pivot(session.Blueprint, selected);
             Vector2 move = Vector2.zero;
             bool moving = drawing && tool == DrawingTool.Move && pending.Count > 1;
+            if (showWorkingGeometry && !moving) WorkingGeometryOverlay.Draw(vh, workingDesign, selected, center, scale, MinimumStrokeWidth(canvas));
             if (moving) move = new Vector2(pending[1].X - pending[0].X, pending[1].Y - pending[0].Y);
             bool outside = false;
             if (moving) foreach (var stroke in session.Snapshot.GetPart(selected).Strokes) foreach (var p in stroke.Points)

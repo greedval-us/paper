@@ -1,5 +1,7 @@
 # Редактор конструкций
 
+Для мортиры доступен отдельный [редактор «Отпечаток заряда»](Charge-Imprint.md): свободная область фиксированной площади и пробный выстрел рядом с рисунком.
+
 ## Как пользоваться
 
 1. В мастерской создайте чертёж и выберите основание, оружие и оборудование. Откройте редактор рисунка.
@@ -15,6 +17,12 @@
 В карточках заготовок покупка и вставка — разные действия. Покупка навсегда открывает заготовку, а вставка заменяет выбранную деталь и отменяется через историю. Отмена рисунка не отменяет уже совершённую покупку.
 
 В списке деталей доступны корпус, до трёх выбранных стволов и украшения. Остальные слои видны бледно, выбранный — тёмными чернилами; крест обозначает локальный центр, стрелка ствола — направление вперёд. Каталог заготовок фильтруется по корпусу или стволу; для украшений заготовок нет. Карточка показывает рисунок, название, описание, цену и отдельные действия покупки и вставки.
+
+Кнопка **«Расчёт»** включает или скрывает штриховку рабочей геометрии. У корпуса показана учитываемая выпуклая оболочка; у ствола — только часть перед креплением, пунктирные размеры и кружок дула. Авторские линии остаются на листе. Размеры под листом относятся к той же геометрии, что используется в бою; задние линии ствола не добавляют характеристик или функциональных чернил.
+
+Под листом указаны пределы роста из каталога. После достижения предела дальнейшее увеличение соответствующего размера расходует чернила без прибавки свойств. Справа после правки появляются стрелки изменения дальности, урона и времени перезарядки либо прочности, вместимости и расхода корпуса. Стрелка вверх у перезарядки означает более долгую паузу между выстрелами. Отмена и повтор обновляют подсветку и пояснения вместе с характеристиками.
+
+При открытии сохранённого свободного рисунка со старыми правилами появляется предупреждение о переходе на новый расчёт. Предпросмотр уже показывает новые значения, но переход происходит только после «Применить». «Отмена» сохраняет старый расчёт.
 
 Сдвиг и изменение пропорций относятся ко всей выбранной детали; масштабирование идёт относительно локального центра (для ствола — крепления), а не центра его видимой рамки. Кнопки размера уменьшают сторону на 10% или увеличивают на 10%. Если преобразование выводит хотя бы одну точку за диапазон −1…+1, оно отклоняется целиком. «Очистить деталь» удаляет только выбранный слой. Один законченный жест, вставка или преобразование — один шаг истории; хранится до 128 шагов, новое изменение очищает повторы.
 
@@ -81,4 +89,4 @@
 
 Старые рисунки остаются доступны для исправления после изменения лимитов. Купленная заготовка не добавляет скрытого бонуса: бой зависит только от полученного рисунка и сборки.
 
-Источники: [DrawingEditorPanel](../Assets/PaperDefense/Presentation/UI/DrawingEditorPanel.cs), [DrawingCanvasGraphic](../Assets/PaperDefense/Presentation/UI/DrawingCanvasGraphic.cs), [DrawingStencilBrowser](../Assets/PaperDefense/Presentation/UI/DrawingStencilBrowser.cs), [DrawingEditSession](../Assets/PaperDefense/Core/DrawingEditSession.cs), [Drawings](../Assets/PaperDefense/Core/Drawings.cs), [FreeformTowerDesign](../Assets/PaperDefense/Core/FreeformTowerDesign.cs), [WorkshopReadModel](../Assets/PaperDefense/Application/WorkshopReadModel.cs). Поведение зафиксировано в [DrawingWorkbenchTests](../Assets/PaperDefense/Tests/PlayMode/DrawingWorkbenchTests.cs), [DrawingEditorFeedbackTests](../Assets/PaperDefense/Tests/PlayMode/DrawingEditorFeedbackTests.cs) и [DrawingUnlockTransactionTests](../Assets/PaperDefense/Tests/PlayMode/DrawingUnlockTransactionTests.cs); при обновлении документации 15.10.2026 тесты не запускались.
+Источники: [DrawingEditorPanel](../Assets/PaperDefense/Presentation/UI/DrawingEditorPanel.cs), [DrawingCanvasGraphic](../Assets/PaperDefense/Presentation/UI/DrawingCanvasGraphic.cs), [DrawingStencilBrowser](../Assets/PaperDefense/Presentation/UI/DrawingStencilBrowser.cs), [DrawingEditSession](../Assets/PaperDefense/Core/DrawingEditSession.cs), [Drawings](../Assets/PaperDefense/Core/Drawings.cs), [FreeformTowerDesign](../Assets/PaperDefense/Core/FreeformTowerDesign.cs), [WorkshopReadModel](../Assets/PaperDefense/Application/WorkshopReadModel.cs). Поведение зафиксировано в [DrawingWorkbenchTests](../Assets/PaperDefense/Tests/PlayMode/DrawingWorkbenchTests.cs), [DrawingEditorFeedbackTests](../Assets/PaperDefense/Tests/PlayMode/DrawingEditorFeedbackTests.cs) и [DrawingUnlockTransactionTests](../Assets/PaperDefense/Tests/PlayMode/DrawingUnlockTransactionTests.cs). Результаты запуска — в [отчёте проверки 15.10.2026](validation/2026-10-15-working-geometry/report.md).

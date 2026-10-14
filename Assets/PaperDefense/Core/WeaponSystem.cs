@@ -392,17 +392,17 @@ namespace PaperDefense.Core
                 if (projectile.Remaining > 0.000001f) { projectiles[write++] = projectile; continue; }
                 visualSourceStructureId=projectile.SourceStructureId;visualMountSlotIndex=projectile.MountSlotIndex;visualActionId=projectile.ActionId;
                 FootprintGeometry? geometry = projectile.ImpactFootprint;
-                bool ellipse = geometry.HasValue && geometry.Value.ForwardRadius != geometry.Value.SideRadius;
+                bool shaped = geometry.HasValue && !geometry.Value.IsCircle;
                 // Contains includes a small normalized boundary tolerance. Keep the broad phase
                 // conservative under world-coordinate rounding, without changing circle queries.
-                float queryRadius = ellipse
+                float queryRadius = shaped
                     ? (float)Math.Min(float.MaxValue, (double)geometry.Value.BoundingRadius * 1.000001)
                     : projectile.Radius;
                 spatial.Query(projectile.To, queryRadius, splashTargets);
                 if (projectile.ColorBudget != null) SortTargets(projectile.To, splashTargets);
                 foreach (var victim in splashTargets)
                 {
-                    if (ellipse && !geometry.Value.Contains(projectile.To, victim.Position)) continue;
+                    if (shaped && !geometry.Value.Contains(projectile.To, victim.Position)) continue;
                     ApplyDamage(victim, projectile.Damage, projectile.Definition, projectile.EffectPayload, projectile.ColorBudget, statistics);
                 }
                 events.Publish(tick, SimulationEventKind.ProjectileImpact, projectile.From, projectile.To,

@@ -82,7 +82,7 @@ namespace PaperDefense.Core
                 else
                 {
                     var mounts=new List<WeaponMountSelection>();
-                    foreach(var mount in page.WeaponMounts){if(mount==null)throw new ArgumentException(path+".weaponMounts: empty mount");GetWeapon(mount.WeaponId);mounts.Add(new WeaponMountSelection(mount.SlotIndex,mount.WeaponId,MortarFootprint.CreateStored(mount.FootprintAspect)));}
+                    foreach(var mount in page.WeaponMounts){if(mount==null)throw new ArgumentException(path+".weaponMounts: empty mount");GetWeapon(mount.WeaponId);mounts.Add(new WeaponMountSelection(mount.SlotIndex,mount.WeaponId,mount.ToFootprint()));}
                     blueprint=new TowerBlueprint(id,page.Name,page.ChassisId,mounts,selections,content:this);
                 }
                 startup.Add(blueprint);

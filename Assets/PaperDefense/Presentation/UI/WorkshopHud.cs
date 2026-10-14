@@ -107,7 +107,7 @@ namespace PaperDefense.Presentation
             }
             if (Mode == WorkshopHudMode.Full || Mode == WorkshopHudMode.Drawing)
             {
-                MortarFootprintEditor = new MortarFootprintPanel(root, font, value => { Draft = value; Refresh(); }, run.CompareMortarFootprints, value => run.PreviewBlueprint(value).Reason, TextResolver);
+                MortarFootprintEditor = new MortarFootprintPanel(root, font, value => { Draft = value; Refresh(); }, run.CompareMortarFootprints, value => run.PreviewBlueprint(value).Reason, TextResolver, run.CompareMortarForms);
                 DrawingEditor = new DrawingEditorPanel(root, font, drawing => { MortarFootprintEditor.Close(); Draft = Draft.WithFreeformDrawing(drawing); SetStatus(UserText.Message(Mode == WorkshopHudMode.Drawing ? "workshop.drawing_hint" : "copy.65c92ef5c0dfe24a")); }, TextResolver,
                     context: new DrawingEditorContext { Preview = candidate => run.PreviewBlueprint(candidate), Workshop = () => run.Workshop, Purchase = run.UnlockDrawingAid });
             }
@@ -555,7 +555,7 @@ namespace PaperDefense.Presentation
                 string id = Draft.GetWeaponId(mount);
                 bool mortar = id != null && run.Content.TryGetWeapon(id, out var weapon) && weapon.SupportsFootprint;
                 footprintButtons[mount].gameObject.SetActive(mortar);
-                if (mortar) footprintButtons[mount].GetComponentInChildren<Text>().text = Resolve(UserText.Message("copy.65784a4e3ffc4d05", mount + 1, Draft.GetMortarFootprint(mount).AspectRatio));
+                if (mortar) footprintButtons[mount].GetComponentInChildren<Text>().text = Resolve(Draft.GetMortarFootprint(mount).IsContour ? UserText.Message("imprint.mount_label", mount + 1) : UserText.Message("copy.65784a4e3ffc4d05", mount + 1, Draft.GetMortarFootprint(mount).AspectRatio));
             }
         }
         void RefreshFocusedPreview()
@@ -589,7 +589,7 @@ namespace PaperDefense.Presentation
         {
             if (run == null || Draft == null || gold == null) return;
             for (int mount = 0; mount < 3; mount++)
-            { string id = Draft.GetWeaponId(mount); bool mortar = id != null && run.Content.TryGetWeapon(id, out var weapon) && weapon.SupportsFootprint; footprintButtons[mount].gameObject.SetActive(mortar); if (mortar) footprintButtons[mount].GetComponentInChildren<Text>().text = Resolve(UserText.Message("copy.65784a4e3ffc4d05", (mount + 1), Draft.GetMortarFootprint(mount).AspectRatio)); }
+            { string id = Draft.GetWeaponId(mount); bool mortar = id != null && run.Content.TryGetWeapon(id, out var weapon) && weapon.SupportsFootprint; footprintButtons[mount].gameObject.SetActive(mortar); if (mortar) footprintButtons[mount].GetComponentInChildren<Text>().text = Resolve(Draft.GetMortarFootprint(mount).IsContour ? UserText.Message("imprint.mount_label", mount + 1) : UserText.Message("copy.65784a4e3ffc4d05", (mount + 1), Draft.GetMortarFootprint(mount).AspectRatio)); }
             gold.text = Resolve(UserText.Message("copy.dfbc594044dd606d", run.Workshop.Gold));
             albumPage = Mathf.Clamp(albumPage, 0, Mathf.Max(0, (run.Workshop.Album.Count - 1) / AlbumRowsPerPage));
             var balance = run.Session.Balance;

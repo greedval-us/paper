@@ -24,14 +24,88 @@ namespace PaperDefense.Tests
                 { TowerCatalog.Validate(value,GameBalance.CreateDefault(),out string reason); return reason; });
         }
         [TearDown] public void Cleanup() => UnityEngine.Object.DestroyImmediate(root);
+        [Test] public void TransversePresetTrialsBesideDrawingAndUndoRestoresCircle()
+        {
+            panel.Open(draft,0);
+            var button=root.GetComponentsInChildren<Button>(true).SingleOrDefault(b=>b.name=="Footprint transverse");
+            Assert.That(button,Is.Not.Null,"The free contour editor must offer a transverse starting shape.");
+            button.onClick.Invoke();
+            Assert.That(draft.FirstFootprint.IsContour,Is.True);
+            Assert.That(draft.SecondFootprint.IsCircle,Is.True);
+            Assert.That(panel.Recording,Is.Not.Null);
+            Assert.That(panel.Recording.Second.Completed,Is.True);
+            Assert.That(panel.Baseline.IsCircle,Is.True);
+            var transverse=draft.FirstFootprint;
+            panel.UseEllipseTool();Assert.That(draft.FirstFootprint.IsContour,Is.False);
+            panel.Undo();Assert.That(draft.FirstFootprint.SameShape(transverse),Is.True);
+            Assert.That(panel.Canvas.gameObject.activeSelf,Is.True);
+            panel.UseFreehandTool();
+            root.GetComponentsInChildren<Button>(true).Single(b=>b.name=="Footprint undo").onClick.Invoke();
+            Assert.That(draft.FirstFootprint.IsCircle,Is.True);
+        }
         void Drag(float y, MortarFootprintPanel selected = null)
         {
             var activePanel = selected ?? panel;
+            activePanel.UseEllipseTool();
             Canvas.ForceUpdateCanvases();
             var pointer = new PointerEventData(null) { button = PointerEventData.InputButton.Left, position = activePanel.Axis.LocalPointToScreen(activePanel.Axis.Endpoint) };
             activePanel.Axis.OnPointerDown(pointer);
             pointer.position = activePanel.Axis.LocalPointToScreen(new Vector2(0,y)); activePanel.Axis.OnDrag(pointer);
             activePanel.Axis.OnPointerUp(pointer);
+        }
+        void DrawContour(params Point2[] points)
+        {
+            Canvas.ForceUpdateCanvases();
+            var pointer=new PointerEventData(null){button=PointerEventData.InputButton.Left,pointerId=11,position=panel.Canvas.LocalPointToScreen(points[0])};
+            panel.Canvas.OnPointerDown(pointer);Assert.That(panel.IsDragging,Is.True);Assert.That(panel.Recording,Is.Null);
+            for(int i=1;i<points.Length;i++){pointer.position=panel.Canvas.LocalPointToScreen(points[i]);panel.Canvas.OnDrag(pointer);}
+            panel.Canvas.OnPointerUp(pointer);
+        }
+        [Test] public void MouseContourAppliesNormalizedShapeAndInvalidStrokeClearsTrialWithoutChangingDraft()
+        {
+            panel.Open(draft,0);var drawing=draft.Drawing;float quality=draft.Assessment.Quality;
+            DrawContour(new Point2(-1,-.5f),new Point2(1,-.5f),new Point2(1,.5f),new Point2(-1,.5f),new Point2(-1,-.5f));
+            Assert.That(draft.FirstFootprint.IsContour,Is.True);Assert.That(panel.Recording,Is.Not.Null);
+            Assert.That(panel.Working.DisplayedPoints.Count,Is.EqualTo(4));Assert.That(draft.Drawing,Is.SameAs(drawing));Assert.That(draft.Assessment.Quality,Is.EqualTo(quality));
+            var accepted=draft.FirstFootprint;
+            DrawContour(new Point2(-1,-1),new Point2(1,1),new Point2(-1,1),new Point2(1,-1),new Point2(-1,-1));
+            Assert.That(panel.Assessment.Issue,Is.EqualTo(FootprintContourIssue.Intersection));Assert.That(panel.Recording,Is.Null);
+            Assert.That(draft.FirstFootprint,Is.SameAs(accepted));
+            root.GetComponentsInChildren<Button>(true).Single(b=>b.name=="Footprint repeat").onClick.Invoke();
+            Assert.That(panel.Recording,Is.Null,"Invalid contour must never replay the last valid shape.");
+            Assert.That(root.GetComponentsInChildren<Text>(true).Single(t=>t.name=="Footprint shape feedback").text,Does.Contain("пересекаются"));
+            panel.Undo();Assert.That(draft.FirstFootprint,Is.SameAs(accepted));Assert.That(panel.Recording,Is.Not.Null);
+        }
+        [Test] public void OpenContourCanBeExplicitlyClosedAndMountSwitchCancelsPendingStroke()
+        {
+            panel.Open(draft,0);
+            DrawContour(new Point2(-1,-1),new Point2(1,-1),new Point2(1,1),new Point2(-1,1));
+            Assert.That(panel.Assessment.Issue,Is.EqualTo(FootprintContourIssue.Open));Assert.That(draft.FirstFootprint.IsCircle,Is.True);
+            root.GetComponentsInChildren<Button>(true).Single(b=>b.name=="Footprint close contour").onClick.Invoke();
+            Assert.That(draft.FirstFootprint.IsContour,Is.True);Assert.That(panel.Recording,Is.Not.Null);
+            var pointer=new PointerEventData(null){button=PointerEventData.InputButton.Left,position=panel.Canvas.LocalPointToScreen(new Point2(-1,-1))};
+            panel.Canvas.OnPointerDown(pointer);Assert.That(panel.Canvas.HasPendingGesture,Is.True);
+            panel.Open(draft,1);panel.Canvas.OnPointerUp(pointer);
+            Assert.That(panel.Canvas.HasPendingGesture,Is.False);Assert.That(draft.SecondFootprint.IsCircle,Is.True);Assert.That(panel.Recording,Is.Not.Null);
+        }
+        [Test] public void EscOrLeavingCanvasCancelsOnlyPendingLine()
+        {
+            panel.Open(draft,0);var accepted=draft.FirstFootprint;
+            var pointer=new PointerEventData(null){button=PointerEventData.InputButton.Left,position=panel.Canvas.LocalPointToScreen(new Point2(-1,-1))};
+            panel.Canvas.OnPointerDown(pointer);panel.Canvas.CancelGesture();panel.Canvas.OnPointerUp(pointer);
+            Assert.That(draft.FirstFootprint,Is.SameAs(accepted));Assert.That(panel.IsDragging,Is.False);
+            panel.Canvas.OnPointerDown(pointer);pointer.position=panel.Canvas.LocalPointToScreen(new Point2(50,50));panel.Canvas.OnDrag(pointer);
+            Assert.That(panel.Canvas.HasPendingGesture,Is.False);Assert.That(draft.FirstFootprint,Is.SameAs(accepted));
+            panel.Close();Assert.That(panel.Recording,Is.Null);
+        }
+        [TestCase(2e38f)] [TestCase(float.MaxValue)] public void LargeFiniteImportedContourRemainsVisibleAndEditable(float coordinate)
+        {
+            var shape=MortarFootprint.FromContour(new[]{new Point2(-coordinate,-coordinate),new Point2(coordinate,-coordinate),new Point2(coordinate,coordinate),new Point2(-coordinate,coordinate)});
+            panel.Open(draft.WithMortarFootprint(0,shape),0);Canvas.ForceUpdateCanvases();
+            var center=panel.Canvas.LocalPointToScreen(default);
+            Assert.That(Vector2.Distance(center,panel.Canvas.LocalPointToScreen(new Point2(coordinate,0))),Is.GreaterThan(100));
+            DrawContour(new Point2(-coordinate*.5f,-coordinate*.5f),new Point2(coordinate*.5f,-coordinate*.5f),new Point2(coordinate*.5f,coordinate*.5f),new Point2(-coordinate*.5f,coordinate*.5f),new Point2(-coordinate*.5f,-coordinate*.5f));
+            Assert.That(panel.Assessment.Valid,Is.True);Assert.That(panel.Recording,Is.Not.Null);
         }
         [Test] public void WorkshopControlsPreserveAuthoredArtThroughVariantAndTemporaryStore()
         {
@@ -188,6 +262,7 @@ namespace PaperDefense.Tests
                 Assert.That(hud.Draft.Origin, Is.EqualTo(source.Origin));
                 Assert.That(hud.Draft.Id, Is.Not.EqualTo(source.Id));
                 var mortar=run.Workshop.Loadout[3]; hud.MortarFootprintEditor.Open(mortar,0);
+                hud.MortarFootprintEditor.UseEllipseTool();
                 var axis=hud.MortarFootprintEditor.Axis;
                 var pointer=new PointerEventData(null) {button=PointerEventData.InputButton.Left,position=axis.LocalPointToScreen(axis.Endpoint)};
                 axis.OnPointerDown(pointer);
@@ -208,6 +283,7 @@ namespace PaperDefense.Tests
         [Test] public void DragStopsOldRecordingThenReleaseStartsFreshRecordingAndCloseCancels()
         {
             panel.Open(draft,0); var old = panel.Recording; Assert.That(old, Is.Not.Null);
+            panel.UseEllipseTool();
             Canvas.ForceUpdateCanvases(); var pointer = new PointerEventData(null) { button = PointerEventData.InputButton.Left, position = panel.Axis.LocalPointToScreen(panel.Axis.Endpoint) };
             panel.Axis.OnPointerDown(pointer); Assert.That(panel.IsDragging, Is.True); Assert.That(panel.Recording, Is.Null);
             pointer.position = panel.Axis.LocalPointToScreen(new Vector2(0,200)); panel.Axis.OnDrag(pointer);

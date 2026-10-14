@@ -67,6 +67,48 @@ namespace PaperDefense.Tests
             Assert.That(editor.Session.Snapshot.StrokeCount, Is.Zero);
             Assert.That(editor.Session.CanUndo, Is.False);
         }
+        [Test] public void WorkingGeometryReadoutFollowsEditsAndUndoWithoutSpendingExtraInk()
+        {
+            editor.Session.AddRectangle(DrawingBindings.Base, new DrawingPoint(-.25f, -.25f), new DrawingPoint(.25f, .25f), out _);
+            editor.Session.AddRectangle(DrawingBindings.Mount0, new DrawingPoint(-.0625f, -.5f), new DrawingPoint(.0625f, .5f), out _);
+            editor.Canvas.SelectedBinding = DrawingBindings.Mount0;
+            editor.Canvas.FinishStroke();
+            string before = Text("Drawing working geometry").text;
+            Assert.That(before, Does.Contain("0,50"));
+            editor.Session.ScalePart(DrawingBindings.Mount0, 1, 1.5f, out _);
+            editor.Canvas.FinishStroke();
+            Assert.That(Text("Drawing working geometry").text, Does.Contain("0,75"));
+            editor.Canvas.Undo();
+            Assert.That(Text("Drawing working geometry").text, Is.EqualTo(before));
+            editor.Canvas.SelectedBinding = DrawingBindings.Base;
+            Assert.That(Text("Drawing working geometry").text, Does.Contain("0,25"));
+            Assert.That(applied, Is.Zero);
+        }
+        [Test] public void HistoricalEditorExplainsUpgradeAndCancelKeepsOriginalRules()
+        {
+            editor.Session.AddRectangle(DrawingBindings.Base, new DrawingPoint(-.25f, -.25f), new DrawingPoint(.25f, .25f), out _);
+            editor.Session.AddRectangle(DrawingBindings.Mount0, new DrawingPoint(-.0625f, -.5f), new DrawingPoint(.0625f, .5f), out _);
+            var data = new BlueprintData(editor.Session.Blueprint.WithFreeformDrawing(editor.Session.Snapshot)); data.FreeformRuleVersion = 1;
+            var old = data.ToBlueprint(); editor.Close(false); editor.Open(old);
+            Assert.That(Text("Drawing introduction").text, Does.Contain("Применить"));
+            Assert.That(old.FreeformDesign.GetBarrel(0).Length, Is.EqualTo(1));
+            editor.Close(false);
+            Assert.That(applied, Is.Zero);
+            Assert.That(new BlueprintData(old).FreeformRuleVersion, Is.EqualTo(1));
+        }
+        [Test] public void CapacityFeedbackUsesRoundedPreviewCapacity()
+        {
+            var run = Connected(new Store(new WorkshopProfile()));
+            editor.Session.AddRectangle(DrawingBindings.Base, new DrawingPoint(-.25f, -.25f), new DrawingPoint(.25f, .25f), out _);
+            editor.Session.AddRectangle(DrawingBindings.Mount0, new DrawingPoint(-.0625f, 0), new DrawingPoint(.0625f, .5f), out _);
+            editor.Canvas.FinishStroke();
+            var before = run.PreviewBlueprint(editor.Session.Blueprint.WithFreeformDrawing(editor.Session.Snapshot));
+            editor.Session.ScalePart(DrawingBindings.Base, 1.001f, 1.001f, out _);
+            editor.Canvas.FinishStroke();
+            var after = run.PreviewBlueprint(editor.Session.Blueprint.WithFreeformDrawing(editor.Session.Snapshot));
+            Assert.That(after.Capacity, Is.EqualTo(before.Capacity));
+            Assert.That(Text("Drawing goal guidance").text, Does.Contain("вместимость без изменений"));
+        }
 
         [Test] public void DisableDiscardsPendingGestureBeforeCanvasIsReenabled()
         {
@@ -321,7 +363,7 @@ namespace PaperDefense.Tests
 
         [Test] public void VisibleWorkbenchRegionsDoNotOverlapAndStayInsideThePanel()
         {
-            string[] names = { "Drawing viewport", "Drawing parts", "Drawing live stats", "Drawing selected mount stats", "Drawing goal guidance", "Drawing stencils", "Drawing rejection", "Apply drawing", "Cancel drawing" };
+            string[] names = { "Drawing viewport", "Drawing working geometry", "Drawing parts", "Drawing live stats", "Drawing selected mount stats", "Drawing goal guidance", "Drawing stencils", "Drawing rejection", "Apply drawing", "Cancel drawing" };
             var regions = root.GetComponentsInChildren<RectTransform>().Where(r => names.Contains(r.name)).ToArray();
             Assert.That(regions.Length, Is.EqualTo(names.Length));
             var board = root.GetComponentsInChildren<RectTransform>().Single(r => r.name == "Authored drawing editor");
@@ -352,6 +394,12 @@ namespace PaperDefense.Tests
             Assert.That(stats.FeedMultiplier, Is.LessThan(1), "Exercise the extra shared-feed line.");
             foreach (var binding in new[] { DrawingBindings.Base, DrawingBindings.Mount0, DrawingBindings.Decoration })
             { editor.Canvas.SelectedBinding = binding; AssertVisibleTextFits(); }
+            editor.Session.ClearPart(DrawingBindings.Base);
+            editor.Session.AddRectangle(DrawingBindings.Base, new DrawingPoint(-.5f, -.5f), new DrawingPoint(.5f, .5f), out _);
+            editor.Canvas.SelectedBinding = DrawingBindings.Base; editor.Canvas.FinishStroke(); AssertVisibleTextFits();
+            editor.Session.ClearPart(DrawingBindings.Mount0);
+            editor.Session.AddRectangle(DrawingBindings.Mount0, new DrawingPoint(-.4f, 0), new DrawingPoint(.4f, 1), out _);
+            editor.Canvas.SelectedBinding = DrawingBindings.Mount0; editor.Canvas.FinishStroke(); AssertVisibleTextFits();
         }
         void AssertVisibleTextFits()
         {

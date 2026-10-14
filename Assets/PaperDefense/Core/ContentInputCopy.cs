@@ -22,7 +22,7 @@ namespace PaperDefense.Core
             {
                 if(d==null){result.StartingPages.Add(null);continue;}
                 var clone=new StartingBlueprintDefinitionInput{Id=d.Id,Name=d.Name,ChassisId=d.ChassisId,FirstWeaponId=d.FirstWeaponId,SecondWeaponId=d.SecondWeaponId,Slot=d.Slot};
-                clone.WeaponMounts=d.WeaponMounts==null?null:d.WeaponMounts.ConvertAll(m=>m==null?null:new WeaponMountSelectionData{SlotIndex=m.SlotIndex,WeaponId=m.WeaponId,FootprintAspect=m.FootprintAspect});
+                clone.WeaponMounts=d.WeaponMounts==null?null:d.WeaponMounts.ConvertAll(m=>m==null?null:m.CreateCopy());
                 if(d.Modules==null)clone.Modules=null;else foreach(var m in d.Modules)clone.Modules.Add(m==null?null:new StartingModuleDefinitionInput{InstanceId=m.InstanceId,DefinitionId=m.DefinitionId});result.StartingPages.Add(clone);
             }
             if(source.Templates==null)result.Templates=null;else foreach(var d in source.Templates)

@@ -51,14 +51,14 @@ namespace PaperDefense.Presentation
             if (item.Kind == SimulationEventKind.ProjectileImpact)
             {
                 float radius = item.ImpactFootprint?.ForwardRadius ?? Mathf.Max(0, item.Radius);
-                if (item.ImpactFootprint.HasValue)
+                if (item.ImpactFootprint.HasValue && !item.ImpactFootprint.Value.IsContour)
                 {
                     var footprint = item.ImpactFootprint.Value;
                     float angle = Mathf.Atan2(footprint.Forward.Y, footprint.Forward.X) - Mathf.PI * .5f;
                     DrawResource(pen, theme, id, at, age, fade, 1,
                         new Vector2(footprint.SideRadius, footprint.ForwardRadius), angle);
                 }
-                else DrawResource(pen, theme, id, at, age, fade, radius);
+                else if (!item.ImpactFootprint.HasValue) DrawResource(pen, theme, id, at, age, fade, radius);
                 Color orange = new Color(.85f, .46f, .2f, fade * .75f);
                 // The perimeter stays at the actual affected area while the inner rings expand.
                 DrawFootprint(pen, at, item.ImpactFootprint, item.Radius, 1, .025f, orange, 32, seed);
@@ -105,6 +105,24 @@ namespace PaperDefense.Presentation
         internal static void DrawFootprint(MeshPen pen, Vector2 center, FootprintGeometry? footprint,
             float fallbackRadius, float scale, float width, Color color, int segments, int seed, bool dashed = false)
         {
+            if (footprint.HasValue && footprint.Value.IsContour)
+            {
+                var shape = footprint.Value;
+                for (int i = 0; i < shape.OutlineCount; i++)
+                {
+                    var a = shape.OutlineOffset(i); var b = shape.OutlineOffset(i + 1);
+                    var start = center + new Vector2(a.X, a.Y) * scale;
+                    var end = center + new Vector2(b.X, b.Y) * scale;
+                    if (!dashed) { pen.Line(start, end, width, color); continue; }
+                    // Dashes belong to the perimeter, not to authored vertex indices.
+                    float length = Vector2.Distance(start, end);
+                    int pieces = Mathf.Clamp(Mathf.CeilToInt(length / .2f), 1, 512);
+                    for (int piece = 0; piece < pieces; piece++)
+                        pen.Line(Vector2.Lerp(start, end, (float)piece / pieces),
+                            Vector2.Lerp(start, end, (piece + .65f) / pieces), width, color);
+                }
+                return;
+            }
             float along = (footprint?.ForwardRadius ?? Mathf.Max(0, fallbackRadius)) * scale;
             float across = (footprint?.SideRadius ?? Mathf.Max(0, fallbackRadius)) * scale;
             if (along <= 0 || across <= 0) return;

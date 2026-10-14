@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using PaperDefense.Core;
+using PaperDefense.Application;
 using UnityEngine;
 
 namespace PaperDefense.Presentation
@@ -14,8 +15,11 @@ namespace PaperDefense.Presentation
         readonly Action<DrawingSnapshot> apply;
         readonly Func<TowerBlueprint, string> preview;
         readonly DrawingEditorContext context;
-        readonly UnityEngine.UI.Text message, rejectionMessage, partLabel, inkLabel, selectedStats, goal, help, zoomLabel;
-        readonly UnityEngine.UI.Button applyButton, undo, redo, grid, snap;
+        readonly UnityEngine.UI.Text message, rejectionMessage, partLabel, inkLabel, selectedStats, goal, help, zoomLabel, introduction, workingGeometry;
+        readonly UnityEngine.UI.Button applyButton, undo, redo, grid, snap, geometry;
+        FreeformTowerDesign previousDesign;
+        TowerPreview? previousPreview;
+        string previousHash, changeBinding, changeMessage;
         readonly RectTransform inkFill;
         readonly Dictionary<string, UnityEngine.UI.Button> parts = new Dictionary<string, UnityEngine.UI.Button>(StringComparer.Ordinal);
         readonly Dictionary<DrawingTool, UnityEngine.UI.Button> tools = new Dictionary<DrawingTool, UnityEngine.UI.Button>();
@@ -37,7 +41,7 @@ namespace PaperDefense.Presentation
             panel = DrawingWorkbenchUi.Box(parent, "Authored drawing editor", new Rect(20, 30, 1560, 940), NotebookPalette.Paper, true).gameObject;
             DrawingWorkbenchUi.Box(panel.transform, "Drawing header rule", new Rect(24, 96, 1512, 2), new Color(.35f, .5f, .65f, .3f));
             ui.Label(panel.transform, "Drawing title", Copy("title"), new Rect(24, 5, 1512, 52), 33, NotebookPalette.Blue);
-            ui.Label(panel.transform, "Drawing introduction", Copy("intro"), new Rect(24, 57, 1512, 34), 22);
+            introduction = ui.Label(panel.transform, "Drawing introduction", Copy("intro"), new Rect(24, 57, 1512, 34), 22);
             ui.Label(panel.transform, "Drawing part heading", Copy("parts"), new Rect(24, 109, 218, 32), 21, NotebookPalette.Blue);
             ui.Label(panel.transform, "Drawing tool heading", Copy("tools"), new Rect(24, 295, 218, 32), 21, NotebookPalette.Blue);
             for (int i = 0; i < 6; i++)
@@ -58,15 +62,17 @@ namespace PaperDefense.Presentation
             { Canvas.CancelGesture(); if (Session.ClearPart(Canvas.SelectedBinding)) ClearRejection(); Refresh(); });
             grid = ui.Button(panel.transform, "Drawing grid", new Rect(264, 112, 119, 40), Copy("grid"), () => Canvas.ShowGrid = !Canvas.ShowGrid);
             snap = ui.Button(panel.transform, "Drawing snap", new Rect(391, 112, 136, 40), Copy("snap"), () => Canvas.SnapToGrid = !Canvas.SnapToGrid);
+            geometry = ui.Button(panel.transform, "Drawing geometry", new Rect(535, 112, 136, 40), Copy("geometry"), () => Canvas.ShowWorkingGeometry = !Canvas.ShowWorkingGeometry);
             ui.Button(panel.transform, "Drawing zoom out", new Rect(679, 112, 44, 40), Copy("smaller"), () => Canvas.Zoom *= .8f);
             zoomLabel = ui.Label(panel.transform, "Drawing zoom value", "", new Rect(732, 112, 95, 40), 21); zoomLabel.alignment = TextAnchor.MiddleCenter;
             ui.Button(panel.transform, "Drawing zoom in", new Rect(836, 112, 44, 40), Copy("larger"), () => Canvas.Zoom *= 1.25f);
             ui.Button(panel.transform, "Drawing fit", new Rect(888, 112, 184, 40), Copy("fit"), () => Canvas.Fit());
-            var sheet = DrawingWorkbenchUi.Box(panel.transform, "Drawing viewport", new Rect(264, 165, 808, 607), new Color(1, .995f, .95f));
+            var sheet = DrawingWorkbenchUi.Box(panel.transform, "Drawing viewport", new Rect(264, 165, 808, 496), new Color(1, .995f, .95f));
             sheet.gameObject.AddComponent<UnityEngine.UI.RectMask2D>();
             var canvas = new GameObject("Drawing canvas", typeof(RectTransform), typeof(CanvasRenderer), typeof(DrawingCanvasGraphic));
-            canvas.transform.SetParent(sheet, false); DrawingWorkbenchUi.Place(canvas.GetComponent<RectTransform>(), new Rect(0, 0, 808, 607));
+            canvas.transform.SetParent(sheet, false); DrawingWorkbenchUi.Place(canvas.GetComponent<RectTransform>(), new Rect(0, 0, 808, 496));
             Canvas = canvas.GetComponent<DrawingCanvasGraphic>(); Canvas.raycastTarget = true;
+            workingGeometry = ui.Label(panel.transform, "Drawing working geometry", "", new Rect(264, 669, 808, 108), 18, NotebookPalette.Blue);
             partLabel = ui.Label(panel.transform, "Drawing selected part and tool", "", new Rect(264, 779, 808, 32), 21, NotebookPalette.Blue);
             rejectionMessage = ui.Label(panel.transform, "Drawing rejection", "", new Rect(264, 814, 808, 73), 19, NotebookPalette.Red);
             help = ui.Label(panel.transform, "Drawing gesture help", "", new Rect(264, 858, 808, 28), 17);
@@ -89,8 +95,10 @@ namespace PaperDefense.Presentation
         public void Open(TowerBlueprint blueprint)
         {
             ClearRejection();
+            previousDesign = null; previousPreview = null; previousHash = changeBinding = changeMessage = null;
             var content = context?.Workshop?.Invoke()?.Content ?? blueprint.Content;
             blueprint = (content == null ? blueprint : blueprint.WithContent(content)).AsFreeform();
+            introduction.text = Resolve(Copy(blueprint.FreeformRuleVersion < FreeformTowerDesign.RuleVersion ? "upgrade" : "intro"));
             Session = new DrawingEditSession(blueprint, blueprint.Drawing); Canvas.Bind(Session);
             RebuildParts();
             stencils.Bind((blueprint.Content ?? GameBalance.CreateDefault().ResolveContent()).DrawingUnlocks);
@@ -134,12 +142,14 @@ namespace PaperDefense.Presentation
             foreach (var pair in tools) pair.Value.GetComponent<UnityEngine.UI.Image>().color = Canvas.Tool == pair.Key ? DrawingWorkbenchUi.Selection : Color.white;
             grid.GetComponent<UnityEngine.UI.Image>().color = Canvas.ShowGrid ? DrawingWorkbenchUi.Selection : Color.white;
             snap.GetComponent<UnityEngine.UI.Image>().color = Canvas.SnapToGrid ? DrawingWorkbenchUi.Selection : Color.white;
+            geometry.GetComponent<UnityEngine.UI.Image>().color = Canvas.ShowWorkingGeometry ? DrawingWorkbenchUi.Selection : Color.white;
             zoomLabel.text = Resolve(UserText.Message("drawing.workbench.zoom", Canvas.Zoom * 100));
             partLabel.text = Resolve(UserText.Message("drawing.workbench.selected", Name(Session.Blueprint, Canvas.SelectedBinding, textResolver), ToolName(Canvas.Tool)));
             undo.interactable = Session.CanUndo; redo.interactable = Session.CanRedo;
             var candidate = Session.Blueprint.WithFreeformDrawing(Session.Snapshot);
             var resolved = context?.Preview?.Invoke(candidate);
             var design = resolved?.FreeformDesign ?? candidate.FreeformDesign;
+            Canvas.SetWorkingDesign(design);
             applyButton.interactable = design.IsUsable;
             inkLabel.text = Resolve(UserText.Message("drawing.workbench.ink", design.InkUsed, design.InkBudget, Copy(design.IsWithinBudget ? "ink_fit" : "ink_over")));
             inkLabel.color = design.IsWithinBudget ? NotebookPalette.Navy : NotebookPalette.Red;
@@ -158,10 +168,45 @@ namespace PaperDefense.Presentation
             }
             else { message.text = Resolve(preview != null ? preview(candidate) : design.Message); }
             goal.text = Resolve(Copy(Canvas.SelectedBinding == DrawingBindings.Base ? "body_goal" : DrawingBindings.TryMount(Canvas.SelectedBinding, out _) ? "barrel_goal" : "decoration_goal"));
+            RefreshGeometry(candidate, design, resolved);
             help.text = Resolve(Copy(Canvas.Tool == DrawingTool.Pencil ? "pencil_hint" : Canvas.Tool == DrawingTool.Eraser ? "eraser_hint" : Canvas.Tool == DrawingTool.Move ? "move_hint" : "shape_hint"));
             if (!design.IsUsable) help.text = Resolve(Session.Snapshot.StrokeCount == 0 ? Copy("beginner") : design.Message);
             stencils.Refresh(Canvas.SelectedBinding); Canvas.SetVerticesDirty();
         }
+        void RefreshGeometry(TowerBlueprint candidate, FreeformTowerDesign design, TowerPreview? resolved)
+        {
+            var rules = candidate.Content?.FreeformRules ?? FreeformRules.Default;
+            string binding = Canvas.SelectedBinding;
+            if (binding == DrawingBindings.Base)
+                workingGeometry.text = Resolve(UserText.Message("drawing.workbench.body_geometry", design.BodyArea, rules.BodyAreaReference,
+                    Copy(design.BodyGrowth >= 1 ? "body_limit" : "body_growth")));
+            else if (DrawingBindings.TryMount(binding, out int slot) && design.GetBarrel(slot) != null)
+            {
+                var barrel = design.GetBarrel(slot);
+                workingGeometry.text = Resolve(UserText.Message("drawing.workbench.barrel_geometry", barrel.Length, rules.BarrelLengthReference,
+                    barrel.Width, rules.BarrelWidthReference, Copy(barrel.LengthGrowth >= 1 ? "length_limit" : "length_growth"),
+                    Copy(barrel.WidthGrowth >= 1 ? "width_limit" : "width_growth")));
+            }
+            else workingGeometry.text = Resolve(Copy("decoration_geometry"));
+            if (previousDesign != null && previousHash != candidate.Drawing.GeometryHash)
+            {
+                changeBinding = binding; changeMessage = null;
+                if (binding == DrawingBindings.Base)
+                    changeMessage = resolved.HasValue && previousPreview.HasValue
+                        ? UserText.Message("drawing.workbench.body_change", Change(previousPreview.Value.Health, resolved.Value.Health),
+                            Change(previousPreview.Value.Capacity, resolved.Value.Capacity), Change(previousDesign.InkUsed, design.InkUsed))
+                        : UserText.Message("drawing.workbench.geometry_change", Change(previousDesign.BodyArea, design.BodyArea), Change(previousDesign.InkUsed, design.InkUsed));
+                else if (DrawingBindings.TryMount(binding, out int mount))
+                {
+                    var before = previousDesign.GetBarrel(mount); var after = design.GetBarrel(mount);
+                    if (before != null && after != null) changeMessage = UserText.Message("drawing.workbench.barrel_change",
+                        Change(before.RangeMultiplier, after.RangeMultiplier), Change(before.IntervalMultiplier, after.IntervalMultiplier), Change(before.DamageMultiplier, after.DamageMultiplier));
+                }
+            }
+            if (changeBinding == binding && changeMessage != null) goal.text = Resolve(changeMessage);
+            previousDesign = design; previousPreview = resolved; previousHash = candidate.Drawing.GeometryHash;
+        }
+        static string Change(float before, float after) => Copy(Mathf.Abs(after - before) < .00001f ? "unchanged" : after > before ? "increased" : "decreased");
         void RebuildParts()
         {
             if (partList != null) UnityEngine.Object.DestroyImmediate(partList);
