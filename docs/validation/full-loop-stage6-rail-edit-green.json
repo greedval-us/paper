@@ -1,0 +1,3168 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "be2a84176c9a4b4685e933da85d06bf9",
+    "status": "succeeded",
+    "mode": "EditMode",
+    "started_unix_ms": 1791769264990,
+    "finished_unix_ms": 1791769267919,
+    "last_update_unix_ms": 1791769267919,
+    "progress": {
+      "completed": 347,
+      "total": 347,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": null,
+      "last_finished_test_full_name": "PaperDefense.Tests.WorkshopTests.UnlockingPartIsPermanentAndAssemblyDoesNotSpendGold",
+      "last_finished_unix_ms": 1791769267868,
+      "stuck_suspected": false,
+      "editor_is_focused": true,
+      "run_in_background": false,
+      "focus_nudge_attempts": null,
+      "focus_nudge_limit": null,
+      "focus_nudge_status": null,
+      "blocked_reason": null,
+      "failures_so_far": [],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "EditMode",
+      "summary": {
+        "total": 347,
+        "passed": 347,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 2.3900835,
+        "resultState": "Passed"
+      },
+      "results": [
+        {
+          "name": "BlotterAssemblyUsesCleanupGeometryWithZeroDamage",
+          "fullName": "PaperDefense.Tests.BlotterCatalogTests.BlotterAssemblyUsesCleanupGeometryWithZeroDamage",
+          "state": "Passed",
+          "durationSeconds": 0.0150683,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlotterRightIsPermanentAndHasItsOwnConfiguredCostAndPurpose",
+          "fullName": "PaperDefense.Tests.BlotterCatalogTests.BlotterRightIsPermanentAndHasItsOwnConfiguredCostAndPurpose",
+          "state": "Passed",
+          "durationSeconds": 0.0049992,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "GunBlotterAndArmorFitTheStandardFoundationExactly",
+          "fullName": "PaperDefense.Tests.BlotterCatalogTests.GunBlotterAndArmorFitTheStandardFoundationExactly",
+          "state": "Passed",
+          "durationSeconds": 0.0002132,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "VersionTwoCannotClaimTheNewCleanupWeapon",
+          "fullName": "PaperDefense.Tests.BlotterCatalogTests.VersionTwoCannotClaimTheNewCleanupWeapon",
+          "state": "Passed",
+          "durationSeconds": 0.0063069,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlotQueriesUseCellCentersIgnoreExpiredMarksAndResolveTiesByCell",
+          "fullName": "PaperDefense.Tests.BlotterTrialTests.BlotQueriesUseCellCentersIgnoreExpiredMarksAndResolveTiesByCell",
+          "state": "Passed",
+          "durationSeconds": 0.0018415,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlotTrialComparisonsHaveIdenticalSeededMarksAndRepeatedRunsAreDeterministic",
+          "fullName": "PaperDefense.Tests.BlotterTrialTests.BlotTrialComparisonsHaveIdenticalSeededMarksAndRepeatedRunsAreDeterministic",
+          "state": "Passed",
+          "durationSeconds": 0.0804606,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ClearCountsLiveMarksOnlyOnceAndInvalidRadiiDoNotMutateThem",
+          "fullName": "PaperDefense.Tests.BlotterTrialTests.ClearCountsLiveMarksOnlyOnceAndInvalidRadiiDoNotMutateThem",
+          "state": "Passed",
+          "durationSeconds": 0.0008575,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ExistingTrialLanesKeepTheirExplicitlyBlotFreeFixtures(Crowd)",
+          "fullName": "PaperDefense.Tests.BlotterTrialTests.ExistingTrialLanesKeepTheirExplicitlyBlotFreeFixtures(Crowd)",
+          "state": "Passed",
+          "durationSeconds": 0.0681764,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ExistingTrialLanesKeepTheirExplicitlyBlotFreeFixtures(Fast)",
+          "fullName": "PaperDefense.Tests.BlotterTrialTests.ExistingTrialLanesKeepTheirExplicitlyBlotFreeFixtures(Fast)",
+          "state": "Passed",
+          "durationSeconds": 0.0357866,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ExistingTrialLanesKeepTheirExplicitlyBlotFreeFixtures(Armored)",
+          "fullName": "PaperDefense.Tests.BlotterTrialTests.ExistingTrialLanesKeepTheirExplicitlyBlotFreeFixtures(Armored)",
+          "state": "Passed",
+          "durationSeconds": 0.0669882,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FrameCopiesMarkValuesInsteadOfRetainingMutableSourceStates",
+          "fullName": "PaperDefense.Tests.BlotterTrialTests.FrameCopiesMarkValuesInsteadOfRetainingMutableSourceStates",
+          "state": "Passed",
+          "durationSeconds": 0.0016663,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LiveAutomaticSupportCleansNearbyCorpsesWithNoEnemyInItsRange",
+          "fullName": "PaperDefense.Tests.BlotterTrialTests.LiveAutomaticSupportCleansNearbyCorpsesWithNoEnemyInItsRange",
+          "state": "Passed",
+          "durationSeconds": 0.0121643,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LiveContextSeesCorpsesCreatedAfterItAndSharesTheExistingMarkCollection",
+          "fullName": "PaperDefense.Tests.BlotterTrialTests.LiveContextSeesCorpsesCreatedAfterItAndSharesTheExistingMarkCollection",
+          "state": "Passed",
+          "durationSeconds": 0.000635,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SupportTrialClearsTheFiniteFixtureAndOwnsPlaybackSnapshotsWithoutRewards",
+          "fullName": "PaperDefense.Tests.BlotterTrialTests.SupportTrialClearsTheFiniteFixtureAndOwnsPlaybackSnapshotsWithoutRewards",
+          "state": "Passed",
+          "durationSeconds": 0.000979,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UncleanedFiniteTrialMarksRemainUnresolvedForTheFullDurationWithoutEnemies",
+          "fullName": "PaperDefense.Tests.BlotterTrialTests.UncleanedFiniteTrialMarksRemainUnresolvedForTheFullDurationWithoutEnemies",
+          "state": "Passed",
+          "durationSeconds": 0.0554112,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ACombatMountStillAcquiringAnEnemyCannotBlockBlotCleanup",
+          "fullName": "PaperDefense.Tests.BlotterWeaponTests.ACombatMountStillAcquiringAnEnemyCannotBlockBlotCleanup",
+          "state": "Passed",
+          "durationSeconds": 0.0014749,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AnIdleBlotterWithNoBlotsDoesNotStealAnActiveGunsDynamicFeed",
+          "fullName": "PaperDefense.Tests.BlotterWeaponTests.AnIdleBlotterWithNoBlotsDoesNotStealAnActiveGunsDynamicFeed",
+          "state": "Passed",
+          "durationSeconds": 0.0050467,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlotterCleansItsConfiguredRadiusWithoutAnyEnemyAndRecordsOnlyActualClears",
+          "fullName": "PaperDefense.Tests.BlotterWeaponTests.BlotterCleansItsConfiguredRadiusWithoutAnyEnemyAndRecordsOnlyActualClears",
+          "state": "Passed",
+          "durationSeconds": 0.00077,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredRadiusAndIntervalChangeActualCleanupInsteadOfEnemyAttacks",
+          "fullName": "PaperDefense.Tests.BlotterWeaponTests.ConfiguredRadiusAndIntervalChangeActualCleanupInsteadOfEnemyAttacks",
+          "state": "Passed",
+          "durationSeconds": 0.0018915,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MissingBlotContextLeavesTheSupportMountIdle",
+          "fullName": "PaperDefense.Tests.BlotterWeaponTests.MissingBlotContextLeavesTheSupportMountIdle",
+          "state": "Passed",
+          "durationSeconds": 0.0002245,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "QualityChangesOnlyCleanupCadenceAndIsAppliedOnce",
+          "fullName": "PaperDefense.Tests.BlotterWeaponTests.QualityChangesOnlyCleanupCadenceAndIsAppliedOnce",
+          "state": "Passed",
+          "durationSeconds": 0.0018245,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SupportCleanupCannotDealDamageOrConsumeTheCombatMountsInkEntitlement",
+          "fullName": "PaperDefense.Tests.BlotterWeaponTests.SupportCleanupCannotDealDamageOrConsumeTheCombatMountsInkEntitlement",
+          "state": "Passed",
+          "durationSeconds": 0.0015608,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TwoWorkingBlottersShareProductionAndChooseTheirOwnRemainingBlotTargets",
+          "fullName": "PaperDefense.Tests.BlotterWeaponTests.TwoWorkingBlottersShareProductionAndChooseTheirOwnRemainingBlotTargets",
+          "state": "Passed",
+          "durationSeconds": 0.0003404,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlueprintWeaponNeitherShootsNorAccumulatesIdleTime",
+          "fullName": "PaperDefense.Tests.CombatContractTests.BlueprintWeaponNeitherShootsNorAccumulatesIdleTime",
+          "state": "Passed",
+          "durationSeconds": 0.0006265,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CoolingWeaponStillCountsTimeWithoutAnAvailableTarget",
+          "fullName": "PaperDefense.Tests.CombatContractTests.CoolingWeaponStillCountsTimeWithoutAnAvailableTarget",
+          "state": "Passed",
+          "durationSeconds": 0.0002801,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CoolingWeaponWithLiveTargetDoesNotCountIdleTime",
+          "fullName": "PaperDefense.Tests.CombatContractTests.CoolingWeaponWithLiveTargetDoesNotCountIdleTime",
+          "state": "Passed",
+          "durationSeconds": 0.0002579,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DamageStatisticsCountOnlyHealthActuallyRemoved(Gun)",
+          "fullName": "PaperDefense.Tests.CombatContractTests.DamageStatisticsCountOnlyHealthActuallyRemoved(Gun)",
+          "state": "Passed",
+          "durationSeconds": 0.0003369,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DamageStatisticsCountOnlyHealthActuallyRemoved(Piercer)",
+          "fullName": "PaperDefense.Tests.CombatContractTests.DamageStatisticsCountOnlyHealthActuallyRemoved(Piercer)",
+          "state": "Passed",
+          "durationSeconds": 0.0004262,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DamageStatisticsCountOnlyHealthActuallyRemoved(Spikes)",
+          "fullName": "PaperDefense.Tests.CombatContractTests.DamageStatisticsCountOnlyHealthActuallyRemoved(Spikes)",
+          "state": "Passed",
+          "durationSeconds": 0.0000748,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DamageStatisticsCountOnlyHealthActuallyRemoved(Mortar)",
+          "fullName": "PaperDefense.Tests.CombatContractTests.DamageStatisticsCountOnlyHealthActuallyRemoved(Mortar)",
+          "state": "Passed",
+          "durationSeconds": 0.0002639,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DroppingVisualEventsDoesNotDropMortarDamage(1)",
+          "fullName": "PaperDefense.Tests.CombatContractTests.DroppingVisualEventsDoesNotDropMortarDamage(1)",
+          "state": "Passed",
+          "durationSeconds": 0.0008133,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DroppingVisualEventsDoesNotDropMortarDamage(512)",
+          "fullName": "PaperDefense.Tests.CombatContractTests.DroppingVisualEventsDoesNotDropMortarDamage(512)",
+          "state": "Passed",
+          "durationSeconds": 0.0000634,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ErasingSourceMortarDoesNotCancelShell",
+          "fullName": "PaperDefense.Tests.CombatContractTests.ErasingSourceMortarDoesNotCancelShell",
+          "state": "Passed",
+          "durationSeconds": 0.0014129,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ExistingShellImpactResolvesBeforeNewWeaponTargetSelection",
+          "fullName": "PaperDefense.Tests.CombatContractTests.ExistingShellImpactResolvesBeforeNewWeaponTargetSelection",
+          "state": "Passed",
+          "durationSeconds": 0.0003556,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FatalHitClampsHealthAtZero",
+          "fullName": "PaperDefense.Tests.CombatContractTests.FatalHitClampsHealthAtZero",
+          "state": "Passed",
+          "durationSeconds": 0.0007821,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HeadlessMortarKillAwardsRewardOnlyAfterImpact",
+          "fullName": "PaperDefense.Tests.CombatContractTests.HeadlessMortarKillAwardsRewardOnlyAfterImpact",
+          "state": "Passed",
+          "durationSeconds": 0.0007795,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MortarDoesNotDamageAtLaunch",
+          "fullName": "PaperDefense.Tests.CombatContractTests.MortarDoesNotDamageAtLaunch",
+          "state": "Passed",
+          "durationSeconds": 0.0002408,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MortarImpactQueriesCurrentPositionsRatherThanLaunchVictims",
+          "fullName": "PaperDefense.Tests.CombatContractTests.MortarImpactQueriesCurrentPositionsRatherThanLaunchVictims",
+          "state": "Passed",
+          "durationSeconds": 0.0004907,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MortarImpactsWithoutAnyPresentation",
+          "fullName": "PaperDefense.Tests.CombatContractTests.MortarImpactsWithoutAnyPresentation",
+          "state": "Passed",
+          "durationSeconds": 0.0005361,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MortarPublishesSeparateLaunchAndImpactEvents",
+          "fullName": "PaperDefense.Tests.CombatContractTests.MortarPublishesSeparateLaunchAndImpactEvents",
+          "state": "Passed",
+          "durationSeconds": 0.0014889,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MortarShellSnapshotsDamageAndFlightBeforeSourceChanges",
+          "fullName": "PaperDefense.Tests.CombatContractTests.MortarShellSnapshotsDamageAndFlightBeforeSourceChanges",
+          "state": "Passed",
+          "durationSeconds": 0.0002922,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NewMortarShellKeepsFullFlightTimeOnItsLaunchStep",
+          "fullName": "PaperDefense.Tests.CombatContractTests.NewMortarShellKeepsFullFlightTimeOnItsLaunchStep",
+          "state": "Passed",
+          "durationSeconds": 0.0002725,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RunnerLeavingMortarDestinationBeforeImpactTakesNoDamage",
+          "fullName": "PaperDefense.Tests.CombatContractTests.RunnerLeavingMortarDestinationBeforeImpactTakesNoDamage",
+          "state": "Passed",
+          "durationSeconds": 0.0005528,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TwoFatalTowersAwardOneKillAndOneReward",
+          "fullName": "PaperDefense.Tests.CombatContractTests.TwoFatalTowersAwardOneKillAndOneReward",
+          "state": "Passed",
+          "durationSeconds": 0.0003887,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WaveCompletionWaitsForShellEvenWhenAnotherWeaponKillsItsTarget",
+          "fullName": "PaperDefense.Tests.CombatContractTests.WaveCompletionWaitsForShellEvenWhenAnotherWeaponKillsItsTarget",
+          "state": "Passed",
+          "durationSeconds": 0.0011308,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AffordableAssemblyUsesItsOwnPriceBeforeCheckingAvailableInk",
+          "fullName": "PaperDefense.Tests.ConstructionRulesTests.AffordableAssemblyUsesItsOwnPriceBeforeCheckingAvailableInk",
+          "state": "Passed",
+          "durationSeconds": 0.0002932,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredFeedAndAcquisitionChangeProductionWeaponFire",
+          "fullName": "PaperDefense.Tests.ConstructionRulesTests.ConfiguredFeedAndAcquisitionChangeProductionWeaponFire",
+          "state": "Passed",
+          "durationSeconds": 0.0020622,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredFoundationModulesAndPaintPriceReplaceEveryAssemblyConstant",
+          "fullName": "PaperDefense.Tests.ConstructionRulesTests.ConfiguredFoundationModulesAndPaintPriceReplaceEveryAssemblyConstant",
+          "state": "Passed",
+          "durationSeconds": 0.0002666,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredUnlockGoldIsUsedWithoutChangingHistoricalPartPrices",
+          "fullName": "PaperDefense.Tests.ConstructionRulesTests.ConfiguredUnlockGoldIsUsedWithoutChangingHistoricalPartPrices",
+          "state": "Passed",
+          "durationSeconds": 0.0003855,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredWeaponLoadsAndCapacityControlActualAssemblyValidation",
+          "fullName": "PaperDefense.Tests.ConstructionRulesTests.ConfiguredWeaponLoadsAndCapacityControlActualAssemblyValidation",
+          "state": "Passed",
+          "durationSeconds": 0.0002096,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ExtractedDefaultsKeepEstablishedAssemblyCostsHealthTimingAndConstraints",
+          "fullName": "PaperDefense.Tests.ConstructionRulesTests.ExtractedDefaultsKeepEstablishedAssemblyCostsHealthTimingAndConstraints",
+          "state": "Passed",
+          "durationSeconds": 0.0002528,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LoadedOwnedPagesKeepTheirGeometryWhenCurrentCapacityChanges",
+          "fullName": "PaperDefense.Tests.ConstructionRulesTests.LoadedOwnedPagesKeepTheirGeometryWhenCurrentCapacityChanges",
+          "state": "Passed",
+          "durationSeconds": 0.0010098,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RuleSnapshotIsIndependentAndRejectsNonfiniteTuning",
+          "fullName": "PaperDefense.Tests.ConstructionRulesTests.RuleSnapshotIsIndependentAndRejectsNonfiniteTuning",
+          "state": "Passed",
+          "durationSeconds": 0.0003091,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AnInterceptedGlobUsesTheArmorAndCommonDefenseCap(0.25f,75.0f)",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.AnInterceptedGlobUsesTheArmorAndCommonDefenseCap(0.25f,75.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0008808,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AnInterceptedGlobUsesTheArmorAndCommonDefenseCap(0.9f,40.0f)",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.AnInterceptedGlobUsesTheArmorAndCommonDefenseCap(0.9f,40.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0000865,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ARealMeleeHitUsesTheSameArmorAndCap(0.25f,20.25f)",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.ARealMeleeHitUsesTheSameArmorAndCap(0.25f,20.25f)",
+          "state": "Passed",
+          "durationSeconds": 0.0008297,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ARealMeleeHitUsesTheSameArmorAndCap(0.9f,10.8f)",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.ARealMeleeHitUsesTheSameArmorAndCap(0.9f,10.8f)",
+          "state": "Passed",
+          "durationSeconds": 0.0004856,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlueCapturesLaunchStrengthAndDuration",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.BlueCapturesLaunchStrengthAndDuration",
+          "state": "Passed",
+          "durationSeconds": 0.0006584,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EqualSlowRefreshesOnceAndDoesNotMultiplyWithBlueOrBlot",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.EqualSlowRefreshesOnceAndDoesNotMultiplyWithBlueOrBlot",
+          "state": "Passed",
+          "durationSeconds": 0.0003684,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "GreenCapturesItsReductionAndDurationAndAffectsItsOwnRawHit",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.GreenCapturesItsReductionAndDurationAndAffectsItsOwnRawHit",
+          "state": "Passed",
+          "durationSeconds": 0.0001382,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "GreenUsesTheStrongestReductionThenOnlyTheWeakSourcesOwnRemainder",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.GreenUsesTheStrongestReductionThenOnlyTheWeakSourcesOwnRemainder",
+          "state": "Passed",
+          "durationSeconds": 0.0001381,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InvalidRawDamageCannotHealOrPoisonHealth",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.InvalidRawDamageCannotHealOrPoisonHealth",
+          "state": "Passed",
+          "durationSeconds": 0.0000878,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InvalidSlowParametersAreRejectedBeforeAnyStatusChanges",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.InvalidSlowParametersAreRejectedBeforeAnyStatusChanges",
+          "state": "Passed",
+          "durationSeconds": 0.0002039,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "OrdinaryDamageUsesTheSameBoundedDefenseFormula(0.0f,100.0f)",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.OrdinaryDamageUsesTheSameBoundedDefenseFormula(0.0f,100.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0000898,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "OrdinaryDamageUsesTheSameBoundedDefenseFormula(-0.5f,100.0f)",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.OrdinaryDamageUsesTheSameBoundedDefenseFormula(-0.5f,100.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.000021,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "OrdinaryDamageUsesTheSameBoundedDefenseFormula(0.25f,75.0f)",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.OrdinaryDamageUsesTheSameBoundedDefenseFormula(0.25f,75.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0000169,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "OrdinaryDamageUsesTheSameBoundedDefenseFormula(0.9f,40.0f)",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.OrdinaryDamageUsesTheSameBoundedDefenseFormula(0.9f,40.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0000148,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RedCapturesLaunchDurationPulseDamageAndItsExplicitDefenseBypass",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.RedCapturesLaunchDurationPulseDamageAndItsExplicitDefenseBypass",
+          "state": "Passed",
+          "durationSeconds": 0.0002386,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RedDoesNotStackOrLetAWeakSourceProlongTheStrongDamage",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.RedDoesNotStackOrLetAWeakSourceProlongTheStrongDamage",
+          "state": "Passed",
+          "durationSeconds": 0.0001351,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WeakerSlowHasItsOwnRemainingDurationAndCannotExtendTheStrongerOne",
+          "fullName": "PaperDefense.Tests.DefenseStatusTests.WeakerSlowHasItsOwnRemainingDurationAndCannotExtendTheStrongerOne",
+          "state": "Passed",
+          "durationSeconds": 0.000105,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AnUndrawnModuleHasItsFixedSmallWeightRegardlessOfWeaponContourDensity",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.AnUndrawnModuleHasItsFixedSmallWeightRegardlessOfWeaponContourDensity",
+          "state": "Passed",
+          "durationSeconds": 0.0040604,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AssessmentCacheEvictsOldEntriesWhileBlueprintsKeepTheirImmutableResult",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.AssessmentCacheEvictsOldEntriesWhileBlueprintsKeepTheirImmutableResult",
+          "state": "Passed",
+          "durationSeconds": 0.0325502,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AssessmentIsImmutableCachedAndVersionedAgainstDrawingAndConstruction",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.AssessmentIsImmutableCachedAndVersionedAgainstDrawingAndConstruction",
+          "state": "Passed",
+          "durationSeconds": 0.0016212,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CompleteReferenceAndReasonableHandTremorBothReachFullQuality",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.CompleteReferenceAndReasonableHandTremorBothReachFullQuality",
+          "state": "Passed",
+          "durationSeconds": 0.000883,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DecorationDoesNotBoostOrPenalizeTheFunctionalAssessment",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.DecorationDoesNotBoostOrPenalizeTheFunctionalAssessment",
+          "state": "Passed",
+          "durationSeconds": 0.0006479,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FillingEveryFunctionalPartHasLowPrecisionInsteadOfAnAutomaticPerfectScore",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.FillingEveryFunctionalPartHasLowPrecisionInsteadOfAnAutomaticPerfectScore",
+          "state": "Passed",
+          "durationSeconds": 0.0013564,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FireMultiplierUsesConfiguredBoundsAndRejectsEfficiencyAboveTheIdeal",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.FireMultiplierUsesConfiguredBoundsAndRejectsEfficiencyAboveTheIdeal",
+          "state": "Passed",
+          "durationSeconds": 0.0002752,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LegacyPagesKeepFullEfficiencyAndNewEmptyDraftsHaveZeroQuality",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.LegacyPagesKeepFullEfficiencyAndNewEmptyDraftsHaveZeroQuality",
+          "state": "Passed",
+          "durationSeconds": 0.0002268,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PartWeightsAreFixedAndMissingMountFeedbackNamesTheUnfinishedContour",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.PartWeightsAreFixedAndMissingMountFeedbackNamesTheUnfinishedContour",
+          "state": "Passed",
+          "durationSeconds": 0.0010292,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "QualityChangesOnlyTheCentralBoundedFireMultiplier(0,0.85f)",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.QualityChangesOnlyTheCentralBoundedFireMultiplier(0,0.85f)",
+          "state": "Passed",
+          "durationSeconds": 0.0001056,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "QualityChangesOnlyTheCentralBoundedFireMultiplier(60,0.94f)",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.QualityChangesOnlyTheCentralBoundedFireMultiplier(60,0.94f)",
+          "state": "Passed",
+          "durationSeconds": 0.0000236,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "QualityChangesOnlyTheCentralBoundedFireMultiplier(100,1)",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.QualityChangesOnlyTheCentralBoundedFireMultiplier(100,1)",
+          "state": "Passed",
+          "durationSeconds": 0.0000187,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "QualityChangesOnlyTheCentralBoundedFireMultiplier(-10,0.85f)",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.QualityChangesOnlyTheCentralBoundedFireMultiplier(-10,0.85f)",
+          "state": "Passed",
+          "durationSeconds": 0.0000175,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "QualityChangesOnlyTheCentralBoundedFireMultiplier(110,1)",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.QualityChangesOnlyTheCentralBoundedFireMultiplier(110,1)",
+          "state": "Passed",
+          "durationSeconds": 0.0000143,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SmallProportionDifferencesAreToleratedWhileLargeScaleChangesRemainMeaningful",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.SmallProportionDifferencesAreToleratedWhileLargeScaleChangesRemainMeaningful",
+          "state": "Passed",
+          "durationSeconds": 0.0006178,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "StrokeOrderDirectionAndDuplicateTracingDoNotChangeQuality",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.StrokeOrderDirectionAndDuplicateTracingDoNotChangeQuality",
+          "state": "Passed",
+          "durationSeconds": 0.0012089,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SubdividingStraightSegmentsDoesNotRewardInputEventDensity",
+          "fullName": "PaperDefense.Tests.DrawingAssessmentTests.SubdividingStraightSegmentsDoesNotRewardInputEventDensity",
+          "state": "Passed",
+          "durationSeconds": 0.0008819,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DrawingDoesNotChangeHealthDamagePriceRangeLoadOrConstructionTime",
+          "fullName": "PaperDefense.Tests.DrawingCombatQualityTests.DrawingDoesNotChangeHealthDamagePriceRangeLoadOrConstructionTime",
+          "state": "Passed",
+          "durationSeconds": 0.0010697,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "QualityChangesOnlyFinalTempoAndMatchesDiscreteFixedSteps(0,0.85f,60,96)",
+          "fullName": "PaperDefense.Tests.DrawingCombatQualityTests.QualityChangesOnlyFinalTempoAndMatchesDiscreteFixedSteps(0,0.85f,60,96)",
+          "state": "Passed",
+          "durationSeconds": 0.0081251,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "QualityChangesOnlyFinalTempoAndMatchesDiscreteFixedSteps(60,0.94f,65,106)",
+          "fullName": "PaperDefense.Tests.DrawingCombatQualityTests.QualityChangesOnlyFinalTempoAndMatchesDiscreteFixedSteps(60,0.94f,65,106)",
+          "state": "Passed",
+          "durationSeconds": 0.0068691,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "QualityChangesOnlyFinalTempoAndMatchesDiscreteFixedSteps(100,1,70,114)",
+          "fullName": "PaperDefense.Tests.DrawingCombatQualityTests.QualityChangesOnlyFinalTempoAndMatchesDiscreteFixedSteps(100,1,70,114)",
+          "state": "Passed",
+          "durationSeconds": 0.0072682,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "QualityIsAppliedAfterTheProductionLimitAndExactlyOnce",
+          "fullName": "PaperDefense.Tests.DrawingCombatQualityTests.QualityIsAppliedAfterTheProductionLimitAndExactlyOnce",
+          "state": "Passed",
+          "durationSeconds": 0.0001842,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "QualityTrialUsesTheSameDrawingAssemblyBudgetAndSeedForBothLanes",
+          "fullName": "PaperDefense.Tests.DrawingCombatQualityTests.QualityTrialUsesTheSameDrawingAssemblyBudgetAndSeedForBothLanes",
+          "state": "Passed",
+          "durationSeconds": 0.0599862,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ChassisAndModuleReplacementClearOnlyTheirChangedParts",
+          "fullName": "PaperDefense.Tests.DrawingTests.ChassisAndModuleReplacementClearOnlyTheirChangedParts",
+          "state": "Passed",
+          "durationSeconds": 0.0014395,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DrawingCannotCreateAdditionalMountsOrChangeConstructionLoad",
+          "fullName": "PaperDefense.Tests.DrawingTests.DrawingCannotCreateAdditionalMountsOrChangeConstructionLoad",
+          "state": "Passed",
+          "durationSeconds": 0.0005581,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EditorUndoRedoAndClearPreserveOtherPartsAndOldSnapshots",
+          "fullName": "PaperDefense.Tests.DrawingTests.EditorUndoRedoAndClearPreserveOtherPartsAndOldSnapshots",
+          "state": "Passed",
+          "durationSeconds": 0.0007029,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EraserIntersectsSegmentsAndRemovesTouchedStrokesAsOneUndoCommand",
+          "fullName": "PaperDefense.Tests.DrawingTests.EraserIntersectsSegmentsAndRemovesTouchedStrokesAsOneUndoCommand",
+          "state": "Passed",
+          "durationSeconds": 0.0006163,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FailedLimitCommandLeavesTheDraftAndUndoHistoryUntouched",
+          "fullName": "PaperDefense.Tests.DrawingTests.FailedLimitCommandLeavesTheDraftAndUndoHistoryUntouched",
+          "state": "Passed",
+          "durationSeconds": 0.0008567,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "IdenticalGunsHaveDistinctBindingsAndForwardFacingLocalContours",
+          "fullName": "PaperDefense.Tests.DrawingTests.IdenticalGunsHaveDistinctBindingsAndForwardFacingLocalContours",
+          "state": "Passed",
+          "durationSeconds": 0.0010608,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InvalidOrOutOfBoundsPointsAreRejectedRatherThanClamped(float.NaN,0)",
+          "fullName": "PaperDefense.Tests.DrawingTests.InvalidOrOutOfBoundsPointsAreRejectedRatherThanClamped(float.NaN,0)",
+          "state": "Passed",
+          "durationSeconds": 0.0002064,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InvalidOrOutOfBoundsPointsAreRejectedRatherThanClamped(0,float.PositiveInfinity)",
+          "fullName": "PaperDefense.Tests.DrawingTests.InvalidOrOutOfBoundsPointsAreRejectedRatherThanClamped(0,float.PositiveInfinity)",
+          "state": "Passed",
+          "durationSeconds": 0.0000325,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InvalidOrOutOfBoundsPointsAreRejectedRatherThanClamped(float.NegativeInfinity,0)",
+          "fullName": "PaperDefense.Tests.DrawingTests.InvalidOrOutOfBoundsPointsAreRejectedRatherThanClamped(float.NegativeInfinity,0)",
+          "state": "Passed",
+          "durationSeconds": 0.0000252,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InvalidOrOutOfBoundsPointsAreRejectedRatherThanClamped(1.0001f,0)",
+          "fullName": "PaperDefense.Tests.DrawingTests.InvalidOrOutOfBoundsPointsAreRejectedRatherThanClamped(1.0001f,0)",
+          "state": "Passed",
+          "durationSeconds": 0.0000223,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InvalidOrOutOfBoundsPointsAreRejectedRatherThanClamped(0,-1.0001f)",
+          "fullName": "PaperDefense.Tests.DrawingTests.InvalidOrOutOfBoundsPointsAreRejectedRatherThanClamped(0,-1.0001f)",
+          "state": "Passed",
+          "durationSeconds": 0.0000227,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LimitsApplyToTheWholePageAcrossAllParts",
+          "fullName": "PaperDefense.Tests.DrawingTests.LimitsApplyToTheWholePageAcrossAllParts",
+          "state": "Passed",
+          "durationSeconds": 0.0010782,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RepeatedIdenticalPointsWithoutVisibleSegmentsRemainAnEmptyDraft",
+          "fullName": "PaperDefense.Tests.DrawingTests.RepeatedIdenticalPointsWithoutVisibleSegmentsRemainAnEmptyDraft",
+          "state": "Passed",
+          "durationSeconds": 0.0002429,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ReplacingOneWeaponClearsOnlyThatMountAndCanBeUndone",
+          "fullName": "PaperDefense.Tests.DrawingTests.ReplacingOneWeaponClearsOnlyThatMountAndCanBeUndone",
+          "state": "Passed",
+          "durationSeconds": 0.0003484,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SnapshotOwnsEveryNestedCollectionAndDeepCopyKeepsTheAuthoredCoordinates",
+          "fullName": "PaperDefense.Tests.DrawingTests.SnapshotOwnsEveryNestedCollectionAndDeepCopyKeepsTheAuthoredCoordinates",
+          "state": "Passed",
+          "durationSeconds": 0.0006858,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SnapshotUsesCanonicalPartOrderAndStableQuantizedCoordinates",
+          "fullName": "PaperDefense.Tests.DrawingTests.SnapshotUsesCanonicalPartOrderAndStableQuantizedCoordinates",
+          "state": "Passed",
+          "durationSeconds": 0.0002156,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UnknownAndDuplicatePartsAndIncompleteStrokesAreRejected",
+          "fullName": "PaperDefense.Tests.DrawingTests.UnknownAndDuplicatePartsAndIncompleteStrokesAreRejected",
+          "state": "Passed",
+          "durationSeconds": 0.0004054,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BalanceSnapshotOwnsItsEffectRulesAndLaterMutationCannotChangeMovement",
+          "fullName": "PaperDefense.Tests.EffectsRulesTests.BalanceSnapshotOwnsItsEffectRulesAndLaterMutationCannotChangeMovement",
+          "state": "Passed",
+          "durationSeconds": 0.0001829,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredBlueCapsMovementForOnlyItsConfiguredDuration",
+          "fullName": "PaperDefense.Tests.EffectsRulesTests.ConfiguredBlueCapsMovementForOnlyItsConfiguredDuration",
+          "state": "Passed",
+          "durationSeconds": 0.0001955,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredDrawingHealthAndDefenseAffectTheActualHit",
+          "fullName": "PaperDefense.Tests.EffectsRulesTests.ConfiguredDrawingHealthAndDefenseAffectTheActualHit",
+          "state": "Passed",
+          "durationSeconds": 0.0001476,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredGreenReducesDefenseOnItsOwnHitAndExpires",
+          "fullName": "PaperDefense.Tests.EffectsRulesTests.ConfiguredGreenReducesDefenseOnItsOwnHitAndExpires",
+          "state": "Passed",
+          "durationSeconds": 0.0001244,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredRedTicksHaveAnExplicitDefenseRule(True,91.0f)",
+          "fullName": "PaperDefense.Tests.EffectsRulesTests.ConfiguredRedTicksHaveAnExplicitDefenseRule(True,91.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0002305,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredRedTicksHaveAnExplicitDefenseRule(False,95.5f)",
+          "fullName": "PaperDefense.Tests.EffectsRulesTests.ConfiguredRedTicksHaveAnExplicitDefenseRule(False,95.5f)",
+          "state": "Passed",
+          "durationSeconds": 0.0000298,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EffectSnapshotRejectsANonFiniteTickInterval",
+          "fullName": "PaperDefense.Tests.EffectsRulesTests.EffectSnapshotRejectsANonFiniteTickInterval",
+          "state": "Passed",
+          "durationSeconds": 0.0001271,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ProductionWeaponUsesTheSameConfiguredGreenAndDefenseRules",
+          "fullName": "PaperDefense.Tests.EffectsRulesTests.ProductionWeaponUsesTheSameConfiguredGreenAndDefenseRules",
+          "state": "Passed",
+          "durationSeconds": 0.0002812,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TrialUsesConfiguredBlueMovementFromTheProvidedBalance",
+          "fullName": "PaperDefense.Tests.EffectsRulesTests.TrialUsesConfiguredBlueMovementFromTheProvidedBalance",
+          "state": "Passed",
+          "durationSeconds": 0.02791,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TrialUsesConfiguredDefenseWithoutReplacingItsScenarioHealth",
+          "fullName": "PaperDefense.Tests.EffectsRulesTests.TrialUsesConfiguredDefenseWithoutReplacingItsScenarioHealth",
+          "state": "Passed",
+          "durationSeconds": 0.0277095,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlotsExpireAndPauseFreezesTheirLifetime",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.BlotsExpireAndPauseFreezesTheirLifetime",
+          "state": "Passed",
+          "durationSeconds": 0.0008403,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlotterPaysOnceClearsRadiusAndHonorsCooldown",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.BlotterPaysOnceClearsRadiusAndHonorsCooldown",
+          "state": "Passed",
+          "durationSeconds": 0.0032437,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CorpseBlotIsConsumedOnceAndBuffedCorpseLeavesOrdinaryBlot",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.CorpseBlotIsConsumedOnceAndBuffedCorpseLeavesOrdinaryBlot",
+          "state": "Passed",
+          "durationSeconds": 0.000599,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DrawingTierChangesHealthAndDefenseWithoutChangingRole(Sketch,1.0f,0.0f)",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.DrawingTierChangesHealthAndDefenseWithoutChangingRole(Sketch,1.0f,0.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0004413,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DrawingTierChangesHealthAndDefenseWithoutChangingRole(Outlined,1.3f,0.08f)",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.DrawingTierChangesHealthAndDefenseWithoutChangingRole(Outlined,1.3f,0.08f)",
+          "state": "Passed",
+          "durationSeconds": 0.0000446,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DrawingTierChangesHealthAndDefenseWithoutChangingRole(Hatched,1.7f,0.15f)",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.DrawingTierChangesHealthAndDefenseWithoutChangingRole(Hatched,1.7f,0.15f)",
+          "state": "Passed",
+          "durationSeconds": 0.0000313,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "GlobKeepsItsWellTargetAfterTheShooterDies",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.GlobKeepsItsWellTargetAfterTheShooterDies",
+          "state": "Passed",
+          "durationSeconds": 0.0016186,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "GreenCountersCombinedDefenseAndBlueCapsBlotSpeed",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.GreenCountersCombinedDefenseAndBlueCapsBlotSpeed",
+          "state": "Passed",
+          "durationSeconds": 0.0002724,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MultipleCorpsesMergeAndOnlyFirstEnemyRefreshesANonStackingBuff",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.MultipleCorpsesMergeAndOnlyFirstEnemyRefreshesANonStackingBuff",
+          "state": "Passed",
+          "durationSeconds": 0.0005789,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RedFatalDamageClampsHealthAndNeverAppliesASecondChain",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.RedFatalDamageClampsHealthAndNeverAppliesASecondChain",
+          "state": "Passed",
+          "durationSeconds": 0.0001466,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RedRefreshesOneBoundedDotAndRecordsActualSourceDamage",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.RedRefreshesOneBoundedDotAndRecordsActualSourceDamage",
+          "state": "Passed",
+          "durationSeconds": 0.0001717,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SpawnedDrawingTierScalesRoleHealthWithoutChangingItsMovement(Outlined,1.3f)",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.SpawnedDrawingTierScalesRoleHealthWithoutChangingItsMovement(Outlined,1.3f)",
+          "state": "Passed",
+          "durationSeconds": 0.0005933,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SpawnedDrawingTierScalesRoleHealthWithoutChangingItsMovement(Hatched,1.7f)",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.SpawnedDrawingTierScalesRoleHealthWithoutChangingItsMovement(Hatched,1.7f)",
+          "state": "Passed",
+          "durationSeconds": 0.0002729,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SpitterTargetsOuterWallAtRangeAndDoesNotHitBaseWhenThatWallVanishes",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.SpitterTargetsOuterWallAtRangeAndDoesNotHitBaseWhenThatWallVanishes",
+          "state": "Passed",
+          "durationSeconds": 0.0054181,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SpitterTelegraphsThenFirstCompletedBlockerAbsorbsGlob",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.SpitterTelegraphsThenFirstCompletedBlockerAbsorbsGlob",
+          "state": "Passed",
+          "durationSeconds": 0.0009348,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UnfinishedWallDoesNotAbsorbGlobAndDeadSpitterShellPersists",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.UnfinishedWallDoesNotAbsorbGlobAndDeadSpitterShellPersists",
+          "state": "Passed",
+          "durationSeconds": 0.0007371,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WallCompletedDuringFlightInterceptsTheApproachingGlob",
+          "fullName": "PaperDefense.Tests.EnemyMechanicsTests.WallCompletedDuringFlightInterceptsTheApproachingGlob",
+          "state": "Passed",
+          "durationSeconds": 0.0011173,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ACustomFanDrawingKeepsItsActualCrookedStrokeInsteadOfTheReference",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.ACustomFanDrawingKeepsItsActualCrookedStrokeInsteadOfTheReference",
+          "state": "Passed",
+          "durationSeconds": 0.0008076,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "APreviouslyAssessedGunDrawingIsNotACompleteStaplerDrawing",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.APreviouslyAssessedGunDrawingIsNotACompleteStaplerDrawing",
+          "state": "Passed",
+          "durationSeconds": 0.0006438,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "APreviouslyAssessedPiercerDrawingIsNotACompleteRicochetDrawing",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.APreviouslyAssessedPiercerDrawingIsNotACompleteRicochetDrawing",
+          "state": "Passed",
+          "durationSeconds": 0.0008277,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlotterHasItsOwnWideAbsorbentHeadAndACompleteDrawingReachesFullQuality",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.BlotterHasItsOwnWideAbsorbentHeadAndACompleteDrawingReachesFullQuality",
+          "state": "Passed",
+          "durationSeconds": 0.0008964,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CustomBlotterStrokesArePreservedWithoutInsertingTheReference",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.CustomBlotterStrokesArePreservedWithoutInsertingTheReference",
+          "state": "Passed",
+          "durationSeconds": 0.0003744,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FanAndGunReferencesKeepSeparateLocalContoursAndEstablishedMountPivots",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.FanAndGunReferencesKeepSeparateLocalContoursAndEstablishedMountPivots",
+          "state": "Passed",
+          "durationSeconds": 0.0188736,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FanAndRicochetUseDistinctLocalContoursAndEstablishedMountPivots",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.FanAndRicochetUseDistinctLocalContoursAndEstablishedMountPivots",
+          "state": "Passed",
+          "durationSeconds": 0.0044324,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FanHasItsOwnWideForwardContourAndACompleteDrawingReachesFullQuality",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.FanHasItsOwnWideForwardContourAndACompleteDrawingReachesFullQuality",
+          "state": "Passed",
+          "durationSeconds": 0.0021008,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "GunAndBlotterHaveIndependentLocalReferencesAndEstablishedMountPivots",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.GunAndBlotterHaveIndependentLocalReferencesAndEstablishedMountPivots",
+          "state": "Passed",
+          "durationSeconds": 0.0038975,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MortarAndStaplerKeepTheirSeparateReferencesAndEstablishedMountPivots",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.MortarAndStaplerKeepTheirSeparateReferencesAndEstablishedMountPivots",
+          "state": "Passed",
+          "durationSeconds": 0.004521,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ReplacingAFanWithRicochetClearsOnlyTheChangedMountAndUndoRestoresItsDrawing",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.ReplacingAFanWithRicochetClearsOnlyTheChangedMountAndUndoRestoresItsDrawing",
+          "state": "Passed",
+          "durationSeconds": 0.0028368,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ReplacingOnlyOneGunWithAFanClearsOnlyThatMountAndCanBeUndone",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.ReplacingOnlyOneGunWithAFanClearsOnlyThatMountAndCanBeUndone",
+          "state": "Passed",
+          "durationSeconds": 0.0031597,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ReplacingOnlyTheSecondGunWithStaplerRetainsTheFirstMountAndCanBeUndone",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.ReplacingOnlyTheSecondGunWithStaplerRetainsTheFirstMountAndCanBeUndone",
+          "state": "Passed",
+          "durationSeconds": 0.0028422,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ReplacingTheSecondGunWithBlotterClearsOnlyItsDrawingAndUndoRestoresIt",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.ReplacingTheSecondGunWithBlotterClearsOnlyItsDrawingAndUndoRestoresIt",
+          "state": "Passed",
+          "durationSeconds": 0.0004975,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RicochetHasADistinctForwardZigzagAndACompleteDrawingReachesFullQuality",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.RicochetHasADistinctForwardZigzagAndACompleteDrawingReachesFullQuality",
+          "state": "Passed",
+          "durationSeconds": 0.0025533,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "StaplerHasADistinctForwardStapleAndACompleteDrawingReachesFullQuality",
+          "fullName": "PaperDefense.Tests.ExtendedDrawingCatalogTests.StaplerHasADistinctForwardStapleAndACompleteDrawingReachesFullQuality",
+          "state": "Passed",
+          "durationSeconds": 0.0025596,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CurrentProfilesWriteVersionThreeAndHistoricalVersionTwoCannotClaimNewKinds",
+          "fullName": "PaperDefense.Tests.FanCatalogTests.CurrentProfilesWriteVersionThreeAndHistoricalVersionTwoCannotClaimNewKinds",
+          "state": "Passed",
+          "durationSeconds": 0.0005766,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FanFitsTheTwoMountCatalogWithItsConfiguredLoadAndPermanentUnlock",
+          "fullName": "PaperDefense.Tests.FanCatalogTests.FanFitsTheTwoMountCatalogWithItsConfiguredLoadAndPermanentUnlock",
+          "state": "Passed",
+          "durationSeconds": 0.0004705,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FanRequiresItsOwnRightAndChargesTheConfiguredUnlockOnce",
+          "fullName": "PaperDefense.Tests.FanCatalogTests.FanRequiresItsOwnRightAndChargesTheConfiguredUnlockOnce",
+          "state": "Passed",
+          "durationSeconds": 0.0006334,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PartDescriptionsRemainImmutableAndSurviveConfiguredCostViews",
+          "fullName": "PaperDefense.Tests.FanCatalogTests.PartDescriptionsRemainImmutableAndSurviveConfiguredCostViews",
+          "state": "Passed",
+          "durationSeconds": 0.0009961,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ReadViewCopiesConeGeometryAndTargetCapIntoReadonlyValues",
+          "fullName": "PaperDefense.Tests.FanCatalogTests.ReadViewCopiesConeGeometryAndTargetCapIntoReadonlyValues",
+          "state": "Passed",
+          "durationSeconds": 0.0036993,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SnapshotOwnsTheConfiguredConeGeometryAndPerActionTargetLimit",
+          "fullName": "PaperDefense.Tests.FanCatalogTests.SnapshotOwnsTheConfiguredConeGeometryAndPerActionTargetLimit",
+          "state": "Passed",
+          "durationSeconds": 0.0001688,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WaveReadViewExposesHistoricalFallbackManualRewardAndTargetPattern",
+          "fullName": "PaperDefense.Tests.FanCatalogTests.WaveReadViewExposesHistoricalFallbackManualRewardAndTargetPattern",
+          "state": "Passed",
+          "durationSeconds": 0.0066995,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FanColorBudgetLimitsEffectsWhileAllConeHitsUseNormalDefenseAndDamage",
+          "fullName": "PaperDefense.Tests.FanWeaponTests.FanColorBudgetLimitsEffectsWhileAllConeHitsUseNormalDefenseAndDamage",
+          "state": "Passed",
+          "durationSeconds": 0.0021465,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FanHitsOnlyItsFiniteConeIncludingTheRangeAndAngleBoundaries",
+          "fullName": "PaperDefense.Tests.FanWeaponTests.FanHitsOnlyItsFiniteConeIncludingTheRangeAndAngleBoundaries",
+          "state": "Passed",
+          "durationSeconds": 0.0008317,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FanTargetLimitUsesDistanceThenIdRegardlessOfEnemyListOrder",
+          "fullName": "PaperDefense.Tests.FanWeaponTests.FanTargetLimitUsesDistanceThenIdRegardlessOfEnemyListOrder",
+          "state": "Passed",
+          "durationSeconds": 0.0006357,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "GunAndFanKeepIndependentTargetsAndAttackGeometryOnOneFoundation",
+          "fullName": "PaperDefense.Tests.FanWeaponTests.GunAndFanKeepIndependentTargetsAndAttackGeometryOnOneFoundation",
+          "state": "Passed",
+          "durationSeconds": 0.0008659,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NewWeaponStatisticsIncludeDamageLaunchesIdleAndMaterialBuildCounts",
+          "fullName": "PaperDefense.Tests.FanWeaponTests.NewWeaponStatisticsIncludeDamageLaunchesIdleAndMaterialBuildCounts",
+          "state": "Passed",
+          "durationSeconds": 0.0005076,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RealTrialUsesConfiguredFanAngleAndTargetLimitAtTheSameBudget",
+          "fullName": "PaperDefense.Tests.FanWeaponTests.RealTrialUsesConfiguredFanAngleAndTargetLimitAtTheSameBudget",
+          "state": "Passed",
+          "durationSeconds": 0.0484452,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ARewardClaimIsConsumedOnceAndTransfersConserveTheOriginalBudget",
+          "fullName": "PaperDefense.Tests.FiniteEconomyTests.ARewardClaimIsConsumedOnceAndTransfersConserveTheOriginalBudget",
+          "state": "Passed",
+          "durationSeconds": 0.0006322,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DamagedUpgradeAndEraseCannotReturnMoreThanThePaidInkOrRepairForFree",
+          "fullName": "PaperDefense.Tests.FiniteEconomyTests.DamagedUpgradeAndEraseCannotReturnMoreThanThePaidInkOrRepairForFree",
+          "state": "Passed",
+          "durationSeconds": 0.0023899,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EachCompletedWavePaysItsOwnGrantAndGoldExactlyOnce",
+          "fullName": "PaperDefense.Tests.FiniteEconomyTests.EachCompletedWavePaysItsOwnGrantAndGoldExactlyOnce",
+          "state": "Passed",
+          "durationSeconds": 0.0019121,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "OfficialSpawnFreezesItsRewardBeforeDefinitionChangesAndPaysOnce",
+          "fullName": "PaperDefense.Tests.FiniteEconomyTests.OfficialSpawnFreezesItsRewardBeforeDefinitionChangesAndPaysOnce",
+          "state": "Passed",
+          "durationSeconds": 0.0006268,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "OneRemainingEnemyDoesNotGenerateIncome",
+          "fullName": "PaperDefense.Tests.FiniteEconomyTests.OneRemainingEnemyDoesNotGenerateIncome",
+          "state": "Passed",
+          "durationSeconds": 0.0804836,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "OnlyHistoricalFixturesCanReceiveUnassignedEnemyRewards(False,3)",
+          "fullName": "PaperDefense.Tests.FiniteEconomyTests.OnlyHistoricalFixturesCanReceiveUnassignedEnemyRewards(False,3)",
+          "state": "Passed",
+          "durationSeconds": 0.0009207,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "OnlyHistoricalFixturesCanReceiveUnassignedEnemyRewards(True,0)",
+          "fullName": "PaperDefense.Tests.FiniteEconomyTests.OnlyHistoricalFixturesCanReceiveUnassignedEnemyRewards(True,0)",
+          "state": "Passed",
+          "durationSeconds": 0.0004548,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SalvageChangesFiniteWaveIncomeInsteadOfCreatingTimeIncome",
+          "fullName": "PaperDefense.Tests.FiniteEconomyTests.SalvageChangesFiniteWaveIncomeInsteadOfCreatingTimeIncome",
+          "state": "Passed",
+          "durationSeconds": 0.0007693,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WaitingDuringPlanningDoesNotGenerateInkOrGold",
+          "fullName": "PaperDefense.Tests.FiniteEconomyTests.WaitingDuringPlanningDoesNotGenerateInkOrGold",
+          "state": "Passed",
+          "durationSeconds": 0.0012588,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WaitingForAnUpgradeAfterItsCountdownDoesNotGenerateIncome",
+          "fullName": "PaperDefense.Tests.FiniteEconomyTests.WaitingForAnUpgradeAfterItsCountdownDoesNotGenerateIncome",
+          "state": "Passed",
+          "durationSeconds": 0.0014437,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlueprintAllowsEntryAndWaitsForOccupantBeforeBecomingWall",
+          "fullName": "PaperDefense.Tests.GameSessionTests.BlueprintAllowsEntryAndWaitsForOccupantBeforeBecomingWall",
+          "state": "Passed",
+          "durationSeconds": 0.0014516,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ClosedRingIsLegalAndEnemiesBreachBeforeEntering",
+          "fullName": "PaperDefense.Tests.GameSessionTests.ClosedRingIsLegalAndEnemiesBreachBeforeEntering",
+          "state": "Passed",
+          "durationSeconds": 0.0017006,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CloserWaitingEnemyCannotReplaceCoolingFrontageOwner",
+          "fullName": "PaperDefense.Tests.GameSessionTests.CloserWaitingEnemyCannotReplaceCoolingFrontageOwner",
+          "state": "Passed",
+          "durationSeconds": 0.0013954,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CompatibleSegmentsAreSkippedAndAnExistingStrokeIsAFreeNoOp(Wall)",
+          "fullName": "PaperDefense.Tests.GameSessionTests.CompatibleSegmentsAreSkippedAndAnExistingStrokeIsAFreeNoOp(Wall)",
+          "state": "Passed",
+          "durationSeconds": 0.0009078,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CompatibleSegmentsAreSkippedAndAnExistingStrokeIsAFreeNoOp(Spikes)",
+          "fullName": "PaperDefense.Tests.GameSessionTests.CompatibleSegmentsAreSkippedAndAnExistingStrokeIsAFreeNoOp(Spikes)",
+          "state": "Passed",
+          "durationSeconds": 0.0005094,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CompletingBlueprintInvalidatesEnemyDestination",
+          "fullName": "PaperDefense.Tests.GameSessionTests.CompletingBlueprintInvalidatesEnemyDestination",
+          "state": "Passed",
+          "durationSeconds": 0.0012612,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CrowdedBreachHasOnlyThreeFrontlineAttackersDuringCooldown",
+          "fullName": "PaperDefense.Tests.GameSessionTests.CrowdedBreachHasOnlyThreeFrontlineAttackersDuringCooldown",
+          "state": "Passed",
+          "durationSeconds": 0.0016592,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DamagedEraseRefundsOnlyRemainingMaterial",
+          "fullName": "PaperDefense.Tests.GameSessionTests.DamagedEraseRefundsOnlyRemainingMaterial",
+          "state": "Passed",
+          "durationSeconds": 0.0005212,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DestroyedDestinationIsReleasedWithoutWaitingForAnotherAttack",
+          "fullName": "PaperDefense.Tests.GameSessionTests.DestroyedDestinationIsReleasedWithoutWaitingForAnotherAttack",
+          "state": "Passed",
+          "durationSeconds": 0.0010136,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DiscountedUpgradeRefundUsesOnlyActualInvestment",
+          "fullName": "PaperDefense.Tests.GameSessionTests.DiscountedUpgradeRefundUsesOnlyActualInvestment",
+          "state": "Passed",
+          "durationSeconds": 0.0006816,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EarlyLaunchGrantIsBoundedAndCannotBeClaimedTwice",
+          "fullName": "PaperDefense.Tests.GameSessionTests.EarlyLaunchGrantIsBoundedAndCannotBeClaimedTwice",
+          "state": "Passed",
+          "durationSeconds": 0.0005251,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EnemiesRouteAroundIsolatedWallsWithoutDamagingThem",
+          "fullName": "PaperDefense.Tests.GameSessionTests.EnemiesRouteAroundIsolatedWallsWithoutDamagingThem",
+          "state": "Passed",
+          "durationSeconds": 0.0012427,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ExecutionRechecksOccupancyAfterAnEarlierValidQuote",
+          "fullName": "PaperDefense.Tests.GameSessionTests.ExecutionRechecksOccupancyAfterAnEarlierValidQuote",
+          "state": "Passed",
+          "durationSeconds": 0.0007133,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "GnawersHaveStrongerBreachDamage(Doodle,90.0f)",
+          "fullName": "PaperDefense.Tests.GameSessionTests.GnawersHaveStrongerBreachDamage(Doodle,90.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0011456,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "GnawersHaveStrongerBreachDamage(Gnawer,85.0f)",
+          "fullName": "PaperDefense.Tests.GameSessionTests.GnawersHaveStrongerBreachDamage(Gnawer,85.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0004438,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HealthBandsCoalesceNavigationRebuildsWithinOneStep",
+          "fullName": "PaperDefense.Tests.GameSessionTests.HealthBandsCoalesceNavigationRebuildsWithinOneStep",
+          "state": "Passed",
+          "durationSeconds": 0.0008505,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "IncompatibleTierRejectsWholeStroke",
+          "fullName": "PaperDefense.Tests.GameSessionTests.IncompatibleTierRejectsWholeStroke",
+          "state": "Passed",
+          "durationSeconds": 0.0006663,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InsufficientInkDoesNotPartiallyBuildStroke",
+          "fullName": "PaperDefense.Tests.GameSessionTests.InsufficientInkDoesNotPartiallyBuildStroke",
+          "state": "Passed",
+          "durationSeconds": 0.0005275,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InvalidCellRejectsEntireStrokeWithoutSpendingInk",
+          "fullName": "PaperDefense.Tests.GameSessionTests.InvalidCellRejectsEntireStrokeWithoutSpendingInk",
+          "state": "Passed",
+          "durationSeconds": 0.000415,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LastKillCompletesWaveAndFinalWaveWins",
+          "fullName": "PaperDefense.Tests.GameSessionTests.LastKillCompletesWaveAndFinalWaveWins",
+          "state": "Passed",
+          "durationSeconds": 0.0004765,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MaterialUpgradeChargesDifferenceAndKeepsDamageFraction",
+          "fullName": "PaperDefense.Tests.GameSessionTests.MaterialUpgradeChargesDifferenceAndKeepsDamageFraction",
+          "state": "Passed",
+          "durationSeconds": 0.0005741,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NearestContendersTakeFrontageAndDeathReleasesTheirPlace",
+          "fullName": "PaperDefense.Tests.GameSessionTests.NearestContendersTakeFrontageAndDeathReleasesTheirPlace",
+          "state": "Passed",
+          "durationSeconds": 0.0008511,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NewlyDrawnWallRebuildsExistingEnemyRoute",
+          "fullName": "PaperDefense.Tests.GameSessionTests.NewlyDrawnWallRebuildsExistingEnemyRoute",
+          "state": "Passed",
+          "durationSeconds": 0.0007803,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "QueueOccupancyStaysBoundedAcrossSpawnAndClosedWall",
+          "fullName": "PaperDefense.Tests.GameSessionTests.QueueOccupancyStaysBoundedAcrossSpawnAndClosedWall",
+          "state": "Passed",
+          "durationSeconds": 0.0126562,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RepeatedCellsAreChargedAndBuiltOnce",
+          "fullName": "PaperDefense.Tests.GameSessionTests.RepeatedCellsAreChargedAndBuiltOnce",
+          "state": "Passed",
+          "durationSeconds": 0.0005914,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SameSeedAndCommandsProduceIdenticalSimulation",
+          "fullName": "PaperDefense.Tests.GameSessionTests.SameSeedAndCommandsProduceIdenticalSimulation",
+          "state": "Passed",
+          "durationSeconds": 0.0044498,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SpawnBorderAndEnemyOccupiedCellsCannotBeBuiltUpon",
+          "fullName": "PaperDefense.Tests.GameSessionTests.SpawnBorderAndEnemyOccupiedCellsCannotBeBuiltUpon",
+          "state": "Passed",
+          "durationSeconds": 0.000717,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SpikesDamagePassingEnemiesWithoutBlockingFlow",
+          "fullName": "PaperDefense.Tests.GameSessionTests.SpikesDamagePassingEnemiesWithoutBlockingFlow",
+          "state": "Passed",
+          "durationSeconds": 0.0008769,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UpgradeChoiceAppearsAfterSecondWaveAndIsConsumedOnce",
+          "fullName": "PaperDefense.Tests.GameSessionTests.UpgradeChoiceAppearsAfterSecondWaveAndIsConsumedOnce",
+          "state": "Passed",
+          "durationSeconds": 0.0011397,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WeaponRolesDamageTheExpectedNumberOfTargets(Gun,1)",
+          "fullName": "PaperDefense.Tests.GameSessionTests.WeaponRolesDamageTheExpectedNumberOfTargets(Gun,1)",
+          "state": "Passed",
+          "durationSeconds": 0.001496,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WeaponRolesDamageTheExpectedNumberOfTargets(Piercer,3)",
+          "fullName": "PaperDefense.Tests.GameSessionTests.WeaponRolesDamageTheExpectedNumberOfTargets(Piercer,3)",
+          "state": "Passed",
+          "durationSeconds": 0.0006095,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WeaponRolesDamageTheExpectedNumberOfTargets(Mortar,3)",
+          "fullName": "PaperDefense.Tests.GameSessionTests.WeaponRolesDamageTheExpectedNumberOfTargets(Mortar,3)",
+          "state": "Passed",
+          "durationSeconds": 0.0010826,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ZeroDeltaFreezesConstructionCountdownAndEconomy",
+          "fullName": "PaperDefense.Tests.GameSessionTests.ZeroDeltaFreezesConstructionCountdownAndEconomy",
+          "state": "Passed",
+          "durationSeconds": 0.0008821,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CoolingMountTracksWithoutChangingDamageOrCooldown",
+          "fullName": "PaperDefense.Tests.IndependentMountAimTests.CoolingMountTracksWithoutChangingDamageOrCooldown",
+          "state": "Passed",
+          "durationSeconds": 0.0011176,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EachMountRecordsTheTargetItActuallySelected",
+          "fullName": "PaperDefense.Tests.IndependentMountAimTests.EachMountRecordsTheTargetItActuallySelected",
+          "state": "Passed",
+          "durationSeconds": 0.001036,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MissingTargetClearsOnlyItsTrackingIdAndKeepsLastOrientation",
+          "fullName": "PaperDefense.Tests.IndependentMountAimTests.MissingTargetClearsOnlyItsTrackingIdAndKeepsLastOrientation",
+          "state": "Passed",
+          "durationSeconds": 0.0006604,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ReadSnapshotAndTrialRecordingPreserveBothDirections",
+          "fullName": "PaperDefense.Tests.IndependentMountAimTests.ReadSnapshotAndTrialRecordingPreserveBothDirections",
+          "state": "Passed",
+          "durationSeconds": 0.000444,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ActivationDuringAssaultDoesNotEarnPartialWave",
+          "fullName": "PaperDefense.Tests.InkLoopTests.ActivationDuringAssaultDoesNotEarnPartialWave",
+          "state": "Passed",
+          "durationSeconds": 0.0084321,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlueprintStrokeIsAtomicAndChargesActualAssemblyOncePerCell",
+          "fullName": "PaperDefense.Tests.InkLoopTests.BlueprintStrokeIsAtomicAndChargesActualAssemblyOncePerCell",
+          "state": "Passed",
+          "durationSeconds": 0.0036674,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ColorCartridgeCostDependsOnAssemblyAndNotDrawingMaterial",
+          "fullName": "PaperDefense.Tests.InkLoopTests.ColorCartridgeCostDependsOnAssemblyAndNotDrawingMaterial",
+          "state": "Passed",
+          "durationSeconds": 0.0030814,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ColorsExpireAndRedDealsDamageWhenEnemyBlotsAreDisabled",
+          "fullName": "PaperDefense.Tests.InkLoopTests.ColorsExpireAndRedDealsDamageWhenEnemyBlotsAreDisabled",
+          "state": "Passed",
+          "durationSeconds": 0.004584,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredWellThreatShareControlsObjectives(0.0f,-1)",
+          "fullName": "PaperDefense.Tests.InkLoopTests.ConfiguredWellThreatShareControlsObjectives(0.0f,-1)",
+          "state": "Passed",
+          "durationSeconds": 0.0081285,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredWellThreatShareControlsObjectives(1.0f,0)",
+          "fullName": "PaperDefense.Tests.InkLoopTests.ConfiguredWellThreatShareControlsObjectives(1.0f,0)",
+          "state": "Passed",
+          "durationSeconds": 0.0086237,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FailedColorBuildDoesNotSpendOrdinaryInk",
+          "fullName": "PaperDefense.Tests.InkLoopTests.FailedColorBuildDoesNotSpendOrdinaryInk",
+          "state": "Passed",
+          "durationSeconds": 0.0056511,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ObjectiveCellsAreReservedAndGoldDoesNotAccrueWithTime",
+          "fullName": "PaperDefense.Tests.InkLoopTests.ObjectiveCellsAreReservedAndGoldDoesNotAccrueWithTime",
+          "state": "Passed",
+          "durationSeconds": 0.0041609,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PaintChargesOnceAndMaterialUpgradePreservesAssemblyAndColor",
+          "fullName": "PaperDefense.Tests.InkLoopTests.PaintChargesOnceAndMaterialUpgradePreservesAssemblyAndColor",
+          "state": "Passed",
+          "durationSeconds": 0.00854,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WellLossIsOptionalRecapturableAndDoesNotDisablePaint",
+          "fullName": "PaperDefense.Tests.InkLoopTests.WellLossIsOptionalRecapturableAndDoesNotDisablePaint",
+          "state": "Passed",
+          "durationSeconds": 0.0066643,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WellPaysOnlyForWholeProtectedWaveAndNeverForWaiting",
+          "fullName": "PaperDefense.Tests.InkLoopTests.WellPaysOnlyForWholeProtectedWaveAndNeverForWaiting",
+          "state": "Passed",
+          "durationSeconds": 0.0077516,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FlowUsesRemainingHealthAndIgnoresUnfinishedBlockers",
+          "fullName": "PaperDefense.Tests.NavigationTests.FlowUsesRemainingHealthAndIgnoresUnfinishedBlockers",
+          "state": "Passed",
+          "durationSeconds": 0.0004386,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SpatialQueriesMatchFullScanAtEdgesAndAfterDeaths",
+          "fullName": "PaperDefense.Tests.NavigationTests.SpatialQueriesMatchFullScanAtEdgesAndAfterDeaths",
+          "state": "Passed",
+          "durationSeconds": 0.038478,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredDeepInkChangesExistingAndNewHealthAndActualDamage",
+          "fullName": "PaperDefense.Tests.ProgressionRulesTests.ConfiguredDeepInkChangesExistingAndNewHealthAndActualDamage",
+          "state": "Passed",
+          "durationSeconds": 0.0032343,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredLegacyWaveGrowthChangesSpawnedEnemyHealth",
+          "fullName": "PaperDefense.Tests.ProgressionRulesTests.ConfiguredLegacyWaveGrowthChangesSpawnedEnemyHealth",
+          "state": "Passed",
+          "durationSeconds": 0.0017583,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredMaximumRefundStillUsesActualPaidCostAndHealth",
+          "fullName": "PaperDefense.Tests.ProgressionRulesTests.ConfiguredMaximumRefundStillUsesActualPaidCostAndHealth",
+          "state": "Passed",
+          "durationSeconds": 0.0014376,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredRapidFireChangesTheActualWeaponCooldown",
+          "fullName": "PaperDefense.Tests.ProgressionRulesTests.ConfiguredRapidFireChangesTheActualWeaponCooldown",
+          "state": "Passed",
+          "durationSeconds": 0.002646,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredSalvageChangesImmediateInkSupplyAndPaidRefund",
+          "fullName": "PaperDefense.Tests.ProgressionRulesTests.ConfiguredSalvageChangesImmediateInkSupplyAndPaidRefund",
+          "state": "Passed",
+          "durationSeconds": 0.0023728,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredSpeedJitterChangesRealMovementWithoutChangingTheEnemyRole",
+          "fullName": "PaperDefense.Tests.ProgressionRulesTests.ConfiguredSpeedJitterChangesRealMovementWithoutChangingTheEnemyRole",
+          "state": "Passed",
+          "durationSeconds": 0.0025168,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredUpgradeCadenceChangesOnlyTheRequestedWaveGate",
+          "fullName": "PaperDefense.Tests.ProgressionRulesTests.ConfiguredUpgradeCadenceChangesOnlyTheRequestedWaveGate",
+          "state": "Passed",
+          "durationSeconds": 0.002604,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "GnawerUsesItsConfiguredStructureDamageMultiplierInAnActualWallHit(False,27.0f)",
+          "fullName": "PaperDefense.Tests.ProgressionRulesTests.GnawerUsesItsConfiguredStructureDamageMultiplierInAnActualWallHit(False,27.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0024213,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "GnawerUsesItsConfiguredStructureDamageMultiplierInAnActualWallHit(True,54.0f)",
+          "fullName": "PaperDefense.Tests.ProgressionRulesTests.GnawerUsesItsConfiguredStructureDamageMultiplierInAnActualWallHit(True,54.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0023336,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ProgressionDefaultsAndOwnedSnapshotPreserveHistoricalRules",
+          "fullName": "PaperDefense.Tests.ProgressionRulesTests.ProgressionDefaultsAndOwnedSnapshotPreserveHistoricalRules",
+          "state": "Passed",
+          "durationSeconds": 0.0006508,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AssemblyChangesKeepUnchangedRailLinesAndRemoveOnlyDisabledRailLines",
+          "fullName": "PaperDefense.Tests.RailCatalogTests.AssemblyChangesKeepUnchangedRailLinesAndRemoveOnlyDisabledRailLines",
+          "state": "Passed",
+          "durationSeconds": 0.0076262,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredRailChangesEveryMountRangeAndActionIntervalOnly(Gun)",
+          "fullName": "PaperDefense.Tests.RailCatalogTests.ConfiguredRailChangesEveryMountRangeAndActionIntervalOnly(Gun)",
+          "state": "Passed",
+          "durationSeconds": 0.0003451,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredRailChangesEveryMountRangeAndActionIntervalOnly(Piercer)",
+          "fullName": "PaperDefense.Tests.RailCatalogTests.ConfiguredRailChangesEveryMountRangeAndActionIntervalOnly(Piercer)",
+          "state": "Passed",
+          "durationSeconds": 0.0001653,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredRailChangesEveryMountRangeAndActionIntervalOnly(Mortar)",
+          "fullName": "PaperDefense.Tests.RailCatalogTests.ConfiguredRailChangesEveryMountRangeAndActionIntervalOnly(Mortar)",
+          "state": "Passed",
+          "durationSeconds": 0.0001128,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredRailChangesEveryMountRangeAndActionIntervalOnly(Fan)",
+          "fullName": "PaperDefense.Tests.RailCatalogTests.ConfiguredRailChangesEveryMountRangeAndActionIntervalOnly(Fan)",
+          "state": "Passed",
+          "durationSeconds": 0.0001379,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredRailChangesEveryMountRangeAndActionIntervalOnly(Ricochet)",
+          "fullName": "PaperDefense.Tests.RailCatalogTests.ConfiguredRailChangesEveryMountRangeAndActionIntervalOnly(Ricochet)",
+          "state": "Passed",
+          "durationSeconds": 0.0000805,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredRailChangesEveryMountRangeAndActionIntervalOnly(Stapler)",
+          "fullName": "PaperDefense.Tests.RailCatalogTests.ConfiguredRailChangesEveryMountRangeAndActionIntervalOnly(Stapler)",
+          "state": "Passed",
+          "durationSeconds": 0.0000867,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredRailChangesEveryMountRangeAndActionIntervalOnly(Blotter)",
+          "fullName": "PaperDefense.Tests.RailCatalogTests.ConfiguredRailChangesEveryMountRangeAndActionIntervalOnly(Blotter)",
+          "state": "Passed",
+          "durationSeconds": 0.0000917,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RailConfiguredTuningIsOwnedBySnapshotsAndReadonlyRangeViews",
+          "fullName": "PaperDefense.Tests.RailCatalogTests.RailConfiguredTuningIsOwnedBySnapshotsAndReadonlyRangeViews",
+          "state": "Passed",
+          "durationSeconds": 0.0021207,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RailConsumesLoadGoldAndConstructionTimeWithoutChangingFeedOrDurability",
+          "fullName": "PaperDefense.Tests.RailCatalogTests.RailConsumesLoadGoldAndConstructionTimeWithoutChangingFeedOrDurability",
+          "state": "Passed",
+          "durationSeconds": 0.000449,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RailIntervalIsAppliedAfterTheHistoricalProductionFloorAndDrawingQuality",
+          "fullName": "PaperDefense.Tests.RailCatalogTests.RailIntervalIsAppliedAfterTheHistoricalProductionFloorAndDrawingQuality",
+          "state": "Passed",
+          "durationSeconds": 0.0001751,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RailNeedsASeparatePermanentRightAndChargesConfiguredGoldOnce",
+          "fullName": "PaperDefense.Tests.RailCatalogTests.RailNeedsASeparatePermanentRightAndChargesConfiguredGoldOnce",
+          "state": "Passed",
+          "durationSeconds": 0.0005483,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "VersionTwoStillRejectsRailRightsAndAssemblies(False)",
+          "fullName": "PaperDefense.Tests.RailCatalogTests.VersionTwoStillRejectsRailRightsAndAssemblies(False)",
+          "state": "Passed",
+          "durationSeconds": 0.000475,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "VersionTwoStillRejectsRailRightsAndAssemblies(True)",
+          "fullName": "PaperDefense.Tests.RailCatalogTests.VersionTwoStillRejectsRailRightsAndAssemblies(True)",
+          "state": "Passed",
+          "durationSeconds": 0.0006908,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CurrentSnapshotsAppendAnOwnedRailPartWithoutMovingDecorationOrExistingCoordinates",
+          "fullName": "PaperDefense.Tests.RailDrawingTests.CurrentSnapshotsAppendAnOwnedRailPartWithoutMovingDecorationOrExistingCoordinates",
+          "state": "Passed",
+          "durationSeconds": 0.0006747,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DormantRailStrokesStayLosslessButDoNotAffectQualityOrAcceptEditorInput",
+          "fullName": "PaperDefense.Tests.RailDrawingTests.DormantRailStrokesStayLosslessButDoNotAffectQualityOrAcceptEditorInput",
+          "state": "Passed",
+          "durationSeconds": 0.0022573,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InstallingRailChangesAssessmentIdentityWhileNamesReuseTheImmutableCachedResult",
+          "fullName": "PaperDefense.Tests.RailDrawingTests.InstallingRailChangesAssessmentIdentityWhileNamesReuseTheImmutableCachedResult",
+          "state": "Passed",
+          "durationSeconds": 0.0025591,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RailHasFiveFixedWeightAndMissingContourFeedbackInAssessmentVersionTwo",
+          "fullName": "PaperDefense.Tests.RailDrawingTests.RailHasFiveFixedWeightAndMissingContourFeedbackInAssessmentVersionTwo",
+          "state": "Passed",
+          "durationSeconds": 0.0032335,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RailPointsAndStrokesConsumeTheExistingWholePageLimits",
+          "fullName": "PaperDefense.Tests.RailDrawingTests.RailPointsAndStrokesConsumeTheExistingWholePageLimits",
+          "state": "Passed",
+          "durationSeconds": 0.0017021,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RailReferenceIsEnabledOnlyForItsModuleAndHasItsOwnStableLocalPivot",
+          "fullName": "PaperDefense.Tests.RailDrawingTests.RailReferenceIsEnabledOnlyForItsModuleAndHasItsOwnStableLocalPivot",
+          "state": "Passed",
+          "durationSeconds": 0.0026867,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RemovingRailClearsOnlyItsPartAndUndoRedoRestoreTheAssemblyAndDrawingTogether",
+          "fullName": "PaperDefense.Tests.RailDrawingTests.RemovingRailClearsOnlyItsPartAndUndoRedoRestoreTheAssemblyAndDrawingTogether",
+          "state": "Passed",
+          "durationSeconds": 0.0070612,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WeaponAndChassisChangesPreserveInstalledRailAndItsOwnEraseCanBeUndone",
+          "fullName": "PaperDefense.Tests.RailDrawingTests.WeaponAndChassisChangesPreserveInstalledRailAndItsOwnEraseCanBeUndone",
+          "state": "Passed",
+          "durationSeconds": 0.0022899,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BlotterRailExpandsItsOwnSearchWithoutExpandingTheCleanupRadius",
+          "fullName": "PaperDefense.Tests.RailWeaponTests.BlotterRailExpandsItsOwnSearchWithoutExpandingTheCleanupRadius",
+          "state": "Passed",
+          "durationSeconds": 0.0017958,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredRailMultipliersControlRealRangeAndCooldown",
+          "fullName": "PaperDefense.Tests.RailWeaponTests.ConfiguredRailMultipliersControlRealRangeAndCooldown",
+          "state": "Passed",
+          "durationSeconds": 0.0011545,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DualRailUsesSharedFeedQualityAndIntervalPenaltyExactlyOnce(False)",
+          "fullName": "PaperDefense.Tests.RailWeaponTests.DualRailUsesSharedFeedQualityAndIntervalPenaltyExactlyOnce(False)",
+          "state": "Passed",
+          "durationSeconds": 0.0061953,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DualRailUsesSharedFeedQualityAndIntervalPenaltyExactlyOnce(True)",
+          "fullName": "PaperDefense.Tests.RailWeaponTests.DualRailUsesSharedFeedQualityAndIntervalPenaltyExactlyOnce(True)",
+          "state": "Passed",
+          "durationSeconds": 0.0091611,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LegacyStructuresWithoutBlueprintIgnoreRailTuning",
+          "fullName": "PaperDefense.Tests.RailWeaponTests.LegacyStructuresWithoutBlueprintIgnoreRailTuning",
+          "state": "Passed",
+          "durationSeconds": 0.0010283,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MortarRailChangesReachAndTempoButPreservesCapturedRadiusFlightAndImpactDamage",
+          "fullName": "PaperDefense.Tests.RailWeaponTests.MortarRailChangesReachAndTempoButPreservesCapturedRadiusFlightAndImpactDamage",
+          "state": "Passed",
+          "durationSeconds": 0.0010424,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(False,100,57)",
+          "fullName": "PaperDefense.Tests.RailWeaponTests.RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(False,100,57)",
+          "state": "Passed",
+          "durationSeconds": 0.0045143,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(False,0,50)",
+          "fullName": "PaperDefense.Tests.RailWeaponTests.RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(False,0,50)",
+          "state": "Passed",
+          "durationSeconds": 0.0038772,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(True,100,57)",
+          "fullName": "PaperDefense.Tests.RailWeaponTests.RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(True,100,57)",
+          "state": "Passed",
+          "durationSeconds": 0.0058228,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(True,0,50)",
+          "fullName": "PaperDefense.Tests.RailWeaponTests.RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(True,0,50)",
+          "state": "Passed",
+          "durationSeconds": 0.0053092,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RailExpandsTheActualCombatQueryUpToItsRangeBoundary",
+          "fullName": "PaperDefense.Tests.RailWeaponTests.RailExpandsTheActualCombatQueryUpToItsRangeBoundary",
+          "state": "Passed",
+          "durationSeconds": 0.0015278,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RicochetDefaultAssemblyExposesTheTunableShortChainHypothesis",
+          "fullName": "PaperDefense.Tests.RicochetCatalogTests.RicochetDefaultAssemblyExposesTheTunableShortChainHypothesis",
+          "state": "Passed",
+          "durationSeconds": 0.0003348,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RicochetRightChargesConfiguredGoldOnceAndKeepsItsDescription",
+          "fullName": "PaperDefense.Tests.RicochetCatalogTests.RicochetRightChargesConfiguredGoldOnceAndKeepsItsDescription",
+          "state": "Passed",
+          "durationSeconds": 0.0005766,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RicochetUsesItsOwnConfiguredLoadAndFitsAlongsideAGun",
+          "fullName": "PaperDefense.Tests.RicochetCatalogTests.RicochetUsesItsOwnConfiguredLoadAndFitsAlongsideAGun",
+          "state": "Passed",
+          "durationSeconds": 0.0002365,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SnapshotAndReadonlySpecKeepTheirOwnJumpGeometryAndTargetCap",
+          "fullName": "PaperDefense.Tests.RicochetCatalogTests.SnapshotAndReadonlySpecKeepTheirOwnJumpGeometryAndTargetCap",
+          "state": "Passed",
+          "durationSeconds": 0.0011804,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "VersionTwoCannotClaimRicochetWhileCurrentProfilesRemainVersionThree",
+          "fullName": "PaperDefense.Tests.RicochetCatalogTests.VersionTwoCannotClaimRicochetWhileCurrentProfilesRemainVersionThree",
+          "state": "Passed",
+          "durationSeconds": 0.000429,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ChainIncludesFirstVictimAndReachesBeyondTowerRangeThroughExactJumpBoundaries",
+          "fullName": "PaperDefense.Tests.RicochetWeaponTests.ChainIncludesFirstVictimAndReachesBeyondTowerRangeThroughExactJumpBoundaries",
+          "state": "Passed",
+          "durationSeconds": 0.0018047,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredJumpRangeStopsTheChainImmediatelyOutsideItsBoundary",
+          "fullName": "PaperDefense.Tests.RicochetWeaponTests.ConfiguredJumpRangeStopsTheChainImmediatelyOutsideItsBoundary",
+          "state": "Passed",
+          "durationSeconds": 0.0010106,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EveryChainHitUsesOrdinaryDefenseAndDamageWhileColorBudgetRemainsShared",
+          "fullName": "PaperDefense.Tests.RicochetWeaponTests.EveryChainHitUsesOrdinaryDefenseAndDamageWhileColorBudgetRemainsShared",
+          "state": "Passed",
+          "durationSeconds": 0.0006949,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "GunAndRicochetUseIndependentFirstVictimsAndOneSharedProductionFeed",
+          "fullName": "PaperDefense.Tests.RicochetWeaponTests.GunAndRicochetUseIndependentFirstVictimsAndOneSharedProductionFeed",
+          "state": "Passed",
+          "durationSeconds": 0.0007835,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HighTargetCapCannotRepeatVictimsOrCreateExtraVisualSegments",
+          "fullName": "PaperDefense.Tests.RicochetWeaponTests.HighTargetCapCannotRepeatVictimsOrCreateExtraVisualSegments",
+          "state": "Passed",
+          "durationSeconds": 0.0005999,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NextVictimUsesNearestAliveUnhitNeighborThenIdRegardlessOfInputOrder",
+          "fullName": "PaperDefense.Tests.RicochetWeaponTests.NextVictimUsesNearestAliveUnhitNeighborThenIdRegardlessOfInputOrder",
+          "state": "Passed",
+          "durationSeconds": 0.0013014,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RealTrialHonorsBothConfiguredJumpRangeAndTotalVictimLimitAtEqualBudget",
+          "fullName": "PaperDefense.Tests.RicochetWeaponTests.RealTrialHonorsBothConfiguredJumpRangeAndTotalVictimLimitAtEqualBudget",
+          "state": "Passed",
+          "durationSeconds": 0.0987062,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AnIdleMountDoesNotReduceTheActiveMountsSupply",
+          "fullName": "PaperDefense.Tests.SharedTowerProductionTests.AnIdleMountDoesNotReduceTheActiveMountsSupply",
+          "state": "Passed",
+          "durationSeconds": 0.0058894,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ATargetReceivesAtMostOneColorRefreshInTheSharedWindow",
+          "fullName": "PaperDefense.Tests.SharedTowerProductionTests.ATargetReceivesAtMostOneColorRefreshInTheSharedWindow",
+          "state": "Passed",
+          "durationSeconds": 0.0009321,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FlyingShellsShareSourceBudgetAndKeepLaunchColorAfterRepaintAndSourceDeath",
+          "fullName": "PaperDefense.Tests.SharedTowerProductionTests.FlyingShellsShareSourceBudgetAndKeepLaunchColorAfterRepaintAndSourceDeath",
+          "state": "Passed",
+          "durationSeconds": 0.0010439,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HistoricalSupplyKeepsItsFixedPenaltyWhenAMountIsIdle",
+          "fullName": "PaperDefense.Tests.SharedTowerProductionTests.HistoricalSupplyKeepsItsFixedPenaltyWhenAMountIsIdle",
+          "state": "Passed",
+          "durationSeconds": 0.0035378,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HitscanAndDelayedImpactUseOneSharedSourceColorBudget",
+          "fullName": "PaperDefense.Tests.SharedTowerProductionTests.HitscanAndDelayedImpactUseOneSharedSourceColorBudget",
+          "state": "Passed",
+          "durationSeconds": 0.0009629,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SharedProductionCannotStarveTheSlowerWeapon",
+          "fullName": "PaperDefense.Tests.SharedTowerProductionTests.SharedProductionCannotStarveTheSlowerWeapon",
+          "state": "Passed",
+          "durationSeconds": 0.0083195,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TwoActiveGunsShareAboutOnePointSixTimesSingleGunProduction",
+          "fullName": "PaperDefense.Tests.SharedTowerProductionTests.TwoActiveGunsShareAboutOnePointSixTimesSingleGunProduction",
+          "state": "Passed",
+          "durationSeconds": 0.0075853,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TwoMountsShareThreeDistinctColorTargetsAndNeverLimitOrdinaryDamage",
+          "fullName": "PaperDefense.Tests.SharedTowerProductionTests.TwoMountsShareThreeDistinctColorTargetsAndNeverLimitOrdinaryDamage",
+          "state": "Passed",
+          "durationSeconds": 0.0010764,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WaitingWithoutTargetsCannotAccumulateAnUnboundedVolley",
+          "fullName": "PaperDefense.Tests.SharedTowerProductionTests.WaitingWithoutTargetsCannotAccumulateAnUnboundedVolley",
+          "state": "Passed",
+          "durationSeconds": 0.0077122,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MortarAndStaplerUseExactlyTheStandardFoundationCapacity",
+          "fullName": "PaperDefense.Tests.StaplerCatalogTests.MortarAndStaplerUseExactlyTheStandardFoundationCapacity",
+          "state": "Passed",
+          "durationSeconds": 0.0002886,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SnapshotAndReadonlySpecOwnIntrinsicSlowStrengthAndDuration",
+          "fullName": "PaperDefense.Tests.StaplerCatalogTests.SnapshotAndReadonlySpecOwnIntrinsicSlowStrengthAndDuration",
+          "state": "Passed",
+          "durationSeconds": 0.0018026,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "StaplerAssemblyExposesItsOwnDamageAndIntrinsicSlowTuning",
+          "fullName": "PaperDefense.Tests.StaplerCatalogTests.StaplerAssemblyExposesItsOwnDamageAndIntrinsicSlowTuning",
+          "state": "Passed",
+          "durationSeconds": 0.0002948,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "StaplerRequiresItsOwnPermanentRightWithAConfiguredPrice",
+          "fullName": "PaperDefense.Tests.StaplerCatalogTests.StaplerRequiresItsOwnPermanentRightWithAConfiguredPrice",
+          "state": "Passed",
+          "durationSeconds": 0.0011232,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "VersionTwoCannotClaimStapler",
+          "fullName": "PaperDefense.Tests.StaplerCatalogTests.VersionTwoCannotClaimStapler",
+          "state": "Passed",
+          "durationSeconds": 0.0003536,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AConfiguredStrongerShortStapleExpiresBackToTheLongerBlueEffect",
+          "fullName": "PaperDefense.Tests.StaplerWeaponTests.AConfiguredStrongerShortStapleExpiresBackToTheLongerBlueEffect",
+          "state": "Passed",
+          "durationSeconds": 0.0009084,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DeniedInkBudgetDoesNotSuppressOrdinaryDamageOrTheIntrinsicStapleSlow",
+          "fullName": "PaperDefense.Tests.StaplerWeaponTests.DeniedInkBudgetDoesNotSuppressOrdinaryDamageOrTheIntrinsicStapleSlow",
+          "state": "Passed",
+          "durationSeconds": 0.0010583,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DrawingQualityChangesStaplerCadenceOnceAndLeavesDamageAndSlowParametersIntact",
+          "fullName": "PaperDefense.Tests.StaplerWeaponTests.DrawingQualityChangesStaplerCadenceOnceAndLeavesDamageAndSlowParametersIntact",
+          "state": "Passed",
+          "durationSeconds": 0.0009697,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "GunAndStaplerKeepIndependentTargetsAndShareTheSameProductionRule",
+          "fullName": "PaperDefense.Tests.StaplerWeaponTests.GunAndStaplerKeepIndependentTargetsAndShareTheSameProductionRule",
+          "state": "Passed",
+          "durationSeconds": 0.0009043,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RealTrialUsesConfiguredSlowStrengthAndDurationWithoutMutatingItsRules",
+          "fullName": "PaperDefense.Tests.StaplerWeaponTests.RealTrialUsesConfiguredSlowStrengthAndDurationWithoutMutatingItsRules",
+          "state": "Passed",
+          "durationSeconds": 0.1386038,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UncoloredStaplerDealsItsDamageAndAppliesOnlyItsConfiguredIntrinsicSlow",
+          "fullName": "PaperDefense.Tests.StaplerWeaponTests.UncoloredStaplerDealsItsDamageAndAppliesOnlyItsConfiguredIntrinsicSlow",
+          "state": "Passed",
+          "durationSeconds": 0.0008843,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WeakStaplesDoNotMultiplyOrExtendBlueAndTheirOwnRemainderResumes",
+          "fullName": "PaperDefense.Tests.StaplerWeaponTests.WeakStaplesDoNotMultiplyOrExtendBlueAndTheirOwnRemainderResumes",
+          "state": "Passed",
+          "durationSeconds": 0.0012786,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AdjustableTargetValuesAndWaveRewardsSurviveOwnedSnapshots",
+          "fullName": "PaperDefense.Tests.TargetPresetTests.AdjustableTargetValuesAndWaveRewardsSurviveOwnedSnapshots",
+          "state": "Passed",
+          "durationSeconds": 0.0003561,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ArmorDefenseAndTargetHealthComeFromTheSharedCatalog",
+          "fullName": "PaperDefense.Tests.TargetPresetTests.ArmorDefenseAndTargetHealthComeFromTheSharedCatalog",
+          "state": "Passed",
+          "durationSeconds": 0.0003262,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ExplicitWaveRewardAndStartingInkOverrideTheTargetPattern",
+          "fullName": "PaperDefense.Tests.TargetPresetTests.ExplicitWaveRewardAndStartingInkOverrideTheTargetPattern",
+          "state": "Passed",
+          "durationSeconds": 0.0002324,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TargetSettingsCloneIsIndependentAndRejectsInvalidFractionsAndWindows",
+          "fullName": "PaperDefense.Tests.TargetPresetTests.TargetSettingsCloneIsIndependentAndRejectsInvalidFractionsAndWindows",
+          "state": "Passed",
+          "durationSeconds": 0.0002983,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TargetTransformOwnsItsRulesAndPreservesHistoricalInput",
+          "fullName": "PaperDefense.Tests.TargetPresetTests.TargetTransformOwnsItsRulesAndPreservesHistoricalInput",
+          "state": "Passed",
+          "durationSeconds": 0.0008663,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredGunPriceIsChargedForEveryTrialCopy",
+          "fullName": "PaperDefense.Tests.TrialBalanceTests.ConfiguredGunPriceIsChargedForEveryTrialCopy",
+          "state": "Passed",
+          "durationSeconds": 0.0524721,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredMaterialCostAndHealthReachTheTrialBattery",
+          "fullName": "PaperDefense.Tests.TrialBalanceTests.ConfiguredMaterialCostAndHealthReachTheTrialBattery",
+          "state": "Passed",
+          "durationSeconds": 0.0612811,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredMortarFlightAndRadiusReachRecordedProjectiles",
+          "fullName": "PaperDefense.Tests.TrialBalanceTests.ConfiguredMortarFlightAndRadiusReachRecordedProjectiles",
+          "state": "Passed",
+          "durationSeconds": 0.0293864,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage(\"damage\")",
+          "fullName": "PaperDefense.Tests.TrialBalanceTests.ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage(\"damage\")",
+          "state": "Passed",
+          "durationSeconds": 0.0637632,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage(\"range\")",
+          "fullName": "PaperDefense.Tests.TrialBalanceTests.ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage(\"range\")",
+          "state": "Passed",
+          "durationSeconds": 0.0657136,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage(\"material damage\")",
+          "fullName": "PaperDefense.Tests.TrialBalanceTests.ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage(\"material damage\")",
+          "state": "Passed",
+          "durationSeconds": 0.0444296,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DefaultEqualBudgetComparisonKeepsTheEstablishedCopyCosts",
+          "fullName": "PaperDefense.Tests.TrialBalanceTests.DefaultEqualBudgetComparisonKeepsTheEstablishedCopyCosts",
+          "state": "Passed",
+          "durationSeconds": 0.1217269,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RunningBothLanesPreservesCallerBalanceIncludingRuleFlags(False)",
+          "fullName": "PaperDefense.Tests.TrialBalanceTests.RunningBothLanesPreservesCallerBalanceIncludingRuleFlags(False)",
+          "state": "Passed",
+          "durationSeconds": 0.0262037,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RunningBothLanesPreservesCallerBalanceIncludingRuleFlags(True)",
+          "fullName": "PaperDefense.Tests.TrialBalanceTests.RunningBothLanesPreservesCallerBalanceIncludingRuleFlags(True)",
+          "state": "Passed",
+          "durationSeconds": 0.0245964,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SnapshotOwnsEveryDefinitionAndWaveAndPreservesAllScalarTuning",
+          "fullName": "PaperDefense.Tests.TrialBalanceTests.SnapshotOwnsEveryDefinitionAndWaveAndPreservesAllScalarTuning",
+          "state": "Passed",
+          "durationSeconds": 0.0011945,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TrialHonorsTheProvidedEnemyMechanicsRuleForArmoredTargets",
+          "fullName": "PaperDefense.Tests.TrialBalanceTests.TrialHonorsTheProvidedEnemyMechanicsRuleForArmoredTargets",
+          "state": "Passed",
+          "durationSeconds": 0.0297501,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TrialKeepsItsFiniteFixtureWhenCampaignEnemyAndWaveDataChanges",
+          "fullName": "PaperDefense.Tests.TrialBalanceTests.TrialKeepsItsFiniteFixtureWhenCampaignEnemyAndWaveDataChanges",
+          "state": "Passed",
+          "durationSeconds": 0.0135793,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CounterfireUsesSharedStructureDefenseWithoutIncreasingTowerHealth",
+          "fullName": "PaperDefense.Tests.TrialCounterfireDefenseTests.CounterfireUsesSharedStructureDefenseWithoutIncreasingTowerHealth",
+          "state": "Passed",
+          "durationSeconds": 0.0385289,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ComparisonUsesSameBudgetAndSeedAndChargesEveryCopy",
+          "fullName": "PaperDefense.Tests.TrialTests.ComparisonUsesSameBudgetAndSeedAndChargesEveryCopy",
+          "state": "Passed",
+          "durationSeconds": 0.1247949,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InsufficientBudgetReportsZeroCopiesAndRealLeaks",
+          "fullName": "PaperDefense.Tests.TrialTests.InsufficientBudgetReportsZeroCopiesAndRealLeaks",
+          "state": "Passed",
+          "durationSeconds": 0.0134849,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "OptionalCounterfireCanDestroyUnprotectedTowers",
+          "fullName": "PaperDefense.Tests.TrialTests.OptionalCounterfireCanDestroyUnprotectedTowers",
+          "state": "Passed",
+          "durationSeconds": 0.0353995,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RecordedCollectionsAndFrameSnapshotsCannotBeMutated",
+          "fullName": "PaperDefense.Tests.TrialTests.RecordedCollectionsAndFrameSnapshotsCannotBeMutated",
+          "state": "Passed",
+          "durationSeconds": 0.0097889,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RecordedFramesAreBoundedAndIncludeExactInitialAndFinalState",
+          "fullName": "PaperDefense.Tests.TrialTests.RecordedFramesAreBoundedAndIncludeExactInitialAndFinalState",
+          "state": "Passed",
+          "durationSeconds": 0.0139268,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RecordedFramesContainActualShotsAndFlyingMortarShells",
+          "fullName": "PaperDefense.Tests.TrialTests.RecordedFramesContainActualShotsAndFlyingMortarShells",
+          "state": "Passed",
+          "durationSeconds": 0.0439208,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RepeatedTrialIsDeterministicAndDoesNotModifyPermanentProfile",
+          "fullName": "PaperDefense.Tests.TrialTests.RepeatedTrialIsDeterministicAndDoesNotModifyPermanentProfile",
+          "state": "Passed",
+          "durationSeconds": 0.0400986,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AlbumCannotGrowPastSixtyFourOnSaveOrRestore",
+          "fullName": "PaperDefense.Tests.WorkshopTests.AlbumCannotGrowPastSixtyFourOnSaveOrRestore",
+          "state": "Passed",
+          "durationSeconds": 0.0012686,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ArmorHealthAndTrackingAcquisitionHaveActualTradeoffs",
+          "fullName": "PaperDefense.Tests.WorkshopTests.ArmorHealthAndTrackingAcquisitionHaveActualTradeoffs",
+          "state": "Passed",
+          "durationSeconds": 0.0003195,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FoundationHealthDependsOnChassisArmorAndMaterialRatherThanMountOrder",
+          "fullName": "PaperDefense.Tests.WorkshopTests.FoundationHealthDependsOnChassisArmorAndMaterialRatherThanMountOrder",
+          "state": "Passed",
+          "durationSeconds": 0.0003876,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FullCustomAlbumRestoresWithoutEvictingAssembliesToRepairSlots",
+          "fullName": "PaperDefense.Tests.WorkshopTests.FullCustomAlbumRestoresWithoutEvictingAssembliesToRepairSlots",
+          "state": "Passed",
+          "durationSeconds": 0.0012803,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HeavyChassisAllowsTwoMortarsButStillHasAFiniteLimit",
+          "fullName": "PaperDefense.Tests.WorkshopTests.HeavyChassisAllowsTwoMortarsButStillHasAFiniteLimit",
+          "state": "Passed",
+          "durationSeconds": 0.0001309,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LoadRulesRejectWeaponsThatCannotFit(Gun,Gun,None,8,True)",
+          "fullName": "PaperDefense.Tests.WorkshopTests.LoadRulesRejectWeaponsThatCannotFit(Gun,Gun,None,8,True)",
+          "state": "Passed",
+          "durationSeconds": 0.0003313,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LoadRulesRejectWeaponsThatCannotFit(Gun,Gun,Armor,11,False)",
+          "fullName": "PaperDefense.Tests.WorkshopTests.LoadRulesRejectWeaponsThatCannotFit(Gun,Gun,Armor,11,False)",
+          "state": "Passed",
+          "durationSeconds": 0.0000765,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LoadRulesRejectWeaponsThatCannotFit(Gun,Piercer,None,10,True)",
+          "fullName": "PaperDefense.Tests.WorkshopTests.LoadRulesRejectWeaponsThatCannotFit(Gun,Piercer,None,10,True)",
+          "state": "Passed",
+          "durationSeconds": 0.0000616,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LoadRulesRejectWeaponsThatCannotFit(Mortar,Gun,None,11,False)",
+          "fullName": "PaperDefense.Tests.WorkshopTests.LoadRulesRejectWeaponsThatCannotFit(Mortar,Gun,None,11,False)",
+          "state": "Passed",
+          "durationSeconds": 0.0000583,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LoadRulesRejectWeaponsThatCannotFit(Mortar,null,Armor,10,True)",
+          "fullName": "PaperDefense.Tests.WorkshopTests.LoadRulesRejectWeaponsThatCannotFit(Mortar,null,Armor,10,True)",
+          "state": "Passed",
+          "durationSeconds": 0.0000591,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LockedPartsCannotBeSavedOrAssignedThroughProfileData",
+          "fullName": "PaperDefense.Tests.WorkshopTests.LockedPartsCannotBeSavedOrAssignedThroughProfileData",
+          "state": "Passed",
+          "durationSeconds": 0.0002754,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MortarColorIsCapturedAtLaunchAndAppliesAtImpact",
+          "fullName": "PaperDefense.Tests.WorkshopTests.MortarColorIsCapturedAtLaunchAndAppliesAtImpact",
+          "state": "Passed",
+          "durationSeconds": 0.0003519,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "OverloadedAssemblyExplainsTheExactCapacityDeficit",
+          "fullName": "PaperDefense.Tests.WorkshopTests.OverloadedAssemblyExplainsTheExactCapacityDeficit",
+          "state": "Passed",
+          "durationSeconds": 0.0001119,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ProfileRoundTripPreservesGoldUnlocksAlbumAndFourDistinctSlots",
+          "fullName": "PaperDefense.Tests.WorkshopTests.ProfileRoundTripPreservesGoldUnlocksAlbumAndFourDistinctSlots",
+          "state": "Passed",
+          "durationSeconds": 0.0002682,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SavedAssemblyIsReplacedByIdAndAssignedLoadoutRemainsValid",
+          "fullName": "PaperDefense.Tests.WorkshopTests.SavedAssemblyIsReplacedByIdAndAssignedLoadoutRemainsValid",
+          "state": "Passed",
+          "durationSeconds": 0.0002842,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SecondWeaponCostsInkAndBuildTimeAndSharesFeed",
+          "fullName": "PaperDefense.Tests.WorkshopTests.SecondWeaponCostsInkAndBuildTimeAndSharesFeed",
+          "state": "Passed",
+          "durationSeconds": 0.0001893,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "StarterAlbumAnswersEveryBasicWeaponRoleWithoutGold",
+          "fullName": "PaperDefense.Tests.WorkshopTests.StarterAlbumAnswersEveryBasicWeaponRoleWithoutGold",
+          "state": "Passed",
+          "durationSeconds": 0.0002438,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TrackingFiresAtNewTargetBeforeOrdinaryAcquisitionCompletes",
+          "fullName": "PaperDefense.Tests.WorkshopTests.TrackingFiresAtNewTargetBeforeOrdinaryAcquisitionCompletes",
+          "state": "Passed",
+          "durationSeconds": 0.0004885,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TwoGunMountsProduceAboutOnePointSixTimesSingleSustainedFire",
+          "fullName": "PaperDefense.Tests.WorkshopTests.TwoGunMountsProduceAboutOnePointSixTimesSingleSustainedFire",
+          "state": "Passed",
+          "durationSeconds": 0.0043335,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UnlockingPartIsPermanentAndAssemblyDoesNotSpendGold",
+          "fullName": "PaperDefense.Tests.WorkshopTests.UnlockingPartIsPermanentAndAssemblyDoesNotSpendGold",
+          "state": "Passed",
+          "durationSeconds": 0.0002153,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

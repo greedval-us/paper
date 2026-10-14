@@ -1,0 +1,100 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "9541c9a3d1c44045ba9238382b88a7d2",
+      "status": "failed",
+      "mode": "PlayMode",
+      "started_unix_ms": 1791929933554,
+      "finished_unix_ms": 1791930019909,
+      "last_update_unix_ms": 1791930019909,
+      "progress": {
+        "completed": 348,
+        "total": 348,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.WorkshopStoreTests.ValidPrimaryIgnoresBrokenBackup",
+        "last_finished_unix_ms": 1791930019863,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [
+          {
+            "full_name": "PaperDefense.Tests.AuthoredWorkshopTests.LeavingViewportEndsStrokeAndOutsideEraserCannotChangeDrawing",
+            "message": "  Re-entry must begin a separate stroke.\r\n  Expected: 2\r\n  But was:  0\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.FocusedWorkshopSceneTests.DrawingSceneEditsThirdLayerAndFootprintWithoutAssemblyAlbumOrBattle",
+            "message": "  Apply drawing\r\n  Expected: True\r\n  But was:  False\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookArtStandSceneTests.TowerSceneShowsFifteenSelectablePartsAndFiveValidCompositions",
+            "message": "  Apply drawing\r\n  Expected: True\r\n  But was:  False\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.TextResourceIntegrationTests.InstanceOverrideChangesHudNestedPanelsAndRealCoreReasonWithoutLeakingToOtherHud",
+            "message": "  Expected: collection containing \"DRAWING SENTINEL\"\r\n  But was:  < \"WORKSHOP SENTINEL\", \"ЗОЛОТО  0\", \"Детали открываются навсегда. Собирай и испытывай бесплатно — за золото покупается право использовать деталь.\", \"01  СОБЕРИ ЧЕРТЁЖ\", \"Пулемёт\", \"Слоты оружия, брони и улучшений задаёт основание\", \"ОБЫЧНОЕ / 10\", \"ТЯЖЁЛОЕ / 14\", \"Первое крепление\", \"ПУЛЕМЁТ\", \"ПРОБОЙ\", \"МОРТИРА\", \"ВЕЕР\", \"РИКОШЕТ\", \"СКРЕПКИ\", \"ПРОМОКАШКА\", \"ПУЛЕМЁТ\", \"ПРОБОЙ\", \"МОРТИРА\", \"ВЕЕР\", \"РИКОШЕТ\", \"СКРЕПКИ\", \"ПРОМОКАШКА\", \"ПУСТО\", \"ПУЛЕМЁТ\", \"ПРОБОЙ\", \"МОРТИРА\", \"ВЕЕР\", \"РИКОШЕТ\", \"СКРЕПКИ\", \"ПРОМОКАШКА\", \"ПУСТО\", \"Второе крепление · общая подача\", \"Третье крепление · общая подача\", \"Броня 0/2147483647\", \"Улучшения 0/2147483647 · отдельные слоты\", \"БРОНЯ +3\", \"ПОДАЧА +2\", \"НАВЕДЕНИЕ +2\", \"НАПРАВЛ. +2\", \"НОВЫЙ\", \"В АЛЬБОМ\", \"УДАЛИТЬ\", \"СДЕЛАТЬ ВАРИАНТ\", \"02  НАРИСУЙ И ПРОВЕРЬ\", \"НАРИСОВАТЬ СВОИ ЛИНИИ  →\", \"След выстрела\", \"След выстрела\", \"След выстрела\", \"НАГРУЗКА  4 / 10\nЦена: 40 штр. · 55 HP · защита 0%\nПостройка: 1,4 с    Дальность: 11,0\nТемп: 2,38 действий/с · подача 100%\nОкраска: 5 чернил · цвет ≤3 цели / 1 с\", \"ИСПЫТАТЬ НА ТЕСТОВОМ ЛИСТЕ  →\", \"03  АЛЬБОМ ЧЕРТЕЖЕЙ\", \"Сохраняй много вариантов. В бой возьми четыре.\", \"Пулемёт · стандартный · 40 штр.\nПУЛЕМЁТ · 55 HP · 2,4/с\", \"Двойной пулемёт · стандартный · 64 штр.\nПУЛЕМЁТ+ПУЛЕМЁТ · 55 HP · 3,8/с\", \"Пробивающая пушка · стандартный · 65 штр.\nПРОБОЙ · 55 HP · 1,0/с\", \"Защищённая мортира · стандартный · 108 штр.\nМОРТИРА · 55 HP · 0,6/с\", <string.Empty>, <string.Empty>, <string.Empty>, <string.Empty>, \"←  ПРЕДЫДУЩИЕ\", \"СЛЕДУЮЩИЕ  →\", \"ТЯЖЁЛОЕ\n90 золота\", \"ПОДАЧА\n60 золота\", \"НАВЕДЕНИЕ\n60 золота\", \"ВЕЕР\n60 золота\", \"РИКОШЕТ\n60 золота\", \"СКРЕПКИ\n40 золота\", \"ПРОМОКАШКА\n40 золота\", \"НАПРАВЛЯЮЩАЯ\n60 золота\", \"04  ЧЕТЫРЕ ЧЕРТЕЖА В БОЙ  ·  число экземпляров ограничено только штрихами и местом\", \"1  Пулемёт\n↑ назначить выбранный рисунок\", \"2  Двойной пулемёт\n↑ назначить выбранный рисунок\", \"3  Пробивающая пушка\n↑ назначить выбранный рисунок\", \"4  Защищённая мортира\n↑ назначить выбранный рисунок\", \"НАЧАТЬ ПАРТИЮ  →\", \"КАРТА 96 × 64  ·  База в центре  ·  Точки: красная (19, 16)   ·   синяя (76, 16)   ·   зелёная (48, 53)\nУгрозы партии: каракули, бегуны, грызуны, плевуны. Стены перехватывают прямые сгустки.\nСтарт: 720 штрихов · ожидание не даёт штрихов · доход за врагов и волны. Точки открывают фронт.\", \"ТОЛЬКО В ПАМЯТИ · Только в памяти; профиль не записывается.\", \"Собирай свободно. Золото открывает деталь навсегда; экземпляры строятся за штрихи.\", \"ПОВТОРИТЬ ЗАПИСЬ\", \"ТЕСТОВЫЙ ЛИСТ  /  ОДИНАКОВЫЙ БЮДЖЕТ\", <string.Empty>, \"ТОЛПА\", \"БЫСТРЫЕ\", \"ЗАЩИЩЁННЫЕ\", \"КЛЯКСЫ\", \"ОБРАТНЫЙ ОГОНЬ\", \"200 ШТРИХОВ\", \"400 ШТРИХОВ\", \"800 ШТРИХОВ\", <string.Empty>, \"ЗАПИСЬ ИСПЫТАНИЯ ×4  ·  нажми «Провести тест»\", \"ТВОЙ РИСУНОК\", \"ОДИН ПУЛЕМЁТ\", \"Нажми «Провести тест».\", <string.Empty>, <string.Empty>, \"ПРОВЕСТИ ТЕСТ\", \"ВЕРНУТЬСЯ К ЧЕРТЕЖУ\", \"MORTAR SENTINEL\", <string.Empty>, <string.Empty>, \"A · зафиксированный след\", \"B · текущий черновик\", <string.Empty>, \"Группа\", \"Колонна\", \"Повторить\", \"Зафиксировать как A\", \"Круг\", \"Вернуться\", \"МАСТЕРСКАЯ РИСУНКА\", \"Рисуйте и исправляйте бесплатно. Форма корпуса и стволов меняет характеристики башни.\", \"ДЕТАЛИ БАШНИ\", \"ИНСТРУМЕНТЫ\", \"Карандаш\", \"Линия\", \"Прямоугольник\", \"Эллипс\", \"Ластик\", \"Сдвиг детали\", \"↶ Назад\", \"Вперёд ↷\", \"Отразить по горизонтали\", \"Ширина\", \"−\", \"+\", \"Высота\", \"−\", \"+\", \"Очистить деталь\", \"Сетка\", \"Привязка\", \"−\", <string.Empty>, \"+\", \"Весь лист\", <string.Empty>, <string.Empty>, <string.Empty>, \"ЧЕРНИЛА В КОНСТРУКЦИИ\", <string.Empty>, \"Это предел формы, а не плата за попытку.\", \"ХАРАКТЕРИСТИКИ БАШНИ\", <string.Empty>, <string.Empty>, <string.Empty>, \"ТРАФАРЕТЫ · МНОГОРАЗОВЫЕ\", <string.Empty>, \"Золото дают пройденные волны и победа.\nРисование и полигон золота не дают.\", \"Для декора трафареты не нужны.\nРисуйте свободно карандашом и фигурами.\", \"Вставка заменяет выбранную деталь; её можно отменить. Покупка только открывает доступ.\", \"Отмена\", \"Применить рисунок →\", \"Колесо: масштаб · средняя кнопка: сдвиг листа\nCtrl+Z / Ctrl+Y: история · Esc: отмена жеста\" >\r\n"
+          }
+        ],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "PlayMode",
+        "summary": {
+          "total": 348,
+          "passed": 344,
+          "failed": 4,
+          "skipped": 0,
+          "durationSeconds": 81.6777431,
+          "resultState": "Failed(Child)"
+        },
+        "results": [
+          {
+            "name": "LeavingViewportEndsStrokeAndOutsideEraserCannotChangeDrawing",
+            "fullName": "PaperDefense.Tests.AuthoredWorkshopTests.LeavingViewportEndsStrokeAndOutsideEraserCannotChangeDrawing",
+            "state": "Failed",
+            "durationSeconds": 0.0824096,
+            "message": "  Re-entry must begin a separate stroke.\r\n  Expected: 2\r\n  But was:  0\r\n",
+            "stackTrace": "at PaperDefense.Tests.AuthoredWorkshopTests.LeavingViewportEndsStrokeAndOutsideEraserCannotChangeDrawing () [0x0012f] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\AuthoredWorkshopTests.cs:191\r\n",
+            "output": ""
+          },
+          {
+            "name": "DrawingSceneEditsThirdLayerAndFootprintWithoutAssemblyAlbumOrBattle",
+            "fullName": "PaperDefense.Tests.FocusedWorkshopSceneTests.DrawingSceneEditsThirdLayerAndFootprintWithoutAssemblyAlbumOrBattle",
+            "state": "Failed",
+            "durationSeconds": 0.4227391,
+            "message": "  Apply drawing\r\n  Expected: True\r\n  But was:  False\r\n",
+            "stackTrace": "at PaperDefense.Tests.FocusedWorkshopSceneTests.Click (System.String name) [0x0002b] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\FocusedWorkshopSceneTests.cs:48\r\nat PaperDefense.Tests.FocusedWorkshopSceneTests+<DrawingSceneEditsThirdLayerAndFootprintWithoutAssemblyAlbumOrBattle>d__12.MoveNext () [0x00217] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\FocusedWorkshopSceneTests.cs:135\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@1405238725ab\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:44\r\n",
+            "output": ""
+          },
+          {
+            "name": "TowerSceneShowsFifteenSelectablePartsAndFiveValidCompositions",
+            "fullName": "PaperDefense.Tests.NotebookArtStandSceneTests.TowerSceneShowsFifteenSelectablePartsAndFiveValidCompositions",
+            "state": "Failed",
+            "durationSeconds": 0.4957211,
+            "message": "  Apply drawing\r\n  Expected: True\r\n  But was:  False\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookArtStandSceneTests.Click (System.String name) [0x0002b] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookArtStandSceneTests.cs:89\r\nat PaperDefense.Tests.NotebookArtStandSceneTests.VerifyOwnDrawingPreview (PaperDefense.Presentation.BlueprintSketch sketch) [0x00109] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookArtStandSceneTests.cs:238\r\nat PaperDefense.Tests.NotebookArtStandSceneTests+<TowerSceneShowsFifteenSelectablePartsAndFiveValidCompositions>d__16.MoveNext () [0x002a5] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookArtStandSceneTests.cs:170\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@1405238725ab\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:44\r\n",
+            "output": ""
+          },
+          {
+            "name": "InstanceOverrideChangesHudNestedPanelsAndRealCoreReasonWithoutLeakingToOtherHud",
+            "fullName": "PaperDefense.Tests.TextResourceIntegrationTests.InstanceOverrideChangesHudNestedPanelsAndRealCoreReasonWithoutLeakingToOtherHud",
+            "state": "Failed",
+            "durationSeconds": 0.0234734,
+            "message": "  Expected: collection containing \"DRAWING SENTINEL\"\r\n  But was:  < \"WORKSHOP SENTINEL\", \"ЗОЛОТО  0\", \"Детали открываются навсегда. Собирай и испытывай бесплатно — за золото покупается право использовать деталь.\", \"01  СОБЕРИ ЧЕРТЁЖ\", \"Пулемёт\", \"Слоты оружия, брони и улучшений задаёт основание\", \"ОБЫЧНОЕ / 10\", \"ТЯЖЁЛОЕ / 14\", \"Первое крепление\", \"ПУЛЕМЁТ\", \"ПРОБОЙ\", \"МОРТИРА\", \"ВЕЕР\", \"РИКОШЕТ\", \"СКРЕПКИ\", \"ПРОМОКАШКА\", \"ПУЛЕМЁТ\", \"ПРОБОЙ\", \"МОРТИРА\", \"ВЕЕР\", \"РИКОШЕТ\", \"СКРЕПКИ\", \"ПРОМОКАШКА\", \"ПУСТО\", \"ПУЛЕМЁТ\", \"ПРОБОЙ\", \"МОРТИРА\", \"ВЕЕР\", \"РИКОШЕТ\", \"СКРЕПКИ\", \"ПРОМОКАШКА\", \"ПУСТО\", \"Второе крепление · общая подача\", \"Третье крепление · общая подача\", \"Броня 0/2147483647\", \"Улучшения 0/2147483647 · отдельные слоты\", \"БРОНЯ +3\", \"ПОДАЧА +2\", \"НАВЕДЕНИЕ +2\", \"НАПРАВЛ. +2\", \"НОВЫЙ\", \"В АЛЬБОМ\", \"УДАЛИТЬ\", \"СДЕЛАТЬ ВАРИАНТ\", \"02  НАРИСУЙ И ПРОВЕРЬ\", \"НАРИСОВАТЬ СВОИ ЛИНИИ  →\", \"След выстрела\", \"След выстрела\", \"След выстрела\", \"НАГРУЗКА  4 / 10\nЦена: 40 штр. · 55 HP · защита 0%\nПостройка: 1,4 с    Дальность: 11,0\nТемп: 2,38 действий/с · подача 100%\nОкраска: 5 чернил · цвет ≤3 цели / 1 с\", \"ИСПЫТАТЬ НА ТЕСТОВОМ ЛИСТЕ  →\", \"03  АЛЬБОМ ЧЕРТЕЖЕЙ\", \"Сохраняй много вариантов. В бой возьми четыре.\", \"Пулемёт · стандартный · 40 штр.\nПУЛЕМЁТ · 55 HP · 2,4/с\", \"Двойной пулемёт · стандартный · 64 штр.\nПУЛЕМЁТ+ПУЛЕМЁТ · 55 HP · 3,8/с\", \"Пробивающая пушка · стандартный · 65 штр.\nПРОБОЙ · 55 HP · 1,0/с\", \"Защищённая мортира · стандартный · 108 штр.\nМОРТИРА · 55 HP · 0,6/с\", <string.Empty>, <string.Empty>, <string.Empty>, <string.Empty>, \"←  ПРЕДЫДУЩИЕ\", \"СЛЕДУЮЩИЕ  →\", \"ТЯЖЁЛОЕ\n90 золота\", \"ПОДАЧА\n60 золота\", \"НАВЕДЕНИЕ\n60 золота\", \"ВЕЕР\n60 золота\", \"РИКОШЕТ\n60 золота\", \"СКРЕПКИ\n40 золота\", \"ПРОМОКАШКА\n40 золота\", \"НАПРАВЛЯЮЩАЯ\n60 золота\", \"04  ЧЕТЫРЕ ЧЕРТЕЖА В БОЙ  ·  число экземпляров ограничено только штрихами и местом\", \"1  Пулемёт\n↑ назначить выбранный рисунок\", \"2  Двойной пулемёт\n↑ назначить выбранный рисунок\", \"3  Пробивающая пушка\n↑ назначить выбранный рисунок\", \"4  Защищённая мортира\n↑ назначить выбранный рисунок\", \"НАЧАТЬ ПАРТИЮ  →\", \"КАРТА 96 × 64  ·  База в центре  ·  Точки: красная (19, 16)   ·   синяя (76, 16)   ·   зелёная (48, 53)\nУгрозы партии: каракули, бегуны, грызуны, плевуны. Стены перехватывают прямые сгустки.\nСтарт: 720 штрихов · ожидание не даёт штрихов · доход за врагов и волны. Точки открывают фронт.\", \"ТОЛЬКО В ПАМЯТИ · Только в памяти; профиль не записывается.\", \"Собирай свободно. Золото открывает деталь навсегда; экземпляры строятся за штрихи.\", \"ПОВТОРИТЬ ЗАПИСЬ\", \"ТЕСТОВЫЙ ЛИСТ  /  ОДИНАКОВЫЙ БЮДЖЕТ\", <string.Empty>, \"ТОЛПА\", \"БЫСТРЫЕ\", \"ЗАЩИЩЁННЫЕ\", \"КЛЯКСЫ\", \"ОБРАТНЫЙ ОГОНЬ\", \"200 ШТРИХОВ\", \"400 ШТРИХОВ\", \"800 ШТРИХОВ\", <string.Empty>, \"ЗАПИСЬ ИСПЫТАНИЯ ×4  ·  нажми «Провести тест»\", \"ТВОЙ РИСУНОК\", \"ОДИН ПУЛЕМЁТ\", \"Нажми «Провести тест».\", <string.Empty>, <string.Empty>, \"ПРОВЕСТИ ТЕСТ\", \"ВЕРНУТЬСЯ К ЧЕРТЕЖУ\", \"MORTAR SENTINEL\", <string.Empty>, <string.Empty>, \"A · зафиксированный след\", \"B · текущий черновик\", <string.Empty>, \"Группа\", \"Колонна\", \"Повторить\", \"Зафиксировать как A\", \"Круг\", \"Вернуться\", \"МАСТЕРСКАЯ РИСУНКА\", \"Рисуйте и исправляйте бесплатно. Форма корпуса и стволов меняет характеристики башни.\", \"ДЕТАЛИ БАШНИ\", \"ИНСТРУМЕНТЫ\", \"Карандаш\", \"Линия\", \"Прямоугольник\", \"Эллипс\", \"Ластик\", \"Сдвиг детали\", \"↶ Назад\", \"Вперёд ↷\", \"Отразить по горизонтали\", \"Ширина\", \"−\", \"+\", \"Высота\", \"−\", \"+\", \"Очистить деталь\", \"Сетка\", \"Привязка\", \"−\", <string.Empty>, \"+\", \"Весь лист\", <string.Empty>, <string.Empty>, <string.Empty>, \"ЧЕРНИЛА В КОНСТРУКЦИИ\", <string.Empty>, \"Это предел формы, а не плата за попытку.\", \"ХАРАКТЕРИСТИКИ БАШНИ\", <string.Empty>, <string.Empty>, <string.Empty>, \"ТРАФАРЕТЫ · МНОГОРАЗОВЫЕ\", <string.Empty>, \"Золото дают пройденные волны и победа.\nРисование и полигон золота не дают.\", \"Для декора трафареты не нужны.\nРисуйте свободно карандашом и фигурами.\", \"Вставка заменяет выбранную деталь; её можно отменить. Покупка только открывает доступ.\", \"Отмена\", \"Применить рисунок →\", \"Колесо: масштаб · средняя кнопка: сдвиг листа\nCtrl+Z / Ctrl+Y: история · Esc: отмена жеста\" >\r\n",
+            "stackTrace": "at PaperDefense.Tests.TextResourceIntegrationTests.InstanceOverrideChangesHudNestedPanelsAndRealCoreReasonWithoutLeakingToOtherHud () [0x00179] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\TextResourceIntegrationTests.cs:41\r\n",
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

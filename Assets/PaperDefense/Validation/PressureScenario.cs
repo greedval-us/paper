@@ -28,10 +28,13 @@ namespace PaperDefense.Validation
         public PressureScenarioReport Report { get; } = new PressureScenarioReport();
         public bool Finished => Report.Completed;
 
-        public PressureScenario(PressureScenarioConfig config = null)
+        public PressureScenario(PressureScenarioConfig config = null, GameBalance configuredBalance = null)
         {
             Config = config ?? new PressureScenarioConfig();
-            var balance = GameBalance.CreateDefault();
+            var balance = configuredBalance == null ? GameBalance.CreateDefault() : configuredBalance.CreateSnapshot();
+            // This replay owns an open-field four-sided arena and a purchased closed wall ring.
+            // Keep configured combat/art tuning, but do not inherit a production road map.
+            balance.Battlefield = null;
             balance.Width = Config.Width; balance.Height = Config.Height;
             balance.StartingInk = Config.StartingInk; balance.BaseHealth = Config.BaseHealth;
             balance.PlanningSeconds = Config.PlanningSeconds;
@@ -45,7 +48,7 @@ namespace PaperDefense.Validation
             {
                 new WaveDefinition { Count = Config.EnemyCount, SpawnInterval = Config.SpawnInterval,
                     Sides = 15, RunnerFraction = Config.RunnerFraction, GnawerFraction = Config.GnawerFraction,
-                    Title = "Пролом внешнего рубежа · 3000 одновременно" }
+                    Title = UserText.Message("copy.b66dab71e0295f6c") }
             };
             Config.Balance = new PressureBalanceSnapshot(balance);
             Session = new GameSession(balance, Config.Seed, false);

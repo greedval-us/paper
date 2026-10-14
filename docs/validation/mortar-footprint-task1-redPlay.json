@@ -1,0 +1,206 @@
+{
+  "job_id": "c1d798c80c074deb9d132aac4dfc0165",
+  "status": "failed",
+  "mode": "PlayMode",
+  "started_unix_ms": 1791811796338,
+  "finished_unix_ms": 1791811801880,
+  "last_update_unix_ms": 1791811801880,
+  "progress": {
+    "completed": 14,
+    "total": 14,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": null,
+    "last_finished_test_full_name": "PaperDefense.Tests.MortarFootprintPersistenceTests.VersionThreeMigrationPreservesExactBytes",
+    "last_finished_unix_ms": 1791811801855,
+    "stuck_suspected": false,
+    "editor_is_focused": true,
+    "run_in_background": false,
+    "focus_nudge_attempts": null,
+    "focus_nudge_limit": null,
+    "focus_nudge_status": null,
+    "blocked_reason": null,
+    "failures_so_far": [
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintPersistenceTests.FailedVersionThreeOriginalCopyDoesNotCommit",
+        "message": "  Expected: False\r\n  But was:  True\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintPersistenceTests.FutureRootOrFootprintMetadataProtectsPrimaryAndBackup(False)",
+        "message": "  Expected: False\r\n  But was:  True\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintPersistenceTests.InvalidVersionFourAspectIsRejected(0.0f)",
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintPersistenceTests.InvalidVersionFourAspectIsRejected(float.NaN)",
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintPersistenceTests.InvalidVersionFourAspectIsRejected(float.PositiveInfinity)",
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintPersistenceTests.InvalidVersionFourAspectIsRejected(3.01f)",
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintPersistenceTests.LegacyVariantSavesWithoutChangingSourceAndRoundTripsShape",
+        "message": "  Пустая страница остаётся черновиком. Нарисуйте хотя бы один штрих.\r\n  Expected: True\r\n  But was:  False\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintPersistenceTests.MissingAndFutureMetadataAreRejectedAndNonMortarCannotHaveOval",
+        "message": "  Expected: <System.ArgumentException>\r\n  But was:  null\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintPersistenceTests.VersionFourRoundTripsTwoDifferentShapes",
+        "message": "  Expected: 2\r\n  But was:  1.0f\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintPersistenceTests.VersionThreeMigrationPreservesExactBytes",
+        "message": "System.IO.FileNotFoundException : Could not find file \"C:\\Users\\Greedval\\AppData\\Local\\Temp\\PaperFootprintTests-3da46ad58d8f41f7819253ebc407f624\\profile.json.v3-original\""
+      }
+    ],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "PlayMode",
+    "summary": {
+      "total": 14,
+      "passed": 4,
+      "failed": 10,
+      "skipped": 0,
+      "durationSeconds": 0.2005305,
+      "resultState": "Failed(Child)"
+    },
+    "results": [
+      {
+        "name": "FailedVersionThreeOriginalCopyDoesNotCommit",
+        "fullName": "PaperDefense.Tests.MortarFootprintPersistenceTests.FailedVersionThreeOriginalCopyDoesNotCommit",
+        "state": "Failed",
+        "durationSeconds": 0.0374605,
+        "message": "  Expected: False\r\n  But was:  True\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintPersistenceTests.FailedVersionThreeOriginalCopyDoesNotCommit () [0x00046] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintPersistenceTests.cs:83\r\n",
+        "output": ""
+      },
+      {
+        "name": "FutureRootOrFootprintMetadataProtectsPrimaryAndBackup(False)",
+        "fullName": "PaperDefense.Tests.MortarFootprintPersistenceTests.FutureRootOrFootprintMetadataProtectsPrimaryAndBackup(False)",
+        "state": "Failed",
+        "durationSeconds": 0.0081399,
+        "message": "  Expected: False\r\n  But was:  True\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintPersistenceTests.FutureRootOrFootprintMetadataProtectsPrimaryAndBackup (System.Boolean root) [0x00091] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintPersistenceTests.cs:75\r\n",
+        "output": ""
+      },
+      {
+        "name": "FutureRootOrFootprintMetadataProtectsPrimaryAndBackup(True)",
+        "fullName": "PaperDefense.Tests.MortarFootprintPersistenceTests.FutureRootOrFootprintMetadataProtectsPrimaryAndBackup(True)",
+        "state": "Passed",
+        "durationSeconds": 0.020981,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "HistoricalVersionsRestoreCircle(1)",
+        "fullName": "PaperDefense.Tests.MortarFootprintPersistenceTests.HistoricalVersionsRestoreCircle(1)",
+        "state": "Passed",
+        "durationSeconds": 0.0029734,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "HistoricalVersionsRestoreCircle(2)",
+        "fullName": "PaperDefense.Tests.MortarFootprintPersistenceTests.HistoricalVersionsRestoreCircle(2)",
+        "state": "Passed",
+        "durationSeconds": 0.0009649,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "HistoricalVersionsRestoreCircle(3)",
+        "fullName": "PaperDefense.Tests.MortarFootprintPersistenceTests.HistoricalVersionsRestoreCircle(3)",
+        "state": "Passed",
+        "durationSeconds": 0.0005738,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "InvalidVersionFourAspectIsRejected(0.0f)",
+        "fullName": "PaperDefense.Tests.MortarFootprintPersistenceTests.InvalidVersionFourAspectIsRejected(0.0f)",
+        "state": "Failed",
+        "durationSeconds": 0.0026145,
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintPersistenceTests.InvalidVersionFourAspectIsRejected (System.Single aspect) [0x00039] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintPersistenceTests.cs:51\r\n",
+        "output": ""
+      },
+      {
+        "name": "InvalidVersionFourAspectIsRejected(float.NaN)",
+        "fullName": "PaperDefense.Tests.MortarFootprintPersistenceTests.InvalidVersionFourAspectIsRejected(float.NaN)",
+        "state": "Failed",
+        "durationSeconds": 0.0006822,
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintPersistenceTests.InvalidVersionFourAspectIsRejected (System.Single aspect) [0x00039] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintPersistenceTests.cs:51\r\n",
+        "output": ""
+      },
+      {
+        "name": "InvalidVersionFourAspectIsRejected(float.PositiveInfinity)",
+        "fullName": "PaperDefense.Tests.MortarFootprintPersistenceTests.InvalidVersionFourAspectIsRejected(float.PositiveInfinity)",
+        "state": "Failed",
+        "durationSeconds": 0.0006537,
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintPersistenceTests.InvalidVersionFourAspectIsRejected (System.Single aspect) [0x00039] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintPersistenceTests.cs:51\r\n",
+        "output": ""
+      },
+      {
+        "name": "InvalidVersionFourAspectIsRejected(3.01f)",
+        "fullName": "PaperDefense.Tests.MortarFootprintPersistenceTests.InvalidVersionFourAspectIsRejected(3.01f)",
+        "state": "Failed",
+        "durationSeconds": 0.0006374,
+        "message": "  Expected: <System.ArgumentOutOfRangeException>\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintPersistenceTests.InvalidVersionFourAspectIsRejected (System.Single aspect) [0x00039] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintPersistenceTests.cs:51\r\n",
+        "output": ""
+      },
+      {
+        "name": "LegacyVariantSavesWithoutChangingSourceAndRoundTripsShape",
+        "fullName": "PaperDefense.Tests.MortarFootprintPersistenceTests.LegacyVariantSavesWithoutChangingSourceAndRoundTripsShape",
+        "state": "Failed",
+        "durationSeconds": 0.0049237,
+        "message": "  Пустая страница остаётся черновиком. Нарисуйте хотя бы один штрих.\r\n  Expected: True\r\n  But was:  False\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintPersistenceTests.LegacyVariantSavesWithoutChangingSourceAndRoundTripsShape () [0x00062] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintPersistenceTests.cs:26\r\n",
+        "output": ""
+      },
+      {
+        "name": "MissingAndFutureMetadataAreRejectedAndNonMortarCannotHaveOval",
+        "fullName": "PaperDefense.Tests.MortarFootprintPersistenceTests.MissingAndFutureMetadataAreRejectedAndNonMortarCannotHaveOval",
+        "state": "Failed",
+        "durationSeconds": 0.0009084,
+        "message": "  Expected: <System.ArgumentException>\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintPersistenceTests.MissingAndFutureMetadataAreRejectedAndNonMortarCannotHaveOval () [0x00039] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintPersistenceTests.cs:56\r\n",
+        "output": ""
+      },
+      {
+        "name": "VersionFourRoundTripsTwoDifferentShapes",
+        "fullName": "PaperDefense.Tests.MortarFootprintPersistenceTests.VersionFourRoundTripsTwoDifferentShapes",
+        "state": "Failed",
+        "durationSeconds": 0.0014179,
+        "message": "  Expected: 2\r\n  But was:  1.0f\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintPersistenceTests.VersionFourRoundTripsTwoDifferentShapes () [0x00045] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintPersistenceTests.cs:38\r\n",
+        "output": ""
+      },
+      {
+        "name": "VersionThreeMigrationPreservesExactBytes",
+        "fullName": "PaperDefense.Tests.MortarFootprintPersistenceTests.VersionThreeMigrationPreservesExactBytes",
+        "state": "Failed:Error",
+        "durationSeconds": 0.0202932,
+        "message": "System.IO.FileNotFoundException : Could not find file \"C:\\Users\\Greedval\\AppData\\Local\\Temp\\PaperFootprintTests-3da46ad58d8f41f7819253ebc407f624\\profile.json.v3-original\"",
+        "stackTrace": "  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x0019e] in <816f70bc2a9c4332b0bd119906a8d40e>:0 \r\n  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize) [0x00000] in <816f70bc2a9c4332b0bd119906a8d40e>:0 \r\n  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,int)\r\n  at System.IO.File.ReadAllBytes (System.String path) [0x00000] in <816f70bc2a9c4332b0bd119906a8d40e>:0 \r\n  at PaperDefense.Tests.MortarFootprintPersistenceTests.VersionThreeMigrationPreservesExactBytes () [0x00074] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintPersistenceTests.cs:66 \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ",
+        "output": ""
+      }
+    ]
+  }
+}

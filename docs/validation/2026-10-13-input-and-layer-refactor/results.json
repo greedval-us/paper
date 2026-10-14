@@ -1,0 +1,32 @@
+{
+  "unityVersion": "6000.5.7f1",
+  "baselinePlayMode": {
+    "total": 296,
+    "passed": 296,
+    "failed": 0
+  },
+  "finalEditMode": {
+    "jobId": "0db5cdfe86b24d358f334e43bcde4720",
+    "total": 780,
+    "passed": 780,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 26.1565023,
+    "resultState": "Passed"
+  },
+  "finalPlayMode": {
+    "jobId": "4cd4f11e0e074d55a6134c2d5f650277",
+    "total": 311,
+    "passed": 311,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 77.3466943,
+    "resultState": "Passed"
+  },
+  "focusedInputTests": {
+    "total": 15,
+    "passed": 15,
+    "failed": 0
+  },
+  "validationScope": "Unity Editor test suites including rendered scene navigation; no standalone Player build or physical high-poll-rate mouse benchmark."
+}

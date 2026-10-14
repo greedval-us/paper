@@ -1,0 +1,460 @@
+diff --git a/Assets/PaperDefense/Core/DrawingEditSession.cs b/Assets/PaperDefense/Core/DrawingEditSession.cs
+index a153ecc..9c4ed84 100644
+--- a/Assets/PaperDefense/Core/DrawingEditSession.cs
++++ b/Assets/PaperDefense/Core/DrawingEditSession.cs
+@@ -71,7 +71,8 @@ namespace PaperDefense.Core
+             if (SameAssembly(Blueprint, blueprint) && Blueprint.Id == blueprint.Id && Blueprint.Name == blueprint.Name) return false;
+             var parts = new List<DrawingPart>(Snapshot.Parts.Count);
+             foreach (DrawingPart part in Snapshot.Parts)
+-                if (RetainPart(part.Key, Blueprint, blueprint)) parts.Add(part);
++                if (DrawingPartPolicy.ShouldRetain(part.Key, Blueprint, blueprint.Chassis, blueprint.FirstWeapon,
++                    blueprint.SecondWeapon, blueprint.Modules)) parts.Add(part);
+             Commit(blueprint, new DrawingSnapshot(parts));
+             return true;
+         }
+@@ -108,21 +109,6 @@ namespace PaperDefense.Core
+         static bool SameAssembly(TowerBlueprint first, TowerBlueprint second)
+             => first.Chassis == second.Chassis && first.FirstWeapon == second.FirstWeapon && first.SecondWeapon == second.SecondWeapon && first.Modules == second.Modules;
+ 
+-        static bool RetainPart(DrawingPartKey key, TowerBlueprint before, TowerBlueprint after)
+-        {
+-            switch (key)
+-            {
+-                case DrawingPartKey.Base: return before.Chassis == after.Chassis;
+-                case DrawingPartKey.Mount0: return before.FirstWeapon == after.FirstWeapon;
+-                case DrawingPartKey.Mount1: return before.SecondWeapon == after.SecondWeapon && after.SecondWeapon.HasValue;
+-                case DrawingPartKey.Armor: return (before.Modules & after.Modules & TowerModules.Armor) != 0;
+-                case DrawingPartKey.Feed: return (before.Modules & after.Modules & TowerModules.Feed) != 0;
+-                case DrawingPartKey.Tracking: return (before.Modules & after.Modules & TowerModules.Tracking) != 0;
+-                case DrawingPartKey.Rail: return (before.Modules & after.Modules & TowerModules.Rail) != 0;
+-                default: return true;
+-            }
+-        }
+-
+         static bool Touches(DrawingStroke stroke, DrawingPoint point, float radius)
+         {
+             float squared = radius * radius;
+diff --git a/Assets/PaperDefense/Core/DrawingTemplates.cs b/Assets/PaperDefense/Core/DrawingTemplates.cs
+index cac5298..5e5befc 100644
+--- a/Assets/PaperDefense/Core/DrawingTemplates.cs
++++ b/Assets/PaperDefense/Core/DrawingTemplates.cs
+@@ -18,20 +18,7 @@ namespace PaperDefense.Core
+         static readonly DrawingPartKey[] partOrder = { DrawingPartKey.Base, DrawingPartKey.Mount0, DrawingPartKey.Mount1,
+             DrawingPartKey.Armor, DrawingPartKey.Feed, DrawingPartKey.Tracking, DrawingPartKey.Rail, DrawingPartKey.Decoration };
+ 
+-        public static bool IsEnabled(TowerBlueprint blueprint, DrawingPartKey key)
+-        {
+-            if (blueprint == null) return false;
+-            switch (key)
+-            {
+-                case DrawingPartKey.Base: case DrawingPartKey.Mount0: case DrawingPartKey.Decoration: return true;
+-                case DrawingPartKey.Mount1: return blueprint.SecondWeapon.HasValue;
+-                case DrawingPartKey.Armor: return (blueprint.Modules & TowerModules.Armor) != 0;
+-                case DrawingPartKey.Feed: return (blueprint.Modules & TowerModules.Feed) != 0;
+-                case DrawingPartKey.Tracking: return (blueprint.Modules & TowerModules.Tracking) != 0;
+-                case DrawingPartKey.Rail: return (blueprint.Modules & TowerModules.Rail) != 0;
+-                default: return false;
+-            }
+-        }
++        public static bool IsEnabled(TowerBlueprint blueprint, DrawingPartKey key) => DrawingPartPolicy.IsEnabled(blueprint, key);
+ 
+         public static IReadOnlyList<DrawingPartKey> EnabledKeys(TowerBlueprint blueprint)
+         {
+diff --git a/Assets/PaperDefense/Core/TowerBlueprint.cs b/Assets/PaperDefense/Core/TowerBlueprint.cs
+index bc14e1f..be288ef 100644
+--- a/Assets/PaperDefense/Core/TowerBlueprint.cs
++++ b/Assets/PaperDefense/Core/TowerBlueprint.cs
+@@ -3,7 +3,7 @@ using System.Collections.Generic;
+ 
+ namespace PaperDefense.Core
+ {
+-    public enum ChassisKind { Standard, Heavy }
++    public enum ChassisKind { Standard = 0, Heavy = 1 }
+     // Zero is deliberately invalid: missing JSON origin metadata cannot become a legacy page.
+     public enum DrawingOrigin { LegacyStandard = 1, PlayerDrawing = 2 }
+     [Flags] public enum TowerModules { None = 0, Armor = 1, Feed = 2, Tracking = 4, Rail = 8 }
+@@ -44,17 +44,7 @@ namespace PaperDefense.Core
+                 return NewDraft(Id, Name, chassis, firstWeapon, secondWeapon, modules);
+             var retained = new List<DrawingPart>();
+             foreach (DrawingPart part in Drawing.Parts)
+-            {
+-                bool keep = part.Key == DrawingPartKey.Decoration ||
+-                    (part.Key == DrawingPartKey.Base && chassis == Chassis) ||
+-                    (part.Key == DrawingPartKey.Mount0 && firstWeapon == FirstWeapon) ||
+-                    (part.Key == DrawingPartKey.Mount1 && secondWeapon.HasValue && secondWeapon == SecondWeapon) ||
+-                    (part.Key == DrawingPartKey.Armor && (modules & Modules & TowerModules.Armor) != 0) ||
+-                    (part.Key == DrawingPartKey.Feed && (modules & Modules & TowerModules.Feed) != 0) ||
+-                    (part.Key == DrawingPartKey.Tracking && (modules & Modules & TowerModules.Tracking) != 0) ||
+-                    (part.Key == DrawingPartKey.Rail && (modules & Modules & TowerModules.Rail) != 0);
+-                if (keep) retained.Add(part);
+-            }
++                if (DrawingPartPolicy.ShouldRetain(part.Key, this, chassis, firstWeapon, secondWeapon, modules)) retained.Add(part);
+             return new TowerBlueprint(Id, Name, chassis, firstWeapon, secondWeapon, modules,
+                 new DrawingSnapshot(retained), DrawingOrigin.PlayerDrawing);
+         }
+@@ -102,8 +92,9 @@ namespace PaperDefense.Core
+         {
+             reason = "";
+             if (blueprint == null) reason = "Выберите чертёж.";
+-            else if (blueprint.Id.Length == 0 || blueprint.Id.Length > 64 || blueprint.Name.Length == 0 || blueprint.Name.Length > 48)
+-                reason = "Нужны идентификатор и название до 48 знаков.";
++            else if (blueprint.Id.Length == 0 || blueprint.Id.Length > ProfileLimits.MaximumBlueprintIdLength ||
++                blueprint.Name.Length == 0 || blueprint.Name.Length > ProfileLimits.MaximumBlueprintNameLength)
++                reason = "Нужны идентификатор и название до " + ProfileLimits.MaximumBlueprintNameLength + " знаков.";
+             else if (!Enum.IsDefined(typeof(ChassisKind), blueprint.Chassis)) reason = "Неизвестное основание.";
+             else if ((blueprint.Modules & ~(TowerModules.Armor | TowerModules.Feed | TowerModules.Tracking | TowerModules.Rail)) != 0) reason = "Неизвестный модуль.";
+             else if (!IsWeapon(blueprint.FirstWeapon) || (blueprint.SecondWeapon.HasValue && !IsWeapon(blueprint.SecondWeapon.Value))) reason = "Крепления принимают только оружейные детали каталога.";
+diff --git a/Assets/PaperDefense/Core/WorkshopProfile.cs b/Assets/PaperDefense/Core/WorkshopProfile.cs
+index 58a6a88..15f5f44 100644
+--- a/Assets/PaperDefense/Core/WorkshopProfile.cs
++++ b/Assets/PaperDefense/Core/WorkshopProfile.cs
+@@ -35,7 +35,7 @@ namespace PaperDefense.Core
+         });
+         private readonly HashSet<string> unlocked = new HashSet<string>(StringComparer.Ordinal);
+         private readonly List<TowerBlueprint> album = new List<TowerBlueprint>();
+-        private readonly string[] loadout = new string[4];
++        private readonly string[] loadout = new string[ProfileLimits.LoadoutSlotCount];
+         private readonly ReadOnlyCollection<TowerBlueprint> albumView;
+         private readonly ReadOnlyCollection<string> loadoutView;
+         public int Gold { get; private set; }
+@@ -55,7 +55,7 @@ namespace PaperDefense.Core
+             albumView = album.AsReadOnly(); loadoutView = Array.AsReadOnly(loadout);
+             foreach (PartUnlock part in parts) if (part.GoldCost == 0) unlocked.Add(part.Id);
+             AddStarters();
+-            for (int i = 0; i < 4; i++) loadout[i] = album[i].Id;
++            for (int i = 0; i < loadout.Length; i++) loadout[i] = album[i].Id;
+         }
+         private void AddStarters()
+         {
+@@ -64,7 +64,7 @@ namespace PaperDefense.Core
+             AddStarter(new TowerBlueprint("starter.piercer", "Пробивающая пушка", ChassisKind.Standard, StructureKind.Piercer));
+             AddStarter(new TowerBlueprint("starter.mortar", "Защищённая мортира", ChassisKind.Standard, StructureKind.Mortar, modules: TowerModules.Armor));
+         }
+-        private void AddStarter(TowerBlueprint blueprint) { if (album.Count < 64 && Find(blueprint.Id) == null) album.Add(blueprint); }
++        private void AddStarter(TowerBlueprint blueprint) { if (album.Count < ProfileLimits.MaximumAlbumPages && Find(blueprint.Id) == null) album.Add(blueprint); }
+         public void GrantGold(int amount) { if (amount > 0) Gold = (int)Math.Min(int.MaxValue, (long)Gold + amount); }
+         public bool IsUnlocked(string id) => id != null && unlocked.Contains(id);
+         public bool Unlock(string id, out string reason, GameBalance balance = null)
+@@ -104,7 +104,7 @@ namespace PaperDefense.Core
+             if (blueprint.Origin == DrawingOrigin.PlayerDrawing && blueprint.Drawing.IsEmpty)
+             { reason = "Пустая страница остаётся черновиком. Нарисуйте хотя бы один штрих."; return false; }
+             for (int i = 0; i < album.Count; i++) if (album[i].Id == blueprint.Id) { album[i] = blueprint; return true; }
+-            if (album.Count >= 64) { reason = "В альбоме уже 64 чертежа."; return false; }
++            if (album.Count >= ProfileLimits.MaximumAlbumPages) { reason = "В альбоме уже " + ProfileLimits.MaximumAlbumPages + " чертежа."; return false; }
+             album.Add(blueprint); return true;
+         }
+         public bool RemoveBlueprint(string id, out string reason)
+@@ -118,7 +118,7 @@ namespace PaperDefense.Core
+         public bool AssignSlot(int slot, string id, out string reason, GameBalance balance = null)
+         {
+             reason = "";
+-            if (slot < 0 || slot >= loadout.Length) { reason = "Номер слота от 0 до 3."; return false; }
++            if (slot < 0 || slot >= loadout.Length) { reason = "Номер слота от 0 до " + (ProfileLimits.LoadoutSlotCount - 1) + "."; return false; }
+             TowerBlueprint blueprint = Find(id);
+             if (blueprint == null || !ValidateOwned(blueprint, out reason, balance)) { if (reason.Length == 0) reason = "Чертёж не найден."; return false; }
+             for (int i = 0; i < loadout.Length; i++) if (i != slot && loadout[i] == id) { reason = "Этот чертёж уже взят в другой слот."; return false; }
+@@ -126,7 +126,7 @@ namespace PaperDefense.Core
+         }
+         private TowerBlueprint Find(string id) { foreach (TowerBlueprint blueprint in album) if (blueprint.Id == id) return blueprint; return null; }
+         public IReadOnlyList<TowerBlueprint> GetLoadoutBlueprints()
+-        { var result = new TowerBlueprint[4]; for (int i = 0; i < 4; i++) result[i] = Find(loadout[i]); return Array.AsReadOnly(result); }
++        { var result = new TowerBlueprint[loadout.Length]; for (int i = 0; i < result.Length; i++) result[i] = Find(loadout[i]); return Array.AsReadOnly(result); }
+         public WorkshopProfileData ToData()
+         {
+             var data = new WorkshopProfileData { Version = CurrentVersion, Gold = Gold, Loadout = (string[])loadout.Clone(), Album = new BlueprintData[album.Count] };
+@@ -164,7 +164,7 @@ namespace PaperDefense.Core
+             // Starters are always available to repair a stale or damaged four-slot selection.
+             profile.AddStarters();
+             var selected = new HashSet<string>();
+-            for (int i = 0; i < 4; i++)
++            for (int i = 0; i < profile.loadout.Length; i++)
+             {
+                 string id = data.Loadout != null && i < data.Loadout.Length ? data.Loadout[i] : null;
+                 if (profile.Find(id) == null || !selected.Add(id))
+@@ -176,8 +176,8 @@ namespace PaperDefense.Core
+         }
+         static WorkshopProfile FromStrictData(WorkshopProfileData data)
+         {
+-            if (data.Gold < 0 || data.Unlocked == null || data.Album == null || data.Album.Length < 4 || data.Album.Length > 64 ||
+-                data.Loadout == null || data.Loadout.Length != 4)
++            if (data.Gold < 0 || data.Unlocked == null || data.Album == null || data.Album.Length < ProfileLimits.LoadoutSlotCount ||
++                data.Album.Length > ProfileLimits.MaximumAlbumPages || data.Loadout == null || data.Loadout.Length != ProfileLimits.LoadoutSlotCount)
+                 throw new ArgumentException("Повреждённые данные профиля версии " + data.Version + ".");
+             var profile = new WorkshopProfile(); profile.Gold = data.Gold;
+             profile.unlocked.Clear(); profile.album.Clear();
+diff --git a/Assets/PaperDefense/Presentation/UI/DrawingEditorPanel.cs b/Assets/PaperDefense/Presentation/UI/DrawingEditorPanel.cs
+index 26ab5f7..c12d78a 100644
+--- a/Assets/PaperDefense/Presentation/UI/DrawingEditorPanel.cs
++++ b/Assets/PaperDefense/Presentation/UI/DrawingEditorPanel.cs
+@@ -79,7 +79,7 @@ namespace PaperDefense.Presentation
+             var assessment = Session.Blueprint.WithDrawing(Session.Snapshot).Assessment;
+             string feedback = "Украшения не участвуют в оценке.";
+             foreach (var part in assessment.PartFeedback) if (part.Part == Canvas.SelectedPart) feedback = part.Message;
+-            message.text = "Качество " + assessment.Quality.ToString("0") + "/100 · " + Session.Snapshot.PointCount + "/2048 точек\n" + feedback;
++            message.text = "Качество " + assessment.Quality.ToString("0") + "/100 · " + Session.Snapshot.PointCount + "/" + DrawingSnapshot.MaxPoints + " точек\n" + feedback;
+             Canvas.SetVerticesDirty();
+         }
+         public static string Name(DrawingPartKey part)
+@@ -156,7 +156,7 @@ namespace PaperDefense.Presentation
+             if (!Point(e, out point))
+             { if (pending.Count > 0) FinishStroke(); return; }
+             if (Eraser) { session.Erase(selected, point, .045f / zoom); Changed?.Invoke(); return; }
+-            if (pending.Count >= 2048) { Rejected?.Invoke("Лимит точек штриха. Закончи его и удали лишнее."); return; }
++            if (pending.Count >= DrawingSnapshot.MaxPoints) { Rejected?.Invoke("Лимит точек штриха. Закончи его и удали лишнее."); return; }
+             if (pending.Count > 0)
+             { var last = pending[pending.Count - 1]; float dx = last.X - point.X, dy = last.Y - point.Y; if (dx * dx + dy * dy < .000016f) return; }
+             pending.Add(point); SetVerticesDirty();
++++ Assets/PaperDefense/Core/DrawingPartPolicy.cs
+using System;
+
+namespace PaperDefense.Core
+{
+    /// <summary>Assembly bindings shared by drawing commands, saved pages and reference templates.</summary>
+    public static class DrawingPartPolicy
+    {
+        public static bool IsEnabled(TowerBlueprint blueprint, DrawingPartKey key)
+        {
+            if (blueprint == null) return false;
+            switch (key)
+            {
+                case DrawingPartKey.Base: case DrawingPartKey.Mount0: case DrawingPartKey.Decoration: return true;
+                case DrawingPartKey.Mount1: return blueprint.SecondWeapon.HasValue;
+                default:
+                    TowerModules module = ModuleFor(key);
+                    return module != TowerModules.None && (blueprint.Modules & module) != 0;
+            }
+        }
+
+        public static bool ShouldRetain(DrawingPartKey key, TowerBlueprint before, ChassisKind afterChassis,
+            StructureKind afterFirstWeapon, StructureKind? afterSecondWeapon, TowerModules afterModules)
+        {
+            if (before == null) throw new ArgumentNullException(nameof(before));
+            switch (key)
+            {
+                case DrawingPartKey.Base: return before.Chassis == afterChassis;
+                case DrawingPartKey.Mount0: return before.FirstWeapon == afterFirstWeapon;
+                case DrawingPartKey.Mount1: return afterSecondWeapon.HasValue && before.SecondWeapon == afterSecondWeapon;
+                case DrawingPartKey.Decoration: return true;
+                default:
+                    TowerModules module = ModuleFor(key);
+                    return module != TowerModules.None && (before.Modules & afterModules & module) != 0;
+            }
+        }
+
+        static TowerModules ModuleFor(DrawingPartKey key)
+        {
+            switch (key)
+            {
+                case DrawingPartKey.Armor: return TowerModules.Armor;
+                case DrawingPartKey.Feed: return TowerModules.Feed;
+                case DrawingPartKey.Tracking: return TowerModules.Tracking;
+                case DrawingPartKey.Rail: return TowerModules.Rail;
+                default: return TowerModules.None;
+            }
+        }
+    }
+}
++++ Assets/PaperDefense/Core/ProfileLimits.cs
+namespace PaperDefense.Core
+{
+    /// <summary>Saved profile structure; these limits are independent of the active game balance.</summary>
+    public static class ProfileLimits
+    {
+        public const int MaximumAlbumPages = 64;
+        public const int LoadoutSlotCount = 4;
+        public const int MaximumBlueprintIdLength = 64;
+        public const int MaximumBlueprintNameLength = 48;
+    }
+}
++++ Assets/PaperDefense/Tests/EditMode/DrawingPolicyContractTests.cs
+using System;
+using NUnit.Framework;
+using PaperDefense.Core;
+
+namespace PaperDefense.Tests
+{
+    /// <summary>Characterization of saved part bindings and format limits before policy extraction.</summary>
+    public sealed class DrawingPolicyContractTests
+    {
+        const TowerModules AllModules = TowerModules.Armor | TowerModules.Feed | TowerModules.Tracking | TowerModules.Rail;
+
+        static DrawingStroke Marker(DrawingPartKey key)
+        {
+            float offset = (int)key / 16f;
+            return new DrawingStroke(new[] { new DrawingPoint(-.5f, -.5f + offset), new DrawingPoint(.5f, .5f - offset) });
+        }
+
+        static DrawingSnapshot EveryPart()
+        {
+            var parts = new DrawingPart[8];
+            for (int i = 0; i < parts.Length; i++)
+                parts[i] = new DrawingPart((DrawingPartKey)i, new[] { Marker((DrawingPartKey)i) });
+            return new DrawingSnapshot(parts);
+        }
+
+        static TowerBlueprint Page(StructureKind? second = StructureKind.Piercer, TowerModules modules = AllModules)
+            => TowerBlueprint.NewDraft("policy", "Policy", ChassisKind.Standard, StructureKind.Gun, second, modules).WithDrawing(EveryPart());
+
+        // Literal hashes were captured from the original entrypoint at HEAD 5ab2424.
+        // Changing a binding, losing decoration, or changing canonical geometry must fail these cases.
+        [TestCase("chassis", DrawingPartKey.Base, "a06d66b6d7fd7891")]
+        [TestCase("first", DrawingPartKey.Mount0, "92b6bb72a4ceb3db")]
+        [TestCase("second", DrawingPartKey.Mount1, "f0ef550f27e73105")]
+        [TestCase("remove-second", DrawingPartKey.Mount1, "f0ef550f27e73105")]
+        [TestCase("armor", DrawingPartKey.Armor, "4f184c1b7ba8f7ff")]
+        [TestCase("feed", DrawingPartKey.Feed, "bd1ffbfff8865229")]
+        [TestCase("tracking", DrawingPartKey.Tracking, "e583295cebaec9ab")]
+        [TestCase("rail", DrawingPartKey.Rail, "899949a009d7430f")]
+        public void BothAssemblyEditorsClearOnlyTheChangedPart(string change, DrawingPartKey removed, string expectedHash)
+        {
+            TowerBlueprint original = Page();
+            ChassisKind chassis = change == "chassis" ? ChassisKind.Heavy : ChassisKind.Standard;
+            StructureKind first = change == "first" ? StructureKind.Mortar : StructureKind.Gun;
+            StructureKind? second = change == "remove-second" ? (StructureKind?)null :
+                change == "second" ? StructureKind.Fan : StructureKind.Piercer;
+            TowerModules modules = AllModules;
+            if (change == "armor") modules &= ~TowerModules.Armor;
+            if (change == "feed") modules &= ~TowerModules.Feed;
+            if (change == "tracking") modules &= ~TowerModules.Tracking;
+            if (change == "rail") modules &= ~TowerModules.Rail;
+
+            TowerBlueprint changed = original.WithAssembly(chassis, first, second, modules);
+            var editor = new DrawingEditSession(original);
+            Assert.That(editor.ReplaceBlueprint(TowerBlueprint.NewDraft(original.Id, original.Name, chassis, first, second, modules)), Is.True);
+            foreach (DrawingSnapshot result in new[] { changed.Drawing, editor.Snapshot })
+            {
+                Assert.That(result.GeometryHash, Is.EqualTo(expectedHash));
+                Assert.That(result.PointCount, Is.EqualTo(14));
+                foreach (DrawingPart part in result.Parts)
+                    Assert.That(part.Strokes.Count, Is.EqualTo(part.Key == removed ? 0 : 1), part.Key.ToString());
+            }
+            Assert.That(original.Drawing.GeometryHash, Is.EqualTo("7e13935604a832fe"));
+            Assert.That(original.Drawing.PointCount, Is.EqualTo(16));
+            Assert.That(editor.Undo(), Is.True);
+            Assert.That(editor.Snapshot.GeometryHash, Is.EqualTo("7e13935604a832fe"));
+            Assert.That(editor.Redo(), Is.True);
+            Assert.That(editor.Snapshot.GeometryHash, Is.EqualTo(expectedHash));
+        }
+
+        [Test]
+        public void AssemblyReplacementRetainsUnsavedEditorStrokesRatherThanBlueprintDrawing()
+        {
+            TowerBlueprint original = TowerBlueprint.NewDraft("draft", "Draft", ChassisKind.Standard, StructureKind.Gun);
+            var editor = new DrawingEditSession(original);
+            Assert.That(editor.AddStroke(DrawingPartKey.Base, Marker(DrawingPartKey.Base).Points, out _), Is.True);
+            Assert.That(editor.AddStroke(DrawingPartKey.Mount0, Marker(DrawingPartKey.Mount0).Points, out _), Is.True);
+            Assert.That(editor.AddStroke(DrawingPartKey.Decoration, Marker(DrawingPartKey.Decoration).Points, out _), Is.True);
+            Assert.That(original.Drawing.PointCount, Is.Zero);
+            Assert.That(editor.ReplaceBlueprint(TowerBlueprint.NewDraft(original.Id, original.Name, original.Chassis, StructureKind.Mortar)), Is.True);
+            Assert.That(editor.Snapshot.GetPart(DrawingPartKey.Base).Strokes.Count, Is.EqualTo(1));
+            Assert.That(editor.Snapshot.GetPart(DrawingPartKey.Mount0).Strokes.Count, Is.Zero);
+            Assert.That(editor.Snapshot.GetPart(DrawingPartKey.Decoration).Strokes.Count, Is.EqualTo(1));
+            Assert.That(editor.Snapshot.PointCount, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void ExactNoOpKeepsDormantSavedPartsWithoutAddingHistory()
+        {
+            TowerBlueprint original = Page(null, TowerModules.None);
+            Assert.That(original.WithAssembly(original.Chassis, original.FirstWeapon, original.SecondWeapon, original.Modules), Is.SameAs(original));
+            var editor = new DrawingEditSession(original);
+            Assert.That(editor.ReplaceBlueprint(original), Is.False);
+            Assert.That(editor.Snapshot.GeometryHash, Is.EqualTo("7e13935604a832fe"));
+            Assert.That(editor.CanUndo, Is.False);
+        }
+
+        [Test]
+        public void InstallingModuleClearsDormantLinesWhileKeepingExistingActiveParts()
+        {
+            TowerBlueprint original = Page(null, TowerModules.None);
+            TowerBlueprint changed = original.WithAssembly(original.Chassis, original.FirstWeapon, null, TowerModules.Armor);
+            var editor = new DrawingEditSession(original);
+            Assert.That(editor.ReplaceBlueprint(TowerBlueprint.NewDraft(original.Id, original.Name, original.Chassis, original.FirstWeapon,
+                modules: TowerModules.Armor)), Is.True);
+            foreach (DrawingSnapshot result in new[] { changed.Drawing, editor.Snapshot })
+            {
+                Assert.That(result.PointCount, Is.EqualTo(6));
+                foreach (DrawingPart part in result.Parts)
+                    Assert.That(part.Strokes.Count, Is.EqualTo(part.Key == DrawingPartKey.Base || part.Key == DrawingPartKey.Mount0 ||
+                        part.Key == DrawingPartKey.Decoration ? 1 : 0), part.Key.ToString());
+            }
+        }
+
+        [Test]
+        public void LegacyNoOpAndRenameKeepOriginButAssemblyChangeStartsAnEmptyAuthoredDraft()
+        {
+            var legacy = new TowerBlueprint("legacy", "Legacy", ChassisKind.Standard, StructureKind.Gun);
+            Assert.That(legacy.WithAssembly(legacy.Chassis, legacy.FirstWeapon, legacy.SecondWeapon, legacy.Modules), Is.SameAs(legacy));
+            Assert.That(legacy.WithName("Renamed").Origin, Is.EqualTo(DrawingOrigin.LegacyStandard));
+            TowerBlueprint changed = legacy.WithAssembly(ChassisKind.Heavy, legacy.FirstWeapon, null, TowerModules.None);
+            Assert.That(changed.Origin, Is.EqualTo(DrawingOrigin.PlayerDrawing));
+            Assert.That(changed.Drawing.IsEmpty, Is.True);
+        }
+
+        [Test]
+        public void EnabledPartsKeepTemplateOrderAndIgnoreDormantSavedLines()
+        {
+            Assert.That(DrawingTemplateCatalog.EnabledKeys(Page()), Is.EqualTo(new[] { DrawingPartKey.Base, DrawingPartKey.Mount0,
+                DrawingPartKey.Mount1, DrawingPartKey.Armor, DrawingPartKey.Feed, DrawingPartKey.Tracking, DrawingPartKey.Rail, DrawingPartKey.Decoration }));
+            TowerBlueprint single = Page(null, TowerModules.None);
+            Assert.That(DrawingTemplateCatalog.EnabledKeys(single), Is.EqualTo(new[] { DrawingPartKey.Base, DrawingPartKey.Mount0, DrawingPartKey.Decoration }));
+            Assert.That(DrawingTemplateCatalog.IsEnabled(null, DrawingPartKey.Base), Is.False);
+            Assert.That(DrawingTemplateCatalog.IsEnabled(single, (DrawingPartKey)99), Is.False);
+            Assert.That(single.Drawing.PointCount, Is.EqualTo(16));
+        }
+
+        [TestCase(TowerModules.Armor, DrawingPartKey.Armor)]
+        [TestCase(TowerModules.Feed, DrawingPartKey.Feed)]
+        [TestCase(TowerModules.Tracking, DrawingPartKey.Tracking)]
+        [TestCase(TowerModules.Rail, DrawingPartKey.Rail)]
+        public void EachOptionalPartUsesItsOwnModuleBinding(TowerModules module, DrawingPartKey enabledPart)
+        {
+            TowerBlueprint single = Page(null, module);
+            foreach (DrawingPartKey key in Enum.GetValues(typeof(DrawingPartKey)))
+                Assert.That(DrawingTemplateCatalog.IsEnabled(single, key), Is.EqualTo(key == DrawingPartKey.Base ||
+                    key == DrawingPartKey.Mount0 || key == DrawingPartKey.Decoration || key == enabledPart), key.ToString());
+        }
+
+        [Test]
+        public void SavedIdentifiersAndDensePartIndexContractStayCompatible()
+        {
+            Assert.That(new[] { (int)ChassisKind.Standard, (int)ChassisKind.Heavy }, Is.EqualTo(new[] { 0, 1 }));
+            Assert.That(new[] { (int)DrawingPartKey.Base, (int)DrawingPartKey.Mount0, (int)DrawingPartKey.Mount1, (int)DrawingPartKey.Armor,
+                (int)DrawingPartKey.Feed, (int)DrawingPartKey.Tracking, (int)DrawingPartKey.Decoration, (int)DrawingPartKey.Rail },
+                Is.EqualTo(new[] { 0, 1, 2, 3, 4, 5, 6, 7 }));
+            Assert.That(Enum.GetValues(typeof(DrawingPartKey)).Length, Is.EqualTo(8));
+            Assert.That(new[] { (int)TowerModules.None, (int)TowerModules.Armor, (int)TowerModules.Feed, (int)TowerModules.Tracking, (int)TowerModules.Rail },
+                Is.EqualTo(new[] { 0, 1, 2, 4, 8 }));
+            Assert.That(DrawingSnapshot.Empty.Parts.Count, Is.EqualTo(8));
+            foreach (DrawingPartKey key in Enum.GetValues(typeof(DrawingPartKey)))
+                Assert.That(DrawingSnapshot.Empty.GetPart(key).Key, Is.EqualTo(key));
+        }
+
+        [TestCase(64, 48, true)]
+        [TestCase(65, 48, false)]
+        [TestCase(64, 49, false)]
+        public void BlueprintIdentifierAndNameLimitsMatchSavedPageContract(int idLength, int nameLength, bool valid)
+        {
+            var page = new TowerBlueprint(new string('i', idLength), new string('Я', nameLength), ChassisKind.Standard, StructureKind.Gun);
+            Assert.That(TowerCatalog.ValidateParts(page, out _), Is.EqualTo(valid));
+        }
+
+        [Test]
+        public void FullAlbumStillAllowsReplacementButRejectsSixtyFifthPageAndFifthSlot()
+        {
+            var profile = new WorkshopProfile();
+            for (int i = 4; i < 64; i++)
+                Assert.That(profile.SaveBlueprint(new TowerBlueprint("page." + i, "Page " + i, ChassisKind.Standard, StructureKind.Gun), out _), Is.True);
+            Assert.That(profile.SaveBlueprint(new TowerBlueprint("page.63", "Renamed", ChassisKind.Standard, StructureKind.Gun), out _), Is.True);
+            Assert.That(profile.SaveBlueprint(new TowerBlueprint("overflow", "Overflow", ChassisKind.Standard, StructureKind.Gun), out _), Is.False);
+            Assert.That(profile.AssignSlot(-1, "page.63", out _), Is.False);
+            Assert.That(profile.AssignSlot(4, "page.63", out _), Is.False);
+            WorkshopProfileData data = profile.ToData();
+            Assert.That(data.Album.Length, Is.EqualTo(64));
+            Assert.That(data.Loadout.Length, Is.EqualTo(4));
+            WorkshopProfile restored = WorkshopProfile.FromData(data);
+            Assert.That(restored.Album.Count, Is.EqualTo(64));
+            Assert.That(restored.GetLoadoutBlueprints().Count, Is.EqualTo(4));
+        }
+    }
+}

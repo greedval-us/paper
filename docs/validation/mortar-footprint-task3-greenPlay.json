@@ -1,0 +1,120 @@
+{
+  "job_id": "4211952e41c44224a8bd35d1e4507a37",
+  "status": "succeeded",
+  "mode": "PlayMode",
+  "started_unix_ms": 1791813072926,
+  "finished_unix_ms": 1791813075398,
+  "last_update_unix_ms": 1791813075398,
+  "progress": {
+    "completed": 9,
+    "total": 9,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": null,
+    "last_finished_test_full_name": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialPiercerUsesConfiguredTargetLimit",
+    "last_finished_unix_ms": 1791813075389,
+    "stuck_suspected": false,
+    "editor_is_focused": true,
+    "run_in_background": false,
+    "focus_nudge_attempts": null,
+    "focus_nudge_limit": null,
+    "focus_nudge_status": null,
+    "blocked_reason": null,
+    "failures_so_far": [],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "PlayMode",
+    "summary": {
+      "total": 9,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 0.6493609,
+      "resultState": "Passed"
+    },
+    "results": [
+      {
+        "name": "BlotTrainingIsExplicitAndShowsClearedAndUnresolvedMarks",
+        "fullName": "PaperDefense.Tests.ExpandedTrialHudTests.BlotTrainingIsExplicitAndShowsClearedAndUnresolvedMarks",
+        "state": "Passed",
+        "durationSeconds": 0.1727638,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "WorkshopProbeLeavesProfileLoadoutCurrencyAndSessionUntouched",
+        "fullName": "PaperDefense.Tests.MortarFootprintProbeIntegrationTests.WorkshopProbeLeavesProfileLoadoutCurrencyAndSessionUntouched",
+        "state": "Passed",
+        "durationSeconds": 0.00152,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ChangedTrialBalanceStillLeavesProfileRunTickAndCurrencyUntouched",
+        "fullName": "PaperDefense.Tests.TrialBalanceIntegrationTests.ChangedTrialBalanceStillLeavesProfileRunTickAndCurrencyUntouched",
+        "state": "Passed",
+        "durationSeconds": 0.0202708,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "PreviewTrialAndBattleConstructionUseTheSameConfiguredPriceAndMaterialHealth",
+        "fullName": "PaperDefense.Tests.TrialBalanceIntegrationTests.PreviewTrialAndBattleConstructionUseTheSameConfiguredPriceAndMaterialHealth",
+        "state": "Passed",
+        "durationSeconds": 0.0517435,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "TrialFireUsesConfiguredShotInterval",
+        "fullName": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredShotInterval",
+        "state": "Passed",
+        "durationSeconds": 0.0734423,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "TrialFireUsesConfiguredWeaponDamageAndRange(\"damage\")",
+        "fullName": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredWeaponDamageAndRange(\"damage\")",
+        "state": "Passed",
+        "durationSeconds": 0.037523,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "TrialFireUsesConfiguredWeaponDamageAndRange(\"range\")",
+        "fullName": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredWeaponDamageAndRange(\"range\")",
+        "state": "Passed",
+        "durationSeconds": 0.0280839,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "TrialMortarUsesConfiguredRadiusAndFlightDuration",
+        "fullName": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialMortarUsesConfiguredRadiusAndFlightDuration",
+        "state": "Passed",
+        "durationSeconds": 0.0663432,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "TrialPiercerUsesConfiguredTargetLimit",
+        "fullName": "PaperDefense.Tests.TrialBalanceIntegrationTests.TrialPiercerUsesConfiguredTargetLimit",
+        "state": "Passed",
+        "durationSeconds": 0.074421,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      }
+    ]
+  }
+}

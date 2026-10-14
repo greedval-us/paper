@@ -1,96 +1,129 @@
 using System;
+using System.Collections.Generic;
 
 namespace PaperDefense.Core
 {
-    public enum ChassisKind { Standard, Heavy }
-    [Flags] public enum TowerModules { None = 0, Armor = 1, Feed = 2, Tracking = 4 }
+    public enum ChassisKind { Standard = 0, Heavy = 1 }
+    public enum DrawingOrigin { LegacyStandard = 1, PlayerDrawing = 2, Freeform = 3 }
+    [Flags] public enum TowerModules { None = 0, Armor = 1, Feed = 2, Tracking = 4, Rail = 8 }
 
-    /// <summary>A saved assembly is a value snapshot. Editing the album never refits deployed towers.</summary>
+    public sealed class WeaponMountSelection
+    {
+        public int SlotIndex { get; }
+        public string WeaponId { get; }
+        public MortarFootprint Footprint { get; }
+        public WeaponMountSelection(int slotIndex,string weaponId,MortarFootprint footprint=null)
+        {
+            if(slotIndex<0||slotIndex>=TowerBlueprint.MaximumWeaponMounts)throw new ArgumentOutOfRangeException(nameof(slotIndex));
+            SlotIndex=slotIndex;WeaponId=ContentValidation.Id(weaponId,"blueprint.weaponMounts.weaponId");Footprint=footprint??MortarFootprint.Circle;
+        }
+    }
+
     public sealed class TowerBlueprint
     {
-        public string Id { get; }
-        public string Name { get; }
+        public const int MaximumWeaponMounts=3;
+        public IReadOnlyList<WeaponMountSelection> WeaponMounts { get; }
+        public string Id { get; } public string Name { get; }
+        public string ChassisId { get; } public string FirstWeaponId { get; } public string SecondWeaponId { get; }
+        public IReadOnlyList<ModuleSelection> ModuleSelections { get; }
+        public ContentCatalogSnapshot Content { get; }
         public ChassisKind Chassis { get; }
         public StructureKind FirstWeapon { get; }
         public StructureKind? SecondWeapon { get; }
         public TowerModules Modules { get; }
-        public TowerBlueprint(string id, string name, ChassisKind chassis, StructureKind firstWeapon,
-            StructureKind? secondWeapon = null, TowerModules modules = TowerModules.None)
-        { Id = id?.Trim() ?? ""; Name = name?.Trim() ?? ""; Chassis = chassis; FirstWeapon = firstWeapon; SecondWeapon = secondWeapon; Modules = modules; }
-    }
-
-    public static class TowerCatalog
-    {
-        public static int Capacity(ChassisKind chassis) => chassis == ChassisKind.Heavy ? 14 : 10;
-        public static int Capacity(TowerBlueprint blueprint) => Capacity(blueprint.Chassis);
-        public static int Load(TowerBlueprint blueprint)
+        internal bool LegacyAssembly { get; }
+        public DrawingSnapshot Drawing { get; } public DrawingOrigin Origin { get; }
+        public bool IsFreeform => Origin == DrawingOrigin.Freeform;
+        public bool HasPlayerDrawing => Origin != DrawingOrigin.LegacyStandard;
+        public FreeformTowerDesign FreeformDesign { get; }
+        public DrawingAssessment Assessment { get; } public DrawingEvaluationStamp EvaluationStamp { get; }
+        public MortarFootprint FirstFootprint { get; } public MortarFootprint SecondFootprint { get; }
+        public TowerBlueprint(string id,string name,string chassisId,string firstWeaponId,string secondWeaponId=null,
+            IEnumerable<ModuleSelection> modules=null,DrawingSnapshot drawing=null,DrawingOrigin origin=DrawingOrigin.LegacyStandard,
+            MortarFootprint firstFootprint=null,MortarFootprint secondFootprint=null,ContentCatalogSnapshot content=null,DrawingEvaluationStamp evaluationStamp=null)
+            :this(id,name,chassisId,LegacyMounts(firstWeaponId,secondWeaponId,firstFootprint,secondFootprint),modules,drawing,origin,content,evaluationStamp)
+        { }
+        static IEnumerable<WeaponMountSelection> LegacyMounts(string first,string second,MortarFootprint firstFootprint,MortarFootprint secondFootprint)
         {
-            int load = WeaponLoad(blueprint.FirstWeapon) + (blueprint.SecondWeapon.HasValue ? WeaponLoad(blueprint.SecondWeapon.Value) : 0);
-            if ((blueprint.Modules & TowerModules.Armor) != 0) load += 3;
-            if ((blueprint.Modules & TowerModules.Feed) != 0) load += 2;
-            if ((blueprint.Modules & TowerModules.Tracking) != 0) load += 2;
-            return load;
+            yield return new WeaponMountSelection(0,first,firstFootprint);
+            if(second!=null)yield return new WeaponMountSelection(1,second,secondFootprint);
+            else if(secondFootprint!=null&&secondFootprint.AspectRatio!=1)throw new ArgumentException("Only occupied mounts may have a noncircular footprint.");
         }
-        private static int WeaponLoad(StructureKind kind) => kind == StructureKind.Gun ? 4 : kind == StructureKind.Piercer ? 6 : kind == StructureKind.Mortar ? 7 : 100;
-        public static bool Validate(TowerBlueprint blueprint, out string reason)
+        public TowerBlueprint(string id,string name,string chassisId,IEnumerable<WeaponMountSelection> weaponMounts,
+            IEnumerable<ModuleSelection> modules=null,DrawingSnapshot drawing=null,DrawingOrigin origin=DrawingOrigin.LegacyStandard,
+            ContentCatalogSnapshot content=null,DrawingEvaluationStamp evaluationStamp=null)
         {
-            reason = "";
-            if (blueprint == null) reason = "Выберите чертёж.";
-            else if (blueprint.Id.Length == 0 || blueprint.Id.Length > 64 || blueprint.Name.Length == 0 || blueprint.Name.Length > 48)
-                reason = "Нужны идентификатор и название до 48 знаков.";
-            else if (!Enum.IsDefined(typeof(ChassisKind), blueprint.Chassis)) reason = "Неизвестное основание.";
-            else if ((blueprint.Modules & ~(TowerModules.Armor | TowerModules.Feed | TowerModules.Tracking)) != 0) reason = "Неизвестный модуль.";
-            else if (WeaponLoad(blueprint.FirstWeapon) > 7 || (blueprint.SecondWeapon.HasValue && WeaponLoad(blueprint.SecondWeapon.Value) > 7)) reason = "Крепления принимают пулемёт, пробивающую пушку или мортиру.";
-            else if (Load(blueprint) > Capacity(blueprint))
-                reason = "Не хватает " + (Load(blueprint) - Capacity(blueprint)) + " ед. нагрузки. Снимите оружие или выберите другое основание.";
-            return reason.Length == 0;
+            if(!Enum.IsDefined(typeof(DrawingOrigin),origin))throw new ArgumentOutOfRangeException(nameof(origin));
+            Id=id?.Trim()??"";Name=name?.Trim()??"";ChassisId=ContentValidation.Id(chassisId,"blueprint.chassisId");
+            var mounts=new List<WeaponMountSelection>();var slots=new HashSet<int>();
+            if(weaponMounts==null)throw new ArgumentNullException(nameof(weaponMounts));
+            foreach(var mount in weaponMounts){if(mount==null||!slots.Add(mount.SlotIndex))throw new ArgumentException("blueprint.weaponMounts: empty or duplicate mount");mounts.Add(new WeaponMountSelection(mount.SlotIndex,mount.WeaponId,mount.Footprint));}
+            if(mounts.Count==0||mounts.Count>MaximumWeaponMounts||!slots.Contains(0))throw new ArgumentException("blueprint.weaponMounts: slot 0 is required; at most three mounts");
+            mounts.Sort((a,b)=>a.SlotIndex.CompareTo(b.SlotIndex));WeaponMounts=mounts.AsReadOnly();
+            FirstWeaponId=GetWeaponId(0);SecondWeaponId=GetWeaponId(1);
+            var owned=new List<ModuleSelection>();var instances=new HashSet<string>(StringComparer.Ordinal);
+            if(modules!=null)foreach(var module in modules){if(module==null||!instances.Add(module.InstanceId))throw new ArgumentException(UserText.Message("copy.14b33da5d4fa66a2"));if(owned.Count>=DrawingSnapshot.MaximumParts)throw new ArgumentException(UserText.Message("copy.64b9875afd6f3520"));owned.Add(new ModuleSelection(module.InstanceId,module.DefinitionId));}
+            ModuleSelections=owned.AsReadOnly();Content=content;Chassis=LegacyContentIds.Chassis(chassisId);FirstWeapon=LegacyContentIds.Weapon(FirstWeaponId);SecondWeapon=SecondWeaponId==null?(StructureKind?)null:LegacyContentIds.Weapon(SecondWeaponId);
+            foreach(var module in owned)Modules|=LegacyContentIds.Module(module.DefinitionId);
+            Drawing=drawing??DrawingSnapshot.Empty;Origin=origin;FirstFootprint=GetWeaponMount(0).Footprint;SecondFootprint=GetWeaponMount(1)?.Footprint??MortarFootprint.Circle;
+            if(origin==DrawingOrigin.LegacyStandard&&!Drawing.IsEmpty)throw new ArgumentException(UserText.Message("copy.b343fa86244c62b6"),nameof(origin));
+            FreeformDesign=IsFreeform?new FreeformTowerDesign(this):null;
+            Assessment=DrawingEvaluator.Evaluate(this,evaluationStamp);EvaluationStamp=Assessment.ToStamp();
         }
-        public static int Cost(TowerBlueprint blueprint, GameBalance balance, MaterialTier tier)
+        public TowerBlueprint(string id,string name,ChassisKind chassis,StructureKind firstWeapon,StructureKind? secondWeapon=null,TowerModules modules=TowerModules.None,
+            DrawingSnapshot drawing=null,DrawingOrigin origin=DrawingOrigin.LegacyStandard,MortarFootprint firstFootprint=null,MortarFootprint secondFootprint=null,DrawingEvaluationStamp evaluationStamp=null)
+            :this(id,name,LegacyContentIds.Chassis(chassis)??"legacy.invalid.chassis."+(int)chassis,LegacyContentIds.Weapon(firstWeapon)??"legacy.invalid.weapon."+(int)firstWeapon,
+                secondWeapon.HasValue?(LegacyContentIds.Weapon(secondWeapon.Value)??"legacy.invalid.weapon."+(int)secondWeapon.Value):null,LegacyContentIds.Modules(modules),drawing,origin,firstFootprint,secondFootprint,null,evaluationStamp)
         {
-            int cost = blueprint.Chassis == ChassisKind.Heavy ? 28 : 16;
-            cost += Math.Max(0, balance.Structure(blueprint.FirstWeapon).Cost - 16);
-            if (blueprint.SecondWeapon.HasValue) cost += Math.Max(0, balance.Structure(blueprint.SecondWeapon.Value).Cost - 16);
-            if ((blueprint.Modules & TowerModules.Armor) != 0) cost += 18;
-            if ((blueprint.Modules & TowerModules.Feed) != 0) cost += 16;
-            if ((blueprint.Modules & TowerModules.Tracking) != 0) cost += 14;
-            return (int)Math.Ceiling(cost * Math.Max(0, balance.Material(tier).CostMultiplier));
+            Chassis=chassis;FirstWeapon=firstWeapon;SecondWeapon=secondWeapon;Modules=modules;LegacyAssembly=true;
+            if((firstWeapon!=StructureKind.Mortar&&FirstFootprint.AspectRatio!=1)||(secondWeapon!=StructureKind.Mortar&&SecondFootprint.AspectRatio!=1))throw new ArgumentException("Only mortar mounts may have a noncircular footprint.");
         }
-        public static float Health(TowerBlueprint blueprint, GameBalance balance, MaterialTier tier)
+        public bool SupportsFootprint(int mount)
+        {string id=mount<0||mount>=MaximumWeaponMounts?null:GetWeaponId(mount);return id!=null&&(Content!=null&&Content.TryGetWeapon(id,out var weapon)?weapon.SupportsFootprint:LegacyContentIds.Weapon(id)==StructureKind.Mortar);}
+        public WeaponMountSelection GetWeaponMount(int mount)
+        {if(mount<0||mount>=MaximumWeaponMounts)throw new ArgumentOutOfRangeException(nameof(mount));foreach(var selection in WeaponMounts)if(selection.SlotIndex==mount)return selection;return null;}
+        public string GetWeaponId(int mount)=>GetWeaponMount(mount)?.WeaponId;
+        public MortarFootprint GetMortarFootprint(int mount){if(!SupportsFootprint(mount))throw new ArgumentOutOfRangeException(nameof(mount),"Mount must support an area projectile footprint.");return GetWeaponMount(mount).Footprint;}
+        public TowerBlueprint WithMortarFootprint(int mount,MortarFootprint footprint)
+        {GetMortarFootprint(mount);if(footprint==null)throw new ArgumentNullException(nameof(footprint));var selected=new List<WeaponMountSelection>();foreach(var item in WeaponMounts)selected.Add(item.SlotIndex==mount?new WeaponMountSelection(mount,item.WeaponId,footprint):item);return new TowerBlueprint(Id,Name,ChassisId,selected,ModuleSelections,Drawing,Origin,Content,EvaluationStamp);}
+        TowerBlueprint Copy(string id,string name,DrawingSnapshot drawing,DrawingOrigin origin,ContentCatalogSnapshot content,DrawingEvaluationStamp stamp)
+            =>new TowerBlueprint(id,name,ChassisId,WeaponMounts,ModuleSelections,drawing,origin,content,stamp);
+        public TowerBlueprint WithContent(ContentCatalogSnapshot content)=>ReferenceEquals(Content,content)?this:Copy(Id,Name,Drawing,Origin,content,EvaluationStamp);
+        public TowerBlueprint WithName(string name)=>Copy(Id,name,Drawing,Origin,Content,EvaluationStamp);
+        public TowerBlueprint WithDrawing(DrawingSnapshot drawing)=>Copy(Id,Name,drawing??throw new ArgumentNullException(nameof(drawing)),IsFreeform?DrawingOrigin.Freeform:DrawingOrigin.PlayerDrawing,Content,HasPlayerDrawing&&drawing.GeometryHash==Drawing.GeometryHash?EvaluationStamp:null);
+        public TowerBlueprint WithFreeformDrawing(DrawingSnapshot drawing)=>Copy(Id,Name,drawing??throw new ArgumentNullException(nameof(drawing)),DrawingOrigin.Freeform,Content,null);
+        public TowerBlueprint AsFreeform()=>IsFreeform?this:WithFreeformDrawing(Drawing);
+        public TowerBlueprint AsVariant(string id,string name)=>Copy(id,name,Drawing.DeepCopy(),Origin,Content,EvaluationStamp);
+        public TowerBlueprint AsNew(string id,string name)=>Copy(id,name,HasPlayerDrawing?Drawing.DeepCopy():DrawingSnapshot.Empty,IsFreeform?DrawingOrigin.Freeform:DrawingOrigin.PlayerDrawing,Content,HasPlayerDrawing?EvaluationStamp:null);
+        public static TowerBlueprint NewDraft(string id,string name,ChassisKind chassis,StructureKind firstWeapon,StructureKind? secondWeapon=null,TowerModules modules=TowerModules.None)=>new TowerBlueprint(id,name,chassis,firstWeapon,secondWeapon,modules,DrawingSnapshot.Empty,DrawingOrigin.PlayerDrawing);
+        public static TowerBlueprint NewDraft(string id,string name,string chassis,string firstWeapon,string secondWeapon=null,IEnumerable<ModuleSelection> modules=null,ContentCatalogSnapshot content=null)=>new TowerBlueprint(id,name,chassis,firstWeapon,secondWeapon,modules,DrawingSnapshot.Empty,DrawingOrigin.PlayerDrawing,content:content);
+        public TowerBlueprint WithAssembly(ChassisKind chassis,StructureKind first,StructureKind? second,TowerModules modules)=>WithAssembly(LegacyContentIds.Chassis(chassis),LegacyContentIds.Weapon(first),second.HasValue?LegacyContentIds.Weapon(second.Value):null,LegacyContentIds.Modules(modules));
+        public TowerBlueprint WithAssembly(string chassis,string first,string second,IEnumerable<ModuleSelection> modules)
         {
-            float health = 55;
-            if (blueprint.Chassis == ChassisKind.Heavy) health *= 1.3f;
-            if ((blueprint.Modules & TowerModules.Armor) != 0) health *= 1.5f;
-            return Math.Max(1, health * balance.Material(tier).HealthMultiplier);
+            var mounts=new List<WeaponMountSelection>{new WeaponMountSelection(0,first,first==FirstWeaponId?FirstFootprint:null)};
+            if(second!=null)mounts.Add(new WeaponMountSelection(1,second,second==SecondWeaponId?SecondFootprint:null));
+            if(GetWeaponMount(2)!=null)mounts.Add(GetWeaponMount(2));
+            return WithAssembly(chassis,mounts,modules);
         }
-        public static int ColorCost(TowerBlueprint blueprint,GameBalance balance)
-            => Math.Max(2,(Cost(blueprint,balance,MaterialTier.Pencil)+7)/8);
-        public static float BuildSeconds(TowerBlueprint blueprint, GameBalance balance, MaterialTier tier)
+        public TowerBlueprint WithWeaponMount(int mount,string weaponId)
         {
-            float seconds = balance.Structure(blueprint.FirstWeapon).BuildSeconds;
-            if (blueprint.SecondWeapon.HasValue) seconds = Math.Max(seconds, balance.Structure(blueprint.SecondWeapon.Value).BuildSeconds) + .4f;
-            if (blueprint.Chassis == ChassisKind.Heavy) seconds += .45f;
-            if ((blueprint.Modules & TowerModules.Armor) != 0) seconds += .25f;
-            if ((blueprint.Modules & TowerModules.Feed) != 0) seconds += .25f;
-            if ((blueprint.Modules & TowerModules.Tracking) != 0) seconds += .25f;
-            return Math.Max(0, seconds * balance.Material(tier).BuildTimeMultiplier);
+            GetWeaponMount(mount);if(mount==0&&weaponId==null)throw new ArgumentException("The first mount is required.",nameof(weaponId));
+            var selected=new List<WeaponMountSelection>();foreach(var item in WeaponMounts)if(item.SlotIndex!=mount)selected.Add(item);
+            if(weaponId!=null)selected.Add(new WeaponMountSelection(mount,weaponId,weaponId==GetWeaponId(mount)?GetWeaponMount(mount).Footprint:null));
+            return WithAssembly(ChassisId,selected,ModuleSelections);
         }
-        public static float FeedMultiplier(TowerBlueprint blueprint)
-            => Math.Min(1.15f, (blueprint.SecondWeapon.HasValue ? .8f : 1) * ((blueprint.Modules & TowerModules.Feed) != 0 ? 1.15f : 1));
-        public static float AcquisitionSeconds(TowerBlueprint blueprint)
-            => (blueprint.Modules & TowerModules.Tracking) != 0 ? .08f : .25f;
-    }
-
-    [Serializable] public sealed class BlueprintData
-    {
-        public string Id, Name;
-        public ChassisKind Chassis;
-        public StructureKind FirstWeapon, SecondWeapon;
-        public bool HasSecondWeapon;
-        public TowerModules Modules;
-        public BlueprintData() { }
-        public BlueprintData(TowerBlueprint blueprint)
-        { Id = blueprint.Id; Name = blueprint.Name; Chassis = blueprint.Chassis; FirstWeapon = blueprint.FirstWeapon;
-            HasSecondWeapon = blueprint.SecondWeapon.HasValue; SecondWeapon = blueprint.SecondWeapon ?? StructureKind.Gun; Modules = blueprint.Modules; }
-        public TowerBlueprint ToBlueprint() => new TowerBlueprint(Id, Name, Chassis, FirstWeapon, HasSecondWeapon ? SecondWeapon : (StructureKind?)null, Modules);
+        public TowerBlueprint WithAssembly(string chassis,IEnumerable<WeaponMountSelection> weaponMounts,IEnumerable<ModuleSelection> modules)
+        {
+            var mounts=new List<WeaponMountSelection>(weaponMounts??throw new ArgumentNullException(nameof(weaponMounts)));mounts.Sort((a,b)=>a.SlotIndex.CompareTo(b.SlotIndex));
+            var selected=new List<ModuleSelection>(modules??Array.Empty<ModuleSelection>());
+            bool same=chassis==ChassisId&&mounts.Count==WeaponMounts.Count&&selected.Count==ModuleSelections.Count;
+            for(int i=0;same&&i<mounts.Count;i++)same=mounts[i].SlotIndex==WeaponMounts[i].SlotIndex&&mounts[i].WeaponId==WeaponMounts[i].WeaponId&&mounts[i].Footprint.AspectRatio==WeaponMounts[i].Footprint.AspectRatio;
+            for(int i=0;same&&i<selected.Count;i++)same=selected[i].InstanceId==ModuleSelections[i].InstanceId&&selected[i].DefinitionId==ModuleSelections[i].DefinitionId;
+            if(same)return this;
+            var candidate=new TowerBlueprint(Id,Name,chassis,mounts,selected,DrawingSnapshot.Empty,IsFreeform?DrawingOrigin.Freeform:DrawingOrigin.PlayerDrawing,Content);
+            if(Origin==DrawingOrigin.LegacyStandard)return candidate;
+            var retained=new List<DrawingPart>();foreach(var part in Drawing.Parts)if(DrawingPartPolicy.ShouldRetain(part.BindingId,this,candidate))retained.Add(part);
+            return candidate.WithDrawing(new DrawingSnapshot(retained));
+        }
     }
 }

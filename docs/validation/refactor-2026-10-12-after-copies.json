@@ -1,0 +1,23 @@
+{
+    "runAtUtc": "2026-10-12T11:28:03.5064812Z",
+    "unityVersion": "6000.5.7f1",
+    "processor": "Intel(R) Core(TM) Ultra 9 275HX",
+    "graphicsDevice": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+    "scope": "Editor CPU mesh assembly only:120 authored double-gun copies,512 source points/page,30 synchronous dynamic-aim redraws after warmup. Enlarged isolated load-fixture budget; no enemies or profile IO. No rendered FPS or Player timing claim.",
+    "copies": 120,
+    "pointsPerPage": 512,
+    "iterations": 30,
+    "cacheBuilds": 1,
+    "meshBatches": 5,
+    "maximumVerticesInOneMesh": 122758,
+    "totalMeshVertices": 257545,
+    "staticRebuildsDuringDynamicAim": 0,
+    "allMeshesUse32BitIndices": true,
+    "independentStates": true,
+    "sharedPreparedGeometry": true,
+    "immutableSource": true,
+    "completedStructures": true,
+    "passed": true,
+    "averageMeshBuildMilliseconds": 11.011993333333331,
+    "maximumMeshBuildMilliseconds": 11.2422
+}

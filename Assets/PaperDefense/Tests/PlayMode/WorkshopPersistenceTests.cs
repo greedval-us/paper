@@ -39,7 +39,7 @@ namespace PaperDefense.Tests
             var root = new GameObject("Manual workshop persistence controller");
             root.SetActive(false); roots.Add(root);
             var controller = root.AddComponent<RunController>();
-            controller.InitializeWorkshop(false);
+            controller.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
             return controller;
         }
 
@@ -83,6 +83,7 @@ namespace PaperDefense.Tests
         [Test] public void NegativeGoldAndBrokenSelectionAreRepairedWithoutGrantingLockedParts()
         {
             var data = new WorkshopProfile().ToData();
+            data.Version = 1; // Legacy sanitisation; v2 drawing pages are loaded strictly.
             data.Gold = -100;
             data.Album = new[] { new BlueprintData { Id = "locked", Name = "Locked", Chassis = ChassisKind.Heavy,
                 FirstWeapon = StructureKind.Gun, Modules = TowerModules.Tracking } };

@@ -1,0 +1,99 @@
+{
+  "Success": true,
+  "VerifiedUtc": "2026-10-12T17:57:59.8290815Z",
+  "OriginalCoreCommit": "b759182",
+  "EffectivePresets": 2,
+  "AssemblyCases": 168,
+  "TrialCasesPerSuite": 28,
+  "ExactFiles": [
+    {
+      "File": "rules.json",
+      "ByteIdentical": true,
+      "BeforeSha256": "27cbf28bb3b76663f2b2601686e9251226df8fc97c6613b5d449f86c5d0af02c",
+      "AfterSha256": "27cbf28bb3b76663f2b2601686e9251226df8fc97c6613b5d449f86c5d0af02c"
+    },
+    {
+      "File": "trials.txt",
+      "ByteIdentical": true,
+      "BeforeSha256": "796cb18efe7285688386268a223731811deb67cfcdcbb64fa639aa694bb8f957",
+      "AfterSha256": "796cb18efe7285688386268a223731811deb67cfcdcbb64fa639aa694bb8f957"
+    },
+    {
+      "File": "target-replay.json",
+      "ByteIdentical": true,
+      "BeforeSha256": "144b9424e4eeedefa63ca543f452dba9de4c73ddd51431d328067f6c850846ab",
+      "AfterSha256": "144b9424e4eeedefa63ca543f452dba9de4c73ddd51431d328067f6c850846ab"
+    },
+    {
+      "File": "historical-replay.json",
+      "ByteIdentical": true,
+      "BeforeSha256": "6b186b3151453330da97d64ca9cb840fba99429478c3aba3e138151e81bf0c94",
+      "AfterSha256": "6b186b3151453330da97d64ca9cb840fba99429478c3aba3e138151e81bf0c94"
+    },
+    {
+      "File": "target-asset-trials.txt",
+      "ByteIdentical": true,
+      "BeforeSha256": "42710a49ac785e175694a5a947602c3a2700b733bad408f1a3df7194de0765cf",
+      "AfterSha256": "42710a49ac785e175694a5a947602c3a2700b733bad408f1a3df7194de0765cf"
+    }
+  ],
+  "ActualAssetReplays": [
+    {
+      "File": "historical-asset-pressure.json",
+      "Ticks": 5693,
+      "Events": 1872,
+      "Digest": "3a042ccfeb445fdb",
+      "EveryTickStateAndEventHashEqual": true,
+      "CheckpointsEqual": true,
+      "TickAndEventCountsEqual": true,
+      "ComparedFinalReportFields": 36,
+      "DifferentFinalFields": [],
+      "OriginalDllJsonOmittedFields": [
+        "FirstBreachCell"
+      ],
+      "Phase": "Victory",
+      "Kills": 3000,
+      "BaseHealth": 250.0
+    },
+    {
+      "File": "historical-asset-campaign.json",
+      "Ticks": 20299,
+      "Events": 9016,
+      "Digest": "85b5b5bc10491e52",
+      "EveryTickStateAndEventHashEqual": true,
+      "CheckpointsEqual": true,
+      "TickAndEventCountsEqual": true,
+      "ComparedFinalReportFields": 51,
+      "DifferentFinalFields": [],
+      "OriginalDllJsonOmittedFields": [
+        "WaveTuning",
+        "Commands",
+        "Waves"
+      ],
+      "Phase": "Victory",
+      "Kills": 3180,
+      "BaseHealth": 232.0
+    },
+    {
+      "File": "target-asset-campaign.json",
+      "Ticks": 21063,
+      "Events": 6912,
+      "Digest": "1c7897be45940a81",
+      "EveryTickStateAndEventHashEqual": true,
+      "CheckpointsEqual": true,
+      "TickAndEventCountsEqual": true,
+      "ComparedFinalReportFields": 51,
+      "DifferentFinalFields": [],
+      "OriginalDllJsonOmittedFields": [
+        "WaveTuning",
+        "Commands",
+        "Waves"
+      ],
+      "Phase": "Victory",
+      "Kills": 3180,
+      "BaseHealth": 250.0
+    }
+  ],
+  "Provenance": "docs/validation/content/original-core-provenance.json",
+  "Note": "Original factory fixtures are preserved separately. Actual-asset originals were reconstructed from the unchanged original Core, with every original setting copied strictly from the byte-identical effective settings. Unity JsonUtility in the isolated original DLL omits nested validation-only report records; every tick state/event hash and all original serialized final fields must still match. The directly captured target golden report also matches byte-for-byte including nested records."
+}

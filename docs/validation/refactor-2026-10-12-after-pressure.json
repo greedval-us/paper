@@ -1,0 +1,27 @@
+{
+    "scenario": "historical pressure seed1337",
+    "digest": "0e856ecc87b93c8e",
+    "finalReport": "{\"Completed\":true,\"Passed\":true,\"TimedOut\":false,\"ClosedOuterRingAtLaunch\":true,\"Phase\":\"Victory\",\"Fingerprint\":\"9a4e907503fce63c\",\"Tick\":5687,\"PeakTick\":980,\"FirstBreachTick\":1250,\"FirstInnerFrontTick\":1339,\"ElapsedSeconds\":189.5782012939453,\"BaseHealth\":250.0,\"FirstBreachSeconds\":41.66637420654297,\"MinimumEnemyRadiusAfterBreach\":11.427986145019532,\"InnerBatteryFrontRadius\":12.0,\"MortarDamage\":70290.40625,\"PiercerDamage\":33914.73828125,\"FirstBreachCell\":{\"X\":48,\"Y\":48},\"Ink\":9986,\"Kills\":3000,\"Alive\":0,\"RemainingToSpawn\":0,\"ExpectedKills\":3000,\"PeakAliveEnemies\":3000,\"AliveAtFirstBreach\":3000,\"OuterWallCountAtLaunch\":128,\"OuterWallCountAtFirstBreach\":127,\"CombatWeaponsBuilt\":48,\"CombatBuildCommands\":48,\"FailedCommands\":0,\"DestroyedStructures\":4,\"MortarLaunches\":639,\"PiercerLaunches\":397,\"WestSpawns\":851,\"EastSpawns\":871,\"NorthSpawns\":636,\"SouthSpawns\":642}",
+    "ticks": 5687,
+    "events": 1679,
+    "checkpoints": [
+        "300:b822ada8b2b313bc",
+        "600:4ce59a1996c8ae8b",
+        "900:6c4ea9aea91d60f6",
+        "1200:55b09ce576413115",
+        "1500:972ac8623ee5200f",
+        "1800:cccf08820d739853",
+        "2100:a4eed3ea66ab674e",
+        "2400:162ee0fbf6567d27",
+        "2700:14fa0cd214db43fc",
+        "3000:2a94fb893b5f0800",
+        "3300:106cd3764cb9ddf0",
+        "3600:b92a9038e31d27a8",
+        "3900:2c41bc9a262d5723",
+        "4200:d2b89bce3547c4dc",
+        "4500:9837c94c236fa0dd",
+        "4800:0352dc6d243f0623",
+        "5100:1cd00d021ea1d76e",
+        "5400:5e40fce38339d665"
+    ]
+}

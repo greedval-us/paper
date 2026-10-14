@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+using PaperDefense.Core;
+
+namespace PaperDefense.Application
+{
+    /// <summary>Authoring input contains shared rules only. Concrete part/effect parameters exist solely in the catalog.</summary>
+    [Serializable] public sealed class GlobalBalanceSettings
+    {
+        public GameBalancePreset Preset;
+        public BattlefieldDefinition Battlefield;
+        public float WaveHealthGrowth;
+        public int Width, Height, StartingInk, MaxEarlyLaunchInk, WaveInkGrant, MaxEnemiesPerCell, BlotterCost, WellActivationCost, WellInkPerWave, WaveGold, VictoryGold;
+        public float BaseHealth, PlanningSeconds, IntermissionSeconds, PassiveInkPerSecond, EarlyLaunchInkPerSecond, SimulationStep, BlotLifetime, BlotBuffSeconds, BlotSpeedBonus, BlotReduction, BlotterCooldown, BlotterRadius, WellHealth, DrawingMinimumRate, DrawingMaximumRate;
+        public bool EnableEnemyMechanics, EnableInkWells;
+        public MechanicsConfiguration Mechanics;
+        public SharedConstructionSettings Construction;
+        public SharedEffectsSettings Effects;
+        public ProgressionRules Progression;
+        public CombatTuningRules Combat;
+        public CrowdMovementRules Crowd = new CrowdMovementRules();
+        public TrialRules Trials;
+        public List<WellPlacementDefinition> WellPlacements;
+        public List<StructureDefinition> StructureDefinitions;
+        public List<MaterialDefinition> MaterialDefinitions;
+        public List<EnemyDefinition> EnemyDefinitions;
+        public List<WaveDefinition> Waves;
+
+        public GameBalance CreateBalance()
+        {
+            if (Mechanics==null) throw new ArgumentException(UserText.Message("copy.8481552fe31cf37d"));
+            if (Construction==null) throw new ArgumentException(UserText.Message("copy.49d432b5407be4f3"));
+            if (Effects==null) throw new ArgumentException(UserText.Message("copy.2b81d3b860f2f90a"));
+            if (Progression==null) throw new ArgumentException(UserText.Message("copy.6ef80603a4d81702"));
+            if (Combat==null) throw new ArgumentException(UserText.Message("copy.c5d44fea95970023"));
+            if (Trials==null) throw new ArgumentException(UserText.Message("copy.aca79a09555fbb87"));
+            if (WellPlacements==null) throw new ArgumentException(UserText.Message("copy.ff80972eaf69620c"));
+            if (StructureDefinitions==null) throw new ArgumentException(UserText.Message("copy.7a88309ae81f2aa2"));
+            if (MaterialDefinitions==null) throw new ArgumentException(UserText.Message("copy.880a8db227050152"));
+            if (EnemyDefinitions==null) throw new ArgumentException(UserText.Message("copy.aa2de19d486ebb8b"));
+            if (Waves==null) throw new ArgumentException(UserText.Message("copy.81624d8adc610cfd"));
+            var b=new GameBalance(); b.Preset=this.Preset; b.Width=this.Width; b.Height=this.Height; b.StartingInk=this.StartingInk; b.MaxEarlyLaunchInk=this.MaxEarlyLaunchInk; b.WaveInkGrant=this.WaveInkGrant; b.MaxEnemiesPerCell=this.MaxEnemiesPerCell; b.BlotterCost=this.BlotterCost; b.WellActivationCost=this.WellActivationCost; b.WellInkPerWave=this.WellInkPerWave; b.WaveGold=this.WaveGold; b.VictoryGold=this.VictoryGold; b.BaseHealth=this.BaseHealth; b.PlanningSeconds=this.PlanningSeconds; b.IntermissionSeconds=this.IntermissionSeconds; b.PassiveInkPerSecond=this.PassiveInkPerSecond; b.EarlyLaunchInkPerSecond=this.EarlyLaunchInkPerSecond; b.SimulationStep=this.SimulationStep; b.BlotLifetime=this.BlotLifetime; b.BlotBuffSeconds=this.BlotBuffSeconds; b.BlotSpeedBonus=this.BlotSpeedBonus; b.BlotReduction=this.BlotReduction; b.BlotterCooldown=this.BlotterCooldown; b.BlotterRadius=this.BlotterRadius; b.WellHealth=this.WellHealth; b.DrawingMinimumRate=this.DrawingMinimumRate; b.DrawingMaximumRate=this.DrawingMaximumRate; b.EnableEnemyMechanics=this.EnableEnemyMechanics; b.EnableInkWells=this.EnableInkWells;
+            b.Battlefield=Battlefield;b.WaveHealthGrowth=WaveHealthGrowth;
+            b.Crowd = Crowd ?? new CrowdMovementRules();
+            b.Mechanics=Mechanics; Construction.Apply(b.Construction); Effects.Apply(b.Effects); b.Progression=Progression;
+            b.Combat=Combat; b.Trials=Trials; b.WellPlacements=WellPlacements; b.StructureDefinitions=StructureDefinitions;
+            b.MaterialDefinitions=MaterialDefinitions; b.EnemyDefinitions=EnemyDefinitions; b.Waves=Waves;
+            if (StructureDefinitions.Exists(item=>item==null || (!ConstructionToolRules.IsTool(item.Kind))))
+                throw new ArgumentException(UserText.Message("copy.de49bacab0a6e523"));
+            return b.CreateSnapshot();
+        }
+
+        public static GlobalBalanceSettings From(GameBalance source)
+        {
+            var b=source.CreateSnapshot(); var input=new GlobalBalanceSettings(); input.Preset=b.Preset; input.Width=b.Width; input.Height=b.Height; input.StartingInk=b.StartingInk; input.MaxEarlyLaunchInk=b.MaxEarlyLaunchInk; input.WaveInkGrant=b.WaveInkGrant; input.MaxEnemiesPerCell=b.MaxEnemiesPerCell; input.BlotterCost=b.BlotterCost; input.WellActivationCost=b.WellActivationCost; input.WellInkPerWave=b.WellInkPerWave; input.WaveGold=b.WaveGold; input.VictoryGold=b.VictoryGold; input.BaseHealth=b.BaseHealth; input.PlanningSeconds=b.PlanningSeconds; input.IntermissionSeconds=b.IntermissionSeconds; input.PassiveInkPerSecond=b.PassiveInkPerSecond; input.EarlyLaunchInkPerSecond=b.EarlyLaunchInkPerSecond; input.SimulationStep=b.SimulationStep; input.BlotLifetime=b.BlotLifetime; input.BlotBuffSeconds=b.BlotBuffSeconds; input.BlotSpeedBonus=b.BlotSpeedBonus; input.BlotReduction=b.BlotReduction; input.BlotterCooldown=b.BlotterCooldown; input.BlotterRadius=b.BlotterRadius; input.WellHealth=b.WellHealth; input.DrawingMinimumRate=b.DrawingMinimumRate; input.DrawingMaximumRate=b.DrawingMaximumRate; input.EnableEnemyMechanics=b.EnableEnemyMechanics; input.EnableInkWells=b.EnableInkWells;
+            input.Battlefield=b.Battlefield;input.WaveHealthGrowth=b.WaveHealthGrowth;
+            input.Crowd = b.Crowd;
+            input.Mechanics=b.Mechanics; input.Construction=SharedConstructionSettings.From(b.Construction); input.Effects=SharedEffectsSettings.From(b.Effects); input.Progression=b.Progression;
+            input.Combat=b.Combat; input.Trials=b.Trials; input.WellPlacements=b.WellPlacements;
+            input.StructureDefinitions=b.StructureDefinitions.FindAll(item=>ConstructionToolRules.IsTool(item.Kind));
+            input.MaterialDefinitions=b.MaterialDefinitions; input.EnemyDefinitions=b.EnemyDefinitions; input.Waves=b.Waves;
+            return input;
+        }
+    }
+
+    [Serializable] public sealed class SharedConstructionSettings
+    {
+        public float DualFeedMultiplier, MaxFeedMultiplier, DynamicFeedCapacity, AcquisitionSeconds;
+        public bool DynamicFeed;
+        public int ColorMinimum, ColorCostDivisor;
+        internal void Apply(TowerConstructionRules target) { target.DualFeedMultiplier=this.DualFeedMultiplier; target.MaxFeedMultiplier=this.MaxFeedMultiplier; target.DynamicFeedCapacity=this.DynamicFeedCapacity; target.AcquisitionSeconds=this.AcquisitionSeconds; target.DynamicFeed=this.DynamicFeed; target.ColorMinimum=this.ColorMinimum; target.ColorCostDivisor=this.ColorCostDivisor; }
+        internal static SharedConstructionSettings From(TowerConstructionRules source)
+        { var input=new SharedConstructionSettings(); input.DualFeedMultiplier=source.DualFeedMultiplier; input.MaxFeedMultiplier=source.MaxFeedMultiplier; input.DynamicFeedCapacity=source.DynamicFeedCapacity; input.AcquisitionSeconds=source.AcquisitionSeconds; input.DynamicFeed=source.DynamicFeed; input.ColorMinimum=source.ColorMinimum; input.ColorCostDivisor=source.ColorCostDivisor; return input; }
+    }
+
+    [Serializable] public sealed class SharedEffectsSettings
+    {
+        public float OutlinedHealthMultiplier, HatchedHealthMultiplier, OutlinedDefense, HatchedDefense, MaximumDefense, ColorWindowSeconds;
+        public bool LimitTowerColor;
+        public int ColorTargetsPerWindow;
+        internal void Apply(EffectsRules target) { target.OutlinedHealthMultiplier=this.OutlinedHealthMultiplier; target.HatchedHealthMultiplier=this.HatchedHealthMultiplier; target.OutlinedDefense=this.OutlinedDefense; target.HatchedDefense=this.HatchedDefense; target.MaximumDefense=this.MaximumDefense; target.ColorWindowSeconds=this.ColorWindowSeconds; target.LimitTowerColor=this.LimitTowerColor; target.ColorTargetsPerWindow=this.ColorTargetsPerWindow; }
+        internal static SharedEffectsSettings From(EffectsRules source)
+        { var input=new SharedEffectsSettings(); input.OutlinedHealthMultiplier=source.OutlinedHealthMultiplier; input.HatchedHealthMultiplier=source.HatchedHealthMultiplier; input.OutlinedDefense=source.OutlinedDefense; input.HatchedDefense=source.HatchedDefense; input.MaximumDefense=source.MaximumDefense; input.ColorWindowSeconds=source.ColorWindowSeconds; input.LimitTowerColor=source.LimitTowerColor; input.ColorTargetsPerWindow=source.ColorTargetsPerWindow; return input; }
+    }
+}

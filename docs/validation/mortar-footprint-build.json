@@ -1,0 +1,16 @@
+{
+  "job_id": "build-16dbc9a24f",
+  "result": "succeeded",
+  "platform": "StandaloneWindows64",
+  "development": true,
+  "output_path": "Builds/MortarFootprint/PaperDefense.exe",
+  "scenes": [
+    "Assets/PaperDefense/Scenes/PaperDefense.unity"
+  ],
+  "started_at": "2026-10-12T14:20:51.5422884Z",
+  "duration_seconds": 12.9414725,
+  "completed_at": "2026-10-12T14:21:04.4837609Z",
+  "total_size_mb": 198.54,
+  "errors": 0,
+  "warnings": 0
+}

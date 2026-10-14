@@ -29,7 +29,10 @@ namespace PaperDefense.Tests
             Assert.That(g.TryBuildBlueprint(new[]{new Cell(10,10),new Cell(10,10),new Cell(11,10)},bp,MaterialTier.Pencil,InkColor.None,out _),Is.True);
             Assert.That(g.Ink,Is.EqualTo(2000-2*TowerCatalog.Cost(bp,b,MaterialTier.Pencil)));
             Assert.That(g.Structures.Count,Is.EqualTo(2));
-            Assert.That(g.Structures[0].Blueprint,Is.SameAs(bp));
+            Assert.That(g.Structures[0].Blueprint.FirstWeaponId,Is.EqualTo(bp.FirstWeaponId));
+            Assert.That(g.Structures[0].Blueprint.SecondWeaponId,Is.EqualTo(bp.SecondWeaponId));
+            Assert.That(g.Structures[0].Blueprint.Content,Is.SameAs(g.Balance.Content));
+            Assert.That(g.Structures[0].Blueprint,Is.SameAs(g.Structures[1].Blueprint));
             Assert.That(g.Structures[0],Is.Not.SameAs(g.Structures[1]));
         }
         [Test] public void FailedColorBuildDoesNotSpendOrdinaryInk()
@@ -72,9 +75,10 @@ namespace PaperDefense.Tests
             var g=new GameSession(b,starterDefenses:false);g.TryActivateWell(1,out _);g.StartNextWave();g.Tick(.04f);
             var bp=new TowerBlueprint("one","Один",ChassisKind.Standard,StructureKind.Gun);var cell=new Cell(10,10);
             g.TryBuildBlueprint(new[]{cell},bp,MaterialTier.Pencil,InkColor.None,out _);
+            var preparedBlueprint=g.StructureAt(cell).Blueprint;
             Assert.That(g.TryPaint(cell,InkColor.Blue,out _),Is.True);int color=g.ColoredInk(InkColor.Blue);
             Assert.That(g.TryPaint(cell,InkColor.Blue,out _),Is.True);Assert.That(g.ColoredInk(InkColor.Blue),Is.EqualTo(color));
-            Assert.That(g.TryUpgrade(cell,out _),Is.True);Assert.That(g.StructureAt(cell).Blueprint,Is.SameAs(bp));
+            Assert.That(g.TryUpgrade(cell,out _),Is.True);Assert.That(g.StructureAt(cell).Blueprint,Is.SameAs(preparedBlueprint));
             Assert.That(g.StructureAt(cell).Color,Is.EqualTo(InkColor.Blue));
         }
         [Test] public void ObjectiveCellsAreReservedAndGoldDoesNotAccrueWithTime()
@@ -97,6 +101,18 @@ namespace PaperDefense.Tests
             g.Tick(2.1f);
             Assert.That(enemy.Health,Is.EqualTo(88).Within(.01f));
             Assert.That(enemy.RedRemaining,Is.Zero);Assert.That(enemy.BlueRemaining,Is.Zero);Assert.That(enemy.GreenRemaining,Is.Zero);
+        }
+        [TestCase(0f, -1)]
+        [TestCase(1f, 0)]
+        public void ConfiguredWellThreatShareControlsObjectives(float share, int objective)
+        {
+            var balance = Balance(); balance.Progression.WellThreatFraction = share;
+            balance.Waves = new List<WaveDefinition> { new WaveDefinition { Count = 32, SpawnInterval = .005f } };
+            var game = new GameSession(balance, starterDefenses: false);
+            Assert.That(game.TryActivateWell(0, out _), Is.True);
+            game.StartNextWave(); game.Tick(.2f);
+            Assert.That(game.Enemies.Count, Is.EqualTo(32));
+            foreach (var enemy in game.Enemies) Assert.That(enemy.ObjectiveIndex, Is.EqualTo(objective));
         }
     }
 }

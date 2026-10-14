@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "7c8233f13efd40fea0f2a8fe3a638398",
+    "status": "failed",
+    "mode": "PlayMode",
+    "started_unix_ms": 1791803823234,
+    "finished_unix_ms": 1791803828945,
+    "last_update_unix_ms": 1791803828945,
+    "progress": {
+      "completed": 1,
+      "total": 1,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": null,
+      "last_finished_test_full_name": "PaperDefense.Tests.ToolPriceConsistencyTests.WallToolbarUsesTheSameRoundedPriceAsItsQuoteAndPayment",
+      "last_finished_unix_ms": 1791803828924,
+      "stuck_suspected": false,
+      "editor_is_focused": true,
+      "run_in_background": false,
+      "focus_nudge_attempts": null,
+      "focus_nudge_limit": null,
+      "focus_nudge_status": null,
+      "blocked_reason": null,
+      "failures_so_far": [
+        {
+          "full_name": "PaperDefense.Tests.ToolPriceConsistencyTests.WallToolbarUsesTheSameRoundedPriceAsItsQuoteAndPayment",
+          "message": "  String lengths are both 17. Strings differ at index 2.\r\n  Expected: \"401 штр. / клетка\"\r\n  But was:  \"400 штр. / клетка\"\r\n  -------------^\r\n"
+        }
+      ],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "PlayMode",
+      "summary": {
+        "total": 1,
+        "passed": 0,
+        "failed": 1,
+        "skipped": 0,
+        "durationSeconds": 0.1458511,
+        "resultState": "Failed(Child)"
+      },
+      "results": [
+        {
+          "name": "WallToolbarUsesTheSameRoundedPriceAsItsQuoteAndPayment",
+          "fullName": "PaperDefense.Tests.ToolPriceConsistencyTests.WallToolbarUsesTheSameRoundedPriceAsItsQuoteAndPayment",
+          "state": "Failed",
+          "durationSeconds": 0.0666094,
+          "message": "  String lengths are both 17. Strings differ at index 2.\r\n  Expected: \"401 штр. / клетка\"\r\n  But was:  \"400 штр. / клетка\"\r\n  -------------^\r\n",
+          "stackTrace": "at PaperDefense.Tests.ToolPriceConsistencyTests.WallToolbarUsesTheSameRoundedPriceAsItsQuoteAndPayment () [0x0012a] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\ToolPriceConsistencyTests.cs:30\r\n",
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

@@ -30,6 +30,11 @@ namespace PaperDefense.Validation
         double tickMilliseconds, tickTotalMilliseconds, maxTickMilliseconds;
         bool complete, finishing, hasPendingSample, measuring;
         FrameSample pendingSample;
+        RunController profileController;
+        ProfileSaveState profileStateAtStart;
+
+        public static bool IsWorkshopProfileIsolated(ProfileSaveState atStart,ProfileSaveState atEnd)
+            =>atStart==ProfileSaveState.MemoryOnly && atEnd==ProfileSaveState.MemoryOnly;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void Install()
@@ -46,6 +51,8 @@ namespace PaperDefense.Validation
             Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
             var bootstrap = FindAnyObjectByType<PaperDefenseBootstrap>();
             if (bootstrap == null) throw new InvalidOperationException("Pressure probe requires the notebook scene.");
+            profileController=bootstrap.Controller;
+            profileStateAtStart=profileController.Workshop.SaveState;
             bootstrap.Controller.enabled = false;
             scenario = new PressureScenario();
             bootstrap.Controller.Initialize(scenario.Session);
@@ -121,14 +128,19 @@ namespace PaperDefense.Validation
         {
             FrameSample[] ordered = frames.ToArray();
             Array.Sort(ordered, (a, b) => b.frameMilliseconds.CompareTo(a.frameMilliseconds));
+            ProfileSaveState profileStateAtEnd=profileController.Workshop.SaveState;
+            bool profileIsolated=IsWorkshopProfileIsolated(profileStateAtStart,profileStateAtEnd);
             var report = new PlayerPressureReport
             {
+                profileSaveStateAtStart=profileStateAtStart.ToString(),
+                profileSaveStateAtEnd=profileStateAtEnd.ToString(),workshopProfileMemoryOnly=profileIsolated,
                 unityVersion = UnityEngine.Application.unityVersion,
                 processor = SystemInfo.processorType, processorCount = SystemInfo.processorCount,
                 graphicsDevice = SystemInfo.graphicsDeviceName, operatingSystem = SystemInfo.operatingSystem,
                 memoryMegabytes = SystemInfo.systemMemorySize, width = Screen.width, height = Screen.height,
                 developmentBuild = Debug.isDebugBuild, speed = speed, rendered = true,
-                scope = "Rendered Windows Player, full notebook scene with ordinary HUD and input enabled, automatic replay commands. VSync off, target60. Frame delta includes pacing and is aligned to prior frame work. Profiler recorders sampled for preceding completed frame. Startup/scenario construction and final report serialization excluded. No screenshots during measurement. Do not send manual commands during replay; compare state fingerprint with headless replay.",
+                scope = "Rendered Windows Player, full notebook scene with ordinary HUD and input enabled, automatic replay commands. VSync off, target60. Frame delta includes pacing and is aligned to prior frame work. Profiler recorders sampled for preceding completed frame. Startup/scenario construction and final report serialization excluded. No screenshots during measurement. Do not send manual commands during replay; compare state fingerprint with headless replay."+
+                    (profileIsolated?" Workshop profile was MemoryOnly before the scenario rebind and at measurement end; workshop profile load/save is isolated.":" Workshop profile I/O was not isolated; see the recorded start/end states."),
                 realSeconds = elapsed.Elapsed.TotalSeconds, discardedSimulationSeconds = clock.DiscardedSeconds,
                 completed = scenario.Finished, configuration = scenario.Config, commands = scenario.Commands.ToArray(),
                 simulation = scenario.Report, allFrames = Summarize(frames, 0),
@@ -195,6 +207,8 @@ namespace PaperDefense.Validation
         }
         [Serializable] public sealed class PlayerPressureReport
         {
+            public string profileSaveStateAtStart,profileSaveStateAtEnd;
+            public bool workshopProfileMemoryOnly;
             public string unityVersion, processor, graphicsDevice, operatingSystem, scope;
             public int processorCount, memoryMegabytes, width, height, speed, navigationRebuilds, meshBuilds, staticStructureBuilds;
             public bool developmentBuild, rendered, completed, gcRecorderAvailable, mainThreadRecorderAvailable;

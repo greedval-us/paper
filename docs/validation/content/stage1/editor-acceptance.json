@@ -1,0 +1,36 @@
+{
+    "Success": true,
+    "TemporaryProfileRemoved": true,
+    "Manifest": "ContentAcceptanceManifest",
+    "Utc": "2026-10-12T17:50:41.2681014Z",
+    "UnityVersion": "6000.5.7f1",
+    "IsolatedProfile": "C:\\Users\\Greedval\\AppData\\Local\\Temp\\PaperContentSmoke-d23a12f3591147dabf0e63c1389052a7\\profile.json",
+    "Error": "",
+    "BattleLaunches": 6,
+    "ChassisPrimaryActions": 1,
+    "ChassisSecondaryActions": 1,
+    "BattleDamage": 66.0,
+    "EExpectedCost": 47,
+    "EPreviewCost": 47,
+    "EPaidCost": 47,
+    "ETrialCopies": 4,
+    "ETrialCost": 188,
+    "EBattleLaunches": 6,
+    "EActualWaveGrant": 123,
+    "EExpectedHitDamage": 19.0,
+    "EProbeDamage": 19.0,
+    "ETrialDamage": 2874.0,
+    "EBattleDamage": 66.0,
+    "VariantDamage": [
+        17.0,
+        17.0,
+        0.0
+    ],
+    "Checks": [
+        "A: catalog, unlock payment, drawing, isolated save/restart, preview, trial and production hit",
+        "B: configured variant actual hit geometry matches the data mask",
+        "C: generic module modifiers, instance identity and restart without new bits",
+        "D: new two-mount chassis saves both weapons and both mounts perform production attacks",
+        "E: changed existing weapon agrees in preview price, exact isolated hit, trial payment/damage and real-wave construction/attacks; changed effect duration and exact completed-wave grant verified"
+    ]
+}

@@ -1,0 +1,15 @@
+{
+  "deletedGuidReferences": [],
+  "missingCurrentDocumentationLinks": [],
+  "catalogSceneCount": 26,
+  "uniqueCatalogSceneCount": 26,
+  "missingCatalogScenes": [],
+  "buildScenes": [
+    "Assets/PaperDefense/Scenes/PaperDefense.unity"
+  ],
+  "toolsTests": {
+    "ExtractionTests": 4,
+    "DiagnosticExtractionTests": 8,
+    "failed": 0
+  }
+}

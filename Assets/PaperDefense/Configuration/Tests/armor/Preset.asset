@@ -1,0 +1,285 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c37096708acf849baf4c4f6d48a7b3, type: 3}
+  m_Name: Preset
+  m_EditorClassIdentifier: PaperDefense.Application::PaperDefense.Application.BalancePresetAsset
+  database: {fileID: 11400000, guid: fcc01d0c41d999642bf006e3aabec06e, type: 2}
+  rules:
+    Preset: 1
+    Width: 48
+    Height: 32
+    StartingInk: 600
+    MaxEarlyLaunchInk: 0
+    WaveInkGrant: 75
+    MaxEnemiesPerCell: 6
+    BlotterCost: 8
+    WellActivationCost: 45
+    WellInkPerWave: 12
+    WaveGold: 8
+    VictoryGold: 30
+    BaseHealth: 250
+    PlanningSeconds: 3600
+    IntermissionSeconds: 3600
+    PassiveInkPerSecond: 0
+    EarlyLaunchInkPerSecond: 0
+    SimulationStep: 0.033333335
+    BlotLifetime: 8
+    BlotBuffSeconds: 4
+    BlotSpeedBonus: 0.15
+    BlotReduction: 0.15
+    BlotterCooldown: 3
+    BlotterRadius: 3
+    WellHealth: 160
+    DrawingMinimumRate: 0.85
+    DrawingMaximumRate: 1
+    EnableEnemyMechanics: 1
+    EnableInkWells: 0
+    Mechanics:
+      EnemyDrawingTiers: 0
+      CorpseBlots: 0
+      RangedEnemies: 1
+      InkWells: 0
+      ColorCartridges: 0
+      RunUpgrades: 0
+      DrawingQuality: 0
+    Construction:
+      DualFeedMultiplier: 0.8
+      MaxFeedMultiplier: 1.15
+      DynamicFeedCapacity: 1.6
+      AcquisitionSeconds: 0.25
+      DynamicFeed: 1
+      ColorMinimum: 2
+      ColorCostDivisor: 8
+    Effects:
+      OutlinedHealthMultiplier: 1.3
+      HatchedHealthMultiplier: 1.7
+      OutlinedDefense: 0.08
+      HatchedDefense: 0.15
+      MaximumDefense: 0.6
+      ColorWindowSeconds: 1
+      LimitTowerColor: 1
+      ColorTargetsPerWindow: 3
+    Progression:
+      RapidFireMultiplier: 1.22
+      DeepInkDamageMultiplier: 1.18
+      DeepInkHealthMultiplier: 1.25
+      SalvageRefundBonus: 0.12
+      SalvageSupplyMultiplier: 1
+      SalvageWaveRewardMultiplier: 1.25
+      RequireAssignedEnemyRewards: 1
+      SalvageImmediateInk: 60
+      MaximumRefundFraction: 0.95
+      LegacyHealthGrowthPerWave: 0.06
+      LegacyHealthGrowthStartsAfterWave: 3
+      EnemySpeedScaleMinimum: 0.92
+      EnemySpeedScaleVariation: 0.16
+      UpgradeEveryWaves: 2
+      LastUpgradeWave: 6
+      WellThreatFraction: 0.3
+    Combat:
+      MinimumActionInterval: 0.05
+      MinimumProductionMultiplier: 0.01
+      DestinationRepathDistanceSquared: 2.25
+      FrontageContactDistance: 1.3
+      ObjectiveContactDistance: 1.15
+      StructureContactDistance: 1.05
+      MinimumRangedDistance: 1.2
+      MinimumSpawnInterval: 0.005
+      MinimumPathDamage: 0.01
+      MinimumRadialRange: 0.5
+    Trials:
+      StepSeconds: 0.033333335
+      MaximumTicks: 1800
+      DefaultBudget: 400
+      BudgetChoices: c80000009001000020030000
+      BaselineChassisId: chassis.standard
+      BaselineWeaponId: weapon.gun
+      CounterfireRange: 12.5
+      CounterfireDamage: 10
+      CounterfireInterval: 2.4
+      ExitX: 48
+      SpawnX: 10
+      SpawnY: 10.5
+      SpawnYVariation: 8
+      CloseTowerCount: 48
+      CloseTowerX: 32
+      CloseTowerY: 10
+      CloseTowerColumns: 4
+      CloseTowerSpacing: 2
+      OverflowTowerX: 1
+      OverflowTowerY: 1
+      OverflowTowerColumns: 60
+      BlotCount: 48
+      FirstBlotX: 33
+      FirstBlotY: 10
+      BlotMinX: 29
+      BlotMaxX: 43
+      BlotMinY: 8
+      BlotMaxY: 28
+      BlotLifetime: 60
+      Scenarios:
+      - Scenario: 0
+        Name: "\u0422\u043E\u043B\u043F\u0430"
+        Count: 240
+        SpawnInterval: 0.1
+        Speed: 2.3
+        Health: 22
+        EnemyKind: 0
+        DrawingTier: 0
+      - Scenario: 1
+        Name: "\u0411\u044B\u0441\u0442\u0440\u044B\u0435"
+        Count: 160
+        SpawnInterval: 0.15
+        Speed: 5
+        Health: 14
+        EnemyKind: 1
+        DrawingTier: 0
+      - Scenario: 2
+        Name: "\u0417\u0430\u0449\u0438\u0449\u0451\u043D\u043D\u044B\u0435"
+        Count: 80
+        SpawnInterval: 0.3
+        Speed: 1.5
+        Health: 140
+        EnemyKind: 2
+        DrawingTier: 2
+      - Scenario: 3
+        Name: "\u041A\u043B\u044F\u043A\u0441\u044B"
+        Count: 0
+        SpawnInterval: 0.3
+        Speed: 2.3
+        Health: 22
+        EnemyKind: 0
+        DrawingTier: 0
+    WellPlacements:
+    - Color: 1
+      XNumerator: 1
+      XDenominator: 5
+      YNumerator: 1
+      YDenominator: 4
+      ReservedRadius: 1
+    - Color: 2
+      XNumerator: 4
+      XDenominator: 5
+      YNumerator: 1
+      YDenominator: 4
+      ReservedRadius: 1
+    - Color: 3
+      XNumerator: 1
+      XDenominator: 2
+      YNumerator: 5
+      YDenominator: 6
+      ReservedRadius: 1
+    StructureDefinitions:
+    - Kind: 0
+      Cost: 3
+      MaxHealth: 65
+      BuildSeconds: 0.35
+      Range: 0
+      Damage: 0
+      ShotInterval: 0.05
+      Radius: 0.1
+      FlightSeconds: 0.8
+      MaxPierce: 1
+      ConeAngleDegrees: 90
+      MaxTargets: 8
+      JumpRange: 0
+      SlowSpeedMultiplier: 1
+      SlowDuration: 0
+    - Kind: 4
+      Cost: 8
+      MaxHealth: 35
+      BuildSeconds: 0.5
+      Range: 0.7
+      Damage: 9
+      ShotInterval: 0.65
+      Radius: 0.65
+      FlightSeconds: 0.8
+      MaxPierce: 1
+      ConeAngleDegrees: 90
+      MaxTargets: 8
+      JumpRange: 0
+      SlowSpeedMultiplier: 1
+      SlowDuration: 0
+    MaterialDefinitions:
+    - CostMultiplier: 1
+      HealthMultiplier: 1
+      DamageMultiplier: 1
+      RefundFraction: 0.8
+      BuildTimeMultiplier: 1
+    - CostMultiplier: 1.8
+      HealthMultiplier: 2.1
+      DamageMultiplier: 1
+      RefundFraction: 0.4
+      BuildTimeMultiplier: 1.3
+    - CostMultiplier: 3.2
+      HealthMultiplier: 4.2
+      DamageMultiplier: 1
+      RefundFraction: 0.2
+      BuildTimeMultiplier: 1.75
+    EnemyDefinitions:
+    - Kind: 0
+      MaxHealth: 22
+      Speed: 2.1
+      Damage: 6
+      AttackInterval: 1.1
+      Range: 12.5
+      WindupSeconds: 0.8
+      ProjectileSeconds: 0.65
+      StructureDamageMultiplier: 1
+      Reward: 1
+    - Kind: 1
+      MaxHealth: 14
+      Speed: 3.6
+      Damage: 3
+      AttackInterval: 0.8
+      Range: 12.5
+      WindupSeconds: 0.8
+      ProjectileSeconds: 0.65
+      StructureDamageMultiplier: 1
+      Reward: 1
+    - Kind: 2
+      MaxHealth: 95
+      Speed: 1.25
+      Damage: 18
+      AttackInterval: 0.9
+      Range: 12.5
+      WindupSeconds: 0.8
+      ProjectileSeconds: 0.65
+      StructureDamageMultiplier: 1.5
+      Reward: 3
+    - Kind: 3
+      MaxHealth: 35
+      Speed: 1.7
+      Damage: 10
+      AttackInterval: 2.4
+      Range: 12.5
+      WindupSeconds: 0.8
+      ProjectileSeconds: 0.65
+      StructureDamageMultiplier: 1
+      Reward: 2
+    Waves:
+    - InkGrant: 0
+      Count: 12
+      SpawnInterval: 0.3
+      RunnerFraction: 0
+      GnawerFraction: 0
+      SpitterFraction: 0
+      OutlinedFraction: 0
+      HatchedFraction: 0
+      Sides: 1
+      Title: "\u0422\u0435\u0441\u0442\u043E\u0432\u0430\u044F \u0432\u043E\u043B\u043D\u0430"
+  overrides:
+    Chassis: []
+    Weapons: []
+    Modules: []
+    Effects: []
+    Templates: []

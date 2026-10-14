@@ -1,0 +1,95 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Text;
+using PaperDefense.Core;
+using PaperDefense.Validation;
+using UnityEngine;
+
+namespace PaperDefense
+{
+    // This bridge only supplies actual current asset values to the original b759182 simulation.
+    // Core sources are exported byte-for-byte and are never patched by this harness.
+    public static class OldBaselineBridge
+    {
+        public static string Commit => "b759182";
+        public static object CloneBalance(object source) => CopyValue(source,typeof(GameBalance),"balance");
+        public static string CanonicalSettings(object source) => Canonical(CloneBalance(source));
+        public static string TrialsJson(object source)
+        {
+            var balance=(GameBalance)CloneBalance(source);var result=new List<string>();
+            foreach(var kind in new[]{StructureKind.Gun,StructureKind.Piercer,StructureKind.Mortar,StructureKind.Fan,StructureKind.Ricochet,StructureKind.Stapler,StructureKind.Blotter})
+                foreach(TrialScenario scenario in Enum.GetValues(typeof(TrialScenario)))
+                {
+                    var blueprint=new TowerBlueprint("trial-contract","trial-contract",ChassisKind.Standard,kind);
+                    var report=TrialRunner.Run(blueprint,balance,scenario,200,1337,true,InkColor.Blue);
+                    var hash=new StableHash();hash.Value(report);result.Add(kind+"/"+scenario+":"+hash.Hex);
+                }
+            return string.Join("\n",result);
+        }
+        public static string ReplayJson(string mode,object source) => RunPrepared(mode,(GameBalance)CloneBalance(source));
+        public static void StartReplay(string mode,object source,string outputPath)
+        {
+            var balance=(GameBalance)CloneBalance(source);
+            string absolute=Path.GetFullPath(outputPath);
+            System.Threading.ThreadPool.QueueUserWorkItem(_=>
+            {
+                try{File.WriteAllText(absolute,RunPrepared(mode,balance));}
+                catch(Exception error){File.WriteAllText(absolute+".error",error.ToString());}
+            });
+        }
+        static string RunPrepared(string mode,GameBalance balance)
+        {
+            if(mode!="pressure"&&mode!="campaign")throw new ArgumentException("mode must be pressure or campaign");
+            var trace=new TraceEvidence{scenario="original b759182 / actual "+balance.Preset+" asset / "+mode+" / seed1337"};
+            var hash=new StableHash();long lastEvent=0;
+            if(mode=="pressure")
+            {
+                var scenario=new PressureScenario(null,balance);
+                while(!scenario.Finished){scenario.Step();Observe(scenario.Session,hash,trace,ref lastEvent);}
+                trace.finalReport=JsonUtility.ToJson(scenario.Report);
+            }
+            else
+            {
+                var scenario=new InkLoopScenario(balance);
+                while(!scenario.Finished){scenario.Step();Observe(scenario.Session,hash,trace,ref lastEvent);}
+                trace.finalReport=JsonUtility.ToJson(scenario.Report);
+            }
+            trace.digest=hash.Hex;return JsonUtility.ToJson(trace,true);
+        }
+        static object CopyValue(object source,Type destination,string path)
+        {
+            if(source==null){if(destination.IsValueType)throw new ArgumentException(path+": null value type");return null;}
+            if(destination==typeof(string))return (string)source;
+            if(destination.IsEnum)return Enum.ToObject(destination,Convert.ToInt64(source,CultureInfo.InvariantCulture));
+            if(destination.IsPrimitive||destination==typeof(decimal))return Convert.ChangeType(source,destination,CultureInfo.InvariantCulture);
+            if(destination.IsArray)
+            {
+                var original=(IEnumerable)source;var items=new List<object>();foreach(var item in original)items.Add(item);
+                Type element=destination.GetElementType();var result=Array.CreateInstance(element,items.Count);
+                for(int i=0;i<items.Count;i++)result.SetValue(CopyValue(items[i],element,path+"["+i+"]"),i);return result;
+            }
+            if(destination.IsGenericType&&destination.GetGenericTypeDefinition()==typeof(List<>))
+            {
+                Type element=destination.GetGenericArguments()[0];var result=(IList)Activator.CreateInstance(destination);int i=0;
+                foreach(var item in (IEnumerable)source)result.Add(CopyValue(item,element,path+"["+(i++)+"]"));return result;
+            }
+            var owned=Activator.CreateInstance(destination);Type actual=source.GetType();
+            foreach(var target in destination.GetFields(BindingFlags.Instance|BindingFlags.Public))
+            {
+                var original=actual.GetField(target.Name,BindingFlags.Instance|BindingFlags.Public);
+                if(original==null)throw new ArgumentException(path+"."+target.Name+": source field missing; no default substitution allowed");
+                target.SetValue(owned,CopyValue(original.GetValue(source),target.FieldType,path+"."+target.Name));
+            }
+            return owned;
+        }
+@@ORIGINAL_OBSERVE@@
+@@ORIGINAL_HASH_HELPERS@@
+
+        [Serializable] sealed class TraceEvidence
+        {public string scenario,digest,finalReport;public int ticks,events;public List<string> checkpoints=new List<string>();}
+    }
+}

@@ -1,0 +1,170 @@
+{
+  "job_id": "d8909021bb8948fda4a4453e2d062b83",
+  "status": "failed",
+  "mode": "EditMode",
+  "started_unix_ms": 1791812544475,
+  "finished_unix_ms": 1791812549165,
+  "last_update_unix_ms": 1791812549165,
+  "progress": {
+    "completed": 14,
+    "total": 14,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": null,
+    "last_finished_test_full_name": "PaperDefense.Tests.MortarFootprintCombatTests.ZeroDirectionAndRadiusAreExplicit",
+    "last_finished_unix_ms": 1791812548943,
+    "stuck_suspected": false,
+    "editor_is_focused": false,
+    "run_in_background": false,
+    "focus_nudge_attempts": null,
+    "focus_nudge_limit": null,
+    "focus_nudge_status": null,
+    "blocked_reason": null,
+    "failures_so_far": [
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintCombatTests.RealImpactIncludesTranslatedForwardAxisBoundary",
+        "message": "  Broad phase must not clip an included ellipse boundary after world-coordinate rounding.\r\n  Expected: 95\r\n  But was:  100.0f\r\n"
+      }
+    ],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "EditMode",
+    "summary": {
+      "total": 14,
+      "passed": 13,
+      "failed": 1,
+      "skipped": 0,
+      "durationSeconds": 0.8996816,
+      "resultState": "Failed(Child)"
+    },
+    "results": [
+      {
+        "name": "CircleKeepsExactOldDistanceBoundary",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.CircleKeepsExactOldDistanceBoundary",
+        "state": "Passed",
+        "durationSeconds": 0.0064272,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EllipseIncludesAxisBoundaryAndRejectsBoundingCircleOnlyPoint(False)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.EllipseIncludesAxisBoundaryAndRejectsBoundingCircleOnlyPoint(False)",
+        "state": "Passed",
+        "durationSeconds": 0.000578,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EllipseIncludesAxisBoundaryAndRejectsBoundingCircleOnlyPoint(True)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.EllipseIncludesAxisBoundaryAndRejectsBoundingCircleOnlyPoint(True)",
+        "state": "Passed",
+        "durationSeconds": 0.0000346,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "GeometryPreservesAreaAndNormalizedDirection(1)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.GeometryPreservesAreaAndNormalizedDirection(1)",
+        "state": "Passed",
+        "durationSeconds": 0.0087069,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "GeometryPreservesAreaAndNormalizedDirection(2)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.GeometryPreservesAreaAndNormalizedDirection(2)",
+        "state": "Passed",
+        "durationSeconds": 0.0000467,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "GeometryPreservesAreaAndNormalizedDirection(3)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.GeometryPreservesAreaAndNormalizedDirection(3)",
+        "state": "Passed",
+        "durationSeconds": 0.0000233,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "InvalidRadiusRejected(-1)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.InvalidRadiusRejected(-1)",
+        "state": "Passed",
+        "durationSeconds": 0.0070131,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "InvalidRadiusRejected(float.NaN)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.InvalidRadiusRejected(float.NaN)",
+        "state": "Passed",
+        "durationSeconds": 0.0001407,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "InvalidRadiusRejected(float.PositiveInfinity)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.InvalidRadiusRejected(float.PositiveInfinity)",
+        "state": "Passed",
+        "durationSeconds": 0.0000426,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "NonfiniteCoordinatesRejected",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.NonfiniteCoordinatesRejected",
+        "state": "Passed",
+        "durationSeconds": 0.0004918,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "RealImpactIncludesTranslatedForwardAxisBoundary",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.RealImpactIncludesTranslatedForwardAxisBoundary",
+        "state": "Failed",
+        "durationSeconds": 0.0159831,
+        "message": "  Broad phase must not clip an included ellipse boundary after world-coordinate rounding.\r\n  Expected: 95\r\n  But was:  100.0f\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintCombatTests.RealImpactIncludesTranslatedForwardAxisBoundary () [0x001d4] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MortarFootprintCombatTests.cs:106\r\n",
+        "output": ""
+      },
+      {
+        "name": "TwoMountsCaptureGeometryAndSharedColorThroughSourceRemovalOrRefit(False)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.TwoMountsCaptureGeometryAndSharedColorThroughSourceRemovalOrRefit(False)",
+        "state": "Passed",
+        "durationSeconds": 0.005145,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "TwoMountsCaptureGeometryAndSharedColorThroughSourceRemovalOrRefit(True)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.TwoMountsCaptureGeometryAndSharedColorThroughSourceRemovalOrRefit(True)",
+        "state": "Passed",
+        "durationSeconds": 0.0001318,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ZeroDirectionAndRadiusAreExplicit",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.ZeroDirectionAndRadiusAreExplicit",
+        "state": "Passed",
+        "durationSeconds": 0.000293,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      }
+    ]
+  }
+}

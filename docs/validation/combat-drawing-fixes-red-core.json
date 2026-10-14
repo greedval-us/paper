@@ -1,0 +1,135 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "ce116141f0f4491baceae50f1d049fb6",
+      "status": "failed",
+      "mode": "EditMode",
+      "started_unix_ms": 1791809277156,
+      "finished_unix_ms": 1791809282617,
+      "last_update_unix_ms": 1791809282617,
+      "progress": {
+        "completed": 7,
+        "total": 7,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.MountReadinessTests.TwoTargetlessReloadsShareSupplyUntilReady",
+        "last_finished_unix_ms": 1791809282362,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [
+          {
+            "full_name": "PaperDefense.Tests.MountReadinessTests.DynamicReloadFinishesWithoutTargetsAndStoresOnlyOneReadyShot",
+            "message": "  An existing reload continues while no target is present.\r\n  Expected: 0\r\n  But was:  0.880952239f\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.MountReadinessTests.EveryBarrelUsesItsOwnConfiguredAcquisitionDelay(None,25)",
+            "message": "  The unchanged short-range target keeps its lock.\r\n  Expected: greater than 1\r\n  But was:  1\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.MountReadinessTests.EveryBarrelUsesItsOwnConfiguredAcquisitionDelay(Tracking,8)",
+            "message": "  The unchanged short-range target keeps its lock.\r\n  Expected: greater than 1\r\n  But was:  1\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.MountReadinessTests.RetargetingOneBarrelDoesNotStallTheOther(False)",
+            "message": "  Expected: 2\r\n  But was:  1\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.MountReadinessTests.RetargetingOneBarrelDoesNotStallTheOther(True)",
+            "message": "  Expected: 2\r\n  But was:  1\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.MountReadinessTests.TwoTargetlessReloadsShareSupplyUntilReady",
+            "message": "  Expected: 0.714285731f +/- 9.99999975E-06f\r\n  But was:  0.90476191f\r\n"
+          }
+        ],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "EditMode",
+        "summary": {
+          "total": 7,
+          "passed": 1,
+          "failed": 6,
+          "skipped": 0,
+          "durationSeconds": 0.716037,
+          "resultState": "Failed(Child)"
+        },
+        "results": [
+          {
+            "name": "DynamicReloadFinishesWithoutTargetsAndStoresOnlyOneReadyShot",
+            "fullName": "PaperDefense.Tests.MountReadinessTests.DynamicReloadFinishesWithoutTargetsAndStoresOnlyOneReadyShot",
+            "state": "Failed",
+            "durationSeconds": 0.0358194,
+            "message": "  An existing reload continues while no target is present.\r\n  Expected: 0\r\n  But was:  0.880952239f\r\n",
+            "stackTrace": "at PaperDefense.Tests.MountReadinessTests.DynamicReloadFinishesWithoutTargetsAndStoresOnlyOneReadyShot () [0x00059] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MountReadinessTests.cs:63\r\n",
+            "output": ""
+          },
+          {
+            "name": "EveryBarrelUsesItsOwnConfiguredAcquisitionDelay(None,25)",
+            "fullName": "PaperDefense.Tests.MountReadinessTests.EveryBarrelUsesItsOwnConfiguredAcquisitionDelay(None,25)",
+            "state": "Failed",
+            "durationSeconds": 0.0051827,
+            "message": "  The unchanged short-range target keeps its lock.\r\n  Expected: greater than 1\r\n  But was:  1\r\n",
+            "stackTrace": "at PaperDefense.Tests.MountReadinessTests.EveryBarrelUsesItsOwnConfiguredAcquisitionDelay (PaperDefense.Core.TowerModules modules, System.Int32 acquisitionTicks) [0x00092] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MountReadinessTests.cs:111\r\n",
+            "output": ""
+          },
+          {
+            "name": "EveryBarrelUsesItsOwnConfiguredAcquisitionDelay(Tracking,8)",
+            "fullName": "PaperDefense.Tests.MountReadinessTests.EveryBarrelUsesItsOwnConfiguredAcquisitionDelay(Tracking,8)",
+            "state": "Failed",
+            "durationSeconds": 0.0007223,
+            "message": "  The unchanged short-range target keeps its lock.\r\n  Expected: greater than 1\r\n  But was:  1\r\n",
+            "stackTrace": "at PaperDefense.Tests.MountReadinessTests.EveryBarrelUsesItsOwnConfiguredAcquisitionDelay (PaperDefense.Core.TowerModules modules, System.Int32 acquisitionTicks) [0x00092] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MountReadinessTests.cs:111\r\n",
+            "output": ""
+          },
+          {
+            "name": "FinishedIdleReloadReleasesSupplyToTheWorkingMount",
+            "fullName": "PaperDefense.Tests.MountReadinessTests.FinishedIdleReloadReleasesSupplyToTheWorkingMount",
+            "state": "Passed",
+            "durationSeconds": 0.0056851,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RetargetingOneBarrelDoesNotStallTheOther(False)",
+            "fullName": "PaperDefense.Tests.MountReadinessTests.RetargetingOneBarrelDoesNotStallTheOther(False)",
+            "state": "Failed",
+            "durationSeconds": 0.0017058,
+            "message": "  Expected: 2\r\n  But was:  1\r\n",
+            "stackTrace": "at PaperDefense.Tests.MountReadinessTests.RetargetingOneBarrelDoesNotStallTheOther (System.Boolean dynamic) [0x000aa] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MountReadinessTests.cs:98\r\n",
+            "output": ""
+          },
+          {
+            "name": "RetargetingOneBarrelDoesNotStallTheOther(True)",
+            "fullName": "PaperDefense.Tests.MountReadinessTests.RetargetingOneBarrelDoesNotStallTheOther(True)",
+            "state": "Failed",
+            "durationSeconds": 0.00053,
+            "message": "  Expected: 2\r\n  But was:  1\r\n",
+            "stackTrace": "at PaperDefense.Tests.MountReadinessTests.RetargetingOneBarrelDoesNotStallTheOther (System.Boolean dynamic) [0x000aa] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MountReadinessTests.cs:98\r\n",
+            "output": ""
+          },
+          {
+            "name": "TwoTargetlessReloadsShareSupplyUntilReady",
+            "fullName": "PaperDefense.Tests.MountReadinessTests.TwoTargetlessReloadsShareSupplyUntilReady",
+            "state": "Failed",
+            "durationSeconds": 0.0015516,
+            "message": "  Expected: 0.714285731f +/- 9.99999975E-06f\r\n  But was:  0.90476191f\r\n",
+            "stackTrace": "at PaperDefense.Tests.MountReadinessTests.TwoTargetlessReloadsShareSupplyUntilReady () [0x00036] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\MountReadinessTests.cs:76\r\n",
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

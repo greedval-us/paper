@@ -1,0 +1,110 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "a32d8bd6bbb8458ab1b61a0845607cb5",
+      "status": "succeeded",
+      "mode": "PlayMode",
+      "started_unix_ms": 1791809645254,
+      "finished_unix_ms": 1791809647449,
+      "last_update_unix_ms": 1791809647449,
+      "progress": {
+        "completed": 7,
+        "total": 7,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.DrawingEditorFeedbackTests.SuccessfulUndoClearsEarlierRejection",
+        "last_finished_unix_ms": 1791809647441,
+        "stuck_suspected": false,
+        "editor_is_focused": true,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "PlayMode",
+        "summary": {
+          "total": 7,
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationSeconds": 0.1842259,
+          "resultState": "Passed"
+        },
+        "results": [
+          {
+            "name": "OpeningAnotherSessionClearsEarlierRejection",
+            "fullName": "PaperDefense.Tests.DrawingEditorFeedbackTests.OpeningAnotherSessionClearsEarlierRejection",
+            "state": "Passed",
+            "durationSeconds": 0.0567483,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RejectedStrokeSurvivesRefreshControlsAndNoOpEdits",
+            "fullName": "PaperDefense.Tests.DrawingEditorFeedbackTests.RejectedStrokeSurvivesRefreshControlsAndNoOpEdits",
+            "state": "Passed",
+            "durationSeconds": 0.0054241,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SuccessfulClearPartClearsEarlierRejection",
+            "fullName": "PaperDefense.Tests.DrawingEditorFeedbackTests.SuccessfulClearPartClearsEarlierRejection",
+            "state": "Passed",
+            "durationSeconds": 0.0039786,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SuccessfulEraseClearsEarlierRejection",
+            "fullName": "PaperDefense.Tests.DrawingEditorFeedbackTests.SuccessfulEraseClearsEarlierRejection",
+            "state": "Passed",
+            "durationSeconds": 0.0038626,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SuccessfulRedoClearsEarlierRejection",
+            "fullName": "PaperDefense.Tests.DrawingEditorFeedbackTests.SuccessfulRedoClearsEarlierRejection",
+            "state": "Passed",
+            "durationSeconds": 0.0038388,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SuccessfulStrokeClearsEarlierRejection",
+            "fullName": "PaperDefense.Tests.DrawingEditorFeedbackTests.SuccessfulStrokeClearsEarlierRejection",
+            "state": "Passed",
+            "durationSeconds": 0.0033004,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SuccessfulUndoClearsEarlierRejection",
+            "fullName": "PaperDefense.Tests.DrawingEditorFeedbackTests.SuccessfulUndoClearsEarlierRejection",
+            "state": "Passed",
+            "durationSeconds": 0.0037929,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

@@ -1,5 +1,6 @@
 using System.Collections;
 using NUnit.Framework;
+using PaperDefense.Application;
 using PaperDefense.Core;
 using PaperDefense.Presentation;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace PaperDefense.Tests
     {
         GameObject root;
         PaperDefenseBootstrap game;
+        GameBalanceAsset fixtureBalance;
 
         [UnitySetUp] public IEnumerator SetUp()
         {
@@ -20,6 +22,11 @@ namespace PaperDefense.Tests
             root = new GameObject("Workshop integration");
             root.SetActive(false);
             game = root.AddComponent<PaperDefenseBootstrap>();
+            fixtureBalance = ScriptableObject.CreateInstance<GameBalanceAsset>();
+            fixtureBalance.ResetToDefaults(); fixtureBalance.useTargetWorkshopPreset = true;
+            fixtureBalance.baseHealth = 250; fixtureBalance.planningSeconds = 35; fixtureBalance.intermissionSeconds = 20;
+            game.balance = fixtureBalance;
+            game.memoryOnlyProfile = true;
             var camera = new GameObject("Workshop camera", typeof(Camera));
             camera.transform.SetParent(root.transform);
             game.worldCamera = camera.GetComponent<Camera>();
@@ -29,7 +36,7 @@ namespace PaperDefense.Tests
         }
 
         [UnityTearDown] public IEnumerator TearDown()
-        { Object.Destroy(root); yield return null; }
+        { Object.Destroy(root); Object.Destroy(fixtureBalance); yield return null; }
 
         Button Button(string name)
         {
@@ -77,6 +84,10 @@ namespace PaperDefense.Tests
             Button("New blueprint").onClick.Invoke();
             Button("First Gun").onClick.Invoke();
             Button("Second Gun").onClick.Invoke();
+            Button("Open drawing editor").onClick.Invoke();
+            Assert.That(workshop.DrawingEditor.Session.AddStroke(DrawingPartKey.Mount0,
+                new[] { new DrawingPoint(0, 0), new DrawingPoint(0, .4f) }, out _), Is.True);
+            FreeformUiTestDrawing.Complete(workshop.DrawingEditor.Session); Button("Apply drawing").onClick.Invoke();
             var saved = workshop.Draft;
             Button("Save blueprint").onClick.Invoke();
             Button("Assign slot 0").onClick.Invoke();
@@ -96,6 +107,10 @@ namespace PaperDefense.Tests
             var workshop = root.GetComponentInChildren<WorkshopHud>(true);
             Button("New blueprint").onClick.Invoke();
             Button("Module Feed").onClick.Invoke();
+            Button("Open drawing editor").onClick.Invoke();
+            FreeformUiTestDrawing.Complete(workshop.DrawingEditor.Session);
+            workshop.DrawingEditor.Close(true);
+            Assert.That(workshop.Draft.FreeformDesign.IsComplete, Is.True);
             Button("Open trial").onClick.Invoke();
             Assert.DoesNotThrow(() => Button("Run trial").onClick.Invoke());
             Assert.That(workshop.Status, Does.Contain("откройте"));
@@ -105,8 +120,9 @@ namespace PaperDefense.Tests
         [UnityTest] public IEnumerator WorkshopDrawingsAndRecordedLanesUploadRealGeometry()
         {
             Canvas.ForceUpdateCanvases();
-            AssertRendered(root.GetComponentInChildren<BlueprintSketch>(true));
-            AssertRendered(root.GetComponentInChildren<WorkshopMapSketch>(true));
+            var workshop = root.GetComponentInChildren<WorkshopHud>(true);
+            AssertRendered(workshop.GetComponentInChildren<BlueprintSketch>());
+            AssertRendered(workshop.GetComponentInChildren<WorkshopMapSketch>());
 
             Button("Open trial").onClick.Invoke();
             Button("Run trial").onClick.Invoke();
@@ -115,6 +131,20 @@ namespace PaperDefense.Tests
             var lanes = root.GetComponentsInChildren<TrialLaneSketch>(true);
             Assert.That(lanes.Length, Is.EqualTo(2));
             foreach (var lane in lanes) AssertRendered(lane);
+        }
+
+        [UnityTest] public IEnumerator ActiveBattlePaletteUploadsBlueprintAndToolIconGeometry()
+        {
+            Assert.That(game.Controller.StartRun(out string reason), Is.True, reason);
+            yield return null; yield return null;
+            Canvas.ForceUpdateCanvases();
+            var hud = root.GetComponentInChildren<NotebookHud>(true);
+            var blueprints = hud.GetComponentsInChildren<BlueprintSketch>();
+            Assert.That(blueprints.Length, Is.EqualTo(ProfileLimits.LoadoutSlotCount));
+            foreach (var blueprint in blueprints) AssertRendered(blueprint);
+            var icons = hud.GetComponentsInChildren<NotebookArtGraphic>();
+            Assert.That(icons.Length, Is.GreaterThanOrEqualTo(4), "Every available construction/action card has visible art.");
+            foreach (var icon in icons) AssertRendered(icon);
         }
 
         static void AssertRendered(Graphic graphic)

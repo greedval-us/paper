@@ -1,0 +1,228 @@
+{
+  "job_id": "be6985972852481189d7bbfb696adf14",
+  "status": "succeeded",
+  "mode": "PlayMode",
+  "started_unix_ms": 1791813833189,
+  "finished_unix_ms": 1791813839620,
+  "last_update_unix_ms": 1791813839620,
+  "progress": {
+    "completed": 21,
+    "total": 21,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": null,
+    "last_finished_test_full_name": "PaperDefense.Tests.MortarFootprintHudTests.WorkshopControlsPreserveAuthoredArtThroughVariantAndTemporaryStore",
+    "last_finished_unix_ms": 1791813839597,
+    "stuck_suspected": false,
+    "editor_is_focused": true,
+    "run_in_background": false,
+    "focus_nudge_attempts": null,
+    "focus_nudge_limit": null,
+    "focus_nudge_status": null,
+    "blocked_reason": null,
+    "failures_so_far": [],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "PlayMode",
+    "summary": {
+      "total": 21,
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 1.3348546,
+      "resultState": "Passed"
+    },
+    "results": [
+      {
+        "name": "BlankNewPageStaysDraftAndDoesNotOverwriteLegacyPage",
+        "fullName": "PaperDefense.Tests.AuthoredWorkshopTests.BlankNewPageStaysDraftAndDoesNotOverwriteLegacyPage",
+        "state": "Passed",
+        "durationSeconds": 0.1019878,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "LeavingViewportEndsStrokeAndOutsideEraserCannotChangeDrawing",
+        "fullName": "PaperDefense.Tests.AuthoredWorkshopTests.LeavingViewportEndsStrokeAndOutsideEraserCannotChangeDrawing",
+        "state": "Passed",
+        "durationSeconds": 0.0730056,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MouseStrokesSurviveEditorAlbumReloadAndSeveralFieldCopies",
+        "fullName": "PaperDefense.Tests.AuthoredWorkshopTests.MouseStrokesSurviveEditorAlbumReloadAndSeveralFieldCopies",
+        "state": "Passed",
+        "durationSeconds": 0.0517425,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "RealHudRestartPreservesPointerDrawingProgressAndSharesQualityWithTrialAndBattle",
+        "fullName": "PaperDefense.Tests.AuthoredWorkshopTests.RealHudRestartPreservesPointerDrawingProgressAndSharesQualityWithTrialAndBattle",
+        "state": "Passed",
+        "durationSeconds": 0.6585366,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SaveAsNewKeepsOriginalPageAndEditingOneMountKeepsOtherStrokes",
+        "fullName": "PaperDefense.Tests.AuthoredWorkshopTests.SaveAsNewKeepsOriginalPageAndEditingOneMountKeepsOtherStrokes",
+        "state": "Passed",
+        "durationSeconds": 0.0334877,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "OpeningAnotherSessionClearsEarlierRejection",
+        "fullName": "PaperDefense.Tests.DrawingEditorFeedbackTests.OpeningAnotherSessionClearsEarlierRejection",
+        "state": "Passed",
+        "durationSeconds": 0.008677,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "RejectedStrokeSurvivesRefreshControlsAndNoOpEdits",
+        "fullName": "PaperDefense.Tests.DrawingEditorFeedbackTests.RejectedStrokeSurvivesRefreshControlsAndNoOpEdits",
+        "state": "Passed",
+        "durationSeconds": 0.0050696,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SuccessfulClearPartClearsEarlierRejection",
+        "fullName": "PaperDefense.Tests.DrawingEditorFeedbackTests.SuccessfulClearPartClearsEarlierRejection",
+        "state": "Passed",
+        "durationSeconds": 0.0044663,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SuccessfulEraseClearsEarlierRejection",
+        "fullName": "PaperDefense.Tests.DrawingEditorFeedbackTests.SuccessfulEraseClearsEarlierRejection",
+        "state": "Passed",
+        "durationSeconds": 0.004002,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SuccessfulRedoClearsEarlierRejection",
+        "fullName": "PaperDefense.Tests.DrawingEditorFeedbackTests.SuccessfulRedoClearsEarlierRejection",
+        "state": "Passed",
+        "durationSeconds": 0.0042204,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SuccessfulStrokeClearsEarlierRejection",
+        "fullName": "PaperDefense.Tests.DrawingEditorFeedbackTests.SuccessfulStrokeClearsEarlierRejection",
+        "state": "Passed",
+        "durationSeconds": 0.0036919,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SuccessfulUndoClearsEarlierRejection",
+        "fullName": "PaperDefense.Tests.DrawingEditorFeedbackTests.SuccessfulUndoClearsEarlierRejection",
+        "state": "Passed",
+        "durationSeconds": 0.0047256,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "NewMountCanBeChosenAndItsPurposeIsExplained(\"Fan\",\"конус\")",
+        "fullName": "PaperDefense.Tests.ExpandedCatalogHudTests.NewMountCanBeChosenAndItsPurposeIsExplained(\"Fan\",\"конус\")",
+        "state": "Passed",
+        "durationSeconds": 0.0167643,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "NewMountCanBeChosenAndItsPurposeIsExplained(\"Ricochet\",\"цепочка\")",
+        "fullName": "PaperDefense.Tests.ExpandedCatalogHudTests.NewMountCanBeChosenAndItsPurposeIsExplained(\"Ricochet\",\"цепочка\")",
+        "state": "Passed",
+        "durationSeconds": 0.0113046,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "NewMountCanBeChosenAndItsPurposeIsExplained(\"Stapler\",\"замедл\")",
+        "fullName": "PaperDefense.Tests.ExpandedCatalogHudTests.NewMountCanBeChosenAndItsPurposeIsExplained(\"Stapler\",\"замедл\")",
+        "state": "Passed",
+        "durationSeconds": 0.0113017,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "NewMountCanBeChosenAndItsPurposeIsExplained(\"Blotter\",\"клякс\")",
+        "fullName": "PaperDefense.Tests.ExpandedCatalogHudTests.NewMountCanBeChosenAndItsPurposeIsExplained(\"Blotter\",\"клякс\")",
+        "state": "Passed",
+        "durationSeconds": 0.0137221,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "BlotTrainingIsExplicitAndShowsClearedAndUnresolvedMarks",
+        "fullName": "PaperDefense.Tests.ExpandedTrialHudTests.BlotTrainingIsExplicitAndShowsClearedAndUnresolvedMarks",
+        "state": "Passed",
+        "durationSeconds": 0.130577,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "DragStopsOldRecordingThenReleaseStartsFreshRecordingAndCloseCancels",
+        "fullName": "PaperDefense.Tests.MortarFootprintHudTests.DragStopsOldRecordingThenReleaseStartsFreshRecordingAndCloseCancels",
+        "state": "Passed",
+        "durationSeconds": 0.0117079,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "LegacyVariantKeepsOriginAndPeriodicHudRefreshDoesNotCancelDrag",
+        "fullName": "PaperDefense.Tests.MortarFootprintHudTests.LegacyVariantKeepsOriginAndPeriodicHudRefreshDoesNotCancelDrag",
+        "state": "Passed",
+        "durationSeconds": 0.0154644,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "PointerClampsBothMortarsIndependentlyAndKeepsBaselineFrozen",
+        "fullName": "PaperDefense.Tests.MortarFootprintHudTests.PointerClampsBothMortarsIndependentlyAndKeepsBaselineFrozen",
+        "state": "Passed",
+        "durationSeconds": 0.0068753,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "WorkshopControlsPreserveAuthoredArtThroughVariantAndTemporaryStore",
+        "fullName": "PaperDefense.Tests.MortarFootprintHudTests.WorkshopControlsPreserveAuthoredArtThroughVariantAndTemporaryStore",
+        "state": "Passed",
+        "durationSeconds": 0.0463316,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,426 @@
+{
+  "job_id": "baad5042e4cc4ac0b852b4559b15c306",
+  "status": "succeeded",
+  "mode": "EditMode",
+  "started_unix_ms": 1791812602734,
+  "finished_unix_ms": 1791812608299,
+  "last_update_unix_ms": 1791812608299,
+  "progress": {
+    "completed": 43,
+    "total": 43,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": null,
+    "last_finished_test_full_name": "PaperDefense.Tests.WeaponPublicationContractTests.ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Stapler,1,4,1)",
+    "last_finished_unix_ms": 1791812608075,
+    "stuck_suspected": false,
+    "editor_is_focused": false,
+    "run_in_background": false,
+    "focus_nudge_attempts": null,
+    "focus_nudge_limit": null,
+    "focus_nudge_status": null,
+    "blocked_reason": null,
+    "failures_so_far": [],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "EditMode",
+    "summary": {
+      "total": 43,
+      "passed": 43,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 1.5938253,
+      "resultState": "Passed"
+    },
+    "results": [
+      {
+        "name": "CoolingMountTracksWithoutChangingDamageOrCooldown",
+        "fullName": "PaperDefense.Tests.IndependentMountAimTests.CoolingMountTracksWithoutChangingDamageOrCooldown",
+        "state": "Passed",
+        "durationSeconds": 0.0223839,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EachMountRecordsTheTargetItActuallySelected",
+        "fullName": "PaperDefense.Tests.IndependentMountAimTests.EachMountRecordsTheTargetItActuallySelected",
+        "state": "Passed",
+        "durationSeconds": 0.0016657,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MissingTargetClearsOnlyItsTrackingIdAndKeepsLastOrientation",
+        "fullName": "PaperDefense.Tests.IndependentMountAimTests.MissingTargetClearsOnlyItsTrackingIdAndKeepsLastOrientation",
+        "state": "Passed",
+        "durationSeconds": 0.00027,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ReadSnapshotAndTrialRecordingPreserveBothDirections",
+        "fullName": "PaperDefense.Tests.IndependentMountAimTests.ReadSnapshotAndTrialRecordingPreserveBothDirections",
+        "state": "Passed",
+        "durationSeconds": 0.0014355,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "CircleKeepsExactOldDistanceBoundary",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.CircleKeepsExactOldDistanceBoundary",
+        "state": "Passed",
+        "durationSeconds": 0.00096,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EllipseIncludesAxisBoundaryAndRejectsBoundingCircleOnlyPoint(False)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.EllipseIncludesAxisBoundaryAndRejectsBoundingCircleOnlyPoint(False)",
+        "state": "Passed",
+        "durationSeconds": 0.0005345,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EllipseIncludesAxisBoundaryAndRejectsBoundingCircleOnlyPoint(True)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.EllipseIncludesAxisBoundaryAndRejectsBoundingCircleOnlyPoint(True)",
+        "state": "Passed",
+        "durationSeconds": 0.0000292,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "GeometryPreservesAreaAndNormalizedDirection(1)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.GeometryPreservesAreaAndNormalizedDirection(1)",
+        "state": "Passed",
+        "durationSeconds": 0.0013899,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "GeometryPreservesAreaAndNormalizedDirection(2)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.GeometryPreservesAreaAndNormalizedDirection(2)",
+        "state": "Passed",
+        "durationSeconds": 0.0000387,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "GeometryPreservesAreaAndNormalizedDirection(3)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.GeometryPreservesAreaAndNormalizedDirection(3)",
+        "state": "Passed",
+        "durationSeconds": 0.0000222,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "InvalidRadiusRejected(-1)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.InvalidRadiusRejected(-1)",
+        "state": "Passed",
+        "durationSeconds": 0.0073798,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "InvalidRadiusRejected(float.NaN)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.InvalidRadiusRejected(float.NaN)",
+        "state": "Passed",
+        "durationSeconds": 0.0000508,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "InvalidRadiusRejected(float.PositiveInfinity)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.InvalidRadiusRejected(float.PositiveInfinity)",
+        "state": "Passed",
+        "durationSeconds": 0.0000241,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "NonfiniteCoordinatesRejected",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.NonfiniteCoordinatesRejected",
+        "state": "Passed",
+        "durationSeconds": 0.0003755,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "RealImpactIncludesTranslatedForwardAxisBoundary",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.RealImpactIncludesTranslatedForwardAxisBoundary",
+        "state": "Passed",
+        "durationSeconds": 0.0010142,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "TwoMountsCaptureGeometryAndSharedColorThroughSourceRemovalOrRefit(False)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.TwoMountsCaptureGeometryAndSharedColorThroughSourceRemovalOrRefit(False)",
+        "state": "Passed",
+        "durationSeconds": 0.0038731,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "TwoMountsCaptureGeometryAndSharedColorThroughSourceRemovalOrRefit(True)",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.TwoMountsCaptureGeometryAndSharedColorThroughSourceRemovalOrRefit(True)",
+        "state": "Passed",
+        "durationSeconds": 0.0001083,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ZeroDirectionAndRadiusAreExplicit",
+        "fullName": "PaperDefense.Tests.MortarFootprintCombatTests.ZeroDirectionAndRadiusAreExplicit",
+        "state": "Passed",
+        "durationSeconds": 0.0003183,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "BlotterRailExpandsItsOwnSearchWithoutExpandingTheCleanupRadius",
+        "fullName": "PaperDefense.Tests.RailWeaponTests.BlotterRailExpandsItsOwnSearchWithoutExpandingTheCleanupRadius",
+        "state": "Passed",
+        "durationSeconds": 0.0037767,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ConfiguredRailMultipliersControlRealRangeAndCooldown",
+        "fullName": "PaperDefense.Tests.RailWeaponTests.ConfiguredRailMultipliersControlRealRangeAndCooldown",
+        "state": "Passed",
+        "durationSeconds": 0.0005332,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "DualRailUsesSharedFeedQualityAndIntervalPenaltyExactlyOnce(False)",
+        "fullName": "PaperDefense.Tests.RailWeaponTests.DualRailUsesSharedFeedQualityAndIntervalPenaltyExactlyOnce(False)",
+        "state": "Passed",
+        "durationSeconds": 0.0047873,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "DualRailUsesSharedFeedQualityAndIntervalPenaltyExactlyOnce(True)",
+        "fullName": "PaperDefense.Tests.RailWeaponTests.DualRailUsesSharedFeedQualityAndIntervalPenaltyExactlyOnce(True)",
+        "state": "Passed",
+        "durationSeconds": 0.0042296,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "LegacyStructuresWithoutBlueprintIgnoreRailTuning",
+        "fullName": "PaperDefense.Tests.RailWeaponTests.LegacyStructuresWithoutBlueprintIgnoreRailTuning",
+        "state": "Passed",
+        "durationSeconds": 0.0005205,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MortarRailChangesReachAndTempoButPreservesCapturedRadiusFlightAndImpactDamage",
+        "fullName": "PaperDefense.Tests.RailWeaponTests.MortarRailChangesReachAndTempoButPreservesCapturedRadiusFlightAndImpactDamage",
+        "state": "Passed",
+        "durationSeconds": 0.0007385,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(False,100,57)",
+        "fullName": "PaperDefense.Tests.RailWeaponTests.RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(False,100,57)",
+        "state": "Passed",
+        "durationSeconds": 0.0023876,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(False,0,50)",
+        "fullName": "PaperDefense.Tests.RailWeaponTests.RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(False,0,50)",
+        "state": "Passed",
+        "durationSeconds": 0.0019293,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(True,100,57)",
+        "fullName": "PaperDefense.Tests.RailWeaponTests.RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(True,100,57)",
+        "state": "Passed",
+        "durationSeconds": 0.0019343,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(True,0,50)",
+        "fullName": "PaperDefense.Tests.RailWeaponTests.RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(True,0,50)",
+        "state": "Passed",
+        "durationSeconds": 0.001938,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "RailExpandsTheActualCombatQueryUpToItsRangeBoundary",
+        "fullName": "PaperDefense.Tests.RailWeaponTests.RailExpandsTheActualCombatQueryUpToItsRangeBoundary",
+        "state": "Passed",
+        "durationSeconds": 0.0005378,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "AnIdleMountDoesNotReduceTheActiveMountsSupply",
+        "fullName": "PaperDefense.Tests.SharedTowerProductionTests.AnIdleMountDoesNotReduceTheActiveMountsSupply",
+        "state": "Passed",
+        "durationSeconds": 0.0029905,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ATargetReceivesAtMostOneColorRefreshInTheSharedWindow",
+        "fullName": "PaperDefense.Tests.SharedTowerProductionTests.ATargetReceivesAtMostOneColorRefreshInTheSharedWindow",
+        "state": "Passed",
+        "durationSeconds": 0.0016433,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "FlyingShellsShareSourceBudgetAndKeepLaunchColorAfterRepaintAndSourceDeath",
+        "fullName": "PaperDefense.Tests.SharedTowerProductionTests.FlyingShellsShareSourceBudgetAndKeepLaunchColorAfterRepaintAndSourceDeath",
+        "state": "Passed",
+        "durationSeconds": 0.0007916,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "HistoricalSupplyKeepsItsFixedPenaltyWhenAMountIsIdle",
+        "fullName": "PaperDefense.Tests.SharedTowerProductionTests.HistoricalSupplyKeepsItsFixedPenaltyWhenAMountIsIdle",
+        "state": "Passed",
+        "durationSeconds": 0.0020764,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "HitscanAndDelayedImpactUseOneSharedSourceColorBudget",
+        "fullName": "PaperDefense.Tests.SharedTowerProductionTests.HitscanAndDelayedImpactUseOneSharedSourceColorBudget",
+        "state": "Passed",
+        "durationSeconds": 0.0005103,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SharedProductionCannotStarveTheSlowerWeapon",
+        "fullName": "PaperDefense.Tests.SharedTowerProductionTests.SharedProductionCannotStarveTheSlowerWeapon",
+        "state": "Passed",
+        "durationSeconds": 0.0036876,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "TwoActiveGunsShareAboutOnePointSixTimesSingleGunProduction",
+        "fullName": "PaperDefense.Tests.SharedTowerProductionTests.TwoActiveGunsShareAboutOnePointSixTimesSingleGunProduction",
+        "state": "Passed",
+        "durationSeconds": 0.0030964,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "TwoMountsShareThreeDistinctColorTargetsAndNeverLimitOrdinaryDamage",
+        "fullName": "PaperDefense.Tests.SharedTowerProductionTests.TwoMountsShareThreeDistinctColorTargetsAndNeverLimitOrdinaryDamage",
+        "state": "Passed",
+        "durationSeconds": 0.0005148,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "WaitingWithoutTargetsCannotAccumulateAnUnboundedVolley",
+        "fullName": "PaperDefense.Tests.SharedTowerProductionTests.WaitingWithoutTargetsCannotAccumulateAnUnboundedVolley",
+        "state": "Passed",
+        "durationSeconds": 0.0057454,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Gun,1,12,1)",
+        "fullName": "PaperDefense.Tests.WeaponPublicationContractTests.ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Gun,1,12,1)",
+        "state": "Passed",
+        "durationSeconds": 0.0020882,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Piercer,1,36,2)",
+        "fullName": "PaperDefense.Tests.WeaponPublicationContractTests.ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Piercer,1,36,2)",
+        "state": "Passed",
+        "durationSeconds": 0.0001512,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Fan,3,30,3)",
+        "fullName": "PaperDefense.Tests.WeaponPublicationContractTests.ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Fan,3,30,3)",
+        "state": "Passed",
+        "durationSeconds": 0.0004076,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Ricochet,3,36,3)",
+        "fullName": "PaperDefense.Tests.WeaponPublicationContractTests.ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Ricochet,3,36,3)",
+        "state": "Passed",
+        "durationSeconds": 0.0007179,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Stapler,1,4,1)",
+        "fullName": "PaperDefense.Tests.WeaponPublicationContractTests.ImmediateWeaponsKeepHitOrderDamageAndPairedVisualEvents(Stapler,1,4,1)",
+        "state": "Passed",
+        "durationSeconds": 0.0003362,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "43e88d277f254b91922687532abcf139",
+      "status": "failed",
+      "mode": "PlayMode",
+      "started_unix_ms": 1791927128554,
+      "finished_unix_ms": 1791927210094,
+      "last_update_unix_ms": 1791927210094,
+      "progress": {
+        "completed": 321,
+        "total": 321,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.WorkshopStoreTests.ValidPrimaryIgnoresBrokenBackup",
+        "last_finished_unix_ms": 1791927210049,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [
+          {
+            "full_name": "PaperDefense.Tests.AuthoredRenderingTests.FreeformProjectileOriginFollowsTheDrawnBarrelTip(0.75f)",
+            "message": "  \u001ePD1:FGZyZWVmb3JtLm92ZXJfYnVkZ2V0AgAAAAUAgIlCBQAAgkI=\u001f\r\n  Expected: True\r\n  But was:  False\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.AuthoredWorkshopTests.MouseStrokesSurviveEditorAlbumReloadAndSeveralFieldCopies",
+            "message": "  Expected: True\r\n  But was:  False\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.AuthoredWorkshopTests.RealHudRestartPreservesPointerDrawingProgressAndSharesQualityWithTrialAndBattle",
+            "message": "  Expected string length 40 but was 11. Strings differ at index 0.\r\n  Expected: \"drawing-618fef561b81411fbfdf420231e6b18c\"\r\n  But was:  \"starter.gun\"\r\n  -----------^\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.AuthoredWorkshopTests.SaveAsNewKeepsOriginalPageAndEditingOneMountKeepsOtherStrokes",
+            "message": "  Expected: not equal to \"drawing-b3cb05eaea8f40e3a3b5fe86eced67db\"\r\n  But was:  \"drawing-b3cb05eaea8f40e3a3b5fe86eced67db\"\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.DataDrivenWorkshopUiTests.EmptyAndPartiallyAssignedStartupPagesRenderAndCanBeFilledInWorkshop(False)",
+            "message": "  Недостаточно места для чернил: использовано 112,5 из 65,0. Уменьшите корпус или стволы.\r\n  Expected: 1\r\n  But was:  0\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.DataDrivenWorkshopUiTests.EmptyAndPartiallyAssignedStartupPagesRenderAndCanBeFilledInWorkshop(True)",
+            "message": "  Недостаточно места для чернил: использовано 112,5 из 65,0. Уменьшите корпус или стволы.\r\n  Expected: 2\r\n  But was:  1\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.DataDrivenWorkshopUiTests.RepeatedNewEquipmentCanBeDrawnIndependentlyWithoutNewDrawingEnumValues",
+            "message": "  Expected: 1\r\n  But was:  0\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.DrawingQualityHudTests.FreeformEditorPreviewAndNormalTrialUseTheSameConstructionWithoutGrading",
+            "message": "  \u001ePD1:FGZyZWVmb3JtLm92ZXJfYnVkZ2V0AgAAAAWAYftCBQAAyEI=\u001f\r\n  Expected: True\r\n  But was:  False\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.FocusedWorkshopSceneTests.DrawingSceneEditsThirdLayerAndFootprintWithoutAssemblyAlbumOrBattle",
+            "message": "  Expected: not null\r\n  But was:  null\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.MortarFootprintHudTests.BlankNameDraftExplainsUnavailableProbeAndRecoversAfterRename",
+            "message": "  Expected: not null\r\n  But was:  null\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.MortarFootprintHudTests.WorkshopControlsPreserveAuthoredArtThroughVariantAndTemporaryStore",
+            "message": "  Недостаточно места для чернил: использовано 123,0 из 100,0. Уменьшите корпус или стволы.\r\n  Expected: True\r\n  But was:  False\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.WorkshopIntegrationTests.LockedTrialShowsAnExplanationWithoutThrowing",
+            "message": "  Expected: String containing \"откройте\"\r\n  But was:  \"Авторские штрихи применены к черновику. Сохрани страницу в альбом.\"\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.WorkshopIntegrationTests.SavedDraftAndFieldPlacementAreIndependentOfLaterEditing",
+            "message": "  Expected string length 40 but was 11. Strings differ at index 0.\r\n  Expected: \"drawing-fd4b08cb76c44ea694703a80af1e7a94\"\r\n  But was:  \"starter.gun\"\r\n  -----------^\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.WorkshopReadabilityTests.AlbumCardsRenderCompositionHealthAndFireRateBelowTheirNames",
+            "message": "  Both standard pages and the saved author drawing must be checked\r\n  Expected: 5\r\n  But was:  4\r\n"
+          }
+        ],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "PlayMode",
+        "summary": {
+          "total": 321,
+          "passed": 307,
+          "failed": 14,
+          "skipped": 0,
+          "durationSeconds": 76.1191672,
+          "resultState": "Failed(Child)"
+        },
+        "results": [
+          {
+            "name": "FreeformProjectileOriginFollowsTheDrawnBarrelTip(0.75f)",
+            "fullName": "PaperDefense.Tests.AuthoredRenderingTests.FreeformProjectileOriginFollowsTheDrawnBarrelTip(0.75f)",
+            "state": "Failed",
+            "durationSeconds": 0.0023822,
+            "message": "  \u001ePD1:FGZyZWVmb3JtLm92ZXJfYnVkZ2V0AgAAAAUAgIlCBQAAgkI=\u001f\r\n  Expected: True\r\n  But was:  False\r\n",
+            "stackTrace": "at PaperDefense.Tests.AuthoredRenderingTests.FreeformProjectileOriginFollowsTheDrawnBarrelTip (System.Single length) [0x00130] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\AuthoredRenderingTests.cs:31\r\n",
+            "output": ""
+          },
+          {
+            "name": "MouseStrokesSurviveEditorAlbumReloadAndSeveralFieldCopies",
+            "fullName": "PaperDefense.Tests.AuthoredWorkshopTests.MouseStrokesSurviveEditorAlbumReloadAndSeveralFieldCopies",
+            "state": "Failed",
+            "durationSeconds": 0.0340658,
+            "message": "  Expected: True\r\n  But was:  False\r\n",
+            "stackTrace": "at PaperDefense.Tests.AuthoredWorkshopTests.MouseStrokesSurviveEditorAlbumReloadAndSeveralFieldCopies () [0x001a8] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\AuthoredWorkshopTests.cs:68\r\n",
+            "output": ""
+          },
+          {
+            "name": "RealHudRestartPreservesPointerDrawingProgressAndSharesQualityWithTrialAndBattle",
+            "fullName": "PaperDefense.Tests.AuthoredWorkshopTests.RealHudRestartPreservesPointerDrawingProgressAndSharesQualityWithTrialAndBattle",
+            "state": "Failed",
+            "durationSeconds": 0.0937101,
+            "message": "  Expected string length 40 but was 11. Strings differ at index 0.\r\n  Expected: \"drawing-618fef561b81411fbfdf420231e6b18c\"\r\n  But was:  \"starter.gun\"\r\n  -----------^\r\n",
+            "stackTrace": "at PaperDefense.Tests.AuthoredWorkshopTests.RealHudRestartPreservesPointerDrawingProgressAndSharesQualityWithTrialAndBattle () [0x0042f] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\AuthoredWorkshopTests.cs:118\r\n",
+            "output": ""
+          },
+          {
+            "name": "SaveAsNewKeepsOriginalPageAndEditingOneMountKeepsOtherStrokes",
+            "fullName": "PaperDefense.Tests.AuthoredWorkshopTests.SaveAsNewKeepsOriginalPageAndEditingOneMountKeepsOtherStrokes",
+            "state": "Failed",
+            "durationSeconds": 0.0225521,
+            "message": "  Expected: not equal to \"drawing-b3cb05eaea8f40e3a3b5fe86eced67db\"\r\n  But was:  \"drawing-b3cb05eaea8f40e3a3b5fe86eced67db\"\r\n",
+            "stackTrace": "at PaperDefense.Tests.AuthoredWorkshopTests.SaveAsNewKeepsOriginalPageAndEditingOneMountKeepsOtherStrokes () [0x0012e] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\AuthoredWorkshopTests.cs:170\r\n",
+            "output": ""
+          },
+          {
+            "name": "EmptyAndPartiallyAssignedStartupPagesRenderAndCanBeFilledInWorkshop(False)",
+            "fullName": "PaperDefense.Tests.DataDrivenWorkshopUiTests.EmptyAndPartiallyAssignedStartupPagesRenderAndCanBeFilledInWorkshop(False)",
+            "state": "Failed",
+            "durationSeconds": 0.0329198,
+            "message": "  Недостаточно места для чернил: использовано 112,5 из 65,0. Уменьшите корпус или стволы.\r\n  Expected: 1\r\n  But was:  0\r\n",
+            "stackTrace": "at PaperDefense.Tests.DataDrivenWorkshopUiTests.EmptyAndPartiallyAssignedStartupPagesRenderAndCanBeFilledInWorkshop (System.Boolean assignOne) [0x00329] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\DataDrivenWorkshopUiTests.cs:214\r\n",
+            "output": ""
+          },
+          {
+            "name": "EmptyAndPartiallyAssignedStartupPagesRenderAndCanBeFilledInWorkshop(True)",
+            "fullName": "PaperDefense.Tests.DataDrivenWorkshopUiTests.EmptyAndPartiallyAssignedStartupPagesRenderAndCanBeFilledInWorkshop(True)",
+            "state": "Failed",
+            "durationSeconds": 0.0277384,
+            "message": "  Недостаточно места для чернил: использовано 112,5 из 65,0. Уменьшите корпус или стволы.\r\n  Expected: 2\r\n  But was:  1\r\n",
+            "stackTrace": "at PaperDefense.Tests.DataDrivenWorkshopUiTests.EmptyAndPartiallyAssignedStartupPagesRenderAndCanBeFilledInWorkshop (System.Boolean assignOne) [0x00329] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\DataDrivenWorkshopUiTests.cs:214\r\n",
+            "output": ""
+          },
+          {
+            "name": "RepeatedNewEquipmentCanBeDrawnIndependentlyWithoutNewDrawingEnumValues",
+            "fullName": "PaperDefense.Tests.DataDrivenWorkshopUiTests.RepeatedNewEquipmentCanBeDrawnIndependentlyWithoutNewDrawingEnumValues",
+            "state": "Failed",
+            "durationSeconds": 0.0299321,
+            "message": "  Expected: 1\r\n  But was:  0\r\n",
+            "stackTrace": "at PaperDefense.Tests.DataDrivenWorkshopUiTests.RepeatedNewEquipmentCanBeDrawnIndependentlyWithoutNewDrawingEnumValues () [0x001ce] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\DataDrivenWorkshopUiTests.cs:86\r\n",
+            "output": ""
+          },
+          {
+            "name": "FreeformEditorPreviewAndNormalTrialUseTheSameConstructionWithoutGrading",
+            "fullName": "PaperDefense.Tests.DrawingQualityHudTests.FreeformEditorPreviewAndNormalTrialUseTheSameConstructionWithoutGrading",
+            "state": "Failed",
+            "durationSeconds": 0.0203098,
+            "message": "  \u001ePD1:FGZyZWVmb3JtLm92ZXJfYnVkZ2V0AgAAAAWAYftCBQAAyEI=\u001f\r\n  Expected: True\r\n  But was:  False\r\n",
+            "stackTrace": "at PaperDefense.Tests.DrawingQualityHudTests.FreeformEditorPreviewAndNormalTrialUseTheSameConstructionWithoutGrading () [0x001bd] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\DrawingQualityHudTests.cs:40\r\n",
+            "output": ""
+          },
+          {
+            "name": "DrawingSceneEditsThirdLayerAndFootprintWithoutAssemblyAlbumOrBattle",
+            "fullName": "PaperDefense.Tests.FocusedWorkshopSceneTests.DrawingSceneEditsThirdLayerAndFootprintWithoutAssemblyAlbumOrBattle",
+            "state": "Failed",
+            "durationSeconds": 0.4148277,
+            "message": "  Expected: not null\r\n  But was:  null\r\n",
+            "stackTrace": "at PaperDefense.Tests.FocusedWorkshopSceneTests+<DrawingSceneEditsThirdLayerAndFootprintWithoutAssemblyAlbumOrBattle>d__12.MoveNext () [0x00291] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\FocusedWorkshopSceneTests.cs:141\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@1405238725ab\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:44\r\n",
+            "output": ""
+          },
+          {
+            "name": "BlankNameDraftExplainsUnavailableProbeAndRecoversAfterRename",
+            "fullName": "PaperDefense.Tests.MortarFootprintHudTests.BlankNameDraftExplainsUnavailableProbeAndRecoversAfterRename",
+            "state": "Failed",
+            "durationSeconds": 0.0228316,
+            "message": "  Expected: not null\r\n  But was:  null\r\n",
+            "stackTrace": "at PaperDefense.Tests.MortarFootprintHudTests.BlankNameDraftExplainsUnavailableProbeAndRecoversAfterRename () [0x001c8] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintHudTests.cs:172\r\n",
+            "output": ""
+          },
+          {
+            "name": "WorkshopControlsPreserveAuthoredArtThroughVariantAndTemporaryStore",
+            "fullName": "PaperDefense.Tests.MortarFootprintHudTests.WorkshopControlsPreserveAuthoredArtThroughVariantAndTemporaryStore",
+            "state": "Failed",
+            "durationSeconds": 0.0421101,
+            "message": "  Недостаточно места для чернил: использовано 123,0 из 100,0. Уменьшите корпус или стволы.\r\n  Expected: True\r\n  But was:  False\r\n",
+            "stackTrace": "at PaperDefense.Tests.MortarFootprintHudTests.WorkshopControlsPreserveAuthoredArtThroughVariantAndTemporaryStore () [0x001bc] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintHudTests.cs:51\r\n",
+            "output": ""
+          },
+          {
+            "name": "LockedTrialShowsAnExplanationWithoutThrowing",
+            "fullName": "PaperDefense.Tests.WorkshopIntegrationTests.LockedTrialShowsAnExplanationWithoutThrowing",
+            "state": "Failed",
+            "durationSeconds": 0.1176457,
+            "message": "  Expected: String containing \"откройте\"\r\n  But was:  \"Авторские штрихи применены к черновику. Сохрани страницу в альбом.\"\r\n",
+            "stackTrace": "at PaperDefense.Tests.WorkshopIntegrationTests+<LockedTrialShowsAnExplanationWithoutThrowing>d__9.MoveNext () [0x000ce] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopIntegrationTests.cs:116\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@1405238725ab\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:44\r\n",
+            "output": ""
+          },
+          {
+            "name": "SavedDraftAndFieldPlacementAreIndependentOfLaterEditing",
+            "fullName": "PaperDefense.Tests.WorkshopIntegrationTests.SavedDraftAndFieldPlacementAreIndependentOfLaterEditing",
+            "state": "Failed",
+            "durationSeconds": 0.1061106,
+            "message": "  Expected string length 40 but was 11. Strings differ at index 0.\r\n  Expected: \"drawing-fd4b08cb76c44ea694703a80af1e7a94\"\r\n  But was:  \"starter.gun\"\r\n  -----------^\r\n",
+            "stackTrace": "at PaperDefense.Tests.WorkshopIntegrationTests+<SavedDraftAndFieldPlacementAreIndependentOfLaterEditing>d__8.MoveNext () [0x0012c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopIntegrationTests.cs:94\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@1405238725ab\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:44\r\n",
+            "output": ""
+          },
+          {
+            "name": "AlbumCardsRenderCompositionHealthAndFireRateBelowTheirNames",
+            "fullName": "PaperDefense.Tests.WorkshopReadabilityTests.AlbumCardsRenderCompositionHealthAndFireRateBelowTheirNames",
+            "state": "Failed",
+            "durationSeconds": 0.018875,
+            "message": "  Both standard pages and the saved author drawing must be checked\r\n  Expected: 5\r\n  But was:  4\r\n",
+            "stackTrace": "at PaperDefense.Tests.WorkshopReadabilityTests.AlbumCardsRenderCompositionHealthAndFireRateBelowTheirNames () [0x00153] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\WorkshopReadabilityTests.cs:45\r\n",
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

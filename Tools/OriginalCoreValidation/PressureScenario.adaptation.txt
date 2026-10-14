@@ -1,0 +1,13 @@
+Only the isolated validation harness constructor is adapted. Original Core files remain byte-for-byte unchanged.
+
+Original signature:
+public PressureScenario(PressureScenarioConfig config = null)
+Replacement:
+public PressureScenario(PressureScenarioConfig config = null, GameBalance configuredBalance = null)
+
+Original balance acquisition:
+var balance = GameBalance.CreateDefault();
+Replacement:
+var balance = configuredBalance == null ? GameBalance.CreateDefault() : configuredBalance.CreateSnapshot();
+
+Every original scenario override and public command is retained. This supplies the actual main asset to original simulation code instead of silently using the historical C# fixture.

@@ -1,0 +1,89 @@
+{
+  "job_id": "b7ae15098cac45f7a5e9a390b70f344f",
+  "status": "failed",
+  "mode": "PlayMode",
+  "started_unix_ms": 1791815415166,
+  "finished_unix_ms": 1791815421197,
+  "last_update_unix_ms": 1791815421197,
+  "progress": {
+    "completed": 5,
+    "total": 5,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": null,
+    "last_finished_test_full_name": "PaperDefense.Tests.MortarFootprintHudTests.WorkshopControlsPreserveAuthoredArtThroughVariantAndTemporaryStore",
+    "last_finished_unix_ms": 1791815421172,
+    "stuck_suspected": false,
+    "editor_is_focused": true,
+    "run_in_background": false,
+    "focus_nudge_attempts": null,
+    "focus_nudge_limit": null,
+    "focus_nudge_status": null,
+    "blocked_reason": null,
+    "failures_so_far": [
+      {
+        "full_name": "PaperDefense.Tests.MortarFootprintHudTests.OverloadedDraftExplainsUnavailableProbeClearsRecordingAndRecovers",
+        "message": "  Expected: No Exception to be thrown\r\n  But was:  <System.ArgumentException: Не хватает 4 ед. нагрузки. Снимите оружие или выберите другое основание.\r\nParameter name: blueprint\r\n  at PaperDefense.Core.MortarFootprintProbe.Compare (PaperDefense.Core.TowerBlueprint blueprint, System.Int32 mount, PaperDefense.Core.MortarFootprint first, PaperDefense.Core.MortarFootprint second, PaperDefense.Core.GameBalance balance, PaperDefense.Core.FootprintFormation formation) [0x00093] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\MortarFootprintProbe.cs:37 \r\n  at PaperDefense.Application.RunController.CompareMortarFootprints (PaperDefense.Core.TowerBlueprint blueprint, System.Int32 mount, PaperDefense.Core.MortarFootprint first, PaperDefense.Core.MortarFootprint second, PaperDefense.Core.FootprintFormation formation) [0x00000] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\RunController.cs:282 \r\n  at PaperDefense.Presentation.MortarFootprintPanel.Record () [0x00011] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\MortarFootprintPanel.cs:65 \r\n  at PaperDefense.Presentation.MortarFootprintPanel.Open (PaperDefense.Core.TowerBlueprint value, System.Int32 mount) [0x0005c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\MortarFootprintPanel.cs:50 \r\n  at PaperDefense.Presentation.WorkshopHud+<>c__DisplayClass73_2.<BuildComposer>b__10 () [0x00000] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkshopHud.cs:147 \r\n  at PaperDefense.Presentation.WorkshopHud+<>c__DisplayClass96_0.<Button>b__0 () [0x00000] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkshopHud.cs:433 \r\n  at UnityEngine.Events.InvokableCall.Invoke () [0x0000d] in <5ecefda573de420b8643923ab4ab8ab5>:0 \r\n  at UnityEngine.Events.UnityEvent.Invoke () [0x0001b] in <5ecefda573de420b8643923ab4ab8ab5>:0 \r\n  at PaperDefense.Tests.MortarFootprintHudTests+<>c__DisplayClass7_0.<OverloadedDraftExplainsUnavailableProbeClearsRecordingAndRecovers>b__0 (System.String name) [0x0000d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintHudTests.cs:84 \r\n  at PaperDefense.Tests.MortarFootprintHudTests+<>c__DisplayClass7_1.<OverloadedDraftExplainsUnavailableProbeClearsRecordingAndRecovers>b__1 () [0x00000] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintHudTests.cs:95 \r\n  at NUnit.Framework.Constraints.ThrowsConstraint+VoidInvocationDescriptor.Invoke () [0x00001] in <8b63e8ac0a4746599ed207982825ae6c>:0 \r\n  at NUnit.Framework.Constraints.ThrowsConstraint+ExceptionInterceptor.Intercept (System.Object invocation) [0x00050] in <8b63e8ac0a4746599ed207982825ae6c>:0 >\r\n"
+      }
+    ],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "PlayMode",
+    "summary": {
+      "total": 5,
+      "passed": 4,
+      "failed": 1,
+      "skipped": 0,
+      "durationSeconds": 0.3087182,
+      "resultState": "Failed(Child)"
+    },
+    "results": [
+      {
+        "name": "DragStopsOldRecordingThenReleaseStartsFreshRecordingAndCloseCancels",
+        "fullName": "PaperDefense.Tests.MortarFootprintHudTests.DragStopsOldRecordingThenReleaseStartsFreshRecordingAndCloseCancels",
+        "state": "Passed",
+        "durationSeconds": 0.1001046,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "LegacyVariantKeepsOriginAndPeriodicHudRefreshDoesNotCancelDrag",
+        "fullName": "PaperDefense.Tests.MortarFootprintHudTests.LegacyVariantKeepsOriginAndPeriodicHudRefreshDoesNotCancelDrag",
+        "state": "Passed",
+        "durationSeconds": 0.0463148,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "OverloadedDraftExplainsUnavailableProbeClearsRecordingAndRecovers",
+        "fullName": "PaperDefense.Tests.MortarFootprintHudTests.OverloadedDraftExplainsUnavailableProbeClearsRecordingAndRecovers",
+        "state": "Failed",
+        "durationSeconds": 0.0196739,
+        "message": "  Expected: No Exception to be thrown\r\n  But was:  <System.ArgumentException: Не хватает 4 ед. нагрузки. Снимите оружие или выберите другое основание.\r\nParameter name: blueprint\r\n  at PaperDefense.Core.MortarFootprintProbe.Compare (PaperDefense.Core.TowerBlueprint blueprint, System.Int32 mount, PaperDefense.Core.MortarFootprint first, PaperDefense.Core.MortarFootprint second, PaperDefense.Core.GameBalance balance, PaperDefense.Core.FootprintFormation formation) [0x00093] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\MortarFootprintProbe.cs:37 \r\n  at PaperDefense.Application.RunController.CompareMortarFootprints (PaperDefense.Core.TowerBlueprint blueprint, System.Int32 mount, PaperDefense.Core.MortarFootprint first, PaperDefense.Core.MortarFootprint second, PaperDefense.Core.FootprintFormation formation) [0x00000] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\RunController.cs:282 \r\n  at PaperDefense.Presentation.MortarFootprintPanel.Record () [0x00011] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\MortarFootprintPanel.cs:65 \r\n  at PaperDefense.Presentation.MortarFootprintPanel.Open (PaperDefense.Core.TowerBlueprint value, System.Int32 mount) [0x0005c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\MortarFootprintPanel.cs:50 \r\n  at PaperDefense.Presentation.WorkshopHud+<>c__DisplayClass73_2.<BuildComposer>b__10 () [0x00000] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkshopHud.cs:147 \r\n  at PaperDefense.Presentation.WorkshopHud+<>c__DisplayClass96_0.<Button>b__0 () [0x00000] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkshopHud.cs:433 \r\n  at UnityEngine.Events.InvokableCall.Invoke () [0x0000d] in <5ecefda573de420b8643923ab4ab8ab5>:0 \r\n  at UnityEngine.Events.UnityEvent.Invoke () [0x0001b] in <5ecefda573de420b8643923ab4ab8ab5>:0 \r\n  at PaperDefense.Tests.MortarFootprintHudTests+<>c__DisplayClass7_0.<OverloadedDraftExplainsUnavailableProbeClearsRecordingAndRecovers>b__0 (System.String name) [0x0000d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintHudTests.cs:84 \r\n  at PaperDefense.Tests.MortarFootprintHudTests+<>c__DisplayClass7_1.<OverloadedDraftExplainsUnavailableProbeClearsRecordingAndRecovers>b__1 () [0x00000] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintHudTests.cs:95 \r\n  at NUnit.Framework.Constraints.ThrowsConstraint+VoidInvocationDescriptor.Invoke () [0x00001] in <8b63e8ac0a4746599ed207982825ae6c>:0 \r\n  at NUnit.Framework.Constraints.ThrowsConstraint+ExceptionInterceptor.Intercept (System.Object invocation) [0x00050] in <8b63e8ac0a4746599ed207982825ae6c>:0 >\r\n",
+        "stackTrace": "at PaperDefense.Tests.MortarFootprintHudTests.OverloadedDraftExplainsUnavailableProbeClearsRecordingAndRecovers () [0x000f9] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\MortarFootprintHudTests.cs:95\r\n",
+        "output": ""
+      },
+      {
+        "name": "PointerClampsBothMortarsIndependentlyAndKeepsBaselineFrozen",
+        "fullName": "PaperDefense.Tests.MortarFootprintHudTests.PointerClampsBothMortarsIndependentlyAndKeepsBaselineFrozen",
+        "state": "Passed",
+        "durationSeconds": 0.0060217,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "WorkshopControlsPreserveAuthoredArtThroughVariantAndTemporaryStore",
+        "fullName": "PaperDefense.Tests.MortarFootprintHudTests.WorkshopControlsPreserveAuthoredArtThroughVariantAndTemporaryStore",
+        "state": "Passed",
+        "durationSeconds": 0.0549613,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      }
+    ]
+  }
+}

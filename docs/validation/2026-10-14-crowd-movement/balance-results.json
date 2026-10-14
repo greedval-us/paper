@@ -1,0 +1,74 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "33247559272c436eb3fd8bfbb8ca9dd3",
+      "status": "succeeded",
+      "mode": "EditMode",
+      "started_unix_ms": 1791941279758,
+      "finished_unix_ms": 1791941296012,
+      "last_update_unix_ms": 1791941296012,
+      "progress": {
+        "completed": 3,
+        "total": 3,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.TowerDefenseBalanceTests.ReinforcedMixedDefenseCanFinishAllEightWavesWithinEarnedInk(41)",
+        "last_finished_unix_ms": 1791941295884,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "EditMode",
+        "summary": {
+          "total": 3,
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationSeconds": 11.9327319,
+          "resultState": "Passed"
+        },
+        "results": [
+          {
+            "name": "ActualStarterWeaponsNeedSeveralHitsAndAffordableOpeningProtectsCastle",
+            "fullName": "PaperDefense.Tests.TowerDefenseBalanceTests.ActualStarterWeaponsNeedSeveralHitsAndAffordableOpeningProtectsCastle",
+            "state": "Passed",
+            "durationSeconds": 0.310462,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ReinforcedMixedDefenseCanFinishAllEightWavesWithinEarnedInk(17)",
+            "fullName": "PaperDefense.Tests.TowerDefenseBalanceTests.ReinforcedMixedDefenseCanFinishAllEightWavesWithinEarnedInk(17)",
+            "state": "Passed",
+            "durationSeconds": 5.3298542,
+            "message": null,
+            "stackTrace": null,
+            "output": "seed 17, wave 1: 28 kills, 250 castle HP, 184 ink, 26 structures\r\nseed 17, wave 2: 66 kills, 250 castle HP, 222 ink, 30 structures\r\nWave 3: reinforce (39, 23) for 40 earned ink.\r\nRedeploy (39, 23): 27 refunded ink.\r\nWave 3: reinforce (61, 33) for 40 earned ink.\r\nseed 17, wave 3: 116 kills, 250 castle HP, 195 ink, 31 structures\r\nWave 4: reinforce (41, 38) for 108 earned ink.\r\nseed 17, wave 4: 180 kills, 250 castle HP, 229 ink, 34 structures\r\nseed 17, wave 5: 260 kills, 250 castle HP, 431 ink, 35 structures\r\nseed 17, wave 6: 360 kills, 250 castle HP, 483 ink, 36 structures\r\nseed 17, wave 7: 485 kills, 250 castle HP, 561 ink, 34 structures\r\nseed 17, wave 8: 640 kills, 250 castle HP, 625 ink, 32 structures\r\nseed 17: 640 kills, 250 castle HP, 625 ink, 636,4s, 2805 construction ink\r\n"
+          },
+          {
+            "name": "ReinforcedMixedDefenseCanFinishAllEightWavesWithinEarnedInk(41)",
+            "fullName": "PaperDefense.Tests.TowerDefenseBalanceTests.ReinforcedMixedDefenseCanFinishAllEightWavesWithinEarnedInk(41)",
+            "state": "Passed",
+            "durationSeconds": 5.794285,
+            "message": null,
+            "stackTrace": null,
+            "output": "seed 41, wave 1: 28 kills, 250 castle HP, 184 ink, 26 structures\r\nseed 41, wave 2: 66 kills, 250 castle HP, 222 ink, 30 structures\r\nseed 41, wave 3: 116 kills, 250 castle HP, 244 ink, 30 structures\r\nWave 4: reinforce (55, 26) for 108 earned ink.\r\nseed 41, wave 4: 180 kills, 250 castle HP, 282 ink, 31 structures\r\nseed 41, wave 5: 260 kills, 250 castle HP, 381 ink, 33 structures\r\nseed 41, wave 6: 360 kills, 250 castle HP, 510 ink, 33 structures\r\nseed 41, wave 7: 485 kills, 250 castle HP, 529 ink, 35 structures\r\nWave 8: reinforce (41, 38) for 108 earned ink.\r\nseed 41, wave 8: 640 kills, 250 castle HP, 561 ink, 37 structures\r\nseed 41: 640 kills, 250 castle HP, 561 ink, 681,7s, 2867 construction ink\r\n"
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

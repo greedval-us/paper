@@ -1,0 +1,262 @@
+{
+  "coreRed": {
+    "result": {
+      "success": true,
+      "message": "Test job status retrieved.",
+      "error": null,
+      "data": {
+        "job_id": "c8134f2df7f44fcfab73a6d7613e8178",
+        "status": "failed",
+        "mode": "EditMode",
+        "started_unix_ms": 1791926429370,
+        "finished_unix_ms": 1791926434273,
+        "last_update_unix_ms": 1791926434273,
+        "progress": {
+          "completed": 1,
+          "total": 1,
+          "current_test_full_name": null,
+          "current_test_started_unix_ms": null,
+          "last_finished_test_full_name": "PaperDefense.Tests.DrawingWorkshopRulesTests.FullCanvasFunctionalGeometryCannotBeSavedOrBuilt",
+          "last_finished_unix_ms": 1791926434093,
+          "stuck_suspected": false,
+          "editor_is_focused": false,
+          "run_in_background": false,
+          "focus_nudge_attempts": null,
+          "focus_nudge_limit": null,
+          "focus_nudge_status": null,
+          "blocked_reason": null,
+          "failures_so_far": [
+            {
+              "full_name": "PaperDefense.Tests.DrawingWorkshopRulesTests.FullCanvasFunctionalGeometryCannotBeSavedOrBuilt",
+              "message": "  Complete geometry must still obey construction ink allowance\r\n  Expected: False\r\n  But was:  True\r\n"
+            }
+          ],
+          "failures_capped": false
+        },
+        "error": null,
+        "result": {
+          "mode": "EditMode",
+          "summary": {
+            "total": 1,
+            "passed": 0,
+            "failed": 1,
+            "skipped": 0,
+            "durationSeconds": 0.5377657,
+            "resultState": "Failed(Child)"
+          },
+          "results": [
+            {
+              "name": "FullCanvasFunctionalGeometryCannotBeSavedOrBuilt",
+              "fullName": "PaperDefense.Tests.DrawingWorkshopRulesTests.FullCanvasFunctionalGeometryCannotBeSavedOrBuilt",
+              "state": "Failed",
+              "durationSeconds": 0.0384145,
+              "message": "  Complete geometry must still obey construction ink allowance\r\n  Expected: False\r\n  But was:  True\r\n",
+              "stackTrace": "at PaperDefense.Tests.DrawingWorkshopRulesTests.FullCanvasFunctionalGeometryCannotBeSavedOrBuilt () [0x0002a] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\DrawingWorkshopRulesTests.cs:16\r\n",
+              "output": ""
+            }
+          ]
+        }
+      },
+      "hint": null
+    }
+  },
+  "loaderRed": {
+    "result": {
+      "success": true,
+      "message": "Test job status retrieved.",
+      "error": null,
+      "data": {
+        "job_id": "138cd1ccd92f458a99a7567c8676e92a",
+        "status": "failed",
+        "mode": "EditMode",
+        "started_unix_ms": 1791926984236,
+        "finished_unix_ms": 1791926989099,
+        "last_update_unix_ms": 1791926989099,
+        "progress": {
+          "completed": 1,
+          "total": 1,
+          "current_test_full_name": null,
+          "current_test_started_unix_ms": null,
+          "last_finished_test_full_name": "PaperDefense.Tests.DrawingWorkshopRulesTests.CustomMinimumGeometrySurvivesReloadAndRemainsEditableUnderStricterRules",
+          "last_finished_unix_ms": 1791926988930,
+          "stuck_suspected": false,
+          "editor_is_focused": false,
+          "run_in_background": false,
+          "focus_nudge_attempts": null,
+          "focus_nudge_limit": null,
+          "focus_nudge_status": null,
+          "blocked_reason": null,
+          "failures_so_far": [
+            {
+              "full_name": "PaperDefense.Tests.DrawingWorkshopRulesTests.CustomMinimumGeometrySurvivesReloadAndRemainsEditableUnderStricterRules",
+              "message": "System.ArgumentException : \u001ePD1:FWZyZWVmb3JtLm1pc3NpbmdfYm9keQAAAAA=\u001f"
+            }
+          ],
+          "failures_capped": false
+        },
+        "error": null,
+        "result": {
+          "mode": "EditMode",
+          "summary": {
+            "total": 1,
+            "passed": 0,
+            "failed": 1,
+            "skipped": 0,
+            "durationSeconds": 0.5470664,
+            "resultState": "Failed(Child)"
+          },
+          "results": [
+            {
+              "name": "CustomMinimumGeometrySurvivesReloadAndRemainsEditableUnderStricterRules",
+              "fullName": "PaperDefense.Tests.DrawingWorkshopRulesTests.CustomMinimumGeometrySurvivesReloadAndRemainsEditableUnderStricterRules",
+              "state": "Failed:Error",
+              "durationSeconds": 0.0469745,
+              "message": "System.ArgumentException : \u001ePD1:FWZyZWVmb3JtLm1pc3NpbmdfYm9keQAAAAA=\u001f",
+              "stackTrace": "  at PaperDefense.Core.WorkshopProfile.FromStrictData (PaperDefense.Core.WorkshopProfileData data) [0x00398] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\WorkshopProfile.cs:277 \r\n  at PaperDefense.Core.WorkshopProfile.FromData (PaperDefense.Core.WorkshopProfileData data) [0x00015] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\WorkshopProfile.cs:202 \r\n  at PaperDefense.Tests.DrawingWorkshopRulesTests.CustomMinimumGeometrySurvivesReloadAndRemainsEditableUnderStricterRules () [0x00077] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\DrawingWorkshopRulesTests.cs:93 \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ",
+              "output": ""
+            }
+          ]
+        }
+      },
+      "hint": null
+    }
+  },
+  "focusedEdit": {
+    "result": {
+      "success": true,
+      "message": "Test job status retrieved.",
+      "error": null,
+      "data": {
+        "job_id": "40a17fee0db54669a5fc32941589e81f",
+        "status": "succeeded",
+        "mode": "EditMode",
+        "started_unix_ms": 1791926885291,
+        "finished_unix_ms": 1791926890368,
+        "last_update_unix_ms": 1791926890368,
+        "progress": {
+          "completed": 30,
+          "total": 30,
+          "current_test_full_name": null,
+          "current_test_started_unix_ms": null,
+          "last_finished_test_full_name": "PaperDefense.Tests.FreeformTowerTests.WideBarrelChangesActualHitDamageAndPreviewTogether",
+          "last_finished_unix_ms": 1791926890146,
+          "stuck_suspected": false,
+          "editor_is_focused": false,
+          "run_in_background": false,
+          "focus_nudge_attempts": null,
+          "focus_nudge_limit": null,
+          "focus_nudge_status": null,
+          "blocked_reason": null,
+          "failures_so_far": [],
+          "failures_capped": false
+        },
+        "error": null,
+        "result": {
+          "mode": "EditMode",
+          "summary": {
+            "total": 30,
+            "passed": 30,
+            "failed": 0,
+            "skipped": 0,
+            "durationSeconds": 0.6943082,
+            "resultState": "Passed"
+          },
+          "results": []
+        }
+      },
+      "hint": null
+    }
+  },
+  "focusedPlay": {
+    "result": {
+      "success": true,
+      "message": "Test job status retrieved.",
+      "error": null,
+      "data": {
+        "job_id": "be9eeef15b5c4cd681fadef7c010f50a",
+        "status": "succeeded",
+        "mode": "PlayMode",
+        "started_unix_ms": 1791926901585,
+        "finished_unix_ms": 1791926907079,
+        "last_update_unix_ms": 1791926907079,
+        "progress": {
+          "completed": 4,
+          "total": 4,
+          "current_test_full_name": null,
+          "current_test_started_unix_ms": null,
+          "last_finished_test_full_name": "PaperDefense.Tests.FreeformWorkshopTests.WorkshopPreviewTrialAndDeployedTowerShareOneFreeformDesign",
+          "last_finished_unix_ms": 1791926907063,
+          "stuck_suspected": false,
+          "editor_is_focused": false,
+          "run_in_background": false,
+          "focus_nudge_attempts": null,
+          "focus_nudge_limit": null,
+          "focus_nudge_status": null,
+          "blocked_reason": null,
+          "failures_so_far": [],
+          "failures_capped": false
+        },
+        "error": null,
+        "result": {
+          "mode": "PlayMode",
+          "summary": {
+            "total": 4,
+            "passed": 4,
+            "failed": 0,
+            "skipped": 0,
+            "durationSeconds": 0.2763601,
+            "resultState": "Passed"
+          },
+          "results": []
+        }
+      },
+      "hint": null
+    }
+  },
+  "fullEdit": {
+    "result": {
+      "success": true,
+      "message": "Test job status retrieved.",
+      "error": null,
+      "data": {
+        "job_id": "82ca6b6b22a84769a7e62f2b1806c500",
+        "status": "succeeded",
+        "mode": "EditMode",
+        "started_unix_ms": 1791927066757,
+        "finished_unix_ms": 1791927097791,
+        "last_update_unix_ms": 1791927097791,
+        "progress": {
+          "completed": 811,
+          "total": 811,
+          "current_test_full_name": null,
+          "current_test_started_unix_ms": null,
+          "last_finished_test_full_name": "PaperDefense.Tests.NotebookArtImportTests.SelfIntersectingPentagramAndRepeatedPolygonVerticesAreRejected",
+          "last_finished_unix_ms": 1791927097590,
+          "stuck_suspected": false,
+          "editor_is_focused": false,
+          "run_in_background": false,
+          "focus_nudge_attempts": null,
+          "focus_nudge_limit": null,
+          "focus_nudge_status": null,
+          "blocked_reason": null,
+          "failures_so_far": [],
+          "failures_capped": false
+        },
+        "error": null,
+        "result": {
+          "mode": "EditMode",
+          "summary": {
+            "total": 811,
+            "passed": 811,
+            "failed": 0,
+            "skipped": 0,
+            "durationSeconds": 26.5833892,
+            "resultState": "Passed"
+          },
+          "results": []
+        }
+      },
+      "hint": null
+    }
+  }
+}

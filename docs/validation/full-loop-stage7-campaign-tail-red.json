@@ -1,0 +1,61 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "58d0dfa7e466455b84c5ab2cd38d19ba",
+      "status": "failed",
+      "mode": "EditMode",
+      "started_unix_ms": 1791799451375,
+      "finished_unix_ms": 1791799458881,
+      "last_update_unix_ms": 1791799458881,
+      "progress": {
+        "completed": 1,
+        "total": 1,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.InkLoopReportTests.TargetCampaignClearsTheFirstSpitterWaveWithinFiniteEarnedInk",
+        "last_finished_unix_ms": 1791799458755,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [
+          {
+            "full_name": "PaperDefense.Tests.InkLoopReportTests.TargetCampaignClearsTheFirstSpitterWaveWithinFiniteEarnedInk",
+            "message": "  A surviving ranged attacker must be reachable without waiting-income or injected resources.\r\n  Expected: Victory\r\n  But was:  Assault\r\n"
+          }
+        ],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "EditMode",
+        "summary": {
+          "total": 1,
+          "passed": 0,
+          "failed": 1,
+          "skipped": 0,
+          "durationSeconds": 3.3140452,
+          "resultState": "Failed(Child)"
+        },
+        "results": [
+          {
+            "name": "TargetCampaignClearsTheFirstSpitterWaveWithinFiniteEarnedInk",
+            "fullName": "PaperDefense.Tests.InkLoopReportTests.TargetCampaignClearsTheFirstSpitterWaveWithinFiniteEarnedInk",
+            "state": "Failed",
+            "durationSeconds": 2.8170505,
+            "message": "  A surviving ranged attacker must be reachable without waiting-income or injected resources.\r\n  Expected: Victory\r\n  But was:  Assault\r\n",
+            "stackTrace": "at PaperDefense.Tests.InkLoopReportTests.TargetCampaignClearsTheFirstSpitterWaveWithinFiniteEarnedInk () [0x0008b] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\InkLoopReportTests.cs:21\r\n",
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

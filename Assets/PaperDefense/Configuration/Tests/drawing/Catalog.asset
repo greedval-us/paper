@@ -1,0 +1,2565 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c49893887805814ea9a073c5bc1e37a, type: 3}
+  m_Name: Catalog
+  m_EditorClassIdentifier: PaperDefense.Application::PaperDefense.Application.ContentDatabaseAsset
+  catalog:
+    Chassis:
+    - Id: chassis.standard
+      Name: "\u041E\u0431\u044B\u0447\u043D\u043E\u0435 \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"
+      Description: "\u0414\u0432\u0430 \u043A\u0440\u0435\u043F\u043B\u0435\u043D\u0438\u044F
+        \u0434\u043B\u044F \u0434\u0435\u0442\u0430\u043B\u0435\u0439 \u0441 \u043E\u0431\u0449\u0435\u0439
+        \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u043D\u043E\u0439
+        \u043D\u0430\u0433\u0440\u0443\u0437\u043A\u043E\u0439."
+      ButtonLabel: "\u041E\u0411\u042B\u0427\u041D\u041E\u0415"
+      UnlockLabel: "\u041E\u0411\u042B\u0427\u041D\u041E\u0415"
+      TemplateId: template.chassis.standard
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 0
+      UnlockGold: 0
+      VisualStyle: 0
+      Capacity: 10
+      BaseCost: 16
+      MountCount: 2
+      UpgradeSlotCount: 2
+      ArmorSlotCount: 1
+      FeedCapacity: 1.6
+      BaseHealth: 55
+      HealthMultiplier: 1
+      BuildSeconds: 0
+      SecondaryBuildSeconds: 0.4
+      PrimaryMountPivotX: 0
+      PrimaryMountPivotY: 0.04
+      PrimaryDualMountPivotX: -0.17
+      PrimaryDualMountPivotY: 0.04
+      SecondaryMountPivotX: 0.17
+      SecondaryMountPivotY: 0.04
+      LegacyKind: 0
+      MountPivots: []
+    - Id: chassis.heavy
+      Name: "\u0422\u044F\u0436\u0451\u043B\u043E\u0435 \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"
+      Description: "\u0412\u043C\u0435\u0449\u0430\u0435\u0442 \u0431\u043E\u043B\u044C\u0448\u0443\u044E
+        \u043D\u0430\u0433\u0440\u0443\u0437\u043A\u0443; \u0434\u043E\u0440\u043E\u0436\u0435
+        \u0438 \u0434\u043E\u043B\u044C\u0448\u0435 \u0441\u0442\u0440\u043E\u0438\u0442\u0441\u044F."
+      ButtonLabel: "\u0422\u042F\u0416\u0401\u041B\u041E\u0415"
+      UnlockLabel: "\u0422\u042F\u0416\u0401\u041B\u041E\u0415"
+      TemplateId: template.chassis.heavy
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 5
+      UnlockGold: 90
+      VisualStyle: 0
+      Capacity: 14
+      BaseCost: 28
+      MountCount: 2
+      UpgradeSlotCount: 2
+      ArmorSlotCount: 1
+      FeedCapacity: 1.6
+      BaseHealth: 55
+      HealthMultiplier: 1.3
+      BuildSeconds: 0.45
+      SecondaryBuildSeconds: 0.4
+      PrimaryMountPivotX: 0
+      PrimaryMountPivotY: 0.04
+      PrimaryDualMountPivotX: -0.17
+      PrimaryDualMountPivotY: 0.04
+      SecondaryMountPivotX: 0.17
+      SecondaryMountPivotY: 0.04
+      LegacyKind: 1
+      MountPivots: []
+    - Id: chassis.precision
+      Name: "\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0435
+        \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"
+      Description: "\u041E\u0434\u0438\u043D \u0441\u0442\u0432\u043E\u043B, \u0442\u0440\u0438
+        \u0443\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u044F \u0438 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u0430\u044F
+        \u0431\u0440\u043E\u043D\u044F. \u0422\u043E\u0447\u043D\u0430\u044F \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430
+        \u043E\u0434\u043D\u043E\u0433\u043E \u043E\u0440\u0443\u0436\u0438\u044F."
+      ButtonLabel: "\u0421\u041F\u0415\u0426\u0418\u0410\u041B\u0418\u0417\u0418\u0420."
+      UnlockLabel: "\u0421\u041F\u0415\u0426\u0418\u0410\u041B\u0418\u0417\u0418\u0420."
+      TemplateId: template.chassis.precision
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 20
+      UnlockGold: 90
+      VisualStyle: 0
+      Capacity: 16
+      BaseCost: 20
+      MountCount: 1
+      UpgradeSlotCount: 3
+      ArmorSlotCount: 1
+      FeedCapacity: 1
+      BaseHealth: 55
+      HealthMultiplier: 1
+      BuildSeconds: 0.25
+      SecondaryBuildSeconds: 0.4
+      PrimaryMountPivotX: 0
+      PrimaryMountPivotY: 0.04
+      PrimaryDualMountPivotX: -0.17
+      PrimaryDualMountPivotY: 0.04
+      SecondaryMountPivotX: 0.17
+      SecondaryMountPivotY: 0.04
+      LegacyKind: -1
+      MountPivots: []
+    - Id: chassis.battery
+      Name: "\u0411\u0430\u0442\u0430\u0440\u0435\u044F"
+      Description: "\u0422\u0440\u0438 \u043D\u0435\u0437\u0430\u0432\u0438\u0441\u0438\u043C\u044B\u0445
+        \u0441\u0442\u0432\u043E\u043B\u0430, \u043E\u0434\u043D\u043E \u0443\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435
+        \u0438 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u0430\u044F \u0431\u0440\u043E\u043D\u044F.
+        \u041E\u0440\u0443\u0436\u0438\u0435 \u0434\u0435\u043B\u0438\u0442 \u043E\u0431\u0449\u0443\u044E
+        \u043F\u043E\u0434\u0430\u0447\u0443."
+      ButtonLabel: "\u0411\u0410\u0422\u0410\u0420\u0415\u042F"
+      UnlockLabel: "\u0411\u0410\u0422\u0410\u0420\u0415\u042F"
+      TemplateId: template.chassis.battery
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 21
+      UnlockGold: 90
+      VisualStyle: 0
+      Capacity: 22
+      BaseCost: 34
+      MountCount: 3
+      UpgradeSlotCount: 1
+      ArmorSlotCount: 1
+      FeedCapacity: 1.8
+      BaseHealth: 55
+      HealthMultiplier: 1
+      BuildSeconds: 0.65
+      SecondaryBuildSeconds: 0.4
+      PrimaryMountPivotX: 0
+      PrimaryMountPivotY: 0.04
+      PrimaryDualMountPivotX: -0.17
+      PrimaryDualMountPivotY: 0.04
+      SecondaryMountPivotX: 0.17
+      SecondaryMountPivotY: 0.04
+      LegacyKind: -1
+      MountPivots:
+      - SlotIndex: 0
+        X: -0.24
+        Y: 0.04
+      - SlotIndex: 1
+        X: 0
+        Y: 0.04
+      - SlotIndex: 2
+        X: 0.24
+        Y: 0.04
+    Weapons:
+    - Id: weapon.gun
+      Name: "\u041F\u0443\u043B\u0435\u043C\u0451\u0442"
+      Description: "\u0427\u0430\u0441\u0442\u044B\u0439 \u043E\u0434\u0438\u043D\u043E\u0447\u043D\u044B\u0439
+        \u043E\u0433\u043E\u043D\u044C. \u041A\u0430\u0436\u0434\u043E\u0435 \u043F\u043E\u043F\u0430\u0434\u0430\u043D\u0438\u0435
+        \u043F\u043E\u0440\u0430\u0436\u0430\u0435\u0442 \u043E\u0434\u043D\u0443
+        \u0446\u0435\u043B\u044C."
+      ButtonLabel: "\u041F\u0423\u041B\u0415\u041C\u0401\u0422"
+      UnlockLabel: "\u041F\u0423\u041B\u0415\u041C\u0401\u0422"
+      TemplateId: template.weapon.gun
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 1
+      UnlockGold: 0
+      VisualStyle: 0
+      Attack: 0
+      Stats:
+        Kind: 1
+        Cost: 40
+        MaxHealth: 55
+        BuildSeconds: 1.4
+        Range: 8
+        Damage: 12
+        ShotInterval: 0.42
+        Radius: 0.1
+        FlightSeconds: 0.8
+        MaxPierce: 1
+        ConeAngleDegrees: 90
+        MaxTargets: 8
+        JumpRange: 0
+        SlowSpeedMultiplier: 1
+        SlowDuration: 0
+      Load: 4
+      AssemblyCredit: 16
+      MinimumLineRadius: 0
+      MinimumRadialRange: 0
+      MinimumRange: 0
+      MaximumFootprintAspectRatio: 3
+      EffectIds: []
+      LegacyKind: 1
+    - Id: weapon.piercer
+      Name: "\u041F\u0440\u043E\u0431\u0438\u0432\u0430\u044E\u0449\u0430\u044F \u043F\u0443\u0448\u043A\u0430"
+      Description: "\u041B\u0438\u043D\u0435\u0439\u043D\u044B\u0439 \u0432\u044B\u0441\u0442\u0440\u0435\u043B
+        \u043F\u043E\u0440\u0430\u0436\u0430\u0435\u0442 \u043A\u043E\u043D\u0435\u0447\u043D\u043E\u0435
+        \u0447\u0438\u0441\u043B\u043E \u0446\u0435\u043B\u0435\u0439; \u0437\u0430\u0449\u0438\u0442\u0430
+        \u0443\u0447\u0438\u0442\u044B\u0432\u0430\u0435\u0442\u0441\u044F."
+      ButtonLabel: "\u041F\u0420\u041E\u0411\u041E\u0419"
+      UnlockLabel: "\u041F\u0420\u041E\u0411\u041E\u0419"
+      TemplateId: template.weapon.piercer
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 2
+      UnlockGold: 0
+      VisualStyle: 0
+      Attack: 1
+      Stats:
+        Kind: 2
+        Cost: 65
+        MaxHealth: 50
+        BuildSeconds: 1.9
+        Range: 12
+        Damage: 18
+        ShotInterval: 1.05
+        Radius: 0.38
+        FlightSeconds: 0.8
+        MaxPierce: 7
+        ConeAngleDegrees: 90
+        MaxTargets: 8
+        JumpRange: 0
+        SlowSpeedMultiplier: 1
+        SlowDuration: 0
+      Load: 6
+      AssemblyCredit: 16
+      MinimumLineRadius: 0.2
+      MinimumRadialRange: 0
+      MinimumRange: 0
+      MaximumFootprintAspectRatio: 3
+      EffectIds: []
+      LegacyKind: 2
+    - Id: weapon.mortar
+      Name: "\u041C\u043E\u0440\u0442\u0438\u0440\u0430"
+      Description: "\u0423\u0434\u0430\u0440 \u043F\u043E \u0437\u0430\u0444\u0438\u043A\u0441\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0439
+        \u0442\u043E\u0447\u043A\u0435 \u0441 \u0437\u0430\u0434\u0435\u0440\u0436\u043A\u043E\u0439.
+        \u0411\u044B\u0441\u0442\u0440\u0430\u044F \u0446\u0435\u043B\u044C \u043C\u043E\u0436\u0435\u0442
+        \u0443\u0439\u0442\u0438."
+      ButtonLabel: "\u041C\u041E\u0420\u0422\u0418\u0420\u0410"
+      UnlockLabel: "\u041C\u041E\u0420\u0422\u0418\u0420\u0410"
+      TemplateId: template.weapon.mortar
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 3
+      UnlockGold: 0
+      VisualStyle: 0
+      Attack: 2
+      Stats:
+        Kind: 3
+        Cost: 90
+        MaxHealth: 60
+        BuildSeconds: 2.4
+        Range: 18
+        Damage: 25
+        ShotInterval: 1.8
+        Radius: 2.4
+        FlightSeconds: 0.8
+        MaxPierce: 1
+        ConeAngleDegrees: 90
+        MaxTargets: 8
+        JumpRange: 0
+        SlowSpeedMultiplier: 1
+        SlowDuration: 0
+      Load: 7
+      AssemblyCredit: 16
+      MinimumLineRadius: 0
+      MinimumRadialRange: 0
+      MinimumRange: 6
+      MaximumFootprintAspectRatio: 3
+      EffectIds: []
+      LegacyKind: 3
+    - Id: weapon.fan
+      Name: "\u0412\u0435\u0435\u0440\u043D\u044B\u0439 \u0441\u0442\u0432\u043E\u043B"
+      Description: "\u041A\u043E\u0440\u043E\u0442\u043A\u0438\u0439 \u0448\u0438\u0440\u043E\u043A\u0438\u0439
+        \u043A\u043E\u043D\u0443\u0441 \u0441 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u043D\u044B\u043C
+        \u0447\u0438\u0441\u043B\u043E\u043C \u0446\u0435\u043B\u0435\u0439. \u0422\u0440\u0435\u0431\u0443\u0435\u0442
+        \u0431\u043B\u0438\u0437\u043A\u043E\u0433\u043E \u0440\u0430\u0437\u043C\u0435\u0449\u0435\u043D\u0438\u044F."
+      ButtonLabel: "\u0412\u0415\u0415\u0420"
+      UnlockLabel: "\u0412\u0415\u0415\u0420"
+      TemplateId: template.weapon.fan
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 8
+      UnlockGold: 60
+      VisualStyle: 0
+      Attack: 3
+      Stats:
+        Kind: 5
+        Cost: 70
+        MaxHealth: 55
+        BuildSeconds: 1.6
+        Range: 6
+        Damage: 10
+        ShotInterval: 1
+        Radius: 0.1
+        FlightSeconds: 0.8
+        MaxPierce: 1
+        ConeAngleDegrees: 90
+        MaxTargets: 8
+        JumpRange: 0
+        SlowSpeedMultiplier: 1
+        SlowDuration: 0
+      Load: 5
+      AssemblyCredit: 16
+      MinimumLineRadius: 0
+      MinimumRadialRange: 0
+      MinimumRange: 0
+      MaximumFootprintAspectRatio: 3
+      EffectIds: []
+      LegacyKind: 5
+    - Id: weapon.ricochet
+      Name: "\u0420\u0438\u043A\u043E\u0448\u0435\u0442"
+      Description: "\u0426\u0435\u043F\u043E\u0447\u043A\u0430 \u043F\u043E\u043F\u0430\u0434\u0430\u043D\u0438\u0439
+        \u043C\u0435\u0436\u0434\u0443 \u0431\u043B\u0438\u0437\u043A\u0438\u043C\u0438
+        \u0446\u0435\u043B\u044F\u043C\u0438. \u041A\u0430\u0436\u0434\u0430\u044F
+        \u0446\u0435\u043B\u044C \u043F\u043E\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F
+        \u043E\u0434\u0438\u043D \u0440\u0430\u0437; \u0437\u0430\u0449\u0438\u0442\u0430
+        \u0443\u0447\u0438\u0442\u044B\u0432\u0430\u0435\u0442\u0441\u044F."
+      ButtonLabel: "\u0420\u0418\u041A\u041E\u0428\u0415\u0422"
+      UnlockLabel: "\u0420\u0418\u041A\u041E\u0428\u0415\u0422"
+      TemplateId: template.weapon.ricochet
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 9
+      UnlockGold: 60
+      VisualStyle: 0
+      Attack: 4
+      Stats:
+        Kind: 6
+        Cost: 65
+        MaxHealth: 55
+        BuildSeconds: 1.6
+        Range: 10
+        Damage: 12
+        ShotInterval: 0.85
+        Radius: 0.1
+        FlightSeconds: 0.8
+        MaxPierce: 1
+        ConeAngleDegrees: 90
+        MaxTargets: 4
+        JumpRange: 3
+        SlowSpeedMultiplier: 1
+        SlowDuration: 0
+      Load: 5
+      AssemblyCredit: 16
+      MinimumLineRadius: 0
+      MinimumRadialRange: 0
+      MinimumRange: 0
+      MaximumFootprintAspectRatio: 3
+      EffectIds: []
+      LegacyKind: 6
+    - Id: weapon.stapler
+      Name: "\u0421\u0442\u0435\u043F\u043B\u0435\u0440"
+      Description: "\u041D\u0435\u0431\u043E\u043B\u044C\u0448\u043E\u0439 \u0443\u0440\u043E\u043D
+        \u0438 \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u0435
+        \u0437\u0430\u043C\u0435\u0434\u043B\u0435\u043D\u0438\u0435 \u0446\u0435\u043B\u0438.
+        \u0421 \u0441\u0438\u043D\u0438\u043C\u0438 \u0447\u0435\u0440\u043D\u0438\u043B\u0430\u043C\u0438
+        \u0434\u0435\u0439\u0441\u0442\u0432\u0443\u0435\u0442 \u0441\u0438\u043B\u044C\u043D\u0435\u0439\u0448\u0435\u0435
+        \u0437\u0430\u043C\u0435\u0434\u043B\u0435\u043D\u0438\u0435."
+      ButtonLabel: "\u0421\u041A\u0420\u0415\u041F\u041A\u0418"
+      UnlockLabel: "\u0421\u041A\u0420\u0415\u041F\u041A\u0418"
+      TemplateId: template.weapon.stapler
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 10
+      UnlockGold: 40
+      VisualStyle: 0
+      Attack: 0
+      Stats:
+        Kind: 7
+        Cost: 35
+        MaxHealth: 55
+        BuildSeconds: 1.2
+        Range: 9
+        Damage: 4
+        ShotInterval: 0.65
+        Radius: 0.1
+        FlightSeconds: 0.8
+        MaxPierce: 1
+        ConeAngleDegrees: 90
+        MaxTargets: 8
+        JumpRange: 0
+        SlowSpeedMultiplier: 0.8
+        SlowDuration: 2
+      Load: 3
+      AssemblyCredit: 16
+      MinimumLineRadius: 0
+      MinimumRadialRange: 0
+      MinimumRange: 0
+      MaximumFootprintAspectRatio: 3
+      EffectIds:
+      - effect.stapler.slow
+      LegacyKind: 7
+    - Id: weapon.blotter
+      Name: "\u041F\u0440\u043E\u043C\u043E\u043A\u0430\u0448\u043A\u0430"
+      Description: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438
+        \u043E\u0447\u0438\u0449\u0430\u0435\u0442 \u043A\u043B\u044F\u043A\u0441\u044B
+        \u0432 \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0439 \u043E\u0431\u043B\u0430\u0441\u0442\u0438.
+        \u041D\u0435 \u043D\u0430\u043D\u043E\u0441\u0438\u0442 \u0443\u0440\u043E\u043D
+        \u0432\u0440\u0430\u0433\u0430\u043C \u0438 \u0434\u0435\u0439\u0441\u0442\u0432\u0443\u0435\u0442
+        \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u043E \u043E\u0442 \u0440\u0443\u0447\u043D\u043E\u0439
+        \u043F\u0440\u043E\u043C\u043E\u043A\u0430\u0448\u043A\u0438."
+      ButtonLabel: "\u041F\u0420\u041E\u041C\u041E\u041A\u0410\u0428\u041A\u0410"
+      UnlockLabel: "\u041F\u0420\u041E\u041C\u041E\u041A\u0410\u0428\u041A\u0410"
+      TemplateId: template.weapon.blotter
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 11
+      UnlockGold: 40
+      VisualStyle: 0
+      Attack: 6
+      Stats:
+        Kind: 8
+        Cost: 30
+        MaxHealth: 55
+        BuildSeconds: 1.2
+        Range: 9
+        Damage: 0
+        ShotInterval: 2
+        Radius: 1.5
+        FlightSeconds: 0.8
+        MaxPierce: 1
+        ConeAngleDegrees: 90
+        MaxTargets: 8
+        JumpRange: 0
+        SlowSpeedMultiplier: 1
+        SlowDuration: 0
+      Load: 3
+      AssemblyCredit: 16
+      MinimumLineRadius: 0
+      MinimumRadialRange: 0
+      MinimumRange: 0
+      MaximumFootprintAspectRatio: 3
+      EffectIds: []
+      LegacyKind: 8
+    Modules:
+    - Id: module.armor
+      Name: "\u0411\u0440\u043E\u043D\u0435\u043F\u043B\u0430\u0441\u0442\u0438\u043D\u044B"
+      Description: "\u041F\u043E\u0432\u044B\u0448\u0430\u044E\u0442 \u0441\u0442\u043E\u0439\u043A\u043E\u0441\u0442\u044C
+        \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u044F \u043A \u0432\u0440\u0430\u0436\u0435\u0441\u043A\u043E\u043C\u0443
+        \u0443\u0440\u043E\u043D\u0443."
+      ButtonLabel: "\u0411\u0420\u041E\u041D\u042F"
+      UnlockLabel: "\u0411\u0420\u041E\u041D\u042F"
+      TemplateId: template.module.armor
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 4
+      UnlockGold: 0
+      VisualStyle: 0
+      Load: 3
+      Cost: 18
+      BuildSeconds: 0.25
+      Repeatable: 0
+      ExclusiveGroup: 
+      AllowedChassisIds: []
+      AllowedAttacks: 
+      Modifiers:
+      - Stat: 0
+        Operation: 2
+        Scope: 0
+        MountIndex: 0
+        Value: 1
+      - Stat: 1
+        Operation: 0
+        Scope: 0
+        MountIndex: 0
+        Value: 0.25
+      LegacyModule: 1
+      SlotKind: 1
+    - Id: module.feed
+      Name: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u043D\u0430\u044F \u043F\u043E\u0434\u0430\u0447\u0430"
+      Description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
+        \u043E\u0431\u0449\u0443\u044E \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C
+        \u043F\u043E\u0434\u0430\u0447\u0438 \u043A \u043E\u0440\u0443\u0436\u0438\u044E."
+      ButtonLabel: "\u041F\u041E\u0414\u0410\u0427\u0410"
+      UnlockLabel: "\u041F\u041E\u0414\u0410\u0427\u0410"
+      TemplateId: template.module.feed
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 6
+      UnlockGold: 60
+      VisualStyle: 0
+      Load: 2
+      Cost: 16
+      BuildSeconds: 0.25
+      Repeatable: 0
+      ExclusiveGroup: 
+      AllowedChassisIds: []
+      AllowedAttacks: 
+      Modifiers:
+      - Stat: 4
+        Operation: 2
+        Scope: 1
+        MountIndex: 0
+        Value: 1.15
+      LegacyModule: 2
+      SlotKind: 0
+    - Id: module.tracking
+      Name: "\u0411\u044B\u0441\u0442\u0440\u043E\u0435 \u043D\u0430\u0432\u0435\u0434\u0435\u043D\u0438\u0435"
+      Description: "\u0421\u043E\u043A\u0440\u0430\u0449\u0430\u0435\u0442 \u0432\u0440\u0435\u043C\u044F
+        \u0437\u0430\u0445\u0432\u0430\u0442\u0430 \u043D\u043E\u0432\u043E\u0439
+        \u0446\u0435\u043B\u0438."
+      ButtonLabel: "\u041D\u0410\u0412\u0415\u0414\u0415\u041D\u0418\u0415"
+      UnlockLabel: "\u041D\u0410\u0412\u0415\u0414\u0415\u041D\u0418\u0415"
+      TemplateId: template.module.tracking
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 7
+      UnlockGold: 60
+      VisualStyle: 0
+      Load: 2
+      Cost: 14
+      BuildSeconds: 0.25
+      Repeatable: 0
+      ExclusiveGroup: 
+      AllowedChassisIds: []
+      AllowedAttacks: 
+      Modifiers:
+      - Stat: 5
+        Operation: 0
+        Scope: 1
+        MountIndex: 0
+        Value: 0.08
+      LegacyModule: 4
+      SlotKind: 0
+    - Id: module.rail
+      Name: "\u041D\u0430\u043F\u0440\u0430\u0432\u043B\u044F\u044E\u0449\u0430\u044F"
+      Description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
+        \u0434\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u044C \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044B\u0445
+        \u0434\u0435\u0442\u0430\u043B\u0435\u0439, \u043D\u043E \u0443\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
+        \u0438\u043D\u0442\u0435\u0440\u0432\u0430\u043B \u043C\u0435\u0436\u0434\u0443
+        \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044F\u043C\u0438. \u0417\u0430\u043D\u0438\u043C\u0430\u0435\u0442
+        \u043D\u0430\u0433\u0440\u0443\u0437\u043A\u0443 \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u044F."
+      ButtonLabel: "\u041D\u0410\u041F\u0420\u0410\u0412\u041B."
+      UnlockLabel: "\u041D\u0410\u041F\u0420\u0410\u0412\u041B\u042F\u042E\u0429\u0410\u042F"
+      TemplateId: template.module.rail
+      Enabled: 1
+      InitiallyUnlocked: 1
+      Order: 12
+      UnlockGold: 60
+      VisualStyle: 0
+      Load: 2
+      Cost: 20
+      BuildSeconds: 0.25
+      Repeatable: 0
+      ExclusiveGroup: 
+      AllowedChassisIds: []
+      AllowedAttacks: 
+      Modifiers:
+      - Stat: 2
+        Operation: 2
+        Scope: 1
+        MountIndex: 0
+        Value: 1.25
+      - Stat: 3
+        Operation: 2
+        Scope: 1
+        MountIndex: 0
+        Value: 1.2
+      LegacyModule: 8
+      SlotKind: 0
+    Effects:
+    - Id: effect.stapler.slow
+      Kind: 1
+      Duration: 2
+      Strength: 0.8
+      TickSeconds: 0
+      IgnoresDefense: 0
+    - Id: effect.color.red
+      Kind: 0
+      Duration: 3
+      Strength: 1
+      TickSeconds: 0.25
+      IgnoresDefense: 1
+    - Id: effect.color.blue
+      Kind: 1
+      Duration: 3
+      Strength: 0.65
+      TickSeconds: 0
+      IgnoresDefense: 0
+    - Id: effect.color.green
+      Kind: 2
+      Duration: 3
+      Strength: 0.2
+      TickSeconds: 0
+      IgnoresDefense: 0
+    Templates:
+    - Id: template.chassis.standard
+      DisplayName: "\u041E\u0431\u044B\u0447\u043D\u043E\u0435 \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"
+      Revision: 3
+      PivotX: 0
+      PivotY: 0
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.43
+          Y: -0.27
+        - X: -0.25999
+          Y: -0.27091
+        - X: -0.09002
+          Y: -0.27565
+        - X: 0.08002
+          Y: -0.27447
+        - X: 0.24999
+          Y: -0.27887
+        - X: 0.42
+          Y: -0.28
+        - X: 0.44313
+          Y: -0.22906
+        - X: 0.47
+          Y: -0.18
+        - X: 0.46473
+          Y: -0.07983
+        - X: 0.45192
+          Y: 0.01977
+        - X: 0.44963
+          Y: 0.12016
+        - X: 0.44
+          Y: 0.22
+        - X: 0.37159
+          Y: 0.28185
+        - X: 0.3
+          Y: 0.34
+        - X: 0.17798
+          Y: 0.3395
+        - X: 0.05604
+          Y: 0.33349
+        - X: -0.06604
+          Y: 0.3366
+        - X: -0.18797
+          Y: 0.33034
+        - X: -0.31
+          Y: 0.33
+        - X: -0.38589
+          Y: 0.27111
+        - X: -0.46
+          Y: 0.21
+        - X: -0.45219
+          Y: 0.11411
+        - X: -0.45086
+          Y: 0.01782
+        - X: -0.43921
+          Y: -0.07783
+        - X: -0.43768
+          Y: -0.1741
+        - X: -0.43
+          Y: -0.27
+      - Points:
+        - X: 0.16
+          Y: 0.04
+        - X: 0.15455
+          Y: 0.08141
+        - X: 0.13856
+          Y: 0.12
+        - X: 0.11314
+          Y: 0.15314
+        - X: 0.08
+          Y: 0.17856
+        - X: 0.04141
+          Y: 0.19455
+        - X: 0
+          Y: 0.2
+        - X: -0.04141
+          Y: 0.19455
+        - X: -0.08
+          Y: 0.17856
+        - X: -0.11314
+          Y: 0.15314
+        - X: -0.13856
+          Y: 0.12
+        - X: -0.15455
+          Y: 0.08141
+        - X: -0.16
+          Y: 0.04
+        - X: -0.15455
+          Y: -0.00141
+        - X: -0.13856
+          Y: -0.04
+        - X: -0.11314
+          Y: -0.07314
+        - X: -0.08
+          Y: -0.09856
+        - X: -0.04141
+          Y: -0.11455
+        - X: -0
+          Y: -0.12
+        - X: 0.04141
+          Y: -0.11455
+        - X: 0.08
+          Y: -0.09856
+        - X: 0.11314
+          Y: -0.07314
+        - X: 0.13856
+          Y: -0.04
+        - X: 0.15455
+          Y: -0.00141
+        - X: 0.16
+          Y: 0.04
+    - Id: template.weapon.gun
+      DisplayName: "\u041F\u0443\u043B\u0435\u043C\u0451\u0442"
+      Revision: 3
+      PivotX: 0
+      PivotY: 0.04
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.13
+          Y: -0.12
+        - X: -0.04333
+          Y: -0.12179
+        - X: 0.04333
+          Y: -0.11811
+        - X: 0.13
+          Y: -0.12
+        - X: 0.12842
+          Y: -0.02333
+        - X: 0.13169
+          Y: 0.07333
+        - X: 0.13
+          Y: 0.17
+        - X: 0.04333
+          Y: 0.16726
+        - X: -0.04333
+          Y: 0.17269
+        - X: -0.13
+          Y: 0.17
+        - X: -0.12736
+          Y: 0.07333
+        - X: -0.1327
+          Y: -0.02333
+        - X: -0.13
+          Y: -0.12
+      - Points:
+        - X: -0.105
+          Y: 0.14
+        - X: -0.03
+          Y: 0.14
+        - X: -0.03072
+          Y: 0.2375
+        - X: -0.02912
+          Y: 0.335
+        - X: -0.03053
+          Y: 0.4325
+        - X: -0.03
+          Y: 0.53
+        - X: -0.105
+          Y: 0.53
+        - X: -0.10427
+          Y: 0.4325
+        - X: -0.10589
+          Y: 0.335
+        - X: -0.10447
+          Y: 0.2375
+        - X: -0.105
+          Y: 0.14
+      - Points:
+        - X: 0.03
+          Y: 0.14
+        - X: 0.105
+          Y: 0.14
+        - X: 0.10276
+          Y: 0.2375
+        - X: 0.1081
+          Y: 0.335
+        - X: 0.10286
+          Y: 0.4325
+        - X: 0.105
+          Y: 0.53
+        - X: 0.03
+          Y: 0.53
+        - X: 0.03224
+          Y: 0.4325
+        - X: 0.0269
+          Y: 0.335
+        - X: 0.03214
+          Y: 0.2375
+        - X: 0.03
+          Y: 0.14
+      - Points:
+        - X: -0.12
+          Y: 0.27
+        - X: -0.04
+          Y: 0.26904
+        - X: 0.04
+          Y: 0.27108
+        - X: 0.12
+          Y: 0.27
+      - Points:
+        - X: -0.12
+          Y: 0.04
+        - X: -0.2
+          Y: 0.02
+        - X: -0.2
+          Y: -0.08
+        - X: -0.12
+          Y: -0.09
+    - Id: template.weapon.piercer
+      DisplayName: "\u041F\u0440\u043E\u0431\u0438\u0432\u0430\u044E\u0449\u0430\u044F
+        \u043F\u0443\u0448\u043A\u0430"
+      Revision: 3
+      PivotX: 0
+      PivotY: 0.04
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.105
+          Y: -0.13
+        - X: 0
+          Y: -0.13094
+        - X: 0.105
+          Y: -0.13
+        - X: 0.10674
+          Y: -0.02998
+        - X: 0.11094
+          Y: 0.06998
+        - X: 0.11193
+          Y: 0.17001
+        - X: 0.115
+          Y: 0.27
+        - X: 0.10049
+          Y: 0.34698
+        - X: 0.08161
+          Y: 0.42304
+        - X: 0.067
+          Y: 0.5
+        - X: 0.03286
+          Y: 0.58976
+        - X: 0
+          Y: 0.68
+        - X: -0.0346
+          Y: 0.59041
+        - X: -0.067
+          Y: 0.5
+        - X: -0.08429
+          Y: 0.4236
+        - X: -0.09782
+          Y: 0.34642
+        - X: -0.115
+          Y: 0.27
+        - X: -0.11276
+          Y: 0.16999
+        - X: -0.10949
+          Y: 0.07001
+        - X: -0.10796
+          Y: -0.03001
+        - X: -0.105
+          Y: -0.13
+      - Points:
+        - X: 0
+          Y: 0.6
+        - X: 0.00005
+          Y: 0.49
+        - X: 0.00008
+          Y: 0.38
+        - X: 0
+          Y: 0.27
+      - Points:
+        - X: -0.09
+          Y: 0.22
+        - X: 0
+          Y: 0.22138
+        - X: 0.09
+          Y: 0.22
+    - Id: template.weapon.mortar
+      DisplayName: "\u041C\u043E\u0440\u0442\u0438\u0440\u0430"
+      Revision: 3
+      PivotX: 0
+      PivotY: 0.04
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.18
+          Y: -0.13
+        - X: -0.09
+          Y: -0.12781
+        - X: 0
+          Y: -0.13316
+        - X: 0.09
+          Y: -0.12772
+        - X: 0.18
+          Y: -0.13
+        - X: 0.18939
+          Y: -0.0402
+        - X: 0.19066
+          Y: 0.0502
+        - X: 0.2
+          Y: 0.14
+        - X: 0.18386
+          Y: 0.23628
+        - X: 0.17618
+          Y: 0.33373
+        - X: 0.16
+          Y: 0.43
+        - X: 0.05333
+          Y: 0.43303
+        - X: -0.05333
+          Y: 0.42698
+        - X: -0.16
+          Y: 0.43
+        - X: -0.1714
+          Y: 0.33307
+        - X: -0.18869
+          Y: 0.23695
+        - X: -0.2
+          Y: 0.14
+        - X: -0.19427
+          Y: 0.04993
+        - X: -0.18561
+          Y: -0.03992
+        - X: -0.18
+          Y: -0.13
+      - Points:
+        - X: 0.17
+          Y: 0.39
+        - X: 0.16421
+          Y: 0.40452
+        - X: 0.14722
+          Y: 0.41805
+        - X: 0.12021
+          Y: 0.42967
+        - X: 0.085
+          Y: 0.43858
+        - X: 0.044
+          Y: 0.44419
+        - X: 0
+          Y: 0.4461
+        - X: -0.044
+          Y: 0.44419
+        - X: -0.085
+          Y: 0.43858
+        - X: -0.12021
+          Y: 0.42967
+        - X: -0.14722
+          Y: 0.41805
+        - X: -0.16421
+          Y: 0.40452
+        - X: -0.17
+          Y: 0.39
+        - X: -0.16421
+          Y: 0.37548
+        - X: -0.14722
+          Y: 0.36195
+        - X: -0.12021
+          Y: 0.35033
+        - X: -0.085
+          Y: 0.34142
+        - X: -0.044
+          Y: 0.33581
+        - X: -0
+          Y: 0.3339
+        - X: 0.044
+          Y: 0.33581
+        - X: 0.085
+          Y: 0.34142
+        - X: 0.12021
+          Y: 0.35033
+        - X: 0.14722
+          Y: 0.36195
+        - X: 0.16421
+          Y: 0.37548
+        - X: 0.17
+          Y: 0.39
+      - Points:
+        - X: -0.19
+          Y: 0.12
+        - X: -0.095
+          Y: 0.12102
+        - X: 0
+          Y: 0.1187
+        - X: 0.095
+          Y: 0.12082
+        - X: 0.19
+          Y: 0.12
+    - Id: template.module.armor
+      DisplayName: "\u0411\u0440\u043E\u043D\u0435\u043F\u043B\u0430\u0441\u0442\u0438\u043D\u044B"
+      Revision: 3
+      PivotX: 0
+      PivotY: -0.08
+      Weight: 5
+      Contours:
+      - Points:
+        - X: -0.36
+          Y: -0.23
+        - X: -0.44101
+          Y: -0.20824
+        - X: -0.52
+          Y: -0.18
+        - X: -0.51816
+          Y: -0.08498
+        - X: -0.51421
+          Y: 0.00998
+        - X: -0.51296
+          Y: 0.10501
+        - X: -0.51
+          Y: 0.2
+        - X: -0.45704
+          Y: 0.24281
+        - X: -0.4
+          Y: 0.28
+        - X: -0.38335
+          Y: 0.21397
+        - X: -0.36
+          Y: 0.15
+        - X: -0.35893
+          Y: 0.055
+        - X: -0.36165
+          Y: -0.04
+        - X: -0.35875
+          Y: -0.135
+        - X: -0.36
+          Y: -0.23
+      - Points:
+        - X: 0.36
+          Y: -0.23
+        - X: 0.43908
+          Y: -0.20204
+        - X: 0.52
+          Y: -0.18
+        - X: 0.51996
+          Y: -0.08494
+        - X: 0.51151
+          Y: 0.00991
+        - X: 0.51497
+          Y: 0.10507
+        - X: 0.51
+          Y: 0.2
+        - X: 0.45683
+          Y: 0.24251
+        - X: 0.4
+          Y: 0.28
+        - X: 0.38084
+          Y: 0.21474
+        - X: 0.36
+          Y: 0.15
+        - X: 0.3605
+          Y: 0.055
+        - X: 0.35915
+          Y: -0.04
+        - X: 0.3607
+          Y: -0.135
+        - X: 0.36
+          Y: -0.23
+    - Id: template.chassis.heavy
+      DisplayName: "\u0422\u044F\u0436\u0451\u043B\u043E\u0435 \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"
+      Revision: 3
+      PivotX: 0
+      PivotY: 0
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.48
+          Y: -0.31
+        - X: -0.288
+          Y: -0.30927
+        - X: -0.096
+          Y: -0.31106
+        - X: 0.096
+          Y: -0.30907
+        - X: 0.288
+          Y: -0.31049
+        - X: 0.48
+          Y: -0.31
+        - X: 0.47927
+          Y: -0.204
+        - X: 0.48131
+          Y: -0.098
+        - X: 0.47856
+          Y: 0.008
+        - X: 0.48096
+          Y: 0.114
+        - X: 0.48
+          Y: 0.22
+        - X: 0.41669
+          Y: 0.28669
+        - X: 0.35
+          Y: 0.35
+        - X: 0.21
+          Y: 0.34868
+        - X: 0.07
+          Y: 0.35202
+        - X: -0.07
+          Y: 0.34809
+        - X: -0.21
+          Y: 0.35111
+        - X: -0.35
+          Y: 0.35
+        - X: -0.41608
+          Y: 0.28608
+        - X: -0.48
+          Y: 0.22
+        - X: -0.48183
+          Y: 0.114
+        - X: -0.47697
+          Y: 0.008
+        - X: -0.48308
+          Y: -0.098
+        - X: -0.47807
+          Y: -0.204
+        - X: -0.48
+          Y: -0.31
+      - Points:
+        - X: -0.52
+          Y: -0.27
+        - X: -0.46
+          Y: -0.26698
+        - X: -0.4
+          Y: -0.27
+        - X: -0.39781
+          Y: -0.1625
+        - X: -0.40303
+          Y: -0.055
+        - X: -0.39791
+          Y: 0.0525
+        - X: -0.4
+          Y: 0.16
+        - X: -0.46
+          Y: 0.16172
+        - X: -0.52
+          Y: 0.16
+        - X: -0.52136
+          Y: 0.0525
+        - X: -0.51796
+          Y: -0.055
+        - X: -0.52153
+          Y: -0.1625
+        - X: -0.52
+          Y: -0.27
+      - Points:
+        - X: 0.4
+          Y: -0.27
+        - X: 0.46
+          Y: -0.2689
+        - X: 0.52
+          Y: -0.27
+        - X: 0.51842
+          Y: -0.1625
+        - X: 0.52235
+          Y: -0.055
+        - X: 0.51826
+          Y: 0.0525
+        - X: 0.52
+          Y: 0.16
+        - X: 0.46
+          Y: 0.15666
+        - X: 0.4
+          Y: 0.16
+        - X: 0.39826
+          Y: 0.0525
+        - X: 0.40235
+          Y: -0.055
+        - X: 0.39841
+          Y: -0.1625
+        - X: 0.4
+          Y: -0.27
+      - Points:
+        - X: -0.035
+          Y: 0.04
+        - X: -0.0396
+          Y: 0.07494
+        - X: -0.05309
+          Y: 0.1075
+        - X: -0.07454
+          Y: 0.13546
+        - X: -0.1025
+          Y: 0.15691
+        - X: -0.13506
+          Y: 0.1704
+        - X: -0.17
+          Y: 0.175
+        - X: -0.20494
+          Y: 0.1704
+        - X: -0.2375
+          Y: 0.15691
+        - X: -0.26546
+          Y: 0.13546
+        - X: -0.28691
+          Y: 0.1075
+        - X: -0.3004
+          Y: 0.07494
+        - X: -0.305
+          Y: 0.04
+        - X: -0.3004
+          Y: 0.00506
+        - X: -0.28691
+          Y: -0.0275
+        - X: -0.26546
+          Y: -0.05546
+        - X: -0.2375
+          Y: -0.07691
+        - X: -0.20494
+          Y: -0.0904
+        - X: -0.17
+          Y: -0.095
+        - X: -0.13506
+          Y: -0.0904
+        - X: -0.1025
+          Y: -0.07691
+        - X: -0.07454
+          Y: -0.05546
+        - X: -0.05309
+          Y: -0.0275
+        - X: -0.0396
+          Y: 0.00506
+        - X: -0.035
+          Y: 0.04
+      - Points:
+        - X: 0.305
+          Y: 0.04
+        - X: 0.3004
+          Y: 0.07494
+        - X: 0.28691
+          Y: 0.1075
+        - X: 0.26546
+          Y: 0.13546
+        - X: 0.2375
+          Y: 0.15691
+        - X: 0.20494
+          Y: 0.1704
+        - X: 0.17
+          Y: 0.175
+        - X: 0.13506
+          Y: 0.1704
+        - X: 0.1025
+          Y: 0.15691
+        - X: 0.07454
+          Y: 0.13546
+        - X: 0.05309
+          Y: 0.1075
+        - X: 0.0396
+          Y: 0.07494
+        - X: 0.035
+          Y: 0.04
+        - X: 0.0396
+          Y: 0.00506
+        - X: 0.05309
+          Y: -0.0275
+        - X: 0.07454
+          Y: -0.05546
+        - X: 0.1025
+          Y: -0.07691
+        - X: 0.13506
+          Y: -0.0904
+        - X: 0.17
+          Y: -0.095
+        - X: 0.20494
+          Y: -0.0904
+        - X: 0.2375
+          Y: -0.07691
+        - X: 0.26546
+          Y: -0.05546
+        - X: 0.28691
+          Y: -0.0275
+        - X: 0.3004
+          Y: 0.00506
+        - X: 0.305
+          Y: 0.04
+    - Id: template.module.feed
+      DisplayName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u043D\u0430\u044F
+        \u043F\u043E\u0434\u0430\u0447\u0430"
+      Revision: 3
+      PivotX: 0
+      PivotY: -0.08
+      Weight: 5
+      Contours:
+      - Points:
+        - X: -0.3
+          Y: -0.4
+        - X: -0.18
+          Y: -0.39808
+        - X: -0.06
+          Y: -0.40305
+        - X: 0.06
+          Y: -0.39701
+        - X: 0.18
+          Y: -0.40181
+        - X: 0.3
+          Y: -0.4
+        - X: 0.30121
+          Y: -0.31
+        - X: 0.3
+          Y: -0.22
+        - X: 0.18
+          Y: -0.21841
+        - X: 0.06
+          Y: -0.22249
+        - X: -0.06
+          Y: -0.2176
+        - X: -0.18
+          Y: -0.22142
+        - X: -0.3
+          Y: -0.22
+        - X: -0.30127
+          Y: -0.31
+        - X: -0.3
+          Y: -0.4
+      - Points:
+        - X: -0.22
+          Y: -0.22
+        - X: -0.22
+          Y: -0.13
+        - X: -0.11
+          Y: -0.12779
+        - X: 0
+          Y: -0.13319
+        - X: 0.11
+          Y: -0.1277
+        - X: 0.22
+          Y: -0.13
+        - X: 0.22
+          Y: -0.22
+    - Id: template.module.tracking
+      DisplayName: "\u0411\u044B\u0441\u0442\u0440\u043E\u0435 \u043D\u0430\u0432\u0435\u0434\u0435\u043D\u0438\u0435"
+      Revision: 3
+      PivotX: 0
+      PivotY: -0.16
+      Weight: 5
+      Contours:
+      - Points:
+        - X: 0.31
+          Y: -0.15
+        - X: 0.30849
+          Y: -0.05
+        - X: 0.31235
+          Y: 0.05
+        - X: 0.30775
+          Y: 0.15
+        - X: 0.31133
+          Y: 0.25
+        - X: 0.31
+          Y: 0.35
+      - Points:
+        - X: 0.425
+          Y: 0.39
+        - X: 0.42108
+          Y: 0.41976
+        - X: 0.40959
+          Y: 0.4475
+        - X: 0.39132
+          Y: 0.47132
+        - X: 0.3675
+          Y: 0.48959
+        - X: 0.33976
+          Y: 0.50108
+        - X: 0.31
+          Y: 0.505
+        - X: 0.28024
+          Y: 0.50108
+        - X: 0.2525
+          Y: 0.48959
+        - X: 0.22868
+          Y: 0.47132
+        - X: 0.21041
+          Y: 0.4475
+        - X: 0.19892
+          Y: 0.41976
+        - X: 0.195
+          Y: 0.39
+        - X: 0.19892
+          Y: 0.36024
+        - X: 0.21041
+          Y: 0.3325
+        - X: 0.22868
+          Y: 0.30868
+        - X: 0.2525
+          Y: 0.29041
+        - X: 0.28024
+          Y: 0.27892
+        - X: 0.31
+          Y: 0.275
+        - X: 0.33976
+          Y: 0.27892
+        - X: 0.3675
+          Y: 0.29041
+        - X: 0.39132
+          Y: 0.30868
+        - X: 0.40959
+          Y: 0.3325
+        - X: 0.42108
+          Y: 0.36024
+        - X: 0.425
+          Y: 0.39
+      - Points:
+        - X: 0.16
+          Y: 0.39
+        - X: 0.26
+          Y: 0.39224
+        - X: 0.36
+          Y: 0.38785
+        - X: 0.46
+          Y: 0.39
+      - Points:
+        - X: 0.31
+          Y: 0.24
+        - X: 0.30827
+          Y: 0.34
+        - X: 0.31162
+          Y: 0.44
+        - X: 0.31
+          Y: 0.54
+      - Points:
+        - X: 0.25
+          Y: -0.23
+        - X: 0.31
+          Y: -0.22802
+        - X: 0.37
+          Y: -0.23
+        - X: 0.37
+          Y: -0.13
+        - X: 0.31
+          Y: -0.12786
+        - X: 0.25
+          Y: -0.13
+        - X: 0.25
+          Y: -0.23
+    - Id: template.weapon.fan
+      DisplayName: "\u0412\u0435\u0435\u0440\u043D\u044B\u0439 \u0441\u0442\u0432\u043E\u043B"
+      Revision: 3
+      PivotX: 0
+      PivotY: 0.04
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.12
+          Y: -0.13
+        - X: -0.04
+          Y: -0.13265
+        - X: 0.04
+          Y: -0.12729
+        - X: 0.12
+          Y: -0.13
+        - X: 0.11063
+          Y: -0.04688
+        - X: 0.10931
+          Y: 0.03688
+        - X: 0.1
+          Y: 0.12
+        - X: 0.14573
+          Y: 0.19366
+        - X: 0.19744
+          Y: 0.2634
+        - X: 0.24082
+          Y: 0.3386
+        - X: 0.29
+          Y: 0.41
+        - X: 0.23035
+          Y: 0.46042
+        - X: 0.17
+          Y: 0.51
+        - X: 0.08458
+          Y: 0.52264
+        - X: 0
+          Y: 0.54
+        - X: -0.08561
+          Y: 0.52845
+        - X: -0.17
+          Y: 0.51
+        - X: -0.2279
+          Y: 0.45748
+        - X: -0.29
+          Y: 0.41
+        - X: -0.24264
+          Y: 0.33741
+        - X: -0.19467
+          Y: 0.26521
+        - X: -0.14782
+          Y: 0.19229
+        - X: -0.1
+          Y: 0.12
+        - X: -0.10627
+          Y: 0.03664
+        - X: -0.11385
+          Y: -0.04663
+        - X: -0.12
+          Y: -0.13
+      - Points:
+        - X: 0
+          Y: 0.02
+        - X: -0.00151
+          Y: 0.12
+        - X: 0.00235
+          Y: 0.22
+        - X: -0.00225
+          Y: 0.32
+        - X: 0.00133
+          Y: 0.42
+        - X: 0
+          Y: 0.52
+      - Points:
+        - X: 0
+          Y: 0.04
+        - X: -0.03474
+          Y: 0.12972
+        - X: -0.06669
+          Y: 0.2205
+        - X: -0.10343
+          Y: 0.30946
+        - X: -0.13505
+          Y: 0.40036
+        - X: -0.17
+          Y: 0.49
+      - Points:
+        - X: 0
+          Y: 0.04
+        - X: 0.03326
+          Y: 0.13028
+        - X: 0.06931
+          Y: 0.2195
+        - X: 0.10057
+          Y: 0.31054
+        - X: 0.13695
+          Y: 0.39964
+        - X: 0.17
+          Y: 0.49
+    - Id: template.weapon.ricochet
+      DisplayName: "\u0420\u0438\u043A\u043E\u0448\u0435\u0442"
+      Revision: 3
+      PivotX: 0
+      PivotY: 0.04
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.18
+          Y: -0.12
+        - X: -0.09
+          Y: -0.1197
+        - X: 0
+          Y: -0.12057
+        - X: 0.09
+          Y: -0.11949
+        - X: 0.18
+          Y: -0.12
+        - X: 0.18264
+          Y: -0.04
+        - X: 0.1773
+          Y: 0.04
+        - X: 0.18
+          Y: 0.12
+        - X: 0.09
+          Y: 0.12213
+        - X: 0
+          Y: 0.11691
+        - X: -0.09
+          Y: 0.12223
+        - X: -0.18
+          Y: 0.12
+        - X: -0.17758
+          Y: 0.04
+        - X: -0.18235
+          Y: -0.04
+        - X: -0.18
+          Y: -0.12
+      - Points:
+        - X: -0.18
+          Y: 0.1
+        - X: -0.1
+          Y: 0.1
+        - X: -0.09798
+          Y: 0.185
+        - X: -0.10293
+          Y: 0.27
+        - X: -0.09787
+          Y: 0.355
+        - X: -0.1
+          Y: 0.44
+        - X: -0.18
+          Y: 0.44
+        - X: -0.17936
+          Y: 0.355
+        - X: -0.18077
+          Y: 0.27
+        - X: -0.17956
+          Y: 0.185
+        - X: -0.18
+          Y: 0.1
+      - Points:
+        - X: 0.1
+          Y: 0.1
+        - X: 0.18
+          Y: 0.1
+        - X: 0.17766
+          Y: 0.185
+        - X: 0.18326
+          Y: 0.27
+        - X: 0.17774
+          Y: 0.355
+        - X: 0.18
+          Y: 0.44
+        - X: 0.1
+          Y: 0.44
+        - X: 0.10157
+          Y: 0.355
+        - X: 0.09766
+          Y: 0.27
+        - X: 0.10173
+          Y: 0.185
+        - X: 0.1
+          Y: 0.1
+      - Points:
+        - X: -0.18
+          Y: -0.12
+        - X: -0.09
+          Y: -0.1197
+        - X: 0
+          Y: -0.12057
+        - X: 0.09
+          Y: -0.11949
+        - X: 0.18
+          Y: -0.12
+        - X: 0.18179
+          Y: -0.012
+        - X: 0.17704
+          Y: 0.096
+        - X: 0.18302
+          Y: 0.204
+        - X: 0.1781
+          Y: 0.312
+        - X: 0.18
+          Y: 0.42
+        - X: 0.13885
+          Y: 0.45885
+        - X: 0.1
+          Y: 0.5
+        - X: 0.10231
+          Y: 0.405
+        - X: 0.09668
+          Y: 0.31
+        - X: 0.10238
+          Y: 0.215
+        - X: 0.1
+          Y: 0.12
+        - X: 0
+          Y: 0.12309
+        - X: -0.1
+          Y: 0.12
+        - X: -0.10027
+          Y: 0.215
+        - X: -0.09948
+          Y: 0.31
+        - X: -0.10047
+          Y: 0.405
+        - X: -0.1
+          Y: 0.5
+        - X: -0.14177
+          Y: 0.46177
+        - X: -0.18
+          Y: 0.42
+        - X: -0.17919
+          Y: 0.312
+        - X: -0.18118
+          Y: 0.204
+        - X: -0.17895
+          Y: 0.096
+        - X: -0.18057
+          Y: -0.012
+        - X: -0.18
+          Y: -0.12
+      - Points:
+        - X: -0.1
+          Y: 0.26
+        - X: -0.01958
+          Y: 0.30932
+        - X: 0.06
+          Y: 0.36
+        - X: -0.00194
+          Y: 0.40767
+        - X: -0.06
+          Y: 0.46
+      - Points:
+        - X: -0.21
+          Y: 0.43
+        - X: -0.15355
+          Y: 0.46271
+        - X: -0.1
+          Y: 0.5
+      - Points:
+        - X: 0.1
+          Y: 0.5
+        - X: 0.15674
+          Y: 0.46773
+        - X: 0.21
+          Y: 0.43
+    - Id: template.weapon.stapler
+      DisplayName: "\u0421\u0442\u0435\u043F\u043B\u0435\u0440"
+      Revision: 3
+      PivotX: 0
+      PivotY: 0.04
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.15
+          Y: -0.14
+        - X: -0.05
+          Y: -0.13864
+        - X: 0.05
+          Y: -0.14147
+        - X: 0.15
+          Y: -0.14
+        - X: 0.15703
+          Y: -0.05963
+        - X: 0.17299
+          Y: 0.01963
+        - X: 0.18
+          Y: 0.1
+        - X: 0.16794
+          Y: 0.18257
+        - X: 0.15452
+          Y: 0.26493
+        - X: 0.14274
+          Y: 0.34754
+        - X: 0.13
+          Y: 0.43
+        - X: 0.04333
+          Y: 0.42979
+        - X: -0.04333
+          Y: 0.43033
+        - X: -0.13
+          Y: 0.43
+        - X: -0.14439
+          Y: 0.34779
+        - X: -0.15242
+          Y: 0.26461
+        - X: -0.16925
+          Y: 0.18277
+        - X: -0.18
+          Y: 0.1
+        - X: -0.17011
+          Y: 0.01999
+        - X: -0.16001
+          Y: -0.06
+        - X: -0.15
+          Y: -0.14
+      - Points:
+        - X: -0.12
+          Y: 0.03
+        - X: -0.04
+          Y: 0.03298
+        - X: 0.04
+          Y: 0.027
+        - X: 0.12
+          Y: 0.03
+        - X: 0.12173
+          Y: 0.115
+        - X: 0.11766
+          Y: 0.2
+        - X: 0.12157
+          Y: 0.285
+        - X: 0.12
+          Y: 0.37
+        - X: 0.04
+          Y: 0.36749
+        - X: -0.04
+          Y: 0.37244
+        - X: -0.12
+          Y: 0.37
+        - X: -0.1196
+          Y: 0.285
+        - X: -0.1207
+          Y: 0.2
+        - X: -0.1194
+          Y: 0.115
+        - X: -0.12
+          Y: 0.03
+      - Points:
+        - X: -0.15
+          Y: 0.09
+        - X: -0.17896
+          Y: 0.14062
+        - X: -0.21
+          Y: 0.19
+        - X: -0.20285
+          Y: 0.28364
+        - X: -0.18711
+          Y: 0.37636
+        - X: -0.18
+          Y: 0.47
+        - X: -0.11
+          Y: 0.52
+        - X: 0
+          Y: 0.5172
+        - X: 0.11
+          Y: 0.52
+        - X: 0.18
+          Y: 0.47
+        - X: 0.19276
+          Y: 0.37696
+        - X: 0.19729
+          Y: 0.28304
+        - X: 0.21
+          Y: 0.19
+        - X: 0.18027
+          Y: 0.13984
+        - X: 0.15
+          Y: 0.09
+      - Points:
+        - X: -0.1
+          Y: 0.45
+        - X: 0
+          Y: 0.44744
+        - X: 0.1
+          Y: 0.45
+    - Id: template.weapon.blotter
+      DisplayName: "\u041F\u0440\u043E\u043C\u043E\u043A\u0430\u0448\u043A\u0430"
+      Revision: 3
+      PivotX: 0
+      PivotY: 0.04
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.24
+          Y: 0.12
+        - X: -0.144
+          Y: 0.11835
+        - X: -0.048
+          Y: 0.12258
+        - X: 0.048
+          Y: 0.11751
+        - X: 0.144
+          Y: 0.12148
+        - X: 0.24
+          Y: 0.12
+        - X: 0.23989
+          Y: 0.21
+        - X: 0.23999
+          Y: 0.3
+        - X: 0.24
+          Y: 0.39
+        - X: 0.144
+          Y: 0.38959
+        - X: 0.048
+          Y: 0.39081
+        - X: -0.048
+          Y: 0.38906
+        - X: -0.144
+          Y: 0.39066
+        - X: -0.24
+          Y: 0.39
+        - X: -0.243
+          Y: 0.3
+        - X: -0.23699
+          Y: 0.21
+        - X: -0.24
+          Y: 0.12
+      - Points:
+        - X: -0.08
+          Y: -0.11
+        - X: 0
+          Y: -0.10939
+        - X: 0.08
+          Y: -0.11
+        - X: 0.07759
+          Y: -0.02667
+        - X: 0.08233
+          Y: 0.05667
+        - X: 0.08
+          Y: 0.14
+        - X: 0
+          Y: 0.13669
+        - X: -0.08
+          Y: 0.14
+        - X: -0.07707
+          Y: 0.05667
+        - X: -0.08296
+          Y: -0.02667
+        - X: -0.08
+          Y: -0.11
+      - Points:
+        - X: -0.25
+          Y: 0.16
+        - X: -0.18
+          Y: 0.13
+        - X: -0.1
+          Y: 0.17
+        - X: -0.03
+          Y: 0.13
+        - X: 0.04
+          Y: 0.17
+        - X: 0.11
+          Y: 0.13
+        - X: 0.18
+          Y: 0.17
+        - X: 0.25
+          Y: 0.15
+    - Id: template.module.rail
+      DisplayName: "\u041D\u0430\u043F\u0440\u0430\u0432\u043B\u044F\u044E\u0449\u0430\u044F"
+      Revision: 3
+      PivotX: 0
+      PivotY: 0
+      Weight: 5
+      Contours:
+      - Points:
+        - X: -0.395
+          Y: -0.32
+        - X: -0.345
+          Y: -0.32
+        - X: -0.3465
+          Y: -0.178
+        - X: -0.34248
+          Y: -0.036
+        - X: -0.34761
+          Y: 0.106
+        - X: -0.34333
+          Y: 0.248
+        - X: -0.345
+          Y: 0.39
+        - X: -0.395
+          Y: 0.39
+        - X: -0.39466
+          Y: 0.248
+        - X: -0.39568
+          Y: 0.106
+        - X: -0.39418
+          Y: -0.036
+        - X: -0.39559
+          Y: -0.178
+        - X: -0.395
+          Y: -0.32
+      - Points:
+        - X: 0.345
+          Y: -0.32
+        - X: 0.395
+          Y: -0.32
+        - X: 0.39595
+          Y: -0.178
+        - X: 0.39359
+          Y: -0.036
+        - X: 0.39629
+          Y: 0.106
+        - X: 0.39429
+          Y: 0.248
+        - X: 0.395
+          Y: 0.39
+        - X: 0.345
+          Y: 0.39
+        - X: 0.34314
+          Y: 0.248
+        - X: 0.34796
+          Y: 0.106
+        - X: 0.34211
+          Y: -0.036
+        - X: 0.34674
+          Y: -0.178
+        - X: 0.345
+          Y: -0.32
+      - Points:
+        - X: -0.4
+          Y: -0.24
+        - X: -0.24
+          Y: -0.24196
+        - X: -0.08
+          Y: -0.23679
+        - X: 0.08
+          Y: -0.24324
+        - X: 0.24
+          Y: -0.23798
+        - X: 0.4
+          Y: -0.24
+      - Points:
+        - X: -0.4
+          Y: 0.24
+        - X: -0.24
+          Y: 0.2416
+        - X: -0.08
+          Y: 0.23751
+        - X: 0.08
+          Y: 0.2424
+        - X: 0.24
+          Y: 0.23858
+        - X: 0.4
+          Y: 0.24
+    - Id: template.chassis.precision
+      DisplayName: "\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0435
+        \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"
+      Revision: 3
+      PivotX: 0
+      PivotY: 0
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.42
+          Y: -0.3
+        - X: -0.254
+          Y: -0.30201
+        - X: -0.088
+          Y: -0.29679
+        - X: 0.078
+          Y: -0.30317
+        - X: 0.244
+          Y: -0.29807
+        - X: 0.41
+          Y: -0.3
+        - X: 0.43983
+          Y: -0.21494
+        - X: 0.47
+          Y: -0.13
+        - X: 0.43333
+          Y: -0.03826
+        - X: 0.3992
+          Y: 0.05447
+        - X: 0.36069
+          Y: 0.14549
+        - X: 0.32688
+          Y: 0.23835
+        - X: 0.29
+          Y: 0.33
+        - X: 0.174
+          Y: 0.32805
+        - X: 0.058
+          Y: 0.3332
+        - X: -0.058
+          Y: 0.32677
+        - X: -0.174
+          Y: 0.33202
+        - X: -0.29
+          Y: 0.33
+        - X: -0.3279
+          Y: 0.23874
+        - X: -0.35891
+          Y: 0.14479
+        - X: -0.4011
+          Y: 0.05521
+        - X: -0.43208
+          Y: -0.03875
+        - X: -0.47
+          Y: -0.13
+        - X: -0.44615
+          Y: -0.21534
+        - X: -0.42
+          Y: -0.3
+      - Points:
+        - X: -0.26
+          Y: -0.23
+        - X: -0.156
+          Y: -0.22853
+        - X: -0.052
+          Y: -0.23228
+        - X: 0.052
+          Y: -0.22782
+        - X: 0.156
+          Y: -0.23128
+        - X: 0.26
+          Y: -0.23
+        - X: 0.26316
+          Y: -0.145
+        - X: 0.26
+          Y: -0.06
+        - X: 0.156
+          Y: -0.05794
+        - X: 0.052
+          Y: -0.06333
+        - X: -0.052
+          Y: -0.05668
+        - X: -0.156
+          Y: -0.06205
+        - X: -0.26
+          Y: -0.06
+        - X: -0.26345
+          Y: -0.145
+        - X: -0.26
+          Y: -0.23
+      - Points:
+        - X: 0.18
+          Y: 0.04
+        - X: 0.17387
+          Y: 0.08659
+        - X: 0.15588
+          Y: 0.13
+        - X: 0.12728
+          Y: 0.16728
+        - X: 0.09
+          Y: 0.19588
+        - X: 0.04659
+          Y: 0.21387
+        - X: 0
+          Y: 0.22
+        - X: -0.04659
+          Y: 0.21387
+        - X: -0.09
+          Y: 0.19588
+        - X: -0.12728
+          Y: 0.16728
+        - X: -0.15588
+          Y: 0.13
+        - X: -0.17387
+          Y: 0.08659
+        - X: -0.18
+          Y: 0.04
+        - X: -0.17387
+          Y: -0.00659
+        - X: -0.15588
+          Y: -0.05
+        - X: -0.12728
+          Y: -0.08728
+        - X: -0.09
+          Y: -0.11588
+        - X: -0.04659
+          Y: -0.13387
+        - X: -0
+          Y: -0.14
+        - X: 0.04659
+          Y: -0.13387
+        - X: 0.09
+          Y: -0.11588
+        - X: 0.12728
+          Y: -0.08728
+        - X: 0.15588
+          Y: -0.05
+        - X: 0.17387
+          Y: -0.00659
+        - X: 0.18
+          Y: 0.04
+    - Id: template.chassis.battery
+      DisplayName: "\u0411\u0430\u0442\u0430\u0440\u0435\u044F"
+      Revision: 3
+      PivotX: 0
+      PivotY: 0
+      Weight: 25
+      Contours:
+      - Points:
+        - X: -0.49
+          Y: -0.31
+        - X: -0.294
+          Y: -0.31033
+        - X: -0.098
+          Y: -0.30933
+        - X: 0.098
+          Y: -0.31081
+        - X: 0.294
+          Y: -0.30942
+        - X: 0.49
+          Y: -0.31
+        - X: 0.50556
+          Y: -0.22009
+        - X: 0.52
+          Y: -0.13
+        - X: 0.50936
+          Y: -0.02727
+        - X: 0.49227
+          Y: 0.07467
+        - X: 0.48449
+          Y: 0.17774
+        - X: 0.47
+          Y: 0.28
+        - X: 0.282
+          Y: 0.27941
+        - X: 0.094
+          Y: 0.28083
+        - X: -0.094
+          Y: 0.27931
+        - X: -0.282
+          Y: 0.28034
+        - X: -0.47
+          Y: 0.28
+        - X: -0.48241
+          Y: 0.17749
+        - X: -0.49527
+          Y: 0.07503
+        - X: -0.50721
+          Y: -0.02754
+        - X: -0.52
+          Y: -0.13
+        - X: -0.50239
+          Y: -0.21957
+        - X: -0.49
+          Y: -0.31
+      - Points:
+        - X: -0.45
+          Y: -0.1
+        - X: -0.27
+          Y: -0.10028
+        - X: -0.09
+          Y: -0.09969
+        - X: 0.09
+          Y: -0.10018
+        - X: 0.27
+          Y: -0.09998
+        - X: 0.45
+          Y: -0.1
+      - Points:
+        - X: -0.128
+          Y: 0.04
+        - X: -0.13182
+          Y: 0.06899
+        - X: -0.14301
+          Y: 0.096
+        - X: -0.1608
+          Y: 0.1192
+        - X: -0.184
+          Y: 0.13699
+        - X: -0.21101
+          Y: 0.14818
+        - X: -0.24
+          Y: 0.152
+        - X: -0.26899
+          Y: 0.14818
+        - X: -0.296
+          Y: 0.13699
+        - X: -0.3192
+          Y: 0.1192
+        - X: -0.33699
+          Y: 0.096
+        - X: -0.34818
+          Y: 0.06899
+        - X: -0.352
+          Y: 0.04
+        - X: -0.34818
+          Y: 0.01101
+        - X: -0.33699
+          Y: -0.016
+        - X: -0.3192
+          Y: -0.0392
+        - X: -0.296
+          Y: -0.05699
+        - X: -0.26899
+          Y: -0.06818
+        - X: -0.24
+          Y: -0.072
+        - X: -0.21101
+          Y: -0.06818
+        - X: -0.184
+          Y: -0.05699
+        - X: -0.1608
+          Y: -0.0392
+        - X: -0.14301
+          Y: -0.016
+        - X: -0.13182
+          Y: 0.01101
+        - X: -0.128
+          Y: 0.04
+      - Points:
+        - X: 0.112
+          Y: 0.04
+        - X: 0.10818
+          Y: 0.06899
+        - X: 0.09699
+          Y: 0.096
+        - X: 0.0792
+          Y: 0.1192
+        - X: 0.056
+          Y: 0.13699
+        - X: 0.02899
+          Y: 0.14818
+        - X: 0
+          Y: 0.152
+        - X: -0.02899
+          Y: 0.14818
+        - X: -0.056
+          Y: 0.13699
+        - X: -0.0792
+          Y: 0.1192
+        - X: -0.09699
+          Y: 0.096
+        - X: -0.10818
+          Y: 0.06899
+        - X: -0.112
+          Y: 0.04
+        - X: -0.10818
+          Y: 0.01101
+        - X: -0.09699
+          Y: -0.016
+        - X: -0.0792
+          Y: -0.0392
+        - X: -0.056
+          Y: -0.05699
+        - X: -0.02899
+          Y: -0.06818
+        - X: -0
+          Y: -0.072
+        - X: 0.02899
+          Y: -0.06818
+        - X: 0.056
+          Y: -0.05699
+        - X: 0.0792
+          Y: -0.0392
+        - X: 0.09699
+          Y: -0.016
+        - X: 0.10818
+          Y: 0.01101
+        - X: 0.112
+          Y: 0.04
+      - Points:
+        - X: 0.352
+          Y: 0.04
+        - X: 0.34818
+          Y: 0.06899
+        - X: 0.33699
+          Y: 0.096
+        - X: 0.3192
+          Y: 0.1192
+        - X: 0.296
+          Y: 0.13699
+        - X: 0.26899
+          Y: 0.14818
+        - X: 0.24
+          Y: 0.152
+        - X: 0.21101
+          Y: 0.14818
+        - X: 0.184
+          Y: 0.13699
+        - X: 0.1608
+          Y: 0.1192
+        - X: 0.14301
+          Y: 0.096
+        - X: 0.13182
+          Y: 0.06899
+        - X: 0.128
+          Y: 0.04
+        - X: 0.13182
+          Y: 0.01101
+        - X: 0.14301
+          Y: -0.016
+        - X: 0.1608
+          Y: -0.0392
+        - X: 0.184
+          Y: -0.05699
+        - X: 0.21101
+          Y: -0.06818
+        - X: 0.24
+          Y: -0.072
+        - X: 0.26899
+          Y: -0.06818
+        - X: 0.296
+          Y: -0.05699
+        - X: 0.3192
+          Y: -0.0392
+        - X: 0.33699
+          Y: -0.016
+        - X: 0.34818
+          Y: 0.01101
+        - X: 0.352
+          Y: 0.04
+    StartingPages:
+    - Id: fixture.start.0
+      Name: "\u0422\u0435\u0441\u0442\u043E\u0432\u044B\u0439 \u0447\u0435\u0440\u0442\u0451\u0436
+        1"
+      ChassisId: chassis.standard
+      FirstWeaponId: weapon.gun
+      SecondWeaponId: 
+      Modules: []
+      WeaponMounts: []
+      Slot: 0
+    - Id: fixture.start.1
+      Name: "\u0422\u0435\u0441\u0442\u043E\u0432\u044B\u0439 \u0447\u0435\u0440\u0442\u0451\u0436
+        2"
+      ChassisId: chassis.standard
+      FirstWeaponId: weapon.gun
+      SecondWeaponId: 
+      Modules: []
+      WeaponMounts: []
+      Slot: 1
+    - Id: fixture.start.2
+      Name: "\u0422\u0435\u0441\u0442\u043E\u0432\u044B\u0439 \u0447\u0435\u0440\u0442\u0451\u0436
+        3"
+      ChassisId: chassis.standard
+      FirstWeaponId: weapon.gun
+      SecondWeaponId: 
+      Modules: []
+      WeaponMounts: []
+      Slot: 2
+    - Id: fixture.start.3
+      Name: "\u0422\u0435\u0441\u0442\u043E\u0432\u044B\u0439 \u0447\u0435\u0440\u0442\u0451\u0436
+        4"
+      ChassisId: chassis.standard
+      FirstWeaponId: weapon.gun
+      SecondWeaponId: 
+      Modules: []
+      WeaponMounts: []
+      Slot: 3
+    FreeformRules:
+      BodyAreaReference: 0.8
+      MinimumBodyArea: 0.06
+      BarrelLengthReference: 0.9
+      BarrelWidthReference: 0.5
+      MinimumBarrelLength: 0.12
+      MinimumMuzzleForward: 0.1
+      HealthBase: 0.6
+      HealthSize: 1.2
+      CapacityBase: 0.6
+      CapacitySize: 0.8
+      CostBase: 0.75
+      CostSize: 0.45
+      CostBarrelLength: 0.12
+      CostBarrelWidth: 0.15
+      BuildBase: 0.8
+      BuildSize: 0.4
+      RangeBase: 0.65
+      RangeLength: 0.75
+      RangeWidthPenalty: 0.2
+      IntervalBase: 0.75
+      IntervalLength: 0.55
+      IntervalWidth: 0.35
+      DamageBase: 0.75
+      DamageWidth: 0.75
+      BaseInkBudget: 65.0
+      ExtraMountInkBudget: 35.0
+      BodyAreaInk: 50.0
+      BarrelLengthInk: 25.0
+      BarrelWidthInk: 35.0
+    DrawingUnlocks:
+    - Id: drawing.body.basic
+      Name: "\u001ePD1:GWRyYXdpbmcuc3RlbmNpbC5ib2R5Lm5hbWUAAAAA\u001f"
+      Description: "\u001ePD1:IGRyYXdpbmcuc3RlbmNpbC5ib2R5LmRlc2NyaXB0aW9uAAAAAA==\u001f"
+      GoldCost: 0
+      InitiallyUnlocked: 1
+      Role: 0
+      Contours:
+      - Points:
+        - X: -0.32
+          Y: -0.35
+        - X: 0.32
+          Y: -0.35
+        - X: 0.4
+          Y: -0.27
+        - X: 0.4
+          Y: 0.27
+        - X: 0.32
+          Y: 0.35
+        - X: -0.32
+          Y: 0.35
+        - X: -0.4
+          Y: 0.27
+        - X: -0.4
+          Y: -0.27
+        - X: -0.32
+          Y: -0.35
+    - Id: drawing.barrel.basic
+      Name: "\u001ePD1:G2RyYXdpbmcuc3RlbmNpbC5iYXJyZWwubmFtZQAAAAA=\u001f"
+      Description: "\u001ePD1:ImRyYXdpbmcuc3RlbmNpbC5iYXJyZWwuZGVzY3JpcHRpb24AAAAA\u001f"
+      GoldCost: 0
+      InitiallyUnlocked: 1
+      Role: 1
+      Contours:
+      - Points:
+        - X: -0.1
+          Y: 0.0
+        - X: 0.1
+          Y: 0.0
+        - X: 0.07
+          Y: 0.6
+        - X: -0.07
+          Y: 0.6
+        - X: -0.1
+          Y: 0.0
+    - Id: drawing.sniper
+      Name: "\u001ePD1:G2RyYXdpbmcuc3RlbmNpbC5zbmlwZXIubmFtZQAAAAA=\u001f"
+      Description: "\u001ePD1:ImRyYXdpbmcuc3RlbmNpbC5zbmlwZXIuZGVzY3JpcHRpb24AAAAA\u001f"
+      GoldCost: 32
+      InitiallyUnlocked: 0
+      Role: 1
+      Contours:
+      - Points:
+        - X: -0.055
+          Y: 0.0
+        - X: 0.055
+          Y: 0.0
+        - X: 0.055
+          Y: 0.18
+        - X: 0.033
+          Y: 0.22
+        - X: 0.033
+          Y: 0.92
+        - X: -0.033
+          Y: 0.92
+        - X: -0.033
+          Y: 0.22
+        - X: -0.055
+          Y: 0.18
+        - X: -0.055
+          Y: 0.0
+      - Points:
+        - X: -0.055
+          Y: 0.12
+        - X: 0.055
+          Y: 0.12
+      - Points:
+        - X: -0.033
+          Y: 0.82
+        - X: 0.033
+          Y: 0.82
+    - Id: drawing.rapid
+      Name: "\u001ePD1:GmRyYXdpbmcuc3RlbmNpbC5yYXBpZC5uYW1lAAAAAA==\u001f"
+      Description: "\u001ePD1:IWRyYXdpbmcuc3RlbmNpbC5yYXBpZC5kZXNjcmlwdGlvbgAAAAA=\u001f"
+      GoldCost: 24
+      InitiallyUnlocked: 0
+      Role: 1
+      Contours:
+      - Points:
+        - X: -0.055
+          Y: 0.0
+        - X: 0.055
+          Y: 0.0
+        - X: 0.055
+          Y: 0.24
+        - X: 0.038
+          Y: 0.3
+        - X: -0.038
+          Y: 0.3
+        - X: -0.055
+          Y: 0.24
+        - X: -0.055
+          Y: 0.0
+      - Points:
+        - X: -0.055
+          Y: 0.1
+        - X: 0.055
+          Y: 0.1
+      - Points:
+        - X: -0.055
+          Y: 0.16
+        - X: 0.055
+          Y: 0.16
+      - Points:
+        - X: -0.055
+          Y: 0.22
+        - X: 0.055
+          Y: 0.22
+    - Id: drawing.heavy
+      Name: "\u001ePD1:GmRyYXdpbmcuc3RlbmNpbC5oZWF2eS5uYW1lAAAAAA==\u001f"
+      Description: "\u001ePD1:IWRyYXdpbmcuc3RlbmNpbC5oZWF2eS5kZXNjcmlwdGlvbgAAAAA=\u001f"
+      GoldCost: 40
+      InitiallyUnlocked: 0
+      Role: 1
+      Contours:
+      - Points:
+        - X: -0.12
+          Y: 0.0
+        - X: 0.12
+          Y: 0.0
+        - X: 0.12
+          Y: 0.3
+        - X: 0.23
+          Y: 0.4
+        - X: 0.23
+          Y: 0.5
+        - X: 0.17
+          Y: 0.56
+        - X: -0.17
+          Y: 0.56
+        - X: -0.23
+          Y: 0.5
+        - X: -0.23
+          Y: 0.4
+        - X: -0.12
+          Y: 0.3
+        - X: -0.12
+          Y: 0.0
+      - Points:
+        - X: -0.23
+          Y: 0.44
+        - X: 0.23
+          Y: 0.44
+      - Points:
+        - X: -0.12
+          Y: 0.16
+        - X: 0.12
+          Y: 0.16
+    Assessment:
+      Revision: 2
+      Tolerance: 0.06
+      CompletionThreshold: 0.95
+      PrecisionThreshold: 0.95
+    RedEffectId: effect.color.red
+    BlueEffectId: effect.color.blue
+    GreenEffectId: effect.color.green
+  presets: []
