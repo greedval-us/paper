@@ -2,6 +2,7 @@ using System;
 using NUnit.Framework;
 using PaperDefense.Application;
 using PaperDefense.Core;
+using PaperDefense.Validation;
 using UnityEditor;
 
 namespace PaperDefense.Tests
@@ -41,16 +42,43 @@ namespace PaperDefense.Tests
 
         [TestCase(17, false)] [TestCase(41, false)] [TestCase(17, true)] [TestCase(41, true)]
         public void ReinforcedMixedDefenseCanFinishAllEightWavesWithinEarnedInk(int seed, bool player)
+            => RunCampaign(seed, player, RunUpgrade.DeepInk, null);
+
+        [TestCase(17, RunUpgrade.RapidFire, "gun-feed")]
+        [TestCase(41, RunUpgrade.RapidFire, "gun-feed")]
+        [TestCase(17, RunUpgrade.Salvage, "gun")]
+        [TestCase(41, RunUpgrade.Salvage, "gun")]
+        [TestCase(17, RunUpgrade.DeepInk, "fan")]
+        [TestCase(41, RunUpgrade.DeepInk, "fan")]
+        [TestCase(17, RunUpgrade.DeepInk, "ricochet")]
+        [TestCase(41, RunUpgrade.DeepInk, "ricochet")]
+        public void UnlockedSpecialistDefensesCanFinishWithinEarnedInk(int seed, RunUpgrade upgrade, string build)
+            => RunCampaign(seed, true, upgrade, build);
+
+        static void RunCampaign(int seed, bool player, RunUpgrade upgrade, string build)
         {
-            var b=MainBalance(player);var loadout=new WorkshopProfile(b.Content,b).GetLoadoutBlueprints();var game=new GameSession(b,seed,false);
+            var b=MainBalance(player);
+            var loadout=new System.Collections.Generic.List<TowerBlueprint>(new WorkshopProfile(b.Content,b).GetLoadoutBlueprints());
+            var specialist=build!=null?NumericBalanceScenario.Build(b,build):null;
+            var game=new GameSession(b,seed,false);
             // A central perimeter covers all four sides; earned ink adds piercing weapons and artillery.
             int[] points={44,28,52,28,44,36,52,36,48,26,48,38,42,32,54,32,42,26,54,26,42,38,54,38,
                 40,28,56,28,40,36,56,36,44,24,52,24,44,40,52,40,40,24,56,24,40,40,56,40,
                 38,32,58,32,48,22,48,42,38,26,58,26,38,38,58,38};
+            if(upgrade==RunUpgrade.Salvage)
+            {
+                // Economy trades global combat bonuses for a larger army. Reinvest its
+                // extra income into a second inner firing line, still at ordinary prices.
+                var expanded=new System.Collections.Generic.List<int>(points);
+                expanded.AddRange(new[]{44,30,52,30,44,34,52,34,46,28,50,28,46,36,50,36});
+                points=expanded.ToArray();
+            }
             int expectedKills=0;
             for(int wave=0;wave<b.Waves.Count;wave++)
             {
-                if(game.PendingUpgrade)game.ChooseUpgrade(RunUpgrade.DeepInk);
+                // Invest in economy at wave 2, then convert the extra army into firepower
+                // at waves 4/6. Repeating an economy choice late has a shorter payoff window.
+                if(game.PendingUpgrade)game.ChooseUpgrade(upgrade==RunUpgrade.Salvage&&wave>=4?RunUpgrade.RapidFire:upgrade);
                 // Restore destroyed guns first, then add completed support and further outer defenses.
                 for(int cursor=0;cursor<points.Length/2;cursor++)
                 {
@@ -74,6 +102,9 @@ namespace PaperDefense.Tests
                         }
                     }
                     var cell=new Cell(points[cursor*2],points[cursor*2+1]);var bp=loadout[cursor<12?0:cursor%3==0?2:3];
+                    // Short-range and chain weapons complement the gun coverage on alternating
+                    // approaches. An unlocked build is not assumed to replace every weapon role.
+                    if(specialist!=null&&cursor<12&&(cursor%2==0||build=="gun-feed"))bp=specialist;
                     if(game.StructureAt(cell)!=null)continue;
                     var quote=game.QuoteBlueprint(new[]{cell},bp,MaterialTier.Pencil,InkColor.None);
                     if(!quote.Valid&&quote.Cost>game.Ink)break;
@@ -142,7 +173,7 @@ namespace PaperDefense.Tests
             // damaged-health refund. Never grant ink or remove an enemy to end the wave.
             for(int salvage=0;TowerCatalog.Cost(blueprint,balance,MaterialTier.Pencil)>game.Ink&&salvage<3;salvage++)
             {
-                if(game.Enemies.Count!=1||threat.Kind!=EnemyKind.Spitter)return false;
+                if(game.RemainingToSpawn!=0||game.Enemies.Count>3||threat.Kind!=EnemyKind.Spitter)return false;
                 StructureState candidate=null;float farthest=0;
                 foreach(var structure in game.Structures)
                 {

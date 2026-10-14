@@ -180,10 +180,10 @@ MonoBehaviour:
         Y: 22
         Width: 1
         Height: 1
-    WaveHealthGrowth: 0.18
+    WaveHealthGrowth: 0.14
     Width: 96
     Height: 64
-    StartingInk: 720
+    StartingInk: 640
     MaxEarlyLaunchInk: 0
     WaveInkGrant: 75
     MaxEnemiesPerCell: 3
@@ -219,7 +219,7 @@ MonoBehaviour:
       DrawingQuality: 1
     Construction:
       DualFeedMultiplier: 0.8
-      MaxFeedMultiplier: 1.15
+      MaxFeedMultiplier: 1.25
       DynamicFeedCapacity: 1.6
       AcquisitionSeconds: 0.25
       DynamicFeed: 1
@@ -235,14 +235,14 @@ MonoBehaviour:
       LimitTowerColor: 1
       ColorTargetsPerWindow: 3
     Progression:
-      RapidFireMultiplier: 1.22
-      DeepInkDamageMultiplier: 1.18
-      DeepInkHealthMultiplier: 1.25
+      RapidFireMultiplier: 1.28
+      DeepInkDamageMultiplier: 1.15
+      DeepInkHealthMultiplier: 1.2
       SalvageRefundBonus: 0.12
       SalvageSupplyMultiplier: 1
       SalvageWaveRewardMultiplier: 1.25
       RequireAssignedEnemyRewards: 1
-      SalvageImmediateInk: 60
+      SalvageImmediateInk: 80
       MaximumRefundFraction: 0.95
       LegacyHealthGrowthPerWave: 0.06
       LegacyHealthGrowthStartsAfterWave: 3
@@ -354,8 +354,8 @@ MonoBehaviour:
       ReservedRadius: 1
     StructureDefinitions:
     - Kind: 0
-      Cost: 14
-      MaxHealth: 240
+      Cost: 16
+      MaxHealth: 200
       BuildSeconds: 0.35
       Range: 0
       Damage: 0
@@ -370,13 +370,13 @@ MonoBehaviour:
       SlowDuration: 0
       RepairPerSecond: 0
     - Kind: 4
-      Cost: 22
+      Cost: 18
       MaxHealth: 35
       BuildSeconds: 0.5
-      Range: 0.7
-      Damage: 9
-      ShotInterval: 0.65
-      Radius: 0.65
+      Range: 0.8
+      Damage: 12
+      ShotInterval: 0.6
+      Radius: 0.8
       FlightSeconds: 0.8
       MaxPierce: 1
       ConeAngleDegrees: 90
@@ -386,23 +386,23 @@ MonoBehaviour:
       SlowDuration: 0
       RepairPerSecond: 0
     - Kind: 9
-      Cost: 30
+      Cost: 22
       MaxHealth: 55
       BuildSeconds: 0.8
       Range: 0
       Damage: 0
       ShotInterval: 0
-      Radius: 0.7
+      Radius: 1
       FlightSeconds: 0.8
       MaxPierce: 0
       ConeAngleDegrees: 90
       MaxTargets: 8
       JumpRange: 0
-      SlowSpeedMultiplier: 0.65
-      SlowDuration: 0.3
+      SlowSpeedMultiplier: 0.6
+      SlowDuration: 0.6
       RepairPerSecond: 0
     - Kind: 10
-      Cost: 80
+      Cost: 65
       MaxHealth: 70
       BuildSeconds: 2
       Range: 5
@@ -416,7 +416,7 @@ MonoBehaviour:
       JumpRange: 0
       SlowSpeedMultiplier: 1
       SlowDuration: 0
-      RepairPerSecond: 8
+      RepairPerSecond: 6
     MaterialDefinitions:
     - CostMultiplier: 1
       HealthMultiplier: 1
@@ -501,8 +501,8 @@ MonoBehaviour:
       VisualScale: 3.5
       Reward: 3
     Waves:
-    - InkGrant: 140
-      Count: 28
+    - InkGrant: 120
+      Count: 30
       SpawnInterval: 0.55
       RunnerFraction: 0
       GnawerFraction: 0
@@ -513,9 +513,9 @@ MonoBehaviour:
       HatchedFraction: 0
       Sides: 15
       Title: "\u041F\u0435\u0440\u0432\u044B\u0439 \u043D\u0430\u0442\u0438\u0441\u043A"
-    - InkGrant: 160
-      Count: 38
-      SpawnInterval: 0.505
+    - InkGrant: 145
+      Count: 42
+      SpawnInterval: 0.51
       RunnerFraction: 0.22
       GnawerFraction: 0
       SpitterFraction: 0
@@ -525,9 +525,9 @@ MonoBehaviour:
       HatchedFraction: 0
       Sides: 15
       Title: "\u0411\u044B\u0441\u0442\u0440\u044B\u0439 \u043D\u0430\u043B\u0451\u0442"
-    - InkGrant: 180
-      Count: 50
-      SpawnInterval: 0.46
+    - InkGrant: 170
+      Count: 54
+      SpawnInterval: 0.47
       RunnerFraction: 0.22
       GnawerFraction: 0.08
       SpitterFraction: 0.04
@@ -537,62 +537,62 @@ MonoBehaviour:
       HatchedFraction: 0
       Sides: 15
       Title: "\u0413\u0440\u044B\u0437\u0443\u043D\u044B \u043D\u0430\u0441\u0442\u0443\u043F\u0430\u044E\u0442"
-    - InkGrant: 200
-      Count: 64
-      SpawnInterval: 0.415
+    - InkGrant: 195
+      Count: 68
+      SpawnInterval: 0.43
       RunnerFraction: 0.24
       GnawerFraction: 0.1
       SpitterFraction: 0.06
-      BruteFraction: 0.04
+      BruteFraction: 0.03
       BulwarkFraction: 0
       OutlinedFraction: 0.18
       HatchedFraction: 0
       Sides: 15
       Title: "\u0422\u044F\u0436\u0451\u043B\u0430\u044F \u043F\u043E\u0441\u0442\u0443\u043F\u044C"
     - InkGrant: 220
-      Count: 80
-      SpawnInterval: 0.37
+      Count: 84
+      SpawnInterval: 0.39
       RunnerFraction: 0.25
-      GnawerFraction: 0.12
-      SpitterFraction: 0.08
-      BruteFraction: 0.05
-      BulwarkFraction: 0.06
+      GnawerFraction: 0.11
+      SpitterFraction: 0.07
+      BruteFraction: 0.04
+      BulwarkFraction: 0.05
       OutlinedFraction: 0.24
       HatchedFraction: 0.04
       Sides: 15
       Title: "\u0429\u0438\u0442\u043E\u043D\u043E\u0441\u0446\u044B"
-    - InkGrant: 240
-      Count: 100
-      SpawnInterval: 0.325
+    - InkGrant: 245
+      Count: 104
+      SpawnInterval: 0.35
       RunnerFraction: 0.25
-      GnawerFraction: 0.13
-      SpitterFraction: 0.1
-      BruteFraction: 0.06
-      BulwarkFraction: 0.08
+      GnawerFraction: 0.12
+      SpitterFraction: 0.08
+      BruteFraction: 0.05
+      BulwarkFraction: 0.07
       OutlinedFraction: 0.3
       HatchedFraction: 0.08
       Sides: 15
       Title: "\u041A\u0440\u0443\u0433\u043E\u0432\u0430\u044F \u0430\u0442\u0430\u043A\u0430"
-    - InkGrant: 260
-      Count: 125
-      SpawnInterval: 0.28
+    - InkGrant: 270
+      Count: 128
+      SpawnInterval: 0.31
       RunnerFraction: 0.25
-      GnawerFraction: 0.15
-      SpitterFraction: 0.12
-      BruteFraction: 0.08
-      BulwarkFraction: 0.1
+      GnawerFraction: 0.13
+      SpitterFraction: 0.09
+      BruteFraction: 0.07
+      BulwarkFraction: 0.09
       OutlinedFraction: 0.35
       HatchedFraction: 0.12
       Sides: 15
       Title: "\u0427\u0435\u0440\u043D\u0438\u043B\u044C\u043D\u044B\u0439 \u043D\u0430\u0442\u0438\u0441\u043A"
-    - InkGrant: 280
-      Count: 155
-      SpawnInterval: 0.235
+    - InkGrant: 300
+      Count: 156
+      SpawnInterval: 0.27
       RunnerFraction: 0.25
-      GnawerFraction: 0.16
-      SpitterFraction: 0.12
-      BruteFraction: 0.1
-      BulwarkFraction: 0.12
+      GnawerFraction: 0.13
+      SpitterFraction: 0.1
+      BruteFraction: 0.08
+      BulwarkFraction: 0.1
       OutlinedFraction: 0.35
       HatchedFraction: 0.16
       Sides: 15
@@ -645,13 +645,13 @@ MonoBehaviour:
       UnlockGold: 90
       VisualStyle: 0
       Capacity: 14
-      BaseCost: 28
+      BaseCost: 26
       MountCount: 2
       UpgradeSlotCount: 2
       ArmorSlotCount: 1
       FeedCapacity: 1.6
       BaseHealth: 55
-      HealthMultiplier: 1.3
+      HealthMultiplier: 1.5
       BuildSeconds: 0.45
       SecondaryBuildSeconds: 0.4
       PrimaryMountPivotX: 0
@@ -678,7 +678,7 @@ MonoBehaviour:
       UnlockGold: 90
       VisualStyle: 0
       Capacity: 16
-      BaseCost: 20
+      BaseCost: 18
       MountCount: 1
       UpgradeSlotCount: 3
       ArmorSlotCount: 1
@@ -711,13 +711,13 @@ MonoBehaviour:
       UnlockGold: 90
       VisualStyle: 0
       Capacity: 22
-      BaseCost: 34
+      BaseCost: 28
       MountCount: 3
       UpgradeSlotCount: 1
       ArmorSlotCount: 1
-      FeedCapacity: 1.8
+      FeedCapacity: 2.4
       BaseHealth: 55
-      HealthMultiplier: 1
+      HealthMultiplier: 1.4
       BuildSeconds: 0.65
       SecondaryBuildSeconds: 0.4
       PrimaryMountPivotX: 0
@@ -795,12 +795,12 @@ MonoBehaviour:
       Attack: 1
       Stats:
         Kind: 2
-        Cost: 65
+        Cost: 60
         MaxHealth: 50
         BuildSeconds: 1.9
-        Range: 12
-        Damage: 18
-        ShotInterval: 1.05
+        Range: 12.5
+        Damage: 20
+        ShotInterval: 1
         Radius: 0.38
         FlightSeconds: 0.8
         MaxPierce: 7
@@ -835,12 +835,12 @@ MonoBehaviour:
       Attack: 2
       Stats:
         Kind: 3
-        Cost: 90
+        Cost: 85
         MaxHealth: 60
         BuildSeconds: 2.4
         Range: 18
-        Damage: 25
-        ShotInterval: 1.8
+        Damage: 28
+        ShotInterval: 1.9
         Radius: 2.4
         FlightSeconds: 0.8
         MaxPierce: 1
@@ -875,12 +875,12 @@ MonoBehaviour:
       Attack: 3
       Stats:
         Kind: 5
-        Cost: 70
+        Cost: 55
         MaxHealth: 55
         BuildSeconds: 1.6
         Range: 6
-        Damage: 10
-        ShotInterval: 1
+        Damage: 14
+        ShotInterval: 0.85
         Radius: 0.1
         FlightSeconds: 0.8
         MaxPierce: 1
@@ -917,12 +917,12 @@ MonoBehaviour:
       Attack: 4
       Stats:
         Kind: 6
-        Cost: 65
+        Cost: 68
         MaxHealth: 55
         BuildSeconds: 1.6
         Range: 10
         Damage: 12
-        ShotInterval: 0.85
+        ShotInterval: 0.9
         Radius: 0.1
         FlightSeconds: 0.8
         MaxPierce: 1
@@ -959,22 +959,22 @@ MonoBehaviour:
       Attack: 0
       Stats:
         Kind: 7
-        Cost: 35
+        Cost: 28
         MaxHealth: 55
         BuildSeconds: 1.2
         Range: 9
-        Damage: 4
-        ShotInterval: 0.65
+        Damage: 5
+        ShotInterval: 0.6
         Radius: 0.1
         FlightSeconds: 0.8
         MaxPierce: 1
         ConeAngleDegrees: 90
         MaxTargets: 8
         JumpRange: 0
-        SlowSpeedMultiplier: 0.8
+        SlowSpeedMultiplier: 0.6
         SlowDuration: 2
         RepairPerSecond: 0
-      Load: 3
+      Load: 2
       AssemblyCredit: 16
       MinimumLineRadius: 0
       MinimumRadialRange: 0
@@ -1003,13 +1003,13 @@ MonoBehaviour:
       Attack: 6
       Stats:
         Kind: 8
-        Cost: 30
+        Cost: 24
         MaxHealth: 55
         BuildSeconds: 1.2
         Range: 9
         Damage: 0
-        ShotInterval: 2
-        Radius: 1.5
+        ShotInterval: 1.4
+        Radius: 2
         FlightSeconds: 0.8
         MaxPierce: 1
         ConeAngleDegrees: 90
@@ -1018,7 +1018,7 @@ MonoBehaviour:
         SlowSpeedMultiplier: 1
         SlowDuration: 0
         RepairPerSecond: 0
-      Load: 3
+      Load: 2
       AssemblyCredit: 16
       MinimumLineRadius: 0
       MinimumRadialRange: 0
@@ -1040,8 +1040,8 @@ MonoBehaviour:
       Order: 4
       UnlockGold: 0
       VisualStyle: 0
-      Load: 3
-      Cost: 18
+      Load: 2
+      Cost: 14
       BuildSeconds: 0.25
       Repeatable: 0
       ExclusiveGroup: 
@@ -1057,7 +1057,7 @@ MonoBehaviour:
         Operation: 0
         Scope: 0
         MountIndex: 0
-        Value: 0.25
+        Value: 0.3
       LegacyModule: 1
       SlotKind: 1
     - Id: module.feed
@@ -1074,7 +1074,7 @@ MonoBehaviour:
       UnlockGold: 60
       VisualStyle: 0
       Load: 2
-      Cost: 16
+      Cost: 10
       BuildSeconds: 0.25
       Repeatable: 0
       ExclusiveGroup: 
@@ -1085,7 +1085,7 @@ MonoBehaviour:
         Operation: 2
         Scope: 1
         MountIndex: 0
-        Value: 1.15
+        Value: 1.25
       LegacyModule: 2
       SlotKind: 0
     - Id: module.tracking
@@ -1101,8 +1101,8 @@ MonoBehaviour:
       Order: 7
       UnlockGold: 60
       VisualStyle: 0
-      Load: 2
-      Cost: 14
+      Load: 1
+      Cost: 8
       BuildSeconds: 0.25
       Repeatable: 0
       ExclusiveGroup: 
@@ -1133,7 +1133,7 @@ MonoBehaviour:
       UnlockGold: 60
       VisualStyle: 0
       Load: 2
-      Cost: 20
+      Cost: 14
       BuildSeconds: 0.25
       Repeatable: 0
       ExclusiveGroup: 
@@ -1149,10 +1149,16 @@ MonoBehaviour:
         Operation: 2
         Scope: 1
         MountIndex: 0
-        Value: 1.2
+        Value: 1.1
       LegacyModule: 8
       SlotKind: 0
-    Effects: []
+    Effects:
+    - Id: effect.stapler.slow
+      Kind: 1
+      Duration: 2
+      Strength: 0.6
+      TickSeconds: 0
+      IgnoresDefense: 0
     Templates:
     - Id: template.chassis.standard
       DisplayName: "\u041E\u0431\u044B\u0447\u043D\u043E\u0435 \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u0435"

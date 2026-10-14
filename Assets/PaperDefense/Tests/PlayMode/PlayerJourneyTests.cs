@@ -131,5 +131,18 @@ namespace PaperDefense.Tests
             Assert.That(game.Run.InWorkshop, Is.True);
             Assert.That(root.GetComponentInChildren<WorkshopHud>(true).PresentationVisible, Is.False);
         }
+
+        [UnityTest] public IEnumerator UpgradeChoicesDisplayAmountsFromTheActiveRules()
+        {
+            Assert.That(game.StartBattle(), Is.True);
+            game.Navigate(PlayerPage.Upgrades); yield return null;
+            var rules = game.Run.Session.Balance.Progression;
+            var labels = new System.Collections.Generic.List<string>();
+            foreach (var label in root.GetComponentsInChildren<Text>()) labels.Add(label.text);
+            Assert.That(labels, Does.Contain("Темп стрельбы +" + Mathf.RoundToInt((rules.RapidFireMultiplier - 1) * 100) + "%"));
+            Assert.That(labels, Does.Contain("Сразу +" + rules.SalvageImmediateInk + " штрихов\nНаграда волн +" +
+                Mathf.RoundToInt((rules.SalvageWaveRewardMultiplier - 1) * 100) + "%\nВозврат +" + Mathf.RoundToInt(rules.SalvageRefundBonus * 100) + " п.п."));
+            Assert.That(Find("Choose upgrade 2"), Is.Not.Null);
+        }
     }
 }

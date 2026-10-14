@@ -181,6 +181,19 @@ namespace PaperDefense.Core
         public readonly int Count,Sides,InkGrant;public readonly float SpawnInterval,RunnerFraction,GnawerFraction,SpitterFraction,BruteFraction,BulwarkFraction,OutlinedFraction,HatchedFraction;public readonly string Title;
         internal WaveView(WaveDefinition d){Count=d.Count;Sides=d.Sides;InkGrant=d.InkGrant;SpawnInterval=d.SpawnInterval;RunnerFraction=d.RunnerFraction;GnawerFraction=d.GnawerFraction;SpitterFraction=d.SpitterFraction;BruteFraction=d.BruteFraction;BulwarkFraction=d.BulwarkFraction;OutlinedFraction=d.OutlinedFraction;HatchedFraction=d.HatchedFraction;Title=d.Title;}
     }
+    public readonly struct RunUpgradeRulesView
+    {
+        public readonly float RapidFireMultiplier, DeepInkDamageMultiplier, DeepInkHealthMultiplier;
+        public readonly float SalvageWaveRewardMultiplier, SalvageRefundBonus;
+        public readonly int SalvageImmediateInk;
+        internal RunUpgradeRulesView(ProgressionRules rules)
+        {
+            RapidFireMultiplier = rules.RapidFireMultiplier; DeepInkDamageMultiplier = rules.DeepInkDamageMultiplier;
+            DeepInkHealthMultiplier = rules.DeepInkHealthMultiplier; SalvageWaveRewardMultiplier = rules.SalvageWaveRewardMultiplier;
+            SalvageRefundBonus = rules.SalvageRefundBonus; SalvageImmediateInk = rules.SalvageImmediateInk;
+        }
+    }
+
     public sealed class GameBalanceView
     {
         readonly GameBalance source;
@@ -201,6 +214,7 @@ namespace PaperDefense.Core
         public bool EnableEnemyMechanics=>source.EnableEnemyMechanics;public bool EnableInkWells=>source.EnableInkWells;
         public GameBalancePreset Preset=>source.Preset;
         public bool DynamicFeed=>source.Construction.DynamicFeed;
+        public RunUpgradeRulesView Progression=>new RunUpgradeRulesView(source.Progression);
         public bool LimitTowerColor=>source.Effects.LimitTowerColor;
         public float ColorWindowSeconds=>source.Effects.ColorWindowSeconds;
         public int ColorTargetsPerWindow=>source.Effects.ColorTargetsPerWindow;

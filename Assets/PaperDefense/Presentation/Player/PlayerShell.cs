@@ -191,11 +191,18 @@ namespace PaperDefense.Presentation
             var panel = Modal(ui.T("upgrade_title"));
             ui.Label(panel, ui.T("upgrade_hint"), new Rect(40, 105, 660, 45), 20, PlayerUi.Muted, alignment: TextAnchor.MiddleCenter);
             PlayerIcon[] icons = { PlayerIcon.Fast, PlayerIcon.Drop, PlayerIcon.Restart };
+            var rules = game.Run.Session.Balance.Progression;
+            string[] details = {
+                ui.T("upgrade_stats_0", Mathf.RoundToInt((rules.RapidFireMultiplier - 1) * 100)),
+                ui.T("upgrade_stats_1", Mathf.RoundToInt((rules.DeepInkDamageMultiplier - 1) * 100), Mathf.RoundToInt((rules.DeepInkHealthMultiplier - 1) * 100)),
+                ui.T("upgrade_stats_2", rules.SalvageImmediateInk, Mathf.RoundToInt((rules.SalvageWaveRewardMultiplier - 1) * 100), Mathf.RoundToInt(rules.SalvageRefundBonus * 100))
+            };
             for (int i = 0; i < 3; i++)
             {
                 int selected = i;
-                ui.IconButton(panel, "Choose upgrade " + i, new Rect(65 + 225 * i, 195, 160, 120), icons[i], ui.T("upgrade_" + i), () => game.ChooseUpgrade((RunUpgrade)selected), true);
-                ui.Label(panel, ui.T("upgrade_" + i), new Rect(45 + 225 * i, 335, 200, 118), 23, title: true, alignment: TextAnchor.UpperCenter);
+                ui.IconButton(panel, "Choose upgrade " + i, new Rect(65 + 225 * i, 195, 160, 120), icons[i], ui.T("upgrade_" + i).Replace('\n', ' '), () => game.ChooseUpgrade((RunUpgrade)selected), true);
+                ui.Label(panel, ui.T("upgrade_" + i), new Rect(45 + 225 * i, 330, 200, 64), 23, title: true, alignment: TextAnchor.UpperCenter);
+                ui.Label(panel, details[i], new Rect(45 + 225 * i, 400, 200, 100), 17, PlayerUi.Muted, alignment: TextAnchor.UpperCenter);
             }
         }
 
