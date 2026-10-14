@@ -67,7 +67,7 @@ namespace PaperDefense.Tests
             var entries = hub.catalog.Scenes;
             string[] savedPaths = AssetDatabase.FindAssets("t:Scene", new[] { TestSceneRoot.TrimEnd('/') })
                 .Select(AssetDatabase.GUIDToAssetPath).ToArray();
-            Assert.That(entries.Count, Is.EqualTo(26));
+            Assert.That(entries.Count, Is.EqualTo(27));
             Assert.That(entries.Select(entry => entry.ScenePath), Is.EquivalentTo(savedPaths),
                 "Every independently saved mechanics and art stand must be reachable from the hub.");
             Assert.That(entries.Select(entry => entry.Id).Distinct().Count(), Is.EqualTo(entries.Count));
@@ -100,7 +100,7 @@ namespace PaperDefense.Tests
         [UnityTest] public IEnumerator EveryHubCardOpensItsSavedStandAndReturnsWithOneSceneAndNoRetainedRuntime()
         {
             var entries = hub.catalog.Scenes.ToArray();
-            Assert.That(entries.Length, Is.EqualTo(26));
+            Assert.That(entries.Length, Is.EqualTo(27));
             foreach (var entry in entries)
             {
                 var outgoingRoots = SceneManager.GetActiveScene().GetRootGameObjects();
@@ -141,7 +141,8 @@ namespace PaperDefense.Tests
                 else
                 {
                     Assert.That(mechanics, Is.Empty, entry.Id);
-                    Assert.That(art.Length, Is.EqualTo(1), entry.Id);
+                    int playerArt = Object.FindObjectsByType<PlayerAssetStand>(FindObjectsInactive.Include, FindObjectsSortMode.None).Length;
+                    Assert.That(art.Length + playerArt, Is.EqualTo(1), entry.Id);
                     Assert.That(Object.FindObjectsByType<RunController>(FindObjectsInactive.Include, FindObjectsSortMode.None), Is.Empty, entry.Id);
                     Assert.That(Object.FindObjectsByType<PaperDefenseBootstrap>(FindObjectsInactive.Include, FindObjectsSortMode.None), Is.Empty, entry.Id);
                 }

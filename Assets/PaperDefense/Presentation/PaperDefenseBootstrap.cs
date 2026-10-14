@@ -27,6 +27,7 @@ namespace PaperDefense.Presentation
         public RunController Controller { get; private set; }
         public DrawingInput Drawing { get; private set; }
         public NotebookWorldView View { get; private set; }
+        public Rect? ViewportOverride { get; set; }
         internal Func<string[]> ArgumentProvider=Environment.GetCommandLineArgs;
         internal IWorkshopProfileStore ProfileStoreOverride;
 
@@ -100,7 +101,8 @@ namespace PaperDefense.Presentation
         {
             float scale=Mathf.Min(Screen.width/1600f,Screen.height/1000f);
             float x=(Screen.width-1600*scale)*.5f,y=(Screen.height-1000*scale)*.5f;
-            if (standMode && !showBattleHud && !showWorkshopHud)
+            if (ViewportOverride.HasValue) worldCamera.rect = ViewportOverride.Value;
+            else if (standMode && !showBattleHud && !showWorkshopHud)
             {
                 float standScale = Mathf.Max(.65f, Mathf.Min(Screen.width / 1280f, Screen.height / 800f));
                 float bottom = Mathf.Max(.04f, (60 * standScale + 12) / Screen.height);

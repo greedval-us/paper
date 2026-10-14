@@ -28,6 +28,7 @@ namespace PaperDefense.Core
             resolver.RequireContract("art.enemy.runner", 0, Array.Empty<int>());
             resolver.RequireContract("art.enemy.spitter", 0, Array.Empty<int>());
             resolver.RequireContract("art.enemy_variant", 2, Array.Empty<int>());
+            resolver.RequireContract("art.hint.assets", 0, Array.Empty<int>());
             resolver.RequireContract("art.hint.effects", 0, Array.Empty<int>());
             resolver.RequireContract("art.hint.enemies", 0, Array.Empty<int>());
             resolver.RequireContract("art.hint.towers", 0, Array.Empty<int>());
@@ -81,6 +82,7 @@ namespace PaperDefense.Core
             resolver.RequireContract("art.tier.hatched", 0, Array.Empty<int>());
             resolver.RequireContract("art.tier.outlined", 0, Array.Empty<int>());
             resolver.RequireContract("art.tier.sketch", 0, Array.Empty<int>());
+            resolver.RequireContract("art.title.assets", 0, Array.Empty<int>());
             resolver.RequireContract("art.title.effects", 0, Array.Empty<int>());
             resolver.RequireContract("art.title.enemies", 0, Array.Empty<int>());
             resolver.RequireContract("art.title.towers", 0, Array.Empty<int>());

@@ -15,6 +15,18 @@ namespace PaperDefense.Presentation
         public UserTextResolver TextResolver { get; set; }
         public bool ReserveStandControls { get; set; }
         public WorkshopHudMode Mode { get; set; }
+        public Action StartRequested { get; set; }
+        bool presentationVisible = true;
+        public bool PresentationVisible
+        {
+            get => presentationVisible;
+            set { presentationVisible = value; if (canvasObject != null) canvasObject.SetActive(value && run.InWorkshop); }
+        }
+        public void SetPlayerLayout()
+        {
+            root.localScale = Vector3.one * .9f;
+            root.anchoredPosition = new Vector2(0, -35);
+        }
         string Resolve(string value) => GameText.Resolve(TextResolver, value);
         const int AlbumRowsPerPage = 8;
         RunController run;
@@ -108,7 +120,7 @@ namespace PaperDefense.Presentation
         void Update()
         {
             if (run == null) return;
-            canvasObject.SetActive(run.InWorkshop);
+            canvasObject.SetActive(run.InWorkshop && PresentationVisible);
             if (!run.InWorkshop) { MortarFootprintEditor?.Close(); return; }
             refresh -= Time.unscaledDeltaTime;
             if (refresh <= 0) { refresh = .15f; Refresh(); }
@@ -428,7 +440,10 @@ namespace PaperDefense.Presentation
                 int slot = i;
                 Button(root, "Assign slot " + i, new Rect(32 + i * 306, 748, 294, 74), "", () => SetStatus(run.AssignBlueprint(slot, Draft.Id, out var reason) ? UserText.Message("copy.70dd786b46cf9291", (slot + 1)) : reason), out slotLabels[i]);
             }
-            Button(root, "Start run", new Rect(1262, 748, 307, 74), UserText.Message("copy.bf1131aabeef6a41"), () => SetStatus(run.StartRun(out var reason) ? UserText.Message("copy.3eade8b0825d164d") : reason));
+            Button(root, "Start run", new Rect(1262, 748, 307, 74), UserText.Message("copy.bf1131aabeef6a41"), () => {
+                if (StartRequested != null) StartRequested();
+                else SetStatus(run.StartRun(out var reason) ? UserText.Message("copy.3eade8b0825d164d") : reason);
+            });
             var diagram = new GameObject("Pre-run map", typeof(RectTransform), typeof(CanvasRenderer), typeof(WorkshopMapSketch));
             diagram.transform.SetParent(root, false); Place(diagram.GetComponent<RectTransform>(), new Rect(35, 839, 295, 80));
             map = diagram.GetComponent<WorkshopMapSketch>(); map.raycastTarget = false;

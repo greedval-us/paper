@@ -6,7 +6,9 @@ Tower defense на тетрадном листе, **Unity 6000.5.7f1**. Собе
 
 Для разработки: [реестр действующих механик](docs/Current-Mechanics.md), [контракты и отключение механик](docs/Mechanics-Contracts.md), [каталог и баланс](docs/Content-Architecture.md).
 
-Открой существующую сцену `Assets/PaperDefense/Scenes/PaperDefense.unity` и нажми **Play**. Начальный экран — мастерская. Пересоздавать сцену через меню не требуется.
+Для игры открой `Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity` или меню **Paper Defense → Game → Open player game**, затем **Play**. Новый вход: меню → карта → подготовка → бой → результат. [Руководство игровой сборки](docs/Player-Game.md).
+
+Прежняя `Assets/PaperDefense/Scenes/PaperDefense.unity` с началом в мастерской и все сцены стендов сохранены для разработки. Основная Windows-сборка создаётся через **Paper Defense → Game → Build player game** в `Builds/PlayerGame/PaperDefense.exe`.
 
 Для запуска Player без чтения и записи своего профиля добавьте `-paper-memory-only`. Сборка Player и результаты проверки текущего среза перечислены в [отчёте аудита](docs/validation/2026-10-13-mechanics-cleanup/report.md).
 
@@ -22,7 +24,7 @@ Tower defense на тетрадном листе, **Unity 6000.5.7f1**. Собе
 
 Детали: пулемёт, линейное перо, мортира, веер, рикошет, скрепкострел и автоматическая промокашка. Оборудование: броня, подача, наведение и направляющая. Сочетания ограничены креплениями и нагрузкой; строительство экземпляров оплачивается штрихами.
 
-Основания, зоны огня и проверенные комбинации описаны в [модульной системе](docs/Modular-Towers.md). Для проверки откройте `Paper Defense → Validation → Open mechanics hub` и нажмите Play: [общий экран стендов](docs/Mechanics-Hub.md) позволяет переходить между 23 сценами механик и тремя сценами графики. Кнопка «К стендам» возвращает в меню. Перечень механик и управление — в [руководстве стендов](docs/Mechanics-Test-Scenes.md). Тексты интерфейса и правил находятся в `Assets/PaperDefense/Resources/Text/ru.asset`, метаданные деталей — в assets каталога.
+Основания, зоны огня и проверенные комбинации описаны в [модульной системе](docs/Modular-Towers.md). Для проверки откройте `Paper Defense → Validation → Open mechanics hub` и нажмите Play: [общий экран стендов](docs/Mechanics-Hub.md) позволяет переходить между 23 сценами механик и четырьмя сценами графики. Кнопка «К стендам» возвращает в меню. Перечень механик и управление — в [руководстве стендов](docs/Mechanics-Test-Scenes.md). Тексты интерфейса и правил находятся в `Assets/PaperDefense/Resources/Text/ru.asset`, метаданные деталей — в assets каталога.
 
 ## Управление в бою
 
@@ -46,7 +48,7 @@ Tower defense на тетрадном листе, **Unity 6000.5.7f1**. Собе
 
 ## Баланс и сохранение
 
-Основная сцена и `NotebookGame.prefab` используют `Assets/PaperDefense/Configuration/TargetNotebookBalance.asset` → `Configuration/Content/Target.asset`. Исторический `NotebookBalance.asset` сохранён для сравнений. Оба преобразуются в независимые снимки ядра.
+Игровая сцена использует отдельные `Configuration/Game/PlayerBalance.asset` → `PlayerRules.asset` → `PlayerContent.asset`. Прежняя сцена и `NotebookGame.prefab` используют `Assets/PaperDefense/Configuration/TargetNotebookBalance.asset` → `Configuration/Content/Target.asset`. Исторический `NotebookBalance.asset` сохранён для сравнений. Все конфигурации преобразуются в независимые снимки ядра; создание и сборка игровой сцены не копируют повторно экспериментальные значения.
 
 Целевые стартовые гипотезы: 720 штрихов, конечные выплаты за врагов и волны, без дохода за ожидание или ранний запуск. Материал повышает живучесть, сохраняя урон; броня даёт 25% защиты. Работающие крепления делят подачу; цвет всей башни ограничен тремя реально поражёнными целями за 1 с. Формулы — в [словаре](docs/Balance-Parameters.md), сравнения — в [отчёте баланса](docs/validation/2026-10-12-stage5-balance.md). [Excel механик и баланса](docs/balance/PaperDefense-Mechanics-Balance.xlsx) строится из рабочих assets; [обновление книги](Tools/BalanceWorkbook/README.md) начинается с экспорта из Unity.
 
@@ -62,4 +64,4 @@ EditMode/PlayMode запускаются через Unity Test Runner. Сост�
 
 Доступны одна карта и восьмиволновая партия. Звук, дополнительные карты и сохранение незаконченного боя остаются вне этого среза. Числа требуют дальнейших игровых тестов.
 
-Ассеты и анимации по концептам, исходники и три отдельных художественных стенда (24–26): [руководство оформления](docs/Notebook-Art.md).
+Ассеты и анимации по концептам, исходники и четыре отдельных художественных стенда (24–27): [руководство оформления](docs/Notebook-Art.md).

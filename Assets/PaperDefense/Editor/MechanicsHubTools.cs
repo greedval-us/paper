@@ -17,8 +17,8 @@ namespace PaperDefense.Editor
     {
         public const string CatalogAssetPath = "Assets/PaperDefense/Resources/Validation/MechanicsSceneCatalog.asset";
         const string TextAssetPath = "Assets/PaperDefense/Resources/Text/ru.asset";
-        static readonly string[] ArtIds = { "tower_art", "enemy_animation", "ink_effects" };
-        static readonly string[] ArtTextIds = { "towers", "enemies", "effects" };
+        static readonly string[] ArtIds = { "tower_art", "enemy_animation", "ink_effects", "player_assets" };
+        static readonly string[] ArtTextIds = { "towers", "enemies", "effects", "assets" };
         static readonly HashSet<string> GroupKeys = new HashSet<string>(StringComparer.Ordinal) {
             "hub.group.workshop", "hub.group.weapons", "hub.group.modules",
             "hub.group.enemies", "hub.group.systems", "hub.group.art"

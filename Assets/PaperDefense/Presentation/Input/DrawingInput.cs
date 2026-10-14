@@ -14,6 +14,7 @@ namespace PaperDefense.Presentation
     {
         public UserTextResolver TextResolver { get; set; }
         public bool ConstructionOnly { get; set; }
+        public bool HandleSessionHotkeys { get; set; } = true;
         string Resolve(string value) => GameText.Resolve(TextResolver, value);
         public StructureKind Tool { get; private set; } = StructureKind.Wall;
         public MaterialTier Tier { get; private set; } = MaterialTier.Pencil;
@@ -311,10 +312,13 @@ namespace PaperDefense.Presentation
             if (k.bKey.wasPressedThisFrame) SelectMode(DrawingMode.Blotter);
             if (k.cKey.wasPressedThisFrame) SelectMode(DrawingMode.Paint);
             if (k.qKey.wasPressedThisFrame) SelectTier((MaterialTier)(((int)Tier + 1) % 3));
-            if (k.spaceKey.wasPressedThisFrame) run.TogglePause();
-            if (k.nKey.wasPressedThisFrame) run.NextWave();
-            if (k.fKey.wasPressedThisFrame) run.ToggleSpeed();
-            if (k.rKey.wasPressedThisFrame) run.Restart();
+            if (HandleSessionHotkeys)
+            {
+                if (k.spaceKey.wasPressedThisFrame) run.TogglePause();
+                if (k.nKey.wasPressedThisFrame) run.NextWave();
+                if (k.fKey.wasPressedThisFrame) run.ToggleSpeed();
+                if (k.rKey.wasPressedThisFrame) run.Restart();
+            }
             if (k.escapeKey.wasPressedThisFrame) Cancel();
             if (k.tabKey.wasPressedThisFrame) view.ShowRanges = !view.ShowRanges;
             if (k.pKey.wasPressedThisFrame && HasHover)

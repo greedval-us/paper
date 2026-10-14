@@ -143,3 +143,8 @@ MonoBehaviour:
     TitleKey: art.title.effects
     DescriptionKey: art.hint.effects
     GroupKey: hub.group.art
+  - Id: player_assets
+    ScenePath: Assets/PaperDefense/Scenes/Tests/27_PlayerAssets.unity
+    TitleKey: art.title.assets
+    DescriptionKey: art.hint.assets
+    GroupKey: hub.group.art
