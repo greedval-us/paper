@@ -15,10 +15,11 @@ namespace PaperDefense.Presentation
         readonly Action<DrawingSnapshot> apply;
         readonly Func<TowerBlueprint, string> preview;
         readonly DrawingEditorContext context;
-        readonly UnityEngine.UI.Text message, rejectionMessage, partLabel, inkLabel, selectedStats, goal, help, zoomLabel, introduction, workingGeometry;
+        readonly UnityEngine.UI.Text message, rejectionMessage, partLabel, inkLabel, selectedStats, goal, help, zoomLabel, introduction, workingGeometry, statsHeading;
         readonly UnityEngine.UI.Button applyButton, undo, redo, grid, snap, geometry;
         FreeformTowerDesign previousDesign;
         TowerPreview? previousPreview;
+        TowerPreview? openingPreview;
         string previousHash, changeBinding, changeMessage;
         readonly RectTransform inkFill;
         readonly Dictionary<string, UnityEngine.UI.Button> parts = new Dictionary<string, UnityEngine.UI.Button>(StringComparer.Ordinal);
@@ -81,8 +82,8 @@ namespace PaperDefense.Presentation
             var inkTrack = DrawingWorkbenchUi.Box(panel.transform, "Drawing ink capacity", new Rect(1096, 180, 440, 12), new Color(.25f, .42f, .61f, .15f));
             inkFill = DrawingWorkbenchUi.Box(inkTrack, "Drawing ink used", new Rect(0, 0, 0, 12), NotebookPalette.Blue);
             ui.Label(panel.transform, "Drawing ink explanation", Copy("ink_note"), new Rect(1096, 199, 440, 26), 17);
-            ui.Label(panel.transform, "Drawing stats heading", Copy("stats_title"), new Rect(1096, 231, 440, 34), 22, NotebookPalette.Blue);
-            message = ui.Label(panel.transform, "Drawing live stats", "", new Rect(1096, 267, 440, 90), 20);
+            statsHeading = ui.Label(panel.transform, "Drawing stats heading", Copy("stats_title"), new Rect(1096, 231, 440, 34), 22, NotebookPalette.Blue);
+            message = ui.Label(panel.transform, "Drawing live stats", "", new Rect(1096, 267, 440, 90), 18);
             selectedStats = ui.Label(panel.transform, "Drawing selected mount stats", "", new Rect(1096, 359, 440, 100), 18);
             goal = ui.Label(panel.transform, "Drawing goal guidance", "", new Rect(1096, 465, 440, 82), 19);
             stencils = new DrawingStencilBrowser(panel.transform, ui, context, Insert, Feedback);
@@ -98,6 +99,7 @@ namespace PaperDefense.Presentation
             previousDesign = null; previousPreview = null; previousHash = changeBinding = changeMessage = null;
             var content = context?.Workshop?.Invoke()?.Content ?? blueprint.Content;
             blueprint = (content == null ? blueprint : blueprint.WithContent(content)).AsFreeform();
+            openingPreview = context?.Preview?.Invoke(blueprint);
             introduction.text = Resolve(Copy(blueprint.FreeformRuleVersion < FreeformTowerDesign.RuleVersion ? "upgrade" : "intro"));
             Session = new DrawingEditSession(blueprint, blueprint.Drawing); Canvas.Bind(Session);
             RebuildParts();
@@ -160,13 +162,20 @@ namespace PaperDefense.Presentation
             {
                 var stats = resolved.Value;
                 message.text = Resolve(UserText.Message("drawing.workbench.stats", stats.Health, stats.Load, stats.Capacity, stats.Cost, stats.BuildSeconds, stats.Range, stats.FireRate));
+                bool comparable=openingPreview.HasValue&&openingPreview.Value.Valid&&stats.Valid;
+                statsHeading.text=Resolve(comparable?UserText.Message("change.opening"):Copy("stats_title"));
+                if(comparable)message.text=Resolve(DesignChangeFeedback.Tower(openingPreview.Value,stats));
                 if (DrawingBindings.TryMount(Canvas.SelectedBinding, out int slot) && stats.Weapons != null)
                     foreach (var mount in stats.Weapons) if (mount.SlotIndex == slot)
+                    {
                         selectedStats.text = Resolve(UserText.Message("drawing.workbench.mount_stats", slot + 1, mount.Damage, mount.Range, mount.FireRate, mount.Interval));
+                        var original=comparable?DesignChangeFeedback.FindMount(openingPreview.Value,slot):null;
+                        if(original.HasValue)selectedStats.text=Resolve(DesignChangeFeedback.Mount(original.Value,mount));
+                    }
                 if (stats.FeedMultiplier > 0 && stats.FeedMultiplier < .999f)
                     selectedStats.text += "\n" + Resolve(UserText.Message("drawing.workbench.feed", stats.FeedMultiplier));
             }
-            else { message.text = Resolve(preview != null ? preview(candidate) : design.Message); }
+            else { statsHeading.text=Resolve(Copy("stats_title"));message.text = Resolve(preview != null ? preview(candidate) : design.Message); }
             goal.text = Resolve(Copy(Canvas.SelectedBinding == DrawingBindings.Base ? "body_goal" : DrawingBindings.TryMount(Canvas.SelectedBinding, out _) ? "barrel_goal" : "decoration_goal"));
             RefreshGeometry(candidate, design, resolved);
             help.text = Resolve(Copy(Canvas.Tool == DrawingTool.Pencil ? "pencil_hint" : Canvas.Tool == DrawingTool.Eraser ? "eraser_hint" : Canvas.Tool == DrawingTool.Move ? "move_hint" : "shape_hint"));
@@ -199,7 +208,11 @@ namespace PaperDefense.Presentation
                 else if (DrawingBindings.TryMount(binding, out int mount))
                 {
                     var before = previousDesign.GetBarrel(mount); var after = design.GetBarrel(mount);
-                    if (before != null && after != null) changeMessage = UserText.Message("drawing.workbench.barrel_change",
+                    var oldStats=previousPreview.HasValue?DesignChangeFeedback.FindMount(previousPreview.Value,mount):null;
+                    var newStats=resolved.HasValue?DesignChangeFeedback.FindMount(resolved.Value,mount):null;
+                    if(oldStats.HasValue&&newStats.HasValue)
+                        changeMessage=UserText.Message("drawing.workbench.barrel_change",Change(oldStats.Value.Range,newStats.Value.Range),Change(oldStats.Value.Interval,newStats.Value.Interval),Change(oldStats.Value.Damage,newStats.Value.Damage));
+                    else if (before != null && after != null && !resolved.HasValue) changeMessage = UserText.Message("drawing.workbench.barrel_change",
                         Change(before.RangeMultiplier, after.RangeMultiplier), Change(before.IntervalMultiplier, after.IntervalMultiplier), Change(before.DamageMultiplier, after.DamageMultiplier));
                 }
             }

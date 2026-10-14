@@ -177,7 +177,9 @@ namespace PaperDefense.Core
                         structure.Blueprint == null ? MortarFootprint.Circle : structure.Blueprint.GetMortarFootprint(mount), tick, events);
                     return;
                 case AttackKind.Cone:
-                    FireFan(structure, origin, target.Position, weapon, damage, payload, colorBudget, shots, tick, statistics, events);
+                    var volley=structure.Blueprint?.GetWeaponMount(mount)?.Volley;
+                    if(volley!=null)FireVolley(structure,origin,target.Position,range,volley,weapon,damage,payload,colorBudget,shots,tick,statistics,events);
+                    else FireFan(structure, origin, target.Position, weapon, damage, payload, colorBudget, shots, tick, statistics, events);
                     return;
                 case AttackKind.Ricochet:
                     FireRicochet(structure, origin, target, weapon, damage, payload, colorBudget, shots, tick, statistics, events);
@@ -326,6 +328,35 @@ namespace PaperDefense.Core
             events.Publish(tick, SimulationEventKind.ProjectileLaunched, from, to, projectile.Weapon,
                 projectile.Radius, projectile.Id, duration, projectile.ImpactFootprint, projectile.WeaponId,
                 projectile.SourceStructureId,projectile.MountSlotIndex,projectile.ActionId,clockSeconds,attack:weapon.Attack);
+        }
+
+        private void FireVolley(StructureState structure,Point2 origin,Point2 aim,float range,FanVolley volley,WeaponDefinition weapon,
+            float damage,ColorEffectPayload payload,TowerColorBudget colorBudget,List<ShotEvent> shots,long tick,RunStatistics statistics,SimulationEventBuffer events)
+        {
+            volley.Validate(weapon);var counts=volley.Allocate(weapon.VolleyPellets);
+            var victims=new EnemyState[counts.Length];var ends=new Point2[counts.Length];
+            // Resolve the entire volley against the same live targets before applying damage.
+            for(int guide=0;guide<counts.Length;guide++)
+            {
+                var direction=volley.Direction(guide,origin,aim);double best=range;
+                foreach(var enemy in targets)
+                {
+                    if(enemy.Health<=0)continue;
+                    double x=(double)enemy.Position.X-origin.X,y=(double)enemy.Position.Y-origin.Y;
+                    double along=x*direction.X+y*direction.Y,side=x*direction.Y-y*direction.X;
+                    double radius=weapon.VolleyHitRadius,inside=radius*radius-side*side;
+                    if(inside<0||along<0)continue;
+                    double distance=Math.Max(0,along-Math.Sqrt(inside));
+                    if(distance>best||distance==best&&victims[guide]!=null&&enemy.Id>=victims[guide].Id)continue;
+                    best=distance;victims[guide]=enemy;
+                }
+                ends[guide]=new Point2(origin.X+direction.X*(float)best,origin.Y+direction.Y*(float)best);
+            }
+            for(int guide=0;guide<counts.Length;guide++)for(int pellet=0;pellet<counts[guide];pellet++)
+            {
+                if(victims[guide]!=null)ApplyDamage(victims[guide],damage,weapon,payload,colorBudget,statistics);
+                PublishShot(origin,ends[guide],weapon,weapon.VolleyHitRadius,structure.Id,shots,tick,events);
+            }
         }
 
         private void FireFan(StructureState structure, Point2 origin, Point2 aim, WeaponDefinition weapon,

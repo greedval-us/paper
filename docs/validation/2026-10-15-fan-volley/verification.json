@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-15",
+  "unity": "6000.5.7f1",
+  "baseCommit": "9971977b937d0c80b4236c6c9f39c23ead389471",
+  "editMode": {
+    "jobId": "0162e721fcb7486887dbd917722a7e5d",
+    "passed": 937,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 97.7778677
+  },
+  "playMode": {
+    "jobId": "eed3c5ade69c4746a5273740c208c7c7",
+    "passed": 408,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 90.6066549
+  },
+  "python": {
+    "commands": [
+      "python -m unittest discover -s Tools -p 'test_*.py'",
+      "python -m unittest discover -s Tools/tests -p 'test_*.py'"
+    ],
+    "passed": 12,
+    "failed": 0
+  },
+  "newFileUserTextViolations": 0,
+  "textResources": 1103,
+  "compilerErrors": 0,
+  "screenshots": ["legacy.png", "directions.png", "duplicate.png"],
+  "captureSettings": "Assets/PaperDefense/Configuration/Game/PlayerBalance.asset",
+  "captureTextHeightOverflows": 0,
+  "campaignBalanceAssessed": false
+}

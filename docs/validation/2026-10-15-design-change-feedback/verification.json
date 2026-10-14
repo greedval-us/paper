@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-15",
+  "unity": "6000.5.7f1",
+  "baseCommit": "9971977b937d0c80b4236c6c9f39c23ead389471",
+  "preservesPreviousUncommittedStages": true,
+  "editMode": {
+    "jobId": "0bf9ca30cfe64cf6ba1df3be0d4add15",
+    "passed": 949,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 95.6473803
+  },
+  "playMode": {
+    "jobId": "6fff4c265b0441f6867cd52ff2394544",
+    "passed": 419,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 88.9487673
+  },
+  "newPlayModeTests": 8,
+  "python": {
+    "commands": [
+      "python -m unittest discover -s Tools -p 'test_*.py'",
+      "python -m unittest discover -s Tools/tests -p 'test_*.py'"
+    ],
+    "passed": 12,
+    "failed": 0
+  },
+  "userTextViolationsInChangedFiles": 0,
+  "textResources": 1161,
+  "compilerErrors": 0,
+  "screenshots": ["drawing.png", "mortar.png", "volley.png", "armor.png"],
+  "captureSettings": "Assets/PaperDefense/Configuration/Game/PlayerBalance.asset",
+  "captureTextHeightOverflows": 0,
+  "codeReview": "One incompatible-volley-baseline finding reproduced, fixed and confirmed by follow-up review."
+}

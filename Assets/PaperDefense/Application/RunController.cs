@@ -299,6 +299,11 @@ namespace PaperDefense.Application
             => MortarFootprintProbe.Compare(blueprint,mount,first,second,session.Balance,formation);
         public FootprintStudyReport CompareMortarForms(TowerBlueprint blueprint,int mount)
             => FootprintStudy.Run(blueprint,mount,session.Balance);
+        public ArmorProbeReport ProbeArmor(TowerBlueprint blueprint,int side=-1)=>ArmorProbe.Run(blueprint,session.Balance,side);
+        public float ArmorDefense(TowerBlueprint blueprint)=>TowerCatalog.Defense(blueprint,session.Balance);
+        public float MaximumStructureDefense=>session.Balance.Effects.MaximumDefense;
+        public FanVolleyProbeReport ProbeFanVolley(TowerBlueprint blueprint,int mount,FanFormation formation)
+            => FanVolleyProbe.Run(blueprint,mount,formation,session.Balance);
 
         public TrialComparison RunTrial(TowerBlueprint blueprint,TrialScenario scenario,bool counterfire=false,int budget=400)
         {

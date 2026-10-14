@@ -144,7 +144,7 @@ namespace PaperDefense.Core
                 if (TraceGlobBlocker(from, to, out var blocker,out var impact))
                 {
                     PublishGlobImpact(glob,impact);
-                    blocker.Health = Math.Max(0, blocker.Health - DamageRules.StructureDamage(glob.Damage, blocker, rules));
+                    blocker.Health = Math.Max(0, blocker.Health - DamageRules.StructureDamage(glob.Damage, blocker, rules, glob.From));
                     if (blocker.Health <= 0) RemoveStructure(blocker, true);
                     else RefreshHealthBand(blocker);
                     continue;

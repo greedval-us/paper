@@ -55,6 +55,8 @@ namespace PaperDefense.Presentation
                 BlueprintSketch.Line(vh, Point(world.xMin,at),Point(world.xMax,at),1,MeshPen.Alpha(NotebookPalette.Blue,.14f));
             }
             var frame = frames[index];
+            foreach(var shot in frame.Shots)
+                BlueprintSketch.Line(vh,Point(shot.From.X,shot.From.Y),Point(shot.To.X,shot.To.Y),2,MeshPen.Alpha(NotebookPalette.Blue,.55f));
             foreach (var tower in frame.Towers)
             {
                 BlueprintSketch.Ring(vh, Point(tower.Cell.X + .5f, tower.Cell.Y + .5f), 5, 3, NotebookPalette.Blue);

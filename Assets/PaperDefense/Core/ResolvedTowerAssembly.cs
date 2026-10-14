@@ -19,12 +19,14 @@ namespace PaperDefense.Core
             int genericBindings=0;foreach(var selection in Blueprint.ModuleSelections)if(!DrawingBindings.TryLegacy(DrawingBindings.Module(selection.InstanceId),out _))genericBindings++;
             if(Blueprint.GetWeaponId(2)!=null)genericBindings++;
             if(genericBindings>TowerCatalog.MaximumGenericModuleBindings)throw new ArgumentException(UserText.Message("copy.e6cf169bb9c337b8", TowerCatalog.MaximumGenericModuleBindings));
+            if(Blueprint.Reinforcement!=null&&!Blueprint.WithContent(Content).HasArmor)throw new ArgumentException(UserText.Message("reinforce.need_armor"));
             if(!Chassis.Enabled)throw new ArgumentException(UserText.Message("copy.0dc61ba711cc3b92"));
             foreach(var mount in Blueprint.WeaponMounts)
             {
                 var weapon=Weapons[mount.SlotIndex];
                 if(!weapon.Enabled)throw new ArgumentException(UserText.Message("copy.0dc61ba711cc3b92"));
                 if(mount.SlotIndex>=Chassis.MountCount)throw new ArgumentException(UserText.Message("copy.de42044c131147ed", Chassis.Id, (mount.SlotIndex+1)));
+                mount.Volley?.Validate(weapon);
                 if(!weapon.SupportsFootprint&&!mount.Footprint.IsCircle)throw new ArgumentException(UserText.Message("copy.ec26e9810b8fe03e"));
                 if(!mount.Footprint.FitsAspectLimit(weapon.MaximumFootprintAspectRatio))throw new ArgumentException(UserText.Message("copy.a630b0b26793f9fd"));
             }

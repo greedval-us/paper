@@ -139,7 +139,7 @@ namespace PaperDefense.Core
                         {
                             events.Publish(tick+1,SimulationEventKind.EnemyAttack,enemy.Position,new Point2(nearest.Cell.X+.5f,nearest.Cell.Y+.5f),default,
                                 entityId:enemy.Id,simulationSeconds:report.DurationSeconds,enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier,enemyVisualScale:enemy.VisualScale);
-                            nearest.Health = Math.Max(0, nearest.Health - DamageRules.StructureDamage(trial.CounterfireDamage, nearest, balance));
+                            nearest.Health = Math.Max(0, nearest.Health - DamageRules.StructureDamage(trial.CounterfireDamage, nearest, balance, enemy.Position));
                             if(nearest.Health<=0)events.Publish(tick+1,SimulationEventKind.StructureDestroyed,
                                 new Point2(nearest.Cell.X+.5f,nearest.Cell.Y+.5f),new Point2(nearest.Cell.X+.5f,nearest.Cell.Y+.5f),nearest.Kind,
                                 entityId:nearest.Id,weaponId:nearest.ContentId,simulationSeconds:report.DurationSeconds);

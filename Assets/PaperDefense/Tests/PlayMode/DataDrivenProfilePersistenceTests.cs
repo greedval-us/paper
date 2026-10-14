@@ -128,7 +128,7 @@ namespace PaperDefense.Tests
             if (field == "evaluation") data.Album[0].EvaluationMetadataVersion = 2;
             if (field == "drawing") data.Album[0].Drawing.FormatVersion = 99;
             if (field == "origin") data.Album[0].Origin = (DrawingOrigin)99;
-            if (field == "mounts") data.Album[0].WeaponMountMetadataVersion=2;
+            if (field == "mounts") data.Album[0].WeaponMountMetadataVersion=3;
             AssertProtected(data);
         }
 

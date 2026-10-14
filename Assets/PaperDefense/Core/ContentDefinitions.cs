@@ -38,6 +38,8 @@ namespace PaperDefense.Core
         public int Load, AssemblyCredit;
         public float MinimumLineRadius, MinimumRadialRange, MinimumRange;
         public float MaximumFootprintAspectRatio = 3;
+        public int VolleyPellets = 6;
+        public float VolleyHitRadius = .18f;
         public List<string> EffectIds = new List<string>();
         public StructureKind LegacyKind = (StructureKind)(-1);
     }
@@ -77,6 +79,7 @@ namespace PaperDefense.Core
         public string Id,Name,ChassisId,FirstWeaponId,SecondWeaponId;
         public List<StartingModuleDefinitionInput> Modules=new List<StartingModuleDefinitionInput>();
         public List<WeaponMountSelectionData> WeaponMounts=new List<WeaponMountSelectionData>();
+        public ArmorDistributionData Reinforcement;
         public int Slot=-1;
     }
 
@@ -166,6 +169,9 @@ namespace PaperDefense.Core
         public IReadOnlyList<EffectDefinition> Effects { get; }
         public StructureKind? LegacyKind => MountKind;
         public bool SupportsFootprint => Attack == AttackKind.AreaProjectile;
+        public bool SupportsVolley => Attack == AttackKind.Cone;
+        public int VolleyPellets { get; }
+        public float VolleyHitRadius { get; }
         internal WeaponDefinition(WeaponDefinitionInput input,IReadOnlyDictionary<string,EffectDefinition> knownEffects=null) : base(input, PartCategory.Weapon, mountKind: LegacyContentIds.Weapon(input.LegacyKind)==input.Id ? input.LegacyKind : (StructureKind?)null, combatMount: input.Attack != AttackKind.Cleanup)
         {
             ContentValidation.EnumValue(input.Attack, Id + ".attack"); ContentValidation.NonNegative(input.Load,Id + ".load"); ContentValidation.NonNegative(input.AssemblyCredit,Id + ".assemblyCredit");
@@ -173,6 +179,10 @@ namespace PaperDefense.Core
             ContentValidation.Positive(input.MaximumFootprintAspectRatio,Id + ".maximumFootprintAspectRatio");
             if(input.MaximumFootprintAspectRatio<1||input.MaximumFootprintAspectRatio>MortarFootprint.StructuralMaximumAspectRatio)throw new ArgumentException(UserText.Message("copy.2d76e3a6af048cc2", Id));
             MaximumFootprintAspectRatio=input.MaximumFootprintAspectRatio;
+            if(input.VolleyPellets<1||input.VolleyPellets>64)throw new ArgumentException("Volley pellets must be 1..64.");
+            ContentValidation.Positive(input.VolleyHitRadius,Id+".volleyHitRadius");
+            if(input.VolleyHitRadius>1)throw new ArgumentException("Volley hit radius must not exceed one cell.");
+            VolleyPellets=input.VolleyPellets;VolleyHitRadius=input.VolleyHitRadius;
             Numeric = CopyStats(input.Stats ?? throw new ArgumentException(UserText.Message("copy.686ca7f7e7e7cd4f", Id)));
             ContentValidation.ValidateWeapon(Numeric, Id);
             ContentValidation.NonNegative(input.MinimumRange,Id + ".minimumRange");

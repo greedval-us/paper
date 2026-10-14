@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using PaperDefense.Application;
 using PaperDefense.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,7 +15,7 @@ namespace PaperDefense.Presentation
         readonly Action<TowerBlueprint> changeDraft;
         readonly Func<TowerBlueprint, int, MortarFootprint, MortarFootprint, FootprintFormation, FootprintProbeComparison> compare;
         readonly FootprintProbeSketch first, second;
-        readonly UnityEngine.UI.Text summary, feedback, instructions, scaleLabel;
+        readonly UnityEngine.UI.Text summary, feedback, instructions, scaleLabel, changes;
         readonly Stack<MortarFootprint> history = new Stack<MortarFootprint>();
         float maximumAspect = MortarFootprint.MaximumAspectRatio, radius;
         TowerBlueprint blueprint;
@@ -55,11 +56,12 @@ namespace PaperDefense.Presentation
             Text(font,UserText.Message("imprint.working"),new Rect(530,140,300,30),21);
             Text(font,UserText.Message("copy.74f7ef7fd7c9851c"),new Rect(880,140,310,30),20);
             Text(font,UserText.Message("copy.2a5e89a7fb3c531b"),new Rect(1220,140,310,30),20);
-            Canvas=Surface("Footprint contour canvas",new Rect(30,180,470,450),true);
-            Working=Surface("Footprint working geometry",new Rect(530,180,300,450),false);
+            Canvas=Surface("Footprint contour canvas",new Rect(30,180,470,350),true);
+            Working=Surface("Footprint working geometry",new Rect(530,180,300,350),false);
+            changes=Text(font,"",new Rect(30,540,800,90),17);changes.name="Footprint change comparison";
             Canvas.Began=BeginDrag;Canvas.Finished=points=>SetContour(points,false);Canvas.Canceled=CancelDrawing;Canvas.UndoRequested=Undo;
             var axis=new GameObject("Footprint axis",typeof(RectTransform),typeof(CanvasRenderer),typeof(FootprintAxisGraphic));
-            axis.transform.SetParent(sheet.transform,false);Place(axis.GetComponent<RectTransform>(),new Rect(30,180,470,450));
+            axis.transform.SetParent(sheet.transform,false);Place(axis.GetComponent<RectTransform>(),new Rect(30,180,470,350));
             Axis=axis.GetComponent<FootprintAxisGraphic>();Axis.Configure(BeginDrag,CommitEllipse);
             Axis.AspectChanged=q=> { if(IsDragging)feedback.text=Resolve(UserText.Message("imprint.ellipse_drag",q,maximumAspect)); };
             Axis.gameObject.SetActive(false);
@@ -122,7 +124,7 @@ namespace PaperDefense.Presentation
         public void PinBaseline()
         {
             if(!IsOpen||IsDragging||rejected!=null)return;
-            Baseline=blueprint.GetMortarFootprint(Mount);Record();
+            Baseline=blueprint.GetMortarFootprint(Mount);ShowChanges();Record();
         }
         public void SetCircle() { if(IsOpen){StopGesture();CommitShape(MortarFootprint.Circle);UseFreehandTool();} }
         void Preset(bool transverse)
@@ -131,7 +133,7 @@ namespace PaperDefense.Presentation
             SetContour(EllipsePoints(Mathf.Min(2.4f,maximumAspect),transverse));
         }
         void Formation(FootprintFormation value) { formation=value;Record(); }
-        void BeginDrag() { IsDragging=true;Clear();Working.Show(Array.Empty<Point2>());feedback.color=NotebookPalette.Navy;feedback.text=Resolve(UserText.Message("imprint.drawing")); }
+        void BeginDrag() { IsDragging=true;Clear();changes.text=Resolve(UserText.Message("change.waiting"));Working.Show(Array.Empty<Point2>());feedback.color=NotebookPalette.Navy;feedback.text=Resolve(UserText.Message("imprint.drawing")); }
         void CancelDrawing()
         {
             IsDragging=false;if(!IsOpen||blueprint==null)return;ShowAccepted();Clear();
@@ -153,6 +155,7 @@ namespace PaperDefense.Presentation
                 Canvas.Show(result.Issue==FootprintContourIssue.Nonfinite||result.Issue==FootprintContourIssue.PointCount?Array.Empty<Point2>():rejected,result,result.Issue!=FootprintContourIssue.Open);
                 Working.Show(result.Issue==FootprintContourIssue.TooFar?Array.Empty<Point2>():result.Normalized,result);
                 feedback.color=NotebookPalette.Red;feedback.text=Resolve(UserText.Message("imprint.invalid",IssueMessage(result.Issue)));
+                changes.text=Resolve(UserText.Message("change.invalid"));
                 return;
             }
             CommitShape(MortarFootprint.FromContour(result.Authored,maximumAspect));
@@ -176,7 +179,9 @@ namespace PaperDefense.Presentation
             feedback.color=NotebookPalette.Navy;
             feedback.text=Resolve(UserText.Message("imprint.accepted",Math.PI*radius*radius,maximumAspect,FootprintContour.MinimumWidth*radius));
             scaleLabel.text=Resolve(UserText.Message("imprint.scale",radius));
+            ShowChanges();
         }
+        void ShowChanges()=>changes.text=Resolve(DesignChangeFeedback.Footprint(Baseline,blueprint.GetMortarFootprint(Mount),radius));
         public void Undo()
         {
             if(!IsOpen||Study?.IsOpen==true)return;bool invalid=rejected!=null;StopGesture();

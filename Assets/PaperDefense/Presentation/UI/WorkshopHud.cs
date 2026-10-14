@@ -42,6 +42,9 @@ namespace PaperDefense.Presentation
         readonly BlueprintSketch[] albumSketches = new BlueprintSketch[AlbumRowsPerPage];
         public DrawingEditorPanel DrawingEditor { get; private set; }
         public MortarFootprintPanel MortarFootprintEditor { get; private set; }
+        public FanVolleyPanel FanVolleyEditor { get; private set; }
+        public ArmorReinforcementPanel ReinforcementEditor { get; private set; }
+        Button reinforcementButton;
         WorkshopMapSketch map;
         readonly Button[] footprintButtons = new Button[3];
         readonly Button[] trialScenarioButtons = new Button[4];
@@ -108,7 +111,9 @@ namespace PaperDefense.Presentation
             if (Mode == WorkshopHudMode.Full || Mode == WorkshopHudMode.Drawing)
             {
                 MortarFootprintEditor = new MortarFootprintPanel(root, font, value => { Draft = value; Refresh(); }, run.CompareMortarFootprints, value => run.PreviewBlueprint(value).Reason, TextResolver, run.CompareMortarForms);
-                DrawingEditor = new DrawingEditorPanel(root, font, drawing => { MortarFootprintEditor.Close(); Draft = Draft.WithFreeformDrawing(drawing); SetStatus(UserText.Message(Mode == WorkshopHudMode.Drawing ? "workshop.drawing_hint" : "copy.65c92ef5c0dfe24a")); }, TextResolver,
+                FanVolleyEditor = new FanVolleyPanel(root,font,value=>{Draft=value;Refresh();},run.ProbeFanVolley,TextResolver);
+                ReinforcementEditor=new ArmorReinforcementPanel(root,font,value=>{Draft=value;Refresh();},run.ProbeArmor,run.ArmorDefense,run.MaximumStructureDefense,TextResolver);
+                DrawingEditor = new DrawingEditorPanel(root, font, drawing => { CloseGeometryEditors(); Draft = Draft.WithFreeformDrawing(drawing); SetStatus(UserText.Message(Mode == WorkshopHudMode.Drawing ? "workshop.drawing_hint" : "copy.65c92ef5c0dfe24a")); }, TextResolver,
                     context: new DrawingEditorContext { Preview = candidate => run.PreviewBlueprint(candidate), Workshop = () => run.Workshop, Purchase = run.UnlockDrawingAid });
             }
             if (title != null) title.SetTextWithoutNotify(Resolve(Draft.Name));
@@ -121,25 +126,25 @@ namespace PaperDefense.Presentation
         {
             if (run == null) return;
             canvasObject.SetActive(run.InWorkshop && PresentationVisible);
-            if (!run.InWorkshop) { MortarFootprintEditor?.Close(); return; }
+            if (!run.InWorkshop) { CloseGeometryEditors(); return; }
             refresh -= Time.unscaledDeltaTime;
             if (refresh <= 0) { refresh = .15f; Refresh(); }
         }
 
         TowerBlueprint NewDrawing() => new TowerBlueprint("drawing-" + Guid.NewGuid().ToString("N"), Resolve(UserText.Message("copy.74a4cbe8134d0a38")), chassisIds[0], weaponIds[0],
             origin: DrawingOrigin.Freeform, content: run.Content);
-        void NewDraft() { MortarFootprintEditor?.Close(); Draft = NewDrawing(); if (title != null) title.SetTextWithoutNotify(Resolve(Draft.Name)); SetStatus(UserText.Message("copy.a2f3120b30cce36d")); }
-        void ResetDraft() { MortarFootprintEditor?.Close(); Draft = initialDraft; if (title != null) title.SetTextWithoutNotify(Resolve(Draft.Name)); SetStatus(UserText.Message("workshop.reset_done")); }
+        void NewDraft() { CloseGeometryEditors(); Draft = NewDrawing(); if (title != null) title.SetTextWithoutNotify(Resolve(Draft.Name)); SetStatus(UserText.Message("copy.a2f3120b30cce36d")); }
+        void ResetDraft() { CloseGeometryEditors(); Draft = initialDraft; if (title != null) title.SetTextWithoutNotify(Resolve(Draft.Name)); SetStatus(UserText.Message("workshop.reset_done")); }
         void SetDraft(string chassis, string first, string second, IEnumerable<ModuleSelection> modules, string selectedPart = null)
         {
-            MortarFootprintEditor?.Close();
+            CloseGeometryEditors();
             Draft = Draft.WithContent(run.Content).WithName(title != null ? title.text : Draft.Name).WithAssembly(chassis, first, second, modules);
             if (selectedPart != null) foreach (var part in run.Workshop.Parts) if (part.Id == selectedPart) { Status = part.Description; break; }
             Refresh();
         }
         void SetWeaponMount(int mount, string weaponId)
         {
-            MortarFootprintEditor?.Close();
+            CloseGeometryEditors();
             Draft = Draft.WithContent(run.Content).WithName(title != null ? title.text : Draft.Name).WithWeaponMount(mount, weaponId);
             if (weaponId != null) Status = run.Content.GetWeapon(weaponId).Description;
             Refresh();
@@ -260,7 +265,7 @@ namespace PaperDefense.Presentation
             title.onEndEdit.AddListener(value => { Draft = Draft.WithName(value); Refresh(); });
             Button(controls, "Open drawing editor", new Rect(30, 143, 711, 67), UserText.Message("copy.d7e0dfdd628b75da"), () =>
             {
-                MortarFootprintEditor?.Close();
+                CloseGeometryEditors();
                 if (DrawingTemplateCatalog.Create(Draft).Count == 0) { SetStatus(UserText.Message("copy.b86b24244e915380")); return; }
                 DrawingEditor.Open(Draft);
             });
@@ -268,8 +273,9 @@ namespace PaperDefense.Presentation
             {
                 int selected = mount;
                 footprintButtons[mount] = Button(controls, "Mortar footprint " + mount, new Rect(30 + mount * 240, 239, 231, 67),
-                    UserText.Message("copy.b6caeb9a0b784643"), () => MortarFootprintEditor.Open(Draft, selected));
+                    UserText.Message("copy.b6caeb9a0b784643"), () => OpenMountGeometry(selected));
             }
+            reinforcementButton=Button(controls,"Open reinforcement",new Rect(30,334,711,60),UserText.Message("reinforce.open"),OpenReinforcement);
             Button(controls, "Open trial", new Rect(30, 428, 711, 67), UserText.Message("copy.65e901944fe5438f"), () => RunDrawingTrial());
             Label(controls, UserText.Message("workshop.comparison_hint"), new Rect(30, 529, 711, 160), 23, NotebookPalette.Navy);
             BuildDrawingComparison();
@@ -386,7 +392,7 @@ namespace PaperDefense.Presentation
             }
             Button(left, "New blueprint", new Rect(18, 487, 140, 43), UserText.Message("copy.c1e5de3d705e623d"), NewDraft);
             Button(left, "Save blueprint", new Rect(170, 487, 200, 43), UserText.Message("copy.28760c1a5ec2d81f"), SaveDraft);
-            Button(left, "Delete blueprint", new Rect(382, 487, 126, 43), UserText.Message("copy.1669c94226115554"), () => { MortarFootprintEditor.Close(); SetStatus(run.DeleteBlueprint(Draft.Id, out var reason) ? UserText.Message("copy.5212a5c55afa3a20") : reason); });
+            Button(left, "Delete blueprint", new Rect(382, 487, 126, 43), UserText.Message("copy.1669c94226115554"), () => { CloseGeometryEditors(); SetStatus(run.DeleteBlueprint(Draft.Id, out var reason) ? UserText.Message("copy.5212a5c55afa3a20") : reason); });
             Button(left, "Save blueprint as new", new Rect(18, 537, 490, 27), UserText.Message("copy.ec1a51e19086049c"), SaveAsNew);
 
             var center = Panel(root, "Live drawing", new Rect(578, 126, 475, 570), new Color(.97f, .97f, .91f));
@@ -396,13 +402,14 @@ namespace PaperDefense.Presentation
             sketch = illustration.GetComponent<BlueprintSketch>(); sketch.raycastTarget = false;
             Button(center, "Open drawing editor", new Rect(22, 251, 432, 42), UserText.Message("copy.d7e0dfdd628b75da"), () =>
             {
-                MortarFootprintEditor.Close();
+                CloseGeometryEditors();
                 if (DrawingTemplateCatalog.Create(Draft).Count == 0) { SetStatus(UserText.Message("copy.b86b24244e915380")); return; }
                 DrawingEditor.Open(Draft);
             });
             for (int mount = 0; mount < 3; mount++)
-            { int selected = mount; footprintButtons[mount] = Button(center, "Mortar footprint " + mount, new Rect(22 + mount * 146, 301, 140, 53), UserText.Message("copy.b6caeb9a0b784643"), () => MortarFootprintEditor.Open(Draft, selected)); }
-            stats = Label(center, "", new Rect(22, 365, 432, 121), 17, NotebookPalette.Navy);
+            { int selected = mount; footprintButtons[mount] = Button(center, "Mortar footprint " + mount, new Rect(22 + mount * 146, 301, 140, 53), UserText.Message("copy.b6caeb9a0b784643"), () => OpenMountGeometry(selected)); }
+            stats = Label(center, "", new Rect(22, 362, 432, 116), 17, NotebookPalette.Navy);
+            reinforcementButton=Button(center,"Open reinforcement",new Rect(22,483,432,34),UserText.Message("reinforce.open"),OpenReinforcement);
             Button(center, "Open trial", new Rect(22, 523, 432, 39), UserText.Message("copy.65e901944fe5438f"), () => { SetTrial(true); RefreshTrialSettings(); });
         }
 
@@ -420,8 +427,8 @@ namespace PaperDefense.Presentation
                 albumSketches[i] = thumb.GetComponent<BlueprintSketch>(); albumSketches[i].raycastTarget = false;
                 Place(albumLabels[i].rectTransform, new Rect(58, 1, 394, 39)); albumLabels[i].fontSize = 13;
             }
-            Button(album, "Album previous", new Rect(18, 435, 224, 33), UserText.Message("copy.ec67fe18caaef874"), () => { MortarFootprintEditor.Close(); albumPage = Mathf.Max(0, albumPage - 1); Refresh(); });
-            Button(album, "Album next", new Rect(254, 435, 224, 33), UserText.Message("copy.689b295f49461225"), () => { MortarFootprintEditor.Close(); albumPage = Mathf.Min(Mathf.Max(0, (run.Workshop.Album.Count - 1) / AlbumRowsPerPage), albumPage + 1); Refresh(); });
+            Button(album, "Album previous", new Rect(18, 435, 224, 33), UserText.Message("copy.ec67fe18caaef874"), () => { CloseGeometryEditors(); albumPage = Mathf.Max(0, albumPage - 1); Refresh(); });
+            Button(album, "Album next", new Rect(254, 435, 224, 33), UserText.Message("copy.689b295f49461225"), () => { CloseGeometryEditors(); albumPage = Mathf.Min(Mathf.Max(0, (run.Workshop.Album.Count - 1) / AlbumRowsPerPage), albumPage + 1); Refresh(); });
             var unlockList = new CatalogScrollList(album, "Unlock catalogue", new Rect(18, 483, 460, 78), partIds.Length, 4, 35, 4);
             for (int i = 0; i < partIds.Length; i++)
             {
@@ -485,13 +492,13 @@ namespace PaperDefense.Presentation
         }
         void SaveDraft()
         {
-            MortarFootprintEditor?.Close();
+            CloseGeometryEditors();
             Draft = Draft.WithName(title.text);
             SetStatus(run.SaveBlueprint(Draft, out var reason) ? UserText.Message("copy.e048f17356f3c1ea", Draft.Name) : reason);
         }
         void SaveAsNew()
         {
-            MortarFootprintEditor?.Close();
+            CloseGeometryEditors();
             var candidate = Draft.AsVariant("drawing-" + Guid.NewGuid().ToString("N"), title.text);
             if (!run.SaveBlueprint(candidate, out var reason)) { SetStatus(reason); return; }
             Draft = candidate; SetStatus(UserText.Message("copy.4c7b8b8a912d4e2b"));
@@ -499,7 +506,7 @@ namespace PaperDefense.Presentation
         void SelectAlbum(int index)
         {
             if (index < 0 || index >= run.Workshop.Album.Count) return;
-            MortarFootprintEditor?.Close();
+            CloseGeometryEditors();
             Draft = run.Workshop.Album[index]; title.SetTextWithoutNotify(Resolve(Draft.Name));
             SetStatus(UserText.Message("copy.fd2246577ecd4462", Draft.Name));
         }
@@ -547,15 +554,27 @@ namespace PaperDefense.Presentation
             Choice(secondWeapons[weaponIds.Length], Draft.GetWeaponId(1) == null);
             Choice(thirdWeapons[weaponIds.Length], Draft.GetWeaponId(2) == null);
         }
+        void CloseGeometryEditors(){MortarFootprintEditor?.Close();FanVolleyEditor?.Close();ReinforcementEditor?.Close();}
+        void OpenReinforcement()
+        {
+            CloseGeometryEditors();
+            if(!Draft.HasArmor){SetStatus(UserText.Message("reinforce.need_armor"));return;}
+            ReinforcementEditor.Open(Draft);
+        }
+        void OpenMountGeometry(int mount)
+        {
+            CloseGeometryEditors();
+            if(Draft.SupportsVolley(mount))FanVolleyEditor.Open(Draft,mount);else MortarFootprintEditor.Open(Draft,mount);
+        }
         void RefreshFootprints()
         {
             for (int mount = 0; mount < footprintButtons.Length; mount++)
             {
                 if (footprintButtons[mount] == null) continue;
                 string id = Draft.GetWeaponId(mount);
-                bool mortar = id != null && run.Content.TryGetWeapon(id, out var weapon) && weapon.SupportsFootprint;
+                bool mortar = id != null && run.Content.TryGetWeapon(id, out var weapon) && (weapon.SupportsFootprint||weapon.SupportsVolley);
                 footprintButtons[mount].gameObject.SetActive(mortar);
-                if (mortar) footprintButtons[mount].GetComponentInChildren<Text>().text = Resolve(Draft.GetMortarFootprint(mount).IsContour ? UserText.Message("imprint.mount_label", mount + 1) : UserText.Message("copy.65784a4e3ffc4d05", mount + 1, Draft.GetMortarFootprint(mount).AspectRatio));
+                if (mortar) footprintButtons[mount].GetComponentInChildren<Text>().text = Resolve(Draft.SupportsVolley(mount)?UserText.Message("volley.mount",mount+1):Draft.GetMortarFootprint(mount).IsContour ? UserText.Message("imprint.mount_label", mount + 1) : UserText.Message("copy.65784a4e3ffc4d05", mount + 1, Draft.GetMortarFootprint(mount).AspectRatio));
             }
         }
         void RefreshFocusedPreview()
@@ -588,8 +607,7 @@ namespace PaperDefense.Presentation
         void RefreshFull()
         {
             if (run == null || Draft == null || gold == null) return;
-            for (int mount = 0; mount < 3; mount++)
-            { string id = Draft.GetWeaponId(mount); bool mortar = id != null && run.Content.TryGetWeapon(id, out var weapon) && weapon.SupportsFootprint; footprintButtons[mount].gameObject.SetActive(mortar); if (mortar) footprintButtons[mount].GetComponentInChildren<Text>().text = Resolve(Draft.GetMortarFootprint(mount).IsContour ? UserText.Message("imprint.mount_label", mount + 1) : UserText.Message("copy.65784a4e3ffc4d05", (mount + 1), Draft.GetMortarFootprint(mount).AspectRatio)); }
+            RefreshFootprints();
             gold.text = Resolve(UserText.Message("copy.dfbc594044dd606d", run.Workshop.Gold));
             albumPage = Mathf.Clamp(albumPage, 0, Mathf.Max(0, (run.Workshop.Album.Count - 1) / AlbumRowsPerPage));
             var balance = run.Session.Balance;
@@ -732,7 +750,7 @@ namespace PaperDefense.Presentation
         public TrialComparison RunDrawingTrial()
         {
             if (trialPanel == null || Draft == null) return null;
-            MortarFootprintEditor?.Close();
+            CloseGeometryEditors();
             if (title != null) Draft = Draft.WithName(title.text);
             SetTrial(true); RefreshTrialSettings();
             return RunTest();
@@ -822,11 +840,13 @@ namespace PaperDefense.Presentation
         public void SetPreviewPose(NotebookAnimationState animation, double seconds, Func<int, Point2> aim)
         { previewAnimation = animation; previewSeconds = seconds; previewAim = aim; SetVerticesDirty(); }
         public bool ShowReference { get; set; }
+        public bool ShowReinforcement { get; set; } = true;
         public void SetBlueprint(TowerBlueprint value) { if (blueprint == value) return; blueprint = value; SetVerticesDirty(); }
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear(); if (blueprint == null || DrawingTemplateCatalog.Create(blueprint).Count == 0) return;
             Vector2 center = rectTransform.rect.center;
+            if(ShowReinforcement&&blueprint.Reinforcement!=null)ArmorReinforcementGraphic.DrawSectors(vh,center,Mathf.Min(rectTransform.rect.width,rectTransform.rect.height)*.42f,blueprint.Reinforcement);
             if (!ShowReference && (blueprint.HasPlayerDrawing || NotebookTowerComposition.UsesResourceArt(blueprint)))
             {
                 float size = Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .68f;

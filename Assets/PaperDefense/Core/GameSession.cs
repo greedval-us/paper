@@ -434,7 +434,7 @@ namespace PaperDefense.Core
                         if (enemy.AttackCooldown <= 0)
                         {
                             float siege = Math.Max(0, definition.StructureDamageMultiplier);
-                            float damage = DamageRules.StructureDamage(Math.Max(0, definition.Damage) * siege, obstacle, rules);
+                            float damage = DamageRules.StructureDamage(Math.Max(0, definition.Damage) * siege, obstacle, rules, enemy.Position);
                             PublishEnemyAttack(enemy,Center(obstacle.Cell));
                             obstacle.Health = Math.Max(0, obstacle.Health - damage);
                             enemy.AttackCooldown = Math.Max(rules.Combat.MinimumActionInterval, definition.AttackInterval);

@@ -30,5 +30,15 @@ namespace PaperDefense.Core
             }
             return Apply(raw,defense,balance.Effects.MaximumDefense);
         }
+        public static float StructureDamage(float raw,StructureState structure,GameBalance balance,Point2 source)
+        {
+            if(structure?.Blueprint?.Reinforcement==null)return StructureDamage(raw,structure,balance);
+            if(balance==null)throw new ArgumentNullException(nameof(balance));
+            if(structure.Assembly==null)structure.Assembly=TowerCatalog.Resolve(structure.Blueprint,balance);
+            float defense=structure.Assembly.Modify(ModifierStat.FoundationDefense,0);
+            var offset=new Point2(source.X-structure.Cell.X-.5f,source.Y-structure.Cell.Y-.5f);
+            defense*=structure.Blueprint.Reinforcement.Multiplier(offset);
+            return Apply(raw,defense,balance.Effects.MaximumDefense);
+        }
     }
 }

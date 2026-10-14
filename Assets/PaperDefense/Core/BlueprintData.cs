@@ -7,6 +7,7 @@ namespace PaperDefense.Core
     [Serializable] public sealed class BlueprintData
     {
         public string Id, Name;
+        public ArmorDistributionData Reinforcement;
         public int ContentMetadataVersion;
         public string ChassisId, FirstWeaponId, SecondWeaponId;
         public ModuleSelectionData[] ModuleSelections;
@@ -27,12 +28,13 @@ namespace PaperDefense.Core
         public int FreeformRuleVersion;
         public BlueprintData() { }
         public BlueprintData(TowerBlueprint blueprint)
-        { Id = blueprint.Id; Name = blueprint.Name; Chassis = blueprint.Chassis; FirstWeapon = blueprint.FirstWeapon;
+        { Reinforcement=blueprint.Reinforcement==null?null:new ArmorDistributionData(blueprint.Reinforcement);
+            Id = blueprint.Id; Name = blueprint.Name; Chassis = blueprint.Chassis; FirstWeapon = blueprint.FirstWeapon;
             HasSecondWeapon = blueprint.SecondWeapon.HasValue; SecondWeapon = blueprint.SecondWeapon ?? StructureKind.Gun; Modules = blueprint.Modules;
             ContentMetadataVersion = 1; ChassisId = blueprint.ChassisId; FirstWeaponId = blueprint.FirstWeaponId; SecondWeaponId = blueprint.SecondWeaponId;
             ModuleSelections = new ModuleSelectionData[blueprint.ModuleSelections.Count];
             WeaponMountMetadataVersion=1;WeaponMounts=new WeaponMountSelectionData[blueprint.WeaponMounts.Count];
-            for(int i=0;i<WeaponMounts.Length;i++)WeaponMounts[i]=new WeaponMountSelectionData(blueprint.WeaponMounts[i]);
+            for(int i=0;i<WeaponMounts.Length;i++){WeaponMounts[i]=new WeaponMountSelectionData(blueprint.WeaponMounts[i]);if(blueprint.WeaponMounts[i].Volley!=null)WeaponMountMetadataVersion=2;}
             for (int i = 0; i < ModuleSelections.Length; i++) ModuleSelections[i] = new ModuleSelectionData(blueprint.ModuleSelections[i]);
             EvaluationMetadataVersion = 1; Evaluation = new DrawingEvaluationData(blueprint.Assessment.ToStamp());
             DrawingMetadataVersion = 1; Origin = blueprint.Origin; Drawing = new DrawingData(blueprint.Drawing);
@@ -44,6 +46,8 @@ namespace PaperDefense.Core
         {
             if (profileVersion > WorkshopProfile.CurrentVersion) throw new NotSupportedException("Newer profile version.");
             if (profileVersion < 1) throw new ArgumentException("Unknown profile version.");
+            if(Reinforcement!=null&&(Reinforcement.Version>1||(profileVersion<7&&Reinforcement.Version!=0)))throw new NotSupportedException("Newer reinforcement rules.");
+            if(WeaponMountMetadataVersion>2||(profileVersion<7&&WeaponMountMetadataVersion>1))throw new NotSupportedException("Newer weapon mount metadata.");
             if(profileVersion<6&&FootprintMetadataVersion>1)throw new NotSupportedException("Contour footprints require mount metadata.");
             if (Origin == DrawingOrigin.Freeform)
             {
@@ -104,17 +108,19 @@ namespace PaperDefense.Core
             }
             if(profileVersion>=6)
             {
-                if(WeaponMountMetadataVersion>1)throw new NotSupportedException("Newer weapon mount metadata.");
-                if(WeaponMountMetadataVersion!=1||WeaponMounts==null||WeaponMounts.Length<1||WeaponMounts.Length>TowerBlueprint.MaximumWeaponMounts)throw new ArgumentException("Missing or invalid weapon mount metadata.");
+                if(WeaponMountMetadataVersion>2)throw new NotSupportedException("Newer weapon mount metadata.");
+                if((WeaponMountMetadataVersion!=1&&WeaponMountMetadataVersion!=2)||WeaponMounts==null||WeaponMounts.Length<1||WeaponMounts.Length>TowerBlueprint.MaximumWeaponMounts)throw new ArgumentException("Missing or invalid weapon mount metadata.");
                 var mounts=new List<WeaponMountSelection>();var slots=new HashSet<int>();
                 foreach(var mount in WeaponMounts)
                 {
                     if(mount==null||!slots.Add(mount.SlotIndex))throw new ArgumentException("Duplicate or empty weapon mount.");
                     var footprint=mount.ToFootprint();
                     if(footprint.IsContour&&FootprintMetadataVersion!=2)throw new ArgumentException("Missing contour footprint metadata.");
-                    mounts.Add(new WeaponMountSelection(mount.SlotIndex,mount.WeaponId,footprint));
+                    var volley=mount.ToVolley();
+                    if(volley!=null&&WeaponMountMetadataVersion!=2)throw new ArgumentException("Missing volley metadata.");
+                    mounts.Add(new WeaponMountSelection(mount.SlotIndex,mount.WeaponId,footprint,volley));
                 }
-                return new TowerBlueprint(Id,Name,ChassisId,mounts,modules,Drawing.ToSnapshot(),Origin,evaluationStamp:Evaluation.ToStamp(),freeformRuleVersion:FreeformRuleVersion);
+                return new TowerBlueprint(Id,Name,ChassisId,mounts,modules,Drawing.ToSnapshot(),Origin,evaluationStamp:Evaluation.ToStamp(),freeformRuleVersion:FreeformRuleVersion,reinforcement:Reinforcement?.ToDistribution());
             }
             return new TowerBlueprint(Id, Name, ChassisId, FirstWeaponId, HasSecondWeapon ? SecondWeaponId : null, modules,
                 Drawing.ToSnapshot(), Origin, MortarFootprint.CreateStored(FirstFootprintAspect), MortarFootprint.CreateStored(SecondFootprintAspect),
@@ -129,15 +135,41 @@ namespace PaperDefense.Core
         public float FootprintAspect=1;
         public int FootprintContourVersion;
         public DrawingPointData[] FootprintPoints;
+        public int VolleyVersion;
+        public DrawingStrokeData[] VolleyGuides;
         public WeaponMountSelectionData() { }
         public WeaponMountSelectionData(WeaponMountSelection selection)
         {
             SlotIndex=selection.SlotIndex;WeaponId=selection.WeaponId;FootprintAspect=selection.Footprint.AspectRatio;
+            if(selection.Volley!=null)
+            {
+                VolleyVersion=1;VolleyGuides=new DrawingStrokeData[selection.Volley.Guides.Count];
+                for(int i=0;i<VolleyGuides.Length;i++)
+                {
+                    var guide=selection.Volley.Guides[i];var points=new DrawingPointData[guide.Points.Count];
+                    for(int j=0;j<points.Length;j++)points[j]=new DrawingPointData{X=guide.Points[j].X,Y=guide.Points[j].Y};
+                    VolleyGuides[i]=new DrawingStrokeData{Points=points};
+                }
+            }
             if(selection.Footprint.IsContour)
             {
                 FootprintContourVersion=1;FootprintPoints=new DrawingPointData[selection.Footprint.Authored.Count];
                 for(int i=0;i<FootprintPoints.Length;i++)FootprintPoints[i]=new DrawingPointData{X=selection.Footprint.Authored[i].X,Y=selection.Footprint.Authored[i].Y};
             }
+        }
+        public FanVolley ToVolley()
+        {
+            if(VolleyVersion>1)throw new NotSupportedException("Newer volley rules.");
+            if(VolleyVersion==0&&(VolleyGuides==null||VolleyGuides.Length==0))return null;
+            if(VolleyVersion!=1||VolleyGuides==null||VolleyGuides.Length<1||VolleyGuides.Length>FanVolley.MaximumGuides)throw new ArgumentException("Invalid volley guides.");
+            var guides=new List<FanGuide>();
+            foreach(var guide in VolleyGuides)
+            {
+                if(guide?.Points==null||guide.Points.Length>FanGuide.MaximumPoints)throw new ArgumentException("Invalid volley guide.");
+                var points=new List<Point2>();foreach(var point in guide.Points){if(point==null)throw new ArgumentException("Missing volley point.");points.Add(new Point2(point.X,point.Y));}
+                guides.Add(new FanGuide(points));
+            }
+            return new FanVolley(guides);
         }
         public MortarFootprint ToFootprint()
         {
@@ -150,7 +182,8 @@ namespace PaperDefense.Core
         }
         internal WeaponMountSelectionData CreateCopy()
         {
-            var copy=new WeaponMountSelectionData{SlotIndex=SlotIndex,WeaponId=WeaponId,FootprintAspect=FootprintAspect,FootprintContourVersion=FootprintContourVersion};
+            var copy=new WeaponMountSelectionData{SlotIndex=SlotIndex,WeaponId=WeaponId,FootprintAspect=FootprintAspect,FootprintContourVersion=FootprintContourVersion,VolleyVersion=VolleyVersion};
+            if(VolleyGuides!=null){copy.VolleyGuides=new DrawingStrokeData[VolleyGuides.Length];for(int i=0;i<VolleyGuides.Length;i++){var guide=VolleyGuides[i];if(guide==null)continue;copy.VolleyGuides[i]=new DrawingStrokeData();if(guide.Points!=null){copy.VolleyGuides[i].Points=new DrawingPointData[guide.Points.Length];for(int j=0;j<guide.Points.Length;j++)if(guide.Points[j]!=null)copy.VolleyGuides[i].Points[j]=new DrawingPointData{X=guide.Points[j].X,Y=guide.Points[j].Y};}}}
             if(FootprintPoints!=null){copy.FootprintPoints=new DrawingPointData[FootprintPoints.Length];for(int i=0;i<FootprintPoints.Length;i++)if(FootprintPoints[i]!=null)copy.FootprintPoints[i]=new DrawingPointData{X=FootprintPoints[i].X,Y=FootprintPoints[i].Y};}
             return copy;
         }

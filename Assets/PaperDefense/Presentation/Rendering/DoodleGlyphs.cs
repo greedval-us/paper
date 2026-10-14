@@ -98,6 +98,7 @@ namespace PaperDefense.Presentation
                     }
                 }
             }
+            if(state.Blueprint?.Reinforcement!=null)Reinforcement(pen,p,state.Blueprint.Reinforcement,edge);
             if (state.Color != InkColor.None)
             {
                 pen.Box(p + new Vector2(0, -.33f), new Vector2(.29f, .16f), InkTone(state.Color), edge, .025f, state.Id);
@@ -130,6 +131,27 @@ namespace PaperDefense.Presentation
                     pen.Line(b, p + new Vector2(-.08f, -.09f), .045f, NotebookPalette.Navy);
                 }
             }
+        }
+
+        static void Reinforcement(MeshPen pen,Vector2 center,ArmorDistribution armor,Color color)
+        {
+            for(int sector=0;sector<4;sector++)
+            {
+                int count=armor.Points[sector];
+                for(int line=0;line<count;line++)
+                {
+                    float radius=.55f+line*.014f;Vector2 previous=default;
+                    for(int step=0;step<=8;step++)
+                    {
+                        float angle=((sector+armor.FacingQuarterTurns)*90-37+74*step/8)*Mathf.Deg2Rad;
+                        var next=center+new Vector2(Mathf.Sin(angle),Mathf.Cos(angle))*radius;
+                        if(step>0)pen.Line(previous,next,.012f,color);previous=next;
+                    }
+                }
+            }
+            var front=ArmorProbe.Direction(armor.FacingQuarterTurns);var d=new Vector2(front.X,front.Y);var tip=center+d*.49f;
+            pen.Line(center+d*.34f,tip,.025f,color);var side=new Vector2(-d.y,d.x);
+            pen.Line(tip,tip-d*.07f+side*.04f,.02f,color);pen.Line(tip,tip-d*.07f-side*.04f,.02f,color);
         }
 
         public static void StructureDynamic(MeshPen pen, StructureView state, float buildDuration, double seconds = 0,

@@ -1,0 +1,95 @@
+[
+  {
+    "screen": 0,
+    "InitialHealth": 55.0,
+    "Cost": 54,
+    "hits": [
+      {
+        "WorldSide": 0,
+        "Raw": 20.0,
+        "Damage": 14.0,
+        "RemainingHealth": 41.0
+      },
+      {
+        "WorldSide": 1,
+        "Raw": 20.0,
+        "Damage": 14.0,
+        "RemainingHealth": 27.0
+      },
+      {
+        "WorldSide": 2,
+        "Raw": 20.0,
+        "Damage": 14.0,
+        "RemainingHealth": 13.0
+      },
+      {
+        "WorldSide": 3,
+        "Raw": 20.0,
+        "Damage": 13.0,
+        "RemainingHealth": 0.0
+      }
+    ]
+  },
+  {
+    "screen": 1,
+    "InitialHealth": 55.0,
+    "Cost": 54,
+    "hits": [
+      {
+        "WorldSide": 0,
+        "Raw": 20.0,
+        "Damage": 7.99999952,
+        "RemainingHealth": 47.0
+      },
+      {
+        "WorldSide": 1,
+        "Raw": 20.0,
+        "Damage": 20.0,
+        "RemainingHealth": 27.0
+      },
+      {
+        "WorldSide": 2,
+        "Raw": 20.0,
+        "Damage": 20.0,
+        "RemainingHealth": 7.0
+      },
+      {
+        "WorldSide": 3,
+        "Raw": 20.0,
+        "Damage": 7.0,
+        "RemainingHealth": 0.0
+      }
+    ]
+  },
+  {
+    "screen": 2,
+    "InitialHealth": 55.0,
+    "Cost": 54,
+    "hits": [
+      {
+        "WorldSide": 0,
+        "Raw": 20.0,
+        "Damage": 20.0,
+        "RemainingHealth": 35.0
+      },
+      {
+        "WorldSide": 1,
+        "Raw": 20.0,
+        "Damage": 7.99999952,
+        "RemainingHealth": 27.0
+      },
+      {
+        "WorldSide": 2,
+        "Raw": 20.0,
+        "Damage": 20.0,
+        "RemainingHealth": 7.0
+      },
+      {
+        "WorldSide": 3,
+        "Raw": 20.0,
+        "Damage": 7.0,
+        "RemainingHealth": 0.0
+      }
+    ]
+  }
+]
