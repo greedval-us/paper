@@ -261,7 +261,7 @@ namespace PaperDefense.Presentation
         internal static void Place(RectTransform rect,Rect box)
         {rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(0,1);rect.anchoredPosition=new Vector2(box.x,-box.y);rect.sizeDelta=box.size;}
     }
-    public sealed class FootprintAxisGraphic : UnityEngine.UI.Graphic, IPointerDownHandler, IDragHandler, IPointerUpHandler
+    public sealed class FootprintAxisGraphic : UnityEngine.UI.MaskableGraphic, IPointerDownHandler, IDragHandler, IPointerUpHandler
     {
         public Action<float> AspectChanged { get; set; }
         Action begin;

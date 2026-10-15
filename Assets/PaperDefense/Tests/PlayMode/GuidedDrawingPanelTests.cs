@@ -156,6 +156,8 @@ namespace PaperDefense.Tests
             Assert.That(Button("Guided insert stencil drawing.sniper").interactable, Is.False);
             Click("Guided insert stencil drawing.sniper"); Assert.That(panel.Session.Snapshot.GeometryHash, Is.EqualTo(before));
             store.Fail = true; Click("Guided buy stencil drawing.sniper");
+            Assert.That(run.Workshop.Gold, Is.EqualTo(100), "Opening confirmation must not spend gold.");
+            Click("Workshop confirm action");
             Assert.That(run.Workshop.Gold, Is.EqualTo(100)); Assert.That(run.Workshop.IsDrawingUnlocked("drawing.sniper"), Is.False);
             Assert.That(changes, Is.Zero);
             string failure = Text("Guided drawing stencil gold").text;
@@ -163,6 +165,7 @@ namespace PaperDefense.Tests
             panel.Refresh();
             Assert.That(Text("Guided drawing stencil gold").text, Is.EqualTo(failure), "Refreshing the draft must not hide a failed purchase behind the gold balance.");
             store.Fail = false; Click("Guided buy stencil drawing.sniper");
+            Click("Workshop confirm action");
             Assert.That(run.Workshop.Gold, Is.EqualTo(68)); Assert.That(run.Workshop.IsDrawingUnlocked("drawing.sniper"), Is.True);
             Assert.That(panel.Session.Snapshot.GeometryHash, Is.EqualTo(before)); Assert.That(changes, Is.Zero);
             Assert.That(Button("Guided insert stencil drawing.sniper").interactable, Is.True);

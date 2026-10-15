@@ -62,12 +62,20 @@ namespace PaperDefense.Presentation
             var choose=ui.Button(card,(owned?"Wizard choose ":"Wizard unlock ")+part.Id,new Rect(14,98,350,34),owned?T(selected?"selected":"choose"):T("unlock",price),()=>
             {
                 ui.HideTooltip();
-                if(!owned){if(!run.UnlockPart(part.Id,out string reason)){wizard.Feedback(reason);return;}Show(wizard.Step,wizard.Draft);return;}
+                if(!owned){ConfirmPurchase(part.Id,()=>Show(wizard.Step,wizard.Draft));return;}
                 if(foundation)wizard.SelectChassis(part.Id);else wizard.SelectWeapon(mount,part.Id);
             },owned?WorkshopIcon.Check:WorkshopIcon.Cost);
             choose.interactable=(foundation||mount<run.Content.GetChassis(draft.ChassisId).MountCount)&&(owned||run.Workshop.Gold>=price);
         }
         int Price(string id)=>run.Workshop.Parts.FirstOrDefault(p=>p.Id==id)?.GoldCost??run.Content.AllParts.First(p=>p.Id==id).UnlockGold;
+        void ConfirmPurchase(string id,Action refresh)
+        {
+            int price=Price(id),gold=run.Workshop.Gold;
+            var definition=run.Content.AllParts.First(p=>p.Id==id);
+            WorkshopConfirm.Show(parent,ui,"Открыть деталь?",ui.Resolve(definition.ButtonLabel)+"\n\nЦена: "+price+" золота\nНа счету: "+gold+"\n"+
+                (gold>=price?"После открытия деталь останется доступной в мастерской.":"Не хватает: "+(price-gold)+" золота"),"Открыть за "+price,()=>
+                { if(!run.UnlockPart(id,out string reason)){purchaseError=reason;wizard.Feedback(reason);}refresh(); },gold>=price);
+        }
         void CloseExtras(){if(extras!=null){UnityEngine.Object.DestroyImmediate(extras);extras=null;}}
         void ShowExtras()
         {
@@ -91,7 +99,7 @@ namespace PaperDefense.Presentation
                 int price=Price(id);
                 var add=ui.Button(card,"Wizard module add "+id,new Rect(14,100,count>0?310:404,36),owned?T(count>0&&!definition.Repeatable?"remove":"add"):T("unlock",price),()=>
                 {
-                    if(!owned){purchaseError=run.UnlockPart(id,out var reason)?null:reason;ShowExtras();return;}
+                    if(!owned){ConfirmPurchase(id,ShowExtras);return;}
                     wizard.ChangeModule(id);ShowExtras();
                 },owned?WorkshopIcon.Plus:WorkshopIcon.Cost);add.interactable=owned||run.Workshop.Gold>=price;
                 if(count>0)ui.IconButton(card,"Wizard module remove "+id,new Rect(338,100,80,36),WorkshopIcon.Trash,T("remove"),()=>{wizard.ChangeModule(id,true);ShowExtras();});

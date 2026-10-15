@@ -22,7 +22,11 @@ namespace PaperDefense.Presentation
                 colors.pressedColor = new Color(.72f, .81f, .98f);
                 button.colors = colors;
                 var caption = button.GetComponentInChildren<Text>();
-                if (caption != null) { ui.Tip(button.gameObject, caption.text); button.GetComponent<WorkshopTooltip>().FollowCaption(caption); }
+                if (caption != null) {
+                    caption.rectTransform.anchorMin = Vector2.zero; caption.rectTransform.anchorMax = Vector2.one;
+                    caption.rectTransform.offsetMin = new Vector2(8, 4); caption.rectTransform.offsetMax = new Vector2(-8, -4);
+                    ui.Tip(button.gameObject, caption.text); button.GetComponent<WorkshopTooltip>().FollowCaption(caption);
+                }
             }
         }
     }

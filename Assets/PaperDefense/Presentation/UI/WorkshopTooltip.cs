@@ -84,7 +84,7 @@ namespace PaperDefense.Presentation
         void Position()
         {
             if (Source == null || !(transform.parent is RectTransform root)) { Hide(); return; }
-            float width = Mathf.Min(1600, root.rect.width), height = Mathf.Min(1000, root.rect.height);
+            float width = root.rect.width, height = root.rect.height;
             if (width <= Margin * 2 || height <= Margin * 2) { Hide(); return; }
             Source.Target.GetWorldCorners(corners);
             float left = float.PositiveInfinity, top = float.PositiveInfinity;

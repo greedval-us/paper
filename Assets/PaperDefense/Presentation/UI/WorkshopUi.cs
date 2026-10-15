@@ -8,11 +8,11 @@ namespace PaperDefense.Presentation
     /// <summary>Shared, maskable uGUI primitives for the guided workshop's 1600 by 1000 canvas.</summary>
     public sealed class WorkshopUi
     {
-        public static readonly Color Paper = new Color32(250, 251, 253, 255);
-        public static readonly Color Surface = new Color32(237, 243, 250, 255);
-        public static readonly Color Ink = new Color32(36, 58, 92, 255);
-        public static readonly Color Blue = new Color32(49, 95, 219, 255);
-        public static readonly Color Muted = new Color32(100, 117, 141, 255);
+        public static readonly Color Paper = PlayerUi.Paper;
+        public static readonly Color Surface = PlayerUi.Wash;
+        public static readonly Color Ink = PlayerUi.Ink;
+        public static readonly Color Blue = PlayerUi.Blue;
+        public static readonly Color Muted = PlayerUi.Muted;
         public static readonly Color Selected = new Color32(220, 232, 255, 255);
         public static readonly Color Line = new Color32(211, 222, 237, 255);
         public static readonly Color Success = new Color32(90, 144, 123, 255);
@@ -61,6 +61,7 @@ namespace PaperDefense.Presentation
         public UnityEngine.UI.Text Label(Transform parent, string name, string value, Rect bounds,
             int size = 20, bool heading = false, Color? color = null)
         {
+            if (heading) bounds.height = Mathf.Max(bounds.height, Mathf.Ceil(size * 1.5f));
             var label = Graphic<UnityEngine.UI.Text>(parent, name, bounds);
             label.font = heading ? HeadingFont : BodyFont;
             label.text = Resolve(value);
@@ -90,6 +91,8 @@ namespace PaperDefense.Presentation
             label.resizeTextForBestFit = true;
             label.resizeTextMinSize = 15;
             label.resizeTextMaxSize = 19;
+            label.rectTransform.anchorMin = Vector2.zero; label.rectTransform.anchorMax = Vector2.one;
+            label.rectTransform.offsetMin = new Vector2(captionX, 4); label.rectTransform.offsetMax = new Vector2(-padding, -4);
             WorkshopIconGraphic symbol = null;
             if (iconSize > 0)
             {

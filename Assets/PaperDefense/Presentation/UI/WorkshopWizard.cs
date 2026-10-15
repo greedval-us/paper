@@ -28,7 +28,7 @@ namespace PaperDefense.Presentation
         readonly WizardAlbumPanel album;
         readonly WizardTrialPanel trial;
         GameObject reviewRoot;UnityEngine.UI.InputField name;BlueprintSketch reviewDrawing;
-        int reached;bool detailsOpen,saved;
+        int reached;bool detailsOpen,saved,dirty;
         public int Step { get; private set; }
         public TowerBlueprint Draft { get; private set; }
         public GuidedDrawingPanel Drawing { get; }
@@ -60,7 +60,7 @@ namespace PaperDefense.Presentation
             ui.Label(parent,"Wizard thumbnail caption",Copy("your_tower"),new Rect(46,845,206,32),17,color:WorkshopUi.Muted);
             notice=ui.Label(parent,"Wizard notice","",new Rect(300,882,840,38),17,color:WorkshopUi.Warning);
             back=ui.Button(parent,"Wizard back",new Rect(24,930,210,48),Copy("back"),Back,WorkshopIcon.Back);
-            next=ui.Button(parent,"Wizard next",new Rect(1230,930,340,48),Copy("to_weapon"),()=>Next(),WorkshopIcon.Next,true);
+            next=ui.Button(parent,"Wizard next",new Rect(1230,930,340,48),Copy("to_weapon"),NextFromUi,WorkshopIcon.Next,true);
             ui.Button(parent,"Start run",new Rect(264,930,270,48),Copy("preparation"),()=>{Suspend();prepare?.Invoke();},WorkshopIcon.Book);
             var side=ui.Panel(parent,"Wizard summary",new Rect(1170,110,400,782),WorkshopUi.Surface);summaryRoot=side.gameObject;
             summaryTitle=ui.Label(side,"Wizard summary title",Copy("your_tower"),new Rect(24,18,352,50),30,true);
@@ -93,7 +93,7 @@ namespace PaperDefense.Presentation
             string chassis=run.Content.AllParts.First(p=>p.Category==PartCategory.Chassis&&p.Enabled&&Owned(p)).Id;
             string weapon=run.Content.AllParts.First(p=>p.Category==PartCategory.Weapon&&p.Enabled&&p.IsCombatMount&&Owned(p)).Id;
             Draft=new TowerBlueprint("drawing-"+Guid.NewGuid().ToString("N"),ui.Resolve(Copy("new_name")),chassis,weapon,origin:DrawingOrigin.Freeform,content:run.Content);
-            Step=reached=0;saved=false;notice.text="";changed?.Invoke(Draft);BuildStep();
+            Step=reached=0;saved=false;dirty=false;notice.text="";changed?.Invoke(Draft);BuildStep();
         }
         internal bool Owned(WorkshopPartDefinition p)=>p.InitiallyUnlocked||run.Workshop.IsUnlocked(p.Id);
         internal bool Rights(out string reason)
@@ -106,7 +106,7 @@ namespace PaperDefense.Presentation
         internal void Feedback(string message){notice.text=ui.Resolve(message);}
         internal void SetDraft(TowerBlueprint value,bool rebuild=true)
         {
-            Draft=value.WithContent(run.Content);saved=false;changed?.Invoke(Draft);notice.text="";
+            Draft=value.WithContent(run.Content);saved=false;dirty=true;changed?.Invoke(Draft);notice.text="";
             if(rebuild)BuildStep();else Refresh();
         }
         public bool SelectChassis(string id)
@@ -143,6 +143,12 @@ namespace PaperDefense.Presentation
             }
             Step++;reached=Math.Max(reached,Step);notice.text="";BuildStep();return true;
         }
+        void NextFromUi()
+        {
+            if(Next()||Step!=3)return;
+            if(run.Workshop.SaveState==ProfileSaveState.WriteFailed||run.Workshop.SaveState==ProfileSaveState.RecoveryRequired)
+                WorkshopConfirm.Show(root,ui,"Не удалось сохранить",notice.text+"\n\nЧерновик остаётся в мастерской. Повтори запись или вернись к работе.","Повторить",NextFromUi);
+        }
         public bool GoToStep(int step)
         {
             if(step<0||step>3||step>reached)return false;
@@ -166,6 +172,14 @@ namespace PaperDefense.Presentation
         public void Load(TowerBlueprint value)
         {
             CloseOverlays();Draft=value.WithContent(run.Content);Step=reached=3;saved=true;changed?.Invoke(Draft);notice.text="";BuildStep();
+        }
+        internal void RequestNewDraft()=>ReplaceDraft(NewDraft);
+        internal void RequestLoad(TowerBlueprint value)=>ReplaceDraft(()=>Load(value));
+        void ReplaceDraft(Action action)
+        {
+            if(!saved&&(dirty||Step>0||!Draft.Drawing.IsEmpty))
+                WorkshopConfirm.Show(root,ui,"Заменить текущий черновик?","Несохранённые изменения этого чертежа будут потеряны. Можно вернуться и сохранить их на шаге «Проверка».","Заменить",action);
+            else action();
         }
         public void ShowAlbum(bool visible)
         {

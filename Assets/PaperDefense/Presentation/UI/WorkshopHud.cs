@@ -26,7 +26,12 @@ namespace PaperDefense.Presentation
         }
         public void SetPlayerLayout()
         {
-            if(Guided!=null)return;
+            if(Guided!=null)
+            {
+                var responsive = canvasObject.GetComponent<WorkshopResponsiveLayout>() ?? canvasObject.AddComponent<WorkshopResponsiveLayout>();
+                responsive.Initialize(root, GetComponentInParent<PlayerGameRoot>());
+                return;
+            }
             root.localScale = Vector3.one * .9f;
             root.anchoredPosition = new Vector2(0, -35);
         }
@@ -840,7 +845,7 @@ namespace PaperDefense.Presentation
 
     /// <summary>A live hand-drawn diagram, including both weapon mounts and armor plates.</summary>
     [RequireComponent(typeof(CanvasRenderer))]
-    public sealed class BlueprintSketch : Graphic
+    public sealed class BlueprintSketch : MaskableGraphic
     {
         TowerBlueprint blueprint;
         NotebookAnimationState previewAnimation;
@@ -939,7 +944,7 @@ namespace PaperDefense.Presentation
     }
 
     [RequireComponent(typeof(CanvasRenderer))]
-    public sealed class WorkshopMapSketch : Graphic
+    public sealed class WorkshopMapSketch : MaskableGraphic
     {
         IRunReadModel session;
         public void SetSession(IRunReadModel value) { if (session == value) return; session = value; SetVerticesDirty(); }

@@ -8,7 +8,7 @@ namespace PaperDefense.Presentation
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear(); var pen = new MeshPen(null, 4096); var r = rectTransform.rect;
-            Color grid = new Color(.24f, .4f, .58f, .065f);
+            Color grid = new Color(.24f, .4f, .58f, .18f);
             for (float x = r.xMin; x < r.xMax; x += 32) pen.Line(new Vector2(x, r.yMin), new Vector2(x, r.yMax), .8f, grid);
             for (float y = r.yMin; y < r.yMax; y += 32) pen.Line(new Vector2(r.xMin, y), new Vector2(r.xMax, y), .8f, grid);
             pen.Line(new Vector2(r.xMin + 96, r.yMin), new Vector2(r.xMin + 96, r.yMax), 1, new Color(.7f, .3f, .24f, .14f));

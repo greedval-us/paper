@@ -127,6 +127,18 @@ namespace PaperDefense.Tests
         }
 
         [Test]
+        public void UltrawideControlsKeepTheirHintsInsideTheActualCanvas()
+        {
+            rootRect.sizeDelta = new Vector2(2370, 1000);
+            var button = Control(new Rect(2240, 910, 100, 48));
+            Enter(button.gameObject);
+            Assert.That(Tooltip.gameObject.activeSelf, Is.True);
+            Rect bounds = TopLeftBounds(Tooltip);
+            Assert.That(bounds.xMax, Is.LessThanOrEqualTo(2370));
+            Assert.That(bounds.Overlaps(TopLeftBounds(button.GetComponent<RectTransform>())), Is.False);
+        }
+
+        [Test]
         public void SourceExitDoesNotDismissAnotherControlsHintAndEnsureReusesTheOverlay()
         {
             var first = Control(new Rect(100, 100, 48, 48));
