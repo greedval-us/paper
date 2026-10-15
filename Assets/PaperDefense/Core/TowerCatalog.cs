@@ -83,6 +83,14 @@ namespace PaperDefense.Core
             return reason.Length==0;
         }
         public static bool Validate(TowerBlueprint blueprint,out string reason)=>Validate(blueprint,null,out reason);
+        /// <summary>Checks selected parts before the player has drawn functional geometry.</summary>
+        public static bool ValidateAssembly(TowerBlueprint blueprint,GameBalance balance,out string reason)
+        {
+            if(!ValidateParts(blueprint,out reason))return false;
+            try{Resolve(blueprint,balance).Validate(Balance(balance));}
+            catch(ArgumentException ex){reason=ex.Message;return false;}
+            return true;
+        }
         public static bool Validate(TowerBlueprint blueprint,GameBalance balance,out string reason)
         {if(!ValidateParts(blueprint,out reason))return false;try{var a=Resolve(blueprint,balance);a.Validate(Balance(balance));if(a.FreeformDesign!=null&&!a.FreeformDesign.IsUsable){reason=a.FreeformDesign.Message;return false;}int excess=Load(blueprint,balance)-Capacity(blueprint,balance);if(excess>0)reason=UserText.Message("copy.b6c9a1b5ca87c2e3", excess);}catch(ArgumentException ex){reason=ex.Message;}return reason.Length==0;}
         public static int Cost(TowerBlueprint blueprint,GameBalance balance,MaterialTier tier)

@@ -18,6 +18,7 @@ namespace PaperDefense.Presentation
 
         public static void Apply(WorkshopHud workshop, PlayerUi ui)
         {
+            if(workshop.UseGuidedFlow)return;
             foreach (var button in workshop.GetComponentsInChildren<Button>(true))
             {
                 if (!Icons.TryGetValue(button.name, out var icon)) continue;

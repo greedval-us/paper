@@ -163,6 +163,7 @@ namespace PaperDefense.Presentation
 
         void Workshop()
         {
+            if(game.GetComponentInChildren<WorkshopHud>(true).UseGuidedFlow)return;
             ui.Panel(page, "Workshop navigation", new Rect(0, 0, 1600, 90), PlayerUi.Paper, true);
             Header(ui.T("workshop"), () => game.Navigate(PlayerPage.Preparation));
         }

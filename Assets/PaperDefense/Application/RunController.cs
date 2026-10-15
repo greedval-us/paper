@@ -277,6 +277,8 @@ namespace PaperDefense.Application
         }
         public TowerPreview PreviewBlueprint(TowerBlueprint blueprint,MaterialTier material=MaterialTier.Pencil)
             =>new TowerPreview(blueprint,session.Balance,material,session.Mechanics);
+        public bool ValidateAssembly(TowerBlueprint blueprint,out string reason)
+            =>TowerCatalog.ValidateAssembly(blueprint,session.Balance,out reason);
         public BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,int slot,MaterialTier material,InkColor color)
         {
             if (session == null || InWorkshop) return RejectedQuote(UserText.Message("copy.e6a1f147d46938e5"));

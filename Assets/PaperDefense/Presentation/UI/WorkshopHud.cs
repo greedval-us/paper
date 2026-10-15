@@ -16,14 +16,17 @@ namespace PaperDefense.Presentation
         public bool ReserveStandControls { get; set; }
         public WorkshopHudMode Mode { get; set; }
         public Action StartRequested { get; set; }
+        public bool UseGuidedFlow { get; set; }
+        public WorkshopWizard Guided { get; private set; }
         bool presentationVisible = true;
         public bool PresentationVisible
         {
             get => presentationVisible;
-            set { presentationVisible = value; if (canvasObject != null) canvasObject.SetActive(value && run.InWorkshop); }
+            set { bool changed=presentationVisible!=value;presentationVisible = value; if (canvasObject != null) canvasObject.SetActive(value && run.InWorkshop);if(changed&&Guided!=null){if(value)Guided.Resume();else Guided.Suspend();} }
         }
         public void SetPlayerLayout()
         {
+            if(Guided!=null)return;
             root.localScale = Vector3.one * .9f;
             root.anchoredPosition = new Vector2(0, -35);
         }
@@ -101,6 +104,12 @@ namespace PaperDefense.Presentation
                 ? run.Workshop.Loadout[0]
                 : run.Workshop.Album.Count > 0 ? run.Workshop.Album[0] : NewDrawing();
             initialDraft = Draft;
+            if(UseGuidedFlow&&Mode==WorkshopHudMode.Full)
+            {
+                Guided=new WorkshopWizard(root,run,TextResolver,value=>Draft=value,()=>StartRequested?.Invoke());
+                MortarFootprintEditor=Guided.Mortar;FanVolleyEditor=Guided.Volley;ReinforcementEditor=Guided.Armor;
+                run.WorkshopChanged+=Refresh;Refresh();return;
+            }
             switch (Mode)
             {
                 case WorkshopHudMode.Assembly: BuildAssembly(); break;
@@ -126,7 +135,7 @@ namespace PaperDefense.Presentation
         {
             if (run == null) return;
             canvasObject.SetActive(run.InWorkshop && PresentationVisible);
-            if (!run.InWorkshop) { CloseGeometryEditors(); return; }
+            if (!run.InWorkshop) { if(Guided!=null)Guided.Suspend();else CloseGeometryEditors(); return; }
             refresh -= Time.unscaledDeltaTime;
             if (refresh <= 0) { refresh = .15f; Refresh(); }
         }
@@ -512,6 +521,7 @@ namespace PaperDefense.Presentation
         }
         void Refresh()
         {
+            if(Guided!=null){Guided.Refresh();return;}
             if (Mode == WorkshopHudMode.Full) { RefreshFull(); return; }
             if (run == null || Draft == null) return;
             if (Mode == WorkshopHudMode.Assembly) RefreshAssemblySelections();
@@ -749,6 +759,7 @@ namespace PaperDefense.Presentation
         public TrialComparison CompareDrawingQuality() => RunDrawingTrial();
         public TrialComparison RunDrawingTrial()
         {
+            if(Guided!=null)return Guided.RunTrial();
             if (trialPanel == null || Draft == null) return null;
             CloseGeometryEditors();
             if (title != null) Draft = Draft.WithName(title.text);

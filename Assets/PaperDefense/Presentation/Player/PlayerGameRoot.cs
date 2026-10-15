@@ -53,6 +53,7 @@ namespace PaperDefense.Presentation
             workshop = new GameObject("Player workshop").AddComponent<WorkshopHud>();
             workshop.transform.SetParent(transform, false); workshop.TextResolver = bootstrap.TextResolver;
             workshop.PresentationVisible = false; workshop.StartRequested = () => Navigate(PlayerPage.Preparation);
+            workshop.UseGuidedFlow=true;
             workshop.Initialize(Run); workshop.SetPlayerLayout(); workshop.PresentationVisible = false;
             shell = new GameObject("Player interface").AddComponent<PlayerShell>();
             shell.transform.SetParent(transform, false); shell.Initialize(this);
