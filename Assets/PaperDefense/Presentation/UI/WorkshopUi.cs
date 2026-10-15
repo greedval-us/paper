@@ -13,8 +13,8 @@ namespace PaperDefense.Presentation
         public static readonly Color Ink = PlayerUi.Ink;
         public static readonly Color Blue = PlayerUi.Blue;
         public static readonly Color Muted = PlayerUi.Muted;
-        public static readonly Color Selected = new Color32(220, 232, 255, 255);
-        public static readonly Color Line = new Color32(211, 222, 237, 255);
+        public static readonly Color Selected = PlayerUi.Selected;
+        public static readonly Color Line = new Color32(206, 202, 187, 255);
         public static readonly Color Success = new Color32(90, 144, 123, 255);
         public static readonly Color Warning = new Color32(165, 101, 39, 255);
 
@@ -53,7 +53,7 @@ namespace PaperDefense.Presentation
         public RectTransform Panel(Transform parent, string name, Rect bounds, Color color, bool blocks = false)
         {
             var panel = Graphic<WorkshopSurfaceGraphic>(parent, name, bounds);
-            panel.color = color;
+            panel.color = color == Color.white ? PlayerUi.Card : color;
             panel.raycastTarget = blocks;
             return panel.rectTransform;
         }
@@ -187,7 +187,7 @@ namespace PaperDefense.Presentation
     {
         const int Segments = 8;
         const int PointCount = (Segments + 1) * 4;
-        [SerializeField] float radius = 16;
+        [SerializeField] float radius = 4;
         float outlineWidth;
         Color outlineColor;
 
@@ -205,6 +205,8 @@ namespace PaperDefense.Presentation
             vh.Clear();
             Rect bounds = rectTransform.rect;
             if (bounds.width <= 0 || bounds.height <= 0) return;
+            if (outlineWidth <= 0 && bounds.width > 250 && bounds.height > 150 && color.a > 0)
+            { NotebookPaperSurface.Draw(vh, bounds, color); return; }
             float r = Mathf.Clamp(radius, 0, Mathf.Min(bounds.width, bounds.height) * .5f);
             float aa = Mathf.Min(.75f, Mathf.Min(bounds.width, bounds.height) * .25f);
             float stroke = Mathf.Clamp(outlineWidth, 0, Mathf.Min(bounds.width, bounds.height) * .25f);
@@ -309,7 +311,7 @@ namespace PaperDefense.Presentation
             else if (pressed) fill = primary ? new Color32(34, 72, 180, 255) : new Color32(197, 216, 249, 255);
             else if (hovered || focused) fill = primary ? new Color32(41, 83, 202, 255) : new Color32(224, 234, 251, 255);
             background.color = fill;
-            background.Outline(!disabled && focused ? 2 : 0, primary ? WorkshopUi.Ink : WorkshopUi.Blue);
+            background.Outline(!disabled && (focused || chosen) ? 2 : 0, WorkshopUi.Ink);
             if (caption != null) caption.color = foreground;
             if (symbol != null) symbol.color = foreground;
         }

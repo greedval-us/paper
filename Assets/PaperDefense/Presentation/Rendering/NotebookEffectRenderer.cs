@@ -43,6 +43,22 @@ namespace PaperDefense.Presentation
             var at = new Vector2(item.To.X, item.To.Y);
             string id = EffectId(item, theme);
             int seed = (int)item.Sequence;
+            if (item.Kind == SimulationEventKind.StructureErased)
+            {
+                // Short paper-coloured rub and crumbs, distinct from an ink explosion.
+                for (int i = 0; i < 5; i++)
+                {
+                    Vector2 a = at + new Vector2(-.48f + t * .28f, -.3f + i * .14f);
+                    pen.Line(a, a + new Vector2(.72f, .09f), .09f, MeshPen.Alpha(NotebookPalette.Paper, fade));
+                    pen.Line(a - Vector2.right * .1f, a + new Vector2(-.04f, .04f), .025f, MeshPen.Alpha(NotebookPalette.Pencil, fade * .6f));
+                }
+                return;
+            }
+            if (item.Kind == SimulationEventKind.StructureCompleted)
+            {
+                pen.Ring(at, .5f + t * .15f, .025f, MeshPen.Alpha(NotebookPalette.Navy, fade * .5f), 24, dashed: true);
+                return;
+            }
             if (item.Kind == SimulationEventKind.WeaponActionStarted)
             {
                 DrawResource(pen, theme, id, muzzle, age, fade);
@@ -87,8 +103,11 @@ namespace PaperDefense.Presentation
             else
             {
                 Color color = MeshPen.Alpha(item.Attack == AttackKind.Line ? NotebookPalette.Marker : NotebookPalette.Blue, fade * .85f);
-                pen.Line(muzzle, at, item.Attack == AttackKind.Line ? .075f : .044f, color);
-                pen.Star(at, .22f + t * .2f, color, .035f, 5, seed * 1.3f);
+                float width = item.Attack == AttackKind.Line ? .075f : item.Attack == AttackKind.Cone ? .025f : .04f;
+                Vector2 from = item.Attack == AttackKind.Line || item.Attack == AttackKind.Ricochet ? muzzle
+                    : Vector2.Lerp(muzzle, at, Mathf.Clamp01(t * .75f));
+                pen.Line(from, at, width, color);
+                pen.Star(at, .13f + t * .12f, color, .025f, 4, seed * 1.3f);
             }
             DrawResource(pen, theme, id, at, age, fade);
         }

@@ -31,7 +31,7 @@ namespace PaperDefense.Presentation
             distanceLabel=ui.Label(root.transform,"Drawing probe distance","",new Rect(47,50,width-100,32),18);
             distanceLabel.alignment=TextAnchor.MiddleCenter;
             ui.Button(root.transform,"Drawing probe farther",new Rect(width-40,50,40,32),"+",()=>SetDistance(Distance+1));
-            var view=DrawingWorkbenchUi.Box(root.transform,"Drawing probe viewport",new Rect(0,88,width,128),new Color(1,.995f,.95f));
+            var view=DrawingWorkbenchUi.Box(root.transform,"Drawing probe viewport",new Rect(0,88,width,128),PlayerUi.Paper);
             view.gameObject.AddComponent<UnityEngine.UI.RectMask2D>();
             var go=new GameObject("Drawing probe sketch",typeof(RectTransform),typeof(CanvasRenderer),typeof(FootprintProbeSketch));
             go.transform.SetParent(view,false);DrawingWorkbenchUi.Place(go.GetComponent<RectTransform>(),new Rect(0,0,width,128));

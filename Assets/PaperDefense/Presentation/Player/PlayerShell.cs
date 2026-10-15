@@ -91,43 +91,40 @@ namespace PaperDefense.Presentation
 
         void Home()
         {
-            ui.Label(page, "Держи линию", new Rect(M, 28, 430, 48), 30, title: true);
+            ui.Label(page, "Держи линию", new Rect(M, 20, 430, 56), 38, title: true);
             gold = ui.Label(page, ui.T("gold", game.Run.Workshop.Gold), new Rect(W - M - 280, 30, 220, 40), 18, PlayerUi.Muted, alignment: TextAnchor.MiddleRight);
             ui.IconButton(page, "Home settings", new Rect(W - M - 48, 24, 48, 48), PlayerIcon.Settings, ui.T("settings"), () => game.OpenSettings());
-            bool narrow = W < 900;
-            float mid = narrow ? 0 : Mathf.Max(0, (H - 670) / 2), left = narrow ? W - 2 * M : Mathf.Min(650, W * .47f - M);
-            var hero = ui.Scroll(page, "Home story", new Rect(0, 100, W, Mathf.Max(120, H - (narrow ? 330 : 210))), mid + 444);
-            ui.Label(hero, "Оборона, которую ты нарисовал", new Rect(M, mid, left, 32), 17, PlayerUi.Blue);
-            int heroSize = Mathf.Clamp(Mathf.RoundToInt(left / 9.2f), 40, 70);
-            ui.Label(hero, "Твоя линия.\nТвои правила.", new Rect(M, mid + 42, left, 196), heroSize, title: true);
-            ui.Label(hero, "Собери башню, нарисуй её характер и защити страницу от каракулей.", new Rect(M, mid + 238, left, 72), 21, PlayerUi.Muted);
-            ui.Button(narrow ? page : hero, "Open campaign", new Rect(M, narrow ? H - 212 : mid + 330, 250, 54), PlayerIcon.Play, "Начать игру", () => game.Navigate(PlayerPage.Map), true);
-            ui.Label(hero, ui.T("mission") + " · " + game.Run.Session.Balance.Waves.Count + " волн", new Rect(M, mid + 398, left, 30), 16, PlayerUi.Muted);
-            float artX = W * .52f, artW = W - artX - M, artH = Mathf.Min(610, H - 220);
-            var art = ui.Panel(hero, "Your notebook", new Rect(artX, (H - artH) / 2 - 115, artW, artH), PlayerUi.Card);
-            art.gameObject.SetActive(!narrow);
-            PlayerUi.Graphic<PlayerPaperGraphic>(art, "Notebook grid", new Rect(0, 0, artW, artH));
-            ui.Art(art, "object.castle", new Rect(artW * .50f, artH * .22f, artW * .30f, artH * .32f));
-            ui.Blueprint(art, game.Run.Workshop.Loadout[0], new Rect(artW * .12f, artH * .42f, artW * .36f, artH * .32f));
-            ui.Art(art, "ui.material.pen", new Rect(artW * .78f, artH * .44f, artW * .15f, artH * .34f));
-            ui.Label(art, "Всё начинается с одного штриха", new Rect(20, artH - 58, artW - 40, 44), 25, PlayerUi.Muted, true, TextAnchor.MiddleCenter);
-            float footer = narrow ? H - 142 : H - 86, buttonWidth = narrow ? (W - 2 * M - 12) / 2 : 205;
-            ui.Panel(page, "Menu divider", new Rect(M, footer - 19, W - 2 * M, 1), new Color32(219, 227, 239, 255));
+            bool narrow = W < 1000;
+            float width = W - M * 2, height = H - 196;
+            var sheet = ui.Panel(page, "Your notebook", new Rect(M, 92, width, height), PlayerUi.Card);
+            float artW = narrow ? width : width - 310;
+            float artH = narrow ? height - 70 : height;
+            PlayerUi.Graphic<PlayerPaperGraphic>(sheet, "Notebook grid", new Rect(12, 12, artW - 24, artH - 24));
+            ui.Art(sheet, "object.castle", new Rect(artW * .50f, artH * .16f, artW * .34f, artH * .50f));
+            ui.Blueprint(sheet, game.Run.Workshop.Loadout[0], new Rect(artW * .14f, artH * .26f, artW * .34f, artH * .59f));
+            if (!narrow)
+            {
+                ui.Label(sheet, "Твоя оборона", new Rect(artW + 12, height * .25f, 270, 56), 34, title: true);
+                ui.Label(sheet, "Собери. Нарисуй.\nЗащити страницу.", new Rect(artW + 12, height * .25f + 68, 270, 64), 20, PlayerUi.Muted);
+                ui.Label(sheet, ui.T("mission") + " · " + game.Run.Session.Balance.Waves.Count + " волн", new Rect(artW + 12, height * .25f + 152, 270, 56), 16, PlayerUi.Muted);
+            }
+            ui.Button(sheet, "Open campaign", new Rect(narrow ? (width - 250) / 2 : artW + 12, narrow ? height - 62 : height * .25f + 222, 250, 50), PlayerIcon.Play, "Начать игру", () => game.Navigate(PlayerPage.Map), true);
+            float footer = H - 82, gap = 12, buttonWidth = (width - gap * 3) / 4;
             ui.Button(page, "workshop", new Rect(M, footer, buttonWidth, 48), PlayerIcon.Pencil, ui.T("workshop"), () => game.Navigate(PlayerPage.Workshop));
-            ui.Button(page, "settings", new Rect(M + buttonWidth + 12, footer, narrow ? buttonWidth : 190, 48), PlayerIcon.Settings, ui.T("settings"), () => game.OpenSettings());
-            ui.Button(page, "help", new Rect(narrow ? M : M + 425, narrow ? footer + 60 : footer, buttonWidth, 48), PlayerIcon.Help, "Как играть", () => game.OpenSettings(true));
-            ui.Button(page, "exit", new Rect(narrow ? M + buttonWidth + 12 : W - M - 140, narrow ? footer + 60 : footer, narrow ? buttonWidth : 140, 48), PlayerIcon.Exit, "Выйти", () => Confirm("Выйти из игры?", "Сохранённые чертежи и золото останутся в профиле.", () => UnityEngine.Application.Quit()));
+            ui.Button(page, "settings", new Rect(M + buttonWidth + gap, footer, buttonWidth, 48), PlayerIcon.Settings, ui.T("settings"), () => game.OpenSettings());
+            ui.Button(page, "help", new Rect(M + 2 * (buttonWidth + gap), footer, buttonWidth, 48), PlayerIcon.Help, "Как играть", () => game.OpenSettings(true));
+            ui.Button(page, "exit", new Rect(M + 3 * (buttonWidth + gap), footer, buttonWidth, 48), PlayerIcon.Exit, "Выйти", () => Confirm("Выйти из игры?", "Сохранённые чертежи и золото останутся в профиле.", () => UnityEngine.Application.Quit()));
         }
 
         void Map()
         {
-            Header("Карта кампании", () => game.Navigate(PlayerPage.Home));
+            Header("Разведка · первая страница", () => game.Navigate(PlayerPage.Home));
             if (W < 900) { CompactMap(); return; }
             float width = W - M * 2, side = Mathf.Min(370, width * .34f), height = H - 165;
             var map = ui.Panel(page, "Mission map", new Rect(M, 112, width - side - 24, height), PlayerUi.Card);
             var sketch = PlayerUi.Graphic<WorkshopMapSketch>(map, "Actual battlefield", new Rect(24, 70, width - side - 72, height - 150)); sketch.SetSession(game.Run.Session);
             ui.Label(map, "Первая страница", new Rect(24, 18, width - side - 72, 44), 29, title: true);
-            ui.Label(map, "Дороги и источники текущей миссии", new Rect(24, height - 60, width - side - 72, 40), 17, PlayerUi.Muted);
+            ui.Label(map, "Стрелки — входы · замок — цель защиты · капли — источники", new Rect(24, height - 60, width - side - 72, 40), 17, PlayerUi.Muted);
             var info = ui.Panel(page, "Mission information", new Rect(W - M - side, 112, side, height), PlayerUi.Card);
             ui.Label(info, "МИССИЯ 01", new Rect(24, 20, side - 48, 30), 16, PlayerUi.Blue);
             ui.Art(info, "object.castle", new Rect(side * .28f, 66, side * .44f, Mathf.Min(150, height * .25f)));
@@ -163,10 +160,10 @@ namespace PaperDefense.Presentation
                 int slot = i; var bp = game.Run.Workshop.Loadout[i];
                 var card = ui.Panel(body, "Loadout " + i, new Rect(i % columns * (cardW + 18), 110 + i / columns * (cardH + 18), cardW, cardH), PlayerUi.Card);
                 ui.Label(card, "0" + (i + 1), new Rect(18, 12, 40, 28), 17, PlayerUi.Muted);
-                ui.Blueprint(card, bp, new Rect(cardW * .25f, 26, cardW * .5f, cardH - 130));
-                ui.Label(card, bp == null ? ui.T("empty") : GameText.Resolve(bp.Name), new Rect(18, cardH - 96, cardW - 36, 40), 23, title: true);
-                if (bp != null) ui.Label(card, ui.T("cost", game.Run.PreviewBlueprint(bp, game.Drawing.Tier).Cost), new Rect(18, cardH - 48, cardW - 90, 30), 17, PlayerUi.Blue);
-                ui.IconButton(card, "Cycle blueprint " + i, new Rect(cardW - 62, cardH - 55, 44, 40), PlayerIcon.Restart, "Следующий чертёж в альбоме", () => game.CycleBlueprint(slot));
+                ui.Blueprint(card, bp, new Rect(28, 16, cardW - 56, cardH - 140));
+                ui.Label(card, bp == null ? ui.T("empty") : GameText.Resolve(bp.Name), new Rect(18, cardH - 126, cardW - 36, 36), 23, title: true);
+                if (bp != null) ui.Label(card, ui.T("cost", game.Run.PreviewBlueprint(bp, game.Drawing.Tier).Cost), new Rect(18, cardH - 90, cardW - 36, 28), 17, PlayerUi.Blue);
+                ui.Button(card, "Replace blueprint " + i, new Rect(14, cardH - 54, cardW - 28, 42), PlayerIcon.Book, "Заменить чертёж", () => OpenBlueprintPicker(slot));
             }
             var materials = ui.Panel(body, "Preparation material", new Rect(0, materialY, width, 132), PlayerUi.Card);
             ui.Label(materials, "Материал строительства", new Rect(20, 12, width - 40, 32), 24, title: true);
@@ -181,6 +178,37 @@ namespace PaperDefense.Presentation
             ui.Button(page, "Edit album", new Rect(M, H - 84, 240, 52), PlayerIcon.Book, "В мастерскую", () => game.Navigate(PlayerPage.Workshop));
             ui.Button(page, "Start battle", new Rect(W - M - 250, H - 84, 250, 52), PlayerIcon.Play, "Начать оборону", () => game.StartBattle(), true);
             status = ui.Label(page, "", new Rect(M + 260, H - 84, Mathf.Max(80, width - 540), 52), 17, NotebookPalette.Red, alignment: TextAnchor.MiddleCenter);
+        }
+
+        void OpenBlueprintPicker(int slot)
+        {
+            var shield = ui.Panel(page, "Blueprint picker shield", new Rect(0, 0, W, H), new Color(.10f, .16f, .22f, .4f), true);
+            float width = Mathf.Min(1040, W - 48), height = Mathf.Min(720, H - 48);
+            var sheet = ui.Panel(shield, "Blueprint album picker", new Rect((W - width) / 2, (H - height) / 2, width, height), PlayerUi.Card, true);
+            Action close = () => { shield.gameObject.SetActive(false); Destroy(shield.gameObject); };
+            ui.Label(sheet, "Альбом · чертёж " + (slot + 1), new Rect(24, 12, width - 100, 52), 30, title: true);
+            ui.IconButton(sheet, "Close blueprint picker", new Rect(width - 64, 16, 44, 40), PlayerIcon.Back, "Отменить выбор", close);
+            int columns = width < 760 ? 2 : 3;
+            float cardW = (width - 60 - 12 * (columns - 1)) / columns;
+            var album = game.Run.Workshop.Album;
+            var list = ui.Scroll(sheet, "Blueprint album choices", new Rect(24, 80, width - 48, height - 104), Mathf.Ceil(album.Count / (float)columns) * 218);
+            for (int i = 0; i < album.Count; i++)
+            {
+                var bp = album[i]; string id = bp.Id;
+                int occupiedSlot = -1;
+                for (int assigned = 0; assigned < 4; assigned++)
+                    if (game.Run.Workshop.Loadout[assigned]?.Id == id) occupiedSlot = assigned;
+                var button = ui.IconButton(list, "Pick blueprint " + id, new Rect(i % columns * (cardW + 12), i / columns * 218, cardW, 206), PlayerIcon.Book, GameText.Resolve(bp.Name), () => game.AssignBlueprint(slot, id));
+                Destroy(button.GetComponentInChildren<PlayerIconGraphic>().gameObject);
+                ui.Blueprint(button.transform, bp, new Rect(20, 12, cardW - 40, 120));
+                ui.Label(button.transform, GameText.Resolve(bp.Name), new Rect(12, 132, cardW - 24, 40), 19, title: true);
+                bool unavailable = occupiedSlot >= 0 && occupiedSlot != slot;
+                button.interactable = !unavailable;
+                ui.Label(button.transform, unavailable ? "Уже в наборе · " + (occupiedSlot + 1) : ui.T("cost", game.Run.PreviewBlueprint(bp, game.Drawing.Tier).Cost), new Rect(12, 174, cardW - 24, 26), 16, PlayerUi.Muted);
+                ui.MarkSelected(button, game.Run.Workshop.Loadout[slot]?.Id == id);
+            }
+            if (album.Count == 0) ui.Label(list, "Альбом пуст. Сохрани чертёж в мастерской.", new Rect(12, 12, width - 84, 80), 20);
+            WorkshopModal.Open(shield.gameObject, close);
         }
 
         public void SetStatus(string message) { if (status != null) status.text = message; }

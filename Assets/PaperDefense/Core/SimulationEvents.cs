@@ -9,7 +9,8 @@ namespace PaperDefense.Core
         Shot = 0, ProjectileLaunched = 1, ProjectileImpact = 2, StructureDestroyed = 3,
         WeaponActionStarted = 4, EnemyAttack = 5, EnemyHit = 6, EnemyDied = 7,
         BlotSpawned = 8, BlotExpired = 9, BlotCleared = 10, BlotAbsorbed = 11,
-        EnemyGlobLaunched = 12, EnemyGlobImpact = 13, BaseHit = 14, InkWellHit = 15, InkWellActivated = 16
+        EnemyGlobLaunched = 12, EnemyGlobImpact = 13, BaseHit = 14, InkWellHit = 15, InkWellActivated = 16,
+        StructureErased = 17, StructureCompleted = 18
     }
 
     public readonly struct SimulationEvent

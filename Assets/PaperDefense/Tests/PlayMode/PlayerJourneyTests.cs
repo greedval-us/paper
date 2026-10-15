@@ -37,6 +37,27 @@ namespace PaperDefense.Tests
             Assert.Fail("Missing active control: " + name); return null;
         }
 
+        [UnityTest] public IEnumerator PreparationPickerChangesOnlyTheChosenSlotAfterAnExplicitChoice()
+        {
+            var choice = game.Run.Workshop.Loadout[0].AsVariant("picker-choice", "Новая страница");
+            Assert.That(game.Run.SaveBlueprint(choice, out var reason), Is.True, reason);
+            game.Navigate(PlayerPage.Preparation); yield return null;
+            string first = game.Run.Workshop.Loadout[0].Id;
+            string second = game.Run.Workshop.Loadout[1].Id;
+            Find("Replace blueprint 0").onClick.Invoke(); yield return null;
+            Assert.That(game.Run.Workshop.Loadout[0].Id, Is.EqualTo(first));
+            Assert.That(Find("Start battle").IsInteractable(), Is.False);
+            Find("Close blueprint picker").onClick.Invoke(); yield return null;
+            Assert.That(Find("Start battle").IsInteractable(), Is.True);
+            Assert.That(game.Run.Workshop.Loadout[0].Id, Is.EqualTo(first));
+            Find("Replace blueprint 0").onClick.Invoke(); yield return null;
+            Assert.That(Find("Pick blueprint " + second).interactable, Is.False);
+            Find("Pick blueprint " + choice.Id).onClick.Invoke(); yield return null;
+            Assert.That(game.Run.Workshop.Loadout[0].Id, Is.EqualTo(choice.Id));
+            Assert.That(game.Run.Workshop.Loadout[1].Id, Is.EqualTo(second));
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Preparation));
+        }
+
         [UnityTest] public IEnumerator FreshLaunchShowsMenuWithoutAdvancingOrWritingProfile()
         {
             Assert.That(game.Page, Is.EqualTo(PlayerPage.Home));

@@ -19,7 +19,7 @@ namespace PaperDefense.Presentation
                 new Vector2(r.xMin, r.yMax - cut * .6f), new Vector2(r.xMin + 1, r.yMin + cut)
             };
             bool light = color.grayscale > .6f;
-            Color fill = light ? new Color(color.r * .985f, color.g * .965f, color.b * .91f, color.a) : color;
+            Color fill = color;
             Color ink = light ? new Color(.12f, .20f, .33f, color.a * .62f) : new Color(.96f, .93f, .82f, color.a * .6f);
             Color ghost = ink; ghost.a *= .25f;
             for (int i = 0; i < edge.Length; i++) pen.Triangle(r.center, edge[i], edge[(i + 1) % edge.Length], fill);

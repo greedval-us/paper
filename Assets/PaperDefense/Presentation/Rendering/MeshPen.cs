@@ -100,6 +100,21 @@ namespace PaperDefense.Presentation
         }
 
         /// <summary>Append cached author lines with only a rigid transform; no wobble or silhouette replacement.</summary>
+        public void AppendRevealed(AuthoredPartGeometry geometry, Vector2 pivot, float radians, Color color, float progress)
+        {
+            if (geometry == null || progress <= 0) return;
+            if (progress >= 1) { Append(geometry, pivot, radians, color); return; }
+            float remaining = geometry.Vertices.Count / 4f * Mathf.Clamp01(progress);
+            float cosine = Mathf.Cos(radians), sine = Mathf.Sin(radians);
+            for (int i = 0; i < geometry.Vertices.Count && remaining > 0; i += 4, remaining--)
+            {
+                Vector2 a = (geometry.Vertices[i] + geometry.Vertices[i + 3]) * .5f;
+                Vector2 b = (geometry.Vertices[i + 1] + geometry.Vertices[i + 2]) * .5f;
+                float width = Vector2.Distance(geometry.Vertices[i], geometry.Vertices[i + 3]);
+                Line(pivot + Rotate(a, cosine, sine), pivot + Rotate(Vector2.Lerp(a, b, Mathf.Min(1, remaining)), cosine, sine), width, color);
+            }
+        }
+
         public void Append(AuthoredPartGeometry geometry, Vector2 pivot, float radians, Color color)
         {
             if (geometry == null) return;
@@ -252,7 +267,7 @@ namespace PaperDefense.Presentation
 
     internal static class NotebookPalette
     {
-        public static readonly Color Paper = new Color(.974f, .957f, .896f);
+        public static readonly Color Paper = new Color32(249, 244, 230, 255);
         public static readonly Color Navy = new Color(.17f, .22f, .29f);
         public static readonly Color Blue = new Color(.23f, .42f, .68f);
         public static readonly Color Pencil = new Color(.68f, .49f, .23f);

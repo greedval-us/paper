@@ -17,10 +17,17 @@ namespace PaperDefense.Tests
                 Assert.That(field.yMin,Is.GreaterThanOrEqualTo(0));
                 Assert.That(field.xMax,Is.LessThanOrEqualTo(1));
                 Assert.That(field.yMax,Is.LessThanOrEqualTo(1));
-                Assert.That(layout.Field.xMin,Is.GreaterThanOrEqualTo(100));
-                Assert.That(layout.Field.yMin,Is.GreaterThanOrEqualTo(132));
+                Assert.That(layout.Field.xMin,Is.GreaterThanOrEqualTo(8));
+                Assert.That(layout.Field.yMin,Is.GreaterThanOrEqualTo(60));
                 Assert.That(layout.Field.height,Is.GreaterThan(0));
             }
+        }
+
+        [TestCase(1280,720)] [TestCase(1920,1080)]
+        public void NormalBattleAllocatesAtLeastSixtyFivePercentToWorld(int width,int height)
+        {
+            var field = new PlayerLayout(width,height).NormalizedField;
+            Assert.That(field.width * field.height, Is.InRange(.65f, .76f));
         }
     }
 }

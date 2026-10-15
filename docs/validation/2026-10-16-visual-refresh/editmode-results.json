@@ -1,0 +1,46 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "b1e6c89a54e448998428dd87c11b34f6",
+      "status": "succeeded",
+      "mode": "EditMode",
+      "started_unix_ms": 1792106071730,
+      "finished_unix_ms": 1792106077530,
+      "last_update_unix_ms": 1792106077530,
+      "progress": {
+        "completed": 58,
+        "total": 58,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.PlayerSceneTests.PlayerEntryExistsSeparatelyFromDevelopmentScenes",
+        "last_finished_unix_ms": 1792106077318,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "EditMode",
+        "summary": {
+          "total": 58,
+          "passed": 58,
+          "failed": 0,
+          "skipped": 0,
+          "durationSeconds": 1.5054306,
+          "resultState": "Passed"
+        },
+        "results": []
+      }
+    },
+    "hint": null
+  }
+}

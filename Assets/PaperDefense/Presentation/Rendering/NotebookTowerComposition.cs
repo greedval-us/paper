@@ -61,6 +61,18 @@ namespace PaperDefense.Presentation
             }
         }
 
+        internal static void DrawConstruction(MeshPen pen, StructureView structure, Vector2 origin, float fraction)
+        {
+            var blueprint = structure.Blueprint;
+            var geometry = AuthoredGeometryCache.For(ReferenceDrawingCache.VisibleDrawing(blueprint));
+            foreach (var template in DrawingTemplateCatalog.Create(blueprint))
+            {
+                Vector2 pivot = origin + new Vector2(template.Pivot.X, template.Pivot.Y);
+                pen.AppendRevealed(geometry.GetPart(template.BindingId), pivot, 0,
+                    DoodleGlyphs.TierColor(structure.Tier), fraction);
+            }
+        }
+
         internal static void DrawMounts(MeshPen pen, TowerBlueprint blueprint, Vector2 origin, MaterialTier tier,
             InkColor ink, StructureView structure, bool aimed, NotebookAnimationState animation, int structureId,
             double seconds, float opacity = 1, NotebookVisualThemeAsset theme = null, Func<int, Point2> overrideAim = null)
@@ -76,6 +88,9 @@ namespace PaperDefense.Presentation
                 Point2 aim = overrideAim != null ? overrideAim(mount.SlotIndex) : aimed ? structure.GetMountAim(mount.SlotIndex) : default;
                 Vector2 forward = Direction(aim, pivot);
                 float angle = Mathf.Atan2(forward.y, forward.x) - Mathf.PI * .5f;
+                // A quiet mounting ring separates the rotating weapon from the authored body.
+                if (aimed && pen.WorldUnitsPerPixel > 0)
+                    pen.Ring(pivot, .065f, .018f, MeshPen.Alpha(NotebookPalette.Navy, opacity * .65f), 12);
                 pivot += forward * (animation?.Recoil(structureId, mount.SlotIndex, seconds, theme) ?? 0);
                 if (authored != null) pen.Append(authored.GetPart(DrawingBindings.Mount(mount.SlotIndex)), pivot, angle, tint);
                 else if (!NotebookArtRenderer.Draw(pen, theme?.FindShape(mount.WeaponId), pivot, radians: angle, strokeTint: MeshPen.Alpha(tint, 1), opacity: opacity, theme: theme))

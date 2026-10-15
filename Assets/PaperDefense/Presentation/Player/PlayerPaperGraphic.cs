@@ -8,7 +8,7 @@ namespace PaperDefense.Presentation
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear(); var pen = new MeshPen(null, 4096); var r = rectTransform.rect;
-            Color grid = new Color(.24f, .4f, .58f, .18f);
+            Color grid = new Color(.24f, .4f, .58f, .075f);
             for (float x = r.xMin; x < r.xMax; x += 32) pen.Line(new Vector2(x, r.yMin), new Vector2(x, r.yMax), .8f, grid);
             for (float y = r.yMin; y < r.yMax; y += 32) pen.Line(new Vector2(r.xMin, y), new Vector2(r.xMax, y), .8f, grid);
             pen.Line(new Vector2(r.xMin + 96, r.yMin), new Vector2(r.xMin + 96, r.yMax), 1, new Color(.7f, .3f, .24f, .14f));
@@ -18,12 +18,14 @@ namespace PaperDefense.Presentation
 
     public sealed class PlayerCardGraphic : MaskableGraphic
     {
-        public float Radius = 14;
+        public float Radius = 4;
         public bool NotebookStyle;
+        public bool Selected;
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear(); Rect r = rectTransform.rect;
-            if (NotebookStyle) { NotebookPaperSurface.Draw(vh, r, color); return; }
+            if (NotebookStyle && !Selected && r.width > 250 && r.height > 150 && color.a > 0)
+            { NotebookPaperSurface.Draw(vh, r, color); return; }
             float radius = Mathf.Min(Radius, r.width * .5f, r.height * .5f);
             vh.AddVert(r.center, color, Vector2.zero);
             for (int corner = 0; corner < 4; corner++)
@@ -37,6 +39,16 @@ namespace PaperDefense.Presentation
                 }
             }
             for (int i = 1; i <= 36; i++) vh.AddTriangle(0, i, i == 36 ? 1 : i + 1);
+            if (Selected)
+            {
+                var pen = new MeshPen(null, 64);
+                var a = new Vector2(r.xMin + 3, r.yMin + 3); var b = new Vector2(r.xMax - 3, r.yMax - 3);
+                pen.Line(a, new Vector2(b.x, a.y), 2, PlayerUi.Ink);
+                pen.Line(new Vector2(b.x, a.y), b, 2, PlayerUi.Ink);
+                pen.Line(b, new Vector2(a.x, b.y), 2, PlayerUi.Ink);
+                pen.Line(new Vector2(a.x, b.y), a, 2, PlayerUi.Ink);
+                pen.CopyTo(vh, Vector2.zero, 1);
+            }
         }
     }
 }

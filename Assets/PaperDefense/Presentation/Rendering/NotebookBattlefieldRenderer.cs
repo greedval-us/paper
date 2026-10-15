@@ -10,8 +10,8 @@ namespace PaperDefense.Presentation
         {
             if(map==null)return;
             theme=theme??NotebookVisualThemeAsset.Default;
-            var roadFill=new Color(.84f,.76f,.59f,.48f);
-            var roadEdge=new Color(.43f,.37f,.26f,.43f);
+            var roadFill=new Color(.84f,.76f,.59f,.28f);
+            var roadEdge=new Color(.43f,.37f,.26f,.30f);
             foreach(var cell in map.Roads)
                 pen.Rect(cell.X-.025f,cell.Y-.025f,1.05f,1.05f,roadFill);
             foreach(var cell in map.Roads)
@@ -32,7 +32,7 @@ namespace PaperDefense.Presentation
                 if(prop.Kind==TerrainPropKind.Mountain&&(prop.Cell.X&1)==0)id="terrain.ridge";
                 pen.Rect(prop.Cell.X,prop.Cell.Y,prop.Width,prop.Height,new Color(.39f,.50f,.40f,.06f));
                 float scale=Mathf.Min(prop.Width/1.15f,prop.Height/1.05f);
-                NotebookArtRenderer.Draw(pen,theme?.FindShape(id),at,scale,theme:theme);
+                NotebookArtRenderer.Draw(pen,theme?.FindShape(id),at,scale,opacity:.58f,theme:theme);
             }
             foreach(var cell in map.BarricadeSites)
             {

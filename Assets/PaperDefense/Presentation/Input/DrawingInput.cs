@@ -27,6 +27,8 @@ namespace PaperDefense.Presentation
         public string PreviewReason { get; private set; } = "";
         public Cell HoverCell { get; private set; }
         public bool HasHover { get; private set; }
+        public Cell? InspectedCell { get; private set; }
+        public void Inspect(Cell? cell) { InspectedCell = cell; Cancel(); }
         public bool ShowRanges => view != null && view.ShowRanges;
         public float Zoom { get; private set; } = 1;
         public Vector2 CameraCenter { get; private set; }
@@ -94,6 +96,7 @@ namespace PaperDefense.Presentation
         void OnApplicationFocus(bool focused) { if (!focused) { Cancel(); HasHover = false; } }
         void OnRestart(IRunReadModel session)
         {
+            InspectedCell = null;
             Cancel(); Zoom = 1; CameraCenter = new Vector2(session.Balance.Width * .5f, session.Balance.Height * .5f);
             ResetUnavailableSelections();
             if (BlueprintSlot >= 0)
@@ -177,6 +180,7 @@ namespace PaperDefense.Presentation
             if (mouse.leftButton.wasPressedThisFrame && HasHover && hasPressOrigin && pressMouse == mouse &&
                 TryCell(pressPosition, out var startCell) && !OverUi(pressPosition))
             {
+                InspectedCell = null;
                 if (Mode == DrawingMode.Upgrade)
                 { Message = run.Upgrade(startCell, out var reason) ? UserText.Message("copy.c21e825dfc5ef9fd") : reason; }
                 else if (Mode == DrawingMode.Erase) { erasedCells = 0; gesture.Begin(startCell, continuous: true); }
@@ -197,14 +201,20 @@ namespace PaperDefense.Presentation
             {
                 if (HasHover && Mode == DrawingMode.Build)
                 {
-                    string reason;
-                    bool success = BlueprintSlot >= 0 ? run.BuildBlueprint(gesture.Cells, BlueprintSlot, Tier, Color, out reason) : run.Build(gesture.Cells, Tool, Tier, out reason);
-                    Message = success ? (run.Paused ? UserText.Message("copy.5550d1f4c6ac852a") : UserText.Message("copy.6d7492b5fc3888c5")) : reason;
+                    if (gesture.Cells.Count == 1 && run.Session.StructureAt(cell).HasValue) Inspect(cell);
+                    else
+                    {
+                        string reason;
+                        bool success = BlueprintSlot >= 0 ? run.BuildBlueprint(gesture.Cells, BlueprintSlot, Tier, Color, out reason) : run.Build(gesture.Cells, Tool, Tier, out reason);
+                        Message = success ? (run.Paused ? UserText.Message("copy.5550d1f4c6ac852a") : UserText.Message("copy.6d7492b5fc3888c5")) : reason;
+                    }
                 }
                 Cancel();
             }
             if (!mouse.leftButton.isPressed && !mouse.leftButton.wasReleasedThisFrame) Cancel();
             if (!HasHover || Mode != DrawingMode.Build) { view.ClearPreview(); PreviewCost = 0; PreviewReason = ""; return; }
+            if (InspectedCell.HasValue && InspectedCell.Value.Equals(cell))
+            { view.ClearPreview(); PreviewCost = 0; PreviewReason = ""; return; }
             hoverPreview[0] = cell;
             IReadOnlyList<Cell> cells = gesture.Active ? gesture.Cells : hoverPreview;
             var quote = BlueprintSlot >= 0 ? run.QuoteBlueprint(cells, BlueprintSlot, Tier, Color) : run.QuoteBuild(cells, Tool, Tier);

@@ -39,6 +39,27 @@ namespace PaperDefense.Tests
 
         [SetUp] public void SetUp() { AuthoredGeometryCache.Clear(); }
 
+        [Test] public void ConstructionRevealKeepsTheSavedDrawingAndEndsAtItsExactGeometry()
+        {
+            var drawing = Drawing(); string hash = drawing.GeometryHash;
+            var part = AuthoredGeometryCache.For(drawing).GetPart(DrawingPartKey.Base);
+            var mesh = new Mesh();
+            try
+            {
+                var pen = new MeshPen(mesh);
+                pen.AppendRevealed(part, Vector2.zero, 0, Color.blue, 0); pen.Upload();
+                Assert.That(mesh.vertexCount, Is.Zero);
+                pen.Clear(); pen.AppendRevealed(part, Vector2.zero, 0, Color.blue, .25f); pen.Upload();
+                Assert.That(mesh.vertexCount, Is.GreaterThan(0).And.LessThan(part.Vertices.Count));
+                pen.Clear(); pen.AppendRevealed(part, Vector2.zero, 0, Color.blue, 1); pen.Upload();
+                var revealed = mesh.vertices;
+                pen.Clear(); pen.Append(part, Vector2.zero, 0, Color.blue); pen.Upload();
+                CollectionAssert.AreEqual(mesh.vertices, revealed);
+                Assert.That(drawing.GeometryHash, Is.EqualTo(hash));
+            }
+            finally { UnityEngine.Object.DestroyImmediate(mesh); }
+        }
+
         [Test] public void RepeatedCopiesAndDeepCopiesShareOnePreparedGeometryWithoutMutableStorage()
         {
             var drawing = Drawing(); var first = AuthoredGeometryCache.For(drawing);

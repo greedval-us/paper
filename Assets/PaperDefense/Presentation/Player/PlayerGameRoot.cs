@@ -15,7 +15,7 @@ namespace PaperDefense.Presentation
         [SerializeField] TextResourcesAsset textResources;
         [SerializeField] NotebookViewSettingsAsset viewSettings;
         [SerializeField] bool memoryOnlyProfile;
-        [SerializeField] bool notebookStyle;
+        [SerializeField] bool notebookStyle = true;
         public bool NotebookStyle => notebookStyle;
         PaperDefenseBootstrap bootstrap;
         WorkshopHud workshop;
@@ -53,7 +53,7 @@ namespace PaperDefense.Presentation
         public bool CanBuild => Page == PlayerPage.Battle && !Run.Paused && !Run.Session.PendingUpgrade && !Finished;
         public bool Finished => Run.Session.Phase == RunPhase.Victory || Run.Session.Phase == RunPhase.Defeat;
 
-        public void Configure(GameBalanceAsset configuration, bool memoryOnly, bool useNotebookStyle = false)
+        public void Configure(GameBalanceAsset configuration, bool memoryOnly, bool useNotebookStyle = true)
         { balance = configuration; memoryOnlyProfile = memoryOnly; notebookStyle = useNotebookStyle; }
 
         void Awake()
@@ -182,6 +182,13 @@ namespace PaperDefense.Presentation
             for (int i = 0; i < album.Count; i++) if (album[i].Id == current) { next = (i + 1) % album.Count; break; }
             if (!Run.AssignBlueprint(slot, album[next].Id, out var reason)) Status = GameText.Resolve(reason);
             else Status = "";
+            shell.Show(PlayerPage.Preparation);
+        }
+
+        public void AssignBlueprint(int slot, string id)
+        {
+            if (Page != PlayerPage.Preparation || !Run.InWorkshop) return;
+            Status = Run.AssignBlueprint(slot, id, out var reason) ? "" : GameText.Resolve(reason);
             shell.Show(PlayerPage.Preparation);
         }
     }

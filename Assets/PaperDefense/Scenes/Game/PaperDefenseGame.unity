@@ -152,6 +152,7 @@ MonoBehaviour:
   textResources: {fileID: 11400000, guid: 65b7c519a9be45c4b55e357b6530ddb6, type: 2}
   viewSettings: {fileID: 0}
   memoryOnlyProfile: 0
+  notebookStyle: 1
 --- !u!4 &724197639
 Transform:
   m_ObjectHideFlags: 0

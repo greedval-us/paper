@@ -7,16 +7,17 @@ namespace PaperDefense.Presentation
     {
         public readonly float Width, Height, Scale;
         public readonly Rect Field;
+        public readonly Rect Header, Dock;
         public float Margin => Width < 1200 ? 24 : 48;
         public bool Compact => Width < 1200;
         public PlayerLayout(int width, int height, float uiScale = 1)
         {
             Scale = Mathf.Max(1, Mathf.Min(width / 1600f, height / 1000f)) * Mathf.Clamp(uiScale, 1, 1.5f);
             Width = Mathf.Max(1, width) / Scale; Height = Mathf.Max(1, height) / Scale;
-            float dock = Width < 900 ? 136 : Width < 1100 ? 214 : 158;
-            float top = Width < 900 ? 180 : 132;
-            float right = Width < 1100 ? 20 : 270;
-            Field = new Rect(100, top, Mathf.Max(100, Width - 100 - right), Mathf.Max(40, Height - top - dock - 60));
+            bool narrow = Width < 1050;
+            Header = new Rect(12, 8, Width - 24, narrow ? 92 : 52);
+            Dock = new Rect(12, Height - (narrow ? 196 : 156), Width - 24, narrow ? 184 : 144);
+            Field = new Rect(12, Header.yMax + 12, Width - 24, Mathf.Max(40, Dock.y - Header.yMax - 24));
         }
         public Rect NormalizedField => new Rect(Field.x / Width, 1 - Field.yMax / Height, Field.width / Width, Field.height / Height);
     }

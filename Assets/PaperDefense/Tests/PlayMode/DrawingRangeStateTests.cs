@@ -92,6 +92,25 @@ namespace PaperDefense.Tests
             Assert.That(drawing.ShowRanges, Is.False);
         }
 
+        [UnityTest] public IEnumerator ExistingWallCanBeInspectedByClickAndExtendedByDrag()
+        {
+            drawing.SelectTool(StructureKind.Wall);
+            var start = new Cell(35, 20); var end = new Cell(38, 20);
+            Assert.That(controller.Build(new[] { start }, StructureKind.Wall, MaterialTier.Pencil, out var reason), Is.True, reason);
+            int ink = controller.Session.Ink;
+            yield return Pointer(ScreenCell(start.X, start.Y), true);
+            yield return Pointer(ScreenCell(start.X, start.Y), false);
+            Assert.That(drawing.InspectedCell, Is.EqualTo(start));
+            Assert.That(controller.Session.Ink, Is.EqualTo(ink));
+            int extensionCost = controller.QuoteBuild(new[] { start, new Cell(36, 20), new Cell(37, 20), end }, StructureKind.Wall, MaterialTier.Pencil).Cost;
+            yield return Pointer(ScreenCell(start.X, start.Y), true);
+            yield return Pointer(ScreenCell(end.X, end.Y), true);
+            yield return Pointer(ScreenCell(end.X, end.Y), false);
+            Assert.That(controller.Session.StructureAt(end).HasValue, Is.True);
+            Assert.That(drawing.InspectedCell.HasValue, Is.False);
+            Assert.That(ink - controller.Session.Ink, Is.EqualTo(extensionCost));
+        }
+
         [UnityTest] public IEnumerator TabTogglesTheCurrentRendererStateInOrdinaryInput()
         {
             drawing.ConstructionOnly = false;

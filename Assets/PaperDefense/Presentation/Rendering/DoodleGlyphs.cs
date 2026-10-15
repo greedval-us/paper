@@ -41,6 +41,7 @@ namespace PaperDefense.Presentation
             Vector2 p = new Vector2(state.Cell.X + .5f, state.Cell.Y + .5f);
             Color color = TierColor(state.Tier);
             bool building = !state.IsComplete;
+            if (building && NotebookTowerComposition.UsesComposition(state.Blueprint)) return;
             float alpha = building ? .48f : 1;
             color.a = alpha;
             Color edge = MeshPen.Alpha(NotebookPalette.Navy, alpha);
@@ -161,7 +162,10 @@ namespace PaperDefense.Presentation
             Color color = state.Color == InkColor.None ? TierColor(state.Tier) : InkTone(state.Color);
             if (!state.IsComplete) color.a = .48f;
             Color edge = MeshPen.Alpha(NotebookPalette.Navy, color.a);
-            if (state.Blueprint != null)
+            float fraction = 1 - Mathf.Clamp01(state.BuildRemaining / Mathf.Max(.01f, buildDuration));
+            if (!state.IsComplete && NotebookTowerComposition.UsesComposition(state.Blueprint))
+                NotebookTowerComposition.DrawConstruction(pen, state, p, fraction);
+            else if (state.Blueprint != null)
             {
                 if (NotebookTowerComposition.UsesComposition(state.Blueprint))
                     NotebookTowerComposition.DrawMounts(pen, state.Blueprint, p, state.Tier, state.Color,
@@ -195,7 +199,6 @@ namespace PaperDefense.Presentation
             float angle = progress * Mathf.PI * 2;
             pen.Disc(p + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * .48f, .065f,
                      state.WaitingForClearance ? NotebookPalette.Red : color, 8);
-            float fraction = 1 - Mathf.Clamp01(state.BuildRemaining / Mathf.Max(.01f, buildDuration));
             pen.Line(p + new Vector2(-.35f, -.6f), p + new Vector2(.35f, -.6f), .06f,
                      MeshPen.Alpha(NotebookPalette.Navy, .16f));
             pen.Line(p + new Vector2(-.35f, -.6f), p + new Vector2(-.35f + .7f * fraction, -.6f), .06f,
@@ -419,6 +422,9 @@ namespace PaperDefense.Presentation
             theme = theme ?? NotebookVisualThemeAsset.Default;
             if (theme == null) return false;
             visualScale = VisualScale(visualScale);
+            Vector2 silhouette = kind == EnemyKind.Runner ? new Vector2(1.16f, .86f)
+                : kind == EnemyKind.Brute ? new Vector2(1.18f, 1.12f)
+                : kind == EnemyKind.Bulwark ? new Vector2(1.08f, 1.05f) : Vector2.one;
             string id = NotebookAnimationState.EnemyId(kind, tier, motion);
             var clip = theme.FindClip(id);
             if (clip != null)
@@ -426,9 +432,9 @@ namespace PaperDefense.Presentation
                 var frame = clip.Sample(Mathf.Max(0, phase));
                 if (frame == null) return false;
                 return NotebookArtRenderer.Draw(pen, theme.FindShape(frame.ShapeId), position + frame.Offset * visualScale,
-                    frame.Scale * visualScale, frame.Rotation, opacity: frame.Alpha, theme: theme);
+                    frame.Scale * visualScale, frame.Rotation, opacity: frame.Alpha, localScale: silhouette, theme: theme);
             }
-            return NotebookArtRenderer.Draw(pen, theme.FindShape(id), position, scale: visualScale, theme: theme);
+            return NotebookArtRenderer.Draw(pen, theme.FindShape(id), position, scale: visualScale, localScale: silhouette, theme: theme);
         }
 
         static void EnemyMarks(MeshPen pen, EnemyView enemy, float time, NotebookVisualThemeAsset theme = null)

@@ -15,7 +15,7 @@ namespace PaperDefense.Editor
     /// <summary>Repeatable evidence from the real Game View, using an explicitly memory-only player.</summary>
     public static class FullGameUiCapture
     {
-        public const string Folder = "docs/validation/2026-10-15-full-game-ui";
+        public static string Folder { get; set; } = "docs/validation/2026-10-15-full-game-ui";
         public static PlayerGameRoot Game { get; private set; }
         public static string LastCapture { get; private set; }
         static int originalIndex = -1;

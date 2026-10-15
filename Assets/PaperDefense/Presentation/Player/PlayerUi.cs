@@ -22,16 +22,17 @@ namespace PaperDefense.Presentation
     public sealed class PlayerUi
     {
         public static readonly Color Ink = new Color32(35, 57, 83, 255);
-        public static readonly Color Blue = new Color32(49, 88, 220, 255);
-        public static readonly Color Paper = new Color32(245, 247, 252, 255);
-        public static readonly Color Card = Color.white;
-        public static readonly Color Muted = new Color32(89, 108, 134, 255);
-        public static readonly Color Wash = new Color32(237, 242, 250, 255);
+        public static readonly Color Blue = new Color32(49, 83, 132, 255);
+        public static readonly Color Paper = new Color32(249, 244, 230, 255);
+        public static readonly Color Card = new Color32(255, 252, 243, 255);
+        public static readonly Color Muted = new Color32(101, 105, 105, 255);
+        public static readonly Color Wash = new Color32(239, 232, 215, 255);
+        public static readonly Color Selected = new Color32(229, 225, 207, 255);
         readonly Font font, heading;
         readonly UserTextResolver copy;
         public bool NotebookStyle { get; }
         public Action<string> Tooltip;
-        public PlayerUi(bool notebookStyle = false)
+        public PlayerUi(bool notebookStyle = true)
         {
             NotebookStyle = notebookStyle;
             font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
@@ -68,7 +69,7 @@ namespace PaperDefense.Presentation
         {
             var panel = Panel(parent, name, bounds, primary ? Blue : Card, true);
             var button = panel.gameObject.AddComponent<Button>(); button.targetGraphic = panel.GetComponent<PlayerCardGraphic>();
-            var colors = button.colors; colors.highlightedColor = new Color(.86f, .92f, 1); colors.pressedColor = new Color(.65f, .79f, .94f); colors.selectedColor = colors.normalColor; colors.disabledColor = new Color(.75f, .75f, .75f, .4f); button.colors = colors;
+            var colors = button.colors; colors.highlightedColor = new Color(.94f, .93f, .88f); colors.pressedColor = new Color(.80f, .81f, .77f); colors.selectedColor = colors.normalColor; colors.disabledColor = new Color(.78f, .78f, .75f, .65f); button.colors = colors;
             button.onClick.AddListener(() => { Tooltip?.Invoke(""); action?.Invoke(); });
             float size = Mathf.Min(bounds.width, bounds.height) * .62f;
             Rect iconBounds = new Rect((bounds.width - size) / 2, (bounds.height - size) / 2, size, size);
@@ -113,7 +114,11 @@ namespace PaperDefense.Presentation
         public BlueprintSketch Blueprint(Transform parent, TowerBlueprint value, Rect bounds)
         { var sketch = Graphic<BlueprintSketch>(parent, "Blueprint", bounds); sketch.SetBlueprint(value); return sketch; }
         public void MarkSelected(Button button, bool selected)
-        { button.targetGraphic.color = selected ? new Color32(220, 231, 255, 255) : Card; }
+        {
+            button.targetGraphic.color = selected ? Selected : Card;
+            if (button.targetGraphic is PlayerCardGraphic card && card.Selected != selected)
+            { card.Selected = selected; card.SetVerticesDirty(); }
+        }
 
         public static void HorizontalScrollbar(ScrollRect scroll)
         {

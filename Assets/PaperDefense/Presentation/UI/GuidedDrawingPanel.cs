@@ -36,6 +36,7 @@ namespace PaperDefense.Presentation
         int rejectedCommands, probeMount;
         bool refreshing, detailsVisible;
         TowerPreview? openingPreview, previousPreview, lastChangePreview;
+        readonly UnityEngine.UI.Text lastChange;
 
         public GameObject Root { get; }
         public DrawingEditSession Session { get; private set; }
@@ -56,7 +57,7 @@ namespace PaperDefense.Presentation
             summary = ui.Panel(Root.transform, "Guided drawing summary", new Rect(1170, 110, 400, 780), WorkshopUi.Surface, true);
             ui.Label(main, "Guided drawing title", Copy("title"), new Rect(24, 14, 530, 44), 32, true);
             ui.Button(main, "Guided drawing stencils", new Rect(602, 18, 214, 42), Copy("stencils"), () => ShowStencils(true), WorkshopIcon.Book);
-            hint = ui.Label(main, "Guided drawing hint", "", new Rect(24, 68, 792, 44), 19, color: WorkshopUi.Muted);
+            hint = ui.Label(main, "Guided drawing hint", "", new Rect(24, 64, 792, 26), 19, color: WorkshopUi.Muted);
 
             WorkshopIcon[] toolIcons = { WorkshopIcon.Pencil, WorkshopIcon.Line, WorkshopIcon.Rectangle, WorkshopIcon.Ellipse, WorkshopIcon.Eraser, WorkshopIcon.Move };
             for (int i = 0; i < 6; i++)
@@ -68,6 +69,7 @@ namespace PaperDefense.Presentation
                 tools.Add(tool, button);
             }
 
+            lastChange = ui.Label(main, "Last drawing change", "", new Rect(24, 92, 792, 24), 17, color: WorkshopUi.Ink);
             var viewport = ui.Panel(main, "Guided drawing viewport", new Rect(90, 174, 726, 470), WorkshopUi.Paper);
             viewport.gameObject.AddComponent<UnityEngine.UI.RectMask2D>();
             var canvasObject = new GameObject("Guided drawing canvas", typeof(RectTransform), typeof(CanvasRenderer), typeof(DrawingCanvasGraphic));
@@ -80,7 +82,7 @@ namespace PaperDefense.Presentation
             var emptyHint = ui.Label(emptyState.transform, "Guided drawing empty hint", Copy("empty_hint"), new Rect(0, 52, 460, 28), 18, color: WorkshopUi.Muted);
             emptyHint.alignment = TextAnchor.MiddleCenter;
             ui.Button(emptyState.transform, "Guided drawing empty stencil", new Rect(120, 98, 220, 42), Copy("take_stencil"), () => ShowStencils(true), WorkshopIcon.Book);
-            activeTool = ui.Label(viewport, "Guided drawing active tool", "", new Rect(18, 436, 250, 24), 17, color: WorkshopUi.Muted);
+            activeTool = ui.Label(viewport, "Guided drawing active tool", "", new Rect(18, 440, 690, 24), 17, color: WorkshopUi.Muted);
 
             undo = Icon(main, "undo", 24, WorkshopIcon.Undo, () => Canvas.Undo());
             redo = Icon(main, "redo", 72, WorkshopIcon.Redo, () => Canvas.Redo());
@@ -197,7 +199,7 @@ namespace PaperDefense.Presentation
                 i++;
             }
             WorkshopUi.Place((RectTransform)emptyState.transform, new Rect((816 - left - 460) / 2, (canvasHeight - 154) / 2, 460, 154));
-            WorkshopUi.Place(activeTool.rectTransform, new Rect(18, canvasHeight - 30, 250, 24));
+            WorkshopUi.Place(activeTool.rectTransform, new Rect(18, canvasHeight - 30, 780 - left, 24));
             string[] row = { "undo", "redo", "mirror", "clear", "grid", "snap", "geometry", "zoom_out", "zoom value", "zoom_in", "fit" };
             foreach (string key in row)
             {
@@ -283,7 +285,8 @@ namespace PaperDefense.Presentation
                 if (DrawingBindings.TryMount(Canvas.SelectedBinding, out int mount)) probeMount = mount;
                 foreach (var part in parts) ui.SetSelected(part.Value, part.Key == Canvas.SelectedBinding);
                 foreach (var tool in tools) ui.SetSelected(tool.Value, tool.Key == Canvas.Tool);
-                activeTool.text = Resolve(Copy(Canvas.Tool.ToString().ToLowerInvariant()));
+                activeTool.text = Resolve(Copy(Canvas.Tool.ToString().ToLowerInvariant())) + " · " + (Canvas.ShowWorkingGeometry ? "Рабочая геометрия: вкл." : "Чистовой рисунок");
+                lastChange.text = LatestChange(resolved);
                 ui.SetSelected(grid, Canvas.ShowGrid); ui.SetSelected(snap, Canvas.SnapToGrid); ui.SetSelected(geometry, Canvas.ShowWorkingGeometry);
                 undo.interactable = Session.CanUndo; redo.interactable = Session.CanRedo;
                 zoom.text = Resolve(Copy("zoom", Canvas.Zoom * 100));
@@ -321,6 +324,25 @@ namespace PaperDefense.Presentation
             if (Canvas.SelectedBinding == DrawingBindings.Base) return Copy("hint_body");
             if (DrawingBindings.TryMount(Canvas.SelectedBinding, out int slot)) return Copy("hint_barrel", slot + 1);
             return Copy("hint_decoration");
+        }
+
+        string LatestChange(TowerPreview? current)
+        {
+            if (!current.HasValue || !current.Value.Valid || !lastChangePreview.HasValue)
+                return "Правь выбранную деталь — здесь появится результат";
+            var before = lastChangePreview.Value; var after = current.Value;
+            var changes = new List<string>();
+            if (before.Cost != after.Cost) changes.Add("цена " + before.Cost + " → " + after.Cost);
+            var a = DesignChangeFeedback.FindMount(before, probeMount);
+            var b = DesignChangeFeedback.FindMount(after, probeMount);
+            if (a.HasValue && b.HasValue)
+            {
+                if (Mathf.Abs(a.Value.Range - b.Value.Range) > .005f) changes.Add("дальность " + a.Value.Range.ToString("0.0") + " → " + b.Value.Range.ToString("0.0"));
+                if (Mathf.Abs(a.Value.Interval - b.Value.Interval) > .005f) changes.Add("интервал " + a.Value.Interval.ToString("0.00") + " → " + b.Value.Interval.ToString("0.00") + " с");
+            }
+            if (changes.Count == 0 && Mathf.Abs(before.Health - after.Health) > .01f)
+                changes.Add("прочность " + before.Health.ToString("0") + " → " + after.Health.ToString("0"));
+            return changes.Count == 0 ? "Последняя правка: характеристики без изменений" : "Последняя правка: " + string.Join(" · ", changes.GetRange(0, Mathf.Min(2, changes.Count)));
         }
 
         void RebuildParts(string signature)

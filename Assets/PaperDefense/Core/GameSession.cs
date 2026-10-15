@@ -160,6 +160,8 @@ namespace PaperDefense.Core
             refund = (int)Math.Floor(structure.PaidInk * fraction * rate + 0.00001f);
             CreditInk(refund);
             Statistics.RecordRefund(refund);
+            EventBuffer.Publish(TickIndex, SimulationEventKind.StructureErased, Center(cell), Center(cell),
+                structure.Kind, entityId: structure.Id, weaponId: structure.ContentId, simulationSeconds: Elapsed);
             RemoveStructure(structure);
             return true;
         }
@@ -257,6 +259,8 @@ namespace PaperDefense.Core
                         if (!waiting)
                         {
                             structure.IsComplete = true;
+                            EventBuffer.Publish(TickIndex, SimulationEventKind.StructureCompleted, Center(structure.Cell), Center(structure.Cell),
+                                structure.Kind, entityId: structure.Id, weaponId: structure.ContentId, simulationSeconds: Elapsed);
                             MarkStructureChanged(structure, true);
                         }
                     }

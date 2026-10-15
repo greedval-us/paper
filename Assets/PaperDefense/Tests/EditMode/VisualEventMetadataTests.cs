@@ -8,6 +8,25 @@ namespace PaperDefense.Tests
 {
     public sealed class VisualEventMetadataTests
     {
+        [Test] public void ErasingPublishesADistinctVisualWithoutRecordingACombatLoss()
+        {
+            var session = new GameSession(GameBalance.CreateDefault(), starterDefenses: false);
+            var cell = new Cell(3, 3);
+            Assert.That(session.TryBuild(new[] { cell }, StructureKind.Wall, MaterialTier.Pencil, out var reason), Is.True, reason);
+            Assert.That(session.TryErase(cell, out _), Is.True);
+            Assert.That(session.EventBuffer.Count(e => e.Kind.ToString() == "StructureErased"), Is.EqualTo(1));
+            Assert.That(session.EventBuffer.Any(e => e.Kind == SimulationEventKind.StructureDestroyed), Is.False);
+        }
+
+        [Test] public void CompletionPublishesOnceWhenConstructionActuallyFinishes()
+        {
+            var session = new GameSession(GameBalance.CreateDefault(), starterDefenses: false);
+            Assert.That(session.TryBuild(new[] { new Cell(3, 3) }, StructureKind.Wall, MaterialTier.Pencil, out var reason), Is.True, reason);
+            Assert.That(session.EventBuffer.Any(e => e.Kind.ToString() == "StructureCompleted"), Is.False);
+            for (int i = 0; i < 100; i++) session.Tick(.05f);
+            Assert.That(session.EventBuffer.Count(e => e.Kind.ToString() == "StructureCompleted"), Is.EqualTo(1));
+        }
+
         static StructureState Tower(StructureKind kind=StructureKind.Gun)=>new StructureState
         {Id=7,Cell=new Cell(10,10),Kind=kind,Tier=MaterialTier.Pencil,Health=100,MaxHealth=100,IsComplete=true};
         static EnemyState Enemy(int id=1,float health=1000,float y=12.5f)=>new EnemyState

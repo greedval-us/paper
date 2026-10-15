@@ -10,6 +10,7 @@ namespace PaperDefense.Presentation
         IReadOnlyList<TrialFrame> frames;
         Func<float> clock;
         Rect world = new Rect(8,4.5f,16,12);
+        readonly MeshPen towerPen = new MeshPen(null, 4096);
         public float WorldScale => Mathf.Min((rectTransform.rect.width - 20) / world.width, (rectTransform.rect.height - 20) / world.height);
         public float PlaybackSeconds => clock?.Invoke() ?? 0;
         public void SetRecording(FootprintProbeReport value, Func<float> sharedClock)
@@ -59,7 +60,10 @@ namespace PaperDefense.Presentation
                 BlueprintSketch.Line(vh,Point(shot.From.X,shot.From.Y),Point(shot.To.X,shot.To.Y),2,MeshPen.Alpha(NotebookPalette.Blue,.55f));
             foreach (var tower in frame.Towers)
             {
-                BlueprintSketch.Ring(vh, Point(tower.Cell.X + .5f, tower.Cell.Y + .5f), 5, 3, NotebookPalette.Blue);
+                towerPen.Clear(); towerPen.MinimumLineWidth = 1.2f / Mathf.Max(.1f, WorldScale);
+                DoodleGlyphs.StructureBase(towerPen, tower);
+                DoodleGlyphs.StructureDynamic(towerPen, tower, 1, seconds);
+                towerPen.CopyTo(vh, rectTransform.rect.center - world.center * WorldScale, WorldScale);
             }
             foreach (var enemy in frame.Enemies)
             {
