@@ -18,6 +18,7 @@ namespace PaperDefense.Presentation
         }
 
         readonly WorkshopUi ui;
+        readonly Transform overlayParent;
         readonly DrawingEditorContext context;
         readonly Action<TowerBlueprint> changed;
         readonly Transform main, summary;
@@ -48,7 +49,7 @@ namespace PaperDefense.Presentation
 
         public GuidedDrawingPanel(Transform parent, WorkshopUi ui, DrawingEditorContext context, Action<TowerBlueprint> changed)
         {
-            this.ui = ui ?? throw new ArgumentNullException(nameof(ui));
+            this.ui = ui ?? throw new ArgumentNullException(nameof(ui)); overlayParent = parent;
             this.context = context; this.changed = changed;
             Root = ui.Panel(parent, "Guided drawing", new Rect(0, 0, 1600, 1000), Color.clear).gameObject;
             main = ui.Panel(Root.transform, "Guided drawing work area", new Rect(300, 110, 840, 780), Color.white, true);
@@ -175,6 +176,40 @@ namespace PaperDefense.Presentation
         public void Hide()
         {
             Canvas.CancelGesture(); Probe?.Reset(); ui.HideTooltip(); stencilPane.SetActive(false); Root.SetActive(false);
+        }
+
+        public void Reflow(float availableHeight)
+        {
+            float height = Mathf.Max(450, availableHeight);
+            var area = (RectTransform)main;
+            area.sizeDelta = new Vector2(840, height);
+            bool shortPage = height < 680;
+            var viewport = (RectTransform)Canvas.transform.parent;
+            float left = shortPage ? 138 : 90, canvasHeight = height - 290;
+            WorkshopUi.Place(viewport, new Rect(left, 174, 816 - left, canvasHeight));
+            WorkshopUi.Place(Canvas.rectTransform, new Rect(0, 0, 816 - left, canvasHeight));
+            int i = 0;
+            foreach (var pair in tools)
+            {
+                WorkshopUi.Place((RectTransform)pair.Value.transform, shortPage
+                    ? new Rect(24 + i % 2 * 54, 174 + i / 2 * 54, 48, 48)
+                    : new Rect(24, 180 + i * 64, 52, 52));
+                i++;
+            }
+            WorkshopUi.Place((RectTransform)emptyState.transform, new Rect((816 - left - 460) / 2, (canvasHeight - 154) / 2, 460, 154));
+            WorkshopUi.Place(activeTool.rectTransform, new Rect(18, canvasHeight - 30, 250, 24));
+            string[] row = { "undo", "redo", "mirror", "clear", "grid", "snap", "geometry", "zoom_out", "zoom value", "zoom_in", "fit" };
+            foreach (string key in row)
+            {
+                var item = main.Find("Guided drawing " + key) as RectTransform;
+                if (item != null) item.anchoredPosition = new Vector2(item.anchoredPosition.x, -(height - 116));
+            }
+            string[] bottom = { "width label", "width smaller", "width larger", "height label", "height smaller", "height larger", "next part" };
+            foreach (string key in bottom)
+            {
+                var item = main.Find("Guided drawing " + key) as RectTransform;
+                if (item != null) item.anchoredPosition = new Vector2(item.anchoredPosition.x, -(height - 64));
+            }
         }
 
         public bool TryFinish(out TowerBlueprint candidate, out string reason)
@@ -390,7 +425,9 @@ namespace PaperDefense.Presentation
             ui.Label(box, "Guided stencil description", definition.Description, new Rect(108, 72, 260, 112), 17);
             var card = new StencilCard { Definition = definition };
             card.Ownership = ui.Label(box, "Guided stencil ownership", "", new Rect(16, 182, 352, 27), 18, color: WorkshopUi.Muted);
-            card.Buy = ui.Button(box, "Guided buy stencil " + definition.Id, new Rect(16, 214, 168, 36), Copy("buy"), () => PurchaseStencil(definition), WorkshopIcon.Cost);
+            card.Buy = ui.Button(box, "Guided buy stencil " + definition.Id, new Rect(16, 214, 168, 36), Copy("buy"), () =>
+                WorkshopConfirm.Show(overlayParent, ui, "Открыть трафарет?", "Цена: " + definition.GoldCost + " золота\nНа счету: " + (context?.Workshop?.Invoke()?.Gold ?? 0) +
+                    "\n\nПокупка открывает трафарет. Вставка в рисунок выполняется отдельной кнопкой.", "Открыть", () => PurchaseStencil(definition)), WorkshopIcon.Cost);
             card.Insert = ui.Button(box, "Guided insert stencil " + definition.Id, new Rect(200, 214, 168, 36), Copy("insert"), () => InsertStencil(definition), WorkshopIcon.Plus, true);
             stencilCards.Add(card);
         }

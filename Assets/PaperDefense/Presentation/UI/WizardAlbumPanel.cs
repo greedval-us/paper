@@ -8,7 +8,7 @@ namespace PaperDefense.Presentation
     internal sealed class WizardAlbumPanel
     {
         readonly Transform parent;readonly WorkshopUi ui;readonly RunController run;readonly WorkshopWizard wizard;
-        GameObject root;int page;string selected,message="";
+        GameObject root;int page;string selected,message="",query="";
         public bool IsOpen=>root!=null&&root.activeSelf;
         static string T(string key,params object[] args)=>WorkshopWizard.Copy(key,args);
         public WizardAlbumPanel(Transform parent,WorkshopUi ui,RunController run,WorkshopWizard wizard)
@@ -19,25 +19,32 @@ namespace PaperDefense.Presentation
             Hide();ui.HideTooltip();
             var shade=ui.Panel(parent,"Wizard album overlay",new Rect(0,0,1600,1000),new Color(.1f,.2f,.34f,.3f),true);root=shade.gameObject;
             var sheet=ui.Panel(shade,"Wizard album sheet",new Rect(140,55,1320,880),WorkshopUi.Paper,true);
-            ui.Label(sheet,"Album title",T("album"),new Rect(32,20,680,56),36,true);
-            ui.Button(sheet,"Wizard new blueprint",new Rect(770,25,430,48),T("new_tower"),wizard.NewDraft,WorkshopIcon.Plus,true);
+            ui.Label(sheet,"Album title",T("album"),new Rect(32,20,430,56),36,true);
+            ui.Button(sheet,"Wizard new blueprint",new Rect(770,25,430,48),T("new_tower"),wizard.RequestNewDraft,WorkshopIcon.Plus,true);
             ui.IconButton(sheet,"Wizard close album",new Rect(1222,25,64,48),WorkshopIcon.Close,T("close"),()=>wizard.ShowAlbum(false));
-            int count=run.Workshop.Album.Count;page=Mathf.Clamp(page,0,Math.Max(0,(count-1)/4));
+            var search=ui.Panel(sheet,"Album search",new Rect(440,25,310,48),Color.white,true);
+            var field=search.gameObject.AddComponent<UnityEngine.UI.InputField>();
+            field.textComponent=ui.Label(search,"Search text",query,new Rect(12,4,286,40),18);
+            field.placeholder=ui.Label(search,"Search placeholder","Поиск чертежа…",new Rect(12,4,286,40),18,color:WorkshopUi.Muted);
+            field.text=query;field.onEndEdit.AddListener(value=>{if(query==value)return;query=value;page=0;Show();});
+            var matches=run.Workshop.Album.Where(bp=>string.IsNullOrWhiteSpace(query)||ui.Resolve(bp.Name).IndexOf(query,StringComparison.CurrentCultureIgnoreCase)>=0).ToArray();
+            int count=matches.Length;page=Mathf.Clamp(page,0,Math.Max(0,(count-1)/4));
             for(int i=0;i<4;i++)
             {
-                int index=page*4+i;if(index>=count)break;var bp=run.Workshop.Album[index];
+                int index=page*4+i;if(index>=count)break;var bp=matches[index];
                 var card=ui.Panel(sheet,"Wizard album card "+index,new Rect(32+i%2*637,100+i/2*214,615,195),selected==bp.Id?WorkshopUi.Selected:Color.white,true);
                 var sketch=WorkshopUi.Graphic<BlueprintSketch>(card,"Album thumbnail",new Rect(16,12,150,160));sketch.SetBlueprint(bp);
                 ui.Label(card,"Album page name",bp.Name,new Rect(186,18,410,40),23);
                 var stats=run.PreviewBlueprint(bp);
                 ui.Label(card,"Album page price",T("album_price",stats.Cost),new Rect(186,65,404,36),18,color:WorkshopUi.Muted);
-                ui.Button(card,"Wizard album edit "+index,new Rect(186,118,170,48),T("edit"),()=>wizard.Load(bp),WorkshopIcon.Pencil);
+                ui.Button(card,"Wizard album edit "+index,new Rect(186,118,170,48),T("edit"),()=>wizard.RequestLoad(bp),WorkshopIcon.Pencil);
                 ui.Button(card,"Wizard album select "+index,new Rect(368,118,160,48),T("loadout"),()=>{selected=bp.Id;message=T("choose_slot");Show();},WorkshopIcon.Book);
                 var delete=ui.IconButton(card,"Wizard album delete "+index,new Rect(540,118,58,48),WorkshopIcon.Trash,T("delete"),()=>
-                {bool deleted=run.DeleteBlueprint(bp.Id,out var reason);message=deleted?T("deleted"):reason;if(deleted&&selected==bp.Id)selected=null;Show();});
+                {WorkshopConfirm.Show(parent,ui,"Удалить чертёж?",ui.Resolve(bp.Name)+"\n\nЧертёж будет удалён из альбома. Отменить удаление нельзя.","Удалить",()=>
+                    {bool deleted=run.DeleteBlueprint(bp.Id,out var reason);message=deleted?T("deleted"):reason;if(deleted&&selected==bp.Id)selected=null;Show();});});
                 delete.interactable=!run.Workshop.Loadout.Any(p=>p?.Id==bp.Id);
             }
-            if(count==0)ui.Label(sheet,"Album empty",T("album_empty"),new Rect(50,140,1220,200),26,true);
+            if(count==0)ui.Label(sheet,"Album empty",string.IsNullOrWhiteSpace(query)?T("album_empty"):"По этому запросу ничего не найдено. Измени название в поиске.",new Rect(50,140,1220,200),26,true);
             ui.Button(sheet,"Wizard album previous",new Rect(32,536,190,44),T("previous"),()=>{page--;Show();},WorkshopIcon.Back).interactable=page>0;
             ui.Label(sheet,"Wizard album page",T("page",page+1,Math.Max(1,(count+3)/4)),new Rect(536,536,250,44),20);
             ui.Button(sheet,"Wizard album next",new Rect(1076,536,210,44),T("next_page"),()=>{page++;Show();},WorkshopIcon.Next).interactable=(page+1)*4<count;

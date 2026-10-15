@@ -21,9 +21,9 @@ namespace PaperDefense.Editor
             var pixels = new Texture2D(width, height, TextureFormat.RGB24, false);
             try
             {
-                RenderTexture.active = texture; GL.Clear(true, true, new Color(.965f, .951f, .905f));
                 var bootstrap = Object.FindAnyObjectByType<PaperDefense.Presentation.PaperDefenseBootstrap>();
                 var world = bootstrap != null ? bootstrap.worldCamera : Camera.main;
+                RenderTexture.active = texture; GL.Clear(true, true, world != null ? world.backgroundColor : new Color(.965f, .951f, .905f));
                 if (world != null)
                 {
                     var target = world.targetTexture;

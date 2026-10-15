@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-15",
+  "unity": "6000.5.7f1",
+  "branch": "codex/full-game-ui",
+  "source": "Unity MCP run_tests/get_test_job",
+  "fullRuns": [
+    {
+      "mode": "EditMode",
+      "jobId": "1fdbc81867424f428fadbe1a20d8d878",
+      "total": 878,
+      "passed": 878,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 101.1524551
+    },
+    {
+      "mode": "PlayMode",
+      "jobId": "76d33d9eeed84879aad05e1c1ab6a378",
+      "total": 469,
+      "passed": 469,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 112.8028828
+    }
+  ],
+  "focusedRegressions": {
+    "jobId": "96f05b265f4a4ba3bb071c3b8972b280",
+    "passed": 3,
+    "failed": 0,
+    "tests": [
+      "PlayerJourneyTests.ScrolledBlueprintCannotDrawOverFixedNavigation",
+      "WorkshopUiTests.UltrawideControlsKeepTheirHintsInsideTheActualCanvas",
+      "PlayerAssetStandTests.InteractivePreviewUsesCandidateStyleAndDisposesAllGameStateOnReturn"
+    ]
+  },
+  "historicalFailure": {
+    "jobId": "5cae3acd34ce479d981961748107105c",
+    "passed": 468,
+    "failed": 1,
+    "resolution": "Preserve owner.NotebookStyle when constructing PlayerUi; focused and full reruns passed."
+  },
+  "finalConsoleErrorEntries": 0,
+  "restoredScene": "Assets/PaperDefense/Scenes/Tests/27_PlayerAssets.unity",
+  "playMode": false,
+  "temporaryRuntimePlayers": 0
+}

@@ -21,6 +21,30 @@ namespace PaperDefense.Presentation
         WorkshopHud workshop;
         PlayerShell shell;
         PlayerPage settingsReturn = PlayerPage.Home;
+        PlayerPage helpReturn = PlayerPage.Home;
+        public float InterfaceScale { get; private set; } = 1;
+        NotebookVisualThemeAsset reducedTheme, originalTheme;
+        public bool ReducedMotion { get; private set; }
+        public void SetReducedMotion(bool value)
+        {
+            if (value == ReducedMotion) return;
+            if (value && reducedTheme == null)
+            {
+                originalTheme = World.VisualTheme;
+                reducedTheme = ScriptableObject.CreateInstance<NotebookVisualThemeAsset>();
+                reducedTheme.name = "Player reduced motion (runtime)";
+                var source = originalTheme != null ? originalTheme : NotebookVisualThemeAsset.Default;
+                var data = JsonUtility.FromJson<NotebookArtSource>(JsonUtility.ToJson(source.Data));
+                foreach (var clip in data.Clips)
+                    foreach (var frame in clip.Frames) { frame.Offset = Vector2.zero; frame.Rotation = 0; frame.Scale = 1; }
+                foreach (var recoil in data.Recoils) recoil.Distance = 0;
+                reducedTheme.ReplaceData(data);
+            }
+            ReducedMotion = value; World.VisualTheme = value ? reducedTheme : originalTheme;
+            foreach (var scroll in GetComponentsInChildren<UnityEngine.UI.ScrollRect>(true)) scroll.inertia = !value;
+        }
+        void OnDestroy() { if (reducedTheme != null) Destroy(reducedTheme); }
+        public void SetInterfaceScale(float scale) => InterfaceScale = Mathf.Clamp(scale, 1, 1.5f);
         public PlayerPage Page { get; private set; }
         public RunController Run => bootstrap.Controller;
         public DrawingInput Drawing => bootstrap.Drawing;
@@ -46,6 +70,7 @@ namespace PaperDefense.Presentation
                 bootstrap.worldCamera = cameraObject.GetComponent<Camera>();
             }
             bootstrap.memoryOnlyProfile = memoryOnlyProfile;
+            bootstrap.PlayerPaperColor = PlayerUi.Paper;
             bootstrap.showBattleHud = false; bootstrap.showWorkshopHud = false;
             bootstrap.enableDrawingInput = false;
             runtime.SetActive(true);
@@ -75,11 +100,13 @@ namespace PaperDefense.Presentation
             {
                 if (keyboard.escapeKey.wasPressedThisFrame)
                 {
+                    if (shell.HasConfirmation) { shell.CancelConfirmation(); return; }
                     if (Page == PlayerPage.Battle) Pause();
                     else if (Page == PlayerPage.Pause) Resume();
-                    else if (Page == PlayerPage.Settings || Page == PlayerPage.Help) Navigate(settingsReturn);
+                    else if (Page == PlayerPage.Settings) CloseSettings();
+                    else if (Page == PlayerPage.Help) CloseHelp();
                 }
-                if (keyboard.spaceKey.wasPressedThisFrame)
+                if (!shell.HasConfirmation && keyboard.spaceKey.wasPressedThisFrame)
                 { if (Page == PlayerPage.Battle) Pause(); else if (Page == PlayerPage.Pause) Resume(); }
                 if (Page == PlayerPage.Battle)
                 {
@@ -93,10 +120,7 @@ namespace PaperDefense.Presentation
 
         void FitViewport()
         {
-            float scale = Mathf.Min(Screen.width / 1600f, Screen.height / 1000f);
-            float x = (Screen.width - 1600 * scale) * .5f, y = (Screen.height - 1000 * scale) * .5f;
-            bootstrap.ViewportOverride = new Rect((x + 125 * scale) / Screen.width, (y + 205 * scale) / Screen.height,
-                1150 * scale / Screen.width, 675 * scale / Screen.height);
+            bootstrap.ViewportOverride = shell.Layout.NormalizedField;
         }
 
         public void Navigate(PlayerPage page)
@@ -138,8 +162,13 @@ namespace PaperDefense.Presentation
         { Run.OpenWorkshop(); StartBattle(); }
 
         public void OpenSettings(bool help = false)
-        { settingsReturn = Page; Navigate(help ? PlayerPage.Help : PlayerPage.Settings); }
+        {
+            if (Page == PlayerPage.Battle) Pause();
+            if (help) { helpReturn = Page; Navigate(PlayerPage.Help); }
+            else { settingsReturn = Page; Navigate(PlayerPage.Settings); }
+        }
         public void CloseSettings() => Navigate(settingsReturn);
+        public void CloseHelp() => Navigate(helpReturn);
 
         public void ChooseUpgrade(RunUpgrade upgrade)
         { Run.ChooseUpgrade(upgrade); Navigate(PlayerPage.Battle); }

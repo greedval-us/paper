@@ -1,257 +1,193 @@
+using System;
 using PaperDefense.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace PaperDefense.Presentation
 {
-    /// <summary>Page composition; navigation and simulation remain owned by their controllers.</summary>
-    public sealed class PlayerShell : MonoBehaviour
+    /// <summary>Page composition only; controllers remain the sources of game data.</summary>
+    public sealed partial class PlayerShell : MonoBehaviour
     {
         PlayerGameRoot game;
         PlayerUi ui;
+        CanvasScaler scaler;
         RectTransform root, page, battleRoot;
         PlayerBattleHud battle;
         CanvasGroup battleInteraction;
         Text status, tooltip, gold;
-        Texture2D landscape;
-        float refresh;
+        float refresh, appliedScale;
+        int screenWidth, screenHeight;
+        bool statistics;
+        Action confirmAction;
+        string confirmTitle, confirmMessage;
+        GameObject confirmation;
+        public bool HasConfirmation => confirmAction != null;
+        public PlayerLayout Layout { get; private set; }
+        float W => Layout.Width;
+        float H => Layout.Height;
+        float M => Layout.Margin;
 
         public void Initialize(PlayerGameRoot owner)
         {
             game = owner; ui = new PlayerUi(owner.NotebookStyle);
-            landscape = Resources.Load<Texture2D>("Art/Player/NotebookLandscape");
             var canvas = gameObject.AddComponent<Canvas>(); canvas.renderMode = RenderMode.ScreenSpaceOverlay; canvas.sortingOrder = 200;
             gameObject.AddComponent<GraphicRaycaster>();
-            var scaler = gameObject.AddComponent<CanvasScaler>(); scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(1600, 1000); scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
-            var go = new GameObject("Player pages", typeof(RectTransform)); go.transform.SetParent(transform, false);
-            root = go.GetComponent<RectTransform>(); root.anchorMin = root.anchorMax = root.pivot = new Vector2(.5f, .5f); root.sizeDelta = new Vector2(1600, 1000);
-            battleRoot = ui.Panel(root, "Battle controls", new Rect(0, 0, 1600, 1000), Color.clear);
-            battleInteraction = battleRoot.gameObject.AddComponent<CanvasGroup>();
-            battle = new PlayerBattleHud(game, ui, battleRoot); battleRoot.gameObject.SetActive(false);
+            scaler = gameObject.AddComponent<CanvasScaler>(); scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
+            root = new GameObject("Player pages", typeof(RectTransform)).GetComponent<RectTransform>(); root.SetParent(transform, false);
+            root.anchorMin = root.anchorMax = root.pivot = new Vector2(.5f, .5f);
+            ApplyLayout(Screen.width, Screen.height);
             ui.Tooltip = value => { if (tooltip != null) tooltip.text = value; };
-            PlayerWorkshopActions.Apply(game.GetComponentInChildren<WorkshopHud>(true), ui);
+        }
+
+        public void ApplyLayout(int width, int height)
+        {
+            screenWidth = width; screenHeight = height; appliedScale = game.InterfaceScale;
+            Layout = new PlayerLayout(width, height, appliedScale);
+            scaler.referenceResolution = new Vector2(W, H); root.sizeDelta = new Vector2(W, H);
+            if (battleRoot != null) { battleRoot.gameObject.SetActive(false); Destroy(battleRoot.gameObject); }
+            battleRoot = ui.Panel(root, "Battle controls", new Rect(0, 0, W, H), Color.clear);
+            battleInteraction = battleRoot.gameObject.AddComponent<CanvasGroup>();
+            battle = new PlayerBattleHud(game, ui, battleRoot, Layout);
+            Show(game.Page);
         }
 
         public void Show(PlayerPage current)
         {
             if (page != null) { page.gameObject.SetActive(false); Destroy(page.gameObject); }
-            bool battlefield = current == PlayerPage.Battle || current == PlayerPage.Pause || current == PlayerPage.Upgrades || current == PlayerPage.Result ||
-                ((current == PlayerPage.Settings || current == PlayerPage.Help) && !game.Run.InWorkshop);
+            bool battlefield = !game.Run.InWorkshop && current != PlayerPage.Workshop;
             battleRoot.gameObject.SetActive(battlefield);
-            battleInteraction.interactable = current == PlayerPage.Battle;
-            battleInteraction.blocksRaycasts = current == PlayerPage.Battle;
-            if (UnityEngine.EventSystems.EventSystem.current != null)
-                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
-            page = ui.Panel(root, "Page " + current, new Rect(0, 0, 1600, 1000), Color.clear);
+            battleInteraction.interactable = current == PlayerPage.Battle && !HasConfirmation;
+            battleInteraction.blocksRaycasts = current == PlayerPage.Battle && !HasConfirmation;
+            UnityEngine.EventSystems.EventSystem.current?.SetSelectedGameObject(null);
+            page = ui.Panel(root, "Page " + current, new Rect(0, 0, W, H), Color.clear);
             status = tooltip = gold = null;
-            if (!battlefield && current != PlayerPage.Workshop) Background(current == PlayerPage.Home);
+            if (!battlefield && current != PlayerPage.Workshop) ui.Panel(page, "Paper", new Rect(0, 0, W, H), PlayerUi.Paper, true);
             switch (current)
             {
                 case PlayerPage.Home: Home(); break;
                 case PlayerPage.Map: Map(); break;
                 case PlayerPage.Preparation: Preparation(); break;
-                case PlayerPage.Workshop: Workshop(); break;
                 case PlayerPage.Pause: Pause(); break;
                 case PlayerPage.Upgrades: Upgrades(); break;
                 case PlayerPage.Result: Result(); break;
-                case PlayerPage.Settings: Settings(battlefield); break;
-                case PlayerPage.Help: Help(battlefield); break;
+                case PlayerPage.Settings: Settings(); break;
+                case PlayerPage.Help: Help(); break;
             }
-            tooltip = ui.Label(page, "", new Rect(160, 963, 1280, 30), 17, PlayerUi.Ink, alignment: TextAnchor.MiddleCenter);
+            tooltip = ui.Label(page, "", new Rect(M, H - 27, W - M * 2, 24), 15, PlayerUi.Muted, alignment: TextAnchor.MiddleCenter);
             SetStatus(game.Status);
             if (battlefield) battle.Refresh();
+            if (HasConfirmation) BuildConfirmation();
         }
 
-        void Background(bool illustrated = false)
+        void Header(string title, Action back)
         {
-            ui.Panel(page, "Paper", new Rect(0, 0, 1600, 1000), PlayerUi.Paper, true);
-            if (ui.NotebookStyle)
-            {
-                var paper = PlayerUi.Graphic<RawImage>(page, "Notebook paper texture", new Rect(0, 0, 1600, 1000));
-                paper.texture = Resources.Load<Texture2D>("Art/Player/NotebookPaper");
-            }
-            if (landscape != null)
-            {
-                var art = PlayerUi.Graphic<RawImage>(page, "Notebook landscape", new Rect(0, 0, 1600, 1000));
-                art.texture = landscape; art.color = new Color(1, 1, 1, illustrated ? 1 : .17f);
-            }
-            else PlayerUi.Graphic<PlayerPaperGraphic>(page, "Notebook ruling", new Rect(0, 0, 1600, 1000));
-            ui.Panel(page, "Footer paper", new Rect(115, 912, 1380, 45), new Color(.98f, .966f, .92f, .93f));
-            ui.Label(page, ui.T("imprint"), new Rect(130, 922, 1000, 26), 15, PlayerUi.Muted);
-            ui.Label(page, "01 / 01", new Rect(1380, 920, 100, 30), 16, PlayerUi.Muted, alignment: TextAnchor.MiddleRight);
-        }
-
-        void Header(string title, System.Action back)
-        {
-            ui.IconButton(page, "Back", new Rect(48, 30, 58, 58), PlayerIcon.Back, ui.T("back"), back);
-            ui.Label(page, title, new Rect(132, 32, 1050, 55), 38, title: true);
-            gold = ui.Label(page, ui.T("gold", game.Run.Workshop.Gold), new Rect(1240, 40, 270, 40), 22, PlayerUi.Blue, alignment: TextAnchor.MiddleRight);
+            ui.IconButton(page, "Back", new Rect(M, 24, 48, 48), PlayerIcon.Back, ui.T("back"), back);
+            bool narrow = W < 900;
+            ui.Label(page, title, new Rect(M + 64, 20, W - M * 2 - (narrow ? 210 : 310), 56), narrow ? 27 : 34, title: true);
+            gold = ui.Label(page, ui.T("gold", game.Run.Workshop.Gold), new Rect(W - M - (narrow ? 140 : 240), 28, narrow ? 140 : 240, 40), narrow ? 18 : 20, PlayerUi.Muted, alignment: TextAnchor.MiddleRight);
             gold.name = "Player gold";
         }
 
         void Home()
         {
-            ui.Label(page, ui.T("eyebrow"), new Rect(142, 100, 650, 36), 17, PlayerUi.Blue);
-            ui.Label(page, ui.T("title_first"), new Rect(132, 150, 700, 130), 88, title: true);
-            ui.Label(page, ui.T("title_second"), new Rect(132, 272, 700, 130), 88, title: true);
-            ui.Label(page, ui.T("tagline"), new Rect(142, 420, 590, 70), 27, PlayerUi.Muted);
-            if (landscape == null) ui.Art(page, "object.castle", new Rect(845, 205, 600, 520));
-            ui.Panel(page, "Menu paper", new Rect(115, 680, 640, 160), new Color(.98f, .966f, .92f, .94f));
-            ui.IconButton(page, "Open campaign", new Rect(142, 538, 100, 100), PlayerIcon.Play, ui.T("open_map"), () => game.Navigate(PlayerPage.Map), true);
-            ui.Label(page, ui.T("open_map"), new Rect(270, 542, 400, 45), 32, title: true);
-            ui.Label(page, ui.T("chapter"), new Rect(272, 588, 440, 36), 19, PlayerUi.Muted);
-            HomeShortcut(142, PlayerIcon.Book, "workshop", () => game.Navigate(PlayerPage.Workshop));
-            HomeShortcut(302, PlayerIcon.Settings, "settings", () => game.OpenSettings());
-            HomeShortcut(462, PlayerIcon.Help, "help", () => game.OpenSettings(true));
-            HomeShortcut(622, PlayerIcon.Exit, "exit", () => UnityEngine.Application.Quit());
-        }
-
-        void HomeShortcut(float x, PlayerIcon icon, string key, System.Action action)
-        {
-            ui.IconButton(page, key, new Rect(x, 707, 70, 70), icon, ui.T(key), action);
-            ui.Label(page, ui.T(key), new Rect(x - 28, 788, 130, 38), 17, PlayerUi.Muted, alignment: TextAnchor.MiddleCenter);
+            ui.Label(page, "Держи линию", new Rect(M, 28, 430, 48), 30, title: true);
+            gold = ui.Label(page, ui.T("gold", game.Run.Workshop.Gold), new Rect(W - M - 280, 30, 220, 40), 18, PlayerUi.Muted, alignment: TextAnchor.MiddleRight);
+            ui.IconButton(page, "Home settings", new Rect(W - M - 48, 24, 48, 48), PlayerIcon.Settings, ui.T("settings"), () => game.OpenSettings());
+            bool narrow = W < 900;
+            float mid = narrow ? 0 : Mathf.Max(0, (H - 670) / 2), left = narrow ? W - 2 * M : Mathf.Min(650, W * .47f - M);
+            var hero = ui.Scroll(page, "Home story", new Rect(0, 100, W, Mathf.Max(120, H - (narrow ? 330 : 210))), mid + 444);
+            ui.Label(hero, "Оборона, которую ты нарисовал", new Rect(M, mid, left, 32), 17, PlayerUi.Blue);
+            int heroSize = Mathf.Clamp(Mathf.RoundToInt(left / 9.2f), 40, 70);
+            ui.Label(hero, "Твоя линия.\nТвои правила.", new Rect(M, mid + 42, left, 196), heroSize, title: true);
+            ui.Label(hero, "Собери башню, нарисуй её характер и защити страницу от каракулей.", new Rect(M, mid + 238, left, 72), 21, PlayerUi.Muted);
+            ui.Button(narrow ? page : hero, "Open campaign", new Rect(M, narrow ? H - 212 : mid + 330, 250, 54), PlayerIcon.Play, "Начать игру", () => game.Navigate(PlayerPage.Map), true);
+            ui.Label(hero, ui.T("mission") + " · " + game.Run.Session.Balance.Waves.Count + " волн", new Rect(M, mid + 398, left, 30), 16, PlayerUi.Muted);
+            float artX = W * .52f, artW = W - artX - M, artH = Mathf.Min(610, H - 220);
+            var art = ui.Panel(hero, "Your notebook", new Rect(artX, (H - artH) / 2 - 115, artW, artH), PlayerUi.Card);
+            art.gameObject.SetActive(!narrow);
+            PlayerUi.Graphic<PlayerPaperGraphic>(art, "Notebook grid", new Rect(0, 0, artW, artH));
+            ui.Art(art, "object.castle", new Rect(artW * .50f, artH * .22f, artW * .30f, artH * .32f));
+            ui.Blueprint(art, game.Run.Workshop.Loadout[0], new Rect(artW * .12f, artH * .42f, artW * .36f, artH * .32f));
+            ui.Art(art, "ui.material.pen", new Rect(artW * .78f, artH * .44f, artW * .15f, artH * .34f));
+            ui.Label(art, "Всё начинается с одного штриха", new Rect(20, artH - 58, artW - 40, 44), 25, PlayerUi.Muted, true, TextAnchor.MiddleCenter);
+            float footer = narrow ? H - 142 : H - 86, buttonWidth = narrow ? (W - 2 * M - 12) / 2 : 205;
+            ui.Panel(page, "Menu divider", new Rect(M, footer - 19, W - 2 * M, 1), new Color32(219, 227, 239, 255));
+            ui.Button(page, "workshop", new Rect(M, footer, buttonWidth, 48), PlayerIcon.Pencil, ui.T("workshop"), () => game.Navigate(PlayerPage.Workshop));
+            ui.Button(page, "settings", new Rect(M + buttonWidth + 12, footer, narrow ? buttonWidth : 190, 48), PlayerIcon.Settings, ui.T("settings"), () => game.OpenSettings());
+            ui.Button(page, "help", new Rect(narrow ? M : M + 425, narrow ? footer + 60 : footer, buttonWidth, 48), PlayerIcon.Help, "Как играть", () => game.OpenSettings(true));
+            ui.Button(page, "exit", new Rect(narrow ? M + buttonWidth + 12 : W - M - 140, narrow ? footer + 60 : footer, narrow ? buttonWidth : 140, 48), PlayerIcon.Exit, "Выйти", () => Confirm("Выйти из игры?", "Сохранённые чертежи и золото останутся в профиле.", () => UnityEngine.Application.Quit()));
         }
 
         void Map()
         {
-            Header(ui.T("campaign"), () => game.Navigate(PlayerPage.Home));
-            ui.Label(page, ui.T("chapter"), new Rect(132, 125, 1050, 48), 28, title: true);
-            var mapCard = ui.Panel(page, "Mission map", new Rect(130, 205, 875, 642), PlayerUi.Card);
-            var map = PlayerUi.Graphic<WorkshopMapSketch>(mapCard, "Actual battlefield", new Rect(26, 40, 822, 540)); map.SetSession(game.Run.Session);
-            ui.Label(mapCard, ui.T("map_caption"), new Rect(30, 580, 810, 40), 17, PlayerUi.Muted, alignment: TextAnchor.MiddleCenter);
-            var info = ui.Panel(page, "Mission information", new Rect(1040, 205, 430, 642), PlayerUi.Card);
-            ui.Label(info, ui.T("mission_number"), new Rect(32, 30, 360, 30), 16, PlayerUi.Blue);
-            ui.Art(info, "object.castle", new Rect(120, 75, 190, 190));
-            ui.Label(info, ui.T("mission"), new Rect(32, 280, 370, 55), 36, title: true);
-            ui.Label(info, ui.T("mission_brief", game.Run.Session.Balance.Waves.Count), new Rect(32, 348, 360, 142), 21, PlayerUi.Muted);
-            ui.IconButton(info, "Prepare mission", new Rect(290, 520, 90, 80), PlayerIcon.Play, ui.T("prepare"), () => game.Navigate(PlayerPage.Preparation), true);
-            ui.Label(info, ui.T("prepare"), new Rect(32, 530, 240, 65), 23, title: true);
+            Header("Карта кампании", () => game.Navigate(PlayerPage.Home));
+            if (W < 900) { CompactMap(); return; }
+            float width = W - M * 2, side = Mathf.Min(370, width * .34f), height = H - 165;
+            var map = ui.Panel(page, "Mission map", new Rect(M, 112, width - side - 24, height), PlayerUi.Card);
+            var sketch = PlayerUi.Graphic<WorkshopMapSketch>(map, "Actual battlefield", new Rect(24, 70, width - side - 72, height - 150)); sketch.SetSession(game.Run.Session);
+            ui.Label(map, "Первая страница", new Rect(24, 18, width - side - 72, 44), 29, title: true);
+            ui.Label(map, "Дороги и источники текущей миссии", new Rect(24, height - 60, width - side - 72, 40), 17, PlayerUi.Muted);
+            var info = ui.Panel(page, "Mission information", new Rect(W - M - side, 112, side, height), PlayerUi.Card);
+            ui.Label(info, "МИССИЯ 01", new Rect(24, 20, side - 48, 30), 16, PlayerUi.Blue);
+            ui.Art(info, "object.castle", new Rect(side * .28f, 66, side * .44f, Mathf.Min(150, height * .25f)));
+            float y = Mathf.Min(230, height * .4f);
+            ui.Label(info, ui.T("mission"), new Rect(24, y, side - 48, 50), 32, title: true);
+            ui.Label(info, ui.T("mission_brief", game.Run.Session.Balance.Waves.Count), new Rect(24, y + 62, side - 48, 140), 19, PlayerUi.Muted);
+            ui.Button(info, "Prepare mission", new Rect(24, height - 78, side - 48, 54), PlayerIcon.Play, "Подготовка", () => game.Navigate(PlayerPage.Preparation), true);
+        }
+
+        void CompactMap()
+        {
+            float width = W - 2 * M;
+            var body = ui.Scroll(page, "Mission scroll", new Rect(M, 100, width, H - 204), 610);
+            var map = ui.Panel(body, "Mission map", new Rect(0, 0, width, 290), PlayerUi.Card);
+            ui.Label(map, "Первая страница", new Rect(20, 12, width - 40, 44), 28, title: true);
+            var sketch = PlayerUi.Graphic<WorkshopMapSketch>(map, "Actual battlefield", new Rect(20, 64, width - 40, 210)); sketch.SetSession(game.Run.Session);
+            ui.Label(body, ui.T("mission"), new Rect(20, 310, width - 40, 52), 30, title: true);
+            ui.Label(body, ui.T("mission_brief", game.Run.Session.Balance.Waves.Count), new Rect(20, 374, width - 40, 200), 20, PlayerUi.Muted);
+            ui.Button(page, "Prepare mission", new Rect(W - M - 250, H - 84, 250, 52), PlayerIcon.Play, "Подготовка", () => game.Navigate(PlayerPage.Preparation), true);
         }
 
         void Preparation()
         {
-            Header(ui.T("prepare"), () => game.Navigate(PlayerPage.Map));
-            ui.Label(page, ui.T("loadout"), new Rect(132, 132, 1200, 50), 32, title: true);
-            ui.Label(page, ui.T("loadout_hint"), new Rect(132, 190, 1200, 38), 19, PlayerUi.Muted);
+            Header("Подготовка к миссии", () => game.Navigate(PlayerPage.Map));
+            int columns = W < 1200 ? 2 : 4;
+            float width = W - M * 2, cardW = (width - 18 * (columns - 1)) / columns;
+            float cardH = columns == 2 ? 220 : 310, materialY = 110 + (cardH + 18) * (4 / columns);
+            var body = ui.Scroll(page, "Preparation scroll", new Rect(M, 100, width, H - 204), materialY + 154);
+            ui.Label(body, "Твой набор обороны", new Rect(0, 0, width, 44), 30, title: true);
+            ui.Label(body, "Четыре чертежа. Материал выбирается отдельно — стоимость меняется вместе с ним.", new Rect(0, 48, width, 46), 18, PlayerUi.Muted);
             for (int i = 0; i < 4; i++)
             {
                 int slot = i; var bp = game.Run.Workshop.Loadout[i];
-                var card = ui.Panel(page, "Loadout " + i, new Rect(130 + i * 338, 258, 310, 330), PlayerUi.Card);
-                ui.Label(card, "0" + (i + 1), new Rect(22, 16, 100, 36), 22, PlayerUi.Muted);
-                ui.Blueprint(card, bp, new Rect(65, 52, 180, 160));
-                ui.Label(card, bp == null ? ui.T("empty") : GameText.Resolve(bp.Name), new Rect(22, 219, 266, 48), 22, title: true, alignment: TextAnchor.MiddleCenter);
-                if (bp != null) ui.Label(card, ui.T("cost", game.Run.PreviewBlueprint(bp, game.Drawing.Tier).Cost), new Rect(22, 280, 190, 28), 18, PlayerUi.Blue);
-                ui.IconButton(card, "Cycle blueprint " + i, new Rect(236, 269, 52, 44), PlayerIcon.Restart, ui.T("cycle_blueprint"), () => game.CycleBlueprint(slot));
+                var card = ui.Panel(body, "Loadout " + i, new Rect(i % columns * (cardW + 18), 110 + i / columns * (cardH + 18), cardW, cardH), PlayerUi.Card);
+                ui.Label(card, "0" + (i + 1), new Rect(18, 12, 40, 28), 17, PlayerUi.Muted);
+                ui.Blueprint(card, bp, new Rect(cardW * .25f, 26, cardW * .5f, cardH - 130));
+                ui.Label(card, bp == null ? ui.T("empty") : GameText.Resolve(bp.Name), new Rect(18, cardH - 96, cardW - 36, 40), 23, title: true);
+                if (bp != null) ui.Label(card, ui.T("cost", game.Run.PreviewBlueprint(bp, game.Drawing.Tier).Cost), new Rect(18, cardH - 48, cardW - 90, 30), 17, PlayerUi.Blue);
+                ui.IconButton(card, "Cycle blueprint " + i, new Rect(cardW - 62, cardH - 55, 44, 40), PlayerIcon.Restart, "Следующий чертёж в альбоме", () => game.CycleBlueprint(slot));
             }
-            var materials = ui.Panel(page, "Preparation material", new Rect(130, 632, 590, 135), PlayerUi.Card);
-            ui.Label(materials, ui.T("material"), new Rect(24, 15, 540, 35), 23, title: true);
-            string[] materialIds = { "pencil", "pen", "marker" };
+            var materials = ui.Panel(body, "Preparation material", new Rect(0, materialY, width, 132), PlayerUi.Card);
+            ui.Label(materials, "Материал строительства", new Rect(20, 12, width - 40, 32), 24, title: true);
+            float materialW = Mathf.Min(210, (width - 64) / 3);
             for (int i = 0; i < 3; i++)
             {
                 int index = i;
-                var b = ui.IconButton(materials, "Starting material " + i, new Rect(24 + i * 180, 62, 150, 54), PlayerIcon.Drop, ui.T("material_" + i), () => { game.Drawing.SelectTier((MaterialTier)index); Show(PlayerPage.Preparation); }, art: "ui.material." + materialIds[i]);
-                ui.MarkSelected(b, (int)game.Drawing.Tier == i);
+                var button = ui.Button(materials, "Starting material " + i, new Rect(20 + i * (materialW + 12), 62, materialW, 48), PlayerIcon.Pencil, new[] { "Карандаш", "Ручка", "Маркер" }[i], () => { game.Drawing.SelectTier((MaterialTier)index); Show(PlayerPage.Preparation); });
+                button.GetComponent<PlayerTooltip>().Message = ui.T("material_" + i);
+                ui.MarkSelected(button, (int)game.Drawing.Tier == i);
             }
-            ui.Label(page, ui.T("preparation_note"), new Rect(770, 642, 680, 110), 21, PlayerUi.Muted);
-            ui.IconButton(page, "Edit album", new Rect(130, 814, 78, 78), PlayerIcon.Book, ui.T("workshop"), () => game.Navigate(PlayerPage.Workshop));
-            ui.Label(page, ui.T("workshop"), new Rect(228, 825, 470, 55), 25, title: true);
-            ui.Label(page, ui.T("start_battle"), new Rect(1010, 825, 320, 55), 29, title: true, alignment: TextAnchor.MiddleRight);
-            ui.IconButton(page, "Start battle", new Rect(1360, 808, 100, 84), PlayerIcon.Play, ui.T("start_battle"), () => game.StartBattle(), true);
-            status = ui.Label(page, "", new Rect(350, 892, 1000, 38), 18, NotebookPalette.Red, alignment: TextAnchor.MiddleCenter);
-        }
-
-        void Workshop()
-        {
-            if(game.GetComponentInChildren<WorkshopHud>(true).UseGuidedFlow)return;
-            ui.Panel(page, "Workshop navigation", new Rect(0, 0, 1600, 90), PlayerUi.Paper, true);
-            Header(ui.T("workshop"), () => game.Navigate(PlayerPage.Preparation));
-        }
-
-        RectTransform Modal(string title)
-        {
-            ui.Panel(page, "Modal input shield", new Rect(0, 0, 1600, 1000), new Color(.08f, .16f, .27f, .42f), true);
-            var panel = ui.Panel(page, "Modal", new Rect(430, 225, 740, 525), PlayerUi.Card, true);
-            ui.Label(panel, title, new Rect(40, 30, 660, 70), 48, title: true, alignment: TextAnchor.MiddleCenter);
-            return panel;
-        }
-
-        void Pause()
-        {
-            var panel = Modal(ui.T("paused"));
-            ui.Label(panel, ui.T("pause_hint"), new Rect(70, 116, 600, 70), 22, PlayerUi.Muted, alignment: TextAnchor.MiddleCenter);
-            ui.IconButton(panel, "Resume", new Rect(310, 220, 120, 96), PlayerIcon.Play, ui.T("resume"), game.Resume, true);
-            ui.IconButton(panel, "Pause settings", new Rect(110, 355, 70, 66), PlayerIcon.Settings, ui.T("settings"), () => game.OpenSettings());
-            ui.IconButton(panel, "Restart battle", new Rect(335, 355, 70, 66), PlayerIcon.Restart, ui.T("restart"), game.Retry);
-            ui.IconButton(panel, "Leave battle", new Rect(560, 355, 70, 66), PlayerIcon.Map, ui.T("leave"), game.ReturnToMap);
-            ui.Label(panel, ui.T("leave_note"), new Rect(50, 452, 640, 50), 17, PlayerUi.Muted, alignment: TextAnchor.MiddleCenter);
-        }
-
-        void Upgrades()
-        {
-            var panel = Modal(ui.T("upgrade_title"));
-            ui.Label(panel, ui.T("upgrade_hint"), new Rect(40, 105, 660, 45), 20, PlayerUi.Muted, alignment: TextAnchor.MiddleCenter);
-            PlayerIcon[] icons = { PlayerIcon.Fast, PlayerIcon.Drop, PlayerIcon.Restart };
-            var rules = game.Run.Session.Balance.Progression;
-            string[] details = {
-                ui.T("upgrade_stats_0", Mathf.RoundToInt((rules.RapidFireMultiplier - 1) * 100)),
-                ui.T("upgrade_stats_1", Mathf.RoundToInt((rules.DeepInkDamageMultiplier - 1) * 100), Mathf.RoundToInt((rules.DeepInkHealthMultiplier - 1) * 100)),
-                ui.T("upgrade_stats_2", rules.SalvageImmediateInk, Mathf.RoundToInt((rules.SalvageWaveRewardMultiplier - 1) * 100), Mathf.RoundToInt(rules.SalvageRefundBonus * 100))
-            };
-            for (int i = 0; i < 3; i++)
-            {
-                int selected = i;
-                ui.IconButton(panel, "Choose upgrade " + i, new Rect(65 + 225 * i, 195, 160, 120), icons[i], ui.T("upgrade_" + i).Replace('\n', ' '), () => game.ChooseUpgrade((RunUpgrade)selected), true);
-                ui.Label(panel, ui.T("upgrade_" + i), new Rect(45 + 225 * i, 330, 200, 64), 23, title: true, alignment: TextAnchor.UpperCenter);
-                ui.Label(panel, details[i], new Rect(45 + 225 * i, 400, 200, 100), 17, PlayerUi.Muted, alignment: TextAnchor.UpperCenter);
-            }
-        }
-
-        void Result()
-        {
-            bool win = game.Run.Session.Phase == RunPhase.Victory;
-            ui.Panel(page, "Result input shield", new Rect(0, 0, 1600, 1000), new Color(.08f, .16f, .27f, .45f), true);
-            var panel = ui.Panel(page, "Battle report", new Rect(235, 130, 1130, 730), PlayerUi.Card, true);
-            ui.Label(panel, ui.T(win ? "victory" : "defeat"), new Rect(40, 25, 1050, 78), 48, title: true, alignment: TextAnchor.MiddleCenter);
-            ui.Art(panel, win ? "object.castle" : "object.castle.damaged", new Rect(55, 115, 220, 230));
-            var s = game.Run.Session;
-            ui.Label(panel, ui.T("result", s.WaveIndex, s.Balance.Waves.Count, s.Kills, s.GoldEarned), new Rect(325, 140, 720, 180), 27);
-            var stats = s.Statistics;
-            ui.Label(panel, ui.T("result_stats_left", stats.BuildInvestment + stats.UpgradeInvestment, stats.RefundedInk, stats.LostInvestment, stats.PeakAliveEnemies), new Rect(55, 365, 490, 165), 22);
-            ui.Label(panel, ui.T("result_stats_right", Mathf.RoundToInt(stats.TotalDamage), stats.TotalStructuresBuilt, stats.DestroyedStructures, stats.Upgrades.Count), new Rect(590, 365, 490, 165), 22);
-            ui.IconButton(panel, "Result map", new Rect(360, 580, 100, 78), PlayerIcon.Map, ui.T("open_map"), game.ReturnToMap);
-            ui.IconButton(panel, "Result retry", new Rect(515, 580, 100, 78), PlayerIcon.Restart, ui.T("restart"), game.Retry, true);
-            ui.IconButton(panel, "Result workshop", new Rect(670, 580, 100, 78), PlayerIcon.Book, ui.T("workshop"), () => { game.Run.OpenWorkshop(); game.Navigate(PlayerPage.Workshop); });
-            ui.Label(panel, GameText.Resolve(game.Run.Workshop.SaveMessage), new Rect(35, 684, 1060, 30), 16, PlayerUi.Muted, alignment: TextAnchor.MiddleCenter);
-        }
-
-        void Settings(bool modal)
-        {
-            var panel = modal ? Modal(ui.T("settings")) : ui.Panel(page, "Settings", new Rect(300, 175, 1000, 620), PlayerUi.Card);
-            if (!modal) ui.Label(panel, ui.T("settings"), new Rect(50, 35, 850, 65), 44, title: true);
-            ui.IconButton(panel, "Toggle fullscreen", new Rect(65, 140, 75, 70), PlayerIcon.Target, ui.T("fullscreen"), () => { Screen.fullScreen = !Screen.fullScreen; });
-            ui.Label(panel, ui.T("fullscreen"), new Rect(170, 150, 480, 50), 25);
-            var ranges = ui.IconButton(panel, "Toggle ranges", new Rect(65, 240, 75, 70), PlayerIcon.Target, ui.T("ranges"), () => { game.World.ShowRanges = !game.World.ShowRanges; Show(PlayerPage.Settings); });
-            ui.MarkSelected(ranges, game.World.ShowRanges);
-            ui.Label(panel, ui.T("ranges"), new Rect(170, 250, 480, 50), 25);
-            ui.IconButton(panel, "Close settings", new Rect(65, 375, 75, 70), PlayerIcon.Back, ui.T("back"), game.CloseSettings);
-            ui.IconButton(panel, "Open help", new Rect(170, 375, 75, 70), PlayerIcon.Help, ui.T("help"), () => game.Navigate(PlayerPage.Help));
-        }
-
-        void Help(bool modal)
-        {
-            var panel = modal ? Modal(ui.T("help")) : ui.Panel(page, "Help", new Rect(265, 160, 1070, 680), PlayerUi.Card);
-            if (!modal) ui.Label(panel, ui.T("help"), new Rect(50, 30, 960, 65), 44, title: true);
-            ui.Label(panel, ui.T("help_body"), new Rect(50, 120, modal ? 640 : 960, modal ? 270 : 400), modal ? 19 : 24);
-            ui.IconButton(panel, "Close help", new Rect(55, modal ? 418 : 565, 75, 65), PlayerIcon.Back, ui.T("back"), game.CloseSettings);
+            ui.Button(page, "Edit album", new Rect(M, H - 84, 240, 52), PlayerIcon.Book, "В мастерскую", () => game.Navigate(PlayerPage.Workshop));
+            ui.Button(page, "Start battle", new Rect(W - M - 250, H - 84, 250, 52), PlayerIcon.Play, "Начать оборону", () => game.StartBattle(), true);
+            status = ui.Label(page, "", new Rect(M + 260, H - 84, Mathf.Max(80, width - 540), 52), 17, NotebookPalette.Red, alignment: TextAnchor.MiddleCenter);
         }
 
         public void SetStatus(string message) { if (status != null) status.text = message; }
         void Update()
         {
-            refresh -= Time.unscaledDeltaTime;
-            if (refresh > 0) return;
-            refresh = .12f;
+            if (screenWidth != Screen.width || screenHeight != Screen.height || !Mathf.Approximately(appliedScale, game.InterfaceScale)) ApplyLayout(Screen.width, Screen.height);
+            refresh -= Time.unscaledDeltaTime; if (refresh > 0) return; refresh = .12f;
             if (gold != null) gold.text = ui.T("gold", game.Run.Workshop.Gold);
             if (battleRoot.gameObject.activeSelf) battle.Refresh();
         }

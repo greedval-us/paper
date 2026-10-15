@@ -21,12 +21,12 @@ namespace PaperDefense.Presentation
     /// <summary>Shared visual primitives for the player screens. Copy lives in a dedicated text asset.</summary>
     public sealed class PlayerUi
     {
-        public static readonly Color Ink = new Color(.12f, .22f, .36f);
-        public static readonly Color Blue = new Color(.16f, .38f, .63f);
-        public static readonly Color Paper = new Color(.965f, .951f, .905f);
-        public static readonly Color Card = new Color(.995f, .988f, .956f);
-        public static readonly Color Muted = new Color(.40f, .47f, .52f);
-        public static readonly Color Wash = new Color(.85f, .9f, .92f);
+        public static readonly Color Ink = new Color32(35, 57, 83, 255);
+        public static readonly Color Blue = new Color32(49, 88, 220, 255);
+        public static readonly Color Paper = new Color32(245, 247, 252, 255);
+        public static readonly Color Card = Color.white;
+        public static readonly Color Muted = new Color32(89, 108, 134, 255);
+        public static readonly Color Wash = new Color32(237, 242, 250, 255);
         readonly Font font, heading;
         readonly UserTextResolver copy;
         public bool NotebookStyle { get; }
@@ -58,6 +58,7 @@ namespace PaperDefense.Presentation
         }
         public Text Label(Transform parent, string text, Rect bounds, int size = 20, Color? color = null, bool title = false, TextAnchor alignment = TextAnchor.MiddleLeft)
         {
+            if (title) bounds.height = Mathf.Max(bounds.height, Mathf.Ceil(size * 1.5f));
             var label = Graphic<Text>(parent, "Copy", bounds); label.text = text; label.font = title ? heading : font;
             label.fontSize = size; label.color = color ?? Ink; label.alignment = alignment;
             label.horizontalOverflow = HorizontalWrapMode.Wrap; label.verticalOverflow = VerticalWrapMode.Truncate;
@@ -76,11 +77,56 @@ namespace PaperDefense.Presentation
             var tooltip = panel.gameObject.AddComponent<PlayerTooltip>(); tooltip.Message = hint; tooltip.Display = text => Tooltip?.Invoke(text);
             return button;
         }
+        public Button Button(Transform parent, string name, Rect bounds, PlayerIcon icon, string caption, Action action, bool primary = false)
+        {
+            var button = IconButton(parent, name, bounds, icon, caption, action, primary);
+            var symbol = button.GetComponentInChildren<PlayerIconGraphic>();
+            Place(symbol.rectTransform, new Rect(16, (bounds.height - 22) / 2, 22, 22));
+            var label = Label(button.transform, caption, new Rect(50, 6, bounds.width - 62, bounds.height - 12), 18, primary ? Card : Ink);
+            label.resizeTextForBestFit = true; label.resizeTextMinSize = 16; label.resizeTextMaxSize = 18;
+            label.rectTransform.anchorMin = Vector2.zero; label.rectTransform.anchorMax = Vector2.one;
+            label.rectTransform.offsetMin = new Vector2(50, 6); label.rectTransform.offsetMax = new Vector2(-12, -6);
+            return button;
+        }
+
+        public RectTransform Scroll(Transform parent, string name, Rect bounds, float contentHeight)
+        {
+            var viewport = Panel(parent, name, bounds, Color.clear, true);
+            viewport.gameObject.AddComponent<RectMask2D>();
+            var scroll = viewport.gameObject.AddComponent<ScrollRect>();
+            var content = new GameObject("Content", typeof(RectTransform)).GetComponent<RectTransform>();
+            content.SetParent(viewport, false); Place(content, new Rect(0, 0, bounds.width, Mathf.Max(bounds.height, contentHeight)));
+            scroll.viewport = viewport; scroll.content = content; scroll.horizontal = false;
+            scroll.movementType = ScrollRect.MovementType.Clamped; scroll.scrollSensitivity = 32;
+            var player = parent.GetComponentInParent<PlayerGameRoot>(); scroll.inertia = player == null || !player.ReducedMotion;
+            var track = Graphic<Image>(viewport, "Scroll track", new Rect(bounds.width - 10, 4, 8, bounds.height - 8));
+            track.color = new Color32(219, 227, 239, 110); track.raycastTarget = true;
+            track.rectTransform.anchorMin = new Vector2(1, 0); track.rectTransform.anchorMax = new Vector2(1, 1);
+            track.rectTransform.pivot = new Vector2(1, 1); track.rectTransform.offsetMin = new Vector2(-10, 4); track.rectTransform.offsetMax = new Vector2(-2, -4);
+            var handle = Graphic<Image>(track.transform, "Scroll handle", new Rect(0, 0, 8, 40)); handle.color = new Color32(148, 166, 195, 220); handle.raycastTarget = true;
+            var bar = track.gameObject.AddComponent<Scrollbar>(); bar.handleRect = handle.rectTransform; bar.targetGraphic = handle; bar.direction = Scrollbar.Direction.BottomToTop;
+            scroll.verticalScrollbar = bar; scroll.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;
+            return content;
+        }
         public NotebookArtGraphic Art(Transform parent, string id, Rect bounds)
         { var art = Graphic<NotebookArtGraphic>(parent, id, bounds); art.Bind(id); return art; }
         public BlueprintSketch Blueprint(Transform parent, TowerBlueprint value, Rect bounds)
         { var sketch = Graphic<BlueprintSketch>(parent, "Blueprint", bounds); sketch.SetBlueprint(value); return sketch; }
         public void MarkSelected(Button button, bool selected)
-        { button.targetGraphic.color = selected ? new Color(.69f, .82f, .91f) : Card; }
+        { button.targetGraphic.color = selected ? new Color32(220, 231, 255, 255) : Card; }
+
+        public static void HorizontalScrollbar(ScrollRect scroll)
+        {
+            scroll.horizontal = true;
+            var track = Graphic<Image>(scroll.transform, "Horizontal scroll track", new Rect(0, 0, 100, 8));
+            track.color = new Color32(219, 227, 239, 160); track.raycastTarget = true;
+            track.rectTransform.anchorMin = Vector2.zero; track.rectTransform.anchorMax = new Vector2(1, 0);
+            track.rectTransform.offsetMin = new Vector2(4, 0); track.rectTransform.offsetMax = new Vector2(-14, 8);
+            var handle = Graphic<Image>(track.transform, "Horizontal scroll handle", new Rect(0, 0, 40, 8));
+            handle.color = new Color32(148, 166, 195, 255); handle.raycastTarget = true;
+            var bar = track.gameObject.AddComponent<Scrollbar>(); bar.handleRect = handle.rectTransform; bar.targetGraphic = handle;
+            bar.direction = Scrollbar.Direction.LeftToRight; scroll.horizontalScrollbar = bar;
+            scroll.horizontalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;
+        }
     }
 }

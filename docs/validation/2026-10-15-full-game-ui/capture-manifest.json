@@ -1,0 +1,482 @@
+[
+  {
+    "file": "album-1024-scale150.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "album-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "album-bottom-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "armor-1024-scale150.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "armor-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "battle-1024-scale150.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "battle-1024.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "battle-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "battle-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "battle-1920-scale125.png",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "battle-1920.png",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "battle-2560.png",
+    "width": 2560,
+    "height": 1080
+  },
+  {
+    "file": "defeat-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "details-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "drawing-1024-scale150.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "drawing-1024.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "drawing-1280-scale125.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "drawing-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "drawing-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "drawing-1920.png",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "drawing-2560.png",
+    "width": 2560,
+    "height": 1080
+  },
+  {
+    "file": "drawing-bottom-1280-scale125.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "empty-album-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "empty-search-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "fan-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "foundation-1024.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "foundation-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "foundation-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "foundation-1920.png",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "foundation-2560.png",
+    "width": 2560,
+    "height": 1080
+  },
+  {
+    "file": "help-1024-scale150.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "help-1024.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "help-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "help-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "help-1920.png",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "help-2560.png",
+    "width": 2560,
+    "height": 1080
+  },
+  {
+    "file": "home-1024-scale150.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "home-1024.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "home-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "home-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "home-1920.png",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "home-2560.png",
+    "width": 2560,
+    "height": 1080
+  },
+  {
+    "file": "invalid-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "leave-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "map-1024-scale150.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "map-1024.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "map-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "map-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "map-1920.png",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "map-2560.png",
+    "width": 2560,
+    "height": 1080
+  },
+  {
+    "file": "mortar-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "mortar-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "mortar-study-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "pause-1024.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "pause-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "pause-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "pause-1920.png",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "pause-2560.png",
+    "width": 2560,
+    "height": 1080
+  },
+  {
+    "file": "planning-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "preparation-1024-scale150.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "preparation-1024.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "preparation-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "preparation-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "preparation-1920.png",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "preparation-2560.png",
+    "width": 2560,
+    "height": 1080
+  },
+  {
+    "file": "purchase-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "review-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "save-error-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "settings-1024-scale150.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "settings-1024.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "settings-1280-scale125.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "settings-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "settings-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "settings-1920.png",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "settings-2560.png",
+    "width": 2560,
+    "height": 1080
+  },
+  {
+    "file": "settings-bottom-1280-scale125.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "statistics-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "stencils-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "tower-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "trial-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "trial-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "trial-bottom-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "upgrades-1024-scale150.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "upgrades-1024.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "upgrades-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "upgrades-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "upgrades-1920.png",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "upgrades-2560.png",
+    "width": 2560,
+    "height": 1080
+  },
+  {
+    "file": "victory-1024-scale150.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "victory-1024.png",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "victory-1280.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "file": "victory-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "victory-1920.png",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "victory-2560.png",
+    "width": 2560,
+    "height": 1080
+  },
+  {
+    "file": "weapons-1600.png",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "file": "workshop-2560-tooltip.png",
+    "width": 2560,
+    "height": 1080
+  }
+]

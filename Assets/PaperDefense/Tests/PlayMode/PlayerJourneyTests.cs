@@ -47,7 +47,7 @@ namespace PaperDefense.Tests
             Assert.That(game.Run.Session.TickIndex, Is.EqualTo(tick));
             Assert.That(root.GetComponentsInChildren<NotebookHud>(true), Is.Empty);
             Assert.That(Find("Open campaign").GetComponentInChildren<PlayerIconGraphic>(), Is.Not.Null);
-            Assert.That(Find("Open campaign").GetComponentsInChildren<Text>(), Is.Empty);
+            Assert.That(Find("Open campaign").GetComponentInChildren<Text>().text, Is.EqualTo("Начать игру"));
         }
 
         [UnityTest] public IEnumerator IconNavigationReachesRealBattleWithFrozenLoadout()
@@ -115,6 +115,12 @@ namespace PaperDefense.Tests
             string blueprint = game.Run.Workshop.Loadout[0].Id;
             int gold = game.Run.Workshop.Gold;
             game.StartBattle(); game.Pause(); Find("Leave battle").onClick.Invoke(); yield return null;
+            Assert.That(game.Run.InWorkshop, Is.False);
+            Assert.That(game.Run.Paused, Is.True);
+            Find("Cancel confirmation").onClick.Invoke();
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Pause));
+            Find("Leave battle").onClick.Invoke();
+            Find("Confirm action").onClick.Invoke(); yield return null;
             Assert.That(game.Page, Is.EqualTo(PlayerPage.Map));
             Assert.That(game.Run.InWorkshop, Is.True); Assert.That(game.Drawing.enabled, Is.False);
             Assert.That(game.Run.Workshop.Loadout[0].Id, Is.EqualTo(blueprint));
@@ -132,6 +138,20 @@ namespace PaperDefense.Tests
             Assert.That(root.GetComponentInChildren<WorkshopHud>(true).PresentationVisible, Is.False);
         }
 
+        [UnityTest] public IEnumerator DirectSettingsPauseBattleAndHelpReturnsToSettings()
+        {
+            game.StartBattle(); game.OpenSettings(); yield return null;
+            long tick = game.Run.Session.TickIndex;
+            yield return new WaitForSecondsRealtime(.12f);
+            Assert.That(game.Run.Paused, Is.True);
+            Assert.That(game.Run.Session.TickIndex, Is.EqualTo(tick));
+            Find("Open help").onClick.Invoke();
+            Find("Close help").onClick.Invoke();
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Settings));
+            Find("Close settings").onClick.Invoke();
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Pause));
+        }
+
         [UnityTest] public IEnumerator UpgradeChoicesDisplayAmountsFromTheActiveRules()
         {
             Assert.That(game.StartBattle(), Is.True);
@@ -143,6 +163,62 @@ namespace PaperDefense.Tests
             Assert.That(labels, Does.Contain("Сразу +" + rules.SalvageImmediateInk + " штрихов\nНаграда волн +" +
                 Mathf.RoundToInt((rules.SalvageWaveRewardMultiplier - 1) * 100) + "%\nВозврат +" + Mathf.RoundToInt(rules.SalvageRefundBonus * 100) + " п.п."));
             Assert.That(Find("Choose upgrade 2"), Is.Not.Null);
+        }
+
+        [UnityTest] public IEnumerator ScalingWorkshopPreservesAcceptedGeometryAndUndo()
+        {
+            game.Navigate(PlayerPage.Workshop); yield return null;
+            var wizard = root.GetComponentInChildren<WorkshopHud>().Guided;
+            wizard.Next(); wizard.Next();
+            var session = wizard.Drawing.Session;
+            Assert.That(session.AddRectangle(DrawingBindings.Base, new DrawingPoint(-.35f,-.35f), new DrawingPoint(.35f,.35f), out _), Is.True);
+            wizard.Drawing.Canvas.FinishStroke();
+            string hash = session.Snapshot.GeometryHash;
+            game.SetInterfaceScale(1.5f); yield return null; yield return null;
+            Assert.That(wizard.Drawing.Session, Is.SameAs(session));
+            Assert.That(session.Snapshot.GeometryHash, Is.EqualTo(hash));
+            Assert.That(session.CanUndo, Is.True);
+            wizard.Drawing.Canvas.Undo();
+            Assert.That(session.Snapshot.StrokeCount, Is.Zero);
+        }
+
+        [UnityTest] public IEnumerator ReducedMotionDoesNotChangeSimulationOrSharedArt()
+        {
+            game.Run.AutomaticSimulation = false; game.StartBattle(); game.Pause();
+            string original = JsonUtility.ToJson(NotebookVisualThemeAsset.Default.Data);
+            var session = game.Run.Session; long tick = session.TickIndex; int ink = session.Ink;
+            game.SetReducedMotion(true); yield return null;
+            Assert.That(game.Run.Session, Is.SameAs(session)); Assert.That(session.TickIndex, Is.EqualTo(tick));
+            Assert.That(session.Ink, Is.EqualTo(ink)); Assert.That(game.Run.Paused, Is.True);
+            Assert.That(JsonUtility.ToJson(NotebookVisualThemeAsset.Default.Data), Is.EqualTo(original));
+            Assert.That(game.World.VisualTheme, Is.Not.SameAs(NotebookVisualThemeAsset.Default));
+            game.SetReducedMotion(false); Assert.That(game.ReducedMotion, Is.False);
+        }
+
+        [UnityTest] public IEnumerator AlbumSearchRetainsLoadoutAndShowsAnEmptyResult()
+        {
+            game.Navigate(PlayerPage.Workshop); yield return null;
+            var wizard = root.GetComponentInChildren<WorkshopHud>().Guided; wizard.ShowAlbum(true); yield return null;
+            string first = game.Run.Workshop.Loadout[0].Id;
+            var field = root.GetComponentInChildren<InputField>(); field.onEndEdit.Invoke("Нет такого чертежа 7429"); yield return null;
+            Assert.That(game.Run.Workshop.Loadout[0].Id, Is.EqualTo(first));
+            bool found = false;
+            foreach (var label in root.GetComponentsInChildren<Text>()) if (label.name == "Album empty") found = label.text.Contains("ничего не найдено");
+            Assert.That(found, Is.True); Assert.That(Find("Wizard close album"), Is.Not.Null);
+        }
+
+        [UnityTest] public IEnumerator ScrolledBlueprintCannotDrawOverFixedNavigation()
+        {
+            game.Navigate(PlayerPage.Preparation); yield return null;
+            ScrollRect scroll = null; BlueprintSketch sketch = null;
+            foreach (var item in root.GetComponentsInChildren<ScrollRect>()) if (item.name == "Preparation scroll") scroll = item;
+            foreach (var item in scroll.GetComponentsInChildren<BlueprintSketch>()) { sketch = item; break; }
+            var card = (RectTransform)sketch.transform.parent;
+            card.anchoredPosition = new Vector2(card.anchoredPosition.x, 500);
+            Canvas.ForceUpdateCanvases(); yield return null;
+            Assert.That(sketch.canvasRenderer.cull, Is.True, "Blueprint must be clipped outside the preparation viewport.");
+            Assert.That(typeof(IClippable).IsAssignableFrom(typeof(WorkshopMapSketch)), Is.True);
+            Assert.That(typeof(IClippable).IsAssignableFrom(typeof(FootprintAxisGraphic)), Is.True);
         }
     }
 }

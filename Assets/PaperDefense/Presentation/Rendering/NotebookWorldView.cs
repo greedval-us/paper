@@ -12,6 +12,7 @@ namespace PaperDefense.Presentation
     {
         public Camera WorldCamera { get; set; }
         public NotebookVisualThemeAsset VisualTheme;
+        public Color? PaperColor { get; set; }
         public NotebookViewSettingsAsset ViewSettings;
         public bool Paused { get; set; }
         public bool ShowEnemyHealthBars { get; set; } = true;
@@ -228,9 +229,9 @@ namespace PaperDefense.Presentation
             p.MinimumStrokePixels = 0;
             Color navy = NotebookPalette.Navy;
             // The subtle page shadow and warm edge make the world feel like an actual sheet.
-            p.Rect(-2.5f, -2.5f, paperWidth + 5, paperHeight + 5, new Color(.89f, .88f, .82f));
-            p.Rect(-1.75f, -1.75f, paperWidth + 3.5f, paperHeight + 3.5f, NotebookPalette.Paper);
-            p.Rect(-1.7f, -1.7f, .22f, paperHeight + 3.4f, new Color(.95f, .92f, .84f));
+            p.Rect(-2.5f, -2.5f, paperWidth + 5, paperHeight + 5, PaperColor.HasValue ? new Color32(220, 229, 242, 255) : new Color(.89f, .88f, .82f));
+            p.Rect(-1.75f, -1.75f, paperWidth + 3.5f, paperHeight + 3.5f, PaperColor ?? NotebookPalette.Paper);
+            p.Rect(-1.7f, -1.7f, .22f, paperHeight + 3.4f, PaperColor.HasValue ? Color.white : new Color(.95f, .92f, .84f));
             // A single pale stroke stays quiet at the full-map overview. Overlapping
             // subpixel cores make alternating dark bands as the grid crosses pixels.
             Color minor = new Color(.35f, .54f, .68f, .07f * minorGridOpacity);

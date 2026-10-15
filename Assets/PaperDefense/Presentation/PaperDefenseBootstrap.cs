@@ -19,6 +19,7 @@ namespace PaperDefense.Presentation
         public WorkshopHudMode workshopHudMode;
         public bool enableDrawingInput = true;
         public bool constructionInputOnly;
+        [NonSerialized] public Color? PlayerPaperColor;
         public TextResourcesAsset textResources;
         public NotebookViewSettingsAsset viewSettings;
         [NonSerialized] public IWorkshopProfileStore ProfileStore;
@@ -57,10 +58,10 @@ namespace PaperDefense.Presentation
             else Controller.InitializeWorkshop(!isolateProfile);
             PrepareController?.Invoke(Controller);
             var background=Child("Paper background camera").AddComponent<Camera>();background.depth=-10;background.cullingMask=0;
-            background.clearFlags=CameraClearFlags.SolidColor;background.backgroundColor=new Color(.975f,.961f,.9f);
+            background.clearFlags=CameraClearFlags.SolidColor;background.backgroundColor=PlayerPaperColor ?? new Color(.975f,.961f,.9f);
             ConfigureCamera();
             View = Child("Presentation — Notebook world").AddComponent<NotebookWorldView>();
-            View.WorldCamera = worldCamera; View.ViewSettings = viewSettings; View.Initialize(Controller.Session);
+            View.WorldCamera = worldCamera; View.ViewSettings = viewSettings; View.PaperColor = PlayerPaperColor; View.Initialize(Controller.Session);
             Drawing = Child("Presentation — Drawing input").AddComponent<DrawingInput>();
             Drawing.TextResolver = TextResolver;
             Drawing.ViewSettings = viewSettings;
@@ -95,7 +96,7 @@ namespace PaperDefense.Presentation
         {
             worldCamera.transform.SetPositionAndRotation(new Vector3(Controller.Session.Balance.Width*.5f,Controller.Session.Balance.Height*.5f,-10),Quaternion.identity);
             worldCamera.orthographic=true;worldCamera.clearFlags=CameraClearFlags.SolidColor;
-            worldCamera.backgroundColor=new Color(.975f,.961f,.9f);worldCamera.nearClipPlane=.1f;worldCamera.farClipPlane=100;
+            worldCamera.backgroundColor=PlayerPaperColor ?? new Color(.975f,.961f,.9f);worldCamera.nearClipPlane=.1f;worldCamera.farClipPlane=100;
             worldCamera.depth=0;FitCamera();
         }
         void FitCamera()
