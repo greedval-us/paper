@@ -21,7 +21,7 @@ namespace PaperDefense.Validation
         public string FixtureDirectory => fixture?.DirectoryPath;
         public int ProfileLoadCalls => fixture?.LoadCalls ?? 0;
         public int ProfileSaveCalls => fixture?.SaveCalls ?? 0;
-        public TrialComparison QualityComparison { get; private set; }
+        public TrialComparison DrawingComparison { get; private set; }
         public bool Paused => Controller != null && Controller.Paused;
         public int SimulationDriverCount => Prepared && !Controller.AutomaticSimulation ? 1 : 0;
         UserTextResolver texts;
@@ -42,7 +42,7 @@ namespace PaperDefense.Validation
 
         void Prepare(bool preserveFiles)
         {
-            Prepared = false; PreparationError = null; pressure = null; QualityComparison = null; status = null;
+            Prepared = false; PreparationError = null; pressure = null; DrawingComparison = null; status = null;
             clock.Reset(); DestroyRuntime();
             try
             {
@@ -83,6 +83,7 @@ namespace PaperDefense.Validation
                 runtimeRoot.SetActive(true);
                 if (Bootstrap.Controller == null || Bootstrap.View == null || Bootstrap.Drawing == null)
                     throw new InvalidOperationException("mechanics.scene: bootstrap preparation did not complete.");
+                FramePreparedActors();
                 if (Controller.Paused != scenario.startPaused) Controller.TogglePause();
                 clock.Reset(); ResetGeneration++; Prepared = true;
             }
@@ -91,6 +92,36 @@ namespace PaperDefense.Validation
                 PreparationError = error.GetType().Name + ": " + error.Message;
                 Debug.LogException(error, this); DestroyRuntime();
             }
+        }
+
+        void FramePreparedActors()
+        {
+            // Full-map scenarios retain normal navigation. Fixed weapon/module fixtures need
+            // enough pixels to distinguish adjacent targets, mounts and transient effects.
+            if (scenario.workshopMode || scenario.focus == MechanicsTestFocus.Pressure ||
+                scenario.focus == MechanicsTestFocus.Construction || scenario.focus == MechanicsTestFocus.Economy ||
+                scenario.focus == MechanicsTestFocus.Wells || scenario.targets.Count == 0) return;
+            var home = Controller.Session.BaseCell;
+            Vector2 min = new Vector2(home.X + .5f, home.Y + .5f), max = min;
+            foreach (var target in scenario.targets)
+            { min = Vector2.Min(min, target.position); max = Vector2.Max(max, target.position); }
+            foreach (var placement in scenario.placements)
+            {
+                Vector2 point = (Vector2)placement.cell + Vector2.one * .5f;
+                min = Vector2.Min(min, point); max = Vector2.Max(max, point);
+            }
+            foreach (var blot in scenario.blots)
+            {
+                Vector2 point = (Vector2)blot.cell + Vector2.one * .5f;
+                min = Vector2.Min(min, point); max = Vector2.Max(max, point);
+            }
+            Vector2 center = (min + max) * .5f;
+            Vector2 size = Vector2.Max(max - min + Vector2.one * 6, new Vector2(10, 9));
+            Bootstrap.WorldBoundsOverride = new Rect(center - size * .5f, size);
+            Bootstrap.View.CompactBaseMarker = true;
+            // Exact HP is already listed beside the fixture. Above-head bars cover the next
+            // actor in these one-cell target rows, including its status and hit animation.
+            Bootstrap.View.ShowEnemyHealthBars = false;
         }
 
         void PrepareController(RunController controller)
@@ -116,7 +147,7 @@ namespace PaperDefense.Validation
             if (scenario.focus == MechanicsTestFocus.Construction || scenario.focus == MechanicsTestFocus.Economy ||
                 scenario.focus == MechanicsTestFocus.Wells)
                 session = new GameSession(scenario.CreateBalance(), scenario.seed, false);
-            else session = scenario.CreatePreparedSession(variant);
+            else session = scenario.CreatePreparedSession();
             controller.Initialize(session);
             for (int i = 0; i < scenario.placements.Count; i++)
             {
@@ -187,7 +218,7 @@ namespace PaperDefense.Validation
         {
             if (!Prepared || scenario.focus != MechanicsTestFocus.Drawing) return;
             var workshop = Bootstrap.GetComponentInChildren<WorkshopHud>();
-            if (workshop != null) QualityComparison = workshop.RunDrawingTrial();
+            if (workshop != null) DrawingComparison = workshop.RunDrawingTrial();
         }
         public bool SaveProfileVariant()
         {

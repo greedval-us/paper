@@ -20,10 +20,10 @@ namespace PaperDefense.Tests
             =>new StructureState {Id=1,Cell=new Cell(10,10),Kind=StructureKind.Stapler,
                 Health=55,IsComplete=true,Tier=MaterialTier.Pencil,
                 Blueprint=blueprint??new TowerBlueprint("stapler","Stapler",ChassisKind.Standard,StructureKind.Stapler)};
-        static RunStatistics Fire(GameBalance balance,StructureState tower,EnemyState enemy,float? quality=null)
+        static RunStatistics Fire(GameBalance balance,StructureState tower,EnemyState enemy)
         {
             var stats=new RunStatistics();
-            new WeaponSystem(balance,quality).Fire(new List<StructureState>{tower},new List<EnemyState>{enemy},new List<ShotEvent>(),
+            new WeaponSystem(balance).Fire(new List<StructureState>{tower},new List<EnemyState>{enemy},new List<ShotEvent>(),
                 1,1,1f/30,1,stats,new SimulationEventBuffer());
             return stats;
         }
@@ -84,16 +84,14 @@ namespace PaperDefense.Tests
             Assert.That(EnemyEffects.MovementMultiplier(second,balance.Effects),Is.EqualTo(.8f));
         }
 
-        [Test] public void HistoricalDrawingQualityDoesNotChangeStaplerCadenceDamageOrSlow()
+        [Test] public void StaplerUsesItsOwnCadenceDamageAndSlow()
         {
-            var balance=Balance(); var slowTower=Tower(); var perfectTower=Tower(); var slowEnemy=Enemy(); var perfectEnemy=Enemy();
-            Fire(balance,slowTower,slowEnemy,0); Fire(balance,perfectTower,perfectEnemy,100);
-            Assert.That(slowTower.Cooldown,Is.EqualTo(.65f).Within(.00001f));
-            Assert.That(perfectTower.Cooldown,Is.EqualTo(.65f).Within(.00001f));
-            Assert.That(slowEnemy.Health,Is.EqualTo(perfectEnemy.Health));
-            Assert.That(EnemyEffects.MovementMultiplier(slowEnemy,balance.Effects),Is.EqualTo(.8f));
-            Assert.That(EnemyEffects.MovementMultiplier(perfectEnemy,balance.Effects),Is.EqualTo(.8f));
-            Assert.That(slowEnemy.BlueRemaining,Is.EqualTo(2)); Assert.That(perfectEnemy.BlueRemaining,Is.EqualTo(2));
+            var balance=Balance(); var tower=Tower(); var enemy=Enemy();
+            Fire(balance,tower,enemy);
+            Assert.That(tower.Cooldown,Is.EqualTo(.65f).Within(.00001f));
+            Assert.That(enemy.Health,Is.EqualTo(96));
+            Assert.That(EnemyEffects.MovementMultiplier(enemy,balance.Effects),Is.EqualTo(.8f));
+            Assert.That(enemy.BlueRemaining,Is.EqualTo(2));
         }
 
         [Test] public void GunAndStaplerKeepIndependentTargetsAndShareTheSameProductionRule()

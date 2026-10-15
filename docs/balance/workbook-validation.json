@@ -1,7 +1,7 @@
 {
-  "GeneratedAtUtc": "2026-10-13T19:57:59.084Z",
-  "BalanceDataSha256": "f529f9f331b23bf35b379f8f20c2e0d5aa0bef510e873ed994ba50cd2cd30efe",
-  "WorkbookSha256": "3c673e62a9e1a0da14fc74d1d35b3354d4f51d0ea11e0f67f170ea1da227ffc2",
+  "GeneratedAtUtc": "2026-10-15T13:42:22.187Z",
+  "BalanceDataSha256": "44513a8bec34c7e2a18226d2e44c22523712cf4646090e5160939da4ffa7ab62",
+  "WorkbookSha256": "e998c31b6c9c81ad6addea0e669bc16fd47b1bcc58afae43a8a5a44dbdb79808",
   "Sheets": [
     "Механики",
     "Расчеты",
@@ -13,7 +13,7 @@
     "Каталог данных",
     "Источники"
   ],
-  "Parameters": 478,
+  "Parameters": 726,
   "CatalogFields": 3364,
   "Parts": [
     {
@@ -30,12 +30,12 @@
     {
       "Path": "docs/validation/content/after/editmode-tests.json",
       "Scope": "Исторический рефакторинг каталога 2026-10-12",
-      "Sha256": "f1b330b3fb87660aafdbc6149981bfb14d32acb5f4f23c76806ed94bb82acf49"
+      "Sha256": "05e9aae35aa630eadbbdebb2f70ae902fbff0c4ace44142f1dafe2244898acf4"
     },
     {
       "Path": "docs/validation/content/after/playmode-tests.json",
       "Scope": "Исторический рефакторинг каталога 2026-10-12",
-      "Sha256": "fc8617f69a2826aa0fb9dd93dfd36489159f6795f4561d1630722cbbc05d368c"
+      "Sha256": "fe13c3918fe4070e0b7b598f96314f5dd9e5f68df23808f6a27dd6a454a3ec35"
     },
     {
       "Path": "docs/validation/content/after/baseline-comparison.json",
@@ -45,12 +45,12 @@
     {
       "Path": "docs/validation/content/after/editor-acceptance.json",
       "Scope": "Исторический рефакторинг каталога 2026-10-12",
-      "Sha256": "2971783f5afcb2bd7f0ff381d02a25cf465b409488018267417550146d8728dd"
+      "Sha256": "27740125c67f5c23e58bc5e6a375f3cfc9086539ef35bd54fd8054ea2e5a5371"
     },
     {
       "Path": "docs/validation/content/after/player-acceptance.json",
       "Scope": "Исторический рефакторинг каталога 2026-10-12",
-      "Sha256": "b48143bb55eea2807d49eb97867b2095abed8f7922fcd1df021f5aeaba08ac8d"
+      "Sha256": "977338d037fb08680877930fa6d9dee85175bd385a26e0b8167bc2b1ab89826e"
     },
     {
       "Path": "docs/validation/content/after/development-build.json",
@@ -63,14 +63,14 @@
       "Sha256": "fcb8bec9bd35ded851587ec4ab3e137306325c377886a817dba9b7a239711d0f"
     },
     {
-      "Path": "docs/validation/2026-10-13-mechanics-cleanup/editmode-tests.json",
+      "Path": "docs/validation/2026-10-15-mechanics-audit/editmode-tests.json",
       "Scope": "Текущая проверка",
-      "Sha256": "61b480d5d7a11145913dc5a8b80a50e14c27ea3288747190eea58b7000ffefae"
+      "Sha256": "93a1a78eac721dd2dd2e44185bf83b1b490c7fa56bf26f1297e345d948b49b72"
     },
     {
-      "Path": "docs/validation/2026-10-13-mechanics-cleanup/playmode-tests.json",
+      "Path": "docs/validation/2026-10-15-mechanics-audit/playmode-tests.json",
       "Scope": "Текущая проверка",
-      "Sha256": "28ab288b05e8f28d9329621fcb082541595af7e4e1626b3e72c40d951048ec9b"
+      "Sha256": "c5d7a27f4844efcdbe8ca6b25057fe43954e315231d766157e194e9104577555"
     }
   ],
   "FormulaChecksPassed": true,

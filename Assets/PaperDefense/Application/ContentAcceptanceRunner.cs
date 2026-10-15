@@ -66,7 +66,7 @@ namespace PaperDefense.Application
                     new[] { new ModuleSelection("acceptance-slot", manifest.newModuleId) }, content);
                 Equal(TowerCatalog.Cost(modular, balance, MaterialTier.Pencil), manifest.expectedModuleAssemblyCost, "C.assembly.price");
                 Equal(TowerCatalog.WeaponRange(modular, balance, manifest.newWeaponId), manifest.expectedModuleRange, "C.range");
-                Equal(TowerCatalog.ActionInterval(modular, balance, manifest.newWeaponId, TowerCatalog.FeedMultiplier(modular, balance), TowerCatalog.QualityMultiplier(modular, balance)),
+                Equal(TowerCatalog.ActionInterval(modular, balance, manifest.newWeaponId, TowerCatalog.FeedMultiplier(modular, balance)),
                     manifest.expectedModuleInterval, "C.interval");
                 Require(profile.SaveBlueprint(modular, out reason, balance), "C.save: " + reason);
                 Require(store.Save(profile).Success, "C.profile.write");
@@ -111,7 +111,6 @@ namespace PaperDefense.Application
                 float expectedExistingPrice = (float)Math.Ceiling(expectedExistingAssembly * (double)Math.Max(0, pencil.CostMultiplier));
                 Equal(changedPreview.Cost, expectedExistingPrice, "E.preview.price");
                 Equal(changedPreview.DrawingQuality, 100, "E.preview.quality");
-                Equal(changedPreview.QualityMultiplier, 1, "E.preview.qualityMultiplier");
                 float expectedExistingHit = manifest.expectedExistingWeaponDamage * pencil.DamageMultiplier;
                 Require(manifest.probeTargetHealth >= expectedExistingHit, "E.fixture: probe health must permit an unclipped existing-weapon hit");
                 var existingHit = Probe(changed, balance, manifest, new[] { new Point2(manifest.probeTargetOffset.x, manifest.probeTargetOffset.y) });

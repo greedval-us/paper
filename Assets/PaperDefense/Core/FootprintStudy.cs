@@ -112,7 +112,7 @@ namespace PaperDefense.Core
             // not a forecast of campaign movement or a modification of enemy balance.
             float speed=radius*(scenario==FootprintStudyScenario.Turning?.8f:scenario==FootprintStudyScenario.Column?.4f:.2f)/Math.Max(.1f,flight);
             float quality=source.Origin==DrawingOrigin.LegacyStandard?100:source.Assessment.Quality;
-            var weapons=new WeaponSystem(rules,quality);var events=new SimulationEventBuffer(32);var statistics=new RunStatistics();
+            var weapons=new WeaponSystem(rules);var events=new SimulationEventBuffer(32);var statistics=new RunStatistics();
             var shots=new List<ShotEvent>();var frames=new List<TrialFrame>();var impacts=new List<SimulationEvent>();
             frames.Add(new TrialFrame(0,enemies,towers,weapons.Projectiles,shots));int launches=0;
             for(int tick=1;tick<=600;tick++)

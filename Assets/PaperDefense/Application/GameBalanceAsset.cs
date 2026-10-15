@@ -33,9 +33,6 @@ namespace PaperDefense.Application
         [Min(0)] public int blotterCost = 8;
         [Min(.1f)] public float blotterRadius = 3, blotterCooldown = 3, blotLifetime = 8, blotBuffSeconds = 4;
         [Range(0,.5f)] public float blotSpeedBonus = .15f, blotReduction = .15f;
-        [Header("Качество рисунка · стартовая гипотеза")]
-        [Range(.01f,1)] public float drawingMinimumRate = .85f;
-        [Range(.01f,1)] public float drawingMaximumRate = 1;
         [Header("Экономика")]
         [Min(0)] public float passiveInkPerSecond = 1.8f;
         [Min(0)] public int waveInkGrant = 75;
@@ -56,7 +53,6 @@ namespace PaperDefense.Application
             if (!legacyAuthoringAdapter) throw new ArgumentException(UserText.Message("copy.7a045f879970f558", name));
             Finite(baseHealth, nameof(baseHealth)); Finite(planningSeconds, nameof(planningSeconds)); Finite(intermissionSeconds, nameof(intermissionSeconds));
             Finite(passiveInkPerSecond, nameof(passiveInkPerSecond)); Finite(earlyLaunchInkPerSecond, nameof(earlyLaunchInkPerSecond));
-            Finite(drawingMinimumRate, nameof(drawingMinimumRate)); Finite(drawingMaximumRate, nameof(drawingMaximumRate));
             var result = GameBalance.CreateDefault();
             result.Mechanics = (mechanics ?? new MechanicsConfiguration()).CreateSnapshot();
             result.Construction = (construction ?? new TowerConstructionRules()).CreateSnapshot();
@@ -73,8 +69,6 @@ namespace PaperDefense.Application
             result.WaveInkGrant = Mathf.Max(0, waveInkGrant);
             result.EarlyLaunchInkPerSecond = Mathf.Max(0, earlyLaunchInkPerSecond);
             result.MaxEarlyLaunchInk = Mathf.Max(0, maxEarlyLaunchInk);
-            result.DrawingMaximumRate = Mathf.Clamp(drawingMaximumRate, .01f, 1);
-            result.DrawingMinimumRate = Mathf.Clamp(drawingMinimumRate, .01f, result.DrawingMaximumRate);
             foreach (var item in materials ?? Array.Empty<MaterialSettings>())
             {
                 if (item == null || !Enum.IsDefined(typeof(MaterialTier), item.tier)) throw new ArgumentException(UserText.Message("copy.81ef3bc14a14f203"), nameof(materials));
@@ -193,7 +187,6 @@ namespace PaperDefense.Application
             maxEnemiesPerCell = b.MaxEnemiesPerCell;
             passiveInkPerSecond=b.PassiveInkPerSecond;waveInkGrant=b.WaveInkGrant;
             earlyLaunchInkPerSecond=b.EarlyLaunchInkPerSecond;maxEarlyLaunchInk=b.MaxEarlyLaunchInk;
-            drawingMinimumRate=b.DrawingMinimumRate;drawingMaximumRate=b.DrawingMaximumRate;
             materials = new MaterialSettings[b.MaterialDefinitions.Count];
             for (int i = 0; i < materials.Length; i++)
             { var d = b.Material((MaterialTier)i); materials[i] = new MaterialSettings { tier = (MaterialTier)i, cost = d.CostMultiplier,

@@ -40,7 +40,7 @@ namespace PaperDefense.Tests
             try
             {
                 asset.ResetToDefaults(); asset.width = 3; asset.height = 3; asset.startingInk = -1;
-                asset.planningSeconds = -7; asset.drawingMaximumRate = 2; asset.drawingMinimumRate = 2;
+                asset.planningSeconds = -7;
                 asset.weapons = new[]
                 {
                     new GameBalanceAsset.WeaponSettings { kind = StructureKind.Gun, cost = 41, damage = 2 },
@@ -52,7 +52,7 @@ namespace PaperDefense.Tests
                 var historical = asset.CreateBalance(); var target = asset.CreateWorkshopBalance();
                 Assert.That(historical.Width, Is.EqualTo(20)); Assert.That(historical.Height, Is.EqualTo(16));
                 Assert.That(historical.StartingInk, Is.Zero); Assert.That(historical.PlanningSeconds, Is.Zero);
-                Assert.That(historical.DrawingMinimumRate, Is.EqualTo(1)); Assert.That(historical.DrawingMaximumRate, Is.EqualTo(1));
+
                 Assert.That(historical.Structure(StructureKind.Gun).Cost, Is.EqualTo(63));
                 Assert.That(historical.Structure(StructureKind.Gun).Damage, Is.EqualTo(17));
                 Assert.That(historical.Construction.ArmorDefense, Is.EqualTo(.1f));

@@ -65,6 +65,9 @@ namespace PaperDefense.Presentation
             if (!IsActive() || CanvasUpdateRegistry.IsRebuildingGraphics() || CanvasUpdateRegistry.IsRebuildingLayout())
                 return;
             float seconds = PlaybackSeconds;
+            float minimumWidth = 1f / (DrawingScale(rectTransform.rect) * Mathf.Max(.01f, canvas == null ? 1 : canvas.scaleFactor));
+            if (!Mathf.Approximately(pen.MinimumLineWidth, minimumWidth))
+            { pen.MinimumLineWidth = minimumWidth; geometryDirty = true; }
             if (!geometryDirty && (!HasRecording || seconds == lastSeconds))
             {
                 SyncBatchAppearance();
@@ -117,8 +120,9 @@ namespace PaperDefense.Presentation
         {
             target.Clear();
             if (!isActiveAndEnabled || !HasRecording) return;
-            float scale = Mathf.Max(.1f, Mathf.Min((rect.width - 16) / 42, (rect.height - 14) / 28));
+            float scale = DrawingScale(rect);
             pen.CopyUiBatchTo(target, rect.center - new Vector2(29, 22) * scale, scale, batchIndex);
         }
+        static float DrawingScale(Rect rect) => Mathf.Max(.1f, Mathf.Min((rect.width - 16) / 42, (rect.height - 14) / 28));
     }
 }

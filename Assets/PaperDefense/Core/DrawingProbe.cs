@@ -40,8 +40,7 @@ namespace PaperDefense.Core
                 float x=enemy.Position.X-10.5f,y=enemy.Position.Y-10.5f,d=(float)Math.Sqrt(x*x+y*y);
                 if(d>=weapon.MinimumRange&&d<=range)reachable=true;
             }
-            float quality=source.Origin==DrawingOrigin.LegacyStandard?100:source.Assessment.Quality;
-            var system=new WeaponSystem(rules,quality);var events=new SimulationEventBuffer(256);
+            var system=new WeaponSystem(rules);var events=new SimulationEventBuffer(256);
             var stats=new RunStatistics();var shots=new List<ShotEvent>();var impacts=new List<SimulationEvent>();
             var frames=new List<TrialFrame>{new TrialFrame(0,enemies,towers,system.Projectiles,shots)};
             bool completed=false;

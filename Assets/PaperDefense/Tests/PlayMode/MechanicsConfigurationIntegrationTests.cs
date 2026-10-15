@@ -11,7 +11,7 @@ namespace PaperDefense.Tests
         static void DisableAll(MechanicsConfiguration mechanics)
         {
             mechanics.EnemyDrawingTiers = mechanics.CorpseBlots = mechanics.RangedEnemies = false;
-            mechanics.InkWells = mechanics.ColorCartridges = mechanics.RunUpgrades = mechanics.DrawingQuality = false;
+            mechanics.InkWells = mechanics.ColorCartridges = mechanics.RunUpgrades = false;
         }
 
         static void AssertDisabled(MechanicsAvailability mechanics)
@@ -19,13 +19,7 @@ namespace PaperDefense.Tests
             Assert.That(mechanics.EnemyDrawingTiers, Is.False); Assert.That(mechanics.CorpseBlots, Is.False);
             Assert.That(mechanics.RangedEnemies, Is.False); Assert.That(mechanics.InkWells, Is.False);
             Assert.That(mechanics.ColorCartridges, Is.False); Assert.That(mechanics.RunUpgrades, Is.False);
-            Assert.That(mechanics.DrawingQuality, Is.False);
         }
-
-        static TowerBlueprint AuthoredGun() => new TowerBlueprint("integration.authored", "Только декор", ChassisKind.Standard,
-            StructureKind.Gun, drawing: new DrawingSnapshot(new[] { new DrawingPart(DrawingPartKey.Decoration, new[] {
-                new DrawingStroke(new[] { new DrawingPoint(-.8f, -.8f), new DrawingPoint(-.7f, -.7f) }) }) }),
-            origin: DrawingOrigin.PlayerDrawing);
 
         [TestCase(false)]
         [TestCase(true)]
@@ -43,7 +37,7 @@ namespace PaperDefense.Tests
                 AssertDisabled(MechanicsAvailability.Resolve(ordinary));
                 AssertDisabled(MechanicsAvailability.Resolve(workshop));
                 asset.mechanics.EnemyDrawingTiers = asset.mechanics.CorpseBlots = asset.mechanics.RangedEnemies = true;
-                asset.mechanics.InkWells = asset.mechanics.ColorCartridges = asset.mechanics.RunUpgrades = asset.mechanics.DrawingQuality = true;
+                asset.mechanics.InkWells = asset.mechanics.ColorCartridges = asset.mechanics.RunUpgrades = true;
                 AssertDisabled(MechanicsAvailability.Resolve(ordinary));
                 AssertDisabled(MechanicsAvailability.Resolve(workshop));
             }
@@ -60,7 +54,7 @@ namespace PaperDefense.Tests
                 var result = MechanicsAvailability.Resolve(asset.CreateWorkshopBalance());
                 Assert.That(result.EnemyDrawingTiers, Is.True); Assert.That(result.CorpseBlots, Is.True);
                 Assert.That(result.RangedEnemies, Is.True); Assert.That(result.InkWells, Is.True);
-                Assert.That(result.ColorCartridges, Is.True); Assert.That(result.RunUpgrades, Is.True); Assert.That(result.DrawingQuality, Is.True);
+                Assert.That(result.ColorCartridges, Is.True); Assert.That(result.RunUpgrades, Is.True);
             }
             finally { Object.DestroyImmediate(asset); }
         }
@@ -75,7 +69,7 @@ namespace PaperDefense.Tests
                 var result = MechanicsAvailability.Resolve(asset.CreateWorkshopBalance());
                 Assert.That(result.EnemyDrawingTiers, Is.True); Assert.That(result.CorpseBlots, Is.True);
                 Assert.That(result.RangedEnemies, Is.True); Assert.That(result.InkWells, Is.True);
-                Assert.That(result.ColorCartridges, Is.True); Assert.That(result.RunUpgrades, Is.True); Assert.That(result.DrawingQuality, Is.True);
+                Assert.That(result.ColorCartridges, Is.True); Assert.That(result.RunUpgrades, Is.True);
             }
             finally { Object.DestroyImmediate(asset); }
         }
@@ -125,50 +119,6 @@ namespace PaperDefense.Tests
                 Assert.That(run.Session.Balance.Mechanics.RunUpgrades, Is.False);
                 Assert.That(run.Content.GetWeapon(prepared.FirstWeaponId).Stats.Range, Is.EqualTo(frozenRange));
                 Assert.That(actualLoadout[0].Content.GetWeapon(prepared.FirstWeaponId).Stats.Range, Is.EqualTo(frozenRange));
-            }
-            finally { Object.DestroyImmediate(root); Object.DestroyImmediate(asset); }
-        }
-
-        [Test]
-        public void WorkshopPreviewAndQualityTrialUseTheDisabledQualityRule()
-        {
-            var root = new GameObject("Isolated neutral quality workshop"); root.SetActive(false);
-            var asset = ScriptableObject.CreateInstance<GameBalanceAsset>();
-            try
-            {
-                asset.mechanics.DrawingQuality = false; asset.generateNewThreats = false;
-                var run = root.AddComponent<RunController>(); run.balanceAsset = asset; run.InitializeWorkshop(false);
-                var blueprint = AuthoredGun(); var preview = run.PreviewBlueprint(blueprint);
-                Assert.That(preview.DrawingQuality, Is.Zero); Assert.That(preview.QualityMultiplier, Is.EqualTo(1));
-                var trial = run.RunQualityTrial(blueprint, TrialScenario.Fast, budget: 40);
-                Assert.That(trial, Is.Not.Null);
-                Assert.That(trial.First.QualityMultiplier, Is.EqualTo(1)); Assert.That(trial.Second.QualityMultiplier, Is.EqualTo(1));
-                Assert.That(trial.First.Damage, Is.EqualTo(trial.Second.Damage).Within(.0001f));
-                Assert.That(trial.First.Leaks, Is.EqualTo(trial.Second.Leaks));
-            }
-            finally { Object.DestroyImmediate(root); Object.DestroyImmediate(asset); }
-        }
-
-        [TestCase(false)]
-        [TestCase(true)]
-        public void ControllerPreviewUsesFrozenSessionQualityAfterItsOwnedConfigurationChanges(bool enabled)
-        {
-            var root = new GameObject("Isolated preview mechanics snapshot"); root.SetActive(false);
-            var asset = ScriptableObject.CreateInstance<GameBalanceAsset>();
-            try
-            {
-                asset.mechanics.DrawingQuality = enabled;
-                var run = root.AddComponent<RunController>(); run.balanceAsset = asset; run.InitializeWorkshop(false);
-                var blueprint = AuthoredGun(); var before = run.PreviewBlueprint(blueprint);
-                var sessionField = typeof(RunController).GetField("session", BindingFlags.Instance | BindingFlags.NonPublic);
-                Assert.That(sessionField, Is.Not.Null);
-                var session = (GameSession)sessionField.GetValue(run);
-                session.Balance.Mechanics.DrawingQuality = !enabled;
-                var after = run.PreviewBlueprint(blueprint);
-                Assert.That(after.QualityMultiplier, Is.EqualTo(1));
-                Assert.That(after.QualityMultiplier, Is.EqualTo(before.QualityMultiplier));
-                Assert.That(after.FireRate, Is.EqualTo(before.FireRate));
-                Assert.That(run.Session.Balance.Mechanics.DrawingQuality, Is.EqualTo(enabled));
             }
             finally { Object.DestroyImmediate(root); Object.DestroyImmediate(asset); }
         }

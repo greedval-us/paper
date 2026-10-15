@@ -9,17 +9,6 @@ namespace PaperDefense.Core
     public static class TrialRunner
     {
         public const int MaximumFrameEvents = 512;
-        public static TrialComparison CompareQuality(TowerBlueprint blueprint, GameBalance balance, TrialScenario scenario,
-            int budget = 400, int seed = 1337, bool counterfire = false, InkColor color = InkColor.None)
-        {
-            BalanceValidation.Validate(balance);
-            var rules = balance.CreateSnapshot();
-            return new TrialComparison
-            {
-                First = RunFixture(blueprint, rules, scenario, budget, seed, counterfire, color),
-                Second = RunFixture(blueprint, rules, scenario, budget, seed, counterfire, color, 100)
-            };
-        }
         public static TrialComparison Compare(TowerBlueprint first, TowerBlueprint second, TrialScenario scenario,
             int budget = 400, int seed = 1337, bool counterfire = false, InkColor color = InkColor.None)
             => Compare(first, second, StandardFixtureBalance(), scenario, budget, seed, counterfire, color);
@@ -55,7 +44,7 @@ namespace PaperDefense.Core
         }
 
         static TrialReport RunFixture(TowerBlueprint blueprint, GameBalance balance, TrialScenario scenario,
-            int budget, int seed, bool counterfire, InkColor color, float? qualityOverride = null)
+            int budget, int seed, bool counterfire, InkColor color)
         {
             if (!TowerCatalog.Validate(blueprint, balance, out string reason)) throw new ArgumentException(reason, nameof(blueprint));
             if (!Enum.IsDefined(typeof(TrialScenario), scenario)) throw new ArgumentOutOfRangeException(nameof(scenario));
@@ -80,8 +69,7 @@ namespace PaperDefense.Core
             }
             var report = new TrialReport { BlueprintId = blueprint.Id, Scenario = scenario, Budget = budget,
                 Seed = seed, Counterfire = counterfire, Color = color, Copies = copies, Cost = copies * unitCost,
-                DrawingQuality = qualityOverride ?? (blueprint.Origin == DrawingOrigin.LegacyStandard ? 100 : blueprint.Assessment.Quality),
-                QualityMultiplier = qualityOverride.HasValue ? TowerCatalog.QualityMultiplier(qualityOverride.Value, balance) : TowerCatalog.QualityMultiplier(blueprint, balance) };
+                DrawingQuality = blueprint.Origin == DrawingOrigin.LegacyStandard ? 100 : blueprint.Assessment.Quality };
             report.Scope = UserText.Message("trial.scope.lane", trial.MaximumTicks * trial.StepSeconds,
                 trial.CounterfireDamage, trial.CounterfireInterval, trial.CounterfireRange);
             var random = new Random(seed);
@@ -90,7 +78,7 @@ namespace PaperDefense.Core
                 report.Scope = UserText.Message("trial.scope.blots_disabled");
             if (blotContext != null)
                 report.Scope = UserText.Message("trial.scope.blots", trial.MaximumTicks * trial.StepSeconds, trial.BlotCount);
-            var weapons = new WeaponSystem(balance, qualityOverride, blotContext); var stats = new RunStatistics();
+            var weapons = new WeaponSystem(balance, blotContext); var stats = new RunStatistics();
             var events = new SimulationEventBuffer(MaximumFrameEvents); var shots = new List<ShotEvent>();
             if(blotContext!=null)blotContext.Events=events;
             var enemies = new List<EnemyState>(256);
@@ -246,7 +234,6 @@ namespace PaperDefense.Core
     [Serializable] public sealed class TrialReport
     {
         public float DrawingQuality { get; internal set; }
-        public float QualityMultiplier { get; internal set; } = 1;
         public string BlueprintId;
         public string Scope;
         public TrialScenario Scenario;

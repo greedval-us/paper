@@ -38,14 +38,14 @@ namespace PaperDefense.Tests
             Assert.That(hud.Draft.FreeformDesign.IsComplete, Is.True);
             var preview = run.PreviewBlueprint(hud.Draft);
             Assert.That(preview.Valid, Is.True, preview.Reason);
-            Assert.That(preview.QualityMultiplier, Is.EqualTo(1));
+
             Assert.That(root.GetComponentsInChildren<Button>(true).Any(b => b.name == "Drawing quality details" || b.name == "Compare drawing quality"), Is.False);
             Assert.That(root.GetComponentsInChildren<Button>(true).Any(b => b.name == "Trial quality mode"), Is.False);
             long before = run.Session.TickIndex;
             int gold = run.Workshop.Gold, ink = run.Session.Ink;
             var trial = hud.RunDrawingTrial();
             Assert.That(trial, Is.Not.Null);
-            Assert.That(trial.First.QualityMultiplier, Is.EqualTo(1));
+
             Assert.That(trial.First.Cost, Is.EqualTo(preview.Cost * trial.First.Copies));
             Assert.That(run.Session.TickIndex, Is.EqualTo(before));
             Assert.That(run.Workshop.Gold, Is.EqualTo(gold));

@@ -1,0 +1,46 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "a9519331fbed41449df27a03007244ab",
+      "status": "succeeded",
+      "mode": "EditMode",
+      "started_unix_ms": 1792074836015,
+      "finished_unix_ms": 1792074941329,
+      "last_update_unix_ms": 1792074941329,
+      "progress": {
+        "completed": 878,
+        "total": 878,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.TowerDefenseBalanceTests.UnlockedSpecialistDefensesCanFinishWithinEarnedInk(41,DeepInk,\"ricochet\")",
+        "last_finished_unix_ms": 1792074941190,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "EditMode",
+        "summary": {
+          "total": 878,
+          "passed": 878,
+          "failed": 0,
+          "skipped": 0,
+          "durationSeconds": 101.2681657,
+          "resultState": "Passed"
+        },
+        "results": []
+      }
+    },
+    "hint": null
+  }
+}

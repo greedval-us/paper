@@ -76,7 +76,7 @@ namespace PaperDefense.Tests
         public void WorkshopDescribesDisabledSystemsWithoutOfferingTheirTrialActions()
         {
             asset.mechanics.CorpseBlots = asset.mechanics.ColorCartridges = asset.mechanics.InkWells = false;
-            asset.mechanics.RangedEnemies = asset.mechanics.EnemyDrawingTiers = asset.mechanics.DrawingQuality = false;
+            asset.mechanics.RangedEnemies = asset.mechanics.EnemyDrawingTiers = false;
             asset.waves[0].spitters = asset.waves[0].hatched = 1;
             run.InitializeWorkshop(false);
             var hud = root.AddComponent<WorkshopHud>(); hud.Initialize(run);

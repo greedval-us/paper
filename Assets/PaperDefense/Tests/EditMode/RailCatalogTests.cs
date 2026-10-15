@@ -38,17 +38,17 @@ namespace PaperDefense.Tests
             var definition = balance.Structure(kind); float radius = definition.Radius, flight = definition.FlightSeconds;
             Assert.That(TowerCatalog.WeaponRange(rail, balance, kind), Is.EqualTo(definition.Range * 1.7f).Within(.00001f));
             Assert.That(TowerCatalog.WeaponRange(plain, balance, kind), Is.EqualTo(definition.Range));
-            float ordinary = TowerCatalog.ActionInterval(definition, .8f, .9f);
-            Assert.That(TowerCatalog.ActionInterval(rail, balance, kind, .8f, .9f), Is.EqualTo(ordinary * 1.4f).Within(.00001f));
-            Assert.That(TowerCatalog.ActionInterval(plain, balance, kind, .8f, .9f), Is.EqualTo(ordinary));
+            float ordinary = TowerCatalog.ActionInterval(definition, .8f);
+            Assert.That(TowerCatalog.ActionInterval(rail, balance, kind, .8f), Is.EqualTo(ordinary * 1.4f).Within(.00001f));
+            Assert.That(TowerCatalog.ActionInterval(plain, balance, kind, .8f), Is.EqualTo(ordinary));
             Assert.That(definition.Radius, Is.EqualTo(radius)); Assert.That(definition.FlightSeconds, Is.EqualTo(flight));
         }
 
-        [Test] public void RailIntervalIsAppliedAfterTheHistoricalProductionFloorAndDrawingQuality()
+        [Test] public void RailIntervalIsAppliedAfterTheProductionFloor()
         {
             var balance = GameBalance.CreateDefault(); balance.Structure(StructureKind.Gun).ShotInterval = .01f;
             var rail = new TowerBlueprint("rail", "Направляющая", ChassisKind.Standard, StructureKind.Gun, modules: TowerModules.Rail);
-            Assert.That(TowerCatalog.ActionInterval(rail, balance, StructureKind.Gun, 100, .5f), Is.EqualTo(.12f).Within(.00001f));
+            Assert.That(TowerCatalog.ActionInterval(rail, balance, StructureKind.Gun, 100), Is.EqualTo(.06f).Within(.00001f));
         }
 
         [Test] public void RailConfiguredTuningIsOwnedBySnapshotsAndReadonlyRangeViews()
@@ -61,7 +61,7 @@ namespace PaperDefense.Tests
             Assert.That(TowerCatalog.Load(rail, copy), Is.EqualTo(7)); Assert.That(TowerCatalog.Cost(rail, copy, MaterialTier.Pencil), Is.EqualTo(67));
             Assert.That(TowerCatalog.BuildSeconds(rail, copy, MaterialTier.Pencil), Is.EqualTo(2.1f).Within(.00001f));
             Assert.That(view.WeaponRange(rail, StructureKind.Gun), Is.EqualTo(22));
-            Assert.That(TowerCatalog.ActionInterval(rail, copy, StructureKind.Gun, 1, 1), Is.EqualTo(.546f).Within(.00001f));
+            Assert.That(TowerCatalog.ActionInterval(rail, copy, StructureKind.Gun, 1), Is.EqualTo(.546f).Within(.00001f));
         }
 
         [Test] public void RailNeedsASeparatePermanentRightAndChargesConfiguredGoldOnce()

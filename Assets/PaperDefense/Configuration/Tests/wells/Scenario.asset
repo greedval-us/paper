@@ -30,7 +30,6 @@ MonoBehaviour:
     InkWells: 1
     ColorCartridges: 0
     RunUpgrades: 0
-    DrawingQuality: 0
   placements:
   - cell: {x: 18, y: 16}
     chassisId: chassis.standard

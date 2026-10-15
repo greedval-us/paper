@@ -8,7 +8,6 @@ namespace PaperDefense.Tests
     {
         [TestCase("base health")]
         [TestCase("simulation step")]
-        [TestCase("drawing rate")]
         [TestCase("weapon damage")]
         [TestCase("material cost")]
         [TestCase("enemy speed")]
@@ -21,7 +20,6 @@ namespace PaperDefense.Tests
             {
                 case "base health": balance.BaseHealth = float.NaN; break;
                 case "simulation step": balance.SimulationStep = float.PositiveInfinity; break;
-                case "drawing rate": balance.DrawingMinimumRate = float.NaN; break;
                 case "weapon damage": balance.Structure(StructureKind.Gun).Damage = float.NaN; break;
                 case "material cost": balance.Material(MaterialTier.Ink).CostMultiplier = float.PositiveInfinity; break;
                 case "enemy speed": balance.Enemy(EnemyKind.Doodle).Speed = float.NaN; break;

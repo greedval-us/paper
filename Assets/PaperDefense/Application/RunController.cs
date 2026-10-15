@@ -276,7 +276,7 @@ namespace PaperDefense.Application
             WorkshopChanged?.Invoke();
         }
         public TowerPreview PreviewBlueprint(TowerBlueprint blueprint,MaterialTier material=MaterialTier.Pencil)
-            =>new TowerPreview(blueprint,session.Balance,material,session.Mechanics);
+            =>new TowerPreview(blueprint,session.Balance,material);
         public bool ValidateAssembly(TowerBlueprint blueprint,out string reason)
             =>TowerCatalog.ValidateAssembly(blueprint,session.Balance,out reason);
         public BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,int slot,MaterialTier material,InkColor color)
@@ -316,12 +316,6 @@ namespace PaperDefense.Application
             var trials=session.Balance.Trials;
             var baseline=new TowerBlueprint("trial.baseline",UserText.Message("copy.5c07091d535b3296"),trials.BaselineChassisId,trials.BaselineWeaponId,content:contentSnapshot);
             return TrialRunner.Compare(blueprint,baseline,session.Balance,scenario,budget,1337,counterfire);
-        }
-        public TrialComparison RunQualityTrial(TowerBlueprint blueprint,TrialScenario scenario,bool counterfire=false,int budget=400)
-        {
-            blueprint=blueprint?.WithContent(contentSnapshot);
-            if(!InWorkshop||!profile.ValidateOwned(blueprint,out _,session.Balance))return null;
-            return TrialRunner.CompareQuality(blueprint,session.Balance,scenario,budget,1337,counterfire);
         }
     }
 }

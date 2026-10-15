@@ -31,7 +31,6 @@ MonoBehaviour:
     InkWells: 1
     ColorCartridges: 1
     RunUpgrades: 1
-    DrawingQuality: 1
   workshopWidth: 96
   workshopHeight: 64
   workshopStartingInk: 720
@@ -60,8 +59,6 @@ MonoBehaviour:
   blotBuffSeconds: 4
   blotSpeedBonus: 0.15
   blotReduction: 0.15
-  drawingMinimumRate: 0.85
-  drawingMaximumRate: 1
   passiveInkPerSecond: 1.8
   waveInkGrant: 75
   earlyLaunchInkPerSecond: 0.8

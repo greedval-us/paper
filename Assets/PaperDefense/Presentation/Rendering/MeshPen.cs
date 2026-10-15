@@ -17,6 +17,8 @@ namespace PaperDefense.Presentation
         // Opt-in for world rendering. UI and geometry inspection keep the exact authored widths.
         internal float WorldUnitsPerPixel { get; set; }
         internal float MinimumStrokePixels { get; set; } = 1.25f;
+        // UI previews use a solid line floor, without the world shader's antialiasing fringe.
+        internal float MinimumLineWidth { get; set; }
 
         // VertexHelper rejects 65,000 vertices. Keep each slice triangle-aligned and strictly below it.
         internal const int MaximumUiBatchVertices = 64998;
@@ -85,7 +87,7 @@ namespace PaperDefense.Presentation
             Vector2 delta = to - from;
             float length = delta.magnitude;
             if (length < .0001f) return;
-            float halfWidth = Mathf.Max(width, MinimumStrokePixels * WorldUnitsPerPixel) * .5f;
+            float halfWidth = Mathf.Max(Mathf.Max(width, MinimumLineWidth), MinimumStrokePixels * WorldUnitsPerPixel) * .5f;
             float extent = halfWidth + WorldUnitsPerPixel;
             Vector2 side = new Vector2(-delta.y, delta.x) * (extent / length);
             int first = vertices.Count;
@@ -102,7 +104,7 @@ namespace PaperDefense.Presentation
         {
             if (geometry == null) return;
             int start = vertices.Count; float cosine = Mathf.Cos(radians), sine = Mathf.Sin(radians);
-            if (WorldUnitsPerPixel > 0)
+            if (WorldUnitsPerPixel > 0 || MinimumLineWidth > 0)
             {
                 // Cached authored geometry consists of one quad per stroke segment (or point).
                 // Keep endpoints/pivots unchanged while making its ink readable on screen.

@@ -42,14 +42,14 @@ namespace PaperDefense.Application
     {
         public readonly int Load,Capacity,Cost,ColorCost;
         public readonly float Health,Defense,BuildSeconds,FireRate,Range,FeedMultiplier;
-        public readonly float DrawingQuality,QualityMultiplier;
+        public readonly float DrawingQuality;
         public readonly bool Valid;
         public readonly string Reason;
         public readonly IReadOnlyList<WeaponPreview> Weapons;
         public readonly FreeformTowerDesign FreeformDesign;
-        internal TowerPreview(TowerBlueprint bp,GameBalance balance,MaterialTier material,MechanicsAvailability? mechanics=null)
+        internal TowerPreview(TowerBlueprint bp,GameBalance balance,MaterialTier material)
         {
-            DrawingQuality=0;QualityMultiplier=1;Defense=0;Weapons=System.Array.Empty<WeaponPreview>();FreeformDesign=null;
+            DrawingQuality=0;Defense=0;Weapons=System.Array.Empty<WeaponPreview>();FreeformDesign=null;
             Valid=TowerCatalog.Validate(bp,balance,out string reason);Reason=reason;
             if(bp==null){Load=Capacity=Cost=ColorCost=0;Health=BuildSeconds=FireRate=Range=FeedMultiplier=0;return;}
             var content = balance.ResolveContent();
@@ -65,7 +65,6 @@ namespace PaperDefense.Application
             try
             {
             Defense=DamageRules.EffectiveDefense(TowerCatalog.Defense(bp,balance),balance.Effects.MaximumDefense);
-            QualityMultiplier=TowerCatalog.QualityMultiplier(bp,balance,(mechanics??MechanicsAvailability.Resolve(balance)).DrawingQuality);
             Load=TowerCatalog.Load(bp,balance);Capacity=TowerCatalog.Capacity(bp,balance);Cost=TowerCatalog.Cost(bp,balance,material);
             ColorCost=TowerCatalog.ColorCost(bp,balance);Health=TowerCatalog.Health(bp,balance,material);
             BuildSeconds=TowerCatalog.BuildSeconds(bp,balance,material);FeedMultiplier=TowerCatalog.FeedMultiplier(bp,balance);
@@ -74,7 +73,7 @@ namespace PaperDefense.Application
             foreach(var mount in bp.WeaponMounts)
             {
                 float range=TowerCatalog.WeaponRange(bp,balance,mount.WeaponId,mount.SlotIndex);
-                float interval=TowerCatalog.ActionInterval(bp,balance,mount.WeaponId,FeedMultiplier,QualityMultiplier,mount.SlotIndex);
+                float interval=TowerCatalog.ActionInterval(bp,balance,mount.WeaponId,FeedMultiplier,mount.SlotIndex);
                 weapons.Add(new WeaponPreview(mount.SlotIndex,range,interval,TowerCatalog.WeaponDamage(bp,balance,mount.WeaponId,material,mount.SlotIndex),FeedMultiplier));
                 Range=System.Math.Max(Range,range);FireRate+=1/interval;
             }

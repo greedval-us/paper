@@ -87,8 +87,7 @@ namespace PaperDefense.Editor
                     Capability("RangedEnemies", balance.Mechanics.RangedEnemies, mechanics.RangedEnemies),
                     Capability("InkWells", balance.Mechanics.InkWells, mechanics.InkWells),
                     Capability("ColorCartridges", balance.Mechanics.ColorCartridges, mechanics.ColorCartridges),
-                    Capability("RunUpgrades", balance.Mechanics.RunUpgrades, mechanics.RunUpgrades),
-                    Capability("DrawingQuality", balance.Mechanics.DrawingQuality, mechanics.DrawingQuality) },
+                    Capability("RunUpgrades", balance.Mechanics.RunUpgrades, mechanics.RunUpgrades) },
                 References = ReferenceRows(balance),
                 Footprints = content.Weapons.Where(weapon => weapon.SupportsFootprint).SelectMany(weapon => new[] { 1f, weapon.MaximumFootprintAspectRatio }.Distinct().Select(aspect => {
                     float radius = weapon.Stats.Radius;
@@ -210,7 +209,7 @@ namespace PaperDefense.Editor
                     Load = TowerCatalog.Load(blueprint, balance), Capacity = TowerCatalog.Capacity(blueprint, balance),
                     DamagePerHit = definition.Damage * mat.DamageMultiplier,
                     ActionInterval = TowerCatalog.ActionInterval(blueprint, balance, definition.Kind,
-                        TowerCatalog.FeedMultiplier(blueprint, balance), TowerCatalog.QualityMultiplier(blueprint, balance)) });
+                        TowerCatalog.FeedMultiplier(blueprint, balance)) });
             }
             return rows.ToArray();
         }

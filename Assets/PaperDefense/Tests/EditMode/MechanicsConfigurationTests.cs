@@ -28,7 +28,7 @@ namespace PaperDefense.Tests
         static void SetConfiguration(MechanicsConfiguration mechanics, bool enabled)
         {
             mechanics.EnemyDrawingTiers = mechanics.CorpseBlots = mechanics.RangedEnemies = enabled;
-            mechanics.InkWells = mechanics.ColorCartridges = mechanics.RunUpgrades = mechanics.DrawingQuality = enabled;
+            mechanics.InkWells = mechanics.ColorCartridges = mechanics.RunUpgrades = enabled;
         }
 
         static void AssertAll(MechanicsAvailability mechanics, bool enabled)
@@ -39,7 +39,6 @@ namespace PaperDefense.Tests
             Assert.That(mechanics.InkWells, Is.EqualTo(enabled), nameof(mechanics.InkWells));
             Assert.That(mechanics.ColorCartridges, Is.EqualTo(enabled), nameof(mechanics.ColorCartridges));
             Assert.That(mechanics.RunUpgrades, Is.EqualTo(enabled), nameof(mechanics.RunUpgrades));
-            Assert.That(mechanics.DrawingQuality, Is.EqualTo(enabled), nameof(mechanics.DrawingQuality));
         }
 
         static TowerBlueprint AuthoredGun() => new TowerBlueprint("mechanics.authored", "Только декор", ChassisKind.Standard,
@@ -86,7 +85,6 @@ namespace PaperDefense.Tests
             Assert.That(mechanics.InkWells, Is.EqualTo(inkWells));
             Assert.That(mechanics.ColorCartridges, Is.True);
             Assert.That(mechanics.RunUpgrades, Is.True);
-            Assert.That(mechanics.DrawingQuality, Is.True);
         }
 
         [Test]
@@ -325,36 +323,9 @@ namespace PaperDefense.Tests
             Assert.That(session.Phase, Is.EqualTo(RunPhase.Victory));
         }
 
-        [Test]
-        public void DisablingDrawingQualityNeutralizesTheRealAndOverrideTrialLanes()
-        {
-            var balance = Balance(); balance.Mechanics.DrawingQuality = false; var blueprint = AuthoredGun();
-            Assert.That(blueprint.Assessment.Quality, Is.Zero);
-            Assert.That(TowerCatalog.QualityMultiplier(blueprint, balance), Is.EqualTo(1));
-            Assert.That(TowerCatalog.QualityMultiplier(0, balance), Is.EqualTo(1));
-            var result = TrialRunner.CompareQuality(blueprint, balance, TrialScenario.Fast, 40, 72);
-            Assert.That(result.First.QualityMultiplier, Is.EqualTo(1)); Assert.That(result.Second.QualityMultiplier, Is.EqualTo(1));
-            Assert.That(result.First.Damage, Is.EqualTo(result.Second.Damage).Within(.0001f));
-            Assert.That(result.First.Leaks, Is.EqualTo(result.Second.Leaks));
-            Assert.That(result.First.DurationSeconds, Is.EqualTo(result.Second.DurationSeconds));
-        }
-
-        [Test]
-        public void WeaponQualityUsesItsCapturedMechanicsAfterTheSourceConfigurationChanges()
-        {
-            var balance = Balance(); balance.Mechanics.DrawingQuality = false;
-            var weapons = new WeaponSystem(balance, 0); balance.Mechanics.DrawingQuality = true;
-            var tower = new StructureState { Id = 1, Cell = new Cell(10, 10), Kind = StructureKind.Gun, Blueprint = AuthoredGun(),
-                Health = 55, MaxHealth = 55, IsComplete = true, PrimaryTargetId = 1 };
-            var enemy = new EnemyState { Id = 1, Health = 100, MaxHealth = 100, Position = new Point2(11.5f, 10.5f) };
-            weapons.Fire(new List<StructureState> { tower }, new List<EnemyState> { enemy }, new List<ShotEvent>(),
-                1, 1, 1f / 30, 1, new RunStatistics(), new SimulationEventBuffer());
-            Assert.That(tower.Cooldown, Is.EqualTo(.42f).Within(.0001f));
-        }
-
         static IEnumerable<TestCaseData> MechanicCombinations()
         {
-            for (int mask = 0; mask < 128; mask++) yield return new TestCaseData(mask).SetName("TinyCampaignCompletesWithMechanicsMask_" + mask);
+            for (int mask = 0; mask < 64; mask++) yield return new TestCaseData(mask).SetName("TinyCampaignCompletesWithMechanicsMask_" + mask);
         }
 
         [TestCaseSource(nameof(MechanicCombinations))]
@@ -367,7 +338,6 @@ namespace PaperDefense.Tests
             balance.Mechanics.InkWells = (mask & 8) != 0;
             balance.Mechanics.ColorCartridges = (mask & 16) != 0;
             balance.Mechanics.RunUpgrades = (mask & 32) != 0;
-            balance.Mechanics.DrawingQuality = (mask & 64) != 0;
             balance.Progression.UpgradeEveryWaves = 1; balance.Progression.LastUpgradeWave = 99;
             balance.Construction.AcquisitionSeconds = 0;
             balance.Structure(StructureKind.Gun).Range = 100;

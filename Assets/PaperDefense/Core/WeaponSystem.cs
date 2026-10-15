@@ -31,7 +31,7 @@ namespace PaperDefense.Core
         internal IReadOnlyList<MortarProjectile> Projectiles => projectiles;
         internal bool HasPendingProjectiles => projectiles.Count != 0;
 
-        internal WeaponSystem(GameBalance balance, float? qualityOverride = null, IBlotContext blotContext = null)
+        internal WeaponSystem(GameBalance balance, IBlotContext blotContext = null)
         {
             balance=balance.CreateSnapshot();
             this.balance = balance;
@@ -75,7 +75,6 @@ namespace PaperDefense.Core
                         if(assembly.Weapons[mount]!=null&&ConsumesProduction(structure,origin,assembly.Weapons[mount],mount,delta))activeMounts++;
                 }
                 float feed = blueprint == null ? 1 : TowerCatalog.FeedMultiplier(assembly, balance, activeMounts);
-                float quality = QualityMultiplier(blueprint);
                 ColorEffectPayload payload = mechanics.ColorCartridges ? ColorPayload(structure.Color) : default;
                 TowerColorBudget colorBudget = null;
                 if (balance.Effects.LimitTowerColor && payload.Color != InkColor.None)
@@ -85,10 +84,10 @@ namespace PaperDefense.Core
                     colorBudget = structure.ColorBudget;
                 }
                 if(assembly==null)FireMount(structure,origin,directWeapons[structure.Kind],0,shots,
-                        fireMultiplier * feed, quality, dynamic, damageMultiplier, payload, colorBudget, delta, tick, statistics, events);
+                        fireMultiplier * feed, dynamic, damageMultiplier, payload, colorBudget, delta, tick, statistics, events);
                 else for(int mount=0;mount<assembly.Weapons.Length;mount++)if(assembly.Weapons[mount]!=null)
                     FireMount(structure,origin,assembly.Weapons[mount],mount,shots,
-                        fireMultiplier*feed,quality,dynamic,damageMultiplier,payload,colorBudget,delta,tick,statistics,events);
+                        fireMultiplier*feed,dynamic,damageMultiplier,payload,colorBudget,delta,tick,statistics,events);
             }
         }
 
@@ -104,18 +103,13 @@ namespace PaperDefense.Core
             bool dynamic=balance.Construction.DynamicFeed;
             float feed=dynamic?TowerCatalog.FeedMultiplier(assembly,balance,ConsumesProduction(structure,origin,weapon,mount,delta)?1:0)
                 :Math.Min(balance.Construction.MaxFeedMultiplier,assembly.Modify(ModifierStat.FeedMultiplier,1));
-            FireMount(structure,origin,weapon,mount,shots,feed,QualityMultiplier(structure.Blueprint),dynamic,1,default,null,delta,tick,statistics,events);
+            FireMount(structure,origin,weapon,mount,shots,feed,dynamic,1,default,null,delta,tick,statistics,events);
         }
 
         bool CanOperate(StructureState structure)
             => structure.Health > 0 && structure.IsComplete && structure.BuildRemaining <= 0 && structure.Kind != StructureKind.Wall && structure.Kind != StructureKind.TarPit && structure.Kind != StructureKind.RepairPost
                 && (structure.Blueprint==null || (Assembly(structure).FreeformDesign?.IsUsable ?? true));
         ColorEffectPayload ColorPayload(InkColor color)=>color==InkColor.Red?redPayload:color==InkColor.Blue?bluePayload:color==InkColor.Green?greenPayload:default;
-
-        float QualityMultiplier(TowerBlueprint blueprint)
-        {
-            return 1;
-        }
 
         // Production is shared by unfinished reloads and acquired working mounts. A ready idle
         // mount releases its share. This preview never mutates tracking: each barrel revalidates
@@ -138,7 +132,7 @@ namespace PaperDefense.Core
         }
 
         private void FireMount(StructureState structure, Point2 origin, WeaponDefinition weapon, int mount,
-            List<ShotEvent> shots, float fireMultiplier, float qualityMultiplier, bool dynamic, float damageMultiplier,
+            List<ShotEvent> shots, float fireMultiplier, bool dynamic, float damageMultiplier,
             ColorEffectPayload payload, TowerColorBudget colorBudget, float delta, long tick,
             RunStatistics statistics, SimulationEventBuffer events)
         {
@@ -146,7 +140,7 @@ namespace PaperDefense.Core
             StructureKind kind = weapon.LegacyKind ?? (StructureKind)(-1);
             var state=structure.GetMountState(mount);
             float range = MountRange(structure, weapon, mount);
-            float interval = TowerCatalog.ActionInterval(Assembly(structure),weapon,mount,balance,fireMultiplier,qualityMultiplier);
+            float interval = TowerCatalog.ActionInterval(Assembly(structure),weapon,mount,balance,fireMultiplier);
             if (dynamic) AdvanceReload(structure, mount, interval, delta);
             if(weapon.Attack==AttackKind.Cleanup)
             {
@@ -254,11 +248,10 @@ namespace PaperDefense.Core
                 int pending=0;for(int mount=0;mount<(assembly==null?1:assembly.Weapons.Length);mount++)
                     if((assembly==null||assembly.Weapons[mount]!=null)&&structure.GetMountState(mount).ActionRemaining>0)pending++;
                 float production = fireMultiplier * (blueprint == null ? 1 : TowerCatalog.FeedMultiplier(assembly, balance, pending));
-                float quality = QualityMultiplier(blueprint);
                 for(int mount=0;mount<(assembly==null?1:assembly.Weapons.Length);mount++)
                 {
                     var weapon=assembly==null?directWeapons[structure.Kind]:assembly.Weapons[mount];if(weapon==null)continue;
-                    AdvanceReload(structure,mount,TowerCatalog.ActionInterval(assembly,weapon,mount,balance,production,quality),delta);
+                    AdvanceReload(structure,mount,TowerCatalog.ActionInterval(assembly,weapon,mount,balance,production),delta);
                     var state=structure.GetMountState(mount);state.TargetId=0;state.AcquisitionRemaining=0;
                 }
             }

@@ -25,8 +25,6 @@ namespace PaperDefense.Core
             NonNegative(balance.BlotterRadius, nameof(balance.BlotterRadius)); NonNegative(balance.WellActivationCost, nameof(balance.WellActivationCost));
             NonNegative(balance.WellInkPerWave, nameof(balance.WellInkPerWave)); Positive(balance.WellHealth, nameof(balance.WellHealth));
             NonNegative(balance.WaveGold, nameof(balance.WaveGold)); NonNegative(balance.VictoryGold, nameof(balance.VictoryGold));
-            Positive(balance.DrawingMinimumRate, nameof(balance.DrawingMinimumRate)); Fraction(balance.DrawingMaximumRate, nameof(balance.DrawingMaximumRate));
-            if (balance.DrawingMinimumRate > balance.DrawingMaximumRate) throw new ArgumentOutOfRangeException(nameof(balance.DrawingMinimumRate));
             if (balance.Construction == null || balance.Effects == null || balance.Progression == null)
                 throw new ArgumentException(UserText.Message("copy.318d981c44ce79bc"), nameof(balance));
             balance.Construction.Validate(); balance.Effects.Validate(); ValidateProgression(balance.Progression);

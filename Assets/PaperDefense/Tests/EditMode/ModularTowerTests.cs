@@ -109,7 +109,7 @@ namespace PaperDefense.Tests
             var page=new TowerBlueprint("feed","Feed","chassis.heavy",new[]{new WeaponMountSelection(0,"weapon.gun"),new WeaponMountSelection(1,"weapon.gun"),new WeaponMountSelection(2,"weapon.mortar")},content:balance.Content);
             var tower=Tower(page);tower.GetMountState(2).TargetId=99;tower.GetMountState(2).AcquisitionRemaining=.1f;
             Fire(new WeaponSystem(balance),tower,new List<EnemyState>{Enemy(1,2)});
-            float expected=TowerCatalog.ActionInterval(page,balance,"weapon.gun",.9f,1);
+            float expected=TowerCatalog.ActionInterval(page,balance,"weapon.gun",.9f);
             Assert.That(tower.GetMountState(0).Cooldown,Is.EqualTo(expected).Within(.00001));
             Assert.That(tower.GetMountState(2).TargetId,Is.Zero);Assert.That(tower.GetMountState(2).AcquisitionRemaining,Is.Zero);
             Assert.That(tower.GetMountState(2).ActionRemaining,Is.Zero);
@@ -239,7 +239,7 @@ namespace PaperDefense.Tests
             input.Modules.Add(new ModuleDefinitionInput{Id="module.adapter",Name="Adapter",TemplateId="template.test",Modifiers=new List<StatModifierInput>{new StatModifierInput{Stat=ModifierStat.ActionInterval,Operation=ModifierOperation.Multiply,Scope=ModifierScope.Mount,MountIndex=2,Value=2}}});
             balance.Content=input.CreateSnapshot();
             var page=new TowerBlueprint("adapter","Adapter","chassis.adapter",new[]{new WeaponMountSelection(0,"weapon.gun"),new WeaponMountSelection(2,"weapon.piercer")},new[]{new ModuleSelection("adapter","module.adapter")},content:balance.Content);
-            Assert.That(TowerCatalog.ActionInterval(page,balance,StructureKind.Piercer,1,1),Is.EqualTo(TowerCatalog.ActionInterval(page,balance,"weapon.piercer",1,1,2)));
+            Assert.That(TowerCatalog.ActionInterval(page,balance,StructureKind.Piercer,1),Is.EqualTo(TowerCatalog.ActionInterval(page,balance,"weapon.piercer",1,2)));
         }
 
         [Test] public void NondynamicFeedRecognizesSparseThirdMountAsASecondWorkingBarrel()

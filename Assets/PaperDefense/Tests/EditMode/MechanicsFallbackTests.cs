@@ -31,14 +31,5 @@ namespace PaperDefense.Tests
             Assert.That(run.Phase, Is.EqualTo(RunPhase.Victory));
         }
 
-        [Test]
-        public void DisabledQualityKeepsAuthoredDataAndUsesNeutralRate()
-        {
-            var balance = GameBalance.CreateDefault();
-            balance.Mechanics.DrawingQuality = false;
-            var draft = TowerBlueprint.NewDraft("test", "Test", ChassisKind.Standard, StructureKind.Gun);
-            Assert.That(draft.Assessment.Quality, Is.Zero);
-            Assert.That(TowerCatalog.QualityMultiplier(draft, balance), Is.EqualTo(1));
-        }
     }
 }

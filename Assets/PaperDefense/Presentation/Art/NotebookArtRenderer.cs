@@ -27,7 +27,7 @@ namespace PaperDefense.Presentation
             float cosine = Mathf.Cos(radians), sine = Mathf.Sin(radians);
             theme = theme ?? NotebookVisualThemeAsset.Default;
             Vector2 stretch = localScale ?? Vector2.one;
-            if (pen.WorldUnitsPerPixel > 0)
+            if (pen.WorldUnitsPerPixel > 0 || pen.MinimumLineWidth > 0)
             {
                 foreach (var command in geometry.Commands)
                 {

@@ -42,8 +42,7 @@ namespace PaperDefense.Core
 
         static FootprintProbeReport Run(TowerBlueprint source,int mount,MortarFootprint footprint,GameBalance balance,FootprintFormation formation,int cost,float quality)
         {
-            // Isolate the selected barrel while retaining equipment and art. Its re-evaluated
-            // drawing assessment must not change cadence: use the source page's quality.
+            // Isolate the selected barrel while retaining equipment and art.
             var isolated=source.WithMortarFootprint(mount,footprint);
             var selected=balance.ResolveContent().GetWeapon(source.GetWeaponId(mount));
             float health=TowerCatalog.Health(source,balance,MaterialTier.Pencil);
@@ -61,7 +60,7 @@ namespace PaperDefense.Core
                 enemies.Add(new EnemyState { Id=i+1,Position=new Point2(anchor.X+x,anchor.Y+y),Health=100,MaxHealth=100 });
             }
             var frames=new List<TrialFrame>(601);
-            var weapons=new WeaponSystem(balance,quality);
+            var weapons=new WeaponSystem(balance);
             var events=new SimulationEventBuffer(16);
             var stats=new RunStatistics(); var shots=new List<ShotEvent>();
             var impacts=new List<SimulationEvent>();

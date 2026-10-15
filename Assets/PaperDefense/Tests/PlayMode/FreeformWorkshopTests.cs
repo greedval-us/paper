@@ -44,7 +44,7 @@ namespace PaperDefense.Tests
                 var trial=run.RunTrial(blueprint,TrialScenario.Crowd);
                 Assert.That(trial.First.Frames[0].Towers[0].Blueprint.IsFreeform,Is.True);
                 Assert.That(trial.First.Frames[0].Towers[0].MaxHealth,Is.EqualTo(preview.Health));
-                Assert.That(trial.First.QualityMultiplier,Is.EqualTo(1));
+
                 Assert.That(run.Workshop.Gold,Is.EqualTo(gold));Assert.That(run.Session.TickIndex,Is.EqualTo(tick));
                 Assert.That(run.StartRun(out reason),Is.True,reason);
                 int ink=run.Session.Ink;

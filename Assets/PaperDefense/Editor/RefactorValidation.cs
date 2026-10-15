@@ -39,7 +39,7 @@ namespace PaperDefense.Editor
                                 capacity = TowerCatalog.Capacity(blueprint, balance), color = TowerCatalog.ColorCost(blueprint, balance),
                                 health = TowerCatalog.Health(blueprint, balance, tier), defense = TowerCatalog.Defense(blueprint, balance),
                                 build = TowerCatalog.BuildSeconds(blueprint, balance, tier), range = TowerCatalog.WeaponRange(blueprint, balance, first.Kind),
-                                interval = TowerCatalog.ActionInterval(blueprint, balance, first.Kind, TowerCatalog.FeedMultiplier(blueprint, balance), 1)
+                                interval = TowerCatalog.ActionInterval(blueprint, balance, first.Kind, TowerCatalog.FeedMultiplier(blueprint, balance))
                             });
                         }
                 }

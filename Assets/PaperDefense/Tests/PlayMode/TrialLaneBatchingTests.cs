@@ -64,9 +64,10 @@ namespace PaperDefense.Tests
         List<UIVertex> UnsplitTriangles()
         {
             var reference = new MeshPen(null);
-            NotebookTrialRenderer.Draw(reference, lane.Playback);
             Rect rect = lane.rectTransform.rect;
             float scale = Mathf.Max(.1f, Mathf.Min((rect.width - 16) / 42, (rect.height - 14) / 28));
+            reference.MinimumLineWidth = 1f / (scale * lane.canvas.scaleFactor);
+            NotebookTrialRenderer.Draw(reference, lane.Playback);
             using (var helper = new VertexHelper())
             {
                 reference.CopyTo(helper, rect.center - new Vector2(29, 22) * scale, scale);
@@ -112,6 +113,17 @@ namespace PaperDefense.Tests
                 if ((actual[i].position - expected[i].position).sqrMagnitude > .000001f ||
                     !actual[i].color.Equals(expected[i].color) || actual[i].uv0 != expected[i].uv0)
                     Assert.Fail("Triangle corner {0} changed position, color, UV or draw order across batching.", i);
+        }
+
+        [Test]
+        public void SmallTrialPreviewRetainsAtLeastOnePixelWideLines()
+        {
+            CreateLane(); lane.rectTransform.sizeDelta = new Vector2(570, 230);
+            Show(Crowd(0));
+            var triangles = BoundedTriangles();
+            float thickness = Mathf.Abs(triangles[2].position.y - triangles[0].position.y);
+            Assert.That(thickness * lane.canvas.scaleFactor, Is.GreaterThanOrEqualTo(.99f),
+                "Small trial previews must not shrink authored lines below a screen pixel.");
         }
 
         [Test]

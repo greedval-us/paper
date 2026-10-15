@@ -87,7 +87,7 @@ namespace PaperDefense.Tests
             var asset = ScriptableObject.CreateInstance<GameBalanceAsset>();
             try
             {
-                asset.useTargetWorkshopPreset = true; asset.drawingMinimumRate = .9f; asset.drawingMaximumRate = 1;
+                asset.useTargetWorkshopPreset = true;
                 asset.construction.SecondaryBuildSeconds = 0; asset.planningSeconds = 1000;
                 asset.weapons = new[] { new GameBalanceAsset.WeaponSettings { kind = StructureKind.Gun, cost = 40,
                     health = 55, buildSeconds = 0, range = 200, damage = 0, shotInterval = .42f } };
@@ -121,10 +121,10 @@ namespace PaperDefense.Tests
                 Assert.That(hud.Draft.Drawing.GetPart(DrawingPartKey.Mount0).Strokes[0].Points[1].X,
                     Is.Not.EqualTo(hud.Draft.Drawing.GetPart(DrawingPartKey.Mount1).Strokes[0].Points[1].X));
                 var preview = run.PreviewBlueprint(hud.Draft);
-                Assert.That(preview.DrawingQuality, Is.EqualTo(quality)); Assert.That(preview.QualityMultiplier, Is.EqualTo(beforeRestart.QualityMultiplier));
+                Assert.That(preview.DrawingQuality, Is.EqualTo(quality));
                 byte[] saved = File.ReadAllBytes(path); int ink = run.Session.Ink; long tick = run.Session.TickIndex;
                 var trial = run.RunTrial(hud.Draft, TrialScenario.Crowd);
-                Assert.That(trial.First.DrawingQuality, Is.EqualTo(quality)); Assert.That(trial.First.QualityMultiplier, Is.EqualTo(preview.QualityMultiplier));
+                Assert.That(trial.First.DrawingQuality, Is.EqualTo(quality));
                 Assert.That(run.Session.Ink, Is.EqualTo(ink)); Assert.That(run.Session.TickIndex, Is.EqualTo(tick));
                 Assert.That(File.ReadAllBytes(path), Is.EqualTo(saved)); Assert.That(run.Workshop.Gold, Is.EqualTo(290));
 
@@ -143,7 +143,7 @@ namespace PaperDefense.Tests
                         observedCooldown = run.Session.StructureAt(cells[0]).Value.Cooldown;
                 };
                 run.NextWave(); for (int i = 0; i < 12; i++) run.AdvanceFrame(1f / 30, false, 1);
-                Assert.That(observedCooldown, Is.EqualTo(TowerCatalog.ActionInterval(hud.Draft, asset.CreateWorkshopBalance(), hud.Draft.FirstWeaponId, preview.FeedMultiplier, 1, 0)).Within(.00001f));
+                Assert.That(observedCooldown, Is.EqualTo(TowerCatalog.ActionInterval(hud.Draft, asset.CreateWorkshopBalance(), hud.Draft.FirstWeaponId, preview.FeedMultiplier, 0)).Within(.00001f));
                 var deployedBattle = run.Session;
                 run.OpenWorkshop(); Click("First Piercer"); Click("Save blueprint");
                 Assert.That(run.Workshop.Album.Single(p => p.Id == id).FirstWeapon, Is.EqualTo(StructureKind.Piercer));

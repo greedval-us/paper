@@ -175,7 +175,7 @@ namespace PaperDefense.Tests
             var source = sourcePreset.CreateBalance();
             var input = GlobalBalanceSettings.From(source);
             string expected = JsonUtility.ToJson(input);
-            source.Mechanics.DrawingQuality = !source.Mechanics.DrawingQuality;
+            source.Mechanics.ColorCartridges = !source.Mechanics.ColorCartridges;
             source.Construction.MaxFeedMultiplier += .5f;
             source.Effects.ColorTargetsPerWindow++;
             source.Progression.UpgradeEveryWaves++;
@@ -192,7 +192,7 @@ namespace PaperDefense.Tests
 
             var published = input.CreateBalance();
             string frozenJson = JsonUtility.ToJson(published);
-            input.Mechanics.DrawingQuality = !input.Mechanics.DrawingQuality;
+            input.Mechanics.ColorCartridges = !input.Mechanics.ColorCartridges;
             input.Construction.MaxFeedMultiplier += .5f;
             input.Effects.ColorTargetsPerWindow++;
             input.Progression.UpgradeEveryWaves++;

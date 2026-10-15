@@ -14,9 +14,9 @@ namespace PaperDefense.Tests
                 Blueprint=blueprint,Health=55,MaxHealth=55,IsComplete=true,Tier=MaterialTier.Pencil,PrimaryTargetId=1,SecondaryTargetId=1};
         static EnemyState Enemy(int id=1,float x=11.5f)
             =>new EnemyState {Id=id,Position=new Point2(x,10.5f),Health=100000,MaxHealth=100000};
-        static RunStatistics Run(GameBalance balance,StructureState tower,int ticks,float quality)
+        static RunStatistics Run(GameBalance balance,StructureState tower,int ticks)
         {
-            var weapons=new WeaponSystem(balance,quality); var stats=new RunStatistics(); var shots=new List<ShotEvent>();
+            var weapons=new WeaponSystem(balance); var stats=new RunStatistics(); var shots=new List<ShotEvent>();
             var structures=new List<StructureState>{tower}; var enemies=new List<EnemyState>{Enemy()}; var events=new SimulationEventBuffer();
             const float delta=1f/30;
             for(int tick=0;tick<ticks;tick++)
@@ -30,18 +30,16 @@ namespace PaperDefense.Tests
         static RunStatistics Fire(GameBalance balance,StructureState tower,List<EnemyState> enemies,out List<ShotEvent> shots,IBlotContext context=null)
         {
             var stats=new RunStatistics();shots=new List<ShotEvent>();
-            new WeaponSystem(balance,null,context).Fire(new List<StructureState>{tower},enemies,shots,1,1,1f/30,1,stats,new SimulationEventBuffer());
+            new WeaponSystem(balance,context).Fire(new List<StructureState>{tower},enemies,shots,1,1,1f/30,1,stats,new SimulationEventBuffer());
             return stats;
         }
 
-        [TestCase(false,100,57)]
-        [TestCase(false,0,57)]
-        [TestCase(true,100,57)]
-        [TestCase(true,0,57)]
-        public void RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(bool dynamic,float quality,int launches)
+        [TestCase(false,57)]
+        [TestCase(true,57)]
+        public void RailChangesSingleMountCadenceInBothSupplyModesWithoutChangingPerHitDamage(bool dynamic,int launches)
         {
             var balance=GameBalance.CreateDefault();balance.Construction.DynamicFeed=dynamic;
-            var tower=Tower(Blueprint());var stats=Run(balance,tower,900,quality);
+            var tower=Tower(Blueprint());var stats=Run(balance,tower,900);
             Assert.That(stats.Launches(StructureKind.Gun),Is.EqualTo(launches));
             Assert.That(stats.Damage(StructureKind.Gun),Is.EqualTo(launches*12));
             Assert.That(tower.Health,Is.EqualTo(55)); Assert.That(balance.Structure(StructureKind.Gun).Range,Is.EqualTo(11));
@@ -52,12 +50,12 @@ namespace PaperDefense.Tests
         {
             var balance=GameBalance.CreateDefault();balance.Construction.DynamicFeed=dynamic;
             var tower=Tower(Blueprint(dual:true));
-            Run(balance,tower,1,0);
+            Run(balance,tower,1);
             float expected=.42f/.8f*1.2f;
             Assert.That(tower.Cooldown,Is.EqualTo(expected).Within(.000001f));
             Assert.That(tower.SecondaryCooldown,Is.EqualTo(expected).Within(.000001f));
             Assert.That(TowerCatalog.FeedMultiplier(tower.Blueprint,balance,2),Is.EqualTo(.8f));
-            Assert.That(Run(balance,Tower(tower.Blueprint),900,0).Launches(StructureKind.Gun),Is.EqualTo(96));
+            Assert.That(Run(balance,Tower(tower.Blueprint),900).Launches(StructureKind.Gun),Is.EqualTo(96));
         }
 
         [Test] public void RailExpandsTheActualCombatQueryUpToItsRangeBoundary()

@@ -84,7 +84,7 @@ namespace PaperDefense.Tests
         {
             var shortBarrel=Tower(length:.3f);var longBarrel=Tower(length:.9f);var balance=GameBalance.CreateDefault();
             Assert.That(TowerCatalog.WeaponRange(longBarrel,balance,StructureKind.Gun),Is.GreaterThan(TowerCatalog.WeaponRange(shortBarrel,balance,StructureKind.Gun)));
-            Assert.That(TowerCatalog.ActionInterval(longBarrel,balance,StructureKind.Gun,1,1),Is.GreaterThan(TowerCatalog.ActionInterval(shortBarrel,balance,StructureKind.Gun,1,1)));
+            Assert.That(TowerCatalog.ActionInterval(longBarrel,balance,StructureKind.Gun,1),Is.GreaterThan(TowerCatalog.ActionInterval(shortBarrel,balance,StructureKind.Gun,1)));
         }
         [Test] public void DuplicateStrokesAndDecorationCannotBuyStats()
         {
@@ -108,7 +108,11 @@ namespace PaperDefense.Tests
         [Test] public void OldDrawingAccuracyNoLongerReducesLiveFireRate()
         {
             var old=TowerBlueprint.NewDraft("old","Old drawing",ChassisKind.Standard,StructureKind.Gun);
-            Assert.That(TowerCatalog.QualityMultiplier(old,GameBalance.CreateDefault()),Is.EqualTo(1));
+            var standard=new TowerBlueprint("standard","Standard",ChassisKind.Standard,StructureKind.Gun);
+            var balance=GameBalance.CreateDefault();
+            Assert.That(old.Assessment.Quality,Is.Zero);
+            Assert.That(TowerCatalog.ActionInterval(old,balance,StructureKind.Gun,1),
+                Is.EqualTo(TowerCatalog.ActionInterval(standard,balance,StructureKind.Gun,1)));
         }
         [Test] public void WideBarrelChangesActualHitDamageAndPreviewTogether()
         {

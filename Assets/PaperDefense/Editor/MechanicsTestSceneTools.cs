@@ -151,7 +151,6 @@ namespace PaperDefense.Editor
             {
                 case MechanicsTestFocus.Assembly: break;
                 case MechanicsTestFocus.Drawing:
-                    s.mechanics.DrawingQuality = true;
                     s.placements.Add(Placement("weapon.gun", "chassis.battery", new[] { "weapon.gun", "weapon.piercer", "weapon.mortar" }));
                     break;
                 case MechanicsTestFocus.Armor:
@@ -219,7 +218,7 @@ namespace PaperDefense.Editor
         static MechanicsBlot Blot(int x, int y) => new MechanicsBlot { cell = new Vector2Int(x, y) };
         static MechanicsConfiguration None() => new MechanicsConfiguration {
             EnemyDrawingTiers = false, CorpseBlots = false, RangedEnemies = false, InkWells = false,
-            ColorCartridges = false, RunUpgrades = false, DrawingQuality = false
+            ColorCartridges = false, RunUpgrades = false
         };
         static void Apply(ContentCatalogInput catalog, ContentOverrides overrides)
         {

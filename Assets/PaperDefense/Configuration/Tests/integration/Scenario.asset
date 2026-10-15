@@ -30,7 +30,6 @@ MonoBehaviour:
     InkWells: 1
     ColorCartridges: 1
     RunUpgrades: 1
-    DrawingQuality: 1
   placements: []
   targets: []
   blots: []

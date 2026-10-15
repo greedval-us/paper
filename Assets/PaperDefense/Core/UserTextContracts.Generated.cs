@@ -220,7 +220,6 @@ namespace PaperDefense.Core
             resolver.RequireContract("copy.195f11eb3d3b0a6f", 0, Array.Empty<int>());
             resolver.RequireContract("copy.19ea6da1c8952906", 1, new[] { 0 });
             resolver.RequireFormatContract("copy.19ea6da1c8952906", 0, "0.0");
-            resolver.RequireContract("copy.1a8fe86ca03d1b8f", 0, Array.Empty<int>());
             resolver.RequireContract("copy.1aa1c191d8f61cbe", 0, Array.Empty<int>());
             resolver.RequireContract("copy.1abdee4640babd7e", 0, Array.Empty<int>());
             resolver.RequireContract("copy.1b2a00ae9bb11df8", 1, Array.Empty<int>());
@@ -256,7 +255,6 @@ namespace PaperDefense.Core
             resolver.RequireContract("copy.27c2a6466d066b29", 2, Array.Empty<int>());
             resolver.RequireContract("copy.27d0e35cfbb3ac62", 0, Array.Empty<int>());
             resolver.RequireContract("copy.280f0b15f654144d", 0, Array.Empty<int>());
-            resolver.RequireContract("copy.285d0432d031dec6", 0, Array.Empty<int>());
             resolver.RequireContract("copy.28760c1a5ec2d81f", 0, Array.Empty<int>());
             resolver.RequireContract("copy.28baba461bb688b4", 0, Array.Empty<int>());
             resolver.RequireContract("copy.28c686dce839c9a7", 0, Array.Empty<int>());
@@ -382,7 +380,6 @@ namespace PaperDefense.Core
             resolver.RequireContract("copy.5781d5bb49432494", 0, Array.Empty<int>());
             resolver.RequireContract("copy.579cb9fc5f9505d7", 0, Array.Empty<int>());
             resolver.RequireContract("copy.5850704bbcf92fc2", 0, Array.Empty<int>());
-            resolver.RequireContract("copy.585e2c4c9f48cee1", 0, Array.Empty<int>());
             resolver.RequireContract("copy.59709b003195830a", 0, Array.Empty<int>());
             resolver.RequireContract("copy.5b3a35476fadf70d", 0, Array.Empty<int>());
             resolver.RequireContract("copy.5b5aabf711c8afb0", 1, new[] { 0 });
@@ -441,7 +438,6 @@ namespace PaperDefense.Core
             resolver.RequireContract("copy.6c146e1186473ee4", 1, new[] { 0 });
             resolver.RequireFormatContract("copy.6c146e1186473ee4", 0, "N0");
             resolver.RequireContract("copy.6c3e6afbb500fc69", 0, Array.Empty<int>());
-            resolver.RequireContract("copy.6c483a5e388e346f", 0, Array.Empty<int>());
             resolver.RequireContract("copy.6c51f44f2b982a45", 0, Array.Empty<int>());
             resolver.RequireContract("copy.6c744cc68ecf81e5", 0, Array.Empty<int>());
             resolver.RequireContract("copy.6c99e7d8fbd8fa26", 0, Array.Empty<int>());
@@ -780,7 +776,6 @@ namespace PaperDefense.Core
             resolver.RequireContract("copy.f136d298cf83917b", 0, Array.Empty<int>());
             resolver.RequireContract("copy.f1a3783cdcbc8f2e", 0, Array.Empty<int>());
             resolver.RequireContract("copy.f26aff7048779ef3", 0, Array.Empty<int>());
-            resolver.RequireContract("copy.f32e6591c784b007", 0, Array.Empty<int>());
             resolver.RequireContract("copy.f3943c56f42d599a", 1, Array.Empty<int>());
             resolver.RequireContract("copy.f4103f0b03141820", 1, Array.Empty<int>());
             resolver.RequireContract("copy.f4e402cf5887131a", 0, Array.Empty<int>());

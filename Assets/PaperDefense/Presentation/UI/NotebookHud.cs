@@ -9,6 +9,7 @@ namespace PaperDefense.Presentation
     public sealed class NotebookHud : MonoBehaviour
     {
         public UserTextResolver TextResolver { get; set; }
+        public bool ReserveStandControls { get; set; }
         string Resolve(string value) => GameText.Resolve(TextResolver, value);
         const int WallToolIndex = ProfileLimits.LoadoutSlotCount, SpikesToolIndex = WallToolIndex + 1;
         const int EraseToolIndex = SpikesToolIndex + 1, UpgradeToolIndex = EraseToolIndex + 1;
@@ -23,6 +24,7 @@ namespace PaperDefense.Presentation
         DrawingInput input;
         Font font;
         GameObject canvasObject;
+        CanvasScaler canvasScaler;
         RectTransform root;
         Text hp, ink, wave, threats, forecast, message, toolHint, launchText, pauseText, speedText, progress, inspect, blotterPrice, wellTitle, navigationHint;
         Image hpFill;
@@ -45,8 +47,9 @@ namespace PaperDefense.Presentation
             canvasObject.transform.SetParent(transform, false);
             var canvas = canvasObject.GetComponent<Canvas>(); canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             canvas.sortingOrder = 50;
-            var scaler = canvasObject.GetComponent<CanvasScaler>(); scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(1600, 1000); scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
+            canvasScaler = canvasObject.GetComponent<CanvasScaler>(); canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
+            FitCanvas();
             var board = new GameObject("Notebook layout 1600x1000",typeof(RectTransform)); board.transform.SetParent(canvasObject.transform,false);
             root=board.GetComponent<RectTransform>();root.anchorMin=root.anchorMax=new Vector2(.5f,.5f);root.pivot=new Vector2(.5f,.5f);
             root.sizeDelta=new Vector2(1600,1000);
@@ -56,9 +59,15 @@ namespace PaperDefense.Presentation
         }
 
         void OnDestroy() { if (input != null) input.SelectionChanged -= RefreshSelection; }
+        void FitCanvas()
+        {
+            float height = ReserveStandControls ? 1000f * Screen.height / Mathf.Max(1, Screen.height - 120) : 1000;
+            canvasScaler.referenceResolution = new Vector2(1600, height);
+        }
         void Update()
         {
             if (run == null) return;
+            FitCanvas();
             canvasObject.SetActive(!run.InWorkshop);
             if (run.InWorkshop) return;
             refresh -= Time.unscaledDeltaTime; if (refresh <= 0) { refresh = .08f; Refresh(); }

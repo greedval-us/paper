@@ -24,12 +24,12 @@ namespace PaperDefense.Tests
         static RunStatistics Fire(GameBalance balance,StructureState tower,IBlotContext context,List<EnemyState> enemies,out List<ShotEvent> shots)
         {
             var stats=new RunStatistics(); shots=new List<ShotEvent>();
-            new WeaponSystem(balance,null,context).Fire(new List<StructureState>{tower},enemies,shots,1,1,1f/30,1,stats,new SimulationEventBuffer());
+            new WeaponSystem(balance,context).Fire(new List<StructureState>{tower},enemies,shots,1,1,1f/30,1,stats,new SimulationEventBuffer());
             return stats;
         }
-        static RunStatistics Run(GameBalance balance,StructureState tower,IBlotContext context,List<EnemyState> enemies,int ticks,float? quality=null)
+        static RunStatistics Run(GameBalance balance,StructureState tower,IBlotContext context,List<EnemyState> enemies,int ticks)
         {
-            var weapons=new WeaponSystem(balance,quality,context); var stats=new RunStatistics();
+            var weapons=new WeaponSystem(balance,context); var stats=new RunStatistics();
             var towers=new List<StructureState>{tower}; var shots=new List<ShotEvent>(); var events=new SimulationEventBuffer(); const float delta=1f/30;
             for(int tick=0;tick<ticks;tick++)
             {
@@ -87,15 +87,14 @@ namespace PaperDefense.Tests
             Assert.That(context.Contains(new Cell(14,10)),Is.True); Assert.That(shots.Count,Is.EqualTo(2));
         }
 
-        [Test] public void RetiredQualityDoesNotChangeCleanupCadence()
+        [Test] public void CleanupCadenceUsesTheConfiguredIntervalWithoutDealingDamage()
         {
             var balance=Balance(); balance.Structure(StructureKind.Blotter).Range=100; balance.Structure(StructureKind.Blotter).Radius=0;
             var cells=new Cell[20]; for(int i=0;i<cells.Length;i++) cells[i]=new Cell(i,5);
-            var low=Run(balance,Tower(),new BlotFixture(cells),new List<EnemyState>(),900,0);
-            var perfect=Run(balance,Tower(),new BlotFixture(cells),new List<EnemyState>(),900,100);
-            Assert.That(low.BlotsCleared,Is.EqualTo(15)); Assert.That(perfect.BlotsCleared,Is.EqualTo(15));
-            Assert.That(low.Launches(StructureKind.Blotter),Is.EqualTo(15)); Assert.That(perfect.Launches(StructureKind.Blotter),Is.EqualTo(15));
-            Assert.That(low.Damage(StructureKind.Blotter),Is.Zero); Assert.That(perfect.Damage(StructureKind.Blotter),Is.Zero);
+            var result=Run(balance,Tower(),new BlotFixture(cells),new List<EnemyState>(),900);
+            Assert.That(result.BlotsCleared,Is.EqualTo(15));
+            Assert.That(result.Launches(StructureKind.Blotter),Is.EqualTo(15));
+            Assert.That(result.Damage(StructureKind.Blotter),Is.Zero);
             Assert.That(balance.Structure(StructureKind.Blotter).Radius,Is.Zero);
         }
 
@@ -137,7 +136,7 @@ namespace PaperDefense.Tests
         {
             var balance=Balance(); balance.Construction.DynamicFeed=true;
             var tower=Tower(); var context=new BlotFixture(new Cell(12,10));
-            var weapons=new WeaponSystem(balance,null,context); var stats=new RunStatistics();
+            var weapons=new WeaponSystem(balance,context); var stats=new RunStatistics();
             var towers=new List<StructureState>{tower}; var enemies=new List<EnemyState>();
             var shots=new List<ShotEvent>(); var events=new SimulationEventBuffer();
             weapons.Fire(towers,enemies,shots,1,1,1f/30,1,stats,events);

@@ -288,7 +288,6 @@ namespace PaperDefense.Presentation
             Button(controls, "Open trial", new Rect(30, 428, 711, 67), UserText.Message("copy.65e901944fe5438f"), () => RunDrawingTrial());
             Label(controls, UserText.Message("workshop.comparison_hint"), new Rect(30, 529, 711, 160), 23, NotebookPalette.Navy);
             BuildDrawingComparison();
-
         }
         void BuildDrawingComparison()
         {
@@ -756,7 +755,6 @@ namespace PaperDefense.Presentation
             trialFirst.text = Resolve(trialSecond.text = Resolve("")); trialResults.text = Resolve(UserText.Message("copy.8f02821e075dc0d1"));
             trialPlayback.text = Resolve(UserText.Message("copy.cfad8860edae4ba5"));
         }
-        public TrialComparison CompareDrawingQuality() => RunDrawingTrial();
         public TrialComparison RunDrawingTrial()
         {
             if(Guided!=null)return Guided.RunTrial();

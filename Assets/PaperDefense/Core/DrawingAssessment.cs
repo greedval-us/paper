@@ -139,17 +139,6 @@ namespace PaperDefense.Core
             return true;
         }
 
-        /// <summary>The single efficiency formula; construction feed and external upgrades are applied separately.</summary>
-        public static float FireMultiplier(float quality, float minimum = .85f, float maximum = 1)
-        {
-            if (float.IsNaN(quality) || float.IsInfinity(quality)) throw new ArgumentOutOfRangeException(nameof(quality));
-            if (float.IsNaN(minimum) || float.IsInfinity(minimum) || minimum <= 0 || minimum > 1)
-                throw new ArgumentOutOfRangeException(nameof(minimum));
-            if (float.IsNaN(maximum) || float.IsInfinity(maximum) || maximum < minimum || maximum > 1)
-                throw new ArgumentOutOfRangeException(nameof(maximum));
-            return minimum + (maximum - minimum) * Math.Max(0, Math.Min(100, quality)) / 100;
-        }
-
         static DrawingAssessment RestoreStamp(TowerBlueprint blueprint, string constructionHash, DrawingEvaluationStamp stamp, string referenceSignature)
         {
             if (stamp.DrawingHash != blueprint.Drawing.GeometryHash || stamp.ConstructionHash != constructionHash)

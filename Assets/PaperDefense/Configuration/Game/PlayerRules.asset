@@ -205,8 +205,6 @@ MonoBehaviour:
     BlotterCooldown: 3
     BlotterRadius: 3
     WellHealth: 160
-    DrawingMinimumRate: 0.85
-    DrawingMaximumRate: 1
     EnableEnemyMechanics: 1
     EnableInkWells: 1
     Mechanics:
@@ -216,7 +214,6 @@ MonoBehaviour:
       InkWells: 1
       ColorCartridges: 1
       RunUpgrades: 1
-      DrawingQuality: 1
     Construction:
       DualFeedMultiplier: 0.8
       MaxFeedMultiplier: 1.25

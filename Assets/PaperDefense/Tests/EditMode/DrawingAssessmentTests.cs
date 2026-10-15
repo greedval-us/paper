@@ -221,21 +221,5 @@ namespace PaperDefense.Tests
             Assert.That(first.Assessment.Quality, Is.EqualTo(100));
         }
 
-        [TestCase(0, .85f)]
-        [TestCase(60, .94f)]
-        [TestCase(100, 1)]
-        [TestCase(-10, .85f)]
-        [TestCase(110, 1)]
-        public void QualityChangesOnlyTheCentralBoundedFireMultiplier(float quality, float expected)
-            => Assert.That(DrawingEvaluator.FireMultiplier(quality, .85f, 1), Is.EqualTo(expected).Within(.000001f));
-
-        [Test]
-        public void FireMultiplierUsesConfiguredBoundsAndRejectsEfficiencyAboveTheIdeal()
-        {
-            Assert.That(DrawingEvaluator.FireMultiplier(50, .9f, 1), Is.EqualTo(.95f).Within(.000001f));
-            Assert.Throws<ArgumentOutOfRangeException>(() => DrawingEvaluator.FireMultiplier(100, .85f, 1.1f));
-            Assert.Throws<ArgumentOutOfRangeException>(() => DrawingEvaluator.FireMultiplier(0, 0, 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => DrawingEvaluator.FireMultiplier(float.NaN, .85f, 1));
-        }
     }
 }

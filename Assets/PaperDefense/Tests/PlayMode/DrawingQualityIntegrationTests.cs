@@ -13,7 +13,6 @@ namespace PaperDefense.Tests
             var asset = ScriptableObject.CreateInstance<GameBalanceAsset>();
             try
             {
-                asset.drawingMinimumRate = .9f; asset.drawingMaximumRate = 1;
                 asset.passiveInkPerSecond = 0; asset.planningSeconds = 1000;
                 asset.weapons = new[] { new GameBalanceAsset.WeaponSettings { kind = StructureKind.Gun, cost = 40,
                     health = 55, buildSeconds = 0, range = 200, damage = 0, shotInterval = .42f } };
@@ -27,10 +26,10 @@ namespace PaperDefense.Tests
                 var preview = run.PreviewBlueprint(blueprint); long tick = run.Session.TickIndex;
                 int gold = run.Workshop.Gold, ink = run.Session.Ink;
                 Assert.That(preview.DrawingQuality, Is.EqualTo(0));
-                Assert.That(preview.QualityMultiplier, Is.EqualTo(1));
+
                 Assert.That(preview.FireRate, Is.EqualTo(2 / (.42f / .8f)).Within(.00001f));
-                var trial = run.RunQualityTrial(blueprint, TrialScenario.Crowd);
-                Assert.That(trial.First.QualityMultiplier, Is.EqualTo(preview.QualityMultiplier));
+                var trial = run.RunTrial(blueprint, TrialScenario.Crowd);
+
                 Assert.That(trial.Second.DrawingQuality, Is.EqualTo(100));
                 Assert.That(trial.First.Frames[0].Towers[0].MaxHealth, Is.EqualTo(preview.Health));
                 Assert.That(run.Session.TickIndex, Is.EqualTo(tick)); Assert.That(run.Session.Ink, Is.EqualTo(ink));
@@ -51,7 +50,7 @@ namespace PaperDefense.Tests
                 };
                 run.NextWave();
                 for (int i = 0; i < 12; i++) run.AdvanceFrame(1f / 30, false, 1);
-                Assert.That(observedCooldown, Is.EqualTo(2 / preview.FireRate).Within(.00001f), "Real launch cooldown uses the same single final quality factor.");
+                Assert.That(observedCooldown, Is.EqualTo(2 / preview.FireRate).Within(.00001f), "Real launch cooldown matches the preview.");
             }
             finally { Object.DestroyImmediate(root); Object.DestroyImmediate(asset); }
         }

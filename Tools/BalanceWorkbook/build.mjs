@@ -125,7 +125,6 @@ const mechanicDescriptions = [
   ['InkWells', 'Чернильницы', 'GameSession.Objectives', 'Активация, цель, выплата цвета', 'Точек и их выплат нет. Все враги идут к базе.', 'Legacy inkWells'],
   ['ColorCartridges', 'Цветные картриджи', 'ColorEffectPayload', 'Окраска и эффект попадания', 'Цвет нельзя купить или применить. Оружие сохраняет обычный урон и собственный эффект степлера.', 'Независима от чернильниц'],
   ['RunUpgrades', 'Улучшения партии', 'GameSession.Progression', 'Выбор после волны', 'Нет ожидания выбора. Между волнами игра продолжается.', 'Независима от экономики'],
-  ['DrawingQuality', 'Качество рисунка', 'TowerCatalog.QualityMultiplier', 'Множитель темпа оружия', 'Множитель качества равен единице. Рисунок и оценка сохраняются.', 'Независима от геометрии мортиры'],
 ];
 const main = sheets['Механики'];
 base(main, 'ДЕРЖИ ЛИНИЮ. Механики и границы', [27, 25, 31, 63, 13, 13, 32]);
@@ -207,7 +206,7 @@ views.push([calc.name, 'A1:J24'], [calc.name, `A${damageRow - 1}:J${refunds.end 
 
 const weapons = sheets['Оружие'];
 base(weapons, 'Оружие и укрепления', [15, 28, 12, 12, 14, 14, 12, 14, 18, 58, 17, 17, 17]);
-note(weapons, 4, 'Дистанции и характеристики до оборудования, материала, подачи, качества и улучшений. Stats.Range сохранён отдельно.', 'M');
+note(weapons, 4, 'Дистанции и характеристики до оборудования, материала, подачи и улучшений. Stats.Range сохранён отдельно.', 'M');
 const weaponNotes = {
   Wall: 'Препятствие. Урона не наносит.', Gun: 'Одна цель.',
   Piercer: 'Линия. Radius — полуширина. MaxPierce — конечный предел целей.',
@@ -304,24 +303,30 @@ views.push([waves.name, 'A1:L14']);
 const parameters = sheets['Параметры'];
 base(parameters, 'Полный словарь эффективных параметров', [60, 22, 24, 24, 24]);
 note(parameters, 4, 'Глобальные правила: бой, волны, испытания, экономика и механики. Каталог по ID приведён отдельно.', 'E');
-note(parameters, 5, 'Песочный цвет отмечает различия между эффективными конфигурациями.', 'E');
+note(parameters, 5, 'Песочный цвет отмечает различия; «—» означает отсутствие параметра в конфигурации.', 'E');
 const paramMaps = configs.map(c => new Map(c.Parameters.map(p => [p.Path, p])));
 const parameterPaths = [...new Set(configs.flatMap(c => c.Parameters.map(p => p.Path)))].sort();
 const paramRows = parameterPaths.map(key => {
   const found = paramMaps.map(map => map.get(key));
-  assert.ok(found.every(Boolean), `Unequal runtime schema: ${key}`);
-  return [key, found[0].Unit, ...found.map(value), found[0].Kind];
+  const available = found.filter(Boolean);
+  const reference = available[0];
+  assert.ok(available.every(p => p.Kind === reference.Kind && p.Unit === reference.Unit),
+    `Incompatible runtime parameter: ${key}`);
+  return [key, reference.Unit, ...found.map(p => p ? value(p) : '—'), reference.Kind];
 });
 const pt = table(parameters, 6, ['Параметр', 'Единица', name(configs[0]), name(configs[1]), 'Тип'], paramRows, { height: 23, wrap: false });
 parameters.getRange(`C${pt.start}:D${pt.end}`).setNumberFormat('0.0000');
 parameterPaths.forEach((key, index) => {
   const r = pt.start + index;
-  if (paramMaps[0].get(key).Kind === 'bool') {
-    parameters.getRange(`C${r}:D${r}`).values = [paramMaps.map(map => value(map.get(key)) ? 'Вкл.' : 'Выкл.')];
+  const found = paramMaps.map(map => map.get(key));
+  const available = found.filter(Boolean);
+  const kind = available[0].Kind;
+  if (kind === 'bool') {
+    parameters.getRange(`C${r}:D${r}`).values = [found.map(p => p ? (value(p) ? 'Вкл.' : 'Выкл.') : '—')];
   }
-  if (paramMaps[0].get(key).Kind === 'number' && Number.isInteger(value(paramMaps[0].get(key))) && Number.isInteger(value(paramMaps[1].get(key))))
+  if (kind === 'number' && available.every(p => Number.isInteger(value(p))))
     parameters.getRange(`C${r}:D${r}`).setNumberFormat('#,##0');
-  if (paramMaps[0].get(key).Kind === 'string') {
+  if (kind === 'string') {
     parameters.getRange(`C${r}:D${r}`).format.wrapText = true;
     parameters.getRange(`A${r}:E${r}`).format.rowHeight = 50;
   }

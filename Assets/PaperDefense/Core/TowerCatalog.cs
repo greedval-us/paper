@@ -25,24 +25,21 @@ namespace PaperDefense.Core
         internal static ResolvedTowerAssembly Resolve(TowerBlueprint blueprint,ContentCatalogSnapshot content)
             =>content.IsLegacyAdapter?new ResolvedTowerAssembly(blueprint,content):assemblyCaches.GetValue(blueprint,createCache).Resolve(content);
         public static int ToolCost(GameBalance balance,StructureKind kind,MaterialTier tier)=>(int)Math.Ceiling(Math.Max(0,balance.Structure(kind).Cost)*Math.Max(0,balance.Material(tier).CostMultiplier));
-        public static float QualityMultiplier(TowerBlueprint blueprint,GameBalance balance)=>QualityMultiplier(blueprint,balance,balance.Mechanics.DrawingQuality);
-        // Kept as a compatibility seam for old callers and saved trial reports. Drawing accuracy is no longer a mechanic.
-        public static float QualityMultiplier(TowerBlueprint blueprint,GameBalance balance,bool enabled)=>1;
-        internal static float QualityMultiplier(float quality,GameBalance balance)=>1;
-        public static float ActionInterval(StructureDefinition definition,float productionMultiplier,float qualityMultiplier)=>ActionInterval(definition.ShotInterval,productionMultiplier,qualityMultiplier,historicalBalance);
-        static float ActionInterval(float seconds,float production,float quality,GameBalance balance)
-        {if(quality<=0||quality>1||float.IsNaN(quality)||float.IsInfinity(quality))throw new ArgumentOutOfRangeException(nameof(quality));return Math.Max(balance.Combat.MinimumActionInterval,seconds/Math.Max(balance.Combat.MinimumProductionMultiplier,production))/quality;}
-        internal static float ActionInterval(ResolvedTowerAssembly assembly,WeaponDefinition weapon,int mount,GameBalance balance,float production,float quality)
-        // New additive modifiers obey the configured floor after supply and quality have been applied.
-        {float geometry=assembly?.FreeformDesign?.GetBarrel(mount)?.IntervalMultiplier??1;float interval=ActionInterval(weapon.Stats.ShotInterval*geometry,production,quality,balance);return FiniteStat(assembly==null?interval:Math.Max(balance.Combat.MinimumActionInterval,assembly.Modify(ModifierStat.ActionInterval,interval,mount,weapon.Attack==AttackKind.Cleanup)),"interval");}
-        public static float ActionInterval(TowerBlueprint blueprint,GameBalance balance,StructureKind kind,float production,float quality)
+        public static float ActionInterval(StructureDefinition definition,float productionMultiplier)
+            =>ActionInterval(definition.ShotInterval,productionMultiplier,historicalBalance);
+        static float ActionInterval(float seconds,float production,GameBalance balance)
+            =>Math.Max(balance.Combat.MinimumActionInterval,seconds/Math.Max(balance.Combat.MinimumProductionMultiplier,production));
+        internal static float ActionInterval(ResolvedTowerAssembly assembly,WeaponDefinition weapon,int mount,GameBalance balance,float production)
+        // Geometry and supply determine the interval; equipment obeys the final configured floor.
+        {float geometry=assembly?.FreeformDesign?.GetBarrel(mount)?.IntervalMultiplier??1;float interval=ActionInterval(weapon.Stats.ShotInterval*geometry,production,balance);return FiniteStat(assembly==null?interval:Math.Max(balance.Combat.MinimumActionInterval,assembly.Modify(ModifierStat.ActionInterval,interval,mount,weapon.Attack==AttackKind.Cleanup)),"interval");}
+        public static float ActionInterval(TowerBlueprint blueprint,GameBalance balance,StructureKind kind,float production)
         {
-            if(blueprint==null)return ActionInterval(balance.Structure(kind).ShotInterval,production,quality,balance);
+            if(blueprint==null)return ActionInterval(balance.Structure(kind).ShotInterval,production,balance);
             var assembly=Resolve(blueprint,balance);
             var weapon=assembly.Content.GetWeapon(LegacyContentIds.Weapon(kind));
-            return ActionInterval(assembly,weapon,FindWeaponMount(blueprint,weapon.Id),balance,production,quality);
+            return ActionInterval(assembly,weapon,FindWeaponMount(blueprint,weapon.Id),balance,production);
         }
-        public static float ActionInterval(TowerBlueprint blueprint,GameBalance balance,string weaponId,float production,float quality,int mount=0){var a=Resolve(blueprint,balance);return ActionInterval(a,a.Content.GetWeapon(weaponId),mount,balance,production,quality);}
+        public static float ActionInterval(TowerBlueprint blueprint,GameBalance balance,string weaponId,float production,int mount=0){var a=Resolve(blueprint,balance);return ActionInterval(a,a.Content.GetWeapon(weaponId),mount,balance,production);}
         public static int Capacity(ChassisKind chassis)=>Capacity(chassis,null); public static int Capacity(TowerBlueprint blueprint)=>Capacity(blueprint,null);
         public static int Capacity(ChassisKind chassis,GameBalance balance)=>Content(null,balance).GetChassis(LegacyContentIds.Chassis(chassis)).Capacity;
         public static int Capacity(TowerBlueprint blueprint,GameBalance balance){var a=Resolve(blueprint,balance);return (int)Math.Min(int.MaxValue,Math.Floor(a.Chassis.Capacity*(double)(a.FreeformDesign?.CapacityMultiplier??1)));}

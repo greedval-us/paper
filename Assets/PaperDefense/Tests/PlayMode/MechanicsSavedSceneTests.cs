@@ -20,6 +20,48 @@ namespace PaperDefense.Tests
 {
     public sealed class MechanicsSavedSceneTests
     {
+        [UnityTest] public IEnumerator IntegrationHudLeavesRoomForStandControls()
+        {
+            EditorSceneManager.LoadSceneInPlayMode("Assets/PaperDefense/Scenes/Tests/13_Integration.unity",
+                new LoadSceneParameters(LoadSceneMode.Single));
+            yield return null;
+            var h = Object.FindFirstObjectByType<MechanicsTestScene>();
+            Assert.That(h.Controller.StartRun(out string reason), Is.True, reason);
+            h.Controller.TogglePause();
+            yield return null;
+            Canvas.ForceUpdateCanvases();
+            var hud = h.Bootstrap.GetComponentInChildren<NotebookHud>();
+            var layout = hud.GetComponentsInChildren<RectTransform>().Single(t => t.name == "Notebook layout 1600x1000");
+            var corners = new Vector3[4]; layout.GetWorldCorners(corners);
+            Assert.That(corners[0].y, Is.GreaterThanOrEqualTo(59), "The bottom toolbar must clear the stand controls.");
+            Assert.That(corners[1].y, Is.LessThanOrEqualTo(Screen.height - 59), "The battle header must clear the stand title.");
+            var last = SceneManager.GetActiveScene();
+            SceneManager.SetActiveScene(SceneManager.CreateScene("Stand HUD spacing verified"));
+            yield return SceneManager.UnloadSceneAsync(last);
+        }
+
+        [UnityTest] public IEnumerator WeaponStandFramesItsActorsAtAReadableScale()
+        {
+            EditorSceneManager.LoadSceneInPlayMode("Assets/PaperDefense/Scenes/Tests/03_Weapons/Gun.unity",
+                new LoadSceneParameters(LoadSceneMode.Single));
+            yield return null;
+            yield return new WaitForEndOfFrame();
+            var h = Object.FindFirstObjectByType<MechanicsTestScene>();
+            var camera = h.Bootstrap.worldCamera;
+            var a = camera.WorldToViewportPoint(new Vector3(23.5f, 16.5f, 0));
+            var b = camera.WorldToViewportPoint(new Vector3(23.5f, 17.5f, 0));
+            Assert.That(b.y - a.y, Is.GreaterThan(.05f), "Adjacent targets must remain distinguishable in the stand viewport.");
+            foreach (var target in h.Controller.Session.Enemies)
+            {
+                var at = camera.WorldToViewportPoint(new Vector3(target.Position.X, target.Position.Y, 0));
+                Assert.That(at.x, Is.InRange(.08f, .92f));
+                Assert.That(at.y, Is.InRange(.08f, .92f));
+            }
+            var last = SceneManager.GetActiveScene();
+            SceneManager.SetActiveScene(SceneManager.CreateScene("Stand framing verified"));
+            yield return SceneManager.UnloadSceneAsync(last);
+        }
+
         [UnityTest] public IEnumerator IntegrationHonorsBattleHudPauseAndSpeedAndKeepsSingleStepExact()
         {
             EditorSceneManager.LoadSceneInPlayMode("Assets/PaperDefense/Scenes/Tests/13_Integration.unity",
@@ -114,7 +156,7 @@ namespace PaperDefense.Tests
             if (focus == MechanicsTestFocus.Drawing)
             {
                 Assert.That(c.Workshop.Loadout[0].WeaponMounts.Count, Is.EqualTo(3), path);
-                h.CompareDrawing(); Assert.That(h.QualityComparison, Is.Not.Null, path); return;
+                h.CompareDrawing(); Assert.That(h.DrawingComparison, Is.Not.Null, path); return;
             }
             if (focus == MechanicsTestFocus.Profile)
             {

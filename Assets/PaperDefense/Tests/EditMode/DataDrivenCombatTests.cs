@@ -101,7 +101,7 @@ namespace PaperDefense.Tests
                 new StatModifierInput{Stat=ModifierStat.ActionInterval,Operation=ModifierOperation.Multiply,Scope=ModifierScope.AllWeapons,Value=1.2f}}});
             balance.Content=input.CreateSnapshot();var bp=Blueprint(balance,weapon.Id,modules:new[]{new ModuleSelection("tradeoff","module.test.tradeoff")},chassis:"chassis.test");
             Assert.That(bp.Modules,Is.EqualTo(TowerModules.None));Assert.That(TowerCatalog.Cost(bp,balance,MaterialTier.Pencil),Is.EqualTo(33));Assert.That(TowerCatalog.Health(bp,balance,MaterialTier.Pencil),Is.EqualTo(80));
-            Assert.That(TowerCatalog.WeaponRange(bp,balance,weapon.Id),Is.EqualTo(15));Assert.That(TowerCatalog.ActionInterval(bp,balance,weapon.Id,1,1),Is.EqualTo(.6f).Within(.00001));
+            Assert.That(TowerCatalog.WeaponRange(bp,balance,weapon.Id),Is.EqualTo(15));Assert.That(TowerCatalog.ActionInterval(bp,balance,weapon.Id,1),Is.EqualTo(.6f).Within(.00001));
             var session=new GameSession(balance,starterDefenses:false);Assert.That(session.TryBuildBlueprint(new[]{new Cell(12,12)},bp,MaterialTier.Pencil,InkColor.None,out var reason),Is.True,reason);
             Assert.That(session.Ink,Is.EqualTo(467));Assert.That(session.Structures[0].MaxHealth,Is.EqualTo(80));Assert.That(session.Structures[0].ContentId,Is.EqualTo(weapon.Id));Assert.That(session.Statistics.BuiltCount(weapon.Id,MaterialTier.Pencil),Is.EqualTo(1));
         }
@@ -214,8 +214,8 @@ namespace PaperDefense.Tests
             input.Modules.Add(new ModuleDefinitionInput{Id="module.test.interval",Name="Interval",TemplateId="template.test",Modifiers=new List<StatModifierInput>{modifier}});balance.Content=input.CreateSnapshot();
             var blueprint=Blueprint(balance,weapon.Id,modules:new[]{new ModuleSelection("interval","module.test.interval")});
             Assert.That(TowerCatalog.Validate(blueprint,balance,out var reason),Is.True,reason);
-            Assert.That(TowerCatalog.ActionInterval(blueprint,balance,weapon.Id,2,1),Is.EqualTo(balance.Combat.MinimumActionInterval));
-            Assert.That(TowerCatalog.ActionInterval(blueprint,balance,weapon.Id,10,1),Is.EqualTo(balance.Combat.MinimumActionInterval));
+            Assert.That(TowerCatalog.ActionInterval(blueprint,balance,weapon.Id,2),Is.EqualTo(balance.Combat.MinimumActionInterval));
+            Assert.That(TowerCatalog.ActionInterval(blueprint,balance,weapon.Id,10),Is.EqualTo(balance.Combat.MinimumActionInterval));
             modifier.Operation=ModifierOperation.Set;modifier.Value=0;balance.Content=input.CreateSnapshot();
             Assert.That(TowerCatalog.Validate(blueprint,balance,out reason),Is.False);Assert.That(TestText.Resolve(reason),Does.Contain("ActionInterval"));
         }

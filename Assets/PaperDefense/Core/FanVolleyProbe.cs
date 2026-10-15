@@ -30,8 +30,7 @@ namespace PaperDefense.Core
                 double a=angles[i]*Math.PI/180;float d=i==0?distance:Math.Min(range,distance+range*(formation==FanFormation.Split?.06f*((i-1)%3+1):.05f));
                 enemies.Add(new EnemyState { Id=i+1,Position=new Point2(10.5f+(float)Math.Cos(a)*d,10.5f-(float)Math.Sin(a)*d),Health=100,MaxHealth=100 });
             }
-            float quality=source.Origin==DrawingOrigin.LegacyStandard?100:source.Assessment.Quality;
-            var system=new WeaponSystem(rules,quality);var events=new SimulationEventBuffer(256);var stats=new RunStatistics();var shots=new List<ShotEvent>();var frames=new List<TrialFrame>();
+            var system=new WeaponSystem(rules);var events=new SimulationEventBuffer(256);var stats=new RunStatistics();var shots=new List<ShotEvent>();var frames=new List<TrialFrame>();
             frames.Add(new TrialFrame(0,enemies,towers,system.Projectiles,shots));bool completed=false;
             for(int tick=1;tick<=600;tick++)
             {

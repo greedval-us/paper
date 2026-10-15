@@ -64,7 +64,7 @@ namespace PaperDefense.Core
             ValidateValue(ModifierStat.ActionInterval,Math.Max(balance.Combat.MinimumActionInterval,weapon.Stats.ShotInterval),mount,support);
             TowerCatalog.WeaponRange(this,weapon,mount);
             // The production floor is the largest possible interval before module operations.
-            TowerCatalog.ActionInterval(this,weapon,mount,balance,0,1);
+            TowerCatalog.ActionInterval(this,weapon,mount,balance,0);
             ValidateValue(ModifierStat.AcquisitionSeconds,balance.Construction.AcquisitionSeconds,mount,support);
         }
         void ValidateValue(ModifierStat stat,float initial,int mount=0,bool support=false)

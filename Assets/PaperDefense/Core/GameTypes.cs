@@ -89,7 +89,6 @@ namespace PaperDefense.Core
         public float BlotLifetime = 8, BlotBuffSeconds = 4, BlotSpeedBonus = .15f, BlotReduction = .15f;
         public int BlotterCost = 8, WellActivationCost = 45, WellInkPerWave = 12, WaveGold = 8, VictoryGold = 30;
         public float BlotterCooldown = 3, BlotterRadius = 3, WellHealth = 160;
-        public float DrawingMinimumRate = .85f, DrawingMaximumRate = 1;
         public List<StructureDefinition> StructureDefinitions = new List<StructureDefinition>
         {
             new StructureDefinition { Kind = StructureKind.Wall, Cost = 3, MaxHealth = 65, BuildSeconds = 0.35f },

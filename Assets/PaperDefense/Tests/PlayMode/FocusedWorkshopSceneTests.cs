@@ -138,10 +138,10 @@ namespace PaperDefense.Tests
             Assert.That(hud.MortarFootprintEditor.IsOpen, Is.True);
             Click("Close footprint");
             harness.CompareDrawing();
-            Assert.That(harness.QualityComparison, Is.Not.Null);
+            Assert.That(harness.DrawingComparison, Is.Not.Null);
             Assert.That(hud.Draft.IsFreeform, Is.True);
             Assert.That(hud.Draft.FreeformDesign.IsComplete, Is.True);
-            Assert.That(harness.QualityComparison.First.QualityMultiplier, Is.EqualTo(1));
+
             Assert.That(Active("Open trial"), Is.True);
             Assert.That(hud.GetComponentsInChildren<Text>(true).Any(t => t.gameObject.activeInHierarchy && t.text.Contains("Качество:")), Is.False);
             Assert.That(Active("Test sheet"), Is.True);

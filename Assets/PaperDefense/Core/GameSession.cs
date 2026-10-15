@@ -75,7 +75,7 @@ namespace PaperDefense.Core
             frontline = new EnemyState[grid.Length * 3];
             frontlineDistances = new float[grid.Length * 3];
             reservedFrontline = new bool[grid.Length * 3];
-            weapons = new WeaponSystem(balance, null, CreateBlotContext());
+            weapons = new WeaponSystem(balance, CreateBlotContext());
             random = new Random(seed);
             InitializeObjectives();
             if (starterDefenses && Battlefield==null) AddStarterDefenses();

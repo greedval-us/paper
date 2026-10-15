@@ -69,7 +69,7 @@ namespace PaperDefense.Validation
             return result;
         }
 
-        public GameSession CreatePreparedSession(int variant = 0)
+        public GameSession CreatePreparedSession()
         {
             var enemies = new List<PreparedEnemy>(); foreach (var target in targets) enemies.Add(target.Prepare());
             var marks = new List<PreparedBlot>(); foreach (var blot in blots) marks.Add(blot.Prepare());

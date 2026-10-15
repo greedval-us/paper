@@ -321,14 +321,15 @@ namespace PaperDefense.Presentation
         }
 
         public static void Enemy(MeshPen pen, EnemyView enemy, float time, bool compact = false,
-            NotebookAnimationState animation = null, NotebookVisualThemeAsset theme = null, double sampleSeconds = double.NaN, float windupSeconds = 0)
+            NotebookAnimationState animation = null, NotebookVisualThemeAsset theme = null, double sampleSeconds = double.NaN, float windupSeconds = 0,
+            bool showHealth = true)
         {
             if (compact)
             {
                 int first = pen.VertexCount;
                 CompactEnemy(pen, enemy);
                 pen.ScaleFrom(first, new Vector2(enemy.Position.X, enemy.Position.Y), VisualScale(enemy.VisualScale));
-                EnemyMarks(pen, enemy, time, theme); EnemyHealth(pen, enemy); return;
+                EnemyMarks(pen, enemy, time, theme); if (showHealth) EnemyHealth(pen, enemy); return;
             }
             float phase = time + enemy.Id * .137f;
             NotebookEnemyMotion motionKind = animation != null ? animation.Observe(enemy, time, out phase, theme, sampleSeconds, windupSeconds)
@@ -336,7 +337,7 @@ namespace PaperDefense.Presentation
             if (DrawResourceEnemy(pen, enemy.Kind, enemy.DrawingTier, new Vector2(enemy.Position.X, enemy.Position.Y), motionKind, phase, theme, enemy.VisualScale))
             {
                 EnemyMarks(pen, enemy, time, theme);
-                EnemyHealth(pen, enemy);
+                if (showHealth) EnemyHealth(pen, enemy);
                 return;
             }
             int firstFallback = pen.VertexCount;
@@ -394,7 +395,7 @@ namespace PaperDefense.Presentation
                 pen.Line(p + new Vector2(.26f, -.14f), p + new Vector2(.4f, -.26f), .07f, edge);
             }
             pen.ScaleFrom(firstFallback, new Vector2(enemy.Position.X, enemy.Position.Y), VisualScale(enemy.VisualScale));
-            EnemyMarks(pen, enemy, time, theme); EnemyHealth(pen, enemy);
+            EnemyMarks(pen, enemy, time, theme); if (showHealth) EnemyHealth(pen, enemy);
         }
         internal static float VisualScale(float value) => float.IsNaN(value) || float.IsInfinity(value) || value <= 0 ? 1 : value;
         internal static float EnemyHealthRatio(float health, float maximum)

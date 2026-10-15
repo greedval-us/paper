@@ -12,7 +12,6 @@ namespace PaperDefense.Core
         public bool InkWells = true;
         public bool ColorCartridges = true;
         public bool RunUpgrades = true;
-        public bool DrawingQuality = true;
 
         public MechanicsConfiguration CreateSnapshot() => (MechanicsConfiguration)MemberwiseClone();
     }
@@ -26,7 +25,6 @@ namespace PaperDefense.Core
         public bool InkWells { get; }
         public bool ColorCartridges { get; }
         public bool RunUpgrades { get; }
-        public bool DrawingQuality { get; }
 
         MechanicsAvailability(GameBalance balance)
         {
@@ -37,7 +35,6 @@ namespace PaperDefense.Core
             InkWells = balance.EnableInkWells && configuration.InkWells;
             ColorCartridges = configuration.ColorCartridges;
             RunUpgrades = configuration.RunUpgrades;
-            DrawingQuality = configuration.DrawingQuality;
         }
 
         public static MechanicsAvailability Resolve(GameBalance balance)

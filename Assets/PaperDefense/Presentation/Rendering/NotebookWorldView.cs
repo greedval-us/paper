@@ -14,9 +14,21 @@ namespace PaperDefense.Presentation
         public NotebookVisualThemeAsset VisualTheme;
         public NotebookViewSettingsAsset ViewSettings;
         public bool Paused { get; set; }
+        public bool ShowEnemyHealthBars { get; set; } = true;
         public double VisualSeconds => visualClock.Seconds;
         public NotebookAnimationState AnimationState => animation;
         bool showRanges;
+        bool compactBaseMarker;
+        public bool CompactBaseMarker
+        {
+            get => compactBaseMarker;
+            set
+            {
+                if (compactBaseMarker == value) return;
+                compactBaseMarker = value; staticDirty = true;
+                if (session != null && paperPen != null) DrawPaper();
+            }
+        }
         public bool ShowRanges
         {
             get => showRanges;
@@ -282,7 +294,7 @@ namespace PaperDefense.Presentation
             }
             // A ghost planning circle and compass doodle ground the empty starting page.
             Vector2 home = new Vector2(session.BaseCell.X + .5f, session.BaseCell.Y + .5f);
-            p.Ring(home, 6.5f, .04f, new Color(.24f, .42f, .67f, .16f), 120, 1, 7, true);
+            if (!CompactBaseMarker) p.Ring(home, 6.5f, .04f, new Color(.24f, .42f, .67f, .16f), 120, 1, 7, true);
             Vector2 compass = new Vector2(paperWidth - 4, paperHeight - 4.5f);
             p.Ring(compass, .8f, .038f, sketch, 24, 1, 22);
             p.Line(compass + Vector2.down * 1.05f, compass + Vector2.up * 1.05f, .04f, sketch);
@@ -351,7 +363,13 @@ namespace PaperDefense.Presentation
                 DoodleGlyphs.StructureBase(p, structure, Theme, mask);
             }
             Vector2 home = new Vector2(session.BaseCell.X + .5f, session.BaseCell.Y + .5f);
-            DoodleGlyphs.Castle(p, home, session.BaseHealth / session.Balance.BaseHealth, (float)visualClock.Seconds, Theme);
+            if (CompactBaseMarker)
+            {
+                // Prepared targets may share the base's neighbourhood. Keep the base cell visible
+                // without covering those actors with the three-cell decorative castle.
+                p.Ring(home, .38f, .025f, MeshPen.Alpha(NotebookPalette.Blue, .35f), 20);
+            }
+            else DoodleGlyphs.Castle(p, home, session.BaseHealth / session.Balance.BaseHealth, (float)visualClock.Seconds, Theme);
             if (session.Phase == RunPhase.Defeat)
             {
                 p.Line(home + new Vector2(-1.9f, -1.7f), home + new Vector2(1.9f, 1.7f), .13f, MeshPen.Alpha(NotebookPalette.Red, .7f));
@@ -397,7 +415,8 @@ namespace PaperDefense.Presentation
                 float margin = DoodleGlyphs.VisualScale(enemy.VisualScale) + .5f;
                 if (cull && (Mathf.Abs(enemy.Position.X - cameraPosition.x) > halfWidth + margin
                           || Mathf.Abs(enemy.Position.Y - cameraPosition.y) > halfHeight + margin)) continue;
-                DoodleGlyphs.Enemy(p, enemy, time, compactSwarm, animation, Theme, windupSeconds: session.Balance.Enemy(enemy.Kind).WindupSeconds);
+                DoodleGlyphs.Enemy(p, enemy, time, compactSwarm, animation, Theme, windupSeconds: session.Balance.Enemy(enemy.Kind).WindupSeconds,
+                    showHealth: ShowEnemyHealthBars);
             }
             foreach (var death in animation.Deaths)
             {
