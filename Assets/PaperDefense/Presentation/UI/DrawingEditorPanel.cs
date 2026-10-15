@@ -25,6 +25,9 @@ namespace PaperDefense.Presentation
         readonly Dictionary<string, UnityEngine.UI.Button> parts = new Dictionary<string, UnityEngine.UI.Button>(StringComparer.Ordinal);
         readonly Dictionary<DrawingTool, UnityEngine.UI.Button> tools = new Dictionary<DrawingTool, UnityEngine.UI.Button>();
         readonly DrawingStencilBrowser stencils;
+        readonly UnityEngine.UI.Button stencilTab,probeTab;
+        int probeMount;
+        public DrawingProbePanel Probe { get; }
         GameObject partList;
         string partListSignature;
         public DrawingEditSession Session { get; private set; }
@@ -86,7 +89,15 @@ namespace PaperDefense.Presentation
             message = ui.Label(panel.transform, "Drawing live stats", "", new Rect(1096, 267, 440, 90), 18);
             selectedStats = ui.Label(panel.transform, "Drawing selected mount stats", "", new Rect(1096, 359, 440, 100), 18);
             goal = ui.Label(panel.transform, "Drawing goal guidance", "", new Rect(1096, 465, 440, 82), 19);
-            stencils = new DrawingStencilBrowser(panel.transform, ui, context, Insert, Feedback);
+            stencils = new DrawingStencilBrowser(panel.transform, ui, context, Insert, Feedback,context?.Probe==null);
+            if(context?.Probe!=null)
+            {
+                Probe=new DrawingProbePanel(panel.transform,ui,context.Probe,()=>Canvas.HasPendingGesture,Refresh);
+                stencilTab=ui.Button(panel.transform,"Drawing stencils tab",new Rect(1096,553,214,34),UserText.Message("drawing.probe.stencils"),()=>ShowProbe(false));
+                probeTab=ui.Button(panel.transform,"Drawing probe tab",new Rect(1322,553,214,34),UserText.Message("drawing.probe.tab"),()=>ShowProbe(true));
+                Canvas.GestureBegan+=Probe.Invalidate;
+                ShowProbe(false);
+            }
             ui.Button(panel.transform, "Cancel drawing", new Rect(24, 894, 218, 34), Copy("cancel"), () => Close(false));
             applyButton = ui.Button(panel.transform, "Apply drawing", new Rect(754, 894, 318, 34), Copy("apply"), () => Close(true), true);
             ui.Label(panel.transform, "Drawing shortcut hint", Copy("shortcuts"), new Rect(264, 889, 480, 48), 15);
@@ -95,6 +106,8 @@ namespace PaperDefense.Presentation
         }
         public void Open(TowerBlueprint blueprint)
         {
+            Probe?.Reset();probeMount=0;
+            if(blueprint.WeaponMounts.Count>0)probeMount=blueprint.WeaponMounts[0].SlotIndex;
             ClearRejection();
             previousDesign = null; previousPreview = null; previousHash = changeBinding = changeMessage = null;
             var content = context?.Workshop?.Invoke()?.Content ?? blueprint.Content;
@@ -117,10 +130,17 @@ namespace PaperDefense.Presentation
                 if (!design.IsUsable) { Feedback(design.Message); Refresh(); return; }
                 apply?.Invoke(Session.Snapshot);
             }
-            Canvas.CancelGesture(); shade.SetActive(false); panel.SetActive(false);
+            Canvas.CancelGesture();Probe?.Reset();shade.SetActive(false); panel.SetActive(false);
+        }
+        public void ShowProbe(bool visible)
+        {
+            if(Probe==null)return;
+            Probe.Show(visible);stencils.Show(!visible);
+            stencilTab.GetComponent<UnityEngine.UI.Image>().color=visible?Color.white:DrawingWorkbenchUi.Selection;
+            probeTab.GetComponent<UnityEngine.UI.Image>().color=visible?DrawingWorkbenchUi.Selection:Color.white;
         }
         void ClearRejection() { rejectionMessage.text = ""; PositionHelp(); }
-        void Feedback(string reason) { rejectionMessage.text = Resolve(reason); PositionHelp(); }
+        void Feedback(string reason) { Probe?.Invalidate();rejectionMessage.text = Resolve(reason); PositionHelp(); }
         void PositionHelp()
         {
             if (help == null) return;
@@ -181,6 +201,8 @@ namespace PaperDefense.Presentation
             help.text = Resolve(Copy(Canvas.Tool == DrawingTool.Pencil ? "pencil_hint" : Canvas.Tool == DrawingTool.Eraser ? "eraser_hint" : Canvas.Tool == DrawingTool.Move ? "move_hint" : "shape_hint"));
             if (!design.IsUsable) help.text = Resolve(Session.Snapshot.StrokeCount == 0 ? Copy("beginner") : design.Message);
             stencils.Refresh(Canvas.SelectedBinding); Canvas.SetVerticesDirty();
+            if(DrawingBindings.TryMount(Canvas.SelectedBinding,out int selectedMount))probeMount=selectedMount;
+            Probe?.Bind(candidate,probeMount,!design.IsUsable?design.Message:resolved.HasValue&&!resolved.Value.Valid?resolved.Value.Reason:null);
         }
         void RefreshGeometry(TowerBlueprint candidate, FreeformTowerDesign design, TowerPreview? resolved)
         {

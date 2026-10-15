@@ -28,6 +28,7 @@ namespace PaperDefense.Presentation
         InputSettings inputSettings;
         public event Action Changed;
         public event Action Edited;
+        public event Action GestureBegan;
         public event Action<string> Rejected;
         public event Action EscapeRequested;
         public bool HasPendingGesture => drawing || panning;
@@ -96,7 +97,7 @@ namespace PaperDefense.Presentation
             if (e.button == PointerEventData.InputButton.Middle)
             { if (!Local(e, out pointerStart)) return; panning = true; panStart = pan; return; }
             if (!Point(e, false, out var point)) return;
-            drawing = true; pending.Add(point); SetVerticesDirty();
+            drawing = true; pending.Add(point); SetVerticesDirty(); GestureBegan?.Invoke();
         }
         public void OnDrag(PointerEventData e)
         {

@@ -13,6 +13,7 @@ namespace PaperDefense.Presentation
         public Func<TowerBlueprint, TowerPreview> Preview { get; set; }
         public Func<WorkshopReadModel> Workshop { get; set; }
         public DrawingAidPurchase Purchase { get; set; }
+        public Func<TowerBlueprint,int,float,DrawingProbeFormation,DrawingProbeReport> Probe { get; set; }
     }
 
     internal sealed class DrawingWorkbenchUi

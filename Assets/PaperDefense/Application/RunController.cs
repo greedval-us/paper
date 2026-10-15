@@ -300,6 +300,8 @@ namespace PaperDefense.Application
         public FootprintStudyReport CompareMortarForms(TowerBlueprint blueprint,int mount)
             => FootprintStudy.Run(blueprint,mount,session.Balance);
         public ArmorProbeReport ProbeArmor(TowerBlueprint blueprint,int side=-1)=>ArmorProbe.Run(blueprint,session.Balance,side);
+        public DrawingProbeReport ProbeDrawing(TowerBlueprint blueprint,int mount,float distance,DrawingProbeFormation formation)
+            =>DrawingProbe.Run(blueprint,mount,distance,formation,session.Balance);
         public float ArmorDefense(TowerBlueprint blueprint)=>TowerCatalog.Defense(blueprint,session.Balance);
         public float MaximumStructureDefense=>session.Balance.Effects.MaximumDefense;
         public FanVolleyProbeReport ProbeFanVolley(TowerBlueprint blueprint,int mount,FanFormation formation)

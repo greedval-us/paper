@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PaperDefense.Presentation
 {
     /// <summary>Two views share their owner's clock; world X and Y use one letterboxed scale.</summary>
-    public sealed class FootprintProbeSketch : UnityEngine.UI.Graphic
+    public sealed class FootprintProbeSketch : UnityEngine.UI.MaskableGraphic
     {
         IReadOnlyList<TrialFrame> frames;
         Func<float> clock;

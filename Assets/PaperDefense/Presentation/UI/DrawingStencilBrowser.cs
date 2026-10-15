@@ -29,11 +29,14 @@ namespace PaperDefense.Presentation
         WorkshopReadModel ownershipSource;
         bool ownershipDirty = true;
         DrawingStencilRole? currentRole;
+        readonly GameObject pane;
+        public void Show(bool visible)=>pane.SetActive(visible);
 
-        public DrawingStencilBrowser(Transform parent, DrawingWorkbenchUi ui, DrawingEditorContext context, Action<DrawingUnlockDefinition> insert, Action<string> feedback)
+        public DrawingStencilBrowser(Transform parent, DrawingWorkbenchUi ui, DrawingEditorContext context, Action<DrawingUnlockDefinition> insert, Action<string> feedback, bool heading=true)
         {
             this.ui = ui; this.context = context; this.insert = insert; this.feedback = feedback;
-            ui.Label(parent, "Drawing stencil heading", UserText.Message("drawing.workbench.stencils"), new Rect(1096, 553, 440, 34), 22, NotebookPalette.Blue);
+            pane=DrawingWorkbenchUi.Box(parent,"Drawing stencil pane",new Rect(0,0,1560,940),Color.clear).gameObject;parent=pane.transform;
+            if(heading)ui.Label(parent, "Drawing stencil heading", UserText.Message("drawing.workbench.stencils"), new Rect(1096, 553, 440, 34), 22, NotebookPalette.Blue);
             gold = ui.Label(parent, "Drawing stencil gold", "", new Rect(1096, 587, 440, 31), 21);
             note = ui.Label(parent, "Drawing gold source", UserText.Message("drawing.workbench.gold_source"), new Rect(1096, 620, 440, 52), 17);
             var root = DrawingWorkbenchUi.Box(parent, "Drawing stencils", new Rect(1096, 679, 440, 169), new Color(.92f, .94f, .93f), true);

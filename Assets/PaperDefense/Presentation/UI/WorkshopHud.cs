@@ -114,7 +114,7 @@ namespace PaperDefense.Presentation
                 FanVolleyEditor = new FanVolleyPanel(root,font,value=>{Draft=value;Refresh();},run.ProbeFanVolley,TextResolver);
                 ReinforcementEditor=new ArmorReinforcementPanel(root,font,value=>{Draft=value;Refresh();},run.ProbeArmor,run.ArmorDefense,run.MaximumStructureDefense,TextResolver);
                 DrawingEditor = new DrawingEditorPanel(root, font, drawing => { CloseGeometryEditors(); Draft = Draft.WithFreeformDrawing(drawing); SetStatus(UserText.Message(Mode == WorkshopHudMode.Drawing ? "workshop.drawing_hint" : "copy.65c92ef5c0dfe24a")); }, TextResolver,
-                    context: new DrawingEditorContext { Preview = candidate => run.PreviewBlueprint(candidate), Workshop = () => run.Workshop, Purchase = run.UnlockDrawingAid });
+                    context: new DrawingEditorContext { Preview = candidate => run.PreviewBlueprint(candidate), Workshop = () => run.Workshop, Purchase = run.UnlockDrawingAid, Probe=run.ProbeDrawing });
             }
             if (title != null) title.SetTextWithoutNotify(Resolve(Draft.Name));
             run.WorkshopChanged += Refresh;
