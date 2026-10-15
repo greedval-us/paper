@@ -1,0 +1,26 @@
+- generic [active] [ref=f3e1]:
+  - main [ref=f3e2]:
+    - generic [ref=f3e3]:
+      - generic [ref=f3e4]:
+        - generic [ref=f3e5]: Держи линию
+        - generic [ref=f3e8]:
+          - generic [ref=f3e9]:
+            - generic [ref=f3e10]: ✦
+            - text: "240"
+            - generic [ref=f3e11]: золота
+          - button "Настройки" [ref=f3e12] [cursor=pointer]
+      - generic [ref=f3e15]:
+        - generic [ref=f3e16]:
+          - generic [ref=f3e17]: Оборона, которую ты нарисовал
+          - heading "Твоя линия. Твои правила." [level=1] [ref=f3e19]: Твоя линия.Твои правила.
+          - paragraph [ref=f3e20]: Собери башню, нарисуй её характер и защити страницу от каракулей.
+          - button "Начать игру" [ref=f3e21] [cursor=pointer]
+          - generic [ref=f3e24]: Первый рубеж · 8 волн
+        - generic [ref=f3e28]: Всё начинается с одного штриха
+      - generic [ref=f3e216]:
+        - navigation [ref=f3e217]:
+          - button "Мастерская" [ref=f3e218] [cursor=pointer]
+          - button "Настройки" [ref=f3e221] [cursor=pointer]
+          - button "Как играть" [ref=f3e224] [cursor=pointer]
+        - button "Выйти" [ref=f3e227] [cursor=pointer]
+  - status

@@ -1,0 +1,170 @@
+{
+  "title": "Держи линию — Чистый лист",
+  "version": "1.0",
+  "date": "2026-10-15",
+  "kind": "UI design sketches, not a game build",
+  "screenCount": 30,
+  "gameScreensAndStates": 28,
+  "designSystemPages": 2,
+  "pngResolution": {
+    "width": 1600,
+    "height": 1000
+  },
+  "layoutChecks": 90,
+  "interactionChecks": 17,
+  "entryPoint": "index.html",
+  "specification": "DESIGN.md",
+  "tokens": "tokens.json",
+  "screens": [
+    {
+      "id": "home",
+      "title": "Главное меню",
+      "png": "screens/home.png"
+    },
+    {
+      "id": "map",
+      "title": "Карта · первый рубеж",
+      "png": "screens/map.png"
+    },
+    {
+      "id": "preparation",
+      "title": "Подготовка к миссии",
+      "png": "screens/preparation.png"
+    },
+    {
+      "id": "foundation",
+      "title": "Основа башни",
+      "png": "screens/foundation.png"
+    },
+    {
+      "id": "weapons",
+      "title": "Оружие и дополнения",
+      "png": "screens/weapons.png"
+    },
+    {
+      "id": "drawing",
+      "title": "Рисунок башни",
+      "png": "screens/drawing.png"
+    },
+    {
+      "id": "details",
+      "title": "Рабочая геометрия",
+      "png": "screens/details.png"
+    },
+    {
+      "id": "review",
+      "title": "Проверка и сохранение",
+      "png": "screens/review.png"
+    },
+    {
+      "id": "album",
+      "title": "Альбом чертежей",
+      "png": "screens/album.png"
+    },
+    {
+      "id": "trial",
+      "title": "Испытание на полигоне",
+      "png": "screens/trial.png"
+    },
+    {
+      "id": "stencils",
+      "title": "Заготовки рисунка",
+      "png": "screens/stencils.png"
+    },
+    {
+      "id": "mortar",
+      "title": "Отпечаток мортиры",
+      "png": "screens/mortar.png"
+    },
+    {
+      "id": "fan",
+      "title": "Направления веера",
+      "png": "screens/fan.png"
+    },
+    {
+      "id": "armor",
+      "title": "Усиление корпуса",
+      "png": "screens/armor.png"
+    },
+    {
+      "id": "planning",
+      "title": "Бой · подготовка",
+      "png": "screens/planning.png"
+    },
+    {
+      "id": "battle",
+      "title": "Бой · волна идёт",
+      "png": "screens/battle.png"
+    },
+    {
+      "id": "tower",
+      "title": "Выбранная башня",
+      "png": "screens/tower.png"
+    },
+    {
+      "id": "pause",
+      "title": "Пауза",
+      "png": "screens/pause.png"
+    },
+    {
+      "id": "upgrades",
+      "title": "Усиление между волнами",
+      "png": "screens/upgrades.png"
+    },
+    {
+      "id": "victory",
+      "title": "Победа",
+      "png": "screens/victory.png"
+    },
+    {
+      "id": "defeat",
+      "title": "Поражение",
+      "png": "screens/defeat.png"
+    },
+    {
+      "id": "settings",
+      "title": "Настройки",
+      "png": "screens/settings.png"
+    },
+    {
+      "id": "help",
+      "title": "Как играть",
+      "png": "screens/help.png"
+    },
+    {
+      "id": "empty",
+      "title": "Пустой альбом",
+      "png": "screens/empty.png"
+    },
+    {
+      "id": "purchase",
+      "title": "Открытие детали",
+      "png": "screens/purchase.png"
+    },
+    {
+      "id": "save-error",
+      "title": "Ошибка сохранения",
+      "png": "screens/save-error.png"
+    },
+    {
+      "id": "invalid",
+      "title": "Незаконченный рисунок",
+      "png": "screens/invalid.png"
+    },
+    {
+      "id": "leave",
+      "title": "Выход из боя",
+      "png": "screens/leave.png"
+    },
+    {
+      "id": "system",
+      "title": "Компоненты и токены",
+      "png": "screens/system.png"
+    },
+    {
+      "id": "flow",
+      "title": "Карта экранов",
+      "png": "screens/flow.png"
+    }
+  ]
+}

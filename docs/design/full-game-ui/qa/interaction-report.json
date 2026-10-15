@@ -1,0 +1,72 @@
+{
+  "checks": [
+    {
+      "name": "Frame navigation updates album",
+      "passed": true
+    },
+    {
+      "name": "Main game route complete",
+      "passed": true
+    },
+    {
+      "name": "Pause blocks background input",
+      "passed": true
+    },
+    {
+      "name": "Settings returns to pause",
+      "passed": true
+    },
+    {
+      "name": "Preview viewport switches",
+      "passed": true
+    },
+    {
+      "name": "Text scale reaches frame",
+      "passed": true
+    },
+    {
+      "name": "Navigation search",
+      "passed": true
+    },
+    {
+      "name": "Blueprint search",
+      "passed": true
+    },
+    {
+      "name": "Drawing dimensions expand",
+      "passed": true
+    },
+    {
+      "name": "Result retains detailed statistics",
+      "passed": true
+    },
+    {
+      "name": "Invalid draft does not claim readiness",
+      "passed": true
+    },
+    {
+      "name": "Empty barrel trial disabled",
+      "passed": true
+    },
+    {
+      "name": "Dialog initial focus is safe",
+      "passed": true
+    },
+    {
+      "name": "Dialog traps focus",
+      "passed": true
+    },
+    {
+      "name": "Escape cancels leaving",
+      "passed": true
+    },
+    {
+      "name": "All buttons have labels",
+      "passed": true
+    },
+    {
+      "name": "Every navigation target exists",
+      "passed": true
+    }
+  ]
+}

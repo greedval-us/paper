@@ -1,0 +1,816 @@
+{
+  "checked": 90,
+  "errors": [],
+  "results": [
+    {
+      "id": "home",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "home",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "map",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "map",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "preparation",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "preparation",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "foundation",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "foundation",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "weapons",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "weapons",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "drawing",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "drawing",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "details",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "details",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "review",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "review",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "album",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "album",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "trial",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "trial",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "stencils",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "stencils",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "mortar",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "mortar",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "fan",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "fan",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "armor",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "armor",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "planning",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "planning",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "battle",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "battle",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "tower",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "tower",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "pause",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "pause",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "upgrades",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "upgrades",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "victory",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "victory",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "defeat",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "defeat",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "settings",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "settings",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "help",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "help",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "empty",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "empty",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "purchase",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "purchase",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "save-error",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "save-error",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "invalid",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "invalid",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "leave",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "leave",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "system",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "system",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "flow",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "flow",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "home",
+      "width": 1024,
+      "height": 768,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "drawing",
+      "width": 1024,
+      "height": 768,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "battle",
+      "width": 1024,
+      "height": 768,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "preparation",
+      "width": 1024,
+      "height": 768,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "settings",
+      "width": 1024,
+      "height": 768,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "home",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "drawing",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "battle",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "preparation",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "settings",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "home",
+      "width": 2560,
+      "height": 1080,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "drawing",
+      "width": 2560,
+      "height": 1080,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "battle",
+      "width": 2560,
+      "height": 1080,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "preparation",
+      "width": 2560,
+      "height": 1080,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "settings",
+      "width": 2560,
+      "height": 1080,
+      "scale": 1,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "home",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1.25,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "drawing",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1.25,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "battle",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1.25,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "preparation",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1.25,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "settings",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1.25,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "home",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1.5,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "drawing",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1.5,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "battle",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1.5,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "preparation",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1.5,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "settings",
+      "width": 1600,
+      "height": 1000,
+      "scale": 1.5,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "home",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.5,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "drawing",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.5,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "battle",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.5,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "preparation",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.5,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    },
+    {
+      "id": "settings",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.5,
+      "bodyOverflow": false,
+      "outside": [],
+      "horizontal": []
+    }
+  ]
+}
