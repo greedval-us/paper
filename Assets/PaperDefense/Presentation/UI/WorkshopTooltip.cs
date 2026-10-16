@@ -33,7 +33,11 @@ namespace PaperDefense.Presentation
         internal void FollowCaption(UnityEngine.UI.Text text) => caption = text;
 
         public void OnPointerEnter(PointerEventData eventData) { if (Visible) owner?.ShowTooltip(this); }
-        public void OnSelect(BaseEventData eventData) { if (Visible) owner?.ShowTooltip(this); }
+        public void OnSelect(BaseEventData eventData)
+        {
+            if (!(eventData is PointerEventData) && Target != null) UiScrollFocus.Reveal(Target);
+            if (Visible) owner?.ShowTooltip(this);
+        }
         public void OnPointerExit(PointerEventData eventData) => owner?.HideTooltip(this);
         public void OnDeselect(BaseEventData eventData) => owner?.HideTooltip(this);
         public void OnPointerDown(PointerEventData eventData) => owner?.HideTooltip(this);

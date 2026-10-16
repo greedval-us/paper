@@ -187,14 +187,22 @@ namespace PaperDefense.Presentation
             area.sizeDelta = new Vector2(840, height);
             bool shortPage = height < 680;
             var viewport = (RectTransform)Canvas.transform.parent;
-            float left = shortPage ? 138 : 90, canvasHeight = height - 290;
-            WorkshopUi.Place(viewport, new Rect(left, 174, 816 - left, canvasHeight));
+            float left = shortPage ? 138 : 90, top = shortPage ? 154 : 174;
+            float canvasHeight = height - (shortPage ? 266 : 290);
+            var title = main.Find("Guided drawing title").GetComponent<UnityEngine.UI.Text>();
+            title.fontSize = shortPage ? 28 : 32;
+            WorkshopUi.Place(title.rectTransform, new Rect(24, shortPage ? 10 : 14, 530, shortPage ? 42 : 48));
+            WorkshopUi.Place(hint.rectTransform, new Rect(24, shortPage ? 56 : 64, 792, 26));
+            WorkshopUi.Place(lastChange.rectTransform, new Rect(24, shortPage ? 82 : 92, 792, 24));
+            var partTabs = main.Find("Guided drawing parts") as RectTransform;
+            if (partTabs != null) WorkshopUi.Place(partTabs, new Rect(24, shortPage ? 108 : 116, 792, 42));
+            WorkshopUi.Place(viewport, new Rect(left, top, 816 - left, canvasHeight));
             WorkshopUi.Place(Canvas.rectTransform, new Rect(0, 0, 816 - left, canvasHeight));
             int i = 0;
             foreach (var pair in tools)
             {
                 WorkshopUi.Place((RectTransform)pair.Value.transform, shortPage
-                    ? new Rect(24 + i % 2 * 54, 174 + i / 2 * 54, 48, 48)
+                    ? new Rect(24 + i % 2 * 54, top + i / 2 * 54, 48, 48)
                     : new Rect(24, 180 + i * 64, 52, 52));
                 i++;
             }
@@ -204,13 +212,13 @@ namespace PaperDefense.Presentation
             foreach (string key in row)
             {
                 var item = main.Find("Guided drawing " + key) as RectTransform;
-                if (item != null) item.anchoredPosition = new Vector2(item.anchoredPosition.x, -(height - 116));
+                if (item != null) item.anchoredPosition = new Vector2(item.anchoredPosition.x, -(height - (shortPage ? 104 : 116)));
             }
             string[] bottom = { "width label", "width smaller", "width larger", "height label", "height smaller", "height larger", "next part" };
             foreach (string key in bottom)
             {
                 var item = main.Find("Guided drawing " + key) as RectTransform;
-                if (item != null) item.anchoredPosition = new Vector2(item.anchoredPosition.x, -(height - 64));
+                if (item != null) item.anchoredPosition = new Vector2(item.anchoredPosition.x, -(height - (shortPage ? 58 : 64)));
             }
         }
 

@@ -13,9 +13,62 @@ namespace PaperDefense.Presentation
         public Action<string> Display;
         public void OnPointerEnter(PointerEventData e) => Display?.Invoke(Message);
         public void OnPointerExit(PointerEventData e) => Display?.Invoke("");
-        public void OnSelect(BaseEventData e) => Display?.Invoke(Message);
-        public void OnDeselect(BaseEventData e) => Display?.Invoke("");
-        void OnDisable() => Display?.Invoke("");
+        public void OnSelect(BaseEventData e)
+        {
+            bool keyboard = !(e is PointerEventData);
+            SetFocus(keyboard);
+            if (keyboard) UiScrollFocus.Reveal((RectTransform)transform);
+            Display?.Invoke(Message);
+        }
+        public void OnDeselect(BaseEventData e) { SetFocus(false); Display?.Invoke(""); }
+        void OnDisable() { SetFocus(false); Display?.Invoke(""); }
+        void SetFocus(bool value)
+        {
+            var card = GetComponent<PlayerCardGraphic>();
+            if (card == null || card.Focused == value) return;
+            card.Focused = value; card.SetVerticesDirty();
+        }
+    }
+
+    /// <summary>Keep keyboard navigation visible, including controls inside nested scroll views.</summary>
+    public sealed class UiScrollFocus : MonoBehaviour, ISelectHandler
+    {
+        static readonly Vector3[] corners = new Vector3[4];
+        public void OnSelect(BaseEventData eventData)
+        {
+            if (!(eventData is PointerEventData)) Reveal((RectTransform)transform);
+        }
+        public static void Reveal(RectTransform target)
+        {
+            Canvas.ForceUpdateCanvases();
+            for (var parent = target.parent; parent != null; parent = parent.parent)
+            {
+                var scroll = parent.GetComponent<ScrollRect>();
+                if (scroll == null || !scroll.isActiveAndEnabled || scroll.content == null || !target.IsChildOf(scroll.content)) continue;
+                var viewport = scroll.viewport != null ? scroll.viewport : (RectTransform)scroll.transform;
+                var control = BoundsIn(viewport, target);
+                var content = BoundsIn(viewport, scroll.content);
+                Rect view = viewport.rect;
+                Vector2 position = scroll.normalizedPosition;
+                float dx = control.min.x < view.xMin + 4 ? view.xMin + 4 - control.min.x :
+                    control.max.x > view.xMax - 4 ? view.xMax - 4 - control.max.x : 0;
+                float dy = control.max.y > view.yMax - 4 ? view.yMax - 4 - control.max.y :
+                    control.min.y < view.yMin + 4 ? view.yMin + 4 - control.min.y : 0;
+                if (scroll.horizontal && content.size.x > view.width)
+                    position.x = Mathf.Clamp01(position.x - dx / (content.size.x - view.width));
+                if (scroll.vertical && content.size.y > view.height)
+                    position.y = Mathf.Clamp01(position.y - dy / (content.size.y - view.height));
+                scroll.StopMovement(); scroll.normalizedPosition = position;
+            }
+            Canvas.ForceUpdateCanvases();
+        }
+        static Bounds BoundsIn(RectTransform viewport, RectTransform target)
+        {
+            target.GetWorldCorners(corners);
+            var bounds = new Bounds(viewport.InverseTransformPoint(corners[0]), Vector3.zero);
+            for (int i = 1; i < corners.Length; i++) bounds.Encapsulate(viewport.InverseTransformPoint(corners[i]));
+            return bounds;
+        }
     }
 
     /// <summary>Shared visual primitives for the player screens. Copy lives in a dedicated text asset.</summary>

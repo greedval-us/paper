@@ -22,6 +22,7 @@ namespace PaperDefense.Presentation
 
         readonly RectTransform context;
         bool showSummary;
+        string toolHint = "";
         static readonly string[] Captions = { "Башня 1", "Башня 2", "Башня 3", "Башня 4", "Стена", "Шипы", "Смола", "Ремонт", "Ластик", "Улучшить", "Промокашка", "Окраска" };
         static readonly string[] Keys = { "1", "2", "3", "4", "5", "6", "7", "8", "E", "U", "B", "C" };
         readonly Text[] names = new Text[4];
@@ -121,6 +122,7 @@ namespace PaperDefense.Presentation
             }
             ui.IconButton(dock, "Battle context toggle", new Rect(w - 64, narrow ? 150 : stripY, 48, 30), PlayerIcon.Help, "Сводка поля", () => { showSummary = !showSummary; Refresh(); });
             selection = ui.Label(root, "", new Rect(24, layout.Dock.y - 28, layout.Width - 48, 24), 15, PlayerUi.Ink, alignment: TextAnchor.MiddleCenter);
+            selection.name = "Battle tool hint";
             message = ui.Label(root, "", new Rect(40, layout.Field.y + 4, layout.Width - 80, 26), 16, PlayerUi.Ink, alignment: TextAnchor.MiddleCenter);
             float contextH = Mathf.Min(252, layout.Field.height - 16);
             context = ui.Panel(root, "Battle context", new Rect(layout.Field.xMax - 288, layout.Field.y + 8, 280, contextH), PlayerUi.Card, true);
@@ -142,6 +144,8 @@ namespace PaperDefense.Presentation
             while (length > 1 && label.preferredWidth > label.rectTransform.rect.width)
                 label.text = value.Substring(0, --length).TrimEnd() + "…";
         }
+
+        public void ShowHint(string value) { toolHint = value ?? ""; Refresh(); }
 
         void Select(int index)
         {
@@ -182,13 +186,22 @@ namespace PaperDefense.Presentation
                   "\nПрочность " + Mathf.CeilToInt(inspected.Value.Health) + " / " + Mathf.CeilToInt(inspected.Value.MaxHealth) +
                   "\n" + (inspected.Value.IsComplete ? "Готова к обороне" : "Строится") + "\nP над башней — приоритет"
                 : "Сводка обороны\nНажми на постройку,\nчтобы увидеть её состояние";
+            float towerHeight = Mathf.Ceil(towerInfo.preferredHeight);
+            PlayerUi.Place(towerInfo.rectTransform, new Rect(4, 0, 238, towerHeight));
+            float statsHeight = showSummary ? Mathf.Ceil(fieldStats.preferredHeight) : 0;
+            PlayerUi.Place(fieldStats.rectTransform, new Rect(4, towerHeight + 12, 238, statsHeight));
+            var contextContent = (RectTransform)towerInfo.transform.parent;
+            float contextHeight = contextContent.parent.GetComponent<ScrollRect>().viewport.rect.height;
+            contextContent.sizeDelta = new Vector2(contextContent.sizeDelta.x, Mathf.Max(contextHeight, towerHeight + (showSummary ? statsHeight + 12 : 0)));
             speedValue.text = "×" + game.Run.Speed;
             bool active = game.Page == PlayerPage.Battle;
             launch.interactable = active && !s.PendingUpgrade && (s.Phase == RunPhase.Planning || s.Phase == RunPhase.Intermission);
             message.text = game.Run.Workshop.HasUnsavedChanges ? GameText.Resolve(game.Run.Workshop.SaveMessage) : input.Message;
             int selected = input.Mode == DrawingMode.Erase ? 8 : input.Mode == DrawingMode.Upgrade ? 9 : input.Mode == DrawingMode.Blotter ? 10 : input.Mode == DrawingMode.Paint ? 11 : input.BlueprintSlot >= 0 ? input.BlueprintSlot : -1;
             if (selected < 0) for (int i = 0; i < Construction.Length; i++) if (input.Tool == Construction[i]) selected = i + 4;
-            selection.text = input.PreviewReason.Length > 0 ? input.PreviewReason : ui.T("selection", ui.T("tool_" + Mathf.Max(0, selected)), ui.T("material_" + (int)input.Tier));
+            string selectedName = selected >= 0 && selected < 4 && selected < game.Run.BuildLoadout.Count
+                ? GameText.Resolve(game.Run.BuildLoadout[selected].Name) : ui.T("tool_" + Mathf.Max(0, selected));
+            selection.text = input.PreviewReason.Length > 0 ? input.PreviewReason : ui.T("selection", selectedName, ui.T("material_" + (int)input.Tier));
             for (int i = 0; i < tools.Length; i++)
             {
                 bool available = true; int cost = 0;
@@ -211,11 +224,12 @@ namespace PaperDefense.Presentation
                 if (i == 10) available = s.Balance.Mechanics.CorpseBlots;
                 if (i == 11) available = s.Balance.Mechanics.ColorCartridges;
                 string reason = !available ? "Недоступно в этой миссии" : cost > s.Ink ? "Не хватает " + (cost - s.Ink) + " штрихов" : "";
-                tools[i].GetComponent<PlayerTooltip>().Message = Keys[i] + " · " + (i < 4 ? displayedNames[i] : ui.T("tool_" + i)) + (reason.Length > 0 ? " · " + reason : "");
+                tools[i].GetComponent<PlayerTooltip>().Message = (i < 4 ? Keys[i] + " · " + displayedNames[i] : ui.T("tool_" + i)) + (reason.Length > 0 ? " · " + reason : "");
                 prices[i].color = cost > s.Ink ? PlayerUi.Muted : PlayerUi.Ink;
                 if (selected == i && cost > s.Ink && input.PreviewReason.Length == 0) selection.text = reason;
                 tools[i].interactable = active && available; ui.MarkSelected(tools[i], selected == i);
             }
+            FitCaption(selection, toolHint.Length > 0 ? toolHint : selection.text);
             for (int i = 0; i < materials.Length; i++) { ui.MarkSelected(materials[i], (int)input.Tier == i); materials[i].interactable = active; }
             for (int i = 0; i < colors.Length; i++)
             {

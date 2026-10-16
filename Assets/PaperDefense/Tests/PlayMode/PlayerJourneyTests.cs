@@ -37,6 +37,124 @@ namespace PaperDefense.Tests
             Assert.Fail("Missing active control: " + name); return null;
         }
 
+        [UnityTest] public IEnumerator KeyboardFocusRevealsPlayerControlsInBothScrollDirections()
+        { yield return CheckScrollFocus(false); }
+
+        [UnityTest] public IEnumerator KeyboardFocusRevealsWorkshopControlsInBothScrollDirections()
+        { yield return CheckScrollFocus(true); }
+
+        IEnumerator CheckScrollFocus(bool workshop)
+        {
+            var ui = new PlayerUi();
+            var parent = root.GetComponentInChildren<Canvas>().transform;
+            foreach (bool horizontal in new[] { false, true })
+            {
+                var content = ui.Scroll(parent, "Focus fixture", new Rect(20, 20, 260, 160), 600);
+                var scroll = content.parent.GetComponent<ScrollRect>();
+                scroll.horizontal = horizontal; scroll.vertical = !horizontal;
+                content.sizeDelta = horizontal ? new Vector2(600, 160) : new Vector2(260, 600);
+                Rect bounds = horizontal ? new Rect(440, 20, 140, 44) : new Rect(20, 500, 140, 44);
+                var button = workshop
+                    ? new WorkshopUi().Button(content, "Focus target", bounds, "Инструмент", () => { })
+                    : ui.Button(content, "Focus target", bounds, PlayerIcon.Pencil, "Инструмент", () => { });
+                Canvas.ForceUpdateCanvases(); yield return null;
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(button.gameObject);
+                yield return null; Canvas.ForceUpdateCanvases();
+                var corners = new Vector3[4]; ((RectTransform)button.transform).GetWorldCorners(corners);
+                foreach (var corner in corners)
+                {
+                    Vector3 p = scroll.viewport.InverseTransformPoint(corner);
+                    Assert.That(p.x, Is.InRange(scroll.viewport.rect.xMin - 1, scroll.viewport.rect.xMax + 1), "Focused control must be visible horizontally.");
+                    Assert.That(p.y, Is.InRange(scroll.viewport.rect.yMin - 1, scroll.viewport.rect.yMax + 1), "Focused control must be visible vertically.");
+                }
+                Object.Destroy(scroll.gameObject); yield return null;
+            }
+        }
+
+        [UnityTest] public IEnumerator KeyboardFocusRevealsNestedScrollAndClearsItsMarkOnDeselect()
+        {
+            var ui = new PlayerUi();
+            var outer = ui.Scroll(root.GetComponentInChildren<Canvas>().transform, "Outer focus fixture", new Rect(20, 20, 280, 200), 800);
+            var inner = ui.Scroll(outer, "Inner focus fixture", new Rect(10, 450, 260, 160), 600);
+            var button = ui.Button(inner, "Nested focus target", new Rect(20, 500, 140, 44), PlayerIcon.Pencil, "Инструмент", () => { });
+            var events = UnityEngine.EventSystems.EventSystem.current;
+            yield return null; events.SetSelectedGameObject(button.gameObject); yield return null;
+            foreach (var content in new[] { inner, outer })
+            {
+                var viewport = content.parent.GetComponent<ScrollRect>().viewport;
+                var corners = new Vector3[4]; ((RectTransform)button.transform).GetWorldCorners(corners);
+                foreach (var corner in corners)
+                    Assert.That(viewport.InverseTransformPoint(corner).y, Is.InRange(viewport.rect.yMin - 1, viewport.rect.yMax + 1));
+            }
+            Assert.That(button.GetComponent<PlayerCardGraphic>().Focused, Is.True);
+            events.SetSelectedGameObject(null);
+            Assert.That(button.GetComponent<PlayerCardGraphic>().Focused, Is.False);
+        }
+
+        [UnityTest] public IEnumerator DrawingSummaryFollowsTheVisibleSheetAndStageChangesResetScroll()
+        {
+            game.Navigate(PlayerPage.Workshop); yield return null;
+            game.SetInterfaceScale(1.5f);
+            var wizard = root.GetComponentInChildren<WorkshopHud>().Guided;
+            wizard.Next(); wizard.Next(); yield return null; yield return null;
+            var nodes = root.GetComponentsInChildren<RectTransform>(true);
+            var area = System.Array.Find(nodes, x => x.name == "Guided drawing work area");
+            var summary = System.Array.Find(nodes, x => x.name == "Guided drawing summary");
+            var scroll = System.Array.Find(root.GetComponentsInChildren<ScrollRect>(), x => x.name == "Workshop responsive scroll");
+            if (summary.anchoredPosition.x < 1)
+                Assert.That(-summary.anchoredPosition.y - area.rect.height * area.localScale.y, Is.EqualTo(20).Within(1));
+            else Assert.That(summary.anchoredPosition.y, Is.EqualTo(0).Within(1));
+            scroll.verticalNormalizedPosition = 0;
+            wizard.GoToStep(1); yield return null; yield return null;
+            Assert.That(scroll.verticalNormalizedPosition, Is.EqualTo(1).Within(.01f));
+            scroll.verticalNormalizedPosition = 0;
+            wizard.GoToStep(0); yield return null; yield return null;
+            Assert.That(scroll.verticalNormalizedPosition, Is.EqualTo(1).Within(.01f));
+        }
+
+        [UnityTest] public IEnumerator WorkshopFocusAlsoRevealsTheEmbeddedProbeAndEditableName()
+        {
+            game.Navigate(PlayerPage.Workshop); game.SetInterfaceScale(1.5f); yield return null;
+            var wizard = root.GetComponentInChildren<WorkshopHud>().Guided;
+            wizard.Next(); wizard.Next();
+            var session = wizard.Drawing.Session;
+            session.AddRectangle(DrawingBindings.Base, new DrawingPoint(-.35f, -.35f), new DrawingPoint(.35f, .35f), out _);
+            foreach (var mount in session.Blueprint.WeaponMounts)
+                session.AddRectangle(DrawingBindings.Mount(mount.SlotIndex), new DrawingPoint(-.0625f, 0), new DrawingPoint(.0625f, .5f), out _);
+            wizard.Drawing.Canvas.FinishStroke(); yield return null; yield return null;
+            var probe = Find("Drawing probe fire");
+            var events = UnityEngine.EventSystems.EventSystem.current;
+            events.SetSelectedGameObject(probe.gameObject); yield return null;
+            AssertVisibleInWorkshop((RectTransform)probe.transform);
+            Assert.That(wizard.Next(), Is.True); yield return null; yield return null;
+            var field = System.Array.Find(root.GetComponentsInChildren<InputField>(), x => x.name == "Wizard name");
+            var scroll = System.Array.Find(root.GetComponentsInChildren<ScrollRect>(), x => x.name == "Workshop responsive scroll");
+            scroll.verticalNormalizedPosition = 0;
+            events.SetSelectedGameObject(field.gameObject); yield return null;
+            AssertVisibleInWorkshop((RectTransform)field.transform);
+        }
+
+        void AssertVisibleInWorkshop(RectTransform target)
+        {
+            var viewport = System.Array.Find(root.GetComponentsInChildren<ScrollRect>(), x => x.name == "Workshop responsive scroll").viewport;
+            var corners = new Vector3[4]; target.GetWorldCorners(corners);
+            foreach (var corner in corners)
+                Assert.That(viewport.InverseTransformPoint(corner).y, Is.InRange(viewport.rect.yMin - 1, viewport.rect.yMax + 1), target.name);
+        }
+
+        [UnityTest] public IEnumerator BattleHintUsesTheDockCaptionAndRestoresTheBlueprintName()
+        {
+            game.StartBattle(); yield return null;
+            var label = System.Array.Find(root.GetComponentsInChildren<Text>(), x => x.name == "Battle tool hint");
+            Assert.That(label.text, Does.Contain(GameText.Resolve(game.Run.BuildLoadout[0].Name)));
+            var button = Find("Build tool 11");
+            var events = UnityEngine.EventSystems.EventSystem.current;
+            events.SetSelectedGameObject(button.gameObject); yield return null;
+            Assert.That(label.text, Does.Contain("Окраска"));
+            events.SetSelectedGameObject(null); yield return null;
+            Assert.That(label.text, Does.Contain(GameText.Resolve(game.Run.BuildLoadout[0].Name)));
+        }
+
         [UnityTest] public IEnumerator PreparationPickerChangesOnlyTheChosenSlotAfterAnExplicitChoice()
         {
             var choice = game.Run.Workshop.Loadout[0].AsVariant("picker-choice", "Новая страница");

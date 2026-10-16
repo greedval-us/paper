@@ -1,0 +1,69 @@
+{
+  "created": "2026-10-16",
+  "edits": [
+    {
+      "id": "16-battle",
+      "change": "Edit ONLY resource glyphs and one word in this game screen. In the bottom construction/blueprint dock replace EVERY gold/yellow droplet beside costs 64,60,99,55,16,18,22,65,8 with a tiny dark-blue PENCIL icon; these costs are strokes, not gold or colored ink. Keep all amounts and layout. Top left change \"261 штрих\" to exact \"261 штрихов\". Keep red/blue/green ink cartridge droplets and colored ink-well bottles unchanged. Preserve all other game art, framing and UI exactly."
+    },
+    {
+      "id": "04-foundation",
+      "change": "Preserve the image and all main card layout. Correct the right-side capacity explanation: replace the incorrect \"Максимальный запас боеприпасов\" under \"Вместимость 12\" with exact \"Предел нагрузки деталей\". The game capacity is part-load capacity, not ammunition. Remove the two tiny decorative slogan boards at the lower left and lower right, replacing with quiet paper, keeping buttons intact. No other new text or artwork."
+    },
+    {
+      "id": "05-weapons",
+      "change": "Preserve entire game workshop artwork and panel geometry. Change ONLY top progression labels to exactly: \"1 Основа\", \"2 Оружие\" (selected), \"3 Рисунок\", \"4 Проверка\". Current wrong \"Башня\", \"Дополнения\", \"В бой!\" must be replaced. Replace gold DROPLET icon beside \"Золото 120\" by a small GOLD COIN. Remove small decorative handwritten slogans and bottom slogan, leave quiet paper. Keep main bottom-right action \"К рисунку\", weapon choices and three slots. No other changes."
+    },
+    {
+      "id": "06-drawing",
+      "change": "Preserve the fictional notebook game screen and drawing. Correct selected layer: \"Ствол 1\" tab must have active blue outline/pale blue fill; \"Корпус\" tab must be neutral. The selected dark pen-nib doodle is layer1. In the right stats change GOLD COIN icon on \"Цена 64 штр.\" row to a BLUE PENCIL; keep number and all stats. Under drawing replace arbitrary numeric width/height fields 184 and172 with compact controls \"Ширина − +\" and \"Высота − +\". Remove the decorative bottom handwritten slogan and smiley, leaving clean paper. No new game controls or artwork."
+    },
+    {
+      "id": "03-preparation",
+      "change": "Preserve all four blueprint cards, actions, words, illustrations and screen layout. In the top background battlefield preview remove the blue winding road/path lines and bridges; replace these strips with the same faint open paper grid and sparse grass. Enemies in this game move freely and approach from all four edges, not fixed roads. Remove the two decorative slogan boards at the far left and far right outside cards, leaving quiet faint paper/trees. Keep all core labels and amounts exactly. Do not add anything."
+    },
+    {
+      "id": "07-details",
+      "change": "Remove the entire bottom row of seven small weapon cards and the \"Новый ствол\" control: this is a geometry detail panel, not a weapon catalog. Replace that row with a compact toggle labeled \"Рабочая геометрия\" and the existing \"К рисунку\" action. Activate step \"3 Рисунок\", not step 2. Replace header \"Золото: 261\" by a coin icon and \"Золото 120\". Make the increase of ink consumption from39 to41 amber, not green. Keep all other content and dimensions."
+    },
+    {
+      "id": "11-stencils",
+      "change": "Keep the entire central stencil-library MODAL exactly as shown, including cards, labels, owned versus locked and insert button. Replace ALL background outside the modal with a faded DRAWING WORKSHOP: pale grid canvas and toy pen-nib turret, simple drawing toolbar, header \"Мастерская\". No enemies, castle battlefield, wave HUD, battle cards or combat tools anywhere behind it. It opens while drawing in the workshop, never during a battle."
+    },
+    {
+      "id": "15-planning",
+      "change": "Correct only the lower-right controls and available balance. Change \"640 штрихов\" to \"256 штрихов\" because several structures are already built. Remove the lower-right \"Золото:0\" and the entire workshop progression row \"1 Основа 2 Оружие 3 Рисунок 4 Проверка\". Replace this same area with a compact 2-by-2 utility group: \"E Ластик\", \"U Улучшить\", \"B Промокашка · 8\", \"C Окраска\"; every price uses a pencil. Below show small status chips for red, blue, green ink wells, \"Активировать · 45\" each. Keep all four blueprint cards, four construction cards, materials, color options and battlefield. No workshop stepper in combat."
+    },
+    {
+      "id": "17-tower",
+      "change": "Keep the selected-tower right panel exactly, the main field, top HUD. Correct bottom dock: first four cards EXACTLY \"1 Двойной · 64\", \"2 Перо · 60\", \"3 Мортира · 99\", \"4 Веер · 55\" with fitting tiny tower drawings and pencil cost symbols; next compact construction group \"5 Стена · 16\", \"6 Шипы · 18\", \"7 Смола · 22\", \"8 Ремонт · 65\"; utility group \"E Ластик\", \"U Улучшить\", \"B Промокашка · 8\", \"C Окраска\". Remove all workshop-step controls and \"Боеприпасы\" label. Thin bottom row exactly \"Карандаш\" selected, \"Ручка\", \"Фломастер\", \"Без цвета\", red drop12, blue drop8, green drop6. Replace blue rivers and wooden bridges in background by faint open grid terrain and rocks. Do not add roads or extra labels."
+    },
+    {
+      "id": "18-pause",
+      "change": "Change only the top-left resource panel \"Золото: 261\" and its gold coin to a blue PENCIL icon with exact label \"261 штрихов\". This combat resource is strokes, not gold. Preserve everything else including the pause dialog and muted battlefield."
+    },
+    {
+      "id": "12-mortar",
+      "change": "Preserve the entire footprint canvas, same closed shape, same trial panel, three comparison thumbnails, buttons and heading. Remove the top combat HUD (castle health, wave, enemies, speed, pause) entirely. Replace it by a slim header with \"Мастерская\" left, coin \"Золото 120\" and \"Альбом\" right. Remove illustrated physical workshop ROOM, desk, mug and books around the central editor; extend flat pale notebook paper to all screen edges. Remove the unnecessary left categories \"Пушки\", \"Мортиры\", \"Башни\", \"Стены\", give the existing shape canvas that space. No new elements, no in-battle editing implication."
+    },
+    {
+      "id": "13-fan",
+      "change": "Keep the fan diagram, exact three rays labeled2 each, preview and result6/3/84. Replace top bar with slim \"Мастерская\" header and coin \"Золото 120\", \"Альбом\". Remove all wave/enemy/speed/pause indicators: this editor is outside combat. Change the three bottom preset buttons to \"1 направление\", \"2 направления\", \"3 направления\"; highlight ONLY third to match the three rays. Remove the decorative bottom mug, pencil and slogan sheet, leave clean paper. Keep existing stepper, active2, and other controls unchanged."
+    },
+    {
+      "id": "14-armor",
+      "change": "Keep entire central armor editor modal, four sectors6+2+2+2, presets, test arrows and controls. Replace ALL battlefield scenery behind it by plain pale notebook paper, faint grid and subtle sketch of an empty drawing canvas, no enemies or castle. Replace top combat HUD by simple \"Мастерская\" header with gold coin \"Золото 120\" and \"Альбом\". No battle resources, waves, enemy count, speed or pause. Change test health label90/250 to90/100. Activate workshop step2 Оружие, not1. Do not add other elements."
+    },
+    {
+      "id": "21-defeat",
+      "change": "Keep the large defeat illustration, title and entire right results card unchanged. Remove the entire bottom row of construction cards and workshop steps; replace with quiet notebook paper. Remove top speed and pause controls and the redundant top combat HUD; replace top bar with only a small back arrow and \"Итоги защиты\". The battle is finished and no construction is possible. No new controls or text."
+    },
+    {
+      "id": "25-purchase",
+      "change": "Keep the central purchase confirmation modal EXACTLY as it is, including mortar, price60gold, balance120gold, remaining60gold, cancel and buy. Replace the entire dimmed BACKGROUND with a simple player WORKSHOP page containing only a slim \"Мастерская\" header, four-step navigation \"Основа Оружие Рисунок Проверка\" active Оружие, a faint drawn tower preview and a few small weapon choice cards. No combat HUD, wave, enemies, castle health. Remove the fake \"Требуемые детали\" crafting-ingredient inventory and checked ingredient counts; this game uses gold unlocks without crafting ingredients. No locked walls/traps catalog. Keep backdrop subdued."
+    },
+    {
+      "id": "27-invalid",
+      "change": "Preserve central incomplete tower drawing, selected unfinished Ствол2 and the right error notice exactly. Activate top step \"3 Рисунок\", not2 Оружие. In left layer list replace \"Наводка\" with \"Корпус\" and replace \"Крепление\" with \"Декор\", fitting simple doodle icons. Replace entire bottom toolbar (currently materials, colors and line styles) with exactly SIX drawing tools: \"Карандаш\", \"Линия\", \"Прямоугольник\", \"Эллипс\", \"Ластик\", \"Перенос\", then compact undo redo, \"Сетка\", \"Привязка\", zoom100%. There are no color/material or dotted-line style selectors in this drawing editor. Keep the disabled \"К проверке\" button and ink41/65. No other changes."
+    }
+  ]
+}

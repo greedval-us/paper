@@ -21,10 +21,11 @@ namespace PaperDefense.Presentation
         public float Radius = 4;
         public bool NotebookStyle;
         public bool Selected;
+        public bool Focused;
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear(); Rect r = rectTransform.rect;
-            if (NotebookStyle && !Selected && r.width > 250 && r.height > 150 && color.a > 0)
+            if (NotebookStyle && !Selected && !Focused && r.width > 250 && r.height > 150 && color.a > 0)
             { NotebookPaperSurface.Draw(vh, r, color); return; }
             float radius = Mathf.Min(Radius, r.width * .5f, r.height * .5f);
             vh.AddVert(r.center, color, Vector2.zero);
@@ -47,6 +48,20 @@ namespace PaperDefense.Presentation
                 pen.Line(new Vector2(b.x, a.y), b, 2, PlayerUi.Ink);
                 pen.Line(b, new Vector2(a.x, b.y), 2, PlayerUi.Ink);
                 pen.Line(new Vector2(a.x, b.y), a, 2, PlayerUi.Ink);
+                pen.CopyTo(vh, Vector2.zero, 1);
+            }
+            if (Focused)
+            {
+                var pen = new MeshPen(null, 64);
+                Color focusInk = color == PlayerUi.Blue ? PlayerUi.Card : PlayerUi.Blue;
+                float inset = Selected ? 7 : 3;
+                var a = new Vector2(r.xMin + inset, r.yMin + inset);
+                var b = new Vector2(r.xMax - inset, r.yMax - inset);
+                foreach (var corner in new[] { a, new Vector2(a.x, b.y), b, new Vector2(b.x, a.y) })
+                {
+                    pen.Line(corner, corner + new Vector2(corner.x == a.x ? 10 : -10, 0), 2, focusInk);
+                    pen.Line(corner, corner + new Vector2(0, corner.y == a.y ? 10 : -10), 2, focusInk);
+                }
                 pen.CopyTo(vh, Vector2.zero, 1);
             }
         }

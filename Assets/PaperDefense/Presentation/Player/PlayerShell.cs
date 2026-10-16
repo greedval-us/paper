@@ -37,7 +37,11 @@ namespace PaperDefense.Presentation
             root = new GameObject("Player pages", typeof(RectTransform)).GetComponent<RectTransform>(); root.SetParent(transform, false);
             root.anchorMin = root.anchorMax = root.pivot = new Vector2(.5f, .5f);
             ApplyLayout(Screen.width, Screen.height);
-            ui.Tooltip = value => { if (tooltip != null) tooltip.text = value; };
+            ui.Tooltip = value =>
+            {
+                if (game.Page == PlayerPage.Battle) battle.ShowHint(value);
+                else if (tooltip != null) tooltip.text = value;
+            };
         }
 
         public void ApplyLayout(int width, int height)
