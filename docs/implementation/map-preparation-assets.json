@@ -1,0 +1,129 @@
+{
+  "date": "2026-10-16",
+  "skill": "imagegen",
+  "assets": [
+    {
+      "name": "MapLandscape",
+      "source": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1457f-d9e1-7a93-8681-b4486b4a41f1\\exec-c93df724-65aa-47f5-a134-ccdba2208f46.png",
+      "output": "Assets/PaperDefense/Resources/Art/Player/MapLandscape.png",
+      "mode": "built-in",
+      "prompt": "Use case: precise-object-edit. Asset type: production landscape illustration for a Unity mission-map screen. Edit Image 1, preserving its dense cobalt-blue ballpoint hatching, ivory graph paper, isometric castle, pine trees, mountains, rocks, fences, wooden props and playful enemy doodles. Extract and extend the LARGE LEFT BATTLEFIELD to fill the entire wide 16:9 image. Castle centered near 54% horizontal, 50% vertical; keep three colored capped ink bottles on rocky outcrops: red upper-left, green upper-right, blue lower-left. Preserve four clear enemy approaches from top/bottom/left/right. Remove the whole right UI sidebar and all header/footer buttons; replace them with coherent landscape. Remove all letters, all numbers, all red health bars and all red UI arrows. No UI, labels, outlines of panels or text anywhere. The castle and enemies are illustration only. Crisp detailed blue pen linework, warmly lit clean notebook paper, subtle grid, no vignette, no new border. Output only the clean full landscape background.",
+      "transparent_background": false,
+      "sha256": "9f2991322ca6c0893646ce911fc7c0f19def5fc429cc97d039b7c8d249882373",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "name": "PreparationLandscape",
+      "source": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1457f-d9e1-7a93-8681-b4486b4a41f1\\exec-8a7dd15f-1684-4ab5-b362-28446cfed37f.png",
+      "output": "Assets/PaperDefense/Resources/Art/Player/PreparationLandscape.png",
+      "mode": "built-in",
+      "prompt": "Use case: precise-object-edit. Asset type: text-free background for a Unity preparation screen. Edit Image 1. Preserve the cobalt-blue ballpoint drawing on warm ivory graph paper and composition: a castle with flag at upper center, tiny approaching enemies, pine trees, mountains and huts in upper third and outer margins. Remove EVERY UI element: entire header and buttons, all text/numbers/icons, central title ribbon, all four tower cards and their contents, material strip, summary and footer buttons. Inpaint these removed regions into clean subtly textured graph paper. Lower central 78% wide area must be mostly empty paper for live Unity cards. Keep castle landscape concentrated in upper 30%, detailed tree/mountain border near far left/right. Remove every red health bar. Output only wide 16:9 background, no baked UI or writing. Preserve original illustration style; no stretching, no vignette.",
+      "transparent_background": false,
+      "sha256": "4c6503f052759fc159e166e7d9abedd9328b3f9506181eca149e83148dc76174",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    {
+      "name": "PreparationTowers",
+      "source": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1457f-d9e1-7a93-8681-b4486b4a41f1\\exec-4330004a-1c51-4002-9ddc-ddf2f80228d3.png",
+      "output": "Assets/PaperDefense/Resources/Art/Player/PreparationTowers.png",
+      "mode": "built-in",
+      "prompt": "Use case: background-extraction. Asset type: transparent horizontal sprite atlas of five tower illustrations for a Unity notebook defense game. Use Image 1 as exact art/style reference for the four tower card illustrations. Produce ONE very wide 5:1 canvas, exactly FIVE equal-width cells in a single horizontal row, each object centered and wholly contained in its cell with 12% transparent padding, no overlap. Left to right: (1) single-barrel ballpoint machine-gun turret on round stone base, matching the double gun but only ONE barrel; (2) the reference DOUBLE machine gun with two distinct barrels on round base; (3) reference long fountain-pen piercing ballista on round base; (4) reference upward angled mortar cannon on round base with a few wooden spikes; (5) reference six-barrel fan/volley turret on round base. Each tower complete including small sandbags/grass/crates touching its base; identical isometric viewing angle and visual scale. Dense detailed deep cobalt-blue ballpoint hatching, crisp ink outlines, warm ivory paper-colored interiors of objects, slight sketch imperfections. Background must be genuinely transparent; do not add paper rectangles, grid, cards, borders, lettering, numbers, shadows outside silhouette, labels, health bars or UI. Output only the FIVE isolated sprites in this exact order and equal-width row.",
+      "transparent_background": true,
+      "sha256": "4f035f1f7028226322c78930db9602c541b1d60580dfb6014b22adaebf067967",
+      "size": [
+        2172,
+        724
+      ]
+    },
+    {
+      "name": "MissionIllustrations",
+      "source": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1457f-d9e1-7a93-8681-b4486b4a41f1\\exec-2ec04b86-b6a7-4be0-bf52-6831874c8e98.png",
+      "output": "Assets/PaperDefense/Resources/Art/Player/MissionIllustrations.png",
+      "mode": "built-in",
+      "prompt": "Use case: background-extraction. Asset type: transparent horizontal sprite atlas for a Unity mission sidebar. Use the right-side castle and three ink bottles in Image 1 as style/subject references. Produce ONE wide 4:1 canvas, exactly FOUR equal-width cells in one horizontal row; each object centered, complete, no overlap, 12% transparent margins. Left to right: (1) the detailed isometric stone castle with crown flag, three major round towers, small pines/rocks at its foot, dense cobalt-blue ballpoint crosshatching; (2) a rich RED ink bottle with neck and capped round top, ink hatching and white specular slashes; (3) identical BLUE ink bottle; (4) identical GREEN ink bottle. Warm ivory opaque interiors in castle, saturated jewel ink colors on bottles, all outlines dark blue pen. Real transparent background, no paper rectangles/grid/cards/borders, no labels, text, numbers, extra objects or UI. Output only FOUR isolated illustrated sprites in exact equal-width order.",
+      "transparent_background": true,
+      "sha256": "854a0b5b2edebeda889c2e4e9b38b1f44026b155b1163d9a12c95921acf37039",
+      "size": [
+        2172,
+        724
+      ]
+    }
+  ],
+  "unity_import": {
+    "max_size": 4096,
+    "compression": "Uncompressed",
+    "mipmaps": false,
+    "wrap": "Clamp",
+    "filter": "Bilinear",
+    "npot": "None",
+    "landscapes": "Sprite Single",
+    "atlases": "Texture2D, sprites created once from source-pixel rectangles; alpha preserved"
+  },
+  "rects_bottom_left": {
+    "PreparationTowers": [
+      [
+        22,
+        195,
+        407,
+        290
+      ],
+      [
+        450,
+        197,
+        403,
+        312
+      ],
+      [
+        877,
+        191,
+        407,
+        342
+      ],
+      [
+        1308,
+        188,
+        420,
+        355
+      ],
+      [
+        1752,
+        193,
+        398,
+        325
+      ]
+    ],
+    "MissionIllustrations": [
+      [
+        21,
+        56,
+        715,
+        602
+      ],
+      [
+        806,
+        108,
+        355,
+        442
+      ],
+      [
+        1300,
+        107,
+        358,
+        444
+      ],
+      [
+        1771,
+        110,
+        354,
+        441
+      ]
+    ]
+  },
+  "art_scope": "New siblings for requested map/preparation pages and associated picker; old theme retained for other screens. Original concept PNGs unchanged. Only known standard assemblies use illustrations; user drawings always use actual geometry."
+}

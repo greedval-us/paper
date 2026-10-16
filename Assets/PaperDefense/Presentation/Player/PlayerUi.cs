@@ -71,16 +71,33 @@ namespace PaperDefense.Presentation
         }
     }
 
+    /// <summary>Uses the normal uGUI button lifecycle to redraw ink states without moving the control.</summary>
+    public sealed class PlayerNotebookButton : UnityEngine.UI.Button
+    {
+        protected override void DoStateTransition(SelectionState state, bool instant)
+        {
+            base.DoStateTransition(state, instant);
+            if (!(targetGraphic is PlayerCardGraphic card)) return;
+            bool disabled = state == SelectionState.Disabled;
+            bool hovered = state == SelectionState.Highlighted;
+            bool pressed = state == SelectionState.Pressed;
+            if (card.Disabled == disabled && card.Hovered == hovered && card.Pressed == pressed) return;
+            card.Disabled = disabled; card.Hovered = hovered; card.Pressed = pressed;
+            card.SetVerticesDirty();
+        }
+    }
+
     /// <summary>Shared visual primitives for the player screens. Copy lives in a dedicated text asset.</summary>
     public sealed class PlayerUi
     {
-        public static readonly Color Ink = new Color32(35, 57, 83, 255);
-        public static readonly Color Blue = new Color32(49, 83, 132, 255);
-        public static readonly Color Paper = new Color32(249, 244, 230, 255);
-        public static readonly Color Card = new Color32(255, 252, 243, 255);
-        public static readonly Color Muted = new Color32(101, 105, 105, 255);
-        public static readonly Color Wash = new Color32(239, 232, 215, 255);
-        public static readonly Color Selected = new Color32(229, 225, 207, 255);
+        public static readonly Color Ink = new Color32(21, 48, 105, 255);
+        public static readonly Color Blue = new Color32(31, 70, 146, 255);
+        public static readonly Color Paper = new Color32(247, 241, 222, 255);
+        public static readonly Color Card = new Color32(252, 247, 231, 255);
+        public static readonly Color Muted = new Color32(73, 88, 119, 255);
+        public static readonly Color Wash = new Color32(235, 230, 211, 255);
+        public static readonly Color Selected = new Color32(224, 234, 245, 255);
+        public static readonly Color Grid = new Color32(104, 143, 174, 42);
         readonly Font font, heading;
         readonly UserTextResolver copy;
         public bool NotebookStyle { get; }
@@ -121,8 +138,12 @@ namespace PaperDefense.Presentation
         public Button IconButton(Transform parent, string name, Rect bounds, PlayerIcon icon, string hint, Action action, bool primary = false, string art = null)
         {
             var panel = Panel(parent, name, bounds, primary ? Blue : Card, true);
-            var button = panel.gameObject.AddComponent<Button>(); button.targetGraphic = panel.GetComponent<PlayerCardGraphic>();
-            var colors = button.colors; colors.highlightedColor = new Color(.94f, .93f, .88f); colors.pressedColor = new Color(.80f, .81f, .77f); colors.selectedColor = colors.normalColor; colors.disabledColor = new Color(.78f, .78f, .75f, .65f); button.colors = colors;
+            var card = panel.GetComponent<PlayerCardGraphic>(); card.Control = true;
+            var button = panel.gameObject.AddComponent<PlayerNotebookButton>(); button.targetGraphic = card;
+            var colors = button.colors; colors.normalColor = Color.white;
+            colors.highlightedColor = new Color(.92f, .96f, 1); colors.pressedColor = new Color(.80f, .86f, .96f);
+            colors.selectedColor = Color.white; colors.disabledColor = new Color(.72f, .75f, .82f);
+            colors.fadeDuration = 0; button.colors = colors;
             button.onClick.AddListener(() => { Tooltip?.Invoke(""); action?.Invoke(); });
             float size = Mathf.Min(bounds.width, bounds.height) * .62f;
             Rect iconBounds = new Rect((bounds.width - size) / 2, (bounds.height - size) / 2, size, size);
@@ -137,6 +158,7 @@ namespace PaperDefense.Presentation
             var symbol = button.GetComponentInChildren<PlayerIconGraphic>();
             Place(symbol.rectTransform, new Rect(16, (bounds.height - 22) / 2, 22, 22));
             var label = Label(button.transform, caption, new Rect(50, 6, bounds.width - 62, bounds.height - 12), 18, primary ? Card : Ink);
+            if (NotebookStyle) label.font = heading;
             label.resizeTextForBestFit = true; label.resizeTextMinSize = 16; label.resizeTextMaxSize = 18;
             label.rectTransform.anchorMin = Vector2.zero; label.rectTransform.anchorMax = Vector2.one;
             label.rectTransform.offsetMin = new Vector2(50, 6); label.rectTransform.offsetMax = new Vector2(-12, -6);
@@ -154,10 +176,10 @@ namespace PaperDefense.Presentation
             scroll.movementType = ScrollRect.MovementType.Clamped; scroll.scrollSensitivity = 32;
             var player = parent.GetComponentInParent<PlayerGameRoot>(); scroll.inertia = player == null || !player.ReducedMotion;
             var track = Graphic<Image>(viewport, "Scroll track", new Rect(bounds.width - 10, 4, 8, bounds.height - 8));
-            track.color = new Color32(219, 227, 239, 110); track.raycastTarget = true;
+            track.color = new Color32(104, 143, 174, 48); track.raycastTarget = true;
             track.rectTransform.anchorMin = new Vector2(1, 0); track.rectTransform.anchorMax = new Vector2(1, 1);
             track.rectTransform.pivot = new Vector2(1, 1); track.rectTransform.offsetMin = new Vector2(-10, 4); track.rectTransform.offsetMax = new Vector2(-2, -4);
-            var handle = Graphic<Image>(track.transform, "Scroll handle", new Rect(0, 0, 8, 40)); handle.color = new Color32(148, 166, 195, 220); handle.raycastTarget = true;
+            var handle = Graphic<Image>(track.transform, "Scroll handle", new Rect(0, 0, 8, 40)); handle.color = new Color32(31, 70, 146, 210); handle.raycastTarget = true;
             var bar = track.gameObject.AddComponent<Scrollbar>(); bar.handleRect = handle.rectTransform; bar.targetGraphic = handle; bar.direction = Scrollbar.Direction.BottomToTop;
             scroll.verticalScrollbar = bar; scroll.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;
             return content;
@@ -177,11 +199,11 @@ namespace PaperDefense.Presentation
         {
             scroll.horizontal = true;
             var track = Graphic<Image>(scroll.transform, "Horizontal scroll track", new Rect(0, 0, 100, 8));
-            track.color = new Color32(219, 227, 239, 160); track.raycastTarget = true;
+            track.color = new Color32(104, 143, 174, 48); track.raycastTarget = true;
             track.rectTransform.anchorMin = Vector2.zero; track.rectTransform.anchorMax = new Vector2(1, 0);
             track.rectTransform.offsetMin = new Vector2(4, 0); track.rectTransform.offsetMax = new Vector2(-14, 8);
             var handle = Graphic<Image>(track.transform, "Horizontal scroll handle", new Rect(0, 0, 40, 8));
-            handle.color = new Color32(148, 166, 195, 255); handle.raycastTarget = true;
+            handle.color = new Color32(31, 70, 146, 210); handle.raycastTarget = true;
             var bar = track.gameObject.AddComponent<Scrollbar>(); bar.handleRect = handle.rectTransform; bar.targetGraphic = handle;
             bar.direction = Scrollbar.Direction.LeftToRight; scroll.horizontalScrollbar = bar;
             scroll.horizontalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;

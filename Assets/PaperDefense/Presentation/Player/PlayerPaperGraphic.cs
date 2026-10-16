@@ -8,10 +8,10 @@ namespace PaperDefense.Presentation
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear(); var pen = new MeshPen(null, 4096); var r = rectTransform.rect;
-            Color grid = new Color(.24f, .4f, .58f, .075f);
-            for (float x = r.xMin; x < r.xMax; x += 32) pen.Line(new Vector2(x, r.yMin), new Vector2(x, r.yMax), .8f, grid);
-            for (float y = r.yMin; y < r.yMax; y += 32) pen.Line(new Vector2(r.xMin, y), new Vector2(r.xMax, y), .8f, grid);
-            pen.Line(new Vector2(r.xMin + 96, r.yMin), new Vector2(r.xMin + 96, r.yMax), 1, new Color(.7f, .3f, .24f, .14f));
+            if (r.width <= 0 || r.height <= 0) return;
+            Color grid = PlayerUi.Grid;
+            for (float x = r.xMin; x < r.xMax; x += 28) pen.Line(new Vector2(x, r.yMin), new Vector2(x, r.yMax), .7f, grid);
+            for (float y = r.yMin; y < r.yMax; y += 28) pen.Line(new Vector2(r.xMin, y), new Vector2(r.xMax, y), .7f, grid);
             pen.CopyTo(vh, Vector2.zero, 1);
         }
     }
@@ -22,11 +22,15 @@ namespace PaperDefense.Presentation
         public bool NotebookStyle;
         public bool Selected;
         public bool Focused;
+        public bool Control;
+        public bool Disabled;
+        public bool Hovered;
+        public bool Pressed;
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear(); Rect r = rectTransform.rect;
-            if (NotebookStyle && !Selected && !Focused && r.width > 250 && r.height > 150 && color.a > 0)
-            { NotebookPaperSurface.Draw(vh, r, color); return; }
+            if (NotebookStyle && color.a >= .9f && r.width >= 8 && r.height >= 8)
+            { NotebookPaperSurface.Draw(vh, r, color, Control, Selected, Focused, Disabled, Hovered, Pressed); return; }
             float radius = Mathf.Min(Radius, r.width * .5f, r.height * .5f);
             vh.AddVert(r.center, color, Vector2.zero);
             for (int corner = 0; corner < 4; corner++)

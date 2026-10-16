@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "message": "Build Succeeded.",
+  "data": {
+    "job_id": "build-3e6160126b",
+    "result": "succeeded",
+    "platform": "StandaloneWindows64",
+    "output_path": "Builds/PlayerGame/PaperDefense.exe",
+    "started_at": "2026-10-16T18:01:35.3563087Z",
+    "duration_seconds": 14.7123399,
+    "completed_at": "2026-10-16T18:01:50.0686486Z",
+    "total_size_mb": 141.11,
+    "errors": 0,
+    "warnings": 485
+  }
+}

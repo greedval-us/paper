@@ -1,0 +1,665 @@
+{
+  "schema_version": "mockup-layout-plan/v2",
+  "layout_contract": {
+    "ui_stack": "UGUI",
+    "mode": "build",
+    "mockup_source": "docs/design/game-concept-art-2026-10-16/screens/02-map.png",
+    "mockup_resolution": "1672x941",
+    "target_resolution": "1600x900",
+    "root_owner": "Root",
+    "structure_rule": "PlayerShell owns fixed page regions; GridLayoutGroup owns all four preparation cards; no scrolling on Map or Preparation",
+    "candidate_policy": {
+      "accepted": "Runtime controls with known callbacks; recorded agent review",
+      "held": "No unresolved candidates",
+      "rejected": "Source UI lettering is removed from generated background"
+    }
+  },
+  "stack_realization": {
+    "target_surface": "runtime",
+    "reusable_asset_type": "prefab",
+    "ugui": {
+      "canvas_root": "Player interface/Player pages/Page Home",
+      "reference_resolution": "PlayerLayout logical width/height (main 1600x900)",
+      "reusable_unit": "Existing PlayerUi.Button code component; no persistent prefab required"
+    }
+  },
+  "layout_tree": [
+    {
+      "node_path": "Root",
+      "role": "container",
+      "parent_owner": "Canvas",
+      "node_kind": "container",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 1
+      },
+      "split_keep_reason": "layout ownership"
+    },
+    {
+      "node_path": "Root/Header",
+      "role": "container",
+      "parent_owner": "Root",
+      "node_kind": "container",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 0.06801275239107332
+      },
+      "split_keep_reason": "layout ownership"
+    },
+    {
+      "node_path": "Root/Field",
+      "role": "container",
+      "parent_owner": "Root",
+      "node_kind": "container",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0,
+        "y": 0.06801275239107332,
+        "width": 0.777511961722488,
+        "height": 0.9319872476089267
+      },
+      "split_keep_reason": "layout ownership"
+    },
+    {
+      "node_path": "Root/Info",
+      "role": "container",
+      "parent_owner": "Root",
+      "node_kind": "container",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.7799043062200957,
+        "y": 0.07013815090329437,
+        "width": 0.21770334928229665,
+        "height": 0.9256110520722636
+      },
+      "split_keep_reason": "layout ownership"
+    },
+    {
+      "node_path": "Root/Header/Back",
+      "role": "visual",
+      "parent_owner": "Root/Header",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.007177033492822967,
+        "y": 0.006376195536663124,
+        "width": 0.10526315789473684,
+        "height": 0.05526036131774708
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Header/Gold",
+      "role": "visual",
+      "parent_owner": "Root/Header",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.8696172248803827,
+        "y": 0.005313496280552604,
+        "width": 0.12260765550239235,
+        "height": 0.05526036131774708
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Field/Workshop",
+      "role": "visual",
+      "parent_owner": "Root/Field",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.007177033492822967,
+        "y": 0.9096705632306057,
+        "width": 0.14354066985645933,
+        "height": 0.07438894792773645
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Info/Title",
+      "role": "visual",
+      "parent_owner": "Root/Info",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.8074162679425837,
+        "y": 0.09351753453772582,
+        "width": 0.17105263157894737,
+        "height": 0.06801275239107332
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Info/Metrics",
+      "role": "visual",
+      "parent_owner": "Root/Info",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.7978468899521531,
+        "y": 0.35812964930924546,
+        "width": 0.1895933014354067,
+        "height": 0.19128586609989373
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Info/Inkwells",
+      "role": "visual",
+      "parent_owner": "Root/Info",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.8050239234449761,
+        "y": 0.6780021253985122,
+        "width": 0.173444976076555,
+        "height": 0.15090329436769395
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Info/Prepare",
+      "role": "visual",
+      "parent_owner": "Root/Info",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.7882775119617225,
+        "y": 0.8522848034006376,
+        "width": 0.19976076555023922,
+        "height": 0.1030818278427205
+      },
+      "split_keep_reason": "live data/interaction"
+    }
+  ],
+  "candidate_item_ledger": [
+    {
+      "candidate_id": "candidate/Root/Header/Back",
+      "source_bounds": {
+        "x": 12,
+        "y": 6,
+        "width": 176,
+        "height": 52
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Header",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Header/Gold",
+      "source_bounds": {
+        "x": 1454,
+        "y": 5,
+        "width": 205,
+        "height": 52
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Header",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Field/Workshop",
+      "source_bounds": {
+        "x": 12,
+        "y": 856,
+        "width": 240,
+        "height": 70
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Field",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Info/Title",
+      "source_bounds": {
+        "x": 1350,
+        "y": 88,
+        "width": 286,
+        "height": 64
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Info",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Info/Metrics",
+      "source_bounds": {
+        "x": 1334,
+        "y": 337,
+        "width": 317,
+        "height": 180
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Info",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Info/Inkwells",
+      "source_bounds": {
+        "x": 1346,
+        "y": 638,
+        "width": 290,
+        "height": 142
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Info",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Info/Prepare",
+      "source_bounds": {
+        "x": 1318,
+        "y": 802,
+        "width": 334,
+        "height": 97
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Info",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    }
+  ],
+  "item_rect_plan": [
+    {
+      "item_id": "Root/Header/Back",
+      "candidate_id": "candidate/Root/Header/Back",
+      "node_path": "Root/Header/Back",
+      "source_rect": {
+        "x": 12,
+        "y": 6,
+        "width": 176,
+        "height": 52
+      },
+      "normalized_rect": {
+        "x": 0.007177033492822967,
+        "y": 0.006376195536663124,
+        "width": 0.10526315789473684,
+        "height": 0.05526036131774708
+      },
+      "parent_local_rect": {
+        "x": 12,
+        "y": 6,
+        "width": 176,
+        "height": 52
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Header/Back"
+    },
+    {
+      "item_id": "Root/Header/Gold",
+      "candidate_id": "candidate/Root/Header/Gold",
+      "node_path": "Root/Header/Gold",
+      "source_rect": {
+        "x": 1454,
+        "y": 5,
+        "width": 205,
+        "height": 52
+      },
+      "normalized_rect": {
+        "x": 0.8696172248803827,
+        "y": 0.005313496280552604,
+        "width": 0.12260765550239235,
+        "height": 0.05526036131774708
+      },
+      "parent_local_rect": {
+        "x": 1454,
+        "y": 5,
+        "width": 205,
+        "height": 52
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Header/Gold"
+    },
+    {
+      "item_id": "Root/Field/Workshop",
+      "candidate_id": "candidate/Root/Field/Workshop",
+      "node_path": "Root/Field/Workshop",
+      "source_rect": {
+        "x": 12,
+        "y": 856,
+        "width": 240,
+        "height": 70
+      },
+      "normalized_rect": {
+        "x": 0.007177033492822967,
+        "y": 0.9096705632306057,
+        "width": 0.14354066985645933,
+        "height": 0.07438894792773645
+      },
+      "parent_local_rect": {
+        "x": 12,
+        "y": 792,
+        "width": 240,
+        "height": 70
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Field/Workshop"
+    },
+    {
+      "item_id": "Root/Info/Title",
+      "candidate_id": "candidate/Root/Info/Title",
+      "node_path": "Root/Info/Title",
+      "source_rect": {
+        "x": 1350,
+        "y": 88,
+        "width": 286,
+        "height": 64
+      },
+      "normalized_rect": {
+        "x": 0.8074162679425837,
+        "y": 0.09351753453772582,
+        "width": 0.17105263157894737,
+        "height": 0.06801275239107332
+      },
+      "parent_local_rect": {
+        "x": 46,
+        "y": 22,
+        "width": 286,
+        "height": 64
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Info/Title"
+    },
+    {
+      "item_id": "Root/Info/Metrics",
+      "candidate_id": "candidate/Root/Info/Metrics",
+      "node_path": "Root/Info/Metrics",
+      "source_rect": {
+        "x": 1334,
+        "y": 337,
+        "width": 317,
+        "height": 180
+      },
+      "normalized_rect": {
+        "x": 0.7978468899521531,
+        "y": 0.35812964930924546,
+        "width": 0.1895933014354067,
+        "height": 0.19128586609989373
+      },
+      "parent_local_rect": {
+        "x": 30,
+        "y": 271,
+        "width": 317,
+        "height": 180
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Info/Metrics"
+    },
+    {
+      "item_id": "Root/Info/Inkwells",
+      "candidate_id": "candidate/Root/Info/Inkwells",
+      "node_path": "Root/Info/Inkwells",
+      "source_rect": {
+        "x": 1346,
+        "y": 638,
+        "width": 290,
+        "height": 142
+      },
+      "normalized_rect": {
+        "x": 0.8050239234449761,
+        "y": 0.6780021253985122,
+        "width": 0.173444976076555,
+        "height": 0.15090329436769395
+      },
+      "parent_local_rect": {
+        "x": 42,
+        "y": 572,
+        "width": 290,
+        "height": 142
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Info/Inkwells"
+    },
+    {
+      "item_id": "Root/Info/Prepare",
+      "candidate_id": "candidate/Root/Info/Prepare",
+      "node_path": "Root/Info/Prepare",
+      "source_rect": {
+        "x": 1318,
+        "y": 802,
+        "width": 334,
+        "height": 97
+      },
+      "normalized_rect": {
+        "x": 0.7882775119617225,
+        "y": 0.8522848034006376,
+        "width": 0.19976076555023922,
+        "height": 0.1030818278427205
+      },
+      "parent_local_rect": {
+        "x": 14,
+        "y": 736,
+        "width": 334,
+        "height": 97
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Info/Prepare"
+    }
+  ],
+  "asset_plan": [
+    {
+      "asset_plan_id": "native/Root/Header/Back",
+      "item_id": "Root/Header/Back",
+      "candidate_id": "candidate/Root/Header/Back",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Header/Gold",
+      "item_id": "Root/Header/Gold",
+      "candidate_id": "candidate/Root/Header/Gold",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Field/Workshop",
+      "item_id": "Root/Field/Workshop",
+      "candidate_id": "candidate/Root/Field/Workshop",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Info/Title",
+      "item_id": "Root/Info/Title",
+      "candidate_id": "candidate/Root/Info/Title",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Info/Metrics",
+      "item_id": "Root/Info/Metrics",
+      "candidate_id": "candidate/Root/Info/Metrics",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Info/Inkwells",
+      "item_id": "Root/Info/Inkwells",
+      "candidate_id": "candidate/Root/Info/Inkwells",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Info/Prepare",
+      "item_id": "Root/Info/Prepare",
+      "candidate_id": "candidate/Root/Info/Prepare",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    }
+  ],
+  "behavior_plan": [
+    {
+      "behavior_id": "Root/Header/Back",
+      "owner": "Root/Header",
+      "intent": "Home"
+    },
+    {
+      "behavior_id": "Root/Header/Gold",
+      "owner": "Root/Header",
+      "intent": "Workshop.Gold"
+    },
+    {
+      "behavior_id": "Root/Field/Workshop",
+      "owner": "Root/Field",
+      "intent": "Workshop"
+    },
+    {
+      "behavior_id": "Root/Info/Title",
+      "owner": "Root/Info",
+      "intent": "Mission"
+    },
+    {
+      "behavior_id": "Root/Info/Metrics",
+      "owner": "Root/Info",
+      "intent": "Waves / BaseHealth / StartingInk"
+    },
+    {
+      "behavior_id": "Root/Info/Inkwells",
+      "owner": "Root/Info",
+      "intent": "Resource legend"
+    },
+    {
+      "behavior_id": "Root/Info/Prepare",
+      "owner": "Root/Info",
+      "intent": "Preparation"
+    }
+  ],
+  "verification_targets": [
+    {
+      "target": "main",
+      "resolution": "1600x900",
+      "checks": [
+        "whole-screen comparison",
+        "live controls",
+        "Cyrillic text"
+      ]
+    },
+    {
+      "target": "alternate aspect",
+      "resolution": "1280x960",
+      "checks": [
+        "all controls reachable",
+        "aspect-preserving art"
+      ]
+    },
+    {
+      "target": "compact",
+      "resolution": "1280x720",
+      "checks": [
+        "long labels",
+        "UI scale 1.5",
+        "safe actions"
+      ]
+    }
+  ],
+  "authorization": "User explicitly requested screens02-03 and replacement art from existing approved design/roadmap.",
+  "baseline": {
+    "unity": "6000.5.7f1",
+    "scene": "Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity",
+    "selected_object": "not required; explicit scene/root targeted",
+    "active_ui_root": "Player interface/Player pages/Page Map",
+    "console_errors": 0,
+    "screenshot": "../validation/2026-10-16-map-preparation/before-map.png"
+  },
+  "review": {
+    "source": "agent",
+    "evidence": "Root visually inspected02/03; preparation agent independently inspected/measured03; contracts agent audited data/commands and current art."
+  },
+  "asset_strategy": "Text-free landscapes + transparent towers and castle/well atlas using built-in imagegen. Original concepts preserved; user drawings stay real BlueprintSketch.",
+  "responsive_realization": "Main1600x900,alternate1280x960,compact1280x720scale150. All four cards in one row; materials and actions visible together. Decoration and illustration height yield to readable live controls. Map duplicate castle miniature is omitted when height is tight. No ScrollRect on either main page; growing album modal retains its own list scroll.",
+  "user_steering": "User explicitly rejected scrolling during visual verification; layout revised to show the whole preparation and map summaries at once."
+}

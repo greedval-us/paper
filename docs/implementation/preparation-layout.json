@@ -1,0 +1,1190 @@
+{
+  "schema_version": "mockup-layout-plan/v2",
+  "layout_contract": {
+    "ui_stack": "UGUI",
+    "mode": "build",
+    "mockup_source": "docs/design/game-concept-art-2026-10-16/screens/03-preparation.png",
+    "mockup_resolution": "1672x941",
+    "target_resolution": "1600x900",
+    "root_owner": "Root",
+    "structure_rule": "PlayerShell owns fixed page regions; GridLayoutGroup owns all four preparation cards; no scrolling on Map or Preparation",
+    "candidate_policy": {
+      "accepted": "Runtime controls with known callbacks; recorded agent review",
+      "held": "No unresolved candidates",
+      "rejected": "Source UI lettering is removed from generated background"
+    }
+  },
+  "stack_realization": {
+    "target_surface": "runtime",
+    "reusable_asset_type": "prefab",
+    "ugui": {
+      "canvas_root": "Player interface/Player pages/Page Home",
+      "reference_resolution": "PlayerLayout logical width/height (main 1600x900)",
+      "reusable_unit": "Existing PlayerUi.Button code component; no persistent prefab required"
+    }
+  },
+  "layout_tree": [
+    {
+      "node_path": "Root",
+      "role": "container",
+      "parent_owner": "Canvas",
+      "node_kind": "container",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 1
+      },
+      "split_keep_reason": "layout ownership"
+    },
+    {
+      "node_path": "Root/Header",
+      "role": "container",
+      "parent_owner": "Root",
+      "node_kind": "container",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 0.06801275239107332
+      },
+      "split_keep_reason": "layout ownership"
+    },
+    {
+      "node_path": "Root/Body",
+      "role": "container",
+      "parent_owner": "Root",
+      "node_kind": "container",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.11602870813397129,
+        "y": 0.32093517534537724,
+        "width": 0.7667464114832536,
+        "height": 0.6004250797024442
+      },
+      "split_keep_reason": "layout ownership"
+    },
+    {
+      "node_path": "Root/Footer",
+      "role": "container",
+      "parent_owner": "Root",
+      "node_kind": "container",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0,
+        "y": 0.9181721572794899,
+        "width": 1,
+        "height": 0.0818278427205101
+      },
+      "split_keep_reason": "layout ownership"
+    },
+    {
+      "node_path": "Root/Header/Back",
+      "role": "visual",
+      "parent_owner": "Root/Header",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.014952153110047847,
+        "y": 0.007438894792773645,
+        "width": 0.1465311004784689,
+        "height": 0.05419766206163656
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Header/Mission",
+      "role": "visual",
+      "parent_owner": "Root/Header",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.3803827751196172,
+        "y": 0.006376195536663124,
+        "width": 0.23803827751196172,
+        "height": 0.052072263549415514
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Header/Gold",
+      "role": "visual",
+      "parent_owner": "Root/Header",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.7990430622009569,
+        "y": 0.005313496280552604,
+        "width": 0.13576555023923445,
+        "height": 0.05419766206163656
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Header/Settings",
+      "role": "visual",
+      "parent_owner": "Root/Header",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.9461722488038278,
+        "y": 0.006376195536663124,
+        "width": 0.038875598086124404,
+        "height": 0.05419766206163656
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Body/Title",
+      "role": "visual",
+      "parent_owner": "Root/Body",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.28708133971291866,
+        "y": 0.32093517534537724,
+        "width": 0.4246411483253589,
+        "height": 0.07863974495217853
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Body/Loadout0",
+      "role": "visual",
+      "parent_owner": "Root/Body",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.1166267942583732,
+        "y": 0.4070138150903294,
+        "width": 0.180622009569378,
+        "height": 0.4250797024442083
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Body/Loadout1",
+      "role": "visual",
+      "parent_owner": "Root/Body",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.31279904306220097,
+        "y": 0.4070138150903294,
+        "width": 0.180622009569378,
+        "height": 0.4250797024442083
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Body/Loadout2",
+      "role": "visual",
+      "parent_owner": "Root/Body",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.506578947368421,
+        "y": 0.4070138150903294,
+        "width": 0.180622009569378,
+        "height": 0.4250797024442083
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Body/Loadout3",
+      "role": "visual",
+      "parent_owner": "Root/Body",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.6997607655502392,
+        "y": 0.4070138150903294,
+        "width": 0.180622009569378,
+        "height": 0.4250797024442083
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Body/Material",
+      "role": "visual",
+      "parent_owner": "Root/Body",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.11602870813397129,
+        "y": 0.8522848034006376,
+        "width": 0.5101674641148325,
+        "height": 0.0669500531349628
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Body/Summary",
+      "role": "visual",
+      "parent_owner": "Root/Body",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.6333732057416268,
+        "y": 0.8512221041445271,
+        "width": 0.1513157894736842,
+        "height": 0.06801275239107332
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Footer/Workshop",
+      "role": "visual",
+      "parent_owner": "Root/Footer",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.014952153110047847,
+        "y": 0.9277364505844846,
+        "width": 0.1519138755980861,
+        "height": 0.057385759829968117
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Footer/Album",
+      "role": "visual",
+      "parent_owner": "Root/Footer",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.17703349282296652,
+        "y": 0.9277364505844846,
+        "width": 0.14055023923444976,
+        "height": 0.057385759829968117
+      },
+      "split_keep_reason": "live data/interaction"
+    },
+    {
+      "node_path": "Root/Footer/Start",
+      "role": "visual",
+      "parent_owner": "Root/Footer",
+      "node_kind": "visual",
+      "layout_owner": "PlayerShell region or parent layout group",
+      "placement_intent": "relative sizing; readable text and controls",
+      "geometry_ratios": {
+        "x": 0.8026315789473685,
+        "y": 0.9181721572794899,
+        "width": 0.18241626794258373,
+        "height": 0.06907545164718384
+      },
+      "split_keep_reason": "live data/interaction"
+    }
+  ],
+  "candidate_item_ledger": [
+    {
+      "candidate_id": "candidate/Root/Header/Back",
+      "source_bounds": {
+        "x": 25,
+        "y": 7,
+        "width": 245,
+        "height": 51
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Header",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Header/Mission",
+      "source_bounds": {
+        "x": 636,
+        "y": 6,
+        "width": 398,
+        "height": 49
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Header",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Header/Gold",
+      "source_bounds": {
+        "x": 1336,
+        "y": 5,
+        "width": 227,
+        "height": 51
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Header",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Header/Settings",
+      "source_bounds": {
+        "x": 1582,
+        "y": 6,
+        "width": 65,
+        "height": 51
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Header",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Body/Title",
+      "source_bounds": {
+        "x": 480,
+        "y": 302,
+        "width": 710,
+        "height": 74
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Body",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Body/Loadout0",
+      "source_bounds": {
+        "x": 195,
+        "y": 383,
+        "width": 302,
+        "height": 400
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Body",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Body/Loadout1",
+      "source_bounds": {
+        "x": 523,
+        "y": 383,
+        "width": 302,
+        "height": 400
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Body",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Body/Loadout2",
+      "source_bounds": {
+        "x": 847,
+        "y": 383,
+        "width": 302,
+        "height": 400
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Body",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Body/Loadout3",
+      "source_bounds": {
+        "x": 1170,
+        "y": 383,
+        "width": 302,
+        "height": 400
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Body",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Body/Material",
+      "source_bounds": {
+        "x": 194,
+        "y": 802,
+        "width": 853,
+        "height": 63
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Body",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Body/Summary",
+      "source_bounds": {
+        "x": 1059,
+        "y": 801,
+        "width": 253,
+        "height": 64
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Body",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Footer/Workshop",
+      "source_bounds": {
+        "x": 25,
+        "y": 873,
+        "width": 254,
+        "height": 54
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Footer",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Footer/Album",
+      "source_bounds": {
+        "x": 296,
+        "y": 873,
+        "width": 235,
+        "height": 54
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Footer",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    },
+    {
+      "candidate_id": "candidate/Root/Footer/Start",
+      "source_bounds": {
+        "x": 1342,
+        "y": 864,
+        "width": 305,
+        "height": 65
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "Inspected native PNG; clear boundary",
+        "Existing runtime data or callback"
+      ],
+      "suggested_role": "runtime leaf",
+      "parent_hint": "Root/Footer",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "User requested screen transfer; visible boundary and existing runtime need."
+    }
+  ],
+  "item_rect_plan": [
+    {
+      "item_id": "Root/Header/Back",
+      "candidate_id": "candidate/Root/Header/Back",
+      "node_path": "Root/Header/Back",
+      "source_rect": {
+        "x": 25,
+        "y": 7,
+        "width": 245,
+        "height": 51
+      },
+      "normalized_rect": {
+        "x": 0.014952153110047847,
+        "y": 0.007438894792773645,
+        "width": 0.1465311004784689,
+        "height": 0.05419766206163656
+      },
+      "parent_local_rect": {
+        "x": 25,
+        "y": 7,
+        "width": 245,
+        "height": 51
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Header/Back"
+    },
+    {
+      "item_id": "Root/Header/Mission",
+      "candidate_id": "candidate/Root/Header/Mission",
+      "node_path": "Root/Header/Mission",
+      "source_rect": {
+        "x": 636,
+        "y": 6,
+        "width": 398,
+        "height": 49
+      },
+      "normalized_rect": {
+        "x": 0.3803827751196172,
+        "y": 0.006376195536663124,
+        "width": 0.23803827751196172,
+        "height": 0.052072263549415514
+      },
+      "parent_local_rect": {
+        "x": 636,
+        "y": 6,
+        "width": 398,
+        "height": 49
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Header/Mission"
+    },
+    {
+      "item_id": "Root/Header/Gold",
+      "candidate_id": "candidate/Root/Header/Gold",
+      "node_path": "Root/Header/Gold",
+      "source_rect": {
+        "x": 1336,
+        "y": 5,
+        "width": 227,
+        "height": 51
+      },
+      "normalized_rect": {
+        "x": 0.7990430622009569,
+        "y": 0.005313496280552604,
+        "width": 0.13576555023923445,
+        "height": 0.05419766206163656
+      },
+      "parent_local_rect": {
+        "x": 1336,
+        "y": 5,
+        "width": 227,
+        "height": 51
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Header/Gold"
+    },
+    {
+      "item_id": "Root/Header/Settings",
+      "candidate_id": "candidate/Root/Header/Settings",
+      "node_path": "Root/Header/Settings",
+      "source_rect": {
+        "x": 1582,
+        "y": 6,
+        "width": 65,
+        "height": 51
+      },
+      "normalized_rect": {
+        "x": 0.9461722488038278,
+        "y": 0.006376195536663124,
+        "width": 0.038875598086124404,
+        "height": 0.05419766206163656
+      },
+      "parent_local_rect": {
+        "x": 1582,
+        "y": 6,
+        "width": 65,
+        "height": 51
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Header/Settings"
+    },
+    {
+      "item_id": "Root/Body/Title",
+      "candidate_id": "candidate/Root/Body/Title",
+      "node_path": "Root/Body/Title",
+      "source_rect": {
+        "x": 480,
+        "y": 302,
+        "width": 710,
+        "height": 74
+      },
+      "normalized_rect": {
+        "x": 0.28708133971291866,
+        "y": 0.32093517534537724,
+        "width": 0.4246411483253589,
+        "height": 0.07863974495217853
+      },
+      "parent_local_rect": {
+        "x": 286,
+        "y": 0,
+        "width": 710,
+        "height": 74
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Body/Title"
+    },
+    {
+      "item_id": "Root/Body/Loadout0",
+      "candidate_id": "candidate/Root/Body/Loadout0",
+      "node_path": "Root/Body/Loadout0",
+      "source_rect": {
+        "x": 195,
+        "y": 383,
+        "width": 302,
+        "height": 400
+      },
+      "normalized_rect": {
+        "x": 0.1166267942583732,
+        "y": 0.4070138150903294,
+        "width": 0.180622009569378,
+        "height": 0.4250797024442083
+      },
+      "parent_local_rect": {
+        "x": 1,
+        "y": 81,
+        "width": 302,
+        "height": 400
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Body/Loadout0"
+    },
+    {
+      "item_id": "Root/Body/Loadout1",
+      "candidate_id": "candidate/Root/Body/Loadout1",
+      "node_path": "Root/Body/Loadout1",
+      "source_rect": {
+        "x": 523,
+        "y": 383,
+        "width": 302,
+        "height": 400
+      },
+      "normalized_rect": {
+        "x": 0.31279904306220097,
+        "y": 0.4070138150903294,
+        "width": 0.180622009569378,
+        "height": 0.4250797024442083
+      },
+      "parent_local_rect": {
+        "x": 329,
+        "y": 81,
+        "width": 302,
+        "height": 400
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Body/Loadout1"
+    },
+    {
+      "item_id": "Root/Body/Loadout2",
+      "candidate_id": "candidate/Root/Body/Loadout2",
+      "node_path": "Root/Body/Loadout2",
+      "source_rect": {
+        "x": 847,
+        "y": 383,
+        "width": 302,
+        "height": 400
+      },
+      "normalized_rect": {
+        "x": 0.506578947368421,
+        "y": 0.4070138150903294,
+        "width": 0.180622009569378,
+        "height": 0.4250797024442083
+      },
+      "parent_local_rect": {
+        "x": 653,
+        "y": 81,
+        "width": 302,
+        "height": 400
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Body/Loadout2"
+    },
+    {
+      "item_id": "Root/Body/Loadout3",
+      "candidate_id": "candidate/Root/Body/Loadout3",
+      "node_path": "Root/Body/Loadout3",
+      "source_rect": {
+        "x": 1170,
+        "y": 383,
+        "width": 302,
+        "height": 400
+      },
+      "normalized_rect": {
+        "x": 0.6997607655502392,
+        "y": 0.4070138150903294,
+        "width": 0.180622009569378,
+        "height": 0.4250797024442083
+      },
+      "parent_local_rect": {
+        "x": 976,
+        "y": 81,
+        "width": 302,
+        "height": 400
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Body/Loadout3"
+    },
+    {
+      "item_id": "Root/Body/Material",
+      "candidate_id": "candidate/Root/Body/Material",
+      "node_path": "Root/Body/Material",
+      "source_rect": {
+        "x": 194,
+        "y": 802,
+        "width": 853,
+        "height": 63
+      },
+      "normalized_rect": {
+        "x": 0.11602870813397129,
+        "y": 0.8522848034006376,
+        "width": 0.5101674641148325,
+        "height": 0.0669500531349628
+      },
+      "parent_local_rect": {
+        "x": 0,
+        "y": 500,
+        "width": 853,
+        "height": 63
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Body/Material"
+    },
+    {
+      "item_id": "Root/Body/Summary",
+      "candidate_id": "candidate/Root/Body/Summary",
+      "node_path": "Root/Body/Summary",
+      "source_rect": {
+        "x": 1059,
+        "y": 801,
+        "width": 253,
+        "height": 64
+      },
+      "normalized_rect": {
+        "x": 0.6333732057416268,
+        "y": 0.8512221041445271,
+        "width": 0.1513157894736842,
+        "height": 0.06801275239107332
+      },
+      "parent_local_rect": {
+        "x": 865,
+        "y": 499,
+        "width": 253,
+        "height": 64
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Body/Summary"
+    },
+    {
+      "item_id": "Root/Footer/Workshop",
+      "candidate_id": "candidate/Root/Footer/Workshop",
+      "node_path": "Root/Footer/Workshop",
+      "source_rect": {
+        "x": 25,
+        "y": 873,
+        "width": 254,
+        "height": 54
+      },
+      "normalized_rect": {
+        "x": 0.014952153110047847,
+        "y": 0.9277364505844846,
+        "width": 0.1519138755980861,
+        "height": 0.057385759829968117
+      },
+      "parent_local_rect": {
+        "x": 25,
+        "y": 9,
+        "width": 254,
+        "height": 54
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Footer/Workshop"
+    },
+    {
+      "item_id": "Root/Footer/Album",
+      "candidate_id": "candidate/Root/Footer/Album",
+      "node_path": "Root/Footer/Album",
+      "source_rect": {
+        "x": 296,
+        "y": 873,
+        "width": 235,
+        "height": 54
+      },
+      "normalized_rect": {
+        "x": 0.17703349282296652,
+        "y": 0.9277364505844846,
+        "width": 0.14055023923444976,
+        "height": 0.057385759829968117
+      },
+      "parent_local_rect": {
+        "x": 296,
+        "y": 9,
+        "width": 235,
+        "height": 54
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Footer/Album"
+    },
+    {
+      "item_id": "Root/Footer/Start",
+      "candidate_id": "candidate/Root/Footer/Start",
+      "node_path": "Root/Footer/Start",
+      "source_rect": {
+        "x": 1342,
+        "y": 864,
+        "width": 305,
+        "height": 65
+      },
+      "normalized_rect": {
+        "x": 0.8026315789473685,
+        "y": 0.9181721572794899,
+        "width": 0.18241626794258373,
+        "height": 0.06907545164718384
+      },
+      "parent_local_rect": {
+        "x": 1342,
+        "y": 0,
+        "width": 305,
+        "height": 65
+      },
+      "fit_mode": "parent flow; text fit; illustrations preserve aspect",
+      "placement_intent": "fixed responsive regions; four-column parent grid; no scroll",
+      "split_keep_reason": "runtime data / interaction",
+      "asset_plan_id": "native/Root/Footer/Start"
+    }
+  ],
+  "asset_plan": [
+    {
+      "asset_plan_id": "native/Root/Header/Back",
+      "item_id": "Root/Header/Back",
+      "candidate_id": "candidate/Root/Header/Back",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Header/Mission",
+      "item_id": "Root/Header/Mission",
+      "candidate_id": "candidate/Root/Header/Mission",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Header/Gold",
+      "item_id": "Root/Header/Gold",
+      "candidate_id": "candidate/Root/Header/Gold",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Header/Settings",
+      "item_id": "Root/Header/Settings",
+      "candidate_id": "candidate/Root/Header/Settings",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Body/Title",
+      "item_id": "Root/Body/Title",
+      "candidate_id": "candidate/Root/Body/Title",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Body/Loadout0",
+      "item_id": "Root/Body/Loadout0",
+      "candidate_id": "candidate/Root/Body/Loadout0",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Body/Loadout1",
+      "item_id": "Root/Body/Loadout1",
+      "candidate_id": "candidate/Root/Body/Loadout1",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Body/Loadout2",
+      "item_id": "Root/Body/Loadout2",
+      "candidate_id": "candidate/Root/Body/Loadout2",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Body/Loadout3",
+      "item_id": "Root/Body/Loadout3",
+      "candidate_id": "candidate/Root/Body/Loadout3",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Body/Material",
+      "item_id": "Root/Body/Material",
+      "candidate_id": "candidate/Root/Body/Material",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Body/Summary",
+      "item_id": "Root/Body/Summary",
+      "candidate_id": "candidate/Root/Body/Summary",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Footer/Workshop",
+      "item_id": "Root/Footer/Workshop",
+      "candidate_id": "candidate/Root/Footer/Workshop",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Footer/Album",
+      "item_id": "Root/Footer/Album",
+      "candidate_id": "candidate/Root/Footer/Album",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/Root/Footer/Start",
+      "item_id": "Root/Footer/Start",
+      "candidate_id": "candidate/Root/Footer/Start",
+      "plan": "Shared notebook UI; new raster art only for illustrations.",
+      "creates_runtime_node": true
+    }
+  ],
+  "behavior_plan": [
+    {
+      "behavior_id": "Root/Header/Back",
+      "owner": "Root/Header",
+      "intent": "Map"
+    },
+    {
+      "behavior_id": "Root/Header/Mission",
+      "owner": "Root/Header",
+      "intent": "Mission+Waves"
+    },
+    {
+      "behavior_id": "Root/Header/Gold",
+      "owner": "Root/Header",
+      "intent": "Gold"
+    },
+    {
+      "behavior_id": "Root/Header/Settings",
+      "owner": "Root/Header",
+      "intent": "OpenSettings"
+    },
+    {
+      "behavior_id": "Root/Body/Title",
+      "owner": "Root/Body",
+      "intent": "Live Cyrillic title"
+    },
+    {
+      "behavior_id": "Root/Body/Loadout0",
+      "owner": "Root/Body",
+      "intent": "Loadout0 actual page/cost + Replace"
+    },
+    {
+      "behavior_id": "Root/Body/Loadout1",
+      "owner": "Root/Body",
+      "intent": "Loadout1 actual page/cost + Replace"
+    },
+    {
+      "behavior_id": "Root/Body/Loadout2",
+      "owner": "Root/Body",
+      "intent": "Loadout2 actual page/cost + Replace"
+    },
+    {
+      "behavior_id": "Root/Body/Loadout3",
+      "owner": "Root/Body",
+      "intent": "Loadout3 actual page/cost + Replace"
+    },
+    {
+      "behavior_id": "Root/Body/Material",
+      "owner": "Root/Body",
+      "intent": "SelectTier and refresh cost"
+    },
+    {
+      "behavior_id": "Root/Body/Summary",
+      "owner": "Root/Body",
+      "intent": "StartingInk, valid unique slots"
+    },
+    {
+      "behavior_id": "Root/Footer/Workshop",
+      "owner": "Root/Footer",
+      "intent": "Workshop"
+    },
+    {
+      "behavior_id": "Root/Footer/Album",
+      "owner": "Root/Footer",
+      "intent": "Open four-slot picker"
+    },
+    {
+      "behavior_id": "Root/Footer/Start",
+      "owner": "Root/Footer",
+      "intent": "StartBattle if ready"
+    }
+  ],
+  "verification_targets": [
+    {
+      "target": "main",
+      "resolution": "1600x900",
+      "checks": [
+        "whole-screen comparison",
+        "live controls",
+        "Cyrillic text"
+      ]
+    },
+    {
+      "target": "alternate aspect",
+      "resolution": "1280x960",
+      "checks": [
+        "all controls reachable",
+        "aspect-preserving art"
+      ]
+    },
+    {
+      "target": "compact",
+      "resolution": "1280x720",
+      "checks": [
+        "long labels",
+        "UI scale 1.5",
+        "safe actions"
+      ]
+    }
+  ],
+  "authorization": "User explicitly requested screens02-03 and replacement art from existing approved design/roadmap.",
+  "baseline": {
+    "unity": "6000.5.7f1",
+    "scene": "Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity",
+    "selected_object": "not required; explicit scene/root targeted",
+    "active_ui_root": "Player interface/Player pages/Page Preparation",
+    "console_errors": 0,
+    "screenshot": "../validation/2026-10-16-map-preparation/before-preparation.png"
+  },
+  "review": {
+    "source": "agent",
+    "evidence": "Root visually inspected02/03; preparation agent independently inspected/measured03; contracts agent audited data/commands and current art."
+  },
+  "asset_strategy": "Text-free landscapes + transparent towers and castle/well atlas using built-in imagegen. Original concepts preserved; user drawings stay real BlueprintSketch.",
+  "responsive_realization": "Main1600x900,alternate1280x960,compact1280x720scale150. All four cards in one row; materials and actions visible together. Decoration and illustration height yield to readable live controls. Map duplicate castle miniature is omitted when height is tight. No ScrollRect on either main page; growing album modal retains its own list scroll.",
+  "user_steering": "User explicitly rejected scrolling during visual verification; layout revised to show the whole preparation and map summaries at once."
+}

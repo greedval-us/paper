@@ -137,8 +137,14 @@ namespace PaperDefense.Editor
             pending = () =>
             {
                 LastCapture = PlayerVisualCapture.Capture(name, width, height, Folder);
-                var labels = Game.GetComponentsInChildren<Text>().Where(t => t.text.Length > 0 && t.preferredHeight > t.rectTransform.rect.height + .5f)
-                    .Select(t => t.name + ": " + t.text.Replace('\n', ' ') + " [" + t.preferredHeight + "/" + t.rectTransform.rect.height + "]").ToArray();
+                // PreferredHeight measures the unfitted font and falsely flags correctly fitted labels.
+                var labels = Game.GetComponentsInChildren<Text>().Where(t => t.text.Length > 0 &&
+                    (t.resizeTextForBestFit && !t.text.Contains("<")
+                        ? t.cachedTextGenerator.characterCountVisible < t.text.Length
+                        : t.preferredHeight > t.rectTransform.rect.height + .5f))
+                    .Select(t => t.name + ": " + t.text.Replace('\n', ' ') +
+                        (t.resizeTextForBestFit ? " [visible " + t.cachedTextGenerator.characterCountVisible + "/" + t.text.Length + "]"
+                            : " [" + t.preferredHeight + "/" + t.rectTransform.rect.height + "]")).ToArray();
                 File.WriteAllLines(Folder + "/" + name + "-text-check.txt", labels);
             };
             EditorApplication.update += Tick;

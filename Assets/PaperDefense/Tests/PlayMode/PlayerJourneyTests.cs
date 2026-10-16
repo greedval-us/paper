@@ -186,7 +186,100 @@ namespace PaperDefense.Tests
             Assert.That(game.Run.Session.TickIndex, Is.EqualTo(tick));
             Assert.That(root.GetComponentsInChildren<NotebookHud>(true), Is.Empty);
             Assert.That(Find("Open campaign").GetComponentInChildren<PlayerIconGraphic>(), Is.Not.Null);
-            Assert.That(Find("Open campaign").GetComponentInChildren<Text>().text, Is.EqualTo("Начать игру"));
+            Assert.That(Find("Open campaign").GetComponentInChildren<Text>().text, Is.EqualTo("Играть"));
+        }
+
+        [UnityTest] public IEnumerator HomeActionsRemainVisibleAndSeparateAcrossWindowSizesAndInterfaceScales()
+        {
+            var shell = root.GetComponentInChildren<PlayerShell>();
+            int[,] sizes = { { 1024, 768 }, { 1280, 720 }, { 1280, 960 }, { 1600, 900 }, { 1920, 1080 } };
+            string[] actions = { "Open campaign", "workshop", "settings", "help", "exit" };
+            for (int size = 0; size < sizes.GetLength(0); size++)
+                foreach (float scale in new[] { 1f, 1.25f, 1.5f })
+                {
+                    game.SetInterfaceScale(scale);
+                    shell.ApplyLayout(sizes[size, 0], sizes[size, 1]);
+                    Canvas.ForceUpdateCanvases();
+                    var page = System.Array.Find(root.GetComponentsInChildren<RectTransform>(), x => x.name == "Page Home");
+                    Assert.That(page, Is.Not.Null);
+                    var bounds = new Rect[actions.Length];
+                    string context = sizes[size, 0] + "x" + sizes[size, 1] + " at " + scale;
+                    for (int i = 0; i < actions.Length; i++)
+                    {
+                        var button = Find(actions[i]);
+                        Assert.That(button.IsInteractable(), Is.True, actions[i] + " at " + context);
+                        bounds[i] = BoundsInPage(page, (RectTransform)button.transform);
+                        Assert.That(bounds[i].width, Is.GreaterThan(0), actions[i] + " at " + context);
+                        Assert.That(bounds[i].height, Is.GreaterThan(0), actions[i] + " at " + context);
+                        Assert.That(bounds[i].xMin, Is.GreaterThanOrEqualTo(page.rect.xMin - 1), actions[i] + " at " + context);
+                        Assert.That(bounds[i].xMax, Is.LessThanOrEqualTo(page.rect.xMax + 1), actions[i] + " at " + context);
+                        Assert.That(bounds[i].yMin, Is.GreaterThanOrEqualTo(page.rect.yMin - 1), actions[i] + " at " + context);
+                        Assert.That(bounds[i].yMax, Is.LessThanOrEqualTo(page.rect.yMax + 1), actions[i] + " at " + context);
+                        for (int previous = 0; previous < i; previous++)
+                            Assert.That(bounds[i].Overlaps(bounds[previous]), Is.False,
+                                actions[i] + " overlaps " + actions[previous] + " at " + context);
+                    }
+                    // Assert before yielding: Update restores the real Screen dimensions on the next frame.
+                    yield return null;
+                }
+        }
+
+        [UnityTest] public IEnumerator InterfaceScaleEnlargesHomeActions()
+        {
+            var shell = root.GetComponentInChildren<PlayerShell>();
+            game.SetInterfaceScale(1); shell.ApplyLayout(1920, 1080); Canvas.ForceUpdateCanvases();
+            float ordinary = ((RectTransform)Find("Open campaign").transform).rect.height * shell.Layout.Scale;
+            game.SetInterfaceScale(1.5f); shell.ApplyLayout(1920, 1080); Canvas.ForceUpdateCanvases();
+            float enlarged = ((RectTransform)Find("Open campaign").transform).rect.height * shell.Layout.Scale;
+            Assert.That(enlarged, Is.GreaterThan(ordinary * 1.2f), "Home must honour the interface accessibility scale.");
+            yield return null;
+        }
+
+        [UnityTest] public IEnumerator LongerHomeCaptionRemainsReadable()
+        {
+            var caption = Find("workshop").GetComponentInChildren<Text>();
+            caption.text = "Мастерская чертежей и рисунков";
+            yield return null;
+            Canvas.ForceUpdateCanvases();
+            Assert.That(caption.cachedTextGenerator.characterCountVisible, Is.GreaterThanOrEqualTo(caption.text.Length),
+                "A longer home action must fit rather than truncate after its first word.");
+        }
+
+        static Rect BoundsInPage(RectTransform page, RectTransform target)
+        {
+            var corners = new Vector3[4]; target.GetWorldCorners(corners);
+            Vector2 min = page.InverseTransformPoint(corners[0]), max = min;
+            foreach (var corner in corners)
+            {
+                Vector2 local = page.InverseTransformPoint(corner);
+                min = Vector2.Min(min, local); max = Vector2.Max(max, local);
+            }
+            return Rect.MinMaxRect(min.x, min.y, max.x, max.y);
+        }
+
+        [UnityTest] public IEnumerator HomeSettingsHelpAndCancelledExitPreserveTheIdleSession()
+        {
+            var session = game.Run.Session;
+            long tick = session.TickIndex;
+            Find("settings").onClick.Invoke(); yield return null;
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Settings));
+            Find("Close settings").onClick.Invoke(); yield return null;
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Home));
+            Find("help").onClick.Invoke(); yield return null;
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Help));
+            Find("Close help").onClick.Invoke(); yield return null;
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Home));
+            Find("exit").onClick.Invoke(); yield return null;
+            Assert.That(root.GetComponentInChildren<PlayerShell>().HasConfirmation, Is.True);
+            Assert.That(Find("Open campaign").IsInteractable(), Is.False);
+            Find("Cancel confirmation").onClick.Invoke(); yield return null;
+            Assert.That(root.GetComponentInChildren<PlayerShell>().HasConfirmation, Is.False);
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Home));
+            Assert.That(Find("Open campaign").IsInteractable(), Is.True);
+            Assert.That(game.Run.Session, Is.SameAs(session));
+            Assert.That(session.TickIndex, Is.EqualTo(tick));
+            Assert.That(game.Run.InWorkshop, Is.True);
+            Assert.That(game.Drawing.enabled, Is.False);
         }
 
         [UnityTest] public IEnumerator IconNavigationReachesRealBattleWithFrozenLoadout()
@@ -203,6 +296,306 @@ namespace PaperDefense.Tests
             Assert.That(game.Drawing.Tier, Is.EqualTo(MaterialTier.Ink));
             Assert.That(game.Drawing.enabled, Is.True);
             Assert.That(game.Drawing.HandleSessionHotkeys, Is.False);
+        }
+
+        [UnityTest] public IEnumerator MapKeepsMissionAndNavigationVisibleAcrossWindowSizesAndInterfaceScales()
+        {
+            game.Navigate(PlayerPage.Map);
+            var shell = root.GetComponentInChildren<PlayerShell>();
+            int[,] sizes = { { 1024, 768 }, { 1280, 720 }, { 1280, 960 }, { 1600, 900 }, { 1920, 1080 } };
+            for (int size = 0; size < sizes.GetLength(0); size++)
+                foreach (float scale in new[] { 1f, 1.25f, 1.5f })
+                {
+                    game.SetInterfaceScale(scale); shell.ApplyLayout(sizes[size, 0], sizes[size, 1]);
+                    Canvas.ForceUpdateCanvases();
+                    var page = ActiveRect("Page Map");
+                    string context = sizes[size, 0] + "x" + sizes[size, 1] + " at " + scale;
+                    Assert.That(page.GetComponentsInChildren<ScrollRect>(), Is.Empty,
+                        "The mission page must fit without scrolling at " + context);
+                    foreach (string name in new[] { "Mission map", "Mission information" })
+                        AssertWithin(page, ActiveRect(name), context);
+                    var back = Find("Back"); var prepare = Find("Prepare mission");
+                    Assert.That(back.IsInteractable(), Is.True, context);
+                    Assert.That(prepare.IsInteractable(), Is.True, context);
+                    AssertWithin(page, (RectTransform)back.transform, context);
+                    AssertWithin(page, (RectTransform)prepare.transform, context);
+                    Assert.That(BoundsInPage(page, (RectTransform)back.transform).Overlaps(
+                        BoundsInPage(page, (RectTransform)prepare.transform)), Is.False, context);
+                    yield return null;
+                }
+        }
+
+        [UnityTest] public IEnumerator PreparationShowsAllFourCardsInOneRowWithoutScrollingAcrossWindowSizesAndInterfaceScales()
+        {
+            game.Navigate(PlayerPage.Preparation);
+            var shell = root.GetComponentInChildren<PlayerShell>();
+            int[,] sizes = { { 1024, 768 }, { 1280, 720 }, { 1280, 960 }, { 1600, 900 }, { 1920, 1080 } };
+            for (int size = 0; size < sizes.GetLength(0); size++)
+                foreach (float scale in new[] { 1f, 1.25f, 1.5f })
+                {
+                    game.SetInterfaceScale(scale); shell.ApplyLayout(sizes[size, 0], sizes[size, 1]);
+                    Canvas.ForceUpdateCanvases();
+                    var page = ActiveRect("Page Preparation");
+                    string context = sizes[size, 0] + "x" + sizes[size, 1] + " at " + scale;
+                    Assert.That(page.GetComponentsInChildren<ScrollRect>(), Is.Empty,
+                        "All four blueprints and materials must fit without scrolling at " + context);
+                    string[] actions = { "Back", "Edit album", "Open preparation album", "Start battle" };
+                    var actionBounds = new Rect[actions.Length];
+                    for (int action = 0; action < actions.Length; action++)
+                    {
+                        var button = Find(actions[action]);
+                        Assert.That(button.IsInteractable(), Is.True, actions[action] + " at " + context);
+                        AssertWithin(page, (RectTransform)button.transform, context);
+                        AssertReadable(button.GetComponentInChildren<Text>(), shell.Layout.Scale, context);
+                        actionBounds[action] = BoundsInPage(page, (RectTransform)button.transform);
+                        for (int previous = 0; previous < action; previous++)
+                            Assert.That(actionBounds[action].Overlaps(actionBounds[previous]), Is.False,
+                                actions[action] + " overlaps " + actions[previous] + " at " + context);
+                    }
+                    var slotBounds = new Rect[4];
+                    for (int slot = 0; slot < 4; slot++)
+                    {
+                        var card = ActiveRect("Loadout " + slot);
+                        AssertWithin(page, card, context);
+                        slotBounds[slot] = BoundsInPage(page, card);
+                        Assert.That(slotBounds[slot].center.y, Is.EqualTo(slotBounds[0].center.y).Within(1),
+                            "All four blueprints must share a single row at " + context);
+                        for (int previous = 0; previous < slot; previous++)
+                            Assert.That(slotBounds[slot].Overlaps(slotBounds[previous]), Is.False,
+                                "Loadout cards overlap at " + context);
+                        for (int action = 0; action < actionBounds.Length; action++)
+                            Assert.That(slotBounds[slot].Overlaps(actionBounds[action]), Is.False,
+                                "Loadout " + slot + " covers " + actions[action] + " at " + context);
+                        foreach (var graphic in card.GetComponentsInChildren<Graphic>())
+                        {
+                            AssertWithin(card, graphic.rectTransform, context);
+                            Assert.That(graphic.canvasRenderer.cull, Is.False,
+                                "Card content must remain visible: " + graphic.name + " at " + context);
+                        }
+                        AssertReadable(ActiveText("Loadout name " + slot), shell.Layout.Scale, context);
+                        AssertReadable(ActiveText("Loadout description " + slot), shell.Layout.Scale, context);
+                        AssertReadable(ActiveText("Loadout cost " + slot), shell.Layout.Scale, context);
+                        var replace = Find("Replace blueprint " + slot);
+                        Assert.That(replace.IsInteractable(), Is.True, context);
+                        AssertReadable(replace.GetComponentInChildren<Text>(), shell.Layout.Scale, context);
+                    }
+                    var materialBounds = new Rect[3];
+                    for (int tier = 0; tier < 3; tier++)
+                    {
+                        var material = Find("Starting material " + tier);
+                        Assert.That(material.IsInteractable(), Is.True, context);
+                        AssertWithin(page, (RectTransform)material.transform, context);
+                        AssertReadable(material.GetComponentInChildren<Text>(), shell.Layout.Scale, context);
+                        materialBounds[tier] = BoundsInPage(page, (RectTransform)material.transform);
+                        foreach (var card in slotBounds)
+                            Assert.That(materialBounds[tier].Overlaps(card), Is.False, "Material overlaps a blueprint at " + context);
+                        foreach (var action in actionBounds)
+                            Assert.That(materialBounds[tier].Overlaps(action), Is.False, "Material overlaps navigation at " + context);
+                        for (int previous = 0; previous < tier; previous++)
+                            Assert.That(materialBounds[tier].Overlaps(materialBounds[previous]), Is.False,
+                                "Material choices overlap at " + context);
+                    }
+                    // Validate the requested virtual size before Update returns to the real Game view size.
+                    yield return null;
+                }
+        }
+
+        [UnityTest] public IEnumerator MissionSummaryUsesTheActiveRulesRatherThanNumbersFromTheSketch()
+        {
+            balance.workshopStartingInk = 913; balance.baseHealth = 337;
+            balance.waves = new[] { balance.waves[0], balance.waves[1], balance.waves[2] };
+            game.Run.OpenWorkshop(); game.Navigate(PlayerPage.Map); yield return null;
+            Assert.That(ActiveText("Mission waves").text, Does.Contain(game.Run.Session.Balance.Waves.Count.ToString()));
+            Assert.That(ActiveText("Mission starting ink").text, Does.Contain("913"));
+            Assert.That(ActiveText("Mission castle health").text, Does.Contain("337"));
+            var session = game.Run.Session;
+            Find("Prepare mission").onClick.Invoke(); yield return null;
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Preparation));
+            Assert.That(game.Run.Session, Is.SameAs(session));
+            Assert.That(game.Run.InWorkshop, Is.True);
+            Assert.That(game.Drawing.enabled, Is.False);
+        }
+
+        [UnityTest] public IEnumerator SelectingPreparationMaterialUpdatesAllFourConstructionPrices()
+        {
+            foreach (var material in balance.materials) material.cost = 1.1f + (int)material.tier * 1.3f;
+            game.Run.OpenWorkshop(); game.Navigate(PlayerPage.Preparation); yield return null;
+            var session = game.Run.Session;
+            var ids = new string[4];
+            for (int slot = 0; slot < 4; slot++) ids[slot] = game.Run.Workshop.Loadout[slot].Id;
+            int previousCost = -1;
+            for (int material = 0; material < 3; material++)
+            {
+                Find("Starting material " + material).onClick.Invoke();
+                Assert.That(game.Drawing.Tier, Is.EqualTo((MaterialTier)material));
+                for (int slot = 0; slot < 4; slot++)
+                {
+                    var blueprint = game.Run.Workshop.Loadout[slot];
+                    int expected = game.Run.PreviewBlueprint(blueprint, game.Drawing.Tier).Cost;
+                    Assert.That(ActiveText("Loadout cost " + slot).text, Does.Contain(expected.ToString()),
+                        "Slot " + slot + " must quote the selected material.");
+                    Assert.That(blueprint.Id, Is.EqualTo(ids[slot]));
+                }
+                int firstCost = game.Run.PreviewBlueprint(game.Run.Workshop.Loadout[0], game.Drawing.Tier).Cost;
+                Assert.That(firstCost, Is.GreaterThan(previousCost)); previousCost = firstCost;
+                Assert.That(game.Run.Session, Is.SameAs(session));
+                Assert.That(game.Run.InWorkshop, Is.True);
+                yield return null;
+            }
+        }
+
+        [UnityTest] public IEnumerator SelectingPreparationMaterialPreservesCompactCardPositionsAndKeyboardFocus()
+        {
+            game.SetInterfaceScale(1.5f); yield return null; yield return null;
+            game.Navigate(PlayerPage.Preparation); yield return null;
+            Canvas.ForceUpdateCanvases();
+            var page = ActiveRect("Page Preparation");
+            Assert.That(page.GetComponentsInChildren<ScrollRect>(), Is.Empty);
+            var cards = new Rect[4]; var prices = new Rect[4];
+            for (int slot = 0; slot < 4; slot++)
+            {
+                cards[slot] = BoundsInPage(page, ActiveRect("Loadout " + slot));
+                prices[slot] = BoundsInPage(page, ActiveText("Loadout cost " + slot).rectTransform);
+            }
+            var material = Find("Starting material 2");
+            var events = UnityEngine.EventSystems.EventSystem.current;
+            events.SetSelectedGameObject(material.gameObject);
+            Canvas.ForceUpdateCanvases();
+            material.onClick.Invoke(); yield return null;
+            Canvas.ForceUpdateCanvases(); page = ActiveRect("Page Preparation");
+            Assert.That(page.GetComponentsInChildren<ScrollRect>(), Is.Empty);
+            Assert.That(events.currentSelectedGameObject, Is.Not.Null, "Keyboard selection must survive a material change.");
+            Assert.That(events.currentSelectedGameObject.name, Is.EqualTo("Starting material 2"));
+            Assert.That(game.Drawing.Tier, Is.EqualTo(MaterialTier.Marker));
+            for (int slot = 0; slot < 4; slot++)
+            {
+                AssertSameBounds(cards[slot], BoundsInPage(page, ActiveRect("Loadout " + slot)), "Card " + slot);
+                AssertSameBounds(prices[slot], BoundsInPage(page, ActiveText("Loadout cost " + slot).rectTransform), "Price " + slot);
+                Assert.That(ActiveText("Loadout cost " + slot).text,
+                    Does.Contain(game.Run.PreviewBlueprint(game.Run.Workshop.Loadout[slot], MaterialTier.Marker).Cost.ToString()));
+            }
+        }
+
+        [UnityTest] public IEnumerator PreparationAlbumCanBeCancelledWithoutChangingTheLoadoutOrStartingBattle()
+        {
+            game.Navigate(PlayerPage.Preparation); yield return null;
+            Find("Starting material 2").onClick.Invoke();
+            var session = game.Run.Session; long tick = session.TickIndex;
+            var ids = new string[4];
+            for (int slot = 0; slot < 4; slot++) ids[slot] = game.Run.Workshop.Loadout[slot].Id;
+            Find("Open preparation album").onClick.Invoke(); yield return null;
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Preparation));
+            Assert.That(Find("Start battle").IsInteractable(), Is.False);
+            Find("Close blueprint picker").onClick.Invoke(); yield return null;
+            Assert.That(Find("Start battle").IsInteractable(), Is.True);
+            Assert.That(game.Run.Session, Is.SameAs(session));
+            Assert.That(session.TickIndex, Is.EqualTo(tick));
+            Assert.That(game.Run.InWorkshop, Is.True);
+            Assert.That(game.Drawing.Tier, Is.EqualTo(MaterialTier.Marker));
+            for (int slot = 0; slot < 4; slot++) Assert.That(game.Run.Workshop.Loadout[slot].Id, Is.EqualTo(ids[slot]));
+        }
+
+        [UnityTest] public IEnumerator PreparationBlocksStartingWithAnEmptyLoadout()
+        {
+            var catalog = LegacyContentCatalog.CreateInput(balance.CreateWorkshopBalance());
+            catalog.StartingPages.Clear();
+            // Runtime snapshots require a known template even when the fixture contains no pages.
+            const string template = "template.journey.empty";
+            catalog.Templates.Add(new DrawingTemplateDefinitionInput { Id = template, DisplayName = "Пустой тестовый набор" });
+            foreach (var part in catalog.Chassis) part.TemplateId = template;
+            foreach (var part in catalog.Weapons) part.TemplateId = template;
+            foreach (var part in catalog.Modules) part.TemplateId = template;
+            game.Run.InitializeWorkshop(new JourneyProfileStore(new WorkshopProfile(catalog.CreateSnapshot())));
+            game.Navigate(PlayerPage.Preparation); yield return null;
+            var session = game.Run.Session;
+            var start = Find("Start battle");
+            Assert.That(start.IsInteractable(), Is.False, "Choose all four blueprints before starting a mission.");
+            UnityEngine.EventSystems.ExecuteEvents.Execute(start.gameObject,
+                new UnityEngine.EventSystems.BaseEventData(UnityEngine.EventSystems.EventSystem.current),
+                UnityEngine.EventSystems.ExecuteEvents.submitHandler);
+            Assert.That(game.Run.Session, Is.SameAs(session));
+            Assert.That(game.Run.InWorkshop, Is.True);
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Preparation));
+            Assert.That(Find("Open preparation album").IsInteractable(), Is.True);
+            Assert.That(Find("Edit album").IsInteractable(), Is.True);
+        }
+
+        [UnityTest] public IEnumerator PreparationAlbumSlotTabsKeepChoicesUniqueAndCancelWithoutChangingTheLoadout()
+        {
+            game.Navigate(PlayerPage.Preparation); yield return null;
+            var session = game.Run.Session;
+            var ids = new string[4];
+            for (int slot = 0; slot < 4; slot++) ids[slot] = game.Run.Workshop.Loadout[slot].Id;
+            Find("Open preparation album").onClick.Invoke(); yield return null;
+            for (int destination = 0; destination < 4; destination++)
+            {
+                Find("Album slot " + destination).onClick.Invoke(); yield return null;
+                Assert.That(Find("Start battle").IsInteractable(), Is.False);
+                for (int slot = 0; slot < 4; slot++)
+                {
+                    Assert.That(game.Run.Workshop.Loadout[slot].Id, Is.EqualTo(ids[slot]));
+                    Assert.That(Find("Pick blueprint " + ids[slot]).IsInteractable(), Is.EqualTo(slot == destination),
+                        "Only the current slot may keep its assigned page; the other three pages are already taken.");
+                }
+            }
+            Find("Close blueprint picker").onClick.Invoke(); yield return null;
+            Assert.That(Find("Start battle").IsInteractable(), Is.True);
+            Assert.That(game.Run.Session, Is.SameAs(session));
+            Assert.That(game.Run.InWorkshop, Is.True);
+            for (int slot = 0; slot < 4; slot++) Assert.That(game.Run.Workshop.Loadout[slot].Id, Is.EqualTo(ids[slot]));
+        }
+
+        RectTransform ActiveRect(string name)
+        {
+            var rect = System.Array.Find(root.GetComponentsInChildren<RectTransform>(), x => x.name == name);
+            Assert.That(rect, Is.Not.Null, "Missing active layout: " + name); return rect;
+        }
+
+        Text ActiveText(string name)
+        {
+            var text = System.Array.Find(root.GetComponentsInChildren<Text>(), x => x.name == name);
+            Assert.That(text, Is.Not.Null, "Missing live label: " + name); return text;
+        }
+
+        static void AssertWithin(RectTransform boundary, RectTransform target, string context)
+        {
+            var bounds = BoundsInPage(boundary, target);
+            string message = target.name + " at " + context;
+            Assert.That(bounds.width, Is.GreaterThan(0), message);
+            Assert.That(bounds.height, Is.GreaterThan(0), message);
+            Assert.That(bounds.xMin, Is.GreaterThanOrEqualTo(boundary.rect.xMin - 1), message);
+            Assert.That(bounds.xMax, Is.LessThanOrEqualTo(boundary.rect.xMax + 1), message);
+            Assert.That(bounds.yMin, Is.GreaterThanOrEqualTo(boundary.rect.yMin - 1), message);
+            Assert.That(bounds.yMax, Is.LessThanOrEqualTo(boundary.rect.yMax + 1), message);
+        }
+
+        static void AssertReadable(Text text, float physicalScale, string context)
+        {
+            Assert.That(text, Is.Not.Null, "Missing visible caption at " + context);
+            Assert.That(text.canvasRenderer.cull, Is.False, text.name + " at " + context);
+            Assert.That(text.cachedTextGenerator.characterCountVisible, Is.GreaterThanOrEqualTo(text.text.Length),
+                "Caption must fit completely: " + text.text + " at " + context);
+            // Unity reports best-fit size in generated screen pixels, including pixelsPerUnit.
+            // Convert back to logical units before applying the resolution under test.
+            float size = text.resizeTextForBestFit
+                ? text.cachedTextGenerator.fontSizeUsedForBestFit / text.pixelsPerUnit
+                : text.fontSize;
+            Assert.That(size * physicalScale, Is.GreaterThanOrEqualTo(14),
+                "Caption must remain readable: " + text.text + " at " + context);
+        }
+
+        static void AssertSameBounds(Rect expected, Rect actual, string context)
+        {
+            Assert.That(Vector2.Distance(expected.position, actual.position), Is.LessThanOrEqualTo(1), context + " moved after changing material.");
+            Assert.That(Vector2.Distance(expected.size, actual.size), Is.LessThanOrEqualTo(1), context + " resized after changing material.");
+        }
+
+        sealed class JourneyProfileStore : IWorkshopProfileStore
+        {
+            WorkshopProfile profile;
+            public JourneyProfileStore(WorkshopProfile profile) { this.profile = profile; }
+            public ProfileLoadResult Load() => new ProfileLoadResult(profile, ProfileLoadSource.Primary, "Isolated player journey profile", true);
+            public ProfileSaveResult Save(WorkshopProfile candidate) { profile = candidate; return new ProfileSaveResult(true, ""); }
         }
 
         [UnityTest] public IEnumerator PauseBlocksConstructionAndSimulationUntilResume()
@@ -346,18 +739,64 @@ namespace PaperDefense.Tests
             Assert.That(found, Is.True); Assert.That(Find("Wizard close album"), Is.Not.Null);
         }
 
-        [UnityTest] public IEnumerator ScrolledBlueprintCannotDrawOverFixedNavigation()
+        [UnityTest] public IEnumerator AuthoredPreparationDrawingFitsItsCardAndStaysClearOfCompactNavigation()
         {
+            var authored = game.Run.Workshop.Loadout[0].AsVariant("compact-drawing", "Мой рисунок");
+            var drawing = new DrawingEditSession(authored);
+            Assert.That(drawing.AddRectangle(DrawingBindings.Base, new DrawingPoint(-.35f, -.35f),
+                new DrawingPoint(.35f, .35f), out var reason), Is.True, reason);
+            Assert.That(drawing.AddRectangle(DrawingBindings.Mount0, new DrawingPoint(-.0625f, 0),
+                new DrawingPoint(.0625f, .5f), out reason), Is.True, reason);
+            authored = authored.WithDrawing(drawing.Snapshot);
+            Assert.That(game.Run.SaveBlueprint(authored, out reason), Is.True, reason);
+            Assert.That(game.Run.AssignBlueprint(0, authored.Id, out reason), Is.True, reason);
+            game.SetInterfaceScale(1.5f); yield return null; yield return null;
+            game.Navigate(PlayerPage.Preparation); yield return null; Canvas.ForceUpdateCanvases();
+            var page = ActiveRect("Page Preparation"); var card = ActiveRect("Loadout 0");
+            Assert.That(page.GetComponentsInChildren<ScrollRect>(), Is.Empty);
+            var sketch = card.GetComponentInChildren<BlueprintSketch>();
+            Assert.That(sketch, Is.Not.Null, "A player's actual drawing must stay visible in preparation.");
+            var sketchRect = (RectTransform)sketch.transform;
+            AssertWithin(card, sketchRect, "150% interface scale");
+            AssertWithin(page, card, "150% interface scale");
+            Assert.That(sketch.canvasRenderer.cull, Is.False, "The authored illustration must be visible without scrolling.");
+            var pictureBounds = BoundsInPage(page, sketchRect);
+            foreach (string action in new[] { "Edit album", "Open preparation album", "Start battle" })
+                Assert.That(pictureBounds.Overlaps(BoundsInPage(page, (RectTransform)Find(action).transform)), Is.False,
+                    "The authored drawing must stay clear of " + action);
+            Assert.That(game.Run.Workshop.Loadout[0].Drawing.GeometryHash, Is.EqualTo(authored.Drawing.GeometryHash));
+        }
+
+        [UnityTest] public IEnumerator MaximumLengthStoredBlueprintNameRemainsReadableInCompactPreparation()
+        {
+            const string phrase = "Моя пробивающая башня 01";
+            string name = phrase + phrase;
+            Assert.That(name.Length, Is.EqualTo(ProfileLimits.MaximumBlueprintNameLength));
+            var authored = game.Run.Workshop.Loadout[2].AsVariant("maximum-name-drawing", name);
+            var drawing = new DrawingEditSession(authored);
+            Assert.That(drawing.AddRectangle(DrawingBindings.Base, new DrawingPoint(-.35f, -.35f),
+                new DrawingPoint(.35f, .35f), out var reason), Is.True, reason);
+            Assert.That(drawing.AddRectangle(DrawingBindings.Mount0, new DrawingPoint(-.0625f, 0),
+                new DrawingPoint(.0625f, .5f), out reason), Is.True, reason);
+            authored = authored.WithDrawing(drawing.Snapshot);
+            Assert.That(game.Run.SaveBlueprint(authored, out reason), Is.True, reason);
+            Assert.That(game.Run.AssignBlueprint(0, authored.Id, out reason), Is.True, reason);
             game.Navigate(PlayerPage.Preparation); yield return null;
-            ScrollRect scroll = null; BlueprintSketch sketch = null;
-            foreach (var item in root.GetComponentsInChildren<ScrollRect>()) if (item.name == "Preparation scroll") scroll = item;
-            foreach (var item in scroll.GetComponentsInChildren<BlueprintSketch>()) { sketch = item; break; }
-            var card = (RectTransform)sketch.transform.parent;
-            card.anchoredPosition = new Vector2(card.anchoredPosition.x, 500);
-            Canvas.ForceUpdateCanvases(); yield return null;
-            Assert.That(sketch.canvasRenderer.cull, Is.True, "Blueprint must be clipped outside the preparation viewport.");
-            Assert.That(typeof(IClippable).IsAssignableFrom(typeof(WorkshopMapSketch)), Is.True);
-            Assert.That(typeof(IClippable).IsAssignableFrom(typeof(FootprintAxisGraphic)), Is.True);
+            var shell = root.GetComponentInChildren<PlayerShell>();
+            int[,] sizes = { { 1024, 768 }, { 1024, 768 }, { 1024, 768 }, { 1280, 720 } };
+            float[] scales = { 1, 1.25f, 1.5f, 1.5f };
+            for (int size = 0; size < sizes.GetLength(0); size++)
+            {
+                game.SetInterfaceScale(scales[size]); shell.ApplyLayout(sizes[size, 0], sizes[size, 1]);
+                Canvas.ForceUpdateCanvases();
+                var caption = ActiveText("Loadout name 0");
+                string context = sizes[size, 0] + "x" + sizes[size, 1] + " at " + scales[size];
+                Assert.That(caption.text, Is.EqualTo(game.Run.Workshop.Loadout[0].Name));
+                Assert.That(caption.text.Length, Is.EqualTo(48));
+                AssertWithin(ActiveRect("Loadout 0"), caption.rectTransform, context);
+                AssertReadable(caption, shell.Layout.Scale, context);
+                yield return null;
+            }
         }
     }
 }

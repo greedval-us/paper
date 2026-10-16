@@ -1,0 +1,109 @@
+{
+  "status": "PASS",
+  "markdown_files": 40,
+  "local_links": 723,
+  "missing_links": [],
+  "concept_images_preserved": 28,
+  "prototype_images_present": 30,
+  "prototype_zip_valid": true,
+  "baseline_files_unchanged": 437,
+  "authorized_existing_code_changes": [
+    "Assets/PaperDefense/Editor/FullGameUiCapture.cs",
+    "Assets/PaperDefense/Presentation/Player/NotebookPaperSurface.cs",
+    "Assets/PaperDefense/Presentation/Player/PlayerPaperGraphic.cs",
+    "Assets/PaperDefense/Presentation/Player/PlayerShell.cs",
+    "Assets/PaperDefense/Presentation/Player/PlayerUi.cs",
+    "Assets/PaperDefense/Tests/PlayMode/PlayerJourneyTests.cs"
+  ],
+  "asset_sha256": {
+    "MapLandscape": "9f2991322ca6c0893646ce911fc7c0f19def5fc429cc97d039b7c8d249882373",
+    "PreparationLandscape": "4c6503f052759fc159e166e7d9abedd9328b3f9506181eca149e83148dc76174",
+    "PreparationTowers": "4f035f1f7028226322c78930db9602c541b1d60580dfb6014b22adaebf067967",
+    "MissionIllustrations": "854a0b5b2edebeda889c2e4e9b38b1f44026b155b1163d9a12c95921acf37039"
+  },
+  "screenshots": {
+    "before-map.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "sha256": "a86b92fd114f8e6fd09d458e1cfd1eb6ac1fd5afa7676c4ea3b48b11b3fb5bc7"
+    },
+    "before-preparation.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "sha256": "2589565d96ad01e6efa58fd19cf37e4b712bab07324a42ffe7250221629e52c6"
+    },
+    "map-1280x720-scale150.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "cd013c671428f2d4cbaf1fae03f95c2d4da523027e6f1d7dad9528180977e309"
+    },
+    "map-1280x960.png": {
+      "size": [
+        1280,
+        960
+      ],
+      "sha256": "2df3df9e243096874a0876f8adb67cdc9035cd1aacaa8cc9f49bc9554e6e5f1e"
+    },
+    "map-1600x900.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "sha256": "8a8c1c0bd665a504c3b05902740afc61d8f66bdc3cf555cc36a281f3b6e7ad84"
+    },
+    "preparation-1280x720-scale150.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "ad0fdbd37ab705ed20ec8f3b512fde8725b419b21e8077758d6b37c150cd120a"
+    },
+    "preparation-1280x960.png": {
+      "size": [
+        1280,
+        960
+      ],
+      "sha256": "77861b39c1f49065f5da515371a366051a91a179f05ae4d5926c9ff5e27b9ceb"
+    },
+    "preparation-1600x900.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "sha256": "4e6266f42ba293450bfe64ad4aca984f6dff2a25d7481f90da10a4db0ee470d0"
+    },
+    "preparation-album.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "sha256": "4e3e2909e87cc76a2d9be22b955062c042fb9e0a94367c7e45cc777cb1def725"
+    },
+    "preparation-long-name.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "994f3e76936aa1da6ba7d4b03d1b4d95a36bcb5be52e8c7486b40074d7b5a4d9"
+    },
+    "preparation-marker.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "sha256": "81d28008496a2ef54f660a5194f2b919b50f45e4134d3dcdd980110ea865fea5"
+    }
+  },
+  "text_checks_empty": 11,
+  "build_game_assemblies": [
+    "PaperDefense.Application.dll",
+    "PaperDefense.Core.dll",
+    "PaperDefense.Presentation.dll"
+  ]
+}

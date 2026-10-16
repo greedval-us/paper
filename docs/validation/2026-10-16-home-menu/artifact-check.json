@@ -1,0 +1,83 @@
+{
+  "status": "PASS",
+  "markdown_files": 39,
+  "local_links": 684,
+  "missing_links": [],
+  "concept_images_preserved": 28,
+  "prototype_images_present": 30,
+  "prototype_zip_valid": true,
+  "baseline_files_unchanged": 437,
+  "authorized_existing_code_changes": [
+    "Assets/PaperDefense/Editor/FullGameUiCapture.cs",
+    "Assets/PaperDefense/Presentation/Player/NotebookPaperSurface.cs",
+    "Assets/PaperDefense/Presentation/Player/PlayerPaperGraphic.cs",
+    "Assets/PaperDefense/Presentation/Player/PlayerShell.cs",
+    "Assets/PaperDefense/Presentation/Player/PlayerUi.cs",
+    "Assets/PaperDefense/Tests/PlayMode/PlayerJourneyTests.cs"
+  ],
+  "background_sha256": "9ae945c48b714e6a68b904f6dc4aa2ae8ff820228d3ffd227a4f52348de4eb23",
+  "screenshots": {
+    "before-home.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "sha256": "3986c56f77a4c90e54e1cf1fbf51f73045b7984efce62985e2b8596db7fe3b90"
+    },
+    "home-1280x720-scale150.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "e03d22fdd0570d49b48752de4219da479b4ed7fd7c70acd63e564d739a41042b"
+    },
+    "home-1280x960.png": {
+      "size": [
+        1280,
+        960
+      ],
+      "sha256": "cdb8dd9c3b5fbd324948e34eff3976e39554960191e1cf8b5f3be7660255359f"
+    },
+    "home-1600x900.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "sha256": "b3a77d82c77050e6366d97fc9f7e80a023ace9f23f03fd1843c57517bf2d527a"
+    },
+    "home-keyboard-focus.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "sha256": "e6d42887b7d14bd304980f6db8ee8d4cd5e369f78f3d3df275e3cca3a1bf0400"
+    },
+    "home-long-copy.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "sha256": "6a8b08ce93eb058cc13bc9dad1aa0419b28df7cde4e8f43e5d84b7fed414948f"
+    },
+    "shared-settings.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "10d9fc19b3eb37c9d8e577cf3c06ace6d0bf333e4a905ddf5cafcfbc9895e416"
+    },
+    "shared-workshop.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "sha256": "d8ea7b14bddbe82f9038b04adc7210f08665d3d0ce1a8eccfa98af1a1b50207a"
+    }
+  },
+  "text_checks_empty": 8,
+  "build_game_assemblies": [
+    "PaperDefense.Application.dll",
+    "PaperDefense.Core.dll",
+    "PaperDefense.Presentation.dll"
+  ]
+}

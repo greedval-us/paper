@@ -1,6 +1,6 @@
 # Параметры «ДЕРЖИ ЛИНИЮ»
 
-Техническая справка по существующей базе игры. [Эскизы и целевой дизайн](Game-Design.md) ещё не реализованы в Unity; расположение элементов ниже описывает текущую оболочку. [Порядок будущей реализации](Implementation-Roadmap.md).
+Техническая справка по действующим системам игры. [Эскизы и целевой дизайн](Game-Design.md) задают визуальный ориентир; [статус переноса в Unity](Implementation-Roadmap.md) отделяет реализованные экраны от оставшейся работы.
 
 Источник основной игры — [PlayerBalance.asset](../Assets/PaperDefense/Configuration/Game/PlayerBalance.asset) → [PlayerRules.asset](../Assets/PaperDefense/Configuration/Game/PlayerRules.asset) → [PlayerContent.asset](../Assets/PaperDefense/Configuration/Game/PlayerContent.asset). Отдельные [Historical.asset](../Assets/PaperDefense/Configuration/Content/Historical.asset) и [Target.asset](../Assets/PaperDefense/Configuration/Content/Target.asset) используют [NotebookContent.asset](../Assets/PaperDefense/Configuration/Content/NotebookContent.asset) и сохранены для редакторских сравнений. Таблицы ниже различают исторические и Target-значения; для основной игры приоритет у PlayerRules. Разрешённые значения попадают в снимок `Core.GameBalance` и каталог; правка исходного asset не меняет начатый бой или полигон. [Точные пути и добавление данных](Content-Architecture.md), [основания и примеры](Modular-Towers.md), [разработка и проверки](Development-Guide.md).
 

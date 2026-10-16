@@ -1,0 +1,543 @@
+{
+  "schema_version": "mockup-layout-plan/v2",
+  "layout_contract": {
+    "ui_stack": "UGUI",
+    "mode": "build",
+    "mockup_source": "docs/design/game-concept-art-2026-10-16/screens/01-home.png",
+    "mockup_resolution": "1672x941",
+    "target_resolution": "1600x900",
+    "root_owner": "Root",
+    "structure_rule": "Existing PlayerShell owns page; parent flow owns repeated actions",
+    "candidate_policy": {
+      "accepted": "Runtime controls with known callbacks; recorded agent review",
+      "held": "No unresolved candidates",
+      "rejected": "Source UI lettering is removed from generated background"
+    }
+  },
+  "stack_realization": {
+    "target_surface": "runtime",
+    "reusable_asset_type": "prefab",
+    "ugui": {
+      "canvas_root": "Player interface/Player pages/Page Home",
+      "reference_resolution": "PlayerLayout logical width/height (main 1600x900)",
+      "reusable_unit": "Existing PlayerUi.Button code component; no persistent prefab required"
+    }
+  },
+  "layout_tree": [
+    {
+      "node_path": "Root",
+      "role": "shell",
+      "parent_owner": "PlayerShell Canvas",
+      "node_kind": "container",
+      "layout_owner": "CanvasScaler Expand; PlayerShell owns rebuild",
+      "placement_intent": "CanvasScaler Expand; PlayerShell owns rebuild",
+      "geometry_ratios": {
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 1
+      },
+      "split_keep_reason": "Runtime page ownership"
+    },
+    {
+      "node_path": "Root/Backdrop",
+      "role": "illustration",
+      "parent_owner": "Root",
+      "node_kind": "container",
+      "layout_owner": "EnvelopeParent; aspect-preserving crop; no raycast",
+      "placement_intent": "EnvelopeParent; aspect-preserving crop; no raycast",
+      "geometry_ratios": {
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 1
+      },
+      "split_keep_reason": "Runtime page ownership"
+    },
+    {
+      "node_path": "Root/Brand",
+      "role": "wordmark",
+      "parent_owner": "Root",
+      "node_kind": "container",
+      "layout_owner": "live Cyrillic text and native ink outline; proportional fit",
+      "placement_intent": "live Cyrillic text and native ink outline; proportional fit",
+      "geometry_ratios": {
+        "x": 0.025119617224880382,
+        "y": 0.03719447396386823,
+        "width": 0.3199760765550239,
+        "height": 0.3188097768331562
+      },
+      "split_keep_reason": "Runtime page ownership"
+    },
+    {
+      "node_path": "Root/Actions",
+      "role": "action group",
+      "parent_owner": "Root",
+      "node_kind": "container",
+      "layout_owner": "VerticalLayoutGroup; preferred child sizes",
+      "placement_intent": "VerticalLayoutGroup; preferred child sizes",
+      "geometry_ratios": {
+        "x": 0.028708133971291867,
+        "y": 0.39638682252922425,
+        "width": 0.24043062200956938,
+        "height": 0.5079702444208289
+      },
+      "split_keep_reason": "Runtime page ownership"
+    },
+    {
+      "node_path": "Root/Footer",
+      "role": "caption",
+      "parent_owner": "Root",
+      "node_kind": "container",
+      "layout_owner": "live caption; no raycast",
+      "placement_intent": "live caption; no raycast",
+      "geometry_ratios": {
+        "x": 0.029904306220095694,
+        "y": 0.9330499468650372,
+        "width": 0.20933014354066987,
+        "height": 0.03719447396386823
+      },
+      "split_keep_reason": "Runtime page ownership"
+    },
+    {
+      "node_path": "Root/Actions/Open campaign",
+      "role": "button composite",
+      "parent_owner": "Root/Actions",
+      "node_kind": "visual",
+      "layout_owner": "VerticalLayoutGroup",
+      "placement_intent": "preferred height/width in source order",
+      "geometry_ratios": {
+        "x": 0.028708133971291867,
+        "y": 0.39638682252922425,
+        "width": 0.24043062200956938,
+        "height": 0.11689691817215728
+      },
+      "split_keep_reason": "Live navigation command; icon and text remain in existing button component"
+    },
+    {
+      "node_path": "Root/Actions/workshop",
+      "role": "button composite",
+      "parent_owner": "Root/Actions",
+      "node_kind": "visual",
+      "layout_owner": "VerticalLayoutGroup",
+      "placement_intent": "preferred height/width in source order",
+      "geometry_ratios": {
+        "x": 0.028708133971291867,
+        "y": 0.5217853347502657,
+        "width": 0.23923444976076555,
+        "height": 0.10201912858660998
+      },
+      "split_keep_reason": "Live navigation command; icon and text remain in existing button component"
+    },
+    {
+      "node_path": "Root/Actions/settings",
+      "role": "button composite",
+      "parent_owner": "Root/Actions",
+      "node_kind": "visual",
+      "layout_owner": "VerticalLayoutGroup",
+      "placement_intent": "preferred height/width in source order",
+      "geometry_ratios": {
+        "x": 0.028708133971291867,
+        "y": 0.6312433581296493,
+        "width": 0.23684210526315788,
+        "height": 0.09351753453772582
+      },
+      "split_keep_reason": "Live navigation command; icon and text remain in existing button component"
+    },
+    {
+      "node_path": "Root/Actions/help",
+      "role": "button composite",
+      "parent_owner": "Root/Actions",
+      "node_kind": "visual",
+      "layout_owner": "VerticalLayoutGroup",
+      "placement_intent": "preferred height/width in source order",
+      "geometry_ratios": {
+        "x": 0.028708133971291867,
+        "y": 0.7332624867162593,
+        "width": 0.23684210526315788,
+        "height": 0.08607863974495218
+      },
+      "split_keep_reason": "Live navigation command; icon and text remain in existing button component"
+    },
+    {
+      "node_path": "Root/Actions/exit",
+      "role": "button composite",
+      "parent_owner": "Root/Actions",
+      "node_kind": "visual",
+      "layout_owner": "VerticalLayoutGroup",
+      "placement_intent": "preferred height/width in source order",
+      "geometry_ratios": {
+        "x": 0.028708133971291867,
+        "y": 0.8405951115834219,
+        "width": 0.15550239234449761,
+        "height": 0.06376195536663125
+      },
+      "split_keep_reason": "Live navigation command; icon and text remain in existing button component"
+    }
+  ],
+  "candidate_item_ledger": [
+    {
+      "candidate_id": "Open campaign",
+      "source_bounds": {
+        "x": 48,
+        "y": 373,
+        "width": 402,
+        "height": 110
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "visible button boundary",
+        "known existing callback",
+        "parent action group"
+      ],
+      "suggested_role": "interactive button",
+      "parent_hint": "Root/Actions",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "Image boundary and actual named callback establish a live control."
+    },
+    {
+      "candidate_id": "workshop",
+      "source_bounds": {
+        "x": 48,
+        "y": 491,
+        "width": 400,
+        "height": 96
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "visible button boundary",
+        "known existing callback",
+        "parent action group"
+      ],
+      "suggested_role": "interactive button",
+      "parent_hint": "Root/Actions",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "Image boundary and actual named callback establish a live control."
+    },
+    {
+      "candidate_id": "settings",
+      "source_bounds": {
+        "x": 48,
+        "y": 594,
+        "width": 396,
+        "height": 88
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "visible button boundary",
+        "known existing callback",
+        "parent action group"
+      ],
+      "suggested_role": "interactive button",
+      "parent_hint": "Root/Actions",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "Image boundary and actual named callback establish a live control."
+    },
+    {
+      "candidate_id": "help",
+      "source_bounds": {
+        "x": 48,
+        "y": 690,
+        "width": 396,
+        "height": 81
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "visible button boundary",
+        "known existing callback",
+        "parent action group"
+      ],
+      "suggested_role": "interactive button",
+      "parent_hint": "Root/Actions",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "Image boundary and actual named callback establish a live control."
+    },
+    {
+      "candidate_id": "exit",
+      "source_bounds": {
+        "x": 48,
+        "y": 791,
+        "width": 260,
+        "height": 60
+      },
+      "confidence_band": "high",
+      "evidence": [
+        "visible button boundary",
+        "known existing callback",
+        "parent action group"
+      ],
+      "suggested_role": "interactive button",
+      "parent_hint": "Root/Actions",
+      "crop_padding": "none",
+      "nine_slice_candidate": false,
+      "review_source": "agent",
+      "review_decision": "accept",
+      "decision_note": "Image boundary and actual named callback establish a live control."
+    }
+  ],
+  "item_rect_plan": [
+    {
+      "item_id": "Open campaign",
+      "candidate_id": "Open campaign",
+      "node_path": "Root/Actions/Open campaign",
+      "source_rect": {
+        "x": 48,
+        "y": 373,
+        "width": 402,
+        "height": 110
+      },
+      "normalized_rect": {
+        "x": 0.028708133971291867,
+        "y": 0.39638682252922425,
+        "width": 0.24043062200956938,
+        "height": 0.11689691817215728
+      },
+      "parent_local_rect": {
+        "x": 0,
+        "y": 0,
+        "width": 402,
+        "height": 110
+      },
+      "fit_mode": "UGUI parent flow",
+      "placement_intent": "VerticalLayoutGroup preferred size; fit screen-proportional menu scale",
+      "split_keep_reason": "Live action; never bake in background",
+      "asset_plan_id": "native/Open campaign"
+    },
+    {
+      "item_id": "workshop",
+      "candidate_id": "workshop",
+      "node_path": "Root/Actions/workshop",
+      "source_rect": {
+        "x": 48,
+        "y": 491,
+        "width": 400,
+        "height": 96
+      },
+      "normalized_rect": {
+        "x": 0.028708133971291867,
+        "y": 0.5217853347502657,
+        "width": 0.23923444976076555,
+        "height": 0.10201912858660998
+      },
+      "parent_local_rect": {
+        "x": 0,
+        "y": 118,
+        "width": 400,
+        "height": 96
+      },
+      "fit_mode": "UGUI parent flow",
+      "placement_intent": "VerticalLayoutGroup preferred size; fit screen-proportional menu scale",
+      "split_keep_reason": "Live action; never bake in background",
+      "asset_plan_id": "native/workshop"
+    },
+    {
+      "item_id": "settings",
+      "candidate_id": "settings",
+      "node_path": "Root/Actions/settings",
+      "source_rect": {
+        "x": 48,
+        "y": 594,
+        "width": 396,
+        "height": 88
+      },
+      "normalized_rect": {
+        "x": 0.028708133971291867,
+        "y": 0.6312433581296493,
+        "width": 0.23684210526315788,
+        "height": 0.09351753453772582
+      },
+      "parent_local_rect": {
+        "x": 0,
+        "y": 221,
+        "width": 396,
+        "height": 88
+      },
+      "fit_mode": "UGUI parent flow",
+      "placement_intent": "VerticalLayoutGroup preferred size; fit screen-proportional menu scale",
+      "split_keep_reason": "Live action; never bake in background",
+      "asset_plan_id": "native/settings"
+    },
+    {
+      "item_id": "help",
+      "candidate_id": "help",
+      "node_path": "Root/Actions/help",
+      "source_rect": {
+        "x": 48,
+        "y": 690,
+        "width": 396,
+        "height": 81
+      },
+      "normalized_rect": {
+        "x": 0.028708133971291867,
+        "y": 0.7332624867162593,
+        "width": 0.23684210526315788,
+        "height": 0.08607863974495218
+      },
+      "parent_local_rect": {
+        "x": 0,
+        "y": 317,
+        "width": 396,
+        "height": 81
+      },
+      "fit_mode": "UGUI parent flow",
+      "placement_intent": "VerticalLayoutGroup preferred size; fit screen-proportional menu scale",
+      "split_keep_reason": "Live action; never bake in background",
+      "asset_plan_id": "native/help"
+    },
+    {
+      "item_id": "exit",
+      "candidate_id": "exit",
+      "node_path": "Root/Actions/exit",
+      "source_rect": {
+        "x": 48,
+        "y": 791,
+        "width": 260,
+        "height": 60
+      },
+      "normalized_rect": {
+        "x": 0.028708133971291867,
+        "y": 0.8405951115834219,
+        "width": 0.15550239234449761,
+        "height": 0.06376195536663125
+      },
+      "parent_local_rect": {
+        "x": 0,
+        "y": 418,
+        "width": 260,
+        "height": 60
+      },
+      "fit_mode": "UGUI parent flow",
+      "placement_intent": "VerticalLayoutGroup preferred size; fit screen-proportional menu scale",
+      "split_keep_reason": "Live action; never bake in background",
+      "asset_plan_id": "native/exit"
+    }
+  ],
+  "asset_plan": [
+    {
+      "asset_plan_id": "native/Open campaign",
+      "item_id": "Open campaign",
+      "candidate_id": "Open campaign",
+      "plan": "Reuse PlayerUi.Button and native icon; procedural notebook skin",
+      "source": "existing code primitives + NotebookHand.ttf",
+      "nine_slice": false,
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/workshop",
+      "item_id": "workshop",
+      "candidate_id": "workshop",
+      "plan": "Reuse PlayerUi.Button and native icon; procedural notebook skin",
+      "source": "existing code primitives + NotebookHand.ttf",
+      "nine_slice": false,
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/settings",
+      "item_id": "settings",
+      "candidate_id": "settings",
+      "plan": "Reuse PlayerUi.Button and native icon; procedural notebook skin",
+      "source": "existing code primitives + NotebookHand.ttf",
+      "nine_slice": false,
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/help",
+      "item_id": "help",
+      "candidate_id": "help",
+      "plan": "Reuse PlayerUi.Button and native icon; procedural notebook skin",
+      "source": "existing code primitives + NotebookHand.ttf",
+      "nine_slice": false,
+      "creates_runtime_node": true
+    },
+    {
+      "asset_plan_id": "native/exit",
+      "item_id": "exit",
+      "candidate_id": "exit",
+      "plan": "Reuse PlayerUi.Button and native icon; procedural notebook skin",
+      "source": "existing code primitives + NotebookHand.ttf",
+      "nine_slice": false,
+      "creates_runtime_node": true
+    }
+  ],
+  "behavior_plan": [
+    {
+      "behavior_id": "Open campaign",
+      "owner": "Root/Actions",
+      "intent": "Navigate Map"
+    },
+    {
+      "behavior_id": "workshop",
+      "owner": "Root/Actions",
+      "intent": "Navigate Workshop"
+    },
+    {
+      "behavior_id": "settings",
+      "owner": "Root/Actions",
+      "intent": "OpenSettings"
+    },
+    {
+      "behavior_id": "help",
+      "owner": "Root/Actions",
+      "intent": "OpenSettings(true)"
+    },
+    {
+      "behavior_id": "exit",
+      "owner": "Root/Actions",
+      "intent": "Confirm then Application.Quit"
+    }
+  ],
+  "verification_targets": [
+    {
+      "target": "main",
+      "resolution": "1600x900",
+      "checks": [
+        "whole-screen comparison",
+        "live controls",
+        "Cyrillic text"
+      ]
+    },
+    {
+      "target": "alternate aspect",
+      "resolution": "1280x960",
+      "checks": [
+        "all controls reachable",
+        "aspect-preserving art"
+      ]
+    },
+    {
+      "target": "compact",
+      "resolution": "1280x720",
+      "checks": [
+        "long labels",
+        "UI scale 1.5",
+        "safe actions"
+      ]
+    }
+  ],
+  "authorization": "User explicitly requested implementation of existing Game-Design and Implementation-Roadmap, starting common style+menu; asset redraw authorized.",
+  "baseline": {
+    "unity": "6000.5.7f1",
+    "scene": "Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity",
+    "selected_object": "not required; explicit scene/root targeted",
+    "active_ui_root": "Player interface/Player pages/Page Home",
+    "console_errors": 0,
+    "screenshot": "../validation/2026-10-16-home-menu/before-home.png"
+  },
+  "review": {
+    "source": "agent",
+    "evidence": "Root inspected source PNG and existing art; audit_menu_contracts independently traced commands; common_notebook_skin inspected source image."
+  },
+  "asset_strategy": "Generated text-free sibling HomeDefenseLandscape.png from inspected reference via built-in imagegen; existing font/native vector icons and procedural paper controls reused."
+}

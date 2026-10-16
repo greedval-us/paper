@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-16",
+  "skill": "imagegen",
+  "mode": "built-in",
+  "operation": "edit",
+  "source_reference": "docs/design/game-concept-art-2026-10-16/screens/01-home.png",
+  "output": "Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscape.png",
+  "generated_source": "C:/Users/Greedval/.codex/generated_images/01a1457f-d9e1-7a93-8681-b4486b4a41f1/exec-ea307ac7-9fdb-4b8d-bd0b-c5653adab9c2.png",
+  "size": [
+    1672,
+    941
+  ],
+  "transparent_background": false,
+  "prompt": "Use case: precise-object-edit. Asset type: production 16:9 background illustration for a Unity game main menu. Image 1 is the edit target and visual reference. Preserve its composition, detailed cobalt-blue ballpoint pen drawing, warm ivory graph paper, right-hand castle, defensive towers, pine trees, mountains, enemy doodles and foreground drawing notebook/pens. Remove EVERY UI element and ALL written content: remove the entire large Russian title/logo, slogan, all five menu buttons, button borders/icons/captions, footer sentence, annotations such as 3x and handwritten words, red health bars, numbers and any other lettering. Inpaint the whole left 30% into clean warm graph paper with no figures so separate live Unity title and buttons can sit there. Preserve detailed line art in right 70% and lower-center foreground. Keep the castle centered near x=65%, y=50%, with action mostly right of x=37%. Clean lightly aged paper, crisp pen hatching, no dark vignette, no new borders, no added objects. Do not create a screenshot or UI mockup: output only the text-free background asset. Wide 16:9 landscape, high-resolution.",
+  "unity_import": {
+    "texture_type": "Sprite",
+    "sprite_mode": "Single",
+    "max_size": 2048,
+    "compression": "Uncompressed",
+    "mipmaps": false,
+    "filter": "Bilinear",
+    "wrap": "Clamp",
+    "npot": "None"
+  },
+  "ui_separation": "Only background illustration is raster. Live Cyrillic wordmark, captions, values, icons and button/focus/state graphics are Unity UI.",
+  "preserved": "Source concept PNG is unchanged.",
+  "sha256": "9ae945c48b714e6a68b904f6dc4aa2ae8ff820228d3ffd227a4f52348de4eb23"
+}
