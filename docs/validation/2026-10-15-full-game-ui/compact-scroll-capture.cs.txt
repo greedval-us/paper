@@ -1,8 +1,0 @@
-
-// Run after wide-and-scale-capture.cs.txt completes.
-var g=PaperDefense.Editor.FullGameUiCapture.Game;
-System.Action<string,int,int,System.Action> q=PaperDefense.Editor.FullGameUiCapture.Enqueue;
-q("drawing-1280-scale125",1280,720,()=>{g.SetInterfaceScale(1.25f);PaperDefense.Editor.FullGameUiCapture.WorkshopStep(2,true);});
-q("drawing-bottom-1280-scale125",1280,720,()=>{g.GetComponentsInChildren<UnityEngine.UI.ScrollRect>().First(x=>x.name=="Workshop responsive scroll").verticalNormalizedPosition=0;});
-q("settings-bottom-1280-scale125",1280,720,()=>{g.OpenSettings();g.GetComponentsInChildren<UnityEngine.UI.ScrollRect>().First().verticalNormalizedPosition=0;});
-return "Compact scroll checks queued";

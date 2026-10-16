@@ -1,6 +1,0 @@
-{
-  "assets": [
-    { "path": "Assets/PaperDefense/Configuration/NotebookBalance.asset", "weaponsBefore": 5, "weaponsAfter": 9, "added": 4, "existingWeaponsPreserved": true, "targetPreset": false },
-    { "path": "Assets/PaperDefense/Configuration/TargetNotebookBalance.asset", "weaponsBefore": 5, "weaponsAfter": 9, "added": 4, "existingWeaponsPreserved": true, "targetPreset": true }
-  ]
-}

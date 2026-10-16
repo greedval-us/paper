@@ -1,6 +1,8 @@
 # Редактор конструкций
 
-Игровой интерфейс теперь использует [пошаговую мастерскую](Guided-Workshop.md): рисование — третий шаг, принятие черновика — «К проверке». Описанные ниже отдельные «Применить»/«Отменить» остаются в технических стендах; инструменты и расчёты общие.
+Техническая справка по существующей базе игры. [Эскизы и целевой дизайн](Game-Design.md) ещё не реализованы в Unity; расположение элементов ниже описывает текущую оболочку. [Порядок будущей реализации](Implementation-Roadmap.md).
+
+Существующая оболочка использует [пошаговую мастерскую](Guided-Workshop.md): рисование — третий шаг, принятие черновика — «К проверке». Отдельный редактор различает применение и отмену своей рабочей копии; его инструменты и расчёты описаны ниже.
 
 Для мортиры доступен отдельный [редактор «Отпечаток заряда»](Charge-Imprint.md): свободная область фиксированной площади и пробный выстрел рядом с рисунком.
 
@@ -45,11 +47,12 @@
 
 Скорострельность ограничивается также подачей и оборудованием. Радиус взрыва, угол веера и специальные эффекты остаются свойствами выбранного вида оружия. Геометрия не меняет тип снаряда. Декор не усиливает башню и не расходует функциональный лимит чернил.
 
-## Три разных ресурса
+## Лимит конструкции и ресурсы
 
 - **Лимит чернил конструкции** показывает, сколько функциональной геометрии помещается в чертёж. Это не кошелёк: исправления, отмена и новые попытки бесплатны. Лимит заново доступен для каждого чертежа.
 - **Золото** приходит за завершённые волны и победу. Оно открывает детали и многоразовые заготовки. Купленная заготовка остаётся доступной, её вставка ничего не стоит. Можно бесплатно нарисовать ту же форму вручную.
-- **Чернила в бою** оплачивают каждую построенную копию башни по её итоговой цене. Покупка заготовки не делает строительство бесплатным.
+- **Штрихи в бою** оплачивают каждую построенную копию башни по её итоговой цене. Покупка заготовки не делает строительство бесплатным.
+- **Цветные чернила** оплачивают окраску башни и включают эффекты. Красный, синий и зелёный запасы учитываются отдельно; они не заменяют штрихи строительства.
 
 Перерасход в редакторе не уничтожает рисунок. Можно уменьшить корпус, укоротить или сузить ствол, отменить действие. Применение, сохранение и строительство требуют допустимой конструкции.
 
@@ -78,7 +81,7 @@
 
 ## Где настраивать
 
-Каталог Target: [NotebookContent.asset](../Assets/PaperDefense/Configuration/Content/NotebookContent.asset). Игровой каталог: [PlayerContent.asset](../Assets/PaperDefense/Configuration/Game/PlayerContent.asset). Изолированный стенд рисования: [drawing/Catalog.asset](../Assets/PaperDefense/Configuration/Tests/drawing/Catalog.asset). Смотри также [правила свободной геометрии](Freeform-Towers.md) и [путеводитель по мастерской](Workshop-Guide.md).
+Каталог основной игры: [PlayerContent.asset](../Assets/PaperDefense/Configuration/Game/PlayerContent.asset). Каталог редакторских сравнений Target/Historical: [NotebookContent.asset](../Assets/PaperDefense/Configuration/Content/NotebookContent.asset). Смотри также [правила свободной геометрии](Freeform-Towers.md) и [путеводитель по мастерской](Workshop-Guide.md).
 
 - `catalog.FreeformRules`: опорные размеры, минимальная допустимая геометрия, коэффициенты прочности/вместимости/цены/строительства/дальности/интервала/урона, лимит и расход чернил.
 - `catalog.DrawingUnlocks`: устойчивый ID, название, описание, цена в золоте, доступность со старта, роль «корпус»/«ствол» и векторные контуры заготовки.
@@ -92,4 +95,4 @@
 
 Старые рисунки остаются доступны для исправления после изменения лимитов. Купленная заготовка не добавляет скрытого бонуса: бой зависит только от полученного рисунка и сборки.
 
-Источники: [DrawingEditorPanel](../Assets/PaperDefense/Presentation/UI/DrawingEditorPanel.cs), [DrawingCanvasGraphic](../Assets/PaperDefense/Presentation/UI/DrawingCanvasGraphic.cs), [DrawingStencilBrowser](../Assets/PaperDefense/Presentation/UI/DrawingStencilBrowser.cs), [DrawingEditSession](../Assets/PaperDefense/Core/DrawingEditSession.cs), [Drawings](../Assets/PaperDefense/Core/Drawings.cs), [FreeformTowerDesign](../Assets/PaperDefense/Core/FreeformTowerDesign.cs), [WorkshopReadModel](../Assets/PaperDefense/Application/WorkshopReadModel.cs). Поведение зафиксировано в [DrawingWorkbenchTests](../Assets/PaperDefense/Tests/PlayMode/DrawingWorkbenchTests.cs), [DrawingEditorFeedbackTests](../Assets/PaperDefense/Tests/PlayMode/DrawingEditorFeedbackTests.cs) и [DrawingUnlockTransactionTests](../Assets/PaperDefense/Tests/PlayMode/DrawingUnlockTransactionTests.cs). Результаты запуска — в [отчёте проверки 15.10.2026](validation/2026-10-15-working-geometry/report.md).
+Источники: [DrawingEditorPanel](../Assets/PaperDefense/Presentation/UI/DrawingEditorPanel.cs), [DrawingCanvasGraphic](../Assets/PaperDefense/Presentation/UI/DrawingCanvasGraphic.cs), [DrawingStencilBrowser](../Assets/PaperDefense/Presentation/UI/DrawingStencilBrowser.cs), [DrawingEditSession](../Assets/PaperDefense/Core/DrawingEditSession.cs), [Drawings](../Assets/PaperDefense/Core/Drawings.cs), [FreeformTowerDesign](../Assets/PaperDefense/Core/FreeformTowerDesign.cs), [WorkshopReadModel](../Assets/PaperDefense/Application/WorkshopReadModel.cs). Поведение зафиксировано в [DrawingWorkbenchTests](../Assets/PaperDefense/Tests/PlayMode/DrawingWorkbenchTests.cs), [DrawingEditorFeedbackTests](../Assets/PaperDefense/Tests/PlayMode/DrawingEditorFeedbackTests.cs) и [DrawingUnlockTransactionTests](../Assets/PaperDefense/Tests/PlayMode/DrawingUnlockTransactionTests.cs). Последняя общая проверка технической базы — в [отчёте очистки](validation/2026-10-16-main-game-cleanup/report.md).

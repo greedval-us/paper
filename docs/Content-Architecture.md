@@ -1,13 +1,16 @@
 # Каталог контента и баланс
 
+Техническая справка по существующей базе игры. [Эскизы и целевой дизайн](Game-Design.md) ещё не реализованы в Unity; расположение элементов ниже описывает текущую оболочку. [Порядок будущей реализации](Implementation-Roadmap.md).
+
 Основания, оружие, оборудование, заготовки рисунка и варианты существующих атак задаются записями `ContentDatabaseAsset`. Рабочий пресет объединяет эту базу с глобальными правилами. Добавление детали с уже поддерживаемым поведением не требует нового enum, кнопки HUD или ветки по её ID. Свободный рисунок добавляет геометрические множители поверх выбранных деталей; правила этого расчёта также принадлежат каталогу.
 
-Этот документ описывает источник данных и порядок расширения. [Реестр механик](Current-Mechanics.md) показывает текущий состав, [общая архитектура](PaperDefense-Architecture.md) объясняет слои, [контракты механик](Mechanics-Contracts.md) — отключение необязательных систем, [совместимость профиля](Content-Profile-Compatibility.md) — миграцию и защиту сохранений. [Отчёт приёмки каталога от 12 октября](validation/content/README.md) сохраняет сравнение до/после и проверку контента, добавленного данными.
+Этот документ описывает источник данных и порядок расширения. [Реестр механик](Current-Mechanics.md) показывает текущий состав, [общая архитектура](PaperDefense-Architecture.md) объясняет слои, [контракты механик](Mechanics-Contracts.md) — отключение необязательных систем, [совместимость профиля](Content-Profile-Compatibility.md) — миграцию и защиту сохранений.
 
 ## Рабочие assets и подготовка
 
 | Файл / тип | Назначение |
 |---|---|
+| [PlayerBalance.asset](../Assets/PaperDefense/Configuration/Game/PlayerBalance.asset), [PlayerRules.asset](../Assets/PaperDefense/Configuration/Game/PlayerRules.asset), [PlayerContent.asset](../Assets/PaperDefense/Configuration/Game/PlayerContent.asset) | Основная игра: GameBalanceAsset → BalancePresetAsset → самостоятельная база. Числа Target не подменяют её настройки. |
 | [NotebookContent.asset](../Assets/PaperDefense/Configuration/Content/NotebookContent.asset) | Общая база `ContentDatabaseAsset`: детали, эффекты, образцы, стартовые страницы, архивная оценка, `FreeformRules` и `DrawingUnlocks`. |
 | [Historical.asset](../Assets/PaperDefense/Configuration/Content/Historical.asset) | `BalancePresetAsset`: глобальные правила исторического баланса и его явные переопределения базы. |
 | [Target.asset](../Assets/PaperDefense/Configuration/Content/Target.asset) | `BalancePresetAsset`: глобальные правила целевого баланса и его явные переопределения базы. |
@@ -25,7 +28,7 @@
 
 Цепочка подготовки: `GameBalanceAsset.dataPreset` → `BalancePresetAsset.CreateBalance()` → копия `GlobalBalanceSettings` → копия каталога → полные переопределения → `ContentCatalogSnapshot` → проверенный `GameBalance` → партия, мастерская и полигон.
 
-`presets` у базы — список связанных пресетов для проверки Inspector. Активный пресет задаёт ссылка `GameBalanceAsset.dataPreset`; порядок массива `presets` ничего не выбирает. Сцена сохраняет прежние ссылки на `GameBalanceAsset`.
+`presets` у базы — список связанных пресетов для проверки Inspector. Активный пресет задаёт ссылка `GameBalanceAsset.dataPreset`; порядок массива `presets` ничего не выбирает. Основная сцена использует PlayerBalance; Historical/Target остаются для редакторских инструментов и тестов.
 
 Снимок каталога владеет своими вложенными коллекциями. `GameSession`, `WeaponSystem` и `TrialRunner` подготавливают правила на границе запуска. Read model отдаёт интерфейсу подготовленные данные. Изменение исходного asset не меняет уже начатый бой, цели, снаряды или записанное испытание. Поиск по ID, разрешение сборки, оценка и геометрия кэшируются; каталог не собирается заново каждый кадр.
 
@@ -82,14 +85,14 @@ ID непустой, без внешних пробелов и управляю�
 | `Stats.Radius`, `FlightSeconds` | Полуширина/радиус существующей геометрии и время полёта площадного снаряда. |
 | `Stats.MaxPierce`, `ConeAngleDegrees`, `MaxTargets`, `JumpRange` | Предел целей линии, угол конуса, конечное число целей и дальность следующего рикошета. |
 | `MinimumLineRadius`, `MinimumRadialRange` | Настраиваемые нижние границы геометрии соответствующего алгоритма. |
-| `MaximumFootprintAspectRatio` | Максимальное отношение сторон равновеликого овала площадного снаряда. Историческое значение3; допустимая техническая граница1–64. |
+| `MaximumFootprintAspectRatio` | Предел вытянутости овала либо свободного контура площадного снаряда. Историческое значение3; допустимая техническая граница1–64. |
 | `EffectIds` | Список встроенных эффектов попадания из `catalog.Effects`. |
 
 | `AttackKind` | Поведение |
 |---|---|
 | `Single` | Одна выбранная цель. Замедляющее оружие получается назначением эффекта `Slow`. |
 | `Line` | Линейная область с конечным пределом целей. |
-| `AreaProjectile` | Снаряд с временем полёта и зафиксированной областью попадания. Для него доступен редактор круга/овала. |
+| `AreaProjectile` | Снаряд с временем полёта и зафиксированной областью попадания. [Редактор отпечатка](Charge-Imprint.md) поддерживает круг, овал и свободный замкнутый контур постоянной площади. |
 | `Cone` | Конус с пределом целей. |
 | `Ricochet` | Цепочка соседних целей без повторного поражения той же цели в цепочке. |
 | `Radial` | Радиальная область. |
@@ -152,7 +155,7 @@ ID непустой, без внешних пробелов и управляю�
 
 ## Функциональный рисунок и заготовки
 
-`catalog.FreeformRules` задаёт опорные размеры, минимальную площадь корпуса, минимальную длину и выступание дула, коэффициенты HP/нагрузки/цены/времени/оружия и бюджет геометрических чернил. [FreeformGeometry](../Assets/PaperDefense/Core/FreeformGeometry.cs) измеряет связные группы штрихов корпуса и каждого занятого крепления; [FreeformTowerDesign](../Assets/PaperDefense/Core/FreeformTowerDesign.cs) версии 1 переводит результат в характеристики. Повторное обведение, подразделение линии и декор не добавляют массу. Полнота, лимит геометрических чернил и допустимая нагрузка проверяются перед сохранением страницы, испытанием и строительством. Это отдельный лимит конструкции, не запас штрихов партии. Подробные формулы — в [параметрах](Balance-Parameters.md), рабочий процесс — в [свободных башнях](Freeform-Towers.md).
+`catalog.FreeformRules` задаёт опорные размеры, минимальную площадь корпуса, минимальную длину и выступание дула, коэффициенты HP/нагрузки/цены/времени/оружия и бюджет геометрических чернил. [FreeformGeometry](../Assets/PaperDefense/Core/FreeformGeometry.cs) измеряет связные группы штрихов корпуса и каждого занятого крепления; [FreeformTowerDesign](../Assets/PaperDefense/Core/FreeformTowerDesign.cs) использует правила v2 для новых рисунков, сохраняя чтение v1. В v2 ствол измеряется только перед креплением. Повторное обведение, подразделение линии и декор не добавляют массу. Полнота, лимит геометрических чернил и допустимая нагрузка проверяются перед сохранением страницы, испытанием и строительством. Это отдельный лимит конструкции, не запас штрихов партии. Подробные формулы — в [параметрах](Balance-Parameters.md), рабочий процесс — в [свободных башнях](Freeform-Towers.md).
 
 `catalog.DrawingUnlocks` содержит `Id`, `Name`, `Description`, `GoldCost`, `InitiallyUnlocked`, `Role` (`Body`/`Barrel`) и `Contours`. Контуры проходят те же проверки координат, что образцы, и должны давать пригодную геометрию своей роли. ID заготовок уникальны и не пересекаются с ID деталей. Их порядок сохраняется по списку базы; `Order`, `Enabled` и overrides для заготовок отсутствуют. Покупка даёт постоянное право вставлять геометрию, а характеристики зависят от получившихся линий.
 
@@ -181,7 +184,7 @@ ID непустой, без внешних пробелов и управляю�
 
 ## Добавление контента в Inspector
 
-1. Откройте рабочий `GameBalanceAsset`, нажмите «Открыть каталог» или выберите `NotebookContent.asset` непосредственно.
+1. Откройте `PlayerBalance.asset` и его `PlayerRules.asset`/`PlayerContent.asset` для изменения основной игры. Для отдельного сравнения Target/Historical выберите соответствующую базу `NotebookContent.asset`. Не смешивайте эти цепочки.
 2. В нужном списке `catalog.Chassis`, `Weapons` или `Modules` добавьте запись либо скопируйте подходящую. Задайте новый постоянный `Id`, названия, описание, доступность и `Order`. Поля `Legacy*` предназначены только историческим адаптерам.
 3. Назначьте существующий `TemplateId` или добавьте образец в `Templates`. Для другого внешнего вида используйте отдельный ID образца. Укажите `VisualStyle=Template` для нового оформления.
 4. Для оружия выберите поддержанный `Attack`, задайте характеристики, `MinimumRange` и `EffectIds`. Для оборудования задайте стоимость, `SlotKind`, ограничения и `Modifiers`. Для основания задайте нагрузку, слоты, здоровье, подачу и опоры креплений.
@@ -216,6 +219,6 @@ ID непустой, без внешних пробелов и управляю�
 
 Правка `.asset` в Unity влияет на следующую подготовку в редакторе. Уже собранный Player содержит свою сериализованную копию assets. Для доставки изменённого каталога нужен новый build или отдельно реализованный канал обновления контента. В этом проекте не добавлены runtime-загрузка удалённой базы, hot reload боя или импорт баланса из Excel.
 
-`Paper Defense > Export mechanics and balance JSON` выгружает подготовленные рабочие пресеты. `Tools/BalanceWorkbook/Build.ps1` создаёт Excel с механиками, балансом, формулами, каталогом и происхождением значений. `docs/balance/balance-data.json` и книга — односторонний отчёт: они не заменяют Unity assets. Отдельная база приёмки новых записей хранится отдельно от рабочих пресетов.
+`Paper Defense > Export mechanics and balance JSON` выгружает подготовленные Historical/Target. Прежние файлы `docs/balance` удалены при очистке: сначала выполните новый экспорт Unity, затем `Tools/BalanceWorkbook/Build.ps1`. Генератор создаёт Excel с механиками, балансом, формулами, каталогом и происхождением значений. Новые `docs/balance/balance-data.json` и книга — односторонний отчёт: они не заменяют Unity assets и не являются экспортом PlayerRules. База приёмки новых записей остаётся в `Assets/PaperDefense/Content/Acceptance`. [ContentAcceptanceRunner](../Assets/PaperDefense/Validation/ContentAcceptanceRunner.cs) и [ContentAcceptanceManifestAsset](../Assets/PaperDefense/Validation/ContentAcceptanceManifestAsset.cs) находятся в Editor-only сборке Validation; namespace сохранён после переноса из Application. Приёмка выполняется тестами без отдельной сцены.
 
 Контракты подготовки и содержимого можно проследить по [ContentAssetBoundaryTests](../Assets/PaperDefense/Tests/Editor/ContentAssetBoundaryTests.cs), [ContentConfigurationBoundaryIntegrationTests](../Assets/PaperDefense/Tests/PlayMode/ContentConfigurationBoundaryIntegrationTests.cs) и [ContentDataOnlyAcceptanceTests](../Assets/PaperDefense/Tests/PlayMode/ContentDataOnlyAcceptanceTests.cs). Ссылки фиксируют существующие проверки кода; новый запуск тестов из этой страницы не следует.

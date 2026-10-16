@@ -1,8 +1,0 @@
-{
-  "runAtLocalDate": "2026-10-12",
-  "unityVersion": "6000.5.7f1",
-  "editMode": { "jobId": "96abe76cf67645feaf2ed81454b0ddea", "passed": 57, "failed": 0, "skipped": 0, "seconds": 1.1191889 },
-  "playMode": { "jobId": "07cef29ca6e24b02800f1e674be3d375", "passed": 14, "failed": 0, "skipped": 0, "seconds": 1.7384072 },
-  "windowsBuild": { "jobId": "build-7aeb91baac", "result": "succeeded", "target": "StandaloneWindows64", "backend": "mono", "development": true, "output": "Builds/Windows/PaperDefense.exe", "errors": 0, "warnings": 0, "seconds": 9.8318739, "sizeMegabytes": 186.35 },
-  "renderedPlayerRuns": { "normalExitCode": 0, "fastExitCode": 0, "resultComparison": "player-comparison.json" }
-}

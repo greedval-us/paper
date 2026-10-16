@@ -2,7 +2,7 @@
 
 [Общая документация](../docs/README.md) · [Разработка и тесты](../docs/Development-Guide.md)
 
-Команды ниже запускаются из корня проекта. Инструменты генерации меняют свои исходные файлы или ассеты; проверочные команды создают отчёты. Старые сценарии сравнения имеют собственные настройки и не представляют текущий PlayerRules.
+Команды ниже запускаются из корня проекта. Инструменты генерации меняют свои исходные файлы или ассеты; проверочные команды создают отчёты. Сценарии сравнения имеют собственные настройки и не представляют текущий PlayerRules. Основной маршрут ещё предстоит оформить по [эскизам](../docs/Game-Design.md).
 
 ## Меню Unity
 
@@ -56,7 +56,7 @@ Runtime-измеритель `PressurePlayerProbe`, флаг `-paper-pressure` �
 | Инструмент | Назначение и ограничения |
 |---|---|
 | [BalanceWorkbook/Build.ps1](BalanceWorkbook/Build.ps1) и [build.mjs](BalanceWorkbook/build.mjs) | JSON из Unity → Excel; проверяют свежесть экспорта и формулы. [Инструкция](BalanceWorkbook/README.md) |
-| [Validate-ContentDataOnly.ps1](Validate-ContentDataOnly.ps1) | `-Mode Freeze` фиксирует хэши кода/ассетов, `Verify` проверяет изменения только допустимых assets в `Assets/PaperDefense/Content`. Использует `rg` и Git; не заменяет Unity-тесты. Существующую фиксацию не перезаписывает |
+| [Validate-ContentDataOnly.ps1](Validate-ContentDataOnly.ps1) | `-Mode Freeze` фиксирует хэши кода/ассетов, `Verify` проверяет изменения только допустимых assets в `Assets/PaperDefense/Content`. Использует `rg` и Git; не заменяет Unity-тесты. Перед новым изменением данных выполните новый Freeze; старая фиксация удалена при очистке. Существующую фиксацию не перезаписывает |
 | [Reconstruct-OriginalCoreBaseline.ps1](Reconstruct-OriginalCoreBaseline.ps1) | PowerShell 7, локальный .NET SDK и Unity Editor/Data; извлекает указанный Git commit (по умолчанию `b759182`) в новый каталог `Temp`, компилирует историческое ядро. Не скачивает commit и не переключает рабочее дерево |
 | [OriginalCoreValidation](OriginalCoreValidation) | Явный адаптер и описание адаптации сценария для исторического baseline |
 | [FullLoopValidation](../Assets/PaperDefense/Editor/FullLoopValidation.cs) | API `RunPressureJson` и `RunAuthoredCopiesJson`: полный альбом/нагрузка и копии авторской геометрии |
@@ -65,4 +65,4 @@ Runtime-измеритель `PressurePlayerProbe`, флаг `-paper-pressure` �
 | [ContentAcceptanceRunner](../Assets/PaperDefense/Validation/ContentAcceptanceRunner.cs) и [ContentAcceptanceManifestAsset](../Assets/PaperDefense/Validation/ContentAcceptanceManifestAsset.cs) | Editor-only приёмка данных `Content/Acceptance` через автоматические тесты; отдельная сцена удалена |
 | [PlayerVisualCapture](../Assets/PaperDefense/Editor/PlayerVisualCapture.cs) | API `Capture`: снимки игрового интерфейса; по умолчанию `Captures/PlayerGame` |
 
-Результаты и ограничения прежних прогонов — в [истории проверок](../docs/validation/README.md). Наличие инструмента или теста не означает успешный запуск на текущем рабочем дереве. Генерация арт-данных и SVG описана в [ArtSource/Notebook](../ArtSource/Notebook/README.md); исходники и эскизы сохранены.
+Последняя проверка очистки и назначение сохранённых исторических JSON описаны в [указателе проверок](../docs/validation/README.md). Эти JSON остаются входами инструментов приёмки и не являются новым результатом текущего дерева. Генерация арт-данных и SVG описана в [ArtSource/Notebook](../ArtSource/Notebook/README.md); исходники и эскизы сохранены.

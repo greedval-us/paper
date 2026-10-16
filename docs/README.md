@@ -1,71 +1,42 @@
-# Документация проекта
+# Документация «Держи линию»
 
-Точка входа — [README проекта](../README.md). Основной игровой вход — `Scenes/Game/PaperDefenseGame.unity`, баланс — PlayerRules. Отдельные тестовые сцены, общий экран стендов и прежняя техническая сцена удалены. Target и Historical остаются для редакторских сравнений; их числа не заменяют игровой пресет.
+**Эскизы пока не реализованы в Unity.** Документы о дизайне описывают цель следующего этапа; технические справочники — существующую игровую основу. Тесты этой основы не являются проверкой реализации эскизов.
 
-## Играть и проверять механику
-
-| Документ | Содержание |
-|---|---|
-| [Игровая оболочка](Player-Game.md) | Меню, карта, подготовка, управление боем, пауза и результат |
-| [Действующие механики](Current-Mechanics.md) | Реестр реализованных систем, ресурсы, оружие, враги и ограничения |
-| [Оборона тетради](Tower-Defense.md) | Карта, волны, строительство, поддержка и баланс пресетов |
-| [Мастерская](Workshop-Guide.md) | Детали, альбом, открытия, набор чертежей и полигон |
-| [Пошаговая мастерская](Guided-Workshop.md) | Вариант A: четыре шага, подсказки, подробности и расположение всех редакторов |
-| [Отпечаток заряда](Charge-Imprint.md) | Свободный контур мортиры, нормализация площади и пробный выстрел |
-| [Авторский веер](Fan-Volley.md) | Направляющие залпа и проверка попаданий |
-| [Направленная броня](Directional-Armor.md) | Секторы защиты, ориентация и пробные удары |
-| [Проба рисунка](Drawing-Probe.md) | Проверка крепления на выбранной дистанции |
-| [Исследование отпечатка](Footprint-Study.md) | Сравнение форм по воспроизводимым расстановкам |
-| [Редактор конструкций](Drawing-Workbench.md) | Инструменты рисования, заготовки, предпросмотр и сохранение |
-| [Свободная форма](Freeform-Towers.md) | Как геометрия корпуса и стволов влияет на характеристики |
-| [Модульные башни](Modular-Towers.md) | Основания, крепления, оборудование, подача и формы мортиры |
-| [Движение толпы](Crowd-Movement.md) | Общие маршруты, локальное движение, очереди и проходы |
-| [Тетрадное оформление](Notebook-Art.md) | Векторные ресурсы, анимация, эффекты, импорт и камера |
-| [Ассеты игровой оболочки](Player-Assets.md) | Фоны, значки и оформление игры; описанный отдельный стенд удалён |
-
-## Разрабатывать и менять данные
+## Начать с дизайна
 
 | Документ | Содержание |
 |---|---|
-| [Разработка и проверки](Development-Guide.md) | Окружение, структура репозитория, запуск, сборка и тесты |
-| [Архитектура](PaperDefense-Architecture.md) | Слои, жизненный цикл, снимки данных, время и отрисовка |
-| [Контракты механик](Mechanics-Contracts.md) | Границы правил и developer configuration |
-| [Каталог контента](Content-Architecture.md) | Базы, пресеты, overrides и проверка данных |
-| [Словарь баланса](Balance-Parameters.md) | Единицы, формулы, источники и потребители параметров |
-| [Совместимость профиля](Content-Profile-Compatibility.md) | Версии, миграция, неизвестные ID, ошибки и атомарная запись |
-| [Расширение механик](Extending-Mechanics.md) | Добавление деталей, эффектов и поведения |
-| [Инструменты проекта](../Tools/README.md) | Меню Unity, текстовые ресурсы, редакторские проверки и экспорт |
-| [Книга баланса](../Tools/BalanceWorkbook/README.md) | Экспорт Historical/Target в JSON и Excel; PlayerRules в книгу не включён |
-| [Исходники оформления](../ArtSource/Notebook/README.md) | Генерация канонического JSON и семи SVG-листов |
+| [Дизайн игры](Game-Design.md) | Единое описание будущего интерфейса по 28 эскизам |
+| [Порядок реализации](Implementation-Roadmap.md) | Этапы переноса в Unity и критерии приёмки |
+| [Источники эскизов](design/README.md) | Приоритет растрового альбома, роль HTML-прототипа и ограничения примеров |
+| [28 концепт-артов](design/game-concept-art-2026-10-16/README.md) | Все экраны, изображения и локальная галерея |
+| [Интерактивный прототип](design/full-game-ui/DESIGN.md) | Дополнительная проработка переходов, компонентов и состояний |
+| [Путь игрока](Player-Game.md) | Целевой маршрут и связь с существующими игровыми командами |
 
-## Покрытие реализованных подсистем
+## Существующие игровые правила
 
-Это карта ответственности документации, а не отчёт об успешном запуске тестов. Пути ведут к реализации; тестовые группы перечислены в [руководстве разработчика](Development-Guide.md).
+Эти документы нужны, чтобы при переносе оформления сохранить поведение игры. Их текущие панели и прежние компоновки не служат визуальным эталоном.
 
-| Подсистема и источник | Где описана |
+| Область | Справочники |
 |---|---|
-| [Игровые экраны](../Assets/PaperDefense/Presentation/Player/PlayerGameRoot.cs), подготовка, пауза, улучшения, результат | Player-Game |
-| [Мастерская, команды и полигон](../Assets/PaperDefense/Application/RunController.cs), постоянные открытия и альбом | Workshop-Guide, Content-Profile-Compatibility |
-| [Редактор линий](../Assets/PaperDefense/Core/DrawingEditSession.cs), [геометрия](../Assets/PaperDefense/Core/FreeformTowerDesign.cs), заготовки | Drawing-Workbench, Freeform-Towers |
-| [Состав башни](../Assets/PaperDefense/Core/TowerBlueprint.cs), крепления, оборудование, цены и подача | Modular-Towers, Balance-Parameters |
-| [Строительство](../Assets/PaperDefense/Core/GameSession.Construction.cs), [смола и ремонт](../Assets/PaperDefense/Core/GameSession.Support.cs) | Current-Mechanics, Tower-Defense |
-| [Оружие](../Assets/PaperDefense/Core/WeaponSystem.cs), [мортирные формы](../Assets/PaperDefense/Core/MortarFootprint.cs), цвет и статусы | Current-Mechanics, Modular-Towers, Mechanics-Contracts |
-| [Враги](../Assets/PaperDefense/Core/GameSession.Enemies.cs), [карта](../Assets/PaperDefense/Core/BattlefieldDefinition.cs), [толпа](../Assets/PaperDefense/Core/EnemyCrowdMotion.cs) | Tower-Defense, Crowd-Movement |
-| [Чернильницы](../Assets/PaperDefense/Core/GameSession.Objectives.cs), [кляксы](../Assets/PaperDefense/Core/CorpseBlotSystem.cs), [экономика](../Assets/PaperDefense/Core/GameSession.Progression.cs) | Current-Mechanics, Mechanics-Contracts |
-| [Контент](../Assets/PaperDefense/Application/ContentDatabaseAsset.cs), пресеты и валидация | Content-Architecture, Extending-Mechanics |
-| [Профиль v7](../Assets/PaperDefense/Core/WorkshopProfile.cs), [IO](../Assets/PaperDefense/Application/WorkshopProfileStore.cs), повтор записи | Content-Profile-Compatibility, PaperDefense-Architecture |
-| [Фиксированный шаг](../Assets/PaperDefense/Application/FixedStepClock.cs), [жесты ввода](../Assets/PaperDefense/Application/ConstructionGesture.cs), read model | PaperDefense-Architecture, Mechanics-Contracts |
-| [Рендерер поля](../Assets/PaperDefense/Presentation/Rendering/NotebookWorldView.cs), анимация, эффекты, камера и повтор полигона | Notebook-Art, PaperDefense-Architecture |
-| [Редакторские сценарии нагрузки](../Assets/PaperDefense/Validation/PressureScenario.cs), [числовые прогоны](../Assets/PaperDefense/Validation/NumericBalanceScenario.cs), приёмка данных и автоматические тесты | Development-Guide, Tools/README |
-| [Русские тексты](../Assets/PaperDefense/Core/UserText.cs), [генератор](../Tools/Extract-UserText.py), отдельные тексты оболочки | Tools/README |
+| Общий состав и бой | [Действующие механики](Current-Mechanics.md), [оборона](Tower-Defense.md), [движение толпы](Crowd-Movement.md) |
+| Мастерская и конструкции | [Мастерская](Workshop-Guide.md), [четыре шага](Guided-Workshop.md), [модульные башни](Modular-Towers.md) |
+| Рисование | [Редактор](Drawing-Workbench.md), [свободная форма](Freeform-Towers.md), [обратная связь правок](Design-Change-Feedback.md) |
+| Особые редакторы | [Отпечаток мортиры](Charge-Imprint.md), [веер](Fan-Volley.md), [броня](Directional-Armor.md) |
+| Испытание рисунка | [Пробный выстрел](Drawing-Probe.md), [сравнение отпечатков](Footprint-Study.md) |
+| Баланс и профиль | [Параметры](Balance-Parameters.md), [совместимость и запись профиля](Content-Profile-Compatibility.md) |
 
-## История и границы актуальности
+## Разработка
 
-- [Сцены механик](Mechanics-Test-Scenes.md) и [общий экран стендов](Mechanics-Hub.md) — сведения об удалённых входах и текущем запуске игры. Упоминания стендов в более ранних тематических руководствах относятся к прежнему устройству проекта.
-- [docs/validation](validation/README.md) — датированные результаты проверок, снимки и измерения. Успех старого прогона относится только к зафиксированному там срезу.
-- `docs/design` — сохранённые эскизы и материалы оформления; [эскизы игры](design/game-concept-art-2026-10-16/README.md). Исходники `ArtSource` и игровые арт-ресурсы также сохранены.
-- `docs/superpowers/specs` и `docs/superpowers/plans` — проектные решения и планы реализации. Незавершённый пункт плана не доказывает отсутствие функции, а описание будущего поведения не доказывает её наличие.
-- Остальные отчёты в `docs/superpowers` сохраняют историю ревью и рефакторинга.
-- `docs/balance` — экспортированные данные и книга баланса; свежесть проверяет генератор, источник истины остаётся в коде и ассетах Unity.
+| Документ | Содержание |
+|---|---|
+| [Запуск, сборка и проверки](Development-Guide.md) | Единственная игровая сцена, структура проекта, тесты |
+| [Архитектура](PaperDefense-Architecture.md) | Presentation → Application → Core, время, ввод и сохранение |
+| [Контракты механик](Mechanics-Contracts.md) | Границы систем и необязательных механик |
+| [Каталог контента](Content-Architecture.md), [расширение механик](Extending-Mechanics.md) | Данные, пресеты, проверки и добавление поведения |
+| [Игровая графика](Notebook-Art.md), [ресурсы оболочки](Player-Assets.md) | Текущие ресурсы для последующего переноса дизайна |
+| [Инструменты](../Tools/README.md), [экспорт баланса](../Tools/BalanceWorkbook/README.md) | Редакторские меню и генераторы |
+| [Исходники оформления](../ArtSource/Notebook/README.md) | Канонические рисунки, JSON и SVG |
+| [Проверки и служебные данные](validation/README.md) | Последняя проверка основы и обязательные входные файлы инструментов |
 
-При добавлении системы обновляйте тематическое руководство и строку покрытия здесь; при изменении запуска — также корневой README. Исторические отчёты сохраняйте с датой, новые результаты записывайте отдельно. Сверка документации не является новым прогоном Unity Test Runner или измерением FPS.
+Старые планы реализации, отчёты стендов и устаревшие таблицы баланса удалены. Актуальные числа читаются из `Configuration/Game/PlayerBalance.asset` → `PlayerRules.asset` → `PlayerContent.asset`; Target и Historical используются только для технических сравнений. Новые отчёты проверки дизайна появятся после его реализации.
