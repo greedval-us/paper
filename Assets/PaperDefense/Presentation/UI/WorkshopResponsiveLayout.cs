@@ -31,7 +31,7 @@ namespace PaperDefense.Presentation
         void LateUpdate()
         {
             if (board == null) return;
-            int signature = Screen.width * 397 ^ Screen.height ^ Mathf.RoundToInt((player == null ? 1 : player.InterfaceScale) * 100);
+            int signature = Screen.width * 397 ^ Screen.height;
             signature = unchecked(signature * 31 + (wizard == null ? 0 : wizard.Step));
             foreach (Transform child in board) signature = unchecked(signature * 31 + child.GetEntityId().GetHashCode() + (child.gameObject.activeSelf ? 1 : 0));
             foreach (Transform child in content) signature = unchecked(signature * 31 + child.GetEntityId().GetHashCode() + (child.gameObject.activeSelf ? 1 : 0));
@@ -46,11 +46,13 @@ namespace PaperDefense.Presentation
         void Visible(string name, bool visible)
         { var item = Find(name); if (item != null && item.gameObject.activeSelf != visible) item.gameObject.SetActive(visible); }
 
-        public void Apply()
+        public void Apply() => Apply(Screen.width, Screen.height);
+
+        public void Apply(int width, int height)
         {
             elements.Clear();
             foreach (var item in board.GetComponentsInChildren<RectTransform>(true)) if (!elements.ContainsKey(item.name)) elements[item.name] = item;
-            var layout = new PlayerLayout(Screen.width, Screen.height, player == null ? 1 : player.InterfaceScale);
+            var layout = new PlayerLayout(width, height);
             float fullWidth = layout.Width, w = Mathf.Min(1600, fullWidth), h = layout.Height;
             float offset = (fullWidth - w) / 2;
             scaler.referenceResolution = new Vector2(fullWidth, h); board.sizeDelta = new Vector2(fullWidth, h);

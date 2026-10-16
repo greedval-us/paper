@@ -15,7 +15,7 @@ namespace PaperDefense.Presentation
         PlayerBattleHud battle;
         CanvasGroup battleInteraction;
         Text status, tooltip, gold;
-        float refresh, appliedScale;
+        float refresh;
         int screenWidth, screenHeight;
         bool statistics;
         Action confirmAction;
@@ -47,8 +47,8 @@ namespace PaperDefense.Presentation
 
         public void ApplyLayout(int width, int height)
         {
-            screenWidth = width; screenHeight = height; appliedScale = game.InterfaceScale;
-            Layout = new PlayerLayout(width, height, appliedScale);
+            screenWidth = width; screenHeight = height;
+            Layout = new PlayerLayout(width, height);
             scaler.referenceResolution = new Vector2(W, H); root.sizeDelta = new Vector2(W, H);
             if (battleRoot != null) { battleRoot.gameObject.SetActive(false); Destroy(battleRoot.gameObject); }
             battleRoot = ui.Panel(root, "Battle controls", new Rect(0, 0, W, H), Color.clear);
@@ -142,7 +142,12 @@ namespace PaperDefense.Presentation
         public void SetStatus(string message) { if (status != null) status.text = message; }
         void Update()
         {
-            if (screenWidth != Screen.width || screenHeight != Screen.height || !Mathf.Approximately(appliedScale, game.InterfaceScale)) ApplyLayout(Screen.width, Screen.height);
+            if (screenWidth != Screen.width || screenHeight != Screen.height)
+            {
+                game.DisplaySettings.RefreshCurrentSize(Screen.width, Screen.height);
+                ApplyLayout(Screen.width, Screen.height);
+            }
+            if (game.Page == PlayerPage.Settings && settingsFullscreen != Screen.fullScreen) Show(PlayerPage.Settings);
             refresh -= Time.unscaledDeltaTime; if (refresh > 0) return; refresh = .12f;
             if (gold != null) gold.text = ui.T("gold", game.Run.Workshop.Gold);
             if (battleRoot.gameObject.activeSelf) battle.Refresh();

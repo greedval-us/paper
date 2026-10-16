@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace PaperDefense.Presentation
 {
-    /// <summary>Prepared triangles share the same resource geometry in a world mesh and a UI canvas.</summary>
+    /// <summary>Production illustrations use the shared atlas; explicit utility shapes retain exact native geometry.</summary>
     public static class NotebookArtRenderer
     {
         struct Vertex { public Vector2 Point; public NotebookInkChannel Channel; public float Alpha; }
@@ -23,6 +23,8 @@ namespace PaperDefense.Presentation
             float radians = 0, Color? strokeTint = null, float opacity = 1, Vector2? localScale = null, NotebookVisualThemeAsset theme = null)
         {
             if (pen == null || shape == null) return false;
+            if (!IsNativeUtility(shape))
+                return NotebookSpriteCatalog.TryDraw(pen, shape.Id, pivot, scale, radians, opacity, localScale, RasterTint(theme));
             var geometry = cache.GetValue(shape, Prepare);
             float cosine = Mathf.Cos(radians), sine = Mathf.Sin(radians);
             theme = theme ?? NotebookVisualThemeAsset.Default;
@@ -57,6 +59,8 @@ namespace PaperDefense.Presentation
             float radians = 0, Color? strokeTint = null, float opacity = 1, Vector2? localScale = null, NotebookVisualThemeAsset theme = null)
         {
             if (target == null || shape == null) return false;
+            if (!IsNativeUtility(shape))
+                return NotebookSpriteCatalog.TryDrawUI(target, shape.Id, center, scale, radians, opacity, localScale, RasterTint(theme));
             var geometry = cache.GetValue(shape, Prepare);
             float cosine = Mathf.Cos(radians), sine = Mathf.Sin(radians);
             theme = theme ?? NotebookVisualThemeAsset.Default;
@@ -65,10 +69,22 @@ namespace PaperDefense.Presentation
             for (int i = 0; i < geometry.Vertices.Count; i++)
             {
                 var v = geometry.Vertices[i];
-                target.AddVert(Transform(Vector2.Scale(v.Point, stretch), center, scale, cosine, sine), Tone(theme, v, strokeTint, opacity), Vector2.zero);
+                target.AddVert(Transform(Vector2.Scale(v.Point, stretch), center, scale, cosine, sine), Tone(theme, v, strokeTint, opacity), NotebookSpriteCatalog.WhiteUV);
             }
             for (int i = 0; i < geometry.Vertices.Count; i += 3) target.AddTriangle(offset + i, offset + i + 1, offset + i + 2);
             return true;
+        }
+        static bool IsNativeUtility(NotebookArtShape shape)
+            => shape.Marks != null && shape.Marks.Count > 0
+                && !ReferenceEquals(NotebookVisualThemeAsset.Default?.FindShape(shape.Id), shape);
+        static Color RasterTint(NotebookVisualThemeAsset theme)
+        {
+            var original = NotebookVisualThemeAsset.Default;
+            if (theme == null || ReferenceEquals(theme, original) || original == null) return Color.white;
+            // A cloned reduced-motion theme keeps the original finished ink colour. Explicit palette
+            // overrides still reach the vertices for alternate themes and their diagnostic previews.
+            return theme.Color(NotebookInkChannel.Navy) == original.Color(NotebookInkChannel.Navy)
+                ? Color.white : theme.Color(NotebookInkChannel.Navy);
         }
         static Vector2 Transform(Vector2 point, Vector2 center, float scale, float cosine, float sine)
             => center + new Vector2(cosine * point.x - sine * point.y, sine * point.x + cosine * point.y) * scale;

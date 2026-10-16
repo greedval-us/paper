@@ -1,0 +1,2873 @@
+fileFormatVersion: 2
+guid: 49720a60586f7aa4488735d4aa717fd8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6818443393575597020
+    second: NotebookAtlas_0
+  - first:
+      213: 2370674768137050047
+    second: NotebookAtlas_1
+  - first:
+      213: 3344847497424357431
+    second: NotebookAtlas_2
+  - first:
+      213: -2903523627406763252
+    second: NotebookAtlas_3
+  - first:
+      213: 3441294627141579230
+    second: NotebookAtlas_4
+  - first:
+      213: 1242269346939962938
+    second: NotebookAtlas_5
+  - first:
+      213: -921093683751392828
+    second: NotebookAtlas_6
+  - first:
+      213: -8020072606695424985
+    second: NotebookAtlas_7
+  - first:
+      213: 7815981710324911461
+    second: NotebookAtlas_8
+  - first:
+      213: 1188316414775380540
+    second: NotebookAtlas_9
+  - first:
+      213: 451747715005446822
+    second: NotebookAtlas_10
+  - first:
+      213: 8587263273188675754
+    second: NotebookAtlas_11
+  - first:
+      213: 3024622823752712190
+    second: NotebookAtlas_12
+  - first:
+      213: -10330677647268748
+    second: NotebookAtlas_13
+  - first:
+      213: 2310171562218754259
+    second: NotebookAtlas_14
+  - first:
+      213: 2423665279996341356
+    second: NotebookAtlas_15
+  - first:
+      213: 2104759952374501968
+    second: NotebookAtlas_16
+  - first:
+      213: -4586748615153383393
+    second: NotebookAtlas_17
+  - first:
+      213: 554767012308775909
+    second: NotebookAtlas_18
+  - first:
+      213: -8647384160377699891
+    second: NotebookAtlas_19
+  - first:
+      213: 72110473867315205
+    second: NotebookAtlas_20
+  - first:
+      213: -4854795229808414992
+    second: NotebookAtlas_21
+  - first:
+      213: 959658639666870044
+    second: NotebookAtlas_22
+  - first:
+      213: -5500601656902337391
+    second: NotebookAtlas_23
+  - first:
+      213: 4615512545999745928
+    second: NotebookAtlas_24
+  - first:
+      213: 3039926726385302815
+    second: NotebookAtlas_25
+  - first:
+      213: 2134137364467408326
+    second: NotebookAtlas_26
+  - first:
+      213: 8357002039694529816
+    second: NotebookAtlas_27
+  - first:
+      213: -3229867495766556336
+    second: NotebookAtlas_28
+  - first:
+      213: 6461071838657727996
+    second: NotebookAtlas_29
+  - first:
+      213: 4236726146348079578
+    second: NotebookAtlas_30
+  - first:
+      213: -302596819408787067
+    second: NotebookAtlas_31
+  - first:
+      213: 2432770542183277339
+    second: NotebookAtlas_32
+  - first:
+      213: 7504557698685541745
+    second: NotebookAtlas_33
+  - first:
+      213: -7995699845751313513
+    second: NotebookAtlas_34
+  - first:
+      213: -7683938876498086419
+    second: NotebookAtlas_35
+  - first:
+      213: 6156475390512532934
+    second: NotebookAtlas_36
+  - first:
+      213: -2173464227868651801
+    second: NotebookAtlas_37
+  - first:
+      213: 3188352843193321107
+    second: NotebookAtlas_38
+  - first:
+      213: 6225990720149081732
+    second: NotebookAtlas_39
+  - first:
+      213: -7535087295501469422
+    second: NotebookAtlas_40
+  - first:
+      213: 5863537529175015355
+    second: NotebookAtlas_41
+  - first:
+      213: 6527177062218170317
+    second: NotebookAtlas_42
+  - first:
+      213: 3675840942425714062
+    second: NotebookAtlas_43
+  - first:
+      213: 136580607098346087
+    second: NotebookAtlas_44
+  - first:
+      213: 5917076617373634098
+    second: NotebookAtlas_45
+  - first:
+      213: 4905037997738477090
+    second: NotebookAtlas_46
+  - first:
+      213: 7035333918049453595
+    second: NotebookAtlas_47
+  - first:
+      213: 6689789749271438304
+    second: NotebookAtlas_48
+  - first:
+      213: 8741074843337677052
+    second: NotebookAtlas_49
+  - first:
+      213: -1232980874592012600
+    second: NotebookAtlas_50
+  - first:
+      213: -5202412206812835615
+    second: NotebookAtlas_51
+  - first:
+      213: 7198756300403603336
+    second: NotebookAtlas_52
+  - first:
+      213: 6459029164131268102
+    second: NotebookAtlas_53
+  - first:
+      213: 4417063178815794550
+    second: NotebookAtlas_54
+  - first:
+      213: -325186979924667271
+    second: NotebookAtlas_55
+  - first:
+      213: 2831665660738188010
+    second: NotebookAtlas_56
+  - first:
+      213: 8989472949222195628
+    second: NotebookAtlas_57
+  - first:
+      213: 5902337913997816690
+    second: NotebookAtlas_58
+  - first:
+      213: 5055286608654947200
+    second: NotebookAtlas_59
+  - first:
+      213: -7874494385258976421
+    second: NotebookAtlas_60
+  - first:
+      213: -7010213656382754428
+    second: NotebookAtlas_61
+  - first:
+      213: 5052772850233453804
+    second: NotebookAtlas_62
+  - first:
+      213: 6251446648561003665
+    second: NotebookAtlas_63
+  - first:
+      213: 4979938536526575055
+    second: NotebookAtlas_64
+  - first:
+      213: -7800028508837709274
+    second: NotebookAtlas_65
+  - first:
+      213: 5296078289811398417
+    second: NotebookAtlas_66
+  - first:
+      213: 3316275549949848093
+    second: NotebookAtlas_67
+  - first:
+      213: 2079686322997293096
+    second: NotebookAtlas_68
+  - first:
+      213: 4402477598241381786
+    second: NotebookAtlas_69
+  - first:
+      213: -8086913301408534387
+    second: NotebookAtlas_70
+  - first:
+      213: 5967076100389374141
+    second: NotebookAtlas_71
+  - first:
+      213: 1033075782148158786
+    second: NotebookAtlas_72
+  - first:
+      213: -720014968546577981
+    second: NotebookAtlas_73
+  - first:
+      213: -5168494426524844395
+    second: NotebookAtlas_74
+  - first:
+      213: 2018558159621930566
+    second: NotebookAtlas_75
+  - first:
+      213: -5636804690769574046
+    second: NotebookAtlas_76
+  - first:
+      213: 8886147846683830126
+    second: NotebookAtlas_77
+  - first:
+      213: -5357124023668343596
+    second: NotebookAtlas_78
+  - first:
+      213: 4995017790825186994
+    second: NotebookAtlas_79
+  - first:
+      213: -5126618511080419843
+    second: NotebookAtlas_80
+  - first:
+      213: -5374467976630735393
+    second: NotebookAtlas_81
+  - first:
+      213: 2063268271535429511
+    second: NotebookAtlas_82
+  - first:
+      213: 5392204697371488767
+    second: NotebookAtlas_83
+  - first:
+      213: -1097846854189519019
+    second: NotebookAtlas_84
+  - first:
+      213: 6400897248649855463
+    second: NotebookAtlas_85
+  - first:
+      213: -7288045033569834887
+    second: NotebookAtlas_86
+  - first:
+      213: -2674417898625293554
+    second: NotebookAtlas_87
+  - first:
+      213: -876296955396475400
+    second: NotebookAtlas_88
+  - first:
+      213: 4140685715623005067
+    second: NotebookAtlas_89
+  - first:
+      213: -8009591805313732093
+    second: NotebookAtlas_90
+  - first:
+      213: 6144669749184503110
+    second: NotebookAtlas_91
+  - first:
+      213: 1063895565803779582
+    second: NotebookAtlas_92
+  - first:
+      213: -1024880026839060962
+    second: NotebookAtlas_93
+  - first:
+      213: 6541721056207008277
+    second: NotebookAtlas_94
+  - first:
+      213: -7014151553281063505
+    second: NotebookAtlas_95
+  - first:
+      213: -352999911306553070
+    second: NotebookAtlas_96
+  - first:
+      213: -2359242663210988065
+    second: NotebookAtlas_97
+  - first:
+      213: -7837672500996737122
+    second: NotebookAtlas_98
+  - first:
+      213: 8225793284201350605
+    second: NotebookAtlas_99
+  - first:
+      213: 112512580192229192
+    second: NotebookAtlas_100
+  - first:
+      213: 4986207412691677547
+    second: NotebookAtlas_101
+  - first:
+      213: -5651772150358415351
+    second: NotebookAtlas_102
+  - first:
+      213: 3161417699323973081
+    second: NotebookAtlas_103
+  - first:
+      213: 978921518199192701
+    second: NotebookAtlas_104
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 0
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: NotebookAtlas_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 3666
+        width: 283
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd3be2b042aff9e50800000000000000
+      internalID: 6818443393575597020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_1
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 3959
+        width: 84
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb75ac8242456e020800000000000000
+      internalID: 2370674768137050047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_2
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 3840
+        width: 289
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73845dfb3194b6e20800000000000000
+      internalID: 3344847497424357431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_3
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 3881
+        width: 271
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0b5777f4ac94b7d0800000000000000
+      internalID: -2903523627406763252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_4
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 3782
+        width: 213
+        height: 298
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed1fb3a0b3fe1cf20800000000000000
+      internalID: 3441294627141579230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_5
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 3807
+        width: 201
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3686b3a36d6d3110800000000000000
+      internalID: 1242269346939962938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_6
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 3375
+        width: 338
+        height: 289
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c9642fbc2e9733f0800000000000000
+      internalID: -921093683751392828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_7
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 3550
+        width: 290
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72cf315d47af2b090800000000000000
+      internalID: -8020072606695424985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_8
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 3592
+        width: 245
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56dcdd664f1f77c60800000000000000
+      internalID: 7815981710324911461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_9
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 3523
+        width: 255
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3ac377bb7fbd7010800000000000000
+      internalID: 1188316414775380540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_10
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 3609
+        width: 241
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6aa7ef0472ee44600800000000000000
+      internalID: 451747715005446822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_11
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 3558
+        width: 56
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa05b2f13761c2770800000000000000
+      internalID: 8587263273188675754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_12
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 3554
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: effb15dde6e99f920800000000000000
+      internalID: 3024622823752712190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_13
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 3330
+        width: 284
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 474ab8cad4c4bdff0800000000000000
+      internalID: -10330677647268748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_14
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 3400
+        width: 234
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d01248cbc06f0020800000000000000
+      internalID: 2310171562218754259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_15
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 2983
+        width: 255
+        height: 390
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6c21a42bb692a120800000000000000
+      internalID: 2423665279996341356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_16
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 3257
+        width: 233
+        height: 266
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05210c2760c953d10800000000000000
+      internalID: 2104759952374501968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_17
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 3026
+        width: 239
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1884c7af689850c0800000000000000
+      internalID: -4586748615153383393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_18
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 3249
+        width: 242
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e3f4cd88ade2b700800000000000000
+      internalID: 554767012308775909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_19
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 3199
+        width: 252
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc109540ce15ef780800000000000000
+      internalID: -8647384160377699891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_20
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 2983
+        width: 145
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 508427b0810300100800000000000000
+      internalID: 72110473867315205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_21
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 2972
+        width: 271
+        height: 283
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fe2206d57d40acb0800000000000000
+      internalID: -4854795229808414992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_22
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 2734
+        width: 258
+        height: 290
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c177af2c274615d00800000000000000
+      internalID: 959658639666870044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_23
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 2978
+        width: 244
+        height: 269
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19c396dbfefe9a3b0800000000000000
+      internalID: -5500601656902337391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_24
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 2997
+        width: 255
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8837ca0e4389d0040800000000000000
+      internalID: 4615512545999745928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_25
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 2674
+        width: 359
+        height: 307
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1d796d504dff2a20800000000000000
+      internalID: 3039926726385302815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_26
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 2654
+        width: 244
+        height: 316
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cdd7f630aafd9d10800000000000000
+      internalID: 2134137364467408326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_27
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 2742
+        width: 285
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 815153be3190af370800000000000000
+      internalID: 8357002039694529816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_28
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 2773
+        width: 234
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 051014b00a43d23d0800000000000000
+      internalID: -3229867495766556336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_29
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 2399
+        width: 404
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfd4973ea965aa950800000000000000
+      internalID: 6461071838657727996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_30
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 2335
+        width: 286
+        height: 316
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad9dfa3abffdbca30800000000000000
+      internalID: 4236726146348079578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_31
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 2492
+        width: 326
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 589e9f4cbc5fccbf0800000000000000
+      internalID: -302596819408787067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_32
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 2474
+        width: 250
+        height: 265
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b136ed23befe2c120800000000000000
+      internalID: 2432770542183277339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_33
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 2564
+        width: 257
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17d1392577b852860800000000000000
+      internalID: 7504557698685541745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_34
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 2071
+        width: 347
+        height: 326
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79be8537a51990190800000000000000
+      internalID: -7995699845751313513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_35
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 2355
+        width: 30
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de574869d4a2d5590800000000000000
+      internalID: -7683938876498086419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_36
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 2229
+        width: 305
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cd0fefcfb1307550800000000000000
+      internalID: 6156475390512532934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_37
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 2228
+        width: 281
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7eecedddccd46d1e0800000000000000
+      internalID: -2173464227868651801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_38
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 2300
+        width: 227
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 396052da40e4f3c20800000000000000
+      internalID: 3188352843193321107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_39
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 1748
+        width: 388
+        height: 321
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48e4d51c299276650800000000000000
+      internalID: 6225990720149081732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_40
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 2053
+        width: 249
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2197310070efd6790800000000000000
+      internalID: -7535087295501469422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_41
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 1972
+        width: 322
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbff5a101587f5150800000000000000
+      internalID: 5863537529175015355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_42
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 1958
+        width: 260
+        height: 268
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcf7793a4f0359a50800000000000000
+      internalID: 6527177062218170317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_43
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 1845
+        width: 133
+        height: 452
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8d2f189cd5330330800000000000000
+      internalID: 3675840942425714062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_44
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 2035
+        width: 43
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76add49a65b35e100800000000000000
+      internalID: 136580607098346087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_45
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 2011
+        width: 23
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23e435f55ddad1250800000000000000
+      internalID: 5917076617373634098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_46
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 1432
+        width: 405
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 226cef82212321440800000000000000
+      internalID: 4905037997738477090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_47
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 1736
+        width: 272
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1648957ce682a160800000000000000
+      internalID: 7035333918049453595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_48
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 1686
+        width: 292
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e3af5b3558e6dc50800000000000000
+      internalID: 6689789749271438304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_49
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 1673
+        width: 249
+        height: 283
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf8de3002498e4970800000000000000
+      internalID: 8741074843337677052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_50
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 1607
+        width: 264
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c6b71b5d6293eee0800000000000000
+      internalID: -1232980874592012600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_51
+      rect:
+        serializedVersion: 2
+        x: 1657
+        y: 1607
+        width: 279
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e0d3c559a15dc7b0800000000000000
+      internalID: -5202412206812835615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_52
+      rect:
+        serializedVersion: 2
+        x: 1938
+        y: 1607
+        width: 292
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 887792ee6be17e360800000000000000
+      internalID: 7198756300403603336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_53
+      rect:
+        serializedVersion: 2
+        x: 2232
+        y: 1607
+        width: 204
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 606bee9adc413a950800000000000000
+      internalID: 6459029164131268102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_54
+      rect:
+        serializedVersion: 2
+        x: 2438
+        y: 1607
+        width: 209
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67de5cbfe8f8c4d30800000000000000
+      internalID: 4417063178815794550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_55
+      rect:
+        serializedVersion: 2
+        x: 2649
+        y: 1607
+        width: 191
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97412082a24bc7bf0800000000000000
+      internalID: -325186979924667271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_56
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 1723
+        width: 51
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae2b8f66ae81c4720800000000000000
+      internalID: 2831665660738188010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_57
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 1432
+        width: 291
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca14f50e40601cc70800000000000000
+      internalID: 8989472949222195628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_58
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 1432
+        width: 335
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 273f8249f0159e150800000000000000
+      internalID: 5902337913997816690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_59
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 1432
+        width: 337
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 083daa2f26cf72640800000000000000
+      internalID: 5055286608654947200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_60
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 1432
+        width: 377
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5ba4d4d31d28b290800000000000000
+      internalID: -7874494385258976421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_61
+      rect:
+        serializedVersion: 2
+        x: 1770
+        y: 1432
+        width: 301
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 481b6bb32d7b6be90800000000000000
+      internalID: -7010213656382754428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_62
+      rect:
+        serializedVersion: 2
+        x: 2073
+        y: 1432
+        width: 232
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cec27e4f22e0f1640800000000000000
+      internalID: 5052772850233453804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_63
+      rect:
+        serializedVersion: 2
+        x: 2307
+        y: 1432
+        width: 225
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19ce8c3fa9991c650800000000000000
+      internalID: 6251446648561003665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_64
+      rect:
+        serializedVersion: 2
+        x: 2535
+        y: 1432
+        width: 192
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc5f1f0d6bb4c1540800000000000000
+      internalID: 4979938536526575055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_65
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 599
+        width: 1709
+        height: 831
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62afec4c56bb0c390800000000000000
+      internalID: -7800028508837709274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_66
+      rect:
+        serializedVersion: 2
+        x: 1750
+        y: 1146
+        width: 260
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11fddde05237f7940800000000000000
+      internalID: 5296078289811398417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_67
+      rect:
+        serializedVersion: 2
+        x: 2059
+        y: 1059
+        width: 402
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1ae214da07c50e20800000000000000
+      internalID: 3316275549949848093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_68
+      rect:
+        serializedVersion: 2
+        x: 2492
+        y: 1059
+        width: 399
+        height: 346
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 820fd7e21b78cdc10800000000000000
+      internalID: 2079686322997293096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_69
+      rect:
+        serializedVersion: 2
+        x: 2894
+        y: 1046
+        width: 400
+        height: 327
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9ddacedc0eb81d30800000000000000
+      internalID: 4402477598241381786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_70
+      rect:
+        serializedVersion: 2
+        x: 3315
+        y: 1297
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d80b92cd23385cf80800000000000000
+      internalID: -8086913301408534387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_71
+      rect:
+        serializedVersion: 2
+        x: 3328
+        y: 1135
+        width: 300
+        height: 269
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db88e6f29105fc250800000000000000
+      internalID: 5967076100389374141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_72
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 1034
+        width: 397
+        height: 327
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 245fffc43f8365e00800000000000000
+      internalID: 1033075782148158786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_73
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 1187
+        width: 12
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c131de633ef106f0800000000000000
+      internalID: -720014968546577981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_74
+      rect:
+        serializedVersion: 2
+        x: 2039
+        y: 1173
+        width: 23
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59e7663f3b1d548b0800000000000000
+      internalID: -5168494426524844395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_75
+      rect:
+        serializedVersion: 2
+        x: 3305
+        y: 1165
+        width: 15
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64e3bbe83fb530c10800000000000000
+      internalID: 2018558159621930566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_76
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 584
+        width: 356
+        height: 559
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2678c62bffb06c1b0800000000000000
+      internalID: -5636804690769574046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_77
+      rect:
+        serializedVersion: 2
+        x: 3305
+        y: 700
+        width: 333
+        height: 428
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e67213fb260f15b70800000000000000
+      internalID: 8886147846683830126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_78
+      rect:
+        serializedVersion: 2
+        x: 3478
+        y: 1120
+        width: 23
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dc798f651ca7a5b0800000000000000
+      internalID: -5357124023668343596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_79
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 700
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b644ec473ed15540800000000000000
+      internalID: 4995017790825186994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_80
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 700
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfd0c1c40a79ad8b0800000000000000
+      internalID: -5126618511080419843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_81
+      rect:
+        serializedVersion: 2
+        x: 2068
+        y: 700
+        width: 422
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdd6634b9dd0a65b0800000000000000
+      internalID: -5374467976630735393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_82
+      rect:
+        serializedVersion: 2
+        x: 2492
+        y: 700
+        width: 400
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7871431bf8332ac10800000000000000
+      internalID: 2063268271535429511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_83
+      rect:
+        serializedVersion: 2
+        x: 2894
+        y: 700
+        width: 409
+        height: 344
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff135076a95f4da40800000000000000
+      internalID: 5392204697371488767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_84
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 700
+        width: 410
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55fe04e4a1aa3c0f0800000000000000
+      internalID: -1097846854189519019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_85
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 483
+        width: 325
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e1cc8d522e84d850800000000000000
+      internalID: 6400897248649855463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_86
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 493
+        width: 246
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 978250bd7a9abda90800000000000000
+      internalID: -7288045033569834887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_87
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 509
+        width: 379
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e032e73471f82ead0800000000000000
+      internalID: -2674417898625293554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_88
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 15
+        width: 717
+        height: 604
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f536d7df84c6d3f0800000000000000
+      internalID: -876296955396475400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_89
+      rect:
+        serializedVersion: 2
+        x: 2799
+        y: 406
+        width: 409
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8b4e3658bba67930800000000000000
+      internalID: 4140685715623005067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_90
+      rect:
+        serializedVersion: 2
+        x: 3260
+        y: 463
+        width: 307
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 302356090b638d090800000000000000
+      internalID: -8009591805313732093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_91
+      rect:
+        serializedVersion: 2
+        x: 3622
+        y: 461
+        width: 314
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64d1b3eb490464550800000000000000
+      internalID: 6144669749184503110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_92
+      rect:
+        serializedVersion: 2
+        x: 3938
+        y: 462
+        width: 159
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef5f8dd5167b3ce00800000000000000
+      internalID: 1063895565803779582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_93
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 91
+        width: 998
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1e6ddeab05e6c1f0800000000000000
+      internalID: -1024880026839060962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_94
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 198
+        width: 404
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51279ee14acd8ca50800000000000000
+      internalID: 6541721056207008277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_95
+      rect:
+        serializedVersion: 2
+        x: 1513
+        y: 132
+        width: 564
+        height: 316
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa58de9235ab8ae90800000000000000
+      internalID: -7014151553281063505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_96
+      rect:
+        serializedVersion: 2
+        x: 2799
+        y: 15
+        width: 459
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21914d07374e91bf0800000000000000
+      internalID: -352999911306553070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_97
+      rect:
+        serializedVersion: 2
+        x: 3260
+        y: 15
+        width: 360
+        height: 446
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fddcc503c49424fd0800000000000000
+      internalID: -2359242663210988065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_98
+      rect:
+        serializedVersion: 2
+        x: 3622
+        y: 15
+        width: 357
+        height: 444
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e97fd38d26efa3390800000000000000
+      internalID: -7837672500996737122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_99
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 16
+        width: 140
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc58d9ce863e72270800000000000000
+      internalID: 8225793284201350605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_100
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 15
+        width: 1303
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 847de177899bf8100800000000000000
+      internalID: 112512580192229192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_101
+      rect:
+        serializedVersion: 2
+        x: 1726
+        y: 35
+        width: 195
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6138e94931923540800000000000000
+      internalID: 4986207412691677547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_102
+      rect:
+        serializedVersion: 2
+        x: 2847
+        y: 15
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 908e0727c2fd091b0800000000000000
+      internalID: -5651772150358415351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_103
+      rect:
+        serializedVersion: 2
+        x: 2852
+        y: 15
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dd86dac5ac9fdb20800000000000000
+      internalID: 3161417699323973081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotebookAtlas_104
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7cbf3b2fe3d59d00800000000000000
+      internalID: 978921518199192701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      NotebookAtlas_0: 6818443393575597020
+      NotebookAtlas_1: 2370674768137050047
+      NotebookAtlas_10: 451747715005446822
+      NotebookAtlas_100: 112512580192229192
+      NotebookAtlas_101: 4986207412691677547
+      NotebookAtlas_102: -5651772150358415351
+      NotebookAtlas_103: 3161417699323973081
+      NotebookAtlas_104: 978921518199192701
+      NotebookAtlas_11: 8587263273188675754
+      NotebookAtlas_12: 3024622823752712190
+      NotebookAtlas_13: -10330677647268748
+      NotebookAtlas_14: 2310171562218754259
+      NotebookAtlas_15: 2423665279996341356
+      NotebookAtlas_16: 2104759952374501968
+      NotebookAtlas_17: -4586748615153383393
+      NotebookAtlas_18: 554767012308775909
+      NotebookAtlas_19: -8647384160377699891
+      NotebookAtlas_2: 3344847497424357431
+      NotebookAtlas_20: 72110473867315205
+      NotebookAtlas_21: -4854795229808414992
+      NotebookAtlas_22: 959658639666870044
+      NotebookAtlas_23: -5500601656902337391
+      NotebookAtlas_24: 4615512545999745928
+      NotebookAtlas_25: 3039926726385302815
+      NotebookAtlas_26: 2134137364467408326
+      NotebookAtlas_27: 8357002039694529816
+      NotebookAtlas_28: -3229867495766556336
+      NotebookAtlas_29: 6461071838657727996
+      NotebookAtlas_3: -2903523627406763252
+      NotebookAtlas_30: 4236726146348079578
+      NotebookAtlas_31: -302596819408787067
+      NotebookAtlas_32: 2432770542183277339
+      NotebookAtlas_33: 7504557698685541745
+      NotebookAtlas_34: -7995699845751313513
+      NotebookAtlas_35: -7683938876498086419
+      NotebookAtlas_36: 6156475390512532934
+      NotebookAtlas_37: -2173464227868651801
+      NotebookAtlas_38: 3188352843193321107
+      NotebookAtlas_39: 6225990720149081732
+      NotebookAtlas_4: 3441294627141579230
+      NotebookAtlas_40: -7535087295501469422
+      NotebookAtlas_41: 5863537529175015355
+      NotebookAtlas_42: 6527177062218170317
+      NotebookAtlas_43: 3675840942425714062
+      NotebookAtlas_44: 136580607098346087
+      NotebookAtlas_45: 5917076617373634098
+      NotebookAtlas_46: 4905037997738477090
+      NotebookAtlas_47: 7035333918049453595
+      NotebookAtlas_48: 6689789749271438304
+      NotebookAtlas_49: 8741074843337677052
+      NotebookAtlas_5: 1242269346939962938
+      NotebookAtlas_50: -1232980874592012600
+      NotebookAtlas_51: -5202412206812835615
+      NotebookAtlas_52: 7198756300403603336
+      NotebookAtlas_53: 6459029164131268102
+      NotebookAtlas_54: 4417063178815794550
+      NotebookAtlas_55: -325186979924667271
+      NotebookAtlas_56: 2831665660738188010
+      NotebookAtlas_57: 8989472949222195628
+      NotebookAtlas_58: 5902337913997816690
+      NotebookAtlas_59: 5055286608654947200
+      NotebookAtlas_6: -921093683751392828
+      NotebookAtlas_60: -7874494385258976421
+      NotebookAtlas_61: -7010213656382754428
+      NotebookAtlas_62: 5052772850233453804
+      NotebookAtlas_63: 6251446648561003665
+      NotebookAtlas_64: 4979938536526575055
+      NotebookAtlas_65: -7800028508837709274
+      NotebookAtlas_66: 5296078289811398417
+      NotebookAtlas_67: 3316275549949848093
+      NotebookAtlas_68: 2079686322997293096
+      NotebookAtlas_69: 4402477598241381786
+      NotebookAtlas_7: -8020072606695424985
+      NotebookAtlas_70: -8086913301408534387
+      NotebookAtlas_71: 5967076100389374141
+      NotebookAtlas_72: 1033075782148158786
+      NotebookAtlas_73: -720014968546577981
+      NotebookAtlas_74: -5168494426524844395
+      NotebookAtlas_75: 2018558159621930566
+      NotebookAtlas_76: -5636804690769574046
+      NotebookAtlas_77: 8886147846683830126
+      NotebookAtlas_78: -5357124023668343596
+      NotebookAtlas_79: 4995017790825186994
+      NotebookAtlas_8: 7815981710324911461
+      NotebookAtlas_80: -5126618511080419843
+      NotebookAtlas_81: -5374467976630735393
+      NotebookAtlas_82: 2063268271535429511
+      NotebookAtlas_83: 5392204697371488767
+      NotebookAtlas_84: -1097846854189519019
+      NotebookAtlas_85: 6400897248649855463
+      NotebookAtlas_86: -7288045033569834887
+      NotebookAtlas_87: -2674417898625293554
+      NotebookAtlas_88: -876296955396475400
+      NotebookAtlas_89: 4140685715623005067
+      NotebookAtlas_9: 1188316414775380540
+      NotebookAtlas_90: -8009591805313732093
+      NotebookAtlas_91: 6144669749184503110
+      NotebookAtlas_92: 1063895565803779582
+      NotebookAtlas_93: -1024880026839060962
+      NotebookAtlas_94: 6541721056207008277
+      NotebookAtlas_95: -7014151553281063505
+      NotebookAtlas_96: -352999911306553070
+      NotebookAtlas_97: -2359242663210988065
+      NotebookAtlas_98: -7837672500996737122
+      NotebookAtlas_99: 8225793284201350605
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

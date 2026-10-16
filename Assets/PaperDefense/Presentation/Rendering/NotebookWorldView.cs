@@ -153,6 +153,7 @@ namespace PaperDefense.Presentation
                 return;
             }
             inkMaterial = new Material(shader) { name = "Notebook ink (runtime)" };
+            inkMaterial.mainTexture = NotebookSpriteCatalog.Texture;
             paperPen = CreatePen("Graph paper", 0, 12000);
             structurePen = CreatePen("Castle, walls and weapon bases", 5, 30000);
             worldPen = CreatePen("Swarm, aiming weapons and construction", 10, 180000);
@@ -433,16 +434,10 @@ namespace PaperDefense.Presentation
         {
             Vector2 at = new Vector2(well.Cell.X + .5f, well.Cell.Y + .5f);
             Color color = DoodleGlyphs.InkTone(well.Color);
-            Color ink = well.Active ? color : MeshPen.Alpha(color, .42f);
             p.Disc(at, 1.1f, MeshPen.Alpha(color, well.Active ? .13f : .06f), 24, .85f);
             string id = well.Color == InkColor.Red ? "object.well.red" : well.Color == InkColor.Blue ? "object.well.blue" : "object.well.green";
-            // Resource art uses normalized icon coordinates; match the fallback bottle size.
-            if (!NotebookArtRenderer.Draw(p, Theme?.FindShape(well.Active ? id + ".active" : id), at, scale: 1.4f, opacity: well.Health > 0 ? 1 : .35f, theme: Theme))
-            {
-                p.Box(at, new Vector2(.95f, .85f), NotebookPalette.Paper, NotebookPalette.Navy, .075f, well.Id);
-                p.Disc(at, .36f, ink, 16, .73f);
-                p.Ring(at + new Vector2(0, .33f), .35f, .07f, color, 16, .5f, well.Id);
-            }
+            DoodleGlyphs.DrawResource(p, well.Active ? id + ".active" : id, at, scale: 1.4f,
+                opacity: well.Health > 0 ? 1 : .35f, theme: Theme);
             p.Line(at + new Vector2(-.55f, -.64f), at + new Vector2(.55f, -.64f), .07f, MeshPen.Alpha(NotebookPalette.Navy, .2f));
             p.Line(at + new Vector2(-.55f, -.64f), at + new Vector2(-.55f + 1.1f * Mathf.Clamp01(well.Health / Mathf.Max(1, well.MaxHealth)), -.64f), .07f, color);
             if (well.Threatened)
@@ -461,13 +456,7 @@ namespace PaperDefense.Presentation
             {
                 var blot = session.Blots[i]; Vector2 center = new Vector2(blot.Cell.X + .5f, blot.Cell.Y + .5f);
                 float fade = Mathf.Clamp01(blot.Remaining / Mathf.Max(.01f, session.Balance.BlotLifetime));
-                Color color = MeshPen.Alpha(NotebookPalette.Marker, .12f + fade * .38f);
-                if (!NotebookArtRenderer.Draw(p, Theme?.FindShape("object.blot"), center, opacity: .3f + fade * .7f, theme: Theme))
-                {
-                    p.Disc(center, .42f, color, 9, .65f);
-                    p.Disc(center + new Vector2(.21f, .08f), .2f, color, 7, .7f);
-                    p.Disc(center + new Vector2(-.23f, -.12f), .14f, color, 7);
-                }
+                DoodleGlyphs.DrawResource(p, "object.blot", center, opacity: .3f + fade * .7f, theme: Theme);
             }
             for (int i = 0; i < session.EnemyProjectiles.Count; i++)
             {
@@ -476,8 +465,7 @@ namespace PaperDefense.Presentation
                 float progress = Mathf.Clamp01(1 - glob.Remaining / Mathf.Max(.001f, glob.Duration));
                 Vector2 point = Vector2.Lerp(from, to, progress);
                 p.Line(Vector2.Lerp(from, to, Mathf.Max(0, progress - .12f)), point, .09f, MeshPen.Alpha(NotebookPalette.Marker, .55f));
-                if (!NotebookArtRenderer.Draw(p, Theme?.FindShape("fx.spitter.projectile"), point, theme: Theme))
-                { p.Disc(point, .14f, NotebookPalette.Navy, 8); p.Disc(point, .09f, NotebookPalette.Marker, 7); }
+                DoodleGlyphs.DrawResource(p, "fx.spitter.projectile", point, theme: Theme);
                 p.Ring(to, .36f, .035f, MeshPen.Alpha(NotebookPalette.Red, .5f), 12, 1, glob.Id, true);
             }
             for (int i = 0; i < session.Projectiles.Count; i++)
@@ -491,11 +479,7 @@ namespace PaperDefense.Presentation
                 Vector2 point = FlightPoint(from, to, flight, height);
                 Vector2 trail = FlightPoint(from, to, Mathf.Max(0, flight - .1f), height);
                 p.Line(trail, point, .045f, MeshPen.Alpha(NotebookPalette.Marker, .6f));
-                if (!NotebookArtRenderer.Draw(p, Theme?.FindShape("fx.mortar.projectile"), point, theme: Theme))
-                {
-                    p.Disc(point, .1f, NotebookPalette.Navy, 10);
-                    p.Disc(point + new Vector2(-.025f, .025f), .035f, NotebookPalette.Paper, 6);
-                }
+                DoodleGlyphs.DrawResource(p, "fx.mortar.projectile", point, theme: Theme);
                 NotebookEffectRenderer.DrawFootprint(p, to, projectile.ImpactFootprint, projectile.Radius, 1, .025f,
                     MeshPen.Alpha(NotebookPalette.Marker, .2f), 24, projectile.Id, true);
             }
@@ -540,16 +524,15 @@ namespace PaperDefense.Presentation
                         NotebookTowerComposition.DrawMounts(p, previewBlueprint, center, previewTier, InkColor.None,
                             default, false, null, 0, 0, .65f, Theme);
                     }
-                    else if (previewBlueprint == null && ConstructionToolRules.IsTool(previewKind) && NotebookArtRenderer.Draw(p,
-                        (Theme ?? NotebookVisualThemeAsset.Default)?.FindShape(previewKind == StructureKind.TarPit ? "object.tar" :
-                            previewKind == StructureKind.RepairPost ? "object.repair" : previewKind == StructureKind.Spikes ? "object.spikes" : "object.wall.0"),
-                        center, strokeTint: color, opacity: .65f, theme: Theme)) { }
-                    else if (previewKind == StructureKind.Wall)
-                        p.Line(center + new Vector2(-.31f, -.28f), center + new Vector2(.3f, .28f), .032f, MeshPen.Alpha(color, .5f));
+                    else if (ConstructionToolRules.IsTool(previewKind))
+                        DoodleGlyphs.DrawResource(p,
+                            previewKind == StructureKind.TarPit ? "object.tar" : previewKind == StructureKind.RepairPost ? "object.repair"
+                            : previewKind == StructureKind.Spikes ? "object.spikes" : "object.wall.0", center, opacity: .65f, theme: Theme);
                     else
                     {
-                        p.Ring(center, .23f, .043f, MeshPen.Alpha(color, .7f), 14, 1, cell.GetHashCode());
-                        p.Line(center, center + Vector2.up * .36f, .06f, MeshPen.Alpha(color, .7f));
+                        DoodleGlyphs.DrawResource(p, "chassis.standard", center, opacity: .65f, theme: Theme);
+                        DoodleGlyphs.DrawResource(p, LegacyContentIds.Weapon(previewKind), center + Vector2.up * .04f,
+                            opacity: .65f, theme: Theme);
                     }
                 }
                 else

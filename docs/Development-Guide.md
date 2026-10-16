@@ -10,7 +10,7 @@
 
 Зависимости заданы в [manifest.json](../Packages/manifest.json), разрешённые версии — в [packages-lock.json](../Packages/packages-lock.json). Среди используемых пакетов: URP 17.6.0, Input System 1.20.0, uGUI 2.5.0 и Test Framework 1.7.0. В manifest также есть Unity 2D, AI, Timeline и Git-пакет `com.coplaydev.unity-mcp`; первый импорт требует доступных источников пакетов. Наличие пакета само по себе не означает реализованную игровую функцию.
 
-Python 3 нужен только для инструментов текста и арт-исходников; они используют стандартную библиотеку. PowerShell запускает вспомогательные `.ps1`. Генератор Excel использует bundled Node.js и `@oai/artifact-tool`; требования описаны [отдельно](../Tools/BalanceWorkbook/README.md). Эти инструменты не нужны для обычного запуска игры в Unity.
+Python 3 нужен для инструментов текста и служебных проверок. Импорт нового оформления выполняется редактором Unity из PNG и JSON. PowerShell запускает вспомогательные `.ps1`. Генератор Excel использует bundled Node.js и `@oai/artifact-tool`; требования описаны [отдельно](../Tools/BalanceWorkbook/README.md). Эти инструменты не нужны для обычного запуска игры в Unity.
 
 ## Структура репозитория
 
@@ -23,9 +23,9 @@ Python 3 нужен только для инструментов текста и
 | `Assets/PaperDefense/Editor` | Меню основной сцены, импорт, экспорт и сборка |
 | `Assets/PaperDefense/Tests` | EditMode, редакторские и PlayMode-проверки |
 | `Assets/PaperDefense/Configuration` | Игровые и Target/Historical настройки |
-| `Assets/PaperDefense/Scenes`, `Prefabs`, `Resources`, `Art` | Сцены, prefab, загружаемые ресурсы и контактные SVG |
+| `Assets/PaperDefense/Scenes`, `Prefabs`, `Resources` | Единственная игровая сцена, prefab и загружаемые ресурсы, включая атлас нового оформления |
 | `Assets/PaperDefense/Content/Acceptance` | Отдельный контент для проверки добавления данных без изменения кода |
-| `ArtSource/Notebook` | Канонический JSON оформления, генераторы и проверки |
+| `ArtSource/Notebook/NewStyle` | Канонические PNG, `sprites.source.json` и `animation.json` нового оформления |
 | `Tools` | Скрипты текста, баланса и проверки данных |
 | `docs` | Дизайн игры и статус переноса, технические справочники, эскизы в `design`, отчёты реализации и очистки |
 | `Builds`, `Library`, `Temp`, `Logs`, `UserSettings` | Локальные сборки, кэш и временные результаты; исключены из Git |
@@ -38,9 +38,19 @@ Python 3 нужен только для инструментов текста и
 |---|---|
 | [Game/PaperDefenseGame.unity](../Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity) | Игровой маршрут; PlayerBalance → PlayerRules → PlayerContent; обычный профиль |
 
-Это единственная сохранённая сцена игры и единственная сцена сборки. **Paper Defense → Game → Open player game** и **Paper Defense → Открыть игру** открывают её. Удалены 30 сцен: 27 механических и художественных стендов, общий экран навигации, прежняя техническая сцена и сцена приёмки контента, а также их генераторы и runtime-обвязка. Эскизы сохранены; главное меню, карта и подготовка уже перенесены, композиции экранов 04–28 ещё предстоят.
+Это единственная сохранённая сцена игры и единственная сцена сборки. **Paper Defense → Game → Open player game** и **Paper Defense → Открыть игру** открывают её. Удалены 30 сцен: 27 механических и художественных стендов, общий экран навигации, прежняя техническая сцена и сцена приёмки контента, а также их генераторы и runtime-обвязка. Канонические 28 эскизов сохранены. Перенесены экраны 01–03 и 22; композиции 04–21 и 23–28 ещё предстоят. Боевые изображения обновлены, полный HUD 15–17 остаётся в плане.
 
 `PlayerGameSceneTools.CreateIfMissing()` создаёт отсутствующие игровые ассеты/сцену; существующие числовые данные баланса не копируются повторно. При этом `CreateConfigurationIfMissing()` всегда заново назначает связи `catalog.presets`, `rules.database`, `balance.dataPreset` и сохраняет assets, даже если они уже существуют. При создании новой сцены метод назначает её единственной сценой Build Settings. `Build()` сам ничего не генерирует: он собирает указанный сохранённый файл сцены.
+
+## Обновление оформления и экранов
+
+Источник графики — `ArtSource/Notebook/NewStyle`: PNG-листы, `sprites.source.json` с семантическими ID и областями спрайтов, `animation.json` с привязками и временем кадров. В редакторе выполните **Paper Defense → Art → Rebuild blue pen atlas** или вызовите `PaperDefense.Editor.NotebookSpriteImportTools.Rebuild()`. Результат — `Resources/Art/NotebookAtlas.png`, `NotebookSprites.json` и `NotebookVisualTheme.asset`; последний хранит анимацию, палитру и отдачу, без старых векторных `Marks`. Полноэкранные фоны остаются отдельными спрайтами в `Resources/Art/Player`. Подробности — в [руководстве оформления](Notebook-Art.md) и [исходниках](../ArtSource/Notebook/README.md).
+
+Настройки показывают текущий размер и отдельный выбор разрешения. Перелистывание не меняет экран; «Применить» передаёт размер в `Screen.SetResolution`, сохраняя текущий `fullScreenMode`. Закрытие сбрасывает неприменённый выбор. Список содержит уникальные размеры монитора и текущее окно; при отсутствии режимов используются размеры окна. Неизвестный режим ExclusiveFullscreen не применяется. Полный экран, радиусы башен, уменьшение движения и помощь остаются доступными.
+
+Новые страницы адаптируются к разрешению и соотношению сторон. Иллюстрации сохраняют собственные пропорции и целые края, свободное место заполняется бумагой. Проверяйте 1024×768, 1280×720, 1280×960, 1600×900 и 1920×1080, длинные подписи, клавиатурный фокус и возврат из настроек во время паузы.
+
+Актуальные снимки и результаты — в [отчёте обновления графики и разрешения](validation/2026-10-17-art-resolution/report.md). Этот документ не объявляет новый результат тестов или сборки.
 
 ## Сборка и запуск Player
 
@@ -63,16 +73,15 @@ Python 3 нужен только для инструментов текста и
 | `PaperDefense.Core.Tests` в `Tests/EditMode` | Строительство, экономика, оружие, враги, путь/толпа, полигон, рисунки, профиль, эффекты и контракты |
 | `PaperDefense.Editor.Tests` в `Tests/Editor` | Сериализованные сцены, каталоги, контент, импорт графики, числовой баланс |
 | `PaperDefense.Integration.Tests` в `Tests/PlayMode` | Ввод, фиксированные часы, HUD, отрисовка, IO/отказы, мастерская и игровой маршрут |
-| `PlayerSceneTests`, `PlayerJourneyTests` | Привязки игрового входа, переходы экранов, подготовка, пауза и результат |
+| `PlayerSceneTests`, `PlayerJourneyTests`, `PlayerDisplaySettingsTests` | Игровой вход, переходы, подготовка, пауза, полная видимость иллюстраций, читаемость и применение выбранного разрешения |
 | `NumericBalanceTests`, `TowerDefenseBalanceTests`, `EnemyCrowdMovementTests` | Измерения сборок, правила обороны и локальное движение |
-| `NotebookArtImportTests`, `NotebookArtPressureTests`, `NotebookCameraReadabilityTests` | Арт-ресурсы, нагрузка рендера и читаемость камеры |
+| `NotebookSpriteImportTests`, `NotebookArtPressureTests`, `NotebookCameraReadabilityTests` | Арт-ресурсы, границы и aliases атласа, нагрузка рендера и читаемость камеры |
 
 Быстрые проверки инструментов без Unity, из корня проекта:
 
 ```powershell
 python -m unittest discover -s Tools -p 'test_extract_user_text.py'
 python -m unittest discover -s Tools/tests -p 'test_*.py'
-python -m unittest discover -s ArtSource/Notebook -p 'test_*.py'
 git diff --check
 ```
 

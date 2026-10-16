@@ -20,8 +20,7 @@ namespace PaperDefense.Presentation
             {
                 if (playback.IsBlotEnded(blot.Cell)) continue;
                 Vector2 at = new Vector2(blot.Cell.X + .5f, blot.Cell.Y + .5f);
-                if (!NotebookArtRenderer.Draw(pen, theme?.FindShape("object.blot"), at, theme: theme))
-                    pen.Ring(at, .3f, .08f, NotebookPalette.Marker, 12);
+                DoodleGlyphs.DrawResource(pen, "object.blot", at, theme: theme);
             }
             foreach (var tower in frame.Towers)
             {
@@ -57,8 +56,7 @@ namespace PaperDefense.Presentation
                 Vector2 from = Muzzle(frame, launch, playback, theme), to = new Vector2(launch.To.X, launch.To.Y);
                 bool mortar = launch.Kind == SimulationEventKind.ProjectileLaunched;
                 Vector2 point = Vector2.Lerp(from, to, progress) + (mortar ? Vector2.up * Mathf.Sin(progress * Mathf.PI) * Mathf.Min(3, Vector2.Distance(from, to) * .22f) : Vector2.zero);
-                if (!NotebookArtRenderer.Draw(pen, theme?.FindShape(mortar ? "fx.mortar.projectile" : "fx.spitter.projectile"), point, theme: theme))
-                    pen.Disc(point, .12f, NotebookPalette.Marker, 8);
+                DoodleGlyphs.DrawResource(pen, mortar ? "fx.mortar.projectile" : "fx.spitter.projectile", point, theme: theme);
                 if (mortar) NotebookEffectRenderer.DrawFootprint(pen, to, launch.ImpactFootprint, launch.Radius, 1, .025f,
                     MeshPen.Alpha(NotebookPalette.Marker, .2f), 24, launch.EntityId, true);
             }
@@ -73,7 +71,7 @@ namespace PaperDefense.Presentation
                 float progress = Mathf.Clamp01(1 - (projectile.Remaining - (seconds - frame.Seconds)) / Mathf.Max(.001f, projectile.Duration));
                 Vector2 from = new Vector2(projectile.From.X, projectile.From.Y), to = new Vector2(projectile.To.X, projectile.To.Y);
                 Vector2 point = Vector2.Lerp(from, to, progress) + Vector2.up * Mathf.Sin(progress * Mathf.PI) * Mathf.Min(3, Vector2.Distance(from, to) * .22f);
-                NotebookArtRenderer.Draw(pen, theme?.FindShape("fx.mortar.projectile"), point, theme: theme);
+                DoodleGlyphs.DrawResource(pen, "fx.mortar.projectile", point, theme: theme);
                 NotebookEffectRenderer.DrawFootprint(pen, to, projectile.ImpactFootprint, projectile.Radius, 1, .025f,
                     MeshPen.Alpha(NotebookPalette.Marker, .2f), 24, projectile.Id, true);
             }

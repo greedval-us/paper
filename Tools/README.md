@@ -13,8 +13,7 @@
 | `Game → Open player game` | Открывает сохранённую игровую сцену |
 | `Game → Build player game` | Собирает Windows x64 и пишет `Builds/PlayerGame/build-report.txt` |
 | `Открыть игру` | Открывает ту же основную сцену `Game/PaperDefenseGame.unity` |
-| `Art → Import notebook art and current templates` | Проверяет JSON оформления, публикует ресурс/актуальные шаблоны и экспортирует SVG |
-| `Art → Export notebook SVG contact sheets` | Экспортирует контактные SVG из проверенного JSON |
+| `Art → Rebuild blue pen atlas` | Собирает PNG-атлас, каталог спрайтов и анимационную тему из `ArtSource/Notebook/NewStyle` |
 | `Content → Validate all databases and presets` | Проверяет базы и пресеты |
 | `Content → Migrate legacy balance assets once` | Историческая миграция старой конфигурации в каталог |
 | `Content → Apply modular tower preset` | Применяет модульный пресет к предусмотренным инструментом данным |
@@ -65,4 +64,4 @@ Runtime-измеритель `PressurePlayerProbe`, флаг `-paper-pressure` �
 | [ContentAcceptanceRunner](../Assets/PaperDefense/Validation/ContentAcceptanceRunner.cs) и [ContentAcceptanceManifestAsset](../Assets/PaperDefense/Validation/ContentAcceptanceManifestAsset.cs) | Editor-only приёмка данных `Content/Acceptance` через автоматические тесты; отдельная сцена удалена |
 | [PlayerVisualCapture](../Assets/PaperDefense/Editor/PlayerVisualCapture.cs) | API `Capture`: снимки игрового интерфейса; по умолчанию `Captures/PlayerGame` |
 
-Последняя проверка очистки и назначение сохранённых исторических JSON описаны в [указателе проверок](../docs/validation/README.md). Эти JSON остаются входами инструментов приёмки и не являются новым результатом текущего дерева. Генерация арт-данных и SVG описана в [ArtSource/Notebook](../ArtSource/Notebook/README.md); исходники и эскизы сохранены.
+Последняя проверка очистки и назначение сохранённых исторических JSON описаны в [указателе проверок](../docs/validation/README.md). Эти JSON остаются входами инструментов приёмки и не являются новым результатом текущего дерева. Канонические PNG, `sprites.source.json`, `animation.json` и редакторский `NotebookSpriteImportTools.Rebuild()` описаны в [ArtSource/Notebook](../ArtSource/Notebook/README.md). Актуальное обновление — в [отчёте графики и разрешения](../docs/validation/2026-10-17-art-resolution/report.md).

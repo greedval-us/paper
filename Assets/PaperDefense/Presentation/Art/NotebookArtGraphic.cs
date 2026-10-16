@@ -8,6 +8,7 @@ namespace PaperDefense.Presentation
     [RequireComponent(typeof(CanvasRenderer))]
     public sealed class NotebookArtGraphic : MaskableGraphic
     {
+        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         string shapeId, clipId;
         float seconds, extent = .6f;
         public string ShapeId => shapeId;
@@ -27,6 +28,9 @@ namespace PaperDefense.Presentation
         void Measure(NotebookArtShape shape)
         {
             if (shape == null) return;
+            if (NotebookSpriteCatalog.TryGetBounds(shape.Id, out var bounds))
+                extent = Mathf.Max(extent, Mathf.Abs(bounds.xMin), Mathf.Abs(bounds.xMax), Mathf.Abs(bounds.yMin), Mathf.Abs(bounds.yMax));
+            if (shape.Marks == null) return;
             foreach (var mark in shape.Marks)
             {
                 foreach (var point in mark.Points) extent = Mathf.Max(extent, Mathf.Abs(point.x), Mathf.Abs(point.y));

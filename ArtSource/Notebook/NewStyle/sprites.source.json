@@ -1,0 +1,2851 @@
+{
+  "revision": "blue-pen-2026-10-17",
+  "sprites": [
+    {
+      "id": "chassis.standard",
+      "source": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "x": 21,
+      "y": 668,
+      "width": 282,
+      "height": 250,
+      "bounds": {
+        "x": -0.3446800000000001,
+        "y": -0.28,
+        "width": 0.6993600000000001,
+        "height": 0.6200000000000001
+      }
+    },
+    {
+      "id": "chassis.heavy",
+      "source": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "x": 331,
+      "y": 671,
+      "width": 320,
+      "height": 253,
+      "bounds": {
+        "x": -0.4189291304347826,
+        "y": -0.31106,
+        "width": 0.8386782608695652,
+        "height": 0.66308
+      }
+    },
+    {
+      "id": "chassis.precision",
+      "source": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "x": 664,
+      "y": 648,
+      "width": 279,
+      "height": 242,
+      "bounds": {
+        "x": -0.36683311983471073,
+        "y": -0.30317,
+        "width": 0.7336662396694215,
+        "height": 0.63637
+      }
+    },
+    {
+      "id": "chassis.battery",
+      "source": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "x": 952,
+      "y": 647,
+      "width": 337,
+      "height": 287,
+      "bounds": {
+        "x": -0.34735658536585357,
+        "y": -0.31081,
+        "width": 0.6947131707317071,
+        "height": 0.5916399999999999
+      }
+    },
+    {
+      "id": "module.armor",
+      "source": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "x": 1324,
+      "y": 655,
+      "width": 277,
+      "height": 208,
+      "bounds": {
+        "x": -0.3395913461538461,
+        "y": -0.23,
+        "width": 0.6791826923076922,
+        "height": 0.51
+      }
+    },
+    {
+      "id": "weapon.gun",
+      "source": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "x": 44,
+      "y": 320,
+      "width": 211,
+      "height": 296,
+      "bounds": {
+        "x": -0.2,
+        "y": -0.028549597156398154,
+        "width": 0.33169000000000004,
+        "height": 0.46530919431279627
+      }
+    },
+    {
+      "id": "weapon.piercer",
+      "source": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "x": 383,
+      "y": 319,
+      "width": 243,
+      "height": 314,
+      "bounds": {
+        "x": -0.115,
+        "y": 0.1259291769547325,
+        "width": 0.23,
+        "height": 0.297201646090535
+      }
+    },
+    {
+      "id": "weapon.mortar",
+      "source": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "x": 677,
+      "y": 327,
+      "width": 240,
+      "height": 270,
+      "bounds": {
+        "x": -0.2,
+        "y": -0.06853000000000001,
+        "width": 0.4,
+        "height": 0.45
+      }
+    },
+    {
+      "id": "weapon.fan",
+      "source": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "x": 998,
+      "y": 321,
+      "width": 256,
+      "height": 288,
+      "bounds": {
+        "x": -0.29,
+        "y": -0.12257499999999999,
+        "width": 0.58,
+        "height": 0.6525
+      }
+    },
+    {
+      "id": "weapon.ricochet",
+      "source": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "x": 1334,
+      "y": 322,
+      "width": 262,
+      "height": 234,
+      "bounds": {
+        "x": -0.21,
+        "y": 0.002157748091603018,
+        "width": 0.42,
+        "height": 0.3751145038167939
+      }
+    },
+    {
+      "id": "weapon.stapler",
+      "source": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "x": 17,
+      "y": 33,
+      "width": 287,
+      "height": 248,
+      "bounds": {
+        "x": -0.21,
+        "y": 0.007801585365853653,
+        "width": 0.42,
+        "height": 0.36292682926829267
+      }
+    },
+    {
+      "id": "weapon.blotter",
+      "source": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "x": 365,
+      "y": 31,
+      "width": 243,
+      "height": 267,
+      "bounds": {
+        "x": -0.2278966853932584,
+        "y": -0.10999999999999999,
+        "width": 0.4557933707865168,
+        "height": 0.50081
+      }
+    },
+    {
+      "id": "module.feed",
+      "source": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "x": 667,
+      "y": 28,
+      "width": 283,
+      "height": 232,
+      "bounds": {
+        "x": -0.16796976293103452,
+        "y": -0.40305,
+        "width": 0.335879525862069,
+        "height": 0.27535
+      }
+    },
+    {
+      "id": "module.tracking",
+      "source": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "x": 950,
+      "y": 31,
+      "width": 350,
+      "height": 259,
+      "bounds": {
+        "x": 0.16000000000000003,
+        "y": 0.04399999999999997,
+        "width": 0.30000000000000004,
+        "height": 0.22200000000000006
+      }
+    },
+    {
+      "id": "module.rail",
+      "source": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "x": 1300,
+      "y": 29,
+      "width": 306,
+      "height": 230,
+      "bounds": {
+        "x": -0.4,
+        "y": -0.2656535947712419,
+        "width": 0.8,
+        "height": 0.6013071895424837
+      }
+    },
+    {
+      "id": "object.wall",
+      "source": "ArtSource/Notebook/NewStyle/ScenerySprites.png",
+      "x": 31,
+      "y": 748,
+      "width": 303,
+      "height": 259,
+      "bounds": {
+        "x": -0.30227,
+        "y": -0.25887110561056104,
+        "width": 0.60385,
+        "height": 0.5161622112211222
+      }
+    },
+    {
+      "id": "object.spikes",
+      "source": "ArtSource/Notebook/NewStyle/ScenerySprites.png",
+      "x": 385,
+      "y": 736,
+      "width": 291,
+      "height": 282,
+      "bounds": {
+        "x": -0.29963164893617017,
+        "y": -0.27165,
+        "width": 0.6002132978723403,
+        "height": 0.58165
+      }
+    },
+    {
+      "id": "object.repair",
+      "source": "ArtSource/Notebook/NewStyle/ScenerySprites.png",
+      "x": 724,
+      "y": 715,
+      "width": 357,
+      "height": 305,
+      "bounds": {
+        "x": -0.34323,
+        "y": -0.2185307282913166,
+        "width": 0.68543,
+        "height": 0.5855914565826331
+      }
+    },
+    {
+      "id": "object.tar",
+      "source": "ArtSource/Notebook/NewStyle/ScenerySprites.png",
+      "x": 1117,
+      "y": 758,
+      "width": 312,
+      "height": 214,
+      "bounds": {
+        "x": -0.48,
+        "y": -0.3184307692307692,
+        "width": 0.96,
+        "height": 0.6584615384615384
+      }
+    },
+    {
+      "id": "terrain.pine",
+      "source": "ArtSource/Notebook/NewStyle/ScenerySprites.png",
+      "x": 46,
+      "y": 342,
+      "width": 253,
+      "height": 388,
+      "bounds": {
+        "x": -0.3362519974226804,
+        "y": -0.44135,
+        "width": 0.6725039948453608,
+        "height": 1.03135
+      }
+    },
+    {
+      "id": "terrain.mountain",
+      "source": "ArtSource/Notebook/NewStyle/ScenerySprites.png",
+      "x": 343,
+      "y": 351,
+      "width": 386,
+      "height": 319,
+      "bounds": {
+        "x": -0.5542255172413793,
+        "y": -0.34258,
+        "width": 1.1284510344827585,
+        "height": 0.93258
+      }
+    },
+    {
+      "id": "terrain.oak",
+      "source": "ArtSource/Notebook/NewStyle/ScenerySprites.png",
+      "x": 731,
+      "y": 358,
+      "width": 345,
+      "height": 324,
+      "bounds": {
+        "x": -0.45,
+        "y": -0.33760869565217394,
+        "width": 0.9,
+        "height": 0.8452173913043479
+      }
+    },
+    {
+      "id": "terrain.rock",
+      "source": "ArtSource/Notebook/NewStyle/ScenerySprites.png",
+      "x": 1105,
+      "y": 366,
+      "width": 324,
+      "height": 238,
+      "bounds": {
+        "x": -0.36936974789915966,
+        "y": -0.27,
+        "width": 0.7487394957983193,
+        "height": 0.55
+      }
+    },
+    {
+      "id": "terrain.shrub",
+      "source": "ArtSource/Notebook/NewStyle/ScenerySprites.png",
+      "x": 38,
+      "y": 37,
+      "width": 255,
+      "height": 205,
+      "bounds": {
+        "x": -0.30597560975609756,
+        "y": -0.23,
+        "width": 0.6219512195121951,
+        "height": 0.5
+      }
+    },
+    {
+      "id": "terrain.ridge",
+      "source": "ArtSource/Notebook/NewStyle/ScenerySprites.png",
+      "x": 318,
+      "y": 57,
+      "width": 375,
+      "height": 171,
+      "bounds": {
+        "x": -0.58,
+        "y": -0.17032999999999993,
+        "width": 1.16,
+        "height": 0.5289599999999999
+      }
+    },
+    {
+      "id": "object.castle.damaged",
+      "source": "ArtSource/Notebook/NewStyle/ScenerySprites.png",
+      "x": 704,
+      "y": 21,
+      "width": 408,
+      "height": 330,
+      "bounds": {
+        "x": -1.4,
+        "y": -0.7926470588235291,
+        "width": 2.8,
+        "height": 2.2647058823529407
+      }
+    },
+    {
+      "id": "object.blot",
+      "source": "ArtSource/Notebook/NewStyle/ScenerySprites.png",
+      "x": 1110,
+      "y": 21,
+      "width": 321,
+      "height": 282,
+      "bounds": {
+        "x": -0.370815159574468,
+        "y": -0.28574999999999995,
+        "width": 0.752130319148936,
+        "height": 0.6607499999999998
+      }
+    },
+    {
+      "id": "enemy.doodle.idle",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 85,
+      "y": 557,
+      "width": 145,
+      "height": 193,
+      "bounds": {
+        "x": -0.22499999999999998,
+        "y": -0.2695344827586207,
+        "width": 0.44999999999999996,
+        "height": 0.5989655172413793
+      }
+    },
+    {
+      "id": "enemy.runner.idle",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 367,
+      "y": 559,
+      "width": 157,
+      "height": 197,
+      "bounds": {
+        "x": -0.2550253807106599,
+        "y": -0.28800000000000003,
+        "width": 0.5100507614213198,
+        "height": 0.64
+      }
+    },
+    {
+      "id": "enemy.gnawer.idle",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 646,
+      "y": 559,
+      "width": 190,
+      "height": 134,
+      "bounds": {
+        "x": -0.325,
+        "y": -0.20628947368421052,
+        "width": 0.65,
+        "height": 0.45842105263157895
+      }
+    },
+    {
+      "id": "enemy.spitter.idle",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 920,
+      "y": 560,
+      "width": 189,
+      "height": 174,
+      "bounds": {
+        "x": -0.3275,
+        "y": -0.27135714285714285,
+        "width": 0.655,
+        "height": 0.603015873015873
+      }
+    },
+    {
+      "id": "enemy.brute.idle",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 1153,
+      "y": 559,
+      "width": 333,
+      "height": 250,
+      "bounds": {
+        "x": -0.46,
+        "y": -0.3108108108108108,
+        "width": 0.92,
+        "height": 0.6906906906906907
+      }
+    },
+    {
+      "id": "enemy.bulwark.idle",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 1513,
+      "y": 557,
+      "width": 200,
+      "height": 226,
+      "bounds": {
+        "x": -0.3672566371681416,
+        "y": -0.37350000000000005,
+        "width": 0.7345132743362832,
+        "height": 0.8300000000000001
+      }
+    },
+    {
+      "id": "enemy.doodle.walk",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 50,
+      "y": 300,
+      "width": 202,
+      "height": 194,
+      "bounds": {
+        "x": -0.31344827586206897,
+        "y": -0.2695344827586207,
+        "width": 0.6268965517241379,
+        "height": 0.6020689655172413
+      }
+    },
+    {
+      "id": "enemy.runner.walk",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 324,
+      "y": 299,
+      "width": 250,
+      "height": 197,
+      "bounds": {
+        "x": -0.40609137055837563,
+        "y": -0.28800000000000003,
+        "width": 0.8121827411167513,
+        "height": 0.64
+      }
+    },
+    {
+      "id": "enemy.gnawer.walk",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 633,
+      "y": 311,
+      "width": 224,
+      "height": 147,
+      "bounds": {
+        "x": -0.38315789473684214,
+        "y": -0.20628947368421052,
+        "width": 0.7663157894736843,
+        "height": 0.5028947368421053
+      }
+    },
+    {
+      "id": "enemy.spitter.walk",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 903,
+      "y": 305,
+      "width": 207,
+      "height": 182,
+      "bounds": {
+        "x": -0.35869047619047617,
+        "y": -0.27135714285714285,
+        "width": 0.7173809523809523,
+        "height": 0.6307407407407407
+      }
+    },
+    {
+      "id": "enemy.brute.walk",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 1152,
+      "y": 300,
+      "width": 335,
+      "height": 237,
+      "bounds": {
+        "x": -0.4627627627627628,
+        "y": -0.3108108108108108,
+        "width": 0.9255255255255256,
+        "height": 0.6547747747747747
+      }
+    },
+    {
+      "id": "enemy.bulwark.walk",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 1501,
+      "y": 297,
+      "width": 232,
+      "height": 220,
+      "bounds": {
+        "x": -0.4260176991150443,
+        "y": -0.37350000000000005,
+        "width": 0.8520353982300886,
+        "height": 0.8079646017699116
+      }
+    },
+    {
+      "id": "enemy.doodle.attack",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 25,
+      "y": 35,
+      "width": 240,
+      "height": 194,
+      "bounds": {
+        "x": -0.37241379310344824,
+        "y": -0.2695344827586207,
+        "width": 0.7448275862068965,
+        "height": 0.6020689655172413
+      }
+    },
+    {
+      "id": "enemy.runner.attack",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 295,
+      "y": 36,
+      "width": 290,
+      "height": 186,
+      "bounds": {
+        "x": -0.47106598984771575,
+        "y": -0.28800000000000003,
+        "width": 0.9421319796954315,
+        "height": 0.604263959390863
+      }
+    },
+    {
+      "id": "enemy.gnawer.attack",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 618,
+      "y": 45,
+      "width": 230,
+      "height": 164,
+      "bounds": {
+        "x": -0.39342105263157895,
+        "y": -0.20628947368421052,
+        "width": 0.7868421052631579,
+        "height": 0.5610526315789474
+      }
+    },
+    {
+      "id": "enemy.spitter.attack",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 886,
+      "y": 45,
+      "width": 299,
+      "height": 163,
+      "bounds": {
+        "x": -0.5181084656084656,
+        "y": -0.27135714285714285,
+        "width": 1.0362169312169311,
+        "height": 0.5648941798941799
+      }
+    },
+    {
+      "id": "enemy.brute.attack",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 1187,
+      "y": 25,
+      "width": 288,
+      "height": 262,
+      "bounds": {
+        "x": -0.3978378378378379,
+        "y": -0.3108108108108108,
+        "width": 0.7956756756756758,
+        "height": 0.7238438438438439
+      }
+    },
+    {
+      "id": "enemy.bulwark.attack",
+      "source": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "x": 1510,
+      "y": 28,
+      "width": 232,
+      "height": 205,
+      "bounds": {
+        "x": -0.4260176991150443,
+        "y": -0.37350000000000005,
+        "width": 0.8520353982300886,
+        "height": 0.7528761061946903
+      }
+    },
+    {
+      "id": "fx.muzzle",
+      "source": "ArtSource/Notebook/NewStyle/EffectSprites.png",
+      "x": 60,
+      "y": 486,
+      "width": 402,
+      "height": 271,
+      "bounds": {
+        "x": -0.21623,
+        "y": -0.15377901741293531,
+        "width": 0.45623,
+        "height": 0.30755803482587063
+      }
+    },
+    {
+      "id": "fx.tracer",
+      "source": "ArtSource/Notebook/NewStyle/EffectSprites.png",
+      "x": 538,
+      "y": 430,
+      "width": 331,
+      "height": 416,
+      "bounds": {
+        "x": -0.04328,
+        "y": -0.0284790332326284,
+        "width": 0.04532,
+        "height": 0.0569580664652568
+      }
+    },
+    {
+      "id": "fx.piercer",
+      "source": "ArtSource/Notebook/NewStyle/EffectSprites.png",
+      "x": 1056,
+      "y": 426,
+      "width": 131,
+      "height": 451,
+      "bounds": {
+        "x": -0.04804,
+        "y": -0.08773843511450381,
+        "width": 0.05097,
+        "height": 0.17547687022900763
+      }
+    },
+    {
+      "id": "fx.mortar.projectile",
+      "source": "ArtSource/Notebook/NewStyle/EffectSprites.png",
+      "x": 1336,
+      "y": 457,
+      "width": 395,
+      "height": 325,
+      "bounds": {
+        "x": -0.1,
+        "y": -0.1972784810126582,
+        "width": 0.2,
+        "height": 0.16455696202531647
+      }
+    },
+    {
+      "id": "fx.mortar.explosion",
+      "source": "ArtSource/Notebook/NewStyle/EffectSprites.png",
+      "x": 17,
+      "y": 23,
+      "width": 457,
+      "height": 387,
+      "bounds": {
+        "x": -0.46055999999999997,
+        "y": -0.39824586433260395,
+        "width": 0.94056,
+        "height": 0.7964917286652079
+      }
+    },
+    {
+      "id": "fx.fan",
+      "source": "ArtSource/Notebook/NewStyle/EffectSprites.png",
+      "x": 487,
+      "y": 28,
+      "width": 398,
+      "height": 355,
+      "bounds": {
+        "x": -0.2970985915492958,
+        "y": 0.0,
+        "width": 0.5941971830985916,
+        "height": 0.53
+      }
+    },
+    {
+      "id": "fx.ricochet",
+      "source": "ArtSource/Notebook/NewStyle/EffectSprites.png",
+      "x": 917,
+      "y": 27,
+      "width": 397,
+      "height": 344,
+      "bounds": {
+        "x": -0.37507267441860465,
+        "y": -0.27,
+        "width": 0.7501453488372093,
+        "height": 0.65
+      }
+    },
+    {
+      "id": "fx.cleanup",
+      "source": "ArtSource/Notebook/NewStyle/EffectSprites.png",
+      "x": 1344,
+      "y": 28,
+      "width": 391,
+      "height": 363,
+      "bounds": {
+        "x": -0.37313033057851236,
+        "y": -0.34641,
+        "width": 0.7462606611570247,
+        "height": 0.69282
+      }
+    },
+    {
+      "id": "icon.pencil",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 53,
+      "y": 926,
+      "width": 254,
+      "height": 269,
+      "bounds": {
+        "x": -0.47211895910780666,
+        "y": -0.5,
+        "width": 0.9442379182156133,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "icon.pen",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 341,
+      "y": 930,
+      "width": 271,
+      "height": 291,
+      "bounds": {
+        "x": -0.46563573883161513,
+        "y": -0.5,
+        "width": 0.9312714776632303,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "icon.marker",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 643,
+      "y": 928,
+      "width": 285,
+      "height": 293,
+      "bounds": {
+        "x": -0.4863481228668942,
+        "y": -0.5,
+        "width": 0.9726962457337884,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "icon.erase",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 972,
+      "y": 930,
+      "width": 253,
+      "height": 208,
+      "bounds": {
+        "x": -0.49999999999999994,
+        "y": -0.4110671936758893,
+        "width": 0.9999999999999999,
+        "height": 0.8221343873517786
+      }
+    },
+    {
+      "id": "icon.paint",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 37,
+      "y": 620,
+      "width": 270,
+      "height": 276,
+      "bounds": {
+        "x": -0.4891304347826087,
+        "y": -0.5,
+        "width": 0.9782608695652174,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "icon.upgrade",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 369,
+      "y": 628,
+      "width": 231,
+      "height": 258,
+      "bounds": {
+        "x": -0.4476744186046512,
+        "y": -0.5,
+        "width": 0.8953488372093024,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "icon.play",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 689,
+      "y": 623,
+      "width": 198,
+      "height": 246,
+      "bounds": {
+        "x": -0.4024390243902439,
+        "y": -0.5,
+        "width": 0.8048780487804879,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "icon.help",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 943,
+      "y": 640,
+      "width": 289,
+      "height": 214,
+      "bounds": {
+        "x": -0.5,
+        "y": -0.370242214532872,
+        "width": 1.0,
+        "height": 0.740484429065744
+      }
+    },
+    {
+      "id": "icon.settings",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 27,
+      "y": 318,
+      "width": 281,
+      "height": 269,
+      "bounds": {
+        "x": -0.5,
+        "y": -0.47864768683274017,
+        "width": 1.0,
+        "height": 0.9572953736654803
+      }
+    },
+    {
+      "id": "icon.workshop",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 342,
+      "y": 325,
+      "width": 258,
+      "height": 266,
+      "bounds": {
+        "x": -0.4849624060150376,
+        "y": -0.5,
+        "width": 0.9699248120300752,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "icon.exit",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 672,
+      "y": 320,
+      "width": 237,
+      "height": 274,
+      "bounds": {
+        "x": -0.4324817518248175,
+        "y": -0.5,
+        "width": 0.864963503649635,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "icon.skull",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 982,
+      "y": 321,
+      "width": 225,
+      "height": 260,
+      "bounds": {
+        "x": -0.4326923076923077,
+        "y": -0.5,
+        "width": 0.8653846153846154,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "icon.entrance",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 37,
+      "y": 26,
+      "width": 249,
+      "height": 264,
+      "bounds": {
+        "x": -0.4715909090909091,
+        "y": -0.5,
+        "width": 0.9431818181818182,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "icon.shield",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 349,
+      "y": 27,
+      "width": 243,
+      "height": 286,
+      "bounds": {
+        "x": -0.42482517482517484,
+        "y": -0.5,
+        "width": 0.8496503496503497,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "icon.heart",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 659,
+      "y": 40,
+      "width": 269,
+      "height": 229,
+      "bounds": {
+        "x": -0.5,
+        "y": -0.4256505576208178,
+        "width": 1.0,
+        "height": 0.8513011152416357
+      }
+    },
+    {
+      "id": "icon.flag",
+      "source": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "x": 990,
+      "y": 26,
+      "width": 247,
+      "height": 281,
+      "bounds": {
+        "x": -0.4395017793594306,
+        "y": -0.5,
+        "width": 0.8790035587188612,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "tower.gun",
+      "source": "ArtSource/Notebook/NewStyle/PreparationTowers.png",
+      "x": 22,
+      "y": 195,
+      "width": 407,
+      "height": 290,
+      "bounds": {
+        "x": -0.5,
+        "y": -0.35626535626535627,
+        "width": 1,
+        "height": 0.7125307125307125
+      }
+    },
+    {
+      "id": "tower.double",
+      "source": "ArtSource/Notebook/NewStyle/PreparationTowers.png",
+      "x": 450,
+      "y": 197,
+      "width": 403,
+      "height": 312,
+      "bounds": {
+        "x": -0.5,
+        "y": -0.3870967741935484,
+        "width": 1,
+        "height": 0.7741935483870968
+      }
+    },
+    {
+      "id": "tower.piercer",
+      "source": "ArtSource/Notebook/NewStyle/PreparationTowers.png",
+      "x": 877,
+      "y": 191,
+      "width": 407,
+      "height": 342,
+      "bounds": {
+        "x": -0.5,
+        "y": -0.4201474201474201,
+        "width": 1,
+        "height": 0.8402948402948403
+      }
+    },
+    {
+      "id": "tower.mortar",
+      "source": "ArtSource/Notebook/NewStyle/PreparationTowers.png",
+      "x": 1308,
+      "y": 188,
+      "width": 420,
+      "height": 355,
+      "bounds": {
+        "x": -0.5,
+        "y": -0.4226190476190476,
+        "width": 1,
+        "height": 0.8452380952380952
+      }
+    },
+    {
+      "id": "tower.fan",
+      "source": "ArtSource/Notebook/NewStyle/PreparationTowers.png",
+      "x": 1752,
+      "y": 193,
+      "width": 398,
+      "height": 325,
+      "bounds": {
+        "x": -0.5,
+        "y": -0.4082914572864322,
+        "width": 1,
+        "height": 0.8165829145728644
+      }
+    },
+    {
+      "id": "hero.castle",
+      "source": "ArtSource/Notebook/NewStyle/MissionIllustrations.png",
+      "x": 21,
+      "y": 56,
+      "width": 715,
+      "height": 602,
+      "bounds": {
+        "x": -1.4,
+        "y": -0.825118881118881,
+        "width": 2.8,
+        "height": 2.3574825174825174
+      }
+    },
+    {
+      "id": "icon.ink-red",
+      "source": "ArtSource/Notebook/NewStyle/MissionIllustrations.png",
+      "x": 806,
+      "y": 108,
+      "width": 355,
+      "height": 442,
+      "bounds": {
+        "x": -0.25776453619909506,
+        "y": -0.31047,
+        "width": 0.5155290723981901,
+        "height": 0.64187
+      }
+    },
+    {
+      "id": "icon.ink-blue",
+      "source": "ArtSource/Notebook/NewStyle/MissionIllustrations.png",
+      "x": 1300,
+      "y": 107,
+      "width": 358,
+      "height": 444,
+      "bounds": {
+        "x": -0.25877191441441444,
+        "y": -0.31047,
+        "width": 0.5175438288288289,
+        "height": 0.64187
+      }
+    },
+    {
+      "id": "icon.ink-green",
+      "source": "ArtSource/Notebook/NewStyle/MissionIllustrations.png",
+      "x": 1771,
+      "y": 110,
+      "width": 354,
+      "height": 441,
+      "bounds": {
+        "x": -0.25762129251700683,
+        "y": -0.31047,
+        "width": 0.5152425850340137,
+        "height": 0.64187
+      }
+    },
+    {
+      "id": "logo.home",
+      "source": "ArtSource/Notebook/NewStyle/HomeWordmark.png",
+      "x": 89,
+      "y": 58,
+      "width": 1691,
+      "height": 728,
+      "bounds": {
+        "x": -1,
+        "y": -0.5,
+        "width": 2,
+        "height": 1
+      }
+    },
+    {
+      "id": "logo.settings",
+      "source": "ArtSource/Notebook/NewStyle/SettingsWordmark.png",
+      "x": 27,
+      "y": 37,
+      "width": 2061,
+      "height": 681,
+      "bounds": {
+        "x": -1,
+        "y": -0.5,
+        "width": 2,
+        "height": 1
+      }
+    }
+  ],
+  "aliases": [
+    {
+      "id": "enemy.doodle.sketch.idle",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.sketch.idle.1",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.sketch.idle.2",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.sketch.idle.3",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.sketch.walk",
+      "alias": "enemy.doodle.walk"
+    },
+    {
+      "id": "enemy.doodle.sketch.walk.1",
+      "alias": "enemy.doodle.walk"
+    },
+    {
+      "id": "enemy.doodle.sketch.walk.2",
+      "alias": "enemy.doodle.walk"
+    },
+    {
+      "id": "enemy.doodle.sketch.walk.3",
+      "alias": "enemy.doodle.walk"
+    },
+    {
+      "id": "enemy.doodle.sketch.attack",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.sketch.attack.1",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.sketch.attack.2",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.sketch.attack.3",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.sketch.hit",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.sketch.hit.1",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.sketch.hit.2",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.sketch.hit.3",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.sketch.death",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.sketch.death.1",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.sketch.death.2",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.sketch.death.3",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.outlined.idle",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.outlined.idle.1",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.outlined.idle.2",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.outlined.idle.3",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.outlined.walk",
+      "alias": "enemy.doodle.walk"
+    },
+    {
+      "id": "enemy.doodle.outlined.walk.1",
+      "alias": "enemy.doodle.walk"
+    },
+    {
+      "id": "enemy.doodle.outlined.walk.2",
+      "alias": "enemy.doodle.walk"
+    },
+    {
+      "id": "enemy.doodle.outlined.walk.3",
+      "alias": "enemy.doodle.walk"
+    },
+    {
+      "id": "enemy.doodle.outlined.attack",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.outlined.attack.1",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.outlined.attack.2",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.outlined.attack.3",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.outlined.hit",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.outlined.hit.1",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.outlined.hit.2",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.outlined.hit.3",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.outlined.death",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.outlined.death.1",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.outlined.death.2",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.outlined.death.3",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.hatched.idle",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.hatched.idle.1",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.hatched.idle.2",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.hatched.idle.3",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.hatched.walk",
+      "alias": "enemy.doodle.walk"
+    },
+    {
+      "id": "enemy.doodle.hatched.walk.1",
+      "alias": "enemy.doodle.walk"
+    },
+    {
+      "id": "enemy.doodle.hatched.walk.2",
+      "alias": "enemy.doodle.walk"
+    },
+    {
+      "id": "enemy.doodle.hatched.walk.3",
+      "alias": "enemy.doodle.walk"
+    },
+    {
+      "id": "enemy.doodle.hatched.attack",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.hatched.attack.1",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.hatched.attack.2",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.hatched.attack.3",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.hatched.hit",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.hatched.hit.1",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.hatched.hit.2",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.hatched.hit.3",
+      "alias": "enemy.doodle.attack"
+    },
+    {
+      "id": "enemy.doodle.hatched.death",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.hatched.death.1",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.hatched.death.2",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.doodle.hatched.death.3",
+      "alias": "enemy.doodle.idle"
+    },
+    {
+      "id": "enemy.runner.sketch.idle",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.sketch.idle.1",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.sketch.idle.2",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.sketch.idle.3",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.sketch.walk",
+      "alias": "enemy.runner.walk"
+    },
+    {
+      "id": "enemy.runner.sketch.walk.1",
+      "alias": "enemy.runner.walk"
+    },
+    {
+      "id": "enemy.runner.sketch.walk.2",
+      "alias": "enemy.runner.walk"
+    },
+    {
+      "id": "enemy.runner.sketch.walk.3",
+      "alias": "enemy.runner.walk"
+    },
+    {
+      "id": "enemy.runner.sketch.attack",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.sketch.attack.1",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.sketch.attack.2",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.sketch.attack.3",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.sketch.hit",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.sketch.hit.1",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.sketch.hit.2",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.sketch.hit.3",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.sketch.death",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.sketch.death.1",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.sketch.death.2",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.sketch.death.3",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.outlined.idle",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.outlined.idle.1",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.outlined.idle.2",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.outlined.idle.3",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.outlined.walk",
+      "alias": "enemy.runner.walk"
+    },
+    {
+      "id": "enemy.runner.outlined.walk.1",
+      "alias": "enemy.runner.walk"
+    },
+    {
+      "id": "enemy.runner.outlined.walk.2",
+      "alias": "enemy.runner.walk"
+    },
+    {
+      "id": "enemy.runner.outlined.walk.3",
+      "alias": "enemy.runner.walk"
+    },
+    {
+      "id": "enemy.runner.outlined.attack",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.outlined.attack.1",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.outlined.attack.2",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.outlined.attack.3",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.outlined.hit",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.outlined.hit.1",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.outlined.hit.2",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.outlined.hit.3",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.outlined.death",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.outlined.death.1",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.outlined.death.2",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.outlined.death.3",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.hatched.idle",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.hatched.idle.1",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.hatched.idle.2",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.hatched.idle.3",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.hatched.walk",
+      "alias": "enemy.runner.walk"
+    },
+    {
+      "id": "enemy.runner.hatched.walk.1",
+      "alias": "enemy.runner.walk"
+    },
+    {
+      "id": "enemy.runner.hatched.walk.2",
+      "alias": "enemy.runner.walk"
+    },
+    {
+      "id": "enemy.runner.hatched.walk.3",
+      "alias": "enemy.runner.walk"
+    },
+    {
+      "id": "enemy.runner.hatched.attack",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.hatched.attack.1",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.hatched.attack.2",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.hatched.attack.3",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.hatched.hit",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.hatched.hit.1",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.hatched.hit.2",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.hatched.hit.3",
+      "alias": "enemy.runner.attack"
+    },
+    {
+      "id": "enemy.runner.hatched.death",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.hatched.death.1",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.hatched.death.2",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.runner.hatched.death.3",
+      "alias": "enemy.runner.idle"
+    },
+    {
+      "id": "enemy.gnawer.sketch.idle",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.sketch.idle.1",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.sketch.idle.2",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.sketch.idle.3",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.sketch.walk",
+      "alias": "enemy.gnawer.walk"
+    },
+    {
+      "id": "enemy.gnawer.sketch.walk.1",
+      "alias": "enemy.gnawer.walk"
+    },
+    {
+      "id": "enemy.gnawer.sketch.walk.2",
+      "alias": "enemy.gnawer.walk"
+    },
+    {
+      "id": "enemy.gnawer.sketch.walk.3",
+      "alias": "enemy.gnawer.walk"
+    },
+    {
+      "id": "enemy.gnawer.sketch.attack",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.sketch.attack.1",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.sketch.attack.2",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.sketch.attack.3",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.sketch.hit",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.sketch.hit.1",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.sketch.hit.2",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.sketch.hit.3",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.sketch.death",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.sketch.death.1",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.sketch.death.2",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.sketch.death.3",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.outlined.idle",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.outlined.idle.1",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.outlined.idle.2",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.outlined.idle.3",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.outlined.walk",
+      "alias": "enemy.gnawer.walk"
+    },
+    {
+      "id": "enemy.gnawer.outlined.walk.1",
+      "alias": "enemy.gnawer.walk"
+    },
+    {
+      "id": "enemy.gnawer.outlined.walk.2",
+      "alias": "enemy.gnawer.walk"
+    },
+    {
+      "id": "enemy.gnawer.outlined.walk.3",
+      "alias": "enemy.gnawer.walk"
+    },
+    {
+      "id": "enemy.gnawer.outlined.attack",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.outlined.attack.1",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.outlined.attack.2",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.outlined.attack.3",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.outlined.hit",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.outlined.hit.1",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.outlined.hit.2",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.outlined.hit.3",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.outlined.death",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.outlined.death.1",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.outlined.death.2",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.outlined.death.3",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.hatched.idle",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.hatched.idle.1",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.hatched.idle.2",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.hatched.idle.3",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.hatched.walk",
+      "alias": "enemy.gnawer.walk"
+    },
+    {
+      "id": "enemy.gnawer.hatched.walk.1",
+      "alias": "enemy.gnawer.walk"
+    },
+    {
+      "id": "enemy.gnawer.hatched.walk.2",
+      "alias": "enemy.gnawer.walk"
+    },
+    {
+      "id": "enemy.gnawer.hatched.walk.3",
+      "alias": "enemy.gnawer.walk"
+    },
+    {
+      "id": "enemy.gnawer.hatched.attack",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.hatched.attack.1",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.hatched.attack.2",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.hatched.attack.3",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.hatched.hit",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.hatched.hit.1",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.hatched.hit.2",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.hatched.hit.3",
+      "alias": "enemy.gnawer.attack"
+    },
+    {
+      "id": "enemy.gnawer.hatched.death",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.hatched.death.1",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.hatched.death.2",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.gnawer.hatched.death.3",
+      "alias": "enemy.gnawer.idle"
+    },
+    {
+      "id": "enemy.spitter.sketch.idle",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.sketch.idle.1",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.sketch.idle.2",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.sketch.idle.3",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.sketch.walk",
+      "alias": "enemy.spitter.walk"
+    },
+    {
+      "id": "enemy.spitter.sketch.walk.1",
+      "alias": "enemy.spitter.walk"
+    },
+    {
+      "id": "enemy.spitter.sketch.walk.2",
+      "alias": "enemy.spitter.walk"
+    },
+    {
+      "id": "enemy.spitter.sketch.walk.3",
+      "alias": "enemy.spitter.walk"
+    },
+    {
+      "id": "enemy.spitter.sketch.attack",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.sketch.attack.1",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.sketch.attack.2",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.sketch.attack.3",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.sketch.hit",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.sketch.hit.1",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.sketch.hit.2",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.sketch.hit.3",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.sketch.death",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.sketch.death.1",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.sketch.death.2",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.sketch.death.3",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.outlined.idle",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.outlined.idle.1",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.outlined.idle.2",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.outlined.idle.3",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.outlined.walk",
+      "alias": "enemy.spitter.walk"
+    },
+    {
+      "id": "enemy.spitter.outlined.walk.1",
+      "alias": "enemy.spitter.walk"
+    },
+    {
+      "id": "enemy.spitter.outlined.walk.2",
+      "alias": "enemy.spitter.walk"
+    },
+    {
+      "id": "enemy.spitter.outlined.walk.3",
+      "alias": "enemy.spitter.walk"
+    },
+    {
+      "id": "enemy.spitter.outlined.attack",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.outlined.attack.1",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.outlined.attack.2",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.outlined.attack.3",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.outlined.hit",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.outlined.hit.1",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.outlined.hit.2",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.outlined.hit.3",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.outlined.death",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.outlined.death.1",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.outlined.death.2",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.outlined.death.3",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.hatched.idle",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.hatched.idle.1",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.hatched.idle.2",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.hatched.idle.3",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.hatched.walk",
+      "alias": "enemy.spitter.walk"
+    },
+    {
+      "id": "enemy.spitter.hatched.walk.1",
+      "alias": "enemy.spitter.walk"
+    },
+    {
+      "id": "enemy.spitter.hatched.walk.2",
+      "alias": "enemy.spitter.walk"
+    },
+    {
+      "id": "enemy.spitter.hatched.walk.3",
+      "alias": "enemy.spitter.walk"
+    },
+    {
+      "id": "enemy.spitter.hatched.attack",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.hatched.attack.1",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.hatched.attack.2",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.hatched.attack.3",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.hatched.hit",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.hatched.hit.1",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.hatched.hit.2",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.hatched.hit.3",
+      "alias": "enemy.spitter.attack"
+    },
+    {
+      "id": "enemy.spitter.hatched.death",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.hatched.death.1",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.hatched.death.2",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.spitter.hatched.death.3",
+      "alias": "enemy.spitter.idle"
+    },
+    {
+      "id": "enemy.brute.sketch.idle",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.sketch.idle.1",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.sketch.idle.2",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.sketch.idle.3",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.sketch.walk",
+      "alias": "enemy.brute.walk"
+    },
+    {
+      "id": "enemy.brute.sketch.walk.1",
+      "alias": "enemy.brute.walk"
+    },
+    {
+      "id": "enemy.brute.sketch.walk.2",
+      "alias": "enemy.brute.walk"
+    },
+    {
+      "id": "enemy.brute.sketch.walk.3",
+      "alias": "enemy.brute.walk"
+    },
+    {
+      "id": "enemy.brute.sketch.attack",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.sketch.attack.1",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.sketch.attack.2",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.sketch.attack.3",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.sketch.hit",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.sketch.hit.1",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.sketch.hit.2",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.sketch.hit.3",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.sketch.death",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.sketch.death.1",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.sketch.death.2",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.sketch.death.3",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.outlined.idle",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.outlined.idle.1",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.outlined.idle.2",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.outlined.idle.3",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.outlined.walk",
+      "alias": "enemy.brute.walk"
+    },
+    {
+      "id": "enemy.brute.outlined.walk.1",
+      "alias": "enemy.brute.walk"
+    },
+    {
+      "id": "enemy.brute.outlined.walk.2",
+      "alias": "enemy.brute.walk"
+    },
+    {
+      "id": "enemy.brute.outlined.walk.3",
+      "alias": "enemy.brute.walk"
+    },
+    {
+      "id": "enemy.brute.outlined.attack",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.outlined.attack.1",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.outlined.attack.2",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.outlined.attack.3",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.outlined.hit",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.outlined.hit.1",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.outlined.hit.2",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.outlined.hit.3",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.outlined.death",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.outlined.death.1",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.outlined.death.2",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.outlined.death.3",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.hatched.idle",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.hatched.idle.1",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.hatched.idle.2",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.hatched.idle.3",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.hatched.walk",
+      "alias": "enemy.brute.walk"
+    },
+    {
+      "id": "enemy.brute.hatched.walk.1",
+      "alias": "enemy.brute.walk"
+    },
+    {
+      "id": "enemy.brute.hatched.walk.2",
+      "alias": "enemy.brute.walk"
+    },
+    {
+      "id": "enemy.brute.hatched.walk.3",
+      "alias": "enemy.brute.walk"
+    },
+    {
+      "id": "enemy.brute.hatched.attack",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.hatched.attack.1",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.hatched.attack.2",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.hatched.attack.3",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.hatched.hit",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.hatched.hit.1",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.hatched.hit.2",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.hatched.hit.3",
+      "alias": "enemy.brute.attack"
+    },
+    {
+      "id": "enemy.brute.hatched.death",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.hatched.death.1",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.hatched.death.2",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.brute.hatched.death.3",
+      "alias": "enemy.brute.idle"
+    },
+    {
+      "id": "enemy.bulwark.sketch.idle",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.sketch.idle.1",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.sketch.idle.2",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.sketch.idle.3",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.sketch.walk",
+      "alias": "enemy.bulwark.walk"
+    },
+    {
+      "id": "enemy.bulwark.sketch.walk.1",
+      "alias": "enemy.bulwark.walk"
+    },
+    {
+      "id": "enemy.bulwark.sketch.walk.2",
+      "alias": "enemy.bulwark.walk"
+    },
+    {
+      "id": "enemy.bulwark.sketch.walk.3",
+      "alias": "enemy.bulwark.walk"
+    },
+    {
+      "id": "enemy.bulwark.sketch.attack",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.sketch.attack.1",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.sketch.attack.2",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.sketch.attack.3",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.sketch.hit",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.sketch.hit.1",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.sketch.hit.2",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.sketch.hit.3",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.sketch.death",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.sketch.death.1",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.sketch.death.2",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.sketch.death.3",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.outlined.idle",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.outlined.idle.1",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.outlined.idle.2",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.outlined.idle.3",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.outlined.walk",
+      "alias": "enemy.bulwark.walk"
+    },
+    {
+      "id": "enemy.bulwark.outlined.walk.1",
+      "alias": "enemy.bulwark.walk"
+    },
+    {
+      "id": "enemy.bulwark.outlined.walk.2",
+      "alias": "enemy.bulwark.walk"
+    },
+    {
+      "id": "enemy.bulwark.outlined.walk.3",
+      "alias": "enemy.bulwark.walk"
+    },
+    {
+      "id": "enemy.bulwark.outlined.attack",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.outlined.attack.1",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.outlined.attack.2",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.outlined.attack.3",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.outlined.hit",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.outlined.hit.1",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.outlined.hit.2",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.outlined.hit.3",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.outlined.death",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.outlined.death.1",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.outlined.death.2",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.outlined.death.3",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.hatched.idle",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.hatched.idle.1",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.hatched.idle.2",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.hatched.idle.3",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.hatched.walk",
+      "alias": "enemy.bulwark.walk"
+    },
+    {
+      "id": "enemy.bulwark.hatched.walk.1",
+      "alias": "enemy.bulwark.walk"
+    },
+    {
+      "id": "enemy.bulwark.hatched.walk.2",
+      "alias": "enemy.bulwark.walk"
+    },
+    {
+      "id": "enemy.bulwark.hatched.walk.3",
+      "alias": "enemy.bulwark.walk"
+    },
+    {
+      "id": "enemy.bulwark.hatched.attack",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.hatched.attack.1",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.hatched.attack.2",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.hatched.attack.3",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.hatched.hit",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.hatched.hit.1",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.hatched.hit.2",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.hatched.hit.3",
+      "alias": "enemy.bulwark.attack"
+    },
+    {
+      "id": "enemy.bulwark.hatched.death",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.hatched.death.1",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.hatched.death.2",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "enemy.bulwark.hatched.death.3",
+      "alias": "enemy.bulwark.idle"
+    },
+    {
+      "id": "object.castle",
+      "alias": "hero.castle"
+    },
+    {
+      "id": "object.wall.0",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.wall.1",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.wall.2",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.wall.3",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.wall.4",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.wall.5",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.wall.6",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.wall.7",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.wall.8",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.wall.9",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.wall.10",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.wall.11",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.wall.12",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.wall.13",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.wall.14",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.wall.15",
+      "alias": "object.wall"
+    },
+    {
+      "id": "object.well.red",
+      "alias": "icon.ink-red"
+    },
+    {
+      "id": "object.well.red.active",
+      "alias": "icon.ink-red"
+    },
+    {
+      "id": "object.well.blue",
+      "alias": "icon.ink-blue"
+    },
+    {
+      "id": "object.well.blue.active",
+      "alias": "icon.ink-blue"
+    },
+    {
+      "id": "object.well.green",
+      "alias": "icon.ink-green"
+    },
+    {
+      "id": "object.well.green.active",
+      "alias": "icon.ink-green"
+    },
+    {
+      "id": "fx.stapler",
+      "alias": "fx.tracer"
+    },
+    {
+      "id": "fx.status.red",
+      "alias": "fx.mortar.explosion"
+    },
+    {
+      "id": "fx.status.blue",
+      "alias": "fx.ricochet"
+    },
+    {
+      "id": "fx.status.green",
+      "alias": "fx.fan"
+    },
+    {
+      "id": "fx.blot.birth",
+      "alias": "object.blot"
+    },
+    {
+      "id": "fx.blot.absorb",
+      "alias": "fx.mortar.explosion"
+    },
+    {
+      "id": "fx.blot.cleanse",
+      "alias": "fx.cleanup"
+    },
+    {
+      "id": "fx.blot.expire",
+      "alias": "fx.cleanup"
+    },
+    {
+      "id": "fx.spitter.projectile",
+      "alias": "fx.mortar.projectile"
+    },
+    {
+      "id": "fx.spitter.impact",
+      "alias": "fx.mortar.explosion"
+    },
+    {
+      "id": "fx.well.activate",
+      "alias": "fx.ricochet"
+    },
+    {
+      "id": "fx.castle.hit",
+      "alias": "fx.muzzle"
+    },
+    {
+      "id": "fx.well.hit",
+      "alias": "fx.muzzle"
+    },
+    {
+      "id": "fx.structure.destroy",
+      "alias": "fx.cleanup"
+    },
+    {
+      "id": "ui.chassis.standard",
+      "alias": "chassis.standard"
+    },
+    {
+      "id": "ui.chassis.heavy",
+      "alias": "chassis.heavy"
+    },
+    {
+      "id": "ui.chassis.precision",
+      "alias": "chassis.precision"
+    },
+    {
+      "id": "ui.chassis.battery",
+      "alias": "chassis.battery"
+    },
+    {
+      "id": "ui.weapon.gun",
+      "alias": "weapon.gun"
+    },
+    {
+      "id": "ui.weapon.piercer",
+      "alias": "weapon.piercer"
+    },
+    {
+      "id": "ui.weapon.mortar",
+      "alias": "weapon.mortar"
+    },
+    {
+      "id": "ui.weapon.fan",
+      "alias": "weapon.fan"
+    },
+    {
+      "id": "ui.weapon.ricochet",
+      "alias": "weapon.ricochet"
+    },
+    {
+      "id": "ui.weapon.stapler",
+      "alias": "weapon.stapler"
+    },
+    {
+      "id": "ui.weapon.blotter",
+      "alias": "weapon.blotter"
+    },
+    {
+      "id": "ui.module.armor",
+      "alias": "module.armor"
+    },
+    {
+      "id": "ui.module.feed",
+      "alias": "module.feed"
+    },
+    {
+      "id": "ui.module.tracking",
+      "alias": "module.tracking"
+    },
+    {
+      "id": "ui.module.rail",
+      "alias": "module.rail"
+    },
+    {
+      "id": "ui.material.pencil",
+      "alias": "icon.pencil"
+    },
+    {
+      "id": "ui.material.pen",
+      "alias": "icon.pen"
+    },
+    {
+      "id": "ui.material.marker",
+      "alias": "icon.marker"
+    },
+    {
+      "id": "ui.ink.red",
+      "alias": "icon.ink-red"
+    },
+    {
+      "id": "ui.ink.blue",
+      "alias": "icon.ink-blue"
+    },
+    {
+      "id": "ui.ink.green",
+      "alias": "icon.ink-green"
+    },
+    {
+      "id": "ui.tool.wall",
+      "alias": "object.wall"
+    },
+    {
+      "id": "ui.tool.spikes",
+      "alias": "object.spikes"
+    },
+    {
+      "id": "ui.tool.erase",
+      "alias": "icon.erase"
+    },
+    {
+      "id": "ui.tool.select",
+      "alias": "icon.pencil"
+    },
+    {
+      "id": "object.entrance",
+      "alias": "icon.entrance"
+    },
+    {
+      "id": "object.barricade-site",
+      "alias": "object.wall"
+    },
+    {
+      "id": "ui.tool.tar",
+      "alias": "object.tar"
+    },
+    {
+      "id": "ui.tool.repair",
+      "alias": "object.repair"
+    },
+    {
+      "id": "ui.tool.upgrade",
+      "alias": "icon.upgrade"
+    },
+    {
+      "id": "ui.tool.blotter",
+      "alias": "weapon.blotter"
+    },
+    {
+      "id": "ui.tool.paint",
+      "alias": "icon.paint"
+    },
+    {
+      "id": "ui.action.wave",
+      "alias": "icon.play"
+    },
+    {
+      "id": "ui.action.workshop",
+      "alias": "icon.workshop"
+    }
+  ]
+}

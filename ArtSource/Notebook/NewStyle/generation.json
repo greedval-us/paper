@@ -1,0 +1,117 @@
+{
+  "date": "2026-10-17",
+  "mode": "built-in imagegen",
+  "assets": [
+    {
+      "name": "HomeWordmark",
+      "mode": "built-in imagegen",
+      "prompt": "Use case: background-extraction. Extract only the exact two-line title 'ДЕРЖИ ЛИНИЮ' from Image1 upper left, including densely blue-hatched letters, ivory torn ribbon behind ЛИНИЮ, small crown flag and ink flourishes. Remove slogan, buttons, graph paper and every scenery object. Tight 2.1:1 transparent cutout, complete title and flag with 5% padding, no cropped strokes. Preserve source lettering and proportions precisely; do not replace it with a smooth font. Only these two words, no extra writing.",
+      "references": [
+        "D:/Projekt Unity/paper/docs/design/game-concept-art-2026-10-16/screens/01-home.png"
+      ],
+      "transparent_background": true,
+      "selected_file": "ArtSource/Notebook/NewStyle/HomeWordmark.png",
+      "initial_generated_file": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1457f-d9e1-7a93-8681-b4486b4a41f1\\exec-94a9ef6e-1a7c-43f4-bf3e-a1ee6acaa402.png"
+    },
+    {
+      "name": "SettingsLandscape",
+      "mode": "built-in imagegen",
+      "prompt": "Use case: precise-object-edit. Edit Image1 into a text-free game settings background. Preserve castle and pine trees on left cliff, distant castle on right, mountains, lake, rocks and foreground trees. Remove all UI panels, all buttons/icons, the entire large logo/crown/ribbon, every handwritten annotation and all lettering (including signs). Inpaint all removals with matching warm ivory graph paper; keep central 60% mostly blank for live UI. Full wide16:9 composition, preserve complete side illustrations and source style. No extra objects, no UI, no text.",
+      "references": [
+        "D:/Projekt Unity/paper/docs/design/game-concept-art-2026-10-16/screens/22-settings.png"
+      ],
+      "transparent_background": false,
+      "selected_file": "ArtSource/Notebook/NewStyle/SettingsLandscape.png",
+      "initial_generated_file": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1457f-d9e1-7a93-8681-b4486b4a41f1\\exec-4f32d2bb-89c7-40a3-872b-b765ab6200e2.png"
+    },
+    {
+      "name": "SettingsWordmark",
+      "mode": "built-in imagegen",
+      "prompt": "Use case: background-extraction. Extract only the centered source title 'ДЕРЖИ ЛИНИЮ' with small crown above and ribbon subtitle 'БАШНИ ЗАЩИЩАЮТ ГЛАВНОЕ'. Preserve exact blue pen hatching, lettering, ivory ribbon, flourish lines and proportions from Image1. Remove graph paper, scenery, all other UI and annotations. Tight transparent 3.5:1 cutout, complete edges with 5% padding; no extra writing or objects.",
+      "references": [
+        "D:/Projekt Unity/paper/docs/design/game-concept-art-2026-10-16/screens/22-settings.png"
+      ],
+      "transparent_background": true,
+      "selected_file": "ArtSource/Notebook/NewStyle/SettingsWordmark.png",
+      "initial_generated_file": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1457f-d9e1-7a93-8681-b4486b4a41f1\\exec-a6b1b6d6-3c0f-4b14-813b-53290c4d347d.png"
+    },
+    {
+      "name": "MapFieldIllustration",
+      "mode": "built-in imagegen",
+      "prompt": "Use case: precise-object-edit. Extract the complete LEFT battlefield from Image1, excluding right sidebar. Output native landscape aspect approximately1.49:1, not16:9; preserve the entire left field's composition without cropping any mountains, enemies or colored wells. Remove top header, bottom workshop button, all lettering, red health bars and red UI approach arrows; inpaint matching graph paper/scenery. Keep castle centered, red capped ink bottle upper-left, green upper-right, blue lower-left, four groups of approaching enemies, pine/mountain border, fences/huts/rocks. Dense cobalt ballpoint pen exactly as source, ivory graph paper. No UI or writing. Full intact illustration.",
+      "references": [
+        "D:/Projekt Unity/paper/docs/design/game-concept-art-2026-10-16/screens/02-map.png"
+      ],
+      "transparent_background": false,
+      "selected_file": "ArtSource/Notebook/NewStyle/MapFieldIllustration.png",
+      "initial_generated_file": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1457f-d9e1-7a93-8681-b4486b4a41f1\\exec-bb1f49c9-2f36-4e4b-8be4-0d169583ef94.png"
+    },
+    {
+      "name": "EnemySprites",
+      "mode": "built-in imagegen",
+      "prompt": "Use case: compositing. Production transparent sprite sheet derived from the supplied enemy drawings. EXACT regular grid: SIX equal columns and THREE equal rows,18 separate characters, no overlaps, 12% clear transparent padding in every cell. Columns from left to right: 1 running skinny round-head stick skeleton Doodle; 2 faster leaning running skeleton Runner; 3 toothy crawling ink blob Gnawer; 4 round speckled spitting ink monster Spitter; 5 large horned muscular club-wielding ogre Brute; 6 armored skull warrior carrying large rectangular shield Bulwark. Row1 idle/front-three-quarter pose; row2 running/advancing pose; row3 attacking pose (club swing, bite, ink spit, shield bash). Same species identity and scale within each column; keep ALL18 complete. Deep cobalt-blue ballpoint pen with dense confident crosshatching, imperfect hand-drawn contours, warm ivory opaque object interiors, exactly matching the supplied game sketches. No photorealism, no 3D render, no smooth vector simplification.  Real transparent background, no paper rectangles, grid, cards, labels, numbers, captions, health bars or UI. Do not add extra characters.",
+      "references": [
+        "D:/Projekt Unity/paper/docs/design/game-concept-art-2026-10-16/screens/16-battle.png",
+        "D:/Projekt Unity/paper/docs/design/game-concept-art-2026-10-16/screens/02-map.png"
+      ],
+      "transparent_background": true,
+      "selected_file": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "initial_generated_file": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1457f-d9e1-7a93-8681-b4486b4a41f1\\exec-2406992f-eb81-45a7-b4fc-e9a29a2c811f.png",
+      "refinement": {
+        "prompt": "Edit this sprite sheet to fix production slicing. Preserve the exact 18 character designs and blue pen style, but REDISTRIBUTE them into a mathematically regular SIX column x THREE row grid. Each full character must fit wholly inside the inner 70 percent of its own equal cell with minimum 15 percent transparent clearance on all four sides. Do not crop, cut off feet, weapons, shield or horns. Do not draw borders or grid lines. ALL characters need the SAME maximum height within a row; do not let the ogres extend into another row. Keep the character column species order and row pose order. Remove stray motion/splash lines extending outside the character silhouette; the spitter attack ink should stop inside its own cell. Real alpha transparency, no paper background. No text or extra objects. The final sheet must have empty transparent space all around every one of the 18 complete isolated silhouettes.",
+        "generated_file": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1457f-d9e1-7a93-8681-b4486b4a41f1\\exec-2809ad0f-3f0a-43dc-ade6-e048ab77730a.png"
+      }
+    },
+    {
+      "name": "ModularSprites",
+      "mode": "built-in imagegen",
+      "prompt": "Use case: compositing. Production transparent sprite sheet of modular tower parts derived precisely from the supplied sketches. EXACT regular grid FIVE equal columns by THREE equal rows,15 isolated objects, each wholly inside its cell with10% transparent padding and no overlap. Top row left-to-right:1 standard round stone foundation with sockets;2 heavier reinforced stone foundation;3 precise mechanical tripod foundation;4 large battery stone foundation with three sockets;5 separate blue stone/steel armor plates. Middle row:6 ballpoint machine-gun barrel and its small swivel mount;7 long fountain-pen piercing barrel and swivel;8 upward-angled mortar barrel and swivel;9 fan six-barrel weapon and swivel;10 spinning ricochet disk and swivel. Bottom row:11 heavy staple-gun turret;12 ink blotter sponge turret;13 ammo feed box and belt;14 targeting scope attachment;15 two support rails attachment. Weapons have NO large foundation underneath, only their small mechanical swivel; foundations contain NO weapons. All weapon barrels aim vertically toward top of their cell at their neutral angle, same isometric ink style. Deep cobalt-blue ballpoint pen with dense confident crosshatching, imperfect hand-drawn contours, warm ivory opaque object interiors, exactly matching the supplied game sketches. No photorealism, no 3D render, no smooth vector simplification.  Actual transparent background; no shadows outside silhouette, no graph paper, no panels, text, numbers, labels, UI or extra parts.",
+      "references": [
+        "D:/Projekt Unity/paper/docs/design/game-concept-art-2026-10-16/screens/04-foundation.png",
+        "D:/Projekt Unity/paper/docs/design/game-concept-art-2026-10-16/screens/05-weapons.png"
+      ],
+      "transparent_background": true,
+      "selected_file": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "initial_generated_file": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1457f-d9e1-7a93-8681-b4486b4a41f1\\exec-45060ceb-fd00-4529-b7b2-4a31a97b7765.png"
+    },
+    {
+      "name": "ScenerySprites",
+      "mode": "built-in imagegen",
+      "prompt": "Use case: compositing. Production transparent object sheet derived from supplied game drawings. EXACT regular grid FOUR equal columns and THREE equal rows,12 complete objects centered separately,12% transparent margin per cell, no overlap. Top row:1 stone battlement wall segment;2 wooden pointed spike barricade;3 small wooden repair hut with crossed-tools emblem on door;4 dark-blue ink tar puddle. Middle row:5 tall detailed pine tree;6 jagged rocky mountain;7 broadleaf oak tree;8 cluster of boulders. Bottom row:9 small leafy shrub;10 long low mountain ridge;11 damaged stone castle with crown flag and missing/cracked masonry;12 splashed ink blot debris. Deep cobalt-blue ballpoint pen with dense confident crosshatching, imperfect hand-drawn contours, warm ivory opaque object interiors, exactly matching the supplied game sketches. No photorealism, no 3D render, no smooth vector simplification.  Real transparent background. No landscape background, ground rectangles, grids, labels, text, numbers, cards, health bars or UI. Keep whole silhouettes inside cells.",
+      "references": [
+        "D:/Projekt Unity/paper/docs/design/game-concept-art-2026-10-16/screens/16-battle.png",
+        "D:/Projekt Unity/paper/docs/design/game-concept-art-2026-10-16/screens/02-map.png"
+      ],
+      "transparent_background": true,
+      "selected_file": "ArtSource/Notebook/NewStyle/ScenerySprites.png",
+      "initial_generated_file": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1457f-d9e1-7a93-8681-b4486b4a41f1\\exec-e063a1fc-5c07-4c82-984c-8e5cf759fbd3.png"
+    },
+    {
+      "name": "InterfaceSprites",
+      "mode": "built-in imagegen",
+      "prompt": "Use case: compositing. Production transparent icon sheet matching the large hand-drawn UI symbols in Image1 and tool icons in Image2. EXACT regular grid FOUR equal columns by FOUR equal rows,16 complete separate icons, same visual scale,12% clear transparent padding per cell, no overlap. Row1 left-to-right: pencil, ballpoint pen, thick felt marker, rectangular eraser. Row2: paintbrush, upward upgrade arrow, right-pointing play triangle, open help book. Row3: mechanical settings gear, crossed pencil-and-wrench workshop tools, exit door with right arrow, skull. Row4: red upward entrance arrow, crowned shield, heart, small crown flag. Deep cobalt-blue ballpoint pen with dense confident crosshatching, imperfect hand-drawn contours, warm ivory opaque object interiors, exactly matching the supplied game sketches. No photorealism, no 3D render, no smooth vector simplification.  Icons mainly cobalt/ivory, red only entrance arrow. Transparent background, no graph paper, boxes, labels, text or numbers.",
+      "references": [
+        "D:/Projekt Unity/paper/docs/design/game-concept-art-2026-10-16/screens/01-home.png",
+        "D:/Projekt Unity/paper/docs/design/game-concept-art-2026-10-16/screens/16-battle.png"
+      ],
+      "transparent_background": true,
+      "selected_file": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "initial_generated_file": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1457f-d9e1-7a93-8681-b4486b4a41f1\\exec-8b218ee6-a32b-407c-956b-b9eb0da506d2.png"
+    },
+    {
+      "name": "EffectSprites",
+      "mode": "built-in imagegen",
+      "prompt": "Use case: compositing. Production transparent effects sprite sheet from the ink combat in Image1. EXACT regular grid FOUR equal columns and TWO equal rows,8 isolated effects,12% padding in every cell. Row1: small blue muzzle flash burst; elongated blue bullet/tracer streak aimed UP; long blue piercing fountain-pen streak aimed UP; blue mortar ink ball projectile. Row2: large radial blue ink-splash explosion; blue curved fan spread/swish; circular spinning ricochet ink ring; pale ivory-and-blue erase/cleanup puff. Deep cobalt-blue ballpoint pen with dense confident crosshatching, imperfect hand-drawn contours, warm ivory opaque object interiors, exactly matching the supplied game sketches. No photorealism, no 3D render, no smooth vector simplification.  Entire isolated effects visible, true transparency. No ground, rectangles, graph paper, numbers, lettering, health bars, panels or UI.",
+      "references": [
+        "D:/Projekt Unity/paper/docs/design/game-concept-art-2026-10-16/screens/16-battle.png"
+      ],
+      "transparent_background": true,
+      "selected_file": "ArtSource/Notebook/NewStyle/EffectSprites.png",
+      "initial_generated_file": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1457f-d9e1-7a93-8681-b4486b4a41f1\\exec-ed7bb523-701a-4283-a44f-fb4531aee5cd.png",
+      "refinement": {
+        "prompt": "Edit the sheet: completely REMOVE the horizontal and vertical blue divider lines, preserve the eight effect drawings. Redistribute into an EXACT FOUR column x TWO row regular grid, each full effect fits wholly in the inner70 percent of its equal cell with15 percent transparent clear margin on all sides. Keep effect order. DO NOT crop splash edges or flare tails. Muzzle flash, tracer, piercing streak, mortar projectile; explosion splash, fan swish, ricochet ring, cleanup puff. Real alpha transparency, no grid, no background, no text. Keep identical blue pen/ivory style.",
+        "generated_file": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1457f-d9e1-7a93-8681-b4486b4a41f1\\exec-a6584b14-1c98-498d-b4d7-af00b4a08a69.png"
+      }
+    }
+  ]
+}

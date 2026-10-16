@@ -78,30 +78,6 @@ namespace PaperDefense.Presentation
             }
         }
 
-        void Settings()
-        {
-            var panel = Sheet("Настройки", 880, 650, out float width); width -= 48;
-            ui.Label(panel, "ЭКРАН И ИНТЕРФЕЙС", new Rect(8, 0, width - 16, 32), 16, PlayerUi.Muted);
-            ui.Button(panel, "Toggle fullscreen", new Rect(8, 54, width - 16, 52), PlayerIcon.Target,
-                "Полный экран: " + (Screen.fullScreen ? "включён" : "выключен"), () => { Screen.fullScreen = !Screen.fullScreen; Show(PlayerPage.Settings); });
-            ui.Button(panel, "Toggle ranges", new Rect(8, 122, width - 16, 52), PlayerIcon.Target,
-                "Радиусы башен: " + (game.World.ShowRanges ? "показаны" : "скрыты"), () => { game.World.ShowRanges = !game.World.ShowRanges; Show(PlayerPage.Settings); });
-            ui.Label(panel, "Масштаб интерфейса", new Rect(8, 198, width - 16, 32), 22);
-            float buttonW = (width - 40) / 3;
-            for (int i = 0; i < 3; i++)
-            {
-                float scale = 1 + i * .25f;
-                var button = ui.Button(panel, "UI scale " + i, new Rect(8 + i * (buttonW + 12), 244, buttonW, 48), PlayerIcon.Plus,
-                    Mathf.RoundToInt(scale * 100) + "%", () => { game.SetInterfaceScale(scale); ApplyLayout(Screen.width, Screen.height); });
-                ui.MarkSelected(button, Mathf.Approximately(game.InterfaceScale, scale));
-            }
-            ui.Label(panel, "Масштаб применяется ко всем страницам. Длинные панели можно прокручивать.", new Rect(8, 306, width - 16, 62), 18, PlayerUi.Muted);
-            ui.Button(panel, "Reduce motion", new Rect(8, 378, width - 16, 52), PlayerIcon.Pause,
-                "Меньше движения: " + (game.ReducedMotion ? "включено" : "выключено"), () => { game.SetReducedMotion(!game.ReducedMotion); Show(PlayerPage.Settings); });
-            ui.Button(panel, "Close settings", new Rect(8, 454, (width - 28) / 2, 52), PlayerIcon.Back, "Готово", game.CloseSettings, true);
-            ui.Button(panel, "Open help", new Rect(width / 2 + 6, 454, (width - 28) / 2, 52), PlayerIcon.Help, "Как играть", () => game.OpenSettings(true));
-        }
-
         void Help()
         {
             var panel = Sheet("Как держать линию", 1060, 780, out float width); width -= 48;

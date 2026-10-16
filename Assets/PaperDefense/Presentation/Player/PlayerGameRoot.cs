@@ -22,7 +22,7 @@ namespace PaperDefense.Presentation
         PlayerShell shell;
         PlayerPage settingsReturn = PlayerPage.Home;
         PlayerPage helpReturn = PlayerPage.Home;
-        public float InterfaceScale { get; private set; } = 1;
+        public PlayerDisplaySettings DisplaySettings { get; private set; }
         NotebookVisualThemeAsset reducedTheme, originalTheme;
         public bool ReducedMotion { get; private set; }
         public void SetReducedMotion(bool value)
@@ -44,7 +44,6 @@ namespace PaperDefense.Presentation
             foreach (var scroll in GetComponentsInChildren<UnityEngine.UI.ScrollRect>(true)) scroll.inertia = !value;
         }
         void OnDestroy() { if (reducedTheme != null) Destroy(reducedTheme); }
-        public void SetInterfaceScale(float scale) => InterfaceScale = Mathf.Clamp(scale, 1, 1.5f);
         public PlayerPage Page { get; private set; }
         public RunController Run => bootstrap.Controller;
         public DrawingInput Drawing => bootstrap.Drawing;
@@ -58,6 +57,7 @@ namespace PaperDefense.Presentation
 
         void Awake()
         {
+            DisplaySettings = PlayerDisplaySettings.FromScreen();
             var runtime = new GameObject("Shared game mechanics");
             runtime.SetActive(false); runtime.transform.SetParent(transform, false);
             bootstrap = runtime.AddComponent<PaperDefenseBootstrap>();
@@ -165,9 +165,9 @@ namespace PaperDefense.Presentation
         {
             if (Page == PlayerPage.Battle) Pause();
             if (help) { helpReturn = Page; Navigate(PlayerPage.Help); }
-            else { settingsReturn = Page; Navigate(PlayerPage.Settings); }
+            else { settingsReturn = Page; DisplaySettings.RefreshCurrentSize(Screen.width, Screen.height); DisplaySettings.CancelSelection(); Navigate(PlayerPage.Settings); }
         }
-        public void CloseSettings() => Navigate(settingsReturn);
+        public void CloseSettings() { DisplaySettings.CancelSelection(); Navigate(settingsReturn); }
         public void CloseHelp() => Navigate(helpReturn);
 
         public void ChooseUpgrade(RunUpgrade upgrade)

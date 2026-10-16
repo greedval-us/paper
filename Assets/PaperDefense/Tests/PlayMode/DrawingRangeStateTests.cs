@@ -22,9 +22,11 @@ namespace PaperDefense.Tests
         Mouse mouse;
         Camera worldCamera;
         InputSettings originalSettings, fixtureSettings;
+        NativeInputIsolation nativeInput;
 
         [UnitySetUp] public IEnumerator CreateIsolatedInput()
         {
+            nativeInput = new NativeInputIsolation();
             originalSettings = InputSystem.settings;
             if (originalSettings == null)
             {
@@ -72,15 +74,19 @@ namespace PaperDefense.Tests
 
         [UnityTearDown] public IEnumerator DisposeIsolatedInput()
         {
-            if (keyboard != null && keyboard.added) InputSystem.RemoveDevice(keyboard);
-            if (mouse != null && mouse.added) InputSystem.RemoveDevice(mouse);
-            if (root != null) Object.Destroy(root);
-            if (fixtureSettings != null)
+            try
             {
-                Assert.That(originalSettings != null, Is.True, "Fixture input settings must retain the original instance.");
-                InputSystem.settings = originalSettings;
-                if (fixtureSettings != null) Object.Destroy(fixtureSettings);
+                if (keyboard != null && keyboard.added) InputSystem.RemoveDevice(keyboard);
+                if (mouse != null && mouse.added) InputSystem.RemoveDevice(mouse);
+                if (root != null) Object.Destroy(root);
+                if (fixtureSettings != null)
+                {
+                    Assert.That(originalSettings != null, Is.True, "Fixture input settings must retain the original instance.");
+                    InputSystem.settings = originalSettings;
+                    if (fixtureSettings != null) Object.Destroy(fixtureSettings);
+                }
             }
+            finally { nativeInput?.Dispose(); nativeInput = null; }
             yield return null;
         }
 

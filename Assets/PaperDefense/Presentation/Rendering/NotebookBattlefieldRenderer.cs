@@ -10,8 +10,8 @@ namespace PaperDefense.Presentation
         {
             if(map==null)return;
             theme=theme??NotebookVisualThemeAsset.Default;
-            var roadFill=new Color(.84f,.76f,.59f,.28f);
-            var roadEdge=new Color(.43f,.37f,.26f,.30f);
+            var roadFill=MeshPen.Alpha(NotebookPalette.Blue,.035f);
+            var roadEdge=MeshPen.Alpha(NotebookPalette.Navy,.24f);
             foreach(var cell in map.Roads)
                 pen.Rect(cell.X-.025f,cell.Y-.025f,1.05f,1.05f,roadFill);
             foreach(var cell in map.Roads)
@@ -30,21 +30,20 @@ namespace PaperDefense.Presentation
                 string id=prop.Kind==TerrainPropKind.Mountain?"terrain.mountain":prop.Kind==TerrainPropKind.Pine?"terrain.pine":
                     prop.Kind==TerrainPropKind.Broadleaf?"terrain.oak":prop.Kind==TerrainPropKind.Rock?"terrain.rock":"terrain.shrub";
                 if(prop.Kind==TerrainPropKind.Mountain&&(prop.Cell.X&1)==0)id="terrain.ridge";
-                pen.Rect(prop.Cell.X,prop.Cell.Y,prop.Width,prop.Height,new Color(.39f,.50f,.40f,.06f));
                 float scale=Mathf.Min(prop.Width/1.15f,prop.Height/1.05f);
-                NotebookArtRenderer.Draw(pen,theme?.FindShape(id),at,scale,opacity:.58f,theme:theme);
+                DoodleGlyphs.DrawResource(pen,id,at,scale,opacity:.95f,theme:theme);
             }
             foreach(var cell in map.BarricadeSites)
             {
                 // The cross marks the single legal blocking cell; a completed barricade covers it.
-                NotebookArtRenderer.Draw(pen,theme?.FindShape("object.barricade-site"),new Vector2(cell.X+.5f,cell.Y+.5f),
+                DoodleGlyphs.DrawResource(pen,"object.barricade-site",new Vector2(cell.X+.5f,cell.Y+.5f),
                     .9f,opacity:.75f,theme:theme);
             }
             foreach(var cell in map.Entrances)
             {
                 int side=map.Side(cell);
                 float rotation=side==1?Mathf.PI*.5f:side==2?-Mathf.PI*.5f:side==8?Mathf.PI:0;
-                NotebookArtRenderer.Draw(pen,theme?.FindShape("object.entrance"),new Vector2(cell.X+.5f,cell.Y+.5f),
+                DoodleGlyphs.DrawResource(pen,"object.entrance",new Vector2(cell.X+.5f,cell.Y+.5f),
                     2,rotation,theme:theme);
             }
         }

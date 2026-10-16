@@ -9,6 +9,7 @@ namespace PaperDefense.Presentation
     [RequireComponent(typeof(CanvasRenderer))]
     public sealed class TrialLaneSketch : MaskableGraphic
     {
+        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         readonly NotebookTrialPlayback playback = new NotebookTrialPlayback();
         readonly MeshPen pen = new MeshPen(null, 8192);
         readonly List<TrialLaneBatchGraphic> batches = new List<TrialLaneBatchGraphic>();

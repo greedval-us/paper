@@ -131,19 +131,23 @@ namespace PaperDefense.Tests
             .Invoke(new object[] { new EnemyState { Id = 1, Kind = EnemyKind.Brute, Health = 100, MaxHealth = 100, VisualScale = scale, Position = new Point2(10, 10) } });
 
         [TestCase(false)] [TestCase(true)]
-        public void LiveAndCompactFallbackPreserveScaleAndRenderFullHealthBars(bool compact)
+        public void LiveAndCrowdEnemiesUseAtlasArtworkPreserveScaleAndRenderFullHealthBars(bool compact)
         {
-            var missing = ScriptableObject.CreateInstance<NotebookVisualThemeAsset>(); var mesh = new Mesh();
+            var mesh = new Mesh();
             try
             {
-                var pen = new MeshPen(mesh); DoodleGlyphs.Enemy(pen, Enemy(1), 0, compact, theme: missing); pen.Upload();
+                Assert.That(NotebookSpriteCatalog.Available, Is.True);
+                var pen = new MeshPen(mesh); DoodleGlyphs.Enemy(pen, Enemy(1), 0, compact); pen.Upload();
                 var first = mesh.bounds;
+                var atlas = new System.Collections.Generic.List<Vector2>(); mesh.GetUVs(1, atlas);
+                Assert.That(atlas.Count(value => value != NotebookSpriteCatalog.WhiteUV), Is.GreaterThanOrEqualTo(4),
+                    "Large crowds must retain the same new enemy artwork as individual enemies.");
                 Assert.That(mesh.colors32.Any(color => color.Equals((Color32)NotebookPalette.Green)), Is.True, "A full HP bar is visible before damage.");
-                pen.Clear(); DoodleGlyphs.Enemy(pen, Enemy(2.4f), 0, compact, theme: missing); pen.Upload();
+                pen.Clear(); DoodleGlyphs.Enemy(pen, Enemy(2.4f), 0, compact); pen.Upload();
                 Assert.That(mesh.bounds.size.x, Is.GreaterThan(first.size.x * 2));
                 Assert.That(mesh.bounds.max.y, Is.GreaterThan(first.max.y + 1));
             }
-            finally { Object.DestroyImmediate(mesh); Object.DestroyImmediate(missing); }
+            finally { Object.DestroyImmediate(mesh); }
         }
 
         [Test] public void DeathEventsRetainFamilyAndScaleForWorldAndTrialTails()

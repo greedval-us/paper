@@ -1,0 +1,7163 @@
+{
+    "revision": "blue-pen-2026-10-17",
+    "whitePixel": {
+        "x": 4,
+        "y": 4
+    },
+    "sprites": [
+        {
+            "id": "chassis.standard",
+            "alias": "",
+            "x": 760,
+            "y": 2498,
+            "width": 282,
+            "height": 250,
+            "bounds": {
+                "x": -0.3446800112724304,
+                "y": -0.2800000011920929,
+                "width": 0.6993600130081177,
+                "height": 0.6200000047683716
+            }
+        },
+        {
+            "id": "chassis.heavy",
+            "alias": "",
+            "x": 423,
+            "y": 1973,
+            "width": 320,
+            "height": 253,
+            "bounds": {
+                "x": -0.4189291298389435,
+                "y": -0.31106001138687136,
+                "width": 0.838678240776062,
+                "height": 0.6630799770355225
+            }
+        },
+        {
+            "id": "chassis.precision",
+            "alias": "",
+            "x": 760,
+            "y": 3870,
+            "width": 279,
+            "height": 242,
+            "bounds": {
+                "x": -0.3668331205844879,
+                "y": -0.30316999554634097,
+                "width": 0.7336662411689758,
+                "height": 0.6363700032234192
+            }
+        },
+        {
+            "id": "chassis.battery",
+            "alias": "",
+            "x": 16,
+            "y": 3376,
+            "width": 337,
+            "height": 287,
+            "bounds": {
+                "x": -0.3473565876483917,
+                "y": -0.31080999970436098,
+                "width": 0.6947131752967835,
+                "height": 0.5916399955749512
+            }
+        },
+        {
+            "id": "module.armor",
+            "alias": "",
+            "x": 1352,
+            "y": 2140,
+            "width": 277,
+            "height": 208,
+            "bounds": {
+                "x": -0.3395913541316986,
+                "y": -0.23000000417232514,
+                "width": 0.6791827082633972,
+                "height": 0.5099999904632568
+            }
+        },
+        {
+            "id": "weapon.gun",
+            "alias": "",
+            "x": 1099,
+            "y": 2524,
+            "width": 211,
+            "height": 296,
+            "bounds": {
+                "x": -0.20000000298023225,
+                "y": -0.028549596667289735,
+                "width": 0.3316900134086609,
+                "height": 0.465309202671051
+            }
+        },
+        {
+            "id": "weapon.piercer",
+            "alias": "",
+            "x": 423,
+            "y": 3030,
+            "width": 243,
+            "height": 314,
+            "bounds": {
+                "x": -0.11500000208616257,
+                "y": 0.12592917680740357,
+                "width": 0.23000000417232514,
+                "height": 0.29720163345336916
+            }
+        },
+        {
+            "id": "weapon.mortar",
+            "alias": "",
+            "x": 1099,
+            "y": 2250,
+            "width": 240,
+            "height": 270,
+            "bounds": {
+                "x": -0.20000000298023225,
+                "y": -0.06853000074625015,
+                "width": 0.4000000059604645,
+                "height": 0.44999998807907107
+            }
+        },
+        {
+            "id": "weapon.fan",
+            "alias": "",
+            "x": 760,
+            "y": 1954,
+            "width": 256,
+            "height": 288,
+            "bounds": {
+                "x": -0.28999999165534975,
+                "y": -0.12257499992847443,
+                "width": 0.5799999833106995,
+                "height": 0.6524999737739563
+            }
+        },
+        {
+            "id": "weapon.ricochet",
+            "alias": "",
+            "x": 1352,
+            "y": 1902,
+            "width": 262,
+            "height": 234,
+            "bounds": {
+                "x": -0.20999999344348908,
+                "y": 0.0021577479783445598,
+                "width": 0.41999998688697817,
+                "height": 0.3751145005226135
+            }
+        },
+        {
+            "id": "weapon.stapler",
+            "alias": "",
+            "x": 760,
+            "y": 2246,
+            "width": 287,
+            "height": 248,
+            "bounds": {
+                "x": -0.20999999344348908,
+                "y": 0.007801585365086794,
+                "width": 0.41999998688697817,
+                "height": 0.3629268407821655
+            }
+        },
+        {
+            "id": "weapon.blotter",
+            "alias": "",
+            "x": 1099,
+            "y": 1979,
+            "width": 243,
+            "height": 267,
+            "bounds": {
+                "x": -0.22789669036865235,
+                "y": -0.10999999940395355,
+                "width": 0.4557933807373047,
+                "height": 0.5008100271224976
+            }
+        },
+        {
+            "id": "module.feed",
+            "alias": "",
+            "x": 1352,
+            "y": 1433,
+            "width": 283,
+            "height": 232,
+            "bounds": {
+                "x": -0.16796976327896119,
+                "y": -0.4030500054359436,
+                "width": 0.33587953448295596,
+                "height": 0.27535000443458559
+            }
+        },
+        {
+            "id": "module.tracking",
+            "alias": "",
+            "x": 1711,
+            "y": 1146,
+            "width": 350,
+            "height": 259,
+            "bounds": {
+                "x": 0.1599999964237213,
+                "y": 0.04399999976158142,
+                "width": 0.30000001192092898,
+                "height": 0.22200000286102296
+            }
+        },
+        {
+            "id": "module.rail",
+            "alias": "",
+            "x": 3261,
+            "y": 464,
+            "width": 306,
+            "height": 230,
+            "bounds": {
+                "x": -0.4000000059604645,
+                "y": -0.2656535804271698,
+                "width": 0.800000011920929,
+                "height": 0.601307213306427
+            }
+        },
+        {
+            "id": "object.wall",
+            "alias": "",
+            "x": 423,
+            "y": 2525,
+            "width": 303,
+            "height": 259,
+            "bounds": {
+                "x": -0.30226999521255495,
+                "y": -0.2588711082935333,
+                "width": 0.6038500070571899,
+                "height": 0.5161622166633606
+            }
+        },
+        {
+            "id": "object.spikes",
+            "alias": "",
+            "x": 423,
+            "y": 1687,
+            "width": 291,
+            "height": 282,
+            "bounds": {
+                "x": -0.29963165521621706,
+                "y": -0.2716499865055084,
+                "width": 0.6002132892608643,
+                "height": 0.5816500186920166
+            }
+        },
+        {
+            "id": "object.repair",
+            "alias": "",
+            "x": 16,
+            "y": 2675,
+            "width": 357,
+            "height": 305,
+            "bounds": {
+                "x": -0.3432300090789795,
+                "y": -0.21853072941303254,
+                "width": 0.6854299902915955,
+                "height": 0.5855914354324341
+            }
+        },
+        {
+            "id": "object.tar",
+            "alias": "",
+            "x": 3623,
+            "y": 462,
+            "width": 312,
+            "height": 214,
+            "bounds": {
+                "x": -0.47999998927116396,
+                "y": -0.3184307813644409,
+                "width": 0.9599999785423279,
+                "height": 0.6584615111351013
+            }
+        },
+        {
+            "id": "terrain.pine",
+            "alias": "",
+            "x": 16,
+            "y": 2984,
+            "width": 253,
+            "height": 388,
+            "bounds": {
+                "x": -0.33625200390815737,
+                "y": -0.4413500130176544,
+                "width": 0.6725040078163147,
+                "height": 1.031350016593933
+            }
+        },
+        {
+            "id": "terrain.mountain",
+            "alias": "",
+            "x": 16,
+            "y": 1749,
+            "width": 386,
+            "height": 319,
+            "bounds": {
+                "x": -0.554225504398346,
+                "y": -0.34257999062538149,
+                "width": 1.1284509897232056,
+                "height": 0.9325799942016602
+            }
+        },
+        {
+            "id": "terrain.oak",
+            "alias": "",
+            "x": 16,
+            "y": 2072,
+            "width": 345,
+            "height": 324,
+            "bounds": {
+                "x": -0.44999998807907107,
+                "y": -0.3376086950302124,
+                "width": 0.8999999761581421,
+                "height": 0.8452174067497253
+            }
+        },
+        {
+            "id": "terrain.rock",
+            "alias": "",
+            "x": 423,
+            "y": 2788,
+            "width": 324,
+            "height": 238,
+            "bounds": {
+                "x": -0.3693697452545166,
+                "y": -0.27000001072883608,
+                "width": 0.74873948097229,
+                "height": 0.550000011920929
+            }
+        },
+        {
+            "id": "terrain.shrub",
+            "alias": "",
+            "x": 1352,
+            "y": 2564,
+            "width": 255,
+            "height": 205,
+            "bounds": {
+                "x": -0.30597561597824099,
+                "y": -0.23000000417232514,
+                "width": 0.6219512224197388,
+                "height": 0.5
+            }
+        },
+        {
+            "id": "terrain.ridge",
+            "alias": "",
+            "x": 1639,
+            "y": 1433,
+            "width": 375,
+            "height": 171,
+            "bounds": {
+                "x": -0.5799999833106995,
+                "y": -0.1703300029039383,
+                "width": 1.159999966621399,
+                "height": 0.5289599895477295
+            }
+        },
+        {
+            "id": "object.castle.damaged",
+            "alias": "",
+            "x": 3641,
+            "y": 701,
+            "width": 408,
+            "height": 330,
+            "bounds": {
+                "x": -1.399999976158142,
+                "y": -0.7926470637321472,
+                "width": 2.799999952316284,
+                "height": 2.2647058963775636
+            }
+        },
+        {
+            "id": "object.blot",
+            "alias": "",
+            "x": 3306,
+            "y": 1121,
+            "width": 321,
+            "height": 282,
+            "bounds": {
+                "x": -0.3708151578903198,
+                "y": -0.28575000166893008,
+                "width": 0.7521303296089172,
+                "height": 0.6607499718666077
+            }
+        },
+        {
+            "id": "enemy.doodle.idle",
+            "alias": "",
+            "x": 273,
+            "y": 2984,
+            "width": 145,
+            "height": 193,
+            "bounds": {
+                "x": -0.22499999403953553,
+                "y": -0.26953446865081789,
+                "width": 0.44999998807907107,
+                "height": 0.5989655256271362
+            }
+        },
+        {
+            "id": "enemy.runner.idle",
+            "alias": "",
+            "x": 3939,
+            "y": 462,
+            "width": 157,
+            "height": 197,
+            "bounds": {
+                "x": -0.25502538681030276,
+                "y": -0.2879999876022339,
+                "width": 0.5100507736206055,
+                "height": 0.6399999856948853
+            }
+        },
+        {
+            "id": "enemy.gnawer.idle",
+            "alias": "",
+            "x": 2555,
+            "y": 1433,
+            "width": 190,
+            "height": 134,
+            "bounds": {
+                "x": -0.32499998807907107,
+                "y": -0.20628947019577027,
+                "width": 0.6499999761581421,
+                "height": 0.4584210515022278
+            }
+        },
+        {
+            "id": "enemy.spitter.idle",
+            "alias": "",
+            "x": 2144,
+            "y": 1608,
+            "width": 189,
+            "height": 174,
+            "bounds": {
+                "x": -0.32749998569488528,
+                "y": -0.27135714888572695,
+                "width": 0.6549999713897705,
+                "height": 0.6030158996582031
+            }
+        },
+        {
+            "id": "enemy.brute.idle",
+            "alias": "",
+            "x": 423,
+            "y": 1433,
+            "width": 333,
+            "height": 250,
+            "bounds": {
+                "x": -0.46000000834465029,
+                "y": -0.31081080436706545,
+                "width": 0.9200000166893005,
+                "height": 0.6906906962394714
+            }
+        },
+        {
+            "id": "enemy.bulwark.idle",
+            "alias": "",
+            "x": 1352,
+            "y": 3631,
+            "width": 200,
+            "height": 226,
+            "bounds": {
+                "x": -0.36725664138793948,
+                "y": -0.3734999895095825,
+                "width": 0.7345132827758789,
+                "height": 0.8299999833106995
+            }
+        },
+        {
+            "id": "enemy.doodle.walk",
+            "alias": "",
+            "x": 1352,
+            "y": 3861,
+            "width": 202,
+            "height": 194,
+            "bounds": {
+                "x": -0.3134482800960541,
+                "y": -0.26953446865081789,
+                "width": 0.6268965601921082,
+                "height": 0.6020689606666565
+            }
+        },
+        {
+            "id": "enemy.runner.walk",
+            "alias": "",
+            "x": 1352,
+            "y": 2773,
+            "width": 250,
+            "height": 197,
+            "bounds": {
+                "x": -0.4060913622379303,
+                "y": -0.2879999876022339,
+                "width": 0.8121827244758606,
+                "height": 0.6399999856948853
+            }
+        },
+        {
+            "id": "enemy.gnawer.walk",
+            "alias": "",
+            "x": 16,
+            "y": 3964,
+            "width": 224,
+            "height": 147,
+            "bounds": {
+                "x": -0.3831579089164734,
+                "y": -0.20628947019577027,
+                "width": 0.7663158178329468,
+                "height": 0.5028947591781616
+            }
+        },
+        {
+            "id": "enemy.spitter.walk",
+            "alias": "",
+            "x": 1933,
+            "y": 1608,
+            "width": 207,
+            "height": 182,
+            "bounds": {
+                "x": -0.358690470457077,
+                "y": -0.27135714888572695,
+                "width": 0.717380940914154,
+                "height": 0.630740761756897
+            }
+        },
+        {
+            "id": "enemy.brute.walk",
+            "alias": "",
+            "x": 760,
+            "y": 1433,
+            "width": 335,
+            "height": 237,
+            "bounds": {
+                "x": -0.4627627730369568,
+                "y": -0.31081080436706545,
+                "width": 0.9255255460739136,
+                "height": 0.6547747850418091
+            }
+        },
+        {
+            "id": "enemy.bulwark.walk",
+            "alias": "",
+            "x": 1099,
+            "y": 3805,
+            "width": 232,
+            "height": 220,
+            "bounds": {
+                "x": -0.426017701625824,
+                "y": -0.3734999895095825,
+                "width": 0.852035403251648,
+                "height": 0.8079646229743958
+            }
+        },
+        {
+            "id": "enemy.doodle.attack",
+            "alias": "",
+            "x": 1352,
+            "y": 3433,
+            "width": 240,
+            "height": 194,
+            "bounds": {
+                "x": -0.3724137842655182,
+                "y": -0.26953446865081789,
+                "width": 0.7448275685310364,
+                "height": 0.6020689606666565
+            }
+        },
+        {
+            "id": "enemy.runner.attack",
+            "alias": "",
+            "x": 1639,
+            "y": 1608,
+            "width": 290,
+            "height": 186,
+            "bounds": {
+                "x": -0.4710659980773926,
+                "y": -0.2879999876022339,
+                "width": 0.9421319961547852,
+                "height": 0.604263961315155
+            }
+        },
+        {
+            "id": "enemy.gnawer.attack",
+            "alias": "",
+            "x": 2321,
+            "y": 1433,
+            "width": 230,
+            "height": 164,
+            "bounds": {
+                "x": -0.3934210538864136,
+                "y": -0.20628947019577027,
+                "width": 0.7868421077728272,
+                "height": 0.5610526204109192
+            }
+        },
+        {
+            "id": "enemy.spitter.attack",
+            "alias": "",
+            "x": 2018,
+            "y": 1433,
+            "width": 299,
+            "height": 163,
+            "bounds": {
+                "x": -0.5181084871292114,
+                "y": -0.27135714888572695,
+                "width": 1.0362169742584229,
+                "height": 0.5648941993713379
+            }
+        },
+        {
+            "id": "enemy.brute.attack",
+            "alias": "",
+            "x": 423,
+            "y": 3621,
+            "width": 288,
+            "height": 262,
+            "bounds": {
+                "x": -0.3978378474712372,
+                "y": -0.31081080436706545,
+                "width": 0.7956756949424744,
+                "height": 0.7238438725471497
+            }
+        },
+        {
+            "id": "enemy.bulwark.attack",
+            "alias": "",
+            "x": 1352,
+            "y": 3224,
+            "width": 232,
+            "height": 205,
+            "bounds": {
+                "x": -0.426017701625824,
+                "y": -0.3734999895095825,
+                "width": 0.852035403251648,
+                "height": 0.7528761029243469
+            }
+        },
+        {
+            "id": "fx.muzzle",
+            "alias": "",
+            "x": 16,
+            "y": 2400,
+            "width": 402,
+            "height": 271,
+            "bounds": {
+                "x": -0.21623000502586366,
+                "y": -0.1537790149450302,
+                "width": 0.4562300145626068,
+                "height": 0.3075580298900604
+            }
+        },
+        {
+            "id": "fx.tracer",
+            "alias": "",
+            "x": 3306,
+            "y": 701,
+            "width": 331,
+            "height": 416,
+            "bounds": {
+                "x": -0.04328000172972679,
+                "y": -0.028479034081101419,
+                "width": 0.04532000049948692,
+                "height": 0.056958068162202838
+            }
+        },
+        {
+            "id": "fx.piercer",
+            "alias": "",
+            "x": 1099,
+            "y": 3086,
+            "width": 131,
+            "height": 451,
+            "bounds": {
+                "x": -0.0480399988591671,
+                "y": -0.08773843199014664,
+                "width": 0.05096999928355217,
+                "height": 0.17547686398029328
+            }
+        },
+        {
+            "id": "fx.mortar.projectile",
+            "alias": "",
+            "x": 3641,
+            "y": 1035,
+            "width": 395,
+            "height": 325,
+            "bounds": {
+                "x": -0.10000000149011612,
+                "y": -0.1972784847021103,
+                "width": 0.20000000298023225,
+                "height": 0.16455696523189546
+            }
+        },
+        {
+            "id": "fx.mortar.explosion",
+            "alias": "",
+            "x": 2800,
+            "y": 16,
+            "width": 457,
+            "height": 387,
+            "bounds": {
+                "x": -0.46055999398231509,
+                "y": -0.3982458710670471,
+                "width": 0.940559983253479,
+                "height": 0.7964917421340942
+            }
+        },
+        {
+            "id": "fx.fan",
+            "alias": "",
+            "x": 2493,
+            "y": 701,
+            "width": 398,
+            "height": 355,
+            "bounds": {
+                "x": -0.2970985770225525,
+                "y": 0.0,
+                "width": 0.594197154045105,
+                "height": 0.5299999713897705
+            }
+        },
+        {
+            "id": "fx.ricochet",
+            "alias": "",
+            "x": 2493,
+            "y": 1060,
+            "width": 397,
+            "height": 344,
+            "bounds": {
+                "x": -0.3750726878643036,
+                "y": -0.27000001072883608,
+                "width": 0.7501453757286072,
+                "height": 0.6499999761581421
+            }
+        },
+        {
+            "id": "fx.cleanup",
+            "alias": "",
+            "x": 2069,
+            "y": 1060,
+            "width": 391,
+            "height": 363,
+            "bounds": {
+                "x": -0.37313032150268557,
+                "y": -0.34641000628471377,
+                "width": 0.7462606430053711,
+                "height": 0.6928200125694275
+            }
+        },
+        {
+            "id": "icon.pencil",
+            "alias": "",
+            "x": 760,
+            "y": 3597,
+            "width": 254,
+            "height": 269,
+            "bounds": {
+                "x": -0.47211897373199465,
+                "y": -0.5,
+                "width": 0.9442379474639893,
+                "height": 1.0
+            }
+        },
+        {
+            "id": "icon.pen",
+            "alias": "",
+            "x": 423,
+            "y": 2230,
+            "width": 271,
+            "height": 291,
+            "bounds": {
+                "x": -0.465635746717453,
+                "y": -0.5,
+                "width": 0.931271493434906,
+                "height": 1.0
+            }
+        },
+        {
+            "id": "icon.marker",
+            "alias": "",
+            "x": 16,
+            "y": 3667,
+            "width": 285,
+            "height": 293,
+            "bounds": {
+                "x": -0.48634812235832217,
+                "y": -0.5,
+                "width": 0.9726962447166443,
+                "height": 1.0
+            }
+        },
+        {
+            "id": "icon.erase",
+            "alias": "",
+            "x": 1352,
+            "y": 2352,
+            "width": 253,
+            "height": 208,
+            "bounds": {
+                "x": -0.5,
+                "y": -0.4110671877861023,
+                "width": 1.0,
+                "height": 0.8221343755722046
+            }
+        },
+        {
+            "id": "icon.paint",
+            "alias": "",
+            "x": 760,
+            "y": 1674,
+            "width": 270,
+            "height": 276,
+            "bounds": {
+                "x": -0.489130437374115,
+                "y": -0.5,
+                "width": 0.97826087474823,
+                "height": 1.0
+            }
+        },
+        {
+            "id": "icon.upgrade",
+            "alias": "",
+            "x": 1099,
+            "y": 2824,
+            "width": 231,
+            "height": 258,
+            "bounds": {
+                "x": -0.447674423456192,
+                "y": -0.5,
+                "width": 0.895348846912384,
+                "height": 1.0
+            }
+        },
+        {
+            "id": "icon.play",
+            "alias": "",
+            "x": 1352,
+            "y": 2974,
+            "width": 198,
+            "height": 246,
+            "bounds": {
+                "x": -0.40243902802467348,
+                "y": -0.5,
+                "width": 0.8048780560493469,
+                "height": 1.0
+            }
+        },
+        {
+            "id": "icon.help",
+            "alias": "",
+            "x": 423,
+            "y": 3887,
+            "width": 289,
+            "height": 214,
+            "bounds": {
+                "x": -0.5,
+                "y": -0.3702422082424164,
+                "width": 1.0,
+                "height": 0.7404844164848328
+            }
+        },
+        {
+            "id": "icon.settings",
+            "alias": "",
+            "x": 423,
+            "y": 3348,
+            "width": 281,
+            "height": 269,
+            "bounds": {
+                "x": -0.5,
+                "y": -0.4786476790904999,
+                "width": 1.0,
+                "height": 0.9572953581809998
+            }
+        },
+        {
+            "id": "icon.workshop",
+            "alias": "",
+            "x": 760,
+            "y": 3327,
+            "width": 258,
+            "height": 266,
+            "bounds": {
+                "x": -0.4849624037742615,
+                "y": -0.5,
+                "width": 0.969924807548523,
+                "height": 1.0
+            }
+        },
+        {
+            "id": "icon.exit",
+            "alias": "",
+            "x": 1099,
+            "y": 1701,
+            "width": 237,
+            "height": 274,
+            "bounds": {
+                "x": -0.4324817657470703,
+                "y": -0.5,
+                "width": 0.8649635314941406,
+                "height": 1.0
+            }
+        },
+        {
+            "id": "icon.skull",
+            "alias": "",
+            "x": 1099,
+            "y": 3541,
+            "width": 225,
+            "height": 260,
+            "bounds": {
+                "x": -0.4326923191547394,
+                "y": -0.5,
+                "width": 0.8653846383094788,
+                "height": 1.0
+            }
+        },
+        {
+            "id": "icon.entrance",
+            "alias": "",
+            "x": 1099,
+            "y": 1433,
+            "width": 249,
+            "height": 264,
+            "bounds": {
+                "x": -0.47159090638160708,
+                "y": -0.5,
+                "width": 0.9431818127632141,
+                "height": 1.0
+            }
+        },
+        {
+            "id": "icon.shield",
+            "alias": "",
+            "x": 760,
+            "y": 2752,
+            "width": 243,
+            "height": 286,
+            "bounds": {
+                "x": -0.42482516169548037,
+                "y": -0.5,
+                "width": 0.8496503233909607,
+                "height": 1.0
+            }
+        },
+        {
+            "id": "icon.heart",
+            "alias": "",
+            "x": 1352,
+            "y": 1669,
+            "width": 269,
+            "height": 229,
+            "bounds": {
+                "x": -0.5,
+                "y": -0.42565056681632998,
+                "width": 1.0,
+                "height": 0.8513011336326599
+            }
+        },
+        {
+            "id": "icon.flag",
+            "alias": "",
+            "x": 760,
+            "y": 3042,
+            "width": 247,
+            "height": 281,
+            "bounds": {
+                "x": -0.4395017921924591,
+                "y": -0.5,
+                "width": 0.8790035843849182,
+                "height": 1.0
+            }
+        },
+        {
+            "id": "tower.gun",
+            "alias": "",
+            "x": 2800,
+            "y": 407,
+            "width": 407,
+            "height": 290,
+            "bounds": {
+                "x": -0.5,
+                "y": -0.3562653660774231,
+                "width": 1.0,
+                "height": 0.7125307321548462
+            }
+        },
+        {
+            "id": "tower.double",
+            "alias": "",
+            "x": 16,
+            "y": 1433,
+            "width": 403,
+            "height": 312,
+            "bounds": {
+                "x": -0.5,
+                "y": -0.3870967626571655,
+                "width": 1.0,
+                "height": 0.774193525314331
+            }
+        },
+        {
+            "id": "tower.piercer",
+            "alias": "",
+            "x": 2895,
+            "y": 701,
+            "width": 407,
+            "height": 342,
+            "bounds": {
+                "x": -0.5,
+                "y": -0.4201474189758301,
+                "width": 1.0,
+                "height": 0.8402948379516602
+            }
+        },
+        {
+            "id": "tower.mortar",
+            "alias": "",
+            "x": 2069,
+            "y": 701,
+            "width": 420,
+            "height": 355,
+            "bounds": {
+                "x": -0.5,
+                "y": -0.4226190447807312,
+                "width": 1.0,
+                "height": 0.8452380895614624
+            }
+        },
+        {
+            "id": "tower.fan",
+            "alias": "",
+            "x": 2895,
+            "y": 1047,
+            "width": 398,
+            "height": 325,
+            "bounds": {
+                "x": -0.5,
+                "y": -0.40829145908355715,
+                "width": 1.0,
+                "height": 0.8165829181671143
+            }
+        },
+        {
+            "id": "hero.castle",
+            "alias": "",
+            "x": 2081,
+            "y": 16,
+            "width": 715,
+            "height": 602,
+            "bounds": {
+                "x": -1.399999976158142,
+                "y": -0.825118899345398,
+                "width": 2.799999952316284,
+                "height": 2.357482433319092
+            }
+        },
+        {
+            "id": "icon.ink-red",
+            "alias": "",
+            "x": 3623,
+            "y": 16,
+            "width": 355,
+            "height": 442,
+            "bounds": {
+                "x": -0.2577645480632782,
+                "y": -0.31047001481056216,
+                "width": 0.5155290961265564,
+                "height": 0.6418700218200684
+            }
+        },
+        {
+            "id": "icon.ink-blue",
+            "alias": "",
+            "x": 3261,
+            "y": 16,
+            "width": 358,
+            "height": 444,
+            "bounds": {
+                "x": -0.2587719261646271,
+                "y": -0.31047001481056216,
+                "width": 0.5175438523292542,
+                "height": 0.6418700218200684
+            }
+        },
+        {
+            "id": "icon.ink-green",
+            "alias": "",
+            "x": 1711,
+            "y": 701,
+            "width": 354,
+            "height": 441,
+            "bounds": {
+                "x": -0.25762128829956057,
+                "y": -0.31047001481056216,
+                "width": 0.5152425765991211,
+                "height": 0.6418700218200684
+            }
+        },
+        {
+            "id": "logo.home",
+            "alias": "",
+            "x": 16,
+            "y": 701,
+            "width": 1691,
+            "height": 728,
+            "bounds": {
+                "x": -1.0,
+                "y": -0.5,
+                "width": 2.0,
+                "height": 1.0
+            }
+        },
+        {
+            "id": "logo.settings",
+            "alias": "",
+            "x": 16,
+            "y": 16,
+            "width": 2061,
+            "height": 681,
+            "bounds": {
+                "x": -1.0,
+                "y": -0.5,
+                "width": 2.0,
+                "height": 1.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.idle",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.idle.1",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.idle.2",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.idle.3",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.walk",
+            "alias": "enemy.doodle.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.walk.1",
+            "alias": "enemy.doodle.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.walk.2",
+            "alias": "enemy.doodle.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.walk.3",
+            "alias": "enemy.doodle.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.attack",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.attack.1",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.attack.2",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.attack.3",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.hit",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.hit.1",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.hit.2",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.hit.3",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.death",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.death.1",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.death.2",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.sketch.death.3",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.idle",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.idle.1",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.idle.2",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.idle.3",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.walk",
+            "alias": "enemy.doodle.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.walk.1",
+            "alias": "enemy.doodle.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.walk.2",
+            "alias": "enemy.doodle.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.walk.3",
+            "alias": "enemy.doodle.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.attack",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.attack.1",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.attack.2",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.attack.3",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.hit",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.hit.1",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.hit.2",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.hit.3",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.death",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.death.1",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.death.2",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.outlined.death.3",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.idle",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.idle.1",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.idle.2",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.idle.3",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.walk",
+            "alias": "enemy.doodle.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.walk.1",
+            "alias": "enemy.doodle.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.walk.2",
+            "alias": "enemy.doodle.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.walk.3",
+            "alias": "enemy.doodle.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.attack",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.attack.1",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.attack.2",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.attack.3",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.hit",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.hit.1",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.hit.2",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.hit.3",
+            "alias": "enemy.doodle.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.death",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.death.1",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.death.2",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.doodle.hatched.death.3",
+            "alias": "enemy.doodle.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.idle",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.idle.1",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.idle.2",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.idle.3",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.walk",
+            "alias": "enemy.runner.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.walk.1",
+            "alias": "enemy.runner.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.walk.2",
+            "alias": "enemy.runner.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.walk.3",
+            "alias": "enemy.runner.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.attack",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.attack.1",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.attack.2",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.attack.3",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.hit",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.hit.1",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.hit.2",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.hit.3",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.death",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.death.1",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.death.2",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.sketch.death.3",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.idle",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.idle.1",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.idle.2",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.idle.3",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.walk",
+            "alias": "enemy.runner.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.walk.1",
+            "alias": "enemy.runner.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.walk.2",
+            "alias": "enemy.runner.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.walk.3",
+            "alias": "enemy.runner.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.attack",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.attack.1",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.attack.2",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.attack.3",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.hit",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.hit.1",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.hit.2",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.hit.3",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.death",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.death.1",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.death.2",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.outlined.death.3",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.idle",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.idle.1",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.idle.2",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.idle.3",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.walk",
+            "alias": "enemy.runner.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.walk.1",
+            "alias": "enemy.runner.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.walk.2",
+            "alias": "enemy.runner.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.walk.3",
+            "alias": "enemy.runner.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.attack",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.attack.1",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.attack.2",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.attack.3",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.hit",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.hit.1",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.hit.2",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.hit.3",
+            "alias": "enemy.runner.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.death",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.death.1",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.death.2",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.runner.hatched.death.3",
+            "alias": "enemy.runner.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.idle",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.idle.1",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.idle.2",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.idle.3",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.walk",
+            "alias": "enemy.gnawer.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.walk.1",
+            "alias": "enemy.gnawer.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.walk.2",
+            "alias": "enemy.gnawer.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.walk.3",
+            "alias": "enemy.gnawer.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.attack",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.attack.1",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.attack.2",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.attack.3",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.hit",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.hit.1",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.hit.2",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.hit.3",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.death",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.death.1",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.death.2",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.sketch.death.3",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.idle",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.idle.1",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.idle.2",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.idle.3",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.walk",
+            "alias": "enemy.gnawer.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.walk.1",
+            "alias": "enemy.gnawer.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.walk.2",
+            "alias": "enemy.gnawer.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.walk.3",
+            "alias": "enemy.gnawer.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.attack",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.attack.1",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.attack.2",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.attack.3",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.hit",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.hit.1",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.hit.2",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.hit.3",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.death",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.death.1",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.death.2",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.outlined.death.3",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.idle",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.idle.1",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.idle.2",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.idle.3",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.walk",
+            "alias": "enemy.gnawer.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.walk.1",
+            "alias": "enemy.gnawer.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.walk.2",
+            "alias": "enemy.gnawer.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.walk.3",
+            "alias": "enemy.gnawer.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.attack",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.attack.1",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.attack.2",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.attack.3",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.hit",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.hit.1",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.hit.2",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.hit.3",
+            "alias": "enemy.gnawer.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.death",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.death.1",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.death.2",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.gnawer.hatched.death.3",
+            "alias": "enemy.gnawer.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.idle",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.idle.1",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.idle.2",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.idle.3",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.walk",
+            "alias": "enemy.spitter.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.walk.1",
+            "alias": "enemy.spitter.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.walk.2",
+            "alias": "enemy.spitter.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.walk.3",
+            "alias": "enemy.spitter.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.attack",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.attack.1",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.attack.2",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.attack.3",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.hit",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.hit.1",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.hit.2",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.hit.3",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.death",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.death.1",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.death.2",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.sketch.death.3",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.idle",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.idle.1",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.idle.2",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.idle.3",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.walk",
+            "alias": "enemy.spitter.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.walk.1",
+            "alias": "enemy.spitter.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.walk.2",
+            "alias": "enemy.spitter.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.walk.3",
+            "alias": "enemy.spitter.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.attack",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.attack.1",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.attack.2",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.attack.3",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.hit",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.hit.1",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.hit.2",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.hit.3",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.death",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.death.1",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.death.2",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.outlined.death.3",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.idle",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.idle.1",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.idle.2",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.idle.3",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.walk",
+            "alias": "enemy.spitter.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.walk.1",
+            "alias": "enemy.spitter.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.walk.2",
+            "alias": "enemy.spitter.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.walk.3",
+            "alias": "enemy.spitter.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.attack",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.attack.1",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.attack.2",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.attack.3",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.hit",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.hit.1",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.hit.2",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.hit.3",
+            "alias": "enemy.spitter.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.death",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.death.1",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.death.2",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.spitter.hatched.death.3",
+            "alias": "enemy.spitter.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.idle",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.idle.1",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.idle.2",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.idle.3",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.walk",
+            "alias": "enemy.brute.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.walk.1",
+            "alias": "enemy.brute.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.walk.2",
+            "alias": "enemy.brute.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.walk.3",
+            "alias": "enemy.brute.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.attack",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.attack.1",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.attack.2",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.attack.3",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.hit",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.hit.1",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.hit.2",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.hit.3",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.death",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.death.1",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.death.2",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.sketch.death.3",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.idle",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.idle.1",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.idle.2",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.idle.3",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.walk",
+            "alias": "enemy.brute.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.walk.1",
+            "alias": "enemy.brute.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.walk.2",
+            "alias": "enemy.brute.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.walk.3",
+            "alias": "enemy.brute.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.attack",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.attack.1",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.attack.2",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.attack.3",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.hit",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.hit.1",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.hit.2",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.hit.3",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.death",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.death.1",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.death.2",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.outlined.death.3",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.idle",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.idle.1",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.idle.2",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.idle.3",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.walk",
+            "alias": "enemy.brute.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.walk.1",
+            "alias": "enemy.brute.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.walk.2",
+            "alias": "enemy.brute.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.walk.3",
+            "alias": "enemy.brute.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.attack",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.attack.1",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.attack.2",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.attack.3",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.hit",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.hit.1",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.hit.2",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.hit.3",
+            "alias": "enemy.brute.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.death",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.death.1",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.death.2",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.brute.hatched.death.3",
+            "alias": "enemy.brute.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.idle",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.idle.1",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.idle.2",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.idle.3",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.walk",
+            "alias": "enemy.bulwark.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.walk.1",
+            "alias": "enemy.bulwark.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.walk.2",
+            "alias": "enemy.bulwark.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.walk.3",
+            "alias": "enemy.bulwark.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.attack",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.attack.1",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.attack.2",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.attack.3",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.hit",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.hit.1",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.hit.2",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.hit.3",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.death",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.death.1",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.death.2",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.sketch.death.3",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.idle",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.idle.1",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.idle.2",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.idle.3",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.walk",
+            "alias": "enemy.bulwark.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.walk.1",
+            "alias": "enemy.bulwark.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.walk.2",
+            "alias": "enemy.bulwark.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.walk.3",
+            "alias": "enemy.bulwark.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.attack",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.attack.1",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.attack.2",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.attack.3",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.hit",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.hit.1",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.hit.2",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.hit.3",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.death",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.death.1",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.death.2",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.outlined.death.3",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.idle",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.idle.1",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.idle.2",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.idle.3",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.walk",
+            "alias": "enemy.bulwark.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.walk.1",
+            "alias": "enemy.bulwark.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.walk.2",
+            "alias": "enemy.bulwark.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.walk.3",
+            "alias": "enemy.bulwark.walk",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.attack",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.attack.1",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.attack.2",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.attack.3",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.hit",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.hit.1",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.hit.2",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.hit.3",
+            "alias": "enemy.bulwark.attack",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.death",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.death.1",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.death.2",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "enemy.bulwark.hatched.death.3",
+            "alias": "enemy.bulwark.idle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.castle",
+            "alias": "hero.castle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.0",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.1",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.2",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.3",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.4",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.5",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.6",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.7",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.8",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.9",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.10",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.11",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.12",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.13",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.14",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.wall.15",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.well.red",
+            "alias": "icon.ink-red",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.well.red.active",
+            "alias": "icon.ink-red",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.well.blue",
+            "alias": "icon.ink-blue",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.well.blue.active",
+            "alias": "icon.ink-blue",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.well.green",
+            "alias": "icon.ink-green",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.well.green.active",
+            "alias": "icon.ink-green",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "fx.stapler",
+            "alias": "fx.tracer",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "fx.status.red",
+            "alias": "fx.mortar.explosion",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "fx.status.blue",
+            "alias": "fx.ricochet",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "fx.status.green",
+            "alias": "fx.fan",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "fx.blot.birth",
+            "alias": "object.blot",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "fx.blot.absorb",
+            "alias": "fx.mortar.explosion",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "fx.blot.cleanse",
+            "alias": "fx.cleanup",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "fx.blot.expire",
+            "alias": "fx.cleanup",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "fx.spitter.projectile",
+            "alias": "fx.mortar.projectile",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "fx.spitter.impact",
+            "alias": "fx.mortar.explosion",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "fx.well.activate",
+            "alias": "fx.ricochet",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "fx.castle.hit",
+            "alias": "fx.muzzle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "fx.well.hit",
+            "alias": "fx.muzzle",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "fx.structure.destroy",
+            "alias": "fx.cleanup",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.chassis.standard",
+            "alias": "chassis.standard",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.chassis.heavy",
+            "alias": "chassis.heavy",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.chassis.precision",
+            "alias": "chassis.precision",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.chassis.battery",
+            "alias": "chassis.battery",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.weapon.gun",
+            "alias": "weapon.gun",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.weapon.piercer",
+            "alias": "weapon.piercer",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.weapon.mortar",
+            "alias": "weapon.mortar",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.weapon.fan",
+            "alias": "weapon.fan",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.weapon.ricochet",
+            "alias": "weapon.ricochet",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.weapon.stapler",
+            "alias": "weapon.stapler",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.weapon.blotter",
+            "alias": "weapon.blotter",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.module.armor",
+            "alias": "module.armor",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.module.feed",
+            "alias": "module.feed",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.module.tracking",
+            "alias": "module.tracking",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.module.rail",
+            "alias": "module.rail",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.material.pencil",
+            "alias": "icon.pencil",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.material.pen",
+            "alias": "icon.pen",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.material.marker",
+            "alias": "icon.marker",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.ink.red",
+            "alias": "icon.ink-red",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.ink.blue",
+            "alias": "icon.ink-blue",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.ink.green",
+            "alias": "icon.ink-green",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.tool.wall",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.tool.spikes",
+            "alias": "object.spikes",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.tool.erase",
+            "alias": "icon.erase",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.tool.select",
+            "alias": "icon.pencil",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.entrance",
+            "alias": "icon.entrance",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "object.barricade-site",
+            "alias": "object.wall",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.tool.tar",
+            "alias": "object.tar",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.tool.repair",
+            "alias": "object.repair",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.tool.upgrade",
+            "alias": "icon.upgrade",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.tool.blotter",
+            "alias": "weapon.blotter",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.tool.paint",
+            "alias": "icon.paint",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.action.wave",
+            "alias": "icon.play",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        },
+        {
+            "id": "ui.action.workshop",
+            "alias": "icon.workshop",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            }
+        }
+    ]
+}

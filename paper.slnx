@@ -5,6 +5,6 @@
   <Project Path="PaperDefense.Presentation.csproj" />
   <Project Path="PaperDefense.Editor.csproj" />
   <Project Path="PaperDefense.Core.Tests.csproj" />
-  <Project Path="PaperDefense.Validation.csproj" />
   <Project Path="PaperDefense.Editor.Tests.csproj" />
+  <Project Path="PaperDefense.Validation.csproj" />
 </Solution>

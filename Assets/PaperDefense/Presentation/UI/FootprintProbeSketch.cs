@@ -7,6 +7,7 @@ namespace PaperDefense.Presentation
     /// <summary>Two views share their owner's clock; world X and Y use one letterboxed scale.</summary>
     public sealed class FootprintProbeSketch : UnityEngine.UI.MaskableGraphic
     {
+        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         IReadOnlyList<TrialFrame> frames;
         Func<float> clock;
         Rect world = new Rect(8,4.5f,16,12);
@@ -67,7 +68,9 @@ namespace PaperDefense.Presentation
             }
             foreach (var enemy in frame.Enemies)
             {
-                BlueprintSketch.Ring(vh, Point(enemy.Position.X, enemy.Position.Y), 4, 3, enemy.Health<enemy.MaxHealth?NotebookPalette.Red:NotebookPalette.Navy);
+                towerPen.Clear();
+                DoodleGlyphs.Enemy(towerPen, enemy, seconds, showHealth: false);
+                towerPen.CopyTo(vh, rectTransform.rect.center - world.center * WorldScale, WorldScale);
             }
             foreach (var projectile in frame.Projectiles)
             {
@@ -75,7 +78,13 @@ namespace PaperDefense.Presentation
                 var from = Point(projectile.From.X, projectile.From.Y);
                 var to = Point(projectile.To.X, projectile.To.Y);
                 BlueprintSketch.Line(vh, from, to, 1, MeshPen.Alpha(NotebookPalette.Blue, .3f));
-                BlueprintSketch.Ring(vh, Vector2.Lerp(from, to, t) + Vector2.up * Mathf.Sin(t * Mathf.PI) * 14, 3, 3, NotebookPalette.Marker);
+                var worldFrom = new Vector2(projectile.From.X, projectile.From.Y);
+                var worldTo = new Vector2(projectile.To.X, projectile.To.Y);
+                var point = Vector2.Lerp(worldFrom, worldTo, t)
+                    + Vector2.up * Mathf.Sin(t * Mathf.PI) * Mathf.Min(3, Vector2.Distance(worldFrom, worldTo) * .22f);
+                towerPen.Clear();
+                DoodleGlyphs.DrawResource(towerPen, "fx.mortar.projectile", point);
+                towerPen.CopyTo(vh, rectTransform.rect.center - world.center * WorldScale, WorldScale);
             }
             foreach (var impact in frame.Impacts)
             {

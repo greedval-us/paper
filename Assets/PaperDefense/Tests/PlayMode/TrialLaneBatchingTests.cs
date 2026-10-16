@@ -15,6 +15,8 @@ namespace PaperDefense.Tests
     public sealed class TrialLaneBatchingTests
     {
         const BindingFlags PrivateInstance = BindingFlags.Instance | BindingFlags.NonPublic;
+        // Raster bodies need far fewer vertices. Keep the fixture above the same Canvas limit.
+        const int OverflowCrowdSize = 3300;
         GameObject root;
         TrialLaneSketch lane;
 
@@ -129,7 +131,7 @@ namespace PaperDefense.Tests
         [Test]
         public void DetailedCrowdAboveUiVertexLimitRetainsEveryTriangleInDrawOrder()
         {
-            CreateLane(); Show(Crowd(240));
+            CreateLane(); Show(Crowd(OverflowCrowdSize));
             List<UIVertex> expected = UnsplitTriangles();
             AssertSameTriangles(expected, BoundedTriangles());
             Assert.That(lane.GetComponentsInChildren<Graphic>().Length, Is.GreaterThan(1));
@@ -138,7 +140,7 @@ namespace PaperDefense.Tests
         [UnityTest]
         public IEnumerator BatchesAreReusedAfterSparseEmptyAndDisabledPlayback()
         {
-            CreateLane(); TrialReport crowd = Crowd(240); Show(crowd);
+            CreateLane(); TrialReport crowd = Crowd(OverflowCrowdSize); Show(crowd);
             yield return null; Canvas.ForceUpdateCanvases();
             var warmed = lane.GetComponentsInChildren<Graphic>(true);
             Assert.That(warmed.Length, Is.GreaterThan(1));
@@ -163,7 +165,7 @@ namespace PaperDefense.Tests
         [UnityTest]
         public IEnumerator PausedBatchesFollowResizingWithoutCanvasRebuildErrors()
         {
-            CreateLane(); Show(Crowd(240));
+            CreateLane(); Show(Crowd(OverflowCrowdSize));
             yield return null; Canvas.ForceUpdateCanvases();
             lane.rectTransform.sizeDelta = new Vector2(350, 610);
             lane.rectTransform.pivot = new Vector2(.2f, .75f);

@@ -844,6 +844,7 @@ namespace PaperDefense.Presentation
     [RequireComponent(typeof(CanvasRenderer))]
     public sealed class BlueprintSketch : MaskableGraphic
     {
+        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         TowerBlueprint blueprint;
         NotebookAnimationState previewAnimation;
         Func<int, Point2> previewAim;
@@ -858,7 +859,7 @@ namespace PaperDefense.Presentation
             vh.Clear(); if (blueprint == null || DrawingTemplateCatalog.Create(blueprint).Count == 0) return;
             Vector2 center = rectTransform.rect.center;
             if(ShowReinforcement&&blueprint.Reinforcement!=null)ArmorReinforcementGraphic.DrawSectors(vh,center,Mathf.Min(rectTransform.rect.width,rectTransform.rect.height)*.42f,blueprint.Reinforcement);
-            if (!ShowReference && (blueprint.HasPlayerDrawing || NotebookTowerComposition.UsesResourceArt(blueprint)))
+            if (!ShowReference)
             {
                 float size = Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .68f;
                 if (previewAnimation != null)
@@ -866,66 +867,17 @@ namespace PaperDefense.Presentation
                 else NotebookTowerComposition.DrawUI(vh, blueprint, center, size);
                 return;
             }
-            if (ShowReference || blueprint.HasPlayerDrawing || ReferenceDrawingCache.UsesTemplateVisual(blueprint))
+            // Reference contours are teaching guides for the drawing editor. Completed standard
+            // assemblies and every runtime battlefield object use the new atlas illustrations.
+            float scale = Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .68f;
+            var drawing = ReferenceDrawingCache.For(blueprint);
+            foreach (var template in DrawingTemplateCatalog.Create(blueprint))
             {
-                float scale = Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .68f;
-                var drawing = ShowReference ? ReferenceDrawingCache.For(blueprint) : ReferenceDrawingCache.VisibleDrawing(blueprint);
-                foreach (var template in DrawingTemplateCatalog.Create(blueprint))
-                {
-                    var part = drawing.GetPart(template.BindingId);
-                    Point2 pivot = template.Pivot;
-                    foreach (var stroke in part.Strokes)
-                        DrawingCanvasGraphic.Draw(vh, stroke.Points, center + new Vector2(pivot.X, pivot.Y) * scale, scale, NotebookPalette.Blue, .018f);
-                }
-                return;
+                var part = drawing.GetPart(template.BindingId);
+                Point2 pivot = template.Pivot;
+                foreach (var stroke in part.Strokes)
+                    DrawingCanvasGraphic.Draw(vh, stroke.Points, center + new Vector2(pivot.X, pivot.Y) * scale, scale, NotebookPalette.Blue, .018f);
             }
-            float legacyScale = Mathf.Min(1, Mathf.Min(rectTransform.rect.width / 270, rectTransform.rect.height / 250));
-            // Standard pages retain their historical diagram, fitted to both the preview and thumbnail.
-            int before = vh.currentVertCount;
-            float radius = blueprint.Chassis == ChassisKind.Heavy ? 76 : 65;
-            Ring(vh, center, radius, 4, NotebookPalette.Blue);
-            Ring(vh, center, radius - 13, 2, NotebookPalette.Blue);
-            for (int side = -1; side <= 1; side += 2)
-            {
-                Line(vh, center + new Vector2(side * radius * .7f, -42), center + new Vector2(side * (radius + 20), -72), 5, NotebookPalette.Navy);
-                if ((blueprint.Modules & TowerModules.Armor) != 0)
-                { Line(vh, center + new Vector2(side * (radius + 8), -39), center + new Vector2(side * (radius + 8), 40), 13, NotebookPalette.Navy); }
-            }
-            foreach (var mount in blueprint.WeaponMounts)
-            {
-                Point2 pivot = blueprint.Content != null && blueprint.Content.TryGetChassis(blueprint.ChassisId, out var chassis)
-                    ? chassis.GetMountPivot(mount.SlotIndex, blueprint.WeaponMounts.Count) : new Point2((mount.SlotIndex - (blueprint.WeaponMounts.Count - 1) * .5f) * .28f, 0);
-                Weapon(vh, center + new Vector2(pivot.X, pivot.Y) * 190, LegacyContentIds.Weapon(mount.WeaponId));
-            }
-            if ((blueprint.Modules & TowerModules.Feed) != 0) Ring(vh, center - Vector2.up * 22, 15, 5, NotebookPalette.Green);
-            if ((blueprint.Modules & TowerModules.Tracking) != 0)
-            { Ring(vh, center + new Vector2(radius + 24, 57), 15, 3, NotebookPalette.Red); Line(vh, center + new Vector2(radius, 26), center + new Vector2(radius + 24, 57), 3, NotebookPalette.Navy); }
-            if ((blueprint.Modules & TowerModules.Rail) != 0)
-            {
-                Line(vh, center + new Vector2(-34, -52), center + new Vector2(34, -52), 4, NotebookPalette.Navy);
-                Line(vh, center + new Vector2(-34, -63), center + new Vector2(34, -63), 4, NotebookPalette.Navy);
-                for (int i = -2; i <= 2; i++) Line(vh, center + new Vector2(i * 14, -49), center + new Vector2(i * 14, -66), 2, NotebookPalette.Blue);
-            }
-            UIVertex vertex = new UIVertex();
-            for (int i = before; i < vh.currentVertCount; i++)
-            { vh.PopulateUIVertex(ref vertex, i); vertex.position = (Vector3)center + (vertex.position - (Vector3)center) * legacyScale; vh.SetUIVertex(vertex, i); }
-        }
-        static void Weapon(VertexHelper vh, Vector2 origin, StructureKind kind)
-        {
-            if (DoodleGlyphs.UsesTemplateMount(kind))
-            {
-                var geometry = DoodleGlyphs.StandardMount(kind);
-                int start = vh.currentVertCount;
-                foreach (Vector2 vertex in geometry.Vertices) vh.AddVert(origin + vertex * 190, NotebookPalette.Blue, Vector2.zero);
-                for (int i = 0; i < geometry.Indices.Count; i += 3)
-                    vh.AddTriangle(start + geometry.Indices[i], start + geometry.Indices[i + 1], start + geometry.Indices[i + 2]);
-                return;
-            }
-            float length = kind == StructureKind.Piercer ? 106 : kind == StructureKind.Mortar ? 49 : 83;
-            float width = kind == StructureKind.Mortar ? 24 : kind == StructureKind.Piercer ? 12 : 17;
-            Vector2 end = origin + Vector2.up * length;
-            Line(vh, origin, end, width + 7, NotebookPalette.Navy); Line(vh, origin, end, width, NotebookPalette.Blue);
-            Line(vh, end + Vector2.left * (width + 4), end + Vector2.right * (width + 4), 6, NotebookPalette.Navy);
         }
         internal static void Ring(VertexHelper vh, Vector2 center, float radius, float width, Color color)
         { for (int i = 0; i < 32; i++) { float a = i * Mathf.PI / 16, b = (i + 1) * Mathf.PI / 16; Line(vh, center + new Vector2(Mathf.Cos(a), Mathf.Sin(a)) * radius, center + new Vector2(Mathf.Cos(b), Mathf.Sin(b)) * radius, width, color); } }
@@ -943,6 +895,7 @@ namespace PaperDefense.Presentation
     [RequireComponent(typeof(CanvasRenderer))]
     public sealed class WorkshopMapSketch : MaskableGraphic
     {
+        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         IRunReadModel session;
         public void SetSession(IRunReadModel value) { if (session == value) return; session = value; SetVerticesDirty(); }
         protected override void OnPopulateMesh(VertexHelper vh)
@@ -961,11 +914,9 @@ namespace PaperDefense.Presentation
                 {
                     Vector2 at = Point(prop.Cell, low, high) - cellSize * .5f;
                     Vector2 size = Vector2.Scale(cellSize, new Vector2(prop.Width, prop.Height));
-                    int start = vh.currentVertCount;
-                    Color tint = MeshPen.Alpha(prop.Kind == TerrainPropKind.Mountain || prop.Kind == TerrainPropKind.Rock ? NotebookPalette.Pencil : NotebookPalette.Green, .22f);
-                    vh.AddVert(at, tint, Vector2.zero); vh.AddVert(at + Vector2.right * size.x, tint, Vector2.zero);
-                    vh.AddVert(at + size, tint, Vector2.zero); vh.AddVert(at + Vector2.up * size.y, tint, Vector2.zero);
-                    vh.AddTriangle(start, start + 1, start + 2); vh.AddTriangle(start, start + 2, start + 3);
+                    string id = prop.Kind == TerrainPropKind.Mountain ? "terrain.mountain" : prop.Kind == TerrainPropKind.Pine ? "terrain.pine"
+                        : prop.Kind == TerrainPropKind.Broadleaf ? "terrain.oak" : prop.Kind == TerrainPropKind.Rock ? "terrain.rock" : "terrain.shrub";
+                    MiniArt(vh, id, new Rect(at, size));
                 }
                 foreach (var cell in battlefield.Roads)
                 {
@@ -980,9 +931,13 @@ namespace PaperDefense.Presentation
                     Arrow(vh, Point(cell, low, high), cell.X == 0 ? Vector2.right : cell.X == session.Balance.Width - 1 ? Vector2.left : cell.Y == 0 ? Vector2.up : Vector2.down);
             }
             Vector2 home = Point(session.BaseCell, low, high);
-            BlueprintSketch.Ring(vh, home, 7, 4, NotebookPalette.Navy);
+            MiniArt(vh, "object.castle", new Rect(home - Vector2.one * 17, Vector2.one * 34));
             for (int i = 0; i < session.Wells.Count; i++)
-            { var well = session.Wells[i]; BlueprintSketch.Ring(vh, Point(well.Cell, low, high), 5, 4, DoodleGlyphs.InkTone(well.Color)); }
+            {
+                var well = session.Wells[i]; var at = Point(well.Cell, low, high);
+                string id = well.Color == InkColor.Red ? "object.well.red" : well.Color == InkColor.Blue ? "object.well.blue" : "object.well.green";
+                MiniArt(vh, id, new Rect(at - Vector2.one * 12, Vector2.one * 24));
+            }
             int sides = battlefield != null ? 0 : session.Balance.Waves.Count > 0 ? session.Balance.Waves[0].Sides : 1;
             if ((sides & 1) != 0) Arrow(vh, new Vector2(low.x + 2, home.y), Vector2.right);
             if ((sides & 2) != 0) Arrow(vh, new Vector2(high.x - 2, home.y), Vector2.left);
@@ -990,6 +945,12 @@ namespace PaperDefense.Presentation
             if ((sides & 8) != 0) Arrow(vh, new Vector2(home.x, low.y + 2), Vector2.up);
         }
         Vector2 Point(Cell cell, Vector2 low, Vector2 high) => new Vector2(Mathf.Lerp(low.x, high.x, (cell.X + .5f) / session.Balance.Width), Mathf.Lerp(low.y, high.y, (cell.Y + .5f) / session.Balance.Height));
+        static void MiniArt(VertexHelper vh, string id, Rect available)
+        {
+            if (!NotebookSpriteCatalog.TryGetBounds(id, out var bounds)) return;
+            float scale = Mathf.Min(available.width / bounds.width, available.height / bounds.height);
+            NotebookSpriteCatalog.TryDrawUI(vh, id, available.center - bounds.center * scale, scale);
+        }
         static void Arrow(VertexHelper vh, Vector2 at, Vector2 direction)
         {
             Vector2 tip = at + direction * 20, side = new Vector2(-direction.y, direction.x) * 6;

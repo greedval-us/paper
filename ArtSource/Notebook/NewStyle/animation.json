@@ -1,0 +1,8761 @@
+{
+  "SchemaVersion": 1,
+  "Revision": "blue-pen-2026-10-17",
+  "MaximumTerminalTailSeconds": 1.2,
+  "MaximumEffects": 256,
+  "MaximumDeaths": 128,
+  "Palette": [
+    {
+      "r": 0.055,
+      "g": 0.17,
+      "b": 0.44,
+      "a": 1
+    },
+    {
+      "r": 0.16,
+      "g": 0.29,
+      "b": 0.49,
+      "a": 0.9
+    },
+    {
+      "r": 0.978,
+      "g": 0.957,
+      "b": 0.901,
+      "a": 1
+    },
+    {
+      "r": 0.85,
+      "g": 0.22,
+      "b": 0.27,
+      "a": 1
+    },
+    {
+      "r": 0.22,
+      "g": 0.48,
+      "b": 0.74,
+      "a": 1
+    },
+    {
+      "r": 0.25,
+      "g": 0.59,
+      "b": 0.43,
+      "a": 1
+    },
+    {
+      "r": 0.58,
+      "g": 0.66,
+      "b": 0.74,
+      "a": 0.18
+    },
+    {
+      "r": 1,
+      "g": 0.995,
+      "b": 0.96,
+      "a": 1
+    }
+  ],
+  "Shapes": [
+    {
+      "Id": "chassis.standard",
+      "TemplateId": "template.chassis.standard",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "chassis.heavy",
+      "TemplateId": "template.chassis.heavy",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "chassis.precision",
+      "TemplateId": "template.chassis.precision",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "chassis.battery",
+      "TemplateId": "template.chassis.battery",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "weapon.gun",
+      "TemplateId": "template.weapon.gun",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "weapon.piercer",
+      "TemplateId": "template.weapon.piercer",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "weapon.mortar",
+      "TemplateId": "template.weapon.mortar",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "weapon.fan",
+      "TemplateId": "template.weapon.fan",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "weapon.ricochet",
+      "TemplateId": "template.weapon.ricochet",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "weapon.stapler",
+      "TemplateId": "template.weapon.stapler",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "weapon.blotter",
+      "TemplateId": "template.weapon.blotter",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "module.armor",
+      "TemplateId": "template.module.armor",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "module.feed",
+      "TemplateId": "template.module.feed",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "module.tracking",
+      "TemplateId": "template.module.tracking",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "module.rail",
+      "TemplateId": "template.module.rail",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.sketch.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.outlined.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.doodle.hatched.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.sketch.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.outlined.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.runner.hatched.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.sketch.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.outlined.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.gnawer.hatched.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.sketch.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.outlined.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.spitter.hatched.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.sketch.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.outlined.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.brute.hatched.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.sketch.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.outlined.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.idle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.idle.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.idle.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.idle.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.walk",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.walk.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.walk.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.walk.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.attack",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.attack.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.attack.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.attack.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.hit.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.hit.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.hit.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.death",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.death.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.death.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "enemy.bulwark.hatched.death.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.castle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.castle.damaged",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.0",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.1",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.2",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.3",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.4",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.5",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.6",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.7",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.8",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.9",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.10",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.11",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.12",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.13",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.14",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.wall.15",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.spikes",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.well.red",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.well.red.active",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.well.blue",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.well.blue.active",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.well.green",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.well.green.active",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.blot",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.muzzle",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.tracer",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.piercer",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.mortar.projectile",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.mortar.explosion",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.fan",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.ricochet",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.stapler",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.cleanup",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.status.red",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.status.blue",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.status.green",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.blot.birth",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.blot.absorb",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.blot.cleanse",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.blot.expire",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.spitter.projectile",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.spitter.impact",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.well.activate",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.castle.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.well.hit",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "fx.structure.destroy",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.chassis.standard",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.chassis.heavy",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.chassis.precision",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.chassis.battery",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.weapon.gun",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.weapon.piercer",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.weapon.mortar",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.weapon.fan",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.weapon.ricochet",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.weapon.stapler",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.weapon.blotter",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.module.armor",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.module.feed",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.module.tracking",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.module.rail",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.material.pencil",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.material.pen",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.material.marker",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.ink.red",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.ink.blue",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.ink.green",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.tool.wall",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.tool.spikes",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.tool.erase",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.tool.select",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "terrain.mountain",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "terrain.ridge",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "terrain.pine",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "terrain.oak",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "terrain.rock",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "terrain.shrub",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.tar",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.repair",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.entrance",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "object.barricade-site",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.tool.tar",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.tool.repair",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.tool.upgrade",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.tool.blotter",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.tool.paint",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.action.wave",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    },
+    {
+      "Id": "ui.action.workshop",
+      "TemplateId": "",
+      "ReferenceRevision": 3,
+      "Marks": []
+    }
+  ],
+  "Clips": [
+    {
+      "Id": "enemy.doodle.sketch.idle",
+      "Duration": 0.9,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.doodle.sketch.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.225,
+          "ShapeId": "enemy.doodle.sketch.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.45,
+          "ShapeId": "enemy.doodle.sketch.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.675,
+          "ShapeId": "enemy.doodle.sketch.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.doodle.sketch.walk",
+      "Duration": 0.58,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.doodle.sketch.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.145,
+          "ShapeId": "enemy.doodle.sketch.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.29,
+          "ShapeId": "enemy.doodle.sketch.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.435,
+          "ShapeId": "enemy.doodle.sketch.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.doodle.sketch.attack",
+      "Duration": 0.36,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.doodle.sketch.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.09,
+          "ShapeId": "enemy.doodle.sketch.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.18,
+          "ShapeId": "enemy.doodle.sketch.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.27,
+          "ShapeId": "enemy.doodle.sketch.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.doodle.sketch.hit",
+      "Duration": 0.17,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.doodle.sketch.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.0425,
+          "ShapeId": "enemy.doodle.sketch.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.085,
+          "ShapeId": "enemy.doodle.sketch.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.1275,
+          "ShapeId": "enemy.doodle.sketch.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.doodle.sketch.death",
+      "Duration": 0.5,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.doodle.sketch.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.125,
+          "ShapeId": "enemy.doodle.sketch.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.25,
+          "ShapeId": "enemy.doodle.sketch.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.375,
+          "ShapeId": "enemy.doodle.sketch.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.doodle.outlined.idle",
+      "Duration": 0.9,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.doodle.outlined.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.225,
+          "ShapeId": "enemy.doodle.outlined.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.45,
+          "ShapeId": "enemy.doodle.outlined.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.675,
+          "ShapeId": "enemy.doodle.outlined.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.doodle.outlined.walk",
+      "Duration": 0.58,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.doodle.outlined.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.145,
+          "ShapeId": "enemy.doodle.outlined.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.29,
+          "ShapeId": "enemy.doodle.outlined.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.435,
+          "ShapeId": "enemy.doodle.outlined.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.doodle.outlined.attack",
+      "Duration": 0.36,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.doodle.outlined.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.09,
+          "ShapeId": "enemy.doodle.outlined.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.18,
+          "ShapeId": "enemy.doodle.outlined.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.27,
+          "ShapeId": "enemy.doodle.outlined.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.doodle.outlined.hit",
+      "Duration": 0.17,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.doodle.outlined.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.0425,
+          "ShapeId": "enemy.doodle.outlined.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.085,
+          "ShapeId": "enemy.doodle.outlined.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.1275,
+          "ShapeId": "enemy.doodle.outlined.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.doodle.outlined.death",
+      "Duration": 0.5,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.doodle.outlined.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.125,
+          "ShapeId": "enemy.doodle.outlined.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.25,
+          "ShapeId": "enemy.doodle.outlined.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.375,
+          "ShapeId": "enemy.doodle.outlined.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.doodle.hatched.idle",
+      "Duration": 0.9,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.doodle.hatched.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.225,
+          "ShapeId": "enemy.doodle.hatched.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.45,
+          "ShapeId": "enemy.doodle.hatched.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.675,
+          "ShapeId": "enemy.doodle.hatched.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.doodle.hatched.walk",
+      "Duration": 0.58,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.doodle.hatched.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.145,
+          "ShapeId": "enemy.doodle.hatched.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.29,
+          "ShapeId": "enemy.doodle.hatched.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.435,
+          "ShapeId": "enemy.doodle.hatched.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.doodle.hatched.attack",
+      "Duration": 0.36,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.doodle.hatched.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.09,
+          "ShapeId": "enemy.doodle.hatched.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.18,
+          "ShapeId": "enemy.doodle.hatched.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.27,
+          "ShapeId": "enemy.doodle.hatched.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.doodle.hatched.hit",
+      "Duration": 0.17,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.doodle.hatched.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.0425,
+          "ShapeId": "enemy.doodle.hatched.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.085,
+          "ShapeId": "enemy.doodle.hatched.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.1275,
+          "ShapeId": "enemy.doodle.hatched.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.doodle.hatched.death",
+      "Duration": 0.5,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.doodle.hatched.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.125,
+          "ShapeId": "enemy.doodle.hatched.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.25,
+          "ShapeId": "enemy.doodle.hatched.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.375,
+          "ShapeId": "enemy.doodle.hatched.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.runner.sketch.idle",
+      "Duration": 0.7,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.runner.sketch.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.175,
+          "ShapeId": "enemy.runner.sketch.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.35,
+          "ShapeId": "enemy.runner.sketch.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.525,
+          "ShapeId": "enemy.runner.sketch.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.runner.sketch.walk",
+      "Duration": 0.34,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.runner.sketch.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.085,
+          "ShapeId": "enemy.runner.sketch.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.17,
+          "ShapeId": "enemy.runner.sketch.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.255,
+          "ShapeId": "enemy.runner.sketch.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.runner.sketch.attack",
+      "Duration": 0.28,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.runner.sketch.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.07,
+          "ShapeId": "enemy.runner.sketch.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.14,
+          "ShapeId": "enemy.runner.sketch.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.21,
+          "ShapeId": "enemy.runner.sketch.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.runner.sketch.hit",
+      "Duration": 0.14,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.runner.sketch.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.035,
+          "ShapeId": "enemy.runner.sketch.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.07,
+          "ShapeId": "enemy.runner.sketch.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.105,
+          "ShapeId": "enemy.runner.sketch.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.runner.sketch.death",
+      "Duration": 0.42,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.runner.sketch.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.105,
+          "ShapeId": "enemy.runner.sketch.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.21,
+          "ShapeId": "enemy.runner.sketch.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.315,
+          "ShapeId": "enemy.runner.sketch.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.runner.outlined.idle",
+      "Duration": 0.7,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.runner.outlined.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.175,
+          "ShapeId": "enemy.runner.outlined.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.35,
+          "ShapeId": "enemy.runner.outlined.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.525,
+          "ShapeId": "enemy.runner.outlined.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.runner.outlined.walk",
+      "Duration": 0.34,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.runner.outlined.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.085,
+          "ShapeId": "enemy.runner.outlined.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.17,
+          "ShapeId": "enemy.runner.outlined.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.255,
+          "ShapeId": "enemy.runner.outlined.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.runner.outlined.attack",
+      "Duration": 0.28,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.runner.outlined.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.07,
+          "ShapeId": "enemy.runner.outlined.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.14,
+          "ShapeId": "enemy.runner.outlined.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.21,
+          "ShapeId": "enemy.runner.outlined.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.runner.outlined.hit",
+      "Duration": 0.14,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.runner.outlined.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.035,
+          "ShapeId": "enemy.runner.outlined.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.07,
+          "ShapeId": "enemy.runner.outlined.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.105,
+          "ShapeId": "enemy.runner.outlined.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.runner.outlined.death",
+      "Duration": 0.42,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.runner.outlined.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.105,
+          "ShapeId": "enemy.runner.outlined.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.21,
+          "ShapeId": "enemy.runner.outlined.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.315,
+          "ShapeId": "enemy.runner.outlined.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.runner.hatched.idle",
+      "Duration": 0.7,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.runner.hatched.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.175,
+          "ShapeId": "enemy.runner.hatched.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.35,
+          "ShapeId": "enemy.runner.hatched.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.525,
+          "ShapeId": "enemy.runner.hatched.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.runner.hatched.walk",
+      "Duration": 0.34,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.runner.hatched.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.085,
+          "ShapeId": "enemy.runner.hatched.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.17,
+          "ShapeId": "enemy.runner.hatched.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.255,
+          "ShapeId": "enemy.runner.hatched.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.runner.hatched.attack",
+      "Duration": 0.28,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.runner.hatched.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.07,
+          "ShapeId": "enemy.runner.hatched.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.14,
+          "ShapeId": "enemy.runner.hatched.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.21,
+          "ShapeId": "enemy.runner.hatched.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.runner.hatched.hit",
+      "Duration": 0.14,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.runner.hatched.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.035,
+          "ShapeId": "enemy.runner.hatched.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.07,
+          "ShapeId": "enemy.runner.hatched.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.105,
+          "ShapeId": "enemy.runner.hatched.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.runner.hatched.death",
+      "Duration": 0.42,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.runner.hatched.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.105,
+          "ShapeId": "enemy.runner.hatched.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.21,
+          "ShapeId": "enemy.runner.hatched.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.315,
+          "ShapeId": "enemy.runner.hatched.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.gnawer.sketch.idle",
+      "Duration": 1,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.gnawer.sketch.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.25,
+          "ShapeId": "enemy.gnawer.sketch.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.5,
+          "ShapeId": "enemy.gnawer.sketch.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.75,
+          "ShapeId": "enemy.gnawer.sketch.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.gnawer.sketch.walk",
+      "Duration": 0.66,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.gnawer.sketch.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.165,
+          "ShapeId": "enemy.gnawer.sketch.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.33,
+          "ShapeId": "enemy.gnawer.sketch.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.495,
+          "ShapeId": "enemy.gnawer.sketch.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.gnawer.sketch.attack",
+      "Duration": 0.42,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.gnawer.sketch.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.105,
+          "ShapeId": "enemy.gnawer.sketch.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.21,
+          "ShapeId": "enemy.gnawer.sketch.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.315,
+          "ShapeId": "enemy.gnawer.sketch.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.gnawer.sketch.hit",
+      "Duration": 0.18,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.gnawer.sketch.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.045,
+          "ShapeId": "enemy.gnawer.sketch.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.09,
+          "ShapeId": "enemy.gnawer.sketch.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.135,
+          "ShapeId": "enemy.gnawer.sketch.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.gnawer.sketch.death",
+      "Duration": 0.55,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.gnawer.sketch.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.1375,
+          "ShapeId": "enemy.gnawer.sketch.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.275,
+          "ShapeId": "enemy.gnawer.sketch.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.4125,
+          "ShapeId": "enemy.gnawer.sketch.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.gnawer.outlined.idle",
+      "Duration": 1,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.gnawer.outlined.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.25,
+          "ShapeId": "enemy.gnawer.outlined.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.5,
+          "ShapeId": "enemy.gnawer.outlined.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.75,
+          "ShapeId": "enemy.gnawer.outlined.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.gnawer.outlined.walk",
+      "Duration": 0.66,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.gnawer.outlined.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.165,
+          "ShapeId": "enemy.gnawer.outlined.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.33,
+          "ShapeId": "enemy.gnawer.outlined.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.495,
+          "ShapeId": "enemy.gnawer.outlined.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.gnawer.outlined.attack",
+      "Duration": 0.42,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.gnawer.outlined.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.105,
+          "ShapeId": "enemy.gnawer.outlined.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.21,
+          "ShapeId": "enemy.gnawer.outlined.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.315,
+          "ShapeId": "enemy.gnawer.outlined.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.gnawer.outlined.hit",
+      "Duration": 0.18,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.gnawer.outlined.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.045,
+          "ShapeId": "enemy.gnawer.outlined.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.09,
+          "ShapeId": "enemy.gnawer.outlined.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.135,
+          "ShapeId": "enemy.gnawer.outlined.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.gnawer.outlined.death",
+      "Duration": 0.55,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.gnawer.outlined.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.1375,
+          "ShapeId": "enemy.gnawer.outlined.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.275,
+          "ShapeId": "enemy.gnawer.outlined.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.4125,
+          "ShapeId": "enemy.gnawer.outlined.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.gnawer.hatched.idle",
+      "Duration": 1,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.gnawer.hatched.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.25,
+          "ShapeId": "enemy.gnawer.hatched.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.5,
+          "ShapeId": "enemy.gnawer.hatched.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.75,
+          "ShapeId": "enemy.gnawer.hatched.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.gnawer.hatched.walk",
+      "Duration": 0.66,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.gnawer.hatched.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.165,
+          "ShapeId": "enemy.gnawer.hatched.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.33,
+          "ShapeId": "enemy.gnawer.hatched.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.495,
+          "ShapeId": "enemy.gnawer.hatched.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.gnawer.hatched.attack",
+      "Duration": 0.42,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.gnawer.hatched.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.105,
+          "ShapeId": "enemy.gnawer.hatched.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.21,
+          "ShapeId": "enemy.gnawer.hatched.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.315,
+          "ShapeId": "enemy.gnawer.hatched.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.gnawer.hatched.hit",
+      "Duration": 0.18,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.gnawer.hatched.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.045,
+          "ShapeId": "enemy.gnawer.hatched.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.09,
+          "ShapeId": "enemy.gnawer.hatched.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.135,
+          "ShapeId": "enemy.gnawer.hatched.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.gnawer.hatched.death",
+      "Duration": 0.55,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.gnawer.hatched.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.1375,
+          "ShapeId": "enemy.gnawer.hatched.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.275,
+          "ShapeId": "enemy.gnawer.hatched.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.4125,
+          "ShapeId": "enemy.gnawer.hatched.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.spitter.sketch.idle",
+      "Duration": 1.1,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.spitter.sketch.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.275,
+          "ShapeId": "enemy.spitter.sketch.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.55,
+          "ShapeId": "enemy.spitter.sketch.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.825,
+          "ShapeId": "enemy.spitter.sketch.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.spitter.sketch.walk",
+      "Duration": 0.72,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.spitter.sketch.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.18,
+          "ShapeId": "enemy.spitter.sketch.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.36,
+          "ShapeId": "enemy.spitter.sketch.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.54,
+          "ShapeId": "enemy.spitter.sketch.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.spitter.sketch.attack",
+      "Duration": 0.5,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.spitter.sketch.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.125,
+          "ShapeId": "enemy.spitter.sketch.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.25,
+          "ShapeId": "enemy.spitter.sketch.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.375,
+          "ShapeId": "enemy.spitter.sketch.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.spitter.sketch.hit",
+      "Duration": 0.2,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.spitter.sketch.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.05,
+          "ShapeId": "enemy.spitter.sketch.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.1,
+          "ShapeId": "enemy.spitter.sketch.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "enemy.spitter.sketch.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.spitter.sketch.death",
+      "Duration": 0.6,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.spitter.sketch.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "enemy.spitter.sketch.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.3,
+          "ShapeId": "enemy.spitter.sketch.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.45,
+          "ShapeId": "enemy.spitter.sketch.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.spitter.outlined.idle",
+      "Duration": 1.1,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.spitter.outlined.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.275,
+          "ShapeId": "enemy.spitter.outlined.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.55,
+          "ShapeId": "enemy.spitter.outlined.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.825,
+          "ShapeId": "enemy.spitter.outlined.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.spitter.outlined.walk",
+      "Duration": 0.72,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.spitter.outlined.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.18,
+          "ShapeId": "enemy.spitter.outlined.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.36,
+          "ShapeId": "enemy.spitter.outlined.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.54,
+          "ShapeId": "enemy.spitter.outlined.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.spitter.outlined.attack",
+      "Duration": 0.5,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.spitter.outlined.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.125,
+          "ShapeId": "enemy.spitter.outlined.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.25,
+          "ShapeId": "enemy.spitter.outlined.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.375,
+          "ShapeId": "enemy.spitter.outlined.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.spitter.outlined.hit",
+      "Duration": 0.2,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.spitter.outlined.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.05,
+          "ShapeId": "enemy.spitter.outlined.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.1,
+          "ShapeId": "enemy.spitter.outlined.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "enemy.spitter.outlined.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.spitter.outlined.death",
+      "Duration": 0.6,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.spitter.outlined.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "enemy.spitter.outlined.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.3,
+          "ShapeId": "enemy.spitter.outlined.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.45,
+          "ShapeId": "enemy.spitter.outlined.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.spitter.hatched.idle",
+      "Duration": 1.1,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.spitter.hatched.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.275,
+          "ShapeId": "enemy.spitter.hatched.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.55,
+          "ShapeId": "enemy.spitter.hatched.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.825,
+          "ShapeId": "enemy.spitter.hatched.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.spitter.hatched.walk",
+      "Duration": 0.72,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.spitter.hatched.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.18,
+          "ShapeId": "enemy.spitter.hatched.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.36,
+          "ShapeId": "enemy.spitter.hatched.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.54,
+          "ShapeId": "enemy.spitter.hatched.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.spitter.hatched.attack",
+      "Duration": 0.5,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.spitter.hatched.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.125,
+          "ShapeId": "enemy.spitter.hatched.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.25,
+          "ShapeId": "enemy.spitter.hatched.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.375,
+          "ShapeId": "enemy.spitter.hatched.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.spitter.hatched.hit",
+      "Duration": 0.2,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.spitter.hatched.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.05,
+          "ShapeId": "enemy.spitter.hatched.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.1,
+          "ShapeId": "enemy.spitter.hatched.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "enemy.spitter.hatched.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.spitter.hatched.death",
+      "Duration": 0.6,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.spitter.hatched.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "enemy.spitter.hatched.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.3,
+          "ShapeId": "enemy.spitter.hatched.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.45,
+          "ShapeId": "enemy.spitter.hatched.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.brute.sketch.idle",
+      "Duration": 1.2,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.brute.sketch.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.3,
+          "ShapeId": "enemy.brute.sketch.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.6,
+          "ShapeId": "enemy.brute.sketch.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.9,
+          "ShapeId": "enemy.brute.sketch.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.brute.sketch.walk",
+      "Duration": 0.95,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.brute.sketch.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.2375,
+          "ShapeId": "enemy.brute.sketch.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.475,
+          "ShapeId": "enemy.brute.sketch.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.7125,
+          "ShapeId": "enemy.brute.sketch.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.brute.sketch.attack",
+      "Duration": 0.65,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.brute.sketch.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.1625,
+          "ShapeId": "enemy.brute.sketch.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.325,
+          "ShapeId": "enemy.brute.sketch.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.4875,
+          "ShapeId": "enemy.brute.sketch.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.brute.sketch.hit",
+      "Duration": 0.24,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.brute.sketch.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.06,
+          "ShapeId": "enemy.brute.sketch.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.12,
+          "ShapeId": "enemy.brute.sketch.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.18,
+          "ShapeId": "enemy.brute.sketch.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.brute.sketch.death",
+      "Duration": 0.8,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.brute.sketch.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.2,
+          "ShapeId": "enemy.brute.sketch.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.4,
+          "ShapeId": "enemy.brute.sketch.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.6,
+          "ShapeId": "enemy.brute.sketch.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.brute.outlined.idle",
+      "Duration": 1.2,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.brute.outlined.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.3,
+          "ShapeId": "enemy.brute.outlined.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.6,
+          "ShapeId": "enemy.brute.outlined.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.9,
+          "ShapeId": "enemy.brute.outlined.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.brute.outlined.walk",
+      "Duration": 0.95,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.brute.outlined.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.2375,
+          "ShapeId": "enemy.brute.outlined.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.475,
+          "ShapeId": "enemy.brute.outlined.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.7125,
+          "ShapeId": "enemy.brute.outlined.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.brute.outlined.attack",
+      "Duration": 0.65,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.brute.outlined.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.1625,
+          "ShapeId": "enemy.brute.outlined.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.325,
+          "ShapeId": "enemy.brute.outlined.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.4875,
+          "ShapeId": "enemy.brute.outlined.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.brute.outlined.hit",
+      "Duration": 0.24,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.brute.outlined.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.06,
+          "ShapeId": "enemy.brute.outlined.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.12,
+          "ShapeId": "enemy.brute.outlined.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.18,
+          "ShapeId": "enemy.brute.outlined.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.brute.outlined.death",
+      "Duration": 0.8,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.brute.outlined.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.2,
+          "ShapeId": "enemy.brute.outlined.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.4,
+          "ShapeId": "enemy.brute.outlined.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.6,
+          "ShapeId": "enemy.brute.outlined.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.brute.hatched.idle",
+      "Duration": 1.2,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.brute.hatched.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.3,
+          "ShapeId": "enemy.brute.hatched.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.6,
+          "ShapeId": "enemy.brute.hatched.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.9,
+          "ShapeId": "enemy.brute.hatched.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.brute.hatched.walk",
+      "Duration": 0.95,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.brute.hatched.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.2375,
+          "ShapeId": "enemy.brute.hatched.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.475,
+          "ShapeId": "enemy.brute.hatched.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.7125,
+          "ShapeId": "enemy.brute.hatched.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.brute.hatched.attack",
+      "Duration": 0.65,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.brute.hatched.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.1625,
+          "ShapeId": "enemy.brute.hatched.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.325,
+          "ShapeId": "enemy.brute.hatched.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.4875,
+          "ShapeId": "enemy.brute.hatched.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.brute.hatched.hit",
+      "Duration": 0.24,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.brute.hatched.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.06,
+          "ShapeId": "enemy.brute.hatched.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.12,
+          "ShapeId": "enemy.brute.hatched.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.18,
+          "ShapeId": "enemy.brute.hatched.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.brute.hatched.death",
+      "Duration": 0.8,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.brute.hatched.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.2,
+          "ShapeId": "enemy.brute.hatched.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.4,
+          "ShapeId": "enemy.brute.hatched.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.6,
+          "ShapeId": "enemy.brute.hatched.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.bulwark.sketch.idle",
+      "Duration": 1.1,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.bulwark.sketch.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.275,
+          "ShapeId": "enemy.bulwark.sketch.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.55,
+          "ShapeId": "enemy.bulwark.sketch.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.825,
+          "ShapeId": "enemy.bulwark.sketch.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.bulwark.sketch.walk",
+      "Duration": 0.8,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.bulwark.sketch.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.2,
+          "ShapeId": "enemy.bulwark.sketch.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.4,
+          "ShapeId": "enemy.bulwark.sketch.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.6,
+          "ShapeId": "enemy.bulwark.sketch.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.bulwark.sketch.attack",
+      "Duration": 0.5,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.bulwark.sketch.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.125,
+          "ShapeId": "enemy.bulwark.sketch.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.25,
+          "ShapeId": "enemy.bulwark.sketch.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.375,
+          "ShapeId": "enemy.bulwark.sketch.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.bulwark.sketch.hit",
+      "Duration": 0.22,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.bulwark.sketch.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.055,
+          "ShapeId": "enemy.bulwark.sketch.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.11,
+          "ShapeId": "enemy.bulwark.sketch.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.165,
+          "ShapeId": "enemy.bulwark.sketch.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.bulwark.sketch.death",
+      "Duration": 0.68,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.bulwark.sketch.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.17,
+          "ShapeId": "enemy.bulwark.sketch.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.34,
+          "ShapeId": "enemy.bulwark.sketch.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.51,
+          "ShapeId": "enemy.bulwark.sketch.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.bulwark.outlined.idle",
+      "Duration": 1.1,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.bulwark.outlined.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.275,
+          "ShapeId": "enemy.bulwark.outlined.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.55,
+          "ShapeId": "enemy.bulwark.outlined.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.825,
+          "ShapeId": "enemy.bulwark.outlined.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.bulwark.outlined.walk",
+      "Duration": 0.8,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.bulwark.outlined.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.2,
+          "ShapeId": "enemy.bulwark.outlined.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.4,
+          "ShapeId": "enemy.bulwark.outlined.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.6,
+          "ShapeId": "enemy.bulwark.outlined.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.bulwark.outlined.attack",
+      "Duration": 0.5,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.bulwark.outlined.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.125,
+          "ShapeId": "enemy.bulwark.outlined.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.25,
+          "ShapeId": "enemy.bulwark.outlined.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.375,
+          "ShapeId": "enemy.bulwark.outlined.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.bulwark.outlined.hit",
+      "Duration": 0.22,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.bulwark.outlined.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.055,
+          "ShapeId": "enemy.bulwark.outlined.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.11,
+          "ShapeId": "enemy.bulwark.outlined.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.165,
+          "ShapeId": "enemy.bulwark.outlined.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.bulwark.outlined.death",
+      "Duration": 0.68,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.bulwark.outlined.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.17,
+          "ShapeId": "enemy.bulwark.outlined.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.34,
+          "ShapeId": "enemy.bulwark.outlined.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.51,
+          "ShapeId": "enemy.bulwark.outlined.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "enemy.bulwark.hatched.idle",
+      "Duration": 1.1,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.bulwark.hatched.idle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.275,
+          "ShapeId": "enemy.bulwark.hatched.idle.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.55,
+          "ShapeId": "enemy.bulwark.hatched.idle.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.825,
+          "ShapeId": "enemy.bulwark.hatched.idle.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.bulwark.hatched.walk",
+      "Duration": 0.8,
+      "Loop": true,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.bulwark.hatched.walk",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.2,
+          "ShapeId": "enemy.bulwark.hatched.walk.1",
+          "Offset": {
+            "x": 0,
+            "y": 0.025
+          },
+          "Rotation": 0.018,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.4,
+          "ShapeId": "enemy.bulwark.hatched.walk.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.6,
+          "ShapeId": "enemy.bulwark.hatched.walk.3",
+          "Offset": {
+            "x": 0,
+            "y": -0.025
+          },
+          "Rotation": -0.018,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.bulwark.hatched.attack",
+      "Duration": 0.5,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.bulwark.hatched.attack",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.125,
+          "ShapeId": "enemy.bulwark.hatched.attack.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.25,
+          "ShapeId": "enemy.bulwark.hatched.attack.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.375,
+          "ShapeId": "enemy.bulwark.hatched.attack.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.bulwark.hatched.hit",
+      "Duration": 0.22,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.bulwark.hatched.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.055,
+          "ShapeId": "enemy.bulwark.hatched.hit.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.11,
+          "ShapeId": "enemy.bulwark.hatched.hit.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.165,
+          "ShapeId": "enemy.bulwark.hatched.hit.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        }
+      ]
+    },
+    {
+      "Id": "enemy.bulwark.hatched.death",
+      "Duration": 0.68,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "enemy.bulwark.hatched.death",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.17,
+          "ShapeId": "enemy.bulwark.hatched.death.1",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.34,
+          "ShapeId": "enemy.bulwark.hatched.death.2",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.51,
+          "ShapeId": "enemy.bulwark.hatched.death.3",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.muzzle",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.muzzle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.muzzle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.muzzle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.muzzle",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.tracer",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.tracer",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.tracer",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.tracer",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.tracer",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.piercer",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.piercer",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.piercer",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.piercer",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.piercer",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.mortar.projectile",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.mortar.projectile",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.mortar.projectile",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.mortar.projectile",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.mortar.projectile",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.mortar.explosion",
+      "Duration": 0.48,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.mortar.explosion",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.12,
+          "ShapeId": "fx.mortar.explosion",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.24,
+          "ShapeId": "fx.mortar.explosion",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.36,
+          "ShapeId": "fx.mortar.explosion",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.fan",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.fan",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.fan",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.fan",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.fan",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.ricochet",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.ricochet",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.ricochet",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.ricochet",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.ricochet",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.stapler",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.stapler",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.stapler",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.stapler",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.stapler",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.cleanup",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.cleanup",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.cleanup",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.cleanup",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.cleanup",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.status.red",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.status.red",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.status.red",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.status.red",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.status.red",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.status.blue",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.status.blue",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.status.blue",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.status.blue",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.status.blue",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.status.green",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.status.green",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.status.green",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.status.green",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.status.green",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.blot.birth",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.blot.birth",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.blot.birth",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.blot.birth",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.blot.birth",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.blot.absorb",
+      "Duration": 0.48,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.blot.absorb",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.12,
+          "ShapeId": "fx.blot.absorb",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.24,
+          "ShapeId": "fx.blot.absorb",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.36,
+          "ShapeId": "fx.blot.absorb",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.blot.cleanse",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.blot.cleanse",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.blot.cleanse",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.blot.cleanse",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.blot.cleanse",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.blot.expire",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.blot.expire",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.blot.expire",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.blot.expire",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.blot.expire",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.spitter.projectile",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.spitter.projectile",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.spitter.projectile",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.spitter.projectile",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.spitter.projectile",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.spitter.impact",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.spitter.impact",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.spitter.impact",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.spitter.impact",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.spitter.impact",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.well.activate",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.well.activate",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.well.activate",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.well.activate",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.well.activate",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.castle.hit",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.castle.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.castle.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.castle.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.castle.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.well.hit",
+      "Duration": 0.3,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.well.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.075,
+          "ShapeId": "fx.well.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.15,
+          "ShapeId": "fx.well.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.22499999999999998,
+          "ShapeId": "fx.well.hit",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    },
+    {
+      "Id": "fx.structure.destroy",
+      "Duration": 0.48,
+      "Loop": false,
+      "Frames": [
+        {
+          "Time": 0.0,
+          "ShapeId": "fx.structure.destroy",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 0.55,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.12,
+          "ShapeId": "fx.structure.destroy",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1,
+          "Alpha": 1
+        },
+        {
+          "Time": 0.24,
+          "ShapeId": "fx.structure.destroy",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.3,
+          "Alpha": 0.5
+        },
+        {
+          "Time": 0.36,
+          "ShapeId": "fx.structure.destroy",
+          "Offset": {
+            "x": 0,
+            "y": 0
+          },
+          "Rotation": 0,
+          "Scale": 1.5,
+          "Alpha": 0
+        }
+      ]
+    }
+  ],
+  "Recoils": [
+    {
+      "WeaponId": "weapon.gun",
+      "EffectId": "fx.muzzle",
+      "Duration": 0.16,
+      "Distance": 0.075,
+      "Muzzle": {
+        "x": 0,
+        "y": 0.55
+      },
+      "Keys": [
+        {
+          "Time": 0,
+          "Value": 0
+        },
+        {
+          "Time": 0.024,
+          "Value": 1
+        },
+        {
+          "Time": 0.064,
+          "Value": 0.74
+        },
+        {
+          "Time": 0.16,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "WeaponId": "weapon.piercer",
+      "EffectId": "fx.piercer",
+      "Duration": 0.24,
+      "Distance": 0.12,
+      "Muzzle": {
+        "x": 0,
+        "y": 0.68
+      },
+      "Keys": [
+        {
+          "Time": 0,
+          "Value": 0
+        },
+        {
+          "Time": 0.036,
+          "Value": 1
+        },
+        {
+          "Time": 0.096,
+          "Value": 0.74
+        },
+        {
+          "Time": 0.24,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "WeaponId": "weapon.mortar",
+      "EffectId": "fx.muzzle",
+      "Duration": 0.32,
+      "Distance": 0.15,
+      "Muzzle": {
+        "x": 0,
+        "y": 0.45
+      },
+      "Keys": [
+        {
+          "Time": 0,
+          "Value": 0
+        },
+        {
+          "Time": 0.048,
+          "Value": 1
+        },
+        {
+          "Time": 0.128,
+          "Value": 0.74
+        },
+        {
+          "Time": 0.32,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "WeaponId": "weapon.fan",
+      "EffectId": "fx.fan",
+      "Duration": 0.22,
+      "Distance": 0.085,
+      "Muzzle": {
+        "x": 0,
+        "y": 0.55
+      },
+      "Keys": [
+        {
+          "Time": 0,
+          "Value": 0
+        },
+        {
+          "Time": 0.033,
+          "Value": 1
+        },
+        {
+          "Time": 0.08800000000000001,
+          "Value": 0.74
+        },
+        {
+          "Time": 0.22,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "WeaponId": "weapon.ricochet",
+      "EffectId": "fx.ricochet",
+      "Duration": 0.2,
+      "Distance": 0.07,
+      "Muzzle": {
+        "x": 0,
+        "y": 0.5
+      },
+      "Keys": [
+        {
+          "Time": 0,
+          "Value": 0
+        },
+        {
+          "Time": 0.03,
+          "Value": 1
+        },
+        {
+          "Time": 0.08000000000000002,
+          "Value": 0.74
+        },
+        {
+          "Time": 0.2,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "WeaponId": "weapon.stapler",
+      "EffectId": "fx.stapler",
+      "Duration": 0.24,
+      "Distance": 0.1,
+      "Muzzle": {
+        "x": 0,
+        "y": 0.53
+      },
+      "Keys": [
+        {
+          "Time": 0,
+          "Value": 0
+        },
+        {
+          "Time": 0.036,
+          "Value": 1
+        },
+        {
+          "Time": 0.096,
+          "Value": 0.74
+        },
+        {
+          "Time": 0.24,
+          "Value": 0
+        }
+      ]
+    },
+    {
+      "WeaponId": "weapon.blotter",
+      "EffectId": "fx.cleanup",
+      "Duration": 0.3,
+      "Distance": 0.045,
+      "Muzzle": {
+        "x": 0,
+        "y": 0.39
+      },
+      "Keys": [
+        {
+          "Time": 0,
+          "Value": 0
+        },
+        {
+          "Time": 0.045,
+          "Value": 1
+        },
+        {
+          "Time": 0.12,
+          "Value": 0.74
+        },
+        {
+          "Time": 0.3,
+          "Value": 0
+        }
+      ]
+    }
+  ]
+}

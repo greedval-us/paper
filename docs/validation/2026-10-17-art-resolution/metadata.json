@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-17",
+  "unity": "6000.5.7f1",
+  "canonicalScreens": "docs/design/game-concept-art-2026-10-16/screens",
+  "productionSource": "ArtSource/Notebook/NewStyle",
+  "atlas": {
+    "width": 4128,
+    "height": 4128,
+    "uniqueSprites": 80,
+    "aliases": 431,
+    "shapeBindings": 465,
+    "clips": 112,
+    "recoils": 7
+  },
+  "generation": "ArtSource/Notebook/NewStyle/generation.json",
+  "supportedSizes": [
+    [
+      1024,
+      768
+    ],
+    [
+      1280,
+      720
+    ],
+    [
+      1280,
+      960
+    ],
+    [
+      1600,
+      900
+    ],
+    [
+      1920,
+      1080
+    ]
+  ],
+  "layout": "contain: native image proportions; paper fills additional window space",
+  "review": {
+    "fixed": [
+      "EnvelopeParent crops",
+      "long blueprint names and descriptions",
+      "native-density captions at 1024x768",
+      "pending resolution preserved across resize",
+      "destroyed cached Unity Sprite recreation"
+    ],
+    "remaining": "Workshop and full battle HUD compositions are later roadmap steps."
+  }
+}

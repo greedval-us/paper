@@ -7,6 +7,7 @@ namespace PaperDefense.Presentation
     [RequireComponent(typeof(CanvasRenderer))]
     internal sealed class TrialLaneBatchGraphic : MaskableGraphic
     {
+        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         TrialLaneSketch owner;
         int batchIndex;
 

@@ -8,38 +8,27 @@ namespace PaperDefense.Presentation
     {
         void BuildNotebookHome()
         {
-            var backdrop = PlayerUi.Graphic<Image>(page, "Home illustration", new Rect(0, 0, W, H));
-            backdrop.sprite = Resources.Load<Sprite>("Art/Player/HomeDefenseLandscape");
-            backdrop.color = backdrop.sprite != null ? Color.white : PlayerUi.Paper;
-            if (backdrop.sprite != null)
-            {
-                var fit = backdrop.gameObject.AddComponent<AspectRatioFitter>();
-                fit.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
-                fit.aspectRatio = backdrop.sprite.rect.width / backdrop.sprite.rect.height;
-            }
+            Rect composition = NotebookPageBackdrop("Art/Player/HomeDefenseLandscape", "Home illustration");
 
-            // Controls honour accessibility scale; only decorative branding yields when height is tight.
-            float responsive = Mathf.Min(W / 1600f, H / 900f);
-            float scale = responsive * game.InterfaceScale;
-            float brandAvailable = H - 450 * scale - 135 * responsive;
+            // Layout follows the size of the complete landscape page, without a second UI scale.
+            float responsive = Mathf.Min(composition.width / 1600f, composition.height / 900f);
+            float scale = responsive;
+            float brandAvailable = composition.height - 450 * scale - 135 * responsive;
             float brandScale = Mathf.Min(scale, Mathf.Max(0, brandAvailable) / 305);
             float brandHeight = 305 * brandScale;
             float gap = 29 * responsive;
             float blockHeight = brandHeight + gap + 450 * scale;
-            float top = Mathf.Max(22 * responsive, (H - 60 * responsive - blockHeight) * .5f);
-            float left = 44 * responsive;
+            float top = composition.y + Mathf.Max(22 * responsive, (composition.height - 60 * responsive - blockHeight) * .5f);
+            float left = composition.x + 44 * responsive;
 
-            // A paper strip protects live controls when the landscape crops on narrower screens.
-            if (W / H < 1.55f || game.InterfaceScale > 1)
+            var brand = ui.Panel(page, "Home wordmark", new Rect(composition.x + 32 * responsive, top, Mathf.Max(500 * brandScale, 402 * scale), brandHeight), Color.clear);
+            if (NotebookSpriteCatalog.TryGet("logo.home", out var wordmark))
             {
-                float stripWidth = Mathf.Max(490 * responsive, left + 438 * scale);
-                var strip = PlayerUi.Graphic<Image>(page, "Home control paper", new Rect(0, 0, stripWidth, H));
-                strip.color = PlayerUi.Paper;
-                PlayerUi.Graphic<PlayerPaperGraphic>(strip.transform, "Paper ruling", new Rect(0, 0, stripWidth, H));
+                NotebookSprite(brand, "Home title illustration", wordmark,
+                    new Rect(-4 * brandScale, 0, 512 * brandScale, 240 * brandScale));
+                HomeLettering(brand, "Нарисуй свою оборону", new Rect(40 * brandScale, 250 * brandScale, 450 * brandScale, 52 * brandScale), 39 * brandScale);
             }
-
-            var brand = ui.Panel(page, "Home wordmark", new Rect(32 * responsive, top, Mathf.Max(500 * brandScale, 402 * scale), brandHeight), Color.clear);
-            if (brandScale < scale * .60f)
+            else if (brandScale < scale * .60f)
             {
                 var compactTitle = HomeLettering(brand, "ДЕРЖИ ЛИНИЮ", new Rect(0, 0, 402 * scale, brandHeight), 54 * scale);
                 compactTitle.fontStyle = FontStyle.Bold;
@@ -79,8 +68,9 @@ namespace PaperDefense.Presentation
 
             int waves = game.Run.Session.Balance.Waves.Count;
             string waveCopy = waves == 8 ? "Восемь волн." : waves + " волн.";
-            HomeLettering(page, "Четыре чертежа. " + waveCopy,
-                new Rect(left, H - 50 * responsive, 360 * responsive, 38 * responsive), 20 * responsive);
+            HomeLettering(page, "Четыре чертежа.\n" + waveCopy,
+                new Rect(left, composition.yMax - 74 * responsive, 260 * responsive, 64 * responsive),
+                Mathf.Max(14 / Layout.Scale, 20 * responsive));
         }
 
         Text HomeLettering(Transform parent, string copy, Rect bounds, float fontSize)
@@ -100,9 +90,11 @@ namespace PaperDefense.Presentation
             var size = button.gameObject.AddComponent<LayoutElement>();
             size.minWidth = size.preferredWidth = width * scale;
             size.minHeight = size.preferredHeight = height * scale;
-            float iconSize = (primary ? 68 : 62) * scale;
+            float iconSize = Mathf.Min(68, height * .76f) * scale;
             var symbol = button.GetComponentInChildren<PlayerIconGraphic>();
             PlayerUi.Place(symbol.rectTransform, new Rect(22 * scale, (height * scale - iconSize) * .5f, iconSize, iconSize));
+            if (!primary)
+                NotebookControlIcon(button, name == "workshop" ? "icon.workshop" : name == "help" ? "icon.help" : NotebookIconId(icon));
             var captionText = button.GetComponentInChildren<Text>();
             captionText.rectTransform.offsetMin = new Vector2(108 * scale, 6 * scale);
             captionText.rectTransform.offsetMax = new Vector2(-14 * scale, -6 * scale);

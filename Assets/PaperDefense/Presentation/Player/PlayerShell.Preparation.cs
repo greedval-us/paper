@@ -10,26 +10,26 @@ namespace PaperDefense.Presentation
     {
         void Preparation()
         {
-            NotebookPageBackdrop("Art/Player/PreparationLandscape");
+            Rect composition = NotebookPageBackdrop("Art/Player/PreparationLandscape");
             NotebookScreenHeader("Подготовка", () => game.Navigate(PlayerPage.Map),
-                ui.T("mission") + " · " + game.Run.Session.Balance.Waves.Count + " волн", true);
+                ui.T("mission") + " · " + game.Run.Session.Balance.Waves.Count + " волн", true, composition);
 
             // Keep all four choices, materials and navigation on one notebook page. When height
             // is tight, decoration yields first, followed by illustration and description space.
-            float scale = Mathf.Min(W / 1600f, H / 900f) * game.InterfaceScale;
+            float scale = Mathf.Min(composition.width / 1600f, composition.height / 900f);
             float margin = 24 * scale;
-            bool wide = W >= 1200 && H >= 700;
-            float width = wide ? Mathf.Min(W - margin * 2, W * .77f) : W - margin * 2;
-            float left = (W - width) * .5f;
+            bool wide = composition.width >= 1200 && composition.height >= 700;
+            float width = wide ? Mathf.Min(composition.width - margin * 2, composition.width * .77f) : composition.width - margin * 2;
+            float left = composition.x + (composition.width - width) * .5f;
             float footerHeight = 56 * scale;
-            float footerY = H - 16 - footerHeight;
+            float footerY = composition.yMax - 16 * scale - footerHeight;
             float gap = 12 * scale;
             float cardWidth = (width - gap * 3) / 4;
             float titleHeight = 64 * scale;
             bool ready = PreparationReady(out int validCount, out string readiness);
-            float materialHeight = (ready ? 74 : 100) * scale;
+            float materialHeight = Mathf.Max((ready ? 80 : 100) * scale, (ready ? 68 : 94) / Layout.Scale);
             float bodyBottom = footerY - 10 * scale;
-            float top = (wide ? 280 : 100) * scale;
+            float top = composition.y + (wide ? 280 : 100) * scale;
             float cardHeight = bodyBottom - top - titleHeight - 8 * scale - materialHeight;
             bool longNames = false;
             foreach (var blueprint in game.Run.Workshop.Loadout)
@@ -37,10 +37,10 @@ namespace PaperDefense.Presentation
             float minimumCardHeight = (longNames ? 330 : 250) * scale;
             if (cardHeight < minimumCardHeight)
             {
-                top = Mathf.Max(72 * scale, top - (minimumCardHeight - cardHeight));
+                top = Mathf.Max(composition.y + 72 * scale, top - (minimumCardHeight - cardHeight));
                 cardHeight = bodyBottom - top - titleHeight - 8 * scale - materialHeight;
             }
-            cardHeight = Mathf.Min(392 * scale, cardHeight);
+            cardHeight = Mathf.Min(400 * scale, cardHeight);
             // Extra height belongs to the landscape above the title, rather than an empty band
             // between the material row and navigation (especially in a taller 4:3 window).
             top = bodyBottom - titleHeight - cardHeight - 8 * scale - materialHeight;
@@ -65,7 +65,7 @@ namespace PaperDefense.Presentation
             PreparationMaterials(body, new Rect(0, materialY, width, materialHeight), scale,
                 validCount, ready ? "" : readiness);
 
-            var footer = ui.Panel(page, "Preparation navigation", new Rect(margin, footerY, W - margin * 2, footerHeight), Color.clear);
+            var footer = ui.Panel(page, "Preparation navigation", new Rect(composition.x + margin, footerY, composition.width - margin * 2, footerHeight), Color.clear);
             var footerFlow = footer.gameObject.AddComponent<HorizontalLayoutGroup>();
             footerFlow.spacing = 16 * scale;
             footerFlow.childControlWidth = footerFlow.childControlHeight = true;
@@ -96,8 +96,13 @@ namespace PaperDefense.Presentation
             bool tight = height < 330 * scale;
             float replaceHeight = (tight ? 36 : 42) * scale;
             string caption = blueprint == null ? ui.T("empty") : GameText.Resolve(blueprint.Name);
-            float nameHeight = (caption.Length > 26 ? 88 : 44) * scale, costHeight = 32 * scale;
-            float descriptionHeight = (tight ? 52 : 68) * scale;
+            float nameHeight = caption.Length > 26
+                ? Mathf.Max(88 * scale, 72 / Layout.Scale)
+                : Mathf.Max(38 * scale, 24 / Layout.Scale);
+            float costHeight = 32 * scale;
+            // The physical text floor needs two complete handwritten lines even on a 1024px
+            // page. Text takes this space from the illustration, rather than being truncated.
+            float descriptionHeight = Mathf.Max((tight ? 44 : 52) * scale, 48 / Layout.Scale);
             float artHeight = height - (64 * scale + nameHeight + descriptionHeight + replaceHeight);
             float nameY = 20 * scale + artHeight;
             float descriptionY = nameY + nameHeight;
@@ -107,12 +112,13 @@ namespace PaperDefense.Presentation
             NotebookLabel(number, (slot + 1).ToString(), new Rect(0, 0, 36 * scale, 36 * scale),
                 Mathf.RoundToInt(28 * scale), alignment: TextAnchor.MiddleCenter);
             var name = NotebookLabel(card, caption,
-                new Rect(10 * scale, nameY, width - 20 * scale, nameHeight), Mathf.RoundToInt(26 * scale),
+                new Rect(10 * scale, nameY, width - 20 * scale, nameHeight), Mathf.RoundToInt(25 * scale),
                 alignment: TextAnchor.MiddleCenter);
             name.name = "Loadout name " + slot;
+            name.fontStyle = FontStyle.Bold;
             name.resizeTextMinSize = Mathf.CeilToInt(15 / Layout.Scale);
             var description = NotebookLabel(card, PreparationBlueprintDescription(blueprint),
-                new Rect(12 * scale, descriptionY, width - 24 * scale, descriptionHeight), Mathf.RoundToInt(19 * scale),
+                new Rect(12 * scale, descriptionY, width - 24 * scale, descriptionHeight), Mathf.RoundToInt(18 * scale),
                 alignment: TextAnchor.MiddleCenter);
             description.name = "Loadout description " + slot;
             description.resizeTextMinSize = Mathf.CeilToInt(15 / Layout.Scale);
@@ -123,6 +129,7 @@ namespace PaperDefense.Presentation
             cost.name = "Loadout cost " + slot;
             var pencil = PlayerUi.Graphic<PlayerIconGraphic>(card, "Cost pencil", new Rect(16 * scale, costY + 2 * scale, 27 * scale, 27 * scale));
             pencil.Icon = PlayerIcon.Pencil; pencil.Sketch = true; pencil.color = PlayerUi.Ink;
+            NotebookInkIcon(pencil, "icon.pencil");
             NotebookAction(card, "Replace blueprint " + slot, new Rect(10 * scale, height - 6 * scale - replaceHeight, width - 20 * scale, replaceHeight),
                 PlayerIcon.Restart, "Заменить", () => OpenBlueprintPicker(slot));
         }
@@ -150,8 +157,12 @@ namespace PaperDefense.Presentation
                 button.GetComponent<PlayerTooltip>().Message = ui.T("material_" + i);
                 ui.MarkSelected(button, (int)game.Drawing.Tier == i);
             }
-            NotebookLabel(materials, ui.T("material_" + (int)game.Drawing.Tier),
-                new Rect(14 * scale, 51 * scale, materialWidth - 28 * scale, 19 * scale), Mathf.RoundToInt(18 * scale));
+            var description = NotebookLabel(materials, ui.T("material_" + (int)game.Drawing.Tier),
+                new Rect(14 * scale, Mathf.Max(51 * scale, 36 / Layout.Scale), materialWidth - 28 * scale,
+                    Mathf.Max(19 * scale, 26 / Layout.Scale)), Mathf.Max(Mathf.CeilToInt(15 / Layout.Scale), Mathf.RoundToInt(18 * scale)));
+            description.name = "Preparation material description";
+            description.resizeTextMinSize = Mathf.CeilToInt(15 / Layout.Scale);
+            description.resizeTextMaxSize = Mathf.Max(description.resizeTextMinSize, description.resizeTextMaxSize);
 
             var summary = ui.Panel(parent, "Preparation summary", new Rect(bounds.x + materialWidth + gap, bounds.y, summaryWidth, bounds.height), PlayerUi.Card);
             NotebookLabel(summary, "Старт: " + game.Run.Session.Balance.StartingInk + " штрихов",

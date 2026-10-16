@@ -21,6 +21,8 @@ namespace PaperDefense.Presentation
                 case SimulationEventKind.BaseHit: return "fx.castle.hit";
                 case SimulationEventKind.InkWellHit: return "fx.well.hit";
                 case SimulationEventKind.InkWellActivated: return "fx.well.activate";
+                case SimulationEventKind.StructureErased: return "fx.cleanup";
+                case SimulationEventKind.StructureCompleted: return "fx.well.activate";
                 case SimulationEventKind.Shot:
                     return item.Attack == AttackKind.Line ? "fx.piercer" : item.Attack == AttackKind.Cone ? "fx.fan"
                         : item.Attack == AttackKind.Ricochet ? "fx.ricochet" : item.Attack == AttackKind.Radial ? "fx.stapler"
@@ -45,18 +47,12 @@ namespace PaperDefense.Presentation
             int seed = (int)item.Sequence;
             if (item.Kind == SimulationEventKind.StructureErased)
             {
-                // Short paper-coloured rub and crumbs, distinct from an ink explosion.
-                for (int i = 0; i < 5; i++)
-                {
-                    Vector2 a = at + new Vector2(-.48f + t * .28f, -.3f + i * .14f);
-                    pen.Line(a, a + new Vector2(.72f, .09f), .09f, MeshPen.Alpha(NotebookPalette.Paper, fade));
-                    pen.Line(a - Vector2.right * .1f, a + new Vector2(-.04f, .04f), .025f, MeshPen.Alpha(NotebookPalette.Pencil, fade * .6f));
-                }
+                DrawResource(pen, theme, id, at, age, fade);
                 return;
             }
             if (item.Kind == SimulationEventKind.StructureCompleted)
             {
-                pen.Ring(at, .5f + t * .15f, .025f, MeshPen.Alpha(NotebookPalette.Navy, fade * .5f), 24, dashed: true);
+                DrawResource(pen, theme, id, at, age, fade, .7f + t * .2f);
                 return;
             }
             if (item.Kind == SimulationEventKind.WeaponActionStarted)
@@ -75,18 +71,17 @@ namespace PaperDefense.Presentation
                         new Vector2(footprint.SideRadius, footprint.ForwardRadius), angle);
                 }
                 else if (!item.ImpactFootprint.HasValue) DrawResource(pen, theme, id, at, age, fade, radius);
-                Color orange = new Color(.85f, .46f, .2f, fade * .75f);
+                Color ink = MeshPen.Alpha(NotebookPalette.Blue, fade * .75f);
                 // The perimeter stays at the actual affected area while the inner rings expand.
-                DrawFootprint(pen, at, item.ImpactFootprint, item.Radius, 1, .025f, orange, 32, seed);
-                DrawFootprint(pen, at, item.ImpactFootprint, item.Radius, .6f + t * .4f, .065f * fade + .025f, orange, 32, seed * 13);
+                DrawFootprint(pen, at, item.ImpactFootprint, item.Radius, 1, .025f, ink, 32, seed);
+                DrawFootprint(pen, at, item.ImpactFootprint, item.Radius, .6f + t * .4f, .065f * fade + .025f, ink, 32, seed * 13);
                 DrawFootprint(pen, at, item.ImpactFootprint, item.Radius, .45f + t * .4f, .035f,
-                    MeshPen.Alpha(orange, fade * .35f), 32, seed * 19);
+                    MeshPen.Alpha(ink, fade * .35f), 32, seed * 19);
                 return;
             }
             if (item.Kind == SimulationEventKind.StructureDestroyed)
             {
                 DrawResource(pen, theme, id, at, age, fade, 1 + t * .5f);
-                pen.Star(at, .4f + t * .45f, MeshPen.Alpha(NotebookPalette.Red, fade * .7f), .045f, 7, seed);
                 return;
             }
             if (item.Kind != SimulationEventKind.Shot)
@@ -107,7 +102,6 @@ namespace PaperDefense.Presentation
                 Vector2 from = item.Attack == AttackKind.Line || item.Attack == AttackKind.Ricochet ? muzzle
                     : Vector2.Lerp(muzzle, at, Mathf.Clamp01(t * .75f));
                 pen.Line(from, at, width, color);
-                pen.Star(at, .13f + t * .12f, color, .025f, 4, seed * 1.3f);
             }
             DrawResource(pen, theme, id, at, age, fade);
         }
@@ -116,7 +110,7 @@ namespace PaperDefense.Presentation
             float age, float fade, float scale = 1, Vector2? localScale = null, float radians = 0)
         {
             var frame = theme?.FindClip(id)?.Sample(age);
-            NotebookArtRenderer.Draw(pen, theme?.FindShape(frame?.ShapeId ?? id), at + (frame?.Offset ?? Vector2.zero),
+            DoodleGlyphs.DrawResource(pen, frame?.ShapeId ?? id, at + (frame?.Offset ?? Vector2.zero),
                 scale * (frame?.Scale ?? 1), radians + (frame?.Rotation ?? 0), opacity: fade * (frame?.Alpha ?? 1),
                 localScale: localScale, theme: theme);
         }

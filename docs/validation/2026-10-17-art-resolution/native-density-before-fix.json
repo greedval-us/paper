@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "2681bb901d2042329c8ab708685cc8a5",
+    "status": "failed",
+    "mode": "PlayMode",
+    "started_unix_ms": 1792188370523,
+    "finished_unix_ms": 1792188376408,
+    "last_update_unix_ms": 1792188376408,
+    "progress": {
+      "completed": 1,
+      "total": 1,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": null,
+      "last_finished_test_full_name": "PaperDefense.Tests.PlayerJourneyTests.SettingsCaptionsFitAtNativePixelDensityAcrossSupportedWindows",
+      "last_finished_unix_ms": 1792188376378,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "run_in_background": true,
+      "focus_nudge_attempts": null,
+      "focus_nudge_limit": null,
+      "focus_nudge_status": null,
+      "blocked_reason": null,
+      "failures_so_far": [
+        {
+          "full_name": "PaperDefense.Tests.PlayerJourneyTests.SettingsCaptionsFitAtNativePixelDensityAcrossSupportedWindows",
+          "message": "  Whole caption must fit at native pixels: Сейчас: 1280 × 720 at 1024x768\r\n  Expected: greater than or equal to 18\r\n  But was:  -1\r\n"
+        }
+      ],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "PlayMode",
+      "summary": {
+        "total": 1,
+        "passed": 0,
+        "failed": 1,
+        "skipped": 0,
+        "durationSeconds": 0.4684111,
+        "resultState": "Failed(Child)"
+      },
+      "results": [
+        {
+          "name": "SettingsCaptionsFitAtNativePixelDensityAcrossSupportedWindows",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.SettingsCaptionsFitAtNativePixelDensityAcrossSupportedWindows",
+          "state": "Failed",
+          "durationSeconds": 0.3920964,
+          "message": "  Whole caption must fit at native pixels: Сейчас: 1280 × 720 at 1024x768\r\n  Expected: greater than or equal to 18\r\n  But was:  -1\r\n",
+          "stackTrace": "at PaperDefense.Tests.PlayerJourneyTests+<SettingsCaptionsFitAtNativePixelDensityAcrossSupportedWindows>d__45.MoveNext () [0x001e9] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\PlayerJourneyTests.cs:791\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@1405238725ab\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:44\r\n",
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

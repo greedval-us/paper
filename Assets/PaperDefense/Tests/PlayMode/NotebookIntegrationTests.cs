@@ -18,9 +18,11 @@ namespace PaperDefense.Tests
         GameBalanceAsset asset;
         Mouse mouse;
         InputSettings originalInputSettings, fixtureInputSettings;
+        NativeInputIsolation nativeInput;
 
         [UnitySetUp] public IEnumerator SetUp()
         {
+            nativeInput = new NativeInputIsolation();
             fixtureInputSettings=null;
             originalInputSettings=InputSystem.settings;
             // A failed earlier play run can leave the manager holding a destroyed
@@ -59,22 +61,26 @@ namespace PaperDefense.Tests
         }
         [UnityTearDown] public IEnumerator TearDown()
         {
-            if(mouse!=null && mouse.added) InputSystem.RemoveDevice(mouse);
-            Object.Destroy(root);Object.Destroy(asset);
-            if(fixtureInputSettings!=null)
+            try
             {
-                bool originalAlive=originalInputSettings!=null;
-                InputSettings restore=originalInputSettings;
-                if(!originalAlive)
+                if(mouse!=null && mouse.added) InputSystem.RemoveDevice(mouse);
+                Object.Destroy(root);Object.Destroy(asset);
+                if(fixtureInputSettings!=null)
                 {
-                    restore=ScriptableObject.CreateInstance<InputSettings>();
-                    restore.hideFlags=HideFlags.HideAndDontSave;
+                    bool originalAlive=originalInputSettings!=null;
+                    InputSettings restore=originalInputSettings;
+                    if(!originalAlive)
+                    {
+                        restore=ScriptableObject.CreateInstance<InputSettings>();
+                        restore.hideFlags=HideFlags.HideAndDontSave;
+                    }
+                    InputSystem.settings=restore;
+                    if(fixtureInputSettings!=null) Object.Destroy(fixtureInputSettings);
+                    Assert.That(originalAlive,Is.True,"The original input settings must survive until restoration.");
+                    Assert.That(InputSystem.settings,Is.SameAs(originalInputSettings));
                 }
-                InputSystem.settings=restore;
-                if(fixtureInputSettings!=null) Object.Destroy(fixtureInputSettings);
-                Assert.That(originalAlive,Is.True,"The original input settings must survive until restoration.");
-                Assert.That(InputSystem.settings,Is.SameAs(originalInputSettings));
             }
+            finally { nativeInput?.Dispose(); nativeInput = null; }
             yield return null;
         }
 

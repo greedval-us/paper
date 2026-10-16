@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using PaperDefense.Application;
@@ -125,7 +126,13 @@ namespace PaperDefense.Tests
                 int compactVertices = WorldMesh(root).vertexCount;
                 Assert.That(compactVertices, Is.GreaterThan(3000 * 3), "The live crowd must contribute batched geometry.");
                 int compactPerEnemy = compactVertices / scenario.ReadModel.Enemies.Count;
-                Assert.That(compactPerEnemy, Is.LessThan(expectedMesh.vertexCount), "The large crowd must use the compact path while the detailed resource path remains available.");
+                Assert.That(compactPerEnemy, Is.LessThanOrEqualTo(256),
+                    "A textured body and its bounded health/status marks must retain a small per-enemy vertex budget.");
+                var atlasCoordinates = new List<Vector2>();
+                WorldMesh(root).GetUVs(1, atlasCoordinates);
+                Assert.That(atlasCoordinates.Count(value => value != NotebookSpriteCatalog.WhiteUV),
+                    Is.GreaterThanOrEqualTo(scenario.ReadModel.Enemies.Count * 4),
+                    "Every crowd body must retain the new atlas illustration; the large crowd cannot restore retired fallback glyphs.");
                 for (int frame = 0; frame < 30; frame++)
                 {
                     yield return null;

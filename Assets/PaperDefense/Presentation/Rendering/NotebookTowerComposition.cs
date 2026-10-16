@@ -10,11 +10,9 @@ namespace PaperDefense.Presentation
     {
         static readonly MeshPen uiPen = new MeshPen(null, 4096);
         public static bool UsesResourceArt(TowerBlueprint blueprint)
-            => blueprint != null && !blueprint.HasPlayerDrawing && blueprint.Content != null
-                && !blueprint.Content.IsLegacyAdapter && ReferenceDrawingCache.UsesTemplateVisual(blueprint)
-                && NotebookVisualThemeAsset.Default != null;
+            => blueprint != null && !blueprint.HasPlayerDrawing;
         internal static bool UsesComposition(TowerBlueprint blueprint)
-            => blueprint != null && (blueprint.HasPlayerDrawing || UsesResourceArt(blueprint));
+            => blueprint != null;
 
         public static void DrawUI(VertexHelper target, TowerBlueprint blueprint, Vector2 center, float scale,
             MaterialTier tier = MaterialTier.Ink, InkColor ink = InkColor.None)
@@ -56,15 +54,23 @@ namespace PaperDefense.Presentation
                     foreach (var module in blueprint.ModuleSelections)
                         if (DrawingBindings.Module(module.InstanceId) == template.BindingId) { id = module.DefinitionId; break; }
                 if (id == null) continue;
-                if (!NotebookArtRenderer.Draw(pen, theme?.FindShape(id), pivot, strokeTint: MeshPen.Alpha(tint, 1), opacity: opacity, theme: theme))
-                    pen.Append(AuthoredGeometryCache.For(ReferenceDrawingCache.For(blueprint)).GetPart(template.BindingId), pivot, 0, tint);
+                DoodleGlyphs.DrawResource(pen, id, pivot, opacity: opacity, theme: theme);
             }
         }
 
-        internal static void DrawConstruction(MeshPen pen, StructureView structure, Vector2 origin, float fraction)
+        internal static void DrawConstruction(MeshPen pen, StructureView structure, Vector2 origin, float fraction,
+            double seconds = 0, NotebookAnimationState animation = null, NotebookVisualThemeAsset theme = null)
         {
             var blueprint = structure.Blueprint;
-            var geometry = AuthoredGeometryCache.For(ReferenceDrawingCache.VisibleDrawing(blueprint));
+            if (!blueprint.HasPlayerDrawing)
+            {
+                float opacity = Mathf.Lerp(.2f, 1, Mathf.Clamp01(fraction));
+                DrawStatic(pen, blueprint, origin, structure.Tier, structure.Color, opacity, theme);
+                DrawMounts(pen, blueprint, origin, structure.Tier, structure.Color, structure, true,
+                    animation, structure.Id, seconds, opacity, theme);
+                return;
+            }
+            var geometry = AuthoredGeometryCache.For(blueprint.Drawing);
             foreach (var template in DrawingTemplateCatalog.Create(blueprint))
             {
                 Vector2 pivot = origin + new Vector2(template.Pivot.X, template.Pivot.Y);
@@ -93,8 +99,7 @@ namespace PaperDefense.Presentation
                     pen.Ring(pivot, .065f, .018f, MeshPen.Alpha(NotebookPalette.Navy, opacity * .65f), 12);
                 pivot += forward * (animation?.Recoil(structureId, mount.SlotIndex, seconds, theme) ?? 0);
                 if (authored != null) pen.Append(authored.GetPart(DrawingBindings.Mount(mount.SlotIndex)), pivot, angle, tint);
-                else if (!NotebookArtRenderer.Draw(pen, theme?.FindShape(mount.WeaponId), pivot, radians: angle, strokeTint: MeshPen.Alpha(tint, 1), opacity: opacity, theme: theme))
-                    pen.Append(AuthoredGeometryCache.For(ReferenceDrawingCache.For(blueprint)).GetPart(DrawingBindings.Mount(mount.SlotIndex)), pivot, angle, tint);
+                else DoodleGlyphs.DrawResource(pen, mount.WeaponId, pivot, radians: angle, opacity: opacity, theme: theme);
             }
         }
 

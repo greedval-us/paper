@@ -10,9 +10,9 @@ namespace PaperDefense.Presentation
         public readonly Rect Header, Dock;
         public float Margin => Width < 1200 ? 24 : 48;
         public bool Compact => Width < 1200;
-        public PlayerLayout(int width, int height, float uiScale = 1)
+        public PlayerLayout(int width, int height)
         {
-            Scale = Mathf.Max(1, Mathf.Min(width / 1600f, height / 1000f)) * Mathf.Clamp(uiScale, 1, 1.5f);
+            Scale = Mathf.Max(1, Mathf.Min(width / 1600f, height / 1000f));
             Width = Mathf.Max(1, width) / Scale; Height = Mathf.Max(1, height) / Scale;
             bool narrow = Width < 1050;
             Header = new Rect(12, 8, Width - 24, narrow ? 92 : 52);

@@ -94,9 +94,9 @@ namespace PaperDefense.Tests
         [UnityTest] public IEnumerator DrawingSummaryFollowsTheVisibleSheetAndStageChangesResetScroll()
         {
             game.Navigate(PlayerPage.Workshop); yield return null;
-            game.SetInterfaceScale(1.5f);
             var wizard = root.GetComponentInChildren<WorkshopHud>().Guided;
             wizard.Next(); wizard.Next(); yield return null; yield return null;
+            root.GetComponentInChildren<WorkshopResponsiveLayout>().Apply(1024, 768);
             var nodes = root.GetComponentsInChildren<RectTransform>(true);
             var area = System.Array.Find(nodes, x => x.name == "Guided drawing work area");
             var summary = System.Array.Find(nodes, x => x.name == "Guided drawing summary");
@@ -114,7 +114,7 @@ namespace PaperDefense.Tests
 
         [UnityTest] public IEnumerator WorkshopFocusAlsoRevealsTheEmbeddedProbeAndEditableName()
         {
-            game.Navigate(PlayerPage.Workshop); game.SetInterfaceScale(1.5f); yield return null;
+            game.Navigate(PlayerPage.Workshop); yield return null;
             var wizard = root.GetComponentInChildren<WorkshopHud>().Guided;
             wizard.Next(); wizard.Next();
             var session = wizard.Drawing.Session;
@@ -122,6 +122,7 @@ namespace PaperDefense.Tests
             foreach (var mount in session.Blueprint.WeaponMounts)
                 session.AddRectangle(DrawingBindings.Mount(mount.SlotIndex), new DrawingPoint(-.0625f, 0), new DrawingPoint(.0625f, .5f), out _);
             wizard.Drawing.Canvas.FinishStroke(); yield return null; yield return null;
+            root.GetComponentInChildren<WorkshopResponsiveLayout>().Apply(1024, 768);
             var probe = Find("Drawing probe fire");
             var events = UnityEngine.EventSystems.EventSystem.current;
             events.SetSelectedGameObject(probe.gameObject); yield return null;
@@ -189,50 +190,37 @@ namespace PaperDefense.Tests
             Assert.That(Find("Open campaign").GetComponentInChildren<Text>().text, Is.EqualTo("Играть"));
         }
 
-        [UnityTest] public IEnumerator HomeActionsRemainVisibleAndSeparateAcrossWindowSizesAndInterfaceScales()
+        [UnityTest] public IEnumerator HomeActionsRemainVisibleAndSeparateAcrossWindowSizes()
         {
             var shell = root.GetComponentInChildren<PlayerShell>();
             int[,] sizes = { { 1024, 768 }, { 1280, 720 }, { 1280, 960 }, { 1600, 900 }, { 1920, 1080 } };
             string[] actions = { "Open campaign", "workshop", "settings", "help", "exit" };
             for (int size = 0; size < sizes.GetLength(0); size++)
-                foreach (float scale in new[] { 1f, 1.25f, 1.5f })
+            {
+                shell.ApplyLayout(sizes[size, 0], sizes[size, 1]);
+                Canvas.ForceUpdateCanvases();
+                var page = System.Array.Find(root.GetComponentsInChildren<RectTransform>(), x => x.name == "Page Home");
+                Assert.That(page, Is.Not.Null);
+                var bounds = new Rect[actions.Length];
+                string context = sizes[size, 0] + "x" + sizes[size, 1];
+                for (int i = 0; i < actions.Length; i++)
                 {
-                    game.SetInterfaceScale(scale);
-                    shell.ApplyLayout(sizes[size, 0], sizes[size, 1]);
-                    Canvas.ForceUpdateCanvases();
-                    var page = System.Array.Find(root.GetComponentsInChildren<RectTransform>(), x => x.name == "Page Home");
-                    Assert.That(page, Is.Not.Null);
-                    var bounds = new Rect[actions.Length];
-                    string context = sizes[size, 0] + "x" + sizes[size, 1] + " at " + scale;
-                    for (int i = 0; i < actions.Length; i++)
-                    {
-                        var button = Find(actions[i]);
-                        Assert.That(button.IsInteractable(), Is.True, actions[i] + " at " + context);
-                        bounds[i] = BoundsInPage(page, (RectTransform)button.transform);
-                        Assert.That(bounds[i].width, Is.GreaterThan(0), actions[i] + " at " + context);
-                        Assert.That(bounds[i].height, Is.GreaterThan(0), actions[i] + " at " + context);
-                        Assert.That(bounds[i].xMin, Is.GreaterThanOrEqualTo(page.rect.xMin - 1), actions[i] + " at " + context);
-                        Assert.That(bounds[i].xMax, Is.LessThanOrEqualTo(page.rect.xMax + 1), actions[i] + " at " + context);
-                        Assert.That(bounds[i].yMin, Is.GreaterThanOrEqualTo(page.rect.yMin - 1), actions[i] + " at " + context);
-                        Assert.That(bounds[i].yMax, Is.LessThanOrEqualTo(page.rect.yMax + 1), actions[i] + " at " + context);
-                        for (int previous = 0; previous < i; previous++)
-                            Assert.That(bounds[i].Overlaps(bounds[previous]), Is.False,
-                                actions[i] + " overlaps " + actions[previous] + " at " + context);
-                    }
-                    // Assert before yielding: Update restores the real Screen dimensions on the next frame.
-                    yield return null;
+                    var button = Find(actions[i]);
+                    Assert.That(button.IsInteractable(), Is.True, actions[i] + " at " + context);
+                    bounds[i] = BoundsInPage(page, (RectTransform)button.transform);
+                    Assert.That(bounds[i].width, Is.GreaterThan(0), actions[i] + " at " + context);
+                    Assert.That(bounds[i].height, Is.GreaterThan(0), actions[i] + " at " + context);
+                    Assert.That(bounds[i].xMin, Is.GreaterThanOrEqualTo(page.rect.xMin - 1), actions[i] + " at " + context);
+                    Assert.That(bounds[i].xMax, Is.LessThanOrEqualTo(page.rect.xMax + 1), actions[i] + " at " + context);
+                    Assert.That(bounds[i].yMin, Is.GreaterThanOrEqualTo(page.rect.yMin - 1), actions[i] + " at " + context);
+                    Assert.That(bounds[i].yMax, Is.LessThanOrEqualTo(page.rect.yMax + 1), actions[i] + " at " + context);
+                    for (int previous = 0; previous < i; previous++)
+                        Assert.That(bounds[i].Overlaps(bounds[previous]), Is.False,
+                            actions[i] + " overlaps " + actions[previous] + " at " + context);
                 }
-        }
-
-        [UnityTest] public IEnumerator InterfaceScaleEnlargesHomeActions()
-        {
-            var shell = root.GetComponentInChildren<PlayerShell>();
-            game.SetInterfaceScale(1); shell.ApplyLayout(1920, 1080); Canvas.ForceUpdateCanvases();
-            float ordinary = ((RectTransform)Find("Open campaign").transform).rect.height * shell.Layout.Scale;
-            game.SetInterfaceScale(1.5f); shell.ApplyLayout(1920, 1080); Canvas.ForceUpdateCanvases();
-            float enlarged = ((RectTransform)Find("Open campaign").transform).rect.height * shell.Layout.Scale;
-            Assert.That(enlarged, Is.GreaterThan(ordinary * 1.2f), "Home must honour the interface accessibility scale.");
-            yield return null;
+                // Assert before yielding: Update restores the real Screen dimensions on the next frame.
+                yield return null;
+            }
         }
 
         [UnityTest] public IEnumerator LongerHomeCaptionRemainsReadable()
@@ -298,106 +286,144 @@ namespace PaperDefense.Tests
             Assert.That(game.Drawing.HandleSessionHotkeys, Is.False);
         }
 
-        [UnityTest] public IEnumerator MapKeepsMissionAndNavigationVisibleAcrossWindowSizesAndInterfaceScales()
+        [UnityTest] public IEnumerator MapKeepsMissionAndNavigationVisibleAcrossWindowSizes()
         {
             game.Navigate(PlayerPage.Map);
             var shell = root.GetComponentInChildren<PlayerShell>();
             int[,] sizes = { { 1024, 768 }, { 1280, 720 }, { 1280, 960 }, { 1600, 900 }, { 1920, 1080 } };
             for (int size = 0; size < sizes.GetLength(0); size++)
-                foreach (float scale in new[] { 1f, 1.25f, 1.5f })
-                {
-                    game.SetInterfaceScale(scale); shell.ApplyLayout(sizes[size, 0], sizes[size, 1]);
-                    Canvas.ForceUpdateCanvases();
-                    var page = ActiveRect("Page Map");
-                    string context = sizes[size, 0] + "x" + sizes[size, 1] + " at " + scale;
-                    Assert.That(page.GetComponentsInChildren<ScrollRect>(), Is.Empty,
-                        "The mission page must fit without scrolling at " + context);
-                    foreach (string name in new[] { "Mission map", "Mission information" })
-                        AssertWithin(page, ActiveRect(name), context);
-                    var back = Find("Back"); var prepare = Find("Prepare mission");
-                    Assert.That(back.IsInteractable(), Is.True, context);
-                    Assert.That(prepare.IsInteractable(), Is.True, context);
-                    AssertWithin(page, (RectTransform)back.transform, context);
-                    AssertWithin(page, (RectTransform)prepare.transform, context);
-                    Assert.That(BoundsInPage(page, (RectTransform)back.transform).Overlaps(
-                        BoundsInPage(page, (RectTransform)prepare.transform)), Is.False, context);
-                    yield return null;
-                }
+            {
+                shell.ApplyLayout(sizes[size, 0], sizes[size, 1]);
+                Canvas.ForceUpdateCanvases();
+                var page = ActiveRect("Page Map");
+                string context = sizes[size, 0] + "x" + sizes[size, 1];
+                Assert.That(page.GetComponentsInChildren<ScrollRect>(), Is.Empty,
+                    "The mission page must fit without scrolling at " + context);
+                foreach (string name in new[] { "Mission map", "Mission information" })
+                    AssertWithin(page, ActiveRect(name), context);
+                var back = Find("Back"); var prepare = Find("Prepare mission");
+                Assert.That(back.IsInteractable(), Is.True, context);
+                Assert.That(prepare.IsInteractable(), Is.True, context);
+                AssertWithin(page, (RectTransform)back.transform, context);
+                AssertWithin(page, (RectTransform)prepare.transform, context);
+                AssertReadable(prepare.GetComponentInChildren<Text>(), shell.Layout.Scale, context);
+                Assert.That(BoundsInPage(page, (RectTransform)back.transform).Overlaps(
+                    BoundsInPage(page, (RectTransform)prepare.transform)), Is.False, context);
+                yield return null;
+            }
         }
 
-        [UnityTest] public IEnumerator PreparationShowsAllFourCardsInOneRowWithoutScrollingAcrossWindowSizesAndInterfaceScales()
+        [UnityTest] public IEnumerator NotebookIllustrationsKeepTheirWholePageAcrossWindowSizes()
+        {
+            var shell = root.GetComponentInChildren<PlayerShell>();
+            int[,] sizes = { { 1024, 768 }, { 1280, 720 }, { 1280, 960 }, { 1600, 900 }, { 1920, 1080 } };
+            for (int size = 0; size < sizes.GetLength(0); size++)
+            {
+                shell.ApplyLayout(sizes[size, 0], sizes[size, 1]);
+                string context = sizes[size, 0] + "x" + sizes[size, 1];
+                game.Navigate(PlayerPage.Home); Canvas.ForceUpdateCanvases();
+                AssertCompleteIllustration(ActiveRect("Page Home"), "Home illustration", context);
+                game.Navigate(PlayerPage.Map); Canvas.ForceUpdateCanvases();
+                AssertCompleteIllustration(ActiveRect("Mission map"), "Mission illustration", context);
+                game.Navigate(PlayerPage.Preparation); Canvas.ForceUpdateCanvases();
+                AssertCompleteIllustration(ActiveRect("Page Preparation"), "Notebook landscape", context);
+                yield return null;
+            }
+        }
+
+        void AssertCompleteIllustration(RectTransform boundary, string name, string context)
+        {
+            var image = System.Array.Find(boundary.GetComponentsInChildren<Image>(), x => x.name == name);
+            Assert.That(image, Is.Not.Null, "Missing whole-page illustration at " + context);
+            Assert.That(image.isActiveAndEnabled, Is.True, name + " must render at " + context);
+            Assert.That(image.canvasRenderer.cull, Is.False, name + " must stay visible at " + context);
+            Assert.That(image.sprite, Is.Not.Null, name + " must load its production illustration.");
+            AssertWithin(boundary, image.rectTransform, context);
+            float aspect = image.sprite.rect.width / image.sprite.rect.height;
+            Assert.That(image.rectTransform.rect.width / image.rectTransform.rect.height, Is.EqualTo(aspect).Within(.001f),
+                name + " must retain its native aspect rather than fill and crop the page at " + context);
+            for (Transform parent = image.transform.parent; parent != null; parent = parent.parent)
+            {
+                Assert.That(parent.GetComponent<RectMask2D>(), Is.Null,
+                    name + " must not lose its edges to a viewport mask at " + context);
+                if (parent == boundary) break;
+            }
+        }
+
+        [UnityTest] public IEnumerator PreparationShowsAllFourCardsInOneRowWithoutScrollingAcrossWindowSizes()
         {
             game.Navigate(PlayerPage.Preparation);
             var shell = root.GetComponentInChildren<PlayerShell>();
             int[,] sizes = { { 1024, 768 }, { 1280, 720 }, { 1280, 960 }, { 1600, 900 }, { 1920, 1080 } };
             for (int size = 0; size < sizes.GetLength(0); size++)
-                foreach (float scale in new[] { 1f, 1.25f, 1.5f })
+            {
+                shell.ApplyLayout(sizes[size, 0], sizes[size, 1]);
+                Canvas.ForceUpdateCanvases();
+                var page = ActiveRect("Page Preparation");
+                string context = sizes[size, 0] + "x" + sizes[size, 1];
+                Assert.That(page.GetComponentsInChildren<ScrollRect>(), Is.Empty,
+                    "All four blueprints and materials must fit without scrolling at " + context);
+                string[] actions = { "Back", "Edit album", "Open preparation album", "Start battle" };
+                var actionBounds = new Rect[actions.Length];
+                for (int action = 0; action < actions.Length; action++)
                 {
-                    game.SetInterfaceScale(scale); shell.ApplyLayout(sizes[size, 0], sizes[size, 1]);
-                    Canvas.ForceUpdateCanvases();
-                    var page = ActiveRect("Page Preparation");
-                    string context = sizes[size, 0] + "x" + sizes[size, 1] + " at " + scale;
-                    Assert.That(page.GetComponentsInChildren<ScrollRect>(), Is.Empty,
-                        "All four blueprints and materials must fit without scrolling at " + context);
-                    string[] actions = { "Back", "Edit album", "Open preparation album", "Start battle" };
-                    var actionBounds = new Rect[actions.Length];
-                    for (int action = 0; action < actions.Length; action++)
+                    var button = Find(actions[action]);
+                    Assert.That(button.IsInteractable(), Is.True, actions[action] + " at " + context);
+                    AssertWithin(page, (RectTransform)button.transform, context);
+                    AssertReadable(button.GetComponentInChildren<Text>(), shell.Layout.Scale, context);
+                    actionBounds[action] = BoundsInPage(page, (RectTransform)button.transform);
+                    for (int previous = 0; previous < action; previous++)
+                        Assert.That(actionBounds[action].Overlaps(actionBounds[previous]), Is.False,
+                            actions[action] + " overlaps " + actions[previous] + " at " + context);
+                }
+                var slotBounds = new Rect[4];
+                for (int slot = 0; slot < 4; slot++)
+                {
+                    var card = ActiveRect("Loadout " + slot);
+                    AssertWithin(page, card, context);
+                    slotBounds[slot] = BoundsInPage(page, card);
+                    Assert.That(slotBounds[slot].center.y, Is.EqualTo(slotBounds[0].center.y).Within(1),
+                        "All four blueprints must share a single row at " + context);
+                    for (int previous = 0; previous < slot; previous++)
+                        Assert.That(slotBounds[slot].Overlaps(slotBounds[previous]), Is.False,
+                            "Loadout cards overlap at " + context);
+                    for (int action = 0; action < actionBounds.Length; action++)
+                        Assert.That(slotBounds[slot].Overlaps(actionBounds[action]), Is.False,
+                            "Loadout " + slot + " covers " + actions[action] + " at " + context);
+                    foreach (var graphic in card.GetComponentsInChildren<Graphic>())
                     {
-                        var button = Find(actions[action]);
-                        Assert.That(button.IsInteractable(), Is.True, actions[action] + " at " + context);
-                        AssertWithin(page, (RectTransform)button.transform, context);
-                        AssertReadable(button.GetComponentInChildren<Text>(), shell.Layout.Scale, context);
-                        actionBounds[action] = BoundsInPage(page, (RectTransform)button.transform);
-                        for (int previous = 0; previous < action; previous++)
-                            Assert.That(actionBounds[action].Overlaps(actionBounds[previous]), Is.False,
-                                actions[action] + " overlaps " + actions[previous] + " at " + context);
-                    }
-                    var slotBounds = new Rect[4];
-                    for (int slot = 0; slot < 4; slot++)
-                    {
-                        var card = ActiveRect("Loadout " + slot);
-                        AssertWithin(page, card, context);
-                        slotBounds[slot] = BoundsInPage(page, card);
-                        Assert.That(slotBounds[slot].center.y, Is.EqualTo(slotBounds[0].center.y).Within(1),
-                            "All four blueprints must share a single row at " + context);
-                        for (int previous = 0; previous < slot; previous++)
-                            Assert.That(slotBounds[slot].Overlaps(slotBounds[previous]), Is.False,
-                                "Loadout cards overlap at " + context);
-                        for (int action = 0; action < actionBounds.Length; action++)
-                            Assert.That(slotBounds[slot].Overlaps(actionBounds[action]), Is.False,
-                                "Loadout " + slot + " covers " + actions[action] + " at " + context);
-                        foreach (var graphic in card.GetComponentsInChildren<Graphic>())
-                        {
-                            AssertWithin(card, graphic.rectTransform, context);
+                        AssertWithin(card, graphic.rectTransform, context);
+                        if (graphic.isActiveAndEnabled)
                             Assert.That(graphic.canvasRenderer.cull, Is.False,
                                 "Card content must remain visible: " + graphic.name + " at " + context);
-                        }
-                        AssertReadable(ActiveText("Loadout name " + slot), shell.Layout.Scale, context);
-                        AssertReadable(ActiveText("Loadout description " + slot), shell.Layout.Scale, context);
-                        AssertReadable(ActiveText("Loadout cost " + slot), shell.Layout.Scale, context);
-                        var replace = Find("Replace blueprint " + slot);
-                        Assert.That(replace.IsInteractable(), Is.True, context);
-                        AssertReadable(replace.GetComponentInChildren<Text>(), shell.Layout.Scale, context);
                     }
-                    var materialBounds = new Rect[3];
-                    for (int tier = 0; tier < 3; tier++)
-                    {
-                        var material = Find("Starting material " + tier);
-                        Assert.That(material.IsInteractable(), Is.True, context);
-                        AssertWithin(page, (RectTransform)material.transform, context);
-                        AssertReadable(material.GetComponentInChildren<Text>(), shell.Layout.Scale, context);
-                        materialBounds[tier] = BoundsInPage(page, (RectTransform)material.transform);
-                        foreach (var card in slotBounds)
-                            Assert.That(materialBounds[tier].Overlaps(card), Is.False, "Material overlaps a blueprint at " + context);
-                        foreach (var action in actionBounds)
-                            Assert.That(materialBounds[tier].Overlaps(action), Is.False, "Material overlaps navigation at " + context);
-                        for (int previous = 0; previous < tier; previous++)
-                            Assert.That(materialBounds[tier].Overlaps(materialBounds[previous]), Is.False,
-                                "Material choices overlap at " + context);
-                    }
-                    // Validate the requested virtual size before Update returns to the real Game view size.
-                    yield return null;
+                    AssertReadable(ActiveText("Loadout name " + slot), shell.Layout.Scale, context);
+                    AssertReadable(ActiveText("Loadout description " + slot), shell.Layout.Scale, context);
+                    AssertReadable(ActiveText("Loadout cost " + slot), shell.Layout.Scale, context);
+                    var replace = Find("Replace blueprint " + slot);
+                    Assert.That(replace.IsInteractable(), Is.True, context);
+                    AssertReadable(replace.GetComponentInChildren<Text>(), shell.Layout.Scale, context);
                 }
+                var materialBounds = new Rect[3];
+                    AssertReadable(ActiveText("Preparation material description"), shell.Layout.Scale, context);
+                for (int tier = 0; tier < 3; tier++)
+                {
+                    var material = Find("Starting material " + tier);
+                    Assert.That(material.IsInteractable(), Is.True, context);
+                    AssertWithin(page, (RectTransform)material.transform, context);
+                    AssertReadable(material.GetComponentInChildren<Text>(), shell.Layout.Scale, context);
+                    materialBounds[tier] = BoundsInPage(page, (RectTransform)material.transform);
+                    foreach (var card in slotBounds)
+                        Assert.That(materialBounds[tier].Overlaps(card), Is.False, "Material overlaps a blueprint at " + context);
+                    foreach (var action in actionBounds)
+                        Assert.That(materialBounds[tier].Overlaps(action), Is.False, "Material overlaps navigation at " + context);
+                    for (int previous = 0; previous < tier; previous++)
+                        Assert.That(materialBounds[tier].Overlaps(materialBounds[previous]), Is.False,
+                            "Material choices overlap at " + context);
+                }
+                // Validate the requested virtual size before Update returns to the real Game view size.
+                yield return null;
+            }
         }
 
         [UnityTest] public IEnumerator MissionSummaryUsesTheActiveRulesRatherThanNumbersFromTheSketch()
@@ -446,9 +472,9 @@ namespace PaperDefense.Tests
 
         [UnityTest] public IEnumerator SelectingPreparationMaterialPreservesCompactCardPositionsAndKeyboardFocus()
         {
-            game.SetInterfaceScale(1.5f); yield return null; yield return null;
+            yield return null; yield return null;
             game.Navigate(PlayerPage.Preparation); yield return null;
-            Canvas.ForceUpdateCanvases();
+            root.GetComponentInChildren<PlayerShell>().ApplyLayout(1024, 768); Canvas.ForceUpdateCanvases();
             var page = ActiveRect("Page Preparation");
             Assert.That(page.GetComponentsInChildren<ScrollRect>(), Is.Empty);
             var cards = new Rect[4]; var prices = new Rect[4];
@@ -461,7 +487,7 @@ namespace PaperDefense.Tests
             var events = UnityEngine.EventSystems.EventSystem.current;
             events.SetSelectedGameObject(material.gameObject);
             Canvas.ForceUpdateCanvases();
-            material.onClick.Invoke(); yield return null;
+            material.onClick.Invoke();
             Canvas.ForceUpdateCanvases(); page = ActiveRect("Page Preparation");
             Assert.That(page.GetComponentsInChildren<ScrollRect>(), Is.Empty);
             Assert.That(events.currentSelectedGameObject, Is.Not.Null, "Keyboard selection must survive a material change.");
@@ -572,6 +598,7 @@ namespace PaperDefense.Tests
         static void AssertReadable(Text text, float physicalScale, string context)
         {
             Assert.That(text, Is.Not.Null, "Missing visible caption at " + context);
+            Assert.That(text.isActiveAndEnabled, Is.True, text.name + " must render at " + context);
             Assert.That(text.canvasRenderer.cull, Is.False, text.name + " at " + context);
             Assert.That(text.cachedTextGenerator.characterCountVisible, Is.GreaterThanOrEqualTo(text.text.Length),
                 "Caption must fit completely: " + text.text + " at " + context);
@@ -684,6 +711,97 @@ namespace PaperDefense.Tests
             Assert.That(game.Page, Is.EqualTo(PlayerPage.Pause));
         }
 
+        [UnityTest] public IEnumerator SettingsOfferResolutionSelectionWithoutApplyingItOnNavigation()
+        {
+            int width = Screen.width, height = Screen.height;
+            game.OpenSettings(); yield return null;
+            var next = Find("Resolution next");
+            var apply = Find("Apply resolution");
+            var selected = ActiveText("Selected resolution");
+            string initial = selected.text;
+            string current = ActiveText("Current resolution").text;
+            Assert.That(apply.interactable, Is.False, "The current display size has no pending change.");
+            next.onClick.Invoke(); yield return null;
+            Assert.That(ActiveText("Selected resolution").text, Is.Not.EqualTo(initial));
+            Assert.That(ActiveText("Current resolution").text, Is.EqualTo(current), "Browsing keeps the applied size visible.");
+            Assert.That(Find("Apply resolution").interactable, Is.True);
+            Assert.That(Screen.width, Is.EqualTo(width), "Browsing resolutions must leave the real display unchanged.");
+            Assert.That(Screen.height, Is.EqualTo(height));
+            Find("Close settings").onClick.Invoke(); yield return null;
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Home));
+            game.OpenSettings(); yield return null;
+            Assert.That(ActiveText("Selected resolution").text, Is.EqualTo(initial), "Closing settings discards an unapplied choice.");
+            Assert.That(Find("Apply resolution").interactable, Is.False);
+        }
+
+        [UnityTest] public IEnumerator SettingsKeepDisplayChoicesAndNavigationVisibleWithoutScrolling()
+        {
+            game.OpenSettings();
+            var shell = root.GetComponentInChildren<PlayerShell>();
+            int[,] sizes = { { 1024, 768 }, { 1280, 720 }, { 1280, 960 }, { 1600, 900 }, { 1920, 1080 } };
+            for (int size = 0; size < sizes.GetLength(0); size++)
+            {
+                shell.ApplyLayout(sizes[size, 0], sizes[size, 1]); Canvas.ForceUpdateCanvases();
+                var page = ActiveRect("Page Settings");
+                string context = sizes[size, 0] + "x" + sizes[size, 1];
+                Assert.That(page.GetComponentsInChildren<ScrollRect>(), Is.Empty,
+                    "Display choices and closing the screen must not require scrolling at " + context);
+                var occupied = new System.Collections.Generic.List<Rect>();
+                foreach (string name in new[] { "Toggle fullscreen", "Resolution previous", "Resolution next",
+                    "Apply resolution", "Toggle ranges", "Reduce motion", "Close settings", "Open help" })
+                {
+                    var control = Find(name);
+                    AssertWithin(page, (RectTransform)control.transform, context);
+                    Rect bounds = BoundsInPage(page, (RectTransform)control.transform);
+                    foreach (var previous in occupied)
+                        Assert.That(bounds.Overlaps(previous), Is.False, name + " must remain separately clickable at " + context);
+                    occupied.Add(bounds);
+                }
+                AssertReadable(ActiveText("Selected resolution"), shell.Layout.Scale, context);
+                AssertReadable(ActiveText("Current resolution"), shell.Layout.Scale, context);
+                AssertCompleteIllustration(page, "Notebook landscape", context);
+                AssertCompleteIllustration(page, "Settings wordmark", context);
+                yield return null;
+            }
+        }
+
+        [UnityTest] public IEnumerator SettingsCaptionsFitAtNativePixelDensityAcrossSupportedWindows()
+        {
+            game.OpenSettings();
+            var shell = root.GetComponentInChildren<PlayerShell>();
+            int[,] sizes = { { 1024, 768 }, { 1280, 720 }, { 1280, 960 }, { 1600, 900 }, { 1920, 1080 } };
+            for (int size = 0; size < sizes.GetLength(0); size++)
+            {
+                shell.ApplyLayout(sizes[size, 0], sizes[size, 1]); Canvas.ForceUpdateCanvases();
+                string context = sizes[size, 0] + "x" + sizes[size, 1];
+                foreach (var label in ActiveRect("Page Settings").GetComponentsInChildren<Text>())
+                {
+                    if (!label.isActiveAndEnabled || string.IsNullOrEmpty(label.text)) continue;
+                    var pixels = label.rectTransform.rect.size * shell.Layout.Scale;
+                    var settings = label.GetGenerationSettings(pixels);
+                    // The real Game view may be larger than this requested layout. Generate at
+                    // the target pixel density so a 1280 view cannot hide clipping at 1024.
+                    settings.scaleFactor = 1;
+                    settings.fontSize = Mathf.RoundToInt(label.fontSize * shell.Layout.Scale);
+                    settings.resizeTextMinSize = Mathf.CeilToInt(label.resizeTextMinSize * shell.Layout.Scale);
+                    settings.resizeTextMaxSize = Mathf.Max(settings.resizeTextMinSize,
+                        Mathf.RoundToInt(label.resizeTextMaxSize * shell.Layout.Scale));
+                    settings.generateOutOfBounds = false;
+                    using (var generated = new TextGenerator())
+                    {
+                        generated.Populate(label.text, settings);
+                        Assert.That(generated.characterCountVisible, Is.GreaterThanOrEqualTo(label.text.Length),
+                            "Whole caption must fit at native pixels: " + label.text + " at " + context);
+                        if (label.name == "Current resolution" || label.name == "Selected resolution" ||
+                            label.transform.parent.name == "Apply resolution" || label.transform.parent.name == "Close settings")
+                            Assert.That(generated.fontSizeUsedForBestFit, Is.GreaterThanOrEqualTo(14),
+                                "Essential display controls must remain readable at " + context);
+                    }
+                }
+                yield return null;
+            }
+        }
+
         [UnityTest] public IEnumerator UpgradeChoicesDisplayAmountsFromTheActiveRules()
         {
             Assert.That(game.StartBattle(), Is.True);
@@ -697,7 +815,7 @@ namespace PaperDefense.Tests
             Assert.That(Find("Choose upgrade 2"), Is.Not.Null);
         }
 
-        [UnityTest] public IEnumerator ScalingWorkshopPreservesAcceptedGeometryAndUndo()
+        [UnityTest] public IEnumerator ResizingWorkshopPreservesAcceptedGeometryAndUndo()
         {
             game.Navigate(PlayerPage.Workshop); yield return null;
             var wizard = root.GetComponentInChildren<WorkshopHud>().Guided;
@@ -706,7 +824,9 @@ namespace PaperDefense.Tests
             Assert.That(session.AddRectangle(DrawingBindings.Base, new DrawingPoint(-.35f,-.35f), new DrawingPoint(.35f,.35f), out _), Is.True);
             wizard.Drawing.Canvas.FinishStroke();
             string hash = session.Snapshot.GeometryHash;
-            game.SetInterfaceScale(1.5f); yield return null; yield return null;
+            var responsive = root.GetComponentInChildren<WorkshopResponsiveLayout>();
+            responsive.Apply(1024, 768); responsive.Apply(1920, 1080);
+            yield return null; yield return null;
             Assert.That(wizard.Drawing.Session, Is.SameAs(session));
             Assert.That(session.Snapshot.GeometryHash, Is.EqualTo(hash));
             Assert.That(session.CanUndo, Is.True);
@@ -749,16 +869,16 @@ namespace PaperDefense.Tests
                 new DrawingPoint(.0625f, .5f), out reason), Is.True, reason);
             authored = authored.WithDrawing(drawing.Snapshot);
             Assert.That(game.Run.SaveBlueprint(authored, out reason), Is.True, reason);
-            Assert.That(game.Run.AssignBlueprint(0, authored.Id, out reason), Is.True, reason);
-            game.SetInterfaceScale(1.5f); yield return null; yield return null;
-            game.Navigate(PlayerPage.Preparation); yield return null; Canvas.ForceUpdateCanvases();
+            Assert.That(game.Run.AssignBlueprint(0, authored.Id, out reason), Is.True, reason); yield return null; yield return null;
+            game.Navigate(PlayerPage.Preparation); yield return null;
+            root.GetComponentInChildren<PlayerShell>().ApplyLayout(1024, 768); Canvas.ForceUpdateCanvases();
             var page = ActiveRect("Page Preparation"); var card = ActiveRect("Loadout 0");
             Assert.That(page.GetComponentsInChildren<ScrollRect>(), Is.Empty);
             var sketch = card.GetComponentInChildren<BlueprintSketch>();
             Assert.That(sketch, Is.Not.Null, "A player's actual drawing must stay visible in preparation.");
             var sketchRect = (RectTransform)sketch.transform;
-            AssertWithin(card, sketchRect, "150% interface scale");
-            AssertWithin(page, card, "150% interface scale");
+            AssertWithin(card, sketchRect, "1024x768 window");
+            AssertWithin(page, card, "1024x768 window");
             Assert.That(sketch.canvasRenderer.cull, Is.False, "The authored illustration must be visible without scrolling.");
             var pictureBounds = BoundsInPage(page, sketchRect);
             foreach (string action in new[] { "Edit album", "Open preparation album", "Start battle" })
@@ -783,14 +903,13 @@ namespace PaperDefense.Tests
             Assert.That(game.Run.AssignBlueprint(0, authored.Id, out reason), Is.True, reason);
             game.Navigate(PlayerPage.Preparation); yield return null;
             var shell = root.GetComponentInChildren<PlayerShell>();
-            int[,] sizes = { { 1024, 768 }, { 1024, 768 }, { 1024, 768 }, { 1280, 720 } };
-            float[] scales = { 1, 1.25f, 1.5f, 1.5f };
+            int[,] sizes = { { 1024, 768 }, { 1280, 720 }, { 1280, 960 }, { 1600, 900 }, { 1920, 1080 } };
             for (int size = 0; size < sizes.GetLength(0); size++)
             {
-                game.SetInterfaceScale(scales[size]); shell.ApplyLayout(sizes[size, 0], sizes[size, 1]);
+                shell.ApplyLayout(sizes[size, 0], sizes[size, 1]);
                 Canvas.ForceUpdateCanvases();
                 var caption = ActiveText("Loadout name 0");
-                string context = sizes[size, 0] + "x" + sizes[size, 1] + " at " + scales[size];
+                string context = sizes[size, 0] + "x" + sizes[size, 1];
                 Assert.That(caption.text, Is.EqualTo(game.Run.Workshop.Loadout[0].Name));
                 Assert.That(caption.text.Length, Is.EqualTo(48));
                 AssertWithin(ActiveRect("Loadout 0"), caption.rectTransform, context);

@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 namespace PaperDefense.Presentation
 {
-    /// <summary>A reusable pen which writes every mark into a single vertex-colored mesh.</summary>
+    /// <summary>Authored strokes and atlas illustrations share one reusable mesh and draw order.</summary>
     internal sealed class MeshPen
     {
         readonly List<Vector3> vertices;
         readonly List<Color32> colors;
         readonly List<Vector3> strokeData;
+        readonly List<Vector2> atlasCoordinates;
         readonly List<int> indices;
         readonly Mesh mesh;
         // Opt-in for world rendering. UI and geometry inspection keep the exact authored widths.
@@ -30,6 +31,7 @@ namespace PaperDefense.Presentation
             vertices = new List<Vector3>(capacity);
             colors = new List<Color32>(capacity);
             strokeData = new List<Vector3>(capacity);
+            atlasCoordinates = new List<Vector2>(capacity);
             indices = new List<int>(capacity * 3 / 2);
             if (mesh != null) { mesh.indexFormat = IndexFormat.UInt32; mesh.MarkDynamic(); }
         }
@@ -39,6 +41,7 @@ namespace PaperDefense.Presentation
             vertices.Clear();
             colors.Clear();
             strokeData.Clear();
+            atlasCoordinates.Clear();
             indices.Clear();
         }
 
@@ -58,6 +61,7 @@ namespace PaperDefense.Presentation
             vertices.Add(new Vector3(p.x, p.y, 0));
             colors.Add(color);
             strokeData.Add(Vector3.zero);
+            atlasCoordinates.Add(NotebookSpriteCatalog.WhiteUV);
             return index;
         }
 
@@ -74,6 +78,16 @@ namespace PaperDefense.Presentation
             Vertex(a, color); Vertex(b, color); Vertex(c, color); Vertex(d, color);
             indices.Add(start); indices.Add(start + 1); indices.Add(start + 2);
             indices.Add(start); indices.Add(start + 2); indices.Add(start + 3);
+        }
+
+        public void TexturedQuad(Vector2 a, Vector2 b, Vector2 c, Vector2 d, Rect uv, Color color)
+        {
+            int first = vertices.Count;
+            Quad(a, b, c, d, color);
+            atlasCoordinates[first] = new Vector2(uv.xMin, uv.yMin);
+            atlasCoordinates[first + 1] = new Vector2(uv.xMax, uv.yMin);
+            atlasCoordinates[first + 2] = new Vector2(uv.xMax, uv.yMax);
+            atlasCoordinates[first + 3] = new Vector2(uv.xMin, uv.yMax);
         }
 
         public void Rect(float x, float y, float width, float height, Color color)
@@ -218,6 +232,7 @@ namespace PaperDefense.Presentation
             mesh.SetVertices(vertices);
             mesh.SetColors(colors);
             mesh.SetUVs(0, strokeData);
+            mesh.SetUVs(1, atlasCoordinates);
             mesh.SetTriangles(indices, 0, false);
             mesh.RecalculateBounds();
         }
@@ -227,7 +242,7 @@ namespace PaperDefense.Presentation
         {
             int start = target.currentVertCount;
             for (int i = 0; i < vertices.Count; i++)
-                target.AddVert(origin + new Vector2(vertices[i].x, vertices[i].y) * scale, colors[i], Vector2.zero);
+                target.AddVert(origin + new Vector2(vertices[i].x, vertices[i].y) * scale, colors[i], atlasCoordinates[i]);
             for (int i = 0; i < indices.Count; i += 3)
                 target.AddTriangle(start + indices[i], start + indices[i + 1], start + indices[i + 2]);
         }
@@ -247,7 +262,7 @@ namespace PaperDefense.Presentation
                 {
                     int source = indices[i + corner];
                     target.AddVert(origin + new Vector2(vertices[source].x, vertices[source].y) * scale,
-                        colors[source], Vector2.zero);
+                        colors[source], atlasCoordinates[source]);
                 }
                 target.AddTriangle(start, start + 1, start + 2);
             }
@@ -267,11 +282,11 @@ namespace PaperDefense.Presentation
 
     internal static class NotebookPalette
     {
-        public static readonly Color Paper = new Color32(249, 244, 230, 255);
-        public static readonly Color Navy = new Color(.17f, .22f, .29f);
-        public static readonly Color Blue = new Color(.23f, .42f, .68f);
-        public static readonly Color Pencil = new Color(.68f, .49f, .23f);
-        public static readonly Color Marker = new Color(.55f, .33f, .64f);
+        public static readonly Color Paper = new Color32(247, 241, 222, 255);
+        public static readonly Color Navy = new Color32(21, 48, 105, 255);
+        public static readonly Color Blue = new Color32(31, 70, 146, 255);
+        public static readonly Color Pencil = new Color32(104, 122, 152, 255);
+        public static readonly Color Marker = new Color32(20, 63, 154, 255);
         public static readonly Color Red = new Color(.84f, .25f, .25f);
         public static readonly Color Green = new Color(.32f, .53f, .43f);
     }

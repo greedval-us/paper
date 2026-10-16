@@ -249,7 +249,9 @@ namespace PaperDefense.Tests
             try
             {
                 var pen = new MeshPen(mesh); NotebookTrialRenderer.DrawProjectiles(pen, playback, theme); pen.Upload();
-                Assert.That(mesh.vertexCount, Is.EqualTo(24), "Only the eight-triangle glob fallback remains; the stale mortar cannot be redrawn.");
+                Assert.That(mesh.vertexCount, Is.EqualTo(4), "Only the new glob atlas illustration remains; the stale mortar cannot be redrawn.");
+                var atlas = new List<Vector2>(); mesh.GetUVs(1, atlas);
+                Assert.That(atlas.Distinct().Count(), Is.EqualTo(4), "The surviving glob retains its new artwork.");
                 playback.Seek(1, theme); Assert.That(playback.IsProjectileEnded(1), Is.False);
                 playback.Seek(0, theme); Assert.That(playback.IsProjectileEnded(1), Is.False);
             }
