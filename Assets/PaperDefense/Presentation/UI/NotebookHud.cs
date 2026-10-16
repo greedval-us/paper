@@ -9,7 +9,6 @@ namespace PaperDefense.Presentation
     public sealed class NotebookHud : MonoBehaviour
     {
         public UserTextResolver TextResolver { get; set; }
-        public bool ReserveStandControls { get; set; }
         string Resolve(string value) => GameText.Resolve(TextResolver, value);
         const int WallToolIndex = ProfileLimits.LoadoutSlotCount, SpikesToolIndex = WallToolIndex + 1;
         const int EraseToolIndex = SpikesToolIndex + 1, UpgradeToolIndex = EraseToolIndex + 1;
@@ -61,7 +60,7 @@ namespace PaperDefense.Presentation
         void OnDestroy() { if (input != null) input.SelectionChanged -= RefreshSelection; }
         void FitCanvas()
         {
-            float height = ReserveStandControls ? 1000f * Screen.height / Mathf.Max(1, Screen.height - 120) : 1000;
+            float height = 1000;
             canvasScaler.referenceResolution = new Vector2(1600, height);
         }
         void Update()

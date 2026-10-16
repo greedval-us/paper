@@ -7,20 +7,21 @@ namespace PaperDefense.Tests
     {
         const string PlayerScene = "Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity";
 
-        [Test] public void PlayerEntryExistsSeparatelyFromDevelopmentScenes()
+        [Test] public void PlayerEntryIsTheOnlySavedGameScene()
         {
             Assert.That(AssetDatabase.LoadAssetAtPath<SceneAsset>(PlayerScene), Is.Not.Null,
                 "The player journey needs its own entry scene.");
-            Assert.That(AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/PaperDefense/Scenes/PaperDefense.unity"), Is.Not.Null);
-            Assert.That(AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/PaperDefense/Scenes/MechanicsHub.unity"), Is.Not.Null);
+            var sceneGuids = AssetDatabase.FindAssets("t:Scene", new[] { "Assets/PaperDefense/Scenes" });
+            var scenePaths = System.Array.ConvertAll(sceneGuids, AssetDatabase.GUIDToAssetPath);
+            Assert.That(scenePaths, Is.EquivalentTo(new[] { PlayerScene }),
+                "The project must keep only the player game scene, without development stands or legacy entry scenes.");
         }
 
-        [Test] public void DefaultBuildStartsWithPlayerJourneyAndExcludesTestStands()
+        [Test] public void DefaultBuildContainsOnlyTheEnabledPlayerJourney()
         {
-            Assert.That(EditorBuildSettings.scenes.Length, Is.GreaterThan(0));
+            Assert.That(EditorBuildSettings.scenes, Has.Length.EqualTo(1));
             Assert.That(EditorBuildSettings.scenes[0].path, Is.EqualTo(PlayerScene));
-            foreach (var scene in EditorBuildSettings.scenes)
-                if (scene.enabled) Assert.That(scene.path, Does.Not.Contain("/Tests/"));
+            Assert.That(EditorBuildSettings.scenes[0].enabled, Is.True);
         }
 
         [Test] public void PlayerBalanceAndCatalogAreIndependentFromDevelopmentAssets()

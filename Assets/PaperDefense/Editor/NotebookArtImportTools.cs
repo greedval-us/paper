@@ -32,19 +32,6 @@ namespace PaperDefense.Editor
             if (target == null || target.database == null) throw Error(TargetPath, "target", "missing active preset");
             var overrides = CreateTargetOverrides(source, target);
 
-            var catalogs = new List<KeyValuePair<ContentDatabaseAsset, ContentCatalogInput>>();
-            foreach (var guid in AssetDatabase.FindAssets("t:ContentDatabaseAsset", new[] { "Assets/PaperDefense/Configuration/Tests" }))
-            {
-                string path = AssetDatabase.GUIDToAssetPath(guid);
-                var asset = AssetDatabase.LoadAssetAtPath<ContentDatabaseAsset>(path);
-                var candidate = asset.catalog.CreateCopy();
-                PublishTemplates(source, candidate.Templates, candidate.Templates);
-                foreach (var part in candidate.Chassis) part.VisualStyle = DrawingVisualStyle.Template;
-                foreach (var part in candidate.Weapons) part.VisualStyle = DrawingVisualStyle.Template;
-                foreach (var part in candidate.Modules) part.VisualStyle = DrawingVisualStyle.Template;
-                candidate.CreateSnapshot();
-                catalogs.Add(new KeyValuePair<ContentDatabaseAsset, ContentCatalogInput>(asset, candidate));
-            }
             // Everything above is a detached candidate. Historical, source catalog and player profiles are untouched.
             var theme = AssetDatabase.LoadAssetAtPath<NotebookVisualThemeAsset>(ThemePath);
             if (theme == null)
@@ -56,11 +43,10 @@ namespace PaperDefense.Editor
             }
             else { theme.ReplaceData(source); EditorUtility.SetDirty(theme); }
             target.overrides = overrides; EditorUtility.SetDirty(target);
-            foreach (var pair in catalogs) { pair.Key.catalog = pair.Value; EditorUtility.SetDirty(pair.Key); }
             AssetDatabase.SaveAssets(); NotebookVisualThemeAsset.ResetDefaultCache();
             ExportSvgContactSheets(source);
             AssetDatabase.Refresh();
-            Debug.Log($"Notebook art imported: {source.Shapes.Count} shapes, {source.Clips.Count} clips, {source.Recoils.Count} recoil curves; {catalogs.Count + 1} current catalogs updated.");
+            Debug.Log($"Notebook art imported: {source.Shapes.Count} shapes, {source.Clips.Count} clips, {source.Recoils.Count} recoil curves; Target catalog updated.");
         }
 
         public static NotebookArtSource ParseAndValidate(string json, string sourcePath = SourcePath)

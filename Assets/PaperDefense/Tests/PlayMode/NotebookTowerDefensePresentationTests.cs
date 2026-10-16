@@ -17,6 +17,7 @@ namespace PaperDefense.Tests
     {
         GameObject root;
         GameBalanceAsset asset;
+        BalancePresetAsset transientPreset;
         RunController run;
         DrawingInput input;
         NotebookHud hud;
@@ -24,12 +25,16 @@ namespace PaperDefense.Tests
         void Open(bool main)
         {
             root = new GameObject("Memory-only tower defense presentation"); root.SetActive(false);
-            asset = main ? Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameBalanceAsset>(
-                "Assets/PaperDefense/Configuration/TargetNotebookBalance.asset")) : ScriptableObject.CreateInstance<GameBalanceAsset>();
+            asset = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameBalanceAsset>(
+                "Assets/PaperDefense/Configuration/TargetNotebookBalance.asset"));
             if (!main)
             {
-                asset.dataPreset = AssetDatabase.LoadAssetAtPath<BalancePresetAsset>("Assets/PaperDefense/Configuration/Tests/construction/Preset.asset");
                 Assert.That(asset.dataPreset, Is.Not.Null);
+                transientPreset = Object.Instantiate(asset.dataPreset);
+                transientPreset.rules = GlobalBalanceSettings.From(transientPreset.CreateBalance());
+                transientPreset.rules.StructureDefinitions.RemoveAll(definition =>
+                    definition.Kind == StructureKind.TarPit || definition.Kind == StructureKind.RepairPost);
+                asset.dataPreset = transientPreset;
                 asset.legacyAuthoringAdapter = false;
             }
             run = root.AddComponent<RunController>(); run.balanceAsset = asset; run.InitializeWorkshop(false);
@@ -37,7 +42,12 @@ namespace PaperDefense.Tests
             input = root.AddComponent<DrawingInput>(); input.Initialize(run, null, null);
             hud = root.AddComponent<NotebookHud>(); hud.Initialize(run, input);
         }
-        [TearDown] public void Close() { if (root != null) Object.DestroyImmediate(root); if (asset != null) Object.DestroyImmediate(asset); }
+        [TearDown] public void Close()
+        {
+            if (root != null) Object.DestroyImmediate(root);
+            if (asset != null) Object.DestroyImmediate(asset);
+            if (transientPreset != null) Object.DestroyImmediate(transientPreset);
+        }
         Button Card(int index) => root.GetComponentsInChildren<Button>(true).Single(button => button.name == "Tool " + index);
 
         [Test] public void MainPresetShowsTwelveNonOverlappingIconCardsAndAllSixFamilies()
@@ -97,7 +107,7 @@ namespace PaperDefense.Tests
             Assert.That(reason, Is.EqualTo(quote.Reason));
         }
 
-        [Test] public void LegacyPresetHidesNewToolsAndCannotSelectThemEvenInConstructionOnlyStand()
+        [Test] public void PresetWithoutOptionalToolsHidesTheirCardsAndRejectsTheirSelection()
         {
             Open(false);
             Assert.That(run.Session.Balance.HasStructure(StructureKind.TarPit), Is.False);

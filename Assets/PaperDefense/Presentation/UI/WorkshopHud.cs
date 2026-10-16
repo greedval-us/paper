@@ -13,7 +13,6 @@ namespace PaperDefense.Presentation
     public sealed class WorkshopHud : MonoBehaviour
     {
         public UserTextResolver TextResolver { get; set; }
-        public bool ReserveStandControls { get; set; }
         public WorkshopHudMode Mode { get; set; }
         public Action StartRequested { get; set; }
         public bool UseGuidedFlow { get; set; }
@@ -100,14 +99,12 @@ namespace PaperDefense.Presentation
             canvas.renderMode = RenderMode.ScreenSpaceOverlay; canvas.sortingOrder = 100;
             var scaler = canvasObject.GetComponent<CanvasScaler>();
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(1600, ReserveStandControls ? 1200 : 1000); scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
+            scaler.referenceResolution = new Vector2(1600, 1000); scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
             var board = new GameObject("Workshop paper", typeof(RectTransform), typeof(Image));
             board.transform.SetParent(canvasObject.transform, false); root = board.GetComponent<RectTransform>();
             root.anchorMin = root.anchorMax = root.pivot = new Vector2(.5f, .5f); root.sizeDelta = new Vector2(1600, 1000);
             board.GetComponent<Image>().color = NotebookPalette.Paper; board.GetComponent<Image>().raycastTarget = true;
-            Draft = ReserveStandControls && run.Workshop.Loadout[0] != null
-                ? run.Workshop.Loadout[0]
-                : run.Workshop.Album.Count > 0 ? run.Workshop.Album[0] : NewDrawing();
+            Draft = run.Workshop.Album.Count > 0 ? run.Workshop.Album[0] : NewDrawing();
             initialDraft = Draft;
             if(UseGuidedFlow&&Mode==WorkshopHudMode.Full)
             {

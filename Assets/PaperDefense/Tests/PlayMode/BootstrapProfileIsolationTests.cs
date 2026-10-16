@@ -3,7 +3,6 @@ using NUnit.Framework;
 using PaperDefense.Application;
 using PaperDefense.Core;
 using PaperDefense.Presentation;
-using PaperDefense.Validation;
 using UnityEngine;
 using UnityEngine.TestTools;
 using Object=UnityEngine.Object;
@@ -33,12 +32,12 @@ namespace PaperDefense.Tests
         {Object.Destroy(root);Object.Destroy(balance);yield return null;}
 
         [TestCase(false,"-paper-memory-only",true)]
-        [TestCase(false,"-paper-pressure",true)]
+        [TestCase(false,"-paper-pressure",false)]
         [TestCase(false,"-paper-pressure-report",false)]
         [TestCase(false,"--paper-pressure",false)]
         [TestCase(false,"ordinary",false)]
         [TestCase(true,"ordinary",true)]
-        public void ExactValidationFlagsOrConfiguredIsolationSelectMemoryOnly(bool configured,string argument,bool expected)
+        public void ExactMemoryOnlyFlagOrConfiguredIsolationSelectMemoryOnly(bool configured,string argument,bool expected)
         {
             Assert.That(PaperDefenseBootstrap.ShouldUseMemoryOnlyProfile(configured,new[]{"PaperDefense.exe",argument}),Is.EqualTo(expected));
         }
@@ -50,8 +49,7 @@ namespace PaperDefense.Tests
         }
 
         [TestCase("-paper-memory-only")]
-        [TestCase("-paper-pressure")]
-        public void ValidationFlagIsAppliedDuringAwakeBeforeAnyProfileStoreLoad(string argument)
+        public void MemoryOnlyFlagIsAppliedDuringAwakeBeforeAnyProfileStoreLoad(string argument)
         {
             bootstrap.memoryOnlyProfile=false;bootstrap.ArgumentProvider=()=>new[]{"PaperDefense.exe",argument};
             root.SetActive(true);
@@ -69,20 +67,15 @@ namespace PaperDefense.Tests
             Assert.That(store.LoadCalls,Is.Zero);Assert.That(bootstrap.Controller.Workshop.SaveState,Is.EqualTo(ProfileSaveState.MemoryOnly));
         }
 
-        [Test] public void OrdinaryLaunchStillLoadsItsConfiguredProfileStoreExactlyOnce()
+        [TestCase("-pressure-report")]
+        [TestCase("-paper-pressure")]
+        public void OrdinaryLaunchStillLoadsItsConfiguredProfileStoreExactlyOnce(string argument)
         {
-            bootstrap.memoryOnlyProfile=false;bootstrap.ArgumentProvider=()=>new[]{"PaperDefense.exe","-pressure-report","isolated.json"};
+            bootstrap.memoryOnlyProfile=false;bootstrap.ArgumentProvider=()=>new[]{"PaperDefense.exe",argument,"isolated.json"};
             root.SetActive(true);
             Assert.That(store.LoadCalls,Is.EqualTo(1));Assert.That(bootstrap.Controller.Workshop.SaveState,Is.EqualTo(ProfileSaveState.Saved));
             Assert.That(bootstrap.Controller.Workshop.Gold,Is.EqualTo(321));
         }
-
-        [TestCase(ProfileSaveState.MemoryOnly,ProfileSaveState.MemoryOnly,true)]
-        [TestCase(ProfileSaveState.Saved,ProfileSaveState.MemoryOnly,false)]
-        [TestCase(ProfileSaveState.MemoryOnly,ProfileSaveState.Saved,false)]
-        [TestCase(ProfileSaveState.RecoveryRequired,ProfileSaveState.RecoveryRequired,false)]
-        public void PressureReportOnlyClaimsIsolationWhenBothObservedStatesAreMemoryOnly(ProfileSaveState start,ProfileSaveState end,bool expected)
-            =>Assert.That(PressurePlayerProbe.IsWorkshopProfileIsolated(start,end),Is.EqualTo(expected));
 
         sealed class CountingStore:IWorkshopProfileStore
         {

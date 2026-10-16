@@ -169,22 +169,25 @@ namespace PaperDefense.Tests
             }
         }
 
-        [Test] public void PublishedAssetAndCurrentSceneCatalogsShareRevisionAndContours()
+        [Test] public void PublishedAssetAndPlayerCatalogShareRevisionAndContours()
         {
             var theme = AssetDatabase.LoadAssetAtPath<NotebookVisualThemeAsset>(NotebookArtImportTools.ThemePath);
             Assert.That(theme, Is.Not.Null, "Import notebook art before running the art acceptance suite.");
             NotebookArtImportTools.Validate(theme.Data, NotebookArtImportTools.ThemePath);
             var target = AssetDatabase.LoadAssetAtPath<BalancePresetAsset>(NotebookArtImportTools.TargetPath);
+            Assert.That(target, Is.Not.Null);
             var expected = target.database.CreateSnapshot(target.overrides);
-            foreach (var guid in AssetDatabase.FindAssets("t:ContentDatabaseAsset", new[] { "Assets/PaperDefense/Configuration/Tests" }))
+            const string playerPath = "Assets/PaperDefense/Configuration/Game/PlayerRules.asset";
+            var player = AssetDatabase.LoadAssetAtPath<BalancePresetAsset>(playerPath);
+            Assert.That(player, Is.Not.Null);
+            var catalog = player.database.CreateSnapshot(player.overrides);
+            var shapes = theme.Data.Shapes.Where(shape => !string.IsNullOrEmpty(shape.TemplateId)).ToArray();
+            Assert.That(shapes, Is.Not.Empty, "Published notebook art must include drawing references.");
+            foreach (var shape in shapes)
             {
-                var catalog = AssetDatabase.LoadAssetAtPath<ContentDatabaseAsset>(AssetDatabase.GUIDToAssetPath(guid)).CreateSnapshot();
-                foreach (var shape in theme.Data.Shapes.Where(shape => !string.IsNullOrEmpty(shape.TemplateId)))
-                {
-                    var reference = expected.GetTemplate(shape.TemplateId); var actual = catalog.GetTemplate(shape.TemplateId);
-                    Assert.That(actual.Revision, Is.EqualTo(reference.Revision), AssetDatabase.GUIDToAssetPath(guid) + " " + shape.Id);
-                    Assert.That(actual.Signature, Is.EqualTo(reference.Signature), AssetDatabase.GUIDToAssetPath(guid) + " " + shape.Id);
-                }
+                var reference = expected.GetTemplate(shape.TemplateId); var actual = catalog.GetTemplate(shape.TemplateId);
+                Assert.That(actual.Revision, Is.EqualTo(reference.Revision), playerPath + " " + shape.Id);
+                Assert.That(actual.Signature, Is.EqualTo(reference.Signature), playerPath + " " + shape.Id);
             }
         }
 

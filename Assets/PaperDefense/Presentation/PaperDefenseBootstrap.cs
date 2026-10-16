@@ -13,23 +13,19 @@ namespace PaperDefense.Presentation
         public GameBalanceAsset balance;
         public Camera worldCamera;
         public bool memoryOnlyProfile;
-        public bool standMode;
         public bool showBattleHud = true;
         public bool showWorkshopHud = true;
         public WorkshopHudMode workshopHudMode;
         public bool enableDrawingInput = true;
-        public bool constructionInputOnly;
         [NonSerialized] public Color? PlayerPaperColor;
         public TextResourcesAsset textResources;
         public NotebookViewSettingsAsset viewSettings;
         [NonSerialized] public IWorkshopProfileStore ProfileStore;
-        [NonSerialized] public Action<RunController> PrepareController;
         public UserTextResolver TextResolver { get; private set; }
         public RunController Controller { get; private set; }
         public DrawingInput Drawing { get; private set; }
         public NotebookWorldView View { get; private set; }
         public Rect? ViewportOverride { get; set; }
-        public Rect? WorldBoundsOverride { get; set; }
         internal Func<string[]> ArgumentProvider=Environment.GetCommandLineArgs;
         internal IWorkshopProfileStore ProfileStoreOverride;
 
@@ -38,7 +34,7 @@ namespace PaperDefense.Presentation
             if(configured) return true;
             if(arguments!=null)
                 for(int i=0;i<arguments.Count;i++)
-                    if(arguments[i]=="-paper-memory-only" || arguments[i]=="-paper-pressure") return true;
+                    if(arguments[i]=="-paper-memory-only") return true;
             return false;
         }
 
@@ -56,7 +52,6 @@ namespace PaperDefense.Presentation
             var selectedStore = ProfileStore ?? ProfileStoreOverride;
             if(!isolateProfile && selectedStore!=null) Controller.InitializeWorkshop(selectedStore);
             else Controller.InitializeWorkshop(!isolateProfile);
-            PrepareController?.Invoke(Controller);
             var background=Child("Paper background camera").AddComponent<Camera>();background.depth=-10;background.cullingMask=0;
             background.clearFlags=CameraClearFlags.SolidColor;background.backgroundColor=PlayerPaperColor ?? new Color(.975f,.961f,.9f);
             ConfigureCamera();
@@ -65,18 +60,17 @@ namespace PaperDefense.Presentation
             Drawing = Child("Presentation — Drawing input").AddComponent<DrawingInput>();
             Drawing.TextResolver = TextResolver;
             Drawing.ViewSettings = viewSettings;
-            Drawing.ConstructionOnly = constructionInputOnly;
             Drawing.Initialize(Controller,View,worldCamera);
             Drawing.enabled = enableDrawingInput;
             if (showBattleHud)
             {
                 var hud = Child("Presentation — Interface").AddComponent<NotebookHud>();
-                hud.TextResolver = TextResolver; hud.ReserveStandControls = standMode; hud.Initialize(Controller,Drawing);
+                hud.TextResolver = TextResolver; hud.Initialize(Controller,Drawing);
             }
             if (showWorkshopHud)
             {
                 var workshop = Child("Presentation — Workshop").AddComponent<WorkshopHud>();
-                workshop.TextResolver = TextResolver; workshop.ReserveStandControls = standMode;
+                workshop.TextResolver = TextResolver;
                 workshop.Mode = workshopHudMode; workshop.Initialize(Controller);
             }
             if (EventSystem.current == null)
@@ -101,24 +95,10 @@ namespace PaperDefense.Presentation
         }
         void FitCamera()
         {
-            float usableHeight = standMode && showBattleHud ? Mathf.Max(1, Screen.height - 120) : Screen.height;
-            float scale=Mathf.Min(Screen.width/1600f,usableHeight/1000f);
+            float scale=Mathf.Min(Screen.width/1600f,Screen.height/1000f);
             float x=(Screen.width-1600*scale)*.5f,y=(Screen.height-1000*scale)*.5f;
             if (ViewportOverride.HasValue) worldCamera.rect = ViewportOverride.Value;
-            else if (standMode && !showBattleHud && !showWorkshopHud)
-            {
-                float standScale = Mathf.Max(.65f, Mathf.Min(Screen.width / 1280f, Screen.height / 800f));
-                float bottom = Mathf.Max(.04f, (60 * standScale + 12) / Screen.height);
-                worldCamera.rect = new Rect(.22f, bottom, .76f, Mathf.Max(.1f, .96f - bottom));
-            }
             else worldCamera.rect = new Rect((x+32*scale)/Screen.width,(y+205*scale)/Screen.height,1536*scale/Screen.width,640*scale/Screen.height);
-            if (WorldBoundsOverride.HasValue)
-            {
-                var bounds = WorldBoundsOverride.Value;
-                worldCamera.orthographicSize = Mathf.Max(bounds.height * .5f, bounds.width * .5f / worldCamera.aspect);
-                worldCamera.transform.position = new Vector3(bounds.center.x, bounds.center.y, -10);
-                return;
-            }
             var b=Controller.Session.Balance;worldCamera.orthographicSize=Mathf.Max(b.Height*.5f+1,b.Width*.5f/worldCamera.aspect+1)/(Drawing!=null ? Drawing.Zoom : 1);
             if(Drawing!=null) worldCamera.transform.position=new Vector3(Drawing.CameraCenter.x,Drawing.CameraCenter.y,-10);
         }

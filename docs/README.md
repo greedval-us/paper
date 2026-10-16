@@ -1,6 +1,6 @@
 # Документация проекта
 
-Точка входа — [README проекта](../README.md). Здесь собраны действующие руководства. Числа берутся из назначенного пресета: игровая сцена использует PlayerRules, техническая — Target. Эти настройки нельзя считать взаимозаменяемыми.
+Точка входа — [README проекта](../README.md). Основной игровой вход — `Scenes/Game/PaperDefenseGame.unity`, баланс — PlayerRules. Отдельные тестовые сцены, общий экран стендов и прежняя техническая сцена удалены. Target и Historical остаются для редакторских сравнений; их числа не заменяют игровой пресет.
 
 ## Играть и проверять механику
 
@@ -20,10 +20,8 @@
 | [Свободная форма](Freeform-Towers.md) | Как геометрия корпуса и стволов влияет на характеристики |
 | [Модульные башни](Modular-Towers.md) | Основания, крепления, оборудование, подача и формы мортиры |
 | [Движение толпы](Crowd-Movement.md) | Общие маршруты, локальное движение, очереди и проходы |
-| [Общий экран стендов](Mechanics-Hub.md) | Навигация и фильтры 27 сцен |
-| [Сцены механик](Mechanics-Test-Scenes.md) | Назначение каждого стенда, шаг симуляции и изоляция профиля |
 | [Тетрадное оформление](Notebook-Art.md) | Векторные ресурсы, анимация, эффекты, импорт и камера |
-| [Ассеты игровой оболочки](Player-Assets.md) | Галерея, фоны, значки и просмотр нового оформления |
+| [Ассеты игровой оболочки](Player-Assets.md) | Фоны, значки и оформление игры; описанный отдельный стенд удалён |
 
 ## Разрабатывать и менять данные
 
@@ -36,7 +34,7 @@
 | [Словарь баланса](Balance-Parameters.md) | Единицы, формулы, источники и потребители параметров |
 | [Совместимость профиля](Content-Profile-Compatibility.md) | Версии, миграция, неизвестные ID, ошибки и атомарная запись |
 | [Расширение механик](Extending-Mechanics.md) | Добавление деталей, эффектов и поведения |
-| [Инструменты проекта](../Tools/README.md) | Меню Unity, текстовые ресурсы, CLI, нагрузка и экспорт |
+| [Инструменты проекта](../Tools/README.md) | Меню Unity, текстовые ресурсы, редакторские проверки и экспорт |
 | [Книга баланса](../Tools/BalanceWorkbook/README.md) | Экспорт Historical/Target в JSON и Excel; PlayerRules в книгу не включён |
 | [Исходники оформления](../ArtSource/Notebook/README.md) | Генерация канонического JSON и семи SVG-листов |
 
@@ -58,13 +56,14 @@
 | [Профиль v7](../Assets/PaperDefense/Core/WorkshopProfile.cs), [IO](../Assets/PaperDefense/Application/WorkshopProfileStore.cs), повтор записи | Content-Profile-Compatibility, PaperDefense-Architecture |
 | [Фиксированный шаг](../Assets/PaperDefense/Application/FixedStepClock.cs), [жесты ввода](../Assets/PaperDefense/Application/ConstructionGesture.cs), read model | PaperDefense-Architecture, Mechanics-Contracts |
 | [Рендерер поля](../Assets/PaperDefense/Presentation/Rendering/NotebookWorldView.cs), анимация, эффекты, камера и повтор полигона | Notebook-Art, PaperDefense-Architecture |
-| [Галерея игрока](../Assets/PaperDefense/Presentation/Art/PlayerAssetStand.cs), экспериментальные панели | Player-Assets |
-| [Сцены механик](../Assets/PaperDefense/Validation/MechanicsTestScene.cs), fixtures, давление 3000 и числовые прогоны | Mechanics-Test-Scenes, Development-Guide, Tools/README |
+| [Редакторские сценарии нагрузки](../Assets/PaperDefense/Validation/PressureScenario.cs), [числовые прогоны](../Assets/PaperDefense/Validation/NumericBalanceScenario.cs), приёмка данных и автоматические тесты | Development-Guide, Tools/README |
 | [Русские тексты](../Assets/PaperDefense/Core/UserText.cs), [генератор](../Tools/Extract-UserText.py), отдельные тексты оболочки | Tools/README |
 
 ## История и границы актуальности
 
+- [Сцены механик](Mechanics-Test-Scenes.md) и [общий экран стендов](Mechanics-Hub.md) — сведения об удалённых входах и текущем запуске игры. Упоминания стендов в более ранних тематических руководствах относятся к прежнему устройству проекта.
 - [docs/validation](validation/README.md) — датированные результаты проверок, снимки и измерения. Успех старого прогона относится только к зафиксированному там срезу.
+- `docs/design` — сохранённые эскизы и материалы оформления; [эскизы игры](design/game-concept-art-2026-10-16/README.md). Исходники `ArtSource` и игровые арт-ресурсы также сохранены.
 - `docs/superpowers/specs` и `docs/superpowers/plans` — проектные решения и планы реализации. Незавершённый пункт плана не доказывает отсутствие функции, а описание будущего поведения не доказывает её наличие.
 - Остальные отчёты в `docs/superpowers` сохраняют историю ревью и рефакторинга.
 - `docs/balance` — экспортированные данные и книга баланса; свежесть проверяет генератор, источник истины остаётся в коде и ассетах Unity.

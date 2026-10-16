@@ -12,24 +12,19 @@
 |---|---|
 | `Game → Open player game` | Открывает сохранённую игровую сцену |
 | `Game → Build player game` | Собирает Windows x64 и пишет `Builds/PlayerGame/build-report.txt` |
-| `Открыть игру` | Открывает прежнюю техническую сцену PaperDefense |
-| `Validation → Open mechanics hub` | Открывает общий экран или возвращает в него из Play |
-| `Validation → Generate missing mechanics scenes` | Создаёт отсутствующие механические стенды и их данные |
-| `Validation → Generate mechanics hub` | Создаёт отсутствующий hub и обновляет каталог существующих стендов |
-| `Art → Generate art test scenes` | Создаёт отсутствующие художественные стенды |
+| `Открыть игру` | Открывает ту же основную сцену `Game/PaperDefenseGame.unity` |
 | `Art → Import notebook art and current templates` | Проверяет JSON оформления, публикует ресурс/актуальные шаблоны и экспортирует SVG |
 | `Art → Export notebook SVG contact sheets` | Экспортирует контактные SVG из проверенного JSON |
 | `Content → Validate all databases and presets` | Проверяет базы и пресеты |
 | `Content → Migrate legacy balance assets once` | Историческая миграция старой конфигурации в каталог |
 | `Content → Apply modular tower preset` | Применяет модульный пресет к предусмотренным инструментом данным |
 | `Content → Apply notebook tower defense rules` | Применяет правила тетрадной обороны к Target |
-| `Content → Prepare development acceptance scene` | Готовит отдельную сцену для приёмки контента |
 | `Export mechanics and balance JSON` | Экспортирует Historical/Target для книги баланса |
 | `Проверить орду 3000` / `Проверить естественный пролом · 3000 врагов` | Один PressureValidation: детерминированный сценарий, отчёт `docs/validation/pressure-replay.json` |
 | `Проверить историческую мастерскую и чернильные рубежи` / `Проверить целевую мастерскую и чернильные рубежи` | InkLoopValidation для Historical / Target, отчёты с префиксами `ink-loop-historical` / `ink-loop-target` |
 | `Проверить все 8 волн` | Исторический CampaignValidation на `GameBalance.CreateDefault()`, отчёт `campaign-smoke.json`; не проверка PlayerRules |
 
-Миграция, Apply и импорт изменяют данные; это не необходимые шаги перед каждым запуском. Генераторы отсутствующих стендов не обновляют уже сохранённые сцены. Точные источники и границы изменения — в [каталоге контента](../docs/Content-Architecture.md) и [оформлении](../docs/Notebook-Art.md).
+Миграция, Apply и импорт изменяют данные; это не необходимые шаги перед каждым запуском. Меню генерации и открытия тестовых сцен удалены вместе со стендами. Точные источники и границы изменения данных — в [каталоге контента](../docs/Content-Architecture.md) и [оформлении](../docs/Notebook-Art.md).
 
 ## Русские тексты
 
@@ -50,31 +45,11 @@ python Tools/Extract-UserText.py --write
 
 Игровая оболочка использует отдельный [player-ru.asset](../Assets/PaperDefense/Resources/Text/player-ru.asset): `PlayerUi.T` добавляет префикс `player.`. Генератор общего словаря не создаёт этот файл. Названия/описания деталей также живут в каталоге контента. Не добавляйте текст прямо в сгенерированный файл контрактов.
 
-## Нагрузочный Player
+## Запуск и нагрузочная проверка
 
-Параметры [PressurePlayerProbe](../Assets/PaperDefense/Validation/PressurePlayerProbe.cs):
+Основная сборка находится в `Builds/PlayerGame/PaperDefense.exe`. Флаг `-paper-memory-only` запускает обычный игровой маршрут с профилем в памяти.
 
-| Параметр | Значение |
-|---|---|
-| `-paper-memory-only` | Обычный запуск с профилем в памяти |
-| `-paper-pressure` | Устанавливает измеритель и сам изолирует профиль до инициализации мастерской |
-| `-pressure-speed 1` / `2` | Скорость сценария; по умолчанию 1 |
-| `-pressure-report <полный путь.json>` | Путь JSON; по умолчанию `pressure-player.json` относительно рабочего каталога |
-
-Нужна предварительно собранная сцена с `PaperDefenseBootstrap`. Сценарий выполняется с реальной отрисовкой, записывает время кадров/симуляции/mesh, GC, пик врагов, отпечаток и состояние изоляции профиля. Прогон ограничен 600 секундами или 36 000 образцами кадров; после отчёта Player завершается. Это отдельный нагрузочный fixture.
-
-| Скрипт | Вход и выход |
-|---|---|
-| [Measure-Pressure.ps1](Measure-Pressure.ps1) | Ожидает `Builds/Windows/PaperDefense.exe`; `-Speed 0` запускает ×1 и ×2, либо укажите 1/2. Пишет фиксированные `player-pressure-xN.json/.log`, повтор заменяет эти отчёты |
-| [Run-FullAlbumPressure.ps1](Run-FullAlbumPressure.ps1) | `-PlayerRelativePath`, `-ReportTag`, `-Speeds`; по умолчанию `Builds/FullAlbumTarget/PaperDefense.exe`. Создаёт датированные отчёты и не заменяет существующие |
-
-Пример выбора основной сборки вместо исторического пути:
-
-```powershell
-./Tools/Run-FullAlbumPressure.ps1 -PlayerRelativePath 'Builds/PlayerGame/PaperDefense.exe' -ReportTag 'player-game' -Speeds 1,2
-```
-
-Скрипты запускают отдельный процесс и ожидают отчёт; они не собирают Player. Сохраняйте условия устройства и разрешение окна при сравнении результатов.
+Runtime-измеритель `PressurePlayerProbe`, флаг `-paper-pressure` и скрипты `Measure-Pressure.ps1` / `Run-FullAlbumPressure.ps1` удалены. Детерминированные сценарии Pressure, NumericBalance и InkLoop сохранены в Editor-only сборке Validation; их вызывают редакторские команды выше и автоматические проверки. Для измерения кадров основной игры используйте Unity Profiler и фиксируйте условия устройства и разрешение окна.
 
 ## Экспорт, приёмка и исторические сравнения
 
@@ -87,6 +62,7 @@ python Tools/Extract-UserText.py --write
 | [FullLoopValidation](../Assets/PaperDefense/Editor/FullLoopValidation.cs) | API `RunPressureJson` и `RunAuthoredCopiesJson`: полный альбом/нагрузка и копии авторской геометрии |
 | [RefactorValidation](../Assets/PaperDefense/Editor/RefactorValidation.cs) | API снимков правил, испытаний, replay и измерений; исторические сравнения |
 | [NumericBalanceScenario](../Assets/PaperDefense/Validation/NumericBalanceScenario.cs) | Матрица сборок, полос, бюджетов и seeds; отдельные ситуационные проверки; вызывается тестами/кодом |
+| [ContentAcceptanceRunner](../Assets/PaperDefense/Validation/ContentAcceptanceRunner.cs) и [ContentAcceptanceManifestAsset](../Assets/PaperDefense/Validation/ContentAcceptanceManifestAsset.cs) | Editor-only приёмка данных `Content/Acceptance` через автоматические тесты; отдельная сцена удалена |
 | [PlayerVisualCapture](../Assets/PaperDefense/Editor/PlayerVisualCapture.cs) | API `Capture`: снимки игрового интерфейса; по умолчанию `Captures/PlayerGame` |
 
-Результаты и ограничения прежних прогонов — в [истории проверок](../docs/validation/README.md). Генерация арт-данных и SVG описана в [ArtSource/Notebook](../ArtSource/Notebook/README.md).
+Результаты и ограничения прежних прогонов — в [истории проверок](../docs/validation/README.md). Наличие инструмента или теста не означает успешный запуск на текущем рабочем дереве. Генерация арт-данных и SVG описана в [ArtSource/Notebook](../ArtSource/Notebook/README.md); исходники и эскизы сохранены.

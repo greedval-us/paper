@@ -8,7 +8,7 @@ namespace PaperDefense.Editor
 {
     public static class PaperDefenseSetup
     {
-        public const string ScenePath = "Assets/PaperDefense/Scenes/PaperDefense.unity";
+        public const string ScenePath = PlayerGameSceneTools.ScenePath;
 
         [MenuItem("Paper Defense/Открыть игру")]
         public static void CreateOrOpen()
