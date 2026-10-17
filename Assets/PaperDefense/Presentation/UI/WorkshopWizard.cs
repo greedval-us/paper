@@ -202,9 +202,10 @@ namespace PaperDefense.Presentation
         void CloseOverlays(){CloseSpecialEditors();Drawing?.Hide();assembly?.Hide();album?.Hide();trial?.Close();ui.HideTooltip();}
         public void Suspend(){CloseOverlays();}
         public void Resume(){BuildStep();}
+        internal void ReflowFoundation(float width,float height)=>assembly.ReflowFoundation(width,height);
         void BuildStep()
         {
-            ui.HideTooltip();Drawing.Hide();assembly.Hide();summaryRoot.SetActive(Step!=2);
+            ui.HideTooltip();Drawing.Hide();assembly.Hide();summaryRoot.SetActive(Step!=0&&Step!=2);
             if(reviewRoot!=null){UnityEngine.Object.DestroyImmediate(reviewRoot);reviewRoot=null;name=null;reviewDrawing=null;}
             if(Step<2)assembly.Show(Step,Draft);
             else if(Step==2)Drawing.Open(Draft);

@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-17",
+  "unity": "6000.5.7f1",
+  "base_commit": "e136633689ab5fcb3f9a3a21ba76760c626d85d2",
+  "source": "uncommitted working tree changes for screen 04",
+  "suite": "PaperDefense.Integration.Tests",
+  "mode": "PlayMode",
+  "job_id": "2af40ec1aad1451993fbe45f442f8843",
+  "total": 482,
+  "passed": 482,
+  "failed": 0,
+  "skipped": 0,
+  "duration_seconds": 35.453264,
+  "final_targeted": {
+    "job_id": "f5779bbdb32b4e51886fffe388887f92",
+    "groups": ["WorkshopFoundationTests", "WorkshopWizardTests", "PlayerJourneyTests"],
+    "total": 50,
+    "passed": 50,
+    "failed": 0,
+    "duration_seconds": 9.7044437
+  },
+  "note": "Full suite after detailed art and focus integration. Targeted rerun after final gold icon order, description bounds and error message paper backing corrections."
+}

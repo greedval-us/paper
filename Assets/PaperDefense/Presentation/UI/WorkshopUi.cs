@@ -276,6 +276,12 @@ namespace PaperDefense.Presentation
         UnityEngine.UI.Text caption;
         WorkshopIconGraphic symbol;
         bool primary, chosen;
+        FoundationDetailGraphic decoration;
+        internal void SetDecoration(FoundationDetailGraphic value)
+        {
+            if (decoration != null) { decoration.Focused = false; decoration.Hovered = false; }
+            decoration = value; DoStateTransition(currentSelectionState, true);
+        }
 
         internal void Configure(WorkshopSurfaceGraphic surface, UnityEngine.UI.Text label, WorkshopIconGraphic icon, bool prominent)
         {
@@ -301,6 +307,7 @@ namespace PaperDefense.Presentation
             bool focused = state == SelectionState.Selected;
             bool hovered = state == SelectionState.Highlighted;
             bool pressed = state == SelectionState.Pressed;
+            if (decoration != null) { decoration.Focused = !disabled && focused; decoration.Hovered = !disabled && hovered; }
             Color fill = primary ? WorkshopUi.Blue : chosen ? WorkshopUi.Selected : WorkshopUi.Surface;
             Color foreground = primary ? WorkshopUi.Paper : chosen ? WorkshopUi.Blue : WorkshopUi.Ink;
             if (disabled)

@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-17",
+  "skill": "imagegen",
+  "mode": "built-in image_gen",
+  "reference": "docs/design/game-concept-art-2026-10-16/screens/04-foundation.png",
+  "assets": [
+    {
+      "source": "ArtSource/Notebook/NewStyle/FoundationPageDecor.png",
+      "runtime": "Assets/PaperDefense/Resources/Art/Player/FoundationPageDecor.png",
+      "prompts": [
+        "Use case: stylized-concept. Asset type: transparent decorative bottom-edge illustration for a Unity notebook game screen. Input image 1 is the visual reference only: reproduce its exact blue ballpoint pen linework, detailed small fir trees, rocks, mountains, crosshatching and warm off-white stone fills. Create ONLY the continuous decorative foreground landscape seen along the very bottom of the reference screen: tall clusters of firs at both lower corners, scattered smaller pines and angular rocks across the bottom edge, with the top contour irregular. Wide landscape image about 3:1 aspect, decoration occupies the lower third; upper two thirds entirely transparent. Real alpha background, no paper background, no grid, no text, no UI, no border, no towers. The landscape must be detailed but fine and airy like the reference, with crisp cobalt/navy pen strokes, no thick cartoon vector outlines. Preserve individual detailed pine needles, fine grass tufts, pebble fragments, layered rock hatching. Do not create any baked interface elements.",
+        "Edit target: wide transparent pine/rock bottom border. Keep the blue ballpoint pen style and warm ivory details. Recompose as a VERY LOW PROFILE bottom-edge landscape: ALL drawing confined to the bottom 18% of the canvas, tallest pine tips may reach bottom 25% at extreme left/right corners only. Upper 75% entirely alpha=0 transparent. Trees, rocks and grass small and delicate, reference a UI page border, not a wide mountain vista. Preserve full image width and continuous bottom-edge ground, retain dense intricate fine pen details, real transparent background, no text, no UI. Make left/right corner pines taller than the tiny scattered central pines. No blue haze or background tint."
+      ]
+    },
+    {
+      "source": "ArtSource/Notebook/NewStyle/FoundationPreviewScenery.png",
+      "runtime": "Assets/PaperDefense/Resources/Art/Player/FoundationPreviewScenery.png",
+      "prompts": [
+        "Use case: stylized-concept. Asset type: transparent scenery frame behind a changeable stone tower base in a Unity UI. Input image 1 is the reference for exact visual style and composition, especially the upper right tower preview area. Produce only its scenery, REMOVE the central round stone tower entirely, all text, arrows, labels, grid, and all UI frames. The center 60 percent width and 65 percent height must be fully transparent empty space so a separate tower sprite can be displayed there. Recreate the detailed blue ballpoint pen vignette around it: pine tree clusters on the upper left and upper right edges, small angular boulders and grass clumps at lower left, a freestanding tall thin flagpole on the right flying a dark blue medieval pennant with a white crown, low broken stone blocks at right bottom, detailed fine grassy footpath and loose pebbles across lower edge. Composition landscape around 3:2, scenery at side and bottom edges, entire image with real transparent background. Fine rich cobalt and navy sketch lines, ivory stone fills, varied crosshatching, imperfect natural handwritten mark quality matching reference. No central tower, no weapons, no words, no numbers, no circles, no decorative interface, no parchment rectangle, no baked paper or grid.",
+        "Edit target: the supplied transparent scenery frame. Change ONLY background cleanup: REMOVE every patch of dark blue/gray gradient fog, glow, vignette, haze and blue background tint surrounding the drawings. All empty spaces, center, edges and gaps between objects must be actual alpha=0 transparency, not black or blue. Preserve exactly the existing trees, flagpole with crown flag, rocks, broken stone blocks, grass and fine pen linework at their positions and sizes, with warm ivory opaque fills only inside stone/foliage objects. Desired result is clean cutout ink illustrations on real transparent background, no shadow/glow backdrop of any kind. Keep artwork crisp. No other changes, no text, no paper, no interface."
+      ]
+    }
+  ]
+}

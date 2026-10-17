@@ -2604,7 +2604,7 @@ MonoBehaviour:
   - key: "wizard.to_review"
     value: "К проверке"
   - key: "wizard.to_weapon"
-    value: "К выбору оружия"
+    value: "К оружию"
   - key: "wizard.trial_conditions"
     value: "{0}   ·   бюджет {1}   ·   ответный огонь: {2}"
   - key: "wizard.trial_details"

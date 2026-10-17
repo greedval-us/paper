@@ -8,13 +8,16 @@ namespace PaperDefense.Presentation
     internal sealed class WizardAssemblyPanel
     {
         readonly Transform parent;readonly WorkshopUi ui;readonly RunController run;readonly WorkshopWizard wizard;
+        readonly WizardFoundationPanel foundation;
         GameObject root,extras;int mount;bool expanded;string purchaseError;
         static string T(string key,params object[] args)=>WorkshopWizard.Copy(key,args);
         public WizardAssemblyPanel(Transform parent,WorkshopUi ui,RunController run,WorkshopWizard wizard)
-        {this.parent=parent;this.ui=ui;this.run=run;this.wizard=wizard;}
-        public void Hide(){if(root!=null){UnityEngine.Object.DestroyImmediate(root);root=null;}CloseExtras();expanded=false;}
+        {this.parent=parent;this.ui=ui;this.run=run;this.wizard=wizard;foundation=new WizardFoundationPanel(parent,ui,run,wizard,ConfirmPurchase);}
+        public void Hide(){foundation.Hide();if(root!=null){UnityEngine.Object.DestroyImmediate(root);root=null;}CloseExtras();expanded=false;}
+        internal void ReflowFoundation(float width,float height)=>foundation.Reflow(width,height);
         public void Show(int step,TowerBlueprint draft)
         {
+            if(step==0){Hide();this.foundation.Show(draft);return;}
             Hide();var page=ui.Panel(parent,"Wizard assembly",new Rect(300,110,840,760),WorkshopUi.Surface);root=page.gameObject;
             bool foundation=step==0;
             ui.Label(page,"Wizard assembly heading",T(foundation?"choose_foundation":"choose_weapon"),new Rect(28,18,784,54),32,true);
