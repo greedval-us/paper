@@ -1,0 +1,9 @@
+Wizard step 0 => Wizard step 0; PASS
+Wizard mount 1 => Wizard mount 1; PASS
+Wizard choose weapon.mortar => Wizard choose weapon.mortar; PASS
+Wizard additions => Wizard additions; PASS
+Wizard weapon armor => Wizard weapon armor; PASS
+Wizard weapon geometry => Wizard weapon geometry; PASS
+Wizard next => Wizard next; PASS
+Wizard back => Wizard back; PASS
+Wizard album => Wizard album; PASS

@@ -20,6 +20,8 @@ namespace PaperDefense.Presentation
         public float Distance { get; private set; }=6;
         public int Mount { get; private set; }
         public DrawingProbeFormation Formation { get; private set; }
+        public bool CompactDistance { get; set; }
+        public string ReadyHint { get; set; }
         internal DrawingProbePanel(Transform parent,DrawingWorkbenchUi ui,
             Func<TowerBlueprint,int,float,DrawingProbeFormation,DrawingProbeReport> probe,Func<bool> pending,Action refresh,Rect? layout=null)
         {
@@ -71,9 +73,9 @@ namespace PaperDefense.Presentation
         public void Invalidate()
         {
             Recording=null;
-            distanceLabel.text=ui.Resolve(UserText.Message("drawing.probe.distance",Distance));
+            distanceLabel.text=CompactDistance?Distance.ToString("0.#"):ui.Resolve(UserText.Message("drawing.probe.distance",Distance));
             formationLabel.text=ui.Resolve(Copy(Formation.ToString().ToLowerInvariant()));
-            result.text=ui.Resolve(string.IsNullOrEmpty(blocked)?Copy("ready"):blocked);
+            result.text=ui.Resolve(string.IsNullOrEmpty(blocked)?ReadyHint??Copy("ready"):blocked);
             result.color=string.IsNullOrEmpty(blocked)?NotebookPalette.Navy:NotebookPalette.Red;
             sketch.SetFrames(candidate==null?null:new[]{DrawingProbe.Preview(candidate,Distance,Formation)},()=>0,Bounds());
         }

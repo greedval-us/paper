@@ -32,6 +32,8 @@ namespace PaperDefense.Presentation
         public event Action<string> Rejected;
         public event Action EscapeRequested;
         public bool HasPendingGesture => drawing || panning;
+        public bool DrawLocalGrid { get; set; } = true;
+        public bool EmphasizeBody { get; set; }
         public DrawingTool Tool { get => tool; set { if (tool == value) return; CancelGesture(); tool = value; Changed?.Invoke(); } }
         public bool Eraser { get => Tool == DrawingTool.Eraser; set => Tool = value ? DrawingTool.Eraser : DrawingTool.Pencil; }
         public bool ShowGrid { get => grid; set { grid = value; SetVerticesDirty(); Changed?.Invoke(); } }
@@ -163,7 +165,7 @@ namespace PaperDefense.Presentation
         {
             vh.Clear(); if (session == null) return;
             var center = Center; float scale = Scale;
-            if (grid)
+            if (grid && DrawLocalGrid)
             {
                 for (int n = -10; n <= 10; n++)
                 {
@@ -192,11 +194,13 @@ namespace PaperDefense.Presentation
                 Point2 pivot = DrawingTemplateCatalog.Pivot(session.Blueprint, part.BindingId);
                 Vector2 offset = new Vector2(pivot.X - activePivot.X, pivot.Y - activePivot.Y);
                 bool active = part.BindingId == selected;
+                bool body = EmphasizeBody && part.BindingId == DrawingBindings.Base;
+                float opacity = EmphasizeBody && part.BindingId == DrawingBindings.Decoration ? .72f : .24f;
                 foreach (var stroke in part.Strokes)
                 {
                     if (active && moving) Draw(vh, stroke.Points, center + offset * scale, scale, new Color(.2f, .35f, .5f, .18f), .009f, MinimumStrokeWidth(canvas));
                     Draw(vh, stroke.Points, center + (offset + (active ? move : Vector2.zero)) * scale, scale,
-                        active ? (moving ? (outside ? NotebookPalette.Red : NotebookPalette.Blue) : NotebookPalette.Navy) : new Color(.22f, .35f, .5f, .24f), active ? .012f : .009f, MinimumStrokeWidth(canvas));
+                        active ? (moving ? (outside ? NotebookPalette.Red : NotebookPalette.Blue) : NotebookPalette.Navy) : body ? NotebookPalette.Navy : new Color(.22f, .35f, .5f, opacity), active || body ? .012f : .009f, MinimumStrokeWidth(canvas));
                 }
             }
             if (drawing && !moving)

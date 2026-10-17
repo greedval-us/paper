@@ -6,7 +6,7 @@ namespace PaperDefense.Presentation
     /// <summary>Small blue-pen details for the foundation page; all dimensions are local UI pixels.</summary>
     public sealed class FoundationDetailGraphic : MaskableGraphic
     {
-        public enum Kind { Frame, ProgressCircle, MountPips, Divider, SelectedCorner, GoldStack, Arrow }
+        public enum Kind { Frame, ProgressCircle, MountPips, Divider, SelectedCorner, GoldStack, Arrow, StepTab, GoldCoin, LoadMeter, Star }
 
         [SerializeField] Kind shape;
         [SerializeField] bool selected, focused, hovered;
@@ -44,6 +44,10 @@ namespace PaperDefense.Presentation
                 case Kind.SelectedCorner: Corner(bounds); break;
                 case Kind.GoldStack: Gold(bounds); break;
                 case Kind.Arrow: Arrow(bounds); break;
+                case Kind.StepTab: StepTab(bounds); break;
+                case Kind.GoldCoin: Coin(bounds.center, Mathf.Min(bounds.width, bounds.height) * .40f); break;
+                case Kind.LoadMeter: LoadMeter(bounds); break;
+                case Kind.Star: Star(bounds); break;
             }
             pen.CopyTo(vh, Vector2.zero, 1);
         }
@@ -107,6 +111,56 @@ namespace PaperDefense.Presentation
                 selected ? Alpha(WorkshopUi.Paper, .9f) : Alpha(ink, .23f), 48);
         }
 
+        void StepTab(Rect bounds)
+        {
+            Rect outer = Inset(bounds, 1.5f);
+            float tip = count < total - 1 ? Mathf.Min(17, outer.width * .12f) : 0;
+            Color ink = selected ? WorkshopUi.Blue : color;
+            Color paper = selected ? WorkshopUi.Blue : WorkshopUi.Paper;
+            float weight = focused ? 2.5f : hovered || selected ? 1.9f : strokeWidth;
+            TabPolygon(outer, tip, paper, ink, weight);
+            TabPolygon(Inset(bounds, 4), Mathf.Max(0, tip - 1.5f), Color.clear,
+                Alpha(selected ? WorkshopUi.Paper : ink, selected ? .43f : .25f), .65f);
+            if (selected)
+                for (float x = outer.xMin + 10; x < outer.xMax - tip - 23; x += 7)
+                    pen.Line(new Vector2(x, outer.yMin + 6), new Vector2(x + 17, outer.yMax - 6), .6f, Alpha(WorkshopUi.Paper, .14f));
+            if (focused)
+                TabPolygon(Inset(bounds, 7), Mathf.Max(0, tip - 3), Color.clear,
+                    selected ? WorkshopUi.Paper : WorkshopUi.Blue, 1.8f);
+        }
+
+        void TabPolygon(Rect bounds, float tip, Color paper, Color ink, float weight)
+        {
+            float corner = Mathf.Min(5, bounds.height * .15f);
+            Vector2[] points = tip > 0 ? new[]
+            {
+                new Vector2(bounds.xMin + corner, bounds.yMax),
+                new Vector2(bounds.xMax - tip, bounds.yMax),
+                new Vector2(bounds.xMax, bounds.center.y),
+                new Vector2(bounds.xMax - tip, bounds.yMin),
+                new Vector2(bounds.xMin + corner, bounds.yMin),
+                new Vector2(bounds.xMin, bounds.yMin + corner),
+                new Vector2(bounds.xMin, bounds.yMax - corner)
+            } : new[]
+            {
+                new Vector2(bounds.xMin + corner, bounds.yMax),
+                new Vector2(bounds.xMax - corner, bounds.yMax),
+                new Vector2(bounds.xMax, bounds.yMax - corner),
+                new Vector2(bounds.xMax, bounds.yMin + corner),
+                new Vector2(bounds.xMax - corner, bounds.yMin),
+                new Vector2(bounds.xMin + corner, bounds.yMin),
+                new Vector2(bounds.xMin, bounds.yMin + corner),
+                new Vector2(bounds.xMin, bounds.yMax - corner)
+            };
+            Vector2 previous = points[points.Length - 1];
+            foreach (Vector2 next in points)
+            {
+                if (paper.a > 0) pen.Triangle(bounds.center, previous, next, paper);
+                pen.Line(previous, next, weight, ink);
+                previous = next;
+            }
+        }
+
         void Pips(Rect bounds)
         {
             int slots = Mathf.Clamp(total, 1, 8), filled = Mathf.Clamp(count, 0, slots);
@@ -152,6 +206,31 @@ namespace PaperDefense.Presentation
             Coin(center + new Vector2(-4, 0) * scale, 5.7f * scale);
             Coin(center + new Vector2(5, 1) * scale, 5.6f * scale);
             Coin(center + new Vector2(0, 8) * scale, 5.7f * scale);
+        }
+
+        void LoadMeter(Rect bounds)
+        {
+            var inside = Inset(bounds, 2);
+            Rounded(inside, inside.height * .45f, new Color32(207, 215, 227, 255), color, 1);
+            float fraction = total <= 0 ? 0 : Mathf.Clamp01((float)count / total);
+            if (fraction <= 0) return;
+            inside.width *= fraction;
+            Rounded(inside, Mathf.Min(inside.height * .45f, inside.width * .45f), count > total ? WorkshopUi.Warning : WorkshopUi.Blue, color, .8f);
+        }
+
+        void Star(Rect bounds)
+        {
+            float radius = Mathf.Min(bounds.width, bounds.height) * .45f;
+            Vector2 previous = bounds.center + Vector2.up * radius;
+            for (int i = 1; i <= 10; i++)
+            {
+                float angle = (90 + i * 36) * Mathf.Deg2Rad;
+                Vector2 next = bounds.center + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius * (i % 2 == 0 ? 1 : .46f);
+                pen.Triangle(bounds.center, previous, next, WorkshopUi.Blue);
+                pen.Line(previous, next, 1.6f, WorkshopUi.Ink);
+                pen.Line(Vector2.Lerp(bounds.center, previous, .82f), Vector2.Lerp(bounds.center, next, .82f), .9f, WorkshopUi.Paper);
+                previous = next;
+            }
         }
 
         void Coin(Vector2 center, float r)

@@ -1,0 +1,55 @@
+// Execute in Unity Play Mode through execute_code. The fixture uses a memory-only profile.
+// This authored example is validation data, never a default drawing or a shipped stencil.
+foreach(var p in UnityEngine.Object.FindObjectsByType<PaperDefense.Presentation.PlayerGameRoot>(UnityEngine.FindObjectsSortMode.None))
+    UnityEngine.Object.DestroyImmediate(p.gameObject);
+PaperDefense.Editor.FullGameUiCapture.CreateFixture();
+PaperDefense.Editor.FullGameUiCapture.Folder="docs/validation/2026-10-17-workshop-drawing";
+PaperDefense.Editor.FullGameUiCapture.AttachPreviewStore(false);
+PaperDefense.Editor.FullGameUiCapture.WorkshopStep(0);
+var w=PaperDefense.Editor.FullGameUiCapture.Wizard;
+w.Next();w.SelectWeapon(0,"weapon.piercer");w.SelectWeapon(1,"weapon.piercer");w.Next();
+var d=w.Drawing;var s=d.Session;
+var body=PaperDefense.Core.DrawingBindings.Base;
+var decor=PaperDefense.Core.DrawingBindings.Decoration;
+s.AddEllipse(body,new PaperDefense.Core.DrawingPoint(-.46f,-.48f),new PaperDefense.Core.DrawingPoint(.46f,.23f),out _);
+foreach(var m in s.Blueprint.WeaponMounts)
+{
+    var b=PaperDefense.Core.DrawingBindings.Mount(m.SlotIndex);
+    s.AddStroke(b,new[]{new PaperDefense.Core.DrawingPoint(-.067f,0),new PaperDefense.Core.DrawingPoint(-.067f,.55f),new PaperDefense.Core.DrawingPoint(-.11f,.62f),new PaperDefense.Core.DrawingPoint(0,.76f),new PaperDefense.Core.DrawingPoint(.11f,.62f),new PaperDefense.Core.DrawingPoint(.067f,.55f),new PaperDefense.Core.DrawingPoint(.067f,0),new PaperDefense.Core.DrawingPoint(-.067f,0)},out _);
+    s.AddLine(b,new PaperDefense.Core.DrawingPoint(-.06f,.13f),new PaperDefense.Core.DrawingPoint(.06f,.13f),out _);
+    s.AddLine(b,new PaperDefense.Core.DrawingPoint(-.06f,.18f),new PaperDefense.Core.DrawingPoint(.06f,.18f),out _);
+    s.AddLine(b,new PaperDefense.Core.DrawingPoint(0,.58f),new PaperDefense.Core.DrawingPoint(0,.72f),out _);
+    s.AddEllipse(b,new PaperDefense.Core.DrawingPoint(-.02f,.54f),new PaperDefense.Core.DrawingPoint(.02f,.58f),out _);
+    for(int i=0;i<4;i++)s.AddLine(b,new PaperDefense.Core.DrawingPoint(-.045f+i*.022f,.22f),new PaperDefense.Core.DrawingPoint(-.055f+i*.022f,.45f),out _);
+}
+s.AddStroke(decor,new[]{new PaperDefense.Core.DrawingPoint(-.42f,-.22f),new PaperDefense.Core.DrawingPoint(-.39f,.07f),new PaperDefense.Core.DrawingPoint(-.25f,.21f),new PaperDefense.Core.DrawingPoint(.01f,.25f),new PaperDefense.Core.DrawingPoint(.28f,.17f),new PaperDefense.Core.DrawingPoint(.42f,-.05f),new PaperDefense.Core.DrawingPoint(.42f,-.23f)},out _);
+s.AddStroke(decor,new[]{new PaperDefense.Core.DrawingPoint(-.42f,-.25f),new PaperDefense.Core.DrawingPoint(-.26f,-.32f),new PaperDefense.Core.DrawingPoint(0,-.34f),new PaperDefense.Core.DrawingPoint(.25f,-.31f),new PaperDefense.Core.DrawingPoint(.43f,-.25f)},out _);
+for(int i=0;i<6;i++)
+{
+    float x=-.32f+i*.128f;
+    s.AddEllipse(decor,new PaperDefense.Core.DrawingPoint(x-.012f,-.22f),new PaperDefense.Core.DrawingPoint(x+.012f,-.195f),out _);
+}
+for(int i=0;i<7;i++)
+{
+    float x=-.29f+i*.08f;
+    s.AddLine(decor,new PaperDefense.Core.DrawingPoint(x,-.30f),new PaperDefense.Core.DrawingPoint(x-.05f,-.42f),out _);
+}
+s.AddStroke(decor,new[]{new PaperDefense.Core.DrawingPoint(.24f,.02f),new PaperDefense.Core.DrawingPoint(.265f,-.04f),new PaperDefense.Core.DrawingPoint(.33f,-.04f),new PaperDefense.Core.DrawingPoint(.28f,-.08f),new PaperDefense.Core.DrawingPoint(.30f,-.15f),new PaperDefense.Core.DrawingPoint(.24f,-.11f),new PaperDefense.Core.DrawingPoint(.18f,-.15f),new PaperDefense.Core.DrawingPoint(.20f,-.08f),new PaperDefense.Core.DrawingPoint(.15f,-.04f),new PaperDefense.Core.DrawingPoint(.215f,-.04f),new PaperDefense.Core.DrawingPoint(.24f,.02f)},out _);
+s.AddRectangle(decor,new PaperDefense.Core.DrawingPoint(-.32f,-.03f),new PaperDefense.Core.DrawingPoint(-.12f,-.25f),out _);
+s.AddEllipse(decor,new PaperDefense.Core.DrawingPoint(-.28f,-.065f),new PaperDefense.Core.DrawingPoint(-.16f,-.19f),out _);
+s.AddLine(decor,new PaperDefense.Core.DrawingPoint(-.25f,-.10f),new PaperDefense.Core.DrawingPoint(-.25f,-.12f),out _);
+s.AddLine(decor,new PaperDefense.Core.DrawingPoint(-.19f,-.10f),new PaperDefense.Core.DrawingPoint(-.19f,-.12f),out _);
+s.AddStroke(decor,new[]{new PaperDefense.Core.DrawingPoint(-.25f,-.145f),new PaperDefense.Core.DrawingPoint(-.22f,-.16f),new PaperDefense.Core.DrawingPoint(-.19f,-.145f)},out _);
+foreach(float x in new[]{-.32f,.02f,.30f})
+{
+    s.AddStroke(decor,new[]{new PaperDefense.Core.DrawingPoint(x-.06f,-.42f),new PaperDefense.Core.DrawingPoint(x+.055f,-.45f),new PaperDefense.Core.DrawingPoint(x+.10f,-.59f),new PaperDefense.Core.DrawingPoint(x-.11f,-.59f),new PaperDefense.Core.DrawingPoint(x-.06f,-.42f)},out _);
+    s.AddEllipse(decor,new PaperDefense.Core.DrawingPoint(x-.025f,-.49f),new PaperDefense.Core.DrawingPoint(x+.025f,-.54f),out _);
+}
+d.Canvas.FinishStroke();
+d.Canvas.ShowWorkingGeometry=false;d.Canvas.SelectedBinding=PaperDefense.Core.DrawingBindings.Mount1;
+d.Canvas.Zoom=1.15f;d.Canvas.SnapToGrid=true;
+// Disable mouse hover only for captures, after functional tests use normal real raycasters.
+foreach(var m in UnityEngine.Object.FindObjectsByType<UnityEngine.InputSystem.UI.InputSystemUIInputModule>(UnityEngine.FindObjectsSortMode.None))m.enabled=false;
+UnityEngine.EventSystems.EventSystem.current?.SetSelectedGameObject(null);
+PaperDefense.Editor.FullGameUiCapture.Capture("drawing-final-1600x900",1600,900);
+return new{d.Candidate.FreeformDesign.InkUsed,d.Candidate.FreeformDesign.InkBudget};

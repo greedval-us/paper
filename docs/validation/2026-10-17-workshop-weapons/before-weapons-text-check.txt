@@ -1,0 +1,4 @@
+Caption: Открыть за 60 золота [visible -1/20]
+Caption: Открыть за 40 золота [visible -1/20]
+Caption: Открыть за 40 золота [visible -1/20]
+Caption: Дополнения и настройки [visible -1/22]

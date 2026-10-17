@@ -100,11 +100,24 @@ namespace PaperDefense.Tests
             var nodes = root.GetComponentsInChildren<RectTransform>(true);
             var area = System.Array.Find(nodes, x => x.name == "Guided drawing work area");
             var summary = System.Array.Find(nodes, x => x.name == "Guided drawing summary");
-            var scroll = System.Array.Find(root.GetComponentsInChildren<ScrollRect>(), x => x.name == "Workshop responsive scroll");
-            if (summary.anchoredPosition.x < 1)
-                Assert.That(-summary.anchoredPosition.y - area.rect.height * area.localScale.y, Is.EqualTo(20).Within(1));
-            else Assert.That(summary.anchoredPosition.y, Is.EqualTo(0).Within(1));
+            var page = wizard.Drawing.Root.GetComponent<RectTransform>();
+            var scroll = System.Array.Find(root.GetComponentsInChildren<ScrollRect>(true), x => x.name == "Workshop responsive scroll");
+            Assert.That(area, Is.Not.Null); Assert.That(summary, Is.Not.Null); Assert.That(scroll, Is.Not.Null);
+            Assert.That(scroll.gameObject.activeInHierarchy, Is.False, "The drawing step uses the visible board directly.");
+            Assert.That(page.IsChildOf(scroll.content), Is.False);
+            var areaBounds = BoundsInPage(page, area); var summaryBounds = BoundsInPage(page, summary);
+            Assert.That(summaryBounds.xMin, Is.GreaterThanOrEqualTo(areaBounds.xMax), "The summary stays beside the visible sheet.");
+            Assert.That(summaryBounds.yMax, Is.EqualTo(areaBounds.yMax).Within(1));
+            AssertContained(page.rect, areaBounds, area.name); AssertContained(page.rect, summaryBounds, summary.name);
+            yield return null; Canvas.ForceUpdateCanvases();
+            AssertVisibleInCanvas(wizard.Drawing.Canvas.rectTransform);
+            AssertVisibleInCanvas(summary);
+
+            // Seed a real scroll range, as a previously visited Review can leave one behind.
+            scroll.content.sizeDelta = new Vector2(scroll.content.sizeDelta.x, scroll.viewport.rect.height + 300);
+            Canvas.ForceUpdateCanvases();
             scroll.verticalNormalizedPosition = 0;
+            Assert.That(scroll.verticalNormalizedPosition, Is.EqualTo(0).Within(.01f));
             wizard.GoToStep(1); yield return null; yield return null;
             Assert.That(scroll.verticalNormalizedPosition, Is.EqualTo(1).Within(.01f));
             scroll.verticalNormalizedPosition = 0;
@@ -125,11 +138,20 @@ namespace PaperDefense.Tests
             root.GetComponentInChildren<WorkshopResponsiveLayout>().Apply(1024, 768);
             var probe = Find("Drawing probe fire");
             var events = UnityEngine.EventSystems.EventSystem.current;
+            var scroll = System.Array.Find(root.GetComponentsInChildren<ScrollRect>(true), x => x.name == "Workshop responsive scroll");
+            Assert.That(scroll, Is.Not.Null);
+            Assert.That(scroll.gameObject.activeInHierarchy, Is.False);
+            Assert.That(probe.GetComponentInParent<ScrollRect>(), Is.Null, "The embedded probe is directly visible on the drawing board.");
             events.SetSelectedGameObject(probe.gameObject); yield return null;
-            AssertVisibleInWorkshop((RectTransform)probe.transform);
+            Canvas.ForceUpdateCanvases();
+            Assert.That(events.currentSelectedGameObject, Is.SameAs(probe.gameObject));
+            AssertVisibleInCanvas((RectTransform)probe.transform);
+            AssertVisibleInCanvas(wizard.Drawing.Canvas.rectTransform);
             Assert.That(wizard.Next(), Is.True); yield return null; yield return null;
             var field = System.Array.Find(root.GetComponentsInChildren<InputField>(), x => x.name == "Wizard name");
-            var scroll = System.Array.Find(root.GetComponentsInChildren<ScrollRect>(), x => x.name == "Workshop responsive scroll");
+            Assert.That(field, Is.Not.Null);
+            Assert.That(scroll.gameObject.activeInHierarchy, Is.True, "Review retains its scrollable name and save controls.");
+            Assert.That(field.transform.IsChildOf(scroll.content), Is.True);
             scroll.verticalNormalizedPosition = 0;
             events.SetSelectedGameObject(field.gameObject); yield return null;
             AssertVisibleInWorkshop((RectTransform)field.transform);
@@ -137,23 +159,47 @@ namespace PaperDefense.Tests
 
         void AssertVisibleInWorkshop(RectTransform target)
         {
-            var viewport = System.Array.Find(root.GetComponentsInChildren<ScrollRect>(), x => x.name == "Workshop responsive scroll").viewport;
-            var corners = new Vector3[4]; target.GetWorldCorners(corners);
-            foreach (var corner in corners)
-                Assert.That(viewport.InverseTransformPoint(corner).y, Is.InRange(viewport.rect.yMin - 1, viewport.rect.yMax + 1), target.name);
+            var scroll = System.Array.Find(root.GetComponentsInChildren<ScrollRect>(true), x => x.name == "Workshop responsive scroll");
+            Assert.That(scroll, Is.Not.Null); Assert.That(scroll.gameObject.activeInHierarchy, Is.True);
+            AssertContained(scroll.viewport.rect, BoundsInPage(scroll.viewport, target), target.name);
+        }
+
+        static void AssertVisibleInCanvas(RectTransform target)
+        {
+            Assert.That(target.gameObject.activeInHierarchy, Is.True, target.name);
+            var canvas = target.GetComponentInParent<Canvas>().rootCanvas.GetComponent<RectTransform>();
+            AssertContained(canvas.rect, BoundsInPage(canvas, target), target.name);
+        }
+
+        static void AssertContained(Rect available, Rect bounds, string context)
+        {
+            Assert.That(bounds.xMin, Is.GreaterThanOrEqualTo(available.xMin - 1), context);
+            Assert.That(bounds.xMax, Is.LessThanOrEqualTo(available.xMax + 1), context);
+            Assert.That(bounds.yMin, Is.GreaterThanOrEqualTo(available.yMin - 1), context);
+            Assert.That(bounds.yMax, Is.LessThanOrEqualTo(available.yMax + 1), context);
         }
 
         [UnityTest] public IEnumerator BattleHintUsesTheDockCaptionAndRestoresTheBlueprintName()
         {
-            game.StartBattle(); yield return null;
-            var label = System.Array.Find(root.GetComponentsInChildren<Text>(), x => x.name == "Battle tool hint");
-            Assert.That(label.text, Does.Contain(GameText.Resolve(game.Run.BuildLoadout[0].Name)));
-            var button = Find("Build tool 11");
             var events = UnityEngine.EventSystems.EventSystem.current;
-            events.SetSelectedGameObject(button.gameObject); yield return null;
-            Assert.That(label.text, Does.Contain("Окраска"));
-            events.SetSelectedGameObject(null); yield return null;
-            Assert.That(label.text, Does.Contain(GameText.Resolve(game.Run.BuildLoadout[0].Name)));
+            var inputModule = events.currentInputModule;
+            bool inputWasEnabled = inputModule != null && inputModule.enabled;
+            if (inputModule != null) inputModule.enabled = false;
+            try
+            {
+                game.StartBattle(); yield return null;
+                var label = System.Array.Find(root.GetComponentsInChildren<Text>(), x => x.name == "Battle tool hint");
+                Assert.That(label.text, Does.Contain(GameText.Resolve(game.Run.BuildLoadout[0].Name)));
+                var button = Find("Build tool 11");
+                events.SetSelectedGameObject(button.gameObject); yield return null;
+                Assert.That(label.text, Does.Contain("Окраска"));
+                events.SetSelectedGameObject(null); yield return null;
+                Assert.That(label.text, Does.Contain(GameText.Resolve(game.Run.BuildLoadout[0].Name)));
+            }
+            finally
+            {
+                if (inputModule != null) inputModule.enabled = inputWasEnabled;
+            }
         }
 
         [UnityTest] public IEnumerator PreparationPickerChangesOnlyTheChosenSlotAfterAnExplicitChoice()

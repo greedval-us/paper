@@ -16,6 +16,8 @@ namespace PaperDefense.Presentation
         int visiblePage = -1;
         bool stencilWasOpen;
         bool foundationHeaderApplied;
+        WizardWeaponHeader weaponHeader;
+        WizardDrawingHeader drawingHeader;
         readonly Dictionary<string, RectTransform> elements = new Dictionary<string, RectTransform>();
         readonly Dictionary<RectTransform, Vector2> sheetSizes = new Dictionary<RectTransform, Vector2>();
         readonly Dictionary<Graphic, HeaderGraphicState> headerStyles = new Dictionary<Graphic, HeaderGraphicState>();
@@ -57,13 +59,20 @@ namespace PaperDefense.Presentation
             elements.Clear();
             foreach (var item in board.GetComponentsInChildren<RectTransform>(true)) if (!elements.ContainsKey(item.name)) elements[item.name] = item;
             var layout = new PlayerLayout(width, height);
-            float fullWidth = layout.Width, w = Mathf.Min(1600, fullWidth), h = layout.Height;
+            bool weapons = wizard != null && wizard.Step == 1;
+            bool drawingPage = wizard != null && wizard.Step == 2;
+            float pageScale = drawingPage ? Mathf.Max(1, 1200 / layout.Width, 850 / layout.Height) :
+                weapons ? Mathf.Max(1, 1024 / layout.Width, 850 / layout.Height) : 1;
+            float fullWidth = layout.Width * pageScale;
+            float w = Mathf.Min(1600, fullWidth), h = layout.Height * (fullWidth / layout.Width);
             float offset = (fullWidth - w) / 2;
             scaler.referenceResolution = new Vector2(fullWidth, h); board.sizeDelta = new Vector2(fullWidth, h);
             bool foundation = wizard != null && wizard.Step == 0;
-            viewport.gameObject.SetActive(!foundation);
+            if (!weapons) weaponHeader?.Restore(wizard == null ? 0 : wizard.Step);
+            if (!drawingPage) drawingHeader?.Restore(wizard == null ? 0 : wizard.Step);
+            viewport.gameObject.SetActive(!foundation && !weapons && !drawingPage);
             Visible("Wizard back", true);
-            Visible("Wizard navigation", !foundation);
+            Visible("Wizard navigation", !foundation && !weapons && !drawingPage);
             if (foundation)
             {
                 Foundation(w, h, offset, fullWidth);
@@ -75,6 +84,55 @@ namespace PaperDefense.Presentation
             }
             RestoreFoundationHeader();
             Visible("Wizard title", true);
+            if (weapons)
+            {
+                bool compact = w < 1350;
+                float top = compact ? 136 : 142, weaponBodyHeight = h - top - 82;
+                Place("Guided workshop", new Rect(0, 0, fullWidth, h));
+                Visible("Wizard assembled thumbnail", false); Visible("Wizard thumbnail caption", false);
+                Visible("Wizard summary", false);
+                for (int i = 0; i < 3; i++) Visible("Wizard connector " + i, false);
+                if (weaponHeader == null) weaponHeader = new WizardWeaponHeader(board, Find);
+                weaponHeader.Apply(w, h, offset, compact);
+                wizard.ReflowWeapons(w - 48, weaponBodyHeight);
+                Place("Wizard weapons", new Rect(offset + 24, top, w - 48, weaponBodyHeight));
+                var hiddenScroll = viewport.GetComponent<ScrollRect>();
+                hiddenScroll.StopMovement(); hiddenScroll.verticalNormalizedPosition = 1;
+                visiblePage = 1; stencilWasOpen = false;
+                AdaptSheets(fullWidth, h);
+                foreach (var control in board.GetComponentsInChildren<Selectable>(true))
+                    if (control.GetComponent<PlayerTooltip>() == null && control.GetComponent<WorkshopTooltip>() == null && control.GetComponent<UiScrollFocus>() == null)
+                        control.gameObject.AddComponent<UiScrollFocus>();
+                return;
+            }
+            if (drawingPage)
+            {
+                const float top = 144;
+                float drawingBodyHeight = h - top - 82;
+                Place("Guided workshop", new Rect(0, 0, fullWidth, h));
+                Visible("Wizard assembled thumbnail", false); Visible("Wizard thumbnail caption", false);
+                Visible("Wizard summary", false);
+                for (int i = 0; i < 3; i++) Visible("Wizard connector " + i, false);
+                if (drawingHeader == null) drawingHeader = new WizardDrawingHeader(board, Find, player);
+                drawingHeader.Apply(w, h, offset, w < 1350);
+                var drawingRoot = Find("Guided drawing");
+                if (drawingRoot != null)
+                {
+                    if (drawingRoot.parent != board) drawingRoot.SetParent(board, false);
+                    drawingRoot.localScale = Vector3.one;
+                    drawingRoot.SetSiblingIndex(2);
+                    wizard.Drawing.ReflowPage(w - 48, drawingBodyHeight);
+                    WorkshopUi.Place(drawingRoot, new Rect(offset + 24, top, w - 48, drawingBodyHeight));
+                }
+                var hiddenScroll = viewport.GetComponent<ScrollRect>();
+                hiddenScroll.StopMovement(); hiddenScroll.verticalNormalizedPosition = 1;
+                visiblePage = 2; stencilWasOpen = false;
+                AdaptSheets(fullWidth, h);
+                foreach (var control in board.GetComponentsInChildren<Selectable>(true))
+                    if (control.GetComponent<PlayerTooltip>() == null && control.GetComponent<WorkshopTooltip>() == null && control.GetComponent<UiScrollFocus>() == null)
+                        control.gameObject.AddComponent<UiScrollFocus>();
+                return;
+            }
             bool verticalSteps = w >= 1450;
             bool shortPage = h < 850;
             float navigationY = shortPage ? 76 : 88;

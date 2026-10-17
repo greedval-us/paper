@@ -37,6 +37,8 @@ namespace PaperDefense.Presentation
         bool refreshing, detailsVisible;
         TowerPreview? openingPreview, previousPreview, lastChangePreview;
         readonly UnityEngine.UI.Text lastChange;
+        readonly GuidedDrawingLayout pageLayout;
+        GameObject stencilShade;
 
         public GameObject Root { get; }
         public DrawingEditSession Session { get; private set; }
@@ -134,6 +136,7 @@ namespace PaperDefense.Presentation
             Canvas.Rejected += Reject;
             Canvas.GestureBegan += () => { Probe?.Invalidate(); emptyState.SetActive(false); };
             Canvas.EscapeRequested += () => BackRequested?.Invoke();
+            pageLayout = new GuidedDrawingLayout(Root.transform, ui, Canvas,Probe);
             ShowDetails(false); stencilPane.SetActive(false); Root.SetActive(false);
         }
 
@@ -177,7 +180,7 @@ namespace PaperDefense.Presentation
 
         public void Hide()
         {
-            Canvas.CancelGesture(); Probe?.Reset(); ui.HideTooltip(); stencilPane.SetActive(false); Root.SetActive(false);
+            Canvas.CancelGesture(); Probe?.Reset(); ui.HideTooltip(); ShowStencils(false); pageLayout.ShowExtras(false); Root.SetActive(false);
         }
 
         public void Reflow(float availableHeight)
@@ -222,6 +225,8 @@ namespace PaperDefense.Presentation
             }
         }
 
+        public void ReflowPage(float availableWidth,float availableHeight)=>pageLayout.Reflow(availableWidth,availableHeight);
+
         public bool TryFinish(out TowerBlueprint candidate, out string reason)
         {
             candidate = null; reason = "";
@@ -247,10 +252,24 @@ namespace PaperDefense.Presentation
         public void ShowStencils(bool visible)
         {
             if (visible && !stencilPane.activeSelf) stencilFeedback = null;
-            Canvas.CancelGesture(); ui.HideTooltip(); stencilPane.SetActive(visible);
+            Canvas.CancelGesture(); ui.HideTooltip();
+            if(visible&&stencilShade==null)
+            {
+                var owner=Root.transform.parent as RectTransform;
+                stencilShade=ui.Panel(owner,"Guided drawing stencil shade",new Rect(0,0,owner.rect.width,owner.rect.height),new Color(.1f,.2f,.34f,.30f),true).gameObject;
+                stencilPane.transform.SetParent(stencilShade.transform,false);
+            }
+            stencilPane.SetActive(visible);
+            if(!visible&&stencilShade!=null)
+            {
+                stencilShade.SetActive(false);
+                stencilPane.transform.SetParent(Root.transform,false);
+                UnityEngine.Object.DestroyImmediate(stencilShade);stencilShade=null;
+            }
+            pageLayout?.ReflowCatalogue();
             // The covered drawing Graphic must not receive keyboard edits behind the catalogue.
             Canvas.gameObject.SetActive(!visible);
-            if (visible && Session != null) { RefreshStencils(); WorkshopModal.Open(stencilPane, () => ShowStencils(false)); ui.HideTooltip(); }
+            if (visible && Session != null) { RefreshStencils(); WorkshopModal.Open(stencilShade, () => ShowStencils(false)); ui.HideTooltip(); }
         }
 
         public void SelectNextPart()
@@ -318,6 +337,7 @@ namespace PaperDefense.Presentation
                 RefreshDetails(design, resolved);
                 if (stencilPane.activeSelf) RefreshStencils();
                 Probe?.Bind(Candidate, probeMount, !design.IsUsable ? design.Message : resolved.HasValue && !resolved.Value.Valid ? resolved.Value.Reason : null);
+                pageLayout.Refresh(resolved, design, probeMount,Candidate,lastChangePreview);
                 if (emittedHash != Session.Snapshot.GeometryHash)
                 { emittedHash = Session.Snapshot.GeometryHash; notify = Candidate; }
             }
@@ -373,6 +393,7 @@ namespace PaperDefense.Presentation
             }
             partSignature = signature;
             if (!parts.ContainsKey(Canvas.SelectedBinding)) Canvas.SelectedBinding = DrawingBindings.Base;
+            pageLayout?.ReflowCurrent();
         }
 
         static string PartName(string binding)

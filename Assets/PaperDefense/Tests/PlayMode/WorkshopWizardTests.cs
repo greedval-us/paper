@@ -62,7 +62,7 @@ namespace PaperDefense.Tests
         }
         [Test] public void ClosedDetailsAreNotVisibleUntilRequested()
         {
-            wizard.Next();
+            wizard.Next();wizard.Next();Draw();wizard.Next();
             var details=root.GetComponentsInChildren<UnityEngine.UI.Text>(true).Single(t=>t.name=="Wizard detailed values");
             Assert.That(details.gameObject.activeInHierarchy,Is.False);Button("Wizard details").onClick.Invoke();Assert.That(details.gameObject.activeInHierarchy,Is.True);
         }

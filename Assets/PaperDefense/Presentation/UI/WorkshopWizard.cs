@@ -203,9 +203,10 @@ namespace PaperDefense.Presentation
         public void Suspend(){CloseOverlays();}
         public void Resume(){BuildStep();}
         internal void ReflowFoundation(float width,float height)=>assembly.ReflowFoundation(width,height);
+        internal void ReflowWeapons(float width,float height)=>assembly.ReflowWeapons(width,height);
         void BuildStep()
         {
-            ui.HideTooltip();Drawing.Hide();assembly.Hide();summaryRoot.SetActive(Step!=0&&Step!=2);
+            ui.HideTooltip();Drawing.Hide();assembly.Hide();summaryRoot.SetActive(Step==3);
             if(reviewRoot!=null){UnityEngine.Object.DestroyImmediate(reviewRoot);reviewRoot=null;name=null;reviewDrawing=null;}
             if(Step<2)assembly.Show(Step,Draft);
             else if(Step==2)Drawing.Open(Draft);
@@ -253,9 +254,10 @@ namespace PaperDefense.Presentation
         public void Refresh()
         {
             if(Draft==null)return;
+            if(Step==1)assembly.RefreshWeapons(Draft);
             gold.text=ui.Resolve(Copy("gold",run.Workshop.Gold));smallPreview.ShowReference=preview.ShowReference=Draft.Drawing.IsEmpty;smallPreview.SetBlueprint(Draft);preview.SetBlueprint(Draft);if(reviewDrawing!=null)reviewDrawing.SetBlueprint(Draft);
             summaryTitle.text=ui.Resolve(Copy(Draft.Drawing.IsEmpty?"assembly_preview":"your_tower"));
-            for(int i=0;i<4;i++){ui.SetSelected(steps[i],i==Step);steps[i].interactable=i<=reached;stepNumbers[i].gameObject.SetActive(i>=Step);stepChecks[i].gameObject.SetActive(i<Step);}
+            for(int i=0;i<4;i++){ui.SetSelected(steps[i],i==Step);steps[i].interactable=i<=reached;stepNumbers[i].gameObject.SetActive(Step==2||i>=Step);stepChecks[i].gameObject.SetActive(i<Step);}
             var nextLabel=next.GetComponentInChildren<UnityEngine.UI.Text>();nextLabel.text=ui.Resolve(Copy(Step==0?"to_weapon":Step==1?"to_drawing":Step==2?"to_review":"save"));
             var stats=run.PreviewBlueprint(Draft);
             var first=stats.Weapons!=null&&stats.Weapons.Count>0?stats.Weapons[0]:(WeaponPreview?)null;

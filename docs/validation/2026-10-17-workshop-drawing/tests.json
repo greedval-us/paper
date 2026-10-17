@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-17",
+  "unity": "6000.5.7f1",
+  "assembly": "PaperDefense.Integration.Tests",
+  "job_id": "adf0c5fc0bee4ae698c1608cee021625",
+  "status": "succeeded",
+  "mode": "PlayMode",
+  "started_unix_ms": 1792213629127,
+  "finished_unix_ms": 1792213672056,
+  "last_update_unix_ms": 1792213672056,
+  "progress": {
+    "completed": 496,
+    "total": 496,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": null,
+    "last_finished_test_full_name": "PaperDefense.Tests.WorkshopWizardTests.SwitchingFoundationRequiresAssemblyRecheck",
+    "last_finished_unix_ms": 1792213671971,
+    "stuck_suspected": false,
+    "editor_is_focused": false,
+    "run_in_background": true,
+    "focus_nudge_attempts": null,
+    "focus_nudge_limit": null,
+    "focus_nudge_status": null,
+    "blocked_reason": null,
+    "failures_so_far": [],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "PlayMode",
+    "summary": {
+      "total": 496,
+      "passed": 496,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 37.3544003,
+      "resultState": "Passed"
+    },
+    "results": []
+  }
+}

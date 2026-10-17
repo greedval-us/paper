@@ -1,6 +1,6 @@
 # Ресурсы игрового оформления
 
-Основная сцена — [PaperDefenseGame.unity](../Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity). Меню, карта, подготовка, основа башни и настройки (01–04, 22) используют оформление эскизов. Новый набор охватывает также постройки, врагов, окружение и эффекты; композиции 05–21 и 23–28 ещё предстоят, включая полный HUD 15–17. Следующий экран — 05 «Оружие». [Статус переноса](Implementation-Roadmap.md).
+Основная сцена — [PaperDefenseGame.unity](../Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity). Меню, карта, подготовка, основа башни, оружие, рисунок и настройки (01–06, 22) используют оформление эскизов. Новый набор охватывает также постройки, врагов, окружение и эффекты; композиции 07–21 и 23–28 ещё предстоят, включая полный HUD 15–17. Следующий экран — 07 «Рабочая геометрия и подробности». [Статус переноса](Implementation-Roadmap.md).
 
 ## Источники и ресурсы
 
@@ -16,7 +16,8 @@
 | `Resources/Art/Player/PreparationLandscape` | Декоративный фон подготовки |
 | `Resources/Art/Player/SettingsLandscape` | Фон настроек по эскизу 22 |
 | `Resources/Art/Player/FoundationPageDecor`, `FoundationPreviewScenery` | Прозрачный нижний пейзаж и окружение предпросмотра основы 04; отдельные PNG с сохранёнными пропорциями |
-| [FoundationDetailGraphic](../Assets/PaperDefense/Presentation/UI/FoundationDetailGraphic.cs) | Тонкие рамки, круглые шаги, деления креплений, отметка выбора, стрелки и видимый фокус экрана 04 |
+| `Resources/Art/Player/DrawingWorkshopHouse` | Подробный домик шапки 06 по эскизу; прозрачный PNG, один Sprite с импортом до 512px; [промпт и происхождение](validation/2026-10-17-workshop-drawing/assets.md) |
+| [FoundationDetailGraphic](../Assets/PaperDefense/Presentation/UI/FoundationDetailGraphic.cs) | Тонкие рамки, круглые шаги, деления креплений, отметка выбора, стрелки и видимый фокус экранов 04–06 |
 | `logo.home`, `logo.settings` | Декоративные логотипы из общего каталога |
 | `tower.*`, `hero.castle`, `icon.ink-*` | Стандартные конструкции, замок и цветные чернильницы для страниц |
 | `chassis.standard`, `chassis.heavy`, `chassis.precision`, `chassis.battery` | Существующие рисунки корпусов из общего атласа для карточек и предпросмотра экрана 04 |
@@ -26,6 +27,10 @@
 | [PlayerShell.Preparation](../Assets/PaperDefense/Presentation/Player/PlayerShell.Preparation.cs) | Четыре карточки, материал, готовность, замена и запуск |
 | [PlayerShell.Settings](../Assets/PaperDefense/Presentation/Player/PlayerShell.Settings.cs) | Полный экран, текущее и выбранное разрешение, применение, радиусы и уменьшение движения |
 | [WizardFoundationPanel](../Assets/PaperDefense/Presentation/UI/WizardFoundationPanel.cs) | Экран 04: каталог корпусов, выбранная основа, реальные параметры и отдельная покупка |
+| [WizardWeaponPanel](../Assets/PaperDefense/Presentation/UI/WizardWeaponPanel.cs), [WizardWeaponHeader](../Assets/PaperDefense/Presentation/UI/WizardWeaponHeader.cs) | Экран 05: текущая сборка, вертикальные крепления, семь карточек оружия, цены, нагрузка и доступ к действующим дополнениям |
+| [WeaponAssemblyGraphic](../Assets/PaperDefense/Presentation/UI/WeaponAssemblyGraphic.cs) | Целая сборка из спрайтов общего атласа для нового черновика; собственная геометрия принятого рисунка с сохранением пропорций |
+| [GuidedDrawingLayout](../Assets/PaperDefense/Presentation/UI/GuidedDrawingLayout.cs), [DrawingSummaryLayout](../Assets/PaperDefense/Presentation/UI/DrawingSummaryLayout.cs) | Экран 06: слои над настоящим холстом, шесть инструментов, нижняя строка, меню «···», бумажная сводка, цветные шкалы и действующая проба |
+| [DrawingCanvasGraphic](../Assets/PaperDefense/Presentation/UI/DrawingCanvasGraphic.cs), [FootprintProbeSketch](../Assets/PaperDefense/Presentation/UI/FootprintProbeSketch.cs) | Редактируемые авторские штрихи и запись настоящей пробы; окружение повторно использует общие рисунки |
 | [PlayerShell.Notebook](../Assets/PaperDefense/Presentation/Player/PlayerShell.Notebook.cs) | Полная видимость фонов и общие элементы страниц |
 | [player-ru.asset](../Assets/PaperDefense/Resources/Text/player-ru.asset) | Текст игрового интерфейса |
 
@@ -41,4 +46,4 @@
 
 Проверяйте основную игру при 16:9 и 4:3, длинные имена и клавиатурный фокус. `-paper-memory-only` позволяет пройти маршрут без личного профиля. Применение общей темы не завершает композиции оставшихся экранов.
 
-[Основа башни — экран 04](validation/2026-10-17-workshop-foundation/report.md) · [Графика и разрешение](validation/2026-10-17-art-resolution/report.md) · [Дизайн](Game-Design.md) · [Порядок реализации](Implementation-Roadmap.md).
+[Рисунок — экран 06](validation/2026-10-17-workshop-drawing/report.md) · [Оружие — экран 05](validation/2026-10-17-workshop-weapons/report.md) · [Основа башни — экран 04](validation/2026-10-17-workshop-foundation/report.md) · [Графика и разрешение](validation/2026-10-17-art-resolution/report.md) · [Дизайн](Game-Design.md) · [Порядок реализации](Implementation-Roadmap.md).

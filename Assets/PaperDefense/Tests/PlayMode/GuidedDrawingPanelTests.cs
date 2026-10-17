@@ -209,16 +209,46 @@ namespace PaperDefense.Tests
             Assert.That(Text("Guided drawing detailed values").text, Does.Contain(expected));
         }
 
-        [Test] public void MainAndSummaryRemainInsideTheDrawingStepContract()
+        [TestCase(1552, 674)]
+        [TestCase(1152, 624)]
+        public void ReflowKeepsTheWorkAreaSummaryAndInputToolsInsideTheirAvailablePage(int width, int height)
         {
+            panel.ReflowPage(width, height); Canvas.ForceUpdateCanvases();
             var rects = panel.Root.GetComponentsInChildren<RectTransform>(true);
             var main = rects.Single(r => r.name == "Guided drawing work area");
             var summary = rects.Single(r => r.name == "Guided drawing summary");
             var catalogue = rects.Single(r => r.name == "Guided drawing stencil catalogue");
-            Assert.That(main.anchoredPosition, Is.EqualTo(new Vector2(300, -110))); Assert.That(main.sizeDelta, Is.EqualTo(new Vector2(840, 780)));
-            Assert.That(summary.anchoredPosition, Is.EqualTo(new Vector2(1170, -110))); Assert.That(summary.sizeDelta, Is.EqualTo(new Vector2(400, 780)));
-            Assert.That(catalogue.anchoredPosition, Is.EqualTo(main.anchoredPosition)); Assert.That(catalogue.sizeDelta, Is.EqualTo(main.sizeDelta));
+            var page = panel.Root.GetComponent<RectTransform>();
+            var available = new Rect(page.rect.xMin, page.rect.yMax - height, width, height);
+            foreach (var region in new[] { main, summary, catalogue })
+            {
+                var bounds = BoundsIn(page, region);
+                Assert.That(bounds.xMin, Is.GreaterThanOrEqualTo(available.xMin - 1), region.name);
+                Assert.That(bounds.xMax, Is.LessThanOrEqualTo(available.xMax + 1), region.name);
+                Assert.That(bounds.yMin, Is.GreaterThanOrEqualTo(available.yMin - 1), region.name);
+                Assert.That(bounds.yMax, Is.LessThanOrEqualTo(available.yMax + 1), region.name);
+            }
+            AssertNoOverlap(BoundsIn(page, main), BoundsIn(page, summary), "The summary must not cover the drawing work area.");
+            var viewport = rects.Single(r => r.name == "Guided drawing viewport");
+            foreach (var tool in panel.Root.GetComponentsInChildren<UnityEngine.UI.Button>(true)
+                .Where(button => button.name.StartsWith("Guided drawing tool ")))
+                AssertNoOverlap(BoundsIn(page, viewport), BoundsIn(page, (RectTransform)tool.transform), tool.name);
             Assert.That(panel.Root.GetComponent<UnityEngine.UI.Graphic>().raycastTarget, Is.False);
+        }
+
+        static Rect BoundsIn(RectTransform parent, RectTransform child)
+        {
+            var corners = new Vector3[4]; child.GetWorldCorners(corners);
+            var points = corners.Select(point => parent.InverseTransformPoint(point)).ToArray();
+            return Rect.MinMaxRect(points.Min(point => point.x), points.Min(point => point.y),
+                points.Max(point => point.x), points.Max(point => point.y));
+        }
+
+        static void AssertNoOverlap(Rect first, Rect second, string message)
+        {
+            float width = Mathf.Min(first.xMax, second.xMax) - Mathf.Max(first.xMin, second.xMin);
+            float height = Mathf.Min(first.yMax, second.yMax) - Mathf.Max(first.yMin, second.yMin);
+            Assert.That(width > 1 && height > 1, Is.False, message);
         }
 
         sealed class Store : IWorkshopProfileStore

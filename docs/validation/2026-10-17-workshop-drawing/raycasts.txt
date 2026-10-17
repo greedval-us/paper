@@ -1,0 +1,21 @@
+PASS Wizard step 0 -> Wizard step 0
+PASS Guided drawing part mount.1 -> Guided drawing part mount.1
+PASS Guided drawing tool Pencil -> Guided drawing tool Pencil
+PASS Guided drawing tool Rectangle -> Guided drawing tool Rectangle
+PASS Guided drawing stencils -> Guided drawing stencils
+PASS Guided drawing undo -> Guided drawing undo
+PASS Guided drawing grid -> Guided drawing grid
+PASS Guided drawing snap -> Guided drawing snap
+PASS Guided drawing zoom_in -> Guided drawing zoom_in
+PASS Guided drawing width larger -> Guided drawing width larger
+PASS Guided drawing height larger -> Guided drawing height larger
+PASS Drawing probe nearer -> Drawing probe nearer
+PASS Drawing probe farther -> Drawing probe farther
+PASS Drawing probe formation -> Drawing probe formation
+PASS Drawing probe fire -> Drawing probe fire
+PASS Guided drawing details toggle -> Guided drawing details toggle
+PASS Wizard back -> Wizard back
+PASS Wizard next -> Wizard next
+PASS Wizard album -> Wizard album
+PASS Guided drawing settings -> Guided drawing settings
+PASS Guided drawing help -> Guided drawing help

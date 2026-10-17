@@ -12,6 +12,8 @@ namespace PaperDefense.Presentation
         Func<float> clock;
         Rect world = new Rect(8,4.5f,16,12);
         readonly MeshPen towerPen = new MeshPen(null, 4096);
+        public float ActorScale { get; set; }=1;
+        public bool ShowWorldGrid { get; set; }=true;
         public float WorldScale => Mathf.Min((rectTransform.rect.width - 20) / world.width, (rectTransform.rect.height - 20) / world.height);
         public float PlaybackSeconds => clock?.Invoke() ?? 0;
         public void SetRecording(FootprintProbeReport value, Func<float> sharedClock)
@@ -46,12 +48,12 @@ namespace PaperDefense.Presentation
             {
                 index = i;
             }
-            for (int x = 0; x <= 8; x++)
+            for (int x = 0; ShowWorldGrid&&x <= 8; x++)
             {
                 float at=world.xMin+x*world.width/8;
                 BlueprintSketch.Line(vh, Point(at,world.yMin),Point(at,world.yMax),1,MeshPen.Alpha(NotebookPalette.Blue,.14f));
             }
-            for (int y = 0; y <= 6; y++)
+            for (int y = 0; ShowWorldGrid&&y <= 6; y++)
             {
                 float at=world.yMin+y*world.height/6;
                 BlueprintSketch.Line(vh, Point(world.xMin,at),Point(world.xMax,at),1,MeshPen.Alpha(NotebookPalette.Blue,.14f));
@@ -61,16 +63,16 @@ namespace PaperDefense.Presentation
                 BlueprintSketch.Line(vh,Point(shot.From.X,shot.From.Y),Point(shot.To.X,shot.To.Y),2,MeshPen.Alpha(NotebookPalette.Blue,.55f));
             foreach (var tower in frame.Towers)
             {
-                towerPen.Clear(); towerPen.MinimumLineWidth = 1.2f / Mathf.Max(.1f, WorldScale);
+                towerPen.Clear(); towerPen.MinimumLineWidth = 1.2f / Mathf.Max(.1f, WorldScale*ActorScale);
                 DoodleGlyphs.StructureBase(towerPen, tower);
                 DoodleGlyphs.StructureDynamic(towerPen, tower, 1, seconds);
-                towerPen.CopyTo(vh, rectTransform.rect.center - world.center * WorldScale, WorldScale);
+                CopyActor(vh,new Vector2(tower.Cell.X+.5f,tower.Cell.Y+.5f));
             }
             foreach (var enemy in frame.Enemies)
             {
                 towerPen.Clear();
                 DoodleGlyphs.Enemy(towerPen, enemy, seconds, showHealth: false);
-                towerPen.CopyTo(vh, rectTransform.rect.center - world.center * WorldScale, WorldScale);
+                CopyActor(vh,new Vector2(enemy.Position.X,enemy.Position.Y));
             }
             foreach (var projectile in frame.Projectiles)
             {
@@ -110,6 +112,11 @@ namespace PaperDefense.Presentation
                     BlueprintSketch.Line(vh, p, q, 2, NotebookPalette.Red);
                 }
             }
+        }
+        void CopyActor(UnityEngine.UI.VertexHelper vh,Vector2 at)
+        {
+            float actorScale=Mathf.Max(.1f,ActorScale);
+            towerPen.CopyTo(vh,rectTransform.rect.center-world.center*WorldScale+at*WorldScale*(1-actorScale),WorldScale*actorScale);
         }
     }
 }
