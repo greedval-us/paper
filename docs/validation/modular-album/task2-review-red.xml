@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Failed(Child)" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 02:59:47Z" end-time="2026-10-18 02:59:48Z" duration="0,7308315">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1005" result="Failed" site="Child" start-time="2026-10-18 02:59:47Z" end-time="2026-10-18 02:59:48Z" duration="0.730832" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1999" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="845" result="Failed" site="Child" start-time="2026-10-18 02:59:47Z" end-time="2026-10-18 02:59:48Z" duration="0.617691" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="2000" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="845" result="Failed" site="Child" start-time="2026-10-18 02:59:47Z" end-time="2026-10-18 02:59:48Z" duration="0.535557" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="2001" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="845" result="Failed" site="Child" start-time="2026-10-18 02:59:47Z" end-time="2026-10-18 02:59:48Z" duration="0.435395" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1036" name="AssemblyResolverTests" fullname="PaperDefense.Tests.AssemblyResolverTests" classname="PaperDefense.Tests.AssemblyResolverTests" runstate="Runnable" testcasecount="36" result="Failed" site="Child" start-time="2026-10-18 02:59:47Z" end-time="2026-10-18 02:59:47Z" duration="0.176051" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1054" name="IntervalFloor_IsAppliedAfterCurrentFeedRatherThanToIntrinsicTiming" fullname="PaperDefense.Tests.AssemblyResolverTests.IntervalFloor_IsAppliedAfterCurrentFeedRatherThanToIntrinsicTiming" methodname="IntervalFloor_IsAppliedAfterCurrentFeedRatherThanToIntrinsicTiming" classname="PaperDefense.Tests.AssemblyResolverTests" runstate="Runnable" seed="687599883" result="Failed" start-time="2026-10-18 02:59:47Z" end-time="2026-10-18 02:59:47Z" duration="0.069786" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 0.0524999984f +/- 9.99999975E-06f
+  But was:  0.0625f
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyResolverTests.IntervalFloor_IsAppliedAfterCurrentFeedRatherThanToIntrinsicTiming () [0x00047] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyResolverTests.cs:151
+]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1080" name="AssemblySnapshotTests" fullname="PaperDefense.Tests.AssemblySnapshotTests" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-10-18 02:59:47Z" end-time="2026-10-18 02:59:48Z" duration="0.162522" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="1086" name="LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication" fullname="PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-10-18 02:59:47Z" end-time="2026-10-18 02:59:48Z" duration="0.141067" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1084" name="LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication(False)" fullname="PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication(False)" methodname="LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" seed="81339747" result="Failed" start-time="2026-10-18 02:59:47Z" end-time="2026-10-18 02:59:48Z" duration="0.037219" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: False
+  But was:  True
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication (System.Boolean health) [0x0007f] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblySnapshotTests.cs:67
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1085" name="LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication(True)" fullname="PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication(True)" methodname="LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" seed="281614648" result="Failed" start-time="2026-10-18 02:59:48Z" end-time="2026-10-18 02:59:48Z" duration="0.003907" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: False
+  But was:  True
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication (System.Boolean health) [0x0007f] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblySnapshotTests.cs:67
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task2-review-red.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

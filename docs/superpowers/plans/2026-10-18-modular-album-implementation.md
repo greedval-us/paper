@@ -1,6 +1,6 @@
 # Составной альбом — Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Выполнение начато по запросу пользователя 18.10.2026. Задача 1 завершена; следующая — задача 2. [Проверки задачи 1](../../validation/modular-album/task1-report.md).
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Выполнение начато по запросу пользователя 18.10.2026. Задачи 1–2 завершены; следующая — задача 3. [Проверки задачи 1](../../validation/modular-album/task1-report.md), [задачи 2](../../validation/modular-album/task2-report.md).
 
 **Goal:** перенести существующую игру на альбом составных башен и сооружений, восемь общих слотов и открытия деталей за уровень и золото, включая все обновлённые экраны.
 
@@ -130,12 +130,12 @@
 
 **Интерфейсы:** `AssemblyResolution AssemblyResolver.Resolve(AssemblyRecipe recipe, ComponentCatalog catalog, GameBalance balance, MaterialTier material)`. Результат: `Valid`, `Diagnostics`, `Value: ResolvedEntry` (null при ошибке). `AssemblyResolution` определяется рядом с `ResolvedEntry`. `ResolvedEntry` хранит Kind, Cost, Health, Load, Capacity, BuildSeconds, Defense, Weapons и Support; `ResolvedWeapon` — точные параметры семейства, Damage, Range, MinimumRange, Interval, MagazineSize, ReloadSeconds, AcquisitionSeconds и лимиты эффекта. `Support: ResolvedSupport` хранит вид, радиус, скорость ремонта/замедления, доход, возврат и разрешённые материалы; этот небольшой тип находится в `ResolvedEntry.cs`. `LegacyAlbumAdapter.Resolve(AlbumEntry entry, GameBalance balance)` оставляет старые страницы на старом расчёте.
 
-- [ ] Написать `AssemblyResolverTests.StarterRecipes_MatchBalanceV1` с карандашом, без цвета/усилений: `Assert.That(towerCosts, Is.EqualTo(new[] {40,64,60,99}));`, HP каждой `55`, нагрузка `[4,8,6,9]`; сооружения cost/HP `[16/200,22/55,65/70,60/80]`. Для дробных значений `Within(0.0001f)`.
-- [ ] Добавить проверки: у базового пулемёта `Damage=12, Range=8, Interval=.42, MagazineSize=6, ReloadSeconds=.42`; короткий вариант `Cost=36, Damage=10.8, Range=6.4, Interval=.357`; длинный `Cost=52, Damage=13.2, Range=10, Interval=.504`. Очередь + барабан недопустимы. Перегрузка, отсутствующий первый ствол, неверная семья головки и четвёртое крепление отклоняются.
-- [ ] Запустить оба класса в EditMode, увидеть красный результат.
-- [ ] Реализовать порядок из спецификации: проверка → исходные значения → прибавки → произведение множителей → лимиты → материал/цвет/усиления. Кредит 16 уже учтён в цене механизма и повторно не вычитается. Расчёт геометрического clearance подключается задачей 3 отдельно от числового resolver.
-- [ ] Проверить перестановку модификаторов, повторное применение материала, смешанные оружия и `N=1`. `AssemblySnapshotTests`: изменение/удаление библиотечного рецепта либо каталога после создания snapshot не меняет сохранённый состав и цену. Все новые тесты и `SharedTowerProductionTests`, `CombatContractTests`, `BalanceBoundaryTests` проходят.
-- [ ] Зафиксировать: `feat: resolve composite recipes with stable snapshots`.
+- [x] Написать `AssemblyResolverTests.StarterRecipes_MatchBalanceV1` с карандашом, без цвета/усилений: `Assert.That(towerCosts, Is.EqualTo(new[] {40,64,60,99}));`, HP каждой `55`, нагрузка `[4,8,6,9]`; сооружения cost/HP `[16/200,22/55,65/70,60/80]`. Для дробных значений `Within(0.0001f)`.
+- [x] Добавить проверки: у базового пулемёта `Damage=12, Range=8, Interval=.42, MagazineSize=6, ReloadSeconds=.42`; короткий вариант `Cost=36, Damage=10.8, Range=6.4, Interval=.357`; длинный `Cost=52, Damage=13.2, Range=10, Interval=.504`. Очередь + барабан недопустимы. Перегрузка, отсутствующий первый ствол, неверная семья головки и четвёртое крепление отклоняются.
+- [x] Запустить оба класса в EditMode, увидеть красный результат.
+- [x] Реализовать порядок из спецификации: проверка → исходные значения → прибавки → произведение множителей → лимиты → материал/цвет/усиления. Кредит 16 уже учтён в цене механизма и повторно не вычитается. Расчёт геометрического clearance подключается задачей 3 отдельно от числового resolver.
+- [x] Проверить перестановку модификаторов, повторное применение материала, смешанные оружия и `N=1`. `AssemblySnapshotTests`: изменение/удаление библиотечного рецепта либо каталога после создания snapshot не меняет сохранённый состав и цену. Все новые тесты и `SharedTowerProductionTests`, `CombatContractTests`, `BalanceBoundaryTests` проходят.
+- [x] Зафиксировать: `feat: resolve composite recipes with stable snapshots`.
 
 ## Задача 3. Графический пилот и проверка стыков
 

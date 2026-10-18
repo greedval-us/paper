@@ -72,5 +72,23 @@ namespace PaperDefense.Core
         static bool Contains<T>(IReadOnlyList<T> list,T item){foreach(var value in list)if(EqualityComparer<T>.Default.Equals(value,item))return true;return false;}
         internal float Modify(ModifierStat stat,float value,int mount=0,bool support=false)
         {foreach(var module in Modules)foreach(var modifier in module.Modifiers){if(modifier.Stat!=stat)continue;if(modifier.Scope==ModifierScope.Mount&&modifier.MountIndex!=mount)continue;if(modifier.Scope==ModifierScope.Support&&!support)continue;value=modifier.Apply(value);}return value;}
+        internal ResolvedEntry CreateLegacySnapshot(GameBalance balance,MaterialTier material)
+        {
+            var weapons=new List<ResolvedWeapon>();float feed=TowerCatalog.FeedMultiplier(Blueprint,balance);
+            foreach(var mount in Blueprint.WeaponMounts)
+            {
+                var w=Weapons[mount.SlotIndex];var stats=w.Stats;
+                float interval=TowerCatalog.ActionInterval(this,w,mount.SlotIndex,balance,feed);
+                weapons.Add(new ResolvedWeapon(mount.SlotIndex,w.Id,AssemblyWeaponFamily.None,w.Attack,
+                    TowerCatalog.WeaponDamage(this,w,balance,material,mount.SlotIndex),TowerCatalog.WeaponRange(this,w,mount.SlotIndex),w.MinimumRange,
+                    interval,1,interval,TowerCatalog.AcquisitionSeconds(this,balance,mount.SlotIndex),
+                    w.Attack==AttackKind.Line?stats.MaxPierce:stats.MaxTargets,stats.Radius,stats.FlightSeconds,stats.JumpRange,stats.ConeAngleDegrees,
+                    stats.SlowSpeedMultiplier,stats.SlowDuration,balance.Combat.MinimumActionInterval,true));
+            }
+            return new ResolvedEntry(AlbumEntryKind.Legacy,material,null,TowerCatalog.Cost(Blueprint,balance,material),
+                TowerCatalog.Health(this,balance,material),TowerCatalog.Load(Blueprint,balance),TowerCatalog.Capacity(Blueprint,balance),
+                TowerCatalog.BuildSeconds(this,balance,material),DamageRules.EffectiveDefense(TowerCatalog.Defense(Blueprint,balance),balance.Effects.MaximumDefense),
+                0,0,1,balance.Material(material).RefundFraction,weapons);
+        }
     }
 }

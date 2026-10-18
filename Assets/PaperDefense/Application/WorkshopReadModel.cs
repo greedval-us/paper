@@ -17,6 +17,9 @@ namespace PaperDefense.Application
         public bool HasUnsavedChanges { get; internal set; }
         public string LastWriteError { get; internal set; } = "";
         public bool IsUnlocked(string id)=>source.IsUnlocked(id);
+        /// <summary>Composite previews consume the page's owned snapshot; legacy pages keep historical resolution.</summary>
+        public AssemblyResolution PreviewAssembly(AlbumEntry entry,GameBalance balance,MaterialTier material=MaterialTier.Pencil)
+            =>TowerCatalog.ResolveEntry(entry,balance,material);
         public bool IsDrawingUnlocked(string id)
         {foreach(var definition in DrawingUnlocks)if(definition.Id==id)return definition.InitiallyUnlocked||source.IsUnlocked(id);return false;}
         internal WorkshopReadModel(WorkshopProfile profile, GameBalance balance=null){source=profile;Refresh(balance);}
