@@ -32,6 +32,7 @@ namespace PaperDefense.Core
         StructureView? StructureAt(Cell cell);
         BuildQuote QuoteBuild(IReadOnlyList<Cell> cells,StructureKind kind,MaterialTier tier);
         BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,TowerBlueprint blueprint,MaterialTier tier,InkColor color);
+        BuildQuote QuoteEntry(IReadOnlyList<Cell> cells,ResolvedEntry entry,MaterialTier tier,InkColor color);
     }
 
     public readonly struct WeaponMountView
@@ -150,6 +151,7 @@ namespace PaperDefense.Core
         public StructureView? StructureAt(Cell cell){var value=source.StructureAt(cell);return value==null?(StructureView?)null:new StructureView(value);}
         public BuildQuote QuoteBuild(IReadOnlyList<Cell> cells,StructureKind kind,MaterialTier tier)=>source.QuoteBuild(cells,kind,tier);
         public BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,TowerBlueprint blueprint,MaterialTier tier,InkColor color)=>source.QuoteBlueprint(cells,blueprint,tier,color);
+        public BuildQuote QuoteEntry(IReadOnlyList<Cell> cells,ResolvedEntry entry,MaterialTier tier,InkColor color)=>source.QuoteEntry(cells,entry,tier,color);
     }
 
     internal sealed class ProjectedList<TSource,TValue> : IReadOnlyList<TValue>

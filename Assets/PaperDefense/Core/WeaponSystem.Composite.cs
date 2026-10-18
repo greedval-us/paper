@@ -204,7 +204,6 @@ namespace PaperDefense.Core
             var cycle = WeaponCycleRules.Step(state.Cycle, weapon, float.Epsilon, true, feed);
             state.Cycle = cycle.StatesAfterShots[0];
             if (weapon.Attack == AttackKind.Cleanup && cleared <= 0) return;
-            structure.Aim = aim;
             BeginVisualAction(structure, weapon.SlotIndex, mount.Origin, aim, mount.Definition, tick, events);
             statistics.RecordLaunch(mount.Definition.Id);
             float damage = TowerCatalog.FiniteStat(Math.Max(0, weapon.Damage * damageMultiplier), "damage");

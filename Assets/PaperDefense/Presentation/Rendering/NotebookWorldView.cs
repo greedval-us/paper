@@ -313,6 +313,20 @@ namespace PaperDefense.Presentation
             {
                 StructureView structure = session.Structures[i];
                 var origin = new Vector2(structure.Cell.X + .5f, structure.Cell.Y + .5f);
+                if (structure.ResolvedEntry != null)
+                {
+                    foreach (var weapon in structure.ResolvedEntry.Weapons)
+                    {
+                        if (weapon.Range > 1) p.Ring(origin, weapon.Range, .035f,
+                            MeshPen.Alpha(DoodleGlyphs.TierColor(structure.Tier), .16f), 96, 1, structure.Id + weapon.SlotIndex, true);
+                        if (weapon.MinimumRange > 0) p.Ring(origin, weapon.MinimumRange, .055f,
+                            MeshPen.Alpha(NotebookPalette.Red, .35f), 72, 1, structure.Id + weapon.SlotIndex, true);
+                    }
+                    float radius = structure.ResolvedEntry.Support?.Radius ?? 0;
+                    if (radius > 0) p.Ring(origin, radius, .035f,
+                        MeshPen.Alpha(DoodleGlyphs.TierColor(structure.Tier), .16f), 96, 1, structure.Id, true);
+                    continue;
+                }
                 if (structure.Blueprint == null)
                 {
                     float range = session.Balance.WeaponRange(null, structure.Kind);
@@ -400,8 +414,8 @@ namespace PaperDefense.Presentation
             for (int i = 0; i < session.Structures.Count; i++)
             {
                 var structure = session.Structures[i];
-                float duration = structure.Blueprint != null ? session.Balance.BuildSeconds(structure.Blueprint, structure.Tier)
-                    : session.Balance.Structure(structure.Kind).BuildSeconds * session.Balance.Material(structure.Tier).BuildTimeMultiplier;
+                float duration = structure.ResolvedEntry?.BuildSeconds ?? (structure.Blueprint != null ? session.Balance.BuildSeconds(structure.Blueprint, structure.Tier)
+                    : session.Balance.Structure(structure.Kind).BuildSeconds * session.Balance.Material(structure.Tier).BuildTimeMultiplier);
                 DoodleGlyphs.StructureDynamic(p, structure, duration, visualClock.Seconds, animation, Theme);
             }
             float time = (float)visualClock.Seconds;

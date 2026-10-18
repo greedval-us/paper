@@ -1,6 +1,6 @@
 # Составной альбом — Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Выполнение начато по запросу пользователя 18.10.2026. Задачи 1–6 завершены; следующая — задача 7. [Проверки задачи 1](../../validation/modular-album/task1-report.md), [задачи 2](../../validation/modular-album/task2-report.md), [задачи 3](../../validation/modular-album/task3-report.md), [задачи 4](../../validation/modular-album/task4-report.md), [задачи 5](../../validation/modular-album/task5-report.md), [задачи 6](../../validation/modular-album/task6-report.md).
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Выполнение начато по запросу пользователя 18.10.2026. Задачи 1–7 завершены; следующая — задача 8. [Проверки задачи 1](../../validation/modular-album/task1-report.md), [задачи 2](../../validation/modular-album/task2-report.md), [задачи 3](../../validation/modular-album/task3-report.md), [задачи 4](../../validation/modular-album/task4-report.md), [задачи 5](../../validation/modular-album/task5-report.md), [задачи 6](../../validation/modular-album/task6-report.md), [задачи 7](../../validation/modular-album/task7-report.md).
 
 **Goal:** перенести существующую игру на альбом составных башен и сооружений, восемь общих слотов и открытия деталей за уровень и золото, включая все обновлённые экраны.
 
@@ -205,12 +205,12 @@
 
 **Интерфейсы:** `GameSession.QuoteEntry(IReadOnlyList<Cell> cells, ResolvedEntry entry, MaterialTier material, InkColor color)` → существующий `BuildQuote`; `TryBuildEntry(..., out string reason)` → bool с теми же входами. `RunController.QuoteEntry(..., int slot, ...)` / `BuildEntry(..., int slot, ..., out string reason)` берут только снимок начатого набора. Повторные экземпляры расходуют штрихи, а не купленные детали.
 
-- [ ] Написать `CompositeConstructionTests.EightStarters_Cost426Ink`: после размещения по одному на допустимых клетках `Assert.That(session.Ink, Is.EqualTo(214));` из начальных 640. Строительство по слоту башни и сооружения использует ровно их resolved-цену; пакет занятых/недопустимых клеток или нехватка ресурса не списывает часть стоимости. Материал меняет стоимость/HP/постройку по текущим правилам.
-- [ ] Написать `CompositeSupportTests`: ремонт 6 HP/с на дальности 5 выбирает одну ближайшую повреждённую постройку; при равенстве — меньший ID. Не лечит себя/другие посты. Два поста на одной цели дают max(rate), а не сумму; HP не превышает максимум. Замедлитель радиуса 1 даёт скорость .6; повторный эффект не перемножается.
-- [ ] Запустить три новых класса, увидеть красный результат.
-- [ ] Подключить составные объекты к занятости клеток, урону, уничтожению, продаже, навигации и статистике. Баррикада блокирует и разрушается по действующим правилам пути, замедлитель остаётся проходимым. Для переднего щита .4/90° направление берётся у основы, а не у каждого оружия; общая защита ограничена .6.
-- [ ] Проверить material/color/усиления без влияния материала на скорость ремонта; ошибка установки не создаёт entity и не расходует ресурс. Новые пользовательские команды не дают строить отдельные бесплатные tools вне набора. Пройти `ConstructionRulesIntegrationTests`, `ConstructionBoundaryTests`, `NavigationTests`, `ArmorCombatIntegrationTests`.
-- [ ] Зафиксировать: `feat: build composite towers and support from album slots`.
+- [x] Написать `CompositeConstructionTests.EightStarters_Cost426Ink`: после размещения по одному на допустимых клетках `Assert.That(session.Ink, Is.EqualTo(214));` из начальных 640. Строительство по слоту башни и сооружения использует ровно их resolved-цену; пакет занятых/недопустимых клеток или нехватка ресурса не списывает часть стоимости. Материал меняет стоимость/HP/постройку по текущим правилам.
+- [x] Написать `CompositeSupportTests`: ремонт 6 HP/с на дальности 5 выбирает одну ближайшую повреждённую постройку; при равенстве — меньший ID. Не лечит себя/другие посты. Два поста на одной цели дают max(rate), а не сумму; HP не превышает максимум. Замедлитель радиуса 1 даёт скорость .6; повторный эффект не перемножается.
+- [x] Запустить три новых класса, увидеть красный результат.
+- [x] Подключить составные объекты к занятости клеток, урону, уничтожению, продаже, навигации и статистике. Баррикада блокирует и разрушается по действующим правилам пути, замедлитель остаётся проходимым. Для переднего щита .4/90° направление берётся у основы, а не у каждого оружия; общая защита ограничена .6.
+- [x] Проверить material/color/усиления без влияния материала на скорость ремонта; ошибка установки не создаёт entity и не расходует ресурс. Новые пользовательские команды не дают строить отдельные бесплатные tools вне набора. Пройти `ConstructionRulesIntegrationTests`, `ConstructionBoundaryTests`, `NavigationTests`, `ArmorCombatIntegrationTests`.
+- [x] Зафиксировать: `feat: build composite towers and support from album slots`.
 
 ## Задача 8. Генераторы и надёжные награды
 

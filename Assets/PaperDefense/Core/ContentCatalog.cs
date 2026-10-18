@@ -116,7 +116,7 @@ namespace PaperDefense.Core
         {
             switch(kind){case StructureKind.Wall:return "tool.wall";case StructureKind.Gun:return "weapon.gun";case StructureKind.Piercer:return "weapon.piercer";case StructureKind.Mortar:return "weapon.mortar";case StructureKind.Spikes:return "tool.spikes";case StructureKind.Fan:return "weapon.fan";case StructureKind.Ricochet:return "weapon.ricochet";case StructureKind.Stapler:return "weapon.stapler";case StructureKind.Blotter:return "weapon.blotter";case StructureKind.TarPit:return "tool.tar";case StructureKind.RepairPost:return "tool.repair";default:return null;}
         }
-        public static StructureKind Weapon(string id){foreach(StructureKind kind in Enum.GetValues(typeof(StructureKind)))if(Weapon(kind)==id)return kind;return (StructureKind)(-1);}
+        public static StructureKind Weapon(string id){if(id==null)return (StructureKind)(-1);foreach(StructureKind kind in Enum.GetValues(typeof(StructureKind)))if(Weapon(kind)==id)return kind;return (StructureKind)(-1);}
         public static ChassisKind Chassis(string id)=>id=="chassis.standard"?ChassisKind.Standard:id=="chassis.heavy"?ChassisKind.Heavy:(ChassisKind)(-1);
         public static string Module(TowerModules module)=>module==TowerModules.Armor?"module.armor":module==TowerModules.Feed?"module.feed":module==TowerModules.Tracking?"module.tracking":module==TowerModules.Rail?"module.rail":null;
         public static TowerModules Module(string id)=>id=="module.armor"?TowerModules.Armor:id=="module.feed"?TowerModules.Feed:id=="module.tracking"?TowerModules.Tracking:id=="module.rail"?TowerModules.Rail:TowerModules.None;

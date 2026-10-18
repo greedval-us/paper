@@ -69,11 +69,12 @@ namespace PaperDefense.Tests
                 Assert.That(copiedDefinitions.Count, Is.EqualTo(definitions.Count), field.Name);
                 for (int i = 0; i < definitions.Count; i++) AssertCopiedFields(definitions[i], copiedDefinitions[i]);
             }
+            int configuredStructureCount = source.StructureDefinitions.Count;
             source.StructureDefinitions.Clear();
             source.MaterialDefinitions[0].DamageMultiplier = 0;
             source.EnemyDefinitions[0].MaxHealth = 999;
             source.Waves[0].Count = 999;
-            Assert.That(copy.StructureDefinitions.Count, Is.EqualTo(Enum.GetValues(typeof(StructureKind)).Length));
+            Assert.That(copy.StructureDefinitions.Count, Is.EqualTo(configuredStructureCount));
             Assert.That(copy.MaterialDefinitions[0].DamageMultiplier, Is.EqualTo(1));
             Assert.That(copy.EnemyDefinitions[0].MaxHealth, Is.EqualTo(22));
             Assert.That(copy.Waves[0].Count, Is.EqualTo(80));

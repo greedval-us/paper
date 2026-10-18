@@ -86,7 +86,7 @@ namespace PaperDefense.Core
             => QuoteBuild(cells, kind, tier, null);
 
         // Placement stays shared; an assembly supplies its complete price before affordability is checked.
-        private BuildQuote QuoteBuild(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier, int? unitPrice)
+        private BuildQuote QuoteBuild(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier, int? unitPrice, bool compositeEntry = false)
         {
             var unique = new List<Cell>();
             var quote = new BuildQuote { Cells = unique, Reason = "", Valid = false };
@@ -110,12 +110,12 @@ namespace PaperDefense.Core
                 else if (Math.Abs(cell.X - BaseCell.X) <= 1 && Math.Abs(cell.Y - BaseCell.Y) <= 1)
                     invalid = UserText.Message("copy.de6ff12a6096d83f");
                 else if (ReservedObjective(cell)) invalid = UserText.Message("copy.3d5bb5922e409c4c");
-                else if (Battlefield!=null&&!Battlefield.CanPlace(cell,unitPrice.HasValue?StructureKind.Gun:kind))
+                else if (Battlefield!=null&&!Battlefield.CanPlace(cell,unitPrice.HasValue&&!compositeEntry?StructureKind.Gun:kind))
                     invalid = Battlefield.IsOpenTerrain?UserText.Message("td.placement.terrain"):kind==StructureKind.Wall?UserText.Message("td.placement.barricade"):kind==StructureKind.Spikes||kind==StructureKind.TarPit?UserText.Message("td.placement.trap"):UserText.Message("td.placement.tower");
                 else if (StructureAt(cell) != null)
                 {
                     var existing = StructureAt(cell);
-                    if ((kind != StructureKind.Wall && kind != StructureKind.Spikes && kind != StructureKind.TarPit) || existing.Kind != kind || existing.Tier != tier)
+                    if (compositeEntry || (kind != StructureKind.Wall && kind != StructureKind.Spikes && kind != StructureKind.TarPit) || existing.Kind != kind || existing.Tier != tier)
                         invalid = UserText.Message("copy.d85abdff9eafbb67");
                     continue;
                 }
@@ -156,7 +156,8 @@ namespace PaperDefense.Core
             var structure = StructureAt(cell);
             if (structure == null) return false;
             float fraction = Clamp(structure.Health / Math.Max(1, structure.MaxHealth), 0, 1);
-            float rate = Clamp(rules.Material(structure.Tier).RefundFraction + salvageBonus, 0, rules.Progression.MaximumRefundFraction);
+            float rate = structure.ResolvedEntry?.Support?.Kind == AssemblyStructureFamily.Generator ? 0 :
+                Clamp((structure.ResolvedEntry?.RefundFraction ?? rules.Material(structure.Tier).RefundFraction) + salvageBonus, 0, rules.Progression.MaximumRefundFraction);
             refund = (int)Math.Floor(structure.PaidInk * fraction * rate + 0.00001f);
             CreditInk(refund);
             Statistics.RecordRefund(refund);
@@ -174,6 +175,7 @@ namespace PaperDefense.Core
             if (structure == null) { reason = UserText.Message("copy.e60f6b7240c54994"); return false; }
             if (structure.Tier == MaterialTier.Marker) { reason = UserText.Message("copy.f7a6e14c3b97d071"); return false; }
             if (!structure.IsComplete) { reason = UserText.Message("copy.0fbbc427bf3169b9"); return false; }
+            if (structure.ResolvedEntry != null) return TryUpgradeEntry(structure, out reason);
             var nextTier = (MaterialTier)((int)structure.Tier + 1);
             int difference = Math.Max(0, StructureBuildCost(structure, nextTier) - StructureBuildCost(structure, structure.Tier));
             if (difference > Ink) { reason = UserText.Message("copy.d952db5ec0c442f9", difference); return false; }

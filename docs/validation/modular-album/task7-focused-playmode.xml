@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="32" result="Passed" total="32" passed="32" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 05:45:20Z" end-time="2026-10-18 05:45:23Z" duration="2,455169">
+  <test-suite type="TestSuite" id="3393" name="paper" fullname="paper" runstate="Runnable" testcasecount="623" result="Passed" start-time="2026-10-18 05:45:20Z" end-time="2026-10-18 05:45:23Z" duration="2.455169" total="32" passed="32" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="3387" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="623" result="Passed" start-time="2026-10-18 05:45:20Z" end-time="2026-10-18 05:45:23Z" duration="2.444897" total="32" passed="32" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="3388" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="623" result="Passed" start-time="2026-10-18 05:45:20Z" end-time="2026-10-18 05:45:23Z" duration="2.428277" total="32" passed="32" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="3389" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="623" result="Passed" start-time="2026-10-18 05:45:20Z" end-time="2026-10-18 05:45:23Z" duration="2.411330" total="32" passed="32" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="2716" name="CompositeConstructionIntegrationTests" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" testcasecount="24" result="Passed" start-time="2026-10-18 05:45:20Z" end-time="2026-10-18 05:45:22Z" duration="2.056397" total="24" passed="24" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2725" name="ColoredTowerUsesPencilCartridgePriceEvenWhenBuiltWithMarker" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.ColoredTowerUsesPencilCartridgePriceEvenWhenBuiltWithMarker" methodname="ColoredTowerUsesPencilCartridgePriceEvenWhenBuiltWithMarker" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="462016224" result="Passed" start-time="2026-10-18 05:45:20Z" end-time="2026-10-18 05:45:20Z" duration="0.163678" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2745" name="ConfiguredAlbumSlotRequirementSurvivesRemovingOrReplacingItsAuthoringCatalog" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.ConfiguredAlbumSlotRequirementSurvivesRemovingOrReplacingItsAuthoringCatalog" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:45:20Z" end-time="2026-10-18 05:45:21Z" duration="0.080408" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2743" name="ConfiguredAlbumSlotRequirementSurvivesRemovingOrReplacingItsAuthoringCatalog(True)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.ConfiguredAlbumSlotRequirementSurvivesRemovingOrReplacingItsAuthoringCatalog(True)" methodname="ConfiguredAlbumSlotRequirementSurvivesRemovingOrReplacingItsAuthoringCatalog" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="853096551" result="Passed" start-time="2026-10-18 05:45:20Z" end-time="2026-10-18 05:45:20Z" duration="0.039934" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2744" name="ConfiguredAlbumSlotRequirementSurvivesRemovingOrReplacingItsAuthoringCatalog(False)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.ConfiguredAlbumSlotRequirementSurvivesRemovingOrReplacingItsAuthoringCatalog(False)" methodname="ConfiguredAlbumSlotRequirementSurvivesRemovingOrReplacingItsAuthoringCatalog" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="1370428770" result="Passed" start-time="2026-10-18 05:45:20Z" end-time="2026-10-18 05:45:21Z" duration="0.038341" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2742" name="ConfiguredAlbumWithOnlyLegacyPagesStillRequiresSelectedSlotsForSupportTools" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.ConfiguredAlbumWithOnlyLegacyPagesStillRequiresSelectedSlotsForSupportTools" methodname="ConfiguredAlbumWithOnlyLegacyPagesStillRequiresSelectedSlotsForSupportTools" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="1407859675" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:21Z" duration="0.038894" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2734" name="ConstructionIgnoresLaterProfileSlotAndAuthoringChanges" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.ConstructionIgnoresLaterProfileSlotAndAuthoringChanges" methodname="ConstructionIgnoresLaterProfileSlotAndAuthoringChanges" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="498076410" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:21Z" duration="0.076006" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2720" name="EightFrozenAlbumSlotsBuildTowersAndSupportForExactly426Ink" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.EightFrozenAlbumSlotsBuildTowersAndSupportForExactly426Ink" methodname="EightFrozenAlbumSlotsBuildTowersAndSupportForExactly426Ink" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="823454829" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:21Z" duration="0.075381" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2719" name="ExistingWorldViewCanBindAllEightCompositeTypesWithAndWithoutRanges" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.ExistingWorldViewCanBindAllEightCompositeTypesWithAndWithoutRanges" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:21Z" duration="0.207592" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2717" name="ExistingWorldViewCanBindAllEightCompositeTypesWithAndWithoutRanges(False)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.ExistingWorldViewCanBindAllEightCompositeTypesWithAndWithoutRanges(False)" methodname="ExistingWorldViewCanBindAllEightCompositeTypesWithAndWithoutRanges" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="138837256" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:21Z" duration="0.125651" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2718" name="ExistingWorldViewCanBindAllEightCompositeTypesWithAndWithoutRanges(True)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.ExistingWorldViewCanBindAllEightCompositeTypesWithAndWithoutRanges(True)" methodname="ExistingWorldViewCanBindAllEightCompositeTypesWithAndWithoutRanges" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="765047165" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:21Z" duration="0.077162" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="2740" name="GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:21Z" duration="0.448367" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2735" name="GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement(0,False)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement(0,False)" methodname="GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="828372500" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:21Z" duration="0.082531" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2736" name="GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement(4,True)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement(4,True)" methodname="GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="1758000589" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:21Z" duration="0.065419" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2737" name="GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement(5,True)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement(5,True)" methodname="GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="1800124194" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:21Z" duration="0.066381" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2738" name="GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement(6,False)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement(6,False)" methodname="GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="283232188" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:21Z" duration="0.161051" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2739" name="GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement(7,False)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement(7,False)" methodname="GestureUsesTheFrozenSlotEntryForContinuousOrSinglePlacement" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="2138190605" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:21Z" duration="0.068870" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="2724" name="MaterialPriceHealthAndConstructionTimeComeFromTheFrozenResolvedEntry" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.MaterialPriceHealthAndConstructionTimeComeFromTheFrozenResolvedEntry" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:22Z" duration="0.211728" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2721" name="MaterialPriceHealthAndConstructionTimeComeFromTheFrozenResolvedEntry(Pencil)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.MaterialPriceHealthAndConstructionTimeComeFromTheFrozenResolvedEntry(Pencil)" methodname="MaterialPriceHealthAndConstructionTimeComeFromTheFrozenResolvedEntry" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="406615134" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:21Z" duration="0.068228" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2722" name="MaterialPriceHealthAndConstructionTimeComeFromTheFrozenResolvedEntry(Ink)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.MaterialPriceHealthAndConstructionTimeComeFromTheFrozenResolvedEntry(Ink)" methodname="MaterialPriceHealthAndConstructionTimeComeFromTheFrozenResolvedEntry" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="773894220" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:21Z" duration="0.072451" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2723" name="MaterialPriceHealthAndConstructionTimeComeFromTheFrozenResolvedEntry(Marker)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.MaterialPriceHealthAndConstructionTimeComeFromTheFrozenResolvedEntry(Marker)" methodname="MaterialPriceHealthAndConstructionTimeComeFromTheFrozenResolvedEntry" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="738143103" result="Passed" start-time="2026-10-18 05:45:21Z" end-time="2026-10-18 05:45:22Z" duration="0.067479" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2741" name="ModernAlbumBlocksDirectSupportToolsWhileLegacyFixtureCommandsRemainCompatible" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.ModernAlbumBlocksDirectSupportToolsWhileLegacyFixtureCommandsRemainCompatible" methodname="ModernAlbumBlocksDirectSupportToolsWhileLegacyFixtureCommandsRemainCompatible" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="155872812" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.070153" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2732" name="RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.426448" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2726" name="RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched(&quot;outside&quot;)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched(&quot;outside&quot;)" methodname="RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="473141544" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.073354" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2727" name="RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched(&quot;occupied&quot;)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched(&quot;occupied&quot;)" methodname="RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="808176698" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.070896" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2728" name="RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched(&quot;empty-slot&quot;)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched(&quot;empty-slot&quot;)" methodname="RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="656030293" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.068559" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2729" name="RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched(&quot;no-ink&quot;)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched(&quot;no-ink&quot;)" methodname="RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="188363845" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.073215" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2730" name="RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched(&quot;no-color&quot;)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched(&quot;no-color&quot;)" methodname="RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="1563435370" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.069478" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2731" name="RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched(&quot;support-color&quot;)" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched(&quot;support-color&quot;)" methodname="RejectedConstructionLeavesEntitiesInkAndCartridgesUntouched" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="274871579" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.066412" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2733" name="RepeatedTowerInstancesSpendBattleInkWithoutChangingPermanentRightsOrProfile" fullname="PaperDefense.Tests.CompositeConstructionIntegrationTests.RepeatedTowerInstancesSpendBattleInkWithoutChangingPermanentRightsOrProfile" methodname="RepeatedTowerInstancesSpendBattleInkWithoutChangingPermanentRightsOrProfile" classname="PaperDefense.Tests.CompositeConstructionIntegrationTests" runstate="Runnable" seed="1962629198" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.224758" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2756" name="ConstructionBoundaryTests" fullname="PaperDefense.Tests.ConstructionBoundaryTests" classname="PaperDefense.Tests.ConstructionBoundaryTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.011889" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2757" name="ContinuousGestureInterpolatesAndDeduplicatesItsReturnPath" fullname="PaperDefense.Tests.ConstructionBoundaryTests.ContinuousGestureInterpolatesAndDeduplicatesItsReturnPath" methodname="ContinuousGestureInterpolatesAndDeduplicatesItsReturnPath" classname="PaperDefense.Tests.ConstructionBoundaryTests" runstate="Runnable" seed="1715171241" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.000826" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2759" name="QuotesAndCommandsApplyTheSameWorkshopAndLoadoutRestrictions" fullname="PaperDefense.Tests.ConstructionBoundaryTests.QuotesAndCommandsApplyTheSameWorkshopAndLoadoutRestrictions" methodname="QuotesAndCommandsApplyTheSameWorkshopAndLoadoutRestrictions" classname="PaperDefense.Tests.ConstructionBoundaryTests" runstate="Runnable" seed="1909887935" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.004353" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2758" name="SinglePlacementTracksOnlyTheLatestCellAndCannotResumeAfterCancel" fullname="PaperDefense.Tests.ConstructionBoundaryTests.SinglePlacementTracksOnlyTheLatestCellAndCannotResumeAfterCancel" methodname="SinglePlacementTracksOnlyTheLatestCellAndCannotResumeAfterCancel" classname="PaperDefense.Tests.ConstructionBoundaryTests" runstate="Runnable" seed="761996958" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.000362" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2760" name="ConstructionRulesIntegrationTests" fullname="PaperDefense.Tests.ConstructionRulesIntegrationTests" classname="PaperDefense.Tests.ConstructionRulesIntegrationTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:23Z" duration="0.328569" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2761" name="AssetConstructionRulesAreOwnedAndSharedByPreviewTrialAndBattle" fullname="PaperDefense.Tests.ConstructionRulesIntegrationTests.AssetConstructionRulesAreOwnedAndSharedByPreviewTrialAndBattle" methodname="AssetConstructionRulesAreOwnedAndSharedByPreviewTrialAndBattle" classname="PaperDefense.Tests.ConstructionRulesIntegrationTests" runstate="Runnable" seed="312616898" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.141680" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2764" name="AssetRulesAndCoreSnapshotsDoNotShareMutableTuning" fullname="PaperDefense.Tests.ConstructionRulesIntegrationTests.AssetRulesAndCoreSnapshotsDoNotShareMutableTuning" methodname="AssetRulesAndCoreSnapshotsDoNotShareMutableTuning" classname="PaperDefense.Tests.ConstructionRulesIntegrationTests" runstate="Runnable" seed="518467247" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.001288" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2763" name="ConfiguredUnlockPriceIsThePriceShownAndChargedByTheController" fullname="PaperDefense.Tests.ConstructionRulesIntegrationTests.ConfiguredUnlockPriceIsThePriceShownAndChargedByTheController" methodname="ConfiguredUnlockPriceIsThePriceShownAndChargedByTheController" classname="PaperDefense.Tests.ConstructionRulesIntegrationTests" runstate="Runnable" seed="1032845109" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:22Z" duration="0.003705" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2762" name="CurrentCapacityReachesSaveSlotTrialAndBattleQuote" fullname="PaperDefense.Tests.ConstructionRulesIntegrationTests.CurrentCapacityReachesSaveSlotTrialAndBattleQuote" methodname="CurrentCapacityReachesSaveSlotTrialAndBattleQuote" classname="PaperDefense.Tests.ConstructionRulesIntegrationTests" runstate="Runnable" seed="1706073900" result="Passed" start-time="2026-10-18 05:45:22Z" end-time="2026-10-18 05:45:23Z" duration="0.126718" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2765" name="EnemyStructureDamageIsMappedClonedAndResetWithItsDefinition" fullname="PaperDefense.Tests.ConstructionRulesIntegrationTests.EnemyStructureDamageIsMappedClonedAndResetWithItsDefinition" methodname="EnemyStructureDamageIsMappedClonedAndResetWithItsDefinition" classname="PaperDefense.Tests.ConstructionRulesIntegrationTests" runstate="Runnable" seed="1669607158" result="Passed" start-time="2026-10-18 05:45:23Z" end-time="2026-10-18 05:45:23Z" duration="0.001622" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task7-focused-playmode.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

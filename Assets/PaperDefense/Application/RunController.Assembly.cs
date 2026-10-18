@@ -9,6 +9,7 @@ namespace PaperDefense.Application
         AssemblyCommands assemblyCommands;
         public AssemblyCommands AssemblyCommands => assemblyCommands ?? (assemblyCommands = new AssemblyCommands(this));
         public RunLoadoutSnapshot RunLoadout { get; private set; }
+        bool runRequiresSlots;
         internal WorkshopProfile AssemblyProfile => profile;
         internal ComponentCatalog ConfiguredAssemblyCatalog => ConfiguredAssemblies();
         internal GameBalance AssemblyBalance => session?.Balance;
@@ -30,10 +31,13 @@ namespace PaperDefense.Application
             { LastConfigurationDiagnostic = error.ToString(); reason = UserText.Message("run.error.configuration"); return false; }
             RunLoadoutSnapshot snapshot;
             TowerBlueprint[] prepared;
+            bool requireSlots;
             try
             {
                 var candidate = profile.CreateWorkingCopy(); candidate.ConfigureContent(balance.Content);
                 var entries = candidate.GetLoadoutEntries();
+                requireSlots = balanceAsset?.dataPreset?.database?.assemblyCatalog != null ||
+                    entries.Any(entry => entry != null && entry.Kind != AlbumEntryKind.Legacy);
                 foreach (var entry in entries.Where(e => e != null))
                 {
                     if (entry.Kind == AlbumEntryKind.Legacy)
@@ -50,7 +54,7 @@ namespace PaperDefense.Application
                 reason = UserText.Message(error.ParamName == "entries" ? "run.loadout.attack_required" : "run.error.configuration");
                 return false;
             }
-            runLoadout = Array.AsReadOnly(prepared); RunLoadout = snapshot; InWorkshop = false;
+            runLoadout = Array.AsReadOnly(prepared); RunLoadout = snapshot; runRequiresSlots = requireSlots; InWorkshop = false;
             Initialize(preparedSession);
             reason = ""; WorkshopChanged?.Invoke(); return true;
         }

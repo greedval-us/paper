@@ -18,6 +18,14 @@ namespace PaperDefense.Application
 
         public ConstructionGesture() => readOnlyCells = cells.AsReadOnly();
 
+        public void Begin(Cell cell, ResolvedEntry entry)
+        {
+            if (entry == null) { Cancel(); return; }
+            var support = entry.Support?.Kind;
+            Begin(cell, entry.Kind == AlbumEntryKind.Structure &&
+                (support == AssemblyStructureFamily.Wall || support == AssemblyStructureFamily.Slow));
+        }
+
         public void Begin(Cell cell, bool continuous)
         {
             Cancel();

@@ -102,6 +102,7 @@ namespace PaperDefense.Core
                     : new StructureState(resolvedEntry);
                 tower.Id = i + 1; tower.Cell = cell; tower.Color = color; tower.IsComplete = true; tower.BuildRemaining = 0;
                 tower.Health = health; tower.MaxHealth = health; tower.Tier = MaterialTier.Pencil;
+                if (resolvedEntry != null) tower.Aim = new Point2(cell.X + 1.5f, cell.Y + .5f);
                 towers.Add(tower);
             }
             var report = new TrialReport { BlueprintId = compositeEntry?.Id ?? blueprint.Id, Scenario = scenario, Budget = budget,

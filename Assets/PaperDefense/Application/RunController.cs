@@ -38,7 +38,7 @@ namespace PaperDefense.Application
         {
             var preparedSession = new GameSession(CreateConfiguredBalance(false, allowLegacyFixtureDefaults));
             var preparedProfile = FreshProfile(preparedSession.Balance);
-            assemblyCommands = null; RunLoadout = null;
+            assemblyCommands = null; RunLoadout = null; runRequiresSlots = false;
             legacyFixtureDefaults = allowLegacyFixtureDefaults;
             persistence.Reset();workshopMode=false;InWorkshop=false;
             profile=preparedProfile;Workshop=new WorkshopReadModel(profile);runLoadout=profile.GetLoadoutBlueprints();
@@ -55,7 +55,7 @@ namespace PaperDefense.Application
             }
             var preparedSession = new GameSession(CreateConfiguredBalance(true, allowLegacyFixtureDefaults), starterDefenses:false);
             var preparedProfile = FreshProfile(preparedSession.Balance);
-            assemblyCommands = null; RunLoadout = null;
+            assemblyCommands = null; RunLoadout = null; runRequiresSlots = false;
             legacyFixtureDefaults = allowLegacyFixtureDefaults;
             persistence.Reset();workshopMode=true;
             profile=preparedProfile;Workshop=new WorkshopReadModel(profile);
@@ -71,7 +71,7 @@ namespace PaperDefense.Application
             var preparedSession = new GameSession(CreateConfiguredBalance(true, allowLegacyFixtureDefaults), starterDefenses:false);
             var freshProfile = FreshProfile(preparedSession.Balance);
             var loaded = store.Load();
-            assemblyCommands = null; RunLoadout = null;
+            assemblyCommands = null; RunLoadout = null; runRequiresSlots = false;
             legacyFixtureDefaults = allowLegacyFixtureDefaults;
             persistence.Attach(store, loaded);workshopMode=true;
             profile=loaded.Source==ProfileLoadSource.NewProfile ? freshProfile : loaded.Profile??freshProfile;
@@ -186,6 +186,8 @@ namespace PaperDefense.Application
         {
             reason = "";
             if (session == null || InWorkshop) { reason = UserText.Message("copy.e6a1f147d46938e5"); return false; }
+            if (runRequiresSlots)
+            { reason = UserText.Message("copy.48635af5e97f1a11"); return false; }
             if (workshopMode && !ConstructionToolRules.IsTool(kind))
             { reason = UserText.Message("copy.65fd0a869c823b56"); return false; }
             return true;
@@ -259,7 +261,7 @@ namespace PaperDefense.Application
         {
             var preparedSession = new GameSession(CreateWorkshopBalance(),starterDefenses:false);
             if(session!=null)DepositGold();
-            RunLoadout = null;
+            RunLoadout = null; runRequiresSlots = false;
             workshopMode=true;InWorkshop=true;
             Initialize(preparedSession);
             InWorkshop=true;
@@ -269,16 +271,57 @@ namespace PaperDefense.Application
             =>new TowerPreview(blueprint,session.Balance,material);
         public bool ValidateAssembly(TowerBlueprint blueprint,out string reason)
             =>TowerCatalog.ValidateAssembly(blueprint,session.Balance,out reason);
+
+        public BuildQuote QuoteEntry(IReadOnlyList<Cell> cells, int slot, MaterialTier material, InkColor color)
+        {
+            if (!TryResolveBuildSlot(slot, material, out var entry, out var resolved, out var reason)) return RejectedQuote(reason);
+            return entry.Kind == AlbumEntryKind.Legacy
+                ? session.QuoteBlueprint(cells, entry.LegacyBlueprint, material, color)
+                : session.QuoteEntry(cells, resolved, material, color);
+        }
+
+        public bool BuildEntry(IReadOnlyList<Cell> cells, int slot, MaterialTier material, InkColor color, out string reason)
+        {
+            if (!TryResolveBuildSlot(slot, material, out var entry, out var resolved, out reason)) return false;
+            return entry.Kind == AlbumEntryKind.Legacy
+                ? session.TryBuildBlueprint(cells, entry.LegacyBlueprint, material, color, out reason)
+                : session.TryBuildEntry(cells, resolved, material, color, out reason);
+        }
+
+        bool TryResolveBuildSlot(int slot, MaterialTier material, out AlbumEntry entry, out ResolvedEntry resolved, out string reason)
+        {
+            entry = null; resolved = null; reason = UserText.Message("copy.e6a1f147d46938e5");
+            if (session == null || InWorkshop) return false;
+            reason = UserText.Message("copy.48635af5e97f1a11");
+            if (RunLoadout == null || slot < 0 || slot >= RunLoadout.Entries.Count) return false;
+            entry = RunLoadout.Entries[slot];
+            if (entry == null) return false;
+            if (!Enum.IsDefined(typeof(MaterialTier), material))
+            { reason = UserText.Message("assembly.material.unsupported"); return false; }
+            if (entry.Kind == AlbumEntryKind.Legacy) { reason = ""; return true; }
+            try { resolved = RunLoadout.ResolveSlot(slot, material); }
+            catch (ArgumentException error)
+            {
+                LastConfigurationDiagnostic = error.ToString();
+                reason = UserText.Message("assembly.material.unsupported");
+                return false;
+            }
+            reason = "";
+            return true;
+        }
+
         public BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,int slot,MaterialTier material,InkColor color)
         {
+            if (RunLoadout != null) return QuoteEntry(cells, slot, material, color);
             if (session == null || InWorkshop) return RejectedQuote(UserText.Message("copy.e6a1f147d46938e5"));
-            if(slot<0||slot>=runLoadout.Count)return new BuildQuote{Cells=Array.Empty<Cell>(),Reason=UserText.Message("copy.48635af5e97f1a11")};
+            if(runLoadout==null||slot<0||slot>=runLoadout.Count)return new BuildQuote{Cells=Array.Empty<Cell>(),Reason=UserText.Message("copy.48635af5e97f1a11")};
             return session.QuoteBlueprint(cells,runLoadout[slot],material,color);
         }
         public bool BuildBlueprint(IReadOnlyList<Cell> cells,int slot,MaterialTier material,InkColor color,out string reason)
         {
+            if (RunLoadout != null) return BuildEntry(cells, slot, material, color, out reason);
             reason=UserText.Message("copy.e6a1f147d46938e5");if(session == null || InWorkshop)return false;
-            if(slot<0||slot>=runLoadout.Count){reason=UserText.Message("copy.48635af5e97f1a11");return false;}
+            if(runLoadout==null||slot<0||slot>=runLoadout.Count){reason=UserText.Message("copy.48635af5e97f1a11");return false;}
             return session.TryBuildBlueprint(cells,runLoadout[slot],material,color,out reason);
         }
         public bool Paint(Cell cell,InkColor color,out string reason)

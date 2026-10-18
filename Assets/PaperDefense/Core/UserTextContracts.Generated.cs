@@ -88,6 +88,7 @@ namespace PaperDefense.Core
             resolver.RequireContract("art.title.towers", 0, Array.Empty<int>());
             resolver.RequireContract("art.wall_mask", 1, Array.Empty<int>());
             resolver.RequireContract("art.weapons", 0, Array.Empty<int>());
+            resolver.RequireContract("assembly.material.unsupported", 0, Array.Empty<int>());
             resolver.RequireContract("change.armor", 10, new[] { 1, 2, 3, 4, 5, 6, 7, 8 });
             resolver.RequireFormatContract("change.armor", 1, "0.#");
             resolver.RequireFormatContract("change.armor", 2, "0.#");
@@ -1121,6 +1122,7 @@ namespace PaperDefense.Core
             resolver.RequireContract("study.unavailable", 1, Array.Empty<int>());
             resolver.RequireContract("study.unsupported", 0, Array.Empty<int>());
             resolver.RequireContract("study.use", 0, Array.Empty<int>());
+            resolver.RequireContract("td.generator.limit", 0, Array.Empty<int>());
             resolver.RequireContract("td.placement.barricade", 0, Array.Empty<int>());
             resolver.RequireContract("td.placement.terrain", 0, Array.Empty<int>());
             resolver.RequireContract("td.placement.tower", 0, Array.Empty<int>());

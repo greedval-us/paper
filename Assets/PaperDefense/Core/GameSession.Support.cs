@@ -5,7 +5,7 @@ namespace PaperDefense.Core
 {
     public static class ConstructionToolRules
     {
-        public static bool IsTool(StructureKind kind)=>kind==StructureKind.Wall||kind==StructureKind.Spikes||kind==StructureKind.TarPit||kind==StructureKind.RepairPost;
+        public static bool IsTool(StructureKind kind)=>kind==StructureKind.Wall||kind==StructureKind.Spikes||kind==StructureKind.TarPit||kind==StructureKind.RepairPost||kind==StructureKind.Generator;
         public static bool IsTrap(StructureKind kind)=>kind==StructureKind.Spikes||kind==StructureKind.TarPit;
     }
     public sealed partial class GameSession
@@ -29,13 +29,15 @@ namespace PaperDefense.Core
             foreach(var structure in structures)
             {
                 if(!structure.IsComplete||structure.Health<=0)continue;
+                if(structure.ResolvedEntry!=null)continue;
                 if(structure.Kind==StructureKind.RepairPost)activeRepairPosts.Add(structure);
                 else if(structure.Kind==StructureKind.TarPit)activeTarPits.Add(structure);
             }
-            if(activeRepairPosts.Count>0)foreach(var target in structures)
+            var modernRates=StructureSupportRules.RepairRates(structures);
+            if(activeRepairPosts.Count>0||modernRates.Count>0)foreach(var target in structures)
             {
                 if(!target.IsComplete||target.Health<=0||target.Kind==StructureKind.RepairPost||target.Health>=target.MaxHealth)continue;
-                float rate=0;
+                modernRates.TryGetValue(target,out float rate);
                 foreach(var post in activeRepairPosts)
                 {
                     var definition=rules.Structure(post.Kind);
@@ -54,6 +56,11 @@ namespace PaperDefense.Core
                     if(enemy.Health>0&&DistanceSquared(Center(trap.Cell),enemy.Position)<=radius*radius)
                         EnemyEffects.ApplySlow(enemy,definition.SlowSpeedMultiplier,Math.Max(delta,definition.SlowDuration));
             }
+            foreach(var source in structures)
+                if(source.ResolvedEntry?.Support?.Kind==AssemblyStructureFamily.Slow)
+                    foreach(var enemy in enemies)
+                        if(enemy.Health>0&&StructureSupportRules.TryGetSlow(source,enemy.Position,out var effect))
+                            EnemyEffects.ApplySlow(enemy,effect.Strength,effect.Duration);
         }
     }
 }

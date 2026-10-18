@@ -1,0 +1,23 @@
+{
+  "phase": "Task 7 before production APIs",
+  "errors": [
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeConstructionTests.cs(27,33): error CS1061: 'GameSession' does not contain a definition for 'TryBuildEntry' and no accessible extension method 'TryBuildEntry' accepting a first argument of type 'GameSession' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeSupportTests.cs(40,25): error CS0103: The name 'StructureSupportRules' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeSupportTests.cs(43,25): error CS0103: The name 'StructureSupportRules' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeConstructionTests.cs(45,37): error CS1061: 'GameSession' does not contain a definition for 'QuoteEntry' and no accessible extension method 'QuoteEntry' accepting a first argument of type 'GameSession' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeSupportTests.cs(55,25): error CS0103: The name 'StructureSupportRules' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeSupportTests.cs(63,25): error CS0103: The name 'StructureSupportRules' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeSupportTests.cs(64,25): error CS0103: The name 'StructureSupportRules' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeSupportTests.cs(84,25): error CS0103: The name 'StructureSupportRules' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeConstructionTests.cs(66,33): error CS1061: 'GameSession' does not contain a definition for 'QuoteEntry' and no accessible extension method 'QuoteEntry' accepting a first argument of type 'GameSession' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeConstructionTests.cs(68,33): error CS1061: 'GameSession' does not contain a definition for 'TryBuildEntry' and no accessible extension method 'TryBuildEntry' accepting a first argument of type 'GameSession' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeSupportTests.cs(94,25): error CS0103: The name 'StructureSupportRules' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeSupportTests.cs(101,25): error CS0103: The name 'StructureSupportRules' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeConstructionTests.cs(80,33): error CS1061: 'GameSession' does not contain a definition for 'QuoteEntry' and no accessible extension method 'QuoteEntry' accepting a first argument of type 'GameSession' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeConstructionTests.cs(82,33): error CS1061: 'GameSession' does not contain a definition for 'TryBuildEntry' and no accessible extension method 'TryBuildEntry' accepting a first argument of type 'GameSession' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeSupportTests.cs(108,25): error CS0103: The name 'StructureSupportRules' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeSupportTests.cs(110,25): error CS0103: The name 'StructureSupportRules' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeConstructionTests.cs(92,33): error CS1061: 'GameSession' does not contain a definition for 'QuoteEntry' and no accessible extension method 'QuoteEntry' accepting a first argument of type 'GameSession' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\CompositeConstructionTests.cs(93,33): error CS1061: 'GameSession' does not contain a definition for 'TryBuildEntry' and no accessible extension method 'TryBuildEntry' accepting a first argument of type 'GameSession' could be found (are you missing a using directive or an assembly reference?)\n"
+  ]
+}
