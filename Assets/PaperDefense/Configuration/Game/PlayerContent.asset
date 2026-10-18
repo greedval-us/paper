@@ -1587,3 +1587,4 @@ MonoBehaviour:
     GreenEffectId: effect.color.green
   presets:
   - {fileID: 11400000, guid: 557c15f41904873419744a3185fc9ff1, type: 2}
+  assemblyCatalog: {fileID: 11400000, guid: 06f53ee717f343a4f97a4dc0543f64a3, type: 2}

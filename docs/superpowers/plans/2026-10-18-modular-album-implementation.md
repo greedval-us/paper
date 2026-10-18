@@ -1,6 +1,6 @@
 # Составной альбом — Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Не начинать реализацию по факту создания этого документа; текущая задача — подготовка плана.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Выполнение начато по запросу пользователя 18.10.2026. Задача 1 завершена; следующая — задача 2. [Проверки задачи 1](../../validation/modular-album/task1-report.md).
 
 **Goal:** перенести существующую игру на альбом составных башен и сооружений, восемь общих слотов и открытия деталей за уровень и золото, включая все обновлённые экраны.
 
@@ -10,7 +10,7 @@
 
 **Spec:** [дизайн игры](../../Game-Design.md), [мастерская](../../Workshop-Assembly.md), [формулы и способности](../../Component-Stats-and-Abilities.md), [миграция](../../Modular-Transition.md), [контракт графики](../../Modular-Asset-Contract.md), [JSON баланса](../../balance/album-balance-v1.json), [Excel](../../balance/PaperDefense-Album-Balance-v1.xlsx), [полная галерея](../../design/game-concept-art-2026-10-16/index.html).
 
-Дата: **18.10.2026**. Проверенная база исходников: commit `1f57553`; до подготовки плана рабочее дерево чистое. Все задачи ниже **предстоят**, галочки не обозначают готовность эскизов или документации.
+Дата: **18.10.2026**. Проверенная база исходников при подготовке: commit `1f57553`; до подготовки плана рабочее дерево чистое. Галочки ниже отражают проверенное выполнение реализации, а не готовность эскизов или документации.
 
 ## Global Constraints
 
@@ -116,11 +116,11 @@
 - `bool ComponentCatalog.TryGet(string id, int revision, out ComponentDefinition definition)` возвращает только точную пару ID/revision; false преобразуется валидатором в диагностику, без подстановки другой версии. `AssemblyCatalogAsset.CreateSnapshot()` возвращает независимый `ComponentCatalog`. `AlbumBalanceImport.Validate(string json)` возвращает `IReadOnlyList<AssemblyDiagnostic>`, `Import(string json, string assetPath)` — сохранённый `AssemblyCatalogAsset`; импорт блокируется при ошибках. Для первого импорта всех частей revision=1, версия баланса — `album-v1.0`; ID и ревизия графики не используются вместо версии баланса.
 - `AssemblyDiagnostic`: стабильный `Code`, путь к части/креплению, аргументы для локализации; ошибки не привязаны к английскому/русскому UI-тексту.
 
-- [ ] Написать `AssemblyCatalogTests.ImportV1_HasCompleteFreeStarterSet`: `Assert.That(catalog.Definitions.Count, Is.EqualTo(54)); Assert.That(catalog.Starters.Count, Is.EqualTo(8));`. Каждая стартовая часть имеет цену открытия 0; категории 14/7/18/15. Duplicate ID+revision, пропущенная категория, отрицательная цена, NaN и неизвестная совместимость дают конкретную диагностику.
-- [ ] Запустить `AssemblyCatalogTests` и `AlbumBalanceImportTests` в EditMode, зафиксировать красный результат.
-- [ ] Реализовать модели и импорт JSON. В импортёре явно преобразовать текущие поля JSON в типы; ID не переименовывать. Предпросмотр импорта показывает добавления и изменения; повторный импорт тех же данных сохраняет GUID и результат. Неполный импорт не меняет asset.
-- [ ] Повторить оба класса: 0 failed; изменение исходного массива после `CreateSnapshot()` не меняет каталог. Восемь рецептов полностью ссылаются на существующие детали. Каталог остаётся выключенным для пользовательского маршрута до готовности зависимостей.
-- [ ] Зафиксировать: `feat: add versioned assembly catalog and balance import`.
+- [x] Написать `AssemblyCatalogTests.ImportV1_HasCompleteFreeStarterSet`: `Assert.That(catalog.Definitions.Count, Is.EqualTo(54)); Assert.That(catalog.Starters.Count, Is.EqualTo(8));`. Каждая стартовая часть имеет цену открытия 0; категории 14/7/18/15. Duplicate ID+revision, пропущенная категория, отрицательная цена, NaN и неизвестная совместимость дают конкретную диагностику.
+- [x] Запустить `AssemblyCatalogTests` и `AlbumBalanceImportTests` в EditMode, зафиксировать красный результат.
+- [x] Реализовать модели и импорт JSON. В импортёре явно преобразовать текущие поля JSON в типы; ID не переименовывать. Предпросмотр импорта показывает добавления и изменения; повторный импорт тех же данных сохраняет GUID и результат. Неполный импорт не меняет asset.
+- [x] Повторить оба класса: 0 failed; изменение исходного массива после `CreateSnapshot()` не меняет каталог. Восемь рецептов полностью ссылаются на существующие детали. Каталог остаётся выключенным для пользовательского маршрута до готовности зависимостей.
+- [x] Зафиксировать: `feat: add versioned assembly catalog and balance import`.
 
 ## Задача 2. Единый расчёт и неизменяемый состав
 

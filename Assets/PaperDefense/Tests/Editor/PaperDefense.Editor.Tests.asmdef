@@ -3,6 +3,8 @@
   "rootNamespace": "PaperDefense.Tests",
   "references": ["PaperDefense.Core", "PaperDefense.Application", "PaperDefense.Editor", "PaperDefense.Presentation", "PaperDefense.Validation"],
   "includePlatforms": ["Editor"],
+  "overrideReferences": true,
+  "precompiledReferences": ["Newtonsoft.Json.dll", "nunit.framework.dll"],
   "optionalUnityReferences": ["TestAssemblies"],
   "autoReferenced": false
 }

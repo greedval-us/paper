@@ -10,6 +10,8 @@ namespace PaperDefense.Application
     {
         public ContentCatalogInput catalog = new ContentCatalogInput();
         public BalancePresetAsset[] presets = Array.Empty<BalancePresetAsset>();
+        // Authoring reference only: the player route switches after assembly dependencies are ready.
+        public AssemblyCatalogAsset assemblyCatalog;
         public ContentCatalogSnapshot CreateSnapshot(ContentOverrides overrides = null)
         {
             if (catalog == null) throw new ArgumentException(UserText.Message("copy.bef2598cc49b8725", name));

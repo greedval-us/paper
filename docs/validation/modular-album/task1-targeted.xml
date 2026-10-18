@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="25" result="Passed" total="25" passed="25" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 02:43:18Z" end-time="2026-10-18 02:43:25Z" duration="6,8731466">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="964" result="Passed" start-time="2026-10-18 02:43:18Z" end-time="2026-10-18 02:43:25Z" duration="6.873147" total="25" passed="25" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1948" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="804" result="Passed" start-time="2026-10-18 02:43:18Z" end-time="2026-10-18 02:43:18Z" duration="0.505259" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1949" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="804" result="Passed" start-time="2026-10-18 02:43:18Z" end-time="2026-10-18 02:43:18Z" duration="0.426208" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1950" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="804" result="Passed" start-time="2026-10-18 02:43:18Z" end-time="2026-10-18 02:43:18Z" duration="0.326477" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1029" name="AssemblyCatalogTests" fullname="PaperDefense.Tests.AssemblyCatalogTests" classname="PaperDefense.Tests.AssemblyCatalogTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-18 02:43:18Z" end-time="2026-10-18 02:43:18Z" duration="0.225866" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1030" name="ImportV1_HasCompleteFreeStarterSet" fullname="PaperDefense.Tests.AssemblyCatalogTests.ImportV1_HasCompleteFreeStarterSet" methodname="ImportV1_HasCompleteFreeStarterSet" classname="PaperDefense.Tests.AssemblyCatalogTests" runstate="Runnable" seed="367939697" result="Passed" start-time="2026-10-18 02:43:18Z" end-time="2026-10-18 02:43:18Z" duration="0.075430" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1031" name="PublishedSnapshot_OwnsNestedDefinitionsAndRecipeArrays" fullname="PaperDefense.Tests.AssemblyCatalogTests.PublishedSnapshot_OwnsNestedDefinitionsAndRecipeArrays" methodname="PublishedSnapshot_OwnsNestedDefinitionsAndRecipeArrays" classname="PaperDefense.Tests.AssemblyCatalogTests" runstate="Runnable" seed="1025258057" result="Passed" start-time="2026-10-18 02:43:18Z" end-time="2026-10-18 02:43:18Z" duration="0.033563" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1032" name="RecipeSnapshot_CopiesDefinitionArrayAndKeepsExactRevisions" fullname="PaperDefense.Tests.AssemblyCatalogTests.RecipeSnapshot_CopiesDefinitionArrayAndKeepsExactRevisions" methodname="RecipeSnapshot_CopiesDefinitionArrayAndKeepsExactRevisions" classname="PaperDefense.Tests.AssemblyCatalogTests" runstate="Runnable" seed="1180990877" result="Passed" start-time="2026-10-18 02:43:18Z" end-time="2026-10-18 02:43:18Z" duration="0.004351" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1035" name="StarterInput_RejectsPopulatedAlternatePayload" fullname="PaperDefense.Tests.AssemblyCatalogTests.StarterInput_RejectsPopulatedAlternatePayload" classname="PaperDefense.Tests.AssemblyCatalogTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 02:43:18Z" end-time="2026-10-18 02:43:18Z" duration="0.005818" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1033" name="StarterInput_RejectsPopulatedAlternatePayload(True)" fullname="PaperDefense.Tests.AssemblyCatalogTests.StarterInput_RejectsPopulatedAlternatePayload(True)" methodname="StarterInput_RejectsPopulatedAlternatePayload" classname="PaperDefense.Tests.AssemblyCatalogTests" runstate="Runnable" seed="460898951" result="Passed" start-time="2026-10-18 02:43:18Z" end-time="2026-10-18 02:43:18Z" duration="0.003091" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1034" name="StarterInput_RejectsPopulatedAlternatePayload(False)" fullname="PaperDefense.Tests.AssemblyCatalogTests.StarterInput_RejectsPopulatedAlternatePayload(False)" methodname="StarterInput_RejectsPopulatedAlternatePayload" classname="PaperDefense.Tests.AssemblyCatalogTests" runstate="Runnable" seed="515644325" result="Passed" start-time="2026-10-18 02:43:18Z" end-time="2026-10-18 02:43:18Z" duration="0.000405" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="2147" name="PaperDefense.Editor.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Editor.Tests.dll" runstate="Runnable" testcasecount="160" result="Passed" start-time="2026-10-18 02:43:18Z" end-time="2026-10-18 02:43:25Z" duration="6.252007" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="2148" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="160" result="Passed" start-time="2026-10-18 02:43:18Z" end-time="2026-10-18 02:43:25Z" duration="6.158937" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="2149" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="160" result="Passed" start-time="2026-10-18 02:43:19Z" end-time="2026-10-18 02:43:25Z" duration="6.060551" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1951" name="AlbumBalanceImportTests" fullname="PaperDefense.Tests.AlbumBalanceImportTests" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-10-18 02:43:19Z" end-time="2026-10-18 02:43:25Z" duration="5.961198" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1954" name="ImportNumbers_IsIndependentOfEditorCulture" fullname="PaperDefense.Tests.AlbumBalanceImportTests.ImportNumbers_IsIndependentOfEditorCulture" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 02:43:19Z" end-time="2026-10-18 02:43:20Z" duration="1.245011" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1952" name="ImportNumbers_IsIndependentOfEditorCulture(&quot;ru-RU&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.ImportNumbers_IsIndependentOfEditorCulture(&quot;ru-RU&quot;)" methodname="ImportNumbers_IsIndependentOfEditorCulture" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="1566370445" result="Passed" start-time="2026-10-18 02:43:19Z" end-time="2026-10-18 02:43:20Z" duration="0.879789" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1953" name="ImportNumbers_IsIndependentOfEditorCulture(&quot;en-US&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.ImportNumbers_IsIndependentOfEditorCulture(&quot;en-US&quot;)" methodname="ImportNumbers_IsIndependentOfEditorCulture" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="402131268" result="Passed" start-time="2026-10-18 02:43:20Z" end-time="2026-10-18 02:43:20Z" duration="0.265198" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1971" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" testcasecount="15" result="Passed" start-time="2026-10-18 02:43:20Z" end-time="2026-10-18 02:43:24Z" duration="3.923987" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1956" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;duplicate&quot;,&quot;assembly.component.duplicate&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;duplicate&quot;,&quot;assembly.component.duplicate&quot;)" methodname="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="1271742960" result="Passed" start-time="2026-10-18 02:43:20Z" end-time="2026-10-18 02:43:20Z" duration="0.305328" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1957" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;category&quot;,&quot;assembly.category.missing&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;category&quot;,&quot;assembly.category.missing&quot;)" methodname="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="857232518" result="Passed" start-time="2026-10-18 02:43:20Z" end-time="2026-10-18 02:43:21Z" duration="0.246838" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1958" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;gold&quot;,&quot;assembly.unlock.negative&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;gold&quot;,&quot;assembly.unlock.negative&quot;)" methodname="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="130509626" result="Passed" start-time="2026-10-18 02:43:21Z" end-time="2026-10-18 02:43:21Z" duration="0.240807" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1959" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;nonfinite&quot;,&quot;assembly.number.nonfinite&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;nonfinite&quot;,&quot;assembly.number.nonfinite&quot;)" methodname="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="1875468092" result="Passed" start-time="2026-10-18 02:43:21Z" end-time="2026-10-18 02:43:21Z" duration="0.245376" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1960" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;compatibility&quot;,&quot;assembly.compatibility.unknown&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;compatibility&quot;,&quot;assembly.compatibility.unknown&quot;)" methodname="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="1611140076" result="Passed" start-time="2026-10-18 02:43:21Z" end-time="2026-10-18 02:43:21Z" duration="0.285543" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1961" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;part&quot;,&quot;assembly.part.missing&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;part&quot;,&quot;assembly.part.missing&quot;)" methodname="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="325130837" result="Passed" start-time="2026-10-18 02:43:21Z" end-time="2026-10-18 02:43:22Z" duration="0.260410" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1962" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;wrongCategory&quot;,&quot;assembly.part.category&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;wrongCategory&quot;,&quot;assembly.part.category&quot;)" methodname="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="1962791228" result="Passed" start-time="2026-10-18 02:43:22Z" end-time="2026-10-18 02:43:22Z" duration="0.236570" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1963" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;weaponIndex&quot;,&quot;assembly.recipe.weapon_index&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;weaponIndex&quot;,&quot;assembly.recipe.weapon_index&quot;)" methodname="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="1641045676" result="Passed" start-time="2026-10-18 02:43:22Z" end-time="2026-10-18 02:43:22Z" duration="0.243993" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1964" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;mountCount&quot;,&quot;assembly.recipe.mount_count&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;mountCount&quot;,&quot;assembly.recipe.mount_count&quot;)" methodname="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="1639226267" result="Passed" start-time="2026-10-18 02:43:22Z" end-time="2026-10-18 02:43:22Z" duration="0.281976" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1965" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;version&quot;,&quot;assembly.balance.version&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;version&quot;,&quot;assembly.balance.version&quot;)" methodname="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="1167630699" result="Passed" start-time="2026-10-18 02:43:22Z" end-time="2026-10-18 02:43:23Z" duration="0.269665" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1966" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;versionObject&quot;,&quot;assembly.balance.version&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;versionObject&quot;,&quot;assembly.balance.version&quot;)" methodname="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="1843952066" result="Passed" start-time="2026-10-18 02:43:23Z" end-time="2026-10-18 02:43:23Z" duration="0.245104" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1967" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;versionArray&quot;,&quot;assembly.balance.version&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;versionArray&quot;,&quot;assembly.balance.version&quot;)" methodname="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="530195603" result="Passed" start-time="2026-10-18 02:43:23Z" end-time="2026-10-18 02:43:23Z" duration="0.244430" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1968" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;fractionalGold&quot;,&quot;assembly.number.range&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;fractionalGold&quot;,&quot;assembly.number.range&quot;)" methodname="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="1063932927" result="Passed" start-time="2026-10-18 02:43:23Z" end-time="2026-10-18 02:43:23Z" duration="0.261679" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1969" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;array&quot;,&quot;assembly.source.array&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;array&quot;,&quot;assembly.source.array&quot;)" methodname="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="1385750053" result="Passed" start-time="2026-10-18 02:43:23Z" end-time="2026-10-18 02:43:24Z" duration="0.279773" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1970" name="InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;multiplier&quot;,&quot;assembly.number.range&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.InvalidImport_ReportsStableCodeAndPreservesExistingAsset(&quot;multiplier&quot;,&quot;assembly.number.range&quot;)" methodname="InvalidImport_ReportsStableCodeAndPreservesExistingAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="376367822" result="Passed" start-time="2026-10-18 02:43:24Z" end-time="2026-10-18 02:43:24Z" duration="0.246054" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1973" name="MalformedJson_ReturnsDiagnosticAndDoesNotCreateAsset" fullname="PaperDefense.Tests.AlbumBalanceImportTests.MalformedJson_ReturnsDiagnosticAndDoesNotCreateAsset" methodname="MalformedJson_ReturnsDiagnosticAndDoesNotCreateAsset" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="384642824" result="Passed" start-time="2026-10-18 02:43:24Z" end-time="2026-10-18 02:43:24Z" duration="0.005946" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1972" name="SignedDiscountsAndTypedFamilies_ArePreserved" fullname="PaperDefense.Tests.AlbumBalanceImportTests.SignedDiscountsAndTypedFamilies_ArePreserved" methodname="SignedDiscountsAndTypedFamilies_ArePreserved" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="1742402840" result="Passed" start-time="2026-10-18 02:43:24Z" end-time="2026-10-18 02:43:24Z" duration="0.238449" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1955" name="ValidSource_ImportsAndReimportsWithoutChangingGuidOrData" fullname="PaperDefense.Tests.AlbumBalanceImportTests.ValidSource_ImportsAndReimportsWithoutChangingGuidOrData" methodname="ValidSource_ImportsAndReimportsWithoutChangingGuidOrData" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="369102116" result="Passed" start-time="2026-10-18 02:43:24Z" end-time="2026-10-18 02:43:25Z" duration="0.444962" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Account API did not become accessible within 30 seconds. This may be due to network issues or editor focus.
+<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task1-targeted.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

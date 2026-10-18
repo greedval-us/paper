@@ -3,5 +3,7 @@
   "rootNamespace": "PaperDefense.Editor",
   "references": ["PaperDefense.Core", "PaperDefense.Application", "PaperDefense.Presentation", "PaperDefense.Validation"],
   "includePlatforms": ["Editor"],
+  "overrideReferences": true,
+  "precompiledReferences": ["Newtonsoft.Json.dll"],
   "autoReferenced": true
 }
