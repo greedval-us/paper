@@ -26,6 +26,8 @@ namespace PaperDefense.Application
         bool legacyFixtureDefaults;
         readonly ProfileSaveCoordinator persistence = new ProfileSaveCoordinator();
         int depositedGold;
+        int submittedRewardWaves;
+        bool submittedVictoryBonus;
         public event Action<IRunReadModel> SessionChanged;
         public event Action<SimulationEvent> SimulationEventReceived;
         readonly FixedStepClock clock = new FixedStepClock();
@@ -38,6 +40,7 @@ namespace PaperDefense.Application
         {
             var preparedSession = new GameSession(CreateConfiguredBalance(false, allowLegacyFixtureDefaults));
             var preparedProfile = FreshProfile(preparedSession.Balance);
+            PrepareRewardProfileReplacement();
             assemblyCommands = null; RunLoadout = null; runRequiresSlots = false;
             legacyFixtureDefaults = allowLegacyFixtureDefaults;
             persistence.Reset();workshopMode=false;InWorkshop=false;
@@ -55,6 +58,7 @@ namespace PaperDefense.Application
             }
             var preparedSession = new GameSession(CreateConfiguredBalance(true, allowLegacyFixtureDefaults), starterDefenses:false);
             var preparedProfile = FreshProfile(preparedSession.Balance);
+            PrepareRewardProfileReplacement();
             assemblyCommands = null; RunLoadout = null; runRequiresSlots = false;
             legacyFixtureDefaults = allowLegacyFixtureDefaults;
             persistence.Reset();workshopMode=true;
@@ -70,6 +74,7 @@ namespace PaperDefense.Application
             // Reject missing/invalid configuration before reading any profile, including the real path.
             var preparedSession = new GameSession(CreateConfiguredBalance(true, allowLegacyFixtureDefaults), starterDefenses:false);
             var freshProfile = FreshProfile(preparedSession.Balance);
+            PrepareRewardProfileReplacement();
             var loaded = store.Load();
             assemblyCommands = null; RunLoadout = null; runRequiresSlots = false;
             legacyFixtureDefaults = allowLegacyFixtureDefaults;
@@ -83,6 +88,7 @@ namespace PaperDefense.Application
 
         public bool RetrySave(out string reason)
         {
+            if (HasPendingRunRewards) return RetryPendingRewards(out reason);
             bool result=persistence.Retry(profile,out reason);
             RefreshSaveInfo();
             if(result)WorkshopChanged?.Invoke();
@@ -90,6 +96,18 @@ namespace PaperDefense.Application
         }
 
         void RefreshSaveInfo() => persistence.CopyStatusTo(Workshop);
+
+        void PrepareRewardProfileReplacement()
+        {
+            if (HasPendingRunRewards)
+            {
+                bool saved = RetryPendingRewards(out var reason);
+                // A commit observer may have queued a newer unpaid result during the successful retry.
+                if (!saved || HasPendingRunRewards)
+                    throw new InvalidOperationException(string.IsNullOrEmpty(reason) ? UserText.Message("run.reward.pending") : reason);
+            }
+            runRewards = null;
+        }
 
         GameBalance CreateWorkshopBalance() => CreateConfiguredBalance(true, legacyFixtureDefaults);
         ComponentCatalog ConfiguredAssemblies() => balanceAsset?.dataPreset?.database?.assemblyCatalog?.CreateSnapshot();
@@ -113,6 +131,7 @@ namespace PaperDefense.Application
             if(profile==null){profile=new WorkshopProfile();Workshop=new WorkshopReadModel(profile);runLoadout=profile.GetLoadoutBlueprints();}
             if (profile.ConfigureContent(contentSnapshot)) persistence.ContentChanged();
             depositedGold=0;
+            submittedRewardWaves=0;submittedVictoryBonus=false;
             Session = new RunReadModel(session);
             Workshop.Refresh(session.Balance);
             RefreshSaveInfo();
@@ -216,10 +235,21 @@ namespace PaperDefense.Application
         }
         void OnApplicationQuit()
         {
+            if (HasPendingRunRewards) RetryPendingRewards(out _);
             persistence.Flush(profile);RefreshSaveInfo();
         }
         void DepositGold()
         {
+            if (runRequiresSlots)
+            {
+                int completed = session.CompletedWaves;
+                bool victory = session.Phase == RunPhase.Victory && completed == 8;
+                if (completed <= submittedRewardWaves && (!victory || submittedVictoryBonus)) return;
+                submittedRewardWaves = Math.Max(submittedRewardWaves, completed);
+                submittedVictoryBonus |= victory;
+                RunRewards.Apply(session.RunId, completed, victory);
+                return;
+            }
             int reward=session.GoldEarned-depositedGold;if(reward<=0)return;
             // Advance this cursor before IO so retry/transition cannot replay the award.
             profile.GrantGold(reward);depositedGold=session.GoldEarned;

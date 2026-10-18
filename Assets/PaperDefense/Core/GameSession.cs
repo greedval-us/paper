@@ -25,12 +25,15 @@ namespace PaperDefense.Core
         public float BaseHealth { get; private set; }
         public int Kills { get; private set; }
         public int WaveIndex { get; private set; }
+        public Guid RunId { get; } = Guid.NewGuid();
+        public int CompletedWaves { get; private set; }
         public int RemainingToSpawn { get; private set; }
         public RunPhase Phase { get; private set; }
         public float Countdown { get; private set; }
         public float Elapsed { get; private set; }
         public bool PendingUpgrade { get; private set; }
         private readonly List<StructureState> structures = new List<StructureState>();
+        private readonly GeneratorWaveLedger generatorLedger = new GeneratorWaveLedger();
         private readonly List<EnemyState> enemies = new List<EnemyState>();
         private readonly List<ShotEvent> shots = new List<ShotEvent>();
         private readonly StructureState[] grid;
@@ -214,6 +217,7 @@ namespace PaperDefense.Core
             RemainingToSpawn = Math.Max(0, wave.Count);
             Countdown = 0;
             spawnClock = 0;
+            generatorLedger.BeginWave(RunId, WaveIndex, structures);
             Phase = RunPhase.Assault;
         }
 

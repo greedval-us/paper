@@ -36,6 +36,8 @@ namespace PaperDefense.Core
 
         private void CompleteWave()
         {
+            CreditInk(generatorLedger.CompleteWave(RunId, WaveIndex, structures));
+            CompletedWaves = WaveIndex;
             AwardWellResources();
             AwardGold();
             int configuredGrant = rules.Waves[WaveIndex - 1].InkGrant;

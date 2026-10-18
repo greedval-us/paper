@@ -27,6 +27,8 @@ namespace PaperDefense.Core
         RunPhase Phase {get;}
         bool PendingUpgrade {get;}
         int GoldEarned {get;}
+        Guid RunId {get;}
+        int CompletedWaves {get;}
         float BlotterCooldown {get;}
         int ColoredInk(InkColor color);
         StructureView? StructureAt(Cell cell);
@@ -147,6 +149,7 @@ namespace PaperDefense.Core
         public float BaseHealth=>source.BaseHealth;public float Countdown=>source.Countdown;public float Elapsed=>source.Elapsed;
         public long TickIndex=>source.TickIndex;public RunPhase Phase=>source.Phase;public bool PendingUpgrade=>source.PendingUpgrade;
         public int GoldEarned=>source.GoldEarned;public float BlotterCooldown=>source.BlotterCooldownRemaining;
+        public Guid RunId=>source.RunId;public int CompletedWaves=>source.CompletedWaves;
         public int ColoredInk(InkColor color)=>source.ColoredInk(color);
         public StructureView? StructureAt(Cell cell){var value=source.StructureAt(cell);return value==null?(StructureView?)null:new StructureView(value);}
         public BuildQuote QuoteBuild(IReadOnlyList<Cell> cells,StructureKind kind,MaterialTier tier)=>source.QuoteBuild(cells,kind,tier);

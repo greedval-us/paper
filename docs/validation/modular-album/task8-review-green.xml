@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="48" result="Passed" total="48" passed="48" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 06:15:49Z" end-time="2026-10-18 06:15:55Z" duration="6,5752098">
+  <test-suite type="TestSuite" id="1814" name="paper" fullname="paper" runstate="Runnable" testcasecount="656" result="Passed" start-time="2026-10-18 06:15:49Z" end-time="2026-10-18 06:15:55Z" duration="6.575210" total="48" passed="48" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1808" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="656" result="Passed" start-time="2026-10-18 06:15:49Z" end-time="2026-10-18 06:15:55Z" duration="6.469561" total="48" passed="48" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1809" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="656" result="Passed" start-time="2026-10-18 06:15:49Z" end-time="2026-10-18 06:15:55Z" duration="6.464809" total="48" passed="48" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1810" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="656" result="Passed" start-time="2026-10-18 06:15:49Z" end-time="2026-10-18 06:15:55Z" duration="6.447640" total="48" passed="48" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1047" name="AssemblyRewardIntegrationTests" fullname="PaperDefense.Tests.AssemblyRewardIntegrationTests" classname="PaperDefense.Tests.AssemblyRewardIntegrationTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-18 06:15:49Z" end-time="2026-10-18 06:15:51Z" duration="2.205575" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1052" name="DefeatInSixthPreservesFiveWaveRewards" fullname="PaperDefense.Tests.AssemblyRewardIntegrationTests.DefeatInSixthPreservesFiveWaveRewards" methodname="DefeatInSixthPreservesFiveWaveRewards" classname="PaperDefense.Tests.AssemblyRewardIntegrationTests" runstate="Runnable" seed="1972999349" result="Passed" start-time="2026-10-18 06:15:49Z" end-time="2026-10-18 06:15:49Z" duration="0.560723" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1048" name="EightCompletedWavesPublish94Gold120XpAndOneDurableReceipt" fullname="PaperDefense.Tests.AssemblyRewardIntegrationTests.EightCompletedWavesPublish94Gold120XpAndOneDurableReceipt" methodname="EightCompletedWavesPublish94Gold120XpAndOneDurableReceipt" classname="PaperDefense.Tests.AssemblyRewardIntegrationTests" runstate="Runnable" seed="817904578" result="Passed" start-time="2026-10-18 06:15:49Z" end-time="2026-10-18 06:15:50Z" duration="0.420771" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1051" name="ExitAfterFiveOrDuringSixthPaysOnlyFiveCompletedWaves" fullname="PaperDefense.Tests.AssemblyRewardIntegrationTests.ExitAfterFiveOrDuringSixthPaysOnlyFiveCompletedWaves" classname="PaperDefense.Tests.AssemblyRewardIntegrationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 06:15:50Z" end-time="2026-10-18 06:15:50Z" duration="0.651012" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1049" name="ExitAfterFiveOrDuringSixthPaysOnlyFiveCompletedWaves(False)" fullname="PaperDefense.Tests.AssemblyRewardIntegrationTests.ExitAfterFiveOrDuringSixthPaysOnlyFiveCompletedWaves(False)" methodname="ExitAfterFiveOrDuringSixthPaysOnlyFiveCompletedWaves" classname="PaperDefense.Tests.AssemblyRewardIntegrationTests" runstate="Runnable" seed="1424648745" result="Passed" start-time="2026-10-18 06:15:50Z" end-time="2026-10-18 06:15:50Z" duration="0.369922" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1050" name="ExitAfterFiveOrDuringSixthPaysOnlyFiveCompletedWaves(True)" fullname="PaperDefense.Tests.AssemblyRewardIntegrationTests.ExitAfterFiveOrDuringSixthPaysOnlyFiveCompletedWaves(True)" methodname="ExitAfterFiveOrDuringSixthPaysOnlyFiveCompletedWaves" classname="PaperDefense.Tests.AssemblyRewardIntegrationTests" runstate="Runnable" seed="1226477334" result="Passed" start-time="2026-10-18 06:15:50Z" end-time="2026-10-18 06:15:50Z" duration="0.277480" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1054" name="FailedAutomaticAwardIsCapturedOnceAndCanBeRetriedAfterMenuAndPurchase" fullname="PaperDefense.Tests.AssemblyRewardIntegrationTests.FailedAutomaticAwardIsCapturedOnceAndCanBeRetriedAfterMenuAndPurchase" methodname="FailedAutomaticAwardIsCapturedOnceAndCanBeRetriedAfterMenuAndPurchase" classname="PaperDefense.Tests.AssemblyRewardIntegrationTests" runstate="Runnable" seed="1914053694" result="Passed" start-time="2026-10-18 06:15:50Z" end-time="2026-10-18 06:15:51Z" duration="0.197488" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1053" name="PausingAndAbandoningTheFirstAssaultDoesNotCreateAReceipt" fullname="PaperDefense.Tests.AssemblyRewardIntegrationTests.PausingAndAbandoningTheFirstAssaultDoesNotCreateAReceipt" methodname="PausingAndAbandoningTheFirstAssaultDoesNotCreateAReceipt" classname="PaperDefense.Tests.AssemblyRewardIntegrationTests" runstate="Runnable" seed="1658557380" result="Passed" start-time="2026-10-18 06:15:51Z" end-time="2026-10-18 06:15:51Z" duration="0.072841" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1055" name="TrialDoesNotPublishProfileRewardsOrChangeExistingReceipts" fullname="PaperDefense.Tests.AssemblyRewardIntegrationTests.TrialDoesNotPublishProfileRewardsOrChangeExistingReceipts" methodname="TrialDoesNotPublishProfileRewardsOrChangeExistingReceipts" classname="PaperDefense.Tests.AssemblyRewardIntegrationTests" runstate="Runnable" seed="1746483466" result="Passed" start-time="2026-10-18 06:15:51Z" end-time="2026-10-18 06:15:51Z" duration="0.278779" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1056" name="AssemblyRewardTests" fullname="PaperDefense.Tests.AssemblyRewardTests" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-10-18 06:15:51Z" end-time="2026-10-18 06:15:55Z" duration="3.790104" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1078" name="ADirectlyConstructedServiceRegistersItsPendingRewardsWithTheController" fullname="PaperDefense.Tests.AssemblyRewardTests.ADirectlyConstructedServiceRegistersItsPendingRewardsWithTheController" methodname="ADirectlyConstructedServiceRegistersItsPendingRewardsWithTheController" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="1633888552" result="Passed" start-time="2026-10-18 06:15:51Z" end-time="2026-10-18 06:15:51Z" duration="0.188406" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1075" name="AFailedPendingRewardPreventsReplacingTheCurrentProfileOrStore" fullname="PaperDefense.Tests.AssemblyRewardTests.AFailedPendingRewardPreventsReplacingTheCurrentProfileOrStore" methodname="AFailedPendingRewardPreventsReplacingTheCurrentProfileOrStore" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="1540629666" result="Passed" start-time="2026-10-18 06:15:51Z" end-time="2026-10-18 06:15:51Z" duration="0.192460" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1079" name="ASecondServiceCannotCreateAnIndependentPendingQueueForTheSameProfile" fullname="PaperDefense.Tests.AssemblyRewardTests.ASecondServiceCannotCreateAnIndependentPendingQueueForTheSameProfile" methodname="ASecondServiceCannotCreateAnIndependentPendingQueueForTheSameProfile" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="1209269198" result="Passed" start-time="2026-10-18 06:15:51Z" end-time="2026-10-18 06:15:51Z" duration="0.061795" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1081" name="AServiceCachedBeforeProfileReplacementCannotClearCurrentPendingStatus" fullname="PaperDefense.Tests.AssemblyRewardTests.AServiceCachedBeforeProfileReplacementCannotClearCurrentPendingStatus" methodname="AServiceCachedBeforeProfileReplacementCannotClearCurrentPendingStatus" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="629801237" result="Passed" start-time="2026-10-18 06:15:51Z" end-time="2026-10-18 06:15:52Z" duration="0.117346" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1082" name="AServiceCachedBeforeProfileReplacementCannotPayIntoTheNewProfile" fullname="PaperDefense.Tests.AssemblyRewardTests.AServiceCachedBeforeProfileReplacementCannotPayIntoTheNewProfile" methodname="AServiceCachedBeforeProfileReplacementCannotPayIntoTheNewProfile" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="335368463" result="Passed" start-time="2026-10-18 06:15:52Z" end-time="2026-10-18 06:15:52Z" duration="0.132754" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1058" name="CumulativeWaveTotalsPayOnlyThePreviouslyUnpaidDifference" fullname="PaperDefense.Tests.AssemblyRewardTests.CumulativeWaveTotalsPayOnlyThePreviouslyUnpaidDifference" methodname="CumulativeWaveTotalsPayOnlyThePreviouslyUnpaidDifference" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="631391086" result="Passed" start-time="2026-10-18 06:15:52Z" end-time="2026-10-18 06:15:52Z" duration="0.215442" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1060" name="DifferentRunIdsReceiveIndependentDurableReceipts" fullname="PaperDefense.Tests.AssemblyRewardTests.DifferentRunIdsReceiveIndependentDurableReceipts" methodname="DifferentRunIdsReceiveIndependentDurableReceipts" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="233942004" result="Passed" start-time="2026-10-18 06:15:52Z" end-time="2026-10-18 06:15:52Z" duration="0.255205" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1080" name="DirectlyConstructedServicePendingRewardsPreventDiscardingTheProfile" fullname="PaperDefense.Tests.AssemblyRewardTests.DirectlyConstructedServicePendingRewardsPreventDiscardingTheProfile" methodname="DirectlyConstructedServicePendingRewardsPreventDiscardingTheProfile" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="1885433294" result="Passed" start-time="2026-10-18 06:15:52Z" end-time="2026-10-18 06:15:52Z" duration="0.117135" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1071" name="FailedRewardThenPurchaseThenRetryPreservesBothTransactions" fullname="PaperDefense.Tests.AssemblyRewardTests.FailedRewardThenPurchaseThenRetryPreservesBothTransactions" methodname="FailedRewardThenPurchaseThenRetryPreservesBothTransactions" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="1243256863" result="Passed" start-time="2026-10-18 06:15:52Z" end-time="2026-10-18 06:15:53Z" duration="0.170602" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1067" name="InvalidRewardInputRejectsWithoutChangingProfileOrDisk" fullname="PaperDefense.Tests.AssemblyRewardTests.InvalidRewardInputRejectsWithoutChangingProfileOrDisk" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-18 06:15:53Z" end-time="2026-10-18 06:15:53Z" duration="0.699022" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1062" name="InvalidRewardInputRejectsWithoutChangingProfileOrDisk(True,1,False)" fullname="PaperDefense.Tests.AssemblyRewardTests.InvalidRewardInputRejectsWithoutChangingProfileOrDisk(True,1,False)" methodname="InvalidRewardInputRejectsWithoutChangingProfileOrDisk" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="2024012980" result="Passed" start-time="2026-10-18 06:15:53Z" end-time="2026-10-18 06:15:53Z" duration="0.118488" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1063" name="InvalidRewardInputRejectsWithoutChangingProfileOrDisk(False,-1,False)" fullname="PaperDefense.Tests.AssemblyRewardTests.InvalidRewardInputRejectsWithoutChangingProfileOrDisk(False,-1,False)" methodname="InvalidRewardInputRejectsWithoutChangingProfileOrDisk" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="743897553" result="Passed" start-time="2026-10-18 06:15:53Z" end-time="2026-10-18 06:15:53Z" duration="0.113851" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1064" name="InvalidRewardInputRejectsWithoutChangingProfileOrDisk(False,9,False)" fullname="PaperDefense.Tests.AssemblyRewardTests.InvalidRewardInputRejectsWithoutChangingProfileOrDisk(False,9,False)" methodname="InvalidRewardInputRejectsWithoutChangingProfileOrDisk" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="786261268" result="Passed" start-time="2026-10-18 06:15:53Z" end-time="2026-10-18 06:15:53Z" duration="0.126193" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1065" name="InvalidRewardInputRejectsWithoutChangingProfileOrDisk(False,7,True)" fullname="PaperDefense.Tests.AssemblyRewardTests.InvalidRewardInputRejectsWithoutChangingProfileOrDisk(False,7,True)" methodname="InvalidRewardInputRejectsWithoutChangingProfileOrDisk" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="800910661" result="Passed" start-time="2026-10-18 06:15:53Z" end-time="2026-10-18 06:15:53Z" duration="0.207291" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1066" name="InvalidRewardInputRejectsWithoutChangingProfileOrDisk(False,0,True)" fullname="PaperDefense.Tests.AssemblyRewardTests.InvalidRewardInputRejectsWithoutChangingProfileOrDisk(False,0,True)" methodname="InvalidRewardInputRejectsWithoutChangingProfileOrDisk" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="518635590" result="Passed" start-time="2026-10-18 06:15:53Z" end-time="2026-10-18 06:15:53Z" duration="0.122717" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1077" name="ProtectedProfilesRejectRewardsWithoutPublishingOrWritingAndKeepTheIntent" fullname="PaperDefense.Tests.AssemblyRewardTests.ProtectedProfilesRejectRewardsWithoutPublishingOrWritingAndKeepTheIntent" methodname="ProtectedProfilesRejectRewardsWithoutPublishingOrWritingAndKeepTheIntent" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="1361863050" result="Passed" start-time="2026-10-18 06:15:53Z" end-time="2026-10-18 06:15:53Z" duration="0.131743" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1069" name="RefusedRewardKeepsThePublishedProfileAndDiskAndExposesPendingWork" fullname="PaperDefense.Tests.AssemblyRewardTests.RefusedRewardKeepsThePublishedProfileAndDiskAndExposesPendingWork" methodname="RefusedRewardKeepsThePublishedProfileAndDiskAndExposesPendingWork" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="1473059599" result="Passed" start-time="2026-10-18 06:15:53Z" end-time="2026-10-18 06:15:54Z" duration="0.175971" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1059" name="ReloadedReceiptPreventsARepeatedResultFromWritingOrPayingAgain" fullname="PaperDefense.Tests.AssemblyRewardTests.ReloadedReceiptPreventsARepeatedResultFromWritingOrPayingAgain" methodname="ReloadedReceiptPreventsARepeatedResultFromWritingOrPayingAgain" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="1986272084" result="Passed" start-time="2026-10-18 06:15:54Z" end-time="2026-10-18 06:15:54Z" duration="0.112311" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1057" name="RepeatedVictory_GrantsOnce" fullname="PaperDefense.Tests.AssemblyRewardTests.RepeatedVictory_GrantsOnce" methodname="RepeatedVictory_GrantsOnce" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="1492389149" result="Passed" start-time="2026-10-18 06:15:54Z" end-time="2026-10-18 06:15:54Z" duration="0.117460" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1070" name="RepeatedWriteFailuresMergeTheHighestCumulativeRewardForOneRun" fullname="PaperDefense.Tests.AssemblyRewardTests.RepeatedWriteFailuresMergeTheHighestCumulativeRewardForOneRun" methodname="RepeatedWriteFailuresMergeTheHighestCumulativeRewardForOneRun" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="1886932545" result="Passed" start-time="2026-10-18 06:15:54Z" end-time="2026-10-18 06:15:54Z" duration="0.204057" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1072" name="RetryCommitsOutstandingRunsTogetherWithoutDroppingEitherReceipt" fullname="PaperDefense.Tests.AssemblyRewardTests.RetryCommitsOutstandingRunsTogetherWithoutDroppingEitherReceipt" methodname="RetryCommitsOutstandingRunsTogetherWithoutDroppingEitherReceipt" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="333289112" result="Passed" start-time="2026-10-18 06:15:54Z" end-time="2026-10-18 06:15:54Z" duration="0.113454" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1074" name="RetrySaveAlsoFlushesPendingRewardsInsteadOfSavingOnlyTheOldBalance" fullname="PaperDefense.Tests.AssemblyRewardTests.RetrySaveAlsoFlushesPendingRewardsInsteadOfSavingOnlyTheOldBalance" methodname="RetrySaveAlsoFlushesPendingRewardsInsteadOfSavingOnlyTheOldBalance" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="339217353" result="Passed" start-time="2026-10-18 06:15:54Z" end-time="2026-10-18 06:15:54Z" duration="0.110940" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1073" name="ReturningToWorkshopKeepsAFailedRewardAvailableForRetry" fullname="PaperDefense.Tests.AssemblyRewardTests.ReturningToWorkshopKeepsAFailedRewardAvailableForRetry" methodname="ReturningToWorkshopKeepsAFailedRewardAvailableForRetry" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="1149494156" result="Passed" start-time="2026-10-18 06:15:54Z" end-time="2026-10-18 06:15:54Z" duration="0.113084" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1083" name="RewardQueuedByACommitObserverMustFinishBeforeProfileReplacement" fullname="PaperDefense.Tests.AssemblyRewardTests.RewardQueuedByACommitObserverMustFinishBeforeProfileReplacement" methodname="RewardQueuedByACommitObserverMustFinishBeforeProfileReplacement" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="1465641218" result="Passed" start-time="2026-10-18 06:15:54Z" end-time="2026-10-18 06:15:54Z" duration="0.157634" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1068" name="RewardsCanCommitDuringBattleWithoutOpeningWorkshopEditing" fullname="PaperDefense.Tests.AssemblyRewardTests.RewardsCanCommitDuringBattleWithoutOpeningWorkshopEditing" methodname="RewardsCanCommitDuringBattleWithoutOpeningWorkshopEditing" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="2002286639" result="Passed" start-time="2026-10-18 06:15:54Z" end-time="2026-10-18 06:15:55Z" duration="0.107986" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1076" name="SubscriberFailureAfterCommitDoesNotKeepOrDuplicateThePaidIntent" fullname="PaperDefense.Tests.AssemblyRewardTests.SubscriberFailureAfterCommitDoesNotKeepOrDuplicateThePaidIntent" methodname="SubscriberFailureAfterCommitDoesNotKeepOrDuplicateThePaidIntent" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="1297054526" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.099894" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1061" name="ZeroCompletedWavesAndAnEmptyRetryDoNotWriteOrPublish" fullname="PaperDefense.Tests.AssemblyRewardTests.ZeroCompletedWavesAndAnEmptyRetryDoNotWriteOrPublish" methodname="ZeroCompletedWavesAndAnEmptyRetryDoNotWriteOrPublish" classname="PaperDefense.Tests.AssemblyRewardTests" runstate="Runnable" seed="1775430439" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.186047" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1363" name="GoldPayoutTests" fullname="PaperDefense.Tests.GoldPayoutTests" classname="PaperDefense.Tests.GoldPayoutTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.098849" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1364" name="CompletedWaveGoldIsBankedOnceAndSurvivesDefeatAndNewWorkshop" fullname="PaperDefense.Tests.GoldPayoutTests.CompletedWaveGoldIsBankedOnceAndSurvivesDefeatAndNewWorkshop" methodname="CompletedWaveGoldIsBankedOnceAndSurvivesDefeatAndNewWorkshop" classname="PaperDefense.Tests.GoldPayoutTests" runstate="Runnable" seed="351220422" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.033342" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1365" name="VictoryAddsOnlyCompletedWaveAndOneVictoryBonus" fullname="PaperDefense.Tests.GoldPayoutTests.VictoryAddsOnlyCompletedWaveAndOneVictoryBonus" methodname="VictoryAddsOnlyCompletedWaveAndOneVictoryBonus" classname="PaperDefense.Tests.GoldPayoutTests" runstate="Runnable" seed="1674375836" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.008951" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1735" name="WorkshopSaveFailureTests" fullname="PaperDefense.Tests.WorkshopSaveFailureTests" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.338172" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1748" name="DirtyRewardHudOffersRetryAndDoesNotReplayTheAward" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.DirtyRewardHudOffersRetryAndDoesNotReplayTheAward" methodname="DirtyRewardHudOffersRetryAndDoesNotReplayTheAward" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="157797802" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.225125" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1740" name="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.019664" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1736" name="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;save&quot;)" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;save&quot;)" methodname="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="1511539472" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.008144" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1737" name="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;delete&quot;)" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;delete&quot;)" methodname="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="1336728399" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.002691" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1738" name="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;assign&quot;)" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;assign&quot;)" methodname="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="969984749" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.002119" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1739" name="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;unlock&quot;)" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;unlock&quot;)" methodname="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="1568698343" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.002125" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1746" name="FailedRewardWriteKeepsGoldOnceAcrossRetryWorkshopAndNewRun" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.FailedRewardWriteKeepsGoldOnceAcrossRetryWorkshopAndNewRun" methodname="FailedRewardWriteKeepsGoldOnceAcrossRetryWorkshopAndNewRun" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="696995108" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.015045" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1745" name="MemoryOnlyModeAllowsEditsAndClearlyReportsItsScope" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.MemoryOnlyModeAllowsEditsAndClearlyReportsItsScope" methodname="MemoryOnlyModeAllowsEditsAndClearlyReportsItsScope" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="899456236" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.006282" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1744" name="NewProfileIsDirtyAndIsSavedOnQuitWithoutChangingTheRealProfilePath" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.NewProfileIsDirtyAndIsSavedOnQuitWithoutChangingTheRealProfilePath" methodname="NewProfileIsDirtyAndIsSavedOnQuitWithoutChangingTheRealProfilePath" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="783139056" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.004240" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1743" name="ProtectedLoadRejectsRetryTransactionsAndQuitWithoutStoreWrites" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.ProtectedLoadRejectsRetryTransactionsAndQuitWithoutStoreWrites" methodname="ProtectedLoadRejectsRetryTransactionsAndQuitWithoutStoreWrites" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="670896892" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.004293" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1747" name="PurchaseCommitsPreviouslyUnsavedRewardAndItsOwnCostExactlyOnce" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.PurchaseCommitsPreviouslyUnsavedRewardAndItsOwnCostExactlyOnce" methodname="PurchaseCommitsPreviouslyUnsavedRewardAndItsOwnCostExactlyOnce" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="1322897275" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.009246" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1741" name="RetryWritesCurrentProfileWithoutReplayingRejectedPurchase" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.RetryWritesCurrentProfileWithoutReplayingRejectedPurchase" methodname="RetryWritesCurrentProfileWithoutReplayingRejectedPurchase" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="1244089190" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.002609" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1749" name="SourceBecomingProtectedDuringSaveKeepsDirtyGoldAndBlocksFurtherWrites" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.SourceBecomingProtectedDuringSaveKeepsDirtyGoldAndBlocksFurtherWrites" methodname="SourceBecomingProtectedDuringSaveKeepsDirtyGoldAndBlocksFurtherWrites" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="1722276294" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.009193" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1742" name="WorkshopKeepsDraftAndDisplaysTheWriteFailure" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.WorkshopKeepsDraftAndDisplaysTheWriteFailure" methodname="WorkshopKeepsDraftAndDisplaysTheWriteFailure" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="1051037772" result="Passed" start-time="2026-10-18 06:15:55Z" end-time="2026-10-18 06:15:55Z" duration="0.038478" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task8-review-green.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

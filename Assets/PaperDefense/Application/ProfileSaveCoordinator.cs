@@ -7,6 +7,7 @@ namespace PaperDefense.Application
     {
         IWorkshopProfileStore store;
         bool canWrite, dirty;
+        bool pendingRunRewards;
         ProfileSaveState state = ProfileSaveState.MemoryOnly;
         string message = UserText.Message("copy.0780dfa419e08bc0"), lastWriteError = "";
 
@@ -14,6 +15,7 @@ namespace PaperDefense.Application
         {
             store = null;
             canWrite = dirty = false;
+            pendingRunRewards = false;
             lastWriteError = "";
             state = ProfileSaveState.MemoryOnly;
             message = UserText.Message("copy.0780dfa419e08bc0");
@@ -22,6 +24,7 @@ namespace PaperDefense.Application
         public void Attach(IWorkshopProfileStore store, ProfileLoadResult loaded)
         {
             this.store = store;
+            pendingRunRewards = false;
             canWrite = loaded.CanWrite && loaded.Source != ProfileLoadSource.RecoveryRequired;
             dirty = canWrite && (loaded.Source == ProfileLoadSource.NewProfile || loaded.Source == ProfileLoadSource.Backup || loaded.RequiresMigration);
             lastWriteError = "";
@@ -73,11 +76,13 @@ namespace PaperDefense.Application
         public void CopyStatusTo(WorkshopReadModel target)
         {
             if (target == null) return;
-            target.SaveState = state;
-            target.SaveMessage = message;
-            target.HasUnsavedChanges = dirty;
+            target.SaveState = pendingRunRewards && state == ProfileSaveState.Saved ? ProfileSaveState.Unsaved : state;
+            target.SaveMessage = pendingRunRewards ? message + " " + UserText.Message("run.reward.pending") : message;
+            target.HasUnsavedChanges = dirty || pendingRunRewards;
             target.LastWriteError = lastWriteError;
         }
+
+        public void SetPendingRunRewards(bool value) => pendingRunRewards = value;
 
         bool Write(WorkshopProfile candidate, bool manual, out string reason)
         {
