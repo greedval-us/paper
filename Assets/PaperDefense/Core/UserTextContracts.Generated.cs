@@ -1093,6 +1093,7 @@ namespace PaperDefense.Core
             resolver.RequireContract("reinforce.trial", 0, Array.Empty<int>());
             resolver.RequireContract("reinforce.uniform", 0, Array.Empty<int>());
             resolver.RequireContract("run.error.configuration", 0, Array.Empty<int>());
+            resolver.RequireContract("run.loadout.attack_required", 0, Array.Empty<int>());
             resolver.RequireContract("study.close", 0, Array.Empty<int>());
             resolver.RequireContract("study.compact", 0, Array.Empty<int>());
             resolver.RequireContract("study.conditions", 4, new[] { 2, 3 });

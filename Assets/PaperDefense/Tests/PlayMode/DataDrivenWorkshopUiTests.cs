@@ -200,10 +200,18 @@ namespace PaperDefense.Tests
             Assert.That(input.Message, Does.Contain("Назначь чертёж"));
             var workshopSession = run.Session;
             Button("Start run").onClick.Invoke();
-            Assert.That(run.InWorkshop, Is.True);
-            Assert.That(run.Session, Is.SameAs(workshopSession));
+            Assert.That(run.InWorkshop, Is.EqualTo(!assignOne));
+            if (assignOne)
+            {
+                Assert.That(run.Session, Is.Not.SameAs(workshopSession));
+                run.OpenWorkshop();
+            }
+            else
+            {
+                Assert.That(run.Session, Is.SameAs(workshopSession));
+                Assert.That(hud.Status, Does.Contain("атакующую башню"));
+            }
             Assert.That(run.Workshop.Album.Count, Is.EqualTo(assignOne ? 1 : 0));
-            Assert.That(hud.Status, Does.Contain("Выберите чертёж"));
 
             Button("New blueprint").onClick.Invoke();
             Button("Open drawing editor").onClick.Invoke();

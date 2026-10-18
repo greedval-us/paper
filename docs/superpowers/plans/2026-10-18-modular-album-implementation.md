@@ -1,6 +1,6 @@
 # Составной альбом — Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Выполнение начато по запросу пользователя 18.10.2026. Задачи 1–4 завершены; следующая — задача 5. [Проверки задачи 1](../../validation/modular-album/task1-report.md), [задачи 2](../../validation/modular-album/task2-report.md), [задачи 3](../../validation/modular-album/task3-report.md), [задачи 4](../../validation/modular-album/task4-report.md).
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Выполнение начато по запросу пользователя 18.10.2026. Задачи 1–5 завершены; следующая — задача 6. [Проверки задачи 1](../../validation/modular-album/task1-report.md), [задачи 2](../../validation/modular-album/task2-report.md), [задачи 3](../../validation/modular-album/task3-report.md), [задачи 4](../../validation/modular-album/task4-report.md), [задачи 5](../../validation/modular-album/task5-report.md).
 
 **Goal:** перенести существующую игру на альбом составных башен и сооружений, восемь общих слотов и открытия деталей за уровень и золото, включая все обновлённые экраны.
 
@@ -175,12 +175,12 @@
 
 **Интерфейсы:** `int MetaProgression.LevelForXp(int totalXp)`; в `AssemblyCommands`: `PurchasePart(string partId, Guid operationId)`, `SaveEntry(AlbumEntry entry, Guid operationId)`, `SaveLibraryEntry(ComponentLibraryEntry entry, Guid operationId)`, `DeleteEntry(string entryId, Guid operationId)`, `AssignSlot(int slotIndex, string entryId, Guid operationId)` возвращают `AssemblyCommandResult` с Success, Code, Diagnostics. Команды работают через владельца текущего профиля и существующий `SaveCandidate`, публикуют candidate только после успеха; operation receipt сохраняется в том же candidate, повтор возвращает тот же результат, включая ID варианта. `WorkshopReadModel` предоставляет `Entries`, `LoadoutEntries`, `Gold`, `TotalXp`, `Level` и статус записи. `RunController.StartRun(out string reason)` сохраняет сигнатуру, но фиксирует `RunLoadoutSnapshot` из восьми разрешённых страниц и снимка баланса.
 
-- [ ] Написать `MetaProgressionTests` для границ: XP 99→L1, 100→L2, 389→L3, 390→L4, 1329→L7, 1330→L8; отрицательное значение отклоняется, превышение последнего порога остаётся L8.
-- [ ] Написать `AssemblyTransactionTests.BuyLongBarrelTwice_ChargesOnce`: L4/94 золота/длинный ствол за 80 → `Assert.That(profile.Gold, Is.EqualTo(14)); Assert.That(profile.IsUnlocked("head.long"), Is.True);` после обоих вызовов. Новая операция для уже купленного права тоже оставляет 14. L3/94 и L4/79 не покупают. IO failure сохраняет 94, старые права, альбом, слоты и черновик. Сохранение и удаление не публикуются до commit.
-- [ ] Запустить три новых класса, зафиксировать красный результат.
-- [ ] Реализовать команды, проверяя права, числовую и геометрическую совместимость задач 2–3. Перенос одного ID между слотами очищает старое назначение в том же candidate; удаление очищает затронутые слоты только после успешной записи. «Сохранить как вариант» создаёт новый ID, правка создаёт новую ревизию. Применение библиотечной ревизии к странице — отдельное явное действие.
-- [ ] `AssemblyLoadoutTests`: 8 разных ID, частично пустой набор допустим; только поддержка/промокашка не запускают бой; одна атакующая башня запускает. Изменение страницы или каталога после StartRun не меняет цену/характеристики объектов этой партии. Повтор после IO не теряет черновик и не повторяет списание. Пройти `WorkshopSaveFailureTests`, `RunControllerTests`, `WorkshopPersistenceTests`.
-- [ ] Зафиксировать: `feat: add atomic album commands and level gated purchases`.
+- [x] Написать `MetaProgressionTests` для границ: XP 99→L1, 100→L2, 389→L3, 390→L4, 1329→L7, 1330→L8; отрицательное значение отклоняется, превышение последнего порога остаётся L8.
+- [x] Написать `AssemblyTransactionTests.BuyLongBarrelTwice_ChargesOnce`: L4/94 золота/длинный ствол за 80 → `Assert.That(profile.Gold, Is.EqualTo(14)); Assert.That(profile.IsUnlocked("head.long"), Is.True);` после обоих вызовов. Новая операция для уже купленного права тоже оставляет 14. L3/94 и L4/79 не покупают. IO failure сохраняет 94, старые права, альбом, слоты и черновик. Сохранение и удаление не публикуются до commit.
+- [x] Запустить три новых класса, зафиксировать красный результат.
+- [x] Реализовать команды, проверяя права, числовую и геометрическую совместимость задач 2–3. Перенос одного ID между слотами очищает старое назначение в том же candidate; удаление очищает затронутые слоты только после успешной записи. «Сохранить как вариант» создаёт новый ID, правка создаёт новую ревизию. Применение библиотечной ревизии к странице — отдельное явное действие.
+- [x] `AssemblyLoadoutTests`: 8 разных ID, частично пустой набор допустим; только поддержка/промокашка не запускают бой; одна атакующая башня запускает. Изменение страницы или каталога после StartRun не меняет цену/характеристики объектов этой партии. Повтор после IO не теряет черновик и не повторяет списание. Пройти `WorkshopSaveFailureTests`, `RunControllerTests`, `WorkshopPersistenceTests`.
+- [x] Зафиксировать: `feat: add atomic album commands and level gated purchases`.
 
 ## Задача 6. Обоймы, очереди и семь боевых семейств
 

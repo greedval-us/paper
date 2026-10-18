@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="31" result="Passed" total="31" passed="31" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 04:40:56Z" end-time="2026-10-18 04:40:57Z" duration="1,2371271">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1154" result="Passed" start-time="2026-10-18 04:40:56Z" end-time="2026-10-18 04:40:57Z" duration="1.237127" total="31" passed="31" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="2161" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="984" result="Passed" start-time="2026-10-18 04:40:56Z" end-time="2026-10-18 04:40:57Z" duration="1.147111" total="31" passed="31" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="2162" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="984" result="Passed" start-time="2026-10-18 04:40:56Z" end-time="2026-10-18 04:40:57Z" duration="1.085090" total="31" passed="31" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="2163" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="984" result="Passed" start-time="2026-10-18 04:40:56Z" end-time="2026-10-18 04:40:57Z" duration="0.985021" total="31" passed="31" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1134" name="AssemblyProfileMutationTests" fullname="PaperDefense.Tests.AssemblyProfileMutationTests" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-10-18 04:40:56Z" end-time="2026-10-18 04:40:57Z" duration="0.686550" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1145" name="AssigningSlot_MovesAnyOwnedEntryAndNullClears" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.AssigningSlot_MovesAnyOwnedEntryAndNullClears" methodname="AssigningSlot_MovesAnyOwnedEntryAndNullClears" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="1509028393" result="Passed" start-time="2026-10-18 04:40:56Z" end-time="2026-10-18 04:40:56Z" duration="0.125606" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1144" name="DeletingLibraryComponent_DoesNotTouchSavedPageSnapshotOrReference" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.DeletingLibraryComponent_DoesNotTouchSavedPageSnapshotOrReference" methodname="DeletingLibraryComponent_DoesNotTouchSavedPageSnapshotOrReference" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="464301179" result="Passed" start-time="2026-10-18 04:40:56Z" end-time="2026-10-18 04:40:56Z" duration="0.038349" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1143" name="DeletingSelectedEntry_ClearsSlotsAndCompatibilityProjection" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.DeletingSelectedEntry_ClearsSlotsAndCompatibilityProjection" methodname="DeletingSelectedEntry_ClearsSlotsAndCompatibilityProjection" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="1210473233" result="Passed" start-time="2026-10-18 04:40:56Z" end-time="2026-10-18 04:40:56Z" duration="0.010044" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1138" name="EditingEntry_UsesOptimisticRevisionAndLeavesOldSnapshotImmutable" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.EditingEntry_UsesOptimisticRevisionAndLeavesOldSnapshotImmutable" methodname="EditingEntry_UsesOptimisticRevisionAndLeavesOldSnapshotImmutable" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="1806067426" result="Passed" start-time="2026-10-18 04:40:56Z" end-time="2026-10-18 04:40:56Z" duration="0.011226" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1147" name="EmptyOperationIds_AreRejectedWithoutPublishingSave" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.EmptyOperationIds_AreRejectedWithoutPublishingSave" methodname="EmptyOperationIds_AreRejectedWithoutPublishingSave" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="705664336" result="Passed" start-time="2026-10-18 04:40:56Z" end-time="2026-10-18 04:40:56Z" duration="0.016362" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1140" name="FullAlbum_AllowsEditButRejectsNewPageAndVariant" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.FullAlbum_AllowsEditButRejectsNewPageAndVariant" methodname="FullAlbum_AllowsEditButRejectsNewPageAndVariant" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="865722672" result="Passed" start-time="2026-10-18 04:40:56Z" end-time="2026-10-18 04:40:57Z" duration="0.260398" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1141" name="LegacyPages_CannotBeSavedThroughModernMutator" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.LegacyPages_CannotBeSavedThroughModernMutator" methodname="LegacyPages_CannotBeSavedThroughModernMutator" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="1717456748" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.009551" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1142" name="LibrarySave_EditAndVariantUseIndependentRevisions" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.LibrarySave_EditAndVariantUseIndependentRevisions" methodname="LibrarySave_EditAndVariantUseIndependentRevisions" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="1407333017" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.015153" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1136" name="PreviouslyOwnedPart_BypassesNewLevelAndPrice" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.PreviouslyOwnedPart_BypassesNewLevelAndPrice" methodname="PreviouslyOwnedPart_BypassesNewLevelAndPrice" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="1684514196" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.021889" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1135" name="Purchase_RequiresLevelThenGoldAndDebitsOnce" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.Purchase_RequiresLevelThenGoldAndDebitsOnce" methodname="Purchase_RequiresLevelThenGoldAndDebitsOnce" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="345401282" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.031380" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1146" name="Receipts_AreCopiedAndDuplicateOperationIsRejected" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.Receipts_AreCopiedAndDuplicateOperationIsRejected" methodname="Receipts_AreCopiedAndDuplicateOperationIsRejected" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="705389512" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.013568" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1137" name="SavingEntry_NormalizesNewRevisionAndRebuildsLegacyProjection" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.SavingEntry_NormalizesNewRevisionAndRebuildsLegacyProjection" methodname="SavingEntry_NormalizesNewRevisionAndRebuildsLegacyProjection" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="843198057" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.013152" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1139" name="VariantEntry_UsesOperationIdentityAndRejectsUnreceiptedCollision" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.VariantEntry_UsesOperationIdentityAndRejectsUnreceiptedCollision" methodname="VariantEntry_UsesOperationIdentityAndRejectsUnreceiptedCollision" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="2138935671" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.010501" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1774" name="MetaProgressionTests" fullname="PaperDefense.Tests.MetaProgressionTests" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" testcasecount="18" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.201862" total="18" passed="18" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1791" name="ExactXpBoundariesChooseTheHighestReachedLevel" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" testcasecount="16" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.102087" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1775" name="ExactXpBoundariesChooseTheHighestReachedLevel(0,1)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(0,1)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="945571176" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000584" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1776" name="ExactXpBoundariesChooseTheHighestReachedLevel(99,1)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(99,1)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="1551556142" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000163" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1777" name="ExactXpBoundariesChooseTheHighestReachedLevel(100,2)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(100,2)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="584137731" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000108" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1778" name="ExactXpBoundariesChooseTheHighestReachedLevel(229,2)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(229,2)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="1347984249" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000089" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1779" name="ExactXpBoundariesChooseTheHighestReachedLevel(230,3)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(230,3)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="33337841" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000067" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1780" name="ExactXpBoundariesChooseTheHighestReachedLevel(389,3)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(389,3)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="86450730" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000059" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1781" name="ExactXpBoundariesChooseTheHighestReachedLevel(390,4)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(390,4)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="197565468" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000065" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1782" name="ExactXpBoundariesChooseTheHighestReachedLevel(579,4)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(579,4)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="1675990998" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000061" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1783" name="ExactXpBoundariesChooseTheHighestReachedLevel(580,5)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(580,5)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="25147366" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000078" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1784" name="ExactXpBoundariesChooseTheHighestReachedLevel(799,5)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(799,5)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="881112838" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000089" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1785" name="ExactXpBoundariesChooseTheHighestReachedLevel(800,6)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(800,6)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="406143341" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000110" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1786" name="ExactXpBoundariesChooseTheHighestReachedLevel(1049,6)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(1049,6)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="434859795" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000111" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1787" name="ExactXpBoundariesChooseTheHighestReachedLevel(1050,7)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(1050,7)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="1281124603" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000090" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1788" name="ExactXpBoundariesChooseTheHighestReachedLevel(1329,7)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(1329,7)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="628283497" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000161" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1789" name="ExactXpBoundariesChooseTheHighestReachedLevel(1330,8)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(1330,8)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="40017210" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000137" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1790" name="ExactXpBoundariesChooseTheHighestReachedLevel(int.MaxValue,8)" fullname="PaperDefense.Tests.MetaProgressionTests.ExactXpBoundariesChooseTheHighestReachedLevel(int.MaxValue,8)" methodname="ExactXpBoundariesChooseTheHighestReachedLevel" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="1112772068" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000150" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1794" name="NegativeXpIsRejected" fullname="PaperDefense.Tests.MetaProgressionTests.NegativeXpIsRejected" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.097709" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1792" name="NegativeXpIsRejected(-1)" fullname="PaperDefense.Tests.MetaProgressionTests.NegativeXpIsRejected(-1)" methodname="NegativeXpIsRejected" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="1313761373" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000975" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1793" name="NegativeXpIsRejected(int.MinValue)" fullname="PaperDefense.Tests.MetaProgressionTests.NegativeXpIsRejected(int.MinValue)" methodname="NegativeXpIsRejected" classname="PaperDefense.Tests.MetaProgressionTests" runstate="Runnable" seed="1589580443" result="Passed" start-time="2026-10-18 04:40:57Z" end-time="2026-10-18 04:40:57Z" duration="0.000182" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task5-core-focused.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

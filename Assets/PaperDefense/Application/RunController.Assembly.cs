@@ -1,0 +1,58 @@
+using System;
+using System.Linq;
+using PaperDefense.Core;
+
+namespace PaperDefense.Application
+{
+    public sealed partial class RunController
+    {
+        AssemblyCommands assemblyCommands;
+        public AssemblyCommands AssemblyCommands => assemblyCommands ?? (assemblyCommands = new AssemblyCommands(this));
+        public RunLoadoutSnapshot RunLoadout { get; private set; }
+        internal WorkshopProfile AssemblyProfile => profile;
+        internal ComponentCatalog ConfiguredAssemblyCatalog => ConfiguredAssemblies();
+        internal GameBalance AssemblyBalance => session?.Balance;
+        internal bool CreateAssemblyCandidate(out WorkshopProfile candidate, out string reason) => CreateCandidate(out candidate, out reason);
+        internal bool CommitAssemblyCandidate(WorkshopProfile candidate, out string reason) => CommitCandidate(candidate, out reason);
+
+        bool StartAssemblyRun(out string reason)
+        {
+            if (!Editing(out reason)) return false;
+            GameBalance balance;
+            GameSession preparedSession;
+            try
+            {
+                balance = CreateWorkshopBalance();
+                balance.Content = balance.ResolveContent();
+                preparedSession = new GameSession(balance, starterDefenses: false);
+            }
+            catch (ArgumentException error)
+            { LastConfigurationDiagnostic = error.ToString(); reason = UserText.Message("run.error.configuration"); return false; }
+            RunLoadoutSnapshot snapshot;
+            TowerBlueprint[] prepared;
+            try
+            {
+                var candidate = profile.CreateWorkingCopy(); candidate.ConfigureContent(balance.Content);
+                var entries = candidate.GetLoadoutEntries();
+                foreach (var entry in entries.Where(e => e != null))
+                {
+                    if (entry.Kind == AlbumEntryKind.Legacy)
+                    { if (!candidate.ValidateOwned(entry.LegacyBlueprint, out reason, balance)) return false; }
+                    else foreach (var part in entry.Snapshot.Recipe.Parts)
+                        if (!candidate.IsUnlocked(part.Id)) { reason = "profile.part.locked: " + part.Id; return false; }
+                }
+                snapshot = new RunLoadoutSnapshot(entries, balance);
+                prepared = candidate.GetLoadoutBlueprints().Select(page => page?.WithContent(balance.Content)).ToArray();
+            }
+            catch (ArgumentException error)
+            {
+                LastConfigurationDiagnostic = error.ToString();
+                reason = UserText.Message(error.ParamName == "entries" ? "run.loadout.attack_required" : "run.error.configuration");
+                return false;
+            }
+            runLoadout = Array.AsReadOnly(prepared); RunLoadout = snapshot; InWorkshop = false;
+            Initialize(preparedSession);
+            reason = ""; WorkshopChanged?.Invoke(); return true;
+        }
+    }
+}

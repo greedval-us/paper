@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="32" result="Failed(Child)" total="32" passed="24" failed="8" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 04:46:12Z" end-time="2026-10-18 04:46:16Z" duration="3,6839648">
+  <test-suite type="TestSuite" id="3157" name="paper" fullname="paper" runstate="Runnable" testcasecount="591" result="Failed" site="Child" start-time="2026-10-18 04:46:12Z" end-time="2026-10-18 04:46:16Z" duration="3.683965" total="32" passed="24" failed="8" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="3151" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="591" result="Failed" site="Child" start-time="2026-10-18 04:46:12Z" end-time="2026-10-18 04:46:16Z" duration="3.679599" total="32" passed="24" failed="8" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="3152" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="591" result="Failed" site="Child" start-time="2026-10-18 04:46:12Z" end-time="2026-10-18 04:46:16Z" duration="3.657027" total="32" passed="24" failed="8" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="3153" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="591" result="Failed" site="Child" start-time="2026-10-18 04:46:12Z" end-time="2026-10-18 04:46:16Z" duration="3.639979" total="32" passed="24" failed="8" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="2425" name="AssemblyLoadoutTests" fullname="PaperDefense.Tests.AssemblyLoadoutTests" classname="PaperDefense.Tests.AssemblyLoadoutTests" runstate="Runnable" testcasecount="12" result="Failed" site="Child" start-time="2026-10-18 04:46:12Z" end-time="2026-10-18 04:46:13Z" duration="1.267509" total="12" passed="6" failed="6" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="2430" name="ALoadoutWithoutAnAttackingTowerCannotStart" fullname="PaperDefense.Tests.AssemblyLoadoutTests.ALoadoutWithoutAnAttackingTowerCannotStart" classname="PaperDefense.Tests.AssemblyLoadoutTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 04:46:12Z" end-time="2026-10-18 04:46:12Z" duration="0.360330" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2427" name="ALoadoutWithoutAnAttackingTowerCannotStart(&quot;empty&quot;)" fullname="PaperDefense.Tests.AssemblyLoadoutTests.ALoadoutWithoutAnAttackingTowerCannotStart(&quot;empty&quot;)" methodname="ALoadoutWithoutAnAttackingTowerCannotStart" classname="PaperDefense.Tests.AssemblyLoadoutTests" runstate="Runnable" seed="1311030180" result="Passed" start-time="2026-10-18 04:46:12Z" end-time="2026-10-18 04:46:12Z" duration="0.166041" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2428" name="ALoadoutWithoutAnAttackingTowerCannotStart(&quot;support&quot;)" fullname="PaperDefense.Tests.AssemblyLoadoutTests.ALoadoutWithoutAnAttackingTowerCannotStart(&quot;support&quot;)" methodname="ALoadoutWithoutAnAttackingTowerCannotStart" classname="PaperDefense.Tests.AssemblyLoadoutTests" runstate="Runnable" seed="1488018460" result="Passed" start-time="2026-10-18 04:46:12Z" end-time="2026-10-18 04:46:12Z" duration="0.064682" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2429" name="ALoadoutWithoutAnAttackingTowerCannotStart(&quot;blotter&quot;)" fullname="PaperDefense.Tests.AssemblyLoadoutTests.ALoadoutWithoutAnAttackingTowerCannotStart(&quot;blotter&quot;)" methodname="ALoadoutWithoutAnAttackingTowerCannotStart" classname="PaperDefense.Tests.AssemblyLoadoutTests" runstate="Runnable" seed="345259922" result="Passed" start-time="2026-10-18 04:46:12Z" end-time="2026-10-18 04:46:12Z" duration="0.093860" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2426" name="EightDifferentPagesShareTheSlotsAndMovingOneClearsItsPreviousAssignment" fullname="PaperDefense.Tests.AssemblyLoadoutTests.EightDifferentPagesShareTheSlotsAndMovingOneClearsItsPreviousAssignment" methodname="EightDifferentPagesShareTheSlotsAndMovingOneClearsItsPreviousAssignment" classname="PaperDefense.Tests.AssemblyLoadoutTests" runstate="Runnable" seed="283199573" result="Passed" start-time="2026-10-18 04:46:12Z" end-time="2026-10-18 04:46:12Z" duration="0.169764" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2438" name="FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout" fullname="PaperDefense.Tests.AssemblyLoadoutTests.FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout" classname="PaperDefense.Tests.AssemblyLoadoutTests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-10-18 04:46:12Z" end-time="2026-10-18 04:46:13Z" duration="0.360724" total="5" passed="0" failed="5" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="2433" name="FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout(&quot;workshop&quot;)" fullname="PaperDefense.Tests.AssemblyLoadoutTests.FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout(&quot;workshop&quot;)" methodname="FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout" classname="PaperDefense.Tests.AssemblyLoadoutTests" runstate="Runnable" seed="1985408795" result="Failed" start-time="2026-10-18 04:46:12Z" end-time="2026-10-18 04:46:13Z" duration="0.073694" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Preparation failure must not clear the running party's frozen selection.
+  Expected: same as <PaperDefense.Core.RunLoadoutSnapshot>
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyLoadoutTests.FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout (System.String preparation) [0x00172] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AssemblyLoadoutTests.cs:139
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="2434" name="FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout(&quot;ordinary&quot;)" fullname="PaperDefense.Tests.AssemblyLoadoutTests.FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout(&quot;ordinary&quot;)" methodname="FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout" classname="PaperDefense.Tests.AssemblyLoadoutTests" runstate="Runnable" seed="1041206800" result="Failed" start-time="2026-10-18 04:46:13Z" end-time="2026-10-18 04:46:13Z" duration="0.074085" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Preparation failure must not clear the running party's frozen selection.
+  Expected: same as <PaperDefense.Core.RunLoadoutSnapshot>
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyLoadoutTests.FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout (System.String preparation) [0x00172] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AssemblyLoadoutTests.cs:139
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="2435" name="FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout(&quot;memory&quot;)" fullname="PaperDefense.Tests.AssemblyLoadoutTests.FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout(&quot;memory&quot;)" methodname="FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout" classname="PaperDefense.Tests.AssemblyLoadoutTests" runstate="Runnable" seed="1240045308" result="Failed" start-time="2026-10-18 04:46:13Z" end-time="2026-10-18 04:46:13Z" duration="0.068483" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Preparation failure must not clear the running party's frozen selection.
+  Expected: same as <PaperDefense.Core.RunLoadoutSnapshot>
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyLoadoutTests.FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout (System.String preparation) [0x00172] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AssemblyLoadoutTests.cs:139
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="2436" name="FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout(&quot;store&quot;)" fullname="PaperDefense.Tests.AssemblyLoadoutTests.FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout(&quot;store&quot;)" methodname="FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout" classname="PaperDefense.Tests.AssemblyLoadoutTests" runstate="Runnable" seed="894659686" result="Failed" start-time="2026-10-18 04:46:13Z" end-time="2026-10-18 04:46:13Z" duration="0.069422" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Preparation failure must not clear the running party's frozen selection.
+  Expected: same as <PaperDefense.Core.RunLoadoutSnapshot>
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyLoadoutTests.FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout (System.String preparation) [0x00172] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AssemblyLoadoutTests.cs:139
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="2437" name="FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout(&quot;null-store&quot;)" fullname="PaperDefense.Tests.AssemblyLoadoutTests.FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout(&quot;null-store&quot;)" methodname="FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout" classname="PaperDefense.Tests.AssemblyLoadoutTests" runstate="Runnable" seed="107694850" result="Failed" start-time="2026-10-18 04:46:13Z" end-time="2026-10-18 04:46:13Z" duration="0.071719" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Preparation failure must not clear the running party's frozen selection.
+  Expected: same as <PaperDefense.Core.RunLoadoutSnapshot>
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyLoadoutTests.FailedPreparationPreservesTheAlreadyPublishedRunAndFrozenLoadout (System.String preparation) [0x00172] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AssemblyLoadoutTests.cs:139
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="2431" name="OneAttackingPageInTheLastSlotCanStartWithSevenEmptySlots" fullname="PaperDefense.Tests.AssemblyLoadoutTests.OneAttackingPageInTheLastSlotCanStartWithSevenEmptySlots" methodname="OneAttackingPageInTheLastSlotCanStartWithSevenEmptySlots" classname="PaperDefense.Tests.AssemblyLoadoutTests" runstate="Runnable" seed="1420274328" result="Passed" start-time="2026-10-18 04:46:13Z" end-time="2026-10-18 04:46:13Z" duration="0.079400" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2432" name="SavedPageAndAuthoringChangesCannotMutateTheSnapshotOfTheStartedRun" fullname="PaperDefense.Tests.AssemblyLoadoutTests.SavedPageAndAuthoringChangesCannotMutateTheSnapshotOfTheStartedRun" methodname="SavedPageAndAuthoringChangesCannotMutateTheSnapshotOfTheStartedRun" classname="PaperDefense.Tests.AssemblyLoadoutTests" runstate="Runnable" seed="673846343" result="Passed" start-time="2026-10-18 04:46:13Z" end-time="2026-10-18 04:46:13Z" duration="0.211789" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2439" name="SessionSubscriberFailurePropagatesAfterTheStartedRunHasBeenPublished" fullname="PaperDefense.Tests.AssemblyLoadoutTests.SessionSubscriberFailurePropagatesAfterTheStartedRunHasBeenPublished" methodname="SessionSubscriberFailurePropagatesAfterTheStartedRunHasBeenPublished" classname="PaperDefense.Tests.AssemblyLoadoutTests" runstate="Runnable" seed="1383449971" result="Failed" start-time="2026-10-18 04:46:13Z" end-time="2026-10-18 04:46:13Z" duration="0.069733" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: <System.ArgumentException>
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyLoadoutTests.SessionSubscriberFailurePropagatesAfterTheStartedRunHasBeenPublished () [0x00059] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AssemblyLoadoutTests.cs:160
+]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2467" name="AssemblyTransactionTests" fullname="PaperDefense.Tests.AssemblyTransactionTests" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" testcasecount="13" result="Failed" site="Child" start-time="2026-10-18 04:46:13Z" end-time="2026-10-18 04:46:16Z" duration="2.317695" total="13" passed="12" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="2468" name="BuyLongBarrelTwice_ChargesOnce" fullname="PaperDefense.Tests.AssemblyTransactionTests.BuyLongBarrelTwice_ChargesOnce" methodname="BuyLongBarrelTwice_ChargesOnce" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" seed="1765602818" result="Passed" start-time="2026-10-18 04:46:13Z" end-time="2026-10-18 04:46:13Z" duration="0.168886" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2482" name="EditingAGunRebindsForgedSnapshotNumbersToTheAuthoritativeCatalog" fullname="PaperDefense.Tests.AssemblyTransactionTests.EditingAGunRebindsForgedSnapshotNumbersToTheAuthoritativeCatalog" methodname="EditingAGunRebindsForgedSnapshotNumbersToTheAuthoritativeCatalog" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" seed="1793832835" result="Passed" start-time="2026-10-18 04:46:13Z" end-time="2026-10-18 04:46:13Z" duration="0.115805" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2471" name="LevelOrGoldRejectionDoesNotWriteOrChangeTheProfile" fullname="PaperDefense.Tests.AssemblyTransactionTests.LevelOrGoldRejectionDoesNotWriteOrChangeTheProfile" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 04:46:13Z" end-time="2026-10-18 04:46:14Z" duration="0.254102" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2469" name="LevelOrGoldRejectionDoesNotWriteOrChangeTheProfile(389,94)" fullname="PaperDefense.Tests.AssemblyTransactionTests.LevelOrGoldRejectionDoesNotWriteOrChangeTheProfile(389,94)" methodname="LevelOrGoldRejectionDoesNotWriteOrChangeTheProfile" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" seed="1585184321" result="Passed" start-time="2026-10-18 04:46:13Z" end-time="2026-10-18 04:46:14Z" duration="0.125148" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2470" name="LevelOrGoldRejectionDoesNotWriteOrChangeTheProfile(390,79)" fullname="PaperDefense.Tests.AssemblyTransactionTests.LevelOrGoldRejectionDoesNotWriteOrChangeTheProfile(390,79)" methodname="LevelOrGoldRejectionDoesNotWriteOrChangeTheProfile" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" seed="1059380673" result="Passed" start-time="2026-10-18 04:46:14Z" end-time="2026-10-18 04:46:14Z" duration="0.124727" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2479" name="LibraryRevisionDoesNotChangeAnOwnedPageUntilExplicitApply" fullname="PaperDefense.Tests.AssemblyTransactionTests.LibraryRevisionDoesNotChangeAnOwnedPageUntilExplicitApply" methodname="LibraryRevisionDoesNotChangeAnOwnedPageUntilExplicitApply" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" seed="971148026" result="Passed" start-time="2026-10-18 04:46:14Z" end-time="2026-10-18 04:46:14Z" duration="0.423974" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2478" name="MissingPhysicalCoverageAndImpossibleMountCountAreRejectedBeforeWriting" fullname="PaperDefense.Tests.AssemblyTransactionTests.MissingPhysicalCoverageAndImpossibleMountCountAreRejectedBeforeWriting" methodname="MissingPhysicalCoverageAndImpossibleMountCountAreRejectedBeforeWriting" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" seed="571097038" result="Passed" start-time="2026-10-18 04:46:14Z" end-time="2026-10-18 04:46:14Z" duration="0.102413" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2472" name="RefusedPurchaseKeepsAllStateAndTheSameOperationCanBeRetriedOnce" fullname="PaperDefense.Tests.AssemblyTransactionTests.RefusedPurchaseKeepsAllStateAndTheSameOperationCanBeRetriedOnce" methodname="RefusedPurchaseKeepsAllStateAndTheSameOperationCanBeRetriedOnce" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" seed="1283204762" result="Passed" start-time="2026-10-18 04:46:14Z" end-time="2026-10-18 04:46:14Z" duration="0.197441" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2473" name="RefusedSaveKeepsDraftAndPublishesOnlyAfterTheSuccessfulCommit" fullname="PaperDefense.Tests.AssemblyTransactionTests.RefusedSaveKeepsDraftAndPublishesOnlyAfterTheSuccessfulCommit" methodname="RefusedSaveKeepsDraftAndPublishesOnlyAfterTheSuccessfulCommit" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" seed="1386568200" result="Passed" start-time="2026-10-18 04:46:14Z" end-time="2026-10-18 04:46:15Z" duration="0.192532" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2481" name="SavingAnEditableGunWithAnUnownedPartRejectsBeforeAnyWrite" fullname="PaperDefense.Tests.AssemblyTransactionTests.SavingAnEditableGunWithAnUnownedPartRejectsBeforeAnyWrite" methodname="SavingAnEditableGunWithAnUnownedPartRejectsBeforeAnyWrite" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" seed="901271529" result="Passed" start-time="2026-10-18 04:46:15Z" end-time="2026-10-18 04:46:15Z" duration="0.128424" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2476" name="SlotAndDeleteTransactionsPublishTheirClearedSlotsOnlyAfterCommit" fullname="PaperDefense.Tests.AssemblyTransactionTests.SlotAndDeleteTransactionsPublishTheirClearedSlotsOnlyAfterCommit" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 04:46:15Z" end-time="2026-10-18 04:46:15Z" duration="0.492982" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <output><![CDATA[Account API did not become accessible within 30 seconds. This may be due to network issues or editor focus.
+]]></output>
+              <test-case id="2474" name="SlotAndDeleteTransactionsPublishTheirClearedSlotsOnlyAfterCommit(&quot;assign&quot;)" fullname="PaperDefense.Tests.AssemblyTransactionTests.SlotAndDeleteTransactionsPublishTheirClearedSlotsOnlyAfterCommit(&quot;assign&quot;)" methodname="SlotAndDeleteTransactionsPublishTheirClearedSlotsOnlyAfterCommit" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" seed="1621632404" result="Passed" start-time="2026-10-18 04:46:15Z" end-time="2026-10-18 04:46:15Z" duration="0.291605" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2475" name="SlotAndDeleteTransactionsPublishTheirClearedSlotsOnlyAfterCommit(&quot;delete&quot;)" fullname="PaperDefense.Tests.AssemblyTransactionTests.SlotAndDeleteTransactionsPublishTheirClearedSlotsOnlyAfterCommit(&quot;delete&quot;)" methodname="SlotAndDeleteTransactionsPublishTheirClearedSlotsOnlyAfterCommit" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" seed="1798053645" result="Passed" start-time="2026-10-18 04:46:15Z" end-time="2026-10-18 04:46:15Z" duration="0.184132" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2477" name="VariantOperationReturnsItsPersistedIdentityAfterRepeatedCallsAndRestart" fullname="PaperDefense.Tests.AssemblyTransactionTests.VariantOperationReturnsItsPersistedIdentityAfterRepeatedCallsAndRestart" methodname="VariantOperationReturnsItsPersistedIdentityAfterRepeatedCallsAndRestart" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" seed="273640791" result="Passed" start-time="2026-10-18 04:46:15Z" end-time="2026-10-18 04:46:15Z" duration="0.128165" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2480" name="WorkshopSubscriberFailurePropagatesWithoutDisguisingACommittedPurchaseAsRejection" fullname="PaperDefense.Tests.AssemblyTransactionTests.WorkshopSubscriberFailurePropagatesWithoutDisguisingACommittedPurchaseAsRejection" methodname="WorkshopSubscriberFailurePropagatesWithoutDisguisingACommittedPurchaseAsRejection" classname="PaperDefense.Tests.AssemblyTransactionTests" runstate="Runnable" seed="1990831196" result="Failed" start-time="2026-10-18 04:46:15Z" end-time="2026-10-18 04:46:16Z" duration="0.103277" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: <System.ArgumentException>
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTransactionTests.WorkshopSubscriberFailurePropagatesWithoutDisguisingACommittedPurchaseAsRejection () [0x00052] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AssemblyTransactionTests.cs:295
+]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2530" name="ContentConfigurationBoundaryIntegrationTests" fullname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests" classname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-10-18 04:46:16Z" end-time="2026-10-18 04:46:16Z" duration="0.038194" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="2538" name="FailedNextPreparationLeavesThePublishedWorkshopAndProfileUntouched" fullname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests.FailedNextPreparationLeavesThePublishedWorkshopAndProfileUntouched" methodname="FailedNextPreparationLeavesThePublishedWorkshopAndProfileUntouched" classname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests" runstate="Runnable" seed="1040986603" result="Failed" start-time="2026-10-18 04:46:16Z" end-time="2026-10-18 04:46:16Z" duration="0.007234" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected string length 46 but was 84. Strings differ at index 0.
+  Expected: "\u001ePD1:F3J1bi5lcnJvci5jb25maWd1cmF0aW9uAAAAAA==\u001f"
+  But was:  "Specified argument was out of the range of valid values.\r\nPar..."
+  -----------^
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests.FailedNextPreparationLeavesThePublishedWorkshopAndProfileUntouched () [0x000cc] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\ContentConfigurationBoundaryIntegrationTests.cs:49
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2537" name="MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo" fullname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests.MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo" classname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-18 04:46:16Z" end-time="2026-10-18 04:46:16Z" duration="0.026682" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2531" name="MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo(False,&quot;ordinary&quot;)" fullname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests.MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo(False,&quot;ordinary&quot;)" methodname="MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo" classname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests" runstate="Runnable" seed="1413807184" result="Passed" start-time="2026-10-18 04:46:16Z" end-time="2026-10-18 04:46:16Z" duration="0.022732" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2532" name="MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo(False,&quot;memory&quot;)" fullname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests.MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo(False,&quot;memory&quot;)" methodname="MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo" classname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests" runstate="Runnable" seed="356609850" result="Passed" start-time="2026-10-18 04:46:16Z" end-time="2026-10-18 04:46:16Z" duration="0.000296" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2533" name="MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo(False,&quot;store&quot;)" fullname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests.MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo(False,&quot;store&quot;)" methodname="MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo" classname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests" runstate="Runnable" seed="1726491043" result="Passed" start-time="2026-10-18 04:46:16Z" end-time="2026-10-18 04:46:16Z" duration="0.000150" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2534" name="MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo(True,&quot;ordinary&quot;)" fullname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests.MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo(True,&quot;ordinary&quot;)" methodname="MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo" classname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests" runstate="Runnable" seed="672740351" result="Passed" start-time="2026-10-18 04:46:16Z" end-time="2026-10-18 04:46:16Z" duration="0.000088" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2535" name="MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo(True,&quot;memory&quot;)" fullname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests.MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo(True,&quot;memory&quot;)" methodname="MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo" classname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests" runstate="Runnable" seed="808401550" result="Passed" start-time="2026-10-18 04:46:16Z" end-time="2026-10-18 04:46:16Z" duration="0.000069" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2536" name="MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo(True,&quot;store&quot;)" fullname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests.MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo(True,&quot;store&quot;)" methodname="MissingOrInvalidConfigurationRejectsPreparationBeforeAnyProfileIo" classname="PaperDefense.Tests.ContentConfigurationBoundaryIntegrationTests" runstate="Runnable" seed="229091070" result="Passed" start-time="2026-10-18 04:46:16Z" end-time="2026-10-18 04:46:16Z" duration="0.000062" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task5-publication-red.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

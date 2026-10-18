@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PaperDefense.Application
 {
-    public sealed class RunController : MonoBehaviour
+    public sealed partial class RunController : MonoBehaviour
     {
         public GameBalanceAsset balanceAsset;
         GameSession session;
@@ -38,6 +38,7 @@ namespace PaperDefense.Application
         {
             var preparedSession = new GameSession(CreateConfiguredBalance(false, allowLegacyFixtureDefaults));
             var preparedProfile = FreshProfile(preparedSession.Balance);
+            assemblyCommands = null; RunLoadout = null;
             legacyFixtureDefaults = allowLegacyFixtureDefaults;
             persistence.Reset();workshopMode=false;InWorkshop=false;
             profile=preparedProfile;Workshop=new WorkshopReadModel(profile);runLoadout=profile.GetLoadoutBlueprints();
@@ -54,6 +55,7 @@ namespace PaperDefense.Application
             }
             var preparedSession = new GameSession(CreateConfiguredBalance(true, allowLegacyFixtureDefaults), starterDefenses:false);
             var preparedProfile = FreshProfile(preparedSession.Balance);
+            assemblyCommands = null; RunLoadout = null;
             legacyFixtureDefaults = allowLegacyFixtureDefaults;
             persistence.Reset();workshopMode=true;
             profile=preparedProfile;Workshop=new WorkshopReadModel(profile);
@@ -69,6 +71,7 @@ namespace PaperDefense.Application
             var preparedSession = new GameSession(CreateConfiguredBalance(true, allowLegacyFixtureDefaults), starterDefenses:false);
             var freshProfile = FreshProfile(preparedSession.Balance);
             var loaded = store.Load();
+            assemblyCommands = null; RunLoadout = null;
             legacyFixtureDefaults = allowLegacyFixtureDefaults;
             persistence.Attach(store, loaded);workshopMode=true;
             profile=loaded.Source==ProfileLoadSource.NewProfile ? freshProfile : loaded.Profile??freshProfile;
@@ -250,32 +253,13 @@ namespace PaperDefense.Application
         }
         public bool StartRun(out string reason)
         {
-            if(!Editing(out reason))return false;
-            GameBalance balance;
-            try { balance=CreateWorkshopBalance(); }
-            catch (ArgumentException error) { LastConfigurationDiagnostic=error.ToString();reason=UserText.Message("run.error.configuration");return false; }
-            var candidate = profile.CreateWorkingCopy();
-            var preparedContent = balance.ResolveContent();
-            balance.Content = preparedContent;
-            candidate.ConfigureContent(preparedContent);
-            var selection=candidate.GetLoadoutBlueprints();
-            // Existing battle adapters still require the four historical tower positions until task 5.
-            // Newly added empty/support positions must not make a migrated four-tower set unusable.
-            for(int i=0;i<selection.Count;i++)
-                if ((i < ProfileLimits.HistoricalLoadoutSlotCount || selection[i] != null) && !candidate.ValidateOwned(selection[i],out reason,balance)) return false;
-            var prepared = new TowerBlueprint[selection.Count];
-            for (int i = 0; i < prepared.Length; i++) prepared[i] = selection[i]?.WithContent(preparedContent);
-            GameSession preparedSession;
-            try { preparedSession=new GameSession(balance,starterDefenses:false); }
-            catch (ArgumentException error) { LastConfigurationDiagnostic=error.ToString();reason=UserText.Message("run.error.configuration");return false; }
-            runLoadout=Array.AsReadOnly(prepared);InWorkshop=false;
-            Initialize(preparedSession);
-            reason="";WorkshopChanged?.Invoke();return true;
+            return StartAssemblyRun(out reason);
         }
         public void OpenWorkshop()
         {
             var preparedSession = new GameSession(CreateWorkshopBalance(),starterDefenses:false);
             if(session!=null)DepositGold();
+            RunLoadout = null;
             workshopMode=true;InWorkshop=true;
             Initialize(preparedSession);
             InWorkshop=true;

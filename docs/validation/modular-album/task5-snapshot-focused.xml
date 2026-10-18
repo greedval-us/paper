@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="25" result="Passed" total="25" passed="25" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:16Z" duration="1,1728048">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1179" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:16Z" duration="1.172805" total="25" passed="25" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="2193" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="1009" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:16Z" duration="1.043266" total="25" passed="25" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="2194" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="1009" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:16Z" duration="0.980611" total="25" passed="25" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="2195" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="1009" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:16Z" duration="0.879087" total="25" passed="25" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1987" name="RunLoadoutSnapshotTests" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:16Z" duration="0.784259" total="25" passed="25" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2018" name="AGeneratorRetainsItsPencilOnlyMaterialRuleAfterSnapshotCreation" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.AGeneratorRetainsItsPencilOnlyMaterialRuleAfterSnapshotCreation" methodname="AGeneratorRetainsItsPencilOnlyMaterialRuleAfterSnapshotCreation" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="1645415951" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.117173" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2001" name="ALoadoutWithoutAnEnemyDamagingWeaponIsRejected" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.ALoadoutWithoutAnEnemyDamagingWeaponIsRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.022334" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1997" name="ALoadoutWithoutAnEnemyDamagingWeaponIsRejected(&quot;empty&quot;)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.ALoadoutWithoutAnEnemyDamagingWeaponIsRejected(&quot;empty&quot;)" methodname="ALoadoutWithoutAnEnemyDamagingWeaponIsRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="583850277" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.000697" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1998" name="ALoadoutWithoutAnEnemyDamagingWeaponIsRejected(&quot;support&quot;)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.ALoadoutWithoutAnEnemyDamagingWeaponIsRejected(&quot;support&quot;)" methodname="ALoadoutWithoutAnEnemyDamagingWeaponIsRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="364479957" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.003883" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1999" name="ALoadoutWithoutAnEnemyDamagingWeaponIsRejected(&quot;blotter&quot;)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.ALoadoutWithoutAnEnemyDamagingWeaponIsRejected(&quot;blotter&quot;)" methodname="ALoadoutWithoutAnEnemyDamagingWeaponIsRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="804793155" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.006454" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2000" name="ALoadoutWithoutAnEnemyDamagingWeaponIsRejected(&quot;supportAndBlotter&quot;)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.ALoadoutWithoutAnEnemyDamagingWeaponIsRejected(&quot;supportAndBlotter&quot;)" methodname="ALoadoutWithoutAnEnemyDamagingWeaponIsRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="1058448503" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.008829" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1994" name="AnyCountOtherThanEightIsRejected" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.AnyCountOtherThanEightIsRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.090833" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1990" name="AnyCountOtherThanEightIsRejected(0)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.AnyCountOtherThanEightIsRejected(0)" methodname="AnyCountOtherThanEightIsRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="1919417530" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.000670" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1991" name="AnyCountOtherThanEightIsRejected(4)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.AnyCountOtherThanEightIsRejected(4)" methodname="AnyCountOtherThanEightIsRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="208839677" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.003939" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1992" name="AnyCountOtherThanEightIsRejected(7)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.AnyCountOtherThanEightIsRejected(7)" methodname="AnyCountOtherThanEightIsRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="2040088537" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.004679" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1993" name="AnyCountOtherThanEightIsRejected(9)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.AnyCountOtherThanEightIsRejected(9)" methodname="AnyCountOtherThanEightIsRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="1623783694" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.003664" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2002" name="AZeroDamageGunDoesNotSatisfyTheAttackingWeaponRequirement" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.AZeroDamageGunDoesNotSatisfyTheAttackingWeaponRequirement" methodname="AZeroDamageGunDoesNotSatisfyTheAttackingWeaponRequirement" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="1907294386" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.004388" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1996" name="DuplicatePageIdsAreRejectedEvenForDifferentEntryInstances" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.DuplicatePageIdsAreRejectedEvenForDifferentEntryInstances" methodname="DuplicatePageIdsAreRejectedEvenForDifferentEntryInstances" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="473230526" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.004788" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1988" name="EightMixedStarterPagesResolveNumericallyWithoutRequiringPilotFitCoverage" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.EightMixedStarterPagesResolveNumericallyWithoutRequiringPilotFitCoverage" methodname="EightMixedStarterPagesResolveNumericallyWithoutRequiringPilotFitCoverage" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="866017652" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.045884" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1989" name="EmptyPositionsArePreservedBesideAnAttackingPage" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.EmptyPositionsArePreservedBesideAnAttackingPage" methodname="EmptyPositionsArePreservedBesideAnAttackingPage" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="1485840683" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.005471" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2004" name="LegacyAttackPageCanAccompanySupportAndCleanupWithoutPurchasingParts" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.LegacyAttackPageCanAccompanySupportAndCleanupWithoutPurchasingParts" methodname="LegacyAttackPageCanAccompanySupportAndCleanupWithoutPurchasingParts" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="2129955205" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.054672" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2003" name="LegacyBlotterStillCannotAttackWhenItsRawConfiguredDamageIsPositive" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.LegacyBlotterStillCannotAttackWhenItsRawConfiguredDamageIsPositive" methodname="LegacyBlotterStillCannotAttackWhenItsRawConfiguredDamageIsPositive" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="1887617645" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.009987" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1995" name="MissingEntriesOrBalanceIsRejected" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.MissingEntriesOrBalanceIsRejected" methodname="MissingEntriesOrBalanceIsRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="668596335" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.004155" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2007" name="NumericallyInvalidOccupiedPagesAreRejected" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.NumericallyInvalidOccupiedPagesAreRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.014180" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2005" name="NumericallyInvalidOccupiedPagesAreRejected(False)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.NumericallyInvalidOccupiedPagesAreRejected(False)" methodname="NumericallyInvalidOccupiedPagesAreRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="1357460891" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.007635" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2006" name="NumericallyInvalidOccupiedPagesAreRejected(True)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.NumericallyInvalidOccupiedPagesAreRejected(True)" methodname="NumericallyInvalidOccupiedPagesAreRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="2001268828" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.005870" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2008" name="OwnedPaidRecipeSurvivesItsMutableCatalogInputBeingReplaced" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.OwnedPaidRecipeSurvivesItsMutableCatalogInputBeingReplaced" methodname="OwnedPaidRecipeSurvivesItsMutableCatalogInputBeingReplaced" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="1986202608" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.005444" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2017" name="ResolvingAnUnknownMaterialIsRejectedEvenForAnEmptySlot" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.ResolvingAnUnknownMaterialIsRejectedEvenForAnEmptySlot" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.091567" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2015" name="ResolvingAnUnknownMaterialIsRejectedEvenForAnEmptySlot(0)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.ResolvingAnUnknownMaterialIsRejectedEvenForAnEmptySlot(0)" methodname="ResolvingAnUnknownMaterialIsRejectedEvenForAnEmptySlot" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="190630810" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.005473" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2016" name="ResolvingAnUnknownMaterialIsRejectedEvenForAnEmptySlot(7)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.ResolvingAnUnknownMaterialIsRejectedEvenForAnEmptySlot(7)" methodname="ResolvingAnUnknownMaterialIsRejectedEvenForAnEmptySlot" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="134794745" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:15Z" duration="0.004228" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="2014" name="ResolvingAnUnknownSlotIsRejected" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.ResolvingAnUnknownSlotIsRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 04:44:15Z" end-time="2026-10-18 04:44:16Z" duration="0.100936" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2012" name="ResolvingAnUnknownSlotIsRejected(-1)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.ResolvingAnUnknownSlotIsRejected(-1)" methodname="ResolvingAnUnknownSlotIsRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="1331820300" result="Passed" start-time="2026-10-18 04:44:16Z" end-time="2026-10-18 04:44:16Z" duration="0.005118" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2013" name="ResolvingAnUnknownSlotIsRejected(8)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.ResolvingAnUnknownSlotIsRejected(8)" methodname="ResolvingAnUnknownSlotIsRejected" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="1445769287" result="Passed" start-time="2026-10-18 04:44:16Z" end-time="2026-10-18 04:44:16Z" duration="0.004386" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="2011" name="SourceListBalanceAndReturnedBalanceCopiesCannotChangeFrozenNumbers" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.SourceListBalanceAndReturnedBalanceCopiesCannotChangeFrozenNumbers" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 04:44:16Z" end-time="2026-10-18 04:44:16Z" duration="0.105322" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2009" name="SourceListBalanceAndReturnedBalanceCopiesCannotChangeFrozenNumbers(False)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.SourceListBalanceAndReturnedBalanceCopiesCannotChangeFrozenNumbers(False)" methodname="SourceListBalanceAndReturnedBalanceCopiesCannotChangeFrozenNumbers" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="1986023794" result="Passed" start-time="2026-10-18 04:44:16Z" end-time="2026-10-18 04:44:16Z" duration="0.007410" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2010" name="SourceListBalanceAndReturnedBalanceCopiesCannotChangeFrozenNumbers(True)" fullname="PaperDefense.Tests.RunLoadoutSnapshotTests.SourceListBalanceAndReturnedBalanceCopiesCannotChangeFrozenNumbers(True)" methodname="SourceListBalanceAndReturnedBalanceCopiesCannotChangeFrozenNumbers" classname="PaperDefense.Tests.RunLoadoutSnapshotTests" runstate="Runnable" seed="2096744597" result="Passed" start-time="2026-10-18 04:44:16Z" end-time="2026-10-18 04:44:16Z" duration="0.009946" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task5-snapshot-focused.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

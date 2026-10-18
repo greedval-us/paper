@@ -1953,6 +1953,8 @@ MonoBehaviour:
     value: "Круговая: 3+3+3+3"
   - key: "run.error.configuration"
     value: "Не удалось подготовить партию: ошибка конфигурации. Подробности доступны в диагностике."
+  - key: "run.loadout.attack_required"
+    value: "Выберите хотя бы одну атакующую башню. Промокашка и поддержка не считаются атакой."
   - key: "study.close"
     value: "К своему рисунку"
   - key: "study.compact"
