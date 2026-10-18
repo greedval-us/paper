@@ -1,6 +1,6 @@
 # Исходники тетрадного оформления
 
-[Руководство оформления](../../docs/Notebook-Art.md) · [Ресурсы страниц](../../docs/Player-Assets.md) · [Порядок реализации](../../docs/Implementation-Roadmap.md)
+[Руководство оформления](../../docs/Notebook-Art.md) · [Ресурсы страниц](../../docs/Player-Assets.md) · [Порядок реализации](../../docs/superpowers/plans/2026-10-18-modular-album-implementation.md)
 
 Канонические игровые изображения находятся в [NewStyle](NewStyle). Актуальное направление — [альбом составных рисунков](../../docs/design/album-assembly-2026-10-17/README.md). Новые листы объектов пока не импортированы. Источники уже выполненных импортов сохранены в [References](References/README.md); устаревшие галереи удалены. Фактическое состояние переноса описано в [аудите](../../docs/audit/2026-10-17-album/report.md).
 

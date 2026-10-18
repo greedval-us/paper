@@ -1,6 +1,6 @@
 # Оборона открытой карты на тетрадном листе
 
-Техническая справка по действующим системам игры. [Эскизы и целевой дизайн](Game-Design.md) задают визуальный ориентир; [статус переноса в Unity](Implementation-Roadmap.md) отделяет реализованные экраны от оставшейся работы.
+Техническая справка по действующим системам игры. [Эскизы и целевой дизайн](Game-Design.md) задают визуальный ориентир; [статус переноса в Unity](superpowers/plans/2026-10-18-modular-album-implementation.md) отделяет реализованные экраны от оставшейся работы.
 
 Общие правила открытой карты используются основным входом [PaperDefenseGame.unity](../Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity) с [PlayerRules.asset](../Assets/PaperDefense/Configuration/Game/PlayerRules.asset). Приведённые ниже исходные числа относятся к отдельному [Target.asset](../Assets/PaperDefense/Configuration/Content/Target.asset), если явно не указан PlayerRules. [Игровой маршрут](Game-Design.md) и [полный реестр](Current-Mechanics.md).
 

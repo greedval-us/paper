@@ -1,6 +1,6 @@
 # Переход к новой модели
 
-18.10.2026. [Дизайн](Game-Design.md), [аудит](audit/2026-10-17-album/report.md), [план](Implementation-Roadmap.md).
+18.10.2026. [Дизайн](Game-Design.md), [аудит](audit/2026-10-17-album/report.md), [план](superpowers/plans/2026-10-18-modular-album-implementation.md).
 
 ## Отменено
 

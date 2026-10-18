@@ -20,11 +20,12 @@ Windows x64: **Paper Defense → Game → Build player game**. Выход: `Buil
 | Configuration | Основной баланс и отдельные сравнительные пресеты |
 | ArtSource/Notebook/NewStyle | Исходные игровые PNG, нарезка, анимация |
 | Tools/AlbumDesign2026 | Новый баланс, Excel и проверка галереи |
-| docs/design/album-assembly-2026-10-17 | Актуальные эскизы, не runtime UI |
+| docs/design/game-concept-art-2026-10-16 | Полная актуальная галерея: 30 экранов и 3 листа объектов, не runtime UI |
+| docs/design/album-assembly-2026-10-17 | Дополнительный интерактивный прототип и листы объектов |
 
 ## Работа над переходом
 
-Начинайте с [плана](Implementation-Roadmap.md) и [аудита](audit/2026-10-17-album/report.md). Не меняйте число слотов одной константой: загрузчик v7 требует точного размера массива. Сначала добавить типизированные рецепты и миграцию, затем UI. Новые значения из Excel не являются уже действующими параметрами Unity.
+Начинайте с [плана](superpowers/plans/2026-10-18-modular-album-implementation.md) и [аудита](audit/2026-10-17-album/report.md). Не меняйте число слотов одной константой: загрузчик v7 требует точного размера массива. Сначала добавить типизированные рецепты и миграцию, затем UI. Новые значения из Excel не являются уже действующими параметрами Unity.
 
 Для графики: **Paper Defense → Art → Rebuild blue pen atlas**. Входы — sprites.source.json и animation.json в NewStyle; результат — NotebookAtlas.png, NotebookSprites.json и NotebookVisualTheme.asset. Сохраняйте .meta. [Стыки](Modular-Asset-Contract.md) обязательны для новых частей; визуальный коллаж не доказывает совместимость при вращении.
 

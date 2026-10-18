@@ -12,7 +12,7 @@ Tower defense на тетрадном листе. Игрок собирает а
 | [Excel с балансом](docs/balance/PaperDefense-Album-Balance-v1.xlsx) | 11 листов, 54 детали, расчётные сборки и прогрессия |
 | [Дизайн игры](docs/Game-Design.md) | Альбом, 8 слотов, составные объекты, экономика |
 | [Мастерская](docs/Workshop-Assembly.md) | Категории деталей и переходы экранов |
-| [План реализации](docs/Implementation-Roadmap.md) | Этапы от текущего кода с критериями приёмки |
+| [План реализации](docs/superpowers/plans/2026-10-18-modular-album-implementation.md) | Этапы от текущего кода с критериями приёмки |
 | [Вся документация](docs/README.md) | Технические справочники и источники |
 
 Запуск: Unity **6000.5.7f1**, сцена [PaperDefenseGame.unity](Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity), меню **Paper Defense → Game → Open player game**, затем Play. Флаг `-paper-memory-only` запускает проверку без личного профиля. [Разработка](docs/Development-Guide.md).

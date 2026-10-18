@@ -1,10 +1,10 @@
 # Ресурсы игрового оформления
 
-> Техническая база до перехода. Свободное рисование отменено в целевом дизайне; упоминания Drawing/Freeform ниже описывают ещё существующий код и совместимость. Новые правила: [конструктор](Workshop-Assembly.md), [характеристики](Component-Stats-and-Abilities.md), [план перехода](Implementation-Roadmap.md).
+> Техническая база до перехода. Свободное рисование отменено в целевом дизайне; упоминания Drawing/Freeform ниже описывают ещё существующий код и совместимость. Новые правила: [конструктор](Workshop-Assembly.md), [характеристики](Component-Stats-and-Abilities.md), [план перехода](superpowers/plans/2026-10-18-modular-album-implementation.md).
 
 Целевой комплект от 18 октября — [альбом составных рисунков](design/album-assembly-2026-10-17/README.md): 9 представлений и 3 листа объектов. Это концепты для следующей реализации. В текущем проекте уже импортированы четыре фрагмента пилота [GunPilotParts-v1.png](../ArtSource/Notebook/NewStyle/GunPilotParts-v1.png). Полная библиотека 54 деталей ещё предстоит.
 
-Основная сцена — [PaperDefenseGame.unity](../Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity). Стандартная мастерская уже использует три шага без холста. Следующий перенос охватывает конструктор частей, сооружения, открытия и 8 общих слотов; числовые подписи должны оставаться живыми элементами UI. [Порядок реализации](Implementation-Roadmap.md).
+Основная сцена — [PaperDefenseGame.unity](../Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity). Стандартная мастерская уже использует три шага без холста. Следующий перенос охватывает конструктор частей, сооружения, открытия и 8 общих слотов; числовые подписи должны оставаться живыми элементами UI. [Порядок реализации](superpowers/plans/2026-10-18-modular-album-implementation.md).
 
 ## Источники и ресурсы
 
@@ -56,4 +56,4 @@
 
 Проверяйте основную игру при 16:9 и 4:3, длинные имена и клавиатурный фокус. `-paper-memory-only` позволяет пройти маршрут без личного профиля. Применение общей темы не завершает композиции оставшихся экранов.
 
-[Рисунок — экран 06](validation/2026-10-17-workshop-drawing/report.md) · [Оружие — экран 05](validation/2026-10-17-workshop-weapons/report.md) · [Основа башни — экран 04](validation/2026-10-17-workshop-foundation/report.md) · [Графика и разрешение](validation/2026-10-17-art-resolution/) · [Дизайн](Game-Design.md) · [Порядок реализации](Implementation-Roadmap.md).
+[Рисунок — экран 06](validation/2026-10-17-workshop-drawing/report.md) · [Оружие — экран 05](validation/2026-10-17-workshop-weapons/report.md) · [Основа башни — экран 04](validation/2026-10-17-workshop-foundation/report.md) · [Графика и разрешение](validation/2026-10-17-art-resolution/) · [Дизайн](Game-Design.md) · [Порядок реализации](superpowers/plans/2026-10-18-modular-album-implementation.md).
