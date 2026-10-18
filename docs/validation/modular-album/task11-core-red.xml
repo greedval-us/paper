@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Failed(Child)" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 22:25:46Z" end-time="2026-10-18 22:25:47Z" duration="0,146221">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1431" result="Failed" site="Child" start-time="2026-10-18 22:25:46Z" end-time="2026-10-18 22:25:47Z" duration="0.146221" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="2491" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="1261" result="Failed" site="Child" start-time="2026-10-18 22:25:47Z" end-time="2026-10-18 22:25:47Z" duration="0.110040" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39156" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="2492" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="1261" result="Failed" site="Child" start-time="2026-10-18 22:25:47Z" end-time="2026-10-18 22:25:47Z" duration="0.105291" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="2493" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="1261" result="Failed" site="Child" start-time="2026-10-18 22:25:47Z" end-time="2026-10-18 22:25:47Z" duration="0.100322" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1805" name="GeneratorWaveReadModelTests" fullname="PaperDefense.Tests.GeneratorWaveReadModelTests" classname="PaperDefense.Tests.GeneratorWaveReadModelTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-10-18 22:25:47Z" end-time="2026-10-18 22:25:47Z" duration="0.099125" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1807" name="AReplacementWithTheSameIdCannotInheritTheOriginalGeneratorsPaidWaves" fullname="PaperDefense.Tests.GeneratorWaveReadModelTests.AReplacementWithTheSameIdCannotInheritTheOriginalGeneratorsPaidWaves" methodname="AReplacementWithTheSameIdCannotInheritTheOriginalGeneratorsPaidWaves" classname="PaperDefense.Tests.GeneratorWaveReadModelTests" runstate="Runnable" seed="1179606156" result="Failed" start-time="2026-10-18 22:25:47Z" end-time="2026-10-18 22:25:47Z" duration="0.033703" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 1
+  But was:  0
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.GeneratorWaveReadModelTests.AReplacementWithTheSameIdCannotInheritTheOriginalGeneratorsPaidWaves () [0x0006d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GeneratorWaveReadModelTests.cs:39
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1806" name="PaidWavesBelongToEachSurvivingGeneratorAndDuplicateCompletionDoesNotIncrement" fullname="PaperDefense.Tests.GeneratorWaveReadModelTests.PaidWavesBelongToEachSurvivingGeneratorAndDuplicateCompletionDoesNotIncrement" methodname="PaidWavesBelongToEachSurvivingGeneratorAndDuplicateCompletionDoesNotIncrement" classname="PaperDefense.Tests.GeneratorWaveReadModelTests" runstate="Runnable" seed="1228771074" result="Failed" start-time="2026-10-18 22:25:47Z" end-time="2026-10-18 22:25:47Z" duration="0.007488" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 1
+  But was:  0
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.GeneratorWaveReadModelTests.PaidWavesBelongToEachSurvivingGeneratorAndDuplicateCompletionDoesNotIncrement () [0x00053] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GeneratorWaveReadModelTests.cs:23
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1808" name="TheReadModelReportsPaidWavesAsAValueSnapshot" fullname="PaperDefense.Tests.GeneratorWaveReadModelTests.TheReadModelReportsPaidWavesAsAValueSnapshot" methodname="TheReadModelReportsPaidWavesAsAValueSnapshot" classname="PaperDefense.Tests.GeneratorWaveReadModelTests" runstate="Runnable" seed="298056834" result="Failed" start-time="2026-10-18 22:25:47Z" end-time="2026-10-18 22:25:47Z" duration="0.048322" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 1
+  But was:  0
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.GeneratorWaveReadModelTests.TheReadModelReportsPaidWavesAsAValueSnapshot () [0x00127] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GeneratorWaveReadModelTests.cs:57
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task11-core-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

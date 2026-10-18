@@ -10,6 +10,7 @@ namespace PaperDefense.Application
         public AssemblyCommands AssemblyCommands => assemblyCommands ?? (assemblyCommands = new AssemblyCommands(this));
         public RunLoadoutSnapshot RunLoadout { get; private set; }
         bool runRequiresSlots;
+        public bool UsesAlbumSlots => runRequiresSlots;
         internal WorkshopProfile AssemblyProfile => profile;
         internal ComponentCatalog ConfiguredAssemblyCatalog => ConfiguredAssemblies();
         public ComponentCatalog AssemblyCatalog => ConfiguredAssemblies();

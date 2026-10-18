@@ -28,10 +28,10 @@ namespace PaperDefense.Core
             bool nextVictory = oldVictory || victory;
             if (nextWaves == oldWaves && nextVictory == oldVictory) return true;
 
-            int newWaves = nextWaves - oldWaves;
-            int victoryDelta = nextVictory && !oldVictory ? 1 : 0;
-            int nextGold = (int)Math.Min(int.MaxValue, (long)Gold + newWaves * 8 + victoryDelta * 30);
-            int nextXp = (int)Math.Min(int.MaxValue, (long)TotalXp + newWaves * 10 + victoryDelta * 40);
+            var before = RunRewardTotals.Calculate(oldWaves, oldVictory);
+            var after = RunRewardTotals.Calculate(nextWaves, nextVictory);
+            int nextGold = (int)Math.Min(int.MaxValue, (long)Gold + after.Gold - before.Gold);
+            int nextXp = (int)Math.Min(int.MaxValue, (long)TotalXp + after.TotalXp - before.TotalXp);
             var receipt = new RunRewardReceiptData
                 { RunId = runId.ToString("N"), Waves = nextWaves, VictoryBonus = nextVictory };
 

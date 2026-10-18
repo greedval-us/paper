@@ -18,6 +18,7 @@ namespace PaperDefense.Presentation
         float refresh;
         int screenWidth, screenHeight;
         bool statistics;
+        bool battleUsesAlbum;
         Action confirmAction;
         string confirmTitle, confirmMessage;
         GameObject confirmation;
@@ -48,7 +49,8 @@ namespace PaperDefense.Presentation
         public void ApplyLayout(int width, int height)
         {
             screenWidth = width; screenHeight = height;
-            Layout = new PlayerLayout(width, height);
+            battleUsesAlbum = game.Run.UsesAlbumSlots;
+            Layout = new PlayerLayout(width, height, battleUsesAlbum);
             scaler.referenceResolution = new Vector2(W, H); root.sizeDelta = new Vector2(W, H);
             // Retired tooltip callbacks must not refresh the HUD while its hierarchy is deactivating.
             battle = null;
@@ -61,6 +63,8 @@ namespace PaperDefense.Presentation
 
         public void Show(PlayerPage current)
         {
+            if (battleUsesAlbum != game.Run.UsesAlbumSlots) { ApplyLayout(screenWidth, screenHeight); return; }
+            ResetAlbumResult();
             RememberAlbumView();
             if (page != null) { page.gameObject.SetActive(false); Destroy(page.gameObject); }
             bool battlefield = !game.Run.InWorkshop && current != PlayerPage.Workshop;
@@ -155,6 +159,7 @@ namespace PaperDefense.Presentation
             refresh -= Time.unscaledDeltaTime; if (refresh > 0) return; refresh = .12f;
             if (gold != null) gold.text = ui.T("gold", game.Run.Workshop.Gold);
             if (progress != null) progress.text = ProgressCopy();
+            RefreshAlbumResult();
             if (battleRoot.gameObject.activeSelf) battle.Refresh();
         }
     }

@@ -52,8 +52,10 @@ namespace PaperDefense.Core
     {
         public readonly int Id;
         public readonly Cell Cell;
+        public readonly int GeneratorPaidWaves;
         public readonly StructureKind Kind;
         public readonly string ContentId;
+        public readonly string SourceAlbumEntryId;
         public readonly MaterialTier Tier;
         public readonly float Health,MaxHealth,BuildRemaining,Cooldown;
         public readonly bool IsComplete,WaitingForClearance;
@@ -69,7 +71,7 @@ namespace PaperDefense.Core
         public Point2 GetMountAim(int mount)=>GetMountState(mount).Aim;
         public int GetMountTargetId(int mount)=>GetMountState(mount).TargetId;
         internal StructureView(StructureState s)
-        {Id=s.Id;Cell=s.Cell;Kind=s.Kind;ContentId=s.ContentId??LegacyContentIds.Weapon(s.Kind);Tier=s.Tier;Health=s.Health;MaxHealth=s.MaxHealth;BuildRemaining=s.BuildRemaining;
+        {Id=s.Id;Cell=s.Cell;GeneratorPaidWaves=s.GeneratorPaidWaves;Kind=s.Kind;ContentId=s.ContentId??LegacyContentIds.Weapon(s.Kind);SourceAlbumEntryId=s.SourceAlbumEntryId;Tier=s.Tier;Health=s.Health;MaxHealth=s.MaxHealth;BuildRemaining=s.BuildRemaining;
             Cooldown=s.Cooldown;IsComplete=s.IsComplete;WaitingForClearance=s.WaitingForClearance;Aim=s.Aim;Priority=s.Priority;
             Blueprint=s.Blueprint;ResolvedEntry=s.ResolvedEntry;Color=s.Color;PrimaryAim=s.PrimaryAim;SecondaryAim=s.SecondaryAim;
             PrimaryTargetId=s.PrimaryTargetId;SecondaryTargetId=s.SecondaryTargetId;

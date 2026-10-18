@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="76" result="Passed" total="76" passed="76" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 22:46:00Z" end-time="2026-10-18 22:46:02Z" duration="1,9189262">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1439" result="Passed" start-time="2026-10-18 22:46:00Z" end-time="2026-10-18 22:46:02Z" duration="1.918926" total="76" passed="76" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="2502" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="1269" result="Passed" start-time="2026-10-18 22:46:00Z" end-time="2026-10-18 22:46:02Z" duration="1.820225" total="76" passed="76" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39156" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="2503" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="1269" result="Passed" start-time="2026-10-18 22:46:00Z" end-time="2026-10-18 22:46:02Z" duration="1.722888" total="76" passed="76" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="2504" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="1269" result="Passed" start-time="2026-10-18 22:46:00Z" end-time="2026-10-18 22:46:02Z" duration="1.622721" total="76" passed="76" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1805" name="GeneratorWaveReadModelTests" fullname="PaperDefense.Tests.GeneratorWaveReadModelTests" classname="PaperDefense.Tests.GeneratorWaveReadModelTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 22:46:00Z" end-time="2026-10-18 22:46:01Z" duration="0.199061" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1807" name="AReplacementWithTheSameIdCannotInheritTheOriginalGeneratorsPaidWaves" fullname="PaperDefense.Tests.GeneratorWaveReadModelTests.AReplacementWithTheSameIdCannotInheritTheOriginalGeneratorsPaidWaves" methodname="AReplacementWithTheSameIdCannotInheritTheOriginalGeneratorsPaidWaves" classname="PaperDefense.Tests.GeneratorWaveReadModelTests" runstate="Runnable" seed="315728766" result="Passed" start-time="2026-10-18 22:46:00Z" end-time="2026-10-18 22:46:00Z" duration="0.035163" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1806" name="PaidWavesBelongToEachSurvivingGeneratorAndDuplicateCompletionDoesNotIncrement" fullname="PaperDefense.Tests.GeneratorWaveReadModelTests.PaidWavesBelongToEachSurvivingGeneratorAndDuplicateCompletionDoesNotIncrement" methodname="PaidWavesBelongToEachSurvivingGeneratorAndDuplicateCompletionDoesNotIncrement" classname="PaperDefense.Tests.GeneratorWaveReadModelTests" runstate="Runnable" seed="1442983117" result="Passed" start-time="2026-10-18 22:46:00Z" end-time="2026-10-18 22:46:00Z" duration="0.007112" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1808" name="TheReadModelReportsPaidWavesAsAValueSnapshot" fullname="PaperDefense.Tests.GeneratorWaveReadModelTests.TheReadModelReportsPaidWavesAsAValueSnapshot" methodname="TheReadModelReportsPaidWavesAsAValueSnapshot" classname="PaperDefense.Tests.GeneratorWaveReadModelTests" runstate="Runnable" seed="1222394206" result="Passed" start-time="2026-10-18 22:46:00Z" end-time="2026-10-18 22:46:01Z" duration="0.051388" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1809" name="GeneratorWaveTests" fullname="PaperDefense.Tests.GeneratorWaveTests" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" testcasecount="42" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.635923" total="42" passed="42" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1812" name="AGeneratorPaysItsResolvedIncomeAfterEachFullySurvivedWave" fullname="PaperDefense.Tests.GeneratorWaveTests.AGeneratorPaysItsResolvedIncomeAfterEachFullySurvivedWave" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.110285" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1810" name="AGeneratorPaysItsResolvedIncomeAfterEachFullySurvivedWave(False,60,80,12)" fullname="PaperDefense.Tests.GeneratorWaveTests.AGeneratorPaysItsResolvedIncomeAfterEachFullySurvivedWave(False,60,80,12)" methodname="AGeneratorPaysItsResolvedIncomeAfterEachFullySurvivedWave" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1111782825" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.007037" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1811" name="AGeneratorPaysItsResolvedIncomeAfterEachFullySurvivedWave(True,72,68,15)" fullname="PaperDefense.Tests.GeneratorWaveTests.AGeneratorPaysItsResolvedIncomeAfterEachFullySurvivedWave(True,72,68,15)" methodname="AGeneratorPaysItsResolvedIncomeAfterEachFullySurvivedWave" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1376007441" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003683" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1839" name="ANewerWaveRetiresAnAbandonedWaveAndOldEventsCannotReopenIt" fullname="PaperDefense.Tests.GeneratorWaveTests.ANewerWaveRetiresAnAbandonedWaveAndOldEventsCannotReopenIt" methodname="ANewerWaveRetiresAnAbandonedWaveAndOldEventsCannotReopenIt" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="701157395" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003983" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1835" name="BeginningTheSameWaveTwiceCannotReplaceItsOriginalEmptySnapshot" fullname="PaperDefense.Tests.GeneratorWaveTests.BeginningTheSameWaveTwiceCannotReplaceItsOriginalEmptySnapshot" methodname="BeginningTheSameWaveTwiceCannotReplaceItsOriginalEmptySnapshot" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1993026128" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003728" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1824" name="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator" fullname="PaperDefense.Tests.GeneratorWaveTests.BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.124797" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1814" name="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;unfinished&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;unfinished&quot;)" methodname="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1498547382" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.004345" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1815" name="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;remaining&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;remaining&quot;)" methodname="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1620855124" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003735" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1816" name="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;dead&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;dead&quot;)" methodname="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="31834359" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003452" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1817" name="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;negativeHealth&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;negativeHealth&quot;)" methodname="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1403267062" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003481" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1818" name="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;nanHealth&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;nanHealth&quot;)" methodname="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="258634015" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003457" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1819" name="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;infiniteHealth&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;infiniteHealth&quot;)" methodname="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="137274092" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003516" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1820" name="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;zeroId&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;zeroId&quot;)" methodname="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1174166917" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003502" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1821" name="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;legacy&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;legacy&quot;)" methodname="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1633160661" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003572" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1822" name="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;wall&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;wall&quot;)" methodname="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1416501113" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.010598" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1823" name="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;null&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator(&quot;null&quot;)" methodname="BeginWaveIgnoresAnythingExceptAnAliveCompletedModernGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="531941374" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003576" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1834" name="BeginWaveOwnsItsSnapshotAndNewGeneratorsCannotBeInsertedDuringTheWave" fullname="PaperDefense.Tests.GeneratorWaveTests.BeginWaveOwnsItsSnapshotAndNewGeneratorsCannotBeInsertedDuringTheWave" methodname="BeginWaveOwnsItsSnapshotAndNewGeneratorsCannotBeInsertedDuringTheWave" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1249921934" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.007278" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1833" name="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator" fullname="PaperDefense.Tests.GeneratorWaveTests.CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.080851" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1825" name="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;removed&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;removed&quot;)" methodname="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="739882450" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.004141" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1826" name="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;dead&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;dead&quot;)" methodname="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1601927521" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003597" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1827" name="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;unfinished&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;unfinished&quot;)" methodname="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1647480458" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003552" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1828" name="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;remaining&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;remaining&quot;)" methodname="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="882176046" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003519" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1829" name="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;nanHealth&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;nanHealth&quot;)" methodname="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="2064936950" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003595" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1830" name="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;infiniteHealth&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;infiniteHealth&quot;)" methodname="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1548331237" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003551" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1831" name="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;changedId&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;changedId&quot;)" methodname="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="648250296" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003665" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1832" name="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;replacement&quot;)" fullname="PaperDefense.Tests.GeneratorWaveTests.CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator(&quot;replacement&quot;)" methodname="CompleteWaveRejectsEntitiesThatDidNotSurviveAsTheSameCompletedGenerator" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="383218467" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.006931" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1838" name="CompletingAnotherWaveDoesNotConsumeTheActiveSnapshot" fullname="PaperDefense.Tests.GeneratorWaveTests.CompletingAnotherWaveDoesNotConsumeTheActiveSnapshot" methodname="CompletingAnotherWaveDoesNotConsumeTheActiveSnapshot" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="823260657" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003766" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1837" name="CompletionWithoutABeginDoesNotInventAPlayedWave" fullname="PaperDefense.Tests.GeneratorWaveTests.CompletionWithoutABeginDoesNotInventAPlayedWave" methodname="CompletionWithoutABeginDoesNotInventAPlayedWave" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1607743491" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003695" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1845" name="EachNewSessionGetsANewRunIdentityAndOnlyActuallyCompletedWavesAreCounted" fullname="PaperDefense.Tests.GeneratorWaveTests.EachNewSessionGetsANewRunIdentityAndOnlyActuallyCompletedWavesAreCounted" methodname="EachNewSessionGetsANewRunIdentityAndOnlyActuallyCompletedWavesAreCounted" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="982572792" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.004727" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1857" name="EmptyCampaignCannotInventGeneratorIncomeOrCompletedWaves" fullname="PaperDefense.Tests.GeneratorWaveTests.EmptyCampaignCannotInventGeneratorIncomeOrCompletedWaves" methodname="EmptyCampaignCannotInventGeneratorIncomeOrCompletedWaves" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1759233042" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.005055" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1850" name="FinishingConstructionOnTheCompletionTickDoesNotEarnAFullWave" fullname="PaperDefense.Tests.GeneratorWaveTests.FinishingConstructionOnTheCompletionTickDoesNotEarnAFullWave" methodname="FinishingConstructionOnTheCompletionTickDoesNotEarnAFullWave" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="691734505" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.005070" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1855" name="GeneratorRejectsOtherMaterialsWithoutSpendingInk" fullname="PaperDefense.Tests.GeneratorWaveTests.GeneratorRejectsOtherMaterialsWithoutSpendingInk" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.053995" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1853" name="GeneratorRejectsOtherMaterialsWithoutSpendingInk(Ink)" fullname="PaperDefense.Tests.GeneratorWaveTests.GeneratorRejectsOtherMaterialsWithoutSpendingInk(Ink)" methodname="GeneratorRejectsOtherMaterialsWithoutSpendingInk" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="157030465" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.005559" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1854" name="GeneratorRejectsOtherMaterialsWithoutSpendingInk(Marker)" fullname="PaperDefense.Tests.GeneratorWaveTests.GeneratorRejectsOtherMaterialsWithoutSpendingInk(Marker)" methodname="GeneratorRejectsOtherMaterialsWithoutSpendingInk" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1557694861" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.004187" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1836" name="IncomeIsFrozenWhenTheWaveBegins" fullname="PaperDefense.Tests.GeneratorWaveTests.IncomeIsFrozenWhenTheWaveBegins" methodname="IncomeIsFrozenWhenTheWaveBegins" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="283559896" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.007181" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1844" name="InvalidArgumentsAreRejectedBeforeBindingOrConsumingTheLedger" fullname="PaperDefense.Tests.GeneratorWaveTests.InvalidArgumentsAreRejectedBeforeBindingOrConsumingTheLedger" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.092168" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1842" name="InvalidArgumentsAreRejectedBeforeBindingOrConsumingTheLedger(True)" fullname="PaperDefense.Tests.GeneratorWaveTests.InvalidArgumentsAreRejectedBeforeBindingOrConsumingTheLedger(True)" methodname="InvalidArgumentsAreRejectedBeforeBindingOrConsumingTheLedger" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1669188784" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.005485" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1843" name="InvalidArgumentsAreRejectedBeforeBindingOrConsumingTheLedger(False)" fullname="PaperDefense.Tests.GeneratorWaveTests.InvalidArgumentsAreRejectedBeforeBindingOrConsumingTheLedger(False)" methodname="InvalidArgumentsAreRejectedBeforeBindingOrConsumingTheLedger" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1614009617" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003735" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1841" name="LedgerDoesNotImposeAnEightWaveCampaignLimit" fullname="PaperDefense.Tests.GeneratorWaveTests.LedgerDoesNotImposeAnEightWaveCampaignLimit" methodname="LedgerDoesNotImposeAnEightWaveCampaignLimit" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1789202325" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003794" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1840" name="OneSessionLedgerCannotBeReboundByEventsFromAnotherRun" fullname="PaperDefense.Tests.GeneratorWaveTests.OneSessionLedgerCannotBeReboundByEventsFromAnotherRun" methodname="OneSessionLedgerCannotBeReboundByEventsFromAnotherRun" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1231842242" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003634" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1856" name="RunUpgradesDoNotMultiplyGeneratorIncomeOrCreateARefund" fullname="PaperDefense.Tests.GeneratorWaveTests.RunUpgradesDoNotMultiplyGeneratorIncomeOrCreateARefund" methodname="RunUpgradesDoNotMultiplyGeneratorIncomeOrCreateARefund" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1830280729" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.006648" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1851" name="SellingAGeneratorBeforeCompletionPaysNeitherIncomeNorRefund" fullname="PaperDefense.Tests.GeneratorWaveTests.SellingAGeneratorBeforeCompletionPaysNeitherIncomeNorRefund" methodname="SellingAGeneratorBeforeCompletionPaysNeitherIncomeNorRefund" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="653788192" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.004976" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1849" name="SessionDoesNotPayAGeneratorBuiltDuringTheWaveUntilTheNextFullWave" fullname="PaperDefense.Tests.GeneratorWaveTests.SessionDoesNotPayAGeneratorBuiltDuringTheWaveUntilTheNextFullWave" methodname="SessionDoesNotPayAGeneratorBuiltDuringTheWaveUntilTheNextFullWave" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="761712664" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.005454" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1848" name="SessionPaysGeneratorsOncePerCompleteWaveWithoutChangingMetaGold" fullname="PaperDefense.Tests.GeneratorWaveTests.SessionPaysGeneratorsOncePerCompleteWaveWithoutChangingMetaGold" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.079271" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1846" name="SessionPaysGeneratorsOncePerCompleteWaveWithoutChangingMetaGold(False,12)" fullname="PaperDefense.Tests.GeneratorWaveTests.SessionPaysGeneratorsOncePerCompleteWaveWithoutChangingMetaGold(False,12)" methodname="SessionPaysGeneratorsOncePerCompleteWaveWithoutChangingMetaGold" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="217848282" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.009210" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1847" name="SessionPaysGeneratorsOncePerCompleteWaveWithoutChangingMetaGold(True,15)" fullname="PaperDefense.Tests.GeneratorWaveTests.SessionPaysGeneratorsOncePerCompleteWaveWithoutChangingMetaGold(True,15)" methodname="SessionPaysGeneratorsOncePerCompleteWaveWithoutChangingMetaGold" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="404549983" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.005164" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1852" name="TwoGeneratorsShareOneLimitAcrossVariantsAndADestroyedGeneratorReleasesCapacity" fullname="PaperDefense.Tests.GeneratorWaveTests.TwoGeneratorsShareOneLimitAcrossVariantsAndADestroyedGeneratorReleasesCapacity" methodname="TwoGeneratorsShareOneLimitAcrossVariantsAndADestroyedGeneratorReleasesCapacity" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1826713099" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.012578" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1813" name="TwoVariantsPayOnlyInkAndEachEntityIsCountedOnce" fullname="PaperDefense.Tests.GeneratorWaveTests.TwoVariantsPayOnlyInkAndEachEntityIsCountedOnce" methodname="TwoVariantsPayOnlyInkAndEachEntityIsCountedOnce" classname="PaperDefense.Tests.GeneratorWaveTests" runstate="Runnable" seed="1610922174" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.009895" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2239" name="RunRewardReceiptTests" fullname="PaperDefense.Tests.RunRewardReceiptTests" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" testcasecount="23" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:02Z" duration="0.382081" total="23" passed="23" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2242" name="CumulativeProgress_GrantsOnlyNewWavesAndThenVictoryBonus" fullname="PaperDefense.Tests.RunRewardReceiptTests.CumulativeProgress_GrantsOnlyNewWavesAndThenVictoryBonus" methodname="CumulativeProgress_GrantsOnlyNewWavesAndThenVictoryBonus" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="1254647545" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.010768" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2259" name="EmptyRunIdentity_IsRejectedAtomically" fullname="PaperDefense.Tests.RunRewardReceiptTests.EmptyRunIdentity_IsRejectedAtomically" methodname="EmptyRunIdentity_IsRejectedAtomically" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="1430782082" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.002825" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2241" name="FiveWavesWithoutVictory_GrantsOnlyCompletedWaves" fullname="PaperDefense.Tests.RunRewardReceiptTests.FiveWavesWithoutVictory_GrantsOnlyCompletedWaves" methodname="FiveWavesWithoutVictory_GrantsOnlyCompletedWaves" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="438130967" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.001567" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2265" name="FutureRewardMetadata_RemainsUnsupported" fullname="PaperDefense.Tests.RunRewardReceiptTests.FutureRewardMetadata_RemainsUnsupported" methodname="FutureRewardMetadata_RemainsUnsupported" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="2076152779" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.001775" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2254" name="InvalidWaveTotals_LeaveTheWholeProfileUnchanged" fullname="PaperDefense.Tests.RunRewardReceiptTests.InvalidWaveTotals_LeaveTheWholeProfileUnchanged" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.091952" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2250" name="InvalidWaveTotals_LeaveTheWholeProfileUnchanged(-1)" fullname="PaperDefense.Tests.RunRewardReceiptTests.InvalidWaveTotals_LeaveTheWholeProfileUnchanged(-1)" methodname="InvalidWaveTotals_LeaveTheWholeProfileUnchanged" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="536991434" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.002909" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2251" name="InvalidWaveTotals_LeaveTheWholeProfileUnchanged(9)" fullname="PaperDefense.Tests.RunRewardReceiptTests.InvalidWaveTotals_LeaveTheWholeProfileUnchanged(9)" methodname="InvalidWaveTotals_LeaveTheWholeProfileUnchanged" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="1496754888" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.002141" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2252" name="InvalidWaveTotals_LeaveTheWholeProfileUnchanged(int.MinValue)" fullname="PaperDefense.Tests.RunRewardReceiptTests.InvalidWaveTotals_LeaveTheWholeProfileUnchanged(int.MinValue)" methodname="InvalidWaveTotals_LeaveTheWholeProfileUnchanged" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="1862527237" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.001918" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2253" name="InvalidWaveTotals_LeaveTheWholeProfileUnchanged(int.MaxValue)" fullname="PaperDefense.Tests.RunRewardReceiptTests.InvalidWaveTotals_LeaveTheWholeProfileUnchanged(int.MaxValue)" methodname="InvalidWaveTotals_LeaveTheWholeProfileUnchanged" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="1220637650" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.002016" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2262" name="JsonReload_PreservesReceiptsAndPaysOnlyTheRemainingDelta" fullname="PaperDefense.Tests.RunRewardReceiptTests.JsonReload_PreservesReceiptsAndPaysOnlyTheRemainingDelta" methodname="JsonReload_PreservesReceiptsAndPaysOnlyTheRemainingDelta" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="676982591" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.007478" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2248" name="NoCompletedWaves_DoesNotCreateAReceipt" fullname="PaperDefense.Tests.RunRewardReceiptTests.NoCompletedWaves_DoesNotCreateAReceipt" methodname="NoCompletedWaves_DoesNotCreateAReceipt" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="1630991502" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.001951" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2246" name="OlderOrRepeatedProgress_IsAnExactNoOp" fullname="PaperDefense.Tests.RunRewardReceiptTests.OlderOrRepeatedProgress_IsAnExactNoOp" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.100160" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2243" name="OlderOrRepeatedProgress_IsAnExactNoOp(0)" fullname="PaperDefense.Tests.RunRewardReceiptTests.OlderOrRepeatedProgress_IsAnExactNoOp(0)" methodname="OlderOrRepeatedProgress_IsAnExactNoOp" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="16871395" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.006382" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2244" name="OlderOrRepeatedProgress_IsAnExactNoOp(2)" fullname="PaperDefense.Tests.RunRewardReceiptTests.OlderOrRepeatedProgress_IsAnExactNoOp(2)" methodname="OlderOrRepeatedProgress_IsAnExactNoOp" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="1582141534" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.006647" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2245" name="OlderOrRepeatedProgress_IsAnExactNoOp(5)" fullname="PaperDefense.Tests.RunRewardReceiptTests.OlderOrRepeatedProgress_IsAnExactNoOp(5)" methodname="OlderOrRepeatedProgress_IsAnExactNoOp" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="1447117753" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.004919" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2247" name="OldNonVictoryProgress_CannotRemoveAnAlreadyPaidVictory" fullname="PaperDefense.Tests.RunRewardReceiptTests.OldNonVictoryProgress_CannotRemoveAnAlreadyPaidVictory" methodname="OldNonVictoryProgress_CannotRemoveAnAlreadyPaidVictory" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="654418306" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003171" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2260" name="ReceiptSnapshot_RemainsDetachedWhenProgressAdvances" fullname="PaperDefense.Tests.RunRewardReceiptTests.ReceiptSnapshot_RemainsDetachedWhenProgressAdvances" methodname="ReceiptSnapshot_RemainsDetachedWhenProgressAdvances" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="1648706303" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.002655" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2240" name="RepeatedVictory_GrantsOnce" fullname="PaperDefense.Tests.RunRewardReceiptTests.RepeatedVictory_GrantsOnce" methodname="RepeatedVictory_GrantsOnce" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="21472386" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.004072" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2264" name="SaturatedBalances_StillRecordProgressWithoutWrappingOrPayingAgain" fullname="PaperDefense.Tests.RunRewardReceiptTests.SaturatedBalances_StillRecordProgressWithoutWrappingOrPayingAgain" methodname="SaturatedBalances_StillRecordProgressWithoutWrappingOrPayingAgain" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="1530416929" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.004166" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2249" name="SeparateRunIdentities_EarnSeparateRewards" fullname="PaperDefense.Tests.RunRewardReceiptTests.SeparateRunIdentities_EarnSeparateRewards" methodname="SeparateRunIdentities_EarnSeparateRewards" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="1980329023" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.003655" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2263" name="UppercaseSavedGuid_IsTheSameRunWhenAdvancingProgress" fullname="PaperDefense.Tests.RunRewardReceiptTests.UppercaseSavedGuid_IsTheSameRunWhenAdvancingProgress" methodname="UppercaseSavedGuid_IsTheSameRunWhenAdvancingProgress" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="913250137" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:01Z" duration="0.005565" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2258" name="VictoryBeforeEightWaves_IsRejectedAtomically" fullname="PaperDefense.Tests.RunRewardReceiptTests.VictoryBeforeEightWaves_IsRejectedAtomically" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 22:46:01Z" end-time="2026-10-18 22:46:02Z" duration="0.068948" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2255" name="VictoryBeforeEightWaves_IsRejectedAtomically(0)" fullname="PaperDefense.Tests.RunRewardReceiptTests.VictoryBeforeEightWaves_IsRejectedAtomically(0)" methodname="VictoryBeforeEightWaves_IsRejectedAtomically" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="1017248395" result="Passed" start-time="2026-10-18 22:46:02Z" end-time="2026-10-18 22:46:02Z" duration="0.004892" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2256" name="VictoryBeforeEightWaves_IsRejectedAtomically(5)" fullname="PaperDefense.Tests.RunRewardReceiptTests.VictoryBeforeEightWaves_IsRejectedAtomically(5)" methodname="VictoryBeforeEightWaves_IsRejectedAtomically" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="1186974716" result="Passed" start-time="2026-10-18 22:46:02Z" end-time="2026-10-18 22:46:02Z" duration="0.004425" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2257" name="VictoryBeforeEightWaves_IsRejectedAtomically(7)" fullname="PaperDefense.Tests.RunRewardReceiptTests.VictoryBeforeEightWaves_IsRejectedAtomically(7)" methodname="VictoryBeforeEightWaves_IsRejectedAtomically" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="1205418774" result="Passed" start-time="2026-10-18 22:46:02Z" end-time="2026-10-18 22:46:02Z" duration="0.003901" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2261" name="WorkingCopy_AdvancesReceiptsAndBalancesIndependently" fullname="PaperDefense.Tests.RunRewardReceiptTests.WorkingCopy_AdvancesReceiptsAndBalancesIndependently" methodname="WorkingCopy_AdvancesReceiptsAndBalancesIndependently" classname="PaperDefense.Tests.RunRewardReceiptTests" runstate="Runnable" seed="712739093" result="Passed" start-time="2026-10-18 22:46:02Z" end-time="2026-10-18 22:46:02Z" duration="0.005126" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2266" name="RunRewardTotalsTests" fullname="PaperDefense.Tests.RunRewardTotalsTests" classname="PaperDefense.Tests.RunRewardTotalsTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-18 22:46:02Z" end-time="2026-10-18 22:46:02Z" duration="0.283067" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="2275" name="InvalidPartialVictoriesCannotBeDisplayedAsEarnedRewards" fullname="PaperDefense.Tests.RunRewardTotalsTests.InvalidPartialVictoriesCannotBeDisplayedAsEarnedRewards" classname="PaperDefense.Tests.RunRewardTotalsTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 22:46:02Z" end-time="2026-10-18 22:46:02Z" duration="0.101890" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2272" name="InvalidPartialVictoriesCannotBeDisplayedAsEarnedRewards(-1,False)" fullname="PaperDefense.Tests.RunRewardTotalsTests.InvalidPartialVictoriesCannotBeDisplayedAsEarnedRewards(-1,False)" methodname="InvalidPartialVictoriesCannotBeDisplayedAsEarnedRewards" classname="PaperDefense.Tests.RunRewardTotalsTests" runstate="Runnable" seed="1124982959" result="Passed" start-time="2026-10-18 22:46:02Z" end-time="2026-10-18 22:46:02Z" duration="0.001255" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2273" name="InvalidPartialVictoriesCannotBeDisplayedAsEarnedRewards(9,False)" fullname="PaperDefense.Tests.RunRewardTotalsTests.InvalidPartialVictoriesCannotBeDisplayedAsEarnedRewards(9,False)" methodname="InvalidPartialVictoriesCannotBeDisplayedAsEarnedRewards" classname="PaperDefense.Tests.RunRewardTotalsTests" runstate="Runnable" seed="783231770" result="Passed" start-time="2026-10-18 22:46:02Z" end-time="2026-10-18 22:46:02Z" duration="0.000272" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2274" name="InvalidPartialVictoriesCannotBeDisplayedAsEarnedRewards(5,True)" fullname="PaperDefense.Tests.RunRewardTotalsTests.InvalidPartialVictoriesCannotBeDisplayedAsEarnedRewards(5,True)" methodname="InvalidPartialVictoriesCannotBeDisplayedAsEarnedRewards" classname="PaperDefense.Tests.RunRewardTotalsTests" runstate="Runnable" seed="1787690972" result="Passed" start-time="2026-10-18 22:46:02Z" end-time="2026-10-18 22:46:02Z" duration="0.000214" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="2271" name="ResultTotalsUseOnlyCompletedWavesAndTheActualVictoryBonus" fullname="PaperDefense.Tests.RunRewardTotalsTests.ResultTotalsUseOnlyCompletedWavesAndTheActualVictoryBonus" classname="PaperDefense.Tests.RunRewardTotalsTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 22:46:02Z" end-time="2026-10-18 22:46:02Z" duration="0.099508" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2267" name="ResultTotalsUseOnlyCompletedWavesAndTheActualVictoryBonus(0,False,0,0)" fullname="PaperDefense.Tests.RunRewardTotalsTests.ResultTotalsUseOnlyCompletedWavesAndTheActualVictoryBonus(0,False,0,0)" methodname="ResultTotalsUseOnlyCompletedWavesAndTheActualVictoryBonus" classname="PaperDefense.Tests.RunRewardTotalsTests" runstate="Runnable" seed="752787388" result="Passed" start-time="2026-10-18 22:46:02Z" end-time="2026-10-18 22:46:02Z" duration="0.000813" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2268" name="ResultTotalsUseOnlyCompletedWavesAndTheActualVictoryBonus(5,False,40,50)" fullname="PaperDefense.Tests.RunRewardTotalsTests.ResultTotalsUseOnlyCompletedWavesAndTheActualVictoryBonus(5,False,40,50)" methodname="ResultTotalsUseOnlyCompletedWavesAndTheActualVictoryBonus" classname="PaperDefense.Tests.RunRewardTotalsTests" runstate="Runnable" seed="314048037" result="Passed" start-time="2026-10-18 22:46:02Z" end-time="2026-10-18 22:46:02Z" duration="0.000224" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2269" name="ResultTotalsUseOnlyCompletedWavesAndTheActualVictoryBonus(8,False,64,80)" fullname="PaperDefense.Tests.RunRewardTotalsTests.ResultTotalsUseOnlyCompletedWavesAndTheActualVictoryBonus(8,False,64,80)" methodname="ResultTotalsUseOnlyCompletedWavesAndTheActualVictoryBonus" classname="PaperDefense.Tests.RunRewardTotalsTests" runstate="Runnable" seed="559218546" result="Passed" start-time="2026-10-18 22:46:02Z" end-time="2026-10-18 22:46:02Z" duration="0.000183" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2270" name="ResultTotalsUseOnlyCompletedWavesAndTheActualVictoryBonus(8,True,94,120)" fullname="PaperDefense.Tests.RunRewardTotalsTests.ResultTotalsUseOnlyCompletedWavesAndTheActualVictoryBonus(8,True,94,120)" methodname="ResultTotalsUseOnlyCompletedWavesAndTheActualVictoryBonus" classname="PaperDefense.Tests.RunRewardTotalsTests" runstate="Runnable" seed="1954762364" result="Passed" start-time="2026-10-18 22:46:02Z" end-time="2026-10-18 22:46:02Z" duration="0.000122" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2276" name="TheReceiptAndProfilePublishTheSameCumulativeRewardWithoutAnotherPayment" fullname="PaperDefense.Tests.RunRewardTotalsTests.TheReceiptAndProfilePublishTheSameCumulativeRewardWithoutAnotherPayment" methodname="TheReceiptAndProfilePublishTheSameCumulativeRewardWithoutAnotherPayment" classname="PaperDefense.Tests.RunRewardTotalsTests" runstate="Runnable" seed="1324150681" result="Passed" start-time="2026-10-18 22:46:02Z" end-time="2026-10-18 22:46:02Z" duration="0.001582" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task11-core-green.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

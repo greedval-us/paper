@@ -252,9 +252,11 @@ namespace PaperDefense.Core
         public Cell Cell;
         public StructureKind Kind;
         public string ContentId;
+        public string SourceAlbumEntryId { get; internal set; }
         internal ResolvedTowerAssembly Assembly;
         public MaterialTier Tier;
         public float Health, MaxHealth, BuildRemaining;
+        public int GeneratorPaidWaves { get; internal set; }
         public bool IsComplete, WaitingForClearance;
         public Point2 Aim;
         readonly WeaponMountState[] mounts={new WeaponMountState(),new WeaponMountState(),new WeaponMountState()};

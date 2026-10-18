@@ -44,6 +44,7 @@ namespace PaperDefense.Core
                 if (!ActiveGenerator(structure) || paid.Contains(structure.Id) ||
                     !eligible.TryGetValue(structure.Id, out var original) || !ReferenceEquals(original.Entity, structure)) continue;
                 paid.Add(structure.Id);
+                if (structure.GeneratorPaidWaves < int.MaxValue) structure.GeneratorPaidWaves++;
                 income = Math.Min(int.MaxValue, income + original.Income);
             }
             completed = true; eligible.Clear();

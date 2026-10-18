@@ -572,9 +572,13 @@ namespace PaperDefense.Presentation
                 }
                 else
                 {
-                    var definition = session.Balance.Structure(previewKind);
-                    float range = previewRange >= 0 ? previewRange : previewKind == StructureKind.TarPit ? Mathf.Max(.5f, definition.Radius) : definition.Range;
-                    p.Ring(center, range, .045f, MeshPen.Alpha(color, .38f), 120, 1, 117, true);
+                    float range = previewRange;
+                    if (range < 0 && session.Balance.HasStructure(previewKind))
+                    {
+                        var definition = session.Balance.Structure(previewKind);
+                        range = previewKind == StructureKind.TarPit ? Mathf.Max(.5f, definition.Radius) : definition.Range;
+                    }
+                    if (range > 0) p.Ring(center, range, .045f, MeshPen.Alpha(color, .38f), 120, 1, 117, true);
                 }
             }
             p.Upload();

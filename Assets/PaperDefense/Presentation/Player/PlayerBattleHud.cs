@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace PaperDefense.Presentation
 {
     /// <summary>Compact player HUD, backed by the same commands as the development HUD.</summary>
-    public sealed class PlayerBattleHud
+    public sealed partial class PlayerBattleHud
     {
         readonly PlayerGameRoot game;
         readonly PlayerUi ui;
@@ -31,6 +31,7 @@ namespace PaperDefense.Presentation
         public PlayerBattleHud(PlayerGameRoot owner, PlayerUi style, RectTransform root, PlayerLayout layout)
         {
             game = owner; ui = style;
+            if (game.Run.UsesAlbumSlots) { BuildAlbumHud(root, layout); return; }
             float w = layout.Header.width;
             bool narrow = layout.Width < 1050;
             var top = ui.Panel(root, "Battle header", layout.Header, PlayerUi.Card, true);
@@ -165,6 +166,7 @@ namespace PaperDefense.Presentation
 
         public void Refresh()
         {
+            if (albumHud) { RefreshAlbumHud(); return; }
             var s = game.Run.Session; var input = game.Drawing;
             ink.text = s.Ink + " штрихов"; health.text = "Замок  " + Mathf.CeilToInt(s.BaseHealth) + " / " + Mathf.CeilToInt(s.Balance.BaseHealth);
             wave.text = ui.T("wave", s.WaveIndex, s.Balance.Waves.Count);

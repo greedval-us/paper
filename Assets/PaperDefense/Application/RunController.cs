@@ -315,7 +315,7 @@ namespace PaperDefense.Application
             if (!TryResolveBuildSlot(slot, material, out var entry, out var resolved, out reason)) return false;
             return entry.Kind == AlbumEntryKind.Legacy
                 ? session.TryBuildBlueprint(cells, entry.LegacyBlueprint, material, color, out reason)
-                : session.TryBuildEntry(cells, resolved, material, color, out reason);
+                : session.TryBuildEntry(cells, resolved, material, color, out reason, entry.Id);
         }
 
         bool TryResolveBuildSlot(int slot, MaterialTier material, out AlbumEntry entry, out ResolvedEntry resolved, out string reason)

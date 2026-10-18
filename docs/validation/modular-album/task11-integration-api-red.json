@@ -1,0 +1,107 @@
+[
+  {
+    "type": "Error",
+    "message": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs(117,25): error CS1061: 'RunController' does not contain a definition for 'UsesAlbumSlots' and no accessible extension method 'UsesAlbumSlots' accepting a first argument of type 'RunController' could be found (are you missing a using directive or an assembly reference?)\n",
+    "file": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs",
+    "line": 117,
+    "stackTrace": null
+  },
+  {
+    "type": "Error",
+    "message": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs(136,36): error CS1061: 'RunController' does not contain a definition for 'UsesAlbumSlots' and no accessible extension method 'UsesAlbumSlots' accepting a first argument of type 'RunController' could be found (are you missing a using directive or an assembly reference?)\n",
+    "file": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs",
+    "line": 136,
+    "stackTrace": null
+  },
+  {
+    "type": "Error",
+    "message": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs(158,37): error CS1061: 'RunController' does not contain a definition for 'UsesAlbumSlots' and no accessible extension method 'UsesAlbumSlots' accepting a first argument of type 'RunController' could be found (are you missing a using directive or an assembly reference?)\n",
+    "file": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs",
+    "line": 158,
+    "stackTrace": null
+  },
+  {
+    "type": "Error",
+    "message": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs(230,30): error CS1061: 'RunController' does not contain a definition for 'UsesAlbumSlots' and no accessible extension method 'UsesAlbumSlots' accepting a first argument of type 'RunController' could be found (are you missing a using directive or an assembly reference?)\n",
+    "file": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs",
+    "line": 230,
+    "stackTrace": null
+  },
+  {
+    "type": "Error",
+    "message": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs(248,44): error CS1061: 'RunController' does not contain a definition for 'UsesAlbumSlots' and no accessible extension method 'UsesAlbumSlots' accepting a first argument of type 'RunController' could be found (are you missing a using directive or an assembly reference?)\n",
+    "file": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs",
+    "line": 248,
+    "stackTrace": null
+  },
+  {
+    "type": "Error",
+    "message": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs(261,29): error CS1061: 'RunController' does not contain a definition for 'UsesAlbumSlots' and no accessible extension method 'UsesAlbumSlots' accepting a first argument of type 'RunController' could be found (are you missing a using directive or an assembly reference?)\n",
+    "file": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs",
+    "line": 261,
+    "stackTrace": null
+  },
+  {
+    "type": "Error",
+    "message": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs(265,33): error CS1061: 'RunController' does not contain a definition for 'UsesAlbumSlots' and no accessible extension method 'UsesAlbumSlots' accepting a first argument of type 'RunController' could be found (are you missing a using directive or an assembly reference?)\n",
+    "file": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs",
+    "line": 265,
+    "stackTrace": null
+  },
+  {
+    "type": "Error",
+    "message": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs(366,21): error CS1061: 'RunController' does not contain a definition for 'UsesAlbumSlots' and no accessible extension method 'UsesAlbumSlots' accepting a first argument of type 'RunController' could be found (are you missing a using directive or an assembly reference?)\n",
+    "file": "Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs",
+    "line": 366,
+    "stackTrace": null
+  },
+  {
+    "type": "Error",
+    "message": "Assets\\PaperDefense\\Presentation\\Player\\PlayerBattleHud.cs(34,26): error CS1061: 'RunController' does not contain a definition for 'UsesAlbumSlots' and no accessible extension method 'UsesAlbumSlots' accepting a first argument of type 'RunController' could be found (are you missing a using directive or an assembly reference?)\n",
+    "file": "Assets\\PaperDefense\\Presentation\\Player\\PlayerBattleHud.cs",
+    "line": 34,
+    "stackTrace": null
+  },
+  {
+    "type": "Error",
+    "message": "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Result.cs(32,26): error CS0103: The name 'RunRewardTotals' does not exist in the current context\n",
+    "file": "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Result.cs",
+    "line": 32,
+    "stackTrace": null
+  },
+  {
+    "type": "Error",
+    "message": "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Result.cs(58,50): error CS1061: 'PlayerGameRoot' does not contain a definition for 'ReturnToHome' and no accessible extension method 'ReturnToHome' accepting a first argument of type 'PlayerGameRoot' could be found (are you missing a using directive or an assembly reference?)\n",
+    "file": "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Result.cs",
+    "line": 58,
+    "stackTrace": null
+  },
+  {
+    "type": "Error",
+    "message": "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Result.cs(62,51): error CS1061: 'PlayerGameRoot' does not contain a definition for 'ReturnToAlbumFromResult' and no accessible extension method 'ReturnToAlbumFromResult' accepting a first argument of type 'PlayerGameRoot' could be found (are you missing a using directive or an assembly reference?)\n",
+    "file": "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Result.cs",
+    "line": 62,
+    "stackTrace": null
+  },
+  {
+    "type": "Error",
+    "message": "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Result.cs(74,26): error CS0103: The name 'RunRewardTotals' does not exist in the current context\n",
+    "file": "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Result.cs",
+    "line": 74,
+    "stackTrace": null
+  },
+  {
+    "type": "Error",
+    "message": "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Result.cs(75,45): error CS1061: 'WorkshopReadModel' does not contain a definition for 'FindRunReward' and no accessible extension method 'FindRunReward' accepting a first argument of type 'WorkshopReadModel' could be found (are you missing a using directive or an assembly reference?)\n",
+    "file": "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Result.cs",
+    "line": 75,
+    "stackTrace": null
+  },
+  {
+    "type": "Error",
+    "message": "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Result.cs(81,50): error CS0103: The name 'ProfileSaveState' does not exist in the current context\n",
+    "file": "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Result.cs",
+    "line": 81,
+    "stackTrace": null
+  }
+]

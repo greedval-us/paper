@@ -20,6 +20,23 @@ namespace PaperDefense.Presentation
         public MaterialTier Tier { get; private set; } = MaterialTier.Pencil;
         public InkColor Color { get; private set; } = InkColor.None;
         public int BlueprintSlot { get; private set; } = -1;
+        public bool IsGameplayInputBlocked
+        {
+            get
+            {
+                var selected = EventSystem.current?.currentSelectedGameObject;
+                for (var current = selected != null && selected.activeInHierarchy ? selected.transform : null; current != null; current = current.parent)
+                {
+                    var input = current.GetComponent<UnityEngine.UI.InputField>();
+                    var tmp = current.GetComponent("TMP_InputField") as Behaviour;
+                    if ((input != null && input.isActiveAndEnabled) || (tmp != null && tmp.isActiveAndEnabled))
+                        return true;
+                }
+                foreach (var modal in FindObjectsByType<WorkshopModal>(FindObjectsSortMode.None))
+                    if (modal.isActiveAndEnabled) return true;
+                return false;
+            }
+        }
         public DrawingMode Mode { get; private set; }
         string message = UserText.Message("copy.462015bfa97612f9");
         public string Message { get => Resolve(message); private set => message = value; }
@@ -101,11 +118,12 @@ namespace PaperDefense.Presentation
             ResetUnavailableSelections();
             if (BlueprintSlot >= 0)
             {
-                if (BlueprintSlot < run.BuildLoadout.Count && run.BuildLoadout[BlueprintSlot] != null)
+                if (run.UsesAlbumSlots) BindAlbumSlot(BlueprintSlot);
+                else if (BlueprintSlot < run.BuildLoadout.Count && run.BuildLoadout[BlueprintSlot] != null)
                     Tool = run.BuildLoadout[BlueprintSlot].FirstWeapon;
                 else { BlueprintSlot = -1; Tool = StructureKind.Wall; }
             }
-            Message = UserText.Message("copy.330da6cb58f99c22");
+            Message = UserText.Message(run.UsesAlbumSlots ? "assembly.battle.planning_hint" : "copy.330da6cb58f99c22");
             SelectionChanged?.Invoke();
         }
 
@@ -119,13 +137,38 @@ namespace PaperDefense.Presentation
         public void SelectSlot(int slot)
         {
             if (ConstructionOnly) return;
+            if (run != null && run.UsesAlbumSlots)
+            {
+                if (slot < 0 || slot >= run.RunLoadout.Entries.Count) return;
+                Cancel(); BindAlbumSlot(slot); Mode = DrawingMode.Build; SelectionChanged?.Invoke(); return;
+            }
             if (run == null || slot < 0 || slot >= run.BuildLoadout.Count) return;
             if (run.BuildLoadout[slot] == null) { Message = UserText.Message("copy.39c29e0231f823f1"); return; }
             Cancel(); BlueprintSlot = slot; Tool = run.BuildLoadout[slot].FirstWeapon;
             Mode = DrawingMode.Build; SelectionChanged?.Invoke();
         }
+        void BindAlbumSlot(int slot)
+        {
+            BlueprintSlot = slot;
+            var resolved = SelectedAlbumEntry(MaterialTier.Pencil);
+            if (resolved == null) { Message = UserText.Message("copy.39c29e0231f823f1"); return; }
+            var page = run.RunLoadout.Entries[slot];
+            Tool = page.Kind == AlbumEntryKind.Legacy ? page.LegacyBlueprint.FirstWeapon : new StructureState(resolved).Kind;
+            if (resolved.Support?.Kind == AssemblyStructureFamily.Generator) Tier = MaterialTier.Pencil;
+            if (resolved.Kind == AlbumEntryKind.Structure) Color = InkColor.None;
+        }
+        ResolvedEntry SelectedAlbumEntry(MaterialTier material)
+        {
+            if (run == null || !run.UsesAlbumSlots || run.RunLoadout == null || BlueprintSlot < 0 || BlueprintSlot >= run.RunLoadout.Entries.Count) return null;
+            try { return run.RunLoadout.ResolveSlot(BlueprintSlot, material); }
+            catch (ArgumentException) { return null; }
+        }
         public void SelectTier(MaterialTier tier)
-        { Cancel(); Tier = tier; SelectionChanged?.Invoke(); }
+        {
+            if (!Enum.IsDefined(typeof(MaterialTier), tier)) return;
+            if (SelectedAlbumEntry(MaterialTier.Pencil)?.Support?.Kind == AssemblyStructureFamily.Generator) tier = MaterialTier.Pencil;
+            Cancel(); Tier = tier; SelectionChanged?.Invoke();
+        }
         public void SelectColor(InkColor color)
         {
             if (ConstructionOnly && color != InkColor.None) return;
@@ -161,7 +204,7 @@ namespace PaperDefense.Presentation
         void Update()
         {
             if (run == null || run.Session == null) return;
-            if (run.InWorkshop) { Cancel(); HasHover = false; return; }
+            if (run.InWorkshop || IsGameplayInputBlocked) { Cancel(); HasHover = false; return; }
             var mouse = Mouse.current;
             Vector2 screen = mouse != null ? mouse.position.ReadValue() : default;
             Cell cell = default;
@@ -188,6 +231,7 @@ namespace PaperDefense.Presentation
                 { Message = run.Blotter(startCell, out var reason) ? UserText.Message("copy.1aa1c191d8f61cbe") : reason; }
                 else if (Mode == DrawingMode.Paint)
                 { Message = run.Paint(startCell, Color, out var reason) ? UserText.Message("copy.d28731380a0c6a83") : reason; }
+                else if (run.UsesAlbumSlots) gesture.Begin(startCell, SelectedAlbumEntry(Tier));
                 else gesture.Begin(startCell, BlueprintSlot < 0 && ConstructionToolRules.IsTool(Tool));
             }
             hasPressOrigin = false;
@@ -205,7 +249,8 @@ namespace PaperDefense.Presentation
                     else
                     {
                         string reason;
-                        bool success = BlueprintSlot >= 0 ? run.BuildBlueprint(gesture.Cells, BlueprintSlot, Tier, Color, out reason) : run.Build(gesture.Cells, Tool, Tier, out reason);
+                        bool success = run.UsesAlbumSlots ? run.BuildEntry(gesture.Cells, BlueprintSlot, Tier, Color, out reason)
+                            : BlueprintSlot >= 0 ? run.BuildBlueprint(gesture.Cells, BlueprintSlot, Tier, Color, out reason) : run.Build(gesture.Cells, Tool, Tier, out reason);
                         Message = success ? (run.Paused ? UserText.Message("copy.5550d1f4c6ac852a") : UserText.Message("copy.6d7492b5fc3888c5")) : reason;
                     }
                 }
@@ -217,11 +262,20 @@ namespace PaperDefense.Presentation
             { view.ClearPreview(); PreviewCost = 0; PreviewReason = ""; return; }
             hoverPreview[0] = cell;
             IReadOnlyList<Cell> cells = gesture.Active ? gesture.Cells : hoverPreview;
-            var quote = BlueprintSlot >= 0 ? run.QuoteBlueprint(cells, BlueprintSlot, Tier, Color) : run.QuoteBuild(cells, Tool, Tier);
+            var quote = run.UsesAlbumSlots ? run.QuoteEntry(cells, BlueprintSlot, Tier, Color)
+                : BlueprintSlot >= 0 ? run.QuoteBlueprint(cells, BlueprintSlot, Tier, Color) : run.QuoteBuild(cells, Tool, Tier);
             PreviewCost = quote.Cost;
             PreviewReason = quote.Valid ? "" : quote.Reason;
-            var blueprint = BlueprintSlot >= 0 && BlueprintSlot < run.BuildLoadout.Count ? run.BuildLoadout[BlueprintSlot] : null;
+            var blueprint = run.UsesAlbumSlots && BlueprintSlot >= 0 && BlueprintSlot < run.RunLoadout.Entries.Count
+                ? run.RunLoadout.Entries[BlueprintSlot]?.LegacyBlueprint
+                : BlueprintSlot >= 0 && BlueprintSlot < run.BuildLoadout.Count ? run.BuildLoadout[BlueprintSlot] : null;
+            var selectedEntry = SelectedAlbumEntry(Tier);
             float range = blueprint != null ? run.PreviewBlueprint(blueprint, Tier).Range : -1;
+            if (selectedEntry != null)
+            {
+                range = selectedEntry.Support?.Radius ?? 0;
+                foreach (var weapon in selectedEntry.Weapons) range = Mathf.Max(range, weapon.Range);
+            }
             view.SetPreview(quote.Cells, Tool, Tier, quote.Valid, range, blueprint: blueprint);
         }
 
@@ -313,10 +367,20 @@ namespace PaperDefense.Presentation
             if (k.digit2Key.wasPressedThisFrame) SelectSlot(1);
             if (k.digit3Key.wasPressedThisFrame) SelectSlot(2);
             if (k.digit4Key.wasPressedThisFrame) SelectSlot(3);
-            if (k.digit5Key.wasPressedThisFrame) SelectTool(StructureKind.Wall);
-            if (k.digit6Key.wasPressedThisFrame) SelectTool(StructureKind.Spikes);
-            if (k.digit7Key.wasPressedThisFrame) SelectTool(StructureKind.TarPit);
-            if (k.digit8Key.wasPressedThisFrame) SelectTool(StructureKind.RepairPost);
+            if (run.UsesAlbumSlots)
+            {
+                if (k.digit5Key.wasPressedThisFrame) SelectSlot(4);
+                if (k.digit6Key.wasPressedThisFrame) SelectSlot(5);
+                if (k.digit7Key.wasPressedThisFrame) SelectSlot(6);
+                if (k.digit8Key.wasPressedThisFrame) SelectSlot(7);
+            }
+            else
+            {
+                if (k.digit5Key.wasPressedThisFrame) SelectTool(StructureKind.Wall);
+                if (k.digit6Key.wasPressedThisFrame) SelectTool(StructureKind.Spikes);
+                if (k.digit7Key.wasPressedThisFrame) SelectTool(StructureKind.TarPit);
+                if (k.digit8Key.wasPressedThisFrame) SelectTool(StructureKind.RepairPost);
+            }
             if (k.eKey.wasPressedThisFrame) SelectMode(DrawingMode.Erase);
             if (k.uKey.wasPressedThisFrame) SelectMode(DrawingMode.Upgrade);
             if (k.bKey.wasPressedThisFrame) SelectMode(DrawingMode.Blotter);

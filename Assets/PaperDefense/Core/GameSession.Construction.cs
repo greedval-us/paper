@@ -32,7 +32,7 @@ namespace PaperDefense.Core
             return quote;
         }
 
-        public bool TryBuildEntry(IReadOnlyList<Cell> cells, ResolvedEntry entry, MaterialTier material, InkColor color, out string reason)
+        public bool TryBuildEntry(IReadOnlyList<Cell> cells, ResolvedEntry entry, MaterialTier material, InkColor color, out string reason, string sourceAlbumEntryId = null)
         {
             var quote = QuoteEntry(cells, entry, material, color); reason = quote.Reason;
             if (!quote.Valid) return false;
@@ -42,7 +42,7 @@ namespace PaperDefense.Core
             foreach (var cell in quote.Cells)
                 prepared.Add(new StructureState(entry)
                 {
-                    Id = nextStructureId + prepared.Count, Cell = cell, PaidInk = entry.Cost, Color = color,
+                    Id = nextStructureId + prepared.Count, Cell = cell, PaidInk = entry.Cost, Color = color, SourceAlbumEntryId = sourceAlbumEntryId,
                     Health = health, MaxHealth = health, IsComplete = entry.BuildSeconds <= 0,
                     Aim = new Point2(cell.X + 1.5f, cell.Y + .5f), Priority = TargetPriority.Nearest
                 });

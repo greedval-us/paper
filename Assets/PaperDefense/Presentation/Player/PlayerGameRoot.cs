@@ -50,7 +50,8 @@ namespace PaperDefense.Presentation
         public DrawingInput Drawing => bootstrap.Drawing;
         public NotebookWorldView World => bootstrap.View;
         public string Status { get; private set; } = "";
-        public bool CanBuild => Page == PlayerPage.Battle && !Run.Paused && !Run.Session.PendingUpgrade && !Finished;
+        public bool CanBuild => Page == PlayerPage.Battle && !Run.Paused && !Run.Session.PendingUpgrade && !Finished &&
+            !(shell?.HasConfirmation ?? false) && !Drawing.IsGameplayInputBlocked;
         public bool Finished => Run.Session.Phase == RunPhase.Victory || Run.Session.Phase == RunPhase.Defeat;
 
         public void Configure(GameBalanceAsset configuration, bool memoryOnly, bool useNotebookStyle = true)
@@ -104,14 +105,14 @@ namespace PaperDefense.Presentation
                 if (keyboard.escapeKey.wasPressedThisFrame)
                 {
                     if (shell.HasConfirmation) { shell.CancelConfirmation(); return; }
-                    if (Page == PlayerPage.Battle) Pause();
+                    if (Page == PlayerPage.Battle && !Drawing.IsGameplayInputBlocked) Pause();
                     else if (Page == PlayerPage.Pause) Resume();
                     else if (Page == PlayerPage.Settings) CloseSettings();
                     else if (Page == PlayerPage.Help) CloseHelp();
                 }
-                if (!shell.HasConfirmation && keyboard.spaceKey.wasPressedThisFrame)
+                if (!shell.HasConfirmation && (Page == PlayerPage.Pause || !Drawing.IsGameplayInputBlocked) && keyboard.spaceKey.wasPressedThisFrame)
                 { if (Page == PlayerPage.Battle) Pause(); else if (Page == PlayerPage.Pause) Resume(); }
-                if (Page == PlayerPage.Battle)
+                if (Page == PlayerPage.Battle && !shell.HasConfirmation && !Drawing.IsGameplayInputBlocked)
                 {
                     if (keyboard.nKey.wasPressedThisFrame) Run.NextWave();
                     if (keyboard.fKey.wasPressedThisFrame) Run.ToggleSpeed();
@@ -194,6 +195,12 @@ namespace PaperDefense.Presentation
         {
             Run.OpenWorkshop(); Status = ""; Navigate(PlayerPage.Map);
         }
+
+        public void ReturnToHome()
+        { Run.OpenWorkshop(); Status = ""; Navigate(PlayerPage.Home); }
+
+        public void ReturnToAlbumFromResult()
+        { Run.OpenWorkshop(); Status = ""; albumReturn = PlayerPage.Map; Navigate(PlayerPage.Album); }
 
         public void Retry()
         { Run.OpenWorkshop(); StartBattle(); }
