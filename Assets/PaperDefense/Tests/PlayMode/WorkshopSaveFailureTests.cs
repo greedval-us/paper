@@ -39,7 +39,7 @@ namespace PaperDefense.Tests
             => new TowerBlueprint(id, name, ChassisKind.Standard, StructureKind.Gun);
 
         string State() => run.Workshop.Gold + "|" + string.Join(",", run.Workshop.Album.Select(p => p.Id + ":" + p.Name)) +
-            "|" + string.Join(",", run.Workshop.Loadout.Select(p => p.Id)) + "|" +
+            "|" + string.Join(",", run.Workshop.Loadout.Select(p => p?.Id)) + "|" +
             string.Join(",", run.Workshop.Parts.Where(p => run.Workshop.IsUnlocked(p.Id)).Select(p => p.Id));
 
         [TestCase("save")]

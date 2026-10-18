@@ -58,15 +58,15 @@ namespace PaperDefense.Tests
             var input = root.AddComponent<DrawingInput>(); input.Initialize(run, null, null);
             var hud = root.AddComponent<NotebookHud>(); hud.Initialize(run, input);
 
-            Assert.That(Button("Tool 8").gameObject.activeSelf, Is.False);
-            Assert.That(Button("Tool 9").gameObject.activeSelf, Is.False);
+            Assert.That(Button("Tool " + (ProfileLimits.LoadoutSlotCount + 4)).gameObject.activeSelf, Is.False);
+            Assert.That(Button("Tool " + (ProfileLimits.LoadoutSlotCount + 5)).gameObject.activeSelf, Is.False);
             for (int i = 0; i < 4; i++) Assert.That(Button("Ink color " + i).gameObject.activeSelf, Is.False);
             for (int i = 0; i < 3; i++)
             {
                 Assert.That(Button("Activate well " + i).gameObject.activeSelf, Is.False);
                 Assert.That(Button("Focus well " + i).gameObject.activeSelf, Is.False);
             }
-            Assert.That(Button("Tool 4").gameObject.activeSelf, Is.True);
+            Assert.That(Button("Tool " + ProfileLimits.LoadoutSlotCount).gameObject.activeSelf, Is.True);
             Assert.That(Button("Focus base").gameObject.activeSelf, Is.True);
             Assert.That(TextField(hud, "forecast"), Does.Not.Contain("Плевуны").And.Not.Contain("штриховка"));
             Assert.That(TextField(hud, "navigationHint"), Does.Not.Contain("окраску"));

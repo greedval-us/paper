@@ -328,7 +328,7 @@ namespace PaperDefense.Tests
             Find("Start battle").onClick.Invoke(); yield return null;
             Assert.That(game.Page, Is.EqualTo(PlayerPage.Battle));
             Assert.That(game.Run.InWorkshop, Is.False);
-            Assert.That(game.Run.BuildLoadout.Count, Is.EqualTo(4));
+            Assert.That(game.Run.BuildLoadout.Count, Is.EqualTo(ProfileLimits.LoadoutSlotCount));
             Assert.That(game.Drawing.Tier, Is.EqualTo(MaterialTier.Ink));
             Assert.That(game.Drawing.enabled, Is.True);
             Assert.That(game.Drawing.HandleSessionHotkeys, Is.False);

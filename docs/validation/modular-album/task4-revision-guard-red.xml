@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="65" result="Failed(Child)" total="65" passed="59" failed="6" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 04:20:25Z" end-time="2026-10-18 04:20:26Z" duration="1,5313403">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1123" result="Failed" site="Child" start-time="2026-10-18 04:20:25Z" end-time="2026-10-18 04:20:26Z" duration="1.531340" total="65" passed="59" failed="6" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="2126" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="953" result="Failed" site="Child" start-time="2026-10-18 04:20:25Z" end-time="2026-10-18 04:20:26Z" duration="1.403760" total="65" passed="59" failed="6" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="2127" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="953" result="Failed" site="Child" start-time="2026-10-18 04:20:25Z" end-time="2026-10-18 04:20:26Z" duration="1.338426" total="65" passed="59" failed="6" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="2128" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="953" result="Failed" site="Child" start-time="2026-10-18 04:20:25Z" end-time="2026-10-18 04:20:26Z" duration="1.237473" total="65" passed="59" failed="6" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1058" name="AssemblyProfileDataTests" fullname="PaperDefense.Tests.AssemblyProfileDataTests" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="65" result="Failed" site="Child" start-time="2026-10-18 04:20:25Z" end-time="2026-10-18 04:20:26Z" duration="1.141001" total="65" passed="59" failed="6" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="1074" name="ComponentLibrary_RoundTripsExactlyOneFivePartRecipe" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ComponentLibrary_RoundTripsExactlyOneFivePartRecipe" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 04:20:25Z" end-time="2026-10-18 04:20:26Z" duration="0.245315" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1072" name="ComponentLibrary_RoundTripsExactlyOneFivePartRecipe(True)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ComponentLibrary_RoundTripsExactlyOneFivePartRecipe(True)" methodname="ComponentLibrary_RoundTripsExactlyOneFivePartRecipe" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1339293201" result="Passed" start-time="2026-10-18 04:20:25Z" end-time="2026-10-18 04:20:26Z" duration="0.133464" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1073" name="ComponentLibrary_RoundTripsExactlyOneFivePartRecipe(False)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ComponentLibrary_RoundTripsExactlyOneFivePartRecipe(False)" methodname="ComponentLibrary_RoundTripsExactlyOneFivePartRecipe" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="833076379" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.005222" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1075" name="ComponentSnapshot_OwnsCopiedDefinitionsAndDtoOwnsMutableInputs" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ComponentSnapshot_OwnsCopiedDefinitionsAndDtoOwnsMutableInputs" methodname="ComponentSnapshot_OwnsCopiedDefinitionsAndDtoOwnsMutableInputs" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="762938449" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.007029" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1076" name="ComponentSnapshot_RejectsWrongCategoryAndMissingDependency" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ComponentSnapshot_RejectsWrongCategoryAndMissingDependency" methodname="ComponentSnapshot_RejectsWrongCategoryAndMissingDependency" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1122989858" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.011585" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1065" name="EmbeddedRevisionTwo_IsSelfContainedAndDoesNotNeedCurrentCatalog" fullname="PaperDefense.Tests.AssemblyProfileDataTests.EmbeddedRevisionTwo_IsSelfContainedAndDoesNotNeedCurrentCatalog" methodname="EmbeddedRevisionTwo_IsSelfContainedAndDoesNotNeedCurrentCatalog" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1402343677" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.018700" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1064" name="EntryKindMustMatchItsSnapshotKind" fullname="PaperDefense.Tests.AssemblyProfileDataTests.EntryKindMustMatchItsSnapshotKind" methodname="EntryKindMustMatchItsSnapshotKind" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1866819614" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.006070" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1071" name="FutureDtoVersion_ProtectsSource" fullname="PaperDefense.Tests.AssemblyProfileDataTests.FutureDtoVersion_ProtectsSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.045694" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1067" name="FutureDtoVersion_ProtectsSource(&quot;entry&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.FutureDtoVersion_ProtectsSource(&quot;entry&quot;)" methodname="FutureDtoVersion_ProtectsSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1834402881" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.008283" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1068" name="FutureDtoVersion_ProtectsSource(&quot;snapshot&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.FutureDtoVersion_ProtectsSource(&quot;snapshot&quot;)" methodname="FutureDtoVersion_ProtectsSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="710005318" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.007378" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1069" name="FutureDtoVersion_ProtectsSource(&quot;library&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.FutureDtoVersion_ProtectsSource(&quot;library&quot;)" methodname="FutureDtoVersion_ProtectsSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1079133217" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.003647" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1070" name="FutureDtoVersion_ProtectsSource(&quot;component&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.FutureDtoVersion_ProtectsSource(&quot;component&quot;)" methodname="FutureDtoVersion_ProtectsSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1429030219" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.003670" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1097" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="15" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.066852" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1082" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;content&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;content&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="395226059" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.005319" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1083" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;evaluation&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;evaluation&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="105437298" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.004529" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1084" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;drawing&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;drawing&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="922057636" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.004002" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1085" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;footprint&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;footprint&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1297196864" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.004090" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1086" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;mounts&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;mounts&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="724409885" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.003737" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1087" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;reinforcement&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;reinforcement&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="576625197" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.003697" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1088" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;freeform&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;freeform&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="199570259" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.004132" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1089" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;origin&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;origin&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="238055670" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.003731" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1090" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;drawingFormat&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;drawingFormat&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="2055522985" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.003596" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1091" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;drawingBinding&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;drawingBinding&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="92518531" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.003836" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1092" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;contour&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;contour&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="759895100" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.005757" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1093" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;volley&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;volley&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1009222684" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.003818" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1094" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;chassisEnum&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;chassisEnum&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="2028884527" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.003934" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1095" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;weaponEnum&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;weaponEnum&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="742389555" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.004022" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1096" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;moduleEnum&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;moduleEnum&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1610633548" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.005877" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1103" name="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.064083" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1098" name="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;kind&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;kind&quot;)" methodname="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1107861018" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.014283" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1099" name="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;category&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;category&quot;)" methodname="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1937615945" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.003845" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1100" name="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;modifier&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;modifier&quot;)" methodname="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="79195049" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.003749" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1101" name="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;operation&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;operation&quot;)" methodname="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="616202073" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.008430" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1102" name="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;structureFamily&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;structureFamily&quot;)" methodname="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1809505842" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.000182" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1062" name="JsonInlineEmptyOppositeVariants_AreAcceptedByTheirTags" fullname="PaperDefense.Tests.AssemblyProfileDataTests.JsonInlineEmptyOppositeVariants_AreAcceptedByTheirTags" methodname="JsonInlineEmptyOppositeVariants_AreAcceptedByTheirTags" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1205932757" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.005267" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1132" name="LegacyEntry_PreservesHistoricalFreeformRuleVersionAndGeometry" fullname="PaperDefense.Tests.AssemblyProfileDataTests.LegacyEntry_PreservesHistoricalFreeformRuleVersionAndGeometry" methodname="LegacyEntry_PreservesHistoricalFreeformRuleVersionAndGeometry" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="837560338" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.011914" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1104" name="LegacyEntry_RejectsPopulatedLibraryReferences" fullname="PaperDefense.Tests.AssemblyProfileDataTests.LegacyEntry_RejectsPopulatedLibraryReferences" methodname="LegacyEntry_RejectsPopulatedLibraryReferences" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1653033897" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.000903" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1061" name="LegacyEntry_RoundTripsHistoricalBlueprintWithoutConversion" fullname="PaperDefense.Tests.AssemblyProfileDataTests.LegacyEntry_RoundTripsHistoricalBlueprintWithoutConversion" methodname="LegacyEntry_RoundTripsHistoricalBlueprintWithoutConversion" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="661106612" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.002287" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1131" name="LibraryComponent_RejectsPopulatedOppositeVariant" fullname="PaperDefense.Tests.AssemblyProfileDataTests.LibraryComponent_RejectsPopulatedOppositeVariant" methodname="LibraryComponent_RejectsPopulatedOppositeVariant" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="850875429" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.004655" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1077" name="LibraryReferenceMetadata_DoesNotReplaceOwnedSnapshot" fullname="PaperDefense.Tests.AssemblyProfileDataTests.LibraryReferenceMetadata_DoesNotReplaceOwnedSnapshot" methodname="LibraryReferenceMetadata_DoesNotReplaceOwnedSnapshot" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="123889659" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.005006" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1066" name="MissingEmbeddedReferencedRevision_ProtectsSource" fullname="PaperDefense.Tests.AssemblyProfileDataTests.MissingEmbeddedReferencedRevision_ProtectsSource" methodname="MissingEmbeddedReferencedRevision_ProtectsSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="285083297" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.004098" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1130" name="MissingNestedDtoMetadata_IsMalformed" fullname="PaperDefense.Tests.AssemblyProfileDataTests.MissingNestedDtoMetadata_IsMalformed" methodname="MissingNestedDtoMetadata_IsMalformed" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1731299229" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.004104" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1081" name="NonemptyInactiveLegacyPayload_IsRejected" fullname="PaperDefense.Tests.AssemblyProfileDataTests.NonemptyInactiveLegacyPayload_IsRejected" methodname="NonemptyInactiveLegacyPayload_IsRejected" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="168901899" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.003724" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1063" name="PopulatedOppositeRecipeVariant_IsRejected" fullname="PaperDefense.Tests.AssemblyProfileDataTests.PopulatedOppositeRecipeVariant_IsRejected" methodname="PopulatedOppositeRecipeVariant_IsRejected" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1808582182" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.003480" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1110" name="ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.067189" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1105" name="ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry(&quot;entries&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry(&quot;entries&quot;)" methodname="ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1960374381" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.018395" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1106" name="ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry(&quot;library&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry(&quot;library&quot;)" methodname="ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="410056308" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.007810" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1107" name="ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry(&quot;rewards&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry(&quot;rewards&quot;)" methodname="ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="960090878" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.006540" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1108" name="ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry(&quot;operations&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry(&quot;operations&quot;)" methodname="ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="164378085" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.005160" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1109" name="ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry(&quot;legacyAlbum&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry(&quot;legacyAlbum&quot;)" methodname="ProfilePreflight_LaterFutureDataWinsOverEarlierMalformedEntry" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="322343217" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.005075" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1116" name="ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.082807" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1111" name="ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling(&quot;entries&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling(&quot;entries&quot;)" methodname="ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="368509414" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.005762" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1112" name="ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling(&quot;library&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling(&quot;library&quot;)" methodname="ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="917679222" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.005520" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1113" name="ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling(&quot;rewards&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling(&quot;rewards&quot;)" methodname="ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1997445866" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.005885" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1114" name="ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling(&quot;operations&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling(&quot;operations&quot;)" methodname="ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1057151012" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.005149" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1115" name="ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling(&quot;legacyAlbum&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling(&quot;legacyAlbum&quot;)" methodname="ProfilePreflight_LaterFutureSiblingWinsOverEarlierMalformedSibling" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1400476359" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.005183" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1120" name="ProfilePreflight_LaterUnknownEntryPartWinsOverEarlierMalformedEntry" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterUnknownEntryPartWinsOverEarlierMalformedEntry" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.088008" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1118" name="ProfilePreflight_LaterUnknownEntryPartWinsOverEarlierMalformedEntry(&quot;id&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterUnknownEntryPartWinsOverEarlierMalformedEntry(&quot;id&quot;)" methodname="ProfilePreflight_LaterUnknownEntryPartWinsOverEarlierMalformedEntry" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1660506255" result="Failed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.010638" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  An unknown embedded identity must protect the entire source despite an earlier malformed page.
+  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterUnknownEntryPartWinsOverEarlierMalformedEntry (System.String identity) [0x00084] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:327
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1119" name="ProfilePreflight_LaterUnknownEntryPartWinsOverEarlierMalformedEntry(&quot;revision&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterUnknownEntryPartWinsOverEarlierMalformedEntry(&quot;revision&quot;)" methodname="ProfilePreflight_LaterUnknownEntryPartWinsOverEarlierMalformedEntry" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1051427046" result="Failed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.006101" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  An unknown embedded identity must protect the entire source despite an earlier malformed page.
+  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterUnknownEntryPartWinsOverEarlierMalformedEntry (System.String identity) [0x00084] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:327
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1125" name="ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.141121" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1121" name="ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling(True,&quot;id&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling(True,&quot;id&quot;)" methodname="ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="389134724" result="Failed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.013775" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  A malformed library sibling must not hide a later unknown embedded identity.
+  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling (System.Boolean foundationKind, System.String identity) [0x0011d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:346
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1122" name="ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling(True,&quot;revision&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling(True,&quot;revision&quot;)" methodname="ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="2087386456" result="Failed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.013279" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  A malformed library sibling must not hide a later unknown embedded identity.
+  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling (System.Boolean foundationKind, System.String identity) [0x0011d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:346
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1123" name="ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling(False,&quot;id&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling(False,&quot;id&quot;)" methodname="ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1628618820" result="Failed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.015884" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  A malformed library sibling must not hide a later unknown embedded identity.
+  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling (System.Boolean foundationKind, System.String identity) [0x0011d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:346
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1124" name="ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling(False,&quot;revision&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling(False,&quot;revision&quot;)" methodname="ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1448249932" result="Failed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.014676" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  A malformed library sibling must not hide a later unknown embedded identity.
+  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_LaterUnknownLibraryPartWinsOverEarlierMalformedSibling (System.Boolean foundationKind, System.String identity) [0x0011d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:346
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="1117" name="ProfilePreflight_MalformedOnlyDataRemainsRecoverable" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_MalformedOnlyDataRemainsRecoverable" methodname="ProfilePreflight_MalformedOnlyDataRemainsRecoverable" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="126341189" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.007525" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1129" name="ProfilePreflight_MalformedPartReferencesRemainRecoverable" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_MalformedPartReferencesRemainRecoverable" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.051062" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1126" name="ProfilePreflight_MalformedPartReferencesRemainRecoverable(&quot;emptyId&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_MalformedPartReferencesRemainRecoverable(&quot;emptyId&quot;)" methodname="ProfilePreflight_MalformedPartReferencesRemainRecoverable" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="409473660" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.006986" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1127" name="ProfilePreflight_MalformedPartReferencesRemainRecoverable(&quot;zeroRevision&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_MalformedPartReferencesRemainRecoverable(&quot;zeroRevision&quot;)" methodname="ProfilePreflight_MalformedPartReferencesRemainRecoverable" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1938365147" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.005563" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1128" name="ProfilePreflight_MalformedPartReferencesRemainRecoverable(&quot;nullDefinitions&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ProfilePreflight_MalformedPartReferencesRemainRecoverable(&quot;nullDefinitions&quot;)" methodname="ProfilePreflight_MalformedPartReferencesRemainRecoverable" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="123360997" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.005237" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1133" name="ReceiptDtos_RoundTripGuidStringsAndProgress" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ReceiptDtos_RoundTripGuidStringsAndProgress" methodname="ReceiptDtos_RoundTripGuidStringsAndProgress" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="52825169" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.000372" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1060" name="StructureEntry_RoundTripsWithoutTowerVariantPayload" fullname="PaperDefense.Tests.AssemblyProfileDataTests.StructureEntry_RoundTripsWithoutTowerVariantPayload" methodname="StructureEntry_RoundTripsWithoutTowerVariantPayload" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1930545845" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.004879" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1059" name="TowerEntry_RoundTripsOwnedRecipeAndDefinitions" fullname="PaperDefense.Tests.AssemblyProfileDataTests.TowerEntry_RoundTripsOwnedRecipeAndDefinitions" methodname="TowerEntry_RoundTripsOwnedRecipeAndDefinitions" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="425965927" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.004920" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1080" name="UnknownEmbeddedEnums_ProtectSource" fullname="PaperDefense.Tests.AssemblyProfileDataTests.UnknownEmbeddedEnums_ProtectSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.078479" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1078" name="UnknownEmbeddedEnums_ProtectSource(&quot;category&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.UnknownEmbeddedEnums_ProtectSource(&quot;category&quot;)" methodname="UnknownEmbeddedEnums_ProtectSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1499287934" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.003946" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1079" name="UnknownEmbeddedEnums_ProtectSource(&quot;modifier&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.UnknownEmbeddedEnums_ProtectSource(&quot;modifier&quot;)" methodname="UnknownEmbeddedEnums_ProtectSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="286423902" result="Passed" start-time="2026-10-18 04:20:26Z" end-time="2026-10-18 04:20:26Z" duration="0.003543" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task4-revision-guard-red.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

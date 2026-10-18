@@ -50,7 +50,7 @@ namespace PaperDefense.Tests
         }
         Button Card(int index) => root.GetComponentsInChildren<Button>(true).Single(button => button.name == "Tool " + index);
 
-        [Test] public void MainPresetShowsTwelveNonOverlappingIconCardsAndAllSixFamilies()
+        [Test] public void MainPresetShowsEightLoadoutAndEightToolCardsWithoutOverlapAndAllSixFamilies()
         {
             Open(true);
             Assert.That(run.Session.Battlefield, Is.Not.Null);
@@ -64,24 +64,34 @@ namespace PaperDefense.Tests
                 foreach (DrawingTier tier in Enum.GetValues(typeof(DrawingTier)))
                     foreach (NotebookEnemyMotion motion in Enum.GetValues(typeof(NotebookEnemyMotion)))
                         Assert.That(theme.FindClip(NotebookAnimationState.EnemyId(kind, tier, motion)), Is.Not.Null, kind + "/" + tier + "/" + motion);
-            var cards = Enumerable.Range(0, 12).Select(Card).ToArray();
+            var cards = Enumerable.Range(0, ProfileLimits.LoadoutSlotCount + icons.Length).Select(Card).ToArray();
             Assert.That(cards.All(card => card.gameObject.activeSelf), Is.True);
             var ordered = cards.Select(card => card.GetComponent<RectTransform>()).OrderBy(rect => rect.anchoredPosition.x).ToArray();
             for (int i = 0; i < ordered.Length; i++)
             {
+                Assert.That(ordered[i].anchoredPosition.x, Is.GreaterThanOrEqualTo(0));
                 Assert.That(ordered[i].anchoredPosition.x + ordered[i].rect.width, Is.LessThanOrEqualTo(1552));
                 if (i > 0) Assert.That(ordered[i].anchoredPosition.x, Is.GreaterThan(ordered[i - 1].anchoredPosition.x + ordered[i - 1].rect.width));
             }
-            Assert.That(cards.Take(4).All(card => card.GetComponentInChildren<BlueprintSketch>(true) != null), Is.True);
-            Assert.That(cards.Skip(4).All(card => card.GetComponentInChildren<NotebookArtGraphic>(true) != null), Is.True);
+            Assert.That(cards.Take(ProfileLimits.LoadoutSlotCount).All(card => card.GetComponentInChildren<BlueprintSketch>(true) != null), Is.True);
+            Assert.That(cards.Skip(ProfileLimits.LoadoutSlotCount).All(card => card.GetComponentInChildren<NotebookArtGraphic>(true) != null), Is.True);
+            foreach (var card in cards)
+            {
+                var bounds = card.GetComponent<RectTransform>();
+                foreach (var child in card.GetComponentsInChildren<RectTransform>(true).Where(child => child.parent == card.transform))
+                {
+                    Assert.That(child.anchoredPosition.x, Is.GreaterThanOrEqualTo(0), card.name + "/" + child.name);
+                    Assert.That(child.anchoredPosition.x + child.rect.width, Is.LessThanOrEqualTo(bounds.rect.width), card.name + "/" + child.name);
+                }
+            }
             var navigation = (Text)typeof(NotebookHud).GetField("navigationHint", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(hud);
             Assert.That(navigation.text, Does.Contain("дёготь").And.Contain("ремонт"));
         }
 
-        [TestCase(10, StructureKind.TarPit)]
-        [TestCase(11, StructureKind.RepairPost)]
-        [TestCase(4, StructureKind.Wall)]
-        [TestCase(5, StructureKind.Spikes)]
+        [TestCase(ProfileLimits.LoadoutSlotCount + 6, StructureKind.TarPit)]
+        [TestCase(ProfileLimits.LoadoutSlotCount + 7, StructureKind.RepairPost)]
+        [TestCase(ProfileLimits.LoadoutSlotCount, StructureKind.Wall)]
+        [TestCase(ProfileLimits.LoadoutSlotCount + 1, StructureKind.Spikes)]
         public void NewToolCardSelectionPriceAndLegalPlacementAgreeWithCore(int index, StructureKind kind)
         {
             Open(true); Card(index).onClick.Invoke();
@@ -114,7 +124,8 @@ namespace PaperDefense.Tests
             Assert.That(run.Session.Balance.HasStructure(StructureKind.RepairPost), Is.False);
             var navigation = (Text)typeof(NotebookHud).GetField("navigationHint", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(hud);
             Assert.That(navigation.text, Does.Not.Contain("дёготь").And.Not.Contain("ремонт"));
-            foreach (int index in new[] { 10, 11 }) Assert.That(Card(index).gameObject.activeSelf, Is.False);
+            foreach (int index in new[] { ProfileLimits.LoadoutSlotCount + 6, ProfileLimits.LoadoutSlotCount + 7 })
+                Assert.That(Card(index).gameObject.activeSelf, Is.False);
             foreach (bool constructionOnly in new[] { false, true })
             {
                 input.ConstructionOnly = constructionOnly;

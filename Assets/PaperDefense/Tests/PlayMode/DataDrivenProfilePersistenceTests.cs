@@ -31,10 +31,6 @@ namespace PaperDefense.Tests
         {
             var profile = new WorkshopProfile(); profile.GrantGold(321); profile.Unlock("module.tracking", out _);
             var data = HistoricalProfileTestData.Create(profile, version);
-            if (version >= 4)
-            {
-                data = profile.ToData(); data.Version = version;
-            }
             File.WriteAllText(path, JsonUtility.ToJson(data, true), new UnicodeEncoding(false, true));
             byte[] source = File.ReadAllBytes(path);
             var store = new WorkshopProfileStore(path); var loaded = store.Load();
@@ -52,10 +48,10 @@ namespace PaperDefense.Tests
         [TestCase(false)] [TestCase(true)]
         public void VersionFiveEmptyAndPartiallyAssignedAlbumsSurviveSaveRestartAndRewardWrite(bool assignOne)
         {
-            var data = new WorkshopProfile().ToData();data.Version=5;
+            var data = HistoricalProfileTestData.Create(new WorkshopProfile(), 5);
             var page = data.Album[0];
             data.Album = assignOne ? new[] { page } : Array.Empty<BlueprintData>();
-            data.Loadout = new string[ProfileLimits.LoadoutSlotCount];
+            data.Loadout = new string[ProfileLimits.HistoricalLoadoutSlotCount];
             if (assignOne) data.Loadout[2] = page.Id;
             data.Gold = 27;
             var profile = WorkshopProfile.FromData(data);
@@ -73,7 +69,8 @@ namespace PaperDefense.Tests
             Assert.That(restarted.Save(loaded.Profile).Success, Is.True);
             var final = new WorkshopProfileStore(path).Load();
             Assert.That(final.Profile.Gold, Is.EqualTo(30));
-            Assert.That(final.Profile.Loadout, Is.EqualTo(data.Loadout));
+            Assert.That(final.Profile.Loadout.Take(ProfileLimits.HistoricalLoadoutSlotCount), Is.EqualTo(data.Loadout));
+            Assert.That(final.Profile.Loadout.Skip(ProfileLimits.HistoricalLoadoutSlotCount), Is.All.Null);
             Assert.That(final.Profile.Album.Count, Is.EqualTo(assignOne ? 1 : 0));
         }
 
@@ -85,7 +82,7 @@ namespace PaperDefense.Tests
             });
             var page = new TowerBlueprint("unknown.page", "Unknown preserved", "chassis.future", "weapon.future",
                 modules: new[] { new ModuleSelection("future-slot", "module.future") }, drawing: drawing, origin: DrawingOrigin.PlayerDrawing);
-            var data = new WorkshopProfile().ToData();
+            var data = HistoricalProfileTestData.Create(new WorkshopProfile(), 7);
             data.Album = data.Album.Concat(new[] { new BlueprintData(page) }).ToArray();
             data.Unlocked = data.Unlocked.Concat(new[] { "chassis.future", "weapon.future", "module.future" }).ToArray();
             data.Loadout[0] = page.Id; data.Gold = 217;

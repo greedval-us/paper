@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Reflection;
+using System.Collections.Generic;
 using NUnit.Framework;
 using PaperDefense.Application;
 using PaperDefense.Core;
@@ -74,19 +75,47 @@ namespace PaperDefense.Tests
             var root = new GameObject("Isolated rail thumbnail", typeof(RectTransform), typeof(CanvasRenderer), typeof(BlueprintSketch));
             try
             {
-                var pen = new MeshPen(mesh); DoodleGlyphs.StructureBase(pen, model.Structures[0]); pen.Upload(); int before = mesh.vertexCount;
-                pen.Clear(); DoodleGlyphs.StructureBase(pen, model.Structures[1]); pen.Upload();
-                Assert.That(mesh.vertexCount, Is.GreaterThan(before), "A standard page must display its rail equipment.");
+                Assert.That(NotebookSpriteCatalog.TryGet("module.rail", out var sprite), Is.True);
+                var pen = new MeshPen(mesh);
+                DoodleGlyphs.StructureBase(pen, model.Structures[0]); DoodleGlyphs.StructureDynamic(pen, model.Structures[0], 1); pen.Upload();
+                var worldUvs = new List<Vector2>(); mesh.GetUVs(1, worldUvs);
+                Assert.That(ContainsSpriteQuad(worldUvs, sprite), Is.False, "The plain world assembly has no rail illustration.");
+                pen.Clear(); DoodleGlyphs.StructureBase(pen, model.Structures[1]); DoodleGlyphs.StructureDynamic(pen, model.Structures[1], 1); pen.Upload();
+                worldUvs.Clear(); mesh.GetUVs(1, worldUvs);
+                Assert.That(ContainsSpriteQuad(worldUvs, sprite), Is.True, "The world assembly must display the actual rail atlas quad.");
                 var sketch = root.GetComponent<BlueprintSketch>();
                 var populate = typeof(BlueprintSketch).GetMethod("OnPopulateMesh", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
                 using (var vh = new VertexHelper())
                 {
-                    sketch.SetBlueprint(plain); populate.Invoke(sketch, new object[] { vh }); int plainCount = vh.currentVertCount;
+                    sketch.SetBlueprint(plain); populate.Invoke(sketch, new object[] { vh });
+                    Assert.That(ContainsSpriteQuad(UiUvs(vh), sprite), Is.False, "The plain album assembly has no rail illustration.");
                     sketch.SetBlueprint(rail); populate.Invoke(sketch, new object[] { vh });
-                    Assert.That(vh.currentVertCount, Is.GreaterThan(plainCount));
+                    Assert.That(ContainsSpriteQuad(UiUvs(vh), sprite), Is.True, "The album assembly must display the actual rail atlas quad.");
                 }
             }
             finally { Object.DestroyImmediate(mesh); Object.DestroyImmediate(root); }
+        }
+
+        static Vector2[] UiUvs(VertexHelper mesh)
+        {
+            var result = new Vector2[mesh.currentVertCount]; var vertex = new UIVertex();
+            for (int i = 0; i < result.Length; i++) { mesh.PopulateUIVertex(ref vertex, i); result[i] = (Vector2)vertex.uv0; }
+            return result;
+        }
+
+        static bool ContainsSpriteQuad(IReadOnlyList<Vector2> coordinates, Sprite sprite)
+        {
+            var r = sprite.rect; float width = sprite.texture.width, height = sprite.texture.height;
+            var corners = new[] { new Vector2(r.xMin / width, r.yMin / height), new Vector2(r.xMax / width, r.yMin / height),
+                new Vector2(r.xMax / width, r.yMax / height), new Vector2(r.xMin / width, r.yMax / height) };
+            for (int first = 0; first + 3 < coordinates.Count; first++)
+            {
+                bool match = true;
+                for (int corner = 0; corner < 4; corner++)
+                    match &= Vector2.Distance(coordinates[first + corner], corners[corner]) < .000001f;
+                if (match) return true;
+            }
+            return false;
         }
 
         [Test] public void DormantRailStrokesStayStoredButDoNotAppearWithoutTheModule()

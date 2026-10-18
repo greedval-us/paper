@@ -7,6 +7,10 @@ namespace PaperDefense.Application
     {
         readonly WorkshopProfile source;
         public int Gold=>source.Gold;
+        public int TotalXp => source.TotalXp;
+        public IReadOnlyList<AlbumEntry> Entries => source.Entries;
+        public IReadOnlyList<ComponentLibraryEntry> Library => source.Library;
+        public IReadOnlyList<AlbumEntry> LoadoutEntries => source.GetLoadoutEntries();
         public IReadOnlyList<TowerBlueprint> Album { get; private set; }
         public IReadOnlyList<PartUnlock> Parts { get; private set; }
         public IReadOnlyList<DrawingUnlockDefinition> DrawingUnlocks { get; private set; }

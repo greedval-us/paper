@@ -151,8 +151,8 @@ namespace PaperDefense.Presentation
         }
 
         internal static bool Supports(TowerBlueprint blueprint) => blueprint != null && !blueprint.HasPlayerDrawing
-            && blueprint.ChassisId == "chassis.standard" && blueprint.WeaponMounts.Count > 0
-            && blueprint.WeaponMounts.All(m => m.WeaponId == "weapon.gun")
+            && blueprint.ChassisId == "chassis.standard" && blueprint.WeaponMounts.Count > 0 && blueprint.WeaponMounts.Count <= 2
+            && blueprint.WeaponMounts.All(m => m.SlotIndex < 2 && m.WeaponId == "weapon.gun")
             && blueprint.ModuleSelections.All(m => m.DefinitionId == "module.armor");
 
         // Compatibility bridge until profile recipe migration (task 4). No saved blueprint is mutated.

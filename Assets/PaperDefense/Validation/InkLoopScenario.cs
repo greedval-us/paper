@@ -67,9 +67,9 @@ namespace PaperDefense.Validation
 
         static IReadOnlyList<TowerBlueprint> PrepareLoadout(IReadOnlyList<TowerBlueprint> suppliedLoadout, GameBalance balance)
         {
-            if(suppliedLoadout.Count!=ProfileLimits.LoadoutSlotCount)
+            if(suppliedLoadout.Count!=ProfileLimits.HistoricalLoadoutSlotCount)
                 throw new ArgumentException("suppliedLoadout must contain exactly four valid blueprint pages.",nameof(suppliedLoadout));
-            var owned=new TowerBlueprint[ProfileLimits.LoadoutSlotCount];
+            var owned=new TowerBlueprint[ProfileLimits.HistoricalLoadoutSlotCount];
             for(int i=0;i<owned.Length;i++)
             {
                 var page=suppliedLoadout[i];

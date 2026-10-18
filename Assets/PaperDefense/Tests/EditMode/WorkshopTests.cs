@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using PaperDefense.Core;
 
@@ -87,8 +88,9 @@ namespace PaperDefense.Tests
         {
             var profile = new WorkshopProfile();
             Assert.That(profile.Gold, Is.Zero);
-            Assert.That(profile.Loadout.Count, Is.EqualTo(4));
-            foreach (var blueprint in profile.GetLoadoutBlueprints())
+            Assert.That(profile.Loadout.Count, Is.EqualTo(ProfileLimits.LoadoutSlotCount));
+            Assert.That(profile.Loadout.Skip(ProfileLimits.HistoricalLoadoutSlotCount), Is.All.Null);
+            foreach (var blueprint in profile.GetLoadoutBlueprints().Take(ProfileLimits.HistoricalLoadoutSlotCount))
                 Assert.That(profile.ValidateOwned(blueprint, out string reason), Is.True, reason);
             Assert.That(profile.GetLoadoutBlueprints()[1].SecondWeapon, Is.EqualTo(StructureKind.Gun));
         }
@@ -120,7 +122,8 @@ namespace PaperDefense.Tests
                 FirstWeapon = StructureKind.Gun, Modules = TowerModules.Tracking } };
             data.Loadout = new[] { "cheat", "cheat", "missing", "" };
             var restored = WorkshopProfile.FromData(data);
-            foreach (var blueprint in restored.GetLoadoutBlueprints())
+            Assert.That(restored.Loadout.Skip(ProfileLimits.HistoricalLoadoutSlotCount), Is.All.Null);
+            foreach (var blueprint in restored.GetLoadoutBlueprints().Take(ProfileLimits.HistoricalLoadoutSlotCount))
                 Assert.That(restored.ValidateOwned(blueprint, out _), Is.True);
             Assert.That(restored.IsUnlocked("module.tracking"), Is.False);
         }
@@ -147,7 +150,10 @@ namespace PaperDefense.Tests
             var restored = WorkshopProfile.FromData(profile.ToData());
             Assert.That(restored.Gold, Is.EqualTo(profile.Gold));
             Assert.That(restored.IsUnlocked("chassis.heavy"), Is.True);
-            Assert.That(new HashSet<string>(restored.Loadout).Count, Is.EqualTo(4));
+            Assert.That(restored.Loadout.Count, Is.EqualTo(ProfileLimits.LoadoutSlotCount));
+            Assert.That(restored.Loadout.Take(ProfileLimits.HistoricalLoadoutSlotCount), Is.EqualTo(profile.Loadout.Take(ProfileLimits.HistoricalLoadoutSlotCount)));
+            Assert.That(restored.Loadout.Take(ProfileLimits.HistoricalLoadoutSlotCount).Distinct().Count(), Is.EqualTo(ProfileLimits.HistoricalLoadoutSlotCount));
+            Assert.That(restored.Loadout.Skip(ProfileLimits.HistoricalLoadoutSlotCount), Is.All.Null);
             Assert.That(restored.AssignSlot(0, restored.Loadout[1], out _), Is.False);
         }
 
@@ -202,9 +208,10 @@ namespace PaperDefense.Tests
             WorkshopProfile restored = WorkshopProfile.FromData(data);
             Assert.That(restored.Album.Count, Is.EqualTo(64));
             Assert.That(restored.Album[63].Id, Is.EqualTo("saved63"));
-            Assert.That(new HashSet<string>(restored.Loadout).Count, Is.EqualTo(4));
+            Assert.That(restored.Loadout.Take(ProfileLimits.HistoricalLoadoutSlotCount).Distinct().Count(), Is.EqualTo(ProfileLimits.HistoricalLoadoutSlotCount));
+            Assert.That(restored.Loadout.Skip(ProfileLimits.HistoricalLoadoutSlotCount), Is.All.Null);
             Assert.That(restored.IsUnlocked("weapon.gun"), Is.True);
-            foreach (TowerBlueprint blueprint in restored.GetLoadoutBlueprints())
+            foreach (TowerBlueprint blueprint in restored.GetLoadoutBlueprints().Take(ProfileLimits.HistoricalLoadoutSlotCount))
                 Assert.That(restored.ValidateOwned(blueprint, out _), Is.True);
         }
 

@@ -154,7 +154,7 @@ namespace PaperDefense.Tests
         [Test] public void ReplacingRemovedWeaponWithCatalogEntryRestoresItsDrawingEditor()
         {
             Initialize();
-            var data=new WorkshopProfile().ToData();
+            var data=HistoricalProfileTestData.Create(new WorkshopProfile(),7);
             var line=new DrawingStroke(new[]{new DrawingPoint(-.1f,0),new DrawingPoint(.1f,.4f)});
             var missing=new TowerBlueprint(data.Album[0].Id,"Removed weapon page","chassis.standard","weapon.removed",
                 drawing:new DrawingSnapshot(new[]{new DrawingPart(DrawingBindings.Base,new[]{line})}),origin:DrawingOrigin.PlayerDrawing);

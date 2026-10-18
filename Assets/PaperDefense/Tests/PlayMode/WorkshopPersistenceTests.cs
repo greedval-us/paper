@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 using PaperDefense.Application;
@@ -75,8 +76,9 @@ namespace PaperDefense.Tests
             WorkshopProfile restored = WorkshopPersistence.Load(path);
             Assert.That(WorkshopPersistence.LastError, Is.Not.Empty);
             Assert.That(restored.Gold, Is.Zero);
-            Assert.That(restored.Loadout.Count, Is.EqualTo(4));
-            foreach (TowerBlueprint blueprint in restored.GetLoadoutBlueprints())
+            Assert.That(restored.Loadout.Count, Is.EqualTo(ProfileLimits.LoadoutSlotCount));
+            Assert.That(restored.Loadout.Skip(ProfileLimits.HistoricalLoadoutSlotCount), Is.All.Null);
+            foreach (TowerBlueprint blueprint in restored.GetLoadoutBlueprints().Take(ProfileLimits.HistoricalLoadoutSlotCount))
                 Assert.That(restored.ValidateOwned(blueprint, out _), Is.True);
         }
 
@@ -94,8 +96,9 @@ namespace PaperDefense.Tests
             Assert.That(restored.Gold, Is.Zero);
             Assert.That(restored.IsUnlocked("chassis.heavy"), Is.False);
             Assert.That(restored.IsUnlocked("module.tracking"), Is.False);
-            Assert.That(new HashSet<string>(restored.Loadout).Count, Is.EqualTo(4));
-            foreach (TowerBlueprint blueprint in restored.GetLoadoutBlueprints())
+            Assert.That(restored.Loadout.Take(ProfileLimits.HistoricalLoadoutSlotCount).Distinct().Count(), Is.EqualTo(ProfileLimits.HistoricalLoadoutSlotCount));
+            Assert.That(restored.Loadout.Skip(ProfileLimits.HistoricalLoadoutSlotCount), Is.All.Null);
+            foreach (TowerBlueprint blueprint in restored.GetLoadoutBlueprints().Take(ProfileLimits.HistoricalLoadoutSlotCount))
                 Assert.That(restored.ValidateOwned(blueprint, out _), Is.True);
         }
 

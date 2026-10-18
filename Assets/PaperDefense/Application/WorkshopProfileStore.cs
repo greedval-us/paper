@@ -13,8 +13,9 @@ namespace PaperDefense.Application
         public ProfileLoadSource Source { get; }
         public string Message { get; }
         public bool CanWrite { get; }
-        public ProfileLoadResult(WorkshopProfile profile, ProfileLoadSource source, string message, bool canWrite)
-        { Profile = profile; Source = source; Message = message ?? ""; CanWrite = canWrite; }
+        public bool RequiresMigration { get; }
+        public ProfileLoadResult(WorkshopProfile profile, ProfileLoadSource source, string message, bool canWrite, bool requiresMigration = false)
+        { Profile = profile; Source = source; Message = message ?? ""; CanWrite = canWrite; RequiresMigration = requiresMigration; }
     }
     public sealed class ProfileSaveResult
     {
@@ -41,17 +42,21 @@ namespace PaperDefense.Application
     {
         readonly string path;
         readonly IWorkshopProfileIO io;
+        readonly ComponentCatalog catalog;
+        readonly GameBalance legacyBalance;
         bool loaded, protectedSource;
         string protectionMessage = "";
         SourceRead compatibleSource;
         public string LastDiagnostic { get; private set; }
         const int MaximumJsonBytes = 32 * 1024 * 1024;
 
-        public WorkshopProfileStore(string path, IWorkshopProfileIO io = null)
+        public WorkshopProfileStore(string path, IWorkshopProfileIO io = null, ComponentCatalog catalog = null, GameBalance legacyBalance = null)
         {
             if (string.IsNullOrEmpty(path)) throw new ArgumentException(UserText.Message("copy.4f8c45706d1efa1c"), nameof(path));
             this.path = Path.GetFullPath(path);
             this.io = io ?? new WorkshopProfileFileIO();
+            this.catalog = catalog;
+            this.legacyBalance = legacyBalance;
         }
 
         public ProfileLoadResult Load()
@@ -66,7 +71,7 @@ namespace PaperDefense.Application
             }
             // A store that has seen an unsafe source never silently becomes writable on retry.
             if (protectedSource && result.CanWrite)
-                return new ProfileLoadResult(result.Profile, ProfileLoadSource.RecoveryRequired, protectionMessage, false);
+                return new ProfileLoadResult(result.Profile, ProfileLoadSource.RecoveryRequired, protectionMessage, false, result.RequiresMigration);
             return result;
         }
 
@@ -92,6 +97,9 @@ namespace PaperDefense.Application
                 string canonical = JsonUtility.ToJson(candidate);
                 ValidateCandidate(canonical, canonical);
                 string serialized = JsonUtility.ToJson(candidate, true);
+                // Full legacy drawing albums can exceed the read limit through indentation alone.
+                // The already validated compact form preserves the complete DTO within the same limit.
+                if (Encoding.UTF8.GetByteCount(serialized) > MaximumJsonBytes) serialized = canonical;
                 ValidateCandidate(serialized, canonical);
                 string folder = Path.GetDirectoryName(path);
                 if (!string.IsNullOrEmpty(folder)) io.CreateDirectory(folder);
@@ -137,7 +145,8 @@ namespace PaperDefense.Application
             if (primary.Kind == SourceKind.Valid)
             {
                 compatibleSource = primary;
-                return new ProfileLoadResult(primary.Profile, ProfileLoadSource.Primary, "", true);
+                return new ProfileLoadResult(primary.Profile, ProfileLoadSource.Primary, "", true,
+                    primary.Version < WorkshopProfile.CurrentVersion);
             }
             if (primary.Kind == SourceKind.Future || primary.Kind == SourceKind.Failure)
                 return Recovery(primary.Message);
@@ -149,10 +158,12 @@ namespace PaperDefense.Application
                 return new ProfileLoadResult(backup.Profile, ProfileLoadSource.Backup,
                     primary.Kind == SourceKind.Corrupt
                         ? UserText.Message("copy.080ccb22e8fd751f")
-                        : UserText.Message("copy.4faf04ac2281dfea"), true);
+                        : UserText.Message("copy.4faf04ac2281dfea"), true,
+                    backup.Version < WorkshopProfile.CurrentVersion);
             }
             if (primary.Kind == SourceKind.Missing && backup.Kind == SourceKind.Missing)
-                return new ProfileLoadResult(new WorkshopProfile(), ProfileLoadSource.NewProfile, "", true);
+                return new ProfileLoadResult(WorkshopProfile.CreateNew(catalog, legacyBalance?.ResolveContent(), legacyBalance),
+                    ProfileLoadSource.NewProfile, "", true);
             return Recovery(UserText.Message("copy.9a7f65a4cb32092f", primary.Message, backup.Message));
         }
 
@@ -181,7 +192,7 @@ namespace PaperDefense.Application
                 if (version < 1 || version > WorkshopProfile.CurrentVersion) throw new InvalidDataException(UserText.Message("copy.0ecaed17b95a05bc"));
                 var data = JsonUtility.FromJson<WorkshopProfileData>(json);
                 if (data == null) throw new InvalidDataException(UserText.Message("copy.46070c4c3dff7836"));
-                return new SourceRead(SourceKind.Valid, WorkshopProfile.FromData(data), "", version, json, file);
+                return new SourceRead(SourceKind.Valid, WorkshopProfile.FromData(data, catalog, legacyBalance), "", version, json, file);
             }
             catch (NotSupportedException error)
             { LastDiagnostic = error.ToString(); return new SourceRead(SourceKind.Future, null, UserText.Message("profile.error.future_schema")); }
@@ -201,13 +212,13 @@ namespace PaperDefense.Application
             return version.Version;
         }
 
-        static void ValidateCandidate(string json, string expectedCanonical)
+        void ValidateCandidate(string json, string expectedCanonical)
         {
             if (ReadVersion(json) != WorkshopProfile.CurrentVersion) throw new InvalidDataException(UserText.Message("copy.2a929baad02aaaad"));
             var candidate = JsonUtility.FromJson<WorkshopProfileData>(json);
             if (candidate == null || JsonUtility.ToJson(candidate) != expectedCanonical)
                 throw new InvalidDataException(UserText.Message("copy.5c3e3703a7f7927e"));
-            WorkshopProfile.FromData(candidate);
+            WorkshopProfile.FromData(candidate, catalog, legacyBalance);
         }
 
         void PreserveHistoricalOriginal(SourceRead source)
@@ -216,8 +227,9 @@ namespace PaperDefense.Application
             string original = path + ".v" + source.Version + "-original";
             try
             {
-                if (io.ReadAllText(original) == source.Json) return;
-                // An earlier migration original is evidence too; never replace it.
+                io.ReadAllText(original);
+                // Decoded text equality cannot prove that the original encoding and bytes match.
+                // An earlier migration original is evidence too; preserve a fresh exact copy separately.
                 original += "-" + Guid.NewGuid().ToString("N");
             }
             catch (FileNotFoundException) { }

@@ -49,7 +49,7 @@ namespace PaperDefense.Tests
         [UnityTest] public IEnumerator NormalBootOpensWorkshopAndStartUsesFourBlueprints()
         {
             Assert.That(game.Controller.InWorkshop, Is.True);
-            Assert.That(game.Controller.Workshop.Loadout.Count, Is.EqualTo(4));
+            Assert.That(game.Controller.Workshop.Loadout.Count, Is.EqualTo(ProfileLimits.LoadoutSlotCount));
             Assert.That(root.GetComponentsInChildren<WorkshopHud>(true).Length, Is.EqualTo(1));
             long tick = game.Controller.Session.TickIndex;
             yield return null;
@@ -141,7 +141,16 @@ namespace PaperDefense.Tests
             var hud = root.GetComponentInChildren<NotebookHud>(true);
             var blueprints = hud.GetComponentsInChildren<BlueprintSketch>();
             Assert.That(blueprints.Length, Is.EqualTo(ProfileLimits.LoadoutSlotCount));
-            foreach (var blueprint in blueprints) AssertRendered(blueprint);
+            for (int i = 0; i < blueprints.Length; i++)
+            {
+                if (game.Controller.BuildLoadout[i] != null) AssertRendered(blueprints[i]);
+                else
+                {
+                    var mesh = blueprints[i].GetComponent<CanvasRenderer>().GetMesh();
+                    Assert.That(mesh == null || mesh.vertexCount == 0, Is.True, "An empty slot must not show another page's artwork.");
+                    Assert.That(blueprints[i].GetComponentInParent<Button>().interactable, Is.False);
+                }
+            }
             var icons = hud.GetComponentsInChildren<NotebookArtGraphic>();
             Assert.That(icons.Length, Is.GreaterThanOrEqualTo(4), "Every available construction/action card has visible art.");
             foreach (var icon in icons) AssertRendered(icon);

@@ -23,7 +23,7 @@ namespace PaperDefense.Application
         {
             this.store = store;
             canWrite = loaded.CanWrite && loaded.Source != ProfileLoadSource.RecoveryRequired;
-            dirty = canWrite && (loaded.Source == ProfileLoadSource.NewProfile || loaded.Source == ProfileLoadSource.Backup);
+            dirty = canWrite && (loaded.Source == ProfileLoadSource.NewProfile || loaded.Source == ProfileLoadSource.Backup || loaded.RequiresMigration);
             lastWriteError = "";
             state = !canWrite ? ProfileSaveState.RecoveryRequired : dirty ? ProfileSaveState.Unsaved : ProfileSaveState.Saved;
             message = loaded.Message;

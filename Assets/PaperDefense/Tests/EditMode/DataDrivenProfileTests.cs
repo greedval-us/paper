@@ -114,9 +114,10 @@ namespace PaperDefense.Tests
             var fresh = new WorkshopProfile(balance.Content);
             Assert.That(fresh.IsUnlocked("weapon.gun"), Is.False);
             Assert.That(fresh.IsUnlocked("chassis.profile-test"), Is.True);
-            Assert.That(fresh.GetLoadoutBlueprints().Count, Is.EqualTo(4));
+            Assert.That(fresh.GetLoadoutBlueprints().Count, Is.EqualTo(ProfileLimits.LoadoutSlotCount));
+            Assert.That(fresh.Loadout.Skip(ProfileLimits.HistoricalLoadoutSlotCount), Is.All.Null);
             Assert.That(fresh.GetLoadoutBlueprints()[0], Is.Null);
-            foreach (var page in fresh.GetLoadoutBlueprints())
+            foreach (var page in fresh.GetLoadoutBlueprints().Take(ProfileLimits.HistoricalLoadoutSlotCount))
             {
                 if (page == null) continue;
                 Assert.That(page.FirstWeaponId, Is.Not.EqualTo("weapon.gun"));
@@ -142,9 +143,11 @@ namespace PaperDefense.Tests
             });
             var content = input.CreateSnapshot();
             var fresh = new WorkshopProfile(content);
-            Assert.That(fresh.Loadout.Distinct().Count(), Is.EqualTo(4));
+            Assert.That(fresh.Loadout.Count, Is.EqualTo(ProfileLimits.LoadoutSlotCount));
+            Assert.That(fresh.Loadout.Take(ProfileLimits.HistoricalLoadoutSlotCount).Distinct().Count(), Is.EqualTo(ProfileLimits.HistoricalLoadoutSlotCount));
+            Assert.That(fresh.Loadout.Skip(ProfileLimits.HistoricalLoadoutSlotCount), Is.All.Null);
             Assert.That(fresh.IsUnlocked("weapon.gun"), Is.False);
-            foreach (var page in fresh.GetLoadoutBlueprints())
+            foreach (var page in fresh.GetLoadoutBlueprints().Take(ProfileLimits.HistoricalLoadoutSlotCount))
             {
                 Assert.That(page.ChassisId, Is.EqualTo("chassis.profile-test"));
                 Assert.That(page.FirstWeaponId, Is.EqualTo("weapon.profile-test"));

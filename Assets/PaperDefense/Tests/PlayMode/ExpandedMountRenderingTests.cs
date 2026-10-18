@@ -31,8 +31,8 @@ namespace PaperDefense.Tests
             Assert.That(bp.FirstWeaponId, Is.EqualTo(source.Id));
             Assert.That(NotebookSpriteCatalog.TryGet(source.Id, out var sprite), Is.True, source.Id);
             Assert.That(NotebookSpriteCatalog.TryGetBounds("chassis.standard", out var chassis), Is.True);
-            // Standard socket 0 is fixed at (34%,78%) of the foundation, with a 29% pedestal footprint.
-            Vector2 socket = new Vector2(10.5f, 10.5f) + chassis.min + Vector2.Scale(chassis.size, new Vector2(.34f, .78f));
+            // The shared Task3 foundation places socket 0 at (16%,78%), with a 29% pedestal footprint.
+            Vector2 socket = new Vector2(10.5f, 10.5f) + chassis.min + Vector2.Scale(chassis.size, new Vector2(.16f, .78f));
             float scale = chassis.width * .29f / source.Diameter;
             var aim = new Point2(20, 10.54f);
             var balance = GameBalance.CreateDefault(); balance.StartingInk = 1000; balance.Structure(kind).BuildSeconds = 0;

@@ -90,7 +90,7 @@ namespace PaperDefense.Tests
             return run;
         }
 
-        [Test] public void VersionSevenRoundTripKeepsEmptyStandardDtosProgressAndHistoricalFreeformData()
+        [Test] public void CurrentVersionRoundTripKeepsEmptyStandardDtosProgressAndHistoricalFreeformData()
         {
             var profile = ProfileWithProgress();
             var historical = HistoricalFreeformPage();
@@ -105,7 +105,7 @@ namespace PaperDefense.Tests
             Assert.That(store.Save(profile).Success, Is.True, store.LastDiagnostic);
 
             var written = JsonUtility.FromJson<WorkshopProfileData>(File.ReadAllText(path));
-            Assert.That(written.Version, Is.EqualTo(7));
+            Assert.That(written.Version, Is.EqualTo(WorkshopProfile.CurrentVersion));
             var dto = written.Album.Single(p => p.Id == standard.Id);
             Assert.That(dto.Origin, Is.EqualTo(DrawingOrigin.LegacyStandard));
             Assert.That(dto.DrawingMetadataVersion, Is.EqualTo(1));
@@ -156,8 +156,7 @@ namespace PaperDefense.Tests
             var profile = ProfileWithProgress();
             if (version == 7)
                 Assert.That(profile.SaveBlueprint(HistoricalFreeformPage(), out var reason), Is.True, reason);
-            var data = version <= 3 ? HistoricalProfileTestData.Create(profile, version) : profile.ToData();
-            data.Version = version;
+            var data = HistoricalProfileTestData.Create(profile, version);
             File.WriteAllText(path, JsonUtility.ToJson(data, true), new UnicodeEncoding(false, true));
             byte[] original = File.ReadAllBytes(path);
             var store = new WorkshopProfileStore(path);
@@ -174,7 +173,7 @@ namespace PaperDefense.Tests
 
             var restored = new WorkshopProfileStore(path).Load();
             Assert.That(restored.CanWrite, Is.True, restored.Message);
-            Assert.That(restored.Profile.ToData().Version, Is.EqualTo(7));
+            Assert.That(restored.Profile.ToData().Version, Is.EqualTo(WorkshopProfile.CurrentVersion));
             Assert.That(restored.Profile.Gold, Is.EqualTo(before.Gold));
             Assert.That(restored.Profile.ToData().Unlocked, Is.EqualTo(before.Unlocked));
             Assert.That(restored.Profile.Loadout, Is.EqualTo(before.Loadout));

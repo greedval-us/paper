@@ -14,9 +14,9 @@ namespace PaperDefense.Core
     }
 
     /// <summary>Permanent options, never a stockpile of consumable weapon instances.</summary>
-    public sealed class WorkshopProfile
+    public sealed partial class WorkshopProfile
     {
-        public const int CurrentVersion = 7;
+        public const int CurrentVersion = 8;
         private static readonly IReadOnlyList<PartUnlock> parts = PartCatalog.HistoricalParts;
         private ContentCatalogSnapshot content;
         private readonly HashSet<string> unlocked = new HashSet<string>(StringComparer.Ordinal);
@@ -44,7 +44,8 @@ namespace PaperDefense.Core
             {
                 foreach (var part in PartCatalog.All) if (part.InitiallyUnlocked) unlocked.Add(part.Id);
                 AddStarters();
-                for (int i = 0; i < loadout.Length; i++) loadout[i] = album[i].Id;
+                for (int i = 0; i < ProfileLimits.HistoricalLoadoutSlotCount; i++) loadout[i] = album[i].Id;
+                ResetEntriesFromLegacy();
                 return;
             }
             ConfigureContent(content);
@@ -60,6 +61,7 @@ namespace PaperDefense.Core
                 if (valid && preparedBalance != null) valid = TowerCatalog.Validate(blueprint, preparedBalance, out reason);
                 if (!valid) throw new ArgumentException("catalog.startupSlots[" + i + "]: " + reason);
             }
+            ResetEntriesFromLegacy();
         }
         /// <summary>Preparation applies newly registered initial rights, never removes saved progress.</summary>
         public bool ConfigureContent(ContentCatalogSnapshot catalog)
@@ -150,12 +152,14 @@ namespace PaperDefense.Core
         }
         public bool SaveBlueprint(TowerBlueprint blueprint, out string reason, GameBalance balance = null)
         {
+            if (blueprint != null && entries.Exists(e => e.Id == blueprint.Id && e.Kind != AlbumEntryKind.Legacy))
+            { reason = "Эта страница хранит составную сборку. Создайте отдельный вариант."; return false; }
             if (!ValidateOwned(blueprint, out reason, balance)) return false;
             if (blueprint.HasPlayerDrawing && blueprint.Drawing.IsEmpty)
             { reason = UserText.Message("copy.b9c49ccc73b9d0d4"); return false; }
-            for (int i = 0; i < album.Count; i++) if (album[i].Id == blueprint.Id) { album[i] = blueprint; return true; }
-            if (album.Count >= ProfileLimits.MaximumAlbumPages) { reason = UserText.Message("copy.9b39b0e67017068e", ProfileLimits.MaximumAlbumPages); return false; }
-            album.Add(blueprint); return true;
+            for (int i = 0; i < album.Count; i++) if (album[i].Id == blueprint.Id) { album[i] = blueprint; StoreLegacyEntry(blueprint); return true; }
+            if (entries.Count >= ProfileLimits.MaximumAlbumPages) { reason = UserText.Message("copy.9b39b0e67017068e", ProfileLimits.MaximumAlbumPages); return false; }
+            album.Add(blueprint); StoreLegacyEntry(blueprint); return true;
         }
         public bool RemoveBlueprint(string id, out string reason)
         {
@@ -163,7 +167,7 @@ namespace PaperDefense.Core
             foreach (string selected in loadout) if (selected == id) { reason = UserText.Message("copy.c254f33cb940ff85"); return false; }
             TowerBlueprint blueprint = Find(id);
             if (blueprint == null) { reason = UserText.Message("copy.5850704bbcf92fc2"); return false; }
-            album.Remove(blueprint); return true;
+            album.Remove(blueprint); entries.RemoveAll(e => e.Id == id); return true;
         }
         public bool AssignSlot(int slot, string id, out string reason, GameBalance balance = null)
         {
@@ -183,6 +187,7 @@ namespace PaperDefense.Core
             var ordered = new List<string>(unlocked); ordered.Sort(StringComparer.Ordinal);
             data.Unlocked = ordered.ToArray();
             for (int i = 0; i < album.Count; i++) data.Album[i] = new BlueprintData(album[i]);
+            WriteAssemblyData(data);
             return data;
         }
         /// <summary>Copy current valid state exactly; loader repairs never run during a transaction.</summary>
@@ -197,12 +202,13 @@ namespace PaperDefense.Core
             copy.album.AddRange(album);
             Array.Copy(loadout, copy.loadout, loadout.Length);
             copy.content = content;
+            CopyAssemblyStateTo(copy);
             return copy;
         }
-        public static WorkshopProfile FromData(WorkshopProfileData data)
+        internal static WorkshopProfile ReadHistorical(WorkshopProfileData data)
         {
-            if (data != null && data.Version >= 2 && data.Version <= CurrentVersion) return FromStrictData(data);
-            if (data != null && data.Version > CurrentVersion) throw new NotSupportedException(UserText.Message("copy.d4480b00d319b755"));
+            if (data != null && data.Version >= 2 && data.Version <= 7) return FromStrictData(data);
+            if (data != null && data.Version > 7) throw new NotSupportedException(UserText.Message("copy.d4480b00d319b755"));
             if (data != null && data.Version != 1) throw new ArgumentException(UserText.Message("copy.0ecaed17b95a05bc"));
             var profile = new WorkshopProfile();
             if (data == null) return profile;
@@ -214,13 +220,13 @@ namespace PaperDefense.Core
                 if (!known && !string.IsNullOrEmpty(id)) throw new NotSupportedException(UserText.Message("copy.3ee1a23fb7b9494a"));
                 if (known && IsVersionTwoPart(id)) profile.unlocked.Add(id);
             }
-            profile.album.Clear();
+            profile.album.Clear(); profile.entries.Clear();
             if (data.Album != null) foreach (BlueprintData saved in data.Album)
                 if (saved != null) profile.SaveBlueprint(saved.ToBlueprint(1), out _);
             // Starters are always available to repair a stale or damaged four-slot selection.
             profile.AddStarters();
             var selected = new HashSet<string>();
-            for (int i = 0; i < profile.loadout.Length; i++)
+            for (int i = 0; i < ProfileLimits.HistoricalLoadoutSlotCount; i++)
             {
                 string id = data.Loadout != null && i < data.Loadout.Length ? data.Loadout[i] : null;
                 if (profile.Find(id) == null || !selected.Add(id))
@@ -228,12 +234,12 @@ namespace PaperDefense.Core
                         if (selected.Add(blueprint.Id)) { id = blueprint.Id; break; }
                 profile.loadout[i] = id;
             }
-            return profile;
+            profile.ResetEntriesFromLegacy(); return profile;
         }
         static WorkshopProfile FromStrictData(WorkshopProfileData data)
         {
-            if (data.Gold < 0 || data.Unlocked == null || data.Album == null || (data.Version < 5 && data.Album.Length < ProfileLimits.LoadoutSlotCount) ||
-                data.Album.Length > ProfileLimits.MaximumAlbumPages || data.Loadout == null || data.Loadout.Length != ProfileLimits.LoadoutSlotCount)
+            if (data.Gold < 0 || data.Unlocked == null || data.Album == null || (data.Version < 5 && data.Album.Length < ProfileLimits.HistoricalLoadoutSlotCount) ||
+                data.Album.Length > ProfileLimits.MaximumAlbumPages || data.Loadout == null || data.Loadout.Length != ProfileLimits.HistoricalLoadoutSlotCount)
                 throw new ArgumentException(UserText.Message("copy.bed3d028a2c52df6", data.Version));
             var profile = new WorkshopProfile(); profile.Gold = data.Gold;
             profile.unlocked.Clear(); profile.album.Clear();
@@ -269,14 +275,14 @@ namespace PaperDefense.Core
                 profile.album.Add(blueprint);
             }
             var selected = new HashSet<string>(StringComparer.Ordinal);
-            for (int i = 0; i < profile.loadout.Length; i++)
+            for (int i = 0; i < ProfileLimits.HistoricalLoadoutSlotCount; i++)
             {
                 string id = data.Loadout[i];
                 if (data.Version >= 5 && string.IsNullOrEmpty(id)) { profile.loadout[i] = null; continue; }
                 if (id == null || profile.Find(id) == null || !selected.Add(id)) throw new ArgumentException(UserText.Message("copy.dac3f5616ef85f95"));
                 profile.loadout[i] = id;
             }
-            return profile;
+            profile.ResetEntriesFromLegacy(); return profile;
         }
         static bool IsVersionTwoPart(string id) => PartCatalog.IsHistorical(id);
     }
@@ -285,5 +291,10 @@ namespace PaperDefense.Core
         public int Version = 1, Gold;
         public string[] Unlocked, Loadout;
         public BlueprintData[] Album;
+        public int TotalXp;
+        public AlbumEntryData[] Entries;
+        public ComponentLibraryEntryData[] Library;
+        public RunRewardReceiptData[] Rewards;
+        public OperationReceiptData[] Operations;
     }
 }

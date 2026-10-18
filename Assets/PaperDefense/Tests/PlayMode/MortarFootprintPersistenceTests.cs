@@ -65,11 +65,11 @@ namespace PaperDefense.Tests
                 .WithMortarFootprint(0, new MortarFootprint(2)).WithMortarFootprint(1, new MortarFootprint(3));
             var restored = new BlueprintData(page).ToBlueprint(4);
             Assert.That(restored.FirstFootprint.AspectRatio, Is.EqualTo(2)); Assert.That(restored.SecondFootprint.AspectRatio, Is.EqualTo(3));
-            Assert.That(WorkshopProfile.CurrentVersion, Is.EqualTo(7));
+            Assert.That(WorkshopProfile.CurrentVersion, Is.EqualTo(8));
         }
         [TestCase(1)] [TestCase(2)] [TestCase(3)] public void HistoricalVersionsRestoreCircle(int version)
         {
-            var data = new WorkshopProfile().ToData(); data.Version = version;
+            var data = HistoricalProfileTestData.Create(new WorkshopProfile(), version);
             foreach (var page in data.Album) { page.FootprintMetadataVersion = 0; page.FirstFootprintAspect = 0; page.SecondFootprintAspect = 0; if (version == 2) { page.Drawing.FormatVersion = 1; page.Drawing.Parts = page.Drawing.Parts.Where(p => (int)p.Key < 7).ToArray(); } }
             foreach (var page in WorkshopProfile.FromData(data).Album) Assert.That(page.FirstFootprint.AspectRatio, Is.EqualTo(1));
         }
@@ -88,7 +88,7 @@ namespace PaperDefense.Tests
         }
         [Test] public void VersionThreeMigrationPreservesExactBytes()
         {
-            var data = new WorkshopProfile().ToData(); data.Version = 3;
+            var data = HistoricalProfileTestData.Create(new WorkshopProfile(), 3);
             File.WriteAllText(path, JsonUtility.ToJson(data, true), new UnicodeEncoding(false, true)); byte[] original = File.ReadAllBytes(path);
             var store = new WorkshopProfileStore(path); var loaded = store.Load(); Assert.That(loaded.CanWrite, Is.True);
             Assert.That(store.Save(loaded.Profile).Success, Is.True);
@@ -106,7 +106,7 @@ namespace PaperDefense.Tests
         }
         [Test] public void FailedVersionThreeOriginalCopyDoesNotCommit()
         {
-            var data = new WorkshopProfile().ToData(); data.Version = 3;
+            var data = HistoricalProfileTestData.Create(new WorkshopProfile(), 3);
             File.WriteAllText(path, JsonUtility.ToJson(data)); byte[] original = File.ReadAllBytes(path);
             var store = new WorkshopProfileStore(path, new CopyFaultIO()); var loaded = store.Load();
             Assert.That(store.Save(loaded.Profile).Success, Is.False);

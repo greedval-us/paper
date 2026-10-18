@@ -171,7 +171,7 @@ namespace PaperDefense.Tests
         }
 
         [Test]
-        public void FullAlbumStillAllowsReplacementButRejectsSixtyFifthPageAndFifthSlot()
+        public void FullAlbumStillAllowsReplacementButRejectsSixtyFifthPageAndNinthSlot()
         {
             var profile = new WorkshopProfile();
             for (int i = 4; i < 64; i++)
@@ -179,13 +179,13 @@ namespace PaperDefense.Tests
             Assert.That(profile.SaveBlueprint(new TowerBlueprint("page.63", "Renamed", ChassisKind.Standard, StructureKind.Gun), out _), Is.True);
             Assert.That(profile.SaveBlueprint(new TowerBlueprint("overflow", "Overflow", ChassisKind.Standard, StructureKind.Gun), out _), Is.False);
             Assert.That(profile.AssignSlot(-1, "page.63", out _), Is.False);
-            Assert.That(profile.AssignSlot(4, "page.63", out _), Is.False);
+            Assert.That(profile.AssignSlot(ProfileLimits.LoadoutSlotCount, "page.63", out _), Is.False);
             WorkshopProfileData data = profile.ToData();
             Assert.That(data.Album.Length, Is.EqualTo(64));
-            Assert.That(data.Loadout.Length, Is.EqualTo(4));
+            Assert.That(data.Loadout.Length, Is.EqualTo(ProfileLimits.LoadoutSlotCount));
             WorkshopProfile restored = WorkshopProfile.FromData(data);
             Assert.That(restored.Album.Count, Is.EqualTo(64));
-            Assert.That(restored.GetLoadoutBlueprints().Count, Is.EqualTo(4));
+            Assert.That(restored.GetLoadoutBlueprints().Count, Is.EqualTo(ProfileLimits.LoadoutSlotCount));
         }
     }
 }

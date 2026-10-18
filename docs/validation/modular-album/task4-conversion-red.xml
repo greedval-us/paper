@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="5" result="Failed(Child)" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 04:10:14Z" end-time="2026-10-18 04:10:14Z" duration="0,4727483">
+  <test-suite type="TestSuite" id="2321" name="paper" fullname="paper" runstate="Runnable" testcasecount="1101" result="Failed" site="Child" start-time="2026-10-18 04:10:14Z" end-time="2026-10-18 04:10:14Z" duration="0.472748" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="2099" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="931" result="Failed" site="Child" start-time="2026-10-18 04:10:14Z" end-time="2026-10-18 04:10:14Z" duration="0.467779" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="2100" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="931" result="Failed" site="Child" start-time="2026-10-18 04:10:14Z" end-time="2026-10-18 04:10:14Z" duration="0.366426" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="2101" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="931" result="Failed" site="Child" start-time="2026-10-18 04:10:14Z" end-time="2026-10-18 04:10:14Z" duration="0.265435" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1854" name="ProfileStandardConversionTests" fullname="PaperDefense.Tests.ProfileStandardConversionTests" classname="PaperDefense.Tests.ProfileStandardConversionTests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-10-18 04:10:14Z" end-time="2026-10-18 04:10:14Z" duration="0.171167" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1859" name="FreeformDrawingRemainsLegacyEvenWithAnOtherwiseMatchingCatalog" fullname="PaperDefense.Tests.ProfileStandardConversionTests.FreeformDrawingRemainsLegacyEvenWithAnOtherwiseMatchingCatalog" methodname="FreeformDrawingRemainsLegacyEvenWithAnOtherwiseMatchingCatalog" classname="PaperDefense.Tests.ProfileStandardConversionTests" runstate="Runnable" seed="823209015" result="Passed" start-time="2026-10-18 04:10:14Z" end-time="2026-10-18 04:10:14Z" duration="0.004008" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1856" name="MatchingStandardConvertsWithIdentityProgressAndAllMaterialStatisticsIntact" fullname="PaperDefense.Tests.ProfileStandardConversionTests.MatchingStandardConvertsWithIdentityProgressAndAllMaterialStatisticsIntact" methodname="MatchingStandardConvertsWithIdentityProgressAndAllMaterialStatisticsIntact" classname="PaperDefense.Tests.ProfileStandardConversionTests" runstate="Runnable" seed="824312898" result="Passed" start-time="2026-10-18 04:10:14Z" end-time="2026-10-18 04:10:14Z" duration="0.023917" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1855" name="MatchingStandardRequiresExplicitHistoricalBalanceBeforeConversion" fullname="PaperDefense.Tests.ProfileStandardConversionTests.MatchingStandardRequiresExplicitHistoricalBalanceBeforeConversion" methodname="MatchingStandardRequiresExplicitHistoricalBalanceBeforeConversion" classname="PaperDefense.Tests.ProfileStandardConversionTests" runstate="Runnable" seed="224675209" result="Passed" start-time="2026-10-18 04:10:14Z" end-time="2026-10-18 04:10:14Z" duration="0.013046" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1857" name="OneDifferentWeaponStatisticRetainsTheCompleteLegacyPage" fullname="PaperDefense.Tests.ProfileStandardConversionTests.OneDifferentWeaponStatisticRetainsTheCompleteLegacyPage" methodname="OneDifferentWeaponStatisticRetainsTheCompleteLegacyPage" classname="PaperDefense.Tests.ProfileStandardConversionTests" runstate="Runnable" seed="1470139609" result="Passed" start-time="2026-10-18 04:10:14Z" end-time="2026-10-18 04:10:14Z" duration="0.006621" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1858" name="OppositeReloadChangesCannotCancelInAggregateDpsAndPermitConversion" fullname="PaperDefense.Tests.ProfileStandardConversionTests.OppositeReloadChangesCannotCancelInAggregateDpsAndPermitConversion" methodname="OppositeReloadChangesCannotCancelInAggregateDpsAndPermitConversion" classname="PaperDefense.Tests.ProfileStandardConversionTests" runstate="Runnable" seed="1602187641" result="Failed" start-time="2026-10-18 04:10:14Z" end-time="2026-10-18 04:10:14Z" duration="0.023003" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Every weapon cadence must be preserved independently even when the total DPS matches.
+  Expected: Legacy
+  But was:  Tower
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.ProfileStandardConversionTests.OppositeReloadChangesCannotCancelInAggregateDpsAndPermitConversion () [0x0035c] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\ProfileStandardConversionTests.cs:169
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task4-conversion-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

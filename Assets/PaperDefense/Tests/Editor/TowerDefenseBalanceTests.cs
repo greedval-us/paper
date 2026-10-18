@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using NUnit.Framework;
 using PaperDefense.Application;
 using PaperDefense.Core;
@@ -26,7 +27,8 @@ namespace PaperDefense.Tests
         public void ActualStarterWeaponsNeedSeveralHitsAndAffordableOpeningProtectsCastle(bool player)
         {
             var b=MainBalance(player);var profile=new WorkshopProfile(b.Content,b);var loadout=profile.GetLoadoutBlueprints();
-            foreach(var bp in loadout)foreach(var mount in bp.WeaponMounts)
+            Assert.That(loadout.Skip(ProfileLimits.HistoricalLoadoutSlotCount),Is.All.Null);
+            foreach(var bp in loadout.Take(ProfileLimits.HistoricalLoadoutSlotCount))foreach(var mount in bp.WeaponMounts)
             {
                 float damage=TowerCatalog.WeaponDamage(bp,b,mount.WeaponId,MaterialTier.Pencil,mount.SlotIndex);
                 Assert.That(Math.Ceiling(b.Enemy(EnemyKind.Doodle).MaxHealth/damage),Is.GreaterThanOrEqualTo(3),bp.Id);

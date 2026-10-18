@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using PaperDefense.Application;
 using PaperDefense.Core;
@@ -94,7 +95,7 @@ namespace PaperDefense.Tests
         [TestCase("chassis")]
         public void UnknownVersionThreePartsCannotRollBackToACompatibleBackup(string unknownPart)
         {
-            var future = RichProfile().ToData(); future.Version = 3;
+            var future = HistoricalProfileTestData.Create(RichProfile(), 3);
             if (unknownPart == "right")
             {
                 var rights = new List<string>(future.Unlocked) { "weapon.future" };
@@ -224,7 +225,9 @@ namespace PaperDefense.Tests
             }
             var copy = original.CreateWorkingCopy();
             Assert.That(copy.Album.Count, Is.EqualTo(4));
-            Assert.That(copy.Loadout, Is.EqualTo(new[] { "replacement.0", "replacement.1", "replacement.2", "replacement.3" }));
+            Assert.That(copy.Loadout.Count, Is.EqualTo(ProfileLimits.LoadoutSlotCount));
+            Assert.That(copy.Loadout.Take(ProfileLimits.HistoricalLoadoutSlotCount), Is.EqualTo(new[] { "replacement.0", "replacement.1", "replacement.2", "replacement.3" }));
+            Assert.That(copy.Loadout.Skip(ProfileLimits.HistoricalLoadoutSlotCount), Is.All.Null);
             copy.GrantGold(100); Assert.That(copy.Unlock("module.feed", out _), Is.True);
             for (int i = 4; i < 64; i++)
                 Assert.That(copy.SaveBlueprint(new TowerBlueprint("page." + i, "Page " + i, ChassisKind.Standard,

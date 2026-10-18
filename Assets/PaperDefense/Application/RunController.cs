@@ -37,7 +37,7 @@ namespace PaperDefense.Application
         public void Initialize(bool allowLegacyFixtureDefaults = false)
         {
             var preparedSession = new GameSession(CreateConfiguredBalance(false, allowLegacyFixtureDefaults));
-            var preparedProfile = new WorkshopProfile(preparedSession.Balance.Content, preparedSession.Balance);
+            var preparedProfile = FreshProfile(preparedSession.Balance);
             legacyFixtureDefaults = allowLegacyFixtureDefaults;
             persistence.Reset();workshopMode=false;InWorkshop=false;
             profile=preparedProfile;Workshop=new WorkshopReadModel(profile);runLoadout=profile.GetLoadoutBlueprints();
@@ -49,10 +49,11 @@ namespace PaperDefense.Application
             if (persistent)
             {
                 if (allowLegacyFixtureDefaults) throw new ArgumentException("Legacy fixtures require memory mode or an explicitly isolated profile store.");
-                InitializeWorkshop(new WorkshopProfileStore(WorkshopPersistence.ProfilePath)); return;
+                var balance = CreateConfiguredBalance(true, false);
+                InitializeWorkshop(new WorkshopProfileStore(WorkshopPersistence.ProfilePath, catalog: ConfiguredAssemblies(), legacyBalance: balance)); return;
             }
             var preparedSession = new GameSession(CreateConfiguredBalance(true, allowLegacyFixtureDefaults), starterDefenses:false);
-            var preparedProfile = new WorkshopProfile(preparedSession.Balance.Content, preparedSession.Balance);
+            var preparedProfile = FreshProfile(preparedSession.Balance);
             legacyFixtureDefaults = allowLegacyFixtureDefaults;
             persistence.Reset();workshopMode=true;
             profile=preparedProfile;Workshop=new WorkshopReadModel(profile);
@@ -66,7 +67,7 @@ namespace PaperDefense.Application
             if (store == null) throw new ArgumentNullException(nameof(store));
             // Reject missing/invalid configuration before reading any profile, including the real path.
             var preparedSession = new GameSession(CreateConfiguredBalance(true, allowLegacyFixtureDefaults), starterDefenses:false);
-            var freshProfile = new WorkshopProfile(preparedSession.Balance.Content, preparedSession.Balance);
+            var freshProfile = FreshProfile(preparedSession.Balance);
             var loaded = store.Load();
             legacyFixtureDefaults = allowLegacyFixtureDefaults;
             persistence.Attach(store, loaded);workshopMode=true;
@@ -88,6 +89,8 @@ namespace PaperDefense.Application
         void RefreshSaveInfo() => persistence.CopyStatusTo(Workshop);
 
         GameBalance CreateWorkshopBalance() => CreateConfiguredBalance(true, legacyFixtureDefaults);
+        ComponentCatalog ConfiguredAssemblies() => balanceAsset?.dataPreset?.database?.assemblyCatalog?.CreateSnapshot();
+        WorkshopProfile FreshProfile(GameBalance balance) => WorkshopProfile.CreateNew(ConfiguredAssemblies(), balance.Content, balance);
 
         GameBalance CreateConfiguredBalance(bool workshop, bool allowLegacyFixtureDefaults)
         {
@@ -256,9 +259,12 @@ namespace PaperDefense.Application
             balance.Content = preparedContent;
             candidate.ConfigureContent(preparedContent);
             var selection=candidate.GetLoadoutBlueprints();
-            foreach(var blueprint in selection)if(!candidate.ValidateOwned(blueprint,out reason,balance))return false;
+            // Existing battle adapters still require the four historical tower positions until task 5.
+            // Newly added empty/support positions must not make a migrated four-tower set unusable.
+            for(int i=0;i<selection.Count;i++)
+                if ((i < ProfileLimits.HistoricalLoadoutSlotCount || selection[i] != null) && !candidate.ValidateOwned(selection[i],out reason,balance)) return false;
             var prepared = new TowerBlueprint[selection.Count];
-            for (int i = 0; i < prepared.Length; i++) prepared[i] = selection[i].WithContent(preparedContent);
+            for (int i = 0; i < prepared.Length; i++) prepared[i] = selection[i]?.WithContent(preparedContent);
             GameSession preparedSession;
             try { preparedSession=new GameSession(balance,starterDefenses:false); }
             catch (ArgumentException error) { LastConfigurationDiagnostic=error.ToString();reason=UserText.Message("run.error.configuration");return false; }
