@@ -20,6 +20,7 @@ namespace PaperDefense.Core
         public int MountSlotIndex { get; internal set; } = -1;
         public long ActionId { get; internal set; }
         internal WeaponDefinition Definition;
+        internal bool CompositeCycle;
         public InkColor Color { get; internal set; }
         internal ColorEffectPayload EffectPayload;
         internal TowerColorBudget ColorBudget;

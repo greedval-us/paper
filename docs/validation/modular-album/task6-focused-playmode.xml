@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="8" result="Passed" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 05:13:18Z" end-time="2026-10-18 05:13:18Z" duration="0,2708472">
+  <test-suite type="TestSuite" id="3257" name="paper" fullname="paper" runstate="Runnable" testcasecount="599" result="Passed" start-time="2026-10-18 05:13:18Z" end-time="2026-10-18 05:13:18Z" duration="0.270847" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="3251" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="599" result="Passed" start-time="2026-10-18 05:13:18Z" end-time="2026-10-18 05:13:18Z" duration="0.260952" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="3252" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="599" result="Passed" start-time="2026-10-18 05:13:18Z" end-time="2026-10-18 05:13:18Z" duration="0.244106" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="3253" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="599" result="Passed" start-time="2026-10-18 05:13:18Z" end-time="2026-10-18 05:13:18Z" duration="0.227561" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="2610" name="CompositeWeaponIntegrationTests" fullname="PaperDefense.Tests.CompositeWeaponIntegrationTests" classname="PaperDefense.Tests.CompositeWeaponIntegrationTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-18 05:13:18Z" end-time="2026-10-18 05:13:18Z" duration="0.214314" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2617" name="AReadViewOwnsItsAmmoAndReloadSnapshotWhileLaterTicksAdvanceTheLiveMagazine" fullname="PaperDefense.Tests.CompositeWeaponIntegrationTests.AReadViewOwnsItsAmmoAndReloadSnapshotWhileLaterTicksAdvanceTheLiveMagazine" methodname="AReadViewOwnsItsAmmoAndReloadSnapshotWhileLaterTicksAdvanceTheLiveMagazine" classname="PaperDefense.Tests.CompositeWeaponIntegrationTests" runstate="Runnable" seed="155249841" result="Passed" start-time="2026-10-18 05:13:18Z" end-time="2026-10-18 05:13:18Z" duration="0.032163" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2615" name="CompositeTrialComparisonUsesTheSameOwnedPageInBothLanes" fullname="PaperDefense.Tests.CompositeWeaponIntegrationTests.CompositeTrialComparisonUsesTheSameOwnedPageInBothLanes" methodname="CompositeTrialComparisonUsesTheSameOwnedPageInBothLanes" classname="PaperDefense.Tests.CompositeWeaponIntegrationTests" runstate="Runnable" seed="1560137962" result="Passed" start-time="2026-10-18 05:13:18Z" end-time="2026-10-18 05:13:18Z" duration="0.016322" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2616" name="LegacyAlbumPageKeepsTheExistingTrialCalculationAndContinuousWeaponPath" fullname="PaperDefense.Tests.CompositeWeaponIntegrationTests.LegacyAlbumPageKeepsTheExistingTrialCalculationAndContinuousWeaponPath" methodname="LegacyAlbumPageKeepsTheExistingTrialCalculationAndContinuousWeaponPath" classname="PaperDefense.Tests.CompositeWeaponIntegrationTests" runstate="Runnable" seed="1407681348" result="Passed" start-time="2026-10-18 05:13:18Z" end-time="2026-10-18 05:13:18Z" duration="0.008659" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2613" name="TrialAndRealSessionUseTheSameSixRoundCycleAndTimestampEveryAction" fullname="PaperDefense.Tests.CompositeWeaponIntegrationTests.TrialAndRealSessionUseTheSameSixRoundCycleAndTimestampEveryAction" classname="PaperDefense.Tests.CompositeWeaponIntegrationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:13:18Z" end-time="2026-10-18 05:13:18Z" duration="0.077504" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2611" name="TrialAndRealSessionUseTheSameSixRoundCycleAndTimestampEveryAction(False)" fullname="PaperDefense.Tests.CompositeWeaponIntegrationTests.TrialAndRealSessionUseTheSameSixRoundCycleAndTimestampEveryAction(False)" methodname="TrialAndRealSessionUseTheSameSixRoundCycleAndTimestampEveryAction" classname="PaperDefense.Tests.CompositeWeaponIntegrationTests" runstate="Runnable" seed="30634913" result="Passed" start-time="2026-10-18 05:13:18Z" end-time="2026-10-18 05:13:18Z" duration="0.041110" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2612" name="TrialAndRealSessionUseTheSameSixRoundCycleAndTimestampEveryAction(True)" fullname="PaperDefense.Tests.CompositeWeaponIntegrationTests.TrialAndRealSessionUseTheSameSixRoundCycleAndTimestampEveryAction(True)" methodname="TrialAndRealSessionUseTheSameSixRoundCycleAndTimestampEveryAction" classname="PaperDefense.Tests.CompositeWeaponIntegrationTests" runstate="Runnable" seed="1320419243" result="Passed" start-time="2026-10-18 05:13:18Z" end-time="2026-10-18 05:13:18Z" duration="0.034236" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2618" name="TrialFramesRetainLoadedAndReloadingMagazineSnapshotsForPlayback" fullname="PaperDefense.Tests.CompositeWeaponIntegrationTests.TrialFramesRetainLoadedAndReloadingMagazineSnapshotsForPlayback" methodname="TrialFramesRetainLoadedAndReloadingMagazineSnapshotsForPlayback" classname="PaperDefense.Tests.CompositeWeaponIntegrationTests" runstate="Runnable" seed="1584292354" result="Passed" start-time="2026-10-18 05:13:18Z" end-time="2026-10-18 05:13:18Z" duration="0.006867" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2614" name="TwoCompositeMountsKeepIndependentActionIdsAndShareFeedOnlyOnce" fullname="PaperDefense.Tests.CompositeWeaponIntegrationTests.TwoCompositeMountsKeepIndependentActionIdsAndShareFeedOnlyOnce" methodname="TwoCompositeMountsKeepIndependentActionIdsAndShareFeedOnlyOnce" classname="PaperDefense.Tests.CompositeWeaponIntegrationTests" runstate="Runnable" seed="751037250" result="Passed" start-time="2026-10-18 05:13:18Z" end-time="2026-10-18 05:13:18Z" duration="0.031597" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2619" name="ZeroDeltaTicksDoNotFireSpendAmmoOrAdvanceReload" fullname="PaperDefense.Tests.CompositeWeaponIntegrationTests.ZeroDeltaTicksDoNotFireSpendAmmoOrAdvanceReload" methodname="ZeroDeltaTicksDoNotFireSpendAmmoOrAdvanceReload" classname="PaperDefense.Tests.CompositeWeaponIntegrationTests" runstate="Runnable" seed="1349724399" result="Passed" start-time="2026-10-18 05:13:18Z" end-time="2026-10-18 05:13:18Z" duration="0.021909" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task6-focused-playmode.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="101" result="Passed" total="101" passed="101" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 05:13:01Z" end-time="2026-10-18 05:13:03Z" duration="2,3101321">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1260" result="Passed" start-time="2026-10-18 05:13:01Z" end-time="2026-10-18 05:13:03Z" duration="2.310132" total="101" passed="101" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="2288" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="1090" result="Passed" start-time="2026-10-18 05:13:01Z" end-time="2026-10-18 05:13:03Z" duration="2.166278" total="101" passed="101" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="2289" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="1090" result="Passed" start-time="2026-10-18 05:13:01Z" end-time="2026-10-18 05:13:03Z" duration="2.118959" total="101" passed="101" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="2290" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="1090" result="Passed" start-time="2026-10-18 05:13:01Z" end-time="2026-10-18 05:13:03Z" duration="2.016631" total="101" passed="101" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1284" name="CompositeWeaponCombatTests" fullname="PaperDefense.Tests.CompositeWeaponCombatTests" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" testcasecount="33" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.737930" total="33" passed="33" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1317" name="AcquisitionCompletedAtTheStepEndFiresAtThatEndpointWithoutWaitingForAnotherFrame" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.AcquisitionCompletedAtTheStepEndFiresAtThatEndpointWithoutWaitingForAnotherFrame" methodname="AcquisitionCompletedAtTheStepEndFiresAtThatEndpointWithoutWaitingForAnotherFrame" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="934079852" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.128621" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1303" name="BlotterCleansWithoutDamagingEnemiesOrRequiringEnemyTargets" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.BlotterCleansWithoutDamagingEnemiesOrRequiringEnemyTargets" methodname="BlotterCleansWithoutDamagingEnemiesOrRequiringEnemyTargets" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="1353606301" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.055003" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1316" name="CoarseStepDoesNotSpendPredictedRoundsAfterTheOnlyTargetDiesOrRefillForItsReplacement" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.CoarseStepDoesNotSpendPredictedRoundsAfterTheOnlyTargetDiesOrRefillForItsReplacement" methodname="CoarseStepDoesNotSpendPredictedRoundsAfterTheOnlyTargetDiesOrRefillForItsReplacement" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="776051156" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.009117" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1310" name="CoarseStepPreservesSimultaneousShotsFromDifferentMounts" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.CoarseStepPreservesSimultaneousShotsFromDifferentMounts" methodname="CoarseStepPreservesSimultaneousShotsFromDifferentMounts" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="2011657965" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.012746" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1311" name="CoarseStepPreservesSimultaneousShotsFromDifferentTowers" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.CoarseStepPreservesSimultaneousShotsFromDifferentTowers" methodname="CoarseStepPreservesSimultaneousShotsFromDifferentTowers" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="1967899125" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.007527" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1293" name="EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.042781" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1286" name="EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias(&quot;gun&quot;,12)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias(&quot;gun&quot;,12)" methodname="EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="339896000" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.006748" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1287" name="EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias(&quot;piercer&quot;,20)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias(&quot;piercer&quot;,20)" methodname="EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="437560251" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.005339" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1288" name="EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias(&quot;mortar&quot;,28)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias(&quot;mortar&quot;,28)" methodname="EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="1884486560" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.006523" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1289" name="EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias(&quot;fan&quot;,14)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias(&quot;fan&quot;,14)" methodname="EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="349445412" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.005185" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1290" name="EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias(&quot;ricochet&quot;,12)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias(&quot;ricochet&quot;,12)" methodname="EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="1200795691" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.005094" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1291" name="EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias(&quot;stapler&quot;,5)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias(&quot;stapler&quot;,5)" methodname="EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="762385351" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.005838" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1292" name="EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias(&quot;blotter&quot;,0)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias(&quot;blotter&quot;,0)" methodname="EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="886602416" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.005051" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1296" name="FanHitsAtMostEightVictimsRegardlessOfListOrder" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.FanHitsAtMostEightVictimsRegardlessOfListOrder" methodname="FanHitsAtMostEightVictimsRegardlessOfListOrder" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="1719297712" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.006586" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1295" name="FanUsesNinetyDegreeConeAndItsRangeBoundaries" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.FanUsesNinetyDegreeConeAndItsRangeBoundaries" methodname="FanUsesNinetyDegreeConeAndItsRangeBoundaries" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="1877960228" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.006220" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1314" name="IdleBlotterReleasesFeedButReloadingBlotterKeepsItsShare" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.IdleBlotterReleasesFeedButReloadingBlotterKeepsItsShare" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.055825" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1312" name="IdleBlotterReleasesFeedButReloadingBlotterKeepsItsShare(False,3)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.IdleBlotterReleasesFeedButReloadingBlotterKeepsItsShare(False,3)" methodname="IdleBlotterReleasesFeedButReloadingBlotterKeepsItsShare" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="1057049060" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.006940" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1313" name="IdleBlotterReleasesFeedButReloadingBlotterKeepsItsShare(True,2)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.IdleBlotterReleasesFeedButReloadingBlotterKeepsItsShare(True,2)" methodname="IdleBlotterReleasesFeedButReloadingBlotterKeepsItsShare" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="1816130610" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.004911" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1321" name="MaterialDamageIsAppliedOnceByResolutionAndUsedUnchangedByCombat" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.MaterialDamageIsAppliedOnceByResolutionAndUsedUnchangedByCombat" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.104058" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1318" name="MaterialDamageIsAppliedOnceByResolutionAndUsedUnchangedByCombat(Pencil,12.0f)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.MaterialDamageIsAppliedOnceByResolutionAndUsedUnchangedByCombat(Pencil,12.0f)" methodname="MaterialDamageIsAppliedOnceByResolutionAndUsedUnchangedByCombat" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="772808203" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.006415" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1319" name="MaterialDamageIsAppliedOnceByResolutionAndUsedUnchangedByCombat(Ink,15.0f)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.MaterialDamageIsAppliedOnceByResolutionAndUsedUnchangedByCombat(Ink,15.0f)" methodname="MaterialDamageIsAppliedOnceByResolutionAndUsedUnchangedByCombat" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="666057591" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.005397" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1320" name="MaterialDamageIsAppliedOnceByResolutionAndUsedUnchangedByCombat(Marker,19.2f)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.MaterialDamageIsAppliedOnceByResolutionAndUsedUnchangedByCombat(Marker,19.2f)" methodname="MaterialDamageIsAppliedOnceByResolutionAndUsedUnchangedByCombat" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="1387807500" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.004794" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1300" name="MortarHitsCurrentOccupantsOfItsFixedPointAfterFlightWithoutEightTargetCap" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.MortarHitsCurrentOccupantsOfItsFixedPointAfterFlightWithoutEightTargetCap" methodname="MortarHitsCurrentOccupantsOfItsFixedPointAfterFlightWithoutEightTargetCap" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="545118256" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.006774" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1301" name="MortarLaunchedInsideACoarseStepImpactsAtItsTrueFlightTime" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.MortarLaunchedInsideACoarseStepImpactsAtItsTrueFlightTime" methodname="MortarLaunchedInsideACoarseStepImpactsAtItsTrueFlightTime" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="1708763113" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.005168" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1302" name="MortarLaunchedNearACoarseStepEndRetainsOnlyItsUnelapsedFlight" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.MortarLaunchedNearACoarseStepEndRetainsOnlyItsUnelapsedFlight" methodname="MortarLaunchedNearACoarseStepEndRetainsOnlyItsUnelapsedFlight" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="1307654487" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.006262" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1299" name="MortarRejectsTargetsInsideSixAndLaunchesAtTheExactBoundary" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.MortarRejectsTargetsInsideSixAndLaunchesAtTheExactBoundary" methodname="MortarRejectsTargetsInsideSixAndLaunchesAtTheExactBoundary" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="1407959967" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.006378" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1294" name="PiercerHitsAtMostSevenDistinctCollinearVictims" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.PiercerHitsAtMostSevenDistinctCollinearVictims" methodname="PiercerHitsAtMostSevenDistinctCollinearVictims" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="30959654" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.007408" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1298" name="RicochetCannotCrossAGapLargerThanThreeEvenInsideInitialRange" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.RicochetCannotCrossAGapLargerThanThreeEvenInsideInitialRange" methodname="RicochetCannotCrossAGapLargerThanThreeEvenInsideInitialRange" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="2088625480" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.005735" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1297" name="RicochetMakesAtMostFourDistinctHitsWithThreeUnitJumps" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.RicochetMakesAtMostFourDistinctHitsWithThreeUnitJumps" methodname="RicochetMakesAtMostFourDistinctHitsWithThreeUnitJumps" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="1537721861" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.007552" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1306" name="StaplerSlowUsesTheStrongestRateAndNeverMultipliesBelowPointFour" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.StaplerSlowUsesTheStrongestRateAndNeverMultipliesBelowPointFour" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.047255" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1304" name="StaplerSlowUsesTheStrongestRateAndNeverMultipliesBelowPointFour(0.6f,0.6f)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.StaplerSlowUsesTheStrongestRateAndNeverMultipliesBelowPointFour(0.6f,0.6f)" methodname="StaplerSlowUsesTheStrongestRateAndNeverMultipliesBelowPointFour" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="317250391" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.005907" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1305" name="StaplerSlowUsesTheStrongestRateAndNeverMultipliesBelowPointFour(0.1f,0.4f)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.StaplerSlowUsesTheStrongestRateAndNeverMultipliesBelowPointFour(0.1f,0.4f)" methodname="StaplerSlowUsesTheStrongestRateAndNeverMultipliesBelowPointFour" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="112947432" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.004828" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1285" name="StructureConstructorOwnsResolvedStatsAndInitializesConstructionState" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.StructureConstructorOwnsResolvedStatsAndInitializesConstructionState" methodname="StructureConstructorOwnsResolvedStatsAndInitializesConstructionState" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="1390214412" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.004633" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1315" name="TargetLossDoesNotRefillAnUnfinishedDrumMagazine" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.TargetLossDoesNotRefillAnUnfinishedDrumMagazine" methodname="TargetLossDoesNotRefillAnUnfinishedDrumMagazine" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="748474406" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.010346" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1309" name="TwoAndThreeMountsKeepIndependentMagazineStatesAndSharedActiveFeed" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.TwoAndThreeMountsKeepIndependentMagazineStatesAndSharedActiveFeed" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.086922" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1307" name="TwoAndThreeMountsKeepIndependentMagazineStatesAndSharedActiveFeed(2)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.TwoAndThreeMountsKeepIndependentMagazineStatesAndSharedActiveFeed(2)" methodname="TwoAndThreeMountsKeepIndependentMagazineStatesAndSharedActiveFeed" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="45204660" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.007095" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1308" name="TwoAndThreeMountsKeepIndependentMagazineStatesAndSharedActiveFeed(3)" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.TwoAndThreeMountsKeepIndependentMagazineStatesAndSharedActiveFeed(3)" methodname="TwoAndThreeMountsKeepIndependentMagazineStatesAndSharedActiveFeed" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="130183478" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.006597" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1322" name="ZeroDeltaDoesNotStartOrAdvanceCompositeAttacks" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.ZeroDeltaDoesNotStartOrAdvanceCompositeAttacks" methodname="ZeroDeltaDoesNotStartOrAdvanceCompositeAttacks" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="865553074" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.005593" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1682" name="IndependentMountAimTests" fullname="PaperDefense.Tests.IndependentMountAimTests" classname="PaperDefense.Tests.IndependentMountAimTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.088026" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1684" name="CoolingMountTracksWithoutChangingDamageOrCooldown" fullname="PaperDefense.Tests.IndependentMountAimTests.CoolingMountTracksWithoutChangingDamageOrCooldown" methodname="CoolingMountTracksWithoutChangingDamageOrCooldown" classname="PaperDefense.Tests.IndependentMountAimTests" runstate="Runnable" seed="2018453153" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.004499" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1683" name="EachMountRecordsTheTargetItActuallySelected" fullname="PaperDefense.Tests.IndependentMountAimTests.EachMountRecordsTheTargetItActuallySelected" methodname="EachMountRecordsTheTargetItActuallySelected" classname="PaperDefense.Tests.IndependentMountAimTests" runstate="Runnable" seed="1339768293" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.001244" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1685" name="MissingTargetClearsOnlyItsTrackingIdAndKeepsLastOrientation" fullname="PaperDefense.Tests.IndependentMountAimTests.MissingTargetClearsOnlyItsTrackingIdAndKeepsLastOrientation" methodname="MissingTargetClearsOnlyItsTrackingIdAndKeepsLastOrientation" classname="PaperDefense.Tests.IndependentMountAimTests" runstate="Runnable" seed="514910828" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.000920" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1686" name="ReadSnapshotAndTrialRecordingPreserveBothDirections" fullname="PaperDefense.Tests.IndependentMountAimTests.ReadSnapshotAndTrialRecordingPreserveBothDirections" methodname="ReadSnapshotAndTrialRecordingPreserveBothDirections" classname="PaperDefense.Tests.IndependentMountAimTests" runstate="Runnable" seed="1564457257" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.001961" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1907" name="MountReadinessTests" fullname="PaperDefense.Tests.MountReadinessTests" classname="PaperDefense.Tests.MountReadinessTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:03Z" duration="0.298420" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1908" name="DynamicReloadFinishesWithoutTargetsAndStoresOnlyOneReadyShot" fullname="PaperDefense.Tests.MountReadinessTests.DynamicReloadFinishesWithoutTargetsAndStoresOnlyOneReadyShot" methodname="DynamicReloadFinishesWithoutTargetsAndStoresOnlyOneReadyShot" classname="PaperDefense.Tests.MountReadinessTests" runstate="Runnable" seed="971170836" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:02Z" duration="0.002450" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1918" name="EveryBarrelUsesItsOwnConfiguredAcquisitionDelay" fullname="PaperDefense.Tests.MountReadinessTests.EveryBarrelUsesItsOwnConfiguredAcquisitionDelay" classname="PaperDefense.Tests.MountReadinessTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:13:02Z" end-time="2026-10-18 05:13:03Z" duration="0.100467" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1916" name="EveryBarrelUsesItsOwnConfiguredAcquisitionDelay(None,25)" fullname="PaperDefense.Tests.MountReadinessTests.EveryBarrelUsesItsOwnConfiguredAcquisitionDelay(None,25)" methodname="EveryBarrelUsesItsOwnConfiguredAcquisitionDelay" classname="PaperDefense.Tests.MountReadinessTests" runstate="Runnable" seed="1934122224" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.002036" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1917" name="EveryBarrelUsesItsOwnConfiguredAcquisitionDelay(Tracking,8)" fullname="PaperDefense.Tests.MountReadinessTests.EveryBarrelUsesItsOwnConfiguredAcquisitionDelay(Tracking,8)" methodname="EveryBarrelUsesItsOwnConfiguredAcquisitionDelay" classname="PaperDefense.Tests.MountReadinessTests" runstate="Runnable" seed="505531252" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.001092" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1910" name="FinishedIdleReloadReleasesSupplyToTheWorkingMount" fullname="PaperDefense.Tests.MountReadinessTests.FinishedIdleReloadReleasesSupplyToTheWorkingMount" methodname="FinishedIdleReloadReleasesSupplyToTheWorkingMount" classname="PaperDefense.Tests.MountReadinessTests" runstate="Runnable" seed="1200467345" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000907" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1920" name="LiveSessionReloadsDuringIntermissionButNotWhilePaused" fullname="PaperDefense.Tests.MountReadinessTests.LiveSessionReloadsDuringIntermissionButNotWhilePaused" methodname="LiveSessionReloadsDuringIntermissionButNotWhilePaused" classname="PaperDefense.Tests.MountReadinessTests" runstate="Runnable" seed="508828698" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.024811" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1915" name="RetargetingOneBarrelDoesNotStallTheOther" fullname="PaperDefense.Tests.MountReadinessTests.RetargetingOneBarrelDoesNotStallTheOther" classname="PaperDefense.Tests.MountReadinessTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.075144" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1911" name="RetargetingOneBarrelDoesNotStallTheOther(False,False)" fullname="PaperDefense.Tests.MountReadinessTests.RetargetingOneBarrelDoesNotStallTheOther(False,False)" methodname="RetargetingOneBarrelDoesNotStallTheOther" classname="PaperDefense.Tests.MountReadinessTests" runstate="Runnable" seed="2017149906" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.001722" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1912" name="RetargetingOneBarrelDoesNotStallTheOther(True,False)" fullname="PaperDefense.Tests.MountReadinessTests.RetargetingOneBarrelDoesNotStallTheOther(True,False)" methodname="RetargetingOneBarrelDoesNotStallTheOther" classname="PaperDefense.Tests.MountReadinessTests" runstate="Runnable" seed="1953952828" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000756" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1913" name="RetargetingOneBarrelDoesNotStallTheOther(False,True)" fullname="PaperDefense.Tests.MountReadinessTests.RetargetingOneBarrelDoesNotStallTheOther(False,True)" methodname="RetargetingOneBarrelDoesNotStallTheOther" classname="PaperDefense.Tests.MountReadinessTests" runstate="Runnable" seed="1197811081" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000853" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1914" name="RetargetingOneBarrelDoesNotStallTheOther(True,True)" fullname="PaperDefense.Tests.MountReadinessTests.RetargetingOneBarrelDoesNotStallTheOther(True,True)" methodname="RetargetingOneBarrelDoesNotStallTheOther" classname="PaperDefense.Tests.MountReadinessTests" runstate="Runnable" seed="1777278856" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000859" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1919" name="SecondaryReacquiresTheActualTargetAfterPrimaryKillsItsCandidate" fullname="PaperDefense.Tests.MountReadinessTests.SecondaryReacquiresTheActualTargetAfterPrimaryKillsItsCandidate" methodname="SecondaryReacquiresTheActualTargetAfterPrimaryKillsItsCandidate" classname="PaperDefense.Tests.MountReadinessTests" runstate="Runnable" seed="389637388" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.001386" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1909" name="TwoTargetlessReloadsShareSupplyUntilReady" fullname="PaperDefense.Tests.MountReadinessTests.TwoTargetlessReloadsShareSupplyUntilReady" methodname="TwoTargetlessReloadsShareSupplyUntilReady" classname="PaperDefense.Tests.MountReadinessTests" runstate="Runnable" seed="324343916" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.001012" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2072" name="SharedTowerProductionTests" fullname="PaperDefense.Tests.SharedTowerProductionTests" classname="PaperDefense.Tests.SharedTowerProductionTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.125578" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2073" name="AnIdleMountDoesNotReduceTheActiveMountsSupply" fullname="PaperDefense.Tests.SharedTowerProductionTests.AnIdleMountDoesNotReduceTheActiveMountsSupply" methodname="AnIdleMountDoesNotReduceTheActiveMountsSupply" classname="PaperDefense.Tests.SharedTowerProductionTests" runstate="Runnable" seed="551030823" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.004772" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2079" name="ATargetReceivesAtMostOneColorRefreshInTheSharedWindow" fullname="PaperDefense.Tests.SharedTowerProductionTests.ATargetReceivesAtMostOneColorRefreshInTheSharedWindow" methodname="ATargetReceivesAtMostOneColorRefreshInTheSharedWindow" classname="PaperDefense.Tests.SharedTowerProductionTests" runstate="Runnable" seed="94625946" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.003177" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2080" name="FlyingShellsShareSourceBudgetAndKeepLaunchColorAfterRepaintAndSourceDeath" fullname="PaperDefense.Tests.SharedTowerProductionTests.FlyingShellsShareSourceBudgetAndKeepLaunchColorAfterRepaintAndSourceDeath" methodname="FlyingShellsShareSourceBudgetAndKeepLaunchColorAfterRepaintAndSourceDeath" classname="PaperDefense.Tests.SharedTowerProductionTests" runstate="Runnable" seed="1600675917" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.001452" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2077" name="HistoricalSupplyKeepsItsFixedPenaltyWhenAMountIsIdle" fullname="PaperDefense.Tests.SharedTowerProductionTests.HistoricalSupplyKeepsItsFixedPenaltyWhenAMountIsIdle" methodname="HistoricalSupplyKeepsItsFixedPenaltyWhenAMountIsIdle" classname="PaperDefense.Tests.SharedTowerProductionTests" runstate="Runnable" seed="280744975" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.003247" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2081" name="HitscanAndDelayedImpactUseOneSharedSourceColorBudget" fullname="PaperDefense.Tests.SharedTowerProductionTests.HitscanAndDelayedImpactUseOneSharedSourceColorBudget" methodname="HitscanAndDelayedImpactUseOneSharedSourceColorBudget" classname="PaperDefense.Tests.SharedTowerProductionTests" runstate="Runnable" seed="818278588" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.001340" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2075" name="SharedProductionCannotStarveTheSlowerWeapon" fullname="PaperDefense.Tests.SharedTowerProductionTests.SharedProductionCannotStarveTheSlowerWeapon" methodname="SharedProductionCannotStarveTheSlowerWeapon" classname="PaperDefense.Tests.SharedTowerProductionTests" runstate="Runnable" seed="1896389049" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.004822" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2074" name="TwoActiveGunsShareAboutOnePointSixTimesSingleGunProduction" fullname="PaperDefense.Tests.SharedTowerProductionTests.TwoActiveGunsShareAboutOnePointSixTimesSingleGunProduction" methodname="TwoActiveGunsShareAboutOnePointSixTimesSingleGunProduction" classname="PaperDefense.Tests.SharedTowerProductionTests" runstate="Runnable" seed="184770229" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.005233" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2078" name="TwoMountsShareThreeDistinctColorTargetsAndNeverLimitOrdinaryDamage" fullname="PaperDefense.Tests.SharedTowerProductionTests.TwoMountsShareThreeDistinctColorTargetsAndNeverLimitOrdinaryDamage" methodname="TwoMountsShareThreeDistinctColorTargetsAndNeverLimitOrdinaryDamage" classname="PaperDefense.Tests.SharedTowerProductionTests" runstate="Runnable" seed="1850076766" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.001300" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2076" name="WaitingWithoutTargetsCannotAccumulateAnUnboundedVolley" fullname="PaperDefense.Tests.SharedTowerProductionTests.WaitingWithoutTargetsCannotAccumulateAnUnboundedVolley" methodname="WaitingWithoutTargetsCannotAccumulateAnUnboundedVolley" classname="PaperDefense.Tests.SharedTowerProductionTests" runstate="Runnable" seed="1051825290" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.007661" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2194" name="WeaponCycleTests" fullname="PaperDefense.Tests.WeaponCycleTests" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" testcasecount="44" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.671044" total="44" passed="44" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2204" name="AnEmptyFieldBeforeAcquisitionCreatesNoPostponedShots" fullname="PaperDefense.Tests.WeaponCycleTests.AnEmptyFieldBeforeAcquisitionCreatesNoPostponedShots" methodname="AnEmptyFieldBeforeAcquisitionCreatesNoPostponedShots" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="409475478" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.001199" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2197" name="BurstMagazine_RepeatsAt126Seconds" fullname="PaperDefense.Tests.WeaponCycleTests.BurstMagazine_RepeatsAt126Seconds" methodname="BurstMagazine_RepeatsAt126Seconds" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="542068357" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.005835" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2212" name="CoarseAndFineStepsProduceTheSameShotsAndFinalState" fullname="PaperDefense.Tests.WeaponCycleTests.CoarseAndFineStepsProduceTheSameShotsAndFinalState" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.111602" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2209" name="CoarseAndFineStepsProduceTheSameShotsAndFinalState(&quot;standard&quot;,2.52f,252)" fullname="PaperDefense.Tests.WeaponCycleTests.CoarseAndFineStepsProduceTheSameShotsAndFinalState(&quot;standard&quot;,2.52f,252)" methodname="CoarseAndFineStepsProduceTheSameShotsAndFinalState" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1740890262" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.006518" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2210" name="CoarseAndFineStepsProduceTheSameShotsAndFinalState(&quot;burst&quot;,1.26f,126)" fullname="PaperDefense.Tests.WeaponCycleTests.CoarseAndFineStepsProduceTheSameShotsAndFinalState(&quot;burst&quot;,1.26f,126)" methodname="CoarseAndFineStepsProduceTheSameShotsAndFinalState" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="772003924" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.004400" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2211" name="CoarseAndFineStepsProduceTheSameShotsAndFinalState(&quot;drum&quot;,5.187f,5187)" fullname="PaperDefense.Tests.WeaponCycleTests.CoarseAndFineStepsProduceTheSameShotsAndFinalState(&quot;drum&quot;,5.187f,5187)" methodname="CoarseAndFineStepsProduceTheSameShotsAndFinalState" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="932442382" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.007192" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2195" name="CreatedMountStartsWithAFullReadyMagazineWithoutFiring" fullname="PaperDefense.Tests.WeaponCycleTests.CreatedMountStartsWithAFullReadyMagazineWithoutFiring" methodname="CreatedMountStartsWithAFullReadyMagazineWithoutFiring" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1460150221" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000568" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2198" name="DrumMagazine_RepeatsAt5187Seconds" fullname="PaperDefense.Tests.WeaponCycleTests.DrumMagazine_RepeatsAt5187Seconds" methodname="DrumMagazine_RepeatsAt5187Seconds" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="263437418" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.004404" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2215" name="EachMountOwnsIndependentRoundsAndPhaseProgress" fullname="PaperDefense.Tests.WeaponCycleTests.EachMountOwnsIndependentRoundsAndPhaseProgress" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.078526" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2213" name="EachMountOwnsIndependentRoundsAndPhaseProgress(2)" fullname="PaperDefense.Tests.WeaponCycleTests.EachMountOwnsIndependentRoundsAndPhaseProgress(2)" methodname="EachMountOwnsIndependentRoundsAndPhaseProgress" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1806419004" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.001856" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2214" name="EachMountOwnsIndependentRoundsAndPhaseProgress(3)" fullname="PaperDefense.Tests.WeaponCycleTests.EachMountOwnsIndependentRoundsAndPhaseProgress(3)" methodname="EachMountOwnsIndependentRoundsAndPhaseProgress" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="600087744" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000175" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2217" name="EachShotExposesItsOwnImmutableStateBeforeTheRestOfTheStepAdvances" fullname="PaperDefense.Tests.WeaponCycleTests.EachShotExposesItsOwnImmutableStateBeforeTheRestOfTheStepAdvances" methodname="EachShotExposesItsOwnImmutableStateBeforeTheRestOfTheStepAdvances" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="152029346" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.001485" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2200" name="EndpointShotsAreIncludedOnceAndTheFollowingStepContinuesTheNextPhase" fullname="PaperDefense.Tests.WeaponCycleTests.EndpointShotsAreIncludedOnceAndTheFollowingStepContinuesTheNextPhase" methodname="EndpointShotsAreIncludedOnceAndTheFollowingStepContinuesTheNextPhase" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1099721446" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000297" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2207" name="FeedChangesApplyOnceDuringReloadAndDoNotAddAnInterval" fullname="PaperDefense.Tests.WeaponCycleTests.FeedChangesApplyOnceDuringReloadAndDoNotAddAnInterval" methodname="FeedChangesApplyOnceDuringReloadAndDoNotAddAnInterval" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1927693770" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000193" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2206" name="FeedChangesApplyOnceToTheRemainingNormalizedIntervalWork" fullname="PaperDefense.Tests.WeaponCycleTests.FeedChangesApplyOnceToTheRemainingNormalizedIntervalWork" methodname="FeedChangesApplyOnceToTheRemainingNormalizedIntervalWork" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1836345607" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000217" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2216" name="InputStateAndReturnedShotOffsetsCannotBeMutatedThroughTheResult" fullname="PaperDefense.Tests.WeaponCycleTests.InputStateAndReturnedShotOffsetsCannotBeMutatedThroughTheResult" methodname="InputStateAndReturnedShotOffsetsCannotBeMutatedThroughTheResult" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="509069145" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000327" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2208" name="IntervalFloorStillAppliesWhenFeedIncreases" fullname="PaperDefense.Tests.WeaponCycleTests.IntervalFloorStillAppliesWhenFeedIncreases" methodname="IntervalFloorStillAppliesWhenFeedIncreases" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1397919838" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000141" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2223" name="InvalidDeltaIsRejected" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidDeltaIsRejected" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.095634" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2219" name="InvalidDeltaIsRejected(-1.0f)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidDeltaIsRejected(-1.0f)" methodname="InvalidDeltaIsRejected" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1732376845" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000809" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2220" name="InvalidDeltaIsRejected(float.NaN)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidDeltaIsRejected(float.NaN)" methodname="InvalidDeltaIsRejected" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="690887919" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000051" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2221" name="InvalidDeltaIsRejected(float.PositiveInfinity)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidDeltaIsRejected(float.PositiveInfinity)" methodname="InvalidDeltaIsRejected" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="182839765" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000048" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2222" name="InvalidDeltaIsRejected(float.NegativeInfinity)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidDeltaIsRejected(float.NegativeInfinity)" methodname="InvalidDeltaIsRejected" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="739207392" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000029" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="2228" name="InvalidFeedIsRejected" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidFeedIsRejected" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.098461" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2224" name="InvalidFeedIsRejected(-1.0f)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidFeedIsRejected(-1.0f)" methodname="InvalidFeedIsRejected" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1140101941" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000493" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2225" name="InvalidFeedIsRejected(float.NaN)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidFeedIsRejected(float.NaN)" methodname="InvalidFeedIsRejected" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1171619150" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000043" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2226" name="InvalidFeedIsRejected(float.PositiveInfinity)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidFeedIsRejected(float.PositiveInfinity)" methodname="InvalidFeedIsRejected" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1818183320" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000028" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2227" name="InvalidFeedIsRejected(float.NegativeInfinity)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidFeedIsRejected(float.NegativeInfinity)" methodname="InvalidFeedIsRejected" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="295652190" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000030" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="2244" name="InvalidMagazineSizeIsRejected" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidMagazineSizeIsRejected" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.099604" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2242" name="InvalidMagazineSizeIsRejected(0)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidMagazineSizeIsRejected(0)" methodname="InvalidMagazineSizeIsRejected" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="494678112" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000417" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2243" name="InvalidMagazineSizeIsRejected(-1)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidMagazineSizeIsRejected(-1)" methodname="InvalidMagazineSizeIsRejected" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1302382606" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000036" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="2241" name="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidWeaponTimingsAreRejectedBeforeAnyAdvance" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.100462" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2229" name="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;interval&quot;,0.0f)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;interval&quot;,0.0f)" methodname="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1343322442" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000546" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2230" name="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;interval&quot;,-1.0f)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;interval&quot;,-1.0f)" methodname="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="682348269" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000048" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2231" name="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;interval&quot;,float.NaN)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;interval&quot;,float.NaN)" methodname="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="490204658" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000045" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2232" name="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;interval&quot;,float.PositiveInfinity)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;interval&quot;,float.PositiveInfinity)" methodname="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="429031364" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000043" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2233" name="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;reload&quot;,0.0f)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;reload&quot;,0.0f)" methodname="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="450837775" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000037" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2234" name="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;reload&quot;,-1.0f)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;reload&quot;,-1.0f)" methodname="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="708635591" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000031" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2235" name="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;reload&quot;,float.NaN)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;reload&quot;,float.NaN)" methodname="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1197067100" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000032" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2236" name="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;reload&quot;,float.PositiveInfinity)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;reload&quot;,float.PositiveInfinity)" methodname="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="349183628" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000052" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2237" name="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;floor&quot;,0.0f)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;floor&quot;,0.0f)" methodname="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="62444583" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000034" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2238" name="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;floor&quot;,-1.0f)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;floor&quot;,-1.0f)" methodname="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1626556893" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000032" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2239" name="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;floor&quot;,float.NaN)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;floor&quot;,float.NaN)" methodname="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="18321967" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000030" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2240" name="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;floor&quot;,float.PositiveInfinity)" fullname="PaperDefense.Tests.WeaponCycleTests.InvalidWeaponTimingsAreRejectedBeforeAnyAdvance(&quot;floor&quot;,float.PositiveInfinity)" methodname="InvalidWeaponTimingsAreRejectedBeforeAnyAdvance" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="2102831965" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000031" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2203" name="LosingTheTargetAfterTheLastRoundFinishesReloadWithoutSavingAQueueOfShots" fullname="PaperDefense.Tests.WeaponCycleTests.LosingTheTargetAfterTheLastRoundFinishesReloadWithoutSavingAQueueOfShots" methodname="LosingTheTargetAfterTheLastRoundFinishesReloadWithoutSavingAQueueOfShots" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="509080730" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000510" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2218" name="MissingStateOrWeaponIsRejected" fullname="PaperDefense.Tests.WeaponCycleTests.MissingStateOrWeaponIsRejected" methodname="MissingStateOrWeaponIsRejected" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1859898825" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000319" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2199" name="SingleRoundMagazineWaitsOnlyForReload" fullname="PaperDefense.Tests.WeaponCycleTests.SingleRoundMagazineWaitsOnlyForReload" methodname="SingleRoundMagazineWaitsOnlyForReload" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="22333743" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000438" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2196" name="StandardMagazine_RepeatsAt252Seconds" fullname="PaperDefense.Tests.WeaponCycleTests.StandardMagazine_RepeatsAt252Seconds" methodname="StandardMagazine_RepeatsAt252Seconds" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1272728501" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.004093" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2205" name="TargetChangesDoNotDiscardRoundsOrRestartTheCurrentInterval" fullname="PaperDefense.Tests.WeaponCycleTests.TargetChangesDoNotDiscardRoundsOrRestartTheCurrentInterval" methodname="TargetChangesDoNotDiscardRoundsOrRestartTheCurrentInterval" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1206297812" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000288" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2201" name="ZeroDeltaNeitherInitializesNorFiresNorAdvancesAnExistingPhase" fullname="PaperDefense.Tests.WeaponCycleTests.ZeroDeltaNeitherInitializesNorFiresNorAdvancesAnExistingPhase" methodname="ZeroDeltaNeitherInitializesNorFiresNorAdvancesAnExistingPhase" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="639767802" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000217" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2202" name="ZeroFeedPausesWorkAndCannotFireEvenWhenFreshAndTargeted" fullname="PaperDefense.Tests.WeaponCycleTests.ZeroFeedPausesWorkAndCannotFireEvenWhenFreshAndTargeted" methodname="ZeroFeedPausesWorkAndCannotFireEvenWhenFreshAndTargeted" classname="PaperDefense.Tests.WeaponCycleTests" runstate="Runnable" seed="1992884799" result="Passed" start-time="2026-10-18 05:13:03Z" end-time="2026-10-18 05:13:03Z" duration="0.000156" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task6-focused-green.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

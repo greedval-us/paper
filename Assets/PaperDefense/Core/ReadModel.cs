@@ -39,7 +39,11 @@ namespace PaperDefense.Core
         public readonly Point2 Aim;
         public readonly int TargetId;
         public readonly float Cooldown,ActionRemaining,AcquisitionRemaining;
-        internal WeaponMountView(WeaponMountState state){Aim=state.Aim;TargetId=state.TargetId;Cooldown=state.Cooldown;ActionRemaining=state.ActionRemaining;AcquisitionRemaining=state.AcquisitionRemaining;}
+        public readonly WeaponCycleState Cycle;
+        public int RoundsRemaining => Cycle.RoundsRemaining;
+        public bool IsReloading => Cycle.IsReloading;
+        public double CycleRemainingWork => Cycle.RemainingWork;
+        internal WeaponMountView(WeaponMountState state){Aim=state.Aim;TargetId=state.TargetId;Cooldown=state.Cooldown;ActionRemaining=state.ActionRemaining;AcquisitionRemaining=state.AcquisitionRemaining;Cycle=state.Cycle;}
     }
     public readonly struct StructureView
     {
@@ -55,6 +59,7 @@ namespace PaperDefense.Core
         public readonly int PrimaryTargetId, SecondaryTargetId;
         public readonly TargetPriority Priority;
         public readonly TowerBlueprint Blueprint;
+        public readonly ResolvedEntry ResolvedEntry;
         public readonly InkColor Color;
         readonly WeaponMountView mount0,mount1,mount2;
         public WeaponMountView GetMountState(int mount)=>mount==0?mount0:mount==1?mount1:mount==2?mount2:throw new ArgumentOutOfRangeException(nameof(mount));
@@ -63,7 +68,7 @@ namespace PaperDefense.Core
         internal StructureView(StructureState s)
         {Id=s.Id;Cell=s.Cell;Kind=s.Kind;ContentId=s.ContentId??LegacyContentIds.Weapon(s.Kind);Tier=s.Tier;Health=s.Health;MaxHealth=s.MaxHealth;BuildRemaining=s.BuildRemaining;
             Cooldown=s.Cooldown;IsComplete=s.IsComplete;WaitingForClearance=s.WaitingForClearance;Aim=s.Aim;Priority=s.Priority;
-            Blueprint=s.Blueprint;Color=s.Color;PrimaryAim=s.PrimaryAim;SecondaryAim=s.SecondaryAim;
+            Blueprint=s.Blueprint;ResolvedEntry=s.ResolvedEntry;Color=s.Color;PrimaryAim=s.PrimaryAim;SecondaryAim=s.SecondaryAim;
             PrimaryTargetId=s.PrimaryTargetId;SecondaryTargetId=s.SecondaryTargetId;
             mount0=new WeaponMountView(s.GetMountState(0));mount1=new WeaponMountView(s.GetMountState(1));mount2=new WeaponMountView(s.GetMountState(2));}
     }

@@ -1,6 +1,6 @@
 # Составной альбом — Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Выполнение начато по запросу пользователя 18.10.2026. Задачи 1–5 завершены; следующая — задача 6. [Проверки задачи 1](../../validation/modular-album/task1-report.md), [задачи 2](../../validation/modular-album/task2-report.md), [задачи 3](../../validation/modular-album/task3-report.md), [задачи 4](../../validation/modular-album/task4-report.md), [задачи 5](../../validation/modular-album/task5-report.md).
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Выполнение начато по запросу пользователя 18.10.2026. Задачи 1–6 завершены; следующая — задача 7. [Проверки задачи 1](../../validation/modular-album/task1-report.md), [задачи 2](../../validation/modular-album/task2-report.md), [задачи 3](../../validation/modular-album/task3-report.md), [задачи 4](../../validation/modular-album/task4-report.md), [задачи 5](../../validation/modular-album/task5-report.md), [задачи 6](../../validation/modular-album/task6-report.md).
 
 **Goal:** перенести существующую игру на альбом составных башен и сооружений, восемь общих слотов и открытия деталей за уровень и золото, включая все обновлённые экраны.
 
@@ -190,12 +190,12 @@
 
 **Интерфейс:** `WeaponCycleResult WeaponCycleRules.Step(WeaponCycleState state, ResolvedWeapon weapon, float delta, bool targetAcquired, float feed)`. State хранит оставшиеся патроны и нормализованный остаток интервала/перезарядки отдельно на каждом mount. Result содержит моменты готовых выстрелов внутри шага и остаток состояния. `delta=0` ничего не продвигает; отсутствие цели позволяет закончить перезарядку, но не накапливает очередь отложенных попаданий.
 
-- [ ] Написать `WeaponCycleTests.StandardMagazine_RepeatsAt252Seconds`: после захвата при t=0 первый выстрел; для N=6/.42/.42 `Assert.That(shotTimes[6], Is.EqualTo(2.52f).Within(.0001f));`. N=3/.189/.882 — следующий цикл в 1.26 с; N=12/.357/1.26 — в 5.187 с. Для N=1 следующий выстрел через ReloadSeconds, без дополнительной задержки Interval.
-- [ ] Добавить тесты потери цели после последнего патрона, смены цели, паузы, восстановления на пустом поле, двух/трёх креплений, смены количества активных стволов. Один шаг 1.26 с и эквивалентные мелкие шаги дают одинаковую последовательность при постоянной захваченной цели. Feed учитывается ровно один раз, включая смену магазина; бесконечные/отрицательные времена отклоняются.
-- [ ] Запустить три новых класса, увидеть красный результат.
-- [ ] Подключить `ResolvedWeapon` к существующим targeting/hit-операциям. Сохранить legacy-ветку старого cooldown. Новый цикл общий для боя и полигона, независим на каждом креплении; завершённое действие не продвигается повторно в `ReloadWithoutTargets`.
-- [ ] Проверить семейства: пробой — максимум 7 разных целей; веер — 90° и максимум 8; рикошет — 4 разные цели, скачок до 3; мортира — минимум 6, полёт .8 к фиксированной точке, радиус 2.4 без искусственного лимита 8; промокашка — 0 урона и очистка. Slow не перемножается, скорость не ниже .4. Пройти существующие `MountReadinessTests`, `IndependentMountAimTests`, `SharedTowerProductionTests` и тесты семи семейств.
-- [ ] Зафиксировать: `feat: simulate composite weapon magazines and bursts`.
+- [x] Написать `WeaponCycleTests.StandardMagazine_RepeatsAt252Seconds`: после захвата при t=0 первый выстрел; для N=6/.42/.42 `Assert.That(shotTimes[6], Is.EqualTo(2.52f).Within(.0001f));`. N=3/.189/.882 — следующий цикл в 1.26 с; N=12/.357/1.26 — в 5.187 с. Для N=1 следующий выстрел через ReloadSeconds, без дополнительной задержки Interval.
+- [x] Добавить тесты потери цели после последнего патрона, смены цели, паузы, восстановления на пустом поле, двух/трёх креплений, смены количества активных стволов. Один шаг 1.26 с и эквивалентные мелкие шаги дают одинаковую последовательность при постоянной захваченной цели. Feed учитывается ровно один раз, включая смену магазина; бесконечные/отрицательные времена отклоняются.
+- [x] Запустить три новых класса, увидеть красный результат.
+- [x] Подключить `ResolvedWeapon` к существующим targeting/hit-операциям. Сохранить legacy-ветку старого cooldown. Новый цикл общий для боя и полигона, независим на каждом креплении; завершённое действие не продвигается повторно в `ReloadWithoutTargets`.
+- [x] Проверить семейства: пробой — максимум 7 разных целей; веер — 90° и максимум 8; рикошет — 4 разные цели, скачок до 3; мортира — минимум 6, полёт .8 к фиксированной точке, радиус 2.4 без искусственного лимита 8; промокашка — 0 урона и очистка. Slow не перемножается, скорость не ниже .4. Пройти существующие `MountReadinessTests`, `IndependentMountAimTests`, `SharedTowerProductionTests` и тесты семи семейств.
+- [x] Зафиксировать: `feat: simulate composite weapon magazines and bursts`.
 
 ## Задача 7. Общая постройка, баррикада, замедление и ремонт
 

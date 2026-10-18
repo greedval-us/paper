@@ -7,7 +7,7 @@ namespace PaperDefense.Core
     /// Target selection and weapon geometry live here, independently of wave and construction rules.
     /// Add new weapon effects in this system; all queries share its reusable spatial buckets.
     /// </summary>
-    internal sealed class WeaponSystem
+    internal sealed partial class WeaponSystem
     {
         private readonly GameBalance balance;
         private readonly ContentCatalogSnapshot catalog;
@@ -57,12 +57,14 @@ namespace PaperDefense.Core
             clockSeconds = timeSeconds ?? clockSeconds + delta;
             visualEvents=events;visualTick=tick;
             spatial.Rebuild(enemies);
-            // Movement has already finished for this step. Resolve only shells launched on
-            // earlier steps, so a newly launched shell retains its complete flight time.
-            AdvanceProjectiles(delta, tick, statistics, events);
+            // Composite actions retain their moments inside the step. Historical shells and
+            // weapon actions retain their original cadence at the end of the simulation tick.
+            FireComposites(structures, shots, fireMultiplier, damageMultiplier, delta, tick, statistics, events);
+            AdvanceProjectiles(delta, tick, statistics, events, legacyOnly: true);
             foreach (var structure in structures)
             {
                 if (!CanOperate(structure)) continue;
+                if (structure.ResolvedEntry != null) continue;
                 Point2 origin = new Point2(structure.Cell.X + 0.5f, structure.Cell.Y + 0.5f);
                 TowerBlueprint blueprint = structure.Blueprint;
                 ResolvedTowerAssembly assembly = Assembly(structure);
@@ -95,8 +97,13 @@ namespace PaperDefense.Core
         internal void FireIsolatedMount(StructureState structure,int mount,List<EnemyState> enemies,List<ShotEvent> shots,
             float delta,long tick,RunStatistics statistics,SimulationEventBuffer events,double timeSeconds)
         {
-            clockSeconds=timeSeconds;visualEvents=events;visualTick=tick;spatial.Rebuild(enemies);AdvanceProjectiles(delta,tick,statistics,events);
-            if(structure==null||!CanOperate(structure))return;
+            clockSeconds=timeSeconds;visualEvents=events;visualTick=tick;spatial.Rebuild(enemies);
+            isolatedComposite.Clear();
+            if(structure?.ResolvedEntry!=null&&CanOperate(structure))isolatedComposite.Add(structure);
+            // Shells own their launch parameters and keep flying after their source is removed.
+            FireComposites(isolatedComposite,shots,1,1,delta,tick,statistics,events,isolatedComposite.Count==0?-1:mount);
+            AdvanceProjectiles(delta,tick,statistics,events,legacyOnly:true);
+            if(structure==null||!CanOperate(structure)||structure.ResolvedEntry!=null)return;
             var assembly=Assembly(structure);var weapon=mount>=0&&mount<assembly.Weapons.Length?assembly.Weapons[mount]:null;
             if(weapon==null)throw new ArgumentOutOfRangeException(nameof(mount));
             Point2 origin=new Point2(structure.Cell.X+.5f,structure.Cell.Y+.5f);
@@ -239,10 +246,15 @@ namespace PaperDefense.Core
         // Assault uses Fire instead, so a simulation step never advances a reload twice.
         internal void ReloadWithoutTargets(List<StructureState> structures, float fireMultiplier, float delta)
         {
-            if (!balance.Construction.DynamicFeed) return;
             foreach (var structure in structures)
             {
                 if (!CanOperate(structure)) continue;
+                if (structure.ResolvedEntry != null)
+                {
+                    ReloadComposite(structure,fireMultiplier,delta);
+                    continue;
+                }
+                if (!balance.Construction.DynamicFeed) continue;
                 TowerBlueprint blueprint = structure.Blueprint;
                 ResolvedTowerAssembly assembly = Assembly(structure);
                 int pending=0;for(int mount=0;mount<(assembly==null?1:assembly.Weapons.Length);mount++)
@@ -304,7 +316,7 @@ namespace PaperDefense.Core
 
         private void LaunchMortar(Point2 from, Point2 to, WeaponDefinition weapon, float damage,
             ColorEffectPayload payload, TowerColorBudget colorBudget, MortarFootprint footprint,
-            long tick, SimulationEventBuffer events)
+            long tick, SimulationEventBuffer events, bool compositeCycle = false)
         {
             var definition=weapon.Numeric;
             float duration = Math.Max(0, definition.FlightSeconds);
@@ -312,7 +324,7 @@ namespace PaperDefense.Core
             {
                 Id = nextProjectileId++, From = from, To = to, Duration = duration,
                 Remaining = duration, Radius = Math.Max(0, definition.Radius),
-                Damage = damage, Weapon = weapon.LegacyKind ?? (StructureKind)(-1), WeaponId = weapon.Id, Definition=weapon, Color = payload.Color,
+                Damage = damage, Weapon = weapon.LegacyKind ?? (StructureKind)(-1), WeaponId = weapon.Id, Definition=weapon, Color = payload.Color, CompositeCycle=compositeCycle,
                 EffectPayload = payload, ColorBudget = colorBudget,
                 SourceStructureId=visualSourceStructureId,MountSlotIndex=visualMountSlotIndex,ActionId=visualActionId,
                 ImpactFootprint = FootprintGeometry.Resolve(footprint, definition.Radius, from, to)
@@ -406,34 +418,41 @@ namespace PaperDefense.Core
             }
         }
 
-        private void AdvanceProjectiles(float delta, long tick, RunStatistics statistics, SimulationEventBuffer events)
+        private void AdvanceProjectiles(float delta, long tick, RunStatistics statistics, SimulationEventBuffer events, bool legacyOnly = false)
         {
             int write = 0;
             for (int read = 0; read < projectiles.Count; read++)
             {
                 var projectile = projectiles[read];
+                if (legacyOnly && projectile.CompositeCycle) { projectiles[write++] = projectile; continue; }
                 projectile.Remaining = Math.Max(0, projectile.Remaining - delta);
                 if (projectile.Remaining > 0.000001f) { projectiles[write++] = projectile; continue; }
-                visualSourceStructureId=projectile.SourceStructureId;visualMountSlotIndex=projectile.MountSlotIndex;visualActionId=projectile.ActionId;
-                FootprintGeometry? geometry = projectile.ImpactFootprint;
-                bool shaped = geometry.HasValue && !geometry.Value.IsCircle;
-                // Contains includes a small normalized boundary tolerance. Keep the broad phase
-                // conservative under world-coordinate rounding, without changing circle queries.
-                float queryRadius = shaped
-                    ? (float)Math.Min(float.MaxValue, (double)geometry.Value.BoundingRadius * 1.000001)
-                    : projectile.Radius;
-                spatial.Query(projectile.To, queryRadius, splashTargets);
-                if (projectile.ColorBudget != null) SortTargets(projectile.To, splashTargets);
-                foreach (var victim in splashTargets)
-                {
-                    if (shaped && !geometry.Value.Contains(projectile.To, victim.Position)) continue;
-                    ApplyDamage(victim, projectile.Damage, projectile.Definition, projectile.EffectPayload, projectile.ColorBudget, statistics);
-                }
-                events.Publish(tick, SimulationEventKind.ProjectileImpact, projectile.From, projectile.To,
-                    projectile.Weapon, projectile.Radius, projectile.Id, impactFootprint: projectile.ImpactFootprint,weaponId:projectile.WeaponId,
-                    sourceStructureId:projectile.SourceStructureId,mountSlotIndex:projectile.MountSlotIndex,actionId:projectile.ActionId,simulationSeconds:clockSeconds,attack:AttackKind.AreaProjectile);
+                ImpactProjectile(projectile,tick,statistics,events);
             }
             if (write < projectiles.Count) projectiles.RemoveRange(write, projectiles.Count - write);
+        }
+
+        // Both historical and composite shells use this one impact operation.
+        void ImpactProjectile(MortarProjectile projectile,long tick,RunStatistics statistics,SimulationEventBuffer events)
+        {
+            visualSourceStructureId=projectile.SourceStructureId;visualMountSlotIndex=projectile.MountSlotIndex;visualActionId=projectile.ActionId;
+            FootprintGeometry? geometry = projectile.ImpactFootprint;
+            bool shaped = geometry.HasValue && !geometry.Value.IsCircle;
+            // Contains includes a small normalized boundary tolerance. Keep the broad phase
+            // conservative under world-coordinate rounding, without changing circle queries.
+            float queryRadius = shaped
+                ? (float)Math.Min(float.MaxValue, (double)geometry.Value.BoundingRadius * 1.000001)
+                : projectile.Radius;
+            spatial.Query(projectile.To, queryRadius, splashTargets);
+            if (projectile.ColorBudget != null) SortTargets(projectile.To, splashTargets);
+            foreach (var victim in splashTargets)
+            {
+                if (shaped && !geometry.Value.Contains(projectile.To, victim.Position)) continue;
+                ApplyDamage(victim, projectile.Damage, projectile.Definition, projectile.EffectPayload, projectile.ColorBudget, statistics);
+            }
+            events.Publish(tick, SimulationEventKind.ProjectileImpact, projectile.From, projectile.To,
+                projectile.Weapon, projectile.Radius, projectile.Id, impactFootprint: projectile.ImpactFootprint,weaponId:projectile.WeaponId,
+                sourceStructureId:projectile.SourceStructureId,mountSlotIndex:projectile.MountSlotIndex,actionId:projectile.ActionId,simulationSeconds:clockSeconds,attack:AttackKind.AreaProjectile);
         }
 
         private void ApplyDamage(EnemyState victim, float damage, WeaponDefinition weapon, ColorEffectPayload payload,

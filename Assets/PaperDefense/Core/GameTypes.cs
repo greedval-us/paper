@@ -203,10 +203,40 @@ namespace PaperDefense.Core
         public Point2 Aim;
         public int TargetId;
         public float Cooldown,AcquisitionRemaining,ActionRemaining;
+        public WeaponCycleState Cycle { get; internal set; } = new WeaponCycleState();
     }
 
     public sealed class StructureState
     {
+        public ResolvedEntry ResolvedEntry { get; }
+        public StructureState() { }
+        public StructureState(ResolvedEntry entry)
+        {
+            ResolvedEntry = entry ?? throw new ArgumentNullException(nameof(entry));
+            if (entry.Kind != AlbumEntryKind.Tower)
+                throw new ArgumentException("A composite combat structure requires a tower entry.", nameof(entry));
+            Tier = entry.Material;
+            Health = MaxHealth = entry.Health;
+            BuildRemaining = entry.BuildSeconds;
+            Kind = CombatKind(entry.Weapons[0].Family);
+            ContentId = entry.Weapons[0].SourceId;
+            foreach (var weapon in entry.Weapons)
+                GetMountState(weapon.SlotIndex).Cycle = WeaponCycleRules.CreateState(weapon);
+        }
+        internal static StructureKind CombatKind(AssemblyWeaponFamily family)
+        {
+            switch (family)
+            {
+                case AssemblyWeaponFamily.Gun: return StructureKind.Gun;
+                case AssemblyWeaponFamily.Piercer: return StructureKind.Piercer;
+                case AssemblyWeaponFamily.Mortar: return StructureKind.Mortar;
+                case AssemblyWeaponFamily.Fan: return StructureKind.Fan;
+                case AssemblyWeaponFamily.Ricochet: return StructureKind.Ricochet;
+                case AssemblyWeaponFamily.Stapler: return StructureKind.Stapler;
+                case AssemblyWeaponFamily.Blotter: return StructureKind.Blotter;
+                default: throw new ArgumentOutOfRangeException(nameof(family));
+            }
+        }
         public int Id;
         public Cell Cell;
         public StructureKind Kind;
