@@ -124,14 +124,14 @@ namespace PaperDefense.Tests
         static Vector2 Center(Vector2[] quad) => (quad[0] + quad[2]) * .5f;
 
         [Test]
-        public void EachStandardGunDrawsItsOwnFourDistinctFragments()
+        public void EachStandardGunDrawsItsOwnCoreFragmentsInsideTheCompletePilot()
         {
             var game = Build(Standard());
             var theme = RecoilTheme();
             var mesh = Draw(game, theme);
             try
             {
-                Assert.That(mesh.vertexCount, Is.EqualTo(32), "Two guns need four textured quads each.");
+                Assert.That(mesh.vertexCount, Is.EqualTo(80), "Two eight-part guns and four foundation layers share one ordered batch.");
                 foreach (string id in Parts)
                     for (int slot = 0; slot < 2; slot++)
                     {
@@ -317,7 +317,7 @@ namespace PaperDefense.Tests
             var mesh = Draw(game, theme, Recoiling(game.Structures[0].Id));
             try
             {
-                Assert.That(mesh.vertexCount, Is.EqualTo(32));
+                Assert.That(mesh.vertexCount, Is.EqualTo(80));
                 foreach (string id in Parts) Assert.That(Quads(mesh, id).Count, Is.EqualTo(2));
                 Assert.That(JsonUtility.ToJson(profile.ToData()), Is.EqualTo(savedProfile),
                     "Presentation must not persist the split fragments, aim, or recoil into the profile.");

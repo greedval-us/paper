@@ -1,6 +1,6 @@
 # Составной альбом — Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Выполнение начато по запросу пользователя 18.10.2026. Задачи 1–2 завершены; следующая — задача 3. [Проверки задачи 1](../../validation/modular-album/task1-report.md), [задачи 2](../../validation/modular-album/task2-report.md).
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Выполнение начато по запросу пользователя 18.10.2026. Задачи 1–3 завершены; следующая — задача 4. [Проверки задачи 1](../../validation/modular-album/task1-report.md), [задачи 2](../../validation/modular-album/task2-report.md), [задачи 3](../../validation/modular-album/task3-report.md).
 
 **Goal:** перенести существующую игру на альбом составных башен и сооружений, восемь общих слотов и открытия деталей за уровень и золото, включая все обновлённые экраны.
 
@@ -145,12 +145,12 @@
 
 **Интерфейсы:** `AssemblyFitRules.Validate(AssemblyRecipe recipe, AssemblyFitCatalog fits)` возвращает `IReadOnlyList<AssemblyDiagnostic>`. Каталог хранит числовые sockets, bounds, clearance и диапазоны углов без Unity API. `AssemblyVisualComposer.Compose(RecipeSnapshot recipe, AssemblyVisualPose pose)` возвращает `AssemblyVisualComposition`: упорядоченные фрагменты, трансформации и anchors. Pose содержит углы каждого mount и отдачу; все UI/world-адаптеры используют один результат. Импорт метаданных выдаёт согласованные визуальные и Core-данные посадок.
 
-- [ ] Написать `AssemblyFitTests.IntersectingPair_ReportsClearance`: `Assert.That(issues.Select(x => x.Code), Does.Contain("assembly.clearance"));`. В `AssemblyVisualPilotTests` неизвестный socket/версия отклоняются; после trim и перепаковки точки attach/muzzle совпадают с исходными с допуском 0,5 исходного пикселя; раздельные углы двух стволов сохраняются. Текущая пересекающаяся пара должна быть воспроизводимо отклонена.
-- [ ] Запустить новые тесты в EditMode, зафиксировать красный результат.
-- [ ] Собрать пилот: обычная рамка, корпус front/back, бронепластины, штатные подача/поворот, два пулемёта со всеми пятью функциональными категориями. Согласовать опоры и зоны движения по контракту. Исправить исходную геометрию так, чтобы бесплатный «Двойной дозор» оставался допустимым; не скрывать пересечения масштабированием только в UI или изменением слоя.
-- [ ] Проверить весь разрешённый диапазон двух независимых поворотов и максимальную отдачу: консервативные swept bounds автоматически, пограничные позы визуально. Пройти `AssemblyVisualPilotTests`, `AssemblyFitTests`, `StandardMountLayoutTests`, `SplitMountMetadataTests`, `SplitGunMountTests`. Пригодность сборки включает и числовую, и геометрическую валидацию.
-- [ ] Сохранить сравнение одной сборки в карточке, крупном preview, альбоме, полигоне и бою через существующие визуальные адаптеры и тестовый snapshot; новые экраны для этой проверки ещё не требуются. Внешняя длина ствола не меняет симуляционную дальность; VFX начинается в согласованном muzzle. До прохождения этого шага не размножать графический подход на остальные семейства. Для последующих backend/UI-тестов использовать явные fixtures посадок; полное производственное покрытие fit/графики принимается в задаче 13.
-- [ ] Зафиксировать: `feat: validate assembly sockets and finish modular gun pilot`.
+- [x] Написать `AssemblyFitTests.IntersectingPair_ReportsClearance`: `Assert.That(issues.Select(x => x.Code), Does.Contain("assembly.clearance"));`. В `AssemblyVisualPilotTests` неизвестный socket/версия отклоняются; после trim и перепаковки точки attach/muzzle совпадают с исходными с допуском 0,5 исходного пикселя; раздельные углы двух стволов сохраняются. Текущая пересекающаяся пара должна быть воспроизводимо отклонена.
+- [x] Запустить новые тесты в EditMode, зафиксировать красный результат.
+- [x] Собрать пилот: обычная рамка, корпус front/back, бронепластины, штатные подача/поворот, два пулемёта со всеми пятью функциональными категориями. Согласовать опоры и зоны движения по контракту. Исправить исходную геометрию так, чтобы бесплатный «Двойной дозор» оставался допустимым; не скрывать пересечения масштабированием только в UI или изменением слоя.
+- [x] Проверить весь разрешённый диапазон двух независимых поворотов и максимальную отдачу: консервативные swept bounds автоматически, пограничные позы визуально. Пройти `AssemblyVisualPilotTests`, `AssemblyFitTests`, `StandardMountLayoutTests`, `SplitMountMetadataTests`, `SplitGunMountTests`. Пригодность сборки включает и числовую, и геометрическую валидацию.
+- [x] Сохранить сравнение одной сборки в карточке, крупном preview, альбоме, полигоне и бою через существующие визуальные адаптеры и тестовый snapshot; новые экраны для этой проверки ещё не требуются. Внешняя длина ствола не меняет симуляционную дальность; VFX начинается в согласованном muzzle. До прохождения этого шага не размножать графический подход на остальные семейства. Для последующих backend/UI-тестов использовать явные fixtures посадок; полное производственное покрытие fit/графики принимается в задаче 13.
+- [x] Зафиксировать: `feat: validate assembly sockets and finish modular gun pilot`.
 
 ## Задача 4. Профиль v8 и миграция без потери страниц
 

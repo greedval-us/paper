@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "asset": "AssemblyAccessories-v1.png",
+  "createdDate": "2026-10-18",
+  "purpose": "Task3 graphical pilot modular assembly accessories",
+  "generation": {
+    "mode": "built-in",
+    "tool": "image_gen.imagegen",
+    "toolNamespace": "functions tools.image_gen__imagegen",
+    "transparent_background": true,
+    "originalOutputPath": "C:\\Users\\Greedval\\.codex\\generated_images\\01a14d00-3789-7613-afbe-e9b4b8910d76\\exec-cd3e31ba-8fe9-400a-88b6-2417cb8b9018.png",
+    "prompt": "Use case: stylized-concept.\nAsset type: transparent game sprite atlas for modular mechanical assembly accessories.\nPrimary request: Generate ONE new clean accessory atlas with exactly SIX isolated accessory groups, arranged in evenly spaced THREE COLUMNS by TWO ROWS on a 1536 x 1024 canvas. These are separate components for an illustrated game; do not assemble them into weapons or towers.\nReference roles: Previously inspected GunPilotParts-v1.png and ModularSprites.png are STYLE REFERENCES ONLY, not edit targets. Match their dark cobalt-blue ballpoint contours, warm ivory paper-colored solid interiors, hand-drawn pen hatching, and mild orthographic three-quarter mechanical asset language.\nScene/backdrop: genuine transparent alpha background everywhere outside the illustrated parts and inside open holes. No ground plane.\nRow 1 left: a small blue-steel iron rear sight, a compact U-notch upright on a short square dovetail mounting foot; simple readable silhouette.\nRow 1 center: a removable slightly curved box ammunition magazine with exactly a short visible three-round strip peeking out at its upper side, riveted cream body, blue metal edges.\nRow 1 right: a separate mechanical trigger lever and bracket, compact hooked finger lever in an L-shaped mounting bracket with one pivot pin, isolated on its own.\nRow 2 left: a foundation feed gearbox / belt-feed ammunition box: compact square mechanical box with panel seams, crank axle or gear housing on its side and a SHORT linked belt at one corner; no gun barrel.\nRow 2 center: a flat foundation rotary bearing ring in mild three-quarter view, rivets around rim, one large completely open transparent hole in its center; only the bearing ring, no tower and no platform filling the hole.\nRow 2 right: a PAIR of matching upright blue-outlined warm cream armor plates, small rectangular beveled riveted panels angled slightly toward one another, separate with a small transparent gap; together count as one accessory group.\nStyle/medium: hand-drawn dark cobalt blue ballpoint pen line art on warm ivory paper-colored material interiors, slightly imperfect confident contour lines, modest fine hatch shading and restrained pen stipple. Solid cream faces, blue edges and blue mechanical recesses. Same visual density and pen technique across all parts. No photorealism.\nComposition: six groups centered in their own equal 512 by 512 cells; all upright; ample transparent padding of at least 50 pixels around each group, no illustration crosses a cell boundary. Keep each group similar visual scale and comfortably isolated. Mild consistent three-quarter angle reveals top and side faces. Crisp readable outlines at sprite size.\nConstraints: transparent background true; no labels, text, numerals, lettering, watermarks, cell borders, grid lines, cast shadows, paper sheet background, detached debris, complete guns or complete towers. Exactly six groups and no extra objects. Do not reproduce any complete object from the references. Preserve transparent spaces inside sight notch, ring hole and mechanical bracket.",
+    "sourceTreatment": "New image generated; inspected reference images supplied visual style context only. No reference file was edited. Neither referenced_image_paths nor num_last_images_to_include was sent, as required for a brand-new generation.",
+    "fallbackUsed": false
+  },
+  "references": [
+    {
+      "path": "D:\\Projekt Unity\\paper\\ArtSource\\Notebook\\NewStyle\\GunPilotParts-v1.png",
+      "role": "style reference only",
+      "inspectedWith": "view_image"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\ArtSource\\Notebook\\NewStyle\\ModularSprites.png",
+      "role": "style reference only",
+      "inspectedWith": "view_image"
+    }
+  ],
+  "image": {
+    "width": 1536,
+    "height": 1024,
+    "pixelFormat": "Format32bppArgb",
+    "alphaMin": 0,
+    "alphaMax": 254,
+    "fullyTransparentPixels": 952441,
+    "fullyOpaquePixels": 0,
+    "cornerAlpha": 0,
+    "ringHoleSampleAlpha": 0,
+    "creamInteriorSampleAlpha": 252,
+    "sha256": "32CDAA7FB704D8D3FC33918A317E3F1047A0995E71282E422F58980A93E07648"
+  },
+  "inspection": {
+    "method": "System.Drawing read-only alpha measurement after visual generation review",
+    "alphaThresholdForMeasuredBounds": 2,
+    "origin": "top-left; x increases right, y increases down; right and bottom are exclusive",
+    "layout": "3 columns by 2 rows",
+    "note": "Six groups are isolated. Ring extends about 3px past the nominal 1024px column boundary; measured independent group crops avoid cutting it."
+  },
+  "crops": [
+    {
+      "name": "IronRearSight",
+      "row": 0,
+      "column": 0,
+      "topOriginRect": [
+        105,
+        83,
+        339,
+        338
+      ],
+      "unityBottomOriginRect": [
+        105,
+        603,
+        339,
+        338
+      ]
+    },
+    {
+      "name": "BoxMagazineThreeRounds",
+      "row": 0,
+      "column": 1,
+      "topOriginRect": [
+        648,
+        33,
+        265,
+        444
+      ],
+      "unityBottomOriginRect": [
+        648,
+        547,
+        265,
+        444
+      ]
+    },
+    {
+      "name": "TriggerLeverBracket",
+      "row": 0,
+      "column": 2,
+      "topOriginRect": [
+        1122,
+        48,
+        335,
+        378
+      ],
+      "unityBottomOriginRect": [
+        1122,
+        598,
+        335,
+        378
+      ]
+    },
+    {
+      "name": "FoundationFeedGearbox",
+      "row": 1,
+      "column": 0,
+      "topOriginRect": [
+        32,
+        540,
+        465,
+        394
+      ],
+      "unityBottomOriginRect": [
+        32,
+        90,
+        465,
+        394
+      ]
+    },
+    {
+      "name": "FoundationRotaryBearingRing",
+      "row": 1,
+      "column": 1,
+      "topOriginRect": [
+        530,
+        576,
+        497,
+        332
+      ],
+      "unityBottomOriginRect": [
+        530,
+        116,
+        497,
+        332
+      ]
+    },
+    {
+      "name": "ArmorPlatePair",
+      "row": 1,
+      "column": 2,
+      "topOriginRect": [
+        1093,
+        537,
+        409,
+        405
+      ],
+      "unityBottomOriginRect": [
+        1093,
+        82,
+        409,
+        405
+      ]
+    }
+  ],
+  "recommendedCropPaddingPixels": 4,
+  "pixelEditing": "None. Copied the generated PNG byte-for-byte into the project; only read-only image inspection was performed."
+}

@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "message": "Retrieved 5 log entries.",
+  "data": [
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyFitTests.cs(23,16): error CS0246: The type or namespace name 'AssemblyFitPointInput' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyFitTests.cs(24,68): error CS0246: The type or namespace name 'AssemblyFitPointInput' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyFitTests.cs(24,16): error CS0246: The type or namespace name 'AssemblyFitRegionInput' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyFitTests.cs(26,16): error CS0246: The type or namespace name 'AssemblyFitCatalogInput' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyFitTests.cs(44,54): error CS0246: The type or namespace name 'AssemblyFitCatalogInput' could not be found (are you missing a using directive or an assembly reference?)\n"
+  ]
+}

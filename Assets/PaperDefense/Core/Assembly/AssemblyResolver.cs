@@ -6,6 +6,17 @@ namespace PaperDefense.Core
 {
     public static class AssemblyResolver
     {
+        /// <summary>Publication gate: both numerical rules and the supplied physical-fit coverage must pass.</summary>
+        public static AssemblyResolution Resolve(AssemblyRecipe recipe, ComponentCatalog catalog, GameBalance balance,
+            MaterialTier material, AssemblyFitCatalog fits)
+        {
+            var numerical = Resolve(recipe, catalog, balance, material);
+            var issues = new List<AssemblyDiagnostic>(numerical.Diagnostics);
+            issues.AddRange(AssemblyFitRules.Validate(recipe, fits));
+            return issues.Count == 0 ? numerical : AssemblyResolution.Failure(issues);
+        }
+
+        /// <summary>Numerical resolution only; callers publishing a new assembly supply a fit catalog via the overload.</summary>
         public static AssemblyResolution Resolve(AssemblyRecipe recipe, ComponentCatalog catalog, GameBalance balance, MaterialTier material)
         {
             var issues = AssemblyValidation.Validate(recipe, catalog, balance, material);

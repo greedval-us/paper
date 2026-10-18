@@ -1,0 +1,876 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-10-18T03:25:06.1558158Z",
+  "method": "compare-atlas-preservation.ps1; SHA-256 of decoded BGRA8 rows, top-to-bottom, without stride padding",
+  "baselineSnapshot": ".superpowers/sdd/2026-10-18-modular-album-implementation/before-task3",
+  "baselineRevision": "blue-pen-2026-10-17-gun-pilot-v1",
+  "currentRevision": "modular-gun-pilot-2026-10-18-v1",
+  "baselineAtlas": {
+    "width": 4128,
+    "height": 4128,
+    "pngSha256": "DBA87D53AD136B9A2907F6AE969852225A2BF219BE95FD4480BE158C110E871B",
+    "metadataSha256": "AAE2CA6BEB652718E2E1897FBAC827157CD0BA3494E97BA8538E367E7736BF74"
+  },
+  "currentAtlas": {
+    "width": 4128,
+    "height": 4128,
+    "pngSha256": "3995BEE43E9D4D41FA781FD87CEDF3CB8B013B04CCCCD04001E0E78F115E33E3",
+    "metadataSha256": "A400FD813BAAD18257B9C5564E03E49EFD5A20A3ADEB16E4DEBE996B32ABFB72"
+  },
+  "baselineCanonicalSpriteCount": 84,
+  "currentCanonicalSpriteCount": 90,
+  "newSpriteIds": [
+    "part.pilot.sight",
+    "part.pilot.magazine",
+    "part.pilot.trigger",
+    "part.pilot.feed",
+    "part.pilot.bearing",
+    "part.pilot.armor"
+  ],
+  "allBaselineSourceEntriesEqual": true,
+  "allSourceAliasesEqual": true,
+  "allBaselineCropPixelsDimensionsAndBoundsEqual": true,
+  "verdict": "pass",
+  "sprites": [
+    {
+      "id": "chassis.standard",
+      "width": 282,
+      "height": 250,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "329FC83969357A8FE2EC06A696BCEFB03962694B8D1C69E5656E0686F10A0D32",
+      "currentPixelsSha256": "329FC83969357A8FE2EC06A696BCEFB03962694B8D1C69E5656E0686F10A0D32",
+      "pixelsEqual": true
+    },
+    {
+      "id": "chassis.heavy",
+      "width": 320,
+      "height": 253,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "F8E014DE0EA68813BB5238D76DB361FEE4CFD2E35679E8030D5D6445DB1DFE56",
+      "currentPixelsSha256": "F8E014DE0EA68813BB5238D76DB361FEE4CFD2E35679E8030D5D6445DB1DFE56",
+      "pixelsEqual": true
+    },
+    {
+      "id": "chassis.precision",
+      "width": 279,
+      "height": 242,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "74E6B1B049332E4BE8D0EAB6DA045B160C35DFF523416394C666507BDAD7DCD9",
+      "currentPixelsSha256": "74E6B1B049332E4BE8D0EAB6DA045B160C35DFF523416394C666507BDAD7DCD9",
+      "pixelsEqual": true
+    },
+    {
+      "id": "chassis.battery",
+      "width": 337,
+      "height": 287,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "5DBB1AC9F3D897CC69AD4C9B8698571BEE9825BA9E5A696D90AC42A8B886D849",
+      "currentPixelsSha256": "5DBB1AC9F3D897CC69AD4C9B8698571BEE9825BA9E5A696D90AC42A8B886D849",
+      "pixelsEqual": true
+    },
+    {
+      "id": "module.armor",
+      "width": 277,
+      "height": 208,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "F31ECF254C2EC1825BA12B3A51B2B57B4C1897E13171A19638D5FE87497EF3E6",
+      "currentPixelsSha256": "F31ECF254C2EC1825BA12B3A51B2B57B4C1897E13171A19638D5FE87497EF3E6",
+      "pixelsEqual": true
+    },
+    {
+      "id": "weapon.gun",
+      "width": 211,
+      "height": 296,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "11F5204674CDE87C1D2E4BAF37A260B210C0EEC68BB6B81093AA5421C0CE6BC3",
+      "currentPixelsSha256": "11F5204674CDE87C1D2E4BAF37A260B210C0EEC68BB6B81093AA5421C0CE6BC3",
+      "pixelsEqual": true
+    },
+    {
+      "id": "weapon.piercer",
+      "width": 243,
+      "height": 314,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "9026A51AA1DC0AE7339D0CA67EAB9F5DE90285FE13AD7A0E1AF43F54982C21E1",
+      "currentPixelsSha256": "9026A51AA1DC0AE7339D0CA67EAB9F5DE90285FE13AD7A0E1AF43F54982C21E1",
+      "pixelsEqual": true
+    },
+    {
+      "id": "weapon.mortar",
+      "width": 240,
+      "height": 270,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "EE7FA223B0B4282F760C06B001F3D510F7E878DA94E415175FB7AB9C5D4479F8",
+      "currentPixelsSha256": "EE7FA223B0B4282F760C06B001F3D510F7E878DA94E415175FB7AB9C5D4479F8",
+      "pixelsEqual": true
+    },
+    {
+      "id": "weapon.fan",
+      "width": 256,
+      "height": 288,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "D4E8220EC48575622B1D058F08B3100B03127F9BDC0B0AE26A7DCB9D7C4FBC95",
+      "currentPixelsSha256": "D4E8220EC48575622B1D058F08B3100B03127F9BDC0B0AE26A7DCB9D7C4FBC95",
+      "pixelsEqual": true
+    },
+    {
+      "id": "weapon.ricochet",
+      "width": 262,
+      "height": 234,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "37C5217A534D2BAD880669EFF2E6922554B1D3DB85A2CE9F33A901CE127A32EF",
+      "currentPixelsSha256": "37C5217A534D2BAD880669EFF2E6922554B1D3DB85A2CE9F33A901CE127A32EF",
+      "pixelsEqual": true
+    },
+    {
+      "id": "weapon.stapler",
+      "width": 287,
+      "height": 248,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "D3DEAB6496ACD9F1B097BA69FCB8ECDBE301B00C3572956C61DA594B8CF2D077",
+      "currentPixelsSha256": "D3DEAB6496ACD9F1B097BA69FCB8ECDBE301B00C3572956C61DA594B8CF2D077",
+      "pixelsEqual": true
+    },
+    {
+      "id": "weapon.blotter",
+      "width": 243,
+      "height": 267,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "B2F8759DA4DFC2F8CF92E199B9EF31A134A64ECD12B92F260251276B648902FE",
+      "currentPixelsSha256": "B2F8759DA4DFC2F8CF92E199B9EF31A134A64ECD12B92F260251276B648902FE",
+      "pixelsEqual": true
+    },
+    {
+      "id": "module.feed",
+      "width": 283,
+      "height": 232,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "1CF3B84848B7F56F1BC427A57AE5D48ED2AADBD34A8AFD691451ECC1B8D4EBD7",
+      "currentPixelsSha256": "1CF3B84848B7F56F1BC427A57AE5D48ED2AADBD34A8AFD691451ECC1B8D4EBD7",
+      "pixelsEqual": true
+    },
+    {
+      "id": "module.tracking",
+      "width": 350,
+      "height": 259,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "C6036070280E280007E886BDD6652ADC5ED26E12CDCA3EEFF232F007A5130AC4",
+      "currentPixelsSha256": "C6036070280E280007E886BDD6652ADC5ED26E12CDCA3EEFF232F007A5130AC4",
+      "pixelsEqual": true
+    },
+    {
+      "id": "module.rail",
+      "width": 306,
+      "height": 230,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "5ED2951C09A46F9261C63817523CBA34A07F77A0C645E829B4C58BFA44DF7263",
+      "currentPixelsSha256": "5ED2951C09A46F9261C63817523CBA34A07F77A0C645E829B4C58BFA44DF7263",
+      "pixelsEqual": true
+    },
+    {
+      "id": "object.wall",
+      "width": 303,
+      "height": 259,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "8B99F65134951799152484C013BD901D6D2125D6AC434EEB9BEB7B4B47298BC1",
+      "currentPixelsSha256": "8B99F65134951799152484C013BD901D6D2125D6AC434EEB9BEB7B4B47298BC1",
+      "pixelsEqual": true
+    },
+    {
+      "id": "object.spikes",
+      "width": 291,
+      "height": 282,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "FABEC8F460152E1C14622F6F830DFB7AC38A9988E6115D2CFAAFB512F25250FF",
+      "currentPixelsSha256": "FABEC8F460152E1C14622F6F830DFB7AC38A9988E6115D2CFAAFB512F25250FF",
+      "pixelsEqual": true
+    },
+    {
+      "id": "object.repair",
+      "width": 357,
+      "height": 305,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "0641086B5050C6E7A10346386237CD9D1F082BE346CC975898D81BB1DDA5464F",
+      "currentPixelsSha256": "0641086B5050C6E7A10346386237CD9D1F082BE346CC975898D81BB1DDA5464F",
+      "pixelsEqual": true
+    },
+    {
+      "id": "object.tar",
+      "width": 312,
+      "height": 214,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "3DC6527227DCFB5D49247E8529F56EA6B236FBCC73993C73A08DC6434172AE30",
+      "currentPixelsSha256": "3DC6527227DCFB5D49247E8529F56EA6B236FBCC73993C73A08DC6434172AE30",
+      "pixelsEqual": true
+    },
+    {
+      "id": "terrain.pine",
+      "width": 253,
+      "height": 388,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "C4562BAC78E2B479293799BC855973F338CCFC40C136F9F76B293B402B6D8352",
+      "currentPixelsSha256": "C4562BAC78E2B479293799BC855973F338CCFC40C136F9F76B293B402B6D8352",
+      "pixelsEqual": true
+    },
+    {
+      "id": "terrain.mountain",
+      "width": 386,
+      "height": 319,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "75381F1AB44FF23891D2119AE9DF78C2EC9056743CF18CC6FC8F48F2866F848E",
+      "currentPixelsSha256": "75381F1AB44FF23891D2119AE9DF78C2EC9056743CF18CC6FC8F48F2866F848E",
+      "pixelsEqual": true
+    },
+    {
+      "id": "terrain.oak",
+      "width": 345,
+      "height": 324,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "5FCE7F19DDFC4B59C4548A2824852B1D5DF0CA85B89C774B7D880165F7D1FF43",
+      "currentPixelsSha256": "5FCE7F19DDFC4B59C4548A2824852B1D5DF0CA85B89C774B7D880165F7D1FF43",
+      "pixelsEqual": true
+    },
+    {
+      "id": "terrain.rock",
+      "width": 324,
+      "height": 238,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "EC25EA81F01896CE3059E72467F99689CDEA426830722BCC2A79496D84B91A01",
+      "currentPixelsSha256": "EC25EA81F01896CE3059E72467F99689CDEA426830722BCC2A79496D84B91A01",
+      "pixelsEqual": true
+    },
+    {
+      "id": "terrain.shrub",
+      "width": 255,
+      "height": 205,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "A6E2A3E8BFBDF3503D40FADDFBFE565AF782D49D3D0DC584BEC2F6B2CCCF439A",
+      "currentPixelsSha256": "A6E2A3E8BFBDF3503D40FADDFBFE565AF782D49D3D0DC584BEC2F6B2CCCF439A",
+      "pixelsEqual": true
+    },
+    {
+      "id": "terrain.ridge",
+      "width": 375,
+      "height": 171,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "7E1D948C32911CA8C21BAEB60B9FA9A912523511DF2583EB3AA222C3F6A4FE4B",
+      "currentPixelsSha256": "7E1D948C32911CA8C21BAEB60B9FA9A912523511DF2583EB3AA222C3F6A4FE4B",
+      "pixelsEqual": true
+    },
+    {
+      "id": "object.castle.damaged",
+      "width": 408,
+      "height": 330,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "B2C238E03BF430D6988DF1B7DB3A6B9010F6D25AD2F811196138DA36231B38F4",
+      "currentPixelsSha256": "B2C238E03BF430D6988DF1B7DB3A6B9010F6D25AD2F811196138DA36231B38F4",
+      "pixelsEqual": true
+    },
+    {
+      "id": "object.blot",
+      "width": 321,
+      "height": 282,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "697DC3D3A153732A9017A603D7AFC904EEE36ABC521C179490523DABF2B31D8D",
+      "currentPixelsSha256": "697DC3D3A153732A9017A603D7AFC904EEE36ABC521C179490523DABF2B31D8D",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.doodle.idle",
+      "width": 145,
+      "height": 193,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "AA14A6190266C1F34A59400A48CCC4DDDB0CB161632FDB31384DA960F9908AFF",
+      "currentPixelsSha256": "AA14A6190266C1F34A59400A48CCC4DDDB0CB161632FDB31384DA960F9908AFF",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.runner.idle",
+      "width": 157,
+      "height": 197,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "1F0ED7762F740671262D0574535AFABDA7EB55A796D1EE85EB9CAB6D510A0640",
+      "currentPixelsSha256": "1F0ED7762F740671262D0574535AFABDA7EB55A796D1EE85EB9CAB6D510A0640",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.gnawer.idle",
+      "width": 190,
+      "height": 134,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "A058AC3F1B03C5885A67B311B6D7477557433BCD24ADE575A2ADE58471B2F186",
+      "currentPixelsSha256": "A058AC3F1B03C5885A67B311B6D7477557433BCD24ADE575A2ADE58471B2F186",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.spitter.idle",
+      "width": 189,
+      "height": 174,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "986552078F3BBE15540C2083FCF4147A7C2356FB53F644E07F746FAD85773470",
+      "currentPixelsSha256": "986552078F3BBE15540C2083FCF4147A7C2356FB53F644E07F746FAD85773470",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.brute.idle",
+      "width": 333,
+      "height": 250,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "027A4A36C318ECBF6DB8A16B532FFD7DD4B7FEE9CB9319F3526DEF7FD9C93455",
+      "currentPixelsSha256": "027A4A36C318ECBF6DB8A16B532FFD7DD4B7FEE9CB9319F3526DEF7FD9C93455",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.bulwark.idle",
+      "width": 200,
+      "height": 226,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "3164A0180168DD6FB90E37245D2B887005676C69BB6DC620F43426AD0D39BB4E",
+      "currentPixelsSha256": "3164A0180168DD6FB90E37245D2B887005676C69BB6DC620F43426AD0D39BB4E",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.doodle.walk",
+      "width": 202,
+      "height": 194,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "9CD6C1656AC5CB5A4F1B7FB544B99FF6ECB7D6C18AE186DEDE367134692783EE",
+      "currentPixelsSha256": "9CD6C1656AC5CB5A4F1B7FB544B99FF6ECB7D6C18AE186DEDE367134692783EE",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.runner.walk",
+      "width": 250,
+      "height": 197,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "CD483D7021E346E29CFD6CC41BCADA581945F38A3556A303A464BD5629C87344",
+      "currentPixelsSha256": "CD483D7021E346E29CFD6CC41BCADA581945F38A3556A303A464BD5629C87344",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.gnawer.walk",
+      "width": 224,
+      "height": 147,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "4D54C40AA5CC54B3C7D7BFEE3875BD8E24DCAC01E1AC635D3B1017B976E74C2D",
+      "currentPixelsSha256": "4D54C40AA5CC54B3C7D7BFEE3875BD8E24DCAC01E1AC635D3B1017B976E74C2D",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.spitter.walk",
+      "width": 207,
+      "height": 182,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "3FB8935188B13EFAF1C1C5A07C6296805A8F557493D3B809A51D7B1FBB19BAFF",
+      "currentPixelsSha256": "3FB8935188B13EFAF1C1C5A07C6296805A8F557493D3B809A51D7B1FBB19BAFF",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.brute.walk",
+      "width": 335,
+      "height": 237,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "73A8A3A966955BC3C816E41CA1856D8BD28C1DD513298FA8BCB5561A402A68D6",
+      "currentPixelsSha256": "73A8A3A966955BC3C816E41CA1856D8BD28C1DD513298FA8BCB5561A402A68D6",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.bulwark.walk",
+      "width": 232,
+      "height": 220,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "3216432D80ABC333E6F67B141F785656E82817E1FFCB24E2D75367C76B0E2A5E",
+      "currentPixelsSha256": "3216432D80ABC333E6F67B141F785656E82817E1FFCB24E2D75367C76B0E2A5E",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.doodle.attack",
+      "width": 240,
+      "height": 194,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "24FA0C7B0E5857139CB09D898404C2069B3E58279003472F3E3AA87F1E97593A",
+      "currentPixelsSha256": "24FA0C7B0E5857139CB09D898404C2069B3E58279003472F3E3AA87F1E97593A",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.runner.attack",
+      "width": 290,
+      "height": 186,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "A367149A07FFCA3985D457111E2B9C1EF4FC1EFE3863E97D7CF64063FB52DC11",
+      "currentPixelsSha256": "A367149A07FFCA3985D457111E2B9C1EF4FC1EFE3863E97D7CF64063FB52DC11",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.gnawer.attack",
+      "width": 230,
+      "height": 164,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "1F45452DAD43D0521CD10588CF5D40CA1DDBA757FF55E97BA1F271AE4298889C",
+      "currentPixelsSha256": "1F45452DAD43D0521CD10588CF5D40CA1DDBA757FF55E97BA1F271AE4298889C",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.spitter.attack",
+      "width": 299,
+      "height": 163,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "C82387A9DEB120BA247B5D30CD9E11F435208E0666C6AA128AF30CA1F1BD8398",
+      "currentPixelsSha256": "C82387A9DEB120BA247B5D30CD9E11F435208E0666C6AA128AF30CA1F1BD8398",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.brute.attack",
+      "width": 288,
+      "height": 262,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "D3BAD5538B608BE3AB67C5F3A26B3B307B3444C8D534756A248F62258FBD1C83",
+      "currentPixelsSha256": "D3BAD5538B608BE3AB67C5F3A26B3B307B3444C8D534756A248F62258FBD1C83",
+      "pixelsEqual": true
+    },
+    {
+      "id": "enemy.bulwark.attack",
+      "width": 232,
+      "height": 205,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "987C879E1762555BE279D0CF63FE9A3C54188BF7C7EFC58B4BF0B47A343ECE43",
+      "currentPixelsSha256": "987C879E1762555BE279D0CF63FE9A3C54188BF7C7EFC58B4BF0B47A343ECE43",
+      "pixelsEqual": true
+    },
+    {
+      "id": "fx.muzzle",
+      "width": 402,
+      "height": 271,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "BAD7E448EC505F1A37F85C209F6BE7A42C1E0A4CC2F5B99217569790DFEA97E9",
+      "currentPixelsSha256": "BAD7E448EC505F1A37F85C209F6BE7A42C1E0A4CC2F5B99217569790DFEA97E9",
+      "pixelsEqual": true
+    },
+    {
+      "id": "fx.tracer",
+      "width": 331,
+      "height": 416,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "26FC3C9335037A61B20CC55B90A602C616F92A4126FA1ADDCA5DD60C3500B2FD",
+      "currentPixelsSha256": "26FC3C9335037A61B20CC55B90A602C616F92A4126FA1ADDCA5DD60C3500B2FD",
+      "pixelsEqual": true
+    },
+    {
+      "id": "fx.piercer",
+      "width": 131,
+      "height": 451,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "CA094EF019B1EB03192A705DF302C78169355F16A0755004BC55FCED8A0ACB8B",
+      "currentPixelsSha256": "CA094EF019B1EB03192A705DF302C78169355F16A0755004BC55FCED8A0ACB8B",
+      "pixelsEqual": true
+    },
+    {
+      "id": "fx.mortar.projectile",
+      "width": 395,
+      "height": 325,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "8C4BF857992D25FEAA99718816D8DB10655DBCB3FF3E2BA948F4B8943EACF434",
+      "currentPixelsSha256": "8C4BF857992D25FEAA99718816D8DB10655DBCB3FF3E2BA948F4B8943EACF434",
+      "pixelsEqual": true
+    },
+    {
+      "id": "fx.mortar.explosion",
+      "width": 457,
+      "height": 387,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "53BABC0512A062D50D3F753E77DA444F1231716FC921F57E7F6A70F07A72DDA0",
+      "currentPixelsSha256": "53BABC0512A062D50D3F753E77DA444F1231716FC921F57E7F6A70F07A72DDA0",
+      "pixelsEqual": true
+    },
+    {
+      "id": "fx.fan",
+      "width": 398,
+      "height": 355,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "93CE43DFDEA2C21D9A1CBCD5FEFF91BE71FC3ABB67844BD2E7FA97B5F7901510",
+      "currentPixelsSha256": "93CE43DFDEA2C21D9A1CBCD5FEFF91BE71FC3ABB67844BD2E7FA97B5F7901510",
+      "pixelsEqual": true
+    },
+    {
+      "id": "fx.ricochet",
+      "width": 397,
+      "height": 344,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "3D00B067F402F0049617F84EB025890911C7CCCB61BD67C79ACFB6ED1B404813",
+      "currentPixelsSha256": "3D00B067F402F0049617F84EB025890911C7CCCB61BD67C79ACFB6ED1B404813",
+      "pixelsEqual": true
+    },
+    {
+      "id": "fx.cleanup",
+      "width": 391,
+      "height": 363,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "7BB317E5E227D295DEBFB7AE43576B7F469951458B73781B2840BCE5A3243F14",
+      "currentPixelsSha256": "7BB317E5E227D295DEBFB7AE43576B7F469951458B73781B2840BCE5A3243F14",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.pencil",
+      "width": 254,
+      "height": 269,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "8FFB18D780233A3F9E8CD9D4B8732D01236589735530C9147FFDE1784F76588A",
+      "currentPixelsSha256": "8FFB18D780233A3F9E8CD9D4B8732D01236589735530C9147FFDE1784F76588A",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.pen",
+      "width": 271,
+      "height": 291,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "0DD720DB369F7864ACBC437310422D775D207F1BA911715B519F0777169C7D79",
+      "currentPixelsSha256": "0DD720DB369F7864ACBC437310422D775D207F1BA911715B519F0777169C7D79",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.marker",
+      "width": 285,
+      "height": 293,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "7E6CD84CEB80A4B279AB930A41494880B4F41B840BE91A49BBE44A5413A8F854",
+      "currentPixelsSha256": "7E6CD84CEB80A4B279AB930A41494880B4F41B840BE91A49BBE44A5413A8F854",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.erase",
+      "width": 253,
+      "height": 208,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "3333A317F36264CAF324032A8921B25B5A795EFA057C9A0AEC165A1090BEE8F9",
+      "currentPixelsSha256": "3333A317F36264CAF324032A8921B25B5A795EFA057C9A0AEC165A1090BEE8F9",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.paint",
+      "width": 270,
+      "height": 276,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "8A507A604C6AC387E5C4AB3F9D512234FBA3C0AC269177DD4490B705546C9056",
+      "currentPixelsSha256": "8A507A604C6AC387E5C4AB3F9D512234FBA3C0AC269177DD4490B705546C9056",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.upgrade",
+      "width": 231,
+      "height": 258,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "546443CCBE6B995627B3F109F79D87F4D9F80F9AC88006FD20E21870895DDF3B",
+      "currentPixelsSha256": "546443CCBE6B995627B3F109F79D87F4D9F80F9AC88006FD20E21870895DDF3B",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.play",
+      "width": 198,
+      "height": 246,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "62E35A5417BB9E31C8B4FE5C497C0BA989CBC0CEEE19F8FE17F8A37AFDE37FAE",
+      "currentPixelsSha256": "62E35A5417BB9E31C8B4FE5C497C0BA989CBC0CEEE19F8FE17F8A37AFDE37FAE",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.help",
+      "width": 289,
+      "height": 214,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "10CE5E6E7D46F0399480C7778EA3B701295BA972AECCEEDD9F72E19BF0CB9FBD",
+      "currentPixelsSha256": "10CE5E6E7D46F0399480C7778EA3B701295BA972AECCEEDD9F72E19BF0CB9FBD",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.settings",
+      "width": 281,
+      "height": 269,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "3DDA6A38F17781A003DF13C11D51351E1719F9DA7ED1E82E211BA558C057A00D",
+      "currentPixelsSha256": "3DDA6A38F17781A003DF13C11D51351E1719F9DA7ED1E82E211BA558C057A00D",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.workshop",
+      "width": 258,
+      "height": 266,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "8EC39456552A6CFB3FF60956EEFAFB4FCE7949333CE44DF552A9D37CD1C90A4C",
+      "currentPixelsSha256": "8EC39456552A6CFB3FF60956EEFAFB4FCE7949333CE44DF552A9D37CD1C90A4C",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.exit",
+      "width": 237,
+      "height": 274,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "1BB6AFF31C4097EB1EDF9184376E5093C4D3D208049D3B26611CFD7C71BFB87B",
+      "currentPixelsSha256": "1BB6AFF31C4097EB1EDF9184376E5093C4D3D208049D3B26611CFD7C71BFB87B",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.skull",
+      "width": 225,
+      "height": 260,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "26B38EE34A12276FAD7DE1EDDF380994F127BA79DEDED4168807E3003D502813",
+      "currentPixelsSha256": "26B38EE34A12276FAD7DE1EDDF380994F127BA79DEDED4168807E3003D502813",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.entrance",
+      "width": 249,
+      "height": 264,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "397FF0717FBFE9A0A3512880FC5A8FDD9996C2CF9FB436FAEB6497589E642406",
+      "currentPixelsSha256": "397FF0717FBFE9A0A3512880FC5A8FDD9996C2CF9FB436FAEB6497589E642406",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.shield",
+      "width": 243,
+      "height": 286,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "3A0FCCAF682426BFE9A2C5EDA9F6A89E11A2322E2C45D38C69AD699ED80510AE",
+      "currentPixelsSha256": "3A0FCCAF682426BFE9A2C5EDA9F6A89E11A2322E2C45D38C69AD699ED80510AE",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.heart",
+      "width": 269,
+      "height": 229,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "72E026E04188421C6982FE65DCFF106AC63851836B37CB9C1DACDAAF93705364",
+      "currentPixelsSha256": "72E026E04188421C6982FE65DCFF106AC63851836B37CB9C1DACDAAF93705364",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.flag",
+      "width": 247,
+      "height": 281,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "279536D58AD0BE9C5610A9DCCE9C2416C22C3F2A744CE6A9C8F08F073C20F6D2",
+      "currentPixelsSha256": "279536D58AD0BE9C5610A9DCCE9C2416C22C3F2A744CE6A9C8F08F073C20F6D2",
+      "pixelsEqual": true
+    },
+    {
+      "id": "tower.gun",
+      "width": 407,
+      "height": 290,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "C6611BA8ADA0F382152BC5B1AEDF38F7080C71E88C5035393ECCECE8102C9313",
+      "currentPixelsSha256": "C6611BA8ADA0F382152BC5B1AEDF38F7080C71E88C5035393ECCECE8102C9313",
+      "pixelsEqual": true
+    },
+    {
+      "id": "tower.double",
+      "width": 403,
+      "height": 312,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "247696030F08D57781EA47251527C4BB7A4F8A8B7361D3419FDEF33317EBC56C",
+      "currentPixelsSha256": "247696030F08D57781EA47251527C4BB7A4F8A8B7361D3419FDEF33317EBC56C",
+      "pixelsEqual": true
+    },
+    {
+      "id": "tower.piercer",
+      "width": 407,
+      "height": 342,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "66D5269E3B89D4D49C7EB1FB4D9CE471A7095E0A3675D3F5E6B216853310E7A7",
+      "currentPixelsSha256": "66D5269E3B89D4D49C7EB1FB4D9CE471A7095E0A3675D3F5E6B216853310E7A7",
+      "pixelsEqual": true
+    },
+    {
+      "id": "tower.mortar",
+      "width": 420,
+      "height": 355,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "B5E424969725DE6DDB89E88E63738ED631A68269169E593EF3A43C0C3CCC90D6",
+      "currentPixelsSha256": "B5E424969725DE6DDB89E88E63738ED631A68269169E593EF3A43C0C3CCC90D6",
+      "pixelsEqual": true
+    },
+    {
+      "id": "tower.fan",
+      "width": 398,
+      "height": 325,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "FE99FBCC8103C285B390DBAA4807ABEB62654936BFC2350AF95DB81952156F24",
+      "currentPixelsSha256": "FE99FBCC8103C285B390DBAA4807ABEB62654936BFC2350AF95DB81952156F24",
+      "pixelsEqual": true
+    },
+    {
+      "id": "hero.castle",
+      "width": 715,
+      "height": 602,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "08D255E094F867E9502D7FA3BAD7D5753477E3245DC73C5DA69EA717C74412BF",
+      "currentPixelsSha256": "08D255E094F867E9502D7FA3BAD7D5753477E3245DC73C5DA69EA717C74412BF",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.ink-red",
+      "width": 355,
+      "height": 442,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "DED93C8ED20134F7696FBAB86C6F04D60595310A22BAE2AAEE15CF0AAFB07D44",
+      "currentPixelsSha256": "DED93C8ED20134F7696FBAB86C6F04D60595310A22BAE2AAEE15CF0AAFB07D44",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.ink-blue",
+      "width": 358,
+      "height": 444,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "2922380D3938A8A8FEFAD0F24AAB202A40CA970C2ABBE4D18CBF9259017D79B8",
+      "currentPixelsSha256": "2922380D3938A8A8FEFAD0F24AAB202A40CA970C2ABBE4D18CBF9259017D79B8",
+      "pixelsEqual": true
+    },
+    {
+      "id": "icon.ink-green",
+      "width": 354,
+      "height": 441,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "B4978E74990921F700497DC26BC6C2759C41B87B6C051C98BA57F921C14F95D9",
+      "currentPixelsSha256": "B4978E74990921F700497DC26BC6C2759C41B87B6C051C98BA57F921C14F95D9",
+      "pixelsEqual": true
+    },
+    {
+      "id": "logo.home",
+      "width": 1691,
+      "height": 728,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "9DBBDB24C0101F66A66992D9E33600B8DB87A05401F5D7017173996795ECAB03",
+      "currentPixelsSha256": "9DBBDB24C0101F66A66992D9E33600B8DB87A05401F5D7017173996795ECAB03",
+      "pixelsEqual": true
+    },
+    {
+      "id": "logo.settings",
+      "width": 2061,
+      "height": 681,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "2435E4B732A8E3AB975D0DEAF3F354AE3D586FDD272A1342343BC24901CF6E03",
+      "currentPixelsSha256": "2435E4B732A8E3AB975D0DEAF3F354AE3D586FDD272A1342343BC24901CF6E03",
+      "pixelsEqual": true
+    },
+    {
+      "id": "part.gun.support",
+      "width": 492,
+      "height": 278,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "4A8721EA4EAAED2705B021591FC1A02B5FC5A3ED602ABCF739E22C73D5E6C130",
+      "currentPixelsSha256": "4A8721EA4EAAED2705B021591FC1A02B5FC5A3ED602ABCF739E22C73D5E6C130",
+      "pixelsEqual": true
+    },
+    {
+      "id": "part.gun.cradle-back",
+      "width": 427,
+      "height": 542,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "D3721A2371C91712241F6C149B4CACC311D13A871DEDBCF265943E4BC83C3C4A",
+      "currentPixelsSha256": "D3721A2371C91712241F6C149B4CACC311D13A871DEDBCF265943E4BC83C3C4A",
+      "pixelsEqual": true
+    },
+    {
+      "id": "part.gun.barrels",
+      "width": 522,
+      "height": 554,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "616F7D2DBE0842DE30B43FE64E9403B6DAF4CBBAAC56D4D6B616A5F70E9D4582",
+      "currentPixelsSha256": "616F7D2DBE0842DE30B43FE64E9403B6DAF4CBBAAC56D4D6B616A5F70E9D4582",
+      "pixelsEqual": true
+    },
+    {
+      "id": "part.gun.collar-front",
+      "width": 413,
+      "height": 242,
+      "dimensionsEqual": true,
+      "boundsEqual": true,
+      "baselinePixelsSha256": "C02582E2100D8DF8AEB340835AD186F2967CABC8C6B7DBEBF475AFFE55040704",
+      "currentPixelsSha256": "C02582E2100D8DF8AEB340835AD186F2967CABC8C6B7DBEBF475AFFE55040704",
+      "pixelsEqual": true
+    }
+  ]
+}

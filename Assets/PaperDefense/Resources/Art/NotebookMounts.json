@@ -1,376 +1,994 @@
 {
-  "schemaVersion": 2,
-  "revision": "standard-atlas-attachments-2026-10-17-v2-split-gun",
-  "foundations": [
-    {
-      "id": "chassis.standard",
-      "sockets": [
+    "schemaVersion": 2,
+    "revision": "modular-gun-pilot-2026-10-18-v1",
+    "foundations": [
         {
-          "slot": 0,
-          "order": 0,
-          "position": {
-            "x": 0.34,
-            "y": 0.78
-          },
-          "diameter": 0.29
+            "id": "chassis.standard",
+            "sockets": [
+                {
+                    "slot": 0,
+                    "order": 0,
+                    "position": {
+                        "x": 0.1599999964237213,
+                        "y": 0.7799999713897705
+                    },
+                    "diameter": 0.28999999165534975
+                },
+                {
+                    "slot": 1,
+                    "order": 1,
+                    "position": {
+                        "x": 0.8399999737739563,
+                        "y": 0.7799999713897705
+                    },
+                    "diameter": 0.28999999165534975
+                }
+            ]
         },
         {
-          "slot": 1,
-          "order": 1,
-          "position": {
-            "x": 0.66,
-            "y": 0.78
-          },
-          "diameter": 0.29
+            "id": "chassis.heavy",
+            "sockets": [
+                {
+                    "slot": 0,
+                    "order": 0,
+                    "position": {
+                        "x": 0.3400000035762787,
+                        "y": 0.7900000214576721
+                    },
+                    "diameter": 0.28999999165534975
+                },
+                {
+                    "slot": 1,
+                    "order": 1,
+                    "position": {
+                        "x": 0.6600000262260437,
+                        "y": 0.7900000214576721
+                    },
+                    "diameter": 0.28999999165534975
+                }
+            ]
+        },
+        {
+            "id": "chassis.precision",
+            "sockets": [
+                {
+                    "slot": 0,
+                    "order": 0,
+                    "position": {
+                        "x": 0.5,
+                        "y": 0.8500000238418579
+                    },
+                    "diameter": 0.4399999976158142
+                }
+            ]
+        },
+        {
+            "id": "chassis.battery",
+            "sockets": [
+                {
+                    "slot": 0,
+                    "order": 1,
+                    "position": {
+                        "x": 0.30000001192092898,
+                        "y": 0.7549999952316284
+                    },
+                    "diameter": 0.23000000417232514
+                },
+                {
+                    "slot": 1,
+                    "order": 0,
+                    "position": {
+                        "x": 0.5,
+                        "y": 0.8349999785423279
+                    },
+                    "diameter": 0.23000000417232514
+                },
+                {
+                    "slot": 2,
+                    "order": 2,
+                    "position": {
+                        "x": 0.699999988079071,
+                        "y": 0.7549999952316284
+                    },
+                    "diameter": 0.23000000417232514
+                }
+            ]
         }
-      ]
-    },
-    {
-      "id": "chassis.heavy",
-      "sockets": [
+    ],
+    "weapons": [
         {
-          "slot": 0,
-          "order": 0,
-          "position": {
-            "x": 0.34,
-            "y": 0.79
-          },
-          "diameter": 0.29
+            "id": "weapon.gun",
+            "canvas": {
+                "x": 211.0,
+                "y": 296.0
+            },
+            "attach": {
+                "x": 111.83000183105469,
+                "y": 23.68000030517578
+            },
+            "muzzle": {
+                "x": 163.0,
+                "y": 267.0
+            },
+            "trim": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 211.0,
+                "height": 296.0
+            },
+            "diameter": 164.5800018310547
         },
         {
-          "slot": 1,
-          "order": 1,
-          "position": {
-            "x": 0.66,
-            "y": 0.79
-          },
-          "diameter": 0.29
+            "id": "weapon.piercer",
+            "canvas": {
+                "x": 243.0,
+                "y": 314.0
+            },
+            "attach": {
+                "x": 94.7699966430664,
+                "y": 25.1200008392334
+            },
+            "muzzle": {
+                "x": 229.0,
+                "y": 299.0
+            },
+            "trim": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 243.0,
+                "height": 314.0
+            },
+            "diameter": 179.82000732421876
+        },
+        {
+            "id": "weapon.mortar",
+            "canvas": {
+                "x": 240.0,
+                "y": 270.0
+            },
+            "attach": {
+                "x": 105.5999984741211,
+                "y": 21.600000381469728
+            },
+            "muzzle": {
+                "x": 191.0,
+                "y": 219.0
+            },
+            "trim": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 240.0,
+                "height": 270.0
+            },
+            "diameter": 201.60000610351563
+        },
+        {
+            "id": "weapon.fan",
+            "canvas": {
+                "x": 256.0,
+                "y": 288.0
+            },
+            "attach": {
+                "x": 92.16000366210938,
+                "y": 23.040000915527345
+            },
+            "muzzle": {
+                "x": 211.0,
+                "y": 213.0
+            },
+            "trim": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 256.0,
+                "height": 288.0
+            },
+            "diameter": 174.0800018310547
+        },
+        {
+            "id": "weapon.ricochet",
+            "canvas": {
+                "x": 262.0,
+                "y": 234.0
+            },
+            "attach": {
+                "x": 81.22000122070313,
+                "y": 18.719999313354493
+            },
+            "muzzle": {
+                "x": 150.0,
+                "y": 183.0
+            },
+            "trim": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 262.0,
+                "height": 234.0
+            },
+            "diameter": 154.5800018310547
+        },
+        {
+            "id": "weapon.stapler",
+            "canvas": {
+                "x": 287.0,
+                "y": 248.0
+            },
+            "attach": {
+                "x": 117.66999816894531,
+                "y": 19.84000015258789
+            },
+            "muzzle": {
+                "x": 261.0,
+                "y": 188.0
+            },
+            "trim": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 287.0,
+                "height": 248.0
+            },
+            "diameter": 192.2899932861328
+        },
+        {
+            "id": "weapon.blotter",
+            "canvas": {
+                "x": 243.0,
+                "y": 267.0
+            },
+            "attach": {
+                "x": 87.4800033569336,
+                "y": 21.360000610351564
+            },
+            "muzzle": {
+                "x": 130.0,
+                "y": 158.0
+            },
+            "trim": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 243.0,
+                "height": 267.0
+            },
+            "diameter": 167.6699981689453
         }
-      ]
-    },
-    {
-      "id": "chassis.precision",
-      "sockets": [
+    ],
+    "pilots": [
         {
-          "slot": 0,
-          "order": 0,
-          "position": {
-            "x": 0.5,
-            "y": 0.85
-          },
-          "diameter": 0.44
+            "chassisId": "chassis.standard",
+            "weaponId": "weapon.gun",
+            "revision": "modular-gun-pilot-2026-10-18-v1",
+            "muzzleFragment": "barrels",
+            "muzzlePoint": {
+                "x": 444.0,
+                "y": 460.0
+            },
+            "pivotOffset": {
+                "x": 0.0,
+                "y": 46.0
+            },
+            "fragments": [
+                {
+                    "id": "support",
+                    "spriteId": "part.gun.support",
+                    "componentId": "turn.standard",
+                    "canvas": {
+                        "x": 492.0,
+                        "y": 278.0
+                    },
+                    "attach": {
+                        "x": 246.0,
+                        "y": 90.0
+                    },
+                    "offset": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "trim": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "width": 492.0,
+                        "height": 278.0
+                    },
+                    "scale": 0.34004130959510805,
+                    "radians": 0.0,
+                    "group": 0,
+                    "layer": 1
+                },
+                {
+                    "id": "cradle-back",
+                    "spriteId": "part.gun.cradle-back",
+                    "componentId": "core.gun",
+                    "canvas": {
+                        "x": 427.0,
+                        "y": 542.0
+                    },
+                    "attach": {
+                        "x": 211.0,
+                        "y": 34.0
+                    },
+                    "offset": {
+                        "x": 0.0,
+                        "y": 46.0
+                    },
+                    "trim": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "width": 427.0,
+                        "height": 542.0
+                    },
+                    "scale": 0.2280000001192093,
+                    "radians": 0.2818063795566559,
+                    "group": 1,
+                    "layer": 3
+                },
+                {
+                    "id": "barrels",
+                    "spriteId": "part.gun.barrels",
+                    "componentId": "head.gun",
+                    "canvas": {
+                        "x": 522.0,
+                        "y": 554.0
+                    },
+                    "attach": {
+                        "x": 74.0,
+                        "y": 60.0
+                    },
+                    "offset": {
+                        "x": 3.5125575065612795,
+                        "y": 102.65477752685547
+                    },
+                    "trim": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "width": 522.0,
+                        "height": 554.0
+                    },
+                    "scale": 0.18240000307559968,
+                    "radians": 0.7818063497543335,
+                    "group": 2,
+                    "layer": 2
+                },
+                {
+                    "id": "collar-front",
+                    "spriteId": "part.gun.collar-front",
+                    "componentId": "core.gun",
+                    "canvas": {
+                        "x": 413.0,
+                        "y": 242.0
+                    },
+                    "attach": {
+                        "x": 206.0,
+                        "y": 120.0
+                    },
+                    "offset": {
+                        "x": -2.153055191040039,
+                        "y": 141.9833526611328
+                    },
+                    "trim": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "width": 413.0,
+                        "height": 242.0
+                    },
+                    "scale": 0.11400000005960465,
+                    "radians": -0.31819361448287966,
+                    "group": 1,
+                    "layer": 7
+                },
+                {
+                    "id": "sight",
+                    "spriteId": "part.pilot.sight",
+                    "componentId": "sight.iron",
+                    "canvas": {
+                        "x": 347.0,
+                        "y": 346.0
+                    },
+                    "attach": {
+                        "x": 173.0,
+                        "y": 42.0
+                    },
+                    "offset": {
+                        "x": -15.0,
+                        "y": 119.0
+                    },
+                    "trim": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "width": 347.0,
+                        "height": 346.0
+                    },
+                    "scale": 0.06499999761581421,
+                    "radians": 0.0,
+                    "group": 1,
+                    "layer": 4
+                },
+                {
+                    "id": "magazine",
+                    "spriteId": "part.pilot.magazine",
+                    "componentId": "magazine.standard",
+                    "canvas": {
+                        "x": 273.0,
+                        "y": 452.0
+                    },
+                    "attach": {
+                        "x": 137.0,
+                        "y": 414.0
+                    },
+                    "offset": {
+                        "x": -32.0,
+                        "y": 95.0
+                    },
+                    "trim": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "width": 273.0,
+                        "height": 452.0
+                    },
+                    "scale": 0.10999999940395355,
+                    "radians": 0.0,
+                    "group": 1,
+                    "layer": 5
+                },
+                {
+                    "id": "trigger",
+                    "spriteId": "part.pilot.trigger",
+                    "componentId": "trigger.standard",
+                    "canvas": {
+                        "x": 343.0,
+                        "y": 386.0
+                    },
+                    "attach": {
+                        "x": 170.0,
+                        "y": 315.0
+                    },
+                    "offset": {
+                        "x": 20.0,
+                        "y": 84.0
+                    },
+                    "trim": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "width": 343.0,
+                        "height": 386.0
+                    },
+                    "scale": 0.06499999761581421,
+                    "radians": 0.0,
+                    "group": 1,
+                    "layer": 6
+                },
+                {
+                    "id": "bearing",
+                    "spriteId": "part.pilot.bearing",
+                    "componentId": "turn.standard",
+                    "canvas": {
+                        "x": 505.0,
+                        "y": 340.0
+                    },
+                    "attach": {
+                        "x": 252.0,
+                        "y": 170.0
+                    },
+                    "offset": {
+                        "x": 0.0,
+                        "y": 35.0
+                    },
+                    "trim": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "width": 505.0,
+                        "height": 340.0
+                    },
+                    "scale": 0.30000001192092898,
+                    "radians": 0.0,
+                    "group": 0,
+                    "layer": 0
+                }
+            ]
         }
-      ]
+    ],
+    "visualSchemaVersion": 1,
+    "frameBounds": {
+        "x": -0.3446800112724304,
+        "y": -0.2800000011920929,
+        "width": 0.6993600130081177,
+        "height": 0.6200000047683716
     },
-    {
-      "id": "chassis.battery",
-      "sockets": [
+    "fits": {
+        "SchemaVersion": 1,
+        "Revision": "modular-gun-pilot-2026-10-18-v1",
+        "Parts": [
+            {
+                "Id": "frame.standard",
+                "AssetRevision": "modular-gun-pilot-2026-10-18-v1",
+                "AttachType": "pilot.frame.standard",
+                "ExpectedSocketType": "pilot.frame.standard",
+                "Revision": 1,
+                "SocketSchemaVersion": 1,
+                "Category": 0
+            },
+            {
+                "Id": "hull.standard",
+                "AssetRevision": "modular-gun-pilot-2026-10-18-v1",
+                "AttachType": "pilot.hull.standard",
+                "ExpectedSocketType": "pilot.hull.standard",
+                "Revision": 1,
+                "SocketSchemaVersion": 1,
+                "Category": 1
+            },
+            {
+                "Id": "armor.none",
+                "AssetRevision": "modular-gun-pilot-2026-10-18-v1",
+                "AttachType": "pilot.armor.none",
+                "ExpectedSocketType": "pilot.armor.none",
+                "Revision": 1,
+                "SocketSchemaVersion": 1,
+                "Category": 2
+            },
+            {
+                "Id": "armor.plate",
+                "AssetRevision": "modular-gun-pilot-2026-10-18-v1",
+                "AttachType": "pilot.armor.plate",
+                "ExpectedSocketType": "pilot.armor.plate",
+                "Revision": 1,
+                "SocketSchemaVersion": 1,
+                "Category": 2
+            },
+            {
+                "Id": "feed.standard",
+                "AssetRevision": "modular-gun-pilot-2026-10-18-v1",
+                "AttachType": "pilot.feed.standard",
+                "ExpectedSocketType": "pilot.feed.standard",
+                "Revision": 1,
+                "SocketSchemaVersion": 1,
+                "Category": 3
+            },
+            {
+                "Id": "turn.standard",
+                "AssetRevision": "modular-gun-pilot-2026-10-18-v1",
+                "AttachType": "pilot.turn.standard",
+                "ExpectedSocketType": "pilot.turn.standard",
+                "Revision": 1,
+                "SocketSchemaVersion": 1,
+                "Category": 4
+            },
+            {
+                "Id": "core.gun",
+                "AssetRevision": "modular-gun-pilot-2026-10-18-v1",
+                "AttachType": "gun.standard",
+                "ExpectedSocketType": "gun.standard",
+                "Revision": 1,
+                "SocketSchemaVersion": 1,
+                "Category": 5
+            },
+            {
+                "Id": "head.gun",
+                "AssetRevision": "modular-gun-pilot-2026-10-18-v1",
+                "AttachType": "pilot.head.gun",
+                "ExpectedSocketType": "pilot.head.gun",
+                "Revision": 1,
+                "SocketSchemaVersion": 1,
+                "Category": 6
+            },
+            {
+                "Id": "sight.iron",
+                "AssetRevision": "modular-gun-pilot-2026-10-18-v1",
+                "AttachType": "pilot.sight.iron",
+                "ExpectedSocketType": "pilot.sight.iron",
+                "Revision": 1,
+                "SocketSchemaVersion": 1,
+                "Category": 7
+            },
+            {
+                "Id": "magazine.standard",
+                "AssetRevision": "modular-gun-pilot-2026-10-18-v1",
+                "AttachType": "pilot.magazine.standard",
+                "ExpectedSocketType": "pilot.magazine.standard",
+                "Revision": 1,
+                "SocketSchemaVersion": 1,
+                "Category": 8
+            },
+            {
+                "Id": "trigger.standard",
+                "AssetRevision": "modular-gun-pilot-2026-10-18-v1",
+                "AttachType": "pilot.trigger.standard",
+                "ExpectedSocketType": "pilot.trigger.standard",
+                "Revision": 1,
+                "SocketSchemaVersion": 1,
+                "Category": 9
+            }
+        ],
+        "Frames": [
+            {
+                "FrameId": "frame.standard",
+                "Revision": 1,
+                "Mounts": [
+                    {
+                        "SlotIndex": 0,
+                        "SocketId": "mount.0",
+                        "SocketType": "gun.standard",
+                        "X": -0.23278240859508515,
+                        "Y": 0.2035999894142151
+                    },
+                    {
+                        "SlotIndex": 1,
+                        "SocketId": "mount.1",
+                        "SocketType": "gun.standard",
+                        "X": 0.24278238415718079,
+                        "Y": 0.2035999894142151
+                    }
+                ],
+                "Keepouts": [
+                    {
+                        "X": -0.3446800112724304,
+                        "Y": -0.2800000011920929,
+                        "Width": 0.6993600130081177,
+                        "Height": 0.11160000413656235,
+                        "ArmorOnly": false
+                    },
+                    {
+                        "X": -0.3446800112724304,
+                        "Y": -0.16840000450611115,
+                        "Width": 0.6993600130081177,
+                        "Height": 0.1860000044107437,
+                        "ArmorOnly": false
+                    },
+                    {
+                        "X": -0.07999999821186066,
+                        "Y": -0.14000000059604646,
+                        "Width": 0.16081999242305757,
+                        "Height": 0.1366799920797348,
+                        "ArmorOnly": false
+                    },
+                    {
+                        "X": -0.13500000536441804,
+                        "Y": -0.2549999952316284,
+                        "Width": 0.27105000615119936,
+                        "Height": 0.268449991941452,
+                        "ArmorOnly": true
+                    }
+                ]
+            }
+        ],
+        "Weapons": [
+            {
+                "MechanismId": "core.gun",
+                "MountType": "gun.standard",
+                "Revision": 1,
+                "RequiredParts": [
+                    {
+                        "Id": "core.gun",
+                        "Revision": 1
+                    },
+                    {
+                        "Id": "head.gun",
+                        "Revision": 1
+                    },
+                    {
+                        "Id": "sight.iron",
+                        "Revision": 1
+                    },
+                    {
+                        "Id": "magazine.standard",
+                        "Revision": 1
+                    },
+                    {
+                        "Id": "trigger.standard",
+                        "Revision": 1
+                    }
+                ],
+                "PivotX": 0.0,
+                "PivotY": 0.056686487048864368,
+                "MinRadians": -3.1415927410125734,
+                "MaxRadians": 3.1415927410125734,
+                "RecoilLimit": 0.08500000089406967,
+                "Clearance": 0.009999999776482582,
+                "Regions": [
+                    {
+                        "Motion": "fixed",
+                        "Points": [
+                            {
+                                "X": -0.10308334976434708,
+                                "Y": -0.09439990669488907
+                            },
+                            {
+                                "X": 0.10308334976434708,
+                                "Y": -0.09439990669488907
+                            },
+                            {
+                                "X": 0.10308334976434708,
+                                "Y": 0.022092653438448907
+                            },
+                            {
+                                "X": -0.10308334976434708,
+                                "Y": 0.022092653438448907
+                            }
+                        ]
+                    },
+                    {
+                        "Motion": "rotating",
+                        "Points": [
+                            {
+                                "X": -0.05428914725780487,
+                                "Y": -0.025662505999207498
+                            },
+                            {
+                                "X": 0.06095172464847565,
+                                "Y": 0.007701003924012184
+                            },
+                            {
+                                "X": 0.018602730706334115,
+                                "Y": 0.153978630900383
+                            },
+                            {
+                                "X": -0.09663815051317215,
+                                "Y": 0.12061513215303421
+                            }
+                        ]
+                    },
+                    {
+                        "Motion": "recoiling",
+                        "Points": [
+                            {
+                                "X": 0.00202694209292531,
+                                "Y": 0.04852678254246712
+                            },
+                            {
+                                "X": 0.08529077470302582,
+                                "Y": 0.131194606423378
+                            },
+                            {
+                                "X": -0.002444817451760173,
+                                "Y": 0.21956273913383485
+                            },
+                            {
+                                "X": -0.08570864796638489,
+                                "Y": 0.13689489662647248
+                            }
+                        ]
+                    },
+                    {
+                        "Motion": "rotating",
+                        "Points": [
+                            {
+                                "X": -0.03541428595781326,
+                                "Y": 0.11132370680570603
+                            },
+                            {
+                                "X": 0.01969309337437153,
+                                "Y": 0.0931721180677414
+                            },
+                            {
+                                "X": 0.030329134315252305,
+                                "Y": 0.1254626363515854
+                            },
+                            {
+                                "X": -0.024778245016932489,
+                                "Y": 0.14361423254013062
+                            }
+                        ]
+                    },
+                    {
+                        "Motion": "rotating",
+                        "Points": [
+                            {
+                                "X": -0.032342106103897098,
+                                "Y": 0.08659476786851883
+                            },
+                            {
+                                "X": -0.004547243006527424,
+                                "Y": 0.08659476786851883
+                            },
+                            {
+                                "X": -0.004547243006527424,
+                                "Y": 0.11430952697992325
+                            },
+                            {
+                                "X": -0.032342106103897098,
+                                "Y": 0.11430952697992325
+                            }
+                        ]
+                    },
+                    {
+                        "Motion": "rotating",
+                        "Points": [
+                            {
+                                "X": -0.058005064725875857,
+                                "Y": 0.004263808485120535
+                            },
+                            {
+                                "X": -0.020998647436499597,
+                                "Y": 0.004263808485120535
+                            },
+                            {
+                                "X": -0.020998647436499597,
+                                "Y": 0.06553450971841812
+                            },
+                            {
+                                "X": -0.058005064725875857,
+                                "Y": 0.06553450971841812
+                            }
+                        ]
+                    },
+                    {
+                        "Motion": "rotating",
+                        "Points": [
+                            {
+                                "X": 0.011029220186173916,
+                                "Y": 0.02159632183611393
+                            },
+                            {
+                                "X": 0.038503680378198627,
+                                "Y": 0.02159632183611393
+                            },
+                            {
+                                "X": 0.038503680378198627,
+                                "Y": 0.05251510068774223
+                            },
+                            {
+                                "X": 0.011029220186173916,
+                                "Y": 0.05251510068774223
+                            }
+                        ]
+                    },
+                    {
+                        "Motion": "fixed",
+                        "Points": [
+                            {
+                                "X": -0.09316302090883255,
+                                "Y": -0.07640353590250015
+                            },
+                            {
+                                "X": 0.09353271126747132,
+                                "Y": -0.07640353590250015
+                            },
+                            {
+                                "X": 0.09353271126747132,
+                                "Y": 0.04929260537028313
+                            },
+                            {
+                                "X": -0.09316302090883255,
+                                "Y": 0.04929260537028313
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "foundationParts": [
         {
-          "slot": 0,
-          "order": 1,
-          "position": {
-            "x": 0.3,
-            "y": 0.755
-          },
-          "diameter": 0.23
+            "partId": "frame.standard",
+            "spriteId": "chassis.standard",
+            "collisionMode": "solid",
+            "layer": 1,
+            "canvas": {
+                "x": 282.0,
+                "y": 250.0
+            },
+            "position": {
+                "x": -0.3446800112724304,
+                "y": -0.2800000011920929
+            },
+            "trim": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 282.0,
+                "height": 250.0
+            },
+            "region": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 282.0,
+                "height": 45.0
+            },
+            "scale": 0.0024800000246614219
         },
         {
-          "slot": 1,
-          "order": 0,
-          "position": {
-            "x": 0.5,
-            "y": 0.835
-          },
-          "diameter": 0.23
+            "partId": "hull.standard",
+            "spriteId": "chassis.standard",
+            "collisionMode": "mount-contact",
+            "layer": 0,
+            "canvas": {
+                "x": 282.0,
+                "y": 250.0
+            },
+            "position": {
+                "x": -0.3446800112724304,
+                "y": -0.2800000011920929
+            },
+            "trim": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 282.0,
+                "height": 250.0
+            },
+            "region": {
+                "x": 0.0,
+                "y": 120.0,
+                "width": 282.0,
+                "height": 130.0
+            },
+            "scale": 0.0024800000246614219
         },
         {
-          "slot": 2,
-          "order": 2,
-          "position": {
-            "x": 0.7,
-            "y": 0.755
-          },
-          "diameter": 0.23
+            "partId": "hull.standard",
+            "spriteId": "chassis.standard",
+            "collisionMode": "solid",
+            "layer": 14,
+            "canvas": {
+                "x": 282.0,
+                "y": 250.0
+            },
+            "position": {
+                "x": -0.3446800112724304,
+                "y": -0.2800000011920929
+            },
+            "trim": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 282.0,
+                "height": 250.0
+            },
+            "region": {
+                "x": 0.0,
+                "y": 45.0,
+                "width": 282.0,
+                "height": 75.0
+            },
+            "scale": 0.0024800000246614219
+        },
+        {
+            "partId": "feed.standard",
+            "spriteId": "part.pilot.feed",
+            "collisionMode": "solid",
+            "layer": 2,
+            "canvas": {
+                "x": 473.0,
+                "y": 402.0
+            },
+            "position": {
+                "x": -0.07999999821186066,
+                "y": -0.14000000059604646
+            },
+            "trim": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 473.0,
+                "height": 402.0
+            },
+            "region": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 473.0,
+                "height": 402.0
+            },
+            "scale": 0.00033999999868683517
+        },
+        {
+            "partId": "armor.plate",
+            "spriteId": "part.pilot.armor",
+            "collisionMode": "armor",
+            "layer": 15,
+            "canvas": {
+                "x": 417.0,
+                "y": 413.0
+            },
+            "position": {
+                "x": -0.13500000536441804,
+                "y": -0.2549999952316284
+            },
+            "trim": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 417.0,
+                "height": 413.0
+            },
+            "region": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 417.0,
+                "height": 413.0
+            },
+            "scale": 0.0006500000017695129
         }
-      ]
-    }
-  ],
-  "weapons": [
-    {
-      "id": "weapon.gun",
-      "canvas": {
-        "x": 211,
-        "y": 296
-      },
-      "attach": {
-        "x": 111.83,
-        "y": 23.68
-      },
-      "diameter": 164.58,
-      "muzzle": {
-        "x": 163,
-        "y": 267
-      },
-      "trim": {
-        "x": 0,
-        "y": 0,
-        "width": 211,
-        "height": 296
-      }
-    },
-    {
-      "id": "weapon.piercer",
-      "canvas": {
-        "x": 243,
-        "y": 314
-      },
-      "attach": {
-        "x": 94.77,
-        "y": 25.12
-      },
-      "diameter": 179.82,
-      "muzzle": {
-        "x": 229,
-        "y": 299
-      },
-      "trim": {
-        "x": 0,
-        "y": 0,
-        "width": 243,
-        "height": 314
-      }
-    },
-    {
-      "id": "weapon.mortar",
-      "canvas": {
-        "x": 240,
-        "y": 270
-      },
-      "attach": {
-        "x": 105.6,
-        "y": 21.6
-      },
-      "diameter": 201.6,
-      "muzzle": {
-        "x": 191,
-        "y": 219
-      },
-      "trim": {
-        "x": 0,
-        "y": 0,
-        "width": 240,
-        "height": 270
-      }
-    },
-    {
-      "id": "weapon.fan",
-      "canvas": {
-        "x": 256,
-        "y": 288
-      },
-      "attach": {
-        "x": 92.16,
-        "y": 23.04
-      },
-      "diameter": 174.08,
-      "muzzle": {
-        "x": 211,
-        "y": 213
-      },
-      "trim": {
-        "x": 0,
-        "y": 0,
-        "width": 256,
-        "height": 288
-      }
-    },
-    {
-      "id": "weapon.ricochet",
-      "canvas": {
-        "x": 262,
-        "y": 234
-      },
-      "attach": {
-        "x": 81.22,
-        "y": 18.72
-      },
-      "diameter": 154.58,
-      "muzzle": {
-        "x": 150,
-        "y": 183
-      },
-      "trim": {
-        "x": 0,
-        "y": 0,
-        "width": 262,
-        "height": 234
-      }
-    },
-    {
-      "id": "weapon.stapler",
-      "canvas": {
-        "x": 287,
-        "y": 248
-      },
-      "attach": {
-        "x": 117.67,
-        "y": 19.84
-      },
-      "diameter": 192.29,
-      "muzzle": {
-        "x": 261,
-        "y": 188
-      },
-      "trim": {
-        "x": 0,
-        "y": 0,
-        "width": 287,
-        "height": 248
-      }
-    },
-    {
-      "id": "weapon.blotter",
-      "canvas": {
-        "x": 243,
-        "y": 267
-      },
-      "attach": {
-        "x": 87.48,
-        "y": 21.36
-      },
-      "diameter": 167.67,
-      "muzzle": {
-        "x": 130,
-        "y": 158
-      },
-      "trim": {
-        "x": 0,
-        "y": 0,
-        "width": 243,
-        "height": 267
-      }
-    }
-  ],
-  "pilots": [
-    {
-      "chassisId": "chassis.standard",
-      "weaponId": "weapon.gun",
-      "revision": "gun-split-2026-10-17-v1",
-      "muzzleFragment": "barrels",
-      "pivotOffset": {
-        "x": 0,
-        "y": 46
-      },
-      "muzzlePoint": {
-        "x": 444,
-        "y": 460
-      },
-      "fragments": [
-        {
-          "id": "support",
-          "spriteId": "part.gun.support",
-          "canvas": {
-            "x": 492,
-            "y": 278
-          },
-          "trim": {
-            "x": 0,
-            "y": 0,
-            "width": 492,
-            "height": 278
-          },
-          "attach": {
-            "x": 246,
-            "y": 90
-          },
-          "offset": {
-            "x": 0,
-            "y": 0
-          },
-          "scale": 0.3400413223140496,
-          "radians": 0,
-          "group": 0,
-          "layer": 0
-        },
-        {
-          "id": "cradle-back",
-          "spriteId": "part.gun.cradle-back",
-          "canvas": {
-            "x": 427,
-            "y": 542
-          },
-          "trim": {
-            "x": 0,
-            "y": 0,
-            "width": 427,
-            "height": 542
-          },
-          "attach": {
-            "x": 211,
-            "y": 34
-          },
-          "offset": {
-            "x": 0,
-            "y": 46
-          },
-          "scale": 0.3,
-          "radians": 0,
-          "group": 1,
-          "layer": 2
-        },
-        {
-          "id": "barrels",
-          "spriteId": "part.gun.barrels",
-          "canvas": {
-            "x": 522,
-            "y": 554
-          },
-          "trim": {
-            "x": 0,
-            "y": 0,
-            "width": 522,
-            "height": 554
-          },
-          "attach": {
-            "x": 74,
-            "y": 60
-          },
-          "offset": {
-            "x": 25.17,
-            "y": 116.32
-          },
-          "scale": 0.24,
-          "radians": 0.5,
-          "group": 2,
-          "layer": 1
-        },
-        {
-          "id": "collar-front",
-          "spriteId": "part.gun.collar-front",
-          "canvas": {
-            "x": 413,
-            "y": 242
-          },
-          "trim": {
-            "x": 0,
-            "y": 0,
-            "width": 413,
-            "height": 242
-          },
-          "attach": {
-            "x": 206,
-            "y": 120
-          },
-          "offset": {
-            "x": 32.4,
-            "y": 168.1
-          },
-          "scale": 0.15,
-          "radians": -0.6,
-          "group": 1,
-          "layer": 3
-        }
-      ]
-    }
-  ]
+    ]
 }

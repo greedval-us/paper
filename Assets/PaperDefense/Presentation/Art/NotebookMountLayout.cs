@@ -8,30 +8,30 @@ namespace PaperDefense.Presentation
     /// <summary>Visual attachment metadata for the existing standard atlas. Never changes gameplay or saved drawings.</summary>
     public static class NotebookMountLayout
     {
-        [Serializable] sealed class Socket
+        [Serializable] public sealed class Socket
         {
             public int slot, order;
             public Vector2 position;
             public float diameter;
         }
-        [Serializable] sealed class Foundation
+        [Serializable] public sealed class Foundation
         {
             public string id;
             public Socket[] sockets;
         }
-        [Serializable] sealed class Weapon
+        [Serializable] public sealed class Weapon
         {
             public string id;
             public Vector2 canvas, attach, muzzle;
             public PixelRect trim;
             public float diameter;
         }
-        [Serializable] sealed class PixelRect
+        [Serializable] public sealed class PixelRect
         {
             public float x, y, width, height;
             public Rect Rect => new Rect(x, y, width, height);
         }
-        [Serializable] sealed class Source
+        [Serializable] public class Source
         {
             public int schemaVersion;
             public string revision;
@@ -39,15 +39,15 @@ namespace PaperDefense.Presentation
             public Weapon[] weapons;
             public Pilot[] pilots;
         }
-        [Serializable] sealed class FragmentSource
+        [Serializable] public sealed class FragmentSource
         {
-            public string id, spriteId;
+            public string id, spriteId, componentId;
             public Vector2 canvas, attach, offset;
             public PixelRect trim;
             public float scale, radians;
             public int group, layer;
         }
-        [Serializable] sealed class Pilot
+        [Serializable] public sealed class Pilot
         {
             public string chassisId, weaponId, revision, muzzleFragment;
             public Vector2 muzzlePoint, pivotOffset;
@@ -184,7 +184,7 @@ namespace PaperDefense.Presentation
         { foreach (var socket in foundation.sockets) if (socket.slot == slot) return socket; return null; }
 
         public static void Validate(string json) => Parse(json);
-        static Source Parse(string json)
+        public static Source Parse(string json)
         {
             Source source;
             try { source = JsonUtility.FromJson<Source>(json); }
@@ -233,7 +233,7 @@ namespace PaperDefense.Presentation
                         || !Positive(part.trim.width) || !Positive(part.trim.height)
                         || !Inside(new Vector2(part.trim.x + part.trim.width, part.trim.y + part.trim.height), part.canvas)
                         || !Finite(part.offset.x) || !Finite(part.offset.y) || !Positive(part.scale) || !Finite(part.radians)
-                        || part.group < 0 || part.group > 2 || part.layer < 0 || part.layer > 3 || !layers.Add(part.layer))
+                        || part.group < 0 || part.group > 2 || part.layer < 0 || part.layer > 15 || !layers.Add(part.layer))
                         throw new FormatException("Notebook mounts: invalid split fragment.");
                     groups |= 1 << part.group;
                     if (part.id == pilot.muzzleFragment) muzzle = part;
@@ -273,6 +273,6 @@ namespace PaperDefense.Presentation
             revision = source.revision; loaded = true;
         }
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        static void Reset() { loaded = false; revision = null; foundations.Clear(); weapons.Clear(); pilots.Clear(); }
+        public static void ResetCache() { loaded = false; revision = null; foundations.Clear(); weapons.Clear(); pilots.Clear(); }
     }
 }

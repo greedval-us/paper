@@ -1,5 +1,5 @@
 {
-  "revision": "blue-pen-2026-10-17-gun-pilot-v1",
+  "revision": "modular-gun-pilot-2026-10-18-v1",
   "sprites": [
     {
       "id": "chassis.standard",
@@ -1175,6 +1175,90 @@
         "y": 0,
         "width": 0.41300000000000003,
         "height": 0.242
+      }
+    },
+    {
+      "id": "part.pilot.sight",
+      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png",
+      "x": 101,
+      "y": 599,
+      "width": 347,
+      "height": 346,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 0.347,
+        "height": 0.346
+      }
+    },
+    {
+      "id": "part.pilot.magazine",
+      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png",
+      "x": 644,
+      "y": 543,
+      "width": 273,
+      "height": 452,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 0.273,
+        "height": 0.452
+      }
+    },
+    {
+      "id": "part.pilot.trigger",
+      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png",
+      "x": 1118,
+      "y": 594,
+      "width": 343,
+      "height": 386,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 0.343,
+        "height": 0.386
+      }
+    },
+    {
+      "id": "part.pilot.feed",
+      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png",
+      "x": 28,
+      "y": 86,
+      "width": 473,
+      "height": 402,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 0.473,
+        "height": 0.402
+      }
+    },
+    {
+      "id": "part.pilot.bearing",
+      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png",
+      "x": 526,
+      "y": 112,
+      "width": 505,
+      "height": 340,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 0.505,
+        "height": 0.34
+      }
+    },
+    {
+      "id": "part.pilot.armor",
+      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png",
+      "x": 1089,
+      "y": 78,
+      "width": 417,
+      "height": 413,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 0.417,
+        "height": 0.413
       }
     }
   ],

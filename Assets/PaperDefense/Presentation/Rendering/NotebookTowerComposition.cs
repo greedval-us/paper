@@ -16,6 +16,12 @@ namespace PaperDefense.Presentation
 
         public static bool TryGetBounds(TowerBlueprint blueprint, out Rect bounds)
         {
+            if (AssemblyVisualComposer.Supports(blueprint))
+            {
+                bounds = AssemblyVisualComposer.ComposeLegacy(blueprint, null, Vector2.zero, null).Bounds;
+                if (blueprint.Reinforcement != null) bounds = Union(bounds, new Rect(-.65f, -.65f, 1.3f, 1.3f));
+                return true;
+            }
             uiPen.Clear();
             if (blueprint != null)
             {
@@ -48,6 +54,8 @@ namespace PaperDefense.Presentation
             }
             return true;
         }
+        static bool UsesAssemblyComposition(TowerBlueprint blueprint, NotebookVisualThemeAsset theme)
+            => AssemblyVisualComposer.Supports(blueprint) && UsesStandardLayout(blueprint, theme);
 
         public static void DrawUI(VertexHelper target, TowerBlueprint blueprint, Vector2 center, float scale,
             MaterialTier tier = MaterialTier.Ink, InkColor ink = InkColor.None)
@@ -56,6 +64,15 @@ namespace PaperDefense.Presentation
             uiPen.Clear();
             DrawStatic(uiPen, blueprint, Vector2.zero, tier, ink);
             DrawMounts(uiPen, blueprint, Vector2.zero, tier, ink, default, false, null, 0, 0);
+            uiPen.CopyTo(target, center, scale);
+        }
+
+        public static void DrawRecipeUI(VertexHelper target, RecipeSnapshot recipe, AssemblyVisualPose pose,
+            Vector2 center, float scale)
+        {
+            if (recipe == null) return;
+            uiPen.Clear();
+            AssemblyVisualComposer.Compose(recipe, pose).Draw(uiPen, Vector2.zero);
             uiPen.CopyTo(target, center, scale);
         }
 
@@ -75,10 +92,12 @@ namespace PaperDefense.Presentation
         internal static void DrawStatic(MeshPen pen, TowerBlueprint blueprint, Vector2 at, MaterialTier tier,
             InkColor ink, float opacity = 1, NotebookVisualThemeAsset theme = null)
         {
+            theme = theme ?? NotebookVisualThemeAsset.Default;
+            // The complete modular tree shares one batch so front panels can cover moving weapons.
+            if (UsesAssemblyComposition(blueprint, theme)) return;
             Color tint = MeshPen.Alpha(DoodleGlyphs.TierColor(tier), opacity);
             bool authored = blueprint.HasPlayerDrawing;
             var geometry = authored ? AuthoredGeometryCache.For(blueprint.Drawing) : null;
-            theme = theme ?? NotebookVisualThemeAsset.Default;
             foreach (var template in DrawingTemplateCatalog.Create(blueprint))
             {
                 if (template.Role == DrawingPartRole.Mount) continue;
@@ -119,13 +138,21 @@ namespace PaperDefense.Presentation
             double seconds, float opacity = 1, NotebookVisualThemeAsset theme = null, Func<int, Point2> overrideAim = null)
         {
             theme = theme ?? NotebookVisualThemeAsset.Default;
+            if (UsesAssemblyComposition(blueprint, theme))
+            {
+                var composition = AssemblyVisualComposer.ComposeLegacy(blueprint,
+                    slot => overrideAim != null ? overrideAim(slot) : aimed ? structure.GetMountAim(slot) : default,
+                    origin, slot => animation?.Recoil(structureId, slot, seconds, theme) ?? 0);
+                composition.Draw(pen, origin, opacity, NotebookArtRenderer.RasterTint(theme));
+                return;
+            }
             Color tint = MeshPen.Alpha(blueprint.HasPlayerDrawing || ink == InkColor.None
                 ? DoodleGlyphs.TierColor(tier) : DoodleGlyphs.InkTone(ink), opacity);
             var authored = blueprint.HasPlayerDrawing ? AuthoredGeometryCache.For(blueprint.Drawing) : null;
             if (UsesStandardLayout(blueprint, theme))
             {
                 // Draw order is independent of slot identity; a missing neighbour never renumbers a socket.
-                for (int layer = 0; layer < 4; layer++)
+                for (int layer = 0; layer < 16; layer++)
                 for (int order = 0; order < 3; order++)
                     foreach (var mount in blueprint.WeaponMounts)
                     {
@@ -159,6 +186,15 @@ namespace PaperDefense.Presentation
             NotebookAnimationState animation, NotebookVisualThemeAsset theme)
         {
             Vector2 origin = new Vector2(structure.Cell.X + .5f, structure.Cell.Y + .5f);
+            if (UsesAssemblyComposition(structure.Blueprint, theme))
+            {
+                var composition = AssemblyVisualComposer.ComposeLegacy(structure.Blueprint,
+                    mountSlot => structure.GetMountAim(mountSlot), origin,
+                    mountSlot => animation?.Recoil(structure.Id, mountSlot, seconds, theme) ?? 0);
+                foreach (var anchor in composition.Anchors)
+                    if (anchor.SlotIndex == slot) return origin + anchor.Muzzle;
+                throw new ArgumentException("Missing occupied assembly mount.", nameof(slot));
+            }
             if (UsesStandardLayout(structure.Blueprint, theme))
             {
                 var mount = NotebookMountLayout.Resolve(structure.Blueprint, slot);

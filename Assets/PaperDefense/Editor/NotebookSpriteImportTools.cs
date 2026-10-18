@@ -13,8 +13,10 @@ namespace PaperDefense.Editor
     {
         public const string SourcePath = "ArtSource/Notebook/NewStyle/sprites.source.json";
         public const string AnimationPath = "ArtSource/Notebook/NewStyle/animation.json";
+        public const string AssemblyPath = "ArtSource/Notebook/NewStyle/assembly-parts.source.json";
         public const string AtlasPath = "Assets/PaperDefense/Resources/Art/NotebookAtlas.png";
         public const string CatalogPath = "Assets/PaperDefense/Resources/Art/NotebookSprites.json";
+        public const string MountsPath = "Assets/PaperDefense/Resources/Art/NotebookMounts.json";
         public const string ThemePath = "Assets/PaperDefense/Resources/Art/NotebookVisualTheme.asset";
 
         [Serializable] public sealed class SpriteBounds { public float x, y, width, height; }
@@ -53,6 +55,9 @@ namespace PaperDefense.Editor
             var source = ParseSource(File.ReadAllText(SourcePath));
             var semanticIds = SemanticIds(source);
             var animation = ParseAnimation(File.ReadAllText(AnimationPath), semanticIds);
+            string mountsJson = AssemblyVisualComposer.BuildRuntimeJson(File.ReadAllText(AssemblyPath), semanticIds,
+                source.sprites.ToDictionary(s => s.id, s => new Rect(s.bounds.x, s.bounds.y, s.bounds.width, s.bounds.height)));
+            NotebookMountLayout.Validate(mountsJson);
             var theme = AssetDatabase.LoadAssetAtPath<NotebookVisualThemeAsset>(ThemePath);
             if (theme == null) throw Error(ThemePath, "theme", "the existing visual asset is required to preserve its GUID");
 
@@ -113,15 +118,19 @@ namespace PaperDefense.Editor
                 Directory.CreateDirectory(Path.GetDirectoryName(AtlasPath));
                 File.WriteAllBytes(AtlasPath, png);
                 File.WriteAllText(CatalogPath, json);
+                File.WriteAllText(MountsPath, mountsJson);
                 AssetDatabase.ImportAsset(AtlasPath, ImportAssetOptions.ForceSynchronousImport);
                 ConfigureAtlasImporter();
                 AssetDatabase.ImportAsset(CatalogPath, ImportAssetOptions.ForceSynchronousImport);
+                AssetDatabase.ImportAsset(MountsPath, ImportAssetOptions.ForceSynchronousImport);
                 theme.ReplaceData(animation);
                 EditorUtility.SetDirty(theme);
                 // Save only this visual asset; unrelated dirty presets must remain untouched.
                 AssetDatabase.SaveAssetIfDirty(theme);
                 NotebookVisualThemeAsset.ResetDefaultCache();
                 NotebookSpriteCatalog.ResetCache();
+                NotebookMountLayout.ResetCache();
+                AssemblyVisualComposer.ResetCache();
                 string summary = $"Blue pen atlas rebuilt: {source.sprites.Length} sprites, {source.aliases.Length} aliases, " +
                     $"{animation.Shapes.Count} shape bindings, {animation.Clips.Count} clips, {animation.Recoils.Count} recoils; {atlas.width}x{atlas.height}.";
                 Debug.Log(summary);

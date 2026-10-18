@@ -1,0 +1,23 @@
+// Run each numbered block separately through Unity execute_code, waiting for the requested mode.
+// 1. Edit Mode: require a clean original scene, then enter a temporary unsaved empty scene.
+var scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+if(scene.isDirty)throw new System.InvalidOperationException("Save original scene changes first.");
+UnityEditor.SessionState.SetString("PaperDefense.Task3OriginalScene",scene.path);
+UnityEditor.SceneManagement.EditorSceneManager.NewScene(UnityEditor.SceneManagement.NewSceneSetup.EmptyScene,UnityEditor.SceneManagement.NewSceneMode.Single);
+UnityEditor.EditorApplication.isPlaying=true;
+return "Wait for Play Mode, then run block 2";
+
+// 2. Play Mode: fixture and output directory. Then execute task3-poses.cs.txt, followed by task3-capture-steps.cs.txt.
+PaperDefense.Editor.FullGameUiCapture.CreateFixture();
+PaperDefense.Editor.FullGameUiCapture.Folder="docs/validation/modular-album/task3-visuals";
+PaperDefense.Editor.FullGameUiCapture.AttachPreviewStore(false);
+return "Run poses, then screen queue. Wait until FullGameUiCapture.Remaining == 0";
+
+// 3. Play Mode after completion: restore the user's Game View and exit.
+PaperDefense.Editor.FullGameUiCapture.RestoreGameView();
+UnityEditor.EditorApplication.isPlaying=false;
+return "Wait for Edit Mode, then block 4";
+
+// 4. Edit Mode: restore the original scene. No profile or scene save is performed by this capture.
+UnityEditor.SceneManagement.EditorSceneManager.OpenScene(UnityEditor.SessionState.GetString("PaperDefense.Task3OriginalScene","Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity"));
+return "Original scene restored";

@@ -405,7 +405,7 @@ namespace PaperDefense.Tests
                 var pen = new MeshPen(mesh) { WorldUnitsPerPixel = .01f };
                 DoodleGlyphs.StructureDynamic(pen, tower, 1, 1 + age, null, theme);
                 pen.Upload();
-                Assert.That(mesh.vertexCount, Is.EqualTo(16));
+                Assert.That(mesh.vertexCount, Is.EqualTo(48), "Eight weapon fragments plus four foundation layers share the dynamic batch.");
                 Vector2 restingTip = SplitGunBarrelPixelInWorld(mesh, new Vector2(444, 460));
                 var animation = Recoiling(tower);
                 pen.Clear();

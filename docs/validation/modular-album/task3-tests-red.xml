@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="23" result="Failed(Child)" total="23" passed="19" failed="4" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 03:23:49Z" end-time="2026-10-18 03:23:50Z" duration="1,0789579">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1030" result="Failed" site="Child" start-time="2026-10-18 03:23:49Z" end-time="2026-10-18 03:23:50Z" duration="1.078958" total="23" passed="19" failed="4" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="2024" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="866" result="Passed" start-time="2026-10-18 03:23:49Z" end-time="2026-10-18 03:23:50Z" duration="0.585709" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="2025" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="866" result="Passed" start-time="2026-10-18 03:23:49Z" end-time="2026-10-18 03:23:50Z" duration="0.517917" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="2026" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="866" result="Passed" start-time="2026-10-18 03:23:49Z" end-time="2026-10-18 03:23:50Z" duration="0.420081" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1036" name="AssemblyFitTests" fullname="PaperDefense.Tests.AssemblyFitTests" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" testcasecount="19" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.322872" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1044" name="BodyAndSelectedArmorKeepouts_RejectSweptIntersection" fullname="PaperDefense.Tests.AssemblyFitTests.BodyAndSelectedArmorKeepouts_RejectSweptIntersection" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.156170" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1042" name="BodyAndSelectedArmorKeepouts_RejectSweptIntersection(False)" fullname="PaperDefense.Tests.AssemblyFitTests.BodyAndSelectedArmorKeepouts_RejectSweptIntersection(False)" methodname="BodyAndSelectedArmorKeepouts_RejectSweptIntersection" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="292919762" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.049292" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1043" name="BodyAndSelectedArmorKeepouts_RejectSweptIntersection(True)" fullname="PaperDefense.Tests.AssemblyFitTests.BodyAndSelectedArmorKeepouts_RejectSweptIntersection(True)" methodname="BodyAndSelectedArmorKeepouts_RejectSweptIntersection" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="969489412" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000925" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1055" name="CatalogSnapshot_DefensivelyCopiesAllNestedAuthorData" fullname="PaperDefense.Tests.AssemblyFitTests.CatalogSnapshot_DefensivelyCopiesAllNestedAuthorData" methodname="CatalogSnapshot_DefensivelyCopiesAllNestedAuthorData" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="127716675" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.039851" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1057" name="CombinedResolution_RequiresNumericalAndPhysicalValidityBeforePublishingValue" fullname="PaperDefense.Tests.AssemblyFitTests.CombinedResolution_RequiresNumericalAndPhysicalValidityBeforePublishingValue" methodname="CombinedResolution_RequiresNumericalAndPhysicalValidityBeforePublishingValue" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="706765288" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.019450" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1038" name="CorrectedDoubleGun_PassesWholeIndependentRotationEnvelopes" fullname="PaperDefense.Tests.AssemblyFitTests.CorrectedDoubleGun_PassesWholeIndependentRotationEnvelopes" methodname="CorrectedDoubleGun_PassesWholeIndependentRotationEnvelopes" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1083164236" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000325" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1056" name="FiniteInputsThatOverflowDerivedGeometry_AreRejected" fullname="PaperDefense.Tests.AssemblyFitTests.FiniteInputsThatOverflowDerivedGeometry_AreRejected" methodname="FiniteInputsThatOverflowDerivedGeometry_AreRejected" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="892865249" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000939" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1041" name="FixedSupportCannotEnterNeighbourMotionEnvelope" fullname="PaperDefense.Tests.AssemblyFitTests.FixedSupportCannotEnterNeighbourMotionEnvelope" methodname="FixedSupportCannotEnterNeighbourMotionEnvelope" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1047333879" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000277" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1040" name="FixedSupportsCannotIntersectEachOther" fullname="PaperDefense.Tests.AssemblyFitTests.FixedSupportsCannotIntersectEachOther" methodname="FixedSupportsCannotIntersectEachOther" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="576734022" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000198" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1037" name="IntersectingPair_ReportsClearance" fullname="PaperDefense.Tests.AssemblyFitTests.IntersectingPair_ReportsClearance" methodname="IntersectingPair_ReportsClearance" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1648179515" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000157" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1054" name="MalformedCatalog_IsRejectedWithStableDiagnostic" fullname="PaperDefense.Tests.AssemblyFitTests.MalformedCatalog_IsRejectedWithStableDiagnostic" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.001590" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1049" name="MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;schema&quot;)" fullname="PaperDefense.Tests.AssemblyFitTests.MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;schema&quot;)" methodname="MalformedCatalog_IsRejectedWithStableDiagnostic" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1128935587" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000453" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1050" name="MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;part_schema&quot;)" fullname="PaperDefense.Tests.AssemblyFitTests.MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;part_schema&quot;)" methodname="MalformedCatalog_IsRejectedWithStableDiagnostic" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1673874903" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000107" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1051" name="MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;socket&quot;)" fullname="PaperDefense.Tests.AssemblyFitTests.MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;socket&quot;)" methodname="MalformedCatalog_IsRejectedWithStableDiagnostic" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1198047645" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000091" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1052" name="MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;number&quot;)" fullname="PaperDefense.Tests.AssemblyFitTests.MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;number&quot;)" methodname="MalformedCatalog_IsRejectedWithStableDiagnostic" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1331720222" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000088" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1053" name="MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;motion&quot;)" fullname="PaperDefense.Tests.AssemblyFitTests.MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;motion&quot;)" methodname="MalformedCatalog_IsRejectedWithStableDiagnostic" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="982099836" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000085" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1047" name="MissingMountAndWrongSocketType_AreRejected" fullname="PaperDefense.Tests.AssemblyFitTests.MissingMountAndWrongSocketType_AreRejected" methodname="MissingMountAndWrongSocketType_AreRejected" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="463446750" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000559" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1048" name="PartAttachMismatch_IsRejected" fullname="PaperDefense.Tests.AssemblyFitTests.PartAttachMismatch_IsRejected" methodname="PartAttachMismatch_IsRejected" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1113755011" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000181" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1039" name="RecoilEndpointBehindPivot_IsIncludedInSweptRadius" fullname="PaperDefense.Tests.AssemblyFitTests.RecoilEndpointBehindPivot_IsIncludedInSweptRadius" methodname="RecoilEndpointBehindPivot_IsIncludedInSweptRadius" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1827486905" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000746" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1046" name="RegisteredButUnsupportedGunCombination_IsRejected" fullname="PaperDefense.Tests.AssemblyFitTests.RegisteredButUnsupportedGunCombination_IsRejected" methodname="RegisteredButUnsupportedGunCombination_IsRejected" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="227986274" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000455" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1045" name="UnknownPartAndExactRevision_AreRejected" fullname="PaperDefense.Tests.AssemblyFitTests.UnknownPartAndExactRevision_AreRejected" methodname="UnknownPartAndExactRevision_AreRejected" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1310635891" result="Passed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.000269" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="2228" name="PaperDefense.Editor.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Editor.Tests.dll" runstate="Runnable" testcasecount="164" result="Failed" site="Child" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.427614" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="2229" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="164" result="Failed" site="Child" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.332509" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="2230" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="164" result="Failed" site="Child" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.232896" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="2050" name="AssemblyVisualPilotTests" fullname="PaperDefense.Tests.AssemblyVisualPilotTests" classname="PaperDefense.Tests.AssemblyVisualPilotTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.133404" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="2051" name="FreeDoubleAndArmoredPilot_PassNumericalAndPhysicalValidation" fullname="PaperDefense.Tests.AssemblyVisualPilotTests.FreeDoubleAndArmoredPilot_PassNumericalAndPhysicalValidation" methodname="FreeDoubleAndArmoredPilot_PassNumericalAndPhysicalValidation" classname="PaperDefense.Tests.AssemblyVisualPilotTests" runstate="Runnable" seed="1625897499" result="Failed" label="Error" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.012642" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.FormatException : Unsupported assembly visual version.]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Presentation.AssemblyVisualComposer.EnsureLoaded () [0x0006e] in D:\Projekt Unity\paper\Assets\PaperDefense\Presentation\Art\AssemblyVisualComposer.cs:242
+  at PaperDefense.Presentation.AssemblyVisualComposer.get_Fits () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Presentation\Art\AssemblyVisualComposer.cs:94
+  at PaperDefense.Tests.AssemblyVisualPilotTests.FreeDoubleAndArmoredPilot_PassNumericalAndPhysicalValidation () [0x00053] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\Editor\AssemblyVisualPilotTests.cs:33
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2052" name="IndependentAnglesAndRecoil_AreKeyedByStableSlot" fullname="PaperDefense.Tests.AssemblyVisualPilotTests.IndependentAnglesAndRecoil_AreKeyedByStableSlot" methodname="IndependentAnglesAndRecoil_AreKeyedByStableSlot" classname="PaperDefense.Tests.AssemblyVisualPilotTests" runstate="Runnable" seed="227889396" result="Failed" label="Error" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.005560" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.FormatException : Unsupported assembly visual version.]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Presentation.AssemblyVisualComposer.EnsureLoaded () [0x0006e] in D:\Projekt Unity\paper\Assets\PaperDefense\Presentation\Art\AssemblyVisualComposer.cs:242
+  at PaperDefense.Presentation.AssemblyVisualComposer.Compose (PaperDefense.Core.RecipeSnapshot snapshot, PaperDefense.Presentation.AssemblyVisualPose pose) [0x0001c] in D:\Projekt Unity\paper\Assets\PaperDefense\Presentation\Art\AssemblyVisualComposer.cs:100
+  at PaperDefense.Tests.AssemblyVisualPilotTests.IndependentAnglesAndRecoil_AreKeyedByStableSlot () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\Editor\AssemblyVisualPilotTests.cs:46
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2054" name="TrimAndPacking_PreserveAttachAndMuzzleWithinHalfSourcePixel" fullname="PaperDefense.Tests.AssemblyVisualPilotTests.TrimAndPacking_PreserveAttachAndMuzzleWithinHalfSourcePixel" methodname="TrimAndPacking_PreserveAttachAndMuzzleWithinHalfSourcePixel" classname="PaperDefense.Tests.AssemblyVisualPilotTests" runstate="Runnable" seed="1085686197" result="Failed" label="Error" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.004321" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.FormatException : Unsupported assembly visual version.]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Presentation.AssemblyVisualComposer.EnsureLoaded () [0x0006e] in D:\Projekt Unity\paper\Assets\PaperDefense\Presentation\Art\AssemblyVisualComposer.cs:242
+  at PaperDefense.Presentation.AssemblyVisualComposer.Compose (PaperDefense.Core.RecipeSnapshot snapshot, PaperDefense.Presentation.AssemblyVisualPose pose) [0x0001c] in D:\Projekt Unity\paper\Assets\PaperDefense\Presentation\Art\AssemblyVisualComposer.cs:100
+  at PaperDefense.Tests.AssemblyVisualPilotTests.TrimAndPacking_PreserveAttachAndMuzzleWithinHalfSourcePixel () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\Editor\AssemblyVisualPilotTests.cs:74
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2053" name="UnknownVisualVersionSocketAndUncoveredPart_AreRejected" fullname="PaperDefense.Tests.AssemblyVisualPilotTests.UnknownVisualVersionSocketAndUncoveredPart_AreRejected" methodname="UnknownVisualVersionSocketAndUncoveredPart_AreRejected" classname="PaperDefense.Tests.AssemblyVisualPilotTests" runstate="Runnable" seed="1601169427" result="Failed" start-time="2026-10-18 03:23:50Z" end-time="2026-10-18 03:23:50Z" duration="0.010408" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: <System.Exception>
+  But was:  <System.FormatException: Unknown pilot socket.
+  at PaperDefense.Presentation.AssemblyVisualComposer.BuildRuntimeJson (System.String json, System.Collections.Generic.ISet`1[T] spriteIds) [0x00760] in D:\Projekt Unity\paper\Assets\PaperDefense\Presentation\Art\AssemblyVisualComposer.cs:227
+  at PaperDefense.Tests.AssemblyVisualPilotTests+<>c__DisplayClass3_0.<UnknownVisualVersionSocketAndUncoveredPart_AreRejected>b__1 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\Editor\AssemblyVisualPilotTests.cs:65
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyVisualPilotTests.UnknownVisualVersionSocketAndUncoveredPart_AreRejected () [0x0003a] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\Editor\AssemblyVisualPilotTests.cs:65
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task3-tests-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

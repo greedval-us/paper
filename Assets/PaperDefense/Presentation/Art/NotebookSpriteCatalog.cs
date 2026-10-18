@@ -91,6 +91,9 @@ namespace PaperDefense.Presentation
         {
             EnsureLoaded();
             if (pen == null || texture == null || id == null || !entries.TryGetValue(id, out var entry)) return false;
+            if (!Finite(scale) || scale <= 0 || !Finite(radians) || !Finite(pivot.x) || !Finite(pivot.y)
+                || !Finite(trim.x) || !Finite(trim.y) || !Finite(trim.width) || !Finite(trim.height)
+                || !Finite(region.x) || !Finite(region.y) || !Finite(region.width) || !Finite(region.height)) return false;
             float left = Mathf.Max(trim.xMin, region.xMin), right = Mathf.Min(trim.xMax, region.xMax);
             float bottom = Mathf.Max(trim.yMin, region.yMin), top = Mathf.Min(trim.yMax, region.yMax);
             if (trim.width <= 0 || trim.height <= 0 || right <= left || top <= bottom) return false;

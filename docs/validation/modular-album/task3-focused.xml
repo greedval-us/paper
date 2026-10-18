@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="57" result="Passed" total="57" passed="57" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 03:27:30Z" end-time="2026-10-18 03:27:32Z" duration="2,1938438">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1034" result="Passed" start-time="2026-10-18 03:27:30Z" end-time="2026-10-18 03:27:32Z" duration="2.193844" total="57" passed="57" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="2024" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="866" result="Passed" start-time="2026-10-18 03:27:30Z" end-time="2026-10-18 03:27:31Z" duration="0.586346" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="2025" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="866" result="Passed" start-time="2026-10-18 03:27:30Z" end-time="2026-10-18 03:27:31Z" duration="0.513640" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="2026" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="866" result="Passed" start-time="2026-10-18 03:27:30Z" end-time="2026-10-18 03:27:31Z" duration="0.414530" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1036" name="AssemblyFitTests" fullname="PaperDefense.Tests.AssemblyFitTests" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" testcasecount="19" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.317831" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1044" name="BodyAndSelectedArmorKeepouts_RejectSweptIntersection" fullname="PaperDefense.Tests.AssemblyFitTests.BodyAndSelectedArmorKeepouts_RejectSweptIntersection" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.151348" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1042" name="BodyAndSelectedArmorKeepouts_RejectSweptIntersection(False)" fullname="PaperDefense.Tests.AssemblyFitTests.BodyAndSelectedArmorKeepouts_RejectSweptIntersection(False)" methodname="BodyAndSelectedArmorKeepouts_RejectSweptIntersection" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="968716178" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.046912" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1043" name="BodyAndSelectedArmorKeepouts_RejectSweptIntersection(True)" fullname="PaperDefense.Tests.AssemblyFitTests.BodyAndSelectedArmorKeepouts_RejectSweptIntersection(True)" methodname="BodyAndSelectedArmorKeepouts_RejectSweptIntersection" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1168955053" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000722" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1055" name="CatalogSnapshot_DefensivelyCopiesAllNestedAuthorData" fullname="PaperDefense.Tests.AssemblyFitTests.CatalogSnapshot_DefensivelyCopiesAllNestedAuthorData" methodname="CatalogSnapshot_DefensivelyCopiesAllNestedAuthorData" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="527076848" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.040869" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1057" name="CombinedResolution_RequiresNumericalAndPhysicalValidityBeforePublishingValue" fullname="PaperDefense.Tests.AssemblyFitTests.CombinedResolution_RequiresNumericalAndPhysicalValidityBeforePublishingValue" methodname="CombinedResolution_RequiresNumericalAndPhysicalValidityBeforePublishingValue" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="641955520" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.018300" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1038" name="CorrectedDoubleGun_PassesWholeIndependentRotationEnvelopes" fullname="PaperDefense.Tests.AssemblyFitTests.CorrectedDoubleGun_PassesWholeIndependentRotationEnvelopes" methodname="CorrectedDoubleGun_PassesWholeIndependentRotationEnvelopes" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="916991670" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000182" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1056" name="FiniteInputsThatOverflowDerivedGeometry_AreRejected" fullname="PaperDefense.Tests.AssemblyFitTests.FiniteInputsThatOverflowDerivedGeometry_AreRejected" methodname="FiniteInputsThatOverflowDerivedGeometry_AreRejected" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1530768813" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000888" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1041" name="FixedSupportCannotEnterNeighbourMotionEnvelope" fullname="PaperDefense.Tests.AssemblyFitTests.FixedSupportCannotEnterNeighbourMotionEnvelope" methodname="FixedSupportCannotEnterNeighbourMotionEnvelope" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="859509581" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000227" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1040" name="FixedSupportsCannotIntersectEachOther" fullname="PaperDefense.Tests.AssemblyFitTests.FixedSupportsCannotIntersectEachOther" methodname="FixedSupportsCannotIntersectEachOther" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1879056501" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000159" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1037" name="IntersectingPair_ReportsClearance" fullname="PaperDefense.Tests.AssemblyFitTests.IntersectingPair_ReportsClearance" methodname="IntersectingPair_ReportsClearance" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1013402670" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000115" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1054" name="MalformedCatalog_IsRejectedWithStableDiagnostic" fullname="PaperDefense.Tests.AssemblyFitTests.MalformedCatalog_IsRejectedWithStableDiagnostic" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.001653" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1049" name="MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;schema&quot;)" fullname="PaperDefense.Tests.AssemblyFitTests.MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;schema&quot;)" methodname="MalformedCatalog_IsRejectedWithStableDiagnostic" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1306980927" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000485" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1050" name="MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;part_schema&quot;)" fullname="PaperDefense.Tests.AssemblyFitTests.MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;part_schema&quot;)" methodname="MalformedCatalog_IsRejectedWithStableDiagnostic" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="1008500350" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000064" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1051" name="MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;socket&quot;)" fullname="PaperDefense.Tests.AssemblyFitTests.MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;socket&quot;)" methodname="MalformedCatalog_IsRejectedWithStableDiagnostic" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="186519992" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000064" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1052" name="MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;number&quot;)" fullname="PaperDefense.Tests.AssemblyFitTests.MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;number&quot;)" methodname="MalformedCatalog_IsRejectedWithStableDiagnostic" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="794426373" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000059" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1053" name="MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;motion&quot;)" fullname="PaperDefense.Tests.AssemblyFitTests.MalformedCatalog_IsRejectedWithStableDiagnostic(&quot;motion&quot;)" methodname="MalformedCatalog_IsRejectedWithStableDiagnostic" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="824727115" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000053" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1047" name="MissingMountAndWrongSocketType_AreRejected" fullname="PaperDefense.Tests.AssemblyFitTests.MissingMountAndWrongSocketType_AreRejected" methodname="MissingMountAndWrongSocketType_AreRejected" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="2017114225" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000628" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1048" name="PartAttachMismatch_IsRejected" fullname="PaperDefense.Tests.AssemblyFitTests.PartAttachMismatch_IsRejected" methodname="PartAttachMismatch_IsRejected" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="874735380" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000137" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1039" name="RecoilEndpointBehindPivot_IsIncludedInSweptRadius" fullname="PaperDefense.Tests.AssemblyFitTests.RecoilEndpointBehindPivot_IsIncludedInSweptRadius" methodname="RecoilEndpointBehindPivot_IsIncludedInSweptRadius" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="219245919" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000706" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1046" name="RegisteredButUnsupportedGunCombination_IsRejected" fullname="PaperDefense.Tests.AssemblyFitTests.RegisteredButUnsupportedGunCombination_IsRejected" methodname="RegisteredButUnsupportedGunCombination_IsRejected" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="2053586183" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000500" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1045" name="UnknownPartAndExactRevision_AreRejected" fullname="PaperDefense.Tests.AssemblyFitTests.UnknownPartAndExactRevision_AreRejected" methodname="UnknownPartAndExactRevision_AreRejected" classname="PaperDefense.Tests.AssemblyFitTests" runstate="Runnable" seed="936706243" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:31Z" duration="0.000256" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="2232" name="PaperDefense.Editor.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Editor.Tests.dll" runstate="Runnable" testcasecount="168" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:32Z" duration="1.484566" total="38" passed="38" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="2233" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="168" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:32Z" duration="1.388128" total="38" passed="38" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="2234" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="168" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:32Z" duration="1.288036" total="38" passed="38" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="2050" name="AssemblyVisualPilotTests" fullname="PaperDefense.Tests.AssemblyVisualPilotTests" classname="PaperDefense.Tests.AssemblyVisualPilotTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:32Z" duration="0.445166" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2052" name="CertifiedBoundaryPoses_UseTheSameOccupiedCornersAsCore" fullname="PaperDefense.Tests.AssemblyVisualPilotTests.CertifiedBoundaryPoses_UseTheSameOccupiedCornersAsCore" methodname="CertifiedBoundaryPoses_UseTheSameOccupiedCornersAsCore" classname="PaperDefense.Tests.AssemblyVisualPilotTests" runstate="Runnable" seed="586822140" result="Passed" start-time="2026-10-18 03:27:31Z" end-time="2026-10-18 03:27:32Z" duration="0.277649" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2051" name="FreeDoubleAndArmoredPilot_PassNumericalAndPhysicalValidation" fullname="PaperDefense.Tests.AssemblyVisualPilotTests.FreeDoubleAndArmoredPilot_PassNumericalAndPhysicalValidation" methodname="FreeDoubleAndArmoredPilot_PassNumericalAndPhysicalValidation" classname="PaperDefense.Tests.AssemblyVisualPilotTests" runstate="Runnable" seed="405375335" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.015079" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2056" name="ImportRejectsSpriteBoundsWhichDivergeFromCertifiedGeometry" fullname="PaperDefense.Tests.AssemblyVisualPilotTests.ImportRejectsSpriteBoundsWhichDivergeFromCertifiedGeometry" methodname="ImportRejectsSpriteBoundsWhichDivergeFromCertifiedGeometry" classname="PaperDefense.Tests.AssemblyVisualPilotTests" runstate="Runnable" seed="768174437" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.001053" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2054" name="IndependentAnglesAndRecoil_AreKeyedByStableSlot" fullname="PaperDefense.Tests.AssemblyVisualPilotTests.IndependentAnglesAndRecoil_AreKeyedByStableSlot" methodname="IndependentAnglesAndRecoil_AreKeyedByStableSlot" classname="PaperDefense.Tests.AssemblyVisualPilotTests" runstate="Runnable" seed="1018738390" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.010029" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2057" name="MixedLegacyTower_RetainsEveryDeclaredGunLayer" fullname="PaperDefense.Tests.AssemblyVisualPilotTests.MixedLegacyTower_RetainsEveryDeclaredGunLayer" methodname="MixedLegacyTower_RetainsEveryDeclaredGunLayer" classname="PaperDefense.Tests.AssemblyVisualPilotTests" runstate="Runnable" seed="163036824" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.011348" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2053" name="RecipeAndExistingAlbumAdapter_ProduceIdenticalGeometry" fullname="PaperDefense.Tests.AssemblyVisualPilotTests.RecipeAndExistingAlbumAdapter_ProduceIdenticalGeometry" methodname="RecipeAndExistingAlbumAdapter_ProduceIdenticalGeometry" classname="PaperDefense.Tests.AssemblyVisualPilotTests" runstate="Runnable" seed="114491729" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.011959" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2058" name="TrimAndPacking_PreserveAttachAndMuzzleWithinHalfSourcePixel" fullname="PaperDefense.Tests.AssemblyVisualPilotTests.TrimAndPacking_PreserveAttachAndMuzzleWithinHalfSourcePixel" methodname="TrimAndPacking_PreserveAttachAndMuzzleWithinHalfSourcePixel" classname="PaperDefense.Tests.AssemblyVisualPilotTests" runstate="Runnable" seed="1586659632" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.008592" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2055" name="UnknownVisualVersionSocketAndUncoveredPart_AreRejected" fullname="PaperDefense.Tests.AssemblyVisualPilotTests.UnknownVisualVersionSocketAndUncoveredPart_AreRejected" methodname="UnknownVisualVersionSocketAndUncoveredPart_AreRejected" classname="PaperDefense.Tests.AssemblyVisualPilotTests" runstate="Runnable" seed="1800703810" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.008485" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2149" name="SplitGunMountTests" fullname="PaperDefense.Tests.SplitGunMountTests" classname="PaperDefense.Tests.SplitGunMountTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.120997" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2152" name="CradleAndFrontCollarRotateWithTheirOwnGunWithoutRecoiling" fullname="PaperDefense.Tests.SplitGunMountTests.CradleAndFrontCollarRotateWithTheirOwnGunWithoutRecoiling" methodname="CradleAndFrontCollarRotateWithTheirOwnGunWithoutRecoiling" classname="PaperDefense.Tests.SplitGunMountTests" runstate="Runnable" seed="1047656457" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.045733" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2153" name="CradleBaseRegistrationStaysOverTheFixedSupportWhenBothGunsTurn" fullname="PaperDefense.Tests.SplitGunMountTests.CradleBaseRegistrationStaysOverTheFixedSupportWhenBothGunsTurn" methodname="CradleBaseRegistrationStaysOverTheFixedSupportWhenBothGunsTurn" classname="PaperDefense.Tests.SplitGunMountTests" runstate="Runnable" seed="1474477444" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.001883" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2150" name="EachStandardGunDrawsItsOwnCoreFragmentsInsideTheCompletePilot" fullname="PaperDefense.Tests.SplitGunMountTests.EachStandardGunDrawsItsOwnCoreFragmentsInsideTheCompletePilot" methodname="EachStandardGunDrawsItsOwnCoreFragmentsInsideTheCompletePilot" classname="PaperDefense.Tests.SplitGunMountTests" runstate="Runnable" seed="1377199465" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.001433" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2154" name="OnlyBarrelsSlideAlongEachIndependentAimAndMuzzleSharesThatDisplacement" fullname="PaperDefense.Tests.SplitGunMountTests.OnlyBarrelsSlideAlongEachIndependentAimAndMuzzleSharesThatDisplacement" methodname="OnlyBarrelsSlideAlongEachIndependentAimAndMuzzleSharesThatDisplacement" classname="PaperDefense.Tests.SplitGunMountTests" runstate="Runnable" seed="1036079328" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.003329" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2158" name="OtherFoundationsKeepTheWholeGunSprite" fullname="PaperDefense.Tests.SplitGunMountTests.OtherFoundationsKeepTheWholeGunSprite" classname="PaperDefense.Tests.SplitGunMountTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.047526" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2155" name="OtherFoundationsKeepTheWholeGunSprite(&quot;chassis.heavy&quot;)" fullname="PaperDefense.Tests.SplitGunMountTests.OtherFoundationsKeepTheWholeGunSprite(&quot;chassis.heavy&quot;)" methodname="OtherFoundationsKeepTheWholeGunSprite" classname="PaperDefense.Tests.SplitGunMountTests" runstate="Runnable" seed="2093460990" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.001036" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2156" name="OtherFoundationsKeepTheWholeGunSprite(&quot;chassis.precision&quot;)" fullname="PaperDefense.Tests.SplitGunMountTests.OtherFoundationsKeepTheWholeGunSprite(&quot;chassis.precision&quot;)" methodname="OtherFoundationsKeepTheWholeGunSprite" classname="PaperDefense.Tests.SplitGunMountTests" runstate="Runnable" seed="2065817037" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.000704" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2157" name="OtherFoundationsKeepTheWholeGunSprite(&quot;chassis.battery&quot;)" fullname="PaperDefense.Tests.SplitGunMountTests.OtherFoundationsKeepTheWholeGunSprite(&quot;chassis.battery&quot;)" methodname="OtherFoundationsKeepTheWholeGunSprite" classname="PaperDefense.Tests.SplitGunMountTests" runstate="Runnable" seed="768576848" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.000196" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2159" name="RenderingSplitGunsPreservesTheSavedProfileAndBlueprint" fullname="PaperDefense.Tests.SplitGunMountTests.RenderingSplitGunsPreservesTheSavedProfileAndBlueprint" methodname="RenderingSplitGunsPreservesTheSavedProfileAndBlueprint" classname="PaperDefense.Tests.SplitGunMountTests" runstate="Runnable" seed="1200196502" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.009157" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2151" name="SupportStaysOnItsFoundationSocketWhenBothGunsAimAndRecoil" fullname="PaperDefense.Tests.SplitGunMountTests.SupportStaysOnItsFoundationSocketWhenBothGunsAimAndRecoil" methodname="SupportStaysOnItsFoundationSocketWhenBothGunsAimAndRecoil" classname="PaperDefense.Tests.SplitGunMountTests" runstate="Runnable" seed="41255887" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.009245" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2160" name="SplitMountMetadataTests" fullname="PaperDefense.Tests.SplitMountMetadataTests" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.283323" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="2175" name="BrokenSplitDefinitionIsRejected" fullname="PaperDefense.Tests.SplitMountMetadataTests.BrokenSplitDefinitionIsRejected" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.101402" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2166" name="BrokenSplitDefinitionIsRejected(&quot;\&quot;schemaVersion\&quot;:2&quot;,&quot;\&quot;schemaVersion\&quot;:1&quot;)" fullname="PaperDefense.Tests.SplitMountMetadataTests.BrokenSplitDefinitionIsRejected(&quot;\&quot;schemaVersion\&quot;:2&quot;,&quot;\&quot;schemaVersion\&quot;:1&quot;)" methodname="BrokenSplitDefinitionIsRejected" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" seed="746770337" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.001050" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2167" name="BrokenSplitDefinitionIsRejected(&quot;\&quot;chassisId\&quot;:\&quot;base\&quot;&quot;,&quot;\&quot;chassisId\&quot;:\&quot;unknown\&quot;&quot;)" fullname="PaperDefense.Tests.SplitMountMetadataTests.BrokenSplitDefinitionIsRejected(&quot;\&quot;chassisId\&quot;:\&quot;base\&quot;&quot;,&quot;\&quot;chassisId\&quot;:\&quot;unknown\&quot;&quot;)" methodname="BrokenSplitDefinitionIsRejected" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" seed="1944358282" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.000212" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2168" name="BrokenSplitDefinitionIsRejected(&quot;\&quot;weaponId\&quot;:\&quot;gun\&quot;&quot;,&quot;\&quot;weaponId\&quot;:\&quot;unknown\&quot;&quot;)" fullname="PaperDefense.Tests.SplitMountMetadataTests.BrokenSplitDefinitionIsRejected(&quot;\&quot;weaponId\&quot;:\&quot;gun\&quot;&quot;,&quot;\&quot;weaponId\&quot;:\&quot;unknown\&quot;&quot;)" methodname="BrokenSplitDefinitionIsRejected" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" seed="1818968082" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.000093" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2169" name="BrokenSplitDefinitionIsRejected(&quot;\&quot;spriteId\&quot;:\&quot;support-sprite\&quot;&quot;,&quot;\&quot;spriteId\&quot;:\&quot;\&quot;&quot;)" fullname="PaperDefense.Tests.SplitMountMetadataTests.BrokenSplitDefinitionIsRejected(&quot;\&quot;spriteId\&quot;:\&quot;support-sprite\&quot;&quot;,&quot;\&quot;spriteId\&quot;:\&quot;\&quot;&quot;)" methodname="BrokenSplitDefinitionIsRejected" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" seed="219364555" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.000077" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2170" name="BrokenSplitDefinitionIsRejected(&quot;\&quot;group\&quot;:0,\&quot;layer\&quot;:0&quot;,&quot;\&quot;group\&quot;:3,\&quot;layer\&quot;:0&quot;)" fullname="PaperDefense.Tests.SplitMountMetadataTests.BrokenSplitDefinitionIsRejected(&quot;\&quot;group\&quot;:0,\&quot;layer\&quot;:0&quot;,&quot;\&quot;group\&quot;:3,\&quot;layer\&quot;:0&quot;)" methodname="BrokenSplitDefinitionIsRejected" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" seed="1253270352" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.000079" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2171" name="BrokenSplitDefinitionIsRejected(&quot;\&quot;group\&quot;:1,\&quot;layer\&quot;:1&quot;,&quot;\&quot;group\&quot;:0,\&quot;layer\&quot;:1&quot;)" fullname="PaperDefense.Tests.SplitMountMetadataTests.BrokenSplitDefinitionIsRejected(&quot;\&quot;group\&quot;:1,\&quot;layer\&quot;:1&quot;,&quot;\&quot;group\&quot;:0,\&quot;layer\&quot;:1&quot;)" methodname="BrokenSplitDefinitionIsRejected" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" seed="1529063230" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.000080" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2172" name="BrokenSplitDefinitionIsRejected(&quot;\&quot;group\&quot;:1,\&quot;layer\&quot;:1&quot;,&quot;\&quot;group\&quot;:1,\&quot;layer\&quot;:0&quot;)" fullname="PaperDefense.Tests.SplitMountMetadataTests.BrokenSplitDefinitionIsRejected(&quot;\&quot;group\&quot;:1,\&quot;layer\&quot;:1&quot;,&quot;\&quot;group\&quot;:1,\&quot;layer\&quot;:0&quot;)" methodname="BrokenSplitDefinitionIsRejected" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" seed="1684009086" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.000078" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2173" name="BrokenSplitDefinitionIsRejected(&quot;\&quot;muzzleFragment\&quot;:\&quot;barrels\&quot;&quot;,&quot;\&quot;muzzleFragment\&quot;:\&quot;support\&quot;&quot;)" fullname="PaperDefense.Tests.SplitMountMetadataTests.BrokenSplitDefinitionIsRejected(&quot;\&quot;muzzleFragment\&quot;:\&quot;barrels\&quot;&quot;,&quot;\&quot;muzzleFragment\&quot;:\&quot;support\&quot;&quot;)" methodname="BrokenSplitDefinitionIsRejected" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" seed="957096993" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.000073" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2174" name="BrokenSplitDefinitionIsRejected(&quot;\&quot;muzzlePoint\&quot;:{\&quot;x\&quot;:70,\&quot;y\&quot;:150}&quot;,&quot;\&quot;muzzlePoint\&quot;:{\&quot;x\&quot;:101,\&quot;y\&quot;:150}&quot;)" fullname="PaperDefense.Tests.SplitMountMetadataTests.BrokenSplitDefinitionIsRejected(&quot;\&quot;muzzlePoint\&quot;:{\&quot;x\&quot;:70,\&quot;y\&quot;:150}&quot;,&quot;\&quot;muzzlePoint\&quot;:{\&quot;x\&quot;:101,\&quot;y\&quot;:150}&quot;)" methodname="BrokenSplitDefinitionIsRejected" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" seed="1740572544" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.000073" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2165" name="MuzzleAtRotationPivotIsRejectedInsteadOfCollapsingAimAndRecoil" fullname="PaperDefense.Tests.SplitMountMetadataTests.MuzzleAtRotationPivotIsRejectedInsteadOfCollapsingAimAndRecoil" methodname="MuzzleAtRotationPivotIsRejectedInsteadOfCollapsingAimAndRecoil" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" seed="186930155" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.000328" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2164" name="NonFinitePivotIsRejected" fullname="PaperDefense.Tests.SplitMountMetadataTests.NonFinitePivotIsRejected" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.101196" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2162" name="NonFinitePivotIsRejected(&quot;1e100&quot;)" fullname="PaperDefense.Tests.SplitMountMetadataTests.NonFinitePivotIsRejected(&quot;1e100&quot;)" methodname="NonFinitePivotIsRejected" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" seed="1349906240" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.000563" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2163" name="NonFinitePivotIsRejected(&quot;-1e100&quot;)" fullname="PaperDefense.Tests.SplitMountMetadataTests.NonFinitePivotIsRejected(&quot;-1e100&quot;)" methodname="NonFinitePivotIsRejected" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" seed="198133236" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.000084" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2161" name="RealSplitMountCatalogueAndMinimalSchemaTwoRemainValid" fullname="PaperDefense.Tests.SplitMountMetadataTests.RealSplitMountCatalogueAndMinimalSchemaTwoRemainValid" methodname="RealSplitMountCatalogueAndMinimalSchemaTwoRemainValid" classname="PaperDefense.Tests.SplitMountMetadataTests" runstate="Runnable" seed="2129299770" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.001366" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2194" name="StandardMountLayoutTests" fullname="PaperDefense.Tests.StandardMountLayoutTests" classname="PaperDefense.Tests.StandardMountLayoutTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.338965" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2201" name="AtlasTrimChangesUvsWithoutChangingTheAuthorCanvasTransform" fullname="PaperDefense.Tests.StandardMountLayoutTests.AtlasTrimChangesUvsWithoutChangingTheAuthorCanvasTransform" methodname="AtlasTrimChangesUvsWithoutChangingTheAuthorCanvasTransform" classname="PaperDefense.Tests.StandardMountLayoutTests" runstate="Runnable" seed="67628550" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.001442" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2202" name="BatteryPedestalIsSeatedOnTheRoofInsteadOfBesideTheBody" fullname="PaperDefense.Tests.StandardMountLayoutTests.BatteryPedestalIsSeatedOnTheRoofInsteadOfBesideTheBody" methodname="BatteryPedestalIsSeatedOnTheRoofInsteadOfBesideTheBody" classname="PaperDefense.Tests.StandardMountLayoutTests" runstate="Runnable" seed="1357335104" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.001922" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2200" name="BrokenMountMetadataIsRejectedInsteadOfSilentlyHidingAWeapon" fullname="PaperDefense.Tests.StandardMountLayoutTests.BrokenMountMetadataIsRejectedInsteadOfSilentlyHidingAWeapon" classname="PaperDefense.Tests.StandardMountLayoutTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.096999" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2198" name="BrokenMountMetadataIsRejectedInsteadOfSilentlyHidingAWeapon(&quot;\&quot;order\&quot;:0&quot;,&quot;\&quot;order\&quot;:9&quot;)" fullname="PaperDefense.Tests.StandardMountLayoutTests.BrokenMountMetadataIsRejectedInsteadOfSilentlyHidingAWeapon(&quot;\&quot;order\&quot;:0&quot;,&quot;\&quot;order\&quot;:9&quot;)" methodname="BrokenMountMetadataIsRejectedInsteadOfSilentlyHidingAWeapon" classname="PaperDefense.Tests.StandardMountLayoutTests" runstate="Runnable" seed="855477675" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.000444" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2199" name="BrokenMountMetadataIsRejectedInsteadOfSilentlyHidingAWeapon(&quot;\&quot;trim\&quot;:{\&quot;x\&quot;:0&quot;,&quot;\&quot;trim\&quot;:{\&quot;x\&quot;:-1&quot;)" fullname="PaperDefense.Tests.StandardMountLayoutTests.BrokenMountMetadataIsRejectedInsteadOfSilentlyHidingAWeapon(&quot;\&quot;trim\&quot;:{\&quot;x\&quot;:0&quot;,&quot;\&quot;trim\&quot;:{\&quot;x\&quot;:-1&quot;)" methodname="BrokenMountMetadataIsRejectedInsteadOfSilentlyHidingAWeapon" classname="PaperDefense.Tests.StandardMountLayoutTests" runstate="Runnable" seed="1021860018" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.000077" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="2197" name="FanAndExtendedRayEffectsStartAtTheRenderedMountTip" fullname="PaperDefense.Tests.StandardMountLayoutTests.FanAndExtendedRayEffectsStartAtTheRenderedMountTip" classname="PaperDefense.Tests.StandardMountLayoutTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.104755" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2195" name="FanAndExtendedRayEffectsStartAtTheRenderedMountTip(18.0f,14.0f)" fullname="PaperDefense.Tests.StandardMountLayoutTests.FanAndExtendedRayEffectsStartAtTheRenderedMountTip(18.0f,14.0f)" methodname="FanAndExtendedRayEffectsStartAtTheRenderedMountTip" classname="PaperDefense.Tests.StandardMountLayoutTests" runstate="Runnable" seed="1519637840" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.003462" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2196" name="FanAndExtendedRayEffectsStartAtTheRenderedMountTip(30.0f,10.5f)" fullname="PaperDefense.Tests.StandardMountLayoutTests.FanAndExtendedRayEffectsStartAtTheRenderedMountTip(30.0f,10.5f)" methodname="FanAndExtendedRayEffectsStartAtTheRenderedMountTip" classname="PaperDefense.Tests.StandardMountLayoutTests" runstate="Runnable" seed="1075782962" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.002510" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2204" name="LargeWeaponPreviewAndAlbumUseTheSameNormalizedGeometry" fullname="PaperDefense.Tests.StandardMountLayoutTests.LargeWeaponPreviewAndAlbumUseTheSameNormalizedGeometry" methodname="LargeWeaponPreviewAndAlbumUseTheSameNormalizedGeometry" classname="PaperDefense.Tests.StandardMountLayoutTests" runstate="Runnable" seed="843302221" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.038085" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2203" name="RemovingABatteryNeighbourDoesNotMoveOrResizeTheRemainingWeapon" fullname="PaperDefense.Tests.StandardMountLayoutTests.RemovingABatteryNeighbourDoesNotMoveOrResizeTheRemainingWeapon" methodname="RemovingABatteryNeighbourDoesNotMoveOrResizeTheRemainingWeapon" classname="PaperDefense.Tests.StandardMountLayoutTests" runstate="Runnable" seed="2027540721" result="Passed" start-time="2026-10-18 03:27:32Z" end-time="2026-10-18 03:27:32Z" duration="0.001908" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task3-focused.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
