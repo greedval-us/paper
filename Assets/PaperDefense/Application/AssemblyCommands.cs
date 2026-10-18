@@ -74,6 +74,22 @@ namespace PaperDefense.Application
         public AssemblyCommandResult DeleteEntry(string entryId, Guid operationId)
             => Execute("DeleteEntry", operationId, candidate => candidate.TryDeleteAssemblyEntry(entryId, out var code)
                 ? AssemblyCommandResult.Ok(entryId) : AssemblyCommandResult.Fail(code, entryId));
+        public AssemblyCommandResult RestoreStarterEntries(Guid operationId)
+            => Execute("RestoreStarterEntries", operationId, candidate => {
+                if (catalog == null) return AssemblyCommandResult.Fail("assembly.catalog.missing");
+                var existing = new HashSet<string>(candidate.Entries.Select(entry => entry.Id), StringComparer.Ordinal);
+                if (!candidate.TryRestoreStarterEntries(catalog, out int missingSpace, out var code))
+                    return AssemblyCommandResult.Fail(code, "profile", missingSpace.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                // Catalog starters are trusted content. Validate their saved numeric snapshots and rights;
+                // arbitrary edited pages still use Prepare's physical fit gate.
+                foreach (var starter in catalog.Starters)
+                {
+                    if (existing.Contains(starter.Id)) continue;
+                    var result = ValidateOwned(candidate, starter);
+                    if (!result.Success) return result;
+                }
+                return AssemblyCommandResult.Ok(null);
+            });
         public AssemblyCommandResult DeleteLibraryEntry(string entryId, Guid operationId)
             => Execute("DeleteLibraryEntry", operationId, candidate => candidate.TryDeleteLibraryComponent(entryId, out var code)
                 ? AssemblyCommandResult.Ok(entryId) : AssemblyCommandResult.Fail(code, entryId));

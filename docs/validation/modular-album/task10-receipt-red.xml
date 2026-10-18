@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Failed(Child)" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 21:38:10Z" end-time="2026-10-18 21:38:11Z" duration="1,0659868">
+  <test-suite type="TestSuite" id="1913" name="paper" fullname="paper" runstate="Runnable" testcasecount="738" result="Failed" site="Child" start-time="2026-10-18 21:38:10Z" end-time="2026-10-18 21:38:11Z" duration="1.065987" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1907" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="738" result="Failed" site="Child" start-time="2026-10-18 21:38:10Z" end-time="2026-10-18 21:38:11Z" duration="1.057419" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39156" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1908" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="738" result="Failed" site="Child" start-time="2026-10-18 21:38:10Z" end-time="2026-10-18 21:38:11Z" duration="1.053651" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1909" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="738" result="Failed" site="Child" start-time="2026-10-18 21:38:10Z" end-time="2026-10-18 21:38:11Z" duration="1.049108" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1001" name="AlbumNavigationTests" fullname="PaperDefense.Tests.AlbumNavigationTests" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" testcasecount="8" result="Failed" site="Child" start-time="2026-10-18 21:38:10Z" end-time="2026-10-18 21:38:11Z" duration="0.649119" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1005" name="ReadinessQueryMatchesStartAndDoesNotPublishOrSaveAnything" fullname="PaperDefense.Tests.AlbumNavigationTests.ReadinessQueryMatchesStartAndDoesNotPublishOrSaveAnything" methodname="ReadinessQueryMatchesStartAndDoesNotPublishOrSaveAnything" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="650161804" result="Failed" start-time="2026-10-18 21:38:10Z" end-time="2026-10-18 21:38:11Z" duration="0.455434" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  profile.write_failed:\u001ePD1:FWNvcHkuMDU2M2UxMDVlODNjMTU3NwEAAAABJh5QRDE6RTNCeWIyWnBiR1V1WlhKeWIzSXVkM0pwZEdVQUFBQUEf\u001f
+  Expected: True
+  But was:  False
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AlbumNavigationTests+<ReadinessQueryMatchesStartAndDoesNotPublishOrSaveAnything>d__11.MoveNext () [0x00047] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumNavigationTests.cs:79
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1006" name="SupportOnlyReadinessAndActualStartBothRejectTheLoadout" fullname="PaperDefense.Tests.AlbumNavigationTests.SupportOnlyReadinessAndActualStartBothRejectTheLoadout" methodname="SupportOnlyReadinessAndActualStartBothRejectTheLoadout" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="1704926703" result="Failed" start-time="2026-10-18 21:38:11Z" end-time="2026-10-18 21:38:11Z" duration="0.183805" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  profile.write_failed:\u001ePD1:FWNvcHkuMDU2M2UxMDVlODNjMTU3NwEAAAABJh5QRDE6RTNCeWIyWnBiR1V1WlhKeWIzSXVkM0pwZEdVQUFBQUEf\u001f
+  Expected: True
+  But was:  False
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AlbumNavigationTests+<SupportOnlyReadinessAndActualStartBothRejectTheLoadout>d__12.MoveNext () [0x00048] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumNavigationTests.cs:92
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1011" name="AlbumUiTests" fullname="PaperDefense.Tests.AlbumUiTests" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" testcasecount="14" result="Failed" site="Child" start-time="2026-10-18 21:38:11Z" end-time="2026-10-18 21:38:11Z" duration="0.397508" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1025" name="RefusedRestoreDoesNotPublishAndTheSameOperationCanBeRetried" fullname="PaperDefense.Tests.AlbumUiTests.RefusedRestoreDoesNotPublishAndTheSameOperationCanBeRetried" methodname="RefusedRestoreDoesNotPublishAndTheSameOperationCanBeRetried" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="1438119329" result="Failed" start-time="2026-10-18 21:38:11Z" end-time="2026-10-18 21:38:11Z" duration="0.177863" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  profile.write_failed | profile.write_failed:profile:\u001ePD1:FWNvcHkuMDU2M2UxMDVlODNjMTU3NwEAAAABJh5QRDE6RTNCeWIyWnBiR1V1WlhKeWIzSXVkM0pwZEdVQUFBQUEf\u001f
+  Expected: True
+  But was:  False
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AlbumUiTests.RefusedRestoreDoesNotPublishAndTheSameOperationCanBeRetried () [0x000ae] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumUiTests.cs:171
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1023" name="RestoreMissingStartersPreservesMoneyNamesAndSlotsAndPersistsOnce" fullname="PaperDefense.Tests.AlbumUiTests.RestoreMissingStartersPreservesMoneyNamesAndSlotsAndPersistsOnce" methodname="RestoreMissingStartersPreservesMoneyNamesAndSlotsAndPersistsOnce" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="1931574922" result="Failed" start-time="2026-10-18 21:38:11Z" end-time="2026-10-18 21:38:11Z" duration="0.203869" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  profile.write_failed | profile.write_failed:profile:\u001ePD1:FWNvcHkuMDU2M2UxMDVlODNjMTU3NwEAAAABJh5QRDE6RTNCeWIyWnBiR1V1WlhKeWIzSXVkM0pwZEdVQUFBQUEf\u001f
+  Expected: True
+  But was:  False
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AlbumUiTests.RestoreMissingStartersPreservesMoneyNamesAndSlotsAndPersistsOnce () [0x000c1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumUiTests.cs:129
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task10-receipt-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

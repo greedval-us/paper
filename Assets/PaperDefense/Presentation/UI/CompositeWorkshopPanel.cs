@@ -28,6 +28,8 @@ namespace PaperDefense.Presentation
         public AlbumEntryKind Route => DraftSession.Draft.Kind;
         public string Status { get; private set; } = "";
         public TrialReport LastTrial { get; private set; }
+        public Action BackRequested { get; set; }
+        public void BeginNewEntry() => NewEntry(AlbumEntryKind.Tower);
         string T(string key, params object[] args) => ui.Resolve(UserText.Message("assembly.workshop." + key, args));
 
         public CompositeWorkshopPanel(Transform parent, RunController run, UserTextResolver resolver, Action prepare)
@@ -166,6 +168,10 @@ namespace PaperDefense.Presentation
             ui.SetSelected(tower, Route == AlbumEntryKind.Tower); ui.SetSelected(support, Route == AlbumEntryKind.Structure);
             ui.Button(Root, "Composite library", new Rect(width - 274, 66, 250, 44), T("library"), () => { libraryOpen = !libraryOpen; Refresh(); }, WorkshopIcon.Book)
                 .interactable = !DraftSession.IsComponentOpen;
+            if (BackRequested != null)
+                ui.Button(Root, "Composite return", new Rect(width - 476, 66, 190, 44),
+                    UserText.Message("assembly.workshop.return"), BackRequested, WorkshopIcon.Back)
+                    .interactable = !DraftSession.IsComponentOpen;
             string[] stages = Route == AlbumEntryKind.Structure ? new[] { "family", "composition", "review" } : new[] { "foundation", "weapons", "review" };
             float stepWidth = (width - 72) / 3;
             for (int i = 0; i < 3; i++)

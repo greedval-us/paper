@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "message": "Retrieved 7 log entries.",
+  "data": [
+    "Assets\\PaperDefense\\Tests\\PlayMode\\AlbumUiTests.cs(18,9): error CS0246: The type or namespace name 'AlbumPanel' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\PlayMode\\AlbumUiTests.cs(31,50): error CS0246: The type or namespace name 'AlbumFilter' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\PlayMode\\AlbumUiTests.cs(29,19): error CS0103: The name 'AlbumFilter' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\PlayMode\\AlbumUiTests.cs(29,50): error CS0103: The name 'AlbumFilter' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\PlayMode\\AlbumUiTests.cs(30,19): error CS0103: The name 'AlbumFilter' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\PlayMode\\AlbumUiTests.cs(30,57): error CS0103: The name 'AlbumFilter' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\PlayMode\\AlbumUiTests.cs(30,93): error CS0103: The name 'AlbumFilter' does not exist in the current context\n"
+  ]
+}

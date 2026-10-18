@@ -1,3 +1,5 @@
+using System.Linq;
+using PaperDefense.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +9,7 @@ namespace PaperDefense.Presentation
     {
         void Map()
         {
+            bool assembly = game.Run.AssemblyCatalog != null;
             float s = Mathf.Min(W / 1600f, H / 900f);
             float top = 64 * s, side = Mathf.Min(W * .46f, 350 * s), fieldWidth = W - side;
             var map = ui.Panel(page, "Mission map", new Rect(0, top, fieldWidth, H - top), Color.clear);
@@ -41,7 +44,7 @@ namespace PaperDefense.Presentation
             var info = ui.Panel(page, "Mission information", new Rect(fieldWidth, top, side, H - top), PlayerUi.Card);
             float prepareHeight = Mathf.Max(76 * s, 56 / Layout.Scale);
             float contentHeight = H - top - prepareHeight - 30 * s;
-            bool compact = contentHeight < 690 * s;
+            bool compact = contentHeight < (assembly ? 748 : 690) * s;
             var content = ui.Panel(info, "Mission details", new Rect(12 * s, 0, side - 24 * s, contentHeight), Color.clear);
             float width = side - 38 * s;
             NotebookLabel(content, ui.T("mission"), new Rect(6 * s, 8 * s, width - 12 * s, (compact ? 50 : 58) * s), Mathf.RoundToInt((compact ? 35 : 40) * s), alignment: TextAnchor.MiddleCenter);
@@ -51,6 +54,11 @@ namespace PaperDefense.Presentation
             MissionMetric(content, "Mission waves", PlayerIcon.Target, session.Balance.Waves.Count + " волн", y, width, s, row - 4 * s); y += row;
             MissionMetric(content, "Mission castle health", PlayerIcon.Heart, "Замок " + session.Balance.BaseHealth, y, width, s, row - 4 * s); y += row;
             MissionMetric(content, "Mission starting ink", PlayerIcon.Pencil, "Старт " + session.Balance.StartingInk + " штрихов", y, width, s, row - 4 * s); y += row;
+            if (assembly)
+            {
+                string count = GameText.Resolve(UserText.Message("assembly.player.map_loadout", game.Run.Workshop.LoadoutEntries.Count(entry => entry != null)));
+                MissionMetric(content, "Mission album loadout", PlayerIcon.Book, count, y, width, s, row - 4 * s); y += row;
+            }
             y += (compact ? 8 : 18) * s;
             NotebookLabel(content, "Защити замок. Строй на свободной земле.", new Rect(10 * s, y, width - 20 * s, (compact ? 48 : 70) * s), Mathf.RoundToInt((compact ? 25 : 28) * s), alignment: TextAnchor.MiddleCenter);
             y += (compact ? 56 : 86) * s;
@@ -67,9 +75,19 @@ namespace PaperDefense.Presentation
                 "Подготовить оборону", () => game.Navigate(PlayerPage.Preparation), true);
             // Compact windows may use two complete handwritten lines beside the pencil.
             prepare.GetComponentInChildren<Text>().resizeTextMaxSize = Mathf.RoundToInt(26 * s);
-            NotebookAction(page, "Map workshop", new Rect(12 * s, H - 80 * s, Mathf.Min(238 * s, fieldWidth - 24 * s), 60 * s), PlayerIcon.Pencil,
-                "Мастерская", () => game.Navigate(PlayerPage.Workshop));
-            NotebookScreenHeader("Карта", () => game.Navigate(PlayerPage.Home));
+            if (assembly)
+                NotebookAction(page, "Map album", new Rect(12 * s, H - 80 * s, Mathf.Min(238 * s, fieldWidth - 24 * s), 60 * s), PlayerIcon.Book,
+                    GameText.Resolve(UserText.Message("assembly.player.album")), game.OpenAlbum);
+            else
+                NotebookAction(page, "Map workshop", new Rect(12 * s, H - 80 * s, Mathf.Min(238 * s, fieldWidth - 24 * s), 60 * s), PlayerIcon.Pencil,
+                    "Мастерская", () => game.Navigate(PlayerPage.Workshop));
+            if (assembly)
+            {
+                NotebookScreenHeader("Карта", () => game.Navigate(PlayerPage.Home), ProgressCopy());
+                progress = page.Find("Notebook header/Mission heading").GetComponentInChildren<Text>();
+                progress.name = "Player progress";
+            }
+            else NotebookScreenHeader("Карта", () => game.Navigate(PlayerPage.Home));
         }
 
         void MissionMetric(Transform parent, string name, PlayerIcon icon, string copy, float y, float width, float s, float height)

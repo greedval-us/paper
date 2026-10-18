@@ -6,6 +6,20 @@ namespace PaperDefense.Core
     /// <summary>Candidate mutations. Application validates assemblies and publishes only after persistence succeeds.</summary>
     public sealed partial class WorkshopProfile
     {
+        public bool TryRestoreStarterEntries(ComponentCatalog catalog, out int missingSpace, out string code)
+        {
+            missingSpace = 0; code = "";
+            if (catalog == null) { code = "assembly.catalog.missing"; return false; }
+            var missing = new List<AlbumEntry>();
+            foreach (var starter in catalog.Starters)
+                if (!entries.Exists(entry => entry.Id == starter.Id)) missing.Add(starter);
+            missingSpace = Math.Max(0, entries.Count + missing.Count - ProfileLimits.MaximumAlbumPages);
+            if (missingSpace > 0) { code = "profile.entry.restore_space"; return false; }
+            foreach (var starter in missing) AddOwnedEntry(starter);
+            GrantInitialComponents(catalog);
+            return true;
+        }
+
         public bool TryPurchaseAssemblyPart(ComponentDefinition part, out string code)
         {
             code = "";

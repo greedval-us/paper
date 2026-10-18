@@ -24,6 +24,8 @@ namespace PaperDefense.Tests
             originalSettings = InputSystem.settings;
             settings = Object.Instantiate(originalSettings);
             settings.scrollDeltaBehavior = InputSettings.ScrollDeltaBehavior.UniformAcrossAllPlatforms;
+            settings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
+            settings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
             // Replacing the Input System's transient default can destroy it unless its flags are retained.
             HideFlags flags = originalSettings.hideFlags;
             try { originalSettings.hideFlags = HideFlags.None; InputSystem.settings = settings; }
@@ -51,6 +53,7 @@ namespace PaperDefense.Tests
 
         void Scroll(float delta, Vector2 screen)
         {
+            Assert.That(mouse.enabled, Is.True, "Synthetic camera input must remain enabled when the editor loses focus.");
             InputState.Change(mouse, new MouseState { scroll = new Vector2(0, delta) });
             typeof(DrawingInput).GetMethod("Navigate", Private).Invoke(drawing, new object[] { mouse, screen });
         }

@@ -1,6 +1,6 @@
 # Составной альбом — Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Выполнение начато по запросу пользователя 18.10.2026. Задачи 1–9 завершены; следующая — задача 10. [Проверки задачи 1](../../validation/modular-album/task1-report.md), [задачи 2](../../validation/modular-album/task2-report.md), [задачи 3](../../validation/modular-album/task3-report.md), [задачи 4](../../validation/modular-album/task4-report.md), [задачи 5](../../validation/modular-album/task5-report.md), [задачи 6](../../validation/modular-album/task6-report.md), [задачи 7](../../validation/modular-album/task7-report.md), [задачи 8](../../validation/modular-album/task8-report.md), [задачи 9](../../validation/modular-album/task9-report.md).
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Выполнение начато по запросу пользователя 18.10.2026. Задачи 1–10 завершены; следующая — задача 11. [Проверки задачи 1](../../validation/modular-album/task1-report.md), [задачи 2](../../validation/modular-album/task2-report.md), [задачи 3](../../validation/modular-album/task3-report.md), [задачи 4](../../validation/modular-album/task4-report.md), [задачи 5](../../validation/modular-album/task5-report.md), [задачи 6](../../validation/modular-album/task6-report.md), [задачи 7](../../validation/modular-album/task7-report.md), [задачи 8](../../validation/modular-album/task8-report.md), [задачи 9](../../validation/modular-album/task9-report.md), [задачи 10](../../validation/modular-album/task10-report.md).
 
 **Goal:** перенести существующую игру на альбом составных башен и сооружений, восемь общих слотов и открытия деталей за уровень и золото, включая все обновлённые экраны.
 
@@ -250,11 +250,11 @@
 
 **Интерфейс:** оболочка читает `WorkshopReadModel.Entries`, `LoadoutEntries`, `Gold`, `TotalXp`, `Level` и результаты команд задачи 5. Вызовы назначения используют индекс 0–7; после сохранения список обновляется по ID, а не по позиции отфильтрованной карточки.
 
-- [ ] Написать `AlbumUiTests`: фильтры Все/Башни/Сооружения/Стандартные/Мои, сохранение и удаление варианта, пустой фильтр «Мои» при доступных стандартах. Восстановление стартового набора не меняет золото и не перезаписывает чужие страницы; при полном альбоме показывает нужное свободное место.
-- [ ] Написать `EightSlotPreparationTests.At1024x768_AllEightSlotsVisible`: `Assert.That(visibleSlotCount, Is.EqualTo(8));`. Все восемь назначаемы, повторный ID переносится после подтверждения, поддержка не обходит проверку атакующего состава, пустые слоты не сдвигают индексы остальных. Длинное имя не перекрывает кнопки. Запустить оба класса в PlayMode, увидеть красный результат.
-- [ ] Перенести **01–03, 09, 24**: главное меню, карту первого рубежа, подготовку, альбом и пустое состояние. Исправить ссылки входа/возврата в мастерскую; показать уровень/XP там, где указано эскизами. При 4:3 — сетка 4×2, на широком экране 8×1 или 4×2; главное меню, карта и основной набор подготовки без прокрутки.
-- [ ] Пройти новые тесты, `PlayerJourneyTests`, `PlayerLayoutTests`, `WorkshopIntegrationTests`. Сохранить сравнение с эскизами на 1024×768, 1280×720, 1920×1080. Проверить клавиатурный фокус и возвращение на ту же страницу после отмены/сохранения.
-- [ ] Зафиксировать: `feat: update album home map and eight slot preparation`.
+- [x] Написать `AlbumUiTests`: фильтры Все/Башни/Сооружения/Стандартные/Мои, сохранение и удаление варианта, пустой фильтр «Мои» при доступных стандартах. Восстановление стартового набора не меняет золото и не перезаписывает чужие страницы; при полном альбоме показывает нужное свободное место.
+- [x] Написать `EightSlotPreparationTests.At1024x768_AllEightSlotsVisible`: `Assert.That(visibleSlotCount, Is.EqualTo(8));`. Все восемь назначаемы, повторный ID переносится после подтверждения, поддержка не обходит проверку атакующего состава, пустые слоты не сдвигают индексы остальных. Длинное имя не перекрывает кнопки. Запустить оба класса в PlayMode, увидеть красный результат.
+- [x] Перенести **01–03, 09, 24**: главное меню, карту первого рубежа, подготовку, альбом и пустое состояние. Исправить ссылки входа/возврата в мастерскую; показать уровень/XP там, где указано эскизами. При 4:3 — сетка 4×2, на широком экране 8×1 или 4×2; главное меню, карта и основной набор подготовки без прокрутки.
+- [x] Пройти новые тесты, `PlayerJourneyTests`, `PlayerLayoutTests`, `WorkshopIntegrationTests`. Сохранить сравнение с эскизами на 1024×768, 1280×720, 1920×1080. Проверить клавиатурный фокус и возвращение на ту же страницу после отмены/сохранения.
+- [x] Зафиксировать: `feat: update album home map and eight slot preparation`.
 
 ## Задача 11. Боевой HUD, пауза, результаты, настройки и помощь
 

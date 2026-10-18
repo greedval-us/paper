@@ -182,7 +182,8 @@ namespace PaperDefense.Core
             {
                 if (saved == null) throw new ArgumentException("Missing operation receipt."); AssemblyProfileDataCopy.Version(saved.Version);
                 var id = ReceiptGuid(saved.OperationId); if (!ops.Add(id) || string.IsNullOrWhiteSpace(saved.Type) || saved.Type.Length > 64) throw new ArgumentException("Invalid operation receipt.");
-                if (saved.ResultId != null) ContentValidation.Id(saved.ResultId, "receipt.result");
+                // JsonUtility writes optional null strings as empty strings. Both represent no result ID.
+                if (!string.IsNullOrEmpty(saved.ResultId)) ContentValidation.Id(saved.ResultId, "receipt.result");
                 profile.operations.Add(Copy(saved));
             }
             profile.content = balance?.ResolveContent();
@@ -191,7 +192,7 @@ namespace PaperDefense.Core
         static Guid ReceiptGuid(string id)
         { if (!Guid.TryParseExact(id, "N", out var result) || result == Guid.Empty) throw new ArgumentException("Receipt GUID must use N format."); return result; }
         static RunRewardReceiptData Copy(RunRewardReceiptData r) => new RunRewardReceiptData { Version=r.Version, RunId=r.RunId, Waves=r.Waves, VictoryBonus=r.VictoryBonus };
-        static OperationReceiptData Copy(OperationReceiptData r) => new OperationReceiptData { Version=r.Version, OperationId=r.OperationId, Type=r.Type, ResultId=r.ResultId };
+        static OperationReceiptData Copy(OperationReceiptData r) => new OperationReceiptData { Version=r.Version, OperationId=r.OperationId, Type=r.Type, ResultId=string.IsNullOrEmpty(r.ResultId) ? null : r.ResultId };
         void GrantInitialComponents(ComponentCatalog catalog)
         { if (catalog != null) foreach (var part in catalog.Definitions) if (part.RequiredLevel == 1 && part.UnlockGold == 0) unlocked.Add(part.Id); }
         internal void PrepareMigratedEntries(ComponentCatalog catalog, GameBalance balance)

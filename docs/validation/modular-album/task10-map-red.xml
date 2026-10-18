@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Failed(Child)" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 21:54:43Z" end-time="2026-10-18 21:54:44Z" duration="1,1149652">
+  <test-suite type="TestSuite" id="1917" name="paper" fullname="paper" runstate="Runnable" testcasecount="742" result="Failed" site="Child" start-time="2026-10-18 21:54:43Z" end-time="2026-10-18 21:54:44Z" duration="1.114965" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1911" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="742" result="Failed" site="Child" start-time="2026-10-18 21:54:43Z" end-time="2026-10-18 21:54:44Z" duration="1.105960" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39156" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1912" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="742" result="Failed" site="Child" start-time="2026-10-18 21:54:43Z" end-time="2026-10-18 21:54:44Z" duration="1.101852" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1913" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="742" result="Failed" site="Child" start-time="2026-10-18 21:54:43Z" end-time="2026-10-18 21:54:44Z" duration="1.098062" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1001" name="AlbumNavigationTests" fullname="PaperDefense.Tests.AlbumNavigationTests" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" testcasecount="11" result="Failed" site="Child" start-time="2026-10-18 21:54:43Z" end-time="2026-10-18 21:54:44Z" duration="1.095910" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="1013" name="HomeAndMapKeepNativeActionsAndActualProgressInsideThePage" fullname="PaperDefense.Tests.AlbumNavigationTests.HomeAndMapKeepNativeActionsAndActualProgressInsideThePage" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-10-18 21:54:43Z" end-time="2026-10-18 21:54:43Z" duration="0.821671" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1010" name="HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1024,768)" fullname="PaperDefense.Tests.AlbumNavigationTests.HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1024,768)" methodname="HomeAndMapKeepNativeActionsAndActualProgressInsideThePage" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="239165868" result="Failed" start-time="2026-10-18 21:54:43Z" end-time="2026-10-18 21:54:43Z" duration="0.459921" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AlbumNavigationTests.HomeAndMapKeepNativeActionsAndActualProgressInsideThePage (System.Int32 width, System.Int32 height) [0x000ca] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumNavigationTests.cs:147
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1011" name="HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1280,720)" fullname="PaperDefense.Tests.AlbumNavigationTests.HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1280,720)" methodname="HomeAndMapKeepNativeActionsAndActualProgressInsideThePage" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="11952532" result="Failed" start-time="2026-10-18 21:54:43Z" end-time="2026-10-18 21:54:43Z" duration="0.168481" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AlbumNavigationTests.HomeAndMapKeepNativeActionsAndActualProgressInsideThePage (System.Int32 width, System.Int32 height) [0x000ca] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumNavigationTests.cs:147
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1012" name="HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1920,1080)" fullname="PaperDefense.Tests.AlbumNavigationTests.HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1920,1080)" methodname="HomeAndMapKeepNativeActionsAndActualProgressInsideThePage" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="1044548864" result="Failed" start-time="2026-10-18 21:54:43Z" end-time="2026-10-18 21:54:43Z" duration="0.186075" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AlbumNavigationTests.HomeAndMapKeepNativeActionsAndActualProgressInsideThePage (System.Int32 width, System.Int32 height) [0x000ca] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumNavigationTests.cs:147
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="1005" name="MapAlbumUsesTheCurrentLoadoutAndReturnsToTheMap" fullname="PaperDefense.Tests.AlbumNavigationTests.MapAlbumUsesTheCurrentLoadoutAndReturnsToTheMap" methodname="MapAlbumUsesTheCurrentLoadoutAndReturnsToTheMap" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="1168250641" result="Failed" label="Error" start-time="2026-10-18 21:54:43Z" end-time="2026-10-18 21:54:44Z" duration="0.267280" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.InvalidOperationException : Sequence contains no matching element]]></message>
+                <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <fe644d7ad1cf499ebe4e7ad937bc03bf>:0
+  at PaperDefense.Tests.AlbumNavigationTests+<MapAlbumUsesTheCurrentLoadoutAndReturnsToTheMap>d__11.MoveNext () [0x00058] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumNavigationTests.cs:72
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44 ]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task10-map-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -14,7 +14,7 @@ namespace PaperDefense.Presentation
         RectTransform root, page, battleRoot;
         PlayerBattleHud battle;
         CanvasGroup battleInteraction;
-        Text status, tooltip, gold;
+        Text status, tooltip, gold, progress;
         float refresh;
         int screenWidth, screenHeight;
         bool statistics;
@@ -61,6 +61,7 @@ namespace PaperDefense.Presentation
 
         public void Show(PlayerPage current)
         {
+            RememberAlbumView();
             if (page != null) { page.gameObject.SetActive(false); Destroy(page.gameObject); }
             bool battlefield = !game.Run.InWorkshop && current != PlayerPage.Workshop;
             battleRoot.gameObject.SetActive(battlefield);
@@ -68,7 +69,7 @@ namespace PaperDefense.Presentation
             battleInteraction.blocksRaycasts = current == PlayerPage.Battle && !HasConfirmation;
             UnityEngine.EventSystems.EventSystem.current?.SetSelectedGameObject(null);
             page = ui.Panel(root, "Page " + current, new Rect(0, 0, W, H), Color.clear);
-            status = tooltip = gold = null;
+            status = tooltip = gold = progress = null;
             if (!battlefield && current != PlayerPage.Workshop && current != PlayerPage.Home)
                 ui.Panel(page, "Paper", new Rect(0, 0, W, H), PlayerUi.Paper, true);
             switch (current)
@@ -76,6 +77,7 @@ namespace PaperDefense.Presentation
                 case PlayerPage.Home: Home(); break;
                 case PlayerPage.Map: Map(); break;
                 case PlayerPage.Preparation: Preparation(); break;
+                case PlayerPage.Album: BuildAlbum(); break;
                 case PlayerPage.Pause: Pause(); break;
                 case PlayerPage.Upgrades: Upgrades(); break;
                 case PlayerPage.Result: Result(); break;
@@ -152,6 +154,7 @@ namespace PaperDefense.Presentation
             if (game.Page == PlayerPage.Settings && settingsFullscreen != Screen.fullScreen) Show(PlayerPage.Settings);
             refresh -= Time.unscaledDeltaTime; if (refresh > 0) return; refresh = .12f;
             if (gold != null) gold.text = ui.T("gold", game.Run.Workshop.Gold);
+            if (progress != null) progress.text = ProgressCopy();
             if (battleRoot.gameObject.activeSelf) battle.Refresh();
         }
     }

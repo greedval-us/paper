@@ -13,11 +13,13 @@ namespace PaperDefense.Presentation
             // Layout follows the size of the complete landscape page, without a second UI scale.
             float responsive = Mathf.Min(composition.width / 1600f, composition.height / 900f);
             float scale = responsive;
-            float brandAvailable = composition.height - 450 * scale - 135 * responsive;
+            bool assembly = game.Run.AssemblyCatalog != null;
+            float actionHeight = assembly ? 506 : 454;
+            float brandAvailable = composition.height - actionHeight * scale - 135 * responsive;
             float brandScale = Mathf.Min(scale, Mathf.Max(0, brandAvailable) / 305);
             float brandHeight = 305 * brandScale;
             float gap = 29 * responsive;
-            float blockHeight = brandHeight + gap + 450 * scale;
+            float blockHeight = brandHeight + gap + actionHeight * scale;
             float top = composition.y + Mathf.Max(22 * responsive, (composition.height - 60 * responsive - blockHeight) * .5f);
             float left = composition.x + 44 * responsive;
 
@@ -45,19 +47,22 @@ namespace PaperDefense.Presentation
                 HomeLettering(brand, "Собери свою оборону", new Rect(40 * brandScale, 250 * brandScale, 450 * brandScale, 52 * brandScale), 39 * brandScale);
             }
 
-            var actions = ui.Panel(page, "Home actions", new Rect(left, top + brandHeight + gap, 402 * scale, 454 * scale), Color.clear);
+            var actions = ui.Panel(page, "Home actions", new Rect(left, top + brandHeight + gap, 402 * scale, actionHeight * scale), Color.clear);
             var flow = actions.gameObject.AddComponent<VerticalLayoutGroup>();
             flow.spacing = 8 * scale; flow.childAlignment = TextAnchor.UpperLeft;
             flow.childControlWidth = flow.childControlHeight = true;
             flow.childForceExpandWidth = flow.childForceExpandHeight = false;
             var play = HomeAction(actions, "Open campaign", PlayerIcon.Play, "Играть", () => game.Navigate(PlayerPage.Map), 402, 104, 60, scale, true);
-            var workshop = HomeAction(actions, "workshop", PlayerIcon.Pencil, ui.T("workshop"), () => game.Navigate(PlayerPage.Workshop), 402, 92, 52, scale);
-            var settings = HomeAction(actions, "settings", PlayerIcon.Settings, ui.T("settings"), () => game.OpenSettings(), 402, 84, 52, scale);
-            var help = HomeAction(actions, "help", PlayerIcon.Book, "Помощь", () => game.OpenSettings(true), 402, 80, 50, scale);
+            Button album = null;
+            if (assembly) album = HomeAction(actions, "Open album", PlayerIcon.Book,
+                GameText.Resolve(PaperDefense.Core.UserText.Message("assembly.player.album")), game.OpenAlbum, 402, 82, 46, scale);
+            var workshop = HomeAction(actions, "workshop", PlayerIcon.Pencil, ui.T("workshop"), () => game.Navigate(PlayerPage.Workshop), 402, assembly ? 82 : 92, 52, scale);
+            var settings = HomeAction(actions, "settings", PlayerIcon.Settings, ui.T("settings"), () => game.OpenSettings(), 402, assembly ? 76 : 84, 52, scale);
+            var help = HomeAction(actions, "help", PlayerIcon.Book, "Помощь", () => game.OpenSettings(true), 402, assembly ? 72 : 80, 50, scale);
             var exit = HomeAction(actions, "exit", PlayerIcon.Exit, "Выйти",
                 () => Confirm("Выйти из игры?", "Сохранённые чертежи и золото останутся в профиле.", () => UnityEngine.Application.Quit()),
-                270, 58, 38, scale);
-            Button[] ordered = { play, workshop, settings, help, exit };
+                270, assembly ? 50 : 58, 38, scale);
+            Button[] ordered = assembly ? new[] { play, album, workshop, settings, help, exit } : new[] { play, workshop, settings, help, exit };
             for (int i = 0; i < ordered.Length; i++)
             {
                 var navigation = ordered[i].navigation; navigation.mode = Navigation.Mode.Explicit;
@@ -68,9 +73,16 @@ namespace PaperDefense.Presentation
 
             int waves = game.Run.Session.Balance.Waves.Count;
             string waveCopy = waves == 8 ? "Восемь волн." : waves + " волн.";
-            HomeLettering(page, "Четыре чертежа.\n" + waveCopy,
+            HomeLettering(page, assembly ? GameText.Resolve(PaperDefense.Core.UserText.Message("assembly.player.tagline", waveCopy)) : "Четыре чертежа.\n" + waveCopy,
                 new Rect(left, composition.yMax - 74 * responsive, 260 * responsive, 64 * responsive),
                 Mathf.Max(14 / Layout.Scale, 20 * responsive));
+            if (assembly)
+            {
+                ui.Panel(page, "Home profile", new Rect(W - 340, 8, 324, 76), PlayerUi.Paper);
+                gold = NotebookLabel(page, ui.T("gold", game.Run.Workshop.Gold), new Rect(W - 330, 10, 306, 34), 22, alignment: TextAnchor.MiddleRight);
+                gold.name = "Player gold";
+                PlayerProgress(new Rect(W - 330, 46, 306, 34));
+            }
         }
 
         Text HomeLettering(Transform parent, string copy, Rect bounds, float fontSize)
