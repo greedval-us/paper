@@ -63,7 +63,7 @@ namespace PaperDefense.Tests
             Click("Composite next"); Click("Composite next");
             Assert.That(panel.Step, Is.EqualTo(2));
             Assert.That(panel.DraftSession.PreviewEntry.Kind, Is.EqualTo(AlbumEntryKind.Structure));
-            Assert.That(Button("Composite trial").IsInteractable(), Is.False, "Support trials belong to the shared trial task.");
+            Assert.That(Button("Composite trial").IsInteractable(), Is.EqualTo(panel.DraftSession.CanTrial));
             if (!panel.DraftSession.CanSave)
             {
                 Assert.That(panel.Status, Is.Not.Empty);
@@ -179,6 +179,8 @@ namespace PaperDefense.Tests
             ReviewTower(); string before = fixture.State(); string draft = JsonUtility.ToJson(new AlbumEntryData(panel.DraftSession.Draft));
             Assert.That(panel.LastTrial, Is.Null);
             Click("Composite trial");
+            Assert.That(panel.LastTrial, Is.Null, "Opening the trial leaves measurements unstarted.");
+            Click("Composite trial run");
             Assert.That(panel.LastTrial, Is.Not.Null);
             Assert.That(panel.LastTrial.Budget, Is.EqualTo(400));
             Assert.That(panel.LastTrial.Copies, Is.EqualTo(400 / panel.DraftSession.Resolved.Cost));

@@ -102,7 +102,10 @@ namespace PaperDefense.Application
         bool OwnedRecipe => PreviewRecipe != null && PreviewRecipe.Parts.All(p => IsOwned(p.Id));
         bool ValidParent => Draft != null && Draft.Kind != AlbumEntryKind.Legacy && ValidName && OwnedRecipe && Resolution.Valid;
         public bool CanSave => !IsComponentOpen && ValidParent && (owner.Workshop.Entries.Count < ProfileLimits.MaximumAlbumPages || owner.Workshop.Entries.Any(e => e.Id == Draft.Id));
-        public bool CanTrial => !IsComponentOpen && ValidParent;
+        // Static support trials use production cell occupancy; rotating tower clearance remains mandatory.
+        // Saving still requires the complete authored fit catalog through ValidParent.
+        public bool CanTrial => !IsComponentOpen && Draft != null && Draft.Kind != AlbumEntryKind.Legacy &&
+            ValidName && OwnedRecipe && (Draft.Kind == AlbumEntryKind.Structure ? Resolved != null : Resolution.Valid);
         public bool CanSaveComponent => IsComponentOpen && ValidName && OwnedRecipe &&
             (ActiveComponent == WorkshopComponentKind.Structure ? Resolved != null : Resolution.Valid);
 
@@ -270,7 +273,12 @@ namespace PaperDefense.Application
         }
         public AssemblyCommandResult PurchasePart(string id, Guid operationId) => LastResult = commands.PurchasePart(id, operationId);
         public TrialReport RunTrial(TrialScenario scenario = TrialScenario.Crowd, int budget = 400, int seed = 1337)
-            => CanTrial ? TrialRunner.Run(PreviewEntry, owner.AssemblyBalance, scenario, budget, seed) : null;
+        {
+            if (!CanTrial || !Enum.IsDefined(typeof(TrialScenario), scenario)) return null;
+            var selected = PreviewEntry.Kind == AlbumEntryKind.Structure
+                ? AssemblyTrialRunner.ScenariosFor(PreviewEntry)[0] : (AssemblyTrialScenario)scenario;
+            return owner.RunAssemblyTrial(PreviewEntry, selected, budget, seed)?.Recording;
+        }
 
         public bool ApplyLibrary(ComponentLibraryEntry component, int slotIndex)
         {

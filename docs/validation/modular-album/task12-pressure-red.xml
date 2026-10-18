@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Failed(Child)" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 23:24:47Z" end-time="2026-10-18 23:24:47Z" duration="0,1429776">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1469" result="Failed" site="Child" start-time="2026-10-18 23:24:47Z" end-time="2026-10-18 23:24:47Z" duration="0.142978" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="2538" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="1299" result="Failed" site="Child" start-time="2026-10-18 23:24:47Z" end-time="2026-10-18 23:24:47Z" duration="0.130025" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39156" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="2539" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="1299" result="Failed" site="Child" start-time="2026-10-18 23:24:47Z" end-time="2026-10-18 23:24:47Z" duration="0.124837" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="2540" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="1299" result="Failed" site="Child" start-time="2026-10-18 23:24:47Z" end-time="2026-10-18 23:24:47Z" duration="0.119981" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1224" name="AssemblyTrialTests" fullname="PaperDefense.Tests.AssemblyTrialTests" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" testcasecount="30" result="Failed" site="Child" start-time="2026-10-18 23:24:47Z" end-time="2026-10-18 23:24:47Z" duration="0.118546" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1235" name="RecordingUsesProductionMagazineSequenceForTheSameStationaryTarget" fullname="PaperDefense.Tests.AssemblyTrialTests.RecordingUsesProductionMagazineSequenceForTheSameStationaryTarget" methodname="RecordingUsesProductionMagazineSequenceForTheSameStationaryTarget" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="796968236" result="Failed" start-time="2026-10-18 23:24:47Z" end-time="2026-10-18 23:24:47Z" duration="0.090207" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected is <System.Linq.Enumerable+SelectListIterator`2[PaperDefense.Core.ShotEvent,System.Double]>, actual is <System.Linq.Enumerable+SelectArrayIterator`2[PaperDefense.Core.ShotEvent,System.Double]>
+  Values differ at index [1]
+  Expected: 0.67000000551342964d
+  But was:  0.67000001668930054d
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.RecordingUsesProductionMagazineSequenceForTheSameStationaryTarget () [0x00268] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:159
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1249" name="SupportRespectsTheConfiguredCrowdLimitInItsPreparedTargets" fullname="PaperDefense.Tests.AssemblyTrialTests.SupportRespectsTheConfiguredCrowdLimitInItsPreparedTargets" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-10-18 23:24:47Z" end-time="2026-10-18 23:24:47Z" duration="0.019041" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1247" name="SupportRespectsTheConfiguredCrowdLimitInItsPreparedTargets(1)" fullname="PaperDefense.Tests.AssemblyTrialTests.SupportRespectsTheConfiguredCrowdLimitInItsPreparedTargets(1)" methodname="SupportRespectsTheConfiguredCrowdLimitInItsPreparedTargets" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1019680948" result="Failed" label="Error" start-time="2026-10-18 23:24:47Z" end-time="2026-10-18 23:24:47Z" duration="0.011797" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentException : preparation: target cell full.]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Core.GameSession.CreatePrepared (PaperDefense.Core.GameBalance balance, System.Int32 seed, System.Collections.Generic.IReadOnlyList`1[T] targets, System.Collections.Generic.IReadOnlyList`1[T] blots, System.Int32 redInk, System.Int32 blueInk, System.Int32 greenInk) [0x00401] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameSessionPreparation.cs:84
+  at PaperDefense.Core.AssemblyTrialRunner.RunSupport (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, PaperDefense.Core.AssemblyTrialReport report) [0x000c6] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\AssemblyTrialRunner.cs:141
+  at PaperDefense.Core.AssemblyTrialRunner.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, PaperDefense.Core.AssemblyTrialScenario scenario, System.Int32 budget, System.Int32 seed) [0x0011c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\AssemblyTrialRunner.cs:77
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0
+--- End of stack trace from previous location where exception was thrown ---
+
+  at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x000d0] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:31
+  at PaperDefense.Tests.AssemblyTrialTests.SupportRespectsTheConfiguredCrowdLimitInItsPreparedTargets (System.Int32 maximumPerCell) [0x00021] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:249
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1248" name="SupportRespectsTheConfiguredCrowdLimitInItsPreparedTargets(3)" fullname="PaperDefense.Tests.AssemblyTrialTests.SupportRespectsTheConfiguredCrowdLimitInItsPreparedTargets(3)" methodname="SupportRespectsTheConfiguredCrowdLimitInItsPreparedTargets" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1109434886" result="Failed" label="Error" start-time="2026-10-18 23:24:47Z" end-time="2026-10-18 23:24:47Z" duration="0.004755" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentException : preparation: target cell full.]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Core.GameSession.CreatePrepared (PaperDefense.Core.GameBalance balance, System.Int32 seed, System.Collections.Generic.IReadOnlyList`1[T] targets, System.Collections.Generic.IReadOnlyList`1[T] blots, System.Int32 redInk, System.Int32 blueInk, System.Int32 greenInk) [0x00401] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameSessionPreparation.cs:84
+  at PaperDefense.Core.AssemblyTrialRunner.RunSupport (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, PaperDefense.Core.AssemblyTrialReport report) [0x000c6] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\AssemblyTrialRunner.cs:141
+  at PaperDefense.Core.AssemblyTrialRunner.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, PaperDefense.Core.AssemblyTrialScenario scenario, System.Int32 budget, System.Int32 seed) [0x0011c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\AssemblyTrialRunner.cs:77
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0
+--- End of stack trace from previous location where exception was thrown ---
+
+  at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x000d0] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:31
+  at PaperDefense.Tests.AssemblyTrialTests.SupportRespectsTheConfiguredCrowdLimitInItsPreparedTargets (System.Int32 maximumPerCell) [0x00021] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:249
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: D:/Projekt Unity/paper/docs/validation/modular-album/task12-pressure-red.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

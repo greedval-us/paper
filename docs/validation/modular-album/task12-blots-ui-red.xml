@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 23:23:29Z" end-time="2026-10-18 23:23:29Z" duration="0,5116429">
+  <test-suite type="TestSuite" id="1977" name="paper" fullname="paper" runstate="Runnable" testcasecount="793" result="Failed" site="Child" start-time="2026-10-18 23:23:29Z" end-time="2026-10-18 23:23:29Z" duration="0.511643" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1971" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="793" result="Failed" site="Child" start-time="2026-10-18 23:23:29Z" end-time="2026-10-18 23:23:29Z" duration="0.500457" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39156" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1972" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="793" result="Failed" site="Child" start-time="2026-10-18 23:23:29Z" end-time="2026-10-18 23:23:29Z" duration="0.496052" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1973" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="793" result="Failed" site="Child" start-time="2026-10-18 23:23:29Z" end-time="2026-10-18 23:23:29Z" duration="0.492116" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1155" name="AssemblyTrialUiTests" fullname="PaperDefense.Tests.AssemblyTrialUiTests" classname="PaperDefense.Tests.AssemblyTrialUiTests" runstate="Runnable" testcasecount="16" result="Failed" site="Child" start-time="2026-10-18 23:23:29Z" end-time="2026-10-18 23:23:29Z" duration="0.489902" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1165" name="BlotScenarioShowsMeasuredCleaningRatherThanTheoreticalDps" fullname="PaperDefense.Tests.AssemblyTrialUiTests.BlotScenarioShowsMeasuredCleaningRatherThanTheoreticalDps" methodname="BlotScenarioShowsMeasuredCleaningRatherThanTheoreticalDps" classname="PaperDefense.Tests.AssemblyTrialUiTests" runstate="Runnable" seed="1883183547" result="Failed" start-time="2026-10-18 23:23:29Z" end-time="2026-10-18 23:23:29Z" duration="0.479392" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Composite trial scenario Blots must be reachable.
+  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialUiTests.Click (System.String name) [0x00008] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AssemblyTrialUiTests.cs:45
+at PaperDefense.Tests.AssemblyTrialUiTests.BlotScenarioShowsMeasuredCleaningRatherThanTheoreticalDps () [0x0001c] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AssemblyTrialUiTests.cs:197
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: D:/Projekt Unity/paper/docs/validation/modular-album/task12-blots-ui-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

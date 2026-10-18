@@ -10,7 +10,7 @@ using UnityEngine.UI;
 namespace PaperDefense.Presentation
 {
     /// <summary>The album editor owns one draft; nested components and durable commands stay explicit.</summary>
-    public sealed class CompositeWorkshopPanel
+    public sealed partial class CompositeWorkshopPanel
     {
         readonly RunController run;
         readonly WorkshopUi ui;
@@ -44,6 +44,7 @@ namespace PaperDefense.Presentation
         public void OpenEntry(AlbumEntry entry)
         {
             if (entry == null) return;
+            ResetAssemblyTrial();
             RememberRoute();
             DraftSession = new WorkshopDraftSession(run, DraftSession.Catalog);
             DraftSession.Begin(entry); Step = 2; mount = 0; feedback = ""; libraryOpen = false; LastTrial = null;
@@ -58,6 +59,7 @@ namespace PaperDefense.Presentation
         }
         void NewEntry(AlbumEntryKind kind)
         {
+            ResetAssemblyTrial();
             var source = DraftSession.Catalog.Starters.First(entry => entry.Kind == kind);
             DraftSession = new WorkshopDraftSession(run, DraftSession.Catalog);
             DraftSession.Begin(new AlbumEntry("entry." + Guid.NewGuid().ToString("N"),
@@ -73,6 +75,7 @@ namespace PaperDefense.Presentation
         {
             if (DraftSession.IsComponentOpen) return;
             if (Route == kind) { libraryOpen = false; Refresh(); return; }
+            ResetAssemblyTrial();
             RememberRoute();
             if (!routes.TryGetValue(kind, out var previous)) { NewEntry(kind); return; }
             DraftSession = previous.Session; Step = previous.Step; mount = previous.Mount;
@@ -85,6 +88,7 @@ namespace PaperDefense.Presentation
             rebuilding = true;
             try
             {
+            CaptureAssemblyTrialPlayback();
             var currentFocus = EventSystem.current?.currentSelectedGameObject;
             string focusName = currentFocus != null && currentFocus.transform.IsChildOf(Root) ? currentFocus.name : null;
             ui.HideTooltip();
@@ -121,7 +125,9 @@ namespace PaperDefense.Presentation
             var notice = ui.Label(Root, "Composite notice", Status, new Rect(26, height - 110, width - 52, 32), 17,
                 color: DraftSession.CanSave && string.IsNullOrEmpty(feedback) ? WorkshopUi.Muted : WorkshopUi.Warning);
             notice.verticalOverflow = VerticalWrapMode.Truncate;
-            Footer(); ui.EnsureTooltip(Root);
+            Footer();
+            if (assemblyTrialOpen) BuildAssemblyTrialSurface();
+            ui.EnsureTooltip(Root);
             if (focusName != null && EventSystem.current != null)
             {
                 var controls = Root.GetComponentsInChildren<Selectable>();
@@ -150,7 +156,7 @@ namespace PaperDefense.Presentation
                 {
                     case "Composite save": case "Composite variant": button.interactable = DraftSession.CanSave; break;
                     case "Composite save component": button.interactable = DraftSession.CanSaveComponent; break;
-                    case "Composite trial": button.interactable = Route == AlbumEntryKind.Tower && DraftSession.CanTrial; break;
+                    case "Composite trial": button.interactable = Route != AlbumEntryKind.Legacy && DraftSession.CanTrial; break;
                     case "Composite route tower": case "Composite route structure": case "Composite library": button.interactable = !DraftSession.IsComponentOpen; break;
                 }
             }
@@ -359,8 +365,7 @@ namespace PaperDefense.Presentation
             }
             composition.Content.sizeDelta = new Vector2(0, Mathf.Max(compositionHeight, contentHeight));
             var trial = ui.Button(parent, "Composite trial", new Rect(18, h - 64, w - 36, 48), T("trial"), OpenTrial, WorkshopIcon.Target);
-            trial.interactable = Route == AlbumEntryKind.Tower && DraftSession.CanTrial;
-            if (Route == AlbumEntryKind.Structure) ui.Tip(trial.gameObject, T("support_trial"));
+            trial.interactable = Route != AlbumEntryKind.Legacy && DraftSession.CanTrial;
         }
 
         void Summary(Transform parent, Rect bounds)
@@ -504,24 +509,5 @@ namespace PaperDefense.Presentation
             WorkshopModal.Open(shade.gameObject, close);
         }
 
-        public TrialReport RunTrial()
-        {
-            if (!DraftSession.CanTrial || Route != AlbumEntryKind.Tower) return null;
-            LastTrial = DraftSession.RunTrial(TrialScenario.Crowd, budget: 400, seed: 1337);
-            return LastTrial;
-        }
-        void OpenTrial()
-        {
-            if (RunTrial() == null) return;
-            var shade = ui.Panel(Root, "Composite trial overlay", new Rect(0, 0, width, height), new Color(.08f, .15f, .25f, .45f), true);
-            var sheet = ui.Panel(shade, "Composite trial sheet", new Rect(40, 60, width - 80, height - 120), WorkshopUi.Paper, true);
-            ui.Label(sheet, "Composite trial title", T("trial"), new Rect(24, 12, width - 128, 54), 32, true);
-            var lane = WorkshopUi.Graphic<TrialLaneSketch>(sheet, "Composite trial lane", new Rect(24, 84, width - 128, height - 370));
-            lane.SetResult(LastTrial, Time.unscaledTime, LastTrial.DurationSeconds);
-            ui.Label(sheet, "Composite trial measured result", T("trial_result", LastTrial.Damage.ToString("0.#"), LastTrial.Leaks, LastTrial.Copies), new Rect(24, height - 270, width - 128, 72), 22);
-            Action close = () => { if (shade != null) WorkshopUi.RemoveView(shade.gameObject); };
-            ui.Button(sheet, "Composite close trial", new Rect(24, height - 190, width - 128, 48), T("close"), close, WorkshopIcon.Back);
-            WorkshopModal.Open(shade.gameObject, close);
-        }
     }
 }
