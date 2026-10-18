@@ -1,0 +1,140 @@
+{
+  "stage2red": {
+    "job": "5a3dbf749fa044789da8be02508fd24e",
+    "status": "failed",
+    "summary": {
+      "total": 3,
+      "passed": 0,
+      "failed": 3,
+      "skipped": 0,
+      "durationSeconds": 0.5973443,
+      "resultState": "Failed(Child)"
+    },
+    "failures": [
+      {
+        "name": "PaperDefense.Tests.StandardMountLayoutTests.BatteryPedestalIsSeatedOnTheRoofInsteadOfBesideTheBody",
+        "message": "  Expected: -0.138942629f +/- 9.99999975E-06f\r\n  But was:  -0.0242042691f\r\n"
+      },
+      {
+        "name": "PaperDefense.Tests.StandardMountLayoutTests.LargeWeaponPreviewAndAlbumUseTheSameNormalizedGeometry",
+        "message": "System.ArgumentException : \u001ePD1:FWNvcHkuN2Y0ZGU5Zjg3ZDkxMmJhYwEAAAABB21vdW50LjI=\u001f\r\nParameter name: bindingId"
+      },
+      {
+        "name": "PaperDefense.Tests.StandardMountLayoutTests.RemovingABatteryNeighbourDoesNotMoveOrResizeTheRemainingWeapon",
+        "message": "System.ArgumentException : \u001ePD1:FWNvcHkuN2Y0ZGU5Zjg3ZDkxMmJhYwEAAAABB21vdW50LjI=\u001f\r\nParameter name: bindingId"
+      }
+    ]
+  },
+  "stage2metadatared": {
+    "job": "41ad79d284b44f3b8c7ceae2f310a6ae",
+    "status": "failed",
+    "summary": {
+      "total": 6,
+      "passed": 4,
+      "failed": 2,
+      "skipped": 0,
+      "durationSeconds": 0.5722222,
+      "resultState": "Failed(Child)"
+    },
+    "failures": [
+      {
+        "name": "PaperDefense.Tests.StandardMountLayoutTests.BrokenMountMetadataIsRejectedInsteadOfSilentlyHidingAWeapon(\"\\\"order\\\":0\",\"\\\"order\\\":9\")",
+        "message": "  Expected: <System.FormatException>\r\n  But was:  null\r\n"
+      },
+      {
+        "name": "PaperDefense.Tests.StandardMountLayoutTests.BrokenMountMetadataIsRejectedInsteadOfSilentlyHidingAWeapon(\"\\\"trim\\\":{\\\"x\\\":0\",\"\\\"trim\\\":{\\\"x\\\":-1\")",
+        "message": "  Expected: <System.FormatException>\r\n  But was:  null\r\n"
+      }
+    ]
+  },
+  "stage2metadataGreen": {
+    "job": "38dab183f3b24b75af45b70369806529",
+    "status": "succeeded",
+    "summary": {
+      "total": 15,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 0.9958106,
+      "resultState": "Passed"
+    },
+    "failures": []
+  },
+  "stage2reviewred": {
+    "job": "437b01c8332749b085164f332fbc5d7b",
+    "status": "failed",
+    "summary": {
+      "total": 20,
+      "passed": 13,
+      "failed": 7,
+      "skipped": 0,
+      "durationSeconds": 1.2833597,
+      "resultState": "Failed(Child)"
+    },
+    "failures": [
+      {
+        "name": "PaperDefense.Tests.StandardMountPreviewRegressionTests.AimedPreviewFitsAfterResizeIncludingItsRecoil(155.0f,165.0f,False)",
+        "message": "  Aiming and resizing must fit the rendered pose, including the weapon's entire atlas frame.\r\n  Expected: in range (-77,51,77,51)\r\n  But was:  -84.5504761f\r\n"
+      },
+      {
+        "name": "PaperDefense.Tests.StandardMountPreviewRegressionTests.AimedPreviewFitsAfterResizeIncludingItsRecoil(155.0f,165.0f,True)",
+        "message": "  Aiming and resizing must fit the rendered pose, including the weapon's entire atlas frame.\r\n  Expected: in range (-77,51,77,51)\r\n  But was:  -82.4548874f\r\n"
+      },
+      {
+        "name": "PaperDefense.Tests.StandardMountPreviewRegressionTests.AimedPreviewFitsAfterResizeIncludingItsRecoil(100.0f,240.0f,False)",
+        "message": "  Aiming and resizing must fit the rendered pose, including the weapon's entire atlas frame.\r\n  Expected: in range (-50,01,50,01)\r\n  But was:  -60.0223083f\r\n"
+      },
+      {
+        "name": "PaperDefense.Tests.StandardMountPreviewRegressionTests.AimedPreviewFitsAfterResizeIncludingItsRecoil(100.0f,240.0f,True)",
+        "message": "  Aiming and resizing must fit the rendered pose, including the weapon's entire atlas frame.\r\n  Expected: in range (-50,01,50,01)\r\n  But was:  -58.5346565f\r\n"
+      },
+      {
+        "name": "PaperDefense.Tests.StandardMountPreviewRegressionTests.ExplicitNativeWeaponKeepsItsGeometryAimAndRecoilInsteadOfTheAtlasFrame",
+        "message": "  An explicit native triangle in the assigned theme must not become a four-vertex atlas weapon.\r\n  Expected: 3\r\n  But was:  4\r\n"
+      },
+      {
+        "name": "PaperDefense.Tests.StandardMountPreviewRegressionTests.ExplicitNativeWeaponKeepsItsThemeMuzzleAimAndRecoil",
+        "message": "  Expected: 11.3249998f +/- 9.99999975E-06f\r\n  But was:  10.6494713f\r\n"
+      },
+      {
+        "name": "PaperDefense.Tests.StandardMountPreviewRegressionTests.ReinforcementSectorsStayCenteredOnTheRenderedFoundationAfterFit",
+        "message": "  Armor sectors and the facing arrow must follow the foundation origin after the whole assembly is fitted.\r\n  Expected: less than 0.00999999978f\r\n  But was:  20.058197f\r\n"
+      }
+    ]
+  },
+  "stage2reviewGreen": {
+    "job": "b90d66e774c443d28618266fff96d66d",
+    "status": "succeeded",
+    "summary": {
+      "total": 26,
+      "passed": 26,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 1.4522098,
+      "resultState": "Passed"
+    },
+    "failures": []
+  },
+  "stage2muzzleRed": {
+    "job": "1221a31d82164ff3b7f8eeef62bb9bf9",
+    "status": "failed",
+    "summary": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "skipped": 0,
+      "durationSeconds": 0.687529,
+      "resultState": "Failed(Child)"
+    },
+    "failures": [
+      {
+        "name": "PaperDefense.Tests.StandardMountLayoutTests.FanAndExtendedRayEffectsStartAtTheRenderedMountTip(18.0f,14.0f)",
+        "message": "  Different rays in one shot must share the visible mount pose, while retaining their endpoints.\r\n  Expected: less than 9.99999975E-06f\r\n  But was:  0.111418195f\r\n"
+      },
+      {
+        "name": "PaperDefense.Tests.StandardMountLayoutTests.FanAndExtendedRayEffectsStartAtTheRenderedMountTip(30.0f,10.5f)",
+        "message": "  Different rays in one shot must share the visible mount pose, while retaining their endpoints.\r\n  Expected: less than 9.99999975E-06f\r\n  But was:  0.00282132463f\r\n"
+      }
+    ]
+  }
+}

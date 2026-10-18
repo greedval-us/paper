@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "source": "native Unity camera and Canvas; unedited PNG",
+  "count": 14,
+  "captures": [
+    {
+      "file": "01-split-gun-poses.png",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 519425,
+      "sha256": "B01AD4E697EAFCC1036C433F0EA5C94AB1A53476A13E92A0FE23EF7719F7878A"
+    },
+    {
+      "file": "02-foundation-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 393743,
+      "sha256": "14C3650C1229A117B31E2AFE31BFB0DC4B9174FF7D453BC9DDC530D394751C42"
+    },
+    {
+      "file": "02-foundation-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 975083,
+      "sha256": "7A2FEBEEFE7BA269132E58C523B6B7788018CB153219C80BCC2D0DBFA797EB25"
+    },
+    {
+      "file": "03-weapons-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 494670,
+      "sha256": "8572E095F03260FFD1BD67AAC8C4713F5BF50F49C86E842F8698FBE8FF1F483A"
+    },
+    {
+      "file": "03-weapons-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 939425,
+      "sha256": "72B609BD88D5F82768CA2D31A843BF03C55B76ECE9DE4034A1FE63A5BBF12DDF"
+    },
+    {
+      "file": "04-review-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 268856,
+      "sha256": "158AFC1C46F3F38EEED568E06084EF423DB63AA4435EC6477ECE98D168316A70"
+    },
+    {
+      "file": "04-review-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 390161,
+      "sha256": "A6A69CD1CE85F024FE87CD032985758F1DAB68B10BC7ACC0C2F9AB97F0EB2213"
+    },
+    {
+      "file": "05-album-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 112719,
+      "sha256": "250439A6A8922982E8635895C19D93CC7B27003F83ACA6DE0DEC114BFF72A7D3"
+    },
+    {
+      "file": "05-album-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 207376,
+      "sha256": "1CA657CA66F30C37982C81ACDBD00317C1A55D01A70C284661A2FC59EFABB117"
+    },
+    {
+      "file": "06-trial-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 59712,
+      "sha256": "B1E8CDCE4A631A7B644CE09BA39BF702A00EFB3FBEB96856974D087F0925625D"
+    },
+    {
+      "file": "06-trial-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 112005,
+      "sha256": "B4B2CAC0D483E08DC63A09462B22B5A2D29D6F4B4D68B15041BCFAAC03B683CB"
+    },
+    {
+      "file": "07-battle-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 185980,
+      "sha256": "31252762B165505EF7AE48741B73F787E56D3F6C643AE3753FEA32A761FDB8A5"
+    },
+    {
+      "file": "07-battle-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 282759,
+      "sha256": "05713303B6D78623F9D1D2608D45251E4942A1B6D688763CDB34272189410026"
+    },
+    {
+      "file": "08-battle-diagnostic-closeup.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 201950,
+      "sha256": "A4B73C213F6B127E7C884C6ADDA913B44928F166E9929BFA9825089B303C8BE0"
+    }
+  ]
+}

@@ -20,82 +20,106 @@ namespace PaperDefense.Tests
             wizard=new WorkshopWizard(root.transform,run,null,_=>{},()=>{});Canvas.ForceUpdateCanvases();
         }
         [TearDown] public void TearDown(){Object.DestroyImmediate(root);Object.DestroyImmediate(events);}
-        void Draw()
-        {
-            var edit=wizard.Drawing.Session;
-            edit.AddRectangle(DrawingBindings.Base,new DrawingPoint(-.35f,-.35f),new DrawingPoint(.35f,.35f),out _);
-            foreach(var mount in wizard.Draft.WeaponMounts)edit.AddRectangle(DrawingBindings.Mount(mount.SlotIndex),new DrawingPoint(-.0625f,0),new DrawingPoint(.0625f,.6f),out _);
-            wizard.Drawing.Canvas.FinishStroke();
-        }
         UnityEngine.UI.Button Button(string name)=>root.GetComponentsInChildren<UnityEngine.UI.Button>(true).First(b=>b.name==name&&b.gameObject.activeInHierarchy);
-        [Test] public void NewTowerCannotSkipDrawingOrSaveAnIncompletePage()
+        string ProfileState()=>run.Workshop.Gold+";"+
+            string.Join("|",run.Workshop.Album.Select(page=>JsonUtility.ToJson(new BlueprintData(page))))+";"+
+            string.Join("|",run.Workshop.Loadout.Select(page=>page?.Id))+";"+
+            string.Join("|",run.Workshop.Parts.Where(part=>run.Workshop.IsUnlocked(part.Id)).Select(part=>part.Id));
+        void Review()
+        {
+            Assert.That(wizard.Next(),Is.True,wizard.Status);Assert.That(wizard.Next(),Is.True,wizard.Status);
+            Assert.That(wizard.Step,Is.EqualTo(2));Assert.That(root.transform.Find("Wizard review"),Is.Not.Null);
+        }
+        void AssertStandard(TowerBlueprint page)
+        {
+            Assert.That(page.Origin,Is.EqualTo(DrawingOrigin.LegacyStandard));
+            Assert.That(page.Drawing.IsEmpty,Is.True);Assert.That(page.FreeformDesign,Is.Null);
+        }
+        [Test] public void NewStandardTowerHasThreeStepsAndReachesReviewWithoutDrawing()
         {
             int count=run.Workshop.Album.Count,writes=store.Writes;
-            Assert.That(wizard.Step,Is.Zero);Assert.That(wizard.Draft.IsFreeform,Is.True);Assert.That(wizard.GoToStep(3),Is.False);
-            Assert.That(wizard.Next(),Is.True);Assert.That(wizard.Next(),Is.True);Assert.That(wizard.Next(),Is.False);
-            Assert.That(wizard.Step,Is.EqualTo(2));Assert.That(wizard.Save(),Is.False);
+            Assert.That(wizard.Step,Is.Zero);AssertStandard(wizard.Draft);
+            Assert.That(root.GetComponentsInChildren<UnityEngine.UI.Button>(true).Where(b=>b.name.StartsWith("Wizard step ")).Select(b=>b.name),
+                Is.EquivalentTo(new[]{"Wizard step 0","Wizard step 1","Wizard step 2"}));
+            Assert.That(wizard.GoToStep(2),Is.False);Assert.That(wizard.GoToStep(3),Is.False);Assert.That(wizard.Save(),Is.False);
+            Review();AssertStandard(wizard.Draft);
+            Assert.That(wizard.Drawing==null||!wizard.Drawing.Root.activeInHierarchy,Is.True,"The normal path must never expose the old canvas.");
             Assert.That(run.Workshop.Album.Count,Is.EqualTo(count));Assert.That(store.Writes,Is.EqualTo(writes));
         }
-        [Test] public void CompleteSequenceSavesExactlyTheCurrentDrawingWithoutSpendingGold()
+        [Test] public void CompleteSequenceSavesStandardAssemblyWithoutStrokesOrSpendingGold()
         {
-            wizard.Next();wizard.Next();Draw();string hash=wizard.Drawing.Candidate.Drawing.GeometryHash;int gold=run.Workshop.Gold,writes=store.Writes;
-            Assert.That(wizard.Next(),Is.True,wizard.Status);Assert.That(wizard.Step,Is.EqualTo(3));Assert.That(wizard.Save(),Is.True,wizard.Status);
+            Review();string id=wizard.Draft.Id;int gold=run.Workshop.Gold,writes=store.Writes;
+            Assert.That(wizard.Save(),Is.True,wizard.Status);
             Assert.That(store.Writes,Is.EqualTo(writes+1));Assert.That(run.Workshop.Gold,Is.EqualTo(gold));
-            Assert.That(run.Workshop.Album.Single(p=>p.Id==wizard.Draft.Id).Drawing.GeometryHash,Is.EqualTo(hash));
+            AssertStandard(run.Workshop.Album.Single(p=>p.Id==id));
         }
         [Test] public void FailedSaveKeepsDraftAndReviewStepForRetry()
         {
-            wizard.Next();wizard.Next();Draw();wizard.Next();string id=wizard.Draft.Id,hash=wizard.Draft.Drawing.GeometryHash;
-            int count=run.Workshop.Album.Count;store.Fail=true;
-            Assert.That(wizard.Save(),Is.False);Assert.That(wizard.Step,Is.EqualTo(3));Assert.That(wizard.Draft.Id,Is.EqualTo(id));
-            Assert.That(wizard.Draft.Drawing.GeometryHash,Is.EqualTo(hash));Assert.That(run.Workshop.Album.Count,Is.EqualTo(count));
-            store.Fail=false;Assert.That(wizard.Save(),Is.True);
+            Review();string draft=JsonUtility.ToJson(new BlueprintData(wizard.Draft));
+            string profile=ProfileState();int writes=store.Writes;store.Fail=true;
+            Assert.That(wizard.Save(),Is.False);Assert.That(wizard.Step,Is.EqualTo(2));
+            Assert.That(JsonUtility.ToJson(new BlueprintData(wizard.Draft)),Is.EqualTo(draft));
+            Assert.That(ProfileState(),Is.EqualTo(profile));Assert.That(store.Writes,Is.EqualTo(writes+1));
+            store.Fail=false;Assert.That(wizard.Save(),Is.True,wizard.Status);AssertStandard(wizard.Draft);
         }
-        [Test] public void BackAndAlbumPreserveAcceptedStrokesAndDiscardOnlyPendingGesture()
+        [Test] public void FailedVariantSavePreservesTheOriginalPageAndCanBeRetried()
         {
-            wizard.Next();wizard.Next();Draw();string hash=wizard.Drawing.Candidate.Drawing.GeometryHash;
-            var pointer=new PointerEventData(events.GetComponent<EventSystem>()){button=PointerEventData.InputButton.Left,position=wizard.Drawing.Canvas.LocalPointToScreen(new Vector2(.1f,.1f))};
-            wizard.Drawing.Canvas.OnPointerDown(pointer);wizard.ShowAlbum(true);Assert.That(wizard.AlbumOpen,Is.True);
-            wizard.ShowAlbum(false);Assert.That(wizard.Drawing.Canvas.HasPendingGesture,Is.False);
-            Assert.That(wizard.Drawing.Candidate.Drawing.GeometryHash,Is.EqualTo(hash));
-            wizard.Back();wizard.Next();Assert.That(wizard.Drawing.Candidate.Drawing.GeometryHash,Is.EqualTo(hash));
+            Review();Assert.That(wizard.Save(),Is.True,wizard.Status);
+            var original=wizard.Draft;string profile=ProfileState();int count=run.Workshop.Album.Count;
+            store.Fail=true;Assert.That(wizard.SaveVariant(),Is.False);
+            Assert.That(wizard.Draft,Is.SameAs(original));Assert.That(ProfileState(),Is.EqualTo(profile));
+            Assert.That(wizard.Step,Is.EqualTo(2));AssertStandard(wizard.Draft);
+            store.Fail=false;Assert.That(wizard.SaveVariant(),Is.True,wizard.Status);
+            Assert.That(wizard.Draft.Id,Is.Not.EqualTo(original.Id));Assert.That(run.Workshop.Album.Count,Is.EqualTo(count+1));
+            Assert.That(JsonUtility.ToJson(new BlueprintData(run.Workshop.Album.Single(p=>p.Id==original.Id))),
+                Is.EqualTo(JsonUtility.ToJson(new BlueprintData(original))));
+        }
+        [Test] public void BackAndAlbumPreserveTheStandardAssembly()
+        {
+            Assert.That(wizard.Next(),Is.True);Assert.That(wizard.SelectWeapon(1,"weapon.gun"),Is.True);
+            Assert.That(wizard.Next(),Is.True,wizard.Status);string before=JsonUtility.ToJson(new BlueprintData(wizard.Draft));
+            wizard.ShowAlbum(true);Assert.That(wizard.AlbumOpen,Is.True);wizard.ShowAlbum(false);
+            Assert.That(wizard.Step,Is.EqualTo(2));wizard.Back();Assert.That(wizard.Step,Is.EqualTo(1));
+            Assert.That(wizard.Next(),Is.True,wizard.Status);
+            Assert.That(JsonUtility.ToJson(new BlueprintData(wizard.Draft)),Is.EqualTo(before));AssertStandard(wizard.Draft);
+            Assert.That(wizard.Drawing==null||!wizard.Drawing.Root.activeInHierarchy,Is.True);
         }
         [Test] public void ClosedDetailsAreNotVisibleUntilRequested()
         {
-            wizard.Next();wizard.Next();Draw();wizard.Next();
-            var details=root.GetComponentsInChildren<UnityEngine.UI.Text>(true).Single(t=>t.name=="Wizard detailed values");
+            Review();var details=root.GetComponentsInChildren<UnityEngine.UI.Text>(true).Single(t=>t.name=="Wizard detailed values");
             Assert.That(details.gameObject.activeInHierarchy,Is.False);Button("Wizard details").onClick.Invoke();Assert.That(details.gameObject.activeInHierarchy,Is.True);
         }
-        [Test] public void ExistingMortarVolleyAndArmorEditorsRemainReachable()
+        [Test] public void StandardReviewDoesNotOfferFreeformMortarVolleyOrArmorEditors()
         {
-            var bp=new TowerBlueprint("all-shapes","Shapes",ChassisKind.Heavy,StructureKind.Mortar,StructureKind.Fan,TowerModules.Armor).WithContent(run.Content);
-            wizard.Load(bp);
-            Button("Wizard geometry 0").onClick.Invoke();Assert.That(wizard.Mortar.IsOpen,Is.True);wizard.Mortar.Close();
-            Button("Wizard geometry 1").onClick.Invoke();Assert.That(wizard.Volley.IsOpen,Is.True);wizard.Volley.Close();
-            Assert.That(EventSystem.current.currentSelectedGameObject,Is.Not.Null,"Legacy editor clears its selection before hiding; the modal must restore a usable control.");
-            Button("Wizard geometry 2").onClick.Invoke();Assert.That(wizard.Armor.IsOpen,Is.True);
-            wizard.Armor.Close();Assert.That(EventSystem.current.currentSelectedGameObject,Is.Not.Null);
+            wizard.Load(new TowerBlueprint("all-shapes","Shapes",ChassisKind.Heavy,StructureKind.Mortar,StructureKind.Fan,TowerModules.Armor).WithContent(run.Content));
+            Assert.That(wizard.Step,Is.EqualTo(2));
+            Assert.That(root.GetComponentsInChildren<UnityEngine.UI.Button>(true).Any(button=>button.gameObject.activeInHierarchy&&button.name.StartsWith("Wizard geometry ")),Is.False);
+            Assert.That(wizard.Mortar==null||!wizard.Mortar.IsOpen,Is.True);
+            Assert.That(wizard.Volley==null||!wizard.Volley.IsOpen,Is.True);
+            Assert.That(wizard.Armor==null||!wizard.Armor.IsOpen,Is.True);
         }
         [Test] public void SwitchingFoundationRequiresAssemblyRecheck()
         {
             wizard.Load(new TowerBlueprint("three","Three","chassis.heavy",new[]{new WeaponMountSelection(0,"weapon.gun"),new WeaponMountSelection(1,"weapon.gun"),new WeaponMountSelection(2,"weapon.gun")},content:run.Content));
-            wizard.GoToStep(0);
-            Assert.That(wizard.SelectChassis("chassis.standard"),Is.True);wizard.Next();Assert.That(wizard.Next(),Is.False);
-            Button("Wizard mount 2").onClick.Invoke();Button("Wizard remove mount").onClick.Invoke();Assert.That(wizard.Next(),Is.True,wizard.Status);
+            Assert.That(wizard.GoToStep(0),Is.True);
+            Assert.That(wizard.SelectChassis("chassis.standard"),Is.True);AssertStandard(wizard.Draft);
+            Assert.That(wizard.Next(),Is.True);Assert.That(wizard.Next(),Is.False);
+            Button("Wizard mount 2").onClick.Invoke();Button("Wizard remove mount").onClick.Invoke();
+            Assert.That(wizard.Next(),Is.True,wizard.Status);Assert.That(wizard.Step,Is.EqualTo(2));AssertStandard(wizard.Draft);
         }
         [Test] public void EmptyNameCannotStrandTheDraftBeforeItsNameField()
         {
-            wizard.Next();wizard.Next();Draw();wizard.Next();
-            var field=root.GetComponentsInChildren<UnityEngine.UI.InputField>().Single();field.text=" ";field.onEndEdit.Invoke(field.text);
+            Review();var field=root.GetComponentsInChildren<UnityEngine.UI.InputField>().Single();field.text=" ";field.onEndEdit.Invoke(field.text);
             Assert.That(string.IsNullOrWhiteSpace(wizard.Draft.Name),Is.False);
-            wizard.Back();Assert.That(wizard.Next(),Is.True,wizard.Status);Assert.That(wizard.Step,Is.EqualTo(3));
+            wizard.Back();Assert.That(wizard.Next(),Is.True,wizard.Status);Assert.That(wizard.Step,Is.EqualTo(2));AssertStandard(wizard.Draft);
         }
-        [Test] public void AuthoredPreviewsShowTheCurrentDrawingInsteadOfTheReferenceTemplate()
+        [Test] public void StandardPreviewsUseTheSameAtlasCompositionAsReviewWithoutCreatingStrokes()
         {
-            wizard.Next();wizard.Next();Draw();wizard.Next();
-            foreach(var sketch in root.GetComponentsInChildren<BlueprintSketch>())Assert.That(sketch.ShowReference,Is.False,sketch.name);
-            wizard.Save();wizard.ShowAlbum(true);
-            foreach(var sketch in root.GetComponentsInChildren<BlueprintSketch>().Where(s=>s.name=="Album thumbnail"))Assert.That(sketch.ShowReference,Is.False);
+            Review();
+            foreach(string preview in new[]{"Wizard assembled thumbnail","Wizard tower preview"})
+                Assert.That(root.GetComponentsInChildren<BlueprintSketch>(true).Single(sketch=>sketch.name==preview).ShowReference,Is.False,preview);
+            Assert.That(wizard.Save(),Is.True,wizard.Status);wizard.ShowAlbum(true);AssertStandard(wizard.Draft);
+            AssertStandard(run.Workshop.Album.Single(page=>page.Id==wizard.Draft.Id));
         }
         [Test] public void AlbumBlocksBackgroundKeyboardActionsAndRestoresTheirState()
         {
@@ -103,7 +127,7 @@ namespace PaperDefense.Tests
             wizard.ShowAlbum(true);wizard.Refresh();
             Assert.That(next.IsInteractable(),Is.False);Assert.That(Button("Wizard step 0").IsInteractable(),Is.False);
             Assert.That(events.GetComponent<EventSystem>().currentSelectedGameObject.transform.IsChildOf(root.transform.Find("Wizard album overlay")),Is.True);
-            wizard.ShowAlbum(false);Assert.That(next.IsInteractable(),Is.True);Assert.That(Button("Wizard step 3").IsInteractable(),Is.False);
+            wizard.ShowAlbum(false);Assert.That(next.IsInteractable(),Is.True);Assert.That(Button("Wizard step 2").IsInteractable(),Is.False);
             Assert.That(events.GetComponent<EventSystem>().currentSelectedGameObject,Is.SameAs(next.gameObject));
         }
         [Test] public void RebuildingAdditionsAndLeavingWorkshopRestoresBackgroundInput()

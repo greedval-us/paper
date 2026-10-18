@@ -62,9 +62,9 @@ namespace PaperDefense.Presentation
             {
                 var remove = ui.Button(rail, "Wizard remove mount", new Rect(0, 490, 180, 42), "Убрать оружие", () =>
                 {
-                    // Selection is deliberately bypassed: obsolete slots remain removable after shrinking a chassis.
+                    // The standard command also permits removing an obsolete slot after shrinking a chassis.
                     string focus = "Wizard mount " + mount;
-                    wizard.SetDraft(wizard.Draft.WithWeaponMount(mount, null)); RestoreFocus(focus, "Wizard mount " + mount);
+                    wizard.SelectWeapon(mount, null); RestoreFocus(focus, "Wizard mount " + mount);
                 }, WorkshopIcon.Trash);
                 ui.Tip(remove.gameObject, "Очистить выбранное крепление. Первое крепление обязательно.");
             }
@@ -138,13 +138,9 @@ namespace PaperDefense.Presentation
             ui.Tip(feedChoice.gameObject, "Выбрать подачу и другие улучшения. В окне доступны покупка, добавление и удаление модулей.");
             var form = Sheet(settings, "Weapon form group", new Rect(784, 34, 370, 88));
             Detail(form, "Setting illustration", FoundationDetailGraphic.Kind.Star, new Rect(8, 8, 76, 70));
-            Label(form, "Setting heading", "Особая форма", new Rect(94, 0, 250, 36), 22, true);
-            string id = draft.GetWeaponId(mount);
-            var weapon = id == null ? null : run.Content.GetWeapon(id);
-            bool special = weapon != null && (weapon.SupportsFootprint || weapon.SupportsVolley);
-            var shape = Selector(form, "Wizard weapon geometry", () => wizard.OpenGeometry(mount));
-            shape.interactable = special;
-            ui.Tip(shape.gameObject, special ? "Настроить " + (weapon.SupportsFootprint ? "отпечаток заряда" : "направления залпа") + " выбранного крепления." : "У выбранного оружия нет редактора особой формы.");
+            Label(form, "Setting heading", "Схема оружия", new Rect(94, 0, 250, 36), 22, true);
+            var shape = Label(form, "Weapon standard form", "Стандартная схема", new Rect(94, 38, 250, 36), 20);
+            ui.Tip(shape.gameObject, "Готовая стандартная схема выбранного оружия.");
             RefreshSettings(draft);
         }
 
@@ -176,7 +172,7 @@ namespace PaperDefense.Presentation
                 else if (!footprint.IsCircle) form = "Эллипс · " + footprint.AspectRatio.ToString("0.#") + ":1";
             }
             else if (weapon != null && weapon.SupportsVolley && draft.GetFanVolley(mount) != null) form = "Залп · " + draft.GetFanVolley(mount).Guides.Count + " направл.";
-            settings.Find("Weapon form group/Wizard weapon geometry/Caption").GetComponent<Text>().text = form;
+            settings.Find("Weapon form group/Weapon standard form").GetComponent<Text>().text = form;
         }
 
         internal void Reflow(float availableWidth, float availableHeight)
@@ -245,7 +241,7 @@ namespace PaperDefense.Presentation
             Place(settings, "Weapon additions heading", new Rect(12, 0, settingsW - 24, 34));
             float column = settingsW / 3;
             string[] groups = { "Weapon armor group", "Weapon feed group", "Weapon form group" };
-            string[] actions = { "Wizard weapon armor", "Wizard additions", "Wizard weapon geometry" };
+            string[] actions = { "Wizard weapon armor", "Wizard additions", "Weapon standard form" };
             for (int i = 0; i < 3; i++)
             {
                 Place(settings, groups[i], new Rect(i * column + 10, 34, column - 20, 88));
@@ -255,6 +251,7 @@ namespace PaperDefense.Presentation
                 Place(group, "Setting heading", new Rect(valueX, 0, valueW, 36));
                 Place(group, actions[i], new Rect(valueX, 40, valueW, 38));
                 var action = group.Find(actions[i]);
+                if (i == 2) { var label = action.GetComponent<Text>(); label.resizeTextForBestFit = true; label.resizeTextMinSize = 13; label.resizeTextMaxSize = 20; continue; }
                 Place(action, "Icon", new Rect(valueW - 28, 8, 22, 22));
                 var caption = action.Find("Caption").GetComponent<Text>();
                 caption.rectTransform.anchorMin = Vector2.zero; caption.rectTransform.anchorMax = Vector2.one;

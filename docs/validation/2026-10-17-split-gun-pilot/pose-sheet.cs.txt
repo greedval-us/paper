@@ -1,0 +1,23 @@
+// Native Unity composition; temporary memory-only diagnostic canvas, no image editing.
+var game=PaperDefense.Editor.FullGameUiCapture.Game;
+var content=game.Run.Content;
+var paper=new UnityEngine.GameObject("Split gun diagnostic sheet",typeof(UnityEngine.RectTransform),typeof(UnityEngine.Canvas),typeof(UnityEngine.UI.CanvasScaler));
+paper.transform.SetParent(game.transform,false);paper.layer=5;
+var canvas=paper.GetComponent<UnityEngine.Canvas>();canvas.renderMode=UnityEngine.RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=32000;
+var scaler=paper.GetComponent<UnityEngine.UI.CanvasScaler>();scaler.uiScaleMode=UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;scaler.referenceResolution=new UnityEngine.Vector2(1600,1200);scaler.matchWidthOrHeight=.5f;
+System.Action<UnityEngine.RectTransform,float,float,float,float> place=(rect,x,y,w,h)=>{rect.anchorMin=rect.anchorMax=new UnityEngine.Vector2(.5f,.5f);rect.pivot=new UnityEngine.Vector2(.5f,.5f);rect.anchoredPosition=new UnityEngine.Vector2(x,y);rect.sizeDelta=new UnityEngine.Vector2(w,h);};
+var background=new UnityEngine.GameObject("Paper",typeof(UnityEngine.RectTransform),typeof(UnityEngine.UI.Image));background.layer=5;background.transform.SetParent(paper.transform,false);var back=background.GetComponent<UnityEngine.RectTransform>();back.anchorMin=UnityEngine.Vector2.zero;back.anchorMax=UnityEngine.Vector2.one;back.offsetMin=back.offsetMax=UnityEngine.Vector2.zero;background.GetComponent<UnityEngine.UI.Image>().color=new UnityEngine.Color(.969f,.957f,.915f,1);
+var font=UnityEngine.Resources.GetBuiltinResource<UnityEngine.Font>("LegacyRuntime.ttf");
+var names=new[]{"Исходная поза · обе установки","Максимальная отдача · обе установки","Разные направления · покой","Разные направления · отдача"};
+for(int i=0;i<4;i++){
+ float x=(i%2-.5f)*800,y=(.5f-i/2)*600;
+ var label=new UnityEngine.GameObject("Caption "+i,typeof(UnityEngine.RectTransform),typeof(UnityEngine.UI.Text));label.layer=5;label.transform.SetParent(paper.transform,false);place(label.GetComponent<UnityEngine.RectTransform>(),x,y+245,780,50);var text=label.GetComponent<UnityEngine.UI.Text>();text.font=font;text.fontSize=26;text.alignment=UnityEngine.TextAnchor.MiddleCenter;text.color=new UnityEngine.Color(.075f,.14f,.31f);text.text=names[i];
+ var art=new UnityEngine.GameObject("Resolved split assembly "+i,typeof(UnityEngine.RectTransform),typeof(PaperDefense.Presentation.BlueprintSketch));art.layer=5;art.transform.SetParent(paper.transform,false);place(art.GetComponent<UnityEngine.RectTransform>(),x,y-25,740,480);var sketch=art.GetComponent<PaperDefense.Presentation.BlueprintSketch>();sketch.ShowReference=false;sketch.ShowReinforcement=false;
+ var blueprint=PaperDefense.Core.TowerBlueprint.NewStandardDraft("split-sheet-"+i,"Standard","chassis.standard","weapon.gun","weapon.gun",content:content);sketch.SetBlueprint(blueprint);
+ var animation=new PaperDefense.Presentation.NotebookAnimationState();
+ if(i%2==1){var events=new PaperDefense.Core.SimulationEventBuffer();for(int slot=0;slot<2;slot++)events.Publish(1,PaperDefense.Core.SimulationEventKind.WeaponActionStarted,default(PaperDefense.Core.Point2),default(PaperDefense.Core.Point2),PaperDefense.Core.StructureKind.Gun,sourceStructureId:1,mountSlotIndex:slot,actionId:100+slot,simulationSeconds:1,weaponId:"weapon.gun");foreach(var item in events)animation.AddEvent(item);}
+ int pose=i;
+ sketch.SetPreviewPose(animation,1.024,slot=>{if(pose<2)return default(PaperDefense.Core.Point2);var p=PaperDefense.Presentation.NotebookMountLayout.Resolve(blueprint,slot).RotationCenter;return new PaperDefense.Core.Point2(p.x+(slot==0?-5:5),p.y+3);});
+}
+PaperDefense.Editor.FullGameUiCapture.Enqueue("01-split-gun-poses",1600,1200,()=>{});
+return new {source="native Unity atlas composition",cells=4};

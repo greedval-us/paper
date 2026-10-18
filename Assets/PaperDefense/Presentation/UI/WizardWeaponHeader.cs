@@ -54,10 +54,10 @@ namespace PaperDefense.Presentation
             }
 
             float stepRowWidth = Mathf.Min(compact ? width - 108 : 940, width - 48);
-            float stepGap = compact ? 27 : 48, stepWidth = (stepRowWidth - stepGap * 3) / 4;
+            float stepGap = compact ? 27 : 48, stepWidth = (stepRowWidth - stepGap * (WorkshopWizard.StepCount - 1)) / WorkshopWizard.StepCount;
             float stepX = offset + (width - stepRowWidth) * .5f, stepY = compact ? 74 : 72;
             float stepHeight = compact ? 47 : 50, diameter = compact ? 34 : 38;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < WorkshopWizard.StepCount; i++)
             {
                 var bounds = new Rect(stepX + i * (stepWidth + stepGap), stepY, stepWidth, stepHeight);
                 Place("Wizard step " + i, bounds);
@@ -69,7 +69,7 @@ namespace PaperDefense.Presentation
                 var caption = button.Find("Caption")?.GetComponent<Text>();
                 if (caption != null) caption.enabled = false;
                 var tab = Detail(layer, "Weapons step tab " + i, FoundationDetailGraphic.Kind.StepTab, bounds);
-                tab.Count = i; tab.Total = 4; tab.Selected = i == 1; tab.color = WorkshopUi.Ink;
+                tab.Count = i; tab.Total = WorkshopWizard.StepCount; tab.Selected = i == 1; tab.color = WorkshopUi.Ink;
                 button.GetComponent<WorkshopButton>()?.SetDecoration(tab);
                 Detail(layer, "Weapons step circle " + i, FoundationDetailGraphic.Kind.ProgressCircle,
                     new Rect(bounds.x + 14, bounds.y + (stepHeight - diameter) * .5f, diameter, diameter)).color = WorkshopUi.Ink;
@@ -83,9 +83,9 @@ namespace PaperDefense.Presentation
                 var check = find("Wizard completed " + i)?.GetComponent<WorkshopIconGraphic>();
                 if (check != null) check.enabled = false;
                 Label(layer, "Weapons step lettering " + i, caption == null ? "" : caption.text,
-                    new Rect(bounds.x + 54, bounds.y + 3, stepWidth - (i == 3 ? 64 : 74), stepHeight - 6),
+                    new Rect(bounds.x + 54, bounds.y + 3, stepWidth - (i == WorkshopWizard.StepCount - 1 ? 64 : 74), stepHeight - 6),
                     hand, compact ? 24 : 27, i == 1 ? WorkshopUi.Paper : WorkshopUi.Ink, TextAnchor.MiddleCenter);
-                if (i < 3)
+                if (i < WorkshopWizard.StepCount - 1)
                 {
                     var arrow = Icon(layer, "Weapons step arrow " + i, WorkshopIcon.Chevron,
                         new Rect(bounds.xMax + (stepGap - 22) * .5f, stepY + (stepHeight - 27) * .5f, 22, 27));
@@ -125,8 +125,8 @@ namespace PaperDefense.Presentation
         void Remember()
         {
             string[] roots = { "Wizard title", "Wizard gold", "Wizard album", "Wizard back", "Wizard next", "Wizard notice",
-                "Wizard step 0", "Wizard step 1", "Wizard step 2", "Wizard step 3", "Wizard progress 0", "Wizard progress 1",
-                "Wizard progress 2", "Wizard progress 3", "Wizard completed 0", "Wizard completed 1", "Wizard completed 2", "Wizard completed 3" };
+                "Wizard step 0", "Wizard step 1", "Wizard step 2", "Wizard progress 0", "Wizard progress 1",
+                "Wizard progress 2", "Wizard completed 0", "Wizard completed 1", "Wizard completed 2" };
             foreach (string name in roots)
             {
                 var item = find(name); if (item == null) continue;
@@ -146,9 +146,9 @@ namespace PaperDefense.Presentation
             foreach (var item in decorations) if (item != null) item.SetActive(false);
             find("Wizard title")?.gameObject.SetActive(true);
             find("Start run")?.gameObject.SetActive(startWasActive);
-            foreach (string name in new[] { "Wizard back", "Wizard album", "Wizard next", "Wizard step 0", "Wizard step 1", "Wizard step 2", "Wizard step 3" })
+            foreach (string name in new[] { "Wizard back", "Wizard album", "Wizard next", "Wizard step 0", "Wizard step 1", "Wizard step 2" })
                 find(name)?.GetComponent<WorkshopButton>()?.SetDecoration(null);
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < WorkshopWizard.StepCount; i++)
             {
                 find("Wizard progress " + i)?.gameObject.SetActive(i >= step);
                 find("Wizard completed " + i)?.gameObject.SetActive(i < step);

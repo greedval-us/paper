@@ -1,5 +1,5 @@
 {
-  "revision": "blue-pen-2026-10-17",
+  "revision": "blue-pen-2026-10-17-gun-pilot-v1",
   "sprites": [
     {
       "id": "chassis.standard",
@@ -1119,6 +1119,62 @@
         "y": -0.5,
         "width": 2,
         "height": 1
+      }
+    },
+    {
+      "id": "part.gun.support",
+      "source": "ArtSource/Notebook/NewStyle/GunPilotParts-v1.png",
+      "x": 68,
+      "y": 654,
+      "width": 492,
+      "height": 278,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 0.492,
+        "height": 0.278
+      }
+    },
+    {
+      "id": "part.gun.cradle-back",
+      "source": "ArtSource/Notebook/NewStyle/GunPilotParts-v1.png",
+      "x": 746,
+      "y": 628,
+      "width": 427,
+      "height": 542,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 0.427,
+        "height": 0.542
+      }
+    },
+    {
+      "id": "part.gun.barrels",
+      "source": "ArtSource/Notebook/NewStyle/GunPilotParts-v1.png",
+      "x": 76,
+      "y": 24,
+      "width": 522,
+      "height": 554,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 0.522,
+        "height": 0.554
+      }
+    },
+    {
+      "id": "part.gun.collar-front",
+      "source": "ArtSource/Notebook/NewStyle/GunPilotParts-v1.png",
+      "x": 762,
+      "y": 77,
+      "width": 413,
+      "height": 242,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 0.41300000000000003,
+        "height": 0.242
       }
     }
   ],

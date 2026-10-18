@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "unity": "6000.5.7f1",
+  "runs": [
+    {
+      "jobId": "d6932c76b08c4d4e87b8bd0d9257d08e",
+      "mode": "EditMode",
+      "startedUnixMs": 1792268025543,
+      "finishedUnixMs": 1792268032131,
+      "summary": {
+        "total": 50,
+        "passed": 50,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 2.0218098,
+        "resultState": "Passed"
+      }
+    },
+    {
+      "jobId": "1900176a07a04c9394682e37e9503a11",
+      "mode": "EditMode",
+      "startedUnixMs": 1792268576390,
+      "finishedUnixMs": 1792268679201,
+      "summary": {
+        "total": 939,
+        "passed": 939,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 98.3007823,
+        "resultState": "Passed"
+      }
+    },
+    {
+      "jobId": "be667795634a4cb78dac02a40ec7aa7e",
+      "mode": "PlayMode",
+      "startedUnixMs": 1792268859570,
+      "finishedUnixMs": 1792268904047,
+      "summary": {
+        "total": 544,
+        "passed": 544,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 38.3533711,
+        "resultState": "Passed"
+      }
+    }
+  ],
+  "regressionEvidence": {
+    "missingFragments": {
+      "jobs": [
+        "08bed321fef4410ab28036761d840203",
+        "615d76ed6dbe48e4a879dfa9c330fce4"
+      ],
+      "summary": {
+        "total": 8,
+        "passed": 3,
+        "failed": 5
+      }
+    },
+    "cradleRegistration": {
+      "mode": "EditMode",
+      "summary": {
+        "total": 1,
+        "passed": 0,
+        "failed": 1,
+        "skipped": 0,
+        "durationSeconds": 0.5894923,
+        "resultState": "Failed(Child)"
+      },
+      "results": [
+        {
+          "name": "CradleBaseRegistrationStaysOverTheFixedSupportWhenBothGunsTurn",
+          "fullName": "PaperDefense.Tests.SplitGunMountTests.CradleBaseRegistrationStaysOverTheFixedSupportWhenBothGunsTurn",
+          "state": "Failed",
+          "durationSeconds": 0.0923879,
+          "message": "  The cradle joint must stay seated on its fixed support when slot 0 turns, including while its barrels recoil.\r\n  Expected: less than 9.99999975E-06f\r\n  But was:  0.113372386f\r\n",
+          "stackTrace": "at PaperDefense.Tests.SplitGunMountTests.CradleBaseRegistrationStaysOverTheFixedSupportWhenBothGunsTurn () [0x0015b] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\Editor\\SplitGunMountTests.cs:236\r\n",
+          "output": ""
+        }
+      ]
+    },
+    "collapsedAxis": {
+      "jobId": "12e3b708dff24dad87ee4432da6775c3",
+      "summary": {
+        "total": 35,
+        "passed": 34,
+        "failed": 1
+      },
+      "failedTest": "PaperDefense.Tests.SplitMountMetadataTests.MuzzleAtRotationPivotIsRejectedInsteadOfCollapsingAimAndRecoil",
+      "message": "Expected FormatException; no exception before validation fix"
+    }
+  }
+}

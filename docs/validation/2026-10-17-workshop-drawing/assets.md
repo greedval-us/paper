@@ -3,7 +3,7 @@
 - Дата: 17 октября 2026.
 - Ресурс: `Assets/PaperDefense/Resources/Art/Player/DrawingWorkshopHouse.png`.
 - Способ: встроенный `image_gen.imagegen`, навык `imagegen`, один вызов; `transparent_background: true`.
-- Эскиз для выделения иллюстрации: `docs/design/game-concept-art-2026-10-16/screens/06-drawing.png`, домик слева от верхнего заголовка.
+- Эскиз для выделения иллюстрации: `ArtSource/Notebook/References/2026-10-16/screens/06-drawing.png`, домик слева от верхнего заголовка.
 - Исходный результат: `C:/Users/Greedval/.codex/generated_images/01a147bf-e86f-7f32-80f1-c1a74bae73e1/exec-3df0caae-c4c1-4eb4-b642-4406020f5157.png`.
 - Формат: PNG, 1536×1024, 32-bit ARGB. Проверенные пиксели вне домика, включая углы и области над крышей, имеют alpha 0. Файл скопирован без переработки альфа-канала.
 - Содержимое: отдельный домик с крышей, дымоходом, дверью, окнами, шестерёнкой и инструментами; игровые надписи отсутствуют.

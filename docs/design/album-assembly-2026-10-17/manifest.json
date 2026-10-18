@@ -1,0 +1,163 @@
+{
+  "date": "2026-10-18",
+  "balance": "album-v1.0",
+  "views": 9,
+  "artSheets": 3,
+  "files": [
+    {
+      "file": "index.html",
+      "bytes": 1162,
+      "sha256": "169b4fdb8f4f73629c8091f2191899bbd3e856c088e96fd49c0f7e99363f3ed5"
+    },
+    {
+      "file": "gallery.js",
+      "bytes": 23866,
+      "sha256": "ad2ea4a7a77074612de160efab9e9dab1a657327974b61c1e0c3b5efcc96773d"
+    },
+    {
+      "file": "gallery.css",
+      "bytes": 9667,
+      "sha256": "aa2c04e399a947dcd4e97bd53b17fa27db3b7c629d0a7ab6bb315b0378c4e656"
+    },
+    {
+      "file": "design-data.js",
+      "bytes": 28386,
+      "sha256": "a27ccfc6dfb53680fc127977b26f485fddc7117e7a69446a661f1968a3fe7ce1"
+    },
+    {
+      "file": "art/01-towers.png",
+      "bytes": 2624844,
+      "sha256": "c196824234faebeb4054827ea880cef5862d57576e8f7f52825546498b79e649"
+    },
+    {
+      "file": "art/02-weapon-parts.png",
+      "bytes": 2810027,
+      "sha256": "c992257bb49d26a15b0601c742d137195104e16a1b8b92edb1db5d720d44064e"
+    },
+    {
+      "file": "art/03-structures.png",
+      "bytes": 3090509,
+      "sha256": "90f87c2008cf9c287077e5875d85fecc61345c0b98dab68ea809f22977d1355f"
+    },
+    {
+      "file": "screens/01-1024.png",
+      "bytes": 502918,
+      "sha256": "80797e81be75006f0a249eff96c60a626a6fa40b5cb429d17c673cc202c25f39"
+    },
+    {
+      "file": "screens/01-1600.png",
+      "bytes": 624876,
+      "sha256": "8dce3d58fada461c7a9f5a5fd58b38a7671319cafef00b0c777feccb8d55e690"
+    },
+    {
+      "file": "screens/02-1024.png",
+      "bytes": 289988,
+      "sha256": "d4778f785887eae2a2d2d0669da92647cf0474d01009e050bd5c846bdfa192f4"
+    },
+    {
+      "file": "screens/02-1600.png",
+      "bytes": 411023,
+      "sha256": "49c3dd4aa37633fdfd38aaa08fef48785728995501c325daded0cc4b33679c6f"
+    },
+    {
+      "file": "screens/03-1024.png",
+      "bytes": 287112,
+      "sha256": "2bb2e4d0a2da2aa6d8087f172f7a083249441f3098459465a42adef1850718a5"
+    },
+    {
+      "file": "screens/03-1600.png",
+      "bytes": 411352,
+      "sha256": "5c6f6670d7bc023e260f5786727343ae031c8f399046841f9bb4930006758775"
+    },
+    {
+      "file": "screens/04-1024.png",
+      "bytes": 307985,
+      "sha256": "56d97e1fe0b1645f55a062343961ab924b67e53e84d527b62d8d56e61ed7e5ed"
+    },
+    {
+      "file": "screens/04-1600.png",
+      "bytes": 407216,
+      "sha256": "fed54add6d12a09021ac2b9af552cdc9e591338d37c9ed799b66c2e6203be982"
+    },
+    {
+      "file": "screens/05-1024.png",
+      "bytes": 267486,
+      "sha256": "321db1f63526c07178ec00c1e318cc2218c17742d8e6c74cf7589d5d7a774599"
+    },
+    {
+      "file": "screens/05-1600.png",
+      "bytes": 390043,
+      "sha256": "e52c992e69bc3c5dd81794f10c0a6b411f51b17733325ee9260e3d1257ac1314"
+    },
+    {
+      "file": "screens/06-1024.png",
+      "bytes": 206218,
+      "sha256": "5a48fcb6df9a0fe6464308445e3cbda374bfa221745101f636df99d599d07b61"
+    },
+    {
+      "file": "screens/06-1600.png",
+      "bytes": 226379,
+      "sha256": "9749ca0c0332736545af8bc7efa41220a67fccf2fb376fa1d604c7999238062b"
+    },
+    {
+      "file": "screens/07-1024.png",
+      "bytes": 325562,
+      "sha256": "9ef511d91751f44eea8e83af920a85d5d60fc91ea9f9f0f3c407b274e5b63bb5"
+    },
+    {
+      "file": "screens/07-1600.png",
+      "bytes": 366631,
+      "sha256": "64c18cc9945a9173b2205a3b50fb326cab5fd11d845926415d7129294eace722"
+    },
+    {
+      "file": "screens/08-1024.png",
+      "bytes": 458787,
+      "sha256": "66d5705bbb4ba060b574932eab1dbb915d4053d11f0254376a3141140bb6ca61"
+    },
+    {
+      "file": "screens/08-1600.png",
+      "bytes": 623380,
+      "sha256": "7662b162c7fcea224cf22aca6cdfbda0ba20fb27fe5d15b96e76ffc1c65b0b47"
+    },
+    {
+      "file": "screens/09-1024.png",
+      "bytes": 2945368,
+      "sha256": "4550a0a32df33cdf92a48add638ce11dacb26eb9925b6da75ef9f6e545c30dab"
+    },
+    {
+      "file": "screens/09-1600.png",
+      "bytes": 6553666,
+      "sha256": "828dc08ea438402cba884d170a1dfe94c2bf94b2e3bf27dd9e8a64f86832223a"
+    },
+    {
+      "file": "screens/state-empty.png",
+      "bytes": 56664,
+      "sha256": "7a7b839c12dcd6a62b44e83094aea0e4c828ddacf61af0a5505fee353fefa08e"
+    },
+    {
+      "file": "screens/state-gold-missing.png",
+      "bytes": 117699,
+      "sha256": "368b7432418f8842e91584c8c9b964f6597d9f23f928d3b10962843da5c188d2"
+    },
+    {
+      "file": "screens/state-incompatible.png",
+      "bytes": 185232,
+      "sha256": "013e34036d3eb2623d261276d432c44703f016ff391549ae61cb36737700108d"
+    },
+    {
+      "file": "screens/state-level-locked.png",
+      "bytes": 293357,
+      "sha256": "9c80430520a3c800c5271a643f180928f57079a1d4a1b3a932eb56f24a8ee6a8"
+    },
+    {
+      "file": "screens/state-purchase.png",
+      "bytes": 96169,
+      "sha256": "7d4a8431cda8823d170956664b1e115810762a8ade69b609381d1b7e6fd4f75f"
+    },
+    {
+      "file": "screens/state-save-error.png",
+      "bytes": 153247,
+      "sha256": "56c8b8fd276e9734961d778b7bcac82b436c50f28a073386bfcf1bda40cfc514"
+    }
+  ]
+}

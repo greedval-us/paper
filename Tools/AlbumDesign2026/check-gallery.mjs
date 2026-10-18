@@ -1,0 +1,22 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {chromium} from 'playwright';
+const root=path.resolve(import.meta.dirname,'../..'),dir=path.join(root,'docs/design/album-assembly-2026-10-17'),shots=path.join(dir,'screens');
+await fs.mkdir(shots,{recursive:true});
+const browser=await chromium.launch({channel:'msedge',headless:true});
+const page=await browser.newPage({viewport:{width:1600,height:1050},deviceScaleFactor:1});
+const errors=[];page.on('pageerror',e=>errors.push(e.message));
+await page.goto(pathToFileURL(path.join(dir,'index.html')).href);await page.locator('.card').first().waitFor();
+const widths=[1600,1024];const captures=[];
+for(const width of widths){await page.setViewportSize({width,height:width===1600?1050:1000});for(let i=0;i<9;i++){await page.locator('#views button').nth(i).click();await page.evaluate(()=>document.fonts.ready);const horizontalOverflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth);if(horizontalOverflow)errors.push('Horizontal overflow '+width+' view '+i);const file=`${String(i+1).padStart(2,'0')}-${width}.png`;await page.screenshot({path:path.join(shots,file),fullPage:true});captures.push(file);}}
+await page.locator('#views button').nth(2).click();await page.locator('#weaponPreset').selectOption('9');if(!await page.locator('.showcase').innerText().then(t=>t.includes('28,57')))throw new Error('Burst stats');
+await page.getByRole('button',{name:'Несовместимость',exact:true}).click();await page.screenshot({path:path.join(shots,'state-incompatible.png')});await page.getByRole('button',{name:'Выбрать штатную обойму',exact:true}).click();
+await page.locator('#views button').nth(4).click();await page.locator('#blueprintName').fill('Сохранённый черновик');await page.getByRole('button',{name:'Показать ошибку записи',exact:true}).click();await page.screenshot({path:path.join(shots,'state-save-error.png')});await page.keyboard.press('Escape');if(await page.locator('#blueprintName').inputValue()!=='Сохранённый черновик')throw new Error('Draft preservation');
+await page.locator('#views button').nth(5).click();await page.locator('#levelInput').fill('1');await page.locator('#levelInput').dispatchEvent('change');await page.screenshot({path:path.join(shots,'state-level-locked.png'),fullPage:true});
+await page.locator('#levelInput').fill('8');await page.locator('#levelInput').dispatchEvent('change');await page.locator('#goldInput').fill('0');await page.locator('#goldInput').dispatchEvent('change');await page.screenshot({path:path.join(shots,'state-gold-missing.png'),fullPage:true});
+await page.locator('#goldInput').fill('94');await page.locator('#goldInput').dispatchEvent('change');await page.locator('[data-buy="head.long"]').click();await page.screenshot({path:path.join(shots,'state-purchase.png')});await page.getByRole('button',{name:'Купить',exact:true}).click();if(!await page.locator('.account').first().innerText().then(t=>t.includes('14')))throw new Error('Purchase deduction');
+await page.locator('#views button').nth(0).click();await page.getByRole('button',{name:'Показать пустой альбом',exact:true}).click();await page.screenshot({path:path.join(shots,'state-empty.png')});await page.getByRole('button',{name:'Получить стандартный набор',exact:true}).click();if(await page.locator('.slot').count()!==8)throw new Error('Eight slots');
+await page.locator('#views button').nth(1).click();await page.locator('[data-foundation="0"]').selectOption('frame.heavy');await page.locator('[data-foundation="1"]').selectOption('hull.reinforced');if(!await page.locator('.showcase').innerText().then(t=>t.includes('107,25')&&t.includes('34 штр.')))throw new Error('Foundation calculation');await page.locator('#views button').nth(4).click();if(!await page.locator('.detail-table').innerText().then(t=>t.includes('68 штр.')))throw new Error('Review calculation');
+await fs.writeFile(path.join(dir,'browser-validation.json'),JSON.stringify({date:'2026-10-18',widths,captures,states:6,errors,actions:['variant comparison','incompatible combination','save error preserved draft','level gate','gold gate','purchase 94-80=14','empty album restore','8 slots','foundation stats 107.25 HP / 34 cost','review with burst weapon 68 cost']},null,2));
+await browser.close();console.log(JSON.stringify({captures:captures.length+6,errors}));if(errors.length)process.exitCode=1;

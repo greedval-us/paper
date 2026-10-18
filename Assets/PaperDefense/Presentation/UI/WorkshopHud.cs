@@ -858,10 +858,18 @@ namespace PaperDefense.Presentation
         {
             vh.Clear(); if (blueprint == null || DrawingTemplateCatalog.Create(blueprint).Count == 0) return;
             Vector2 center = rectTransform.rect.center;
-            if(ShowReinforcement&&blueprint.Reinforcement!=null)ArmorReinforcementGraphic.DrawSectors(vh,center,Mathf.Min(rectTransform.rect.width,rectTransform.rect.height)*.42f,blueprint.Reinforcement);
             if (!ShowReference)
             {
                 float size = Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .68f;
+                if (NotebookMountLayout.Supports(blueprint) && NotebookTowerComposition.TryGetBounds(blueprint, out var bounds))
+                {
+                    size = .9f * Mathf.Min(rectTransform.rect.width / Mathf.Max(.001f, bounds.width),
+                        rectTransform.rect.height / Mathf.Max(.001f, bounds.height));
+                    center -= bounds.center * size;
+                }
+                if (ShowReinforcement && blueprint.Reinforcement != null)
+                    ArmorReinforcementGraphic.DrawSectors(vh, center, NotebookMountLayout.Supports(blueprint)
+                        ? size * .625f : Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .42f, blueprint.Reinforcement);
                 if (previewAnimation != null)
                     NotebookTowerComposition.DrawPreviewUI(vh, blueprint, center, size, previewAnimation, 1, previewSeconds, previewAim);
                 else NotebookTowerComposition.DrawUI(vh, blueprint, center, size);
@@ -870,6 +878,8 @@ namespace PaperDefense.Presentation
             // Reference contours are teaching guides for the drawing editor. Completed standard
             // assemblies and every runtime battlefield object use the new atlas illustrations.
             float scale = Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .68f;
+            if (ShowReinforcement && blueprint.Reinforcement != null)
+                ArmorReinforcementGraphic.DrawSectors(vh, center, Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .42f, blueprint.Reinforcement);
             var drawing = ReferenceDrawingCache.For(blueprint);
             foreach (var template in DrawingTemplateCatalog.Create(blueprint))
             {

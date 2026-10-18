@@ -1,5 +1,5 @@
 {
-    "revision": "blue-pen-2026-10-17",
+    "revision": "blue-pen-2026-10-17-gun-pilot-v1",
     "whitePixel": {
         "x": 4,
         "y": 4
@@ -8,8 +8,8 @@
         {
             "id": "chassis.standard",
             "alias": "",
-            "x": 760,
-            "y": 2498,
+            "x": 1198,
+            "y": 2487,
             "width": 282,
             "height": 250,
             "bounds": {
@@ -22,8 +22,8 @@
         {
             "id": "chassis.heavy",
             "alias": "",
-            "x": 423,
-            "y": 1973,
+            "x": 427,
+            "y": 3481,
             "width": 320,
             "height": 253,
             "bounds": {
@@ -36,8 +36,8 @@
         {
             "id": "chassis.precision",
             "alias": "",
-            "x": 760,
-            "y": 3870,
+            "x": 1198,
+            "y": 2741,
             "width": 279,
             "height": 242,
             "bounds": {
@@ -50,8 +50,8 @@
         {
             "id": "chassis.battery",
             "alias": "",
-            "x": 16,
-            "y": 3376,
+            "x": 427,
+            "y": 2353,
             "width": 337,
             "height": 287,
             "bounds": {
@@ -64,8 +64,8 @@
         {
             "id": "module.armor",
             "alias": "",
-            "x": 1352,
-            "y": 2140,
+            "x": 3360,
+            "y": 1433,
             "width": 277,
             "height": 208,
             "bounds": {
@@ -78,8 +78,8 @@
         {
             "id": "weapon.gun",
             "alias": "",
-            "x": 1099,
-            "y": 2524,
+            "x": 684,
+            "y": 1961,
             "width": 211,
             "height": 296,
             "bounds": {
@@ -92,8 +92,8 @@
         {
             "id": "weapon.piercer",
             "alias": "",
-            "x": 423,
-            "y": 3030,
+            "x": 923,
+            "y": 1728,
             "width": 243,
             "height": 314,
             "bounds": {
@@ -106,8 +106,8 @@
         {
             "id": "weapon.mortar",
             "alias": "",
-            "x": 1099,
-            "y": 2250,
+            "x": 1198,
+            "y": 3772,
             "width": 240,
             "height": 270,
             "bounds": {
@@ -120,8 +120,8 @@
         {
             "id": "weapon.fan",
             "alias": "",
-            "x": 760,
-            "y": 1954,
+            "x": 923,
+            "y": 2326,
             "width": 256,
             "height": 288,
             "bounds": {
@@ -134,8 +134,8 @@
         {
             "id": "weapon.ricochet",
             "alias": "",
-            "x": 1352,
-            "y": 1902,
+            "x": 3094,
+            "y": 1433,
             "width": 262,
             "height": 234,
             "bounds": {
@@ -148,8 +148,8 @@
         {
             "id": "weapon.stapler",
             "alias": "",
-            "x": 760,
-            "y": 2246,
+            "x": 1198,
+            "y": 2235,
             "width": 287,
             "height": 248,
             "bounds": {
@@ -162,8 +162,8 @@
         {
             "id": "weapon.blotter",
             "alias": "",
-            "x": 1099,
-            "y": 1979,
+            "x": 1198,
+            "y": 3501,
             "width": 243,
             "height": 267,
             "bounds": {
@@ -176,8 +176,8 @@
         {
             "id": "module.feed",
             "alias": "",
-            "x": 1352,
-            "y": 1433,
+            "x": 1198,
+            "y": 2987,
             "width": 283,
             "height": 232,
             "bounds": {
@@ -190,8 +190,8 @@
         {
             "id": "module.tracking",
             "alias": "",
-            "x": 1711,
-            "y": 1146,
+            "x": 2172,
+            "y": 1149,
             "width": 350,
             "height": 259,
             "bounds": {
@@ -204,8 +204,8 @@
         {
             "id": "module.rail",
             "alias": "",
-            "x": 3261,
-            "y": 464,
+            "x": 3757,
+            "y": 462,
             "width": 306,
             "height": 230,
             "bounds": {
@@ -218,8 +218,8 @@
         {
             "id": "object.wall",
             "alias": "",
-            "x": 423,
-            "y": 2525,
+            "x": 1198,
+            "y": 1433,
             "width": 303,
             "height": 259,
             "bounds": {
@@ -232,8 +232,8 @@
         {
             "id": "object.spikes",
             "alias": "",
-            "x": 423,
-            "y": 1687,
+            "x": 427,
+            "y": 3195,
             "width": 291,
             "height": 282,
             "bounds": {
@@ -246,8 +246,8 @@
         {
             "id": "object.repair",
             "alias": "",
-            "x": 16,
-            "y": 2675,
+            "x": 3718,
+            "y": 1121,
             "width": 357,
             "height": 305,
             "bounds": {
@@ -260,8 +260,8 @@
         {
             "id": "object.tar",
             "alias": "",
-            "x": 3623,
-            "y": 462,
+            "x": 1833,
+            "y": 1433,
             "width": 312,
             "height": 214,
             "bounds": {
@@ -274,8 +274,8 @@
         {
             "id": "terrain.pine",
             "alias": "",
-            "x": 16,
-            "y": 2984,
+            "x": 427,
+            "y": 1961,
             "width": 253,
             "height": 388,
             "bounds": {
@@ -289,7 +289,7 @@
             "id": "terrain.mountain",
             "alias": "",
             "x": 16,
-            "y": 1749,
+            "y": 2753,
             "width": 386,
             "height": 319,
             "bounds": {
@@ -303,7 +303,7 @@
             "id": "terrain.oak",
             "alias": "",
             "x": 16,
-            "y": 2072,
+            "y": 3370,
             "width": 345,
             "height": 324,
             "bounds": {
@@ -316,8 +316,8 @@
         {
             "id": "terrain.rock",
             "alias": "",
-            "x": 423,
-            "y": 2788,
+            "x": 1505,
+            "y": 1433,
             "width": 324,
             "height": 238,
             "bounds": {
@@ -330,8 +330,8 @@
         {
             "id": "terrain.shrub",
             "alias": "",
-            "x": 1352,
-            "y": 2564,
+            "x": 1997,
+            "y": 1675,
             "width": 255,
             "height": 205,
             "bounds": {
@@ -344,7 +344,7 @@
         {
             "id": "terrain.ridge",
             "alias": "",
-            "x": 1639,
+            "x": 2149,
             "y": 1433,
             "width": 375,
             "height": 171,
@@ -358,8 +358,8 @@
         {
             "id": "object.castle.damaged",
             "alias": "",
-            "x": 3641,
-            "y": 701,
+            "x": 1711,
+            "y": 1092,
             "width": 408,
             "height": 330,
             "bounds": {
@@ -372,8 +372,8 @@
         {
             "id": "object.blot",
             "alias": "",
-            "x": 3306,
-            "y": 1121,
+            "x": 2534,
+            "y": 1146,
             "width": 321,
             "height": 282,
             "bounds": {
@@ -386,8 +386,8 @@
         {
             "id": "enemy.doodle.idle",
             "alias": "",
-            "x": 273,
-            "y": 2984,
+            "x": 768,
+            "y": 2353,
             "width": 145,
             "height": 193,
             "bounds": {
@@ -400,8 +400,8 @@
         {
             "id": "enemy.runner.idle",
             "alias": "",
-            "x": 3939,
-            "y": 462,
+            "x": 751,
+            "y": 3481,
             "width": 157,
             "height": 197,
             "bounds": {
@@ -414,8 +414,8 @@
         {
             "id": "enemy.gnawer.idle",
             "alias": "",
-            "x": 2555,
-            "y": 1433,
+            "x": 3326,
+            "y": 562,
             "width": 190,
             "height": 134,
             "bounds": {
@@ -428,8 +428,8 @@
         {
             "id": "enemy.spitter.idle",
             "alias": "",
-            "x": 2144,
-            "y": 1608,
+            "x": 722,
+            "y": 3195,
             "width": 189,
             "height": 174,
             "bounds": {
@@ -442,8 +442,8 @@
         {
             "id": "enemy.brute.idle",
             "alias": "",
-            "x": 423,
-            "y": 1433,
+            "x": 427,
+            "y": 2941,
             "width": 333,
             "height": 250,
             "bounds": {
@@ -456,8 +456,8 @@
         {
             "id": "enemy.bulwark.idle",
             "alias": "",
-            "x": 1352,
-            "y": 3631,
+            "x": 1505,
+            "y": 2656,
             "width": 200,
             "height": 226,
             "bounds": {
@@ -470,8 +470,8 @@
         {
             "id": "enemy.doodle.walk",
             "alias": "",
-            "x": 1352,
-            "y": 3861,
+            "x": 1505,
+            "y": 2886,
             "width": 202,
             "height": 194,
             "bounds": {
@@ -484,8 +484,8 @@
         {
             "id": "enemy.runner.walk",
             "alias": "",
-            "x": 1352,
-            "y": 2773,
+            "x": 2256,
+            "y": 1675,
             "width": 250,
             "height": 197,
             "bounds": {
@@ -498,8 +498,8 @@
         {
             "id": "enemy.gnawer.walk",
             "alias": "",
-            "x": 16,
-            "y": 3964,
+            "x": 1505,
+            "y": 3438,
             "width": 224,
             "height": 147,
             "bounds": {
@@ -512,8 +512,8 @@
         {
             "id": "enemy.spitter.walk",
             "alias": "",
-            "x": 1933,
-            "y": 1608,
+            "x": 1505,
+            "y": 3252,
             "width": 207,
             "height": 182,
             "bounds": {
@@ -526,8 +526,8 @@
         {
             "id": "enemy.brute.walk",
             "alias": "",
-            "x": 760,
-            "y": 1433,
+            "x": 427,
+            "y": 3738,
             "width": 335,
             "height": 237,
             "bounds": {
@@ -540,8 +540,8 @@
         {
             "id": "enemy.bulwark.walk",
             "alias": "",
-            "x": 1099,
-            "y": 3805,
+            "x": 1740,
+            "y": 1887,
             "width": 232,
             "height": 220,
             "bounds": {
@@ -554,8 +554,8 @@
         {
             "id": "enemy.doodle.attack",
             "alias": "",
-            "x": 1352,
-            "y": 3433,
+            "x": 3049,
+            "y": 1675,
             "width": 240,
             "height": 194,
             "bounds": {
@@ -568,8 +568,8 @@
         {
             "id": "enemy.runner.attack",
             "alias": "",
-            "x": 1639,
-            "y": 1608,
+            "x": 3641,
+            "y": 1433,
             "width": 290,
             "height": 186,
             "bounds": {
@@ -582,8 +582,8 @@
         {
             "id": "enemy.gnawer.attack",
             "alias": "",
-            "x": 2321,
-            "y": 1433,
+            "x": 1505,
+            "y": 3084,
             "width": 230,
             "height": 164,
             "bounds": {
@@ -596,8 +596,8 @@
         {
             "id": "enemy.spitter.attack",
             "alias": "",
-            "x": 2018,
-            "y": 1433,
+            "x": 2510,
+            "y": 1675,
             "width": 299,
             "height": 163,
             "bounds": {
@@ -610,8 +610,8 @@
         {
             "id": "enemy.brute.attack",
             "alias": "",
-            "x": 423,
-            "y": 3621,
+            "x": 1198,
+            "y": 1969,
             "width": 288,
             "height": 262,
             "bounds": {
@@ -624,8 +624,8 @@
         {
             "id": "enemy.bulwark.attack",
             "alias": "",
-            "x": 1352,
-            "y": 3224,
+            "x": 2813,
+            "y": 1675,
             "width": 232,
             "height": 205,
             "bounds": {
@@ -639,7 +639,7 @@
             "id": "fx.muzzle",
             "alias": "",
             "x": 16,
-            "y": 2400,
+            "y": 3698,
             "width": 402,
             "height": 271,
             "bounds": {
@@ -652,7 +652,7 @@
         {
             "id": "fx.tracer",
             "alias": "",
-            "x": 3306,
+            "x": 3718,
             "y": 701,
             "width": 331,
             "height": 416,
@@ -666,8 +666,8 @@
         {
             "id": "fx.piercer",
             "alias": "",
-            "x": 1099,
-            "y": 3086,
+            "x": 1505,
+            "y": 1937,
             "width": 131,
             "height": 451,
             "bounds": {
@@ -680,8 +680,8 @@
         {
             "id": "fx.mortar.projectile",
             "alias": "",
-            "x": 3641,
-            "y": 1035,
+            "x": 16,
+            "y": 2108,
             "width": 395,
             "height": 325,
             "bounds": {
@@ -694,8 +694,8 @@
         {
             "id": "fx.mortar.explosion",
             "alias": "",
-            "x": 2800,
-            "y": 16,
+            "x": 1711,
+            "y": 701,
             "width": 457,
             "height": 387,
             "bounds": {
@@ -708,7 +708,7 @@
         {
             "id": "fx.fan",
             "alias": "",
-            "x": 2493,
+            "x": 3316,
             "y": 701,
             "width": 398,
             "height": 355,
@@ -722,7 +722,7 @@
         {
             "id": "fx.ricochet",
             "alias": "",
-            "x": 2493,
+            "x": 3316,
             "y": 1060,
             "width": 397,
             "height": 344,
@@ -736,7 +736,7 @@
         {
             "id": "fx.cleanup",
             "alias": "",
-            "x": 2069,
+            "x": 2892,
             "y": 1060,
             "width": 391,
             "height": 363,
@@ -750,8 +750,8 @@
         {
             "id": "icon.pencil",
             "alias": "",
-            "x": 760,
-            "y": 3597,
+            "x": 923,
+            "y": 3463,
             "width": 254,
             "height": 269,
             "bounds": {
@@ -764,8 +764,8 @@
         {
             "id": "icon.pen",
             "alias": "",
-            "x": 423,
-            "y": 2230,
+            "x": 923,
+            "y": 1433,
             "width": 271,
             "height": 291,
             "bounds": {
@@ -778,8 +778,8 @@
         {
             "id": "icon.marker",
             "alias": "",
-            "x": 16,
-            "y": 3667,
+            "x": 427,
+            "y": 2644,
             "width": 285,
             "height": 293,
             "bounds": {
@@ -792,8 +792,8 @@
         {
             "id": "icon.erase",
             "alias": "",
-            "x": 1352,
-            "y": 2352,
+            "x": 1740,
+            "y": 1675,
             "width": 253,
             "height": 208,
             "bounds": {
@@ -806,8 +806,8 @@
         {
             "id": "icon.paint",
             "alias": "",
-            "x": 760,
-            "y": 1674,
+            "x": 923,
+            "y": 2046,
             "width": 270,
             "height": 276,
             "bounds": {
@@ -820,8 +820,8 @@
         {
             "id": "icon.upgrade",
             "alias": "",
-            "x": 1099,
-            "y": 2824,
+            "x": 1505,
+            "y": 1675,
             "width": 231,
             "height": 258,
             "bounds": {
@@ -834,8 +834,8 @@
         {
             "id": "icon.play",
             "alias": "",
-            "x": 1352,
-            "y": 2974,
+            "x": 716,
+            "y": 2644,
             "width": 198,
             "height": 246,
             "bounds": {
@@ -848,8 +848,8 @@
         {
             "id": "icon.help",
             "alias": "",
-            "x": 423,
-            "y": 3887,
+            "x": 2528,
+            "y": 1433,
             "width": 289,
             "height": 214,
             "bounds": {
@@ -862,8 +862,8 @@
         {
             "id": "icon.settings",
             "alias": "",
-            "x": 423,
-            "y": 3348,
+            "x": 1198,
+            "y": 1696,
             "width": 281,
             "height": 269,
             "bounds": {
@@ -876,8 +876,8 @@
         {
             "id": "icon.workshop",
             "alias": "",
-            "x": 760,
-            "y": 3327,
+            "x": 923,
+            "y": 3193,
             "width": 258,
             "height": 266,
             "bounds": {
@@ -890,8 +890,8 @@
         {
             "id": "icon.exit",
             "alias": "",
-            "x": 1099,
-            "y": 1701,
+            "x": 1198,
+            "y": 3223,
             "width": 237,
             "height": 274,
             "bounds": {
@@ -904,8 +904,8 @@
         {
             "id": "icon.skull",
             "alias": "",
-            "x": 1099,
-            "y": 3541,
+            "x": 1505,
+            "y": 2392,
             "width": 225,
             "height": 260,
             "bounds": {
@@ -918,8 +918,8 @@
         {
             "id": "icon.entrance",
             "alias": "",
-            "x": 1099,
-            "y": 1433,
+            "x": 923,
+            "y": 3736,
             "width": 249,
             "height": 264,
             "bounds": {
@@ -932,8 +932,8 @@
         {
             "id": "icon.shield",
             "alias": "",
-            "x": 760,
-            "y": 2752,
+            "x": 923,
+            "y": 2618,
             "width": 243,
             "height": 286,
             "bounds": {
@@ -946,8 +946,8 @@
         {
             "id": "icon.heart",
             "alias": "",
-            "x": 1352,
-            "y": 1669,
+            "x": 2821,
+            "y": 1433,
             "width": 269,
             "height": 229,
             "bounds": {
@@ -960,8 +960,8 @@
         {
             "id": "icon.flag",
             "alias": "",
-            "x": 760,
-            "y": 3042,
+            "x": 923,
+            "y": 2908,
             "width": 247,
             "height": 281,
             "bounds": {
@@ -974,8 +974,8 @@
         {
             "id": "tower.gun",
             "alias": "",
-            "x": 2800,
-            "y": 407,
+            "x": 16,
+            "y": 3076,
             "width": 407,
             "height": 290,
             "bounds": {
@@ -989,7 +989,7 @@
             "id": "tower.double",
             "alias": "",
             "x": 16,
-            "y": 1433,
+            "y": 2437,
             "width": 403,
             "height": 312,
             "bounds": {
@@ -1002,8 +1002,8 @@
         {
             "id": "tower.piercer",
             "alias": "",
-            "x": 2895,
-            "y": 701,
+            "x": 16,
+            "y": 1433,
             "width": 407,
             "height": 342,
             "bounds": {
@@ -1016,7 +1016,7 @@
         {
             "id": "tower.mortar",
             "alias": "",
-            "x": 2069,
+            "x": 2892,
             "y": 701,
             "width": 420,
             "height": 355,
@@ -1030,8 +1030,8 @@
         {
             "id": "tower.fan",
             "alias": "",
-            "x": 2895,
-            "y": 1047,
+            "x": 16,
+            "y": 1779,
             "width": 398,
             "height": 325,
             "bounds": {
@@ -1058,7 +1058,7 @@
         {
             "id": "icon.ink-red",
             "alias": "",
-            "x": 3623,
+            "x": 3757,
             "y": 16,
             "width": 355,
             "height": 442,
@@ -1072,8 +1072,8 @@
         {
             "id": "icon.ink-blue",
             "alias": "",
-            "x": 3261,
-            "y": 16,
+            "x": 2172,
+            "y": 701,
             "width": 358,
             "height": 444,
             "bounds": {
@@ -1086,7 +1086,7 @@
         {
             "id": "icon.ink-green",
             "alias": "",
-            "x": 1711,
+            "x": 2534,
             "y": 701,
             "width": 354,
             "height": 441,
@@ -1123,6 +1123,62 @@
                 "y": -0.5,
                 "width": 2.0,
                 "height": 1.0
+            }
+        },
+        {
+            "id": "part.gun.support",
+            "alias": "",
+            "x": 427,
+            "y": 1433,
+            "width": 492,
+            "height": 278,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.492000013589859,
+                "height": 0.27799999713897707
+            }
+        },
+        {
+            "id": "part.gun.cradle-back",
+            "alias": "",
+            "x": 3326,
+            "y": 16,
+            "width": 427,
+            "height": 542,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.4269999861717224,
+                "height": 0.5419999957084656
+            }
+        },
+        {
+            "id": "part.gun.barrels",
+            "alias": "",
+            "x": 2800,
+            "y": 16,
+            "width": 522,
+            "height": 554,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.5220000147819519,
+                "height": 0.5540000200271606
+            }
+        },
+        {
+            "id": "part.gun.collar-front",
+            "alias": "",
+            "x": 427,
+            "y": 1715,
+            "width": 413,
+            "height": 242,
+            "bounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.4129999876022339,
+                "height": 0.24199999868869782
             }
         },
         {

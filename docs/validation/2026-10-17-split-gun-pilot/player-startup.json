@@ -1,0 +1,16 @@
+{
+  "binary": "Builds/Stage2SplitGunPilot/PaperDefense.exe",
+  "arguments": [
+    "-batchmode",
+    "-nographics",
+    "-paper-memory-only"
+  ],
+  "observedSeconds": 8,
+  "exitedEarly": false,
+  "stoppedOwnedProcess": true,
+  "logFile": "player-startup.log",
+  "logBytes": 1328,
+  "errorLines": [],
+  "passed": true,
+  "sha256": "D05C5848F7CC2EB32FF6016F54762EE3C666A69B862BE297DF2390830C1EA8CF"
+}

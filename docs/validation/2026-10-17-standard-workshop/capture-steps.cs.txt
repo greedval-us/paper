@@ -1,0 +1,41 @@
+PaperDefense.Editor.FullGameUiCapture.CreateFixture();
+PaperDefense.Editor.FullGameUiCapture.Folder="docs/validation/2026-10-17-standard-workshop";
+PaperDefense.Editor.FullGameUiCapture.AttachPreviewStore(false);
+var run=PaperDefense.Editor.FullGameUiCapture.Game.Run;
+foreach(var part in run.Content.AllParts)if(part.Enabled&&!part.InitiallyUnlocked&&!run.Workshop.IsUnlocked(part.Id)){string reason;if(!run.UnlockPart(part.Id,out reason))throw new System.InvalidOperationException(reason);}
+System.Action battle=()=>{
+ var game=PaperDefense.Editor.FullGameUiCapture.Game;game.Run.OpenWorkshop();if(!game.StartBattle())throw new System.InvalidOperationException("Cannot start battle");
+ var session=(PaperDefense.Core.GameSession)typeof(PaperDefense.Application.RunController).GetField("session",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).GetValue(game.Run);
+ var weapons=new[]{"weapon.gun","weapon.piercer","weapon.mortar","weapon.fan","weapon.ricochet","weapon.stapler","weapon.blotter"};
+ for(int i=0;i<8;i++){
+  var bp=i<7?PaperDefense.Core.TowerBlueprint.NewStandardDraft("evidence-"+i,"Standard "+i,"chassis.standard",weapons[i],content:game.Run.Content):new PaperDefense.Core.TowerBlueprint("evidence-battery","Mixed battery","chassis.battery",new[]{new PaperDefense.Core.WeaponMountSelection(0,"weapon.gun"),new PaperDefense.Core.WeaponMountSelection(1,"weapon.mortar"),new PaperDefense.Core.WeaponMountSelection(2,"weapon.fan")},content:game.Run.Content);
+  bool built=false;string reason="";for(int dy=0;dy<3&&!built;dy++)for(int dx=0;dx<3&&!built;dx++)built=session.TryBuildBlueprint(new[]{new PaperDefense.Core.Cell(30+i%4*3+dx,22+i/4*4+dy)},bp,PaperDefense.Core.MaterialTier.Pencil,PaperDefense.Core.InkColor.None,out reason);
+  if(!built)throw new System.InvalidOperationException(bp.Id+": "+reason);
+ }
+ for(int tick=0;tick<360;tick++)game.Run.StepSimulation();game.Drawing.Focus(new PaperDefense.Core.Cell(35,25));typeof(PaperDefense.Presentation.DrawingInput).GetProperty("Zoom").SetValue(game.Drawing,4f,null);game.Run.NextWave();
+};
+PaperDefense.Editor.FullGameUiCapture.Enqueue("04-foundation-wide",1600,900,()=>PaperDefense.Editor.FullGameUiCapture.WorkshopStep(0));
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-gun-wide",1600,900,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(1);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.SelectWeapon(0,"weapon.gun"))throw new System.InvalidOperationException("Cannot select gun");});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-piercer-wide",1600,900,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(1);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.SelectWeapon(0,"weapon.piercer"))throw new System.InvalidOperationException("Cannot select piercer");});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-mortar-wide",1600,900,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(1);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.SelectWeapon(0,"weapon.mortar"))throw new System.InvalidOperationException("Cannot select mortar");});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-fan-wide",1600,900,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(1);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.SelectWeapon(0,"weapon.fan"))throw new System.InvalidOperationException("Cannot select fan");});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-ricochet-wide",1600,900,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(1);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.SelectWeapon(0,"weapon.ricochet"))throw new System.InvalidOperationException("Cannot select ricochet");});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-stapler-wide",1600,900,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(1);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.SelectWeapon(0,"weapon.stapler"))throw new System.InvalidOperationException("Cannot select stapler");});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-blotter-wide",1600,900,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(1);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.SelectWeapon(0,"weapon.blotter"))throw new System.InvalidOperationException("Cannot select blotter");});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("08-review-wide",1600,900,()=>PaperDefense.Editor.FullGameUiCapture.WorkshopStep(2));
+ PaperDefense.Editor.FullGameUiCapture.Enqueue("09-album-wide",1600,900,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(2);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.Save())throw new System.InvalidOperationException("Cannot save fixture");PaperDefense.Editor.FullGameUiCapture.Wizard.ShowAlbum(true);});
+ PaperDefense.Editor.FullGameUiCapture.Enqueue("10-trial-wide",1600,900,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(2);PaperDefense.Editor.FullGameUiCapture.Click("Wizard full trial");PaperDefense.Editor.FullGameUiCapture.Wizard.RunTrial();});
+ PaperDefense.Editor.FullGameUiCapture.Enqueue("16-battle-matrix-wide",1600,900,battle);
+PaperDefense.Editor.FullGameUiCapture.Enqueue("04-foundation-4x3",1024,768,()=>PaperDefense.Editor.FullGameUiCapture.WorkshopStep(0));
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-gun-4x3",1024,768,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(1);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.SelectWeapon(0,"weapon.gun"))throw new System.InvalidOperationException("Cannot select gun");});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-piercer-4x3",1024,768,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(1);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.SelectWeapon(0,"weapon.piercer"))throw new System.InvalidOperationException("Cannot select piercer");});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-mortar-4x3",1024,768,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(1);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.SelectWeapon(0,"weapon.mortar"))throw new System.InvalidOperationException("Cannot select mortar");});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-fan-4x3",1024,768,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(1);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.SelectWeapon(0,"weapon.fan"))throw new System.InvalidOperationException("Cannot select fan");});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-ricochet-4x3",1024,768,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(1);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.SelectWeapon(0,"weapon.ricochet"))throw new System.InvalidOperationException("Cannot select ricochet");});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-stapler-4x3",1024,768,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(1);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.SelectWeapon(0,"weapon.stapler"))throw new System.InvalidOperationException("Cannot select stapler");});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-blotter-4x3",1024,768,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(1);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.SelectWeapon(0,"weapon.blotter"))throw new System.InvalidOperationException("Cannot select blotter");});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("08-review-4x3",1024,768,()=>PaperDefense.Editor.FullGameUiCapture.WorkshopStep(2));
+ PaperDefense.Editor.FullGameUiCapture.Enqueue("09-album-4x3",1024,768,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(2);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.Save())throw new System.InvalidOperationException("Cannot save fixture");PaperDefense.Editor.FullGameUiCapture.Wizard.ShowAlbum(true);});
+ PaperDefense.Editor.FullGameUiCapture.Enqueue("10-trial-4x3",1024,768,()=>{PaperDefense.Editor.FullGameUiCapture.WorkshopStep(2);PaperDefense.Editor.FullGameUiCapture.Click("Wizard full trial");PaperDefense.Editor.FullGameUiCapture.Wizard.RunTrial();});
+ PaperDefense.Editor.FullGameUiCapture.Enqueue("16-battle-matrix-4x3",1024,768,battle);
+return new {queued=PaperDefense.Editor.FullGameUiCapture.Remaining,profile="memory-only"};

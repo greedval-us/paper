@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "scope": "Validated workspace source files; includes prior standard-mount baseline changes; no Git commit created",
+  "files": [
+    {
+      "file": "ArtSource/Notebook/NewStyle/GunPilotParts-v1.png",
+      "sha256": "12C243260EB902866BA490AE6A3C48ED4716EF3585FF4B60977736E483AF0AED"
+    },
+    {
+      "file": "ArtSource/Notebook/NewStyle/GunPilotParts-v1.provenance.json",
+      "sha256": "F36AF9444A95F706E6825262E9FA2BCC14B7B10D310D129A1EBF9A2E7A5320F1"
+    },
+    {
+      "file": "ArtSource/Notebook/NewStyle/sprites.source.json",
+      "sha256": "279A71A33833518374B5A51F26E6957CFFAC78F575466267ABE1F331C7FE53BC"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/Art/NotebookMountLayout.cs",
+      "sha256": "ADFB77B7E995B71290EEFB8C4D9B5E60714EBDB37A436C003AE4A784964324D2"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/Rendering/NotebookTowerComposition.cs",
+      "sha256": "3DC0AD9639D8F625D53FAA1E232CFA1D6952622921BFC8393B554242707757A0"
+    },
+    {
+      "file": "Assets/PaperDefense/Resources/Art/NotebookMounts.json",
+      "sha256": "34A5DE5D5DC76E78999B76185D587AED570C1EA137317C33931C9D3B8A36F08C"
+    },
+    {
+      "file": "Assets/PaperDefense/Resources/Art/NotebookAtlas.png",
+      "sha256": "DBA87D53AD136B9A2907F6AE969852225A2BF219BE95FD4480BE158C110E871B"
+    },
+    {
+      "file": "Assets/PaperDefense/Resources/Art/NotebookSprites.json",
+      "sha256": "AAE2CA6BEB652718E2E1897FBAC827157CD0BA3494E97BA8538E367E7736BF74"
+    },
+    {
+      "file": "Assets/PaperDefense/Resources/Art/NotebookVisualTheme.asset",
+      "sha256": "AB0E4A75FE6307A5E5668275F175B79670FBCB1DDA19DDC56DCECC98016F6850"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/Editor/SplitGunMountTests.cs",
+      "sha256": "608D983BA6820E1A3C49E539C8EDA2583DC1582E1B24708D973B2C05FBD6B8F8"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/Editor/SplitMountMetadataTests.cs",
+      "sha256": "08A0CD187619063B92F82DA3DA74480F724143646D1F3B6CFE4A2DE104B2C7DB"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/Editor/StandardMountCompatibilityTests.cs",
+      "sha256": "A11941813E9DD3F526B2527EF5CC96828DF6169B659517F1C542F9E7A43E3C0D"
+    },
+    {
+      "file": "Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity",
+      "sha256": "F34C6D5F595DACDF10440EACD12313370CB3C534C969B7B2E58F9F6F71953F8C"
+    },
+    {
+      "file": "ProjectSettings/ProjectVersion.txt",
+      "sha256": "4B72A68F7B9E250D7F392F9964A8CE91959FA26628A05117AB911EDFEC912313"
+    }
+  ]
+}

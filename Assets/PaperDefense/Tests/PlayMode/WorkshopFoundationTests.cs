@@ -67,6 +67,9 @@ namespace PaperDefense.Tests
         {
             var chassis = run.Content.GetChassis(id);
             Assert.That(wizard.Draft.ChassisId, Is.EqualTo(id));
+            Assert.That(wizard.Draft.Origin, Is.EqualTo(DrawingOrigin.LegacyStandard), "Changing foundation must retain standard construction rules.");
+            Assert.That(wizard.Draft.Drawing.IsEmpty, Is.True);
+            Assert.That(wizard.Draft.FreeformDesign, Is.Null);
             Assert.That(Preview().sprite, Is.Not.Null, id);
             Assert.That(Preview().sprite.name, Is.EqualTo(id), "Show the chosen foundation without its weapon assembly.");
             Assert.That(Text("Foundation mount value").text, Is.EqualTo(chassis.MountCount.ToString()), id);

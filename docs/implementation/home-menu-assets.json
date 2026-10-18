@@ -3,7 +3,7 @@
   "skill": "imagegen",
   "mode": "built-in",
   "operation": "edit",
-  "source_reference": "docs/design/game-concept-art-2026-10-16/screens/01-home.png",
+  "source_reference": "ArtSource/Notebook/References/2026-10-16/screens/01-home.png",
   "output": "Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscape.png",
   "generated_source": "C:/Users/Greedval/.codex/generated_images/01a1457f-d9e1-7a93-8681-b4486b4a41f1/exec-ea307ac7-9fdb-4b8d-bd0b-c5653adab9c2.png",
   "size": [

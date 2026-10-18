@@ -64,4 +64,8 @@ Runtime-измеритель `PressurePlayerProbe`, флаг `-paper-pressure` �
 | [ContentAcceptanceRunner](../Assets/PaperDefense/Validation/ContentAcceptanceRunner.cs) и [ContentAcceptanceManifestAsset](../Assets/PaperDefense/Validation/ContentAcceptanceManifestAsset.cs) | Editor-only приёмка данных `Content/Acceptance` через автоматические тесты; отдельная сцена удалена |
 | [PlayerVisualCapture](../Assets/PaperDefense/Editor/PlayerVisualCapture.cs) | API `Capture`: снимки игрового интерфейса; по умолчанию `Captures/PlayerGame` |
 
-Последняя проверка очистки и назначение сохранённых исторических JSON описаны в [указателе проверок](../docs/validation/README.md). Эти JSON остаются входами инструментов приёмки и не являются новым результатом текущего дерева. Канонические PNG, `sprites.source.json`, `animation.json` и редакторский `NotebookSpriteImportTools.Rebuild()` описаны в [ArtSource/Notebook](../ArtSource/Notebook/README.md). Актуальное обновление — в [отчёте графики и разрешения](../docs/validation/2026-10-17-art-resolution/report.md).
+Последняя проверка очистки и назначение сохранённых исторических JSON описаны в [указателе проверок](../docs/validation/README.md). Эти JSON остаются входами инструментов приёмки и не являются новым результатом текущего дерева. Канонические PNG, `sprites.source.json`, `animation.json` и редакторский `NotebookSpriteImportTools.Rebuild()` описаны в [ArtSource/Notebook](../ArtSource/Notebook/README.md). Актуальное обновление — в [отчёте графики и разрешения](../docs/validation/2026-10-17-art-resolution/).
+
+## Новый баланс составного альбома
+
+[AlbumDesign2026](AlbumDesign2026/README.md) строит актуальные 54 детали, Excel и данные эскизов. Старый BalanceWorkbook остаётся инструментом сравнения Historical/Target. Он не является источником новой основной модели.

@@ -1,0 +1,183 @@
+{
+  "engine": "Unity6000.5.7f1",
+  "memory_only": true,
+  "image_processing": false,
+  "count": 25,
+  "screens": [
+    {
+      "file": "04-foundation-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 393695,
+      "sha256": "7c18b2462876108da0b4696b37b973eff404180454e6e811a8cd1c47a191860d"
+    },
+    {
+      "file": "04-foundation-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 974963,
+      "sha256": "2538e2c255a9c0d90c8a9b9308d3ce0a6104594746a8688ad12431573e39af90"
+    },
+    {
+      "file": "05-blotter-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 510500,
+      "sha256": "37d2d69a5fe5a886c490e646458cd4cf7a056d321bb8cebbb53f715b34785526"
+    },
+    {
+      "file": "05-blotter-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 934041,
+      "sha256": "4c717b65057e063f2e1eb2d895767cea9f0a89c61ce5b8c43a47c7272ddb546e"
+    },
+    {
+      "file": "05-fan-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 511942,
+      "sha256": "b2d14153e62e0dacd3f08983f400bcae0612cf09945a704ab5fe32dd8e2ecf7a"
+    },
+    {
+      "file": "05-fan-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 936337,
+      "sha256": "5b25ac09de4285db82e1eedfd9e32ccec86a9d6bd48e6bceb4ab54833df13ae1"
+    },
+    {
+      "file": "05-gun-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 502783,
+      "sha256": "e4be7842e098f9165b9475b4bd820b13df6c839cb6d082c1dc140c4bd7edde5e"
+    },
+    {
+      "file": "05-gun-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 922623,
+      "sha256": "e8fd8d4e652c5628d23880f27296b92d7175857a52749d270a6f98be43574457"
+    },
+    {
+      "file": "05-mortar-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 513118,
+      "sha256": "0de7ac97fac3b62fc0aa458081357290cc3f0986120ec49f7193c92519320158"
+    },
+    {
+      "file": "05-mortar-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 940862,
+      "sha256": "f81537087a2c261b21f77c36472767556570bca88666869e2b659983cd1f3237"
+    },
+    {
+      "file": "05-piercer-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 493280,
+      "sha256": "9bc6149fd20e05ff5fe517d528379cc826f49c1812d2454fd55e93bfc04f1122"
+    },
+    {
+      "file": "05-piercer-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 909394,
+      "sha256": "e19fc0cd326e5919156a841e2bcebc9da91128d0d4024a374ad64ae49af5b83d"
+    },
+    {
+      "file": "05-ricochet-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 529020,
+      "sha256": "2c880b61d03f07a4760c6adeceb13d386f5e4476f5ec58915b70d067419deab1"
+    },
+    {
+      "file": "05-ricochet-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 961405,
+      "sha256": "fad077a472144fb0236394b78e08a3fe101a8171d2f857dfd13f712c67d4430a"
+    },
+    {
+      "file": "05-stapler-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 528913,
+      "sha256": "cfb4b142554f0b7baef106ed82d863c39ad16e42752c5182daa1cd84f5fe4520"
+    },
+    {
+      "file": "05-stapler-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 962191,
+      "sha256": "6f2401a0868357f0c37582fd8bd1dd543a4e3417273a13085bad84f6181d699a"
+    },
+    {
+      "file": "08-review-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 187407,
+      "sha256": "a2199e113dc99497f571feb9a13c9f9957828dbc2701b303322f2c0195a90546"
+    },
+    {
+      "file": "08-review-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 277297,
+      "sha256": "a0fc6c10196f6550da2ca5ca4e8f5c5bd8ae33908b79d9717d19875f8cbed9c7"
+    },
+    {
+      "file": "09-album-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 91968,
+      "sha256": "73b51e48ad26d464b51201840e3f189dba5905e8f303363a46f334fb915bd290"
+    },
+    {
+      "file": "09-album-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 154812,
+      "sha256": "9e2133db4eff8ea146f77a2701c3c9c403d17027c59d8429a83a916e0119095c"
+    },
+    {
+      "file": "10-trial-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 59455,
+      "sha256": "5dd8feee2eab4878e4600b474e591ecfce8db7f9c3884150eba4f598baacfc8b"
+    },
+    {
+      "file": "10-trial-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 108583,
+      "sha256": "b0c42abb3eeaa9904e4607000c16373d634fe2a78006fb980dbe4d365f0604e7"
+    },
+    {
+      "file": "16-battle-matrix-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 164537,
+      "sha256": "4cb251d320e613d5c8c71bdb58cee5885e992bcf998b6d0839082df617e8068a"
+    },
+    {
+      "file": "16-battle-matrix-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 241011,
+      "sha256": "1c5e73231b367ebfd092fa8eea8c8dd5766de824985fe802c11f801bb21ac9aa"
+    },
+    {
+      "file": "standard-composition-sheet.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 425885,
+      "sha256": "a2aeea456f810e3e78e128bbc452f29abd89bf9f00e9fee07ac64bf5b63b6484"
+    }
+  ]
+}

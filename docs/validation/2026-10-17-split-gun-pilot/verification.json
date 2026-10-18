@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-17",
+  "scope": "Stage 2b: chassis.standard / weapon.gun split motion pilot, both slots",
+  "scopedSliceVerified": true,
+  "completeStageTwoAccepted": false,
+  "editMode": {
+    "total": 939,
+    "passed": 939,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 98.3007823,
+    "resultState": "Passed"
+  },
+  "playMode": {
+    "total": 544,
+    "passed": 544,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 38.3533711,
+    "resultState": "Passed"
+  },
+  "build": {
+    "job_id": "build-40da4f64ed",
+    "result": "succeeded",
+    "platform": "StandaloneWindows64",
+    "output_path": "Builds/Stage2SplitGunPilot/PaperDefense.exe",
+    "started_at": "2026-10-17T20:30:29.0400325Z",
+    "duration_seconds": 15.325842699999999,
+    "completed_at": "2026-10-17T20:30:44.3658752Z",
+    "total_size_mb": 222.99,
+    "errors": 0,
+    "warnings": 485
+  },
+  "playerStartup": {
+    "manifest": "player-startup.json",
+    "passed": true,
+    "graphicsMode": "null; visual acceptance performed in Editor captures",
+    "memoryOnly": true,
+    "observedSeconds": 8
+  },
+  "captures": {
+    "count": 14,
+    "manifest": "screenshots.json",
+    "nativeUnedited": true,
+    "allVisuallyInspected": true,
+    "knownTextChecks": "Review screenshots: two pre-existing off-viewport captions return visible=-1"
+  },
+  "atlasPreservation": {
+    "manifest": "atlas-preservation.json",
+    "baselineSprites": 80,
+    "currentSprites": 84,
+    "allOldCropPixelsDimensionsBoundsEqual": true
+  },
+  "sourceManifest": "source-hashes.json",
+  "documentation": {
+    "localLinksChecked": 128,
+    "brokenLinks": 0,
+    "conceptGalleryCommand": "node docs/design/game-concept-art-2026-10-17-modular/verify.cjs",
+    "conceptGalleryVerified": true,
+    "diffCheckPassed": true
+  },
+  "editor": {
+    "state": {
+      "schema_version": "unity-mcp/editor_state@2",
+      "observed_at_unix_ms": 1792269274023,
+      "sequence": 3,
+      "unity": {
+        "instance_id": "paper@7b0a85d9d090300e",
+        "unity_version": "6000.5.7f1",
+        "project_id": null,
+        "platform": "WindowsEditor",
+        "is_batch_mode": false
+      },
+      "editor": {
+        "is_focused": false,
+        "play_mode": {
+          "is_playing": false,
+          "is_paused": false,
+          "is_changing": false
+        },
+        "active_scene": {
+          "path": "Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity",
+          "guid": "7c75d7fda09847a4aa0078398dcaa6f8",
+          "name": "PaperDefenseGame"
+        }
+      },
+      "activity": {
+        "phase": "idle",
+        "since_unix_ms": 1792269145115,
+        "reasons": [
+          "tick"
+        ]
+      },
+      "compilation": {
+        "is_compiling": false,
+        "is_domain_reload_pending": false,
+        "last_compile_started_unix_ms": 1792269135649,
+        "last_compile_finished_unix_ms": 1792269135898,
+        "last_domain_reload_before_unix_ms": null,
+        "last_domain_reload_after_unix_ms": 1792269142896
+      },
+      "assets": {
+        "is_updating": false,
+        "external_changes_dirty": false,
+        "external_changes_last_seen_unix_ms": 1792269146532,
+        "external_changes_dirty_since_unix_ms": null,
+        "external_changes_last_cleared_unix_ms": 1792269146540,
+        "refresh": {
+          "is_refresh_in_progress": false,
+          "last_refresh_requested_unix_ms": null,
+          "last_refresh_finished_unix_ms": null
+        }
+      },
+      "tests": {
+        "is_running": false,
+        "mode": null,
+        "current_job_id": null,
+        "started_unix_ms": null,
+        "started_by": "unknown",
+        "last_run": null
+      },
+      "transport": {
+        "unity_bridge_connected": null,
+        "last_message_unix_ms": null
+      },
+      "settings": {
+        "batch_execute_max_commands": 25
+      },
+      "advice": {
+        "ready_for_tools": true,
+        "blocking_reasons": [],
+        "recommended_retry_after_ms": 0,
+        "recommended_next_action": "none"
+      },
+      "staleness": {
+        "age_ms": 108,
+        "is_stale": false
+      }
+    },
+    "activeSceneDirty": false,
+    "runtimeErrors": 0
+  },
+  "preserved": {
+    "profileSchema": 7,
+    "coreBalanceAndDtoUnchangedInThisSlice": true,
+    "settingsAndPackagesDiffEmpty": true,
+    "unrelatedWorkspaceChangesRetained": true
+  },
+  "pending": [
+    "Foundation front/back fragments and production armour",
+    "Independent neighbor clearance across all allowed angles; existing spacing ~0.2238 U versus ~0.30 U gun radius",
+    "Only after full pilot acceptance: remaining foundations and weapon families"
+  ]
+}

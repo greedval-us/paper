@@ -1,5 +1,7 @@
 # Контракты механик
 
+> Техническая база до перехода. Свободное рисование отменено в целевом дизайне; упоминания Drawing/Freeform ниже описывают ещё существующий код и совместимость. Новые правила: [конструктор](Workshop-Assembly.md), [характеристики](Component-Stats-and-Abilities.md), [план перехода](Implementation-Roadmap.md).
+
 Техническая справка по действующим системам игры. [Эскизы и целевой дизайн](Game-Design.md) задают визуальный ориентир; [статус переноса в Unity](Implementation-Roadmap.md) отделяет реализованные экраны от оставшейся работы.
 
 Механики рабочего пресета настраивает разработчик в `BalancePresetAsset.rules.Mechanics` перед созданием партии. `GameBalanceAsset.dataPreset` выбирает пресет; поле `GameBalanceAsset.mechanics` относится к явному legacy-адаптеру и при назначенном пресете не применяется. Игроку выбор систем не предоставляется. Основная игра использует [PlayerRules](../Assets/PaperDefense/Configuration/Game/PlayerRules.asset); отдельный [Target](../Assets/PaperDefense/Configuration/Content/Target.asset) сохранён для редакторских сравнений. Полный состав систем — в [реестре действующих механик](Current-Mechanics.md).

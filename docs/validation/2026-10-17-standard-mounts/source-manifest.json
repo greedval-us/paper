@@ -1,0 +1,91 @@
+{
+  "stage": 2,
+  "slice": "common standard atlas mounts",
+  "files": [
+    {
+      "file": "Assets/PaperDefense/Presentation/Art/NotebookMountLayout.cs",
+      "bytes": 9243,
+      "sha256": "012c8d4b2beef67fd33b52120325c3ddbd337a9d4de92960aff616299618a496"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/Art/NotebookMountLayout.cs.meta",
+      "bytes": 59,
+      "sha256": "bc5ff38623dd56b3492c1888f549b3136033bbe827729a39e5bd43d6d5be7bf1"
+    },
+    {
+      "file": "Assets/PaperDefense/Resources/Art/NotebookMounts.json",
+      "bytes": 4548,
+      "sha256": "a874c25f00ce7c2f4159cf9f5b80706e54010358923183a9c596c169ac65c54e"
+    },
+    {
+      "file": "Assets/PaperDefense/Resources/Art/NotebookMounts.json.meta",
+      "bytes": 158,
+      "sha256": "925d9bc811cd0b87e27cc5b89974b6aea61107902f4bdc5b0eaa4d04d00685fd"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/Art/NotebookSpriteCatalog.cs",
+      "bytes": 12383,
+      "sha256": "a08a6da7aac3108dc59cb0850c64130ad60e9e0e5303dd5d4ceb4c6c3162bd5b"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/Art/NotebookArtRenderer.cs",
+      "bytes": 8999,
+      "sha256": "26865c6cbdf27954120806f3203ecc036079318e7d1ec7430b361a3580e6858c"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/Rendering/MeshPen.cs",
+      "bytes": 14441,
+      "sha256": "0dd8592b5e7adce0b356ae98065c014ee1c5b6448f35195f58a2ce96194d0891"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/Rendering/NotebookTowerComposition.cs",
+      "bytes": 12315,
+      "sha256": "e7f879b7e88b217a289d6699a6423d8ea1c78959afcc978119b34f9939d5b7a7"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/UI/WeaponAssemblyGraphic.cs",
+      "bytes": 1308,
+      "sha256": "f40ddf00ec26ed1acfca4ece1e077591191aa9c44d37869b674735d27c253f01"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/UI/WorkshopHud.cs",
+      "bytes": 77768,
+      "sha256": "7031f31dd6ffb1717ce1cbaede695fb619133c392b1c52d5b7ad4537be451479"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/Editor/StandardMountLayoutTests.cs",
+      "bytes": 8441,
+      "sha256": "67ee314dcb9374ad7f2ffe14c9e84e461dd73d4ebfc3b4f2b7e87de3d84a732d"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/Editor/StandardMountLayoutTests.cs.meta",
+      "bytes": 59,
+      "sha256": "53caf912d81242f716a59acc611d8079f369d52286cd1d7fffa7af20bc1bc7e6"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/Editor/StandardMountCompatibilityTests.cs",
+      "bytes": 29425,
+      "sha256": "70e787edfc6d7107fdf5a055baa558d9f84e690c7e82b3b9cf4985fb7b83658a"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/Editor/StandardMountCompatibilityTests.cs.meta",
+      "bytes": 60,
+      "sha256": "c5dcff951aea85c37337f3da2f669460010ba14991d5e9de95fff21a28c92baa"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/Editor/StandardMountPreviewRegressionTests.cs",
+      "bytes": 10841,
+      "sha256": "b39dcd23ec0491a3a203afe2433412d64fd4c688cdd4f4bfcfbc9fad71f9124d"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/Editor/StandardMountPreviewRegressionTests.cs.meta",
+      "bytes": 60,
+      "sha256": "7852cca501c4a36931c4d8f2167e84c1d6fdfab3ae19e38706a90094f5b2af3d"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/PlayMode/ExpandedMountRenderingTests.cs",
+      "bytes": 5181,
+      "sha256": "fbf1034c172d1959dc08ab3c16a232fbe81eafa91b5fc44b720bf5f716c22d44"
+    }
+  ]
+}

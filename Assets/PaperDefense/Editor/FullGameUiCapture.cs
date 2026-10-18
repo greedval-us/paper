@@ -36,20 +36,12 @@ namespace PaperDefense.Editor
             catch (Exception e) { LastCapture = "ERROR: " + e; queue.Clear(); Debug.LogError(LastCapture); }
         }
         public static WorkshopWizard Wizard => Game.GetComponentInChildren<WorkshopHud>(true).Guided;
-        public static void CompleteDrawing()
+        public static void WorkshopStep(int step)
         {
-            var drawing = Wizard.Drawing; var session = drawing.Session;
-            session.AddRectangle(DrawingBindings.Base, new DrawingPoint(-.35f,-.35f), new DrawingPoint(.35f,.35f), out _);
-            foreach (var mount in session.Blueprint.WeaponMounts)
-                session.AddRectangle(DrawingBindings.Mount(mount.SlotIndex), new DrawingPoint(-.0625f,0), new DrawingPoint(.0625f,.5f), out _);
-            drawing.Canvas.FinishStroke();
-        }
-        public static void WorkshopStep(int step, bool complete = false)
-        {
+            if (step < 0 || step > 2) throw new ArgumentOutOfRangeException(nameof(step));
             Game.Run.OpenWorkshop(); Game.Navigate(PlayerPage.Workshop); Wizard.NewDraft();
-            for (int i = 0; i < Mathf.Min(2, step); i++) Wizard.Next();
-            if (complete) CompleteDrawing();
-            if (step == 3) Wizard.Next();
+            for (int i = 0; i < step; i++)
+                if (!Wizard.Next()) throw new InvalidOperationException("Cannot reach workshop step " + step + ": " + Wizard.Status);
         }
         public static void Planning(bool wave = false)
         {

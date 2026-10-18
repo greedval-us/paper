@@ -46,6 +46,15 @@ namespace PaperDefense.Presentation
         }
 
         internal int VertexCount => vertices.Count;
+        internal bool TryGetBounds(out Rect bounds)
+        {
+            bounds = default;
+            if (vertices.Count == 0) return false;
+            Vector2 low = vertices[0], high = low;
+            foreach (var point in vertices) { low = Vector2.Min(low, point); high = Vector2.Max(high, point); }
+            bounds = UnityEngine.Rect.MinMaxRect(low.x, low.y, high.x, high.y);
+            return true;
+        }
         internal void ScaleFrom(int firstVertex, Vector2 pivot, float scale)
         {
             for (int i = firstVertex; i < vertices.Count; i++)

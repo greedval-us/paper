@@ -10,17 +10,19 @@ namespace PaperDefense.Presentation
     /// <summary>Player-facing sequence. Draft changes stay local until an explicit successful save.</summary>
     public sealed class WorkshopWizard
     {
+        public const int StepCount=3;
+        const int ReviewStep=StepCount-1;
         readonly RunController run;
         readonly WorkshopUi ui;
         readonly Transform root;
         readonly Action<TowerBlueprint> changed;
         readonly Action prepare;
-        readonly UnityEngine.UI.Button[] steps=new UnityEngine.UI.Button[4];
-        readonly UnityEngine.UI.Text[] stepNumbers=new UnityEngine.UI.Text[4];
+        readonly UnityEngine.UI.Button[] steps=new UnityEngine.UI.Button[StepCount];
+        readonly UnityEngine.UI.Text[] stepNumbers=new UnityEngine.UI.Text[StepCount];
         readonly UnityEngine.UI.Button next,back;
         readonly UnityEngine.UI.Text notice,gold,summaryTitle,details;
         readonly UnityEngine.UI.Text[] summaryValues=new UnityEngine.UI.Text[3];
-        readonly WorkshopIconGraphic[] stepChecks=new WorkshopIconGraphic[4];
+        readonly WorkshopIconGraphic[] stepChecks=new WorkshopIconGraphic[StepCount];
         readonly UnityEngine.UI.ScrollRect detailScroll;
         readonly BlueprintSketch preview,smallPreview;
         readonly GameObject summaryRoot;
@@ -31,6 +33,7 @@ namespace PaperDefense.Presentation
         int reached;bool detailsOpen,saved,dirty;
         public int Step { get; private set; }
         public TowerBlueprint Draft { get; private set; }
+        public bool IsReadOnly=>Draft!=null&&Draft.Origin!=DrawingOrigin.LegacyStandard;
         public GuidedDrawingPanel Drawing { get; }
         public MortarFootprintPanel Mortar { get; }
         public FanVolleyPanel Volley { get; }
@@ -46,17 +49,17 @@ namespace PaperDefense.Presentation
             gold=ui.Label(parent,"Wizard gold","",new Rect(1050,26,230,40),20,color:WorkshopUi.Muted);
             ui.Button(parent,"Wizard album",new Rect(1300,24,260,48),Copy("album"),()=>ShowAlbum(true),WorkshopIcon.Book);
             ui.Panel(parent,"Wizard navigation",new Rect(24,110,250,782),WorkshopUi.Surface);
-            string[] labels={"foundation","weapon","drawing","review"};
-            WorkshopIcon[] icons={WorkshopIcon.Tower,WorkshopIcon.Weapon,WorkshopIcon.Pencil,WorkshopIcon.Target};
-            for(int i=0;i<4;i++)
+            string[] labels={"foundation","weapon","review"};
+            WorkshopIcon[] icons={WorkshopIcon.Tower,WorkshopIcon.Weapon,WorkshopIcon.Target};
+            for(int i=0;i<StepCount;i++)
             {
                 int slot=i;
                 stepNumbers[i]=ui.Label(parent,"Wizard progress "+i,(i+1).ToString(),new Rect(43,140+i*126,36,36),22,color:WorkshopUi.Muted);
                 stepChecks[i]=WorkshopUi.Graphic<WorkshopIconGraphic>(parent,"Wizard completed "+i,new Rect(43,145+i*126,24,24));stepChecks[i].Icon=WorkshopIcon.Check;stepChecks[i].color=WorkshopUi.Success;
                 steps[i]=ui.Button(parent,"Wizard step "+i,new Rect(38,181+i*126,222,62),Copy(labels[i]),()=>GoToStep(slot),icons[i]);
-                if(i<3)ui.Panel(parent,"Wizard connector "+i,new Rect(60,252+i*126,2,17),WorkshopUi.Line);
+                if(i<StepCount-1)ui.Panel(parent,"Wizard connector "+i,new Rect(60,252+i*126,2,17),WorkshopUi.Line);
             }
-            smallPreview=WorkshopUi.Graphic<BlueprintSketch>(parent,"Wizard assembled thumbnail",new Rect(70,680,155,165));smallPreview.ShowReference=true;
+            smallPreview=WorkshopUi.Graphic<BlueprintSketch>(parent,"Wizard assembled thumbnail",new Rect(70,680,155,165));
             ui.Label(parent,"Wizard thumbnail caption",Copy("your_tower"),new Rect(46,845,206,32),17,color:WorkshopUi.Muted);
             notice=ui.Label(parent,"Wizard notice","",new Rect(300,882,840,38),17,color:WorkshopUi.Warning);
             back=ui.Button(parent,"Wizard back",new Rect(24,930,210,48),Copy("back"),Back,WorkshopIcon.Back);
@@ -64,7 +67,7 @@ namespace PaperDefense.Presentation
             ui.Button(parent,"Start run",new Rect(264,930,270,48),Copy("preparation"),()=>{Suspend();prepare?.Invoke();},WorkshopIcon.Book);
             var side=ui.Panel(parent,"Wizard summary",new Rect(1170,110,400,782),WorkshopUi.Surface);summaryRoot=side.gameObject;
             summaryTitle=ui.Label(side,"Wizard summary title",Copy("your_tower"),new Rect(24,18,352,50),30,true);
-            preview=WorkshopUi.Graphic<BlueprintSketch>(side,"Wizard tower preview",new Rect(64,88,270,275));preview.ShowReference=true;
+            preview=WorkshopUi.Graphic<BlueprintSketch>(side,"Wizard tower preview",new Rect(64,88,270,275));
             string[] metrics={"damage","range","cost"};WorkshopIcon[] symbols={WorkshopIcon.Damage,WorkshopIcon.Range,WorkshopIcon.Cost};
             for(int i=0;i<3;i++)
             {
@@ -76,14 +79,8 @@ namespace PaperDefense.Presentation
             var detailList=new CatalogScrollList(side,"Wizard detail scroll",new Rect(26,589,346,167),1,1,167,0);detailScroll=detailList.Scroll;
             details=ui.Label(detailList.Content,"Wizard detailed values","",new Rect(0,0,328,167),18,color:WorkshopUi.Muted);
             assembly=new WizardAssemblyPanel(parent,ui,run,this);
-            Drawing=new GuidedDrawingPanel(parent,ui,new DrawingEditorContext{Preview=p=>run.PreviewBlueprint(p),Workshop=()=>run.Workshop,Purchase=run.UnlockDrawingAid,Probe=run.ProbeDrawing},p=>SetDraft(p,false));
-            Drawing.BackRequested+=Back;
             album=new WizardAlbumPanel(parent,ui,run,this);
             trial=new WizardTrialPanel(parent,ui,run);
-            Mortar=new MortarFootprintPanel(parent,ui.BodyFont,p=>SetDraft(p,false),run.CompareMortarFootprints,p=>run.PreviewBlueprint(p).Reason,resolver,run.CompareMortarForms);
-            Volley=new FanVolleyPanel(parent,ui.BodyFont,p=>SetDraft(p,false),run.ProbeFanVolley,resolver);
-            Armor=new ArmorReinforcementPanel(parent,ui.BodyFont,p=>SetDraft(p,false),run.ProbeArmor,run.ArmorDefense,run.MaximumStructureDefense,resolver);
-            foreach(string sheet in new[]{"Mortar footprint sheet","Footprint study sheet","Fan volley sheet","Reinforcement sheet"})WorkshopSpecialistStyle.Apply(parent.Find(sheet),ui);
             ui.EnsureTooltip(parent);
             NewDraft();
         }
@@ -92,7 +89,7 @@ namespace PaperDefense.Presentation
             CloseOverlays();
             string chassis=run.Content.AllParts.First(p=>p.Category==PartCategory.Chassis&&p.Enabled&&Owned(p)).Id;
             string weapon=run.Content.AllParts.First(p=>p.Category==PartCategory.Weapon&&p.Enabled&&p.IsCombatMount&&Owned(p)).Id;
-            Draft=new TowerBlueprint("drawing-"+Guid.NewGuid().ToString("N"),ui.Resolve(Copy("new_name")),chassis,weapon,origin:DrawingOrigin.Freeform,content:run.Content);
+            Draft=TowerBlueprint.NewStandardDraft("tower-"+Guid.NewGuid().ToString("N"),ui.Resolve(Copy("new_name")),chassis,weapon,content:run.Content);
             Step=reached=0;saved=false;dirty=false;notice.text="";changed?.Invoke(Draft);BuildStep();
         }
         internal bool Owned(WorkshopPartDefinition p)=>p.InitiallyUnlocked||run.Workshop.IsUnlocked(p.Id);
@@ -106,72 +103,80 @@ namespace PaperDefense.Presentation
         internal void Feedback(string message){notice.text=ui.Resolve(message);}
         internal void SetDraft(TowerBlueprint value,bool rebuild=true)
         {
+            if(IsReadOnly||value==null||value.Origin!=DrawingOrigin.LegacyStandard){Feedback(Copy("legacy_readonly"));return;}
             Draft=value.WithContent(run.Content);saved=false;dirty=true;changed?.Invoke(Draft);notice.text="";
             if(rebuild)BuildStep();else Refresh();
         }
         public bool SelectChassis(string id)
         {
+            if(IsReadOnly)return RejectHistoricalEdit();
             if(!run.Content.TryGetChassis(id,out var p)||!p.Enabled||!Owned(p))return false;
-            reached=Math.Min(reached,1);SetDraft(Draft.WithAssembly(id,Draft.WeaponMounts,Draft.ModuleSelections));return true;
+            reached=Math.Min(reached,1);SetDraft(Draft.WithStandardAssembly(id,Draft.WeaponMounts,Draft.ModuleSelections));return true;
         }
         public bool SelectWeapon(int mount,string id)
         {
-            if(mount<0||mount>=run.Content.GetChassis(Draft.ChassisId).MountCount)return false;
+            if(IsReadOnly)return RejectHistoricalEdit();
+            if(mount<0||mount>=TowerBlueprint.MaximumWeaponMounts)return false;
+            if(id!=null&&mount>=run.Content.GetChassis(Draft.ChassisId).MountCount)return false;
+            if(id==null&&Draft.GetWeaponMount(mount)==null)return false;
             if(id!=null&&(!run.Content.TryGetWeapon(id,out var p)||!p.Enabled||!Owned(p)))return false;
             if(mount==0&&id==null)return false;
-            reached=Math.Min(reached,2);SetDraft(Draft.WithWeaponMount(mount,id));return true;
+            var mounts=Draft.WeaponMounts.Where(m=>m.SlotIndex!=mount).ToList();
+            var previous=Draft.GetWeaponMount(mount);
+            if(id!=null)mounts.Add(new WeaponMountSelection(mount,id,id==previous?.WeaponId?previous.Footprint:null,id==previous?.WeaponId?previous.Volley:null));
+            reached=Math.Min(reached,ReviewStep);SetDraft(Draft.WithStandardAssembly(Draft.ChassisId,mounts,Draft.ModuleSelections));return true;
         }
         public bool ChangeModule(string id,bool remove=false)
         {
+            if(IsReadOnly)return RejectHistoricalEdit();
             if(!run.Content.TryGetModule(id,out var definition)||!definition.Enabled||!Owned(definition))return false;
             var modules=Draft.ModuleSelections.ToList();int index=modules.FindLastIndex(m=>m.DefinitionId==id);
             if(remove||index>=0&&!definition.Repeatable){if(index>=0)modules.RemoveAt(index);else return false;}
             else modules.Add(new ModuleSelection("module-"+Guid.NewGuid().ToString("N"),id));
-            reached=Math.Min(reached,2);SetDraft(Draft.WithAssembly(Draft.ChassisId,Draft.WeaponMounts,modules));return true;
+            reached=Math.Min(reached,ReviewStep);SetDraft(Draft.WithStandardAssembly(Draft.ChassisId,Draft.WeaponMounts,modules));return true;
         }
+        bool RejectHistoricalEdit(){Feedback(Copy("legacy_readonly"));return false;}
         public bool Next()
         {
-            if(Step==3)return Save();
+            if(IsReadOnly)return RejectHistoricalEdit();
+            if(Step==ReviewStep)return Save();
             if(Step==0)
             {if(!run.Content.TryGetChassis(Draft.ChassisId,out var part)||!Owned(part)){Feedback(Copy("locked_selected"));return false;}}
             if(Step==1&&!AssemblyValid(out string reason)){Feedback(reason);return false;}
-            if(Step==2)
-            {
-                if(!Drawing.TryFinish(out var candidate,out string error)){Feedback(error);return false;}
-                Draft=candidate;changed?.Invoke(Draft);
-                if(!Rights(out error)){Feedback(error);return false;}
-            }
             Step++;reached=Math.Max(reached,Step);notice.text="";BuildStep();return true;
         }
         void NextFromUi()
         {
-            if(Next()||Step!=3)return;
+            if(Next()||Step!=ReviewStep||IsReadOnly)return;
             if(run.Workshop.SaveState==ProfileSaveState.WriteFailed||run.Workshop.SaveState==ProfileSaveState.RecoveryRequired)
                 WorkshopConfirm.Show(root,ui,"Не удалось сохранить",notice.text+"\n\nЧерновик остаётся в мастерской. Повтори запись или вернись к работе.","Повторить",NextFromUi);
         }
         public bool GoToStep(int step)
         {
-            if(step<0||step>3||step>reached)return false;
+            if(step<0||step>=StepCount||step>reached)return false;
+            if(IsReadOnly)return step==ReviewStep;
             if(step>Step){while(Step<step)if(!Next())return false;return true;}
-            if(Step==2){Drawing.Hide();Draft=Drawing.Candidate;changed?.Invoke(Draft);}
             Step=step;notice.text="";BuildStep();return true;
         }
-        public void Back(){if(Step>0)GoToStep(Step-1);else ShowAlbum(true);}
+        public void Back(){if(IsReadOnly){RejectHistoricalEdit();return;}if(Step>0)GoToStep(Step-1);else ShowAlbum(true);}
         public bool Save()
         {
-            if(Step!=3)return false;
+            if(IsReadOnly)return RejectHistoricalEdit();
+            if(Step!=ReviewStep)return false;
             if(name!=null)Rename(name.text);
             if(!run.SaveBlueprint(Draft,out string reason)){Feedback(reason);return false;}
             saved=true;changed?.Invoke(Draft);Feedback(Copy("saved"));Refresh();return true;
         }
         public bool SaveVariant()
         {
-            var before=Draft;Draft=Draft.AsVariant("drawing-"+Guid.NewGuid().ToString("N"),ValidName(name!=null?name.text:Draft.Name));
+            if(IsReadOnly)return RejectHistoricalEdit();
+            if(Step!=ReviewStep)return false;
+            var before=Draft;Draft=Draft.AsVariant("tower-"+Guid.NewGuid().ToString("N"),ValidName(name!=null?name.text:Draft.Name));
             if(Save())return true;Draft=before;return false;
         }
         public void Load(TowerBlueprint value)
         {
-            CloseOverlays();Draft=value.WithContent(run.Content);Step=reached=3;saved=true;changed?.Invoke(Draft);notice.text="";BuildStep();
+            CloseOverlays();Draft=value.WithContent(run.Content);Step=reached=ReviewStep;saved=true;changed?.Invoke(Draft);notice.text="";BuildStep();
         }
         internal void RequestNewDraft()=>ReplaceDraft(NewDraft);
         internal void RequestLoad(TowerBlueprint value)=>ReplaceDraft(()=>Load(value));
@@ -183,19 +188,15 @@ namespace PaperDefense.Presentation
         }
         public void ShowAlbum(bool visible)
         {
-            ui.HideTooltip();if(visible&&Step==2){Drawing.Hide();Draft=Drawing.Candidate;changed?.Invoke(Draft);}
+            ui.HideTooltip();
             if(visible)album.Show();else{album.Hide();BuildStep();}
         }
         internal void OpenGeometry(int mount)
         {
-            CloseSpecialEditors();ui.HideTooltip();
-            var focus=UnityEngine.EventSystems.EventSystem.current?.currentSelectedGameObject;
-            var weapon=run.Content.GetWeapon(Draft.GetWeaponId(mount));
-            if(weapon.SupportsFootprint){Mortar.Open(Draft,mount);WorkshopModal.Open(root.Find("Mortar footprint sheet").gameObject,Mortar.Close,focus);}
-            else if(weapon.SupportsVolley){Volley.Open(Draft,mount);WorkshopModal.Open(root.Find("Fan volley sheet").gameObject,Volley.Close,focus);}
+            Feedback(Copy(IsReadOnly?"legacy_readonly":"standard_presets"));
         }
         internal void OpenArmor()
-        {CloseSpecialEditors();ui.HideTooltip();var focus=UnityEngine.EventSystems.EventSystem.current?.currentSelectedGameObject;Armor.Open(Draft);WorkshopModal.Open(root.Find("Reinforcement sheet").gameObject,Armor.Close,focus);}
+        {Feedback(Copy(IsReadOnly?"legacy_readonly":"standard_presets"));}
         internal void OpenTrial(){ui.HideTooltip();trial.Open(Draft);}
         public TrialComparison RunTrial()=>trial.Record(Draft);
         void CloseSpecialEditors(){Mortar?.Close();Volley?.Close();Armor?.Close();}
@@ -206,10 +207,9 @@ namespace PaperDefense.Presentation
         internal void ReflowWeapons(float width,float height)=>assembly.ReflowWeapons(width,height);
         void BuildStep()
         {
-            ui.HideTooltip();Drawing.Hide();assembly.Hide();summaryRoot.SetActive(Step==3);
+            ui.HideTooltip();assembly.Hide();summaryRoot.SetActive(Step==ReviewStep);
             if(reviewRoot!=null){UnityEngine.Object.DestroyImmediate(reviewRoot);reviewRoot=null;name=null;reviewDrawing=null;}
             if(Step<2)assembly.Show(Step,Draft);
-            else if(Step==2)Drawing.Open(Draft);
             else BuildReview();
             Refresh();
         }
@@ -222,43 +222,35 @@ namespace PaperDefense.Presentation
             ui.Label(page,"Review name heading",Copy("name"),new Rect(442,128,365,30),18);
             var field=ui.Panel(page,"Wizard name",new Rect(440,166,370,52),Color.white,true);
             name=field.gameObject.AddComponent<UnityEngine.UI.InputField>();name.textComponent=ui.Label(field,"Wizard name value","",new Rect(14,4,342,44),22);
-            name.characterLimit=ProfileLimits.MaximumBlueprintNameLength;name.SetTextWithoutNotify(ui.Resolve(Draft.Name));
+            name.characterLimit=ProfileLimits.MaximumBlueprintNameLength;name.SetTextWithoutNotify(ui.Resolve(Draft.Name));name.interactable=!IsReadOnly;
             name.onEndEdit.AddListener(value=>{Rename(value);Refresh();});
             ui.Button(page,"Wizard full trial",new Rect(440,244,370,58),Copy("full_trial"),OpenTrial,WorkshopIcon.Target);
-            ui.Label(page,"Review check",Copy("review_ready"),new Rect(440,320,368,150),20,color:WorkshopUi.Muted);
+            ui.Label(page,"Review check",Copy(IsReadOnly?"legacy_readonly":"review_ready"),new Rect(440,320,368,150),20,color:WorkshopUi.Muted);
             ui.Label(page,"Review adjustments",Copy("adjustments"),new Rect(28,492,784,34),22);
             BuildSpecialButtons(page,Draft,new Rect(28,538,784,125));
-            ui.Button(page,"Wizard save variant",new Rect(28,681,350,48),Copy("save_variant"),()=>SaveVariant(),WorkshopIcon.Copy);
+            ui.Button(page,"Wizard save variant",new Rect(28,681,350,48),Copy("save_variant"),()=>SaveVariant(),WorkshopIcon.Copy).interactable=!IsReadOnly;
             ui.Button(page,"Wizard open saved",new Rect(420,681,390,48),Copy("album"),()=>ShowAlbum(true),WorkshopIcon.Book);
         }
         string ValidName(string value)=>string.IsNullOrWhiteSpace(value)?ui.Resolve(Copy("new_name")):value.Trim();
         void Rename(string value)
         {
+            if(IsReadOnly){RejectHistoricalEdit();return;}
             string valid=ValidName(value);if(name!=null)name.SetTextWithoutNotify(valid);
             if(Draft.Name==valid)return;Draft=Draft.WithName(valid);saved=false;changed?.Invoke(Draft);
         }
         internal void BuildSpecialButtons(Transform parent,TowerBlueprint source,Rect bounds,Action beforeOpen=null)
         {
-            var actions=new List<(string label,Action action,WorkshopIcon icon)>();
-            foreach(var mount in source.WeaponMounts)
-            {
-                int slot=mount.SlotIndex;var weapon=run.Content.GetWeapon(mount.WeaponId);
-                if(weapon.SupportsFootprint)actions.Add((Copy("imprint",slot+1),()=>OpenGeometry(slot),WorkshopIcon.Target));
-                if(weapon.SupportsVolley)actions.Add((Copy("volley",slot+1),()=>OpenGeometry(slot),WorkshopIcon.Weapon));
-            }
-            if(source.HasArmor)actions.Add((Copy("armor"),OpenArmor,WorkshopIcon.Shield));
-            if(actions.Count==0){ui.Label(parent,"Wizard no geometry options",Copy("no_special"),bounds,18,color:WorkshopUi.Muted);return;}
-            var scroll=new CatalogScrollList(parent,"Wizard geometry options",bounds,actions.Count,2,52,8);
-            for(int i=0;i<actions.Count;i++){var action=actions[i];ui.Button(scroll.Content,"Wizard geometry "+i,new Rect(i%2*(bounds.width/2),i/2*60,bounds.width/2-12,52),action.label,()=>{beforeOpen?.Invoke();action.action();},action.icon);}
+            ui.Label(parent,"Wizard no geometry options",Copy("standard_presets"),bounds,18,color:WorkshopUi.Muted);
         }
         public void Refresh()
         {
             if(Draft==null)return;
             if(Step==1)assembly.RefreshWeapons(Draft);
-            gold.text=ui.Resolve(Copy("gold",run.Workshop.Gold));smallPreview.ShowReference=preview.ShowReference=Draft.Drawing.IsEmpty;smallPreview.SetBlueprint(Draft);preview.SetBlueprint(Draft);if(reviewDrawing!=null)reviewDrawing.SetBlueprint(Draft);
+            gold.text=ui.Resolve(Copy("gold",run.Workshop.Gold));smallPreview.ShowReference=preview.ShowReference=false;smallPreview.SetBlueprint(Draft);preview.SetBlueprint(Draft);if(reviewDrawing!=null)reviewDrawing.SetBlueprint(Draft);
             summaryTitle.text=ui.Resolve(Copy(Draft.Drawing.IsEmpty?"assembly_preview":"your_tower"));
-            for(int i=0;i<4;i++){ui.SetSelected(steps[i],i==Step);steps[i].interactable=i<=reached;stepNumbers[i].gameObject.SetActive(Step==2||i>=Step);stepChecks[i].gameObject.SetActive(i<Step);}
-            var nextLabel=next.GetComponentInChildren<UnityEngine.UI.Text>();nextLabel.text=ui.Resolve(Copy(Step==0?"to_weapon":Step==1?"to_drawing":Step==2?"to_review":"save"));
+            for(int i=0;i<StepCount;i++){ui.SetSelected(steps[i],i==Step);steps[i].interactable=i<=reached&&(!IsReadOnly||i==ReviewStep);stepNumbers[i].gameObject.SetActive(i>=Step);stepChecks[i].gameObject.SetActive(i<Step);}
+            next.interactable=back.interactable=!IsReadOnly;
+            var nextLabel=next.GetComponentInChildren<UnityEngine.UI.Text>();nextLabel.text=ui.Resolve(Copy(Step==0?"to_weapon":Step==1?"to_review":"save"));
             var stats=run.PreviewBlueprint(Draft);
             var first=stats.Weapons!=null&&stats.Weapons.Count>0?stats.Weapons[0]:(WeaponPreview?)null;
             summaryValues[0].text=(first?.Damage??0).ToString("0.#");summaryValues[1].text=stats.Range.ToString("0.#");summaryValues[2].text=stats.Cost.ToString();
@@ -266,8 +258,8 @@ namespace PaperDefense.Presentation
             var text=new System.Text.StringBuilder(ui.Resolve(Copy("detail_values",stats.Health,stats.Load,stats.Capacity,stats.BuildSeconds,stats.FireRate,stats.Defense*100)));
             if(stats.Weapons!=null)foreach(var weapon in stats.Weapons)text.Append("\n\n").Append(ui.Resolve(Copy("mount_detail",weapon.SlotIndex+1,weapon.Damage,weapon.Range,weapon.Interval)));
             details.text=text.ToString();float height=Mathf.Max(167,details.preferredHeight+8);details.rectTransform.sizeDelta=new Vector2(328,height);detailScroll.content.sizeDelta=new Vector2(0,height);
-            if(Step==3&&!stats.Valid)Feedback(stats.Reason);
-            if(Step==3&&saved)nextLabel.text=ui.Resolve(Copy("saved_button"));
+            if(Step==ReviewStep&&!stats.Valid)Feedback(stats.Reason);
+            if(Step==ReviewStep&&saved)nextLabel.text=ui.Resolve(Copy("saved_button"));
         }
     }
 }

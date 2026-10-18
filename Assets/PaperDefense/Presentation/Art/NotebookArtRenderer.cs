@@ -74,10 +74,10 @@ namespace PaperDefense.Presentation
             for (int i = 0; i < geometry.Vertices.Count; i += 3) target.AddTriangle(offset + i, offset + i + 1, offset + i + 2);
             return true;
         }
-        static bool IsNativeUtility(NotebookArtShape shape)
+        internal static bool IsNativeUtility(NotebookArtShape shape)
             => shape.Marks != null && shape.Marks.Count > 0
                 && !ReferenceEquals(NotebookVisualThemeAsset.Default?.FindShape(shape.Id), shape);
-        static Color RasterTint(NotebookVisualThemeAsset theme)
+        internal static Color RasterTint(NotebookVisualThemeAsset theme)
         {
             var original = NotebookVisualThemeAsset.Default;
             if (theme == null || ReferenceEquals(theme, original) || original == null) return Color.white;

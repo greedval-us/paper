@@ -2,7 +2,7 @@
 
 Техническая справка по действующим системам игры. [Эскизы и целевой дизайн](Game-Design.md) задают визуальный ориентир; [статус переноса в Unity](Implementation-Roadmap.md) отделяет реализованные экраны от оставшейся работы.
 
-Общие правила открытой карты используются основным входом [PaperDefenseGame.unity](../Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity) с [PlayerRules.asset](../Assets/PaperDefense/Configuration/Game/PlayerRules.asset). Приведённые ниже исходные числа относятся к отдельному [Target.asset](../Assets/PaperDefense/Configuration/Content/Target.asset), если явно не указан PlayerRules. [Игровой маршрут](Player-Game.md) и [полный реестр](Current-Mechanics.md).
+Общие правила открытой карты используются основным входом [PaperDefenseGame.unity](../Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity) с [PlayerRules.asset](../Assets/PaperDefense/Configuration/Game/PlayerRules.asset). Приведённые ниже исходные числа относятся к отдельному [Target.asset](../Assets/PaperDefense/Configuration/Content/Target.asset), если явно не указан PlayerRules. [Игровой маршрут](Game-Design.md) и [полный реестр](Current-Mechanics.md).
 
 ## Зачем строить разные элементы
 
@@ -85,7 +85,7 @@
 - `Presentation`: карта, окружение, анимации, HP и инструменты меню. Предпросмотр спрашивает правила у симуляции.
 - `ArtSource/Notebook/NewStyle`: PNG построек, врагов, окружения, эффектов и значков; `sprites.source.json` связывает области рисунков с игровыми ID, `animation.json` хранит кадры и отдачу без старой векторной графики.
 
-После изменения PNG или JSON вызовите `PaperDefense.Editor.NotebookSpriteImportTools.Rebuild()` в редакторе Unity. Импорт собирает общий атлас и каталог спрайтов; `NotebookVisualTheme` хранит только привязки, палитру и анимацию, с пустыми `Marks`. Новый боевой рисунок подключён к существующим расчётам и не меняет геометрию авторских башен. [Работа с оформлением](Notebook-Art.md). Композиции расстановки, активной волны и выбранной башни (15–17) ещё предстоит перенести по эскизам; [текущий отчёт](validation/2026-10-17-art-resolution/report.md) описывает замену графики отдельно от HUD.
+После изменения PNG или JSON вызовите `PaperDefense.Editor.NotebookSpriteImportTools.Rebuild()` в редакторе Unity. Импорт собирает общий атлас и каталог спрайтов; `NotebookVisualTheme` хранит только привязки, палитру и анимацию, с пустыми `Marks`. Новый боевой рисунок подключён к существующим расчётам и не меняет геометрию авторских башен. [Работа с оформлением](Notebook-Art.md). Композиции расстановки, активной волны и выбранной башни (15–17) ещё предстоит перенести по эскизам; [текущий отчёт](validation/2026-10-17-art-resolution/) описывает замену графики отдельно от HUD.
 
 Изолированные автоматические сценарии могут задавать собственную карту; это не отдельный вход игрока. Сохранена только основная игровая сцена.
 

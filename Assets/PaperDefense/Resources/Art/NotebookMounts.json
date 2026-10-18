@@ -1,0 +1,376 @@
+{
+  "schemaVersion": 2,
+  "revision": "standard-atlas-attachments-2026-10-17-v2-split-gun",
+  "foundations": [
+    {
+      "id": "chassis.standard",
+      "sockets": [
+        {
+          "slot": 0,
+          "order": 0,
+          "position": {
+            "x": 0.34,
+            "y": 0.78
+          },
+          "diameter": 0.29
+        },
+        {
+          "slot": 1,
+          "order": 1,
+          "position": {
+            "x": 0.66,
+            "y": 0.78
+          },
+          "diameter": 0.29
+        }
+      ]
+    },
+    {
+      "id": "chassis.heavy",
+      "sockets": [
+        {
+          "slot": 0,
+          "order": 0,
+          "position": {
+            "x": 0.34,
+            "y": 0.79
+          },
+          "diameter": 0.29
+        },
+        {
+          "slot": 1,
+          "order": 1,
+          "position": {
+            "x": 0.66,
+            "y": 0.79
+          },
+          "diameter": 0.29
+        }
+      ]
+    },
+    {
+      "id": "chassis.precision",
+      "sockets": [
+        {
+          "slot": 0,
+          "order": 0,
+          "position": {
+            "x": 0.5,
+            "y": 0.85
+          },
+          "diameter": 0.44
+        }
+      ]
+    },
+    {
+      "id": "chassis.battery",
+      "sockets": [
+        {
+          "slot": 0,
+          "order": 1,
+          "position": {
+            "x": 0.3,
+            "y": 0.755
+          },
+          "diameter": 0.23
+        },
+        {
+          "slot": 1,
+          "order": 0,
+          "position": {
+            "x": 0.5,
+            "y": 0.835
+          },
+          "diameter": 0.23
+        },
+        {
+          "slot": 2,
+          "order": 2,
+          "position": {
+            "x": 0.7,
+            "y": 0.755
+          },
+          "diameter": 0.23
+        }
+      ]
+    }
+  ],
+  "weapons": [
+    {
+      "id": "weapon.gun",
+      "canvas": {
+        "x": 211,
+        "y": 296
+      },
+      "attach": {
+        "x": 111.83,
+        "y": 23.68
+      },
+      "diameter": 164.58,
+      "muzzle": {
+        "x": 163,
+        "y": 267
+      },
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 211,
+        "height": 296
+      }
+    },
+    {
+      "id": "weapon.piercer",
+      "canvas": {
+        "x": 243,
+        "y": 314
+      },
+      "attach": {
+        "x": 94.77,
+        "y": 25.12
+      },
+      "diameter": 179.82,
+      "muzzle": {
+        "x": 229,
+        "y": 299
+      },
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 243,
+        "height": 314
+      }
+    },
+    {
+      "id": "weapon.mortar",
+      "canvas": {
+        "x": 240,
+        "y": 270
+      },
+      "attach": {
+        "x": 105.6,
+        "y": 21.6
+      },
+      "diameter": 201.6,
+      "muzzle": {
+        "x": 191,
+        "y": 219
+      },
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 240,
+        "height": 270
+      }
+    },
+    {
+      "id": "weapon.fan",
+      "canvas": {
+        "x": 256,
+        "y": 288
+      },
+      "attach": {
+        "x": 92.16,
+        "y": 23.04
+      },
+      "diameter": 174.08,
+      "muzzle": {
+        "x": 211,
+        "y": 213
+      },
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 256,
+        "height": 288
+      }
+    },
+    {
+      "id": "weapon.ricochet",
+      "canvas": {
+        "x": 262,
+        "y": 234
+      },
+      "attach": {
+        "x": 81.22,
+        "y": 18.72
+      },
+      "diameter": 154.58,
+      "muzzle": {
+        "x": 150,
+        "y": 183
+      },
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 262,
+        "height": 234
+      }
+    },
+    {
+      "id": "weapon.stapler",
+      "canvas": {
+        "x": 287,
+        "y": 248
+      },
+      "attach": {
+        "x": 117.67,
+        "y": 19.84
+      },
+      "diameter": 192.29,
+      "muzzle": {
+        "x": 261,
+        "y": 188
+      },
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 287,
+        "height": 248
+      }
+    },
+    {
+      "id": "weapon.blotter",
+      "canvas": {
+        "x": 243,
+        "y": 267
+      },
+      "attach": {
+        "x": 87.48,
+        "y": 21.36
+      },
+      "diameter": 167.67,
+      "muzzle": {
+        "x": 130,
+        "y": 158
+      },
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 243,
+        "height": 267
+      }
+    }
+  ],
+  "pilots": [
+    {
+      "chassisId": "chassis.standard",
+      "weaponId": "weapon.gun",
+      "revision": "gun-split-2026-10-17-v1",
+      "muzzleFragment": "barrels",
+      "pivotOffset": {
+        "x": 0,
+        "y": 46
+      },
+      "muzzlePoint": {
+        "x": 444,
+        "y": 460
+      },
+      "fragments": [
+        {
+          "id": "support",
+          "spriteId": "part.gun.support",
+          "canvas": {
+            "x": 492,
+            "y": 278
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 492,
+            "height": 278
+          },
+          "attach": {
+            "x": 246,
+            "y": 90
+          },
+          "offset": {
+            "x": 0,
+            "y": 0
+          },
+          "scale": 0.3400413223140496,
+          "radians": 0,
+          "group": 0,
+          "layer": 0
+        },
+        {
+          "id": "cradle-back",
+          "spriteId": "part.gun.cradle-back",
+          "canvas": {
+            "x": 427,
+            "y": 542
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 427,
+            "height": 542
+          },
+          "attach": {
+            "x": 211,
+            "y": 34
+          },
+          "offset": {
+            "x": 0,
+            "y": 46
+          },
+          "scale": 0.3,
+          "radians": 0,
+          "group": 1,
+          "layer": 2
+        },
+        {
+          "id": "barrels",
+          "spriteId": "part.gun.barrels",
+          "canvas": {
+            "x": 522,
+            "y": 554
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 522,
+            "height": 554
+          },
+          "attach": {
+            "x": 74,
+            "y": 60
+          },
+          "offset": {
+            "x": 25.17,
+            "y": 116.32
+          },
+          "scale": 0.24,
+          "radians": 0.5,
+          "group": 2,
+          "layer": 1
+        },
+        {
+          "id": "collar-front",
+          "spriteId": "part.gun.collar-front",
+          "canvas": {
+            "x": 413,
+            "y": 242
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 413,
+            "height": 242
+          },
+          "attach": {
+            "x": 206,
+            "y": 120
+          },
+          "offset": {
+            "x": 32.4,
+            "y": 168.1
+          },
+          "scale": 0.15,
+          "radians": -0.6,
+          "group": 1,
+          "layer": 3
+        }
+      ]
+    }
+  ]
+}

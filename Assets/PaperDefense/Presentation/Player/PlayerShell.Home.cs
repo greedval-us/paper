@@ -26,7 +26,7 @@ namespace PaperDefense.Presentation
             {
                 NotebookSprite(brand, "Home title illustration", wordmark,
                     new Rect(-4 * brandScale, 0, 512 * brandScale, 240 * brandScale));
-                HomeLettering(brand, "Нарисуй свою оборону", new Rect(40 * brandScale, 250 * brandScale, 450 * brandScale, 52 * brandScale), 39 * brandScale);
+                HomeLettering(brand, "Собери свою оборону", new Rect(40 * brandScale, 250 * brandScale, 450 * brandScale, 52 * brandScale), 39 * brandScale);
             }
             else if (brandScale < scale * .60f)
             {
@@ -42,7 +42,7 @@ namespace PaperDefense.Presentation
                 second.fontStyle = FontStyle.Bold;
                 var flag = PlayerUi.Graphic<PlayerIconGraphic>(brand, "Notebook flag", new Rect(447 * brandScale, 76 * brandScale, 65 * brandScale, 107 * brandScale));
                 flag.Icon = PlayerIcon.Flag; flag.Sketch = true; flag.color = PlayerUi.Ink;
-                HomeLettering(brand, "Нарисуй свою оборону", new Rect(40 * brandScale, 250 * brandScale, 450 * brandScale, 52 * brandScale), 39 * brandScale);
+                HomeLettering(brand, "Собери свою оборону", new Rect(40 * brandScale, 250 * brandScale, 450 * brandScale, 52 * brandScale), 39 * brandScale);
             }
 
             var actions = ui.Panel(page, "Home actions", new Rect(left, top + brandHeight + gap, 402 * scale, 454 * scale), Color.clear);

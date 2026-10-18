@@ -40,7 +40,7 @@ namespace PaperDefense.Presentation
             ui.Tooltip = value =>
             {
                 if (game.Page == PlayerPage.Home || game.Page == PlayerPage.Map || game.Page == PlayerPage.Preparation) return;
-                if (game.Page == PlayerPage.Battle) battle.ShowHint(value);
+                if (game.Page == PlayerPage.Battle) battle?.ShowHint(value);
                 else if (tooltip != null) tooltip.text = value;
             };
         }
@@ -50,6 +50,8 @@ namespace PaperDefense.Presentation
             screenWidth = width; screenHeight = height;
             Layout = new PlayerLayout(width, height);
             scaler.referenceResolution = new Vector2(W, H); root.sizeDelta = new Vector2(W, H);
+            // Retired tooltip callbacks must not refresh the HUD while its hierarchy is deactivating.
+            battle = null;
             if (battleRoot != null) { battleRoot.gameObject.SetActive(false); Destroy(battleRoot.gameObject); }
             battleRoot = ui.Panel(root, "Battle controls", new Rect(0, 0, W, H), Color.clear);
             battleInteraction = battleRoot.gameObject.AddComponent<CanvasGroup>();

@@ -1,0 +1,24 @@
+// Native Unity diagnostic sheet, executed after the screen-capture queue is empty.
+var game=PaperDefense.Editor.FullGameUiCapture.Game;
+var content=game.Run.Content;
+var paper=new UnityEngine.GameObject("Common mount diagnostic sheet",typeof(UnityEngine.RectTransform),typeof(UnityEngine.Canvas),typeof(UnityEngine.UI.CanvasScaler));
+paper.transform.SetParent(game.transform,false);paper.layer=5;
+var canvas=paper.GetComponent<UnityEngine.Canvas>();canvas.renderMode=UnityEngine.RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=32000;
+var scaler=paper.GetComponent<UnityEngine.UI.CanvasScaler>();scaler.uiScaleMode=UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;scaler.referenceResolution=new UnityEngine.Vector2(1600,1200);scaler.matchWidthOrHeight=.5f;
+System.Action<UnityEngine.RectTransform,float,float,float,float> place=(rect,x,y,w,h)=>{rect.anchorMin=rect.anchorMax=new UnityEngine.Vector2(.5f,.5f);rect.pivot=new UnityEngine.Vector2(.5f,.5f);rect.anchoredPosition=new UnityEngine.Vector2(x,y);rect.sizeDelta=new UnityEngine.Vector2(w,h);};
+var background=new UnityEngine.GameObject("Paper",typeof(UnityEngine.RectTransform),typeof(UnityEngine.UI.Image));background.layer=5;background.transform.SetParent(paper.transform,false);var back=background.GetComponent<UnityEngine.RectTransform>();back.anchorMin=UnityEngine.Vector2.zero;back.anchorMax=UnityEngine.Vector2.one;back.offsetMin=back.offsetMax=UnityEngine.Vector2.zero;background.GetComponent<UnityEngine.UI.Image>().color=new UnityEngine.Color(.969f,.957f,.915f,1);
+var font=UnityEngine.Resources.GetBuiltinResource<UnityEngine.Font>("LegacyRuntime.ttf");
+var names=new[]{"Обычная · два крепления","Тяжёлая · два крепления","Тренога · одно крепление","Батарея · три крепления","Пулемёт","Пробивающая пушка","Мортира","Веерный ствол","Рикошет","Степлер","Промокашка","Батарея · разные направления"};
+var ids=new[]{"weapon.gun","weapon.piercer","weapon.mortar","weapon.fan","weapon.ricochet","weapon.stapler","weapon.blotter"};
+for(int i=0;i<12;i++){
+ float x=(i%4-1.5f)*400,y=(1-i/4)*400;
+ var label=new UnityEngine.GameObject("Caption "+i,typeof(UnityEngine.RectTransform),typeof(UnityEngine.UI.Text));label.layer=5;label.transform.SetParent(paper.transform,false);place(label.GetComponent<UnityEngine.RectTransform>(),x,y+155,390,45);var text=label.GetComponent<UnityEngine.UI.Text>();text.font=font;text.fontSize=24;text.alignment=UnityEngine.TextAnchor.MiddleCenter;text.color=new UnityEngine.Color(.075f,.14f,.31f);text.text=names[i];
+ var art=new UnityEngine.GameObject("Resolved assembly "+i,typeof(UnityEngine.RectTransform),typeof(PaperDefense.Presentation.BlueprintSketch));art.layer=5;art.transform.SetParent(paper.transform,false);place(art.GetComponent<UnityEngine.RectTransform>(),x,y-25,360,300);var sketch=art.GetComponent<PaperDefense.Presentation.BlueprintSketch>();sketch.ShowReference=false;sketch.ShowReinforcement=false;
+ PaperDefense.Core.TowerBlueprint blueprint;
+ if(i==3||i==11)blueprint=new PaperDefense.Core.TowerBlueprint("sheet-"+i,"Battery","chassis.battery",new[]{new PaperDefense.Core.WeaponMountSelection(0,"weapon.gun"),new PaperDefense.Core.WeaponMountSelection(1,i==11?"weapon.mortar":"weapon.gun"),new PaperDefense.Core.WeaponMountSelection(2,i==11?"weapon.fan":"weapon.gun")},content:content);
+ else blueprint=PaperDefense.Core.TowerBlueprint.NewStandardDraft("sheet-"+i,"Standard",i==1?"chassis.heavy":i==2?"chassis.precision":"chassis.standard",i<4?"weapon.gun":ids[i-4],i<2?"weapon.gun":null,content:content);
+ sketch.SetBlueprint(blueprint);
+ if(i==11)sketch.SetPreviewPose(new PaperDefense.Presentation.NotebookAnimationState(),0,slot=>slot==0?new PaperDefense.Core.Point2(-10,6):slot==1?new PaperDefense.Core.Point2(0,10):new PaperDefense.Core.Point2(10,6));
+}
+PaperDefense.Editor.FullGameUiCapture.Enqueue("08-common-mount-sheet",1600,1200,()=>{});
+return new {source="native Unity atlas composition",cells=12};

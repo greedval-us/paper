@@ -127,6 +127,17 @@ namespace PaperDefense.Core
         public TowerBlueprint AsFreeform()=>IsFreeform?this:WithFreeformDrawing(Drawing);
         public TowerBlueprint AsVariant(string id,string name)=>Copy(id,name,Drawing.DeepCopy(),Origin,Content,EvaluationStamp);
         public TowerBlueprint AsNew(string id,string name)=>Copy(id,name,HasPlayerDrawing?Drawing.DeepCopy():DrawingSnapshot.Empty,IsFreeform?DrawingOrigin.Freeform:DrawingOrigin.PlayerDrawing,Content,HasPlayerDrawing?EvaluationStamp:null);
+        /// <summary>Creates a ready-to-assemble standard page without authored geometry.</summary>
+        public static TowerBlueprint NewStandardDraft(string id,string name,string chassis,string firstWeapon,string secondWeapon=null,IEnumerable<ModuleSelection> modules=null,ContentCatalogSnapshot content=null)
+            =>new TowerBlueprint(id,name,chassis,firstWeapon,secondWeapon,modules,DrawingSnapshot.Empty,DrawingOrigin.LegacyStandard,content:content);
+        /// <summary>Changes a standard recipe without converting it to the historical drawing editor format.</summary>
+        public TowerBlueprint WithStandardAssembly(string chassis,IEnumerable<WeaponMountSelection> weaponMounts,IEnumerable<ModuleSelection> modules)
+        {
+            if(Origin!=DrawingOrigin.LegacyStandard)throw new InvalidOperationException("Historical drawings cannot be changed through the standard assembly path.");
+            var candidate=WithAssembly(chassis,weaponMounts,modules);
+            return new TowerBlueprint(Id,Name,candidate.ChassisId,candidate.WeaponMounts,candidate.ModuleSelections,
+                DrawingSnapshot.Empty,DrawingOrigin.LegacyStandard,Content,reinforcement:candidate.Reinforcement);
+        }
         public static TowerBlueprint NewDraft(string id,string name,ChassisKind chassis,StructureKind firstWeapon,StructureKind? secondWeapon=null,TowerModules modules=TowerModules.None)=>new TowerBlueprint(id,name,chassis,firstWeapon,secondWeapon,modules,DrawingSnapshot.Empty,DrawingOrigin.PlayerDrawing);
         public static TowerBlueprint NewDraft(string id,string name,string chassis,string firstWeapon,string secondWeapon=null,IEnumerable<ModuleSelection> modules=null,ContentCatalogSnapshot content=null)=>new TowerBlueprint(id,name,chassis,firstWeapon,secondWeapon,modules,DrawingSnapshot.Empty,DrawingOrigin.PlayerDrawing,content:content);
         public TowerBlueprint WithAssembly(ChassisKind chassis,StructureKind first,StructureKind? second,TowerModules modules)=>WithAssembly(LegacyContentIds.Chassis(chassis),LegacyContentIds.Weapon(first),second.HasValue?LegacyContentIds.Weapon(second.Value):null,LegacyContentIds.Modules(modules));

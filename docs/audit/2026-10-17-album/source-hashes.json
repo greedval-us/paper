@@ -1,0 +1,694 @@
+[
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\ArmorDistribution.cs",
+    "Hash": "E7280884088842FAFA6DC69C0B6DCC2BF2A746AAA1568656AAA4DA5E02EE051B"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\ArmorDistributionData.cs",
+    "Hash": "9CA95AD2433C857F8CC356457A01D5257B374D737B90F1C52D5BA55108A5A917"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\ArmorProbe.cs",
+    "Hash": "C9A64FE334A4526C32278A1A894EEDA041F4E3111BA450418B5B3AA0D2CB2985"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\AssemblyInfo.cs",
+    "Hash": "15130CAF1AD71F8F356A96E3935B80DA93BD48E1FA6BEB048BE4B17FB3D394D3"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\BalanceValidation.cs",
+    "Hash": "0559AFB862F6E4EB5B8BD20851FCBD7F8B5364A5BC4AF4EEFF082D54E6F211B4"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\BattlefieldDefinition.cs",
+    "Hash": "C92BB9A323B37AFA9E259BB3AED0E9D0A5158DDF80D80F86EFB2CB37C0F71810"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\BlotContext.cs",
+    "Hash": "E2AD8C28746716D43E6F4C43FF7131B5C813608FACDF083168DB66A401E2BBCF"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\BlueprintData.cs",
+    "Hash": "43E93BE855A85E2D63A7328E0C10CD90E0CB6EF6EB0120337633581D490C03A3"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\ColorEffectPayload.cs",
+    "Hash": "374642512B93A64EADD637EC9B82DF2F638471D2CC72F8AF53CB9C65A8277C18"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\ContentCatalog.cs",
+    "Hash": "1BFC4AF17D66F2FB2CEFE94681A00163A3F441439FED3ACED771618BF3E02ECC"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\ContentCombatProbe.cs",
+    "Hash": "CF7E089FC895C1054375AF0FDBF73F05201E3FE303E41AE8DB746636C2E83DC5"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\ContentDefinitions.cs",
+    "Hash": "CEA21AF69A3F83A58C3213ACE98736892D3E3FFF2CA20EA3A1BBA95109461B38"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\ContentInputCopy.cs",
+    "Hash": "ED37C46417FD680CA999293E393CA6AFB35802B22B6FA8F3FAEC55D974B01F5D"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\CorpseBlotSystem.cs",
+    "Hash": "BF417E08085B039FBD74F379DF814D980DD91DF247F6570DA909F8A0480E8FD7"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\CrowdMovementRules.cs",
+    "Hash": "158351BB8B80D02A005F1DD8ABE50CB92B86A0757C3C2C39194734B1B96B22E7"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\DamageRules.cs",
+    "Hash": "2FA534EDF09CE1DD6A26C2B6B9598774A2575F47BA22C6FC38055B59F1DB4BFB"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\DrawingAssessment.cs",
+    "Hash": "E66AEDAFBD24D945DD847B646B9EDDB16B260FFABF55233B34F723A381F755DB"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\DrawingContentDefinitions.cs",
+    "Hash": "FF6D2F5204D044872C84130849BC04DCAC5E5D88300FEBD068E6645564F60B7E"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\DrawingEditSession.cs",
+    "Hash": "DDBF58FCF6CB22806520B77689AB275063507A463F8EF20AEE359D3900D55A07"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\DrawingPartPolicy.cs",
+    "Hash": "ED91D542B3D8B5AF7F295DEFBA1B735F73335CD4356E1A8C7C3F05C9751550F5"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\DrawingProbe.cs",
+    "Hash": "97F2125B7C928DCD5538E37B5D80B63F3BF871016A3A3BA2B58478A47B6812E7"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\Drawings.cs",
+    "Hash": "32BED4964DDC6D4560AE5D0B6D503650D6701F357383924D8A762D627545E8AA"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\DrawingTemplates.cs",
+    "Hash": "A9E1EC1D86E359BF16D79027B3265706D8E9548DF3DD7997B1F3331C29629B4A"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\DrawingUnlockDefinitions.cs",
+    "Hash": "B69EF700F0587A48BB026E874786279E7A862A7D88B350899FDFE8550AE20247"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\EffectsRules.cs",
+    "Hash": "1C2C890253EA1EBBCC6D4CBE56A9ED5FE1BE50B9283F2F95A40138D781E48E4E"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\EnemyCrowdGrid.cs",
+    "Hash": "FC56C1C30FF18E5E5AB9418FF60A83FDE026A0CF3869C7167541C579FFE9414B"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\EnemyCrowdMotion.cs",
+    "Hash": "0CC2EBFD2C49E8FEB98FA3B1C269DCD8A108AB51C51A080AA57E3E380F5FA679"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\EnemyEffects.cs",
+    "Hash": "C117F6AE6997B0BC8304A5C0D51BA509B05C071190E20C83D0A150E736F35193"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\EnemyMechanicsTypes.cs",
+    "Hash": "3E6CF2AA12EFAF17D226CE92057D9D0D3086BD4C27238CD1500D8C39A0DCC2FB"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\EnemyRewardBudget.cs",
+    "Hash": "49D88EA133DE3377A4CA14B4FEBE114D07CE9DCE78F86EA96B9857CFEB104430"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\EnemySpatialIndex.cs",
+    "Hash": "7AA36C444164BB16BBB2011775214A64EEF2029264638A5C0278279DD08EA70C"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\FanVolley.cs",
+    "Hash": "1CC84870CDBA8B39A17646B1D14A8F787E43681402BB11DD05F0B65947E01F48"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\FanVolleyProbe.cs",
+    "Hash": "D12DF509B9B456F61B3412EE3C3416D659F6E441F2F61E410FB854AD170A7E22"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\FootprintContour.cs",
+    "Hash": "113ED014215D617BF4298F8450A2C5CB1BD14128C767698AF5A2412648315FA9"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\FootprintGeometry.cs",
+    "Hash": "CF57C5CC5B10AD51F0A929561F96DB4F09AF75ADA4FEA9489F0F4A68CACA486F"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\FootprintStudy.cs",
+    "Hash": "9B984A8F34254A12963658923D8A1D31B81104F2E09FE77582CA45FE1550248E"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\FreeformGeometry.cs",
+    "Hash": "0432241B278A8BCC45BE6E595BD936252A651228E70F3F4B48A8E528AE563411"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\FreeformRules.cs",
+    "Hash": "29D9CCF088951CB85CF1EA4A6A4C060A23C28257BC2607FEB04A061203C54BDC"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\FreeformTowerDesign.cs",
+    "Hash": "0121CF714FFBC8513DDCDBD33A4F9F3069F7B7E4BAB3C7D8FC849B16F8FF2BCC"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\GameBalance.RuntimeTuning.cs",
+    "Hash": "36FB62E7B9785E4F4187D57052ABD1EBCE27ADB8AF8C6DFDA3913D99E549FDF4"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\GameBalancePresets.cs",
+    "Hash": "8AE0008D122179B36B164649DB23FF713F05F9BE8BD71ED77626D16B0B58786F"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\GameSession.Construction.cs",
+    "Hash": "029F85AF8C54B5AA14ECC774794B2D6B9D0E608D48DC87346D5119280A085459"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\GameSession.Crowd.cs",
+    "Hash": "3C1253B0E5D7C6FD98CC1DDFEE9DADAEE49D6BEF8661F1F4D12318EED6EF927D"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\GameSession.cs",
+    "Hash": "D241267F752E6FA499598AE2CA273EC13793103B74B9D35258051E7EDD6A1C17"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\GameSession.Enemies.cs",
+    "Hash": "4BC0BA9FCEA62C5C543E906D53CAB1601207A8EC88616D600C1FBE9D693C4BC2"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\GameSession.Objectives.cs",
+    "Hash": "89B30E0822666BF060CDBFE518E1E6C979702B9CDC04F20F22B20B84332944FD"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\GameSession.Progression.cs",
+    "Hash": "B418A1826BE223C0DB13FDBF0FD6074B84D73222DD868AF56E5743E25579A55D"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\GameSession.Support.cs",
+    "Hash": "AC4A0D2A73B51131AD67AEC38BA8385AD49D3F5A4BED2B49A8560FC38670D2C8"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\GameSessionPreparation.cs",
+    "Hash": "99E0B137B54359459459B8FA2A1EF39D708CEDEF72D3AA3657EF10AB2AF1A98F"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\GameTypes.cs",
+    "Hash": "6D119567311DC5203E897B69E0BD61480A9ED184D6772B1EEC630ABD72728AFB"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\LegacyContentCatalog.cs",
+    "Hash": "D9A6E1ED094C6950B264CADC9CDF08EBE8349471AFFA011AA90FBC3BEAAA26A1"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\MechanicsConfiguration.cs",
+    "Hash": "80B9A497EE99B6FFB7935D66F98F2E295A8EB153D8CE9DA9F76757F242C1820B"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\MortarFootprint.cs",
+    "Hash": "FE140C7D7EAD5C82B62CCF5E0B032880DE5BDD9ECB57E13A104D725A12E7EF47"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\MortarFootprintProbe.cs",
+    "Hash": "875157593FC424B7899F58F22AA74518D844952B03AD46E48542D197671D92FF"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\MortarProjectile.cs",
+    "Hash": "F40A74BC3F94B37C93CDF412E6CCC37154D305827D6F5E4AD64CC8658D470293"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\NotebookTowerDefensePreset.cs",
+    "Hash": "CD92C1C20C2AC598C85D4465E3BC83340C6036F48F7E26B1BB28B812AE676601"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\PartCatalog.cs",
+    "Hash": "E97F057142E667B52DECF16B9896BEF2BF1D0AC68BC2D0267ED071ABC1CD014A"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\ProfileLimits.cs",
+    "Hash": "D5D54B3A40C68CDE0C77389771EC082DFA49D0DC0AAEA25F91A1D0CBF83AEEC8"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\ProgressionRules.cs",
+    "Hash": "DE7C74DAD422B198B2FDC85EA625DD5C9AF3DAF264CE0BC15CD595E1DDE4D84D"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\ReadModel.cs",
+    "Hash": "D1BA08FF9D40E04C861BB12AE461E8605333C7AA2EDDFD4D1384740472F1B22A"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\ResolvedTowerAssembly.cs",
+    "Hash": "602874DC4D85DEAA9CE6751D2BAAE5AE2CE858CABE45DEE50223F7EAEC8D2018"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\RunStatistics.cs",
+    "Hash": "0B581525FD654163A64AA0E8F6DE3AE98663A79A2314063BED940CFF3963CDE3"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\SimulationEvents.cs",
+    "Hash": "62C54A8BF05D8461B4607242CBED847A38EBDDF76753BD284C69CD8E60A18C76"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\TargetPresetSettings.cs",
+    "Hash": "0AB0EC895225DC2ACD914EEB7647669DB830788739C3C00D781759E15B89A357"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\TimedEffectState.cs",
+    "Hash": "DE3D2AC3BC17639DB0672B3D02040CD70A6467ECF49CF84BB6D2CAD813EE960E"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\TowerBlueprint.cs",
+    "Hash": "81548B6E730DB01138F03F3DA00AD8D2381D4BA985D39F3543FA8FE7B9A49417"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\TowerCatalog.cs",
+    "Hash": "F4CC9BFB7E63BB56B2B0A172339E92AB10EFE54F65F3F1109CE2496C163D84E1"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\TowerColorBudget.cs",
+    "Hash": "C5EFDAB396C724D85D0DCA0C40E2A0AB2735D961A4E9D76DC146112187C18482"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\TowerConstructionRules.cs",
+    "Hash": "A048B20A66DA34A9EF722A8C8C18FA2B31CB9C07729B01833F37CFB339BF7BC6"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\TrialRunner.cs",
+    "Hash": "04EE7A94B83A7131CBB7B13248AB9E904CD3CC9DC12DCEED24EA39177179C4B4"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\TrialScenarioDefinition.cs",
+    "Hash": "411F9DB5A86165A9E16F9B6FD40841EAD345834549EC01EEC3173DDA61CB171C"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\UserText.cs",
+    "Hash": "EF18B5C74D78B6AD00EB83C4221D20D85179F312DBE1B77DA1DA5F9043F4B13D"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\UserTextContracts.Generated.cs",
+    "Hash": "8E4738A39B5703E5FEDF3C4D063819927C2D70B751829A5879A958CFB9856945"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\WeaponSystem.cs",
+    "Hash": "9C41E4ADB22093C9A2D3A9B30E6A808BBF85B046BA1A21949F4BDF98F86EBBBD"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\WeightedFlowField.cs",
+    "Hash": "1C1D60FC72034E1A34E4CCA6C2A21A0281FD01768CBBB8A9B64836A20FE335C0"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Core\\WorkshopProfile.cs",
+    "Hash": "C52D346DB37A7D304E553DE1EC5E18FDCA48B78B71CE207CF775D3FEDAD07646"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\AssemblyInfo.cs",
+    "Hash": "458F6AA1C773253BD160C480692E5076C8F8BE9853E12034BA7EAA391F1B80B1"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\BalancePresetAsset.cs",
+    "Hash": "94CAC782D584687B55FD5C15E1CF40A4EC43490271195482EBC07BFF12435E0D"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\ConstructionGesture.cs",
+    "Hash": "1BE69076F80D33DF488BC26DD73E1C1744F96812B1C70B898EA18E22836508A0"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\ContentDatabaseAsset.cs",
+    "Hash": "0AB5F6AB2FC9B30A69CEDD4CC564069B38313CB256D72772BD9C549D6826329C"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\DesignChangeFeedback.cs",
+    "Hash": "A6DD36A3247EAEACC464DA7145403842B078945E17BF2A7F144FB8273FC48CFE"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\FixedStepClock.cs",
+    "Hash": "A9742B653308EBEB72A6BC03ABDCE1C4FBBEB45E857C9FAB9DDE32B5FA0F8F92"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\GameBalanceAsset.cs",
+    "Hash": "78129D997F7037F45ED70C8F52B386120403B748477D993AA38D010FC8C06C00"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\GlobalBalanceSettings.cs",
+    "Hash": "22858230CC56B4127D6A975E8EB6DF50859985F3A452A88BF29C99C60A4AB298"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\ProfileSaveCoordinator.cs",
+    "Hash": "54D43294310C65F0E67F9F23B83145CB4328843F23B076BDD290F77DF431A5E5"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\ProfileSaveState.cs",
+    "Hash": "AF79074390AAE9232966FD811ECAE2E13F79C693679EF51EE5E8616301BE352C"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\RunController.cs",
+    "Hash": "9420F4054F596BBF0EAB093EDBF27DC67D6DB61DB2BCC2BF3B676B381171A7F7"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\TextResourcesAsset.cs",
+    "Hash": "383D33A02D2CD4BE338F5349D62814BC39A843228A034C79CA7BF389AB292DE1"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\WorkshopPersistence.cs",
+    "Hash": "A2CEB618CDF5A14609BF96AB47ED38A958A3000E6D7E8DCA3075E52678D982C5"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\WorkshopProfileStore.cs",
+    "Hash": "7CFBCD2027CE5AC6930A82737AB712A83B458476D2DF222E2B55B64DBE310217"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Application\\WorkshopReadModel.cs",
+    "Hash": "3D257F9CA31A55F6FA02532D5DC47E1587C87EDA56007B93A3CF984C04E41418"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\PaperDefenseBootstrap.cs",
+    "Hash": "EB54ECBD8C002B7F20572D021AB8F9B65E53E5E6D725D9E2D2D3675442060F03"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Art\\NotebookArtGraphic.cs",
+    "Hash": "06AC23F84E94387AB33EAF3AB1BF8BEF66FC25A577581D7C43C98DC7CF03C4CB"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Art\\NotebookArtRenderer.cs",
+    "Hash": "26865C6CBDF27954120806F3203ECC036079318E7D1EC7430B361A3580E6858C"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Art\\NotebookMountLayout.cs",
+    "Hash": "ADFB77B7E995B71290EEFB8C4D9B5E60714EBDB37A436C003AE4A784964324D2"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Art\\NotebookSpriteCatalog.cs",
+    "Hash": "A08A6DA7AAC3108DC59CB0850C64130AD60E9E0E5303DD5D4CEB4C6C3162BD5B"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Art\\NotebookVisualThemeAsset.cs",
+    "Hash": "09C22D6F264E2FEB3AC3F972DF651F906A5C6AB5ADB6AD8D7116F7F8E12FFD9B"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Input\\DrawingInput.cs",
+    "Hash": "130975427ED7B648E601B29D5D79BA5FE9B06370999E5A72C723148DD42448B0"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Input\\PointerEventPolicy.cs",
+    "Hash": "70B040CF7EF035546375058A03744F6AB2841A69464D2214DA09B1ED19C7BB09"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\NotebookPaperSurface.cs",
+    "Hash": "AB10A683610DCC5CF548747AD5DB6FA6908566367D64F4FDC2F67149E2BC882C"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerBattleHud.cs",
+    "Hash": "4591FD3BB5443156A486E5AD67E9FC6ED3AA72F47309F92DBDA2584DD3D0EFFB"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerDisplaySettings.cs",
+    "Hash": "92CAB05E43E996602E92D9962CCA3BA0650CDE671FF356063ED3FE2DFDD94428"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerGameRoot.cs",
+    "Hash": "A22D9AD0404E7D754E493701B28CE62762C8EE8B2A3956B3B3CEA6DE93C71DBF"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerIconGraphic.cs",
+    "Hash": "6AE48F602424051AF57A5FD6CDB8CAD5171D6C461EC5F91B6E73E2CB846B7C58"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerLayout.cs",
+    "Hash": "9C5B3DAA4A3ADAA7E4AE63C010FCB5EB1871FAEE20F423F337C684DD8CCE644F"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerPaperGraphic.cs",
+    "Hash": "E4FFAA965B1C2D4584EAE61722A8F48E806ECD2B4D53626F1A975F754D72CF20"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerSettingsGraphic.cs",
+    "Hash": "4EADB041CE567C2C9BFE9FD33BF1450D50C9A239F175A6FF96D58D2E70577980"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.cs",
+    "Hash": "C1C9A977D7F13FFCA81BF6E6AFE28F25C6CA8F7E35D204CDB3C9B175258A4564"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Dialogs.cs",
+    "Hash": "187018554E670287E2ACB37606A6E210766A9FB57C643F5B2AC6D5CC868A1128"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Home.cs",
+    "Hash": "7F2886A9654C6CF70B3698343A983FC1DD01EE4B647D9B79964A14B92D479159"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Map.cs",
+    "Hash": "93F39D939A2D5359ABE72EDFDA5524680AC255C2809BA2F8278864A9EC7A3959"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Notebook.cs",
+    "Hash": "784818B1A94E4BA1E319F92FCE36824444FAEDAB994E2B6BB01469780D94832B"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Preparation.cs",
+    "Hash": "9B702F68E8B22FBC701229AB094C2950073138253AD245D9785B0CB18D7DE225"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.Settings.cs",
+    "Hash": "F29A813E066315145D1A6302565174FB3FAFD97A9F144362426C9C531892788B"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerUi.cs",
+    "Hash": "F087C47283702CCAEDB22AAB25B1B062D9400ACB2D4B9BA9DE831793C8EA6912"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Player\\PlayerWorkshopActions.cs",
+    "Hash": "8B91F2AEF414A64491EFE69357BBC1676484B38048241ED7B53048707573F97F"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\AuthoredGeometryCache.cs",
+    "Hash": "4F363F7FB892C36AA136532145291FF42CE730C2DFC885B5132FF8ABF3FCEC93"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\DoodleGlyphs.cs",
+    "Hash": "0560E4CA43BDE7BC6567F23D0FC30195A20CCF00C0F2B38D6EC765564A13A318"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\MeshPen.cs",
+    "Hash": "0DD8592B5E7ADCE0B356AE98065C014EE1C5B6448F35195F58A2CE96194D0891"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\NotebookAnimationState.cs",
+    "Hash": "045EC411B3A45FBD25453A1B241A33F5E6B3CAAFA89C3A31C39AE2F59FB88971"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\NotebookBattlefieldRenderer.cs",
+    "Hash": "2F8B1A63C5DAD7B28A60E6DE392B84FA780104DE08C59A6ED7EE2146148973F0"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\NotebookEffectRenderer.cs",
+    "Hash": "83D7E20D1C091BC092D840FE318ACDB009490F69C76C5A567BCC45E86D48EDA5"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\NotebookTowerComposition.cs",
+    "Hash": "3DC0AD9639D8F625D53FAA1E232CFA1D6952622921BFC8393B554242707757A0"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\NotebookTrialPlayback.cs",
+    "Hash": "8FCCADEF9D3BD590FBDE5C9EA8BC59F7F53FA2F34B66493073C338FA60B5215A"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\NotebookTrialRenderer.cs",
+    "Hash": "91C63DF29BFFEBC92149F055EB2161ED4861E3A0B034B9D5B9C030B901C36832"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\NotebookViewSettingsAsset.cs",
+    "Hash": "CC901C9F5506C9E0932A2B5F0DBE74ACB01EE03D84B82118B94C4987B4BFF914"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\NotebookWorldView.cs",
+    "Hash": "57ACB68C829653B2665DA399A64F17E23C632520DB763ACF0441576C74E231F0"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\ReferenceDrawingCache.cs",
+    "Hash": "34C9C443472C66CA5E2FCCAC523A2A89B6398B554F3F207EFC608D7A0B5F36D9"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\TrialLaneBatchGraphic.cs",
+    "Hash": "A931D0C4D6331547B4899B16F7E68989C25DF7C0DD3600037E139D775D3B38C4"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\TrialLaneSketch.cs",
+    "Hash": "4720CC282568C6018BD44670B57900CDACE267FDB972054DBF5FA0CA4061CD71"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\ArmorReinforcementGraphic.cs",
+    "Hash": "DDE1878023FFAF70BD20C0131440F4938B38315B4022B0BA41EB87F534D0343F"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\ArmorReinforcementPanel.cs",
+    "Hash": "7C856DD0F6CA03EC3F7BC038386051357501049F80C07D6D50F132FEA0464B7A"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\CatalogScrollList.cs",
+    "Hash": "F7A2F3BC762BF6576EFA0DFED3FAC012CF9AF8BDCB9D10396751026CAE45C0DA"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\DrawingCanvasGraphic.cs",
+    "Hash": "DC033840F52FE807D1002BEA3B709A2EAB98974853BD6BDA59C6B39F1A1DC2AB"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\DrawingEditorPanel.cs",
+    "Hash": "4F9E3FEFEC0B6F1D6ADDEFE076C45C7CE8248973BE484074244B3DDC5855614D"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\DrawingProbePanel.cs",
+    "Hash": "036372BED4D024DAA857D96CC6CE0FF2510F6E1A5E0CBA96A482221D6BBC2297"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\DrawingStencilBrowser.cs",
+    "Hash": "E17AF6E63920C34A1B34F1E62390C00D1C237CB919A37A523245BBE9C2FF5E6C"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\DrawingSummaryLayout.cs",
+    "Hash": "B7B017E941B63B88A6A17E37DE3EB901007C30CF6270AB75AB0648273C943FA4"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\DrawingWorkbenchUi.cs",
+    "Hash": "8DFD111919F488141A80B275B99BA9B7492DEC58D77C6394366E2A3056A6222D"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\FanVolleyGraphic.cs",
+    "Hash": "3256D81C3A2319D04CA889A53BCFF53F1E248CB81C76400C984DFB43ED231886"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\FanVolleyPanel.cs",
+    "Hash": "57A231CF559CD9A573A72E17F76568BACC9DD51454BEB7A294B6419744F64B0E"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\FootprintCanvasGraphic.cs",
+    "Hash": "981F25C4878DDD5AB20E378D322C9777FDF7E5C7D89D9FA1B338655A3063CF41"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\FootprintProbeSketch.cs",
+    "Hash": "44CE4B16C22ED7D4F7D3758D73BCACBC80288F2F478CC0D59AA97E6B23C782ED"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\FootprintStudyPanel.cs",
+    "Hash": "2748A6B7828888AED4719CC298DD4BA6E60536F6FD7EA03335D95E9FB4298A9A"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\FoundationDetailGraphic.cs",
+    "Hash": "367E65942B5FFBE7A28BBB2D2DBF8E378E14BCBF6BC712223A26E0F391B64869"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\GameText.cs",
+    "Hash": "5A7C9750601F49B6E5DCB7852788FE4F0B0CF0A0B59BEECC62430A86B0105CBC"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\GuidedDrawingLayout.cs",
+    "Hash": "34954A15BC4E8F69586CC7DA88296EF8204FC741FDE5A6F6F01CBAD3FAAB2EFE"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\GuidedDrawingPanel.cs",
+    "Hash": "44B8D345508F752FD1DA3B8E5A35EB2D1D98A854BE1610F0BD49777BBE1855BF"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\MortarFootprintPanel.cs",
+    "Hash": "F008B9F87C36C617555DDC2DE71E119C2E5811529C149518B900A7FAA52E43A5"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\NotebookHud.cs",
+    "Hash": "42D110A6202AC2EA98D1E4B489EF7715F6890F8E583CECB4E6E02D2B8A9CC6B0"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WeaponAssemblyGraphic.cs",
+    "Hash": "F40DDF00EC26ED1ACFCA4ECE1E077591191AA9C44D37869B674735D27C253F01"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WizardAlbumPanel.cs",
+    "Hash": "572CAFBAAA49C734FDAF85E1744D628E574D972DDB0668C0B2248A2CFE0D93D2"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WizardAssemblyPanel.cs",
+    "Hash": "DB57C03E71C49345B81AC8DEC9AD284CB113F8BED63A63930CA95629DE65AA8A"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WizardDrawingHeader.cs",
+    "Hash": "15B3758FA83FA7AB628EB4349166E670AB3D0E471B7B20A3CC95112B0D9D15EF"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WizardFoundationPanel.cs",
+    "Hash": "008AA1C164714998CDEC5F9E0F174A4197374DBEFF0D183C4FBBB6F5A0B4DF25"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WizardTrialPanel.cs",
+    "Hash": "D36B477768BC94FBBDE8DA12A7CB3D946F47861EF1FC4357074B78EEEC004B6E"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WizardWeaponHeader.cs",
+    "Hash": "E2B020B0F586FDCBF8B8CB34AD56C43EAFEF60150EC7522CC12AD6A9798ACCFD"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WizardWeaponPanel.cs",
+    "Hash": "7E8A7543958B9B5CD6DFCBA2CF56466C0081B8B458636A1D7881276249F7AFDA"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkingGeometryOverlay.cs",
+    "Hash": "1EEC9889F5E09A91379537988E2778ECB1865B397F13576FE3B6717E457DFE7A"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkshopConfirm.cs",
+    "Hash": "50B1DFD0D6F771501F90BB018CB0786A83E43D331DFC1AF9EF45FB99F8C47D73"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkshopHud.cs",
+    "Hash": "7031F31DD6FFB1717CE1CBAEDE695FB619133C392B1C52D5B7AD4537BE451479"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkshopIconGraphic.cs",
+    "Hash": "AE160AA7DFC771736FEE7B6EC28772CC9BF7C5091F709EE6BA6BAC400AD3A287"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkshopModal.cs",
+    "Hash": "AFCAB2C58CD0CEAA253F8D9091704A964CA60142D772ED5FDBEB9577734768FA"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkshopOverlayLayout.cs",
+    "Hash": "F51C6E5BD2DEDE77090A3666E84157D037BAECDA09536EA7C9B1A018A1045AD2"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkshopResponsiveLayout.cs",
+    "Hash": "127D4DA0CA877211E356C444980CCA0B5D49CFF0A2CA7BD65D510938802C85F1"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkshopSheetLayout.cs",
+    "Hash": "7C50D6EC86561A0F7C5317BE6A26BF58077AC9C8BDD0538EE9FEE7CA5666CEB8"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkshopSpecialistStyle.cs",
+    "Hash": "FEE5DC53CAFFC61C608CF7DA64655451218C7DFF5A4AC718D138ED1285C3451F"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkshopTooltip.cs",
+    "Hash": "05827CABE6FD5F7CA5B978730E2344462371434395F1ACE9E7FEE7493514AEE0"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkshopUi.cs",
+    "Hash": "C4C018D7A6119497D4BA5C15A24BBAF4AFA1EB78C082B1F1B47A5A86F96332DD"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\WorkshopWizard.cs",
+    "Hash": "FFBD02DF87FCB6CEE455B56B6CDF4F27782F72222B25D0C7690D0573CD3DC7DF"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Configuration\\Game\\PlayerBalance.asset",
+    "Hash": "73F233F1E84B95A44B6F4F4CB2BDA852CB1E4C01D48BDB210A14C077D6AAFCCD"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Configuration\\Game\\PlayerContent.asset",
+    "Hash": "86827C4AFAE3B3BA419350E253EB0562185C2AAEBF698B7F99BE1EB8AA0B68F1"
+  },
+  {
+    "Path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Configuration\\Game\\PlayerRules.asset",
+    "Hash": "99DF88CCA78140478F987AA05CA1CB0DC5F2E7581EE57E78ECE171F842AB3C7F"
+  }
+]
