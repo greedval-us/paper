@@ -17,6 +17,7 @@ namespace PaperDefense.Presentation
             var body = new GameObject(name + " content", typeof(RectTransform)); body.transform.SetParent(rect, false);
             Content = body.GetComponent<RectTransform>();
             Content.anchorMin = new Vector2(0, 1); Content.anchorMax = new Vector2(1, 1); Content.pivot = new Vector2(0, 1);
+            Content.anchoredPosition = Vector2.zero;
             int rows = Mathf.CeilToInt(count / (float)Mathf.Max(1, columns));
             Content.sizeDelta = new Vector2(0, Mathf.Max(bounds.height, rows * (rowHeight + gap) - gap));
             Scroll = viewport.GetComponent<ScrollRect>(); Scroll.viewport = rect; Scroll.content = Content;
@@ -32,8 +33,10 @@ namespace PaperDefense.Presentation
                 var handleRect = handle.GetComponent<RectTransform>(); handleRect.anchorMin = Vector2.zero; handleRect.anchorMax = Vector2.one; handleRect.sizeDelta = Vector2.zero;
                 handle.GetComponent<Image>().color = new Color(.2f, .35f, .55f, .55f);
                 var scrollbar = track.GetComponent<Scrollbar>(); scrollbar.handleRect = handleRect; scrollbar.targetGraphic = handle.GetComponent<Image>(); scrollbar.direction = Scrollbar.Direction.BottomToTop;
+                scrollbar.value = 1;
                 Scroll.verticalScrollbar = scrollbar;
             }
+            Scroll.verticalNormalizedPosition = 1;
         }
         static void Place(RectTransform rect, Rect box)
         { rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0, 1); rect.anchoredPosition = new Vector2(box.x, -box.y); rect.sizeDelta = box.size; }

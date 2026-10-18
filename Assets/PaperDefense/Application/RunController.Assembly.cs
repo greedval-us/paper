@@ -12,6 +12,7 @@ namespace PaperDefense.Application
         bool runRequiresSlots;
         internal WorkshopProfile AssemblyProfile => profile;
         internal ComponentCatalog ConfiguredAssemblyCatalog => ConfiguredAssemblies();
+        public ComponentCatalog AssemblyCatalog => ConfiguredAssemblies();
         internal GameBalance AssemblyBalance => session?.Balance;
         internal bool CreateAssemblyCandidate(out WorkshopProfile candidate, out string reason) => CreateCandidate(out candidate, out reason);
         internal bool CommitAssemblyCandidate(WorkshopProfile candidate, out string reason) => CommitCandidate(candidate, out reason);

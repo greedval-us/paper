@@ -12,6 +12,7 @@ namespace PaperDefense.Presentation
         CanvasScaler scaler;
         PlayerGameRoot player;
         WorkshopWizard wizard;
+        CompositeWorkshopPanel composite;
         int lastSignature;
         int visiblePage = -1;
         bool stencilWasOpen;
@@ -32,10 +33,20 @@ namespace PaperDefense.Presentation
             board.GetComponent<Image>().color = PlayerUi.Paper;
             Apply();
         }
+        public void InitializeComposite(RectTransform root, CompositeWorkshopPanel panel)
+        {
+            board = root; composite = panel; scaler = GetComponent<CanvasScaler>();
+            Apply();
+        }
         void LateUpdate()
         {
             if (board == null) return;
             int signature = Screen.width * 397 ^ Screen.height;
+            if (composite != null)
+            {
+                if (signature != lastSignature) { lastSignature = signature; Apply(); }
+                return;
+            }
             signature = unchecked(signature * 31 + (wizard == null ? 0 : wizard.Step));
             signature = unchecked(signature * 31 + (wizard == null ? 0 : wizard.Status.GetHashCode()));
             foreach (Transform child in board) signature = unchecked(signature * 31 + child.GetEntityId().GetHashCode() + (child.gameObject.activeSelf ? 1 : 0));
@@ -55,6 +66,14 @@ namespace PaperDefense.Presentation
 
         public void Apply(int width, int height)
         {
+            if (composite != null)
+            {
+                var viewportLayout = new PlayerLayout(width, height);
+                scaler.referenceResolution = new Vector2(viewportLayout.Width, viewportLayout.Height);
+                board.sizeDelta = scaler.referenceResolution;
+                composite.Reflow(viewportLayout.Width, viewportLayout.Height);
+                return;
+            }
             elements.Clear();
             foreach (var item in board.GetComponentsInChildren<RectTransform>(true)) if (!elements.ContainsKey(item.name)) elements[item.name] = item;
             var layout = new PlayerLayout(width, height);

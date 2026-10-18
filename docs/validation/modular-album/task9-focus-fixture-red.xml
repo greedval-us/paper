@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 06:48:05Z" end-time="2026-10-18 06:48:06Z" duration="0,6814393">
+  <test-suite type="TestSuite" id="1872" name="paper" fullname="paper" runstate="Runnable" testcasecount="703" result="Failed" site="Child" start-time="2026-10-18 06:48:05Z" end-time="2026-10-18 06:48:06Z" duration="0.681439" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1866" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="703" result="Failed" site="Child" start-time="2026-10-18 06:48:06Z" end-time="2026-10-18 06:48:06Z" duration="0.572119" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1867" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="703" result="Failed" site="Child" start-time="2026-10-18 06:48:06Z" end-time="2026-10-18 06:48:06Z" duration="0.567256" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1868" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="703" result="Failed" site="Child" start-time="2026-10-18 06:48:06Z" end-time="2026-10-18 06:48:06Z" duration="0.550976" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1184" name="CompositeWorkshopHostTests" fullname="PaperDefense.Tests.CompositeWorkshopHostTests" classname="PaperDefense.Tests.CompositeWorkshopHostTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-10-18 06:48:06Z" end-time="2026-10-18 06:48:06Z" duration="0.535710" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1185" name="EditingANameSurvivesLiveHudUpdatesWithoutLosingFocusOrText" fullname="PaperDefense.Tests.CompositeWorkshopHostTests.EditingANameSurvivesLiveHudUpdatesWithoutLosingFocusOrText" methodname="EditingANameSurvivesLiveHudUpdatesWithoutLosingFocusOrText" classname="PaperDefense.Tests.CompositeWorkshopHostTests" runstate="Runnable" seed="1823251362" result="Failed" label="Error" start-time="2026-10-18 06:48:06Z" end-time="2026-10-18 06:48:06Z" duration="0.514462" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.InvalidOperationException : Sequence contains no matching element]]></message>
+                <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <fe644d7ad1cf499ebe4e7ad937bc03bf>:0
+  at PaperDefense.Tests.CompositeWorkshopHostTests+<EditingANameSurvivesLiveHudUpdatesWithoutLosingFocusOrText>d__0.MoveNext () [0x000cd] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\CompositeWorkshopHostTests.cs:28
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44 ]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task9-focus-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

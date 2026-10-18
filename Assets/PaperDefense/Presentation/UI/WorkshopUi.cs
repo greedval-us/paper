@@ -40,6 +40,22 @@ namespace PaperDefense.Presentation
             rect.sizeDelta = bounds.size;
         }
 
+        public static void RemoveView(GameObject view)
+        {
+            if (view == null) return;
+            // Submit handlers finish after their command; keep the retired control alive until then.
+            view.transform.SetParent(null, false);
+            view.SetActive(false);
+            if (UnityEngine.Application.isPlaying) UnityEngine.Object.Destroy(view);
+            else UnityEngine.Object.DestroyImmediate(view);
+        }
+
+        public static void ClearViews(Transform parent)
+        {
+            for (int i = parent.childCount - 1; i >= 0; i--)
+                RemoveView(parent.GetChild(i).gameObject);
+        }
+
         public static T Graphic<T>(Transform parent, string name, Rect bounds) where T : UnityEngine.UI.Graphic
         {
             var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(T));

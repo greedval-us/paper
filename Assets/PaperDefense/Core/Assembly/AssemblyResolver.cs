@@ -6,6 +6,20 @@ namespace PaperDefense.Core
 {
     public static class AssemblyResolver
     {
+        /// <summary>Display-only numbers retain the real load limit when a recipe is overloaded.</summary>
+        public static AssemblyPreviewMetrics PreviewMetrics(AssemblyRecipe recipe, ComponentCatalog catalog, GameBalance balance, MaterialTier material)
+        {
+            if (AssemblyValidation.Validate(recipe, catalog, balance, material).Count != 0) return null;
+            try
+            {
+                var result = recipe.Tower != null ? ResolveTower(recipe, catalog, balance, material, true) : ResolveStructure(recipe, catalog, balance, material, true);
+                _ = result.EffectiveHealth; _ = result.Dps;
+                return new AssemblyPreviewMetrics(result);
+            }
+            catch (AssemblyCatalogException) { return null; }
+            catch (OverflowException) { return null; }
+        }
+
         /// <summary>Publication gate: both numerical rules and the supplied physical-fit coverage must pass.</summary>
         public static AssemblyResolution Resolve(AssemblyRecipe recipe, ComponentCatalog catalog, GameBalance balance,
             MaterialTier material, AssemblyFitCatalog fits)
@@ -41,7 +55,7 @@ namespace PaperDefense.Core
             if (entry == null) return AssemblyResolution.Failure(new[] { new AssemblyDiagnostic("assembly.entry.missing", "entry") });
             return entry.Kind == AlbumEntryKind.Legacy ? LegacyAlbumAdapter.Resolve(entry, balance, material) : Resolve(entry.Snapshot, balance, material);
         }
-        static ResolvedEntry ResolveTower(AssemblyRecipe recipe, ComponentCatalog catalog, GameBalance balance, MaterialTier material)
+        static ResolvedEntry ResolveTower(AssemblyRecipe recipe, ComponentCatalog catalog, GameBalance balance, MaterialTier material, bool allowOverload = false)
         {
             var tower = recipe.Tower; var foundation = Parts(tower.Foundation.Parts, catalog); var frame = foundation[0];
             var all = Parts(recipe.Parts, catalog); var m = balance.Material(material);
@@ -49,7 +63,7 @@ namespace PaperDefense.Core
             int load = AssemblyValidation.Integer(Fold(null, all, AssemblyStat.Load), "entry.load");
             int mounts = AssemblyValidation.Integer(frame.Get(AssemblyStat.MountCount, ModifierOperation.Set), "foundation.mounts", true);
             foreach (var mount in tower.Mounts) if (mount.SlotIndex >= mounts) throw AssemblyCatalogException.At("assembly.mount.unavailable", "mounts[" + mount.SlotIndex + "]");
-            if (load > capacity) throw AssemblyCatalogException.At("assembly.load.exceeded", "entry.load", load.ToString(), capacity.ToString());
+            if (load > capacity && !allowOverload) throw AssemblyCatalogException.At("assembly.load.exceeded", "entry.load", load.ToString(), capacity.ToString());
             var weapons = new List<ResolvedWeapon>(); double weaponBuild = 0;
             foreach (var mount in tower.Mounts)
             {
@@ -99,12 +113,12 @@ namespace PaperDefense.Core
             _ = w.CycleSeconds; _ = w.NominalDps;
             return w;
         }
-        static ResolvedEntry ResolveStructure(AssemblyRecipe recipe, ComponentCatalog catalog, GameBalance balance, MaterialTier material)
+        static ResolvedEntry ResolveStructure(AssemblyRecipe recipe, ComponentCatalog catalog, GameBalance balance, MaterialTier material, bool allowOverload = false)
         {
             var s = recipe.Structure; var parts = Parts(s.Parts, catalog); var site = parts[0]; var function = parts[1]; var m = balance.Material(material);
             int capacity = AssemblyValidation.Integer(Fold(site, parts, AssemblyStat.Capacity), "structure.capacity");
             int load = AssemblyValidation.Integer(Fold(null, parts, AssemblyStat.Load), "structure.load");
-            if (load > capacity) throw AssemblyCatalogException.At("assembly.load.exceeded", "structure.load");
+            if (load > capacity && !allowOverload) throw AssemblyCatalogException.At("assembly.load.exceeded", "structure.load");
             float rate = AssemblyValidation.NonNegative(Fold(function, parts, AssemblyStat.SupportRate), "structure.rate");
             float radius = AssemblyValidation.NonNegative(Fold(function, parts, AssemblyStat.Range), "structure.radius");
             var support = new ResolvedSupport(s.Family, radius, s.Family == AssemblyStructureFamily.Repair ? rate : 0, Slow(parts),

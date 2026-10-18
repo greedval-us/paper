@@ -21,12 +21,21 @@ namespace PaperDefense.Tests
         WorkshopWizard wizard;
         WorkshopResponsiveLayout responsive;
         Store store;
+        GameBalanceAsset balance;
+        BalancePresetAsset preset;
+        ContentDatabaseAsset database;
 
         void Open(bool threeMounts = false)
         {
-            var balance = AssetDatabase.LoadAssetAtPath<GameBalanceAsset>(
+            var source = AssetDatabase.LoadAssetAtPath<GameBalanceAsset>(
                 "Assets/PaperDefense/Configuration/Game/PlayerBalance.asset");
-            Assert.That(balance, Is.Not.Null, "Exercise the main game's catalog and workshop rules.");
+            Assert.That(source, Is.Not.Null, "Exercise the main game's catalog and workshop rules.");
+            // This fixture checks the historical standard editor. Retain the main content and rules,
+            // while explicitly opting out of the composite route covered by CompositeWorkshopUiTests.
+            balance = Object.Instantiate(source);
+            preset = Object.Instantiate(source.dataPreset);
+            database = Object.Instantiate(source.dataPreset.database);
+            balance.dataPreset = preset; preset.database = database; database.assemblyCatalog = null;
             var prepared = balance.CreateWorkshopBalance();
             var profile = new WorkshopProfile(prepared.ResolveContent(), prepared);
             profile.GrantGold(1000);
@@ -63,6 +72,9 @@ namespace PaperDefense.Tests
         {
             if (root != null) Object.DestroyImmediate(root);
             if (events != null) Object.DestroyImmediate(events);
+            if (balance != null) Object.DestroyImmediate(balance);
+            if (preset != null) Object.DestroyImmediate(preset);
+            if (database != null) Object.DestroyImmediate(database);
         }
 
         Button Button(string name)

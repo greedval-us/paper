@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="59" result="Passed" total="59" passed="59" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 06:23:37Z" end-time="2026-10-18 06:23:40Z" duration="2,0757903">
+  <test-suite type="TestSuite" id="1814" name="paper" fullname="paper" runstate="Runnable" testcasecount="656" result="Passed" start-time="2026-10-18 06:23:37Z" end-time="2026-10-18 06:23:40Z" duration="2.075790" total="59" passed="59" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1808" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="656" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:40Z" duration="1.971732" total="59" passed="59" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1809" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="656" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:40Z" duration="1.967339" total="59" passed="59" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1810" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="656" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:40Z" duration="1.949507" total="59" passed="59" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1592" name="StandardWorkshopFlowTests" fullname="PaperDefense.Tests.StandardWorkshopFlowTests" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" testcasecount="34" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:39Z" duration="1.185437" total="34" passed="34" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1626" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" testcasecount="28" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.801848" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1598" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;Back&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;Back&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="2132308327" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.369016" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1599" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;GoToFoundation&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;GoToFoundation&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="88139642" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.016897" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1600" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;GoToWeapons&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;GoToWeapons&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="1476384218" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.016581" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1601" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;SelectChassis&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;SelectChassis&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="685877399" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.016516" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1602" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;SelectWeapon&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;SelectWeapon&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="147896407" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.017677" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1603" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;ChangeModule&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;ChangeModule&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="1748828682" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.016905" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1604" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;Next&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;Next&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="766917045" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.015792" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1605" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;Save&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;Save&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="1176517023" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.016962" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1606" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;SaveVariant&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;SaveVariant&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="1501406530" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.018634" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1607" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;Mortar&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;Mortar&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="1032972909" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.017428" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1608" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;Volley&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;Volley&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="207752596" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.014754" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1609" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;Armor&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;Armor&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="1709415854" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.014082" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1610" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;Rename&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;Rename&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="1265408638" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.013921" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1611" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;EditorCallback&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(PlayerDrawing,&quot;EditorCallback&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="389661286" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.014639" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1612" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;Back&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;Back&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="801202443" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.015908" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1613" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;GoToFoundation&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;GoToFoundation&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="698486944" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.014013" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1614" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;GoToWeapons&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;GoToWeapons&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="528801518" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.013898" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1615" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;SelectChassis&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;SelectChassis&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="1716106807" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.013696" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1616" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;SelectWeapon&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;SelectWeapon&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="155972674" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.014477" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1617" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;ChangeModule&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;ChangeModule&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="1294232379" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.013628" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1618" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;Next&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;Next&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="2038587375" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.013773" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1619" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;Save&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;Save&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="1510162165" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.014284" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1620" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;SaveVariant&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;SaveVariant&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="273288812" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.013928" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1621" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;Mortar&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;Mortar&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="627919937" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.013621" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1622" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;Volley&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;Volley&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="1964042355" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.013637" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1623" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;Armor&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;Armor&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="528978850" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.013760" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1624" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;Rename&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;Rename&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="481825402" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.014062" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1625" name="HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;EditorCallback&quot;)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalCommandsCannotEditSaveOrDuplicateThePage(Freeform,&quot;EditorCallback&quot;)" methodname="HistoricalCommandsCannotEditSaveOrDuplicateThePage" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="516831542" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:38Z" duration="0.014576" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1597" name="HistoricalLoadOpensReviewAndPreservesOriginalGeometryAndRules" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalLoadOpensReviewAndPreservesOriginalGeometryAndRules" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:39Z" duration="0.096571" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1595" name="HistoricalLoadOpensReviewAndPreservesOriginalGeometryAndRules(PlayerDrawing)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalLoadOpensReviewAndPreservesOriginalGeometryAndRules(PlayerDrawing)" methodname="HistoricalLoadOpensReviewAndPreservesOriginalGeometryAndRules" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="1087426503" result="Passed" start-time="2026-10-18 06:23:38Z" end-time="2026-10-18 06:23:39Z" duration="0.071721" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1596" name="HistoricalLoadOpensReviewAndPreservesOriginalGeometryAndRules(Freeform)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.HistoricalLoadOpensReviewAndPreservesOriginalGeometryAndRules(Freeform)" methodname="HistoricalLoadOpensReviewAndPreservesOriginalGeometryAndRules" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="1869995892" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.021229" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1594" name="SaveVariantAndLoadRetainStandardAssemblyWithoutOpeningDrawing" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.SaveVariantAndLoadRetainStandardAssemblyWithoutOpeningDrawing" methodname="SaveVariantAndLoadRetainStandardAssemblyWithoutOpeningDrawing" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="404687082" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.128390" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1629" name="SeparateNewDraftLeavesHistoricalDataIntactAndRestoresStandardEditing" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.SeparateNewDraftLeavesHistoricalDataIntactAndRestoresStandardEditing" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.056983" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1627" name="SeparateNewDraftLeavesHistoricalDataIntactAndRestoresStandardEditing(PlayerDrawing)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.SeparateNewDraftLeavesHistoricalDataIntactAndRestoresStandardEditing(PlayerDrawing)" methodname="SeparateNewDraftLeavesHistoricalDataIntactAndRestoresStandardEditing" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="524386827" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.027205" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1628" name="SeparateNewDraftLeavesHistoricalDataIntactAndRestoresStandardEditing(Freeform)" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.SeparateNewDraftLeavesHistoricalDataIntactAndRestoresStandardEditing(Freeform)" methodname="SeparateNewDraftLeavesHistoricalDataIntactAndRestoresStandardEditing" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="1913430478" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.025657" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1593" name="StandardOriginSurvivesEveryFoundationWeaponAndModuleMutation" fullname="PaperDefense.Tests.StandardWorkshopFlowTests.StandardOriginSurvivesEveryFoundationWeaponAndModuleMutation" methodname="StandardOriginSurvivesEveryFoundationWeaponAndModuleMutation" classname="PaperDefense.Tests.StandardWorkshopFlowTests" runstate="Runnable" seed="261480931" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.038216" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1735" name="WorkshopSaveFailureTests" fullname="PaperDefense.Tests.WorkshopSaveFailureTests" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.220423" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1748" name="DirtyRewardHudOffersRetryAndDoesNotReplayTheAward" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.DirtyRewardHudOffersRetryAndDoesNotReplayTheAward" methodname="DirtyRewardHudOffersRetryAndDoesNotReplayTheAward" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="1707007582" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.119371" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1740" name="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.015176" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1736" name="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;save&quot;)" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;save&quot;)" methodname="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="169872835" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.003569" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1737" name="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;delete&quot;)" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;delete&quot;)" methodname="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="1146310010" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.003398" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1738" name="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;assign&quot;)" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;assign&quot;)" methodname="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="280451201" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.002640" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1739" name="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;unlock&quot;)" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged(&quot;unlock&quot;)" methodname="FailedManualCommitLeavesGoldAlbumAndSlotsUnchanged" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="2115144387" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.002004" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1746" name="FailedRewardWriteKeepsGoldOnceAcrossRetryWorkshopAndNewRun" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.FailedRewardWriteKeepsGoldOnceAcrossRetryWorkshopAndNewRun" methodname="FailedRewardWriteKeepsGoldOnceAcrossRetryWorkshopAndNewRun" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="936693381" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.011501" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1745" name="MemoryOnlyModeAllowsEditsAndClearlyReportsItsScope" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.MemoryOnlyModeAllowsEditsAndClearlyReportsItsScope" methodname="MemoryOnlyModeAllowsEditsAndClearlyReportsItsScope" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="1058322660" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.005765" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1744" name="NewProfileIsDirtyAndIsSavedOnQuitWithoutChangingTheRealProfilePath" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.NewProfileIsDirtyAndIsSavedOnQuitWithoutChangingTheRealProfilePath" methodname="NewProfileIsDirtyAndIsSavedOnQuitWithoutChangingTheRealProfilePath" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="674904697" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.003518" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1743" name="ProtectedLoadRejectsRetryTransactionsAndQuitWithoutStoreWrites" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.ProtectedLoadRejectsRetryTransactionsAndQuitWithoutStoreWrites" methodname="ProtectedLoadRejectsRetryTransactionsAndQuitWithoutStoreWrites" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="734423165" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.003853" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1747" name="PurchaseCommitsPreviouslyUnsavedRewardAndItsOwnCostExactlyOnce" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.PurchaseCommitsPreviouslyUnsavedRewardAndItsOwnCostExactlyOnce" methodname="PurchaseCommitsPreviouslyUnsavedRewardAndItsOwnCostExactlyOnce" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="1221597742" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.009345" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1741" name="RetryWritesCurrentProfileWithoutReplayingRejectedPurchase" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.RetryWritesCurrentProfileWithoutReplayingRejectedPurchase" methodname="RetryWritesCurrentProfileWithoutReplayingRejectedPurchase" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="572536136" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.002891" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1749" name="SourceBecomingProtectedDuringSaveKeepsDirtyGoldAndBlocksFurtherWrites" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.SourceBecomingProtectedDuringSaveKeepsDirtyGoldAndBlocksFurtherWrites" methodname="SourceBecomingProtectedDuringSaveKeepsDirtyGoldAndBlocksFurtherWrites" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="622633797" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.008772" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1742" name="WorkshopKeepsDraftAndDisplaysTheWriteFailure" fullname="PaperDefense.Tests.WorkshopSaveFailureTests.WorkshopKeepsDraftAndDisplaysTheWriteFailure" methodname="WorkshopKeepsDraftAndDisplaysTheWriteFailure" classname="PaperDefense.Tests.WorkshopSaveFailureTests" runstate="Runnable" seed="323346362" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.035003" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1795" name="WorkshopWizardTests" fullname="PaperDefense.Tests.WorkshopWizardTests" classname="PaperDefense.Tests.WorkshopWizardTests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:40Z" duration="0.528674" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1806" name="AlbumBlocksBackgroundKeyboardActionsAndRestoresTheirState" fullname="PaperDefense.Tests.WorkshopWizardTests.AlbumBlocksBackgroundKeyboardActionsAndRestoresTheirState" methodname="AlbumBlocksBackgroundKeyboardActionsAndRestoresTheirState" classname="PaperDefense.Tests.WorkshopWizardTests" runstate="Runnable" seed="2063913137" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.090392" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1800" name="BackAndAlbumPreserveTheStandardAssembly" fullname="PaperDefense.Tests.WorkshopWizardTests.BackAndAlbumPreserveTheStandardAssembly" methodname="BackAndAlbumPreserveTheStandardAssembly" classname="PaperDefense.Tests.WorkshopWizardTests" runstate="Runnable" seed="1161596366" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.058172" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1801" name="ClosedDetailsAreNotVisibleUntilRequested" fullname="PaperDefense.Tests.WorkshopWizardTests.ClosedDetailsAreNotVisibleUntilRequested" methodname="ClosedDetailsAreNotVisibleUntilRequested" classname="PaperDefense.Tests.WorkshopWizardTests" runstate="Runnable" seed="723252680" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.021186" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1797" name="CompleteSequenceSavesStandardAssemblyWithoutStrokesOrSpendingGold" fullname="PaperDefense.Tests.WorkshopWizardTests.CompleteSequenceSavesStandardAssemblyWithoutStrokesOrSpendingGold" methodname="CompleteSequenceSavesStandardAssemblyWithoutStrokesOrSpendingGold" classname="PaperDefense.Tests.WorkshopWizardTests" runstate="Runnable" seed="761352690" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.021538" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1804" name="EmptyNameCannotStrandTheDraftBeforeItsNameField" fullname="PaperDefense.Tests.WorkshopWizardTests.EmptyNameCannotStrandTheDraftBeforeItsNameField" methodname="EmptyNameCannotStrandTheDraftBeforeItsNameField" classname="PaperDefense.Tests.WorkshopWizardTests" runstate="Runnable" seed="1468698642" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.029034" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1798" name="FailedSaveKeepsDraftAndReviewStepForRetry" fullname="PaperDefense.Tests.WorkshopWizardTests.FailedSaveKeepsDraftAndReviewStepForRetry" methodname="FailedSaveKeepsDraftAndReviewStepForRetry" classname="PaperDefense.Tests.WorkshopWizardTests" runstate="Runnable" seed="1818761776" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.032666" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1799" name="FailedVariantSavePreservesTheOriginalPageAndCanBeRetried" fullname="PaperDefense.Tests.WorkshopWizardTests.FailedVariantSavePreservesTheOriginalPageAndCanBeRetried" methodname="FailedVariantSavePreservesTheOriginalPageAndCanBeRetried" classname="PaperDefense.Tests.WorkshopWizardTests" runstate="Runnable" seed="525316785" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.083539" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1796" name="NewStandardTowerHasThreeStepsAndReachesReviewWithoutDrawing" fullname="PaperDefense.Tests.WorkshopWizardTests.NewStandardTowerHasThreeStepsAndReachesReviewWithoutDrawing" methodname="NewStandardTowerHasThreeStepsAndReachesReviewWithoutDrawing" classname="PaperDefense.Tests.WorkshopWizardTests" runstate="Runnable" seed="1301232299" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.022646" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1807" name="RebuildingAdditionsAndLeavingWorkshopRestoresBackgroundInput" fullname="PaperDefense.Tests.WorkshopWizardTests.RebuildingAdditionsAndLeavingWorkshopRestoresBackgroundInput" methodname="RebuildingAdditionsAndLeavingWorkshopRestoresBackgroundInput" classname="PaperDefense.Tests.WorkshopWizardTests" runstate="Runnable" seed="1466697928" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.052967" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1805" name="StandardPreviewsUseTheSameAtlasCompositionAsReviewWithoutCreatingStrokes" fullname="PaperDefense.Tests.WorkshopWizardTests.StandardPreviewsUseTheSameAtlasCompositionAsReviewWithoutCreatingStrokes" methodname="StandardPreviewsUseTheSameAtlasCompositionAsReviewWithoutCreatingStrokes" classname="PaperDefense.Tests.WorkshopWizardTests" runstate="Runnable" seed="1194380801" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.038217" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1802" name="StandardReviewDoesNotOfferFreeformMortarVolleyOrArmorEditors" fullname="PaperDefense.Tests.WorkshopWizardTests.StandardReviewDoesNotOfferFreeformMortarVolleyOrArmorEditors" methodname="StandardReviewDoesNotOfferFreeformMortarVolleyOrArmorEditors" classname="PaperDefense.Tests.WorkshopWizardTests" runstate="Runnable" seed="964128906" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:39Z" duration="0.015034" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1803" name="SwitchingFoundationRequiresAssemblyRecheck" fullname="PaperDefense.Tests.WorkshopWizardTests.SwitchingFoundationRequiresAssemblyRecheck" methodname="SwitchingFoundationRequiresAssemblyRecheck" classname="PaperDefense.Tests.WorkshopWizardTests" runstate="Runnable" seed="990851528" result="Passed" start-time="2026-10-18 06:23:39Z" end-time="2026-10-18 06:23:40Z" duration="0.058188" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task9-baseline.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
