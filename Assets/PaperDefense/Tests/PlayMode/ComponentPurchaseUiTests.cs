@@ -61,6 +61,68 @@ namespace PaperDefense.Tests
             }
         }
 
+        [Test] public void InspectingLockedLongBarrelComparesResolverNumbersWithoutChangingTheDraft()
+        {
+            using (var fixture = new AssemblyCommandFixture(94, 390))
+            {
+                var draft = Weapon(fixture); var beforeRecipe = draft.PreviewRecipe; string before = fixture.State();
+                var original = draft.Resolved;
+                var tower = beforeRecipe.Tower; var weapon = tower.Mounts[0].Weapon;
+                var candidateRecipe = new AssemblyRecipe(new TowerRecipe(tower.Foundation, new[] {
+                    new WeaponMountRecipe(0, new WeaponRecipe(weapon.Mechanism, new PartRef("head.long", 1), weapon.Sight, weapon.Magazine, weapon.Trigger)) }));
+                var candidate = AssemblyResolver.Resolve(candidateRecipe, fixture.Catalog, fixture.Balance, MaterialTier.Pencil).Value;
+                var panel = Panel(fixture, draft); panel.Catalog.SetShowUnavailable(true); panel.Catalog.InspectPart("head.long");
+                var label = canvas.GetComponentsInChildren<Text>(true).SingleOrDefault(text => text.name == "Component comparison");
+                Assert.That(label, Is.Not.Null, "Inspecting a replacement must show current → candidate values from the shared resolver.");
+                string Number(float value) => value.ToString("0.###", System.Globalization.CultureInfo.GetCultureInfo("ru-RU"));
+                Assert.That(label.text, Does.Contain(Number(original.Weapons[0].Damage) + " → " + Number(candidate.Weapons[0].Damage)));
+                Assert.That(label.text, Does.Contain(Number(original.Weapons[0].Range) + " → " + Number(candidate.Weapons[0].Range)));
+                Assert.That(label.text, Does.Contain(original.Cost + " → " + candidate.Cost));
+                Assert.That(label.text, Does.Contain(original.Load + " → " + candidate.Load));
+                Assert.That(draft.PreviewRecipe, Is.SameAs(beforeRecipe));
+                Assert.That(fixture.State(), Is.EqualTo(before));
+                Assert.That(fixture.Store.SaveCalls, Is.Zero);
+                Assert.That(Button("Component select part").interactable, Is.False);
+            }
+        }
+
+        [Test] public void InspectingMortarMechanismUsesTheInstallCompatiblePartsWithoutEditingTheGunDraft()
+        {
+            using (var fixture = new AssemblyCommandFixture(94, 390))
+            {
+                var gun = fixture.Gun();
+                var mortar = fixture.Catalog.Starters.First(entry => entry.Kind == AlbumEntryKind.Tower && entry.Snapshot.Recipe.Tower.Mounts[0].Weapon.Mechanism.Id == "core.mortar");
+                // Use a foundation that can carry the mortar, so this test isolates inspection
+                // from the separate overload gate already exercised by the workshop tests.
+                var source = new AlbumEntry("inspection.mechanism", "Gun fixture", 1, new RecipeSnapshot(new AssemblyRecipe(new TowerRecipe(
+                    mortar.Snapshot.Recipe.Tower.Foundation, gun.Snapshot.Recipe.Tower.Mounts)), fixture.Catalog.BalanceRevision, fixture.Catalog.Definitions));
+                var install = new WorkshopDraftSession(fixture.Run); install.Begin(source); install.OpenWeapon(0);
+                Assert.That(install.SelectPart("core.mortar"), Is.True);
+                var expectedRecipe = install.PreviewRecipe;
+                Assert.That(expectedRecipe.Tower.Mounts[0].Weapon.Head.Id, Is.EqualTo("head.mortar"));
+                var expected = AssemblyResolver.Resolve(expectedRecipe, fixture.Catalog, fixture.Balance, MaterialTier.Pencil);
+                Assert.That(expected.Valid, Is.True);
+                var draft = new WorkshopDraftSession(fixture.Run); draft.Begin(source); draft.OpenWeapon(0);
+                var beforeRecipe = draft.PreviewRecipe; string before = fixture.State();
+                var panel = Panel(fixture, draft); panel.Catalog.SetShowUnavailable(true); panel.Catalog.InspectPart("core.mortar");
+                var preview = canvas.GetComponentInChildren<AssemblyMechanicPreview>();
+                Assert.That(preview, Is.Not.Null, "Inspecting the mortar must show its own ready diagram, rather than the previously equipped gun.");
+                Assert.That(preview.Weapon.Family, Is.EqualTo(AssemblyWeaponFamily.Mortar));
+                Assert.That(preview.Weapon.Radius, Is.EqualTo(expected.Value.Weapons[0].Radius));
+                var property = typeof(AssemblyMechanicPreview).GetProperty("Recipe");
+                Assert.That(property, Is.Not.Null, "The displayed composition needs the same compatible part recipe as installation.");
+                var displayed = (RecipeSnapshot)property.GetValue(preview);
+                Assert.That(displayed.Recipe.Tower.Mounts[0].Weapon.Parts.Select(part => part.Id),
+                    Is.EqualTo(expectedRecipe.Tower.Mounts[0].Weapon.Parts.Select(part => part.Id)));
+                var comparison = canvas.GetComponentsInChildren<Text>().Single(text => text.name == "Component comparison");
+                Assert.That(comparison.text, Does.Contain("Радиус"));
+                Assert.That(draft.PreviewRecipe, Is.SameAs(beforeRecipe));
+                Assert.That(draft.PreviewRecipe.Tower.Mounts[0].Weapon.Mechanism.Id, Is.EqualTo("core.gun"));
+                Assert.That(fixture.State(), Is.EqualTo(before));
+                Assert.That(fixture.Store.SaveCalls, Is.Zero);
+            }
+        }
+
         [Test] public void MagazineShowsCapacityAndCycleTimingsFromTheResolver()
         {
             using (var fixture = new AssemblyCommandFixture())
@@ -71,6 +133,50 @@ namespace PaperDefense.Tests
                 string expected = TextResourcesAsset.Default.Resolve(UserText.Message("assembly.component.magazine_stats",
                     weapon.MagazineSize, weapon.Interval, weapon.ReloadSeconds));
                 Assert.That(canvas.GetComponentsInChildren<Text>(true).Any(t => t.text == expected), Is.True);
+            }
+        }
+
+        [TestCase("core.gun", "head.gun", "magazine.drum")]
+        [TestCase("core.gun", "head.gun", "magazine.belt")]
+        [TestCase("core.stapler", "head.stapler", "magazine.drum")]
+        [TestCase("core.mortar", "head.mortar", "magazine.standard")]
+        [TestCase("core.fan", "head.fan", "magazine.standard")]
+        public void InspectedMagazineShowsVisibleResolvedCapacityIntervalAndReloadWithoutEditing(string mechanism, string head, string inspectedMagazine)
+        {
+            using (var fixture = new AssemblyCommandFixture(94, 390))
+            {
+                var starter = mechanism == "core.mortar" ? fixture.Catalog.Starters.First(entry => entry.Kind == AlbumEntryKind.Tower &&
+                    entry.Snapshot.Recipe.Tower.Mounts[0].Weapon.Mechanism.Id == mechanism) : fixture.Gun();
+                var originalWeapon = starter.Snapshot.Recipe.Tower.Mounts[0].Weapon;
+                var weapon = new WeaponRecipe(new PartRef(mechanism, 1), new PartRef(head, 1), originalWeapon.Sight, new PartRef("magazine.standard", 1), originalWeapon.Trigger);
+                var recipe = new AssemblyRecipe(new TowerRecipe(starter.Snapshot.Recipe.Tower.Foundation, new[] { new WeaponMountRecipe(0, weapon) }));
+                var source = new AlbumEntry("inspection.magazine", "Magazine fixture", 1, new RecipeSnapshot(recipe, fixture.Catalog.BalanceRevision, fixture.Catalog.Definitions));
+                var draft = new WorkshopDraftSession(fixture.Run); draft.Begin(source); draft.OpenWeapon(0); draft.SelectCategory(ComponentCategory.Magazine);
+                var beforeRecipe = draft.PreviewRecipe; string before = fixture.State();
+                var current = draft.Resolved.Weapons[0];
+                var candidateRecipe = new AssemblyRecipe(new TowerRecipe(recipe.Tower.Foundation, new[] {
+                    new WeaponMountRecipe(0, new WeaponRecipe(weapon.Mechanism, weapon.Head, weapon.Sight, new PartRef(inspectedMagazine, 1), weapon.Trigger)) }));
+                var candidate = AssemblyResolver.Resolve(candidateRecipe, fixture.Catalog, fixture.Balance, MaterialTier.Pencil).Value.Weapons[0];
+                var panel = Panel(fixture, draft); panel.Catalog.SetShowUnavailable(true); panel.Catalog.InspectPart(inspectedMagazine); Canvas.ForceUpdateCanvases();
+                var cycle = canvas.GetComponentsInChildren<Text>().SingleOrDefault(text => text.name == "Component magazine cycle");
+                Assert.That(cycle, Is.Not.Null, "The defining magazine statistics must have their own visible region, including mortar and fan views.");
+                Assert.That(cycle.isActiveAndEnabled && cycle.rectTransform.rect.height >= 60, Is.True);
+                string Number(float value) => value.ToString("0.###", System.Globalization.CultureInfo.GetCultureInfo("ru-RU"));
+                if (inspectedMagazine == "magazine.standard")
+                {
+                    Assert.That(cycle.text, Does.Contain(current.MagazineSize.ToString()));
+                    Assert.That(cycle.text, Does.Contain(Number(current.Interval)));
+                    Assert.That(cycle.text, Does.Contain(Number(current.ReloadSeconds)));
+                }
+                else
+                {
+                    Assert.That(cycle.text, Does.Contain(current.MagazineSize + " → " + candidate.MagazineSize));
+                    Assert.That(cycle.text, Does.Contain(Number(current.Interval) + " → " + Number(candidate.Interval)));
+                    Assert.That(cycle.text, Does.Contain(Number(current.ReloadSeconds) + " → " + Number(candidate.ReloadSeconds)));
+                }
+                Assert.That(draft.PreviewRecipe, Is.SameAs(beforeRecipe));
+                Assert.That(fixture.State(), Is.EqualTo(before));
+                Assert.That(fixture.Store.SaveCalls, Is.Zero);
             }
         }
 
@@ -86,6 +192,34 @@ namespace PaperDefense.Tests
                 float bottom = viewport.InverseTransformPoint(corners[0]).y;
                 Assert.That(top, Is.LessThanOrEqualTo(viewport.rect.yMax + .1f));
                 Assert.That(bottom, Is.GreaterThanOrEqualTo(viewport.rect.yMin - .1f));
+            }
+        }
+
+        [Test] public void ReflowKeepsTheEquippedFanFullyInsideItsCatalogueViewport()
+        {
+            using (var fixture = new AssemblyCommandFixture(94, 390, data =>
+                data.Unlocked = data.Unlocked.Concat(new[] { "core.fan", "head.fan" }).Distinct().ToArray()))
+            {
+                var starter = fixture.Gun(); var old = starter.Snapshot.Recipe.Tower.Mounts[0].Weapon;
+                var weapon = new WeaponRecipe(new PartRef("core.fan", 1), new PartRef("head.fan", 1), old.Sight, old.Magazine, old.Trigger);
+                var recipe = new AssemblyRecipe(new TowerRecipe(starter.Snapshot.Recipe.Tower.Foundation, new[] { new WeaponMountRecipe(0, weapon) }));
+                var draft = new WorkshopDraftSession(fixture.Run);
+                draft.Begin(new AlbumEntry("inspection.fan", "Fan fixture", 1, new RecipeSnapshot(recipe, fixture.Catalog.BalanceRevision, fixture.Catalog.Definitions)));
+                draft.OpenWeapon(0);
+                var panel = Panel(fixture, draft); panel.Reflow(1232, 488); Canvas.ForceUpdateCanvases();
+                var selected = Button("Component inspect core.fan").GetComponent<RectTransform>();
+                var viewport = (RectTransform)selected.parent.parent;
+                var corners = new Vector3[4]; selected.GetWorldCorners(corners);
+                Assert.That(viewport.InverseTransformPoint(corners[1]).y, Is.LessThanOrEqualTo(viewport.rect.yMax + .1f));
+                Assert.That(viewport.InverseTransformPoint(corners[0]).y, Is.GreaterThanOrEqualTo(viewport.rect.yMin - .1f),
+                    "Reflow must reveal the selected part again after rebuilding the catalogue's final geometry.");
+                panel.Catalog.SetShowUnavailable(true); Canvas.ForceUpdateCanvases();
+                selected = Button("Component inspect core.fan").GetComponent<RectTransform>();
+                viewport = (RectTransform)selected.parent.parent; selected.GetWorldCorners(corners);
+                Assert.That(viewport.InverseTransformPoint(corners[1]).y, Is.LessThanOrEqualTo(viewport.rect.yMax + .1f));
+                Assert.That(viewport.InverseTransformPoint(corners[0]).y, Is.GreaterThanOrEqualTo(viewport.rect.yMin - .1f),
+                    "Showing unavailable variants must keep the equipped fan visible in the rebuilt catalogue.");
+                Assert.That(fixture.Store.SaveCalls, Is.Zero);
             }
         }
 
@@ -152,8 +286,8 @@ namespace PaperDefense.Tests
                 Assert.That(draft.PreviewRecipe.Tower.Mounts.Single().Weapon.Trigger.Id, Is.EqualTo("trigger.burst"));
                 Assert.That(draft.Resolved, Is.Not.Null);
                 Assert.That(draft.Diagnostics.Any(d => d.Code == "assembly.part.required"), Is.False);
-                Assert.That(draft.CanSaveComponent, Is.False, "The burst trigger still needs physical fit coverage beyond the current gun pilot.");
-                Assert.That(draft.Diagnostics.Any(d => d.Code.Contains("fit")), Is.True);
+                Assert.That(draft.CanSaveComponent, Is.True, "The full catalog certifies the burst trigger with its required stock magazine.");
+                Assert.That(draft.Diagnostics.Any(d => d.Code.Contains("fit")), Is.False);
             }
         }
 

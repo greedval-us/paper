@@ -206,6 +206,7 @@ namespace PaperDefense.Presentation
         [SerializeField] float radius = 4;
         float outlineWidth;
         Color outlineColor;
+        internal bool IsControl, Chosen, Focused, Disabled, Hovered, Pressed;
 
         public float Radius { get => radius; set { if (radius == value) return; radius = value; SetVerticesDirty(); } }
         internal void Outline(float width, Color tint)
@@ -221,6 +222,11 @@ namespace PaperDefense.Presentation
             vh.Clear();
             Rect bounds = rectTransform.rect;
             if (bounds.width <= 0 || bounds.height <= 0) return;
+            if (IsControl && color.a >= .9f && bounds.width >= 8 && bounds.height >= 8)
+            {
+                NotebookPaperSurface.Draw(vh, bounds, color, true, Chosen, Focused, Disabled, Hovered, Pressed);
+                return;
+            }
             if (outlineWidth <= 0 && bounds.width > 250 && bounds.height > 150 && color.a > 0)
             { NotebookPaperSurface.Draw(vh, bounds, color); return; }
             float r = Mathf.Clamp(radius, 0, Mathf.Min(bounds.width, bounds.height) * .5f);
@@ -302,6 +308,7 @@ namespace PaperDefense.Presentation
         internal void Configure(WorkshopSurfaceGraphic surface, UnityEngine.UI.Text label, WorkshopIconGraphic icon, bool prominent)
         {
             background = surface;
+            background.IsControl = true;
             caption = label;
             symbol = icon;
             primary = prominent;
@@ -323,6 +330,11 @@ namespace PaperDefense.Presentation
             bool focused = state == SelectionState.Selected;
             bool hovered = state == SelectionState.Highlighted;
             bool pressed = state == SelectionState.Pressed;
+            background.Chosen = chosen;
+            background.Focused = focused;
+            background.Disabled = disabled;
+            background.Hovered = hovered;
+            background.Pressed = pressed;
             if (decoration != null) { decoration.Focused = !disabled && focused; decoration.Hovered = !disabled && hovered; }
             Color fill = primary ? WorkshopUi.Blue : chosen ? WorkshopUi.Selected : WorkshopUi.Surface;
             Color foreground = primary ? WorkshopUi.Paper : chosen ? WorkshopUi.Blue : WorkshopUi.Ink;
@@ -335,6 +347,7 @@ namespace PaperDefense.Presentation
             else if (hovered || focused) fill = primary ? new Color32(41, 83, 202, 255) : new Color32(224, 234, 251, 255);
             background.color = fill;
             background.Outline(!disabled && (focused || chosen) ? 2 : 0, WorkshopUi.Ink);
+            background.SetVerticesDirty();
             if (caption != null) caption.color = foreground;
             if (symbol != null) symbol.color = foreground;
         }

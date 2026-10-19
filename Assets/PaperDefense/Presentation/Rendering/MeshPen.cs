@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace PaperDefense.Presentation
 {
     /// <summary>Authored strokes and atlas illustrations share one reusable mesh and draw order.</summary>
-    internal sealed class MeshPen
+    public sealed class MeshPen
     {
         readonly List<Vector3> vertices;
         readonly List<Color32> colors;

@@ -1,0 +1,289 @@
+{
+  "definitions": 54,
+  "nativeCrops": 140,
+  "sourcePixelArea": 15663298,
+  "envelopes": [
+    {
+      "mechanism": "core.gun",
+      "radius": 0.22467076460746474,
+      "minimumAxisSpacing": 0.4593415292149295
+    },
+    {
+      "mechanism": "core.piercer",
+      "radius": 0.2148539019984608,
+      "minimumAxisSpacing": 0.4397078039969216
+    },
+    {
+      "mechanism": "core.mortar",
+      "radius": 0.21380428060490952,
+      "minimumAxisSpacing": 0.43760856120981906
+    },
+    {
+      "mechanism": "core.fan",
+      "radius": 0.2073538658619455,
+      "minimumAxisSpacing": 0.42470773172389104
+    },
+    {
+      "mechanism": "core.ricochet",
+      "radius": 0.2058269547174779,
+      "minimumAxisSpacing": 0.4216539094349558
+    },
+    {
+      "mechanism": "core.stapler",
+      "radius": 0.20836702309683966,
+      "minimumAxisSpacing": 0.42673404619367933
+    },
+    {
+      "mechanism": "core.blotter",
+      "radius": 0.207494732325977,
+      "minimumAxisSpacing": 0.42498946465195403
+    }
+  ],
+  "runtimeChecks": {
+    "configurations": 28,
+    "placements": 56,
+    "collisions": []
+  },
+  "variantChecks": [
+    {
+      "part": "frame.standard",
+      "tested": 21,
+      "valid": 21,
+      "witness": {
+        "frame": "frame.standard",
+        "mechanism": "core.gun",
+        "slots": [
+          0
+        ]
+      },
+      "validFrames": [
+        "frame.standard"
+      ]
+    },
+    {
+      "part": "frame.heavy",
+      "tested": 21,
+      "valid": 21,
+      "witness": {
+        "frame": "frame.heavy",
+        "mechanism": "core.gun",
+        "slots": [
+          0
+        ]
+      },
+      "validFrames": [
+        "frame.heavy"
+      ]
+    },
+    {
+      "part": "frame.precision",
+      "tested": 7,
+      "valid": 7,
+      "witness": {
+        "frame": "frame.precision",
+        "mechanism": "core.gun",
+        "slots": [
+          0
+        ]
+      },
+      "validFrames": [
+        "frame.precision"
+      ]
+    },
+    {
+      "part": "frame.battery",
+      "tested": 49,
+      "valid": 49,
+      "witness": {
+        "frame": "frame.battery",
+        "mechanism": "core.gun",
+        "slots": [
+          0
+        ]
+      },
+      "validFrames": [
+        "frame.battery"
+      ]
+    },
+    {
+      "part": "hull.standard",
+      "tested": 98,
+      "valid": 98,
+      "witness": {
+        "frame": "frame.standard",
+        "mechanism": "core.gun",
+        "slots": [
+          0
+        ]
+      },
+      "validFrames": [
+        "frame.standard",
+        "frame.battery",
+        "frame.heavy",
+        "frame.precision"
+      ]
+    },
+    {
+      "part": "hull.light",
+      "tested": 98,
+      "valid": 98,
+      "witness": {
+        "frame": "frame.standard",
+        "mechanism": "core.gun",
+        "slots": [
+          0
+        ]
+      },
+      "validFrames": [
+        "frame.standard",
+        "frame.battery",
+        "frame.heavy",
+        "frame.precision"
+      ]
+    },
+    {
+      "part": "hull.reinforced",
+      "tested": 98,
+      "valid": 77,
+      "witness": {
+        "frame": "frame.battery",
+        "mechanism": "core.gun",
+        "slots": [
+          0
+        ]
+      },
+      "validFrames": [
+        "frame.battery",
+        "frame.heavy",
+        "frame.precision"
+      ]
+    },
+    {
+      "part": "armor.none",
+      "tested": 98,
+      "valid": 98,
+      "witness": {
+        "frame": "frame.standard",
+        "mechanism": "core.gun",
+        "slots": [
+          0
+        ]
+      },
+      "validFrames": [
+        "frame.standard",
+        "frame.battery",
+        "frame.heavy",
+        "frame.precision"
+      ]
+    },
+    {
+      "part": "armor.plate",
+      "tested": 98,
+      "valid": 98,
+      "witness": {
+        "frame": "frame.standard",
+        "mechanism": "core.gun",
+        "slots": [
+          0
+        ]
+      },
+      "validFrames": [
+        "frame.standard",
+        "frame.battery",
+        "frame.heavy",
+        "frame.precision"
+      ]
+    },
+    {
+      "part": "armor.front",
+      "tested": 98,
+      "valid": 98,
+      "witness": {
+        "frame": "frame.standard",
+        "mechanism": "core.gun",
+        "slots": [
+          0
+        ]
+      },
+      "validFrames": [
+        "frame.standard",
+        "frame.battery",
+        "frame.heavy",
+        "frame.precision"
+      ]
+    },
+    {
+      "part": "feed.standard",
+      "tested": 98,
+      "valid": 98,
+      "witness": {
+        "frame": "frame.standard",
+        "mechanism": "core.gun",
+        "slots": [
+          0
+        ]
+      },
+      "validFrames": [
+        "frame.standard",
+        "frame.battery",
+        "frame.heavy",
+        "frame.precision"
+      ]
+    },
+    {
+      "part": "feed.boost",
+      "tested": 98,
+      "valid": 98,
+      "witness": {
+        "frame": "frame.standard",
+        "mechanism": "core.gun",
+        "slots": [
+          0
+        ]
+      },
+      "validFrames": [
+        "frame.standard",
+        "frame.battery",
+        "frame.heavy",
+        "frame.precision"
+      ]
+    },
+    {
+      "part": "turn.standard",
+      "tested": 98,
+      "valid": 98,
+      "witness": {
+        "frame": "frame.standard",
+        "mechanism": "core.gun",
+        "slots": [
+          0
+        ]
+      },
+      "validFrames": [
+        "frame.standard",
+        "frame.battery",
+        "frame.heavy",
+        "frame.precision"
+      ]
+    },
+    {
+      "part": "turn.quick",
+      "tested": 98,
+      "valid": 98,
+      "witness": {
+        "frame": "frame.standard",
+        "mechanism": "core.gun",
+        "slots": [
+          0
+        ]
+      },
+      "validFrames": [
+        "frame.standard",
+        "frame.battery",
+        "frame.heavy",
+        "frame.precision"
+      ]
+    }
+  ],
+  "problems": []
+}

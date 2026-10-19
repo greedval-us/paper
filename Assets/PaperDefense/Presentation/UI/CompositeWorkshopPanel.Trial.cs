@@ -10,17 +10,19 @@ namespace PaperDefense.Presentation
     public sealed partial class CompositeWorkshopPanel
     {
         const int AssemblyTrialSeed = 1337;
-        bool assemblyTrialOpen, assemblyTrialPaused;
+        bool assemblyTrialOpen, assemblyTrialPaused, assemblyTrialOverview;
         float assemblyTrialSeconds;
         int assemblyTrialBudget = 400;
         AssemblyTrialScenario assemblyTrialScenario;
-        AlbumEntry assemblyTrialSource;
+        AlbumEntry assemblyTrialSource, assemblyTrialComparisonSource;
         GameObject assemblyTrialOverlay;
-        TrialLaneSketch assemblyTrialLane;
+        TrialLaneSketch assemblyTrialLane, assemblyTrialComparisonLane;
         Text assemblyTrialConditions, assemblyTrialQuote, assemblyTrialMeasured;
+        Text assemblyTrialComparisonQuote, assemblyTrialComparisonMeasured;
         Text assemblyTrialEmpty;
-        Button assemblyTrialPause, assemblyTrialRestart;
+        Button assemblyTrialPause, assemblyTrialRestart, assemblyTrialView;
         public AssemblyTrialReport LastAssemblyTrial { get; private set; }
+        public AssemblyTrialReport LastAssemblyTrialComparison { get; private set; }
         string TrialText(string key, params object[] args) => ui.Resolve(UserText.Message("assembly.trial." + key, args));
 
         static bool IsCleaningTrial(ResolvedEntry entry) => entry != null && entry.Weapons.Count > 0 &&
@@ -38,8 +40,10 @@ namespace PaperDefense.Presentation
         void ResetAssemblyTrial()
         {
             CloseAssemblyTrial();
-            LastAssemblyTrial = null; LastTrial = null; assemblyTrialSource = null;
+            LastAssemblyTrial = null; LastAssemblyTrialComparison = null; LastTrial = null;
+            assemblyTrialSource = null; assemblyTrialComparisonSource = null;
             assemblyTrialSeconds = 0; assemblyTrialPaused = false;
+            assemblyTrialOverview = false;
         }
 
         void CaptureAssemblyTrialPlayback()
@@ -57,6 +61,7 @@ namespace PaperDefense.Presentation
             assemblyTrialSource = new AlbumEntry(draft.Id, DraftSession.Name, draft.Revision, draft.Snapshot, draft.LibraryReferences);
             assemblyTrialScenario = DefaultAssemblyScenario();
             assemblyTrialBudget = 400;
+            assemblyTrialComparisonSource = ComparisonCandidates().FirstOrDefault();
             assemblyTrialOpen = true;
             BuildAssemblyTrialSurface();
         }
@@ -65,7 +70,7 @@ namespace PaperDefense.Presentation
         {
             assemblyTrialOpen = false;
             if (assemblyTrialOverlay != null) WorkshopUi.RemoveView(assemblyTrialOverlay);
-            assemblyTrialOverlay = null; assemblyTrialLane = null;
+            assemblyTrialOverlay = null; assemblyTrialLane = null; assemblyTrialComparisonLane = null;
         }
 
         public TrialReport RunTrial()
@@ -75,9 +80,34 @@ namespace PaperDefense.Presentation
                 DraftSession.Name, DraftSession.Draft.Revision, DraftSession.Draft.Snapshot, DraftSession.Draft.LibraryReferences);
             if (!assemblyTrialOpen) assemblyTrialScenario = DefaultAssemblyScenario();
             LastAssemblyTrial = run.RunAssemblyTrial(source, assemblyTrialScenario, assemblyTrialBudget, AssemblyTrialSeed);
+            LastAssemblyTrialComparison = assemblyTrialOpen && assemblyTrialComparisonSource != null
+                ? run.RunAssemblyTrial(assemblyTrialComparisonSource, assemblyTrialScenario, assemblyTrialBudget, AssemblyTrialSeed) : null;
             LastTrial = LastAssemblyTrial?.Recording;
             assemblyTrialSeconds = 0; assemblyTrialPaused = false;
             return LastTrial;
+        }
+
+        AlbumEntry[] ComparisonCandidates()
+        {
+            if (assemblyTrialSource == null) return Array.Empty<AlbumEntry>();
+            bool DifferentRecipe(AlbumEntry entry) => !entry.Snapshot.Recipe.Parts.Select(part => (part.Id, part.Revision))
+                .SequenceEqual(assemblyTrialSource.Snapshot.Recipe.Parts.Select(part => (part.Id, part.Revision)));
+            bool Eligible(AlbumEntry entry)
+            {
+                if (entry.Id == assemblyTrialSource.Id || entry.Kind != assemblyTrialSource.Kind || entry.Kind == AlbumEntryKind.Legacy ||
+                    !AssemblyTrialRunner.ScenariosFor(entry).Contains(assemblyTrialScenario)) return false;
+                var gate = new PaperDefense.Application.WorkshopDraftSession(run, DraftSession.Catalog);
+                gate.Begin(entry); return gate.CanTrial;
+            }
+            return run.Workshop.Entries.Where(Eligible).OrderByDescending(DifferentRecipe).ThenBy(entry => entry.Name).ToArray();
+        }
+
+        void CycleComparison()
+        {
+            var choices = ComparisonCandidates();
+            int index = Array.FindIndex(choices, item => item.Id == assemblyTrialComparisonSource?.Id);
+            assemblyTrialComparisonSource = index + 1 < choices.Length ? choices[index + 1] : null;
+            InvalidateAssemblyTrial(); RebuildAssemblyTrialSurface();
         }
 
         void BuildAssemblyTrialSurface()
@@ -87,7 +117,8 @@ namespace PaperDefense.Presentation
             assemblyTrialOverlay = shade.gameObject;
             float w = width - 32, h = height - 24;
             var sheet = ui.Panel(shade, "Composite trial sheet", new Rect(16, 12, w, h), WorkshopUi.Paper, true);
-            float rightWidth = Mathf.Clamp(w * .30f, 294, 390), leftWidth = w - rightWidth - 40;
+            bool comparing = assemblyTrialComparisonSource != null;
+            float rightWidth = Mathf.Clamp(w * (comparing ? .37f : .30f), comparing ? 346 : 294, comparing ? 480 : 390), leftWidth = w - rightWidth - 40;
             ui.Button(sheet, "Composite trial header return", new Rect(12, 8, 206, 48), TrialText("return"), CloseAssemblyTrial, WorkshopIcon.Back);
             var title = ui.Label(sheet, "Composite trial title", TrialText("title"), new Rect(230, 6, w - 460, 52), 31, true);
             title.alignment = TextAnchor.MiddleCenter;
@@ -97,40 +128,80 @@ namespace PaperDefense.Presentation
             {
                 var scenario = scenarios[i];
                 var tab = ui.Button(sheet, "Composite trial scenario " + scenario,
-                    new Rect(12 + i * (tabWidth + 6), 76, tabWidth, 42), TrialText("scenario." + scenario), () => {
-                        assemblyTrialScenario = scenario; InvalidateAssemblyTrial(); RebuildAssemblyTrialSurface();
+                    new Rect(12 + i * (tabWidth + 6), 76, tabWidth, 36), TrialText("scenario." + scenario), () => {
+                        assemblyTrialScenario = scenario;
+                        if (assemblyTrialComparisonSource != null && !ComparisonCandidates().Any(entry => entry.Id == assemblyTrialComparisonSource.Id))
+                            assemblyTrialComparisonSource = ComparisonCandidates().FirstOrDefault();
+                        InvalidateAssemblyTrial(); RebuildAssemblyTrialSurface();
                     });
                 ui.SetSelected(tab, scenario == assemblyTrialScenario);
             }
-            ui.Button(sheet, "Composite trial budget", new Rect(12, 130, 194, 48), TrialText("budget", assemblyTrialBudget), () => {
+            ui.Button(sheet, "Composite trial budget", new Rect(w - 206, 8, 194, 48), TrialText("budget", assemblyTrialBudget), () => {
                 var choices = run.Session.Balance.Trials.BudgetChoices;
                 int index = choices.IndexOf(assemblyTrialBudget);
                 assemblyTrialBudget = choices[(index + 1) % choices.Count];
                 InvalidateAssemblyTrial(); RebuildAssemblyTrialSurface();
             }, WorkshopIcon.Cost);
-            assemblyTrialConditions = ui.Label(sheet, "Composite trial conditions", "", new Rect(220, 124, leftWidth - 208, 62), 17, color: WorkshopUi.Muted);
-            var field = ui.Panel(sheet, "Composite trial field", new Rect(12, 194, leftWidth, h - 206), WorkshopUi.Surface, true);
+            assemblyTrialConditions = ui.Label(sheet, "Composite trial conditions", "", new Rect(232, 54, w - 464, 20), 14, color: WorkshopUi.Muted);
+            assemblyTrialConditions.alignment = TextAnchor.MiddleCenter;
+            float fieldHeight = h - 130;
+            var field = ui.Panel(sheet, "Composite trial field", new Rect(12, 118, leftWidth, fieldHeight), WorkshopUi.Surface, true);
             field.gameObject.AddComponent<RectMask2D>();
-            assemblyTrialLane = WorkshopUi.Graphic<TrialLaneSketch>(field, "Composite trial lane", new Rect(0, 0, leftWidth, h - 206));
-            assemblyTrialEmpty = ui.Label(field, "Composite trial field hint", TrialText("unstarted"), new Rect(28, (h - 206) * .42f, leftWidth - 56, 96), 25, true, WorkshopUi.Muted);
+            WorkshopScenery(field, "Composite trial scenery", new Rect(4, 4, leftWidth - 8, fieldHeight - 8), .58f);
+            float laneHeight = comparing ? (fieldHeight - 10) * .5f : fieldHeight;
+            var firstViewport = ui.Panel(field, "Composite trial first viewport", new Rect(0, 26, leftWidth, laneHeight - 26), Color.clear);
+            firstViewport.gameObject.AddComponent<RectMask2D>();
+            assemblyTrialLane = WorkshopUi.Graphic<TrialLaneSketch>(firstViewport, "Composite trial lane", new Rect(0, 0, leftWidth, laneHeight - 26));
+            assemblyTrialLane.FrameRecording = true;
+            assemblyTrialLane.CombatFocus = !assemblyTrialOverview;
+            if (comparing)
+            {
+                ui.Label(field, "Composite trial first lane name", assemblyTrialSource.Name, new Rect(14, 0, leftWidth - 218, 26), 18, true);
+                ui.Label(field, "Composite trial second lane name", assemblyTrialComparisonSource.Name, new Rect(14, laneHeight + 10, leftWidth - 28, 26), 18, true);
+                var secondViewport = ui.Panel(field, "Composite trial second viewport", new Rect(0, laneHeight + 36, leftWidth, laneHeight - 26), Color.clear);
+                secondViewport.gameObject.AddComponent<RectMask2D>();
+                assemblyTrialComparisonLane = WorkshopUi.Graphic<TrialLaneSketch>(secondViewport, "Composite trial comparison lane", new Rect(0, 0, leftWidth, laneHeight - 26));
+                assemblyTrialComparisonLane.FrameRecording = true;
+                assemblyTrialComparisonLane.CombatFocus = !assemblyTrialOverview;
+            }
+            assemblyTrialView = ui.Button(field, "Composite trial overview", new Rect(leftWidth - 202, 0, 190, 26),
+                TrialText(assemblyTrialOverview ? "combat_focus" : "overview"), () => {
+                    CaptureAssemblyTrialPlayback(); assemblyTrialOverview = !assemblyTrialOverview; RebuildAssemblyTrialSurface();
+                }, WorkshopIcon.Target);
+            assemblyTrialEmpty = ui.Label(field, "Composite trial field hint", TrialText("unstarted"), new Rect(28, fieldHeight * .42f, leftWidth - 56, 96), 25, true, WorkshopUi.Muted);
             assemblyTrialEmpty.alignment = TextAnchor.MiddleCenter;
 
             float cardHeight = h - 88;
             var card = ui.Panel(sheet, "Composite trial measurements", new Rect(28 + leftWidth, 76, rightWidth, cardHeight), WorkshopUi.Surface, true);
-            ui.Label(card, "Composite trial comparison heading", TrialText("comparison"), new Rect(14, 8, rightWidth - 28, 36), 23, true);
-            var name = ui.Label(card, "Composite trial entry name", assemblyTrialSource.Name, new Rect(14, 48, rightWidth - 28, 44), 19, true);
+            ui.Label(card, "Composite trial comparison heading", TrialText(comparing ? "comparison_heading" : "comparison"), new Rect(14, 8, rightWidth - 28, 36), 23, true);
+            float columnWidth = comparing ? (rightWidth - 40) * .5f : rightWidth - 28;
+            var name = ui.Label(card, "Composite trial entry name", assemblyTrialSource.Name, new Rect(14, 48, columnWidth, 44), 19, true);
             name.resizeTextForBestFit = true; name.resizeTextMinSize = 15; name.resizeTextMaxSize = 19;
-            assemblyTrialQuote = ui.Label(card, "Composite trial quote", "", new Rect(14, 98, rightWidth - 28, 84), 18);
+            assemblyTrialQuote = ui.Label(card, "Composite trial quote", "", new Rect(14, 98, columnWidth, 84), comparing ? 16 : 18);
+            if (comparing)
+            {
+                var otherName = ui.Label(card, "Composite trial comparison entry name", assemblyTrialComparisonSource.Name, new Rect(26 + columnWidth, 48, columnWidth, 44), 19, true);
+                otherName.resizeTextForBestFit = true; otherName.resizeTextMinSize = 15; otherName.resizeTextMaxSize = 19;
+                assemblyTrialComparisonQuote = ui.Label(card, "Composite trial comparison quote", "", new Rect(26 + columnWidth, 98, columnWidth, 84), 16);
+            }
             var theory = ui.Label(card, "Composite trial theory", AssemblyTrialTheory(), new Rect(14, 188, rightWidth - 28, 56), 17, color: WorkshopUi.Muted);
             theory.alignment = TextAnchor.UpperLeft;
-            assemblyTrialMeasured = ui.Label(card, "Composite trial measured result", "", new Rect(14, 250, rightWidth - 28, cardHeight - 432), 17);
+            assemblyTrialMeasured = ui.Label(card, "Composite trial measured result", "", new Rect(14, 250, columnWidth, cardHeight - 486), comparing ? 15 : 17);
             assemblyTrialMeasured.alignment = TextAnchor.UpperLeft;
+            if (comparing)
+            {
+                assemblyTrialComparisonMeasured = ui.Label(card, "Composite trial comparison measured result", "", new Rect(26 + columnWidth, 250, columnWidth, cardHeight - 486), 15);
+                assemblyTrialComparisonMeasured.alignment = TextAnchor.UpperLeft;
+            }
             float actionY = cardHeight - 176;
+            ui.Button(card, "Composite trial compare", new Rect(14, actionY - 54, rightWidth - 28, 46),
+                TrialText("compare_with", assemblyTrialComparisonSource?.Name ?? TrialText("compare_none")), CycleComparison, WorkshopIcon.Book);
             ui.Button(card, "Composite trial run", new Rect(14, actionY, rightWidth - 28, 46), TrialText("run"), RecordAssemblyTrial, WorkshopIcon.Target, true);
             float half = (rightWidth - 36) / 2;
             assemblyTrialPause = ui.Button(card, "Composite trial pause", new Rect(14, actionY + 54, half, 42), TrialText(assemblyTrialPaused ? "resume" : "pause"), () => {
                 if (LastTrial == null) return;
                 assemblyTrialLane.PlaybackPaused = !assemblyTrialLane.PlaybackPaused;
+                if (assemblyTrialComparisonLane != null) assemblyTrialComparisonLane.PlaybackPaused = assemblyTrialLane.PlaybackPaused;
                 CaptureAssemblyTrialPlayback();
                 assemblyTrialPause.GetComponentInChildren<Text>().text = TrialText(assemblyTrialPaused ? "resume" : "pause");
             });
@@ -169,13 +240,13 @@ namespace PaperDefense.Presentation
         void RebuildAssemblyTrialSurface()
         {
             if (assemblyTrialOverlay != null) WorkshopUi.RemoveView(assemblyTrialOverlay);
-            assemblyTrialOverlay = null; assemblyTrialLane = null;
+            assemblyTrialOverlay = null; assemblyTrialLane = null; assemblyTrialComparisonLane = null;
             BuildAssemblyTrialSurface();
         }
 
         void InvalidateAssemblyTrial()
         {
-            LastAssemblyTrial = null; LastTrial = null; assemblyTrialSeconds = 0; assemblyTrialPaused = false;
+            LastAssemblyTrial = null; LastAssemblyTrialComparison = null; LastTrial = null; assemblyTrialSeconds = 0; assemblyTrialPaused = false;
         }
 
         void RecordAssemblyTrial()
@@ -193,17 +264,32 @@ namespace PaperDefense.Presentation
             if (resolved?.Support?.MaximumInstances > 0) copies = Math.Min(copies, resolved.Support.MaximumInstances);
             copies = LastAssemblyTrial?.Copies ?? copies;
             assemblyTrialQuote.text = TrialText("quote", unitCost, copies, LastAssemblyTrial?.Cost ?? copies * unitCost);
-            assemblyTrialMeasured.text = LastAssemblyTrial == null ? TrialText("unstarted") : AssemblyTrialMeasurements();
+            assemblyTrialMeasured.text = LastAssemblyTrial == null ? TrialText("unstarted") : AssemblyTrialMeasurements(LastAssemblyTrial);
+            if (assemblyTrialComparisonLane != null)
+            {
+                var second = LastAssemblyTrialComparison;
+                if (second != null) assemblyTrialComparisonQuote.text = TrialText("quote", second.UnitCost, second.Copies, second.Cost);
+                else
+                {
+                    var gate = new PaperDefense.Application.WorkshopDraftSession(run, DraftSession.Catalog); gate.Begin(assemblyTrialComparisonSource);
+                    int cost = gate.Resolved?.Cost ?? 0, number = cost > 0 ? assemblyTrialBudget / cost : 0;
+                    if (gate.Resolved?.Support?.MaximumInstances > 0) number = Math.Min(number, gate.Resolved.Support.MaximumInstances);
+                    assemblyTrialComparisonQuote.text = TrialText("quote", cost, number, number * cost);
+                }
+                assemblyTrialComparisonMeasured.text = second == null ? TrialText("unstarted_short") : AssemblyTrialMeasurements(second);
+                assemblyTrialComparisonLane.SetResult(second?.Recording, Time.unscaledTime - assemblyTrialSeconds / assemblyTrialComparisonLane.PlaybackSpeed, second?.Recording?.DurationSeconds ?? 1);
+                assemblyTrialComparisonLane.PlaybackPaused = assemblyTrialPaused;
+            }
             assemblyTrialEmpty.gameObject.SetActive(LastAssemblyTrial == null);
             assemblyTrialPause.interactable = assemblyTrialRestart.interactable = LastTrial != null;
+            assemblyTrialView.interactable = LastTrial != null;
             assemblyTrialLane.SetResult(LastTrial, Time.unscaledTime - assemblyTrialSeconds / assemblyTrialLane.PlaybackSpeed, LastTrial?.DurationSeconds ?? 1);
             assemblyTrialLane.PlaybackPaused = assemblyTrialPaused;
             assemblyTrialPause.GetComponentInChildren<Text>().text = TrialText(assemblyTrialPaused ? "resume" : "pause");
         }
 
-        string AssemblyTrialMeasurements()
+        string AssemblyTrialMeasurements(AssemblyTrialReport report)
         {
-            var report = LastAssemblyTrial;
             var lines = new List<string>();
             if (report.Damage.HasValue) lines.Add(TrialText("damage", report.Damage.Value.ToString("0.##")));
             if (report.Leaks.HasValue) lines.Add(TrialText("leaks", report.Leaks.Value));

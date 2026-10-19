@@ -36,6 +36,23 @@ namespace PaperDefense.Editor
             catch (Exception e) { LastCapture = "ERROR: " + e; queue.Clear(); Debug.LogError(LastCapture); }
         }
         public static WorkshopWizard Wizard => Game.GetComponentInChildren<WorkshopHud>(true).Guided;
+        public static CompositeWorkshopPanel Assembly => Game.GetComponentInChildren<WorkshopHud>(true).Composite;
+        public static readonly Vector2Int[] AssemblyResolutions = {
+            new Vector2Int(1024, 768), new Vector2Int(1280, 720), new Vector2Int(1920, 1080),
+            new Vector2Int(1280, 960), new Vector2Int(1600, 900)
+        };
+
+        /// <summary>Reach the production album editor without the retired drawing wizard.</summary>
+        public static void AssemblyStep(int step, AlbumEntry entry = null)
+        {
+            if (step < 0 || step > 2) throw new ArgumentOutOfRangeException(nameof(step));
+            Game.Run.OpenWorkshop(); Game.Navigate(PlayerPage.Workshop);
+            var panel = Assembly ?? throw new InvalidOperationException("The production assembly editor is unavailable.");
+            if (entry == null) panel.BeginNewEntry(); else panel.OpenEntry(entry);
+            var button = panel.Root.GetComponentsInChildren<Button>().Single(item => item.name == "Composite step " + step);
+            if (!button.IsInteractable()) throw new InvalidOperationException("The requested assembly stage is unavailable.");
+            button.onClick.Invoke();
+        }
         public static void WorkshopStep(int step)
         {
             if (step < 0 || step > 2) throw new ArgumentOutOfRangeException(nameof(step));

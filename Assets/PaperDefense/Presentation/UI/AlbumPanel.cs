@@ -78,9 +78,12 @@ namespace PaperDefense.Presentation
                 float bodyY = 254, bodyHeight = height - bodyY - 106;
                 float catalogWidth = (width - 64) * .7f;
                 var entries = run.Workshop.Entries.Where(Matches).ToArray();
-                if (entries.Length == 0) Empty(new Rect(24, bodyY, catalogWidth, bodyHeight));
-                else Cards(entries, new Rect(24, bodyY, catalogWidth, bodyHeight));
-                Inspector(new Rect(40 + catalogWidth, bodyY, width - catalogWidth - 64, bodyHeight));
+                if (entries.Length == 0) Empty(new Rect(24, bodyY, width - 48, bodyHeight));
+                else
+                {
+                    Cards(entries, new Rect(24, bodyY, catalogWidth, bodyHeight));
+                    Inspector(new Rect(40 + catalogWidth, bodyY, width - catalogWidth - 64, bodyHeight));
+                }
                 Footer();
                 if (focus != null && EventSystem.current != null)
                 {
@@ -112,6 +115,18 @@ namespace PaperDefense.Presentation
                 var button = ui.Button(Root, "Album assign " + index,
                     new Rect(24 + index % columns * (slotWidth + gap), 72 + index / columns * 56, slotWidth, slotHeight),
                     caption, () => RequestAssign(slot), WorkshopIcon.Book);
+                if (columns == 8 && entry != null)
+                {
+                    WorkshopUi.RemoveView(button.GetComponentInChildren<WorkshopIconGraphic>().gameObject);
+                    var name = button.GetComponentInChildren<Text>();
+                    WorkshopUi.Place(name.rectTransform, new Rect(6, 64, slotWidth - 12, 36));
+                    name.text = ui.Resolve(entry.Name); name.fontSize = 14;
+                    name.resizeTextForBestFit = true; name.resizeTextMinSize = 13; name.resizeTextMaxSize = 14;
+                    name.alignment = TextAnchor.MiddleCenter;
+                    DrawEntry(button.transform, entry, new Rect(8, 3, slotWidth - 16, 58));
+                    var number = ui.Label(button.transform, "Album slot number " + index, (index + 1).ToString(), new Rect(6, 2, 22, 22), 15);
+                    number.alignment = TextAnchor.UpperLeft;
+                }
                 button.interactable = !destinationSlot.HasValue && Selected != null;
                 ui.SetSelected(button, destinationSlot == index || SelectedId != null && entry?.Id == SelectedId);
             }
@@ -132,7 +147,7 @@ namespace PaperDefense.Presentation
 
         void Cards(AlbumEntry[] entries, Rect bounds)
         {
-            int columns = width >= 1500 ? 4 : 2;
+            int columns = width >= 1024 ? 4 : 2;
             const float gap = 12;
             float cardWidth = (bounds.width - gap * (columns - 1) - 8) / columns;
             float cardHeight = Mathf.Clamp((bounds.height - gap) / 2, 168, 246);
@@ -152,21 +167,33 @@ namespace PaperDefense.Presentation
                 var title = ui.Label(card, "Album card name", entry.Name, new Rect(10, cardHeight - 82, cardWidth - 20, 46), 19, true);
                 title.resizeTextForBestFit = true; title.resizeTextMinSize = 15; title.resizeTextMaxSize = 19;
                 var resolved = run.PreviewAlbumEntry(entry, MaterialTier.Pencil);
-                ui.Label(card, "Album card price", resolved.Valid ? T("price", resolved.Value.Cost) : T("unavailable"),
+                var price = ui.Label(card, "Album card price", resolved.Valid ? T("price", resolved.Value.Cost) : T("unavailable"),
                     new Rect(10, cardHeight - 32, cardWidth - 20, 26), 16, color: WorkshopUi.Muted);
+                price.resizeTextForBestFit = true; price.resizeTextMinSize = 14; price.resizeTextMaxSize = 16;
+                price.horizontalOverflow = HorizontalWrapMode.Overflow;
             }
         }
 
         void Empty(Rect bounds)
         {
             var sheet = ui.Panel(Root, "Album empty sheet", bounds, Color.white);
-            float imageHeight = Mathf.Min(130, bounds.height * .3f);
-            var illustration = WorkshopUi.Graphic<WorkshopIconGraphic>(sheet, "Album empty notebook", new Rect(bounds.width * .35f, 12, bounds.width * .3f, imageHeight));
-            illustration.Icon = WorkshopIcon.Book; illustration.color = WorkshopUi.Blue;
+            float imageHeight = Mathf.Max(120, Mathf.Min(270, bounds.height - 158));
+            float imageWidth = Mathf.Min(740, bounds.width * .78f), imageX = (bounds.width - imageWidth) * .5f;
             var title = ui.Label(sheet, "Album empty", T(Filter == AlbumFilter.Mine ? "empty_mine" : "empty"),
-                new Rect(24, imageHeight + 14, bounds.width - 48, 52), 27, true); title.alignment = TextAnchor.MiddleCenter;
-            var hint = ui.Label(sheet, "Album empty explanation", T("empty_hint"), new Rect(24, imageHeight + 72, bounds.width - 48, 60), 19, color: WorkshopUi.Muted);
+                new Rect(24, 0, bounds.width - 48, 44), 30, true); title.alignment = TextAnchor.MiddleCenter;
+            var hint = ui.Label(sheet, "Album empty explanation", T("empty_hint"), new Rect(24, 44, bounds.width - 48, 42), 19, color: WorkshopUi.Muted);
             hint.alignment = TextAnchor.MiddleCenter;
+            var illustration = WorkshopUi.Graphic<NotebookOpenBookGraphic>(sheet, "Album empty notebook", new Rect(imageX, 84, imageWidth, imageHeight));
+            var starter = run.AssemblyCatalog?.Starters.FirstOrDefault(entry => entry.Kind == AlbumEntryKind.Tower);
+            if (starter != null)
+            {
+                var left = WorkshopUi.Graphic<WeaponAssemblyGraphic>(illustration.transform, "Album empty foundation study",
+                    new Rect(imageWidth * .09f, imageHeight * .16f, imageWidth * .35f, imageHeight * .66f));
+                left.SetComposition(AssemblyVisualComposer.ComposeFoundation(starter.Snapshot.Recipe.Tower.Foundation));
+                var right = WorkshopUi.Graphic<WeaponAssemblyGraphic>(illustration.transform, "Album empty assembled study",
+                    new Rect(imageWidth * .55f, imageHeight * .16f, imageWidth * .34f, imageHeight * .66f));
+                right.SetRecipe(starter.Snapshot);
+            }
             float actionWidth = Mathf.Min(320, bounds.width - 48);
             ui.Button(sheet, "Album show standard", new Rect((bounds.width - actionWidth) / 2, bounds.height - 58, actionWidth, 44),
                 T("show_standard"), () => SetFilter(AlbumFilter.Standard), WorkshopIcon.Book);
@@ -204,7 +231,7 @@ namespace PaperDefense.Presentation
             {
                 var legacy = WorkshopUi.Graphic<BlueprintSketch>(parent, "Album legacy illustration", bounds); legacy.SetBlueprint(entry.LegacyBlueprint); return;
             }
-            if (entry.Kind == AlbumEntryKind.Tower)
+            if (entry.Kind == AlbumEntryKind.Tower || entry.Kind == AlbumEntryKind.Structure)
             {
                 var exact = WorkshopUi.Graphic<WeaponAssemblyGraphic>(parent, "Album certified illustration", bounds);
                 try { exact.SetRecipe(entry.Snapshot); return; }
@@ -226,7 +253,7 @@ namespace PaperDefense.Presentation
         void Footer()
         {
             string status = feedback;
-            if (string.IsNullOrEmpty(status) && Selected != null && !destinationSlot.HasValue) status = T("choose_slot");
+            if (string.IsNullOrEmpty(status) && Selected != null && Matches(Selected) && !destinationSlot.HasValue) status = T("choose_slot");
             ui.Label(Root, "Album status", status, new Rect(24, height - 98, width - 48, 34), 17, color: WorkshopUi.Warning);
             ui.Button(Root, "Album new", new Rect(24, height - 58, 190, 44), T("new"), () => edit?.Invoke(null), WorkshopIcon.Plus, true).interactable = edit != null;
             ui.Button(Root, "Album restore", new Rect(226, height - 58, 310, 44), T("restore"), () => {

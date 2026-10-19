@@ -18,10 +18,16 @@ namespace PaperDefense.Presentation
         readonly Text[] albumColorAmounts = new Text[4], albumWellAmounts = new Text[3];
         readonly PlayerIconGraphic[] albumWellSymbols = new PlayerIconGraphic[3];
         readonly Cell[] albumQuoteCell = new Cell[1];
+        readonly RectTransform[] albumApproaches = new RectTransform[4];
+        readonly Text[] albumApproachCounts = new Text[4];
+        readonly int[] albumOffscreenCounts = new int[4];
+        readonly bool[] albumApproachSides = new bool[4];
         Text albumInk, albumHealth, albumWave, albumPhase, albumForecast, albumSpeed, albumMessage, albumSelection;
         Text albumStructureName, albumDetails, albumFieldSummary;
         Button albumLaunch, albumErase, albumUpgrade, albumPaint, albumBlotter;
-        RectTransform albumContext, albumContextContent, albumPreview;
+        Button albumOverview;
+        Text albumOverviewCaption;
+        RectTransform albumContext, albumContextContent, albumPreview, albumMessageBadge;
         int albumPreviewId = -1;
         float albumContextWidth;
 
@@ -106,9 +112,16 @@ namespace PaperDefense.Presentation
             albumBlotter = AlbumAction(dock, "Album battle blotter", new Rect(actionX + (actionWidth + gap) * 2, stripY, actionWidth, 44), PlayerIcon.Drop, "blotter", DrawingMode.Blotter, "ui.tool.blotter");
             albumPaint = AlbumAction(dock, "Album battle paint", new Rect(actionX + (actionWidth + gap) * 3, stripY, actionWidth, 44), PlayerIcon.Pencil, "paint", DrawingMode.Paint, "ui.tool.paint");
             ui.IconButton(dock, "Battle context toggle", new Rect(actionX + (actionWidth + gap) * 4, stripY, actionWidth, 44), PlayerIcon.Help, BattleCopy("summary"), () => { albumShowSummary = !albumShowSummary; Refresh(); });
-            albumSelection = ui.Label(parent, "", new Rect(24, layout.Dock.y - 28, layout.Width - 48, 24), 15, PlayerUi.Ink, alignment: TextAnchor.MiddleCenter);
+            albumSelection = ui.Label(parent, "", new Rect(180, layout.Dock.y - 20, layout.Width - 360, 20), 15, PlayerUi.Ink, alignment: TextAnchor.MiddleCenter);
             albumSelection.name = "Battle tool hint";
-            albumMessage = ui.Label(parent, "", new Rect(260, layout.Field.y + 4, Mathf.Max(10, layout.Field.width - 590), 26), 16, PlayerUi.Ink, alignment: TextAnchor.MiddleCenter);
+            float messageWidth = Mathf.Min(440, layout.Field.width * .42f);
+            albumMessageBadge = ui.Panel(parent, "Battle message paper", new Rect(layout.Field.x + 8, layout.Field.yMax - 94, messageWidth, 42), PlayerUi.Card);
+            albumMessage = ui.Label(albumMessageBadge, "", new Rect(10, 3, messageWidth - 20, 36), 16, PlayerUi.Ink, alignment: TextAnchor.MiddleLeft);
+            albumOverview = AlbumTextButton(parent, "Battle overview", new Rect(layout.Field.x + 8, layout.Field.yMax - 42, 118, 34),
+                BattleCopy("overview"), () => { if (!game.CanBuild) return; game.Drawing.SetBattleView(game.Drawing.Zoom > 1.01f); Refresh(); });
+            albumOverview.GetComponent<PlayerTooltip>().Message = BattleCopy("overview_hint");
+            albumOverviewCaption = albumOverview.GetComponentInChildren<Text>();
+            BuildApproachIndicators(parent, layout.Field);
             for (int i = 0; i < albumWells.Length; i++)
             {
                 int index = i;
@@ -144,6 +157,51 @@ namespace PaperDefense.Presentation
             albumContext.gameObject.SetActive(false);
         }
 
+        void BuildApproachIndicators(Transform parent, Rect field)
+        {
+            if (game.Run.Session.Battlefield != null)
+                foreach (var cell in game.Run.Session.Battlefield.Entrances)
+                {
+                    if (cell.X == 0) albumApproachSides[0] = true;
+                    if (cell.X == game.Run.Session.Balance.Width - 1) albumApproachSides[1] = true;
+                    if (cell.Y == game.Run.Session.Balance.Height - 1) albumApproachSides[2] = true;
+                    if (cell.Y == 0) albumApproachSides[3] = true;
+                }
+            var positions = new[] { new Vector2(field.x + 8, field.center.y - 15), new Vector2(field.xMax - 72, field.center.y - 15),
+                new Vector2(field.center.x - 32, field.y + 8), new Vector2(field.center.x - 32, field.yMax - 34) };
+            for (int side = 0; side < 4; side++)
+            {
+                var panel = ui.Panel(parent, "Battle approach " + side, new Rect(positions[side], new Vector2(64, 30)), PlayerUi.Card);
+                albumApproaches[side] = panel;
+                var arrow = PlayerUi.Graphic<PlayerIconGraphic>(panel, "Enemy approach arrow", new Rect(3, 1, 30, 28));
+                arrow.Icon = PlayerIcon.Next; arrow.Sketch = true; arrow.color = NotebookPalette.Red;
+                arrow.rectTransform.pivot = new Vector2(.5f, .5f); arrow.rectTransform.anchoredPosition = new Vector2(18, -15);
+                arrow.rectTransform.localEulerAngles = new Vector3(0, 0, side == 0 ? 0 : side == 1 ? 180 : side == 2 ? -90 : 90);
+                albumApproachCounts[side] = ui.Label(panel, "", new Rect(34, 0, 28, 30), 16, NotebookPalette.Red, alignment: TextAnchor.MiddleCenter);
+            }
+        }
+
+        void RefreshApproachIndicators(IRunReadModel session)
+        {
+            for (int side = 0; side < 4; side++) albumOffscreenCounts[side] = 0;
+            var camera = game.World.WorldCamera;
+            if (camera != null)
+                foreach (var enemy in session.Enemies)
+                {
+                    var point = camera.WorldToViewportPoint(new Vector3(enemy.Position.X, enemy.Position.Y, 0));
+                    int side = point.x < 0 ? 0 : point.x > 1 ? 1 : point.y > 1 ? 2 : point.y < 0 ? 3 : -1;
+                    if (side >= 0) albumOffscreenCounts[side]++;
+                }
+            bool focused = game.Drawing.Zoom > 1.01f;
+            for (int side = 0; side < 4; side++)
+            {
+                albumApproaches[side].gameObject.SetActive(focused && (albumApproachSides[side] || albumOffscreenCounts[side] > 0));
+                albumApproachCounts[side].text = albumOffscreenCounts[side] > 0 ? albumOffscreenCounts[side].ToString() : "";
+            }
+            albumOverviewCaption.text = BattleCopy(focused ? "overview" : "castle_focus");
+            albumOverview.interactable = game.CanBuild;
+        }
+
         Button AlbumAction(Transform parent, string name, Rect bounds, PlayerIcon icon, string copy, DrawingMode mode, string art)
             => ui.IconButton(parent, name, bounds, icon, BattleCopy(copy), () => {
                 if (!game.CanBuild) return; game.Drawing.SelectMode(mode); Refresh();
@@ -161,7 +219,7 @@ namespace PaperDefense.Presentation
         void AlbumIllustration(Transform parent, AlbumEntry entry, Rect bounds, string identity)
         {
             if (entry == null) return;
-            if (entry.Kind == AlbumEntryKind.Tower)
+            if (entry.Kind == AlbumEntryKind.Tower || entry.Kind == AlbumEntryKind.Structure)
             {
                 var exact = PlayerUi.Graphic<WeaponAssemblyGraphic>(parent, identity + " certified assembly", bounds);
                 try { exact.SetRecipe(entry.Snapshot); return; }
@@ -201,6 +259,7 @@ namespace PaperDefense.Presentation
                 Canvas.ForceUpdateCanvases();
             }
             var s = game.Run.Session; var input = game.Drawing; bool active = game.CanBuild;
+            RefreshApproachIndicators(s);
             albumInk.text = BattleCopy("ink", s.Ink); albumHealth.text = BattleCopy("castle", Mathf.CeilToInt(s.BaseHealth), Mathf.CeilToInt(s.Balance.BaseHealth));
             albumWave.text = ui.T("wave", s.WaveIndex, s.Balance.Waves.Count);
             albumPhase.text = game.Finished ? BattleCopy("completed") : s.PendingUpgrade ? BattleCopy("upgrade_choice") : s.Phase == RunPhase.Assault ? ui.T("enemies", s.Enemies.Count + s.RemainingToSpawn) : ui.T("planning", Mathf.CeilToInt(s.Countdown));
@@ -208,6 +267,7 @@ namespace PaperDefense.Presentation
             albumSpeed.text = "×" + game.Run.Speed;
             albumLaunch.interactable = active && !s.PendingUpgrade && (s.Phase == RunPhase.Planning || s.Phase == RunPhase.Intermission);
             albumMessage.text = game.Run.Workshop.HasUnsavedChanges ? GameText.Resolve(game.Run.Workshop.SaveMessage) : input.Message;
+            albumMessageBadge.gameObject.SetActive(!string.IsNullOrEmpty(albumMessage.text));
             string selectedName = input.BlueprintSlot >= 0 && input.BlueprintSlot < game.Run.RunLoadout.Entries.Count && game.Run.RunLoadout.Entries[input.BlueprintSlot] != null
                 ? GameText.Resolve(game.Run.RunLoadout.Entries[input.BlueprintSlot].Name) : ui.T("empty");
             if (input.Mode != DrawingMode.Build) selectedName = BattleCopy(input.Mode == DrawingMode.Erase ? "erase" : input.Mode == DrawingMode.Upgrade ? "upgrade" : input.Mode == DrawingMode.Paint ? "paint" : "blotter");

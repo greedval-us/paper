@@ -16,6 +16,7 @@ namespace PaperDefense.Presentation
             PlayerUi.Graphic<PlayerPaperGraphic>(page, "Notebook paper ruling", new Rect(0, 0, W, H));
             var sprite = Resources.Load<Sprite>(resource);
             var bounds = NotebookFitRect(sprite, new Rect(0, 0, W, H));
+            if (resource.EndsWith("FoundationPageDecor", StringComparison.Ordinal)) bounds.y = H - bounds.height;
             NotebookSprite(page, name, sprite, bounds);
             return bounds;
         }

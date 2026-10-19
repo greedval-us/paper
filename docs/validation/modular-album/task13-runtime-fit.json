@@ -1,0 +1,48 @@
+{
+  "definitions": 54,
+  "nativeCrops": 140,
+  "sourcePixelArea": 15663298,
+  "envelopes": [
+    {
+      "mechanism": "core.gun",
+      "radius": 0.22467076460746474,
+      "minimumAxisSpacing": 0.4593415292149295
+    },
+    {
+      "mechanism": "core.piercer",
+      "radius": 0.2148539019984608,
+      "minimumAxisSpacing": 0.4397078039969216
+    },
+    {
+      "mechanism": "core.mortar",
+      "radius": 0.21380428060490952,
+      "minimumAxisSpacing": 0.43760856120981906
+    },
+    {
+      "mechanism": "core.fan",
+      "radius": 0.2073538658619455,
+      "minimumAxisSpacing": 0.42470773172389104
+    },
+    {
+      "mechanism": "core.ricochet",
+      "radius": 0.2058269547174779,
+      "minimumAxisSpacing": 0.4216539094349558
+    },
+    {
+      "mechanism": "core.stapler",
+      "radius": 0.20836702309683966,
+      "minimumAxisSpacing": 0.42673404619367933
+    },
+    {
+      "mechanism": "core.blotter",
+      "radius": 0.207494732325977,
+      "minimumAxisSpacing": 0.42498946465195403
+    }
+  ],
+  "runtimeChecks": {
+    "configurations": 28,
+    "placements": 56,
+    "collisions": []
+  },
+  "problems": []
+}

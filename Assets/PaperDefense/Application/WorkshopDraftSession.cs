@@ -102,12 +102,8 @@ namespace PaperDefense.Application
         bool OwnedRecipe => PreviewRecipe != null && PreviewRecipe.Parts.All(p => IsOwned(p.Id));
         bool ValidParent => Draft != null && Draft.Kind != AlbumEntryKind.Legacy && ValidName && OwnedRecipe && Resolution.Valid;
         public bool CanSave => !IsComponentOpen && ValidParent && (owner.Workshop.Entries.Count < ProfileLimits.MaximumAlbumPages || owner.Workshop.Entries.Any(e => e.Id == Draft.Id));
-        // Static support trials use production cell occupancy; rotating tower clearance remains mandatory.
-        // Saving still requires the complete authored fit catalog through ValidParent.
-        public bool CanTrial => !IsComponentOpen && Draft != null && Draft.Kind != AlbumEntryKind.Legacy &&
-            ValidName && OwnedRecipe && (Draft.Kind == AlbumEntryKind.Structure ? Resolved != null : Resolution.Valid);
-        public bool CanSaveComponent => IsComponentOpen && ValidName && OwnedRecipe &&
-            (ActiveComponent == WorkshopComponentKind.Structure ? Resolved != null : Resolution.Valid);
+        public bool CanTrial => !IsComponentOpen && ValidParent;
+        public bool CanSaveComponent => IsComponentOpen && ValidParent;
 
         public void Begin(AlbumEntry source)
         {

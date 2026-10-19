@@ -8,6 +8,9 @@ namespace PaperDefense.Editor
     {
         public static string Capture(string name, int width = 1600, int height = 1000, string folder = "Captures/PlayerGame")
         {
+            if (width <= 0 || height <= 0) throw new System.ArgumentOutOfRangeException(nameof(width));
+            if (string.IsNullOrWhiteSpace(name) || name.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
+                throw new System.ArgumentException("Capture requires a single file name.", nameof(name));
             var canvases = Object.FindObjectsByType<Canvas>();
             var modes = new RenderMode[canvases.Length]; var cameras = new Camera[canvases.Length];
             var distances = new float[canvases.Length];
@@ -45,7 +48,13 @@ namespace PaperDefense.Editor
                 GL.PopMatrix();
                 RenderTexture.active = texture; pixels.ReadPixels(new Rect(0, 0, width, height), 0, 0); pixels.Apply();
                 Directory.CreateDirectory(folder);
-                string path = folder + "/" + name + ".png"; File.WriteAllBytes(path, pixels.EncodeToPNG()); return path;
+                string path = folder + "/" + name + ".png"; File.WriteAllBytes(path, pixels.EncodeToPNG());
+                File.WriteAllText(folder + "/" + name + ".json", JsonUtility.ToJson(new CaptureEvidence {
+                    name = name, width = width, height = height, frame = Time.frameCount,
+                    scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,
+                    activeCanvases = canvases.Length, artRevision = PaperDefense.Presentation.AssemblyVisualComposer.Revision
+                }, true));
+                return path;
             }
             finally
             {
@@ -57,6 +66,11 @@ namespace PaperDefense.Editor
                 overlay.Release(); Object.DestroyImmediate(overlay);
                 texture.Release(); Object.DestroyImmediate(texture); Object.DestroyImmediate(captureObject);
             }
+        }
+        [System.Serializable] sealed class CaptureEvidence
+        {
+            public string name, scene, artRevision;
+            public int width, height, frame, activeCanvases;
         }
     }
 }

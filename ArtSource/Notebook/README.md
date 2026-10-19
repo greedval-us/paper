@@ -2,7 +2,7 @@
 
 [Руководство оформления](../../docs/Notebook-Art.md) · [Ресурсы страниц](../../docs/Player-Assets.md) · [Порядок реализации](../../docs/superpowers/plans/2026-10-18-modular-album-implementation.md)
 
-Канонические игровые изображения находятся в [NewStyle](NewStyle). Актуальное направление — [альбом составных рисунков](../../docs/design/album-assembly-2026-10-17/README.md). Новые листы объектов пока не импортированы. Источники уже выполненных импортов сохранены в [References](References/README.md); устаревшие галереи удалены. Фактическое состояние переноса описано в [аудите](../../docs/audit/2026-10-17-album/report.md).
+Канонические игровые изображения находятся в [NewStyle](NewStyle). Актуальное направление — [альбом составных рисунков](../../docs/design/album-assembly-2026-10-17/README.md). Полный каталог содержит привязки всех 54 деталей; отдельные прозрачные части произведены по листам объектов 31–33. Исторический пилот сохранён для прежних чертежей. Происхождение новых листов, промпты и повторная генерация ремонтного поста описаны в `FullCatalog-v1.provenance.json` и `StandardFoundation-v2.provenance.json`. Текущую визуальную приёмку фиксирует [матрица задачи 13](../../docs/validation/modular-album/visual-gallery.html); исторический аудит не заменяет её.
 
 ## Состав источников
 
@@ -26,8 +26,9 @@ Alias связывает игровой ID с основным рисунком.
 1. Отредактируйте нужный PNG или добавьте новый прозрачный рисунок в `NewStyle`.
 2. Обновите область и привязки в `sprites.source.json`; проверьте границы изображения и локальный pivot. При добавлении ID проверьте его потребителей и aliases.
 3. Если меняется анимация, обновите кадры или отдачу в `animation.json`, сохраняя пустые `Marks` у стандартных форм.
-4. В редакторе Unity выполните **Paper Defense → Art → Rebuild blue pen atlas** или вызовите `PaperDefense.Editor.NotebookSpriteImportTools.Rebuild()`.
-5. Проверьте результат в основной игре и запустите проверки затронутых привязок, импорта и отображения.
+4. Для изменения составных деталей выполните `node Tools/ArtAssembly13/build-catalog.mjs`, затем `node Tools/ArtAssembly13/pack-catalog.mjs`. Схема упаковки сохраняет все исходные пиксели и зазоры 4 px в 4096×4096; импорт отклоняет устаревшие размеры и привязки.
+5. В редакторе Unity выполните **Paper Defense → Art → Rebuild blue pen atlas** или вызовите `PaperDefense.Editor.NotebookSpriteImportTools.Rebuild()`.
+6. Проверьте результат в основной игре и запустите проверки затронутых привязок, импорта и отображения, включая `AssemblyArtCoverageTests`, `AssemblyArtImportValidationTests` и `NotebookNativeAtlasTests`.
 
 Результат импорта находится в `Assets/PaperDefense/Resources/Art`:
 

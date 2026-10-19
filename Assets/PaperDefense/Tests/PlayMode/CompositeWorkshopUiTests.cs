@@ -275,7 +275,7 @@ namespace PaperDefense.Tests
             Assert.That(contributors, Does.Contain(fixture.Catalog.Definitions.First(part => part.Id == "core.mortar").Name).And.Contain("7"));
         }
 
-        [Test] public void CertifiedPilotUsesItsRecipeAndUncertifiedPartIsClearlyALabeledFamilySchematic()
+        [Test] public void CoveredLongBarrelUsesItsCompleteRecipeInsteadOfAFamilySchematic()
         {
             var page = fixture.Gun(); panel.OpenEntry(page);
             var pilot = panel.Root.GetComponentInChildren<WeaponAssemblyGraphic>();
@@ -286,8 +286,10 @@ namespace PaperDefense.Tests
             var recipe = new AssemblyRecipe(new TowerRecipe(tower.Foundation, new[] { new WeaponMountRecipe(0, longHead) }));
             panel.OpenEntry(new AlbumEntry("ui.long.schematic", "Длинный ствол", 1,
                 new RecipeSnapshot(recipe, fixture.Catalog.BalanceRevision, fixture.Catalog.Definitions)));
-            Assert.That(panel.Root.GetComponentsInChildren<Text>().Single(text => text.name == "Composite schematic caption").text,
-                Is.EqualTo(TextResourcesAsset.Default.Resolve(UserText.Message("assembly.workshop.neutral"))));
+            var exact = panel.Root.GetComponentInChildren<WeaponAssemblyGraphic>();
+            Assert.That(exact, Is.Not.Null);
+            Assert.That(exact.Recipe.Recipe.Parts.Select(part => part.Id), Is.EqualTo(recipe.Parts.Select(part => part.Id)));
+            Assert.That(panel.Root.GetComponentsInChildren<Text>().Any(text => text.name == "Composite schematic caption"), Is.False);
         }
     }
 }

@@ -9,6 +9,7 @@ namespace PaperDefense.Presentation
     {
         readonly PlayerGameRoot game;
         readonly PlayerUi ui;
+        readonly RectTransform renderRoot;
         readonly Text ink, health, wave, phase, message, selection, speedValue, forecast, fieldStats, towerInfo;
         readonly Button launch;
         readonly Button[] tools = new Button[12], materials = new Button[3], colors = new Button[4];
@@ -30,7 +31,7 @@ namespace PaperDefense.Presentation
 
         public PlayerBattleHud(PlayerGameRoot owner, PlayerUi style, RectTransform root, PlayerLayout layout)
         {
-            game = owner; ui = style;
+            game = owner; ui = style; renderRoot = root;
             if (game.Run.UsesAlbumSlots) { BuildAlbumHud(root, layout); return; }
             float w = layout.Header.width;
             bool narrow = layout.Width < 1050;
@@ -166,6 +167,10 @@ namespace PaperDefense.Presentation
 
         public void Refresh()
         {
+            // Tooltip retirement clears the cached hint through ShowHint, including during
+            // parent deactivation. Rebuilding that hierarchy would reactivate child controls
+            // from inside OnDisable (and is invalid during scene/fixture destruction).
+            if (game == null || renderRoot == null || !renderRoot.gameObject.activeInHierarchy) return;
             if (albumHud) { RefreshAlbumHud(); return; }
             var s = game.Run.Session; var input = game.Drawing;
             ink.text = s.Ink + " штрихов"; health.text = "Замок  " + Mathf.CeilToInt(s.BaseHealth) + " / " + Mathf.CeilToInt(s.Balance.BaseHealth);

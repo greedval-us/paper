@@ -132,7 +132,7 @@ namespace PaperDefense.Presentation
             if (entry == null) return;
             if (entry.Kind == AlbumEntryKind.Legacy)
             { NotebookBlueprintIllustration(parent, entry.LegacyBlueprint, bounds); return; }
-            if (entry.Kind == AlbumEntryKind.Tower)
+            if (entry.Kind == AlbumEntryKind.Tower || entry.Kind == AlbumEntryKind.Structure)
             {
                 var exact = PlayerUi.Graphic<WeaponAssemblyGraphic>(parent, "Preparation certified assembly", bounds);
                 try { exact.SetRecipe(entry.Snapshot); return; }

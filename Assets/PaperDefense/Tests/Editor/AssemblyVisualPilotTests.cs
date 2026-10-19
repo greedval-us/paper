@@ -47,7 +47,6 @@ namespace PaperDefense.Tests
             AssemblyVisualComposer.Fits.TryGetWeapon("core.gun", 1, out var fit);
             float radius = AssemblyFitRules.SweptRadius(fit);
             var source = JsonUtility.FromJson<AssemblyVisualComposer.Manifest>(System.IO.File.ReadAllText(PaperDefense.Editor.NotebookSpriteImportTools.AssemblyPath));
-            var split = source.pilots.Single();
             foreach (float a in new[] { -Mathf.PI, -Mathf.PI / 2, 0, Mathf.PI / 2, Mathf.PI })
             foreach (float b in new[] { -Mathf.PI, -Mathf.PI / 2, 0, Mathf.PI / 2, Mathf.PI })
             foreach (float recoil in new[] { 0, -.085f })
@@ -55,7 +54,7 @@ namespace PaperDefense.Tests
                 var composition = AssemblyVisualComposer.Compose(Pilot(true), new AssemblyVisualPose(new[] { new AssemblyMountPose(0, a, recoil), new AssemblyMountPose(1, b, recoil) }));
                 foreach (var f in composition.Fragments.Where(f => f.SlotIndex >= 0))
                 {
-                    if (split.fragments.Single(s => s.spriteId == f.SpriteId).group == 0) continue;
+                    if (source.visualParts.Single(p => p.partId == f.PartId).fragments.Single(s => s.spriteId == f.SpriteId).motion == "fixed") continue;
                     var pivot = composition.Anchors.Single(p => p.SlotIndex == f.SlotIndex).RotationCenter;
                     foreach (var p in new[] { f.Trim.min, new Vector2(f.Trim.xMax, f.Trim.yMin), f.Trim.max, new Vector2(f.Trim.xMin, f.Trim.yMax) })
                         Assert.That(Vector2.Distance(f.Transform(p), pivot), Is.LessThanOrEqualTo(radius + .000001f), f.SpriteId);
@@ -63,23 +62,31 @@ namespace PaperDefense.Tests
             }
         }
 
-        [Test] public void RecipeAndExistingAlbumAdapter_ProduceIdenticalGeometry()
+        [Test] public void ModernRecipeUi_UsesTheSharedTreeAndLegacyAlbumRetainsItsHistoricalPilot()
         {
             var snapshot = Pilot();
             var blueprint = new TowerBlueprint("same-pilot", "Same pilot", ChassisKind.Standard, StructureKind.Gun, StructureKind.Gun);
-            using (var recipe = new VertexHelper())
-            using (var album = new VertexHelper())
+            var modern = AssemblyVisualComposer.Compose(snapshot, new AssemblyVisualPose());
+            var historical = AssemblyVisualComposer.ComposeLegacy(blueprint, null, Vector2.zero, null);
+            Assert.That(historical.Fragments.Any(f => f.SpriteId == "chassis.standard"), Is.True);
+            Assert.That(modern.Fragments.Any(f => f.SpriteId == "part.full.frame.standard"), Is.True);
+            Assert.That(historical.Bounds.height, Is.GreaterThan(modern.Bounds.height));
+            using (var recipe = new VertexHelper()) using (var sharedTree = new VertexHelper()) using (var album = new VertexHelper())
             {
                 NotebookTowerComposition.DrawRecipeUI(recipe, snapshot, new AssemblyVisualPose(), Vector2.zero, 1);
                 NotebookTowerComposition.DrawUI(album, blueprint, Vector2.zero, 1);
-                Assert.That(recipe.currentVertCount, Is.EqualTo(album.currentVertCount));
+                var pen = new MeshPen(null, 4096); modern.Draw(pen, Vector2.zero); pen.CopyTo(sharedTree, Vector2.zero, 1);
+                Assert.That(recipe.currentVertCount, Is.EqualTo(sharedTree.currentVertCount));
+                Assert.That(album.currentVertCount, Is.GreaterThan(0));
                 var left = new UIVertex(); var right = new UIVertex();
                 for (int i = 0; i < recipe.currentVertCount; i++)
                 {
-                    recipe.PopulateUIVertex(ref left, i); album.PopulateUIVertex(ref right, i);
+                    recipe.PopulateUIVertex(ref left, i); sharedTree.PopulateUIVertex(ref right, i);
                     Assert.That(Vector3.Distance(left.position, right.position), Is.LessThan(.000001f));
                     Assert.That(Vector4.Distance(left.uv1, right.uv1), Is.LessThan(.000001f));
                 }
+                foreach (var anchor in historical.Anchors)
+                    Assert.That(anchor.Attach, Is.EqualTo(NotebookMountLayout.Resolve(blueprint, anchor.SlotIndex).Socket));
             }
         }
 
@@ -141,14 +148,25 @@ namespace PaperDefense.Tests
             finally { UnityEngine.Object.DestroyImmediate(mesh); }
         }
 
-        [Test] public void TrimAndPacking_PreserveAttachAndMuzzleWithinHalfSourcePixel()
+        [TestCase(false)] [TestCase(true)] public void TrimAndPacking_PreserveAttachAndMuzzleWithinHalfSourcePixel(bool historical)
         {
-            var composition = AssemblyVisualComposer.Compose(Pilot(), new AssemblyVisualPose());
+            var blueprint = new TowerBlueprint("fit", "Fit", ChassisKind.Standard, StructureKind.Gun, StructureKind.Gun);
+            var composition = historical ? AssemblyVisualComposer.ComposeLegacy(blueprint, null, Vector2.zero, null)
+                : AssemblyVisualComposer.Compose(Pilot(), new AssemblyVisualPose());
             foreach (var anchor in composition.Anchors)
             {
-                var mount = NotebookMountLayout.Resolve(new TowerBlueprint("fit", "Fit", ChassisKind.Standard, StructureKind.Gun, StructureKind.Gun), anchor.SlotIndex);
-                Assert.That(Vector2.Distance(mount.Socket, anchor.Attach) / mount.Scale, Is.LessThan(.5f));
-                Assert.That(Vector2.Distance(mount.Transform(mount.Muzzle), anchor.Muzzle) / mount.Scale, Is.LessThan(.5f));
+                if (historical)
+                {
+                    var mount = NotebookMountLayout.Resolve(blueprint, anchor.SlotIndex);
+                    Assert.That(Vector2.Distance(mount.Socket, anchor.Attach) / mount.Scale, Is.LessThan(.5f));
+                    Assert.That(Vector2.Distance(mount.Transform(mount.Muzzle), anchor.Muzzle) / mount.Scale, Is.LessThan(.5f));
+                }
+                else
+                {
+                    AssemblyVisualComposer.Fits.TryGetFrame("frame.standard", 1, out var frame);
+                    var socket = frame.Mounts.Single(m => m.SlotIndex == anchor.SlotIndex);
+                    Assert.That(Vector2.Distance(new Vector2(socket.Position.X, socket.Position.Y), anchor.Attach), Is.LessThan(.000001f));
+                }
                 var barrel = composition.Fragments.Single(f => f.SlotIndex == anchor.SlotIndex && f.SpriteId == "part.gun.barrels");
                 Assert.That(Vector2.Distance(barrel.Transform(new Vector2(444, 460)), anchor.Muzzle) / barrel.Scale, Is.LessThan(.5f));
                 Assert.That(NotebookSpriteCatalog.TryGet(barrel.SpriteId, out var sprite), Is.True);

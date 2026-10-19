@@ -240,9 +240,15 @@ namespace PaperDefense.Tests
             {
                 var unsupported = fixture.Catalog.Starters.First(entry => entry.Kind == AlbumEntryKind.Tower &&
                     entry.Snapshot.Recipe.Tower.Mounts[0].Weapon.Mechanism.Id == "core.piercer");
-                Assert.That(AssemblyFitRules.Validate(unsupported.Snapshot.Recipe, AssemblyVisualComposer.Fits), Is.Not.Empty);
+                Assert.That(AssemblyFitRules.Validate(unsupported.Snapshot.Recipe, AssemblyVisualComposer.Fits), Is.Empty,
+                    "The production catalog now includes the piercer; simulate missing coverage in a detached fixture.");
+                var incomplete = JsonUtility.FromJson<AssemblyVisualComposer.Manifest>(Resources.Load<TextAsset>("Art/NotebookMounts").text).fits;
+                incomplete.Weapons = incomplete.Weapons.Where(weapon => weapon.MechanismId != "core.piercer").ToArray();
+                var missingFits = new AssemblyFitCatalog(incomplete);
+                var guardedCommands = new AssemblyCommands(fixture.Run, fixture.Catalog, missingFits);
+                Assert.That(AssemblyFitRules.Validate(unsupported.Snapshot.Recipe, missingFits), Is.Not.Empty);
                 var draft = new AlbumEntry("draft.unsupported", "Unsupported physical fit", 1, unsupported.Snapshot);
-                Assert.That(fixture.Commands.SaveEntry(draft, Guid.NewGuid()).Success, Is.False);
+                Assert.That(guardedCommands.SaveEntry(draft, Guid.NewGuid()).Success, Is.False);
                 var gun = fixture.Gun(); var tower = gun.Snapshot.Recipe.Tower;
                 var invalidRecipe = new AssemblyRecipe(new TowerRecipe(tower.Foundation,
                     Enumerable.Range(0, 3).Select(slot => new WeaponMountRecipe(slot, tower.Mounts[0].Weapon))));

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using PaperDefense.Core;
 using UnityEngine;
 
@@ -133,22 +134,42 @@ namespace PaperDefense.Presentation
         void AlbumHelp()
         {
             NotebookPageBackdrop("Art/Player/FoundationPageDecor");
+            PlayerUi.Graphic<NotebookBindingGraphic>(page, "Help notebook binding", new Rect(0, 0, W, H));
             float margin = Mathf.Max(24, W * .055f), width = W - margin * 2, gap = 12;
             var paper = ui.Panel(page, "Album help sheet", new Rect(margin, 24, width, H - 48), PlayerUi.Card, true);
             NotebookLabel(paper, JourneyCopy("help.title"), new Rect(24, 12, width - 48, 62), 38, alignment: TextAnchor.MiddleCenter);
             string[] keys = { "collect", "save", "slots", "defend" };
-            float cardWidth = (width - 48 - gap * 3) / 4, cardHeight = Mathf.Clamp((H - 230) * .5f, 224, 290);
+            var helpEntries = game.Run.RunLoadout?.Entries ?? game.Run.Workshop.LoadoutEntries;
+            var example = helpEntries.FirstOrDefault(entry => entry?.Kind == AlbumEntryKind.Tower)
+                ?? game.Run.AssemblyCatalog.Starters.First(entry => entry.Kind == AlbumEntryKind.Tower);
+            float cardWidth = (width - 48 - gap * 3) / 4, cardHeight = Mathf.Clamp((H - 230) * .5f, 270, 330);
             for (int i = 0; i < 4; i++)
             {
                 var card = ui.Panel(paper, "Help step " + i, new Rect(24 + i * (cardWidth + gap), 88, cardWidth, cardHeight), PlayerUi.Wash);
                 NotebookLabel(card, JourneyCopy("help." + keys[i] + "_title"), new Rect(8, 6, cardWidth - 16, 44), 29, alignment: TextAnchor.MiddleCenter);
                 var illustration = new Rect(20, 52, cardWidth - 40, 98);
-                if (i == 0) ui.Art(card, "ui.weapon.gun", illustration);
-                else if (i == 3) ui.Art(card, "object.castle", illustration);
+                if (i == 0)
+                {
+                    var foundation = PlayerUi.Graphic<WeaponAssemblyGraphic>(card, "Help complete foundation", new Rect(36, 108, cardWidth - 72, 44));
+                    foundation.SetComposition(AssemblyVisualComposer.ComposeFoundation(example.Snapshot.Recipe.Tower.Foundation));
+                    var weapon = example.Snapshot.Recipe.Tower.Mounts[0].Weapon;
+                    var mechanism = PlayerUi.Graphic<WeaponAssemblyGraphic>(card, "Help detached mechanism", new Rect(40, 54, cardWidth - 80, 64));
+                    mechanism.SetPart(weapon.Mechanism);
+                    var sight = PlayerUi.Graphic<WeaponAssemblyGraphic>(card, "Help detached sight", new Rect(12, 72, 40, 40));
+                    sight.SetPart(weapon.Sight);
+                    var magazine = PlayerUi.Graphic<WeaponAssemblyGraphic>(card, "Help detached magazine", new Rect(cardWidth - 52, 80, 40, 40));
+                    magazine.SetPart(weapon.Magazine);
+                }
+                else if (i == 3)
+                {
+                    ui.Art(card, "object.castle", new Rect(12, 54, cardWidth - 62, 100));
+                    for (int enemy = 0; enemy < 3; enemy++)
+                        ui.Art(card, "icon.skull", new Rect(cardWidth - 42, 62 + enemy * 28, 25, 25));
+                }
                 else if (i == 1)
                 {
-                    var icon = PlayerUi.Graphic<PlayerIconGraphic>(card, "Save album illustration", illustration);
-                    icon.Icon = PlayerIcon.Book; icon.Sketch = true; icon.color = PlayerUi.Blue;
+                    var book = PlayerUi.Graphic<NotebookOpenBookGraphic>(card, "Save album illustration", illustration);
+                    PreparationAssemblyIllustration(book.transform, example, new Rect(illustration.width * .15f, 8, illustration.width * .7f, 80));
                 }
                 else
                 {
@@ -156,10 +177,13 @@ namespace PaperDefense.Presentation
                     for (int slot = 0; slot < 8; slot++)
                     {
                         var cell = ui.Panel(card, "Help slot " + slot, new Rect(16 + slot % 4 * (slotWidth + 4), 54 + slot / 4 * 47, slotWidth, 42), PlayerUi.Card);
-                        NotebookLabel(cell, (slot + 1).ToString(), new Rect(0, 0, slotWidth, 42), 24, alignment: TextAnchor.MiddleCenter);
+                        NotebookLabel(cell, (slot + 1).ToString(), new Rect(2, 0, 14, 15), 14);
+                        var entry = helpEntries[slot] ?? game.Run.AssemblyCatalog.Starters[slot % game.Run.AssemblyCatalog.Starters.Count];
+                        PreparationAssemblyIllustration(cell, entry, new Rect(5, 10, slotWidth - 10, 30));
                     }
                 }
-                NotebookLabel(card, JourneyCopy("help." + keys[i] + "_body"), new Rect(12, 156, cardWidth - 24, cardHeight - 164), 19, PlayerUi.Muted);
+                var body = NotebookLabel(card, JourneyCopy("help." + keys[i] + "_body"), new Rect(12, 156, cardWidth - 24, cardHeight - 164), 18, PlayerUi.Ink);
+                body.resizeTextMinSize = Mathf.CeilToInt(15 / Layout.Scale);
             }
             float infoY = 102 + cardHeight, infoHeight = H - infoY - 148, infoWidth = (width - 60) * .5f;
             string[] sections = { "resources", "controls" };
@@ -180,12 +204,15 @@ namespace PaperDefense.Presentation
         {
             if (confirmation != null) { confirmation.SetActive(false); Destroy(confirmation); }
             var shade = ui.Panel(page, "Confirmation shield", new Rect(0, 0, W, H), new Color(.08f, .15f, .25f, .48f), true); confirmation = shade.gameObject;
-            float width = Mathf.Min(640, W - 40), height = Mathf.Min(360, H - 40);
+            float width = Mathf.Min(640, W - 40), height = Mathf.Min(440, H - 40);
             var card = ui.Panel(shade, "Confirmation", new Rect((W - width) / 2, (H - height) / 2, width, height), PlayerUi.Card, true);
-            ui.Label(card, confirmTitle, new Rect(28, 24, width - 56, 76), 34, title: true);
-            ui.Label(card, confirmMessage, new Rect(28, 112, width - 56, height - 210), 20, PlayerUi.Muted);
+            bool leaving = game.Run.AssemblyCatalog != null && confirmTitle == JourneyCopy("pause.leave_title");
+            var symbol = PlayerUi.Graphic<PlayerIconGraphic>(card, "Confirmation illustration", new Rect((width - 110) * .5f, 18, 110, 100));
+            symbol.Icon = leaving ? PlayerIcon.Map : PlayerIcon.Help; symbol.Sketch = true; symbol.color = PlayerUi.Blue;
+            NotebookLabel(card, confirmTitle, new Rect(28, 126, width - 56, 68), 34, alignment: TextAnchor.MiddleCenter);
+            NotebookLabel(card, confirmMessage, new Rect(28, 204, width - 56, height - 294), 22, PlayerUi.Ink, TextAnchor.MiddleCenter);
             ui.Button(card, "Cancel confirmation", new Rect(28, height - 78, (width - 68) / 2, 50), PlayerIcon.Back, "Остаться", CancelConfirmation);
-            ui.Button(card, "Confirm action", new Rect(width / 2 + 6, height - 78, (width - 68) / 2, 50), PlayerIcon.Next, "Продолжить", () => { var action = confirmAction; CancelConfirmation(); action?.Invoke(); }, true);
+            ui.Button(card, "Confirm action", new Rect(width / 2 + 6, height - 78, (width - 68) / 2, 50), PlayerIcon.Next, leaving ? "Завершить бой" : "Продолжить", () => { var action = confirmAction; CancelConfirmation(); action?.Invoke(); }, true);
             WorkshopModal.Open(confirmation, CancelConfirmation);
         }
         public void CancelConfirmation()

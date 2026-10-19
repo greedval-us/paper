@@ -1,11 +1,144 @@
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using PaperDefense.Core;
 using UnityEngine;
 
 namespace PaperDefense.Presentation
 {
+    /// <summary>One whole-enemy view transform; recorded simulation size and position remain untouched.</summary>
+    public static class NotebookEnemyView
+    {
+        public const float ModernScale = .7f;
+        public static float ScaleFor(bool modernPresentation) => modernPresentation ? ModernScale : 1;
+    }
+
+    /// <summary>One uniform presentation transform for modern assemblies in battle and recorded trials.</summary>
+    public static class NotebookAssemblyView
+    {
+        public const float Scale = 2;
+        static ConditionalWeakTable<RecipeSnapshot, ViewFit> viewFits = new ConditionalWeakTable<RecipeSnapshot, ViewFit>();
+        static string revision;
+        sealed class ViewFit
+        {
+            public Rect Envelope;
+            public float Scale;
+        }
+        public static Vector2 Point(Vector2 origin, Vector2 local) => origin + local * Scale;
+        public static Rect Bounds(Vector2 origin, Rect local) => new Rect(Point(origin, local.min), local.size * Scale);
+        public static float ScaleFor(RecipeSnapshot snapshot) => snapshot == null ? Scale : Fit(snapshot).Scale;
+        public static Vector2 Point(Vector2 origin, Vector2 local, RecipeSnapshot snapshot) => origin + local * ScaleFor(snapshot);
+        public static Rect Bounds(Vector2 origin, RecipeSnapshot snapshot)
+        {
+            var fit = Fit(snapshot);
+            return new Rect(origin + fit.Envelope.min * fit.Scale, fit.Envelope.size * fit.Scale);
+        }
+
+        static ViewFit Fit(RecipeSnapshot snapshot)
+        {
+            if (revision != AssemblyVisualComposer.Revision)
+            {
+                viewFits = new ConditionalWeakTable<RecipeSnapshot, ViewFit>();
+                revision = AssemblyVisualComposer.Revision;
+            }
+            return viewFits.GetValue(snapshot, CalculateFit);
+        }
+
+        static ViewFit CalculateFit(RecipeSnapshot snapshot)
+        {
+            Rect envelope = new Rect(Vector2.zero, Vector2.zero);
+            var tower = snapshot.Recipe.Tower;
+            if (tower == null) Include(ref envelope, AssemblyVisualComposer.Compose(snapshot, new AssemblyVisualPose()).Bounds);
+            else
+            {
+                // Fixed foundation art and certified swept circles form one immutable envelope.
+                // Current aimed or recoiling quads never participate in this scale calculation.
+                Include(ref envelope, AssemblyVisualComposer.ComposeFoundation(tower.Foundation).Bounds);
+                AssemblyVisualComposer.Fits.TryGetFrame(tower.Foundation.Frame.Id, tower.Foundation.Frame.Revision, out var frame);
+                foreach (var mount in tower.Mounts)
+                {
+                    AssemblyVisualComposer.Fits.TryGetWeapon(mount.Weapon.Mechanism.Id, mount.Weapon.Mechanism.Revision, out var weapon);
+                    foreach (var socket in frame.Mounts)
+                    {
+                        if (socket.SlotIndex != mount.SlotIndex) continue;
+                        Vector2 pivot = new Vector2(socket.Position.X + weapon.Pivot.X, socket.Position.Y + weapon.Pivot.Y);
+                        float radius = AssemblyFitRules.SweptRadius(weapon);
+                        Include(ref envelope, new Rect(pivot - Vector2.one * radius, Vector2.one * radius * 2));
+                        foreach (var region in weapon.Regions)
+                            if (region.Motion == "fixed")
+                                foreach (var point in region.Points)
+                                    Include(ref envelope, new Rect(pivot + new Vector2(point.X, point.Y), Vector2.zero));
+                    }
+                }
+            }
+            float extent = Mathf.Max(Mathf.Abs(envelope.xMin), Mathf.Abs(envelope.xMax), Mathf.Abs(envelope.yMin), Mathf.Abs(envelope.yMax));
+            return new ViewFit { Envelope = envelope, Scale = Mathf.Min(Scale, 1 / Mathf.Max(.0001f, extent)) };
+        }
+
+        static void Include(ref Rect envelope, Rect next) => envelope = Rect.MinMaxRect(Mathf.Min(envelope.xMin, next.xMin),
+            Mathf.Min(envelope.yMin, next.yMin), Mathf.Max(envelope.xMax, next.xMax), Mathf.Max(envelope.yMax, next.yMax));
+    }
+
     /// <summary>New atlas illustrations and live semantic marks of the batched battlefield.</summary>
     internal static class DoodleGlyphs
     {
+        static ConditionalWeakTable<RecipeSnapshot, AssemblyVisualComposition> restAssemblies = new ConditionalWeakTable<RecipeSnapshot, AssemblyVisualComposition>();
+        static string assemblyRevision;
+
+        internal static AssemblyVisualComposition ComposeAssembly(StructureView state, double seconds = 0,
+            NotebookAnimationState animation = null, NotebookVisualThemeAsset theme = null)
+        {
+            var snapshot = state.ResolvedEntry?.Snapshot;
+            if (snapshot == null || state.ResolvedEntry.Kind == AlbumEntryKind.Legacy) return null;
+            if (assemblyRevision != AssemblyVisualComposer.Revision)
+            {
+                restAssemblies = new ConditionalWeakTable<RecipeSnapshot, AssemblyVisualComposition>();
+                assemblyRevision = AssemblyVisualComposer.Revision;
+            }
+            // ResolvedEntry owns the frozen run snapshot. An edited album page can never
+            // change an already placed object's artwork or its projectile origin.
+            var rest = restAssemblies.GetValue(snapshot, recipe => AssemblyVisualComposer.Compose(recipe, new AssemblyVisualPose()));
+            if (snapshot.Recipe.Tower == null) return rest;
+            var poses = new List<AssemblyMountPose>(rest.Anchors.Count);
+            Vector2 at = new Vector2(state.Cell.X + .5f, state.Cell.Y + .5f);
+            foreach (var anchor in rest.Anchors)
+            {
+                var aim = state.GetMountAim(anchor.SlotIndex);
+                Vector2 delta = new Vector2(aim.X, aim.Y) - NotebookAssemblyView.Point(at, anchor.RotationCenter, snapshot);
+                float angle = aim.X == 0 && aim.Y == 0 || delta.sqrMagnitude < .000001f ? 0 :
+                    Mathf.Atan2(delta.y, delta.x) - Mathf.PI * .5f;
+                angle = Mathf.Atan2(Mathf.Sin(angle), Mathf.Cos(angle));
+                var weapon = snapshot.Recipe.Tower.Mounts;
+                for (int i = 0; i < weapon.Count; i++)
+                {
+                    if (weapon[i].SlotIndex != anchor.SlotIndex) continue;
+                    var part = weapon[i].Weapon.Mechanism;
+                    AssemblyVisualComposer.Fits.TryGetWeapon(part.Id, part.Revision, out var fit);
+                    float recoil = animation?.Recoil(state.Id, anchor.SlotIndex, seconds, theme) ?? 0;
+                    poses.Add(new AssemblyMountPose(anchor.SlotIndex, Mathf.Clamp(angle, fit.MinRadians, fit.MaxRadians),
+                        Mathf.Clamp(recoil, -fit.RecoilLimit, 0)));
+                    break;
+                }
+            }
+            return AssemblyVisualComposer.Compose(snapshot, new AssemblyVisualPose(poses));
+        }
+
+        internal static Vector2 SegmentOrigin(StructureView structure, int slot, Point2 aim, Vector2 recordedFrom,
+            double seconds, NotebookAnimationState animation, NotebookVisualThemeAsset theme)
+        {
+            Vector2 source = new Vector2(structure.Cell.X + .5f, structure.Cell.Y + .5f);
+            // Only a shot emitted at the structure centre uses its visual barrel.
+            // Ricochet continuations keep the preceding victim as their origin.
+            if (slot < 0 || (recordedFrom - source).sqrMagnitude > .00000001f) return recordedFrom;
+            if (structure.ResolvedEntry != null && structure.ResolvedEntry.Kind != AlbumEntryKind.Legacy)
+            {
+                var composition = ComposeAssembly(structure, seconds, animation, theme);
+                foreach (var anchor in composition.Anchors)
+                    if (anchor.SlotIndex == slot) return NotebookAssemblyView.Point(source, anchor.Muzzle, structure.ResolvedEntry.Snapshot);
+                return recordedFrom;
+            }
+            return NotebookTowerComposition.SegmentOrigin(structure, slot, aim, recordedFrom, seconds, animation, theme);
+        }
+
         public static Color TierColor(MaterialTier tier)
         {
             switch (tier)
@@ -33,10 +166,18 @@ namespace PaperDefense.Presentation
             Vector2 p = new Vector2(state.Cell.X + .5f, state.Cell.Y + .5f);
             bool building = !state.IsComplete;
             if (building && NotebookTowerComposition.UsesComposition(state.Blueprint)) return;
+            bool modern = state.ResolvedEntry != null && state.ResolvedEntry.Kind != AlbumEntryKind.Legacy;
+            Rect artwork = modern ? NotebookAssemblyView.Bounds(p, state.ResolvedEntry.Snapshot)
+                : new Rect(p - Vector2.one * .5f, Vector2.one);
             float alpha = building ? .48f : 1;
             Color color = MeshPen.Alpha(TierColor(state.Tier), alpha);
             Color edge = MeshPen.Alpha(NotebookPalette.Navy, alpha);
-            if (NotebookTowerComposition.UsesComposition(state.Blueprint))
+            if (modern)
+            {
+                // The complete modern tree is ordered in one dynamic batch, including
+                // front hull panels that must cover rotating weapon fragments.
+            }
+            else if (NotebookTowerComposition.UsesComposition(state.Blueprint))
                 NotebookTowerComposition.DrawStatic(pen, state.Blueprint, p, state.Tier, state.Color, alpha, theme);
             else
             {
@@ -54,7 +195,8 @@ namespace PaperDefense.Presentation
             }
             if (building)
             {
-                pen.Ring(p, .48f, .035f, MeshPen.Alpha(color, .8f), 24, 1, state.Id, true);
+                float radius = modern ? Mathf.Max(.48f, artwork.size.magnitude * .5f) : .48f;
+                pen.Ring(p, radius, .035f, MeshPen.Alpha(color, .8f), 24, 1, state.Id, true);
                 if (state.WaitingForClearance)
                 {
                     pen.Box(p, new Vector2(.54f, .54f), MeshPen.Alpha(NotebookPalette.Paper, .7f), NotebookPalette.Red, .045f, state.Id);
@@ -64,8 +206,10 @@ namespace PaperDefense.Presentation
             float health = state.MaxHealth > 0 ? Mathf.Clamp01(state.Health / (float)state.MaxHealth) : 1;
             if (health < .99f)
             {
-                pen.Line(p + new Vector2(-.34f, -.52f), p + new Vector2(.34f, -.52f), .055f, MeshPen.Alpha(NotebookPalette.Navy, .17f));
-                pen.Line(p + new Vector2(-.34f, -.52f), p + new Vector2(-.34f + .68f * health, -.52f),
+                Vector2 left = modern ? new Vector2(artwork.xMin, artwork.yMin - .16f) : p + new Vector2(-.34f, -.52f);
+                float width = modern ? Mathf.Max(.68f, artwork.width) : .68f;
+                pen.Line(left, left + Vector2.right * width, .055f, MeshPen.Alpha(NotebookPalette.Navy, .17f));
+                pen.Line(left, left + Vector2.right * (width * health),
                     .055f, health > .35f ? NotebookPalette.Blue : NotebookPalette.Red);
             }
         }
@@ -97,7 +241,10 @@ namespace PaperDefense.Presentation
             Vector2 p = new Vector2(state.Cell.X + .5f, state.Cell.Y + .5f);
             Color color = state.Color == InkColor.None ? TierColor(state.Tier) : InkTone(state.Color);
             float fraction = 1 - Mathf.Clamp01(state.BuildRemaining / Mathf.Max(.01f, buildDuration));
-            if (!state.IsComplete && NotebookTowerComposition.UsesComposition(state.Blueprint))
+            if (state.ResolvedEntry != null && state.ResolvedEntry.Kind != AlbumEntryKind.Legacy)
+                ComposeAssembly(state, seconds, animation, theme).Draw(pen, p, state.IsComplete ? 1 : .48f,
+                    uniformScale: NotebookAssemblyView.ScaleFor(state.ResolvedEntry.Snapshot));
+            else if (!state.IsComplete && NotebookTowerComposition.UsesComposition(state.Blueprint))
                 NotebookTowerComposition.DrawConstruction(pen, state, p, fraction, seconds, animation, theme);
             else if (NotebookTowerComposition.UsesComposition(state.Blueprint))
                 NotebookTowerComposition.DrawMounts(pen, state.Blueprint, p, state.Tier, state.Color,
@@ -115,12 +262,18 @@ namespace PaperDefense.Presentation
                 }
             }
             if (state.IsComplete) return;
+            bool modern = state.ResolvedEntry != null && state.ResolvedEntry.Kind != AlbumEntryKind.Legacy;
+            Rect artwork = modern ? NotebookAssemblyView.Bounds(p, state.ResolvedEntry.Snapshot)
+                : new Rect(p - Vector2.one * .5f, Vector2.one);
             float progress = Mathf.Repeat((float)seconds * .45f + state.Id * .13f, 1);
             float angle = progress * Mathf.PI * 2;
-            pen.Disc(p + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * .48f, .065f,
+            float radius = modern ? Mathf.Max(.48f, artwork.size.magnitude * .5f) : .48f;
+            pen.Disc(p + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius, .065f,
                 state.WaitingForClearance ? NotebookPalette.Red : color, 8);
-            pen.Line(p + new Vector2(-.35f, -.6f), p + new Vector2(.35f, -.6f), .06f, MeshPen.Alpha(NotebookPalette.Navy, .16f));
-            pen.Line(p + new Vector2(-.35f, -.6f), p + new Vector2(-.35f + .7f * fraction, -.6f), .06f,
+            Vector2 left = modern ? new Vector2(artwork.xMin, artwork.yMin - .3f) : p + new Vector2(-.35f, -.6f);
+            float width = modern ? Mathf.Max(.7f, artwork.width) : .7f;
+            pen.Line(left, left + Vector2.right * width, .06f, MeshPen.Alpha(NotebookPalette.Navy, .16f));
+            pen.Line(left, left + Vector2.right * (width * fraction), .06f,
                 state.WaitingForClearance ? NotebookPalette.Red : color);
         }
 
@@ -133,8 +286,9 @@ namespace PaperDefense.Presentation
 
         public static void Enemy(MeshPen pen, EnemyView enemy, float time, bool compact = false,
             NotebookAnimationState animation = null, NotebookVisualThemeAsset theme = null, double sampleSeconds = double.NaN, float windupSeconds = 0,
-            bool showHealth = true)
+            bool showHealth = true, float uniformScale = 1)
         {
+            int first = pen.VertexCount;
             float phase = time + enemy.Id * .137f;
             NotebookEnemyMotion motion = animation != null ? animation.Observe(enemy, time, out phase, theme, sampleSeconds, windupSeconds)
                 : enemy.WindupRemaining > 0 ? NotebookEnemyMotion.Attack : NotebookEnemyMotion.Idle;
@@ -143,6 +297,8 @@ namespace PaperDefense.Presentation
             DrawResourceEnemy(pen, enemy.Kind, enemy.DrawingTier, new Vector2(enemy.Position.X, enemy.Position.Y), motion, phase, theme, enemy.VisualScale);
             EnemyMarks(pen, enemy, time, theme);
             if (showHealth) EnemyHealth(pen, enemy);
+            float presentationScale = VisualScale(uniformScale);
+            if (presentationScale != 1) pen.ScaleFrom(first, new Vector2(enemy.Position.X, enemy.Position.Y), presentationScale);
         }
         internal static float VisualScale(float value) => float.IsNaN(value) || float.IsInfinity(value) || value <= 0 ? 1 : value;
         internal static float EnemyHealthRatio(float health, float maximum)
@@ -161,8 +317,9 @@ namespace PaperDefense.Presentation
                 ratio > .35f ? NotebookPalette.Green : NotebookPalette.Red);
         }
         internal static bool DrawResourceEnemy(MeshPen pen, EnemyKind kind, DrawingTier tier, Vector2 position,
-            NotebookEnemyMotion motion, float phase, NotebookVisualThemeAsset theme = null, float visualScale = 1)
+            NotebookEnemyMotion motion, float phase, NotebookVisualThemeAsset theme = null, float visualScale = 1, float uniformScale = 1)
         {
+            int first = pen.VertexCount;
             theme = theme ?? NotebookVisualThemeAsset.Default;
             visualScale = VisualScale(visualScale);
             Vector2 silhouette = kind == EnemyKind.Runner ? new Vector2(1.16f, .86f)
@@ -170,8 +327,11 @@ namespace PaperDefense.Presentation
                 : kind == EnemyKind.Bulwark ? new Vector2(1.08f, 1.05f) : Vector2.one;
             string id = NotebookAnimationState.EnemyId(kind, tier, motion);
             var frame = theme?.FindClip(id)?.Sample(Mathf.Max(0, phase));
-            return DrawResource(pen, frame?.ShapeId ?? id, position + (frame?.Offset ?? Vector2.zero) * visualScale,
+            bool drawn = DrawResource(pen, frame?.ShapeId ?? id, position + (frame?.Offset ?? Vector2.zero) * visualScale,
                 (frame?.Scale ?? 1) * visualScale, frame?.Rotation ?? 0, frame?.Alpha ?? 1, silhouette, theme);
+            float presentationScale = VisualScale(uniformScale);
+            if (presentationScale != 1) pen.ScaleFrom(first, position, presentationScale);
+            return drawn;
         }
 
         static void EnemyMarks(MeshPen pen, EnemyView enemy, float time, NotebookVisualThemeAsset theme)
@@ -192,8 +352,8 @@ namespace PaperDefense.Presentation
             pen.ScaleFrom(first, p, VisualScale(enemy.VisualScale));
         }
 
-        public static void Castle(MeshPen pen, Vector2 p, float healthFraction, float seconds = 0, NotebookVisualThemeAsset theme = null)
-            => DrawResource(pen, healthFraction < .6f ? "object.castle.damaged" : "object.castle", p, 3, theme: theme);
+        public static void Castle(MeshPen pen, Vector2 p, float healthFraction, float seconds = 0, NotebookVisualThemeAsset theme = null, float uniformScale = 1)
+            => DrawResource(pen, healthFraction < .6f ? "object.castle.damaged" : "object.castle", p, 3 * uniformScale, theme: theme);
         public static void Tree(MeshPen pen, Vector2 p, float size, Color color, int seed)
             => DrawResource(pen, "terrain.pine", p + Vector2.up * size * .5f, size, opacity: color.a);
         public static void Rock(MeshPen pen, Vector2 p, float size, Color color, int seed)

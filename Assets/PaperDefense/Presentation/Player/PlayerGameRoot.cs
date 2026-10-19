@@ -174,7 +174,11 @@ namespace PaperDefense.Presentation
         {
             if (!Run.InWorkshop) return false;
             if (!Run.StartRun(out var reason)) { Status = GameText.Resolve(reason); shell.SetStatus(Status); return false; }
-            Status = ""; Drawing.SelectSlot(0); Navigate(PlayerPage.Battle); return true;
+            Status = ""; Drawing.SelectSlot(0);
+            World.CastleVisualScale = Run.UsesAlbumSlots ? .55f : 1;
+            World.ModernEnemyPresentation = Run.UsesAlbumSlots;
+            if (Run.UsesAlbumSlots) Drawing.SetBattleView(false);
+            Navigate(PlayerPage.Battle); return true;
         }
 
         public void Pause()

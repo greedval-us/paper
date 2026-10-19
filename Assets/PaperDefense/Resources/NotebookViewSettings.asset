@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NotebookViewSettings
   m_EditorClassIdentifier: PaperDefense.Presentation::PaperDefense.Presentation.NotebookViewSettingsAsset
   ZoomPerNotch: 1.28
-  MaximumZoom: 4
+  MaximumZoom: 6
   MinimumStrokePixels: 1.25
   TerrainStrokePixels: 1
   TowerMarkerPixels: 12

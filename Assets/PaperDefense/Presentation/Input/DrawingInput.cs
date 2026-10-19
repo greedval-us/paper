@@ -38,8 +38,13 @@ namespace PaperDefense.Presentation
             }
         }
         public DrawingMode Mode { get; private set; }
+        static readonly string AlbumPlanningMessage = UserText.Message("assembly.battle.planning_hint");
         string message = UserText.Message("copy.462015bfa97612f9");
-        public string Message { get => Resolve(message); private set => message = value; }
+        public string Message
+        {
+            get => message == AlbumPlanningMessage && run?.Session?.Phase == RunPhase.Assault ? "" : Resolve(message);
+            private set => message = value;
+        }
         public int PreviewCost { get; private set; }
         public string PreviewReason { get; private set; } = "";
         public Cell HoverCell { get; private set; }
@@ -276,7 +281,8 @@ namespace PaperDefense.Presentation
                 range = selectedEntry.Support?.Radius ?? 0;
                 foreach (var weapon in selectedEntry.Weapons) range = Mathf.Max(range, weapon.Range);
             }
-            view.SetPreview(quote.Cells, Tool, Tier, quote.Valid, range, blueprint: blueprint);
+            view.SetPreview(quote.Cells, Tool, Tier, quote.Valid, range, blueprint: blueprint,
+                recipe: selectedEntry?.Kind == AlbumEntryKind.Legacy ? null : selectedEntry?.Snapshot);
         }
 
         void Navigate(Mouse mouse,Vector2 screen)
@@ -320,6 +326,18 @@ namespace PaperDefense.Presentation
             Cancel(); float old = Zoom; Zoom = Mathf.Clamp(Mathf.Max(1.5f, Zoom), 1, Mathf.Max(1, CameraSettings.MaximumZoom));
             CameraCenter = new Vector2(cell.X + .5f, cell.Y + .5f);
             if (worldCamera != null) { worldCamera.orthographicSize *= old / Zoom; ClampCamera(); }
+        }
+
+        /// <summary>Presentation framing only. The attempt, simulation clock and frozen loadout are unchanged.</summary>
+        public void SetBattleView(bool overview)
+        {
+            if (run == null) return;
+            Cancel(); float previous = Zoom;
+            Zoom = overview ? 1 : Mathf.Clamp(6, 1, Mathf.Max(1, CameraSettings.MaximumZoom));
+            CameraCenter = overview
+                ? new Vector2(run.Session.Balance.Width * .5f, run.Session.Balance.Height * .5f)
+                : new Vector2(run.Session.BaseCell.X + .5f, run.Session.BaseCell.Y + .5f);
+            if (worldCamera != null) { worldCamera.orthographicSize *= previous / Zoom; ClampCamera(); }
         }
 
         bool TryCell(Vector2 screen, out Cell cell)

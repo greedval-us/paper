@@ -12,7 +12,7 @@ namespace PaperDefense.Tests
         static readonly string[] Sprites = { "part.gun.barrels", "part.pilot.sight", "part.pilot.magazine", "part.pilot.trigger" };
 
         [Test]
-        public void RecordedDoubleGun_TrialAndBattleAdaptersMatchRecipeCompositionAtRestAimAndRecoil()
+        public void RecordedLegacyDoubleGun_TrialAndBattleAdaptersMatchHistoricalCompositionAtRestAimAndRecoil()
         {
             var snapshot = AssemblyVisualPilotTests.Pilot();
             var balance = GameBalance.CreateDefault();
@@ -51,7 +51,9 @@ namespace PaperDefense.Tests
                     }).ToArray();
                     observedAim |= poses.Any(p => Mathf.Abs(p.Radians) > .001f);
                     observedRecoil |= poses.Any(p => p.Recoil < -.001f);
-                    var expected = AssemblyVisualComposer.Compose(snapshot, new AssemblyVisualPose(poses));
+                    var expected = AssemblyVisualComposer.ComposeLegacy(tower.Blueprint,
+                        slot => tower.GetMountAim(slot), origin,
+                        slot => playback.Animation.Recoil(tower.Id, slot, seconds));
                     Assert.That(expected.Anchors.Select(a => a.SlotIndex), Is.EqualTo(new[] { 0, 1 }));
                     foreach (var selected in tower.Blueprint.WeaponMounts)
                         Assert.That(TowerCatalog.WeaponRange(tower.Blueprint, balance, selected.WeaponId, selected.SlotIndex),

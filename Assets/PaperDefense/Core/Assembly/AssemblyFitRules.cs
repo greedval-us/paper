@@ -44,7 +44,12 @@ namespace PaperDefense.Core
             }
             if (issues.Count > 0) return issues.AsReadOnly();
             if (recipe.Tower == null)
-            { issues.Add(new AssemblyDiagnostic("assembly.fit.coverage", "structure")); return issues.AsReadOnly(); }
+            {
+                if (!fits.TryGetStructure(recipe.Structure.Family, out var structure)
+                    || !Covers(recipe.Structure.Parts, structure.RequiredParts, structure.CompatibleParts, fits))
+                    issues.Add(new AssemblyDiagnostic("assembly.fit.coverage", "structure"));
+                return issues.AsReadOnly();
+            }
             var tower = recipe.Tower;
             if (!fits.TryGetFrame(tower.Foundation.Frame.Id, tower.Foundation.Frame.Revision, out var frame))
             { issues.Add(new AssemblyDiagnostic("assembly.fit.coverage", "foundation.frame")); return issues.AsReadOnly(); }
@@ -57,7 +62,7 @@ namespace PaperDefense.Core
                 if (socket == null)
                 { issues.Add(new AssemblyDiagnostic("assembly.fit.socket", path, "mount." + selected.SlotIndex)); continue; }
                 if (!fits.TryGetWeapon(selected.Weapon.Mechanism.Id, selected.Weapon.Mechanism.Revision, out var weapon)
-                    || !Covers(selected.Weapon, weapon))
+                    || !Covers(selected.Weapon.Parts, weapon.RequiredParts, weapon.CompatibleParts, fits))
                 { issues.Add(new AssemblyDiagnostic("assembly.fit.coverage", path)); continue; }
                 if (socket.SocketType != weapon.MountType)
                 { issues.Add(new AssemblyDiagnostic("assembly.fit.socket_type", path, socket.SocketType, weapon.MountType)); continue; }
@@ -67,6 +72,12 @@ namespace PaperDefense.Core
                 var placement = new Placement(socket, weapon, path); placements.Add(placement);
                 foreach (var keepout in frame.Keepouts)
                 {
+                    if (!string.IsNullOrEmpty(keepout.PartId))
+                    {
+                        bool selectedPart = false;
+                        foreach (var part in tower.Foundation.Parts) if (part.Id == keepout.PartId) { selectedPart = true; break; }
+                        if (!selectedPart) continue;
+                    }
                     if (keepout.ArmorOnly && tower.Foundation.Armor.Id != "armor.plate") continue;
                     var bounds = new Bounds(keepout);
                     bool collision = CircleNear(placement.Pivot, (double)placement.Radius + weapon.Clearance, bounds);
@@ -90,15 +101,21 @@ namespace PaperDefense.Core
             return issues.AsReadOnly();
         }
 
-        static bool Covers(WeaponRecipe recipe, AssemblyFitWeapon fit)
+        static bool Covers(IEnumerable<PartRef> recipe, IReadOnlyList<PartRef> required, IReadOnlyList<PartRef> compatible, AssemblyFitCatalog fits)
         {
             int index = 0;
-            foreach (var reference in recipe.Parts)
+            foreach (var reference in recipe)
             {
-                var required = fit.RequiredParts[index++];
-                if (reference.Id != required.Id || reference.Revision != required.Revision) return false;
+                if (index >= required.Count) return false;
+                var standard = required[index++]; bool found = reference.Id == standard.Id && reference.Revision == standard.Revision;
+                if (!fits.TryGetPart(reference.Id, reference.Revision, out var selectedPart)
+                    || !fits.TryGetPart(standard.Id, standard.Revision, out var standardPart)
+                    || selectedPart.Category != standardPart.Category) return false;
+                if (!found) foreach (var allowed in compatible)
+                    if (reference.Id == allowed.Id && reference.Revision == allowed.Revision) { found = true; break; }
+                if (!found) return false;
             }
-            return index == fit.RequiredParts.Count;
+            return index == required.Count;
         }
         sealed class Placement
         {

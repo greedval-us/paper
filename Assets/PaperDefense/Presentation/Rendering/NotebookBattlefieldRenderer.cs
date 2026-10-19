@@ -31,6 +31,13 @@ namespace PaperDefense.Presentation
                     prop.Kind==TerrainPropKind.Broadleaf?"terrain.oak":prop.Kind==TerrainPropKind.Rock?"terrain.rock":"terrain.shrub";
                 if(prop.Kind==TerrainPropKind.Mountain&&(prop.Cell.X&1)==0)id="terrain.ridge";
                 float scale=Mathf.Min(prop.Width/1.15f,prop.Height/1.05f);
+                // Fit the authored silhouette to its occupied terrain rectangle. The
+                // pine's actual width is .67 U, so an assumed 1.15 U left sparse dots.
+                if(NotebookSpriteCatalog.TryGetBounds(id,out var bounds)&&bounds.width>0&&bounds.height>0)
+                {
+                    scale=.94f*Mathf.Min(prop.Width/bounds.width,prop.Height/bounds.height);
+                    at-=bounds.center*scale;
+                }
                 DoodleGlyphs.DrawResource(pen,id,at,scale,opacity:.95f,theme:theme);
             }
             foreach(var cell in map.BarricadeSites)
