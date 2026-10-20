@@ -5,9 +5,8 @@ using UnityEngine;
 namespace PaperDefense.Presentation
 {
     /// <summary>Two views share their owner's clock; world X and Y use one letterboxed scale.</summary>
-    public sealed class FootprintProbeSketch : UnityEngine.UI.MaskableGraphic
+    public sealed class FootprintProbeSketch : NotebookAtlasGraphic
     {
-        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         IReadOnlyList<TrialFrame> frames;
         Func<float> clock;
         Rect world = new Rect(8,4.5f,16,12);

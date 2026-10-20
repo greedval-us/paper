@@ -9,7 +9,7 @@ namespace PaperDefense.Tests
 {
     public sealed class NotebookNativeAtlasTests
     {
-        [Test] public void CompleteAtlas_Fits4096WithFourPixelGuttersAndPreservesEveryNativeRgbaPixel()
+        [Test] public void CompleteAtlasPng_FitsDeclaredNativeSizeWithFourPixelGuttersAndPreservesEveryNativeRgbaPixel()
         {
             var source = NotebookSpriteImportTools.ParseSource(File.ReadAllText(NotebookSpriteImportTools.SourcePath));
             var atlas = new Texture2D(2, 2, TextureFormat.RGBA32, false);
@@ -17,7 +17,12 @@ namespace PaperDefense.Tests
             try
             {
                 Assert.That(atlas.LoadImage(File.ReadAllBytes(NotebookSpriteImportTools.AtlasPath)), Is.True);
-                Assert.That(atlas.width, Is.EqualTo(4096)); Assert.That(atlas.height, Is.EqualTo(4096));
+                Assert.That(atlas.width, Is.EqualTo(4096)); Assert.That(atlas.height, Is.EqualTo(4352));
+                var imported = Resources.Load<Texture2D>("Art/NotebookAtlas");
+                Assert.That(imported.width, Is.EqualTo(atlas.width)); Assert.That(imported.height, Is.EqualTo(atlas.height),
+                    "The non-square atlas must remain native-sized in the player resource.");
+                Assert.That(imported.mipmapCount, Is.EqualTo(1), "Whole-atlas mipmaps mix neighbouring native crops.");
+                Assert.That(imported.filterMode, Is.EqualTo(FilterMode.Bilinear));
                 var actual = atlas.GetPixels32();
                 foreach (var definition in source.sprites)
                 {
@@ -25,7 +30,7 @@ namespace PaperDefense.Tests
                     var rect = sprite.rect;
                     Assert.That(rect.width, Is.EqualTo(definition.width)); Assert.That(rect.height, Is.EqualTo(definition.height));
                     Assert.That(rect.xMin, Is.GreaterThanOrEqualTo(0)); Assert.That(rect.yMin, Is.GreaterThanOrEqualTo(0));
-                    Assert.That(rect.xMax, Is.LessThanOrEqualTo(4096)); Assert.That(rect.yMax, Is.LessThanOrEqualTo(4096));
+                    Assert.That(rect.xMax, Is.LessThanOrEqualTo(atlas.width)); Assert.That(rect.yMax, Is.LessThanOrEqualTo(atlas.height));
                     foreach (var other in placed)
                     {
                         float dx = Mathf.Max(rect.xMin - other.xMax, other.xMin - rect.xMax);

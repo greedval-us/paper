@@ -6,9 +6,8 @@ namespace PaperDefense.Presentation
 {
     /// <summary>Canvas view of the same resource primitives used in the batched world.</summary>
     [RequireComponent(typeof(CanvasRenderer))]
-    public sealed class NotebookArtGraphic : MaskableGraphic
+    public sealed class NotebookArtGraphic : NotebookAtlasGraphic
     {
-        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         string shapeId, clipId;
         float seconds;
         Rect drawingBounds;

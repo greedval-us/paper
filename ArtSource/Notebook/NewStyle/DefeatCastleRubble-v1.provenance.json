@@ -1,0 +1,11 @@
+{
+  "generator": "built-in image_gen",
+  "file": "DefeatCastleRubble-v1.png",
+  "runtimeFile": "Assets/PaperDefense/Resources/Art/Player/DefeatCastleRubble.png",
+  "transparent_background": true,
+  "references": ["docs/design/game-concept-art-2026-10-16/screens/21-defeat.png"],
+  "prompt": "Use case: background-extraction. Extract only the destroyed blue-ink castle illustration in the lower-left central area of this reference, including its collapsed towers, shattered gate, leaning broken flag, piles of masonry, broken barriers, scattered rubble and the small celebrating doodle invaders around/on the ruin. Preserve the reference composition and exact blue-ballpoint pen drawing style, warm ivory stone fills and crosshatching. It must visibly be a COLLAPSED RUIN, not an intact standing castle. Remove ALL text, headings, ribbons, UI panels, reward symbols, forest background, mountains, graph-paper grid and paper background. Produce one clean isolated landscape transparent illustration, complete ruin and complete surrounding small doodle figures fully in frame, no cropped limbs or stones, about4% transparent padding. No external shadow, no glow, no added UI or words. The result is a decorative illustration for the actual defeat result screen. Match the source21 castle ruin and invaders as closely as possible.",
+  "output": "C:/Users/Greedval/.codex/generated_images/01a14cd7-7db2-7df0-8654-f50c4f801bf0/exec-e0fe3276-7148-4bcd-a628-85574f30853b.png",
+  "sourcePixelsModifiedByCode": false,
+  "usage": "Decorative result-screen illustration only. Statistics, labels and actions remain live UI elements."
+}

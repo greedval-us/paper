@@ -40,7 +40,8 @@ namespace PaperDefense.Editor
         [Serializable] sealed class Pixel { public int x, y; }
         [Serializable] sealed class NativePacking
         {
-            public int atlas, gutter;
+            public int atlas, height, gutter;
+            public int Height => height > 0 ? height : atlas;
             public NativeRectangle[] rectangles;
         }
         [Serializable] sealed class NativeRectangle
@@ -96,7 +97,7 @@ namespace PaperDefense.Editor
                     return new Vector2Int(image.width, image.height);
                 });
                 var imagePixels = images.ToDictionary(pair => pair.Key, pair => pair.Value.GetPixels32(), StringComparer.OrdinalIgnoreCase);
-                var atlasPixels = new Color32[packing.atlas * packing.atlas];
+                var atlasPixels = new Color32[packing.atlas * packing.Height];
                 for (int i = 0; i < source.sprites.Length; i++)
                 {
                     var sprite = source.sprites[i]; var rect = packing.rectangles[i]; string path = ResolveSourcePath(sprite.source);
@@ -110,7 +111,7 @@ namespace PaperDefense.Editor
                 var pen = packing.rectangles[packing.rectangles.Length - 1];
                 for (int y = 0; y < 9; y++) for (int x = 0; x < 9; x++)
                     atlasPixels[(pen.y + y) * packing.atlas + pen.x + x] = new Color32(255, 255, 255, 255);
-                atlas = new Texture2D(packing.atlas, packing.atlas, TextureFormat.RGBA32, false);
+                atlas = new Texture2D(packing.atlas, packing.Height, TextureFormat.RGBA32, false);
                 atlas.SetPixels32(atlasPixels);
                 atlas.Apply(false, false);
 
@@ -168,7 +169,8 @@ namespace PaperDefense.Editor
             NativePacking layout;
             try { layout = JsonUtility.FromJson<NativePacking>(File.ReadAllText(PackingPath)); }
             catch (Exception error) { throw Stale("invalid layout JSON: " + error.Message); }
-            if (layout == null || layout.atlas != 4096 || layout.gutter != 4 || layout.rectangles == null
+            if (layout == null || layout.atlas != 4096 || (layout.Height != 4096 && layout.Height != 4352)
+                || layout.gutter != 4 || layout.rectangles == null
                 || layout.rectangles.Length != source.sprites.Length + 1) throw Stale("stale atlas size, gutter or native crop count");
             var ids = new HashSet<string>(StringComparer.Ordinal);
             for (int i = 0; i < layout.rectangles.Length; i++)
@@ -179,8 +181,8 @@ namespace PaperDefense.Editor
                 if (rect == null || rect.index != i || rect.id != id || !ids.Add(rect.id)
                     || rect.width != width || rect.height != height) throw Stale("native crop ID, order or dimensions changed at " + id);
                 if (rect.x < 0 || rect.y < 0 || rect.width <= 0 || rect.height <= 0
-                    || (long)rect.x + rect.width > layout.atlas || (long)rect.y + rect.height > layout.atlas)
-                    throw Stale("native rectangle extends outside 4096 at " + id);
+                    || (long)rect.x + rect.width > layout.atlas || (long)rect.y + rect.height > layout.Height)
+                    throw Stale("native rectangle extends outside the declared atlas at " + id);
                 for (int j = 0; j < i; j++)
                 {
                     var other = layout.rectangles[j];
@@ -252,9 +254,13 @@ namespace PaperDefense.Editor
             importer.textureType = TextureImporterType.Default;
             importer.npotScale = TextureImporterNPOTScale.None;
             importer.maxTextureSize = 8192;
+            // Packed native crops have only four pixels of gutter. Full-atlas mipmaps
+            // would mix neighbouring illustrations at small sizes; the notebook shaders
+            // instead average four samples from mip zero inside a bounded footprint.
             importer.mipmapEnabled = false;
             importer.wrapMode = TextureWrapMode.Clamp;
             importer.filterMode = FilterMode.Bilinear;
+            importer.mipMapBias = 0;
             importer.textureCompression = TextureImporterCompression.Uncompressed;
             importer.alphaSource = TextureImporterAlphaSource.FromInput;
             importer.alphaIsTransparency = true;

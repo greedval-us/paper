@@ -27,6 +27,7 @@ namespace PaperDefense.Presentation
         public string SelectedId { get; private set; }
         string T(string key, params object[] args) => ui.Resolve(UserText.Message("assembly.album." + key, args));
         AlbumEntry Selected => run.Workshop.Entries.FirstOrDefault(entry => entry.Id == SelectedId);
+        float PageInset => width >= 1250 ? Mathf.Min(112, width * .075f) : 24;
 
         public AlbumPanel(Transform parent, RunController run, UserTextResolver resolver,
             Action<AlbumEntry> edit, Action close, Action assigned = null, int? destinationSlot = null)
@@ -74,15 +75,16 @@ namespace PaperDefense.Presentation
                 string focus = previous != null && previous.transform.IsChildOf(Root) ? previous.name : null;
                 if (SelectedId != null && Selected == null) SelectedId = null;
                 WorkshopUi.ClearViews(Root); confirmation = null;
-                Header(); Slots(); Filters();
-                float bodyY = 254, bodyHeight = height - bodyY - 106;
-                float catalogWidth = (width - 64) * .7f;
+                Periphery(); Header(); Slots(); Filters();
+                float bodyY = 232, bodyHeight = height - bodyY - 92;
+                float innerWidth = width - PageInset * 2;
+                float catalogWidth = (innerWidth - 16) * .72f;
                 var entries = run.Workshop.Entries.Where(Matches).ToArray();
-                if (entries.Length == 0) Empty(new Rect(24, bodyY, width - 48, bodyHeight));
+                if (entries.Length == 0) Empty(new Rect(PageInset, bodyY, innerWidth, bodyHeight));
                 else
                 {
-                    Cards(entries, new Rect(24, bodyY, catalogWidth, bodyHeight));
-                    Inspector(new Rect(40 + catalogWidth, bodyY, width - catalogWidth - 64, bodyHeight));
+                    Cards(entries, new Rect(PageInset, bodyY, catalogWidth, bodyHeight));
+                    Inspector(new Rect(PageInset + catalogWidth + 16, bodyY, innerWidth - catalogWidth - 16, bodyHeight));
                 }
                 Footer();
                 if (focus != null && EventSystem.current != null)
@@ -96,24 +98,60 @@ namespace PaperDefense.Presentation
 
         void Header()
         {
+            float innerWidth = width - PageInset * 2;
             ui.Label(Root, "Album title", destinationSlot.HasValue ? T("destination", destinationSlot.Value + 1) : T("title"),
-                new Rect(24, 10, width * .48f, 48), 32, true);
+                new Rect(PageInset, 10, innerWidth * .33f, 48), 32, true);
             var resources = ui.Label(Root, "Album resources", T("resources", run.Workshop.Gold, run.Workshop.Level, run.Workshop.TotalXp),
-                new Rect(width * .49f, 16, width * .51f - 24, 40), 19, color: WorkshopUi.Muted);
-            resources.alignment = TextAnchor.MiddleRight;
+                new Rect(PageInset + innerWidth * .34f, 16, innerWidth * .4f - 12, 40), 19, color: WorkshopUi.Muted);
+            resources.alignment = TextAnchor.MiddleCenter;
+            ui.Button(Root, "Album new", new Rect(PageInset + innerWidth * .75f, 14, innerWidth * .25f, 44),
+                T("new"), () => edit?.Invoke(null), WorkshopIcon.Plus, true).interactable = edit != null;
+        }
+
+        void Periphery()
+        {
+            float edge = Mathf.Max(58, PageInset + 12);
+            void Art(string id, Rect bounds)
+            {
+                var art = WorkshopUi.Graphic<NotebookArtGraphic>(Root, "Album margin " + id, bounds);
+                art.Bind(id); art.color = new Color(1, 1, 1, .95f);
+            }
+            for (int side = 0; side < 2; side++)
+            {
+                float x = side == 0 ? -edge * .27f : width - edge * .78f;
+                for (int tree = 0; tree < 5; tree++)
+                {
+                    float treeWidth = edge * (tree % 2 == 0 ? 1.02f : .72f);
+                    float y = 188 + tree * (height - 270) / 5;
+                    Art("terrain.pine", new Rect(x + tree % 2 * edge * .18f, y, treeWidth, treeWidth * 1.48f));
+                    if (tree % 2 == 1) Art("terrain.rock", new Rect(x, y + treeWidth, edge, edge * .56f));
+                }
+            }
+            if (PageInset >= 64)
+            {
+                var house = WorkshopUi.Graphic<Image>(Root, "Album workshop in margin", new Rect(4, 60, PageInset - 12, 122));
+                house.sprite = Resources.Load<Sprite>("Art/Player/DrawingWorkshopHouse"); house.preserveAspect = true;
+            }
+            Art("object.castle", new Rect(width - 192, 60, 188, 118));
+            Art("icon.flag", new Rect(width - edge + 8, height * .57f, edge * .6f, edge));
+            Art("terrain.shrub", new Rect(0, height - 100, edge * 1.55f, 92));
+            Art("terrain.rock", new Rect(width - edge * 1.4f, height - 92, edge * 1.45f, 88));
         }
 
         void Slots()
         {
             int columns = width < 1250 ? 4 : 8;
-            float gap = 8, slotWidth = (width - 48 - gap * (columns - 1)) / columns;
+            float gap = 8, slotStart = PageInset + (columns == 8 ? 190 : 170);
+            float slotEnd = width - PageInset - (columns == 8 ? 120 : 100);
+            float slotWidth = (slotEnd - slotStart - gap * (columns - 1)) / columns;
             float slotHeight = columns == 4 ? 48 : 104;
+            ui.Label(Root, "Album current loadout", "Текущий набор:", new Rect(PageInset, 86, slotStart - PageInset - 12, 58), 23, true);
             for (int index = 0; index < 8; index++)
             {
                 int slot = index; var entry = run.Workshop.LoadoutEntries[index];
                 string caption = entry == null ? T("slot_empty", index + 1) : T("slot", index + 1, ui.Resolve(entry.Name));
                 var button = ui.Button(Root, "Album assign " + index,
-                    new Rect(24 + index % columns * (slotWidth + gap), 72 + index / columns * 56, slotWidth, slotHeight),
+                    new Rect(slotStart + index % columns * (slotWidth + gap), 72 + index / columns * 56, slotWidth, slotHeight),
                     caption, () => RequestAssign(slot), WorkshopIcon.Book);
                 if (columns == 8 && entry != null)
                 {
@@ -135,12 +173,12 @@ namespace PaperDefense.Presentation
         void Filters()
         {
             string[] keys = { "all", "towers", "structures", "standard", "mine" };
-            float gap = 10, tabWidth = (width - 48 - gap * 4) / 5;
+            float gap = 8, tabWidth = (width - PageInset * 2 - gap * 4) * .72f / 5;
             for (int index = 0; index < keys.Length; index++)
             {
                 var filter = (AlbumFilter)index;
                 var button = ui.Button(Root, "Album filter " + filter,
-                    new Rect(24 + index * (tabWidth + gap), 198, tabWidth, 44), T("filter." + keys[index]), () => SetFilter(filter));
+                    new Rect(PageInset + index * (tabWidth + gap), 186, tabWidth, 38), T("filter." + keys[index]), () => SetFilter(filter));
                 ui.SetSelected(button, Filter == filter);
             }
         }
@@ -159,13 +197,17 @@ namespace PaperDefense.Presentation
                     new Rect(index % columns * (cardWidth + gap), index / columns * (cardHeight + gap), cardWidth, cardHeight),
                     SelectedId == entry.Id ? WorkshopUi.Selected : Color.white, true);
                 // The full card is the choose target; decorative children never intercept pointer input.
-                var button = card.gameObject.AddComponent<Button>(); button.targetGraphic = card.GetComponent<WorkshopSurfaceGraphic>();
+                var surface = card.GetComponent<WorkshopSurfaceGraphic>();
+                surface.IsControl = true; surface.Chosen = SelectedId == entry.Id;
+                var button = card.gameObject.AddComponent<Button>(); button.targetGraphic = surface;
                 card.gameObject.AddComponent<UiScrollFocus>();
                 button.name = "Album choose " + entry.Id;
                 button.onClick.AddListener(() => { SelectedId = entry.Id; feedback = ""; if (destinationSlot.HasValue) RequestAssign(destinationSlot.Value); else Refresh(); });
-                DrawEntry(card, entry, new Rect(8, 6, cardWidth - 16, cardHeight - 92));
-                var title = ui.Label(card, "Album card name", entry.Name, new Rect(10, cardHeight - 82, cardWidth - 20, 46), 19, true);
+                var title = ui.Label(card, "Album card name", entry.Name, new Rect(10, 4, cardWidth - 20, 38), 21, true);
                 title.resizeTextForBestFit = true; title.resizeTextMinSize = 15; title.resizeTextMaxSize = 19;
+                var rule = WorkshopUi.Graphic<Image>(card, "Album card title rule", new Rect(10, 43, cardWidth - 20, 1));
+                rule.color = new Color(.12f, .28f, .52f, .55f);
+                DrawEntry(card, entry, new Rect(5, 48, cardWidth - 10, cardHeight - 82));
                 var resolved = run.PreviewAlbumEntry(entry, MaterialTier.Pencil);
                 var price = ui.Label(card, "Album card price", resolved.Valid ? T("price", resolved.Value.Cost) : T("unavailable"),
                     new Rect(10, cardHeight - 32, cardWidth - 20, 26), 16, color: WorkshopUi.Muted);
@@ -177,8 +219,8 @@ namespace PaperDefense.Presentation
         void Empty(Rect bounds)
         {
             var sheet = ui.Panel(Root, "Album empty sheet", bounds, Color.white);
-            float imageHeight = Mathf.Max(120, Mathf.Min(270, bounds.height - 158));
-            float imageWidth = Mathf.Min(740, bounds.width * .78f), imageX = (bounds.width - imageWidth) * .5f;
+            float imageHeight = Mathf.Max(120, Mathf.Min(420, bounds.height - 158));
+            float imageWidth = Mathf.Min(1100, bounds.width * .88f), imageX = (bounds.width - imageWidth) * .5f;
             var title = ui.Label(sheet, "Album empty", T(Filter == AlbumFilter.Mine ? "empty_mine" : "empty"),
                 new Rect(24, 0, bounds.width - 48, 44), 30, true); title.alignment = TextAnchor.MiddleCenter;
             var hint = ui.Label(sheet, "Album empty explanation", T("empty_hint"), new Rect(24, 44, bounds.width - 48, 42), 19, color: WorkshopUi.Muted);
@@ -193,6 +235,12 @@ namespace PaperDefense.Presentation
                 var right = WorkshopUi.Graphic<WeaponAssemblyGraphic>(illustration.transform, "Album empty assembled study",
                     new Rect(imageWidth * .55f, imageHeight * .16f, imageWidth * .34f, imageHeight * .66f));
                 right.SetRecipe(starter.Snapshot);
+            }
+            if (NotebookSpriteCatalog.TryGet("icon.ink-blue", out var inkBottle))
+            {
+                var ink = WorkshopUi.Graphic<Image>(sheet, "Album empty ink bottle",
+                    new Rect(Mathf.Max(16, imageX - 24), 84 + imageHeight - 56, 62, 76));
+                ink.sprite = inkBottle; ink.preserveAspect = true;
             }
             float actionWidth = Mathf.Min(320, bounds.width - 48);
             ui.Button(sheet, "Album show standard", new Rect((bounds.width - actionWidth) / 2, bounds.height - 58, actionWidth, 44),
@@ -209,20 +257,22 @@ namespace PaperDefense.Presentation
                 return;
             }
             float w = bounds.width, h = bounds.height;
-            ui.Label(sheet, "Album selected name", entry.Name, new Rect(16, 4, w - 32, 62), 24, true);
-            float artHeight = Mathf.Max(64, h - 282);
-            DrawEntry(sheet, entry, new Rect(16, 70, w - 32, artHeight));
+            ui.Label(sheet, "Album selected name", entry.Name, new Rect(16, 4, w - 32, 46), 27, true);
+            var rule = WorkshopUi.Graphic<Image>(sheet, "Album selected title rule", new Rect(16, 51, w - 32, 1));
+            rule.color = new Color(.12f, .28f, .52f, .55f);
+            float artHeight = Mathf.Max(68, h - 236);
+            DrawEntry(sheet, entry, new Rect(8, 56, w - 16, artHeight));
             var resolved = run.PreviewAlbumEntry(entry, MaterialTier.Pencil);
             string statistics = resolved.Valid ? T("statistics", resolved.Value.Cost, resolved.Value.Health.ToString("0.##"), resolved.Value.Load, resolved.Value.Capacity) : T("unavailable");
-            ui.Label(sheet, "Album selected statistics", statistics, new Rect(16, h - 204, w - 32, 60), 17, color: WorkshopUi.Muted);
-            var editButton = ui.Button(sheet, "Album edit", new Rect(16, h - 140, w - 32, 42), T("edit"), () => edit?.Invoke(Selected), WorkshopIcon.Pencil);
+            ui.Label(sheet, "Album selected statistics", statistics, new Rect(16, h - 176, w - 32, 54), 18, color: WorkshopUi.Muted);
+            var editButton = ui.Button(sheet, "Album edit", new Rect(16, h - 120, w - 32, 36), T("edit"), () => edit?.Invoke(Selected), WorkshopIcon.Pencil);
             editButton.interactable = edit != null;
-            ui.Button(sheet, "Album variant", new Rect(16, h - 94, w - 32, 42), T("variant"), () => {
+            ui.Button(sheet, "Album variant", new Rect(16, h - 80, w - 32, 36), T("variant"), () => {
                 var result = run.AssemblyCommands.SaveEntryAsVariant(Selected, Guid.NewGuid());
                 if (result.Success) SelectedId = result.ResultId;
                 feedback = ResultText(result, "variant_saved"); Refresh();
             }, WorkshopIcon.Copy).interactable = entry.Kind != AlbumEntryKind.Legacy;
-            ui.Button(sheet, "Album delete", new Rect(16, h - 48, w - 32, 42), T("delete"), RequestDelete, WorkshopIcon.Trash);
+            ui.Button(sheet, "Album delete", new Rect(16, h - 40, w - 32, 36), T("delete"), RequestDelete, WorkshopIcon.Trash);
         }
 
         void DrawEntry(Transform parent, AlbumEntry entry, Rect bounds)
@@ -254,12 +304,11 @@ namespace PaperDefense.Presentation
         {
             string status = feedback;
             if (string.IsNullOrEmpty(status) && Selected != null && Matches(Selected) && !destinationSlot.HasValue) status = T("choose_slot");
-            ui.Label(Root, "Album status", status, new Rect(24, height - 98, width - 48, 34), 17, color: WorkshopUi.Warning);
-            ui.Button(Root, "Album new", new Rect(24, height - 58, 190, 44), T("new"), () => edit?.Invoke(null), WorkshopIcon.Plus, true).interactable = edit != null;
-            ui.Button(Root, "Album restore", new Rect(226, height - 58, 310, 44), T("restore"), () => {
+            ui.Label(Root, "Album status", status, new Rect(PageInset, height - 86, width - PageInset * 2, 30), 17, color: WorkshopUi.Warning);
+            ui.Button(Root, "Album restore", new Rect(PageInset, height - 52, 310, 42), T("restore"), () => {
                 feedback = ResultText(run.AssemblyCommands.RestoreStarterEntries(Guid.NewGuid()), "restored"); Refresh();
             }, WorkshopIcon.Undo);
-            ui.Button(Root, "Album close", new Rect(width - 204, height - 58, 180, 44), T("close"), close, WorkshopIcon.Back);
+            ui.Button(Root, "Album close", new Rect(width - PageInset - 220, height - 52, 220, 42), T("close"), close, WorkshopIcon.Back);
         }
 
         string ResultText(AssemblyCommandResult result, string success)

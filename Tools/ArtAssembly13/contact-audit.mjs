@@ -51,6 +51,17 @@ if(process.argv.includes('--foundation-contact')){
  for(const id of['frame.standard','frame.heavy','frame.precision','frame.battery']){const f=part(id).fragments[0];console.log(JSON.stringify({frame:id,feedPoint:point,feedAlpha:alpha(feed,200,250),frameAlpha:sampleWorld(f,point)}));}
  process.exit(0);
 }
+if(process.argv.includes('--foundation-seats')){
+ for(const id of['frame.standard','frame.heavy','frame.precision','frame.battery']){
+  const p=part(id),f=p.fragments[0];
+  for(const mount of p.mounts){const point=[mount.position.x,mount.position.y];
+   const probes=[[0,0],[-2,0],[2,0],[0,-2],[0,2]].map(([dx,dy])=>alpha(f,point[0]+dx,point[1]+dy));
+   if(Math.min(...probes)<128)throw new Error('A foundation seat is not opaque: '+id+'/'+mount.slot);
+   console.log(JSON.stringify({frame:id,slot:mount.slot,source:point,world:tf(f,point),minimumAlpha:Math.min(...probes)}));
+  }
+ }
+ process.exit(0);
+}
 if(process.argv.includes('--probes')){
  const sight=part('sight.iron').fragments[0],foot=tf(sight,[173,16]);
  for(const family of ['gun','piercer','mortar','fan','ricochet','stapler','blotter']){const core=part('core.'+family).fragments[0],native=points(core),pts=native.map(p=>tf(core,p)),centre=native.filter(p=>Math.abs(p[0]-core.attach.x)<=1),bottom=centre.reduce((a,b)=>a[1]<b[1]?a:b);console.log(JSON.stringify({family,foot:bottom,footWorld:tf(core,bottom),sightFoot:foot,coreAlphaAtSightFoot:sampleWorld(core,foot),bounds:[Math.min(...pts.map(p=>p[0])),Math.min(...pts.map(p=>p[1])),Math.max(...pts.map(p=>p[0])),Math.max(...pts.map(p=>p[1]))]}));}

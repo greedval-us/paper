@@ -1,6 +1,6 @@
 {
     "schemaVersion": 2,
-    "revision": "modular-full-catalog-2026-10-19-v5",
+    "revision": "modular-full-catalog-2026-10-19-v6",
     "foundations": [
         {
             "id": "chassis.standard",
@@ -494,11 +494,11 @@
     },
     "fits": {
         "SchemaVersion": 1,
-        "Revision": "modular-full-catalog-2026-10-19-v5",
+        "Revision": "modular-full-catalog-2026-10-19-v6",
         "Parts": [
             {
                 "Id": "frame.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -507,7 +507,7 @@
             },
             {
                 "Id": "frame.heavy",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -516,7 +516,7 @@
             },
             {
                 "Id": "frame.precision",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -525,7 +525,7 @@
             },
             {
                 "Id": "frame.battery",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -534,7 +534,7 @@
             },
             {
                 "Id": "hull.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Hull",
                 "ExpectedSocketType": "assembly.Hull",
                 "Revision": 1,
@@ -543,7 +543,7 @@
             },
             {
                 "Id": "hull.light",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Hull",
                 "ExpectedSocketType": "assembly.Hull",
                 "Revision": 1,
@@ -552,7 +552,7 @@
             },
             {
                 "Id": "hull.reinforced",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Hull",
                 "ExpectedSocketType": "assembly.Hull",
                 "Revision": 1,
@@ -561,7 +561,7 @@
             },
             {
                 "Id": "armor.none",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Armor",
                 "ExpectedSocketType": "assembly.Armor",
                 "Revision": 1,
@@ -570,7 +570,7 @@
             },
             {
                 "Id": "armor.plate",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Armor",
                 "ExpectedSocketType": "assembly.Armor",
                 "Revision": 1,
@@ -579,7 +579,7 @@
             },
             {
                 "Id": "armor.front",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Armor",
                 "ExpectedSocketType": "assembly.Armor",
                 "Revision": 1,
@@ -588,7 +588,7 @@
             },
             {
                 "Id": "feed.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Feed",
                 "ExpectedSocketType": "assembly.Feed",
                 "Revision": 1,
@@ -597,7 +597,7 @@
             },
             {
                 "Id": "feed.boost",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Feed",
                 "ExpectedSocketType": "assembly.Feed",
                 "Revision": 1,
@@ -606,7 +606,7 @@
             },
             {
                 "Id": "turn.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Turn",
                 "ExpectedSocketType": "assembly.Turn",
                 "Revision": 1,
@@ -615,7 +615,7 @@
             },
             {
                 "Id": "turn.quick",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Turn",
                 "ExpectedSocketType": "assembly.Turn",
                 "Revision": 1,
@@ -624,7 +624,7 @@
             },
             {
                 "Id": "core.gun",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -633,7 +633,7 @@
             },
             {
                 "Id": "core.piercer",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -642,7 +642,7 @@
             },
             {
                 "Id": "core.mortar",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -651,7 +651,7 @@
             },
             {
                 "Id": "core.fan",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -660,7 +660,7 @@
             },
             {
                 "Id": "core.ricochet",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -669,7 +669,7 @@
             },
             {
                 "Id": "core.stapler",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -678,7 +678,7 @@
             },
             {
                 "Id": "core.blotter",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -687,7 +687,7 @@
             },
             {
                 "Id": "head.gun",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -696,7 +696,7 @@
             },
             {
                 "Id": "head.piercer",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -705,7 +705,7 @@
             },
             {
                 "Id": "head.mortar",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -714,7 +714,7 @@
             },
             {
                 "Id": "head.fan",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -723,7 +723,7 @@
             },
             {
                 "Id": "head.ricochet",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -732,7 +732,7 @@
             },
             {
                 "Id": "head.stapler",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -741,7 +741,7 @@
             },
             {
                 "Id": "head.blotter",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -750,7 +750,7 @@
             },
             {
                 "Id": "head.short",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -759,7 +759,7 @@
             },
             {
                 "Id": "head.long",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -768,7 +768,7 @@
             },
             {
                 "Id": "head.wide",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -777,7 +777,7 @@
             },
             {
                 "Id": "sight.iron",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Sight",
                 "ExpectedSocketType": "assembly.Sight",
                 "Revision": 1,
@@ -786,7 +786,7 @@
             },
             {
                 "Id": "sight.scope",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Sight",
                 "ExpectedSocketType": "assembly.Sight",
                 "Revision": 1,
@@ -795,7 +795,7 @@
             },
             {
                 "Id": "sight.tracking",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Sight",
                 "ExpectedSocketType": "assembly.Sight",
                 "Revision": 1,
@@ -804,7 +804,7 @@
             },
             {
                 "Id": "magazine.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Magazine",
                 "ExpectedSocketType": "assembly.Magazine",
                 "Revision": 1,
@@ -813,7 +813,7 @@
             },
             {
                 "Id": "magazine.drum",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Magazine",
                 "ExpectedSocketType": "assembly.Magazine",
                 "Revision": 1,
@@ -822,7 +822,7 @@
             },
             {
                 "Id": "magazine.belt",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Magazine",
                 "ExpectedSocketType": "assembly.Magazine",
                 "Revision": 1,
@@ -831,7 +831,7 @@
             },
             {
                 "Id": "trigger.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Trigger",
                 "ExpectedSocketType": "assembly.Trigger",
                 "Revision": 1,
@@ -840,7 +840,7 @@
             },
             {
                 "Id": "trigger.burst",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Trigger",
                 "ExpectedSocketType": "assembly.Trigger",
                 "Revision": 1,
@@ -849,7 +849,7 @@
             },
             {
                 "Id": "site.wall",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -858,7 +858,7 @@
             },
             {
                 "Id": "site.slow",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -867,7 +867,7 @@
             },
             {
                 "Id": "site.repair",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -876,7 +876,7 @@
             },
             {
                 "Id": "site.generator",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -885,7 +885,7 @@
             },
             {
                 "Id": "function.wall",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -894,7 +894,7 @@
             },
             {
                 "Id": "function.slow",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -903,7 +903,7 @@
             },
             {
                 "Id": "function.repair",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -912,7 +912,7 @@
             },
             {
                 "Id": "function.generator",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -921,7 +921,7 @@
             },
             {
                 "Id": "shell.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Shell",
                 "ExpectedSocketType": "assembly.Shell",
                 "Revision": 1,
@@ -930,7 +930,7 @@
             },
             {
                 "Id": "shell.light",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Shell",
                 "ExpectedSocketType": "assembly.Shell",
                 "Revision": 1,
@@ -939,7 +939,7 @@
             },
             {
                 "Id": "shell.reinforced",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Shell",
                 "ExpectedSocketType": "assembly.Shell",
                 "Revision": 1,
@@ -948,7 +948,7 @@
             },
             {
                 "Id": "utility.none",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,
@@ -957,7 +957,7 @@
             },
             {
                 "Id": "utility.armor",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,
@@ -966,7 +966,7 @@
             },
             {
                 "Id": "utility.range",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,
@@ -975,7 +975,7 @@
             },
             {
                 "Id": "utility.economy",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,
@@ -992,47 +992,47 @@
                         "SlotIndex": 0,
                         "SocketId": "mount.0",
                         "SocketType": "gun.standard",
-                        "X": -0.2512873411178589,
-                        "Y": -0.03416065871715546
+                        "X": -0.2512873113155365,
+                        "Y": -0.03416064381599426
                     },
                     {
                         "SlotIndex": 1,
                         "SocketId": "mount.1",
                         "SocketType": "gun.standard",
-                        "X": 0.24768280982971192,
-                        "Y": -0.03416065871715546
+                        "X": 0.2476828694343567,
+                        "Y": -0.03416064381599426
                     }
                 ],
                 "Keepouts": [
                     {
-                        "X": -0.4840370714664459,
-                        "Y": -0.21902163326740266,
-                        "Width": 0.9680742025375366,
-                        "Height": 0.06704427301883698,
+                        "X": -0.49233242869377139,
+                        "Y": -0.3791860044002533,
+                        "Width": 0.9817355871200562,
+                        "Height": 0.14118357002735139,
                         "ArmorOnly": false,
                         "PartId": "frame.standard"
                     },
                     {
-                        "X": -0.4840370714664459,
-                        "Y": -0.15197734534740449,
-                        "Width": 0.9680742025375366,
-                        "Height": 0.03575696051120758,
+                        "X": -0.49233242869377139,
+                        "Y": -0.23800243437290193,
+                        "Width": 0.9817355871200562,
+                        "Height": 0.07529790699481964,
                         "ArmorOnly": false,
                         "PartId": "hull.standard"
                     },
                     {
-                        "X": -0.4840370714664459,
-                        "Y": -0.15197734534740449,
-                        "Width": 0.9680742025375366,
-                        "Height": 0.03575696051120758,
+                        "X": -0.49233242869377139,
+                        "Y": -0.23800243437290193,
+                        "Width": 0.9817355871200562,
+                        "Height": 0.07529790699481964,
                         "ArmorOnly": false,
                         "PartId": "hull.light"
                     },
                     {
-                        "X": -0.4840370714664459,
-                        "Y": -0.15197734534740449,
-                        "Width": 0.9680742025375366,
-                        "Height": 0.03575696051120758,
+                        "X": -0.49233242869377139,
+                        "Y": -0.23800243437290193,
+                        "Width": 0.9817355871200562,
+                        "Height": 0.07529790699481964,
                         "ArmorOnly": false,
                         "PartId": "hull.reinforced"
                     },
@@ -1062,9 +1062,9 @@
                     },
                     {
                         "X": -0.05089285597205162,
-                        "Y": -0.21902163326740266,
+                        "Y": -0.3791860342025757,
                         "Width": 0.10875000059604645,
-                        "Height": 0.13499999046325684,
+                        "Height": 0.13500002026557923,
                         "ArmorOnly": false,
                         "PartId": "armor.front"
                     },
@@ -1171,9 +1171,9 @@
                     },
                     {
                         "X": -0.05089285597205162,
-                        "Y": -0.21902163326740266,
+                        "Y": -0.3791860342025757,
                         "Width": 0.10875000059604645,
-                        "Height": 0.13499999046325684,
+                        "Height": 0.13500002026557923,
                         "ArmorOnly": false,
                         "PartId": "armor.front"
                     },
@@ -1273,9 +1273,9 @@
                     },
                     {
                         "X": -0.05089285597205162,
-                        "Y": -0.21902163326740266,
+                        "Y": -0.3791860342025757,
                         "Width": 0.10875000059604645,
-                        "Height": 0.13499999046325684,
+                        "Height": 0.13500002026557923,
                         "ArmorOnly": false,
                         "PartId": "armor.front"
                     },
@@ -1368,9 +1368,9 @@
                     },
                     {
                         "X": -0.05089285597205162,
-                        "Y": -0.21902163326740266,
+                        "Y": -0.3791860342025757,
                         "Width": 0.10875000059604645,
-                        "Height": 0.13499999046325684,
+                        "Height": 0.13500002026557923,
                         "ArmorOnly": false,
                         "PartId": "armor.front"
                     },
@@ -4564,7 +4564,7 @@
     "visualParts": [
         {
             "partId": "frame.standard",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 0,
@@ -4576,15 +4576,15 @@
                 {
                     "slot": 0,
                     "position": {
-                        "x": 483.0,
-                        "y": 458.0
+                        "x": 398.0,
+                        "y": 625.0
                     }
                 },
                 {
                     "slot": 1,
                     "position": {
-                        "x": 1452.0,
-                        "y": 458.0
+                        "x": 1137.0,
+                        "y": 625.0
                     }
                 }
             ],
@@ -4597,34 +4597,34 @@
                     "layer": 1,
                     "family": 0,
                     "canvas": {
-                        "x": 1942.0,
-                        "y": 809.0
+                        "x": 1536.0,
+                        "y": 1024.0
                     },
                     "attach": {
                         "x": 0.0,
                         "y": 0.0
                     },
                     "position": {
-                        "x": -0.5,
-                        "y": -0.27000001072883608
+                        "x": -0.5200154781341553,
+                        "y": -0.4561583995819092
                     },
                     "muzzle": {
                         "x": 0.0,
                         "y": 0.0
                     },
                     "trim": {
-                        "x": 31.0,
-                        "y": 99.0,
-                        "width": 1880.0,
-                        "height": 434.0
+                        "x": 41.0,
+                        "y": 114.0,
+                        "width": 1454.0,
+                        "height": 697.0
                     },
                     "region": {
-                        "x": 31.0,
-                        "y": 99.0,
-                        "width": 1880.0,
-                        "height": 130.1999969482422
+                        "x": 41.0,
+                        "y": 114.0,
+                        "width": 1454.0,
+                        "height": 209.10000610351563
                     },
-                    "scale": 0.0005149330827407539,
+                    "scale": 0.0006751964101567864,
                     "radians": 0.0,
                     "hasMuzzle": false
                 }
@@ -4632,7 +4632,7 @@
         },
         {
             "partId": "frame.heavy",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 0,
@@ -4700,7 +4700,7 @@
         },
         {
             "partId": "frame.precision",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 0,
@@ -4761,7 +4761,7 @@
         },
         {
             "partId": "frame.battery",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 0,
@@ -4836,7 +4836,7 @@
         },
         {
             "partId": "hull.standard",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 1,
@@ -4854,34 +4854,34 @@
                     "layer": 0,
                     "family": 0,
                     "canvas": {
-                        "x": 1942.0,
-                        "y": 809.0
+                        "x": 1536.0,
+                        "y": 1024.0
                     },
                     "attach": {
                         "x": 0.0,
                         "y": 0.0
                     },
                     "position": {
-                        "x": -0.5,
-                        "y": -0.27000001072883608
+                        "x": -0.5200154781341553,
+                        "y": -0.4561583995819092
                     },
                     "muzzle": {
                         "x": 0.0,
                         "y": 0.0
                     },
                     "trim": {
-                        "x": 31.0,
-                        "y": 99.0,
-                        "width": 1880.0,
-                        "height": 434.0
+                        "x": 41.0,
+                        "y": 114.0,
+                        "width": 1454.0,
+                        "height": 697.0
                     },
                     "region": {
-                        "x": 31.0,
-                        "y": 298.6400146484375,
-                        "width": 1880.0,
-                        "height": 234.36000061035157
+                        "x": 41.0,
+                        "y": 434.6199951171875,
+                        "width": 1454.0,
+                        "height": 376.3800048828125
                     },
-                    "scale": 0.0005149330827407539,
+                    "scale": 0.0006751964101567864,
                     "radians": 0.0,
                     "hasMuzzle": false
                 },
@@ -4893,34 +4893,34 @@
                     "layer": 14,
                     "family": 0,
                     "canvas": {
-                        "x": 1942.0,
-                        "y": 809.0
+                        "x": 1536.0,
+                        "y": 1024.0
                     },
                     "attach": {
                         "x": 0.0,
                         "y": 0.0
                     },
                     "position": {
-                        "x": -0.5,
-                        "y": -0.27000001072883608
+                        "x": -0.5200154781341553,
+                        "y": -0.4561583995819092
                     },
                     "muzzle": {
                         "x": 0.0,
                         "y": 0.0
                     },
                     "trim": {
-                        "x": 31.0,
-                        "y": 99.0,
-                        "width": 1880.0,
-                        "height": 434.0
+                        "x": 41.0,
+                        "y": 114.0,
+                        "width": 1454.0,
+                        "height": 697.0
                     },
                     "region": {
-                        "x": 31.0,
-                        "y": 229.1999969482422,
-                        "width": 1880.0,
-                        "height": 69.44000244140625
+                        "x": 41.0,
+                        "y": 323.1000061035156,
+                        "width": 1454.0,
+                        "height": 111.5199966430664
                     },
-                    "scale": 0.0005149330827407539,
+                    "scale": 0.0006751964101567864,
                     "radians": 0.0,
                     "hasMuzzle": false
                 }
@@ -4928,7 +4928,7 @@
         },
         {
             "partId": "hull.light",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 1,
@@ -5020,7 +5020,7 @@
         },
         {
             "partId": "hull.reinforced",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 1,
@@ -5112,7 +5112,7 @@
         },
         {
             "partId": "armor.none",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "Без брони",
             "revision": 1,
             "category": 2,
@@ -5125,7 +5125,7 @@
         },
         {
             "partId": "armor.plate",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 2,
@@ -5178,7 +5178,7 @@
         },
         {
             "partId": "armor.front",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 2,
@@ -5205,7 +5205,7 @@
                     },
                     "position": {
                         "x": 0.0,
-                        "y": -0.1507180631160736
+                        "y": -0.31088244915008547
                     },
                     "muzzle": {
                         "x": 0.0,
@@ -5231,7 +5231,7 @@
         },
         {
             "partId": "feed.standard",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 3,
@@ -5284,7 +5284,7 @@
         },
         {
             "partId": "feed.boost",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 3,
@@ -5337,7 +5337,7 @@
         },
         {
             "partId": "turn.standard",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 4,
@@ -5390,7 +5390,7 @@
         },
         {
             "partId": "turn.quick",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 4,
@@ -5482,7 +5482,7 @@
         },
         {
             "partId": "core.gun",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 5,
@@ -5535,7 +5535,7 @@
         },
         {
             "partId": "core.piercer",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 5,
@@ -5588,7 +5588,7 @@
         },
         {
             "partId": "core.mortar",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 5,
@@ -5641,7 +5641,7 @@
         },
         {
             "partId": "core.fan",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 5,
@@ -5694,7 +5694,7 @@
         },
         {
             "partId": "core.ricochet",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 5,
@@ -5747,7 +5747,7 @@
         },
         {
             "partId": "core.stapler",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 5,
@@ -5800,7 +5800,7 @@
         },
         {
             "partId": "core.blotter",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 5,
@@ -5853,7 +5853,7 @@
         },
         {
             "partId": "head.gun",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -5906,7 +5906,7 @@
         },
         {
             "partId": "head.piercer",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -5959,7 +5959,7 @@
         },
         {
             "partId": "head.mortar",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6012,7 +6012,7 @@
         },
         {
             "partId": "head.fan",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6065,7 +6065,7 @@
         },
         {
             "partId": "head.ricochet",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6118,7 +6118,7 @@
         },
         {
             "partId": "head.stapler",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6171,7 +6171,7 @@
         },
         {
             "partId": "head.blotter",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6224,7 +6224,7 @@
         },
         {
             "partId": "head.short",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6277,7 +6277,7 @@
         },
         {
             "partId": "head.long",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6330,7 +6330,7 @@
         },
         {
             "partId": "head.wide",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6383,7 +6383,7 @@
         },
         {
             "partId": "sight.iron",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 7,
@@ -6436,7 +6436,7 @@
         },
         {
             "partId": "sight.scope",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 7,
@@ -6489,7 +6489,7 @@
         },
         {
             "partId": "sight.tracking",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 7,
@@ -6542,7 +6542,7 @@
         },
         {
             "partId": "magazine.standard",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 8,
@@ -6595,7 +6595,7 @@
         },
         {
             "partId": "magazine.drum",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 8,
@@ -6648,7 +6648,7 @@
         },
         {
             "partId": "magazine.belt",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 8,
@@ -6701,7 +6701,7 @@
         },
         {
             "partId": "trigger.standard",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 9,
@@ -6754,7 +6754,7 @@
         },
         {
             "partId": "trigger.burst",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 9,
@@ -6807,7 +6807,7 @@
         },
         {
             "partId": "site.wall",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 10,
@@ -6860,7 +6860,7 @@
         },
         {
             "partId": "site.slow",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 10,
@@ -6913,7 +6913,7 @@
         },
         {
             "partId": "site.repair",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 10,
@@ -6966,7 +6966,7 @@
         },
         {
             "partId": "site.generator",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 10,
@@ -7019,7 +7019,7 @@
         },
         {
             "partId": "function.wall",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 11,
@@ -7072,7 +7072,7 @@
         },
         {
             "partId": "function.slow",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 11,
@@ -7125,7 +7125,7 @@
         },
         {
             "partId": "function.repair",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 11,
@@ -7217,7 +7217,7 @@
         },
         {
             "partId": "function.generator",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 11,
@@ -7270,7 +7270,7 @@
         },
         {
             "partId": "shell.standard",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 12,
@@ -7440,7 +7440,7 @@
         },
         {
             "partId": "shell.light",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 12,
@@ -7766,7 +7766,7 @@
         },
         {
             "partId": "shell.reinforced",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 12,
@@ -8092,7 +8092,7 @@
         },
         {
             "partId": "utility.none",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "Без оснащения",
             "revision": 1,
             "category": 13,
@@ -8105,7 +8105,7 @@
         },
         {
             "partId": "utility.armor",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 13,
@@ -8236,7 +8236,7 @@
         },
         {
             "partId": "utility.range",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 13,
@@ -8289,7 +8289,7 @@
         },
         {
             "partId": "utility.economy",
-            "assetRevision": "modular-full-catalog-2026-10-19-v5",
+            "assetRevision": "modular-full-catalog-2026-10-19-v6",
             "neutral": "",
             "revision": 1,
             "category": 13,
@@ -8386,11 +8386,11 @@
     },
     "legacyFits": {
         "SchemaVersion": 1,
-        "Revision": "modular-full-catalog-2026-10-19-v5",
+        "Revision": "modular-full-catalog-2026-10-19-v6",
         "Parts": [
             {
                 "Id": "frame.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -8399,7 +8399,7 @@
             },
             {
                 "Id": "frame.heavy",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -8408,7 +8408,7 @@
             },
             {
                 "Id": "frame.precision",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -8417,7 +8417,7 @@
             },
             {
                 "Id": "frame.battery",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -8426,7 +8426,7 @@
             },
             {
                 "Id": "hull.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Hull",
                 "ExpectedSocketType": "assembly.Hull",
                 "Revision": 1,
@@ -8435,7 +8435,7 @@
             },
             {
                 "Id": "hull.light",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Hull",
                 "ExpectedSocketType": "assembly.Hull",
                 "Revision": 1,
@@ -8444,7 +8444,7 @@
             },
             {
                 "Id": "hull.reinforced",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Hull",
                 "ExpectedSocketType": "assembly.Hull",
                 "Revision": 1,
@@ -8453,7 +8453,7 @@
             },
             {
                 "Id": "armor.none",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Armor",
                 "ExpectedSocketType": "assembly.Armor",
                 "Revision": 1,
@@ -8462,7 +8462,7 @@
             },
             {
                 "Id": "armor.plate",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Armor",
                 "ExpectedSocketType": "assembly.Armor",
                 "Revision": 1,
@@ -8471,7 +8471,7 @@
             },
             {
                 "Id": "armor.front",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Armor",
                 "ExpectedSocketType": "assembly.Armor",
                 "Revision": 1,
@@ -8480,7 +8480,7 @@
             },
             {
                 "Id": "feed.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Feed",
                 "ExpectedSocketType": "assembly.Feed",
                 "Revision": 1,
@@ -8489,7 +8489,7 @@
             },
             {
                 "Id": "feed.boost",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Feed",
                 "ExpectedSocketType": "assembly.Feed",
                 "Revision": 1,
@@ -8498,7 +8498,7 @@
             },
             {
                 "Id": "turn.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Turn",
                 "ExpectedSocketType": "assembly.Turn",
                 "Revision": 1,
@@ -8507,7 +8507,7 @@
             },
             {
                 "Id": "turn.quick",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Turn",
                 "ExpectedSocketType": "assembly.Turn",
                 "Revision": 1,
@@ -8516,7 +8516,7 @@
             },
             {
                 "Id": "core.gun",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -8525,7 +8525,7 @@
             },
             {
                 "Id": "core.piercer",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -8534,7 +8534,7 @@
             },
             {
                 "Id": "core.mortar",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -8543,7 +8543,7 @@
             },
             {
                 "Id": "core.fan",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -8552,7 +8552,7 @@
             },
             {
                 "Id": "core.ricochet",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -8561,7 +8561,7 @@
             },
             {
                 "Id": "core.stapler",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -8570,7 +8570,7 @@
             },
             {
                 "Id": "core.blotter",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -8579,7 +8579,7 @@
             },
             {
                 "Id": "head.gun",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8588,7 +8588,7 @@
             },
             {
                 "Id": "head.piercer",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8597,7 +8597,7 @@
             },
             {
                 "Id": "head.mortar",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8606,7 +8606,7 @@
             },
             {
                 "Id": "head.fan",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8615,7 +8615,7 @@
             },
             {
                 "Id": "head.ricochet",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8624,7 +8624,7 @@
             },
             {
                 "Id": "head.stapler",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8633,7 +8633,7 @@
             },
             {
                 "Id": "head.blotter",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8642,7 +8642,7 @@
             },
             {
                 "Id": "head.short",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8651,7 +8651,7 @@
             },
             {
                 "Id": "head.long",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8660,7 +8660,7 @@
             },
             {
                 "Id": "head.wide",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8669,7 +8669,7 @@
             },
             {
                 "Id": "sight.iron",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Sight",
                 "ExpectedSocketType": "assembly.Sight",
                 "Revision": 1,
@@ -8678,7 +8678,7 @@
             },
             {
                 "Id": "sight.scope",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Sight",
                 "ExpectedSocketType": "assembly.Sight",
                 "Revision": 1,
@@ -8687,7 +8687,7 @@
             },
             {
                 "Id": "sight.tracking",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Sight",
                 "ExpectedSocketType": "assembly.Sight",
                 "Revision": 1,
@@ -8696,7 +8696,7 @@
             },
             {
                 "Id": "magazine.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Magazine",
                 "ExpectedSocketType": "assembly.Magazine",
                 "Revision": 1,
@@ -8705,7 +8705,7 @@
             },
             {
                 "Id": "magazine.drum",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Magazine",
                 "ExpectedSocketType": "assembly.Magazine",
                 "Revision": 1,
@@ -8714,7 +8714,7 @@
             },
             {
                 "Id": "magazine.belt",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Magazine",
                 "ExpectedSocketType": "assembly.Magazine",
                 "Revision": 1,
@@ -8723,7 +8723,7 @@
             },
             {
                 "Id": "trigger.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Trigger",
                 "ExpectedSocketType": "assembly.Trigger",
                 "Revision": 1,
@@ -8732,7 +8732,7 @@
             },
             {
                 "Id": "trigger.burst",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Trigger",
                 "ExpectedSocketType": "assembly.Trigger",
                 "Revision": 1,
@@ -8741,7 +8741,7 @@
             },
             {
                 "Id": "site.wall",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -8750,7 +8750,7 @@
             },
             {
                 "Id": "site.slow",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -8759,7 +8759,7 @@
             },
             {
                 "Id": "site.repair",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -8768,7 +8768,7 @@
             },
             {
                 "Id": "site.generator",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -8777,7 +8777,7 @@
             },
             {
                 "Id": "function.wall",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -8786,7 +8786,7 @@
             },
             {
                 "Id": "function.slow",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -8795,7 +8795,7 @@
             },
             {
                 "Id": "function.repair",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -8804,7 +8804,7 @@
             },
             {
                 "Id": "function.generator",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -8813,7 +8813,7 @@
             },
             {
                 "Id": "shell.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Shell",
                 "ExpectedSocketType": "assembly.Shell",
                 "Revision": 1,
@@ -8822,7 +8822,7 @@
             },
             {
                 "Id": "shell.light",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Shell",
                 "ExpectedSocketType": "assembly.Shell",
                 "Revision": 1,
@@ -8831,7 +8831,7 @@
             },
             {
                 "Id": "shell.reinforced",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Shell",
                 "ExpectedSocketType": "assembly.Shell",
                 "Revision": 1,
@@ -8840,7 +8840,7 @@
             },
             {
                 "Id": "utility.none",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,
@@ -8849,7 +8849,7 @@
             },
             {
                 "Id": "utility.armor",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,
@@ -8858,7 +8858,7 @@
             },
             {
                 "Id": "utility.range",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,
@@ -8867,7 +8867,7 @@
             },
             {
                 "Id": "utility.economy",
-                "AssetRevision": "modular-full-catalog-2026-10-19-v5",
+                "AssetRevision": "modular-full-catalog-2026-10-19-v6",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,

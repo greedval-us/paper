@@ -27,6 +27,50 @@ namespace PaperDefense.Tests
         Button Button(string name) => canvas.GetComponentsInChildren<Button>(true).Single(b => b.name == name);
         [TearDown] public void TearDown() { if (canvas != null) Object.DestroyImmediate(canvas); }
 
+        [Test] public void FoundationInspectionShowsOnlyTheFoundationQuoteAndCapabilitiesWithoutChangingItsTower()
+        {
+            using (var fixture = new AssemblyCommandFixture(94, 390))
+            {
+                var draft = new WorkshopDraftSession(fixture.Run); draft.Begin(fixture.Gun()); draft.OpenFoundation();
+                draft.SelectCategory(ComponentCategory.Hull);
+                var beforeRecipe = draft.PreviewRecipe; string before = fixture.State();
+                var panel = Panel(fixture, draft);
+                var label = canvas.GetComponentsInChildren<Text>(true).Single(text => text.name == "Component resolved statistics");
+                Assert.That(label.text, Does.Contain("Цена основы: 16"), "The foundation drawing must quote its own sixteen strokes, not the forty-stroke armed tower.");
+                Assert.That(label.text, Does.Contain("Крепления: 2"));
+                Assert.That(label.text, Does.Contain("Подача: 1,6"));
+                Assert.That(label.text, Does.Contain("Прочность: 55"));
+                Assert.That(label.text, Does.Contain("Вместимость: 10"));
+                Assert.That(label.text, Does.Not.Contain("урон").And.Not.Contain("DPS"));
+                Assert.That(draft.PreviewRecipe, Is.SameAs(beforeRecipe));
+                Assert.That(fixture.State(), Is.EqualTo(before));
+                Assert.That(fixture.Store.SaveCalls, Is.Zero);
+            }
+        }
+
+        [Test] public void WeaponDrawingShowsSixResolvedWeaponCharacteristicsAndItsOwnPriceWithoutEditing()
+        {
+            using(var fixture=new AssemblyCommandFixture(94,390))
+            {
+                var draft=Weapon(fixture); draft.SelectCategory(ComponentCategory.Mechanism);
+                var beforeRecipe=draft.PreviewRecipe; string before=fixture.State();
+                Panel(fixture,draft);
+                var weapon=draft.Resolved.Weapons.Single();
+                var statistics=canvas.GetComponentsInChildren<Text>().Single(text=>text.name=="Component resolved statistics");
+                string Number(float value)=>value.ToString("0.###",System.Globalization.CultureInfo.GetCultureInfo("ru-RU"));
+                Assert.That(statistics.isActiveAndEnabled,Is.True);
+                Assert.That(statistics.text,Does.Contain("Урон: "+Number(weapon.Damage)));
+                Assert.That(statistics.text,Does.Contain("Дальность: "+Number(weapon.Range)));
+                Assert.That(statistics.text,Does.Contain("Обойма: "+weapon.MagazineSize));
+                Assert.That(statistics.text,Does.Contain("Перезарядка: "+Number(weapon.ReloadSeconds)+" с"));
+                Assert.That(statistics.text,Does.Contain("Нагрузка башни: "+draft.Resolved.Load));
+                Assert.That(statistics.text,Does.Contain("Цена оружия: 24 штр."),"The weapon drawing quotes its own selected five parts, excluding the sixteen-stroke foundation.");
+                Assert.That(statistics.text.TrimEnd().Split('\n').Length,Is.EqualTo(6));
+                Assert.That(draft.PreviewRecipe,Is.SameAs(beforeRecipe));
+                Assert.That(fixture.State(),Is.EqualTo(before)); Assert.That(fixture.Store.SaveCalls,Is.Zero);
+            }
+        }
+
         [Test] public void NativeSubmitInstallsThePartWithoutDestroyingTheExecutingButton()
         {
             using (var fixture = new AssemblyCommandFixture(94, 390))
@@ -161,6 +205,17 @@ namespace PaperDefense.Tests
                 var cycle = canvas.GetComponentsInChildren<Text>().SingleOrDefault(text => text.name == "Component magazine cycle");
                 Assert.That(cycle, Is.Not.Null, "The defining magazine statistics must have their own visible region, including mortar and fan views.");
                 Assert.That(cycle.isActiveAndEnabled && cycle.rectTransform.rect.height >= 60, Is.True);
+                var modifiers=canvas.GetComponentsInChildren<Text>(true).Single(text=>text.name=="Component inspected modifiers");
+                if(modifiers.isActiveAndEnabled && !string.IsNullOrWhiteSpace(modifiers.text) && modifiers.rectTransform.rect.height>0)
+                {
+                    Rect ScreenRect(RectTransform rect)
+                    {
+                        var corners=new Vector3[4]; rect.GetWorldCorners(corners);
+                        return Rect.MinMaxRect(corners[0].x,corners[0].y,corners[2].x,corners[2].y);
+                    }
+                    Assert.That(ScreenRect(modifiers.rectTransform).Overlaps(ScreenRect(cycle.rectTransform)),Is.False,
+                        "Magazine multipliers cannot obscure capacity or cycle timings.");
+                }
                 string Number(float value) => value.ToString("0.###", System.Globalization.CultureInfo.GetCultureInfo("ru-RU"));
                 if (inspectedMagazine == "magazine.standard")
                 {

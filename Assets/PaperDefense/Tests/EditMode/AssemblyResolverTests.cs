@@ -44,6 +44,48 @@ namespace PaperDefense.Tests
 
     public sealed class AssemblyResolverTests
     {
+        static int FoundationQuote(FoundationRecipe foundation, ComponentCatalog catalog, GameBalance balance, MaterialTier material)
+        {
+            var method = typeof(AssemblyResolver).GetMethod("FoundationCost", new[] { typeof(FoundationRecipe), typeof(ComponentCatalog), typeof(GameBalance), typeof(MaterialTier) });
+            Assert.That(method, Is.Not.Null, "The foundation quote must use the existing resolver cost fold instead of duplicating it in presentation.");
+            return (int)method.Invoke(null, new object[] { foundation, catalog, balance, material });
+        }
+
+        [Test] public void FoundationQuoteExcludesEveryWeaponContribution()
+        {
+            var data = AssemblyResolverFixture.Input();
+            AssemblyResolverFixture.Set(data, "core.gun", AssemblyStat.Cost, ModifierOperation.Add, 10000);
+            var catalog = AssemblyResolverFixture.Modified(data);
+            Assert.That(FoundationQuote(AssemblyResolverFixture.Foundation(), catalog, GameBalance.CreateDefault(), MaterialTier.Pencil), Is.EqualTo(16));
+        }
+
+        [Test] public void WeaponQuoteExcludesEveryFoundationContribution()
+        {
+            var data = AssemblyResolverFixture.Input();
+            AssemblyResolverFixture.Set(data, "frame.standard", AssemblyStat.Cost, ModifierOperation.Add, 10000);
+            AssemblyResolverFixture.Set(data, "frame.standard", AssemblyStat.Cost, ModifierOperation.Multiply, 9);
+            Assert.That(AssemblyResolver.WeaponCost(AssemblyResolverFixture.Weapon(), AssemblyResolverFixture.Modified(data),
+                GameBalance.CreateDefault(), MaterialTier.Pencil), Is.EqualTo(24));
+        }
+
+        [TestCase(MaterialTier.Pencil, 30)] [TestCase(MaterialTier.Ink, 54)]
+        public void WeaponQuoteUsesTheSameMultipliersAndSingleRoundingAsTheSharedFold(MaterialTier material, int expected)
+        {
+            var data = AssemblyResolverFixture.Input();
+            AssemblyResolverFixture.Set(data, "head.gun", AssemblyStat.Cost, ModifierOperation.Multiply, 1.25f);
+            Assert.That(AssemblyResolver.WeaponCost(AssemblyResolverFixture.Weapon(), AssemblyResolverFixture.Modified(data),
+                GameBalance.CreateDefault(), material), Is.EqualTo(expected));
+        }
+
+        [TestCase(MaterialTier.Pencil, 38)] [TestCase(MaterialTier.Ink, 68)]
+        public void FoundationQuoteUsesSelectedPartsMultipliersAndTheSharedMaterialRounding(MaterialTier material, int expected)
+        {
+            var data = AssemblyResolverFixture.Input();
+            AssemblyResolverFixture.Set(data, "frame.standard", AssemblyStat.Cost, ModifierOperation.Multiply, 1.25f);
+            var catalog = AssemblyResolverFixture.Modified(data);
+            Assert.That(FoundationQuote(AssemblyResolverFixture.Foundation(armor: "plate"), catalog, GameBalance.CreateDefault(), material), Is.EqualTo(expected));
+        }
+
         [Test] public void StarterRecipes_MatchBalanceV1()
         {
             var catalog = AssemblyResolverFixture.Catalog();

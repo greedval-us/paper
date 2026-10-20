@@ -1,5 +1,5 @@
 {
-  "revision": "modular-full-catalog-2026-10-19-v5",
+  "revision": "modular-full-catalog-2026-10-19-v6",
   "sprites": [
     {
       "id": "chassis.standard",
@@ -1501,16 +1501,16 @@
     },
     {
       "id": "part.full.frame.standard",
-      "source": "ArtSource/Notebook/NewStyle/StandardFoundation-v2.png",
-      "x": 31,
-      "y": 99,
-      "width": 1880,
-      "height": 434,
+      "source": "ArtSource/Notebook/NewStyle/StandardFoundation-v4.png",
+      "x": 41,
+      "y": 114,
+      "width": 1454,
+      "height": 697,
       "bounds": {
-        "x": 0.01596292481977343,
-        "y": 0.0509783728115345,
-        "width": 0.9680741503604531,
-        "height": 0.223480947476828
+        "x": 0.027683052082796217,
+        "y": 0.07697238871801876,
+        "width": 0.9817355543508708,
+        "height": 0.4706118854075357
       }
     },
     {

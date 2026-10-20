@@ -260,7 +260,7 @@ namespace PaperDefense.Presentation
         /// Copy one consecutive triangle slice without changing winding or draw order. Expanding corners
         /// also handles triangles sharing vertices across a boundary, without per-frame remap buffers.
         /// </summary>
-        internal void CopyUiBatchTo(VertexHelper target, Vector2 origin, float scale, int batchIndex)
+        internal void CopyUiBatchTo(VertexHelper target, Vector2 origin, float scale, int batchIndex, bool mirrorX = false)
         {
             int first = batchIndex * MaximumUiBatchVertices;
             int end = Math.Min(first + MaximumUiBatchVertices, indices.Count);
@@ -270,7 +270,7 @@ namespace PaperDefense.Presentation
                 for (int corner = 0; corner < 3; corner++)
                 {
                     int source = indices[i + corner];
-                    target.AddVert(origin + new Vector2(vertices[source].x, vertices[source].y) * scale,
+                    target.AddVert(origin + new Vector2(vertices[source].x * (mirrorX ? -1 : 1), vertices[source].y) * scale,
                         colors[source], atlasCoordinates[source]);
                 }
                 target.AddTriangle(start, start + 1, start + 2);

@@ -94,7 +94,7 @@ namespace PaperDefense.Presentation
         public static readonly Color Blue = new Color32(31, 70, 146, 255);
         public static readonly Color Paper = new Color32(247, 241, 222, 255);
         public static readonly Color Card = new Color32(252, 247, 231, 255);
-        public static readonly Color Muted = new Color32(73, 88, 119, 255);
+        public static readonly Color Muted = new Color32(45, 68, 108, 255);
         public static readonly Color Wash = new Color32(235, 230, 211, 255);
         public static readonly Color Selected = new Color32(224, 234, 245, 255);
         public static readonly Color Grid = new Color32(104, 143, 174, 42);
@@ -105,8 +105,8 @@ namespace PaperDefense.Presentation
         public PlayerUi(bool notebookStyle = true)
         {
             NotebookStyle = notebookStyle;
-            font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            heading = Resources.Load<Font>("NotebookHand") ?? font;
+            font = Resources.Load<Font>("NotebookNeucha") ?? Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            heading = font;
             copy = Resources.Load<TextResourcesAsset>("Text/player-ru").CreateResolver();
         }
         public string T(string key, params object[] args) => copy.Resolve(UserText.Message("player." + key, args));
@@ -131,6 +131,7 @@ namespace PaperDefense.Presentation
         {
             if (title) bounds.height = Mathf.Max(bounds.height, Mathf.Ceil(size * 1.5f));
             var label = Graphic<Text>(parent, "Copy", bounds); label.text = text; label.font = title ? heading : font;
+            label.fontStyle = NotebookStyle || title ? FontStyle.Bold : FontStyle.Normal;
             label.fontSize = size; label.color = color ?? Ink; label.alignment = alignment;
             label.horizontalOverflow = HorizontalWrapMode.Wrap; label.verticalOverflow = VerticalWrapMode.Truncate;
             return label;
@@ -159,7 +160,8 @@ namespace PaperDefense.Presentation
             Place(symbol.rectTransform, new Rect(16, (bounds.height - 22) / 2, 22, 22));
             var label = Label(button.transform, caption, new Rect(50, 6, bounds.width - 62, bounds.height - 12), 18, primary ? Card : Ink);
             if (NotebookStyle) label.font = heading;
-            label.resizeTextForBestFit = true; label.resizeTextMinSize = 16; label.resizeTextMaxSize = 18;
+            label.fontStyle = FontStyle.Bold;
+            label.resizeTextForBestFit = true; label.resizeTextMinSize = 16; label.resizeTextMaxSize = 22;
             label.rectTransform.anchorMin = Vector2.zero; label.rectTransform.anchorMax = Vector2.one;
             label.rectTransform.offsetMin = new Vector2(50, 6); label.rectTransform.offsetMax = new Vector2(-12, -6);
             return button;

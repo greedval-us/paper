@@ -1,0 +1,47 @@
+{
+  "generator": "built-in image_gen",
+  "file": "StandardFoundation-v6.png",
+  "transparent_background": true,
+  "status": "unintegrated candidate",
+  "references": [
+    "ArtSource/Notebook/NewStyle/StandardFoundation-v4.png",
+    "docs/design/album-assembly-2026-10-17/art/01-towers.png"
+  ],
+  "intent": "Explore a thinner one-course slab after the v4 silhouette-readability test failed. The committed production binding remains v4.",
+  "initialPrompt": "Production sprite correction. Edit image1's modular tower foundation toward image2's VERY LOW broad stone plinth. KEEP a complete genuine transparent1536x1024 canvas. The old block is MUCH TOO TALL and its disks too close together. Make the entire physical foundation ONLY ONE THIN COURSE of stone masonry, with a SHALLOW wide diamond/isometric top plane and very short side walls. Entire physical silhouette should be about1450px WIDE and at most420px HIGH (roughly x43..1493,y320..740). Strong blue ballpoint pen outlines and restrained hatching, ivory stone, blue corner plates, tiny muted gold bolts, small crown plate. Exactly TWO BIG FLAT mounting seating disks, placed MUCH FARTHER APART near the extreme left and right of the roof. Disk centers approximately x250 and x1286, BOTH at identical y430 from the top. Each full disk about440px WIDE with very low height; keep both fully in frame with padding. Their centre-to-centre spacing must exceed1000px, while the entire physical object's height stays UNDER450px. The big circles should almost reach the left and right corners. Large open top roof, not a frontal beam; shallow clear diamond footprint, low square stone slab in perspective. Remove all weapons. No background, paper, external glow, shadow, lettering, arrows, extra objects or UI. Fully transparent clean alpha outside the physical object, including ALL canvas padding. Preserve the pen-drawn game art style. This is a LOW PLATFORM, not a tall stone block; prioritise far-apart seating disks and a very low silhouette.",
+  "compressionPrompt": "Precise geometric sprite edit, SAME transparent1536x1024 canvas. The object is still too tall. Compress the ENTIRE physical object VERTICALLY to65% of its present height, leaving its horizontal width and every x-coordinate unchanged. Its old ink bounds are about y234..865 (631px high). The NEW physical ink bounds MUST be about y345..755 (410px high). Move the complete compressed object to this range, with LARGE transparent empty padding above and below. Keep the same two mounting disks at the same x positions (~307 and1230), same masonry, blue plates, bolts and blue pen drawing. The top plane's diamond becomes visibly MUCH SHALLOWER, like a square slab viewed from a lower camera angle; disk ellipses become flatter; stone side walls become shorter. One thin masonry course only. Do NOT expand the object vertically to fill the image. Complete object only40% of canvas height, with about350px of fully transparent padding above and260px below. Preserve genuine clean alpha outside the physical silhouette, no external glow or cast shadow, no background, no text, no weapons. The entire object's width remains~1500px but height is only410px. This very low slab proportion is mechanically essential for small game weapon silhouettes.",
+  "outputs": [
+    {
+      "file": "StandardFoundation-v5.png",
+      "generatedOutput": "C:/Users/Greedval/.codex/generated_images/01a14cd7-7db2-7df0-8654-f50c4f801bf0/exec-089756aa-00f5-4bbd-bc02-ccb3f8e46440.png",
+      "status": "rejected: 631-pixel physical height"
+    },
+    {
+      "file": "StandardFoundation-v6.png",
+      "generatedOutput": "C:/Users/Greedval/.codex/generated_images/01a14cd7-7db2-7df0-8654-f50c4f801bf0/exec-200f42e4-6daa-4b5c-979f-1f615d94de5f.png",
+      "status": "unintegrated: requires truthful physical wall regions"
+    }
+  ],
+  "actualCanvas": [
+    1536,
+    1024
+  ],
+  "actualAlphaBoundsTopLeft": {
+    "left": 18,
+    "top": 354,
+    "right": 1517,
+    "bottom": 760
+  },
+  "inspectedSeatsBottomLeft": [
+    [
+      312,
+      540
+    ],
+    [
+      1224,
+      540
+    ]
+  ],
+  "sourcePixelsModifiedByCode": false,
+  "note": "The disk landmarks differ from requested prompt positions. A uniform transform can preserve prior logical seats, but the old .30/.46 horizontal wall bands produce 14 real clearance failures. The wall is V-shaped; reducing a whole-width solid band to .15/.27 would omit genuine sidewall pixels near the mounts. That shortcut was rejected. The candidate is not referenced by the committed catalog and has not passed runtime or visual acceptance."
+}

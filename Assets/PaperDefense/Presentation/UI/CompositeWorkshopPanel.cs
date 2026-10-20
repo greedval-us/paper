@@ -119,10 +119,11 @@ namespace PaperDefense.Presentation
             else if (libraryOpen) Library(body, width - 48, bodyHeight);
             else
             {
-                float summaryWidth = (width - 64) * .39f;
+                float summaryWidth = (width - 64) * (Route == AlbumEntryKind.Tower && Step == 0 ? .44f : .39f);
                 float pageWidth = width - 64 - summaryWidth;
                 bool weaponsLayout = Route == AlbumEntryKind.Tower && Step == 1;
-                var page = ui.Panel(body, "Composite page", new Rect(weaponsLayout ? summaryWidth + 16 : 0, 0, pageWidth, bodyHeight), WorkshopUi.Surface);
+                var page = ui.Panel(body, "Composite page", new Rect(weaponsLayout ? summaryWidth + 16 : 0, 0, pageWidth, bodyHeight),
+                    Route == AlbumEntryKind.Tower && Step == 2 ? Color.clear : WorkshopUi.Surface);
                 if (Route == AlbumEntryKind.Legacy || Step == 2) Review(page, pageWidth, bodyHeight);
                 else if (Route == AlbumEntryKind.Structure) Structures(page, pageWidth, bodyHeight);
                 else if (Step == 0) Foundations(page, pageWidth, bodyHeight);
@@ -159,9 +160,11 @@ namespace PaperDefense.Presentation
             var validation = Root.Find("Composite content/Composite summary/Composite validation")?.GetComponent<Text>();
             if (validation != null)
             {
-                validation.text = Status; validation.color = HasStatusFailure ? WorkshopUi.Warning : WorkshopUi.Success;
+                validation.text = UsesReferenceReview && !HasStatusFailure ? "" : Status; validation.color = HasStatusFailure ? WorkshopUi.Warning : WorkshopUi.Success;
                 float summaryWidth = ((RectTransform)validation.transform.parent).rect.width;
-                WorkshopUi.Place(validation.rectTransform, HasWriteFailure ? new Rect(78, 148, summaryWidth - 104, 64) : new Rect(18, 150, summaryWidth - 36, 60));
+                float summaryHeight = ((RectTransform)validation.transform.parent).rect.height;
+                WorkshopUi.Place(validation.rectTransform, UsesReferenceReview ? new Rect(18, summaryHeight - 101, summaryWidth - 36, 34)
+                    : HasWriteFailure ? new Rect(78, 148, summaryWidth - 104, 64) : new Rect(18, 150, summaryWidth - 36, 60));
             }
             foreach (string name in new[] { "Composite save warning", "Composite save warning mark" })
             {
@@ -169,7 +172,7 @@ namespace PaperDefense.Presentation
                 if (warning != null) warning.gameObject.SetActive(HasWriteFailure);
             }
             var previewTitle = Root.Find("Composite content/Composite summary/Composite preview title")?.GetComponent<Text>();
-            if (previewTitle != null) previewTitle.text = DraftSession.Name;
+            if (previewTitle != null && !UsesReferenceReview && !(Route == AlbumEntryKind.Tower && Step == 0)) previewTitle.text = DraftSession.Name;
             foreach (var button in Root.GetComponentsInChildren<Button>())
             {
                 switch (button.name)
@@ -253,33 +256,6 @@ namespace PaperDefense.Presentation
             feedback = result.Success ? T("saved") : ""; Refresh();
         }
 
-        void Foundations(Transform parent, float w, float h)
-        {
-            ui.Label(parent, "Composite foundation heading", T("foundation"), new Rect(18, 8, w - 36, 44), 28, true);
-            ui.Label(parent, "Composite foundation hint", T("foundation_hint"), new Rect(18, 48, w - 36, 32), 17);
-            ui.Button(parent, "Composite edit foundation", new Rect(18, h - 60, w - 36, 44), T("edit_foundation"), () => { DraftSession.OpenFoundation(); Refresh(); }, WorkshopIcon.Settings);
-            var frames = DraftSession.Catalog.Definitions.Where(part => part.Category == ComponentCategory.Frame).ToArray();
-            float cardHeight = Mathf.Max(154, (h - 174) * .5f);
-            var list = new CatalogScrollList(parent, "Composite foundation catalog", new Rect(18, 88, w - 36, h - 162), frames.Length, 2, cardHeight, 12);
-            float cardWidth = (w - 60) / 2;
-            for (int i = 0; i < frames.Length; i++)
-            {
-                var part = frames[i]; var card = ui.Panel(list.Content, "Composite frame " + part.Id, new Rect(i % 2 * (cardWidth + 12), i / 2 * (cardHeight + 12), cardWidth, cardHeight), WorkshopUi.Paper);
-                ui.Label(card, "Composite frame name", part.Name, new Rect(12, 2, cardWidth - 24, 26), 21, true);
-                var selected = DraftSession.PreviewRecipe.Tower.Foundation;
-                FoundationPicture(card, new FoundationRecipe(new PartRef(part.Id, part.Revision), selected.Hull, selected.Armor, selected.Feed, selected.Turn),
-                    "Composite frame illustration", new Rect(10, 30, cardWidth - 20, cardHeight - 80));
-                ui.Label(card, "Composite frame values", T("foundation_values", part.Get(AssemblyStat.MountCount, ModifierOperation.Set), part.Get(AssemblyStat.Capacity, ModifierOperation.Set)), new Rect(12, cardHeight - 50, cardWidth - 24, 22), 15);
-                bool owned = DraftSession.IsOwned(part.Id);
-                ui.Button(card, "Composite choose frame " + part.Id, new Rect(12, cardHeight - 28, cardWidth - 24, 26), T(owned ? "choose" : "composition"), () => {
-                    if (owned) DraftSession.ApplyPreset(FoundationPreset(part), -1);
-                    else DraftSession.OpenFoundation();
-                    feedback = ""; Refresh();
-                }, owned ? WorkshopIcon.Check : WorkshopIcon.Settings);
-                ui.SetSelected(card.GetComponentInChildren<Button>(), DraftSession.PreviewRecipe.Tower.Foundation.Frame.Id == part.Id);
-            }
-        }
-
         AlbumEntry FoundationPreset(ComponentDefinition frame)
         {
             var current = DraftSession.PreviewRecipe.Tower;
@@ -297,47 +273,6 @@ namespace PaperDefense.Presentation
                 return new PartRef(part.Id, part.Revision);
             }
             return new WeaponRecipe(new PartRef(mechanism.Id, mechanism.Revision), Part(ComponentCategory.Head), Part(ComponentCategory.Sight), Part(ComponentCategory.Magazine), Part(ComponentCategory.Trigger));
-        }
-
-        void Weapons(Transform parent, float w, float h)
-        {
-            ui.Label(parent, "Composite weapon heading", T("weapons"), new Rect(18, 8, w - 36, 44), 28, true);
-            var tower = DraftSession.PreviewRecipe.Tower;
-            var frame = DraftSession.PreviewEntry.Snapshot.Definitions.First(part => part.Id == tower.Foundation.Frame.Id);
-            int count = Mathf.Clamp((int)frame.Get(AssemblyStat.MountCount, ModifierOperation.Set), 1, 3);
-            mount = Mathf.Clamp(mount, 0, count - 1); float slotWidth = (w - 48) / count;
-            for (int i = 0; i < count; i++)
-            {
-                int slot = i; var button = ui.Button(parent, "Composite mount " + i, new Rect(18 + i * (slotWidth + 6), 58, slotWidth, 42), T("select_mount", i + 1), () => { mount = slot; Refresh(); }); ui.SetSelected(button, mount == i);
-            }
-            var edit = ui.Button(parent, "Composite edit weapon", new Rect(18, h - 60, w - 36 - (mount > 0 ? 64 : 0), 44), T("edit_weapon", mount + 1), () => { DraftSession.OpenWeapon(mount); Refresh(); }, WorkshopIcon.Settings);
-            edit.interactable = tower.Mounts.Any(item => item.SlotIndex == mount);
-            if (mount > 0) ui.IconButton(parent, "Composite remove weapon", new Rect(w - 70, h - 60, 52, 44), WorkshopIcon.Trash, T("remove_weapon", mount + 1), () => { DraftSession.RemoveWeapon(mount); Refresh(); });
-            var mechanisms = DraftSession.Catalog.Definitions.Where(part => part.Category == ComponentCategory.Mechanism).ToArray();
-            int columns = w >= 520 ? 4 : 3;
-            float cardHeight = Mathf.Max(142, (h - 190) * .5f);
-            var list = new CatalogScrollList(parent, "Composite weapon catalog", new Rect(18, 106, w - 36, h - 178), mechanisms.Length, columns, cardHeight, 12);
-            for (int i = 0; i < mechanisms.Length; i++)
-            {
-                int rowColumns = columns == 4 && i >= 4 ? 3 : columns;
-                int column = columns == 4 && i >= 4 ? i - 4 : i % columns;
-                float cardWidth = (w - 48 - 12 * (rowColumns - 1)) / rowColumns;
-                var part = mechanisms[i]; var card = ui.Panel(list.Content, "Composite weapon " + part.Id, new Rect(column * (cardWidth + 12), i / columns * (cardHeight + 12), cardWidth, cardHeight), WorkshopUi.Paper);
-                WeaponPicture(card, WeaponPreset(part), "Composite weapon illustration", new Rect(8, 6, cardWidth - 16, cardHeight - 68));
-                var name = ui.Label(card, "Composite weapon name", part.Name, new Rect(8, cardHeight - 62, cardWidth - 16, 28), 21, true);
-                name.resizeTextForBestFit = true; name.resizeTextMinSize = 15; name.resizeTextMaxSize = 21;
-                name.alignment = TextAnchor.MiddleCenter;
-                bool owned = DraftSession.IsOwned(part.Id);
-                ui.Button(card, "Composite choose weapon " + part.Id, new Rect(12, cardHeight - 30, cardWidth - 24, 28), T(owned ? "choose" : "composition"), () => {
-                    if (owned)
-                    {
-                        var recipe = new AssemblyRecipe(new TowerRecipe(tower.Foundation, new[] { new WeaponMountRecipe(0, WeaponPreset(part)) }));
-                        DraftSession.ApplyPreset(Preset(recipe, part.Name), mount);
-                    }
-                    else if (tower.Mounts.Any(item => item.SlotIndex == mount)) DraftSession.OpenWeapon(mount);
-                    feedback = ""; Refresh();
-                }, WorkshopIcon.None);
-            }
         }
 
         void Structures(Transform parent, float w, float h)
@@ -361,100 +296,6 @@ namespace PaperDefense.Presentation
                 }, WorkshopIcon.Check);
             }
             ui.Button(parent, "Composite edit structure", new Rect(18, h - 60, w - 36, 44), T("composition"), () => { DraftSession.OpenStructure(); Refresh(); }, WorkshopIcon.Settings);
-        }
-
-        void Review(Transform parent, float w, float h)
-        {
-            ui.Label(parent, "Composite review heading", T("review"), new Rect(18, 8, w - 36, 44), 28, true);
-            float illustrationHeight = Mathf.Max(190, h - 158);
-            if (Route == AlbumEntryKind.Legacy)
-            {
-                var picture = WorkshopUi.Graphic<BlueprintSketch>(parent, "Composite assembled preview", new Rect(14, 58, w - 28, illustrationHeight));
-                picture.SetBlueprint(DraftSession.Draft.LegacyBlueprint);
-            }
-            else DrawRecipePreview(parent, DraftSession.PreviewRecipe, w, illustrationHeight);
-            float compositionHeight = Mathf.Max(60, h - illustrationHeight - 70);
-            var composition = new CatalogScrollList(parent, "Composite review composition viewport", new Rect(18, illustrationHeight + 64, w - 36, compositionHeight), 1, 1, h, 0);
-            var compositionText = ui.Label(composition.Content, "Composite review composition", CompositionText(), new Rect(0, 0, w - 54, compositionHeight), 16);
-            compositionText.alignment = TextAnchor.UpperLeft;
-            float contentHeight = Mathf.Max(80, compositionText.preferredHeight + 12);
-            WorkshopUi.Place(compositionText.rectTransform, new Rect(0, 0, w - 54, contentHeight));
-            if (DraftSession.PreviewMetrics?.Overloaded == true)
-            {
-                var entry = DraftSession.PreviewEntry;
-                var contributors = DraftSession.PreviewRecipe.Parts.Select(reference => entry.Snapshot.Definitions.First(part => part.Id == reference.Id && part.Revision == reference.Revision))
-                    .Where(part => part.Get(AssemblyStat.Load, ModifierOperation.Add) != 0)
-                    .Select(part => ui.Resolve(part.Name) + " " + part.Get(AssemblyStat.Load, ModifierOperation.Add).ToString("+0.##;-0.##;0"));
-                var label = ui.Label(composition.Content, "Composite load contributors", UserText.Message("assembly.component.load_parts", string.Join(" · ", contributors)),
-                    new Rect(0, contentHeight + 6, w - 54, 100), 18, color: WorkshopUi.Warning);
-                label.alignment = TextAnchor.UpperLeft;
-                float contributionHeight = Mathf.Max(56, label.preferredHeight + 12);
-                WorkshopUi.Place(label.rectTransform, new Rect(0, contentHeight + 6, w - 54, contributionHeight));
-                contentHeight += contributionHeight + 6;
-            }
-            composition.Content.sizeDelta = new Vector2(0, Mathf.Max(compositionHeight, contentHeight));
-        }
-
-        void Summary(Transform parent, Rect bounds)
-        {
-            var sheet = ui.Panel(parent, "Composite summary", bounds, WorkshopUi.Surface);
-            float w = bounds.width, h = bounds.height;
-            ui.Label(sheet, "Composite preview title", DraftSession.Name, new Rect(18, 8, w - 36, 44), 27, true);
-            bool review = Step == 2 || Route == AlbumEntryKind.Legacy;
-            float imageHeight = Mathf.Max(150, h - 246);
-            var recipe = DraftSession.PreviewRecipe;
-            if (review)
-            {
-                ui.Label(sheet, "Composite name label", T("name"), new Rect(18, 58, w - 36, 28), 18);
-                var fieldRoot = ui.Panel(sheet, "Composite name", new Rect(18, 90, w - 36, 48), WorkshopUi.Paper, true);
-                var field = fieldRoot.gameObject.AddComponent<InputField>();
-                var text = ui.Label(fieldRoot, "Composite name value", DraftSession.Name, new Rect(12, 2, w - 60, 44), 23);
-                field.textComponent = text; field.text = DraftSession.Name; field.characterLimit = 0;
-                field.interactable = Route != AlbumEntryKind.Legacy;
-                var nameSession = DraftSession;
-                field.onEndEdit.AddListener(value => {
-                    nameSession.Rename(value);
-                    if (ReferenceEquals(nameSession, DraftSession)) { feedback = ""; RefreshStatus(); }
-                });
-                var warning = ui.Panel(sheet, "Composite save warning", new Rect(18, 146, w - 36, 68), new Color32(255, 232, 211, 255));
-                warning.gameObject.SetActive(HasWriteFailure);
-                var warningMark = WorkshopUi.Graphic<WorkshopSaveFailureMark>(sheet, "Composite save warning mark", new Rect(28, 161, 40, 40));
-                warningMark.gameObject.SetActive(HasWriteFailure);
-                var ready = ui.Label(sheet, "Composite validation", StatusText(), HasWriteFailure ? new Rect(78, 148, w - 104, 64) : new Rect(18, 150, w - 36, 60), HasWriteFailure ? 17 : 20,
-                    color: HasStatusFailure ? WorkshopUi.Warning : WorkshopUi.Success);
-                ready.alignment = TextAnchor.MiddleLeft;
-            }
-            else DrawRecipePreview(sheet, recipe, w, imageHeight);
-            var resolved = DraftSession.Resolved;
-            var metrics = DraftSession.PreviewMetrics;
-            float y = review ? 218 : 68 + imageHeight;
-            string loadCost = resolved != null ? T("load_cost", resolved.Load, resolved.Capacity, resolved.Cost)
-                : metrics != null ? T("load_cost", metrics.Load, metrics.Capacity, metrics.Cost) : T("clearance");
-            string health = resolved != null ? T("health", resolved.Health.ToString("0.#"), resolved.BuildSeconds.ToString("0.##"))
-                : metrics != null ? T("health", metrics.Health.ToString("0.#"), metrics.BuildSeconds.ToString("0.##")) : "";
-            ui.Label(sheet, "Composite load cost", loadCost, new Rect(18, y, w - 36, 34), 21);
-            ui.Label(sheet, "Composite health", health, new Rect(18, y + 38, w - 36, 32), 18);
-            string effect = "";
-            if (resolved?.Support != null)
-            {
-                var support = resolved.Support;
-                if (support.Kind == AssemblyStructureFamily.Generator) effect = T("generator", support.IncomePerWave, support.PaybackWaves(resolved.Cost));
-                else if (support.Kind == AssemblyStructureFamily.Repair) effect = T("repair", support.RepairPerSecond, support.Radius);
-                else if (support.Kind == AssemblyStructureFamily.Slow) effect = T("slow", support.SlowSpeedMultiplier, support.Radius, support.SlowSeconds);
-                else effect = T("wall");
-            }
-            else if (resolved != null) effect = T("dps", resolved.Dps.ToString("0.##"));
-            ui.Label(sheet, "Composite effect", effect, new Rect(18, y + 76, w - 36, review ? Mathf.Max(50, h - y - 152) : 38), 18);
-            if (!review)
-            {
-                var composition = ui.Label(sheet, "Composite selected composition", CompositionText(true), new Rect(18, y + 118, w - 36, Mathf.Max(0, h - y - 124)), 15);
-                composition.alignment = TextAnchor.UpperLeft;
-            }
-            else
-            {
-                var trial = ui.Button(sheet, "Composite trial", new Rect(18, h - 64, w - 36, 48), T("trial"), OpenTrial, WorkshopIcon.Target);
-                trial.interactable = Route != AlbumEntryKind.Legacy && DraftSession.CanTrial;
-            }
         }
 
         void DrawRecipePreview(Transform parent, AssemblyRecipe recipe, float w, float imageHeight)
@@ -502,7 +343,7 @@ namespace PaperDefense.Presentation
         void WeaponPicture(Transform parent, WeaponRecipe weapon, string name, Rect bounds)
         {
             var picture = WorkshopUi.Graphic<WeaponAssemblyGraphic>(parent, name, bounds);
-            try { picture.SetComposition(AssemblyVisualComposer.ComposeWeapon(weapon)); }
+            try { picture.SetComposition(AssemblyVisualComposer.ComposeWeapon(weapon, AssemblyPreviewPose.ForWeapon())); }
             catch (ArgumentException) { WorkshopUi.RemoveView(picture.gameObject); }
             catch (InvalidOperationException) { WorkshopUi.RemoveView(picture.gameObject); }
             catch (NotSupportedException) { WorkshopUi.RemoveView(picture.gameObject); }
@@ -588,7 +429,7 @@ namespace PaperDefense.Presentation
             {
                 var entry = entries[i]; var card = ui.Panel(list.Content, "Composite library " + entry.Id, new Rect(0, i * (cardHeight + 12), w - 54, cardHeight), WorkshopUi.Surface);
                 var picture = WorkshopUi.Graphic<WeaponAssemblyGraphic>(card, "Composite library illustration", new Rect(16, 12, 180, 144));
-                try { picture.SetComposition(entry.Kind == ComponentLibraryKind.Foundation ? AssemblyVisualComposer.ComposeFoundation(entry.Snapshot.Foundation) : AssemblyVisualComposer.ComposeWeapon(entry.Snapshot.Weapon)); }
+                try { picture.SetComposition(entry.Kind == ComponentLibraryKind.Foundation ? AssemblyVisualComposer.ComposeFoundation(entry.Snapshot.Foundation) : AssemblyVisualComposer.ComposeWeapon(entry.Snapshot.Weapon, AssemblyPreviewPose.ForWeapon())); }
                 catch (ArgumentException) { WorkshopUi.RemoveView(picture.gameObject); }
                 catch (InvalidOperationException) { WorkshopUi.RemoveView(picture.gameObject); }
                 catch (NotSupportedException) { WorkshopUi.RemoveView(picture.gameObject); }

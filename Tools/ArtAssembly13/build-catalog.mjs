@@ -9,7 +9,7 @@ const read = p => JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
 const write = (p,v) => fs.writeFileSync(path.join(root,p),JSON.stringify(v,null,2)+'\n');
 const source = read(art+'sprites.source.json');
 const assembly = read(art+'assembly-parts.source.json');
-const revision = 'modular-full-catalog-2026-10-19-v5';
+const revision = 'modular-full-catalog-2026-10-19-v6';
 const asset = fs.readFileSync(path.join(root,'Assets/PaperDefense/Configuration/Game/PlayerAssemblyCatalog.asset'),'utf8').split('    Starters:')[0];
 const definitions = [...asset.matchAll(/^    - Id: (.+)\r?\n([\s\S]*?)(?=^    - Id:|$(?![\s\S]))/gm)].map(m=>({
   partId:m[1].trim(),revision:Number(m[2].match(/Revision: (\d+)/)[1]),
@@ -50,7 +50,7 @@ function decodePng(relative){
 }
 const sheets=new Map();
 function cell(relative,index){
- if(!sheets.has(relative))sheets.set(relative,decodePng(relative));const im=sheets.get(relative),grid=/StandardFoundation-v2\.png$/.test(relative)?1:/SupportAttachments-v1\.png$|RepairParts-v1\.png$|BatteryFoundation-v3\.png$/.test(relative)?2:4,col=index%grid,row=Math.floor(index/grid);
+ if(!sheets.has(relative))sheets.set(relative,decodePng(relative));const im=sheets.get(relative),grid=/StandardFoundation-v[24]\.png$/.test(relative)?1:/SupportAttachments-v1\.png$|RepairParts-v1\.png$|BatteryFoundation-v3\.png$/.test(relative)?2:4,col=index%grid,row=Math.floor(index/grid);
  let left=Math.floor(col*im.w/grid),right=Math.floor((col+1)*im.w/grid);
  let top=Math.floor(row*im.h/grid),bottom=Math.floor((row+1)*im.h/grid);
  // The long nib's tip extends above its nominal fourth-row cell. The transparent
@@ -143,12 +143,18 @@ for(const [id,index,width,sockets] of frameSpecs){
 }
 // Modern recipes use a low plinth. The historical pilot canvases and its two
 // original socket coordinates remain above in foundations/pilots for legacy.
-const standard=art+'StandardFoundation-v2.png',base=cell(standard,0),baseScale=1.0/base.canvas.x;
+const standard=art+'StandardFoundation-v4.png',base=cell(standard,0);
+// Preserve the accepted logical seats while replacing the front-facing beam
+// with the more faithful isometric plinth. Source disk centres were inspected
+// on the full 1536x1024 canvas; no source pixels are rescaled or rewritten.
+const oldLeft=-.5+483/1942,oldRight=-.5+1452/1942,oldSeatY=-.27+458/1942;
+const baseScale=(oldRight-oldLeft)/(1137-398);
+const basePosition=[oldLeft-398*baseScale,oldSeatY-625*baseScale];
 parts.get('frame.standard').fragments=[];parts.get('hull.standard').fragments=[];
-const standardFrame=add('frame.standard',standard,0,{attach:[0,0],position:[-.5,-.27],scale:baseScale,layer:1,collisionMode:'solid'});
+const standardFrame=add('frame.standard',standard,0,{attach:[0,0],position:basePosition,scale:baseScale,layer:1,collisionMode:'solid'});
 const modernFrame=parts.get('frame.standard'); modernFrame.hullBaseFraction=.30;modernFrame.hullFrontFraction=.46;
 standardFrame.region=rect(base.trim.x,base.trim.y,base.trim.width,base.trim.height*.30);
-modernFrame.mounts=[{slot:0,position:point(483,458)},{slot:1,position:point(1452,458)}];
+modernFrame.mounts=[{slot:0,position:point(398,625)},{slot:1,position:point(1137,625)}];
 // A base's upper seating surface and its foreground are separate ordered
 // fragments. Their actual source bands also supply the physical keepouts.
 for(const split of [{bottom:.46,height:.54,layer:0},{bottom:.30,height:.16,layer:14}]){

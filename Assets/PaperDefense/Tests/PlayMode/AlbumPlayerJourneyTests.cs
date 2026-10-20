@@ -100,9 +100,31 @@ namespace PaperDefense.Tests
             Assert.That(game.Page, Is.EqualTo(PlayerPage.Result)); Assert.That(game.Run.Session.Phase, Is.EqualTo(RunPhase.Defeat));
             Assert.That(Text("Result completed waves").text, Does.Contain("5").And.Contain("8"));
             Assert.That(Text("Result reward totals").text, Does.Contain("40").And.Contain("50"));
+            Assert.That(Text("Result defeat wave").text, Does.Contain("6"));
             Click("Result album"); Assert.That(game.Page, Is.EqualTo(PlayerPage.Album));
             Assert.That(game.Run.InWorkshop, Is.True); Assert.That(game.Run.Workshop.Gold, Is.EqualTo(40));
             Assert.That(game.Run.Workshop.TotalXp, Is.EqualTo(50)); Assert.That(fixture.SavedData.Rewards.Single().VictoryBonus, Is.False);
+        }
+
+        [UnityTest] public IEnumerator DefeatShowsActualLossesAndKeepsTruncatedHistoryHonest()
+        {
+            Assert.That(game.StartBattle(), Is.True); game.Run.NextWave();
+            var actual = (GameSession)typeof(RunController).GetField("session", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(game.Run);
+            foreach (var kind in new[] { StructureKind.Gun, StructureKind.Mortar, StructureKind.Wall, StructureKind.RepairPost })
+                actual.Statistics.RecordLoss(new Cell(1, 1), 1, 0, kind, MaterialTier.Pencil, 10);
+            KillObjective(); yield return null;
+            Assert.That(Text("Result lost towers").text, Does.EndWith("2"));
+            Assert.That(Text("Result lost supports").text, Does.EndWith("2"));
+            Assert.That(Text("Result reward totals").text.Split('\n'), Has.Length.EqualTo(2));
+            var rubble = root.GetComponentsInChildren<Image>().Single(image => image.name == "Defeat castle rubble illustration");
+            Assert.That(rubble.sprite, Is.Not.Null); Assert.That(rubble.sprite.name, Is.EqualTo("DefeatCastleRubble"));
+            for (int i = 0; i < 35; i++)
+                actual.Statistics.RecordLoss(new Cell(1, 1), i + 2, 0, StructureKind.Wall, MaterialTier.Pencil, 2);
+            shell.Show(PlayerPage.Result);
+            Assert.That(Text("Result total losses").text, Does.EndWith("39"));
+            Assert.That(Text("Result lost investment").text, Does.EndWith("110"));
+            Assert.That(root.GetComponentsInChildren<Text>().Any(text => text.name == "Result lost towers"), Is.False,
+                "The last32 breaches cannot supply a complete tower/support split after39 losses.");
         }
 
         [UnityTest] public IEnumerator CancelledExitKeepsTheSameAttemptAndRestoresPauseKeyboardFocus()

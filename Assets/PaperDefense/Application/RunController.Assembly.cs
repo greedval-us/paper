@@ -21,6 +21,23 @@ namespace PaperDefense.Application
         public AssemblyResolution PreviewAlbumEntry(AlbumEntry entry, MaterialTier material = MaterialTier.Pencil)
             => TowerCatalog.ResolveEntry(entry, AssemblyBalance, material);
 
+        /// <summary>Read-only foundation quote from the inspected page's frozen definitions.</summary>
+        public int PreviewFoundationCost(RecipeSnapshot snapshot, MaterialTier material = MaterialTier.Pencil)
+        {
+            if (snapshot?.Recipe.Tower == null) throw new ArgumentException("A tower snapshot is required.", nameof(snapshot));
+            return AssemblyResolver.FoundationCost(snapshot.Recipe.Tower.Foundation,
+                new ComponentCatalog(snapshot.BalanceRevision, snapshot.Definitions), AssemblyBalance, material);
+        }
+
+        public int PreviewWeaponCost(RecipeSnapshot snapshot, int slot = 0, MaterialTier material = MaterialTier.Pencil)
+        {
+            if (snapshot?.Recipe.Tower == null) throw new ArgumentException("A tower snapshot is required.", nameof(snapshot));
+            var mount = snapshot.Recipe.Tower.Mounts.SingleOrDefault(value => value.SlotIndex == slot);
+            if (mount == null) throw new ArgumentOutOfRangeException(nameof(slot));
+            return AssemblyResolver.WeaponCost(mount.Weapon,
+                new ComponentCatalog(snapshot.BalanceRevision, snapshot.Definitions), AssemblyBalance, material);
+        }
+
         /// <summary>Uses the actual start gate without publishing a loadout or touching the profile store.</summary>
         public bool CanStartAlbumRun(out string reason)
         {

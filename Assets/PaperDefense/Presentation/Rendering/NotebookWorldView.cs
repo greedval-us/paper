@@ -288,6 +288,18 @@ namespace PaperDefense.Presentation
                 p.Line(new Vector2(-1.5f, y), new Vector2(paperWidth + 1.5f, y),
                        y % 5 == 0 ? majorWidth : minorWidth, y % 5 == 0 ? major : minor);
             }
+            if (ModernEnemyPresentation && minorGridOpacity > 0)
+            {
+                // Fine notebook ruling is decorative paper texture. The full-unit
+                // placement grid and every simulation coordinate retain their scale.
+                var fine = new Color(.35f, .54f, .68f, .105f * minorGridOpacity);
+                for (int column = -3; column <= (paperWidth + 1) * 3; column++)
+                    if (column % 3 != 0)
+                        p.Line(new Vector2(column / 3f, -1.5f), new Vector2(column / 3f, paperHeight + 1.5f), minorWidth, fine);
+                for (int row = -3; row <= (paperHeight + 1) * 3; row++)
+                    if (row % 3 != 0)
+                        p.Line(new Vector2(-1.5f, row / 3f), new Vector2(paperWidth + 1.5f, row / 3f), minorWidth, fine);
+            }
             // Microtexture disappears before it becomes subpixel sparkle on the overview.
             for (int i = 0; minorGridOpacity > 0 && i < 700; i++)
             {
@@ -357,32 +369,7 @@ namespace PaperDefense.Presentation
             float halfHeight = WorldCamera.orthographicSize, halfWidth = halfHeight * WorldCamera.aspect;
             Vector2 center = WorldCamera.transform.position;
             var visible = new Rect(center - new Vector2(halfWidth, halfHeight), new Vector2(halfWidth, halfHeight) * 2);
-            float band = Mathf.Min(halfHeight * .72f, halfWidth * .2f);
-            // Marginal forest sketches belong to the paper, below ranges and every live actor.
-            // They introduce no terrain cells and keep the central combat space clear.
-            for (int side = 0; side < 2; side++)
-                for (int cluster = 0; cluster < 3; cluster++)
-                for (int tree = 0; tree < (cluster == 1 ? 2 : 3); tree++)
-                {
-                    int seed = tree + side * 11 + cluster * 37;
-                    float clusterCenter = cluster == 0 ? .12f : cluster == 1 ? .52f + side * .05f : .88f;
-                    float height = visible.height * (cluster == 1 ? .12f : .24f) * (.8f + MeshPen.Hash(seed) * .35f);
-                    float inset = tree == 0 ? -.32f : tree == 1 ? .18f : -.06f;
-                    float x = side == 0 ? visible.xMin + band * inset : visible.xMax - band * (1 + inset);
-                    float y = visible.yMin + visible.height * clusterCenter - height * .5f + height * (MeshPen.Hash(seed + 19) - .5f) * .2f;
-                    DrawFramingResource(pen, "terrain.pine", new Rect(x, y, band * .8f, height), .64f + tree * .02f);
-                    if (tree == 1)
-                        DrawFramingResource(pen, "terrain.rock", new Rect(x, y - height * .05f, band * .46f, visible.height * .055f), .6f);
-                }
-            DrawFramingResource(pen, "terrain.mountain", new Rect(visible.xMin - band * .3f, visible.yMax - visible.height * .31f, band * 1.35f, visible.height * .31f), .62f);
-            DrawFramingResource(pen, "terrain.mountain", new Rect(visible.xMax - band * 1.05f, visible.yMin - visible.height * .02f, band * 1.35f, visible.height * .3f), .62f);
-        }
-
-        void DrawFramingResource(MeshPen pen, string id, Rect available, float opacity)
-        {
-            if (!NotebookSpriteCatalog.TryGetBounds(id, out var bounds) || bounds.width <= 0 || bounds.height <= 0) return;
-            float scale = Mathf.Min(available.width / bounds.width, available.height / bounds.height);
-            DoodleGlyphs.DrawResource(pen, id, available.center - bounds.center * scale, scale, opacity: opacity, theme: Theme);
+            NotebookSceneryComposition.Draw(pen, visible, Theme);
         }
 
         void DrawSurroundingScenery(MeshPen pen)

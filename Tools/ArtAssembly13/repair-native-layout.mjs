@@ -3,8 +3,11 @@
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 export function relocateNative(source,seed){
-const size=4096,gap=4,bin=size+gap,target='part.full.frame.battery';
+const size=4096,gap=4,bin=size+gap;
 const defs=[...source.sprites.map((s,index)=>({id:s.id,index,w:s.width+gap,h:s.height+gap})),{id:'$pen-white',index:source.sprites.length,w:13,h:13}];
+const resized=defs.filter(d=>{const p=seed.rectangles.find(p=>p.id===d.id);return !p||p.width+gap!==d.w||p.height+gap!==d.h;});
+if(resized.length!==1)return null;
+const target=resized[0].id;
 const old=seed.rectangles.filter(p=>p.id!==target).map(p=>({...p,w:p.width+gap,h:p.height+gap}));
 const changed=defs.find(p=>p.id===target);
 if(old.length!==defs.length-1)return null;
@@ -40,7 +43,7 @@ for(const candidate of candidates.slice(0,5000)){
   }
   if(failed)continue;
   for(let i=0;i<placed.length;i++){const p=placed[i];if(p.x<0||p.y<0||p.x+p.w>bin||p.y+p.h>bin)throw Error('Bounds');for(let j=0;j<i;j++)if(intersect(p,placed[j]))throw Error('Overlap');}
-  const output={atlas:size,gutter:gap,algorithm:'MaxRects local relocation',seed:'packing-baseline-v3.json',order,score,attempts,nativePixelArea:defs.reduce((n,p)=>n+(p.w-gap)*(p.h-gap),0),
+  const output={atlas:size,gutter:gap,algorithm:'MaxRects local relocation',changed:target,order,score,attempts,nativePixelArea:defs.reduce((n,p)=>n+(p.w-gap)*(p.h-gap),0),
    rectangles:defs.map(d=>{const p=placed.find(p=>p.id===d.id);return{id:d.id,index:d.index,x:p.x,y:p.y,width:d.w-gap,height:d.h-gap};})};
   return output;
  }

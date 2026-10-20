@@ -335,7 +335,7 @@ namespace PaperDefense.Presentation
     }
 
     /// <summary>Paper folds, title ribbons and calibrated load segments for the drawing readout.</summary>
-    public sealed class DrawingSummaryDetailGraphic : MaskableGraphic
+    public sealed class DrawingSummaryDetailGraphic : NotebookAtlasGraphic
     {
         public enum Kind { FoldedPaper, Ribbon, InkAccent, InkHatching, LoadSegments, Clock }
         Kind shape;
@@ -343,7 +343,6 @@ namespace PaperDefense.Presentation
         readonly MeshPen pen = new MeshPen(null, 1536);
         public Kind Shape { get => shape; set { shape = value; SetVerticesDirty(); } }
         public float Fraction { get => fraction; set { fraction = Mathf.Clamp01(value); SetVerticesDirty(); } }
-        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
 
         protected override void OnPopulateMesh(VertexHelper vh)
         {

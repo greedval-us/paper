@@ -14,7 +14,7 @@ namespace PaperDefense.Presentation
             float responsive = Mathf.Min(composition.width / 1600f, composition.height / 900f);
             float scale = responsive;
             bool assembly = game.Run.AssemblyCatalog != null;
-            float actionHeight = assembly ? 506 : 454;
+            float actionHeight = assembly ? 458 : 454, actionWidth = assembly ? 426 : 402;
             float brandAvailable = composition.height - actionHeight * scale - 135 * responsive;
             float brandScale = Mathf.Min(scale, Mathf.Max(0, brandAvailable) / 305);
             float brandHeight = 305 * brandScale;
@@ -23,7 +23,7 @@ namespace PaperDefense.Presentation
             float top = composition.y + Mathf.Max(22 * responsive, (composition.height - 60 * responsive - blockHeight) * .5f);
             float left = composition.x + 44 * responsive;
 
-            var brand = ui.Panel(page, "Home wordmark", new Rect(composition.x + 32 * responsive, top, Mathf.Max(500 * brandScale, 402 * scale), brandHeight), Color.clear);
+            var brand = ui.Panel(page, "Home wordmark", new Rect(composition.x + 32 * responsive, top, Mathf.Max(500 * brandScale, actionWidth * scale), brandHeight), Color.clear);
             if (NotebookSpriteCatalog.TryGet("logo.home", out var wordmark))
             {
                 NotebookSprite(brand, "Home title illustration", wordmark,
@@ -47,21 +47,21 @@ namespace PaperDefense.Presentation
                 HomeLettering(brand, "Собери свою оборону", new Rect(40 * brandScale, 250 * brandScale, 450 * brandScale, 52 * brandScale), 39 * brandScale);
             }
 
-            var actions = ui.Panel(page, "Home actions", new Rect(left, top + brandHeight + gap, 402 * scale, actionHeight * scale), Color.clear);
+            var actions = ui.Panel(page, "Home actions", new Rect(left, top + brandHeight + gap, actionWidth * scale, actionHeight * scale), Color.clear);
             var flow = actions.gameObject.AddComponent<VerticalLayoutGroup>();
             flow.spacing = 8 * scale; flow.childAlignment = TextAnchor.UpperLeft;
             flow.childControlWidth = flow.childControlHeight = true;
             flow.childForceExpandWidth = flow.childForceExpandHeight = false;
-            var play = HomeAction(actions, "Open campaign", PlayerIcon.Play, "Играть", () => game.Navigate(PlayerPage.Map), 402, 104, 60, scale, true);
+            var play = HomeAction(actions, "Open campaign", PlayerIcon.Play, "Играть", () => game.Navigate(PlayerPage.Map), actionWidth, 104, 60, scale, true);
             Button album = null;
             if (assembly) album = HomeAction(actions, "Open album", PlayerIcon.Book,
-                GameText.Resolve(PaperDefense.Core.UserText.Message("assembly.player.album")), game.OpenAlbum, 402, 82, 46, scale);
-            var workshop = HomeAction(actions, "workshop", PlayerIcon.Pencil, ui.T("workshop"), () => game.Navigate(PlayerPage.Workshop), 402, assembly ? 82 : 92, 52, scale);
-            var settings = HomeAction(actions, "settings", PlayerIcon.Settings, ui.T("settings"), () => game.OpenSettings(), 402, assembly ? 76 : 84, 52, scale);
-            var help = HomeAction(actions, "help", PlayerIcon.Book, "Помощь", () => game.OpenSettings(true), 402, assembly ? 72 : 80, 50, scale);
+                GameText.Resolve(PaperDefense.Core.UserText.Message("assembly.player.album")), game.OpenAlbum, actionWidth, 64, 44, scale);
+            var workshop = HomeAction(actions, "workshop", PlayerIcon.Pencil, ui.T("workshop"), () => game.Navigate(PlayerPage.Workshop), actionWidth, assembly ? 72 : 92, 50, scale);
+            var settings = HomeAction(actions, "settings", PlayerIcon.Settings, ui.T("settings"), () => game.OpenSettings(), actionWidth, assembly ? 68 : 84, 50, scale);
+            var help = HomeAction(actions, "help", PlayerIcon.Book, "Помощь", () => game.OpenSettings(true), actionWidth, assembly ? 64 : 80, 48, scale);
             var exit = HomeAction(actions, "exit", PlayerIcon.Exit, "Выйти",
                 () => Confirm("Выйти из игры?", "Сохранённые чертежи и золото останутся в профиле.", () => UnityEngine.Application.Quit()),
-                270, assembly ? 50 : 58, 38, scale);
+                270, assembly ? 46 : 58, 36, scale);
             Button[] ordered = assembly ? new[] { play, album, workshop, settings, help, exit } : new[] { play, workshop, settings, help, exit };
             for (int i = 0; i < ordered.Length; i++)
             {
@@ -78,10 +78,10 @@ namespace PaperDefense.Presentation
                 Mathf.Max(14 / Layout.Scale, 20 * responsive));
             if (assembly)
             {
-                ui.Panel(page, "Home profile", new Rect(W - 340, 8, 324, 76), PlayerUi.Paper);
-                gold = NotebookLabel(page, ui.T("gold", game.Run.Workshop.Gold), new Rect(W - 330, 10, 306, 34), 22, alignment: TextAnchor.MiddleRight);
+                ui.Panel(page, "Home profile", new Rect(W - 284, 8, 270, 60), PlayerUi.Paper);
+                gold = NotebookLabel(page, ui.T("gold", game.Run.Workshop.Gold), new Rect(W - 276, 9, 254, 26), 20, alignment: TextAnchor.MiddleRight);
                 gold.name = "Player gold";
-                PlayerProgress(new Rect(W - 330, 46, 306, 34));
+                PlayerProgress(new Rect(W - 276, 36, 254, 26));
             }
         }
 

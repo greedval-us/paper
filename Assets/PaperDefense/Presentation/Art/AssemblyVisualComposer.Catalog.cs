@@ -50,14 +50,19 @@ namespace PaperDefense.Presentation
         }
 
         public static AssemblyVisualComposition ComposeWeapon(WeaponRecipe recipe)
+            => ComposeWeapon(recipe, new AssemblyVisualPose());
+
+        public static AssemblyVisualComposition ComposeWeapon(WeaponRecipe recipe, AssemblyVisualPose pose)
         {
             if (recipe == null) throw new ArgumentNullException(nameof(recipe));
+            pose = pose ?? new AssemblyVisualPose();
+            if (pose.Mounts.Any(mount => mount.SlotIndex != 0)) throw new ArgumentException("A standalone weapon has only socket zero.", nameof(pose));
             EnsureLoaded();
             var foundation = new FoundationRecipe(P("frame.standard"), P("hull.standard"), P("armor.none"), P("feed.standard"), P("turn.standard"));
             var assembly = new AssemblyRecipe(new TowerRecipe(foundation, new[] { new WeaponMountRecipe(0, recipe) }));
             var diagnostics = AssemblyFitRules.Validate(assembly, fits);
             if (diagnostics.Count != 0) throw new AssemblyCatalogException(diagnostics);
-            var full = ComposeCatalog(assembly, new AssemblyVisualPose()); var anchor = full.Anchors.Single();
+            var full = ComposeCatalog(assembly, pose); var anchor = full.Anchors.Single();
             var fragments = full.Fragments.Where(f => f.SlotIndex == 0).Select(f => new AssemblyVisualFragment(
                 f.PartId, f.SpriteId, f.SlotIndex, f.Layer, f.Trim, f.Region, f.Origin - anchor.RotationCenter, f.Scale, f.Radians)).ToList();
             return Finish(fragments, new List<AssemblyVisualAnchor> { new AssemblyVisualAnchor(0,

@@ -104,7 +104,7 @@ namespace PaperDefense.Presentation
             {
                 var aim = state.GetMountAim(anchor.SlotIndex);
                 Vector2 delta = new Vector2(aim.X, aim.Y) - NotebookAssemblyView.Point(at, anchor.RotationCenter, snapshot);
-                float angle = aim.X == 0 && aim.Y == 0 || delta.sqrMagnitude < .000001f ? 0 :
+                float angle = aim.X == 0 && aim.Y == 0 || delta.sqrMagnitude < .000001f ? AssemblyPreviewPose.Radians :
                     Mathf.Atan2(delta.y, delta.x) - Mathf.PI * .5f;
                 angle = Mathf.Atan2(Mathf.Sin(angle), Mathf.Cos(angle));
                 var weapon = snapshot.Recipe.Tower.Mounts;

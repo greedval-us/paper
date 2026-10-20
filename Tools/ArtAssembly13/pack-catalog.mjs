@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import { relocateNative } from './repair-native-layout.mjs';
 const source=JSON.parse(fs.readFileSync('ArtSource/Notebook/NewStyle/sprites.source.json','utf8'));
-const size=4096,gap=4,bin=size+gap;
+const size=4096,height=4352,gap=4,bin=size+gap,binHeight=height+gap;
 const items=source.sprites.map((s,index)=>({id:s.id,index,w:s.width+gap,h:s.height+gap}));
 items.push({id:'$pen-white',index:items.length,w:9+gap,h:9+gap});
 const contains=(a,b)=>a.x<=b.x&&a.y<=b.y&&a.x+a.w>=b.x+b.w&&a.y+a.h>=b.y+b.h;
@@ -26,7 +26,7 @@ function score(free,r,method,placed){
  if(method==='bottom')return[free.y+r.h,free.x,Math.min(dx,dy),Math.max(dx,dy)];
  let contact=0;
  if(free.x===0||free.x+r.w===bin)contact+=r.h;
- if(free.y===0||free.y+r.h===bin)contact+=r.w;
+ if(free.y===0||free.y+r.h===binHeight)contact+=r.w;
  for(const p of placed){
   if(p.x===free.x+r.w||p.x+p.w===free.x)contact+=Math.max(0,Math.min(p.y+p.h,free.y+r.h)-Math.max(p.y,free.y));
   if(p.y===free.y+r.h||p.y+p.h===free.y)contact+=Math.max(0,Math.min(p.x+p.w,free.x+r.w)-Math.max(p.x,free.x));
@@ -35,7 +35,7 @@ function score(free,r,method,placed){
 }
 const less=(a,b)=>!b||a.some((v,i)=>v!==b[i]&&a.slice(0,i).every((v,j)=>v===b[j])&&v<b[i]);
 function pack(order,method,global){
- let free=[{x:0,y:0,w:bin,h:bin}],remaining=[...order],placed=[];
+ let free=[{x:0,y:0,w:bin,h:binHeight}],remaining=[...order],placed=[];
  while(remaining.length){
   let best,chosen,box,bestIndex;
   const length=global?remaining.length:1;
@@ -59,10 +59,10 @@ function tryPack(order,method,global,label){
  if(result.remaining.length)return false;
  const placed=result.placed;
  for(let i=0;i<placed.length;i++){
-  const p=placed[i];if(p.x<0||p.y<0||p.x+p.w-gap>size||p.y+p.h-gap>size)throw new Error('Out of bounds '+p.id);
+  const p=placed[i];if(p.x<0||p.y<0||p.x+p.w-gap>size||p.y+p.h-gap>height)throw new Error('Out of bounds '+p.id);
   for(let j=0;j<i;j++)if(intersect(p,placed[j]))throw new Error('Gutter overlap '+p.id);
  }
- const output={atlas:size,gutter:gap,algorithm:'MaxRects',method,order:label,global,attempts,
+ const output={atlas:size,height,gutter:gap,algorithm:'MaxRects',method,order:label,global,attempts,
   nativePixelArea:items.reduce((n,r)=>n+(r.w-gap)*(r.h-gap),0),
   rectangles:placed.sort((a,b)=>a.index-b.index).map(p=>({id:p.id,index:p.index,x:p.x,y:p.y,width:p.w-gap,height:p.h-gap}))};
  fs.writeFileSync('Tools/ArtAssembly13/packing-4096.json',JSON.stringify(output,null,2)+'\n');
@@ -75,10 +75,9 @@ for(const[name,compare]of Object.entries(comparators))for(const method of method
 // A small native crop change can destabilise an otherwise excellent complete
 // layout. Deterministically relocate only its neighbours from the immutable
 // accepted baseline before attempting a broader seeded search.
-const baseline='Tools/ArtAssembly13/packing-baseline-v3.json';
-if(fs.existsSync(baseline)){
+for(const baseline of ['Tools/ArtAssembly13/packing-baseline-v5.json','Tools/ArtAssembly13/packing-baseline-v3.json'])if(fs.existsSync(baseline)){
  const repaired=relocateNative(source,JSON.parse(fs.readFileSync(baseline,'utf8')));
- if(repaired){fs.writeFileSync('Tools/ArtAssembly13/packing-4096.json',JSON.stringify(repaired,null,2)+'\n');console.log(JSON.stringify({success:true,...repaired,rectangles:repaired.rectangles.length},null,2));process.exit(0);}
+ if(repaired){repaired.seed=baseline;fs.writeFileSync('Tools/ArtAssembly13/packing-4096.json',JSON.stringify(repaired,null,2)+'\n');console.log(JSON.stringify({success:true,...repaired,rectangles:repaired.rectangles.length},null,2));process.exit(0);}
 }
 let seed=1;const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
 const limit=Number(process.argv[2]??3000),deadline=Date.now()+45000;

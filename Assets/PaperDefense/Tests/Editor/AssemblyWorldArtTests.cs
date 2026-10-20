@@ -40,11 +40,26 @@ namespace PaperDefense.Tests
                 var session = Session(entry.Snapshot);
                 var view = new RunReadModel(session).Structures[0];
                 var actual = Compose(view);
-                var expected = AssemblyVisualComposer.Compose(view.ResolvedEntry.Snapshot, new AssemblyVisualPose());
+                var expected = AssemblyVisualComposer.Compose(view.ResolvedEntry.Snapshot, AssemblyPreviewPose.For(view.ResolvedEntry.Snapshot));
                 Assert.That(actual.Fragments.Select(f => (f.PartId, f.SpriteId, f.Layer)),
                     Is.EqualTo(expected.Fragments.Select(f => (f.PartId, f.SpriteId, f.Layer))), entry.Id);
                 Assert.That(actual.Bounds, Is.EqualTo(expected.Bounds), entry.Id);
                 Assert.That(actual.Anchors.Count, Is.EqualTo(entry.Kind == AlbumEntryKind.Tower ? entry.Snapshot.Recipe.Tower.Mounts.Count : 0), entry.Id);
+            }
+        }
+
+        [Test] public void IdleWorldWeaponsUseTheSameForwardRightDisplayPoseUntilTheyAcquireARealAim()
+        {
+            var catalog = AssetDatabase.LoadAssetAtPath<AssemblyCatalogAsset>("Assets/PaperDefense/Configuration/Game/PlayerAssemblyCatalog.asset").CreateSnapshot();
+            foreach (var entry in catalog.Starters.Where(value => value.Kind == AlbumEntryKind.Tower))
+            {
+                var session = Session(entry.Snapshot);
+                var view = new RunReadModel(session).Structures[0];
+                var actual = Compose(view);
+                var expected = AssemblyVisualComposer.Compose(entry.Snapshot, AssemblyPreviewPose.For(entry.Snapshot));
+                Assert.That(actual.Fragments.Select(fragment => (fragment.Origin, fragment.Radians)),
+                    Is.EqualTo(expected.Fragments.Select(fragment => (fragment.Origin, fragment.Radians))), entry.Id);
+                Assert.That(actual.Anchors.Select(anchor => anchor.Muzzle), Is.EqualTo(expected.Anchors.Select(anchor => anchor.Muzzle)), entry.Id);
             }
         }
 

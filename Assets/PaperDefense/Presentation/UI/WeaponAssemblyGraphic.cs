@@ -6,9 +6,8 @@ namespace PaperDefense.Presentation
 {
     /// <summary>Fits the same assembly used by album, trial and battle into the weapon screen.</summary>
     [RequireComponent(typeof(CanvasRenderer))]
-    public sealed class WeaponAssemblyGraphic : MaskableGraphic
+    public sealed class WeaponAssemblyGraphic : NotebookAtlasGraphic
     {
-        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         public TowerBlueprint Blueprint { get; private set; }
         public RecipeSnapshot Recipe { get; private set; }
         public AssemblyVisualPose Pose { get; private set; }
@@ -31,8 +30,8 @@ namespace PaperDefense.Presentation
 
         public void SetRecipe(RecipeSnapshot value, AssemblyVisualPose pose = null)
         {
-            var nextPose = pose ?? new AssemblyVisualPose();
-            Rect nextBounds = value == null ? default : AssemblyVisualComposer.Compose(value, nextPose).Bounds;
+            var nextPose = pose ?? AssemblyPreviewPose.For(value);
+            Rect nextBounds = value == null ? default : AssemblyPreviewPose.VisibleBounds(AssemblyVisualComposer.Compose(value, nextPose));
             Blueprint = null;
             Part = null;
             standalone = null;
@@ -49,21 +48,21 @@ namespace PaperDefense.Presentation
             var composition = AssemblyVisualComposer.ComposePart(value);
             Blueprint = null; Recipe = null; Pose = null; Part = value;
             standalone = null;
-            bounds = composition.Bounds; hasBounds = composition.Fragments.Count > 0;
+            bounds = AssemblyPreviewPose.VisibleBounds(composition); hasBounds = composition.Fragments.Count > 0;
             SetVerticesDirty(); SetMaterialDirty();
         }
 
         public void SetComposition(AssemblyVisualComposition value)
         {
             Blueprint = null; Recipe = null; Pose = null; Part = null; standalone = value;
-            bounds = value?.Bounds ?? default; hasBounds = value != null && value.Fragments.Count > 0;
+            bounds = AssemblyPreviewPose.VisibleBounds(value); hasBounds = value != null && value.Fragments.Count > 0;
             SetVerticesDirty(); SetMaterialDirty();
         }
 
         public void SetPose(AssemblyVisualPose value)
         {
-            var nextPose = value ?? new AssemblyVisualPose();
-            if (Recipe != null) bounds = AssemblyVisualComposer.Compose(Recipe, nextPose).Bounds;
+            var nextPose = value ?? AssemblyPreviewPose.For(Recipe);
+            if (Recipe != null) bounds = AssemblyPreviewPose.VisibleBounds(AssemblyVisualComposer.Compose(Recipe, nextPose));
             Pose = nextPose;
             SetVerticesDirty();
         }

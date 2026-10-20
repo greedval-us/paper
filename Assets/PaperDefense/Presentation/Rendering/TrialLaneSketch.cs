@@ -7,9 +7,8 @@ namespace PaperDefense.Presentation
 {
     /// <summary>Trial playback uses simulation timestamps, the shared composition and recorded interval events.</summary>
     [RequireComponent(typeof(CanvasRenderer))]
-    public sealed class TrialLaneSketch : MaskableGraphic
+    public sealed class TrialLaneSketch : NotebookAtlasGraphic
     {
-        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         readonly NotebookTrialPlayback playback = new NotebookTrialPlayback();
         readonly MeshPen pen = new MeshPen(null, 8192);
         readonly List<TrialLaneBatchGraphic> batches = new List<TrialLaneBatchGraphic>();
@@ -138,7 +137,11 @@ namespace PaperDefense.Presentation
             if (!isActiveAndEnabled || !HasRecording) return;
             float scale = DrawingScale(rect);
             var center = ViewBounds.center;
-            pen.CopyUiBatchTo(target, rect.center - center * scale, scale, batchIndex);
+            // Source 10 places towers on the left. Reflect the complete recorded
+            // triangle stream, so bodies, muzzle positions, impacts and health bars
+            // retain exactly the same spatial relationships and timestamps.
+            if (FrameRecording) center.x = -center.x;
+            pen.CopyUiBatchTo(target, rect.center - center * scale, scale, batchIndex, FrameRecording);
         }
         float DrawingScale(Rect rect)
         {

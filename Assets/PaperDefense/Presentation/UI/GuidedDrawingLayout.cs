@@ -323,10 +323,9 @@ namespace PaperDefense.Presentation
         }
     }
 
-    public sealed class DrawingStencilBoxGraphic : MaskableGraphic
+    public sealed class DrawingStencilBoxGraphic : NotebookAtlasGraphic
     {
         readonly MeshPen pen=new MeshPen(null,512);
-        public override Texture mainTexture=>NotebookSpriteCatalog.Texture;
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear();pen.Clear();
@@ -347,13 +346,12 @@ namespace PaperDefense.Presentation
         {for(int i=1;i<points.Length;i++)pen.Line(new Vector2(points[i-1].x,24-points[i-1].y),new Vector2(points[i].x,24-points[i].y),.85f,ink);}
     }
 
-    public sealed class DrawingPaperGridGraphic : MaskableGraphic
+    public sealed class DrawingPaperGridGraphic : NotebookAtlasGraphic
     {
         public DrawingCanvasGraphic Drawing;
         Vector2 lastPan;
         float lastZoom;
         readonly MeshPen pen=new MeshPen(null,2048);
-        public override Texture mainTexture=>NotebookSpriteCatalog.Texture;
         void LateUpdate()
         {
             if(Drawing==null||(lastPan==Drawing.Pan&&lastZoom==Drawing.Zoom))return;

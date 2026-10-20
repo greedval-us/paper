@@ -24,6 +24,7 @@ namespace PaperDefense.Tests
         [TestCase("layout_dimension")]
         [TestCase("layout_overlap")]
         [TestCase("layout_missing_white")]
+        [TestCase("layout_height")]
         public void MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(string mutation)
         {
             string originalSource = File.ReadAllText(NotebookSpriteImportTools.AssemblyPath);
@@ -47,6 +48,7 @@ namespace PaperDefense.Tests
                     case "layout_id": rectangles[0]["id"] = "unregistered.sprite"; break;
                     case "layout_dimension": rectangles[0]["width"] = (int)rectangles[0]["width"] + 1; break;
                     case "layout_overlap": rectangles[1]["x"] = rectangles[0]["x"].DeepClone(); rectangles[1]["y"] = rectangles[0]["y"].DeepClone(); break;
+                    case "layout_height": layout["height"] = 4353; break;
                     default: rectangles.RemoveAt(rectangles.Count - 1); break;
                 }
             }

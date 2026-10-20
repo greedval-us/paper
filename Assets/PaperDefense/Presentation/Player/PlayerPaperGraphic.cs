@@ -10,16 +10,15 @@ namespace PaperDefense.Presentation
             vh.Clear(); var pen = new MeshPen(null, 4096); var r = rectTransform.rect;
             if (r.width <= 0 || r.height <= 0) return;
             Color grid = PlayerUi.Grid;
-            for (float x = r.xMin; x < r.xMax; x += 28) pen.Line(new Vector2(x, r.yMin), new Vector2(x, r.yMax), .7f, grid);
-            for (float y = r.yMin; y < r.yMax; y += 28) pen.Line(new Vector2(r.xMin, y), new Vector2(r.xMax, y), .7f, grid);
+            for (float x = r.xMin; x < r.xMax; x += 20) pen.Line(new Vector2(x, r.yMin), new Vector2(x, r.yMax), .7f, grid);
+            for (float y = r.yMin; y < r.yMax; y += 20) pen.Line(new Vector2(r.xMin, y), new Vector2(r.xMax, y), .7f, grid);
             pen.CopyTo(vh, Vector2.zero, 1);
         }
     }
 
     /// <summary>Notebook decoration is geometry around the live page, never a baked UI screenshot.</summary>
-    public sealed class NotebookBindingGraphic : MaskableGraphic
+    public sealed class NotebookBindingGraphic : NotebookAtlasGraphic
     {
-        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         protected override void OnPopulateMesh(VertexHelper target)
         {
             target.Clear(); var pen = new MeshPen(null, 4096); Rect r = rectTransform.rect;
@@ -40,9 +39,8 @@ namespace PaperDefense.Presentation
         }
     }
 
-    public sealed class NotebookOpenBookGraphic : MaskableGraphic
+    public sealed class NotebookOpenBookGraphic : NotebookAtlasGraphic
     {
-        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         protected override void OnPopulateMesh(VertexHelper target)
         {
             target.Clear(); var pen = new MeshPen(null, 2048); Rect r = rectTransform.rect;

@@ -6,6 +6,36 @@ namespace PaperDefense.Core
 {
     public static class AssemblyResolver
     {
+        /// <summary>The five selected foundation parts use the same cost fold and material rounding as a complete tower.</summary>
+        public static int FoundationCost(FoundationRecipe foundation, ComponentCatalog catalog, GameBalance balance, MaterialTier material)
+        {
+            if (foundation == null) throw new ArgumentNullException(nameof(foundation));
+            return ComponentCost(foundation.Parts, ComponentCategory.Frame, catalog, balance, material);
+        }
+
+        /// <summary>The selected five weapon parts are quoted independently, using the authoritative cost fold.</summary>
+        public static int WeaponCost(WeaponRecipe weapon, ComponentCatalog catalog, GameBalance balance, MaterialTier material)
+        {
+            if (weapon == null) throw new ArgumentNullException(nameof(weapon));
+            return ComponentCost(weapon.Parts, ComponentCategory.Mechanism, catalog, balance, material);
+        }
+
+        static int ComponentCost(IEnumerable<PartRef> references, ComponentCategory firstCategory, ComponentCatalog catalog, GameBalance balance, MaterialTier material)
+        {
+            if (catalog == null) throw new ArgumentNullException(nameof(catalog));
+            if (balance == null) throw new ArgumentNullException(nameof(balance));
+            AssemblyValidation.ValidateBalance(balance, material);
+            int category = (int)firstCategory;
+            foreach (var reference in references)
+            {
+                if (!catalog.TryGet(reference.Id, reference.Revision, out var part))
+                    throw AssemblyCatalogException.At("assembly.part.missing", "component.parts[" + category + "]");
+                if (part.Category != (ComponentCategory)category++)
+                    throw new ArgumentException("A component part uses the wrong category.", nameof(references));
+            }
+            return Cost(Parts(references, catalog), balance.Material(material).CostMultiplier);
+        }
+
         /// <summary>Display-only numbers retain the real load limit when a recipe is overloaded.</summary>
         public static AssemblyPreviewMetrics PreviewMetrics(AssemblyRecipe recipe, ComponentCatalog catalog, GameBalance balance, MaterialTier material)
         {

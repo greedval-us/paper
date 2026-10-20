@@ -855,9 +855,8 @@ namespace PaperDefense.Presentation
 
     /// <summary>A live hand-drawn diagram, including both weapon mounts and armor plates.</summary>
     [RequireComponent(typeof(CanvasRenderer))]
-    public sealed class BlueprintSketch : MaskableGraphic
+    public sealed class BlueprintSketch : NotebookAtlasGraphic
     {
-        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         TowerBlueprint blueprint;
         NotebookAnimationState previewAnimation;
         Func<int, Point2> previewAim;
@@ -916,9 +915,8 @@ namespace PaperDefense.Presentation
     }
 
     [RequireComponent(typeof(CanvasRenderer))]
-    public sealed class WorkshopMapSketch : MaskableGraphic
+    public sealed class WorkshopMapSketch : NotebookAtlasGraphic
     {
-        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         IRunReadModel session;
         public void SetSession(IRunReadModel value) { if (session == value) return; session = value; SetVerticesDirty(); }
         protected override void OnPopulateMesh(VertexHelper vh)

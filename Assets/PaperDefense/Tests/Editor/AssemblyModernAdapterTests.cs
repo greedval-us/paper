@@ -38,11 +38,13 @@ namespace PaperDefense.Tests
                     Vector2 origin = new Vector2(tower.Cell.X + .5f, tower.Cell.Y + .5f);
                     float seconds = (float)playback.Seconds;
                     var rest = AssemblyVisualComposer.Compose(tower.ResolvedEntry.Snapshot, new AssemblyVisualPose());
+                    var idlePose = AssemblyPreviewPose.For(tower.ResolvedEntry.Snapshot);
                     var poses = rest.Anchors.Select(anchor => {
                         var target = tower.GetMountAim(anchor.SlotIndex);
                         Vector2 direction = new Vector2(target.X, target.Y) - NotebookAssemblyView.Point(origin, anchor.RotationCenter, tower.ResolvedEntry.Snapshot);
-                        float radians = target.X == 0 && target.Y == 0 || direction.sqrMagnitude < .000001f
-                            ? 0 : Mathf.Atan2(direction.y, direction.x) - Mathf.PI * .5f;
+                        float radians = target.X == 0 && target.Y == 0
+                            ? idlePose.Mounts.Single(pose => pose.SlotIndex == anchor.SlotIndex).Radians
+                            : direction.sqrMagnitude < .000001f ? 0 : Mathf.Atan2(direction.y, direction.x) - Mathf.PI * .5f;
                         radians = Mathf.Atan2(Mathf.Sin(radians), Mathf.Cos(radians));
                         var mechanism = tower.ResolvedEntry.Snapshot.Recipe.Tower.Mounts.Single(mount => mount.SlotIndex == anchor.SlotIndex).Weapon.Mechanism;
                         Assert.That(AssemblyVisualComposer.Fits.TryGetWeapon(mechanism.Id, mechanism.Revision, out var fit), Is.True);
@@ -50,7 +52,10 @@ namespace PaperDefense.Tests
                         return new AssemblyMountPose(anchor.SlotIndex, Mathf.Clamp(radians, fit.MinRadians, fit.MaxRadians),
                             Mathf.Clamp(recoil, -fit.RecoilLimit, 0));
                     }).ToArray();
-                    observedAim |= poses.Any(pose => Mathf.Abs(pose.Radians) > .001f);
+                    observedAim |= poses.Any(pose => {
+                        var target = tower.GetMountAim(pose.SlotIndex);
+                        return (target.X != 0 || target.Y != 0) && Mathf.Abs(pose.Radians) > .001f;
+                    });
                     observedRecoil |= poses.Any(pose => pose.Recoil < -.001f);
                     observedRest |= poses.All(pose => Mathf.Abs(pose.Recoil) < .000001f);
                     var expected = AssemblyVisualComposer.Compose(tower.ResolvedEntry.Snapshot, new AssemblyVisualPose(poses));

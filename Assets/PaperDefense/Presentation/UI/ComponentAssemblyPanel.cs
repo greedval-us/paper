@@ -36,18 +36,22 @@ namespace PaperDefense.Presentation
         public void Refresh()
         {
             WorkshopUi.ClearViews(tabs);
-            WorkshopUi.Place(tabs, new Rect(0, 0, width, 54));
+            WorkshopUi.Place(tabs, new Rect(0, 0, width, 48));
             int count = draft.Categories.Count;
             float tabWidth = (width - Mathf.Max(0, count - 1) * 8) / Mathf.Max(1, count);
             for (int i = 0; i < count; i++)
             {
                 var category = draft.Categories[i];
-                var button = ui.Button(tabs, "Component category " + category, new Rect(i * (tabWidth + 8), 0, tabWidth, 50),
-                    UserText.Message("assembly.component.category." + category), () => { draft.SelectCategory(category); Refresh(); });
+                var icon = category == ComponentCategory.Head ? WorkshopIcon.Weapon : category == ComponentCategory.Sight ? WorkshopIcon.Target
+                    : category == ComponentCategory.Armor || category == ComponentCategory.Shell ? WorkshopIcon.Shield
+                    : category == ComponentCategory.Frame || category == ComponentCategory.Site ? WorkshopIcon.Rectangle
+                    : category == ComponentCategory.Hull ? WorkshopIcon.Tower : category == ComponentCategory.Magazine || category == ComponentCategory.Feed ? WorkshopIcon.Ink : WorkshopIcon.Settings;
+                var button = ui.Button(tabs, "Component category " + category, new Rect(i * (tabWidth + 8), 0, tabWidth, 46),
+                    UserText.Message("assembly.component.category." + category), () => { draft.SelectCategory(category); Refresh(); }, icon);
                 ui.SetSelected(button, draft.ActiveCategory == category);
             }
-            WorkshopUi.Place(Catalog.Root, new Rect(0, 66, width, height - 66));
-            Catalog.Reflow(width, height - 66);
+            WorkshopUi.Place(Catalog.Root, new Rect(0, 56, width, height - 56));
+            Catalog.Reflow(width, height - 56);
         }
     }
 }

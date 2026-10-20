@@ -44,32 +44,32 @@ namespace PaperDefense.Presentation
             var info = ui.Panel(page, "Mission information", new Rect(fieldWidth, top, side, H - top), PlayerUi.Card);
             float prepareHeight = Mathf.Max(76 * s, 56 / Layout.Scale);
             float contentHeight = H - top - prepareHeight - 30 * s;
-            bool compact = contentHeight < (assembly ? 748 : 690) * s;
+            float detailScale = Mathf.Min(s, contentHeight / (assembly ? 708 : 652));
             var content = ui.Panel(info, "Mission details", new Rect(12 * s, 0, side - 24 * s, contentHeight), Color.clear);
             float width = side - 38 * s;
-            NotebookLabel(content, ui.T("mission"), new Rect(6 * s, 8 * s, width - 12 * s, (compact ? 50 : 58) * s), Mathf.RoundToInt((compact ? 35 : 40) * s), alignment: TextAnchor.MiddleCenter);
-            float y = (compact ? 62 : 78) * s;
-            if (!compact) { NotebookMissionArt(content, 0, new Rect(28 * s, y, width - 56 * s, 158 * s)); y += 168 * s; }
-            float row = (compact ? 48 : 58) * s;
-            MissionMetric(content, "Mission waves", PlayerIcon.Target, session.Balance.Waves.Count + " волн", y, width, s, row - 4 * s); y += row;
-            MissionMetric(content, "Mission castle health", PlayerIcon.Heart, "Замок " + session.Balance.BaseHealth, y, width, s, row - 4 * s); y += row;
-            MissionMetric(content, "Mission starting ink", PlayerIcon.Pencil, "Старт " + session.Balance.StartingInk + " штрихов", y, width, s, row - 4 * s); y += row;
+            NotebookLabel(content, ui.T("mission"), new Rect(6 * s, 8 * detailScale, width - 12 * s, 50 * detailScale), Mathf.RoundToInt(40 * detailScale), alignment: TextAnchor.MiddleCenter);
+            float y = 62 * detailScale;
+            NotebookMissionArt(content, 0, new Rect(28 * s, y, width - 56 * s, 172 * detailScale)); y += 182 * detailScale;
+            float row = 56 * detailScale;
+            MissionMetric(content, "Mission waves", PlayerIcon.Target, session.Balance.Waves.Count + " волн", y, width, detailScale, row - 4 * detailScale); y += row;
+            MissionMetric(content, "Mission castle health", PlayerIcon.Heart, "Замок " + session.Balance.BaseHealth, y, width, detailScale, row - 4 * detailScale); y += row;
+            MissionMetric(content, "Mission starting ink", PlayerIcon.Pencil, "Старт " + session.Balance.StartingInk + " штрихов", y, width, detailScale, row - 4 * detailScale); y += row;
             if (assembly)
             {
                 string count = GameText.Resolve(UserText.Message("assembly.player.map_loadout", game.Run.Workshop.LoadoutEntries.Count(entry => entry != null)));
-                MissionMetric(content, "Mission album loadout", PlayerIcon.Book, count, y, width, s, row - 4 * s); y += row;
+                MissionMetric(content, "Mission album loadout", PlayerIcon.Book, count, y, width, detailScale, row - 4 * detailScale); y += row;
             }
-            y += (compact ? 8 : 18) * s;
-            NotebookLabel(content, "Защити замок. Строй на свободной земле.", new Rect(10 * s, y, width - 20 * s, (compact ? 48 : 70) * s), Mathf.RoundToInt((compact ? 25 : 28) * s), alignment: TextAnchor.MiddleCenter);
-            y += (compact ? 56 : 86) * s;
-            NotebookLabel(content, "Чернильницы", new Rect(0, y, width, (compact ? 26 : 34) * s), Mathf.RoundToInt(27 * s), alignment: TextAnchor.MiddleCenter);
-            y += (compact ? 32 : 42) * s;
+            y += 10 * detailScale;
+            NotebookLabel(content, "Защити замок. Строй на свободной земле.", new Rect(10 * s, y, width - 20 * s, 62 * detailScale), Mathf.RoundToInt(27 * detailScale), alignment: TextAnchor.MiddleCenter);
+            y += 74 * detailScale;
+            NotebookLabel(content, "Чернильницы", new Rect(0, y, width, 34 * detailScale), Mathf.RoundToInt(27 * detailScale), alignment: TextAnchor.MiddleCenter);
+            y += 40 * detailScale;
             string[] colors = { "Красная", "Синяя", "Зелёная" };
             for (int i = 0; i < 3; i++)
             {
                 float cell = width / 3;
-                NotebookMissionArt(content, i + 1, new Rect(i * cell + 14 * s, y, cell - 28 * s, (compact ? 64 : 82) * s));
-                NotebookLabel(content, colors[i], new Rect(i * cell, y + (compact ? 68 : 88) * s, cell, (compact ? 24 : 30) * s), Mathf.RoundToInt(20 * s), alignment: TextAnchor.MiddleCenter);
+                NotebookMissionArt(content, i + 1, new Rect(i * cell + 14 * s, y, cell - 28 * s, 82 * detailScale));
+                NotebookLabel(content, colors[i], new Rect(i * cell, y + 88 * detailScale, cell, 28 * detailScale), Mathf.RoundToInt(20 * detailScale), alignment: TextAnchor.MiddleCenter);
             }
             var prepare = NotebookAction(info, "Prepare mission", new Rect(16 * s, H - top - 20 * s - prepareHeight, side - 32 * s, prepareHeight), PlayerIcon.Pencil,
                 "Подготовить оборону", () => game.Navigate(PlayerPage.Preparation), true);

@@ -90,6 +90,24 @@ namespace PaperDefense.Tests
             Assert.That(fixture.Store.SaveCalls, Is.EqualTo(writes));
         }
 
+        [TestCase(true)] [TestCase(false)]
+        public void BlotsReportKeepsAllSixMeasurementRowsVisibleAt720p(bool comparing)
+        {
+            Open(fixture.Gun()); Click("Composite trial scenario Blots");
+            if (!comparing)
+                for (int i = 0; i < 20 && Text("Composite trial comparison measured result") != null; i++)
+                    Click("Composite trial compare");
+            Assert.That(Text("Composite trial comparison measured result") != null, Is.EqualTo(comparing));
+            Click("Composite trial run");
+            foreach (var label in panel.Root.GetComponentsInChildren<Text>().Where(value =>
+                value.name == "Composite trial measured result" || value.name == "Composite trial comparison measured result"))
+            {
+                Assert.That(label.text.Split('\n').Length, Is.EqualTo(6));
+                Assert.That(label.cachedTextGenerator.characterCountVisible, Is.EqualTo(label.text.Length),
+                    label.name + ": the report must render its final measurement, including duration.");
+            }
+        }
+
         [Test] public void OpeningTrialDoesNotInventMeasuredResultsOrStartSimulation()
         {
             Open(fixture.Gun());
