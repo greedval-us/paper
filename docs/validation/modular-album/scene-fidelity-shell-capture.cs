@@ -91,6 +91,17 @@ foreach (var scenario in new[] { "battle", "victory", "defeat", "pending" })
             clearHints();
             UnityEngine.Canvas.ForceUpdateCanvases();
             paths.Add(PaperDefense.Editor.PlayerVisualCapture.Capture("fidelity-" + name + "-" + size.x + "x" + size.y, size.x, size.y, "docs/validation/modular-album/fidelity-screenshots"));
+            if (name == "23-help")
+            {
+                var keys = owner.GetComponentsInChildren<UnityEngine.UI.Text>(true)
+                    .Where(text => text.transform.parent.name.StartsWith("Help key ")).ToArray();
+                if (keys.Length != 12) throw new System.InvalidOperationException("Help must show all 12 real key bindings.");
+                foreach (var key in keys)
+                    if (key.cachedTextGenerator.characterCountVisible < key.text.Length)
+                        throw new System.InvalidOperationException("Help key clips at " + size.x + "x" + size.y + ": " + key.text);
+                System.IO.File.AppendAllText("docs/validation/modular-album/fidelity-help-key-proof.txt",
+                    size.x + "x" + size.y + ": 12/12 complete key labels, including Space/Esc; catalog " + PaperDefense.Presentation.AssemblyVisualComposer.Revision + "\n");
+            }
         };
         System.Action<string> click = name => owner.GetComponentsInChildren<UnityEngine.UI.Button>().Single(b => b.name == name).onClick.Invoke();
         if (scenario == "battle")

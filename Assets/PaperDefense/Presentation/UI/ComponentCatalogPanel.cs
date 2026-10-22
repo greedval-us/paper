@@ -415,11 +415,21 @@ namespace PaperDefense.Presentation
             float w = parentRect != null && parentRect.rect.width > 0 ? parentRect.rect.width : 1600;
             float h = parentRect != null && parentRect.rect.height > 0 ? parentRect.rect.height : 1000;
             var shade = ui.Panel(parent, "Component purchase overlay", new Rect(0, 0, w, h), new Color(.08f, .15f, .25f, .45f), true); purchase = shade.gameObject;
-            float cw = Mathf.Min(720, w - 40), ch = Mathf.Min(460, h - 40);
+            float cw = Mathf.Min(620, w - 40), ch = Mathf.Min(650, h - 40);
             var card = ui.Panel(shade, "Component purchase sheet", new Rect((w - cw) * .5f, (h - ch) * .5f, cw, ch), WorkshopUi.Paper, true);
             ui.Label(card, "Component purchase title", Copy("purchase_title", part.Name), new Rect(24, 16, cw - 48, 74), 30, true);
+            var reference = new PartRef(part.Id, part.Revision);
+            var drawing = AssemblyVisualComposer.ComposePart(reference);
+            float illustrationHeight = Mathf.Clamp(ch * .3f, 96, 190);
+            bool slender = drawing.Bounds.height > drawing.Bounds.width * 3;
+            float illustrationSize = illustrationHeight * (slender ? 1.5f : 1);
+            var illustration = WorkshopUi.Graphic<WeaponAssemblyGraphic>(card, "Component purchase illustration", new Rect(0, 0, illustrationSize, illustrationSize));
+            illustration.SetPart(reference);
+            illustration.rectTransform.pivot = new Vector2(.5f, .5f);
+            illustration.rectTransform.anchoredPosition = new Vector2(cw * .5f, -100 - illustrationHeight * .5f);
+            if (slender) illustration.rectTransform.localRotation = Quaternion.Euler(0, 0, -65);
             ui.Label(card, "Component purchase conditions", Copy("purchase_message", part.RequiredLevel, run.Workshop.Level, part.UnlockGold, run.Workshop.Gold, run.Workshop.Gold - part.UnlockGold),
-                new Rect(24, 106, cw - 48, ch - 190), 22);
+                new Rect(24, 112 + illustrationHeight, cw - 48, ch - illustrationHeight - 204), 22);
             ui.Button(card, "Component purchase cancel", new Rect(24, ch - 72, (cw - 60) * .5f, 48), Copy("cancel"), ClosePurchase, WorkshopIcon.Back);
             var confirm = ui.Button(card, "Component purchase confirm", new Rect(36 + (cw - 60) * .5f, ch - 72, (cw - 60) * .5f, 48), Copy("purchase", part.UnlockGold), () => {
                 draft.PurchasePart(part.Id, Guid.NewGuid()); ClosePurchase(); revealInspected = true; Refresh(); changed?.Invoke();

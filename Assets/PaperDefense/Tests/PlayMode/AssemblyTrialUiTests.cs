@@ -108,6 +108,38 @@ namespace PaperDefense.Tests
             }
         }
 
+        [Test] public void FocusedTrialOmitsWholeRemoteCopyInsteadOfShowingItsClippedEdge()
+        {
+            var entry = fixture.Catalog.Starters.First(value => value.Kind == AlbumEntryKind.Tower && value.Snapshot.Recipe.Tower.Mounts.Count == 2);
+            Open(entry); Click("Composite trial run");
+            var lane = Lane; lane.PlaybackPaused = true;
+            var frame = lane.Playback.Report.Frames[lane.Playback.FrameIndex];
+            var actualPen = new MeshPen(null);
+            NotebookTrialRenderer.Draw(actualPen, lane.Playback, lane.ViewBounds);
+            var actual = new System.Collections.Generic.List<UIVertex>();
+            using (var mesh = new VertexHelper())
+            { actualPen.CopyTo(mesh, Vector2.zero, 1); mesh.GetUIVertexStream(actual); }
+            int partialCopies = 0;
+            foreach (var tower in frame.Towers.Where(value => value.Health > 0 && value.ResolvedEntry?.Snapshot != null))
+            {
+                var bounds = NotebookAssemblyView.Bounds(Center(tower), tower.ResolvedEntry.Snapshot);
+                var view = lane.ViewBounds;
+                if (!view.Overlaps(bounds) || bounds.xMin >= view.xMin && bounds.xMax <= view.xMax && bounds.yMin >= view.yMin && bounds.yMax <= view.yMax) continue;
+                partialCopies++;
+                var body = new MeshPen(null);
+                DoodleGlyphs.StructureBase(body, tower, NotebookVisualThemeAsset.Default);
+                DoodleGlyphs.StructureDynamic(body, tower, 1, (float)lane.Playback.Seconds, lane.Playback.Animation, NotebookVisualThemeAsset.Default);
+                var bodyVertices = new System.Collections.Generic.List<UIVertex>();
+                using (var mesh = new VertexHelper())
+                { body.CopyTo(mesh, Vector2.zero, 1); mesh.GetUIVertexStream(bodyVertices); }
+                Assert.That(bodyVertices, Is.Not.Empty);
+                var sample = bodyVertices[0];
+                Assert.That(actual.Any(value => (value.position - sample.position).sqrMagnitude < .000001f && value.uv0 == sample.uv0 && value.color.Equals(sample.color)), Is.False,
+                    "A remote copy outside the combat camera must not leave half a foundation on its edge; the overview retains every real copy.");
+            }
+            Assert.That(partialCopies, Is.GreaterThan(0), "This actual double-gun report must exercise a copy across the focus boundary.");
+        }
+
         [Test] public void OpeningTrialDoesNotInventMeasuredResultsOrStartSimulation()
         {
             Open(fixture.Gun());

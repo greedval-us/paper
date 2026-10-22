@@ -1,0 +1,1294 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-10-22",
+  "reviewer": "/root/battle_final13",
+  "artRevision": "modular-full-catalog-2026-10-22-v7",
+  "scope": "9 canonical states × 5 sizes plus 9 extra states × 5 sizes",
+  "verdict": "PASS_WITH_RESIDUALS",
+  "inspectionMethod": "Every listed final PNG was individually opened with view_image and visually inspected; ten source sketch PNGs were also opened. Existence/hash/revision checks supplement, and do not replace, visual inspection.",
+  "inspectionCount": {
+    "canonicalStates": 9,
+    "extraStates": 9,
+    "sizesPerState": 5,
+    "uniqueFinalPngs": 90,
+    "sourceSketches": 10,
+    "pngViewEvents": 95,
+    "correctedPngReinspections": 5
+  },
+  "priorities": {
+    "P1": 0,
+    "P2": 1,
+    "P3": "Recorded as residuals without blocking legibility, family identity, action visibility or assembly contact.",
+    "unresolvedP2": 0
+  },
+  "globalObservations": [
+    "All five aspect/size variants show complete interactive action labels with no destructive overlap. At 1024×768 the battle header wraps to two rows and longer build-card names wrap.",
+    "The lowered square slab has continuous floor contact with the weapon turn units. Single, double, long piercer and upward mortar silhouettes remain distinguishable at minimum size.",
+    "Dense blue hatching on small tower art and slab edges becomes stippled at 1024×768 and 1280×720. This is a P3 material-density residual, not a P2 loss of family identity. No sampling across atlas crop boundaries is recommended.",
+    "Actual simulation wave numbers, resources, enemies, target direction and effects intentionally differ from the illustrated source. Runtime values were not replaced with source screenshot values.",
+    "These are functional visual-acceptance verdicts with explicit fidelity residuals, not claims of pixel-exact scene recreation."
+  ],
+  "findings": [
+    {
+      "id": "BATTLE13-P2-25-HERO",
+      "priority": "P2",
+      "state": "25-purchase",
+      "status": "FIXED_AND_VISUALLY_VERIFIED_ALL_FIVE_SIZES",
+      "sizes": [
+        "1024x768",
+        "1280x720",
+        "1280x960",
+        "1600x900",
+        "1920x1080"
+      ],
+      "observation": "Source25 gives the long barrel a large central illustration between the title and cost rows. The final purchase modal omits that illustration and leaves the upper half blank in all five sizes.",
+      "requestedCorrection": "Reuse the actual selected-part illustration in the modal's existing empty upper space; retain exact cost, balance, remaining-gold text and current confirmation flow.",
+      "reportedToRoot": true,
+      "resolution": "Fresh corrected25 images were individually reopened after root published them: actual selected head.long art now appears between the title and quote, and all price/balance/remainder/action labels remain visible without overlap at every size."
+    }
+  ],
+  "states": [
+    {
+      "id": "15-planning",
+      "canonical": true,
+      "source": "15-planning.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Central castle, surrounding four tower placements and four functional structures are separated and readable; mountains and forest islands frame the cleared central area.",
+        "All eight build cards, prices, material selection, ink quantities, wave-start and overview actions remain visible at all five sizes."
+      ],
+      "residuals": [
+        "Compared with source15, tower slabs are broad low squares with a visible unused second seat, and the single/mortar weapons read smaller relative to the castle.",
+        "The planning instruction is a lower-left rectangular callout rather than the source's central ribbon; resource bottles are represented by HUD quantities in the focused composition.",
+        "At 1024 the top HUD wraps to two rows; lower action controls use compact icons."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-15-planning-1024x768.png",
+          "sha256": "1a30ba2e42290cc55dcc2272268666f22fd3321354947f8ebcb59838eaccce0a",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6148,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-15-planning-1280x720.png",
+          "sha256": "50326a5a69891279d77abc42d12f98e471f6c8d8c18a0f821b6639c6b3563547",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10772,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-15-planning-1280x960.png",
+          "sha256": "83aecc0a67339b4a166254927c84296010b660b4a37dd365472ec1c01d66d6ad",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10814,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-15-planning-1600x900.png",
+          "sha256": "1c13ada9b1fe0039159ec73131330ef99b2b6d34a428af86f26bb78f7c18d535",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10837,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-15-planning-1920x1080.png",
+          "sha256": "1ebed044fed805624308e2b69f2539ccc5c3cae598c9b240891152fa016726d1",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10794,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "16-battle",
+      "canonical": true,
+      "source": "16-battle.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Live aim directions, enemy health strips, hit splat and approach counts coexist with the castle and defense group without UI overlap.",
+        "Gun, double gun, piercer, mortar, barricade, slow device, repair and generator retain distinct shapes in both the battlefield and build cards."
+      ],
+      "residuals": [
+        "Early-wave fixture is much sparser than source16's late-wave crowd and large boss group; values and actors are actual simulation state.",
+        "Blue slab hatching is stippled at short heights; long range/trajectory line is runtime geometry.",
+        "Enemy sprites crossing the world viewport edge can be partially outside the view; this is world framing rather than clipped UI."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/16-battle.png",
+      "sourceSha256": "bfafea38bdade0cc00e1a83467dbe63bb9e4326cd0c5bc848c9792e660bf1bb7",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-16-battle-1024x768.png",
+          "sha256": "c0ecb83a5bad09e83e3cf7e5973f20966b4674a8db174f033ccf2657ce30d5df",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6148,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-16-battle-1280x720.png",
+          "sha256": "bd6ff5098fa69b88dfc790af922c3ed5214d439fc79f1e2d1ce1b720e6536b3a",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10772,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-16-battle-1280x960.png",
+          "sha256": "2da920bc7ffcb3cb911d828bb29643d0a197e948d1db5618b0bb500e1e64c15b",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10814,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-16-battle-1600x900.png",
+          "sha256": "c8240065211cb14f93d7ec9773a53cf1aa195bd94f02f4269c67bd1c1c81b53a",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10837,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-16-battle-1920x1080.png",
+          "sha256": "8c4496ba93b2deffe4a1cd27abd89e51687c7e797a6b294b1faf8f2f502f4c8d",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10794,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "17-tower",
+      "canonical": true,
+      "source": "17-tower.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Right paper inspector has a complete double-weapon assembly illustration, durability/material/price/load/weapon-cycle rows, close action and three unobscured priority choices.",
+        "Mounted turn units touch the shallow slab and both barrels are separate; no detached or missing fragment is visible."
+      ],
+      "residuals": [
+        "The modern inspector shows more runtime cycle data than source17's five-row design, using a visible scroll area. At 1024×768/1280×720 the lowest second-weapon range row is available through scrolling.",
+        "The source's illustrated icons/HP bar and radius highlight are replaced by textual runtime rows; controls remain readable."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-17-tower-1024x768.png",
+          "sha256": "a4ce1bc181f87045fb17b67ddb7f599e8757386e1be5c032289895b663dc7b21",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6148,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-17-tower-1280x720.png",
+          "sha256": "4c1c5be0c5f48bf5e6650750087014fa1e5cbd394230c6bb33a04b54c479bb86",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10772,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-17-tower-1280x960.png",
+          "sha256": "2fa1550d3ccb220f8afc42bcfffe02ec44ad23319f40ce8af4e596f3b6520d89",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10814,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-17-tower-1600x900.png",
+          "sha256": "c96c3bb1fdf954b7e22210375fb1b3e1d87137c2ded48603e7b92dd6774a5be9",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10837,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-17-tower-1920x1080.png",
+          "sha256": "1309451e6f129110e9543b56dd0f33a1635fea28a34566fe97b11eb94555e6e6",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10794,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "18-pause",
+      "canonical": true,
+      "source": "18-pause.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Centered paper modal, dimmed background, blue primary Continue button, Settings/Restart/Map actions and Esc hint are all visible in each size.",
+        "Text does not collide with the modal edge or buttons; underlay is consistently dimmed."
+      ],
+      "residuals": [
+        "Current modal is wider with left-aligned title/actions and a short explanatory sentence; source18 has a smaller icon-led centered layout.",
+        "Action icons are smaller and simpler than the illustrated source."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/18-pause.png",
+      "sourceSha256": "a37b1ec4059c5abdf37ef6f5695ecc549360bac90f383fc1f6b1ae3917695bc3",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-18-pause-1024x768.png",
+          "sha256": "159563eef8a6d32a81617f808fa35138512718f82245faa7cf62634bea5d0b3c",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6148,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-18-pause-1280x720.png",
+          "sha256": "a41499cbf71073d58d54929eb0de2e7646a8b6f55f7321046b9d732c6d7e1e31",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10772,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-18-pause-1280x960.png",
+          "sha256": "6499b5b8135c11768c3429b313b3885a81d39f6cbb603f93e62e2dba0d2d8b55",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10814,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-18-pause-1600x900.png",
+          "sha256": "97fec838502220d57757a70ef3f164fdaafde4af88940687a85e669b3d5b6c5b",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10837,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-18-pause-1920x1080.png",
+          "sha256": "d3168ded26bdd42666afd20b80567c49ddb5d02e9d749565f8bcd490c673b4f3",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10794,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "19-upgrades",
+      "canonical": true,
+      "source": "19-upgrades.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "All three upgrade cards show their own title, identifying art, full modifier text and Choose action at all five sizes.",
+        "Long middle title wraps to two lines without touching the illustration; generator exception footer is completely visible."
+      ],
+      "residuals": [
+        "Title and subtitle wording differ from source19 and the panel has a larger enclosing paper border.",
+        "Return-resources card uses a simple blue pencil glyph instead of the source's detailed pencil-and-shavings illustration; meaning and actual three bonuses remain clear."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades-1024x768.png",
+          "sha256": "1d5bc19b13fe73a70c1bcfd0d368e86050718bc5d24184cdb81aad0e20a0789b",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6148,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades-1280x720.png",
+          "sha256": "c4bf91da7f342bc60b370d46466c5c3dbd04fb7652e9b8390236ff19c0d33135",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10772,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades-1280x960.png",
+          "sha256": "40eeb8dd26280a11611c11201c2f6dc7beb705ec56408ea1440cb6ffbcf4e2ec",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10814,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades-1600x900.png",
+          "sha256": "8c4e2bc1d1ba5d7d35a39059ca9808c16c4a4794a1454af9a7b0a03fbcb5cd25",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10837,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades-1920x1080.png",
+          "sha256": "0f85a43fe1cd57401b07870a84bb9b02665fba4211f7291929b55c00ef106129",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10794,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "25-purchase",
+      "canonical": true,
+      "source": "25-purchase.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Actual long-barrel name, required/current level, price80, balance94, remainder14, one-time-purchase notice and both actions are readable in all sizes.",
+        "Purchase confirmation is correctly separated visually from dimmed catalog content.",
+        "Reinspection after correction: actual selected long-barrel illustration now occupies the modal upper center, restoring the primary image hierarchy from source25; no blank hero area remains."
+      ],
+      "residuals": [
+        "P2 BATTLE13-P2-25-HERO is fixed and rechecked in all five fresh images. The actual selected modular head.long nib-barrel image replaces the earlier source25 smooth cylindrical barrel illustration; current gold/level values and one-time-purchase flow stay real.",
+        "Modal quote uses compact plain text rather than the source25 framed currency table and separate green requirement check; all financial values are legible."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/25-purchase.png",
+      "sourceSha256": "05b7ab824ddcc1ac63d718b871bd4907e2192a7aac3aaf985d9eb6064fb332b4",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-25-purchase-1024x768.png",
+          "sha256": "860df7bda7901140162f59ea61d3140d043f761d06642c79b3087bedcc3775a1",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 240294,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-25-purchase-1280x720.png",
+          "sha256": "020d3973626d8d7dedf4132e97886be378e5d4fa8aeb627c89feb27874ab9b1b",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 240560,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-25-purchase-1280x960.png",
+          "sha256": "e1ef0da6546380f9189b9a781f61da27c0122c7af11a5a283328fcaff1854ecd",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 242012,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-25-purchase-1600x900.png",
+          "sha256": "530c005d2b548be636e6ccce9c8cecd7177f620b9d41e976bb1fa5bec8ddb5be",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 242701,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-25-purchase-1920x1080.png",
+          "sha256": "3536c73ee0e3c34bacb720e85c8840ae073ed49b6b6cde4f095d53e48e75224f",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 241235,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "26-save-error",
+      "canonical": true,
+      "source": "26-save-error.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Actual double-gun draft remains visible; the amber warning explicitly says the draft stays open and asks to repeat saving.",
+        "Retry-save action is blue and readable, with Back, Save variant and Trial actions also fitting each viewport."
+      ],
+      "residuals": [
+        "Source26 uses a separate red torn-paper error dialog; current recovery remains inline in the right review panel with an amber warning strip.",
+        "Warning is less dominant than the source but is placed directly below the name field and above normal statistics; no illustrated full-screen error overlay is claimed."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-26-save-error-1024x768.png",
+          "sha256": "bca6bc7beeb59c3b528e92b0092e4e0804fd1332f87e58c6b501b9ded28cecc5",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-26-save-error-1280x720.png",
+          "sha256": "560b03fcf1540727a1d537ec0baeff709cca4257d776262da9cde4f806cf2cfc",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-26-save-error-1280x960.png",
+          "sha256": "f32a9128b6b50bd64d84db5c78c93c1bc7f0527f47bf58c2449467f7597677a6",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-26-save-error-1600x900.png",
+          "sha256": "7b77e4820a3d5f09f6ec44abcfc68fbc9484e24531eb1a87974bf1a749e954b2",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-26-save-error-1920x1080.png",
+          "sha256": "6420f5892d0bd56a1111cbb353cedae399313e9dc5739b8b6651ab9d7ab69c6d",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "27-invalid",
+      "canonical": true,
+      "source": "27-invalid.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Conflicting burst-trigger illustration is large and complete, diagnostic text has clear paper behind it, and Replace with standard magazine is legible in all sizes.",
+        "The final Save and select action is visibly disabled; catalog selection, installed marker and actual modifiers are visible."
+      ],
+      "residuals": [
+        "The current canonical invalid state is the selected-part diagnosis screen rather than source27's whole-assembly view with a red right sidebar.",
+        "Warning uses amber text and generic incompatibility wording; the repair action names the standard magazine."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/27-invalid.png",
+      "sourceSha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-27-invalid-1024x768.png",
+          "sha256": "7fa13529958c1b5057f4c3d7c5e1443ceead4e286b57c966f07bb890bd195267",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-27-invalid-1280x720.png",
+          "sha256": "fb941df1c2631598d52d2e2032f2a1013c98cce0ac2a25f4f325f9c1de8c2822",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-27-invalid-1280x960.png",
+          "sha256": "50be7886d24ac57823ae81341157897d05d1d8b52b9df13a71604aee838f1db8",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-27-invalid-1600x900.png",
+          "sha256": "fb7d6ef0a2fdd1cca220e88f591458b1612c2ce8682da5aa56595f38f62205eb",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-27-invalid-1920x1080.png",
+          "sha256": "fe5777a9ab46add5122e40c1d795c38b399f98af4712e76c99ebc9ee1542adde",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "28-leave",
+      "canonical": true,
+      "source": "28-leave.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Centered confirmation includes map symbol, question, complete two-line explanation about losing the active battle and keeping completed-wave rewards, Stay and Finish battle actions.",
+        "All modal text and both actions fit at all five sizes; front modal is clearly separated from dimmed battle UI."
+      ],
+      "residuals": [
+        "Source28's detailed folded route map is represented by a simple blue folded-map outline.",
+        "Current confirmation appears over the existing dimmed pause panel; its upper title/frame remains visible behind. Source28 shows only one dialog.",
+        "Primary blue emphasis is on Finish battle, whereas source28 emphasizes Stay; actual button labels are unambiguous."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/28-leave.png",
+      "sourceSha256": "d280c9dc11d916756a5ca6b695d2cf2020009df3085d6b55d41dd5dd09ece7b2",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-28-leave-1024x768.png",
+          "sha256": "44ad0a8da74d08b88913c4fad59c28b1b7f2f17ff3f140292bf38e2b6a454fb6",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6148,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-28-leave-1280x720.png",
+          "sha256": "9b1cea042f1ff836521ed9c16e4b9564a2dcd5e211b9bc3bf5d2ab3dbdad4c9c",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10772,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-28-leave-1280x960.png",
+          "sha256": "3c89d23fd121417d0e6272052058587e94941b80097596a68bb19d9370260e26",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10814,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-28-leave-1600x900.png",
+          "sha256": "f50c73886073fa1b39b1a46b275aec427e759d5984aa0835555663ca42ad3fc7",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10837,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-28-leave-1920x1080.png",
+          "sha256": "573807665c15f84eb0eb11bccd6c573d9ca26479bacb6b45bf353ece29ff4db0",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10794,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "15-overview",
+      "canonical": false,
+      "source": "15-planning.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Overview shows all four map-edge approach groups and resource nodes, centered castle group, world boundaries and Return to castle action in each size.",
+        "HUD, build cards and controls retain their size and remain readable while the world zooms out."
+      ],
+      "residuals": [
+        "Overview deliberately shows the real large map, so castle/towers are tiny. It is a navigation overview rather than the source's castle-focused illustration."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-15-overview-1024x768.png",
+          "sha256": "5c710df86646d7d8c4251ed8925fe64d0ce39ce7b95872df45f11a84ee4cb68a",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6148,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-15-overview-1280x720.png",
+          "sha256": "96b4503ab88d551d6db103e02cdcfc92c441b16d4449b61e4b397e92cd24bb73",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10772,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-15-overview-1280x960.png",
+          "sha256": "2c185b76a369b51d1b415bed146aaf2a7854c7f1fd148d22a6b13fe8edd4e988",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10814,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-15-overview-1600x900.png",
+          "sha256": "fb3c1cb19496219d468e20f08488d997272ea074a133a211238f2dbb1088e32e",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10837,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-15-overview-1920x1080.png",
+          "sha256": "b8575d5e94bd24b1dbb04cdbde03b9118458fea3883f4f9a6723de3ba7b4f1b3",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10794,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "17-generator",
+      "canonical": false,
+      "source": "17-tower.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Generator is identifiable by wheel, reservoir and chimney in both the full inspector and world/card art.",
+        "Durability80/80, cost60, full-wave income12, completed full waves0, full-wave condition, pencil-only and return0 text are complete at all five sizes."
+      ],
+      "residuals": [
+        "Uses the same modern text/scroll inspector as tower state rather than the source17 icon table; no extra generator-specific source sketch exists."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-17-generator-1024x768.png",
+          "sha256": "0b9f229fd6219efa80dcacb3fa4efcdfcb22f118d91e4d6785cfba794cb748bb",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6148,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-17-generator-1280x720.png",
+          "sha256": "f639cc650aee43da4f057e12d5a392ce642d8885f474978318687a990364662c",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10772,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-17-generator-1280x960.png",
+          "sha256": "7e815e388deba7c3463bb7aec0649d40a07f4963a91bbf5480c7446d461b891a",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10814,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-17-generator-1600x900.png",
+          "sha256": "14481e5ef5612ef02eb98a6edddd19abf865ff636d63918e4387a2b8d0353afd",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10837,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-17-generator-1920x1080.png",
+          "sha256": "aee3d6fe5f9be73c0e5619edf39cfa7e19b1d886ae245f156ca54d246ac8e736",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10794,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "17-repair",
+      "canonical": false,
+      "source": "17-tower.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Repair house/tool silhouette is clear; inspector durability70/70, material, cost65, repair6HP/s single-target and radius5 are readable at all five sizes."
+      ],
+      "residuals": [
+        "Inspector follows the modern text layout with more open space than source17's icon table."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-17-repair-1024x768.png",
+          "sha256": "9868451fb2311b8fc33eebaa7acffe5d3b58db776735db943d28330ca26c065c",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6148,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-17-repair-1280x720.png",
+          "sha256": "a6ede3c4e93a3c83caebbc140a8ad77ffc411889cd84baa5525a193092c294f4",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10772,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-17-repair-1280x960.png",
+          "sha256": "1b595e510502c65b92991ad91dee8f86f2e380a989a326989e8c3a15de7bdcff",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10814,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-17-repair-1600x900.png",
+          "sha256": "5311ce16fb80c0b246614f95147a5ae21dc6bae2a8e96e8b18a508d509cb1ba8",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10837,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-17-repair-1920x1080.png",
+          "sha256": "45d31e6f7139849b45028cf811966453f9ae2b75a5587866ceaf1bfd3764029b",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10794,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "19-upgrades2",
+      "canonical": false,
+      "source": "19-upgrades.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Actual completed wave2/8 appears; all three cards, complete bonus lines, Choose actions and generator footer fit every size."
+      ],
+      "residuals": [
+        "Shares canonical19's generic pencil glyph and enclosing paper-panel difference."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades2-1024x768.png",
+          "sha256": "c7f0f26ade3dede0804789821a097770091a64469bba4b287e8c0071db61aca8",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6148,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades2-1280x720.png",
+          "sha256": "79f3b41142f886ce1643896473c2924c72ccb2817c8204b99d87a4ecdaacbb6f",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10772,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades2-1280x960.png",
+          "sha256": "bd5402087f1d5d98335fb7fe68d021ceb762d1129a0b842206a719f9b8d320d5",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10814,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades2-1600x900.png",
+          "sha256": "9eb7c1e8090ef0b1de404f8cf1a91497ef8915e815bbc1a983fab0f65ac91c74",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10837,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades2-1920x1080.png",
+          "sha256": "4b8bd6dc1b2c2472cb8bade7ea2b8eadb729f994120819935d6f1b75f15ba217",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10794,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "19-upgrades4",
+      "canonical": false,
+      "source": "19-upgrades.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Actual completed wave4/8 appears; all three cards, complete bonus lines, Choose actions and generator footer fit every size."
+      ],
+      "residuals": [
+        "Shares canonical19's generic pencil glyph and enclosing paper-panel difference."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades4-1024x768.png",
+          "sha256": "1d5bc19b13fe73a70c1bcfd0d368e86050718bc5d24184cdb81aad0e20a0789b",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6148,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades4-1280x720.png",
+          "sha256": "c4bf91da7f342bc60b370d46466c5c3dbd04fb7652e9b8390236ff19c0d33135",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10772,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades4-1280x960.png",
+          "sha256": "40eeb8dd26280a11611c11201c2f6dc7beb705ec56408ea1440cb6ffbcf4e2ec",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10814,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades4-1600x900.png",
+          "sha256": "8c4e2bc1d1ba5d7d35a39059ca9808c16c4a4794a1454af9a7b0a03fbcb5cd25",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10837,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades4-1920x1080.png",
+          "sha256": "0f85a43fe1cd57401b07870a84bb9b02665fba4211f7291929b55c00ef106129",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10794,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "19-upgrades6",
+      "canonical": false,
+      "source": "19-upgrades.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Actual completed wave6/8 appears; all three cards, complete bonus lines, Choose actions and generator footer fit every size."
+      ],
+      "residuals": [
+        "Shares canonical19's generic pencil glyph and enclosing paper-panel difference."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades6-1024x768.png",
+          "sha256": "90d7bc9b0b26cd70a6251b5327bd9ae5eae419d57243d69c2cc7a5d74f5d1f90",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6148,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades6-1280x720.png",
+          "sha256": "cbe2993921f4a3a19b3c2034f3abca4e5cfe8ba2f8512edef7f731ec99b0d165",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10772,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades6-1280x960.png",
+          "sha256": "3ebc6bc747f143140a1e4d2436cce72d8d7076d21dd14fa87e9693a3014ffbe7",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10814,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades6-1600x900.png",
+          "sha256": "80691ac648b1957bf944cb6f079b85452b67f487f95dfb12ae2b51ba862c5ee8",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10837,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-19-upgrades6-1920x1080.png",
+          "sha256": "e558015f084a2e35261b1e01332e159dc85fbd4695c8fc92fc70fe57d894bbde",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10794,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "26-save-retry",
+      "canonical": false,
+      "source": "26-save-error.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Successful retry replaces the amber warning with three green checks and actual price64/durability55/DPS45.71; saved-in-album status is visible above the footer.",
+        "Full double-weapon assembly remains intact, both mounts contact the slab, and name/statistics/trial/save controls remain readable in all sizes."
+      ],
+      "residuals": [
+        "Success uses the runtime review layout rather than source26's illustrated error dialog, which is appropriate to the different result state."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-26-save-retry-1024x768.png",
+          "sha256": "72c430604d1ee0b4b9028832ef9f4351ae1642e21d745db049b3928fab18ce56",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-26-save-retry-1280x720.png",
+          "sha256": "48965a8d05e21785614034b6ca202b372525b9e34d83a1f945e004c4dc985fdb",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-26-save-retry-1280x960.png",
+          "sha256": "20cfbd74d67aacd943e1e09db10e158620cca46dbfa24187b0a192d565c4956e",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-26-save-retry-1600x900.png",
+          "sha256": "44a57a2bf7ca1b377760577992226ecee3ac3dcb92f71dbd0a838b51391971cc",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-26-save-retry-1920x1080.png",
+          "sha256": "2f7547a5e11d906144b912d567fcbdfde96fa6700cd407d57a9f3ae8b2a4880c",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "20-pending",
+      "canonical": false,
+      "source": "20-victory.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "All five individually viewed images show the victory ribbon, mission subtitle, actual waves8/8, reward94gold/120XP and the wave-versus-victory split64+30gold/80+40XP.",
+        "Pending state is explicit: the lower receipt says the reward awaits saving and offers a complete Retry saving action; text and button do not collide with financial rows, Statistics, or the three navigation actions at any size.",
+        "Displayed level1/XP0 and empty0/100XP bar agree visually with the pending unapplied reward state rather than presenting source illustration progress as saved.",
+        "Castle, mounted tower group, repair, generator and barricades are fully framed between the reward panels and receipt; weapon turn units remain in contact with the new shallow slabs."
+      ],
+      "residuals": [
+        "Source20 is a saved reward illustration, whereas this extra state intentionally shows an unsaved receipt and retry flow using actual profile progress.",
+        "Compared with source20, modular square foundations are wider and flatter, forest and mountain scenery uses repeated native groups, and the laurel/ribbon and resource glyphs are simpler.",
+        "At1024×768 small assembly hatching is stippled but weapon families and all labels remain identifiable. The4:3 layout preserves more open paper above the composition."
+      ],
+      "visualFlags": {
+        "allFiveImagesOpened": true,
+        "sourceOpened": true,
+        "textLegible": true,
+        "actionLabelsComplete": true,
+        "noDestructiveOverlap": true,
+        "assemblyContactsContinuous": true,
+        "pendingStatusDistinct": true,
+        "noP1P2": true
+      },
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-20-pending-1024x768.png",
+          "sha256": "4dbb9b1cda930ed5a7132030e2dde1b3497e463c25be02a6afc34e0faf3c18e4",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6148,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-20-pending-1280x720.png",
+          "sha256": "6c1b175dcec5f5a8f16ab0485bd7368207032123604c6563c9fa4fd2dd7546fd",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10772,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-20-pending-1280x960.png",
+          "sha256": "cb26c7efc6bdc7293f5d43d51a9b5bf4605f5fbb257e3293654d4541bd0f8a26",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10814,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-20-pending-1600x900.png",
+          "sha256": "da0f4d2459676ff8a8c58593556beb90eda2dafbd916a539b72089704d34eb36",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10837,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-20-pending-1920x1080.png",
+          "sha256": "b8a17a705523873b7c8b6d18a0c95d46452464c08ffca752d953e31194fd9dfd",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10794,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "20-statistics",
+      "canonical": false,
+      "source": "20-victory.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "All five individually viewed images show a centered paper Statistics modal above a consistently dimmed victory result.",
+        "Two separate columns show all eight actual report fields: invested426, returned0, lost0, maxenemies0, damage0, built8, destroyed0 and upgrades3. At1024×768 and1280×720 the longest label is complete and does not enter the opposite column.",
+        "The full-width Return to results action is completely visible at each size; title, metrics and button maintain separate vertical bands without touching the modal border.",
+        "Visible saved-reward receipt behind the modal at larger sizes remains subordinate to the active statistics panel."
+      ],
+      "residuals": [
+        "Source20 shows Statistics as a collapsed receipt row and contains no expanded layout; this extra state follows the same paper, blue ink and dimmed-modal language rather than claiming a source-exact expanded composition.",
+        "The functional expanded report uses two plain text columns with generous empty paper instead of inventing illustrated charts or copying numerical values from the sketch."
+      ],
+      "visualFlags": {
+        "allFiveImagesOpened": true,
+        "sourceOpened": true,
+        "textLegible": true,
+        "actionLabelsComplete": true,
+        "noDestructiveOverlap": true,
+        "allEightMetricsVisible": true,
+        "columnsSeparated": true,
+        "noP1P2": true
+      },
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-20-statistics-1024x768.png",
+          "sha256": "4b88a4315ecfdcb1d94de0da42a8ddfe9666609b06de4ae4b8b196118b6520d6",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6148,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-20-statistics-1280x720.png",
+          "sha256": "029e58f06244db049712d8a52cbcf0f5255065e2c443ffd7226099b6ae5ecb4b",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10772,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-20-statistics-1280x960.png",
+          "sha256": "d3be00114ef7c6398416c987e3e9fa94a46cb72e73cb382e9379be508107427e",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10814,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-20-statistics-1600x900.png",
+          "sha256": "18cb841d440ab403ce305319dc2aec4b489cf81a7372b7fce8db8d840de66566",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10837,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-20-statistics-1920x1080.png",
+          "sha256": "7fde4fd82be1eed7d674f204ff63966eca20d9c3da65e117d3483f722cf19bba",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10794,
+          "verdict": "PASS_WITH_RESIDUALS",
+          "inspectedWith": "view_image",
+          "visuallyInspected": true
+        }
+      ]
+    }
+  ]
+}

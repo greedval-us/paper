@@ -6,6 +6,7 @@ var originalRoots = new System.Collections.Generic.HashSet<UnityEngine.GameObjec
 var paths = new System.Collections.Generic.List<string>();
 var proofs = new System.Collections.Generic.List<string>();
 string onlySize = UnityEditor.SessionState.GetString("PaperDefense.Task13.CaptureSize", "");
+string onlyNames = UnityEditor.SessionState.GetString("PaperDefense.Fidelity.CaptureNames", "");
 foreach (var size in new[] { new UnityEngine.Vector2Int(1024, 768), new UnityEngine.Vector2Int(1280, 720), new UnityEngine.Vector2Int(1920, 1080), new UnityEngine.Vector2Int(1280, 960), new UnityEngine.Vector2Int(1600, 900) })
 {
     if (onlySize.Length > 0 && onlySize != size.x + "x" + size.y) continue;
@@ -39,6 +40,7 @@ foreach (var size in new[] { new UnityEngine.Vector2Int(1024, 768), new UnityEng
             button.onClick.Invoke();
         };
         System.Action<string> capture = name => {
+            if (onlyNames.Length > 0 && !onlyNames.Split(',').Contains(name)) return;
             // A screenshot documents the requested screen state rather than incidental keyboard
             // selection/hover help left behind by the preceding automated click.
             foreach (var tooltip in canvasObject.GetComponentsInChildren<UnityEngine.MonoBehaviour>(true).Where(component => component.GetType().Name == "WorkshopTooltipOverlay"))
@@ -114,7 +116,7 @@ foreach (var size in new[] { new UnityEngine.Vector2Int(1024, 768), new UnityEng
         if (panel.DraftSession.CanSaveComponent || !panel.DraftSession.Diagnostics.Any(issue => issue.Code == "assembly.part.required")) throw new System.InvalidOperationException("Queue/drum conflict was not rejected before save.");
         capture("27-invalid");
         panel.OpenEntry(gun); panel.DraftSession.OpenFoundation(); panel.DraftSession.SaveComponent(System.Guid.NewGuid()); panel.Refresh(); click("Composite library"); capture("30-library");
-        proofs.Add(size.x + "x" + size.y + ": all workshop states captured; purchase 94-80=14; independent comparison has no IO; failed save retains draft; retry has one page; invalid queue/drum blocked.");
+        proofs.Add(size.x + "x" + size.y + ": " + (onlyNames.Length == 0 ? "all workshop states captured" : "recaptured " + onlyNames) + "; purchase 94-80=14; independent comparison has no IO; failed save retains draft; retry has one page; invalid queue/drum blocked.");
     }
     finally
     {
@@ -122,7 +124,7 @@ foreach (var size in new[] { new UnityEngine.Vector2Int(1024, 768), new UnityEng
         foreach (var root in scene.GetRootGameObjects()) if (!originalRoots.Contains(root)) UnityEngine.Object.DestroyImmediate(root);
     }
 }
-string proofPath = "D:/Projekt Unity/paper/docs/validation/modular-album/scene-fidelity-workshop-capture-proof.txt";
+string proofPath = "D:/Projekt Unity/paper/docs/validation/modular-album/" + (onlyNames.Length == 0 ? "scene-fidelity-workshop-capture-proof.txt" : "scene-fidelity-workshop-fixes-proof.txt");
 if (onlySize.Length > 0 && System.IO.File.Exists(proofPath)) proofs.InsertRange(0, System.IO.File.ReadAllLines(proofPath).Where(line => !line.StartsWith(onlySize + ":")));
 System.IO.File.WriteAllLines(proofPath, proofs);
 return string.Join("\n", paths);

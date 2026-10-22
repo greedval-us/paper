@@ -1,0 +1,40 @@
+{
+  "reviewedOn": "2026-10-22",
+  "reviewer": "Codex /root/final_code_review13",
+  "baseCommit": "5508cdd4c81ee7f13245f66554c4661281c2bff5",
+  "mode": "read-only independent agent review of the working diff",
+  "verified": [
+    "Measured v9 source seats, contiguous native bands and preserved logical mounts.",
+    "Runtime weapon envelopes and radii unchanged.",
+    "Shared feed contacts across all four frames covered by actual opaque-facade and visible-pixel tests; a preliminary concern based on fragment bounds was withdrawn.",
+    "Focused-trial whole-copy culling and actual selected-part purchase illustration agree with their regression tests.",
+    "Full saved PlayMode evidence: 836/836 including six new regression cases.",
+    "Viewed v9 source plus corrected purchase and focused-trial capture pixels."
+  ],
+  "limits": [
+    "This review is not independent approval of the full screenshot matrix; three visual reports plus the separate parts/Blots report provide pixel-inspection evidence.",
+    "Reviewer did not run Unity tests or gallery generation. Root archived the final complete results and verified editor restoration and exact proof coverage."
+  ],
+  "documentationFollowUp": {
+    "finding": "Ten reward-state PNGs were missing from bound visual protocols while the interim report counted 240.",
+    "priority": "Important",
+    "status": "RESOLVED_BY_ACTUAL_REVIEW_AND_HASH_BINDING",
+    "affectedStates": [
+      "20-pending",
+      "20-statistics"
+    ],
+    "scope": "All five sizes for each state; no source code or test defect.",
+    "resolution": "Battle reviewer individually opened all ten missing reward frames, added two extra states and ten current PNG SHA256 records. Root independently verified all 240 current PNGs have exactly one explicit manual record with matching hash, revision and valid sidecar. No new P1/P2 found."
+  },
+  "codeFindings": {
+    "critical": 0,
+    "important": 0,
+    "minor": 0
+  },
+  "finalReadOnlyFollowUp": {
+    "materialFindingsRemaining": 0,
+    "gallery": "Read final UI blocks and --require-reviewed: READY remains separate from manual review, current revision is displayed, incomplete proof is rejected.",
+    "documentation": "Read corrected final report/test counts and battle90 protocol; the missing ten reward records are resolved.",
+    "execution": "Reviewer did not run generation or call Unity; root performed final executable checks."
+  }
+}

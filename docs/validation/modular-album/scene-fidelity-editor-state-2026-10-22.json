@@ -1,0 +1,15 @@
+{
+  "checkedOn": "2026-10-22",
+  "unityVersion": "6000.5.7f1",
+  "proof": {
+    "success": true,
+    "message": "Code executed successfully.",
+    "data": {
+      "result": "scene=Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity;dirty=False;playing=False;compiling=False;atlas=4096x4352;mipCount=1;filter=Bilinear",
+      "compiler": "codedom"
+    }
+  },
+  "consoleErrors": 0,
+  "consoleEvidence": "read_console action=get types=error count=20 returned zero entries after final full EditMode and scene restoration",
+  "captureFilterReset": true
+}

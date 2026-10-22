@@ -1,5 +1,5 @@
 {
-  "revision": "modular-full-catalog-2026-10-19-v6",
+  "revision": "modular-full-catalog-2026-10-22-v7",
   "sourceSheets": [
     {
       "file": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
@@ -12,7 +12,7 @@
       "height": 1254
     },
     {
-      "file": "ArtSource/Notebook/NewStyle/StandardFoundation-v4.png",
+      "file": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.png",
       "width": 1536,
       "height": 1024
     },
@@ -178,11 +178,11 @@
     },
     {
       "id": "part.full.frame.standard",
-      "source": "ArtSource/Notebook/NewStyle/StandardFoundation-v4.png",
-      "x": 41,
-      "y": 114,
-      "width": 1454,
-      "height": 697
+      "source": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.png",
+      "x": 17,
+      "y": 290,
+      "width": 1503,
+      "height": 444
     },
     {
       "id": "part.full.frame.battery",

@@ -9,7 +9,7 @@ const read = p => JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
 const write = (p,v) => fs.writeFileSync(path.join(root,p),JSON.stringify(v,null,2)+'\n');
 const source = read(art+'sprites.source.json');
 const assembly = read(art+'assembly-parts.source.json');
-const revision = 'modular-full-catalog-2026-10-19-v6';
+const revision = 'modular-full-catalog-2026-10-22-v7';
 const asset = fs.readFileSync(path.join(root,'Assets/PaperDefense/Configuration/Game/PlayerAssemblyCatalog.asset'),'utf8').split('    Starters:')[0];
 const definitions = [...asset.matchAll(/^    - Id: (.+)\r?\n([\s\S]*?)(?=^    - Id:|$(?![\s\S]))/gm)].map(m=>({
   partId:m[1].trim(),revision:Number(m[2].match(/Revision: (\d+)/)[1]),
@@ -50,7 +50,7 @@ function decodePng(relative){
 }
 const sheets=new Map();
 function cell(relative,index){
- if(!sheets.has(relative))sheets.set(relative,decodePng(relative));const im=sheets.get(relative),grid=/StandardFoundation-v[24]\.png$/.test(relative)?1:/SupportAttachments-v1\.png$|RepairParts-v1\.png$|BatteryFoundation-v3\.png$/.test(relative)?2:4,col=index%grid,row=Math.floor(index/grid);
+ if(!sheets.has(relative))sheets.set(relative,decodePng(relative));const im=sheets.get(relative),grid=/StandardFoundation-v[249]\.png$/.test(relative)?1:/SupportAttachments-v1\.png$|RepairParts-v1\.png$|BatteryFoundation-v3\.png$/.test(relative)?2:4,col=index%grid,row=Math.floor(index/grid);
  let left=Math.floor(col*im.w/grid),right=Math.floor((col+1)*im.w/grid);
  let top=Math.floor(row*im.h/grid),bottom=Math.floor((row+1)*im.h/grid);
  // The long nib's tip extends above its nominal fourth-row cell. The transparent
@@ -143,21 +143,32 @@ for(const [id,index,width,sockets] of frameSpecs){
 }
 // Modern recipes use a low plinth. The historical pilot canvases and its two
 // original socket coordinates remain above in foundations/pilots for legacy.
-const standard=art+'StandardFoundation-v4.png',base=cell(standard,0);
+const standard=art+'StandardFoundation-v9.png',base=cell(standard,0);
 // Preserve the accepted logical seats while replacing the front-facing beam
 // with the more faithful isometric plinth. Source disk centres were inspected
 // on the full 1536x1024 canvas; no source pixels are rescaled or rewritten.
 const oldLeft=-.5+483/1942,oldRight=-.5+1452/1942,oldSeatY=-.27+458/1942;
-const baseScale=(oldRight-oldLeft)/(1137-398);
-const basePosition=[oldLeft-398*baseScale,oldSeatY-625*baseScale];
+// Actual cream seating faces have pixel bounds (219,341)..(519,425) and
+// (1013,341)..(1314,426), top-origin. The centres below are inspected on
+// those faces, not taken from the requested generation coordinates.
+const seatLeft=368,seatRight=1163,seatY=640;
+const baseScale=(oldRight-oldLeft)/(seatRight-seatLeft);
+const basePosition=[oldLeft-seatLeft*baseScale,oldSeatY-seatY*baseScale];
 parts.get('frame.standard').fragments=[];parts.get('hull.standard').fragments=[];
 const standardFrame=add('frame.standard',standard,0,{attach:[0,0],position:basePosition,scale:baseScale,layer:1,collisionMode:'solid'});
-const modernFrame=parts.get('frame.standard'); modernFrame.hullBaseFraction=.30;modernFrame.hullFrontFraction=.46;
-standardFrame.region=rect(base.trim.x,base.trim.y,base.trim.width,base.trim.height*.30);
-modernFrame.mounts=[{slot:0,position:point(398,625)},{slot:1,position:point(1137,625)}];
+// The vertical corner faces begin near top-origin y515. Include them in a
+// conservative foreground band beginning at y512 (native bottom-left 511),
+// rather than dropping the outer walls to manufacture clearance. Native row
+// 384 separates the lowest front course from the upper foreground. All three
+// bands remain contiguous and retain the complete original crop.
+const baseTop=384,frontTop=511;
+const baseFraction=(baseTop-base.trim.y)/base.trim.height,frontFraction=(frontTop-base.trim.y)/base.trim.height;
+const modernFrame=parts.get('frame.standard'); modernFrame.hullBaseFraction=baseFraction;modernFrame.hullFrontFraction=frontFraction;
+standardFrame.region=rect(base.trim.x,base.trim.y,base.trim.width,baseTop-base.trim.y);
+modernFrame.mounts=[{slot:0,position:point(seatLeft,seatY)},{slot:1,position:point(seatRight,seatY)}];
 // A base's upper seating surface and its foreground are separate ordered
 // fragments. Their actual source bands also supply the physical keepouts.
-for(const split of [{bottom:.46,height:.54,layer:0},{bottom:.30,height:.16,layer:14}]){
+for(const split of [{bottom:frontFraction,height:1-frontFraction,layer:0},{bottom:baseFraction,height:frontFraction-baseFraction,layer:14}]){
  const f=clone(standardFrame);f.socketId='hull.standard.'+split.layer;f.layer=split.layer;
  f.collisionMode=split.layer===14?'solid':'mount-contact';
  f.region=rect(base.trim.x,base.trim.y+base.trim.height*split.bottom,base.trim.width,base.trim.height*split.height);
@@ -172,7 +183,7 @@ const batteryPart=parts.get('frame.battery');batteryPart.hullBaseFraction=.18;ba
 batteryFrame.region=rect(batteryFrame.trim.x,batteryFrame.trim.y,batteryFrame.trim.width,batteryFrame.trim.height*.18);
 batteryPart.mounts=[{slot:0,position:point(168,292)},{slot:1,position:point(312,344)},{slot:2,position:point(459,290)}];
 for(const id of ['armor.plate','feed.standard'])for(const f of parts.get(id).fragments){
- f.scale*=.5;f.position=point(id==='armor.plate'?-.0675:-.04,id==='armor.plate'?-.218:-.214);
+ f.scale*=.5;f.position=point(id==='armor.plate'?-.0675:-.04,id==='armor.plate'?-.218:-.2475);
  if(id==='feed.standard')f.layer=16;
 }
 const modernPivot=.158;

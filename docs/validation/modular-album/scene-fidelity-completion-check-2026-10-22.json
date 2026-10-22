@@ -1,0 +1,52 @@
+{
+  "checkedOn": "2026-10-22",
+  "revision": "modular-full-catalog-2026-10-22-v7",
+  "canonicalScreens": 150,
+  "extraScreens": 80,
+  "partsSheetsAndBlots": 10,
+  "totalCurrentPngs": 240,
+  "uniqueHashBoundManualReviews": 240,
+  "missingProofs": [],
+  "duplicateProofs": [],
+  "hashMismatches": [],
+  "invalidSidecars": [],
+  "tests": {
+    "editmode": {
+      "summary": {
+        "total": 1574,
+        "passed": 1574,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 591.5742828,
+        "resultState": "Passed"
+      },
+      "path": "docs/validation/modular-album/scene-fidelity-editmode-2026-10-22.json",
+      "sha256": "66460a629a7b1b4372937b4c7e21c00a83e5c0e53fd086d24a99302e005493d6"
+    },
+    "playmode": {
+      "summary": {
+        "total": 836,
+        "passed": 836,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 145.164542,
+        "resultState": "Passed"
+      },
+      "path": "docs/validation/modular-album/scene-fidelity-playmode-2026-10-22.json",
+      "sha256": "5230b5a8b871de893c786e8be406b60ef035e976f1c46d88ae97fe21fdfc5ad8"
+    }
+  },
+  "scope": "Task13 visual acceptance; task14 remains unstarted. Integrity and manual visual verdicts are separate checks.",
+  "galleryTooling": {
+    "command": "node Tools/ArtAssembly13/build-fidelity-gallery.mjs --require-complete --require-reviewed",
+    "exitCode": 0,
+    "canonicalIntegrityReady": 150,
+    "canonicalManuallyReviewedWithDifferences": 150,
+    "missingStaleInvalid": 0,
+    "acceptedPositiveProof": 1,
+    "rejectedCorruptedOrMissingProofCases": 10,
+    "generatedClientScriptsCompiled": 1,
+    "moduleSyntaxCheckPassed": true,
+    "browserAutomationPerformed": false
+  }
+}

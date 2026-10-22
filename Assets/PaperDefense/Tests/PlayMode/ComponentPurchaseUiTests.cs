@@ -278,6 +278,49 @@ namespace PaperDefense.Tests
             }
         }
 
+        [TestCase(1024, 768)] [TestCase(1280, 720)] [TestCase(1920, 1080)]
+        [TestCase(1280, 960)] [TestCase(1600, 900)]
+        public void PurchaseShowsTheActualSelectedPartBetweenTitleAndQuote(int width, int height)
+        {
+            using (var fixture = new AssemblyCommandFixture(94, 390))
+            {
+                var draft = Weapon(fixture); var panel = Panel(fixture, draft);
+                canvas.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
+                panel.Reflow(width - 48, height - 230);
+                panel.Catalog.SetShowUnavailable(true); panel.Catalog.InspectPart("head.long");
+                Button("Component purchase part").onClick.Invoke(); Canvas.ForceUpdateCanvases();
+                var art = canvas.GetComponentsInChildren<WeaponAssemblyGraphic>()
+                    .SingleOrDefault(value => value.name == "Component purchase illustration");
+                Assert.That(art, Is.Not.Null, "The purchase sheet needs its own real selected-part illustration.");
+                Assert.That(art.Part.Value.Id, Is.EqualTo("head.long"));
+                var card = (RectTransform)art.transform.parent;
+                var labels = card.GetComponentsInChildren<Text>();
+                var title = labels.Single(value => value.name == "Component purchase title");
+                var quote = labels.Single(value => value.name == "Component purchase conditions");
+                var corners = new Vector3[4]; title.rectTransform.GetWorldCorners(corners);
+                float titleBottom = card.InverseTransformPoint(corners[0]).y;
+                quote.rectTransform.GetWorldCorners(corners);
+                float quoteTop = card.InverseTransformPoint(corners[1]).y;
+                using (var mesh = new VertexHelper())
+                {
+                    typeof(WeaponAssemblyGraphic).GetMethod("OnPopulateMesh", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic,
+                        null, new[] { typeof(VertexHelper) }, null)
+                        .Invoke(art, new object[] { mesh });
+                    Assert.That(mesh.currentVertCount, Is.GreaterThanOrEqualTo(4));
+                    for (int i = 0; i < mesh.currentVertCount; i++)
+                    {
+                        var vertex = new UIVertex(); mesh.PopulateUIVertex(ref vertex, i);
+                        var point = card.InverseTransformPoint(art.transform.TransformPoint(vertex.position));
+                        Assert.That(point.x, Is.InRange(card.rect.xMin + 12, card.rect.xMax - 12));
+                        Assert.That(point.y, Is.InRange(quoteTop + 6, titleBottom - 6), "Art must fit between the real title and price text.");
+                    }
+                }
+                Assert.That(quote.cachedTextGenerator.characterCountVisible, Is.EqualTo(quote.text.Length));
+                Assert.That(fixture.Run.Workshop.Gold, Is.EqualTo(94));
+                Assert.That(draft.PreviewRecipe.Tower.Mounts.Single().Weapon.Head.Id, Is.EqualTo("head.gun"));
+            }
+        }
+
         [Test] public void PurchaseRequiresConfirmationAndNeverInstallsThePart()
         {
             using (var fixture = new AssemblyCommandFixture(94, 390))

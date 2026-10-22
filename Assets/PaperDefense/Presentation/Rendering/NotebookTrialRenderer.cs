@@ -267,6 +267,12 @@ namespace PaperDefense.Presentation
             foreach (var tower in frame.Towers)
             {
                 if (tower.Health <= 0 || playback.IsStructureEnded(tower.Id)) continue;
+                // A combat close-up may omit remote copies. Keep their whole silhouettes
+                // out of the camera instead of leaving a severed base along its edge.
+                // RecordingBounds includes every copy, so the overview still draws them all.
+                var silhouette = SourceBounds(tower);
+                if (framing.HasValue && (silhouette.xMin < bounds.xMin || silhouette.xMax > bounds.xMax ||
+                    silhouette.yMin < bounds.yMin || silhouette.yMax > bounds.yMax)) continue;
                 DoodleGlyphs.StructureBase(pen, tower, theme);
                 DoodleGlyphs.StructureDynamic(pen, tower, 1, seconds, playback.Animation, theme);
             }

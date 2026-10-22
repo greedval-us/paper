@@ -1,0 +1,72 @@
+{
+  "generator": "built-in image_gen",
+  "file": "StandardFoundation-v9.png",
+  "transparent_background": true,
+  "references": [
+    "ArtSource/Notebook/NewStyle/StandardFoundation-v6.png"
+  ],
+  "intent": "Lower the standard plinth to preserve all seven weapon silhouettes while retaining the existing logical sockets, unchanged weapon envelopes, conservative wall keepouts and native RGBA pixels.",
+  "iterations": [
+    {
+      "file": "StandardFoundation-v7.png",
+      "output": "C:/Users/Greedval/.codex/generated_images/01a14cd7-7db2-7df0-8654-f50c4f801bf0/exec-c025b8f6-ace8-41f7-a20b-40dd87891fe4.png",
+      "prompt": "Production sprite geometry correction, edit target image1. Same genuine transparent1536x1024 canvas, no pixel filling beyond the object. Keep its LOW ONE-COURSE stone slab, blue ballpoint pen contours/hatching, cream stone, blue corner plates and tiny gold bolts. CRITICAL CHANGE: move BOTH complete flat mounting disks UP/BACK about90 pixels, keeping identical x coordinates and sizes: left centre approximately(312,400), right centre approximately(1224,400), top-left pixel coordinates. They are currently near y484; place them farther back on the roof. Their centres MUST be on the SAME horizontal line and far apart horizontally, approximately912px centre spacing. Preserve substantial real roof directly under each full mounting pad, no floating disks: extend the back diamond roof edge upward/back as needed, with backmost corner at about y260. Keep all physical ink within about x18..1517,y255..775: complete object at most530 pixels high, large transparent padding top/bottom. Entire FRONT stone wall (both sloping front faces) must begin NO HIGHER than y565 at its outside left/right corners, descending to y685 near the central front corner; bottomwall ends around y760. Thus the two pad centre lines at y400 have at least165 pixels clear depth above the highest wall top. Very shallow short stone side walls, ONE course only. Broad low square diamond platform, clear real isometric plane under both pads. EXACTLY two disk pads, no additional disks. Keep front crown/corner cap. Do not enlarge object to fill the canvas. No weapon, support, pedestal, lettering, arrows, UI, paper, background, external shadow or blue/grey glow. All space beyond the hard physical silhouette must have alpha0, with no halo. Transparent clean production sprite. The deep empty upper roof behind the foreground wall and the two backward-shifted mounting disks are mechanically essential; do not just flatten the old shape without moving disks.",
+      "status": "rejected: disk spacing and native height give insufficient silhouette ratio"
+    },
+    {
+      "file": "StandardFoundation-v8.png",
+      "output": "C:/Users/Greedval/.codex/generated_images/01a14cd7-7db2-7df0-8654-f50c4f801bf0/exec-57bfeb04-923d-4898-8261-a5833f93648f.png",
+      "prompt": "Precise assembly sprite edit of THIS exact transparent1536x1024 image. Keep the complete LOW stone slab and its front wall exactly as drawn, same width1500px and same back/frontcorners, no enlarging its vertical silhouette. Change ONLY the two entire mounting disks and repair the roof where they were. Current actualdiskcentres are about(400,385) and(1136,385) from top-left. Move LEFT disk86 pixels LEFT and20 pixels UP to centre(314,365). Move RIGHT disk86 pixels RIGHT and20 pixels UP to centre(1222,365). Both disks must sit on the same horizontal liney365, theircentres908pixels apart. Theirxcentres must be near20% and80% ofcanvaswidth, NOT26%/74%. Retain current diskwidth~310px andellipseheight~105px, don'tmake them larger. Bothdisksmust remainfully visible andgenuinely seated on opaque creamstone roof; extend justthebackroofunder them ifneededwithoutchangingthelowforegroundwall. Keep completeobjectinkwithin x18..1517 andy230..775, atmost545pxhigh. No otherchange: same one-coursewalls,bluepenhatching,bluecornerplates,goldbolts,frontcrown. Absolutely no weapons, towers, supports, text, UI, graphicpaper, castshadow, or opaque background. Remove ALL externalblue-greyhalo outsidephysicalsilhouette: alpha0 throughout transparentpadding. Keepbackground genuinelytransparent. The one essentialmodification is much WIDER diskspacing andslightlyhigherdiskcentres; do notleave eitherdiskinitscurrentposition.",
+      "status": "rejected: native height too large for actual disk spacing"
+    },
+    {
+      "file": "StandardFoundation-v9.png",
+      "output": "C:/Users/Greedval/.codex/generated_images/01a14cd7-7db2-7df0-8654-f50c4f801bf0/exec-18e15ea7-f36a-4bf5-b862-4d7a2d15cc28.png",
+      "prompt": "Exact whole-object geometric sprite correction. Keep same transparent1536x1024canvas and EVERY horizontalcoordinateofthisimage. Do notmove disks horizontally: actualcentresx~368and1168, separation800px; keepthosexvalues. Compress the ENTIRE physicalsprite ONLY VERTICALLY to80% ofcurrentheight. Oldphysicalinkboundsapproximatelyy240..780(height540); NEWinkboundsmustbeabouty320..752(height432). Allparts, backroof, bothdisks,bluecornerplates,frontwallandcrowntogetherreceiveexactlysameverticalcompression. Thusdiskcentresoldy350→newy408, disksbecomeflatterellipses,frontwalltopoldy520→newy544, centralfrontedgeoldy670→newy664, bottomy780→newy752. Keepfull1500pxwidth. Shallowisometricroofandshortone-coursestonewall. Large fullytransparentpadding above~320pxandbelow~270px. DO NOT enlargeobjectverticallytofillcanvas. Sameblueballpointink,creamstone,hatchingandgoldbolts;donotaddanything. EXACTLYtwoseatingdisks,nowvisiblyflatterellipsesandlowersidewalls. No weapons,noUI,noletters,nopaper,nobackground,noglow,noshadow. Removeexternalgrey/bluehalo:cleanphysicalsilhouettewithalpha0outside. Thisuniformwholeobjectverticalcompressionisessential; keepxcoordinatesandwidehorizontalproportionsunchanged.",
+      "status": "selected after actual source measurement and source-fit validation; runtime acceptance recorded separately"
+    }
+  ],
+  "actualCanvas": [
+    1536,
+    1024
+  ],
+  "actualSourceSeatsBottomLeft": [
+    [
+      368,
+      640
+    ],
+    [
+      1163,
+      640
+    ]
+  ],
+  "nativeCrop": {
+    "x": 17,
+    "y": 290,
+    "width": 1503,
+    "height": 444
+  },
+  "uniformTransform": {
+    "scale": 0.0006276353885315664,
+    "position": [
+      -0.4822571556263724,
+      -0.43584730777451763
+    ]
+  },
+  "sourceBandsBottomLeft": {
+    "base": [
+      290,
+      384
+    ],
+    "front": [
+      384,
+      511
+    ],
+    "roof": [
+      511,
+      734
+    ]
+  },
+  "sourcePixelsModifiedByCode": false,
+  "note": "Requested coordinates are not used as measured landmarks. Both prior logical seats are preserved exactly by one uniform source-to-world transform. The foreground keepout conservatively includes the real outer vertical corner faces, which start near top-origin y515; its source top is y512. Worst swept-envelope clearance is +0.0042942005 U. The smallest moving-weapon/base ratio is 0.73464478 against the unchanged 0.65 test. Feed joint is placed on the actual opaque central facade. No weapon scales, radii, clearances, or test thresholds were reduced."
+}
