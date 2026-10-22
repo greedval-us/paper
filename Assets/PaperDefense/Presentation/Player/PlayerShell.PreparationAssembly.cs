@@ -13,26 +13,31 @@ namespace PaperDefense.Presentation
 
         void AssemblyPreparation()
         {
-            NotebookPageBackdrop("Art/Player/PreparationLandscape");
+            Rect landscape = NotebookPageBackdrop("Art/Player/PreparationLandscape");
+            // Keep the whole illustration, but align this screen's scenery to the header.
+            // Centering a 16:9 page in 4:3 otherwise leaves a blank band above the castle.
+            landscape.y = 0;
+            PlayerUi.Place(page.Find("Notebook landscape").GetComponent<RectTransform>(), landscape);
             NotebookScreenHeader(PreparationCopy("title"), () => game.Navigate(PlayerPage.Map),
-                ProgressCopy(), true);
+                ProgressCopy(), true, currencyCoin: true);
             progress = page.Find("Notebook header/Mission heading").GetComponentInChildren<Text>();
             progress.name = "Player progress";
 
-            float scale = Mathf.Min(W / 1600f, H / 1000f);
+            float scale = Mathf.Min(W / 1600f, H / 900f);
             float margin = Mathf.Max(16, 28 * scale), gap = Mathf.Max(8, 12 * scale);
             float width = W - margin * 2;
             bool inlineFooter = W >= 1250;
-            float footerHeight = inlineFooter ? Mathf.Max(62, 76 * scale) : Mathf.Max(44, 56 * scale);
+            float footerHeight = inlineFooter ? Mathf.Max(62, 68 * scale) : Mathf.Max(44, 56 * scale);
             float footerY = H - margin - footerHeight;
             float materialHeight = Mathf.Max(58, 72 * scale), materialY = inlineFooter ? footerY : footerY - gap - materialHeight;
-            float ribbonHeight = Mathf.Max(36, 48 * scale), ribbonY = Mathf.Min(170, Mathf.Max(120, H * .225f));
+            float ribbonHeight = Mathf.Max(36, 56 * scale), ribbonY = landscape.height * (207f / 941f);
             float gridY = ribbonY + ribbonHeight + gap;
             float gridHeight = materialY - gap - gridY;
             float cardWidth = (width - gap * 3) / 4, cardHeight = (gridHeight - gap) / 2;
 
-            var ribbon = ui.Panel(page, "Assembly preparation ribbon", new Rect(margin + width * .16f, ribbonY, width * .68f, ribbonHeight), PlayerUi.Card);
-            NotebookLabel(ribbon, PreparationCopy("ribbon"), new Rect(8, 0, width * .68f - 16, ribbonHeight),
+            float ribbonWidth = width * .46f;
+            var ribbon = ui.Panel(page, "Assembly preparation ribbon", new Rect((W - ribbonWidth) * .5f, ribbonY, ribbonWidth, ribbonHeight), PlayerUi.Card);
+            NotebookLabel(ribbon, PreparationCopy("ribbon"), new Rect(8, 0, ribbonWidth - 16, ribbonHeight),
                 Mathf.Max(25, Mathf.RoundToInt(37 * scale)), alignment: TextAnchor.MiddleCenter);
             var grid = ui.Panel(page, "Assembly preparation loadout", new Rect(margin, gridY, width, gridHeight), Color.clear);
             var flow = grid.gameObject.AddComponent<GridLayoutGroup>();
@@ -55,8 +60,10 @@ namespace PaperDefense.Presentation
                 scale, count, ready ? "" : GameText.Resolve(reason));
             PreparationFooterCaption(NotebookAction(footer, "Edit album", new Rect(0, 0, workshopWidth, footerHeight), PlayerIcon.Pencil,
                 "В мастерскую", () => game.Navigate(PlayerPage.Workshop)));
-            PreparationFooterCaption(NotebookAction(footer, "Open preparation album", new Rect(workshopWidth + gap, 0, albumWidth, footerHeight), PlayerIcon.Book,
-                "Альбом", game.ShowAlbum));
+            var album = NotebookAction(footer, "Open preparation album", new Rect(workshopWidth + gap, 0, albumWidth, footerHeight), PlayerIcon.Book,
+                "Альбом", game.ShowAlbum);
+            PreparationFooterCaption(album);
+            NotebookControlIcon(album, "icon.help");
             status = NotebookLabel(page, "", new Rect(margin, ribbonY - 26, width, 24),
                 17, NotebookPalette.Red, TextAnchor.MiddleCenter); status.name = "Preparation status";
             var start = NotebookAction(footer, "Start battle", new Rect(width - startWidth, 0, startWidth, footerHeight), PlayerIcon.Play,
@@ -72,6 +79,8 @@ namespace PaperDefense.Presentation
             float symbolSize = Mathf.Min(36, bounds.height * .56f);
             var symbol = button.GetComponentInChildren<PlayerIconGraphic>();
             PlayerUi.Place(symbol.rectTransform, new Rect(10, (bounds.height - symbolSize) * .5f, symbolSize, symbolSize));
+            foreach (var illustration in symbol.GetComponentsInChildren<Image>())
+                PlayerUi.Place(illustration.rectTransform, NotebookFitRect(illustration.sprite, new Rect(0, 0, symbolSize, symbolSize)));
             var copy = button.GetComponentInChildren<Text>();
             float lineHeight = Mathf.Min(30, bounds.height - 10);
             PlayerUi.Place(copy.rectTransform, new Rect(symbolSize + 18, (bounds.height - lineHeight) * .5f,
@@ -86,15 +95,17 @@ namespace PaperDefense.Presentation
             var card = ui.Panel(parent, "Album loadout " + slot, new Rect(0, 0, width, height), PlayerUi.Card);
             string caption = entry == null ? PreparationCopy("empty") : GameText.Resolve(entry.Name);
             bool generator = entry?.Snapshot?.Recipe.Structure?.Family == AssemblyStructureFamily.Generator;
-            float actionHeight = Mathf.Max(32, 40 * scale);
+            float actionHeight = Mathf.Max(32, 34 * scale);
             float nameHeight = caption.Length > 26 ? Mathf.Max(54, 58 * scale) : Mathf.Max(28, 34 * scale);
             float costHeight = generator ? 50 : 24;
             float artHeight = Mathf.Max(16, height - actionHeight - nameHeight - costHeight - 18);
             PreparationAssemblyIllustration(card, entry, new Rect(4, 5, width - 8, artHeight));
-            var number = ui.Panel(card, "Album loadout number " + slot, new Rect(8, 6, 28, 28), PlayerUi.Card);
-            NotebookLabel(number, (slot + 1).ToString(), new Rect(0, 0, 28, 28), 21, alignment: TextAnchor.MiddleCenter);
+            float numberSize = Mathf.Max(28, 40 * scale);
+            var number = ui.Panel(card, "Album loadout number " + slot, new Rect(8, 6, numberSize, numberSize), PlayerUi.Card);
+            NotebookLabel(number, (slot + 1).ToString(), new Rect(0, 0, numberSize, numberSize),
+                Mathf.Max(21, Mathf.RoundToInt(29 * scale)), alignment: TextAnchor.MiddleCenter);
             var name = NotebookLabel(card, caption,
-                new Rect(8, artHeight + 7, width - 16, nameHeight), 23, alignment: TextAnchor.MiddleCenter);
+                new Rect(8, artHeight + 7, width - 16, nameHeight), Mathf.Max(23, Mathf.RoundToInt(27 * scale)), alignment: TextAnchor.MiddleCenter);
             name.name = "Album loadout name " + slot; name.fontStyle = FontStyle.Bold;
             name.resizeTextMinSize = Mathf.CeilToInt(15 / Layout.Scale);
             name.verticalOverflow = VerticalWrapMode.Truncate; name.horizontalOverflow = HorizontalWrapMode.Wrap;
@@ -106,6 +117,19 @@ namespace PaperDefense.Presentation
                 quote != null && !quote.Valid ? NotebookPalette.Red : PlayerUi.Ink, TextAnchor.MiddleCenter);
             price.name = "Album loadout cost " + slot; price.resizeTextMinSize = Mathf.CeilToInt(15 / Layout.Scale);
             if (generator) { price.resizeTextForBestFit = false; price.fontSize = 18; }
+            // The generator's second line is a construction rule. Keep the full card
+            // width for it rather than fitting both lines to a measured price caption.
+            if (entry != null && !generator)
+            {
+                float textWidth = Mathf.Min(width - 48, price.preferredWidth + 4);
+                float priceX = (width - textWidth + 26) * .5f;
+                float priceY = artHeight + nameHeight + 7;
+                PlayerUi.Place(price.rectTransform, new Rect(priceX, priceY, textWidth, costHeight));
+                var pencil = PlayerUi.Graphic<PlayerIconGraphic>(card, "Album loadout price pencil " + slot,
+                    new Rect(priceX - 26, priceY + 1, 22, 22));
+                pencil.Icon = PlayerIcon.Pencil; pencil.Sketch = true; pencil.color = PlayerUi.Ink;
+                NotebookInkIcon(pencil, "icon.pencil");
+            }
 
             float clearWidth = actionHeight, replaceWidth = width - 24 - clearWidth;
             NotebookAction(card, "Replace album entry " + slot, new Rect(8, height - actionHeight - 8, replaceWidth, actionHeight),

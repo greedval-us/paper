@@ -1,0 +1,17 @@
+{
+  "generator": "built-in image_gen",
+  "skill": "C:/Users/Greedval/.codex/skills/.system/imagegen/SKILL.md",
+  "mode": "precise-object-edit",
+  "source": "Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscape.png",
+  "reference": "docs/design/game-concept-art-2026-10-16/screens/01-home.png",
+  "prompt": "Use case: precise-object-edit. Image1 is the edit target, a production game home landscape asset; image2 is ONLY the concept reference for the notebook drawing at the bottom. Preserve image1's complete wide 1672x941 composition, aspect ratio, full outer bounds, cream graph paper, empty left third reserved for live game menu, pen, pencil, eraser, central castle and the entire surrounding illustrated battle/forests/mountains EXACTLY in their current positions and style. Change ONLY the assembled three-barrel gun drawn on the open notebook at the lower center (roughly x600..1000 y710..930). Replace that drawing with a detailed blue-ballpoint exploded assembly diagram like the same area in image2: mounted receiver and round base at lower-left of the notebook, detached top plate above, and three alternate barrel assemblies arranged vertically at the notebook's right, connected to the receiver with thin blue dashed right-angle arrows. Use the notebook paper plane/perspective and leave each piece clearly separated. All schematic parts and blue arrows must fit on the existing notebook sheet. Keep fine hand-drawn blue ink, hatched ivory forms and the same line weight. Do not add or copy ANY interface text, logo, buttons, health bars, labels or numbers from image2. Left third stays completely empty paper. No new objects outside notebook, no moved castle/enemies, no cropping, no vignette, no transparency. Output the clean wide landscape asset only, without UI. Prioritize preserving every part of image1 outside this one notebook drawing.",
+  "output": "C:/Users/Greedval/.codex/generated_images/01a14cd7-7db2-7df0-8654-f50c4f801bf0/exec-c5b1cfa2-96ad-4bb6-8629-ad0da30f5bd7.png",
+  "sourceCopy": "ArtSource/Notebook/NewStyle/HomeDefenseLandscape-v2.png",
+  "runtimeCopy": "Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscapeV2.png",
+  "dimensions": [
+    1672,
+    941
+  ],
+  "sourcePixelsModifiedByCode": false,
+  "selection": "Root opened actual generated PNG. The lower notebook now shows separated receiver/base/top plate/three alternate barrels and arrows; blank menu area, castle and surrounding landscape remain. Runtime layout acceptance is separate."
+}

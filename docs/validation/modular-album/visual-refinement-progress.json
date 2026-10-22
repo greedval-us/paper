@@ -85,63 +85,72 @@
       "id": "01",
       "title": "Главное меню",
       "source": "01-home.png",
-      "status": "implementation_in_progress",
-      "baselineCapture": "fidelity-01-home-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-01-home-1920x1080.png",
+      "visualEvidence": "refinement-first3-visual-review.json",
+      "technicalEvidence": "refinement-01-09-green.json",
+      "reviewSource": "agent"
     },
     {
       "id": "02",
       "title": "Карта",
       "source": "02-map.png",
-      "status": "implementation_in_progress",
-      "baselineCapture": "fidelity-02-map-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-02-map-1920x1080.png",
+      "visualEvidence": "refinement-first3-visual-review.json",
+      "technicalEvidence": "refinement-01-09-green.json",
+      "reviewSource": "agent"
     },
     {
       "id": "03",
       "title": "Подготовка",
       "source": "03-preparation.png",
-      "status": "implementation_in_progress",
-      "baselineCapture": "fidelity-03-preparation-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-03-preparation-1920x1080.png",
+      "visualEvidence": "refinement-first3-visual-review.json",
+      "technicalEvidence": "refinement-01-09-green.json",
+      "reviewSource": "agent"
     },
     {
       "id": "04",
       "title": "Выбор основы",
       "source": "04-foundation.png",
-      "status": "pending",
+      "status": "implemented_pending_visual_verification",
       "baselineCapture": "fidelity-04-foundation-1920x1080.png"
     },
     {
       "id": "05",
       "title": "Выбор оружия",
       "source": "05-weapons.png",
-      "status": "pending",
+      "status": "implemented_pending_visual_verification",
       "baselineCapture": "fidelity-05-weapons-1920x1080.png"
     },
     {
       "id": "06",
       "title": "Сборка оружия",
       "source": "06-drawing.png",
-      "status": "pending",
+      "status": "implemented_pending_visual_verification",
       "baselineCapture": "fidelity-06-drawing-1920x1080.png"
     },
     {
       "id": "07",
       "title": "Сравнение деталей",
       "source": "07-details.png",
-      "status": "pending",
+      "status": "implemented_pending_visual_verification",
       "baselineCapture": "fidelity-07-details-1920x1080.png"
     },
     {
       "id": "08",
       "title": "Проверка сборки",
       "source": "08-review.png",
-      "status": "pending",
+      "status": "implemented_pending_visual_verification",
       "baselineCapture": "fidelity-08-review-1920x1080.png"
     },
     {
       "id": "09",
       "title": "Альбом",
       "source": "09-album.png",
-      "status": "pending",
+      "status": "implemented_pending_visual_verification",
       "baselineCapture": "fidelity-09-album-1920x1080.png"
     },
     {
@@ -246,7 +255,7 @@
       "id": "24",
       "title": "Пустой альбом",
       "source": "24-empty.png",
-      "status": "pending",
+      "status": "implemented_pending_visual_verification",
       "baselineCapture": "fidelity-24-empty-1920x1080.png"
     },
     {

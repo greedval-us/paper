@@ -1,0 +1,563 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "d4533475070a4561aae03cf9ab02001c",
+    "status": "failed",
+    "mode": "PlayMode",
+    "started_unix_ms": 1792705644637,
+    "finished_unix_ms": 1792705671414,
+    "last_update_unix_ms": 1792705671414,
+    "progress": {
+      "completed": 57,
+      "total": 57,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": null,
+      "last_finished_test_full_name": "PaperDefense.Tests.PlayerJourneyTests.WorkshopReviewFocusRevealsTheTrialAndEditableName",
+      "last_finished_unix_ms": 1792705671374,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "run_in_background": true,
+      "focus_nudge_attempts": null,
+      "focus_nudge_limit": null,
+      "focus_nudge_status": null,
+      "blocked_reason": null,
+      "failures_so_far": [
+        {
+          "full_name": "PaperDefense.Tests.EightSlotPreparationTests.AMaximumLengthNameStaysClearOfReplaceAndClearControlsAtEveryRequiredSize",
+          "message": "  The price and pencil-only line must both fit their rendered area at (1280, 720)\r\n  Expected: less than or equal to 51.0f\r\n  But was:  59.0f\r\n"
+        }
+      ],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "PlayMode",
+      "summary": {
+        "total": 57,
+        "passed": 56,
+        "failed": 1,
+        "skipped": 0,
+        "durationSeconds": 18.5552243,
+        "resultState": "Failed(Child)"
+      },
+      "results": [
+        {
+          "name": "ClearingASlotWithTheKeyboardFocusesItsReplacementControl",
+          "fullName": "PaperDefense.Tests.AlbumNavigationTests.ClearingASlotWithTheKeyboardFocusesItsReplacementControl",
+          "state": "Passed",
+          "durationSeconds": 1.017721,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EditingAnAlbumPageSavesItsIdentityAndReturnsToTheSameSelection",
+          "fullName": "PaperDefense.Tests.AlbumNavigationTests.EditingAnAlbumPageSavesItsIdentityAndReturnsToTheSameSelection",
+          "state": "Passed",
+          "durationSeconds": 0.5794488,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HomeAlbumReturnsToHomeAndPreparationAlbumReturnsToPreparation",
+          "fullName": "PaperDefense.Tests.AlbumNavigationTests.HomeAlbumReturnsToHomeAndPreparationAlbumReturnsToPreparation",
+          "state": "Passed",
+          "durationSeconds": 0.502366,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1024,768)",
+          "fullName": "PaperDefense.Tests.AlbumNavigationTests.HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1024,768)",
+          "state": "Passed",
+          "durationSeconds": 0.2210651,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1280,720)",
+          "fullName": "PaperDefense.Tests.AlbumNavigationTests.HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1280,720)",
+          "state": "Passed",
+          "durationSeconds": 0.1994838,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1920,1080)",
+          "fullName": "PaperDefense.Tests.AlbumNavigationTests.HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1920,1080)",
+          "state": "Passed",
+          "durationSeconds": 0.2459556,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MapAlbumUsesTheCurrentLoadoutAndReturnsToTheMap",
+          "fullName": "PaperDefense.Tests.AlbumNavigationTests.MapAlbumUsesTheCurrentLoadoutAndReturnsToTheMap",
+          "state": "Passed",
+          "durationSeconds": 0.3343202,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "OpeningAlbumWithTheKeyboardChoosesAnActiveAlbumControl",
+          "fullName": "PaperDefense.Tests.AlbumNavigationTests.OpeningAlbumWithTheKeyboardChoosesAnActiveAlbumControl",
+          "state": "Passed",
+          "durationSeconds": 0.3185494,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ReadinessQueryMatchesStartAndDoesNotPublishOrSaveAnything",
+          "fullName": "PaperDefense.Tests.AlbumNavigationTests.ReadinessQueryMatchesStartAndDoesNotPublishOrSaveAnything",
+          "state": "Passed",
+          "durationSeconds": 0.5411709,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ReturningFromAnUnsavedEditKeepsThePublishedPageAndSelectedIdentity",
+          "fullName": "PaperDefense.Tests.AlbumNavigationTests.ReturningFromAnUnsavedEditKeepsThePublishedPageAndSelectedIdentity",
+          "state": "Passed",
+          "durationSeconds": 0.7139956,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SupportOnlyReadinessAndActualStartBothRejectTheLoadout",
+          "fullName": "PaperDefense.Tests.AlbumNavigationTests.SupportOnlyReadinessAndActualStartBothRejectTheLoadout",
+          "state": "Passed",
+          "durationSeconds": 0.404378,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ConfirmationBlocksTheRootsWaveAndSpeedHotkeysUntilCancelled",
+          "fullName": "PaperDefense.Tests.AlbumPlayerControlsTests.ConfirmationBlocksTheRootsWaveAndSpeedHotkeysUntilCancelled",
+          "state": "Passed",
+          "durationSeconds": 0.3466057,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FocusedNameInputBlocksThePlayerRootsBattleHotkeysAndBuildGate",
+          "fullName": "PaperDefense.Tests.AlbumPlayerControlsTests.FocusedNameInputBlocksThePlayerRootsBattleHotkeysAndBuildGate",
+          "state": "Passed",
+          "durationSeconds": 0.2737744,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SpaceResumesTheSamePausedBattleWithItsModalOpen",
+          "fullName": "PaperDefense.Tests.AlbumPlayerControlsTests.SpaceResumesTheSamePausedBattleWithItsModalOpen",
+          "state": "Passed",
+          "durationSeconds": 0.3632176,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AllEightPositionsRemainAssignableWithoutCompactingEmptySlots",
+          "fullName": "PaperDefense.Tests.EightSlotPreparationTests.AllEightPositionsRemainAssignableWithoutCompactingEmptySlots",
+          "state": "Passed",
+          "durationSeconds": 1.1982437,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AMaximumLengthNameStaysClearOfReplaceAndClearControlsAtEveryRequiredSize",
+          "fullName": "PaperDefense.Tests.EightSlotPreparationTests.AMaximumLengthNameStaysClearOfReplaceAndClearControlsAtEveryRequiredSize",
+          "state": "Failed",
+          "durationSeconds": 0.2891057,
+          "message": "  The price and pencil-only line must both fit their rendered area at (1280, 720)\r\n  Expected: less than or equal to 51.0f\r\n  But was:  59.0f\r\n",
+          "stackTrace": "at PaperDefense.Tests.EightSlotPreparationTests+<AMaximumLengthNameStaysClearOfReplaceAndClearControlsAtEveryRequiredSize>d__13.MoveNext () [0x002e5] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\EightSlotPreparationTests.cs:150\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@1405238725ab\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:44\r\n",
+          "output": ""
+        },
+        {
+          "name": "At1024x768_AllEightSlotsVisible",
+          "fullName": "PaperDefense.Tests.EightSlotPreparationTests.At1024x768_AllEightSlotsVisible",
+          "state": "Passed",
+          "durationSeconds": 0.6635362,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CancellingThePickerReturnsKeyboardFocusToTheSameSlot",
+          "fullName": "PaperDefense.Tests.EightSlotPreparationTests.CancellingThePickerReturnsKeyboardFocusToTheSameSlot",
+          "state": "Passed",
+          "durationSeconds": 0.3161218,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SelectingAnOccupiedEntryRequiresConfirmationBeforeMovingIt",
+          "fullName": "PaperDefense.Tests.EightSlotPreparationTests.SelectingAnOccupiedEntryRequiresConfirmationBeforeMovingIt",
+          "state": "Passed",
+          "durationSeconds": 0.517737,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SupportOnlyPreparationCannotStartAnEnemyDefenseRun",
+          "fullName": "PaperDefense.Tests.EightSlotPreparationTests.SupportOnlyPreparationCannotStartAnEnemyDefenseRun",
+          "state": "Passed",
+          "durationSeconds": 0.3062547,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AlbumSearchRetainsLoadoutAndShowsAnEmptyResult",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.AlbumSearchRetainsLoadoutAndShowsAnEmptyResult",
+          "state": "Passed",
+          "durationSeconds": 0.3602724,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AuthoredPreparationDrawingFitsItsCardAndStaysClearOfCompactNavigation",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.AuthoredPreparationDrawingFitsItsCardAndStaysClearOfCompactNavigation",
+          "state": "Passed",
+          "durationSeconds": 0.2211601,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BattleHintUsesTheDockCaptionAndRestoresTheBlueprintName",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.BattleHintUsesTheDockCaptionAndRestoresTheBlueprintName",
+          "state": "Passed",
+          "durationSeconds": 0.2453933,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DirectSettingsPauseBattleAndHelpReturnsToSettings",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.DirectSettingsPauseBattleAndHelpReturnsToSettings",
+          "state": "Passed",
+          "durationSeconds": 0.315315,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ExistingWorkshopReturnsToPreparationBeforeStartingRun",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.ExistingWorkshopReturnsToPreparationBeforeStartingRun",
+          "state": "Passed",
+          "durationSeconds": 0.1409418,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FreshLaunchShowsMenuWithoutAdvancingOrWritingProfile",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.FreshLaunchShowsMenuWithoutAdvancingOrWritingProfile",
+          "state": "Passed",
+          "durationSeconds": 0.1198387,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HomeActionsRemainVisibleAndSeparateAcrossWindowSizes",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.HomeActionsRemainVisibleAndSeparateAcrossWindowSizes",
+          "state": "Passed",
+          "durationSeconds": 0.2055327,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HomeSettingsHelpAndCancelledExitPreserveTheIdleSession",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.HomeSettingsHelpAndCancelledExitPreserveTheIdleSession",
+          "state": "Passed",
+          "durationSeconds": 0.2201915,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "IconNavigationReachesRealBattleWithFrozenLoadout",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.IconNavigationReachesRealBattleWithFrozenLoadout",
+          "state": "Passed",
+          "durationSeconds": 0.1386828,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "KeyboardFocusRevealsNestedScrollAndClearsItsMarkOnDeselect",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.KeyboardFocusRevealsNestedScrollAndClearsItsMarkOnDeselect",
+          "state": "Passed",
+          "durationSeconds": 0.1370561,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "KeyboardFocusRevealsPlayerControlsInBothScrollDirections",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.KeyboardFocusRevealsPlayerControlsInBothScrollDirections",
+          "state": "Passed",
+          "durationSeconds": 0.2038861,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "KeyboardFocusRevealsWorkshopControlsInBothScrollDirections",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.KeyboardFocusRevealsWorkshopControlsInBothScrollDirections",
+          "state": "Passed",
+          "durationSeconds": 0.2021093,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LeavingBattleKeepsAlbumAndReturnsToSafePreparation",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.LeavingBattleKeepsAlbumAndReturnsToSafePreparation",
+          "state": "Passed",
+          "durationSeconds": 0.1389405,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LongerHomeCaptionRemainsReadable",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.LongerHomeCaptionRemainsReadable",
+          "state": "Passed",
+          "durationSeconds": 0.1190755,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MapKeepsMissionAndNavigationVisibleAcrossWindowSizes",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.MapKeepsMissionAndNavigationVisibleAcrossWindowSizes",
+          "state": "Passed",
+          "durationSeconds": 0.2535469,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MaximumLengthStoredBlueprintNameRemainsReadableInCompactPreparation",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.MaximumLengthStoredBlueprintNameRemainsReadableInCompactPreparation",
+          "state": "Passed",
+          "durationSeconds": 0.2671818,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MissionSummaryUsesTheActiveRulesRatherThanNumbersFromTheSketch",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.MissionSummaryUsesTheActiveRulesRatherThanNumbersFromTheSketch",
+          "state": "Passed",
+          "durationSeconds": 0.1394279,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NotebookIllustrationsKeepTheirWholePageAcrossWindowSizes",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.NotebookIllustrationsKeepTheirWholePageAcrossWindowSizes",
+          "state": "Passed",
+          "durationSeconds": 0.4524662,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PauseBlocksConstructionAndSimulationUntilResume",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.PauseBlocksConstructionAndSimulationUntilResume",
+          "state": "Passed",
+          "durationSeconds": 0.2714501,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PauseBlocksKeyboardSubmitOnPreviouslyFocusedBattleControl",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.PauseBlocksKeyboardSubmitOnPreviouslyFocusedBattleControl",
+          "state": "Passed",
+          "durationSeconds": 0.1341708,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PreparationAlbumCanBeCancelledWithoutChangingTheLoadoutOrStartingBattle",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.PreparationAlbumCanBeCancelledWithoutChangingTheLoadoutOrStartingBattle",
+          "state": "Passed",
+          "durationSeconds": 0.1742264,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PreparationAlbumSlotTabsKeepChoicesUniqueAndCancelWithoutChangingTheLoadout",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.PreparationAlbumSlotTabsKeepChoicesUniqueAndCancelWithoutChangingTheLoadout",
+          "state": "Passed",
+          "durationSeconds": 0.5568336,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PreparationBlocksStartingWithAnEmptyLoadout",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.PreparationBlocksStartingWithAnEmptyLoadout",
+          "state": "Passed",
+          "durationSeconds": 0.2779062,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PreparationPickerChangesOnlyTheChosenSlotAfterAnExplicitChoice",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.PreparationPickerChangesOnlyTheChosenSlotAfterAnExplicitChoice",
+          "state": "Passed",
+          "durationSeconds": 0.2365015,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PreparationShowsAllFourCardsInOneRowWithoutScrollingAcrossWindowSizes",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.PreparationShowsAllFourCardsInOneRowWithoutScrollingAcrossWindowSizes",
+          "state": "Passed",
+          "durationSeconds": 0.4149621,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ReducedMotionDoesNotChangeSimulationOrSharedArt",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.ReducedMotionDoesNotChangeSimulationOrSharedArt",
+          "state": "Passed",
+          "durationSeconds": 0.1647968,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ResizingBattleRetiresTooltipCallbacksWithoutReactivatingTheOldHud",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.ResizingBattleRetiresTooltipCallbacksWithoutReactivatingTheOldHud",
+          "state": "Passed",
+          "durationSeconds": 0.301225,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ResizingWorkshopPreservesTheStandardAssemblyDto",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.ResizingWorkshopPreservesTheStandardAssemblyDto",
+          "state": "Passed",
+          "durationSeconds": 0.2378338,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SelectingPreparationMaterialPreservesCompactCardPositionsAndKeyboardFocus",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.SelectingPreparationMaterialPreservesCompactCardPositionsAndKeyboardFocus",
+          "state": "Passed",
+          "durationSeconds": 0.224854,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SelectingPreparationMaterialUpdatesAllFourConstructionPrices",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.SelectingPreparationMaterialUpdatesAllFourConstructionPrices",
+          "state": "Passed",
+          "durationSeconds": 0.2378247,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SettingsCaptionsFitAtNativePixelDensityAcrossSupportedWindows",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.SettingsCaptionsFitAtNativePixelDensityAcrossSupportedWindows",
+          "state": "Passed",
+          "durationSeconds": 0.4379215,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SettingsKeepBattlePausedAndReturnToPause",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.SettingsKeepBattlePausedAndReturnToPause",
+          "state": "Passed",
+          "durationSeconds": 0.1919374,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SettingsKeepDisplayChoicesAndNavigationVisibleWithoutScrolling",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.SettingsKeepDisplayChoicesAndNavigationVisibleWithoutScrolling",
+          "state": "Passed",
+          "durationSeconds": 0.374731,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SettingsOfferResolutionSelectionWithoutApplyingItOnNavigation",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.SettingsOfferResolutionSelectionWithoutApplyingItOnNavigation",
+          "state": "Passed",
+          "durationSeconds": 0.2039377,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "StandardReviewRemainsVisibleAndStageChangesResetScroll",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.StandardReviewRemainsVisibleAndStageChangesResetScroll",
+          "state": "Passed",
+          "durationSeconds": 0.3797582,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UpgradeChoicesDisplayAmountsFromTheActiveRules",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.UpgradeChoicesDisplayAmountsFromTheActiveRules",
+          "state": "Passed",
+          "durationSeconds": 0.1715144,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WorkshopReviewFocusRevealsTheTrialAndEditableName",
+          "fullName": "PaperDefense.Tests.PlayerJourneyTests.WorkshopReviewFocusRevealsTheTrialAndEditableName",
+          "state": "Passed",
+          "durationSeconds": 0.2084542,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

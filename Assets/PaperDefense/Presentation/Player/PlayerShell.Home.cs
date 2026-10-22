@@ -8,20 +8,22 @@ namespace PaperDefense.Presentation
     {
         void BuildNotebookHome()
         {
-            Rect composition = NotebookPageBackdrop("Art/Player/HomeDefenseLandscape", "Home illustration");
+            Rect composition = NotebookPageBackdrop("Art/Player/HomeDefenseLandscapeV2", "Home illustration");
 
             // Layout follows the size of the complete landscape page, without a second UI scale.
             float responsive = Mathf.Min(composition.width / 1600f, composition.height / 900f);
             float scale = responsive;
             bool assembly = game.Run.AssemblyCatalog != null;
-            float actionHeight = assembly ? 458 : 454, actionWidth = assembly ? 426 : 402;
-            float brandAvailable = composition.height - actionHeight * scale - 135 * responsive;
+            // The source menu occupies about 24% of the illustrated page, leaving the
+            // notebook and the castle as the other two large shapes in the composition.
+            float actionHeight = assembly ? 466 : 454, actionWidth = assembly ? 380 : 402;
+            float brandAvailable = composition.height - actionHeight * scale - (assembly ? 129 : 135) * responsive;
             float brandScale = Mathf.Min(scale, Mathf.Max(0, brandAvailable) / 305);
             float brandHeight = 305 * brandScale;
-            float gap = 29 * responsive;
+            float gap = (assembly ? 33 : 29) * responsive;
             float blockHeight = brandHeight + gap + actionHeight * scale;
             float top = composition.y + Mathf.Max(22 * responsive, (composition.height - 60 * responsive - blockHeight) * .5f);
-            float left = composition.x + 44 * responsive;
+            float left = composition.x + 46 * responsive;
 
             var brand = ui.Panel(page, "Home wordmark", new Rect(composition.x + 32 * responsive, top, Mathf.Max(500 * brandScale, actionWidth * scale), brandHeight), Color.clear);
             if (NotebookSpriteCatalog.TryGet("logo.home", out var wordmark))
@@ -55,13 +57,13 @@ namespace PaperDefense.Presentation
             var play = HomeAction(actions, "Open campaign", PlayerIcon.Play, "Играть", () => game.Navigate(PlayerPage.Map), actionWidth, 104, 60, scale, true);
             Button album = null;
             if (assembly) album = HomeAction(actions, "Open album", PlayerIcon.Book,
-                GameText.Resolve(PaperDefense.Core.UserText.Message("assembly.player.album")), game.OpenAlbum, actionWidth, 64, 44, scale);
-            var workshop = HomeAction(actions, "workshop", PlayerIcon.Pencil, ui.T("workshop"), () => game.Navigate(PlayerPage.Workshop), actionWidth, assembly ? 72 : 92, 50, scale);
-            var settings = HomeAction(actions, "settings", PlayerIcon.Settings, ui.T("settings"), () => game.OpenSettings(), actionWidth, assembly ? 68 : 84, 50, scale);
-            var help = HomeAction(actions, "help", PlayerIcon.Book, "Помощь", () => game.OpenSettings(true), actionWidth, assembly ? 64 : 80, 48, scale);
+                GameText.Resolve(PaperDefense.Core.UserText.Message("assembly.player.album")), game.OpenAlbum, actionWidth, 66, 42, scale);
+            var workshop = HomeAction(actions, "workshop", PlayerIcon.Pencil, ui.T("workshop"), () => game.Navigate(PlayerPage.Workshop), actionWidth, assembly ? 66 : 92, assembly ? 42 : 50, scale);
+            var settings = HomeAction(actions, "settings", PlayerIcon.Settings, ui.T("settings"), () => game.OpenSettings(), actionWidth, assembly ? 66 : 84, assembly ? 42 : 50, scale);
+            var help = HomeAction(actions, "help", PlayerIcon.Book, "Помощь", () => game.OpenSettings(true), actionWidth, assembly ? 64 : 80, assembly ? 42 : 48, scale);
             var exit = HomeAction(actions, "exit", PlayerIcon.Exit, "Выйти",
                 () => Confirm("Выйти из игры?", "Сохранённые чертежи и золото останутся в профиле.", () => UnityEngine.Application.Quit()),
-                270, assembly ? 46 : 58, 36, scale);
+                assembly ? 294 : 270, assembly ? 60 : 58, 36, scale);
             Button[] ordered = assembly ? new[] { play, album, workshop, settings, help, exit } : new[] { play, workshop, settings, help, exit };
             for (int i = 0; i < ordered.Length; i++)
             {
@@ -74,7 +76,7 @@ namespace PaperDefense.Presentation
             int waves = game.Run.Session.Balance.Waves.Count;
             string waveCopy = waves == 8 ? "Восемь волн." : waves + " волн.";
             HomeLettering(page, assembly ? GameText.Resolve(PaperDefense.Core.UserText.Message("assembly.player.tagline", waveCopy)) : "Четыре чертежа.\n" + waveCopy,
-                new Rect(left, composition.yMax - 74 * responsive, 260 * responsive, 64 * responsive),
+                new Rect(left, composition.yMax - (assembly ? 56 : 74) * responsive, 300 * responsive, 48 * responsive),
                 Mathf.Max(14 / Layout.Scale, 20 * responsive));
             if (assembly)
             {
@@ -106,9 +108,9 @@ namespace PaperDefense.Presentation
             var symbol = button.GetComponentInChildren<PlayerIconGraphic>();
             PlayerUi.Place(symbol.rectTransform, new Rect(22 * scale, (height * scale - iconSize) * .5f, iconSize, iconSize));
             if (!primary)
-                NotebookControlIcon(button, name == "workshop" ? "icon.workshop" : name == "help" ? "icon.help" : NotebookIconId(icon));
+                NotebookControlIcon(button, name == "workshop" ? "icon.workshop" : icon == PlayerIcon.Book ? "icon.help" : NotebookIconId(icon));
             var captionText = button.GetComponentInChildren<Text>();
-            captionText.rectTransform.offsetMin = new Vector2(108 * scale, 6 * scale);
+            captionText.rectTransform.offsetMin = new Vector2(126 * scale, 6 * scale);
             captionText.rectTransform.offsetMax = new Vector2(-14 * scale, -6 * scale);
             captionText.resizeTextMinSize = Mathf.Max(12, Mathf.RoundToInt(fontSize * scale * .45f));
             captionText.resizeTextMaxSize = Mathf.Max(14, Mathf.RoundToInt(fontSize * scale));
