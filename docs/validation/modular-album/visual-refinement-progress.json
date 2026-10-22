@@ -1,0 +1,295 @@
+{
+  "scope": "Sequential further refinement of all 30 existing scenes toward concept style while preserving gameplay. This supersedes the earlier technical visual acceptance for newly changed surfaces only.",
+  "baselineCommit": "0adb5a7",
+  "referenceSize": [
+    1672,
+    941
+  ],
+  "visualContract": [
+    "Blue ballpoint drawing, warm graph paper, source composition with readable live Russian text.",
+    "Real recipes, profile data, prices, placements, actions and battle state remain authoritative.",
+    "World terrain stays at map coordinates under pan, zoom and aspect changes. No viewport-relative fictional obstacles.",
+    "Inspect each source and current runtime frame, repair the strongest actual mismatch, then capture and check gameplay at main and alternate aspect."
+  ],
+  "order": [
+    "camera-terrain",
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30"
+  ],
+  "intake": {
+    "unity": "6000.5.7f1",
+    "scene": "Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity",
+    "stopped": true,
+    "consoleErrors": 0,
+    "selectedObject": null,
+    "runtimeUiOwner": "PlayerShell / CompositeWorkshopPanel (UGUI; created in PlayMode)",
+    "sharedAssetPolicy": "Keep existing generated modular sources and mappings unless a specific inspected mismatch requires a scoped change."
+  },
+  "cameraTerrain": {
+    "status": "complete_for_scoped_camera_fix",
+    "rootCause": "NotebookWorldView.DrawFocusedSceneryFrame uses camera bounds and zoom cutoff to redraw decorative trees and rocks relative to the viewport.",
+    "repair": "Retain authoritative map props and fixed surrounding scenery; remove the duplicate camera-framed layer and unused paper pan/aspect invalidation. Keep adaptive grid/stroke scaling.",
+    "reviewSource": "agent",
+    "verification": [
+      "Stable atlas sprite world vertices across pan, zoom threshold and aspect.",
+      "Projected sprite moves/scales with camera.",
+      "Session, resources and placement unchanged.",
+      "Fresh battle zoom/pan captures."
+    ],
+    "technicalEvidence": {
+      "redJob": "f37bb6be7f90452fb4c0425a71fff050",
+      "redFailed": 3,
+      "greenJob": "1ea98b4733824f2faf7dfc21f8d028b2",
+      "greenPassed": 24,
+      "greenFailed": 0,
+      "greenSkipped": 0,
+      "redResult": "refinement-camera-red.json",
+      "greenResult": "refinement-camera-green.json"
+    },
+    "visualEvidence": "refinement-terrain-visual-review.json",
+    "residuals": [
+      "Fixed planning instruction can overlap world actors when deliberately panned beneath it. To revisit with battle-scene layout.",
+      "Close castle views are sparse because fake viewport forests were removed; further world style must remain grounded in map terrain."
+    ]
+  },
+  "scenes": [
+    {
+      "id": "01",
+      "title": "Главное меню",
+      "source": "01-home.png",
+      "status": "implementation_in_progress",
+      "baselineCapture": "fidelity-01-home-1920x1080.png"
+    },
+    {
+      "id": "02",
+      "title": "Карта",
+      "source": "02-map.png",
+      "status": "implementation_in_progress",
+      "baselineCapture": "fidelity-02-map-1920x1080.png"
+    },
+    {
+      "id": "03",
+      "title": "Подготовка",
+      "source": "03-preparation.png",
+      "status": "implementation_in_progress",
+      "baselineCapture": "fidelity-03-preparation-1920x1080.png"
+    },
+    {
+      "id": "04",
+      "title": "Выбор основы",
+      "source": "04-foundation.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-04-foundation-1920x1080.png"
+    },
+    {
+      "id": "05",
+      "title": "Выбор оружия",
+      "source": "05-weapons.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-05-weapons-1920x1080.png"
+    },
+    {
+      "id": "06",
+      "title": "Сборка оружия",
+      "source": "06-drawing.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-06-drawing-1920x1080.png"
+    },
+    {
+      "id": "07",
+      "title": "Сравнение деталей",
+      "source": "07-details.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-07-details-1920x1080.png"
+    },
+    {
+      "id": "08",
+      "title": "Проверка сборки",
+      "source": "08-review.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-08-review-1920x1080.png"
+    },
+    {
+      "id": "09",
+      "title": "Альбом",
+      "source": "09-album.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-09-album-1920x1080.png"
+    },
+    {
+      "id": "10",
+      "title": "Полигон",
+      "source": "10-trial.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-10-trial-1920x1080.png"
+    },
+    {
+      "id": "11",
+      "title": "Открытия деталей",
+      "source": "11-stencils.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-11-stencils-1920x1080.png"
+    },
+    {
+      "id": "12",
+      "title": "Мортира",
+      "source": "12-mortar.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-12-mortar-1920x1080.png"
+    },
+    {
+      "id": "13",
+      "title": "Веер",
+      "source": "13-fan.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-13-fan-1920x1080.png"
+    },
+    {
+      "id": "14",
+      "title": "Броня",
+      "source": "14-armor.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-14-armor-1920x1080.png"
+    },
+    {
+      "id": "15",
+      "title": "Планирование",
+      "source": "15-planning.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-15-planning-1920x1080.png"
+    },
+    {
+      "id": "16",
+      "title": "Бой",
+      "source": "16-battle.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-16-battle-1920x1080.png"
+    },
+    {
+      "id": "17",
+      "title": "Инспектор",
+      "source": "17-tower.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-17-tower-1920x1080.png"
+    },
+    {
+      "id": "18",
+      "title": "Пауза",
+      "source": "18-pause.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-18-pause-1920x1080.png"
+    },
+    {
+      "id": "19",
+      "title": "Усиления",
+      "source": "19-upgrades.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-19-upgrades-1920x1080.png"
+    },
+    {
+      "id": "20",
+      "title": "Победа",
+      "source": "20-victory.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-20-victory-1920x1080.png"
+    },
+    {
+      "id": "21",
+      "title": "Поражение",
+      "source": "21-defeat.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-21-defeat-1920x1080.png"
+    },
+    {
+      "id": "22",
+      "title": "Настройки",
+      "source": "22-settings.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-22-settings-1920x1080.png"
+    },
+    {
+      "id": "23",
+      "title": "Помощь",
+      "source": "23-help.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-23-help-1920x1080.png"
+    },
+    {
+      "id": "24",
+      "title": "Пустой альбом",
+      "source": "24-empty.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-24-empty-1920x1080.png"
+    },
+    {
+      "id": "25",
+      "title": "Покупка",
+      "source": "25-purchase.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-25-purchase-1920x1080.png"
+    },
+    {
+      "id": "26",
+      "title": "Ошибка записи",
+      "source": "26-save-error.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-26-save-error-1920x1080.png"
+    },
+    {
+      "id": "27",
+      "title": "Несовместимость",
+      "source": "27-invalid.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-27-invalid-1920x1080.png"
+    },
+    {
+      "id": "28",
+      "title": "Выход из боя",
+      "source": "28-leave.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-28-leave-1920x1080.png"
+    },
+    {
+      "id": "29",
+      "title": "Сборка сооружения",
+      "source": "29-structure.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-29-structure-1920x1080.png"
+    },
+    {
+      "id": "30",
+      "title": "Сборка основы",
+      "source": "30-foundation-parts.png",
+      "status": "pending",
+      "baselineCapture": "fidelity-30-foundation-parts-1920x1080.png"
+    }
+  ]
+}

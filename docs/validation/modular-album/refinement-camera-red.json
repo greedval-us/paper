@@ -1,0 +1,85 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "f37bb6be7f90452fb4c0425a71fff050",
+    "status": "failed",
+    "mode": "PlayMode",
+    "started_unix_ms": 1792704326492,
+    "finished_unix_ms": 1792704333790,
+    "last_update_unix_ms": 1792704333790,
+    "progress": {
+      "completed": 3,
+      "total": 3,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": null,
+      "last_finished_test_full_name": "PaperDefense.Tests.NotebookCameraReadabilityTests.ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"aspect\")",
+      "last_finished_unix_ms": 1792704333766,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "run_in_background": true,
+      "focus_nudge_attempts": null,
+      "focus_nudge_limit": null,
+      "focus_nudge_status": null,
+      "blocked_reason": null,
+      "failures_so_far": [
+        {
+          "full_name": "PaperDefense.Tests.NotebookCameraReadabilityTests.ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"pan\")",
+          "message": "  Terrain vertex 336 moved in world coordinates during camera pan.\r\n  Expected: less than 9.99999975E-05f\r\n  But was:  3.60555124f\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.NotebookCameraReadabilityTests.ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"zoom\")",
+          "message": "  Camera zoom must not make terrain illustrations appear or disappear.\r\n  Expected: 684\r\n  But was:  500\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.NotebookCameraReadabilityTests.ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"aspect\")",
+          "message": "  Terrain vertex 336 moved in world coordinates during camera aspect.\r\n  Expected: less than 9.99999975E-05f\r\n  But was:  9.58345699f\r\n"
+        }
+      ],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "PlayMode",
+      "summary": {
+        "total": 3,
+        "passed": 0,
+        "failed": 3,
+        "skipped": 0,
+        "durationSeconds": 0.2908899,
+        "resultState": "Failed(Child)"
+      },
+      "results": [
+        {
+          "name": "ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"pan\")",
+          "fullName": "PaperDefense.Tests.NotebookCameraReadabilityTests.ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"pan\")",
+          "state": "Failed",
+          "durationSeconds": 0.1922109,
+          "message": "  Terrain vertex 336 moved in world coordinates during camera pan.\r\n  Expected: less than 9.99999975E-05f\r\n  But was:  3.60555124f\r\n",
+          "stackTrace": "at PaperDefense.Tests.NotebookCameraReadabilityTests.AssertPaperAtlasUnchanged (System.ValueTuple`2[T1,T2] before, System.ValueTuple`2[T1,T2] after, System.String navigation) [0x0005e] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookCameraReadabilityTests.cs:196\r\nat PaperDefense.Tests.NotebookCameraReadabilityTests.ProductionMapSceneryRemainsAnchoredDuringCameraNavigation (System.String navigation) [0x004a7] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookCameraReadabilityTests.cs:147\r\n",
+          "output": ""
+        },
+        {
+          "name": "ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"zoom\")",
+          "fullName": "PaperDefense.Tests.NotebookCameraReadabilityTests.ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"zoom\")",
+          "state": "Failed",
+          "durationSeconds": 0.0309803,
+          "message": "  Camera zoom must not make terrain illustrations appear or disappear.\r\n  Expected: 684\r\n  But was:  500\r\n",
+          "stackTrace": "at PaperDefense.Tests.NotebookCameraReadabilityTests.AssertPaperAtlasUnchanged (System.ValueTuple`2[T1,T2] before, System.ValueTuple`2[T1,T2] after, System.String navigation) [0x00000] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookCameraReadabilityTests.cs:192\r\nat PaperDefense.Tests.NotebookCameraReadabilityTests.ProductionMapSceneryRemainsAnchoredDuringCameraNavigation (System.String navigation) [0x004a7] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookCameraReadabilityTests.cs:147\r\n",
+          "output": ""
+        },
+        {
+          "name": "ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"aspect\")",
+          "fullName": "PaperDefense.Tests.NotebookCameraReadabilityTests.ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"aspect\")",
+          "state": "Failed",
+          "durationSeconds": 0.0331507,
+          "message": "  Terrain vertex 336 moved in world coordinates during camera aspect.\r\n  Expected: less than 9.99999975E-05f\r\n  But was:  9.58345699f\r\n",
+          "stackTrace": "at PaperDefense.Tests.NotebookCameraReadabilityTests.AssertPaperAtlasUnchanged (System.ValueTuple`2[T1,T2] before, System.ValueTuple`2[T1,T2] after, System.String navigation) [0x0005e] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookCameraReadabilityTests.cs:196\r\nat PaperDefense.Tests.NotebookCameraReadabilityTests.ProductionMapSceneryRemainsAnchoredDuringCameraNavigation (System.String navigation) [0x004a7] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookCameraReadabilityTests.cs:147\r\n",
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

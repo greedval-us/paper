@@ -1,0 +1,179 @@
+{
+  "schema": "paper-defense.visual-review/v1",
+  "reviewId": "camera-map-scenery-2026-10-23",
+  "reviewedAt": "2026-10-23T00:31:53+03:00",
+  "reviewer": "/root/refine_terrain_visual_review",
+  "roleResult": "complete_for_role",
+  "verdict": "pass_for_scoped_camera_fix_with_residuals",
+  "scope": {
+    "included": "Manual visual review of eight fresh terrain camera screenshots after removal of the extra viewport-generated tree/rock layer.",
+    "excluded": [
+      "Completion or visual acceptance of the thirty-scene album",
+      "Independent execution of Unity tests or live interaction",
+      "Exact world-projection, collider, or input-hit testing from still pictures",
+      "User acceptance of art direction"
+    ],
+    "sourceEditsByReviewer": false,
+    "unityMutationsByReviewer": false
+  },
+  "capabilities": {
+    "artifactAccess": "verified: read the actual PNG files, their sidecars, test evidence, and source hashes from this workspace",
+    "visionInputAndInterpretation": "verified: each PNG was opened individually with tools.view_image and its rendered pixels inspected",
+    "visionProofObservation": "The first 1280x720 overview shows a tiny blue-ink castle within a cream grid, sparse interior map trees and rocks, dense outer forest/mountains, Russian HUD labels and eight build cards.",
+    "projectSourceRead": "verified",
+    "liveUnityAccess": "not_exercised_for_this_role",
+    "screenshotCapture": "not_exercised_for_this_role; supplied by coordinator",
+    "imageGeneration": "not_applicable"
+  },
+  "instructionsRead": [
+    "C:/Users/Greedval/.codex/skills/unity-mcp-ui-layout/SKILL.md",
+    "C:/Users/Greedval/.codex/skills/unity-mcp-ui-layout/references/agent-capability-routing.md"
+  ],
+  "revision": {
+    "gitHead": "0adb5a7bbc0d2cb18042d1e8c0e47115161b3382",
+    "workingTreeHasUncommittedChanges": true,
+    "captureArtRevision": "modular-full-catalog-2026-10-22-v7",
+    "captureFrame": 56941,
+    "captureSidecarScene": "",
+    "captureActiveCanvases": 1,
+    "sourceHashes": [
+      {
+        "path": "D:/Projekt Unity/paper/Assets/PaperDefense/Presentation/Rendering/NotebookWorldView.cs",
+        "sha256": "650D4E1FC47702BB5DCB7B8CEF1CCF785D4C6A647A474BBDC90378195F0B372A"
+      },
+      {
+        "path": "D:/Projekt Unity/paper/Assets/PaperDefense/Tests/PlayMode/NotebookCameraReadabilityTests.cs",
+        "sha256": "2252D50DCE195E7B6B4844EF56444EE595F74E32660396A6A551978AEB1F0954"
+      }
+    ]
+  },
+  "technicalEvidence": {
+    "owner": "/root",
+    "path": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-camera-green.json",
+    "sha256": "DF73F2C83EEE7CFB904F36339BB46D414F0FB5CD395BC3CB43A3D0CB2C33BC1B",
+    "readByReviewer": true,
+    "summary": "Saved PlayMode result reports 24 passed, 0 failed, 0 skipped, including ProductionMapSceneryRemainsAnchoredDuringCameraNavigation for pan, zoom and aspect.",
+    "interpretationBoundary": "These tests supply the technical anchoring and interaction evidence. The pictures alone do not establish exact projected positions or hit targets."
+  },
+  "manualReviewFlags": {
+    "allEightActualFilesOpenedIndividually": true,
+    "bothAspectRatiosInspected": true,
+    "zoom1Zoom3Zoom6AndPanCompared": true,
+    "visibleTextAndActionBoundsInspected": true,
+    "noNewVisibleHudTextClippingFound": true,
+    "noVisibleActionOutsideFrameFound": true,
+    "interactiveReachabilityExercisedByReviewer": false,
+    "exactWorldAnchoringProvedFromPixels": false,
+    "wholeAlbumReviewed": false,
+    "sourceConceptInspected": false
+  },
+  "comparisonObservations": [
+    "At zoom1 the field contains sparse interior trees, rocks and resource marks, with dense decorative scenery outside the field boundaries. Both aspect ratios retain the overview composition.",
+    "At zoom3 the centered castle grows and a few distant trees and rocks remain near the outer screen regions. At zoom6 the close castle has clear cream graph-paper surroundings. This is visually compatible with cropping and scaling sparse map scenery; no exact projection claim is inferred from these pictures.",
+    "At pan6 the castle moves down and left beneath the stationary HUD. A rock enters at the far right edge in 1280x720; the narrower 1024x768 crop does not include it. These stills do not show a new ring of viewport-relative props around the castle.",
+    "The 1280x720 HUD stays in a single top row. The 1024x768 HUD uses a taller two-row arrangement, and the start-wave, speed, focus and pause actions remain visibly contained.",
+    "All eight build cards, tool buttons, material counters, side navigation arrows and overview action stay visible. Longer Russian card names wrap within their cards at 1024x768."
+  ],
+  "residuals": [
+    {
+      "id": "planning-overlay-over-castle-during-pan",
+      "severity": "minor_existing_layout_behavior",
+      "observation": "The fixed planning instruction strip covers part of the lower castle in both pan6 captures. Its text and the surrounding actions remain legible. The supplied set does not establish when this HUD overlap behavior was introduced.",
+      "blockingForCameraSceneryFix": false
+    },
+    {
+      "id": "sparse-close-map-style",
+      "severity": "style_residual",
+      "observation": "Zoom3 and zoom6 have broad empty cream areas and a very faint range circle. This gives the castle clarity, but the visual density differs strongly from the densely illustrated overview margins. This review does not accept or reject that art-direction choice for the wider album.",
+      "blockingForCameraSceneryFix": false
+    },
+    {
+      "id": "source-concept-context-unavailable",
+      "severity": "review_limit",
+      "observation": "concept15-planning.png was named as style context but was not found in the workspace file inventory during this review. No source-concept match is claimed.",
+      "blockingForCameraSceneryFix": false
+    }
+  ],
+  "images": [
+    {
+      "path": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom1-1280x720.png",
+      "sidecarPath": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom1-1280x720.json",
+      "sha256": "845F80013CAD1FB9B8EEEB56E240D3DFBF8F287792EA23FCF2428B1E7FE57112",
+      "width": 1280,
+      "height": 720,
+      "manualPixelInspection": true,
+      "observation": "Tiny centered castle, sparse map-backed interior scenery, dense forest and mountain margins; single-row header and all build cards fit.",
+      "seriousVisibleFinding": false
+    },
+    {
+      "path": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom1-1024x768.png",
+      "sidecarPath": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom1-1024x768.json",
+      "sha256": "56F785543B06FE5E6E5C84CF5EFB775C81E1C8FA35477ABB00781F781C84B555",
+      "width": 1024,
+      "height": 768,
+      "manualPixelInspection": true,
+      "observation": "Overview field and decorated margins remain visible with a taller header. Eight narrower build cards wrap their longer labels without visible truncation.",
+      "seriousVisibleFinding": false
+    },
+    {
+      "path": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom3-1280x720.png",
+      "sidecarPath": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom3-1280x720.json",
+      "sha256": "F491BE39D5DD5359C1B5DAE12F728739617AD5EADD94D1180769532BAF9297C4",
+      "width": 1280,
+      "height": 720,
+      "manualPixelInspection": true,
+      "observation": "Mid-size centered castle, one pine near the upper left and small rocks near outer edges. The surroundings are sparse and the unchanged HUD stays readable.",
+      "seriousVisibleFinding": false
+    },
+    {
+      "path": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom3-1024x768.png",
+      "sidecarPath": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom3-1024x768.json",
+      "sha256": "8B5D560D0C910F81AF7CCE96FC775B548CE561FB77D081A55C3DF96BD79EF472",
+      "width": 1024,
+      "height": 768,
+      "manualPixelInspection": true,
+      "observation": "Same sparse mid-zoom composition with left-edge pine cropped by the world viewport and distant rocks. No HUD text or action appears cut off.",
+      "seriousVisibleFinding": false
+    },
+    {
+      "path": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom6-1280x720.png",
+      "sidecarPath": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom6-1280x720.json",
+      "sha256": "819E2D6977F30288F5E9A597E28C5463AED2BD6F6F32EFBDA106E2D341BBCF9D",
+      "width": 1280,
+      "height": 720,
+      "manualPixelInspection": true,
+      "observation": "Large centered castle is fully visible with fine grid and a faint large range circle; no extra near-screen obstacles surround it. HUD and build strip fit.",
+      "seriousVisibleFinding": false
+    },
+    {
+      "path": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom6-1024x768.png",
+      "sidecarPath": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom6-1024x768.json",
+      "sha256": "CA92DBA9DD0C7193BA9B66FA69CE5B891B098292920DC02A240C5D26C048CEEC",
+      "width": 1024,
+      "height": 768,
+      "manualPixelInspection": true,
+      "observation": "Large castle remains completely framed between the taller header and build strip. Range circle crosses viewport boundaries as world content; all HUD actions remain contained.",
+      "seriousVisibleFinding": false
+    },
+    {
+      "path": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-pan6-1280x720.png",
+      "sidecarPath": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-pan6-1280x720.json",
+      "sha256": "986C37E59B50C6571DB839C539857389680B5EC2A8AE8D83EC1772C3C08CFEBB",
+      "width": 1280,
+      "height": 720,
+      "manualPixelInspection": true,
+      "observation": "Panned castle is down-left and partly behind the fixed planning instruction strip; a rock is visible at the far right edge. All HUD text and action panels remain legible and in frame.",
+      "seriousVisibleFinding": false
+    },
+    {
+      "path": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-pan6-1024x768.png",
+      "sidecarPath": "D:/Projekt Unity/paper/docs/validation/modular-album/refinement-screenshots/refinement-terrain-pan6-1024x768.json",
+      "sha256": "531B25F78D1DF2743FEA005BC9CDD20EC0D36F228FEFCE869B33CE671504788B",
+      "width": 1024,
+      "height": 768,
+      "manualPixelInspection": true,
+      "observation": "Panned castle is down-left beneath the fixed instruction strip; the narrower crop has no right-edge rock. Two-row header, overview action, eight build cards and bottom tool actions remain contained.",
+      "seriousVisibleFinding": false
+    }
+  ]
+}

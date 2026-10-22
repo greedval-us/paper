@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Reflection;
 using NUnit.Framework;
 using PaperDefense.Application;
@@ -34,7 +35,8 @@ namespace PaperDefense.Tests
             var run = root.AddComponent<RunController>();
             run.AutomaticSimulation = false;
             run.Initialize(allowLegacyFixtureDefaults: true);
-            camera = root.AddComponent<Camera>(); camera.orthographic = true;
+            camera = new GameObject("Readability camera", typeof(Camera)).GetComponent<Camera>();
+            camera.transform.SetParent(root.transform, false); camera.orthographic = true;
             camera.orthographicSize = 10;
             camera.transform.position = new Vector3(run.Session.Balance.Width * .5f, run.Session.Balance.Height * .5f, -10);
             view = root.AddComponent<NotebookWorldView>(); view.WorldCamera = camera; view.Initialize(run.Session);
@@ -81,6 +83,139 @@ namespace PaperDefense.Tests
             camera.transform.position += Vector3.right;
             typeof(NotebookWorldView).GetMethod("LateUpdate", Private).Invoke(view, null);
             Assert.That(view.StaticGeometryRefreshCount, Is.EqualTo(after));
+        }
+
+        [TestCase("pan")]
+        [TestCase("zoom")]
+        [TestCase("aspect")]
+        public void ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(string navigation)
+        {
+            // This is the actual terrain/placement map. The old open-field fixture
+            // never exercised the camera-framed scenery branch.
+            var session = new GameSession(NotebookTowerDefensePreset.Create(), starterDefenses: false);
+            var read = new RunReadModel(session);
+            var map = read.Battlefield;
+            Assert.That(map, Is.Not.Null);
+            Assert.That(NotebookSpriteCatalog.Available, Is.True, "Use the real imported terrain illustrations.");
+            camera.aspect = 16f / 9f; camera.orthographicSize = 20;
+            camera.transform.position = new Vector3(48.5f, 32.5f, -10);
+            view.ModernEnemyPresentation = true; view.Bind(read);
+            typeof(NotebookWorldView).GetMethod("LateUpdate", Private).Invoke(view, null);
+
+            var before = PaperAtlas();
+            var pineBefore = ProjectMapPine(before.Vertices);
+            var runId = read.RunId;
+            long tick = read.TickIndex;
+            int ink = read.Ink, gold = read.GoldEarned;
+            float elapsed = read.Elapsed, health = read.BaseHealth;
+            int topology = read.TopologyVersion, structures = read.Structures.Count;
+            var props = new List<TerrainPropView>(map.Props);
+            var placement = new bool[read.Balance.Width * read.Balance.Height];
+            for (int y = 0; y < read.Balance.Height; y++)
+                for (int x = 0; x < read.Balance.Width; x++)
+                    placement[y * read.Balance.Width + x] = map.CanPlace(new Cell(x, y), StructureKind.Wall);
+            var freeCell = new[] { new Cell(40, 32) };
+            var terrainCell = new[] { new Cell(7, 32) };
+            var freeQuote = read.QuoteBuild(freeCell, StructureKind.Wall, MaterialTier.Pencil);
+            var terrainQuote = read.QuoteBuild(terrainCell, StructureKind.Wall, MaterialTier.Pencil);
+            Assert.That(freeQuote.Valid, Is.True, "A camera move must retain this usable construction cell.");
+            Assert.That(terrainQuote.Valid, Is.False, "The authored pine occupies reserved terrain.");
+
+            if (navigation == "pan") camera.transform.position += new Vector3(3, -2, 0);
+            // The production map is 64 units high, so 20 -> 24 crosses the old
+            // 22.4-unit scenery threshold and must not add/remove illustrations.
+            else if (navigation == "zoom") camera.orthographicSize = 24;
+            else camera.aspect = 4f / 3f;
+            typeof(NotebookWorldView).GetMethod("LateUpdate", Private).Invoke(view, null);
+            var after = PaperAtlas();
+
+            Assert.That(read.RunId, Is.EqualTo(runId));
+            Assert.That(read.TickIndex, Is.EqualTo(tick)); Assert.That(read.Elapsed, Is.EqualTo(elapsed));
+            Assert.That(read.Ink, Is.EqualTo(ink)); Assert.That(read.GoldEarned, Is.EqualTo(gold));
+            Assert.That(read.BaseHealth, Is.EqualTo(health)); Assert.That(read.Structures.Count, Is.EqualTo(structures));
+            Assert.That(read.TopologyVersion, Is.EqualTo(topology)); Assert.That(read.Battlefield, Is.SameAs(map));
+            CollectionAssert.AreEqual(props, map.Props, "Camera framing cannot rewrite terrain footprints.");
+            for (int y = 0; y < read.Balance.Height; y++)
+                for (int x = 0; x < read.Balance.Width; x++)
+                    Assert.That(map.CanPlace(new Cell(x, y), StructureKind.Wall),
+                        Is.EqualTo(placement[y * read.Balance.Width + x]), $"Placement at {x},{y} changed with the camera.");
+            var afterFree = read.QuoteBuild(freeCell, StructureKind.Wall, MaterialTier.Pencil);
+            var afterTerrain = read.QuoteBuild(terrainCell, StructureKind.Wall, MaterialTier.Pencil);
+            Assert.That(afterFree.Valid, Is.EqualTo(freeQuote.Valid)); Assert.That(afterFree.Cost, Is.EqualTo(freeQuote.Cost));
+            Assert.That(afterTerrain.Valid, Is.EqualTo(terrainQuote.Valid)); Assert.That(afterTerrain.Reason, Is.EqualTo(terrainQuote.Reason));
+
+            AssertPaperAtlasUnchanged(before, after, navigation);
+            var pineAfter = ProjectMapPine(after.Vertices);
+            if (navigation == "pan")
+            {
+                var screenDelta = new Vector2(3 * camera.pixelWidth / (40f * camera.aspect),
+                    -2 * camera.pixelHeight / 40f);
+                var expectedCenter = pineBefore.center - screenDelta;
+                Assert.That(Vector2.Distance(pineAfter.center, expectedCenter), Is.LessThan(.01f),
+                    "The terrain illustration must move across the screen with its map cell.");
+                Assert.That(Vector2.Distance(pineAfter.size, pineBefore.size), Is.LessThan(.01f));
+            }
+            else if (navigation == "zoom")
+            {
+                Assert.That(pineAfter.height, Is.EqualTo(pineBefore.height * 20f / 24f).Within(.01f));
+                camera.orthographicSize = 10;
+                typeof(NotebookWorldView).GetMethod("LateUpdate", Private).Invoke(view, null);
+                var close = PaperAtlas();
+                AssertPaperAtlasUnchanged(before, close, "close zoom");
+                Assert.That(ProjectMapPine(close.Vertices).height, Is.EqualTo(pineBefore.height * 2).Within(.01f),
+                    "Zoom enlarges the same tree instead of resizing it to a fixed screen height.");
+            }
+        }
+
+        (Vector3[] Vertices, Vector2[] Uvs) PaperAtlas()
+        {
+            var filter = root.transform.Find("Graph paper").GetComponent<MeshFilter>();
+            var mesh = filter.sharedMesh;
+            var source = mesh.vertices;
+            var sourceUv = new List<Vector2>(); mesh.GetUVs(1, sourceUv);
+            var vertices = new List<Vector3>(); var uv = new List<Vector2>();
+            for (int index = 0; index < source.Length; index++)
+            {
+                // Grid strokes have a white atlas coordinate and may legitimately
+                // change their widths or disappear at overview scale.
+                if (sourceUv[index] == NotebookSpriteCatalog.WhiteUV) continue;
+                vertices.Add(filter.transform.TransformPoint(source[index])); uv.Add(sourceUv[index]);
+            }
+            Assert.That(vertices.Count, Is.GreaterThan(4), "Actual terrain artwork must remain present.");
+            Assert.That(vertices.Count % 4, Is.Zero, "Terrain atlas illustrations are complete quads.");
+            return (vertices.ToArray(), uv.ToArray());
+        }
+
+        static void AssertPaperAtlasUnchanged((Vector3[] Vertices, Vector2[] Uvs) before,
+            (Vector3[] Vertices, Vector2[] Uvs) after, string navigation)
+        {
+            Assert.That(after.Vertices.Length, Is.EqualTo(before.Vertices.Length),
+                $"Camera {navigation} must not make terrain illustrations appear or disappear.");
+            CollectionAssert.AreEqual(before.Uvs, after.Uvs, $"Camera {navigation} must retain the same terrain illustrations.");
+            for (int index = 0; index < before.Vertices.Length; index++)
+                Assert.That(Vector3.Distance(after.Vertices[index], before.Vertices[index]), Is.LessThan(.0001f),
+                    $"Terrain vertex {index} moved in world coordinates during camera {navigation}.");
+        }
+
+        Rect ProjectMapPine(Vector3[] vertices)
+        {
+            // This authored two-by-three-cell pine occupies (7,32), with its
+            // illustration centred at (8,33.5), independently of the camera.
+            for (int index = 0; index < vertices.Length; index += 4)
+            {
+                Vector3 center = (vertices[index] + vertices[index + 2]) * .5f;
+                if (Vector3.Distance(center, new Vector3(8, 33.5f, 0)) > .001f) continue;
+                Vector2 low = camera.WorldToScreenPoint(vertices[index]);
+                Vector2 high = low;
+                for (int corner = 1; corner < 4; corner++)
+                {
+                    Vector2 point = camera.WorldToScreenPoint(vertices[index + corner]);
+                    low = Vector2.Min(low, point); high = Vector2.Max(high, point);
+                }
+                return Rect.MinMaxRect(low.x, low.y, high.x, high.y);
+            }
+            Assert.Fail("The actual authored pine must remain rendered at its reserved map footprint.");
+            return default;
         }
 
         [Test] public void FractionalScrollAccumulatesAndZoomStopsAtBothLimits()

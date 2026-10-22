@@ -75,8 +75,6 @@ namespace PaperDefense.Presentation
         TowerBlueprint previewBlueprint;
         RecipeSnapshot previewRecipe;
         int paperWidth, paperHeight;
-        Vector2 paperCameraCenter;
-        float paperCameraHeight = -1, paperCameraAspect = -1;
         int visualVersion = -1, topologyVersion = -1, castleHealthBand = -1;
         RunPhase renderedPhase;
         bool staticDirty = true;
@@ -202,7 +200,7 @@ namespace PaperDefense.Presentation
             animation.Prune(visualClock.Seconds, Theme);
             long started = System.Diagnostics.Stopwatch.GetTimestamp();
             bool scaleChanged = UpdateViewScale();
-            if (scaleChanged || PaperFrameChanged()) DrawPaper();
+            if (scaleChanged) DrawPaper();
             if (scaleChanged)
             {
                 if (previewCells.Count > 0) DrawPreview();
@@ -239,13 +237,6 @@ namespace PaperDefense.Presentation
             minorGridOpacity = grid; terrainStrokePixels = terrain;
             towerMarkerPixels = settings.TowerMarkerPixels;
             return true;
-        }
-
-        bool PaperFrameChanged()
-        {
-            if (WorldCamera == null || !WorldCamera.orthographic || CompactBaseMarker) return false;
-            return paperCameraCenter != (Vector2)WorldCamera.transform.position
-                || paperCameraHeight != WorldCamera.orthographicSize || paperCameraAspect != WorldCamera.aspect;
         }
 
         void DrawPaper()
@@ -352,24 +343,10 @@ namespace PaperDefense.Presentation
             p.Line(compass + Vector2.left * 1.05f, compass + Vector2.right * 1.05f, .04f, sketch);
             p.Triangle(compass + Vector2.up * .85f, compass + new Vector2(-.16f, -.14f), compass + new Vector2(.16f, -.14f), sketch);
             p.MinimumStrokePixels = terrainStrokePixels;
-            DrawFocusedSceneryFrame(p);
+            // The immutable battlefield owns every playable terrain prop. Camera-relative
+            // decoration would slide over buildable cells when panning or zooming.
             NotebookBattlefieldRenderer.Draw(p, session.Battlefield, Theme);
-            if (WorldCamera != null)
-            {
-                paperCameraCenter = WorldCamera.transform.position;
-                paperCameraHeight = WorldCamera.orthographicSize; paperCameraAspect = WorldCamera.aspect;
-            }
             p.Upload();
-        }
-
-        void DrawFocusedSceneryFrame(MeshPen pen)
-        {
-            if (session.Battlefield == null || WorldCamera == null || !WorldCamera.orthographic || CompactBaseMarker
-                || WorldCamera.orthographicSize >= paperHeight * .35f) return;
-            float halfHeight = WorldCamera.orthographicSize, halfWidth = halfHeight * WorldCamera.aspect;
-            Vector2 center = WorldCamera.transform.position;
-            var visible = new Rect(center - new Vector2(halfWidth, halfHeight), new Vector2(halfWidth, halfHeight) * 2);
-            NotebookSceneryComposition.Draw(pen, visible, Theme);
         }
 
         void DrawSurroundingScenery(MeshPen pen)
