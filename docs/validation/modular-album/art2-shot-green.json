@@ -1,0 +1,299 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "899389924730485fa47c5d237b28297e",
+      "status": "succeeded",
+      "mode": "PlayMode",
+      "started_unix_ms": 1792716393420,
+      "finished_unix_ms": 1792716401470,
+      "last_update_unix_ms": 1792716401470,
+      "progress": {
+        "completed": 28,
+        "total": 28,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.NotebookAnimationRenderingTests.WorldAndTrialRicochetContinuationStartsAtThePreviousVictimWhileTheFirstSegmentUsesTheMuzzle",
+        "last_finished_unix_ms": 1792716401437,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": true,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "PlayMode",
+        "summary": {
+          "total": 28,
+          "passed": 28,
+          "failed": 0,
+          "skipped": 0,
+          "durationSeconds": 0.3701738,
+          "resultState": "Passed"
+        },
+        "results": [
+          {
+            "name": "AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(\"well\")",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(\"well\")",
+            "state": "Passed",
+            "durationSeconds": 0.1058555,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(\"blot\")",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(\"blot\")",
+            "state": "Passed",
+            "durationSeconds": 0.0089375,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(\"glob\")",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(\"glob\")",
+            "state": "Passed",
+            "durationSeconds": 0.0064315,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(\"mortar\")",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(\"mortar\")",
+            "state": "Passed",
+            "durationSeconds": 0.0062984,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "AuthoredBatteryRecoilTransformsSavedLinesRigidlyAndNeverRebuildsOrReassessesThem",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.AuthoredBatteryRecoilTransformsSavedLinesRigidlyAndNeverRebuildsOrReassessesThem",
+            "state": "Passed",
+            "durationSeconds": 0.0346111,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "CapturedCircularFootprintOwnsItsRadiusEvenWhenFallbackDiffers(0.2f)",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.CapturedCircularFootprintOwnsItsRadiusEvenWhenFallbackDiffers(0.2f)",
+            "state": "Passed",
+            "durationSeconds": 0.0013863,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "CapturedCircularFootprintOwnsItsRadiusEvenWhenFallbackDiffers(2.0f)",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.CapturedCircularFootprintOwnsItsRadiusEvenWhenFallbackDiffers(2.0f)",
+            "state": "Passed",
+            "durationSeconds": 0.0001198,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Cone,\"fx.fan\")",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Cone,\"fx.fan\")",
+            "state": "Passed",
+            "durationSeconds": 0.0012304,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Line,\"fx.piercer\")",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Line,\"fx.piercer\")",
+            "state": "Passed",
+            "durationSeconds": 0.0000904,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Radial,\"fx.stapler\")",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Radial,\"fx.stapler\")",
+            "state": "Passed",
+            "durationSeconds": 0.0000572,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Cleanup,\"fx.cleanup\")",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Cleanup,\"fx.cleanup\")",
+            "state": "Passed",
+            "durationSeconds": 0.0001069,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "EnemyWalkUsesActualMovementAndAStoppedEnemyReturnsToIdle",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.EnemyWalkUsesActualMovementAndAStoppedEnemyReturnsToIdle",
+            "state": "Passed",
+            "durationSeconds": 0.0246502,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "OverflowEvictsOnlyVisualRecordsAndResetClearsAllTransientState",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.OverflowEvictsOnlyVisualRecordsAndResetClearsAllTransientState",
+            "state": "Passed",
+            "durationSeconds": 0.008265,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SimulationClockFreezesOnPauseAdvancesOnStepAndCapsTheTerminalTail",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.SimulationClockFreezesOnPauseAdvancesOnStepAndCapsTheTerminalTail",
+            "state": "Passed",
+            "durationSeconds": 0.0012919,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(0.1f)",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(0.1f)",
+            "state": "Passed",
+            "durationSeconds": 0.0020693,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(0.5f)",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(0.5f)",
+            "state": "Passed",
+            "durationSeconds": 0.0001384,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(0.9f)",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(0.9f)",
+            "state": "Passed",
+            "durationSeconds": 0.0000936,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SingleShotInkStreakAdvancesFromTheActualMuzzleTowardItsCapturedTarget",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotInkStreakAdvancesFromTheActualMuzzleTowardItsCapturedTarget",
+            "state": "Passed",
+            "durationSeconds": 0.0010096,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SpecialistShotPathsKeepTheirFullMuzzleToTargetGeometry(Line)",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.SpecialistShotPathsKeepTheirFullMuzzleToTargetGeometry(Line)",
+            "state": "Passed",
+            "durationSeconds": 0.0007103,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SpecialistShotPathsKeepTheirFullMuzzleToTargetGeometry(Ricochet)",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.SpecialistShotPathsKeepTheirFullMuzzleToTargetGeometry(Ricochet)",
+            "state": "Passed",
+            "durationSeconds": 0.000162,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ThreeIdenticalWeaponsRecoilIndependentlyAndSegmentsNeverRestartAnAction",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.ThreeIdenticalWeaponsRecoilIndependentlyAndSegmentsNeverRestartAnAction",
+            "state": "Passed",
+            "durationSeconds": 0.0004556,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "TrialDeathSuppressesTheStaleLiveSnapshotEvenAfterTheDeathTailExpiresAndSeekRestoresIt",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.TrialDeathSuppressesTheStaleLiveSnapshotEvenAfterTheDeathTailExpiresAndSeekRestoresIt",
+            "state": "Passed",
+            "durationSeconds": 0.0066144,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "TrialEffectUsesTheAssignedThemePalette",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.TrialEffectUsesTheAssignedThemePalette",
+            "state": "Passed",
+            "durationSeconds": 0.0014364,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "TrialImpactPreservesCapturedMortarFootprint(False)",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.TrialImpactPreservesCapturedMortarFootprint(False)",
+            "state": "Passed",
+            "durationSeconds": 0.0014384,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "TrialImpactPreservesCapturedMortarFootprint(True)",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.TrialImpactPreservesCapturedMortarFootprint(True)",
+            "state": "Passed",
+            "durationSeconds": 0.0002824,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "TrialImpactSuppressesSnapshotFallbackAndMortarGlobIdsStayIndependent",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.TrialImpactSuppressesSnapshotFallbackAndMortarGlobIdsStayIndependent",
+            "state": "Passed",
+            "durationSeconds": 0.0051564,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "TrialSeekReplaysTimestampedActionsAndRepeatedSeeksPreserveTheSamePose",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.TrialSeekReplaysTimestampedActionsAndRepeatedSeeksPreserveTheSamePose",
+            "state": "Passed",
+            "durationSeconds": 0.0331024,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "WorldAndTrialRicochetContinuationStartsAtThePreviousVictimWhileTheFirstSegmentUsesTheMuzzle",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.WorldAndTrialRicochetContinuationStartsAtThePreviousVictimWhileTheFirstSegmentUsesTheMuzzle",
+            "state": "Passed",
+            "durationSeconds": 0.0189553,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

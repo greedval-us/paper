@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "/root",
+  "scope": "save warning and recovery",
+  "sourceInspection": "Source26 plus all15 exact captures physically opened in this turn.",
+  "records": [
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-26-save-error-1024x768.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captureSha256": "8d331fca71f607164a2f8a804d48c1497c0b1ad29a5a96fc14c93855f829e128",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Source26 and this exact full PNG physically opened by root using view_image.",
+        "Red double pencil contour, corner hatching and layered warning triangle stay within the recoverable save sheet.",
+        "Actual retry/continue states retain the draft and restore the saved album state; labels and actions fit at this size."
+      ],
+      "residuals": [
+        "Current modular workshop uses the approved square standard foundation and right summary instead of the old round-base sketch composition.",
+        "The red code-native paper edge is less irregular and less textured than the reference.",
+        "At compact sizes the composition list intentionally uses a scroll viewport; the full recipe is not shown at once."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-26-save-dismissed-1024x768.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captureSha256": "b6409e6287a60fd4600bad44940645bda41d240934e305849a9699f57d250f7c",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Source26 and this exact full PNG physically opened by root using view_image.",
+        "Red double pencil contour, corner hatching and layered warning triangle stay within the recoverable save sheet.",
+        "Actual retry/continue states retain the draft and restore the saved album state; labels and actions fit at this size."
+      ],
+      "residuals": [
+        "Current modular workshop uses the approved square standard foundation and right summary instead of the old round-base sketch composition.",
+        "The red code-native paper edge is less irregular and less textured than the reference.",
+        "At compact sizes the composition list intentionally uses a scroll viewport; the full recipe is not shown at once."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-26-save-retry-1024x768.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captureSha256": "626c8189a80727c197369b306b096686d379357c790190ad8f974be8d3ba517d",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Source26 and this exact full PNG physically opened by root using view_image.",
+        "Red double pencil contour, corner hatching and layered warning triangle stay within the recoverable save sheet.",
+        "Actual retry/continue states retain the draft and restore the saved album state; labels and actions fit at this size."
+      ],
+      "residuals": [
+        "Current modular workshop uses the approved square standard foundation and right summary instead of the old round-base sketch composition.",
+        "The red code-native paper edge is less irregular and less textured than the reference.",
+        "At compact sizes the composition list intentionally uses a scroll viewport; the full recipe is not shown at once."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-26-save-error-1280x720.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captureSha256": "f8a63e1da19e90e34d84f19d153000fa9435285df02c7c50a7abbc517e60851a",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Source26 and this exact full PNG physically opened by root using view_image.",
+        "Red double pencil contour, corner hatching and layered warning triangle stay within the recoverable save sheet.",
+        "Actual retry/continue states retain the draft and restore the saved album state; labels and actions fit at this size."
+      ],
+      "residuals": [
+        "Current modular workshop uses the approved square standard foundation and right summary instead of the old round-base sketch composition.",
+        "The red code-native paper edge is less irregular and less textured than the reference.",
+        "At compact sizes the composition list intentionally uses a scroll viewport; the full recipe is not shown at once."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-26-save-dismissed-1280x720.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captureSha256": "648fde6cd62cbbdba5b86b94b8a2686a07536328e8dc38eb97c20918ae07ecc4",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Source26 and this exact full PNG physically opened by root using view_image.",
+        "Red double pencil contour, corner hatching and layered warning triangle stay within the recoverable save sheet.",
+        "Actual retry/continue states retain the draft and restore the saved album state; labels and actions fit at this size."
+      ],
+      "residuals": [
+        "Current modular workshop uses the approved square standard foundation and right summary instead of the old round-base sketch composition.",
+        "The red code-native paper edge is less irregular and less textured than the reference.",
+        "At compact sizes the composition list intentionally uses a scroll viewport; the full recipe is not shown at once."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-26-save-retry-1280x720.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captureSha256": "b71b349398af64189175a707d6993df646fbc9d0a8423c7d2dfa0cfd5711b923",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Source26 and this exact full PNG physically opened by root using view_image.",
+        "Red double pencil contour, corner hatching and layered warning triangle stay within the recoverable save sheet.",
+        "Actual retry/continue states retain the draft and restore the saved album state; labels and actions fit at this size."
+      ],
+      "residuals": [
+        "Current modular workshop uses the approved square standard foundation and right summary instead of the old round-base sketch composition.",
+        "The red code-native paper edge is less irregular and less textured than the reference.",
+        "At compact sizes the composition list intentionally uses a scroll viewport; the full recipe is not shown at once."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-26-save-error-1920x1080.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captureSha256": "b173507afb9c549b97861daaf4379df9c8fade1565aefb34c25dd0836fdb26fb",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Source26 and this exact full PNG physically opened by root using view_image.",
+        "Red double pencil contour, corner hatching and layered warning triangle stay within the recoverable save sheet.",
+        "Actual retry/continue states retain the draft and restore the saved album state; labels and actions fit at this size."
+      ],
+      "residuals": [
+        "Current modular workshop uses the approved square standard foundation and right summary instead of the old round-base sketch composition.",
+        "The red code-native paper edge is less irregular and less textured than the reference.",
+        "At compact sizes the composition list intentionally uses a scroll viewport; the full recipe is not shown at once."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-26-save-dismissed-1920x1080.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captureSha256": "9f361c50180ce2768e1f1717b1ab11fbc3ccd3d67eae3e15e566f06afe09e172",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Source26 and this exact full PNG physically opened by root using view_image.",
+        "Red double pencil contour, corner hatching and layered warning triangle stay within the recoverable save sheet.",
+        "Actual retry/continue states retain the draft and restore the saved album state; labels and actions fit at this size."
+      ],
+      "residuals": [
+        "Current modular workshop uses the approved square standard foundation and right summary instead of the old round-base sketch composition.",
+        "The red code-native paper edge is less irregular and less textured than the reference.",
+        "At compact sizes the composition list intentionally uses a scroll viewport; the full recipe is not shown at once."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-26-save-retry-1920x1080.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captureSha256": "37b328890972b74ac1379dccd38160d148ff41bc8643a60fb17997a4ff263874",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Source26 and this exact full PNG physically opened by root using view_image.",
+        "Red double pencil contour, corner hatching and layered warning triangle stay within the recoverable save sheet.",
+        "Actual retry/continue states retain the draft and restore the saved album state; labels and actions fit at this size."
+      ],
+      "residuals": [
+        "Current modular workshop uses the approved square standard foundation and right summary instead of the old round-base sketch composition.",
+        "The red code-native paper edge is less irregular and less textured than the reference.",
+        "At compact sizes the composition list intentionally uses a scroll viewport; the full recipe is not shown at once."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-26-save-error-1280x960.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captureSha256": "44a91a31fed82d2952843cb9f165aba55d6c8de2091ac79f1d922e1d0ab85094",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Source26 and this exact full PNG physically opened by root using view_image.",
+        "Red double pencil contour, corner hatching and layered warning triangle stay within the recoverable save sheet.",
+        "Actual retry/continue states retain the draft and restore the saved album state; labels and actions fit at this size."
+      ],
+      "residuals": [
+        "Current modular workshop uses the approved square standard foundation and right summary instead of the old round-base sketch composition.",
+        "The red code-native paper edge is less irregular and less textured than the reference.",
+        "At compact sizes the composition list intentionally uses a scroll viewport; the full recipe is not shown at once."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-26-save-dismissed-1280x960.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captureSha256": "2fb47203b5357f1abf79e3661f56e58a0564b09c212f838a69b5e16ebf498b57",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Source26 and this exact full PNG physically opened by root using view_image.",
+        "Red double pencil contour, corner hatching and layered warning triangle stay within the recoverable save sheet.",
+        "Actual retry/continue states retain the draft and restore the saved album state; labels and actions fit at this size."
+      ],
+      "residuals": [
+        "Current modular workshop uses the approved square standard foundation and right summary instead of the old round-base sketch composition.",
+        "The red code-native paper edge is less irregular and less textured than the reference.",
+        "At compact sizes the composition list intentionally uses a scroll viewport; the full recipe is not shown at once."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-26-save-retry-1280x960.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captureSha256": "25c04c3a77b2210fbfb908755d793ae97ad6f98738fc590dc6b85c3318442009",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Source26 and this exact full PNG physically opened by root using view_image.",
+        "Red double pencil contour, corner hatching and layered warning triangle stay within the recoverable save sheet.",
+        "Actual retry/continue states retain the draft and restore the saved album state; labels and actions fit at this size."
+      ],
+      "residuals": [
+        "Current modular workshop uses the approved square standard foundation and right summary instead of the old round-base sketch composition.",
+        "The red code-native paper edge is less irregular and less textured than the reference.",
+        "At compact sizes the composition list intentionally uses a scroll viewport; the full recipe is not shown at once."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-26-save-error-1600x900.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captureSha256": "3562c8a84c33b0ac053a9b68b2c922347ba2528d10b117d9325fef16852b010f",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Source26 and this exact full PNG physically opened by root using view_image.",
+        "Red double pencil contour, corner hatching and layered warning triangle stay within the recoverable save sheet.",
+        "Actual retry/continue states retain the draft and restore the saved album state; labels and actions fit at this size."
+      ],
+      "residuals": [
+        "Current modular workshop uses the approved square standard foundation and right summary instead of the old round-base sketch composition.",
+        "The red code-native paper edge is less irregular and less textured than the reference.",
+        "At compact sizes the composition list intentionally uses a scroll viewport; the full recipe is not shown at once."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-26-save-dismissed-1600x900.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captureSha256": "fdf8ec39409c28bc69d05b7b966b9e9f8969becfdcd93e42f4dfcea336adf73b",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Source26 and this exact full PNG physically opened by root using view_image.",
+        "Red double pencil contour, corner hatching and layered warning triangle stay within the recoverable save sheet.",
+        "Actual retry/continue states retain the draft and restore the saved album state; labels and actions fit at this size."
+      ],
+      "residuals": [
+        "Current modular workshop uses the approved square standard foundation and right summary instead of the old round-base sketch composition.",
+        "The red code-native paper edge is less irregular and less textured than the reference.",
+        "At compact sizes the composition list intentionally uses a scroll viewport; the full recipe is not shown at once."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-26-save-retry-1600x900.png",
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "captureSha256": "2e0c70d6f22c6e006a0a4e260ea36b9254b87d3a978ded548e201647fda0c9e2",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Source26 and this exact full PNG physically opened by root using view_image.",
+        "Red double pencil contour, corner hatching and layered warning triangle stay within the recoverable save sheet.",
+        "Actual retry/continue states retain the draft and restore the saved album state; labels and actions fit at this size."
+      ],
+      "residuals": [
+        "Current modular workshop uses the approved square standard foundation and right summary instead of the old round-base sketch composition.",
+        "The red code-native paper edge is less irregular and less textured than the reference.",
+        "At compact sizes the composition list intentionally uses a scroll viewport; the full recipe is not shown at once."
+      ]
+    }
+  ]
+}

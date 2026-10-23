@@ -1,0 +1,312 @@
+{
+  "iteration": "art2",
+  "baseline": "c4d89c5",
+  "executor": "/root/art2_workshop_audit",
+  "status": "implemented_visual_reviewed_with_differences",
+  "stack": "uGUI; bounded repair of display-only diagrams and rule illustrations",
+  "capabilities": {
+    "filesystem": true,
+    "vision": "verified by physically opening every listed source/current PNG with view_image",
+    "unityExecution": "reserved to root",
+    "imageGeneration": "not used"
+  },
+  "scope": [
+    "FittedVisibleBounds display rectangles, edge-to-edge dashed connectors and visible arrowheads, preserved authored art geometry",
+    "Explicit localized category captions only for large local workshop diagrams; compact help/book/context diagrams unlabelled",
+    "Native idle enemy artwork in mortar/fan rule pages, no health bars or simulated encounter",
+    "Light circle/sector hatching; original resolved ConeDegrees,TargetLimit,Radius and mechanical muzzle placement remain",
+    "Preserve the default ComposePart API and opt in to the actual structure family in the exploded diagram, so shared shells use their own grate, roof or reservoir"
+  ],
+  "changedFiles": [
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopAssemblyDiagram.cs",
+      "sha256": "c65e46dd63eaadbc57854d899280f4187e4de65fb8910a83b1d8d20f4631023a"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ComponentCatalogPanel.cs",
+      "sha256": "3ba8ccd72496df9b319a70e51cee56109709b5b23ab6f51062f64fa9c6573be5"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ComponentCatalogPanel.Sketch.cs",
+      "sha256": "5c6ef139836b088bdb2442e31f0ff567d4b3a17dc687f61cdae3ba4bb1aaeb05"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Art/AssemblyVisualComposer.Catalog.cs",
+      "sha256": "f3398447daf564ea6723dba84f8e871284a0efb13a79f392234195ffdccf3226"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/Editor/AssemblyArtCoverageTests.cs",
+      "sha256": "f07b6b3305a151eb242a58e4e2acf451eb69edb77d6e3e632ed1f019476632d0"
+    }
+  ],
+  "protectedFiles": [
+    {
+      "path": "ArtSource/Notebook/NewStyle/assembly-parts.source.json",
+      "sha256": "a0c6796dfdf3d1c4ffb8aefd325759170117be30bcf4ea8f72db9987a2a13048"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/sprites.source.json",
+      "sha256": "b459b4161328ca9f65ea29d6670a2379a7bd6489ace72c12c2ff37407fd75553"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.png",
+      "sha256": "d351a1e24e81ad6200ffe54cc1a3ef7c58eaa83e5311bbab9a92dedebaa0d05e"
+    },
+    {
+      "path": "Assets/PaperDefense/Resources/Art/NotebookSprites.json",
+      "sha256": "4b86b216098d4105ba42544a7a5433b49c8ea7b2f74e77df4b513a5632a00ec9"
+    },
+    {
+      "path": "Assets/PaperDefense/Configuration/Game/PlayerAssemblyCatalog.asset",
+      "sha256": "203f13f0babd1e95400df1544f30cb4c7c48f6509367daeafa4215db8b6737b6"
+    }
+  ],
+  "assetsReused": [
+    {
+      "path": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "sha256": "3940438c692db1965e38c64715e86f686230e82b9dd4f96df9081b363ecd7ca3"
+    }
+  ],
+  "spriteIds": [
+    "enemy.doodle.idle",
+    "enemy.runner.idle",
+    "enemy.gnawer.idle"
+  ],
+  "sourceImages": [
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/04-foundation.png",
+      "sha256": "9180154b909dd512afea969def6509a0b0220b972ff7f56a5699dbbc1723285c"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/05-weapons.png",
+      "sha256": "2f0893c31272c3e20e6a79b873c8db17770f3c92f89a22cba2b271a20421f638"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/06-drawing.png",
+      "sha256": "edba0bc718e2c896c7854442f269855aa16f22b8cb456994c61bb25410126930"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/08-review.png",
+      "sha256": "77ec8626b7444519e8c635d44ff07ba496e180bc5f20bc76ab72750db568522b"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/09-album.png",
+      "sha256": "f85732485ee24e51bbf780898baa5ea822a875b31ae0da345bcdd7ac5cbe19be"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "sha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/12-mortar.png",
+      "sha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/13-fan.png",
+      "sha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/14-armor.png",
+      "sha256": "1cd621482759ce147f1aa4513f11753f0b3510b9c8af1459acb9d999a0e88e45"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/24-empty.png",
+      "sha256": "6a5fb645b1529e2f2102bc111da1a81204f53c96276084a0783c51f196b8b073"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/25-purchase.png",
+      "sha256": "05b7ab824ddcc1ac63d718b871bd4907e2192a7aac3aaf985d9eb6064fb332b4"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "sha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/27-invalid.png",
+      "sha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/28-leave.png",
+      "sha256": "d280c9dc11d916756a5ca6b695d2cf2020009df3085d6b55d41dd5dd09ece7b2"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "sha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "sha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd"
+    }
+  ],
+  "baselineCaptures": [
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1920x1080.png",
+      "sha256": "377ae254f7a3cc37f03868d2798dc604865e1c2eb98d3ebb348dc3f84cfc042e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1920x1080.png",
+      "sha256": "a9b151a8ff771db26acdf1d29013834d29c6d0edfa5bb645fe22337e9bb42a7e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1920x1080.png",
+      "sha256": "fc795cb54a4d6dd9c0b6a4e4ebd25b5366718d2a37135be33d294975b4ac7457"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1920x1080.png",
+      "sha256": "22752f669c0fc4653d371c49b48a2a3ac06a1e03745cd36400d98e1da597110d"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1920x1080.png",
+      "sha256": "2feebc643ff4e1b987f4619b99b09f93568f6c1b2363a2b2f3a12ac1257adb24"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1920x1080.png",
+      "sha256": "005de4d6983ef0a6f4d4078dc70c8b6fdcf44fda5102fc188b639ac37c1ce380"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-1920x1080.png",
+      "sha256": "0e12ad71041c1f69304ec9e0b2c8cc34c1a5a08531578a900782dbe928029e30"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1920x1080.png",
+      "sha256": "d6dfa37b3c7c20b4e3e4041c2123d3583734f0220697310eecd8a562e1954b51"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1920x1080.png",
+      "sha256": "86ebe7ba0afcdb0138e1934ac50c6617c0354c06e89e7ffcbe308a1c5e74ab07"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1920x1080.png",
+      "sha256": "1f3ff5f5afc597a608a4a81ea0c0aecc59e98b2d3eaf450e5f5805967e69f306"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1920x1080.png",
+      "sha256": "91341828088bfdb3752ad8cc113571ab2e12403d1cc5223f73c218ebf8b2a28c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1920x1080.png",
+      "sha256": "67f1012af11d9511cd03e7512c7b188e8e61adb71e47768bfae3dd28f1551914"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1920x1080.png",
+      "sha256": "157af209b59699e5609362d31aa2c911b0661d6b75ac7501f456c2fcf6057815"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-error-1920x1080.png",
+      "sha256": "14e6069b89ca6d18c12c9af8f3c6ab48f28e33a211e08225ae2b173757beff61"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1920x1080.png",
+      "sha256": "9bc66658441bb414b73eb5aeace888a7878520098aacfac33c149d3f3b70c9be"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1920x1080.png",
+      "sha256": "7b471b5e62a68e29e3304d519adbfe675113c322b3aea9ff4fb9422d930ce0d2"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1920x1080.png",
+      "sha256": "7278c1d207a72e3d0ce9dce785070e26d52349e44e406c8d899bd67d9a350cf5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1920x1080.png",
+      "sha256": "29259727a91e7cccc2b7ebe79bf0a1db9dce36a43d3a6111a27b3ed32cb70455"
+    }
+  ],
+  "extraBaselineCaptures": [
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1024x768.png",
+      "sha256": "31c6e1b9ea84d14166e7720eedf36cb567fc0959ad05de725afb9f05cccc6adb"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1024x768.png",
+      "sha256": "1378f48e30112d2aac9d0b2d2f8278bdf841d0f62822bab274e4549b0e069b5e"
+    }
+  ],
+  "verification": [
+    {
+      "check": "git diff --check",
+      "status": "pass",
+      "evidence": "executed after final code changes; only line ending warnings"
+    },
+    {
+      "check": "localized category keys",
+      "status": "pass",
+      "evidence": "all Frame/Hull/Armor/Feed/Turn, Mechanism/Head/Sight/Magazine/Trigger and Site/Function/Shell/Utility keys verified in ru.asset"
+    },
+    {
+      "check": "Unity import, compile, PlayMode, fresh visual captures",
+      "status": "blocked",
+      "reason": "root exclusively owns live Unity session; awaiting integration gate"
+    },
+    {
+      "check": "family artwork regression RED",
+      "status": "pass",
+      "evidence": "root run b38b33c1f82548a5a269202f75e5d666; 0/3 expected wrong wall shell failures; art2-structure-family-red.json"
+    },
+    {
+      "check": "family artwork focused GREEN",
+      "status": "pass",
+      "evidence": "root confirmed 11/11; art2-structure-family-green.json"
+    },
+    {
+      "check": "Fresh whole-screen source visual comparison, five sizes",
+      "status": "pass",
+      "evidence": "art2-workshop-visual-review.json:55 physically inspected images, PASS_WITH_DIFFERENCES"
+    }
+  ],
+  "requiredCaptureStates": [
+    "06-drawing",
+    "11-stencils",
+    "12-mortar",
+    "13-fan",
+    "24-empty",
+    "27-invalid",
+    "29-structure",
+    "29-wall",
+    "29-slow",
+    "29-repair",
+    "30-foundation-parts",
+    "23-help"
+  ],
+  "requiredCaptureSizes": [
+    "1024x768",
+    "1280x720",
+    "1920x1080"
+  ],
+  "reviewFocus": [
+    "No caption intersects its native artwork or connector; category labels intentionally absent on compact surfaces",
+    "Every non-neutral part has a visible connector in exploded diagrams",
+    "Native enemies remain distinct inside real cone/radius illustration; actual effect bounds and count unchanged",
+    "No changes to authored StandardFoundation-v9 regions, scales, sockets, physical composition or recipes"
+  ],
+  "protectedFileHashCheck": [
+    {
+      "path": "ArtSource/Notebook/NewStyle/assembly-parts.source.json",
+      "unchanged": true
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/sprites.source.json",
+      "unchanged": true
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.png",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/PaperDefense/Resources/Art/NotebookSprites.json",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/PaperDefense/Configuration/Game/PlayerAssemblyCatalog.asset",
+      "unchanged": true
+    }
+  ]
+}

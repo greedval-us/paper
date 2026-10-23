@@ -1,0 +1,110 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "da325c3df13045ccbd6deba5b32b33b2",
+      "status": "succeeded",
+      "mode": "EditMode",
+      "started_unix_ms": 1792716057403,
+      "finished_unix_ms": 1792716063692,
+      "last_update_unix_ms": 1792716063692,
+      "progress": {
+        "completed": 7,
+        "total": 7,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.TowerDefenseBalanceTests.ActualMainPresetsReserveInnerPinesAndKeepCampaignBuildCellsFree(True)",
+        "last_finished_unix_ms": 1792716063541,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": true,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "EditMode",
+        "summary": {
+          "total": 7,
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "durationSeconds": 1.3172124,
+          "resultState": "Passed"
+        },
+        "results": [
+          {
+            "name": "MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(38,35)",
+            "fullName": "PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(38,35)",
+            "state": "Passed",
+            "durationSeconds": 0.1348866,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(57,35)",
+            "fullName": "PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(57,35)",
+            "state": "Passed",
+            "durationSeconds": 0.0081526,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(38,27)",
+            "fullName": "PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(38,27)",
+            "state": "Passed",
+            "durationSeconds": 0.0074779,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(57,27)",
+            "fullName": "PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(57,27)",
+            "state": "Passed",
+            "durationSeconds": 0.008208,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "MainRecipeConnectsAllWellsAndReservesFullObjectiveFootprints",
+            "fullName": "PaperDefense.Tests.TowerDefenseRulesTests.MainRecipeConnectsAllWellsAndReservesFullObjectiveFootprints",
+            "state": "Passed",
+            "durationSeconds": 0.0238026,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ActualMainPresetsReserveInnerPinesAndKeepCampaignBuildCellsFree(False)",
+            "fullName": "PaperDefense.Tests.TowerDefenseBalanceTests.ActualMainPresetsReserveInnerPinesAndKeepCampaignBuildCellsFree(False)",
+            "state": "Passed",
+            "durationSeconds": 0.069195,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ActualMainPresetsReserveInnerPinesAndKeepCampaignBuildCellsFree(True)",
+            "fullName": "PaperDefense.Tests.TowerDefenseBalanceTests.ActualMainPresetsReserveInnerPinesAndKeepCampaignBuildCellsFree(True)",
+            "state": "Passed",
+            "durationSeconds": 0.0276324,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

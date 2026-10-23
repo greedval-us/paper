@@ -134,9 +134,9 @@ namespace PaperDefense.Presentation
             var overlay = ui.Panel(Root, "Composite save failure overlay", new Rect(0, 0, width, height), new Color(.12f, .14f, .18f, .12f), true);
             float sheetWidth = Mathf.Min(560, width - 64), sheetHeight = 374;
             float x = Mathf.Min(width - sheetWidth - 36, width * .64f), y = Mathf.Clamp(height * .34f, 132, height - sheetHeight - 88);
-            var sheet = ui.Panel(overlay, "Composite save failure sheet", new Rect(x, y, sheetWidth, sheetHeight), WorkshopUi.Paper, true);
-            var edge = ReferenceDetail(sheet, "Composite save failure edge", new Rect(0, 0, sheetWidth, sheetHeight), FoundationDetailGraphic.Kind.Frame);
-            edge.color = new Color32(152, 42, 43, 255); edge.StrokeWidth = 2.6f; edge.Radius = 5;
+            var sheet = ui.Panel(overlay, "Composite save failure sheet", new Rect(x, y, sheetWidth, sheetHeight), Color.clear, true);
+            var edge = WorkshopUi.Graphic<WorkshopSaveFailurePaper>(sheet, "Composite save failure edge", new Rect(0, 0, sheetWidth, sheetHeight));
+            edge.color = new Color32(152, 42, 43, 255);
             WorkshopUi.Graphic<WorkshopSaveFailureMark>(sheet, "Composite save failure mark", new Rect((sheetWidth - 66) * .5f, 16, 66, 66));
             var title = ui.Label(sheet, "Composite save failure title", "Не удалось сохранить", new Rect(24, 86, sheetWidth - 48, 48), 32, true, edge.color);
             title.alignment = TextAnchor.MiddleCenter;
@@ -227,6 +227,63 @@ namespace PaperDefense.Presentation
             number.alignment = TextAnchor.MiddleRight;
         }
 
+    }
+
+    /// <summary>The red pencil sheet belongs only to the recoverable save warning.</summary>
+    public sealed class WorkshopSaveFailurePaper : MaskableGraphic
+    {
+        readonly MeshPen pen = new MeshPen(null, 1536);
+
+        protected override void OnPopulateMesh(VertexHelper target)
+        {
+            target.Clear(); pen.Clear();
+            var r = rectTransform.rect;
+            if (r.width < 24 || r.height < 24) return;
+            var edge = new[] {
+                new Vector2(r.xMin + 7, r.yMin + 4), new Vector2(r.xMin + r.width * .33f, r.yMin + 6),
+                new Vector2(r.xMin + r.width * .68f, r.yMin + 3), new Vector2(r.xMax - 9, r.yMin + 6),
+                new Vector2(r.xMax - 4, r.yMin + 14), new Vector2(r.xMax - 6, r.yMin + r.height * .52f),
+                new Vector2(r.xMax - 3, r.yMax - 12), new Vector2(r.xMax - 11, r.yMax - 5),
+                new Vector2(r.xMin + r.width * .64f, r.yMax - 7), new Vector2(r.xMin + r.width * .27f, r.yMax - 4),
+                new Vector2(r.xMin + 10, r.yMax - 6), new Vector2(r.xMin + 4, r.yMax - 14),
+                new Vector2(r.xMin + 6, r.yMin + r.height * .46f)
+            };
+            var shadow = new Color(.2f, .14f, .14f, .12f);
+            var offset = new Vector2(2, -3);
+            for (int i = 0; i < edge.Length; i++)
+                pen.Triangle(r.center + offset, edge[i] + offset, edge[(i + 1) % edge.Length] + offset, shadow);
+            var light = color; light.a *= .35f;
+            for (int i = 0; i < edge.Length; i++)
+            {
+                var a = edge[i]; var b = edge[(i + 1) % edge.Length];
+                pen.Triangle(r.center, a, b, WorkshopUi.Paper);
+                Stroke(a, b, 2.15f, color, i);
+                var innerA = a + (r.center - a).normalized * 3.2f;
+                var innerB = b + (r.center - b).normalized * 3.2f;
+                Stroke(innerA, innerB, .8f, light, i + 5);
+            }
+            for (int i = 0; i < 12; i++)
+            {
+                float x = r.xMin + 13 + i * 5.5f;
+                pen.Line(new Vector2(x, r.yMax - 13), new Vector2(x + 6, r.yMax - 20 - i * .18f), .75f, light);
+                x = r.xMax - 78 + i * 5.5f;
+                pen.Line(new Vector2(x, r.yMin + 13), new Vector2(x + 6, r.yMin + 20), .75f, light);
+            }
+            pen.CopyTo(target, Vector2.zero, 1);
+        }
+
+        void Stroke(Vector2 from, Vector2 to, float width, Color ink, int phase)
+        {
+            int steps = Mathf.Max(1, Mathf.CeilToInt(Vector2.Distance(from, to) / 20));
+            var normal = new Vector2(-(to - from).y, (to - from).x).normalized;
+            var previous = from;
+            for (int i = 1; i <= steps; i++)
+            {
+                float t = (float)i / steps;
+                var next = Vector2.Lerp(from, to, t) + normal * (Mathf.Sin(i * 2.1f + phase) * Mathf.Sin(t * Mathf.PI) * .4f);
+                pen.Line(previous, next, width, ink); previous = next;
+            }
+        }
     }
 
     public sealed class WorkshopReviewCheckDisc : MaskableGraphic

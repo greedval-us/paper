@@ -170,8 +170,9 @@ namespace PaperDefense.Presentation
             float navigationLeft = victory ? left : left + buttonWidth + gap;
             NotebookAction(composition, "Result map", victory ? R(navigationLeft, footer, buttonWidth, 64) : R(1114, 758, 312, 48), PlayerIcon.Map,
                 "На карту", game.ReturnToMap);
-            NotebookAction(composition, "Result album", victory ? R(navigationLeft + buttonWidth + gap, footer, buttonWidth, 64) : R(1026, 674, 488, 56), PlayerIcon.Book,
+            var album = NotebookAction(composition, "Result album", victory ? R(navigationLeft + buttonWidth + gap, footer, buttonWidth, 64) : R(1026, 674, 488, 56), PlayerIcon.Book,
                 JourneyCopy("result.album"), game.ReturnToAlbumFromResult);
+            NotebookControlIcon(album, "icon.workshop");
             NotebookAction(composition, "Result retry", victory ? R(navigationLeft + (buttonWidth + gap) * 2, footer, buttonWidth, 64) : R(1026, 598, 488, 64), PlayerIcon.Restart,
                 "Ещё попытка", game.Retry, true);
             RefreshAlbumResult();
@@ -342,7 +343,7 @@ namespace PaperDefense.Presentation
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear();
-            var pen = new MeshPen(null, 512);
+            var pen = new MeshPen(null, 4096);
             Rect bounds = rectTransform.rect;
             Color ink = PlayerUi.Ink, paper = PlayerUi.Paper;
             float stroke = Mathf.Max(.8f, Mathf.Min(bounds.width, bounds.height) * .018f);
@@ -357,6 +358,18 @@ namespace PaperDefense.Presentation
                 {
                     Vector2 a = points[i], b = points[(i + 1) % points.Length];
                     pen.Triangle(center, a, b, fill); pen.Line(a, b, stroke, ink);
+                }
+            }
+            void FineLine(float x, float y, float a, float b, float opacity = .55f)
+                => pen.Line(P(x, y), P(a, b), stroke * .52f, new Color(ink.r, ink.g, ink.b, opacity));
+            void FoldHatching(bool right)
+            {
+                // Keep the handwritten title area clear; dense strokes belong to the folded ends.
+                for (int hatch = 0; hatch < 12; hatch++)
+                {
+                    float x = .030f + hatch * .0062f, y = .39f + Mathf.Sin(hatch * 1.7f) * .009f;
+                    float a = x + .028f, b = y + .23f;
+                    FineLine(right ? 1 - x : x, y, right ? 1 - a : a, b, .72f);
                 }
             }
             if (Kind == NotebookResultEmblem.Courtyard)
@@ -378,29 +391,83 @@ namespace PaperDefense.Presentation
                 Line(.88f, .16f, .97f, .24f); Line(.90f, .84f, .98f, .88f);
                 for (int slash = 0; slash < 5; slash++)
                     Line(.035f + slash * .012f, .41f, .09f + slash * .012f, .48f);
+                for (int hatch = 0; hatch < 12; hatch++)
+                {
+                    float y = .27f + hatch * .044f;
+                    FineLine(.069f, y, .093f, y + .045f, .7f);
+                    FineLine(.924f, y - .045f, .945f, y - .005f, .6f);
+                }
+                FineLine(.18f, .125f, .30f, .095f, .46f);
+                FineLine(.71f, .12f, .86f, .16f, .46f);
+                FineLine(.17f, .861f, .32f, .848f, .42f);
+                FineLine(.70f, .801f, .86f, .766f, .42f);
+                // Fibres and pen flecks sit beside the tear rather than across live lettering.
+                for (int fleck = 0; fleck < 9; fleck++)
+                {
+                    float y = .17f + fleck * .079f;
+                    FineLine(.024f, y, .035f, y + .014f, .75f);
+                    FineLine(.969f, y + .019f, .982f, y + .006f, .65f);
+                }
             }
             else if (Kind == NotebookResultEmblem.Ribbon)
             {
                 Polygon(new[] { P(.12f, .28f), P(.01f, .34f), P(.06f, .59f), P(.01f, .89f), P(.17f, .82f) }, paper);
                 Polygon(new[] { P(.88f, .28f), P(.99f, .34f), P(.94f, .59f), P(.99f, .89f), P(.83f, .82f) }, paper);
-                Polygon(new[] { P(.10f, .18f), P(.27f, .075f), P(.51f, .04f), P(.75f, .08f), P(.90f, .18f),
-                    P(.88f, .88f), P(.67f, .94f), P(.43f, .94f), P(.12f, .88f) }, paper);
-                Line(.10f, .18f, .12f, .88f); Line(.90f, .18f, .88f, .88f);
-                for (int i = 0; i < 5; i++)
+                FoldHatching(false); FoldHatching(true);
+                var band = new Vector2[42];
+                for (int point = 0; point <= 20; point++)
                 {
-                    float offset = i * .018f;
-                    Line(.027f + offset, .40f, .074f + offset, .47f);
-                    Line(.973f - offset, .40f, .926f - offset, .47f);
+                    float t = point / 20f;
+                    band[point] = P(.10f + t * .80f, .18f - Mathf.Sin(t * Mathf.PI) * .13f);
+                    band[41 - point] = P(.12f + t * .76f, .88f + Mathf.Sin(t * Mathf.PI) * .06f);
+                }
+                Polygon(band, paper);
+                Line(.10f, .18f, .12f, .88f); Line(.90f, .18f, .88f, .88f);
+                for (int point = 0; point < 20; point++)
+                {
+                    float a = point / 20f, b = (point + 1) / 20f;
+                    FineLine(.108f + a * .784f, .207f - Mathf.Sin(a * Mathf.PI) * .13f,
+                        .108f + b * .784f, .207f - Mathf.Sin(b * Mathf.PI) * .13f, .35f);
+                    FineLine(.13f + a * .74f, .852f + Mathf.Sin(a * Mathf.PI) * .06f,
+                        .13f + b * .74f, .852f + Mathf.Sin(b * Mathf.PI) * .06f, .38f);
+                }
+                for (int hatch = 0; hatch < 8; hatch++)
+                {
+                    float y = .28f + hatch * .065f;
+                    FineLine(.102f, y, .115f, y + .035f, .7f);
+                    FineLine(.898f, y, .885f, y + .035f, .7f);
                 }
             }
             else if (Kind == NotebookResultEmblem.Laurel)
             {
-                Line(.77f, .94f, .39f, .66f); Line(.39f, .66f, .27f, .36f); Line(.27f, .36f, .43f, .06f);
-                for (int leaf = 0; leaf < 5; leaf++)
+                Vector2 Branch(float t)
                 {
-                    float y = .18f + leaf * .14f, x = .30f + Mathf.Max(0, y - .38f) * .6f;
-                    Polygon(new[] { P(x, y + .05f), P(x - .23f, y - .10f), P(x - .18f, y + .07f) }, paper);
-                    Polygon(new[] { P(x + .02f, y + .05f), P(x + .30f, y - .03f), P(x + .14f, y + .15f) }, paper);
+                    float u = 1 - t;
+                    return new Vector2(.77f, .94f) * (u * u * u) + new Vector2(.13f, .64f) * (3 * u * u * t)
+                        + new Vector2(.21f, .28f) * (3 * u * t * t) + new Vector2(.44f, .03f) * (t * t * t);
+                }
+                for (int step = 0; step < 22; step++)
+                {
+                    Vector2 a = Branch(step / 22f), b = Branch((step + 1) / 22f);
+                    Line(a.x, a.y, b.x, b.y);
+                    FineLine(a.x + .020f, a.y, b.x + .020f, b.y, .5f);
+                }
+                for (int leaf = 0; leaf < 6; leaf++)
+                for (int side = 0; side < 2; side++)
+                {
+                    Vector2 root = Branch(.15f + leaf * .135f);
+                    float sign = side == 0 ? -1 : 1;
+                    Vector2 tip = root + new Vector2(sign * .26f, -.13f);
+                    Vector2 middle = Vector2.Lerp(root, tip, .54f);
+                    Polygon(new[] { P(root.x, root.y), P(middle.x - sign * .03f, middle.y - .04f), P(tip.x, tip.y),
+                        P(middle.x + sign * .05f, middle.y + .04f) }, new Color32(239, 237, 211, 255));
+                    Line(root.x, root.y, tip.x, tip.y);
+                    for (int vein = 0; vein < 3; vein++)
+                    {
+                        Vector2 baseVein = Vector2.Lerp(root, tip, .28f + vein * .18f);
+                        FineLine(baseVein.x, baseVein.y, baseVein.x - sign * .035f, baseVein.y - .036f, .8f);
+                        FineLine(baseVein.x, baseVein.y, baseVein.x + sign * .042f, baseVein.y + .025f, .75f);
+                    }
                 }
             }
             else
@@ -410,10 +477,23 @@ namespace PaperDefense.Presentation
                 {
                     pen.Disc(Vector2.zero, radius, new Color32(250, 217, 102, 255), 32, 1.13f);
                     pen.Ring(Vector2.zero, radius, stroke * 1.4f, ink, 32, 1.13f);
-                    pen.Ring(Vector2.zero, radius * .73f, stroke, new Color32(172, 116, 25, 255), 32, 1.13f);
-                    for (int hatch = 0; hatch < 3; hatch++)
-                        pen.Line(new Vector2(-radius * .36f + hatch * radius * .15f, -radius * .45f),
-                            new Vector2(radius * .25f + hatch * radius * .15f, radius * .45f), stroke, new Color32(195, 143, 38, 255));
+                    Color gold = new Color32(172, 116, 25, 255);
+                    pen.Ring(new Vector2(radius * .035f, radius * .025f), radius * .79f, stroke * .72f, gold, 40, 1.13f);
+                    pen.Ring(new Vector2(-radius * .025f, radius * .035f), radius * .67f, stroke * .45f, new Color32(255, 242, 175, 255), 40, 1.13f);
+                    for (int rim = 0; rim < 24; rim++)
+                    {
+                        float angle = rim * Mathf.PI / 12;
+                        var direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle) * 1.13f);
+                        pen.Line(direction * radius * .85f, direction * radius * .94f, stroke * .45f, gold);
+                    }
+                    // Engraved crown: the coin remains a small symbol, not an extra text label.
+                    Vector2[] crown = { new Vector2(-.43f, .19f), new Vector2(-.21f, -.04f), new Vector2(0, .31f),
+                        new Vector2(.21f, -.04f), new Vector2(.43f, .19f), new Vector2(.31f, -.31f), new Vector2(-.31f, -.31f) };
+                    for (int point = 0; point < crown.Length; point++)
+                        pen.Line(crown[point] * radius, crown[(point + 1) % crown.Length] * radius, stroke * .9f, gold);
+                    for (int hatch = 0; hatch < 5; hatch++)
+                        pen.Line(new Vector2(-.29f + hatch * .12f, -.31f) * radius,
+                            new Vector2(-.22f + hatch * .10f, -.15f) * radius, stroke * .46f, gold);
                 }
                 else
                 {
@@ -424,6 +504,13 @@ namespace PaperDefense.Presentation
                         points[i] = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius * (i % 2 == 0 ? 1 : .70f);
                     }
                     Polygon(points, ink);
+                    for (int point = 0; point < points.Length; point++)
+                    {
+                        Vector2 a = points[point] * .77f, b = points[(point + 1) % points.Length] * .77f;
+                        pen.Line(a, b, stroke * .62f, new Color32(235, 236, 210, 255));
+                        Vector2 inner = points[point] * .84f, outer = points[point] * .96f;
+                        pen.Line(inner, outer, stroke * .45f, new Color32(113, 147, 203, 255));
+                    }
                 }
             }
             pen.CopyTo(vh, bounds.center, 1);

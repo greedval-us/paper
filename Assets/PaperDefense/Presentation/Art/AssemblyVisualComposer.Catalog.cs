@@ -39,12 +39,19 @@ namespace PaperDefense.Presentation
         /// <summary>Part inspection uses exactly the authored canvases, pivots and ordered layers
         /// used by the completed recipe. Neutral options deliberately have no raster fragments.</summary>
         public static AssemblyVisualComposition ComposePart(PartRef reference)
+            => ComposePart(reference, AssemblyStructureFamily.None);
+
+        /// <summary>A shared structure part keeps the same family artwork as its completed recipe.</summary>
+        public static AssemblyVisualComposition ComposePart(PartRef reference, AssemblyStructureFamily family)
         {
             EnsureLoaded(); var part = FindPart(manifest, reference);
             if (part == null) throw new ArgumentException("No visual mapping for " + reference.Id + "@" + reference.Revision);
             var fragments = new List<AssemblyVisualFragment>();
-            var family = part.structureFamilies;
-            if (family == AssemblyStructureFamily.All || !SingleFamily(family)) family = AssemblyStructureFamily.Wall;
+            if (family == AssemblyStructureFamily.None)
+            {
+                family = part.structureFamilies;
+                if (family == AssemblyStructureFamily.All || !SingleFamily(family)) family = AssemblyStructureFamily.Wall;
+            }
             Append(part, -1, Vector2.zero, 0, 0, fragments, family);
             return Finish(fragments, new List<AssemblyVisualAnchor>());
         }

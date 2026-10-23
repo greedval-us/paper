@@ -1,0 +1,74 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "77295973eb8448838991b2beaf1f4a0e",
+      "status": "failed",
+      "mode": "EditMode",
+      "started_unix_ms": 1792715756056,
+      "finished_unix_ms": 1792715763178,
+      "last_update_unix_ms": 1792715763178,
+      "progress": {
+        "completed": 2,
+        "total": 2,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.TowerDefenseBalanceTests.ActualMainPresetsReserveInnerPinesAndKeepCampaignBuildCellsFree(True)",
+        "last_finished_unix_ms": 1792715763018,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": true,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [
+          {
+            "full_name": "PaperDefense.Tests.TowerDefenseBalanceTests.ActualMainPresetsReserveInnerPinesAndKeepCampaignBuildCellsFree(False)",
+            "message": "  Target missing pine terrain at (38, 35)\r\n  Expected: True\r\n  But was:  False\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.TowerDefenseBalanceTests.ActualMainPresetsReserveInnerPinesAndKeepCampaignBuildCellsFree(True)",
+            "message": "  PlayerRules missing pine terrain at (38, 35)\r\n  Expected: True\r\n  But was:  False\r\n"
+          }
+        ],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "EditMode",
+        "summary": {
+          "total": 2,
+          "passed": 0,
+          "failed": 2,
+          "skipped": 0,
+          "durationSeconds": 0.8112677,
+          "resultState": "Failed(Child)"
+        },
+        "results": [
+          {
+            "name": "ActualMainPresetsReserveInnerPinesAndKeepCampaignBuildCellsFree(False)",
+            "fullName": "PaperDefense.Tests.TowerDefenseBalanceTests.ActualMainPresetsReserveInnerPinesAndKeepCampaignBuildCellsFree(False)",
+            "state": "Failed",
+            "durationSeconds": 0.1786715,
+            "message": "  Target missing pine terrain at (38, 35)\r\n  Expected: True\r\n  But was:  False\r\n",
+            "stackTrace": "at PaperDefense.Tests.TowerDefenseBalanceTests.ActualMainPresetsReserveInnerPinesAndKeepCampaignBuildCellsFree (System.Boolean player) [0x0011e] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\Editor\\TowerDefenseBalanceTests.cs:44\r\n",
+            "output": ""
+          },
+          {
+            "name": "ActualMainPresetsReserveInnerPinesAndKeepCampaignBuildCellsFree(True)",
+            "fullName": "PaperDefense.Tests.TowerDefenseBalanceTests.ActualMainPresetsReserveInnerPinesAndKeepCampaignBuildCellsFree(True)",
+            "state": "Failed",
+            "durationSeconds": 0.0198975,
+            "message": "  PlayerRules missing pine terrain at (38, 35)\r\n  Expected: True\r\n  But was:  False\r\n",
+            "stackTrace": "at PaperDefense.Tests.TowerDefenseBalanceTests.ActualMainPresetsReserveInnerPinesAndKeepCampaignBuildCellsFree (System.Boolean player) [0x0011e] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\Editor\\TowerDefenseBalanceTests.cs:44\r\n",
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

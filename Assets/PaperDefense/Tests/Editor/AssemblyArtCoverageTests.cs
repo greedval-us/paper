@@ -148,6 +148,33 @@ namespace PaperDefense.Tests
             Assert.Throws<ArgumentException>(() => AssemblyVisualComposer.ComposePart(Ref("head.gun", 99)));
         }
 
+        [TestCase(AssemblyStructureFamily.Slow)]
+        [TestCase(AssemblyStructureFamily.Repair)]
+        [TestCase(AssemblyStructureFamily.Generator)]
+        public void ExplodedStructureShell_UsesTheSameFamilyArtworkAsTheCompletedRecipe(AssemblyStructureFamily family)
+        {
+            var entry = Catalog().Starters.Single(item => item.Kind == AlbumEntryKind.Structure && item.Snapshot.Recipe.Structure.Family == family);
+            var recipe = entry.Snapshot.Recipe;
+            var complete = AssemblyVisualComposer.Compose(entry.Snapshot, new AssemblyVisualPose());
+            var expected = complete.Fragments.Where(fragment => fragment.PartId == recipe.Structure.Shell.Id).ToArray();
+            Assert.That(expected, Is.Not.Empty, "The family-specific completed recipe must supply the shell's native artwork.");
+            var go = new GameObject("Family-specific exploded structure", typeof(RectTransform), typeof(CanvasRenderer), typeof(WorkshopAssemblyDiagram));
+            try
+            {
+                var diagram = go.GetComponent<WorkshopAssemblyDiagram>(); diagram.Configure(recipe, WorkshopComponentKind.Structure, 0);
+                var field = typeof(WorkshopAssemblyDiagram).GetField("drawings", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                var drawings = ((IEnumerable<AssemblyVisualComposition>)field.GetValue(diagram)).ToArray();
+                int shell = diagram.Parts.ToList().FindIndex(reference => reference.Id == recipe.Structure.Shell.Id);
+                var actual = drawings[shell].Fragments;
+                Assert.That(actual.Select(fragment => fragment.SpriteId), Is.EqualTo(expected.Select(fragment => fragment.SpriteId)),
+                    family + " must inspect its own roof, grate or reservoir instead of the wall's metal panels.");
+                Assert.That(actual.Select(fragment => (fragment.PartId, fragment.Scale, fragment.Radians, fragment.Origin)),
+                    Is.EqualTo(expected.Select(fragment => (fragment.PartId, fragment.Scale, fragment.Radians, fragment.Origin))),
+                    "Inspection must preserve the same authored source transforms used by the complete recipe.");
+            }
+            finally { UnityEngine.Object.DestroyImmediate(go); }
+        }
+
         [Test] public void FamilyCards_ShowCompleteWeaponsAndFoundationCardsKeepTheirEmptyMounts()
         {
             var catalog = Catalog();

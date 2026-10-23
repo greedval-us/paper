@@ -1,0 +1,5 @@
+1920x1080: recaptured 29-structure,29-wall,29-slow,29-repair; purchase 94-80=14; independent comparison has no IO; failed save retains draft; retry has one page; invalid queue/drum blocked.
+1024x768: recaptured 29-structure,29-wall,29-slow,29-repair; purchase 94-80=14; independent comparison has no IO; failed save retains draft; retry has one page; invalid queue/drum blocked.
+1280x720: recaptured 29-structure,29-wall,29-slow,29-repair; purchase 94-80=14; independent comparison has no IO; failed save retains draft; retry has one page; invalid queue/drum blocked.
+1280x960: recaptured 29-structure,29-wall,29-slow,29-repair; purchase 94-80=14; independent comparison has no IO; failed save retains draft; retry has one page; invalid queue/drum blocked.
+1600x900: recaptured 29-structure,29-wall,29-slow,29-repair; purchase 94-80=14; independent comparison has no IO; failed save retains draft; retry has one page; invalid queue/drum blocked.

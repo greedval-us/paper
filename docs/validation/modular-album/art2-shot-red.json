@@ -1,0 +1,118 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "c029aa5da2794304910748892f4c0ee5",
+      "status": "failed",
+      "mode": "PlayMode",
+      "started_unix_ms": 1792716128139,
+      "finished_unix_ms": 1792716134951,
+      "last_update_unix_ms": 1792716134951,
+      "progress": {
+        "completed": 6,
+        "total": 6,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.NotebookAnimationRenderingTests.SpecialistShotPathsKeepTheirFullMuzzleToTargetGeometry(Ricochet)",
+        "last_finished_unix_ms": 1792716134930,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": true,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [
+          {
+            "full_name": "PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(0.1f)",
+            "message": "  An ordinary shot is a short ink mark, even when its captured target is twenty units away.\r\n  Expected: in range (0,05,0,8)\r\n  But was:  18.5f\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(0.5f)",
+            "message": "  An ordinary shot is a short ink mark, even when its captured target is twenty units away.\r\n  Expected: in range (0,05,0,8)\r\n  But was:  12.5f\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(0.9f)",
+            "message": "  An ordinary shot is a short ink mark, even when its captured target is twenty units away.\r\n  Expected: in range (0,05,0,8)\r\n  But was:  6.50000095f\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotInkStreakAdvancesFromTheActualMuzzleTowardItsCapturedTarget",
+            "message": "  The first mark leaves the rendered muzzle, not the event's structure-centre source.\r\n  Expected: less than 1\r\n  But was:  20.0f\r\n"
+          }
+        ],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "PlayMode",
+        "summary": {
+          "total": 6,
+          "passed": 2,
+          "failed": 4,
+          "skipped": 0,
+          "durationSeconds": 0.0668803,
+          "resultState": "Failed(Child)"
+        },
+        "results": [
+          {
+            "name": "SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(0.1f)",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(0.1f)",
+            "state": "Failed",
+            "durationSeconds": 0.0211207,
+            "message": "  An ordinary shot is a short ink mark, even when its captured target is twenty units away.\r\n  Expected: in range (0,05,0,8)\r\n  But was:  18.5f\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotDrawsABoundedInkStreakThroughoutItsLifetime (System.Single fraction) [0x00121] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookAnimationRenderingTests.cs:221\r\n",
+            "output": ""
+          },
+          {
+            "name": "SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(0.5f)",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(0.5f)",
+            "state": "Failed",
+            "durationSeconds": 0.0005021,
+            "message": "  An ordinary shot is a short ink mark, even when its captured target is twenty units away.\r\n  Expected: in range (0,05,0,8)\r\n  But was:  12.5f\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotDrawsABoundedInkStreakThroughoutItsLifetime (System.Single fraction) [0x00121] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookAnimationRenderingTests.cs:221\r\n",
+            "output": ""
+          },
+          {
+            "name": "SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(0.9f)",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(0.9f)",
+            "state": "Failed",
+            "durationSeconds": 0.0002951,
+            "message": "  An ordinary shot is a short ink mark, even when its captured target is twenty units away.\r\n  Expected: in range (0,05,0,8)\r\n  But was:  6.50000095f\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotDrawsABoundedInkStreakThroughoutItsLifetime (System.Single fraction) [0x00121] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookAnimationRenderingTests.cs:221\r\n",
+            "output": ""
+          },
+          {
+            "name": "SingleShotInkStreakAdvancesFromTheActualMuzzleTowardItsCapturedTarget",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotInkStreakAdvancesFromTheActualMuzzleTowardItsCapturedTarget",
+            "state": "Failed",
+            "durationSeconds": 0.0041344,
+            "message": "  The first mark leaves the rendered muzzle, not the event's structure-centre source.\r\n  Expected: less than 1\r\n  But was:  20.0f\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookAnimationRenderingTests.SingleShotInkStreakAdvancesFromTheActualMuzzleTowardItsCapturedTarget () [0x00270] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookAnimationRenderingTests.cs:252\r\n",
+            "output": ""
+          },
+          {
+            "name": "SpecialistShotPathsKeepTheirFullMuzzleToTargetGeometry(Line)",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.SpecialistShotPathsKeepTheirFullMuzzleToTargetGeometry(Line)",
+            "state": "Passed",
+            "durationSeconds": 0.0023984,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SpecialistShotPathsKeepTheirFullMuzzleToTargetGeometry(Ricochet)",
+            "fullName": "PaperDefense.Tests.NotebookAnimationRenderingTests.SpecialistShotPathsKeepTheirFullMuzzleToTargetGeometry(Ricochet)",
+            "state": "Passed",
+            "durationSeconds": 0.0003126,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

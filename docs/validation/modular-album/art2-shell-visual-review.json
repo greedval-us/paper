@@ -1,0 +1,863 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "/root/art2_shell_audit",
+  "scope": "art2 shell scenes18,19,20 variants,21,22,23,28",
+  "sourceInspection": [
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/18-pause.png",
+      "sourceSha256": "a37b1ec4059c5abdf37ef6f5695ecc549360bac90f383fc1f6b1ae3917695bc3",
+      "inspected": true,
+      "method": "Physical view_image inspection in this agent session; source23 and other shell sources were also compared against the baseline before edits."
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "inspected": true,
+      "method": "Physical view_image inspection in this agent session; source23 and other shell sources were also compared against the baseline before edits."
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "inspected": true,
+      "method": "Physical view_image inspection in this agent session; source23 and other shell sources were also compared against the baseline before edits."
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/21-defeat.png",
+      "sourceSha256": "4c842f460848bc0b2820590486a9c12488ea84e10abbcc59cc02b02c56ee2e6e",
+      "inspected": true,
+      "method": "Physical view_image inspection in this agent session; source23 and other shell sources were also compared against the baseline before edits."
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/22-settings.png",
+      "sourceSha256": "395c7d5afb47b7189886e29853dcc699a81139038216c429cc1342055dea1f8a",
+      "inspected": true,
+      "method": "Physical view_image inspection in this agent session; source23 and other shell sources were also compared against the baseline before edits."
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/28-leave.png",
+      "sourceSha256": "d280c9dc11d916756a5ca6b695d2cf2020009df3085d6b55d41dd5dd09ece7b2",
+      "inspected": true,
+      "method": "Physical view_image inspection in this agent session; source23 and other shell sources were also compared against the baseline before edits."
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/23-help.png",
+      "sourceSha256": "80e9e894c092a8cd7e22c1feead5609630bbb043ab3f1af6a3c3efb997d18f47",
+      "inspected": true,
+      "method": "Physical view_image inspection in this agent session; source23 and other shell sources were also compared against the baseline before edits."
+    }
+  ],
+  "records": [
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/18-pause.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-18-pause-1920x1080.png",
+      "sourceSha256": "a37b1ec4059c5abdf37ef6f5695ecc549360bac90f383fc1f6b1ae3917695bc3",
+      "captureSha256": "9393d4a3b675e2737e1b1560327f0b49b9075d0ba66ac31d84814ed5a42d5694",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Native paper border and texture replace the flat folded fallback while all four actions and the Esc hint stay inside the sheet.",
+        "Title clears the upper ink border; no transparent top gap or stretched96px corner is visible.",
+        "Physically opened whole frame at 1920x1080; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The paused battlefield follows actual map props and current modular recipes; it is sparser than the illustrative concept.",
+        "Pause/settings/map symbols remain code-native simple icons."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/18-pause.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-18-pause-1024x768.png",
+      "sourceSha256": "a37b1ec4059c5abdf37ef6f5695ecc549360bac90f383fc1f6b1ae3917695bc3",
+      "captureSha256": "11c47d7de37d5aa83af3e9bbff4030348fd790569c3a7b65f78bfb66e40c2b1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Native paper border and texture replace the flat folded fallback while all four actions and the Esc hint stay inside the sheet.",
+        "Title clears the upper ink border; no transparent top gap or stretched96px corner is visible.",
+        "Physically opened whole frame at 1024x768; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The paused battlefield follows actual map props and current modular recipes; it is sparser than the illustrative concept.",
+        "Pause/settings/map symbols remain code-native simple icons."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/18-pause.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-18-pause-1280x720.png",
+      "sourceSha256": "a37b1ec4059c5abdf37ef6f5695ecc549360bac90f383fc1f6b1ae3917695bc3",
+      "captureSha256": "6c8a8c368f7a5a9097f0211c743c14a49c898b3208d650979b839f2c76ebe6ae",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Native paper border and texture replace the flat folded fallback while all four actions and the Esc hint stay inside the sheet.",
+        "Title clears the upper ink border; no transparent top gap or stretched96px corner is visible.",
+        "Physically opened whole frame at 1280x720; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The paused battlefield follows actual map props and current modular recipes; it is sparser than the illustrative concept.",
+        "Pause/settings/map symbols remain code-native simple icons."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/18-pause.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-18-pause-1280x960.png",
+      "sourceSha256": "a37b1ec4059c5abdf37ef6f5695ecc549360bac90f383fc1f6b1ae3917695bc3",
+      "captureSha256": "50eb939a142dcaa4b456efc7c9648ed3537d4d2d975d54ad98330c80d32ff9ae",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Native paper border and texture replace the flat folded fallback while all four actions and the Esc hint stay inside the sheet.",
+        "Title clears the upper ink border; no transparent top gap or stretched96px corner is visible.",
+        "Physically opened whole frame at 1280x960; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The paused battlefield follows actual map props and current modular recipes; it is sparser than the illustrative concept.",
+        "Pause/settings/map symbols remain code-native simple icons."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/18-pause.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-18-pause-1600x900.png",
+      "sourceSha256": "a37b1ec4059c5abdf37ef6f5695ecc549360bac90f383fc1f6b1ae3917695bc3",
+      "captureSha256": "236ba7f0b36994ac3d81028f8b12966d5f3f15cc4bb16da0f4fd2b850edac0d3",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Native paper border and texture replace the flat folded fallback while all four actions and the Esc hint stay inside the sheet.",
+        "Title clears the upper ink border; no transparent top gap or stretched96px corner is visible.",
+        "Physically opened whole frame at 1600x900; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The paused battlefield follows actual map props and current modular recipes; it is sparser than the illustrative concept.",
+        "Pause/settings/map symbols remain code-native simple icons."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-19-upgrades-1920x1080.png",
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "captureSha256": "fa1013929e2bd5cef84157fbab4631b57c5bc10904e5a94494c1f180c68a8b6b",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Three distinct ivory cards retain readable actual benefits, weapon/pencil illustrations and all three Choose controls.",
+        "Blue sketch borders stay outside content; title, wave note and generator rule remain above the bottom loadout.",
+        "Physically opened whole frame at 1920x1080; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The current gameplay battlefield and modular loadout silhouettes differ from the dense scene in the source.",
+        "The generator note has a transparent background; a dimmed approach marker can be seen behind it in some layouts."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-19-upgrades-1024x768.png",
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "captureSha256": "05bda819efea0656d852cd4dc17b80e3c31fe732ac68b05def6d12e865962d13",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Three distinct ivory cards retain readable actual benefits, weapon/pencil illustrations and all three Choose controls.",
+        "Blue sketch borders stay outside content; title, wave note and generator rule remain above the bottom loadout.",
+        "Physically opened whole frame at 1024x768; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The current gameplay battlefield and modular loadout silhouettes differ from the dense scene in the source.",
+        "The generator note has a transparent background; a dimmed approach marker can be seen behind it in some layouts."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-19-upgrades-1280x720.png",
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "captureSha256": "2b366d28c93d568dfc8ee87b5fa62e2e95f0fc0a9d1151905ee423e4dee254d0",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Three distinct ivory cards retain readable actual benefits, weapon/pencil illustrations and all three Choose controls.",
+        "Blue sketch borders stay outside content; title, wave note and generator rule remain above the bottom loadout.",
+        "Physically opened whole frame at 1280x720; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The current gameplay battlefield and modular loadout silhouettes differ from the dense scene in the source.",
+        "The generator note has a transparent background; a dimmed approach marker can be seen behind it in some layouts."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-19-upgrades-1280x960.png",
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "captureSha256": "d26e5d0897705bb4a45fcd91689ad50f08f9a3ba72e05a0cda71ec3709e391e3",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Three distinct ivory cards retain readable actual benefits, weapon/pencil illustrations and all three Choose controls.",
+        "Blue sketch borders stay outside content; title, wave note and generator rule remain above the bottom loadout.",
+        "Physically opened whole frame at 1280x960; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The current gameplay battlefield and modular loadout silhouettes differ from the dense scene in the source.",
+        "The generator note has a transparent background; a dimmed approach marker can be seen behind it in some layouts."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-19-upgrades-1600x900.png",
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "captureSha256": "55354bb196c99277752b280259deedf0e99e94eb5f543d33c5eae1fb68ab2b99",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Three distinct ivory cards retain readable actual benefits, weapon/pencil illustrations and all three Choose controls.",
+        "Blue sketch borders stay outside content; title, wave note and generator rule remain above the bottom loadout.",
+        "Physically opened whole frame at 1600x900; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The current gameplay battlefield and modular loadout silhouettes differ from the dense scene in the source.",
+        "The generator note has a transparent background; a dimmed approach marker can be seen behind it in some layouts."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-20-victory-1920x1080.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captureSha256": "ebed9ef74af1ae2fb9b6f49cd21ae3ac3e7f5d6aaf47235ad29dc14d7925b78a",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Ribbon end hatching and veined laurels are visible without crossing the live title.",
+        "Engraved coin, inset XP emblem and native workshop icon sit cleanly beside actual values and navigation.",
+        "Reward breakdown, XP interval, financial report and saved receipt remain separated and readable.",
+        "Physically opened whole frame at 1920x1080; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The perimeter remains a repeated pale forest rather than the source's coherent detailed mountain battlefield.",
+        "Actual frozen modular assemblies have wider foundations than the source's compact legacy tower illustrations.",
+        "Runtime lettering and code-native ornaments differ from the source's raster calligraphy."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-20-victory-1024x768.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captureSha256": "39068a3d61a5f729d80c2ac276ac895c59a2766ee5dd2f1ab83f740483c350ac",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Ribbon end hatching and veined laurels are visible without crossing the live title.",
+        "Engraved coin, inset XP emblem and native workshop icon sit cleanly beside actual values and navigation.",
+        "Reward breakdown, XP interval, financial report and saved receipt remain separated and readable.",
+        "Physically opened whole frame at 1024x768; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The perimeter remains a repeated pale forest rather than the source's coherent detailed mountain battlefield.",
+        "Actual frozen modular assemblies have wider foundations than the source's compact legacy tower illustrations.",
+        "Runtime lettering and code-native ornaments differ from the source's raster calligraphy."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-20-victory-1280x720.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captureSha256": "ed03d73ed1f1b56d13605276ef322defae1155ef911db38857bc6dd2c9b10794",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Ribbon end hatching and veined laurels are visible without crossing the live title.",
+        "Engraved coin, inset XP emblem and native workshop icon sit cleanly beside actual values and navigation.",
+        "Reward breakdown, XP interval, financial report and saved receipt remain separated and readable.",
+        "Physically opened whole frame at 1280x720; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The perimeter remains a repeated pale forest rather than the source's coherent detailed mountain battlefield.",
+        "Actual frozen modular assemblies have wider foundations than the source's compact legacy tower illustrations.",
+        "Runtime lettering and code-native ornaments differ from the source's raster calligraphy."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-20-victory-1280x960.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captureSha256": "125b7f9ab8d19befb026077f9b9ce0555fe091a671026134573041b0403e18f3",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Ribbon end hatching and veined laurels are visible without crossing the live title.",
+        "Engraved coin, inset XP emblem and native workshop icon sit cleanly beside actual values and navigation.",
+        "Reward breakdown, XP interval, financial report and saved receipt remain separated and readable.",
+        "Physically opened whole frame at 1280x960; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The perimeter remains a repeated pale forest rather than the source's coherent detailed mountain battlefield.",
+        "Actual frozen modular assemblies have wider foundations than the source's compact legacy tower illustrations.",
+        "Runtime lettering and code-native ornaments differ from the source's raster calligraphy."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-20-victory-1600x900.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captureSha256": "437333238596d5c25828e26025d2e5810bef59cd41956e822aede6892256d4b3",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Ribbon end hatching and veined laurels are visible without crossing the live title.",
+        "Engraved coin, inset XP emblem and native workshop icon sit cleanly beside actual values and navigation.",
+        "Reward breakdown, XP interval, financial report and saved receipt remain separated and readable.",
+        "Physically opened whole frame at 1600x900; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The perimeter remains a repeated pale forest rather than the source's coherent detailed mountain battlefield.",
+        "Actual frozen modular assemblies have wider foundations than the source's compact legacy tower illustrations.",
+        "Runtime lettering and code-native ornaments differ from the source's raster calligraphy."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-20-pending-1920x1080.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captureSha256": "ee49fa6aba48075cd14e16694f960e6f87840f800279445fe2cad96a0589c53b",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Pending-save status and Retry saving remain visible in the wider report without covering navigation.",
+        "The empty pending XP track is distinct from saved progression and the real gold/XP reward columns remain visible.",
+        "Ornament hatching stays clear of the title and values.",
+        "Physically opened whole frame at 1920x1080; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The source20 depicts a saved reward, so this live pending variant has an additional report action.",
+        "Repeated perimeter scenery and current modular assembly silhouettes retain documented differences from the concept."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-20-pending-1024x768.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captureSha256": "116925a65e61a37d8a90a9e7f6177f517569c6e7754944807c752e012991ee2f",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Pending-save status and Retry saving remain visible in the wider report without covering navigation.",
+        "The empty pending XP track is distinct from saved progression and the real gold/XP reward columns remain visible.",
+        "Ornament hatching stays clear of the title and values.",
+        "Physically opened whole frame at 1024x768; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The source20 depicts a saved reward, so this live pending variant has an additional report action.",
+        "Repeated perimeter scenery and current modular assembly silhouettes retain documented differences from the concept."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-20-pending-1280x720.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captureSha256": "72e4f3c564f2ff7a1f04c244fdeebc261a5210ba4be8cad74101134cdee4f3f8",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Pending-save status and Retry saving remain visible in the wider report without covering navigation.",
+        "The empty pending XP track is distinct from saved progression and the real gold/XP reward columns remain visible.",
+        "Ornament hatching stays clear of the title and values.",
+        "Physically opened whole frame at 1280x720; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The source20 depicts a saved reward, so this live pending variant has an additional report action.",
+        "Repeated perimeter scenery and current modular assembly silhouettes retain documented differences from the concept."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-20-pending-1280x960.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captureSha256": "0a86efc74ee138b147257b6137868688b33f3cc070cc77afac60f81b55ce23a5",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Pending-save status and Retry saving remain visible in the wider report without covering navigation.",
+        "The empty pending XP track is distinct from saved progression and the real gold/XP reward columns remain visible.",
+        "Ornament hatching stays clear of the title and values.",
+        "Physically opened whole frame at 1280x960; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The source20 depicts a saved reward, so this live pending variant has an additional report action.",
+        "Repeated perimeter scenery and current modular assembly silhouettes retain documented differences from the concept."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-20-pending-1600x900.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captureSha256": "06147f2138dd3b3439b5c609b2a3ef5d35569da5180c1e98416737b36b09385a",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Pending-save status and Retry saving remain visible in the wider report without covering navigation.",
+        "The empty pending XP track is distinct from saved progression and the real gold/XP reward columns remain visible.",
+        "Ornament hatching stays clear of the title and values.",
+        "Physically opened whole frame at 1600x900; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The source20 depicts a saved reward, so this live pending variant has an additional report action.",
+        "Repeated perimeter scenery and current modular assembly silhouettes retain documented differences from the concept."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-20-statistics-1920x1080.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captureSha256": "2b3fc0badef555f3a49767cc4ef0f4559773696e4bdbf105d907e49f649b7153",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Statistics opens as a centered modal with two readable columns, visible scroll owner and Return to results action.",
+        "The modal and its controls stay within the viewport; the result page is visibly dimmed behind it.",
+        "Physically opened whole frame at 1920x1080; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The source20 shows the collapsed report; the expanded statistics modal is an existing functional extension.",
+        "The statistics sheet retains its prior procedural graph-paper surface rather than the new scoped card artwork."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-20-statistics-1024x768.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captureSha256": "6941dcf9dd8900cb552f2adb236aa9f81c986ed83cef7a015db83ae3e0206d69",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Statistics opens as a centered modal with two readable columns, visible scroll owner and Return to results action.",
+        "The modal and its controls stay within the viewport; the result page is visibly dimmed behind it.",
+        "Physically opened whole frame at 1024x768; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The source20 shows the collapsed report; the expanded statistics modal is an existing functional extension.",
+        "The statistics sheet retains its prior procedural graph-paper surface rather than the new scoped card artwork."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-20-statistics-1280x720.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captureSha256": "a2a534dd3ae32446662b8791e616e77cca03a4531a5bbdb04adce449fda75ab7",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Statistics opens as a centered modal with two readable columns, visible scroll owner and Return to results action.",
+        "The modal and its controls stay within the viewport; the result page is visibly dimmed behind it.",
+        "Physically opened whole frame at 1280x720; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The source20 shows the collapsed report; the expanded statistics modal is an existing functional extension.",
+        "The statistics sheet retains its prior procedural graph-paper surface rather than the new scoped card artwork."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-20-statistics-1280x960.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captureSha256": "4cf2be1e51cdae31d04b4945b17ffad0e616f8e5703c8395fecf82218c876e5e",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Statistics opens as a centered modal with two readable columns, visible scroll owner and Return to results action.",
+        "The modal and its controls stay within the viewport; the result page is visibly dimmed behind it.",
+        "Physically opened whole frame at 1280x960; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The source20 shows the collapsed report; the expanded statistics modal is an existing functional extension.",
+        "The statistics sheet retains its prior procedural graph-paper surface rather than the new scoped card artwork."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-20-statistics-1600x900.png",
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "captureSha256": "fb4410d0c3024b245e8dcae6713289a75ec18b1b86b68ad7a5352bec409dfe29",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Statistics opens as a centered modal with two readable columns, visible scroll owner and Return to results action.",
+        "The modal and its controls stay within the viewport; the result page is visibly dimmed behind it.",
+        "Physically opened whole frame at 1600x900; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The source20 shows the collapsed report; the expanded statistics modal is an existing functional extension.",
+        "The statistics sheet retains its prior procedural graph-paper surface rather than the new scoped card artwork."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/21-defeat.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-21-defeat-1920x1080.png",
+      "sourceSha256": "4c842f460848bc0b2820590486a9c12488ea84e10abbcc59cc02b02c56ee2e6e",
+      "captureSha256": "30233a15f5f713253853367b81f6137c1d813c79cc7d014f3571e877cb2171fc",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Rubble illustration stays dominant on the left, actual defeat wave and gold/XP values remain grouped on the right.",
+        "Torn ribbon edge hatching/fibres do not obscure lettering; native workshop icon is visible on the Album action.",
+        "Loss rows, saved status, receipt and all navigation controls remain separated.",
+        "Physically opened whole frame at 1920x1080; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "Peripheral scenery remains paler and less continuous than the source.",
+        "The functional album label and actual fixture loss counts differ from the concept's illustrative content.",
+        "Code-native ribbon shape and lettering remain an interpretation of the source calligraphy."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/21-defeat.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-21-defeat-1024x768.png",
+      "sourceSha256": "4c842f460848bc0b2820590486a9c12488ea84e10abbcc59cc02b02c56ee2e6e",
+      "captureSha256": "ffc7f4504cd6870b524364c99b07ef951acbb32daea1236b0a3f383ace0f7e21",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Rubble illustration stays dominant on the left, actual defeat wave and gold/XP values remain grouped on the right.",
+        "Torn ribbon edge hatching/fibres do not obscure lettering; native workshop icon is visible on the Album action.",
+        "Loss rows, saved status, receipt and all navigation controls remain separated.",
+        "Physically opened whole frame at 1024x768; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "Peripheral scenery remains paler and less continuous than the source.",
+        "The functional album label and actual fixture loss counts differ from the concept's illustrative content.",
+        "Code-native ribbon shape and lettering remain an interpretation of the source calligraphy."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/21-defeat.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-21-defeat-1280x720.png",
+      "sourceSha256": "4c842f460848bc0b2820590486a9c12488ea84e10abbcc59cc02b02c56ee2e6e",
+      "captureSha256": "5baa887aa0302832172b63da1c40b72e7cb9c7a3e78f466427862411f70e0095",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Rubble illustration stays dominant on the left, actual defeat wave and gold/XP values remain grouped on the right.",
+        "Torn ribbon edge hatching/fibres do not obscure lettering; native workshop icon is visible on the Album action.",
+        "Loss rows, saved status, receipt and all navigation controls remain separated.",
+        "Physically opened whole frame at 1280x720; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "Peripheral scenery remains paler and less continuous than the source.",
+        "The functional album label and actual fixture loss counts differ from the concept's illustrative content.",
+        "Code-native ribbon shape and lettering remain an interpretation of the source calligraphy."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/21-defeat.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-21-defeat-1280x960.png",
+      "sourceSha256": "4c842f460848bc0b2820590486a9c12488ea84e10abbcc59cc02b02c56ee2e6e",
+      "captureSha256": "f6c15c5c9721a42f0a3758d2b994666af911eb58e1cfc2757528b2c7a0db19aa",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Rubble illustration stays dominant on the left, actual defeat wave and gold/XP values remain grouped on the right.",
+        "Torn ribbon edge hatching/fibres do not obscure lettering; native workshop icon is visible on the Album action.",
+        "Loss rows, saved status, receipt and all navigation controls remain separated.",
+        "Physically opened whole frame at 1280x960; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "Peripheral scenery remains paler and less continuous than the source.",
+        "The functional album label and actual fixture loss counts differ from the concept's illustrative content.",
+        "Code-native ribbon shape and lettering remain an interpretation of the source calligraphy."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/21-defeat.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-21-defeat-1600x900.png",
+      "sourceSha256": "4c842f460848bc0b2820590486a9c12488ea84e10abbcc59cc02b02c56ee2e6e",
+      "captureSha256": "4773c490d4dcdb4ef40b649638ca5ca00c189e3dec61146b82a5718bf4702ac3",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Rubble illustration stays dominant on the left, actual defeat wave and gold/XP values remain grouped on the right.",
+        "Torn ribbon edge hatching/fibres do not obscure lettering; native workshop icon is visible on the Album action.",
+        "Loss rows, saved status, receipt and all navigation controls remain separated.",
+        "Physically opened whole frame at 1600x900; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "Peripheral scenery remains paler and less continuous than the source.",
+        "The functional album label and actual fixture loss counts differ from the concept's illustrative content.",
+        "Code-native ribbon shape and lettering remain an interpretation of the source calligraphy."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/22-settings.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-22-settings-1920x1080.png",
+      "sourceSha256": "395c7d5afb47b7189886e29853dcc699a81139038216c429cc1342055dea1f8a",
+      "captureSha256": "21b1db1293bf0e6ff216b99d037d08a0804bfa69eebcc907a612d20a35ebc154",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The native paper is fitted to the existing settings container with a narrow blue border and quiet texture.",
+        "All four settings rows, resolution selector/apply control, Help action and Done remain clear of the frame.",
+        "Castle landscape and authored wordmark retain their source-like pen detail.",
+        "Physically opened whole frame at 1920x1080; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "Resolution and reduced-motion controls are functional additions beyond the two main toggles in the source.",
+        "At4:3 the whole landscape remains contained, leaving ivory extension bands instead of cropping source details."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/22-settings.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-22-settings-1024x768.png",
+      "sourceSha256": "395c7d5afb47b7189886e29853dcc699a81139038216c429cc1342055dea1f8a",
+      "captureSha256": "ce18fabb2e36acb3bfedae07057fed7943410c25c7443771339dbb2125ab310d",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The native paper is fitted to the existing settings container with a narrow blue border and quiet texture.",
+        "All four settings rows, resolution selector/apply control, Help action and Done remain clear of the frame.",
+        "Castle landscape and authored wordmark retain their source-like pen detail.",
+        "Physically opened whole frame at 1024x768; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "Resolution and reduced-motion controls are functional additions beyond the two main toggles in the source.",
+        "At4:3 the whole landscape remains contained, leaving ivory extension bands instead of cropping source details."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/22-settings.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-22-settings-1280x720.png",
+      "sourceSha256": "395c7d5afb47b7189886e29853dcc699a81139038216c429cc1342055dea1f8a",
+      "captureSha256": "b7f51f1673029d99ef978801a9f5c1f8b196bfcd8f694df2a481f277428e4c63",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The native paper is fitted to the existing settings container with a narrow blue border and quiet texture.",
+        "All four settings rows, resolution selector/apply control, Help action and Done remain clear of the frame.",
+        "Castle landscape and authored wordmark retain their source-like pen detail.",
+        "Physically opened whole frame at 1280x720; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "Resolution and reduced-motion controls are functional additions beyond the two main toggles in the source.",
+        "At4:3 the whole landscape remains contained, leaving ivory extension bands instead of cropping source details."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/22-settings.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-22-settings-1280x960.png",
+      "sourceSha256": "395c7d5afb47b7189886e29853dcc699a81139038216c429cc1342055dea1f8a",
+      "captureSha256": "18ee69ae5f261e8eb7b70db0d0cdcc5df6034381854efb9a66df575ac5a41b06",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The native paper is fitted to the existing settings container with a narrow blue border and quiet texture.",
+        "All four settings rows, resolution selector/apply control, Help action and Done remain clear of the frame.",
+        "Castle landscape and authored wordmark retain their source-like pen detail.",
+        "Physically opened whole frame at 1280x960; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "Resolution and reduced-motion controls are functional additions beyond the two main toggles in the source.",
+        "At4:3 the whole landscape remains contained, leaving ivory extension bands instead of cropping source details."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/22-settings.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-22-settings-1600x900.png",
+      "sourceSha256": "395c7d5afb47b7189886e29853dcc699a81139038216c429cc1342055dea1f8a",
+      "captureSha256": "5013d3a7e65563bb9a43f55313a6598b58fb7cf008ef7946a8375a3d9cebc814",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The native paper is fitted to the existing settings container with a narrow blue border and quiet texture.",
+        "All four settings rows, resolution selector/apply control, Help action and Done remain clear of the frame.",
+        "Castle landscape and authored wordmark retain their source-like pen detail.",
+        "Physically opened whole frame at 1600x900; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "Resolution and reduced-motion controls are functional additions beyond the two main toggles in the source.",
+        "At4:3 the whole landscape remains contained, leaving ivory extension bands instead of cropping source details."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/28-leave.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-28-leave-1920x1080.png",
+      "sourceSha256": "d280c9dc11d916756a5ca6b695d2cf2020009df3085d6b55d41dd5dd09ece7b2",
+      "captureSha256": "1ac21b3f8cf64882bb243334868b1e95d88e91d59fc3c947d0bec187954a956e",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The new paper frame contains the map symbol, title, warning, close control and two distinct choices.",
+        "No pause card leaks through behind the leave confirmation; the battlefield is visibly dimmed.",
+        "The thin frame and24UIpx corners do not interfere with text or action bounds.",
+        "Physically opened whole frame at 1920x1080; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The map symbol remains a simple folded-map outline rather than the source's detailed illustrated map.",
+        "The current gameplay background and modular loadout differ from the concept's dense battlefield."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/28-leave.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-28-leave-1024x768.png",
+      "sourceSha256": "d280c9dc11d916756a5ca6b695d2cf2020009df3085d6b55d41dd5dd09ece7b2",
+      "captureSha256": "05894358bbecfdfe732541a25e837796ccdb6e48608ecba58dd5ab0537d9c7b1",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The new paper frame contains the map symbol, title, warning, close control and two distinct choices.",
+        "No pause card leaks through behind the leave confirmation; the battlefield is visibly dimmed.",
+        "The thin frame and24UIpx corners do not interfere with text or action bounds.",
+        "Physically opened whole frame at 1024x768; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The map symbol remains a simple folded-map outline rather than the source's detailed illustrated map.",
+        "The current gameplay background and modular loadout differ from the concept's dense battlefield."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/28-leave.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-28-leave-1280x720.png",
+      "sourceSha256": "d280c9dc11d916756a5ca6b695d2cf2020009df3085d6b55d41dd5dd09ece7b2",
+      "captureSha256": "7e8aedc4a3affe410dee9a15175582bf4a7d53a1c28cc472e07ae81e60afab50",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The new paper frame contains the map symbol, title, warning, close control and two distinct choices.",
+        "No pause card leaks through behind the leave confirmation; the battlefield is visibly dimmed.",
+        "The thin frame and24UIpx corners do not interfere with text or action bounds.",
+        "Physically opened whole frame at 1280x720; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The map symbol remains a simple folded-map outline rather than the source's detailed illustrated map.",
+        "The current gameplay background and modular loadout differ from the concept's dense battlefield."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/28-leave.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-28-leave-1280x960.png",
+      "sourceSha256": "d280c9dc11d916756a5ca6b695d2cf2020009df3085d6b55d41dd5dd09ece7b2",
+      "captureSha256": "ad1b43a7a6f9e39aac9ad0029f9801573f98e30bb247875ae876202b6accb07b",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The new paper frame contains the map symbol, title, warning, close control and two distinct choices.",
+        "No pause card leaks through behind the leave confirmation; the battlefield is visibly dimmed.",
+        "The thin frame and24UIpx corners do not interfere with text or action bounds.",
+        "Physically opened whole frame at 1280x960; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The map symbol remains a simple folded-map outline rather than the source's detailed illustrated map.",
+        "The current gameplay background and modular loadout differ from the concept's dense battlefield."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/28-leave.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-28-leave-1600x900.png",
+      "sourceSha256": "d280c9dc11d916756a5ca6b695d2cf2020009df3085d6b55d41dd5dd09ece7b2",
+      "captureSha256": "6041f981718ba0c87b038f8d7f366a87d697c53b46c466d118512609629b2241",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The new paper frame contains the map symbol, title, warning, close control and two distinct choices.",
+        "No pause card leaks through behind the leave confirmation; the battlefield is visibly dimmed.",
+        "The thin frame and24UIpx corners do not interfere with text or action bounds.",
+        "Physically opened whole frame at 1600x900; no unintended clipping or missing primary control found."
+      ],
+      "residuals": [
+        "The map symbol remains a simple folded-map outline rather than the source's detailed illustrated map.",
+        "The current gameplay background and modular loadout differ from the concept's dense battlefield."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/23-help.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-23-help-1920x1080.png",
+      "sourceSha256": "80e9e894c092a8cd7e22c1feead5609630bbb043ab3f1af6a3c3efb997d18f47",
+      "captureSha256": "e47de6fb32c014b1b4c1e749723561103e81031c630ed6d102bdc42c940025e0",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Physically opened final recapture at 1920x1080 after the fitted-book correction.",
+        "The real assembly now sits inside the visible native book pages; the earlier foundation overhang below the lower cover is resolved.",
+        "The new coherent river/bridge/castle perimeter is visible beside the sheet with a single native notebook binding.",
+        "Four illustrated steps, four resource rows, all12 actual control labels and both navigation actions remain visible without unintended clipping."
+      ],
+      "residuals": [
+        "Modern modular foundations and all eight actual loadout entries differ from the source's legacy compact towers; miniature tower slots remain small at compact sizes.",
+        "Runtime text, procedural interior paper edges and the expanded actual control list retain differences from the source lettering and simplified instructions.",
+        "At4:3 the background is contained with ivory extension bands instead of cropping the illustrated perimeter."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/23-help.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-23-help-1024x768.png",
+      "sourceSha256": "80e9e894c092a8cd7e22c1feead5609630bbb043ab3f1af6a3c3efb997d18f47",
+      "captureSha256": "0de26584fb58829c2d89e5f55bda8aed94cdbedd9029333f96ff57dcc91d396b",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Physically opened final recapture at 1024x768 after the fitted-book correction.",
+        "The real assembly now sits inside the visible native book pages; the earlier foundation overhang below the lower cover is resolved.",
+        "The new coherent river/bridge/castle perimeter is visible beside the sheet with a single native notebook binding.",
+        "Four illustrated steps, four resource rows, all12 actual control labels and both navigation actions remain visible without unintended clipping."
+      ],
+      "residuals": [
+        "Modern modular foundations and all eight actual loadout entries differ from the source's legacy compact towers; miniature tower slots remain small at compact sizes.",
+        "Runtime text, procedural interior paper edges and the expanded actual control list retain differences from the source lettering and simplified instructions.",
+        "At4:3 the background is contained with ivory extension bands instead of cropping the illustrated perimeter."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/23-help.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-23-help-1280x720.png",
+      "sourceSha256": "80e9e894c092a8cd7e22c1feead5609630bbb043ab3f1af6a3c3efb997d18f47",
+      "captureSha256": "e228f362566d46f8bf1a1801408bad04febb6543aa77a9be67ecb142644c7dea",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Physically opened final recapture at 1280x720 after the fitted-book correction.",
+        "The real assembly now sits inside the visible native book pages; the earlier foundation overhang below the lower cover is resolved.",
+        "The new coherent river/bridge/castle perimeter is visible beside the sheet with a single native notebook binding.",
+        "Four illustrated steps, four resource rows, all12 actual control labels and both navigation actions remain visible without unintended clipping."
+      ],
+      "residuals": [
+        "Modern modular foundations and all eight actual loadout entries differ from the source's legacy compact towers; miniature tower slots remain small at compact sizes.",
+        "Runtime text, procedural interior paper edges and the expanded actual control list retain differences from the source lettering and simplified instructions.",
+        "At4:3 the background is contained with ivory extension bands instead of cropping the illustrated perimeter."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/23-help.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-23-help-1280x960.png",
+      "sourceSha256": "80e9e894c092a8cd7e22c1feead5609630bbb043ab3f1af6a3c3efb997d18f47",
+      "captureSha256": "1aa874250adc0accd916ece94e5c57e128d9202d0d7c8be40d4b3e5eea28c995",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Physically opened final recapture at 1280x960 after the fitted-book correction.",
+        "The real assembly now sits inside the visible native book pages; the earlier foundation overhang below the lower cover is resolved.",
+        "The new coherent river/bridge/castle perimeter is visible beside the sheet with a single native notebook binding.",
+        "Four illustrated steps, four resource rows, all12 actual control labels and both navigation actions remain visible without unintended clipping."
+      ],
+      "residuals": [
+        "Modern modular foundations and all eight actual loadout entries differ from the source's legacy compact towers; miniature tower slots remain small at compact sizes.",
+        "Runtime text, procedural interior paper edges and the expanded actual control list retain differences from the source lettering and simplified instructions.",
+        "At4:3 the background is contained with ivory extension bands instead of cropping the illustrated perimeter."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/23-help.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-23-help-1600x900.png",
+      "sourceSha256": "80e9e894c092a8cd7e22c1feead5609630bbb043ab3f1af6a3c3efb997d18f47",
+      "captureSha256": "3fb527ae3fe7cedb616285447cee595a514decb6f3ad4955124eeec374604d20",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Physically opened final recapture at 1600x900 after the fitted-book correction.",
+        "The real assembly now sits inside the visible native book pages; the earlier foundation overhang below the lower cover is resolved.",
+        "The new coherent river/bridge/castle perimeter is visible beside the sheet with a single native notebook binding.",
+        "Four illustrated steps, four resource rows, all12 actual control labels and both navigation actions remain visible without unintended clipping."
+      ],
+      "residuals": [
+        "Modern modular foundations and all eight actual loadout entries differ from the source's legacy compact towers; miniature tower slots remain small at compact sizes.",
+        "Runtime text, procedural interior paper edges and the expanded actual control list retain differences from the source lettering and simplified instructions.",
+        "At4:3 the background is contained with ivory extension bands instead of cropping the illustrated perimeter."
+      ]
+    }
+  ],
+  "pending": [],
+  "verificationBoundary": "This is image-based visual QA only. Unity execution, behavioral tests and final scene restore belong to root. No human approval or pixel-identical source match is claimed."
+}

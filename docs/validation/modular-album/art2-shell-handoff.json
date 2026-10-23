@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "task": "concept-fidelity-art-iteration-2-shell",
+  "baseline": "c4d89c5",
+  "status": "implemented_unverified",
+  "freeze": true,
+  "executor": "/root/art2_shell_audit",
+  "capabilities": {
+    "artifactAccess": "verified: read sources/current images and edited owned files",
+    "vision": "verified: view_image physically delivered 6 source and 12 baseline capture frames; native resources inspected",
+    "unity": "not exercised: root owns Unity",
+    "generation": "not exercised: root owns new assets"
+  },
+  "skill": {
+    "name": "unity-mcp-ui-layout",
+    "mode": "UGUI asset-aware bounded repair",
+    "referencesRead": [
+      "SKILL.md",
+      "references/execution-contract.md",
+      "references/agent-runbook.md",
+      "references/agent-capability-routing.md"
+    ]
+  },
+  "inspectedSources": [
+    "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+    "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+    "docs/design/game-concept-art-2026-10-16/screens/21-defeat.png",
+    "docs/design/game-concept-art-2026-10-16/screens/22-settings.png",
+    "docs/design/game-concept-art-2026-10-16/screens/23-help.png",
+    "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png"
+  ],
+  "inspectedBaselineCaptures": [
+    "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1920x1080.png",
+    "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1024x768.png",
+    "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1920x1080.png",
+    "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1024x768.png",
+    "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1920x1080.png",
+    "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1024x768.png",
+    "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1920x1080.png",
+    "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1024x768.png",
+    "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1920x1080.png",
+    "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1024x768.png",
+    "docs/validation/modular-album/refinement-screenshots/refinement-26-save-error-1920x1080.png",
+    "docs/validation/modular-album/refinement-screenshots/refinement-26-save-error-1024x768.png"
+  ],
+  "nativeAssetsPhysicallyInspected": [
+    "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+    "Assets/PaperDefense/Resources/Art/Player/AlbumOpenBookV2.png",
+    "Assets/PaperDefense/Resources/Art/Player/SettingsLandscape.png"
+  ],
+  "files": [
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Dialogs.cs",
+      "sha256": "1c2cc831d4bcfeb257f56e139fdc76d4aa2a60d2c10a1e7abc4fb669a12b0c75"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Result.cs",
+      "sha256": "f21051d4aa7592e61a131ef662cd1510a584ee71f44e4d27c0bfa05dfc88b507"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Settings.cs",
+      "sha256": "852bed135a6c87b3a7bb8a5df709429f9f6a0c713518d758262e34c70482f9d1"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/NotebookPaperArt.cs",
+      "sha256": "e0ab9327bbeae550a33759e40499c97e3282744902547aeb6978780e660c8e3d"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/NotebookPaperArt.cs.meta",
+      "sha256": "5b307c24b96e0017f7f80d12297a78d2f798e873c913de33552b2c3d61a78844"
+    }
+  ],
+  "changes": [
+    "NotebookPaperArt.Apply creates or updates only a named child Image, stretches to its existing parent, uses Sliced fill and no raycast target, sorts behind live controls. Cached runtime Sprite region is Unity bottom-left Rect(24,48,1038,1328) in the inspected 1086x1448 source texture; pivot(0.5,0.5), PPU100, FullRect, border96 each side, Image pixelsPerUnitMultiplier4 makes each border24 UIpx. Missing/unexpected texture dimensions return false for the scoped procedural fallback. Source PNG remains unchanged. Cache destroys owned Sprite and resets at SubsystemRegistration; destroyed/replaced textures rebuild the cache.",
+    "Applied new paper only to pause18, upgrade cards19, settings22 and leave28; original scoped fallback drawing disabled only when the asset is actually available. Parent input shields and Graphics remain untouched.",
+    "Help23 chooses HelpLandscapeV2 when available, otherwise the previous background, procedural notebook binding and standalone hero.castle. The new peripheral artwork suppresses both duplicate binding and the extra pasted castle.",
+    "Help Save uses existing AlbumOpenBookV2 with the real loadout assembly over it; keeps procedural fallback. A final physical QA found the earlier assembly used the taller pre-fit art slot and protruded below the wide book. The scoped repair now places its real graphic inside the actual fitted book Rect, x9%/y7%/w82%/h80%; native recipe geometry is unchanged. Card sizes, examples and instructional copy unchanged. All final23 recaptures were physically inspected at five aspects and accepted with documented concept differences in art2-shell-visual-review.json.",
+    "Result album action uses existing native icon.workshop. Result statistics and Settings Help already bind native icon.help; no duplicate icon is created.",
+    "Result ribbons now have curved main band, second fine contour, dense end-fold hatching and quiet edges. Torn ribbon gains edge fibres and pen flecks, laurels curved stem and veined leaves, coin engraved crown/reeded rim/highlight, XP star inset paper edge and subtle rim strokes. The same emblems serve Help resource icons."
+  ],
+  "preserved": [
+    "All existing callback delegates and button names",
+    "All existing modal roots, modal cancellation and focus",
+    "Actual reward receipt, pending-save state, XP/gold and loss values",
+    "Live frozen recipes and physical assembly composition",
+    "All existing Rects, scale strategy and text ownership",
+    "No shared PlayerCardGraphic/PlayerPaperGraphic or workshop code modified"
+  ],
+  "dependencies": [
+    {
+      "resource": "Art/Player/NotebookPaperCardV1",
+      "owner": "root",
+      "role": "transparent exterior portrait ivory card; Sprite border96px; Sliced"
+    },
+    {
+      "resource": "Art/Player/HelpLandscapeV2",
+      "owner": "root",
+      "role": "whole peripheral notebook landscape23 with empty central UI region"
+    }
+  ],
+  "verification": [
+    {
+      "check": "git diff --check on owned tracked source files",
+      "status": "pass",
+      "evidence": "command exit0"
+    },
+    {
+      "check": "physical review of baseline source/current/native art",
+      "status": "pass",
+      "evidence": "listed images opened directly through view_image"
+    },
+    {
+      "check": "fresh Unity import/compile/console",
+      "status": "blocked",
+      "reason": "not run by design; root owns serialized Unity"
+    },
+    {
+      "check": "fresh affected scene screenshots and alternate aspect",
+      "status": "blocked",
+      "reason": "await root asset import and capture; this handoff does not claim visual acceptance"
+    },
+    {
+      "check": "save/receipt/modal interaction regression",
+      "status": "blocked",
+      "reason": "await root test execution; no callbacks or data code changed"
+    }
+  ],
+  "requiredCaptureScope": [
+    "18-pause",
+    "19-upgrades",
+    "20-victory",
+    "20-pending",
+    "20-statistics",
+    "21-defeat",
+    "22-settings",
+    "23-help",
+    "28-leave"
+  ],
+  "recommendedChecks": [
+    "main1920x1080 and alternate1024x768 for all affected scenes",
+    "720p Help body/key readability and result pending Retry placement",
+    "paper Sliced border does not enter button/text region",
+    "native Help book and live example contained within existing Save card",
+    "modal click blocking and focus remain correct"
+  ],
+  "remainingDifferences": [
+    "No new coherent result20 battlefield perimeter in this bounded change",
+    "Real modular foundation silhouettes and live recipes intentionally remain current gameplay art",
+    "Code-native ornaments improve stroke richness but do not reproduce raster source lettering"
+  ]
+}

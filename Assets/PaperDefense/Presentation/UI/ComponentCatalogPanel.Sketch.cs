@@ -153,6 +153,7 @@ namespace PaperDefense.Presentation
                     Hide("Component resolved preview"); Hide("Component inspected illustration");
                     var exploded = WorkshopUi.Graphic<WorkshopAssemblyDiagram>(details,"Component assembly diagram",stage);
                     exploded.Configure(snapshot.Recipe,draft.ActiveComponent,draft.ActiveMount);
+                    exploded.ShowCategoryCaptions(ui);
                     var caption = ui.Label(details,"Component diagram caption",Copy("diagram"),new Rect(10,h-88,right-20,24),16,true,WorkshopUi.Muted);
                     caption.alignment = TextAnchor.MiddleCenter;
                 }
@@ -387,6 +388,7 @@ namespace PaperDefense.Presentation
             if (scenery != null) { WorkshopUi.Place(scenery.rectTransform, new Rect(12, h - 140, right - 36, 104)); scenery.color = new Color(1, 1, 1, .12f); }
             var diagram = WorkshopUi.Graphic<WorkshopAssemblyDiagram>(details, "Component assembly diagram", new Rect(12, 48, right - 36, h - 110));
             diagram.Configure((candidate ?? draft.Resolved).Snapshot.Recipe, draft.ActiveComponent, draft.ActiveMount);
+            diagram.ShowCategoryCaptions(ui);
             ui.Label(details, "Component diagram caption", Copy("diagram"), new Rect(14, h - 48, right - 40, 32), 18, true, WorkshopUi.Muted).alignment = TextAnchor.MiddleCenter;
             WorkshopUi.Place(Root.Find("Component show unavailable") as RectTransform, new Rect(details.anchoredPosition.x + right - Mathf.Min(308, right - 16), 3, Mathf.Min(300, right - 24), 30));
         }
@@ -436,6 +438,7 @@ namespace PaperDefense.Presentation
             MoveDetail(details, "Component inspected name", new Rect(14, 2, right - 34, 38));
             var diagram = WorkshopUi.Graphic<WorkshopAssemblyDiagram>(details, "Component invalid parts diagram", new Rect(18, 88, right - 50, h - 142));
             diagram.Configure(draft.PreviewRecipe, draft.ActiveComponent, draft.ActiveMount);
+            diagram.ShowCategoryCaptions(ui);
             ui.Label(details, "Component invalid parts caption", Copy("diagram"), new Rect(14, h - 42, right - 40, 30), 18, true, WorkshopUi.Muted);
             ui.Label(details, "Component conflict heading", "Детали несовместимы", new Rect(right + 12, 2, w - right - 24, 42), w - right > 400 ? 28 : 23, true, NotebookPalette.Red);
             var issue = draft.Diagnostics.First(value => value.Code == "assembly.part.required");
@@ -484,6 +487,7 @@ namespace PaperDefense.Presentation
             }
             var diagram = WorkshopUi.Graphic<WorkshopAssemblyDiagram>(details, "Component assembly diagram", new Rect(18, 54, right - 48, h - 132));
             diagram.Configure((candidate ?? draft.Resolved).Snapshot.Recipe, draft.ActiveComponent, draft.ActiveMount);
+            diagram.ShowCategoryCaptions(ui);
             var caption = ui.Label(details, "Component diagram caption", Copy("diagram"), new Rect(inset, h - 58, right - inset * 2 - 12, 34), 18, true, WorkshopUi.Muted);
             caption.alignment = TextAnchor.MiddleCenter;
             var statistics = Find("Component comparison")?.GetComponent<Text>() ?? Find("Component resolved statistics")?.GetComponent<Text>();

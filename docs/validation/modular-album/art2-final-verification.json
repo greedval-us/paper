@@ -1,0 +1,292 @@
+{
+  "schemaVersion": 1,
+  "baseline": "c4d89c533a00c8f8e3fb9e3a3755c3a7afb73228",
+  "status": "PASS_WITH_DIFFERENCES",
+  "checks": {
+    "visual": {
+      "captureCount": 163,
+      "sceneCount": 20,
+      "canonicalSizes": [
+        "1024x768",
+        "1280x720",
+        "1920x1080",
+        "1280x960",
+        "1600x900"
+      ],
+      "physicallyReviewed": 163,
+      "integrity": "PASS",
+      "fidelity": "PASS_WITH_DIFFERENCES",
+      "scope": "20 affected scenes, their recovery/support variants and 8 terrain views; unchanged scenes retain prior acceptance."
+    },
+    "codeReview": "No blocking findings",
+    "protectedFiles": 5,
+    "byteIdenticalNativeAssets": 2,
+    "finalConsoleErrors": 0,
+    "editorRestored": true,
+    "browserInteractiveRun": "NOT_VERIFIED"
+  },
+  "testRuns": [
+    {
+      "mode": "EditMode",
+      "file": "docs/validation/modular-album/art2-final-editmode.json",
+      "sha256": "8f8f9945eace82e14748ee08bfe03f392c766b75de25b457047e449e6019e458",
+      "jobId": "5a8af77754e24d9fb3e31ffbf3a1b3ef",
+      "summary": {
+        "total": 1583,
+        "passed": 1583,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 546.3839755,
+        "resultState": "Passed"
+      }
+    },
+    {
+      "mode": "PlayMode",
+      "file": "docs/validation/modular-album/art2-final-playmode.json",
+      "sha256": "46ebe2fcc6fb03e0e941fee76716b12800c1a0b2c9e534c3ef88af23f054c01d",
+      "jobId": "e107398cc3b94de5895e930ae399510e",
+      "summary": {
+        "total": 855,
+        "passed": 855,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 160.7060108,
+        "resultState": "Passed"
+      }
+    }
+  ],
+  "imageAssets": [
+    {
+      "source": "ArtSource/Notebook/NewStyle/HelpLandscapeV2.png",
+      "runtime": "Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png",
+      "sha256": "9c88fc7d630cf918e128340b877f3e144aceb64e0f6dba82f09d10e8c293c9e5"
+    },
+    {
+      "source": "ArtSource/Notebook/NewStyle/NotebookPaperCardV1.png",
+      "runtime": "Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png",
+      "sha256": "b5afc593f0ffec864012f60b95102c15891a709ed28a1bd06061b2620e29a41e"
+    }
+  ],
+  "reviewedFiles": [
+    {
+      "path": "Assets/PaperDefense/Configuration/Content/Target.asset",
+      "sha256": "70f6614a173a55e60e03d66222bbdfe1fbc8a79c3757b4f2ef1a1a0c51f36db0"
+    },
+    {
+      "path": "Assets/PaperDefense/Configuration/Game/PlayerRules.asset",
+      "sha256": "dcaf91b459e03bf7642ff5c3908815a2ec485f509cf3dafef988867758a43f7d"
+    },
+    {
+      "path": "Assets/PaperDefense/Core/NotebookTowerDefensePreset.cs",
+      "sha256": "85864f39346d0da2ce7f991a8bf8d44ad5dc236dc29009cd7bf0cffb0c29a926"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Art/AssemblyVisualComposer.Catalog.cs",
+      "sha256": "f3398447daf564ea6723dba84f8e871284a0efb13a79f392234195ffdccf3226"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/NotebookPaperArt.cs",
+      "sha256": "e0ab9327bbeae550a33759e40499c97e3282744902547aeb6978780e660c8e3d"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/NotebookPaperArt.cs.meta",
+      "sha256": "5b307c24b96e0017f7f80d12297a78d2f798e873c913de33552b2c3d61a78844"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Dialogs.cs",
+      "sha256": "1c2cc831d4bcfeb257f56e139fdc76d4aa2a60d2c10a1e7abc4fb669a12b0c75"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Result.cs",
+      "sha256": "f21051d4aa7592e61a131ef662cd1510a584ee71f44e4d27c0bfa05dfc88b507"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Settings.cs",
+      "sha256": "852bed135a6c87b3a7bb8a5df709429f9f6a0c713518d758262e34c70482f9d1"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/NotebookEffectRenderer.cs",
+      "sha256": "2f68c54f0b435ad73cc309bca7c6fe9b8782ff12a6c93884c75f6215b6ed88dc"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ComponentCatalogPanel.Sketch.cs",
+      "sha256": "5c6ef139836b088bdb2442e31f0ff567d4b3a17dc687f61cdae3ba4bb1aaeb05"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ComponentCatalogPanel.cs",
+      "sha256": "3ba8ccd72496df9b319a70e51cee56109709b5b23ab6f51062f64fa9c6573be5"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/CompositeWorkshopPanel.Review.cs",
+      "sha256": "c30a88920e3f9705ee95500beafe6c20706de5df66e8c6b8ddf28e15342fd9b8"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/CompositeWorkshopPanel.cs",
+      "sha256": "93d4114cfa6d4ee50d0dd387a9985ebd7a513af948ed665fcf170aa43206fb29"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopAssemblyDiagram.cs",
+      "sha256": "c65e46dd63eaadbc57854d899280f4187e4de65fb8910a83b1d8d20f4631023a"
+    },
+    {
+      "path": "Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png",
+      "sha256": "9c88fc7d630cf918e128340b877f3e144aceb64e0f6dba82f09d10e8c293c9e5"
+    },
+    {
+      "path": "Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png.meta",
+      "sha256": "3f6a82e934686f6738975d402ddcba483d12b6ea9586ac9f863d46fd8ddaeb6c"
+    },
+    {
+      "path": "Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png",
+      "sha256": "b5afc593f0ffec864012f60b95102c15891a709ed28a1bd06061b2620e29a41e"
+    },
+    {
+      "path": "Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png.meta",
+      "sha256": "28f97e04ef01a2ee4dad4e30cc452dd131c30a97b87861723702198eb95064d2"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/EditMode/TowerDefenseRulesTests.cs",
+      "sha256": "5fb42ebb83647a4fc4e9c642d8a949840b86df1bfbc72817e6a98e2425f83840"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/Editor/AssemblyArtCoverageTests.cs",
+      "sha256": "f07b6b3305a151eb242a58e4e2acf451eb69edb77d6e3e632ed1f019476632d0"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/Editor/TowerDefenseBalanceTests.cs",
+      "sha256": "c7acad05f310c7712aabdf6b276d0595aa3c26530682070b53b188dda69a4878"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/NotebookAnimationRenderingTests.cs",
+      "sha256": "e388fa851670407178240c3d2b65c81a784d66c8997424c37e039cb5e47df35f"
+    }
+  ],
+  "protectedFiles": [
+    {
+      "path": "ArtSource/Notebook/NewStyle/assembly-parts.source.json",
+      "sha256": "a0c6796dfdf3d1c4ffb8aefd325759170117be30bcf4ea8f72db9987a2a13048"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/sprites.source.json",
+      "sha256": "b459b4161328ca9f65ea29d6670a2379a7bd6489ace72c12c2ff37407fd75553"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.png",
+      "sha256": "d351a1e24e81ad6200ffe54cc1a3ef7c58eaa83e5311bbab9a92dedebaa0d05e"
+    },
+    {
+      "path": "Assets/PaperDefense/Resources/Art/NotebookSprites.json",
+      "sha256": "4b86b216098d4105ba42544a7a5433b49c8ea7b2f74e77df4b513a5632a00ec9"
+    },
+    {
+      "path": "Assets/PaperDefense/Configuration/Game/PlayerAssemblyCatalog.asset",
+      "sha256": "203f13f0babd1e95400df1544f30cb4c7c48f6509367daeafa4215db8b6737b6"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "Tools/ArtAssembly13/build-art2-gallery.mjs",
+      "sha256": "58995ea59ee478608b013c539b9a056b0697458f2fbd02c16793746b61be46a0"
+    },
+    {
+      "path": "Tools/ArtAssembly13/verify-art2.mjs",
+      "sha256": "b2939761e3ff4e4f6651966d3d30cadfdcc5bd59125c3a557691a52fe9359121"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-gallery.html",
+      "sha256": "bafe6acc229432f2d108f09ca56a788181d0deb8857d561e1e5bb92fd4397eff"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-visual-index.json",
+      "sha256": "a02ac81f62597d9646b7137b91ba20ba1967979a38cb99fcc4d4f91b517e2f83"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-code-review.md",
+      "sha256": "f424c6c387d008a0f86fea24aa15407e08bfd18bccbd620a5598892bd74393e1"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-editor-end-state.json",
+      "sha256": "d5186c96a825ef760f315ee3fc420d73aa3e0196331079469dbeb2a48e6e0703"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-root-visual-review.json",
+      "sha256": "e7ca633d7e346d9e4ce9cfa4098b3663c7fb6244b0a690759e829d9ba53e3e67"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-shell-visual-review.json",
+      "sha256": "7834d48af106fc743ad84413876e17bd7041e0101ecb064797e3ba48bc373eb1"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-workshop-visual-review.json",
+      "sha256": "15ce975c849ca761e8508d494a60eb99be7cb7899c7460d23e344e7fc4f1d108"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-battle-visual-review.json",
+      "sha256": "4a74a0f5da64b1910c41f5220ad8f4cb62e306b84f89d9614fe18072610238bb"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-workshop-capture.cs",
+      "sha256": "6de9f9b8b326394dd775e105fdfc34c273964eb169597ea7468a5b7bc1285b91"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-shell-capture.cs",
+      "sha256": "98620f1f5ef33c1364a898e84569050749625ff89b041a728b3236f5c081651e"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-terrain-capture.cs",
+      "sha256": "ff03af32b447119ef9f2605f30cc7dd722f6792c1998ddc7017bedba339f51b6"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-report.md",
+      "sha256": "16cfbec22686445d7d5e3a7ebf456d88598454962382cf84d2aa2fa84de1e12b"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-expected-test-diagnostics.json",
+      "sha256": "caf27580700bf003e926bcbcfcde7944531ebf87fc6b223359ab60846240fd25"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-workshop-fixes-proof.txt",
+      "sha256": "0b64754014b8a69715005cdf7bf0e4a71e9314ecf6f4514e49607786b8309ca4"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-help-key-proof.txt",
+      "sha256": "53d077889178c22c85c94482f7d98499b3f36df507d458e866aba3c8fc167b2f"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-terrain-red.json",
+      "sha256": "f71269b295bae9a0d37f7df7e5385412f7247a09e288ee29ea35749969a0b84d"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-production-terrain-red.json",
+      "sha256": "6249ef93c64821cd4e26ed1049c547dff54b40bf9ddf22f49d924887a4017444"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-terrain-green.json",
+      "sha256": "f5882e1194dbafc57e11c6b0ebd8f39d1ce45dbda42408b1f3f1e736cd7f769b"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-shot-red.json",
+      "sha256": "f68246ef30930577586e12f4399f08227e6a943fecc7f96186aa738058c9c711"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-shot-green.json",
+      "sha256": "e640b5583e8961441c091d427e5fc0c6554f8c98e8c1d8dd79b6ce21f3d15795"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-structure-family-red.json",
+      "sha256": "e0400f6acc98655cfcc446b7344522dcc4385764a7393dfcceb4449b5141ebb6"
+    },
+    {
+      "path": "docs/validation/modular-album/art2-structure-family-green.json",
+      "sha256": "1ce63a0e86e8e664c764511e20ac8dca2af5f43c10441e47078a4b52b37bf11b"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/HelpLandscapeV2.provenance.json",
+      "sha256": "c2882212db1ebbfda3743d8b23463b6921df6e35fb34ca0939c19668a8453973"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/NotebookPaperCardV1.provenance.json",
+      "sha256": "e3448c84959534e834131b24131429e733f0dd422e96c7bae21523f00b6ab957"
+    }
+  ]
+}

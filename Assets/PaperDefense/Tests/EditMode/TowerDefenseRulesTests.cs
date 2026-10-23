@@ -204,9 +204,39 @@ namespace PaperDefense.Tests
             foreach(var entrance in map.Entrances)Assert.That(map.DistanceToCastle(entrance),Is.LessThan(int.MaxValue));
             foreach(var wave in b.Waves)Assert.That(wave.Sides,Is.EqualTo(15));
             foreach(var w in b.WellPlacements)Assert.That(map.DistanceToCastle(w.Resolve(b.Width,b.Height)),Is.LessThan(int.MaxValue));
-            for(int y=20;y<=44;y++)for(int x=36;x<=60;x++)Assert.That(map.IsWalkable(new Cell(x,y)),Is.True,"Clear central defensive area");
+            for(int y=20;y<=44;y++)for(int x=36;x<=60;x++)
+            {
+                bool island=(x==38||x==39||x==57||x==58)&&((y>=27&&y<=29)||(y>=35&&y<=37));
+                Assert.That(map.IsWalkable(new Cell(x,y)),Is.EqualTo(!island),"Only the four authored pine footprints may interrupt the original clearing: "+x+","+y);
+            }
+            // Four small terrain islands frame the nearby field, while the core
+            // defensive area and broad cardinal approaches stay open for builds.
+            for(int y=26;y<=38;y++)for(int x=42;x<=54;x++)Assert.That(map.IsWalkable(new Cell(x,y)),Is.True,"Clear central defensive area");
+            for(int y=30;y<=34;y++)for(int x=36;x<=60;x++)Assert.That(map.IsWalkable(new Cell(x,y)),Is.True,"Clear east/west approach");
+            for(int y=20;y<=44;y++)for(int x=46;x<=50;x++)Assert.That(map.IsWalkable(new Cell(x,y)),Is.True,"Clear north/south approach");
             b.Battlefield.Props.Add(new TerrainPropDefinition{Kind=TerrainPropKind.Rock,X=16,Y=14,Width=3,Height=2});
             Assert.Throws<ArgumentException>(()=>BalanceValidation.Validate(b));
+        }
+        [TestCase(38,35)] [TestCase(57,35)]
+        [TestCase(38,27)] [TestCase(57,27)]
+        public void MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(int x,int y)
+        {
+            var b=NotebookTowerDefensePreset.Create();b.StartingInk=10000;
+            var game=new GameSession(b,starterDefenses:false);
+            var clear=new Cell(40,32);
+            Assert.That(game.QuoteBuild(new[]{clear},StructureKind.Wall,MaterialTier.Pencil).Valid,Is.True);
+            int before=game.Ink;
+            for(int row=y;row<y+3;row++)for(int column=x;column<x+2;column++)
+            {
+                var occupied=new Cell(column,row);
+                Assert.That(game.Battlefield.IsWalkable(occupied),Is.False,"Visible pine ground must be real reserved terrain: "+occupied);
+                var mixed=new[]{clear,occupied};
+                Assert.That(game.QuoteBuild(mixed,StructureKind.Wall,MaterialTier.Pencil).Valid,Is.False);
+                Assert.That(game.TryBuild(mixed,StructureKind.Wall,MaterialTier.Pencil,out _),Is.False);
+                Assert.That(game.Ink,Is.EqualTo(before));Assert.That(game.Structures,Is.Empty);
+            }
+            Assert.That(game.TryBuild(new[]{clear},StructureKind.Wall,MaterialTier.Pencil,out _),Is.True);
+            Assert.That(game.Structures.Count,Is.EqualTo(1));
         }
         [Test] public void GroundDistanceAndTerrainFootprintsBoundConstruction()
         {

@@ -489,7 +489,7 @@ namespace PaperDefense.Presentation
     /// <summary>A font-independent warning mark for the failed-save card.</summary>
     public sealed class WorkshopSaveFailureMark : MaskableGraphic
     {
-        readonly MeshPen pen = new MeshPen(null, 64);
+        readonly MeshPen pen = new MeshPen(null, 256);
         protected override void OnPopulateMesh(VertexHelper target)
         {
             target.Clear(); pen.Clear();
@@ -499,7 +499,18 @@ namespace PaperDefense.Presentation
             var top = center + Vector2.up * radius;
             var left = center + new Vector2(-radius, -radius * .8f);
             var right = center + new Vector2(radius, -radius * .8f);
+            pen.Triangle(top, left, right, new Color32(255, 238, 217, 255));
             pen.Line(top, left, 2.3f, ink); pen.Line(left, right, 2.3f, ink); pen.Line(right, top, 2.3f, ink);
+            var faint = new Color32(152, 42, 43, 110);
+            pen.Line(Vector2.Lerp(top, center, .15f), Vector2.Lerp(left, center, .15f), .8f, faint);
+            pen.Line(Vector2.Lerp(left, center, .15f), Vector2.Lerp(right, center, .15f), .8f, faint);
+            pen.Line(Vector2.Lerp(right, center, .15f), Vector2.Lerp(top, center, .15f), .8f, faint);
+            for (int i = 0; i < 5; i++)
+            {
+                float t = .2f + i * .12f;
+                var start = Vector2.Lerp(left, top, t);
+                pen.Line(start, start + new Vector2(radius * .12f, 0), .7f, faint);
+            }
             pen.Line(center + Vector2.up * radius * .38f, center - Vector2.up * radius * .16f, 2.5f, ink);
             pen.Disc(center - Vector2.up * radius * .47f, radius * .085f, ink, 10);
             pen.CopyTo(target, Vector2.zero, 1);

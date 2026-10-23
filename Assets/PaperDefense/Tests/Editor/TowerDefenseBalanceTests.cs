@@ -24,6 +24,47 @@ namespace PaperDefense.Tests
         }
 
         [TestCase(false)] [TestCase(true)]
+        public void ActualMainPresetsReserveInnerPinesAndKeepCampaignBuildCellsFree(bool player)
+        {
+            var adapter=AssetDatabase.LoadAssetAtPath<GameBalanceAsset>(player
+                ? "Assets/PaperDefense/Configuration/Game/PlayerBalance.asset"
+                : "Assets/PaperDefense/Configuration/TargetNotebookBalance.asset");
+            var preset=AssetDatabase.LoadAssetAtPath<BalancePresetAsset>(player
+                ? "Assets/PaperDefense/Configuration/Game/PlayerRules.asset"
+                : "Assets/PaperDefense/Configuration/Content/Target.asset");
+            Assert.That(adapter,Is.Not.Null);Assert.That(preset,Is.Not.Null);
+            Assert.That(adapter.dataPreset,Is.SameAs(preset));
+            foreach(var b in new[]{adapter.CreateBalance(),preset.CreateBalance()})
+            {
+                var game=new GameSession(b,starterDefenses:false);int before=game.Ink;
+                foreach(var origin in new[]{new Cell(38,35),new Cell(57,35),new Cell(38,27),new Cell(57,27)})
+                for(int dy=0;dy<3;dy++)for(int dx=0;dx<2;dx++)
+                {
+                    var cell=new Cell(origin.X+dx,origin.Y+dy);
+                    Assert.That(game.Battlefield.IsReservedTerrain(cell),Is.True,preset.name+" missing pine terrain at "+cell);
+                    Assert.That(game.TryBuild(new[]{new Cell(40,32),cell},StructureKind.Wall,MaterialTier.Pencil,out _),Is.False);
+                    Assert.That(game.Ink,Is.EqualTo(before));Assert.That(game.Structures,Is.Empty);
+                }
+                int[] buildPoints={44,28,52,28,44,36,52,36,48,26,48,38,42,32,54,32,42,26,54,26,42,38,54,38,
+                    40,28,56,28,40,36,56,36,44,24,52,24,44,40,52,40,40,24,56,24,40,40,56,40,
+                    38,32,58,32,48,22,48,42,38,26,58,26,38,38,58,38};
+                for(int i=0;i<buildPoints.Length;i+=2)
+                    Assert.That(game.QuoteBuild(new[]{new Cell(buildPoints[i],buildPoints[i+1])},StructureKind.Wall,MaterialTier.Pencil).Valid,
+                        Is.True,"Existing campaign construction cell remains usable");
+                Assert.That(game.Battlefield.Entrances.Count,Is.EqualTo(16));
+                foreach(var entrance in game.Battlefield.Entrances)
+                    Assert.That(game.Battlefield.DistanceToCastle(entrance),Is.LessThan(int.MaxValue));
+                foreach(var well in b.WellPlacements)
+                {
+                    var cell=well.Resolve(b.Width,b.Height);
+                    Assert.That(game.Battlefield.DistanceToCastle(cell),Is.LessThan(int.MaxValue));
+                    for(int dy=-well.ReservedRadius;dy<=well.ReservedRadius;dy++)for(int dx=-well.ReservedRadius;dx<=well.ReservedRadius;dx++)
+                        Assert.That(game.Battlefield.IsReservedTerrain(new Cell(cell.X+dx,cell.Y+dy)),Is.False);
+                }
+            }
+        }
+
+        [TestCase(false)] [TestCase(true)]
         public void ActualStarterWeaponsNeedSeveralHitsAndAffordableOpeningProtectsCastle(bool player)
         {
             var b=MainBalance(player);var profile=new WorkshopProfile(b.Content,b);var loadout=profile.GetLoadoutBlueprints();

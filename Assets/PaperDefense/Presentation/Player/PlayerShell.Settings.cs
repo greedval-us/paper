@@ -29,7 +29,8 @@ namespace PaperDefense.Presentation
             }
 
             var panel = ui.Panel(composition, "Display settings sheet", new Rect(375 * s, 246 * s, 850 * s, 428 * s), Color.clear);
-            PlayerUi.Graphic<NotebookHelpPaperGraphic>(panel, "Settings loose paper", new Rect(0, 0, 850 * s, 428 * s));
+            var paper = PlayerUi.Graphic<NotebookHelpPaperGraphic>(panel, "Settings loose paper", new Rect(0, 0, 850 * s, 428 * s));
+            if (NotebookPaperArt.Apply(panel, "Settings illustrated paper")) paper.enabled = false;
             foreach (float ruleY in new[] { 109f, 219f, 319f })
             {
                 var rule = PlayerUi.Graphic<Image>(panel, "Settings divider", new Rect(20 * s, ruleY * s, 810 * s, s));

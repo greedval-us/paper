@@ -1,0 +1,14 @@
+{
+  "mode": "built-in image_gen",
+  "reference": "docs/design/game-concept-art-2026-10-16/screens/23-help.png",
+  "prompt": "Use case: precise-object-edit / background-extraction. Asset type: complete background illustration for the existing game's Help screen. Input image1 is the approved Help source concept; recreate ONLY its surrounding blue-ballpoint notebook landscape and large central blank parchment. Remove ALL labels, typography, logo sticker, crowns used as text decorations, buttons, icons, diagrams, resource rows, keycaps and UI controls. Preserve source composition: dark metal spiral binding along far left; winding river and small stone arched bridge on left peripheral strip; blue pine forest top and bottom corners; castle with flag and a winding dashed road down the right peripheral strip, second stone bridge near bottom-right. Dense fine dark navy and cobalt ballpoint crosshatching on warm pale ivory graph paper. Keep the LARGE central paper area fully blank and opaque, approximatelyx16percent..85percent and y9percent..96percent; existing live UI will cover it. Reserve the top-central10percent as mostly blank graph paper as well. All landscape detail stays in the outside15percent left/right, top8percent and bottom5percent, mirroring the source. Central parchment has gently ragged hand-cut edge, very subtle paper grain, faint graph grid and no blue marks inside. Landscape16:9, native wide game-screen composition. No letters, text, numbers, captions, UI, diagrams, characters or watermark anywhere. Preserve strong crisp illustrative linework and source scale instead of repeating the same tree cutout. This is an opaque complete background.",
+  "generated": "C:/Users/Greedval/.codex/generated_images/01a14cd7-7db2-7df0-8654-f50c4f801bf0/exec-4fe4b6f3-a12d-4101-b4e4-82f32fc577b4.png",
+  "source": "ArtSource/Notebook/NewStyle/HelpLandscapeV2.png",
+  "runtime": "Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png",
+  "dimensions": [
+    1672,
+    941
+  ],
+  "postprocessing": "none; native PNG copied unchanged",
+  "review": "Root physically inspected generated output: text-free, source-style ink/paper, usable live-content region"
+}

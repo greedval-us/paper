@@ -48,6 +48,7 @@ namespace PaperDefense.Presentation
             var paper = ui.Panel(shield, "Pause paper", new Rect((W - width) * .5f, (H - height) * .5f, width, height), Color.clear, true);
             var edge = PlayerUi.Graphic<DrawingSummaryDetailGraphic>(paper, "Pause folded paper", new Rect(0, 0, width, height));
             edge.Shape = DrawingSummaryDetailGraphic.Kind.FoldedPaper;
+            if (NotebookPaperArt.Apply(paper, "Pause illustrated paper")) edge.enabled = false;
             var symbol = PlayerUi.Graphic<PlayerIconGraphic>(paper, "Pause heading icon", new Rect(width * .5f - 108, 26, 50, 50));
             symbol.Icon = PlayerIcon.Pause; symbol.Sketch = true; symbol.color = PlayerUi.Blue;
             NotebookLabel(paper, JourneyCopy("pause.title"), new Rect(width * .5f - 45, 22, 166, 58), 38, alignment: TextAnchor.MiddleCenter);
@@ -140,7 +141,8 @@ namespace PaperDefense.Presentation
             {
                 int selected = i;
                 var card = ui.Panel(shield, "Upgrade offer " + i, new Rect(x + i * (cardWidth + 16), cardTop, cardWidth, cardHeight), Color.clear, true);
-                PlayerUi.Graphic<NotebookHelpPaperGraphic>(card, "Upgrade separate paper " + i, new Rect(0, 0, cardWidth, cardHeight));
+                var paper = PlayerUi.Graphic<NotebookHelpPaperGraphic>(card, "Upgrade separate paper " + i, new Rect(0, 0, cardWidth, cardHeight));
+                if (NotebookPaperArt.Apply(card, "Upgrade illustrated paper " + i)) paper.enabled = false;
                 NotebookLabel(card, ui.T("upgrade_" + i).Split('\n')[0], new Rect(15, compact ? 6 : 10, cardWidth - 30, compact ? 54 : 66), compact ? 25 : 28, alignment: TextAnchor.MiddleCenter);
                 float artTop = compact ? 62 : 82, artHeight = compact ? cardHeight * .32f : 158;
                 ui.Art(card, i == 0 ? "ui.weapon.gun" : i == 1 ? "ui.weapon.mortar" : "ui.material.pencil", new Rect(24, artTop, cardWidth - 48, artHeight));
@@ -207,10 +209,13 @@ namespace PaperDefense.Presentation
 
         void AlbumHelp()
         {
-            NotebookPageBackdrop("Art/Player/FoundationPageDecor");
-            PlayerUi.Graphic<NotebookBindingGraphic>(page, "Help notebook binding", new Rect(0, 0, W, H));
+            bool illustratedLandscape = Resources.Load<Sprite>("Art/Player/HelpLandscapeV2") != null;
+            NotebookPageBackdrop(illustratedLandscape ? "Art/Player/HelpLandscapeV2" : "Art/Player/FoundationPageDecor");
+            if (!illustratedLandscape)
+                PlayerUi.Graphic<NotebookBindingGraphic>(page, "Help notebook binding", new Rect(0, 0, W, H));
             float margin = W < 1200 ? 48 : W * .115f, width = W - margin * 2, gap = 12;
-            HelpAtlasIcon(page, "hero.castle", new Rect(W - margin * 1.25f, H * .22f, margin * 1.45f, H * .32f));
+            if (!illustratedLandscape)
+                HelpAtlasIcon(page, "hero.castle", new Rect(W - margin * 1.25f, H * .22f, margin * 1.45f, H * .32f));
             var paper = ui.Panel(page, "Album help sheet", new Rect(margin, 24, width, H - 48), Color.clear, true);
             PlayerUi.Graphic<NotebookHelpPaperGraphic>(paper, "Help cut paper edge", new Rect(0, 0, width, H - 48));
             NotebookLabel(paper, JourneyCopy("help.title"), new Rect(138, 12, width - 170, 66), 44, alignment: TextAnchor.MiddleCenter);
@@ -262,8 +267,20 @@ namespace PaperDefense.Presentation
                 }
                 else if (i == 1)
                 {
-                    var book = PlayerUi.Graphic<NotebookOpenBookGraphic>(card, "Save album illustration", illustration);
-                    PreparationAssemblyIllustration(book.transform, example, new Rect(illustration.width * .08f, 6, illustration.width * .84f, artHeight - 12));
+                    var bookSprite = Resources.Load<Sprite>("Art/Player/AlbumOpenBookV2");
+                    Transform book = bookSprite != null
+                        ? NotebookSprite(card, "Save album illustration", bookSprite, illustration).transform
+                        : PlayerUi.Graphic<NotebookOpenBookGraphic>(card, "Save album illustration", illustration).transform;
+                    var recipeBounds = new Rect(illustration.width * .08f, 6, illustration.width * .84f, artHeight - 12);
+                    if (bookSprite != null)
+                    {
+                        // NotebookSprite fits the wide native book inside the card first. Place the
+                        // real drawing on that fitted page, not inside the taller original art slot.
+                        Rect pages = ((RectTransform)book).rect;
+                        recipeBounds = new Rect(pages.width * .09f, pages.height * .07f,
+                            pages.width * .82f, pages.height * .80f);
+                    }
+                    PreparationAssemblyIllustration(book, example, recipeBounds);
                 }
                 else
                 {
@@ -391,6 +408,7 @@ namespace PaperDefense.Presentation
             {
                 var paper = PlayerUi.Graphic<DrawingSummaryDetailGraphic>(card, "Leave confirmation folded paper", new Rect(0, 0, width, height));
                 paper.Shape = DrawingSummaryDetailGraphic.Kind.FoldedPaper;
+                if (NotebookPaperArt.Apply(card, "Leave illustrated paper")) paper.enabled = false;
                 var close = ui.IconButton(card, "Close confirmation", new Rect(width - 52, 14, 36, 36), PlayerIcon.Back, "Остаться", CancelConfirmation);
                 WorkshopUi.RemoveView(close.GetComponentInChildren<PlayerIconGraphic>().gameObject);
                 NotebookLabel(close.transform, "×", new Rect(0, 0, 36, 34), 32, alignment: TextAnchor.MiddleCenter);

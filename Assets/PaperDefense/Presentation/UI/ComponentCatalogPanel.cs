@@ -516,11 +516,12 @@ namespace PaperDefense.Presentation
                 for (int i = 1; i <= 32; i++)
                 {
                     var next = Point(i / 32f);
-                    diagram.Triangle(origin, previous, next, MeshPen.Alpha(blue, .28f));
+                    diagram.Triangle(origin, previous, next, MeshPen.Alpha(blue, .045f));
                     if (i % 8 == 0) diagram.Line(origin, next, 1, MeshPen.Alpha(blue, .22f));
                     if (i % 3 != 0) diagram.Line(previous, next, 2, blue);
                     previous = next;
                 }
+                HatchSector(diagram, origin, radius, angle, MeshPen.Alpha(blue, .22f));
                 diagram.Line(origin, Point(0), 2, blue); diagram.Line(origin, Point(1), 2, blue);
                 Vector2 Dimension(float fraction) => origin + (Point(fraction) - origin) * 1.065f;
                 for (int i = 0; i < 48; i++) diagram.Line(Dimension(i / 48f), Dimension((i + 1) / 48f), 2.1f, blue);
@@ -538,7 +539,7 @@ namespace PaperDefense.Presentation
                     int index = i < 3 ? i : i < 6 ? i - 3 : i - 6;
                     float fraction = row == 2 ? .36f + index * .28f : .2f + index * .3f;
                     var point = Vector2.Lerp(origin, Point(fraction), .42f + row * .20f);
-                    Target(diagram, point, Mathf.Clamp(radius * .06f, 12, 16));
+                    Target(diagram, point, Mathf.Clamp(radius * .06f, 12, 16), i);
                 }
                 artCenter = new Vector2(rect.center.x, rect.yMin + rect.height * .17f);
                 muzzleDestination=origin;
@@ -549,15 +550,15 @@ namespace PaperDefense.Presentation
                 // Radius is shown in one labelled world scale; wider heads visibly expand the footprint.
                 float unit = Mathf.Min(rect.width / 12, rect.height / 10);
                 float radius = Weapon.Radius * unit;
-                diagram.Disc(point, radius, MeshPen.Alpha(blue, .24f), 48);
+                diagram.Disc(point, radius, MeshPen.Alpha(blue, .045f), 48);
                 var diagonal=new Vector2(.7071068f,.7071068f); var across=new Vector2(-diagonal.y,diagonal.x);
-                for(float at=-radius+4;at<radius;at+=8)
+                for(float at=-radius+4;at<radius;at+=10)
                 {
                     float half=Mathf.Sqrt(Mathf.Max(0,radius*radius-at*at)); var middle=point+across*at;
-                    diagram.Line(middle-diagonal*half,middle+diagonal*half,1.3f,MeshPen.Alpha(blue,.38f));
+                    diagram.Line(middle-diagonal*half,middle+diagonal*half,1.15f,MeshPen.Alpha(blue,.22f));
                 }
                 diagram.Ring(point, radius, 2.2f, blue, 48, dashed: true);
-                for (int i = 0; i < 3; i++) Target(diagram, point + new Vector2(radius * (.8f + i * .1f), radius * (.95f - i * .95f)), 16);
+                for (int i = 0; i < 3; i++) Target(diagram, point + new Vector2(radius * (.8f + i * .1f), radius * (.95f - i * .95f)), 16, i + 2);
                 artCenter = new Vector2(rect.center.x - rect.width * .22f, rect.yMin + rect.height * .18f);
                 var start = composition.Anchors.Count>0 ? artCenter+(composition.Anchors[0].Muzzle-artBounds.center)*scale
                     : artCenter+new Vector2(10,rect.height*.10f);
@@ -576,26 +577,36 @@ namespace PaperDefense.Presentation
                 ? muzzleDestination.Value-composition.Anchors[0].Muzzle*scale : artCenter-artBounds.center*scale;
             assembly.CopyTo(target,artOrigin,scale);
         }
-        static void Target(MeshPen pen, Vector2 center, float radius)
+        static void HatchSector(MeshPen pen, Vector2 origin, float radius, float angle, Color ink)
         {
-            var ink = WorkshopUi.Blue;
-            var shoulderLeft = center + new Vector2(-radius, radius * .8f);
-            var shoulderRight = center + new Vector2(radius, radius * .8f);
-            var lowerLeft = center + new Vector2(-radius * .8f, -radius * .8f);
-            var lowerRight = center + new Vector2(radius * .8f, -radius * .8f);
-            var point = center + Vector2.down * radius * 1.35f;
-            pen.Triangle(shoulderLeft, shoulderRight, point, MeshPen.Alpha(ink, .18f));
-            pen.Line(shoulderLeft, shoulderRight, 2.2f, ink); pen.Line(shoulderLeft, lowerLeft, 2.2f, ink);
-            pen.Line(shoulderRight, lowerRight, 2.2f, ink); pen.Line(lowerLeft, point, 2.2f, ink); pen.Line(lowerRight, point, 2.2f, ink);
-            var head = center + Vector2.up * radius * 1.45f;
-            pen.Ring(head, radius * .48f, 1.4f, ink, 12);
-            pen.Line(head + new Vector2(-radius * .32f, 0), head + new Vector2(radius * .32f, 0), 1.4f, ink);
-            for (int i = -1; i <= 1; i++) pen.Line(head + new Vector2(i * radius * .22f, radius * .35f), head + new Vector2(i * radius * .3f, radius * .8f), 1.2f, ink);
-            pen.Line(center + Vector2.left * radius, center + Vector2.left * radius * 1.55f, 1.5f, ink);
-            pen.Line(center + Vector2.right * radius, center + Vector2.right * radius * 1.55f, 1.5f, ink);
-            pen.Ring(center, radius * .45f, 1.2f, ink, 12); pen.Disc(center, radius * .18f, NotebookPalette.Red, 8);
-            pen.Line(point, center + Vector2.down * radius * 2.35f, 1.5f, ink);
-            pen.Line(center + new Vector2(-radius * .45f, -radius * 2.35f), center + new Vector2(radius * .45f, -radius * 2.35f), 1.3f, ink);
+            if (radius <= 0 || angle < .001f) return;
+            var diagonal = new Vector2(.7071068f, .7071068f); var across = new Vector2(-diagonal.y, diagonal.x);
+            float cosine = Mathf.Cos(angle * .5f), sine = Mathf.Sin(angle * .5f);
+            for (float at = -radius + 5; at < radius; at += 11)
+            {
+                var point = across * at; float half = Mathf.Sqrt(Mathf.Max(0, radius * radius - at * at));
+                float start = -half, end = half;
+                if (!ClipToHalfPlane(new Vector2(-cosine, sine), point, diagonal, ref start, ref end)
+                    || !ClipToHalfPlane(new Vector2(cosine, sine), point, diagonal, ref start, ref end)) continue;
+                if (end > start) pen.Line(origin + point + diagonal * start, origin + point + diagonal * end, 1.1f, ink);
+            }
+        }
+        static bool ClipToHalfPlane(Vector2 normal, Vector2 point, Vector2 direction, ref float start, ref float end)
+        {
+            float along = Vector2.Dot(normal, direction), offset = Vector2.Dot(normal, point);
+            if (Mathf.Abs(along) < .0001f) return offset >= 0;
+            float crossing = -offset / along;
+            if (along > 0) start = Mathf.Max(start, crossing); else end = Mathf.Min(end, crossing);
+            return end >= start;
+        }
+        static void Target(MeshPen pen, Vector2 center, float radius, int variant)
+        {
+            string id = variant % 3 == 0 ? "enemy.doodle.idle" : variant % 3 == 1 ? "enemy.runner.idle" : "enemy.gnawer.idle";
+            if (!NotebookSpriteCatalog.TryGetBounds(id, out var bounds)) return;
+            // These are the game's actual enemy illustrations on a read-only rule page.
+            // They do not imply a running encounter, a health value or an extra target.
+            float scale = radius * 4.4f / Mathf.Max(.001f, bounds.height);
+            NotebookSpriteCatalog.TryDraw(pen, id, center - bounds.center * scale, scale);
         }
     }
 }
