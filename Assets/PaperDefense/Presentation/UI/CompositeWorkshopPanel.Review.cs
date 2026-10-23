@@ -13,7 +13,8 @@ namespace PaperDefense.Presentation
         {
             bool reference = Route == AlbumEntryKind.Tower;
             if (!reference) ui.Label(parent, "Composite review heading", T("review"), new Rect(18, 8, w - 36, 44), 28, true);
-            float illustrationHeight = Mathf.Max(190, h - (reference ? 142 : 158));
+            bool wideReference = reference && width >= 1400;
+            float illustrationHeight = Mathf.Max(190, h - (reference ? 166 : 158));
             if (Route == AlbumEntryKind.Legacy)
             {
                 var picture = WorkshopUi.Graphic<BlueprintSketch>(parent, "Composite assembled preview", new Rect(14, 58, w - 28, illustrationHeight));
@@ -21,20 +22,30 @@ namespace PaperDefense.Presentation
             }
             else if (reference)
             {
-                var art = new Rect(8, 4, w - 16, illustrationHeight);
-                WorkshopScenery(parent, "Composite preview scenery", art, .78f);
+                float artWidth = wideReference ? w * .71f : w - 20;
+                illustrationHeight = wideReference ? Mathf.Min(600, illustrationHeight) : illustrationHeight;
+                var art = new Rect(wideReference ? w * .225f : (w - artWidth) * .5f, wideReference ? h * .08f : 8, artWidth, illustrationHeight);
+                WorkshopScenery(parent, "Composite preview scenery", art, .62f);
                 RecipePicture(parent, DraftSession.PreviewEntry.Snapshot, "Composite certified recipe preview", art);
-                var name = ui.Label(parent, "Composite review drawing name", DraftSession.Name, new Rect(18, illustrationHeight + 8, w - 36, 38), 27, true);
+                illustrationHeight = art.yMax;
+                var name = ui.Label(parent, "Composite review drawing name", DraftSession.Name, new Rect(18, illustrationHeight + 8, w - 36, 42), 28, true);
                 name.alignment = TextAnchor.MiddleCenter;
             }
             else DrawRecipePreview(parent, DraftSession.PreviewRecipe, w, illustrationHeight);
-            float compositionY = illustrationHeight + (reference ? 50 : 64);
-            float compositionHeight = Mathf.Max(60, h - compositionY - 8);
-            var composition = new CatalogScrollList(parent, "Composite review composition viewport", new Rect(18, compositionY, w - 36, compositionHeight), 1, 1, h, 0);
-            var compositionText = ui.Label(composition.Content, "Composite review composition", CompositionText(), new Rect(0, 0, w - 54, compositionHeight), reference ? 13 : 16);
+            float compositionY = illustrationHeight + (reference ? 60 : 64);
+            float compositionHeight = Mathf.Max(60, h - compositionY - (reference ? 12 : 8));
+            if (reference)
+            {
+                var frame = ReferenceDetail(parent, "Composite review recipe frame", new Rect(18, compositionY - 4, w - 36, compositionHeight + 8), FoundationDetailGraphic.Kind.Frame);
+                frame.Fill = new Color(WorkshopUi.Paper.r, WorkshopUi.Paper.g, WorkshopUi.Paper.b, .84f); frame.color = WorkshopUi.Muted;
+            }
+            float compositionWidth = w - (reference ? 76 : 54);
+            var composition = new CatalogScrollList(parent, "Composite review composition viewport",
+                reference ? new Rect(26, compositionY + 4, w - 52, compositionHeight - 8) : new Rect(18, compositionY, w - 36, compositionHeight), 1, 1, h, 0);
+            var compositionText = ui.Label(composition.Content, "Composite review composition", CompositionText(), new Rect(0, 0, compositionWidth, compositionHeight), reference ? 15 : 16, color: reference ? WorkshopUi.Muted : WorkshopUi.Ink);
             compositionText.alignment = TextAnchor.UpperLeft;
             float contentHeight = Mathf.Max(80, compositionText.preferredHeight + 12);
-            WorkshopUi.Place(compositionText.rectTransform, new Rect(0, 0, w - 54, contentHeight));
+            WorkshopUi.Place(compositionText.rectTransform, new Rect(0, 0, compositionWidth, contentHeight));
             if (DraftSession.PreviewMetrics?.Overloaded == true)
             {
                 var entry = DraftSession.PreviewEntry;
@@ -42,10 +53,10 @@ namespace PaperDefense.Presentation
                     .Where(part => part.Get(AssemblyStat.Load, ModifierOperation.Add) != 0)
                     .Select(part => ui.Resolve(part.Name) + " " + part.Get(AssemblyStat.Load, ModifierOperation.Add).ToString("+0.##;-0.##;0"));
                 var label = ui.Label(composition.Content, "Composite load contributors", UserText.Message("assembly.component.load_parts", string.Join(" · ", contributors)),
-                    new Rect(0, contentHeight + 6, w - 54, 100), 18, color: WorkshopUi.Warning);
+                    new Rect(0, contentHeight + 6, compositionWidth, 100), 18, color: WorkshopUi.Warning);
                 label.alignment = TextAnchor.UpperLeft;
                 float contributionHeight = Mathf.Max(56, label.preferredHeight + 12);
-                WorkshopUi.Place(label.rectTransform, new Rect(0, contentHeight + 6, w - 54, contributionHeight));
+                WorkshopUi.Place(label.rectTransform, new Rect(0, contentHeight + 6, compositionWidth, contributionHeight));
                 contentHeight += contributionHeight + 6;
             }
             composition.Content.sizeDelta = new Vector2(0, Mathf.Max(compositionHeight, contentHeight));
@@ -116,19 +127,50 @@ namespace PaperDefense.Presentation
             }
         }
 
-        bool UsesReferenceReview => Route == AlbumEntryKind.Tower && Step == 2 && !HasWriteFailure;
+        bool UsesReferenceReview => Route == AlbumEntryKind.Tower && Step == 2;
+
+        void BuildSaveFailureSurface()
+        {
+            var overlay = ui.Panel(Root, "Composite save failure overlay", new Rect(0, 0, width, height), new Color(.12f, .14f, .18f, .12f), true);
+            float sheetWidth = Mathf.Min(560, width - 64), sheetHeight = 374;
+            float x = Mathf.Min(width - sheetWidth - 36, width * .64f), y = Mathf.Clamp(height * .34f, 132, height - sheetHeight - 88);
+            var sheet = ui.Panel(overlay, "Composite save failure sheet", new Rect(x, y, sheetWidth, sheetHeight), WorkshopUi.Paper, true);
+            var edge = ReferenceDetail(sheet, "Composite save failure edge", new Rect(0, 0, sheetWidth, sheetHeight), FoundationDetailGraphic.Kind.Frame);
+            edge.color = new Color32(152, 42, 43, 255); edge.StrokeWidth = 2.6f; edge.Radius = 5;
+            WorkshopUi.Graphic<WorkshopSaveFailureMark>(sheet, "Composite save failure mark", new Rect((sheetWidth - 66) * .5f, 16, 66, 66));
+            var title = ui.Label(sheet, "Composite save failure title", "Не удалось сохранить", new Rect(24, 86, sheetWidth - 48, 48), 32, true, edge.color);
+            title.alignment = TextAnchor.MiddleCenter;
+            var detail = ui.Label(sheet, "Composite save failure detail", StatusText(), new Rect(32, 142, sheetWidth - 64, 70), 20);
+            detail.alignment = TextAnchor.MiddleCenter;
+            ui.Button(sheet, "Composite save failure retry", new Rect(32, 230, sheetWidth - 64, 54), T("retry_save"), () => Save(saveFailureVariant), WorkshopIcon.Save, true)
+                .interactable = DraftSession.CanSave;
+            Action dismiss = () => { saveFailureDismissed = true; Refresh(); };
+            ui.Button(sheet, "Composite save failure continue", new Rect(32, 298, sheetWidth - 64, 50), "Продолжить сборку", dismiss, WorkshopIcon.Back);
+            var save = Root.GetComponentsInChildren<Button>().FirstOrDefault(button => button.name == "Composite save");
+            WorkshopModal.Open(overlay.gameObject, dismiss, save?.gameObject);
+        }
 
         void ReferenceReviewSummary(Transform parent, Rect bounds)
         {
+            if (width >= 1400)
+            {
+                float cardWidth = Mathf.Max(380, Mathf.Min(580, bounds.width * .8f)), cardHeight = Mathf.Min(648, bounds.height - 60);
+                bounds = new Rect(bounds.x, bounds.y + (bounds.height - cardHeight) * .45f, cardWidth, cardHeight);
+            }
             var sheet = ui.Panel(parent, "Composite summary", bounds, WorkshopUi.Paper);
             float w = bounds.width, h = bounds.height;
-            var banner = ui.Label(sheet, "Composite preview title", DraftSession.CanSave ? "Готово к защите" : "Проверь сборку", new Rect(18, 6, w - 36, 44), 29, true);
+            bool compact = h < 580;
+            var bannerFrame = ReferenceDetail(sheet, "Composite review banner frame", new Rect(24, 10, w - 48, compact ? 42 : 52), FoundationDetailGraphic.Kind.Frame);
+            bannerFrame.Fill = WorkshopUi.Surface; bannerFrame.Radius = 7;
+            var banner = ui.Label(sheet, "Composite preview title", DraftSession.CanSave ? "Готово к защите" : "Проверь сборку", new Rect(28, compact ? 10 : 14, w - 56, 42), compact ? 28 : 32, true);
             banner.alignment = TextAnchor.MiddleCenter;
-            ReferenceDetail(sheet, "Composite review title line", new Rect(26, 49, w - 52, 2), FoundationDetailGraphic.Kind.Divider);
-            ui.Label(sheet, "Composite name label", T("name"), new Rect(18, 58, w - 36, 26), 18);
-            var fieldRoot = ui.Panel(sheet, "Composite name", new Rect(18, 88, w - 36, 48), WorkshopUi.Surface, true);
+            ui.Label(sheet, "Composite name label", T("name"), new Rect(22, compact ? 56 : 72, w - 44, 26), 20);
+            var fieldRoot = ui.Panel(sheet, "Composite name", new Rect(22, compact ? 84 : 104, w - 44, 48), WorkshopUi.Surface, true);
+            ReferenceDetail(fieldRoot, "Composite review name frame", new Rect(0, 0, w - 44, 48), FoundationDetailGraphic.Kind.Frame);
             var field = fieldRoot.gameObject.AddComponent<InputField>();
-            var nameText = ui.Label(fieldRoot, "Composite name value", DraftSession.Name, new Rect(12, 2, w - 60, 44), 23);
+            var nameText = ui.Label(fieldRoot, "Composite name value", DraftSession.Name, new Rect(12, 2, w - 100, 44), compact ? 23 : 25);
+            var pencil = WorkshopUi.Graphic<WorkshopIconGraphic>(fieldRoot, "Composite review name pencil", new Rect(w - 82, 11, 27, 27));
+            pencil.Icon = WorkshopIcon.Pencil; pencil.color = WorkshopUi.Ink;
             field.textComponent = nameText; field.text = DraftSession.Name; field.characterLimit = 0;
             var nameSession = DraftSession;
             field.onEndEdit.AddListener(value => {
@@ -138,23 +180,31 @@ namespace PaperDefense.Presentation
                     feedback = ""; RefreshStatus();
                     var drawingName = Root.GetComponentsInChildren<Text>().FirstOrDefault(label => label.name == "Composite review drawing name");
                     if (drawingName != null) drawingName.text = DraftSession.Name;
+                    banner.text = DraftSession.CanSave ? "Готово к защите" : "Проверь сборку";
+                    var saveNote = Root.Find("Composite content/Composite summary/Composite free save note");
+                    if (saveNote != null) saveNote.gameObject.SetActive(!HasStatusFailure);
                 }
             });
             var metrics = DraftSession.PreviewMetrics;
             bool compatible = !DraftSession.Resolution.Diagnostics.Any(issue => issue.Code != "assembly.load.exceeded");
             bool owned = DraftSession.PreviewRecipe.Parts.All(reference => DraftSession.IsOwned(reference.Id));
-            ReviewCheck(sheet, "Composite compatibility check", compatible ? "Все детали совместимы" : "Проверь совместимость деталей", 150, w, compatible);
-            ReviewCheck(sheet, "Composite ownership check", owned ? "Детали открыты" : "Есть закрытые детали", 190, w, owned);
+            float checksY = compact ? 142 : 168, checkPitch = compact ? 42 : 48;
+            ReviewCheck(sheet, "Composite compatibility check", compatible ? "Все детали совместимы" : "Проверь совместимость деталей", checksY, w, compatible);
+            ReviewCheck(sheet, "Composite ownership check", owned ? "Детали открыты" : "Есть закрытые детали", checksY + checkPitch, w, owned);
             bool loadOk = metrics != null && !metrics.Overloaded;
             string load = metrics == null ? T("clearance") : metrics.Overloaded ? T("load_cost", metrics.Load, metrics.Capacity, metrics.Cost) : "Нагрузка " + metrics.Load + "/" + metrics.Capacity;
-            ReviewCheck(sheet, "Composite load cost", load, 230, w, loadOk);
-            ReferenceDetail(sheet, "Composite review stats divider", new Rect(18, 268, w - 36, 2), FoundationDetailGraphic.Kind.Divider);
-            ReviewValue(sheet, "cost", "Цена постройки", metrics == null ? "—" : metrics.Cost + " штр.", 278, w, WorkshopIcon.Pencil);
-            ReviewValue(sheet, "health", "Прочность", metrics?.Health.ToString("0.#") ?? "—", 314, w, WorkshopIcon.Shield);
-            ReviewValue(sheet, "dps", "DPS", DraftSession.Resolved?.Dps.ToString("0.##") ?? "—", 350, w, WorkshopIcon.Target);
+            ReviewCheck(sheet, "Composite load cost", load, checksY + checkPitch * 2, w, loadOk);
+            float valuesY = compact ? 276 : 330, valuePitch = compact ? 38 : 46;
+            ReferenceDetail(sheet, "Composite review stats divider", new Rect(22, valuesY - 10, w - 44, 2), FoundationDetailGraphic.Kind.Divider);
+            ReviewValue(sheet, "cost", "Цена постройки", metrics == null ? "—" : metrics.Cost + " штр.", valuesY, w, WorkshopIcon.Pencil);
+            ReviewValue(sheet, "health", "Прочность", metrics?.Health.ToString("0.#") ?? "—", valuesY + valuePitch, w, WorkshopIcon.Shield);
+            ReviewValue(sheet, "dps", "DPS", DraftSession.Resolved?.Dps.ToString("0.##") ?? "—", valuesY + valuePitch * 2, w, WorkshopIcon.Target);
             var validation = ui.Label(sheet, "Composite validation", HasStatusFailure ? StatusText() : "", new Rect(18, h - 101, w - 36, 34), 15,
                 color: HasStatusFailure ? WorkshopUi.Warning : WorkshopUi.Success);
             validation.alignment = TextAnchor.UpperLeft;
+            var freeSaveNote = ui.Label(sheet, "Composite free save note", "Сохранение бесплатно · Альбом " + run.Workshop.Entries.Count + "/" + ProfileLimits.MaximumAlbumPages,
+                new Rect(22, h - 92, w - 44, 28), w < 420 ? 14 : 17, color: WorkshopUi.Muted);
+            freeSaveNote.alignment = TextAnchor.MiddleCenter; freeSaveNote.gameObject.SetActive(!HasStatusFailure);
             var trial = ui.Button(sheet, "Composite trial", new Rect(18, h - 60, w - 36, 46), T("trial"), OpenTrial, WorkshopIcon.Target);
             trial.interactable = DraftSession.CanTrial;
         }
@@ -162,18 +212,18 @@ namespace PaperDefense.Presentation
         void ReviewCheck(Transform parent, string name, string caption, float y, float w, bool valid)
         {
             Color tint = valid ? (Color)new Color32(20, 145, 70, 255) : WorkshopUi.Warning;
-            var disc = WorkshopUi.Graphic<WorkshopReviewCheckDisc>(parent, name + " disc", new Rect(20, y + 1, 32, 32));
+            var disc = WorkshopUi.Graphic<WorkshopReviewCheckDisc>(parent, name + " disc", new Rect(24, y + 2, 36, 36));
             disc.color = tint;
-            var icon = WorkshopUi.Graphic<WorkshopIconGraphic>(parent, name + " icon", new Rect(24, y + 5, 24, 24));
+            var icon = WorkshopUi.Graphic<WorkshopIconGraphic>(parent, name + " icon", new Rect(29, y + 7, 26, 26));
             icon.Icon = valid ? WorkshopIcon.Check : WorkshopIcon.Help; icon.color = Color.white;
-            var label = ui.Label(parent, name, caption, new Rect(66, y, w - 84, 36), w < 400 ? 18 : 20, color: valid ? WorkshopUi.Ink : WorkshopUi.Warning);
+            var label = ui.Label(parent, name, caption, new Rect(74, y, w - 96, 40), w < 420 ? 19 : 23, color: valid ? WorkshopUi.Ink : WorkshopUi.Warning);
             label.alignment = TextAnchor.MiddleLeft;
         }
         void ReviewValue(Transform parent, string name, string title, string value, float y, float w, WorkshopIcon kind)
         {
-            var icon = WorkshopUi.Graphic<WorkshopIconGraphic>(parent, "Composite review " + name + " icon", new Rect(20, y + 4, 28, 28)); icon.Icon = kind; icon.color = WorkshopUi.Ink;
-            ui.Label(parent, "Composite review " + name + " title", title, new Rect(58, y, w * .57f - 58, 36), w < 400 ? 17 : 19);
-            var number = ui.Label(parent, "Composite review " + name + " value", value, new Rect(w * .57f, y, w * .43f - 20, 36), 23, true);
+            var icon = WorkshopUi.Graphic<WorkshopIconGraphic>(parent, "Composite review " + name + " icon", new Rect(24, y + 3, 30, 30)); icon.Icon = kind; icon.color = WorkshopUi.Ink;
+            ui.Label(parent, "Composite review " + name + " title", title, new Rect(68, y, w * .65f - 68, 38), w < 420 ? 18 : 22);
+            var number = ui.Label(parent, "Composite review " + name + " value", value, new Rect(w * .65f, y, w * .35f - 24, 38), w < 420 ? 24 : 28, true);
             number.alignment = TextAnchor.MiddleRight;
         }
 

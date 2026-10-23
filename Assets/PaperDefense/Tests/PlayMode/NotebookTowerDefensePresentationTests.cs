@@ -156,7 +156,41 @@ namespace PaperDefense.Tests
                 Assert.That(mesh.colors32.Any(color => color.Equals((Color32)NotebookPalette.Green)), Is.True, "A full HP bar is visible before damage.");
                 pen.Clear(); DoodleGlyphs.Enemy(pen, Enemy(2.4f), 0, compact); pen.Upload();
                 Assert.That(mesh.bounds.size.x, Is.GreaterThan(first.size.x * 2));
-                Assert.That(mesh.bounds.max.y, Is.GreaterThan(first.max.y + 1));
+                Assert.That(mesh.bounds.max.y, Is.GreaterThan(first.max.y), "A scaled enemy and its attached bar grow together.");
+            }
+            finally { Object.DestroyImmediate(mesh); }
+        }
+
+        [TestCase(EnemyKind.Doodle)] [TestCase(EnemyKind.Runner)] [TestCase(EnemyKind.Gnawer)]
+        [TestCase(EnemyKind.Spitter)] [TestCase(EnemyKind.Brute)] [TestCase(EnemyKind.Bulwark)]
+        public void EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(EnemyKind kind)
+        {
+            var mesh = new Mesh();
+            try
+            {
+                var pen = new MeshPen(mesh);
+                foreach (float scale in new[] { 1f, 2.4f })
+                foreach (float presentation in new[] { 1f, NotebookEnemyView.ModernScale })
+                foreach (float windup in new[] { 0f, .3f })
+                {
+                    var enemy = (EnemyView)typeof(EnemyView).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Single()
+                        .Invoke(new object[] { new EnemyState { Id = 7, Kind = kind, Health = 100, MaxHealth = 100,
+                            VisualScale = scale, Position = new Point2(10, 10), WindupRemaining = windup } });
+                    pen.Clear(); DoodleGlyphs.Enemy(pen, enemy, .21f, showHealth: false, uniformScale: presentation); pen.Upload();
+                    var body = mesh.bounds;
+                    pen.Clear();
+                    // An earlier actor in the shared batch must not affect this enemy's anchor.
+                    pen.Rect(-100, -100, 200, 200, Color.black);
+                    DoodleGlyphs.Enemy(pen, enemy, .21f, uniformScale: presentation); pen.Upload();
+                    var points = mesh.vertices; var colors = mesh.colors32;
+                    var bar = points.Where((point, index) => colors[index].Equals((Color32)NotebookPalette.Green)).ToArray();
+                    Assert.That(bar.Length, Is.EqualTo(4), kind + " retains its full health indicator.");
+                    float gap = bar.Min(point => point.y) - body.max.y;
+                    Assert.That(gap, Is.GreaterThan(.06f * presentation), kind + " must clear its visible head and border.");
+                    Assert.That(gap, Is.LessThanOrEqualTo(.18f * scale * presentation), kind + " must stay attached to its current silhouette.");
+                    Assert.That((bar.Min(point => point.x) + bar.Max(point => point.x)) * .5f,
+                        Is.EqualTo(body.center.x).Within(.001f), kind + " follows the animated body's center.");
+                }
             }
             finally { Object.DestroyImmediate(mesh); }
         }

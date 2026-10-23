@@ -17,6 +17,7 @@ namespace PaperDefense.Presentation
         Rect[] slots = Array.Empty<Rect>();
         bool foundationDiagram;
         public IReadOnlyList<PartRef> Parts => parts;
+        public float Opacity { get; set; } = 1;
 
         public void Configure(AssemblyRecipe recipe, WorkshopComponentKind component, int mount)
         {
@@ -24,12 +25,14 @@ namespace PaperDefense.Presentation
             if (component == WorkshopComponentKind.Structure)
             {
                 parts = recipe.Structure.Parts.ToArray();
-                slots = new[] { new Rect(.15f,.02f,.72f,.25f), new Rect(.09f,.37f,.47f,.42f), new Rect(.53f,.67f,.43f,.30f), new Rect(.72f,.30f,.26f,.29f) };
+                slots = new[] { new Rect(.20f,.03f,.64f,.23f), new Rect(.10f,.30f,.60f,.42f), new Rect(.40f,.70f,.34f,.28f), new Rect(.73f,.40f,.25f,.30f) };
             }
             else if (component == WorkshopComponentKind.Foundation)
             {
                 parts = recipe.Tower.Foundation.Parts.ToArray();
-                slots = new[] { new Rect(.18f,.03f,.72f,.23f), new Rect(.10f,.38f,.64f,.29f), new Rect(.78f,.36f,.21f,.30f), new Rect(.02f,.69f,.26f,.22f), new Rect(.43f,.70f,.37f,.24f) };
+                // Authored frame and hull bands stay intact. A thin base band is an actual
+                // part, so pack the stack rather than expanding its source Region or scale.
+                slots = new[] { new Rect(.13f,.02f,.72f,.18f), new Rect(.14f,.27f,.72f,.27f), new Rect(.79f,.30f,.20f,.28f), new Rect(.02f,.60f,.27f,.25f), new Rect(.39f,.62f,.33f,.29f) };
             }
             else
             {
@@ -60,9 +63,9 @@ namespace PaperDefense.Presentation
                     Vector2 start = Vector2.Lerp(at, end, .40f);
                     int steps = Mathf.Max(2, Mathf.CeilToInt(Vector2.Distance(start, end) / 8));
                     for (int dash = 0; dash < steps; dash += 2)
-                        arrows.Line(Vector2.Lerp(start,end,(float)dash/steps), Vector2.Lerp(start,end,Mathf.Min(1,(dash+1f)/steps)), 1.6f, WorkshopUi.Blue);
+                        arrows.Line(Vector2.Lerp(start,end,(float)dash/steps), Vector2.Lerp(start,end,Mathf.Min(1,(dash+1f)/steps)), 1.6f, MeshPen.Alpha(WorkshopUi.Blue, Opacity));
                     var along = (end-start).normalized; var side = new Vector2(-along.y, along.x);
-                    arrows.Line(end, end-along*8+side*4, 1.7f, WorkshopUi.Blue); arrows.Line(end, end-along*8-side*4, 1.7f, WorkshopUi.Blue);
+                    arrows.Line(end, end-along*8+side*4, 1.7f, MeshPen.Alpha(WorkshopUi.Blue, Opacity)); arrows.Line(end, end-along*8-side*4, 1.7f, MeshPen.Alpha(WorkshopUi.Blue, Opacity));
                 }
             }
             if (!foundationDiagram) arrows.CopyTo(target, Vector2.zero, 1);
@@ -70,8 +73,9 @@ namespace PaperDefense.Presentation
             {
                 var drawing = drawings[i]; if (drawing.Fragments.Count == 0) continue;
                 var slot = slots[i]; var at = Point(slot.center.x, slot.center.y);
-                float scale = .94f * Mathf.Min(area.width * slot.width / Mathf.Max(.001f,drawing.Bounds.width), area.height * slot.height / Mathf.Max(.001f,drawing.Bounds.height));
-                part.Clear(); drawing.Draw(part, Vector2.zero); part.CopyTo(target, at-drawing.Bounds.center*scale, scale);
+                var visible = AssemblyPreviewPose.VisibleBounds(drawing);
+                float scale = .94f * Mathf.Min(area.width * slot.width / Mathf.Max(.001f,visible.width), area.height * slot.height / Mathf.Max(.001f,visible.height));
+                part.Clear(); drawing.Draw(part, Vector2.zero, Opacity); part.CopyTo(target, at-visible.center*scale, scale);
             }
             if (foundationDiagram) arrows.CopyTo(target, Vector2.zero, 1);
         }

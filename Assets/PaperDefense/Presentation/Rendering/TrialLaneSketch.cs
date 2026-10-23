@@ -17,6 +17,12 @@ namespace PaperDefense.Presentation
         Rect recordingBounds = new Rect(8, 8, 42, 28);
         Rect combatBounds = new Rect(8, 8, 42, 28);
         bool combatFocus;
+        bool quietGrid;
+        public bool QuietGrid
+        {
+            get => quietGrid;
+            set { if (quietGrid == value) return; quietGrid = value; geometryDirty = true; RefreshGeometry(); }
+        }
         /// <summary>The modern shared trial frames the recorded activity rather than unused fixture cells.</summary>
         public bool FrameRecording { get; set; }
         public Rect RecordingBounds => recordingBounds;
@@ -91,7 +97,7 @@ namespace PaperDefense.Presentation
             if (HasRecording)
             {
                 playback.Seek(seconds);
-                NotebookTrialRenderer.Draw(pen, playback, FrameRecording ? ViewBounds : (Rect?)null);
+                NotebookTrialRenderer.Draw(pen, playback, FrameRecording ? ViewBounds : (Rect?)null, quietGrid ? .035f : .12f);
             }
             else pen.Clear();
             lastSeconds = seconds; geometryDirty = false;

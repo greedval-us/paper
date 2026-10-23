@@ -188,7 +188,7 @@ namespace PaperDefense.Presentation
             int columns = width >= 1024 ? 4 : 2;
             const float gap = 12;
             float cardWidth = (bounds.width - gap * (columns - 1) - 8) / columns;
-            float cardHeight = Mathf.Clamp((bounds.height - gap) / 2, 168, 246);
+            float cardHeight = Mathf.Clamp((bounds.height - gap) / 2, 168, 340);
             var list = new CatalogScrollList(Root, "Album catalogue", bounds, entries.Length, columns, cardHeight, gap);
             for (int index = 0; index < entries.Length; index++)
             {
@@ -199,6 +199,11 @@ namespace PaperDefense.Presentation
                 // The full card is the choose target; decorative children never intercept pointer input.
                 var surface = card.GetComponent<WorkshopSurfaceGraphic>();
                 surface.IsControl = true; surface.Chosen = SelectedId == entry.Id;
+                if (SelectedId == entry.Id)
+                {
+                    var selection = WorkshopUi.Graphic<FoundationDetailGraphic>(card, "Album selected card frame", new Rect(1, 1, cardWidth - 2, cardHeight - 2));
+                    selection.Shape = FoundationDetailGraphic.Kind.Frame; selection.Selected = true; selection.StrokeWidth = 2.2f;
+                }
                 var button = card.gameObject.AddComponent<Button>(); button.targetGraphic = surface;
                 card.gameObject.AddComponent<UiScrollFocus>();
                 button.name = "Album choose " + entry.Id;
@@ -209,29 +214,35 @@ namespace PaperDefense.Presentation
                 rule.color = new Color(.12f, .28f, .52f, .55f);
                 DrawEntry(card, entry, new Rect(5, 48, cardWidth - 10, cardHeight - 82));
                 var resolved = run.PreviewAlbumEntry(entry, MaterialTier.Pencil);
+                AlbumIcon(card, "Album card pencil", "icon.pencil", new Rect(10, cardHeight - 34, 25, 28));
                 var price = ui.Label(card, "Album card price", resolved.Valid ? T("price", resolved.Value.Cost) : T("unavailable"),
-                    new Rect(10, cardHeight - 32, cardWidth - 20, 26), 16, color: WorkshopUi.Muted);
-                price.resizeTextForBestFit = true; price.resizeTextMinSize = 14; price.resizeTextMaxSize = 16;
+                    new Rect(40, cardHeight - 34, cardWidth - 48, 28), 18);
+                price.resizeTextForBestFit = true; price.resizeTextMinSize = 14; price.resizeTextMaxSize = 18;
                 price.horizontalOverflow = HorizontalWrapMode.Overflow;
             }
         }
 
         void Empty(Rect bounds)
         {
-            var sheet = ui.Panel(Root, "Album empty sheet", bounds, Color.white);
-            float imageHeight = Mathf.Max(120, Mathf.Min(420, bounds.height - 158));
-            float imageWidth = Mathf.Min(1100, bounds.width * .88f), imageX = (bounds.width - imageWidth) * .5f;
+            var sheet = ui.Panel(Root, "Album empty sheet", bounds, Color.clear);
+            float imageHeight = Mathf.Max(120, Mathf.Min(430, bounds.height - 200));
+            float imageWidth = Mathf.Min(imageHeight * (1862f / 845f), bounds.width * .88f);
+            imageHeight = imageWidth * (845f / 1862f);
+            float imageX = (bounds.width - imageWidth) * .5f;
             var title = ui.Label(sheet, "Album empty", T(Filter == AlbumFilter.Mine ? "empty_mine" : "empty"),
-                new Rect(24, 0, bounds.width - 48, 44), 30, true); title.alignment = TextAnchor.MiddleCenter;
+                new Rect(24, 0, bounds.width - 48, 50), 34, true); title.alignment = TextAnchor.MiddleCenter;
             var hint = ui.Label(sheet, "Album empty explanation", T("empty_hint"), new Rect(24, 44, bounds.width - 48, 42), 19, color: WorkshopUi.Muted);
             hint.alignment = TextAnchor.MiddleCenter;
-            var illustration = WorkshopUi.Graphic<NotebookOpenBookGraphic>(sheet, "Album empty notebook", new Rect(imageX, 84, imageWidth, imageHeight));
+            var illustration = WorkshopUi.Graphic<Image>(sheet, "Album empty notebook", new Rect(imageX, 80, imageWidth, imageHeight));
+            illustration.sprite = Resources.Load<Sprite>("Art/Player/AlbumOpenBookV2"); illustration.preserveAspect = true;
+            illustration.rectTransform.pivot = new Vector2(.5f, .5f);
+            illustration.rectTransform.anchoredPosition = new Vector2(imageX + imageWidth * .5f, -80 - imageHeight * .5f);
             var starter = run.AssemblyCatalog?.Starters.FirstOrDefault(entry => entry.Kind == AlbumEntryKind.Tower);
             if (starter != null)
             {
-                var left = WorkshopUi.Graphic<WeaponAssemblyGraphic>(illustration.transform, "Album empty foundation study",
-                    new Rect(imageWidth * .09f, imageHeight * .16f, imageWidth * .35f, imageHeight * .66f));
-                left.SetComposition(AssemblyVisualComposer.ComposeFoundation(starter.Snapshot.Recipe.Tower.Foundation));
+                var left = WorkshopUi.Graphic<WorkshopAssemblyDiagram>(illustration.transform, "Album empty foundation study",
+                    new Rect(imageWidth * .10f, imageHeight * .12f, imageWidth * .34f, imageHeight * .70f));
+                left.Configure(starter.Snapshot.Recipe, WorkshopComponentKind.Weapon, starter.Snapshot.Recipe.Tower.Mounts[0].SlotIndex);
                 var right = WorkshopUi.Graphic<WeaponAssemblyGraphic>(illustration.transform, "Album empty assembled study",
                     new Rect(imageWidth * .55f, imageHeight * .16f, imageWidth * .34f, imageHeight * .66f));
                 right.SetRecipe(starter.Snapshot);
@@ -243,6 +254,8 @@ namespace PaperDefense.Presentation
                 ink.sprite = inkBottle; ink.preserveAspect = true;
             }
             float actionWidth = Mathf.Min(320, bounds.width - 48);
+            ui.Button(sheet, "Album empty create", new Rect((bounds.width - actionWidth) / 2, bounds.height - 110, actionWidth, 48),
+                T("new"), () => edit?.Invoke(null), WorkshopIcon.Pencil, true).interactable = edit != null;
             ui.Button(sheet, "Album show standard", new Rect((bounds.width - actionWidth) / 2, bounds.height - 58, actionWidth, 44),
                 T("show_standard"), () => SetFilter(AlbumFilter.Standard), WorkshopIcon.Book);
         }
@@ -260,11 +273,17 @@ namespace PaperDefense.Presentation
             ui.Label(sheet, "Album selected name", entry.Name, new Rect(16, 4, w - 32, 46), 27, true);
             var rule = WorkshopUi.Graphic<Image>(sheet, "Album selected title rule", new Rect(16, 51, w - 32, 1));
             rule.color = new Color(.12f, .28f, .52f, .55f);
-            float artHeight = Mathf.Max(68, h - 236);
+            float statisticsY = h - 254;
+            float artHeight = Mathf.Max(68, statisticsY - 64);
             DrawEntry(sheet, entry, new Rect(8, 56, w - 16, artHeight));
             var resolved = run.PreviewAlbumEntry(entry, MaterialTier.Pencil);
-            string statistics = resolved.Valid ? T("statistics", resolved.Value.Cost, resolved.Value.Health.ToString("0.##"), resolved.Value.Load, resolved.Value.Capacity) : T("unavailable");
-            ui.Label(sheet, "Album selected statistics", statistics, new Rect(16, h - 176, w - 32, 54), 18, color: WorkshopUi.Muted);
+            if (resolved.Valid)
+            {
+                InspectorMetric(sheet, "Health", "icon.heart", null, resolved.Value.Health.ToString("0.##"), statisticsY, w);
+                InspectorMetric(sheet, "Load", null, WorkshopIcon.Shield, resolved.Value.Load + " / " + resolved.Value.Capacity, statisticsY + 40, w);
+                InspectorMetric(sheet, "Cost", "icon.pencil", null, T("price", resolved.Value.Cost), statisticsY + 80, w);
+            }
+            else ui.Label(sheet, "Album selected statistics", T("unavailable"), new Rect(16, statisticsY, w - 32, 112), 19, color: WorkshopUi.Warning);
             var editButton = ui.Button(sheet, "Album edit", new Rect(16, h - 120, w - 32, 36), T("edit"), () => edit?.Invoke(Selected), WorkshopIcon.Pencil);
             editButton.interactable = edit != null;
             ui.Button(sheet, "Album variant", new Rect(16, h - 80, w - 32, 36), T("variant"), () => {
@@ -273,6 +292,33 @@ namespace PaperDefense.Presentation
                 feedback = ResultText(result, "variant_saved"); Refresh();
             }, WorkshopIcon.Copy).interactable = entry.Kind != AlbumEntryKind.Legacy;
             ui.Button(sheet, "Album delete", new Rect(16, h - 40, w - 32, 36), T("delete"), RequestDelete, WorkshopIcon.Trash);
+        }
+
+        void InspectorMetric(Transform parent, string stat, string artId, WorkshopIcon? symbol, string value, float y, float w)
+        {
+            if (artId != null)
+            {
+                AlbumIcon(parent, "Album metric icon " + stat, artId, new Rect(14, y + 5, 30, 29));
+            }
+            else
+            {
+                var icon = WorkshopUi.Graphic<WorkshopIconGraphic>(parent, "Album metric icon " + stat, new Rect(17, y + 8, 24, 24)); icon.Icon = symbol.Value; icon.color = WorkshopUi.Blue;
+            }
+            float valueWidth = Mathf.Clamp(w * .42f, 86, 166);
+            var label = ui.Label(parent, "Album metric label " + stat, UserText.Message("assembly.component.stat." + stat), new Rect(50, y + 2, w - valueWidth - 68, 36), 21);
+            label.resizeTextForBestFit = true; label.resizeTextMinSize = 16; label.resizeTextMaxSize = 21;
+            var number = ui.Label(parent, "Album metric value " + stat, value, new Rect(w - valueWidth - 16, y + 2, valueWidth, 36), 25);
+            number.alignment = TextAnchor.MiddleRight; number.resizeTextForBestFit = true; number.resizeTextMinSize = 17; number.resizeTextMaxSize = 25;
+            var rule = WorkshopUi.Graphic<Image>(parent, "Album metric rule " + stat, new Rect(16, y + 39, w - 32, 1)); rule.color = new Color(.12f, .28f, .52f, .35f);
+        }
+
+        static void AlbumIcon(Transform parent, string name, string id, Rect bounds)
+        {
+            var image = WorkshopUi.Graphic<Image>(parent, name, bounds);
+            if (NotebookSpriteCatalog.TryGet(id, out var sprite)) image.sprite = sprite; else image.enabled = false;
+            image.preserveAspect = true;
+            image.rectTransform.pivot = new Vector2(.5f, .5f);
+            image.rectTransform.anchoredPosition = new Vector2(bounds.center.x, -bounds.center.y);
         }
 
         void DrawEntry(Transform parent, AlbumEntry entry, Rect bounds)

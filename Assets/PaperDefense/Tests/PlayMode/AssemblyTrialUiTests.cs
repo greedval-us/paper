@@ -49,6 +49,8 @@ namespace PaperDefense.Tests
             Canvas.ForceUpdateCanvases();
         }
         Text Text(string name) => panel.Root.GetComponentsInChildren<Text>(true).SingleOrDefault(text => text.name == name);
+        Text[] MeasuredCells(bool comparison = false) => panel.Root.GetComponentsInChildren<Text>()
+            .Where(text => text.name.StartsWith(comparison ? "Composite trial measured comparison row " : "Composite trial measured row ") && text.name.EndsWith(" value")).ToArray();
         TrialLaneSketch Lane => panel.Root.GetComponentInChildren<TrialLaneSketch>();
         object Report
         {
@@ -85,7 +87,8 @@ namespace PaperDefense.Tests
             foreach (string condition in new[] { "Scenario", "Budget", "Seed" })
                 Assert.That(Value(comparison, condition), Is.EqualTo(Value(Report, condition)), condition);
             Assert.That(panel.Root.GetComponentsInChildren<TrialLaneSketch>().Count(), Is.EqualTo(2));
-            Assert.That(Text("Composite trial comparison measured result").text, Does.Contain("Измеренный"));
+            Assert.That(Text("Composite trial measured row 0 label").text, Does.Contain("Измеренный"));
+            Assert.That(MeasuredCells(true)[0].text, Is.EqualTo(panel.LastAssemblyTrialComparison.Damage.Value.ToString("0.##")));
             Assert.That(fixture.State(), Is.EqualTo(before));
             Assert.That(fixture.Store.SaveCalls, Is.EqualTo(writes));
         }
@@ -95,16 +98,29 @@ namespace PaperDefense.Tests
         {
             Open(fixture.Gun()); Click("Composite trial scenario Blots");
             if (!comparing)
-                for (int i = 0; i < 20 && Text("Composite trial comparison measured result") != null; i++)
+                for (int i = 0; i < 20 && Text("Composite trial comparison entry name") != null; i++)
                     Click("Composite trial compare");
-            Assert.That(Text("Composite trial comparison measured result") != null, Is.EqualTo(comparing));
+            Assert.That(Text("Composite trial comparison entry name") != null, Is.EqualTo(comparing));
             Click("Composite trial run");
-            foreach (var label in panel.Root.GetComponentsInChildren<Text>().Where(value =>
-                value.name == "Composite trial measured result" || value.name == "Composite trial comparison measured result"))
+            var labels = panel.Root.GetComponentsInChildren<Text>().Where(value => value.name.StartsWith("Composite trial measured row ") && value.name.EndsWith(" label")).ToArray();
+            Assert.That(labels.Length, Is.EqualTo(6));
+            Assert.That(MeasuredCells().Length, Is.EqualTo(6));
+            Assert.That(MeasuredCells(true).Length, Is.EqualTo(comparing ? 6 : 0));
+            Assert.That(labels.Last().text, Does.Contain("Длительность"));
+            Assert.That(MeasuredCells().Last().text, Does.Contain(panel.LastAssemblyTrial.DurationSeconds.ToString("0.##")));
+            if (comparing) Assert.That(MeasuredCells(true).Last().text, Does.Contain(panel.LastAssemblyTrialComparison.DurationSeconds.ToString("0.##")));
+            foreach (var label in labels.Concat(MeasuredCells()).Concat(MeasuredCells(true)))
             {
-                Assert.That(label.text.Split('\n').Length, Is.EqualTo(6));
                 Assert.That(label.cachedTextGenerator.characterCountVisible, Is.EqualTo(label.text.Length),
                     label.name + ": the report must render its final measurement, including duration.");
+                var table = (RectTransform)label.transform.parent;
+                var corners = new Vector3[4]; label.rectTransform.GetWorldCorners(corners);
+                foreach (var corner in corners)
+                {
+                    Vector2 local = table.InverseTransformPoint(corner);
+                    Assert.That(local.x, Is.InRange(table.rect.xMin - .01f, table.rect.xMax + .01f));
+                    Assert.That(local.y, Is.InRange(table.rect.yMin - .01f, table.rect.yMax + .01f));
+                }
             }
         }
 
@@ -149,7 +165,8 @@ namespace PaperDefense.Tests
             Assert.That(Lane.HasRecording, Is.False);
             Assert.That(Button("Composite trial run").IsInteractable(), Is.True);
             Assert.That(Button("Composite trial pause").IsInteractable(), Is.False);
-            Assert.That(Text("Composite trial measured result").text, Does.Not.Match(@"[0-9]"));
+            Assert.That(Text("Composite trial measured hint").text, Does.Not.Match(@"[0-9]"));
+            Assert.That(MeasuredCells(), Is.Empty, "Unstarted trials cannot publish measured cells.");
         }
 
         static Vector2 Center(StructureView structure) => new Vector2(structure.Cell.X + .5f, structure.Cell.Y + .5f);
@@ -420,7 +437,7 @@ namespace PaperDefense.Tests
             Open(Support(family)); Click("Composite trial run");
             Assert.That(Value(Report, metric), Is.GreaterThan(0));
             Assert.That(Value(Report, "Damage"), Is.Null);
-            Assert.That(Text("Composite trial measured result").text, Does.Not.Contain("DPS"));
+            Assert.That(panel.Root.GetComponentsInChildren<Text>().Where(label => label.name.StartsWith("Composite trial measured row ")).Any(label => label.text.Contains("DPS")), Is.False);
             Assert.That(Text("Composite trial conditions").text, Does.Contain("400").And.Contain("1337"));
         }
 
@@ -469,7 +486,7 @@ namespace PaperDefense.Tests
             Assert.That(Value(Report, "Scenario").ToString(), Is.EqualTo("Blots"));
             Assert.That(Value(Report, "BlotsCleared"), Is.EqualTo(0), "A gun does not clean blots.");
             Assert.That(Value(Report, "UnresolvedBlots"), Is.GreaterThan(0));
-            Assert.That(Text("Composite trial measured result").text, Does.Not.Contain("DPS"));
+            Assert.That(panel.Root.GetComponentsInChildren<Text>().Where(label => label.name.StartsWith("Composite trial measured row ")).Any(label => label.text.Contains("DPS")), Is.False);
         }
 
         [TestCase("invalid")] [TestCase("locked")] [TestCase("overload")] [TestCase("clearance")]

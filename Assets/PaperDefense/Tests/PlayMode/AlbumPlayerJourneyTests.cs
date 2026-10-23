@@ -83,7 +83,8 @@ namespace PaperDefense.Tests
             for (int i = 0; i < 8; i++) yield return CompleteWave();
             Assert.That(game.Page, Is.EqualTo(PlayerPage.Result));
             Assert.That(session.Statistics.Upgrades.Count, Is.EqualTo(3));
-            Assert.That(Text("Result reward totals").text, Does.Contain("94").And.Contain("120"));
+            Assert.That(Text("Result gold reward").text, Does.Contain("94"));
+            Assert.That(Text("Result XP reward").text, Does.Contain("120"));
             Assert.That(Text("Result reward status").text, Does.Contain("сохранена"));
             Assert.That(Text("Result progress").text, Does.Contain("2").And.Contain("120"));
             Click("Result home"); Assert.That(game.Page, Is.EqualTo(PlayerPage.Home));
@@ -99,7 +100,8 @@ namespace PaperDefense.Tests
             game.Run.NextWave(); KillObjective(); yield return null;
             Assert.That(game.Page, Is.EqualTo(PlayerPage.Result)); Assert.That(game.Run.Session.Phase, Is.EqualTo(RunPhase.Defeat));
             Assert.That(Text("Result completed waves").text, Does.Contain("5").And.Contain("8"));
-            Assert.That(Text("Result reward totals").text, Does.Contain("40").And.Contain("50"));
+            Assert.That(Text("Result gold reward").text, Does.Contain("40"));
+            Assert.That(Text("Result XP reward").text, Does.Contain("50"));
             Assert.That(Text("Result defeat wave").text, Does.Contain("6"));
             Click("Result album"); Assert.That(game.Page, Is.EqualTo(PlayerPage.Album));
             Assert.That(game.Run.InWorkshop, Is.True); Assert.That(game.Run.Workshop.Gold, Is.EqualTo(40));
@@ -115,7 +117,8 @@ namespace PaperDefense.Tests
             KillObjective(); yield return null;
             Assert.That(Text("Result lost towers").text, Does.EndWith("2"));
             Assert.That(Text("Result lost supports").text, Does.EndWith("2"));
-            Assert.That(Text("Result reward totals").text.Split('\n'), Has.Length.EqualTo(2));
+            Assert.That(Text("Result gold reward").isActiveAndEnabled, Is.True);
+            Assert.That(Text("Result XP reward").isActiveAndEnabled, Is.True);
             var rubble = root.GetComponentsInChildren<Image>().Single(image => image.name == "Defeat castle rubble illustration");
             Assert.That(rubble.sprite, Is.Not.Null); Assert.That(rubble.sprite.name, Is.EqualTo("DefeatCastleRubble"));
             for (int i = 0; i < 35; i++)
@@ -155,6 +158,24 @@ namespace PaperDefense.Tests
             var receipt = fixture.SavedData.Rewards.Single(); Assert.That(receipt.Waves, Is.EqualTo(5)); Assert.That(receipt.VictoryBonus, Is.False);
         }
 
+        [UnityTest] public IEnumerator ExitConfirmationHidesPauseAndCancelRestoresItWithoutResuming()
+        {
+            Assert.That(game.StartBattle(), Is.True); game.Pause();
+            var session = game.Run.Session; long tick = session.TickIndex;
+            var pause = root.GetComponentsInChildren<CanvasGroup>().Single(group => group.name == "Pause presentation");
+            Submit("Leave battle");
+            Assert.That(pause.alpha, Is.Zero);
+            Assert.That(Button("Resume").IsInteractable(), Is.False);
+            Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(Button("Cancel confirmation").gameObject));
+            Assert.That(Button("Cancel confirmation").targetGraphic.color, Is.EqualTo(PlayerUi.Blue));
+            Submit("Close confirmation");
+            Assert.That(shell.HasConfirmation, Is.False); Assert.That(pause.alpha, Is.EqualTo(1));
+            Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(Button("Leave battle").gameObject));
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Pause)); Assert.That(game.Run.Paused, Is.True);
+            Assert.That(game.Run.Session, Is.SameAs(session)); Assert.That(session.TickIndex, Is.EqualTo(tick));
+            yield return null;
+        }
+
         [UnityTest] public IEnumerator PendingResultCanRetrySavingWithoutDuplicatingRewardsOrRebuildingTheAttempt()
         {
             fixture.Preset.rules.Waves[5].Count = 0;
@@ -162,7 +183,8 @@ namespace PaperDefense.Tests
             fixture.Store.RefuseWrites = true;
             for (int i = 0; i < 8; i++) yield return CompleteWave();
             Assert.That(game.Page, Is.EqualTo(PlayerPage.Result)); Assert.That(game.Run.HasPendingRunRewards, Is.True);
-            Assert.That(Text("Result reward totals").text, Does.Contain("94").And.Contain("120"));
+            Assert.That(Text("Result gold reward").text, Does.Contain("94"));
+            Assert.That(Text("Result XP reward").text, Does.Contain("120"));
             Assert.That(Text("Result reward status").text, Does.Not.Contain("Награда сохранена"));
             Assert.That(Button("Result retry save").IsInteractable(), Is.True); var session = game.Run.Session;
             int writes = fixture.Store.SaveCalls;

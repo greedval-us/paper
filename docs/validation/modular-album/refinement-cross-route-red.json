@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "10ff05ab304a4ca8a7e8f18d5955ca9b",
+    "status": "failed",
+    "mode": "PlayMode",
+    "started_unix_ms": 1792711388089,
+    "finished_unix_ms": 1792711397247,
+    "last_update_unix_ms": 1792711397247,
+    "progress": {
+      "completed": 1,
+      "total": 1,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": null,
+      "last_finished_test_full_name": "PaperDefense.Tests.CompositeWorkshopUiTests.FailedSavesRetainTheirOwnRetryIntentAndDismissalWhenSwitchingRoutes",
+      "last_finished_unix_ms": 1792711397225,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "run_in_background": true,
+      "focus_nudge_attempts": null,
+      "focus_nudge_limit": null,
+      "focus_nudge_status": null,
+      "blocked_reason": null,
+      "failures_so_far": [
+        {
+          "full_name": "PaperDefense.Tests.CompositeWorkshopUiTests.FailedSavesRetainTheirOwnRetryIntentAndDismissalWhenSwitchingRoutes",
+          "message": "  The visible retry action must retain the tower's failed Variant command.\r\n  Expected: not equal to \"entry.344cf6af9b8b49de97e4e100b29d6fc2\"\r\n  But was:  \"entry.344cf6af9b8b49de97e4e100b29d6fc2\"\r\n"
+        }
+      ],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "PlayMode",
+      "summary": {
+        "total": 1,
+        "passed": 0,
+        "failed": 1,
+        "skipped": 0,
+        "durationSeconds": 0.8696812,
+        "resultState": "Failed(Child)"
+      },
+      "results": [
+        {
+          "name": "FailedSavesRetainTheirOwnRetryIntentAndDismissalWhenSwitchingRoutes",
+          "fullName": "PaperDefense.Tests.CompositeWorkshopUiTests.FailedSavesRetainTheirOwnRetryIntentAndDismissalWhenSwitchingRoutes",
+          "state": "Failed",
+          "durationSeconds": 0.8287775,
+          "message": "  The visible retry action must retain the tower's failed Variant command.\r\n  Expected: not equal to \"entry.344cf6af9b8b49de97e4e100b29d6fc2\"\r\n  But was:  \"entry.344cf6af9b8b49de97e4e100b29d6fc2\"\r\n",
+          "stackTrace": "at PaperDefense.Tests.CompositeWorkshopUiTests.FailedSavesRetainTheirOwnRetryIntentAndDismissalWhenSwitchingRoutes () [0x00204] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\CompositeWorkshopUiTests.cs:191\r\n",
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

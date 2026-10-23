@@ -114,8 +114,93 @@ namespace PaperDefense.Tests
             Assert.That(panel.Status, Is.Not.Empty);
             Assert.That(JsonUtility.ToJson(new AlbumEntryData(panel.DraftSession.Draft)), Is.EqualTo(before));
             Assert.That(fixture.Run.Workshop.Entries.Count, Is.EqualTo(count));
-            fixture.Store.RefuseWrites = false; Click("Composite save");
+            fixture.Store.RefuseWrites = false; Click("Composite save failure retry");
             Assert.That(fixture.Run.Workshop.Entries.Any(entry => entry.Id == panel.DraftSession.Draft.Id), Is.True);
+        }
+
+        [TestCase(false)] [TestCase(true)]
+        public void DismissingWriteFailureSurvivesReflowAndRetryPreservesTheNamedDraft(bool variant)
+        {
+            ReviewTower();
+            var name = panel.Root.GetComponentsInChildren<InputField>().Single();
+            name.text = "Северный дозор после ошибки"; name.onEndEdit.Invoke(name.text);
+            string originalId = panel.DraftSession.Draft.Id;
+            string recipe = JsonUtility.ToJson(new AlbumEntryData(panel.DraftSession.PreviewEntry));
+            int entries = fixture.Run.Workshop.Entries.Count, gold = fixture.Run.Workshop.Gold;
+            fixture.Store.RefuseWrites = true;
+            Click(variant ? "Composite variant" : "Composite save");
+            var failure = panel.DraftSession.LastResult;
+            Assert.That(failure.Code, Is.EqualTo("profile.write_failed"));
+            Assert.That(panel.Root.Find("Composite save failure overlay"), Is.Not.Null,
+                "A refused write needs a dismissible error sheet over the unchanged recipe review.");
+            Assert.That(panel.Root.GetComponentsInChildren<Text>().Any(label => label.name == "Composite compatibility check"), Is.True);
+            int attempts = fixture.Store.SaveCalls;
+            Click("Composite save failure continue");
+            Assert.That(panel.DraftSession.LastResult, Is.SameAs(failure), "Continue dismisses presentation only.");
+            Assert.That(panel.Root.Find("Composite save failure overlay"), Is.Null);
+            panel.Reflow(1024, 768); panel.Refresh(); Canvas.ForceUpdateCanvases();
+            Assert.That(panel.Root.Find("Composite save failure overlay"), Is.Null, "Reflow must not reopen a dismissed failure.");
+            Assert.That(panel.DraftSession.LastResult, Is.SameAs(failure));
+            Assert.That(panel.DraftSession.Name, Is.EqualTo("Северный дозор после ошибки"));
+            Assert.That(JsonUtility.ToJson(new AlbumEntryData(panel.DraftSession.PreviewEntry)), Is.EqualTo(recipe));
+            Assert.That(panel.DraftSession.Draft.Id, Is.EqualTo(originalId));
+            Assert.That(fixture.Store.SaveCalls, Is.EqualTo(attempts), "Dismiss and reflow cannot retry or write.");
+            Assert.That(fixture.Run.Workshop.Entries.Count, Is.EqualTo(entries));
+            Assert.That(fixture.Run.Workshop.Gold, Is.EqualTo(gold));
+            Click(variant ? "Composite variant" : "Composite save");
+            Assert.That(panel.Root.Find("Composite save failure overlay"), Is.Not.Null, "A new refused attempt can show its error.");
+            fixture.Store.RefuseWrites = false;
+            Click("Composite save failure retry");
+            Assert.That(panel.DraftSession.LastResult.Success, Is.True);
+            Assert.That(panel.Root.Find("Composite save failure overlay"), Is.Null);
+            Assert.That(fixture.Run.Workshop.Entries.Count, Is.EqualTo(entries + 1));
+            Assert.That(panel.DraftSession.Name, Is.EqualTo("Северный дозор после ошибки"));
+            Assert.That(panel.DraftSession.Draft.Id == originalId, Is.EqualTo(!variant), "Retry retains the failed save versus variant command.");
+            Assert.That(panel.Step, Is.EqualTo(2));
+            Assert.That(fixture.Run.Workshop.Gold, Is.EqualTo(gold));
+        }
+
+        [Test] public void FailedSavesRetainTheirOwnRetryIntentAndDismissalWhenSwitchingRoutes()
+        {
+            ReviewTower();
+            panel.DraftSession.Rename("Вариант северной башни"); panel.Refresh();
+            var towerSession = panel.DraftSession;
+            string towerId = towerSession.Draft.Id;
+            int entries = fixture.Run.Workshop.Entries.Count, gold = fixture.Run.Workshop.Gold;
+            fixture.Store.RefuseWrites = true;
+            Click("Composite variant"); var towerFailure = towerSession.LastResult;
+            Assert.That(towerFailure.Code, Is.EqualTo("profile.write_failed"));
+            Click("Composite save failure continue");
+
+            Click("Composite route structure"); ReviewTower();
+            panel.DraftSession.Rename("Сохранение южного поста"); panel.Refresh();
+            var structureSession = panel.DraftSession;
+            string structureId = structureSession.Draft.Id;
+            Assert.That(structureSession.CanSave, Is.True, panel.Status);
+            Click("Composite save"); var structureFailure = structureSession.LastResult;
+            Assert.That(structureFailure.Code, Is.EqualTo("profile.write_failed"));
+            Click("Composite save failure continue");
+
+            Click("Composite route tower"); panel.Reflow(1024, 768);
+            Assert.That(panel.DraftSession, Is.SameAs(towerSession));
+            Assert.That(panel.DraftSession.LastResult, Is.SameAs(towerFailure));
+            Assert.That(panel.Root.Find("Composite save failure overlay"), Is.Null, "Tower Continue remains dismissed after another route fails.");
+            fixture.Store.RefuseWrites = false;
+            Click("Composite save");
+            Assert.That(towerSession.LastResult.Success, Is.True);
+            Assert.That(towerSession.Draft.Id, Is.Not.EqualTo(towerId), "The visible retry action must retain the tower's failed Variant command.");
+            Assert.That(towerSession.Name, Is.EqualTo("Вариант северной башни"));
+
+            Click("Composite route structure"); panel.Reflow(1280, 720);
+            Assert.That(panel.DraftSession, Is.SameAs(structureSession));
+            Assert.That(panel.DraftSession.LastResult, Is.SameAs(structureFailure));
+            Assert.That(panel.Root.Find("Composite save failure overlay"), Is.Null, "Structure Continue remains dismissed after the tower retry succeeds.");
+            Click("Composite save");
+            Assert.That(structureSession.LastResult.Success, Is.True);
+            Assert.That(structureSession.Draft.Id, Is.EqualTo(structureId), "The structure retains its own normal Save command.");
+            Assert.That(structureSession.Name, Is.EqualTo("Сохранение южного поста"));
+            Assert.That(fixture.Run.Workshop.Entries.Count, Is.EqualTo(entries + 2));
+            Assert.That(fixture.Run.Workshop.Gold, Is.EqualTo(gold));
         }
 
         [Test] public void HistoricalPageIsReadOnlyAndNewRecipeActionRemainsAvailable()

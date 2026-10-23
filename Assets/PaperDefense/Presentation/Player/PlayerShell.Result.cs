@@ -9,7 +9,8 @@ namespace PaperDefense.Presentation
 {
     public sealed partial class PlayerShell
     {
-        Text resultRewardTotals, resultCompletedWaves, resultRewardStatus, resultReceipt, resultProgress, resultXpCaption, resultDefeatWave;
+        Text resultGoldReward, resultXpReward, resultCompletedWaves, resultRewardStatus, resultReceipt, resultProgress, resultXpCaption, resultDefeatWave;
+        PlayerIconGraphic resultSavedMark;
         Image resultXpFill;
         Rect resultXpTrack;
         Button resultRetrySave, resultHome;
@@ -17,8 +18,9 @@ namespace PaperDefense.Presentation
 
         void ResetAlbumResult()
         {
-            resultRewardTotals = resultCompletedWaves = resultRewardStatus = resultReceipt = resultProgress = null;
+            resultGoldReward = resultXpReward = resultCompletedWaves = resultRewardStatus = resultReceipt = resultProgress = null;
             resultXpCaption = resultDefeatWave = null; resultXpFill = null;
+            resultSavedMark = null;
             resultRetrySave = resultHome = null;
         }
 
@@ -26,11 +28,8 @@ namespace PaperDefense.Presentation
         {
             bool victory = game.Run.Session.Phase == RunPhase.Victory;
             NotebookPageBackdrop("Art/Player/FoundationPageDecor", "Result landscape border");
-            if (!victory)
-            {
-                var border = page.Find("Result landscape border")?.GetComponent<Image>();
-                if (border != null) border.color = new Color(1, 1, 1, .22f);
-            }
+            var border = page.Find("Result landscape border")?.GetComponent<Image>();
+            if (border != null) border.color = new Color(1, 1, 1, victory ? .32f : .16f);
             float scale = Mathf.Min(W / 1600f, H / 900f);
             var composition = ui.Panel(page, "Result composition", new Rect((W - 1600 * scale) * .5f,
                 (H - 900 * scale) * .5f, 1600 * scale, 900 * scale), Color.clear);
@@ -40,7 +39,8 @@ namespace PaperDefense.Presentation
             if (!victory) ui.Panel(composition, "Defeat results sheet", R(1006, 70, 528, 756), PlayerUi.Card);
 
             var banner = ui.Panel(composition, "Result title ribbon", victory ? R(365, 4, 870, 118) : R(140, 62, 810, 150), Color.clear);
-            ResultEmblem(banner, NotebookResultEmblem.Ribbon, victory ? R(0, 0, 870, 118) : R(0, 0, 810, 150));
+            ResultEmblem(banner, victory ? NotebookResultEmblem.Ribbon : NotebookResultEmblem.TornRibbon,
+                victory ? R(0, 0, 870, 118) : R(0, 0, 810, 150));
             if (victory)
             {
                 ResultEmblem(composition, NotebookResultEmblem.Laurel, R(306, 31, 62, 100));
@@ -56,17 +56,23 @@ namespace PaperDefense.Presentation
             var rewards = ui.Panel(composition, "Result reward sheet", victory ? R(390, 156, 820, 80) : R(1026, 90, 488, 276), PlayerUi.Card);
             resultCompletedWaves = NotebookLabel(rewards, "", victory ? R(18, 8, 268, 58) : R(20, 8, 448, 44), F(28));
             resultCompletedWaves.name = "Result completed waves";
-            resultRewardTotals = NotebookLabel(rewards, "", victory ? R(286, 4, 510, 64) : R(76, 100, 392, 114),
-                F(victory ? 35 : 38), alignment: victory ? TextAnchor.MiddleCenter : TextAnchor.MiddleLeft);
-            resultRewardTotals.name = "Result reward totals";
+            resultGoldReward = NotebookLabel(rewards, "", victory ? R(332, 4, 212, 68) : R(76, 100, 392, 54),
+                F(victory ? 31 : 38));
+            resultGoldReward.name = "Result gold reward";
+            resultXpReward = NotebookLabel(rewards, "", victory ? R(608, 4, 202, 68) : R(76, 158, 392, 54),
+                F(victory ? 31 : 38));
+            resultXpReward.name = "Result XP reward";
             if (victory)
             {
                 ResultAtlasIcon(rewards, "icon.flag", R(12, 9, 44, 60));
                 PlayerUi.Place(resultCompletedWaves.rectTransform, R(62, 4, 214, 68));
                 ResultEmblem(rewards, NotebookResultEmblem.Coin, R(278, 18, 42, 46));
-                PlayerUi.Place(resultRewardTotals.rectTransform, R(332, 4, 430, 64));
-                resultRewardTotals.resizeTextMaxSize = F(31);
-                var star = ResultEmblem(rewards, NotebookResultEmblem.XpStar, R(770, 20, 38, 42));
+                foreach (float dividerX in new[] { 264f, 548f })
+                {
+                    var divider = PlayerUi.Graphic<Image>(rewards, "Reward column divider", R(dividerX, 14, 1, 52));
+                    divider.color = new Color(PlayerUi.Blue.r, PlayerUi.Blue.g, PlayerUi.Blue.b, .42f);
+                }
+                var star = ResultEmblem(rewards, NotebookResultEmblem.XpStar, R(558, 20, 38, 42));
                 NotebookLabel(star.transform, "XP", R(3, 5, 32, 32), F(15), Color.white, TextAnchor.MiddleCenter);
             }
             else
@@ -81,28 +87,33 @@ namespace PaperDefense.Presentation
             if (victory)
             {
                 var breakdown = ui.Panel(composition, "Result reward breakdown", R(350, 244, 900, 48), PlayerUi.Card);
-                NotebookLabel(breakdown, JourneyCopy("result.breakdown", totals.WaveGold, totals.WaveXp, totals.VictoryGold, totals.VictoryXp),
-                    R(16, 0, 868, 48), F(23), PlayerUi.Ink, TextAnchor.MiddleCenter);
+                string[] sources = JourneyCopy("result.breakdown", totals.WaveGold, totals.WaveXp, totals.VictoryGold, totals.VictoryXp)
+                    .Split(new[] { "    " }, System.StringSplitOptions.None);
+                for (int source = 0; source < sources.Length; source++)
+                    NotebookLabel(breakdown, sources[source], R(14 + source * 450, 0, 422, 48), F(23), PlayerUi.Ink, TextAnchor.MiddleCenter);
+                var divider = PlayerUi.Graphic<Image>(breakdown, "Reward source divider", R(450, 10, 1, 28));
+                divider.color = new Color(PlayerUi.Blue.r, PlayerUi.Blue.g, PlayerUi.Blue.b, .42f);
             }
             var progressSheet = ui.Panel(victory ? composition : rewards, "Result progress sheet", victory ? R(350, 292, 900, 76) : R(14, 238, 460, 30), victory ? PlayerUi.Card : Color.clear);
-            resultProgress = NotebookLabel(progressSheet, "", victory ? R(20, 0, 860, 34) : R(6, 0, 448, 30),
+            resultProgress = NotebookLabel(progressSheet, "", victory ? R(62, 8, 306, 56) : R(6, 0, 448, 30),
                 F(victory ? 27 : 23), alignment: TextAnchor.MiddleCenter);
             resultProgress.name = "Result progress";
             if (victory)
             {
-                ResultAtlasIcon(progressSheet, "icon.shield", R(20, 36, 34, 30));
-                resultXpCaption = NotebookLabel(progressSheet, "", R(62, 34, 240, 32), F(21));
+                ResultAtlasIcon(progressSheet, "icon.shield", R(20, 21, 34, 34));
+                resultXpCaption = NotebookLabel(progressSheet, "", R(392, 3, 470, 30), F(21), alignment: TextAnchor.MiddleCenter);
                 resultXpCaption.name = "Result XP interval";
-                var track = ui.Panel(progressSheet, "Result XP track", R(316, 41, 550, 21), PlayerUi.Paper);
-                resultXpTrack = new Rect(3 * scale, 3 * scale, 544 * scale, 15 * scale);
+                var track = ui.Panel(progressSheet, "Result XP track", R(386, 43, 480, 20), PlayerUi.Paper);
+                resultXpTrack = new Rect(3 * scale, 3 * scale, 474 * scale, 14 * scale);
                 resultXpFill = PlayerUi.Graphic<Image>(track, "Result XP progress", resultXpTrack);
                 resultXpFill.color = NotebookPalette.Blue;
             }
             bool pendingSave = game.Run.HasPendingRunRewards || game.Run.Workshop.HasUnsavedChanges;
             float reportWidth = victory ? pendingSave ? 900 : 600 : 488, reportHeight = victory ? 210 : 208;
             var report = ui.Panel(composition, "Result mission report", victory ? R((1600 - reportWidth) * .5f, 594, reportWidth, reportHeight) : R(1026, 378, reportWidth, reportHeight), PlayerUi.Card);
-            NotebookAction(report, "Result statistics", R(16, victory ? 90 : 4, reportWidth - 32, 44), PlayerIcon.Book,
+            var statisticsButton = NotebookAction(report, "Result statistics", R(16, victory ? 90 : 4, reportWidth - 32, 44), PlayerIcon.Book,
                 "Статистика миссии", OpenAlbumResultStatistics);
+            NotebookControlIcon(statisticsButton, "icon.help");
             var stats = game.Run.Session.Statistics;
             string reportCopy = ui.T("result_stats_left", stats.BuildInvestment + stats.UpgradeInvestment, stats.RefundedInk,
                 stats.LostInvestment, stats.PeakAliveEnemies);
@@ -112,7 +123,11 @@ namespace PaperDefense.Presentation
                 for (int metric = 0; metric < 3 && metric < financialRows.Length; metric++)
                 {
                     ResultAtlasIcon(report, "icon.pencil", R(17, 4 + metric * 27, 27, 27));
-                    NotebookLabel(report, financialRows[metric], R(52, 4 + metric * 27, reportWidth - 70, 27), F(23), PlayerUi.Ink);
+                    int separator = financialRows[metric].LastIndexOf('·');
+                    string caption = separator < 0 ? financialRows[metric] : financialRows[metric].Substring(0, separator).Trim();
+                    string value = separator < 0 ? "" : financialRows[metric].Substring(separator + 1).Trim();
+                    NotebookLabel(report, caption, R(52, 4 + metric * 27, reportWidth - 220, 27), F(23), PlayerUi.Ink);
+                    NotebookLabel(report, value, R(reportWidth - 160, 4 + metric * 27, 138, 27), F(25), PlayerUi.Ink, TextAnchor.MiddleRight);
                     var rule = PlayerUi.Graphic<Image>(report, "Financial ink rule", R(16, 30 + metric * 27, reportWidth - 32, 1));
                     rule.color = new Color(.12f, .28f, .52f, .28f);
                 }
@@ -123,14 +138,25 @@ namespace PaperDefense.Presentation
                 int lostTowers = stats.Breaches.Count(loss => loss.Kind == StructureKind.Gun || loss.Kind == StructureKind.Piercer ||
                     loss.Kind == StructureKind.Mortar || loss.Kind == StructureKind.Fan || loss.Kind == StructureKind.Ricochet ||
                     loss.Kind == StructureKind.Stapler || loss.Kind == StructureKind.Blotter);
-                NotebookLabel(report, completeHistory ? "Потеряно башен · " + lostTowers : "Потеряно построек · " + stats.DestroyedStructures,
-                    R(18, 54, reportWidth - 36, 32), F(24)).name = completeHistory ? "Result lost towers" : "Result total losses";
-                NotebookLabel(report, completeHistory ? "Потеряно сооружений · " + (stats.DestroyedStructures - lostTowers) : "Утрачено штрихов · " + stats.LostInvestment,
-                    R(18, 90, reportWidth - 36, 32), F(24)).name = completeHistory ? "Result lost supports" : "Result lost investment";
+                string[] lossLabels = { completeHistory ? "Потеряно башен" : "Потеряно построек", completeHistory ? "Потеряно сооружений" : "Утрачено штрихов" };
+                int[] lossValues = { completeHistory ? lostTowers : stats.DestroyedStructures, completeHistory ? stats.DestroyedStructures - lostTowers : stats.LostInvestment };
+                for (int loss = 0; loss < lossLabels.Length; loss++)
+                {
+                    float lossY = 54 + loss * 36;
+                    ui.Art(report, loss == 0 ? "object.castle" : "ui.tool.wall", R(18, lossY, 32, 32));
+                    NotebookLabel(report, lossLabels[loss], R(62, lossY, reportWidth - 148, 32), F(24));
+                    var value = NotebookLabel(report, lossValues[loss].ToString(), R(reportWidth - 78, lossY, 56, 32), F(28), alignment: TextAnchor.MiddleRight);
+                    value.name = loss == 0 ? completeHistory ? "Result lost towers" : "Result total losses" : completeHistory ? "Result lost supports" : "Result lost investment";
+                    var line = PlayerUi.Graphic<Image>(report, "Loss row divider", R(18, lossY + 33, reportWidth - 36, 1));
+                    line.color = new Color(PlayerUi.Blue.r, PlayerUi.Blue.g, PlayerUi.Blue.b, .30f);
+                }
             }
             float statusTop = victory ? 136 : reportHeight - 80, statusHeight = victory ? 40 : 48;
             resultRewardStatus = NotebookLabel(report, "", R(18, statusTop, reportWidth - 36, statusHeight), F(20), alignment: TextAnchor.MiddleCenter);
             resultRewardStatus.name = "Result reward status";
+            resultSavedMark = PlayerUi.Graphic<PlayerIconGraphic>(report, "Result saved confirmation", R(20, statusTop + 5, 28, 28));
+            resultSavedMark.Icon = PlayerIcon.Check; resultSavedMark.Sketch = true;
+            resultSavedMark.color = new Color32(32, 103, 60, 255);
             resultStatusFullBounds = R(18, statusTop, reportWidth - 36, statusHeight);
             float saveWidth = victory ? 320 : 210;
             resultStatusRetryBounds = R(18, statusTop, reportWidth - saveWidth - 54, statusHeight);
@@ -159,18 +185,18 @@ namespace PaperDefense.Presentation
             void Scenery(string id, Rect bounds)
             {
                 var art = ui.Art(parent, id, bounds);
-                if (!victory) art.color = new Color(1, 1, 1, .22f);
+                art.color = new Color(1, 1, 1, victory ? .40f : .16f);
             }
             for (int side = 0; side < 2; side++)
             {
                 float edge = side == 0 ? -34 : 1320;
-                Scenery("terrain.mountain", R(edge - 34, 40, 390, 240));
-                Scenery("terrain.ridge", R(edge + (side == 0 ? 182 : -220), 152, 310, 154));
-                for (int tree = 0; tree < 8; tree++)
+                Scenery("terrain.mountain", R(edge - 34, 40, 330, 174));
+                Scenery("terrain.ridge", R(edge + (side == 0 ? 182 : -220), 146, 270, 112));
+                for (int tree = 0; tree < 5; tree++)
                 {
-                    float treeWidth = 74 + tree % 3 * 22;
+                    float treeWidth = 64 + tree % 3 * 18;
                     float x = side == 0 ? 6 + tree % 3 * 82 : 1510 - tree % 3 * 78;
-                    float y = 224 + tree * 73;
+                    float y = 254 + tree * 116;
                     Scenery("terrain.pine", R(x, y, treeWidth, treeWidth * 1.5f));
                     Scenery("terrain.shrub", R(x + 30, y + treeWidth * 1.1f, 100, 58));
                     if (tree % 2 == 1) Scenery("terrain.rock", R(x - 20, y + treeWidth * 1.1f, 100, 72));
@@ -178,6 +204,7 @@ namespace PaperDefense.Presentation
             }
             if (victory)
             {
+                ResultEmblem(parent, NotebookResultEmblem.Courtyard, R(300, 474, 1000, 136));
                 var frozen = game.Run.RunLoadout?.Entries.Where(entry => entry != null).ToArray() ?? System.Array.Empty<AlbumEntry>();
                 var towers = frozen.Where(entry => entry.Kind == AlbumEntryKind.Tower || entry.Kind == AlbumEntryKind.Legacy).Take(4).ToArray();
                 Rect[] towerBounds = { R(326, 432, 232, 158), R(468, 374, 238, 170), R(1042, 432, 232, 158), R(894, 374, 238, 170) };
@@ -238,7 +265,7 @@ namespace PaperDefense.Presentation
 
         void RefreshAlbumResult()
         {
-            if (resultRewardTotals == null || game.Page != PlayerPage.Result) return;
+            if (resultGoldReward == null || game.Page != PlayerPage.Result) return;
             var session = game.Run.Session;
             bool victory = session.Phase == RunPhase.Victory;
             var totals = RunRewardTotals.Calculate(session.CompletedWaves, victory);
@@ -246,8 +273,10 @@ namespace PaperDefense.Presentation
             bool saved = receipt != null && receipt.Waves >= session.CompletedWaves && (!victory || receipt.VictoryBonus);
             resultCompletedWaves.text = victory ? "Волны\n" + session.CompletedWaves + " / " + session.Balance.Waves.Count
                 : JourneyCopy("result.waves", session.CompletedWaves, session.Balance.Waves.Count);
-            resultRewardTotals.text = JourneyCopy("result.totals", totals.Gold, totals.TotalXp);
-            if (!victory) resultRewardTotals.text = resultRewardTotals.text.Replace("    ", "\n");
+            string[] rewardColumns = JourneyCopy("result.totals", totals.Gold, totals.TotalXp)
+                .Split(new[] { "    " }, System.StringSplitOptions.None);
+            resultGoldReward.text = rewardColumns[0];
+            resultXpReward.text = rewardColumns.Length > 1 ? rewardColumns[1] : "";
             if (resultDefeatWave != null) resultDefeatWave.text = session.WaveIndex > 0
                 ? "Поражение на волне " + session.WaveIndex : "Поражение до первой волны";
             resultProgress.text = ProgressCopy();
@@ -264,6 +293,7 @@ namespace PaperDefense.Presentation
                 ? game.Run.Workshop.SaveState == ProfileSaveState.MemoryOnly ? GameText.Resolve(game.Run.Workshop.SaveMessage) : JourneyCopy("result.saved")
                 : JourneyCopy("result.pending");
             resultRewardStatus.color = saved ? new Color32(32, 103, 60, 255) : PlayerUi.Ink;
+            resultSavedMark.enabled = saved && game.Run.Workshop.SaveState != ProfileSaveState.MemoryOnly && session.CompletedWaves > 0;
             resultReceipt.text = receipt != null ? JourneyCopy("result.receipt", receipt.Gold, receipt.TotalXp) : "";
             bool retry = game.Run.HasPendingRunRewards || game.Run.Workshop.HasUnsavedChanges;
             PlayerUi.Place(resultRewardStatus.rectTransform, retry ? resultStatusRetryBounds : resultStatusFullBounds);
@@ -302,7 +332,7 @@ namespace PaperDefense.Presentation
         }
     }
 
-    public enum NotebookResultEmblem { Ribbon, Coin, XpStar, Laurel }
+    public enum NotebookResultEmblem { Ribbon, Coin, XpStar, Laurel, TornRibbon, Courtyard }
 
     /// <summary>Small pen ornaments around live result labels; no reward text is baked into artwork.</summary>
     public sealed class NotebookResultEmblemGraphic : MaskableGraphic
@@ -329,7 +359,27 @@ namespace PaperDefense.Presentation
                     pen.Triangle(center, a, b, fill); pen.Line(a, b, stroke, ink);
                 }
             }
-            if (Kind == NotebookResultEmblem.Ribbon)
+            if (Kind == NotebookResultEmblem.Courtyard)
+            {
+                Color ground = new Color(ink.r, ink.g, ink.b, .22f);
+                pen.Ring(Vector2.zero, bounds.width * .48f, stroke, ground, 64, bounds.height / bounds.width * .86f, dashed: true);
+                for (int hatch = 0; hatch < 14; hatch++)
+                {
+                    float x = .10f + hatch * .06f;
+                    pen.Line(P(x, .72f), P(x + .02f, .78f), stroke, ground);
+                }
+            }
+            else if (Kind == NotebookResultEmblem.TornRibbon)
+            {
+                Polygon(new[] { P(.04f, .22f), P(.20f, .10f), P(.48f, .06f), P(.74f, .10f), P(.95f, .20f),
+                    P(.91f, .31f), P(.96f, .35f), P(.92f, .47f), P(.94f, .74f), P(.76f, .82f),
+                    P(.49f, .84f), P(.22f, .91f), P(.06f, .96f), P(.09f, .78f), P(.035f, .81f), P(.07f, .59f) }, paper);
+                Line(.05f, .16f, .13f, .28f); Line(.06f, .31f, .14f, .20f);
+                Line(.88f, .16f, .97f, .24f); Line(.90f, .84f, .98f, .88f);
+                for (int slash = 0; slash < 5; slash++)
+                    Line(.035f + slash * .012f, .41f, .09f + slash * .012f, .48f);
+            }
+            else if (Kind == NotebookResultEmblem.Ribbon)
             {
                 Polygon(new[] { P(.12f, .28f), P(.01f, .34f), P(.06f, .59f), P(.01f, .89f), P(.17f, .82f) }, paper);
                 Polygon(new[] { P(.88f, .28f), P(.99f, .34f), P(.94f, .59f), P(.99f, .89f), P(.83f, .82f) }, paper);

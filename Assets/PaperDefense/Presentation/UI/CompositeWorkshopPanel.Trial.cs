@@ -17,8 +17,8 @@ namespace PaperDefense.Presentation
         AlbumEntry assemblyTrialSource, assemblyTrialComparisonSource;
         GameObject assemblyTrialOverlay;
         TrialLaneSketch assemblyTrialLane, assemblyTrialComparisonLane;
-        Text assemblyTrialConditions, assemblyTrialQuote, assemblyTrialMeasured;
-        Text assemblyTrialComparisonQuote, assemblyTrialComparisonMeasured;
+        Text assemblyTrialConditions;
+        RectTransform assemblyTrialQuoteRows, assemblyTrialMeasuredRows;
         Text assemblyTrialEmpty;
         Button assemblyTrialPause, assemblyTrialRestart, assemblyTrialView;
         public AssemblyTrialReport LastAssemblyTrial { get; private set; }
@@ -147,12 +147,13 @@ namespace PaperDefense.Presentation
             float fieldHeight = h - 130;
             var field = ui.Panel(sheet, "Composite trial field", new Rect(12, 118, leftWidth, fieldHeight), WorkshopUi.Surface, true);
             field.gameObject.AddComponent<RectMask2D>();
-            WorkshopScenery(field, "Composite trial scenery", new Rect(4, 4, leftWidth - 8, fieldHeight - 8), .85f);
+            TrialPerimeter(field, leftWidth, fieldHeight);
             float laneHeight = comparing ? (fieldHeight - 10) * .5f : fieldHeight;
             var firstViewport = ui.Panel(field, "Composite trial first viewport", new Rect(0, 26, leftWidth, laneHeight - 26), Color.clear);
             firstViewport.gameObject.AddComponent<RectMask2D>();
             assemblyTrialLane = WorkshopUi.Graphic<TrialLaneSketch>(firstViewport, "Composite trial lane", new Rect(0, 0, leftWidth, laneHeight - 26));
             assemblyTrialLane.FrameRecording = true;
+            assemblyTrialLane.QuietGrid = true;
             assemblyTrialLane.CombatFocus = !assemblyTrialOverview;
             if (comparing)
             {
@@ -162,6 +163,7 @@ namespace PaperDefense.Presentation
                 secondViewport.gameObject.AddComponent<RectMask2D>();
                 assemblyTrialComparisonLane = WorkshopUi.Graphic<TrialLaneSketch>(secondViewport, "Composite trial comparison lane", new Rect(0, 0, leftWidth, laneHeight - 26));
                 assemblyTrialComparisonLane.FrameRecording = true;
+                assemblyTrialComparisonLane.QuietGrid = true;
                 assemblyTrialComparisonLane.CombatFocus = !assemblyTrialOverview;
             }
             assemblyTrialView = ui.Button(field, "Composite trial overview", new Rect(leftWidth - 202, 0, 190, 26),
@@ -174,29 +176,21 @@ namespace PaperDefense.Presentation
             float cardHeight = h - 88;
             var card = ui.Panel(sheet, "Composite trial measurements", new Rect(28 + leftWidth, 76, rightWidth, cardHeight), WorkshopUi.Surface, true);
             ui.Label(card, "Composite trial comparison heading", TrialText(comparing ? "comparison_heading" : "comparison"), new Rect(14, 8, rightWidth - 28, 36), 23, true);
-            var quoteRules = WorkshopUi.Graphic<WorkshopMetricRules>(card,"Composite trial quote rules",new Rect(10,96,rightWidth-20,81));
-            quoteRules.Rows=3; quoteRules.DivideColumns=comparing; quoteRules.raycastTarget=false;
-            float columnWidth = comparing ? (rightWidth - 40) * .5f : rightWidth - 28;
-            var name = ui.Label(card, "Composite trial entry name", assemblyTrialSource.Name, new Rect(14, 48, columnWidth, 44), 19, true);
+            float tableWidth = rightWidth - 28, labelWidth = tableWidth * .45f;
+            float columnWidth = (tableWidth - labelWidth - 8) / (comparing ? 2 : 1), firstX = 14 + labelWidth + 8;
+            var name = ui.Label(card, "Composite trial entry name", assemblyTrialSource.Name, new Rect(firstX, 48, columnWidth, 44), 18, true);
             name.resizeTextForBestFit = true; name.resizeTextMinSize = 15; name.resizeTextMaxSize = 19;
-            assemblyTrialQuote = WorkshopMetricText.Create(ui,card, "Composite trial quote", "", new Rect(18, 98, columnWidth-8, 84));
+            name.alignment = TextAnchor.MiddleCenter;
+            assemblyTrialQuoteRows = ui.Panel(card, "Composite trial quote table", new Rect(14, 98, tableWidth, 84), Color.clear);
             if (comparing)
             {
-                var otherName = ui.Label(card, "Composite trial comparison entry name", assemblyTrialComparisonSource.Name, new Rect(26 + columnWidth, 48, columnWidth, 44), 19, true);
+                var otherName = ui.Label(card, "Composite trial comparison entry name", assemblyTrialComparisonSource.Name, new Rect(firstX + columnWidth, 48, columnWidth, 44), 18, true);
                 otherName.resizeTextForBestFit = true; otherName.resizeTextMinSize = 15; otherName.resizeTextMaxSize = 19;
-                assemblyTrialComparisonQuote = WorkshopMetricText.Create(ui,card, "Composite trial comparison quote", "", new Rect(30 + columnWidth, 98, columnWidth-8, 84));
+                otherName.alignment = TextAnchor.MiddleCenter;
             }
             var theory = ui.Label(card, "Composite trial theory", AssemblyTrialTheory(), new Rect(14, 188, rightWidth - 28, 56), 17, color: WorkshopUi.Muted);
             theory.alignment = TextAnchor.UpperLeft;
-            assemblyTrialMeasured = ui.Label(card, "Composite trial measured result", "", new Rect(18, 250, columnWidth-8, cardHeight - 486),18,color:WorkshopUi.Blue);
-            assemblyTrialMeasured.alignment = TextAnchor.UpperLeft;
-            assemblyTrialMeasured.resizeTextForBestFit=true; assemblyTrialMeasured.resizeTextMinSize=14; assemblyTrialMeasured.resizeTextMaxSize=18;
-            if (comparing)
-            {
-                assemblyTrialComparisonMeasured = ui.Label(card, "Composite trial comparison measured result", "", new Rect(30 + columnWidth, 250, columnWidth-8, cardHeight - 486),18,color:WorkshopUi.Blue);
-                assemblyTrialComparisonMeasured.alignment = TextAnchor.UpperLeft;
-                assemblyTrialComparisonMeasured.resizeTextForBestFit=true; assemblyTrialComparisonMeasured.resizeTextMinSize=14; assemblyTrialComparisonMeasured.resizeTextMaxSize=18;
-            }
+            assemblyTrialMeasuredRows = ui.Panel(card, "Composite trial measured table", new Rect(14, 250, tableWidth, cardHeight - 486), Color.clear);
             float actionY = cardHeight - 176;
             ui.Button(card, "Composite trial compare", new Rect(14, actionY - 54, rightWidth - 28, 46),
                 TrialText("compare_with", assemblyTrialComparisonSource?.Name ?? TrialText("compare_none")), CycleComparison, WorkshopIcon.Book);
@@ -267,20 +261,18 @@ namespace PaperDefense.Presentation
             int copies = unitCost > 0 ? assemblyTrialBudget / unitCost : 0;
             if (resolved?.Support?.MaximumInstances > 0) copies = Math.Min(copies, resolved.Support.MaximumInstances);
             copies = LastAssemblyTrial?.Copies ?? copies;
-            assemblyTrialQuote.text = TrialText("quote", unitCost, copies, LastAssemblyTrial?.Cost ?? copies * unitCost);
-            assemblyTrialMeasured.text = LastAssemblyTrial == null ? TrialText("unstarted") : AssemblyTrialMeasurements(LastAssemblyTrial);
+            string firstQuote = TrialText("quote", unitCost, copies, LastAssemblyTrial?.Cost ?? copies * unitCost), comparisonQuote = null;
             if (assemblyTrialComparisonLane != null)
             {
                 var second = LastAssemblyTrialComparison;
-                if (second != null) assemblyTrialComparisonQuote.text = TrialText("quote", second.UnitCost, second.Copies, second.Cost);
+                if (second != null) comparisonQuote = TrialText("quote", second.UnitCost, second.Copies, second.Cost);
                 else
                 {
                     var gate = new PaperDefense.Application.WorkshopDraftSession(run, DraftSession.Catalog); gate.Begin(assemblyTrialComparisonSource);
                     int cost = gate.Resolved?.Cost ?? 0, number = cost > 0 ? assemblyTrialBudget / cost : 0;
                     if (gate.Resolved?.Support?.MaximumInstances > 0) number = Math.Min(number, gate.Resolved.Support.MaximumInstances);
-                    assemblyTrialComparisonQuote.text = TrialText("quote", cost, number, number * cost);
+                    comparisonQuote = TrialText("quote", cost, number, number * cost);
                 }
-                assemblyTrialComparisonMeasured.text = second == null ? TrialText("unstarted_short") : AssemblyTrialMeasurements(second);
                 assemblyTrialComparisonLane.SetResult(second?.Recording, Time.unscaledTime - assemblyTrialSeconds / assemblyTrialComparisonLane.PlaybackSpeed, second?.Recording?.DurationSeconds ?? 1);
                 assemblyTrialComparisonLane.PlaybackPaused = assemblyTrialPaused;
             }
@@ -290,8 +282,74 @@ namespace PaperDefense.Presentation
             assemblyTrialLane.SetResult(LastTrial, Time.unscaledTime - assemblyTrialSeconds / assemblyTrialLane.PlaybackSpeed, LastTrial?.DurationSeconds ?? 1);
             assemblyTrialLane.PlaybackPaused = assemblyTrialPaused;
             assemblyTrialPause.GetComponentInChildren<Text>().text = TrialText(assemblyTrialPaused ? "resume" : "pause");
-            foreach(var value in new[] {assemblyTrialQuote,assemblyTrialMeasured,assemblyTrialComparisonQuote,assemblyTrialComparisonMeasured})
-                (value as WorkshopMetricText)?.FitRows();
+            TrialMetricTable(assemblyTrialQuoteRows, "Composite trial quote", firstQuote, comparisonQuote);
+            TrialMetricTable(assemblyTrialMeasuredRows, "Composite trial measured", LastAssemblyTrial == null ? null : AssemblyTrialMeasurements(LastAssemblyTrial),
+                LastAssemblyTrialComparison == null ? null : AssemblyTrialMeasurements(LastAssemblyTrialComparison));
+        }
+
+        void TrialMetricTable(RectTransform table, string prefix, string first, string comparison)
+        {
+            WorkshopUi.ClearViews(table);
+            if (first == null)
+            {
+                var hint = ui.Label(table, prefix + " hint", TrialText("unstarted"), new Rect(0, 0, table.rect.width, table.rect.height), 18, color: WorkshopUi.Muted);
+                hint.alignment = TextAnchor.UpperLeft;
+                return;
+            }
+            var rows = first.Split('\n');
+            var otherRows = comparison?.Split('\n') ?? Array.Empty<string>();
+            string Title(string row) { int colon = row.IndexOf(':'); return colon < 0 ? row : row.Substring(0, colon); }
+            string Value(string row) { int colon = row.IndexOf(':'); return colon < 0 ? "" : row.Substring(colon + 1).Trim(); }
+            var firstValues = rows.ToDictionary(Title, Value);
+            var otherValues = otherRows.ToDictionary(Title, Value);
+            var titles = rows.Concat(otherRows).Select(Title).Distinct().ToArray();
+            bool comparing = assemblyTrialComparisonSource != null;
+            float w = table.rect.width, labelWidth = w * .45f, columnWidth = (w - labelWidth - 8) / (comparing ? 2 : 1);
+            float pitch = Mathf.Min(30, table.rect.height / Mathf.Max(1, titles.Length));
+            int size = Mathf.Clamp(Mathf.FloorToInt(pitch * .8f), 15, 20);
+            for (int column = 0; column < (comparing ? 2 : 1); column++)
+            {
+                float x = column == 0 ? labelWidth + 4 : labelWidth + 8 + columnWidth;
+                var divider = ReferenceDetail(table, prefix + " column " + column + " rule", new Rect(x, 0, 1, titles.Length * pitch), FoundationDetailGraphic.Kind.Divider);
+                divider.color = new Color(WorkshopUi.Ink.r, WorkshopUi.Ink.g, WorkshopUi.Ink.b, .18f);
+            }
+            for (int i = 0; i < titles.Length; i++)
+            {
+                string title = titles[i];
+                string value = firstValues.TryGetValue(title, out var actual) ? actual : "—";
+                var rule = ReferenceDetail(table, prefix + " row " + i + " rule", new Rect(0, (i + 1) * pitch - 1, w, 1), FoundationDetailGraphic.Kind.Divider);
+                rule.color = new Color(WorkshopUi.Ink.r, WorkshopUi.Ink.g, WorkshopUi.Ink.b, .18f);
+                var label = ui.Label(table, prefix + " row " + i + " label", title, new Rect(0, i * pitch, labelWidth, pitch - 1), size);
+                label.resizeTextForBestFit = true; label.resizeTextMinSize = 14; label.resizeTextMaxSize = size;
+                var number = ui.Label(table, prefix + " row " + i + " value", value, new Rect(labelWidth + 8, i * pitch, columnWidth - 3, pitch - 1), size, color: WorkshopUi.Blue);
+                number.alignment = TextAnchor.MiddleCenter;
+                number.resizeTextForBestFit = true; number.resizeTextMinSize = 14; number.resizeTextMaxSize = size;
+                if (comparing)
+                {
+                    var otherNumber = ui.Label(table, prefix + " comparison row " + i + " value", otherValues.TryGetValue(title, out var other) ? other : "—",
+                        new Rect(labelWidth + 8 + columnWidth, i * pitch, columnWidth - 3, pitch - 1), size);
+                    otherNumber.alignment = TextAnchor.MiddleCenter;
+                    otherNumber.resizeTextForBestFit = true; otherNumber.resizeTextMinSize = 14; otherNumber.resizeTextMaxSize = size;
+                }
+            }
+        }
+
+        void TrialPerimeter(Transform parent, float w, float h)
+        {
+            float tree = Mathf.Clamp(h * .12f, 42, 92), rock = Mathf.Clamp(h * .065f, 30, 48);
+            Art("left pine", "terrain.pine", new Rect(3, 32, tree * .62f, tree));
+            Art("right pine", "terrain.pine", new Rect(w - tree * .62f - 4, 30, tree * .62f, tree));
+            Art("lower left pine", "terrain.pine", new Rect(8, h - tree - 5, tree * .62f, tree));
+            Art("lower right pine", "terrain.pine", new Rect(w - tree * .62f - 9, h - tree - 4, tree * .62f, tree));
+            Art("left rocks", "terrain.rock", new Rect(tree * .55f, h - rock - 4, rock * 1.4f, rock));
+            Art("right rocks", "terrain.rock", new Rect(w - tree * .55f - rock * 1.4f, h - rock - 4, rock * 1.4f, rock));
+            Art("left shrub", "terrain.shrub", new Rect(tree * .65f, 34, 34, 30));
+            Art("right shrub", "terrain.shrub", new Rect(w - tree * .65f - 34, 34, 34, 30));
+            void Art(string name, string id, Rect bounds)
+            {
+                var image = WorkshopUi.Graphic<NotebookArtGraphic>(parent, "Composite trial perimeter " + name, bounds);
+                image.Bind(id); image.color = new Color(1, 1, 1, .62f);
+            }
         }
 
         string AssemblyTrialMeasurements(AssemblyTrialReport report)
@@ -302,7 +360,8 @@ namespace PaperDefense.Presentation
             if (report.UnresolvedEnemies.HasValue) lines.Add(TrialText("unresolved", report.UnresolvedEnemies.Value));
             if (report.RepairedHealth.HasValue) lines.Add(TrialText("repaired", report.RepairedHealth.Value.ToString("0.##")));
             if (report.Income.HasValue) lines.Add(TrialText("income", report.Income.Value));
-            if (report.CompletedWaves.HasValue) lines.Add(TrialText("waves", report.CompletedWaves.Value, report.PaidWaves ?? 0));
+            if (report.CompletedWaves.HasValue)
+                lines.AddRange(TrialText("waves", report.CompletedWaves.Value, report.PaidWaves ?? 0).Split('·').Select(line => line.Trim()));
             if (report.BlotsCleared.HasValue) lines.Add(TrialText("cleared", report.BlotsCleared.Value));
             if (report.UnresolvedBlots.HasValue) lines.Add(TrialText("blots_remaining", report.UnresolvedBlots.Value));
             if (report.PreventedMovement.HasValue) lines.Add(TrialText("control", report.PreventedMovement.Value.ToString("0.##")));

@@ -1,0 +1,82 @@
+{
+  "status": "complete_for_requested_refinement_with_documented_visual_differences",
+  "completedAt": "2026-10-23",
+  "scope": "Further concept-style refinement of all30 existing scenes, with live gameplay, profile data and authored modular geometry retained.",
+  "visual": {
+    "canonicalScenes": 30,
+    "sizes": [
+      "1024x768",
+      "1280x720",
+      "1920x1080",
+      "1280x960",
+      "1600x900"
+    ],
+    "physicallyReviewedCanonicalCaptures": 150,
+    "missing": 0,
+    "stale": 0,
+    "invalid": 0,
+    "verdict": "REVIEWED_WITH_DIFFERENCES",
+    "reports": "refinement-scene-reviews.json",
+    "gallery": "visual-refinement-gallery.html",
+    "sourceAndCaptureManifest": "refinement-final-capture-manifest.json"
+  },
+  "tests": [
+    {
+      "mode": "PlayMode",
+      "job": "38dbc50a38794d19862c12c9bbea389f",
+      "passed": 849,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 148.0318889,
+      "artifact": "refinement-final-playmode.json"
+    },
+    {
+      "mode": "EditMode",
+      "job": "3570403097a44f3a89c52e2d1795cc0d",
+      "passed": 1574,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 610.1355652,
+      "artifact": "refinement-final-editmode.json"
+    }
+  ],
+  "regressionEvidence": [
+    "World scenery remains anchored under camera pan, zoom and aspect; refinement-camera-red/green.json.",
+    "Profile write failure dismissal, route-owned state and retry/Variant intent have regression coverage; refinement-save-overlay-red.json and refinement-cross-route-red.json.",
+    "Six enemy families fail the old detached HP anchor; refinement-enemy-health-red.json. Final PlayMode verifies animated body/status/warning bounds at two actor scales and two presentation scales with unrelated earlier batch vertices."
+  ],
+  "independentCodeReview": [
+    {
+      "reviewer": "/root/implement_workshop_04_08",
+      "scope": "Composite workshop command/retry/dismiss/modal/comparison flow and DoodleGlyphs/MeshPen hot path",
+      "actionableFindings": 0
+    },
+    {
+      "reviewer": "/root/implement_components_06_07",
+      "scope": "Album, live battle inspector, result rewards, settings, help, pause/leave/cancel lifecycle",
+      "actionableFindings": 0
+    }
+  ],
+  "finalEditor": {
+    "scene": "Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity",
+    "playing": false,
+    "dirty": false,
+    "consoleErrors": 0
+  },
+  "residuals": [
+    "Real modular foundations, recipes, scenarios and gameplay density differ from illustrative source examples; no claim of one-to-one pixel fidelity or human approval.",
+    "4:3 views preserve the whole source landscape, with paper bands where necessary. Compact inspectors deliberately scroll.",
+    "Part30 retains the thin authored foundation-frame strip and collar edge; source regions, fragment scales, sockets and colliders were preserved.",
+    "Enemy HP clears the current body plus status/warning marks, so it may shift when those marks appear. Bounds use atlas quads/native geometry rather than scanning alpha pixels."
+  ],
+  "galleryVerification": {
+    "generatorStrictGate": "150/150 READY and reviewed; zero missing/stale/invalid proofs",
+    "inlineJavaScriptSyntax": "passed",
+    "browserInteraction": "Not executed: sandbox loopback connection unavailable and in-app browser file protocol rejected by URL policy. No policy workaround used; standalone HTML and all image proofs are saved."
+  },
+  "artProvenance": [
+    "ArtSource/Notebook/NewStyle/HomeDefenseLandscape-v2.provenance.json",
+    "ArtSource/Notebook/NewStyle/AlbumOpenBook-v2.provenance.json"
+  ],
+  "workspacePreservation": "Existing unrelated Tools/BalanceWorkbook/node_modules changes excluded from staging and commits."
+}

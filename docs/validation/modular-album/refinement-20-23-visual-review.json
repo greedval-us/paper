@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Codex visual reviewer /root/refine_ui_01_03; actual source and runtime PNGs opened with image input, not inferred from filenames or test success.",
+  "reviewDate": "2026-10-23",
+  "scope": "Scenes 20–23 and the existing pending-save/statistics variants of scene 20; five required resolutions, 30 physical runtime image reviews.",
+  "verdict": "pass-with-documented-residuals",
+  "sourceImages": [
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "sha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/21-defeat.png",
+      "sha256": "4c842f460848bc0b2820590486a9c12488ea84e10abbcc59cc02b02c56ee2e6e"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/22-settings.png",
+      "sha256": "395c7d5afb47b7189886e29853dcc699a81139038216c429cc1342055dea1f8a"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/23-help.png",
+      "sha256": "80e9e894c092a8cd7e22c1feead5609630bbb043ab3f1af6a3c3efb997d18f47"
+    }
+  ],
+  "capturePolicy": "20/21 PNGs were reviewed after the result refinement. All 22/23 PNGs were physically reopened after the final short-Help spacing change and shared enemy-health drawing change. Hashes bind the exact current PNG and metadata files.",
+  "sourceComparison": {
+    "20-victory": "Source hierarchy improved through separated wave/gold/XP columns, actual reward breakdown, compact real progression, quieter perimeter and grounded full modular art.",
+    "21-defeat": "Source hierarchy improved through a torn/slashed banner, actual separate rewards and aligned honest loss values; complete rubble retained.",
+    "22-settings": "Loose central paper, internal rules, inset Help row and larger Done action follow the concept while preserving all four actual settings.",
+    "23-help": "Larger real diagrams, complete foundation, loose lower papers and stronger headings follow the concept while preserving full explanations and all twelve control groups."
+  },
+  "captures": [
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1024x768.png",
+      "sha256": "1a35da0cc0f613eabc4e2f2bb18d8adfec11071a3382feb4f840794506df902c",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1024x768.json",
+      "metadataSha256": "fe1cec41242018f5a1d00395f85f3b3afaa11eb417636e97a101ab43acec4caf",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Visible real reward hierarchy separates 8 / 8 completed waves, +94 gold and +120 XP; wave/victory breakdown remains 64 / 80 and 30 / 40.",
+        "Current profile reads level 2, 120 XP, with the actual 120 / 230 XP interval and normalized within-level fill. No illustrative level-up or unlock transition is asserted.",
+        "Actual frozen modular loadout retains complete foundations; quiet perimeter scenery and a faint courtyard put the rewards first.",
+        "426 invested ink, zero refund/loss, saved status, green saved mark and the actual 94-gold / 120-XP receipt are visible. Menu/map/album/retry routes do not collide.",
+        "The compact 4:3 page keeps all reward/report/receipt rows legible; extra paper bands and the full uncropped loadout remain an accepted aspect-ratio tradeoff."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1280x720.png",
+      "sha256": "a47be7b34e17a060c41eadcf621266bdcccc85650edc99007151891951fce436",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1280x720.json",
+      "metadataSha256": "a95a6ee3b99f3e52e8587c5e899ce224c1693ea0266791dccf70e9702976f136",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Visible real reward hierarchy separates 8 / 8 completed waves, +94 gold and +120 XP; wave/victory breakdown remains 64 / 80 and 30 / 40.",
+        "Current profile reads level 2, 120 XP, with the actual 120 / 230 XP interval and normalized within-level fill. No illustrative level-up or unlock transition is asserted.",
+        "Actual frozen modular loadout retains complete foundations; quiet perimeter scenery and a faint courtyard put the rewards first.",
+        "426 invested ink, zero refund/loss, saved status, green saved mark and the actual 94-gold / 120-XP receipt are visible. Menu/map/album/retry routes do not collide.",
+        "The short widescreen layout keeps the receipt and all three footer actions clear; no reward-column collision."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1920x1080.png",
+      "sha256": "b4d023cec589b5b316c0b0cd1efda7e2d4641f3d9961cc0d9ffba63095d8a7d9",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1920x1080.json",
+      "metadataSha256": "6abf3f0f09ba928f9f305dfa2b6e952805073cf3bc0a832720a68ed9be445414",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Visible real reward hierarchy separates 8 / 8 completed waves, +94 gold and +120 XP; wave/victory breakdown remains 64 / 80 and 30 / 40.",
+        "Current profile reads level 2, 120 XP, with the actual 120 / 230 XP interval and normalized within-level fill. No illustrative level-up or unlock transition is asserted.",
+        "Actual frozen modular loadout retains complete foundations; quiet perimeter scenery and a faint courtyard put the rewards first.",
+        "426 invested ink, zero refund/loss, saved status, green saved mark and the actual 94-gold / 120-XP receipt are visible. Menu/map/album/retry routes do not collide.",
+        "Large separated reward columns and compact actual progression are legible at full size; the quieter terrain no longer dominates the report."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1280x960.png",
+      "sha256": "8a68efefd6b26037b3de3c837f54649a457d98b0bd86fb1156b801bc58dd1260",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1280x960.json",
+      "metadataSha256": "f72cafa99c8aa10c60b79272b5c3336bdee1f3f4085ccfd449ea9dbe3a3efa51",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Visible real reward hierarchy separates 8 / 8 completed waves, +94 gold and +120 XP; wave/victory breakdown remains 64 / 80 and 30 / 40.",
+        "Current profile reads level 2, 120 XP, with the actual 120 / 230 XP interval and normalized within-level fill. No illustrative level-up or unlock transition is asserted.",
+        "Actual frozen modular loadout retains complete foundations; quiet perimeter scenery and a faint courtyard put the rewards first.",
+        "426 invested ink, zero refund/loss, saved status, green saved mark and the actual 94-gold / 120-XP receipt are visible. Menu/map/album/retry routes do not collide.",
+        "The full composition remains centered with generous 4:3 paper margins; complete modular foundations are retained."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1600x900.png",
+      "sha256": "71ca85a2efcc1eafaccdf9e8e82552091bb907eb860d7981784c5e9870b5320b",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1600x900.json",
+      "metadataSha256": "43179b2d60b4c781610e154ed8e7d3c3361b1b99a4405edc39b0f2e207a8fe45",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Visible real reward hierarchy separates 8 / 8 completed waves, +94 gold and +120 XP; wave/victory breakdown remains 64 / 80 and 30 / 40.",
+        "Current profile reads level 2, 120 XP, with the actual 120 / 230 XP interval and normalized within-level fill. No illustrative level-up or unlock transition is asserted.",
+        "Actual frozen modular loadout retains complete foundations; quiet perimeter scenery and a faint courtyard put the rewards first.",
+        "426 invested ink, zero refund/loss, saved status, green saved mark and the actual 94-gold / 120-XP receipt are visible. Menu/map/album/retry routes do not collide.",
+        "Reward breakdown, report values and actual receipt remain distinct across the full widescreen composition."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1024x768.png",
+      "sha256": "78ec2491d83f8588e937907352b120755d561e495c4905c8b711e4b134fc2da9",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1024x768.json",
+      "metadataSha256": "7527a127ae74e108ff8324baeb5cb166dc0d7ff5a0fe4a405891b23faf11f907",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Earned +94 gold and +120 XP remain visible in separate columns while the unsaved profile remains level 1, 0 XP, 0 / 100.",
+        "The actual pending-save message and Retry Save action are visible; no green saved mark or saved receipt is falsely presented.",
+        "Reward breakdown, complete modular foundations and all result navigation controls remain visible without collisions.",
+        "The compact status/retry line is readable and contained; the earned totals remain distinct from the still-zero saved profile."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1280x720.png",
+      "sha256": "f6b0322cd2ece911db774772fd33141facea0cbba484fae175bbacbe3177e4b1",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1280x720.json",
+      "metadataSha256": "2eb1e8cb35be469cfa025e51fc5a9d982346acadff1b3cd40ca9ea3e4263544d",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Earned +94 gold and +120 XP remain visible in separate columns while the unsaved profile remains level 1, 0 XP, 0 / 100.",
+        "The actual pending-save message and Retry Save action are visible; no green saved mark or saved receipt is falsely presented.",
+        "Reward breakdown, complete modular foundations and all result navigation controls remain visible without collisions.",
+        "Short-page retry allocation leaves both the pending message and Retry Save button readable without moving the footer outside the page."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1920x1080.png",
+      "sha256": "b758b8e074e777cc27e0c9b8993206c0d9c8d1afedafaa19534f88f1746d5595",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1920x1080.json",
+      "metadataSha256": "beebdfb25c9f1c513a3bd86b41f9b31feb8acbe141e50356f1311bbc2f921529",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Earned +94 gold and +120 XP remain visible in separate columns while the unsaved profile remains level 1, 0 XP, 0 / 100.",
+        "The actual pending-save message and Retry Save action are visible; no green saved mark or saved receipt is falsely presented.",
+        "Reward breakdown, complete modular foundations and all result navigation controls remain visible without collisions.",
+        "Pending state and empty 0 / 100 progress are plainly visible; no saved check/receipt appears."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1280x960.png",
+      "sha256": "7fc40e126e59043da166f5b76f556da5b5a479d7193c845fbe2083c505074b58",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1280x960.json",
+      "metadataSha256": "8decbde2da3a34b1797a14a134e2e0fb19edb89099b8196492ccf1a3b8588ae0",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Earned +94 gold and +120 XP remain visible in separate columns while the unsaved profile remains level 1, 0 XP, 0 / 100.",
+        "The actual pending-save message and Retry Save action are visible; no green saved mark or saved receipt is falsely presented.",
+        "Reward breakdown, complete modular foundations and all result navigation controls remain visible without collisions.",
+        "4:3 spacing retains all pending-state content and complete foundations without overlap."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1600x900.png",
+      "sha256": "6b643ebd57085e6f37639a9ab3c3e8eb08673a5bac9373447b5fa6681184a836",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1600x900.json",
+      "metadataSha256": "3b168e601db61da0d694b604fa0ab8f282e2dfffa52ca3f6f584397065b9b642",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Earned +94 gold and +120 XP remain visible in separate columns while the unsaved profile remains level 1, 0 XP, 0 / 100.",
+        "The actual pending-save message and Retry Save action are visible; no green saved mark or saved receipt is falsely presented.",
+        "Reward breakdown, complete modular foundations and all result navigation controls remain visible without collisions.",
+        "The pending state, actual zero profile progress and separate earned totals remain consistent and unobscured."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1024x768.png",
+      "sha256": "6941dcf9dd8900cb552f2adb236aa9f81c986ed83cef7a015db83ae3e0206d69",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1024x768.json",
+      "metadataSha256": "5a6d15acfe1925e6f6b2bf0db0bfe363b37f8d6027bf5676da9cf8ffac9fa185",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Mission statistics sheet shows both real four-row columns: 426 invested, 0 refunded, 0 lost, 0 peak enemies; 0 damage, 8 built, 0 destroyed, 3 upgrades.",
+        "The modal title and Return to results action are clear; the sheet covers and dims the result beneath it without clipping its own contents.",
+        "Statistics are an existing product-specific modal beyond the static victory concept. The capture verifies presentation; no-I/O is a source/test evidence claim, not a claim derived from pixels.",
+        "The near-full-width modal keeps all eight statistics and its return action inside the sheet; the outer result is intentionally mostly covered."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1280x720.png",
+      "sha256": "15f3e61f94ec837b5eeda3036c73b4b7fe2df0da835976d1dbfbe934f4dc0493",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1280x720.json",
+      "metadataSha256": "d53e3ece5e2cdf347d44a2561e10e980fdbb62552ef2d4b2de2396238a40e84b",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Mission statistics sheet shows both real four-row columns: 426 invested, 0 refunded, 0 lost, 0 peak enemies; 0 damage, 8 built, 0 destroyed, 3 upgrades.",
+        "The modal title and Return to results action are clear; the sheet covers and dims the result beneath it without clipping its own contents.",
+        "Statistics are an existing product-specific modal beyond the static victory concept. The capture verifies presentation; no-I/O is a source/test evidence claim, not a claim derived from pixels.",
+        "Both statistics columns and the return action fit cleanly within the short viewport."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1920x1080.png",
+      "sha256": "2dcee4348b88b229d763fac31bdd8d1843afc73d24b80d607241a38909bff5c5",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1920x1080.json",
+      "metadataSha256": "c19272f3e27eaa45f1b3c50b6a4a3cb94a885723342410411220c40e70a00901",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Mission statistics sheet shows both real four-row columns: 426 invested, 0 refunded, 0 lost, 0 peak enemies; 0 damage, 8 built, 0 destroyed, 3 upgrades.",
+        "The modal title and Return to results action are clear; the sheet covers and dims the result beneath it without clipping its own contents.",
+        "Statistics are an existing product-specific modal beyond the static victory concept. The capture verifies presentation; no-I/O is a source/test evidence claim, not a claim derived from pixels.",
+        "The centered modal shows ample column separation; background result is visibly dimmed and the return action is clear."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1280x960.png",
+      "sha256": "3493b0c0e0a61f93cc25c4fcdcdc6087d0e29d56729789e368d0561db9400ec7",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1280x960.json",
+      "metadataSha256": "86e1c5e4e17ac09351c4ded8e375bc643f1694a8ed9af3ae1ef9f73119823f99",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Mission statistics sheet shows both real four-row columns: 426 invested, 0 refunded, 0 lost, 0 peak enemies; 0 damage, 8 built, 0 destroyed, 3 upgrades.",
+        "The modal title and Return to results action are clear; the sheet covers and dims the result beneath it without clipping its own contents.",
+        "Statistics are an existing product-specific modal beyond the static victory concept. The capture verifies presentation; no-I/O is a source/test evidence claim, not a claim derived from pixels.",
+        "The sheet remains fully inside the 4:3 page; actual values and return action are legible."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1600x900.png",
+      "sha256": "cba41ca7af3e0d1f97b611e344911b2c0844eaf43860c81a945bbf163b26d340",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1600x900.json",
+      "metadataSha256": "2250d6c17ecae258d0c64f950d7842a689f6aed302c05a73b92de5606c4e8c72",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Mission statistics sheet shows both real four-row columns: 426 invested, 0 refunded, 0 lost, 0 peak enemies; 0 damage, 8 built, 0 destroyed, 3 upgrades.",
+        "The modal title and Return to results action are clear; the sheet covers and dims the result beneath it without clipping its own contents.",
+        "Statistics are an existing product-specific modal beyond the static victory concept. The capture verifies presentation; no-I/O is a source/test evidence claim, not a claim derived from pixels.",
+        "The centered sheet preserves two readable columns, the title, and one unambiguous return action."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1024x768.png",
+      "sha256": "be4a920960ba009b8158613b62d67ee0da06a4272319bd12ab898c7116b57d8e",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1024x768.json",
+      "metadataSha256": "aed3be4095d29cb69827077b3a97b254f31619c4ab6956c4f0d780865367d1f3",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Native torn/slashed banner, complete castle rubble, and separate reward/loss/action groups strengthen the source hierarchy.",
+        "Actual result shows 5 / 8 completed waves, defeat on wave 6, +40 gold, +50 XP, and current level 1 / 50 XP.",
+        "Aligned loss rows honestly show this captured attempt's zeros instead of the concept's illustrative losses. Saved status, green saved mark and actual 40-gold / 50-XP receipt remain visible.",
+        "Menu, map, album and retry navigation remain clear without overlap; no fabricated component, tier or unlock values are substituted.",
+        "Compact 4:3 layout retains the torn banner, full rubble, all actual reward/loss rows and footer actions."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1280x720.png",
+      "sha256": "da2a025147e32c2ce9abcfab860aebc5d19a8c9f9868fc8decdc023206db5e01",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1280x720.json",
+      "metadataSha256": "5390b751660b9656a82f8127e32cac12adcd988a311ddac3a2b127180359a7de",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Native torn/slashed banner, complete castle rubble, and separate reward/loss/action groups strengthen the source hierarchy.",
+        "Actual result shows 5 / 8 completed waves, defeat on wave 6, +40 gold, +50 XP, and current level 1 / 50 XP.",
+        "Aligned loss rows honestly show this captured attempt's zeros instead of the concept's illustrative losses. Saved status, green saved mark and actual 40-gold / 50-XP receipt remain visible.",
+        "Menu, map, album and retry navigation remain clear without overlap; no fabricated component, tier or unlock values are substituted.",
+        "Short widescreen layout keeps receipt and loss rows separate from the three footer actions."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1920x1080.png",
+      "sha256": "23be5e1b5d1b5dcdf5f0a543f944008f25d5bea5ff080a646d87ec74429ce495",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1920x1080.json",
+      "metadataSha256": "d6bec0ebd6fb07c47a4639a0883823692562e8e8eeb89fe5900de191dcd004a3",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Native torn/slashed banner, complete castle rubble, and separate reward/loss/action groups strengthen the source hierarchy.",
+        "Actual result shows 5 / 8 completed waves, defeat on wave 6, +40 gold, +50 XP, and current level 1 / 50 XP.",
+        "Aligned loss rows honestly show this captured attempt's zeros instead of the concept's illustrative losses. Saved status, green saved mark and actual 40-gold / 50-XP receipt remain visible.",
+        "Menu, map, album and retry navigation remain clear without overlap; no fabricated component, tier or unlock values are substituted.",
+        "The torn banner and lower loss panel create a stronger source-style hierarchy; all actual values remain legible."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1280x960.png",
+      "sha256": "b7261de3ad800934f46ab80b548d0051142cf927ed77d7c9900e721b27c66289",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1280x960.json",
+      "metadataSha256": "ad68161f49d90aaf785724a344fdca687f4e9af9cf22ee53fb8befd93e0c34ca",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Native torn/slashed banner, complete castle rubble, and separate reward/loss/action groups strengthen the source hierarchy.",
+        "Actual result shows 5 / 8 completed waves, defeat on wave 6, +40 gold, +50 XP, and current level 1 / 50 XP.",
+        "Aligned loss rows honestly show this captured attempt's zeros instead of the concept's illustrative losses. Saved status, green saved mark and actual 40-gold / 50-XP receipt remain visible.",
+        "Menu, map, album and retry navigation remain clear without overlap; no fabricated component, tier or unlock values are substituted.",
+        "Extra 4:3 paper margins preserve full rubble and all controls without cropping."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1600x900.png",
+      "sha256": "bfcef10020e5a496dbad6448c6d99ab7175f1a5d84dd9588333ad9eb1356528e",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1600x900.json",
+      "metadataSha256": "18b97c57f89639ec6ada629853b6b57a44ca471f03dfcd99a7a0f01d1725ca81",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Native torn/slashed banner, complete castle rubble, and separate reward/loss/action groups strengthen the source hierarchy.",
+        "Actual result shows 5 / 8 completed waves, defeat on wave 6, +40 gold, +50 XP, and current level 1 / 50 XP.",
+        "Aligned loss rows honestly show this captured attempt's zeros instead of the concept's illustrative losses. Saved status, green saved mark and actual 40-gold / 50-XP receipt remain visible.",
+        "Menu, map, album and retry navigation remain clear without overlap; no fabricated component, tier or unlock values are substituted.",
+        "Loss labels align with actual values; saved receipt and navigation remain clear at the intermediate widescreen size."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1024x768.png",
+      "sha256": "3dfecd87f763292f9edce7ca6a855136c1a59da3fbe3b68ee49d0f0d51afa7fa",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1024x768.json",
+      "metadataSha256": "7089606a0c6eacc241c64e944743f13c136ed7f04d1c0aeb6d722cb2ebf8099e",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "One loose ruled paper groups all four real settings: fullscreen, display resolution, object ranges and reduced motion.",
+        "Resolution browse arrows, displayed 1280 × 720 selection/current setting and Apply action are separated and readable. The real setting is independent of validation capture dimensions.",
+        "Separate Help row with inset caption/right arrow and the enlarged Done action preserve clear hierarchy and all actual controls.",
+        "All four rows fit on the loose paper; full landscape is contained with the known 4:3 paper bands."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1280x720.png",
+      "sha256": "184cb609b6aab566a3e13c93df6ef468b66d2cef78ff34f104564d581516bcd3",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1280x720.json",
+      "metadataSha256": "e3b125b10fef764fe74a5e0fd0e8b522837a107ef9a3291baac59666f6aa295f",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "One loose ruled paper groups all four real settings: fullscreen, display resolution, object ranges and reduced motion.",
+        "Resolution browse arrows, displayed 1280 × 720 selection/current setting and Apply action are separated and readable. The real setting is independent of validation capture dimensions.",
+        "Separate Help row with inset caption/right arrow and the enlarged Done action preserve clear hierarchy and all actual controls.",
+        "All descriptions, resolution arrows/Apply and the separate Help/Done controls fit the short viewport."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1920x1080.png",
+      "sha256": "006e5c4a3e8c6be0326041c5619149c44822bd6e59945c486bd40d5d19698029",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1920x1080.json",
+      "metadataSha256": "ab6909f6ba55b85f5b331e8d2343503f68355fc6324677d62e32c6955b499a2d",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "One loose ruled paper groups all four real settings: fullscreen, display resolution, object ranges and reduced motion.",
+        "Resolution browse arrows, displayed 1280 × 720 selection/current setting and Apply action are separated and readable. The real setting is independent of validation capture dimensions.",
+        "Separate Help row with inset caption/right arrow and the enlarged Done action preserve clear hierarchy and all actual controls.",
+        "The loose paper and divider rules provide a clear source-style grouping with generous control separation."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1280x960.png",
+      "sha256": "8a59ce17ddade9cad6cbaa31bd0935712d61a316d6b53c36ba41bb2fd3d1ced2",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1280x960.json",
+      "metadataSha256": "ac16aca421e912d9853fb27923497f9331df7877d8256aebd9b7530de60a96c7",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "One loose ruled paper groups all four real settings: fullscreen, display resolution, object ranges and reduced motion.",
+        "Resolution browse arrows, displayed 1280 × 720 selection/current setting and Apply action are separated and readable. The real setting is independent of validation capture dimensions.",
+        "Separate Help row with inset caption/right arrow and the enlarged Done action preserve clear hierarchy and all actual controls.",
+        "All four rows and complete decorative landscape remain visible within the contained 4:3 composition."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1600x900.png",
+      "sha256": "90be0afd0541cda3987fb547665bf2c6e38cd47cdadd31aabfdf2b9cf5819cc5",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1600x900.json",
+      "metadataSha256": "2cd72755b85a773604cc3cbeae9606dfd4cc826b08d167b40968e9d29340d215",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "One loose ruled paper groups all four real settings: fullscreen, display resolution, object ranges and reduced motion.",
+        "Resolution browse arrows, displayed 1280 × 720 selection/current setting and Apply action are separated and readable. The real setting is independent of validation capture dimensions.",
+        "Separate Help row with inset caption/right arrow and the enlarged Done action preserve clear hierarchy and all actual controls.",
+        "The four ruled rows, Help route and enlarged Done action remain readable without overlapping the backdrop subjects."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1024x768.png",
+      "sha256": "1030ebc00e4b0968c5c24254a83d8ea451a3a3c2218f87a4fc4e0f2f9a288f8a",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1024x768.json",
+      "metadataSha256": "231bf0af19ef813c2fa18614f9f8c11e1958b5c999d6024325e5371a9da05d2f",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Four enlarged diagrams show actual exploded weapon components plus a complete foundation, a saved modern assembly, eight slots and castle defense.",
+        "All four resource meanings remain visible. All twelve real control groups are present: 1–8, Q, C, E, U, P, B, N, F, Tab, Space / Esc and wheel.",
+        "The two lower loose paper groups, heading rules, eight-slot reminder, Back and Understood actions remain distinct and visible. Actual descriptions/callback context are preserved.",
+        "Compact single-line resource explanations and all twelve key groups are readable; four complete diagrams and footer actions remain visible."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1280x720.png",
+      "sha256": "3cf06d257fb6093f60590ad42ef9338c2d55d773e66ba0a45999e2ecbc7817b4",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1280x720.json",
+      "metadataSha256": "fc7d6de198994ef266cfa0d116f05301b19dc620e00b8837b662e49d4db8183d",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Four enlarged diagrams show actual exploded weapon components plus a complete foundation, a saved modern assembly, eight slots and castle defense.",
+        "All four resource meanings remain visible. All twelve real control groups are present: 1–8, Q, C, E, U, P, B, N, F, Tab, Space / Esc and wheel.",
+        "The two lower loose paper groups, heading rules, eight-slot reminder, Back and Understood actions remain distinct and visible. Actual descriptions/callback context are preserved.",
+        "Final short-page spacing reclaims the header/footer gaps for the lower panels. All twelve key rows, including Space / Esc and wheel, are readable and do not overlap; these long keycaps remain compact."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1920x1080.png",
+      "sha256": "3123a0aef764485a5f951c012c5195c9f0cb9e090120ac8ea967956bf0a610ac",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1920x1080.json",
+      "metadataSha256": "ca5cedaacd7118a1009b8c49b0dc1a570764ebf84852a67e347eb686bf831b90",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Four enlarged diagrams show actual exploded weapon components plus a complete foundation, a saved modern assembly, eight slots and castle defense.",
+        "All four resource meanings remain visible. All twelve real control groups are present: 1–8, Q, C, E, U, P, B, N, F, Tab, Space / Esc and wheel.",
+        "The two lower loose paper groups, heading rules, eight-slot reminder, Back and Understood actions remain distinct and visible. Actual descriptions/callback context are preserved.",
+        "Larger diagrams and two-line resource headings/descriptions support the source hierarchy; all twelve control rows are clearly spaced."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1280x960.png",
+      "sha256": "f1269902d529bb734b1fd3605f27e89c821f88afe0964a09cf99afdc2f66cbb1",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1280x960.json",
+      "metadataSha256": "4414a439ce9e002c02f12c5ea1a86bb5f218188e1c6e67d41f8f987e3f7e3589",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Four enlarged diagrams show actual exploded weapon components plus a complete foundation, a saved modern assembly, eight slots and castle defense.",
+        "All four resource meanings remain visible. All twelve real control groups are present: 1–8, Q, C, E, U, P, B, N, F, Tab, Space / Esc and wheel.",
+        "The two lower loose paper groups, heading rules, eight-slot reminder, Back and Understood actions remain distinct and visible. Actual descriptions/callback context are preserved.",
+        "Tall 4:3 page provides clear lower-panel row separation while retaining all four diagrams and the complete foundation."
+      ]
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1600x900.png",
+      "sha256": "1c6af126d872455bde56668171fd9bcc319a96dbad712f8129ec74207c14cfd3",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1600x900.json",
+      "metadataSha256": "60b7da7dcded1d89fe979934ee78702f285245934708899151f05a6ce51fa204",
+      "reviewed": true,
+      "status": "pass-with-documented-residuals",
+      "observations": [
+        "Four enlarged diagrams show actual exploded weapon components plus a complete foundation, a saved modern assembly, eight slots and castle defense.",
+        "All four resource meanings remain visible. All twelve real control groups are present: 1–8, Q, C, E, U, P, B, N, F, Tab, Space / Esc and wheel.",
+        "The two lower loose paper groups, heading rules, eight-slot reminder, Back and Understood actions remain distinct and visible. Actual descriptions/callback context are preserved.",
+        "Card prose wraps within each card; lower paper groups retain all resource meanings and twelve key groups without clipping."
+      ]
+    }
+  ],
+  "implementationSnapshot": [
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Result.cs",
+      "sha256": "1ef15574cac57db31fc82d887934ed56fde45b809cc2801794ef074f0540b37b"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Settings.cs",
+      "sha256": "50144432f169a6d32e25e8a2b0b25cc8ede51a0bc92e188ad4e3231b7b71119f"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Dialogs.cs",
+      "sha256": "53239168b350328a8c8eb958e1de25801a7caac7613d2c4758a8a0d570742722"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/AlbumPlayerJourneyTests.cs",
+      "sha256": "f171ba6a973ad76026f50a880535ddab1904e4232005dd61ce574853292929e6"
+    }
+  ],
+  "behaviorEvidence": {
+    "visuallyExercised": [
+      "Saved victory receipt and actual gold/XP",
+      "Pending reward and Retry Save state",
+      "Victory mission statistics",
+      "Saved defeat and actual zero losses",
+      "All four Settings rows",
+      "All twelve Help key groups at all five sizes"
+    ],
+    "sourceReviewed": [
+      "RefreshAlbumResult derives earned values from RunRewardTotals and receipt/profile values from the actual workshop state. It selects the real MemoryOnly message and suppresses the green saved mark in MemoryOnly mode.",
+      "OpenAlbumResultStatistics only reads Session.Statistics, creates UI, and closes its modal; it does not perform profile I/O.",
+      "Defeat classification retains complete-history tower/support counts and the actual total-loss/investment fallback when the last-32 history is incomplete.",
+      "Settings callbacks and contextual Help/Settings return paths remain existing gameplay behavior."
+    ],
+    "rootTestEvidence": {
+      "path": "docs/validation/modular-album/refinement-final-playmode.json",
+      "sha256": "775fd2f11aca2f2e5ec1726f58033dfe0a4d82995766335a68a205efe0ed9bae",
+      "mode": "PlayMode",
+      "passed": 849,
+      "total": 849,
+      "jobId": "38dbc50a38794d19862c12c9bbea389f",
+      "executionOwner": "Parent /root; reviewer inspected the archived result and did not invoke Unity."
+    },
+    "verificationLimits": [
+      "The 30 PNGs do not include a dedicated MemoryOnly result, nonzero/incomplete loss history, max-tier profile, or Apply-resolution confirmation state. Those behaviors were source-reviewed and existing relevant tests were included in the parent's full green PlayMode run; this document does not claim separate visual exercise of those states.",
+      "Screenshots establish presentation, not persistence/no-I/O by themselves."
+    ]
+  },
+  "residuals": [
+    "The native result ribbons, ornaments and courtyard are simpler than the painted concept; actual modular assemblies and full foundations deliberately retain their real appearance.",
+    "4:3 result/settings compositions retain paper bands or additional blank space to preserve full illustrations and established no-crop behavior.",
+    "Help retains more real instructional copy and twelve bindings than the concept. Its short 720p layout is denser, particularly the Space / Esc keycap, but all content remains readable and visible.",
+    "The concept's illustrative prior/next level, unlock and loss examples are not invented in the live UI; current actual progression and losses are shown.",
+    "The pending-save and mission-statistics surfaces are real product states beyond the single static victory source; their exact existing semantics take priority over copying illustrative content."
+  ],
+  "assetsFreeze": "Final Help spacing change saved before the parent's final PlayMode/capture/EditMode window. No further Assets edits during this QA."
+}

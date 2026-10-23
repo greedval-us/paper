@@ -1,0 +1,950 @@
+{
+  "schema": "modular-album-component-refinement-plan-v1",
+  "status": "reviewed_plan_only",
+  "reviewSource": "agent",
+  "author": "/root/implement_components_06_07",
+  "authorization": "Read-only inspection and plan only. No Assets implementation until root go after current capture/test window.",
+  "uiStack": "Existing UGUI; ComponentAssemblyPanel -> ComponentCatalogPanel owns category/catalogue/details, CatalogScrollList owns scrolling; enclosing CompositeWorkshopPanel owns save/cancel.",
+  "referenceResolution": [
+    1672,
+    941
+  ],
+  "verificationTargets": [
+    [
+      1024,
+      768
+    ],
+    [
+      1280,
+      720
+    ],
+    [
+      1920,
+      1080
+    ],
+    [
+      1280,
+      960
+    ],
+    [
+      1600,
+      900
+    ]
+  ],
+  "capabilities": {
+    "sourceVision": "verified: all8 assigned screen PNGs,22 baseline PNGs across1920/1024, modern31–33 art sheets and StandardFoundation-v9 physically opened",
+    "artifactAccess": "verified",
+    "sourceEdit": "available but currently held by root",
+    "unity": "not used; root owns import/runtime/capture/tests",
+    "generation": "not needed; current project sprites reused"
+  },
+  "existingInputs": [
+    "docs/validation/modular-album/refinement-09-30-handoff.json",
+    "docs/validation/modular-album/refinement-04-08-handoff.json",
+    "docs/validation/modular-album/task13-reference-fidelity-audit.md"
+  ],
+  "detailedPriorAgentHandoff": "No separate09–14 handoff file found; requested any additional message constraints from root.",
+  "sharedBehaviorGuardrails": [
+    "Inspect does not install/spend/save.",
+    "Preserve current rights, catalogue identities and resources.",
+    "Local edits, SaveComponent and CancelComponent boundaries stay explicit.",
+    "CanTrial remains !IsComponentOpen && ValidParent.",
+    "No fake trial, invalid resolved statistics or measured gameplay outcome.",
+    "Do not modify source sprite trims, Regions, sockets, scales, collisions or Fit."
+  ],
+  "commonLayoutTree": [
+    {
+      "node": "Component assembly/Component categories",
+      "owner": "ComponentAssemblyPanel.Refresh",
+      "intent": "Existing category owner; semantic category navigation remains live."
+    },
+    {
+      "node": "Component assembly/Component catalog/Context",
+      "owner": "ComponentCatalogPanel branch",
+      "intent": "Read-only real recipe/individual-part background only when branch needs it."
+    },
+    {
+      "node": "Component assembly/Component catalog/Component catalogue list",
+      "owner": "CatalogScrollList",
+      "intent": "Single bounded scroll owner for actual compatible definitions."
+    },
+    {
+      "node": "Component assembly/Component catalog/Component details",
+      "owner": "ComponentCatalogPanel branch",
+      "intent": "Named art, numeric/rule/diagnostic regions and existing action handlers."
+    }
+  ],
+  "candidateReview": {
+    "reviewSource": "agent",
+    "accept": "High-confidence source-bounded cards, panels, rule illustrations and buttons with inspected runtime responsibility.",
+    "hold": "A new11 scope-close X until its real owner provides a dedicated callback; no inferred command reuse.",
+    "reject": [
+      "Baked decorative scenery decomposition",
+      "Source illustrative battle damage/health numbers",
+      "Invalid fully composed weapon or fabricated resolved metrics",
+      "New neutral-option raster fragments"
+    ]
+  },
+  "boundsDiagnosis": {
+    "codeEvidence": [
+      "AssemblyVisualComposer.Catalog.cs Finish() unions transformed Region corners.",
+      "ComposePart() passes its authored part fragments to Finish() without swept-envelope enlargement.",
+      "AssemblyPreviewPose.VisibleBounds() unions transformed Trim∩Region corners.",
+      "PrepareFullCatalog validates every Region lies within Trim."
+    ],
+    "conclusion": "For these valid part-only compositions, Bounds equals VisibleBounds. The full-recipe swept-envelope issue does not establish a part-only mismatch.",
+    "actualStandardParts": {
+      "frame": "frame.standard Trim(17,290,1503,444), Region(17,290,1503,94)",
+      "hull": "hull.standard roof/front Regions cover y384..734 (350 source px)",
+      "neutralArmor": "armor.none has no fragments",
+      "turn": "turn.standard uses authored collar Region(137,99,222,179)"
+    },
+    "permittedRepair": "UI-only compact slot packing and contextual full-foundation art; preserve authored decomposition."
+  },
+  "scenes": [
+    {
+      "id": "11",
+      "name": "11-stencils",
+      "branch": "catalogueLayout: unowned alternate head, non-family weapon",
+      "owners": [
+        "ComponentCatalogPanel.cs",
+        "ComponentCatalogPanel.Sketch.cs"
+      ],
+      "baseline": [
+        "11-stencils"
+      ],
+      "physicalFinding": "The baseline has three full-height cards and no contained inset sheet or genuine workshop context. The source has a centered parts sheet over a real assembly scene; card art, availability badge and inspector are separate.",
+      "plan": [
+        "Retain a quiet actual PreviewRecipe diagram behind an inset parts sheet; keep source categories on the existing component owner.",
+        "Bound the three-part catalogue height to fit art-first cards with name, ownership/requirements and contribution footer; keep CatalogScrollList as the sole scroll owner.",
+        "Keep actual current-to-candidate comparison evidence in the inspector and the existing purchase/disabled-install command owners.",
+        "Keep the enclosing component Cancel action. Do not draw a new source-style close X unless a dedicated scope-close callback is explicitly wired by its owner."
+      ],
+      "guards": [
+        "InspectPart changes only inspectedId and presentation.",
+        "Purchase and install remain separate explicit actions.",
+        "Use current pen-nib head art; do not substitute the source cannon barrels."
+      ],
+      "sourceRegions": {
+        "sheet": {
+          "sourceRect": [
+            383,
+            110,
+            977,
+            730
+          ],
+          "normalizedRect": [
+            0.2291,
+            0.1169,
+            0.5843,
+            0.7758
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "choices": {
+          "sourceRect": [
+            419,
+            317,
+            630,
+            403
+          ],
+          "normalizedRect": [
+            0.2506,
+            0.3369,
+            0.3768,
+            0.4283
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "inspector": {
+          "sourceRect": [
+            1064,
+            197,
+            269,
+            463
+          ],
+          "normalizedRect": [
+            0.6364,
+            0.2094,
+            0.1609,
+            0.492
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "purchase": {
+          "sourceRect": [
+            1070,
+            669,
+            259,
+            61
+          ],
+          "normalizedRect": [
+            0.64,
+            0.7109,
+            0.1549,
+            0.0648
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        }
+      }
+    },
+    {
+      "id": "12",
+      "name": "12-mortar",
+      "branch": "familyLayout + Mortar + Head",
+      "owners": [
+        "ComponentCatalogPanel.cs",
+        "ComponentCatalogPanel.Sketch.cs",
+        "AssemblyMechanicPreview (declared in ComponentCatalogPanel.cs)"
+      ],
+      "baseline": [
+        "12-mortar"
+      ],
+      "physicalFinding": "Baseline two narrow cards are stretched vertically, radius ink is pale, and mechanism preview/statistics share one surface. Source uses three clearly framed regions and wider paired barrel cards.",
+      "plan": [
+        "Create choices, actual rule illustration and characteristic frames, reserving adaptive widths for both mortar head cards at1024.",
+        "Draw the actual candidate standalone weapon composition already produced by InspectedResolution and AssemblyMechanicPreview.Configure.",
+        "Strengthen actual Weapon.Radius footprint and trajectory anchored to the composition's real muzzle; keep minimum range, radius, interval and price sourced from resolver.",
+        "Label the field as a rule illustration. Retain actual head.mortar/head.wide identities and unlock state."
+      ],
+      "guards": [
+        "No legacy shape or footprint editor.",
+        "Do not fabricate enemy health or measured hits.",
+        "Locked inspection may preview numbers/art but cannot install or spend."
+      ],
+      "sourceRegions": {
+        "choices": {
+          "sourceRect": [
+            123,
+            166,
+            472,
+            632
+          ],
+          "normalizedRect": [
+            0.0736,
+            0.1764,
+            0.2823,
+            0.6716
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "preview": {
+          "sourceRect": [
+            596,
+            177,
+            605,
+            603
+          ],
+          "normalizedRect": [
+            0.3565,
+            0.1881,
+            0.3618,
+            0.6408
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "statistics": {
+          "sourceRect": [
+            1214,
+            177,
+            336,
+            603
+          ],
+          "normalizedRect": [
+            0.7261,
+            0.1881,
+            0.201,
+            0.6408
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        }
+      }
+    },
+    {
+      "id": "13",
+      "name": "13-fan",
+      "branch": "familyLayout + Fan",
+      "owners": [
+        "ComponentCatalogPanel.cs",
+        "ComponentCatalogPanel.Sketch.cs",
+        "AssemblyMechanicPreview (declared in ComponentCatalogPanel.cs)"
+      ],
+      "baseline": [
+        "13-fan"
+      ],
+      "physicalFinding": "The baseline cone is a faint gray fan with many radial hairlines. Targets have thin outlines, the weapon is small at the base, and the angle lacks the source curved dimension arrows.",
+      "plan": [
+        "Use stronger blue sector fill, a curved outside dimension arc and end arrowheads; reduce radial hairlines.",
+        "Strengthen target outlines while treating dummies as diagram examples, never live actors or measured results.",
+        "Increase the actual fan weapon within the field while keeping the real composition muzzle at the true cone origin.",
+        "Frame metrics and provide meaningful category navigation only through draft.SelectCategory and actual compatible sight/mechanism options."
+      ],
+      "guards": [
+        "Cone geometry remains derived from Weapon.ConeDegrees; count text from Weapon.TargetLimit.",
+        "No target-limit or attachment semantic changes.",
+        "Keep catalog reveal, ownership and explicit install actions."
+      ],
+      "sourceRegions": {
+        "field": {
+          "sourceRect": [
+            19,
+            140,
+            1082,
+            768
+          ],
+          "normalizedRect": [
+            0.0114,
+            0.1488,
+            0.6471,
+            0.8162
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "statistics": {
+          "sourceRect": [
+            1127,
+            158,
+            514,
+            409
+          ],
+          "normalizedRect": [
+            0.674,
+            0.1679,
+            0.3074,
+            0.4346
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "navigation": {
+          "sourceRect": [
+            1128,
+            644,
+            506,
+            169
+          ],
+          "normalizedRect": [
+            0.6746,
+            0.6844,
+            0.3026,
+            0.1796
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "apply": {
+          "sourceRect": [
+            1242,
+            837,
+            289,
+            72
+          ],
+          "normalizedRect": [
+            0.7428,
+            0.8895,
+            0.1728,
+            0.0765
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        }
+      }
+    },
+    {
+      "id": "14",
+      "name": "14-armor",
+      "branch": "Foundation + Armor",
+      "owners": [
+        "ComponentCatalogPanel.cs",
+        "ComponentCatalogPanel.Sketch.cs",
+        "WorkshopProtectionDirections (declared in WorkshopAssemblyDiagram.cs)"
+      ],
+      "baseline": [
+        "14-armor"
+      ],
+      "physicalFinding": "Source shows full foundation variants in all three cards and a distinct rule panel. Baseline cards show no-art neutral text or loose armor plates; the rule illustration is extremely small and reads like a simulation heading.",
+      "plan": [
+        "Keep the actual modern rectangular foundation as the main preview.",
+        "For each none/plate/front choice, construct the candidate foundation recipe and render ComposeFoundation so each card shows the complete real variant.",
+        "Create a distinct right protection rule panel with readable actual general/front defense and a clearly labeled directional illustration.",
+        "Keep a read-only illustration; do not add a new gameplay probe or present the source20→14 and86/100 as live measurements."
+      ],
+      "guards": [
+        "Neutral armor remains zero raster fragments in the actual composition.",
+        "Do not replace the foundation with the source circular base.",
+        "Install remains local; final SaveComponent belongs to enclosing sheet."
+      ],
+      "sourceRegions": {
+        "foundation": {
+          "sourceRect": [
+            270,
+            159,
+            778,
+            323
+          ],
+          "normalizedRect": [
+            0.1615,
+            0.169,
+            0.4653,
+            0.3433
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "choices": {
+          "sourceRect": [
+            294,
+            486,
+            735,
+            341
+          ],
+          "normalizedRect": [
+            0.1758,
+            0.5165,
+            0.4396,
+            0.3624
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "rulePanel": {
+          "sourceRect": [
+            1059,
+            160,
+            399,
+            728
+          ],
+          "normalizedRect": [
+            0.6334,
+            0.17,
+            0.2386,
+            0.7736
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        }
+      }
+    },
+    {
+      "id": "25",
+      "name": "25-purchase",
+      "branch": "OpenPurchase explicit confirmation modal",
+      "owners": [
+        "ComponentCatalogPanel.cs"
+      ],
+      "baseline": [
+        "25-purchase"
+      ],
+      "physicalFinding": "The baseline has the correct selected pen-nib art and actual numbers, but purchase information is dense prose without the source requirement row, separated three-row ledger or close X.",
+      "plan": [
+        "Keep the actual selected part illustration between title and quote, preserving the existing geometric fit test.",
+        "Render required/current level as a separate requirement row, then aligned price/current-gold/remainder rows using actual run.Workshop and selected part fields.",
+        "Add X through ClosePurchase and retain cancel/confirm, WorkshopModal focus isolation and restoration.",
+        "Use a local paper/torn contour and enlarge footer targets without changing the exact PurchasePart(part.Id,Guid.NewGuid()) operation."
+      ],
+      "guards": [
+        "Confirmation alone grants rights; installation remains separate.",
+        "Insufficient-level/gold state remains disabled.",
+        "Purchase failure retains local draft and displays actual error detail."
+      ],
+      "sourceRegions": {
+        "sheet": {
+          "sourceRect": [
+            536,
+            146,
+            602,
+            685
+          ],
+          "normalizedRect": [
+            0.3206,
+            0.1552,
+            0.36,
+            0.7279
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "art": {
+          "sourceRect": [
+            642,
+            255,
+            413,
+            203
+          ],
+          "normalizedRect": [
+            0.384,
+            0.271,
+            0.247,
+            0.2157
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "requirement": {
+          "sourceRect": [
+            654,
+            480,
+            383,
+            36
+          ],
+          "normalizedRect": [
+            0.3911,
+            0.5101,
+            0.2291,
+            0.0383
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "ledger": {
+          "sourceRect": [
+            566,
+            529,
+            542,
+            159
+          ],
+          "normalizedRect": [
+            0.3385,
+            0.5622,
+            0.3242,
+            0.169
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "footer": {
+          "sourceRect": [
+            564,
+            735,
+            546,
+            72
+          ],
+          "normalizedRect": [
+            0.3373,
+            0.7811,
+            0.3266,
+            0.0765
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        }
+      }
+    },
+    {
+      "id": "27",
+      "name": "27-invalid",
+      "branch": "actual active diagnostic assembly.part.required; suggested repair available",
+      "owners": [
+        "ComponentCatalogPanel.cs",
+        "ComponentCatalogPanel.Sketch.cs",
+        "WorkshopAssemblyDiagram.cs"
+      ],
+      "baseline": [
+        "27-invalid"
+      ],
+      "physicalFinding": "The baseline focuses a giant standalone burst trigger and leaves the conflict context implicit. The source names the conflicting magazine and trigger, displays their pair around a red X and promotes an explicit stock-magazine repair action.",
+      "plan": [
+        "Render the actual invalid selected recipe as safely independent ComposePart illustrations in WorkshopAssemblyDiagram; never call full Compose/SetRecipe for it.",
+        "Resolve conflict evidence from AssemblyDiagnostic.Arguments plus the selected recipe's required-category part; show actual names and art around a red X.",
+        "Create a red-edged inspector containing actual diagnostic message and prominent existing SuggestedPartId action.",
+        "Keep undefined resolved statistics absent; contribution/part definitions may remain visible as actual known values."
+      ],
+      "guards": [
+        "Do not silently select stock magazine or install any part during inspection.",
+        "CanSave and CanTrial retain existing gates.",
+        "Handle missing mapping with named neutral text rather than a fabricated assembled weapon."
+      ],
+      "sourceRegions": {
+        "selectedParts": {
+          "sourceRect": [
+            10,
+            73,
+            298,
+            630
+          ],
+          "normalizedRect": [
+            0.006,
+            0.0776,
+            0.1782,
+            0.6695
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "diagram": {
+          "sourceRect": [
+            309,
+            74,
+            958,
+            712
+          ],
+          "normalizedRect": [
+            0.1848,
+            0.0786,
+            0.573,
+            0.7566
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "inspector": {
+          "sourceRect": [
+            1269,
+            73,
+            396,
+            714
+          ],
+          "normalizedRect": [
+            0.759,
+            0.0776,
+            0.2368,
+            0.7588
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "suggestion": {
+          "sourceRect": [
+            1297,
+            431,
+            350,
+            83
+          ],
+          "normalizedRect": [
+            0.7757,
+            0.458,
+            0.2093,
+            0.0882
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        }
+      }
+    },
+    {
+      "id": "29",
+      "name": "29-structure",
+      "branch": "Structure active component, all four support families",
+      "owners": [
+        "ComponentCatalogPanel.cs",
+        "ComponentCatalogPanel.Sketch.cs",
+        "WorkshopAssemblyDiagram.cs"
+      ],
+      "baseline": [
+        "29-structure",
+        "29-wall",
+        "29-slow",
+        "29-repair"
+      ],
+      "physicalFinding": "Every baseline family shares a broad decorative scenery sheet with relatively sparse part placement and tiny unframed metrics. Generator placement rules are present but crowded into the same surface. Neutral no-equipment is a repeated text placeholder.",
+      "plan": [
+        "Separate choices, dense actual exploded recipe diagram and right metrics/rules.",
+        "Draw the selected family's actual parts; reduce scenery to low-contrast decoration and shorten arrow travel.",
+        "Represent utility.none as a ghost/check absence symbol and its real label; never add a raster fragment to the actual recipe.",
+        "Split numeric metrics from placement/behavior rules for each support family. Generator values come from ResolvedSupport.IncomePerWave/MaximumInstances/AllowedMaterials/RefundFraction/PaybackWaves, and full-wave payout prose follows GeneratorWaveLedger."
+      ],
+      "guards": [
+        "No copied source price, health or upgrade requirement numbers.",
+        "Preserve family parts, rights filtering, single catalogue scroll, explicit install and SaveComponent.",
+        "Wall/slow/repair rules remain their actual family semantics."
+      ],
+      "sourceRegions": {
+        "choices": {
+          "sourceRect": [
+            30,
+            309,
+            265,
+            499
+          ],
+          "normalizedRect": [
+            0.0179,
+            0.3284,
+            0.1585,
+            0.5303
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "diagram": {
+          "sourceRect": [
+            302,
+            307,
+            876,
+            517
+          ],
+          "normalizedRect": [
+            0.1806,
+            0.3262,
+            0.5239,
+            0.5494
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "statistics": {
+          "sourceRect": [
+            1192,
+            148,
+            459,
+            341
+          ],
+          "normalizedRect": [
+            0.7129,
+            0.1573,
+            0.2745,
+            0.3624
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "rules": {
+          "sourceRect": [
+            1193,
+            505,
+            457,
+            320
+          ],
+          "normalizedRect": [
+            0.7135,
+            0.5367,
+            0.2733,
+            0.3401
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        }
+      }
+    },
+    {
+      "id": "30",
+      "name": "30-foundation-parts",
+      "branch": "Foundation category excluding Armor specialized page",
+      "owners": [
+        "ComponentCatalogPanel.cs",
+        "ComponentCatalogPanel.Sketch.cs",
+        "WorkshopAssemblyDiagram.cs"
+      ],
+      "baseline": [
+        "30-foundation-parts"
+      ],
+      "physicalFinding": "The standard hull and frame in the baseline look cut because the diagram presents deliberately split authored regions as widely separated parts. The lower standard-frame base is a thin band. Source30 is a compact vertical stack, but modern sheet31 and native v9 own the actual square foundation identity.",
+      "plan": [
+        "Keep the modern actual frame/hull/collar decomposition and compact the vertical diagram slots; do not force the source circular silhouette.",
+        "Add quiet complete-foundation contextual art if needed to make the thin actual frame band legible, while keeping the real selected fragments distinct.",
+        "Fit the actual drawn regions consistently; record Bounds/VisibleBounds equality for part-only compositions instead of claiming a blind substitution fixes clipping.",
+        "Use stronger real candidate foundation cards and separate characteristic frame, retaining empty neutral armor as absence."
+      ],
+      "guards": [
+        "No atlas trim, Region, socket, scale, collider or Fit changes.",
+        "Source31–33 item identities outrank early screen silhouette styling.",
+        "SaveComponent/CancelComponent and CanTrial unchanged."
+      ],
+      "sourceRegions": {
+        "choices": {
+          "sourceRect": [
+            30,
+            229,
+            420,
+            583
+          ],
+          "normalizedRect": [
+            0.0179,
+            0.2434,
+            0.2512,
+            0.6196
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "stack": {
+          "sourceRect": [
+            456,
+            226,
+            728,
+            592
+          ],
+          "normalizedRect": [
+            0.2727,
+            0.2402,
+            0.4354,
+            0.6291
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        },
+        "statistics": {
+          "sourceRect": [
+            1194,
+            148,
+            456,
+            669
+          ],
+          "normalizedRect": [
+            0.7141,
+            0.1573,
+            0.2727,
+            0.7109
+          ],
+          "fitIntent": "Parent-owned adaptive region; source pixels are composition evidence, not raw runtime coordinates."
+        }
+      }
+    }
+  ],
+  "regressionTests": [
+    "ComponentPurchaseUiTests",
+    "CompositeWorkshopTests",
+    "CompositeWorkshopUiTests",
+    "AssemblyPreviewPresentationTests",
+    "AssemblyFoundationVariantArtTests",
+    "AssemblyModernAdapterTests",
+    "AssemblyArtCoverageTests"
+  ],
+  "implementationOrder": [
+    "11 contained catalogue and25 modal ledger (same purchase/inspection owner)",
+    "12/13 rule-field frames and geometry",
+    "14 full candidate foundations and labeled protection rules",
+    "27 safe invalid-part inspector",
+    "29 structure metrics/rules and compact diagram",
+    "30 part-only fit diagnosis and compact modern foundation diagram"
+  ],
+  "verificationPlan": [
+    "Root captures fresh branch screens at all5 target sizes after import; reviewer physically inspects actual PNGs.",
+    "Recheck06/07 shared branches after ComponentCatalogPanel and WorkshopAssemblyDiagram edits.",
+    "Exercise locked inspection, purchase cancel/confirm/failure, owned install, explicit SuggestedPartId repair, local cancel/save, all4 structure families and category navigation.",
+    "Verify actual renderer numbers, no unexpected overlaps, complete text including long part names and full table headers, neutral absence semantics.",
+    "Root owns fresh console/import and regression-test evidence."
+  ],
+  "inputHashes": [
+    {
+      "sha256": "e7db4bda40c51239137e4c59bbea053b7431e2836c511b89d80c4514dab4ef10",
+      "path": "docs/validation/modular-album/refinement-09-30-handoff.json"
+    },
+    {
+      "sha256": "a8c06fb2993fec4e8695a683e945edf7bd56bf6b4aa23029c230c5693ad95c61",
+      "path": "docs/validation/modular-album/refinement-04-08-handoff.json"
+    },
+    {
+      "sha256": "171204bd45a91a79035d194bd729aac8e6698a876909072a6c23e9fc0529b2db",
+      "path": "docs/validation/modular-album/task13-reference-fidelity-audit.md"
+    },
+    {
+      "sha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "path": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png"
+    },
+    {
+      "sha256": "79d69a6170dca6ffdddeecc19f98b53a604d86ddd7622358496de2ff8e347a19",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-11-stencils-1920x1080.png"
+    },
+    {
+      "sha256": "1a06b7aab7366aa0f0aec8781d19d58605e33aa4b0802dfe1cbaece187c1839d",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-11-stencils-1024x768.png"
+    },
+    {
+      "sha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c",
+      "path": "docs/design/game-concept-art-2026-10-16/screens/12-mortar.png"
+    },
+    {
+      "sha256": "06a145ffd10bc6017ef9b2ceeab3addce844dfc07461568dfb90fcdd51b60f23",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-12-mortar-1920x1080.png"
+    },
+    {
+      "sha256": "ca7a22df1072934b7a184c0d83ed34eccbbc8ddb49911e58381e85054e88eff3",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-12-mortar-1024x768.png"
+    },
+    {
+      "sha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61",
+      "path": "docs/design/game-concept-art-2026-10-16/screens/13-fan.png"
+    },
+    {
+      "sha256": "0e99dd4870f9bbed9f73ac3b88012806b43b0fcd9a57c829b517f9b1dc795510",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-13-fan-1920x1080.png"
+    },
+    {
+      "sha256": "3767208379402c437010fd5eea5e086a0c165853cc1775a4abd8bfc24632388a",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-13-fan-1024x768.png"
+    },
+    {
+      "sha256": "1cd621482759ce147f1aa4513f11753f0b3510b9c8af1459acb9d999a0e88e45",
+      "path": "docs/design/game-concept-art-2026-10-16/screens/14-armor.png"
+    },
+    {
+      "sha256": "8284642e0913caea7d2361e68b2f6a0120b9aaa04ada6ba221862259476397e3",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-14-armor-1920x1080.png"
+    },
+    {
+      "sha256": "55e66aa8a0cf31f330d05499fd60296294e7f31213402249eea6549202c681c1",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-14-armor-1024x768.png"
+    },
+    {
+      "sha256": "05b7ab824ddcc1ac63d718b871bd4907e2192a7aac3aaf985d9eb6064fb332b4",
+      "path": "docs/design/game-concept-art-2026-10-16/screens/25-purchase.png"
+    },
+    {
+      "sha256": "3536c73ee0e3c34bacb720e85c8840ae073ed49b6b6cde4f095d53e48e75224f",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-25-purchase-1920x1080.png"
+    },
+    {
+      "sha256": "860df7bda7901140162f59ea61d3140d043f761d06642c79b3087bedcc3775a1",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-25-purchase-1024x768.png"
+    },
+    {
+      "sha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f",
+      "path": "docs/design/game-concept-art-2026-10-16/screens/27-invalid.png"
+    },
+    {
+      "sha256": "fe5777a9ab46add5122e40c1d795c38b399f98af4712e76c99ebc9ee1542adde",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-27-invalid-1920x1080.png"
+    },
+    {
+      "sha256": "7fa13529958c1b5057f4c3d7c5e1443ceead4e286b57c966f07bb890bd195267",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-27-invalid-1024x768.png"
+    },
+    {
+      "sha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "path": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png"
+    },
+    {
+      "sha256": "86b32985b5d8c082f68e7033ee3dbda5503166399629583dcd81e5c84b2001db",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-structure-1920x1080.png"
+    },
+    {
+      "sha256": "df4248fa1274e941167cc8dbff3705210cf0f5f4aebd6c4091ca230c11970a64",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-structure-1024x768.png"
+    },
+    {
+      "sha256": "37951aee30cc916dc51c97445246225e9853b37614021b230dac9144857899d0",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-wall-1920x1080.png"
+    },
+    {
+      "sha256": "2927bd708de38a0bfa9926ed9d383bfaf2161f3b4e0c6b84f963a69f1251bad3",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-wall-1024x768.png"
+    },
+    {
+      "sha256": "63a0b48b7028612f6999ad92c388705d865e2ef3885c438c693cc238925c6a6d",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-slow-1920x1080.png"
+    },
+    {
+      "sha256": "48efa8108ab5533c7741dc30d2b60ab85fa0fda364cb13c42bbec952ec49feb7",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-slow-1024x768.png"
+    },
+    {
+      "sha256": "49ab4ba41f131e8b1384f5382cb748cdc27bdabb2ef43d37a0be002fc1ec81ec",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-repair-1920x1080.png"
+    },
+    {
+      "sha256": "29c4e189783530c4b568cdca749888ffa945648403612c25ba14d85dc75b4210",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-repair-1024x768.png"
+    },
+    {
+      "sha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "path": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png"
+    },
+    {
+      "sha256": "a4e53a0efcd3d767f17bda1115888ca56c81dbb8485ebd9a1517a0f9c55f1d5e",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-foundation-parts-1920x1080.png"
+    },
+    {
+      "sha256": "03c59c4b9ac670eda53a83b1d7279676da6e2287017a771c3f185a7d974c26a9",
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-foundation-parts-1024x768.png"
+    },
+    {
+      "sha256": "c196824234faebeb4054827ea880cef5862d57576e8f7f52825546498b79e649",
+      "path": "docs/design/album-assembly-2026-10-17/art/01-towers.png"
+    },
+    {
+      "sha256": "c992257bb49d26a15b0601c742d137195104e16a1b8b92edb1db5d720d44064e",
+      "path": "docs/design/album-assembly-2026-10-17/art/02-weapon-parts.png"
+    },
+    {
+      "sha256": "90f87c2008cf9c287077e5875d85fecc61345c0b98dab68ea809f22977d1355f",
+      "path": "docs/design/album-assembly-2026-10-17/art/03-structures.png"
+    },
+    {
+      "sha256": "d351a1e24e81ad6200ffe54cc1a3ef7c58eaa83e5311bbab9a92dedebaa0d05e",
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.png"
+    },
+    {
+      "sha256": "a0c6796dfdf3d1c4ffb8aefd325759170117be30bcf4ea8f72db9987a2a13048",
+      "path": "ArtSource/Notebook/NewStyle/assembly-parts.source.json"
+    }
+  ]
+}

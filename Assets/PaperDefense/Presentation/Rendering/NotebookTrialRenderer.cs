@@ -244,7 +244,7 @@ namespace PaperDefense.Presentation
             return Rect.MinMaxRect(left - 2, bottom - 2, right + 2, top + 3);
         }
 
-        internal static void Draw(MeshPen pen, NotebookTrialPlayback playback, Rect? framing = null)
+        internal static void Draw(MeshPen pen, NotebookTrialPlayback playback, Rect? framing = null, float gridOpacity = .12f)
         {
             pen.Clear();
             var theme = NotebookVisualThemeAsset.Default;
@@ -253,9 +253,9 @@ namespace PaperDefense.Presentation
             var bounds = framing ?? new Rect(8, 8, 42, 28);
             int grid = framing.HasValue ? 2 : 4;
             for (int y = Mathf.CeilToInt(bounds.yMin / grid) * grid; y <= bounds.yMax; y += grid)
-                pen.Line(new Vector2(bounds.xMin, y), new Vector2(bounds.xMax, y), .04f, MeshPen.Alpha(NotebookPalette.Blue, .12f));
+                pen.Line(new Vector2(bounds.xMin, y), new Vector2(bounds.xMax, y), .04f, MeshPen.Alpha(NotebookPalette.Blue, gridOpacity));
             for (int x = Mathf.CeilToInt(bounds.xMin / grid) * grid; x <= bounds.xMax; x += grid)
-                pen.Line(new Vector2(x, bounds.yMin), new Vector2(x, bounds.yMax), .04f, MeshPen.Alpha(NotebookPalette.Blue, .12f));
+                pen.Line(new Vector2(x, bounds.yMin), new Vector2(x, bounds.yMax), .04f, MeshPen.Alpha(NotebookPalette.Blue, gridOpacity));
             if (!framing.HasValue)
                 pen.Line(new Vector2(48, 8), new Vector2(48, 36), .09f, MeshPen.Alpha(NotebookPalette.Red, .65f));
             foreach (var blot in frame.Blots)

@@ -1,0 +1,73 @@
+{
+  "status": "implemented_visual_reviewed",
+  "visualEvidence": "docs/validation/modular-album/refinement-components-11-30-visual-review.json",
+  "visualVerification": "All65 current specialized runtime PNGs physically reviewed at all5 targets;60 pass and5 pass with preserved authored-art appearance in30. Final test/console gate remains owned by root.",
+  "owner": "/root/implement_components_06_07",
+  "plan": "docs/validation/modular-album/refinement-components-11-30-plan.json",
+  "sourceVision": "All eight assigned source screen images,22 baseline1920/1024 captures, modern31–33 sheets and native StandardFoundation-v9 image physically inspected before implementation.",
+  "files": [
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ComponentCatalogPanel.cs",
+      "sha256": "abf0cfe6d7167baeef1705f352f512a37f01af4434a057d514e6a7b596aa4356"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ComponentCatalogPanel.Sketch.cs",
+      "sha256": "9575b94a340e916841e6677be6b8a0d18260598c06a2597d8e0bcf5339a52fe0"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopAssemblyDiagram.cs",
+      "sha256": "37f63097d9a3455f31d803faf39ebf14db2cab645e88fe05cbddb42b393cfe03"
+    }
+  ],
+  "scope": {
+    "s25": "Actual required/current level, actual price/gold/remainder ledger, torn local edge, close X and retained Cancel initial focus.",
+    "s11": "Inset actual parts sheet and bounded art-led cards over a quiet real recipe context.",
+    "s27": "Actual invalid recipe as independent ComposePart drawings, diagnostic-derived conflicting part pair, red inspector and original SuggestedPartId repair.",
+    "s12": "Separate choices/actual mortar rule field/statistics frames; wider paired cards and stronger radius ink.",
+    "s29": "Separate actual structure metrics/placement rules, quiet scenery, compact real diagram and neutral no-equipment ghost/check UI symbol.",
+    "s13": "Stronger real-angle sector, curved dimension arrows, quieter radial lines, true-muzzle anchored weapon and actual Sight navigation.",
+    "s14": "Full candidate foundation variants in cards; separate clearly labeled protection rule panel; no functional probe.",
+    "s30": "Compact existing square-foundation authored-region stack; no source-region/fragment-scale/trim/socket/collider changes."
+  },
+  "behavior": [
+    "Existing InspectPart/SelectPart/PurchasePart handlers retain command ownership.",
+    "CanTrial remains !IsComponentOpen && ValidParent.",
+    "SaveComponent/CancelComponent remain on the enclosing sheet.",
+    "No fake trial, functional damage probe or invalid resolved statistics.",
+    "No catalogue identity/resource or game-balance changes."
+  ],
+  "staticEvidence": [
+    "Balanced braces in all three modified source files.",
+    "No trailing whitespace in modified source files.",
+    "CanTrial, SelectPart, SuggestedPartId and PurchasePart source boundaries inspected."
+  ],
+  "notExecuted": [
+    "Unity import/compile",
+    "PlayMode/EditMode tests",
+    "Final post-recapture test/console gate, tracked separately by root"
+  ],
+  "rootEvidenceOwner": "/root",
+  "regressionRecommendations": [
+    "ComponentPurchaseUiTests",
+    "CompositeWorkshopTests",
+    "CompositeWorkshopUiTests",
+    "AssemblyPreviewPresentationTests",
+    "AssemblyFoundationVariantArtTests",
+    "AssemblyModernAdapterTests",
+    "AssemblyArtCoverageTests"
+  ],
+  "captureRecommendations": [
+    "11-stencils,12-mortar,13-fan,14-armor,25-purchase,27-invalid,29-structure/wall/slow/repair,30-foundation-parts at all five targets",
+    "06-drawing and07-details shared-branch regression captures"
+  ],
+  "risks": [
+    "Purchase-failure branch text is behavior-test coverage owned by root; screenshots cover normal and unaffordable locked conditions.",
+    "Modern30 thin base band is intentionally retained; a full circular source silhouette is not claimed."
+  ],
+  "compactGeometryRepair": {
+    "lockedHead": "Subordinate art omitted when pre-table space below64px; otherwise conservative rotated-square AABB fits inside the available gap with8px table clearance.",
+    "armor": "Budget actual direction-preview height before the six-row table; derive pitch from remaining space and keep10px before actions.432h/two-action case: diagram108..160, rows170..314 at24px pitch, actions324.",
+    "mainArmorTitle": "Reserve title40..74 plus10px gap; fit the actual main preview/scenery starting84 inside the upper frame. This removes the real1024 locked front-shield title/collar overlap without masking it.",
+    "status": "Source arithmetic and actual compact11/14 runtime captures verified; all10 replacement14 captures physically re-reviewed."
+  }
+}

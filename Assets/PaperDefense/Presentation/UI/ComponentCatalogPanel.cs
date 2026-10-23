@@ -150,27 +150,30 @@ namespace PaperDefense.Presentation
             bool catalogueLayout = comparingHeads && !draft.IsOwned(inspected.Id);
             bool armorLayout = draft.ActiveComponent == WorkshopComponentKind.Foundation && draft.ActiveCategory == ComponentCategory.Armor;
             bool mortarLayout = familyLayout && activeWeapon.Family == AssemblyWeaponFamily.Mortar && draft.ActiveCategory == ComponentCategory.Head;
-            float listWidth = mortarLayout ? width * .27f - 16 : familyLayout ? width * .35f - 28 : Mathf.Clamp(width * .22f, 218, 300), gap = 16;
+            bool drawingLayout = UsesWeaponDrawing(inspected, familyLayout);
+            float listWidth = mortarLayout ? width * .32f - 16 : familyLayout ? width * .35f - 28 : Mathf.Clamp(width * .22f, 218, 300), gap = 16;
             bool secondaryAction = inspected != null && (!string.IsNullOrEmpty(draft.SuggestedPartId) ||
                 !draft.IsOwned(inspected.Id) && (run.Workshop.Level < inspected.RequiredLevel || run.Workshop.Gold < inspected.UnlockGold));
             float variantY = Mathf.Min(draft.ActiveCategory == ComponentCategory.Magazine ? 294 : secondaryAction ? 264 : 284,
                 height - (secondaryAction ? 116 : 66) - 48);
-            var listBounds = mortarLayout ? new Rect(0, 40, listWidth, height - 48)
+            float catalogueInset = width * .12f;
+            var listBounds = mortarLayout ? new Rect(12, 74, listWidth - 20, height - 96)
                 : familyLayout ? new Rect(width * .65f + 6, variantY, listWidth, height - (secondaryAction ? 116 : 66) - variantY)
                 : armorLayout ? new Rect(0, height * .53f, width * .65f - 14, height * .47f - 8)
                 : comparisonLayout ? new Rect(0, height - 128, width * .65f - 14, 122)
-                : catalogueLayout ? new Rect(0, 40, width * .65f - 14, height - 40)
+                : catalogueLayout ? new Rect(catalogueInset + 14, 82, width * .65f - catalogueInset - 28, height - 100)
                 : new Rect(0, 40, listWidth, height - 40);
             if (inspected != null) Details(inspected, familyLayout ? new Rect(0, 0, width, height)
                 : comparisonLayout || armorLayout ? new Rect(0, 0, width, height)
-                : catalogueLayout ? new Rect(width * .65f, 0, width * .35f, height)
+                : catalogueLayout ? new Rect(width * .65f, 42, width * .35f, height - 42)
                 : new Rect(listWidth + gap, 0, width - listWidth - gap, height), familyLayout, candidate);
             if (!familyLayout && !comparisonLayout && !catalogueLayout && !armorLayout) ui.Label(Root, "Component catalogue heading", Copy("catalog"), new Rect(0, 0, listWidth, 34), 23, true);
             var toggle = ui.Button(Root, "Component show unavailable", mortarLayout ? new Rect(0, 0, listWidth, 34) : familyLayout ? new Rect(width * .65f + 6, 4, listWidth, 38) : new Rect(width - 330, 0, 330, 34),
                 Copy("show_unavailable", Copy(showUnavailable ? "yes" : "no")), () => SetShowUnavailable(!showUnavailable));
             ui.SetSelected(toggle, showUnavailable);
             var visible = compatible.Where(p => showUnavailable || draft.IsOwned(p.Id)).ToArray();
-            float rowHeight = mortarLayout || armorLayout ? listBounds.height - 6 : familyLayout ? Mathf.Clamp(listBounds.height, 48, 118) : comparisonLayout ? 118 : catalogueLayout ? listBounds.height - 6 : Mathf.Clamp((height - 46) / 2.6f, 150, 230);
+            float rowHeight = mortarLayout ? Mathf.Min(listBounds.height - 6, Mathf.Clamp(height * .72f, 260, 510)) : armorLayout ? listBounds.height - 6 : familyLayout ? Mathf.Clamp(listBounds.height, 48, 118) : comparisonLayout ? 118 : catalogueLayout ? Mathf.Min(listBounds.height - 6, Mathf.Clamp(height * .64f, 240, 470))
+                : drawingLayout ? Mathf.Clamp((height - 46) / 2.2f, 190, 250) : Mathf.Clamp((height - 46) / 2.6f, 150, 230);
             int columns = mortarLayout ? 2 : comparisonLayout || catalogueLayout || armorLayout ? 3 : familyLayout && listWidth >= 340 ? 2 : 1;
             float rowWidth = (listBounds.width - 10 - (columns - 1) * 10) / columns;
             const float rowGap = 10;
@@ -180,13 +183,23 @@ namespace PaperDefense.Presentation
                 var part = visible[i]; bool owned = draft.IsOwned(part.Id);
                 bool compact = comparisonLayout || familyLayout && rowHeight < 96;
                 bool mini = familyLayout && rowHeight < 72;
+                bool artLed = drawingLayout || catalogueLayout;
                 var button = ui.Button(list.Content, "Component inspect " + part.Id, new Rect(i % columns * (rowWidth + rowGap), i / columns * (rowHeight + rowGap), rowWidth, rowHeight), "", () => InspectPart(part.Id));
                 ui.SetSelected(button, part.Id == inspectedId);
-                var name = ui.Label(button.transform, "Component part name", part.Name, compact ? new Rect(74, mini ? 0 : 4, rowWidth - 82, mini ? 20 : 34) : new Rect(12, 4, rowWidth - 24, familyLayout ? 24 : 36), mini ? 15 : familyLayout ? 18 : 21, true);
+                var name = ui.Label(button.transform, "Component part name", part.Name, compact ? new Rect(74, mini ? 0 : 4, rowWidth - 82, mini ? 20 : 34) : artLed ? new Rect(12, rowHeight - 96, rowWidth - 24, 40) : new Rect(12, 4, rowWidth - 24, familyLayout ? 24 : 36), mini ? 15 : familyLayout ? 18 : 21, true);
                 name.resizeTextForBestFit = true; name.resizeTextMinSize = familyLayout ? 12 : 16; name.resizeTextMaxSize = mini ? 15 : familyLayout ? 18 : 21;
-                DrawPart(button.transform, part, "Component part illustration", compact ? new Rect(6, 12, 62, rowHeight - 24) :
-                    new Rect(10, familyLayout ? 30 : 38, rowWidth - 20, familyLayout ? Mathf.Max(20, rowHeight - 66) : rowHeight - 94));
-                var availability = ui.Label(button.transform, "Component part availability", owned ? Copy(part.Id == EquippedId() ? "equipped" : "owned") : Copy(compact ? "conditions_short" : "conditions", part.RequiredLevel, part.UnlockGold),
+                var partBounds = compact ? new Rect(6, 12, 62, rowHeight - 24) :
+                    artLed ? new Rect(14, 8, rowWidth - 28, Mathf.Max(38, rowHeight - 106)) : new Rect(10, familyLayout ? 30 : 38, rowWidth - 20, familyLayout ? Mathf.Max(20, rowHeight - 66) : rowHeight - 94);
+                var foundationCandidate = draft.ActiveComponent == WorkshopComponentKind.Foundation &&
+                    (part.Category == ComponentCategory.Armor || part.Category == ComponentCategory.Hull)
+                    ? InspectedResolution(part)?.Snapshot.Recipe.Tower.Foundation : null;
+                if (foundationCandidate != null)
+                {
+                    var illustration = WorkshopUi.Graphic<WeaponAssemblyGraphic>(button.transform, "Component part illustration", partBounds);
+                    illustration.SetComposition(AssemblyVisualComposer.ComposeFoundation(foundationCandidate));
+                }
+                else DrawPart(button.transform, part, "Component part illustration", partBounds);
+                var availability = ui.Label(button.transform, "Component part availability", owned ? Copy(part.Id == EquippedId() ? "equipped" : "owned") : Copy(compact || catalogueLayout ? "conditions_short" : "conditions", part.RequiredLevel, part.UnlockGold),
                     compact ? new Rect(74, rowHeight - (mini ? 24 : 32), rowWidth - 82, 22) : new Rect(12, rowHeight - (familyLayout ? 36 : 66), rowWidth - 24, familyLayout ? 26 : 30),
                     compact ? 12 : familyLayout ? 13 : 16, color: owned ? WorkshopUi.Blue : WorkshopUi.Warning);
                 if (mortarLayout)
@@ -194,7 +207,13 @@ namespace PaperDefense.Presentation
                     WorkshopUi.Place(availability.rectTransform, new Rect(10, rowHeight - 54, rowWidth - 20, 44));
                     availability.resizeTextForBestFit = true; availability.resizeTextMinSize = 10; availability.resizeTextMaxSize = 13;
                 }
-                if (!familyLayout) ui.Label(button.transform, "Component part contribution", Contribution(part, rowWidth < 280), compact ? new Rect(74, rowHeight - 62, rowWidth - 82, 28) : new Rect(12, rowHeight - 28, rowWidth - 24, 24), compact ? 12 : 14, color: WorkshopUi.Muted);
+                if (artLed)
+                {
+                    WorkshopUi.Place(availability.rectTransform, new Rect(12, rowHeight - 54, rowWidth - 24, 20));
+                    availability.fontSize = 15;
+                }
+                if (!familyLayout) ui.Label(button.transform, "Component part contribution", Contribution(part, rowWidth < 280), compact ? new Rect(74, rowHeight - 62, rowWidth - 82, 28)
+                    : artLed ? new Rect(12, rowHeight - 32, rowWidth - 24, 20) : new Rect(12, rowHeight - 28, rowWidth - 24, 24), compact || catalogueLayout ? 12 : 14, color: WorkshopUi.Muted);
             }
             if (visible.Length == 0) ui.Label(list.Content, "Component empty catalogue", Copy("empty"), new Rect(16, 18, listWidth - 42, 120), 21);
             if (revealInspected)
@@ -357,6 +376,11 @@ namespace PaperDefense.Presentation
             var composition = AssemblyVisualComposer.ComposePart(reference);
             if (composition.Fragments.Count == 0)
             {
+                if (part.Category == ComponentCategory.Utility)
+                {
+                    WorkshopUi.Graphic<WorkshopNeutralPartGraphic>(parent, name + " absence", new Rect(rect.x + rect.width * .2f, rect.y, rect.width * .6f, Mathf.Max(24, rect.height - 30)));
+                    rect = new Rect(rect.x, rect.yMax - 30, rect.width, 30);
+                }
                 var neutral = ui.Label(parent, name, part.Name, rect, 20, true, WorkshopUi.Muted);
                 neutral.alignment = TextAnchor.MiddleCenter; return;
             }
@@ -417,7 +441,9 @@ namespace PaperDefense.Presentation
             var shade = ui.Panel(parent, "Component purchase overlay", new Rect(0, 0, w, h), new Color(.08f, .15f, .25f, .45f), true); purchase = shade.gameObject;
             float cw = Mathf.Min(620, w - 40), ch = Mathf.Min(650, h - 40);
             var card = ui.Panel(shade, "Component purchase sheet", new Rect((w - cw) * .5f, (h - ch) * .5f, cw, ch), WorkshopUi.Paper, true);
-            ui.Label(card, "Component purchase title", Copy("purchase_title", part.Name), new Rect(24, 16, cw - 48, 74), 30, true);
+            WorkshopUi.Graphic<WorkshopPurchasePaperEdge>(card, "Component purchase torn edge", new Rect(0, 0, cw, ch));
+            ui.Label(card, "Component purchase title", Copy("purchase_title", part.Name), new Rect(24, 16, cw - 94, 74), 30, true);
+            var close = ui.IconButton(card, "Component purchase close", new Rect(cw - 62, 18, 40, 40), WorkshopIcon.Close, Copy("cancel"), ClosePurchase);
             var reference = new PartRef(part.Id, part.Revision);
             var drawing = AssemblyVisualComposer.ComposePart(reference);
             float illustrationHeight = Mathf.Clamp(ch * .3f, 96, 190);
@@ -428,13 +454,29 @@ namespace PaperDefense.Presentation
             illustration.rectTransform.pivot = new Vector2(.5f, .5f);
             illustration.rectTransform.anchoredPosition = new Vector2(cw * .5f, -100 - illustrationHeight * .5f);
             if (slender) illustration.rectTransform.localRotation = Quaternion.Euler(0, 0, -65);
-            ui.Label(card, "Component purchase conditions", Copy("purchase_message", part.RequiredLevel, run.Workshop.Level, part.UnlockGold, run.Workshop.Gold, run.Workshop.Gold - part.UnlockGold),
-                new Rect(24, 112 + illustrationHeight, cw - 48, ch - illustrationHeight - 204), 22);
-            ui.Button(card, "Component purchase cancel", new Rect(24, ch - 72, (cw - 60) * .5f, 48), Copy("cancel"), ClosePurchase, WorkshopIcon.Back);
-            var confirm = ui.Button(card, "Component purchase confirm", new Rect(36 + (cw - 60) * .5f, ch - 72, (cw - 60) * .5f, 48), Copy("purchase", part.UnlockGold), () => {
+            float quoteY = 112 + illustrationHeight;
+            ui.Label(card, "Component purchase conditions", "Требуется уровень " + part.RequiredLevel + " · твой уровень " + run.Workshop.Level,
+                new Rect(24, quoteY, cw - 84, 34), 22);
+            var requirement = WorkshopUi.Graphic<WorkshopIconGraphic>(card, "Component purchase requirement state", new Rect(cw - 58, quoteY + 4, 26, 26));
+            requirement.Icon = run.Workshop.Level >= part.RequiredLevel ? WorkshopIcon.Check : WorkshopIcon.Close;
+            requirement.color = run.Workshop.Level >= part.RequiredLevel ? new Color32(27, 122, 79, 255) : WorkshopUi.Warning;
+            var ledger = ui.Panel(card, "Component purchase ledger", new Rect(24, quoteY + 44, cw - 48, 118), Color.white);
+            string[] ledgerLabels = { "Стоимость", "Твой запас", "Останется" };
+            int[] ledgerValues = { part.UnlockGold, run.Workshop.Gold, run.Workshop.Gold - part.UnlockGold };
+            for (int i = 0; i < ledgerLabels.Length; i++)
+            {
+                ui.Label(ledger, "Component purchase ledger label " + i, ledgerLabels[i], new Rect(18, 4 + i * 36, (cw - 84) * .55f, 34), 23, true);
+                var coin = WorkshopUi.Graphic<WorkshopIconGraphic>(ledger, "Component purchase ledger currency " + i, new Rect((cw - 48) * .58f, 9 + i * 36, 24, 24)); coin.Icon = WorkshopIcon.Cost; coin.color = WorkshopUi.Warning;
+                ui.Label(ledger, "Component purchase ledger value " + i, ledgerValues[i] + " золота", new Rect((cw - 48) * .66f, 4 + i * 36, (cw - 48) * .31f, 34), 23, true,
+                    i == 2 && ledgerValues[i] < 0 ? WorkshopUi.Warning : WorkshopUi.Blue);
+            }
+            ui.Label(card, "Component purchase boundary note", "Покупка один раз. Установка — отдельным действием.", new Rect(24, quoteY + 172, cw - 48, 58), 20);
+            ui.Button(card, "Component purchase cancel", new Rect(24, ch - 76, (cw - 60) * .5f, 52), Copy("cancel"), ClosePurchase, WorkshopIcon.Back);
+            var confirm = ui.Button(card, "Component purchase confirm", new Rect(36 + (cw - 60) * .5f, ch - 76, (cw - 60) * .5f, 52), Copy("purchase", part.UnlockGold), () => {
                 draft.PurchasePart(part.Id, Guid.NewGuid()); ClosePurchase(); revealInspected = true; Refresh(); changed?.Invoke();
             }, WorkshopIcon.Cost, true);
             confirm.interactable = !draft.IsOwned(part.Id) && run.Workshop.Level >= part.RequiredLevel && run.Workshop.Gold >= part.UnlockGold;
+            close.transform.SetAsLastSibling();
             WorkshopModal.Open(shade.gameObject, ClosePurchase);
         }
         public void ClosePurchase()
@@ -461,25 +503,34 @@ namespace PaperDefense.Presentation
             var rect = rectTransform.rect; diagram.Clear();
             var blue = WorkshopUi.Blue;
             var artBounds=AssemblyPreviewPose.VisibleBounds(composition);
-            float scale=Mathf.Min(rect.width*.58f/Mathf.Max(.001f,artBounds.width),rect.height*.34f/Mathf.Max(.001f,artBounds.height));
+            float scale=Mathf.Min(rect.width*.62f/Mathf.Max(.001f,artBounds.width),rect.height*(Weapon.Family == AssemblyWeaponFamily.Fan ? .38f : .34f)/Mathf.Max(.001f,artBounds.height));
             Vector2? muzzleDestination=null;
             Vector2 artCenter;
             if (Weapon.Family == AssemblyWeaponFamily.Fan)
             {
-                var origin = new Vector2(rect.center.x, rect.yMin + rect.height * .35f);
-                float radius = Mathf.Min(rect.width * .48f, rect.height * .63f);
+                var origin = new Vector2(rect.center.x, rect.yMin + rect.height * .39f);
+                float radius = Mathf.Min(rect.width * .46f, rect.height * .55f);
                 float angle = Mathf.Clamp(Weapon.ConeDegrees, 0, 180) * Mathf.Deg2Rad;
                 Vector2 Point(float fraction) => origin + new Vector2(Mathf.Cos(Mathf.PI * .5f - angle * .5f + angle * fraction), Mathf.Sin(Mathf.PI * .5f - angle * .5f + angle * fraction)) * radius;
                 var previous = Point(0);
                 for (int i = 1; i <= 32; i++)
                 {
                     var next = Point(i / 32f);
-                    diagram.Triangle(origin, previous, next, MeshPen.Alpha(blue, .20f));
-                    if (i % 2 == 0) diagram.Line(origin, next, 1, MeshPen.Alpha(blue, .16f));
-                    if (i % 3 != 0) diagram.Line(previous, next, 1.5f, MeshPen.Alpha(blue, .8f));
+                    diagram.Triangle(origin, previous, next, MeshPen.Alpha(blue, .28f));
+                    if (i % 8 == 0) diagram.Line(origin, next, 1, MeshPen.Alpha(blue, .22f));
+                    if (i % 3 != 0) diagram.Line(previous, next, 2, blue);
                     previous = next;
                 }
-                diagram.Line(origin, Point(0), 1.5f, blue); diagram.Line(origin, Point(1), 1.5f, blue);
+                diagram.Line(origin, Point(0), 2, blue); diagram.Line(origin, Point(1), 2, blue);
+                Vector2 Dimension(float fraction) => origin + (Point(fraction) - origin) * 1.065f;
+                for (int i = 0; i < 48; i++) diagram.Line(Dimension(i / 48f), Dimension((i + 1) / 48f), 2.1f, blue);
+                foreach (float end in new[] { 0f, 1f })
+                {
+                    var tip = Dimension(end); var along = (tip - Dimension(end == 0 ? .04f : .96f)).normalized;
+                    var side = new Vector2(-along.y, along.x);
+                    diagram.Line(tip, tip - along * 10 + side * 5, 2.2f, blue);
+                    diagram.Line(tip, tip - along * 10 - side * 5, 2.2f, blue);
+                }
                 int targets = Mathf.Min(8, Weapon.TargetLimit);
                 for (int i = 0; i < targets; i++)
                 {
@@ -498,14 +549,14 @@ namespace PaperDefense.Presentation
                 // Radius is shown in one labelled world scale; wider heads visibly expand the footprint.
                 float unit = Mathf.Min(rect.width / 12, rect.height / 10);
                 float radius = Weapon.Radius * unit;
-                diagram.Disc(point, radius, MeshPen.Alpha(blue, .18f), 48);
+                diagram.Disc(point, radius, MeshPen.Alpha(blue, .24f), 48);
                 var diagonal=new Vector2(.7071068f,.7071068f); var across=new Vector2(-diagonal.y,diagonal.x);
                 for(float at=-radius+4;at<radius;at+=8)
                 {
                     float half=Mathf.Sqrt(Mathf.Max(0,radius*radius-at*at)); var middle=point+across*at;
-                    diagram.Line(middle-diagonal*half,middle+diagonal*half,1,MeshPen.Alpha(blue,.25f));
+                    diagram.Line(middle-diagonal*half,middle+diagonal*half,1.3f,MeshPen.Alpha(blue,.38f));
                 }
-                diagram.Ring(point, radius, 1.5f, blue, 48, dashed: true);
+                diagram.Ring(point, radius, 2.2f, blue, 48, dashed: true);
                 for (int i = 0; i < 3; i++) Target(diagram, point + new Vector2(radius * (.8f + i * .1f), radius * (.95f - i * .95f)), 16);
                 artCenter = new Vector2(rect.center.x - rect.width * .22f, rect.yMin + rect.height * .18f);
                 var start = composition.Anchors.Count>0 ? artCenter+(composition.Anchors[0].Muzzle-artBounds.center)*scale
@@ -533,9 +584,9 @@ namespace PaperDefense.Presentation
             var lowerLeft = center + new Vector2(-radius * .8f, -radius * .8f);
             var lowerRight = center + new Vector2(radius * .8f, -radius * .8f);
             var point = center + Vector2.down * radius * 1.35f;
-            pen.Triangle(shoulderLeft, shoulderRight, point, MeshPen.Alpha(ink, .11f));
-            pen.Line(shoulderLeft, shoulderRight, 1.5f, ink); pen.Line(shoulderLeft, lowerLeft, 1.5f, ink);
-            pen.Line(shoulderRight, lowerRight, 1.5f, ink); pen.Line(lowerLeft, point, 1.5f, ink); pen.Line(lowerRight, point, 1.5f, ink);
+            pen.Triangle(shoulderLeft, shoulderRight, point, MeshPen.Alpha(ink, .18f));
+            pen.Line(shoulderLeft, shoulderRight, 2.2f, ink); pen.Line(shoulderLeft, lowerLeft, 2.2f, ink);
+            pen.Line(shoulderRight, lowerRight, 2.2f, ink); pen.Line(lowerLeft, point, 2.2f, ink); pen.Line(lowerRight, point, 2.2f, ink);
             var head = center + Vector2.up * radius * 1.45f;
             pen.Ring(head, radius * .48f, 1.4f, ink, 12);
             pen.Line(head + new Vector2(-radius * .32f, 0), head + new Vector2(radius * .32f, 0), 1.4f, ink);

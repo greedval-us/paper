@@ -76,8 +76,8 @@
     },
     "visualEvidence": "refinement-terrain-visual-review.json",
     "residuals": [
-      "Fixed planning instruction can overlap world actors when deliberately panned beneath it. To revisit with battle-scene layout.",
-      "Close castle views are sparse because fake viewport forests were removed; further world style must remain grounded in map terrain."
+      "No viewport-relative scenery remains. Real map props stay reserved and world-anchored; the actual battlefield is sparser than the illustrative source composition.",
+      "HUD elements deliberately overlay world actors when the camera is panned underneath them."
     ]
   },
   "scenes": [
@@ -88,8 +88,9 @@
       "status": "accepted_with_documented_residuals",
       "baselineCapture": "fidelity-01-home-1920x1080.png",
       "visualEvidence": "refinement-first3-visual-review.json",
-      "technicalEvidence": "refinement-01-09-green.json",
-      "reviewSource": "agent"
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "02",
@@ -98,8 +99,9 @@
       "status": "accepted_with_documented_residuals",
       "baselineCapture": "fidelity-02-map-1920x1080.png",
       "visualEvidence": "refinement-first3-visual-review.json",
-      "technicalEvidence": "refinement-01-09-green.json",
-      "reviewSource": "agent"
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "03",
@@ -108,197 +110,332 @@
       "status": "accepted_with_documented_residuals",
       "baselineCapture": "fidelity-03-preparation-1920x1080.png",
       "visualEvidence": "refinement-first3-visual-review.json",
-      "technicalEvidence": "refinement-01-09-green.json",
-      "reviewSource": "agent"
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "04",
       "title": "Выбор основы",
       "source": "04-foundation.png",
-      "status": "implemented_pending_visual_verification",
-      "baselineCapture": "fidelity-04-foundation-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-04-foundation-1920x1080.png",
+      "visualEvidence": "refinement-04-05-08-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "05",
       "title": "Выбор оружия",
       "source": "05-weapons.png",
-      "status": "implemented_pending_visual_verification",
-      "baselineCapture": "fidelity-05-weapons-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-05-weapons-1920x1080.png",
+      "visualEvidence": "refinement-04-05-08-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "06",
       "title": "Сборка оружия",
       "source": "06-drawing.png",
-      "status": "implemented_pending_visual_verification",
-      "baselineCapture": "fidelity-06-drawing-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-06-drawing-1920x1080.png",
+      "visualEvidence": "refinement-06-07-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "07",
       "title": "Сравнение деталей",
       "source": "07-details.png",
-      "status": "implemented_pending_visual_verification",
-      "baselineCapture": "fidelity-07-details-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-07-details-1920x1080.png",
+      "visualEvidence": "refinement-06-07-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "08",
       "title": "Проверка сборки",
       "source": "08-review.png",
-      "status": "implemented_pending_visual_verification",
-      "baselineCapture": "fidelity-08-review-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-08-review-1920x1080.png",
+      "visualEvidence": "refinement-04-05-08-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "09",
       "title": "Альбом",
       "source": "09-album.png",
-      "status": "implemented_pending_visual_verification",
-      "baselineCapture": "fidelity-09-album-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-09-album-1920x1080.png",
+      "visualEvidence": "refinement-09-24-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "10",
       "title": "Полигон",
       "source": "10-trial.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-10-trial-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-10-trial-1920x1080.png",
+      "visualEvidence": "refinement-10-26-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "11",
       "title": "Открытия деталей",
       "source": "11-stencils.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-11-stencils-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-11-stencils-1920x1080.png",
+      "visualEvidence": "refinement-components-11-30-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "12",
       "title": "Мортира",
       "source": "12-mortar.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-12-mortar-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-12-mortar-1920x1080.png",
+      "visualEvidence": "refinement-components-11-30-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "13",
       "title": "Веер",
       "source": "13-fan.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-13-fan-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-13-fan-1920x1080.png",
+      "visualEvidence": "refinement-components-11-30-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "14",
       "title": "Броня",
       "source": "14-armor.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-14-armor-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-14-armor-1920x1080.png",
+      "visualEvidence": "refinement-components-11-30-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "15",
       "title": "Планирование",
       "source": "15-planning.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-15-planning-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-15-planning-1920x1080.png",
+      "visualEvidence": "refinement-battle-15-19-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "16",
       "title": "Бой",
       "source": "16-battle.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-16-battle-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-16-battle-1920x1080.png",
+      "visualEvidence": "refinement-battle-15-19-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "17",
       "title": "Инспектор",
       "source": "17-tower.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-17-tower-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-17-tower-1920x1080.png",
+      "visualEvidence": "refinement-battle-15-19-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "18",
       "title": "Пауза",
       "source": "18-pause.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-18-pause-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-18-pause-1920x1080.png",
+      "visualEvidence": "refinement-battle-15-19-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "19",
       "title": "Усиления",
       "source": "19-upgrades.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-19-upgrades-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-19-upgrades-1920x1080.png",
+      "visualEvidence": "refinement-battle-15-19-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "20",
       "title": "Победа",
       "source": "20-victory.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-20-victory-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-20-victory-1920x1080.png",
+      "visualEvidence": "refinement-20-23-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "21",
       "title": "Поражение",
       "source": "21-defeat.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-21-defeat-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-21-defeat-1920x1080.png",
+      "visualEvidence": "refinement-20-23-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "22",
       "title": "Настройки",
       "source": "22-settings.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-22-settings-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-22-settings-1920x1080.png",
+      "visualEvidence": "refinement-20-23-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "23",
       "title": "Помощь",
       "source": "23-help.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-23-help-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-23-help-1920x1080.png",
+      "visualEvidence": "refinement-20-23-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "24",
       "title": "Пустой альбом",
       "source": "24-empty.png",
-      "status": "implemented_pending_visual_verification",
-      "baselineCapture": "fidelity-24-empty-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-24-empty-1920x1080.png",
+      "visualEvidence": "refinement-09-24-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "25",
       "title": "Покупка",
       "source": "25-purchase.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-25-purchase-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-25-purchase-1920x1080.png",
+      "visualEvidence": "refinement-components-11-30-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "26",
       "title": "Ошибка записи",
       "source": "26-save-error.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-26-save-error-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-26-save-error-1920x1080.png",
+      "visualEvidence": "refinement-10-26-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "27",
       "title": "Несовместимость",
       "source": "27-invalid.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-27-invalid-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-27-invalid-1920x1080.png",
+      "visualEvidence": "refinement-components-11-30-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "28",
       "title": "Выход из боя",
       "source": "28-leave.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-28-leave-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-28-leave-1920x1080.png",
+      "visualEvidence": "refinement-battle-15-19-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "29",
       "title": "Сборка сооружения",
       "source": "29-structure.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-29-structure-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-29-structure-1920x1080.png",
+      "visualEvidence": "refinement-components-11-30-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     },
     {
       "id": "30",
       "title": "Сборка основы",
       "source": "30-foundation-parts.png",
-      "status": "pending",
-      "baselineCapture": "fidelity-30-foundation-parts-1920x1080.png"
+      "status": "accepted_with_documented_residuals",
+      "baselineCapture": "fidelity-30-foundation-parts-1920x1080.png",
+      "visualEvidence": "refinement-components-11-30-visual-review.json",
+      "technicalEvidence": "refinement-final-playmode.json",
+      "reviewSource": "agent",
+      "captureCount": 5
     }
-  ]
+  ],
+  "gallery": "visual-refinement-gallery.html",
+  "galleryReviewIndex": "refinement-scene-reviews.json",
+  "galleryState": "complete_150_of_150_hash_bound_visual_proofs_with_documented_differences",
+  "finalPlayMode": {
+    "job": "38dbc50a38794d19862c12c9bbea389f",
+    "passed": 849,
+    "failed": 0,
+    "skipped": 0,
+    "artifact": "refinement-final-playmode.json"
+  },
+  "finalEditMode": {
+    "job": "3570403097a44f3a89c52e2d1795cc0d",
+    "status": "succeeded",
+    "passed": 1574,
+    "failed": 0,
+    "skipped": 0,
+    "artifact": "refinement-final-editmode.json"
+  },
+  "finalCaptureManifest": "refinement-final-capture-manifest.json",
+  "status": "complete_for_requested_refinement_with_documented_visual_differences",
+  "finalEditor": {
+    "scene": "Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity",
+    "playing": false,
+    "dirty": false,
+    "consoleErrors": 0
+  }
 }

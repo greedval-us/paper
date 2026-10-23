@@ -16,11 +16,17 @@ namespace PaperDefense.Presentation
         readonly WorkshopUi ui;
         readonly Action prepare;
         readonly Dictionary<AlbumEntryKind, RouteDraft> routes = new Dictionary<AlbumEntryKind, RouteDraft>();
-        sealed class RouteDraft { public WorkshopDraftSession Session; public int Step, Mount; }
+        sealed class RouteDraft
+        {
+            public WorkshopDraftSession Session;
+            public int Step, Mount;
+            public bool SaveFailureDismissed, SaveFailureVariant;
+        }
         float width = 1600, height = 1000;
         int mount;
         bool libraryOpen;
         bool rebuilding;
+        bool saveFailureDismissed, saveFailureVariant;
         string feedback = "";
         public RectTransform Root { get; }
         public WorkshopDraftSession DraftSession { get; private set; }
@@ -51,7 +57,7 @@ namespace PaperDefense.Presentation
             ResetAssemblyTrial();
             RememberRoute();
             DraftSession = new WorkshopDraftSession(run, DraftSession.Catalog);
-            DraftSession.Begin(entry); Step = 2; mount = 0; feedback = ""; libraryOpen = false; LastTrial = null;
+            DraftSession.Begin(entry); Step = 2; mount = 0; feedback = ""; libraryOpen = false; LastTrial = null; saveFailureDismissed = saveFailureVariant = false;
             Root.gameObject.SetActive(true); Refresh();
         }
         public void Suspend() { ui.HideTooltip(); Root.gameObject.SetActive(false); }
@@ -68,12 +74,13 @@ namespace PaperDefense.Presentation
             DraftSession = new WorkshopDraftSession(run, DraftSession.Catalog);
             DraftSession.Begin(new AlbumEntry("entry." + Guid.NewGuid().ToString("N"),
                 T(kind == AlbumEntryKind.Tower ? "new_tower" : "new_structure"), 1, source.Snapshot));
-            Step = 0; mount = 0; feedback = ""; libraryOpen = false; LastTrial = null; Refresh();
+            Step = 0; mount = 0; feedback = ""; libraryOpen = false; LastTrial = null; saveFailureDismissed = saveFailureVariant = false; Refresh();
         }
         void RememberRoute()
         {
             if (DraftSession.Draft != null && Route != AlbumEntryKind.Legacy)
-                routes[Route] = new RouteDraft { Session = DraftSession, Step = Step, Mount = mount };
+                routes[Route] = new RouteDraft { Session = DraftSession, Step = Step, Mount = mount,
+                    SaveFailureDismissed = saveFailureDismissed, SaveFailureVariant = saveFailureVariant };
         }
         void SwitchRoute(AlbumEntryKind kind)
         {
@@ -83,6 +90,7 @@ namespace PaperDefense.Presentation
             RememberRoute();
             if (!routes.TryGetValue(kind, out var previous)) { NewEntry(kind); return; }
             DraftSession = previous.Session; Step = previous.Step; mount = previous.Mount;
+            saveFailureDismissed = previous.SaveFailureDismissed; saveFailureVariant = previous.SaveFailureVariant;
             libraryOpen = false; feedback = ""; LastTrial = null; Refresh();
         }
 
@@ -135,6 +143,7 @@ namespace PaperDefense.Presentation
                 color: HasStatusFailure ? WorkshopUi.Warning : WorkshopUi.Muted);
             notice.verticalOverflow = VerticalWrapMode.Truncate;
             Footer();
+            if (HasWriteFailure && !saveFailureDismissed && !DraftSession.IsComponentOpen && !libraryOpen && Step == 2) BuildSaveFailureSurface();
             if (assemblyTrialOpen) BuildAssemblyTrialSurface();
             ui.EnsureTooltip(Root);
             if (focusName != null && EventSystem.current != null)
@@ -188,10 +197,13 @@ namespace PaperDefense.Presentation
 
         void Header()
         {
+            bool sketchHeader = Route == AlbumEntryKind.Tower && !libraryOpen;
             ui.Label(Root, "Composite title", T("title"), new Rect(24, 8, width * .35f, 50), 32, true);
+            float resourcesX = sketchHeader ? Mathf.Max(350, width - 460) : width * .38f;
+            if (sketchHeader) ReferenceDetail(Root, "Composite header gold", new Rect(resourcesX - 40, 12, 34, 34), FoundationDetailGraphic.Kind.GoldStack);
             var resources = ui.Label(Root, "Composite resources", T("resources", run.Workshop.Gold, run.Workshop.Level, run.Workshop.TotalXp),
-                new Rect(width * .38f, 12, width * .62f - 244, 38), 18);
-            resources.alignment = TextAnchor.MiddleRight;
+                new Rect(resourcesX, 12, width - resourcesX - 244, 38), 18);
+            resources.alignment = sketchHeader ? TextAnchor.MiddleLeft : TextAnchor.MiddleRight;
             float routeX = BackRequested == null ? 24 : 82;
             var tower = ui.Button(Root, "Composite route tower", new Rect(routeX, 66, 130, 44), T("tower"), () => SwitchRoute(AlbumEntryKind.Tower), WorkshopIcon.Tower);
             var support = ui.Button(Root, "Composite route structure", new Rect(routeX + 142, 66, 150, 44), T("structure"), () => SwitchRoute(AlbumEntryKind.Structure), WorkshopIcon.Shield);
@@ -213,6 +225,20 @@ namespace PaperDefense.Presentation
                     (i + 1) + "  " + T(stages[i]), () => { if (!DraftSession.IsComponentOpen) { Step = target; libraryOpen = false; Refresh(); } });
                 button.interactable = !DraftSession.IsComponentOpen && (Route != AlbumEntryKind.Legacy || i == 2);
                 ui.SetSelected(button, i == Step);
+                if (sketchHeader)
+                {
+                    button.GetComponent<WorkshopSurfaceGraphic>().canvasRenderer.SetAlpha(0);
+                    button.GetComponentInChildren<Text>().enabled = false;
+                    var tab = ReferenceDetail(button.transform, "Composite step tab " + i, new Rect(0, 0, stepWidth, 44), FoundationDetailGraphic.Kind.StepTab);
+                    tab.Count = i; tab.Total = 3; tab.Selected = i == Step; tab.transform.SetAsFirstSibling();
+                    ((WorkshopButton)button).SetDecoration(tab);
+                    ReferenceDetail(button.transform, "Composite step circle " + i, new Rect(10, 7, 30, 30), FoundationDetailGraphic.Kind.ProgressCircle);
+                    var number = ui.Label(button.transform, "Composite step number " + i, (i + 1).ToString(), new Rect(10, 7, 30, 30), 23);
+                    number.alignment = TextAnchor.MiddleCenter;
+                    var caption = ui.Label(button.transform, "Composite step lettering " + i, T(stages[i]), new Rect(44, 4, stepWidth - 58, 36), width < 1250 ? 20 : 24,
+                        color: i == Step ? WorkshopUi.Paper : !button.interactable ? WorkshopUi.Muted : WorkshopUi.Ink);
+                    caption.alignment = TextAnchor.MiddleCenter;
+                }
             }
         }
 
@@ -240,7 +266,7 @@ namespace PaperDefense.Presentation
             {
                 ui.Button(footer, "Composite variant", new Rect(third + 12, 0, third, 56), T("variant"), () => Save(true), WorkshopIcon.Copy)
                     .interactable = DraftSession.CanSave;
-                ui.Button(footer, "Composite save", new Rect((third + 12) * 2, 0, third, 56), SaveCaption, () => Save(false), WorkshopIcon.Save, true)
+                ui.Button(footer, "Composite save", new Rect((third + 12) * 2, 0, third, 56), SaveCaption, () => Save(HasWriteFailure && saveFailureVariant), WorkshopIcon.Save, true)
                     .interactable = DraftSession.CanSave;
             }
             else
@@ -252,6 +278,7 @@ namespace PaperDefense.Presentation
 
         void Save(bool variant)
         {
+            saveFailureVariant = variant; saveFailureDismissed = false;
             var result = DraftSession.SaveEntry(Guid.NewGuid(), variant);
             feedback = result.Success ? T("saved") : ""; Refresh();
         }

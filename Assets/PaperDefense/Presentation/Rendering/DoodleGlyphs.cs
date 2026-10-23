@@ -296,19 +296,21 @@ namespace PaperDefense.Presentation
             // silhouette and animation for individual enemies and the largest crowds.
             DrawResourceEnemy(pen, enemy.Kind, enemy.DrawingTier, new Vector2(enemy.Position.X, enemy.Position.Y), motion, phase, theme, enemy.VisualScale);
             EnemyMarks(pen, enemy, time, theme);
-            if (showHealth) EnemyHealth(pen, enemy);
+            if (showHealth && pen.TryGetBounds(first, out var silhouette)) EnemyHealth(pen, enemy, silhouette);
             float presentationScale = VisualScale(uniformScale);
             if (presentationScale != 1) pen.ScaleFrom(first, new Vector2(enemy.Position.X, enemy.Position.Y), presentationScale);
         }
         internal static float VisualScale(float value) => float.IsNaN(value) || float.IsInfinity(value) || value <= 0 ? 1 : value;
         internal static float EnemyHealthRatio(float health, float maximum)
             => maximum > 0 && !float.IsNaN(health) && !float.IsNaN(maximum) ? Mathf.Clamp01(health / maximum) : 0;
-        static void EnemyHealth(MeshPen pen, EnemyView enemy)
+        static void EnemyHealth(MeshPen pen, EnemyView enemy, Rect silhouette)
         {
             float scale = VisualScale(enemy.VisualScale), width = Mathf.Max(.72f, .72f * scale);
             float height = Mathf.Max(.24f, pen.WorldUnitsPerPixel * 2);
             // Solid paper backing and a dark border remain readable above both terrain and ink art.
-            Vector2 at = new Vector2(enemy.Position.X, enemy.Position.Y) + Vector2.up * (.75f * scale + .13f);
+            // Follow this animated body's real extent, including status/attack marks, rather
+            // than the retired glyph's fixed height. Earlier actors share the same batch.
+            Vector2 at = new Vector2(silhouette.center.x, silhouette.yMax + .13f * scale);
             pen.Rect(at.x - width * .5f - .06f, at.y - .06f, width + .12f, height + .12f, NotebookPalette.Paper);
             pen.Rect(at.x - width * .5f - .025f, at.y - .025f, width + .05f, height + .05f, NotebookPalette.Navy);
             pen.Rect(at.x - width * .5f, at.y, width, height, MeshPen.Alpha(NotebookPalette.Navy, .22f));

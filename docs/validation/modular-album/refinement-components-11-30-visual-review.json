@@ -1,0 +1,1353 @@
+{
+  "schema": "modular-album-components-visual-review-v1",
+  "status": "reviewed_pass",
+  "reviewer": "/root/implement_components_06_07 — visual inspection of actual PNG images through view_image; hashes calculated after physical review.",
+  "reviewDate": "2026-10-23",
+  "scope": "11 contained locked-head catalogue (including unaffordable);12 mortar;13 fan;14 armor (owned and locked);25 purchase;27 invalid;29 generator/wall/slow/repair;30 foundation parts — 13 scenarios × 5 target sizes.",
+  "captureCount": 65,
+  "reviewedCount": 65,
+  "technicalVerificationOwner": "/root",
+  "technicalVerification": "Unity import, console, behavior and final test evidence are tracked separately by root. This artifact asserts physical visual review of the bound captures.",
+  "relatedPlan": "docs/validation/modular-album/refinement-components-11-30-plan.json",
+  "relatedImplementation": "docs/validation/modular-album/refinement-components-11-30-implementation.json",
+  "sourceImages": [
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "sha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/12-mortar.png",
+      "sha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/13-fan.png",
+      "sha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/14-armor.png",
+      "sha256": "1cd621482759ce147f1aa4513f11753f0b3510b9c8af1459acb9d999a0e88e45"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/25-purchase.png",
+      "sha256": "05b7ab824ddcc1ac63d718b871bd4907e2192a7aac3aaf985d9eb6064fb332b4"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/27-invalid.png",
+      "sha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "sha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "sha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd"
+    },
+    {
+      "path": "docs/design/album-assembly-2026-10-17/art/01-towers.png",
+      "sha256": "c196824234faebeb4054827ea880cef5862d57576e8f7f52825546498b79e649"
+    },
+    {
+      "path": "docs/design/album-assembly-2026-10-17/art/02-weapon-parts.png",
+      "sha256": "c992257bb49d26a15b0601c742d137195104e16a1b8b92edb1db5d720d44064e"
+    },
+    {
+      "path": "docs/design/album-assembly-2026-10-17/art/03-structures.png",
+      "sha256": "90f87c2008cf9c287077e5875d85fecc61345c0b98dab68ea809f22977d1355f"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.png",
+      "sha256": "d351a1e24e81ad6200ffe54cc1a3ef7c58eaa83e5311bbab9a92dedebaa0d05e"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ComponentCatalogPanel.cs",
+      "sha256": "abf0cfe6d7167baeef1705f352f512a37f01af4434a057d514e6a7b596aa4356"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ComponentCatalogPanel.Sketch.cs",
+      "sha256": "9575b94a340e916841e6677be6b8a0d18260598c06a2597d8e0bcf5339a52fe0"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopAssemblyDiagram.cs",
+      "sha256": "37f63097d9a3455f31d803faf39ebf14db2cab645e88fe05cbddb42b393cfe03"
+    }
+  ],
+  "reviewHistory": [
+    {
+      "finding": "14 main foundation preview could enter the title band, visibly intersecting the locked front-shield title at1024x768.",
+      "repair": "Authorized LayoutArmor-only change reserves the title band before fitting the actual preview/scenery; no covering surface, source art or gameplay changes.",
+      "verification": "All 10 replacement14 captures were physically reopened after the fix and now pass."
+    },
+    {
+      "finding": "The previous compact locked-head inspector and armor-rule table had geometry-budget conflicts.",
+      "repair": "Subordinate rotated art now uses the pre-table space or is omitted; armor diagram ends before derived six-row metrics, which end before both actions.",
+      "verification": "Actual11-unaffordable and14-locked1280x720 captures show readable conditions, six rows and separated disabled actions."
+    },
+    {
+      "finding": "Root recaptured all20 structure29 frames following the shared health-strip change.",
+      "verification": "All20 current29 images were physically reopened. Their PNG hashes remain identical to the prior capture batch while metadata frame hashes changed; the current metadata hashes are bound below."
+    }
+  ],
+  "residuals": [
+    {
+      "scene": "30-foundation-parts",
+      "severity": "authored_art_appearance",
+      "decision": "Retain the authored thin frame band and collar paper edge; no source trim/region/identity/native-scale/collision change.",
+      "reason": "Part-only Bounds and VisibleBounds use the same valid authored-region extent here. The isolated frame region is intentionally94 source pixels high; a fuller silhouette would change authored decomposition."
+    },
+    {
+      "scene": "11-stencils-unaffordable",
+      "severity": "compact_optional_illustration",
+      "decision": "At1280x720 the subordinate inspector drawing is omitted because the six real comparison rows and both actions own the available height. The primary catalogue artwork remains visible."
+    }
+  ],
+  "manifestNote": "The previous refinement-batch3 capture table predates the authorized14 title-band repair and29 metadata recapture. This file binds the current PNG and metadata hashes directly; root owns the final refreshed capture manifest.",
+  "captures": [
+    {
+      "scene": "11-stencils",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1024x768.png",
+      "sha256": "d42a7faccf00958a1ba45c4b8352995fb41894e025ab47678e0d1deb51e1d2d6",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1024x768.json",
+      "metadataSha256": "56d9e379026396e3d6a8b99b68b395d37ce10747d98bfc2a0e2107820c1b8a21",
+      "width": 1024,
+      "height": 768,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Inset parts sheet retains a quiet actual exploded-weapon study behind it; three real head cards show names and ownership/level/gold conditions.",
+        "All six current→candidate rows and the 80-gold purchase action remain readable and separate from save/cancel.",
+        "Subordinate inspector art is small but contained above the first row; primary card artwork remains clear."
+      ]
+    },
+    {
+      "scene": "11-stencils",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1280x720.png",
+      "sha256": "fd19084a9668aeb265024f09ac351fb0633553765e99f1049a97257e8cbf3d4b",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1280x720.json",
+      "metadataSha256": "9b43514bbd4d13a145b6f0dcedfc904ab553e7e25b14d2de73d5e49e1eccb04d",
+      "width": 1280,
+      "height": 720,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Inset parts sheet retains a quiet actual exploded-weapon study behind it; three real head cards show names and ownership/level/gold conditions.",
+        "All six current→candidate rows and the 80-gold purchase action remain readable and separate from save/cancel.",
+        "Subordinate inspector art is small but contained above the first row; primary card artwork remains clear."
+      ]
+    },
+    {
+      "scene": "11-stencils",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1280x960.png",
+      "sha256": "53e929cf694e3c96a8f4f511e6aef39e3e2a3e6b2730f079fdfb573ba9508728",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1280x960.json",
+      "metadataSha256": "63b359ee64cc21e0227e96195b42b05e5deb529da75b83cafb6404f8890f33b6",
+      "width": 1280,
+      "height": 960,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Inset parts sheet retains a quiet actual exploded-weapon study behind it; three real head cards show names and ownership/level/gold conditions.",
+        "All six current→candidate rows and the 80-gold purchase action remain readable and separate from save/cancel.",
+        "Subordinate inspector art is small but contained above the first row; primary card artwork remains clear."
+      ]
+    },
+    {
+      "scene": "11-stencils",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1600x900.png",
+      "sha256": "5cf85351d9f31154134fe24f142dd2f4df562f4c5a729cc39a3d7df3cb5e9f0d",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1600x900.json",
+      "metadataSha256": "f42414e6f38a1643b295852dfbb9980e562122ce05e3442b73da7589ad2d0b10",
+      "width": 1600,
+      "height": 900,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Inset parts sheet retains a quiet actual exploded-weapon study behind it; three real head cards show names and ownership/level/gold conditions.",
+        "All six current→candidate rows and the 80-gold purchase action remain readable and separate from save/cancel.",
+        "Subordinate inspector art is small but contained above the first row; primary card artwork remains clear."
+      ]
+    },
+    {
+      "scene": "11-stencils",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1920x1080.png",
+      "sha256": "d6dfa37b3c7c20b4e3e4041c2123d3583734f0220697310eecd8a562e1954b51",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1920x1080.json",
+      "metadataSha256": "9ff59daa97a1a98a31eadaa2ea73b6f49a3fa7ebeb24912c02d8dd6ae4c14e9a",
+      "width": 1920,
+      "height": 1080,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Inset parts sheet retains a quiet actual exploded-weapon study behind it; three real head cards show names and ownership/level/gold conditions.",
+        "All six current→candidate rows and the 80-gold purchase action remain readable and separate from save/cancel.",
+        "Subordinate inspector art is small but contained above the first row; primary card artwork remains clear."
+      ]
+    },
+    {
+      "scene": "11-stencils-unaffordable",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1024x768.png",
+      "sha256": "5b692cc3c6ded9bc733c3cd261ec197f7fd4a990f063819d7712dde8181a1e81",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1024x768.json",
+      "metadataSha256": "f618d78a388a6e84875d3abf5b0a04da472ad38c2def2a472a7759d7d01ab5ca",
+      "width": 1024,
+      "height": 768,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Real short-head candidate values include cost40→36 and load4→3, while40-gold purchase and install remain visibly disabled with only 14 gold.",
+        "All six rows, requirements and both disabled actions are readable.",
+        "The compact 1280x720 inspector omits subordinate art; it no longer reaches the first statistic row, and all primary catalogue art remains visible."
+      ]
+    },
+    {
+      "scene": "11-stencils-unaffordable",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1280x720.png",
+      "sha256": "7ee1613ed94fbff24d6ce45630ba8486b72471f38336cfb9e7c51b8b16447b1b",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1280x720.json",
+      "metadataSha256": "7485aaef246a194856b1dd33c0b3f7a25cc42baf0c383bf67c8b6f4f046ca0be",
+      "width": 1280,
+      "height": 720,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Real short-head candidate values include cost40→36 and load4→3, while40-gold purchase and install remain visibly disabled with only 14 gold.",
+        "All six rows, requirements and both disabled actions are readable.",
+        "The compact 1280x720 inspector omits subordinate art; it no longer reaches the first statistic row, and all primary catalogue art remains visible."
+      ]
+    },
+    {
+      "scene": "11-stencils-unaffordable",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1280x960.png",
+      "sha256": "120a6b66cf2666985df1fc54229c06077ecec24240df03f600d4326939b5f991",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1280x960.json",
+      "metadataSha256": "d65521a5c66ddc1be4e50abe1eafdbdb490ea97efdcbf118b9935f69f123828d",
+      "width": 1280,
+      "height": 960,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Real short-head candidate values include cost40→36 and load4→3, while40-gold purchase and install remain visibly disabled with only 14 gold.",
+        "All six rows, requirements and both disabled actions are readable.",
+        "The compact 1280x720 inspector omits subordinate art; it no longer reaches the first statistic row, and all primary catalogue art remains visible."
+      ]
+    },
+    {
+      "scene": "11-stencils-unaffordable",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1600x900.png",
+      "sha256": "4a7e0c3ff33b94d92ff589957c29358ef3bfc75c68c92d7e0d89ab2c559b011f",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1600x900.json",
+      "metadataSha256": "07a35e4a17606e16264292f61bc6d41e8f5768fbcd97bb87007b2072cd8f68f0",
+      "width": 1600,
+      "height": 900,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Real short-head candidate values include cost40→36 and load4→3, while40-gold purchase and install remain visibly disabled with only 14 gold.",
+        "All six rows, requirements and both disabled actions are readable.",
+        "The compact 1280x720 inspector omits subordinate art; it no longer reaches the first statistic row, and all primary catalogue art remains visible."
+      ]
+    },
+    {
+      "scene": "11-stencils-unaffordable",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1920x1080.png",
+      "sha256": "271e7bb7433fcd5c93b87273e07a98ed70e228f22fb31452c17000b3799443a3",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1920x1080.json",
+      "metadataSha256": "22efaf4d9ba0c8f21fa13fc480d178c38a28af8708a0aeb48b87fec4083cdf50",
+      "width": 1920,
+      "height": 1080,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Real short-head candidate values include cost40→36 and load4→3, while40-gold purchase and install remain visibly disabled with only 14 gold.",
+        "All six rows, requirements and both disabled actions are readable.",
+        "The compact 1280x720 inspector omits subordinate art; it no longer reaches the first statistic row, and all primary catalogue art remains visible."
+      ]
+    },
+    {
+      "scene": "12-mortar",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1024x768.png",
+      "sha256": "a4505405fc932e6caa0c322650643a378967457e20cae338f87f7f35744302a6",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1024x768.json",
+      "metadataSha256": "29af2570dae795a80e59a7da31840d4a1262d7df1e1af2fd4351218e6e4f581d",
+      "width": 1024,
+      "height": 768,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Choices, composed-weapon/radius rule field and characteristic sheet are visibly separate frames.",
+        "Both actual mortar heads and the wide-head level6/120-gold condition remain visible; the selected complete mortar weapon is shown in the field.",
+        "Damage28, range18, minimum6, radius2.4, interval1.9s and tower price99 are readable; rule caption and install/save/cancel do not overlap."
+      ]
+    },
+    {
+      "scene": "12-mortar",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1280x720.png",
+      "sha256": "8ba6b33c139797800aa40a018ee8cd4168b6fb8ea5ff7c0847c4f5db135e804e",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1280x720.json",
+      "metadataSha256": "2883ec10cbd13cece02f6924dfdceda76fe3b8ff83c6ede359f55c167f20d65e",
+      "width": 1280,
+      "height": 720,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Choices, composed-weapon/radius rule field and characteristic sheet are visibly separate frames.",
+        "Both actual mortar heads and the wide-head level6/120-gold condition remain visible; the selected complete mortar weapon is shown in the field.",
+        "Damage28, range18, minimum6, radius2.4, interval1.9s and tower price99 are readable; rule caption and install/save/cancel do not overlap."
+      ]
+    },
+    {
+      "scene": "12-mortar",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1280x960.png",
+      "sha256": "c822629ed4c4d8cb53b04361f9096d3a182587445254145e31dd49d3900d7cd6",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1280x960.json",
+      "metadataSha256": "8b7f7665688a1bc61fb62132b741a25ec42505659b772a3117beb4168b8c350b",
+      "width": 1280,
+      "height": 960,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Choices, composed-weapon/radius rule field and characteristic sheet are visibly separate frames.",
+        "Both actual mortar heads and the wide-head level6/120-gold condition remain visible; the selected complete mortar weapon is shown in the field.",
+        "Damage28, range18, minimum6, radius2.4, interval1.9s and tower price99 are readable; rule caption and install/save/cancel do not overlap."
+      ]
+    },
+    {
+      "scene": "12-mortar",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1600x900.png",
+      "sha256": "efc12de50e92be4c1782697c3c8e5214bf737129aaa99afef3c4fda1f181c816",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1600x900.json",
+      "metadataSha256": "bb560c818efc883e857d0fa7b4b3002358ccbd9f46579028a3b098337c8deffd",
+      "width": 1600,
+      "height": 900,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Choices, composed-weapon/radius rule field and characteristic sheet are visibly separate frames.",
+        "Both actual mortar heads and the wide-head level6/120-gold condition remain visible; the selected complete mortar weapon is shown in the field.",
+        "Damage28, range18, minimum6, radius2.4, interval1.9s and tower price99 are readable; rule caption and install/save/cancel do not overlap."
+      ]
+    },
+    {
+      "scene": "12-mortar",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1920x1080.png",
+      "sha256": "86ebe7ba0afcdb0138e1934ac50c6617c0354c06e89e7ffcbe308a1c5e74ab07",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1920x1080.json",
+      "metadataSha256": "b7c4a76322a06df53632be0e9117ee7a0ead8757f1956dd78e0f8a842271a851",
+      "width": 1920,
+      "height": 1080,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Choices, composed-weapon/radius rule field and characteristic sheet are visibly separate frames.",
+        "Both actual mortar heads and the wide-head level6/120-gold condition remain visible; the selected complete mortar weapon is shown in the field.",
+        "Damage28, range18, minimum6, radius2.4, interval1.9s and tower price99 are readable; rule caption and install/save/cancel do not overlap."
+      ]
+    },
+    {
+      "scene": "13-fan",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1024x768.png",
+      "sha256": "d466ad56ce05838565e60d21f205a9510fea390528b011ebe41ff461cec8504f",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1024x768.json",
+      "metadataSha256": "cbd1e4164f7ab7b84d0d5de5012de889d97f43d947636b96972bc02bce1fc190",
+      "width": 1024,
+      "height": 768,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Stronger90-degree sector, curved dimension arrows and eight outlined diagram targets remain clear over quiet scenery.",
+        "Actual fan weapon stays below the cone origin; six real characteristic rows and55-stroke tower price remain readable.",
+        "The equipped fan card is fully visible in the bounded scroll catalogue at compact sizes; other compatible mechanisms remain available by scrolling, and the Sight action is unobscured."
+      ]
+    },
+    {
+      "scene": "13-fan",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1280x720.png",
+      "sha256": "e0ca163355429f0af58765454237d8c6a177120fffea63146be2f8747cbce0f2",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1280x720.json",
+      "metadataSha256": "d95b295ba6c2128e0b504eaca6c1519bb3d1cf84feb7f371ecaee4d32fab0b6f",
+      "width": 1280,
+      "height": 720,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Stronger90-degree sector, curved dimension arrows and eight outlined diagram targets remain clear over quiet scenery.",
+        "Actual fan weapon stays below the cone origin; six real characteristic rows and55-stroke tower price remain readable.",
+        "The equipped fan card is fully visible in the bounded scroll catalogue at compact sizes; other compatible mechanisms remain available by scrolling, and the Sight action is unobscured."
+      ]
+    },
+    {
+      "scene": "13-fan",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1280x960.png",
+      "sha256": "60565a6e4a9620dd0c9f7f2e93ae4ce01d5ea34e9efee13a38a3c922b4f28881",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1280x960.json",
+      "metadataSha256": "1e211f12dc9cf7caacd2864aade7adfc8a1fa77b8269590206f4ab24e32dae83",
+      "width": 1280,
+      "height": 960,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Stronger90-degree sector, curved dimension arrows and eight outlined diagram targets remain clear over quiet scenery.",
+        "Actual fan weapon stays below the cone origin; six real characteristic rows and55-stroke tower price remain readable.",
+        "The equipped fan card is fully visible in the bounded scroll catalogue at compact sizes; other compatible mechanisms remain available by scrolling, and the Sight action is unobscured."
+      ]
+    },
+    {
+      "scene": "13-fan",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1600x900.png",
+      "sha256": "dd91f1c59fa9704be98cd485c829a97456a33e331e145602d99a0c543edabb0b",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1600x900.json",
+      "metadataSha256": "2ec1c3cb30f48214a1157996251843211c178c5b9fddfcd235133df61fc7c367",
+      "width": 1600,
+      "height": 900,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Stronger90-degree sector, curved dimension arrows and eight outlined diagram targets remain clear over quiet scenery.",
+        "Actual fan weapon stays below the cone origin; six real characteristic rows and55-stroke tower price remain readable.",
+        "The equipped fan card is fully visible in the bounded scroll catalogue at compact sizes; other compatible mechanisms remain available by scrolling, and the Sight action is unobscured."
+      ]
+    },
+    {
+      "scene": "13-fan",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1920x1080.png",
+      "sha256": "1f3ff5f5afc597a608a4a81ea0c0aecc59e98b2d3eaf450e5f5805967e69f306",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1920x1080.json",
+      "metadataSha256": "b277320df57677676611b36caa004e1ba37fd087446911b2fd5e814ca3343355",
+      "width": 1920,
+      "height": 1080,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "Stronger90-degree sector, curved dimension arrows and eight outlined diagram targets remain clear over quiet scenery.",
+        "Actual fan weapon stays below the cone origin; six real characteristic rows and55-stroke tower price remain readable.",
+        "The equipped fan card is fully visible in the bounded scroll catalogue at compact sizes; other compatible mechanisms remain available by scrolling, and the Sight action is unobscured."
+      ]
+    },
+    {
+      "scene": "14-armor",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1024x768.png",
+      "sha256": "c0520e79b15851adf28235b980d4966629d963d064b93397453d9cd89bf44ab6",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1024x768.json",
+      "metadataSha256": "74d2c0789453a99642cbd9ea469b6b48cd14724f4e87df273ce54f1187469424",
+      "width": 1024,
+      "height": 768,
+      "frame": 7256,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "All three cards show complete real none/plate/front candidate foundations; the selected plate is visible on the main foundation.",
+        "The main plate title now has a reserved band above the full preview at every size, including1024x768.",
+        "The right panel is clearly labeled «Схема защиты» with six actual defense/cost/load comparisons; its direction illustration and install action remain separate.",
+        "Previously close plate collar now remains wholly below the main title band."
+      ]
+    },
+    {
+      "scene": "14-armor",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1280x720.png",
+      "sha256": "c21210847f37000b8bd00ad9b87684c1a77573af46dc1b017a3f67afbe802262",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1280x720.json",
+      "metadataSha256": "4d614c5ec21b075e95fbec74b9d8aa8670eeb5a19b42fc7011b3911276528f26",
+      "width": 1280,
+      "height": 720,
+      "frame": 14419,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "All three cards show complete real none/plate/front candidate foundations; the selected plate is visible on the main foundation.",
+        "The main plate title now has a reserved band above the full preview at every size, including1024x768.",
+        "The right panel is clearly labeled «Схема защиты» with six actual defense/cost/load comparisons; its direction illustration and install action remain separate.",
+        "The compact rule diagram ends before the six-row table; the install action remains below all rows."
+      ]
+    },
+    {
+      "scene": "14-armor",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1280x960.png",
+      "sha256": "53a4bfa3d357c8df2ccdbc5fe0477ef33bde9329eba853c1c0c1ab5fc2fcc782",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1280x960.json",
+      "metadataSha256": "2abddaee38860deaa771c0fc142078ddfce3ce309c52031742707bb8f86230f4",
+      "width": 1280,
+      "height": 960,
+      "frame": 14429,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "All three cards show complete real none/plate/front candidate foundations; the selected plate is visible on the main foundation.",
+        "The main plate title now has a reserved band above the full preview at every size, including1024x768.",
+        "The right panel is clearly labeled «Схема защиты» with six actual defense/cost/load comparisons; its direction illustration and install action remain separate."
+      ]
+    },
+    {
+      "scene": "14-armor",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1600x900.png",
+      "sha256": "aec5530b0b1378a1fa1d7c0053561c7a5ee406e8db4792085ff1bb663ae72348",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1600x900.json",
+      "metadataSha256": "260452f4e0d2408c80f8f00ef439ea330c3a1bb865acb448be95311f2d57c89c",
+      "width": 1600,
+      "height": 900,
+      "frame": 14433,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "All three cards show complete real none/plate/front candidate foundations; the selected plate is visible on the main foundation.",
+        "The main plate title now has a reserved band above the full preview at every size, including1024x768.",
+        "The right panel is clearly labeled «Схема защиты» with six actual defense/cost/load comparisons; its direction illustration and install action remain separate."
+      ]
+    },
+    {
+      "scene": "14-armor",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1920x1080.png",
+      "sha256": "91341828088bfdb3752ad8cc113571ab2e12403d1cc5223f73c218ebf8b2a28c",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1920x1080.json",
+      "metadataSha256": "e1b6871a0dd49801a62177ef4bca3040ec429b23c1ac4ca1ead55d2cb7453de3",
+      "width": 1920,
+      "height": 1080,
+      "frame": 14427,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "All three cards show complete real none/plate/front candidate foundations; the selected plate is visible on the main foundation.",
+        "The main plate title now has a reserved band above the full preview at every size, including1024x768.",
+        "The right panel is clearly labeled «Схема защиты» with six actual defense/cost/load comparisons; its direction illustration and install action remain separate."
+      ]
+    },
+    {
+      "scene": "14-armor-locked",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1024x768.png",
+      "sha256": "75f05c8ea0c188dbc840253e7ad5df08fc18321f7264465eb235c91280369695",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1024x768.json",
+      "metadataSha256": "4206d06fd9dc9208241815440c82af7b28c30ce5e023fdc6fc1aa68eb64db747",
+      "width": 1024,
+      "height": 768,
+      "frame": 7256,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The full front-shield foundation stays below the title at every size; the former1024x768 title/collar intersection is resolved.",
+        "Actual level5/100-gold conditions and all six comparison rows remain readable.",
+        "Both purchase and install controls remain visibly disabled; rule illustration, metrics and actions occupy separate bands.",
+        "The «Фронтальный щит» title is clear, with visible paper gap above both collars."
+      ]
+    },
+    {
+      "scene": "14-armor-locked",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1280x720.png",
+      "sha256": "cbf234acf21b7ba06248c642b6e70f77d091ec720990656c067a6267b6eeac3a",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1280x720.json",
+      "metadataSha256": "e967b80d65a8a338f2e7f42d926dff6ca86c5564cef9d7c9b4a23367170ab047",
+      "width": 1280,
+      "height": 720,
+      "frame": 14419,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The full front-shield foundation stays below the title at every size; the former1024x768 title/collar intersection is resolved.",
+        "Actual level5/100-gold conditions and all six comparison rows remain readable.",
+        "Both purchase and install controls remain visibly disabled; rule illustration, metrics and actions occupy separate bands.",
+        "The small subordinate direction diagram is contained above the first statistic; all six rows fit before the two disabled actions."
+      ]
+    },
+    {
+      "scene": "14-armor-locked",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1280x960.png",
+      "sha256": "8debef0b4e565dae87e781608f83be34557c35e7de04c6fe40cbc0ce6b77a18a",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1280x960.json",
+      "metadataSha256": "6ebf064e0fa1b108dbeb7cf2fd3e1002097ec4ee055232d379ef7a80a57997d0",
+      "width": 1280,
+      "height": 960,
+      "frame": 14429,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The full front-shield foundation stays below the title at every size; the former1024x768 title/collar intersection is resolved.",
+        "Actual level5/100-gold conditions and all six comparison rows remain readable.",
+        "Both purchase and install controls remain visibly disabled; rule illustration, metrics and actions occupy separate bands."
+      ]
+    },
+    {
+      "scene": "14-armor-locked",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1600x900.png",
+      "sha256": "35d8b154d1a8c403a0c6d822308fca2dd599391459fd03a12d587b814d3b7672",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1600x900.json",
+      "metadataSha256": "78755303addb27fc4a8ac4fd399d1081a5061b5b53f1a7fb6b4056359ba09c88",
+      "width": 1600,
+      "height": 900,
+      "frame": 14433,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The full front-shield foundation stays below the title at every size; the former1024x768 title/collar intersection is resolved.",
+        "Actual level5/100-gold conditions and all six comparison rows remain readable.",
+        "Both purchase and install controls remain visibly disabled; rule illustration, metrics and actions occupy separate bands."
+      ]
+    },
+    {
+      "scene": "14-armor-locked",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1920x1080.png",
+      "sha256": "f0a9ed097c9336c4866aca8a7145b3686bcf93fdfbd2bf014ef072401145f160",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1920x1080.json",
+      "metadataSha256": "85bcff27f1a4fbc844e8464c9d310d423d525271db8180d26025c44250340c73",
+      "width": 1920,
+      "height": 1080,
+      "frame": 14427,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The full front-shield foundation stays below the title at every size; the former1024x768 title/collar intersection is resolved.",
+        "Actual level5/100-gold conditions and all six comparison rows remain readable.",
+        "Both purchase and install controls remain visibly disabled; rule illustration, metrics and actions occupy separate bands."
+      ]
+    },
+    {
+      "scene": "25-purchase",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1024x768.png",
+      "sha256": "845178fb2d9fc59afb8ababdc6e2d2628f0d78f2be6d1aafb749277888e1dfbf",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1024x768.json",
+      "metadataSha256": "0603033dd5f5a9966903f9bc9e72279dcebd99dec1371edeaa92ab7a2052eecd",
+      "width": 1024,
+      "height": 768,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The selected real long pen-nib part fits between the title and level requirement without clipping.",
+        "Actual ledger values 80cost, 94gold and 14remainder are aligned and readable; one-time purchase/separate installation note is clear.",
+        "Close X, Cancel and confirm80-gold controls remain separated inside the modal; the covered workshop is subdued."
+      ]
+    },
+    {
+      "scene": "25-purchase",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1280x720.png",
+      "sha256": "8dfe0456a746922a78a2e7ed65b0471fb219f3c3c4e52a614876b8dcdc20a720",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1280x720.json",
+      "metadataSha256": "72a2df4e81f96d44a2dbafa9f6eeaca86cfc68e1dee5f95fda5e03ad9c81b011",
+      "width": 1280,
+      "height": 720,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The selected real long pen-nib part fits between the title and level requirement without clipping.",
+        "Actual ledger values 80cost, 94gold and 14remainder are aligned and readable; one-time purchase/separate installation note is clear.",
+        "Close X, Cancel and confirm80-gold controls remain separated inside the modal; the covered workshop is subdued."
+      ]
+    },
+    {
+      "scene": "25-purchase",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1280x960.png",
+      "sha256": "94aaa76db273e0a84675b45978fade82db8904cca898b9eace61ddc7306aa095",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1280x960.json",
+      "metadataSha256": "28353e2f88a5b6c50ae76f0fb36d039eee95ed561cd121e192094b3313dd00d6",
+      "width": 1280,
+      "height": 960,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The selected real long pen-nib part fits between the title and level requirement without clipping.",
+        "Actual ledger values 80cost, 94gold and 14remainder are aligned and readable; one-time purchase/separate installation note is clear.",
+        "Close X, Cancel and confirm80-gold controls remain separated inside the modal; the covered workshop is subdued."
+      ]
+    },
+    {
+      "scene": "25-purchase",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1600x900.png",
+      "sha256": "22e6c4b3ee360221aee8b1eee02931ec3293b3dae852286eb058d2343f8947f6",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1600x900.json",
+      "metadataSha256": "417a2672bdf665620f173a488f021847c5f0ba55afcc4eb9c253216a498f3fcf",
+      "width": 1600,
+      "height": 900,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The selected real long pen-nib part fits between the title and level requirement without clipping.",
+        "Actual ledger values 80cost, 94gold and 14remainder are aligned and readable; one-time purchase/separate installation note is clear.",
+        "Close X, Cancel and confirm80-gold controls remain separated inside the modal; the covered workshop is subdued."
+      ]
+    },
+    {
+      "scene": "25-purchase",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1920x1080.png",
+      "sha256": "157af209b59699e5609362d31aa2c911b0661d6b75ac7501f456c2fcf6057815",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1920x1080.json",
+      "metadataSha256": "7fe0ca295ca58f6275a68630aab3cf8a31badb5e2e70bc00ad39941fe6328da7",
+      "width": 1920,
+      "height": 1080,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The selected real long pen-nib part fits between the title and level requirement without clipping.",
+        "Actual ledger values 80cost, 94gold and 14remainder are aligned and readable; one-time purchase/separate installation note is clear.",
+        "Close X, Cancel and confirm80-gold controls remain separated inside the modal; the covered workshop is subdued."
+      ]
+    },
+    {
+      "scene": "27-invalid",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1024x768.png",
+      "sha256": "d200d1917a9128530db53fd04315984b38052ccac6cc629a54b408aecc272136",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1024x768.json",
+      "metadataSha256": "01974755cb2c79e34b6a9c7ed947b7a89612aaa812c33ac3f0c2c7177d448620",
+      "width": 1024,
+      "height": 768,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The left sheet shows the actual independent parts without inventing a valid complete weapon or resolved statistics.",
+        "The inspector isolates the actual drum magazine and burst trigger around a red conflict cross, with their names and the required stock-magazine/cassette condition readable.",
+        "The existing suggested stock-magazine action remains clear; final save stays visibly disabled and all 5 sizes fit."
+      ]
+    },
+    {
+      "scene": "27-invalid",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1280x720.png",
+      "sha256": "700d8277d9efa7e195d126354d19c7cf5ca2cf75592842f1c124192045a4f90a",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1280x720.json",
+      "metadataSha256": "2666beec38ba31d6a8a89b068e8a781a798daf8046cb84ce271b3a0d69eefdb7",
+      "width": 1280,
+      "height": 720,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The left sheet shows the actual independent parts without inventing a valid complete weapon or resolved statistics.",
+        "The inspector isolates the actual drum magazine and burst trigger around a red conflict cross, with their names and the required stock-magazine/cassette condition readable.",
+        "The existing suggested stock-magazine action remains clear; final save stays visibly disabled and all 5 sizes fit."
+      ]
+    },
+    {
+      "scene": "27-invalid",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1280x960.png",
+      "sha256": "efd657f651dc0e3e1964b1fe944ee7233f5231630fc82ff420759d5fa34c0fa6",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1280x960.json",
+      "metadataSha256": "9545de3e8cf3c4c9a8bc4e7e6be5a921d4d067a10d5eee2b19ba3535a7552d98",
+      "width": 1280,
+      "height": 960,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The left sheet shows the actual independent parts without inventing a valid complete weapon or resolved statistics.",
+        "The inspector isolates the actual drum magazine and burst trigger around a red conflict cross, with their names and the required stock-magazine/cassette condition readable.",
+        "The existing suggested stock-magazine action remains clear; final save stays visibly disabled and all 5 sizes fit."
+      ]
+    },
+    {
+      "scene": "27-invalid",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1600x900.png",
+      "sha256": "80eb63644ecead9df7c488b5acfa68fd07764bdec843b6499fef0a8057fd206a",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1600x900.json",
+      "metadataSha256": "5fcca603364e7a1163ee34fa0d5c355e7d6210cf1363176958a1a79c68dcede5",
+      "width": 1600,
+      "height": 900,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The left sheet shows the actual independent parts without inventing a valid complete weapon or resolved statistics.",
+        "The inspector isolates the actual drum magazine and burst trigger around a red conflict cross, with their names and the required stock-magazine/cassette condition readable.",
+        "The existing suggested stock-magazine action remains clear; final save stays visibly disabled and all 5 sizes fit."
+      ]
+    },
+    {
+      "scene": "27-invalid",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1920x1080.png",
+      "sha256": "9bc66658441bb414b73eb5aeace888a7878520098aacfac33c149d3f3b70c9be",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1920x1080.json",
+      "metadataSha256": "25cba89c6d5aa63f2f226cb447fa74e321dcd93aef13434787ed7e7cb3b79f8c",
+      "width": 1920,
+      "height": 1080,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The left sheet shows the actual independent parts without inventing a valid complete weapon or resolved statistics.",
+        "The inspector isolates the actual drum magazine and burst trigger around a red conflict cross, with their names and the required stock-magazine/cassette condition readable.",
+        "The existing suggested stock-magazine action remains clear; final save stays visibly disabled and all 5 sizes fit."
+      ]
+    },
+    {
+      "scene": "29-structure",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1024x768.png",
+      "sha256": "1378f48e30112d2aac9d0b2d2f8278bdf841d0f62822bab274e4549b0e069b5e",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1024x768.json",
+      "metadataSha256": "59fec0b945ff9f9e764a77489fb86b46cc693de579cb119e233f3b2e5aa6ab84",
+      "width": 1024,
+      "height": 768,
+      "frame": 7256,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The actual generator composition is split into shell panels, mechanism and foundation with clear spacing over quiet scenery.",
+        "All four actual numeric rows remain readable:80HP,60-stroke cost,12income per wave and5-wave payback.",
+        "The rules retain pencil-only placement, limit2, zero sale refund and income after a fully survived wave; no rule text or install/apply action overlaps at compact sizes.",
+        "The neutral equipment option is clearly labeled «Без оснащения»; real locked alternatives stay in the bounded scroll catalogue."
+      ]
+    },
+    {
+      "scene": "29-structure",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1280x720.png",
+      "sha256": "5a2e2582c7900e536416556d72918d5db5a44ef001a900f94728d1b933c207cb",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1280x720.json",
+      "metadataSha256": "40559195145ec019d1c81478fb84696061c2f9daca407f603a32456adb5fa131",
+      "width": 1280,
+      "height": 720,
+      "frame": 14419,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The actual generator composition is split into shell panels, mechanism and foundation with clear spacing over quiet scenery.",
+        "All four actual numeric rows remain readable:80HP,60-stroke cost,12income per wave and5-wave payback.",
+        "The rules retain pencil-only placement, limit2, zero sale refund and income after a fully survived wave; no rule text or install/apply action overlaps at compact sizes.",
+        "The neutral equipment option is clearly labeled «Без оснащения»; real locked alternatives stay in the bounded scroll catalogue."
+      ]
+    },
+    {
+      "scene": "29-structure",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1280x960.png",
+      "sha256": "c574e65a05c8eb1308d963586d4d90e458142fc096fe46381c1474adecbf3cdf",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1280x960.json",
+      "metadataSha256": "139d295c5b3885a6ffc327f1805fda203400269ec9fe72d02bcc91466b637a2c",
+      "width": 1280,
+      "height": 960,
+      "frame": 14429,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The actual generator composition is split into shell panels, mechanism and foundation with clear spacing over quiet scenery.",
+        "All four actual numeric rows remain readable:80HP,60-stroke cost,12income per wave and5-wave payback.",
+        "The rules retain pencil-only placement, limit2, zero sale refund and income after a fully survived wave; no rule text or install/apply action overlaps at compact sizes.",
+        "The neutral equipment option is clearly labeled «Без оснащения»; real locked alternatives stay in the bounded scroll catalogue."
+      ]
+    },
+    {
+      "scene": "29-structure",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1600x900.png",
+      "sha256": "138676137fd2d810648882eacd10a7fbd7f92c8090b8e70512b14ecdbd49ea2c",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1600x900.json",
+      "metadataSha256": "7081356044f541431d4b3e27e5becb60e6ca06d0afac1dba2b6d6b52defaeead",
+      "width": 1600,
+      "height": 900,
+      "frame": 14433,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The actual generator composition is split into shell panels, mechanism and foundation with clear spacing over quiet scenery.",
+        "All four actual numeric rows remain readable:80HP,60-stroke cost,12income per wave and5-wave payback.",
+        "The rules retain pencil-only placement, limit2, zero sale refund and income after a fully survived wave; no rule text or install/apply action overlaps at compact sizes.",
+        "The neutral equipment option is clearly labeled «Без оснащения»; real locked alternatives stay in the bounded scroll catalogue."
+      ]
+    },
+    {
+      "scene": "29-structure",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1920x1080.png",
+      "sha256": "7278c1d207a72e3d0ce9dce785070e26d52349e44e406c8d899bd67d9a350cf5",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1920x1080.json",
+      "metadataSha256": "c6117028fd776a6f6c49efef62efaaf51c241df57cdab5384625985d891acc92",
+      "width": 1920,
+      "height": 1080,
+      "frame": 14427,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The actual generator composition is split into shell panels, mechanism and foundation with clear spacing over quiet scenery.",
+        "All four actual numeric rows remain readable:80HP,60-stroke cost,12income per wave and5-wave payback.",
+        "The rules retain pencil-only placement, limit2, zero sale refund and income after a fully survived wave; no rule text or install/apply action overlaps at compact sizes.",
+        "The neutral equipment option is clearly labeled «Без оснащения»; real locked alternatives stay in the bounded scroll catalogue."
+      ]
+    },
+    {
+      "scene": "29-wall",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1024x768.png",
+      "sha256": "8a19914b16c4d3874dfa950bafb5895c7c19e88caa2cd21633d1ec338658b954",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1024x768.json",
+      "metadataSha256": "8e96c36a0ca61f46d18ecf94f88b545994e8e3a0296942f077078638860b323d",
+      "width": 1024,
+      "height": 768,
+      "frame": 7256,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The actual wood barricade, separate shell panels and foundation fit inside the diagram without crossing the caption.",
+        "The three real rows 200HP,16-stroke cost and load2/6 are readable.",
+        "Path-blocking and enemy-destruction rules remain separate from the numeric table and install action at every size."
+      ]
+    },
+    {
+      "scene": "29-wall",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1280x720.png",
+      "sha256": "492dfe30c391042baadad940337037c940811045da3a180674f95da041069a1a",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1280x720.json",
+      "metadataSha256": "d37cc0b433b9a83c33acd67a23e6aabc723078d1af6323cbdd9fcef9c237e2ec",
+      "width": 1280,
+      "height": 720,
+      "frame": 14419,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The actual wood barricade, separate shell panels and foundation fit inside the diagram without crossing the caption.",
+        "The three real rows 200HP,16-stroke cost and load2/6 are readable.",
+        "Path-blocking and enemy-destruction rules remain separate from the numeric table and install action at every size."
+      ]
+    },
+    {
+      "scene": "29-wall",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1280x960.png",
+      "sha256": "ec487df5e9c9d4f7a7373562a3db62e0feb15903b1a5cc7ff9aa9628f11b297d",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1280x960.json",
+      "metadataSha256": "186032f183aca9548af57f33b7f69d28e875a9c9d9ee834ad399eb66202d67ba",
+      "width": 1280,
+      "height": 960,
+      "frame": 14429,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The actual wood barricade, separate shell panels and foundation fit inside the diagram without crossing the caption.",
+        "The three real rows 200HP,16-stroke cost and load2/6 are readable.",
+        "Path-blocking and enemy-destruction rules remain separate from the numeric table and install action at every size."
+      ]
+    },
+    {
+      "scene": "29-wall",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1600x900.png",
+      "sha256": "6eb483248dd069ab969830a2af52d143e19e0aaddecbd997ddb0838a0d46a2b2",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1600x900.json",
+      "metadataSha256": "fc8650bd27acaa8388597ddc193bd2ae2dbdcbc7271e9a1cebfa77374d6223a6",
+      "width": 1600,
+      "height": 900,
+      "frame": 14433,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The actual wood barricade, separate shell panels and foundation fit inside the diagram without crossing the caption.",
+        "The three real rows 200HP,16-stroke cost and load2/6 are readable.",
+        "Path-blocking and enemy-destruction rules remain separate from the numeric table and install action at every size."
+      ]
+    },
+    {
+      "scene": "29-wall",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1920x1080.png",
+      "sha256": "672cdd066dcf81fde8b541be4094bd0e435e9ad0b0b6157c60d3b9ecd76da189",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1920x1080.json",
+      "metadataSha256": "2fd0ab6d0568c7a10749f9c8dc901027bfd964084f9bafa70e1e748c9f180404",
+      "width": 1920,
+      "height": 1080,
+      "frame": 14427,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The actual wood barricade, separate shell panels and foundation fit inside the diagram without crossing the caption.",
+        "The three real rows 200HP,16-stroke cost and load2/6 are readable.",
+        "Path-blocking and enemy-destruction rules remain separate from the numeric table and install action at every size."
+      ]
+    },
+    {
+      "scene": "29-slow",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1024x768.png",
+      "sha256": "b97180f2a26a21b8c6ab7a8b47cd9758211fbc862d99e3127d2a5038be06412b",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1024x768.json",
+      "metadataSha256": "e3e55e646ed75894e65f6837622b8295452a8438fa50f9ab39a775ef9ba77b71",
+      "width": 1024,
+      "height": 768,
+      "frame": 7256,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The actual blue slow-field bowl, shell panels and collar foundation remain distinct and wholly contained.",
+        "All five real values 55HP,22-stroke cost,enemy-speed×0.6,radius1 and0.6s duration remain readable.",
+        "The placement-rule explanation remains complete, wrapping cleanly to two lines at 1024x768; install and apply controls stay clear."
+      ]
+    },
+    {
+      "scene": "29-slow",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1280x720.png",
+      "sha256": "d591f1ed429631fa655fe107cf56bb2f25e495ce3f4de9ce947c5e2ed2191192",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1280x720.json",
+      "metadataSha256": "14bcf0946c7758babd2d9ca5c04f72273b6bfe3d1cf560ba96765e44e49e9ddc",
+      "width": 1280,
+      "height": 720,
+      "frame": 14419,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The actual blue slow-field bowl, shell panels and collar foundation remain distinct and wholly contained.",
+        "All five real values 55HP,22-stroke cost,enemy-speed×0.6,radius1 and0.6s duration remain readable.",
+        "The placement-rule explanation remains complete, wrapping cleanly to two lines at 1024x768; install and apply controls stay clear."
+      ]
+    },
+    {
+      "scene": "29-slow",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1280x960.png",
+      "sha256": "88844708c1aa333a42c32bcdadfc722ef4b2af3a5399b7cc7cb90b5255900d4b",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1280x960.json",
+      "metadataSha256": "c52bad7c9055aeb9792b9d6c06084bb3e6f6de8542ee9b44eb37aafa9ada59d2",
+      "width": 1280,
+      "height": 960,
+      "frame": 14429,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The actual blue slow-field bowl, shell panels and collar foundation remain distinct and wholly contained.",
+        "All five real values 55HP,22-stroke cost,enemy-speed×0.6,radius1 and0.6s duration remain readable.",
+        "The placement-rule explanation remains complete, wrapping cleanly to two lines at 1024x768; install and apply controls stay clear."
+      ]
+    },
+    {
+      "scene": "29-slow",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1600x900.png",
+      "sha256": "9407d920c2994799cc4fe08d4324dd67819ffc82ff8727e8d2972f85846e4eb9",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1600x900.json",
+      "metadataSha256": "62bb09105c3c89133380d79a77fd99ae33327706c69cac950100901060af25c7",
+      "width": 1600,
+      "height": 900,
+      "frame": 14433,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The actual blue slow-field bowl, shell panels and collar foundation remain distinct and wholly contained.",
+        "All five real values 55HP,22-stroke cost,enemy-speed×0.6,radius1 and0.6s duration remain readable.",
+        "The placement-rule explanation remains complete, wrapping cleanly to two lines at 1024x768; install and apply controls stay clear."
+      ]
+    },
+    {
+      "scene": "29-slow",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1920x1080.png",
+      "sha256": "c9585ab0732c6bc24731a8c10d4d7a5849e1007136f1361098437e030eaa8cd2",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1920x1080.json",
+      "metadataSha256": "cef24bee9281e6a847f98fc0220854c5dfba67a6c32826382f33e1f017526850",
+      "width": 1920,
+      "height": 1080,
+      "frame": 14427,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The actual blue slow-field bowl, shell panels and collar foundation remain distinct and wholly contained.",
+        "All five real values 55HP,22-stroke cost,enemy-speed×0.6,radius1 and0.6s duration remain readable.",
+        "The placement-rule explanation remains complete, wrapping cleanly to two lines at 1024x768; install and apply controls stay clear."
+      ]
+    },
+    {
+      "scene": "29-repair",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1024x768.png",
+      "sha256": "9dafcca43fc1d8fd2d46dbbecd866b120532b8451586ac16b753e310d5b8b0ed",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1024x768.json",
+      "metadataSha256": "68530308ebb2dc667eab8c67f117f696bd443c39ba25ee46ac77296446f4942a",
+      "width": 1024,
+      "height": 768,
+      "frame": 7256,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The real repair workshop, shell panels and square foundation are separately visible without art or caption clipping.",
+        "All four actual rows 70HP,65-stroke cost,6HP/s repair and radius5 remain readable.",
+        "The one-target/no-stacking rule stays clear in its own region; the bounded catalogue continues below the visible cards without crossing the footer."
+      ]
+    },
+    {
+      "scene": "29-repair",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1280x720.png",
+      "sha256": "0b5eda92e8089ee891ca281fa4629a08cf56a405982d4ca39dd0bf9e9ae94e80",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1280x720.json",
+      "metadataSha256": "5de5a65a229c267ec781488c6c823a981aed8705d93629eaec0d11b9502c1a8b",
+      "width": 1280,
+      "height": 720,
+      "frame": 14419,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The real repair workshop, shell panels and square foundation are separately visible without art or caption clipping.",
+        "All four actual rows 70HP,65-stroke cost,6HP/s repair and radius5 remain readable.",
+        "The one-target/no-stacking rule stays clear in its own region; the bounded catalogue continues below the visible cards without crossing the footer."
+      ]
+    },
+    {
+      "scene": "29-repair",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1280x960.png",
+      "sha256": "36608ca74ece5565c0a4466f04c0481652a9f4988a40d08e1dc08858a3da0c39",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1280x960.json",
+      "metadataSha256": "601a3aed7bde97c779bd4639a646e5b34ca66451023923bbec651e817194a712",
+      "width": 1280,
+      "height": 960,
+      "frame": 14429,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The real repair workshop, shell panels and square foundation are separately visible without art or caption clipping.",
+        "All four actual rows 70HP,65-stroke cost,6HP/s repair and radius5 remain readable.",
+        "The one-target/no-stacking rule stays clear in its own region; the bounded catalogue continues below the visible cards without crossing the footer."
+      ]
+    },
+    {
+      "scene": "29-repair",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1600x900.png",
+      "sha256": "c98f9702d86b6a3f8d629f83e9e8240d258342756404b088ace1bf24e9fe78f5",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1600x900.json",
+      "metadataSha256": "dd872e9e478a10ef91f1addf87563ba7068b44f2b66552f610fae88cf6285562",
+      "width": 1600,
+      "height": 900,
+      "frame": 14433,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The real repair workshop, shell panels and square foundation are separately visible without art or caption clipping.",
+        "All four actual rows 70HP,65-stroke cost,6HP/s repair and radius5 remain readable.",
+        "The one-target/no-stacking rule stays clear in its own region; the bounded catalogue continues below the visible cards without crossing the footer."
+      ]
+    },
+    {
+      "scene": "29-repair",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1920x1080.png",
+      "sha256": "064526eac2e6516463f78e45b98cb2a33f48ef65777814a46a4be577cf366598",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1920x1080.json",
+      "metadataSha256": "f564c25d214534f9620d8b3a738d2cfea7e3f66d833bf5e3de5c4f56c2d76e9f",
+      "width": 1920,
+      "height": 1080,
+      "frame": 14427,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass",
+      "observations": [
+        "The real repair workshop, shell panels and square foundation are separately visible without art or caption clipping.",
+        "All four actual rows 70HP,65-stroke cost,6HP/s repair and radius5 remain readable.",
+        "The one-target/no-stacking rule stays clear in its own region; the bounded catalogue continues below the visible cards without crossing the footer."
+      ]
+    },
+    {
+      "scene": "30-foundation-parts",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1024x768.png",
+      "sha256": "19d304665278d7d06d875dd64498124d1c23c9ed7e418551b87498c28a9d5514",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1024x768.json",
+      "metadataSha256": "23e00e5772e8bad7af5a1591d74c39b9d49fd568b621d9830c7f22a917320dac",
+      "width": 1024,
+      "height": 768,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass_with_authored_art_residual",
+      "observations": [
+        "Actual feed box, turn collar, hull plane and thin front-frame strip are separately contained and linked by assembly arrows.",
+        "Real ordinary/light/reinforced candidate foundations and five actual foundation metrics remain readable; selected ordinary hull is fully visible.",
+        "The lower front-frame remains an intentionally thin authored strip and the collar retains the supplied cropped-paper edge. This is recorded residual source appearance; no atlas trim, identity, native scale or collision change is warranted by the inspected VisibleBounds diagnosis."
+      ]
+    },
+    {
+      "scene": "30-foundation-parts",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1280x720.png",
+      "sha256": "3fa679c0851218f6c93a4a5d748d81a334d8cd9c024b32b4a4e96159216c2886",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1280x720.json",
+      "metadataSha256": "8a5833edf29b654b9aadb573044f9d13a026ce21fcccb4b6899086bb3189d345",
+      "width": 1280,
+      "height": 720,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass_with_authored_art_residual",
+      "observations": [
+        "Actual feed box, turn collar, hull plane and thin front-frame strip are separately contained and linked by assembly arrows.",
+        "Real ordinary/light/reinforced candidate foundations and five actual foundation metrics remain readable; selected ordinary hull is fully visible.",
+        "The lower front-frame remains an intentionally thin authored strip and the collar retains the supplied cropped-paper edge. This is recorded residual source appearance; no atlas trim, identity, native scale or collision change is warranted by the inspected VisibleBounds diagnosis."
+      ]
+    },
+    {
+      "scene": "30-foundation-parts",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1280x960.png",
+      "sha256": "38c961f694ad3dd74722b4f47f7a35564314f2af59d9be9a37e6ec42d057f4df",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1280x960.json",
+      "metadataSha256": "1ce6ea051da6250c5690ca0015a4da50d6b2c329ebfee721b617f87dec5b992a",
+      "width": 1280,
+      "height": 960,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass_with_authored_art_residual",
+      "observations": [
+        "Actual feed box, turn collar, hull plane and thin front-frame strip are separately contained and linked by assembly arrows.",
+        "Real ordinary/light/reinforced candidate foundations and five actual foundation metrics remain readable; selected ordinary hull is fully visible.",
+        "The lower front-frame remains an intentionally thin authored strip and the collar retains the supplied cropped-paper edge. This is recorded residual source appearance; no atlas trim, identity, native scale or collision change is warranted by the inspected VisibleBounds diagnosis."
+      ]
+    },
+    {
+      "scene": "30-foundation-parts",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1600x900.png",
+      "sha256": "5f4b7e6460adbbf97f94fe701349e328d32e037ae064b8759b7477d4a8640a4c",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1600x900.json",
+      "metadataSha256": "7d89309da170f8cffd035603676e129bd3551b593bcf51a002f0503bd055d536",
+      "width": 1600,
+      "height": 900,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass_with_authored_art_residual",
+      "observations": [
+        "Actual feed box, turn collar, hull plane and thin front-frame strip are separately contained and linked by assembly arrows.",
+        "Real ordinary/light/reinforced candidate foundations and five actual foundation metrics remain readable; selected ordinary hull is fully visible.",
+        "The lower front-frame remains an intentionally thin authored strip and the collar retains the supplied cropped-paper edge. This is recorded residual source appearance; no atlas trim, identity, native scale or collision change is warranted by the inspected VisibleBounds diagnosis."
+      ]
+    },
+    {
+      "scene": "30-foundation-parts",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1920x1080.png",
+      "sha256": "29259727a91e7cccc2b7ebe79bf0a1db9dce36a43d3a6111a27b3ed32cb70455",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1920x1080.json",
+      "metadataSha256": "4944b6ce6f39685be320dff57efcf86bc07d093447c92dabbb8b881f5b292683",
+      "width": 1920,
+      "height": 1080,
+      "frame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7",
+      "reviewed": true,
+      "status": "pass_with_authored_art_residual",
+      "observations": [
+        "Actual feed box, turn collar, hull plane and thin front-frame strip are separately contained and linked by assembly arrows.",
+        "Real ordinary/light/reinforced candidate foundations and five actual foundation metrics remain readable; selected ordinary hull is fully visible.",
+        "The lower front-frame remains an intentionally thin authored strip and the collar retains the supplied cropped-paper edge. This is recorded residual source appearance; no atlas trim, identity, native scale or collision change is warranted by the inspected VisibleBounds diagnosis."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+Composite trial measured row 0 label text=Измеренный урон visible=15
+Composite trial measured row 0 value text=0 visible=1
+Composite trial measured row 1 label text=Пропущено visible=9
+Composite trial measured row 1 value text=0 visible=1
+Composite trial measured row 2 label text=Осталось целей visible=14
+Composite trial measured row 2 value text=0 visible=1
+Composite trial measured row 3 label text=Убрано клякс visible=12
+Composite trial measured row 3 value text=0 visible=1
+Composite trial measured row 4 label text=Осталось клякс visible=14
+Composite trial measured row 4 value text=48 visible=2
+Composite trial measured row 5 label text=Длительность visible=12
+Composite trial measured row 5 value text=60 с visible=4

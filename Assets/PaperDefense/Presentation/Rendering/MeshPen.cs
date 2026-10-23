@@ -46,12 +46,14 @@ namespace PaperDefense.Presentation
         }
 
         internal int VertexCount => vertices.Count;
-        internal bool TryGetBounds(out Rect bounds)
+        internal bool TryGetBounds(out Rect bounds) => TryGetBounds(0, out bounds);
+        internal bool TryGetBounds(int firstVertex, out Rect bounds)
         {
             bounds = default;
-            if (vertices.Count == 0) return false;
-            Vector2 low = vertices[0], high = low;
-            foreach (var point in vertices) { low = Vector2.Min(low, point); high = Vector2.Max(high, point); }
+            if (firstVertex < 0 || firstVertex >= vertices.Count) return false;
+            Vector2 low = vertices[firstVertex], high = low;
+            for (int i = firstVertex + 1; i < vertices.Count; i++)
+            { low = Vector2.Min(low, vertices[i]); high = Vector2.Max(high, vertices[i]); }
             bounds = UnityEngine.Rect.MinMaxRect(low.x, low.y, high.x, high.y);
             return true;
         }

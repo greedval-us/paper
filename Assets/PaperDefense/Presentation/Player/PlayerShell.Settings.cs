@@ -28,7 +28,13 @@ namespace PaperDefense.Presentation
                     Mathf.RoundToInt(24 * s), alignment: TextAnchor.MiddleCenter);
             }
 
-            var panel = ui.Panel(composition, "Display settings sheet", new Rect(375 * s, 246 * s, 850 * s, 428 * s), PlayerUi.Card);
+            var panel = ui.Panel(composition, "Display settings sheet", new Rect(375 * s, 246 * s, 850 * s, 428 * s), Color.clear);
+            PlayerUi.Graphic<NotebookHelpPaperGraphic>(panel, "Settings loose paper", new Rect(0, 0, 850 * s, 428 * s));
+            foreach (float ruleY in new[] { 109f, 219f, 319f })
+            {
+                var rule = PlayerUi.Graphic<Image>(panel, "Settings divider", new Rect(20 * s, ruleY * s, 810 * s, s));
+                rule.color = new Color(PlayerUi.Blue.r, PlayerUi.Blue.g, PlayerUi.Blue.b, .34f);
+            }
             settingsFullscreen = Screen.fullScreen;
             SettingsToggleRow(panel, "Toggle fullscreen", "Полный экран", "Развернуть игру на весь экран",
                 new Rect(20 * s, 14 * s, 810 * s, 88 * s), PlayerIcon.Target, settingsFullscreen,
@@ -69,9 +75,12 @@ namespace PaperDefense.Presentation
             SettingsToggleRow(panel, "Reduce motion", "Меньше движения", "Спокойные рисунки и панели",
                 new Rect(20 * s, 324 * s, 810 * s, 88 * s), PlayerIcon.Pause, game.ReducedMotion,
                 () => game.SetReducedMotion(!game.ReducedMotion), s);
-            NotebookAction(composition, "Open help", new Rect(375 * s, 690 * s, 850 * s, 64 * s),
+            var help = NotebookAction(composition, "Open help", new Rect(375 * s, 690 * s, 850 * s, 64 * s),
                 PlayerIcon.Help, assembly ? "Управление · " + JourneyCopy("settings.controls_body") : "Управление", () => game.OpenSettings(true));
-            var close = SettingsTextAction(composition, "Close settings", "Готово", new Rect(650 * s, 788 * s, 300 * s, 70 * s),
+            var nextHelp = PlayerUi.Graphic<PlayerIconGraphic>(help.transform, "Help navigation chevron", new Rect(800 * s, 19 * s, 24 * s, 27 * s));
+            nextHelp.Icon = PlayerIcon.Next; nextHelp.Sketch = true; nextHelp.color = PlayerUi.Ink;
+            help.GetComponentInChildren<Text>().rectTransform.offsetMax = new Vector2(-54 * s, -6 * s);
+            var close = SettingsTextAction(composition, "Close settings", "Готово", new Rect(630 * s, 780 * s, 340 * s, 78 * s),
                 game.CloseSettings, Mathf.RoundToInt(44 * s), true, s);
             UnityEngine.EventSystems.EventSystem.current?.SetSelectedGameObject(close.gameObject);
         }
@@ -81,6 +90,7 @@ namespace PaperDefense.Presentation
         {
             var button = ui.IconButton(parent, name, bounds, icon, title + ": " + (value ? "включено" : "выключено"),
                 () => { change(); Show(PlayerPage.Settings); });
+            button.targetGraphic.color = Color.clear;
             var symbol = button.GetComponentInChildren<PlayerIconGraphic>();
             if (monitor)
             {

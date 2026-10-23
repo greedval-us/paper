@@ -1,0 +1,517 @@
+{
+  "status": "reviewed_45_pass",
+  "reviewSource": "agent",
+  "reviewer": "/root/implement_battle_15_19; /root (final19 and24 changed world recaptures)",
+  "reviewDate": "2026-10-23",
+  "evidenceOwner": "root Unity capture and test executor",
+  "visionEvidence": "All 40 actual PNGs were delivered through view_image and physically reviewed after implementation; source scenes15-19 and28 plus previous wide/narrow captures were also inspected. Root physically opened source19 and all5 final scene19 recaptures after responsive-field fix. Root physically reopened24 changed world PNGs after HP anchoring. Six1280x960 recaptures are pixel-identical to the earlier accepted frames; earlier proof remains valid.",
+  "uiStack": "UGUI",
+  "changeMode": "bounded repair",
+  "verification": {
+    "latestGreenBeforeScene19Fit": "refinement-04-28-green.json:161/161 per root, job db6a674857824bbeb79346792195e7a3",
+    "scene19Fit": "All5 fresh frames physically reviewed by /root; three separate cards, complete benefits and generator note clear the gameplay dock in every aspect.",
+    "assetsMutationScope": "Final local geometry and common enemy presentation fixes have been captured; source/hash proofs identify the actual reviewed pixels.",
+    "latestGreen": "refinement-final-playmode.json:849/849, job38dbc50a38794d19862c12c9bbea389f"
+  },
+  "scopedDeviations": [
+    "World remains the authoritative gameplay battlefield, with no invented decorative props or staged enemies to reproduce mockup density.",
+    "Certified recipe illustrations retain the real assembly and proportion, including their full foundation.",
+    "Inspector has one intentional scroll at compact sizes; its fixed priority controls do not scroll."
+  ],
+  "frames": [
+    {
+      "scene": "15-planning",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-planning-1920x1080.png",
+      "sha256": "43033f4d951cb1f0d67a74ffab6e9bd1a09bf7e21b5f67810c3740cc6a6edeb5",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "All eight cards, two-line generator cost, live chips and centered objective fit; the objective clears castle and bottom approach."
+    },
+    {
+      "scene": "15-planning",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-planning-1600x900.png",
+      "sha256": "106cf32038db182ec8b814306bcecb791390d33729b260391092070692b5affa",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "All eight cards, two-line generator cost, live chips and centered objective fit; the objective clears castle and bottom approach."
+    },
+    {
+      "scene": "15-planning",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-planning-1280x960.png",
+      "sha256": "9cb8c37f686eab504e048fe2ea950848493024556e9ad31e28f2617c0117558e",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "All eight cards, two-line generator cost, live chips and centered objective fit; the objective clears castle and bottom approach."
+    },
+    {
+      "scene": "15-planning",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-planning-1280x720.png",
+      "sha256": "8a6eb5da593a50eede5bc764494b9188d9fb5092a741e6ab2f618ad235dc9006",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "All eight cards, two-line generator cost, live chips and centered objective fit; the objective clears castle and bottom approach."
+    },
+    {
+      "scene": "15-planning",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-planning-1024x768.png",
+      "sha256": "c64dd5af7cbd5208973afe03dd5f2eab19714cd1bdbafdd4d55e559d2e9da533",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "All eight cards, two-line generator cost, live chips and centered objective fit; the objective clears castle and bottom approach."
+    },
+    {
+      "scene": "16-battle",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-16-battle-1920x1080.png",
+      "sha256": "d2856ee227bdf3da10b5e8dc456b4e08c1a41985d72e4601c3d9e1fdac90268f",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Actual assault frame, live enemy count, subordinate forecast and disabled launch are legible; indicators report actual offscreen approaches. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "6f803200ca59bcf765ce41668338d5016fe89221b18922bc48db7477d45c062c",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "16-battle",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-16-battle-1600x900.png",
+      "sha256": "787218ed7c4ada95a8f5139370728f093df1621c7a2b35fea14b5acdbd076d91",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Actual assault frame, live enemy count, subordinate forecast and disabled launch are legible; indicators report actual offscreen approaches. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "f64bdc197a9ab73e2ab5ee66ea7911dd57075c81870878e36522ce7fb3b5bc78",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "16-battle",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-16-battle-1280x960.png",
+      "sha256": "5e0dedaf76c25d8ff9a5b90ad17f952de304c559925589335535fa793c9ecd89",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Actual assault frame, live enemy count, subordinate forecast and disabled launch are legible; indicators report actual offscreen approaches."
+    },
+    {
+      "scene": "16-battle",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-16-battle-1280x720.png",
+      "sha256": "87d9bcb6942f9e15e2d10d74962e79daec834baa715526cc6e10fba93c96d733",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Actual assault frame, live enemy count, subordinate forecast and disabled launch are legible; indicators report actual offscreen approaches. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "2057c2b0b3dd89d6b86dd9a4663ba2824d9d1df702dd7605c06236c640f1a4a7",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "16-battle",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-16-battle-1024x768.png",
+      "sha256": "32a6347b36a73902a833f4cef42c0c7c14fc00fa58bf720e38d0c185034de174",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Actual assault frame, live enemy count, subordinate forecast and disabled launch are legible; indicators report actual offscreen approaches. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "cf7986fd9c3d46635c6129e3bfa28dddd3a8ed1f1e45faa4bae16a6b460fc483",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "17-tower",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-tower-1920x1080.png",
+      "sha256": "18cd9f7fdce7ae84320739b38151737c7998b9417dc68e5810d1c5ec09582014",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Real selected art and live HP/state are separate from aligned material/color/cost/load rows; lower weapon-cycle details use the one existing scroll; priorities and X remain outside it. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "62e7ad97c722dcc97b9b5d98489a0f049fcbb6359d61748258afd808df527db1",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "17-tower",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-tower-1600x900.png",
+      "sha256": "987c27afb08c0c2f1b936ea903c54e5e3a8c87d429f6ff786a0dc86f9c4db4e6",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Real selected art and live HP/state are separate from aligned material/color/cost/load rows; lower weapon-cycle details use the one existing scroll; priorities and X remain outside it. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "2823e707dc8c066e1afee6c7d20f17592132c597be514174920d322d857e4035",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "17-tower",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-tower-1280x960.png",
+      "sha256": "535db0a7f2238e96a0b6afef2b21fdfc80835135d36a61167e7019514ddb7692",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Real selected art and live HP/state are separate from aligned material/color/cost/load rows; lower weapon-cycle details use the one existing scroll; priorities and X remain outside it."
+    },
+    {
+      "scene": "17-tower",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-tower-1280x720.png",
+      "sha256": "a90a9c97124574ec986a0abe55e2b0e88e423f1db0d21d6a77951cdc15971dbe",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Real selected art and live HP/state are separate from aligned material/color/cost/load rows; lower weapon-cycle details use the one existing scroll; priorities and X remain outside it. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "28bd420a71f53093b97d4373716309e7693144b8e5898829052d8b29b9d1dfb8",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "17-tower",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-tower-1024x768.png",
+      "sha256": "90693c3052c5bd78d02643d3a7a35c88b4e9da9d3b6b2e315159b474568b57bc",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Real selected art and live HP/state are separate from aligned material/color/cost/load rows; lower weapon-cycle details use the one existing scroll; priorities and X remain outside it. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "c36e894de2f803dd41050d105d112856d6d6f3451649897d1e1a044fd2cf6766",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "17-generator",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-generator-1920x1080.png",
+      "sha256": "70bd4c1f9420d0689a2d30dfc7898178f2a0d677ff398d99e8364f4c647aacdb",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Real generator art, HP and three rows; no tower priorities. Full-wave income/pencil/zero-refund rules remain in the scroll, with lower rules below the initial fold at compact sizes. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "50ddd05d0c14243f75cc69a2d47ea2cf47d3752c655df104166d05f1d8240df1",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "17-generator",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-generator-1600x900.png",
+      "sha256": "e2167eee71560c51a64e4f0f4ea773bb774d86c9e4dc6b7240ecc2de299a6018",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Real generator art, HP and three rows; no tower priorities. Full-wave income/pencil/zero-refund rules remain in the scroll, with lower rules below the initial fold at compact sizes. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "7beb2e2aae335dd8430d5c1eefe98d38480a6c0fc20297df3ca03b6288f99644",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "17-generator",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-generator-1280x960.png",
+      "sha256": "034bbdac0ce115448cddb94d82556d49882390630ab94b952a953734fd7c0ace",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Real generator art, HP and three rows; no tower priorities. Full-wave income/pencil/zero-refund rules remain in the scroll, with lower rules below the initial fold at compact sizes."
+    },
+    {
+      "scene": "17-generator",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-generator-1280x720.png",
+      "sha256": "64d295943e961498dd719f2cde8397c581c13cb2ee45a0cb040337a77fe9b1df",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Real generator art, HP and three rows; no tower priorities. Full-wave income/pencil/zero-refund rules remain in the scroll, with lower rules below the initial fold at compact sizes. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "2562be9c17b7c3c93f65ef02e9717503e355d055775c47fd9aa17d5fb051e44f",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "17-generator",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-generator-1024x768.png",
+      "sha256": "7a8673f12031386c6fc5d20b1f2e184fe5c14e62b4f72c1272d14698a7032ee3",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Real generator art, HP and three rows; no tower priorities. Full-wave income/pencil/zero-refund rules remain in the scroll, with lower rules below the initial fold at compact sizes. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "eebc900079ec601ca979a2b36d9e976298e3c1a129e985195b0dd6ce63eb8282",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "17-repair",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-repair-1920x1080.png",
+      "sha256": "c69081e6a508640f3f5d6b316d1d8c0c4ed82f0ca7ef30d970ba6d2af8622983",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Real repair art, HP and three rows; no tower priorities. Actual repair/radius details remain in the scroll, below the initial fold at compact sizes. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "de26624e94343c3f638f53b4216a640172984db0c9d11aaa32c3c847d94e6303",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "17-repair",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-repair-1600x900.png",
+      "sha256": "c722180fd443489e56e2430021a680e42a05fdd8e13999b802b671c01aa16aa9",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Real repair art, HP and three rows; no tower priorities. Actual repair/radius details remain in the scroll, below the initial fold at compact sizes. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "106f6b2af4bd1e893b147ff220548047ac6127c4f01692106c85d4ceed121f42",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "17-repair",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-repair-1280x960.png",
+      "sha256": "5f0fa6243089bceb137aa44fc4e6fa60fb63d776d1ea2d35fa3a6b95cfd0408f",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Real repair art, HP and three rows; no tower priorities. Actual repair/radius details remain in the scroll, below the initial fold at compact sizes."
+    },
+    {
+      "scene": "17-repair",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-repair-1280x720.png",
+      "sha256": "3fb3480ad547f315ff5e79a037e9e68704f2efbb80c14101721e559ff76e6c7c",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Real repair art, HP and three rows; no tower priorities. Actual repair/radius details remain in the scroll, below the initial fold at compact sizes. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "1942dbd46be534fd602cd991639a061e7e067f143c3d6247f3ca5f2d86e26794",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "17-repair",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-repair-1024x768.png",
+      "sha256": "d82501e4f75818fbb8227af88ddf412030143534b5f64ea94d83699e7fa428ed",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Real repair art, HP and three rows; no tower priorities. Actual repair/radius details remain in the scroll, below the initial fold at compact sizes. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "f5ec8864753b5d4c015cb00d2adfba4677ed369e99ac246fe999c59d37d340b8",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "18-pause",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-18-pause-1920x1080.png",
+      "sha256": "8995abf1f41255776e35a359002f19f0c40faa52de728c9e83e6999b5e808694",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Narrow tall paper with all four large actions and Esc hint; no internal scroll. Dimmed dock is partly covered at compact heights while all pause actions remain visible. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "5eb24c8eb98a4314679d2256a50862af93164f12b630e7fa4ee325d039f82653",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "18-pause",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-18-pause-1600x900.png",
+      "sha256": "ea73bc7a941d6734c22aa37ac913bfbe341bc9ae8df1ecdf502f35737bc0015e",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Narrow tall paper with all four large actions and Esc hint; no internal scroll. Dimmed dock is partly covered at compact heights while all pause actions remain visible. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "8fb17c95276352b4e65d97b3f036e7422b89897f9f1254fced4c0dc0ae779319",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "18-pause",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-18-pause-1280x960.png",
+      "sha256": "a47af3586b2619f2f52782b95f3f95df48b2582a0c46d0f07e3261893d83f8ee",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Narrow tall paper with all four large actions and Esc hint; no internal scroll. Dimmed dock is partly covered at compact heights while all pause actions remain visible."
+    },
+    {
+      "scene": "18-pause",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-18-pause-1280x720.png",
+      "sha256": "2ff00242f3831cffe566cd402fc7d8740fa800b43bf126e9e192ee65d1ae27f7",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Narrow tall paper with all four large actions and Esc hint; no internal scroll. Dimmed dock is partly covered at compact heights while all pause actions remain visible. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "e694fa200d2495c4016a4843eaf73148196905158b14b5b37af0d4496fc27d2f",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "18-pause",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-18-pause-1024x768.png",
+      "sha256": "73aaaebc64b652d23447daee1d0d61f5050cab1be73eed8baac98554c3df5b46",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Narrow tall paper with all four large actions and Esc hint; no internal scroll. Dimmed dock is partly covered at compact heights while all pause actions remain visible. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "1c9498c4da4cd342a771e626d2fe7caf5924113bb2fbdc47f3e9f9df7ae39441",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "19-upgrades",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1920x1080.png",
+      "sha256": "5823991f1f12d8cb44093155c182c32029d19b49e42cea8e9e64b32da596bca4",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Three separate illustrated papers retain real benefits and44px choose actions; complete generator note ends above the gameplay dock at all5 aspects.",
+      "metadataSha256": "c6949440340f2d1f62defdc8d44945364286886ce397f2a54d899454053bcbd9"
+    },
+    {
+      "scene": "19-upgrades",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1600x900.png",
+      "sha256": "20be0eed95b1bc214067e2226eb52d8bdf422d501753aab210ac81d08c29d4d9",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Three separate illustrated papers retain real benefits and44px choose actions; complete generator note ends above the gameplay dock at all5 aspects.",
+      "metadataSha256": "bd0068f37b305c78ce8d8e84fce81153031425fc9bc28dc8b47428b2d1173f0a"
+    },
+    {
+      "scene": "19-upgrades",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1280x960.png",
+      "sha256": "fc8a810f37e713238071d7fc66a746b962ee4f91ab69990c2993611ea8d0f2fb",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Three separate illustrated papers retain real benefits and44px choose actions; complete generator note ends above the gameplay dock at all5 aspects.",
+      "metadataSha256": "309859ccf9b39ce9600d7e58a669277d24037669195a787fc74f86e0ba1cd3b2"
+    },
+    {
+      "scene": "19-upgrades",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1280x720.png",
+      "sha256": "608ee877e8a7a66b5ddba958e6a982a12e083db4ddae9c6d072d711d18ba7969",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Three separate illustrated papers retain real benefits and44px choose actions; complete generator note ends above the gameplay dock at all5 aspects.",
+      "metadataSha256": "e6f290f9d911f3d7b068ceced40d61cd920f9830e9a067a3d56803c8580a6397"
+    },
+    {
+      "scene": "19-upgrades",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1024x768.png",
+      "sha256": "fdd050d25cae234d9443db15f1d9bdf9f9782ef5792f7c80b07eadfa24e3a7b5",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Three separate illustrated papers retain real benefits and44px choose actions; complete generator note ends above the gameplay dock at all5 aspects.",
+      "metadataSha256": "0dc61a677a8fe9e6c5286e8392e3ec1beeaf5c60fe7cff26dbe70f8cf7fcd984"
+    },
+    {
+      "scene": "28-leave",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1920x1080.png",
+      "sha256": "7b471b5e62a68e29e3304d519adbfe675113c322b3aea9ff4fb9422d930ce0d2",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Folded compact leave modal, X, primary Stay and neutral finish action are legible; Pause presentation is hidden under confirmation. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "d95fc3c86cd2499b1903f4bbb449a16a820351685847e409e5802f3a6e476008",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "28-leave",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1600x900.png",
+      "sha256": "3bc75334e300ae1b51e5750cefa37a2c0305fba8cb0f65d25c3087fcf7dbfc88",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Folded compact leave modal, X, primary Stay and neutral finish action are legible; Pause presentation is hidden under confirmation. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "744f47fd849e4372b148a5fed206a0480e017fc4cc319c54a811c5ff3e81d639",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "28-leave",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1280x960.png",
+      "sha256": "05284dd459f400ddbea1aa082cb10aac360afa13b24baa6e39037f231406e68a",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Folded compact leave modal, X, primary Stay and neutral finish action are legible; Pause presentation is hidden under confirmation."
+    },
+    {
+      "scene": "28-leave",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1280x720.png",
+      "sha256": "4cfc7a9b3818f6a0014922f029a6adacaf6440d688c0b0bff0d7acb3934bffc8",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Folded compact leave modal, X, primary Stay and neutral finish action are legible; Pause presentation is hidden under confirmation. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "9b5b6a642394fd2099126c4a8d238e1db3e1802df3537143e84ef950ea0065fb",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "28-leave",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1024x768.png",
+      "sha256": "d6607cb7f859a1b6b306935436b78829646d03323d27f43615cf4f4a3b60a0b7",
+      "visuallyInspected": true,
+      "status": "pass_scoped_repair",
+      "reason": "Folded compact leave modal, X, primary Stay and neutral finish action are legible; Pause presentation is hidden under confirmation. Final recapture physically reopened after enemy HP anchoring; body/HP remain aligned on visible actors, all original control/layout observations retained.",
+      "metadataSha256": "2830492169c0abc867ae2ff94956e3cba6c2050b4671518be94caa0724fdbfef",
+      "reviewer": "/root"
+    },
+    {
+      "scene": "15-overview",
+      "size": "1024x768",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-overview-1024x768.png",
+      "sha256": "997dfa80e9209ddc743fec699f8ae1c92d27609f52e2862c7c157018ee94e9dd",
+      "metadataSha256": "43b0834d59224c5533a47749e90e16fb2e0160e8ae6f0653939c5bb636519a48",
+      "visuallyInspected": true,
+      "reviewer": "/root",
+      "status": "pass_scoped_repair",
+      "reason": "Root physically inspected full-map planning: real reserved terrain/ink landmarks and spawns fit; actors are deliberately small in strategic overview, live dock/actions remain readable."
+    },
+    {
+      "scene": "15-overview",
+      "size": "1280x720",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-overview-1280x720.png",
+      "sha256": "a00f2c67fa6a7bbdfe6c8b9c24a8e7b2fb511914032ea2c3111e4fe9d8db7959",
+      "metadataSha256": "6b5748b0f6a3cb8b3ef634d89fe23776c46fb79538f2e8653ef81c9ba97965b4",
+      "visuallyInspected": true,
+      "reviewer": "/root",
+      "status": "pass_scoped_repair",
+      "reason": "Root physically inspected full-map planning: real reserved terrain/ink landmarks and spawns fit; actors are deliberately small in strategic overview, live dock/actions remain readable."
+    },
+    {
+      "scene": "15-overview",
+      "size": "1920x1080",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-overview-1920x1080.png",
+      "sha256": "c56d471ec490cbff7662b6f76528dc95e98ff4756fe62728025d077e7c3e7773",
+      "metadataSha256": "4de1da0bbd56c46ceed96fcd1f3dbe97dc1224f6af111dff6828b6d49a61a0b0",
+      "visuallyInspected": true,
+      "reviewer": "/root",
+      "status": "pass_scoped_repair",
+      "reason": "Root physically inspected full-map planning: real reserved terrain/ink landmarks and spawns fit; actors are deliberately small in strategic overview, live dock/actions remain readable."
+    },
+    {
+      "scene": "15-overview",
+      "size": "1280x960",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-overview-1280x960.png",
+      "sha256": "5bda9d0329bb78ed169084d3980357ddc87598a0b389c84aa8ead8de62a35636",
+      "metadataSha256": "0a2f5dbb3f4a57dcb2daef5ba7dbafc238a8610779f1264ebde65a183d6c378b",
+      "visuallyInspected": true,
+      "reviewer": "/root",
+      "status": "pass_scoped_repair",
+      "reason": "Root physically inspected full-map planning: real reserved terrain/ink landmarks and spawns fit; actors are deliberately small in strategic overview, live dock/actions remain readable."
+    },
+    {
+      "scene": "15-overview",
+      "size": "1600x900",
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-overview-1600x900.png",
+      "sha256": "2bceee551b160c5cb25ac19a513312a158737abf7e92e4f86293054ed71cdd37",
+      "metadataSha256": "4a63ad8e537a53a67642152e73780c2f7fe49531acd430532a7ad4faa40b03a3",
+      "visuallyInspected": true,
+      "reviewer": "/root",
+      "status": "pass_scoped_repair",
+      "reason": "Root physically inspected full-map planning: real reserved terrain/ink landmarks and spawns fit; actors are deliberately small in strategic overview, live dock/actions remain readable."
+    }
+  ],
+  "sourceImages": [
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "sha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/16-battle.png",
+      "sha256": "bfafea38bdade0cc00e1a83467dbe63bb9e4326cd0c5bc848c9792e660bf1bb7"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "sha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/18-pause.png",
+      "sha256": "a37b1ec4059c5abdf37ef6f5695ecc549360bac90f383fc1f6b1ae3917695bc3"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "sha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/28-leave.png",
+      "sha256": "d280c9dc11d916756a5ca6b695d2cf2020009df3085d6b55d41dd5dd09ece7b2"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "schema": "paper-defense/scoped-visual-review/v1",
+  "reviewedOn": "2026-10-23",
+  "scope": "09 Album /24 Empty album",
+  "reviewer": {
+    "executor": "/root",
+    "reviewSource": "agent",
+    "vision": "Root opened both original concepts, both baseline sizes for each and all10 final PNGs."
+  },
+  "status": "reviewed_pass",
+  "technicalEvidence": "refinement-04-28-green.json",
+  "captureSourceManifest": "refinement-batch2-capture-manifest.json",
+  "preserved": [
+    "Actual recipe identity including whole broad modular foundation; real8slots/gold/XP.",
+    "Single catalogue scroll owner, filter/SelectedId/focus and actual home/map/preparation return.",
+    "Assignment/move-confirm/deletion/write-failure/starter-restore commands.",
+    "Empty primary opens creation; secondary changes to starter filter without restoring or spending."
+  ],
+  "fixedFindings": [
+    "Catalogue uses available vertical height for2rows; selected frame and native pencil prices are clear.",
+    "Inspector health/load/cost use native illustrations and aligned true values.",
+    "Empty state has central create action and detailed concept-derived blank book; live real weapon parts left and actual assembled starter right."
+  ],
+  "residuals": [
+    "Native modern modular silhouettes differ from illustrative old round-chassis concept.",
+    "At720 empty book is smaller to retain live loadout, filters, explanation, two central actions and footer.",
+    "Margin scenery reuses existing native pine/rock motifs instead of every unique camp/flag prop in source."
+  ],
+  "blockingFindings": [],
+  "scenes": [
+    {
+      "id": "09",
+      "name": "album",
+      "observations": "All8cards/5filters/liveinspector/statrows/actionsfitall5sizes, no clip. At1080theunusedblankbottomisremoved; actualcatalogueselectionandfullfoundationremain.",
+      "captures": [
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1024x768.png",
+          "sha256": "b130a6f28375bf37337a64bbae9a13706b25e9b32006ca8993125be9a62f1b0d",
+          "metadataSha256": "b1edad33f0613339d33f47708ac79bed1ea8f62bb38524128a34274fd0eb194c",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1280x720.png",
+          "sha256": "6e7d167d6712d0b90b1ed35e6e49782666ea8cfa6775fd8abdd64ee2c592cad1",
+          "metadataSha256": "c4352a2268371025ea3b80961abfb03653c4ffc122c3e4e0122b13af585f428b",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1280x960.png",
+          "sha256": "b8c04295de8e9ef9cb7a394b84e81013bfe05938b7b0f182a74a1739eac9b5bd",
+          "metadataSha256": "736c657a09b2bf5f1d383a7c002384cc49d69b0f2b28fdc8dca0d2ee2b0ef4e3",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1600x900.png",
+          "sha256": "c6b02329a55d4fcd660d99341ba0644a09c1d37c70b538027b84b53552893e66",
+          "metadataSha256": "f84c70172ec41f3a97fa20e232c59af099c0e41361a62ca028c171c058fdb1f1",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1920x1080.png",
+          "sha256": "005de4d6983ef0a6f4d4078dc70c8b6fdcf44fda5102fc188b639ac37c1ce380",
+          "metadataSha256": "a5d03acf63dd6d5d10b25e84083ee5b6f31ed7f3720196ad36490988b71c1ffe",
+          "visuallyOpened": true
+        }
+      ],
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/09-album.png",
+        "sha256": "f85732485ee24e51bbf780898baa5ea822a875b31ae0da345bcdd7ac5cbe19be"
+      }
+    },
+    {
+      "id": "24",
+      "name": "empty",
+      "observations": "Detailedblankbook/livefive-partdiagram/starterpreviewandtwocenteredactionsfitall5. Realprofile/loadoutpreserved; no baked UI or fabricated assembly.",
+      "captures": [
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1024x768.png",
+          "sha256": "681e63af9c8e6a3cc24d94221807e0a06bc61825fbdf1a3651ddcdf1bc656019",
+          "metadataSha256": "0504dab615cf30a525810c95498332401498d55a18e3a34588e95d5eee636039",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1280x720.png",
+          "sha256": "835503334bd3d2516a2c95602310ee1d645e6df244da6fc8e75216e43cb9ce65",
+          "metadataSha256": "0b466ffa2e85e63c5641b70d8ee69b3c54c54e750ed762ae67b9b4163f548cc8",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1280x960.png",
+          "sha256": "fc1caa8151ec261274f0d4994806f212114d7151a7343091a9d7806922dcbf53",
+          "metadataSha256": "45cb7f106d9e64674ee79d3143bfc7515fae6b24c975d8c1f328da463ab741e1",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1600x900.png",
+          "sha256": "d26d1558eed98ca83062dc02b9d4feb5919a323c7d9e44fd4a14c450ee4f13aa",
+          "metadataSha256": "d080f1a3462feed56351626b52dc03f872e00377865e3621cc1fa2a689108862",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1920x1080.png",
+          "sha256": "67f1012af11d9511cd03e7512c7b188e8e61adb71e47768bfae3dd28f1551914",
+          "metadataSha256": "35179c1207f7e29a871d575476cccda78137ffdcde97e790f6f76d760fe838df",
+          "visuallyOpened": true
+        }
+      ],
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/24-empty.png",
+        "sha256": "6a5fb645b1529e2f2102bc111da1a81204f53c96276084a0783c51f196b8b073"
+      }
+    }
+  ]
+}

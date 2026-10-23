@@ -1,0 +1,254 @@
+{
+  "status": "reviewed_plan_only",
+  "reviewSource": "agent",
+  "referenceResolution": [
+    1672,
+    941
+  ],
+  "note": "Analysts inspected every assigned source and both baseline 1920x1080/1024x768 PNGs. Coordinates are approximate source landmarks; implementation and fresh verification remain required. Catalog v7 is the current catalogue revision; foundation v9 is an asset version, not a later catalogue.",
+  "scenes": [
+    {
+      "id": "09",
+      "owner": "AlbumPanel",
+      "repair": [
+        "Use available vertical extent for two catalogue rows; strengthen selected frame and pencil costs.",
+        "Separate real health/load/cost rows with icons and aligned values in inspector."
+      ],
+      "preserve": [
+        "Single catalogue scroll owner, real identity, request-assign/move/save-failure/deletion/focus/return semantics."
+      ]
+    },
+    {
+      "id": "10",
+      "owner": "CompositeWorkshopPanel.Trial / NotebookTrialRenderer / TrialLaneSketch",
+      "repair": [
+        "Reduce oversized opaque perimeter scenery and secondary grid.",
+        "Aligned actual comparison measurement table and grouped trial controls."
+      ],
+      "preserve": [
+        "All six scenarios, actual playback actors, muzzle/health/shot geometry, synchronized pause/time, no IO/rewards."
+      ]
+    },
+    {
+      "id": "11",
+      "owner": "ComponentCatalogPanel catalogueLayout",
+      "repair": [
+        "Contained inset parts sheet, shorter art-led cards and real availability badges.",
+        "Genuine workshop context behind modal using actual recipe diagram."
+      ],
+      "preserve": [
+        "Inspect vs install vs purchase; cancel component closes scope; modern pen-nib barrel identity."
+      ]
+    },
+    {
+      "id": "12",
+      "owner": "ComponentCatalogPanel mortar / AssemblyMechanicPreview",
+      "repair": [
+        "Three separate frames, wider two barrel cards.",
+        "Candidate real weapon composition, stronger actual radius footprint and disclosed rule preview."
+      ],
+      "preserve": [
+        "Resolver radius/minimum/price/interval, head.mortar/head.wide, unlock state; no legacy shape editing."
+      ]
+    },
+    {
+      "id": "13",
+      "owner": "AssemblyMechanicPreview fan / ComponentCatalogPanel",
+      "repair": [
+        "Stronger sector fill and dummy outlines; curved dimension arrow, fewer radial hairlines.",
+        "Bigger actual weapon anchored to true muzzle; stronger metric sheet and real reachable mechanism/sight navigation."
+      ],
+      "preserve": [
+        "ConeDegrees/TargetLimit, category meaning, attachment diagnostics."
+      ]
+    },
+    {
+      "id": "14",
+      "owner": "ComponentCatalogPanel armor / WorkshopProtectionDirections",
+      "repair": [
+        "Retain updated rectangular foundation in source three-zone page composition.",
+        "Each none/plate/front card shows true candidate full foundation; distinct right rule panel."
+      ],
+      "preserve": [
+        "Truthful rule preview or real modular DamageRules test, never legacy TowerBlueprint probe; local install vs final save."
+      ]
+    },
+    {
+      "id": "15",
+      "owner": "PlayerBattleHud",
+      "repair": [
+        "Larger real recipe art in all8 dock cards; 2-line names and baseline costs.",
+        "Illustrated live currency/health chips, centered wave ribbon.",
+        "Small centered objective strip above dock, transient errors separate to avoid castle occlusion."
+      ],
+      "preserve": [
+        "Bounded dock at1024, source-proven actual map props only; erase/upgrade/blotter/paint callbacks."
+      ]
+    },
+    {
+      "id": "16",
+      "owner": "PlayerBattleHud",
+      "repair": [
+        "Active-wave hierarchy, enemy count and forecast subordinate; quiet disabled launch.",
+        "Real combat capture, truthful optional offscreen approach indicators."
+      ],
+      "preserve": [
+        "No false staged enemies; any selection range from resolved data, destroyed/closed support correct."
+      ]
+    },
+    {
+      "id": "17",
+      "owner": "Battle inspector",
+      "repair": [
+        "Structured name, real art, live HP bar and actual material/load/cost/cycle rows.",
+        "Priority outside one scroll owner; close X."
+      ],
+      "preserve": [
+        "No camera move, generator zero refund/pencil rule, support priority hidden."
+      ]
+    },
+    {
+      "id": "18",
+      "owner": "PlayerShell.Dialogs Pause",
+      "repair": [
+        "Dedicated narrow tall paper, heading and4 large actions/icons with Esc hint."
+      ],
+      "preserve": [
+        "Modal input isolation, pause state, restart/leave confirmations."
+      ]
+    },
+    {
+      "id": "19",
+      "owner": "PlayerShell upgrades",
+      "repair": [
+        "Ribbon and3 separate paper cards over subdued actual world.",
+        "Actual Balance.Progression quantitative benefits, bigger illustrations, neutral choose except focus."
+      ],
+      "preserve": [
+        "Single ChooseUpgrade command and generator exception; fit1024 without unnecessary scroll."
+      ]
+    },
+    {
+      "id": "20",
+      "owner": "PlayerShell.Result",
+      "repair": [
+        "Separated actual reward columns, compact XP/progress, eligibility callout only from real evidence.",
+        "Ground frozen actual loadout in courtyard; lower perimeter mountains/repeated trees.",
+        "Compact receipt/report and confirmation emblem."
+      ],
+      "preserve": [
+        "Actual RunRewardTotals/receipt/pending RetrySave and memory-only distinction; frozen occupied mounts."
+      ]
+    },
+    {
+      "id": "21",
+      "owner": "PlayerShell.Result",
+      "repair": [
+        "Defeat-specific torn/slashed banner.",
+        "Distinct reward/loss/action groups with aligned real numbers."
+      ],
+      "preserve": [
+        "DestroyedStructures vs Breaches fallback, actual waves/receipt/navigation; no source illustrative losses."
+      ]
+    },
+    {
+      "id": "22",
+      "owner": "PlayerShell.Settings",
+      "repair": [
+        "One loose sheet with divider rules for all4 actual settings.",
+        "Separate help/navigation row and larger Done action."
+      ],
+      "preserve": [
+        "Resolution apply/cancel, fullscreen support, reduced motion, original settings return."
+      ]
+    },
+    {
+      "id": "23",
+      "owner": "PlayerShell.Dialogs AlbumHelp",
+      "repair": [
+        "Larger4 diagrams, tighter prose cards and handwritten title.",
+        "Stronger live resource headings, lighter borders."
+      ],
+      "preserve": [
+        "All12 real keys, modern modular diagrams,8slots, modal focus/contextual return."
+      ]
+    },
+    {
+      "id": "24",
+      "owner": "AlbumPanel Empty / NotebookOpenBookGraphic opt-in",
+      "repair": [
+        "Centered primary create and smaller starter-filter action.",
+        "Larger detailed book; actual exploded foundation left and actual starter right."
+      ],
+      "preserve": [
+        "Filter vs restore distinction, actual gold/identities and current loadout."
+      ]
+    },
+    {
+      "id": "25",
+      "owner": "ComponentCatalogPanel.OpenPurchase",
+      "repair": [
+        "Requirement row +3-row ledger price/gold/remainder.",
+        "Torn outline and close X to ClosePurchase, larger footer."
+      ],
+      "preserve": [
+        "PurchasePart(part.Id,Guid.NewGuid), actual rights/level/gold, subsequent install separate, modern barrel."
+      ]
+    },
+    {
+      "id": "26",
+      "owner": "CompositeWorkshopPanel.Review write failure",
+      "repair": [
+        "Screen-owned floating red-edged error sheet with real detail and grouped retry/continue.",
+        "Keep normal recipe review behind it; explicit presentation dismiss state."
+      ],
+      "preserve": [
+        "Dismiss visual only; never cancel/reset draft/name/failure. Retry exact save command."
+      ]
+    },
+    {
+      "id": "27",
+      "owner": "ComponentCatalogPanel invalid branch",
+      "repair": [
+        "Dedicated red inspector, actual conflict part pair around X.",
+        "Invalid selected recipe as individual parts/exploded diagram, promoted SuggestedPartId action."
+      ],
+      "preserve": [
+        "Invalid full Compose/SetRecipe throws; no fabricated resolved stats; CanSave unchanged; explicit user repair only."
+      ]
+    },
+    {
+      "id": "28",
+      "owner": "PlayerShell.Dialogs BuildConfirmation",
+      "repair": [
+        "Compact folded modal/map, X=CancelConfirmation, Stay primary/focused.",
+        "Hide only Pause presentation during leave confirmation; restore cancel."
+      ],
+      "preserve": [
+        "confirmAction/modal/Esc/paused simulation/game.ReturnToMap, no resume toggle."
+      ]
+    },
+    {
+      "id": "29",
+      "owner": "StructureAssemblyPanel / ComponentCatalogPanel / WorkshopAssemblyDiagram",
+      "repair": [
+        "Three regions: choices, dense actual exploded diagram, separate metrics and placement rules.",
+        "Neutral no-equipment as ghost/check representing absence."
+      ],
+      "preserve": [
+        "Family parts/ownership/scroll/explicit install/SaveComponent; no copied requirement numbers."
+      ]
+    },
+    {
+      "id": "30",
+      "owner": "WorkshopAssemblyDiagram / ComponentCatalogPanel",
+      "repair": [
+        "Inspect Bounds vs VisibleBounds fitting without changing trims/colliders/sockets/scales.",
+        "Compact vertical updated square foundation stack and stronger real cards/stats."
+      ],
+      "preserve": [
+        "31–33 modern identity, actual hull/collars, neutral armor has no fragments, SaveComponent/CancelComponent."
+      ]
+    }
+  ]
+}
