@@ -143,8 +143,27 @@ namespace PaperDefense.Tests
                 var hub = drawing.Fragments.Single(f => f.PartId == "turn.standard" && f.SlotIndex == socket.SlotIndex);
                 Assert.That(Bounds(hub).width, Is.LessThanOrEqualTo(.26f), "A turn hub must fit the real disk, rather than add an oversized empty dish.");
                 // Actual bottom of the front bolt, rather than the surrounding plate.
-                Assert.That(Vector2.Distance(hub.Transform(new Vector2(245, 99)), new Vector2(socket.Position.X, socket.Position.Y)), Is.LessThan(.000001f));
+                Assert.That(Vector2.Distance(hub.Transform(new Vector2(625.5f, 405.5f)), new Vector2(socket.Position.X, socket.Position.Y)), Is.LessThan(.000001f));
             }
+        }
+
+        [Test] public void ModernTurnHub_DoesNotCarryAClippedPatchOfTheBroadOldPlinth()
+        {
+            var drawing = AssemblyVisualComposer.ComposeFoundation(new FoundationRecipe(P("frame.standard"), P("hull.standard"), P("armor.none"), P("feed.standard"), P("turn.standard")));
+            var hub = drawing.Fragments.First(f => f.PartId == "turn.standard");
+            AssemblyVisualComposer.Fits.TryGetFrame("frame.standard", 1, out var frame);
+            var seat = frame.Mounts.First(m => m.SlotIndex == hub.SlotIndex).Position;
+            var atlas = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+            try
+            {
+                Assert.That(atlas.LoadImage(File.ReadAllBytes(PaperDefense.Editor.NotebookSpriteImportTools.AtlasPath)), Is.True);
+                var pixels = atlas.GetPixels32();
+                foreach (float x in new[] { -.065f, .065f })
+                foreach (float y in new[] { .002f, .005f })
+                    Assert.That(AlphaAtWorld(hub, new Vector2(seat.X + x, seat.Y + y), pixels, atlas.width), Is.LessThan(8),
+                        "Outside the narrow front bolt, the hub's lower corners must be transparent, not a clipped ivory floor rectangle.");
+            }
+            finally { UnityEngine.Object.DestroyImmediate(atlas); }
         }
 
         [Test] public void ModernReceiverFeet_SeatOnTheOpaqueFrontInnerLipRatherThanHoverOverTheOpening()
@@ -167,10 +186,10 @@ namespace PaperDefense.Tests
                     var hub = drawing.Fragments.Single(f => f.PartId == "turn.standard");
                     // These are opaque source landmarks: the receiver's central
                     // lowest foot and the front inner edge of the open bearing.
-                    var lip = new Vector2(245, 196);
+                    var lip = new Vector2(625.5f, 643.5f);
                     Assert.That(Alpha(receiver, feet[i], pixels, atlas.width), Is.GreaterThanOrEqualTo(128));
                     Assert.That(Alpha(hub, lip, pixels, atlas.width), Is.GreaterThanOrEqualTo(128));
-                    Assert.That(Alpha(hub, new Vector2(245, 99), pixels, atlas.width), Is.GreaterThanOrEqualTo(128));
+                    Assert.That(Alpha(hub, new Vector2(625.5f, 405.5f), pixels, atlas.width), Is.GreaterThanOrEqualTo(128));
                     Assert.That(Vector2.Distance(receiver.Transform(feet[i]), hub.Transform(lip)), Is.LessThan(.002f), families[i] + ": the central foot must reach the bearing's front lip.");
                 }
             }
@@ -197,7 +216,8 @@ namespace PaperDefense.Tests
                         var receiver = drawing.Fragments.Single(f => f.PartId == "core." + family);
                         // Sample the centre of an opaque foot pixel, a few
                         // pixels inside its edge, to avoid angle-rounding seams.
-                        var foot = new Vector2(173.5f, 20.5f);
+                        // Measured lower central foot on AssemblyAccessories-v2.
+                        var foot = new Vector2(257.5f, 15.5f);
                         Assert.That(Alpha(sight, foot, pixels, atlas.width), Is.GreaterThanOrEqualTo(128));
                         Assert.That(AlphaAtWorld(receiver, sight.Transform(foot), pixels, atlas.width), Is.GreaterThanOrEqualTo(128), family + ": the sight's real mounting foot must touch the receiver during recoil.");
                     }
@@ -209,9 +229,28 @@ namespace PaperDefense.Tests
         [Test] public void BatteryFoundation_IsALowThreeDiskPlinthWithReadableMountedWeapons()
         {
             var drawing = AssemblyVisualComposer.ComposeFoundation(new FoundationRecipe(P("frame.battery"), P("hull.standard"), P("armor.none"), P("feed.standard"), P("turn.standard")));
-            var baseBounds = drawing.Fragments.Where(f => f.PartId == "frame.battery" || f.PartId == "hull.standard").Select(Bounds).ToArray();
-            float height = baseBounds.Max(r => r.yMax) - baseBounds.Min(r => r.yMin);
-            Assert.That(height, Is.LessThanOrEqualTo(.60f), "A battery must use a low three-pad plinth; a tall empty block makes all three heads unreadable in the shared fit.");
+            // Judge the actual opaque plinth, excluding its transparent native
+            // crop padding. Physical keepouts still retain the whole crop;
+            // EveryHull_PreservesTheActualFrameBaseRoofAndFront checks that
+            // none of those contiguous source bands are discarded.
+            var atlas = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+            try
+            {
+                Assert.That(atlas.LoadImage(File.ReadAllBytes(PaperDefense.Editor.NotebookSpriteImportTools.AtlasPath)), Is.True);
+                var pixels = atlas.GetPixels32(); float bottom = float.PositiveInfinity, top = float.NegativeInfinity;
+                foreach (var fragment in drawing.Fragments.Where(f => f.PartId == "frame.battery" || f.PartId == "hull.standard"))
+                    for (int y = Mathf.CeilToInt(fragment.Region.yMin); y < fragment.Region.yMax; y++)
+                    for (int x = Mathf.CeilToInt(fragment.Region.xMin); x < fragment.Region.xMax; x++)
+                    {
+                        var point = new Vector2(x + .5f, y + .5f);
+                        if (!fragment.Region.Contains(point) || Alpha(fragment, point, pixels, atlas.width) < 128) continue;
+                        bottom = Mathf.Min(bottom, fragment.Transform(point - Vector2.one * .5f).y);
+                        top = Mathf.Max(top, fragment.Transform(point + Vector2.one * .5f).y);
+                    }
+                Assert.That(top - bottom, Is.GreaterThan(0));
+                Assert.That(top - bottom, Is.LessThanOrEqualTo(.60f), "A battery must use a low three-pad plinth; a tall empty block makes all three heads unreadable in the shared fit.");
+            }
+            finally { UnityEngine.Object.DestroyImmediate(atlas); }
             Assert.That(drawing.Fragments.Count(f => f.PartId == "turn.standard"), Is.EqualTo(3));
         }
 

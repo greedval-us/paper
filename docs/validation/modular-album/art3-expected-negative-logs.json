@@ -1,0 +1,33 @@
+{
+  "source": "docs/validation/modular-album/art3-final-playmode-results.json",
+  "note": "These3 passing negative fixtures deliberately expect exceptions with LogAssert.Expect. Final resumed editor console contains zero errors.",
+  "tests": [
+    {
+      "name": "IncompatibleOverrideIsRejectedBeforeProfileStoreLoad",
+      "fullName": "PaperDefense.Tests.TextResourceIntegrationTests.IncompatibleOverrideIsRejectedBeforeProfileStoreLoad",
+      "state": "Passed",
+      "durationSeconds": 0.0121187,
+      "message": null,
+      "stackTrace": null,
+      "output": "ArgumentException: Incompatible text template: copy.159b7c81e8a7413c\r\nParameter name: key\r\nPaperDefense.Core.UserTextResolver.RequireContract (System.String key, System.Int32 argumentCount, System.Int32[] formattedArguments) (at Assets/PaperDefense/Core/UserText.cs:176)\nPaperDefense.Core.UserTextContracts.Validate (PaperDefense.Core.UserTextResolver resolver) (at Assets/PaperDefense/Core/UserTextContracts.Generated.cs:560)\nPaperDefense.Presentation.PaperDefenseBootstrap.Awake () (at Assets/PaperDefense/Presentation/PaperDefenseBootstrap.cs:45)\nUnityEngine.GameObject:SetActive(Boolean)\nPaperDefense.Tests.TextResourceIntegrationTests:IncompatibleOverrideIsRejectedBeforeProfileStoreLoad() (at Assets/PaperDefense/Tests/PlayMode/TextResourceIntegrationTests.cs:100)\nSystem.Reflection.MethodBase:Invoke(Object, Object[])\nNUnit.Framework.Internal.Reflect:InvokeMethod(MethodInfo, Object, Object[])\nNUnit.Framework.Internal.MethodWrapper:Invoke(Object, Object[])\nNUnit.Framework.Internal.Commands.TestMethodCommand:RunNonAsyncTestMethod(ITestExecutionContext)\nNUnit.Framework.Internal.Commands.TestMethodCommand:RunTestMethod(ITestExecutionContext)\nNUnit.Framework.Internal.Commands.TestMethodCommand:Execute(ITestExecutionContext)\nUnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)\n\r\n"
+    },
+    {
+      "name": "InvalidNumericOverrideIsRejectedBeforeProfileStoreLoad(\"Q\",\"FormatException: No semantic argument type supports this format\\\\.\")",
+      "fullName": "PaperDefense.Tests.TextResourceIntegrationTests.InvalidNumericOverrideIsRejectedBeforeProfileStoreLoad(\"Q\",\"FormatException: No semantic argument type supports this format\\\\.\")",
+      "state": "Passed",
+      "durationSeconds": 0.006186,
+      "message": null,
+      "stackTrace": null,
+      "output": "FormatException: No semantic argument type supports this format.\r\nPaperDefense.Core.UserTextResolver+FormatProbe.ToString (System.String format, System.IFormatProvider provider) (at Assets/PaperDefense/Core/UserText.cs:148)\nSystem.Text.StringBuilder.AppendFormatHelper (System.IFormatProvider provider, System.String format, System.ParamsArray args) (at <816f70bc2a9c4332b0bd119906a8d40e>:0)\nSystem.String.FormatHelper (System.IFormatProvider provider, System.String format, System.ParamsArray args) (at <816f70bc2a9c4332b0bd119906a8d40e>:0)\nSystem.String.Format (System.IFormatProvider provider, System.String format, System.Object[] args) (at <816f70bc2a9c4332b0bd119906a8d40e>:0)\nPaperDefense.Core.UserTextResolver.Validate (System.String key, System.String template) (at Assets/PaperDefense/Core/UserText.cs:131)\nRethrow as FormatException: Invalid text template: copy.034c4ac46d600a47\nPaperDefense.Core.UserTextResolver.Validate (System.String key, System.String template) (at Assets/PaperDefense/Core/UserText.cs:132)\nPaperDefense.Core.UserTextResolver..ctor (System.Collections.Generic.IEnumerable`1[T] entries, System.Globalization.CultureInfo culture) (at Assets/PaperDefense/Core/UserText.cs:83)\nPaperDefense.Application.TextResourcesAsset.CreateResolver () (at Assets/PaperDefense/Application/TextResourcesAsset.cs:47)\nPaperDefense.Presentation.PaperDefenseBootstrap.Awake () (at Assets/PaperDefense/Presentation/PaperDefenseBootstrap.cs:44)\nUnityEngine.GameObject:SetActive(Boolean)\nPaperDefense.Tests.TextResourceIntegrationTests:InvalidNumericOverrideIsRejectedBeforeProfileStoreLoad(String, String) (at Assets/PaperDefense/Tests/PlayMode/TextResourceIntegrationTests.cs:123)\nSystem.Reflection.MethodBase:Invoke(Object, Object[])\nNUnit.Framework.Internal.Reflect:InvokeMethod(MethodInfo, Object, Object[])\nNUnit.Framework.Internal.MethodWrapper:Invoke(Object, Object[])\nNUnit.Framework.Internal.Commands.TestMethodCommand:RunNonAsyncTestMethod(ITestExecutionContext)\nNUnit.Framework.Internal.Commands.TestMethodCommand:RunTestMethod(ITestExecutionContext)\nNUnit.Framework.Internal.Commands.TestMethodCommand:Execute(ITestExecutionContext)\nUnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)\n\r\n"
+    },
+    {
+      "name": "InvalidNumericOverrideIsRejectedBeforeProfileStoreLoad(\"D\",\"ArgumentException: Incompatible text template: copy\\\\.034c4ac46d600a47\")",
+      "fullName": "PaperDefense.Tests.TextResourceIntegrationTests.InvalidNumericOverrideIsRejectedBeforeProfileStoreLoad(\"D\",\"ArgumentException: Incompatible text template: copy\\\\.034c4ac46d600a47\")",
+      "state": "Passed",
+      "durationSeconds": 0.0066436,
+      "message": null,
+      "stackTrace": null,
+      "output": "ArgumentException: Incompatible text template: copy.034c4ac46d600a47\r\nParameter name: key\r\nPaperDefense.Core.UserTextResolver.RequireFormatContract (System.String key, System.Int32 argumentIndex, System.String[] formats) (at Assets/PaperDefense/Core/UserText.cs:185)\nPaperDefense.Core.UserTextContracts.Validate (PaperDefense.Core.UserTextResolver resolver) (at Assets/PaperDefense/Core/UserTextContracts.Generated.cs:503)\nPaperDefense.Presentation.PaperDefenseBootstrap.Awake () (at Assets/PaperDefense/Presentation/PaperDefenseBootstrap.cs:45)\nUnityEngine.GameObject:SetActive(Boolean)\nPaperDefense.Tests.TextResourceIntegrationTests:InvalidNumericOverrideIsRejectedBeforeProfileStoreLoad(String, String) (at Assets/PaperDefense/Tests/PlayMode/TextResourceIntegrationTests.cs:123)\nSystem.Reflection.MethodBase:Invoke(Object, Object[])\nNUnit.Framework.Internal.Reflect:InvokeMethod(MethodInfo, Object, Object[])\nNUnit.Framework.Internal.MethodWrapper:Invoke(Object, Object[])\nNUnit.Framework.Internal.Commands.TestMethodCommand:RunNonAsyncTestMethod(ITestExecutionContext)\nNUnit.Framework.Internal.Commands.TestMethodCommand:RunTestMethod(ITestExecutionContext)\nNUnit.Framework.Internal.Commands.TestMethodCommand:Execute(ITestExecutionContext)\nUnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)\n\r\n"
+    }
+  ]
+}

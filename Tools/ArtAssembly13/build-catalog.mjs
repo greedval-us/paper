@@ -9,7 +9,7 @@ const read = p => JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
 const write = (p,v) => fs.writeFileSync(path.join(root,p),JSON.stringify(v,null,2)+'\n');
 const source = read(art+'sprites.source.json');
 const assembly = read(art+'assembly-parts.source.json');
-const revision = 'modular-full-catalog-2026-10-22-v7';
+const revision = 'modular-full-catalog-2026-10-24-v8';
 const asset = fs.readFileSync(path.join(root,'Assets/PaperDefense/Configuration/Game/PlayerAssemblyCatalog.asset'),'utf8').split('    Starters:')[0];
 const definitions = [...asset.matchAll(/^    - Id: (.+)\r?\n([\s\S]*?)(?=^    - Id:|$(?![\s\S]))/gm)].map(m=>({
   partId:m[1].trim(),revision:Number(m[2].match(/Revision: (\d+)/)[1]),
@@ -22,6 +22,27 @@ const rect = (x,y,width,height)=>({x,y,width,height});
 const point = (x,y)=>({x,y});
 const rotate = (p,r)=>point(p.x*Math.cos(r)-p.y*Math.sin(r),p.x*Math.sin(r)+p.y*Math.cos(r));
 const clone = x => structuredClone(x);
+// Native v2 crops and actual mechanical landmarks were measured on the new
+// ink-accessory drawing (art3-accessory-candidate-review.json). Keep the old
+// physical widths, except armour whose height is the limiting safe extent.
+// Reapply original constants so rebuilding is idempotent, never cumulative.
+const accessorySpecs=[
+ ['sight',33,530,508,419,.065*347/508,[257.5,15.5],[-14.9675,117.6025]],
+ ['magazine',662,514,375,461,.11*273/375,[38.5,169.5],[-32,95]],
+ ['trigger',1150,547,345,423,.065*343/345,[149.5,123.5],[20,84]],
+ ['bearing',574,69,512,395,.3*505/512,[260.5,214.5],[0,35]],
+ ['feed',51,75,496,372,.00034*473/496],
+ ['armor',1153,74,324,416,.00065*413/416]
+];
+for(const [id,x,y,width,height,scale,attach,offset]of accessorySpecs){
+ const spriteId='part.pilot.'+id,s=source.sprites.find(s=>s.id===spriteId);
+ if(!s)throw new Error('Missing retained accessory ID '+spriteId);
+ Object.assign(s,{source:art+'AssemblyAccessories-v2.png',x,y,width,height,bounds:rect(0,0,width/1000,height/1000)});
+ const f=assembly.pilots[0].fragments.find(f=>f.spriteId===spriteId)??assembly.foundationParts.find(f=>f.spriteId===spriteId);
+ Object.assign(f,{canvas:point(width,height),trim:rect(0,0,width,height),scale});
+ if(attach){f.attach=point(...attach);f.offset=point(...offset);}
+ else f.region=rect(0,0,width,height);
+}
 parts.get('armor.none').neutral='Без брони'; parts.get('utility.none').neutral='Без оснащения';
 for(const f of assembly.foundationParts){
   parts.get(f.partId).fragments.push({spriteId:f.spriteId,socketId:f.partId+'.'+f.layer,motion:'fixed',collisionMode:f.collisionMode,
@@ -50,7 +71,7 @@ function decodePng(relative){
 }
 const sheets=new Map();
 function cell(relative,index){
- if(!sheets.has(relative))sheets.set(relative,decodePng(relative));const im=sheets.get(relative),grid=/StandardFoundation-v[249]\.png$/.test(relative)?1:/SupportAttachments-v1\.png$|RepairParts-v1\.png$|BatteryFoundation-v3\.png$/.test(relative)?2:4,col=index%grid,row=Math.floor(index/grid);
+ if(!sheets.has(relative))sheets.set(relative,decodePng(relative));const im=sheets.get(relative),grid=/StandardFoundation-v10\.png$|TurnHub-v1\.png$/.test(relative)?1:/SupportAttachments-v1\.png$|RepairParts-v1\.png$|BatteryFoundation-v4\.png$/.test(relative)?2:4,col=index%grid,row=Math.floor(index/grid);
  let left=Math.floor(col*im.w/grid),right=Math.floor((col+1)*im.w/grid);
  let top=Math.floor(row*im.h/grid),bottom=Math.floor((row+1)*im.h/grid);
  // The long nib's tip extends above its nominal fourth-row cell. The transparent
@@ -143,14 +164,15 @@ for(const [id,index,width,sockets] of frameSpecs){
 }
 // Modern recipes use a low plinth. The historical pilot canvases and its two
 // original socket coordinates remain above in foundations/pilots for legacy.
-const standard=art+'StandardFoundation-v9.png',base=cell(standard,0);
+const standard=art+'StandardFoundation-v10.png',base=cell(standard,0);
 // Preserve the accepted logical seats while replacing the front-facing beam
 // with the more faithful isometric plinth. Source disk centres were inspected
 // on the full 1536x1024 canvas; no source pixels are rescaled or rewritten.
 const oldLeft=-.5+483/1942,oldRight=-.5+1452/1942,oldSeatY=-.27+458/1942;
-// Actual cream seating faces have pixel bounds (219,341)..(519,425) and
-// (1013,341)..(1314,426), top-origin. The centres below are inspected on
-// those faces, not taken from the requested generation coordinates.
+// The refreshed matte stone drawing retains both cream seating faces:
+// measured centres BL(370.5,641) and (1165.5,641). The accepted controls
+// below remain inside those faces within 2.7px annotation uncertainty.
+// Refresh the complete lower crop: v10's front stone extends 30px farther.
 const seatLeft=368,seatRight=1163,seatY=640;
 const baseScale=(oldRight-oldLeft)/(seatRight-seatLeft);
 const basePosition=[oldLeft-seatLeft*baseScale,oldSeatY-seatY*baseScale];
@@ -176,22 +198,25 @@ for(const split of [{bottom:frontFraction,height:1-frontFraction,layer:0},{botto
 }
 // A genuine low three-pad foundation replaces the old tall battery block.
 // All three disk centres were inspected on the unchanged top-left 627px cell.
-// The four golden disk bolts also provide an independent centre witness.
-const battery=art+'BatteryFoundation-v3.png',batteryCell=cell(battery,0),batteryScale=1.95/batteryCell.canvas.x;
+// Refreshed navy hatching preserves all three faces within 1-2px of the
+// accepted authored centres. Retain logical mounts; refresh the native crop.
+const battery=art+'BatteryFoundation-v4.png',batteryCell=cell(battery,0),batteryScale=1.95/batteryCell.canvas.x;
 const batteryFrame=add('frame.battery',battery,0,{attach:[0,0],position:[-.975,-.88],scale:batteryScale,layer:1,collisionMode:'solid'});
 const batteryPart=parts.get('frame.battery');batteryPart.hullBaseFraction=.18;batteryPart.hullFrontFraction=.35;
 batteryFrame.region=rect(batteryFrame.trim.x,batteryFrame.trim.y,batteryFrame.trim.width,batteryFrame.trim.height*.18);
 batteryPart.mounts=[{slot:0,position:point(168,292)},{slot:1,position:point(312,344)},{slot:2,position:point(459,290)}];
 for(const id of ['armor.plate','feed.standard'])for(const f of parts.get(id).fragments){
- f.scale*=.5;f.position=point(id==='armor.plate'?-.0675:-.04,id==='armor.plate'?-.218:-.2475);
+ f.scale*=.5;f.position=point(id==='armor.plate'?.0002625-f.canvas.x*f.scale/2:-.04,id==='armor.plate'?-.218:-.2075);
  if(id==='feed.standard')f.layer=16;
 }
 const modernPivot=.158;
-const support=parts.get('turn.standard').fragments.find(f=>f.spriteId==='part.gun.support');
-// Keep the genuine central vertical hub, not its broad empty dish. Its real
-// foot seats on the disk; its top meets the gearbox without a floating ring.
-support.attach=point(245,99);support.region=rect(137,99,222,179);support.scale=.00075;support.position=point(0,-modernPivot);
-parts.get('turn.standard').fragments=[support];
+// The original rectangular extraction retained a patch of the broad dish.
+// A separate native cutout keeps the curved lower edge and front bolt only.
+// Measured foot BL(625.5,405.5), front inner lip(625.5,643.5) have the same
+// 0.07275U world separation as the accepted receiver contact. Legacy pilot
+// retains its complete original dish and original part.gun.support binding.
+parts.get('turn.standard').fragments=[];
+const support=add('turn.standard',art+'TurnHub-v1.png',0,{attach:[625.5/1254,405.5/1254],position:[0,-modernPivot],scale:.07275/238,layer:3});
 assembly.modernPivot=point(0,modernPivot);
 add('hull.light',variants,3,{attach:[.5,.5],position:[0,-.18],radius:.24,layer:14,collisionMode:'solid'});
 add('hull.reinforced',variants,4,{attach:[.5,.5],position:[0,-.18],radius:.24,layer:14,collisionMode:'solid'});
@@ -203,7 +228,9 @@ add('armor.front',variants,5,{attach:[.5,.5],position:[0,frameFloor-(shieldCell.
 add('feed.boost',variants,6,{attach:[.5,.5],position:[0,-.10],radius:.10,layer:16,collisionMode:'solid'});
 add('turn.quick',variants,7,{attach:[.5,.5],position:[0,-.025],radius:.08,layer:3});
 const quickSupport=clone(support);quickSupport.socketId='turn.quick.support';parts.get('turn.quick').fragments.push(quickSupport);
-parts.get('sight.iron').fragments[0].position.y=.005;
+// Preserve the previous opaque sight-foot contact in world space while
+// attaching the refreshed drawing by its measured lower foot itself.
+parts.get('sight.iron').fragments[0].position.y=.005-21.5*.065*units;
 parts.get('magazine.standard').fragments[0].position.y=.020;
 parts.get('trigger.standard').fragments[0].position.y=.020;
 add('sight.scope',variants,8,{attach:[.5,.18],position:[-.035,.005],radius:.035*1.7,motion:'rotating',layer:7});

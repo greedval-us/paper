@@ -1,0 +1,4246 @@
+{
+  "schemaVersion": 1,
+  "inventoryDate": "2026-10-24",
+  "baselineCommit": "77e0e49",
+  "revision": "modular-full-catalog-2026-10-22-v7",
+  "scope": "Static read-only product dependency inventory. Only this report is written. No Unity, image generation, deletion, import, or dependency mutation.",
+  "sourceCounts": {
+    "directRuntimePngs": 12,
+    "modernLayoutSourceSheets": 7,
+    "atlasSourceSheets": 18,
+    "aliases": 431,
+    "sourceSprites": 140,
+    "nativeSourcePngs": 35,
+    "modernPartDefinitions": 54
+  },
+  "semantics": {
+    "REMOVE_CANDIDATE": "No live product raster dependency found; candidate only after proof/evidence review. No deletion performed.",
+    "REPLACE": "Reachable old raster set requiring replacement/rerouting before native source or IDs can be retired.",
+    "KEEP": "Needed now or explicitly protected evidence. Active dependency does not certify style."
+  },
+  "manifests": [
+    {
+      "decision": "KEEP",
+      "sha256": "B459B4161328CA9F65EA29D6670A2379A7BD6489ACE72C12C2FF37407FD75553",
+      "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+    },
+    {
+      "decision": "KEEP",
+      "sha256": "A0C6796DFDF3D1C4FFB8AEFD325759170117BE30BCF4EA8F72DB9987A2A13048",
+      "path": "ArtSource/Notebook/NewStyle/assembly-parts.source.json"
+    },
+    {
+      "decision": "KEEP",
+      "sha256": "29F50D351165E91C870CE98C9EB73D8ED3DC1A73263100BD431DDE856631BDA2",
+      "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+    },
+    {
+      "decision": "KEEP",
+      "sha256": "F7662E9912BD90D5DD533C420B3505DE5E0DD4E48D98A818E563E7032EEA32AD",
+      "path": "ArtSource/Notebook/NewStyle/animation.json"
+    },
+    {
+      "decision": "KEEP",
+      "sha256": "A6FBB539ED3A5D27E28FAA43AE71FF2E66724FD5427A7D6A7F6AF5E970879C70",
+      "path": "ArtSource/Notebook/NewStyle/generation.json"
+    },
+    {
+      "decision": "KEEP",
+      "sha256": "00CDE4A102CA1709D9FD0845DABA5895F3BC9916BF3A5D90704D78B373D8D333",
+      "path": "ArtSource/Notebook/NewStyle/foundation-generation.json"
+    },
+    {
+      "decision": "KEEP",
+      "sha256": "0B7A9C652721F3612216C6A0F4638839CF0F78688702A0E092BD15A95FCBC88D",
+      "path": "ArtSource/Notebook/NewStyle/hashes.json"
+    },
+    {
+      "decision": "KEEP",
+      "sha256": "CA4EB58413B23507303106DD1A64ABF4E600AFC8A39587C74F89D56476CB4ADD",
+      "path": "ArtSource/Notebook/References/manifest.json"
+    },
+    {
+      "decision": "KEEP",
+      "sha256": "8822E85BD242DD40D0AC7A1B60CB130C797A7A8338B1F8C4E0A6B23E4032C747",
+      "path": "docs/implementation/home-menu-assets.json"
+    },
+    {
+      "decision": "KEEP",
+      "sha256": "E85D3F0BD3D897309496B0B71D2FBE00F32BAC0AF2ED1526DAC3D6A7EB40F5F1",
+      "path": "docs/implementation/map-preparation-assets.json"
+    },
+    {
+      "decision": "KEEP",
+      "sha256": "F307A16503BC971A2C1AFAF2F81B582C43A78B9401C1E3CB1113D400F9ECE524",
+      "path": "Tools/ArtAssembly13/packing-4096.json"
+    },
+    {
+      "decision": "KEEP",
+      "sha256": "4B86B216098D4105BA42544A7A5433B49C8EA7B2F74E77DF4B513A5632A00EC9",
+      "path": "Assets/PaperDefense/Resources/Art/NotebookSprites.json"
+    },
+    {
+      "decision": "KEEP",
+      "sha256": "577D1A46F43D4597EDD33F6777BCD3479226B0D7F3739D73C01DA76380C5023F",
+      "path": "Assets/PaperDefense/Resources/Art/NotebookMounts.json"
+    }
+  ],
+  "sourceRasters": [
+    {
+      "role": "modern-and-legacy-shared-component-parts",
+      "reason": "Current 54-part modern mapping and historical gun pilot both use these native parts. The full catalog generation script seeds gun and accessory definitions from the pilot.",
+      "spriteIds": [
+        "part.pilot.sight",
+        "part.pilot.magazine",
+        "part.pilot.trigger",
+        "part.pilot.feed",
+        "part.pilot.bearing",
+        "part.pilot.armor"
+      ],
+      "image": {
+        "width": 1536,
+        "bytes": 2413913,
+        "height": 1024,
+        "sha256": "32CDAA7FB704D8D3FC33918A317E3F1047A0995E71282E422F58980A93E07648"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"asset\": \"AssemblyAccessories-v1.png\",",
+          "line": 3,
+          "path": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.provenance.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png\",",
+          "line": 1182,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png\",",
+          "line": 1196,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png\",",
+          "line": 1210,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png\",",
+          "line": 1224,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png\",",
+          "line": 1238,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png\",",
+          "line": 1252,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"path\": \"ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png\",",
+          "line": 67,
+          "path": "docs/validation/modular-album/art2-workshop-visual-review.json"
+        },
+        {
+          "text": "- Источник прежних четырёх оружейных деталей сохранён. Добавлен прозрачный [лист аксессуаров](../../../ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png), созданный встроенным `image_gen.imagegen`; [точный запрос и происхождение](../../../ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.provenance.json). Растровые исходники не редактировались программно; кропы и упаковка выполняются штатным Unity-импортом.",
+          "line": 10,
+          "path": "docs/validation/modular-album/task3-report.md"
+        }
+      ],
+      "modernPartIds": [
+        "armor.plate",
+        "feed.standard",
+        "sight.iron",
+        "magazine.standard",
+        "trigger.standard"
+      ],
+      "risk": "Whole-sheet removal would break modern default gun/accessory recipes as well as compatibility. Replace IDs/anchors across both mappings together.",
+      "path": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png",
+      "decision": "KEEP"
+    },
+    {
+      "role": "modern-full-catalog-native-sheet",
+      "reason": "Referenced by current authoritative sprite manifest; required for deterministic atlas rebuild.",
+      "spriteIds": [
+        "part.full.frame.battery"
+      ],
+      "image": {
+        "width": 1254,
+        "bytes": 912876,
+        "height": 1254,
+        "sha256": "98F90FC29B16BA1EA908B9F7CE7C9C2AC9DC51D92593334B68A4A0418A546511"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"acceptance\": \"Rejected for atlas packing density; superseded by the newly generated compact BatteryFoundation-v3.png. Geometry design is retained.\"",
+          "line": 10,
+          "path": "ArtSource/Notebook/NewStyle/BatteryFoundation-v2.provenance.json"
+        },
+        {
+          "text": "\"project_source\": \"ArtSource/Notebook/NewStyle/BatteryFoundation-v3.png\",",
+          "line": 7,
+          "path": "ArtSource/Notebook/NewStyle/BatteryFoundation-v3.provenance.json"
+        },
+        {
+          "text": "\"file\": \"ArtSource/Notebook/NewStyle/BatteryFoundation-v3.png\",",
+          "line": 20,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/BatteryFoundation-v3.png\",",
+          "line": 189,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/BatteryFoundation-v3.png\",",
+          "line": 1518,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "The battery uses the top-left 627-pixel cell of `BatteryFoundation-v3.png`, an independently authored compact source with three real disks. Its 564×192 native import crop replaces the old tall block. The larger `BatteryFoundation-v2.png` was rejected for packing density and is not imported. `contact-audit.mjs --probes` reads current alpha and reports receiver-foot and sight-contact positions without changing any image or source metadata.",
+          "line": 21,
+          "path": "Tools/ArtAssembly13/README.md"
+        },
+        {
+          "text": "const battery=art+'BatteryFoundation-v3.png',batteryCell=cell(battery,0),batteryScale=1.95/batteryCell.canvas.x;",
+          "line": 180,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "const im=decode(art+'BatteryFoundation-v3.png'),visited=new Uint8Array(im.w*im.h),queue=new Int32Array(im.w*im.h),gold=[];",
+          "line": 19,
+          "path": "Tools/ArtAssembly13/contact-audit.mjs"
+        },
+        {
+          "text": "Обычная основа использует [низкую двухместную плиту](../ArtSource/Notebook/NewStyle/StandardFoundation-v2.png), батарея — верхнюю левую ячейку [компактной трёхместной плиты](../ArtSource/Notebook/NewStyle/BatteryFoundation-v3.png). У батареи импортируется родная область 564×192 px; широкий предыдущий источник не входит в атлас. Обе основы разбиты на нижнюю часть, заднюю плоскость и передний край в общих координатах исходного изображения.",
+          "line": 110,
+          "path": "docs/Modular-Asset-Contract.md"
+        },
+        {
+          "text": "Исходные прозрачные PNG, промпты и причины повторной генерации хранятся в `ArtSource/Notebook/NewStyle/`. Первая пара ремонтных корпуса и крыши отклонена из-за пересекающихся прямоугольных crop; отдельный `RepairParts-v1.png` заменяет оба фрагмента. `StandardFoundation-v2.png` добавляет низкую двухместную основу после обнаруженного на настоящих кадрах нарушения пропорций. `BatteryFoundation-v3.png` заменяет высокий трёхместный постамент: он вынуждал уменьшать весь кадр настолько, что терялись три оружейных силуэта. Предшествующий крупный источник батареи отклонён по плотности упаковки; компактный лист заново сгенерирован, а не уменьшен программно. Пиксели исходных PNG не редактируются при импорте.",
+          "line": 15,
+          "path": "docs/validation/modular-album/visual-acceptance.md"
+        }
+      ],
+      "modernPartIds": [
+        "frame.battery"
+      ],
+      "risk": "Visual style acceptance is outside this static inventory.",
+      "path": "ArtSource/Notebook/NewStyle/BatteryFoundation-v3.png",
+      "decision": "KEEP"
+    },
+    {
+      "role": "active-shared-art",
+      "reason": "Referenced by current authoritative sprite manifest; required for deterministic atlas rebuild.",
+      "spriteIds": [
+        "fx.muzzle",
+        "fx.tracer",
+        "fx.piercer",
+        "fx.mortar.projectile",
+        "fx.mortar.explosion",
+        "fx.fan",
+        "fx.ricochet",
+        "fx.cleanup"
+      ],
+      "image": {
+        "width": 1774,
+        "bytes": 1627796,
+        "height": 887,
+        "sha256": "E505A49CB445504E13F909E8F17688A9CD5A2B5EFF7B34B77188453F130E4AD9"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"selected_file\": \"ArtSource/Notebook/NewStyle/EffectSprites.png\",",
+          "line": 109,
+          "path": "ArtSource/Notebook/NewStyle/generation.json"
+        },
+        {
+          "text": "\"File\": \"EffectSprites.png\",",
+          "line": 3,
+          "path": "ArtSource/Notebook/NewStyle/hashes.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EffectSprites.png\",",
+          "line": 636,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EffectSprites.png\",",
+          "line": 650,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EffectSprites.png\",",
+          "line": 664,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EffectSprites.png\",",
+          "line": 678,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EffectSprites.png\",",
+          "line": 692,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EffectSprites.png\",",
+          "line": 706,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EffectSprites.png\",",
+          "line": 720,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EffectSprites.png\",",
+          "line": 734,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        }
+      ],
+      "modernPartIds": [],
+      "risk": "Visual style acceptance is outside this static inventory.",
+      "path": "ArtSource/Notebook/NewStyle/EffectSprites.png",
+      "decision": "KEEP"
+    },
+    {
+      "role": "active-shared-art",
+      "reason": "Referenced by current authoritative sprite manifest; required for deterministic atlas rebuild.",
+      "spriteIds": [
+        "enemy.doodle.idle",
+        "enemy.runner.idle",
+        "enemy.gnawer.idle",
+        "enemy.spitter.idle",
+        "enemy.brute.idle",
+        "enemy.bulwark.idle",
+        "enemy.doodle.walk",
+        "enemy.runner.walk",
+        "enemy.gnawer.walk",
+        "enemy.spitter.walk",
+        "enemy.brute.walk",
+        "enemy.bulwark.walk",
+        "enemy.doodle.attack",
+        "enemy.runner.attack",
+        "enemy.gnawer.attack",
+        "enemy.spitter.attack",
+        "enemy.brute.attack",
+        "enemy.bulwark.attack"
+      ],
+      "image": {
+        "width": 1774,
+        "bytes": 1613441,
+        "height": 887,
+        "sha256": "3940438C692DB1965E38C64715E86F686230E82B9DD4F96DF9081B363ECD7CA3"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"selected_file\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 58,
+          "path": "ArtSource/Notebook/NewStyle/generation.json"
+        },
+        {
+          "text": "\"File\": \"EnemySprites.png\",",
+          "line": 7,
+          "path": "ArtSource/Notebook/NewStyle/hashes.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 384,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 398,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 412,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 426,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 440,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 454,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 468,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 482,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 496,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 510,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 524,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 538,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 552,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 566,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 580,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 594,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 608,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 622,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "id = \"test.pose\", source = \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 18,
+          "path": "Assets/PaperDefense/Tests/Editor/NotebookSpriteImportTests.cs"
+        },
+        {
+          "text": "\"path\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 66,
+          "path": "docs/validation/modular-album/art2-workshop-handoff.json"
+        },
+        {
+          "text": "\"path\": \"ArtSource/Notebook/NewStyle/EnemySprites.png\",",
+          "line": 55,
+          "path": "docs/validation/modular-album/art2-workshop-visual-review.json"
+        }
+      ],
+      "modernPartIds": [],
+      "risk": "Visual style acceptance is outside this static inventory.",
+      "path": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "decision": "KEEP"
+    },
+    {
+      "role": "modern-full-catalog-native-sheet",
+      "reason": "Referenced by current authoritative sprite manifest; required for deterministic atlas rebuild.",
+      "spriteIds": [
+        "part.full.site.wall",
+        "part.full.function.wall",
+        "part.full.shell.standard.wall",
+        "part.full.utility.armor.wall",
+        "part.full.site.slow",
+        "part.full.function.slow",
+        "part.full.shell.standard.slow",
+        "part.full.function.repair.toolbox",
+        "part.full.site.generator",
+        "part.full.function.generator",
+        "part.full.shell.standard.generator",
+        "part.full.utility.economy"
+      ],
+      "image": {
+        "width": 1254,
+        "bytes": 2187435,
+        "height": 1254,
+        "sha256": "7FC319BA1372C7C4CE6E8095470CF917974DC61C6639D1E06053878981BE2D3D"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"file\": \"FullStructureParts-v1.png\",",
+          "line": 14,
+          "path": "ArtSource/Notebook/NewStyle/FullCatalog-v1.provenance.json"
+        },
+        {
+          "text": "\"file\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 25,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 293,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 301,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 309,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 317,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 325,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 333,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 341,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 373,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 381,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 389,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 397,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 405,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 1700,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 1714,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 1728,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 1742,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 1756,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 1770,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 1784,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 1840,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 1854,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 1868,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 1882,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 1896,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "if(relative.endsWith('FullStructureParts-v1.png')){",
+          "line": 68,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "const supports=art+'FullStructureParts-v1.png';",
+          "line": 215,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "Новые прозрачные production-листы: [оружие](../ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png), [основы и варианты](../ArtSource/Notebook/NewStyle/FullVariantParts-v1.png), [сооружения](../ArtSource/Notebook/NewStyle/FullStructureParts-v1.png), [отдельные части мастерской](../ArtSource/Notebook/NewStyle/RepairParts-v1.png), [оболочки и оснащение](../ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png). [Происхождение](../ArtSource/Notebook/NewStyle/FullCatalog-v1.provenance.json) записывает генерацию и исходные файлы. Целые страницы концептов не используются как нарезанные игровые детали. Пересекавшиеся прямоугольные области корпуса и крыши мастерской заменены отдельным листом; маска из чужих пикселей не создавалась.",
+          "line": 108,
+          "path": "docs/Modular-Asset-Contract.md"
+        },
+        {
+          "text": "\"path\": \"ArtSource/Notebook/NewStyle/FullStructureParts-v1.png\",",
+          "line": 61,
+          "path": "docs/validation/modular-album/art2-workshop-visual-review.json"
+        }
+      ],
+      "modernPartIds": [
+        "site.wall",
+        "site.slow",
+        "site.generator",
+        "function.wall",
+        "function.slow",
+        "function.repair",
+        "function.generator",
+        "shell.standard",
+        "shell.light",
+        "shell.reinforced",
+        "utility.armor",
+        "utility.economy"
+      ],
+      "risk": "Visual style acceptance is outside this static inventory.",
+      "path": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "decision": "KEEP"
+    },
+    {
+      "role": "modern-full-catalog-native-sheet",
+      "reason": "Referenced by current authoritative sprite manifest; required for deterministic atlas rebuild.",
+      "spriteIds": [
+        "part.full.shell.light.panel.wall",
+        "part.full.shell.reinforced.panel.wall",
+        "part.full.utility.economy.pump"
+      ],
+      "image": {
+        "width": 1254,
+        "bytes": 1611742,
+        "height": 1254,
+        "sha256": "3D3B9ACEE34B660B9601C90CC8988D5353307E3C476D82518566B4C8D844E4ED"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"file\": \"FullSupportAttachments-v1.png\",",
+          "line": 26,
+          "path": "ArtSource/Notebook/NewStyle/FullCatalog-v1.provenance.json"
+        },
+        {
+          "text": "\"file\": \"ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png\",",
+          "line": 35,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png\",",
+          "line": 413,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png\",",
+          "line": 421,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png\",",
+          "line": 437,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png\",",
+          "line": 1910,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png\",",
+          "line": 1924,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png\",",
+          "line": 1952,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "if(relative.endsWith('FullSupportAttachments-v1.png')&&index===3)left=820;",
+          "line": 76,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "const attachments=art+'FullSupportAttachments-v1.png';",
+          "line": 262,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "Новые прозрачные production-листы: [оружие](../ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png), [основы и варианты](../ArtSource/Notebook/NewStyle/FullVariantParts-v1.png), [сооружения](../ArtSource/Notebook/NewStyle/FullStructureParts-v1.png), [отдельные части мастерской](../ArtSource/Notebook/NewStyle/RepairParts-v1.png), [оболочки и оснащение](../ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png). [Происхождение](../ArtSource/Notebook/NewStyle/FullCatalog-v1.provenance.json) записывает генерацию и исходные файлы. Целые страницы концептов не используются как нарезанные игровые детали. Пересекавшиеся прямоугольные области корпуса и крыши мастерской заменены отдельным листом; маска из чужих пикселей не создавалась.",
+          "line": 108,
+          "path": "docs/Modular-Asset-Contract.md"
+        }
+      ],
+      "modernPartIds": [
+        "shell.light",
+        "shell.reinforced",
+        "utility.economy"
+      ],
+      "risk": "Visual style acceptance is outside this static inventory.",
+      "path": "ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png",
+      "decision": "KEEP"
+    },
+    {
+      "role": "modern-full-catalog-native-sheet",
+      "reason": "Referenced by current authoritative sprite manifest; required for deterministic atlas rebuild.",
+      "spriteIds": [
+        "part.full.frame.heavy",
+        "part.full.frame.precision",
+        "part.full.hull.light",
+        "part.full.hull.reinforced",
+        "part.full.hull.light.back",
+        "part.full.hull.reinforced.back",
+        "part.full.armor.front",
+        "part.full.feed.boost",
+        "part.full.turn.quick",
+        "part.full.sight.scope",
+        "part.full.sight.tracking",
+        "part.full.magazine.drum",
+        "part.full.magazine.belt",
+        "part.full.trigger.burst"
+      ],
+      "image": {
+        "width": 1254,
+        "bytes": 2001080,
+        "height": 1254,
+        "sha256": "358DBC851A58636349729FB4009E738FFD110763DA38996092724F42D7381395"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"file\": \"FullVariantParts-v1.png\",",
+          "line": 20,
+          "path": "ArtSource/Notebook/NewStyle/FullCatalog-v1.provenance.json"
+        },
+        {
+          "text": "\"file\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 10,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 165,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 173,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 197,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 205,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 213,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 221,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 229,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 237,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 245,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 253,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 261,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 269,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 277,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 285,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 1476,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 1490,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 1532,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 1546,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 1560,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 1574,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 1588,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 1602,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 1616,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 1630,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 1644,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 1658,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 1672,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullVariantParts-v1.png\",",
+          "line": 1686,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "if(relative.endsWith('FullVariantParts-v1.png')){",
+          "line": 64,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "const variants=art+'FullVariantParts-v1.png';",
+          "line": 129,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "Новые прозрачные production-листы: [оружие](../ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png), [основы и варианты](../ArtSource/Notebook/NewStyle/FullVariantParts-v1.png), [сооружения](../ArtSource/Notebook/NewStyle/FullStructureParts-v1.png), [отдельные части мастерской](../ArtSource/Notebook/NewStyle/RepairParts-v1.png), [оболочки и оснащение](../ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png). [Происхождение](../ArtSource/Notebook/NewStyle/FullCatalog-v1.provenance.json) записывает генерацию и исходные файлы. Целые страницы концептов не используются как нарезанные игровые детали. Пересекавшиеся прямоугольные области корпуса и крыши мастерской заменены отдельным листом; маска из чужих пикселей не создавалась.",
+          "line": 108,
+          "path": "docs/Modular-Asset-Contract.md"
+        }
+      ],
+      "modernPartIds": [
+        "frame.heavy",
+        "frame.precision",
+        "hull.light",
+        "hull.reinforced",
+        "armor.front",
+        "feed.boost",
+        "turn.quick",
+        "sight.scope",
+        "sight.tracking",
+        "magazine.drum",
+        "magazine.belt",
+        "trigger.burst"
+      ],
+      "risk": "Visual style acceptance is outside this static inventory.",
+      "path": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "decision": "KEEP"
+    },
+    {
+      "role": "modern-full-catalog-native-sheet",
+      "reason": "Referenced by current authoritative sprite manifest; required for deterministic atlas rebuild.",
+      "spriteIds": [
+        "part.full.core.piercer",
+        "part.full.head.piercer",
+        "part.full.core.mortar",
+        "part.full.head.mortar",
+        "part.full.core.fan",
+        "part.full.head.fan",
+        "part.full.core.ricochet",
+        "part.full.head.ricochet",
+        "part.full.core.stapler",
+        "part.full.head.stapler",
+        "part.full.core.blotter",
+        "part.full.head.blotter",
+        "part.full.head.short",
+        "part.full.head.long",
+        "part.full.head.wide"
+      ],
+      "image": {
+        "width": 1254,
+        "bytes": 2077828,
+        "height": 1254,
+        "sha256": "905556BDA0C6E85A50B2AF2C9DEE5748E5082C0B05799BE6DA6223634D5804D5"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"file\": \"FullWeaponParts-v1.png\",",
+          "line": 8,
+          "path": "ArtSource/Notebook/NewStyle/FullCatalog-v1.provenance.json"
+        },
+        {
+          "text": "\"file\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 5,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 45,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 53,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 61,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 69,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 77,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 85,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 93,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 101,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 109,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 117,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 125,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 133,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 141,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 149,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 157,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 1266,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 1280,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 1294,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 1308,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 1322,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 1336,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 1350,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 1364,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 1378,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 1392,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 1406,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 1420,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 1434,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 1448,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png\",",
+          "line": 1462,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "if(relative.endsWith('FullWeaponParts-v1.png')&&index===9)bottom=904;",
+          "line": 58,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "if(relative.endsWith('FullWeaponParts-v1.png')&&index===13)top=904;",
+          "line": 59,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "if(relative.endsWith('FullWeaponParts-v1.png')&&index===0)right=340;",
+          "line": 60,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "if(relative.endsWith('FullWeaponParts-v1.png')&&index===1)left=340;",
+          "line": 61,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "if(relative.endsWith('FullWeaponParts-v1.png')&&index===2)bottom=350;",
+          "line": 62,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "if(relative.endsWith('FullWeaponParts-v1.png')&&index===6)top=350;",
+          "line": 63,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "const weapons=art+'FullWeaponParts-v1.png';",
+          "line": 99,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "Новые прозрачные production-листы: [оружие](../ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png), [основы и варианты](../ArtSource/Notebook/NewStyle/FullVariantParts-v1.png), [сооружения](../ArtSource/Notebook/NewStyle/FullStructureParts-v1.png), [отдельные части мастерской](../ArtSource/Notebook/NewStyle/RepairParts-v1.png), [оболочки и оснащение](../ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png). [Происхождение](../ArtSource/Notebook/NewStyle/FullCatalog-v1.provenance.json) записывает генерацию и исходные файлы. Целые страницы концептов не используются как нарезанные игровые детали. Пересекавшиеся прямоугольные области корпуса и крыши мастерской заменены отдельным листом; маска из чужих пикселей не создавалась.",
+          "line": 108,
+          "path": "docs/Modular-Asset-Contract.md"
+        },
+        {
+          "text": "Открыты в исходном размере: [лист 31](../../design/album-assembly-2026-10-17/art/01-towers.png), [04](../../design/game-concept-art-2026-10-16/screens/04-foundation.png), [05](../../design/game-concept-art-2026-10-16/screens/05-weapons.png), [08](../../design/game-concept-art-2026-10-16/screens/08-review.png), текущие 04/05/08 в 1280×720, листы rest/turn90/max-recoil в 1920×1080 и исходный FullWeaponParts-v1.png. Изображения доступны и визуально интерпретированы; заключение не выведено из имён файлов.",
+          "line": 5,
+          "path": "docs/validation/modular-album/task13-reference-fidelity-audit.md"
+        }
+      ],
+      "modernPartIds": [
+        "core.gun",
+        "core.piercer",
+        "core.mortar",
+        "core.fan",
+        "core.ricochet",
+        "core.stapler",
+        "core.blotter",
+        "head.piercer",
+        "head.mortar",
+        "head.fan",
+        "head.ricochet",
+        "head.stapler",
+        "head.blotter",
+        "head.short",
+        "head.long",
+        "head.wide"
+      ],
+      "risk": "Visual style acceptance is outside this static inventory.",
+      "path": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "decision": "KEEP"
+    },
+    {
+      "role": "modern-and-legacy-shared-component-parts",
+      "reason": "Current 54-part modern mapping and historical gun pilot both use these native parts. The full catalog generation script seeds gun and accessory definitions from the pilot.",
+      "spriteIds": [
+        "part.gun.support",
+        "part.gun.cradle-back",
+        "part.gun.barrels",
+        "part.gun.collar-front"
+      ],
+      "image": {
+        "width": 1254,
+        "bytes": 1268984,
+        "height": 1254,
+        "sha256": "12C243260EB902866BA490AE6A3C48ED4716EF3585FF4B60977736E483AF0AED"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"prompt\": \"Use case: stylized-concept.\\nAsset type: transparent game sprite atlas for modular mechanical assembly accessories.\\nPrimary request: Generate ONE new clean accessory atlas with exactly SIX isolated accessory groups, arranged in evenly spaced THREE COLUMNS by TWO ROWS on a 1536 x 1024 canvas. These are separate components for an illustrated game; do not assemble them into weapons or towers.\\nReference roles: Previously inspected GunPilotParts-v1.png and ModularSprites.png are STYLE REFERENCES ONLY, not edit targets. Match their dark cobalt-blue ballpoint contours, warm ivory paper-colored solid interiors, hand-drawn pen hatching, and mild orthographic three-quarter mechanical asset language.\\nScene/backdrop: genuine transparent alpha background everywhere outside the illustrated parts and inside open holes. No ground plane.\\nRow 1 left: a small blue-steel iron rear sight, a compact U-notch upright on a short square dovetail mounting foot; simple readable silhouette.\\nRow 1 center: a removable slightly curved box ammunition magazine with exactly a short visible three-round strip peeking out at its upper side, riveted cream body, blue metal edges.\\nRow 1 right: a separate mechanical trigger lever and bracket, compact hooked finger lever in an L-shaped mounting bracket with one pivot pin, isolated on its own.\\nRow 2 left: a foundation feed gearbox / belt-feed ammunition box: compact square mechanical box with panel seams, crank axle or gear housing on its side and a SHORT linked belt at one corner; no gun barrel.\\nRow 2 center: a flat foundation rotary bearing ring in mild three-quarter view, rivets around rim, one large completely open transparent hole in its center; only the bearing ring, no tower and no platform filling the hole.\\nRow 2 right: a PAIR of matching upright blue-outlined warm cream armor plates, small rectangular beveled riveted panels angled slightly toward one another, separate with a small transparent gap; together count as one accessory group.\\nStyle/medium: hand-drawn dark cobalt blue ballpoint pen line art on warm ivory paper-colored material interiors, slightly imperfect confident contour lines, modest fine hatch shading and restrained pen stipple. Solid cream faces, blue edges and blue mechanical recesses. Same visual density and pen technique across all parts. No photorealism.\\nComposition: six groups centered in their own equal 512 by 512 cells; all upright; ample transparent padding of at least 50 pixels around each group, no illustration crosses a cell boundary. Keep each group similar visual scale and comfortably isolated. Mild consistent three-quarter angle reveals top and side faces. Crisp readable outlines at sprite size.\\nConstraints: transparent background true; no labels, text, numerals, lettering, watermarks, cell borders, grid lines, cast shadows, paper sheet background, detached debris, complete guns or complete towers. Exactly six groups and no extra objects. Do not reproduce any complete object from the references. Preserve transparent spaces inside sight notch, ring hole and mechanical bracket.\",",
+          "line": 12,
+          "path": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.provenance.json"
+        },
+        {
+          "text": "\"path\": \"D:\\\\Projekt Unity\\\\paper\\\\ArtSource\\\\Notebook\\\\NewStyle\\\\GunPilotParts-v1.png\",",
+          "line": 18,
+          "path": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.provenance.json"
+        },
+        {
+          "text": "\"asset\": \"ArtSource/Notebook/NewStyle/GunPilotParts-v1.png\",",
+          "line": 3,
+          "path": "ArtSource/Notebook/NewStyle/GunPilotParts-v1.provenance.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/GunPilotParts-v1.png\",",
+          "line": 1126,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/GunPilotParts-v1.png\",",
+          "line": 1140,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/GunPilotParts-v1.png\",",
+          "line": 1154,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/GunPilotParts-v1.png\",",
+          "line": 1168,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "[ModularSprites.png](../ArtSource/Notebook/NewStyle/ModularSprites.png) содержит целые основы и оружие. В [sprites.source.json](../ArtSource/Notebook/NewStyle/sprites.source.json) добавлены четыре фрагмента [GunPilotParts-v1.png](../ArtSource/Notebook/NewStyle/GunPilotParts-v1.png); [промпт и происхождение](../ArtSource/Notebook/NewStyle/GunPilotParts-v1.provenance.json) сохранены рядом. [NotebookSpriteCatalog](../Assets/PaperDefense/Presentation/Art/NotebookSpriteCatalog.cs) загружает общий атлас. [WeaponAssemblyGraphic](../Assets/PaperDefense/Presentation/UI/WeaponAssemblyGraphic.cs) и [NotebookTowerComposition](../Assets/PaperDefense/Presentation/Rendering/NotebookTowerComposition.cs) используют [NotebookMountLayout](../Assets/PaperDefense/Presentation/Art/NotebookMountLayout.cs) и [каталог креплений](../Assets/PaperDefense/Resources/Art/NotebookMounts.json). Шаблонные pivots остаются адаптером исторических рисунков.",
+          "line": 70,
+          "path": "docs/Modular-Asset-Contract.md"
+        },
+        {
+          "text": "Целевой комплект от 18 октября — [альбом составных рисунков](design/album-assembly-2026-10-17/README.md): 9 представлений и 3 листа объектов. Это концепты для следующей реализации. В текущем проекте уже импортированы четыре фрагмента пилота [GunPilotParts-v1.png](../ArtSource/Notebook/NewStyle/GunPilotParts-v1.png). Полная библиотека 54 деталей ещё предстоит.",
+          "line": 5,
+          "path": "docs/Player-Assets.md"
+        },
+        {
+          "text": "| [GunPilotParts-v1.png](../ArtSource/Notebook/NewStyle/GunPilotParts-v1.png), `part.gun.*` | Неподвижная опора, стволы с отдачей, вращающийся корпус люльки и передняя муфта только для `chassis.standard` / `weapon.gun` в обоих слотах; [промпт и происхождение](../ArtSource/Notebook/NewStyle/GunPilotParts-v1.provenance.json) |",
+          "line": 18,
+          "path": "docs/Player-Assets.md"
+        },
+        {
+          "text": "?? ArtSource/Notebook/NewStyle/GunPilotParts-v1.png",
+          "line": 114,
+          "path": "docs/audit/2026-10-17-album/worktree-before.txt"
+        },
+        {
+          "text": "Подготовлены четыре прозрачных фрагмента: неподвижная опора, корпус люльки с приёмной трубой, пакет стволов и передняя муфта. Источники: [GunPilotParts-v1.png](../../../ArtSource/Notebook/NewStyle/GunPilotParts-v1.png), [точный промпт и происхождение](../../../ArtSource/Notebook/NewStyle/GunPilotParts-v1.provenance.json), [нарезка](../../../ArtSource/Notebook/NewStyle/sprites.source.json). Ориентиры — [A4](../../../ArtSource/Notebook/References/2026-10-17/sheets/A4-weapon-components.png) и прежний ModularSprites; новый лист является производным ассетом для проверки движения, а не объявлением всего A4 готовой библиотекой.",
+          "line": 7,
+          "path": "docs/validation/2026-10-17-split-gun-pilot/report.md"
+        },
+        {
+          "text": "\"file\": \"ArtSource/Notebook/NewStyle/GunPilotParts-v1.png\",",
+          "line": 6,
+          "path": "docs/validation/2026-10-17-split-gun-pilot/source-hashes.json"
+        }
+      ],
+      "modernPartIds": [
+        "turn.standard",
+        "turn.quick",
+        "head.gun"
+      ],
+      "risk": "Whole-sheet removal would break modern default gun/accessory recipes as well as compatibility. Replace IDs/anchors across both mappings together.",
+      "path": "ArtSource/Notebook/NewStyle/GunPilotParts-v1.png",
+      "decision": "KEEP"
+    },
+    {
+      "role": "active-shared-art",
+      "reason": "Referenced by current authoritative sprite manifest; required for deterministic atlas rebuild.",
+      "spriteIds": [
+        "logo.home"
+      ],
+      "image": {
+        "width": 1817,
+        "bytes": 1883658,
+        "height": 866,
+        "sha256": "0BE8069CA3A7403518131F2D4A4E097A4F3B0C3B53C34B277313A2FC42A53FF9"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"selected_file\": \"ArtSource/Notebook/NewStyle/HomeWordmark.png\",",
+          "line": 13,
+          "path": "ArtSource/Notebook/NewStyle/generation.json"
+        },
+        {
+          "text": "\"File\": \"HomeWordmark.png\",",
+          "line": 11,
+          "path": "ArtSource/Notebook/NewStyle/hashes.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/HomeWordmark.png\",",
+          "line": 1098,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        }
+      ],
+      "modernPartIds": [],
+      "risk": "Visual style acceptance is outside this static inventory.",
+      "path": "ArtSource/Notebook/NewStyle/HomeWordmark.png",
+      "decision": "KEEP"
+    },
+    {
+      "role": "active-shared-art",
+      "reason": "Referenced by current authoritative sprite manifest; required for deterministic atlas rebuild.",
+      "spriteIds": [
+        "icon.pencil",
+        "icon.pen",
+        "icon.marker",
+        "icon.erase",
+        "icon.paint",
+        "icon.upgrade",
+        "icon.play",
+        "icon.help",
+        "icon.settings",
+        "icon.workshop",
+        "icon.exit",
+        "icon.skull",
+        "icon.entrance",
+        "icon.shield",
+        "icon.heart",
+        "icon.flag"
+      ],
+      "image": {
+        "width": 1254,
+        "bytes": 1874644,
+        "height": 1254,
+        "sha256": "03E52AD764C941313BA3A45753273D7B41AFB1014EAD09578F860AD255B6C64E"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"selected_file\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 98,
+          "path": "ArtSource/Notebook/NewStyle/generation.json"
+        },
+        {
+          "text": "\"File\": \"InterfaceSprites.png\",",
+          "line": 15,
+          "path": "ArtSource/Notebook/NewStyle/hashes.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 748,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 762,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 776,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 790,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 804,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 818,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 832,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 846,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 860,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 874,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 888,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 902,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 916,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 930,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 944,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 958,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"ArtSource/Notebook/NewStyle/InterfaceSprites.png\",",
+          "line": 47,
+          "path": "docs/validation/modular-album/art2-shell-handoff.json"
+        }
+      ],
+      "modernPartIds": [],
+      "risk": "Visual style acceptance is outside this static inventory.",
+      "path": "ArtSource/Notebook/NewStyle/InterfaceSprites.png",
+      "decision": "KEEP"
+    },
+    {
+      "role": "active-shared-art",
+      "reason": "Referenced by current authoritative sprite manifest; required for deterministic atlas rebuild.",
+      "spriteIds": [
+        "hero.castle",
+        "icon.ink-red",
+        "icon.ink-blue",
+        "icon.ink-green"
+      ],
+      "image": {
+        "width": 2172,
+        "bytes": 1799587,
+        "height": 724,
+        "sha256": "854A0B5B2EDEBEDA889C2E4E9B38B1F44026B155B1163D9A12C95921ACF37039"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"File\": \"MissionIllustrations.png\",",
+          "line": 23,
+          "path": "ArtSource/Notebook/NewStyle/hashes.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/MissionIllustrations.png\",",
+          "line": 1042,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/MissionIllustrations.png\",",
+          "line": 1056,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/MissionIllustrations.png\",",
+          "line": 1070,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/MissionIllustrations.png\",",
+          "line": 1084,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"output\": \"Assets/PaperDefense/Resources/Art/Player/MissionIllustrations.png\",",
+          "line": 47,
+          "path": "docs/implementation/map-preparation-assets.json"
+        },
+        {
+          "text": "\"D:\\\\Projekt Unity\\\\paper\\\\Assets\\\\PaperDefense\\\\Resources\\\\Art\\\\Player\\\\MissionIllustrations.png\",",
+          "line": 20,
+          "path": "docs/validation/2026-10-17-art-resolution/removed-art-files.json"
+        },
+        {
+          "text": "\"D:\\\\Projekt Unity\\\\paper\\\\Assets\\\\PaperDefense\\\\Resources\\\\Art\\\\Player\\\\MissionIllustrations.png.meta\",",
+          "line": 21,
+          "path": "docs/validation/2026-10-17-art-resolution/removed-art-files.json"
+        }
+      ],
+      "modernPartIds": [],
+      "risk": "Visual style acceptance is outside this static inventory.",
+      "path": "ArtSource/Notebook/NewStyle/MissionIllustrations.png",
+      "decision": "KEEP"
+    },
+    {
+      "role": "legacy-whole-foundation-weapon-module",
+      "reason": "Old complete chassis, weapons and modules remain imported and reachable through active UI aliases, legacy blueprint rendering, and compatibility pilot foundation.",
+      "spriteIds": [
+        "chassis.standard",
+        "chassis.heavy",
+        "chassis.precision",
+        "chassis.battery",
+        "module.armor",
+        "weapon.gun",
+        "weapon.piercer",
+        "weapon.mortar",
+        "weapon.fan",
+        "weapon.ricochet",
+        "weapon.stapler",
+        "weapon.blotter",
+        "module.feed",
+        "module.tracking",
+        "module.rail"
+      ],
+      "image": {
+        "width": 1619,
+        "bytes": 2270178,
+        "height": 972,
+        "sha256": "5B178E5327EE19C839EA47054C13B6D84E71F90D7E056A02B74ED25333A5F060"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"prompt\": \"Use case: stylized-concept.\\nAsset type: transparent game sprite atlas for modular mechanical assembly accessories.\\nPrimary request: Generate ONE new clean accessory atlas with exactly SIX isolated accessory groups, arranged in evenly spaced THREE COLUMNS by TWO ROWS on a 1536 x 1024 canvas. These are separate components for an illustrated game; do not assemble them into weapons or towers.\\nReference roles: Previously inspected GunPilotParts-v1.png and ModularSprites.png are STYLE REFERENCES ONLY, not edit targets. Match their dark cobalt-blue ballpoint contours, warm ivory paper-colored solid interiors, hand-drawn pen hatching, and mild orthographic three-quarter mechanical asset language.\\nScene/backdrop: genuine transparent alpha background everywhere outside the illustrated parts and inside open holes. No ground plane.\\nRow 1 left: a small blue-steel iron rear sight, a compact U-notch upright on a short square dovetail mounting foot; simple readable silhouette.\\nRow 1 center: a removable slightly curved box ammunition magazine with exactly a short visible three-round strip peeking out at its upper side, riveted cream body, blue metal edges.\\nRow 1 right: a separate mechanical trigger lever and bracket, compact hooked finger lever in an L-shaped mounting bracket with one pivot pin, isolated on its own.\\nRow 2 left: a foundation feed gearbox / belt-feed ammunition box: compact square mechanical box with panel seams, crank axle or gear housing on its side and a SHORT linked belt at one corner; no gun barrel.\\nRow 2 center: a flat foundation rotary bearing ring in mild three-quarter view, rivets around rim, one large completely open transparent hole in its center; only the bearing ring, no tower and no platform filling the hole.\\nRow 2 right: a PAIR of matching upright blue-outlined warm cream armor plates, small rectangular beveled riveted panels angled slightly toward one another, separate with a small transparent gap; together count as one accessory group.\\nStyle/medium: hand-drawn dark cobalt blue ballpoint pen line art on warm ivory paper-colored material interiors, slightly imperfect confident contour lines, modest fine hatch shading and restrained pen stipple. Solid cream faces, blue edges and blue mechanical recesses. Same visual density and pen technique across all parts. No photorealism.\\nComposition: six groups centered in their own equal 512 by 512 cells; all upright; ample transparent padding of at least 50 pixels around each group, no illustration crosses a cell boundary. Keep each group similar visual scale and comfortably isolated. Mild consistent three-quarter angle reveals top and side faces. Crisp readable outlines at sprite size.\\nConstraints: transparent background true; no labels, text, numerals, lettering, watermarks, cell borders, grid lines, cast shadows, paper sheet background, detached debris, complete guns or complete towers. Exactly six groups and no extra objects. Do not reproduce any complete object from the references. Preserve transparent spaces inside sight notch, ring hole and mechanical bracket.\",",
+          "line": 12,
+          "path": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.provenance.json"
+        },
+        {
+          "text": "\"path\": \"D:\\\\Projekt Unity\\\\paper\\\\ArtSource\\\\Notebook\\\\NewStyle\\\\ModularSprites.png\",",
+          "line": 23,
+          "path": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.provenance.json"
+        },
+        {
+          "text": "\"path\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 40,
+          "path": "ArtSource/Notebook/NewStyle/GunPilotParts-v1.provenance.json"
+        },
+        {
+          "text": "\"selected_file\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 74,
+          "path": "ArtSource/Notebook/NewStyle/generation.json"
+        },
+        {
+          "text": "\"File\": \"ModularSprites.png\",",
+          "line": 27,
+          "path": "ArtSource/Notebook/NewStyle/hashes.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 6,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 20,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 34,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 48,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 62,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 76,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 90,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 104,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 118,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 132,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 146,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 160,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 174,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 188,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ModularSprites.png\",",
+          "line": 202,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "[ModularSprites.png](../ArtSource/Notebook/NewStyle/ModularSprites.png) содержит целые основы и оружие. В [sprites.source.json](../ArtSource/Notebook/NewStyle/sprites.source.json) добавлены четыре фрагмента [GunPilotParts-v1.png](../ArtSource/Notebook/NewStyle/GunPilotParts-v1.png); [промпт и происхождение](../ArtSource/Notebook/NewStyle/GunPilotParts-v1.provenance.json) сохранены рядом. [NotebookSpriteCatalog](../Assets/PaperDefense/Presentation/Art/NotebookSpriteCatalog.cs) загружает общий атлас. [WeaponAssemblyGraphic](../Assets/PaperDefense/Presentation/UI/WeaponAssemblyGraphic.cs) и [NotebookTowerComposition](../Assets/PaperDefense/Presentation/Rendering/NotebookTowerComposition.cs) используют [NotebookMountLayout](../Assets/PaperDefense/Presentation/Art/NotebookMountLayout.cs) и [каталог креплений](../Assets/PaperDefense/Resources/Art/NotebookMounts.json). Шаблонные pivots остаются адаптером исторических рисунков.",
+          "line": 70,
+          "path": "docs/Modular-Asset-Contract.md"
+        }
+      ],
+      "modernPartIds": [],
+      "risk": "Cannot remove whole sheet until all 15 IDs, UI aliases, legacy mounts, animation/theme bindings and foundationParts contract receive compatible replacements. Modern recipe replacement alone does not retire this sheet.",
+      "path": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "decision": "REPLACE"
+    },
+    {
+      "role": "legacy-complete-tower-illustrations",
+      "reason": "NotebookBlueprintIllustration selects five preassembled illustrations for supported LegacyStandard pages and is reached from preparation/results.",
+      "spriteIds": [
+        "tower.gun",
+        "tower.double",
+        "tower.piercer",
+        "tower.mortar",
+        "tower.fan"
+      ],
+      "image": {
+        "width": 2172,
+        "bytes": 1346383,
+        "height": 724,
+        "sha256": "4F035F1F7028226322C78930DB9602C541B1D60580DFB6014B22ADAEBF067967"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"File\": \"PreparationTowers.png\",",
+          "line": 31,
+          "path": "ArtSource/Notebook/NewStyle/hashes.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/PreparationTowers.png\",",
+          "line": 972,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/PreparationTowers.png\",",
+          "line": 986,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/PreparationTowers.png\",",
+          "line": 1000,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/PreparationTowers.png\",",
+          "line": 1014,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/PreparationTowers.png\",",
+          "line": 1028,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"output\": \"Assets/PaperDefense/Resources/Art/Player/PreparationTowers.png\",",
+          "line": 34,
+          "path": "docs/implementation/map-preparation-assets.json"
+        },
+        {
+          "text": "\"D:\\\\Projekt Unity\\\\paper\\\\Assets\\\\PaperDefense\\\\Resources\\\\Art\\\\Player\\\\PreparationTowers.png\",",
+          "line": 18,
+          "path": "docs/validation/2026-10-17-art-resolution/removed-art-files.json"
+        },
+        {
+          "text": "\"D:\\\\Projekt Unity\\\\paper\\\\Assets\\\\PaperDefense\\\\Resources\\\\Art\\\\Player\\\\PreparationTowers.png.meta\",",
+          "line": 19,
+          "path": "docs/validation/2026-10-17-art-resolution/removed-art-files.json"
+        }
+      ],
+      "modernPartIds": [],
+      "risk": "Retire sprite IDs only after replacing this UI path with composition or accepted icons; provenance independently records this sheet.",
+      "path": "ArtSource/Notebook/NewStyle/PreparationTowers.png",
+      "decision": "REPLACE"
+    },
+    {
+      "role": "modern-full-catalog-native-sheet",
+      "reason": "Referenced by current authoritative sprite manifest; required for deterministic atlas rebuild.",
+      "spriteIds": [
+        "part.full.site.repair",
+        "part.full.function.repair",
+        "part.full.shell.standard.repair",
+        "part.full.utility.range"
+      ],
+      "image": {
+        "width": 1254,
+        "bytes": 1441670,
+        "height": 1254,
+        "sha256": "36F1398A481980B99D3F8ED10543533D0BADE56E327312C0C54C70D8DE99C827"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"note\": \"Repair row body/roof rejected due to crop overlap; replaced by RepairParts-v1.png. Other rows retained.\"",
+          "line": 17,
+          "path": "ArtSource/Notebook/NewStyle/FullCatalog-v1.provenance.json"
+        },
+        {
+          "text": "\"file\": \"RepairParts-v1.png\",",
+          "line": 32,
+          "path": "ArtSource/Notebook/NewStyle/FullCatalog-v1.provenance.json"
+        },
+        {
+          "text": "\"file\": \"ArtSource/Notebook/NewStyle/RepairParts-v1.png\",",
+          "line": 30,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/RepairParts-v1.png\",",
+          "line": 349,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/RepairParts-v1.png\",",
+          "line": 357,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/RepairParts-v1.png\",",
+          "line": 365,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/RepairParts-v1.png\",",
+          "line": 429,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/RepairParts-v1.png\",",
+          "line": 1798,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/RepairParts-v1.png\",",
+          "line": 1812,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/RepairParts-v1.png\",",
+          "line": 1826,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/RepairParts-v1.png\",",
+          "line": 1938,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "const repair=art+'RepairParts-v1.png';",
+          "line": 216,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "Новые прозрачные production-листы: [оружие](../ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png), [основы и варианты](../ArtSource/Notebook/NewStyle/FullVariantParts-v1.png), [сооружения](../ArtSource/Notebook/NewStyle/FullStructureParts-v1.png), [отдельные части мастерской](../ArtSource/Notebook/NewStyle/RepairParts-v1.png), [оболочки и оснащение](../ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png). [Происхождение](../ArtSource/Notebook/NewStyle/FullCatalog-v1.provenance.json) записывает генерацию и исходные файлы. Целые страницы концептов не используются как нарезанные игровые детали. Пересекавшиеся прямоугольные области корпуса и крыши мастерской заменены отдельным листом; маска из чужих пикселей не создавалась.",
+          "line": 108,
+          "path": "docs/Modular-Asset-Contract.md"
+        },
+        {
+          "text": "Исходные прозрачные PNG, промпты и причины повторной генерации хранятся в `ArtSource/Notebook/NewStyle/`. Первая пара ремонтных корпуса и крыши отклонена из-за пересекающихся прямоугольных crop; отдельный `RepairParts-v1.png` заменяет оба фрагмента. `StandardFoundation-v2.png` добавляет низкую двухместную основу после обнаруженного на настоящих кадрах нарушения пропорций. `BatteryFoundation-v3.png` заменяет высокий трёхместный постамент: он вынуждал уменьшать весь кадр настолько, что терялись три оружейных силуэта. Предшествующий крупный источник батареи отклонён по плотности упаковки; компактный лист заново сгенерирован, а не уменьшен программно. Пиксели исходных PNG не редактируются при импорте.",
+          "line": 15,
+          "path": "docs/validation/modular-album/visual-acceptance.md"
+        }
+      ],
+      "modernPartIds": [
+        "site.repair",
+        "function.repair",
+        "shell.standard",
+        "shell.light",
+        "shell.reinforced",
+        "utility.range"
+      ],
+      "risk": "Visual style acceptance is outside this static inventory.",
+      "path": "ArtSource/Notebook/NewStyle/RepairParts-v1.png",
+      "decision": "KEEP"
+    },
+    {
+      "role": "mixed-legacy-structures-and-live-terrain",
+      "reason": "object.wall/object.spikes/object.repair/object.tar use old complete structures in legacy/no-blueprint world fallback and UI aliases; terrain/castle/blot crops remain separate live consumers.",
+      "spriteIds": [
+        "object.wall",
+        "object.spikes",
+        "object.repair",
+        "object.tar",
+        "terrain.pine",
+        "terrain.mountain",
+        "terrain.oak",
+        "terrain.rock",
+        "terrain.shrub",
+        "terrain.ridge",
+        "object.castle.damaged",
+        "object.blot"
+      ],
+      "image": {
+        "width": 1448,
+        "bytes": 2203181,
+        "height": 1086,
+        "sha256": "F70B3935D29D55D4475E97C76B90F68473ABDF1EF2BC669F308612C1E2BD5A31"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"selected_file\": \"ArtSource/Notebook/NewStyle/ScenerySprites.png\",",
+          "line": 86,
+          "path": "ArtSource/Notebook/NewStyle/generation.json"
+        },
+        {
+          "text": "\"File\": \"ScenerySprites.png\",",
+          "line": 35,
+          "path": "ArtSource/Notebook/NewStyle/hashes.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ScenerySprites.png\",",
+          "line": 216,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ScenerySprites.png\",",
+          "line": 230,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ScenerySprites.png\",",
+          "line": 244,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ScenerySprites.png\",",
+          "line": 258,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ScenerySprites.png\",",
+          "line": 272,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ScenerySprites.png\",",
+          "line": 286,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ScenerySprites.png\",",
+          "line": 300,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ScenerySprites.png\",",
+          "line": 314,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ScenerySprites.png\",",
+          "line": 328,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ScenerySprites.png\",",
+          "line": 342,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ScenerySprites.png\",",
+          "line": 356,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/ScenerySprites.png\",",
+          "line": 370,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        }
+      ],
+      "modernPartIds": [],
+      "risk": "Replace structure crops or reroute their callers; retain terrain.*, object.castle.damaged and object.blot unless independently replaced. Never delete the whole source just because modern structure recipes exist.",
+      "path": "ArtSource/Notebook/NewStyle/ScenerySprites.png",
+      "decision": "REPLACE"
+    },
+    {
+      "role": "active-shared-art",
+      "reason": "Referenced by current authoritative sprite manifest; required for deterministic atlas rebuild.",
+      "spriteIds": [
+        "logo.settings"
+      ],
+      "image": {
+        "width": 2115,
+        "bytes": 1461942,
+        "height": 744,
+        "sha256": "A7B0BCE096D8EDBEE5948F50852DF806F1617F3F7C30F09654AF3B4BB29DD2EA"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"selected_file\": \"ArtSource/Notebook/NewStyle/SettingsWordmark.png\",",
+          "line": 35,
+          "path": "ArtSource/Notebook/NewStyle/generation.json"
+        },
+        {
+          "text": "\"File\": \"SettingsWordmark.png\",",
+          "line": 43,
+          "path": "ArtSource/Notebook/NewStyle/hashes.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/SettingsWordmark.png\",",
+          "line": 1112,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        }
+      ],
+      "modernPartIds": [],
+      "risk": "Visual style acceptance is outside this static inventory.",
+      "path": "ArtSource/Notebook/NewStyle/SettingsWordmark.png",
+      "decision": "KEEP"
+    },
+    {
+      "role": "modern-full-catalog-native-sheet",
+      "reason": "Referenced by current authoritative sprite manifest; required for deterministic atlas rebuild.",
+      "spriteIds": [
+        "part.full.frame.standard"
+      ],
+      "image": {
+        "width": 1536,
+        "bytes": 1434321,
+        "height": 1024,
+        "sha256": "D351A1E24E81AD6200FFE54CC1A3EF7C58EAA83E5311BBAB9A92DEDEBAA0D05E"
+      },
+      "atlasImport": true,
+      "proof": [
+        {
+          "text": "\"file\": \"StandardFoundation-v9.png\",",
+          "line": 3,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.provenance.json"
+        },
+        {
+          "text": "\"file\": \"StandardFoundation-v9.png\",",
+          "line": 23,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.provenance.json"
+        },
+        {
+          "text": "\"file\": \"ArtSource/Notebook/NewStyle/StandardFoundation-v9.png\",",
+          "line": 15,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/StandardFoundation-v9.png\",",
+          "line": 181,
+          "path": "ArtSource/Notebook/NewStyle/full-catalog-layout.json"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/StandardFoundation-v9.png\",",
+          "line": 1504,
+          "path": "ArtSource/Notebook/NewStyle/sprites.source.json"
+        },
+        {
+          "text": "The source sheets follow the object references in `docs/design/album-assembly-2026-10-17/art/01-towers.png`, `02-weapon-parts.png` and `03-structures.png`. Full concept pages are never imported as modular sprites. The historical gun pilot remains unchanged in the legacy blueprint adapter. Modern recipes use `StandardFoundation-v9.png`, its inspected two disk centres (368,640) and (1163,640) on the bottom-left pixel canvas, a low isometric plinth and a compact fixed hub. One uniform scale (0.0006276353885315664) and position (-0.4822571556263724,-0.43584730777451763) retain both prior logical socket positions. The native crop is x17/y290/1503×444; contiguous base/front/roof bands occupy y290–384 / 384–511 / 511–734. The conservative front keepout covers the actual outer vertical corner faces. Minimum swept-envelope clearance is +0.004294 U; smallest moving-weapon/base height ratio is 0.734645 against the unchanged 0.65 threshold. Receivers use real opaque lowest-foot landmarks to seat on the front inner lip; the receiver-mounted sight remains attached when the head recoils. The moving weapon envelopes stay near 0.22 U. New family silhouettes have their own mechanism and head bindings; foundation variants, feed, turn, sights, cartridges and triggers have separate bindings. `armor.none` and `utility.none` deliberately have no sprite. Measured coordinates, exact prompts and rejected v7/v8 iterations are recorded in `StandardFoundation-v9.provenance.json`; requested prompt coordinates are not substituted for measured landmarks.",
+          "line": 5,
+          "path": "Tools/ArtAssembly13/README.md"
+        },
+        {
+          "text": "const standard=art+'StandardFoundation-v9.png',base=cell(standard,0);",
+          "line": 146,
+          "path": "Tools/ArtAssembly13/build-catalog.mjs"
+        },
+        {
+          "text": "\"path\": \"ArtSource/Notebook/NewStyle/StandardFoundation-v9.png\",",
+          "line": 174,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "\"path\": \"ArtSource/Notebook/NewStyle/StandardFoundation-v9.png\",",
+          "line": 52,
+          "path": "docs/validation/modular-album/art2-workshop-handoff.json"
+        },
+        {
+          "text": "\"path\": \"ArtSource/Notebook/NewStyle/StandardFoundation-v9.png\",",
+          "line": 300,
+          "path": "docs/validation/modular-album/art2-workshop-handoff.json"
+        },
+        {
+          "text": "\"path\": \"ArtSource/Notebook/NewStyle/StandardFoundation-v9.png\"",
+          "line": 943,
+          "path": "docs/validation/modular-album/refinement-components-11-30-plan.json"
+        },
+        {
+          "text": "\"path\": \"ArtSource/Notebook/NewStyle/StandardFoundation-v9.png\",",
+          "line": 59,
+          "path": "docs/validation/modular-album/refinement-components-11-30-visual-review.json"
+        },
+        {
+          "text": "Снимок от 20 октября (`955e2da`) оставлял открытой высоту основания. В текущем проходе используется `StandardFoundation-v9.png`, каталог `modular-full-catalog-2026-10-22-v7`. Низкое основание, стыки, семь оружейных семейств, основные экраны и дополнительные состояния повторно проверены на свежих кадрах. Художественные вердикты означают приёмку с перечисленными различиями; попиксельное совпадение не заявляется.",
+          "line": 7,
+          "path": "docs/validation/modular-album/scene-fidelity-report.md"
+        }
+      ],
+      "modernPartIds": [
+        "frame.standard",
+        "hull.standard"
+      ],
+      "risk": "Visual style acceptance is outside this static inventory.",
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.png",
+      "decision": "KEEP"
+    },
+    {
+      "role": "independent-direct-resource-source",
+      "reason": "Direct runtime Resources sprite is independent from sprites.source/full-catalog-layout and is loaded by live UI.",
+      "image": {
+        "width": 1862,
+        "bytes": 2026517,
+        "height": 845,
+        "sha256": "87B87415C8261326CF5D0D3A1819615F08695DB203A6DB4F3B0AFF10CE0656EA"
+      },
+      "runtimeCopyByteIdentical": true,
+      "proof": [
+        {
+          "text": "\"runtime\": \"Assets/PaperDefense/Resources/Art/Player/AlbumOpenBookV2.png\",",
+          "line": 8,
+          "path": "ArtSource/Notebook/NewStyle/AlbumOpenBook-v2.provenance.json"
+        },
+        {
+          "text": "var bookSprite = Resources.Load<Sprite>(\"Art/Player/AlbumOpenBookV2\");",
+          "line": 270,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Dialogs.cs"
+        },
+        {
+          "text": "illustration.sprite = Resources.Load<Sprite>(\"Art/Player/AlbumOpenBookV2\"); illustration.preserveAspect = true;",
+          "line": 237,
+          "path": "Assets/PaperDefense/Presentation/UI/AlbumPanel.cs"
+        },
+        {
+          "text": "\"Assets/PaperDefense/Resources/Art/Player/AlbumOpenBookV2.png\",",
+          "line": 48,
+          "path": "docs/validation/modular-album/art2-shell-handoff.json"
+        },
+        {
+          "text": "\"Help Save uses existing AlbumOpenBookV2 with the real loadout assembly over it; keeps procedural fallback. A final physical QA found the earlier assembly used the taller pre-fit art slot and protruded below the wide book. The scoped repair now places its real graphic inside the actual fitted book Rect, x9%/y7%/w82%/h80%; native recipe geometry is unchanged. Card sizes, examples and instructional copy unchanged. All final23 recaptures were physically inspected at five aspects and accepted with documented concept differences in art2-shell-visual-review.json.\",",
+          "line": 77,
+          "path": "docs/validation/modular-album/art2-shell-handoff.json"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/AlbumOpenBookV2.png\",",
+          "line": 863,
+          "path": "docs/validation/modular-album/refinement-final-capture-manifest.json"
+        }
+      ],
+      "runtimePath": "Assets/PaperDefense/Resources/Art/Player/AlbumOpenBookV2.png",
+      "risk": "Absence from atlas manifest does not imply unused.",
+      "path": "ArtSource/Notebook/NewStyle/AlbumOpenBook-v2.png",
+      "atlasImport": false,
+      "decision": "KEEP"
+    },
+    {
+      "reason": "No current source sprite, layout source sheet, runtime direct resource, or importer names this raster. Current sources are StandardFoundation-v9.png and BatteryFoundation-v3.png.",
+      "risk": "Historical design/provenance may cite this revision. Preserve provenance records, validation screenshots, reference sketches and documented baseline evidence; decide whether the rejected native itself is required as evidence before removal. No deletion authorized by this inventory.",
+      "proof": [
+        {
+          "text": "\"project_source\": \"ArtSource/Notebook/NewStyle/BatteryFoundation-v2.png\",",
+          "line": 6,
+          "path": "ArtSource/Notebook/NewStyle/BatteryFoundation-v2.provenance.json"
+        },
+        {
+          "text": "\"referenced_image_paths\": [\"ArtSource/Notebook/NewStyle/BatteryFoundation-v2.png\"],",
+          "line": 5,
+          "path": "ArtSource/Notebook/NewStyle/BatteryFoundation-v3.provenance.json"
+        },
+        {
+          "text": "The battery uses the top-left 627-pixel cell of `BatteryFoundation-v3.png`, an independently authored compact source with three real disks. Its 564×192 native import crop replaces the old tall block. The larger `BatteryFoundation-v2.png` was rejected for packing density and is not imported. `contact-audit.mjs --probes` reads current alpha and reports receiver-foot and sight-contact positions without changing any image or source metadata.",
+          "line": 21,
+          "path": "Tools/ArtAssembly13/README.md"
+        }
+      ],
+      "image": {
+        "width": 1774,
+        "bytes": 942348,
+        "height": 887,
+        "sha256": "3245D636CD970C6AB8A584CDA188C03DB0797A51EBA58BA15FED53CFC82EE110"
+      },
+      "atlasImport": false,
+      "decision": "REMOVE_CANDIDATE",
+      "role": "superseded-native-foundation-revision",
+      "path": "ArtSource/Notebook/NewStyle/BatteryFoundation-v2.png"
+    },
+    {
+      "role": "independent-direct-resource-source",
+      "reason": "Direct runtime Resources sprite is independent from sprites.source/full-catalog-layout and is loaded by live UI.",
+      "image": {
+        "width": 1672,
+        "bytes": 2220677,
+        "height": 941,
+        "sha256": "00C3F300A2BE59DA4D9E3854B01CD725B6AF2A533351D3FA4DAFF305B5FD358A"
+      },
+      "runtimeCopyByteIdentical": true,
+      "proof": [
+        {
+          "text": "\"file\": \"DefeatCastleRubble-v1.png\",",
+          "line": 3,
+          "path": "ArtSource/Notebook/NewStyle/DefeatCastleRubble-v1.provenance.json"
+        },
+        {
+          "text": "\"runtimeFile\": \"Assets/PaperDefense/Resources/Art/Player/DefeatCastleRubble.png\",",
+          "line": 4,
+          "path": "ArtSource/Notebook/NewStyle/DefeatCastleRubble-v1.provenance.json"
+        },
+        {
+          "text": "NotebookSprite(parent, \"Defeat castle rubble illustration\", Resources.Load<Sprite>(\"Art/Player/DefeatCastleRubble\"), R(34, 264, 964, 540));",
+          "line": 230,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Result.cs"
+        },
+        {
+          "text": "Assert.That(rubble.sprite, Is.Not.Null); Assert.That(rubble.sprite.name, Is.EqualTo(\"DefeatCastleRubble\"));",
+          "line": 123,
+          "path": "Assets/PaperDefense/Tests/PlayMode/AlbumPlayerJourneyTests.cs"
+        },
+        {
+          "text": "Для 21 отдельно извлечены руины и рисунки захватчиков (`DefeatCastleRubble-v1.png`);",
+          "line": 36,
+          "path": "docs/validation/modular-album/scene-fidelity-plan.md"
+        },
+        {
+          "text": "Root подготовил прозрачный отдельный ресурс `Art/Player/DefeatCastleRubble` по источнику21, без UI, текста и бумаги. Ресурс просмотрен рядом с источником. В `PlayerShell.Result.cs` прежний повреждённый замок и отдельные декоративные фигуры заменены одним `Image`; фон приглушён, заголовок нарисован native ribbon с живым текстом. Правая карточка и стек настоящих действий перераспределены ближе к источнику: завершённые волны, actual `WaveIndex` красным, золото и XP вертикально, потери, статус/receipt и retry сохранения. Home остаётся доступен сверху; Retry/Album/Map — в правой колонке.",
+          "line": 72,
+          "path": "docs/validation/modular-album/scene-fidelity-shell-changes.md"
+        }
+      ],
+      "runtimePath": "Assets/PaperDefense/Resources/Art/Player/DefeatCastleRubble.png",
+      "risk": "Absence from atlas manifest does not imply unused.",
+      "path": "ArtSource/Notebook/NewStyle/DefeatCastleRubble-v1.png",
+      "atlasImport": false,
+      "decision": "KEEP"
+    },
+    {
+      "role": "independent-direct-resource-source",
+      "reason": "Direct runtime Resources sprite is independent from sprites.source/full-catalog-layout and is loaded by live UI.",
+      "image": {
+        "width": 2172,
+        "bytes": 683872,
+        "height": 724,
+        "sha256": "520219BE1FD260D5A19B75F4C8DCCBCA0573B8A972F8D4FAF0E51FD4C11E3B7F"
+      },
+      "runtimeCopyByteIdentical": true,
+      "proof": [
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FoundationPageDecor.png\",",
+          "line": 8,
+          "path": "ArtSource/Notebook/NewStyle/foundation-generation.json"
+        },
+        {
+          "text": "\"runtime\": \"Assets/PaperDefense/Resources/Art/Player/FoundationPageDecor.png\",",
+          "line": 9,
+          "path": "ArtSource/Notebook/NewStyle/foundation-generation.json"
+        },
+        {
+          "text": "| `NewStyle/FoundationPageDecor.png`, `FoundationPreviewScenery.png` | Прозрачный нижний пейзаж и отдельное окружение корпуса для экрана 04 |",
+          "line": 15,
+          "path": "ArtSource/Notebook/README.md"
+        },
+        {
+          "text": "NotebookPageBackdrop(illustratedLandscape ? \"Art/Player/HelpLandscapeV2\" : \"Art/Player/FoundationPageDecor\");",
+          "line": 213,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Dialogs.cs"
+        },
+        {
+          "text": "if (resource.EndsWith(\"FoundationPageDecor\", StringComparison.Ordinal)) bounds.y = H - bounds.height;",
+          "line": 19,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Notebook.cs"
+        },
+        {
+          "text": "NotebookPageBackdrop(\"Art/Player/FoundationPageDecor\", \"Result landscape border\");",
+          "line": 30,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Result.cs"
+        },
+        {
+          "text": "pageDecor.sprite = Resources.Load<Sprite>(\"Art/Player/FoundationPageDecor\");",
+          "line": 109,
+          "path": "Assets/PaperDefense/Presentation/UI/CompositeWorkshopPanel.cs"
+        },
+        {
+          "text": "landscape.sprite = Resources.Load<Sprite>(\"Art/Player/FoundationPageDecor\"); landscape.preserveAspect = true;",
+          "line": 42,
+          "path": "Assets/PaperDefense/Presentation/UI/GuidedDrawingLayout.cs"
+        },
+        {
+          "text": "ResourceIllustration(root, \"Foundation page decoration\", \"FoundationPageDecor\", new Rect(-24, height - 110, width + 48, 220));",
+          "line": 42,
+          "path": "Assets/PaperDefense/Presentation/UI/WizardFoundationPanel.cs"
+        },
+        {
+          "text": "Resource(root, \"Weapon page decoration\", \"FoundationPageDecor\", new Rect(0, 0, width, height));",
+          "line": 42,
+          "path": "Assets/PaperDefense/Presentation/UI/WizardWeaponPanel.cs"
+        },
+        {
+          "text": "| `Resources/Art/Player/FoundationPageDecor`, `FoundationPreviewScenery` | Прозрачный нижний пейзаж и окружение предпросмотра основы 04; отдельные PNG с сохранёнными пропорциями |",
+          "line": 24,
+          "path": "docs/Player-Assets.md"
+        },
+        {
+          "text": "Ассеты повторно используются из NotebookAtlas, FoundationPageDecor, FoundationPreviewScenery. Рабочие линии на холсте всегда принадлежат настоящему черновику. Растровый рисунок башни из PNG не подменяет пользовательский рисунок. Шкалы урона, дальности, паузы и HP отражают относительный множитель формы в текущих правилах; точные значения стоят справа. Нагрузка сравнивается с настоящей вместимостью.",
+          "line": 24,
+          "path": "docs/validation/2026-10-17-workshop-drawing/layout.md"
+        },
+        {
+          "text": "Проверенные ресурсы: `NotebookAtlas.png`, `NotebookSprites.json`, ключи `chassis.standard`, `chassis.heavy`, `chassis.precision`, `chassis.battery`. Спрайты показываются целиком. После замечания пользователя о недостатке деталей добавлены прозрачные растровые `FoundationPageDecor` и `FoundationPreviewScenery`: нижний пейзаж, ели, камни, трава, флаг и руины вокруг выбранного корпуса. Источники и точные промпты: `ArtSource/Notebook/NewStyle/foundation-generation.json`, навык `imagegen`, встроенный инструмент. Игровые подписи и числа остаются UI.",
+          "line": 32,
+          "path": "docs/validation/2026-10-17-workshop-foundation/layout.md"
+        },
+        {
+          "text": "- [FoundationPageDecor.png](../../../ArtSource/Notebook/NewStyle/FoundationPageDecor.png) → `Resources/Art/Player/FoundationPageDecor.png`.",
+          "line": 48,
+          "path": "docs/validation/2026-10-17-workshop-foundation/report.md"
+        },
+        {
+          "text": "Ассеты: отдельные спрайты оружия и основы из NotebookSpriteCatalog; подробное окружение FoundationPreviewScenery и нижний пейзаж FoundationPageDecor из предыдущего шага. Подписи и числа остаются текстом UI. Новая растровая генерация не нужна для этого шага.",
+          "line": 24,
+          "path": "docs/validation/2026-10-17-workshop-weapons/layout.md"
+        }
+      ],
+      "runtimePath": "Assets/PaperDefense/Resources/Art/Player/FoundationPageDecor.png",
+      "risk": "Absence from atlas manifest does not imply unused.",
+      "path": "ArtSource/Notebook/NewStyle/FoundationPageDecor.png",
+      "atlasImport": false,
+      "decision": "KEEP"
+    },
+    {
+      "role": "independent-direct-resource-source",
+      "reason": "Direct runtime Resources sprite is independent from sprites.source/full-catalog-layout and is loaded by live UI.",
+      "image": {
+        "width": 1536,
+        "bytes": 2177262,
+        "height": 1024,
+        "sha256": "484AC7C599297A82B16E0D92526AF20C4C4BD50E376319624135CF9753B0C7E0"
+      },
+      "runtimeCopyByteIdentical": true,
+      "proof": [
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/FoundationPreviewScenery.png\",",
+          "line": 16,
+          "path": "ArtSource/Notebook/NewStyle/foundation-generation.json"
+        },
+        {
+          "text": "\"runtime\": \"Assets/PaperDefense/Resources/Art/Player/FoundationPreviewScenery.png\",",
+          "line": 17,
+          "path": "ArtSource/Notebook/NewStyle/foundation-generation.json"
+        },
+        {
+          "text": "| `NewStyle/FoundationPageDecor.png`, `FoundationPreviewScenery.png` | Прозрачный нижний пейзаж и отдельное окружение корпуса для экрана 04 |",
+          "line": 15,
+          "path": "ArtSource/Notebook/README.md"
+        },
+        {
+          "text": "scenery.sprite = Resources.Load<Sprite>(\"Art/Player/FoundationPreviewScenery\");",
+          "line": 405,
+          "path": "Assets/PaperDefense/Presentation/UI/ComponentCatalogPanel.cs"
+        },
+        {
+          "text": "scenery.sprite = Resources.Load<Sprite>(\"Art/Player/FoundationPreviewScenery\");",
+          "line": 392,
+          "path": "Assets/PaperDefense/Presentation/UI/CompositeWorkshopPanel.cs"
+        },
+        {
+          "text": "probeScenery.sprite = Resources.Load<Sprite>(\"Art/Player/FoundationPreviewScenery\");",
+          "line": 122,
+          "path": "Assets/PaperDefense/Presentation/UI/DrawingSummaryLayout.cs"
+        },
+        {
+          "text": "ResourceIllustration(preview, \"Foundation preview scenery\", \"FoundationPreviewScenery\", new Rect(10, 90, 662, 420));",
+          "line": 56,
+          "path": "Assets/PaperDefense/Presentation/UI/WizardFoundationPanel.cs"
+        },
+        {
+          "text": "Resource(assembly, \"Weapon assembly scenery\", \"FoundationPreviewScenery\", new Rect(0, 45, 400, 430));",
+          "line": 45,
+          "path": "Assets/PaperDefense/Presentation/UI/WizardWeaponPanel.cs"
+        },
+        {
+          "text": "| `Resources/Art/Player/FoundationPageDecor`, `FoundationPreviewScenery` | Прозрачный нижний пейзаж и окружение предпросмотра основы 04; отдельные PNG с сохранёнными пропорциями |",
+          "line": 24,
+          "path": "docs/Player-Assets.md"
+        },
+        {
+          "text": "Ассеты повторно используются из NotebookAtlas, FoundationPageDecor, FoundationPreviewScenery. Рабочие линии на холсте всегда принадлежат настоящему черновику. Растровый рисунок башни из PNG не подменяет пользовательский рисунок. Шкалы урона, дальности, паузы и HP отражают относительный множитель формы в текущих правилах; точные значения стоят справа. Нагрузка сравнивается с настоящей вместимостью.",
+          "line": 24,
+          "path": "docs/validation/2026-10-17-workshop-drawing/layout.md"
+        },
+        {
+          "text": "Проверенные ресурсы: `NotebookAtlas.png`, `NotebookSprites.json`, ключи `chassis.standard`, `chassis.heavy`, `chassis.precision`, `chassis.battery`. Спрайты показываются целиком. После замечания пользователя о недостатке деталей добавлены прозрачные растровые `FoundationPageDecor` и `FoundationPreviewScenery`: нижний пейзаж, ели, камни, трава, флаг и руины вокруг выбранного корпуса. Источники и точные промпты: `ArtSource/Notebook/NewStyle/foundation-generation.json`, навык `imagegen`, встроенный инструмент. Игровые подписи и числа остаются UI.",
+          "line": 32,
+          "path": "docs/validation/2026-10-17-workshop-foundation/layout.md"
+        },
+        {
+          "text": "- [FoundationPreviewScenery.png](../../../ArtSource/Notebook/NewStyle/FoundationPreviewScenery.png) → `Resources/Art/Player/FoundationPreviewScenery.png`.",
+          "line": 49,
+          "path": "docs/validation/2026-10-17-workshop-foundation/report.md"
+        },
+        {
+          "text": "Ассеты: отдельные спрайты оружия и основы из NotebookSpriteCatalog; подробное окружение FoundationPreviewScenery и нижний пейзаж FoundationPageDecor из предыдущего шага. Подписи и числа остаются текстом UI. Новая растровая генерация не нужна для этого шага.",
+          "line": 24,
+          "path": "docs/validation/2026-10-17-workshop-weapons/layout.md"
+        }
+      ],
+      "runtimePath": "Assets/PaperDefense/Resources/Art/Player/FoundationPreviewScenery.png",
+      "risk": "Absence from atlas manifest does not imply unused.",
+      "path": "ArtSource/Notebook/NewStyle/FoundationPreviewScenery.png",
+      "atlasImport": false,
+      "decision": "KEEP"
+    },
+    {
+      "role": "independent-direct-resource-source",
+      "reason": "Direct runtime Resources sprite is independent from sprites.source/full-catalog-layout and is loaded by live UI.",
+      "image": {
+        "width": 1672,
+        "bytes": 2328051,
+        "height": 941,
+        "sha256": "9C88FC7D630CF918E128340B877F3E144ACEB64E0F6DBA82F09D10E8C293C9E5"
+      },
+      "runtimeCopyByteIdentical": true,
+      "proof": [
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/HelpLandscapeV2.png\",",
+          "line": 6,
+          "path": "ArtSource/Notebook/NewStyle/HelpLandscapeV2.provenance.json"
+        },
+        {
+          "text": "\"runtime\": \"Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png\",",
+          "line": 7,
+          "path": "ArtSource/Notebook/NewStyle/HelpLandscapeV2.provenance.json"
+        },
+        {
+          "text": "bool illustratedLandscape = Resources.Load<Sprite>(\"Art/Player/HelpLandscapeV2\") != null;",
+          "line": 212,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Dialogs.cs"
+        },
+        {
+          "text": "NotebookPageBackdrop(illustratedLandscape ? \"Art/Player/HelpLandscapeV2\" : \"Art/Player/FoundationPageDecor\");",
+          "line": 213,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Dialogs.cs"
+        },
+        {
+          "text": "const imageAssets = ['HelpLandscapeV2', 'NotebookPaperCardV1'].map(name => {",
+          "line": 23,
+          "path": "Tools/ArtAssembly13/verify-art2.mjs"
+        },
+        {
+          "text": "- **Sprite/cache lifetime and cost:** `NotebookPaperArt` caches one generated Sprite, reuses the imported Texture2D, destroys its previous Sprite on replacement and resets it at `SubsystemRegistration`. It performs no texture pixel reads/copies and creates no material clones. The cache is populated on screen construction rather than an Update loop. Native card dimensions are 1086×1448; the display region `(24,48,1038,1328)` and 96-pixel slice borders remain inside that texture. Its decorative Image has `raycastTarget=false`, is stretched behind content, and callers retain their procedural fallback if the native asset is missing or has unexpected dimensions. New textures are non-readable, without mipmaps; HelpLandscapeV2 is 1672×941. No unbounded runtime cache or per-frame allocation loop was introduced.",
+          "line": 11,
+          "path": "docs/validation/modular-album/art2-code-review.md"
+        },
+        {
+          "text": "| `Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png` | `9c88fc7d630cf918e128340b877f3e144aceb64e0f6dba82f09d10e8c293c9e5` |",
+          "line": 50,
+          "path": "docs/validation/modular-album/art2-code-review.md"
+        },
+        {
+          "text": "| `Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png.meta` | `3f6a82e934686f6738975d402ddcba483d12b6ea9586ac9f863d46fd8ddaeb6c` |",
+          "line": 51,
+          "path": "docs/validation/modular-album/art2-code-review.md"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/HelpLandscapeV2.png\",",
+          "line": 60,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "\"runtime\": \"Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png\",",
+          "line": 61,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png\",",
+          "line": 132,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png.meta\",",
+          "line": 136,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "\"path\": \"ArtSource/Notebook/NewStyle/HelpLandscapeV2.provenance.json\",",
+          "line": 284,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "- [Пейзаж справки: запрос и происхождение](../../../ArtSource/Notebook/NewStyle/HelpLandscapeV2.provenance.json).",
+          "line": 21,
+          "path": "docs/validation/modular-album/art2-report.md"
+        },
+        {
+          "text": "\"Help23 chooses HelpLandscapeV2 when available, otherwise the previous background, procedural notebook binding and standalone hero.castle. The new peripheral artwork suppresses both duplicate binding and the extra pasted castle.\",",
+          "line": 76,
+          "path": "docs/validation/modular-album/art2-shell-handoff.json"
+        },
+        {
+          "text": "\"resource\": \"Art/Player/HelpLandscapeV2\",",
+          "line": 96,
+          "path": "docs/validation/modular-album/art2-shell-handoff.json"
+        }
+      ],
+      "runtimePath": "Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png",
+      "risk": "Absence from atlas manifest does not imply unused.",
+      "path": "ArtSource/Notebook/NewStyle/HelpLandscapeV2.png",
+      "atlasImport": false,
+      "decision": "KEEP"
+    },
+    {
+      "role": "independent-direct-resource-source",
+      "reason": "Direct runtime Resources sprite is independent from sprites.source/full-catalog-layout and is loaded by live UI.",
+      "image": {
+        "width": 1672,
+        "bytes": 2640711,
+        "height": 941,
+        "sha256": "3106A953D1BD0E954458E965393F68CC0D7CF01F2862211DA95C6D2948C8D62E"
+      },
+      "runtimeCopyByteIdentical": true,
+      "proof": [
+        {
+          "text": "\"runtimeCopy\": \"Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscapeV2.png\",",
+          "line": 10,
+          "path": "ArtSource/Notebook/NewStyle/HomeDefenseLandscape-v2.provenance.json"
+        },
+        {
+          "text": "Rect composition = NotebookPageBackdrop(\"Art/Player/HomeDefenseLandscapeV2\", \"Home illustration\");",
+          "line": 11,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Home.cs"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscapeV2.png\",",
+          "line": 867,
+          "path": "docs/validation/modular-album/refinement-final-capture-manifest.json"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscapeV2.png\",",
+          "line": 82,
+          "path": "docs/validation/modular-album/refinement-first3-visual-review.json"
+        }
+      ],
+      "runtimePath": "Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscapeV2.png",
+      "risk": "Absence from atlas manifest does not imply unused.",
+      "path": "ArtSource/Notebook/NewStyle/HomeDefenseLandscape-v2.png",
+      "atlasImport": false,
+      "decision": "KEEP"
+    },
+    {
+      "role": "independent-direct-resource-source",
+      "reason": "Direct runtime Resources sprite is independent from sprites.source/full-catalog-layout and is loaded by live UI.",
+      "image": {
+        "width": 1531,
+        "bytes": 3367638,
+        "height": 1027,
+        "sha256": "9264FF1F03323D507CB78523E5FE2E240893068EF95AFF4820B7AAEDA895A273"
+      },
+      "runtimeCopyByteIdentical": true,
+      "proof": [
+        {
+          "text": "\"name\": \"MapFieldIllustration\",",
+          "line": 39,
+          "path": "ArtSource/Notebook/NewStyle/generation.json"
+        },
+        {
+          "text": "\"selected_file\": \"ArtSource/Notebook/NewStyle/MapFieldIllustration.png\",",
+          "line": 46,
+          "path": "ArtSource/Notebook/NewStyle/generation.json"
+        },
+        {
+          "text": "\"File\": \"MapFieldIllustration.png\",",
+          "line": 19,
+          "path": "ArtSource/Notebook/NewStyle/hashes.json"
+        },
+        {
+          "text": "Полноэкранные фоны остаются отдельными спрайтами `Resources/Art/Player`, вне атласа. При замене `NewStyle/SettingsLandscape.png` или `MapFieldIllustration.png` обновите соответствующий PNG в `Assets/PaperDefense/Resources/Art/Player`, сохраняя его `.meta`; импорт атласа эти файлы не копирует.",
+          "line": 43,
+          "path": "ArtSource/Notebook/README.md"
+        },
+        {
+          "text": "var sprite = Resources.Load<Sprite>(\"Art/Player/MapFieldIllustration\");",
+          "line": 22,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Map.cs"
+        },
+        {
+          "text": "Полноэкранные фоны загружаются отдельно из `Resources/Art/Player`; они не упаковываются в атлас. При замене фона обновляют соответствующий PNG, сохраняя его Unity `.meta`. Например, источник `NewStyle/SettingsLandscape.png` соответствует ресурсу `Player/SettingsLandscape.png`, а `MapFieldIllustration.png` — ресурсу карты.",
+          "line": 26,
+          "path": "docs/Notebook-Art.md"
+        },
+        {
+          "text": "| `Resources/Art/Player/MapFieldIllustration` | Целый рисунок поля карты |",
+          "line": 21,
+          "path": "docs/Player-Assets.md"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/MapFieldIllustration.png\",",
+          "line": 86,
+          "path": "docs/validation/modular-album/refinement-first3-visual-review.json"
+        }
+      ],
+      "runtimePath": "Assets/PaperDefense/Resources/Art/Player/MapFieldIllustration.png",
+      "risk": "Absence from atlas manifest does not imply unused.",
+      "path": "ArtSource/Notebook/NewStyle/MapFieldIllustration.png",
+      "atlasImport": false,
+      "decision": "KEEP"
+    },
+    {
+      "role": "independent-direct-resource-source",
+      "reason": "Direct runtime Resources sprite is independent from sprites.source/full-catalog-layout and is loaded by live UI.",
+      "image": {
+        "width": 1086,
+        "bytes": 2137967,
+        "height": 1448,
+        "sha256": "B5AFC593F0FFEC864012F60B95102C15891A709ED28A1BD06061B2620E29A41E"
+      },
+      "runtimeCopyByteIdentical": true,
+      "proof": [
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/NotebookPaperCardV1.png\",",
+          "line": 6,
+          "path": "ArtSource/Notebook/NewStyle/NotebookPaperCardV1.provenance.json"
+        },
+        {
+          "text": "\"runtime\": \"Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png\",",
+          "line": 7,
+          "path": "ArtSource/Notebook/NewStyle/NotebookPaperCardV1.provenance.json"
+        },
+        {
+          "text": "var source = Resources.Load<Sprite>(\"Art/Player/NotebookPaperCardV1\");",
+          "line": 37,
+          "path": "Assets/PaperDefense/Presentation/Player/NotebookPaperArt.cs"
+        },
+        {
+          "text": "const imageAssets = ['HelpLandscapeV2', 'NotebookPaperCardV1'].map(name => {",
+          "line": 23,
+          "path": "Tools/ArtAssembly13/verify-art2.mjs"
+        },
+        {
+          "text": "| `Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png` | `b5afc593f0ffec864012f60b95102c15891a709ed28a1bd06061b2620e29a41e` |",
+          "line": 52,
+          "path": "docs/validation/modular-album/art2-code-review.md"
+        },
+        {
+          "text": "| `Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png.meta` | `28f97e04ef01a2ee4dad4e30cc452dd131c30a97b87861723702198eb95064d2` |",
+          "line": 53,
+          "path": "docs/validation/modular-album/art2-code-review.md"
+        },
+        {
+          "text": "\"source\": \"ArtSource/Notebook/NewStyle/NotebookPaperCardV1.png\",",
+          "line": 65,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "\"runtime\": \"Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png\",",
+          "line": 66,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png\",",
+          "line": 140,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png.meta\",",
+          "line": 144,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "\"path\": \"ArtSource/Notebook/NewStyle/NotebookPaperCardV1.provenance.json\",",
+          "line": 288,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "- [Бумажная панель: запрос и происхождение](../../../ArtSource/Notebook/NewStyle/NotebookPaperCardV1.provenance.json).",
+          "line": 20,
+          "path": "docs/validation/modular-album/art2-report.md"
+        },
+        {
+          "text": "\"resource\": \"Art/Player/NotebookPaperCardV1\",",
+          "line": 91,
+          "path": "docs/validation/modular-album/art2-shell-handoff.json"
+        }
+      ],
+      "runtimePath": "Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png",
+      "risk": "Absence from atlas manifest does not imply unused.",
+      "path": "ArtSource/Notebook/NewStyle/NotebookPaperCardV1.png",
+      "atlasImport": false,
+      "decision": "KEEP"
+    },
+    {
+      "role": "independent-direct-resource-source",
+      "reason": "Direct runtime Resources sprite is independent from sprites.source/full-catalog-layout and is loaded by live UI.",
+      "image": {
+        "width": 1672,
+        "bytes": 2346766,
+        "height": 941,
+        "sha256": "A6330F4FF7DAFC6E77AB50876CB0E74D7D4B5B2C2AA2399A2747F1D8D17934F7"
+      },
+      "runtimeCopyByteIdentical": true,
+      "proof": [
+        {
+          "text": "\"name\": \"SettingsLandscape\",",
+          "line": 17,
+          "path": "ArtSource/Notebook/NewStyle/generation.json"
+        },
+        {
+          "text": "\"selected_file\": \"ArtSource/Notebook/NewStyle/SettingsLandscape.png\",",
+          "line": 24,
+          "path": "ArtSource/Notebook/NewStyle/generation.json"
+        },
+        {
+          "text": "\"File\": \"SettingsLandscape.png\",",
+          "line": 39,
+          "path": "ArtSource/Notebook/NewStyle/hashes.json"
+        },
+        {
+          "text": "Полноэкранные фоны остаются отдельными спрайтами `Resources/Art/Player`, вне атласа. При замене `NewStyle/SettingsLandscape.png` или `MapFieldIllustration.png` обновите соответствующий PNG в `Assets/PaperDefense/Resources/Art/Player`, сохраняя его `.meta`; импорт атласа эти файлы не копирует.",
+          "line": 43,
+          "path": "ArtSource/Notebook/README.md"
+        },
+        {
+          "text": "NotebookPageBackdrop(\"Art/Player/SettingsLandscape\");",
+          "line": 14,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Settings.cs"
+        },
+        {
+          "text": "Полноэкранные фоны загружаются отдельно из `Resources/Art/Player`; они не упаковываются в атлас. При замене фона обновляют соответствующий PNG, сохраняя его Unity `.meta`. Например, источник `NewStyle/SettingsLandscape.png` соответствует ресурсу `Player/SettingsLandscape.png`, а `MapFieldIllustration.png` — ресурсу карты.",
+          "line": 26,
+          "path": "docs/Notebook-Art.md"
+        },
+        {
+          "text": "| `Resources/Art/Player/SettingsLandscape` | Фон настроек по эскизу 22 |",
+          "line": 23,
+          "path": "docs/Player-Assets.md"
+        },
+        {
+          "text": "\"Assets/PaperDefense/Resources/Art/Player/SettingsLandscape.png\"",
+          "line": 49,
+          "path": "docs/validation/modular-album/art2-shell-handoff.json"
+        }
+      ],
+      "runtimePath": "Assets/PaperDefense/Resources/Art/Player/SettingsLandscape.png",
+      "risk": "Absence from atlas manifest does not imply unused.",
+      "path": "ArtSource/Notebook/NewStyle/SettingsLandscape.png",
+      "atlasImport": false,
+      "decision": "KEEP"
+    },
+    {
+      "reason": "No current source sprite, layout source sheet, runtime direct resource, or importer names this raster. Current sources are StandardFoundation-v9.png and BatteryFoundation-v3.png.",
+      "risk": "Historical design/provenance may cite this revision. Preserve provenance records, validation screenshots, reference sketches and documented baseline evidence; decide whether the rejected native itself is required as evidence before removal. No deletion authorized by this inventory.",
+      "proof": [
+        {
+          "text": "\"file\": \"StandardFoundation-v2.png\",",
+          "line": 2,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v2.provenance.json"
+        },
+        {
+          "text": "\"references\": [\"docs/design/album-assembly-2026-10-17/art/01-towers.png\", \"ArtSource/Notebook/NewStyle/StandardFoundation-v2.png\"],",
+          "line": 5,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v4.provenance.json"
+        },
+        {
+          "text": "Обычная основа использует [низкую двухместную плиту](../ArtSource/Notebook/NewStyle/StandardFoundation-v2.png), батарея — верхнюю левую ячейку [компактной трёхместной плиты](../ArtSource/Notebook/NewStyle/BatteryFoundation-v3.png). У батареи импортируется родная область 564×192 px; широкий предыдущий источник не входит в атлас. Обе основы разбиты на нижнюю часть, заднюю плоскость и передний край в общих координатах исходного изображения.",
+          "line": 110,
+          "path": "docs/Modular-Asset-Contract.md"
+        },
+        {
+          "text": "Исходные прозрачные PNG, промпты и причины повторной генерации хранятся в `ArtSource/Notebook/NewStyle/`. Первая пара ремонтных корпуса и крыши отклонена из-за пересекающихся прямоугольных crop; отдельный `RepairParts-v1.png` заменяет оба фрагмента. `StandardFoundation-v2.png` добавляет низкую двухместную основу после обнаруженного на настоящих кадрах нарушения пропорций. `BatteryFoundation-v3.png` заменяет высокий трёхместный постамент: он вынуждал уменьшать весь кадр настолько, что терялись три оружейных силуэта. Предшествующий крупный источник батареи отклонён по плотности упаковки; компактный лист заново сгенерирован, а не уменьшен программно. Пиксели исходных PNG не редактируются при импорте.",
+          "line": 15,
+          "path": "docs/validation/modular-album/visual-acceptance.md"
+        }
+      ],
+      "image": {
+        "width": 1942,
+        "bytes": 1792390,
+        "height": 809,
+        "sha256": "CE3FC203FAD1A7F0E592B29F881AFF24260835AFB8DD9372496E34811B43AC9D"
+      },
+      "atlasImport": false,
+      "decision": "REMOVE_CANDIDATE",
+      "role": "superseded-native-foundation-revision",
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v2.png"
+    },
+    {
+      "reason": "No current source sprite, layout source sheet, runtime direct resource, or importer names this raster. Current sources are StandardFoundation-v9.png and BatteryFoundation-v3.png.",
+      "risk": "Historical design/provenance may cite this revision. Preserve provenance records, validation screenshots, reference sketches and documented baseline evidence; decide whether the rejected native itself is required as evidence before removal. No deletion authorized by this inventory.",
+      "proof": [],
+      "image": {
+        "width": 1536,
+        "bytes": 2099698,
+        "height": 1024,
+        "sha256": "6E61C01DDE00506032223851252754BE0C0B5D9392FE589F3FD26C294E111C36"
+      },
+      "atlasImport": false,
+      "decision": "REMOVE_CANDIDATE",
+      "role": "superseded-native-foundation-revision",
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v3.png"
+    },
+    {
+      "reason": "No current source sprite, layout source sheet, runtime direct resource, or importer names this raster. Current sources are StandardFoundation-v9.png and BatteryFoundation-v3.png.",
+      "risk": "Historical design/provenance may cite this revision. Preserve provenance records, validation screenshots, reference sketches and documented baseline evidence; decide whether the rejected native itself is required as evidence before removal. No deletion authorized by this inventory.",
+      "proof": [
+        {
+          "text": "\"file\": \"StandardFoundation-v4.png\",",
+          "line": 3,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v4.provenance.json"
+        },
+        {
+          "text": "\"ArtSource/Notebook/NewStyle/StandardFoundation-v4.png\",",
+          "line": 7,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v6.provenance.json"
+        },
+        {
+          "text": "Для первого прохода изометрической основы создан отдельный `StandardFoundation-v4.png` встроенным imagegen;",
+          "line": 31,
+          "path": "docs/validation/modular-album/scene-fidelity-plan.md"
+        }
+      ],
+      "image": {
+        "width": 1536,
+        "bytes": 2056364,
+        "height": 1024,
+        "sha256": "9F803F5ECC4E7EDA7A102B9F5065C40401A9F507E19E48D2A210AD08E733D3DE"
+      },
+      "atlasImport": false,
+      "decision": "REMOVE_CANDIDATE",
+      "role": "superseded-native-foundation-revision",
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v4.png"
+    },
+    {
+      "reason": "No current source sprite, layout source sheet, runtime direct resource, or importer names this raster. Current sources are StandardFoundation-v9.png and BatteryFoundation-v3.png.",
+      "risk": "Historical design/provenance may cite this revision. Preserve provenance records, validation screenshots, reference sketches and documented baseline evidence; decide whether the rejected native itself is required as evidence before removal. No deletion authorized by this inventory.",
+      "proof": [
+        {
+          "text": "\"file\": \"StandardFoundation-v5.png\",",
+          "line": 15,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v6.provenance.json"
+        }
+      ],
+      "image": {
+        "width": 1536,
+        "bytes": 1825166,
+        "height": 1024,
+        "sha256": "CA1892BB27739BFC4D59E860E887953EBEB247783E4903785E4BBDE4D8243611"
+      },
+      "atlasImport": false,
+      "decision": "REMOVE_CANDIDATE",
+      "role": "superseded-native-foundation-revision",
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v5.png"
+    },
+    {
+      "reason": "No current source sprite, layout source sheet, runtime direct resource, or importer names this raster. Current sources are StandardFoundation-v9.png and BatteryFoundation-v3.png.",
+      "risk": "Historical design/provenance may cite this revision. Preserve provenance records, validation screenshots, reference sketches and documented baseline evidence; decide whether the rejected native itself is required as evidence before removal. No deletion authorized by this inventory.",
+      "proof": [
+        {
+          "text": "\"file\": \"StandardFoundation-v6.png\",",
+          "line": 3,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v6.provenance.json"
+        },
+        {
+          "text": "\"file\": \"StandardFoundation-v6.png\",",
+          "line": 20,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v6.provenance.json"
+        },
+        {
+          "text": "\"ArtSource/Notebook/NewStyle/StandardFoundation-v6.png\"",
+          "line": 6,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.provenance.json"
+        }
+      ],
+      "image": {
+        "width": 1536,
+        "bytes": 1379522,
+        "height": 1024,
+        "sha256": "960AFFFCC33B71582142E5F57E3D4929934BDF0193CF69AE3EBBD5113DBDB987"
+      },
+      "atlasImport": false,
+      "decision": "REMOVE_CANDIDATE",
+      "role": "superseded-native-foundation-revision",
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v6.png"
+    },
+    {
+      "reason": "No current source sprite, layout source sheet, runtime direct resource, or importer names this raster. Current sources are StandardFoundation-v9.png and BatteryFoundation-v3.png.",
+      "risk": "Historical design/provenance may cite this revision. Preserve provenance records, validation screenshots, reference sketches and documented baseline evidence; decide whether the rejected native itself is required as evidence before removal. No deletion authorized by this inventory.",
+      "proof": [
+        {
+          "text": "\"file\": \"StandardFoundation-v7.png\",",
+          "line": 11,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.provenance.json"
+        }
+      ],
+      "image": {
+        "width": 1536,
+        "bytes": 1582456,
+        "height": 1024,
+        "sha256": "710B564168402ECE9A55A0BA08C9298C3D700B29EA454577D20B1B54897AF237"
+      },
+      "atlasImport": false,
+      "decision": "REMOVE_CANDIDATE",
+      "role": "superseded-native-foundation-revision",
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v7.png"
+    },
+    {
+      "reason": "No current source sprite, layout source sheet, runtime direct resource, or importer names this raster. Current sources are StandardFoundation-v9.png and BatteryFoundation-v3.png.",
+      "risk": "Historical design/provenance may cite this revision. Preserve provenance records, validation screenshots, reference sketches and documented baseline evidence; decide whether the rejected native itself is required as evidence before removal. No deletion authorized by this inventory.",
+      "proof": [
+        {
+          "text": "\"file\": \"StandardFoundation-v8.png\",",
+          "line": 17,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.provenance.json"
+        }
+      ],
+      "image": {
+        "width": 1536,
+        "bytes": 1604730,
+        "height": 1024,
+        "sha256": "6483230153074E924C876C76CCC0ED89F11ABE47C276AC4B757DD01557F3762D"
+      },
+      "atlasImport": false,
+      "decision": "REMOVE_CANDIDATE",
+      "role": "superseded-native-foundation-revision",
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v8.png"
+    }
+  ],
+  "runtimePlayerRasters": [
+    {
+      "risk": "Independent Resource path; atlas import cannot recreate this file.",
+      "proof": [
+        {
+          "text": "\"runtime\": \"Assets/PaperDefense/Resources/Art/Player/AlbumOpenBookV2.png\",",
+          "line": 8,
+          "path": "ArtSource/Notebook/NewStyle/AlbumOpenBook-v2.provenance.json"
+        },
+        {
+          "text": "var bookSprite = Resources.Load<Sprite>(\"Art/Player/AlbumOpenBookV2\");",
+          "line": 270,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Dialogs.cs"
+        },
+        {
+          "text": "illustration.sprite = Resources.Load<Sprite>(\"Art/Player/AlbumOpenBookV2\"); illustration.preserveAspect = true;",
+          "line": 237,
+          "path": "Assets/PaperDefense/Presentation/UI/AlbumPanel.cs"
+        },
+        {
+          "text": "\"Assets/PaperDefense/Resources/Art/Player/AlbumOpenBookV2.png\",",
+          "line": 48,
+          "path": "docs/validation/modular-album/art2-shell-handoff.json"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/AlbumOpenBookV2.png\",",
+          "line": 863,
+          "path": "docs/validation/modular-album/refinement-final-capture-manifest.json"
+        }
+      ],
+      "path": "Assets/PaperDefense/Resources/Art/Player/AlbumOpenBookV2.png",
+      "decision": "KEEP",
+      "image": {
+        "width": 1862,
+        "bytes": 2026517,
+        "height": 845,
+        "sha256": "87B87415C8261326CF5D0D3A1819615F08695DB203A6DB4F3B0AFF10CE0656EA"
+      },
+      "reason": "Live Resources.Load/NotebookPageBackdrop caller."
+    },
+    {
+      "risk": "Independent Resource path; atlas import cannot recreate this file.",
+      "proof": [
+        {
+          "text": "\"runtimeFile\": \"Assets/PaperDefense/Resources/Art/Player/DefeatCastleRubble.png\",",
+          "line": 4,
+          "path": "ArtSource/Notebook/NewStyle/DefeatCastleRubble-v1.provenance.json"
+        },
+        {
+          "text": "NotebookSprite(parent, \"Defeat castle rubble illustration\", Resources.Load<Sprite>(\"Art/Player/DefeatCastleRubble\"), R(34, 264, 964, 540));",
+          "line": 230,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Result.cs"
+        },
+        {
+          "text": "Root подготовил прозрачный отдельный ресурс `Art/Player/DefeatCastleRubble` по источнику21, без UI, текста и бумаги. Ресурс просмотрен рядом с источником. В `PlayerShell.Result.cs` прежний повреждённый замок и отдельные декоративные фигуры заменены одним `Image`; фон приглушён, заголовок нарисован native ribbon с живым текстом. Правая карточка и стек настоящих действий перераспределены ближе к источнику: завершённые волны, actual `WaveIndex` красным, золото и XP вертикально, потери, статус/receipt и retry сохранения. Home остаётся доступен сверху; Retry/Album/Map — в правой колонке.",
+          "line": 72,
+          "path": "docs/validation/modular-album/scene-fidelity-shell-changes.md"
+        }
+      ],
+      "path": "Assets/PaperDefense/Resources/Art/Player/DefeatCastleRubble.png",
+      "decision": "KEEP",
+      "image": {
+        "width": 1672,
+        "bytes": 2220677,
+        "height": 941,
+        "sha256": "00C3F300A2BE59DA4D9E3854B01CD725B6AF2A533351D3FA4DAFF305B5FD358A"
+      },
+      "reason": "Live Resources.Load/NotebookPageBackdrop caller."
+    },
+    {
+      "risk": "Independent Resource path; atlas import cannot recreate this file.",
+      "proof": [
+        {
+          "text": "house.sprite = Resources.Load<Sprite>(\"Art/Player/DrawingWorkshopHouse\"); house.preserveAspect = true;",
+          "line": 133,
+          "path": "Assets/PaperDefense/Presentation/UI/AlbumPanel.cs"
+        },
+        {
+          "text": "var house=id==\"icon.workshop\"?Resources.Load<Sprite>(\"Art/Player/DrawingWorkshopHouse\"):null;",
+          "line": 246,
+          "path": "Assets/PaperDefense/Presentation/UI/WizardDrawingHeader.cs"
+        },
+        {
+          "text": "| `Resources/Art/Player/DrawingWorkshopHouse` | Подробный домик шапки 06 по эскизу; прозрачный PNG, один Sprite с импортом до 512px; [промпт и происхождение](validation/2026-10-17-workshop-drawing/assets.md) |",
+          "line": 25,
+          "path": "docs/Player-Assets.md"
+        },
+        {
+          "text": "- Ресурс: `Assets/PaperDefense/Resources/Art/Player/DrawingWorkshopHouse.png`.",
+          "line": 4,
+          "path": "docs/validation/2026-10-17-workshop-drawing/assets.md"
+        }
+      ],
+      "path": "Assets/PaperDefense/Resources/Art/Player/DrawingWorkshopHouse.png",
+      "decision": "KEEP",
+      "image": {
+        "width": 1536,
+        "bytes": 2498416,
+        "height": 1024,
+        "sha256": "FCF49D01198696EE7F1BC719C02CA30CE8374C26FC1C37FFC54483884421F450"
+      },
+      "reason": "Live Resources.Load/NotebookPageBackdrop caller."
+    },
+    {
+      "risk": "Independent Resource path; atlas import cannot recreate this file.",
+      "proof": [
+        {
+          "text": "\"runtime\": \"Assets/PaperDefense/Resources/Art/Player/FoundationPageDecor.png\",",
+          "line": 9,
+          "path": "ArtSource/Notebook/NewStyle/foundation-generation.json"
+        },
+        {
+          "text": "NotebookPageBackdrop(illustratedLandscape ? \"Art/Player/HelpLandscapeV2\" : \"Art/Player/FoundationPageDecor\");",
+          "line": 213,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Dialogs.cs"
+        },
+        {
+          "text": "NotebookPageBackdrop(\"Art/Player/FoundationPageDecor\", \"Result landscape border\");",
+          "line": 30,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Result.cs"
+        },
+        {
+          "text": "pageDecor.sprite = Resources.Load<Sprite>(\"Art/Player/FoundationPageDecor\");",
+          "line": 109,
+          "path": "Assets/PaperDefense/Presentation/UI/CompositeWorkshopPanel.cs"
+        },
+        {
+          "text": "landscape.sprite = Resources.Load<Sprite>(\"Art/Player/FoundationPageDecor\"); landscape.preserveAspect = true;",
+          "line": 42,
+          "path": "Assets/PaperDefense/Presentation/UI/GuidedDrawingLayout.cs"
+        },
+        {
+          "text": "| `Resources/Art/Player/FoundationPageDecor`, `FoundationPreviewScenery` | Прозрачный нижний пейзаж и окружение предпросмотра основы 04; отдельные PNG с сохранёнными пропорциями |",
+          "line": 24,
+          "path": "docs/Player-Assets.md"
+        },
+        {
+          "text": "- [FoundationPageDecor.png](../../../ArtSource/Notebook/NewStyle/FoundationPageDecor.png) → `Resources/Art/Player/FoundationPageDecor.png`.",
+          "line": 48,
+          "path": "docs/validation/2026-10-17-workshop-foundation/report.md"
+        }
+      ],
+      "path": "Assets/PaperDefense/Resources/Art/Player/FoundationPageDecor.png",
+      "decision": "KEEP",
+      "image": {
+        "width": 2172,
+        "bytes": 683872,
+        "height": 724,
+        "sha256": "520219BE1FD260D5A19B75F4C8DCCBCA0573B8A972F8D4FAF0E51FD4C11E3B7F"
+      },
+      "reason": "Live Resources.Load/NotebookPageBackdrop caller."
+    },
+    {
+      "risk": "Independent Resource path; atlas import cannot recreate this file.",
+      "proof": [
+        {
+          "text": "\"runtime\": \"Assets/PaperDefense/Resources/Art/Player/FoundationPreviewScenery.png\",",
+          "line": 17,
+          "path": "ArtSource/Notebook/NewStyle/foundation-generation.json"
+        },
+        {
+          "text": "scenery.sprite = Resources.Load<Sprite>(\"Art/Player/FoundationPreviewScenery\");",
+          "line": 405,
+          "path": "Assets/PaperDefense/Presentation/UI/ComponentCatalogPanel.cs"
+        },
+        {
+          "text": "scenery.sprite = Resources.Load<Sprite>(\"Art/Player/FoundationPreviewScenery\");",
+          "line": 392,
+          "path": "Assets/PaperDefense/Presentation/UI/CompositeWorkshopPanel.cs"
+        },
+        {
+          "text": "probeScenery.sprite = Resources.Load<Sprite>(\"Art/Player/FoundationPreviewScenery\");",
+          "line": 122,
+          "path": "Assets/PaperDefense/Presentation/UI/DrawingSummaryLayout.cs"
+        },
+        {
+          "text": "- [FoundationPreviewScenery.png](../../../ArtSource/Notebook/NewStyle/FoundationPreviewScenery.png) → `Resources/Art/Player/FoundationPreviewScenery.png`.",
+          "line": 49,
+          "path": "docs/validation/2026-10-17-workshop-foundation/report.md"
+        }
+      ],
+      "path": "Assets/PaperDefense/Resources/Art/Player/FoundationPreviewScenery.png",
+      "decision": "KEEP",
+      "image": {
+        "width": 1536,
+        "bytes": 2177262,
+        "height": 1024,
+        "sha256": "484AC7C599297A82B16E0D92526AF20C4C4BD50E376319624135CF9753B0C7E0"
+      },
+      "reason": "Live Resources.Load/NotebookPageBackdrop caller."
+    },
+    {
+      "risk": "Independent Resource path; atlas import cannot recreate this file.",
+      "proof": [
+        {
+          "text": "\"runtime\": \"Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png\",",
+          "line": 7,
+          "path": "ArtSource/Notebook/NewStyle/HelpLandscapeV2.provenance.json"
+        },
+        {
+          "text": "bool illustratedLandscape = Resources.Load<Sprite>(\"Art/Player/HelpLandscapeV2\") != null;",
+          "line": 212,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Dialogs.cs"
+        },
+        {
+          "text": "NotebookPageBackdrop(illustratedLandscape ? \"Art/Player/HelpLandscapeV2\" : \"Art/Player/FoundationPageDecor\");",
+          "line": 213,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Dialogs.cs"
+        },
+        {
+          "text": "| `Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png` | `9c88fc7d630cf918e128340b877f3e144aceb64e0f6dba82f09d10e8c293c9e5` |",
+          "line": 50,
+          "path": "docs/validation/modular-album/art2-code-review.md"
+        },
+        {
+          "text": "| `Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png.meta` | `3f6a82e934686f6738975d402ddcba483d12b6ea9586ac9f863d46fd8ddaeb6c` |",
+          "line": 51,
+          "path": "docs/validation/modular-album/art2-code-review.md"
+        },
+        {
+          "text": "\"runtime\": \"Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png\",",
+          "line": 61,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png\",",
+          "line": 132,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png.meta\",",
+          "line": 136,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "\"resource\": \"Art/Player/HelpLandscapeV2\",",
+          "line": 96,
+          "path": "docs/validation/modular-album/art2-shell-handoff.json"
+        }
+      ],
+      "path": "Assets/PaperDefense/Resources/Art/Player/HelpLandscapeV2.png",
+      "decision": "KEEP",
+      "image": {
+        "width": 1672,
+        "bytes": 2328051,
+        "height": 941,
+        "sha256": "9C88FC7D630CF918E128340B877F3E144ACEB64E0F6DBA82F09D10E8C293C9E5"
+      },
+      "reason": "Live Resources.Load/NotebookPageBackdrop caller."
+    },
+    {
+      "risk": "Still used as v2 provenance input and historical generation output; preserve those evidence records before pruning runtime duplicate.",
+      "proof": [
+        {
+          "text": "\"source\": \"Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscape.png\",",
+          "line": 5,
+          "path": "ArtSource/Notebook/NewStyle/HomeDefenseLandscape-v2.provenance.json"
+        },
+        {
+          "text": "\"runtimeCopy\": \"Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscapeV2.png\",",
+          "line": 10,
+          "path": "ArtSource/Notebook/NewStyle/HomeDefenseLandscape-v2.provenance.json"
+        },
+        {
+          "text": "Rect composition = NotebookPageBackdrop(\"Art/Player/HomeDefenseLandscapeV2\", \"Home illustration\");",
+          "line": 11,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Home.cs"
+        },
+        {
+          "text": "| `Resources/Art/Player/HomeDefenseLandscape` | Фон меню без запечённых игровых подписей и кнопок |",
+          "line": 20,
+          "path": "docs/Player-Assets.md"
+        },
+        {
+          "text": "\"output\": \"Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscape.png\",",
+          "line": 7,
+          "path": "docs/implementation/home-menu-assets.json"
+        },
+        {
+          "text": "- [Фон без текста](../../../Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscape.png) подготовлен из эскиза через imagegen в режиме built-in. [Точный prompt и импорт](../../implementation/home-menu-assets.json), [план компоновки](../../implementation/home-menu-layout.json). Названия, значения, значки и состояния кнопок не запечены в фоне.",
+          "line": 9,
+          "path": "docs/validation/2026-10-16-home-menu/report.md"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscapeV2.png\",",
+          "line": 867,
+          "path": "docs/validation/modular-album/refinement-final-capture-manifest.json"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscapeV2.png\",",
+          "line": 82,
+          "path": "docs/validation/modular-album/refinement-first3-visual-review.json"
+        }
+      ],
+      "path": "Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscape.png",
+      "decision": "REMOVE_CANDIDATE",
+      "image": {
+        "width": 1672,
+        "bytes": 2896819,
+        "height": 941,
+        "sha256": "9AE945C48B714E6A68B904F6DC4AA2AE8FF820228D3FFD227A4F52348DE4EB23"
+      },
+      "reason": "Home UI loads HomeDefenseLandscapeV2; no current runtime code loads this older exact Resource key."
+    },
+    {
+      "risk": "Independent Resource path; atlas import cannot recreate this file.",
+      "proof": [
+        {
+          "text": "\"runtimeCopy\": \"Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscapeV2.png\",",
+          "line": 10,
+          "path": "ArtSource/Notebook/NewStyle/HomeDefenseLandscape-v2.provenance.json"
+        },
+        {
+          "text": "Rect composition = NotebookPageBackdrop(\"Art/Player/HomeDefenseLandscapeV2\", \"Home illustration\");",
+          "line": 11,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Home.cs"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscapeV2.png\",",
+          "line": 867,
+          "path": "docs/validation/modular-album/refinement-final-capture-manifest.json"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscapeV2.png\",",
+          "line": 82,
+          "path": "docs/validation/modular-album/refinement-first3-visual-review.json"
+        }
+      ],
+      "path": "Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscapeV2.png",
+      "decision": "KEEP",
+      "image": {
+        "width": 1672,
+        "bytes": 2640711,
+        "height": 941,
+        "sha256": "3106A953D1BD0E954458E965393F68CC0D7CF01F2862211DA95C6D2948C8D62E"
+      },
+      "reason": "Live Resources.Load/NotebookPageBackdrop caller."
+    },
+    {
+      "risk": "Independent Resource path; atlas import cannot recreate this file.",
+      "proof": [
+        {
+          "text": "var sprite = Resources.Load<Sprite>(\"Art/Player/MapFieldIllustration\");",
+          "line": 22,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Map.cs"
+        },
+        {
+          "text": "| `Resources/Art/Player/MapFieldIllustration` | Целый рисунок поля карты |",
+          "line": 21,
+          "path": "docs/Player-Assets.md"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/MapFieldIllustration.png\",",
+          "line": 86,
+          "path": "docs/validation/modular-album/refinement-first3-visual-review.json"
+        }
+      ],
+      "path": "Assets/PaperDefense/Resources/Art/Player/MapFieldIllustration.png",
+      "decision": "KEEP",
+      "image": {
+        "width": 1531,
+        "bytes": 3367638,
+        "height": 1027,
+        "sha256": "9264FF1F03323D507CB78523E5FE2E240893068EF95AFF4820B7AAEDA895A273"
+      },
+      "reason": "Live Resources.Load/NotebookPageBackdrop caller."
+    },
+    {
+      "risk": "Independent Resource path; atlas import cannot recreate this file.",
+      "proof": [
+        {
+          "text": "\"runtime\": \"Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png\",",
+          "line": 7,
+          "path": "ArtSource/Notebook/NewStyle/NotebookPaperCardV1.provenance.json"
+        },
+        {
+          "text": "var source = Resources.Load<Sprite>(\"Art/Player/NotebookPaperCardV1\");",
+          "line": 37,
+          "path": "Assets/PaperDefense/Presentation/Player/NotebookPaperArt.cs"
+        },
+        {
+          "text": "| `Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png` | `b5afc593f0ffec864012f60b95102c15891a709ed28a1bd06061b2620e29a41e` |",
+          "line": 52,
+          "path": "docs/validation/modular-album/art2-code-review.md"
+        },
+        {
+          "text": "| `Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png.meta` | `28f97e04ef01a2ee4dad4e30cc452dd131c30a97b87861723702198eb95064d2` |",
+          "line": 53,
+          "path": "docs/validation/modular-album/art2-code-review.md"
+        },
+        {
+          "text": "\"runtime\": \"Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png\",",
+          "line": 66,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png\",",
+          "line": 140,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png.meta\",",
+          "line": 144,
+          "path": "docs/validation/modular-album/art2-final-verification.json"
+        },
+        {
+          "text": "\"resource\": \"Art/Player/NotebookPaperCardV1\",",
+          "line": 91,
+          "path": "docs/validation/modular-album/art2-shell-handoff.json"
+        }
+      ],
+      "path": "Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png",
+      "decision": "KEEP",
+      "image": {
+        "width": 1086,
+        "bytes": 2137967,
+        "height": 1448,
+        "sha256": "B5AFC593F0FFEC864012F60B95102C15891A709ED28A1BD06061B2620E29A41E"
+      },
+      "reason": "Live Resources.Load/NotebookPageBackdrop caller."
+    },
+    {
+      "risk": "Independent Resource path; atlas import cannot recreate this file.",
+      "proof": [
+        {
+          "text": "Rect composition = NotebookPageBackdrop(\"Art/Player/PreparationLandscape\");",
+          "line": 14,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Preparation.cs"
+        },
+        {
+          "text": "Rect landscape = NotebookPageBackdrop(\"Art/Player/PreparationLandscape\");",
+          "line": 16,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.PreparationAssembly.cs"
+        },
+        {
+          "text": "| `Resources/Art/Player/PreparationLandscape` | Декоративный фон подготовки |",
+          "line": 22,
+          "path": "docs/Player-Assets.md"
+        },
+        {
+          "text": "\"output\": \"Assets/PaperDefense/Resources/Art/Player/PreparationLandscape.png\",",
+          "line": 21,
+          "path": "docs/implementation/map-preparation-assets.json"
+        },
+        {
+          "text": "- [PreparationLandscape](../../../Assets/PaperDefense/Resources/Art/Player/PreparationLandscape.png) — фон подготовки без карточек и надписей.",
+          "line": 16,
+          "path": "docs/validation/2026-10-16-map-preparation/report.md"
+        },
+        {
+          "text": "\"path\": \"Assets/PaperDefense/Resources/Art/Player/PreparationLandscape.png\",",
+          "line": 90,
+          "path": "docs/validation/modular-album/refinement-first3-visual-review.json"
+        }
+      ],
+      "path": "Assets/PaperDefense/Resources/Art/Player/PreparationLandscape.png",
+      "decision": "KEEP",
+      "image": {
+        "width": 1672,
+        "bytes": 2196204,
+        "height": 941,
+        "sha256": "4C6503F052759FC159E166E7D9ABEDD9328B3F9506181ECA149E83148DC76174"
+      },
+      "reason": "Live Resources.Load/NotebookPageBackdrop caller."
+    },
+    {
+      "risk": "Independent Resource path; atlas import cannot recreate this file.",
+      "proof": [
+        {
+          "text": "NotebookPageBackdrop(\"Art/Player/SettingsLandscape\");",
+          "line": 14,
+          "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Settings.cs"
+        },
+        {
+          "text": "| `Resources/Art/Player/SettingsLandscape` | Фон настроек по эскизу 22 |",
+          "line": 23,
+          "path": "docs/Player-Assets.md"
+        },
+        {
+          "text": "\"Assets/PaperDefense/Resources/Art/Player/SettingsLandscape.png\"",
+          "line": 49,
+          "path": "docs/validation/modular-album/art2-shell-handoff.json"
+        }
+      ],
+      "path": "Assets/PaperDefense/Resources/Art/Player/SettingsLandscape.png",
+      "decision": "KEEP",
+      "image": {
+        "width": 1672,
+        "bytes": 2346766,
+        "height": 941,
+        "sha256": "A6330F4FF7DAFC6E77AB50876CB0E74D7D4B5B2C2AA2399A2747F1D8D17934F7"
+      },
+      "reason": "Live Resources.Load/NotebookPageBackdrop caller."
+    }
+  ],
+  "modernPartBindings": [
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 127,
+      "category": 0,
+      "partId": "frame.standard",
+      "spriteIds": [
+        "part.full.frame.standard"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 127,
+      "category": 0,
+      "partId": "frame.heavy",
+      "spriteIds": [
+        "part.full.frame.heavy"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 127,
+      "category": 0,
+      "partId": "frame.precision",
+      "spriteIds": [
+        "part.full.frame.precision"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 127,
+      "category": 0,
+      "partId": "frame.battery",
+      "spriteIds": [
+        "part.full.frame.battery"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 2,
+      "weaponFamilies": 127,
+      "category": 1,
+      "partId": "hull.standard",
+      "spriteIds": [
+        "part.full.frame.standard"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 2,
+      "weaponFamilies": 127,
+      "category": 1,
+      "partId": "hull.light",
+      "spriteIds": [
+        "part.full.hull.light",
+        "part.full.hull.light.back"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 2,
+      "weaponFamilies": 127,
+      "category": 1,
+      "partId": "hull.reinforced",
+      "spriteIds": [
+        "part.full.hull.reinforced",
+        "part.full.hull.reinforced.back"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 0,
+      "weaponFamilies": 127,
+      "category": 2,
+      "partId": "armor.none",
+      "spriteIds": [],
+      "neutral": "Без брони",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 127,
+      "category": 2,
+      "partId": "armor.plate",
+      "spriteIds": [
+        "part.pilot.armor"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 127,
+      "category": 2,
+      "partId": "armor.front",
+      "spriteIds": [
+        "part.full.armor.front"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 127,
+      "category": 3,
+      "partId": "feed.standard",
+      "spriteIds": [
+        "part.pilot.feed"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 127,
+      "category": 3,
+      "partId": "feed.boost",
+      "spriteIds": [
+        "part.full.feed.boost"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 127,
+      "category": 4,
+      "partId": "turn.standard",
+      "spriteIds": [
+        "part.gun.support"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 2,
+      "weaponFamilies": 127,
+      "category": 4,
+      "partId": "turn.quick",
+      "spriteIds": [
+        "part.full.turn.quick",
+        "part.gun.support"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 1,
+      "category": 5,
+      "partId": "core.gun",
+      "spriteIds": [
+        "part.full.core.piercer"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 2,
+      "category": 5,
+      "partId": "core.piercer",
+      "spriteIds": [
+        "part.full.core.piercer"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 4,
+      "category": 5,
+      "partId": "core.mortar",
+      "spriteIds": [
+        "part.full.core.mortar"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 8,
+      "category": 5,
+      "partId": "core.fan",
+      "spriteIds": [
+        "part.full.core.fan"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 16,
+      "category": 5,
+      "partId": "core.ricochet",
+      "spriteIds": [
+        "part.full.core.ricochet"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 32,
+      "category": 5,
+      "partId": "core.stapler",
+      "spriteIds": [
+        "part.full.core.stapler"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 64,
+      "category": 5,
+      "partId": "core.blotter",
+      "spriteIds": [
+        "part.full.core.blotter"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 1,
+      "category": 6,
+      "partId": "head.gun",
+      "spriteIds": [
+        "part.gun.barrels"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 2,
+      "category": 6,
+      "partId": "head.piercer",
+      "spriteIds": [
+        "part.full.head.piercer"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 4,
+      "category": 6,
+      "partId": "head.mortar",
+      "spriteIds": [
+        "part.full.head.mortar"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 8,
+      "category": 6,
+      "partId": "head.fan",
+      "spriteIds": [
+        "part.full.head.fan"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 16,
+      "category": 6,
+      "partId": "head.ricochet",
+      "spriteIds": [
+        "part.full.head.ricochet"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 32,
+      "category": 6,
+      "partId": "head.stapler",
+      "spriteIds": [
+        "part.full.head.stapler"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 64,
+      "category": 6,
+      "partId": "head.blotter",
+      "spriteIds": [
+        "part.full.head.blotter"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 3,
+      "category": 6,
+      "partId": "head.short",
+      "spriteIds": [
+        "part.full.head.short"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 3,
+      "category": 6,
+      "partId": "head.long",
+      "spriteIds": [
+        "part.full.head.long"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 4,
+      "category": 6,
+      "partId": "head.wide",
+      "spriteIds": [
+        "part.full.head.wide"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 127,
+      "category": 7,
+      "partId": "sight.iron",
+      "spriteIds": [
+        "part.pilot.sight"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 23,
+      "category": 7,
+      "partId": "sight.scope",
+      "spriteIds": [
+        "part.full.sight.scope"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 127,
+      "category": 7,
+      "partId": "sight.tracking",
+      "spriteIds": [
+        "part.full.sight.tracking"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 127,
+      "category": 8,
+      "partId": "magazine.standard",
+      "spriteIds": [
+        "part.pilot.magazine"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 33,
+      "category": 8,
+      "partId": "magazine.drum",
+      "spriteIds": [
+        "part.full.magazine.drum"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 1,
+      "category": 8,
+      "partId": "magazine.belt",
+      "spriteIds": [
+        "part.full.magazine.belt"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 127,
+      "category": 9,
+      "partId": "trigger.standard",
+      "spriteIds": [
+        "part.pilot.trigger"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 1,
+      "category": 9,
+      "partId": "trigger.burst",
+      "spriteIds": [
+        "part.full.trigger.burst"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 0
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 0,
+      "category": 10,
+      "partId": "site.wall",
+      "spriteIds": [
+        "part.full.site.wall"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 1
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 0,
+      "category": 10,
+      "partId": "site.slow",
+      "spriteIds": [
+        "part.full.site.slow"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 2
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 0,
+      "category": 10,
+      "partId": "site.repair",
+      "spriteIds": [
+        "part.full.site.repair"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 4
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 0,
+      "category": 10,
+      "partId": "site.generator",
+      "spriteIds": [
+        "part.full.site.generator"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 8
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 0,
+      "category": 11,
+      "partId": "function.wall",
+      "spriteIds": [
+        "part.full.function.wall"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 1
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 0,
+      "category": 11,
+      "partId": "function.slow",
+      "spriteIds": [
+        "part.full.function.slow"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 2
+    },
+    {
+      "fragmentCount": 2,
+      "weaponFamilies": 0,
+      "category": 11,
+      "partId": "function.repair",
+      "spriteIds": [
+        "part.full.function.repair",
+        "part.full.function.repair.toolbox"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 4
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 0,
+      "category": 11,
+      "partId": "function.generator",
+      "spriteIds": [
+        "part.full.function.generator"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 8
+    },
+    {
+      "fragmentCount": 4,
+      "weaponFamilies": 0,
+      "category": 12,
+      "partId": "shell.standard",
+      "spriteIds": [
+        "part.full.shell.standard.generator",
+        "part.full.shell.standard.repair",
+        "part.full.shell.standard.slow",
+        "part.full.shell.standard.wall"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 15
+    },
+    {
+      "fragmentCount": 8,
+      "weaponFamilies": 0,
+      "category": 12,
+      "partId": "shell.light",
+      "spriteIds": [
+        "part.full.shell.light.panel.wall",
+        "part.full.shell.standard.generator",
+        "part.full.shell.standard.repair",
+        "part.full.shell.standard.slow",
+        "part.full.shell.standard.wall"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 15
+    },
+    {
+      "fragmentCount": 8,
+      "weaponFamilies": 0,
+      "category": 12,
+      "partId": "shell.reinforced",
+      "spriteIds": [
+        "part.full.shell.reinforced.panel.wall",
+        "part.full.shell.standard.generator",
+        "part.full.shell.standard.repair",
+        "part.full.shell.standard.slow",
+        "part.full.shell.standard.wall"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 15
+    },
+    {
+      "fragmentCount": 0,
+      "weaponFamilies": 0,
+      "category": 13,
+      "partId": "utility.none",
+      "spriteIds": [],
+      "neutral": "Без оснащения",
+      "revision": 1,
+      "structureFamilies": 15
+    },
+    {
+      "fragmentCount": 3,
+      "weaponFamilies": 0,
+      "category": 13,
+      "partId": "utility.armor",
+      "spriteIds": [
+        "part.full.utility.armor.wall"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 13
+    },
+    {
+      "fragmentCount": 1,
+      "weaponFamilies": 0,
+      "category": 13,
+      "partId": "utility.range",
+      "spriteIds": [
+        "part.full.utility.range"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 4
+    },
+    {
+      "fragmentCount": 2,
+      "weaponFamilies": 0,
+      "category": 13,
+      "partId": "utility.economy",
+      "spriteIds": [
+        "part.full.utility.economy",
+        "part.full.utility.economy.pump"
+      ],
+      "neutral": "",
+      "revision": 1,
+      "structureFamilies": 8
+    }
+  ],
+  "uiAliases": [
+    {
+      "id": "ui.chassis.standard",
+      "alias": "chassis.standard"
+    },
+    {
+      "id": "ui.chassis.heavy",
+      "alias": "chassis.heavy"
+    },
+    {
+      "id": "ui.chassis.precision",
+      "alias": "chassis.precision"
+    },
+    {
+      "id": "ui.chassis.battery",
+      "alias": "chassis.battery"
+    },
+    {
+      "id": "ui.weapon.gun",
+      "alias": "weapon.gun"
+    },
+    {
+      "id": "ui.weapon.piercer",
+      "alias": "weapon.piercer"
+    },
+    {
+      "id": "ui.weapon.mortar",
+      "alias": "weapon.mortar"
+    },
+    {
+      "id": "ui.weapon.fan",
+      "alias": "weapon.fan"
+    },
+    {
+      "id": "ui.weapon.ricochet",
+      "alias": "weapon.ricochet"
+    },
+    {
+      "id": "ui.weapon.stapler",
+      "alias": "weapon.stapler"
+    },
+    {
+      "id": "ui.weapon.blotter",
+      "alias": "weapon.blotter"
+    },
+    {
+      "id": "ui.module.armor",
+      "alias": "module.armor"
+    },
+    {
+      "id": "ui.module.feed",
+      "alias": "module.feed"
+    },
+    {
+      "id": "ui.module.tracking",
+      "alias": "module.tracking"
+    },
+    {
+      "id": "ui.module.rail",
+      "alias": "module.rail"
+    },
+    {
+      "id": "ui.tool.wall",
+      "alias": "object.wall"
+    },
+    {
+      "id": "ui.tool.spikes",
+      "alias": "object.spikes"
+    },
+    {
+      "id": "ui.tool.erase",
+      "alias": "icon.erase"
+    },
+    {
+      "id": "ui.tool.select",
+      "alias": "icon.pencil"
+    },
+    {
+      "id": "ui.tool.tar",
+      "alias": "object.tar"
+    },
+    {
+      "id": "ui.tool.repair",
+      "alias": "object.repair"
+    },
+    {
+      "id": "ui.tool.upgrade",
+      "alias": "icon.upgrade"
+    },
+    {
+      "id": "ui.tool.blotter",
+      "alias": "weapon.blotter"
+    },
+    {
+      "id": "ui.tool.paint",
+      "alias": "icon.paint"
+    }
+  ],
+  "runtimeAtlas": {
+    "decision": "REPLACE",
+    "proof": [
+      "Assets/PaperDefense/Editor/NotebookSpriteImportTools.cs:16-24",
+      "Assets/PaperDefense/Editor/NotebookSpriteImportTools.cs:66-155",
+      "Assets/PaperDefense/Presentation/Art/NotebookSpriteCatalog.cs:170-171"
+    ],
+    "reason": "Derived atlas contains modern full catalog plus reachable old complete art. Rebuild only after semantic replacement and packing update.",
+    "image": {
+      "width": 4096,
+      "bytes": 29752109,
+      "height": 4352,
+      "sha256": "3DF21476137D1E193B21CB86813AE55658D20D1FEC9F63C87A9A5A8FB5FE55FA"
+    },
+    "path": "Assets/PaperDefense/Resources/Art/NotebookAtlas.png"
+  },
+  "reachabilityFindings": [
+    {
+      "finding": "Modern recipe screens still bind ui.weapon.* aliases to old whole-weapon crops, so mismatched art remains visible even with all modern component mappings present.",
+      "severity": "high",
+      "proof": [
+        "Assets/PaperDefense/Presentation/UI/AlbumPanel.cs:340-342",
+        "Assets/PaperDefense/Presentation/Player/PlayerBattleHud.Album.cs:274",
+        "Assets/PaperDefense/Presentation/Player/PlayerShell.PreparationAssembly.cs:192",
+        "Assets/PaperDefense/Presentation/Player/PlayerShell.Dialogs.cs:99",
+        "ArtSource/Notebook/NewStyle/sprites.source.json aliases"
+      ],
+      "id": "ui-old-weapon-icons"
+    },
+    {
+      "finding": "V8 profile migration preserves pages as Legacy unless conversion is exactly equivalent. These pages remain buildable and rendered; blanket deletion of legacy sprite IDs breaks existing saves.",
+      "severity": "high",
+      "proof": [
+        "Assets/PaperDefense/Core/ProfileMigrationV8.cs:42-75",
+        "Assets/PaperDefense/Core/ProfileMigrationV8.cs:198-210",
+        "Assets/PaperDefense/Application/RunController.cs:308-317",
+        "Assets/PaperDefense/Presentation/Rendering/DoodleGlyphs.cs:165-188",
+        "Assets/PaperDefense/Presentation/Rendering/DoodleGlyphs.cs:242-260"
+      ],
+      "id": "legacy-profile-runtime"
+    },
+    {
+      "finding": "foundationParts still split chassis.standard from ModularSprites for historical gun composition. GunPilotParts and AssemblyAccessories also seed modern definitions. A replaced modern frame does not eliminate these independent inputs.",
+      "severity": "high",
+      "proof": [
+        "ArtSource/Notebook/NewStyle/assembly-parts.source.json foundationParts",
+        "Assets/PaperDefense/Presentation/Art/AssemblyVisualComposer.cs:159-182",
+        "Tools/ArtAssembly13/build-catalog.mjs:25-39"
+      ],
+      "id": "pilot-frame-retained"
+    },
+    {
+      "finding": "PreparationTowers remains reachable from legacy page previews, separate from runtime weapon composition.",
+      "severity": "medium",
+      "proof": [
+        "Assets/PaperDefense/Presentation/Player/PlayerShell.Notebook.cs:111-136",
+        "Assets/PaperDefense/Presentation/Player/PlayerShell.PreparationAssembly.cs:176",
+        "Assets/PaperDefense/Presentation/Player/PlayerShell.Result.cs:262"
+      ],
+      "id": "legacy-ui-precomposed-towers"
+    },
+    {
+      "finding": "ScenerySprites structure crops remain reachable in no-blueprint world fallback, placement previews and UI tool aliases.",
+      "severity": "high",
+      "proof": [
+        "Assets/PaperDefense/Presentation/Rendering/DoodleGlyphs.cs:184-188",
+        "Assets/PaperDefense/Presentation/Rendering/NotebookWorldView.cs:616",
+        "Assets/PaperDefense/Presentation/UI/AlbumPanel.cs:340-341"
+      ],
+      "id": "world-fallback-structures"
+    },
+    {
+      "finding": "Asset contract still links StandardFoundation-v2 although current manifest uses v9. Update current-contract link before removing obsolete native; retain historical validation records.",
+      "severity": "low",
+      "proof": [
+        "docs/Modular-Asset-Contract.md:110",
+        "ArtSource/Notebook/NewStyle/full-catalog-layout.json:15"
+      ],
+      "id": "stale-document-native-link"
+    },
+    {
+      "finding": "PreparationLandscape and DrawingWorkshopHouse have live runtime Resource callers outside atlas source manifests. Direct backgrounds/decor/card/book/rubble sources likewise must be considered independently.",
+      "severity": "medium",
+      "proof": [
+        "docs/implementation/map-preparation-assets.json:19-21",
+        "ArtSource/Notebook/NewStyle/foundation-generation.json",
+        "ArtSource/Notebook/NewStyle/AlbumOpenBook-v2.provenance.json",
+        "ArtSource/Notebook/NewStyle/DefeatCastleRubble-v1.provenance.json"
+      ],
+      "id": "independent-resource-manifests"
+    }
+  ],
+  "protectedEvidence": [
+    "ArtSource/Notebook/References/**",
+    "ArtSource/Notebook/NewStyle/*.provenance.json",
+    "docs/design/album-assembly-2026-10-17/art/**",
+    "docs/validation/** historical screenshots and reports",
+    "ArtSource/Notebook/References/manifest.json"
+  ],
+  "protectedUserChanges": [
+    "Tools/BalanceWorkbook/node_modules/** existing 12 changed files",
+    "New Unity Project/** untracked"
+  ],
+  "retirementGates": [
+    "Replace or reroute old UI aliases and no-blueprint/legacy render paths without changing saved page identity or behavior.",
+    "Preserve the 54-part mappings including neutral armor.none/utility.none; core.gun and default accessories share pilot sheets.",
+    "Keep modern and legacy authored anchors coherent; sprite bounds and UV updates alone are insufficient.",
+    "Regenerate native packing and publish atlas, sprite manifest, mount manifest and visual theme coherently.",
+    "Keep independent direct Resources copies and their provenance; check runtime Resource keys before pruning.",
+    "Preserve reference sketches, provenance and historical visual validation evidence."
+  ],
+  "limitations": [
+    "Static dependencies establish reachability and safe-retirement conditions, not art style acceptance.",
+    "Dynamic semantic IDs are covered through renderer code and aliases; no runtime scene or save was loaded.",
+    "No asset or metadata was deleted or changed."
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "revision": "modular-full-catalog-2026-10-22-v7",
+  "revision": "modular-full-catalog-2026-10-24-v8",
   "sprites": [
     {
       "id": "chassis.standard",
@@ -1179,86 +1179,86 @@
     },
     {
       "id": "part.pilot.sight",
-      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png",
-      "x": 101,
-      "y": 599,
-      "width": 347,
-      "height": 346,
+      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v2.png",
+      "x": 33,
+      "y": 530,
+      "width": 508,
+      "height": 419,
       "bounds": {
         "x": 0,
         "y": 0,
-        "width": 0.347,
-        "height": 0.346
+        "width": 0.508,
+        "height": 0.419
       }
     },
     {
       "id": "part.pilot.magazine",
-      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png",
-      "x": 644,
-      "y": 543,
-      "width": 273,
-      "height": 452,
+      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v2.png",
+      "x": 662,
+      "y": 514,
+      "width": 375,
+      "height": 461,
       "bounds": {
         "x": 0,
         "y": 0,
-        "width": 0.273,
-        "height": 0.452
+        "width": 0.375,
+        "height": 0.461
       }
     },
     {
       "id": "part.pilot.trigger",
-      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png",
-      "x": 1118,
-      "y": 594,
-      "width": 343,
-      "height": 386,
+      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v2.png",
+      "x": 1150,
+      "y": 547,
+      "width": 345,
+      "height": 423,
       "bounds": {
         "x": 0,
         "y": 0,
-        "width": 0.343,
-        "height": 0.386
+        "width": 0.345,
+        "height": 0.423
       }
     },
     {
       "id": "part.pilot.feed",
-      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png",
-      "x": 28,
-      "y": 86,
-      "width": 473,
-      "height": 402,
+      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v2.png",
+      "x": 51,
+      "y": 75,
+      "width": 496,
+      "height": 372,
       "bounds": {
         "x": 0,
         "y": 0,
-        "width": 0.473,
-        "height": 0.402
+        "width": 0.496,
+        "height": 0.372
       }
     },
     {
       "id": "part.pilot.bearing",
-      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png",
-      "x": 526,
-      "y": 112,
-      "width": 505,
-      "height": 340,
+      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v2.png",
+      "x": 574,
+      "y": 69,
+      "width": 512,
+      "height": 395,
       "bounds": {
         "x": 0,
         "y": 0,
-        "width": 0.505,
-        "height": 0.34
+        "width": 0.512,
+        "height": 0.395
       }
     },
     {
       "id": "part.pilot.armor",
-      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png",
-      "x": 1089,
-      "y": 78,
-      "width": 417,
-      "height": 413,
+      "source": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v2.png",
+      "x": 1153,
+      "y": 74,
+      "width": 324,
+      "height": 416,
       "bounds": {
         "x": 0,
         "y": 0,
-        "width": 0.417,
-        "height": 0.413
+        "width": 0.324,
+        "height": 0.416
       }
     },
     {
@@ -1501,30 +1501,44 @@
     },
     {
       "id": "part.full.frame.standard",
-      "source": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.png",
-      "x": 17,
-      "y": 290,
-      "width": 1503,
-      "height": 444,
+      "source": "ArtSource/Notebook/NewStyle/StandardFoundation-v10.png",
+      "x": 19,
+      "y": 260,
+      "width": 1499,
+      "height": 475,
       "bounds": {
-        "x": 0.010669801605036628,
-        "y": 0.18201426267415424,
-        "width": 0.9433359889629442,
-        "height": 0.2786701125080155
+        "x": 0.011925072382099762,
+        "y": 0.16318520101820727,
+        "width": 0.940825447408818,
+        "height": 0.29812680955249404
       }
     },
     {
       "id": "part.full.frame.battery",
-      "source": "ArtSource/Notebook/NewStyle/BatteryFoundation-v3.png",
-      "x": 32,
-      "y": 814,
-      "width": 564,
-      "height": 192,
+      "source": "ArtSource/Notebook/NewStyle/BatteryFoundation-v4.png",
+      "x": 31,
+      "y": 810,
+      "width": 566,
+      "height": 197,
       "bounds": {
-        "x": 0.09952153110047847,
-        "y": 0.5815789473684211,
-        "width": 1.754066985645933,
-        "height": 0.5971291866028708
+        "x": 0.09641148325358852,
+        "y": 0.5691387559808613,
+        "width": 1.760287081339713,
+        "height": 0.6126794258373206
+      }
+    },
+    {
+      "id": "part.full.turn.standard",
+      "source": "ArtSource/Notebook/NewStyle/TurnHub-v1.png",
+      "x": 351,
+      "y": 398,
+      "width": 553,
+      "height": 448,
+      "bounds": {
+        "x": 0.10729096638655461,
+        "y": 0.12165756302521007,
+        "width": 0.16903676470588233,
+        "height": 0.13694117647058823
       }
     },
     {

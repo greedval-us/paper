@@ -1,0 +1,15 @@
+{
+  "mode": "built-in image_gen reference edit",
+  "status": "integrated_and_reviewed",
+  "referenceImages": [
+    "ArtSource/Notebook/NewStyle/StandardFoundation-v9.png",
+    "docs/design/album-assembly-2026-10-17/art/01-towers.png"
+  ],
+  "prompt": "Use case: style-transfer / precise-object-edit. Asset type: production transparent game sprite, low two-seat tower foundation. Image1 is the EXACT edit target and its layout/mechanical registration is authoritative. Image2 is the authoritative style and material reference, especially the square chipped-stone DOZOR bases. Redraw ONLY the materials and line language of Image1 into the authentic blue-ballpoint notebook style of Image2. KEEP Image1 full 1536x1024 landscape canvas, transparent background, camera angle, complete low diamond outer footprint, thin plinth height, and precisely the two existing round mounting pads in their same positions and sizes. Target pad centres approximately(368,384) and(1163,384) measured from top-left of Image1; do not move, enlarge or add seats. Preserve the full existing outer silhouette and visible front side band, because weapons and collider contacts are already authored against it. Transform smooth pale ceramic-looking floor tiles into hand-drawn rough warm-ivory limestone blocks: irregular natural chipped masonry seams, fine uneven dark navy/cobalt crosshatching, stipple, small cracks and pen scratches as in Image2. Turn electric blue glossy corner fittings into matte dark blue engraved metal; turn bright spherical yellow/gold studs into small flat subdued brass rivets with pen hatching, as in Image2. No glossy specular dots, plastic/3D rendering, smooth gradients, dramatic lighting or added ornamental parts. Mount pads remain empty opaque ivory/blue ellipses with thin mechanical edge; no weapons/towers/castle/hull on top. Keep shape dimensions and source view; material/style change only. Genuine alpha transparency outside the exact foundation; opaque warm ivory stone inside. No floor, ground shadow, glow, text, letters, guides, grid, paper backdrop or watermark. Output native PNG, aim exact1536x1024 composition.",
+  "generated": "C:\\Users\\Greedval\\.codex\\generated_images\\01a14cd7-7db2-7df0-8654-f50c4f801bf0\\exec-2c299333-a706-4067-ab70-1252e9ff3499.png",
+  "source": "ArtSource/Notebook/NewStyle/StandardFoundation-v10.png",
+  "postprocessing": "none; native RGBA copied unchanged",
+  "acceptedRevision": "modular-full-catalog-2026-10-24-v8",
+  "sha256": "55ceae0a45287313b9f1404318e2d8ff3728e82838a23710b41af521a9838407",
+  "validationFolder": "docs/validation/modular-album/"
+}

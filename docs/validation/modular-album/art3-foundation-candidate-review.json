@@ -1,0 +1,582 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "method": {
+    "visual": "Opened both actual candidate PNGs with view_image and compared with previously physically inspected original sketches and prior versions.",
+    "pixelMeasurements": "System.Drawing.Bitmap read-only per-pixel RGBA. Bounds measured independently at several alpha thresholds; seating faces measured as largest 4-connected cream region (A>240,R>165,G>150,B>100,R>B+12) within manually visually selected seating-face windows. Reported centres are region bounding-box midpoints, not prompt coordinates.",
+    "measurementUncertaintyPx": "Approximately 1-2 px on seating-face centres due hand-drawn ellipse contours, antialiasing and highlights. Subpixel digits in least-squares fits are arithmetic, not claimed subpixel annotation accuracy.",
+    "coordinates": "PNG measurements use top-left pixel coordinates. Standard BL converts y=1024-yTop. Battery authored controls use BL within the 627x627 top-left CELL, y=627-yTop; full-sheet BL adds another627. Bounds represented [x,y,width,height] top-origin unless explicitly stated.",
+    "scope": "Only this report written. Native candidate images, metadata, code and Unity unchanged."
+  },
+  "references": {
+    "standardOld": "StandardFoundation-v9.png",
+    "batteryOld": "BatteryFoundation-v3.png",
+    "authority": "docs/design/album-assembly-2026-10-17/art/01-towers.png",
+    "oldAuthoredControls": {
+      "standardSheetBL": [
+        [
+          368,
+          640
+        ],
+        [
+          1163,
+          640
+        ]
+      ],
+      "batteryTopLeftCellBL": [
+        [
+          168,
+          292
+        ],
+        [
+          312,
+          344
+        ],
+        [
+          459,
+          290
+        ]
+      ]
+    }
+  },
+  "candidates": [
+    {
+      "file": "ArtSource/Notebook/NewStyle/StandardFoundation-v10.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "55CEAE0A45287313B9F1404318E2D8FF3728E82838A23710B41AF521A9838407",
+      "styleVerdict": "PASS_IMPROVED",
+      "registrationVerdict": "SEATS_PASS_FOREGROUND_REVALIDATION_REQUIRED",
+      "visualEvidence": [
+        "Electric cyan trim and white-highlighted spherical gold studs of v9 become matte dark navy fittings and flatter muted brass with drawn texture.",
+        "Stone front/side faces now show strong directional blue hatch clusters, irregular chips and cracks; roof gains broken blue flecks and uneven marks. Material is substantially closer to original sketched blocks and current weapon/building parts.",
+        "The broad low tiled layout stays because mechanical footprint is retained; it still feels more regular than original masonry, but changed surface drawing unifies the family without forcing new wall geometry.",
+        "Foreground lower masonry edge extends visibly downward relative to v9; image is not an exact silhouette-preserving edit."
+      ],
+      "alphaBounds": {
+        "greaterThan0": [
+          0,
+          61,
+          1520,
+          963
+        ],
+        "greaterThan1": [
+          19,
+          290,
+          1499,
+          474
+        ],
+        "greaterThan4": [
+          21,
+          291,
+          1496,
+          471
+        ],
+        "greaterThan8": [
+          21,
+          291,
+          1495,
+          471
+        ],
+        "greaterThan16": [
+          21,
+          291,
+          1495,
+          471
+        ],
+        "greaterThan128": [
+          22,
+          292,
+          1493,
+          469
+        ],
+        "greaterThan240": [
+          23,
+          293,
+          1491,
+          467
+        ]
+      },
+      "priorAlphaBounds": {
+        "greaterThan0": [
+          13,
+          183,
+          1509,
+          809
+        ],
+        "greaterThan1": [
+          17,
+          291,
+          1503,
+          443
+        ],
+        "greaterThan16": [
+          19,
+          293,
+          1499,
+          439
+        ]
+      },
+      "physicalExtentBLAtAlphaGreaterThan16": [
+        262,
+        733
+      ],
+      "priorPhysicalExtentBLAtAlphaGreaterThan16": [
+        292,
+        731
+      ],
+      "seatCreamRegionsTopOrigin": [
+        {
+          "bbox": [
+            221,
+            340,
+            300,
+            87
+          ],
+          "bboxCentre": [
+            370.5,
+            383
+          ],
+          "pixelCount": 17034
+        },
+        {
+          "bbox": [
+            1016,
+            340,
+            300,
+            87
+          ],
+          "bboxCentre": [
+            1165.5,
+            383
+          ],
+          "pixelCount": 17213
+        }
+      ],
+      "priorMeasuredSeatCentresTopOrigin": [
+        [
+          370.5,
+          383
+        ],
+        [
+          1165,
+          382.5
+        ]
+      ],
+      "measuredSeatsSheetBL": [
+        [
+          370.5,
+          641
+        ],
+        [
+          1165.5,
+          641
+        ]
+      ],
+      "fitToAuthoredControls": {
+        "scale": 1,
+        "radians": 0,
+        "translation": [
+          -2.5,
+          -1
+        ],
+        "residuals": [
+          {
+            "point": [
+              368,
+              640
+            ],
+            "dx": 0,
+            "dy": 0
+          },
+          {
+            "point": [
+              1163,
+              640
+            ],
+            "dx": 0,
+            "dy": 0
+          }
+        ],
+        "maxResidual": 0,
+        "rms": 0
+      },
+      "straightBands": {
+        "status": "Proposed conservative extension of existing authored straight bands, not a claim of uniquely visible horizontal boundary lines.",
+        "atAlphaGreaterThan16": {
+          "baseBL": [
+            262,
+            384
+          ],
+          "frontBL": [
+            384,
+            511
+          ],
+          "roofBL": [
+            511,
+            733
+          ]
+        },
+        "atAlphaGreaterThan1": {
+          "baseBL": [
+            260,
+            384
+          ],
+          "frontBL": [
+            384,
+            511
+          ],
+          "roofBL": [
+            511,
+            734
+          ]
+        },
+        "notes": [
+          "Existing authored interior splits384 and511 can be retained for initial native metadata update; old lower base bound290 must expand downward to cover new physical stone.",
+          "Keepout's upper front boundary must still conservatively include the highest real corner side faces; do not reduce it merely to recover clearance.",
+          "New foreground depth must be included in silhouette, placement and sweep checks. Two-seat fit alone does not validate the whole object."
+        ]
+      },
+      "cropGuidance": "alpha>1 native ink crop is [19,290,1499,474] top-origin, equivalent sheetBL [19,260,1499,474]. alpha>16 yields [21,291,1495,471], equivalent BL [21,262,1495,471]. Follow the existing pipeline cutoff/padding policy; raw alpha>0 includes scattered alpha1 pixels and is inappropriate as a physical crop.",
+      "hiddenRgbSamples": [
+        {
+          "topOrigin": [
+            768,
+            275
+          ],
+          "rgba": [
+            96,
+            93,
+            108,
+            0
+          ]
+        },
+        {
+          "topOrigin": [
+            768,
+            800
+          ],
+          "rgba": [
+            18,
+            27,
+            65,
+            0
+          ]
+        }
+      ],
+      "recommendation": "Adopt after root recalculates native crop and foreground extent with unchanged weapon envelope/seat logic and reruns required assembly validation. Reject a blind source-file swap with old crop."
+    },
+    {
+      "file": "ArtSource/Notebook/NewStyle/BatteryFoundation-v4.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "CF999A95A6B657454E6A5901F547A959913FA1379DC3106969D56FA0845255E4",
+      "styleVerdict": "PASS_IMPROVED",
+      "registrationVerdict": "PASS_WITHIN_ANNOTATION_PRECISION",
+      "visualEvidence": [
+        "Previously sparse pale stone gains distinct diagonal blue hatch strokes, chipped edges, small blue scratch clusters and stronger navy side shadows.",
+        "Three-seat triangle, thin connected stone silhouette, quiet brass fasteners and same four-cell arrangement remain legible.",
+        "Still calmer than FullWeapon at source sheet scale, but glyph/stone distinction and contrast now match the family better. Judge at equal rendered part size because source-cell scales differ."
+      ],
+      "topLeftCellAlphaBounds": {
+        "greaterThan0": [
+          28,
+          29,
+          599,
+          566
+        ],
+        "greaterThan1": [
+          30,
+          246,
+          567,
+          199
+        ],
+        "greaterThan4": [
+          32,
+          247,
+          565,
+          196
+        ],
+        "greaterThan8": [
+          33,
+          249,
+          562,
+          193
+        ],
+        "greaterThan16": [
+          33,
+          249,
+          562,
+          193
+        ],
+        "greaterThan128": [
+          33,
+          249,
+          562,
+          192
+        ],
+        "greaterThan240": [
+          34,
+          250,
+          560,
+          191
+        ]
+      },
+      "priorTopLeftCellAlphaBounds": {
+        "greaterThan0": [
+          29,
+          168,
+          567,
+          451
+        ],
+        "greaterThan1": [
+          31,
+          248,
+          565,
+          192
+        ],
+        "greaterThan16": [
+          34,
+          250,
+          560,
+          188
+        ]
+      },
+      "physicalExtentCellBLAtAlphaGreaterThan16": [
+        185,
+        378
+      ],
+      "priorPhysicalExtentCellBLAtAlphaGreaterThan16": [
+        189,
+        377
+      ],
+      "seatCreamRegionsTopOrigin": [
+        {
+          "bbox": [
+            103,
+            311,
+            129,
+            55
+          ],
+          "bboxCentre": [
+            167,
+            338
+          ],
+          "pixelCount": 4958
+        },
+        {
+          "bbox": [
+            246,
+            259,
+            133,
+            53
+          ],
+          "bboxCentre": [
+            312,
+            285
+          ],
+          "pixelCount": 4807
+        },
+        {
+          "bbox": [
+            394,
+            312,
+            132,
+            54
+          ],
+          "bboxCentre": [
+            459.5,
+            338.5
+          ],
+          "pixelCount": 4991
+        }
+      ],
+      "priorMeasuredSeatCentresTopOrigin": [
+        [
+          167.5,
+          338
+        ],
+        [
+          312,
+          285
+        ],
+        [
+          459,
+          338.5
+        ]
+      ],
+      "measuredSeatsCellBL": [
+        [
+          167,
+          289
+        ],
+        [
+          312,
+          342
+        ],
+        [
+          459.5,
+          288.5
+        ]
+      ],
+      "measuredSeatsFullSheetBL": [
+        [
+          167,
+          916
+        ],
+        [
+          312,
+          969
+        ],
+        [
+          459.5,
+          915.5
+        ]
+      ],
+      "fitToAuthoredControlsWithoutRotation": {
+        "scale": 0.9949033273884589,
+        "radians": 0,
+        "translation": [
+          1.7610757486438047,
+          3.728796822104016
+        ],
+        "residuals": [
+          {
+            "point": [
+              167.90993142251645,
+              291.25585843736866
+            ],
+            "dx": -0.09006857748354946,
+            "dy": -0.7441415626313415
+          },
+          {
+            "point": [
+              312.17091389384296,
+              343.98573478895696
+            ],
+            "dx": 0.17091389384296463,
+            "dy": -0.014265211043039017
+          },
+          {
+            "point": [
+              458.91915468364067,
+              290.7584067736744
+            ],
+            "dx": -0.0808453163593299,
+            "dy": 0.7584067736743805
+          }
+        ],
+        "maxResidual": 0.7627036118522208,
+        "rms": 0.6252974942037363
+      },
+      "fitToAuthoredControlsWithRotation": {
+        "scale": 0.9949145051001886,
+        "radians": -0.004740225210152013,
+        "translation": [
+          0.31559074390531583,
+          5.20415046750594
+        ],
+        "residuals": [
+          {
+            "point": [
+              167.82739965226222,
+              291.9436231894873
+            ],
+            "dx": -0.17260034773778443,
+            "dy": -0.05637681051268828
+          },
+          {
+            "point": [
+              312.33833548493016,
+              343.98966487325475
+            ],
+            "dx": 0.3383354849301554,
+            "dy": -0.010335126745246725
+          },
+          {
+            "point": [
+              458.83426486280774,
+              290.06671193725794
+            ],
+            "dx": -0.1657351371922573,
+            "dy": 0.066711937257935
+          }
+        ],
+        "maxResidual": 0.33849330157000707,
+        "rms": 0.24458506242436695
+      },
+      "fitToPriorMeasuredSeatsWithoutRotation": {
+        "scale": 0.9967259661664515,
+        "radians": 0,
+        "translation": [
+          1.024226917595172,
+          1.003491369982612
+        ],
+        "residuals": [
+          {
+            "point": [
+              167.47746326739258,
+              289.0572955920871
+            ],
+            "dx": -0.022536732607420618,
+            "dy": 0.05729559208708679
+          },
+          {
+            "point": [
+              312.00272836152806,
+              341.88377179890904
+            ],
+            "dx": 0.0027283615280566664,
+            "dy": -0.1162282010909621
+          },
+          {
+            "point": [
+              459.01980837107965,
+              288.5589326090039
+            ],
+            "dx": 0.019808371079648168,
+            "dy": 0.058932609003875314
+          }
+        ],
+        "maxResidual": 0.11626021970334006,
+        "rms": 0.08400903095011039
+      },
+      "fitConclusion": "A single uniform scale+translation preserves all three centres to max0.763px versus authored controls, below 1-2px annotation uncertainty; versus old measured faces max0.116px. Full rotated similarity residual0.338px adds no practically meaningful improvement and introduces unnecessary rotation.",
+      "straightBands": {
+        "status": "Conservative authored straight slices using existing old base/front fractions0.18/0.35 over a refreshed crop, not visually unique boundaries.",
+        "atAlphaGreaterThan16": {
+          "baseCellBL": [
+            185,
+            219.74
+          ],
+          "frontCellBL": [
+            219.74,
+            287.29
+          ],
+          "roofCellBL": [
+            287.29,
+            378
+          ]
+        },
+        "atAlphaGreaterThan1": {
+          "baseCellBL": [
+            182,
+            217.82
+          ],
+          "frontCellBL": [
+            217.82,
+            287.47
+          ],
+          "roofCellBL": [
+            287.47,
+            381
+          ]
+        },
+        "note": "If retaining authored absolute cuts instead of fractions, explicitly extend the old base lower bound to include new stone. The lower physical change is only approximately4px at alpha>16, versus Standard's approximately30px."
+      },
+      "cropGuidance": "Top-left cell alpha>1 crop[30,246,567,199] top-origin converts cellBL[30,182,567,199] and full-sheetBL[30,809,567,199]. alpha>16 crop[33,249,562,193] converts cellBL[33,185,562,193] or full-sheetBL[33,812,562,193]. Retain existing pipeline cutoff/padding convention; do not include remote alpha1 specks.",
+      "recommendation": "Adopt after native crop metadata and single uniform source-to-world fit are refreshed; retain existing three logical mounts and no rotation if possible. Required runtime placement checks remain root-owned."
+    }
+  ],
+  "overallDecision": "Both candidates improve source-style coherence. Seating layout passes measured similarity registration. Standard's foreground silhouette changed enough that runtime/collision validity is not established by this review. All exact transformation coefficients are measured-fit outputs; none are copied from generation prompts."
+}

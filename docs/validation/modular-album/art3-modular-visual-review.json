@@ -1,0 +1,331 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Codex art3_style, physical PNG inspection",
+  "method": "All12 exact final captures were physically opened with view_image at original detail after TurnHub replacement/feed lift; all3 original sketch PNGs and native TurnHub-v1 were physically opened. Hashes below bind that inspection to exact files. No Unity interaction, source changes or image edits performed by reviewer.",
+  "scope": "Six12-cell pose sheets (rest/turn90/max-recoil at1920x1080 and1024x768), six9-cell definition sheets covering54definitions. Source style comparisons are visual; numerical contact/sweep/test results belong to separate root validation.",
+  "referenceImages": [
+    {
+      "path": "docs/design/album-assembly-2026-10-17/art/01-towers.png",
+      "sha256": "C196824234FAEBEB4054827EA880CEF5862D57576E8F7F52825546498B79E649",
+      "inspected": true
+    },
+    {
+      "path": "docs/design/album-assembly-2026-10-17/art/02-weapon-parts.png",
+      "sha256": "C992257BB49D26A15B0601C742D137195104E16A1B8B92EDB1DB5D720D44064E",
+      "inspected": true
+    },
+    {
+      "path": "docs/design/album-assembly-2026-10-17/art/03-structures.png",
+      "sha256": "90F87C2008CF9C287077E5875D85FECC61345C0B98DAB68EA809F22977D1355F",
+      "inspected": true
+    }
+  ],
+  "additionalNativeSource": {
+    "path": "ArtSource/Notebook/NewStyle/TurnHub-v1.png",
+    "sha256": "6CB528ED48F39A23E532B5B219885F2BD1728E569BC12CCE72F8387D7E9F535D",
+    "inspected": true,
+    "observations": [
+      "Standalone ivory/navy cylindrical hub with dense ballpoint hatching and circular lip.",
+      "No wide disk plane or cream rectangle attached below its foot."
+    ]
+  },
+  "overallVerdict": "PASS_WITH_RESIDUALS",
+  "overallFindings": [
+    "Common warm ivory/navy pen-drawn material language now connects bases, weapons, ink accessories and buildings.",
+    "Old support-crop cream rectangle is absent from the inspected final assemblies.",
+    "No obvious detached primary weapon heads, missing corners or panel clipping in these12static captures.",
+    "Residual differences remain in foundation proportions, slow-field height, small-scale readability and some brass/texture density; this is not a claim of100percent sketch fidelity."
+  ],
+  "records": [
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-parts-rest-1920x1080.png",
+      "captureSha256": "4AEF62DDF01705BA7DC2C04509E514FAC8F3A80140106B8204CCC3E2C8DD5D50",
+      "sourcePath": "docs/design/album-assembly-2026-10-17/art/01-towers.png",
+      "sourceSha256": "C196824234FAEBEB4054827EA880CEF5862D57576E8F7F52825546498B79E649",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Seven weapon families remain identifiable: barrel bundle, pen nib, open mortar, five-nib fan, star disc, two stapler jaws and porous sponge.",
+        "New navy/ivory turn hub sits on the left disk; old cream rectangle from the support crop is absent.",
+        "Barricade wood/armor, workshop wrench roof/tools, generator glass/flywheel and blue grille field share the pen-drawn material vocabulary.",
+        "Three battery weapons occupy distinct seats; no obvious floating heads or cut-off contours at this capture scale."
+      ],
+      "residuals": [
+        "Standard base remains a broad regular tiled platform with a relatively small single weapon, compared with compact chipped masonry in01.",
+        "Slow field is a taller multi-tier assembly than the low ring in03.",
+        "Fine small accessories are much less prominent than the primary weapon silhouettes."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-parts-rest-1024x768.png",
+      "captureSha256": "FE8BCFD9B9D53AD46AB68208849B532BCFB30C78027EF3C794604869A3FB9F84",
+      "sourcePath": "docs/design/album-assembly-2026-10-17/art/01-towers.png",
+      "sourceSha256": "C196824234FAEBEB4054827EA880CEF5862D57576E8F7F52825546498B79E649",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "All12 cells fit inside their panels with visible labels and complete main silhouettes.",
+        "Pen nib, mortar mouth, fan tips, sponge cube and stapler fork remain distinct despite smaller render size.",
+        "New hub retains its round lip and foot instead of a rectangular cream crop.",
+        "All three battery seat silhouettes remain separately visible."
+      ],
+      "residuals": [
+        "Fine blue hatching merges into dark bands; tiny sights/magazines/feed motifs cannot be distinguished reliably at this scale.",
+        "Single weapon still occupies a small portion of the broad two-seat platform.",
+        "Slow field retains a taller tiered profile than original03."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-parts-turn90-1920x1080.png",
+      "captureSha256": "9E98FB3579E0AA73EB4F1F8541499C00DDDE13FF09D64F160C7EAB17CB693EB1",
+      "sourcePath": "docs/design/album-assembly-2026-10-17/art/01-towers.png",
+      "sourceSha256": "C196824234FAEBEB4054827EA880CEF5862D57576E8F7F52825546498B79E649",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Barrels, nib, mortar, fan, stapler and sponge turn left while their support hubs remain seated.",
+        "Rotated fan tips and sponge silhouette are whole; no visible rectangular support-crop remnant.",
+        "Three battery guns remain separate across the seats after turning.",
+        "Stationary barricade, repair post, ink generator and grille field preserve consistent material rendering."
+      ],
+      "residuals": [
+        "The ricochet disc reads as an upright oval in this pose, a consequence of rotating illustrated components.",
+        "Standard base remains wider/flatter and more regularly tiled than original01.",
+        "Small fitting contact quality is limited by visual sampling; numeric contact checks are separate evidence."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-parts-turn90-1024x768.png",
+      "captureSha256": "EB4FAFE69CFAADE214123C6ED7CE0CE82FFF61B3512B76B6511503BEF05407F7",
+      "sourcePath": "docs/design/album-assembly-2026-10-17/art/01-towers.png",
+      "sourceSha256": "C196824234FAEBEB4054827EA880CEF5862D57576E8F7F52825546498B79E649",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Turned left-facing muzzle/nib/fan/stapler/sponge remain inside panels.",
+        "The hubs appear connected to their seats; no obvious paper-coloured rectangle below the mechanism.",
+        "Battery's three guns and three disks remain separately readable."
+      ],
+      "residuals": [
+        "Hatch texture and tiny blue ink accessories merge at1024; large silhouettes carry recognition.",
+        "Ricochet disc is a narrow vertical oval at this angle.",
+        "Broad platform dominates the small single weapon."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-parts-max-recoil-1920x1080.png",
+      "captureSha256": "A80839B790907B46A05085B51139FB87AF4714E044CBD92B155961A1ADC20161",
+      "sourcePath": "docs/design/album-assembly-2026-10-17/art/01-towers.png",
+      "sourceSha256": "C196824234FAEBEB4054827EA880CEF5862D57576E8F7F52825546498B79E649",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Recoil shows compacted barrel/receiver relationships without obvious detached heads across seven families.",
+        "Fan head and star-disc head move nearer the receiver; sponge remains on its illustrated bracket.",
+        "Hub feet remain on the left mounting disk; old rectangular cropped surface is absent.",
+        "Battery mounts retain their individual seats; building silhouettes remain whole."
+      ],
+      "residuals": [
+        "Some recoiled assemblies read as densely stacked cylinders rather than the airy sketch mechanisms.",
+        "Standard platform remains visually broad and regularly tiled.",
+        "Fine contact pixels and exact keepout clearances are not established by this visual review."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-parts-max-recoil-1024x768.png",
+      "captureSha256": "5CD126C76F7687526FB471BD75BF4F045F88B23EB02948E5E818832E5E52AC64",
+      "sourcePath": "docs/design/album-assembly-2026-10-17/art/01-towers.png",
+      "sourceSha256": "C196824234FAEBEB4054827EA880CEF5862D57576E8F7F52825546498B79E649",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "All12 small panels contain complete main silhouettes in maximum recoil.",
+        "The seven weapon families retain distinctive head outlines and seated hubs.",
+        "Three battery guns remain distinct; workshop and generator retain recognizable roof/flywheel forms."
+      ],
+      "residuals": [
+        "Dense receiver/head detail loses separation at1024; very small accessories read as blue clusters.",
+        "Broad standard tile footprint and taller slow-field tiers still differ from the sketches.",
+        "This is a static pose check, not proof of every intermediate animation frame."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-variants-1-1920x1080.png",
+      "captureSha256": "50280BB6ED92005BCF2BA604196230A51ECD43FB150C63A4B4746AE7549B7809",
+      "sourcePath": "docs/design/album-assembly-2026-10-17/art/01-towers.png",
+      "sourceSha256": "C196824234FAEBEB4054827EA880CEF5862D57576E8F7F52825546498B79E649",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Inspected all9 definition cells and their selected-detail areas.",
+        "Heavy chipped stone, precision metal ring and battery stone distinguish foundation materials; the complete assembled foundations are whole.",
+        "Light/reinforced hull examples preserve navy braces and ivory panels; shield has the reference crown motif."
+      ],
+      "residuals": [
+        "Selected previews for four frame definitions show only thin lower bands rather than full foundation silhouettes; this is consistent with frame/hull splitting, but limits gallery readability.",
+        "Standard remains more regular/tiled than source01.",
+        "Heavy and precision gold fasteners remain brighter than new standard-base hardware."
+      ],
+      "definitionChecks": [
+        "frame.battery: three empty disks and stone body visible in complete assembly; selected lower band only.",
+        "frame.heavy: chipped square blocks and large plate; selected lower front band only.",
+        "frame.precision: ivory/navy round foundation and upright inner ring; selected lower strip only.",
+        "frame.standard: two-seat tiled platform whole; selected frame strip very thin.",
+        "hull.light: paired low pale curved panels with metal braces visible.",
+        "hull.reinforced: thick curved masonry/braces visibly heavier.",
+        "hull.standard: selected roof/top seat area visible as platform.",
+        "armor.front: crown shield visible at front and as isolated curved plate.",
+        "armor.none: no isolated fragment and full unarmored assembly shown."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-variants-2-1920x1080.png",
+      "captureSha256": "61133A836C339030901BD3CAB44EAD4E124732794AC25716264F67F94F10368D",
+      "sourcePath": "docs/design/album-assembly-2026-10-17/art/02-weapon-parts.png",
+      "sourceSha256": "C992257BB49D26A15B0601C742D137195104E16A1B8B92EDB1DB5D720D44064E",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Inspected all9 definition cells, including armor, both feeds, both turns and four mechanism families.",
+        "New ordinary feed detail visibly uses blue capsules and an ink-drop box; pointed bullets from old Accessories are absent.",
+        "Ordinary turn detail is a standalone navy/ivory cylinder, with no cream rectangular surface.",
+        "Sponge pores, fan nibs, gun barrel bundle and open mortar remain identifiable in composed and isolated views."
+      ],
+      "residuals": [
+        "Improved feed still uses warm gold belt capsules, unlike new blue ordinary-feed capsules.",
+        "Armor pair appears as two narrow upright strips at the front; silhouette differs from broader original armor panels.",
+        "Small ordinary feed appears as a compact blue cluster on the assembly facade."
+      ],
+      "definitionChecks": [
+        "armor.plate: two narrow upright cream side strips visible at facade and in isolated pair.",
+        "feed.boost: blue box and gold capsule belt distinct.",
+        "feed.standard: new blue capsule loop/drop box whole in detail; compact on facade.",
+        "turn.quick: toothed rear ring and new cylindrical hub both visible.",
+        "turn.standard: clean complete standalone hub and assembled lip/foot.",
+        "core.blotter: porous cube on axle bracket recognizable.",
+        "core.fan: five nibs and star fan mechanism recognizable.",
+        "core.gun: barrel bundle and gear receiver recognizable.",
+        "core.mortar: open dark muzzle and cradle recognizable."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-variants-3-1920x1080.png",
+      "captureSha256": "5272D5296912742435302668FE3B817C2646D65E5504B3BB51F4800E6659E5D7",
+      "sourcePath": "docs/design/album-assembly-2026-10-17/art/02-weapon-parts.png",
+      "sourceSha256": "C992257BB49D26A15B0601C742D137195104E16A1B8B92EDB1DB5D720D44064E",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Inspected all9 mechanism/head cells in composed and isolated whole-weapon views.",
+        "Piercer nib, ricochet star disc, stapler jaws, sponge cube, five-nib fan, gatling bundle, long pen and open mortar all retain complete contours.",
+        "New hub's ivory body and navy cavities connect the different weapon families visually."
+      ],
+      "residuals": [
+        "Illustrated weapons use dense small hatching and bright pin highlights compared with the looser pen sketch.",
+        "Isolated rest views are more vertically stacked than the diagonal machines shown in source02.",
+        "Standard foundation dominates each complete assembly footprint."
+      ],
+      "definitionChecks": [
+        "core.piercer: gear box and pen nib complete.",
+        "core.ricochet: complete star disc and drive body.",
+        "core.stapler: open parallel jaws and hinge distinct.",
+        "head.blotter: porous sponge cube has intact edges.",
+        "head.fan: five separated fountain nibs intact.",
+        "head.gun: four muzzle tubes and receiver rings intact.",
+        "head.long: longer nib barrel distinct from short.",
+        "head.mortar: wide straight cup visible.",
+        "head.piercer: nib tip and banded barrel complete."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-variants-4-1920x1080.png",
+      "captureSha256": "C9B7498CCBA95EFD0A5394BCA1047F23447FA811C2562D24C99628F35494339E",
+      "sourcePath": "docs/design/album-assembly-2026-10-17/art/02-weapon-parts.png",
+      "sourceSha256": "C992257BB49D26A15B0601C742D137195104E16A1B8B92EDB1DB5D720D44064E",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Inspected all9 head/sight/magazine cells.",
+        "Short nib and flared wide barrel differ visibly from their default heads; ricochet/stapler identities are retained.",
+        "Tracking eye and telescope glass remain blue; belt and drum add distinct left-side silhouettes.",
+        "No obvious clipped nib tips, cut-off stapler jaws or detached illustrated hub in these static views."
+      ],
+      "residuals": [
+        "Iron, scope and tracking sights remain very small in the complete assemblies despite readable blue forms in the larger whole-weapon detail.",
+        "Belt retains gold capsules rather than blue ink-cylinder treatment.",
+        "Scope/tracking details are not as prominent as their large reference module cards."
+      ],
+      "definitionChecks": [
+        "head.ricochet: star disc intact.",
+        "head.short: shorter narrow nib distinguishable.",
+        "head.stapler: open pair of jaws complete.",
+        "head.wide: flared muzzle distinct from straight mortar cup.",
+        "sight.iron: small top fitting visible in whole-weapon view.",
+        "sight.scope: small blue/ivory scope fitting visible.",
+        "sight.tracking: blue eyeball fitting on receiver visible.",
+        "magazine.belt: warm capsule belt extends from receiver side.",
+        "magazine.drum: round opaque pale drum visible at receiver side."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-variants-5-1920x1080.png",
+      "captureSha256": "B3BAA7A8AC84F1BB2C527139CFD5A05E650F66E76B82C31032E7DC8505CBD582",
+      "sourcePath": "docs/design/album-assembly-2026-10-17/art/03-structures.png",
+      "sourceSha256": "90F87C2008CF9C287077E5875D85FECC61345C0B98DAB68EA809F22977D1355F",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Inspected all9 cells, covering ordinary cassette, two triggers, four building sites and pump/repair functions.",
+        "Repair roof, tools, wooden posts and stone plinth share reference03's distinct material divisions.",
+        "Generator shows blue glass reservoir, brass flywheel and pipe; barricade retains wood and paired blue armor.",
+        "Site/function detail areas show complete isolated building pieces without the old repair crop-overlap artifact."
+      ],
+      "residuals": [
+        "Cassette and trigger variants are subtle at full assembly size; their source detail exceeds readable game scale.",
+        "Slow-field site is a tall mechanical pedestal/ring rather than the low stone pan in original03.",
+        "Generator brass remains brighter/more extensive than new standard foundation fasteners."
+      ],
+      "definitionChecks": [
+        "magazine.standard: small ordinary cassette included in complete weapon.",
+        "trigger.burst: small side component differs from ordinary trigger.",
+        "trigger.standard: small lever fitting included without obvious separated fragment.",
+        "site.generator: rectangular chipped stone site and corner pegs complete.",
+        "site.repair: square stone site/pegs complete and workshop seated.",
+        "site.slow: round mechanical base with raised collar complete.",
+        "site.wall: narrow stone footing/pegs complete under barricade.",
+        "function.generator: pump/flywheel/reservoir/pipe complete.",
+        "function.repair: roofless open workshop detail and assembled roofed building complete."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-variants-6-1920x1080.png",
+      "captureSha256": "52CABD087C798C8904B8DDCBE1CE5A2C356D7FC01C630D6DD19730D1F713D1C9",
+      "sourcePath": "docs/design/album-assembly-2026-10-17/art/03-structures.png",
+      "sourceSha256": "90F87C2008CF9C287077E5875D85FECC61345C0B98DAB68EA809F22977D1355F",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Inspected all9 support-building function/shell/utility cells.",
+        "Ink pool detail visibly shows a blue spiral; wall section retains horizontal woodgrain and dark metal frame.",
+        "Light shell is an open wood/braced front; reinforced shell is a solid cream/navy front; standard paired plates and protective panel remain distinct.",
+        "Economy pump adds small pipe/gauge; range utility places an articulated claw beside the workshop; neutral utility explicitly has no isolated fragment."
+      ],
+      "residuals": [
+        "Assembled slow field is taller and more mechanically tiered than original03's low broad ring.",
+        "Brass pivots and bands are brighter on some utility parts than on new foundation hardware.",
+        "The claw arm has a separate small stone foot beside the workshop, more visibly separated than the compact sketch crane."
+      ],
+      "definitionChecks": [
+        "function.slow: blue spiral ink basin in isolated detail and mesh above in assembly.",
+        "function.wall: framed horizontal wooden section complete.",
+        "shell.light: open wood/braced front plus paired plates.",
+        "shell.reinforced: solid riveted curved front plus paired plates.",
+        "shell.standard: two separate riveted navy/ivory plates.",
+        "utility.armor: compact trapezoidal front protection panel.",
+        "utility.economy: flywheel and small pipe/gauge parts shown; assembly complete.",
+        "utility.none: explicitly neutral/no separate fragment, complete wall assembly retained.",
+        "utility.range: articulated claw on small stone foot beside workshop; full arm silhouette intact."
+      ]
+    }
+  ]
+}

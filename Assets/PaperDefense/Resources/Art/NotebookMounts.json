@@ -1,6 +1,6 @@
 {
     "schemaVersion": 2,
-    "revision": "modular-full-catalog-2026-10-22-v7",
+    "revision": "modular-full-catalog-2026-10-24-v8",
     "foundations": [
         {
             "id": "chassis.standard",
@@ -379,24 +379,24 @@
                     "spriteId": "part.pilot.sight",
                     "componentId": "sight.iron",
                     "canvas": {
-                        "x": 347.0,
-                        "y": 346.0
+                        "x": 508.0,
+                        "y": 419.0
                     },
                     "attach": {
-                        "x": 173.0,
-                        "y": 42.0
+                        "x": 257.5,
+                        "y": 15.5
                     },
                     "offset": {
-                        "x": -15.0,
-                        "y": 119.0
+                        "x": -14.967499732971192,
+                        "y": 117.60250091552735
                     },
                     "trim": {
                         "x": 0.0,
                         "y": 0.0,
-                        "width": 347.0,
-                        "height": 346.0
+                        "width": 508.0,
+                        "height": 419.0
                     },
-                    "scale": 0.06499999761581421,
+                    "scale": 0.04439960792660713,
                     "radians": 0.0,
                     "group": 1,
                     "layer": 4
@@ -406,12 +406,12 @@
                     "spriteId": "part.pilot.magazine",
                     "componentId": "magazine.standard",
                     "canvas": {
-                        "x": 273.0,
-                        "y": 452.0
+                        "x": 375.0,
+                        "y": 461.0
                     },
                     "attach": {
-                        "x": 137.0,
-                        "y": 414.0
+                        "x": 38.5,
+                        "y": 169.5
                     },
                     "offset": {
                         "x": -32.0,
@@ -420,10 +420,10 @@
                     "trim": {
                         "x": 0.0,
                         "y": 0.0,
-                        "width": 273.0,
-                        "height": 452.0
+                        "width": 375.0,
+                        "height": 461.0
                     },
-                    "scale": 0.10999999940395355,
+                    "scale": 0.08008000254631043,
                     "radians": 0.0,
                     "group": 1,
                     "layer": 5
@@ -433,12 +433,12 @@
                     "spriteId": "part.pilot.trigger",
                     "componentId": "trigger.standard",
                     "canvas": {
-                        "x": 343.0,
-                        "y": 386.0
+                        "x": 345.0,
+                        "y": 423.0
                     },
                     "attach": {
-                        "x": 170.0,
-                        "y": 315.0
+                        "x": 149.5,
+                        "y": 123.5
                     },
                     "offset": {
                         "x": 20.0,
@@ -447,10 +447,10 @@
                     "trim": {
                         "x": 0.0,
                         "y": 0.0,
-                        "width": 343.0,
-                        "height": 386.0
+                        "width": 345.0,
+                        "height": 423.0
                     },
-                    "scale": 0.06499999761581421,
+                    "scale": 0.06462319195270539,
                     "radians": 0.0,
                     "group": 1,
                     "layer": 6
@@ -460,12 +460,12 @@
                     "spriteId": "part.pilot.bearing",
                     "componentId": "turn.standard",
                     "canvas": {
-                        "x": 505.0,
-                        "y": 340.0
+                        "x": 512.0,
+                        "y": 395.0
                     },
                     "attach": {
-                        "x": 252.0,
-                        "y": 170.0
+                        "x": 260.5,
+                        "y": 214.5
                     },
                     "offset": {
                         "x": 0.0,
@@ -474,10 +474,10 @@
                     "trim": {
                         "x": 0.0,
                         "y": 0.0,
-                        "width": 505.0,
-                        "height": 340.0
+                        "width": 512.0,
+                        "height": 395.0
                     },
-                    "scale": 0.30000001192092898,
+                    "scale": 0.2958984375,
                     "radians": 0.0,
                     "group": 0,
                     "layer": 0
@@ -494,11 +494,11 @@
     },
     "fits": {
         "SchemaVersion": 1,
-        "Revision": "modular-full-catalog-2026-10-22-v7",
+        "Revision": "modular-full-catalog-2026-10-24-v8",
         "Parts": [
             {
                 "Id": "frame.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -507,7 +507,7 @@
             },
             {
                 "Id": "frame.heavy",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -516,7 +516,7 @@
             },
             {
                 "Id": "frame.precision",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -525,7 +525,7 @@
             },
             {
                 "Id": "frame.battery",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -534,7 +534,7 @@
             },
             {
                 "Id": "hull.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Hull",
                 "ExpectedSocketType": "assembly.Hull",
                 "Revision": 1,
@@ -543,7 +543,7 @@
             },
             {
                 "Id": "hull.light",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Hull",
                 "ExpectedSocketType": "assembly.Hull",
                 "Revision": 1,
@@ -552,7 +552,7 @@
             },
             {
                 "Id": "hull.reinforced",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Hull",
                 "ExpectedSocketType": "assembly.Hull",
                 "Revision": 1,
@@ -561,7 +561,7 @@
             },
             {
                 "Id": "armor.none",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Armor",
                 "ExpectedSocketType": "assembly.Armor",
                 "Revision": 1,
@@ -570,7 +570,7 @@
             },
             {
                 "Id": "armor.plate",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Armor",
                 "ExpectedSocketType": "assembly.Armor",
                 "Revision": 1,
@@ -579,7 +579,7 @@
             },
             {
                 "Id": "armor.front",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Armor",
                 "ExpectedSocketType": "assembly.Armor",
                 "Revision": 1,
@@ -588,7 +588,7 @@
             },
             {
                 "Id": "feed.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Feed",
                 "ExpectedSocketType": "assembly.Feed",
                 "Revision": 1,
@@ -597,7 +597,7 @@
             },
             {
                 "Id": "feed.boost",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Feed",
                 "ExpectedSocketType": "assembly.Feed",
                 "Revision": 1,
@@ -606,7 +606,7 @@
             },
             {
                 "Id": "turn.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Turn",
                 "ExpectedSocketType": "assembly.Turn",
                 "Revision": 1,
@@ -615,7 +615,7 @@
             },
             {
                 "Id": "turn.quick",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Turn",
                 "ExpectedSocketType": "assembly.Turn",
                 "Revision": 1,
@@ -624,7 +624,7 @@
             },
             {
                 "Id": "core.gun",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -633,7 +633,7 @@
             },
             {
                 "Id": "core.piercer",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -642,7 +642,7 @@
             },
             {
                 "Id": "core.mortar",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -651,7 +651,7 @@
             },
             {
                 "Id": "core.fan",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -660,7 +660,7 @@
             },
             {
                 "Id": "core.ricochet",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -669,7 +669,7 @@
             },
             {
                 "Id": "core.stapler",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -678,7 +678,7 @@
             },
             {
                 "Id": "core.blotter",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -687,7 +687,7 @@
             },
             {
                 "Id": "head.gun",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -696,7 +696,7 @@
             },
             {
                 "Id": "head.piercer",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -705,7 +705,7 @@
             },
             {
                 "Id": "head.mortar",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -714,7 +714,7 @@
             },
             {
                 "Id": "head.fan",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -723,7 +723,7 @@
             },
             {
                 "Id": "head.ricochet",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -732,7 +732,7 @@
             },
             {
                 "Id": "head.stapler",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -741,7 +741,7 @@
             },
             {
                 "Id": "head.blotter",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -750,7 +750,7 @@
             },
             {
                 "Id": "head.short",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -759,7 +759,7 @@
             },
             {
                 "Id": "head.long",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -768,7 +768,7 @@
             },
             {
                 "Id": "head.wide",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -777,7 +777,7 @@
             },
             {
                 "Id": "sight.iron",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Sight",
                 "ExpectedSocketType": "assembly.Sight",
                 "Revision": 1,
@@ -786,7 +786,7 @@
             },
             {
                 "Id": "sight.scope",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Sight",
                 "ExpectedSocketType": "assembly.Sight",
                 "Revision": 1,
@@ -795,7 +795,7 @@
             },
             {
                 "Id": "sight.tracking",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Sight",
                 "ExpectedSocketType": "assembly.Sight",
                 "Revision": 1,
@@ -804,7 +804,7 @@
             },
             {
                 "Id": "magazine.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Magazine",
                 "ExpectedSocketType": "assembly.Magazine",
                 "Revision": 1,
@@ -813,7 +813,7 @@
             },
             {
                 "Id": "magazine.drum",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Magazine",
                 "ExpectedSocketType": "assembly.Magazine",
                 "Revision": 1,
@@ -822,7 +822,7 @@
             },
             {
                 "Id": "magazine.belt",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Magazine",
                 "ExpectedSocketType": "assembly.Magazine",
                 "Revision": 1,
@@ -831,7 +831,7 @@
             },
             {
                 "Id": "trigger.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Trigger",
                 "ExpectedSocketType": "assembly.Trigger",
                 "Revision": 1,
@@ -840,7 +840,7 @@
             },
             {
                 "Id": "trigger.burst",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Trigger",
                 "ExpectedSocketType": "assembly.Trigger",
                 "Revision": 1,
@@ -849,7 +849,7 @@
             },
             {
                 "Id": "site.wall",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -858,7 +858,7 @@
             },
             {
                 "Id": "site.slow",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -867,7 +867,7 @@
             },
             {
                 "Id": "site.repair",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -876,7 +876,7 @@
             },
             {
                 "Id": "site.generator",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -885,7 +885,7 @@
             },
             {
                 "Id": "function.wall",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -894,7 +894,7 @@
             },
             {
                 "Id": "function.slow",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -903,7 +903,7 @@
             },
             {
                 "Id": "function.repair",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -912,7 +912,7 @@
             },
             {
                 "Id": "function.generator",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -921,7 +921,7 @@
             },
             {
                 "Id": "shell.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Shell",
                 "ExpectedSocketType": "assembly.Shell",
                 "Revision": 1,
@@ -930,7 +930,7 @@
             },
             {
                 "Id": "shell.light",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Shell",
                 "ExpectedSocketType": "assembly.Shell",
                 "Revision": 1,
@@ -939,7 +939,7 @@
             },
             {
                 "Id": "shell.reinforced",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Shell",
                 "ExpectedSocketType": "assembly.Shell",
                 "Revision": 1,
@@ -948,7 +948,7 @@
             },
             {
                 "Id": "utility.none",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,
@@ -957,7 +957,7 @@
             },
             {
                 "Id": "utility.armor",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,
@@ -966,7 +966,7 @@
             },
             {
                 "Id": "utility.range",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,
@@ -975,7 +975,7 @@
             },
             {
                 "Id": "utility.economy",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,
@@ -1005,33 +1005,33 @@
                 ],
                 "Keepouts": [
                     {
-                        "X": -0.4715873599052429,
-                        "Y": -0.2538330554962158,
-                        "Width": 0.943336009979248,
-                        "Height": 0.058997735381126407,
+                        "X": -0.4703320860862732,
+                        "Y": -0.27266210317611697,
+                        "Width": 0.9408254623413086,
+                        "Height": 0.07782678306102753,
                         "ArmorOnly": false,
                         "PartId": "frame.standard"
                     },
                     {
-                        "X": -0.4715873599052429,
+                        "X": -0.4703320860862732,
                         "Y": -0.19483532011508943,
-                        "Width": 0.943336009979248,
+                        "Width": 0.9408254623413086,
                         "Height": 0.07970969378948212,
                         "ArmorOnly": false,
                         "PartId": "hull.standard"
                     },
                     {
-                        "X": -0.4715873599052429,
+                        "X": -0.4703320860862732,
                         "Y": -0.19483532011508943,
-                        "Width": 0.943336009979248,
+                        "Width": 0.9408254623413086,
                         "Height": 0.07970969378948212,
                         "ArmorOnly": false,
                         "PartId": "hull.light"
                     },
                     {
-                        "X": -0.4715873599052429,
+                        "X": -0.4703320860862732,
                         "Y": -0.19483532011508943,
-                        "Width": 0.943336009979248,
+                        "Width": 0.9408254623413086,
                         "Height": 0.07970969378948212,
                         "ArmorOnly": false,
                         "PartId": "hull.reinforced"
@@ -1053,26 +1053,26 @@
                         "PartId": "hull.reinforced"
                     },
                     {
-                        "X": -0.06750000268220902,
+                        "X": -0.05200781300663948,
                         "Y": -0.21799999475479127,
-                        "Width": 0.13552500307559968,
+                        "Width": 0.1045406237244606,
                         "Height": 0.134224995970726,
                         "ArmorOnly": false,
                         "PartId": "armor.plate"
                     },
                     {
                         "X": -0.05089285597205162,
-                        "Y": -0.2538330554962158,
+                        "Y": -0.27266210317611697,
                         "Width": 0.10875000059604645,
-                        "Height": 0.13500002026557923,
+                        "Height": 0.13499999046325684,
                         "ArmorOnly": false,
                         "PartId": "armor.front"
                     },
                     {
                         "X": -0.03999999910593033,
-                        "Y": -0.2475000023841858,
-                        "Width": 0.08040999621152878,
-                        "Height": 0.068340003490448,
+                        "Y": -0.20749999582767487,
+                        "Width": 0.08041000366210938,
+                        "Height": 0.06030750274658203,
                         "ArmorOnly": false,
                         "PartId": "feed.standard"
                     },
@@ -1114,34 +1114,34 @@
                 ],
                 "Keepouts": [
                     {
-                        "X": -0.8754785060882568,
-                        "Y": -0.2984210252761841,
-                        "Width": 1.754067063331604,
-                        "Height": 0.10748320817947388,
+                        "X": -0.8785885572433472,
+                        "Y": -0.3108612298965454,
+                        "Width": 1.7602871656417847,
+                        "Height": 0.11028224229812622,
                         "ArmorOnly": false,
                         "PartId": "frame.battery"
                     },
                     {
-                        "X": -0.8754785060882568,
-                        "Y": -0.1909378170967102,
-                        "Width": 1.754067063331604,
-                        "Height": 0.10151201486587525,
+                        "X": -0.8785885572433472,
+                        "Y": -0.20057892799377442,
+                        "Width": 1.7602871656417847,
+                        "Height": 0.1041555404663086,
                         "ArmorOnly": false,
                         "PartId": "hull.standard"
                     },
                     {
-                        "X": -0.8754785060882568,
-                        "Y": -0.1909378170967102,
-                        "Width": 1.754067063331604,
-                        "Height": 0.10151201486587525,
+                        "X": -0.8785885572433472,
+                        "Y": -0.20057892799377442,
+                        "Width": 1.7602871656417847,
+                        "Height": 0.1041555404663086,
                         "ArmorOnly": false,
                         "PartId": "hull.light"
                     },
                     {
-                        "X": -0.8754785060882568,
-                        "Y": -0.1909378170967102,
-                        "Width": 1.754067063331604,
-                        "Height": 0.10151201486587525,
+                        "X": -0.8785885572433472,
+                        "Y": -0.20057892799377442,
+                        "Width": 1.7602871656417847,
+                        "Height": 0.1041555404663086,
                         "ArmorOnly": false,
                         "PartId": "hull.reinforced"
                     },
@@ -1162,26 +1162,26 @@
                         "PartId": "hull.reinforced"
                     },
                     {
-                        "X": -0.06750000268220902,
+                        "X": -0.05200781300663948,
                         "Y": -0.21799999475479127,
-                        "Width": 0.13552500307559968,
+                        "Width": 0.1045406237244606,
                         "Height": 0.134224995970726,
                         "ArmorOnly": false,
                         "PartId": "armor.plate"
                     },
                     {
                         "X": -0.05089285597205162,
-                        "Y": -0.2538330554962158,
+                        "Y": -0.27266210317611697,
                         "Width": 0.10875000059604645,
-                        "Height": 0.13500002026557923,
+                        "Height": 0.13499999046325684,
                         "ArmorOnly": false,
                         "PartId": "armor.front"
                     },
                     {
                         "X": -0.03999999910593033,
-                        "Y": -0.2475000023841858,
-                        "Width": 0.08040999621152878,
-                        "Height": 0.068340003490448,
+                        "Y": -0.20749999582767487,
+                        "Width": 0.08041000366210938,
+                        "Height": 0.06030750274658203,
                         "ArmorOnly": false,
                         "PartId": "feed.standard"
                     },
@@ -1264,26 +1264,26 @@
                         "PartId": "hull.reinforced"
                     },
                     {
-                        "X": -0.06750000268220902,
+                        "X": -0.05200781300663948,
                         "Y": -0.21799999475479127,
-                        "Width": 0.13552500307559968,
+                        "Width": 0.1045406237244606,
                         "Height": 0.134224995970726,
                         "ArmorOnly": false,
                         "PartId": "armor.plate"
                     },
                     {
                         "X": -0.05089285597205162,
-                        "Y": -0.2538330554962158,
+                        "Y": -0.27266210317611697,
                         "Width": 0.10875000059604645,
-                        "Height": 0.13500002026557923,
+                        "Height": 0.13499999046325684,
                         "ArmorOnly": false,
                         "PartId": "armor.front"
                     },
                     {
                         "X": -0.03999999910593033,
-                        "Y": -0.2475000023841858,
-                        "Width": 0.08040999621152878,
-                        "Height": 0.068340003490448,
+                        "Y": -0.20749999582767487,
+                        "Width": 0.08041000366210938,
+                        "Height": 0.06030750274658203,
                         "ArmorOnly": false,
                         "PartId": "feed.standard"
                     },
@@ -1359,26 +1359,26 @@
                         "PartId": "hull.reinforced"
                     },
                     {
-                        "X": -0.06750000268220902,
+                        "X": -0.05200781300663948,
                         "Y": -0.21799999475479127,
-                        "Width": 0.13552500307559968,
+                        "Width": 0.1045406237244606,
                         "Height": 0.134224995970726,
                         "ArmorOnly": false,
                         "PartId": "armor.plate"
                     },
                     {
                         "X": -0.05089285597205162,
-                        "Y": -0.2538330554962158,
+                        "Y": -0.27266210317611697,
                         "Width": 0.10875000059604645,
-                        "Height": 0.13500002026557923,
+                        "Height": 0.13499999046325684,
                         "ArmorOnly": false,
                         "PartId": "armor.front"
                     },
                     {
                         "X": -0.03999999910593033,
-                        "Y": -0.2475000023841858,
-                        "Width": 0.08040999621152878,
-                        "Height": 0.068340003490448,
+                        "Y": -0.20749999582767487,
+                        "Width": 0.08041000366210938,
+                        "Height": 0.06030750274658203,
                         "ArmorOnly": false,
                         "PartId": "feed.standard"
                     },
@@ -1565,20 +1565,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.0016357800923287869
+                                "X": -0.03253360837697983,
+                                "Y": 0.0024297682102769615
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.0016357800923287869
+                                "X": -0.004738742485642433,
+                                "Y": 0.0024297682102769615
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.029350541532039644
+                                "X": -0.004738742485642433,
+                                "Y": 0.025355059653520585
                             },
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.029350541532039644
+                                "X": -0.03253360837697983,
+                                "Y": 0.025355059653520585
                             }
                         ]
                     },
@@ -1628,20 +1628,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.058005064725875857,
-                                "Y": -0.036119621247053149
+                                "X": -0.04323340579867363,
+                                "Y": 0.003273097798228264
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": -0.036119621247053149
+                                "X": -0.006226986646652222,
+                                "Y": 0.003273097798228264
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": 0.025151075795292856
+                                "X": -0.006226986646652222,
+                                "Y": 0.04876632243394852
                             },
                             {
-                                "X": -0.058005064725875857,
-                                "Y": 0.025151075795292856
+                                "X": -0.04323340579867363,
+                                "Y": 0.04876632243394852
                             }
                         ]
                     },
@@ -1691,20 +1691,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": 0.011029218323528767,
-                                "Y": -0.005231648683547974
+                                "X": 0.012740698643028736,
+                                "Y": 0.010164938867092133
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": -0.005231648683547974
+                                "X": 0.04021516069769859,
+                                "Y": 0.010164938867092133
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": 0.02568713203072548
+                                "X": 0.04021516069769859,
+                                "Y": 0.04385101795196533
                             },
                             {
-                                "X": 0.011029218323528767,
-                                "Y": 0.02568713203072548
+                                "X": 0.012740698643028736,
+                                "Y": 0.04385101795196533
                             }
                         ]
                     },
@@ -1733,20 +1733,20 @@
                         "Motion": "fixed",
                         "Points": [
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.15800000727176667
+                                "X": -0.08390703797340393,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.15800000727176667
+                                "X": 0.08512972295284271,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.023750007152557374
+                                "X": 0.08512972295284271,
+                                "Y": -0.02335137128829956
                             },
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.023750007152557374
+                                "X": -0.08390703797340393,
+                                "Y": -0.02335137128829956
                             }
                         ]
                     },
@@ -1775,20 +1775,20 @@
                         "Motion": "fixed",
                         "Points": [
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.15800000727176667
+                                "X": -0.08390703797340393,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.15800000727176667
+                                "X": 0.08512972295284271,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.023750007152557374
+                                "X": 0.08512972295284271,
+                                "Y": -0.02335137128829956
                             },
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.023750007152557374
+                                "X": -0.08390703797340393,
+                                "Y": -0.02335137128829956
                             }
                         ]
                     }
@@ -1953,20 +1953,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.0016357800923287869
+                                "X": -0.03253360837697983,
+                                "Y": 0.0024297682102769615
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.0016357800923287869
+                                "X": -0.004738742485642433,
+                                "Y": 0.0024297682102769615
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.029350541532039644
+                                "X": -0.004738742485642433,
+                                "Y": 0.025355059653520585
                             },
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.029350541532039644
+                                "X": -0.03253360837697983,
+                                "Y": 0.025355059653520585
                             }
                         ]
                     },
@@ -2016,20 +2016,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.058005064725875857,
-                                "Y": -0.036119621247053149
+                                "X": -0.04323340579867363,
+                                "Y": 0.003273097798228264
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": -0.036119621247053149
+                                "X": -0.006226986646652222,
+                                "Y": 0.003273097798228264
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": 0.025151075795292856
+                                "X": -0.006226986646652222,
+                                "Y": 0.04876632243394852
                             },
                             {
-                                "X": -0.058005064725875857,
-                                "Y": 0.025151075795292856
+                                "X": -0.04323340579867363,
+                                "Y": 0.04876632243394852
                             }
                         ]
                     },
@@ -2037,20 +2037,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": 0.011029218323528767,
-                                "Y": -0.005231648683547974
+                                "X": 0.012740698643028736,
+                                "Y": 0.010164938867092133
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": -0.005231648683547974
+                                "X": 0.04021516069769859,
+                                "Y": 0.010164938867092133
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": 0.02568713203072548
+                                "X": 0.04021516069769859,
+                                "Y": 0.04385101795196533
                             },
                             {
-                                "X": 0.011029218323528767,
-                                "Y": 0.02568713203072548
+                                "X": 0.012740698643028736,
+                                "Y": 0.04385101795196533
                             }
                         ]
                     },
@@ -2058,20 +2058,20 @@
                         "Motion": "fixed",
                         "Points": [
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.15800000727176667
+                                "X": -0.08390703797340393,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.15800000727176667
+                                "X": 0.08512972295284271,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.023750007152557374
+                                "X": 0.08512972295284271,
+                                "Y": -0.02335137128829956
                             },
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.023750007152557374
+                                "X": -0.08390703797340393,
+                                "Y": -0.02335137128829956
                             }
                         ]
                     },
@@ -2100,20 +2100,20 @@
                         "Motion": "fixed",
                         "Points": [
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.15800000727176667
+                                "X": -0.08390703797340393,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.15800000727176667
+                                "X": 0.08512972295284271,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.023750007152557374
+                                "X": 0.08512972295284271,
+                                "Y": -0.02335137128829956
                             },
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.023750007152557374
+                                "X": -0.08390703797340393,
+                                "Y": -0.02335137128829956
                             }
                         ]
                     }
@@ -2253,20 +2253,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.0016357800923287869
+                                "X": -0.03253360837697983,
+                                "Y": 0.0024297682102769615
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.0016357800923287869
+                                "X": -0.004738742485642433,
+                                "Y": 0.0024297682102769615
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.029350541532039644
+                                "X": -0.004738742485642433,
+                                "Y": 0.025355059653520585
                             },
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.029350541532039644
+                                "X": -0.03253360837697983,
+                                "Y": 0.025355059653520585
                             }
                         ]
                     },
@@ -2316,20 +2316,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.058005064725875857,
-                                "Y": -0.036119621247053149
+                                "X": -0.04323340579867363,
+                                "Y": 0.003273097798228264
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": -0.036119621247053149
+                                "X": -0.006226986646652222,
+                                "Y": 0.003273097798228264
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": 0.025151075795292856
+                                "X": -0.006226986646652222,
+                                "Y": 0.04876632243394852
                             },
                             {
-                                "X": -0.058005064725875857,
-                                "Y": 0.025151075795292856
+                                "X": -0.04323340579867363,
+                                "Y": 0.04876632243394852
                             }
                         ]
                     },
@@ -2337,20 +2337,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": 0.011029218323528767,
-                                "Y": -0.005231648683547974
+                                "X": 0.012740698643028736,
+                                "Y": 0.010164938867092133
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": -0.005231648683547974
+                                "X": 0.04021516069769859,
+                                "Y": 0.010164938867092133
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": 0.02568713203072548
+                                "X": 0.04021516069769859,
+                                "Y": 0.04385101795196533
                             },
                             {
-                                "X": 0.011029218323528767,
-                                "Y": 0.02568713203072548
+                                "X": 0.012740698643028736,
+                                "Y": 0.04385101795196533
                             }
                         ]
                     },
@@ -2358,20 +2358,20 @@
                         "Motion": "fixed",
                         "Points": [
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.15800000727176667
+                                "X": -0.08390703797340393,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.15800000727176667
+                                "X": 0.08512972295284271,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.023750007152557374
+                                "X": 0.08512972295284271,
+                                "Y": -0.02335137128829956
                             },
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.023750007152557374
+                                "X": -0.08390703797340393,
+                                "Y": -0.02335137128829956
                             }
                         ]
                     },
@@ -2400,20 +2400,20 @@
                         "Motion": "fixed",
                         "Points": [
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.15800000727176667
+                                "X": -0.08390703797340393,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.15800000727176667
+                                "X": 0.08512972295284271,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.023750007152557374
+                                "X": 0.08512972295284271,
+                                "Y": -0.02335137128829956
                             },
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.023750007152557374
+                                "X": -0.08390703797340393,
+                                "Y": -0.02335137128829956
                             }
                         ]
                     }
@@ -2524,20 +2524,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.0016357800923287869
+                                "X": -0.03253360837697983,
+                                "Y": 0.0024297682102769615
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.0016357800923287869
+                                "X": -0.004738742485642433,
+                                "Y": 0.0024297682102769615
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.029350541532039644
+                                "X": -0.004738742485642433,
+                                "Y": 0.025355059653520585
                             },
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.029350541532039644
+                                "X": -0.03253360837697983,
+                                "Y": 0.025355059653520585
                             }
                         ]
                     },
@@ -2566,20 +2566,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.058005064725875857,
-                                "Y": -0.036119621247053149
+                                "X": -0.04323340579867363,
+                                "Y": 0.003273097798228264
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": -0.036119621247053149
+                                "X": -0.006226986646652222,
+                                "Y": 0.003273097798228264
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": 0.025151075795292856
+                                "X": -0.006226986646652222,
+                                "Y": 0.04876632243394852
                             },
                             {
-                                "X": -0.058005064725875857,
-                                "Y": 0.025151075795292856
+                                "X": -0.04323340579867363,
+                                "Y": 0.04876632243394852
                             }
                         ]
                     },
@@ -2587,20 +2587,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": 0.011029218323528767,
-                                "Y": -0.005231648683547974
+                                "X": 0.012740698643028736,
+                                "Y": 0.010164938867092133
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": -0.005231648683547974
+                                "X": 0.04021516069769859,
+                                "Y": 0.010164938867092133
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": 0.02568713203072548
+                                "X": 0.04021516069769859,
+                                "Y": 0.04385101795196533
                             },
                             {
-                                "X": 0.011029218323528767,
-                                "Y": 0.02568713203072548
+                                "X": 0.012740698643028736,
+                                "Y": 0.04385101795196533
                             }
                         ]
                     },
@@ -2608,20 +2608,20 @@
                         "Motion": "fixed",
                         "Points": [
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.15800000727176667
+                                "X": -0.08390703797340393,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.15800000727176667
+                                "X": 0.08512972295284271,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.023750007152557374
+                                "X": 0.08512972295284271,
+                                "Y": -0.02335137128829956
                             },
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.023750007152557374
+                                "X": -0.08390703797340393,
+                                "Y": -0.02335137128829956
                             }
                         ]
                     },
@@ -2650,20 +2650,20 @@
                         "Motion": "fixed",
                         "Points": [
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.15800000727176667
+                                "X": -0.08390703797340393,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.15800000727176667
+                                "X": 0.08512972295284271,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.023750007152557374
+                                "X": 0.08512972295284271,
+                                "Y": -0.02335137128829956
                             },
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.023750007152557374
+                                "X": -0.08390703797340393,
+                                "Y": -0.02335137128829956
                             }
                         ]
                     }
@@ -2778,20 +2778,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.0016357800923287869
+                                "X": -0.03253360837697983,
+                                "Y": 0.0024297682102769615
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.0016357800923287869
+                                "X": -0.004738742485642433,
+                                "Y": 0.0024297682102769615
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.029350541532039644
+                                "X": -0.004738742485642433,
+                                "Y": 0.025355059653520585
                             },
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.029350541532039644
+                                "X": -0.03253360837697983,
+                                "Y": 0.025355059653520585
                             }
                         ]
                     },
@@ -2841,20 +2841,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.058005064725875857,
-                                "Y": -0.036119621247053149
+                                "X": -0.04323340579867363,
+                                "Y": 0.003273097798228264
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": -0.036119621247053149
+                                "X": -0.006226986646652222,
+                                "Y": 0.003273097798228264
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": 0.025151075795292856
+                                "X": -0.006226986646652222,
+                                "Y": 0.04876632243394852
                             },
                             {
-                                "X": -0.058005064725875857,
-                                "Y": 0.025151075795292856
+                                "X": -0.04323340579867363,
+                                "Y": 0.04876632243394852
                             }
                         ]
                     },
@@ -2862,20 +2862,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": 0.011029218323528767,
-                                "Y": -0.005231648683547974
+                                "X": 0.012740698643028736,
+                                "Y": 0.010164938867092133
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": -0.005231648683547974
+                                "X": 0.04021516069769859,
+                                "Y": 0.010164938867092133
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": 0.02568713203072548
+                                "X": 0.04021516069769859,
+                                "Y": 0.04385101795196533
                             },
                             {
-                                "X": 0.011029218323528767,
-                                "Y": 0.02568713203072548
+                                "X": 0.012740698643028736,
+                                "Y": 0.04385101795196533
                             }
                         ]
                     },
@@ -2883,20 +2883,20 @@
                         "Motion": "fixed",
                         "Points": [
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.15800000727176667
+                                "X": -0.08390703797340393,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.15800000727176667
+                                "X": 0.08512972295284271,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.023750007152557374
+                                "X": 0.08512972295284271,
+                                "Y": -0.02335137128829956
                             },
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.023750007152557374
+                                "X": -0.08390703797340393,
+                                "Y": -0.02335137128829956
                             }
                         ]
                     },
@@ -2925,20 +2925,20 @@
                         "Motion": "fixed",
                         "Points": [
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.15800000727176667
+                                "X": -0.08390703797340393,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.15800000727176667
+                                "X": 0.08512972295284271,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.023750007152557374
+                                "X": 0.08512972295284271,
+                                "Y": -0.02335137128829956
                             },
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.023750007152557374
+                                "X": -0.08390703797340393,
+                                "Y": -0.02335137128829956
                             }
                         ]
                     }
@@ -3053,20 +3053,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.0016357800923287869
+                                "X": -0.03253360837697983,
+                                "Y": 0.0024297682102769615
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.0016357800923287869
+                                "X": -0.004738742485642433,
+                                "Y": 0.0024297682102769615
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.029350541532039644
+                                "X": -0.004738742485642433,
+                                "Y": 0.025355059653520585
                             },
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.029350541532039644
+                                "X": -0.03253360837697983,
+                                "Y": 0.025355059653520585
                             }
                         ]
                     },
@@ -3095,20 +3095,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.058005064725875857,
-                                "Y": -0.036119621247053149
+                                "X": -0.04323340579867363,
+                                "Y": 0.003273097798228264
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": -0.036119621247053149
+                                "X": -0.006226986646652222,
+                                "Y": 0.003273097798228264
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": 0.025151075795292856
+                                "X": -0.006226986646652222,
+                                "Y": 0.04876632243394852
                             },
                             {
-                                "X": -0.058005064725875857,
-                                "Y": 0.025151075795292856
+                                "X": -0.04323340579867363,
+                                "Y": 0.04876632243394852
                             }
                         ]
                     },
@@ -3137,20 +3137,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": 0.011029218323528767,
-                                "Y": -0.005231648683547974
+                                "X": 0.012740698643028736,
+                                "Y": 0.010164938867092133
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": -0.005231648683547974
+                                "X": 0.04021516069769859,
+                                "Y": 0.010164938867092133
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": 0.02568713203072548
+                                "X": 0.04021516069769859,
+                                "Y": 0.04385101795196533
                             },
                             {
-                                "X": 0.011029218323528767,
-                                "Y": 0.02568713203072548
+                                "X": 0.012740698643028736,
+                                "Y": 0.04385101795196533
                             }
                         ]
                     },
@@ -3158,20 +3158,20 @@
                         "Motion": "fixed",
                         "Points": [
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.15800000727176667
+                                "X": -0.08390703797340393,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.15800000727176667
+                                "X": 0.08512972295284271,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.023750007152557374
+                                "X": 0.08512972295284271,
+                                "Y": -0.02335137128829956
                             },
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.023750007152557374
+                                "X": -0.08390703797340393,
+                                "Y": -0.02335137128829956
                             }
                         ]
                     },
@@ -3200,20 +3200,20 @@
                         "Motion": "fixed",
                         "Points": [
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.15800000727176667
+                                "X": -0.08390703797340393,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.15800000727176667
+                                "X": 0.08512972295284271,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.023750007152557374
+                                "X": 0.08512972295284271,
+                                "Y": -0.02335137128829956
                             },
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.023750007152557374
+                                "X": -0.08390703797340393,
+                                "Y": -0.02335137128829956
                             }
                         ]
                     }
@@ -3324,20 +3324,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.0016357800923287869
+                                "X": -0.03253360837697983,
+                                "Y": 0.0024297682102769615
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.0016357800923287869
+                                "X": -0.004738742485642433,
+                                "Y": 0.0024297682102769615
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.029350541532039644
+                                "X": -0.004738742485642433,
+                                "Y": 0.025355059653520585
                             },
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.029350541532039644
+                                "X": -0.03253360837697983,
+                                "Y": 0.025355059653520585
                             }
                         ]
                     },
@@ -3366,20 +3366,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.058005064725875857,
-                                "Y": -0.036119621247053149
+                                "X": -0.04323340579867363,
+                                "Y": 0.003273097798228264
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": -0.036119621247053149
+                                "X": -0.006226986646652222,
+                                "Y": 0.003273097798228264
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": 0.025151075795292856
+                                "X": -0.006226986646652222,
+                                "Y": 0.04876632243394852
                             },
                             {
-                                "X": -0.058005064725875857,
-                                "Y": 0.025151075795292856
+                                "X": -0.04323340579867363,
+                                "Y": 0.04876632243394852
                             }
                         ]
                     },
@@ -3387,20 +3387,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": 0.011029218323528767,
-                                "Y": -0.005231648683547974
+                                "X": 0.012740698643028736,
+                                "Y": 0.010164938867092133
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": -0.005231648683547974
+                                "X": 0.04021516069769859,
+                                "Y": 0.010164938867092133
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": 0.02568713203072548
+                                "X": 0.04021516069769859,
+                                "Y": 0.04385101795196533
                             },
                             {
-                                "X": 0.011029218323528767,
-                                "Y": 0.02568713203072548
+                                "X": 0.012740698643028736,
+                                "Y": 0.04385101795196533
                             }
                         ]
                     },
@@ -3408,20 +3408,20 @@
                         "Motion": "fixed",
                         "Points": [
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.15800000727176667
+                                "X": -0.08390703797340393,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.15800000727176667
+                                "X": 0.08512972295284271,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.023750007152557374
+                                "X": 0.08512972295284271,
+                                "Y": -0.02335137128829956
                             },
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.023750007152557374
+                                "X": -0.08390703797340393,
+                                "Y": -0.02335137128829956
                             }
                         ]
                     },
@@ -3450,20 +3450,20 @@
                         "Motion": "fixed",
                         "Points": [
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.15800000727176667
+                                "X": -0.08390703797340393,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.15800000727176667
+                                "X": 0.08512972295284271,
+                                "Y": -0.16029255092144013
                             },
                             {
-                                "X": 0.08550000190734863,
-                                "Y": -0.023750007152557374
+                                "X": 0.08512972295284271,
+                                "Y": -0.02335137128829956
                             },
                             {
-                                "X": -0.08100000023841858,
-                                "Y": -0.023750007152557374
+                                "X": -0.08390703797340393,
+                                "Y": -0.02335137128829956
                             }
                         ]
                     }
@@ -4512,8 +4512,8 @@
             "collisionMode": "solid",
             "layer": 2,
             "canvas": {
-                "x": 473.0,
-                "y": 402.0
+                "x": 496.0,
+                "y": 372.0
             },
             "position": {
                 "x": -0.07999999821186066,
@@ -4522,16 +4522,16 @@
             "trim": {
                 "x": 0.0,
                 "y": 0.0,
-                "width": 473.0,
-                "height": 402.0
+                "width": 496.0,
+                "height": 372.0
             },
             "region": {
                 "x": 0.0,
                 "y": 0.0,
-                "width": 473.0,
-                "height": 402.0
+                "width": 496.0,
+                "height": 372.0
             },
-            "scale": 0.00033999999868683517
+            "scale": 0.0003242338716518134
         },
         {
             "partId": "armor.plate",
@@ -4539,8 +4539,8 @@
             "collisionMode": "armor",
             "layer": 15,
             "canvas": {
-                "x": 417.0,
-                "y": 413.0
+                "x": 324.0,
+                "y": 416.0
             },
             "position": {
                 "x": -0.13500000536441804,
@@ -4549,29 +4549,29 @@
             "trim": {
                 "x": 0.0,
                 "y": 0.0,
-                "width": 417.0,
-                "height": 413.0
+                "width": 324.0,
+                "height": 416.0
             },
             "region": {
                 "x": 0.0,
                 "y": 0.0,
-                "width": 417.0,
-                "height": 413.0
+                "width": 324.0,
+                "height": 416.0
             },
-            "scale": 0.0006500000017695129
+            "scale": 0.0006453124806284905
         }
     ],
     "visualParts": [
         {
             "partId": "frame.standard",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 0,
             "weaponFamilies": 127,
             "structureFamilies": 0,
-            "hullBaseFraction": 0.21171170473098756,
-            "hullFrontFraction": 0.4977477490901947,
+            "hullBaseFraction": 0.2610526382923126,
+            "hullFrontFraction": 0.5284210443496704,
             "mounts": [
                 {
                     "slot": 0,
@@ -4613,16 +4613,16 @@
                         "y": 0.0
                     },
                     "trim": {
-                        "x": 17.0,
-                        "y": 290.0,
-                        "width": 1503.0,
-                        "height": 444.0
+                        "x": 19.0,
+                        "y": 260.0,
+                        "width": 1499.0,
+                        "height": 475.0
                     },
                     "region": {
-                        "x": 17.0,
-                        "y": 290.0,
-                        "width": 1503.0,
-                        "height": 94.0
+                        "x": 19.0,
+                        "y": 260.0,
+                        "width": 1499.0,
+                        "height": 124.0
                     },
                     "scale": 0.0006276353960856795,
                     "radians": 0.0,
@@ -4632,7 +4632,7 @@
         },
         {
             "partId": "frame.heavy",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 0,
@@ -4700,7 +4700,7 @@
         },
         {
             "partId": "frame.precision",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 0,
@@ -4761,7 +4761,7 @@
         },
         {
             "partId": "frame.battery",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 0,
@@ -4817,16 +4817,16 @@
                         "y": 0.0
                     },
                     "trim": {
-                        "x": 32.0,
-                        "y": 187.0,
-                        "width": 564.0,
-                        "height": 192.0
+                        "x": 31.0,
+                        "y": 183.0,
+                        "width": 566.0,
+                        "height": 197.0
                     },
                     "region": {
-                        "x": 32.0,
-                        "y": 187.0,
-                        "width": 564.0,
-                        "height": 34.560001373291019
+                        "x": 31.0,
+                        "y": 183.0,
+                        "width": 566.0,
+                        "height": 35.459999084472659
                     },
                     "scale": 0.003110047895461321,
                     "radians": 0.0,
@@ -4836,7 +4836,7 @@
         },
         {
             "partId": "hull.standard",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 1,
@@ -4870,16 +4870,16 @@
                         "y": 0.0
                     },
                     "trim": {
-                        "x": 17.0,
-                        "y": 290.0,
-                        "width": 1503.0,
-                        "height": 444.0
+                        "x": 19.0,
+                        "y": 260.0,
+                        "width": 1499.0,
+                        "height": 475.0
                     },
                     "region": {
-                        "x": 17.0,
+                        "x": 19.0,
                         "y": 511.0,
-                        "width": 1503.0,
-                        "height": 223.0
+                        "width": 1499.0,
+                        "height": 224.0
                     },
                     "scale": 0.0006276353960856795,
                     "radians": 0.0,
@@ -4909,15 +4909,15 @@
                         "y": 0.0
                     },
                     "trim": {
-                        "x": 17.0,
-                        "y": 290.0,
-                        "width": 1503.0,
-                        "height": 444.0
+                        "x": 19.0,
+                        "y": 260.0,
+                        "width": 1499.0,
+                        "height": 475.0
                     },
                     "region": {
-                        "x": 17.0,
+                        "x": 19.0,
                         "y": 384.0,
-                        "width": 1503.0,
+                        "width": 1499.0,
                         "height": 127.0
                     },
                     "scale": 0.0006276353960856795,
@@ -4928,7 +4928,7 @@
         },
         {
             "partId": "hull.light",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 1,
@@ -5020,7 +5020,7 @@
         },
         {
             "partId": "hull.reinforced",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 1,
@@ -5112,7 +5112,7 @@
         },
         {
             "partId": "armor.none",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "Без брони",
             "revision": 1,
             "category": 2,
@@ -5125,7 +5125,7 @@
         },
         {
             "partId": "armor.plate",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 2,
@@ -5143,15 +5143,15 @@
                     "layer": 15,
                     "family": 0,
                     "canvas": {
-                        "x": 417.0,
-                        "y": 413.0
+                        "x": 324.0,
+                        "y": 416.0
                     },
                     "attach": {
                         "x": 0.0,
                         "y": 0.0
                     },
                     "position": {
-                        "x": -0.06750000268220902,
+                        "x": -0.05200781300663948,
                         "y": -0.21799999475479127
                     },
                     "muzzle": {
@@ -5161,16 +5161,16 @@
                     "trim": {
                         "x": 0.0,
                         "y": 0.0,
-                        "width": 417.0,
-                        "height": 413.0
+                        "width": 324.0,
+                        "height": 416.0
                     },
                     "region": {
                         "x": 0.0,
                         "y": 0.0,
-                        "width": 417.0,
-                        "height": 413.0
+                        "width": 324.0,
+                        "height": 416.0
                     },
-                    "scale": 0.00032500000088475645,
+                    "scale": 0.0003226562403142452,
                     "radians": 0.0,
                     "hasMuzzle": false
                 }
@@ -5178,7 +5178,7 @@
         },
         {
             "partId": "armor.front",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 2,
@@ -5205,7 +5205,7 @@
                     },
                     "position": {
                         "x": 0.0,
-                        "y": -0.18552947044372559
+                        "y": -0.2043585330247879
                     },
                     "muzzle": {
                         "x": 0.0,
@@ -5231,7 +5231,7 @@
         },
         {
             "partId": "feed.standard",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 3,
@@ -5249,8 +5249,8 @@
                     "layer": 16,
                     "family": 0,
                     "canvas": {
-                        "x": 473.0,
-                        "y": 402.0
+                        "x": 496.0,
+                        "y": 372.0
                     },
                     "attach": {
                         "x": 0.0,
@@ -5258,7 +5258,7 @@
                     },
                     "position": {
                         "x": -0.03999999910593033,
-                        "y": -0.2475000023841858
+                        "y": -0.20749999582767487
                     },
                     "muzzle": {
                         "x": 0.0,
@@ -5267,16 +5267,16 @@
                     "trim": {
                         "x": 0.0,
                         "y": 0.0,
-                        "width": 473.0,
-                        "height": 402.0
+                        "width": 496.0,
+                        "height": 372.0
                     },
                     "region": {
                         "x": 0.0,
                         "y": 0.0,
-                        "width": 473.0,
-                        "height": 402.0
+                        "width": 496.0,
+                        "height": 372.0
                     },
-                    "scale": 0.00016999999934341758,
+                    "scale": 0.0001621169358259067,
                     "radians": 0.0,
                     "hasMuzzle": false
                 }
@@ -5284,7 +5284,7 @@
         },
         {
             "partId": "feed.boost",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 3,
@@ -5337,7 +5337,7 @@
         },
         {
             "partId": "turn.standard",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 4,
@@ -5348,19 +5348,19 @@
             "mounts": [],
             "fragments": [
                 {
-                    "spriteId": "part.gun.support",
-                    "socketId": "turn.standard.support",
+                    "spriteId": "part.full.turn.standard",
+                    "socketId": "turn.standard.root",
                     "motion": "fixed",
                     "collisionMode": "mount-contact",
-                    "layer": 4,
+                    "layer": 3,
                     "family": 0,
                     "canvas": {
-                        "x": 492.0,
-                        "y": 278.0
+                        "x": 1254.0,
+                        "y": 1254.0
                     },
                     "attach": {
-                        "x": 245.0,
-                        "y": 99.0
+                        "x": 625.5,
+                        "y": 405.5
                     },
                     "position": {
                         "x": 0.0,
@@ -5371,18 +5371,18 @@
                         "y": 0.0
                     },
                     "trim": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "width": 492.0,
-                        "height": 278.0
+                        "x": 351.0,
+                        "y": 398.0,
+                        "width": 553.0,
+                        "height": 448.0
                     },
                     "region": {
-                        "x": 137.0,
-                        "y": 99.0,
-                        "width": 222.0,
-                        "height": 179.0
+                        "x": 351.0,
+                        "y": 398.0,
+                        "width": 553.0,
+                        "height": 448.0
                     },
-                    "scale": 0.000750000006519258,
+                    "scale": 0.0003056722634937614,
                     "radians": 0.0,
                     "hasMuzzle": false
                 }
@@ -5390,7 +5390,7 @@
         },
         {
             "partId": "turn.quick",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 4,
@@ -5440,19 +5440,19 @@
                     "hasMuzzle": false
                 },
                 {
-                    "spriteId": "part.gun.support",
+                    "spriteId": "part.full.turn.standard",
                     "socketId": "turn.quick.support",
                     "motion": "fixed",
                     "collisionMode": "mount-contact",
-                    "layer": 4,
+                    "layer": 3,
                     "family": 0,
                     "canvas": {
-                        "x": 492.0,
-                        "y": 278.0
+                        "x": 1254.0,
+                        "y": 1254.0
                     },
                     "attach": {
-                        "x": 245.0,
-                        "y": 99.0
+                        "x": 625.5,
+                        "y": 405.5
                     },
                     "position": {
                         "x": 0.0,
@@ -5463,18 +5463,18 @@
                         "y": 0.0
                     },
                     "trim": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "width": 492.0,
-                        "height": 278.0
+                        "x": 351.0,
+                        "y": 398.0,
+                        "width": 553.0,
+                        "height": 448.0
                     },
                     "region": {
-                        "x": 137.0,
-                        "y": 99.0,
-                        "width": 222.0,
-                        "height": 179.0
+                        "x": 351.0,
+                        "y": 398.0,
+                        "width": 553.0,
+                        "height": 448.0
                     },
-                    "scale": 0.000750000006519258,
+                    "scale": 0.0003056722634937614,
                     "radians": 0.0,
                     "hasMuzzle": false
                 }
@@ -5482,7 +5482,7 @@
         },
         {
             "partId": "core.gun",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 5,
@@ -5535,7 +5535,7 @@
         },
         {
             "partId": "core.piercer",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 5,
@@ -5588,7 +5588,7 @@
         },
         {
             "partId": "core.mortar",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 5,
@@ -5641,7 +5641,7 @@
         },
         {
             "partId": "core.fan",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 5,
@@ -5694,7 +5694,7 @@
         },
         {
             "partId": "core.ricochet",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 5,
@@ -5747,7 +5747,7 @@
         },
         {
             "partId": "core.stapler",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 5,
@@ -5800,7 +5800,7 @@
         },
         {
             "partId": "core.blotter",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 5,
@@ -5853,7 +5853,7 @@
         },
         {
             "partId": "head.gun",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -5906,7 +5906,7 @@
         },
         {
             "partId": "head.piercer",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -5959,7 +5959,7 @@
         },
         {
             "partId": "head.mortar",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6012,7 +6012,7 @@
         },
         {
             "partId": "head.fan",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6065,7 +6065,7 @@
         },
         {
             "partId": "head.ricochet",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6118,7 +6118,7 @@
         },
         {
             "partId": "head.stapler",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6171,7 +6171,7 @@
         },
         {
             "partId": "head.blotter",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6224,7 +6224,7 @@
         },
         {
             "partId": "head.short",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6277,7 +6277,7 @@
         },
         {
             "partId": "head.long",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6330,7 +6330,7 @@
         },
         {
             "partId": "head.wide",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 6,
@@ -6383,7 +6383,7 @@
         },
         {
             "partId": "sight.iron",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 7,
@@ -6401,16 +6401,16 @@
                     "layer": 7,
                     "family": 0,
                     "canvas": {
-                        "x": 347.0,
-                        "y": 346.0
+                        "x": 508.0,
+                        "y": 419.0
                     },
                     "attach": {
-                        "x": 173.0,
-                        "y": 42.0
+                        "x": 257.5,
+                        "y": 15.5
                     },
                     "position": {
-                        "x": -0.018484724685549737,
-                        "y": 0.004999999888241291
+                        "x": -0.018444674089550973,
+                        "y": 0.0032778398599475624
                     },
                     "muzzle": {
                         "x": 0.0,
@@ -6419,16 +6419,16 @@
                     "trim": {
                         "x": 0.0,
                         "y": 0.0,
-                        "width": 347.0,
-                        "height": 346.0
+                        "width": 508.0,
+                        "height": 419.0
                     },
                     "region": {
                         "x": 0.0,
                         "y": 0.0,
-                        "width": 347.0,
-                        "height": 346.0
+                        "width": 508.0,
+                        "height": 419.0
                     },
-                    "scale": 0.00008010047167772427,
+                    "scale": 0.000054714299039915204,
                     "radians": 0.0,
                     "hasMuzzle": false
                 }
@@ -6436,7 +6436,7 @@
         },
         {
             "partId": "sight.scope",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 7,
@@ -6489,7 +6489,7 @@
         },
         {
             "partId": "sight.tracking",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 7,
@@ -6542,7 +6542,7 @@
         },
         {
             "partId": "magazine.standard",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 8,
@@ -6560,12 +6560,12 @@
                     "layer": 8,
                     "family": 0,
                     "canvas": {
-                        "x": 273.0,
-                        "y": 452.0
+                        "x": 375.0,
+                        "y": 461.0
                     },
                     "attach": {
-                        "x": 137.0,
-                        "y": 414.0
+                        "x": 38.5,
+                        "y": 169.5
                     },
                     "position": {
                         "x": -0.039434079080820087,
@@ -6578,16 +6578,16 @@
                     "trim": {
                         "x": 0.0,
                         "y": 0.0,
-                        "width": 273.0,
-                        "height": 452.0
+                        "width": 375.0,
+                        "height": 461.0
                     },
                     "region": {
                         "x": 0.0,
                         "y": 0.0,
-                        "width": 273.0,
-                        "height": 452.0
+                        "width": 375.0,
+                        "height": 461.0
                     },
-                    "scale": 0.00013555464101955295,
+                    "scale": 0.00009868378401733935,
                     "radians": 0.0,
                     "hasMuzzle": false
                 }
@@ -6595,7 +6595,7 @@
         },
         {
             "partId": "magazine.drum",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 8,
@@ -6648,7 +6648,7 @@
         },
         {
             "partId": "magazine.belt",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 8,
@@ -6701,7 +6701,7 @@
         },
         {
             "partId": "trigger.standard",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 9,
@@ -6719,12 +6719,12 @@
                     "layer": 9,
                     "family": 0,
                     "canvas": {
-                        "x": 343.0,
-                        "y": 386.0
+                        "x": 345.0,
+                        "y": 423.0
                     },
                     "attach": {
-                        "x": 170.0,
-                        "y": 315.0
+                        "x": 149.5,
+                        "y": 123.5
                     },
                     "position": {
                         "x": 0.024646298959851266,
@@ -6737,16 +6737,16 @@
                     "trim": {
                         "x": 0.0,
                         "y": 0.0,
-                        "width": 343.0,
-                        "height": 386.0
+                        "width": 345.0,
+                        "height": 423.0
                     },
                     "region": {
                         "x": 0.0,
                         "y": 0.0,
-                        "width": 343.0,
-                        "height": 386.0
+                        "width": 345.0,
+                        "height": 423.0
                     },
-                    "scale": 0.00008010047167772427,
+                    "scale": 0.00007963612006278709,
                     "radians": 0.0,
                     "hasMuzzle": false
                 }
@@ -6754,7 +6754,7 @@
         },
         {
             "partId": "trigger.burst",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 9,
@@ -6807,7 +6807,7 @@
         },
         {
             "partId": "site.wall",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 10,
@@ -6860,7 +6860,7 @@
         },
         {
             "partId": "site.slow",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 10,
@@ -6913,7 +6913,7 @@
         },
         {
             "partId": "site.repair",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 10,
@@ -6966,7 +6966,7 @@
         },
         {
             "partId": "site.generator",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 10,
@@ -7019,7 +7019,7 @@
         },
         {
             "partId": "function.wall",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 11,
@@ -7072,7 +7072,7 @@
         },
         {
             "partId": "function.slow",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 11,
@@ -7125,7 +7125,7 @@
         },
         {
             "partId": "function.repair",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 11,
@@ -7217,7 +7217,7 @@
         },
         {
             "partId": "function.generator",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 11,
@@ -7270,7 +7270,7 @@
         },
         {
             "partId": "shell.standard",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 12,
@@ -7440,7 +7440,7 @@
         },
         {
             "partId": "shell.light",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 12,
@@ -7766,7 +7766,7 @@
         },
         {
             "partId": "shell.reinforced",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 12,
@@ -8092,7 +8092,7 @@
         },
         {
             "partId": "utility.none",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "Без оснащения",
             "revision": 1,
             "category": 13,
@@ -8105,7 +8105,7 @@
         },
         {
             "partId": "utility.armor",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 13,
@@ -8236,7 +8236,7 @@
         },
         {
             "partId": "utility.range",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 13,
@@ -8289,7 +8289,7 @@
         },
         {
             "partId": "utility.economy",
-            "assetRevision": "modular-full-catalog-2026-10-22-v7",
+            "assetRevision": "modular-full-catalog-2026-10-24-v8",
             "neutral": "",
             "revision": 1,
             "category": 13,
@@ -8386,11 +8386,11 @@
     },
     "legacyFits": {
         "SchemaVersion": 1,
-        "Revision": "modular-full-catalog-2026-10-22-v7",
+        "Revision": "modular-full-catalog-2026-10-24-v8",
         "Parts": [
             {
                 "Id": "frame.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -8399,7 +8399,7 @@
             },
             {
                 "Id": "frame.heavy",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -8408,7 +8408,7 @@
             },
             {
                 "Id": "frame.precision",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -8417,7 +8417,7 @@
             },
             {
                 "Id": "frame.battery",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Frame",
                 "ExpectedSocketType": "assembly.Frame",
                 "Revision": 1,
@@ -8426,7 +8426,7 @@
             },
             {
                 "Id": "hull.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Hull",
                 "ExpectedSocketType": "assembly.Hull",
                 "Revision": 1,
@@ -8435,7 +8435,7 @@
             },
             {
                 "Id": "hull.light",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Hull",
                 "ExpectedSocketType": "assembly.Hull",
                 "Revision": 1,
@@ -8444,7 +8444,7 @@
             },
             {
                 "Id": "hull.reinforced",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Hull",
                 "ExpectedSocketType": "assembly.Hull",
                 "Revision": 1,
@@ -8453,7 +8453,7 @@
             },
             {
                 "Id": "armor.none",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Armor",
                 "ExpectedSocketType": "assembly.Armor",
                 "Revision": 1,
@@ -8462,7 +8462,7 @@
             },
             {
                 "Id": "armor.plate",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Armor",
                 "ExpectedSocketType": "assembly.Armor",
                 "Revision": 1,
@@ -8471,7 +8471,7 @@
             },
             {
                 "Id": "armor.front",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Armor",
                 "ExpectedSocketType": "assembly.Armor",
                 "Revision": 1,
@@ -8480,7 +8480,7 @@
             },
             {
                 "Id": "feed.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Feed",
                 "ExpectedSocketType": "assembly.Feed",
                 "Revision": 1,
@@ -8489,7 +8489,7 @@
             },
             {
                 "Id": "feed.boost",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Feed",
                 "ExpectedSocketType": "assembly.Feed",
                 "Revision": 1,
@@ -8498,7 +8498,7 @@
             },
             {
                 "Id": "turn.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Turn",
                 "ExpectedSocketType": "assembly.Turn",
                 "Revision": 1,
@@ -8507,7 +8507,7 @@
             },
             {
                 "Id": "turn.quick",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Turn",
                 "ExpectedSocketType": "assembly.Turn",
                 "Revision": 1,
@@ -8516,7 +8516,7 @@
             },
             {
                 "Id": "core.gun",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -8525,7 +8525,7 @@
             },
             {
                 "Id": "core.piercer",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -8534,7 +8534,7 @@
             },
             {
                 "Id": "core.mortar",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -8543,7 +8543,7 @@
             },
             {
                 "Id": "core.fan",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -8552,7 +8552,7 @@
             },
             {
                 "Id": "core.ricochet",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -8561,7 +8561,7 @@
             },
             {
                 "Id": "core.stapler",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -8570,7 +8570,7 @@
             },
             {
                 "Id": "core.blotter",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "gun.standard",
                 "ExpectedSocketType": "gun.standard",
                 "Revision": 1,
@@ -8579,7 +8579,7 @@
             },
             {
                 "Id": "head.gun",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8588,7 +8588,7 @@
             },
             {
                 "Id": "head.piercer",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8597,7 +8597,7 @@
             },
             {
                 "Id": "head.mortar",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8606,7 +8606,7 @@
             },
             {
                 "Id": "head.fan",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8615,7 +8615,7 @@
             },
             {
                 "Id": "head.ricochet",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8624,7 +8624,7 @@
             },
             {
                 "Id": "head.stapler",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8633,7 +8633,7 @@
             },
             {
                 "Id": "head.blotter",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8642,7 +8642,7 @@
             },
             {
                 "Id": "head.short",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8651,7 +8651,7 @@
             },
             {
                 "Id": "head.long",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8660,7 +8660,7 @@
             },
             {
                 "Id": "head.wide",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Head",
                 "ExpectedSocketType": "assembly.Head",
                 "Revision": 1,
@@ -8669,7 +8669,7 @@
             },
             {
                 "Id": "sight.iron",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Sight",
                 "ExpectedSocketType": "assembly.Sight",
                 "Revision": 1,
@@ -8678,7 +8678,7 @@
             },
             {
                 "Id": "sight.scope",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Sight",
                 "ExpectedSocketType": "assembly.Sight",
                 "Revision": 1,
@@ -8687,7 +8687,7 @@
             },
             {
                 "Id": "sight.tracking",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Sight",
                 "ExpectedSocketType": "assembly.Sight",
                 "Revision": 1,
@@ -8696,7 +8696,7 @@
             },
             {
                 "Id": "magazine.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Magazine",
                 "ExpectedSocketType": "assembly.Magazine",
                 "Revision": 1,
@@ -8705,7 +8705,7 @@
             },
             {
                 "Id": "magazine.drum",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Magazine",
                 "ExpectedSocketType": "assembly.Magazine",
                 "Revision": 1,
@@ -8714,7 +8714,7 @@
             },
             {
                 "Id": "magazine.belt",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Magazine",
                 "ExpectedSocketType": "assembly.Magazine",
                 "Revision": 1,
@@ -8723,7 +8723,7 @@
             },
             {
                 "Id": "trigger.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Trigger",
                 "ExpectedSocketType": "assembly.Trigger",
                 "Revision": 1,
@@ -8732,7 +8732,7 @@
             },
             {
                 "Id": "trigger.burst",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Trigger",
                 "ExpectedSocketType": "assembly.Trigger",
                 "Revision": 1,
@@ -8741,7 +8741,7 @@
             },
             {
                 "Id": "site.wall",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -8750,7 +8750,7 @@
             },
             {
                 "Id": "site.slow",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -8759,7 +8759,7 @@
             },
             {
                 "Id": "site.repair",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -8768,7 +8768,7 @@
             },
             {
                 "Id": "site.generator",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Site",
                 "ExpectedSocketType": "assembly.Site",
                 "Revision": 1,
@@ -8777,7 +8777,7 @@
             },
             {
                 "Id": "function.wall",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -8786,7 +8786,7 @@
             },
             {
                 "Id": "function.slow",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -8795,7 +8795,7 @@
             },
             {
                 "Id": "function.repair",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -8804,7 +8804,7 @@
             },
             {
                 "Id": "function.generator",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Function",
                 "ExpectedSocketType": "assembly.Function",
                 "Revision": 1,
@@ -8813,7 +8813,7 @@
             },
             {
                 "Id": "shell.standard",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Shell",
                 "ExpectedSocketType": "assembly.Shell",
                 "Revision": 1,
@@ -8822,7 +8822,7 @@
             },
             {
                 "Id": "shell.light",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Shell",
                 "ExpectedSocketType": "assembly.Shell",
                 "Revision": 1,
@@ -8831,7 +8831,7 @@
             },
             {
                 "Id": "shell.reinforced",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Shell",
                 "ExpectedSocketType": "assembly.Shell",
                 "Revision": 1,
@@ -8840,7 +8840,7 @@
             },
             {
                 "Id": "utility.none",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,
@@ -8849,7 +8849,7 @@
             },
             {
                 "Id": "utility.armor",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,
@@ -8858,7 +8858,7 @@
             },
             {
                 "Id": "utility.range",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,
@@ -8867,7 +8867,7 @@
             },
             {
                 "Id": "utility.economy",
-                "AssetRevision": "modular-full-catalog-2026-10-22-v7",
+                "AssetRevision": "modular-full-catalog-2026-10-24-v8",
                 "AttachType": "assembly.Utility",
                 "ExpectedSocketType": "assembly.Utility",
                 "Revision": 1,
@@ -8915,15 +8915,15 @@
                     {
                         "X": -0.07999999821186066,
                         "Y": -0.14000000059604646,
-                        "Width": 0.16081999242305757,
-                        "Height": 0.1366799920797348,
+                        "Width": 0.16082000732421876,
+                        "Height": 0.12061499804258347,
                         "ArmorOnly": false,
                         "PartId": ""
                     },
                     {
                         "X": -0.13500000536441804,
                         "Y": -0.2549999952316284,
-                        "Width": 0.27105000615119936,
+                        "Width": 0.2090812474489212,
                         "Height": 0.268449991941452,
                         "ArmorOnly": true,
                         "PartId": ""
@@ -9168,20 +9168,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.08659476786851883
+                                "X": -0.03253360465168953,
+                                "Y": 0.08738876134157181
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.08659476786851883
+                                "X": -0.0047387415543198589,
+                                "Y": 0.08738876134157181
                             },
                             {
-                                "X": -0.004547243006527424,
-                                "Y": 0.11430952697992325
+                                "X": -0.0047387415543198589,
+                                "Y": 0.11031405627727509
                             },
                             {
-                                "X": -0.032342106103897098,
-                                "Y": 0.11430952697992325
+                                "X": -0.03253360465168953,
+                                "Y": 0.11031405627727509
                             }
                         ]
                     },
@@ -9189,20 +9189,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": -0.058005064725875857,
-                                "Y": 0.004263808485120535
+                                "X": -0.04323340579867363,
+                                "Y": 0.04365652799606323
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": 0.004263808485120535
+                                "X": -0.006226985715329647,
+                                "Y": 0.04365652799606323
                             },
                             {
-                                "X": -0.020998647436499597,
-                                "Y": 0.06553450971841812
+                                "X": -0.006226985715329647,
+                                "Y": 0.08914975821971894
                             },
                             {
-                                "X": -0.058005064725875857,
-                                "Y": 0.06553450971841812
+                                "X": -0.04323340579867363,
+                                "Y": 0.08914975821971894
                             }
                         ]
                     },
@@ -9210,20 +9210,20 @@
                         "Motion": "rotating",
                         "Points": [
                             {
-                                "X": 0.011029220186173916,
-                                "Y": 0.02159632183611393
+                                "X": 0.012740698643028736,
+                                "Y": 0.03699290752410889
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": 0.02159632183611393
+                                "X": 0.04021516442298889,
+                                "Y": 0.03699290752410889
                             },
                             {
-                                "X": 0.038503680378198627,
-                                "Y": 0.05251510068774223
+                                "X": 0.04021516442298889,
+                                "Y": 0.07067898660898209
                             },
                             {
-                                "X": 0.011029220186173916,
-                                "Y": 0.05251510068774223
+                                "X": 0.012740698643028736,
+                                "Y": 0.07067898660898209
                             }
                         ]
                     },
@@ -9231,20 +9231,20 @@
                         "Motion": "fixed",
                         "Points": [
                             {
-                                "X": -0.09316302090883255,
-                                "Y": -0.07640353590250015
+                                "X": -0.09498874098062515,
+                                "Y": -0.09177076071500778
                             },
                             {
-                                "X": 0.09353271126747132,
-                                "Y": -0.07640353590250015
+                                "X": 0.09170697629451752,
+                                "Y": -0.09177076071500778
                             },
                             {
-                                "X": 0.09353271126747132,
-                                "Y": 0.04929260537028313
+                                "X": 0.09170697629451752,
+                                "Y": 0.052262067794799808
                             },
                             {
-                                "X": -0.09316302090883255,
-                                "Y": 0.04929260537028313
+                                "X": -0.09498874098062515,
+                                "Y": 0.052262067794799808
                             }
                         ]
                     }

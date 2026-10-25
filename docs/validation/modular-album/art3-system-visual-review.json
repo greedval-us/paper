@@ -1,0 +1,394 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Codex art3_style, physical PNG inspection",
+  "method": "Physically opened each20 final capture PNGs at original detail and4 source PNGs with view_image; reviewed layout,text,illustrations and action visibility at each size. Only this report written; no Unity/product/image changes.",
+  "manifest": "docs/validation/modular-album/task13-visual-states.json",
+  "scope": "Scenes22settings,23help,24empty,28leave in5sizes. Scene23 is HELP in canonical manifest, not a library screen.",
+  "overallVerdict": "PASS_WITH_RESIDUALS",
+  "limitations": [
+    "Static visual review; button functionality and input tests are separate evidence.",
+    "Common notebook style retained with extra application controls and responsive adaptation; no100percent fidelity claim."
+  ],
+  "records": [
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-22-settings-1024x768.png",
+      "captureSha256": "4DE28184B691CE19083FCE8D4CBC815507D89CAE1E255C38A24FC8A291081851",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/22-settings.png",
+      "sourceSha256": "395C7D5AFB47B7189886E29853DCC699A81139038216C429CC1342055DEA1F8A",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1024x768 wide content is centred with cream top/bottom bands; descriptions are small but whole.",
+        "Navy hatched wordmark/crown, ivory grid paper and blue castle/mountain landscape preserve source style.",
+        "All four rows (fullscreen,resolution,radii,reduced motion), controls strip, back and Done are visible. Resolution arrows/value/apply have separate bounds.",
+        "Off toggles use pale blue tracks and cream handles; main action uses blue hatching."
+      ],
+      "residuals": [
+        "Source has two rows; added resolution/reduced-motion controls make live panel taller/denser.",
+        "Thin straight separators and repeated borders are more regular than loose source pen lines.",
+        "Source fullscreen-on green state differs from captured off blue-grey state."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-22-settings-1280x720.png",
+      "captureSha256": "03CF8A5A7B76CB9831038128BEF27152452EE53E8FE301E6CC87BCDEAEC78884",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/22-settings.png",
+      "sourceSha256": "395C7D5AFB47B7189886E29853DCC699A81139038216C429CC1342055DEA1F8A",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1280x720 composition fills viewport; Done has bottom margin and controls stay separated.",
+        "Navy hatched wordmark/crown, ivory grid paper and blue castle/mountain landscape preserve source style.",
+        "All four rows (fullscreen,resolution,radii,reduced motion), controls strip, back and Done are visible. Resolution arrows/value/apply have separate bounds.",
+        "Off toggles use pale blue tracks and cream handles; main action uses blue hatching."
+      ],
+      "residuals": [
+        "Source has two rows; added resolution/reduced-motion controls make live panel taller/denser.",
+        "Thin straight separators and repeated borders are more regular than loose source pen lines.",
+        "Source fullscreen-on green state differs from captured off blue-grey state."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-22-settings-1280x960.png",
+      "captureSha256": "28AC0D8CDDADF753040EE0D9676490AAEC5C291FB8E083F4760B7ECC0DDC668D",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/22-settings.png",
+      "sourceSha256": "395C7D5AFB47B7189886E29853DCC699A81139038216C429CC1342055DEA1F8A",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1280x960 wide composition has cream letterbox bands; all four rows stay intact.",
+        "Navy hatched wordmark/crown, ivory grid paper and blue castle/mountain landscape preserve source style.",
+        "All four rows (fullscreen,resolution,radii,reduced motion), controls strip, back and Done are visible. Resolution arrows/value/apply have separate bounds.",
+        "Off toggles use pale blue tracks and cream handles; main action uses blue hatching."
+      ],
+      "residuals": [
+        "Source has two rows; added resolution/reduced-motion controls make live panel taller/denser.",
+        "Thin straight separators and repeated borders are more regular than loose source pen lines.",
+        "Source fullscreen-on green state differs from captured off blue-grey state."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-22-settings-1600x900.png",
+      "captureSha256": "55066005D84C78E21F622FCA16C3B82DBDE35CFE4A6D708C11D070863C44A540",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/22-settings.png",
+      "sourceSha256": "395C7D5AFB47B7189886E29853DCC699A81139038216C429CC1342055DEA1F8A",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1600x900 castle/mountain framing remains visible around the complete card.",
+        "Navy hatched wordmark/crown, ivory grid paper and blue castle/mountain landscape preserve source style.",
+        "All four rows (fullscreen,resolution,radii,reduced motion), controls strip, back and Done are visible. Resolution arrows/value/apply have separate bounds.",
+        "Off toggles use pale blue tracks and cream handles; main action uses blue hatching."
+      ],
+      "residuals": [
+        "Source has two rows; added resolution/reduced-motion controls make live panel taller/denser.",
+        "Thin straight separators and repeated borders are more regular than loose source pen lines.",
+        "Source fullscreen-on green state differs from captured off blue-grey state."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-22-settings-1920x1080.png",
+      "captureSha256": "9A282F5FF7CB39DD1F175F0FB97EE5C923976AFDDF3ECD5413FE8F351C6F3648",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/22-settings.png",
+      "sourceSha256": "395C7D5AFB47B7189886E29853DCC699A81139038216C429CC1342055DEA1F8A",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1920x1080 all descriptions and controls remain readable and unclipped.",
+        "Navy hatched wordmark/crown, ivory grid paper and blue castle/mountain landscape preserve source style.",
+        "All four rows (fullscreen,resolution,radii,reduced motion), controls strip, back and Done are visible. Resolution arrows/value/apply have separate bounds.",
+        "Off toggles use pale blue tracks and cream handles; main action uses blue hatching."
+      ],
+      "residuals": [
+        "Source has two rows; added resolution/reduced-motion controls make live panel taller/denser.",
+        "Thin straight separators and repeated borders are more regular than loose source pen lines.",
+        "Source fullscreen-on green state differs from captured off blue-grey state."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-23-help-1024x768.png",
+      "captureSha256": "D5BDE25F5EBC9BEAE6045F09FAF7D306843039C55EE6F7035C177489F35A9F2F",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/23-help.png",
+      "sourceSha256": "80E9E894C092A8CD7E22C1FEEAD5609630BBB043AB3F1AF6A3C3EFB997D18F47",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1024x768 all four cards and lower panels fit with compact text; both footer actions are whole.",
+        "Checked four illustrated cards: assemble/arrows,save/book,eight slots,defend castle/skulls.",
+        "Resources show pencil,gold,experience,coloured ink; controls form two keycap columns; Back and Understood stay visible.",
+        "Inset ivory paper,navy text,spiral binding and forest/river/bridge/castle background retain notebook identity."
+      ],
+      "residuals": [
+        "Title/panel borders are straighter and less hand-lettered than original.",
+        "Modern broad-base weapon thumbnails are small within card/slot frames; source drawings were larger.",
+        "Extra controls/explanation make layout denser; tiny slot numbers and hatch texture merge at small sizes."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-23-help-1280x720.png",
+      "captureSha256": "22EBBC2590C518BF9F49877B7FE791B3836971E62EB083F1ABC0AC5F3BC4106C",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/23-help.png",
+      "sourceSha256": "80E9E894C092A8CD7E22C1FEEAD5609630BBB043AB3F1AF6A3C3EFB997D18F47",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1280x720 compact one-line resource rows free height; controls remain in two columns.",
+        "Checked four illustrated cards: assemble/arrows,save/book,eight slots,defend castle/skulls.",
+        "Resources show pencil,gold,experience,coloured ink; controls form two keycap columns; Back and Understood stay visible.",
+        "Inset ivory paper,navy text,spiral binding and forest/river/bridge/castle background retain notebook identity."
+      ],
+      "residuals": [
+        "Title/panel borders are straighter and less hand-lettered than original.",
+        "Modern broad-base weapon thumbnails are small within card/slot frames; source drawings were larger.",
+        "Extra controls/explanation make layout denser; tiny slot numbers and hatch texture merge at small sizes."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-23-help-1280x960.png",
+      "captureSha256": "1A11A2D7FBFFF7FAEB4F1B3E32B822954E86255A81F33F514BC6D455F4722B37",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/23-help.png",
+      "sourceSha256": "80E9E894C092A8CD7E22C1FEEAD5609630BBB043AB3F1AF6A3C3EFB997D18F47",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1280x960 resource title/description lines expand lower panels vertically; all keycaps stay visible.",
+        "Checked four illustrated cards: assemble/arrows,save/book,eight slots,defend castle/skulls.",
+        "Resources show pencil,gold,experience,coloured ink; controls form two keycap columns; Back and Understood stay visible.",
+        "Inset ivory paper,navy text,spiral binding and forest/river/bridge/castle background retain notebook identity."
+      ],
+      "residuals": [
+        "Title/panel borders are straighter and less hand-lettered than original.",
+        "Modern broad-base weapon thumbnails are small within card/slot frames; source drawings were larger.",
+        "Extra controls/explanation make layout denser; tiny slot numbers and hatch texture merge at small sizes."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-23-help-1600x900.png",
+      "captureSha256": "81CC0890C5EFE7914709B94A276E8D2983285479037105C69077A0E63539FC7B",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/23-help.png",
+      "sourceSha256": "80E9E894C092A8CD7E22C1FEEAD5609630BBB043AB3F1AF6A3C3EFB997D18F47",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1600x900 arrows,book,slots and defence castle remain distinct; lower row spacing is readable.",
+        "Checked four illustrated cards: assemble/arrows,save/book,eight slots,defend castle/skulls.",
+        "Resources show pencil,gold,experience,coloured ink; controls form two keycap columns; Back and Understood stay visible.",
+        "Inset ivory paper,navy text,spiral binding and forest/river/bridge/castle background retain notebook identity."
+      ],
+      "residuals": [
+        "Title/panel borders are straighter and less hand-lettered than original.",
+        "Modern broad-base weapon thumbnails are small within card/slot frames; source drawings were larger.",
+        "Extra controls/explanation make layout denser; tiny slot numbers and hatch texture merge at small sizes."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-23-help-1920x1080.png",
+      "captureSha256": "D7FCA3C00C3FCF05ECFBD60FFB39BC060A66925CCED789802D794263CD7FFFAF",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/23-help.png",
+      "sourceSha256": "80E9E894C092A8CD7E22C1FEEAD5609630BBB043AB3F1AF6A3C3EFB997D18F47",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1920x1080 text/keycaps/resources are complete; top weapon thumbnails still remain comparatively small.",
+        "Checked four illustrated cards: assemble/arrows,save/book,eight slots,defend castle/skulls.",
+        "Resources show pencil,gold,experience,coloured ink; controls form two keycap columns; Back and Understood stay visible.",
+        "Inset ivory paper,navy text,spiral binding and forest/river/bridge/castle background retain notebook identity."
+      ],
+      "residuals": [
+        "Title/panel borders are straighter and less hand-lettered than original.",
+        "Modern broad-base weapon thumbnails are small within card/slot frames; source drawings were larger.",
+        "Extra controls/explanation make layout denser; tiny slot numbers and hatch texture merge at small sizes."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-24-empty-1024x768.png",
+      "captureSha256": "33C36F20922F940A985DAFDB1ED33FD559ECDDB21950423550096408A8370C62",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/24-empty.png",
+      "sourceSha256": "6A5FB645B1529E2F2102BC111DA1A81204F53C96276084A0783C51F196B8B073",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1024x768 starters become two rows of text buttons without thumbnails; wrapped names,book and all actions stay visible.",
+        "Empty-own-builds message and explanatory line appear over central spiral book: exploded parts/arrows left,assembled weapon right.",
+        "Eight starter slots,category tabs with My selected,status and top New Build remain visible.",
+        "Central New Build/Open Starter Set and bottom Restore Starter Set/Back are distinct; paper/tree/castle decoration shares blue-pen style."
+      ],
+      "residuals": [
+        "Denser application header/tabs replace sparse decorative source header.",
+        "Source pencil,crumpled paper and large right ink bottle are omitted/replaced by smaller bottle near left book foot.",
+        "Current tiled gun foundation differs from compact cylindrical sketch tower; book scale changes substantially with viewport height."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-24-empty-1280x720.png",
+      "captureSha256": "7534027FC27605D3D69165DB243E32F00F06F1EA897D2F9769FEE3AB823618CE",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/24-empty.png",
+      "sourceSha256": "6A5FB645B1529E2F2102BC111DA1A81204F53C96276084A0783C51F196B8B073",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1280x720 eight thumbnail slots stay in one row and book is compact above central actions.",
+        "Empty-own-builds message and explanatory line appear over central spiral book: exploded parts/arrows left,assembled weapon right.",
+        "Eight starter slots,category tabs with My selected,status and top New Build remain visible.",
+        "Central New Build/Open Starter Set and bottom Restore Starter Set/Back are distinct; paper/tree/castle decoration shares blue-pen style."
+      ],
+      "residuals": [
+        "Denser application header/tabs replace sparse decorative source header.",
+        "Source pencil,crumpled paper and large right ink bottle are omitted/replaced by smaller bottle near left book foot.",
+        "Current tiled gun foundation differs from compact cylindrical sketch tower; book scale changes substantially with viewport height."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-24-empty-1280x960.png",
+      "captureSha256": "6301A2556685E715599CED0091D260D24EF4C28EB67F3AF43ED72F96D8DC611F",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/24-empty.png",
+      "sourceSha256": "6A5FB645B1529E2F2102BC111DA1A81204F53C96276084A0783C51F196B8B073",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1280x960 book expands broadly while one-row slots remain; no book/action overlap is visible.",
+        "Empty-own-builds message and explanatory line appear over central spiral book: exploded parts/arrows left,assembled weapon right.",
+        "Eight starter slots,category tabs with My selected,status and top New Build remain visible.",
+        "Central New Build/Open Starter Set and bottom Restore Starter Set/Back are distinct; paper/tree/castle decoration shares blue-pen style."
+      ],
+      "residuals": [
+        "Denser application header/tabs replace sparse decorative source header.",
+        "Source pencil,crumpled paper and large right ink bottle are omitted/replaced by smaller bottle near left book foot.",
+        "Current tiled gun foundation differs from compact cylindrical sketch tower; book scale changes substantially with viewport height."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-24-empty-1600x900.png",
+      "captureSha256": "65311D392BC611CB3EF70E90AD3635879EB063B4D145BFD06613BF6E244F6EFB",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/24-empty.png",
+      "sourceSha256": "6A5FB645B1529E2F2102BC111DA1A81204F53C96276084A0783C51F196B8B073",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1600x900 medium book sits below wide tabs; central/corner actions are whole.",
+        "Empty-own-builds message and explanatory line appear over central spiral book: exploded parts/arrows left,assembled weapon right.",
+        "Eight starter slots,category tabs with My selected,status and top New Build remain visible.",
+        "Central New Build/Open Starter Set and bottom Restore Starter Set/Back are distinct; paper/tree/castle decoration shares blue-pen style."
+      ],
+      "residuals": [
+        "Denser application header/tabs replace sparse decorative source header.",
+        "Source pencil,crumpled paper and large right ink bottle are omitted/replaced by smaller bottle near left book foot.",
+        "Current tiled gun foundation differs from compact cylindrical sketch tower; book scale changes substantially with viewport height."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-24-empty-1920x1080.png",
+      "captureSha256": "0122399DCBAE8713AE2A2C8A2C2C401E2A9F407E27ED4DA992221BC9BBE70E45",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/24-empty.png",
+      "sourceSha256": "6A5FB645B1529E2F2102BC111DA1A81204F53C96276084A0783C51F196B8B073",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1920x1080 book/exploded parts are clear with generous space; top slot images remain small.",
+        "Empty-own-builds message and explanatory line appear over central spiral book: exploded parts/arrows left,assembled weapon right.",
+        "Eight starter slots,category tabs with My selected,status and top New Build remain visible.",
+        "Central New Build/Open Starter Set and bottom Restore Starter Set/Back are distinct; paper/tree/castle decoration shares blue-pen style."
+      ],
+      "residuals": [
+        "Denser application header/tabs replace sparse decorative source header.",
+        "Source pencil,crumpled paper and large right ink bottle are omitted/replaced by smaller bottle near left book foot.",
+        "Current tiled gun foundation differs from compact cylindrical sketch tower; book scale changes substantially with viewport height."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-28-leave-1024x768.png",
+      "captureSha256": "51B96432E7DACE0F291B5C66B8E7C69A714A0B7775E5C9E584A11538B8D2B7B5",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/28-leave.png",
+      "sourceSha256": "D280C9DC11D916756A5CA6B695D2CF2020009DF3085D6B55D41DD5DD09ECE7B2",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1024x768 modal overlaps upper palette but all actions/close stay whole; HUD uses an extra line.",
+        "Centred ivory modal separates clearly from dimmed battle/HUD.",
+        "Map icon,title,progress warning,top-right close,blue Stay and ivory Finish Battle are all whole.",
+        "Warning wraps inside card; bottom eight-slot palette and material/action controls remain visible and dimmed."
+      ],
+      "residuals": [
+        "Map icon is a simple three-panel outline instead of detailed route map with trees/X.",
+        "Modal has more regular borders and larger blank vertical gaps than sketch.",
+        "Sparse captured battle with few enemies/trees differs from dense source combat vignette; state counts are not identical."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-28-leave-1280x720.png",
+      "captureSha256": "6A3A5ECA3ED08757100AEBBA9BD7D907E67EC28AF6C439783112E9D1E44DEC00",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/28-leave.png",
+      "sourceSha256": "D280C9DC11D916756A5CA6B695D2CF2020009DF3085D6B55D41DD5DD09ECE7B2",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1280x720 centred warning wraps to two lines and two actions have separate complete borders.",
+        "Centred ivory modal separates clearly from dimmed battle/HUD.",
+        "Map icon,title,progress warning,top-right close,blue Stay and ivory Finish Battle are all whole.",
+        "Warning wraps inside card; bottom eight-slot palette and material/action controls remain visible and dimmed."
+      ],
+      "residuals": [
+        "Map icon is a simple three-panel outline instead of detailed route map with trees/X.",
+        "Modal has more regular borders and larger blank vertical gaps than sketch.",
+        "Sparse captured battle with few enemies/trees differs from dense source combat vignette; state counts are not identical."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-28-leave-1280x960.png",
+      "captureSha256": "2D3D77F7C451D2CDD66CB74101A8A2B817B4EA99628E2D2EA3E9F92BD6FE0400",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/28-leave.png",
+      "sourceSha256": "D280C9DC11D916756A5CA6B695D2CF2020009DF3085D6B55D41DD5DD09ECE7B2",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1280x960 taller battle viewport surrounds modal; upper HUD and full palette remain visible.",
+        "Centred ivory modal separates clearly from dimmed battle/HUD.",
+        "Map icon,title,progress warning,top-right close,blue Stay and ivory Finish Battle are all whole.",
+        "Warning wraps inside card; bottom eight-slot palette and material/action controls remain visible and dimmed."
+      ],
+      "residuals": [
+        "Map icon is a simple three-panel outline instead of detailed route map with trees/X.",
+        "Modal has more regular borders and larger blank vertical gaps than sketch.",
+        "Sparse captured battle with few enemies/trees differs from dense source combat vignette; state counts are not identical."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-28-leave-1600x900.png",
+      "captureSha256": "EC44C11393E8D3070EAC0E23AFFF90F23C212033058CCEA1AEFCD7B401F2326B",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/28-leave.png",
+      "sourceSha256": "D280C9DC11D916756A5CA6B695D2CF2020009DF3085D6B55D41DD5DD09ECE7B2",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1600x900 title,warning and actions have generous spacing; dimmed field stays subordinate.",
+        "Centred ivory modal separates clearly from dimmed battle/HUD.",
+        "Map icon,title,progress warning,top-right close,blue Stay and ivory Finish Battle are all whole.",
+        "Warning wraps inside card; bottom eight-slot palette and material/action controls remain visible and dimmed."
+      ],
+      "residuals": [
+        "Map icon is a simple three-panel outline instead of detailed route map with trees/X.",
+        "Modal has more regular borders and larger blank vertical gaps than sketch.",
+        "Sparse captured battle with few enemies/trees differs from dense source combat vignette; state counts are not identical."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-28-leave-1920x1080.png",
+      "captureSha256": "8A4AAF6A51E91A62017AA1F4B189D49B8C5ECEE1C5589FD9068B08FDB4223219",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/28-leave.png",
+      "sourceSha256": "D280C9DC11D916756A5CA6B695D2CF2020009DF3085D6B55D41DD5DD09ECE7B2",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "At1920x1080 modal stays centred; simplified map and sparse battle differ visibly from source.",
+        "Centred ivory modal separates clearly from dimmed battle/HUD.",
+        "Map icon,title,progress warning,top-right close,blue Stay and ivory Finish Battle are all whole.",
+        "Warning wraps inside card; bottom eight-slot palette and material/action controls remain visible and dimmed."
+      ],
+      "residuals": [
+        "Map icon is a simple three-panel outline instead of detailed route map with trees/X.",
+        "Modal has more regular borders and larger blank vertical gaps than sketch.",
+        "Sparse captured battle with few enemies/trees differs from dense source combat vignette; state counts are not identical."
+      ]
+    }
+  ]
+}

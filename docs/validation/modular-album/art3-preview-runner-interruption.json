@@ -1,0 +1,57 @@
+{
+  "job": {
+    "job_id": "7f0e7b0fa3c84786b2faf3a71d88c813",
+    "status": "failed",
+    "mode": "PlayMode",
+    "started_unix_ms": 1792923153903,
+    "finished_unix_ms": 1792923167914,
+    "last_update_unix_ms": 1792923167914,
+    "progress": {
+      "completed": 1,
+      "total": 10,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": null,
+      "last_finished_test_full_name": "PaperDefense.Tests.NotebookWeaponPreviewTests.ExplicitAnimationRetainsTheOriginalClipFramesAfterAComposedPreview",
+      "last_finished_unix_ms": 1792923161312,
+      "stuck_suspected": false,
+      "editor_is_focused": true,
+      "run_in_background": true,
+      "focus_nudge_attempts": null,
+      "focus_nudge_limit": null,
+      "focus_nudge_status": null,
+      "blocked_reason": null,
+      "failures_so_far": [],
+      "failures_capped": false
+    },
+    "error": "An unexpected error happened while running tests.",
+    "result": null
+  },
+  "console": {
+    "success": true,
+    "message": "Retrieved 3 log entries.",
+    "data": [
+      {
+        "type": "Exception",
+        "message": "NullReferenceException: Object reference not set to an instance of an object",
+        "file": "./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/Tasks/PlayModeRunTask.cs",
+        "line": 52,
+        "stackTrace": "UnityEditor.TestTools.TestRunner.TestRun.Tasks.PlayModeRunTask+<Execute>d__1.MoveNext () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/Tasks/PlayModeRunTask.cs:52)\nUnityEditor.TestTools.TestRunner.TestRun.TestJobRunner.ExecuteStep () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:194)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions()\n"
+      },
+      {
+        "type": "Error",
+        "message": "An unexpected error happened while running tests.",
+        "file": "./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/Api/CallbacksDelegator.cs",
+        "line": 67,
+        "stackTrace": "UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n"
+      },
+      {
+        "type": "Error",
+        "message": "Too many instant steps in test execution mode: Error. Current task ExitPlayModeTask.",
+        "file": "./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/TestJobRunner.cs",
+        "line": 140,
+        "stackTrace": "UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n"
+      }
+    ]
+  },
+  "note": "Test framework lost PlayMode execution context during a domain reload. This is an incomplete run, not a product test result. Rerun after compilation is stable."
+}

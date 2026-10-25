@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "message": "Code executed successfully.",
+  "data": {
+    "result": {
+      "scene": "Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity",
+      "dirty": false,
+      "playing": false,
+      "compiling": false,
+      "updating": false,
+      "revision": "modular-full-catalog-2026-10-24-v8"
+    },
+    "compiler": "codedom"
+  }
+}

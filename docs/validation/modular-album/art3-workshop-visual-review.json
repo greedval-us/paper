@@ -1,0 +1,2221 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "art3_captureprep / physical PNG inspection",
+  "revision": "modular-full-catalog-2026-10-24-v8",
+  "status": "REVIEWED_WITH_DIFFERENCES",
+  "generatedAt": "2026-10-25T18:40:09.8824889Z",
+  "scope": "20 workshop states x 5 sizes; separate tail review owns 26-save-error, 26-save-dismissed, 26-save-retry, 27-invalid, 29-structure, 29-wall, 29-slow, 29-repair.",
+  "summary": {
+    "physicallyInspectedPngs": 100,
+    "distinctStates": 20,
+    "sizeCount": 5,
+    "blockersObserved": 0,
+    "exactSketchMatchClaimed": false,
+    "correctedFindings": [
+      "Cream rectangle below hub is absent in fresh captures.",
+      "Precision feed reaches the facade; tiny ink mechanism detail meets the lower front bolt/plate."
+    ],
+    "residuals": [
+      "Flat rectangular platforms and pen mechanisms differ from compact round sketch towers.",
+      "Some compact layouts clip secondary component text or omit node labels.",
+      "Zoomed blot views crop distant marks; overview keeps assemblies within the field.",
+      "Overview assemblies and library miniatures are small, with large paper gaps."
+    ]
+  },
+  "records": [
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-04-foundation-1024x768.png",
+      "captureSha256": "a620c95557818ea146acce8cdec8cb1e93d9607bdd2a3a676d187610d7ef7333",
+      "metadataSha256": "7ed633ec9966a1a172ca05669e320f059a2eea98b0309fe083a129b7a5acbe15",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/04-foundation.png",
+      "sourceSha256": "9180154b909dd512afea969def6509a0b0220b972ff7f56a5699dbbc1723285c",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Четыре карточки и обе подписанные посадки помещаются; основа непрерывна, цилиндры стоят на кольцах площадки.",
+        "После исправления маленький чернильный механизм у точной основы касается передней нижней накладки/болта и не выглядит отдельно плавающей деталью.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Плоская квадратная площадка с широко разнесёнными цилиндрами отличается от компактной круглой башни экранного эскиза; золотистые заклёпки сильнее выделены."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-04-foundation-1280x720.png",
+      "captureSha256": "c85a085f4d2aff09e7f5936138abd6a5471cec350f6e1589e4f6edcc4871b893",
+      "metadataSha256": "4853b1e28353b777c3307c66fea894602fdbc3fe229b4597796c633f8a0d5835",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/04-foundation.png",
+      "sourceSha256": "9180154b909dd512afea969def6509a0b0220b972ff7f56a5699dbbc1723285c",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Четыре карточки и обе подписанные посадки помещаются; основа непрерывна, цилиндры стоят на кольцах площадки.",
+        "После исправления маленький чернильный механизм у точной основы касается передней нижней накладки/болта и не выглядит отдельно плавающей деталью.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Плоская квадратная площадка с широко разнесёнными цилиндрами отличается от компактной круглой башни экранного эскиза; золотистые заклёпки сильнее выделены."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-04-foundation-1280x960.png",
+      "captureSha256": "ae317e20d14df0a4179c4f4937058b93de7cd6a8fd2526096c1f357ee8330c64",
+      "metadataSha256": "f721b599c87d76c7c5fab2bd557e80769adb2ca0761bb5d873fabc64913c30e4",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/04-foundation.png",
+      "sourceSha256": "9180154b909dd512afea969def6509a0b0220b972ff7f56a5699dbbc1723285c",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Четыре карточки и обе подписанные посадки помещаются; основа непрерывна, цилиндры стоят на кольцах площадки.",
+        "После исправления маленький чернильный механизм у точной основы касается передней нижней накладки/болта и не выглядит отдельно плавающей деталью.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Плоская квадратная площадка с широко разнесёнными цилиндрами отличается от компактной круглой башни экранного эскиза; золотистые заклёпки сильнее выделены."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-04-foundation-1600x900.png",
+      "captureSha256": "43ed46fa6a0136e089fc5da7e87c036fc2a3508af34d7b79d9f51b1a525bdd1a",
+      "metadataSha256": "b1ab8766416db1cdf8c21003e18a1b5e08f3bc37e61eaf838bd9187a4ffed6b6",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/04-foundation.png",
+      "sourceSha256": "9180154b909dd512afea969def6509a0b0220b972ff7f56a5699dbbc1723285c",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Четыре карточки и обе подписанные посадки помещаются; основа непрерывна, цилиндры стоят на кольцах площадки.",
+        "После исправления маленький чернильный механизм у точной основы касается передней нижней накладки/болта и не выглядит отдельно плавающей деталью.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Плоская квадратная площадка с широко разнесёнными цилиндрами отличается от компактной круглой башни экранного эскиза; золотистые заклёпки сильнее выделены."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-04-foundation-1920x1080.png",
+      "captureSha256": "4e9857ad0666ec0a8be2badd9d127b9a43c22e90d9fbf010855f5d7f80005c0c",
+      "metadataSha256": "4e0da40a27832bff568d53e732f822c3ff864c94911c79f5388159ddd585bda3",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/04-foundation.png",
+      "sourceSha256": "9180154b909dd512afea969def6509a0b0220b972ff7f56a5699dbbc1723285c",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Четыре карточки и обе подписанные посадки помещаются; основа непрерывна, цилиндры стоят на кольцах площадки.",
+        "После исправления маленький чернильный механизм у точной основы касается передней нижней накладки/болта и не выглядит отдельно плавающей деталью.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Плоская квадратная площадка с широко разнесёнными цилиндрами отличается от компактной круглой башни экранного эскиза; золотистые заклёпки сильнее выделены."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-05-weapons-1024x768.png",
+      "captureSha256": "2a7c179c0351719f8447e70a5285901c53873eb1868590a8f2617b9dd2041014",
+      "metadataSha256": "dc1f077b5d7021f48da2328dfeead3c8a33c1dee1e3e2ef8d76223210f7e8e68",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/05-weapons.png",
+      "sourceSha256": "2f0893c31272c3e20e6a79b873c8db17770f3c92f89a22cba2b271a20421f638",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Все семь оружий различимы; полная установленная сборка соединена с левым гнездом, второй слот пуст; цены, выбор крепления и действия видны.",
+        "Светлый прямоугольник под цилиндрическим основанием удалён, силуэт карточек чистый.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Широкая плоская площадка отличается от компактной круглой башни экранного эскиза.",
+        "Однострочный состав под характеристиками обрезан после прицела."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-05-weapons-1280x720.png",
+      "captureSha256": "6af1097b05e6fb6fec60908d9b76a002bd98ed7cb39e58fc3212fe2ff6f84b88",
+      "metadataSha256": "1c4418d4e95206e6dce067a084b375c0b3630007901265465176a2efb33fea3b",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/05-weapons.png",
+      "sourceSha256": "2f0893c31272c3e20e6a79b873c8db17770f3c92f89a22cba2b271a20421f638",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Все семь оружий различимы; полная установленная сборка соединена с левым гнездом, второй слот пуст; цены, выбор крепления и действия видны.",
+        "Светлый прямоугольник под цилиндрическим основанием удалён, силуэт карточек чистый.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Широкая плоская площадка отличается от компактной круглой башни экранного эскиза.",
+        "Однострочный состав обрезан после магазина."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-05-weapons-1280x960.png",
+      "captureSha256": "0b46eb7b1e9c0afca7b69eea664d840c7ee58e9280d8f6fee6a81210ade3e14b",
+      "metadataSha256": "f709fffd8f1a553a7174a1b824871250892a98e093f9419b34dc9cfe04d506e8",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/05-weapons.png",
+      "sourceSha256": "2f0893c31272c3e20e6a79b873c8db17770f3c92f89a22cba2b271a20421f638",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Все семь оружий различимы; полная установленная сборка соединена с левым гнездом, второй слот пуст; цены, выбор крепления и действия видны.",
+        "Светлый прямоугольник под цилиндрическим основанием удалён, силуэт карточек чистый.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Широкая плоская площадка отличается от компактной круглой башни экранного эскиза.",
+        "Однострочный состав обрезан после магазина."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-05-weapons-1600x900.png",
+      "captureSha256": "b9a6068e39efd07b317ab723d0ea24cd8a7c69938669dae742c6f0e681ca1a02",
+      "metadataSha256": "362a16f074d8488f146ecf81a69655d0af8936d84d9d5e249ae0359588690e9e",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/05-weapons.png",
+      "sourceSha256": "2f0893c31272c3e20e6a79b873c8db17770f3c92f89a22cba2b271a20421f638",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Все семь оружий различимы; полная установленная сборка соединена с левым гнездом, второй слот пуст; цены, выбор крепления и действия видны.",
+        "Светлый прямоугольник под цилиндрическим основанием удалён, силуэт карточек чистый.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Широкая плоская площадка отличается от компактной круглой башни экранного эскиза."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-05-weapons-1920x1080.png",
+      "captureSha256": "87a03c34003e4d7a3b7721937d889bf2c4f1db561bc7461b5369e2d0987cfeac",
+      "metadataSha256": "184da23e44d53a8cedaa571fecf8d4aa2e5509dd984e1da16289b1e653bc03f8",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/05-weapons.png",
+      "sourceSha256": "2f0893c31272c3e20e6a79b873c8db17770f3c92f89a22cba2b271a20421f638",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Все семь оружий различимы; полная установленная сборка соединена с левым гнездом, второй слот пуст; цены, выбор крепления и действия видны.",
+        "Светлый прямоугольник под цилиндрическим основанием удалён, силуэт карточек чистый.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Широкая плоская площадка отличается от компактной круглой башни экранного эскиза."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-06-drawing-1024x768.png",
+      "captureSha256": "d568909ddfb35d800a5c9b1c0fb6012e9f4390ea14eb7689a81c520c0f809f91",
+      "metadataSha256": "9368de86c7e96fa3f93653869f82fe121d8e69fb23faf7a3052c1bb358518d15",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/06-drawing.png",
+      "sourceSha256": "edba0bc718e2c896c7854442f269855aa16f22b8cb456994c61bb25410126930",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Пять компонентов разнесены стрелками в схеме; картридж с каплей различим, рисунки не залезают на статистику и действия.",
+        "Вкладки, скролл деталей, установка и нижнее сохранение помещаются.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Схема прямоугольного механизма отличается от круглого корпуса эскиза; отдельный мини-полигон заменён числовой панелью.",
+        "Подписи узлов на компактной схеме скрыты."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-06-drawing-1280x720.png",
+      "captureSha256": "f819bbc022b996ac21d5397f63de2f79b2fe59a85ff0710df190e0e6d69a0914",
+      "metadataSha256": "4e6e787ab36db5094b869dc2ecd9f32b7de5873e37717f323989042499a44a7e",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/06-drawing.png",
+      "sourceSha256": "edba0bc718e2c896c7854442f269855aa16f22b8cb456994c61bb25410126930",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Пять компонентов разнесены стрелками в схеме; картридж с каплей различим, рисунки не залезают на статистику и действия.",
+        "Вкладки, скролл деталей, установка и нижнее сохранение помещаются.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Схема прямоугольного механизма отличается от круглого корпуса эскиза; отдельный мини-полигон заменён числовой панелью.",
+        "Подписи узлов на компактной схеме скрыты."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-06-drawing-1280x960.png",
+      "captureSha256": "562be737cbe7d83e4c52558f4af78703dbaf6b679a85aa0100accdfcb6599176",
+      "metadataSha256": "4f4857dfc28a416bd3138490c9783a63376187fa0217063fd5b6abe0c405c1ac",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/06-drawing.png",
+      "sourceSha256": "edba0bc718e2c896c7854442f269855aa16f22b8cb456994c61bb25410126930",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Пять компонентов разнесены стрелками в схеме; картридж с каплей различим, рисунки не залезают на статистику и действия.",
+        "Вкладки, скролл деталей, установка и нижнее сохранение помещаются.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Схема прямоугольного механизма отличается от круглого корпуса эскиза; отдельный мини-полигон заменён числовой панелью."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-06-drawing-1600x900.png",
+      "captureSha256": "a10a366465cfda57abf0006930e3acb2438c35419865509573c5210d81740174",
+      "metadataSha256": "62823dd88dd3ba40765107962378ce6815785c3f32b083903b92d8a2375220b2",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/06-drawing.png",
+      "sourceSha256": "edba0bc718e2c896c7854442f269855aa16f22b8cb456994c61bb25410126930",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Пять компонентов разнесены стрелками в схеме; картридж с каплей различим, рисунки не залезают на статистику и действия.",
+        "Вкладки, скролл деталей, установка и нижнее сохранение помещаются.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Схема прямоугольного механизма отличается от круглого корпуса эскиза; отдельный мини-полигон заменён числовой панелью."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-06-drawing-1920x1080.png",
+      "captureSha256": "9452fba7e6cf949e54e13a07aa267d9386c3afd09d0f43fc17fea6228084f52c",
+      "metadataSha256": "2c2007cd935071c5bbaee4a9b19e37c978a2c9ee51379ae675403cd5147e7321",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/06-drawing.png",
+      "sourceSha256": "edba0bc718e2c896c7854442f269855aa16f22b8cb456994c61bb25410126930",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Пять компонентов разнесены стрелками в схеме; картридж с каплей различим, рисунки не залезают на статистику и действия.",
+        "Вкладки, скролл деталей, установка и нижнее сохранение помещаются.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Схема прямоугольного механизма отличается от круглого корпуса эскиза; отдельный мини-полигон заменён числовой панелью."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-07-details-1024x768.png",
+      "captureSha256": "982b4f1951c61332ecbcd8abe4de377fdd3e03c53ec58436e8bcd1534025e6c9",
+      "metadataSha256": "c85e995af20bf26c4d12632babec49cf268eb49a466ee625e49ab0043d25469d",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Обе головки целиком видны, шесть числовых сравнений и установка помещаются; после покупки показано14 золота, длинная головка открыта.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Отдельная головка-перо вместо цилиндрического оружия на станине эскиза7; декоративного пробного выстрела нет.",
+        "Название штатной головки в маленькой нижней карточке обрезано; полное есть под большой иллюстрацией."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-07-details-1280x720.png",
+      "captureSha256": "6cc87b379ed2985ebc76006901df57b123787b9e88053522bb318ff6f3f11399",
+      "metadataSha256": "90d4e04d66c81ceab0c5119d0d5becbab186833baf5bb4d8774382df9dcaf780",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Обе головки целиком видны, шесть числовых сравнений и установка помещаются; после покупки показано14 золота, длинная головка открыта.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Отдельная головка-перо вместо цилиндрического оружия на станине эскиза7; декоративного пробного выстрела нет."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-07-details-1280x960.png",
+      "captureSha256": "f93068e109f6b77d6a025ef9d093dd9cc64bee98cb9a3fa5300baaef37ef9457",
+      "metadataSha256": "9dc8ec50754439569bd42c92c502b79556f6b0cb421cec39eecd81ea75bc3749",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Обе головки целиком видны, шесть числовых сравнений и установка помещаются; после покупки показано14 золота, длинная головка открыта.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Отдельная головка-перо вместо цилиндрического оружия на станине эскиза7; декоративного пробного выстрела нет."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-07-details-1600x900.png",
+      "captureSha256": "4e5299c8950192cf5260cd5b6e3ec77cd489bf3ae2d452110b4e4240140ac048",
+      "metadataSha256": "0bda234f33ee8827b3920561d3be64426209a82cd4a3c9ae83653a429a168efd",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Обе головки целиком видны, шесть числовых сравнений и установка помещаются; после покупки показано14 золота, длинная головка открыта.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Отдельная головка-перо вместо цилиндрического оружия на станине эскиза7; декоративного пробного выстрела нет."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-07-details-1920x1080.png",
+      "captureSha256": "2e2056abd81baba2b44b73ec1d56b28a9825be85f35c72da86690177af674720",
+      "metadataSha256": "a25b71fed568b1b41951be2b478562f3cc2551c926abd12e0c854d14d851883c",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Обе головки целиком видны, шесть числовых сравнений и установка помещаются; после покупки показано14 золота, длинная головка открыта.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Отдельная головка-перо вместо цилиндрического оружия на станине эскиза7; декоративного пробного выстрела нет."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-07-magazine-belt-1024x768.png",
+      "captureSha256": "fc777057617e0f58d71696015608b348535d157ddae605886bfa86febe0c66ca",
+      "metadataSha256": "ef1608af07b728501c72ddcea28f3ff4f3d17954f1b27a4db44494f2725e15ea",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Полный пулемёт соединён с чистым цилиндрическим hub; лента касается верхнего подающего узла, лишней подложки нет.",
+        "Цикл, DPS/цена/нагрузка и недоступные открытие/установка помещаются.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Петля ленты выглядит обычными золотистыми патронами, чернильная семантика слабее кассеты; вместо парного сравнения эскиза7 показан один полный кандидат."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-07-magazine-belt-1280x720.png",
+      "captureSha256": "2c9f5c6a95c10273c216e1e8b345e9894c5c99ddc7c93b5090ffe73eaf22845d",
+      "metadataSha256": "8d0bcdfad08c951660d7832b52d4529122b863a203fc84a2faa19d6e5c3e9291",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Полный пулемёт соединён с чистым цилиндрическим hub; лента касается верхнего подающего узла, лишней подложки нет.",
+        "Цикл, DPS/цена/нагрузка и недоступные открытие/установка помещаются.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Петля ленты выглядит обычными золотистыми патронами, чернильная семантика слабее кассеты; вместо парного сравнения эскиза7 показан один полный кандидат."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-07-magazine-belt-1280x960.png",
+      "captureSha256": "665862a88afddf6280b7eec4408ffefa7ef32f1eadc043aa31179f64f6c4d4ce",
+      "metadataSha256": "f8438d634481dcb44c09ce3543beed374bd040e3283c9b35cd5d4eb2ddf6d0cf",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Полный пулемёт соединён с чистым цилиндрическим hub; лента касается верхнего подающего узла, лишней подложки нет.",
+        "Цикл, DPS/цена/нагрузка и недоступные открытие/установка помещаются.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Петля ленты выглядит обычными золотистыми патронами, чернильная семантика слабее кассеты; вместо парного сравнения эскиза7 показан один полный кандидат."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-07-magazine-belt-1600x900.png",
+      "captureSha256": "d372a38a2cf495e99558748879d91c7c08189cd3c0c631957fb24b676dcf026b",
+      "metadataSha256": "f1930ed66c5e0f5a15d5d3ab7d60f677eccb0c7ebfa513b3500d8c2769695329",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Полный пулемёт соединён с чистым цилиндрическим hub; лента касается верхнего подающего узла, лишней подложки нет.",
+        "Цикл, DPS/цена/нагрузка и недоступные открытие/установка помещаются.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Петля ленты выглядит обычными золотистыми патронами, чернильная семантика слабее кассеты; вместо парного сравнения эскиза7 показан один полный кандидат."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-07-magazine-belt-1920x1080.png",
+      "captureSha256": "1a270c54b391af4675f671286e5265e679475b110abd8e2fe00b97f3b60cca92",
+      "metadataSha256": "b2828abccb347ca0904d9267c08484f225c1355277f3390c1c1cb54ee8dd1522",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Полный пулемёт соединён с чистым цилиндрическим hub; лента касается верхнего подающего узла, лишней подложки нет.",
+        "Цикл, DPS/цена/нагрузка и недоступные открытие/установка помещаются.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Петля ленты выглядит обычными золотистыми патронами, чернильная семантика слабее кассеты; вместо парного сравнения эскиза7 показан один полный кандидат."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-07-magazine-drum-1024x768.png",
+      "captureSha256": "f80480ab61836892804ae3ca9e84dc5c4554215a677bfe821287cba7b79c5161",
+      "metadataSha256": "bd0948d1b98639667be82a6fcc3da704db02fe77029c958f3d36f13753718b14",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Барабан касается бокового узла полного пулемёта; чистый hub без кремового прямоугольника, вся сборка в пределах панели.",
+        "Цикл и параметры читаются; штатная кассета с каплей и выбранный барабан различимы.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Барабан выглядит обычным металлическим барабаном; чернильная семантика слабее кассеты. Вместо парного сравнения эскиза7 показан один полный кандидат."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-07-magazine-drum-1280x720.png",
+      "captureSha256": "d8391c9a7ffd4abf5505e9ad033aab43523b36905a8ff562d130172a3182837a",
+      "metadataSha256": "e7edd4fa9e1ae908d22cfe495c1a9c60ff954b3f8e96c360ff7268f7477ff5ac",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Барабан касается бокового узла полного пулемёта; чистый hub без кремового прямоугольника, вся сборка в пределах панели.",
+        "Цикл и параметры читаются; штатная кассета с каплей и выбранный барабан различимы.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Барабан выглядит обычным металлическим барабаном; чернильная семантика слабее кассеты. Вместо парного сравнения эскиза7 показан один полный кандидат."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-07-magazine-drum-1280x960.png",
+      "captureSha256": "56ca5ff4b99099bf5cf2a15f1c09a56ff9baf987379ef0d912a027f5579c7619",
+      "metadataSha256": "7bd5aa4831f37ca13355ab9d5e8ad89b192c743d86c87209175d53dbf117c8e3",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Барабан касается бокового узла полного пулемёта; чистый hub без кремового прямоугольника, вся сборка в пределах панели.",
+        "Цикл и параметры читаются; штатная кассета с каплей и выбранный барабан различимы.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Барабан выглядит обычным металлическим барабаном; чернильная семантика слабее кассеты. Вместо парного сравнения эскиза7 показан один полный кандидат."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-07-magazine-drum-1600x900.png",
+      "captureSha256": "6bfc7016f79c09041eae2ec7e8fbf8b3a9c560f6b8c894f5eefc10af029f77dd",
+      "metadataSha256": "86644a44db113ceb9be17a0cbaec5b2773afd222972a84217819e93fa728552d",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Барабан касается бокового узла полного пулемёта; чистый hub без кремового прямоугольника, вся сборка в пределах панели.",
+        "Цикл и параметры читаются; штатная кассета с каплей и выбранный барабан различимы.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Барабан выглядит обычным металлическим барабаном; чернильная семантика слабее кассеты. Вместо парного сравнения эскиза7 показан один полный кандидат."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-07-magazine-drum-1920x1080.png",
+      "captureSha256": "cbc81727a2d838d5163a4b03bda928a6b16c3d8a848963e4340f774c3f4c8b9f",
+      "metadataSha256": "89ceabf307f201edd3742cdffeedb56a3f6f8dcf8920bcaaebba926dbb305d96",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Барабан касается бокового узла полного пулемёта; чистый hub без кремового прямоугольника, вся сборка в пределах панели.",
+        "Цикл и параметры читаются; штатная кассета с каплей и выбранный барабан различимы.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Барабан выглядит обычным металлическим барабаном; чернильная семантика слабее кассеты. Вместо парного сравнения эскиза7 показан один полный кандидат."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-08-review-1024x768.png",
+      "captureSha256": "0d127a0cdb9d8dd7e745f9a6303b15cba7362d213a0f8c51530d6fedec30cb3c",
+      "metadataSha256": "d1e4d821f5265e418ee4cc4b610008f789c052cbb9f8c87ebd96792f0e8f6d0b",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/08-review.png",
+      "sourceSha256": "77ec8626b7444519e8c635d44ff07ba496e180bc5f20bc76ab72750db568522b",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Оба пулемёта связаны с отдельными кольцами общей площадки, сборка целиком в левой панели, без лишних прямоугольников.",
+        "Имя, три проверки,64 штриха,55 прочности,45,71DPS, полигон и сохранения читаются; состав в отдельном скролле.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Большая свободная площадка между параллельными стволами отличается от компактной круглой башни эскиза8."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-08-review-1280x720.png",
+      "captureSha256": "8b2343be27e2dd2799858572747efe93664886850288ffd640b62ddc0626b71e",
+      "metadataSha256": "ec1e2d8d0b2471c0a763a4571cfac7e3d6fb2f452020db75170412d49e6daeb4",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/08-review.png",
+      "sourceSha256": "77ec8626b7444519e8c635d44ff07ba496e180bc5f20bc76ab72750db568522b",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Оба пулемёта связаны с отдельными кольцами общей площадки, сборка целиком в левой панели, без лишних прямоугольников.",
+        "Имя, три проверки,64 штриха,55 прочности,45,71DPS, полигон и сохранения читаются; состав в отдельном скролле.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Большая свободная площадка между параллельными стволами отличается от компактной круглой башни эскиза8."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-08-review-1280x960.png",
+      "captureSha256": "caa615941ecb494b62f7d1d3de8e9cceac280ddd18b146b4417809f14a113f57",
+      "metadataSha256": "a94d01fe01932708f5207c7caf5af83340fc4a6f00c6db669925505380d0e81f",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/08-review.png",
+      "sourceSha256": "77ec8626b7444519e8c635d44ff07ba496e180bc5f20bc76ab72750db568522b",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Оба пулемёта связаны с отдельными кольцами общей площадки, сборка целиком в левой панели, без лишних прямоугольников.",
+        "Имя, три проверки,64 штриха,55 прочности,45,71DPS, полигон и сохранения читаются; состав в отдельном скролле.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Большая свободная площадка между параллельными стволами отличается от компактной круглой башни эскиза8."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-08-review-1600x900.png",
+      "captureSha256": "a3909f54bcfacef8d1f612cabee3f7cb27d6f390ee5f95f0c956bd255da6fb28",
+      "metadataSha256": "e9161f11d3880afcb5cc4291a78c9f69a01fdb247bbcfd99ed63283bf8ae9eb0",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/08-review.png",
+      "sourceSha256": "77ec8626b7444519e8c635d44ff07ba496e180bc5f20bc76ab72750db568522b",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Оба пулемёта связаны с отдельными кольцами общей площадки, сборка целиком в левой панели, без лишних прямоугольников.",
+        "Имя, три проверки,64 штриха,55 прочности,45,71DPS, полигон и сохранения читаются; состав в отдельном скролле.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Большая свободная площадка между параллельными стволами отличается от компактной круглой башни эскиза8."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-08-review-1920x1080.png",
+      "captureSha256": "805f1c40e277dfe55854020798b6c155473a78d365c23283f27edd54daa6ba59",
+      "metadataSha256": "cd42062c95904930b0da3625f0af06cf259c984dcd6b0f203f3867713a7aec15",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/08-review.png",
+      "sourceSha256": "77ec8626b7444519e8c635d44ff07ba496e180bc5f20bc76ab72750db568522b",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Оба пулемёта связаны с отдельными кольцами общей площадки, сборка целиком в левой панели, без лишних прямоугольников.",
+        "Имя, три проверки,64 штриха,55 прочности,45,71DPS, полигон и сохранения читаются; состав в отдельном скролле.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Большая свободная площадка между параллельными стволами отличается от компактной круглой башни эскиза8."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-1024x768.png",
+      "captureSha256": "e994cf59d041506ff94d4b7fbfeb59f4a49b649b6c8b40d333db9137bfe1dab7",
+      "metadataSha256": "3688ec2162ea58a4df66a01e9a5783a64351d8eedd1980aaf5d8cbbabbb0adee",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Две раздельные линии: двойной дозор и дозор на площадках, цели и выстрелы видны, всё внутри поля; таблица бюджета/измерений и кнопки не перекрываются.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Башни гораздо мельче и поле более пустое, чем богато оформленный полигон эскиза10; трассы выглядят прямыми штрихами вместо чернильных капель."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-1280x720.png",
+      "captureSha256": "8b7fed6cd06ba7fd4432b4d3bb88bf66d47f205d4082c85f6a413059b158154f",
+      "metadataSha256": "d52eebf0ee51050bddba7959938571aef0a898d14d1f172059f85c946fddfa3a",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Две раздельные линии: двойной дозор и дозор на площадках, цели и выстрелы видны, всё внутри поля; таблица бюджета/измерений и кнопки не перекрываются.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Башни гораздо мельче и поле более пустое, чем богато оформленный полигон эскиза10; трассы выглядят прямыми штрихами вместо чернильных капель."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-1280x960.png",
+      "captureSha256": "873f1c8a297bd988f09ce997687e06c3aa255e70fc4fc87096743b1134fbe101",
+      "metadataSha256": "e2f23447ec24f14dd7927a95234de7679a36a8911774d96338000d770c96077b",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Две раздельные линии: двойной дозор и дозор на площадках, цели и выстрелы видны, всё внутри поля; таблица бюджета/измерений и кнопки не перекрываются.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Башни гораздо мельче и поле более пустое, чем богато оформленный полигон эскиза10; трассы выглядят прямыми штрихами вместо чернильных капель."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-1600x900.png",
+      "captureSha256": "bcebbfb3bea6f1a12bc17127bf5197bb21c781c25385d11d5505b24458420130",
+      "metadataSha256": "4fb83f7308e3156f9d659ace765d8b8de3bb2f80d9d089ba8d3429631bb874cf",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Две раздельные линии: двойной дозор и дозор на площадках, цели и выстрелы видны, всё внутри поля; таблица бюджета/измерений и кнопки не перекрываются.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Башни гораздо мельче и поле более пустое, чем богато оформленный полигон эскиза10; трассы выглядят прямыми штрихами вместо чернильных капель."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-1920x1080.png",
+      "captureSha256": "c6b6cadb96b4f4bb4c130d75f9fa95550bf83e67905645189dd4e2fb7f3bee07",
+      "metadataSha256": "9926309323d55123c0919ad3e52f3d4197dddb1e68926ab5262b0d294f7df8ff",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Две раздельные линии: двойной дозор и дозор на площадках, цели и выстрелы видны, всё внутри поля; таблица бюджета/измерений и кнопки не перекрываются.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Башни гораздо мельче и поле более пустое, чем богато оформленный полигон эскиза10; трассы выглядят прямыми штрихами вместо чернильных капель."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-blots-comparison-1024x768.png",
+      "captureSha256": "cb164a728e11df765163f75d154a744e5f3f312af95cb610b22d07d72089335a",
+      "metadataSha256": "e4a50f7df1cdd7d0412a7fbf58087bda0f0e7cf166fbed18dddb5b329ed49dd2",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Обе сборки на связанных площадках и ближайшие кляксы видны; правая таблица включает все шесть измеренных строк и оба столбца.",
+        "Управление, вкладка клякс,60с длительности и48 оставшихся клякс не перекрыты.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Режим клякс является дополнительным состоянием, не буквальной сценой экранного эскиза10; поле более пустое.",
+        "Часть дальних клякс у левого/нижнего края обрезается границей приближённого поля, ближайшие объекты и сборки помещаются; доступен «Весь полигон»."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-blots-comparison-1280x720.png",
+      "captureSha256": "8c4147d9869cc06bf5370fa595952541e28d175bd220afc598dee1cd7eee5ef0",
+      "metadataSha256": "9044c45af20602fb4ffebd04545b85205949a0e12e304bb5618630f54c1afb97",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Обе сборки на связанных площадках и ближайшие кляксы видны; правая таблица включает все шесть измеренных строк и оба столбца.",
+        "Управление, вкладка клякс,60с длительности и48 оставшихся клякс не перекрыты.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Режим клякс является дополнительным состоянием, не буквальной сценой экранного эскиза10; поле более пустое.",
+        "Часть дальних клякс у левого/нижнего края обрезается границей приближённого поля, ближайшие объекты и сборки помещаются; доступен «Весь полигон»."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-blots-comparison-1280x960.png",
+      "captureSha256": "19ed70885d4bd293e0cf46eb93f9a1250d8a763f0f9a65593358bcb1bd5a81a0",
+      "metadataSha256": "a4d3bf09aed3d04b1cb850a7d5ef726f807bf1b6b168503cb38f761d636f270f",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Обе сборки на связанных площадках и ближайшие кляксы видны; правая таблица включает все шесть измеренных строк и оба столбца.",
+        "Управление, вкладка клякс,60с длительности и48 оставшихся клякс не перекрыты.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Режим клякс является дополнительным состоянием, не буквальной сценой экранного эскиза10; поле более пустое.",
+        "Часть дальних клякс у левого/нижнего края обрезается границей приближённого поля, ближайшие объекты и сборки помещаются; доступен «Весь полигон»."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-blots-comparison-1600x900.png",
+      "captureSha256": "5a3bac78ba468e52ccca1a12776851fc692f1b8ab5e4d995d2bfb2fc62bf3e23",
+      "metadataSha256": "8874644c1c2a95f409d037b85e63754d8909dffeeb7a79c5a02464bfb11e585a",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Обе сборки на связанных площадках и ближайшие кляксы видны; правая таблица включает все шесть измеренных строк и оба столбца.",
+        "Управление, вкладка клякс,60с длительности и48 оставшихся клякс не перекрыты.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Режим клякс является дополнительным состоянием, не буквальной сценой экранного эскиза10; поле более пустое.",
+        "Часть дальних клякс у левого/нижнего края обрезается границей приближённого поля, ближайшие объекты и сборки помещаются; доступен «Весь полигон»."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-blots-comparison-1920x1080.png",
+      "captureSha256": "06de871c8ed36178f85e9ff0212a7563a8b59c0103d0b9d38267aae7459aed68",
+      "metadataSha256": "fbb009f5753c3d9836def7d4e1413e9bef437578a65543fd2a6ed9b1c791380f",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Обе сборки на связанных площадках и ближайшие кляксы видны; правая таблица включает все шесть измеренных строк и оба столбца.",
+        "Управление, вкладка клякс,60с длительности и48 оставшихся клякс не перекрыты.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Режим клякс является дополнительным состоянием, не буквальной сценой экранного эскиза10; поле более пустое.",
+        "Часть дальних клякс у левого/нижнего края обрезается границей приближённого поля, ближайшие объекты и сборки помещаются; доступен «Весь полигон»."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-blots-single-1024x768.png",
+      "captureSha256": "2b206b07168581be9a5a0ca16980aae06713057cad6c82555b988b83ee5589ff",
+      "metadataSha256": "f1f1b9bc35d4a5b6ff8d64c8eb62f791204af99abdbe705585c965245dc947b8",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Одна сборка с пустым вторым кольцом показана крупно; hub чистый и связан с площадкой.",
+        "Все шесть результатов пробы читаются на каждом размере, включая кляксы и длительность; действия не перекрыты.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Дополнительный режим отличается от эскиза10; кляксы у верхнего/левого/нижнего края приближённого поля частично обрезаны, при этом сама башня помещается."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-blots-single-1280x720.png",
+      "captureSha256": "d1a9a215571b61649f1ac19eafd2fa752231b2022cd76a7370d4417a2fdac8e6",
+      "metadataSha256": "ac3a0ff95c96137b7153daf03868381fddde2b8388bca0834e9f79bc275194ce",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Одна сборка с пустым вторым кольцом показана крупно; hub чистый и связан с площадкой.",
+        "Все шесть результатов пробы читаются на каждом размере, включая кляксы и длительность; действия не перекрыты.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Дополнительный режим отличается от эскиза10; кляксы у верхнего/левого/нижнего края приближённого поля частично обрезаны, при этом сама башня помещается."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-blots-single-1280x960.png",
+      "captureSha256": "8964068bcd7fdc48bb29bab4963e32f284fbfafc236e5e398b074f079093682d",
+      "metadataSha256": "2365be4223e151faea696b3448cd621b0c0139b4cd14569b655af82025a9605c",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Одна сборка с пустым вторым кольцом показана крупно; hub чистый и связан с площадкой.",
+        "Все шесть результатов пробы читаются на каждом размере, включая кляксы и длительность; действия не перекрыты.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Дополнительный режим отличается от эскиза10; кляксы у верхнего/левого/нижнего края приближённого поля частично обрезаны, при этом сама башня помещается."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-blots-single-1600x900.png",
+      "captureSha256": "affd4257a13d4422b5019681c121f15acccde3366fb0173f4082771cc54c0723",
+      "metadataSha256": "061ff4480b2e28e07b22dab8e01d3a118257955fbed8c8aa05a0d687b807e31c",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Одна сборка с пустым вторым кольцом показана крупно; hub чистый и связан с площадкой.",
+        "Все шесть результатов пробы читаются на каждом размере, включая кляксы и длительность; действия не перекрыты.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Дополнительный режим отличается от эскиза10; кляксы у верхнего/левого/нижнего края приближённого поля частично обрезаны, при этом сама башня помещается."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-blots-single-1920x1080.png",
+      "captureSha256": "8b055ab7e50f3a3f0b6cd19c2e43d1cd1dd0920bdf8e63b763c922f8e07f9b32",
+      "metadataSha256": "5a8c4339cefae8c11bb78c47330bd02ef8d90375680ff4dd5a97c2a2bdb24d98",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Одна сборка с пустым вторым кольцом показана крупно; hub чистый и связан с площадкой.",
+        "Все шесть результатов пробы читаются на каждом размере, включая кляксы и длительность; действия не перекрыты.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Дополнительный режим отличается от эскиза10; кляксы у верхнего/левого/нижнего края приближённого поля частично обрезаны, при этом сама башня помещается."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-overview-1024x768.png",
+      "captureSha256": "99731bea77d32fc7da22f86e485e69acd48ad1a2d489f7e11f2788a9b7d49afb",
+      "metadataSha256": "39bb2a7a705d277a0bdb41ab1893fe990f9d58ce9ee2942abf4822d5ae4cd76b",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Все6 двойных и10 одинарных копий видны целиком, цели и линии трасс внутри поля; кнопка возврата крупного плана и таблица доступны.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Общий план очень мелкий, на1024 детали оружия превращаются в тонкие синие отметки; для чтения предусмотрен крупный план. Иллюстрированная плотная композиция эскиза10 не воспроизводится."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-overview-1280x720.png",
+      "captureSha256": "6737448e40e1279ebf57f6aec7b930397c2d7a525d92ddf4455fedd4ac16327e",
+      "metadataSha256": "dbd9c0313946eb060958354736d7c276b36506d0727afb7ebd215c3f2a6b0ee6",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Все6 двойных и10 одинарных копий видны целиком, цели и линии трасс внутри поля; кнопка возврата крупного плана и таблица доступны.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Общий план очень мелкий, на1024 детали оружия превращаются в тонкие синие отметки; для чтения предусмотрен крупный план. Иллюстрированная плотная композиция эскиза10 не воспроизводится."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-overview-1280x960.png",
+      "captureSha256": "862b891eeff01c196e6503f3a8a49ab20a5e264d296b8b6a7a712ee28f61415f",
+      "metadataSha256": "bd6fb4eee742f820051a276795ce6e935ec6c955870a48b7cb5906e7fe6df296",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Все6 двойных и10 одинарных копий видны целиком, цели и линии трасс внутри поля; кнопка возврата крупного плана и таблица доступны.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Общий план очень мелкий, на1024 детали оружия превращаются в тонкие синие отметки; для чтения предусмотрен крупный план. Иллюстрированная плотная композиция эскиза10 не воспроизводится."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-overview-1600x900.png",
+      "captureSha256": "a1f48d65cc753430bb047baaeb488e8a1da327baee3c80fc45dccec642d81ebd",
+      "metadataSha256": "fd625825d75b6dcaddeb5b8011533e899aab9b4d20d6d816b59620591dba12b6",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Все6 двойных и10 одинарных копий видны целиком, цели и линии трасс внутри поля; кнопка возврата крупного плана и таблица доступны.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Общий план очень мелкий, на1024 детали оружия превращаются в тонкие синие отметки; для чтения предусмотрен крупный план. Иллюстрированная плотная композиция эскиза10 не воспроизводится."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-10-trial-overview-1920x1080.png",
+      "captureSha256": "c73e3fefd5e7cbe28e5a4c0ac9dde5be54cd652c89d85c8427d66ace6d554a8a",
+      "metadataSha256": "1d766a150d91729088b741784b955f7ea2f262ccd96dd36797d015448932a314",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/10-trial.png",
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Все6 двойных и10 одинарных копий видны целиком, цели и линии трасс внутри поля; кнопка возврата крупного плана и таблица доступны.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Общий план очень мелкий, на1024 детали оружия превращаются в тонкие синие отметки; для чтения предусмотрен крупный план. Иллюстрированная плотная композиция эскиза10 не воспроизводится."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-11-stencils-1024x768.png",
+      "captureSha256": "c0317eaaf9dd2d450e874575fe461d675d0a4dac73d5db7d02e39ccc83823ecf",
+      "metadataSha256": "16772b0797c4c74c4bb3572d74bf7bebc0bb9948c4a3528d39315f67e4dbd5a9",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Три головки, выделение длинной, условие ур4/80золота и активное открытие видны во всех пяти кадрах; таблица изменений полностью читается.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Перо вместо длинной металлической трубы эскиза11; карточки растянуты вертикально на больших кадрах, справа много пустого пространства и маленькая иллюстрация выбранного предмета."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-11-stencils-1280x720.png",
+      "captureSha256": "13f2076d78f12f926eedfb5015b8c297cec8efb5dbbeec7f5b389ffd60fe9688",
+      "metadataSha256": "6fadf1a913be3f5374988e5872aad3d4f72d10019af86fef8453a8f946df4841",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Три головки, выделение длинной, условие ур4/80золота и активное открытие видны во всех пяти кадрах; таблица изменений полностью читается.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Перо вместо длинной металлической трубы эскиза11; карточки растянуты вертикально на больших кадрах, справа много пустого пространства и маленькая иллюстрация выбранного предмета."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-11-stencils-1280x960.png",
+      "captureSha256": "062b5f8c66941b3bfe5fabdb5c1cdfcd3f6b870eb756c74fa4a772ab3b570ec2",
+      "metadataSha256": "b4d48c8b57cdd7a035829c15e4928959c116562f1cd77a2095424c2b4e7aa7a3",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Три головки, выделение длинной, условие ур4/80золота и активное открытие видны во всех пяти кадрах; таблица изменений полностью читается.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Перо вместо длинной металлической трубы эскиза11; карточки растянуты вертикально на больших кадрах, справа много пустого пространства и маленькая иллюстрация выбранного предмета."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-11-stencils-1600x900.png",
+      "captureSha256": "51a47445de8f4873ebef8f59b2ba5488a1a8a3270938d5490b261d615963473a",
+      "metadataSha256": "2306a8d250cf63543f6bbb1ad242d358e8a40da40568954da1aef297f1baa30f",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Три головки, выделение длинной, условие ур4/80золота и активное открытие видны во всех пяти кадрах; таблица изменений полностью читается.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Перо вместо длинной металлической трубы эскиза11; карточки растянуты вертикально на больших кадрах, справа много пустого пространства и маленькая иллюстрация выбранного предмета."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-11-stencils-1920x1080.png",
+      "captureSha256": "02baf6cdf0016d57dbe44d0bbf12dbd9d5a53daad26b02e61c85e2d186e05016",
+      "metadataSha256": "d5a26bcb5d8de929f83d1b6c4b5af51a77b62ad92a18e9de6b713058ef8df965",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Три головки, выделение длинной, условие ур4/80золота и активное открытие видны во всех пяти кадрах; таблица изменений полностью читается.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Перо вместо длинной металлической трубы эскиза11; карточки растянуты вертикально на больших кадрах, справа много пустого пространства и маленькая иллюстрация выбранного предмета."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-11-stencils-unaffordable-1024x768.png",
+      "captureSha256": "b1805f98eb964d837ede87fadb49e8b2a69b3346e7c318faff34ac1371be22fc",
+      "metadataSha256": "b96d04fecf5aa1cc6129f69250f35055b6bedacc98e5df6217c1b2c2de26bd80",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Короткая головка выделена,14 золота против цены40 и оба отключённых действия показаны; таблица сравнений читается.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Перо и растянутые карточки отличаются от эскиза11; маленькое изображение справа вторично относительно крупных карточек."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-11-stencils-unaffordable-1280x720.png",
+      "captureSha256": "75fcc5d5b20e7cd44e51a97d7423af6e4ca27448e80f22391ede12c96551529a",
+      "metadataSha256": "311ad53bb252b9cf8108ae04d99c292293f821448b61634ecd644ebcd30bf789",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Короткая головка выделена,14 золота против цены40 и оба отключённых действия показаны; таблица сравнений читается.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Перо и растянутые карточки отличаются от эскиза11; маленькое изображение справа вторично относительно крупных карточек.",
+        "Миниатюра выбранной головки в правом верхнем блоке не видна при этой высоте, но крупное изображение в выбранной карточке есть."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-11-stencils-unaffordable-1280x960.png",
+      "captureSha256": "f3f45d4de2f0c86f0715a6c465969145c7d76eae11110d2cb56492e004f7d7b4",
+      "metadataSha256": "9a4d89fb2b9c70acdce8bf9f8719b21a179e0ac85e9cfd7d8ae0fd866f8a2902",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Короткая головка выделена,14 золота против цены40 и оба отключённых действия показаны; таблица сравнений читается.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Перо и растянутые карточки отличаются от эскиза11; маленькое изображение справа вторично относительно крупных карточек."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-11-stencils-unaffordable-1600x900.png",
+      "captureSha256": "4776fe6b1cfb0d12703a7818435a2c5ffbe36daf1470c574e5f2c5bcd36b0bdc",
+      "metadataSha256": "ba7e0be594d0801e131755eba040d1f67b5c6b951c9b0196b6e3e9753ac5f968",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Короткая головка выделена,14 золота против цены40 и оба отключённых действия показаны; таблица сравнений читается.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Перо и растянутые карточки отличаются от эскиза11; маленькое изображение справа вторично относительно крупных карточек."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-11-stencils-unaffordable-1920x1080.png",
+      "captureSha256": "9367f937e3e490905b8fc4c11cb79d642ccccb4a082830317576bcad26d4c162",
+      "metadataSha256": "fd2dfd057c83c90f576cd514f045d4c42bbbf7a3fb4be653dfa70fbd31bf4700",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Короткая головка выделена,14 золота против цены40 и оба отключённых действия показаны; таблица сравнений читается.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Перо и растянутые карточки отличаются от эскиза11; маленькое изображение справа вторично относительно крупных карточек."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-12-mortar-1024x768.png",
+      "captureSha256": "c7c4c7fbe4635ce4e4ba7a15c65deec8ecc63adfd9536774280e184e5aa6aa6e",
+      "metadataSha256": "172c29b26751d7546a8b5d775c035d73cadbc33099139c091abf5e1cd83fe9c2",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/12-mortar.png",
+      "sourceSha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Обе головки мортиры показаны целиком; центральная мортира стоит на чистом hub, дуга и зона попадания с целями внутри панели.",
+        "Урон28, дальность18, минимум6, радиус2,4, интервал1,9 и цена99 читаются, установка/сохранение видны.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Вместо оформленного широкого боевого поля эскиза12 — узкая вертикальная схема; слева отдельные стволы вместо полных мортир, правые параметры без цветных полос."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-12-mortar-1280x720.png",
+      "captureSha256": "85aa561003891dd2e948b88e2638d06b90698634e23e16a0f64bd10c7a9ce98e",
+      "metadataSha256": "f5bfa006524f051133b74fcdc032e774b635ec20b447b40ecff595a227ff197e",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/12-mortar.png",
+      "sourceSha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Обе головки мортиры показаны целиком; центральная мортира стоит на чистом hub, дуга и зона попадания с целями внутри панели.",
+        "Урон28, дальность18, минимум6, радиус2,4, интервал1,9 и цена99 читаются, установка/сохранение видны.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Вместо оформленного широкого боевого поля эскиза12 — узкая вертикальная схема; слева отдельные стволы вместо полных мортир, правые параметры без цветных полос."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-12-mortar-1280x960.png",
+      "captureSha256": "9bb209f5f77b70041f9b85dd84507a08d45f1fbdf3b254ec0d10ae62c5dab4af",
+      "metadataSha256": "a4e5402127658ee5f6a41bcc8917fd2719f406540174de58b67bb1703418aa16",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/12-mortar.png",
+      "sourceSha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Обе головки мортиры показаны целиком; центральная мортира стоит на чистом hub, дуга и зона попадания с целями внутри панели.",
+        "Урон28, дальность18, минимум6, радиус2,4, интервал1,9 и цена99 читаются, установка/сохранение видны.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Вместо оформленного широкого боевого поля эскиза12 — узкая вертикальная схема; слева отдельные стволы вместо полных мортир, правые параметры без цветных полос."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-12-mortar-1600x900.png",
+      "captureSha256": "b4764ac535421f8e669ac96f20f775ce644fa6c674379331686a4f3a00c4f2ac",
+      "metadataSha256": "cb04fea08c85dbb752f62c58f0266a3a95c052c17e2be828868af2189bf36012",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/12-mortar.png",
+      "sourceSha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Обе головки мортиры показаны целиком; центральная мортира стоит на чистом hub, дуга и зона попадания с целями внутри панели.",
+        "Урон28, дальность18, минимум6, радиус2,4, интервал1,9 и цена99 читаются, установка/сохранение видны.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Вместо оформленного широкого боевого поля эскиза12 — узкая вертикальная схема; слева отдельные стволы вместо полных мортир, правые параметры без цветных полос."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-12-mortar-1920x1080.png",
+      "captureSha256": "3ef208741200f79cf924f31d0c9da1d3d641f13c89c14ba61a4610973972e72d",
+      "metadataSha256": "8d5f7e615d9846af20acba54da0a82bde49a3c239e475de533b8b4e047be81ea",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/12-mortar.png",
+      "sourceSha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Обе головки мортиры показаны целиком; центральная мортира стоит на чистом hub, дуга и зона попадания с целями внутри панели.",
+        "Урон28, дальность18, минимум6, радиус2,4, интервал1,9 и цена99 читаются, установка/сохранение видны.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Вместо оформленного широкого боевого поля эскиза12 — узкая вертикальная схема; слева отдельные стволы вместо полных мортир, правые параметры без цветных полос."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-13-fan-1024x768.png",
+      "captureSha256": "435a76ba8ba882f12f98597a472a30fa3bdc8c2fe58f34406a256dc5ddc78abc",
+      "metadataSha256": "ddb834d8f2d185919499d0c26b9680e4d6dff8cad4ffb01ba2b82cd6c2e3375d",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/13-fan.png",
+      "sourceSha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Веер перьев стоит на соединённом чистом hub; сектор90°, восемь целей и параметры видны, схема не заходит на действия.",
+        "Переключение прицела, карточки механизмов со скроллом и сохранение находятся в отдельных областях.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Реальные враги вместо отдельных манекенов эскиза13, часть фигур в секторе перекрывает друг друга; нижняя основа цилиндрическая, не каменная башня."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-13-fan-1280x720.png",
+      "captureSha256": "0c1e830d15f73742f61660545cfa25f0a06858cf52f19a7fce5d773d14b789d8",
+      "metadataSha256": "cfa18d5a75bf365320904a0ef552156492aca6d1b5ababb4658bb63f8ed70769",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/13-fan.png",
+      "sourceSha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Веер перьев стоит на соединённом чистом hub; сектор90°, восемь целей и параметры видны, схема не заходит на действия.",
+        "Переключение прицела, карточки механизмов со скроллом и сохранение находятся в отдельных областях.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Реальные враги вместо отдельных манекенов эскиза13, часть фигур в секторе перекрывает друг друга; нижняя основа цилиндрическая, не каменная башня."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-13-fan-1280x960.png",
+      "captureSha256": "1242c5aa396040dce18cf97808852d3fab8ec7c71c5fc93b7acd30af6a25e855",
+      "metadataSha256": "193a553f2ed985ee109895fb7461d3d0796c148be16f1b48e5a4b35d191c32e8",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/13-fan.png",
+      "sourceSha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Веер перьев стоит на соединённом чистом hub; сектор90°, восемь целей и параметры видны, схема не заходит на действия.",
+        "Переключение прицела, карточки механизмов со скроллом и сохранение находятся в отдельных областях.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Реальные враги вместо отдельных манекенов эскиза13, часть фигур в секторе перекрывает друг друга; нижняя основа цилиндрическая, не каменная башня."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-13-fan-1600x900.png",
+      "captureSha256": "31f1d7eccf1b5a608b9ebf56e4e046fa1b4b344e4e8914157b15e52902e98a03",
+      "metadataSha256": "45fd8dee88b9b5fb2b878a6fa998f80a290d489ea6b4c22012e449aa591c08f2",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/13-fan.png",
+      "sourceSha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Веер перьев стоит на соединённом чистом hub; сектор90°, восемь целей и параметры видны, схема не заходит на действия.",
+        "Переключение прицела, карточки механизмов со скроллом и сохранение находятся в отдельных областях.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Реальные враги вместо отдельных манекенов эскиза13, часть фигур в секторе перекрывает друг друга; нижняя основа цилиндрическая, не каменная башня."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-13-fan-1920x1080.png",
+      "captureSha256": "402d8e1905287f571a1420b90a5c8e00063b3ecb37e019ff9138a17a41a0d7b3",
+      "metadataSha256": "60124e165765a8816fc625af754c1676493c020e30b2767b105ad6acf8432e2b",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/13-fan.png",
+      "sourceSha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Веер перьев стоит на соединённом чистом hub; сектор90°, восемь целей и параметры видны, схема не заходит на действия.",
+        "Переключение прицела, карточки механизмов со скроллом и сохранение находятся в отдельных областях.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Реальные враги вместо отдельных манекенов эскиза13, часть фигур в секторе перекрывает друг друга; нижняя основа цилиндрическая, не каменная башня."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-14-armor-1024x768.png",
+      "captureSha256": "bd26f3a8a44d0426d47f940621a663ac071646d18d2a6900eab8e94eade12555",
+      "metadataSha256": "b25b43ff99803203568fa4264005418d06b926db38639fcffd14c3b9a5445c01",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/14-armor.png",
+      "sourceSha256": "1cd621482759ce147f1aa4513f11753f0b3510b9c8af1459acb9d999a0e88e45",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Бронепластины прикреплены к передней накладке площадки; обе посадки и полная основа помещаются, без отдельных плавающих модулей.",
+        "Три варианта брони,30%общей защиты, цена16→30 и нагрузка4→6 читаются; установка и сохранение доступны.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Броня выглядит небольшой передней скобой на большой платформе, а не охватывающим круглую основу покрытием эскиза14; пробный удар заменён схемой стрелок и таблицей."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-14-armor-1280x720.png",
+      "captureSha256": "019f9edf4606634b17779f8a2e03f5f8365c4b2600fc2dcccf0fa575e7f061d1",
+      "metadataSha256": "c8a8b62ac7fee65612585f8ffde6e132fd1b92462bce2a1e3d7f0dee096fb929",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/14-armor.png",
+      "sourceSha256": "1cd621482759ce147f1aa4513f11753f0b3510b9c8af1459acb9d999a0e88e45",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Бронепластины прикреплены к передней накладке площадки; обе посадки и полная основа помещаются, без отдельных плавающих модулей.",
+        "Три варианта брони,30%общей защиты, цена16→30 и нагрузка4→6 читаются; установка и сохранение доступны.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Броня выглядит небольшой передней скобой на большой платформе, а не охватывающим круглую основу покрытием эскиза14; пробный удар заменён схемой стрелок и таблицей."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-14-armor-1280x960.png",
+      "captureSha256": "51a7972407214165d9d15cda23923fdc80c507f8da448d62791dc96b30e4e8e1",
+      "metadataSha256": "33810f49f4a1e5991fc12787fae3135843a9290521cd14246f87c7d0a6bbb62e",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/14-armor.png",
+      "sourceSha256": "1cd621482759ce147f1aa4513f11753f0b3510b9c8af1459acb9d999a0e88e45",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Бронепластины прикреплены к передней накладке площадки; обе посадки и полная основа помещаются, без отдельных плавающих модулей.",
+        "Три варианта брони,30%общей защиты, цена16→30 и нагрузка4→6 читаются; установка и сохранение доступны.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Броня выглядит небольшой передней скобой на большой платформе, а не охватывающим круглую основу покрытием эскиза14; пробный удар заменён схемой стрелок и таблицей."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-14-armor-1600x900.png",
+      "captureSha256": "71656cd2f3f9a786eb1eaa7b4a257b3233c9d59d12ea3377859d4239b4a33ea9",
+      "metadataSha256": "bd4c81c8b0af173bb219d839e08627528a7910e20eaac0c52c5268eb71a591a0",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/14-armor.png",
+      "sourceSha256": "1cd621482759ce147f1aa4513f11753f0b3510b9c8af1459acb9d999a0e88e45",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Бронепластины прикреплены к передней накладке площадки; обе посадки и полная основа помещаются, без отдельных плавающих модулей.",
+        "Три варианта брони,30%общей защиты, цена16→30 и нагрузка4→6 читаются; установка и сохранение доступны.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Броня выглядит небольшой передней скобой на большой платформе, а не охватывающим круглую основу покрытием эскиза14; пробный удар заменён схемой стрелок и таблицей."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-14-armor-1920x1080.png",
+      "captureSha256": "69b8bd729b19d062248e9d8f853828b98d2eb6a6e3182b6ad230c4823f950e82",
+      "metadataSha256": "48e559346b6e1e985eab6a4d5d435152dd3e90af06de830550d908d33091b2cf",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/14-armor.png",
+      "sourceSha256": "1cd621482759ce147f1aa4513f11753f0b3510b9c8af1459acb9d999a0e88e45",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Бронепластины прикреплены к передней накладке площадки; обе посадки и полная основа помещаются, без отдельных плавающих модулей.",
+        "Три варианта брони,30%общей защиты, цена16→30 и нагрузка4→6 читаются; установка и сохранение доступны.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Броня выглядит небольшой передней скобой на большой платформе, а не охватывающим круглую основу покрытием эскиза14; пробный удар заменён схемой стрелок и таблицей."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-14-armor-locked-1024x768.png",
+      "captureSha256": "2d84208c3168bb531814cfe07f37a3ce89cbbc3e65af78558ea066f4c3d3967b",
+      "metadataSha256": "b0ce98d12e767d23a1b02d3d147192ca941b017c117ea4e1c37e6edca615cc2f",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/14-armor.png",
+      "sourceSha256": "1cd621482759ce147f1aa4513f11753f0b3510b9c8af1459acb9d999a0e88e45",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Фронтальный щит касается переднего края основы, отдельного плавающего элемента нет; три варианта и40%фронта видны.",
+        "Уровень5/100 золота и недоступные открытие/установка явно показаны; подписи не пересекаются.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Щит маленький относительно широкой площадки, схема отличается от кругового корпуса/пробного удара эскиза14."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-14-armor-locked-1280x720.png",
+      "captureSha256": "320962ac261f1643ced01e11c73a7d05b5af6e1dff79ea93718a30c5a2eb4a02",
+      "metadataSha256": "262c91bd07e26e7e804b5993552538ff18d92285338ff00c2d15704e9b0ff1e5",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/14-armor.png",
+      "sourceSha256": "1cd621482759ce147f1aa4513f11753f0b3510b9c8af1459acb9d999a0e88e45",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Фронтальный щит касается переднего края основы, отдельного плавающего элемента нет; три варианта и40%фронта видны.",
+        "Уровень5/100 золота и недоступные открытие/установка явно показаны; подписи не пересекаются.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Щит маленький относительно широкой площадки, схема отличается от кругового корпуса/пробного удара эскиза14."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-14-armor-locked-1280x960.png",
+      "captureSha256": "09d646f0c7243e6b6dfb37e7cc5b9b4fbe1af0bc905793679c19d79c10fcf09f",
+      "metadataSha256": "154b0893d8189d3f57b16de4ff2937e939f3a9a45c46114b7ff32916ab7b805d",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/14-armor.png",
+      "sourceSha256": "1cd621482759ce147f1aa4513f11753f0b3510b9c8af1459acb9d999a0e88e45",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Фронтальный щит касается переднего края основы, отдельного плавающего элемента нет; три варианта и40%фронта видны.",
+        "Уровень5/100 золота и недоступные открытие/установка явно показаны; подписи не пересекаются.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Щит маленький относительно широкой площадки, схема отличается от кругового корпуса/пробного удара эскиза14."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-14-armor-locked-1600x900.png",
+      "captureSha256": "8aca7ae8a8087cf73dbabf6bc3b1f3f53852d158cfdc2a11fc7cb8d159d85cc5",
+      "metadataSha256": "1b96ac5b076b74a678cd9060e5bae087139af06cc946ca8b5fdc733c3aa5a3e5",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/14-armor.png",
+      "sourceSha256": "1cd621482759ce147f1aa4513f11753f0b3510b9c8af1459acb9d999a0e88e45",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Фронтальный щит касается переднего края основы, отдельного плавающего элемента нет; три варианта и40%фронта видны.",
+        "Уровень5/100 золота и недоступные открытие/установка явно показаны; подписи не пересекаются.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Щит маленький относительно широкой площадки, схема отличается от кругового корпуса/пробного удара эскиза14."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-14-armor-locked-1920x1080.png",
+      "captureSha256": "5f186a61f08fc39a5e442ef2e02b5e0980a0c680b381a93bc6612527e13a7e42",
+      "metadataSha256": "3088eb1fdb05c03edfe5e9143f29d3ae4c6e7d2502f2171e4251a89e0227b2e9",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/14-armor.png",
+      "sourceSha256": "1cd621482759ce147f1aa4513f11753f0b3510b9c8af1459acb9d999a0e88e45",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Фронтальный щит касается переднего края основы, отдельного плавающего элемента нет; три варианта и40%фронта видны.",
+        "Уровень5/100 золота и недоступные открытие/установка явно показаны; подписи не пересекаются.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Щит маленький относительно широкой площадки, схема отличается от кругового корпуса/пробного удара эскиза14."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-25-purchase-1024x768.png",
+      "captureSha256": "40a1fea83b3bb39ddaea2aaa47ed47a60b00a3a7585a2e14b1c77537e5d6cebf",
+      "metadataSha256": "9798e3845293a7d237ba2d401a9c2f94d574accc6b99730c9eaf11aa66f0407d",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/25-purchase.png",
+      "sourceSha256": "05b7ab824ddcc1ac63d718b871bd4907e2192a7aac3aaf985d9eb6064fb332b4",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Модальная покупка полностью помещается на пяти размерах: головка, требуемый/свой уровень4,80/94/14 золота, пояснение и обе кнопки читаются.",
+        "Фон затемнён, закрытие видно; изображение не заходит на цены и действия.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Перо и более простая прямоугольная бумажная модаль отличаются от длинной трубы и богато нарисованного окружения эскиза25."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-25-purchase-1280x720.png",
+      "captureSha256": "62f31fabd4cf82c04e4e74164795d56704d6f26baa1a38d6f34c8f9cd571aa08",
+      "metadataSha256": "d05e6e4521150fc810280b241c94dff58fbd1a67dd234e3156d90dcae485ad57",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/25-purchase.png",
+      "sourceSha256": "05b7ab824ddcc1ac63d718b871bd4907e2192a7aac3aaf985d9eb6064fb332b4",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Модальная покупка полностью помещается на пяти размерах: головка, требуемый/свой уровень4,80/94/14 золота, пояснение и обе кнопки читаются.",
+        "Фон затемнён, закрытие видно; изображение не заходит на цены и действия.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Перо и более простая прямоугольная бумажная модаль отличаются от длинной трубы и богато нарисованного окружения эскиза25."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-25-purchase-1280x960.png",
+      "captureSha256": "2301edde1755fe6077ac99fbf163bed60f065ac75d636702d76016739c5aa3c1",
+      "metadataSha256": "48f1a1eb6aeb7a72bb14f17f191bc94da046f97c2dbbfab82197ad4428858a86",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/25-purchase.png",
+      "sourceSha256": "05b7ab824ddcc1ac63d718b871bd4907e2192a7aac3aaf985d9eb6064fb332b4",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Модальная покупка полностью помещается на пяти размерах: головка, требуемый/свой уровень4,80/94/14 золота, пояснение и обе кнопки читаются.",
+        "Фон затемнён, закрытие видно; изображение не заходит на цены и действия.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Перо и более простая прямоугольная бумажная модаль отличаются от длинной трубы и богато нарисованного окружения эскиза25."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-25-purchase-1600x900.png",
+      "captureSha256": "f98ca7c43bd0b561cb43a945319ca0349491f7cf7ef245f24320833b43f99d8f",
+      "metadataSha256": "04bea9bacb288dbef224c796d985d28ee54f8aadff3115da68fbdcb0d1a4a8f9",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/25-purchase.png",
+      "sourceSha256": "05b7ab824ddcc1ac63d718b871bd4907e2192a7aac3aaf985d9eb6064fb332b4",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Модальная покупка полностью помещается на пяти размерах: головка, требуемый/свой уровень4,80/94/14 золота, пояснение и обе кнопки читаются.",
+        "Фон затемнён, закрытие видно; изображение не заходит на цены и действия.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Перо и более простая прямоугольная бумажная модаль отличаются от длинной трубы и богато нарисованного окружения эскиза25."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-25-purchase-1920x1080.png",
+      "captureSha256": "6b6063cda90a2ff248fbf5f145bfe4e83d55555ef527204591c5d7ad54298e58",
+      "metadataSha256": "3ab555a97e10d1c15715c4d06532c9099d9d419c499276bba398009f598af52f",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/25-purchase.png",
+      "sourceSha256": "05b7ab824ddcc1ac63d718b871bd4907e2192a7aac3aaf985d9eb6064fb332b4",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Модальная покупка полностью помещается на пяти размерах: головка, требуемый/свой уровень4,80/94/14 золота, пояснение и обе кнопки читаются.",
+        "Фон затемнён, закрытие видно; изображение не заходит на цены и действия.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Перо и более простая прямоугольная бумажная модаль отличаются от длинной трубы и богато нарисованного окружения эскиза25."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-30-foundation-parts-1024x768.png",
+      "captureSha256": "1be3c9ec4ba04536934c99cd22996433c73fb59026609bb9dd4e7c0157999121",
+      "metadataSha256": "42073cf240fe609d93f02e91263286e6dfc9a8f4111de038a9a36606566e0af1",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Чернильная подача, поворотный цилиндр, плоскость корпуса и непрерывная передняя полоса рамки разнесены стрелками; clean hub без подложки.",
+        "Карточки трёх корпусов в скролле, пять параметров и действия помещаются на каждом размере.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Вместо круглого многоярусного корпуса эскиза30 показана плоская площадка; рамка в разборе выглядит тонкой передней полосой, а не отдельным полным основанием.",
+        "Подписи отдельных узлов на компактной схеме скрыты."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-30-foundation-parts-1280x720.png",
+      "captureSha256": "1097e8c534299a5a715fc821c5c58f9d737046ff5442da6a326e250e6b65060e",
+      "metadataSha256": "4597a83a1450a95588f0a6eacb7cfd57252e427dc6b6a933968fd8999e582dca",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Чернильная подача, поворотный цилиндр, плоскость корпуса и непрерывная передняя полоса рамки разнесены стрелками; clean hub без подложки.",
+        "Карточки трёх корпусов в скролле, пять параметров и действия помещаются на каждом размере.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Вместо круглого многоярусного корпуса эскиза30 показана плоская площадка; рамка в разборе выглядит тонкой передней полосой, а не отдельным полным основанием.",
+        "Подписи отдельных узлов на компактной схеме скрыты."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-30-foundation-parts-1280x960.png",
+      "captureSha256": "0aac702f9553c2b1150869b62d30e25d48238860dedf48444d9dbb011e41d6ea",
+      "metadataSha256": "133cc5a99bd76fd498b16c347292a9e38b79a349e8e7fd0321b18d877498b1e3",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Чернильная подача, поворотный цилиндр, плоскость корпуса и непрерывная передняя полоса рамки разнесены стрелками; clean hub без подложки.",
+        "Карточки трёх корпусов в скролле, пять параметров и действия помещаются на каждом размере.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Вместо круглого многоярусного корпуса эскиза30 показана плоская площадка; рамка в разборе выглядит тонкой передней полосой, а не отдельным полным основанием."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-30-foundation-parts-1600x900.png",
+      "captureSha256": "2b775ba7549503538c316ed1230c5210a5e22ceafe9f3f1bddc848731205a0fa",
+      "metadataSha256": "fb8e11523346bd1676a564b953872ff9437b4087851637e512f0b224fe698f1f",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Чернильная подача, поворотный цилиндр, плоскость корпуса и непрерывная передняя полоса рамки разнесены стрелками; clean hub без подложки.",
+        "Карточки трёх корпусов в скролле, пять параметров и действия помещаются на каждом размере.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Вместо круглого многоярусного корпуса эскиза30 показана плоская площадка; рамка в разборе выглядит тонкой передней полосой, а не отдельным полным основанием."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-30-foundation-parts-1920x1080.png",
+      "captureSha256": "168de01025629c3515d136a7adf17576f43bf81e5fd3c199a7476fa01a7c4c72",
+      "metadataSha256": "37092b234fcba1d2c29c9a791f72f91dbadc47332166b2b79844ef1ebca5f063",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Чернильная подача, поворотный цилиндр, плоскость корпуса и непрерывная передняя полоса рамки разнесены стрелками; clean hub без подложки.",
+        "Карточки трёх корпусов в скролле, пять параметров и действия помещаются на каждом размере.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Вместо круглого многоярусного корпуса эскиза30 показана плоская площадка; рамка в разборе выглядит тонкой передней полосой, а не отдельным полным основанием."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-30-library-1024x768.png",
+      "captureSha256": "81043348a24aa39d366fdea78b87724f4edd56b00e86245167f4e884436b0032",
+      "metadataSha256": "cd4e0f36ac4392e03b92aa1998b89f41132bffc3dd0f891399f65ff213fd94b0",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "На всех пяти размерах целая миниатюра сохранённой основы: оба цилиндрических посадочных узла стоят на единой платформе, посторонних деталей вне карточки нет.",
+        "Название «Дозор · основа», полный состав, выбор состава, удаление и возврат к сборке читаются и не перекрывают друг друга.",
+        "Физически просмотрен текущий PNG 1024x768 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Это дополнительное состояние библиотеки; эскиз 30 показывает разбор основы. Вместо крупной круглой ступенчатой башни используется небольшая прямоугольная платформа с двумя узлами.",
+        "На больших кадрах карточка и миниатюра занимают малую часть экрана, остаётся много пустой бумаги."
+      ],
+      "size": "1024x768",
+      "width": 1024,
+      "height": 768,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-30-library-1280x720.png",
+      "captureSha256": "b00f052659d20884e247b0543b15e2d0d45c545b63e3fb53bc45a158c268fe4a",
+      "metadataSha256": "3b56b315bf42df52e1f2d60b2ee000ac7a76b6f8daa34437a57c752d8d88a139",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "На всех пяти размерах целая миниатюра сохранённой основы: оба цилиндрических посадочных узла стоят на единой платформе, посторонних деталей вне карточки нет.",
+        "Название «Дозор · основа», полный состав, выбор состава, удаление и возврат к сборке читаются и не перекрывают друг друга.",
+        "Физически просмотрен текущий PNG 1280x720 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Это дополнительное состояние библиотеки; эскиз 30 показывает разбор основы. Вместо крупной круглой ступенчатой башни используется небольшая прямоугольная платформа с двумя узлами.",
+        "На больших кадрах карточка и миниатюра занимают малую часть экрана, остаётся много пустой бумаги."
+      ],
+      "size": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-30-library-1280x960.png",
+      "captureSha256": "2bcdc825ca9a63a987a2f005f88c8009cc6667d86b4ffdf023aa3f3f09119256",
+      "metadataSha256": "06cb42aca3ac3de05ae6dca3be25990a7e34d50ed1117ecaa02c6a6af8efd01a",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "На всех пяти размерах целая миниатюра сохранённой основы: оба цилиндрических посадочных узла стоят на единой платформе, посторонних деталей вне карточки нет.",
+        "Название «Дозор · основа», полный состав, выбор состава, удаление и возврат к сборке читаются и не перекрывают друг друга.",
+        "Физически просмотрен текущий PNG 1280x960 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Это дополнительное состояние библиотеки; эскиз 30 показывает разбор основы. Вместо крупной круглой ступенчатой башни используется небольшая прямоугольная платформа с двумя узлами.",
+        "На больших кадрах карточка и миниатюра занимают малую часть экрана, остаётся много пустой бумаги."
+      ],
+      "size": "1280x960",
+      "width": 1280,
+      "height": 960,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-30-library-1600x900.png",
+      "captureSha256": "4639dff92a3b9abe56b9c2879d584548016f0ccd0a80aee6662e008723f81583",
+      "metadataSha256": "f16687cb2943d4141048d939f767423d1c052d735266a975dafd7a40b4b8dec7",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "На всех пяти размерах целая миниатюра сохранённой основы: оба цилиндрических посадочных узла стоят на единой платформе, посторонних деталей вне карточки нет.",
+        "Название «Дозор · основа», полный состав, выбор состава, удаление и возврат к сборке читаются и не перекрывают друг друга.",
+        "Физически просмотрен текущий PNG 1600x900 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Это дополнительное состояние библиотеки; эскиз 30 показывает разбор основы. Вместо крупной круглой ступенчатой башни используется небольшая прямоугольная платформа с двумя узлами.",
+        "На больших кадрах карточка и миниатюра занимают малую часть экрана, остаётся много пустой бумаги."
+      ],
+      "size": "1600x900",
+      "width": 1600,
+      "height": 900,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-30-library-1920x1080.png",
+      "captureSha256": "b7deba261ff4f870d589bb226d32b3100bf9c863b7b00e3c28a3c903698dd12a",
+      "metadataSha256": "11705c0ed36ff28ebe67f240fc44a8ec46bffbe7c93a849632d71ea326fb02d1",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "inspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "На всех пяти размерах целая миниатюра сохранённой основы: оба цилиндрических посадочных узла стоят на единой платформе, посторонних деталей вне карточки нет.",
+        "Название «Дозор · основа», полный состав, выбор состава, удаление и возврат к сборке читаются и не перекрывают друг друга.",
+        "Физически просмотрен текущий PNG 1920x1080 после повторного захвата с исправленными hub и подачей."
+      ],
+      "residuals": [
+        "Это дополнительное состояние библиотеки; эскиз 30 показывает разбор основы. Вместо крупной круглой ступенчатой башни используется небольшая прямоугольная платформа с двумя узлами.",
+        "На больших кадрах карточка и миниатюра занимают малую часть экрана, остаётся много пустой бумаги."
+      ],
+      "size": "1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "artRevision": "modular-full-catalog-2026-10-24-v8",
+      "inspectionMethod": "Individual native PNG opened with view_image; no compositing or raster modification."
+    }
+  ]
+}

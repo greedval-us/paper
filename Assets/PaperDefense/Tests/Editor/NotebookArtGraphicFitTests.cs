@@ -1,5 +1,6 @@
 using System.Reflection;
 using NUnit.Framework;
+using PaperDefense.Core;
 using PaperDefense.Presentation;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,10 @@ namespace PaperDefense.Tests
                 var graphic = owner.AddComponent<NotebookArtGraphic>();
                 graphic.rectTransform.sizeDelta = new Vector2(width, height); graphic.Bind(id);
                 Assert.That(NotebookSpriteCatalog.TryGetBounds(id, out var authored), Is.True);
+                if (id == "ui.weapon.piercer")
+                    authored = AssemblyPreviewPose.VisibleBounds(AssemblyVisualComposer.ComposeWeapon(new WeaponRecipe(
+                        new PartRef("core.piercer", 1), new PartRef("head.piercer", 1), new PartRef("sight.iron", 1),
+                        new PartRef("magazine.standard", 1), new PartRef("trigger.standard", 1)), AssemblyPreviewPose.ForWeapon()));
                 using (var mesh = new VertexHelper())
                 {
                     typeof(NotebookArtGraphic).GetMethod("OnPopulateMesh", BindingFlags.Instance | BindingFlags.NonPublic, null, new[] { typeof(VertexHelper) }, null)

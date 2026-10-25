@@ -1,0 +1,151 @@
+{
+  "date": "2026-10-25",
+  "reviewer": "/root",
+  "method": "Primary agent physically reopened all eight final native PNGs after clean hub/feed recapture, comparing the planning sketch; fresh hashes bind those exact inspected files.",
+  "records": [
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-terrain-zoom1-1024x768.png",
+      "captureSha256": "9813a211a087da73179d12360a8bada55988a22e24f6dcfc7dc9e289e92da34c",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "metadataSha256": "7f81b078fe1b3876057be5b25408546f17a97add03d040acf54ad09a542d0ddf",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Primary agent opened this exact native PNG and the original planning sketch with view_image.",
+        "Ivory graph paper, navy pen castle/foliage and eight live assembly cards share the notebook style; HUD and card controls remain legible.",
+        "Trees and rocks remain inside the world viewport; zoom changes castle and terrain together, and pan shifts their relative screen positions together."
+      ],
+      "residuals": [
+        "The live camera provides a sparse readable battlefield; the concept has denser illustrative scenery and preplaced defence.",
+        "At 1024x768 the top HUD wraps into two rows; this intentionally preserves working controls and text size."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-terrain-zoom3-1024x768.png",
+      "captureSha256": "3f444f78d78bbe3679885005b2ee19a8bb0c6f5bf5800269a4de679fcf6cc4ac",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "metadataSha256": "93a07f31ac907ada13f836db1a0b9ad50f218fbef0db3dcb1c3ec96aef0eaab5",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Primary agent opened this exact native PNG and the original planning sketch with view_image.",
+        "Ivory graph paper, navy pen castle/foliage and eight live assembly cards share the notebook style; HUD and card controls remain legible.",
+        "Trees and rocks remain inside the world viewport; zoom changes castle and terrain together, and pan shifts their relative screen positions together."
+      ],
+      "residuals": [
+        "The live camera provides a sparse readable battlefield; the concept has denser illustrative scenery and preplaced defence.",
+        "At 1024x768 the top HUD wraps into two rows; this intentionally preserves working controls and text size."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-terrain-zoom6-1024x768.png",
+      "captureSha256": "39047c945e92c8d7f7408cb1540dfc0ac1f7d0124a56616570b4a311d2706248",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "metadataSha256": "f9d05e937bf9bf252f75ed68349e5ed27aa10a620303af30e93c4751ec9e1dca",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Primary agent opened this exact native PNG and the original planning sketch with view_image.",
+        "Ivory graph paper, navy pen castle/foliage and eight live assembly cards share the notebook style; HUD and card controls remain legible.",
+        "Trees and rocks remain inside the world viewport; zoom changes castle and terrain together, and pan shifts their relative screen positions together."
+      ],
+      "residuals": [
+        "The live camera provides a sparse readable battlefield; the concept has denser illustrative scenery and preplaced defence.",
+        "At 1024x768 the top HUD wraps into two rows; this intentionally preserves working controls and text size."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-terrain-pan6-1024x768.png",
+      "captureSha256": "d03d2a151a5c25912689e3c0cf50f96213586064b4ef47312eb9d9321f39ef8e",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "metadataSha256": "8c6b622443f881fab81837e687a4dc0071469c9cd1f9999891b5905ca370876c",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Primary agent opened this exact native PNG and the original planning sketch with view_image.",
+        "Ivory graph paper, navy pen castle/foliage and eight live assembly cards share the notebook style; HUD and card controls remain legible.",
+        "Trees and rocks remain inside the world viewport; zoom changes castle and terrain together, and pan shifts their relative screen positions together."
+      ],
+      "residuals": [
+        "The live camera provides a sparse readable battlefield; the concept has denser illustrative scenery and preplaced defence.",
+        "At 1024x768 the top HUD wraps into two rows; this intentionally preserves working controls and text size."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-terrain-zoom1-1280x720.png",
+      "captureSha256": "892c311e3e815df84e2098d4ac5be8da6759039aef0da72382e24897bf6d30a1",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "metadataSha256": "8aeec08b82fcbff20ef8431d0d1817b89306e57c484209dac0063e98b8eec098",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Primary agent opened this exact native PNG and the original planning sketch with view_image.",
+        "Ivory graph paper, navy pen castle/foliage and eight live assembly cards share the notebook style; HUD and card controls remain legible.",
+        "Trees and rocks remain inside the world viewport; zoom changes castle and terrain together, and pan shifts their relative screen positions together."
+      ],
+      "residuals": [
+        "The live camera provides a sparse readable battlefield; the concept has denser illustrative scenery and preplaced defence.",
+        "At 1024x768 the top HUD wraps into two rows; this intentionally preserves working controls and text size."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-terrain-zoom3-1280x720.png",
+      "captureSha256": "b704ab40881c9bb942a3f64f91b7321b3a9f80423bed40a22b2e8a236b9ba7a8",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "metadataSha256": "86d6d61a0f5c660c997983980d915f9ce7041576444073f0c45e6f81a8901591",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Primary agent opened this exact native PNG and the original planning sketch with view_image.",
+        "Ivory graph paper, navy pen castle/foliage and eight live assembly cards share the notebook style; HUD and card controls remain legible.",
+        "Trees and rocks remain inside the world viewport; zoom changes castle and terrain together, and pan shifts their relative screen positions together."
+      ],
+      "residuals": [
+        "The live camera provides a sparse readable battlefield; the concept has denser illustrative scenery and preplaced defence.",
+        "At 1024x768 the top HUD wraps into two rows; this intentionally preserves working controls and text size."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-terrain-zoom6-1280x720.png",
+      "captureSha256": "41a2cb08aae210998b3f21e14c725e2fd33050113516c2e355edcfc3cc12e3a1",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "metadataSha256": "a9302db1a600cb31c1455506873eaada17506c60b01f42ab58a5f2e991228991",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Primary agent opened this exact native PNG and the original planning sketch with view_image.",
+        "Ivory graph paper, navy pen castle/foliage and eight live assembly cards share the notebook style; HUD and card controls remain legible.",
+        "Trees and rocks remain inside the world viewport; zoom changes castle and terrain together, and pan shifts their relative screen positions together."
+      ],
+      "residuals": [
+        "The live camera provides a sparse readable battlefield; the concept has denser illustrative scenery and preplaced defence.",
+        "At 1024x768 the top HUD wraps into two rows; this intentionally preserves working controls and text size."
+      ]
+    },
+    {
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-terrain-pan6-1280x720.png",
+      "captureSha256": "46e14901dfa0dad75607ecc18cc1395ba69c0d781837fb455fc7482c6ee86318",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "metadataSha256": "22b383cf2bc34cc7f9f30c626e18a861f6e094179fc36d5f8a2a95c414a409b6",
+      "inspected": true,
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Primary agent opened this exact native PNG and the original planning sketch with view_image.",
+        "Ivory graph paper, navy pen castle/foliage and eight live assembly cards share the notebook style; HUD and card controls remain legible.",
+        "Trees and rocks remain inside the world viewport; zoom changes castle and terrain together, and pan shifts their relative screen positions together."
+      ],
+      "residuals": [
+        "The live camera provides a sparse readable battlefield; the concept has denser illustrative scenery and preplaced defence.",
+        "At 1024x768 the top HUD wraps into two rows; this intentionally preserves working controls and text size."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-25",
+  "mode": "built-in image_gen",
+  "intent": "generate with sketch style reference",
+  "reference": "docs/design/album-assembly-2026-10-17/art/02-weapon-parts.png",
+  "original": "C:/Users/Greedval/.codex/generated_images/01a14cd7-7db2-7df0-8654-f50c4f801bf0/exec-bb3854c8-56e3-4395-ae77-503736ab7931.png",
+  "saved": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v2.png",
+  "prompt": "Use case: stylized-concept. Asset type: six transparent modular ink-machine stationery accessories for a notebook drawing game. Use the attached approved sketch sheet ONLY as style and material reference. Create one clean landscape 1536x1024 sprite sheet arranged in exactly 3 columns by 2 rows, with wide completely transparent gutters and each entire separate object isolated inside its own cell. Top-left: empty U-shaped ivory metal cradle with four corner feet and round side pivot holes. Top-middle: curved upright ink-cartridge cassette, ivory casing edged in navy metal, three visible rounded deep-blue ink capsules at top and a small ink-drop emblem on the front. Top-right: separate curved spring lever with round axle and a narrow two-hole mounting plate. Bottom-left: cube ink-feed box with round side axle and a loop of six small rounded blue ink capsules linked into a flexible feed ribbon, one small ink-drop emblem on the box. Bottom-middle: large empty circular bearing ring seen isometrically, warm ivory upper annulus with small bolts, dark navy inner wall, open transparent central hole. Bottom-right: two detached flat tall side armour plates as a single paired object, cream faces, tiny blue rivets and navy edges, transparent gap between them. Hand-drawn fine dark navy and cobalt ballpoint crosshatching on opaque warm ivory metal as in the sketch, irregular etched strokes, small matte subdued brass accents. Match camera three-quarter view and detailed scale of attached modular parts; no glossy plastic, volumetric gold studs or gradients. A collection of fantastical drawing-machine spare parts using blue ink supplies. Genuine alpha transparency around all objects and in mechanical holes. No assembled machine, scene, people, backdrop, shadow, glow, solid background, grid, cell frames, labels, text or watermark. Preserve 3x2 layout and keep each object at least 25 pixels away from cell boundaries.",
+  "status": "integrated_and_reviewed",
+  "acceptedRevision": "modular-full-catalog-2026-10-24-v8",
+  "sha256": "b1d11fa706b9a67ee27100ce1e0f6bae47ea2bb5adbc85609d790d70144c6372",
+  "validationFolder": "docs/validation/modular-album/"
+}

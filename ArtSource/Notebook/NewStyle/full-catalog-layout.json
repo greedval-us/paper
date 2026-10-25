@@ -1,5 +1,5 @@
 {
-  "revision": "modular-full-catalog-2026-10-22-v7",
+  "revision": "modular-full-catalog-2026-10-24-v8",
   "sourceSheets": [
     {
       "file": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
@@ -12,12 +12,17 @@
       "height": 1254
     },
     {
-      "file": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.png",
+      "file": "ArtSource/Notebook/NewStyle/StandardFoundation-v10.png",
       "width": 1536,
       "height": 1024
     },
     {
-      "file": "ArtSource/Notebook/NewStyle/BatteryFoundation-v3.png",
+      "file": "ArtSource/Notebook/NewStyle/BatteryFoundation-v4.png",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "file": "ArtSource/Notebook/NewStyle/TurnHub-v1.png",
       "width": 1254,
       "height": 1254
     },
@@ -178,19 +183,27 @@
     },
     {
       "id": "part.full.frame.standard",
-      "source": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.png",
-      "x": 17,
-      "y": 290,
-      "width": 1503,
-      "height": 444
+      "source": "ArtSource/Notebook/NewStyle/StandardFoundation-v10.png",
+      "x": 19,
+      "y": 260,
+      "width": 1499,
+      "height": 475
     },
     {
       "id": "part.full.frame.battery",
-      "source": "ArtSource/Notebook/NewStyle/BatteryFoundation-v3.png",
-      "x": 32,
-      "y": 814,
-      "width": 564,
-      "height": 192
+      "source": "ArtSource/Notebook/NewStyle/BatteryFoundation-v4.png",
+      "x": 31,
+      "y": 810,
+      "width": 566,
+      "height": 197
+    },
+    {
+      "id": "part.full.turn.standard",
+      "source": "ArtSource/Notebook/NewStyle/TurnHub-v1.png",
+      "x": 351,
+      "y": 398,
+      "width": 553,
+      "height": 448
     },
     {
       "id": "part.full.hull.light",

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-25",
+  "file": "ArtSource/Notebook/NewStyle/TurnHub-v1.png",
+  "sha256": "6cb528ed48f39a23e532b5b219885f2bd1728e569bc12cce72f8387d7e9f535d",
+  "dimensions": [
+    1254,
+    1254
+  ],
+  "reviewer": "/root",
+  "verdict": "PASS_WITH_RESIDUALS",
+  "source": "docs/design/album-assembly-2026-10-17/art/02-weapon-parts.png",
+  "nativeCropBL": [
+    351,
+    398,
+    553,
+    448
+  ],
+  "fullCanvasFoot": [
+    625.5,
+    405.5
+  ],
+  "fullCanvasInnerLip": [
+    625.5,
+    643.5
+  ],
+  "sampleAlpha": [
+    252,
+    253
+  ],
+  "scale": 0.000305672268907563,
+  "observations": [
+    "Actual native generated cutout inspected. No broad disk or rectangular ivory floor remains beneath the cylindrical hub.",
+    "Measured lower bolt foot remains on the logical seat; front inner lip keeps the accepted receiver-foot separation of .07275 world units.",
+    "Modern source binding part.full.turn.standard is separate; legacy part.gun.support keeps its original complete plinth."
+  ],
+  "residuals": [
+    "The tiny brass bolt keeps a bright sketched highlight. The open cavity has a dark hatched inner wall."
+  ],
+  "regression": "ModernTurnHub_DoesNotCarryAClippedPatchOfTheBroadOldPlinth: old lower-corner alpha254 fails; replacement passes with transparent corners.",
+  "geometryEvidence": "art3-hub-geometry-green.json"
+}

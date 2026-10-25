@@ -1,0 +1,1460 @@
+{
+  "scope": "19 shell states, five sizes each. Prefixes22/23/24/28 delegated to separate reviewer and excluded here.",
+  "records": [
+    {
+      "sourceSha256": "c3b9cab2e4416338e108abaf80a202fd7f4e37ac489d348181e6c118d5b48305",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-01-home-1024x768.png",
+      "inspected": true,
+      "captureSha256": "0102b9bd033f6cfc2e2b3251d2b0dba205910c0ec121f9936ecfe6e4b0208861",
+      "residuals": [
+        "Raster landscape and wordmark approximate the sketch; button outlines are more regular and profile badge is added.",
+        "4:3 layout keeps the illustration aspect and adds substantial paper margins."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/01-home.png",
+      "observations": [
+        "Logo, six menu actions and castle battle illustration remain legible and separated. The notebook shows exploded alternatives, matching the assembly theme.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c3b9cab2e4416338e108abaf80a202fd7f4e37ac489d348181e6c118d5b48305",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-01-home-1280x720.png",
+      "inspected": true,
+      "captureSha256": "9fc95980ff7462894c0e0c830fb165986e26c250ffdee0b074c77520611a1a32",
+      "residuals": [
+        "Raster landscape and wordmark approximate the sketch; button outlines are more regular and profile badge is added."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/01-home.png",
+      "observations": [
+        "Logo, six menu actions and castle battle illustration remain legible and separated. The notebook shows exploded alternatives, matching the assembly theme.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c3b9cab2e4416338e108abaf80a202fd7f4e37ac489d348181e6c118d5b48305",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-01-home-1280x960.png",
+      "inspected": true,
+      "captureSha256": "901c80eec0caa5880fb16ac7ba876a1e737062ae843abd93356de51a25a1639c",
+      "residuals": [
+        "Raster landscape and wordmark approximate the sketch; button outlines are more regular and profile badge is added.",
+        "4:3 layout keeps the illustration aspect and adds substantial paper margins."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/01-home.png",
+      "observations": [
+        "Logo, six menu actions and castle battle illustration remain legible and separated. The notebook shows exploded alternatives, matching the assembly theme.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c3b9cab2e4416338e108abaf80a202fd7f4e37ac489d348181e6c118d5b48305",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-01-home-1600x900.png",
+      "inspected": true,
+      "captureSha256": "42a2629a07351ae6786ab48c63c491ee9a934291bc2b51fd551108b9fd123f3a",
+      "residuals": [
+        "Raster landscape and wordmark approximate the sketch; button outlines are more regular and profile badge is added."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/01-home.png",
+      "observations": [
+        "Logo, six menu actions and castle battle illustration remain legible and separated. The notebook shows exploded alternatives, matching the assembly theme.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c3b9cab2e4416338e108abaf80a202fd7f4e37ac489d348181e6c118d5b48305",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-01-home-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "0f350085bae2bdc746ea3170c93ff207ac4eec397cba1f0332adb5ffc5deddd3",
+      "residuals": [
+        "Raster landscape and wordmark approximate the sketch; button outlines are more regular and profile badge is added."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/01-home.png",
+      "observations": [
+        "Logo, six menu actions and castle battle illustration remain legible and separated. The notebook shows exploded alternatives, matching the assembly theme.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "9e1a8916060e84641862352e8c71ce029b9dd203e50442db923aebb83822fce1",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-02-map-1024x768.png",
+      "inspected": true,
+      "captureSha256": "9422f6ce3ded02906543e2a77de3c3c99c3b1d55b66d2e914df39fe98d06ee27",
+      "residuals": [
+        "Panel/field proportions and thinner entry markers differ from the sketch; no claim of exact placement fidelity.",
+        "4:3 layout keeps the illustration aspect and adds substantial paper margins."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/02-map.png",
+      "observations": [
+        "Mission panel, castle, eight-wave summary, ink bottles and preparation action remain legible. Field retains the illustrated castle and four approaches.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "9e1a8916060e84641862352e8c71ce029b9dd203e50442db923aebb83822fce1",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-02-map-1280x720.png",
+      "inspected": true,
+      "captureSha256": "b293b4528e695d75a4d8eb85ad15ce04e05ffe70ae3244a4c7cfb122de3afa46",
+      "residuals": [
+        "Panel/field proportions and thinner entry markers differ from the sketch; no claim of exact placement fidelity."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/02-map.png",
+      "observations": [
+        "Mission panel, castle, eight-wave summary, ink bottles and preparation action remain legible. Field retains the illustrated castle and four approaches.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "9e1a8916060e84641862352e8c71ce029b9dd203e50442db923aebb83822fce1",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-02-map-1280x960.png",
+      "inspected": true,
+      "captureSha256": "67b048311203cdc7248d0e705d911c561ed312a65d2c683a18939960f5dd2967",
+      "residuals": [
+        "Panel/field proportions and thinner entry markers differ from the sketch; no claim of exact placement fidelity.",
+        "4:3 layout keeps the illustration aspect and adds substantial paper margins."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/02-map.png",
+      "observations": [
+        "Mission panel, castle, eight-wave summary, ink bottles and preparation action remain legible. Field retains the illustrated castle and four approaches.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "9e1a8916060e84641862352e8c71ce029b9dd203e50442db923aebb83822fce1",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-02-map-1600x900.png",
+      "inspected": true,
+      "captureSha256": "af61210a38b1391ddf8346c676e917c60d85eccd49321860a71fc028026f8264",
+      "residuals": [
+        "Panel/field proportions and thinner entry markers differ from the sketch; no claim of exact placement fidelity."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/02-map.png",
+      "observations": [
+        "Mission panel, castle, eight-wave summary, ink bottles and preparation action remain legible. Field retains the illustrated castle and four approaches.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "9e1a8916060e84641862352e8c71ce029b9dd203e50442db923aebb83822fce1",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-02-map-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "a0f78a83fddee4d121fa41dc226474edf95b1eb9489e19515eb51cd0ba837a68",
+      "residuals": [
+        "Panel/field proportions and thinner entry markers differ from the sketch; no claim of exact placement fidelity."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/02-map.png",
+      "observations": [
+        "Mission panel, castle, eight-wave summary, ink bottles and preparation action remain legible. Field retains the illustrated castle and four approaches.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "3284aa75dd44a16b8a2fb573322c01882f516f5ca4b6fb5ed7ce8accc5cad614",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-03-preparation-1024x768.png",
+      "inspected": true,
+      "captureSha256": "3bef8e5ab01ee18c69da0adc2be03ace7e8e3278c9e2a710a515291af2257749",
+      "residuals": [
+        "Square two-seat foundations occupy more width relative to weapons than the sketch round bases; repair/generator have stronger brass and volume. Material summary hugs its panel border."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/03-preparation.png",
+      "observations": [
+        "Eight recipe cards retain distinct single/double/piercer/mortar and support silhouettes. Swap/delete, material options and start action remain separated.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "3284aa75dd44a16b8a2fb573322c01882f516f5ca4b6fb5ed7ce8accc5cad614",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-03-preparation-1280x720.png",
+      "inspected": true,
+      "captureSha256": "74e29138cd25cead574034465ccaeed3c64210bbe2d9419b0cd2695f0c2652ac",
+      "residuals": [
+        "Square two-seat foundations occupy more width relative to weapons than the sketch round bases; repair/generator have stronger brass and volume. Material summary hugs its panel border."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/03-preparation.png",
+      "observations": [
+        "Eight recipe cards retain distinct single/double/piercer/mortar and support silhouettes. Swap/delete, material options and start action remain separated.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "3284aa75dd44a16b8a2fb573322c01882f516f5ca4b6fb5ed7ce8accc5cad614",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-03-preparation-1280x960.png",
+      "inspected": true,
+      "captureSha256": "c9c678cd2e73025693559d37cb631cbda77eb2725e5b125eaa3e5ac8619e3827",
+      "residuals": [
+        "Square two-seat foundations occupy more width relative to weapons than the sketch round bases; repair/generator have stronger brass and volume. Material summary hugs its panel border."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/03-preparation.png",
+      "observations": [
+        "Eight recipe cards retain distinct single/double/piercer/mortar and support silhouettes. Swap/delete, material options and start action remain separated.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "3284aa75dd44a16b8a2fb573322c01882f516f5ca4b6fb5ed7ce8accc5cad614",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-03-preparation-1600x900.png",
+      "inspected": true,
+      "captureSha256": "5ef666b7a7bc0555dc933c1d80770764482792b67a222dc15efb06f4eb472684",
+      "residuals": [
+        "Square two-seat foundations occupy more width relative to weapons than the sketch round bases; repair/generator have stronger brass and volume. Material summary hugs its panel border."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/03-preparation.png",
+      "observations": [
+        "Eight recipe cards retain distinct single/double/piercer/mortar and support silhouettes. Swap/delete, material options and start action remain separated.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "3284aa75dd44a16b8a2fb573322c01882f516f5ca4b6fb5ed7ce8accc5cad614",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-03-preparation-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "eddf61a9906eeb186b493998cf7244c0df7777c37977e8cd29689c383d6bc56b",
+      "residuals": [
+        "Square two-seat foundations occupy more width relative to weapons than the sketch round bases; repair/generator have stronger brass and volume. Material summary hugs its panel border."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/03-preparation.png",
+      "observations": [
+        "Eight recipe cards retain distinct single/double/piercer/mortar and support silhouettes. Swap/delete, material options and start action remain separated.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "f85732485ee24e51bbf780898baa5ea822a875b31ae0da345bcdd7ac5cbe19be",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-09-album-1024x768.png",
+      "inspected": true,
+      "captureSha256": "efdeb612a2368f37ebebc6d1cdb61070ed7fdbf18017fe20a9e564e10881ea66",
+      "residuals": [
+        "Current loadout uses labels and thumbnails instead of empty plus slots; square foundations and support shading differ from sketch. Footer slot hint is small and muted."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/09-album.png",
+      "observations": [
+        "Selected card, right recipe preview and loadout agree on the modular gun composition. Eight cards, filter tabs, prices and edit/save/delete controls are readable.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds.",
+        "Compact layout uses two rows of text loadout slots instead of thumbnail strip; labels wrap inside their buttons."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "f85732485ee24e51bbf780898baa5ea822a875b31ae0da345bcdd7ac5cbe19be",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-09-album-1280x720.png",
+      "inspected": true,
+      "captureSha256": "3b94970f9d73e541639268180c657e234107cad7535cef55692409f597c7169a",
+      "residuals": [
+        "Current loadout uses labels and thumbnails instead of empty plus slots; square foundations and support shading differ from sketch. Footer slot hint is small and muted."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/09-album.png",
+      "observations": [
+        "Selected card, right recipe preview and loadout agree on the modular gun composition. Eight cards, filter tabs, prices and edit/save/delete controls are readable.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "f85732485ee24e51bbf780898baa5ea822a875b31ae0da345bcdd7ac5cbe19be",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-09-album-1280x960.png",
+      "inspected": true,
+      "captureSha256": "d1dc228b5eb842e344c51af82aff913dcd354816792babef314f16a48fd7e15d",
+      "residuals": [
+        "Current loadout uses labels and thumbnails instead of empty plus slots; square foundations and support shading differ from sketch. Footer slot hint is small and muted."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/09-album.png",
+      "observations": [
+        "Selected card, right recipe preview and loadout agree on the modular gun composition. Eight cards, filter tabs, prices and edit/save/delete controls are readable.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "f85732485ee24e51bbf780898baa5ea822a875b31ae0da345bcdd7ac5cbe19be",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-09-album-1600x900.png",
+      "inspected": true,
+      "captureSha256": "49ff4f3a893bead0baab66e580c4ebc91db25255e6e1c6aa5f8e095b3cedc23d",
+      "residuals": [
+        "Current loadout uses labels and thumbnails instead of empty plus slots; square foundations and support shading differ from sketch. Footer slot hint is small and muted."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/09-album.png",
+      "observations": [
+        "Selected card, right recipe preview and loadout agree on the modular gun composition. Eight cards, filter tabs, prices and edit/save/delete controls are readable.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "f85732485ee24e51bbf780898baa5ea822a875b31ae0da345bcdd7ac5cbe19be",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-09-album-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "66aefcdca33064a2b1c94d4d29df043e63e31aa85216194b61cdb6d8e91e3a1a",
+      "residuals": [
+        "Current loadout uses labels and thumbnails instead of empty plus slots; square foundations and support shading differ from sketch. Footer slot hint is small and muted."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/09-album.png",
+      "observations": [
+        "Selected card, right recipe preview and loadout agree on the modular gun composition. Eight cards, filter tabs, prices and edit/save/delete controls are readable.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-15-overview-1024x768.png",
+      "inspected": true,
+      "captureSha256": "3242318430636627ca7cf626e9b0eb8ef68a19f4d8f0f7cf300cc53dfa59a59d",
+      "residuals": [
+        "Zoomed-out castle and map objects are very small; broad empty grid and repeated edge trees are substantially sparser than source planning illustration."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "observations": [
+        "Full-map overview displays approach arrows, central castle, ink positions and eight illustrated slots; HUD controls remain separated.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-15-overview-1280x720.png",
+      "inspected": true,
+      "captureSha256": "d23bb156bf5ce6d19ce393e12c86f40165e27b2b870755d30036d2d24bc30c7e",
+      "residuals": [
+        "Zoomed-out castle and map objects are very small; broad empty grid and repeated edge trees are substantially sparser than source planning illustration."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "observations": [
+        "Full-map overview displays approach arrows, central castle, ink positions and eight illustrated slots; HUD controls remain separated.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-15-overview-1280x960.png",
+      "inspected": true,
+      "captureSha256": "6eabe81b7ecf19eb6b72214b344dfb26068ec332f8b72f4d16be9f0e05196bca",
+      "residuals": [
+        "Zoomed-out castle and map objects are very small; broad empty grid and repeated edge trees are substantially sparser than source planning illustration."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "observations": [
+        "Full-map overview displays approach arrows, central castle, ink positions and eight illustrated slots; HUD controls remain separated.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-15-overview-1600x900.png",
+      "inspected": true,
+      "captureSha256": "bc2c18f45694b3342bf24291a8cdc42c406be2d7f6227b6105d63f6fe730dc5e",
+      "residuals": [
+        "Zoomed-out castle and map objects are very small; broad empty grid and repeated edge trees are substantially sparser than source planning illustration."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "observations": [
+        "Full-map overview displays approach arrows, central castle, ink positions and eight illustrated slots; HUD controls remain separated.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-15-overview-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "efa8deb51686c79c84eb6edd2a16c53e489268155555eb048782ecf2eb691e69",
+      "residuals": [
+        "Zoomed-out castle and map objects are very small; broad empty grid and repeated edge trees are substantially sparser than source planning illustration."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "observations": [
+        "Full-map overview displays approach arrows, central castle, ink positions and eight illustrated slots; HUD controls remain separated.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-15-planning-1024x768.png",
+      "inspected": true,
+      "captureSha256": "f907cd9c7e820e9e45bf9e4d7d9a3be0ec0c4bf699a4819e93a55a396b185d76",
+      "residuals": [
+        "Broad empty grid, four corner pines and smaller weapon/plinth ratio differ from the dense sketch; entry boxes are sparse and lower tool row relies on small icons."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "observations": [
+        "Castle-focused planning shows eight placed recipe families and matching bottom cards, visible start-wave action and four entry markers.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-15-planning-1280x720.png",
+      "inspected": true,
+      "captureSha256": "b395b310de3499aecf877a45431657bfc5506dec861e54e39990cf34788cb09c",
+      "residuals": [
+        "Broad empty grid, four corner pines and smaller weapon/plinth ratio differ from the dense sketch; entry boxes are sparse and lower tool row relies on small icons."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "observations": [
+        "Castle-focused planning shows eight placed recipe families and matching bottom cards, visible start-wave action and four entry markers.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-15-planning-1280x960.png",
+      "inspected": true,
+      "captureSha256": "c77bc73bc56c033bfc498dd9c66f1772118860b00fa555863966a00b7cf0da5b",
+      "residuals": [
+        "Broad empty grid, four corner pines and smaller weapon/plinth ratio differ from the dense sketch; entry boxes are sparse and lower tool row relies on small icons."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "observations": [
+        "Castle-focused planning shows eight placed recipe families and matching bottom cards, visible start-wave action and four entry markers.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-15-planning-1600x900.png",
+      "inspected": true,
+      "captureSha256": "c1d5d1d65ef2f82a80e3dd5754e16b3459d3fa9b82ff0ffe6b27a90a95b66a0e",
+      "residuals": [
+        "Broad empty grid, four corner pines and smaller weapon/plinth ratio differ from the dense sketch; entry boxes are sparse and lower tool row relies on small icons."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "observations": [
+        "Castle-focused planning shows eight placed recipe families and matching bottom cards, visible start-wave action and four entry markers.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-15-planning-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "63acb2b3ddcdcc888fdcb0dbc847bd8dca3f514829588d2ca7b85586696101c2",
+      "residuals": [
+        "Broad empty grid, four corner pines and smaller weapon/plinth ratio differ from the dense sketch; entry boxes are sparse and lower tool row relies on small icons."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/15-planning.png",
+      "observations": [
+        "Castle-focused planning shows eight placed recipe families and matching bottom cards, visible start-wave action and four entry markers.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "bfafea38bdade0cc00e1a83467dbe63bb9e4326cd0c5bc848c9792e660bf1bb7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-16-battle-1024x768.png",
+      "inspected": true,
+      "captureSha256": "5406955c486b0eed7c9a0d18d12a497d51eed53373ac1f7ae444ac7b1d3b8fea",
+      "residuals": [
+        "This live early-wave frame is much less populated than source wave-five battle; broad empty grid and small weapons remain, so no full battle-density equivalence is claimed."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/16-battle.png",
+      "observations": [
+        "Wave-one HUD, enemy counts and health bars are visible with aimed modular guns, tracer and impact marks. Bottom recipe cards remain consistent with preparation.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "bfafea38bdade0cc00e1a83467dbe63bb9e4326cd0c5bc848c9792e660bf1bb7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-16-battle-1280x720.png",
+      "inspected": true,
+      "captureSha256": "f710a2994600b0bb46afcca85cfcefacbfbe9a54287e11e75dccc394923b5763",
+      "residuals": [
+        "This live early-wave frame is much less populated than source wave-five battle; broad empty grid and small weapons remain, so no full battle-density equivalence is claimed."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/16-battle.png",
+      "observations": [
+        "Wave-one HUD, enemy counts and health bars are visible with aimed modular guns, tracer and impact marks. Bottom recipe cards remain consistent with preparation.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "bfafea38bdade0cc00e1a83467dbe63bb9e4326cd0c5bc848c9792e660bf1bb7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-16-battle-1280x960.png",
+      "inspected": true,
+      "captureSha256": "e6089d914e6d84123389651e297e00122b6b77f3baee3ea669519f2c3d02f6af",
+      "residuals": [
+        "This live early-wave frame is much less populated than source wave-five battle; broad empty grid and small weapons remain, so no full battle-density equivalence is claimed."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/16-battle.png",
+      "observations": [
+        "Wave-one HUD, enemy counts and health bars are visible with aimed modular guns, tracer and impact marks. Bottom recipe cards remain consistent with preparation.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "bfafea38bdade0cc00e1a83467dbe63bb9e4326cd0c5bc848c9792e660bf1bb7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-16-battle-1600x900.png",
+      "inspected": true,
+      "captureSha256": "5bfb921a0834123299290f245cc668c07584c3e3fbebd41797f47c8c64d4a855",
+      "residuals": [
+        "This live early-wave frame is much less populated than source wave-five battle; broad empty grid and small weapons remain, so no full battle-density equivalence is claimed."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/16-battle.png",
+      "observations": [
+        "Wave-one HUD, enemy counts and health bars are visible with aimed modular guns, tracer and impact marks. Bottom recipe cards remain consistent with preparation.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "bfafea38bdade0cc00e1a83467dbe63bb9e4326cd0c5bc848c9792e660bf1bb7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-16-battle-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "8584a921fb20ba18adb55d35d079a97891364fee7f4e0c536333923af75cd47e",
+      "residuals": [
+        "This live early-wave frame is much less populated than source wave-five battle; broad empty grid and small weapons remain, so no full battle-density equivalence is claimed."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/16-battle.png",
+      "observations": [
+        "Wave-one HUD, enemy counts and health bars are visible with aimed modular guns, tracer and impact marks. Bottom recipe cards remain consistent with preparation.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-17-generator-1024x768.png",
+      "inspected": true,
+      "captureSha256": "82c8a9cc4206b090ddf5b05ba375a12a9ed4ba37732c2cff796a9aadcd5d571c",
+      "residuals": [
+        "Inspector is smaller and more regular than sketch; support rendering has stronger brass/volume. Scroll viewport hides lower details in shorter layouts.",
+        "Short inspector viewport does not expose all lower details at initial scroll position; on 1024x768 a lower text row is partially clipped at the viewport edge. Scroll interaction was not exercised by this image review."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "observations": [
+        "Inspector identifies generator with matching recipe art, health, pencil material, no-color and price. Close control remains visible; large layouts expose income details.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_RESIDUALS"
+    },
+    {
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-17-generator-1280x720.png",
+      "inspected": true,
+      "captureSha256": "72dc6a577ad96fa3a286629afb49fba5ef9799ee9cbfd591f3a50360be421601",
+      "residuals": [
+        "Inspector is smaller and more regular than sketch; support rendering has stronger brass/volume. Scroll viewport hides lower details in shorter layouts.",
+        "Short inspector viewport does not expose all lower details at initial scroll position; on 1024x768 a lower text row is partially clipped at the viewport edge. Scroll interaction was not exercised by this image review."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "observations": [
+        "Inspector identifies generator with matching recipe art, health, pencil material, no-color and price. Close control remains visible; large layouts expose income details.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_RESIDUALS"
+    },
+    {
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-17-generator-1280x960.png",
+      "inspected": true,
+      "captureSha256": "1671161d9eb5601e3384cfc4c3a62431caa769ec43890945f51d0541117bcc3d",
+      "residuals": [
+        "Inspector is smaller and more regular than sketch; support rendering has stronger brass/volume. Scroll viewport hides lower details in shorter layouts."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "observations": [
+        "Inspector identifies generator with matching recipe art, health, pencil material, no-color and price. Close control remains visible; large layouts expose income details.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-17-generator-1600x900.png",
+      "inspected": true,
+      "captureSha256": "43d761c4dffaa83ae96c3a333d0359dc28c6b4e922bc5d39ba2eeb760688b698",
+      "residuals": [
+        "Inspector is smaller and more regular than sketch; support rendering has stronger brass/volume. Scroll viewport hides lower details in shorter layouts."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "observations": [
+        "Inspector identifies generator with matching recipe art, health, pencil material, no-color and price. Close control remains visible; large layouts expose income details.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-17-generator-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "82517dc7bc0564fbde85364ffd2f538469f9e28871fb6d07b22921afe361be39",
+      "residuals": [
+        "Inspector is smaller and more regular than sketch; support rendering has stronger brass/volume. Scroll viewport hides lower details in shorter layouts."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "observations": [
+        "Inspector identifies generator with matching recipe art, health, pencil material, no-color and price. Close control remains visible; large layouts expose income details.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-17-repair-1024x768.png",
+      "inspected": true,
+      "captureSha256": "c466d5047dd5e7d7a646ea862844dec17a70ed3d2dc578ecd54b4d2f0d1706e3",
+      "residuals": [
+        "Repair art is more compact and brass-accented than sketch. Scroll viewport hides lower details in shorter layouts.",
+        "Short inspector viewport does not expose all lower details at initial scroll position; on 1024x768 a lower text row is partially clipped at the viewport edge. Scroll interaction was not exercised by this image review."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "observations": [
+        "Inspector identifies repair post with matching house art, health, material and price. Larger layouts show repair rate and radius without colliding with close control.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_RESIDUALS"
+    },
+    {
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-17-repair-1280x720.png",
+      "inspected": true,
+      "captureSha256": "3d897422f091234d03a38f9f9189d154da6fdba89bfce8437c150f2b872d69cb",
+      "residuals": [
+        "Repair art is more compact and brass-accented than sketch. Scroll viewport hides lower details in shorter layouts.",
+        "Short inspector viewport does not expose all lower details at initial scroll position; on 1024x768 a lower text row is partially clipped at the viewport edge. Scroll interaction was not exercised by this image review."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "observations": [
+        "Inspector identifies repair post with matching house art, health, material and price. Larger layouts show repair rate and radius without colliding with close control.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_RESIDUALS"
+    },
+    {
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-17-repair-1280x960.png",
+      "inspected": true,
+      "captureSha256": "56aae7012e4452bc9d44ef90211309e9270af5068df6df7bcfdf087ca57ec468",
+      "residuals": [
+        "Repair art is more compact and brass-accented than sketch. Scroll viewport hides lower details in shorter layouts."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "observations": [
+        "Inspector identifies repair post with matching house art, health, material and price. Larger layouts show repair rate and radius without colliding with close control.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-17-repair-1600x900.png",
+      "inspected": true,
+      "captureSha256": "d28e267a3e85a08817949fb927d57a2aa6de9947e7b793d45f91cf7143644edc",
+      "residuals": [
+        "Repair art is more compact and brass-accented than sketch. Scroll viewport hides lower details in shorter layouts."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "observations": [
+        "Inspector identifies repair post with matching house art, health, material and price. Larger layouts show repair rate and radius without colliding with close control.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-17-repair-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "1b2c9078b715baf3a57cdc35b09dcfef6e662314ca0a2040dc6e9e7501db408f",
+      "residuals": [
+        "Repair art is more compact and brass-accented than sketch. Scroll viewport hides lower details in shorter layouts."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "observations": [
+        "Inspector identifies repair post with matching house art, health, material and price. Larger layouts show repair rate and radius without colliding with close control.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-17-tower-1024x768.png",
+      "inspected": true,
+      "captureSha256": "fd5dc129914793b3968b52287c1ff143c697211b30c291bc04d1d09128cd6c2a",
+      "residuals": [
+        "The inspector reserves more space for additional firing details than the sketch; shorter layouts require scrolling and show a partial lower row.",
+        "Short inspector viewport does not expose all lower details at initial scroll position; on 1024x768 a lower text row is partially clipped at the viewport edge. Scroll interaction was not exercised by this image review."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "observations": [
+        "Double-gun inspector and bottom card show two distinct modular guns on the same plinth. Health, material, color, price and pinned target-priority choices remain distinguishable.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_RESIDUALS"
+    },
+    {
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-17-tower-1280x720.png",
+      "inspected": true,
+      "captureSha256": "535b46e4b44b4032fee7fe2e3809fd55877c464281ffb12bfe77ce797c77e485",
+      "residuals": [
+        "The inspector reserves more space for additional firing details than the sketch; shorter layouts require scrolling and show a partial lower row.",
+        "Short inspector viewport does not expose all lower details at initial scroll position; on 1024x768 a lower text row is partially clipped at the viewport edge. Scroll interaction was not exercised by this image review."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "observations": [
+        "Double-gun inspector and bottom card show two distinct modular guns on the same plinth. Health, material, color, price and pinned target-priority choices remain distinguishable.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_RESIDUALS"
+    },
+    {
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-17-tower-1280x960.png",
+      "inspected": true,
+      "captureSha256": "7099d6d02537553f4b8c803662a9857975f01986272a53c8a7de7df119548a95",
+      "residuals": [
+        "The inspector reserves more space for additional firing details than the sketch; shorter layouts require scrolling and show a partial lower row."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "observations": [
+        "Double-gun inspector and bottom card show two distinct modular guns on the same plinth. Health, material, color, price and pinned target-priority choices remain distinguishable.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-17-tower-1600x900.png",
+      "inspected": true,
+      "captureSha256": "a71221e8a1cbd73f51d2ca32e18eaa955cce7e05b26f13c77712d828b2556679",
+      "residuals": [
+        "The inspector reserves more space for additional firing details than the sketch; shorter layouts require scrolling and show a partial lower row."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "observations": [
+        "Double-gun inspector and bottom card show two distinct modular guns on the same plinth. Health, material, color, price and pinned target-priority choices remain distinguishable.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-17-tower-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "aac657fcf32b2619b5476eb19d4c70c7f5bbb12c93e588a1c75333743ee136aa",
+      "residuals": [
+        "The inspector reserves more space for additional firing details than the sketch; shorter layouts require scrolling and show a partial lower row."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/17-tower.png",
+      "observations": [
+        "Double-gun inspector and bottom card show two distinct modular guns on the same plinth. Health, material, color, price and pinned target-priority choices remain distinguishable.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "a37b1ec4059c5abdf37ef6f5695ecc549360bac90f383fc1f6b1ae3917695bc3",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-18-pause-1024x768.png",
+      "inspected": true,
+      "captureSha256": "474a689ffcc8ce7141081fc59147573c7a74fade38350f76e76bf841cdd89fc4",
+      "residuals": [
+        "Native control icons and regular card borders are simpler than sketch hatching; background battle is sparser."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/18-pause.png",
+      "observations": [
+        "Centered pause card has four readable separated actions and Escape hint; dimming makes the modal distinct from disabled battle controls.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "a37b1ec4059c5abdf37ef6f5695ecc549360bac90f383fc1f6b1ae3917695bc3",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-18-pause-1280x720.png",
+      "inspected": true,
+      "captureSha256": "2b8553a8fed31b373eb49445857584556560b4fa3d52cf2a90928295ccd46d6c",
+      "residuals": [
+        "Native control icons and regular card borders are simpler than sketch hatching; background battle is sparser."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/18-pause.png",
+      "observations": [
+        "Centered pause card has four readable separated actions and Escape hint; dimming makes the modal distinct from disabled battle controls.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "a37b1ec4059c5abdf37ef6f5695ecc549360bac90f383fc1f6b1ae3917695bc3",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-18-pause-1280x960.png",
+      "inspected": true,
+      "captureSha256": "cfcdcd1ad91c926147be6f10b95781ad93d67b39b20c6c81bdc1f81f09ea0e51",
+      "residuals": [
+        "Native control icons and regular card borders are simpler than sketch hatching; background battle is sparser."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/18-pause.png",
+      "observations": [
+        "Centered pause card has four readable separated actions and Escape hint; dimming makes the modal distinct from disabled battle controls.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "a37b1ec4059c5abdf37ef6f5695ecc549360bac90f383fc1f6b1ae3917695bc3",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-18-pause-1600x900.png",
+      "inspected": true,
+      "captureSha256": "a9103fd5e7044b474f13f3b1bc96f48de3e98e4cdd1f5ea10113c24ef9b6cf15",
+      "residuals": [
+        "Native control icons and regular card borders are simpler than sketch hatching; background battle is sparser."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/18-pause.png",
+      "observations": [
+        "Centered pause card has four readable separated actions and Escape hint; dimming makes the modal distinct from disabled battle controls.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "a37b1ec4059c5abdf37ef6f5695ecc549360bac90f383fc1f6b1ae3917695bc3",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-18-pause-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "8f2809becb79625acd708632ab13ffc67140ce3ffb011285f614faed0d6eb06c",
+      "residuals": [
+        "Native control icons and regular card borders are simpler than sketch hatching; background battle is sparser."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/18-pause.png",
+      "observations": [
+        "Centered pause card has four readable separated actions and Escape hint; dimming makes the modal distinct from disabled battle controls.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades-1024x768.png",
+      "inspected": true,
+      "captureSha256": "1fb8934c3e34a8ffd29b003862cb25dcff6337121cf01601e0f201a831ec352f",
+      "residuals": [
+        "Illustrations omit the sketch stone platforms and motion strokes. Pale world entry marker can meet the generator caveat footer; muted background is sparser."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Wave-four upgrade chooser has three separated cards; gun and mortar illustrations use the new cylindrical hub, and pencil identifies refund option. All Choose actions are readable.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades-1280x720.png",
+      "inspected": true,
+      "captureSha256": "01b1c45fcab63da6596e8ef960a120eddb16edd1739a023071444e963afe4573",
+      "residuals": [
+        "Illustrations omit the sketch stone platforms and motion strokes. Pale world entry marker can meet the generator caveat footer; muted background is sparser."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Wave-four upgrade chooser has three separated cards; gun and mortar illustrations use the new cylindrical hub, and pencil identifies refund option. All Choose actions are readable.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades-1280x960.png",
+      "inspected": true,
+      "captureSha256": "383be3ed98648b8481cf5785387820ed800f8561d6c7f7e02943920928275f10",
+      "residuals": [
+        "Illustrations omit the sketch stone platforms and motion strokes. Pale world entry marker can meet the generator caveat footer; muted background is sparser."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Wave-four upgrade chooser has three separated cards; gun and mortar illustrations use the new cylindrical hub, and pencil identifies refund option. All Choose actions are readable.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades-1600x900.png",
+      "inspected": true,
+      "captureSha256": "e6203328e5577a9abef48261fcc6902547fdbdfe4b9c55c2089b8a19f88a1c65",
+      "residuals": [
+        "Illustrations omit the sketch stone platforms and motion strokes. Pale world entry marker can meet the generator caveat footer; muted background is sparser.",
+        "Generator caveat text crosses the pale/red background bottom-entry marker; card text and Choose buttons remain readable."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Wave-four upgrade chooser has three separated cards; gun and mortar illustrations use the new cylindrical hub, and pencil identifies refund option. All Choose actions are readable.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_RESIDUALS"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "a17e538629c12ca629310fe5e249249659f0a5d91060cdf5aac8327af453f380",
+      "residuals": [
+        "Illustrations omit the sketch stone platforms and motion strokes. Pale world entry marker can meet the generator caveat footer; muted background is sparser."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Wave-four upgrade chooser has three separated cards; gun and mortar illustrations use the new cylindrical hub, and pencil identifies refund option. All Choose actions are readable.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades2-1024x768.png",
+      "inspected": true,
+      "captureSha256": "bf1b1f0e66d9d77391465440ff3cf4060b2bfb3ff2787a0ac956b1b088b50a41",
+      "residuals": [
+        "Same options repeat at captured wave two; motion decoration and platform silhouette differ from the sketch. Footer is close to pale background entry marker."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Wave-two chooser displays three legible options, new modular gun/mortar illustrations, pencil and separated Choose buttons.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades2-1280x720.png",
+      "inspected": true,
+      "captureSha256": "3a108865e95208356c77736d569f124ca8fad0c49223571d13640ade34cf7c90",
+      "residuals": [
+        "Same options repeat at captured wave two; motion decoration and platform silhouette differ from the sketch. Footer is close to pale background entry marker."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Wave-two chooser displays three legible options, new modular gun/mortar illustrations, pencil and separated Choose buttons.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades2-1280x960.png",
+      "inspected": true,
+      "captureSha256": "5fc6814034f4abd653247f800279044a97ed90aeef2c06b238fbbe6f99671363",
+      "residuals": [
+        "Same options repeat at captured wave two; motion decoration and platform silhouette differ from the sketch. Footer is close to pale background entry marker."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Wave-two chooser displays three legible options, new modular gun/mortar illustrations, pencil and separated Choose buttons.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades2-1600x900.png",
+      "inspected": true,
+      "captureSha256": "8a9eaab7ec9de389641a77886b68cf7a19ae01842c7a4c96e7767e45381b855d",
+      "residuals": [
+        "Same options repeat at captured wave two; motion decoration and platform silhouette differ from the sketch. Footer is close to pale background entry marker.",
+        "Generator caveat text crosses the pale/red background bottom-entry marker; card text and Choose buttons remain readable."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Wave-two chooser displays three legible options, new modular gun/mortar illustrations, pencil and separated Choose buttons.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_RESIDUALS"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades2-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "32677af2ade2957083687d7a80ab95ff37955fe03ba25b3c9175ae12d3b6e076",
+      "residuals": [
+        "Same options repeat at captured wave two; motion decoration and platform silhouette differ from the sketch. Footer is close to pale background entry marker."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Wave-two chooser displays three legible options, new modular gun/mortar illustrations, pencil and separated Choose buttons.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades4-1024x768.png",
+      "inspected": true,
+      "captureSha256": "1fb8934c3e34a8ffd29b003862cb25dcff6337121cf01601e0f201a831ec352f",
+      "residuals": [
+        "Platform and hatching density differ from sketch; footer is close to pale background entry marker."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Additional wave-four chooser retains readable numeric bonuses, clean-hub gun/mortar art and separate Choose actions.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades4-1280x720.png",
+      "inspected": true,
+      "captureSha256": "01b1c45fcab63da6596e8ef960a120eddb16edd1739a023071444e963afe4573",
+      "residuals": [
+        "Platform and hatching density differ from sketch; footer is close to pale background entry marker."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Additional wave-four chooser retains readable numeric bonuses, clean-hub gun/mortar art and separate Choose actions.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades4-1280x960.png",
+      "inspected": true,
+      "captureSha256": "383be3ed98648b8481cf5785387820ed800f8561d6c7f7e02943920928275f10",
+      "residuals": [
+        "Platform and hatching density differ from sketch; footer is close to pale background entry marker."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Additional wave-four chooser retains readable numeric bonuses, clean-hub gun/mortar art and separate Choose actions.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades4-1600x900.png",
+      "inspected": true,
+      "captureSha256": "e6203328e5577a9abef48261fcc6902547fdbdfe4b9c55c2089b8a19f88a1c65",
+      "residuals": [
+        "Platform and hatching density differ from sketch; footer is close to pale background entry marker.",
+        "Generator caveat text crosses the pale/red background bottom-entry marker; card text and Choose buttons remain readable."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Additional wave-four chooser retains readable numeric bonuses, clean-hub gun/mortar art and separate Choose actions.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_RESIDUALS"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades4-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "a17e538629c12ca629310fe5e249249659f0a5d91060cdf5aac8327af453f380",
+      "residuals": [
+        "Platform and hatching density differ from sketch; footer is close to pale background entry marker."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Additional wave-four chooser retains readable numeric bonuses, clean-hub gun/mortar art and separate Choose actions.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades6-1024x768.png",
+      "inspected": true,
+      "captureSha256": "c329909f49364ebfbbe09736197df480b905c6dfdc9f388ea0dfacf312a9afab",
+      "residuals": [
+        "Captured choices repeat the other stage views; source card motion strokes/platforms are absent. Footer is close to pale background entry marker."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Wave-six chooser shows stage-specific header and readable three-card bonuses with modular gun/mortar illustrations and distinct Choose buttons.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades6-1280x720.png",
+      "inspected": true,
+      "captureSha256": "0b95c92688c4a3a059dec4f3bcb2b546fcc3b5afb86bb1e708f7930e784a583a",
+      "residuals": [
+        "Captured choices repeat the other stage views; source card motion strokes/platforms are absent. Footer is close to pale background entry marker."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Wave-six chooser shows stage-specific header and readable three-card bonuses with modular gun/mortar illustrations and distinct Choose buttons.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades6-1280x960.png",
+      "inspected": true,
+      "captureSha256": "4cb68335ed5425f47bec50c533213c92e8d61b408be64a8b7f3a19119b0c593a",
+      "residuals": [
+        "Captured choices repeat the other stage views; source card motion strokes/platforms are absent. Footer is close to pale background entry marker."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Wave-six chooser shows stage-specific header and readable three-card bonuses with modular gun/mortar illustrations and distinct Choose buttons.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades6-1600x900.png",
+      "inspected": true,
+      "captureSha256": "ebe7ab4112095dc5b923e8c2443ac07c93c7dd32a735eacd0c22da5c36d9078b",
+      "residuals": [
+        "Captured choices repeat the other stage views; source card motion strokes/platforms are absent. Footer is close to pale background entry marker.",
+        "Generator caveat text crosses the pale/red background bottom-entry marker; card text and Choose buttons remain readable."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Wave-six chooser shows stage-specific header and readable three-card bonuses with modular gun/mortar illustrations and distinct Choose buttons.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_RESIDUALS"
+    },
+    {
+      "sourceSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-19-upgrades6-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "bf97764f9547e06820e45663d20ec9766559239a5da4149f4fb4c2b1d4af2f05",
+      "residuals": [
+        "Captured choices repeat the other stage views; source card motion strokes/platforms are absent. Footer is close to pale background entry marker."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/19-upgrades.png",
+      "observations": [
+        "Wave-six chooser shows stage-specific header and readable three-card bonuses with modular gun/mortar illustrations and distinct Choose buttons.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-20-pending-1024x768.png",
+      "inspected": true,
+      "captureSha256": "4c970627a3f6b0103b47b06d424ed3b3dbf9fb79c7e0ef86271e091ce9db9f35",
+      "residuals": [
+        "Result vignette uses separate flat platforms rather than sketch towers; surrounding defeated enemies are sparse isolated sprites and decorative spacing differs.",
+        "4:3 layout keeps the illustration aspect and adds substantial paper margins."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "observations": [
+        "Victory pending-save state explicitly shows reward awaiting save, retry-save action and zero current XP progress. Modern modular towers surround castle; navigation remains readable.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-20-pending-1280x720.png",
+      "inspected": true,
+      "captureSha256": "1eadd2531c2c4476239c966d991d7f3be76f14694542d815a12f433ff8540bb5",
+      "residuals": [
+        "Result vignette uses separate flat platforms rather than sketch towers; surrounding defeated enemies are sparse isolated sprites and decorative spacing differs."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "observations": [
+        "Victory pending-save state explicitly shows reward awaiting save, retry-save action and zero current XP progress. Modern modular towers surround castle; navigation remains readable.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-20-pending-1280x960.png",
+      "inspected": true,
+      "captureSha256": "e3cd9d1d2981863db91b761613bb630c2d0136ddffc430ee6c35acbf7b3d0878",
+      "residuals": [
+        "Result vignette uses separate flat platforms rather than sketch towers; surrounding defeated enemies are sparse isolated sprites and decorative spacing differs.",
+        "4:3 layout keeps the illustration aspect and adds substantial paper margins."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "observations": [
+        "Victory pending-save state explicitly shows reward awaiting save, retry-save action and zero current XP progress. Modern modular towers surround castle; navigation remains readable.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-20-pending-1600x900.png",
+      "inspected": true,
+      "captureSha256": "293fc016b03a80ed8055579044216ad47b211044830cd16e2b7350390284a5c7",
+      "residuals": [
+        "Result vignette uses separate flat platforms rather than sketch towers; surrounding defeated enemies are sparse isolated sprites and decorative spacing differs."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "observations": [
+        "Victory pending-save state explicitly shows reward awaiting save, retry-save action and zero current XP progress. Modern modular towers surround castle; navigation remains readable.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-20-pending-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "c212165aaa95547af9fe810c56cced3e75ca755fab8d5a45f986ca8ce7015173",
+      "residuals": [
+        "Result vignette uses separate flat platforms rather than sketch towers; surrounding defeated enemies are sparse isolated sprites and decorative spacing differs."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "observations": [
+        "Victory pending-save state explicitly shows reward awaiting save, retry-save action and zero current XP progress. Modern modular towers surround castle; navigation remains readable.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-20-statistics-1024x768.png",
+      "inspected": true,
+      "captureSha256": "8ca72b7ed8314bc6a0a61325ce16d02b275aac546e029b360f019306f0424fbd",
+      "residuals": [
+        "Large blank regions and visible scrollbar remain even with short data; this supplemental modal has no exact counterpart in the source victory sketch."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "observations": [
+        "Statistics modal presents two separated columns of mission values and prominent return action over dimmed results. All displayed values and labels are readable.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-20-statistics-1280x720.png",
+      "inspected": true,
+      "captureSha256": "113798f6366aaa3bbe80137fce4b90b0b8cadd51bbb552007f583f78a577050a",
+      "residuals": [
+        "Large blank regions and visible scrollbar remain even with short data; this supplemental modal has no exact counterpart in the source victory sketch."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "observations": [
+        "Statistics modal presents two separated columns of mission values and prominent return action over dimmed results. All displayed values and labels are readable.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-20-statistics-1280x960.png",
+      "inspected": true,
+      "captureSha256": "ca66839cb56022449afe7b6d8339f460323f124d7d9fde2a63b63f408e190c36",
+      "residuals": [
+        "Large blank regions and visible scrollbar remain even with short data; this supplemental modal has no exact counterpart in the source victory sketch."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "observations": [
+        "Statistics modal presents two separated columns of mission values and prominent return action over dimmed results. All displayed values and labels are readable.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-20-statistics-1600x900.png",
+      "inspected": true,
+      "captureSha256": "f7ff35fce937f21b713b63ba38409053261089d7df709dbb11615d066307d874",
+      "residuals": [
+        "Large blank regions and visible scrollbar remain even with short data; this supplemental modal has no exact counterpart in the source victory sketch."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "observations": [
+        "Statistics modal presents two separated columns of mission values and prominent return action over dimmed results. All displayed values and labels are readable.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-20-statistics-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "5f59dc843664075f47738489960b8c2ccbc99160ea1c5508626caff97baf33bf",
+      "residuals": [
+        "Large blank regions and visible scrollbar remain even with short data; this supplemental modal has no exact counterpart in the source victory sketch."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "observations": [
+        "Statistics modal presents two separated columns of mission values and prominent return action over dimmed results. All displayed values and labels are readable.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-20-victory-1024x768.png",
+      "inspected": true,
+      "captureSha256": "a6dec7fc4753431a9d57847d90b675ff1686e2276bfea55df5d39caa72c2e87c",
+      "residuals": [
+        "Wide flat plinths, sparse defeated-enemy sprites and simplified landscape differ from the sketch; progress-bar style is more regular.",
+        "4:3 layout keeps the illustration aspect and adds substantial paper margins."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "observations": [
+        "Saved victory shows 8/8 waves, gold and XP, level-two progress, saved-reward status and three navigation actions. Castle vignette uses current modular towers.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-20-victory-1280x720.png",
+      "inspected": true,
+      "captureSha256": "7e2d66b0d4de8b850ee9800a0ef30f33dad69119c0b45dac61cc0b8897bd4ebe",
+      "residuals": [
+        "Wide flat plinths, sparse defeated-enemy sprites and simplified landscape differ from the sketch; progress-bar style is more regular."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "observations": [
+        "Saved victory shows 8/8 waves, gold and XP, level-two progress, saved-reward status and three navigation actions. Castle vignette uses current modular towers.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-20-victory-1280x960.png",
+      "inspected": true,
+      "captureSha256": "85e84400212740b8907f43d3fdf8799e74dbaa4c99b622317377b63ae018856e",
+      "residuals": [
+        "Wide flat plinths, sparse defeated-enemy sprites and simplified landscape differ from the sketch; progress-bar style is more regular.",
+        "4:3 layout keeps the illustration aspect and adds substantial paper margins."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "observations": [
+        "Saved victory shows 8/8 waves, gold and XP, level-two progress, saved-reward status and three navigation actions. Castle vignette uses current modular towers.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-20-victory-1600x900.png",
+      "inspected": true,
+      "captureSha256": "1a4cec285970a205022450fd1c4d0a80eb39f94e53c52f1703e22c96f4db9374",
+      "residuals": [
+        "Wide flat plinths, sparse defeated-enemy sprites and simplified landscape differ from the sketch; progress-bar style is more regular."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "observations": [
+        "Saved victory shows 8/8 waves, gold and XP, level-two progress, saved-reward status and three navigation actions. Castle vignette uses current modular towers.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-20-victory-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "dafe49a32b50a0fc1ab7f336fa3a4fd7c34286fcf3403e4fc2f864cb7e5965d9",
+      "residuals": [
+        "Wide flat plinths, sparse defeated-enemy sprites and simplified landscape differ from the sketch; progress-bar style is more regular."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+      "observations": [
+        "Saved victory shows 8/8 waves, gold and XP, level-two progress, saved-reward status and three navigation actions. Castle vignette uses current modular towers.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "4c842f460848bc0b2820590486a9c12488ea84e10abbcc59cc02b02c56ee2e6e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-21-defeat-1024x768.png",
+      "inspected": true,
+      "captureSha256": "9653eaaa5e14894f4cf945e76ca29749105e7c65bdff3194768c5f8b20a69e31",
+      "residuals": [
+        "Caption and panel styling are simpler; background border is lighter and current loss values differ from illustrative sketch data.",
+        "4:3 layout keeps the illustration aspect and adds substantial paper margins."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/21-defeat.png",
+      "observations": [
+        "Rubble illustration, red defeat wave, completed waves, saved gold/XP and retry/album/map controls remain distinct and readable.",
+        "Physically opened this 1024x768 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "4c842f460848bc0b2820590486a9c12488ea84e10abbcc59cc02b02c56ee2e6e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-21-defeat-1280x720.png",
+      "inspected": true,
+      "captureSha256": "d0114d90559a024e6d87754cefac321388925a35f6937cf98ab70ceffb16e821",
+      "residuals": [
+        "Caption and panel styling are simpler; background border is lighter and current loss values differ from illustrative sketch data."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/21-defeat.png",
+      "observations": [
+        "Rubble illustration, red defeat wave, completed waves, saved gold/XP and retry/album/map controls remain distinct and readable.",
+        "Physically opened this 1280x720 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "4c842f460848bc0b2820590486a9c12488ea84e10abbcc59cc02b02c56ee2e6e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-21-defeat-1280x960.png",
+      "inspected": true,
+      "captureSha256": "3a04ea734b747755f5c002bf260e8478e1de7d743e9cb6a5dad7493f56e91559",
+      "residuals": [
+        "Caption and panel styling are simpler; background border is lighter and current loss values differ from illustrative sketch data.",
+        "4:3 layout keeps the illustration aspect and adds substantial paper margins."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/21-defeat.png",
+      "observations": [
+        "Rubble illustration, red defeat wave, completed waves, saved gold/XP and retry/album/map controls remain distinct and readable.",
+        "Physically opened this 1280x960 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "4c842f460848bc0b2820590486a9c12488ea84e10abbcc59cc02b02c56ee2e6e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-21-defeat-1600x900.png",
+      "inspected": true,
+      "captureSha256": "abf30f06c9fb2fcee4e40a94f1f56131cb15f9341c7f866cceb8ab768dd09c87",
+      "residuals": [
+        "Caption and panel styling are simpler; background border is lighter and current loss values differ from illustrative sketch data."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/21-defeat.png",
+      "observations": [
+        "Rubble illustration, red defeat wave, completed waves, saved gold/XP and retry/album/map controls remain distinct and readable.",
+        "Physically opened this 1600x900 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "sourceSha256": "4c842f460848bc0b2820590486a9c12488ea84e10abbcc59cc02b02c56ee2e6e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-21-defeat-1920x1080.png",
+      "inspected": true,
+      "captureSha256": "5e6d0853e4e4b96730cab77f10404042b6c2a0f38f67b955324b767e7899e9a3",
+      "residuals": [
+        "Caption and panel styling are simpler; background border is lighter and current loss values differ from illustrative sketch data."
+      ],
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/21-defeat.png",
+      "observations": [
+        "Rubble illustration, red defeat wave, completed waves, saved gold/XP and retry/album/map controls remain distinct and readable.",
+        "Physically opened this 1920x1080 PNG with view_image, including HUD/card text and illustration bounds."
+      ],
+      "verdict": "PASS_WITH_DIFFERENCES"
+    }
+  ],
+  "limitations": [
+    "Still-image review does not validate clicks, keyboard behavior, scrolling or continuous animation.",
+    "Differences and viewport clipping are explicitly retained; no 100 percent sketch fidelity or blanket no-overlap claim.",
+    "No product/Unity/source/screenshot mutations performed."
+  ],
+  "reviewer": "Codex art3_inventory - physical shell PNG inspection",
+  "revision": "modular-full-catalog-2026-10-24-v8",
+  "method": "Opened each of these 95 final PNGs with view_image in groups of five resolutions and inspected the source sketches separately. Hashes freshly read after physical inspection; sidecars did not supply verdicts.",
+  "schemaVersion": 1
+}

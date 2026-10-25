@@ -4,6 +4,7 @@ import zlib from 'node:zlib';
 const art='ArtSource/Notebook/NewStyle/';
 const assembly=JSON.parse(fs.readFileSync(art+'assembly-parts.source.json'));
 const sprites=JSON.parse(fs.readFileSync(art+'sprites.source.json')).sprites;
+const part=id=>assembly.visualParts.find(p=>p.partId===id);
 const images=new Map();
 function decode(file){
  if(images.has(file))return images.get(file);
@@ -16,7 +17,7 @@ function decode(file){
  const result={w,h,pixels};images.set(file,result);return result;
 }
 if(process.argv.includes('--battery-landmarks')){
- const im=decode(art+'BatteryFoundation-v3.png'),visited=new Uint8Array(im.w*im.h),queue=new Int32Array(im.w*im.h),gold=[];
+ const im=decode(sprites.find(s=>s.id===part('frame.battery').fragments[0].spriteId).source),visited=new Uint8Array(im.w*im.h),queue=new Int32Array(im.w*im.h),gold=[];
  const ok=p=>{const o=p*4,r=im.pixels[o],g=im.pixels[o+1],b=im.pixels[o+2];return im.pixels[o+3]>128&&r>100&&g>70&&g<r*.85&&b<g*.7;};
  for(let y=250;y<400;y++)for(let x=30;x<600;x++){
   const start=y*im.w+x;if(visited[start]||!ok(start))continue;let n=1,head=0,sx=0,sy=0;visited[start]=1;queue[0]=start;
@@ -25,7 +26,6 @@ if(process.argv.includes('--battery-landmarks')){
  }
  console.log(JSON.stringify(gold,null,2));process.exit(0);
 }
-const part=id=>assembly.visualParts.find(p=>p.partId===id);
 function alpha(f,x,y){const s=sprites.find(s=>s.id===f.spriteId),im=decode(s.source);x=Math.floor(s.x+x-f.trim.x);y=im.h-1-Math.floor(s.y+y-f.trim.y);return x<0||x>=im.w||y<0||y>=im.h?0:im.pixels[(y*im.w+x)*4+3];}
 function points(f){const out=[];for(let y=Math.ceil(f.region.y);y<f.region.y+f.region.height;y++)for(let x=Math.ceil(f.region.x);x<f.region.x+f.region.width;x++)if(alpha(f,x,y)>=128)out.push([x,y]);return out;}
 function tf(f,p,angle=0,recoil=0){const r=f.radians,dx=(p[0]-f.attach.x)*f.scale,dy=(p[1]-f.attach.y)*f.scale;let x=f.position.x+dx*Math.cos(r)-dy*Math.sin(r),y=f.position.y+dx*Math.sin(r)+dy*Math.cos(r)+(f.motion==='recoiling'?recoil:0);if(f.motion==='fixed')angle=0;return[x*Math.cos(angle)-y*Math.sin(angle),x*Math.sin(angle)+y*Math.cos(angle)];}
@@ -63,7 +63,7 @@ if(process.argv.includes('--foundation-seats')){
  process.exit(0);
 }
 if(process.argv.includes('--probes')){
- const sight=part('sight.iron').fragments[0],foot=tf(sight,[173,16]);
+ const sight=part('sight.iron').fragments[0],foot=tf(sight,[257.5,15.5]);
  for(const family of ['gun','piercer','mortar','fan','ricochet','stapler','blotter']){const core=part('core.'+family).fragments[0],native=points(core),pts=native.map(p=>tf(core,p)),centre=native.filter(p=>Math.abs(p[0]-core.attach.x)<=1),bottom=centre.reduce((a,b)=>a[1]<b[1]?a:b);console.log(JSON.stringify({family,foot:bottom,footWorld:tf(core,bottom),sightFoot:foot,coreAlphaAtSightFoot:sampleWorld(core,foot),bounds:[Math.min(...pts.map(p=>p[0])),Math.min(...pts.map(p=>p[1])),Math.max(...pts.map(p=>p[0])),Math.max(...pts.map(p=>p[1]))]}));}
  process.exit(0);
 }

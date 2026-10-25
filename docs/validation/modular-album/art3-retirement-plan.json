@@ -1,0 +1,472 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "baseline": "77e0e49",
+  "status": "PLAN_ONLY_NO_DELETIONS",
+  "userCleanupAuthorized": true,
+  "executionOwner": "root after replacement validation",
+  "candidateRasterCount": 9,
+  "exactFileDeletionList": [
+    "ArtSource/Notebook/NewStyle/BatteryFoundation-v2.png",
+    "ArtSource/Notebook/NewStyle/StandardFoundation-v2.png",
+    "ArtSource/Notebook/NewStyle/StandardFoundation-v3.png",
+    "ArtSource/Notebook/NewStyle/StandardFoundation-v4.png",
+    "ArtSource/Notebook/NewStyle/StandardFoundation-v5.png",
+    "ArtSource/Notebook/NewStyle/StandardFoundation-v6.png",
+    "ArtSource/Notebook/NewStyle/StandardFoundation-v7.png",
+    "ArtSource/Notebook/NewStyle/StandardFoundation-v8.png",
+    "Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscape.png",
+    "Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscape.png.meta"
+  ],
+  "entries": [
+    {
+      "path": "ArtSource/Notebook/NewStyle/BatteryFoundation-v2.png",
+      "exactResourceLiteralReferences": null,
+      "status": "READY_AFTER_ROOT_REPLACEMENT_VALIDATION",
+      "currentLayoutReferences": [],
+      "deletionEffect": "No active input or hard asset reference found. Historical/provenance references remain historical. Native reproducibility uses baselineGitBlob and SHA256.",
+      "meta": {
+        "path": null,
+        "references": null,
+        "sha256": null,
+        "exists": false,
+        "guid": null
+      },
+      "resourceKey": null,
+      "assetDirectFilenameReferences": [],
+      "sha256": "3245D636CD970C6AB8A584CDA188C03DB0797A51EBA58BA15FED53CFC82EE110",
+      "exists": true,
+      "evidenceReferences": [
+        {
+          "text": "\"project_source\": \"ArtSource/Notebook/NewStyle/BatteryFoundation-v2.png\",",
+          "line": 6,
+          "path": "ArtSource/Notebook/NewStyle/BatteryFoundation-v2.provenance.json"
+        },
+        {
+          "text": "\"referenced_image_paths\": [\"ArtSource/Notebook/NewStyle/BatteryFoundation-v2.png\"],",
+          "line": 5,
+          "path": "ArtSource/Notebook/NewStyle/BatteryFoundation-v3.provenance.json"
+        },
+        {
+          "text": "The battery uses the top-left 627-pixel cell of `BatteryFoundation-v3.png`, an independently authored compact source with three real disks. Its 564×192 native import crop replaces the old tall block. The larger `BatteryFoundation-v2.png` was rejected for packing density and is not imported. `contact-audit.mjs --probes` reads current alpha and reports receiver-foot and sight-contact positions without changing any image or source metadata.",
+          "line": 21,
+          "path": "Tools/ArtAssembly13/README.md"
+        }
+      ],
+      "toolCodeFilenameReferences": [],
+      "baselineGitBlob": "8a465ec5f9dc7ea8847e6bbfe0fbaea4961d5fa5",
+      "currentSpriteManifestReferences": []
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v2.png",
+      "exactResourceLiteralReferences": null,
+      "status": "READY_AFTER_ROOT_REPLACEMENT_VALIDATION",
+      "currentLayoutReferences": [],
+      "deletionEffect": "No active input or hard asset reference found. Historical/provenance references remain historical. Native reproducibility uses baselineGitBlob and SHA256.",
+      "meta": {
+        "path": null,
+        "references": null,
+        "sha256": null,
+        "exists": false,
+        "guid": null
+      },
+      "resourceKey": null,
+      "assetDirectFilenameReferences": [],
+      "sha256": "CE3FC203FAD1A7F0E592B29F881AFF24260835AFB8DD9372496E34811B43AC9D",
+      "exists": true,
+      "evidenceReferences": [
+        {
+          "text": "\"file\": \"StandardFoundation-v2.png\",",
+          "line": 2,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v2.provenance.json"
+        },
+        {
+          "text": "\"references\": [\"docs/design/album-assembly-2026-10-17/art/01-towers.png\", \"ArtSource/Notebook/NewStyle/StandardFoundation-v2.png\"],",
+          "line": 5,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v4.provenance.json"
+        },
+        {
+          "text": "Обычная основа использует [низкую двухместную плиту](../ArtSource/Notebook/NewStyle/StandardFoundation-v2.png), батарея — верхнюю левую ячейку [компактной трёхместной плиты](../ArtSource/Notebook/NewStyle/BatteryFoundation-v3.png). У батареи импортируется родная область 564×192 px; широкий предыдущий источник не входит в атлас. Обе основы разбиты на нижнюю часть, заднюю плоскость и передний край в общих координатах исходного изображения.",
+          "line": 110,
+          "path": "docs/Modular-Asset-Contract.md"
+        },
+        {
+          "text": "Исходные прозрачные PNG, промпты и причины повторной генерации хранятся в `ArtSource/Notebook/NewStyle/`. Первая пара ремонтных корпуса и крыши отклонена из-за пересекающихся прямоугольных crop; отдельный `RepairParts-v1.png` заменяет оба фрагмента. `StandardFoundation-v2.png` добавляет низкую двухместную основу после обнаруженного на настоящих кадрах нарушения пропорций. `BatteryFoundation-v3.png` заменяет высокий трёхместный постамент: он вынуждал уменьшать весь кадр настолько, что терялись три оружейных силуэта. Предшествующий крупный источник батареи отклонён по плотности упаковки; компактный лист заново сгенерирован, а не уменьшен программно. Пиксели исходных PNG не редактируются при импорте.",
+          "line": 15,
+          "path": "docs/validation/modular-album/visual-acceptance.md"
+        }
+      ],
+      "toolCodeFilenameReferences": [],
+      "baselineGitBlob": "119bd5af7452c3b758c39e143499450ba34d5bab",
+      "currentSpriteManifestReferences": []
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v3.png",
+      "exactResourceLiteralReferences": null,
+      "status": "READY_AFTER_ROOT_REPLACEMENT_VALIDATION",
+      "currentLayoutReferences": [],
+      "deletionEffect": "No active input or hard asset reference found. Historical/provenance references remain historical. Native reproducibility uses baselineGitBlob and SHA256.",
+      "meta": {
+        "path": null,
+        "references": null,
+        "sha256": null,
+        "exists": false,
+        "guid": null
+      },
+      "resourceKey": null,
+      "assetDirectFilenameReferences": [],
+      "sha256": "6E61C01DDE00506032223851252754BE0C0B5D9392FE589F3FD26C294E111C36",
+      "exists": true,
+      "evidenceReferences": [],
+      "toolCodeFilenameReferences": [],
+      "baselineGitBlob": "92c1078b475824e327781fc79da6c0aaf1b146ae",
+      "currentSpriteManifestReferences": []
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v4.png",
+      "exactResourceLiteralReferences": null,
+      "status": "READY_AFTER_ROOT_REPLACEMENT_VALIDATION",
+      "currentLayoutReferences": [],
+      "deletionEffect": "No active input or hard asset reference found. Historical/provenance references remain historical. Native reproducibility uses baselineGitBlob and SHA256.",
+      "meta": {
+        "path": null,
+        "references": null,
+        "sha256": null,
+        "exists": false,
+        "guid": null
+      },
+      "resourceKey": null,
+      "assetDirectFilenameReferences": [],
+      "sha256": "9F803F5ECC4E7EDA7A102B9F5065C40401A9F507E19E48D2A210AD08E733D3DE",
+      "exists": true,
+      "evidenceReferences": [
+        {
+          "text": "\"file\": \"StandardFoundation-v4.png\",",
+          "line": 3,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v4.provenance.json"
+        },
+        {
+          "text": "\"ArtSource/Notebook/NewStyle/StandardFoundation-v4.png\",",
+          "line": 7,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v6.provenance.json"
+        },
+        {
+          "text": "Для первого прохода изометрической основы создан отдельный `StandardFoundation-v4.png` встроенным imagegen;",
+          "line": 31,
+          "path": "docs/validation/modular-album/scene-fidelity-plan.md"
+        }
+      ],
+      "toolCodeFilenameReferences": [],
+      "baselineGitBlob": "bce37d27d1152562b073f4473257ea51637ba977",
+      "currentSpriteManifestReferences": []
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v5.png",
+      "exactResourceLiteralReferences": null,
+      "status": "READY_AFTER_ROOT_REPLACEMENT_VALIDATION",
+      "currentLayoutReferences": [],
+      "deletionEffect": "No active input or hard asset reference found. Historical/provenance references remain historical. Native reproducibility uses baselineGitBlob and SHA256.",
+      "meta": {
+        "path": null,
+        "references": null,
+        "sha256": null,
+        "exists": false,
+        "guid": null
+      },
+      "resourceKey": null,
+      "assetDirectFilenameReferences": [],
+      "sha256": "CA1892BB27739BFC4D59E860E887953EBEB247783E4903785E4BBDE4D8243611",
+      "exists": true,
+      "evidenceReferences": [
+        {
+          "text": "\"file\": \"StandardFoundation-v5.png\",",
+          "line": 15,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v6.provenance.json"
+        }
+      ],
+      "toolCodeFilenameReferences": [],
+      "baselineGitBlob": "29e7a411fef3d90b118d4af05a3270b3b23e06af",
+      "currentSpriteManifestReferences": []
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v6.png",
+      "exactResourceLiteralReferences": null,
+      "status": "READY_AFTER_ROOT_REPLACEMENT_VALIDATION",
+      "currentLayoutReferences": [],
+      "deletionEffect": "No active input or hard asset reference found. Historical/provenance references remain historical. Native reproducibility uses baselineGitBlob and SHA256.",
+      "meta": {
+        "path": null,
+        "references": null,
+        "sha256": null,
+        "exists": false,
+        "guid": null
+      },
+      "resourceKey": null,
+      "assetDirectFilenameReferences": [],
+      "sha256": "960AFFFCC33B71582142E5F57E3D4929934BDF0193CF69AE3EBBD5113DBDB987",
+      "exists": true,
+      "evidenceReferences": [
+        {
+          "text": "\"file\": \"StandardFoundation-v6.png\",",
+          "line": 3,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v6.provenance.json"
+        },
+        {
+          "text": "\"file\": \"StandardFoundation-v6.png\",",
+          "line": 20,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v6.provenance.json"
+        },
+        {
+          "text": "\"ArtSource/Notebook/NewStyle/StandardFoundation-v6.png\"",
+          "line": 6,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.provenance.json"
+        }
+      ],
+      "toolCodeFilenameReferences": [],
+      "baselineGitBlob": "edc0e35a0b1a9d704f1697eb0b4c3d90ef64943f",
+      "currentSpriteManifestReferences": []
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v7.png",
+      "exactResourceLiteralReferences": null,
+      "status": "READY_AFTER_ROOT_REPLACEMENT_VALIDATION",
+      "currentLayoutReferences": [],
+      "deletionEffect": "No active input or hard asset reference found. Historical/provenance references remain historical. Native reproducibility uses baselineGitBlob and SHA256.",
+      "meta": {
+        "path": null,
+        "references": null,
+        "sha256": null,
+        "exists": false,
+        "guid": null
+      },
+      "resourceKey": null,
+      "assetDirectFilenameReferences": [],
+      "sha256": "710B564168402ECE9A55A0BA08C9298C3D700B29EA454577D20B1B54897AF237",
+      "exists": true,
+      "evidenceReferences": [
+        {
+          "text": "\"file\": \"StandardFoundation-v7.png\",",
+          "line": 11,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.provenance.json"
+        }
+      ],
+      "toolCodeFilenameReferences": [],
+      "baselineGitBlob": "3cf6f8c65ff0a666774aac40574457b1949aec8b",
+      "currentSpriteManifestReferences": []
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v8.png",
+      "exactResourceLiteralReferences": null,
+      "status": "READY_AFTER_ROOT_REPLACEMENT_VALIDATION",
+      "currentLayoutReferences": [],
+      "deletionEffect": "No active input or hard asset reference found. Historical/provenance references remain historical. Native reproducibility uses baselineGitBlob and SHA256.",
+      "meta": {
+        "path": null,
+        "references": null,
+        "sha256": null,
+        "exists": false,
+        "guid": null
+      },
+      "resourceKey": null,
+      "assetDirectFilenameReferences": [],
+      "sha256": "6483230153074E924C876C76CCC0ED89F11ABE47C276AC4B757DD01557F3762D",
+      "exists": true,
+      "evidenceReferences": [
+        {
+          "text": "\"file\": \"StandardFoundation-v8.png\",",
+          "line": 17,
+          "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.provenance.json"
+        }
+      ],
+      "toolCodeFilenameReferences": [],
+      "baselineGitBlob": "3ab81f95537d68a8385b5b598b7c4eeac9c498a1",
+      "currentSpriteManifestReferences": []
+    },
+    {
+      "path": "Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscape.png",
+      "exactResourceLiteralReferences": null,
+      "status": "READY_AFTER_ROOT_REPLACEMENT_VALIDATION",
+      "currentLayoutReferences": [],
+      "deletionEffect": "No active input or hard asset reference found. Historical/provenance references remain historical. Native reproducibility uses baselineGitBlob and SHA256.",
+      "meta": {
+        "path": "Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscape.png.meta",
+        "references": null,
+        "sha256": "B4DA93088D4EAECB4C41EA573D08B556DD16D657A4FC9250D73CC23BA324B045",
+        "exists": true,
+        "guid": "0d1b95e29913469479dc678b972e61a0"
+      },
+      "resourceKey": "Art/Player/HomeDefenseLandscape",
+      "assetDirectFilenameReferences": [],
+      "sha256": "9AE945C48B714E6A68B904F6DC4AA2AE8FF820228D3FFD227A4F52348DE4EB23",
+      "exists": true,
+      "evidenceReferences": [],
+      "toolCodeFilenameReferences": [],
+      "baselineGitBlob": "9f3e475707263b1891e8349b4d5efc9034062931",
+      "currentSpriteManifestReferences": []
+    }
+  ],
+  "scan": {
+    "firstPartyToolCodeFileCount": 27,
+    "untrackedNewUnityProjectExcluded": true,
+    "testEvidence": "All current Assets/PaperDefense tests are included in asset scan. No candidate basename/resource key/GUID was referenced by any test.",
+    "nodeModulesExcluded": true,
+    "assetTextFileCount": 1037
+  },
+  "mustKeepUntilReplacementValidated": [
+    "ArtSource/Notebook/NewStyle/StandardFoundation-v9.png",
+    "ArtSource/Notebook/NewStyle/BatteryFoundation-v3.png"
+  ],
+  "protectedEvidence": [
+    "ArtSource/Notebook/References/**",
+    "docs/design/** reference sketches",
+    "docs/validation/** historical screenshots and records",
+    "ArtSource/Notebook/NewStyle/*.provenance.json"
+  ],
+  "limitations": [
+    "No test suites or Unity imports executed by this inventory role.",
+    "Static code/direct references checked; root must rerun replacement tests and refresh scan immediately before removal.",
+    "Generic helpers may support old filename patterns without depending on the removed files."
+  ],
+  "toolAndTestImpact": [
+    {
+      "path": "Assets/PaperDefense/Tests/Editor/NotebookNativeAtlasTests.cs",
+      "lines": [
+        15,
+        28,
+        41,
+        46
+      ],
+      "finding": "Native fidelity test reads only source.sprites entries; none uses candidate rasters. No directory-wide native PNG count assertion.",
+      "requiredChange": "none"
+    },
+    {
+      "path": "Assets/PaperDefense/Editor/NotebookSpriteImportTools.cs",
+      "lines": [
+        16,
+        76,
+        84,
+        94
+      ],
+      "finding": "Importer loads only current source.sprites paths. Candidates absent from current authoritative manifest.",
+      "requiredChange": "none"
+    },
+    {
+      "path": "Tools/ArtAssembly13/build-catalog.mjs",
+      "lines": [
+        53,
+        146,
+        180
+      ],
+      "finding": "cell helper regex supports StandardFoundation-v2/v4/v9 formatting, but selected standard path is v9 and battery path v3. Generic old-format support is not a file read.",
+      "requiredChange": "none for eight old native deletions"
+    },
+    {
+      "path": "Tools/ArtAssembly13/contact-audit.mjs",
+      "lines": [
+        19
+      ],
+      "finding": "Reads current BatteryFoundation-v3 only.",
+      "requiredChange": "none"
+    },
+    {
+      "path": "Tools/ArtAssembly13/verify-art2.mjs",
+      "lines": [
+        15,
+        21,
+        25
+      ],
+      "finding": "Historical integrity checker reads indexed evidence and protectedFiles manifests, then HelpLandscapeV2 and NotebookPaperCardV1. Candidate filenames absent from tool code and scanned evidence references; preserve historical indexed captures/provenance.",
+      "requiredChange": "none caused by candidate deletion; historical hash verification may independently flag new production changes"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Home.cs",
+      "lines": [
+        11
+      ],
+      "finding": "Exact active key is Art/Player/HomeDefenseLandscapeV2. No code loads exact obsolete key Art/Player/HomeDefenseLandscape; no Resources.LoadAll call found.",
+      "requiredChange": "none"
+    }
+  ],
+  "requiredCurrentDocumentationUpdates": [
+    {
+      "path": "docs/Modular-Asset-Contract.md",
+      "reason": "Current-contract hyperlink would otherwise target removed PNG.",
+      "line": 110,
+      "action": "Replace current foundation hyperlink StandardFoundation-v2.png with validated current source (v9 before ART3 replacement, then the accepted replacement). Keep historical validation descriptions unchanged."
+    },
+    {
+      "path": "docs/Player-Assets.md",
+      "reason": "Current home code uses V2; old key becomes nonexistent after cleanup.",
+      "line": 20,
+      "action": "Change current runtime Resource key HomeDefenseLandscape to HomeDefenseLandscapeV2."
+    }
+  ],
+  "evidenceToPreserveUnchanged": [
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v2.provenance.json",
+      "reason": "Records rejected predecessor; keep prompt."
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v4.provenance.json",
+      "reason": "References v2 as historical generation input."
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v6.provenance.json",
+      "reason": "Records v4 input and v5/v6 iteration."
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.provenance.json",
+      "reason": "Records v6 input and rejected v7/v8 before selected v9."
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/BatteryFoundation-v2.provenance.json",
+      "reason": "Explicit rejection and v3 successor."
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/BatteryFoundation-v3.provenance.json",
+      "reason": "References historical v2 generation input."
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/HomeDefenseLandscape-v2.provenance.json",
+      "reason": "Records obsolete home runtime as generation input; preserve original path as historical fact."
+    },
+    {
+      "path": "docs/implementation/home-menu-assets.json",
+      "reason": "Historical generation output; do not rewrite history to imply V2 was originally generated.",
+      "line": 7
+    },
+    {
+      "path": "docs/implementation/home-menu-layout.json",
+      "reason": "Historical asset strategy.",
+      "line": 542
+    },
+    {
+      "path": "docs/validation/2026-10-16-home-menu/report.md",
+      "reason": "Historical report; preserve text/screenshots. Retired raster recoverable from baseline blob recorded in ledger.",
+      "line": 9
+    },
+    {
+      "path": "docs/validation/modular-album/scene-fidelity-plan.md",
+      "reason": "Historical v4 iteration description.",
+      "line": 31
+    },
+    {
+      "path": "docs/validation/modular-album/visual-acceptance.md",
+      "reason": "Historical v2/v3 iteration acceptance.",
+      "line": 15
+    },
+    {
+      "path": "Tools/ArtAssembly13/README.md",
+      "reason": "Correctly describes Battery v2 rejection. Optional note that native is retired to baseline; no executable dependency.",
+      "line": 21
+    }
+  ],
+  "rootExecutionGates": [
+    "Keep current v9 and battery v3 until replacements pass native import and visual/fit validation.",
+    "Update two current documentation pointers listed here.",
+    "Immediately recheck every candidate SHA256 equals ledger and source/layout references remain empty; do not delete a path adopted by concurrent work.",
+    "Delete only exactFileDeletionList: eight source PNGs plus old home PNG and its single .meta.",
+    "Do not delete provenance, reference sketches, historical captures, current v9/v3, New Unity Project, or dependency changes.",
+    "Reimport/refresh after runtime asset removal and run required replacement checks; confirm no missing-reference or runtime home regression."
+  ]
+}

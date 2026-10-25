@@ -1,0 +1,174 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "3dd1d776d0c6480e8834e2eb5f2492ee",
+      "status": "failed",
+      "mode": "PlayMode",
+      "started_unix_ms": 1792791408599,
+      "finished_unix_ms": 1792791416089,
+      "last_update_unix_ms": 1792791416089,
+      "progress": {
+        "completed": 10,
+        "total": 10,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.NotebookWeaponPreviewTests.RebindingToNonWeaponArtOrUnknownShapeClearsTheComposedPreview",
+        "last_finished_unix_ms": 1792791416062,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": true,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [
+          {
+            "full_name": "PaperDefense.Tests.NotebookWeaponPreviewTests.ExplicitAnimationRetainsTheOriginalClipFramesAfterAComposedPreview",
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.ricochet\", \"head.ricochet\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.ricochet\", \"core.ricochet\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"gun\")",
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.gun\", \"head.gun\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.gun\", \"core.gun\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"piercer\")",
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.piercer\", \"head.piercer\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.piercer\", \"core.piercer\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"mortar\")",
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.mortar\", \"head.mortar\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.mortar\", \"core.mortar\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"fan\")",
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.fan\", \"head.fan\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.fan\", \"core.fan\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"ricochet\")",
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.ricochet\", \"head.ricochet\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.ricochet\", \"core.ricochet\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"stapler\")",
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.stapler\", \"head.stapler\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.stapler\", \"core.stapler\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"blotter\")",
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.blotter\", \"head.blotter\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.blotter\", \"core.blotter\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookWeaponPreviewTests.RebindingFromOneFamilyToAnotherReplacesEveryPreviousFragment",
+            "message": "  Expected: greater than 4\r\n  But was:  4\r\n"
+          }
+        ],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "PlayMode",
+        "summary": {
+          "total": 10,
+          "passed": 1,
+          "failed": 9,
+          "skipped": 0,
+          "durationSeconds": 0.2476952,
+          "resultState": "Failed(Child)"
+        },
+        "results": [
+          {
+            "name": "ExplicitAnimationRetainsTheOriginalClipFramesAfterAComposedPreview",
+            "fullName": "PaperDefense.Tests.NotebookWeaponPreviewTests.ExplicitAnimationRetainsTheOriginalClipFramesAfterAComposedPreview",
+            "state": "Failed",
+            "durationSeconds": 0.175871,
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.ricochet\", \"head.ricochet\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.ricochet\", \"core.ricochet\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookWeaponPreviewTests.AssertModernMesh (System.String family) [0x0007d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:78\r\nat PaperDefense.Tests.NotebookWeaponPreviewTests.ExplicitAnimationRetainsTheOriginalClipFramesAfterAComposedPreview () [0x000ae] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:69\r\n",
+            "output": ""
+          },
+          {
+            "name": "KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"gun\")",
+            "fullName": "PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"gun\")",
+            "state": "Failed",
+            "durationSeconds": 0.0012282,
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.gun\", \"head.gun\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.gun\", \"core.gun\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookWeaponPreviewTests.AssertModernMesh (System.String family) [0x0007d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:78\r\nat PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad (System.String family) [0x00037] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:36\r\n",
+            "output": ""
+          },
+          {
+            "name": "KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"piercer\")",
+            "fullName": "PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"piercer\")",
+            "state": "Failed",
+            "durationSeconds": 0.0004023,
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.piercer\", \"head.piercer\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.piercer\", \"core.piercer\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookWeaponPreviewTests.AssertModernMesh (System.String family) [0x0007d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:78\r\nat PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad (System.String family) [0x00037] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:36\r\n",
+            "output": ""
+          },
+          {
+            "name": "KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"mortar\")",
+            "fullName": "PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"mortar\")",
+            "state": "Failed",
+            "durationSeconds": 0.0003232,
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.mortar\", \"head.mortar\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.mortar\", \"core.mortar\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookWeaponPreviewTests.AssertModernMesh (System.String family) [0x0007d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:78\r\nat PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad (System.String family) [0x00037] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:36\r\n",
+            "output": ""
+          },
+          {
+            "name": "KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"fan\")",
+            "fullName": "PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"fan\")",
+            "state": "Failed",
+            "durationSeconds": 0.0002763,
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.fan\", \"head.fan\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.fan\", \"core.fan\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookWeaponPreviewTests.AssertModernMesh (System.String family) [0x0007d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:78\r\nat PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad (System.String family) [0x00037] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:36\r\n",
+            "output": ""
+          },
+          {
+            "name": "KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"ricochet\")",
+            "fullName": "PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"ricochet\")",
+            "state": "Failed",
+            "durationSeconds": 0.0003102,
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.ricochet\", \"head.ricochet\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.ricochet\", \"core.ricochet\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookWeaponPreviewTests.AssertModernMesh (System.String family) [0x0007d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:78\r\nat PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad (System.String family) [0x00037] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:36\r\n",
+            "output": ""
+          },
+          {
+            "name": "KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"stapler\")",
+            "fullName": "PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"stapler\")",
+            "state": "Failed",
+            "durationSeconds": 0.0003036,
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.stapler\", \"head.stapler\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.stapler\", \"core.stapler\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookWeaponPreviewTests.AssertModernMesh (System.String family) [0x0007d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:78\r\nat PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad (System.String family) [0x00037] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:36\r\n",
+            "output": ""
+          },
+          {
+            "name": "KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"blotter\")",
+            "fullName": "PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad(\"blotter\")",
+            "state": "Failed",
+            "durationSeconds": 0.0002972,
+            "message": "  The expected illustration includes all five actual weapon categories.\r\n  Expected: equivalent to < \"core.blotter\", \"head.blotter\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n  But was:  < \"turn.standard\", \"head.blotter\", \"core.blotter\", \"sight.iron\", \"magazine.standard\", \"trigger.standard\" >\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookWeaponPreviewTests.AssertModernMesh (System.String family) [0x0007d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:78\r\nat PaperDefense.Tests.NotebookWeaponPreviewTests.KnownWeaponIllustrationDrawsEveryModernWeaponCategoryInsteadOfLegacyAtlasQuad (System.String family) [0x00037] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:36\r\n",
+            "output": ""
+          },
+          {
+            "name": "RebindingFromOneFamilyToAnotherReplacesEveryPreviousFragment",
+            "fullName": "PaperDefense.Tests.NotebookWeaponPreviewTests.RebindingFromOneFamilyToAnotherReplacesEveryPreviousFragment",
+            "state": "Failed",
+            "durationSeconds": 0.0007313,
+            "message": "  Expected: greater than 4\r\n  But was:  4\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookWeaponPreviewTests.RebindingFromOneFamilyToAnotherReplacesEveryPreviousFragment () [0x00018] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookWeaponPreviewTests.cs:42\r\n",
+            "output": ""
+          },
+          {
+            "name": "RebindingToNonWeaponArtOrUnknownShapeClearsTheComposedPreview",
+            "fullName": "PaperDefense.Tests.NotebookWeaponPreviewTests.RebindingToNonWeaponArtOrUnknownShapeClearsTheComposedPreview",
+            "state": "Passed",
+            "durationSeconds": 0.0018636,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

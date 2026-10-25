@@ -12,6 +12,8 @@ namespace PaperDefense.Presentation
         float seconds;
         Rect drawingBounds;
         bool hasBounds;
+        AssemblyVisualComposition weaponPreview;
+        MeshPen previewPen;
         public string ShapeId => shapeId;
         public string ClipId => clipId;
         public float Seconds => seconds;
@@ -19,6 +21,29 @@ namespace PaperDefense.Presentation
         public void Bind(string shape, string clip = null)
         {
             shapeId = shape; clipId = clip; hasBounds = false; drawingBounds = default;
+            weaponPreview = null;
+            string family = null;
+            if (clip == null)
+                switch (shape)
+                {
+                    case "ui.weapon.gun": family = "gun"; break;
+                    case "ui.weapon.piercer": family = "piercer"; break;
+                    case "ui.weapon.mortar": family = "mortar"; break;
+                    case "ui.weapon.fan": family = "fan"; break;
+                    case "ui.weapon.ricochet": family = "ricochet"; break;
+                    case "ui.weapon.stapler": family = "stapler"; break;
+                    case "ui.weapon.blotter": family = "blotter"; break;
+                }
+            if (family != null)
+            {
+                var recipe = new WeaponRecipe(new PartRef("core." + family, 1), new PartRef("head." + family, 1),
+                    new PartRef("sight.iron", 1), new PartRef("magazine.standard", 1), new PartRef("trigger.standard", 1));
+                weaponPreview = AssemblyVisualComposer.ComposeWeapon(recipe, AssemblyPreviewPose.ForWeapon());
+                drawingBounds = AssemblyPreviewPose.VisibleBounds(weaponPreview);
+                hasBounds = drawingBounds.width > 0 && drawingBounds.height > 0;
+                SetVerticesDirty();
+                return;
+            }
             var theme = NotebookVisualThemeAsset.Default;
             Measure(theme?.FindShape(shape), Vector2.zero, 0, 1);
             var animation = theme?.FindClip(clip);
@@ -61,12 +86,20 @@ namespace PaperDefense.Presentation
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear(); var theme = NotebookVisualThemeAsset.Default; if (theme == null || !hasBounds) return;
+            float scale = .92f * Mathf.Min(rectTransform.rect.width / Mathf.Max(.001f, drawingBounds.width),
+                rectTransform.rect.height / Mathf.Max(.001f, drawingBounds.height));
+            if (weaponPreview != null)
+            {
+                if (previewPen == null) previewPen = new MeshPen(null, 32);
+                previewPen.Clear();
+                weaponPreview.Draw(previewPen, Vector2.zero, color.a);
+                previewPen.CopyTo(vh, rectTransform.rect.center - drawingBounds.center * scale, scale);
+                return;
+            }
             var clip = theme.FindClip(clipId);
             float phase = RepeatPreview && clip != null && clip.Duration > 0 ? Mathf.Repeat(seconds, clip.Duration) : seconds;
             var frame = clip?.Sample(phase);
             var shape = theme.FindShape(frame?.ShapeId ?? shapeId);
-            float scale = .92f * Mathf.Min(rectTransform.rect.width / Mathf.Max(.001f, drawingBounds.width),
-                rectTransform.rect.height / Mathf.Max(.001f, drawingBounds.height));
             NotebookArtRenderer.DrawUI(vh, shape,
                 rectTransform.rect.center - drawingBounds.center * scale + (frame?.Offset ?? Vector2.zero) * scale,
                 scale * (frame?.Scale ?? 1), frame?.Rotation ?? 0, opacity: (frame?.Alpha ?? 1) * color.a);
