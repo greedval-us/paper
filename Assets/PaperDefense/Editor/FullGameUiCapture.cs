@@ -35,7 +35,6 @@ namespace PaperDefense.Editor
             try { queue.Dequeue()(); }
             catch (Exception e) { LastCapture = "ERROR: " + e; queue.Clear(); Debug.LogError(LastCapture); }
         }
-        public static WorkshopWizard Wizard => Game.GetComponentInChildren<WorkshopHud>(true).Guided;
         public static CompositeWorkshopPanel Assembly => Game.GetComponentInChildren<WorkshopHud>(true).Composite;
         public static readonly Vector2Int[] AssemblyResolutions = {
             new Vector2Int(1024, 768), new Vector2Int(1280, 720), new Vector2Int(1920, 1080),
@@ -53,13 +52,7 @@ namespace PaperDefense.Editor
             if (!button.IsInteractable()) throw new InvalidOperationException("The requested assembly stage is unavailable.");
             button.onClick.Invoke();
         }
-        public static void WorkshopStep(int step)
-        {
-            if (step < 0 || step > 2) throw new ArgumentOutOfRangeException(nameof(step));
-            Game.Run.OpenWorkshop(); Game.Navigate(PlayerPage.Workshop); Wizard.NewDraft();
-            for (int i = 0; i < step; i++)
-                if (!Wizard.Next()) throw new InvalidOperationException("Cannot reach workshop step " + step + ": " + Wizard.Status);
-        }
+        public static void WorkshopStep(int step) => AssemblyStep(step);
         public static void Planning(bool wave = false)
         {
             Game.Run.OpenWorkshop(); Game.StartBattle();

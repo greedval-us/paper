@@ -91,74 +91,6 @@ namespace PaperDefense.Tests
             Assert.That(button.GetComponent<PlayerCardGraphic>().Focused, Is.False);
         }
 
-        [UnityTest] public IEnumerator StandardReviewRemainsVisibleAndStageChangesResetScroll()
-        {
-            game.Navigate(PlayerPage.Workshop); yield return null;
-            var wizard = root.GetComponentInChildren<WorkshopHud>().Guided;
-            Assert.That(wizard.Next(), Is.True); Assert.That(wizard.Next(), Is.True);
-            yield return null; yield return null;
-            var responsive = root.GetComponentInChildren<WorkshopResponsiveLayout>();
-            responsive.enabled = false; responsive.Apply(1024, 768);
-            var nodes = root.GetComponentsInChildren<RectTransform>(true);
-            var review = System.Array.Find(nodes, x => x.name == "Wizard review");
-            var heading = System.Array.Find(nodes, x => x.name == "Review heading");
-            var scroll = System.Array.Find(root.GetComponentsInChildren<ScrollRect>(true), x => x.name == "Workshop responsive scroll");
-            Assert.That(wizard.Step, Is.EqualTo(2)); Assert.That(wizard.Drawing, Is.Null);
-            Assert.That(wizard.Draft.Origin, Is.EqualTo(DrawingOrigin.LegacyStandard));
-            Assert.That(review, Is.Not.Null); Assert.That(heading, Is.Not.Null); Assert.That(scroll, Is.Not.Null);
-            Assert.That(scroll.gameObject.activeInHierarchy, Is.True);
-            Assert.That(review.IsChildOf(scroll.content), Is.True);
-            Canvas.ForceUpdateCanvases();
-            AssertVisibleInWorkshop(heading);
-            AssertVisibleInCanvas((RectTransform)Find("Wizard next").transform);
-            AssertVisibleInCanvas((RectTransform)Find("Wizard back").transform);
-            for (int i = 0; i < 3; i++) AssertVisibleInCanvas((RectTransform)Find("Wizard step " + i).transform);
-
-            // Seed a real scroll range, as a previously visited Review can leave one behind.
-            scroll.content.sizeDelta = new Vector2(scroll.content.sizeDelta.x, scroll.viewport.rect.height + 300);
-            Canvas.ForceUpdateCanvases();
-            scroll.verticalNormalizedPosition = 0;
-            Assert.That(scroll.verticalNormalizedPosition, Is.EqualTo(0).Within(.01f));
-            Assert.That(wizard.GoToStep(1), Is.True); responsive.Apply(1024, 768);
-            yield return null; yield return null;
-            Assert.That(scroll.verticalNormalizedPosition, Is.EqualTo(1).Within(.01f));
-            scroll.verticalNormalizedPosition = 0;
-            Assert.That(wizard.GoToStep(0), Is.True); responsive.Apply(1024, 768);
-            yield return null; yield return null;
-            Assert.That(scroll.verticalNormalizedPosition, Is.EqualTo(1).Within(.01f));
-        }
-
-        [UnityTest] public IEnumerator WorkshopReviewFocusRevealsTheTrialAndEditableName()
-        {
-            game.Navigate(PlayerPage.Workshop); yield return null;
-            var wizard = root.GetComponentInChildren<WorkshopHud>().Guided;
-            Assert.That(wizard.Next(), Is.True); Assert.That(wizard.Next(), Is.True);
-            yield return null; yield return null;
-            var responsive = root.GetComponentInChildren<WorkshopResponsiveLayout>();
-            responsive.enabled = false; responsive.Apply(1024, 768);
-            var trial = Find("Wizard full trial");
-            var events = UnityEngine.EventSystems.EventSystem.current;
-            var scroll = System.Array.Find(root.GetComponentsInChildren<ScrollRect>(true), x => x.name == "Workshop responsive scroll");
-            Assert.That(scroll, Is.Not.Null);
-            Assert.That(scroll.gameObject.activeInHierarchy, Is.True);
-            Assert.That(wizard.Step, Is.EqualTo(2)); Assert.That(wizard.Drawing, Is.Null);
-            string draft = JsonUtility.ToJson(new BlueprintData(wizard.Draft));
-            scroll.verticalNormalizedPosition = 0;
-            events.SetSelectedGameObject(trial.gameObject); yield return null;
-            Canvas.ForceUpdateCanvases();
-            Assert.That(events.currentSelectedGameObject, Is.SameAs(trial.gameObject));
-            AssertVisibleInWorkshop((RectTransform)trial.transform);
-            var field = System.Array.Find(root.GetComponentsInChildren<InputField>(), x => x.name == "Wizard name");
-            Assert.That(field, Is.Not.Null);
-            Assert.That(scroll.gameObject.activeInHierarchy, Is.True, "Review retains its scrollable name and save controls.");
-            Assert.That(field.transform.IsChildOf(scroll.content), Is.True);
-            scroll.verticalNormalizedPosition = 0;
-            events.SetSelectedGameObject(field.gameObject); yield return null;
-            AssertVisibleInWorkshop((RectTransform)field.transform);
-            Assert.That(events.currentSelectedGameObject, Is.SameAs(field.gameObject));
-            Assert.That(JsonUtility.ToJson(new BlueprintData(wizard.Draft)), Is.EqualTo(draft));
-        }
-
         void AssertVisibleInWorkshop(RectTransform target)
         {
             var scroll = System.Array.Find(root.GetComponentsInChildren<ScrollRect>(true), x => x.name == "Workshop responsive scroll");
@@ -734,17 +666,6 @@ namespace PaperDefense.Tests
             Assert.That(game.Run.Workshop.Gold, Is.EqualTo(gold));
         }
 
-        [UnityTest] public IEnumerator ExistingWorkshopReturnsToPreparationBeforeStartingRun()
-        {
-            Find("workshop").onClick.Invoke(); yield return null;
-            Assert.That(game.Page, Is.EqualTo(PlayerPage.Workshop));
-            Assert.That(Find("Start run"), Is.Not.Null);
-            Find("Start run").onClick.Invoke(); yield return null;
-            Assert.That(game.Page, Is.EqualTo(PlayerPage.Preparation));
-            Assert.That(game.Run.InWorkshop, Is.True);
-            Assert.That(root.GetComponentInChildren<WorkshopHud>(true).PresentationVisible, Is.False);
-        }
-
         [UnityTest] public IEnumerator DirectSettingsPauseBattleAndHelpReturnsToSettings()
         {
             game.StartBattle(); game.OpenSettings(); yield return null;
@@ -863,41 +784,6 @@ namespace PaperDefense.Tests
             Assert.That(Find("Choose upgrade 2"), Is.Not.Null);
         }
 
-        [UnityTest] public IEnumerator ResizingWorkshopPreservesTheStandardAssemblyDto()
-        {
-            game.Navigate(PlayerPage.Workshop); yield return null;
-            var wizard = root.GetComponentInChildren<WorkshopHud>().Guided;
-            Assert.That(wizard.Next(), Is.True);
-            Assert.That(wizard.SelectWeapon(1, "weapon.gun"), Is.True);
-            Assert.That(wizard.Next(), Is.True);
-            string draft = JsonUtility.ToJson(new BlueprintData(wizard.Draft));
-            string ProfileState()
-            {
-                var state = new System.Text.StringBuilder().Append(game.Run.Workshop.Gold);
-                foreach (var page in game.Run.Workshop.Album) state.Append('|').Append(JsonUtility.ToJson(new BlueprintData(page)));
-                state.Append(';');
-                foreach (var page in game.Run.Workshop.Loadout) state.Append('|').Append(page?.Id);
-                state.Append(';');
-                foreach (var part in game.Run.Workshop.Parts) state.Append('|').Append(part.Id).Append(':').Append(game.Run.Workshop.IsUnlocked(part.Id));
-                return state.ToString();
-            }
-            string profile = ProfileState();
-            var responsive = root.GetComponentInChildren<WorkshopResponsiveLayout>();
-            responsive.enabled = false;
-            foreach (var size in new[] { new Vector2Int(1024, 768), new Vector2Int(1920, 1080), new Vector2Int(1024, 768) })
-            {
-                responsive.Apply(size.x, size.y); yield return null;
-                Canvas.ForceUpdateCanvases();
-                Assert.That(wizard.Step, Is.EqualTo(2)); Assert.That(wizard.Drawing, Is.Null);
-                Assert.That(wizard.Draft.Origin, Is.EqualTo(DrawingOrigin.LegacyStandard));
-                Assert.That(wizard.Draft.Drawing.IsEmpty, Is.True); Assert.That(wizard.Draft.FreeformDesign, Is.Null);
-                Assert.That(JsonUtility.ToJson(new BlueprintData(wizard.Draft)), Is.EqualTo(draft));
-                Assert.That(ProfileState(), Is.EqualTo(profile));
-                AssertVisibleInCanvas((RectTransform)Find("Wizard next").transform);
-                AssertVisibleInCanvas((RectTransform)Find("Wizard back").transform);
-            }
-        }
-
         [UnityTest] public IEnumerator ResizingBattleRetiresTooltipCallbacksWithoutReactivatingTheOldHud()
         {
             game.Run.AutomaticSimulation = false;
@@ -925,18 +811,6 @@ namespace PaperDefense.Tests
             Assert.That(JsonUtility.ToJson(NotebookVisualThemeAsset.Default.Data), Is.EqualTo(original));
             Assert.That(game.World.VisualTheme, Is.Not.SameAs(NotebookVisualThemeAsset.Default));
             game.SetReducedMotion(false); Assert.That(game.ReducedMotion, Is.False);
-        }
-
-        [UnityTest] public IEnumerator AlbumSearchRetainsLoadoutAndShowsAnEmptyResult()
-        {
-            game.Navigate(PlayerPage.Workshop); yield return null;
-            var wizard = root.GetComponentInChildren<WorkshopHud>().Guided; wizard.ShowAlbum(true); yield return null;
-            string first = game.Run.Workshop.Loadout[0].Id;
-            var field = root.GetComponentInChildren<InputField>(); field.onEndEdit.Invoke("Нет такого чертежа 7429"); yield return null;
-            Assert.That(game.Run.Workshop.Loadout[0].Id, Is.EqualTo(first));
-            bool found = false;
-            foreach (var label in root.GetComponentsInChildren<Text>()) if (label.name == "Album empty") found = label.text.Contains("ничего не найдено");
-            Assert.That(found, Is.True); Assert.That(Find("Wizard close album"), Is.Not.Null);
         }
 
         [UnityTest] public IEnumerator AuthoredPreparationDrawingFitsItsCardAndStaysClearOfCompactNavigation()

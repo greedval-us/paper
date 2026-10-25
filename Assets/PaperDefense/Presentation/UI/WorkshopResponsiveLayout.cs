@@ -409,13 +409,6 @@ namespace PaperDefense.Presentation
                     else FitSheet(sheet, w, h);
                 }
             }
-            string[] specialists = { "Mortar footprint sheet", "Footprint study sheet", "Fan volley sheet", "Reinforcement sheet" };
-            foreach (string name in specialists)
-            {
-                var sheet = Find(name); if (sheet == null) continue;
-                var responsive = sheet.GetComponent<WorkshopSheetLayout>() ?? sheet.gameObject.AddComponent<WorkshopSheetLayout>();
-                responsive.Reflow(w, h);
-            }
         }
         void FitSheet(RectTransform sheet, float w, float h)
         {

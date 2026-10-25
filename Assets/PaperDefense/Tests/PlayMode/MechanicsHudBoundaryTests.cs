@@ -72,24 +72,5 @@ namespace PaperDefense.Tests
             Assert.That(TextField(hud, "navigationHint"), Does.Not.Contain("окраску"));
         }
 
-        [Test]
-        public void WorkshopDescribesDisabledSystemsWithoutOfferingTheirTrialActions()
-        {
-            asset.mechanics.CorpseBlots = asset.mechanics.ColorCartridges = asset.mechanics.InkWells = false;
-            asset.mechanics.RangedEnemies = asset.mechanics.EnemyDrawingTiers = false;
-            asset.waves[0].spitters = asset.waves[0].hatched = 1;
-            run.InitializeWorkshop(false);
-            var hud = root.AddComponent<WorkshopHud>(); hud.Initialize(run);
-
-            Assert.That(TextField(hud, "stats"), Does.Not.Contain("Окраска:"));
-            Assert.That(TextField(hud, "briefing"), Does.Not.Contain("плевуны").And.Not.Contain("сгустки").And.Not.Contain("Точки:"));
-            Assert.That(Button("Trial 3").gameObject.activeSelf, Is.False);
-            Assert.That(root.GetComponentsInChildren<Button>(true).Any(b => b.name == "Trial quality mode"), Is.False);
-            Assert.That(Button("Trial 2").GetComponentInChildren<Text>().text, Is.EqualTo("ГРЫЗУНЫ"));
-            Assert.That(root.GetComponentsInChildren<Button>(true).Any(b => b.name == "Drawing quality details"), Is.False);
-            Button("Open trial").onClick.Invoke(); Button("Run trial").onClick.Invoke();
-            Assert.That(TextField(hud, "trialFirst"), Is.Not.Empty, "The normal trial remains usable.");
-            Assert.That(run.Session.TickIndex, Is.Zero); Assert.That(run.Workshop.Gold, Is.Zero);
-        }
     }
 }

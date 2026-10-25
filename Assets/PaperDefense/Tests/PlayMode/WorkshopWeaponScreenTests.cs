@@ -48,6 +48,13 @@ namespace PaperDefense.Tests
             Canvas.ForceUpdateCanvases();
         }
 
+        void AssertNoDrawingEditors(string action = "")
+        {
+            var retired = new[] { "DrawingCanvasGraphic", "FootprintCanvasGraphic", "FootprintAxisGraphic", "FanVolleyGraphic", "ArmorReinforcementGraphic" };
+            Assert.That(root.GetComponentsInChildren<Component>(true).Where(component => component != null)
+                .Select(component => component.GetType().Name).Intersect(retired), Is.Empty, action);
+        }
+
         [TearDown] public void TearDown()
         {
             if (root != null) Object.DestroyImmediate(root);
@@ -174,7 +181,7 @@ namespace PaperDefense.Tests
             Assert.That(wizard.Next(), Is.True, "A valid standard assembly must reach review with an empty drawing.");
             Assert.That(wizard.Step, Is.EqualTo(2));
             Assert.That(root.transform.Find("Wizard review"), Is.Not.Null);
-            Assert.That(wizard.Drawing == null || !wizard.Drawing.Root.activeInHierarchy, Is.True);
+            AssertNoDrawingEditors();
             Assert.That(run.Workshop.Gold, Is.EqualTo(gold));
             Assert.That(store.Writes, Is.EqualTo(writes));
         }
@@ -272,8 +279,7 @@ namespace PaperDefense.Tests
             var open = typeof(WorkshopWizard).GetMethod("OpenGeometry", BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.That(open, Is.Not.Null);
             open.Invoke(wizard, new object[] { 0 });
-            Assert.That(wizard.Mortar == null || !wizard.Mortar.IsOpen, Is.True,
-                "The retired editor command must also reject direct invocation.");
+            AssertNoDrawingEditors("The retired editor command must also reject direct invocation.");
             Assert.That(wizard.Draft, Is.SameAs(before));
             Assert.That(root.transform.Find("Wizard weapons"), Is.SameAs(page));
             Assert.That(page.GetComponentInChildren<WeaponAssemblyGraphic>(), Is.SameAs(preview));

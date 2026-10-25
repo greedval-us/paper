@@ -25,6 +25,12 @@ namespace PaperDefense.Tests
             string.Join("|",run.Workshop.Album.Select(page=>JsonUtility.ToJson(new BlueprintData(page))))+";"+
             string.Join("|",run.Workshop.Loadout.Select(page=>page?.Id))+";"+
             string.Join("|",run.Workshop.Parts.Where(part=>run.Workshop.IsUnlocked(part.Id)).Select(part=>part.Id));
+        void AssertNoDrawingEditors()
+        {
+            var retired=new[]{"DrawingCanvasGraphic","FootprintCanvasGraphic","FootprintAxisGraphic","FanVolleyGraphic","ArmorReinforcementGraphic"};
+            Assert.That(root.GetComponentsInChildren<Component>(true).Where(component=>component!=null)
+                .Select(component=>component.GetType().Name).Intersect(retired),Is.Empty);
+        }
         void Review()
         {
             Assert.That(wizard.Next(),Is.True,wizard.Status);Assert.That(wizard.Next(),Is.True,wizard.Status);
@@ -43,7 +49,7 @@ namespace PaperDefense.Tests
                 Is.EquivalentTo(new[]{"Wizard step 0","Wizard step 1","Wizard step 2"}));
             Assert.That(wizard.GoToStep(2),Is.False);Assert.That(wizard.GoToStep(3),Is.False);Assert.That(wizard.Save(),Is.False);
             Review();AssertStandard(wizard.Draft);
-            Assert.That(wizard.Drawing==null||!wizard.Drawing.Root.activeInHierarchy,Is.True,"The normal path must never expose the old canvas.");
+            AssertNoDrawingEditors();
             Assert.That(run.Workshop.Album.Count,Is.EqualTo(count));Assert.That(store.Writes,Is.EqualTo(writes));
         }
         [Test] public void CompleteSequenceSavesStandardAssemblyWithoutStrokesOrSpendingGold()
@@ -82,7 +88,7 @@ namespace PaperDefense.Tests
             Assert.That(wizard.Step,Is.EqualTo(2));wizard.Back();Assert.That(wizard.Step,Is.EqualTo(1));
             Assert.That(wizard.Next(),Is.True,wizard.Status);
             Assert.That(JsonUtility.ToJson(new BlueprintData(wizard.Draft)),Is.EqualTo(before));AssertStandard(wizard.Draft);
-            Assert.That(wizard.Drawing==null||!wizard.Drawing.Root.activeInHierarchy,Is.True);
+            AssertNoDrawingEditors();
         }
         [Test] public void ClosedDetailsAreNotVisibleUntilRequested()
         {
@@ -92,11 +98,8 @@ namespace PaperDefense.Tests
         [Test] public void StandardReviewDoesNotOfferFreeformMortarVolleyOrArmorEditors()
         {
             wizard.Load(new TowerBlueprint("all-shapes","Shapes",ChassisKind.Heavy,StructureKind.Mortar,StructureKind.Fan,TowerModules.Armor).WithContent(run.Content));
-            Assert.That(wizard.Step,Is.EqualTo(2));
+            Assert.That(wizard.Step,Is.EqualTo(2));AssertNoDrawingEditors();
             Assert.That(root.GetComponentsInChildren<UnityEngine.UI.Button>(true).Any(button=>button.gameObject.activeInHierarchy&&button.name.StartsWith("Wizard geometry ")),Is.False);
-            Assert.That(wizard.Mortar==null||!wizard.Mortar.IsOpen,Is.True);
-            Assert.That(wizard.Volley==null||!wizard.Volley.IsOpen,Is.True);
-            Assert.That(wizard.Armor==null||!wizard.Armor.IsOpen,Is.True);
         }
         [Test] public void SwitchingFoundationRequiresAssemblyRecheck()
         {

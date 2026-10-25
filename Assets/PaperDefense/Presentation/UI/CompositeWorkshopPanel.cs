@@ -62,6 +62,7 @@ namespace PaperDefense.Presentation
         }
         public void Suspend() { ui.HideTooltip(); Root.gameObject.SetActive(false); }
         public void Resume() { Root.gameObject.SetActive(true); Refresh(); }
+        internal void ResumeWithFeedback(string message) { feedback = ui.Resolve(message); Resume(); }
         public void Reflow(float width, float height)
         {
             this.width = Mathf.Max(800, width); this.height = Mathf.Max(600, height);

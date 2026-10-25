@@ -14,29 +14,6 @@ namespace PaperDefense.Tests
     {
         const TowerModules Rail = (TowerModules)8;
 
-        [Test] public void WorkshopExplainsRangeTradeoffAndOffersSeparateDrawingLayer()
-        {
-            var root = new GameObject("Isolated rail workshop"); root.SetActive(false);
-            try
-            {
-                var run = root.AddComponent<RunController>(); run.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
-                var hud = root.AddComponent<WorkshopHud>(); hud.Initialize(run);
-                var button = root.GetComponentsInChildren<Button>(true).SingleOrDefault(b => b.name == "Module Rail");
-                Assert.That(button, Is.Not.Null);
-                button.onClick.Invoke();
-                Assert.That(hud.Draft.Modules & Rail, Is.EqualTo(Rail));
-                Assert.That(hud.Status.ToLowerInvariant(), Does.Contain("дальн"));
-                hud.DrawingEditor.Open(hud.Draft);
-                var layer = root.GetComponentsInChildren<Button>(true).SingleOrDefault(b => b.name == "Draw part Rail");
-                Assert.That(layer, Is.Null, "Equipment modifiers no longer add tracing roles.");
-                var roles = root.GetComponentsInChildren<Button>(true).Where(b => b.name.StartsWith("Draw part ")).ToArray();
-                Assert.That(roles.Any(b => b.GetComponentInChildren<Text>().text == "КОРПУС"), Is.True);
-                Assert.That(roles.Any(b => b.GetComponentInChildren<Text>().text == "СТВОЛ 1"), Is.True);
-                Assert.That(roles.Any(b => b.GetComponentInChildren<Text>().text == "ДЕКОР"), Is.True);
-            }
-            finally { Object.DestroyImmediate(root); }
-        }
-
         [TestCase(1, 4)]
         [TestCase(8, 2)]
         public void FieldRangeRingUsesEffectiveAssemblyRange(int kindValue, float rawRange)

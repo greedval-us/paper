@@ -36,6 +36,8 @@ namespace PaperDefense.Presentation
             if (destinationSlot.HasValue && (destinationSlot < 0 || destinationSlot > 7)) throw new ArgumentOutOfRangeException(nameof(destinationSlot));
             ui = new WorkshopUi(resolver); this.edit = edit; this.close = close; this.assigned = assigned; this.destinationSlot = destinationSlot;
             Root = ui.Panel(parent, "Album panel", new Rect(0, 0, width, height), WorkshopUi.Paper, true);
+            // Album refreshes replace Root's children; the disposable host page owns its hint overlay.
+            ui.EnsureTooltip(parent);
             Refresh();
         }
 

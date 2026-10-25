@@ -13,6 +13,26 @@ namespace PaperDefense.Tests
 {
     public sealed class CompositeWorkshopHostTests
     {
+        [TestCase(WorkshopHudMode.Full)] [TestCase(WorkshopHudMode.Assembly)]
+        [TestCase(WorkshopHudMode.Drawing)] [TestCase(WorkshopHudMode.Profile)]
+        public void MissingCompositeCatalogShowsAnExplanationWithoutReopeningHistoricalEditors(WorkshopHudMode mode)
+        {
+            var owner = new GameObject("Historical catalog rejection"); owner.SetActive(false);
+            try
+            {
+                var run = owner.AddComponent<RunController>(); run.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
+                Assert.That(run.AssemblyCatalog, Is.Null);
+                var hud = owner.AddComponent<WorkshopHud>(); hud.Mode = mode; hud.Initialize(run);
+                Assert.That(hud.Composite, Is.Null, "A missing modular catalog must reject the editing route.");
+                var explanation = owner.GetComponentsInChildren<UnityEngine.UI.Text>(true).Single(text => text.name == "Album unavailable");
+                Assert.That(explanation.text, Does.Contain("каталог составного альбома"));
+                Assert.That(hud.Status, Is.EqualTo(explanation.text));
+                Assert.That(owner.GetComponentsInChildren<UnityEngine.UI.Button>(true), Is.Empty,
+                    "The rejected route cannot leave historical editor commands available.");
+            }
+            finally { Object.DestroyImmediate(owner); }
+        }
+
         [UnityTest] public IEnumerator EditingANameSurvivesLiveHudUpdatesWithoutLosingFocusOrText()
         {
             var events = new GameObject("Composite live editing events", typeof(EventSystem));
@@ -63,10 +83,9 @@ namespace PaperDefense.Tests
                 var hud = fixture.Root.AddComponent<WorkshopHud>();
                 hud.UseGuidedFlow = true; hud.Mode = WorkshopHudMode.Full; hud.Initialize(fixture.Run);
                 Assert.That(hud.Composite, Is.Not.Null);
-                Assert.That(hud.DrawingEditor, Is.Null);
-                Assert.That(hud.MortarFootprintEditor, Is.Null);
-                Assert.That(hud.FanVolleyEditor, Is.Null);
-                Assert.That(hud.ReinforcementEditor, Is.Null);
+                var retired = new[] { "DrawingCanvasGraphic", "FootprintCanvasGraphic", "FootprintAxisGraphic", "FanVolleyGraphic", "ArmorReinforcementGraphic" };
+                Assert.That(fixture.Root.GetComponentsInChildren<Component>(true).Where(component => component != null)
+                    .Select(component => component.GetType().Name).Intersect(retired), Is.Empty);
                 Assert.That(fixture.Root.GetComponentsInChildren<UnityEngine.UI.Button>(true)
                     .Any(button => button.name == "Composite preparation"), Is.True);
             }

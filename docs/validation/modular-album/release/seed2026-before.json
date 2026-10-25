@@ -1,0 +1,1845 @@
+{
+  "row": {
+    "Fixture": "Campaign",
+    "RecipeId": "campaign.g0.repair1",
+    "RecipeName": "Mixed paid battery",
+    "Revision": "album-v1.0",
+    "Role": "Campaign",
+    "Scenario": "EightWaves",
+    "Outcome": "Timeout",
+    "Notes": "Original Player map, eight populated waves and castle HP; no starter structures or forced construction completion. Support buys reduce the same starting budget. Fixed paid mixed battery reinvests earned ink every 60 ticks. Each phase waits ten seconds; upgrades DeepInk except wave4 RapidFire. No well activation, free healing, generator replacement or erasure. Campaign Leaks is inapplicable: enemies repeatedly attack the castle. NetResource is actual generator income minus generator purchases; RemainingInk includes all production rewards. Same seed repeats a treatment; spawn admission may change the realized mixture across treatments.",
+    "Seed": 2026,
+    "Budget": 640,
+    "StartingInk": 640,
+    "RemainingInk": 7,
+    "UnitCost": 0,
+    "Cost": 1034,
+    "Copies": 17,
+    "FixtureCost": 0,
+    "Leaks": 0,
+    "UnresolvedEnemies": 541,
+    "BlotsCleared": 0,
+    "UnresolvedBlots": 0,
+    "SurvivingStructures": 16,
+    "DestroyedStructures": 1,
+    "Income": 0,
+    "NetResource": 0,
+    "CompletedWaves": 2,
+    "PaidWaves": 0,
+    "Kills": 125,
+    "SpawnedEnemies": 126,
+    "BaseHits": 1,
+    "Generators": 0,
+    "SimulationTicks": 60000,
+    "EnemyCount": 666,
+    "BlotCount": 0,
+    "MaximumTicks": 60000,
+    "EnemyKind": "",
+    "EnemyDrawingTier": "",
+    "Repair": true,
+    "DamageApplicable": true,
+    "LeaksApplicable": false,
+    "CastleApplicable": true,
+    "ControlApplicable": false,
+    "RepairApplicable": true,
+    "IncomeApplicable": true,
+    "CleaningApplicable": false,
+    "Damage": 9284.1787109375,
+    "IdleSeconds": 34409.1171875,
+    "DurationSeconds": 1999.5999755859375,
+    "StartingBaseHealth": 250.0,
+    "BaseHealth": 240.0,
+    "BaseDamageTaken": 10.0,
+    "PreventedMovement": 0.0,
+    "RepairedHealth": 5729.8876953125,
+    "SurvivingStructureHealth": 1217.0,
+    "BuildSeconds": 0.0,
+    "EnemyHealth": 0.0,
+    "EnemySpeed": 0.0,
+    "EnemySpawnInterval": 0.0,
+    "StepSeconds": 0.033333335071802139,
+    "SpawnX": 0.0,
+    "SpawnY": 0.0,
+    "SpawnYVariation": 0.0,
+    "ExitX": 0.0,
+    "RepairTargetInitialHealth": 0.0,
+    "RepairTargetMaximumHealth": 0.0,
+    "SpawnedByKind": [
+      95,
+      23,
+      4,
+      4,
+      0,
+      0
+    ],
+    "SpawnedByDrawingTier": [
+      115,
+      11,
+      0
+    ],
+    "Composition": [
+      "album.repair",
+      "album.wall",
+      "album.guard",
+      "album.double",
+      "album.piercer",
+      "album.mortar"
+    ],
+    "Placements": [
+      {
+        "EntryId": "album.repair",
+        "X": 48,
+        "Y": 34,
+        "Cost": 65,
+        "Seconds": 0.0
+      },
+      {
+        "EntryId": "album.wall",
+        "X": 48,
+        "Y": 35,
+        "Cost": 16,
+        "Seconds": 0.0
+      },
+      {
+        "EntryId": "album.guard",
+        "X": 45,
+        "Y": 32,
+        "Cost": 40,
+        "Seconds": 0.0
+      },
+      {
+        "EntryId": "album.double",
+        "X": 51,
+        "Y": 32,
+        "Cost": 64,
+        "Seconds": 0.0
+      },
+      {
+        "EntryId": "album.piercer",
+        "X": 48,
+        "Y": 29,
+        "Cost": 60,
+        "Seconds": 0.0
+      },
+      {
+        "EntryId": "album.mortar",
+        "X": 45,
+        "Y": 29,
+        "Cost": 99,
+        "Seconds": 0.0
+      },
+      {
+        "EntryId": "album.guard",
+        "X": 51,
+        "Y": 29,
+        "Cost": 40,
+        "Seconds": 0.0
+      },
+      {
+        "EntryId": "album.double",
+        "X": 45,
+        "Y": 35,
+        "Cost": 64,
+        "Seconds": 0.0
+      },
+      {
+        "EntryId": "album.piercer",
+        "X": 51,
+        "Y": 35,
+        "Cost": 60,
+        "Seconds": 0.0
+      },
+      {
+        "EntryId": "album.mortar",
+        "X": 44,
+        "Y": 32,
+        "Cost": 99,
+        "Seconds": 0.0
+      },
+      {
+        "EntryId": "album.guard",
+        "X": 52,
+        "Y": 32,
+        "Cost": 40,
+        "Seconds": 31.999855041503906
+      },
+      {
+        "EntryId": "album.double",
+        "X": 48,
+        "Y": 28,
+        "Cost": 64,
+        "Seconds": 49.399589538574219
+      },
+      {
+        "EntryId": "album.piercer",
+        "X": 48,
+        "Y": 36,
+        "Cost": 60,
+        "Seconds": 49.399589538574219
+      },
+      {
+        "EntryId": "album.mortar",
+        "X": 44,
+        "Y": 28,
+        "Cost": 99,
+        "Seconds": 101.06546783447266
+      },
+      {
+        "EntryId": "album.guard",
+        "X": 52,
+        "Y": 28,
+        "Cost": 40,
+        "Seconds": 101.06546783447266
+      },
+      {
+        "EntryId": "album.double",
+        "X": 44,
+        "Y": 36,
+        "Cost": 64,
+        "Seconds": 101.06546783447266
+      },
+      {
+        "EntryId": "album.piercer",
+        "X": 52,
+        "Y": 28,
+        "Cost": 60,
+        "Seconds": 166.00650024414063
+      }
+    ],
+    "InitialTargets": []
+  },
+  "snapshots": [
+    {
+      "seconds": 1949.61218,
+      "wave": 3,
+      "remainingToSpawn": 0,
+      "alive": 1,
+      "kills": 125,
+      "ink": 7,
+      "baseHP": 240.0,
+      "totalDamage": 9284.179,
+      "repair": 5570.73242,
+      "enemy": {
+        "Id": 112,
+        "Kind": 3,
+        "Position": {
+          "X": 64.91283,
+          "Y": 33.5001678
+        },
+        "Health": 140.8,
+        "MaxHealth": 140.8,
+        "VisualScale": 2.8,
+        "DrawingTier": 0,
+        "BlotRemaining": 0.0,
+        "RedRemaining": 0.0,
+        "BlueRemaining": 0.0,
+        "GreenRemaining": 0.0,
+        "WindupRemaining": 0.0,
+        "RedTickRemaining": 0.0,
+        "RedSourceWeapon": 0,
+        "RedSourceWeaponId": null,
+        "RewardBudget": 2,
+        "RedEffect": null,
+        "BlueEffect": null,
+        "GreenEffect": null,
+        "ObjectiveIndex": -1,
+        "RangedObjectiveIndex": -2147483648,
+        "RangedTarget": {
+          "X": 52.5,
+          "Y": 32.5
+        },
+        "RangedCooldown": 1.80000067,
+        "WindingUp": false,
+        "AttackCooldown": 0.0,
+        "SpeedScale": 0.992188632,
+        "Destination": {
+          "X": 63.5,
+          "Y": 33.5
+        },
+        "MovementDirection": {
+          "X": -1.0,
+          "Y": -0.000135703624
+        },
+        "AvoidanceNeighborId": 0,
+        "AvoidanceSide": 0.0,
+        "NavigationDirection": {
+          "X": -1.0,
+          "Y": -0.000118802047
+        },
+        "NavigationCost": 8.095239,
+        "YieldingToNeighbor": false,
+        "CrowdHoldingPosition": true,
+        "HasDestination": true,
+        "VisualDeathPublished": false
+      },
+      "blocker": {
+        "id": 11,
+        "recipe": "album.guard",
+        "x": 52,
+        "y": 32,
+        "hp": 66.0,
+        "maxHP": 66.0
+      },
+      "mounts": [
+        {
+          "id": 3,
+          "recipe": "album.guard",
+          "x": 45,
+          "y": 32,
+          "complete": true,
+          "distance": 19.438574276920246,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 4,
+          "recipe": "album.double",
+          "x": 51,
+          "y": 32,
+          "complete": true,
+          "distance": 13.450065109965612,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 4,
+          "recipe": "album.double",
+          "x": 51,
+          "y": 32,
+          "complete": true,
+          "distance": 13.450065109965612,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 5,
+          "recipe": "album.piercer",
+          "x": 48,
+          "y": 29,
+          "complete": true,
+          "distance": 16.893259536599444,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 6,
+          "recipe": "album.mortar",
+          "x": 45,
+          "y": 29,
+          "complete": true,
+          "distance": 19.820675493015461,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 7,
+          "recipe": "album.guard",
+          "x": 51,
+          "y": 29,
+          "complete": true,
+          "distance": 13.996615967525594,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 8,
+          "recipe": "album.double",
+          "x": 45,
+          "y": 35,
+          "complete": true,
+          "distance": 19.515562068238449,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 8,
+          "recipe": "album.double",
+          "x": 45,
+          "y": 35,
+          "complete": true,
+          "distance": 19.515562068238449,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 9,
+          "recipe": "album.piercer",
+          "x": 51,
+          "y": 35,
+          "complete": true,
+          "distance": 13.561093037887328,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 10,
+          "recipe": "album.mortar",
+          "x": 44,
+          "y": 32,
+          "complete": true,
+          "distance": 20.437314476112498,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 11,
+          "recipe": "album.guard",
+          "x": 52,
+          "y": 32,
+          "complete": true,
+          "distance": 12.453055785073092,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 12,
+          "recipe": "album.double",
+          "x": 48,
+          "y": 28,
+          "complete": true,
+          "distance": 17.157580058512547,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 12,
+          "recipe": "album.double",
+          "x": 48,
+          "y": 28,
+          "complete": true,
+          "distance": 17.157580058512547,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 13,
+          "recipe": "album.piercer",
+          "x": 48,
+          "y": 36,
+          "complete": true,
+          "distance": 16.684719593609969,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 14,
+          "recipe": "album.mortar",
+          "x": 44,
+          "y": 28,
+          "complete": true,
+          "distance": 21.016307139194435,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 16,
+          "recipe": "album.double",
+          "x": 44,
+          "y": 36,
+          "complete": true,
+          "distance": 20.632074064962055,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 16,
+          "recipe": "album.double",
+          "x": 44,
+          "y": 36,
+          "complete": true,
+          "distance": 20.632074064962055,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 17,
+          "recipe": "album.piercer",
+          "x": 52,
+          "y": 28,
+          "complete": true,
+          "distance": 13.382075368177386,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        }
+      ]
+    },
+    {
+      "seconds": 1959.60974,
+      "wave": 3,
+      "remainingToSpawn": 0,
+      "alive": 1,
+      "kills": 125,
+      "ink": 7,
+      "baseHP": 240.0,
+      "totalDamage": 9284.179,
+      "repair": 5602.56348,
+      "enemy": {
+        "Id": 112,
+        "Kind": 3,
+        "Position": {
+          "X": 64.91283,
+          "Y": 33.5001678
+        },
+        "Health": 140.8,
+        "MaxHealth": 140.8,
+        "VisualScale": 2.8,
+        "DrawingTier": 0,
+        "BlotRemaining": 0.0,
+        "RedRemaining": 0.0,
+        "BlueRemaining": 0.0,
+        "GreenRemaining": 0.0,
+        "WindupRemaining": 0.0,
+        "RedTickRemaining": 0.0,
+        "RedSourceWeapon": 0,
+        "RedSourceWeaponId": null,
+        "RewardBudget": 2,
+        "RedEffect": null,
+        "BlueEffect": null,
+        "GreenEffect": null,
+        "ObjectiveIndex": -1,
+        "RangedObjectiveIndex": -2147483648,
+        "RangedTarget": {
+          "X": 52.5,
+          "Y": 32.5
+        },
+        "RangedCooldown": 1.500001,
+        "WindingUp": false,
+        "AttackCooldown": 0.0,
+        "SpeedScale": 0.992188632,
+        "Destination": {
+          "X": 63.5,
+          "Y": 33.5
+        },
+        "MovementDirection": {
+          "X": -1.0,
+          "Y": -0.000135703624
+        },
+        "AvoidanceNeighborId": 0,
+        "AvoidanceSide": 0.0,
+        "NavigationDirection": {
+          "X": -1.0,
+          "Y": -0.000118802047
+        },
+        "NavigationCost": 8.095239,
+        "YieldingToNeighbor": false,
+        "CrowdHoldingPosition": true,
+        "HasDestination": true,
+        "VisualDeathPublished": false
+      },
+      "blocker": {
+        "id": 11,
+        "recipe": "album.guard",
+        "x": 52,
+        "y": 32,
+        "hp": 57.8000069,
+        "maxHP": 66.0
+      },
+      "mounts": [
+        {
+          "id": 3,
+          "recipe": "album.guard",
+          "x": 45,
+          "y": 32,
+          "complete": true,
+          "distance": 19.438574276920246,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 4,
+          "recipe": "album.double",
+          "x": 51,
+          "y": 32,
+          "complete": true,
+          "distance": 13.450065109965612,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 4,
+          "recipe": "album.double",
+          "x": 51,
+          "y": 32,
+          "complete": true,
+          "distance": 13.450065109965612,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 5,
+          "recipe": "album.piercer",
+          "x": 48,
+          "y": 29,
+          "complete": true,
+          "distance": 16.893259536599444,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 6,
+          "recipe": "album.mortar",
+          "x": 45,
+          "y": 29,
+          "complete": true,
+          "distance": 19.820675493015461,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 7,
+          "recipe": "album.guard",
+          "x": 51,
+          "y": 29,
+          "complete": true,
+          "distance": 13.996615967525594,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 8,
+          "recipe": "album.double",
+          "x": 45,
+          "y": 35,
+          "complete": true,
+          "distance": 19.515562068238449,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 8,
+          "recipe": "album.double",
+          "x": 45,
+          "y": 35,
+          "complete": true,
+          "distance": 19.515562068238449,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 9,
+          "recipe": "album.piercer",
+          "x": 51,
+          "y": 35,
+          "complete": true,
+          "distance": 13.561093037887328,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 10,
+          "recipe": "album.mortar",
+          "x": 44,
+          "y": 32,
+          "complete": true,
+          "distance": 20.437314476112498,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 11,
+          "recipe": "album.guard",
+          "x": 52,
+          "y": 32,
+          "complete": true,
+          "distance": 12.453055785073092,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 12,
+          "recipe": "album.double",
+          "x": 48,
+          "y": 28,
+          "complete": true,
+          "distance": 17.157580058512547,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 12,
+          "recipe": "album.double",
+          "x": 48,
+          "y": 28,
+          "complete": true,
+          "distance": 17.157580058512547,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 13,
+          "recipe": "album.piercer",
+          "x": 48,
+          "y": 36,
+          "complete": true,
+          "distance": 16.684719593609969,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 14,
+          "recipe": "album.mortar",
+          "x": 44,
+          "y": 28,
+          "complete": true,
+          "distance": 21.016307139194435,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 16,
+          "recipe": "album.double",
+          "x": 44,
+          "y": 36,
+          "complete": true,
+          "distance": 20.632074064962055,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 16,
+          "recipe": "album.double",
+          "x": 44,
+          "y": 36,
+          "complete": true,
+          "distance": 20.632074064962055,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 17,
+          "recipe": "album.piercer",
+          "x": 52,
+          "y": 28,
+          "complete": true,
+          "distance": 13.382075368177386,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        }
+      ]
+    },
+    {
+      "seconds": 1969.6073,
+      "wave": 3,
+      "remainingToSpawn": 0,
+      "alive": 1,
+      "kills": 125,
+      "ink": 7,
+      "baseHP": 240.0,
+      "totalDamage": 9284.179,
+      "repair": 5634.39453,
+      "enemy": {
+        "Id": 112,
+        "Kind": 3,
+        "Position": {
+          "X": 64.91283,
+          "Y": 33.5001678
+        },
+        "Health": 140.8,
+        "MaxHealth": 140.8,
+        "VisualScale": 2.8,
+        "DrawingTier": 0,
+        "BlotRemaining": 0.0,
+        "RedRemaining": 0.0,
+        "BlueRemaining": 0.0,
+        "GreenRemaining": 0.0,
+        "WindupRemaining": 0.0,
+        "RedTickRemaining": 0.0,
+        "RedSourceWeapon": 0,
+        "RedSourceWeaponId": null,
+        "RewardBudget": 2,
+        "RedEffect": null,
+        "BlueEffect": null,
+        "GreenEffect": null,
+        "ObjectiveIndex": -1,
+        "RangedObjectiveIndex": -2147483648,
+        "RangedTarget": {
+          "X": 52.5,
+          "Y": 32.5
+        },
+        "RangedCooldown": 1.20000124,
+        "WindingUp": false,
+        "AttackCooldown": 0.0,
+        "SpeedScale": 0.992188632,
+        "Destination": {
+          "X": 63.5,
+          "Y": 33.5
+        },
+        "MovementDirection": {
+          "X": -1.0,
+          "Y": -0.000135703624
+        },
+        "AvoidanceNeighborId": 0,
+        "AvoidanceSide": 0.0,
+        "NavigationDirection": {
+          "X": -1.0,
+          "Y": -0.000118802047
+        },
+        "NavigationCost": 8.095239,
+        "YieldingToNeighbor": false,
+        "CrowdHoldingPosition": true,
+        "HasDestination": true,
+        "VisualDeathPublished": false
+      },
+      "blocker": {
+        "id": 11,
+        "recipe": "album.guard",
+        "x": 52,
+        "y": 32,
+        "hp": 59.6000137,
+        "maxHP": 66.0
+      },
+      "mounts": [
+        {
+          "id": 3,
+          "recipe": "album.guard",
+          "x": 45,
+          "y": 32,
+          "complete": true,
+          "distance": 19.438574276920246,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 4,
+          "recipe": "album.double",
+          "x": 51,
+          "y": 32,
+          "complete": true,
+          "distance": 13.450065109965612,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 4,
+          "recipe": "album.double",
+          "x": 51,
+          "y": 32,
+          "complete": true,
+          "distance": 13.450065109965612,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 5,
+          "recipe": "album.piercer",
+          "x": 48,
+          "y": 29,
+          "complete": true,
+          "distance": 16.893259536599444,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 6,
+          "recipe": "album.mortar",
+          "x": 45,
+          "y": 29,
+          "complete": true,
+          "distance": 19.820675493015461,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 7,
+          "recipe": "album.guard",
+          "x": 51,
+          "y": 29,
+          "complete": true,
+          "distance": 13.996615967525594,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 8,
+          "recipe": "album.double",
+          "x": 45,
+          "y": 35,
+          "complete": true,
+          "distance": 19.515562068238449,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 8,
+          "recipe": "album.double",
+          "x": 45,
+          "y": 35,
+          "complete": true,
+          "distance": 19.515562068238449,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 9,
+          "recipe": "album.piercer",
+          "x": 51,
+          "y": 35,
+          "complete": true,
+          "distance": 13.561093037887328,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 10,
+          "recipe": "album.mortar",
+          "x": 44,
+          "y": 32,
+          "complete": true,
+          "distance": 20.437314476112498,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 11,
+          "recipe": "album.guard",
+          "x": 52,
+          "y": 32,
+          "complete": true,
+          "distance": 12.453055785073092,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 12,
+          "recipe": "album.double",
+          "x": 48,
+          "y": 28,
+          "complete": true,
+          "distance": 17.157580058512547,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 12,
+          "recipe": "album.double",
+          "x": 48,
+          "y": 28,
+          "complete": true,
+          "distance": 17.157580058512547,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 13,
+          "recipe": "album.piercer",
+          "x": 48,
+          "y": 36,
+          "complete": true,
+          "distance": 16.684719593609969,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 14,
+          "recipe": "album.mortar",
+          "x": 44,
+          "y": 28,
+          "complete": true,
+          "distance": 21.016307139194435,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 16,
+          "recipe": "album.double",
+          "x": 44,
+          "y": 36,
+          "complete": true,
+          "distance": 20.632074064962055,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 16,
+          "recipe": "album.double",
+          "x": 44,
+          "y": 36,
+          "complete": true,
+          "distance": 20.632074064962055,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 17,
+          "recipe": "album.piercer",
+          "x": 52,
+          "y": 28,
+          "complete": true,
+          "distance": 13.382075368177386,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        }
+      ]
+    },
+    {
+      "seconds": 1979.60486,
+      "wave": 3,
+      "remainingToSpawn": 0,
+      "alive": 1,
+      "kills": 125,
+      "ink": 7,
+      "baseHP": 240.0,
+      "totalDamage": 9284.179,
+      "repair": 5666.22559,
+      "enemy": {
+        "Id": 112,
+        "Kind": 3,
+        "Position": {
+          "X": 64.91283,
+          "Y": 33.5001678
+        },
+        "Health": 140.8,
+        "MaxHealth": 140.8,
+        "VisualScale": 2.8,
+        "DrawingTier": 0,
+        "BlotRemaining": 0.0,
+        "RedRemaining": 0.0,
+        "BlueRemaining": 0.0,
+        "GreenRemaining": 0.0,
+        "WindupRemaining": 0.0,
+        "RedTickRemaining": 0.0,
+        "RedSourceWeapon": 0,
+        "RedSourceWeaponId": null,
+        "RewardBudget": 2,
+        "RedEffect": null,
+        "BlueEffect": null,
+        "GreenEffect": null,
+        "ObjectiveIndex": -1,
+        "RangedObjectiveIndex": -2147483648,
+        "RangedTarget": {
+          "X": 52.5,
+          "Y": 32.5
+        },
+        "RangedCooldown": 0.900001347,
+        "WindingUp": false,
+        "AttackCooldown": 0.0,
+        "SpeedScale": 0.992188632,
+        "Destination": {
+          "X": 63.5,
+          "Y": 33.5
+        },
+        "MovementDirection": {
+          "X": -1.0,
+          "Y": -0.000135703624
+        },
+        "AvoidanceNeighborId": 0,
+        "AvoidanceSide": 0.0,
+        "NavigationDirection": {
+          "X": -1.0,
+          "Y": -0.000118802047
+        },
+        "NavigationCost": 8.095239,
+        "YieldingToNeighbor": false,
+        "CrowdHoldingPosition": true,
+        "HasDestination": true,
+        "VisualDeathPublished": false
+      },
+      "blocker": {
+        "id": 11,
+        "recipe": "album.guard",
+        "x": 52,
+        "y": 32,
+        "hp": 61.40002,
+        "maxHP": 66.0
+      },
+      "mounts": [
+        {
+          "id": 3,
+          "recipe": "album.guard",
+          "x": 45,
+          "y": 32,
+          "complete": true,
+          "distance": 19.438574276920246,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 4,
+          "recipe": "album.double",
+          "x": 51,
+          "y": 32,
+          "complete": true,
+          "distance": 13.450065109965612,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 4,
+          "recipe": "album.double",
+          "x": 51,
+          "y": 32,
+          "complete": true,
+          "distance": 13.450065109965612,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 5,
+          "recipe": "album.piercer",
+          "x": 48,
+          "y": 29,
+          "complete": true,
+          "distance": 16.893259536599444,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 6,
+          "recipe": "album.mortar",
+          "x": 45,
+          "y": 29,
+          "complete": true,
+          "distance": 19.820675493015461,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 7,
+          "recipe": "album.guard",
+          "x": 51,
+          "y": 29,
+          "complete": true,
+          "distance": 13.996615967525594,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 8,
+          "recipe": "album.double",
+          "x": 45,
+          "y": 35,
+          "complete": true,
+          "distance": 19.515562068238449,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 8,
+          "recipe": "album.double",
+          "x": 45,
+          "y": 35,
+          "complete": true,
+          "distance": 19.515562068238449,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 9,
+          "recipe": "album.piercer",
+          "x": 51,
+          "y": 35,
+          "complete": true,
+          "distance": 13.561093037887328,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 10,
+          "recipe": "album.mortar",
+          "x": 44,
+          "y": 32,
+          "complete": true,
+          "distance": 20.437314476112498,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 11,
+          "recipe": "album.guard",
+          "x": 52,
+          "y": 32,
+          "complete": true,
+          "distance": 12.453055785073092,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 12,
+          "recipe": "album.double",
+          "x": 48,
+          "y": 28,
+          "complete": true,
+          "distance": 17.157580058512547,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 12,
+          "recipe": "album.double",
+          "x": 48,
+          "y": 28,
+          "complete": true,
+          "distance": 17.157580058512547,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 13,
+          "recipe": "album.piercer",
+          "x": 48,
+          "y": 36,
+          "complete": true,
+          "distance": 16.684719593609969,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 14,
+          "recipe": "album.mortar",
+          "x": 44,
+          "y": 28,
+          "complete": true,
+          "distance": 21.016307139194435,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 16,
+          "recipe": "album.double",
+          "x": 44,
+          "y": 36,
+          "complete": true,
+          "distance": 20.632074064962055,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 16,
+          "recipe": "album.double",
+          "x": 44,
+          "y": 36,
+          "complete": true,
+          "distance": 20.632074064962055,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 17,
+          "recipe": "album.piercer",
+          "x": 52,
+          "y": 28,
+          "complete": true,
+          "distance": 13.382075368177386,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        }
+      ]
+    },
+    {
+      "seconds": 1989.60242,
+      "wave": 3,
+      "remainingToSpawn": 0,
+      "alive": 1,
+      "kills": 125,
+      "ink": 7,
+      "baseHP": 240.0,
+      "totalDamage": 9284.179,
+      "repair": 5698.05664,
+      "enemy": {
+        "Id": 112,
+        "Kind": 3,
+        "Position": {
+          "X": 64.91283,
+          "Y": 33.5001678
+        },
+        "Health": 140.8,
+        "MaxHealth": 140.8,
+        "VisualScale": 2.8,
+        "DrawingTier": 0,
+        "BlotRemaining": 0.0,
+        "RedRemaining": 0.0,
+        "BlueRemaining": 0.0,
+        "GreenRemaining": 0.0,
+        "WindupRemaining": 0.0,
+        "RedTickRemaining": 0.0,
+        "RedSourceWeapon": 0,
+        "RedSourceWeaponId": null,
+        "RewardBudget": 2,
+        "RedEffect": null,
+        "BlueEffect": null,
+        "GreenEffect": null,
+        "ObjectiveIndex": -1,
+        "RangedObjectiveIndex": -2147483648,
+        "RangedTarget": {
+          "X": 52.5,
+          "Y": 32.5
+        },
+        "RangedCooldown": 0.6000011,
+        "WindingUp": false,
+        "AttackCooldown": 0.0,
+        "SpeedScale": 0.992188632,
+        "Destination": {
+          "X": 63.5,
+          "Y": 33.5
+        },
+        "MovementDirection": {
+          "X": -1.0,
+          "Y": -0.000135703624
+        },
+        "AvoidanceNeighborId": 0,
+        "AvoidanceSide": 0.0,
+        "NavigationDirection": {
+          "X": -1.0,
+          "Y": -0.000118802047
+        },
+        "NavigationCost": 8.095239,
+        "YieldingToNeighbor": false,
+        "CrowdHoldingPosition": true,
+        "HasDestination": true,
+        "VisualDeathPublished": false
+      },
+      "blocker": {
+        "id": 11,
+        "recipe": "album.guard",
+        "x": 52,
+        "y": 32,
+        "hp": 63.2000275,
+        "maxHP": 66.0
+      },
+      "mounts": [
+        {
+          "id": 3,
+          "recipe": "album.guard",
+          "x": 45,
+          "y": 32,
+          "complete": true,
+          "distance": 19.438574276920246,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 4,
+          "recipe": "album.double",
+          "x": 51,
+          "y": 32,
+          "complete": true,
+          "distance": 13.450065109965612,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 4,
+          "recipe": "album.double",
+          "x": 51,
+          "y": 32,
+          "complete": true,
+          "distance": 13.450065109965612,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 5,
+          "recipe": "album.piercer",
+          "x": 48,
+          "y": 29,
+          "complete": true,
+          "distance": 16.893259536599444,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 6,
+          "recipe": "album.mortar",
+          "x": 45,
+          "y": 29,
+          "complete": true,
+          "distance": 19.820675493015461,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 7,
+          "recipe": "album.guard",
+          "x": 51,
+          "y": 29,
+          "complete": true,
+          "distance": 13.996615967525594,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 8,
+          "recipe": "album.double",
+          "x": 45,
+          "y": 35,
+          "complete": true,
+          "distance": 19.515562068238449,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 8,
+          "recipe": "album.double",
+          "x": 45,
+          "y": 35,
+          "complete": true,
+          "distance": 19.515562068238449,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 9,
+          "recipe": "album.piercer",
+          "x": 51,
+          "y": 35,
+          "complete": true,
+          "distance": 13.561093037887328,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 10,
+          "recipe": "album.mortar",
+          "x": 44,
+          "y": 32,
+          "complete": true,
+          "distance": 20.437314476112498,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 11,
+          "recipe": "album.guard",
+          "x": 52,
+          "y": 32,
+          "complete": true,
+          "distance": 12.453055785073092,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 12,
+          "recipe": "album.double",
+          "x": 48,
+          "y": 28,
+          "complete": true,
+          "distance": 17.157580058512547,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 12,
+          "recipe": "album.double",
+          "x": 48,
+          "y": 28,
+          "complete": true,
+          "distance": 17.157580058512547,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 13,
+          "recipe": "album.piercer",
+          "x": 48,
+          "y": 36,
+          "complete": true,
+          "distance": 16.684719593609969,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 14,
+          "recipe": "album.mortar",
+          "x": 44,
+          "y": 28,
+          "complete": true,
+          "distance": 21.016307139194435,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 16,
+          "recipe": "album.double",
+          "x": 44,
+          "y": 36,
+          "complete": true,
+          "distance": 20.632074064962055,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 16,
+          "recipe": "album.double",
+          "x": 44,
+          "y": 36,
+          "complete": true,
+          "distance": 20.632074064962055,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 17,
+          "recipe": "album.piercer",
+          "x": 52,
+          "y": 28,
+          "complete": true,
+          "distance": 13.382075368177386,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        }
+      ]
+    },
+    {
+      "seconds": 1999.6,
+      "wave": 3,
+      "remainingToSpawn": 0,
+      "alive": 1,
+      "kills": 125,
+      "ink": 7,
+      "baseHP": 240.0,
+      "totalDamage": 9284.179,
+      "repair": 5729.8877,
+      "enemy": {
+        "Id": 112,
+        "Kind": 3,
+        "Position": {
+          "X": 64.91283,
+          "Y": 33.5001678
+        },
+        "Health": 140.8,
+        "MaxHealth": 140.8,
+        "VisualScale": 2.8,
+        "DrawingTier": 0,
+        "BlotRemaining": 0.0,
+        "RedRemaining": 0.0,
+        "BlueRemaining": 0.0,
+        "GreenRemaining": 0.0,
+        "WindupRemaining": 0.0,
+        "RedTickRemaining": 0.0,
+        "RedSourceWeapon": 0,
+        "RedSourceWeaponId": null,
+        "RewardBudget": 2,
+        "RedEffect": null,
+        "BlueEffect": null,
+        "GreenEffect": null,
+        "ObjectiveIndex": -1,
+        "RangedObjectiveIndex": -2147483648,
+        "RangedTarget": {
+          "X": 52.5,
+          "Y": 32.5
+        },
+        "RangedCooldown": 0.300001025,
+        "WindingUp": false,
+        "AttackCooldown": 0.0,
+        "SpeedScale": 0.992188632,
+        "Destination": {
+          "X": 63.5,
+          "Y": 33.5
+        },
+        "MovementDirection": {
+          "X": -1.0,
+          "Y": -0.000135703624
+        },
+        "AvoidanceNeighborId": 0,
+        "AvoidanceSide": 0.0,
+        "NavigationDirection": {
+          "X": -1.0,
+          "Y": -0.000118802047
+        },
+        "NavigationCost": 8.095239,
+        "YieldingToNeighbor": false,
+        "CrowdHoldingPosition": true,
+        "HasDestination": true,
+        "VisualDeathPublished": false
+      },
+      "blocker": {
+        "id": 11,
+        "recipe": "album.guard",
+        "x": 52,
+        "y": 32,
+        "hp": 65.0000153,
+        "maxHP": 66.0
+      },
+      "mounts": [
+        {
+          "id": 3,
+          "recipe": "album.guard",
+          "x": 45,
+          "y": 32,
+          "complete": true,
+          "distance": 19.438574276920246,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 4,
+          "recipe": "album.double",
+          "x": 51,
+          "y": 32,
+          "complete": true,
+          "distance": 13.450065109965612,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 4,
+          "recipe": "album.double",
+          "x": 51,
+          "y": 32,
+          "complete": true,
+          "distance": 13.450065109965612,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 5,
+          "recipe": "album.piercer",
+          "x": 48,
+          "y": 29,
+          "complete": true,
+          "distance": 16.893259536599444,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 6,
+          "recipe": "album.mortar",
+          "x": 45,
+          "y": 29,
+          "complete": true,
+          "distance": 19.820675493015461,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 7,
+          "recipe": "album.guard",
+          "x": 51,
+          "y": 29,
+          "complete": true,
+          "distance": 13.996615967525594,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 8,
+          "recipe": "album.double",
+          "x": 45,
+          "y": 35,
+          "complete": true,
+          "distance": 19.515562068238449,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 8,
+          "recipe": "album.double",
+          "x": 45,
+          "y": 35,
+          "complete": true,
+          "distance": 19.515562068238449,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 9,
+          "recipe": "album.piercer",
+          "x": 51,
+          "y": 35,
+          "complete": true,
+          "distance": 13.561093037887328,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 10,
+          "recipe": "album.mortar",
+          "x": 44,
+          "y": 32,
+          "complete": true,
+          "distance": 20.437314476112498,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 11,
+          "recipe": "album.guard",
+          "x": 52,
+          "y": 32,
+          "complete": true,
+          "distance": 12.453055785073092,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 12,
+          "recipe": "album.double",
+          "x": 48,
+          "y": 28,
+          "complete": true,
+          "distance": 17.157580058512547,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 12,
+          "recipe": "album.double",
+          "x": 48,
+          "y": 28,
+          "complete": true,
+          "distance": 17.157580058512547,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 13,
+          "recipe": "album.piercer",
+          "x": 48,
+          "y": 36,
+          "complete": true,
+          "distance": 16.684719593609969,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 14,
+          "recipe": "album.mortar",
+          "x": 44,
+          "y": 28,
+          "complete": true,
+          "distance": 21.016307139194435,
+          "range": 18.0,
+          "minRange": 6.0,
+          "targetId": 0
+        },
+        {
+          "id": 16,
+          "recipe": "album.double",
+          "x": 44,
+          "y": 36,
+          "complete": true,
+          "distance": 20.632074064962055,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 16,
+          "recipe": "album.double",
+          "x": 44,
+          "y": 36,
+          "complete": true,
+          "distance": 20.632074064962055,
+          "range": 8.0,
+          "minRange": 0.0,
+          "targetId": 0
+        },
+        {
+          "id": 17,
+          "recipe": "album.piercer",
+          "x": 52,
+          "y": 28,
+          "complete": true,
+          "distance": 13.382075368177386,
+          "range": 12.5,
+          "minRange": 0.0,
+          "targetId": 0
+        }
+      ]
+    }
+  ]
+}

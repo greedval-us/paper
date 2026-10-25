@@ -6,7 +6,11 @@
 
 Единственная игровая сцена: [PaperDefenseGame.unity](../Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity). Меню **Paper Defense → Game → Open player game**, затем Play. Конфигурация: PlayerBalance → PlayerRules → PlayerContent. `CreateConfigurationIfMissing()` повторно назначает связи каталога даже при существующих assets; не используйте его как безвредное чтение.
 
-Windows x64: **Paper Defense → Game → Build player game**. Выход: `Builds/PlayerGame/PaperDefense.exe`, рядом build-report.txt. Для запуска без личного профиля передайте `-paper-memory-only`. Новая сборка в рамках аудита не выполнялась.
+Windows x64: **Paper Defense → Game → Build player game** (`PlayerGameSceneTools.Build`). Выход: `Builds/PlayerGame/PaperDefense.exe`, рядом build-report.txt. [Отчёт выпуска](validation/modular-album/release/acceptance.md) содержит свежий результат, хеши и проверки запуска. Для проверки без личного профиля передайте `-paper-memory-only`.
+
+Для отдельного тестового сохранения поддерживается `-paper-profile-path <абсолютный путь внутри системной временной папки>`. Некорректный путь отклоняется до открытия хранилища; автоматического перехода к личному профилю при ошибке нет. Флаг памяти имеет приоритет над временным store. Приёмочная инструментализация включается только явно через `-paper-release-probe <отчёт.json>` вместе с изоляцией профиля и не создаётся при обычном запуске игры.
+
+Перед полными тестами можно включить `AlbumReleaseTestResults.Enable("EditMode")` или `Enable("PlayMode")`: нативный TestRunnerApi сохраняет XML в `docs/validation/modular-album/release`. После приёмки вызвать `Disable()`. Сборка остаётся обычной Windows x64, без Development-флага; frame timing включён для проверки на устройстве. При скрытом окне GPU-измерение может отсутствовать и должно быть обозначено как недоступное.
 
 ## Структура
 
@@ -25,7 +29,7 @@ Windows x64: **Paper Defense → Game → Build player game**. Выход: `Buil
 
 ## Работа над переходом
 
-Начинайте с [плана](superpowers/plans/2026-10-18-modular-album-implementation.md) и [аудита](audit/2026-10-17-album/report.md). Не меняйте число слотов одной константой: загрузчик v7 требует точного размера массива. Сначала добавить типизированные рецепты и миграцию, затем UI. Новые значения из Excel не являются уже действующими параметрами Unity.
+Начинайте с [плана](superpowers/plans/2026-10-18-modular-album-implementation.md) и [текущего состояния](Current-Mechanics.md). Writer v8 использует восемь слотов; reader v7 проверяет исходные четыре и переносит данные без потери страниц. Сохраняйте этот контракт и тесты миграции. Изменения баланса вносятся в build-data.mjs, затем JSON/Excel сверяются с актуальным экспортом Player; сама правка Excel игровые assets не меняет.
 
 Для графики: **Paper Defense → Art → Rebuild blue pen atlas**. Входы — sprites.source.json и animation.json в NewStyle; результат — NotebookAtlas.png, NotebookSprites.json и NotebookVisualTheme.asset. Сохраняйте .meta. [Стыки](Modular-Asset-Contract.md) обязательны для новых частей; визуальный коллаж не доказывает совместимость при вращении.
 

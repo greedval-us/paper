@@ -16,37 +16,28 @@ namespace PaperDefense.Tests
     public sealed class TextResourceIntegrationTests
     {
         [Test]
-        public void InstanceOverrideChangesHudNestedPanelsAndRealCoreReasonWithoutLeakingToOtherHud()
+        public void InstanceOverrideChangesWorkshopControlsAndRealCoreReasonWithoutLeakingToOtherUi()
         {
-            var asset = ScriptableObject.CreateInstance<TextResourcesAsset>();
-            var first = new GameObject("Text override fixture"); first.SetActive(false);
-            var second = new GameObject("Independent text fixture"); second.SetActive(false);
+            var asset=ScriptableObject.CreateInstance<TextResourcesAsset>();
+            var first=new GameObject("Text override fixture",typeof(RectTransform));
+            var second=new GameObject("Independent text fixture",typeof(RectTransform));
             try
             {
-                foreach (var pair in TextResourcesAsset.Default.Entries) asset.entries.Add(new TextResourcesAsset.Entry(pair.Key, pair.Value));
-                Replace(asset, "copy.159b7c81e8a7413c", "WORKSHOP SENTINEL");
-                Replace(asset, "drawing.workbench.title", "DRAWING SENTINEL");
-                Replace(asset, "copy.90b777be2577be25", "MORTAR SENTINEL");
-                Replace(asset, "copy.a8ce8499831aa26c", "CORE SENTINEL");
-                var resolver = asset.CreateResolver();
-                var run = first.AddComponent<RunController>(); run.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
-                var hud = first.AddComponent<WorkshopHud>(); hud.TextResolver = resolver; hud.Initialize(run);
-                var input = first.AddComponent<DrawingInput>(); input.TextResolver = resolver;
-                var session = new GameSession(GameBalance.CreateDefault());
-                Assert.That(session.TryPaint(new Cell(-1, -1), InkColor.None, out string reason), Is.False);
-                input.SetMessage(reason);
-                Assert.That(input.Message, Is.EqualTo("CORE SENTINEL"));
-                var displayed = first.GetComponentsInChildren<Text>(true).Select(text => text.text).ToArray();
-                Assert.That(displayed, Does.Contain("WORKSHOP SENTINEL"));
-                Assert.That(displayed, Does.Contain("DRAWING SENTINEL"));
-                Assert.That(displayed, Does.Contain("MORTAR SENTINEL"));
-                Assert.That(displayed.Any(text => text.Contains("\u001ePD1:")), Is.False, "All Text controls must resolve semantic messages.");
-
-                var otherRun = second.AddComponent<RunController>(); otherRun.InitializeWorkshop(false, allowLegacyFixtureDefaults: true);
-                second.AddComponent<WorkshopHud>().Initialize(otherRun);
-                Assert.That(second.GetComponentsInChildren<Text>(true).Any(text => text.text.Contains("SENTINEL")), Is.False);
+                foreach(var pair in TextResourcesAsset.Default.Entries)asset.entries.Add(new TextResourcesAsset.Entry(pair.Key,pair.Value));
+                Replace(asset,"wizard.new_name","WORKSHOP SENTINEL");
+                Replace(asset,"copy.a8ce8499831aa26c","CORE SENTINEL");
+                var resolver=asset.CreateResolver();
+                var label=new WorkshopUi(resolver).Label(first.transform,"Resolved workshop control",UserText.Message("wizard.new_name"),new Rect(0,0,300,60),20);
+                var input=first.AddComponent<DrawingInput>();input.TextResolver=resolver;
+                var session=new GameSession(GameBalance.CreateDefault());
+                Assert.That(session.TryPaint(new Cell(-1,-1),InkColor.None,out string reason),Is.False);
+                input.SetMessage(reason);Assert.That(input.Message,Is.EqualTo("CORE SENTINEL"));
+                Assert.That(label.text,Is.EqualTo("WORKSHOP SENTINEL"));
+                Assert.That(label.text.Contains("\u001ePD1:"),Is.False);
+                var independent=new WorkshopUi().Label(second.transform,"Independent workshop control",UserText.Message("wizard.new_name"),new Rect(0,0,300,60),20);
+                Assert.That(independent.text,Does.Not.Contain("SENTINEL"));
             }
-            finally { Object.DestroyImmediate(first); Object.DestroyImmediate(second); Object.DestroyImmediate(asset); }
+            finally{Object.DestroyImmediate(first);Object.DestroyImmediate(second);Object.DestroyImmediate(asset);}
         }
 
         [Test]

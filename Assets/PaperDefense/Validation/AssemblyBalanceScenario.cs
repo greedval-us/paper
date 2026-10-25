@@ -25,6 +25,16 @@ namespace PaperDefense.Validation
         public float X, Y, Health;
     }
 
+    [Serializable]
+    public sealed class AssemblyBalanceRecoveryAction
+    {
+        public string Command, Reason, EntryId;
+        public int StructureId, X, Y, Refund, InkBefore, InkAfter, WaveIndex, Kills;
+        public int TargetStructureId, TargetX, TargetY;
+        public float Seconds, NoKillSeconds;
+        public int[] LiveEnemyIds = Array.Empty<int>();
+    }
+
     /// <summary>Applicability flags distinguish an unavailable measurement from a measured zero.</summary>
     [Serializable]
     public sealed class AssemblyBalanceRow
@@ -33,7 +43,7 @@ namespace PaperDefense.Validation
         public int Seed, Budget, StartingInk, RemainingInk, UnitCost, Cost, Copies, FixtureCost;
         public int Leaks, UnresolvedEnemies, BlotsCleared, UnresolvedBlots, SurvivingStructures, DestroyedStructures;
         public int Income, NetResource, CompletedWaves, PaidWaves, Kills, SpawnedEnemies, BaseHits;
-        public int Generators, SimulationTicks;
+        public int Generators, SimulationTicks, RefundedInk;
         public int EnemyCount, BlotCount, MaximumTicks;
         public string EnemyKind, EnemyDrawingTier;
         public bool Repair, DamageApplicable, LeaksApplicable, CastleApplicable, ControlApplicable;
@@ -46,6 +56,7 @@ namespace PaperDefense.Validation
         public string[] Composition = Array.Empty<string>();
         public AssemblyBalancePlacement[] Placements = Array.Empty<AssemblyBalancePlacement>();
         public AssemblyBalanceTarget[] InitialTargets = Array.Empty<AssemblyBalanceTarget>();
+        public AssemblyBalanceRecoveryAction[] RecoveryActions = Array.Empty<AssemblyBalanceRecoveryAction>();
     }
 
     [Serializable]
@@ -211,12 +222,13 @@ namespace PaperDefense.Validation
         }
 
         public static AssemblyBalanceRow RunCampaign(GameBalance source, ComponentCatalog catalog,
-            int seed, int generators, bool repair)
+            int seed, int generators, bool repair, Action<GameSession> observe = null, bool recoverStalemates = true)
         {
             if (generators < 0 || generators > 2) throw new ArgumentOutOfRangeException(nameof(generators));
             if (source.Waves.Count != 8) throw new ArgumentException("The campaign requires the live eight wave definitions.", nameof(source));
             var rules = source.CreateSnapshot(); var session = new GameSession(rules, seed, false);
             var orders = new List<AssemblyBalancePlacement>();
+            var recoveries = new List<AssemblyBalanceRecoveryAction>();
             var resolved = catalog.Starters.ToDictionary(e => e.Id, e => TowerCatalog.ResolveEntry(e, rules).Value, StringComparer.Ordinal);
 
             bool Build(string id, Cell cell, bool required = false)
@@ -253,19 +265,76 @@ namespace PaperDefense.Validation
                     if (Build(id, cell)) purchaseIndex++;
                 }
             }
-            float phaseStarted = 0; var observedPhase = session.Phase; int ticks = 0;
+            float phaseStarted = 0, lastKillSeconds = 0;
+            var observedPhase = session.Phase; int ticks = 0, observedKills = 0;
+
+            void RecoverUncoveredRepairStalemate()
+            {
+                if (!recoverStalemates || session.Phase != RunPhase.Assault || session.RemainingToSpawn != 0 ||
+                    session.Enemies.Count == 0 || session.Elapsed - lastKillSeconds < 30) return;
+
+                // A ranged attacker can keep shooting a repaired outer blocker beyond the
+                // fixed battery's coverage. Leave combat rules intact and use a player command.
+                foreach (var enemy in session.Enemies)
+                {
+                    if (enemy.Health <= 0) continue;
+                    foreach (var tower in session.Structures)
+                    {
+                        if (tower.Health <= 0 || !tower.IsComplete || tower.BuildRemaining > 0 ||
+                            tower.ResolvedEntry?.Kind != AlbumEntryKind.Tower) continue;
+                        double dx = tower.Cell.X + .5d - enemy.Position.X;
+                        double dy = tower.Cell.Y + .5d - enemy.Position.Y;
+                        double distance = dx * dx + dy * dy;
+                        foreach (var weapon in tower.ResolvedEntry.Weapons)
+                            if (weapon.Attack != AttackKind.Cleanup && weapon.Range > 0 &&
+                                distance >= weapon.MinimumRange * (double)weapon.MinimumRange &&
+                                distance <= weapon.Range * (double)weapon.Range) return;
+                    }
+                }
+
+                var repairRates = StructureSupportRules.RepairRates(session.Structures);
+                foreach (var post in session.Structures)
+                {
+                    var support = post.ResolvedEntry?.Support;
+                    if (post.Health <= 0 || !post.IsComplete || post.BuildRemaining > 0 ||
+                        support?.Kind != AssemblyStructureFamily.Repair) continue;
+                    var repairedTarget = repairRates.Keys.Where(target => {
+                        double dx = post.Cell.X - target.Cell.X, dy = post.Cell.Y - target.Cell.Y;
+                        return dx * dx + dy * dy <= support.Radius * (double)support.Radius;
+                    }).OrderBy(target => target.Id).FirstOrDefault();
+                    if (repairedTarget == null) continue;
+                    var action = new AssemblyBalanceRecoveryAction {
+                        Command = "Erase", Reason = "UncoveredRepairedBlocker", EntryId = post.SourceAlbumEntryId,
+                        StructureId = post.Id, X = post.Cell.X, Y = post.Cell.Y, Seconds = session.Elapsed,
+                        InkBefore = session.Ink, WaveIndex = session.WaveIndex, Kills = session.Kills,
+                        NoKillSeconds = session.Elapsed - lastKillSeconds,
+                        TargetStructureId = repairedTarget.Id, TargetX = repairedTarget.Cell.X, TargetY = repairedTarget.Cell.Y,
+                        LiveEnemyIds = session.Enemies.Where(enemy => enemy.Health > 0).Select(enemy => enemy.Id).ToArray()
+                    };
+                    if (!session.TryErase(post.Cell, out int refund)) continue;
+                    action.Refund = refund; action.InkAfter = session.Ink;
+                    recoveries.Add(action);
+                    lastKillSeconds = session.Elapsed;
+                    break;
+                }
+            }
+
             for (; ticks < MaximumCampaignTicks; ticks++)
             {
                 if (session.Phase == RunPhase.Victory || session.Phase == RunPhase.Defeat) break;
-                if (session.Phase != observedPhase) { observedPhase = session.Phase; phaseStarted = session.Elapsed; }
+                if (session.Phase != observedPhase)
+                { observedPhase = session.Phase; phaseStarted = session.Elapsed; lastKillSeconds = session.Elapsed; }
+                if (session.Kills != observedKills || session.Phase != RunPhase.Assault || session.RemainingToSpawn > 0)
+                { observedKills = session.Kills; lastKillSeconds = session.Elapsed; }
                 if (session.Phase == RunPhase.Planning || session.Phase == RunPhase.Intermission)
                 {
                     if (session.PendingUpgrade) session.ChooseUpgrade(session.WaveIndex == 4 ? RunUpgrade.RapidFire : RunUpgrade.DeepInk);
                     BuyBattery();
                     if (session.Elapsed - phaseStarted >= 10) session.StartNextWave();
                 }
-                if (ticks % 60 == 0) BuyBattery();
+                if (ticks % 60 == 0) { BuyBattery(); RecoverUncoveredRepairStalemate(); }
                 session.Tick(CampaignDelta);
+                if (observe != null && (ticks + 1) % 300 == 0) observe(session);
             }
             var stats = session.Statistics;
             int totalPlanned = rules.Waves.Sum(w => w.Count);
@@ -289,7 +358,10 @@ namespace PaperDefense.Validation
                 UnresolvedEnemies = Math.Max(0, totalPlanned - session.Kills),
                 Outcome = session.Phase == RunPhase.Victory ? "Victory" : session.Phase == RunPhase.Defeat ? "Defeat" : "Timeout",
                 Composition = orders.Select(o => o.EntryId).Distinct().ToArray(), Placements = orders.ToArray(),
-                Notes = "Original Player map, eight populated waves and castle HP; no starter structures or forced construction completion. Support buys reduce the same starting budget. Fixed paid mixed battery reinvests earned ink every 60 ticks. Each phase waits ten seconds; upgrades DeepInk except wave4 RapidFire. No well activation, free healing, generator replacement or erasure. Campaign Leaks is inapplicable: enemies repeatedly attack the castle. NetResource is actual generator income minus generator purchases; RemainingInk includes all production rewards. Same seed repeats a treatment; spawn admission may change the realized mixture across treatments."
+                RefundedInk = stats.RefundedInk, RecoveryActions = recoveries.ToArray(),
+                Notes = (recoverStalemates ? "Campaign policy v2: after thirty seconds without kills, with no spawn backlog and every survivor outside all completed offensive mount ranges, erase an active repair post sustaining a damaged blocker using the ordinary refund command. RecoveryActions records each command; the repair treatment means an initial repair purchase and may include this erasure. " :
+                    "Historical campaign policy v1: no stalemate recovery or erasure. ") +
+                    "Original Player map, eight populated waves and castle HP; no starter structures or forced construction completion. Support buys reduce the same starting budget. Fixed paid mixed battery reinvests earned ink every 60 ticks; erased repair posts are not replaced. Each phase waits ten seconds; upgrades DeepInk except wave4 RapidFire. No well activation, free healing or generator replacement. Campaign Leaks is inapplicable: enemies repeatedly attack the castle. NetResource is actual generator income minus generator purchases; RemainingInk includes all production rewards and ordinary erasure refunds. Placements and Cost retain all paid purchases; RefundedInk records refunds separately. Same seed repeats a treatment; spawn admission may change the realized mixture across treatments."
             };
         }
 

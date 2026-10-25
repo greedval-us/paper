@@ -34,10 +34,6 @@ namespace PaperDefense.Presentation
         public int Step { get; private set; }
         public TowerBlueprint Draft { get; private set; }
         public bool IsReadOnly=>Draft!=null&&Draft.Origin!=DrawingOrigin.LegacyStandard;
-        public GuidedDrawingPanel Drawing { get; }
-        public MortarFootprintPanel Mortar { get; }
-        public FanVolleyPanel Volley { get; }
-        public ArmorReinforcementPanel Armor { get; }
         public bool AlbumOpen=>album.IsOpen;
         public string Status=>notice.text;
         internal static string Copy(string key,params object[] values)=>UserText.Message("wizard."+key,values);
@@ -199,8 +195,7 @@ namespace PaperDefense.Presentation
         {Feedback(Copy(IsReadOnly?"legacy_readonly":"standard_presets"));}
         internal void OpenTrial(){ui.HideTooltip();trial.Open(Draft);}
         public TrialComparison RunTrial()=>trial.Record(Draft);
-        void CloseSpecialEditors(){Mortar?.Close();Volley?.Close();Armor?.Close();}
-        void CloseOverlays(){CloseSpecialEditors();Drawing?.Hide();assembly?.Hide();album?.Hide();trial?.Close();ui.HideTooltip();}
+        void CloseOverlays(){assembly?.Hide();album?.Hide();trial?.Close();ui.HideTooltip();}
         public void Suspend(){CloseOverlays();}
         public void Resume(){BuildStep();}
         internal void ReflowFoundation(float width,float height)=>assembly.ReflowFoundation(width,height);

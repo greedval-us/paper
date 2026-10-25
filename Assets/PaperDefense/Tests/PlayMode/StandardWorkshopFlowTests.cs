@@ -33,6 +33,13 @@ namespace PaperDefense.Tests
             Canvas.ForceUpdateCanvases();
         }
 
+        void AssertNoDrawingEditors(string action = "")
+        {
+            var retired = new[] { "DrawingCanvasGraphic", "FootprintCanvasGraphic", "FootprintAxisGraphic", "FanVolleyGraphic", "ArmorReinforcementGraphic" };
+            Assert.That(root.GetComponentsInChildren<Component>(true).Where(component => component != null)
+                .Select(component => component.GetType().Name).Intersect(retired), Is.Empty, action);
+        }
+
         [TearDown] public void TearDown()
         {
             Object.DestroyImmediate(root); Object.DestroyImmediate(events);
@@ -49,7 +56,7 @@ namespace PaperDefense.Tests
             Assert.That(wizard.Draft.Drawing.IsEmpty, Is.True, action);
             Assert.That(wizard.Draft.Drawing.StrokeCount, Is.Zero, action);
             Assert.That(wizard.Draft.FreeformDesign, Is.Null, action);
-            Assert.That(wizard.Drawing == null || !wizard.Drawing.Root.activeInHierarchy, Is.True, action);
+            AssertNoDrawingEditors(action);
         }
         object Command(string name, params object[] args)
         {
@@ -127,7 +134,7 @@ namespace PaperDefense.Tests
             Assert.That(Snapshot(wizard.Draft), Is.EqualTo(before));
             Assert.That(wizard.Draft.Origin, Is.EqualTo(origin));
             Assert.That(wizard.Draft.Drawing.IsEmpty, Is.False);
-            Assert.That(wizard.Drawing == null || !wizard.Drawing.Root.activeInHierarchy, Is.True);
+            AssertNoDrawingEditors();
             Assert.That(root.transform.Find("Wizard review"), Is.Not.Null);
             Assert.That(store.Writes, Is.EqualTo(writes), "Reading historical data must never rewrite the profile.");
             Assert.That(root.GetComponentsInChildren<UnityEngine.UI.InputField>(true)
@@ -192,10 +199,7 @@ namespace PaperDefense.Tests
             Assert.That(ProfileState(), Is.EqualTo(profile), command);
             Assert.That(store.Writes, Is.EqualTo(writes), command);
             Assert.That(changes, Is.EqualTo(callbacks), command);
-            Assert.That(wizard.Mortar == null || !wizard.Mortar.IsOpen, Is.True, command);
-            Assert.That(wizard.Volley == null || !wizard.Volley.IsOpen, Is.True, command);
-            Assert.That(wizard.Armor == null || !wizard.Armor.IsOpen, Is.True, command);
-            Assert.That(wizard.Drawing == null || !wizard.Drawing.Root.activeInHierarchy, Is.True, command);
+            AssertNoDrawingEditors(command);
         }
 
         [TestCase(DrawingOrigin.PlayerDrawing)]
