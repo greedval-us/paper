@@ -1,0 +1,105 @@
+{
+  "job_id": "48e540c6ab38473784f1e97a10ff3c23",
+  "status": "failed",
+  "mode": "EditMode",
+  "started_unix_ms": 1792957333453,
+  "finished_unix_ms": 1792957339555,
+  "last_update_unix_ms": 1792957339555,
+  "progress": {
+    "completed": 5,
+    "total": 5,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": null,
+    "last_finished_test_full_name": "PaperDefense.Tests.AssemblyBalanceStatisticsTests.RepairCountsOnlyHealthActuallyRestoredAndStopsAtFullHealth",
+    "last_finished_unix_ms": 1792957339428,
+    "stuck_suspected": false,
+    "editor_is_focused": false,
+    "run_in_background": true,
+    "focus_nudge_attempts": null,
+    "focus_nudge_limit": null,
+    "focus_nudge_status": null,
+    "blocked_reason": null,
+    "failures_so_far": [
+      {
+        "full_name": "PaperDefense.Tests.AssemblyBalanceAcceptanceTests.RuntimeExport_MatchesDesignData",
+        "message": "  Balance export must resolve the live Player chain and the modular catalog.\r\n  Expected: not null\r\n  But was:  null\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.AssemblyBalanceStatisticsTests.GeneratorCountsOnlyActualWavePayoutAndCannotPayAgainWhileIdle",
+        "message": "  Missing measured production statistic: TotalGeneratorIncome\r\n  Expected: not null\r\n  But was:  null\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.AssemblyBalanceStatisticsTests.InvalidMeasurementInputsCannotContaminateAggregates",
+        "message": "  Missing production repair measurement hook.\r\n  Expected: not null\r\n  But was:  null\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.AssemblyBalanceStatisticsTests.PreparedEnemiesAndRealBaseAttacksAreCountedWithoutEventBufferInference",
+        "message": "  Missing measured production statistic: TotalSpawnedEnemies\r\n  Expected: not null\r\n  But was:  null\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.AssemblyBalanceStatisticsTests.RepairCountsOnlyHealthActuallyRestoredAndStopsAtFullHealth",
+        "message": "  Missing measured production statistic: TotalRepairedHealth\r\n  Expected: not null\r\n  But was:  null\r\n"
+      }
+    ],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "EditMode",
+    "summary": {
+      "total": 5,
+      "passed": 0,
+      "failed": 5,
+      "skipped": 0,
+      "durationSeconds": 0.7002828,
+      "resultState": "Failed(Child)"
+    },
+    "results": [
+      {
+        "name": "RuntimeExport_MatchesDesignData",
+        "fullName": "PaperDefense.Tests.AssemblyBalanceAcceptanceTests.RuntimeExport_MatchesDesignData",
+        "state": "Failed",
+        "durationSeconds": 0.02041,
+        "message": "  Balance export must resolve the live Player chain and the modular catalog.\r\n  Expected: not null\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.AssemblyBalanceAcceptanceTests.RuntimeExport_MatchesDesignData () [0x00000] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\Editor\\AssemblyBalanceAcceptanceTests.cs:11\r\n",
+        "output": ""
+      },
+      {
+        "name": "GeneratorCountsOnlyActualWavePayoutAndCannotPayAgainWhileIdle",
+        "fullName": "PaperDefense.Tests.AssemblyBalanceStatisticsTests.GeneratorCountsOnlyActualWavePayoutAndCannotPayAgainWhileIdle",
+        "state": "Failed",
+        "durationSeconds": 0.1031987,
+        "message": "  Missing measured production statistic: TotalGeneratorIncome\r\n  Expected: not null\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.AssemblyBalanceStatisticsTests.Metric[T] (PaperDefense.Core.RunStatistics statistics, System.String name) [0x00010] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\Editor\\AssemblyBalanceStatisticsTests.cs:15\r\nat PaperDefense.Tests.AssemblyBalanceStatisticsTests.GeneratorCountsOnlyActualWavePayoutAndCannotPayAgainWhileIdle () [0x00070] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\Editor\\AssemblyBalanceStatisticsTests.cs:63\r\n",
+        "output": ""
+      },
+      {
+        "name": "InvalidMeasurementInputsCannotContaminateAggregates",
+        "fullName": "PaperDefense.Tests.AssemblyBalanceStatisticsTests.InvalidMeasurementInputsCannotContaminateAggregates",
+        "state": "Failed",
+        "durationSeconds": 0.000431,
+        "message": "  Missing production repair measurement hook.\r\n  Expected: not null\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.AssemblyBalanceStatisticsTests.InvalidMeasurementInputsCannotContaminateAggregates () [0x0001b] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\Editor\\AssemblyBalanceStatisticsTests.cs:88\r\n",
+        "output": ""
+      },
+      {
+        "name": "PreparedEnemiesAndRealBaseAttacksAreCountedWithoutEventBufferInference",
+        "fullName": "PaperDefense.Tests.AssemblyBalanceStatisticsTests.PreparedEnemiesAndRealBaseAttacksAreCountedWithoutEventBufferInference",
+        "state": "Failed",
+        "durationSeconds": 0.0075386,
+        "message": "  Missing measured production statistic: TotalSpawnedEnemies\r\n  Expected: not null\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.AssemblyBalanceStatisticsTests.Metric[T] (PaperDefense.Core.RunStatistics statistics, System.String name) [0x00010] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\Editor\\AssemblyBalanceStatisticsTests.cs:15\r\nat PaperDefense.Tests.AssemblyBalanceStatisticsTests.PreparedEnemiesAndRealBaseAttacksAreCountedWithoutEventBufferInference () [0x00066] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\Editor\\AssemblyBalanceStatisticsTests.cs:77\r\n",
+        "output": ""
+      },
+      {
+        "name": "RepairCountsOnlyHealthActuallyRestoredAndStopsAtFullHealth",
+        "fullName": "PaperDefense.Tests.AssemblyBalanceStatisticsTests.RepairCountsOnlyHealthActuallyRestoredAndStopsAtFullHealth",
+        "state": "Failed",
+        "durationSeconds": 0.0119185,
+        "message": "  Missing measured production statistic: TotalRepairedHealth\r\n  Expected: not null\r\n  But was:  null\r\n",
+        "stackTrace": "at PaperDefense.Tests.AssemblyBalanceStatisticsTests.Metric[T] (PaperDefense.Core.RunStatistics statistics, System.String name) [0x00010] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\Editor\\AssemblyBalanceStatisticsTests.cs:15\r\nat PaperDefense.Tests.AssemblyBalanceStatisticsTests.RepairCountsOnlyHealthActuallyRestoredAndStopsAtFullHealth () [0x000e9] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\Editor\\AssemblyBalanceStatisticsTests.cs:50\r\n",
+        "output": ""
+      }
+    ]
+  }
+}

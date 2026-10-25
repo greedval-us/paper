@@ -73,7 +73,7 @@ namespace PaperDefense.Core
             if (activeMounts == 0) return 0;
             // Legacy weapon snapshots already contain the exact effective cooldown from the old path.
             if (Kind == AlbumEntryKind.Legacy) return 1;
-            return AssemblyValidation.Positive(Math.Min(1.25, Math.Min(FeedModifier, FeedCapacity * (double)FeedModifier / activeMounts)), "entry.feed");
+            return AssemblyValidation.Positive(Math.Min(AssemblyBalanceLimits.MaximumFeed, Math.Min(FeedModifier, FeedCapacity * (double)FeedModifier / activeMounts)), "entry.feed");
         }
     }
 }

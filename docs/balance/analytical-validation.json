@@ -120,5 +120,24 @@
       "eightWaveProfit": 38
     }
   ],
+  "runtimeSource": {
+    "balance": "Assets/PaperDefense/Configuration/Game/PlayerBalance.asset",
+    "rules": "Assets/PaperDefense/Configuration/Game/PlayerRules.asset",
+    "content": "Assets/PaperDefense/Configuration/Game/PlayerContent.asset",
+    "assemblyCatalog": "Assets/PaperDefense/Configuration/Game/PlayerAssemblyCatalog.asset"
+  },
+  "balanceRevision": "album-v1.0",
+  "numericDifferences": [],
+  "controlledMutation": {
+    "field": "definitions.core.gun.numeric.damage",
+    "detected": true,
+    "differences": [
+      {
+        "path": "definitions.core.gun.numeric.damage",
+        "expected": 12,
+        "actual": 13
+      }
+    ]
+  },
   "errors": []
 }

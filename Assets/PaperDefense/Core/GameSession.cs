@@ -382,6 +382,7 @@ namespace PaperDefense.Core
                         (float)random.NextDouble() * rules.Progression.EnemySpeedScaleVariation, AttackCooldown = 0,
                     DrawingTier = drawing, ObjectiveIndex = ChooseObjective(spawnCell), RewardBudget = Math.Max(0, definition.Reward)
                 });
+                Statistics.RecordSpawn(kind, drawing);
                 Statistics.ObserveEnemies(enemies.Count);
                 crowdMotion?.Add(enemies[enemies.Count - 1]);
             }

@@ -45,7 +45,9 @@ namespace PaperDefense.Core
                         rate=Math.Max(rate,definition.RepairPerSecond);
                 }
                 if(rate<=0)continue;
+                float beforeRepair = target.Health;
                 target.Health=Math.Min(target.MaxHealth,target.Health+rate*delta);
+                Statistics.RecordRepair(target.Health - beforeRepair);
                 RefreshHealthBand(target);
             }
             foreach(var trap in activeTarPits)

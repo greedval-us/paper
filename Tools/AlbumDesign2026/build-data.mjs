@@ -1,12 +1,23 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import assert from 'node:assert/strict';
 const root=path.resolve(import.meta.dirname,'../..');
-const runtime=JSON.parse(await fs.readFile(path.join(root,'docs/audit/2026-10-17-album/current-runtime.json'),'utf8'));
+
+// Authoritative balance inputs. Runtime exports are verification evidence, never generator inputs.
+export function buildDesignData(){
 const version='album-v1.0';
 const common={level:1,gold:0,cost:0,load:0,build:0,hpMult:1,capacityAdd:0,feedMult:1,defense:0,frontDefense:0,acquisitionMult:1};
 const foundations=[];
 function f(id,name,slot,values={}){foundations.push({...common,id,name,slot,compatible:'all',...values});}
-runtime.Chassis.forEach((c,i)=>f('frame.'+c.Id.split('.')[1],['Обычная рамка','Тяжёлая рамка','Точная рамка','Батарейная рамка'][i],'Рамка',{level:[1,3,4,7][i],gold:[0,90,90,160][i],cost:c.BaseCost,hp:c.BaseHealth*c.HealthMultiplier,capacity:c.Capacity,mounts:c.MountCount,feed:c.FeedCapacity,build:c.BuildSeconds,source:c.Id}));
+const frames=[
+ ['standard','Обычная рамка',1,0,16,55,10,2,1.6,0],
+ ['heavy','Тяжёлая рамка',3,90,26,82.5,14,2,1.6,.45],
+ ['precision','Точная рамка',4,90,18,55,16,1,1,.25],
+ ['battery','Батарейная рамка',7,160,28,77,22,3,2.4,.65]
+];
+for(const [id,name,level,gold,cost,hp,capacity,mounts,feed,build] of frames)
+ f('frame.'+id,name,'Рамка',{level,gold,cost,hp,capacity,mounts,feed,build,source:'chassis.'+id});
 f('hull.standard','Обычный корпус','Корпус');
 f('hull.light','Облегчённый корпус','Корпус',{level:2,gold:40,cost:-4,hpMult:.8,capacityAdd:-2,build:-.2});
 f('hull.reinforced','Усиленный корпус','Корпус',{level:4,gold:80,cost:8,load:1,hpMult:1.3,build:.3});
@@ -17,7 +28,16 @@ f('feed.standard','Обычная подача','Подача');
 f('feed.boost','Улучшенная подача','Подача',{level:3,gold:70,cost:10,load:2,feedMult:1.25,build:.2});
 f('turn.standard','Обычный поворот','Поворот');
 f('turn.quick','Быстрый поворот','Поворот',{level:2,gold:40,cost:8,load:1,acquisitionMult:.32});
-const cores=runtime.Weapons.map((w,i)=>({id:'core.'+w.Id.split('.')[1],source:w.Id,name:w.Name,level:[1,1,1,4,6,2,3][i],gold:[0,0,0,80,120,40,50][i],cost:w.Stats.Cost-w.AssemblyCredit,load:w.Load,damage:w.Stats.Damage,interval:w.Stats.ShotInterval,range:w.Stats.Range,minRange:w.MinimumRange,targets:[1,7,8,8,4,1,0][i],radius:w.Stats.Radius,build:w.Stats.BuildSeconds,attack:['Одиночный','Пробитие','Площадь','Веер','Рикошет','Замедление','Очистка'][i],clip:[6,1,1,1,1,4,1][i],reload:w.Stats.ShotInterval,slow:i===5?.6:1,slowSeconds:i===5?2:0,flight:i===2?.8:0,jump:i===4?3:0,notes:['Частые одиночные попадания','До 7 разных целей, броня действует','Оценка по 8 целям; фактическое число в радиусе зависит от сцены','До 8 целей в конусе 90°','4 разные цели; переход до 3 клеток','Движение ×0,6 на 2 с; сильнейшее замедление','Нулевой урон; очистка клякс радиусом 2'][i]}));
+const mechanisms=[
+ ['gun','Пулемёт',24,4,12,.42,8,0,.1,1.4],
+ ['piercer','Пробивающая пушка',44,6,20,1,12.5,0,.38,1.9],
+ ['mortar','Мортира',69,7,28,1.9,18,6,2.4,2.4],
+ ['fan','Веерный ствол',39,5,14,.85,6,0,.1,1.6],
+ ['ricochet','Рикошет',52,5,12,.9,10,0,.1,1.6],
+ ['stapler','Степлер',12,2,5,.6,9,0,.1,1.2],
+ ['blotter','Промокашка',8,2,0,1.4,9,0,2,1.2]
+];
+const cores=mechanisms.map(([id,name,cost,load,damage,interval,range,minRange,radius,build],i)=>({id:'core.'+id,source:'weapon.'+id,name,level:[1,1,1,4,6,2,3][i],gold:[0,0,0,80,120,40,50][i],cost,load,damage,interval,range,minRange,targets:[1,7,8,8,4,1,0][i],radius,build,attack:['Одиночный','Пробитие','Площадь','Веер','Рикошет','Замедление','Очистка'][i],clip:[6,1,1,1,1,4,1][i],reload:interval,slow:i===5?.6:1,slowSeconds:i===5?2:0,flight:i===2?.8:0,jump:i===4?3:0,notes:['Частые одиночные попадания','До 7 разных целей, броня действует','Оценка по 8 целям; фактическое число в радиусе зависит от сцены','До 8 целей в конусе 90°','4 разные цели; переход до 3 клеток','Движение ×0,6 на 2 с; сильнейшее замедление','Нулевой урон; очистка клякс радиусом 2'][i]}));
 const wc={level:1,gold:0,cost:0,load:0,damageMult:1,intervalMult:1,rangeMult:1,clipMult:1,clipOverride:0,reloadMult:1,acquisitionMult:1,radiusMult:1,compatible:'all'};
 const weaponParts=[];
 function w(id,name,slot,values={}){weaponParts.push({...wc,id,name,slot,...values});}
@@ -52,7 +72,7 @@ s('utility.armor','Защитные панели','Оснащение',{level:3,
 s('utility.range','Расширитель зоны','Оснащение',{level:5,gold:90,cost:15,load:2,rangeMult:1.3,rateMult:.8,compatible:'repair',notes:'Радиус 6,5; ремонт 4,8 HP/с.'});
 s('utility.economy','Экономичный насос','Оснащение',{level:8,gold:180,cost:12,load:2,rateMult:1.25,hpMult:.85,compatible:'generator',notes:'15 штрихов за волну, прочность ×0,85.'});
 const allParts=[...foundations,...cores.map(c=>({...c,slot:'Механизм',compatible:'weapon'})),...weaponParts,...buildingParts];
-const rules={slots:8,maxAlbumPages:64,initialGold:0,startingInk:runtime.StartingInk,waves:8,waveGold:runtime.WaveGold,victoryGold:runtime.VictoryGold,xpPerWave:10,xpVictory:40,maxFeed:1.25,acquisition:.25,maxDefense:.6,maxGenerators:2,generatorRefund:0,generatorMaterial:'pencil',towerRefund:.8,slowFloor:.4,geometryPower:false};
+const rules={slots:8,maxAlbumPages:64,initialGold:0,startingInk:640,waves:8,waveGold:8,victoryGold:30,xpPerWave:10,xpVictory:40,maxFeed:1.25,acquisition:.25,maxDefense:.6,maxGenerators:2,generatorRefund:0,generatorMaterial:'pencil',towerRefund:.8,slowFloor:.4,geometryPower:false};
 const levels=[0,100,230,390,580,800,1050,1330].map((xp,i)=>({level:i+1,xp,parts:allParts.filter(p=>p.level===i+1&&p.gold>0).map(p=>p.id)}));
 const defaultW=(name,core,head='head.'+core.slice(5),sight='sight.iron',magazine='magazine.standard',trigger='trigger.standard')=>({id:'weaponRecipe.'+name,name,core,head,sight,magazine,trigger});
 const weapons=[...cores.map(c=>defaultW(c.name,c.id)),defaultW('Короткий дозор','core.gun','head.short'),defaultW('Дальний пробой','core.piercer','head.long','sight.scope'),defaultW('Очередь дозора','core.gun','head.gun','sight.iron','magazine.standard','trigger.burst'),defaultW('Барабанный дозор','core.gun','head.gun','sight.iron','magazine.drum')];
@@ -66,6 +86,17 @@ weapons.forEach(r=>r.resolved=resolveWeapon(r));
 towers.forEach(t=>{const fr=get(t.frame),h=get(t.hull),a=get(t.armor),fe=get(t.feed),tu=get(t.turn),we=weapons[t.weapon].resolved;const parts=[fr,h,a,fe,tu];const feed=Math.min(rules.maxFeed,fe.feedMult,fr.feed*fe.feedMult/t.count);t.resolved={cost:Math.ceil(parts.reduce((x,p)=>x+p.cost,0)+we.cost*t.count),hp:fr.hp*h.hpMult,load:parts.reduce((x,p)=>x+p.load,0)+we.load*t.count,capacity:fr.capacity+h.capacityAdd,defense:a.defense,frontDefense:a.frontDefense,feed,dps:we.dps*t.count*feed,range:we.range,level:Math.max(...parts.map(p=>p.level),we.level),acquisition:we.acquisition*tu.acquisitionMult};if(t.resolved.load>t.resolved.capacity||t.count>fr.mounts)throw new Error('Invalid tower '+t.id);});
 buildings.forEach(b=>{const p=[b.site,b.function,b.shell,b.utility].map(get);for(const x of p)if(x.compatible!=='all'&&!x.compatible.split(',').includes(b.family))throw new Error('Building compatibility');b.resolved={cost:Math.ceil(p.reduce((a,p)=>a+p.cost,0)),hp:p[0].hp*p[2].hpMult*p[3].hpMult,load:p.reduce((a,p)=>a+p.load,0),capacity:p[0].capacity,range:p[1].range*p[3].rangeMult,rate:p[1].rate*p[3].rateMult,slow:p[1].slow,defense:p[3].defense,build:p.reduce((a,p)=>a+p.build,0),level:Math.max(...p.map(p=>p.level))};if(b.resolved.load>b.resolved.capacity)throw new Error('Building load');});
 const result={version,date:'2026-10-18',status:'Предлагаемый баланс для реализации и игровых прогонов',rules,foundations,cores,weaponParts,buildingParts,weapons,towers,buildings,levels,partCount:allParts.length};
+function finite(value,at){
+ if(typeof value==='number')assert(Number.isFinite(value),'Non-finite balance number at '+at);
+ else if(value&&typeof value==='object')for(const [key,child] of Object.entries(value))finite(child,at+'.'+key);
+}
+finite(result,'balance');
+return result;
+}
+
+if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
+const result=buildDesignData(),{towers,buildings}=result;
 await fs.writeFile(path.join(root,'docs/balance/album-balance-v1.json'),JSON.stringify(result,null,2));
 await fs.writeFile(path.join(root,'docs/design/album-assembly-2026-10-17/design-data.js'),'window.ALBUM_DATA = '+JSON.stringify(result)+';\n');
-console.log(JSON.stringify({parts:allParts.length,towers:towers.map(t=>({name:t.name,...t.resolved})),buildings:buildings.map(b=>({name:b.name,...b.resolved})),totalUnlock:allParts.reduce((a,p)=>a+p.gold,0)},null,2));
+console.log(JSON.stringify({parts:result.partCount,towers:towers.map(t=>({name:t.name,...t.resolved})),buildings:buildings.map(b=>({name:b.name,...b.resolved})),totalUnlock:[...result.foundations,...result.cores,...result.weaponParts,...result.buildingParts].reduce((a,p)=>a+p.gold,0)},null,2));
+}

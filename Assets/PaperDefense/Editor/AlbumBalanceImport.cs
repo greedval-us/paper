@@ -42,7 +42,7 @@ namespace PaperDefense.Editor
             { "wall", AssemblyStructureFamily.Wall }, { "slow", AssemblyStructureFamily.Slow },
             { "repair", AssemblyStructureFamily.Repair }, { "generator", AssemblyStructureFamily.Generator }
         };
-        static readonly (string key, AssemblyStat stat, ModifierOperation operation)[] NumericFields =
+        internal static readonly (string key, AssemblyStat stat, ModifierOperation operation)[] NumericFields =
         {
             ("cost", AssemblyStat.Cost, ModifierOperation.Add), ("load", AssemblyStat.Load, ModifierOperation.Add), ("build", AssemblyStat.BuildSeconds, ModifierOperation.Add),
             ("hp", AssemblyStat.Health, ModifierOperation.Set), ("hpMult", AssemblyStat.Health, ModifierOperation.Multiply),
@@ -121,7 +121,7 @@ namespace PaperDefense.Editor
                 throw AssemblyCatalogException.At("assembly.asset.path", path ?? "assetPath");
             return path;
         }
-        static AssemblyCatalogInput ReadValidated(string json)
+        public static AssemblyCatalogInput ReadValidated(string json)
         {
             try { return Parse(json); }
             catch (JsonException) { throw AssemblyCatalogException.At("assembly.source.json", "source"); }

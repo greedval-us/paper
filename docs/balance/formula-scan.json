@@ -1,1 +1,10 @@
-{"kind":"notice","message":"Cell search matched 0 entries."}
+{
+  "actualMatches": [],
+  "errorCells": [],
+  "inspect": [
+    {
+      "kind": "notice",
+      "message": "Cell search matched 0 entries."
+    }
+  ]
+}

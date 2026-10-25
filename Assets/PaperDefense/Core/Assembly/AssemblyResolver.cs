@@ -103,8 +103,8 @@ namespace PaperDefense.Core
             }
             double seconds = Fold(frame, foundation, AssemblyStat.BuildSeconds) + weaponBuild + (tower.Mounts.Count - 1) * (double)balance.Construction.SecondaryBuildSeconds;
             var health = AssemblyValidation.Positive(Fold(frame, foundation, AssemblyStat.Health), "foundation.health");
-            var defense = Math.Min(.6f, AssemblyValidation.NonNegative(Fold(null, foundation, AssemblyStat.Defense), "foundation.defense"));
-            var front = Math.Min(.6f, AssemblyValidation.NonNegative(Fold(null, foundation, AssemblyStat.FrontDefense), "foundation.frontDefense"));
+            var defense = Math.Min(AssemblyBalanceLimits.MaximumDefense, AssemblyValidation.NonNegative(Fold(null, foundation, AssemblyStat.Defense), "foundation.defense"));
+            var front = Math.Min(AssemblyBalanceLimits.MaximumDefense, AssemblyValidation.NonNegative(Fold(null, foundation, AssemblyStat.FrontDefense), "foundation.frontDefense"));
             double feedCapacity = frame.Get(AssemblyStat.Feed, ModifierOperation.Set) + Add(foundation, AssemblyStat.Feed);
             return new ResolvedEntry(AlbumEntryKind.Tower, material, Snapshot(recipe, catalog, all), Cost(all, m.CostMultiplier),
                 AssemblyValidation.Positive(health * (double)m.HealthMultiplier, "entry.health"), load, capacity,
@@ -157,7 +157,7 @@ namespace PaperDefense.Core
             return new ResolvedEntry(AlbumEntryKind.Structure, material, Snapshot(recipe, catalog, parts), Cost(parts, m.CostMultiplier),
                 AssemblyValidation.Positive(Fold(site, parts, AssemblyStat.Health) * m.HealthMultiplier, "structure.health"), load, capacity,
                 AssemblyValidation.NonNegative(Fold(null, parts, AssemblyStat.BuildSeconds) * m.BuildTimeMultiplier, "structure.build"),
-                Math.Min(.6f, AssemblyValidation.NonNegative(Fold(null, parts, AssemblyStat.Defense), "structure.defense")), 0, 0, 1,
+                Math.Min(AssemblyBalanceLimits.MaximumDefense, AssemblyValidation.NonNegative(Fold(null, parts, AssemblyStat.Defense), "structure.defense")), 0, 0, 1,
                 support.RefundFraction, Array.Empty<ResolvedWeapon>(), support);
         }
         static ComponentDefinition[] Parts(IEnumerable<PartRef> parts, ComponentCatalog catalog)
@@ -187,7 +187,7 @@ namespace PaperDefense.Core
         {
             float slow = 1;
             foreach (var p in parts) slow = Math.Min(slow, AssemblyValidation.Fraction(p.Get(AssemblyStat.Slow, ModifierOperation.Set, 1), p.Id + ".slow"));
-            return Math.Max(.4f, slow);
+            return Math.Max(AssemblyBalanceLimits.MinimumSlow, slow);
         }
         static AttackKind Attack(AssemblyWeaponFamily family)
         {

@@ -1,0 +1,2201 @@
+{
+  "schemaVersion": 1,
+  "balanceRevision": "album-v1.0",
+  "definitions": [
+    {
+      "id": "frame.standard",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 16.0,
+        "load": 0.0,
+        "build": 0.0,
+        "hp": 55.0,
+        "hpMult": 1.0,
+        "capacity": 10.0,
+        "capacityAdd": 0.0,
+        "mounts": 2.0,
+        "feed": 1.6,
+        "feedMult": 1.0,
+        "defense": 0.0,
+        "frontDefense": 0.0,
+        "acquisitionMult": 1.0
+      }
+    },
+    {
+      "id": "frame.heavy",
+      "revision": 1,
+      "level": 3,
+      "gold": 90,
+      "numeric": {
+        "cost": 26.0,
+        "load": 0.0,
+        "build": 0.45,
+        "hp": 82.5,
+        "hpMult": 1.0,
+        "capacity": 14.0,
+        "capacityAdd": 0.0,
+        "mounts": 2.0,
+        "feed": 1.6,
+        "feedMult": 1.0,
+        "defense": 0.0,
+        "frontDefense": 0.0,
+        "acquisitionMult": 1.0
+      }
+    },
+    {
+      "id": "frame.precision",
+      "revision": 1,
+      "level": 4,
+      "gold": 90,
+      "numeric": {
+        "cost": 18.0,
+        "load": 0.0,
+        "build": 0.25,
+        "hp": 55.0,
+        "hpMult": 1.0,
+        "capacity": 16.0,
+        "capacityAdd": 0.0,
+        "mounts": 1.0,
+        "feed": 1.0,
+        "feedMult": 1.0,
+        "defense": 0.0,
+        "frontDefense": 0.0,
+        "acquisitionMult": 1.0
+      }
+    },
+    {
+      "id": "frame.battery",
+      "revision": 1,
+      "level": 7,
+      "gold": 160,
+      "numeric": {
+        "cost": 28.0,
+        "load": 0.0,
+        "build": 0.65,
+        "hp": 77.0,
+        "hpMult": 1.0,
+        "capacity": 22.0,
+        "capacityAdd": 0.0,
+        "mounts": 3.0,
+        "feed": 2.4,
+        "feedMult": 1.0,
+        "defense": 0.0,
+        "frontDefense": 0.0,
+        "acquisitionMult": 1.0
+      }
+    },
+    {
+      "id": "hull.standard",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "build": 0.0,
+        "hpMult": 1.0,
+        "capacityAdd": 0.0,
+        "feedMult": 1.0,
+        "defense": 0.0,
+        "frontDefense": 0.0,
+        "acquisitionMult": 1.0
+      }
+    },
+    {
+      "id": "hull.light",
+      "revision": 1,
+      "level": 2,
+      "gold": 40,
+      "numeric": {
+        "cost": -4.0,
+        "load": 0.0,
+        "build": -0.2,
+        "hpMult": 0.8,
+        "capacityAdd": -2.0,
+        "feedMult": 1.0,
+        "defense": 0.0,
+        "frontDefense": 0.0,
+        "acquisitionMult": 1.0
+      }
+    },
+    {
+      "id": "hull.reinforced",
+      "revision": 1,
+      "level": 4,
+      "gold": 80,
+      "numeric": {
+        "cost": 8.0,
+        "load": 1.0,
+        "build": 0.3,
+        "hpMult": 1.3,
+        "capacityAdd": 0.0,
+        "feedMult": 1.0,
+        "defense": 0.0,
+        "frontDefense": 0.0,
+        "acquisitionMult": 1.0
+      }
+    },
+    {
+      "id": "armor.none",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "build": 0.0,
+        "hpMult": 1.0,
+        "capacityAdd": 0.0,
+        "feedMult": 1.0,
+        "defense": 0.0,
+        "frontDefense": 0.0,
+        "acquisitionMult": 1.0
+      }
+    },
+    {
+      "id": "armor.plate",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 14.0,
+        "load": 2.0,
+        "build": 0.2,
+        "hpMult": 1.0,
+        "capacityAdd": 0.0,
+        "feedMult": 1.0,
+        "defense": 0.3,
+        "frontDefense": 0.0,
+        "acquisitionMult": 1.0
+      }
+    },
+    {
+      "id": "armor.front",
+      "revision": 1,
+      "level": 5,
+      "gold": 100,
+      "numeric": {
+        "cost": 12.0,
+        "load": 2.0,
+        "build": 0.2,
+        "hpMult": 1.0,
+        "capacityAdd": 0.0,
+        "feedMult": 1.0,
+        "defense": 0.0,
+        "frontDefense": 0.4,
+        "acquisitionMult": 1.0
+      }
+    },
+    {
+      "id": "feed.standard",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "build": 0.0,
+        "hpMult": 1.0,
+        "capacityAdd": 0.0,
+        "feedMult": 1.0,
+        "defense": 0.0,
+        "frontDefense": 0.0,
+        "acquisitionMult": 1.0
+      }
+    },
+    {
+      "id": "feed.boost",
+      "revision": 1,
+      "level": 3,
+      "gold": 70,
+      "numeric": {
+        "cost": 10.0,
+        "load": 2.0,
+        "build": 0.2,
+        "hpMult": 1.0,
+        "capacityAdd": 0.0,
+        "feedMult": 1.25,
+        "defense": 0.0,
+        "frontDefense": 0.0,
+        "acquisitionMult": 1.0
+      }
+    },
+    {
+      "id": "turn.standard",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "build": 0.0,
+        "hpMult": 1.0,
+        "capacityAdd": 0.0,
+        "feedMult": 1.0,
+        "defense": 0.0,
+        "frontDefense": 0.0,
+        "acquisitionMult": 1.0
+      }
+    },
+    {
+      "id": "turn.quick",
+      "revision": 1,
+      "level": 2,
+      "gold": 40,
+      "numeric": {
+        "cost": 8.0,
+        "load": 1.0,
+        "build": 0.0,
+        "hpMult": 1.0,
+        "capacityAdd": 0.0,
+        "feedMult": 1.0,
+        "defense": 0.0,
+        "frontDefense": 0.0,
+        "acquisitionMult": 0.32
+      }
+    },
+    {
+      "id": "core.gun",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 24.0,
+        "load": 4.0,
+        "build": 1.4,
+        "damage": 12.0,
+        "interval": 0.42,
+        "range": 8.0,
+        "minRange": 0.0,
+        "targets": 1.0,
+        "radius": 0.1,
+        "clip": 6.0,
+        "reload": 0.42,
+        "slow": 1.0,
+        "slowSeconds": 0.0,
+        "flight": 0.0,
+        "jump": 0.0
+      }
+    },
+    {
+      "id": "core.piercer",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 44.0,
+        "load": 6.0,
+        "build": 1.9,
+        "damage": 20.0,
+        "interval": 1.0,
+        "range": 12.5,
+        "minRange": 0.0,
+        "targets": 7.0,
+        "radius": 0.38,
+        "clip": 1.0,
+        "reload": 1.0,
+        "slow": 1.0,
+        "slowSeconds": 0.0,
+        "flight": 0.0,
+        "jump": 0.0
+      }
+    },
+    {
+      "id": "core.mortar",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 69.0,
+        "load": 7.0,
+        "build": 2.4,
+        "damage": 28.0,
+        "interval": 1.9,
+        "range": 18.0,
+        "minRange": 6.0,
+        "targets": 8.0,
+        "radius": 2.4,
+        "clip": 1.0,
+        "reload": 1.9,
+        "slow": 1.0,
+        "slowSeconds": 0.0,
+        "flight": 0.8,
+        "jump": 0.0
+      }
+    },
+    {
+      "id": "core.fan",
+      "revision": 1,
+      "level": 4,
+      "gold": 80,
+      "numeric": {
+        "cost": 39.0,
+        "load": 5.0,
+        "build": 1.6,
+        "damage": 14.0,
+        "interval": 0.85,
+        "range": 6.0,
+        "minRange": 0.0,
+        "targets": 8.0,
+        "radius": 0.1,
+        "clip": 1.0,
+        "reload": 0.85,
+        "slow": 1.0,
+        "slowSeconds": 0.0,
+        "flight": 0.0,
+        "jump": 0.0
+      }
+    },
+    {
+      "id": "core.ricochet",
+      "revision": 1,
+      "level": 6,
+      "gold": 120,
+      "numeric": {
+        "cost": 52.0,
+        "load": 5.0,
+        "build": 1.6,
+        "damage": 12.0,
+        "interval": 0.9,
+        "range": 10.0,
+        "minRange": 0.0,
+        "targets": 4.0,
+        "radius": 0.1,
+        "clip": 1.0,
+        "reload": 0.9,
+        "slow": 1.0,
+        "slowSeconds": 0.0,
+        "flight": 0.0,
+        "jump": 3.0
+      }
+    },
+    {
+      "id": "core.stapler",
+      "revision": 1,
+      "level": 2,
+      "gold": 40,
+      "numeric": {
+        "cost": 12.0,
+        "load": 2.0,
+        "build": 1.2,
+        "damage": 5.0,
+        "interval": 0.6,
+        "range": 9.0,
+        "minRange": 0.0,
+        "targets": 1.0,
+        "radius": 0.1,
+        "clip": 4.0,
+        "reload": 0.6,
+        "slow": 0.6,
+        "slowSeconds": 2.0,
+        "flight": 0.0,
+        "jump": 0.0
+      }
+    },
+    {
+      "id": "core.blotter",
+      "revision": 1,
+      "level": 3,
+      "gold": 50,
+      "numeric": {
+        "cost": 8.0,
+        "load": 2.0,
+        "build": 1.2,
+        "damage": 0.0,
+        "interval": 1.4,
+        "range": 9.0,
+        "minRange": 0.0,
+        "targets": 0.0,
+        "radius": 2.0,
+        "clip": 1.0,
+        "reload": 1.4,
+        "slow": 1.0,
+        "slowSeconds": 0.0,
+        "flight": 0.0,
+        "jump": 0.0
+      }
+    },
+    {
+      "id": "head.gun",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 1.0,
+        "intervalMult": 1.0,
+        "rangeMult": 1.0,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 1.0
+      }
+    },
+    {
+      "id": "head.piercer",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 1.0,
+        "intervalMult": 1.0,
+        "rangeMult": 1.0,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 1.0
+      }
+    },
+    {
+      "id": "head.mortar",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 1.0,
+        "intervalMult": 1.0,
+        "rangeMult": 1.0,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 1.0
+      }
+    },
+    {
+      "id": "head.fan",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 1.0,
+        "intervalMult": 1.0,
+        "rangeMult": 1.0,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 1.0
+      }
+    },
+    {
+      "id": "head.ricochet",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 1.0,
+        "intervalMult": 1.0,
+        "rangeMult": 1.0,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 1.0
+      }
+    },
+    {
+      "id": "head.stapler",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 1.0,
+        "intervalMult": 1.0,
+        "rangeMult": 1.0,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 1.0
+      }
+    },
+    {
+      "id": "head.blotter",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 1.0,
+        "intervalMult": 1.0,
+        "rangeMult": 1.0,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 1.0
+      }
+    },
+    {
+      "id": "head.short",
+      "revision": 1,
+      "level": 2,
+      "gold": 40,
+      "numeric": {
+        "cost": -4.0,
+        "load": -1.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 0.9,
+        "intervalMult": 0.85,
+        "rangeMult": 0.8,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 0.85
+      }
+    },
+    {
+      "id": "head.long",
+      "revision": 1,
+      "level": 4,
+      "gold": 80,
+      "numeric": {
+        "cost": 12.0,
+        "load": 2.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 1.1,
+        "intervalMult": 1.2,
+        "rangeMult": 1.25,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 1.2
+      }
+    },
+    {
+      "id": "head.wide",
+      "revision": 1,
+      "level": 6,
+      "gold": 120,
+      "numeric": {
+        "cost": 16.0,
+        "load": 2.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 1.25,
+        "intervalMult": 1.3,
+        "rangeMult": 0.9,
+        "radiusMult": 1.15,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 1.3
+      }
+    },
+    {
+      "id": "sight.iron",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 1.0,
+        "intervalMult": 1.0,
+        "rangeMult": 1.0,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 1.0
+      }
+    },
+    {
+      "id": "sight.scope",
+      "revision": 1,
+      "level": 3,
+      "gold": 60,
+      "numeric": {
+        "cost": 10.0,
+        "load": 1.0,
+        "acquisitionMult": 1.3,
+        "damageMult": 1.0,
+        "intervalMult": 1.0,
+        "rangeMult": 1.15,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 1.0
+      }
+    },
+    {
+      "id": "sight.tracking",
+      "revision": 1,
+      "level": 5,
+      "gold": 90,
+      "numeric": {
+        "cost": 8.0,
+        "load": 1.0,
+        "acquisitionMult": 0.4,
+        "damageMult": 1.0,
+        "intervalMult": 1.0,
+        "rangeMult": 0.95,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 1.0
+      }
+    },
+    {
+      "id": "magazine.standard",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 1.0,
+        "intervalMult": 1.0,
+        "rangeMult": 1.0,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 1.0
+      }
+    },
+    {
+      "id": "magazine.drum",
+      "revision": 1,
+      "level": 4,
+      "gold": 80,
+      "numeric": {
+        "cost": 12.0,
+        "load": 1.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 1.0,
+        "intervalMult": 0.85,
+        "rangeMult": 1.0,
+        "radiusMult": 1.0,
+        "clipMult": 2.0,
+        "clipOverride": 0.0,
+        "reloadMult": 3.0
+      }
+    },
+    {
+      "id": "magazine.belt",
+      "revision": 1,
+      "level": 7,
+      "gold": 150,
+      "numeric": {
+        "cost": 14.0,
+        "load": 2.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 1.0,
+        "intervalMult": 1.0,
+        "rangeMult": 1.0,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 0.8
+      }
+    },
+    {
+      "id": "trigger.standard",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 1.0,
+        "intervalMult": 1.0,
+        "rangeMult": 1.0,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 0.0,
+        "reloadMult": 1.0
+      }
+    },
+    {
+      "id": "trigger.burst",
+      "revision": 1,
+      "level": 5,
+      "gold": 100,
+      "numeric": {
+        "cost": 10.0,
+        "load": 1.0,
+        "acquisitionMult": 1.0,
+        "damageMult": 1.0,
+        "intervalMult": 0.45,
+        "rangeMult": 1.0,
+        "radiusMult": 1.0,
+        "clipMult": 1.0,
+        "clipOverride": 3.0,
+        "reloadMult": 2.1
+      }
+    },
+    {
+      "id": "site.wall",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 8.0,
+        "load": 0.0,
+        "build": 0.15,
+        "hp": 200.0,
+        "hpMult": 1.0,
+        "capacity": 6.0,
+        "defense": 0.0,
+        "range": 0.0,
+        "rangeMult": 1.0,
+        "slow": 1.0,
+        "rate": 0.0,
+        "rateMult": 1.0
+      }
+    },
+    {
+      "id": "site.slow",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 10.0,
+        "load": 0.0,
+        "build": 0.3,
+        "hp": 55.0,
+        "hpMult": 1.0,
+        "capacity": 6.0,
+        "defense": 0.0,
+        "range": 0.0,
+        "rangeMult": 1.0,
+        "slow": 1.0,
+        "rate": 0.0,
+        "rateMult": 1.0
+      }
+    },
+    {
+      "id": "site.repair",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 20.0,
+        "load": 0.0,
+        "build": 0.7,
+        "hp": 70.0,
+        "hpMult": 1.0,
+        "capacity": 6.0,
+        "defense": 0.0,
+        "range": 0.0,
+        "rangeMult": 1.0,
+        "slow": 1.0,
+        "rate": 0.0,
+        "rateMult": 1.0
+      }
+    },
+    {
+      "id": "site.generator",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 20.0,
+        "load": 0.0,
+        "build": 0.7,
+        "hp": 80.0,
+        "hpMult": 1.0,
+        "capacity": 6.0,
+        "defense": 0.0,
+        "range": 0.0,
+        "rangeMult": 1.0,
+        "slow": 1.0,
+        "rate": 0.0,
+        "rateMult": 1.0
+      }
+    },
+    {
+      "id": "function.wall",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 8.0,
+        "load": 2.0,
+        "build": 0.2,
+        "hp": 0.0,
+        "hpMult": 1.0,
+        "capacity": 0.0,
+        "defense": 0.0,
+        "range": 0.0,
+        "rangeMult": 1.0,
+        "slow": 1.0,
+        "rate": 0.0,
+        "rateMult": 1.0
+      }
+    },
+    {
+      "id": "function.slow",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 12.0,
+        "load": 2.0,
+        "build": 0.5,
+        "hp": 0.0,
+        "hpMult": 1.0,
+        "capacity": 0.0,
+        "defense": 0.0,
+        "range": 1.0,
+        "rangeMult": 1.0,
+        "slow": 0.6,
+        "rate": 0.0,
+        "rateMult": 1.0
+      }
+    },
+    {
+      "id": "function.repair",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 45.0,
+        "load": 3.0,
+        "build": 1.3,
+        "hp": 0.0,
+        "hpMult": 1.0,
+        "capacity": 0.0,
+        "defense": 0.0,
+        "range": 5.0,
+        "rangeMult": 1.0,
+        "slow": 1.0,
+        "rate": 6.0,
+        "rateMult": 1.0
+      }
+    },
+    {
+      "id": "function.generator",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 40.0,
+        "load": 3.0,
+        "build": 1.5,
+        "hp": 0.0,
+        "hpMult": 1.0,
+        "capacity": 0.0,
+        "defense": 0.0,
+        "range": 0.0,
+        "rangeMult": 1.0,
+        "slow": 1.0,
+        "rate": 12.0,
+        "rateMult": 1.0
+      }
+    },
+    {
+      "id": "shell.standard",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "build": 0.0,
+        "hp": 0.0,
+        "hpMult": 1.0,
+        "capacity": 0.0,
+        "defense": 0.0,
+        "range": 0.0,
+        "rangeMult": 1.0,
+        "slow": 1.0,
+        "rate": 0.0,
+        "rateMult": 1.0
+      }
+    },
+    {
+      "id": "shell.light",
+      "revision": 1,
+      "level": 2,
+      "gold": 35,
+      "numeric": {
+        "cost": -4.0,
+        "load": 0.0,
+        "build": -0.1,
+        "hp": 0.0,
+        "hpMult": 0.75,
+        "capacity": 0.0,
+        "defense": 0.0,
+        "range": 0.0,
+        "rangeMult": 1.0,
+        "slow": 1.0,
+        "rate": 0.0,
+        "rateMult": 1.0
+      }
+    },
+    {
+      "id": "shell.reinforced",
+      "revision": 1,
+      "level": 4,
+      "gold": 70,
+      "numeric": {
+        "cost": 10.0,
+        "load": 1.0,
+        "build": 0.3,
+        "hp": 0.0,
+        "hpMult": 1.5,
+        "capacity": 0.0,
+        "defense": 0.0,
+        "range": 0.0,
+        "rangeMult": 1.0,
+        "slow": 1.0,
+        "rate": 0.0,
+        "rateMult": 1.0
+      }
+    },
+    {
+      "id": "utility.none",
+      "revision": 1,
+      "level": 1,
+      "gold": 0,
+      "numeric": {
+        "cost": 0.0,
+        "load": 0.0,
+        "build": 0.0,
+        "hp": 0.0,
+        "hpMult": 1.0,
+        "capacity": 0.0,
+        "defense": 0.0,
+        "range": 0.0,
+        "rangeMult": 1.0,
+        "slow": 1.0,
+        "rate": 0.0,
+        "rateMult": 1.0
+      }
+    },
+    {
+      "id": "utility.armor",
+      "revision": 1,
+      "level": 3,
+      "gold": 60,
+      "numeric": {
+        "cost": 12.0,
+        "load": 2.0,
+        "build": 0.0,
+        "hp": 0.0,
+        "hpMult": 1.0,
+        "capacity": 0.0,
+        "defense": 0.2,
+        "range": 0.0,
+        "rangeMult": 1.0,
+        "slow": 1.0,
+        "rate": 0.0,
+        "rateMult": 1.0
+      }
+    },
+    {
+      "id": "utility.range",
+      "revision": 1,
+      "level": 5,
+      "gold": 90,
+      "numeric": {
+        "cost": 15.0,
+        "load": 2.0,
+        "build": 0.0,
+        "hp": 0.0,
+        "hpMult": 1.0,
+        "capacity": 0.0,
+        "defense": 0.0,
+        "range": 0.0,
+        "rangeMult": 1.3,
+        "slow": 1.0,
+        "rate": 0.0,
+        "rateMult": 0.8
+      }
+    },
+    {
+      "id": "utility.economy",
+      "revision": 1,
+      "level": 8,
+      "gold": 180,
+      "numeric": {
+        "cost": 12.0,
+        "load": 2.0,
+        "build": 0.0,
+        "hp": 0.0,
+        "hpMult": 0.85,
+        "capacity": 0.0,
+        "defense": 0.0,
+        "range": 0.0,
+        "rangeMult": 1.0,
+        "slow": 1.0,
+        "rate": 0.0,
+        "rateMult": 1.25
+      }
+    }
+  ],
+  "weapons": [
+    {
+      "id": "weaponRecipe.Пулемёт",
+      "resolved": {
+        "damage": 12.0,
+        "interval": 0.42,
+        "reload": 0.42,
+        "clip": 6,
+        "cycle": 2.52,
+        "dps": 28.5714283,
+        "range": 8.0,
+        "minRange": 0.0,
+        "cost": 24,
+        "load": 4.0,
+        "level": 1,
+        "acquisition": 0.25,
+        "radius": 0.1,
+        "targets": 1
+      }
+    },
+    {
+      "id": "weaponRecipe.Пробивающая пушка",
+      "resolved": {
+        "damage": 20.0,
+        "interval": 1.0,
+        "reload": 1.0,
+        "clip": 1,
+        "cycle": 1.0,
+        "dps": 20.0,
+        "range": 12.5,
+        "minRange": 0.0,
+        "cost": 44,
+        "load": 6.0,
+        "level": 1,
+        "acquisition": 0.25,
+        "radius": 0.38,
+        "targets": 7
+      }
+    },
+    {
+      "id": "weaponRecipe.Мортира",
+      "resolved": {
+        "damage": 28.0,
+        "interval": 1.9,
+        "reload": 1.9,
+        "clip": 1,
+        "cycle": 1.9,
+        "dps": 14.7368422,
+        "range": 18.0,
+        "minRange": 6.0,
+        "cost": 69,
+        "load": 7.0,
+        "level": 1,
+        "acquisition": 0.25,
+        "radius": 2.4,
+        "targets": 8
+      }
+    },
+    {
+      "id": "weaponRecipe.Веерный ствол",
+      "resolved": {
+        "damage": 14.0,
+        "interval": 0.85,
+        "reload": 0.85,
+        "clip": 1,
+        "cycle": 0.85,
+        "dps": 16.4705887,
+        "range": 6.0,
+        "minRange": 0.0,
+        "cost": 39,
+        "load": 5.0,
+        "level": 4,
+        "acquisition": 0.25,
+        "radius": 0.1,
+        "targets": 8
+      }
+    },
+    {
+      "id": "weaponRecipe.Рикошет",
+      "resolved": {
+        "damage": 12.0,
+        "interval": 0.9,
+        "reload": 0.9,
+        "clip": 1,
+        "cycle": 0.9,
+        "dps": 13.333334,
+        "range": 10.0,
+        "minRange": 0.0,
+        "cost": 52,
+        "load": 5.0,
+        "level": 6,
+        "acquisition": 0.25,
+        "radius": 0.1,
+        "targets": 4
+      }
+    },
+    {
+      "id": "weaponRecipe.Степлер",
+      "resolved": {
+        "damage": 5.0,
+        "interval": 0.6,
+        "reload": 0.6,
+        "clip": 4,
+        "cycle": 2.4,
+        "dps": 8.333333,
+        "range": 9.0,
+        "minRange": 0.0,
+        "cost": 12,
+        "load": 2.0,
+        "level": 2,
+        "acquisition": 0.25,
+        "radius": 0.1,
+        "targets": 1
+      }
+    },
+    {
+      "id": "weaponRecipe.Промокашка",
+      "resolved": {
+        "damage": 0.0,
+        "interval": 1.4,
+        "reload": 1.4,
+        "clip": 1,
+        "cycle": 1.4,
+        "dps": 0.0,
+        "range": 9.0,
+        "minRange": 0.0,
+        "cost": 8,
+        "load": 2.0,
+        "level": 3,
+        "acquisition": 0.25,
+        "radius": 2.0,
+        "targets": 0
+      }
+    },
+    {
+      "id": "weaponRecipe.Короткий дозор",
+      "resolved": {
+        "damage": 10.7999992,
+        "interval": 0.357,
+        "reload": 0.357,
+        "clip": 6,
+        "cycle": 2.142,
+        "dps": 30.2521,
+        "range": 6.4,
+        "minRange": 0.0,
+        "cost": 20,
+        "load": 3.0,
+        "level": 2,
+        "acquisition": 0.25,
+        "radius": 0.1,
+        "targets": 1
+      }
+    },
+    {
+      "id": "weaponRecipe.Дальний пробой",
+      "resolved": {
+        "damage": 22.0,
+        "interval": 1.2,
+        "reload": 1.2,
+        "clip": 1,
+        "cycle": 1.2,
+        "dps": 18.3333321,
+        "range": 17.96875,
+        "minRange": 0.0,
+        "cost": 66,
+        "load": 9.0,
+        "level": 4,
+        "acquisition": 0.325,
+        "radius": 0.38,
+        "targets": 7
+      }
+    },
+    {
+      "id": "weaponRecipe.Очередь дозора",
+      "resolved": {
+        "damage": 12.0,
+        "interval": 0.189,
+        "reload": 0.8819999,
+        "clip": 3,
+        "cycle": 1.25999987,
+        "dps": 28.5714321,
+        "range": 8.0,
+        "minRange": 0.0,
+        "cost": 34,
+        "load": 5.0,
+        "level": 5,
+        "acquisition": 0.25,
+        "radius": 0.1,
+        "targets": 1
+      }
+    },
+    {
+      "id": "weaponRecipe.Барабанный дозор",
+      "resolved": {
+        "damage": 12.0,
+        "interval": 0.357,
+        "reload": 1.26,
+        "clip": 12,
+        "cycle": 5.187,
+        "dps": 27.761713,
+        "range": 8.0,
+        "minRange": 0.0,
+        "cost": 36,
+        "load": 5.0,
+        "level": 4,
+        "acquisition": 0.25,
+        "radius": 0.1,
+        "targets": 1
+      }
+    }
+  ],
+  "towers": [
+    {
+      "id": "album.guard",
+      "resolved": {
+        "cost": 40,
+        "hp": 55.0,
+        "load": 4,
+        "capacity": 10,
+        "defense": 0.0,
+        "level": 1,
+        "frontDefense": 0.0,
+        "feed": 1.0,
+        "dps": 28.57143,
+        "range": 8.0,
+        "acquisition": 0.25
+      },
+      "parts": [
+        {
+          "id": "frame.standard",
+          "revision": 1
+        },
+        {
+          "id": "hull.standard",
+          "revision": 1
+        },
+        {
+          "id": "armor.none",
+          "revision": 1
+        },
+        {
+          "id": "feed.standard",
+          "revision": 1
+        },
+        {
+          "id": "turn.standard",
+          "revision": 1
+        },
+        {
+          "id": "core.gun",
+          "revision": 1
+        },
+        {
+          "id": "head.gun",
+          "revision": 1
+        },
+        {
+          "id": "sight.iron",
+          "revision": 1
+        },
+        {
+          "id": "magazine.standard",
+          "revision": 1
+        },
+        {
+          "id": "trigger.standard",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "id": "album.double",
+      "resolved": {
+        "cost": 64,
+        "hp": 55.0,
+        "load": 8,
+        "capacity": 10,
+        "defense": 0.0,
+        "level": 1,
+        "frontDefense": 0.0,
+        "feed": 0.8,
+        "dps": 45.7142868,
+        "range": 8.0,
+        "acquisition": 0.25
+      },
+      "parts": [
+        {
+          "id": "frame.standard",
+          "revision": 1
+        },
+        {
+          "id": "hull.standard",
+          "revision": 1
+        },
+        {
+          "id": "armor.none",
+          "revision": 1
+        },
+        {
+          "id": "feed.standard",
+          "revision": 1
+        },
+        {
+          "id": "turn.standard",
+          "revision": 1
+        },
+        {
+          "id": "core.gun",
+          "revision": 1
+        },
+        {
+          "id": "head.gun",
+          "revision": 1
+        },
+        {
+          "id": "sight.iron",
+          "revision": 1
+        },
+        {
+          "id": "magazine.standard",
+          "revision": 1
+        },
+        {
+          "id": "trigger.standard",
+          "revision": 1
+        },
+        {
+          "id": "core.gun",
+          "revision": 1
+        },
+        {
+          "id": "head.gun",
+          "revision": 1
+        },
+        {
+          "id": "sight.iron",
+          "revision": 1
+        },
+        {
+          "id": "magazine.standard",
+          "revision": 1
+        },
+        {
+          "id": "trigger.standard",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "id": "album.piercer",
+      "resolved": {
+        "cost": 60,
+        "hp": 55.0,
+        "load": 6,
+        "capacity": 10,
+        "defense": 0.0,
+        "level": 1,
+        "frontDefense": 0.0,
+        "feed": 1.0,
+        "dps": 20.0,
+        "range": 12.5,
+        "acquisition": 0.25
+      },
+      "parts": [
+        {
+          "id": "frame.standard",
+          "revision": 1
+        },
+        {
+          "id": "hull.standard",
+          "revision": 1
+        },
+        {
+          "id": "armor.none",
+          "revision": 1
+        },
+        {
+          "id": "feed.standard",
+          "revision": 1
+        },
+        {
+          "id": "turn.standard",
+          "revision": 1
+        },
+        {
+          "id": "core.piercer",
+          "revision": 1
+        },
+        {
+          "id": "head.piercer",
+          "revision": 1
+        },
+        {
+          "id": "sight.iron",
+          "revision": 1
+        },
+        {
+          "id": "magazine.standard",
+          "revision": 1
+        },
+        {
+          "id": "trigger.standard",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "id": "album.mortar",
+      "resolved": {
+        "cost": 99,
+        "hp": 55.0,
+        "load": 9,
+        "capacity": 10,
+        "defense": 0.3,
+        "level": 1,
+        "frontDefense": 0.0,
+        "feed": 1.0,
+        "dps": 14.7368422,
+        "range": 18.0,
+        "acquisition": 0.25
+      },
+      "parts": [
+        {
+          "id": "frame.standard",
+          "revision": 1
+        },
+        {
+          "id": "hull.standard",
+          "revision": 1
+        },
+        {
+          "id": "armor.plate",
+          "revision": 1
+        },
+        {
+          "id": "feed.standard",
+          "revision": 1
+        },
+        {
+          "id": "turn.standard",
+          "revision": 1
+        },
+        {
+          "id": "core.mortar",
+          "revision": 1
+        },
+        {
+          "id": "head.mortar",
+          "revision": 1
+        },
+        {
+          "id": "sight.iron",
+          "revision": 1
+        },
+        {
+          "id": "magazine.standard",
+          "revision": 1
+        },
+        {
+          "id": "trigger.standard",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "id": "album.short",
+      "resolved": {
+        "cost": 36,
+        "hp": 55.0,
+        "load": 3,
+        "capacity": 10,
+        "defense": 0.0,
+        "level": 2,
+        "frontDefense": 0.0,
+        "feed": 1.0,
+        "dps": 30.2521,
+        "range": 6.4,
+        "acquisition": 0.25
+      },
+      "parts": [
+        {
+          "id": "frame.standard",
+          "revision": 1
+        },
+        {
+          "id": "hull.standard",
+          "revision": 1
+        },
+        {
+          "id": "armor.none",
+          "revision": 1
+        },
+        {
+          "id": "feed.standard",
+          "revision": 1
+        },
+        {
+          "id": "turn.standard",
+          "revision": 1
+        },
+        {
+          "id": "core.gun",
+          "revision": 1
+        },
+        {
+          "id": "head.short",
+          "revision": 1
+        },
+        {
+          "id": "sight.iron",
+          "revision": 1
+        },
+        {
+          "id": "magazine.standard",
+          "revision": 1
+        },
+        {
+          "id": "trigger.standard",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "id": "album.sniper",
+      "resolved": {
+        "cost": 84,
+        "hp": 55.0,
+        "load": 9,
+        "capacity": 16,
+        "defense": 0.0,
+        "level": 4,
+        "frontDefense": 0.0,
+        "feed": 1.0,
+        "dps": 18.3333321,
+        "range": 17.96875,
+        "acquisition": 0.325
+      },
+      "parts": [
+        {
+          "id": "frame.precision",
+          "revision": 1
+        },
+        {
+          "id": "hull.standard",
+          "revision": 1
+        },
+        {
+          "id": "armor.none",
+          "revision": 1
+        },
+        {
+          "id": "feed.standard",
+          "revision": 1
+        },
+        {
+          "id": "turn.standard",
+          "revision": 1
+        },
+        {
+          "id": "core.piercer",
+          "revision": 1
+        },
+        {
+          "id": "head.long",
+          "revision": 1
+        },
+        {
+          "id": "sight.scope",
+          "revision": 1
+        },
+        {
+          "id": "magazine.standard",
+          "revision": 1
+        },
+        {
+          "id": "trigger.standard",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "id": "album.burst",
+      "resolved": {
+        "cost": 50,
+        "hp": 55.0,
+        "load": 5,
+        "capacity": 10,
+        "defense": 0.0,
+        "level": 5,
+        "frontDefense": 0.0,
+        "feed": 1.0,
+        "dps": 28.57143,
+        "range": 8.0,
+        "acquisition": 0.25
+      },
+      "parts": [
+        {
+          "id": "frame.standard",
+          "revision": 1
+        },
+        {
+          "id": "hull.standard",
+          "revision": 1
+        },
+        {
+          "id": "armor.none",
+          "revision": 1
+        },
+        {
+          "id": "feed.standard",
+          "revision": 1
+        },
+        {
+          "id": "turn.standard",
+          "revision": 1
+        },
+        {
+          "id": "core.gun",
+          "revision": 1
+        },
+        {
+          "id": "head.gun",
+          "revision": 1
+        },
+        {
+          "id": "sight.iron",
+          "revision": 1
+        },
+        {
+          "id": "magazine.standard",
+          "revision": 1
+        },
+        {
+          "id": "trigger.burst",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "id": "album.drum",
+      "resolved": {
+        "cost": 52,
+        "hp": 55.0,
+        "load": 5,
+        "capacity": 10,
+        "defense": 0.0,
+        "level": 4,
+        "frontDefense": 0.0,
+        "feed": 1.0,
+        "dps": 27.761713,
+        "range": 8.0,
+        "acquisition": 0.25
+      },
+      "parts": [
+        {
+          "id": "frame.standard",
+          "revision": 1
+        },
+        {
+          "id": "hull.standard",
+          "revision": 1
+        },
+        {
+          "id": "armor.none",
+          "revision": 1
+        },
+        {
+          "id": "feed.standard",
+          "revision": 1
+        },
+        {
+          "id": "turn.standard",
+          "revision": 1
+        },
+        {
+          "id": "core.gun",
+          "revision": 1
+        },
+        {
+          "id": "head.gun",
+          "revision": 1
+        },
+        {
+          "id": "sight.iron",
+          "revision": 1
+        },
+        {
+          "id": "magazine.drum",
+          "revision": 1
+        },
+        {
+          "id": "trigger.standard",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "id": "album.battery",
+      "resolved": {
+        "cost": 100,
+        "hp": 77.0,
+        "load": 12,
+        "capacity": 22,
+        "defense": 0.0,
+        "level": 7,
+        "frontDefense": 0.0,
+        "feed": 0.8,
+        "dps": 68.57143,
+        "range": 8.0,
+        "acquisition": 0.25
+      },
+      "parts": [
+        {
+          "id": "frame.battery",
+          "revision": 1
+        },
+        {
+          "id": "hull.standard",
+          "revision": 1
+        },
+        {
+          "id": "armor.none",
+          "revision": 1
+        },
+        {
+          "id": "feed.standard",
+          "revision": 1
+        },
+        {
+          "id": "turn.standard",
+          "revision": 1
+        },
+        {
+          "id": "core.gun",
+          "revision": 1
+        },
+        {
+          "id": "head.gun",
+          "revision": 1
+        },
+        {
+          "id": "sight.iron",
+          "revision": 1
+        },
+        {
+          "id": "magazine.standard",
+          "revision": 1
+        },
+        {
+          "id": "trigger.standard",
+          "revision": 1
+        },
+        {
+          "id": "core.gun",
+          "revision": 1
+        },
+        {
+          "id": "head.gun",
+          "revision": 1
+        },
+        {
+          "id": "sight.iron",
+          "revision": 1
+        },
+        {
+          "id": "magazine.standard",
+          "revision": 1
+        },
+        {
+          "id": "trigger.standard",
+          "revision": 1
+        },
+        {
+          "id": "core.gun",
+          "revision": 1
+        },
+        {
+          "id": "head.gun",
+          "revision": 1
+        },
+        {
+          "id": "sight.iron",
+          "revision": 1
+        },
+        {
+          "id": "magazine.standard",
+          "revision": 1
+        },
+        {
+          "id": "trigger.standard",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "id": "album.stapler",
+      "resolved": {
+        "cost": 28,
+        "hp": 55.0,
+        "load": 2,
+        "capacity": 10,
+        "defense": 0.0,
+        "level": 2,
+        "frontDefense": 0.0,
+        "feed": 1.0,
+        "dps": 8.333333,
+        "range": 9.0,
+        "acquisition": 0.25
+      },
+      "parts": [
+        {
+          "id": "frame.standard",
+          "revision": 1
+        },
+        {
+          "id": "hull.standard",
+          "revision": 1
+        },
+        {
+          "id": "armor.none",
+          "revision": 1
+        },
+        {
+          "id": "feed.standard",
+          "revision": 1
+        },
+        {
+          "id": "turn.standard",
+          "revision": 1
+        },
+        {
+          "id": "core.stapler",
+          "revision": 1
+        },
+        {
+          "id": "head.stapler",
+          "revision": 1
+        },
+        {
+          "id": "sight.iron",
+          "revision": 1
+        },
+        {
+          "id": "magazine.standard",
+          "revision": 1
+        },
+        {
+          "id": "trigger.standard",
+          "revision": 1
+        }
+      ]
+    }
+  ],
+  "buildings": [
+    {
+      "id": "album.wall",
+      "resolved": {
+        "cost": 16,
+        "hp": 200.0,
+        "load": 2,
+        "capacity": 6,
+        "defense": 0.0,
+        "level": 1,
+        "range": 0.0,
+        "rate": 0.0,
+        "slow": 1.0,
+        "build": 0.350000024
+      },
+      "parts": [
+        {
+          "id": "site.wall",
+          "revision": 1
+        },
+        {
+          "id": "function.wall",
+          "revision": 1
+        },
+        {
+          "id": "shell.standard",
+          "revision": 1
+        },
+        {
+          "id": "utility.none",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "id": "album.slow",
+      "resolved": {
+        "cost": 22,
+        "hp": 55.0,
+        "load": 2,
+        "capacity": 6,
+        "defense": 0.0,
+        "level": 1,
+        "range": 1.0,
+        "rate": 0.0,
+        "slow": 0.6,
+        "build": 0.8
+      },
+      "parts": [
+        {
+          "id": "site.slow",
+          "revision": 1
+        },
+        {
+          "id": "function.slow",
+          "revision": 1
+        },
+        {
+          "id": "shell.standard",
+          "revision": 1
+        },
+        {
+          "id": "utility.none",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "id": "album.repair",
+      "resolved": {
+        "cost": 65,
+        "hp": 70.0,
+        "load": 3,
+        "capacity": 6,
+        "defense": 0.0,
+        "level": 1,
+        "range": 5.0,
+        "rate": 6.0,
+        "slow": 1.0,
+        "build": 2.0
+      },
+      "parts": [
+        {
+          "id": "site.repair",
+          "revision": 1
+        },
+        {
+          "id": "function.repair",
+          "revision": 1
+        },
+        {
+          "id": "shell.standard",
+          "revision": 1
+        },
+        {
+          "id": "utility.none",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "id": "album.generator",
+      "resolved": {
+        "cost": 60,
+        "hp": 80.0,
+        "load": 3,
+        "capacity": 6,
+        "defense": 0.0,
+        "level": 1,
+        "range": 0.0,
+        "rate": 12.0,
+        "slow": 1.0,
+        "build": 2.2
+      },
+      "parts": [
+        {
+          "id": "site.generator",
+          "revision": 1
+        },
+        {
+          "id": "function.generator",
+          "revision": 1
+        },
+        {
+          "id": "shell.standard",
+          "revision": 1
+        },
+        {
+          "id": "utility.none",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "id": "album.wall-heavy",
+      "resolved": {
+        "cost": 38,
+        "hp": 300.0,
+        "load": 5,
+        "capacity": 6,
+        "defense": 0.2,
+        "level": 4,
+        "range": 0.0,
+        "rate": 0.0,
+        "slow": 1.0,
+        "build": 0.650000036
+      },
+      "parts": [
+        {
+          "id": "site.wall",
+          "revision": 1
+        },
+        {
+          "id": "function.wall",
+          "revision": 1
+        },
+        {
+          "id": "shell.reinforced",
+          "revision": 1
+        },
+        {
+          "id": "utility.armor",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "id": "album.repair-wide",
+      "resolved": {
+        "cost": 80,
+        "hp": 70.0,
+        "load": 5,
+        "capacity": 6,
+        "defense": 0.0,
+        "level": 5,
+        "range": 6.5,
+        "rate": 4.8,
+        "slow": 1.0,
+        "build": 2.0
+      },
+      "parts": [
+        {
+          "id": "site.repair",
+          "revision": 1
+        },
+        {
+          "id": "function.repair",
+          "revision": 1
+        },
+        {
+          "id": "shell.standard",
+          "revision": 1
+        },
+        {
+          "id": "utility.range",
+          "revision": 1
+        }
+      ]
+    },
+    {
+      "id": "album.generator-economy",
+      "resolved": {
+        "cost": 72,
+        "hp": 68.0,
+        "load": 5,
+        "capacity": 6,
+        "defense": 0.0,
+        "level": 8,
+        "range": 0.0,
+        "rate": 15.0,
+        "slow": 1.0,
+        "build": 2.2
+      },
+      "parts": [
+        {
+          "id": "site.generator",
+          "revision": 1
+        },
+        {
+          "id": "function.generator",
+          "revision": 1
+        },
+        {
+          "id": "shell.standard",
+          "revision": 1
+        },
+        {
+          "id": "utility.economy",
+          "revision": 1
+        }
+      ]
+    }
+  ],
+  "starters": [
+    "album.guard",
+    "album.double",
+    "album.piercer",
+    "album.mortar",
+    "album.wall",
+    "album.slow",
+    "album.repair",
+    "album.generator"
+  ],
+  "rules": {
+    "slots": 8,
+    "maxAlbumPages": 64,
+    "initialGold": 0,
+    "startingInk": 640,
+    "waves": 8,
+    "waveGold": 8,
+    "victoryGold": 30,
+    "xpPerWave": 10,
+    "xpVictory": 40,
+    "maxFeed": 1.25,
+    "acquisition": 0.25,
+    "maxDefense": 0.6,
+    "maxGenerators": 2,
+    "generatorRefund": 0.0,
+    "generatorMaterial": "pencil",
+    "towerRefund": 0.8,
+    "slowFloor": 0.4,
+    "geometryPower": false
+  },
+  "levels": [
+    {
+      "level": 1,
+      "xp": 0
+    },
+    {
+      "level": 2,
+      "xp": 100
+    },
+    {
+      "level": 3,
+      "xp": 230
+    },
+    {
+      "level": 4,
+      "xp": 390
+    },
+    {
+      "level": 5,
+      "xp": 580
+    },
+    {
+      "level": 6,
+      "xp": 800
+    },
+    {
+      "level": 7,
+      "xp": 1050
+    },
+    {
+      "level": 8,
+      "xp": 1330
+    }
+  ],
+  "source": {
+    "balance": "Assets/PaperDefense/Configuration/Game/PlayerBalance.asset",
+    "rules": "Assets/PaperDefense/Configuration/Game/PlayerRules.asset",
+    "content": "Assets/PaperDefense/Configuration/Game/PlayerContent.asset",
+    "assemblyCatalog": "Assets/PaperDefense/Configuration/Game/PlayerAssemblyCatalog.asset"
+  }
+}

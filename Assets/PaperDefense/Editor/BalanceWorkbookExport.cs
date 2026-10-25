@@ -15,13 +15,14 @@ using UnityEngine;
 namespace PaperDefense.Editor
 {
     /// <summary>Read-only runtime export for the reproducible mechanics/balance workbook.</summary>
-    public static class BalanceWorkbookExport
+    public static partial class BalanceWorkbookExport
     {
         [MenuItem("Paper Defense/Export mechanics and balance JSON")]
         public static void ExportFromMenu() => Debug.Log(Export());
 
         public static string Export()
         {
+            ExportPlayerAssembly();
             string root = Path.GetFullPath(Path.Combine(UnityEngine.Application.dataPath, ".."));
             var configurations = new List<ConfigurationRecord>();
             foreach (string assetPath in new[] {

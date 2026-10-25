@@ -34,6 +34,33 @@ namespace PaperDefense.Core
         readonly List<string> weaponIds=new List<string>();
         public IReadOnlyList<string> WeaponIds=>weaponIds.AsReadOnly();
         public float TotalDamage {get;private set;} public float TotalIdleSeconds {get;private set;}
+        public float TotalRepairedHealth { get; private set; }
+        public int TotalGeneratorIncome { get; private set; }
+        public int TotalSpawnedEnemies { get; private set; }
+        public int BaseHits { get; private set; }
+        public float BaseDamageTaken { get; private set; }
+        readonly int[] spawnedByKind = new int[6], spawnedByDrawingTier = new int[3];
+        public IReadOnlyList<int> SpawnedByKind => Array.AsReadOnly(spawnedByKind);
+        public IReadOnlyList<int> SpawnedByDrawingTier => Array.AsReadOnly(spawnedByDrawingTier);
+        static int AddCount(int value, int amount) => (int)Math.Min(int.MaxValue, (long)value + Math.Max(0, amount));
+        static float AddMeasurement(float value, float amount) =>
+            amount > 0 && !float.IsNaN(amount) && !float.IsInfinity(amount)
+                ? (float)Math.Min(float.MaxValue, (double)value + amount) : value;
+        public void RecordRepair(float actual) => TotalRepairedHealth = AddMeasurement(TotalRepairedHealth, actual);
+        public void RecordGeneratorIncome(int actual) => TotalGeneratorIncome = AddCount(TotalGeneratorIncome, actual);
+        public void RecordSpawn(EnemyKind kind, DrawingTier tier)
+        {
+            if (!Enum.IsDefined(typeof(EnemyKind), kind) || !Enum.IsDefined(typeof(DrawingTier), tier)) return;
+            TotalSpawnedEnemies = AddCount(TotalSpawnedEnemies, 1);
+            spawnedByKind[(int)kind] = AddCount(spawnedByKind[(int)kind], 1);
+            spawnedByDrawingTier[(int)tier] = AddCount(spawnedByDrawingTier[(int)tier], 1);
+        }
+        public void RecordBaseDamage(float actual)
+        {
+            if (!(actual > 0) || float.IsNaN(actual) || float.IsInfinity(actual)) return;
+            BaseHits = AddCount(BaseHits, 1);
+            BaseDamageTaken = AddMeasurement(BaseDamageTaken, actual);
+        }
         WeaponMetrics Metrics(string id,bool create)
         {
             if(id==null)return null;
@@ -106,6 +133,13 @@ namespace PaperDefense.Core
         public IReadOnlyList<RunUpgrade> Upgrades=>source.Upgrades;
         public IReadOnlyList<string> WeaponIds=>source.WeaponIds;
         public float TotalDamage=>source.TotalDamage;public float TotalIdleSeconds=>source.TotalIdleSeconds;
+        public float TotalRepairedHealth => source.TotalRepairedHealth;
+        public int TotalGeneratorIncome => source.TotalGeneratorIncome;
+        public int TotalSpawnedEnemies => source.TotalSpawnedEnemies;
+        public int BaseHits => source.BaseHits;
+        public float BaseDamageTaken => source.BaseDamageTaken;
+        public IReadOnlyList<int> SpawnedByKind => source.SpawnedByKind;
+        public IReadOnlyList<int> SpawnedByDrawingTier => source.SpawnedByDrawingTier;
         public float Damage(string id)=>source.Damage(id);public float IdleSeconds(string id)=>source.IdleSeconds(id);public int Launches(string id)=>source.Launches(id);
         public int BuiltCount(string id,MaterialTier tier)=>source.BuiltCount(id,tier);
         public float Damage(StructureKind kind)=>source.Damage(kind);

@@ -36,7 +36,9 @@ namespace PaperDefense.Core
 
         private void CompleteWave()
         {
-            CreditInk(generatorLedger.CompleteWave(RunId, WaveIndex, structures));
+            int generatorIncome = generatorLedger.CompleteWave(RunId, WaveIndex, structures);
+            CreditInk(generatorIncome);
+            Statistics.RecordGeneratorIncome(generatorIncome);
             CompletedWaves = WaveIndex;
             AwardWellResources();
             AwardGold();
