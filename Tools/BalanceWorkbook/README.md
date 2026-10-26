@@ -5,7 +5,7 @@
 Книга экспортирует **Historical и Target**, а основная игра использует отдельный [PlayerRules.asset](../../Assets/PaperDefense/Configuration/Game/PlayerRules.asset). Значения PlayerRules сверяйте с его assets; их нельзя выводить из столбца Target. Прежние сгенерированные файлы `docs/balance` удалены при очистке: перед созданием новой книги обязателен новый экспорт из Unity.
 
 1. В Unity выполните `Paper Defense > Export mechanics and balance JSON` или вызовите `PaperDefense.Editor.BalanceWorkbookExport.Export()`.
-2. В корне проекта выполните `Tools/BalanceWorkbook/Build.ps1`.
+2. Настройте [локальные зависимости](../README.md#локальные-зависимости-nodejs), затем в корне проекта выполните `Tools/BalanceWorkbook/Build.ps1`.
 3. Проверьте `docs/balance/PaperDefense-Mechanics-Balance.xlsx`. `workbook-validation.json` сохраняет хэш данных, результат сверки формул и ограничения проверки.
 
 Экспорт читает обе настройки через `CreateWorkshopBalance()`: рабочие `Historical.asset` и `Target.asset` уже содержат конечные правила и overrides. Повторное применение Target или генерация legacy-угроз не нужны. Экспорт не меняет настройки, профиль или текущую партию. JSON версии 2 содержит глобальные правила, эффективные каталоги по ID, configured/effective механики и эталоны `TowerCatalog`. Для каждой записи каталога сохранены источник и факт переопределения пресетом. Отдельный каталог приёмки не включается в основной баланс.

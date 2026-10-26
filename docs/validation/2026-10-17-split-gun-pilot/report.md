@@ -33,7 +33,7 @@
 
 [Итоговый протокол](verification.json), [SHA256 проверенных исходников](source-hashes.json). Проверены 128 локальных ссылок обновлённых документов, битых нет; `git diff --check` чист. Галерея новых эскизов проходит `verify.cjs`, исходные 28 PNG сохранены. Settings, ProjectSettings и Packages не изменены.
 
-Windows Standalone x64, Mono, обычная сохранённая сцена, `strict_mode` и `detailed_report`: сборка успешна, 0 ошибок, 485 предупреждений; в консоли — прежние shader warnings пакета Sentis. [build.json](build.json). Новый [Player](../../../Builds/Stage2SplitGunPilot/PaperDefense.exe) проработал 8 секунд с `-batchmode -nographics -paper-memory-only`; исключений и ошибок в логе нет. Остановлен только собственный проверочный процесс. [Результат запуска](player-startup.json), [лог](player-startup.log). Это проверка запуска; визуальные и боевые проверки выполнены в Unity выше.
+Windows Standalone x64, Mono, обычная сохранённая сцена, `strict_mode` и `detailed_report`: сборка успешна, 0 ошибок, 485 предупреждений; в консоли — прежние shader warnings пакета Sentis. [build.json](build.json). Player из исторического `Builds/Stage2SplitGunPilot/PaperDefense.exe` (локальная сборка удалена при чистке 26.10.2026; [актуальная сборка](../modular-album/release/acceptance.md)) проработал 8 секунд с `-batchmode -nographics -paper-memory-only`; исключений и ошибок в логе нет. Остановлен только собственный проверочный процесс. [Результат запуска](player-startup.json), [лог](player-startup.log). Это проверка запуска; визуальные и боевые проверки выполнены в Unity выше.
 
 ## Снимки работающей игры
 

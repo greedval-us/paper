@@ -2,7 +2,7 @@
 
 Исходник проектного баланса — build-data.mjs. Реальная база — docs/audit/2026-10-17-album/current-runtime.json, экспортированная через Unity из PlayerBalance.asset. Игровые assets эти скрипты не изменяют.
 
-Используется Node.js 24, @oai/artifact-tool и Playwright из bundled runtime Codex. node_modules — локальная ссылка на его библиотеки; зависимости не копируются в Git. Для снимков установлен Microsoft Edge, отдельный временный профиль.
+Используется Node.js 24, @oai/artifact-tool и Playwright из bundled runtime Codex. `node_modules` — локальный каталог или junction, исключённый из Git. Для свежего клона сначала настройте [локальные зависимости](../README.md#локальные-зависимости-nodejs). Существующие каталоги не заменяются автоматически. Для снимков установлен Microsoft Edge, отдельный временный профиль.
 
 ```powershell
 node Tools/AlbumDesign2026/build-data.mjs

@@ -26,7 +26,7 @@ Alias связывает игровой ID с основным рисунком.
 1. Отредактируйте нужный PNG или добавьте новый прозрачный рисунок в `NewStyle`.
 2. Обновите область и привязки в `sprites.source.json`; проверьте границы изображения и локальный pivot. При добавлении ID проверьте его потребителей и aliases.
 3. Если меняется анимация, обновите кадры или отдачу в `animation.json`, сохраняя пустые `Marks` у стандартных форм.
-4. Для изменения составных деталей выполните `node Tools/ArtAssembly13/build-catalog.mjs`, затем `node Tools/ArtAssembly13/pack-catalog.mjs`. Схема упаковки сохраняет все исходные пиксели и зазоры 4 px в 4096×4096; импорт отклоняет устаревшие размеры и привязки.
+4. Для изменения составных деталей выполните `node Tools/ArtAssembly13/build-catalog.mjs`, затем `node Tools/ArtAssembly13/pack-catalog.mjs`. Схема упаковки сохраняет все исходные пиксели и зазоры 4 px в 4096×4352; импорт отклоняет устаревшие размеры и привязки.
 5. В редакторе Unity выполните **Paper Defense → Art → Rebuild blue pen atlas** или вызовите `PaperDefense.Editor.NotebookSpriteImportTools.Rebuild()`.
 6. Проверьте результат в основной игре и запустите проверки затронутых привязок, импорта и отображения, включая `AssemblyArtCoverageTests`, `AssemblyArtImportValidationTests` и `NotebookNativeAtlasTests`.
 
