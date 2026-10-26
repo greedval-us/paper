@@ -1,100 +1,46 @@
-# Разработка, запуск и проверки
+# Разработка, запуск и проверка
 
-Техническая справка по действующим системам игры. [Эскизы и целевой дизайн](Game-Design.md) задают визуальный ориентир; [статус переноса в Unity](Implementation-Roadmap.md) отделяет реализованные экраны от оставшейся работы.
+Версия редактора: **Unity 6000.5.7f1**, источник — [ProjectVersion.txt](../ProjectSettings/ProjectVersion.txt). Пакеты: [manifest](../Packages/manifest.json) и [lock](../Packages/packages-lock.json). Проект открывается из корня с Assets, Packages и ProjectSettings.
 
-[Указатель документации](README.md) · [Архитектура](PaperDefense-Architecture.md) · [Инструменты](../Tools/README.md)
+## Запуск
 
-## Окружение
+Единственная игровая сцена: [PaperDefenseGame.unity](../Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity). Меню **Paper Defense → Game → Open player game**, затем Play. Конфигурация: PlayerBalance → PlayerRules → PlayerContent. `CreateConfigurationIfMissing()` повторно назначает связи каталога даже при существующих assets; не используйте его как безвредное чтение.
 
-Проект открывается из корня, содержащего `Assets`, `Packages` и `ProjectSettings`. Версия редактора зафиксирована в [ProjectVersion.txt](../ProjectSettings/ProjectVersion.txt): **6000.5.7f1**. Для основной сборки нужен модуль Windows Build Support установленного редактора.
+Windows x64: **Paper Defense → Game → Build player game** (`PlayerGameSceneTools.Build`). Выход: `Builds/PlayerGame/PaperDefense.exe`, рядом build-report.txt. [Отчёт выпуска](validation/modular-album/release/acceptance.md) содержит свежий результат, хеши и проверки запуска. Для проверки без личного профиля передайте `-paper-memory-only`.
 
-Зависимости заданы в [manifest.json](../Packages/manifest.json), разрешённые версии — в [packages-lock.json](../Packages/packages-lock.json). Среди используемых пакетов: URP 17.6.0, Input System 1.20.0, uGUI 2.5.0 и Test Framework 1.7.0. В manifest также есть Unity 2D, AI, Timeline и Git-пакет `com.coplaydev.unity-mcp`; первый импорт требует доступных источников пакетов. Наличие пакета само по себе не означает реализованную игровую функцию.
+Для отдельного тестового сохранения поддерживается `-paper-profile-path <абсолютный путь внутри системной временной папки>`. Некорректный путь отклоняется до открытия хранилища; автоматического перехода к личному профилю при ошибке нет. Флаг памяти имеет приоритет над временным store. Приёмочная инструментализация включается только явно через `-paper-release-probe <отчёт.json>` вместе с изоляцией профиля и не создаётся при обычном запуске игры.
 
-Python 3 нужен для инструментов текста и служебных проверок. Импорт нового оформления выполняется редактором Unity из PNG и JSON. PowerShell запускает вспомогательные `.ps1`. Генератор Excel использует bundled Node.js и `@oai/artifact-tool`; требования описаны [отдельно](../Tools/BalanceWorkbook/README.md). Эти инструменты не нужны для обычного запуска игры в Unity.
+Перед полными тестами можно включить `AlbumReleaseTestResults.Enable("EditMode")` или `Enable("PlayMode")`: нативный TestRunnerApi сохраняет XML в `docs/validation/modular-album/release`. После приёмки вызвать `Disable()`. Сборка остаётся обычной Windows x64, без Development-флага; frame timing включён для проверки на устройстве. При скрытом окне GPU-измерение может отсутствовать и должно быть обозначено как недоступное.
 
-## Структура репозитория
+## Структура
 
 | Каталог | Назначение |
 |---|---|
-| `Assets/PaperDefense/Core` | Правила, модели, геометрия и симуляция без Unity API |
-| `Assets/PaperDefense/Application` | Контроллер, снимки конфигурации, профиль и IO |
-| `Assets/PaperDefense/Presentation` | Ввод, игрок, мастерская, HUD и отрисовка |
-| `Assets/PaperDefense/Validation` | Editor-only сценарии нагрузки, баланса и приёмки данных для автоматических проверок |
-| `Assets/PaperDefense/Editor` | Меню основной сцены, импорт, экспорт и сборка |
-| `Assets/PaperDefense/Tests` | EditMode, редакторские и PlayMode-проверки |
-| `Assets/PaperDefense/Configuration` | Игровые и Target/Historical настройки |
-| `Assets/PaperDefense/Scenes`, `Prefabs`, `Resources` | Единственная игровая сцена, prefab и загружаемые ресурсы, включая атлас нового оформления |
-| `Assets/PaperDefense/Content/Acceptance` | Отдельный контент для проверки добавления данных без изменения кода |
-| `ArtSource/Notebook/NewStyle` | Канонические PNG, `sprites.source.json` и `animation.json` нового оформления |
-| `Tools` | Скрипты текста, баланса и проверки данных |
-| `docs` | Дизайн игры и статус переноса, технические справочники, эскизы в `design`, отчёты реализации и очистки |
-| `Builds`, `Library`, `Temp`, `Logs`, `UserSettings` | Локальные сборки, кэш и временные результаты; исключены из Git |
+| Assets/PaperDefense/Core | Правила и симуляция без Unity API |
+| Application | Контроллер, профиль, конфигурация, IO |
+| Presentation | Ввод, мастерская, оболочка, HUD, отрисовка |
+| Editor и Validation | Импорт, сборка, редакторские сценарии |
+| Tests | EditMode, Editor, PlayMode |
+| Configuration | Основной баланс и отдельные сравнительные пресеты |
+| ArtSource/Notebook/NewStyle | Исходные игровые PNG, нарезка, анимация |
+| Tools/AlbumDesign2026 | Новый баланс, Excel и проверка галереи |
+| docs/design/game-concept-art-2026-10-16 | Полная актуальная галерея: 30 экранов и 3 листа объектов, не runtime UI |
+| docs/design/album-assembly-2026-10-17 | Дополнительный интерактивный прототип и листы объектов |
 
-Сгенерированные `.csproj` не являются источником списка зависимостей. Границы сборок задаются `.asmdef`, пакеты — manifest/lock. Файлы `.meta` Unity сохраняются вместе со своими ассетами.
+## Работа над переходом
 
-## Точки входа и конфигурации
+Начинайте с [плана](superpowers/plans/2026-10-18-modular-album-implementation.md) и [текущего состояния](Current-Mechanics.md). Writer v8 использует восемь слотов; reader v7 проверяет исходные четыре и переносит данные без потери страниц. Сохраняйте этот контракт и тесты миграции. Изменения баланса вносятся в build-data.mjs, затем JSON/Excel сверяются с актуальным экспортом Player; сама правка Excel игровые assets не меняет.
 
-| Вход | Назначение и профиль |
-|---|---|
-| [Game/PaperDefenseGame.unity](../Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity) | Игровой маршрут; PlayerBalance → PlayerRules → PlayerContent; обычный профиль |
+Для графики: **Paper Defense → Art → Rebuild blue pen atlas**. Входы — sprites.source.json и animation.json в NewStyle; результат — NotebookAtlas.png, NotebookSprites.json и NotebookVisualTheme.asset. Сохраняйте .meta. [Стыки](Modular-Asset-Contract.md) обязательны для новых частей; визуальный коллаж не доказывает совместимость при вращении.
 
-Это единственная сохранённая сцена игры и единственная сцена сборки. **Paper Defense → Game → Open player game** и **Paper Defense → Открыть игру** открывают её. Удалены 30 сцен: 27 механических и художественных стендов, общий экран навигации, прежняя техническая сцена и сцена приёмки контента, а также их генераторы и runtime-обвязка. Канонические 28 эскизов сохранены. Перенесены экраны 01–06 и 22; композиции 07–21 и 23–28 ещё предстоят. Следующий экран — 07 «Рабочая геометрия и подробности». Боевые изображения обновлены, полный HUD 15–17 остаётся в плане.
+## Проверки
 
-`PlayerGameSceneTools.CreateIfMissing()` создаёт отсутствующие игровые ассеты/сцену; существующие числовые данные баланса не копируются повторно. При этом `CreateConfigurationIfMissing()` всегда заново назначает связи `catalog.presets`, `rules.database`, `balance.dataPreset` и сохраняет assets, даже если они уже существуют. При создании новой сцены метод назначает её единственной сценой Build Settings. `Build()` сам ничего не генерирует: он собирает указанный сохранённый файл сцены.
+В Unity Test Runner запускайте EditMode и PlayMode отдельно. Сборки: `PaperDefense.Core.Tests`, `PaperDefense.Editor.Tests`, `PaperDefense.Integration.Tests`. Тесты сцен могут открывать другие сцены; сначала сохраните собственные изменения.
 
-## Обновление оформления и экранов
+Подбирайте набор по изменению: миграция — сериализация и повреждённые профили; резолвер — категории, совместимость, формулы и порядок частей; бой — цикл выстрела, цели и сохранённое состояние; UI — 8 слотов, управление и ошибки записи. Финальный этап требует полного набора тестов и Windows build.
 
-Источник графики — `ArtSource/Notebook/NewStyle`: PNG-листы, `sprites.source.json` с семантическими ID и областями спрайтов, `animation.json` с привязками и временем кадров. В редакторе выполните **Paper Defense → Art → Rebuild blue pen atlas** или вызовите `PaperDefense.Editor.NotebookSpriteImportTools.Rebuild()`. Результат — `Resources/Art/NotebookAtlas.png`, `NotebookSprites.json` и `NotebookVisualTheme.asset`; последний хранит анимацию, палитру и отдачу, без старых векторных `Marks`. Полноэкранные фоны остаются отдельными спрайтами в `Resources/Art/Player`. Подробности — в [руководстве оформления](Notebook-Art.md) и [исходниках](../ArtSource/Notebook/README.md).
+Эскизы и Excel воспроизводятся командами из [Tools/AlbumDesign2026/README](../Tools/AlbumDesign2026/README.md). Это самостоятельная проверка материалов, не тест Unity. Python-инструменты: `python -m unittest discover -s Tools/tests -p 'test_*.py'`. Перед сдачей изменений: `git diff --check`.
 
-Экраны 04–06 перенесены поверх действующего `WorkshopWizard`. `WizardFoundationPanel` и `WizardWeaponPanel` используют детали общего атласа; параметры берутся из текущего каталога `RunController.Content`. `GuidedDrawingLayout` размещает слои, шесть инструментов и нижнюю строку вокруг настоящего `DrawingCanvasGraphic`, а `DrawingSummaryLayout` оформляет реальные показатели и существующую пробу. Дополнительные команды находятся в меню «···»; каталог заготовок остаётся модальным. Правила рисунка, баланс и сохранение этим переносом не меняются. Композиции подробностей 07, проверки 08 и альбома 09/24 ещё предстоят.
+Ручной маршрут: меню → карта → подготовка → мастерская → альбом → бой → пауза → результат → повторное открытие. Для нового UI проверить 1024×768, 1280×720, 1280×960, 1600×900, 1920×1080, длинные подписи и клавиатурный фокус. Профилирование выполнять в фиксированных условиях устройства через Unity Profiler; результаты unit-тестов не являются FPS.
 
-Настройки показывают текущий размер и отдельный выбор разрешения. Перелистывание не меняет экран; «Применить» передаёт размер в `Screen.SetResolution`, сохраняя текущий `fullScreenMode`. Закрытие сбрасывает неприменённый выбор. Список содержит уникальные размеры монитора и текущее окно; при отсутствии режимов используются размеры окна. Неизвестный режим ExclusiveFullscreen не применяется. Полный экран, радиусы башен, уменьшение движения и помощь остаются доступными.
-
-Новые страницы адаптируются к разрешению и соотношению сторон. Иллюстрации сохраняют собственные пропорции и целые края, свободное место заполняется бумагой. Проверяйте 1024×768, 1280×720, 1280×960, 1600×900 и 1920×1080, длинные подписи, клавиатурный фокус и возврат из настроек во время паузы.
-
-Актуальные снимки и результаты переноса рисунка — в [отчёте экрана 06](validation/2026-10-17-workshop-drawing/report.md); предыдущие шаги сохранены в [отчёте оружия 05](validation/2026-10-17-workshop-weapons/report.md), [отчёте основы 04](validation/2026-10-17-workshop-foundation/report.md) и [отчёте графики и разрешения](validation/2026-10-17-art-resolution/report.md). Этот документ не объявляет новый результат тестов или сборки.
-
-## Сборка и запуск Player
-
-В Unity выполните **Paper Defense → Game → Build player game**. Метод [PlayerGameSceneTools.Build](../Assets/PaperDefense/Editor/PlayerGameSceneTools.cs) использует только игровую сцену, `StandaloneWindows64` и `BuildOptions.None`. Результат — `Builds/PlayerGame/PaperDefense.exe`; итог сборки — соседний `build-report.txt` с результатом, ошибками, предупреждениями, размером и временем.
-
-Обычный запуск использует профиль на диске. Пример из корня проекта для проверки с профилем в памяти:
-
-```powershell
-& '.\Builds\PlayerGame\PaperDefense.exe' -paper-memory-only
-```
-
-Флаг `-paper-pressure` и запускавшие его скрипты удалены. Player запускает основной игровой маршрут; `-paper-memory-only` позволяет проходить его с профилем в памяти.
-
-## Автоматические проверки
-
-В Unity Test Runner запускайте **EditMode** и **PlayMode** отдельно. Тесты редакторских ассетов находятся на вкладке EditMode вместе с тестами ядра. Перед проверками сохранённых сцен сохраните собственные несохранённые изменения: тесты могут открывать другие сцены.
-
-| Сборка / файлы | Что покрывают |
-|---|---|
-| `PaperDefense.Core.Tests` в `Tests/EditMode` | Строительство, экономика, оружие, враги, путь/толпа, полигон, рисунки, профиль, эффекты и контракты |
-| `PaperDefense.Editor.Tests` в `Tests/Editor` | Сериализованные сцены, каталоги, контент, импорт графики, числовой баланс |
-| `PaperDefense.Integration.Tests` в `Tests/PlayMode` | Ввод, фиксированные часы, HUD, отрисовка, IO/отказы, мастерская и игровой маршрут |
-| `PlayerSceneTests`, `PlayerJourneyTests`, `PlayerDisplaySettingsTests` | Игровой вход, переходы, подготовка, пауза, полная видимость иллюстраций, читаемость и применение выбранного разрешения |
-| `NumericBalanceTests`, `TowerDefenseBalanceTests`, `EnemyCrowdMovementTests` | Измерения сборок, правила обороны и локальное движение |
-| `NotebookSpriteImportTests`, `NotebookArtPressureTests`, `NotebookCameraReadabilityTests` | Арт-ресурсы, границы и aliases атласа, нагрузка рендера и читаемость камеры |
-
-Быстрые проверки инструментов без Unity, из корня проекта:
-
-```powershell
-python -m unittest discover -s Tools -p 'test_extract_user_text.py'
-python -m unittest discover -s Tools/tests -p 'test_*.py'
-git diff --check
-```
-
-Это разные наборы: Python не проверяет C# или игровой маршрут. Последняя проверка очистки и её границы записаны в [указателе проверок](validation/README.md). Перечисление тестового класса означает наличие проверки, а не её успешный запуск при изменении этой страницы.
-
-Удалены проверки, привязанные к удалённым стендам и hub. Проверки ядра, игрового маршрута, профиля, графики и данных сохранены. `PressureScenario`, `NumericBalanceScenario`, `InkLoopScenario`, `ContentAcceptanceManifestAsset` и `ContentAcceptanceRunner` находятся в Editor-only сборке Validation; данные `Content/Acceptance` остаются для автоматической приёмки без отдельной сцены.
-
-## Ручная и нагрузочная проверка
-
-После изменений игрового потока пройдите меню → карта → подготовка → мастерская → бой → пауза → результат в основной сцене. После правок рисунка проверьте применение/отмену, сохранение страницы, повторное открытие и одинаковый вид копий в бою. Для прохода без личного профиля используйте `-paper-memory-only`; запись и отказы профиля проверяют автоматические тесты с временными данными.
-
-Детерминированные сценарии нагрузки доступны из редакторских инструментов и тестов, описанных в [Tools/README](../Tools/README.md). Они используют отдельные настройки для сравнения. Измерения времени кадра требуют Unity Profiler, реального рендера и фиксированных условий устройства; счётчик перестроек пути или тест без графики не является измерением FPS.
-
-Записывайте версию Unity, пресет, seed, конфигурацию, результат и пути к доказательствам в новый датированный отчёт. При изменении системы обновляйте её руководство из [общего указателя](README.md). Старые планы, отчёты стендов и матрицы прогонов удалены при очистке; их прежние результаты не подменяют новую проверку.
+Каждый отчёт должен называть версию Unity, конфигурацию, seed, выполненные команды, результаты и ограничения. [История проверок](validation/README.md) сохраняет даты; старый успех не подтверждает новую реализацию.

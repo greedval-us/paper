@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "message": "Retrieved 8 log entries.",
+  "data": [
+    "Assets\\PaperDefense\\Presentation\\UI\\AlbumPanel.cs(148,36): error CS1061: 'RunController' does not contain a definition for 'PreviewAlbumEntry' and no accessible extension method 'PreviewAlbumEntry' accepting a first argument of type 'RunController' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Presentation\\UI\\AlbumPanel.cs(182,32): error CS1061: 'RunController' does not contain a definition for 'PreviewAlbumEntry' and no accessible extension method 'PreviewAlbumEntry' accepting a first argument of type 'RunController' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.PreparationAssembly.cs(42,35): error CS1061: 'RunController' does not contain a definition for 'CanStartAlbumRun' and no accessible extension method 'CanStartAlbumRun' accepting a first argument of type 'RunController' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.PreparationAssembly.cs(52,32): error CS1061: 'PlayerGameRoot' does not contain a definition for 'ShowAlbum' and no accessible extension method 'ShowAlbum' accepting a first argument of type 'PlayerGameRoot' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.PreparationAssembly.cs(57,55): error CS1061: 'RunController' does not contain a definition for 'CanStartAlbumRun' and no accessible extension method 'CanStartAlbumRun' accepting a first argument of type 'RunController' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.PreparationAssembly.cs(78,57): error CS1061: 'RunController' does not contain a definition for 'PreviewAlbumEntry' and no accessible extension method 'PreviewAlbumEntry' accepting a first argument of type 'RunController' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.PreparationAssembly.cs(87,98): error CS0103: The name 'OpenAssemblyPicker' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Presentation\\Player\\PlayerShell.PreparationAssembly.cs(90,54): error CS1061: 'PlayerGameRoot' does not contain a definition for 'AssignAlbumEntry' and no accessible extension method 'AssignAlbumEntry' accepting a first argument of type 'PlayerGameRoot' could be found (are you missing a using directive or an assembly reference?)\n"
+  ]
+}

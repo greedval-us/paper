@@ -7,6 +7,11 @@ namespace PaperDefense.Application
     {
         readonly WorkshopProfile source;
         public int Gold=>source.Gold;
+        public int TotalXp => source.TotalXp;
+        public int Level => MetaProgression.LevelForXp(source.TotalXp);
+        public IReadOnlyList<AlbumEntry> Entries => source.Entries;
+        public IReadOnlyList<ComponentLibraryEntry> Library => source.Library;
+        public IReadOnlyList<AlbumEntry> LoadoutEntries => source.GetLoadoutEntries();
         public IReadOnlyList<TowerBlueprint> Album { get; private set; }
         public IReadOnlyList<PartUnlock> Parts { get; private set; }
         public IReadOnlyList<DrawingUnlockDefinition> DrawingUnlocks { get; private set; }
@@ -17,6 +22,10 @@ namespace PaperDefense.Application
         public bool HasUnsavedChanges { get; internal set; }
         public string LastWriteError { get; internal set; } = "";
         public bool IsUnlocked(string id)=>source.IsUnlocked(id);
+        public RunRewardReceipt FindRunReward(System.Guid runId) => source.FindRunReward(runId);
+        /// <summary>Composite previews consume the page's owned snapshot; legacy pages keep historical resolution.</summary>
+        public AssemblyResolution PreviewAssembly(AlbumEntry entry,GameBalance balance,MaterialTier material=MaterialTier.Pencil)
+            =>TowerCatalog.ResolveEntry(entry,balance,material);
         public bool IsDrawingUnlocked(string id)
         {foreach(var definition in DrawingUnlocks)if(definition.Id==id)return definition.InitiallyUnlocked||source.IsUnlocked(id);return false;}
         internal WorkshopReadModel(WorkshopProfile profile, GameBalance balance=null){source=profile;Refresh(balance);}

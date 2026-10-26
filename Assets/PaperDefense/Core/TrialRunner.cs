@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PaperDefense.Core
 {
@@ -35,6 +36,38 @@ namespace PaperDefense.Core
             return RunFixture(blueprint, balance.CreateSnapshot(), scenario, budget, seed, counterfire, color);
         }
 
+        /// <summary>Composite pages use their owned definitions and the same firing lane as historical towers.</summary>
+        public static TrialReport Run(AlbumEntry entry, GameBalance balance, TrialScenario scenario,
+            int budget = 400, int seed = 1337, bool counterfire = false, InkColor color = InkColor.None)
+        {
+            BalanceValidation.Validate(balance);
+            return RunEntryFixture(entry, balance.CreateSnapshot(), scenario, budget, seed, counterfire, color);
+        }
+
+        public static TrialComparison Compare(AlbumEntry first, AlbumEntry second, GameBalance balance,
+            TrialScenario scenario, int budget = 400, int seed = 1337, bool counterfire = false, InkColor color = InkColor.None)
+        {
+            BalanceValidation.Validate(balance);
+            var rules = balance.CreateSnapshot();
+            return new TrialComparison { First = RunEntryFixture(first, rules, scenario, budget, seed, counterfire, color),
+                Second = RunEntryFixture(second, rules, scenario, budget, seed, counterfire, color) };
+        }
+
+        internal static TrialReport RunAssemblyFixture(AlbumEntry entry, GameBalance balance, TrialScenario scenario,
+            int budget, int seed, TrialScenarioDefinition fixture, float spawnYVariation)
+            => RunEntryFixture(entry, balance, scenario, budget, seed, false, InkColor.None, fixture, spawnYVariation);
+
+        static TrialReport RunEntryFixture(AlbumEntry entry, GameBalance balance, TrialScenario scenario,
+            int budget, int seed, bool counterfire, InkColor color, TrialScenarioDefinition fixture = null, float? spawnYVariation = null)
+        {
+            if (entry == null) throw new ArgumentNullException(nameof(entry));
+            if (entry.Kind == AlbumEntryKind.Legacy)
+                return RunFixture(entry.LegacyBlueprint, balance, scenario, budget, seed, counterfire, color,
+                    fixtureOverride: fixture, spawnYVariationOverride: spawnYVariation);
+            if (entry.Kind != AlbumEntryKind.Tower) throw new ArgumentException("A firing lane requires a tower page.", nameof(entry));
+            return RunFixture(null, balance, scenario, budget, seed, counterfire, color, entry, fixture, spawnYVariation);
+        }
+
         // Historical overloads are explicitly the standard fixture, including its original tier effects.
         static GameBalance StandardFixtureBalance()
         {
@@ -44,9 +77,17 @@ namespace PaperDefense.Core
         }
 
         static TrialReport RunFixture(TowerBlueprint blueprint, GameBalance balance, TrialScenario scenario,
-            int budget, int seed, bool counterfire, InkColor color)
+            int budget, int seed, bool counterfire, InkColor color, AlbumEntry compositeEntry = null,
+            TrialScenarioDefinition fixtureOverride = null, float? spawnYVariationOverride = null)
         {
-            if (!TowerCatalog.Validate(blueprint, balance, out string reason)) throw new ArgumentException(reason, nameof(blueprint));
+            ResolvedEntry resolvedEntry = null;
+            if (compositeEntry != null)
+            {
+                var resolved = TowerCatalog.ResolveEntry(compositeEntry, balance);
+                if (!resolved.Valid) throw new ArgumentException(string.Join(",", resolved.Diagnostics.Select(issue => issue.Code + ":" + issue.Path)), nameof(compositeEntry));
+                resolvedEntry = resolved.Value;
+            }
+            else if (!TowerCatalog.Validate(blueprint, balance, out string reason)) throw new ArgumentException(reason, nameof(blueprint));
             if (!Enum.IsDefined(typeof(TrialScenario), scenario)) throw new ArgumentOutOfRangeException(nameof(scenario));
             if (!Enum.IsDefined(typeof(InkColor), color)) throw new ArgumentOutOfRangeException(nameof(color));
             if (budget < 0 || budget > TrialRules.MaximumBudget) throw new ArgumentOutOfRangeException(nameof(budget));
@@ -54,22 +95,25 @@ namespace PaperDefense.Core
             var effects = balance.Effects.ForEnemyDrawingTiers(mechanics.EnemyDrawingTiers);
             if (!mechanics.ColorCartridges) color = InkColor.None;
             var trial = balance.Trials;
-            if (balance.Content != null) blueprint = blueprint.WithContent(balance.Content);
-            int unitCost = Math.Max(1, TowerCatalog.Cost(blueprint, balance, MaterialTier.Pencil));
+            if (balance.Content != null && blueprint != null) blueprint = blueprint.WithContent(balance.Content);
+            int unitCost = Math.Max(1, resolvedEntry?.Cost ?? TowerCatalog.Cost(blueprint, balance, MaterialTier.Pencil));
             int copies = budget / unitCost;
             var towers = new List<StructureState>(copies);
             for (int i = 0; i < copies; i++)
             {
-                float health = TowerCatalog.Health(blueprint, balance, MaterialTier.Pencil);
+                float health = resolvedEntry?.Health ?? TowerCatalog.Health(blueprint, balance, MaterialTier.Pencil);
                 // Keep the small-budget battery near the lane and assign every extra copy a unique cell.
                 Cell cell = i < trial.CloseTowerCount ? new Cell(trial.CloseTowerX + i % trial.CloseTowerColumns * trial.CloseTowerSpacing, trial.CloseTowerY + i / trial.CloseTowerColumns * trial.CloseTowerSpacing) : new Cell(trial.OverflowTowerX + (i - trial.CloseTowerCount) % trial.OverflowTowerColumns, trial.OverflowTowerY + (i - trial.CloseTowerCount) / trial.OverflowTowerColumns);
-                towers.Add(new StructureState { Id = i + 1, Cell = cell,
-                    Kind = blueprint.FirstWeapon, Blueprint = blueprint, Color = color, IsComplete = true,
-                    Health = health, MaxHealth = health, Tier = MaterialTier.Pencil });
+                var tower = resolvedEntry == null ? new StructureState { Kind = blueprint.FirstWeapon, Blueprint = blueprint }
+                    : new StructureState(resolvedEntry);
+                tower.Id = i + 1; tower.Cell = cell; tower.Color = color; tower.IsComplete = true; tower.BuildRemaining = 0;
+                tower.Health = health; tower.MaxHealth = health; tower.Tier = MaterialTier.Pencil;
+                if (resolvedEntry != null) tower.Aim = new Point2(cell.X + 1.5f, cell.Y + .5f);
+                towers.Add(tower);
             }
-            var report = new TrialReport { BlueprintId = blueprint.Id, Scenario = scenario, Budget = budget,
+            var report = new TrialReport { BlueprintId = compositeEntry?.Id ?? blueprint.Id, Scenario = scenario, Budget = budget,
                 Seed = seed, Counterfire = counterfire, Color = color, Copies = copies, Cost = copies * unitCost,
-                DrawingQuality = blueprint.Origin == DrawingOrigin.LegacyStandard ? 100 : blueprint.Assessment.Quality };
+                DrawingQuality = compositeEntry != null || blueprint.Origin == DrawingOrigin.LegacyStandard ? 100 : blueprint.Assessment.Quality };
             report.Scope = UserText.Message("trial.scope.lane", trial.MaximumTicks * trial.StepSeconds,
                 trial.CounterfireDamage, trial.CounterfireInterval, trial.CounterfireRange);
             var random = new Random(seed);
@@ -88,7 +132,7 @@ namespace PaperDefense.Core
             var frameEvents = new List<SimulationEvent>();
             long eventCursor=0,frameDroppedEvents=0;
             frames.Add(new TrialFrame(0, enemies, towers, weapons.Projectiles, frameShots, blotContext?.Marks));
-            TrialScenarioDefinition fixture = trial.For(scenario);
+            TrialScenarioDefinition fixture = fixtureOverride ?? trial.For(scenario);
             int count = fixture.Count;
             float delta = trial.StepSeconds;
             float spawnClock = 0; int spawned = 0;
@@ -100,12 +144,12 @@ namespace PaperDefense.Core
                 while (spawned < count && spawnClock <= 0)
                 {
                     enemies.Add(new EnemyState { Id = ++spawned, Kind = fixture.EnemyKind, VisualScale=balance.Enemy(fixture.EnemyKind).VisualScale,
-                        Position = new Point2(trial.SpawnX, trial.SpawnY + (float)random.NextDouble() * trial.SpawnYVariation), Health = fixture.Health, MaxHealth = fixture.Health,
+                        Position = new Point2(trial.SpawnX, trial.SpawnY + (float)random.NextDouble() * (spawnYVariationOverride ?? trial.SpawnYVariation)), Health = fixture.Health, MaxHealth = fixture.Health,
                         DrawingTier = mechanics.EnemyDrawingTiers ? fixture.DrawingTier : DrawingTier.Sketch });
                     spawnClock += fixture.SpawnInterval;
                 }
                 foreach (StructureState tower in towers)
-                    if (!balance.Construction.DynamicFeed)
+                    if (tower.ResolvedEntry == null && !balance.Construction.DynamicFeed)
                     { for(int mount=0;mount<TowerBlueprint.MaximumWeaponMounts;mount++){var state=tower.GetMountState(mount);state.Cooldown=Math.Max(0,state.Cooldown-delta);} }
                 foreach (EnemyState enemy in enemies)
                 {

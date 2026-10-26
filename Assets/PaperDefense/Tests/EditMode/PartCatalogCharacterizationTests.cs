@@ -70,7 +70,7 @@ namespace PaperDefense.Tests
         public void SerializedEnumsKeepTheirOriginalNumericContracts()
         {
             AssertDense<MaterialTier>("Pencil", "Ink", "Marker");
-            AssertDense<StructureKind>("Wall", "Gun", "Piercer", "Mortar", "Spikes", "Fan", "Ricochet", "Stapler", "Blotter", "TarPit", "RepairPost");
+            AssertDense<StructureKind>("Wall", "Gun", "Piercer", "Mortar", "Spikes", "Fan", "Ricochet", "Stapler", "Blotter", "TarPit", "RepairPost", "Generator");
             AssertDense<EnemyKind>("Doodle", "Runner", "Gnawer", "Spitter", "Brute", "Bulwark");
             AssertDense<DrawingTier>("Sketch", "Outlined", "Hatched");
             AssertDense<InkColor>("None", "Red", "Blue", "Green");

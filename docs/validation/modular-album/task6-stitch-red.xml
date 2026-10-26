@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Failed(Child)" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 05:15:10Z" end-time="2026-10-18 05:15:10Z" duration="0,5896856">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1262" result="Failed" site="Child" start-time="2026-10-18 05:15:10Z" end-time="2026-10-18 05:15:10Z" duration="0.589686" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="2290" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="1092" result="Failed" site="Child" start-time="2026-10-18 05:15:10Z" end-time="2026-10-18 05:15:10Z" duration="0.491365" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="2291" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="1092" result="Failed" site="Child" start-time="2026-10-18 05:15:10Z" end-time="2026-10-18 05:15:10Z" duration="0.439616" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="2292" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="1092" result="Failed" site="Child" start-time="2026-10-18 05:15:10Z" end-time="2026-10-18 05:15:10Z" duration="0.340101" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1284" name="CompositeWeaponCombatTests" fullname="PaperDefense.Tests.CompositeWeaponCombatTests" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" testcasecount="35" result="Failed" site="Child" start-time="2026-10-18 05:15:10Z" end-time="2026-10-18 05:15:10Z" duration="0.243186" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1304" name="AModernGunFiresAtTheStepStartBeforeAnOlderLegacyShellImpacts" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.AModernGunFiresAtTheStepStartBeforeAnOlderLegacyShellImpacts" methodname="AModernGunFiresAtTheStepStartBeforeAnOlderLegacyShellImpacts" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="911678274" result="Failed" start-time="2026-10-18 05:15:10Z" end-time="2026-10-18 05:15:10Z" duration="0.126819" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 1
+  But was:  0
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.CompositeWeaponCombatTests.AModernGunFiresAtTheStepStartBeforeAnOlderLegacyShellImpacts () [0x00125] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CompositeWeaponCombatTests.cs:214
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1303" name="IsolatedCompositeMortarFinishesItsFlightAfterTheSourceIsRemoved" fullname="PaperDefense.Tests.CompositeWeaponCombatTests.IsolatedCompositeMortarFinishesItsFlightAfterTheSourceIsRemoved" methodname="IsolatedCompositeMortarFinishesItsFlightAfterTheSourceIsRemoved" classname="PaperDefense.Tests.CompositeWeaponCombatTests" runstate="Runnable" seed="1693314495" result="Failed" start-time="2026-10-18 05:15:10Z" end-time="2026-10-18 05:15:10Z" duration="0.006592" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 972
+  But was:  1000.0f
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.CompositeWeaponCombatTests.IsolatedCompositeMortarFinishesItsFlightAfterTheSourceIsRemoved () [0x00105] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CompositeWeaponCombatTests.cs:196
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task6-stitch-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

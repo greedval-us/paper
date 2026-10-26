@@ -23,7 +23,7 @@ namespace PaperDefense.Core
     }
 
     public enum MaterialTier { Pencil = 0, Ink = 1, Marker = 2 }
-    public enum StructureKind { Wall = 0, Gun = 1, Piercer = 2, Mortar = 3, Spikes = 4, Fan = 5, Ricochet = 6, Stapler = 7, Blotter = 8, TarPit = 9, RepairPost = 10 }
+    public enum StructureKind { Wall = 0, Gun = 1, Piercer = 2, Mortar = 3, Spikes = 4, Fan = 5, Ricochet = 6, Stapler = 7, Blotter = 8, TarPit = 9, RepairPost = 10, Generator = 11 }
     public enum EnemyKind { Doodle = 0, Runner = 1, Gnawer = 2, Spitter = 3, Brute = 4, Bulwark = 5 }
     public enum DrawingTier { Sketch = 0, Outlined = 1, Hatched = 2 }
     public enum InkColor { None = 0, Red = 1, Blue = 2, Green = 3 }
@@ -203,17 +203,60 @@ namespace PaperDefense.Core
         public Point2 Aim;
         public int TargetId;
         public float Cooldown,AcquisitionRemaining,ActionRemaining;
+        public WeaponCycleState Cycle { get; internal set; } = new WeaponCycleState();
     }
 
     public sealed class StructureState
     {
+        public ResolvedEntry ResolvedEntry { get; internal set; }
+        public StructureState() { }
+        public StructureState(ResolvedEntry entry)
+        {
+            ResolvedEntry = entry ?? throw new ArgumentNullException(nameof(entry));
+            Kind = EntryKind(entry);
+            Tier = entry.Material;
+            Health = MaxHealth = entry.Health;
+            BuildRemaining = entry.BuildSeconds;
+            ContentId = entry.Kind == AlbumEntryKind.Tower ? entry.Weapons[0].SourceId : entry.Snapshot.Recipe.Structure.Function.Id;
+            foreach (var weapon in entry.Weapons)
+                GetMountState(weapon.SlotIndex).Cycle = WeaponCycleRules.CreateState(weapon);
+        }
+        internal static StructureKind EntryKind(ResolvedEntry entry)
+        {
+            if (entry.Kind == AlbumEntryKind.Tower) return CombatKind(entry.Weapons[0].Family);
+            if (entry.Kind == AlbumEntryKind.Structure && entry.Support != null)
+                switch (entry.Support.Kind)
+                {
+                    case AssemblyStructureFamily.Wall: return StructureKind.Wall;
+                    case AssemblyStructureFamily.Slow: return StructureKind.TarPit;
+                    case AssemblyStructureFamily.Repair: return StructureKind.RepairPost;
+                    case AssemblyStructureFamily.Generator: return StructureKind.Generator;
+                }
+            throw new ArgumentException("A composite structure requires a modern tower or support entry.", nameof(entry));
+        }
+        internal static StructureKind CombatKind(AssemblyWeaponFamily family)
+        {
+            switch (family)
+            {
+                case AssemblyWeaponFamily.Gun: return StructureKind.Gun;
+                case AssemblyWeaponFamily.Piercer: return StructureKind.Piercer;
+                case AssemblyWeaponFamily.Mortar: return StructureKind.Mortar;
+                case AssemblyWeaponFamily.Fan: return StructureKind.Fan;
+                case AssemblyWeaponFamily.Ricochet: return StructureKind.Ricochet;
+                case AssemblyWeaponFamily.Stapler: return StructureKind.Stapler;
+                case AssemblyWeaponFamily.Blotter: return StructureKind.Blotter;
+                default: throw new ArgumentOutOfRangeException(nameof(family));
+            }
+        }
         public int Id;
         public Cell Cell;
         public StructureKind Kind;
         public string ContentId;
+        public string SourceAlbumEntryId { get; internal set; }
         internal ResolvedTowerAssembly Assembly;
         public MaterialTier Tier;
         public float Health, MaxHealth, BuildRemaining;
+        public int GeneratorPaidWaves { get; internal set; }
         public bool IsComplete, WaitingForClearance;
         public Point2 Aim;
         readonly WeaponMountState[] mounts={new WeaponMountState(),new WeaponMountState(),new WeaponMountState()};

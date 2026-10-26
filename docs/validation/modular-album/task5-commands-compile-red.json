@@ -1,0 +1,7 @@
+{
+  "success": true,
+  "message": "Retrieved 1 log entries.",
+  "data": [
+    "Assets\\PaperDefense\\Tests\\PlayMode\\AssemblyTransactionTests.cs(27,18): error CS0246: The type or namespace name 'AssemblyCommands' could not be found (are you missing a using directive or an assembly reference?)\n"
+  ]
+}

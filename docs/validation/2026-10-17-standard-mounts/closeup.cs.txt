@@ -1,0 +1,8 @@
+// After composition-sheet capture, remove only the temporary overlay and magnify the actual battle renderer.
+var game=PaperDefense.Editor.FullGameUiCapture.Game;
+var sheet=UnityEngine.GameObject.Find("Common mount diagnostic sheet");
+if(sheet!=null)UnityEngine.Object.DestroyImmediate(sheet);
+var cell=game.Run.Session.Structures[0].Cell;game.Drawing.Focus(cell);
+typeof(PaperDefense.Presentation.DrawingInput).GetProperty("Zoom").SetValue(game.Drawing,12f,null);
+PaperDefense.Editor.FullGameUiCapture.Enqueue("09-battery-battle-closeup",1600,900,()=>{});
+return new {diagnosticMagnification=12,cellX=cell.X,cellY=cell.Y};

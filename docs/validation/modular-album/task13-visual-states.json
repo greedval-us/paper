@@ -1,0 +1,221 @@
+{
+  "sizes": [
+    "1024x768",
+    "1280x720",
+    "1920x1080",
+    "1280x960",
+    "1600x900"
+  ],
+  "states": [
+    {
+      "id": 1,
+      "slug": "home",
+      "title": "Главное меню",
+      "source": "01-home.png",
+      "capture": "task13-01-home"
+    },
+    {
+      "id": 2,
+      "slug": "map",
+      "title": "Карта",
+      "source": "02-map.png",
+      "capture": "task13-02-map"
+    },
+    {
+      "id": 3,
+      "slug": "preparation",
+      "title": "Подготовка",
+      "source": "03-preparation.png",
+      "capture": "task13-03-preparation"
+    },
+    {
+      "id": 4,
+      "slug": "foundation",
+      "title": "Выбор основы",
+      "source": "04-foundation.png",
+      "capture": "task13-04-foundation"
+    },
+    {
+      "id": 5,
+      "slug": "weapons",
+      "title": "Выбор оружия",
+      "source": "05-weapons.png",
+      "capture": "task13-05-weapons"
+    },
+    {
+      "id": 6,
+      "slug": "drawing",
+      "title": "Сборка оружия",
+      "source": "06-drawing.png",
+      "capture": "task13-06-drawing"
+    },
+    {
+      "id": 7,
+      "slug": "details",
+      "title": "Сравнение деталей",
+      "source": "07-details.png",
+      "capture": "task13-07-details"
+    },
+    {
+      "id": 8,
+      "slug": "review",
+      "title": "Проверка сборки",
+      "source": "08-review.png",
+      "capture": "task13-08-review"
+    },
+    {
+      "id": 9,
+      "slug": "album",
+      "title": "Альбом",
+      "source": "09-album.png",
+      "capture": "task13-09-album"
+    },
+    {
+      "id": 10,
+      "slug": "trial",
+      "title": "Полигон",
+      "source": "10-trial.png",
+      "capture": "task13-10-trial"
+    },
+    {
+      "id": 11,
+      "slug": "stencils",
+      "title": "Открытия деталей",
+      "source": "11-stencils.png",
+      "capture": "task13-11-stencils"
+    },
+    {
+      "id": 12,
+      "slug": "mortar",
+      "title": "Мортира",
+      "source": "12-mortar.png",
+      "capture": "task13-12-mortar"
+    },
+    {
+      "id": 13,
+      "slug": "fan",
+      "title": "Веер",
+      "source": "13-fan.png",
+      "capture": "task13-13-fan"
+    },
+    {
+      "id": 14,
+      "slug": "armor",
+      "title": "Броня",
+      "source": "14-armor.png",
+      "capture": "task13-14-armor"
+    },
+    {
+      "id": 15,
+      "slug": "planning",
+      "title": "Планирование",
+      "source": "15-planning.png",
+      "capture": "task13-15-planning"
+    },
+    {
+      "id": 16,
+      "slug": "battle",
+      "title": "Бой",
+      "source": "16-battle.png",
+      "capture": "task13-16-battle"
+    },
+    {
+      "id": 17,
+      "slug": "tower",
+      "title": "Инспектор",
+      "source": "17-tower.png",
+      "capture": "task13-17-tower"
+    },
+    {
+      "id": 18,
+      "slug": "pause",
+      "title": "Пауза",
+      "source": "18-pause.png",
+      "capture": "task13-18-pause"
+    },
+    {
+      "id": 19,
+      "slug": "upgrades",
+      "title": "Усиления",
+      "source": "19-upgrades.png",
+      "capture": "task13-19-upgrades"
+    },
+    {
+      "id": 20,
+      "slug": "victory",
+      "title": "Победа",
+      "source": "20-victory.png",
+      "capture": "task13-20-victory"
+    },
+    {
+      "id": 21,
+      "slug": "defeat",
+      "title": "Поражение",
+      "source": "21-defeat.png",
+      "capture": "task13-21-defeat"
+    },
+    {
+      "id": 22,
+      "slug": "settings",
+      "title": "Настройки",
+      "source": "22-settings.png",
+      "capture": "task13-22-settings"
+    },
+    {
+      "id": 23,
+      "slug": "help",
+      "title": "Помощь",
+      "source": "23-help.png",
+      "capture": "task13-23-help"
+    },
+    {
+      "id": 24,
+      "slug": "empty",
+      "title": "Пустой альбом",
+      "source": "24-empty.png",
+      "capture": "task13-24-empty"
+    },
+    {
+      "id": 25,
+      "slug": "purchase",
+      "title": "Покупка",
+      "source": "25-purchase.png",
+      "capture": "task13-25-purchase"
+    },
+    {
+      "id": 26,
+      "slug": "save-error",
+      "title": "Ошибка записи",
+      "source": "26-save-error.png",
+      "capture": "task13-26-save-error"
+    },
+    {
+      "id": 27,
+      "slug": "invalid",
+      "title": "Несовместимость",
+      "source": "27-invalid.png",
+      "capture": "task13-27-invalid"
+    },
+    {
+      "id": 28,
+      "slug": "leave",
+      "title": "Выход из боя",
+      "source": "28-leave.png",
+      "capture": "task13-28-leave"
+    },
+    {
+      "id": 29,
+      "slug": "structure",
+      "title": "Сборка сооружения",
+      "source": "29-structure.png",
+      "capture": "task13-29-structure"
+    },
+    {
+      "id": 30,
+      "slug": "foundation-parts",
+      "title": "Сборка основы",
+      "source": "30-foundation-parts.png",
+      "capture": "task13-30-foundation-parts"
+    }
+  ]
+}

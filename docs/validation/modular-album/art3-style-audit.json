@@ -1,0 +1,350 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "scope": "Read-only visual comparison of three original design sheets and nine current source sheets. No PNG, Unity, product, dependency, or user project changes.",
+  "method": {
+    "images": "Every listed PNG physically opened with view_image; dimensions and SHA256 read from actual filesystem bytes.",
+    "alphaCaveat": "view_image visibly exposes some nonzero RGB hidden under alpha=0. Apparent external grey/blue background on StandardFoundation-v9 and AssemblyAccessories-v1 must not be treated as an alpha defect without composited verification.",
+    "sampledHiddenRGB": [
+      {
+        "source": "StandardFoundation-v9.png",
+        "topOriginPoint": [
+          768,
+          275
+        ],
+        "rgba": [
+          103,
+          97,
+          94,
+          0
+        ]
+      },
+      {
+        "source": "AssemblyAccessories-v1.png",
+        "topOriginPoint": [
+          600,
+          500
+        ],
+        "rgba": [
+          50,
+          50,
+          63,
+          0
+        ]
+      }
+    ]
+  },
+  "inputFiles": [
+    {
+      "path": "docs/design/album-assembly-2026-10-17/art/01-towers.png",
+      "width": 1672,
+      "height": 941,
+      "sha256": "C196824234FAEBEB4054827EA880CEF5862D57576E8F7F52825546498B79E649"
+    },
+    {
+      "path": "docs/design/album-assembly-2026-10-17/art/02-weapon-parts.png",
+      "width": 1672,
+      "height": 941,
+      "sha256": "C992257BB49D26A15B0601C742D137195104E16A1B8B92EDB1DB5D720D44064E"
+    },
+    {
+      "path": "docs/design/album-assembly-2026-10-17/art/03-structures.png",
+      "width": 1672,
+      "height": 941,
+      "sha256": "90F87C2008CF9C287077E5875D85FECC61345C0B98DAB68EA809F22977D1355F"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/GunPilotParts-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "12C243260EB902866BA490AE6A3C48ED4716EF3585FF4B60977736E483AF0AED"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "905556BDA0C6E85A50B2AF2C9DEE5748E5082C0B05799BE6DA6223634D5804D5"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "358DBC851A58636349729FB4009E738FFD110763DA38996092724F42D7381395"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v9.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "D351A1E24E81AD6200FFE54CC1A3EF7C58EAA83E5311BBAB9A92DEDEBAA0D05E"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/BatteryFoundation-v3.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "98F90FC29B16BA1EA908B9F7CE7C9C2AC9DC51D92593334B68A4A0418A546511"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "7FC319BA1372C7C4CE6E8095470CF917974DC61C6639D1E06053878981BE2D3D"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/RepairParts-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "36F1398A481980B99D3F8ED10543533D0BADE56E327312C0C54C70D8DE99C827"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "3D3B9ACEE34B660B9601C90CC8988D5353307E3C476D82518566B4C8D844E4ED"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "32CDAA7FB704D8D3FC33918A317E3F1047A0995E71282E422F58980A93E07648"
+    }
+  ],
+  "manifests": {
+    "revision": "modular-full-catalog-2026-10-22-v7",
+    "authoritative": "ArtSource/Notebook/NewStyle/sprites.source.json",
+    "layout": "ArtSource/Notebook/NewStyle/full-catalog-layout.json",
+    "note": "full-catalog-layout lists seven of the requested modern sheets. GunPilotParts and AssemblyAccessories are additionally active in sprites.source.json. This confirms the requested current nine. Other active legacy ModularSprites/PreparationTowers sources exist but were not physically audited in this scoped assignment.",
+    "activeSpriteCounts": {
+      "GunPilotParts-v1.png": 4,
+      "FullWeaponParts-v1.png": 15,
+      "FullVariantParts-v1.png": 14,
+      "StandardFoundation-v9.png": 1,
+      "BatteryFoundation-v3.png": 1,
+      "FullStructureParts-v1.png": 12,
+      "RepairParts-v1.png": 4,
+      "FullSupportAttachments-v1.png": 3,
+      "AssemblyAccessories-v1.png": 6
+    }
+  },
+  "referenceObservations": [
+    {
+      "source": "01-towers.png",
+      "observations": [
+        "Standard and double-gun towers use thick, chipped rectangular stone blocks, short strong blue hatching on side faces, ivory top faces and dark navy corner straps.",
+        "Battery is a coherent masonry island with three circular open seats, front gear badge and irregular broken lower edge; it is not a perfectly tiled board.",
+        "Metal bodies are warm ivory with blue shadow planes and scratch/hatch marks. Gold occurs in small fasteners, pivot centres and occasional emblem rather than full gleaming edges.",
+        "Three-quarter view shows tops plus short front/side faces, with consistent left/right receding diagonals; massive foundations remain distinctly thick enough to read as stone."
+      ]
+    },
+    {
+      "source": "02-weapon-parts.png",
+      "observations": [
+        "Central machine is an ink-and-fountain-pen contraption; cartridge has three blue ink cylinders and a drop mark, not pointed bullets.",
+        "Barrel ends in a fountain pen nib, fan has five nibs, sponge has irregular dark pores, and stapler has two readable parallel jaws.",
+        "Dark navy outlines are reinforced at overlaps; interior texture uses visibly directional uneven blue hatch strokes. Ivory paper-like material remains broad and readable.",
+        "Telescope/eye sensor glass has dark blue interiors with small highlights; star motifs recur on mechanisms."
+      ]
+    },
+    {
+      "source": "03-structures.png",
+      "observations": [
+        "Barricade mixes longitudinal woodgrain, ivory stone footings and blue riveted armor; the material breaks are distinct.",
+        "Slow field is a dark blue ink pool, perforated rim and diagonal pale grille, with masonry/metal base.",
+        "Workshop uses wooden posts, ivory peaked wrench roof, tools and small jointed crane; generator uses blue ink glass reservoir, round flywheel and pipe.",
+        "Exploded pieces maintain the same three-quarter camera and volume language as their assembled building."
+      ]
+    }
+  ],
+  "styleBrief": {
+    "direction": "Blue ballpoint notebook engineering illustrations, adapted as clean isolated game pieces. Original three design sheets are visual authority; FullWeapon/Structure/Repair are stronger current execution references than Standard-v9.",
+    "palette": {
+      "status": "Suggested art targets, not claimed sampled exact source values.",
+      "ink": "#10266B deep navy outlines and darkest cavities",
+      "hatch": "#244D9E muted cobalt directional strokes",
+      "ivory": "#F1E4C1 warm broad lit faces",
+      "stoneShadow": "#8A9BBB pale blue-grey subordinate to navy hatching",
+      "wood": "#C59B5C restrained honey/ochre with blue grain",
+      "brass": "#B78B3E muted tiny accents; retain occasional brighter pin centres only",
+      "avoid": "Electric cyan rims, saturated orange/gold beads covering every corner, pure white plastic highlights, smooth photorealistic metallic gradients."
+    },
+    "lineWeight": "At an approximately 300 px high isolated part, use roughly 2-4 px navy outer contours, 1-2 px inner construction edges and finer broken hatch strokes. These are proposed proportions, not measurements or resampling instructions. Preserve hand-drawn variation and reinforce overlaps.",
+    "density": "Light top faces with sparse scuffs, medium blue hatching on side faces and concentrated navy cavities. Do not evenly speckle every surface or turn stone into smooth cream plastic. Avoid uniformly dense tiny marks that collapse at game scale.",
+    "perspective": "Consistent shallow three-quarter orthographic-like view. Keep existing validated weapon-facing axes, seat centres, canvas dimensions, native sprite envelope and assembly anchors. Re-illustrate surfaces within safe silhouettes before proposing geometry changes; do not globally squash or stretch art to fake perspective.",
+    "shape": "Chunky manufactured, slightly irregular silhouettes; squared chipped stone blocks, distinct metal straps, clear circular seats, simple strong nib/stapler/sponge identities. Keep open mechanisms readable rather than ornamenting every edge.",
+    "materials": "Stone gets block seams, chips and short rough hatch clusters. Metal gets planar ivory highlights and directional blue hatch, not gold mirror beads. Wood gets long grain. Glass/ink may use restrained blue highlights because that material is explicitly in the sketch. Brass stays secondary.",
+    "production": "True alpha outside the physical object; no labels, arrows, graph paper or scene shadows baked into game parts. Inspect actual alpha/composite, not hidden RGB. Compare selected cells at equivalent on-screen size and ensure part joins still align.",
+    "familyMotifs": "Stars on weapon machinery and crowns on armor/feed remain consistent existing motifs. Drop/ink-cylinder language should replace exposed pointed ammunition where the original reference establishes ink machinery."
+  },
+  "sheetVerdicts": [
+    {
+      "source": "GunPilotParts-v1.png",
+      "verdict": "KEEP_STYLE",
+      "priority": "P3",
+      "observations": [
+        "Large cream metal faces are shaded with long dark blue diagonal hatch strokes. Collar rim, open cup and barrel bundle share navy edges, restrained pale rivets and ivory highlights.",
+        "The four-barrel bundle has dark hollow circular mouths, repeating metal hoops and the same shallow three-quarter direction as reference guns."
+      ],
+      "actions": [
+        "Retain linework, palette and material rendering as one current style anchor.",
+        "Separate assembly issue: upper-right part mapped as part.gun.cradle-back visibly includes an entire raised open mortar tube. Confirm that silhouette is intended behind gatling barrels before using it as an empty cradle; this is not a style-based rejection."
+      ]
+    },
+    {
+      "source": "FullWeaponParts-v1.png",
+      "verdict": "KEEP",
+      "priority": "P3",
+      "observations": [
+        "Cube gear mechanism, fountain nibs, five-nib fan, star disc, stapler jaws and sponge pores visibly preserve reference identities.",
+        "Dense blue crosshatching on cream metal, navy cavities and small gold pins repeat across the 4x4 sheet. Some pins are more lustrous than sketch pins, but broad material remains hand drawn."
+      ],
+      "actions": [
+        "Use as main current palette/linework anchor.",
+        "Optional later refinement: reduce rounded bright gold fasteners uniformly without erasing distinctive motifs."
+      ]
+    },
+    {
+      "source": "FullVariantParts-v1.png",
+      "verdict": "KEEP_WITH_TARGETED_REFINEMENT",
+      "priority": "P3",
+      "observations": [
+        "Heavy block foundation in top-left retains cracked stone side blocks and blue corner plates; round precision ring shares cream and blue hatch.",
+        "Shield/crown, reinforced wall blocks, gear turntable and blue glass sight/sensor fit the notebook machinery family.",
+        "Belts/feed show repeated small gold cylindrical capsules, appreciably warmer than original blue ink cartridges, though unlike Accessories these are not conspicuously pointed bullets."
+      ],
+      "actions": [
+        "Retain geometry and most art.",
+        "When ink feed family is redrawn, normalize feed boost and belt capsules to blue/ivory ink cartridge forms and reduce bright gold coverage.",
+        "Keep heavy and precision bases as material reference for Standard/Battery redrawing."
+      ]
+    },
+    {
+      "source": "StandardFoundation-v9.png",
+      "verdict": "REDRAW",
+      "priority": "P1",
+      "affectedIds": [
+        "part.full.frame.standard"
+      ],
+      "observations": [
+        "One very broad shallow diamond platform has a roof made of large nearly uniform pale slabs with pockmark highlights and very little directional hatch.",
+        "Corner metal has highly saturated electric blue rims; large studs are orange/yellow spherical beads with sharp white highlights. This reads smoother, shinier and more cartoon-rendered than original ballpoint masonry.",
+        "Original double-gun base has chipped individual stone blocks and dark rough hatched side faces; current roof dominates as a clean tiled board. Current flattened disks and wafer-like wall height further differ from the heavier block impression in the sketch.",
+        "Grey/blue exterior seen in view_image was sampled at alpha=0, so external glow is NOT a confirmed sprite defect."
+      ],
+      "actions": [
+        "First replacement: re-illustrate within current validated canvas/envelope and seat coordinates, retaining two existing seats and safe assembly clearances.",
+        "Use irregular ivory stone block seams, chipped edge marks, short navy/blue hatch shadow clusters, muted blue metal straps and small dull brass fasteners.",
+        "Do not increase wall height or shift sockets solely to imitate sketch bulk; preserve assembly constraints while expressing stone through surface drawing."
+      ]
+    },
+    {
+      "source": "BatteryFoundation-v3.png",
+      "verdict": "REDRAW_OR_HARMONIZE_AFTER_STANDARD",
+      "priority": "P2",
+      "affectedIds": [
+        "part.full.frame.battery"
+      ],
+      "observations": [
+        "Four compact duplicate three-seat bases sit on the sheet; only one is imported.",
+        "Seats and broad roof are mostly quiet cream with very fine sparse grey/blue scribbling, thin navy lines and modest amber pins.",
+        "Connected lobed outline and thin wall band are much smoother and flatter than rough block battery in original 01-towers; contrast is weaker than current FullWeapon/Structure parts."
+      ],
+      "actions": [
+        "After standard replacement, match its stone texture, outline strength and side-face blue shadow density.",
+        "Keep three current seats and native usable cell dimensions; avoid filling cavities with extra upright cups or machinery.",
+        "Use subtle chipped masonry under the same low silhouette rather than rebuilding its functional footprint."
+      ]
+    },
+    {
+      "source": "FullStructureParts-v1.png",
+      "verdict": "KEEP",
+      "priority": "P3",
+      "observations": [
+        "Stone site bases have individual chipped blocks and navy corner brackets; separate barricade has honey wood grain under blue metal bands.",
+        "Slow pool is clearly blue ink, grille has pale diagonal bars on navy, rim has circular perforations.",
+        "Roof's blue wrench, toolbox, glass ink cylinder, pump and flywheel reproduce the material and role language in 03-structures."
+      ],
+      "actions": [
+        "Keep imported 12 definitions.",
+        "Do not reactivate the old repair body/roof cells rejected for crop overlap; RepairParts-v1 is current active replacement.",
+        "Optional later: soften oversized bright gold fasteners only as part of a family-wide refinement."
+      ]
+    },
+    {
+      "source": "RepairParts-v1.png",
+      "verdict": "KEEP",
+      "priority": "P3",
+      "observations": [
+        "Foundation has chipped cream masonry and navy brackets. Roofless workshop has warm grain, dark blue interior, visible wrench tools and workbench.",
+        "Separate ivory planked roof carries large dark blue wrench. Crane uses blue hatch planes, ivory metal and small gold pivots.",
+        "Perspective and heavy hand-ink material family align with original workshop; source cells use larger scale than 4x4 sheets, which is not itself a style problem."
+      ],
+      "actions": [
+        "Keep the four imported pieces; use workshop as building material reference.",
+        "Verify linework at actual assembled render size before reducing detail."
+      ]
+    },
+    {
+      "source": "FullSupportAttachments-v1.png",
+      "verdict": "KEEP",
+      "priority": "P3",
+      "observations": [
+        "Light shell shows open braces and longitudinal wood grain; heavy shell uses solid curved cream panels, thick blue shadow bands and riveted vertical braces.",
+        "Articulated crane and pump/gauge use directional hatching, navy outlines and blue ink glass.",
+        "Gold occupies pivots, pipe rings and fasteners; more pronounced than sketch but still subordinate to blue/ivory shapes."
+      ],
+      "actions": [
+        "Keep three active imported definitions.",
+        "Optional later: muted brass treatment for large pipe bands, consistent with generator; do not flatten necessary glass reflections."
+      ]
+    },
+    {
+      "source": "AssemblyAccessories-v1.png",
+      "verdict": "TARGETED_REDRAW",
+      "priority": "P1",
+      "affectedIds": [
+        "part.pilot.magazine",
+        "part.pilot.feed"
+      ],
+      "observations": [
+        "Mount, trigger, bearing and armor have a more restrained cream/navy finely hatched finish that is broadly compatible.",
+        "Top-centre magazine explicitly contains three pointed brass bullets; bottom-left feed belt explicitly shows multiple pointed brass bullets. This changes the original ink-cylinder/drop system into firearm ammunition.",
+        "Broad grey/blue surroundings visible in view_image include sampled alpha=0 RGB and are not a confirmed transparency defect."
+      ],
+      "actions": [
+        "Redraw magazine/feed using blue ink capsules/cylinders, dark ink reservoir cues and optional drop motif, retaining mechanical connectors and existing dimensions.",
+        "Retain sight/mount, trigger, bearing and armor unless assembled comparison reveals scale/lineweight mismatch.",
+        "Do not delete other sheet cells just to replace the two divergent pieces."
+      ]
+    }
+  ],
+  "recommendedReplacementList": [
+    {
+      "order": 1,
+      "priority": "P1",
+      "source": "StandardFoundation-v9.png",
+      "ids": [
+        "part.full.frame.standard"
+      ],
+      "reason": "Strongest actual rendering/material mismatch: glossy cyan/gold corner hardware and smooth large roof tiles versus chipped blue-hatched stone."
+    },
+    {
+      "order": 2,
+      "priority": "P1",
+      "source": "AssemblyAccessories-v1.png",
+      "ids": [
+        "part.pilot.magazine",
+        "part.pilot.feed"
+      ],
+      "reason": "Pointed bullet imagery contradicts original blue ink-cylinder/drop language despite compatible linework."
+    },
+    {
+      "order": 3,
+      "priority": "P2",
+      "source": "BatteryFoundation-v3.png",
+      "ids": [
+        "part.full.frame.battery"
+      ],
+      "reason": "Quieter fine light texture and smoother lobed platform need contrast/stone harmonization with weapons and improved standard."
+    }
+  ],
+  "limits": "No assembled runtime screenshots or Unity state inspected in this assignment; source art approval does not establish mechanical validity. Do not delete legacy sources until all referenced sprite IDs are migrated and active manifests checked. This audit does not authorize or perform edits to protected dependency or New Unity Project paths."
+}

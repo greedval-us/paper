@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="45" result="Failed(Child)" total="45" passed="25" failed="20" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 04:07:52Z" end-time="2026-10-18 04:07:53Z" duration="1,0690836">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1096" result="Failed" site="Child" start-time="2026-10-18 04:07:52Z" end-time="2026-10-18 04:07:53Z" duration="1.069084" total="45" passed="25" failed="20" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="2093" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="926" result="Failed" site="Child" start-time="2026-10-18 04:07:52Z" end-time="2026-10-18 04:07:53Z" duration="0.945177" total="45" passed="25" failed="20" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="2094" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="926" result="Failed" site="Child" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.876319" total="45" passed="25" failed="20" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="2095" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="926" result="Failed" site="Child" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.776262" total="45" passed="25" failed="20" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1058" name="AssemblyProfileDataTests" fullname="PaperDefense.Tests.AssemblyProfileDataTests" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="45" result="Failed" site="Child" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.680360" total="45" passed="25" failed="20" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="1074" name="ComponentLibrary_RoundTripsExactlyOneFivePartRecipe" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ComponentLibrary_RoundTripsExactlyOneFivePartRecipe" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.229916" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1072" name="ComponentLibrary_RoundTripsExactlyOneFivePartRecipe(True)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ComponentLibrary_RoundTripsExactlyOneFivePartRecipe(True)" methodname="ComponentLibrary_RoundTripsExactlyOneFivePartRecipe" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="369474202" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.119786" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1073" name="ComponentLibrary_RoundTripsExactlyOneFivePartRecipe(False)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ComponentLibrary_RoundTripsExactlyOneFivePartRecipe(False)" methodname="ComponentLibrary_RoundTripsExactlyOneFivePartRecipe" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1993582721" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.004545" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1075" name="ComponentSnapshot_OwnsCopiedDefinitionsAndDtoOwnsMutableInputs" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ComponentSnapshot_OwnsCopiedDefinitionsAndDtoOwnsMutableInputs" methodname="ComponentSnapshot_OwnsCopiedDefinitionsAndDtoOwnsMutableInputs" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="678240078" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.006775" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1076" name="ComponentSnapshot_RejectsWrongCategoryAndMissingDependency" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ComponentSnapshot_RejectsWrongCategoryAndMissingDependency" methodname="ComponentSnapshot_RejectsWrongCategoryAndMissingDependency" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1281614346" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.009248" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1065" name="EmbeddedRevisionTwo_IsSelfContainedAndDoesNotNeedCurrentCatalog" fullname="PaperDefense.Tests.AssemblyProfileDataTests.EmbeddedRevisionTwo_IsSelfContainedAndDoesNotNeedCurrentCatalog" methodname="EmbeddedRevisionTwo_IsSelfContainedAndDoesNotNeedCurrentCatalog" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="791060434" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.021244" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1064" name="EntryKindMustMatchItsSnapshotKind" fullname="PaperDefense.Tests.AssemblyProfileDataTests.EntryKindMustMatchItsSnapshotKind" methodname="EntryKindMustMatchItsSnapshotKind" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="949638772" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.005561" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1071" name="FutureDtoVersion_ProtectsSource" fullname="PaperDefense.Tests.AssemblyProfileDataTests.FutureDtoVersion_ProtectsSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.023880" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1067" name="FutureDtoVersion_ProtectsSource(&quot;entry&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.FutureDtoVersion_ProtectsSource(&quot;entry&quot;)" methodname="FutureDtoVersion_ProtectsSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1371922831" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.007696" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1068" name="FutureDtoVersion_ProtectsSource(&quot;snapshot&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.FutureDtoVersion_ProtectsSource(&quot;snapshot&quot;)" methodname="FutureDtoVersion_ProtectsSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1519648370" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.007407" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1069" name="FutureDtoVersion_ProtectsSource(&quot;library&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.FutureDtoVersion_ProtectsSource(&quot;library&quot;)" methodname="FutureDtoVersion_ProtectsSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="220599390" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.003489" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1070" name="FutureDtoVersion_ProtectsSource(&quot;component&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.FutureDtoVersion_ProtectsSource(&quot;component&quot;)" methodname="FutureDtoVersion_ProtectsSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="458773808" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.003845" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1097" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="15" result="Failed" site="Child" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.142328" total="15" passed="0" failed="15" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1082" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;content&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;content&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="340249773" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.007446" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid assembly entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass19_0.<InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x003f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1083" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;evaluation&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;evaluation&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="490636786" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.004068" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid assembly entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass19_0.<InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x003f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1084" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;drawing&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;drawing&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="235390437" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.004036" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid assembly entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass19_0.<InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x003f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1085" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;footprint&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;footprint&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="178995337" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.003668" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid assembly entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass19_0.<InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x003f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1086" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;mounts&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;mounts&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="244198021" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.003860" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid assembly entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass19_0.<InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x003f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1087" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;reinforcement&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;reinforcement&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="271445074" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.003937" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid assembly entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass19_0.<InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x003f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1088" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;freeform&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;freeform&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1245194502" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.003786" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid assembly entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass19_0.<InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x003f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1089" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;origin&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;origin&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1181245545" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.003917" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid assembly entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass19_0.<InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x003f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1090" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;drawingFormat&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;drawingFormat&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1177713555" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.004267" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid assembly entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass19_0.<InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x003f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1091" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;drawingBinding&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;drawingBinding&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="842195389" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.004592" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid assembly entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass19_0.<InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x003f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1092" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;contour&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;contour&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="813652021" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.004545" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid assembly entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass19_0.<InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x003f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1093" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;volley&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;volley&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1408938042" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.005374" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid assembly entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass19_0.<InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x003f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1094" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;chassisEnum&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;chassisEnum&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="328469249" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.003787" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid assembly entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass19_0.<InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x003f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1095" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;weaponEnum&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;weaponEnum&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="67656728" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.003679" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid assembly entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass19_0.<InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x003f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1096" name="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;moduleEnum&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;moduleEnum&quot;)" methodname="InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1888319834" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.003590" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid assembly entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass19_0.<InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveLegacyFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x003f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:235
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1103" name="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.062854" total="5" passed="0" failed="5" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1098" name="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;kind&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;kind&quot;)" methodname="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="2118996060" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.016734" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x0017e] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:254
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1099" name="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;category&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;category&quot;)" methodname="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="950669149" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.004432" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid legacy entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass20_0.<InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:254
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x0017e] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:254
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1100" name="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;modifier&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;modifier&quot;)" methodname="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="333828029" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.004421" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid legacy entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass20_0.<InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:254
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x0017e] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:254
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1101" name="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;operation&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;operation&quot;)" methodname="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="360573517" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.004023" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid legacy entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass20_0.<InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:254
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x0017e] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:254
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1102" name="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;structureFamily&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation(&quot;structureFamily&quot;)" methodname="InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="582564701" result="Failed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.000554" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <System.NotSupportedException>
+  But was:  <System.ArgumentException: Invalid legacy entry payload.
+  at PaperDefense.Core.AlbumEntryData.CreateSnapshot () [0x00190] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\AssemblyProfileData.cs:145
+  at PaperDefense.Tests.AssemblyProfileDataTests+<>c__DisplayClass20_0.<InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:254
+  at NUnit.Framework.Assert.Throws (NUnit.Framework.Constraints.IResolveConstraint expression, NUnit.Framework.TestDelegate code, System.String message, System.Object[] args) [0x00043] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileDataTests.InactiveSnapshotFutureMetadata_ProtectsSourceBeforeUnionValidation (System.String field) [0x0017e] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileDataTests.cs:254
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="1062" name="JsonInlineEmptyOppositeVariants_AreAcceptedByTheirTags" fullname="PaperDefense.Tests.AssemblyProfileDataTests.JsonInlineEmptyOppositeVariants_AreAcceptedByTheirTags" methodname="JsonInlineEmptyOppositeVariants_AreAcceptedByTheirTags" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1137766379" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.005598" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1107" name="LegacyEntry_PreservesHistoricalFreeformRuleVersionAndGeometry" fullname="PaperDefense.Tests.AssemblyProfileDataTests.LegacyEntry_PreservesHistoricalFreeformRuleVersionAndGeometry" methodname="LegacyEntry_PreservesHistoricalFreeformRuleVersionAndGeometry" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1065444847" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.009296" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1104" name="LegacyEntry_RejectsPopulatedLibraryReferences" fullname="PaperDefense.Tests.AssemblyProfileDataTests.LegacyEntry_RejectsPopulatedLibraryReferences" methodname="LegacyEntry_RejectsPopulatedLibraryReferences" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="384152674" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.000617" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1061" name="LegacyEntry_RoundTripsHistoricalBlueprintWithoutConversion" fullname="PaperDefense.Tests.AssemblyProfileDataTests.LegacyEntry_RoundTripsHistoricalBlueprintWithoutConversion" methodname="LegacyEntry_RoundTripsHistoricalBlueprintWithoutConversion" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1695882504" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.000914" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1106" name="LibraryComponent_RejectsPopulatedOppositeVariant" fullname="PaperDefense.Tests.AssemblyProfileDataTests.LibraryComponent_RejectsPopulatedOppositeVariant" methodname="LibraryComponent_RejectsPopulatedOppositeVariant" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="75676877" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.004482" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1077" name="LibraryReferenceMetadata_DoesNotReplaceOwnedSnapshot" fullname="PaperDefense.Tests.AssemblyProfileDataTests.LibraryReferenceMetadata_DoesNotReplaceOwnedSnapshot" methodname="LibraryReferenceMetadata_DoesNotReplaceOwnedSnapshot" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="503439213" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.005191" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1066" name="MissingEmbeddedReferencedRevision_ProtectsSource" fullname="PaperDefense.Tests.AssemblyProfileDataTests.MissingEmbeddedReferencedRevision_ProtectsSource" methodname="MissingEmbeddedReferencedRevision_ProtectsSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="33220547" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.003837" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1105" name="MissingNestedDtoMetadata_IsMalformed" fullname="PaperDefense.Tests.AssemblyProfileDataTests.MissingNestedDtoMetadata_IsMalformed" methodname="MissingNestedDtoMetadata_IsMalformed" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1449112764" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.003757" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1081" name="NonemptyInactiveLegacyPayload_IsRejected" fullname="PaperDefense.Tests.AssemblyProfileDataTests.NonemptyInactiveLegacyPayload_IsRejected" methodname="NonemptyInactiveLegacyPayload_IsRejected" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1704518059" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.004786" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1063" name="PopulatedOppositeRecipeVariant_IsRejected" fullname="PaperDefense.Tests.AssemblyProfileDataTests.PopulatedOppositeRecipeVariant_IsRejected" methodname="PopulatedOppositeRecipeVariant_IsRejected" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1285831552" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.004140" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1108" name="ReceiptDtos_RoundTripGuidStringsAndProgress" fullname="PaperDefense.Tests.AssemblyProfileDataTests.ReceiptDtos_RoundTripGuidStringsAndProgress" methodname="ReceiptDtos_RoundTripGuidStringsAndProgress" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1707260516" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.000493" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1060" name="StructureEntry_RoundTripsWithoutTowerVariantPayload" fullname="PaperDefense.Tests.AssemblyProfileDataTests.StructureEntry_RoundTripsWithoutTowerVariantPayload" methodname="StructureEntry_RoundTripsWithoutTowerVariantPayload" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="569375529" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.004948" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1059" name="TowerEntry_RoundTripsOwnedRecipeAndDefinitions" fullname="PaperDefense.Tests.AssemblyProfileDataTests.TowerEntry_RoundTripsOwnedRecipeAndDefinitions" methodname="TowerEntry_RoundTripsOwnedRecipeAndDefinitions" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="2075342754" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.004935" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1080" name="UnknownEmbeddedEnums_ProtectSource" fullname="PaperDefense.Tests.AssemblyProfileDataTests.UnknownEmbeddedEnums_ProtectSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.023285" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1078" name="UnknownEmbeddedEnums_ProtectSource(&quot;category&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.UnknownEmbeddedEnums_ProtectSource(&quot;category&quot;)" methodname="UnknownEmbeddedEnums_ProtectSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="1424240383" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.004131" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1079" name="UnknownEmbeddedEnums_ProtectSource(&quot;modifier&quot;)" fullname="PaperDefense.Tests.AssemblyProfileDataTests.UnknownEmbeddedEnums_ProtectSource(&quot;modifier&quot;)" methodname="UnknownEmbeddedEnums_ProtectSource" classname="PaperDefense.Tests.AssemblyProfileDataTests" runstate="Runnable" seed="567387441" result="Passed" start-time="2026-10-18 04:07:53Z" end-time="2026-10-18 04:07:53Z" duration="0.003622" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task4-schema-red.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

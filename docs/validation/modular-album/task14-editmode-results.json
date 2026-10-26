@@ -1,0 +1,38 @@
+{
+  "job_id": "5c5c33fe01c94b59b9347cd764e790a9",
+  "status": "succeeded",
+  "mode": "EditMode",
+  "started_unix_ms": 1792958237251,
+  "finished_unix_ms": 1792958613512,
+  "last_update_unix_ms": 1792958613512,
+  "progress": {
+    "completed": 1598,
+    "total": 1598,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": null,
+    "last_finished_test_full_name": "PaperDefense.Tests.TowerDefenseBalanceTests.UnlockedSpecialistDefensesCanFinishWithinEarnedInk(41,DeepInk,\"ricochet\")",
+    "last_finished_unix_ms": 1792958613303,
+    "stuck_suspected": false,
+    "editor_is_focused": false,
+    "run_in_background": true,
+    "focus_nudge_attempts": null,
+    "focus_nudge_limit": null,
+    "focus_nudge_status": null,
+    "blocked_reason": null,
+    "failures_so_far": [],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "EditMode",
+    "summary": {
+      "total": 1598,
+      "passed": 1598,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 371.6793643,
+      "resultState": "Passed"
+    },
+    "results": []
+  }
+}

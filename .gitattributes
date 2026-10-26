@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Preserve the exact bytes used by Art3 capture and review hashes.
+docs/validation/modular-album/art3-* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/validation/modular-album/art3-*/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

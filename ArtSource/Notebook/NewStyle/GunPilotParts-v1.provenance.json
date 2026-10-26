@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "asset": "ArtSource/Notebook/NewStyle/GunPilotParts-v1.png",
+  "createdOn": "2026-10-17",
+  "purpose": "Four transparent gun fragments for the standard-foundation split-mount pilot: fixed support, rotating cradle, recoiling barrels, and rotating front collar.",
+  "sourceImage": {
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG",
+    "bitDepth": 8,
+    "colorType": 6,
+    "channels": "RGBA",
+    "sha256": "12c243260eb902866ba490ae6a3c48ed4716ef3585ff4b60977736e483af0aed",
+    "copiedWithoutPixelChanges": true
+  },
+  "generation": {
+    "tool": "image_gen.imagegen",
+    "mode": "reference-image edit",
+    "transparentBackground": true,
+    "originalOutput": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1471f-94aa-7db2-87de-378f14207955\\exec-6f401ec6-bd00-40b5-b5f9-deb469198489.png",
+    "referencedImage": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1471f-94aa-7db2-87de-378f14207955\\exec-b65e801f-f0c0-4b15-a2cb-388578668543.png",
+    "referencedImageSha256": "78858a5f762de5a9ffcbb0c67d1b31eb48ade2b36b9989889b3fce8a3f4a6e56",
+    "prompt": "Precise sprite-sheet editing: preserve these exact four detailed blue-pen/ivory gun components, their shapes and genuine transparent background. REARRANGE ONLY into a SQUARE 2 by 2 grid with wide transparent gutters, so that each component's complete rectangular bounding box is fully inside its own quadrant and cannot include pixels of a neighboring component. Upper-left: fixed round pedestal. Upper-right: fork cradle and receiver sleeve. Lower-left: thin four-tube barrel bundle with the extended hidden rear shaft. Lower-right: U-shaped front retaining collar with transparent opening. Do not merge, overlap, duplicate or delete any part; no assembled gun, no foundation, no labels, no background, no drawn grid lines. Retain all bolts, hatching, sleeve interiors and alpha. Leave generous padding at the canvas edge and 100px completely transparent space crossing the middle of the square in both directions. This sheet will be sliced into FOUR rectangular sprites. Keep machinegun tubes slender.",
+    "earlierCandidates": [
+      {
+        "output": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1471f-94aa-7db2-87de-378f14207955\\exec-a929af98-49a1-407a-85ad-f77cf77fcfbb.png",
+        "sha256": "392d552b36cf1edd3e38722e7e6a5dfc0556288fde8dcb984a66baca0ec64965",
+        "status": "Rejected; front collar needed an open retaining shape and barrels needed a thinner silhouette."
+      },
+      {
+        "output": "C:\\Users\\Greedval\\.codex\\generated_images\\01a1471f-94aa-7db2-87de-378f14207955\\exec-b65e801f-f0c0-4b15-a2cb-388578668543.png",
+        "sha256": "78858a5f762de5a9ffcbb0c67d1b31eb48ade2b36b9989889b3fce8a3f4a6e56",
+        "status": "Superseded as an import sheet; used as the reference for the final separated 2 by 2 arrangement."
+      }
+    ],
+    "reproducibilityNote": "The generation paths record provenance only. Unity imports the checked-in asset path above and does not require files from the generation cache."
+  },
+  "designReferencesInspected": [
+    {
+      "path": "ArtSource/Notebook/NewStyle/ModularSprites.png",
+      "sha256": "5b178e5327ee19c839ea47054c13b6d84e71f90d7e056a02b74ed25333a5f060",
+      "width": 1619,
+      "height": 972
+    },
+    {
+      "path": "ArtSource/Notebook/References/2026-10-17/sheets/A4-weapon-components.png",
+      "sha256": "a993a4f1ec47950f631851282b0b03a5cd389a3cd7c96406e65622045d22ef1b",
+      "width": 1672,
+      "height": 941
+    }
+  ],
+  "integration": {
+    "spriteSource": "ArtSource/Notebook/NewStyle/sprites.source.json",
+    "cropCoordinateSystem": "Integer source-image pixels; origin at the bottom-left, matching the Unity texture crop input.",
+    "rectanglesAuthoredManually": true,
+    "crops": [
+      { "id": "part.gun.support", "x": 68, "y": 654, "width": 492, "height": 278 },
+      { "id": "part.gun.cradle-back", "x": 746, "y": 628, "width": 427, "height": 542 },
+      { "id": "part.gun.barrels", "x": 76, "y": 24, "width": 522, "height": 554 },
+      { "id": "part.gun.collar-front", "x": 762, "y": 77, "width": 413, "height": 242 }
+    ],
+    "registrationSource": "Assets/PaperDefense/Resources/Art/NotebookMounts.json",
+    "registrationNote": "Fragment attachment points, offsets, scales, rotation pivots and muzzle points are authored explicitly in NotebookMounts.json. Alpha bounds were inspected to help choose padded crop rectangles; alpha trim analysis does not author mechanical anchors or infer attachment points.",
+    "importNote": "NotebookSpriteImportTools.Rebuild packs the four source rectangles into the existing notebook atlas. Packing is asset integration, not a pixel-editing step."
+  }
+}

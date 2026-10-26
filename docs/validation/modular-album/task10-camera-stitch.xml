@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="62" result="Passed" total="62" passed="62" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 22:02:51Z" end-time="2026-10-18 22:03:04Z" duration="13,7856767">
+  <test-suite type="TestSuite" id="1919" name="paper" fullname="paper" runstate="Runnable" testcasecount="742" result="Passed" start-time="2026-10-18 22:02:51Z" end-time="2026-10-18 22:03:04Z" duration="13.785677" total="62" passed="62" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1911" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="742" result="Passed" start-time="2026-10-18 22:02:51Z" end-time="2026-10-18 22:03:04Z" duration="13.780465" total="62" passed="62" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39156" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1912" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="742" result="Passed" start-time="2026-10-18 22:02:51Z" end-time="2026-10-18 22:03:04Z" duration="13.776170" total="62" passed="62" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1913" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="742" result="Passed" start-time="2026-10-18 22:02:51Z" end-time="2026-10-18 22:03:04Z" duration="13.771741" total="62" passed="62" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="AlbumNavigationTests" fullname="PaperDefense.Tests.AlbumNavigationTests" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-10-18 22:02:51Z" end-time="2026-10-18 22:02:54Z" duration="3.699283" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1003" name="ClearingASlotWithTheKeyboardFocusesItsReplacementControl" fullname="PaperDefense.Tests.AlbumNavigationTests.ClearingASlotWithTheKeyboardFocusesItsReplacementControl" methodname="ClearingASlotWithTheKeyboardFocusesItsReplacementControl" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="1309991069" result="Passed" start-time="2026-10-18 22:02:51Z" end-time="2026-10-18 22:02:51Z" duration="0.524489" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1006" name="EditingAnAlbumPageSavesItsIdentityAndReturnsToTheSameSelection" fullname="PaperDefense.Tests.AlbumNavigationTests.EditingAnAlbumPageSavesItsIdentityAndReturnsToTheSameSelection" methodname="EditingAnAlbumPageSavesItsIdentityAndReturnsToTheSameSelection" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="357365468" result="Passed" start-time="2026-10-18 22:02:51Z" end-time="2026-10-18 22:02:52Z" duration="0.449078" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1004" name="HomeAlbumReturnsToHomeAndPreparationAlbumReturnsToPreparation" fullname="PaperDefense.Tests.AlbumNavigationTests.HomeAlbumReturnsToHomeAndPreparationAlbumReturnsToPreparation" methodname="HomeAlbumReturnsToHomeAndPreparationAlbumReturnsToPreparation" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="1200244861" result="Passed" start-time="2026-10-18 22:02:52Z" end-time="2026-10-18 22:02:52Z" duration="0.327929" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1013" name="HomeAndMapKeepNativeActionsAndActualProgressInsideThePage" fullname="PaperDefense.Tests.AlbumNavigationTests.HomeAndMapKeepNativeActionsAndActualProgressInsideThePage" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 22:02:52Z" end-time="2026-10-18 22:02:52Z" duration="0.606592" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1010" name="HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1024,768)" fullname="PaperDefense.Tests.AlbumNavigationTests.HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1024,768)" methodname="HomeAndMapKeepNativeActionsAndActualProgressInsideThePage" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="341586203" result="Passed" start-time="2026-10-18 22:02:52Z" end-time="2026-10-18 22:02:52Z" duration="0.181793" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1011" name="HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1280,720)" fullname="PaperDefense.Tests.AlbumNavigationTests.HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1280,720)" methodname="HomeAndMapKeepNativeActionsAndActualProgressInsideThePage" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="729695427" result="Passed" start-time="2026-10-18 22:02:52Z" end-time="2026-10-18 22:02:52Z" duration="0.231790" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1012" name="HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1920,1080)" fullname="PaperDefense.Tests.AlbumNavigationTests.HomeAndMapKeepNativeActionsAndActualProgressInsideThePage(1920,1080)" methodname="HomeAndMapKeepNativeActionsAndActualProgressInsideThePage" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="119207390" result="Passed" start-time="2026-10-18 22:02:52Z" end-time="2026-10-18 22:02:52Z" duration="0.177199" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1005" name="MapAlbumUsesTheCurrentLoadoutAndReturnsToTheMap" fullname="PaperDefense.Tests.AlbumNavigationTests.MapAlbumUsesTheCurrentLoadoutAndReturnsToTheMap" methodname="MapAlbumUsesTheCurrentLoadoutAndReturnsToTheMap" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="1349923260" result="Passed" start-time="2026-10-18 22:02:52Z" end-time="2026-10-18 22:02:53Z" duration="0.313274" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1002" name="OpeningAlbumWithTheKeyboardChoosesAnActiveAlbumControl" fullname="PaperDefense.Tests.AlbumNavigationTests.OpeningAlbumWithTheKeyboardChoosesAnActiveAlbumControl" methodname="OpeningAlbumWithTheKeyboardChoosesAnActiveAlbumControl" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="1718399450" result="Passed" start-time="2026-10-18 22:02:53Z" end-time="2026-10-18 22:02:53Z" duration="0.282642" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1008" name="ReadinessQueryMatchesStartAndDoesNotPublishOrSaveAnything" fullname="PaperDefense.Tests.AlbumNavigationTests.ReadinessQueryMatchesStartAndDoesNotPublishOrSaveAnything" methodname="ReadinessQueryMatchesStartAndDoesNotPublishOrSaveAnything" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="416529214" result="Passed" start-time="2026-10-18 22:02:53Z" end-time="2026-10-18 22:02:54Z" duration="0.457227" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1007" name="ReturningFromAnUnsavedEditKeepsThePublishedPageAndSelectedIdentity" fullname="PaperDefense.Tests.AlbumNavigationTests.ReturningFromAnUnsavedEditKeepsThePublishedPageAndSelectedIdentity" methodname="ReturningFromAnUnsavedEditKeepsThePublishedPageAndSelectedIdentity" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="599014595" result="Passed" start-time="2026-10-18 22:02:54Z" end-time="2026-10-18 22:02:54Z" duration="0.387277" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1009" name="SupportOnlyReadinessAndActualStartBothRejectTheLoadout" fullname="PaperDefense.Tests.AlbumNavigationTests.SupportOnlyReadinessAndActualStartBothRejectTheLoadout" methodname="SupportOnlyReadinessAndActualStartBothRejectTheLoadout" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="1844880318" result="Passed" start-time="2026-10-18 22:02:54Z" end-time="2026-10-18 22:02:54Z" duration="0.346706" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1014" name="AlbumUiTests" fullname="PaperDefense.Tests.AlbumUiTests" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" testcasecount="15" result="Passed" start-time="2026-10-18 22:02:54Z" end-time="2026-10-18 22:02:57Z" duration="2.963100" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1023" name="DeleteVariantRequiresConfirmationAndClearsOnlyItsAssignedSlot" fullname="PaperDefense.Tests.AlbumUiTests.DeleteVariantRequiresConfirmationAndClearsOnlyItsAssignedSlot" methodname="DeleteVariantRequiresConfirmationAndClearsOnlyItsAssignedSlot" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="710093291" result="Passed" start-time="2026-10-18 22:02:54Z" end-time="2026-10-18 22:02:55Z" duration="0.295193" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1024" name="DestinationPickerMovesAnExistingIdOnlyAfterConfirmation" fullname="PaperDefense.Tests.AlbumUiTests.DestinationPickerMovesAnExistingIdOnlyAfterConfirmation" methodname="DestinationPickerMovesAnExistingIdOnlyAfterConfirmation" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="1712668279" result="Passed" start-time="2026-10-18 22:02:55Z" end-time="2026-10-18 22:02:55Z" duration="0.133458" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1021" name="EmptyMineFilterStillOffersTheStandardPages" fullname="PaperDefense.Tests.AlbumUiTests.EmptyMineFilterStillOffersTheStandardPages" methodname="EmptyMineFilterStillOffersTheStandardPages" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="1389780272" result="Passed" start-time="2026-10-18 22:02:55Z" end-time="2026-10-18 22:02:55Z" duration="0.361479" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1025" name="FailedAssignmentKeepsThePickerAndProfileUntouched" fullname="PaperDefense.Tests.AlbumUiTests.FailedAssignmentKeepsThePickerAndProfileUntouched" methodname="FailedAssignmentKeepsThePickerAndProfileUntouched" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="1665119684" result="Passed" start-time="2026-10-18 22:02:55Z" end-time="2026-10-18 22:02:55Z" duration="0.219548" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1022" name="FilteredCardEditsItsIdentityAndVariantBecomesSelectedByIdentity" fullname="PaperDefense.Tests.AlbumUiTests.FilteredCardEditsItsIdentityAndVariantBecomesSelectedByIdentity" methodname="FilteredCardEditsItsIdentityAndVariantBecomesSelectedByIdentity" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="1475080193" result="Passed" start-time="2026-10-18 22:02:55Z" end-time="2026-10-18 22:02:55Z" duration="0.197819" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1020" name="FiltersUseTheWholeEntryAlbum" fullname="PaperDefense.Tests.AlbumUiTests.FiltersUseTheWholeEntryAlbum" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-18 22:02:55Z" end-time="2026-10-18 22:02:56Z" duration="0.477401" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1015" name="FiltersUseTheWholeEntryAlbum(All,8)" fullname="PaperDefense.Tests.AlbumUiTests.FiltersUseTheWholeEntryAlbum(All,8)" methodname="FiltersUseTheWholeEntryAlbum" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="1990191699" result="Passed" start-time="2026-10-18 22:02:55Z" end-time="2026-10-18 22:02:56Z" duration="0.083519" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1016" name="FiltersUseTheWholeEntryAlbum(Towers,4)" fullname="PaperDefense.Tests.AlbumUiTests.FiltersUseTheWholeEntryAlbum(Towers,4)" methodname="FiltersUseTheWholeEntryAlbum" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="547910462" result="Passed" start-time="2026-10-18 22:02:56Z" end-time="2026-10-18 22:02:56Z" duration="0.085115" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1017" name="FiltersUseTheWholeEntryAlbum(Structures,4)" fullname="PaperDefense.Tests.AlbumUiTests.FiltersUseTheWholeEntryAlbum(Structures,4)" methodname="FiltersUseTheWholeEntryAlbum" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="729683073" result="Passed" start-time="2026-10-18 22:02:56Z" end-time="2026-10-18 22:02:56Z" duration="0.083676" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1018" name="FiltersUseTheWholeEntryAlbum(Standard,8)" fullname="PaperDefense.Tests.AlbumUiTests.FiltersUseTheWholeEntryAlbum(Standard,8)" methodname="FiltersUseTheWholeEntryAlbum" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="1117818811" result="Passed" start-time="2026-10-18 22:02:56Z" end-time="2026-10-18 22:02:56Z" duration="0.106990" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1019" name="FiltersUseTheWholeEntryAlbum(Mine,0)" fullname="PaperDefense.Tests.AlbumUiTests.FiltersUseTheWholeEntryAlbum(Mine,0)" methodname="FiltersUseTheWholeEntryAlbum" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="787681133" result="Passed" start-time="2026-10-18 22:02:56Z" end-time="2026-10-18 22:02:56Z" duration="0.111238" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1027" name="FullAlbumRestoreReportsTheWholeSpaceDeficitWithoutPartialWrites" fullname="PaperDefense.Tests.AlbumUiTests.FullAlbumRestoreReportsTheWholeSpaceDeficitWithoutPartialWrites" methodname="FullAlbumRestoreReportsTheWholeSpaceDeficitWithoutPartialWrites" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="323911507" result="Passed" start-time="2026-10-18 22:02:56Z" end-time="2026-10-18 22:02:57Z" duration="0.594523" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1030" name="KeyboardSelectionRevealsTheLastCardInsideTheCatalogue" fullname="PaperDefense.Tests.AlbumUiTests.KeyboardSelectionRevealsTheLastCardInsideTheCatalogue" methodname="KeyboardSelectionRevealsTheLastCardInsideTheCatalogue" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="1367689122" result="Passed" start-time="2026-10-18 22:02:57Z" end-time="2026-10-18 22:02:57Z" duration="0.120862" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1029" name="NativeSubmitKeepsFilterControlAliveUntilItsHandlerFinishes" fullname="PaperDefense.Tests.AlbumUiTests.NativeSubmitKeepsFilterControlAliveUntilItsHandlerFinishes" methodname="NativeSubmitKeepsFilterControlAliveUntilItsHandlerFinishes" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="1725233037" result="Passed" start-time="2026-10-18 22:02:57Z" end-time="2026-10-18 22:02:57Z" duration="0.170871" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1028" name="RefusedRestoreDoesNotPublishAndTheSameOperationCanBeRetried" fullname="PaperDefense.Tests.AlbumUiTests.RefusedRestoreDoesNotPublishAndTheSameOperationCanBeRetried" methodname="RefusedRestoreDoesNotPublishAndTheSameOperationCanBeRetried" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="494081709" result="Passed" start-time="2026-10-18 22:02:57Z" end-time="2026-10-18 22:02:57Z" duration="0.192745" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1026" name="RestoreMissingStartersPreservesMoneyNamesAndSlotsAndPersistsOnce" fullname="PaperDefense.Tests.AlbumUiTests.RestoreMissingStartersPreservesMoneyNamesAndSlotsAndPersistsOnce" methodname="RestoreMissingStartersPreservesMoneyNamesAndSlotsAndPersistsOnce" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="1618244587" result="Passed" start-time="2026-10-18 22:02:57Z" end-time="2026-10-18 22:02:57Z" duration="0.182263" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1414" name="EightSlotPreparationTests" fullname="PaperDefense.Tests.EightSlotPreparationTests" classname="PaperDefense.Tests.EightSlotPreparationTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-18 22:02:57Z" end-time="2026-10-18 22:02:59Z" duration="2.022836" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1416" name="AllEightPositionsRemainAssignableWithoutCompactingEmptySlots" fullname="PaperDefense.Tests.EightSlotPreparationTests.AllEightPositionsRemainAssignableWithoutCompactingEmptySlots" methodname="AllEightPositionsRemainAssignableWithoutCompactingEmptySlots" classname="PaperDefense.Tests.EightSlotPreparationTests" runstate="Runnable" seed="2060851514" result="Passed" start-time="2026-10-18 22:02:57Z" end-time="2026-10-18 22:02:58Z" duration="0.915895" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1419" name="AMaximumLengthNameStaysClearOfReplaceAndClearControlsAtEveryRequiredSize" fullname="PaperDefense.Tests.EightSlotPreparationTests.AMaximumLengthNameStaysClearOfReplaceAndClearControlsAtEveryRequiredSize" methodname="AMaximumLengthNameStaysClearOfReplaceAndClearControlsAtEveryRequiredSize" classname="PaperDefense.Tests.EightSlotPreparationTests" runstate="Runnable" seed="403840799" result="Passed" start-time="2026-10-18 22:02:58Z" end-time="2026-10-18 22:02:58Z" duration="0.309310" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1415" name="At1024x768_AllEightSlotsVisible" fullname="PaperDefense.Tests.EightSlotPreparationTests.At1024x768_AllEightSlotsVisible" methodname="At1024x768_AllEightSlotsVisible" classname="PaperDefense.Tests.EightSlotPreparationTests" runstate="Runnable" seed="1165260889" result="Passed" start-time="2026-10-18 22:02:58Z" end-time="2026-10-18 22:02:59Z" duration="0.183731" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1420" name="CancellingThePickerReturnsKeyboardFocusToTheSameSlot" fullname="PaperDefense.Tests.EightSlotPreparationTests.CancellingThePickerReturnsKeyboardFocusToTheSameSlot" methodname="CancellingThePickerReturnsKeyboardFocusToTheSameSlot" classname="PaperDefense.Tests.EightSlotPreparationTests" runstate="Runnable" seed="1034689652" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.222502" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1417" name="SelectingAnOccupiedEntryRequiresConfirmationBeforeMovingIt" fullname="PaperDefense.Tests.EightSlotPreparationTests.SelectingAnOccupiedEntryRequiresConfirmationBeforeMovingIt" methodname="SelectingAnOccupiedEntryRequiresConfirmationBeforeMovingIt" classname="PaperDefense.Tests.EightSlotPreparationTests" runstate="Runnable" seed="1772251837" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.217767" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1418" name="SupportOnlyPreparationCannotStartAnEnemyDefenseRun" fullname="PaperDefense.Tests.EightSlotPreparationTests.SupportOnlyPreparationCannotStartAnEnemyDefenseRun" methodname="SupportOnlyPreparationCannotStartAnEnemyDefenseRun" classname="PaperDefense.Tests.EightSlotPreparationTests" runstate="Runnable" seed="1076720248" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.169401" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1548" name="NotebookAnimationRenderingTests" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" testcasecount="22" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:03:00Z" duration="0.452398" total="22" passed="22" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1573" name="AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.191569" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1569" name="AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(&quot;well&quot;)" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(&quot;well&quot;)" methodname="AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="1274431036" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.010480" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1570" name="AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(&quot;blot&quot;)" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(&quot;blot&quot;)" methodname="AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="955836795" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.032653" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1571" name="AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(&quot;glob&quot;)" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(&quot;glob&quot;)" methodname="AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="1701039232" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.061093" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1572" name="AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(&quot;mortar&quot;)" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes(&quot;mortar&quot;)" methodname="AssignedThemePaletteReachesWorldWellsBlotsAndProjectileMeshes" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="302870071" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.069804" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1574" name="AuthoredBatteryRecoilTransformsSavedLinesRigidlyAndNeverRebuildsOrReassessesThem" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.AuthoredBatteryRecoilTransformsSavedLinesRigidlyAndNeverRebuildsOrReassessesThem" methodname="AuthoredBatteryRecoilTransformsSavedLinesRigidlyAndNeverRebuildsOrReassessesThem" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="1968299822" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.021443" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1560" name="CapturedCircularFootprintOwnsItsRadiusEvenWhenFallbackDiffers" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.CapturedCircularFootprintOwnsItsRadiusEvenWhenFallbackDiffers" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.007937" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1558" name="CapturedCircularFootprintOwnsItsRadiusEvenWhenFallbackDiffers(0.2f)" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.CapturedCircularFootprintOwnsItsRadiusEvenWhenFallbackDiffers(0.2f)" methodname="CapturedCircularFootprintOwnsItsRadiusEvenWhenFallbackDiffers" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="360306260" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.003385" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1559" name="CapturedCircularFootprintOwnsItsRadiusEvenWhenFallbackDiffers(2.0f)" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.CapturedCircularFootprintOwnsItsRadiusEvenWhenFallbackDiffers(2.0f)" methodname="CapturedCircularFootprintOwnsItsRadiusEvenWhenFallbackDiffers" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="347990" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.002279" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1565" name="EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.013525" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1561" name="EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Cone,&quot;fx.fan&quot;)" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Cone,&quot;fx.fan&quot;)" methodname="EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="1021062884" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.000949" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1562" name="EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Line,&quot;fx.piercer&quot;)" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Line,&quot;fx.piercer&quot;)" methodname="EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="1666926445" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.000416" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1563" name="EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Radial,&quot;fx.stapler&quot;)" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Radial,&quot;fx.stapler&quot;)" methodname="EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="370206487" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.000366" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1564" name="EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Cleanup,&quot;fx.cleanup&quot;)" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases(Cleanup,&quot;fx.cleanup&quot;)" methodname="EffectsUseCapturedAttackForWeaponsWithoutLegacyAliases" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="1044870408" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:02:59Z" duration="0.000387" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1553" name="EnemyWalkUsesActualMovementAndAStoppedEnemyReturnsToIdle" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.EnemyWalkUsesActualMovementAndAStoppedEnemyReturnsToIdle" methodname="EnemyWalkUsesActualMovementAndAStoppedEnemyReturnsToIdle" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="1629968469" result="Passed" start-time="2026-10-18 22:02:59Z" end-time="2026-10-18 22:03:00Z" duration="0.034021" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1551" name="OverflowEvictsOnlyVisualRecordsAndResetClearsAllTransientState" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.OverflowEvictsOnlyVisualRecordsAndResetClearsAllTransientState" methodname="OverflowEvictsOnlyVisualRecordsAndResetClearsAllTransientState" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="926170221" result="Passed" start-time="2026-10-18 22:03:00Z" end-time="2026-10-18 22:03:00Z" duration="0.009276" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1550" name="SimulationClockFreezesOnPauseAdvancesOnStepAndCapsTheTerminalTail" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.SimulationClockFreezesOnPauseAdvancesOnStepAndCapsTheTerminalTail" methodname="SimulationClockFreezesOnPauseAdvancesOnStepAndCapsTheTerminalTail" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="1164759838" result="Passed" start-time="2026-10-18 22:03:00Z" end-time="2026-10-18 22:03:00Z" duration="0.000672" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1549" name="ThreeIdenticalWeaponsRecoilIndependentlyAndSegmentsNeverRestartAnAction" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.ThreeIdenticalWeaponsRecoilIndependentlyAndSegmentsNeverRestartAnAction" methodname="ThreeIdenticalWeaponsRecoilIndependentlyAndSegmentsNeverRestartAnAction" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="2017580106" result="Passed" start-time="2026-10-18 22:03:00Z" end-time="2026-10-18 22:03:00Z" duration="0.001239" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1566" name="TrialDeathSuppressesTheStaleLiveSnapshotEvenAfterTheDeathTailExpiresAndSeekRestoresIt" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.TrialDeathSuppressesTheStaleLiveSnapshotEvenAfterTheDeathTailExpiresAndSeekRestoresIt" methodname="TrialDeathSuppressesTheStaleLiveSnapshotEvenAfterTheDeathTailExpiresAndSeekRestoresIt" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="1923707136" result="Passed" start-time="2026-10-18 22:03:00Z" end-time="2026-10-18 22:03:00Z" duration="0.007983" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1557" name="TrialEffectUsesTheAssignedThemePalette" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.TrialEffectUsesTheAssignedThemePalette" methodname="TrialEffectUsesTheAssignedThemePalette" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="924281291" result="Passed" start-time="2026-10-18 22:03:00Z" end-time="2026-10-18 22:03:00Z" duration="0.004842" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1556" name="TrialImpactPreservesCapturedMortarFootprint" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.TrialImpactPreservesCapturedMortarFootprint" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 22:03:00Z" end-time="2026-10-18 22:03:00Z" duration="0.009086" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1554" name="TrialImpactPreservesCapturedMortarFootprint(False)" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.TrialImpactPreservesCapturedMortarFootprint(False)" methodname="TrialImpactPreservesCapturedMortarFootprint" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="1394089757" result="Passed" start-time="2026-10-18 22:03:00Z" end-time="2026-10-18 22:03:00Z" duration="0.004152" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1555" name="TrialImpactPreservesCapturedMortarFootprint(True)" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.TrialImpactPreservesCapturedMortarFootprint(True)" methodname="TrialImpactPreservesCapturedMortarFootprint" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="1419003143" result="Passed" start-time="2026-10-18 22:03:00Z" end-time="2026-10-18 22:03:00Z" duration="0.002935" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1567" name="TrialImpactSuppressesSnapshotFallbackAndMortarGlobIdsStayIndependent" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.TrialImpactSuppressesSnapshotFallbackAndMortarGlobIdsStayIndependent" methodname="TrialImpactSuppressesSnapshotFallbackAndMortarGlobIdsStayIndependent" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="181038919" result="Passed" start-time="2026-10-18 22:03:00Z" end-time="2026-10-18 22:03:00Z" duration="0.007873" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1552" name="TrialSeekReplaysTimestampedActionsAndRepeatedSeeksPreserveTheSamePose" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.TrialSeekReplaysTimestampedActionsAndRepeatedSeeksPreserveTheSamePose" methodname="TrialSeekReplaysTimestampedActionsAndRepeatedSeeksPreserveTheSamePose" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="511425006" result="Passed" start-time="2026-10-18 22:03:00Z" end-time="2026-10-18 22:03:00Z" duration="0.044284" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1568" name="WorldAndTrialRicochetContinuationStartsAtThePreviousVictimWhileTheFirstSegmentUsesTheMuzzle" fullname="PaperDefense.Tests.NotebookAnimationRenderingTests.WorldAndTrialRicochetContinuationStartsAtThePreviousVictimWhileTheFirstSegmentUsesTheMuzzle" methodname="WorldAndTrialRicochetContinuationStartsAtThePreviousVictimWhileTheFirstSegmentUsesTheMuzzle" classname="PaperDefense.Tests.NotebookAnimationRenderingTests" runstate="Runnable" seed="99107423" result="Passed" start-time="2026-10-18 22:03:00Z" end-time="2026-10-18 22:03:00Z" duration="0.079521" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1575" name="NotebookArtPressureTests" fullname="PaperDefense.Tests.NotebookArtPressureTests" classname="PaperDefense.Tests.NotebookArtPressureTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-10-18 22:03:00Z" end-time="2026-10-18 22:03:04Z" duration="4.589109" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1576" name="ConfiguredNotebookArtRendersTheNaturalThreeThousandEnemyPeakWithoutChangingTheBattle" fullname="PaperDefense.Tests.NotebookArtPressureTests.ConfiguredNotebookArtRendersTheNaturalThreeThousandEnemyPeakWithoutChangingTheBattle" methodname="ConfiguredNotebookArtRendersTheNaturalThreeThousandEnemyPeakWithoutChangingTheBattle" classname="PaperDefense.Tests.NotebookArtPressureTests" runstate="Runnable" seed="677123038" result="Passed" start-time="2026-10-18 22:03:00Z" end-time="2026-10-18 22:03:04Z" duration="4.586604" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="Timeout" value="120000" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Natural crowd core: samples=534, average=7,232ms, max=14,049ms
+Notebook art pressure: alive=3000, renderedFrames=30, batches=5, compactVertices=60252, meanMeshMs=7,993, maximumMeshMs=11,725, tick=730, fingerprint=f1d9e90e44597ae4
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1577" name="NotebookCameraReadabilityTests" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-18 22:03:04Z" end-time="2026-10-18 22:03:04Z" duration="0.041365" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1579" name="CameraScaleRefreshesStaticGeometryButPanningDoesNot" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests.CameraScaleRefreshesStaticGeometryButPanningDoesNot" methodname="CameraScaleRefreshesStaticGeometryButPanningDoesNot" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" seed="1850391479" result="Passed" start-time="2026-10-18 22:03:04Z" end-time="2026-10-18 22:03:04Z" duration="0.005041" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1580" name="FractionalScrollAccumulatesAndZoomStopsAtBothLimits" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests.FractionalScrollAccumulatesAndZoomStopsAtBothLimits" methodname="FractionalScrollAccumulatesAndZoomStopsAtBothLimits" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" seed="1168578609" result="Passed" start-time="2026-10-18 22:03:04Z" end-time="2026-10-18 22:03:04Z" duration="0.004868" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1578" name="NormalizedWheelNotchZoomsNoticeablyAndKeepsTheCursorAnchor" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests.NormalizedWheelNotchZoomsNoticeablyAndKeepsTheCursorAnchor" methodname="NormalizedWheelNotchZoomsNoticeablyAndKeepsTheCursorAnchor" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" seed="1794133673" result="Passed" start-time="2026-10-18 22:03:04Z" end-time="2026-10-18 22:03:04Z" duration="0.003610" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1583" name="OverviewHidesFineGridAndCloseZoomRestoresIt" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests.OverviewHidesFineGridAndCloseZoomRestoresIt" methodname="OverviewHidesFineGridAndCloseZoomRestoresIt" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" seed="1237894371" result="Passed" start-time="2026-10-18 22:03:04Z" end-time="2026-10-18 22:03:04Z" duration="0.003943" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1581" name="PlatformRangesNormalizeOnlyLegacyWindowsInput" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests.PlatformRangesNormalizeOnlyLegacyWindowsInput" methodname="PlatformRangesNormalizeOnlyLegacyWindowsInput" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" seed="430853862" result="Passed" start-time="2026-10-18 22:03:04Z" end-time="2026-10-18 22:03:04Z" duration="0.002996" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1584" name="ResourceAndAuthoredStrokesKeepScreenWidthWithoutChangingSourceGeometry" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests.ResourceAndAuthoredStrokesKeepScreenWidthWithoutChangingSourceGeometry" methodname="ResourceAndAuthoredStrokesKeepScreenWidthWithoutChangingSourceGeometry" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" seed="1309031251" result="Passed" start-time="2026-10-18 22:03:04Z" end-time="2026-10-18 22:03:04Z" duration="0.003325" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1582" name="ScrollOutsideTheMapDoesNotZoomAndFocusClampsToMapEdges" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests.ScrollOutsideTheMapDoesNotZoomAndFocusClampsToMapEdges" methodname="ScrollOutsideTheMapDoesNotZoomAndFocusClampsToMapEdges" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" seed="1828506242" result="Passed" start-time="2026-10-18 22:03:04Z" end-time="2026-10-18 22:03:04Z" duration="0.003226" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task10-camera-stitch.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

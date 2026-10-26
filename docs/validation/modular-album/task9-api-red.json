@@ -1,0 +1,6 @@
+[
+  "Assets\\PaperDefense\\Tests\\PlayMode\\CompositeWorkshopUiTests.cs(19,9): error CS0246: The type or namespace name 'CompositeWorkshopPanel' could not be found (are you missing a using directive or an assembly reference?)\n",
+  "Assets\\PaperDefense\\Tests\\PlayMode\\ComponentPurchaseUiTests.cs(17,70): error CS0246: The type or namespace name 'WorkshopDraftSession' could not be found (are you missing a using directive or an assembly reference?)\n",
+  "Assets\\PaperDefense\\Tests\\PlayMode\\ComponentPurchaseUiTests.cs(17,9): error CS0246: The type or namespace name 'ComponentAssemblyPanel' could not be found (are you missing a using directive or an assembly reference?)\n",
+  "Assets\\PaperDefense\\Tests\\PlayMode\\ComponentPurchaseUiTests.cs(24,16): error CS0246: The type or namespace name 'WorkshopDraftSession' could not be found (are you missing a using directive or an assembly reference?)\n"
+]

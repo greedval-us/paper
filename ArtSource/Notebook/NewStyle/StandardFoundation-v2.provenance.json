@@ -1,0 +1,7 @@
+{
+  "file": "StandardFoundation-v2.png",
+  "generator": "built-in image_gen",
+  "prompt": "Create ONE production GAME modular foundation sprite, no text: low broad stone tower plinth on transparent alpha, blue ballpointpen finecrosshatching with warmivorypapercoloredstoneandtinymetalbluebraces. Matching the reference bluepen towerassets andconceptsheet. MAINCONSTRAINT: This is a LOW wide platform, like a flatmachiniststonebase ratherthan a tallcastletower. Overallimage objectwidth-to-heightabout3.0:1. Shallowthreequarterfrontview, topdeck largeandclear. ExactlyTWO small EMPTY flat circular mounting discs with horizontalleft/rightseparation, on outerleftquarter andouterrightquarter oftopdeck; unobstructedareaabovethem. Simpleonecourseofstonethickbasewithcornerbraces, lowfrontwall, simplecrownengravingonfront. NOguns, NOtallverticalcolumns, NOelevatedbearingcolumns, NOgrass/groundshadow/papergrid/background/border/text. Entireisolatedobjecthasbroadtransparentmargin. Needintactsourcecanvasstraighton symmetricalperspective. Thiswillbesplitintoactualfront/backseatregionsinthegameimportpipeline; thereforecleantopedgeandfrontface. Spriteiswideformatlandscape1536x640approx. Transparentbackground.",
+  "sourceRole": "New low standard two-socket foundation, replacing the visibly oversized modern cylinder. Historical pilot source retained.",
+  "output": "C:\\Users\\Greedval\\.codex\\generated_images\\01a14cd7-7db2-7df0-8654-f50c4f801bf0\\exec-087b7f04-683d-4fc8-9ed0-eed44dd33271.png"
+}

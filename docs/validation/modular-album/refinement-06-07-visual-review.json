@@ -1,0 +1,221 @@
+{
+  "schema": "modular-album-visual-review-v1",
+  "status": "reviewed_pass",
+  "reviewer": "/root/implement_components_06_07",
+  "reviewMethod": "Physical image interpretation through view_image after the final footer/header fixes and shared active-step contrast repair; all ten replacement PNGs reopened at their actual resolutions.",
+  "scope": [
+    "06-drawing",
+    "07-details"
+  ],
+  "sourceImages": [
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/06-drawing.png",
+      "sha256": "edba0bc718e2c896c7854442f269855aa16f22b8cb456994c61bb25410126930"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/07-details.png",
+      "sha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9"
+    }
+  ],
+  "captures": [
+    {
+      "metadataSha256": "18fc49c3ca1692f5abb31c298f17fb558abcf90448f3621de4c609e9b6fe1fb8",
+      "width": 1024,
+      "observations": [
+        "Exploded part art is isolated from scenery; all six statistic strings fit the separate right frame.",
+        "Card contribution text has clear padding above the selected underline.",
+        "Diagram, caption, local action and enclosing save/cancel remain separated."
+      ],
+      "height": 768,
+      "sha256": "31c6e1b9ea84d14166e7720eedf36cb567fc0959ad05de725afb9f05cccc6adb",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1024x768.json",
+      "frame": 1,
+      "reviewed": true,
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1024x768.png"
+    },
+    {
+      "metadataSha256": "4f7f65eb76b046bf9392254074348344392dad3b06040fc8383d321f5506f0db",
+      "width": 1280,
+      "observations": [
+        "Exploded part art is isolated from scenery; all six statistic strings fit the separate right frame.",
+        "Card contribution text has clear padding above the selected underline.",
+        "Diagram, caption, local action and enclosing save/cancel remain separated."
+      ],
+      "height": 720,
+      "sha256": "a9e0830ca158927bab7a8a68ed52848fe63539bc5dd6948ff6066e3840567251",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1280x720.json",
+      "frame": 1,
+      "reviewed": true,
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1280x720.png"
+    },
+    {
+      "metadataSha256": "097f08ad999e567c34ddc55282a1de9838124373890e43204beea5d14b4b6b69",
+      "width": 1920,
+      "observations": [
+        "Exploded part art is isolated from scenery; all six statistic strings fit the separate right frame.",
+        "Card contribution text has clear padding above the selected underline.",
+        "Diagram, caption, local action and enclosing save/cancel remain separated."
+      ],
+      "height": 1080,
+      "sha256": "fc795cb54a4d6dd9c0b6a4e4ebd25b5366718d2a37135be33d294975b4ac7457",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1920x1080.json",
+      "frame": 1,
+      "reviewed": true,
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1920x1080.png"
+    },
+    {
+      "metadataSha256": "6c669d9a3d592b90a6eab8fbbee8871f216b508c9496a541f99e8a9263b7e656",
+      "width": 1280,
+      "observations": [
+        "Exploded part art is isolated from scenery; all six statistic strings fit the separate right frame.",
+        "Card contribution text has clear padding above the selected underline.",
+        "Diagram, caption, local action and enclosing save/cancel remain separated."
+      ],
+      "height": 960,
+      "sha256": "302830d8918e32aeca1382991d247893e02649079081cfed9f74a698f4b23ae5",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1280x960.json",
+      "frame": 1,
+      "reviewed": true,
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1280x960.png"
+    },
+    {
+      "metadataSha256": "3da6cc283609fd226bf4fbe7c9a03167a0baa90982f39f9d43f572119644703c",
+      "width": 1600,
+      "observations": [
+        "Exploded part art is isolated from scenery; all six statistic strings fit the separate right frame.",
+        "Card contribution text has clear padding above the selected underline.",
+        "Diagram, caption, local action and enclosing save/cancel remain separated."
+      ],
+      "height": 900,
+      "sha256": "38a0c5fffd5de4a70031cfef5ec0d32a7e7c37b111ec2b7c5ca9bb327cd9b283",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1600x900.json",
+      "frame": 1,
+      "reviewed": true,
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1600x900.png"
+    },
+    {
+      "metadataSha256": "88567458240fc5501d247607bb998b9c1ba9eb8929ef7ff5688c75da641d7351",
+      "width": 1024,
+      "observations": [
+        "All six values and arrows remain aligned; green, orange and red outcomes are visibly distinct.",
+        "The complete current-part header including family is visible, using three lines at1024/1280.",
+        "Rotated art clears caption plates; table and install action do not overlap."
+      ],
+      "height": 768,
+      "sha256": "9bf5e794381e74776846bbcaf959898d2c0b732e9d998832a5673016fb3f43dc",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1024x768.json",
+      "frame": 1,
+      "reviewed": true,
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1024x768.png"
+    },
+    {
+      "metadataSha256": "b4510e0bab5fe5b985b88dcef2c3ace97120843202402938b6b3de44ac168820",
+      "width": 1280,
+      "observations": [
+        "All six values and arrows remain aligned; green, orange and red outcomes are visibly distinct.",
+        "The complete current-part header including family is visible, using three lines at1024/1280.",
+        "Rotated art clears caption plates; table and install action do not overlap."
+      ],
+      "height": 720,
+      "sha256": "16205f5bb4323edab5952fb6fae9b527c79741a635a45d6bbe5b57647e8be8d7",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1280x720.json",
+      "frame": 1,
+      "reviewed": true,
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1280x720.png"
+    },
+    {
+      "metadataSha256": "a0b260983331ef2137f1b67f4081edb5962d0cfd64ff78cc587ac0d17ffdba5b",
+      "width": 1920,
+      "observations": [
+        "All six values and arrows remain aligned; green, orange and red outcomes are visibly distinct.",
+        "The complete current-part header including family is visible, using three lines at1024/1280.",
+        "Rotated art clears caption plates; table and install action do not overlap."
+      ],
+      "height": 1080,
+      "sha256": "22752f669c0fc4653d371c49b48a2a3ac06a1e03745cd36400d98e1da597110d",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1920x1080.json",
+      "frame": 1,
+      "reviewed": true,
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1920x1080.png"
+    },
+    {
+      "metadataSha256": "ed7ab7622dfcf9ec097ae0556f7c4361901e89a4750cbb2d04ac34d46f897ff5",
+      "width": 1280,
+      "observations": [
+        "All six values and arrows remain aligned; green, orange and red outcomes are visibly distinct.",
+        "The complete current-part header including family is visible, using three lines at1024/1280.",
+        "Rotated art clears caption plates; table and install action do not overlap."
+      ],
+      "height": 960,
+      "sha256": "f642541dd5fd88bc1e7a41cf8dc3d9e69ff7b6aae7d8f3e067aca0bd01023e2f",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1280x960.json",
+      "frame": 1,
+      "reviewed": true,
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1280x960.png"
+    },
+    {
+      "metadataSha256": "2ee7f435c5c16d49baa97d4e238215968e417af97c3586b2ffcdd5fbad3d0de6",
+      "width": 1600,
+      "observations": [
+        "All six values and arrows remain aligned; green, orange and red outcomes are visibly distinct.",
+        "The complete current-part header including family is visible, using three lines at1024/1280.",
+        "Rotated art clears caption plates; table and install action do not overlap."
+      ],
+      "height": 900,
+      "sha256": "c78fececb9f515b64eb4773400b563f2e22335118f90c57cc3d0109eb7039407",
+      "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1600x900.json",
+      "frame": 1,
+      "reviewed": true,
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1600x900.png"
+    }
+  ],
+  "improvements": [
+    "06 separates the exploded assembly stage from its six-row characteristic frame, improves local row pitch, makes catalogue cards art-first, and reduces scenery competition.",
+    "07 uses separate current/candidate art frames and caption plates, six aligned resolver-number rows, colored outcome labels, and an apply action directly below the table.",
+    "All five target sizes retain visible local save/cancel controls, bounded catalogue viewports and art/caption clearance."
+  ],
+  "ownedDefectsRepairedAfterCaptures": [
+    {
+      "observed": "The compact contribution footer intersects or rides the selected-card underline, most apparent at1024x768.",
+      "repair": "Move card text and image allocation upward and retain twelve pixels beneath the contribution text region.",
+      "verification": "Pass: physically verified in all five replacement captures.",
+      "id": "06-card-footer-selected-rule"
+    },
+    {
+      "observed": "The current-part table header at1024x768 truncates its full family-bearing name.",
+      "repair": "Increase the table header from40 to60 units and derive row pitch from the remaining available height.",
+      "verification": "Pass: physically verified in all five replacement captures.",
+      "id": "07-current-header-truncation"
+    }
+  ],
+  "externalResiduals": [],
+  "preservedBehaviorEvidence": {
+    "result": "161/161 green reported in refinement-04-28-green.json; current capture source revision bound by refinement-batch2-capture-manifest.json.",
+    "source": "Root technical artifacts",
+    "limits": "Visual review validates the ten current captures. New changes for11+ will require affected shared-branch regression captures."
+  },
+  "postRepairSourceFiles": [
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ComponentCatalogPanel.cs",
+      "sha256": "c34a8f7ddfd270438efa5fe173e7450d2e90fa23c69818684d9ac0c7abc1f13c"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ComponentCatalogPanel.Sketch.cs",
+      "sha256": "9ca14251b63e4f8c7adb5482003fe48b6d218faf18841628fec9c9e0edd66bd0"
+    }
+  ],
+  "recaptureRequired": [],
+  "assumptions": [
+    "Source06/07 art identities remain the existing gameplay catalogue identities; no images generated.",
+    "This is bounded presentation refinement; the live local editor has no trial action."
+  ],
+  "conclusion": "Pass for the bounded06/07 refinement at all five targets: clear region ownership, padded compact footers, complete comparison headers, readable actual values and reachable local actions. Source cannon/circular identities remain intentionally replaced by current real catalogue art; no fake trial added.",
+  "captureManifest": {
+    "sha256": "a2b65366fab3590cbb9b361a292af87deee09b8cb0cbc2832629987da8bf97a2",
+    "path": "docs/validation/modular-album/refinement-batch2-capture-manifest.json"
+  },
+  "technicalEvidence": {
+    "sha256": "bf33d3afd591ae574d71e952a15b864ce8d0db607c8e21f70c5f4b369cdce432",
+    "path": "docs/validation/modular-album/refinement-04-28-green.json"
+  }
+}

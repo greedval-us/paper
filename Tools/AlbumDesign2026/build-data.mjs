@@ -1,0 +1,102 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import assert from 'node:assert/strict';
+const root=path.resolve(import.meta.dirname,'../..');
+
+// Authoritative balance inputs. Runtime exports are verification evidence, never generator inputs.
+export function buildDesignData(){
+const version='album-v1.0';
+const common={level:1,gold:0,cost:0,load:0,build:0,hpMult:1,capacityAdd:0,feedMult:1,defense:0,frontDefense:0,acquisitionMult:1};
+const foundations=[];
+function f(id,name,slot,values={}){foundations.push({...common,id,name,slot,compatible:'all',...values});}
+const frames=[
+ ['standard','Обычная рамка',1,0,16,55,10,2,1.6,0],
+ ['heavy','Тяжёлая рамка',3,90,26,82.5,14,2,1.6,.45],
+ ['precision','Точная рамка',4,90,18,55,16,1,1,.25],
+ ['battery','Батарейная рамка',7,160,28,77,22,3,2.4,.65]
+];
+for(const [id,name,level,gold,cost,hp,capacity,mounts,feed,build] of frames)
+ f('frame.'+id,name,'Рамка',{level,gold,cost,hp,capacity,mounts,feed,build,source:'chassis.'+id});
+f('hull.standard','Обычный корпус','Корпус');
+f('hull.light','Облегчённый корпус','Корпус',{level:2,gold:40,cost:-4,hpMult:.8,capacityAdd:-2,build:-.2});
+f('hull.reinforced','Усиленный корпус','Корпус',{level:4,gold:80,cost:8,load:1,hpMult:1.3,build:.3});
+f('armor.none','Без брони','Броня');
+f('armor.plate','Бронепластины','Броня',{cost:14,load:2,defense:.3,build:.2});
+f('armor.front','Фронтальный щит','Броня',{level:5,gold:100,cost:12,load:2,frontDefense:.4,build:.2,notes:'90° спереди; общая защита 0. Не складывается с пластинами.'});
+f('feed.standard','Обычная подача','Подача');
+f('feed.boost','Улучшенная подача','Подача',{level:3,gold:70,cost:10,load:2,feedMult:1.25,build:.2});
+f('turn.standard','Обычный поворот','Поворот');
+f('turn.quick','Быстрый поворот','Поворот',{level:2,gold:40,cost:8,load:1,acquisitionMult:.32});
+const mechanisms=[
+ ['gun','Пулемёт',24,4,12,.42,8,0,.1,1.4],
+ ['piercer','Пробивающая пушка',44,6,20,1,12.5,0,.38,1.9],
+ ['mortar','Мортира',69,7,28,1.9,18,6,2.4,2.4],
+ ['fan','Веерный ствол',39,5,14,.85,6,0,.1,1.6],
+ ['ricochet','Рикошет',52,5,12,.9,10,0,.1,1.6],
+ ['stapler','Степлер',12,2,5,.6,9,0,.1,1.2],
+ ['blotter','Промокашка',8,2,0,1.4,9,0,2,1.2]
+];
+const cores=mechanisms.map(([id,name,cost,load,damage,interval,range,minRange,radius,build],i)=>({id:'core.'+id,source:'weapon.'+id,name,level:[1,1,1,4,6,2,3][i],gold:[0,0,0,80,120,40,50][i],cost,load,damage,interval,range,minRange,targets:[1,7,8,8,4,1,0][i],radius,build,attack:['Одиночный','Пробитие','Площадь','Веер','Рикошет','Замедление','Очистка'][i],clip:[6,1,1,1,1,4,1][i],reload:interval,slow:i===5?.6:1,slowSeconds:i===5?2:0,flight:i===2?.8:0,jump:i===4?3:0,notes:['Частые одиночные попадания','До 7 разных целей, броня действует','Оценка по 8 целям; фактическое число в радиусе зависит от сцены','До 8 целей в конусе 90°','4 разные цели; переход до 3 клеток','Движение ×0,6 на 2 с; сильнейшее замедление','Нулевой урон; очистка клякс радиусом 2'][i]}));
+const wc={level:1,gold:0,cost:0,load:0,damageMult:1,intervalMult:1,rangeMult:1,clipMult:1,clipOverride:0,reloadMult:1,acquisitionMult:1,radiusMult:1,compatible:'all'};
+const weaponParts=[];
+function w(id,name,slot,values={}){weaponParts.push({...wc,id,name,slot,...values});}
+for(const c of cores)w('head.'+c.id.slice(5),['core.gun','core.piercer','core.mortar','core.fan'].includes(c.id)?'Штатный ствол: '+c.name:'Штатная головка: '+c.name,'Ствол / головка',{compatible:c.id});
+w('head.short','Короткий ствол','Ствол / головка',{level:2,gold:40,cost:-4,load:-1,damageMult:.9,intervalMult:.85,reloadMult:.85,rangeMult:.8,compatible:'core.gun,core.piercer'});
+w('head.long','Длинный ствол','Ствол / головка',{level:4,gold:80,cost:12,load:2,damageMult:1.1,intervalMult:1.2,reloadMult:1.2,rangeMult:1.25,compatible:'core.gun,core.piercer'});
+w('head.wide','Широкий ствол','Ствол / головка',{level:6,gold:120,cost:16,load:2,damageMult:1.25,intervalMult:1.3,reloadMult:1.3,rangeMult:.9,radiusMult:1.15,compatible:'core.mortar'});
+w('sight.iron','Мушка / указатель','Прицел');
+w('sight.scope','Оптика','Прицел',{level:3,gold:60,cost:10,load:1,rangeMult:1.15,acquisitionMult:1.3,compatible:'core.gun,core.piercer,core.mortar,core.ricochet'});
+w('sight.tracking','Следящий прицел','Прицел',{level:5,gold:90,cost:8,load:1,rangeMult:.95,acquisitionMult:.4});
+w('magazine.standard','Штатная обойма / кассета','Магазин');
+w('magazine.drum','Барабан','Магазин',{level:4,gold:80,cost:12,load:1,intervalMult:.85,clipMult:2,reloadMult:3,compatible:'core.gun,core.stapler'});
+w('magazine.belt','Лента','Магазин',{level:7,gold:150,cost:14,load:2,reloadMult:.8,compatible:'core.gun'});
+w('trigger.standard','Обычный спуск','Спуск');
+w('trigger.burst','Спуск: очередь 3','Спуск',{level:5,gold:100,cost:10,load:1,intervalMult:.45,clipOverride:3,reloadMult:2.1,compatible:'core.gun',notes:'Ровно 3 выстрела за цикл. Только штатная обойма.'});
+const sc={level:1,gold:0,cost:0,load:0,capacity:0,hp:0,hpMult:1,range:0,rangeMult:1,rate:0,rateMult:1,slow:1,defense:0,build:0,compatible:'all'};
+const buildingParts=[];
+function s(id,name,slot,values={}){buildingParts.push({...sc,id,name,slot,...values});}
+s('site.wall','Опора баррикады','Основание',{compatible:'wall',cost:8,hp:200,capacity:6,build:.15});
+s('site.slow','Поддон замедлителя','Основание',{compatible:'slow',cost:10,hp:55,capacity:6,build:.3});
+s('site.repair','Фундамент мастерской','Основание',{compatible:'repair',cost:20,hp:70,capacity:6,build:.7});
+s('site.generator','Фундамент насоса','Основание',{compatible:'generator',cost:20,hp:80,capacity:6,build:.7});
+s('function.wall','Секция заграждения','Функция',{compatible:'wall',cost:8,load:2,build:.2,notes:'Блокирует путь; враги могут разрушить.'});
+s('function.slow','Чернильный состав','Функция',{compatible:'slow',cost:12,load:2,range:1,slow:.6,build:.5,notes:'Движение ×0,6 в зоне и 0,6 с после выхода. Не складывается.'});
+s('function.repair','Ремонтный набор','Функция',{compatible:'repair',cost:45,load:3,range:5,rate:6,build:1.3,notes:'6 HP/с одной ближайшей повреждённой постройке. Без себя и других ремонтных постов.'});
+s('function.generator','Насос штрихов','Функция',{compatible:'generator',cost:40,load:3,rate:12,build:1.5,notes:'12 штрихов за пережитую волну; не золото. Максимум 2 насоса на поле.'});
+s('shell.standard','Обычная оболочка','Оболочка');
+s('shell.light','Лёгкая оболочка','Оболочка',{level:2,gold:35,cost:-4,hpMult:.75,build:-.1});
+s('shell.reinforced','Усиленная оболочка','Оболочка',{level:4,gold:70,cost:10,load:1,hpMult:1.5,build:.3});
+s('utility.none','Без оснащения','Оснащение');
+s('utility.armor','Защитные панели','Оснащение',{level:3,gold:60,cost:12,load:2,defense:.2,compatible:'wall,repair,generator'});
+s('utility.range','Расширитель зоны','Оснащение',{level:5,gold:90,cost:15,load:2,rangeMult:1.3,rateMult:.8,compatible:'repair',notes:'Радиус 6,5; ремонт 4,8 HP/с.'});
+s('utility.economy','Экономичный насос','Оснащение',{level:8,gold:180,cost:12,load:2,rateMult:1.25,hpMult:.85,compatible:'generator',notes:'15 штрихов за волну, прочность ×0,85.'});
+const allParts=[...foundations,...cores.map(c=>({...c,slot:'Механизм',compatible:'weapon'})),...weaponParts,...buildingParts];
+const rules={slots:8,maxAlbumPages:64,initialGold:0,startingInk:640,waves:8,waveGold:8,victoryGold:30,xpPerWave:10,xpVictory:40,maxFeed:1.25,acquisition:.25,maxDefense:.6,maxGenerators:2,generatorRefund:0,generatorMaterial:'pencil',towerRefund:.8,slowFloor:.4,geometryPower:false};
+const levels=[0,100,230,390,580,800,1050,1330].map((xp,i)=>({level:i+1,xp,parts:allParts.filter(p=>p.level===i+1&&p.gold>0).map(p=>p.id)}));
+const defaultW=(name,core,head='head.'+core.slice(5),sight='sight.iron',magazine='magazine.standard',trigger='trigger.standard')=>({id:'weaponRecipe.'+name,name,core,head,sight,magazine,trigger});
+const weapons=[...cores.map(c=>defaultW(c.name,c.id)),defaultW('Короткий дозор','core.gun','head.short'),defaultW('Дальний пробой','core.piercer','head.long','sight.scope'),defaultW('Очередь дозора','core.gun','head.gun','sight.iron','magazine.standard','trigger.burst'),defaultW('Барабанный дозор','core.gun','head.gun','sight.iron','magazine.drum')];
+const defaultT=(id,name,weapon,count=1,values={})=>({id,name,frame:'frame.standard',hull:'hull.standard',armor:'armor.none',feed:'feed.standard',turn:'turn.standard',weapon,count,starter:false,role:'',...values});
+const towers=[defaultT('album.guard','Дозор',0,1,{starter:true,role:'Дешёвая точечная оборона'}),defaultT('album.double','Двойной дозор',0,2,{starter:true,role:'Плотный огонь, общая подача 0,8 на ствол'}),defaultT('album.piercer','Пробой',1,1,{starter:true,role:'Прямой участок и несколько целей'}),defaultT('album.mortar','Защищённая мортира',2,1,{starter:true,armor:'armor.plate',role:'Группа врагов, мёртвая зона 6 клеток'}),defaultT('album.short','Ближний дозор',7,1,{role:'Ближе и дешевле, выше темп'}),defaultT('album.sniper','Дальний пробой',8,1,{frame:'frame.precision',role:'Дальность за меньший темп'}),defaultT('album.burst','Очередь дозора',9,1,{role:'Три быстрых попадания и пауза'}),defaultT('album.drum','Барабанный дозор',10,1,{role:'Длинная очередь, долгая смена магазина'}),defaultT('album.battery','Батарея',0,3,{frame:'frame.battery',role:'Три ствола с общей подачей'}),defaultT('album.stapler','Степлер',5,1,{role:'Контроль быстрых целей'})];
+const buildings=['wall','slow','repair','generator'].map((family,i)=>({id:'album.'+family,name:['Баррикада','Замедлитель','Ремонтный пост','Генератор штрихов'][i],family,site:'site.'+family,function:'function.'+family,shell:'shell.standard',utility:'utility.none',starter:true,cap:family==='generator'?2:0}));
+buildings.push({...buildings[0],id:'album.wall-heavy',name:'Бронированная баррикада',shell:'shell.reinforced',utility:'utility.armor',starter:false}, {...buildings[2],id:'album.repair-wide',name:'Дальний ремонт',utility:'utility.range',starter:false}, {...buildings[3],id:'album.generator-economy',name:'Экономичный насос',utility:'utility.economy',starter:false});
+const get=id=>{const p=allParts.find(p=>p.id===id);if(!p)throw new Error('Unknown '+id);return p;};
+function resolveWeapon(r){const c=get(r.core),ps=[r.head,r.sight,r.magazine,r.trigger].map(get);for(const p of ps)if(p.compatible!=='all'&&!p.compatible.split(',').includes(c.id))throw new Error('Compatibility '+p.id);if(r.trigger==='trigger.burst'&&r.magazine!=='magazine.standard')throw new Error('Burst magazine');const mul=k=>ps.reduce((a,p)=>a*p[k],1);const clip=ps.find(p=>p.clipOverride>0)?.clipOverride??c.clip*mul('clipMult');const damage=c.damage*mul('damageMult'),interval=c.interval*mul('intervalMult'),reload=c.reload*mul('reloadMult'),cycle=(clip-1)*interval+reload;return {damage,interval,reload,clip,cycle,dps:damage*clip/cycle,range:c.range*mul('rangeMult'),minRange:c.minRange,cost:c.cost+ps.reduce((a,p)=>a+p.cost,0),load:c.load+ps.reduce((a,p)=>a+p.load,0),level:Math.max(c.level,...ps.map(p=>p.level)),acquisition:rules.acquisition*mul('acquisitionMult'),radius:c.radius*mul('radiusMult'),targets:c.targets};}
+weapons.forEach(r=>r.resolved=resolveWeapon(r));
+towers.forEach(t=>{const fr=get(t.frame),h=get(t.hull),a=get(t.armor),fe=get(t.feed),tu=get(t.turn),we=weapons[t.weapon].resolved;const parts=[fr,h,a,fe,tu];const feed=Math.min(rules.maxFeed,fe.feedMult,fr.feed*fe.feedMult/t.count);t.resolved={cost:Math.ceil(parts.reduce((x,p)=>x+p.cost,0)+we.cost*t.count),hp:fr.hp*h.hpMult,load:parts.reduce((x,p)=>x+p.load,0)+we.load*t.count,capacity:fr.capacity+h.capacityAdd,defense:a.defense,frontDefense:a.frontDefense,feed,dps:we.dps*t.count*feed,range:we.range,level:Math.max(...parts.map(p=>p.level),we.level),acquisition:we.acquisition*tu.acquisitionMult};if(t.resolved.load>t.resolved.capacity||t.count>fr.mounts)throw new Error('Invalid tower '+t.id);});
+buildings.forEach(b=>{const p=[b.site,b.function,b.shell,b.utility].map(get);for(const x of p)if(x.compatible!=='all'&&!x.compatible.split(',').includes(b.family))throw new Error('Building compatibility');b.resolved={cost:Math.ceil(p.reduce((a,p)=>a+p.cost,0)),hp:p[0].hp*p[2].hpMult*p[3].hpMult,load:p.reduce((a,p)=>a+p.load,0),capacity:p[0].capacity,range:p[1].range*p[3].rangeMult,rate:p[1].rate*p[3].rateMult,slow:p[1].slow,defense:p[3].defense,build:p.reduce((a,p)=>a+p.build,0),level:Math.max(...p.map(p=>p.level))};if(b.resolved.load>b.resolved.capacity)throw new Error('Building load');});
+const result={version,date:'2026-10-18',status:'Предлагаемый баланс для реализации и игровых прогонов',rules,foundations,cores,weaponParts,buildingParts,weapons,towers,buildings,levels,partCount:allParts.length};
+function finite(value,at){
+ if(typeof value==='number')assert(Number.isFinite(value),'Non-finite balance number at '+at);
+ else if(value&&typeof value==='object')for(const [key,child] of Object.entries(value))finite(child,at+'.'+key);
+}
+finite(result,'balance');
+return result;
+}
+
+if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
+const result=buildDesignData(),{towers,buildings}=result;
+await fs.writeFile(path.join(root,'docs/balance/album-balance-v1.json'),JSON.stringify(result,null,2));
+await fs.writeFile(path.join(root,'docs/design/album-assembly-2026-10-17/design-data.js'),'window.ALBUM_DATA = '+JSON.stringify(result)+';\n');
+console.log(JSON.stringify({parts:result.partCount,towers:towers.map(t=>({name:t.name,...t.resolved})),buildings:buildings.map(b=>({name:b.name,...b.resolved})),totalUnlock:[...result.foundations,...result.cores,...result.weaponParts,...result.buildingParts].reduce((a,p)=>a+p.gold,0)},null,2));
+}

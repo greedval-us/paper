@@ -27,11 +27,14 @@ namespace PaperDefense.Core
         RunPhase Phase {get;}
         bool PendingUpgrade {get;}
         int GoldEarned {get;}
+        Guid RunId {get;}
+        int CompletedWaves {get;}
         float BlotterCooldown {get;}
         int ColoredInk(InkColor color);
         StructureView? StructureAt(Cell cell);
         BuildQuote QuoteBuild(IReadOnlyList<Cell> cells,StructureKind kind,MaterialTier tier);
         BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,TowerBlueprint blueprint,MaterialTier tier,InkColor color);
+        BuildQuote QuoteEntry(IReadOnlyList<Cell> cells,ResolvedEntry entry,MaterialTier tier,InkColor color);
     }
 
     public readonly struct WeaponMountView
@@ -39,14 +42,20 @@ namespace PaperDefense.Core
         public readonly Point2 Aim;
         public readonly int TargetId;
         public readonly float Cooldown,ActionRemaining,AcquisitionRemaining;
-        internal WeaponMountView(WeaponMountState state){Aim=state.Aim;TargetId=state.TargetId;Cooldown=state.Cooldown;ActionRemaining=state.ActionRemaining;AcquisitionRemaining=state.AcquisitionRemaining;}
+        public readonly WeaponCycleState Cycle;
+        public int RoundsRemaining => Cycle.RoundsRemaining;
+        public bool IsReloading => Cycle.IsReloading;
+        public double CycleRemainingWork => Cycle.RemainingWork;
+        internal WeaponMountView(WeaponMountState state){Aim=state.Aim;TargetId=state.TargetId;Cooldown=state.Cooldown;ActionRemaining=state.ActionRemaining;AcquisitionRemaining=state.AcquisitionRemaining;Cycle=state.Cycle;}
     }
     public readonly struct StructureView
     {
         public readonly int Id;
         public readonly Cell Cell;
+        public readonly int GeneratorPaidWaves;
         public readonly StructureKind Kind;
         public readonly string ContentId;
+        public readonly string SourceAlbumEntryId;
         public readonly MaterialTier Tier;
         public readonly float Health,MaxHealth,BuildRemaining,Cooldown;
         public readonly bool IsComplete,WaitingForClearance;
@@ -55,15 +64,16 @@ namespace PaperDefense.Core
         public readonly int PrimaryTargetId, SecondaryTargetId;
         public readonly TargetPriority Priority;
         public readonly TowerBlueprint Blueprint;
+        public readonly ResolvedEntry ResolvedEntry;
         public readonly InkColor Color;
         readonly WeaponMountView mount0,mount1,mount2;
         public WeaponMountView GetMountState(int mount)=>mount==0?mount0:mount==1?mount1:mount==2?mount2:throw new ArgumentOutOfRangeException(nameof(mount));
         public Point2 GetMountAim(int mount)=>GetMountState(mount).Aim;
         public int GetMountTargetId(int mount)=>GetMountState(mount).TargetId;
         internal StructureView(StructureState s)
-        {Id=s.Id;Cell=s.Cell;Kind=s.Kind;ContentId=s.ContentId??LegacyContentIds.Weapon(s.Kind);Tier=s.Tier;Health=s.Health;MaxHealth=s.MaxHealth;BuildRemaining=s.BuildRemaining;
+        {Id=s.Id;Cell=s.Cell;GeneratorPaidWaves=s.GeneratorPaidWaves;Kind=s.Kind;ContentId=s.ContentId??LegacyContentIds.Weapon(s.Kind);SourceAlbumEntryId=s.SourceAlbumEntryId;Tier=s.Tier;Health=s.Health;MaxHealth=s.MaxHealth;BuildRemaining=s.BuildRemaining;
             Cooldown=s.Cooldown;IsComplete=s.IsComplete;WaitingForClearance=s.WaitingForClearance;Aim=s.Aim;Priority=s.Priority;
-            Blueprint=s.Blueprint;Color=s.Color;PrimaryAim=s.PrimaryAim;SecondaryAim=s.SecondaryAim;
+            Blueprint=s.Blueprint;ResolvedEntry=s.ResolvedEntry;Color=s.Color;PrimaryAim=s.PrimaryAim;SecondaryAim=s.SecondaryAim;
             PrimaryTargetId=s.PrimaryTargetId;SecondaryTargetId=s.SecondaryTargetId;
             mount0=new WeaponMountView(s.GetMountState(0));mount1=new WeaponMountView(s.GetMountState(1));mount2=new WeaponMountView(s.GetMountState(2));}
     }
@@ -141,10 +151,12 @@ namespace PaperDefense.Core
         public float BaseHealth=>source.BaseHealth;public float Countdown=>source.Countdown;public float Elapsed=>source.Elapsed;
         public long TickIndex=>source.TickIndex;public RunPhase Phase=>source.Phase;public bool PendingUpgrade=>source.PendingUpgrade;
         public int GoldEarned=>source.GoldEarned;public float BlotterCooldown=>source.BlotterCooldownRemaining;
+        public Guid RunId=>source.RunId;public int CompletedWaves=>source.CompletedWaves;
         public int ColoredInk(InkColor color)=>source.ColoredInk(color);
         public StructureView? StructureAt(Cell cell){var value=source.StructureAt(cell);return value==null?(StructureView?)null:new StructureView(value);}
         public BuildQuote QuoteBuild(IReadOnlyList<Cell> cells,StructureKind kind,MaterialTier tier)=>source.QuoteBuild(cells,kind,tier);
         public BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,TowerBlueprint blueprint,MaterialTier tier,InkColor color)=>source.QuoteBlueprint(cells,blueprint,tier,color);
+        public BuildQuote QuoteEntry(IReadOnlyList<Cell> cells,ResolvedEntry entry,MaterialTier tier,InkColor color)=>source.QuoteEntry(cells,entry,tier,color);
     }
 
     internal sealed class ProjectedList<TSource,TValue> : IReadOnlyList<TValue>

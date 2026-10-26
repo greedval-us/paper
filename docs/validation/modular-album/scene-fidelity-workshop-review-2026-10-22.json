@@ -1,0 +1,1452 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-10-22",
+  "reviewer": "workshop_final13",
+  "artRevision": "modular-full-catalog-2026-10-22-v7",
+  "scope": "12 canonical workshop/trial screens and 7 extra runtime states at all 5 prescribed sizes",
+  "method": "Each listed PNG was opened with view_image and inspected as actual pixels. All 12 corresponding source sketches and the 3 updated modular assembly sheets were also opened. SHA256 and capture metadata below bind the review to the inspected artifacts; file existence alone was not used as visual evidence.",
+  "verdict": "PASS_WITH_RESIDUALS",
+  "acceptanceMeaning": "No open P1/P2 visual regressions in the inspected runtime states after the focused-trial correction. This is a technical visual review, not a claim of pixel identity or human art-direction approval.",
+  "uniqueCaptureCount": 95,
+  "captureViewOperations": 105,
+  "canonicalCaptureCount": 60,
+  "extraCaptureCount": 35,
+  "sourceSketchCount": 12,
+  "updatedAssemblySheetCount": 3,
+  "sizes": [
+    "1024x768",
+    "1280x720",
+    "1920x1080",
+    "1280x960",
+    "1600x900"
+  ],
+  "openP1P2": [],
+  "resolvedFindings": [
+    {
+      "priority": "P2",
+      "state": "10-trial",
+      "finding": "The first capture set cut remote tower assemblies and their wide low bases against the focused viewport's left border, most visibly at 1920x1080, 1600x900 and 1280x960.",
+      "resolution": "The parent corrected focused presentation to omit an out-of-focus assembly as a whole rather than draw a half base. Camera focus and physical actor scale remain separate from overview presentation.",
+      "recheck": "All 5 corrected focused captures and all 5 overview captures were physically reopened. No cut actor or base remains at the viewport border in the focused captures. Overview still presents the complete groups.",
+      "status": "RESOLVED"
+    }
+  ],
+  "sharedObservations": [
+    "Blue pen outlines, ivory squared paper, hand-drawn typography, restrained gold accents and hatching consistently follow the source visual language.",
+    "The low Standard foundation stays a shallow slab; the two distant mounting discs remain legible and the moving weapon silhouette is clear above the mounting cylinder. The two-gun review composition has no visible joint gap or roof occlusion of the mechanisms.",
+    "Working runtime numbers were reviewed for visible labels and fit. They were not replaced with illustrative source numbers. Numeric correctness beyond the visible known fixture values is covered by the parent's separate automated checks.",
+    "Clipped portions of scrollable off-screen catalog cards are normal viewport behavior. Selected details and primary actions stay visible.",
+    "Most screens use the common live workshop header and footer rather than reproducing the source's different per-screen header controls.",
+    "The updated modular sheets are authoritative for component silhouettes. Earlier round high tower foundations in sketches 04, 05, 08 and 30 are therefore represented by the current modular foundation, not reproduced literally."
+  ],
+  "sharedResiduals": [
+    "The art is assembled from 2D sprites. Perspective, proportions, isolated component cut edges and exploded spacing are not a pixel-identical reconstruction of the paintings.",
+    "Large standalone weapon previews expose a small ivory rectangular source/crop fringe beneath the mounting cylinder, clearest in magazine previews. It does not hide a joint, label or control, but remains a polish difference from the surrounding paper.",
+    "Peripheral scenery is reused and more subdued than the bespoke scenery painted for several source sketches.",
+    "Some secondary long recipe or catalog captions shorten at 1024 pixels; the selected title, cost/availability and main metrics remain available in the primary panel."
+  ],
+  "updatedAssemblySources": [
+    "docs/design/album-assembly-2026-10-17/art/01-towers.png",
+    "docs/design/album-assembly-2026-10-17/art/02-weapon-parts.png",
+    "docs/design/album-assembly-2026-10-17/art/03-structures.png"
+  ],
+  "states": [
+    {
+      "captureStem": "04-foundation",
+      "kind": "canonical",
+      "source": "04-foundation.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "The four foundation cards retain the source 2 by 2 arrangement on the left and large preview on the right.",
+        "Both labelled mounting arrows, all four foundation metrics (2, 10, 55 HP, 16 strokes), prices/level requirements and navigation are visible at every size.",
+        "The Standard base is a thin one-course diamond slab with no towering front wall; its complete silhouette fits the hero preview."
+      ],
+      "residuals": [
+        "The live current modular low slab differs from the old round masonry concept; the full hero is smaller within the taller 4:3 preview area."
+      ],
+      "sourceSha256": "9180154b909dd512afea969def6509a0b0220b972ff7f56a5699dbbc1723285c",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-04-foundation-1024x768.png",
+          "sha256": "f9c85250314f33c2489940336794a1303971cc568d5c374eaf8c2d21120c7a3c",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-04-foundation-1024x768.json",
+          "metadataSha256": "d3f5f09f3826f8a3d4f9fad43fa8c4767973aea04743815ea39b756e2e180ad9",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-04-foundation-1280x720.png",
+          "sha256": "95e1b32bf9b572f735cc4cda75a2aaf26cedecda4caad18896528ba2c079e327",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-04-foundation-1280x720.json",
+          "metadataSha256": "0de0da80ac610ae582c234bbdd94c034cdcd7932c7ecd737ea51a11ad784969a",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-04-foundation-1920x1080.png",
+          "sha256": "2e39a9d501e42c3ef323588638c691e92f76fc0194405f7f43533c1e3a7b94d9",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-04-foundation-1920x1080.json",
+          "metadataSha256": "3f450b9f2e8818f8576fbc249cfc8394d2e79b4d5169b711d27efdf99eaa3c6f",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-04-foundation-1280x960.png",
+          "sha256": "f1a3840fe269793dbea1e97beaa22cf5e69d44c4e7b297f8e5f545d589b78e58",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-04-foundation-1280x960.json",
+          "metadataSha256": "450be1f56b0d3bcc024b044c134d965e02b140b684e1c5e965a29639772bb1f5",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-04-foundation-1600x900.png",
+          "sha256": "d1e520f9841342fb4059c838925d5fa71c1aa5a5743beb4be6886bec9a879ed0",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-04-foundation-1600x900.json",
+          "metadataSha256": "49c09d5ba26cd773504a101eb63fc60cdfb50ec3b518e69a7c1503b1d2b72dbc",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "05-weapons",
+      "kind": "canonical",
+      "source": "05-weapons.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "All seven weapon families have distinct silhouettes and readable names/prices at all sizes, including the two-line piercer name at 1024.",
+        "The load is 4/10, whole tower price 40 and gun-only price 24; the other six catalog prices remain 44, 69, 39, 52, 12 and 8.",
+        "The selected gun seats on the left mount; the empty right seat remains visible and the hero stays inside its allocated area."
+      ],
+      "residuals": [
+        "The runtime names follow the catalog and need not duplicate shorter illustrative labels in the source.",
+        "The small recipe summary beneath the hero is shortened at narrow widths; the five part tabs remain available."
+      ],
+      "sourceSha256": "2f0893c31272c3e20e6a79b873c8db17770f3c92f89a22cba2b271a20421f638",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-05-weapons-1024x768.png",
+          "sha256": "c9542db245e232705d5b34d1217a9a2420836ba270d3fb90e1cf7c72f51be8b3",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-05-weapons-1024x768.json",
+          "metadataSha256": "f566ccae7b978a96b1a0278e5061d99e6ecf084999f0c65901fd363b7cb5d621",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-05-weapons-1280x720.png",
+          "sha256": "0f98102a6fc16d73d133593d6c447fa08bd6288291fca2fd2ed381ee5611f6f4",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-05-weapons-1280x720.json",
+          "metadataSha256": "d1fbe83034d43c69f54cb5691dbcb64a7c37e8c153fa796fc884e7ca9e386243",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-05-weapons-1920x1080.png",
+          "sha256": "133d213871ccc3996c3b8bd8d687ffe06c34e5ccbbae6fa34abba06b6dc0038b",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-05-weapons-1920x1080.json",
+          "metadataSha256": "3fde04cf5650d8a0eef59b2f7ff1ec5029c0d31bcd8bcbdc367d76a8e8fb48ed",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-05-weapons-1280x960.png",
+          "sha256": "d3df7e2a841e181d5edcef742d82ea6fc0c55d1633acd43ff0f2b7be7a0b2988",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-05-weapons-1280x960.json",
+          "metadataSha256": "b188d06d03afe62585ea27c386c2b9add66025d3a4f6b918ac3ca49327e17f04",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-05-weapons-1600x900.png",
+          "sha256": "50fee5e747f5fdf8ebf7e2a7a1a92202a4329a8c94a74aa8db5cfe35c120c849",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-05-weapons-1600x900.json",
+          "metadataSha256": "beabedc011cdafaf3b734c53a908bd530833d2ad649e5d9874c5274ab0adc15f",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "06-drawing",
+      "kind": "canonical",
+      "source": "06-drawing.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "The five actual weapon parts are visible in an exploded composition with dotted connection guides.",
+        "All six right-side fields remain readable: damage 12, range 8, magazine 6, reload 0.42 seconds, tower load 4, weapon price 24.",
+        "Save/select and cancel controls remain fully inside the footer at all sizes."
+      ],
+      "residuals": [
+        "The source's miniature trial illustration and colored bar meters are represented by the live component workflow and numeric rows.",
+        "The mechanism is the updated modular cube rather than the source's earlier round body."
+      ],
+      "sourceSha256": "edba0bc718e2c896c7854442f269855aa16f22b8cb456994c61bb25410126930",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-06-drawing-1024x768.png",
+          "sha256": "eed84bd7ff1540a6a3045fbe90161a6af91a3ebf1001c00bbc45ae21fbbcaa56",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-06-drawing-1024x768.json",
+          "metadataSha256": "d8d3303b3dcac5427736a51ae87a3120006cc2ab6a93ff26070b06401cab2697",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-06-drawing-1280x720.png",
+          "sha256": "351cda36db40f174328cc6f5c009b1887e420b5d9c3dbd725be8601243375787",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-06-drawing-1280x720.json",
+          "metadataSha256": "e7491f48a73b727e60311c9a99581c364e0f2f437b69232ff8cb01acaf592713",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-06-drawing-1920x1080.png",
+          "sha256": "72afa55d9d07013023f8bcf290c4be45a0020986e99e305e101760d595a63e22",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-06-drawing-1920x1080.json",
+          "metadataSha256": "10458c62e04738c699f9ec6eed9d88e30b7c41a07c817b14ed71e60380ebf2c2",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-06-drawing-1280x960.png",
+          "sha256": "16f12242779e5854f38ac191ccb8d9986185ec1b437f79aef27ed4d48856b06c",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-06-drawing-1280x960.json",
+          "metadataSha256": "df584d4fbd76b85f17546166fa418667e053d7794d24bdd1a3144f1c33c9dc77",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-06-drawing-1600x900.png",
+          "sha256": "0a3e0d4a81e51ee7e5feab7d20a5281abd3a4d4651574a0afb634cc86f3342b9",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-06-drawing-1600x900.json",
+          "metadataSha256": "0af25a25b090a6627f3afeac58e5b8091ed6fe96a1b5acc48f965c9f3d917ce6",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "07-details",
+      "kind": "canonical",
+      "source": "07-details.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Two large isolated barrels match the source's side-by-side comparison concept and remain clear of the table.",
+        "All six visible deltas fit: 12 to 13.2, 8 to 10, 0.42 to 0.504 seconds, 28.57 to 26.19 DPS, 40 to 52 strokes and load 4 to 6.",
+        "The selected long-barrel card, install action and save/select action stay visible at every size."
+      ],
+      "residuals": [
+        "The live table uses shorter DPS/price/load labels rather than spelling out tower on this screen.",
+        "The 1024 standard-barrel catalog card shortens its secondary title, while the larger hero caption identifies the current gun barrel.",
+        "The source's decorative ammunition crates and trial inset are absent from the functional comparison layout."
+      ],
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-details-1024x768.png",
+          "sha256": "8f661f1e1caa229a48a22873a90f3d46b142ae79d1f9e419a6cfcc31df721579",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-details-1024x768.json",
+          "metadataSha256": "3e18d9ba0457686bb3f0f2f8e969f57dc141776cee1ef6a168d5d63a6ec10a23",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-details-1280x720.png",
+          "sha256": "61d0629349214e1ed6373d385542887c703cef021f15caebd4e2fcbbbbcd9848",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-details-1280x720.json",
+          "metadataSha256": "895398ededd81e13051c1212443f6c76eaea4b412d105dc4b059b6d74d368f15",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-details-1920x1080.png",
+          "sha256": "5b0b4a1d5deba7901460c387085af91709d505b3a34308a5f945ca5f1fe3a051",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-details-1920x1080.json",
+          "metadataSha256": "f7f9db4c07d985b5d232c6a80be6e43b2611e6e8e67c88cd13a0b009ac5c12cc",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-details-1280x960.png",
+          "sha256": "734277e47d026d52006566934aebbdad4fb051adc9d2f10973be7d1a7127c41e",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-details-1280x960.json",
+          "metadataSha256": "41ef34076afe3d8838ee03b69fc5f370f650bd48909a5f99ff2d029cfacffaf7",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-details-1600x900.png",
+          "sha256": "769a0d2da874dbb32a22dffbf60c05835a1d087a20bcf908249131519aa232a2",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-details-1600x900.json",
+          "metadataSha256": "e07883a9a291c24093e986aa3b8c3e1c26ce0d5315fe0bcb133acabd53a6c02d",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "08-review",
+      "kind": "canonical",
+      "source": "08-review.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "The double gun assembly, name field, green compatibility checks and right-side result card follow the source composition.",
+        "Load 8/10, tower price 64, HP 55 and DPS 45.71 are readable at every size; the three green checks are drawn and not missing glyphs.",
+        "Both weapon mechanisms are clearly above the low base, with intact seats and no intersection into its front wall."
+      ],
+      "residuals": [
+        "The two live idle weapons point in the same preview direction, unlike the artist's opposing decorative pose.",
+        "Extra frozen recipe rows use a scroll area beneath the hero and are denser than the painted caption."
+      ],
+      "sourceSha256": "77ec8626b7444519e8c635d44ff07ba496e180bc5f20bc76ab72750db568522b",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-08-review-1024x768.png",
+          "sha256": "bca8959711976e5c2641bee25242ed343f073511681b623cee909d949eb2eec4",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-08-review-1024x768.json",
+          "metadataSha256": "00919f04af8d9705e1b1a08065cc6ebe7b4699e77185accd329ac753d658eaa7",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-08-review-1280x720.png",
+          "sha256": "9865f2e790f0f1df13d274e78325d83c59a04d85821520c9b6bd5e4eb6d8781c",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-08-review-1280x720.json",
+          "metadataSha256": "f15caff9875afe173ccb5a062e91da4dba33ae8eeb1d63c62f2bb3edfeb8324f",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-08-review-1920x1080.png",
+          "sha256": "e955137874c931cbe38bcd717f4ed080691f52be0f9423ba426e18b17eebf54a",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-08-review-1920x1080.json",
+          "metadataSha256": "ae84b4d5bf4f9c60c87f44ffe9ade57f371d7c3540519b907553014ee8c00165",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-08-review-1280x960.png",
+          "sha256": "3060f971874c010c344d463926a9813cbceebe53c0cf505e36f911a9fbe5a685",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-08-review-1280x960.json",
+          "metadataSha256": "5072ef2e9280331f8cd47b437b4b036786f03f8c1249e37d386a2114fe280755",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-08-review-1600x900.png",
+          "sha256": "9ef3a5b16a59aa8f250dc5c58ea17fc8b2128527182b50f0c152c0265558d8f2",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-08-review-1600x900.json",
+          "metadataSha256": "8a13b319580a63266a1d0ff6421afd34e76d81c29217a775324046d80741e832",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "10-trial",
+      "kind": "canonical",
+      "source": "10-trial.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "After recheck, the focused view contains a complete engaging tower assembly and target in each comparison lane, without half-cut remote assemblies at the viewport border.",
+        "Budget 400, copy costs 64/40, copies 6/10, spending 384/400 and measured damage 22/22 are readable at every size.",
+        "The comparison table, six scenario tabs, pause/replay and return controls fit all five resolutions."
+      ],
+      "residuals": [
+        "The runtime compares two actual runs rather than reproducing three illustrative source battle groups.",
+        "Focused presentation deliberately omits whole remote assemblies outside the engagement; overview is the complete army view.",
+        "Source projectile flourishes, red health bars and scenery density differ from the current recorded frame."
+      ],
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-1024x768.png",
+          "sha256": "5b94419437f8c11cff9cf5d0e54b9df06d8b3b691cf43f2f28c04b88b4e6fc6b",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-1024x768.json",
+          "metadataSha256": "bc778fecf58cfaa699c1a583fd8f108b01277839002de880c37b3dbfeefcf8bf",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 240294,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-1280x720.png",
+          "sha256": "a82f267550629ec0e7c1e04c61f0e4baf0c4b7f482e625bda74f9c91df5b250c",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-1280x720.json",
+          "metadataSha256": "e59c2b57fb45e4dd77ead5ecb47f1c4f1a7eef357c60471ece2f0eeba503d9d3",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 240560,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-1920x1080.png",
+          "sha256": "2204c6dfc5041cfd523af8c598187489c7bcac956ef07a5b7713038737376e4f",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-1920x1080.json",
+          "metadataSha256": "da9c568ff8679c87d9f9797d7b982e1a79dc99454a892977464219b4226d244a",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 241235,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-1280x960.png",
+          "sha256": "260f4d48c2e62b04a3ca5ff93de0f286eb82a8673e0dd4e14da7971d44cb7e4f",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-1280x960.json",
+          "metadataSha256": "cef3f04e490a365d34a34ac3da4a320e05fb08af4daa30b173dc20ea14847e7d",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 242012,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-1600x900.png",
+          "sha256": "95ba2f2fcd25d67a1b6edfffa048f33e21a0b5c033f88fee1285879bcc28618e",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-1600x900.json",
+          "metadataSha256": "402f9ebfec19660ffe61ff991f8d24e8c1e10904603036aec650db7d87e94838",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 242701,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "11-stencils",
+      "kind": "canonical",
+      "source": "11-stencils.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "The three barrel choices and selected long barrel reproduce the source card hierarchy.",
+        "The detail thumbnail, all six comparison rows and 80-gold unlock action remain visible at all sizes.",
+        "The selected requirement is legible as level 4 and 80 gold in the main detail area; the profile still displays 94 gold before purchase."
+      ],
+      "residuals": [
+        "The runtime uses a full workshop catalog rather than the concept's centered modal over a workshop painting.",
+        "The 1024 card itself shortens the last gold word; the complete requirement remains in the right detail panel."
+      ],
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-11-stencils-1024x768.png",
+          "sha256": "1a06b7aab7366aa0f0aec8781d19d58605e33aa4b0802dfe1cbaece187c1839d",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-11-stencils-1024x768.json",
+          "metadataSha256": "5da3ba7fd327bb81b36d4a46756ca4af2191d658efb38d0927628f7f3c79bcec",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-11-stencils-1280x720.png",
+          "sha256": "f845ab82e5674e98f6b1cd0e5ee9ce04f38db6ca90304179b61a6deac5b1e42d",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-11-stencils-1280x720.json",
+          "metadataSha256": "eddff5ffdd63930446bd2dfd0e349cbc514c786fb5d198d83f505a86d049ca5a",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-11-stencils-1920x1080.png",
+          "sha256": "79d69a6170dca6ffdddeecc19f98b53a604d86ddd7622358496de2ff8e347a19",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-11-stencils-1920x1080.json",
+          "metadataSha256": "4bbc2f0c33888b2b9a80d2d37582a3b964c1e31de5f873882a5b55642f784df8",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-11-stencils-1280x960.png",
+          "sha256": "272a58e9b0a4a58489ecedcaa1b10d585492ef91049645c72b203456db2570fd",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-11-stencils-1280x960.json",
+          "metadataSha256": "291ec6383e2cd8493d7d443c7657fc5caa40c772b1170c8cd58d0101f70d6adb",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-11-stencils-1600x900.png",
+          "sha256": "b7dba24e7f86fce526af4af1c7e862056832af60b7a655173e385a6d2c351313",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-11-stencils-1600x900.json",
+          "metadataSha256": "f0a9e9c53f6ce0fcdcecfe1ef079d9ee41bebd2de8a66b3d0077a604fff99339",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "12-mortar",
+      "kind": "canonical",
+      "source": "12-mortar.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "Standard and wide mortar barrels, the arcing shot guide, hatched impact circle and target dummies all fit the central preview.",
+        "Damage 28, range 18, minimum 6, radius 2.4, interval 1.9 seconds and current tower price 99 are readable.",
+        "The locked wide-barrel card shows both level 6 and 120-gold requirement even at 1024."
+      ],
+      "residuals": [
+        "The targets are the live line-art dummies rather than the painted source enemies; there are fewer targets.",
+        "The current selected standard barrel is shown with its real mechanics and compact numeric fields instead of source bar meters."
+      ],
+      "sourceSha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-12-mortar-1024x768.png",
+          "sha256": "ca7a22df1072934b7a184c0d83ed34eccbbc8ddb49911e58381e85054e88eff3",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-12-mortar-1024x768.json",
+          "metadataSha256": "a08e2b8d42c4edfa3be6d951b6954c52ba0f38db533c95842ff98efae5653dfe",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-12-mortar-1280x720.png",
+          "sha256": "95bd5cf077bd400da0a492a74b26b50828175194a0708867b4294a616b1fe7af",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-12-mortar-1280x720.json",
+          "metadataSha256": "1a6821d0de566f4ad928376d31c12b9a52ccef86f3f5ccd5f81915f20a544a9b",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-12-mortar-1920x1080.png",
+          "sha256": "06a145ffd10bc6017ef9b2ceeab3addce844dfc07461568dfb90fcdd51b60f23",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-12-mortar-1920x1080.json",
+          "metadataSha256": "78743ea4a4ede7f8d35d6210b768559e689a96bd5516a73cfb6568b4c79dd4a3",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-12-mortar-1280x960.png",
+          "sha256": "d5943ec8bda1c6bed0991242ace475c4fb375cf58d842b5906b7af3fc61348fd",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-12-mortar-1280x960.json",
+          "metadataSha256": "7e5ccdf87e12e18a9e0e58323a88e11bfa36cbf9f3a0c3519ffe5e7eb46761c2",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-12-mortar-1600x900.png",
+          "sha256": "2d2b404a263f693a05b01e4038f94c3c27fad8bd3a0669e59c66c384ab7c8a69",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-12-mortar-1600x900.json",
+          "metadataSha256": "39d8d8b5eb4b3f73a2c1fdc51c15a419a260561b030bdda13f05ec19ec135984",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "13-fan",
+      "kind": "canonical",
+      "source": "13-fan.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "The sector's apex meets the weapon muzzle; its 90-degree label, hatched wedge and all eight target dummies are visible.",
+        "Damage 14, range 6, interval 0.85 seconds, up to 8 targets, sector 90 degrees and tower cost 55 remain readable at all five sizes.",
+        "No target or wedge covers the right-side metric rows or footer controls."
+      ],
+      "residuals": [
+        "The current mechanism selector occupies the right lower area instead of the source's two sight-selector cards."
+      ],
+      "sourceSha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-13-fan-1024x768.png",
+          "sha256": "3767208379402c437010fd5eea5e086a0c165853cc1775a4abd8bfc24632388a",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-13-fan-1024x768.json",
+          "metadataSha256": "15987eae6c43959b8046b61eace873c4c10cd6c815ce177ffb374ac6cbe5ee73",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-13-fan-1280x720.png",
+          "sha256": "532e4c04290835d00ff741335dae43e1f04fe4d6e374b48a14e23cf77eacdae4",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-13-fan-1280x720.json",
+          "metadataSha256": "213540df7c6d5be7cac23e3145b4dd859255f8fa0636e7418b64b3d0f6843046",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-13-fan-1920x1080.png",
+          "sha256": "0e99dd4870f9bbed9f73ac3b88012806b43b0fcd9a57c829b517f9b1dc795510",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-13-fan-1920x1080.json",
+          "metadataSha256": "baa6cc6c571386a5c748bee68d3f8c099682a34d60e24d0ebd254fa80b9921cf",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-13-fan-1280x960.png",
+          "sha256": "422230a38ef4e318144f9662c4935ef47a8a9713fd5e649912480c0fcc61f6f2",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-13-fan-1280x960.json",
+          "metadataSha256": "d7f55c86bfa2fab34679c29e46abac8d3243d049e29017c828fc8d2d4a37f27e",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-13-fan-1600x900.png",
+          "sha256": "bda457f4a9a344f271069a972e2f6a9abe947d9ca692ce43477ae2adce39fe4b",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-13-fan-1600x900.json",
+          "metadataSha256": "3e2e3cd212af482b406df5330a4b51f629c5cac211b4b6040d71ef8c1806055b",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "14-armor",
+      "kind": "canonical",
+      "source": "14-armor.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "No-armor, plate and frontal-shield cards retain distinct states and readable availability.",
+        "The four direction arrows, small full foundation preview and all six numeric rows fit all sizes.",
+        "The plate preview shows general protection 0 to 30 percent while frontal 90-degree protection stays 0; cost 16 to 30 and load 4 to 6 are visible."
+      ],
+      "residuals": [
+        "Armor is presented as the current 2D pair of plates near the foundation front, not the source's wrapped overhead ring.",
+        "The direction diagram replaces the concept's separate incoming-hit/remaining-HP demonstration."
+      ],
+      "sourceSha256": "1cd621482759ce147f1aa4513f11753f0b3510b9c8af1459acb9d999a0e88e45",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-14-armor-1024x768.png",
+          "sha256": "55e66aa8a0cf31f330d05499fd60296294e7f31213402249eea6549202c681c1",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-14-armor-1024x768.json",
+          "metadataSha256": "2d751297af185a44c5184f9e417a7012664732e066e469673772f74695c9815a",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-14-armor-1280x720.png",
+          "sha256": "df13a03e295d0699de883a272e14514ff2a290d1e294c2cfd26971792f22fbc7",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-14-armor-1280x720.json",
+          "metadataSha256": "9f11a7770004d7e49dc5bc81532942c7f826c8ee2820cf5595d7ee121781a2cf",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-14-armor-1920x1080.png",
+          "sha256": "8284642e0913caea7d2361e68b2f6a0120b9aaa04ada6ba221862259476397e3",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-14-armor-1920x1080.json",
+          "metadataSha256": "c2b21a2ef83f65acd065bdf2c494898e9f23b5eb5e9ac6dc11508cc62471e1e9",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-14-armor-1280x960.png",
+          "sha256": "3f94c92343a9e74c1799efc3a07b54cbfeb016a718b9b77d3ca6b39e7f016d50",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-14-armor-1280x960.json",
+          "metadataSha256": "a82bf265b80e824b7f95f34b418afcb413be94a13e1a00f50a09f5780a1eb77b",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-14-armor-1600x900.png",
+          "sha256": "4f843a09eca04fc4f13b6f5fe8007cedb9bf70ba7a120a2af753794b0310e9e0",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-14-armor-1600x900.json",
+          "metadataSha256": "597bd257fed12b1501dbe377ca4939324b31a7523ebab2831b6cfa8da30d1568",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "29-structure",
+      "kind": "canonical",
+      "source": "29-structure.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "The generator function, shell panels and foundation are visible as separate native parts with dotted assembly arrows.",
+        "All four capability rows fit: 80 HP, cost 60, income 12 per wave, payback 5 waves.",
+        "The placement rules remain distinct from metrics: pencil only, limit 2 and sale return 0. The economical-pump level 8 and 180-gold availability is visible when its scroll card is in view."
+      ],
+      "residuals": [
+        "The source's generator explodes its wheel, reservoir and pipe more individually; the runtime function part is a frozen composed sprite.",
+        "The complete-survived-wave explanation from the source is not repeated in this compact rules panel."
+      ],
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-structure-1024x768.png",
+          "sha256": "df4248fa1274e941167cc8dbff3705210cf0f5f4aebd6c4091ca230c11970a64",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-structure-1024x768.json",
+          "metadataSha256": "709a900ed66c3833be58691ebbc001579b946a1c683712b44f1888a8f849ccba",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-structure-1280x720.png",
+          "sha256": "a08e817a984f3037d15308a4aa50f630644fb027e35923c608ea41dcde9f6493",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-structure-1280x720.json",
+          "metadataSha256": "29a260f80e2ea417ff208e5b80432951d868459e4d11d7487373cbfeccd67967",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-structure-1920x1080.png",
+          "sha256": "86b32985b5d8c082f68e7033ee3dbda5503166399629583dcd81e5c84b2001db",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-structure-1920x1080.json",
+          "metadataSha256": "7092d85a770233d93af90be0d21256f1630b2b5a3ddd4d0552c2ff60740305f2",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-structure-1280x960.png",
+          "sha256": "f8da0850f8d7662a54b5ac6de3f4c39e3af7241941bbf4fca3a0666e5371d628",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-structure-1280x960.json",
+          "metadataSha256": "2952b1ab2dc035c86e56392b2e7837619b8846dd79efb82cdf71dc41528f85c3",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-structure-1600x900.png",
+          "sha256": "d6ec47d92fa0c5326dc327d9df072b67d02034166c157d252a2e1368ed61b20d",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-structure-1600x900.json",
+          "metadataSha256": "b85a80f8036cb4021c8a786555cfced5564f43aa29eeb980134d391a1160ca97",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "30-foundation-parts",
+      "kind": "canonical",
+      "source": "30-foundation-parts.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "The five foundation categories, compatible hull cards and current native exploded foundation parts remain visible.",
+        "The five relevant fields read HP 55, capacity 10, mounts 2, feed 1.6 and foundation price 16; no weapon damage or DPS is substituted.",
+        "Dotted guides point from feed/turn to the hull and from the hull to the frame."
+      ],
+      "residuals": [
+        "The new one-course foundation's authored lower frame appears as a very thin front wedge when exploded; its straight cut edge is more obvious at large sizes than the old round concept.",
+        "The older source's tall circular layered diagram is not replicated because the current Standard foundation is a genuinely low modular slab."
+      ],
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-foundation-parts-1024x768.png",
+          "sha256": "03c59c4b9ac670eda53a83b1d7279676da6e2287017a771c3f185a7d974c26a9",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-foundation-parts-1024x768.json",
+          "metadataSha256": "de4763d749b3b65e2ac5e682c1f94e4ad5290cbcf5632fd573240b821236e407",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-foundation-parts-1280x720.png",
+          "sha256": "1e62bb693eaddf1fba54d11b305fc6236458574c901e5fc75d4f00dba8eaa970",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-foundation-parts-1280x720.json",
+          "metadataSha256": "bad6e57ae7832f9534e86f7975769b57a518cdd7fc4de66bd1c78ca76cc3d7a7",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-foundation-parts-1920x1080.png",
+          "sha256": "a4e53a0efcd3d767f17bda1115888ca56c81dbb8485ebd9a1517a0f9c55f1d5e",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-foundation-parts-1920x1080.json",
+          "metadataSha256": "2c203734d073207e8dd122d77b1ce71bf55dd0a4dae0f8f454865b1f849128d2",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-foundation-parts-1280x960.png",
+          "sha256": "11fbd3ce9fce63eac8bb1e8392c118d47e7d7a2f84318ed25e767021cf32426b",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-foundation-parts-1280x960.json",
+          "metadataSha256": "35aefdf1b6272348b442aeec6dee8f03ed8808a020cc9df4429b754f83e2f691",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-foundation-parts-1600x900.png",
+          "sha256": "fca7d51371293790d0dd453e57d96a20e379fb80eacfcc7add61900f1dd258e4",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-foundation-parts-1600x900.json",
+          "metadataSha256": "8facaaed368fbc180e5ebfe18b7c0bee7335c0c6ec080b4de43bca687541437c",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "07-magazine-drum",
+      "kind": "extra",
+      "source": "07-details.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "The drum is seated on the actual gun with no visible joint gap; its large hero remains within the preview.",
+        "Three magazine-cycle rows remain separate and visible: volume 6 to 12, interval 0.42 to 0.357 seconds and change 0.42 to 1.26 seconds.",
+        "DPS tower, tower price and tower load labels are explicit, with 28.571 to 27.762, 40 to 52 and 4 to 5."
+      ],
+      "residuals": [
+        "This extra cycle comparison is not a separately painted source screen; it uses the common detail layout."
+      ],
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-drum-1024x768.png",
+          "sha256": "07884ecfc4bdf0b0a9bf79f318d2e9826c1a5872f2f3eda7b25a0aa64fd1356c",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-drum-1024x768.json",
+          "metadataSha256": "3d50271ff8e292ca3cc99399fb77cd0ee5e373b5448e314ca4c52680ab6a567b",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-drum-1280x720.png",
+          "sha256": "43b35a56a7377619c6470befe3729b501041f0ae58f8b75254ef53aad4a7a961",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-drum-1280x720.json",
+          "metadataSha256": "a11101cbe5acbdd2ec912a52946d05339d34327fd34be0b217703a7096398cac",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-drum-1920x1080.png",
+          "sha256": "f91a1145689d0c1051ea369f8ada6b28e9de8cfdfb6d498f0b17c681b8f7250e",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-drum-1920x1080.json",
+          "metadataSha256": "5d0a1dd4d1efbdfb3cd942aaea644d12cdb6ecdc4a53a1320ccccb4d3de8f5a2",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-drum-1280x960.png",
+          "sha256": "0a7276851612a5d6a3ded6ff018d01f25778f7db77c3d832c150f46414564fbd",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-drum-1280x960.json",
+          "metadataSha256": "f3009769c32b4e6736d25ee8617e4f156c08a5df64545298ed99da94805e0d74",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-drum-1600x900.png",
+          "sha256": "400f286845aba790ee1d838b94cfbb6c4bfe2b02ef9fde0009591ea46fd5f073",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-drum-1600x900.json",
+          "metadataSha256": "ef0cb69df0c824689072fb036302780a23039306fdde0ba2be052aeb45f5aa8b",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "07-magazine-belt",
+      "kind": "extra",
+      "source": "07-details.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "The belt's curled cartridge silhouette and receiver attachment remain visible at all five sizes.",
+        "Volume 6 to 6, interval 0.42 to 0.42 seconds, change 0.42 to 0.336 seconds, tower DPS 28.571 to 29.557, price 40 to 54 and load 4 to 6 all fit.",
+        "The level 7/150-gold requirement and disabled unlock/install states are legible, without covering the metric table."
+      ],
+      "residuals": [
+        "The catalog scrolls to the belt, so the off-screen standard cassette card is intentionally clipped at the top of its scroll area."
+      ],
+      "sourceSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-belt-1024x768.png",
+          "sha256": "5f50bcbc5e567e0aaad63ed3a6b7635a8960fe3268fa4870afbeed376de690d2",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-belt-1024x768.json",
+          "metadataSha256": "ea427a08fdb169f90b8851808443ba149429223c1053792c07e07fd1bd92eba1",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-belt-1280x720.png",
+          "sha256": "468d75ba25a60563cd3771929645d0b4a837b4a57d4c096bed24cb0547ff3916",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-belt-1280x720.json",
+          "metadataSha256": "52456386bf75c6fb212393247acf96459962f2ad39667078bd1edfe06c0e33c6",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-belt-1920x1080.png",
+          "sha256": "1dd49b4df98b5b799965dfbdf6914870377f7e410645c82e053333c3af727a20",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-belt-1920x1080.json",
+          "metadataSha256": "57733d15df2afee7fad4702b8add0f38c7b8c47677fa22f654525b458c7d566c",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-belt-1280x960.png",
+          "sha256": "429f4ea437baf01bd40a0410eaa1050eb0a07ef5895d45af14bc0f8a88ce06bf",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-belt-1280x960.json",
+          "metadataSha256": "bc2bc25c6fe310fe21b85c9a6398ff8081b8a845753793f87f2a61f44f98a61c",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-belt-1600x900.png",
+          "sha256": "212898868e08f76ed8df8a36ee0fb634e2d0b8d191160324166a95dd5b74ba2f",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-07-magazine-belt-1600x900.json",
+          "metadataSha256": "2742e9e91efe14c762159b60d7b978307adf009cc0a8acb4c8bfd1b5ff42039b",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "10-trial-overview",
+      "kind": "extra",
+      "source": "10-trial.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "The complete recorded tower groups are inside the viewport at every size, and the active toggle reads close-up.",
+        "The comparison values and actions stay readable and unchanged from the focused run.",
+        "All five overview images were reopened after the focused actor-clipping correction."
+      ],
+      "residuals": [
+        "The full-budget army becomes very small at 1024; the close-up toggle is needed for inspecting individual weapons.",
+        "Decorative scenery stays large relative to the tiny overview actors and is not an exact painting-to-runtime scale match."
+      ],
+      "sourceSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-overview-1024x768.png",
+          "sha256": "c4a144ff403d8f4bd996c00d0b92eee77731fc604bb3c7d71b2c99bf543d7942",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-overview-1024x768.json",
+          "metadataSha256": "08b29c7caf6aff14203930b76b3c6a4874970417bd3aa13d7e8aebba361ae7ed",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 240294,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-overview-1280x720.png",
+          "sha256": "ae68086c4ee51e98896b3730adc394690f60276b50c49b423c5ca4aaf28fbea7",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-overview-1280x720.json",
+          "metadataSha256": "ab2eb8539737fa7736bd260c7d1b61d00daa4a88e53fa4d288b31127330a341d",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 240560,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-overview-1920x1080.png",
+          "sha256": "9af1c850deb6f43f20c0d30e62c3235b95ff46c89895d7fa3bc88399a7595d9f",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-overview-1920x1080.json",
+          "metadataSha256": "7d28e12eb2df0eacd3718c2f72f79e02a333d4dba1957a86f23cf62f43e42534",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 241235,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-overview-1280x960.png",
+          "sha256": "a190b8d7f014f266cf35ae83a2b5e1fcdc5379d4745887b80fb49ce815c00063",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-overview-1280x960.json",
+          "metadataSha256": "3a939ef8b8954560cfad4eda4acd42b5c563ef45237fff4ebdc53383c85d85b9",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 242012,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-overview-1600x900.png",
+          "sha256": "bb1d17410cdbdaaaa53c8f80f63c2ee839801f8f165951a9af6a5a05d111ea57",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-overview-1600x900.json",
+          "metadataSha256": "5d1be54e149a5aefea4d0b06a40703f53b9caf151cf70974421e163c107f2bdf",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 242701,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "29-wall",
+      "kind": "extra",
+      "source": "29-structure.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "The timber wall, two shell plates and separate foundation match the updated structure sheet's modular language.",
+        "HP 200, cost 16, load 2/6, path blocking and enemy destruction rules are visible at all five sizes.",
+        "The install/apply actions fit and the parts are clear of the metric column."
+      ],
+      "residuals": [
+        "The shared exploded layout is less bespoke than the updated sheet's multi-layer wall diagram."
+      ],
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-wall-1024x768.png",
+          "sha256": "2927bd708de38a0bfa9926ed9d383bfaf2161f3b4e0c6b84f963a69f1251bad3",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-wall-1024x768.json",
+          "metadataSha256": "da59237fc8ef9b7936e04feed89156e5407d86bcd179b47e5ba7c6e942ba12ce",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-wall-1280x720.png",
+          "sha256": "135044e72f0c82e36da6c9e6831c53c3bce4250ec319f37e2cd603d9b1d69fed",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-wall-1280x720.json",
+          "metadataSha256": "1246ee858c1b37dfd702ca384f575d382f300e5d7f68848c9f7ee55ab1601a54",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-wall-1920x1080.png",
+          "sha256": "37951aee30cc916dc51c97445246225e9853b37614021b230dac9144857899d0",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-wall-1920x1080.json",
+          "metadataSha256": "361e6ba3e5fea70b299698943c9d1aab4b78fdee9f2d425cdea699a6ccb5b435",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-wall-1280x960.png",
+          "sha256": "ec2b6cd7c445f1e47b2e4ba9bb2d5436f87d10ff05a8055b627677c0cae19897",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-wall-1280x960.json",
+          "metadataSha256": "39e4b8d2e2df4b6d8b77f2fda1109a205339dca8ac8936a4decd5473f3881609",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-wall-1600x900.png",
+          "sha256": "453529a4d7d33597283ad71430c41a048b495ce784b617ac9e007eb03e7da303",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-wall-1600x900.json",
+          "metadataSha256": "5db1899f4d64a69a726b4293dfb48c43b870eef68dbf32b71bef2dc5902c01d9",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "29-slow",
+      "kind": "extra",
+      "source": "29-structure.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "The blue ink basin is visibly different from the other function parts and fits with shell and foundation parts.",
+        "HP 55, cost 22, enemy speed times 0.6, radius 1 and duration 0.6 seconds remain fully visible."
+      ],
+      "residuals": [
+        "The runtime default basin lacks the separate grate layer prominent in the updated structure painting."
+      ],
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-slow-1024x768.png",
+          "sha256": "48efa8108ab5533c7741dc30d2b60ab85fa0fda364cb13c42bbec952ec49feb7",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-slow-1024x768.json",
+          "metadataSha256": "a85e12de030fbeec30051ce558a7155558f94ab1e5d1cb1cdff59b799878dec9",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-slow-1280x720.png",
+          "sha256": "336bb4bff99701085527a77619b112bd8890982431c3855ba70ed883f8f1b04c",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-slow-1280x720.json",
+          "metadataSha256": "6b49caba85a0b1ecd1554ccf037c133221486a5b78854fdaf8bb3de6193235e4",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-slow-1920x1080.png",
+          "sha256": "63a0b48b7028612f6999ad92c388705d865e2ef3885c438c693cc238925c6a6d",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-slow-1920x1080.json",
+          "metadataSha256": "7814af742517266e347a647e815b6696df0f9b6dbf49e4222d44431cdfdf4139",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-slow-1280x960.png",
+          "sha256": "b07b49893993802cf718aac0a4da3ae6f1dacbe2ff15f70412b110cbcbd7a0ea",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-slow-1280x960.json",
+          "metadataSha256": "24536baf61858f05b5fd7861b5f46dba16fa1a327e2d11c5f5562ed6a324291e",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-slow-1600x900.png",
+          "sha256": "9a9f4952d80a4974b62e25de5271ae6778b0a5c7157759cfb9adeefb07e9ebf1",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-slow-1600x900.json",
+          "metadataSha256": "2b4c1bef1ab020644ed7c345aa131bb2a768241486a72b0486b4cb8f800cff64",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "29-repair",
+      "kind": "extra",
+      "source": "29-structure.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "The wooden repair workshop and tools are distinct in both hero and part cards.",
+        "HP 70, cost 65, repair 6 HP per second, radius 5 and one-target/no-stacking rule are readable at every size.",
+        "The zone-expander arm card uses the matching updated assembly style and appears naturally through scrolling."
+      ],
+      "residuals": [
+        "The current default workshop function has open framing rather than the complete pitched roof and crane of the source's finished repair post."
+      ],
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-repair-1024x768.png",
+          "sha256": "29c4e189783530c4b568cdca749888ffa945648403612c25ba14d85dc75b4210",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-repair-1024x768.json",
+          "metadataSha256": "4b49a216f598d2fcb1dda0bc336166fbf8ed6cab4a78698fbcb3048e1cd6519f",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-repair-1280x720.png",
+          "sha256": "8a489b1418ec2147fd2c0c25369772fe3f37275c3c42d7184b0369777725621c",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-repair-1280x720.json",
+          "metadataSha256": "2099e91c2ce7c6abd6c8e18780d7ed47e96102f65aadad5cd0577d43caf92b36",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-repair-1920x1080.png",
+          "sha256": "49ab4ba41f131e8b1384f5382cb748cdc27bdabb2ef43d37a0be002fc1ec81ec",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-repair-1920x1080.json",
+          "metadataSha256": "6294489cc98da84a0121e6bc799d9f663e276382fa8939db4eca6764431e44c0",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-repair-1280x960.png",
+          "sha256": "3b68c15476f4a8a68ee16efd9a58ff75642fe807c7c245c2ffe418483b45b192",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-repair-1280x960.json",
+          "metadataSha256": "fe107460f041d6aef8439bb225c45a85a72ed01f642b3b87ce00d6596bc99ef2",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-repair-1600x900.png",
+          "sha256": "25816ae234b1234c2d886b6ab722c2377579a5cc9679b3ce2478ce37f2fe02ef",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-29-repair-1600x900.json",
+          "metadataSha256": "15aad7f8afab25a786a4570a955f47337280664c5db9885208793c3272244434",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    },
+    {
+      "captureStem": "30-library",
+      "kind": "extra",
+      "source": "30-foundation-parts.png",
+      "verdict": "PASS_WITH_RESIDUALS",
+      "observations": [
+        "The saved Dozor foundation uses the new low-base thumbnail and all five recipe names are visible.",
+        "Choose composition, delete from library and return controls fit at every size."
+      ],
+      "residuals": [
+        "No separate full painting exists for this extra library state; the live saved-item list uses the common paper styling.",
+        "A single saved fixture leaves large empty paper space below the card."
+      ],
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-library-1024x768.png",
+          "sha256": "bb277dfd903e173a90da68a22fb51c02d24ee5be1c77a6f1799b00628a1a7903",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-library-1024x768.json",
+          "metadataSha256": "adc59892daa1c1d69cb47b7c114491f40cb31cf2e89c959414aaecae9d2dfa29",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 6651,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-library-1280x720.png",
+          "sha256": "b1097a0fdf284cabde9579c5b80829c3a2aaf3185eb9f44945859c7245657d1b",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-library-1280x720.json",
+          "metadataSha256": "593ad7871c537a9ce3831833818ee7e6c732402ed26b037a538daa840f032364",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10784,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-library-1920x1080.png",
+          "sha256": "7592262ab29680eaeef28621a1a54d977669a24c0907e5fd3d591a3fcd061d09",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-library-1920x1080.json",
+          "metadataSha256": "976b8df770d611b5f31ad7b5964f9ee69204aacbc96fc98c42fd03e9f1c5cb4f",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10804,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-library-1280x960.png",
+          "sha256": "5e229e5b5e6f9d7bda1206ad2428e600aba9ecd400ec7ab2b3c856ea73adf046",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-library-1280x960.json",
+          "metadataSha256": "cbeeb3765cd7927163a351765033fd555a910c21c5615fb7eed7e4264e39c191",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10827,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-library-1600x900.png",
+          "sha256": "2bd3b738a649ceed93cecfa4560ac1ab3517e35ce93995e6448677ef594ac045",
+          "metadataPath": "docs/validation/modular-album/fidelity-screenshots/fidelity-30-library-1600x900.json",
+          "metadataSha256": "12ae7a3514d81ac1d427ba46c62edd1ffaee3d38b3bee43d9bb16a50ca68af65",
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "frame": 10846,
+          "pixelsViewed": true,
+          "verdict": "PASS_WITH_RESIDUALS"
+        }
+      ]
+    }
+  ],
+  "updatedAssemblySourceBindings": [
+    {
+      "path": "docs/design/album-assembly-2026-10-17/art/01-towers.png",
+      "sha256": "c196824234faebeb4054827ea880cef5862d57576e8f7f52825546498b79e649",
+      "pixelsViewed": true
+    },
+    {
+      "path": "docs/design/album-assembly-2026-10-17/art/02-weapon-parts.png",
+      "sha256": "c992257bb49d26a15b0601c742d137195104e16a1b8b92edb1db5d720d44064e",
+      "pixelsViewed": true
+    },
+    {
+      "path": "docs/design/album-assembly-2026-10-17/art/03-structures.png",
+      "sha256": "90f87c2008cf9c287077e5875d85fecc61345c0b98dab68ea809f22977d1355f",
+      "pixelsViewed": true
+    }
+  ]
+}

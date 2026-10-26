@@ -1,0 +1,9 @@
+{
+  "started": true,
+  "alive_after_8_seconds": true,
+  "exit_code_before_cleanup": null,
+  "memory_only": true,
+  "graphics": "headless",
+  "log_written": true,
+  "runtime_errors": []
+}

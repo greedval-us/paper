@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Failed(Child)" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 03:00:43Z" end-time="2026-10-18 03:00:43Z" duration="0,6448222">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1007" result="Failed" site="Child" start-time="2026-10-18 03:00:43Z" end-time="2026-10-18 03:00:43Z" duration="0.644822" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="2002" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="847" result="Failed" site="Child" start-time="2026-10-18 03:00:43Z" end-time="2026-10-18 03:00:43Z" duration="0.531030" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="2003" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="847" result="Failed" site="Child" start-time="2026-10-18 03:00:43Z" end-time="2026-10-18 03:00:43Z" duration="0.450860" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="2004" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="847" result="Failed" site="Child" start-time="2026-10-18 03:00:43Z" end-time="2026-10-18 03:00:43Z" duration="0.351462" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1080" name="AssemblySnapshotTests" fullname="PaperDefense.Tests.AssemblySnapshotTests" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-10-18 03:00:43Z" end-time="2026-10-18 03:00:43Z" duration="0.255529" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="1089" name="LegacyAdapter_IncompleteBalanceReturnsDiagnostics" fullname="PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_IncompleteBalanceReturnsDiagnostics" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-10-18 03:00:43Z" end-time="2026-10-18 03:00:43Z" duration="0.154947" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1087" name="LegacyAdapter_IncompleteBalanceReturnsDiagnostics(True,&quot;assembly.balance.missing&quot;)" fullname="PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_IncompleteBalanceReturnsDiagnostics(True,&quot;assembly.balance.missing&quot;)" methodname="LegacyAdapter_IncompleteBalanceReturnsDiagnostics" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" seed="1681652547" result="Failed" start-time="2026-10-18 03:00:43Z" end-time="2026-10-18 03:00:43Z" duration="0.030232" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: No Exception to be thrown
+  But was:  <System.NullReferenceException: Object reference not set to an instance of an object
+  at PaperDefense.Core.LegacyContentCatalog.CreateInput (PaperDefense.Core.GameBalance balance) [0x00438] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\LegacyContentCatalog.cs:43
+  at PaperDefense.Core.LegacyContentCatalog.Create (PaperDefense.Core.GameBalance balance) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\LegacyContentCatalog.cs:9
+  at PaperDefense.Core.TowerCatalog.Content (PaperDefense.Core.TowerBlueprint blueprint, PaperDefense.Core.GameBalance balance) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\TowerCatalog.cs:26
+  at PaperDefense.Core.TowerCatalog.Resolve (PaperDefense.Core.TowerBlueprint blueprint, PaperDefense.Core.GameBalance balance) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\TowerCatalog.cs:27
+  at PaperDefense.Core.TowerCatalog.Validate (PaperDefense.Core.TowerBlueprint blueprint, PaperDefense.Core.GameBalance balance, System.String& reason) [0x0000c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\TowerCatalog.cs:95
+  at PaperDefense.Core.LegacyAlbumAdapter.Resolve (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, PaperDefense.Core.MaterialTier material) [0x0003f] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\LegacyAlbumAdapter.cs:15
+  at PaperDefense.Tests.AssemblySnapshotTests+<>c__DisplayClass4_0.<LegacyAdapter_IncompleteBalanceReturnsDiagnostics>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblySnapshotTests.cs:79
+  at NUnit.Framework.Constraints.ThrowsConstraint+VoidInvocationDescriptor.Invoke () [0x00001] in <8b63e8ac0a4746599ed207982825ae6c>:0
+  at NUnit.Framework.Constraints.ThrowsConstraint+ExceptionInterceptor.Intercept (System.Object invocation) [0x00050] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_IncompleteBalanceReturnsDiagnostics (System.Boolean effects, System.String code) [0x00063] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblySnapshotTests.cs:79
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1088" name="LegacyAdapter_IncompleteBalanceReturnsDiagnostics(False,&quot;assembly.material.unknown&quot;)" fullname="PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_IncompleteBalanceReturnsDiagnostics(False,&quot;assembly.material.unknown&quot;)" methodname="LegacyAdapter_IncompleteBalanceReturnsDiagnostics" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" seed="696298992" result="Failed" start-time="2026-10-18 03:00:43Z" end-time="2026-10-18 03:00:43Z" duration="0.018865" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: No Exception to be thrown
+  But was:  <System.NullReferenceException: Object reference not set to an instance of an object
+  at PaperDefense.Core.TowerCatalog.Health (PaperDefense.Core.ResolvedTowerAssembly a, PaperDefense.Core.GameBalance balance, PaperDefense.Core.MaterialTier tier) [0x00023] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\TowerCatalog.cs:99
+  at PaperDefense.Core.ResolvedTowerAssembly.Validate (PaperDefense.Core.GameBalance balance) [0x004d1] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\ResolvedTowerAssembly.cs:54
+  at PaperDefense.Core.TowerCatalog.Validate (PaperDefense.Core.TowerBlueprint blueprint, PaperDefense.Core.GameBalance balance, System.String& reason) [0x00014] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\TowerCatalog.cs:95
+  at PaperDefense.Core.LegacyAlbumAdapter.Resolve (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, PaperDefense.Core.MaterialTier material) [0x0003f] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\Assembly\LegacyAlbumAdapter.cs:15
+  at PaperDefense.Tests.AssemblySnapshotTests+<>c__DisplayClass4_0.<LegacyAdapter_IncompleteBalanceReturnsDiagnostics>b__0 () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblySnapshotTests.cs:79
+  at NUnit.Framework.Constraints.ThrowsConstraint+VoidInvocationDescriptor.Invoke () [0x00001] in <8b63e8ac0a4746599ed207982825ae6c>:0
+  at NUnit.Framework.Constraints.ThrowsConstraint+ExceptionInterceptor.Intercept (System.Object invocation) [0x00050] in <8b63e8ac0a4746599ed207982825ae6c>:0 >
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_IncompleteBalanceReturnsDiagnostics (System.Boolean effects, System.String code) [0x00063] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblySnapshotTests.cs:79
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task2-balance-red.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

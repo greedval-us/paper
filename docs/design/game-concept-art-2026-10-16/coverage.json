@@ -1,0 +1,263 @@
+{
+  "date": "2026-10-18",
+  "originalScreens": 28,
+  "updatedOriginalScreens": 28,
+  "additionalScreens": 2,
+  "objectSheets": 3,
+  "total": 33,
+  "originalRecoveryArchive": "../../audit/2026-10-17-album/original-sketches-recovery.zip",
+  "screens": [
+    {
+      "id": "01-home",
+      "originalTitle": "Главное меню",
+      "currentTitle": "Главное меню",
+      "file": "screens/01-home.png",
+      "originalSha256": "8f871da2ed12c1850046141a56600f566b0e5d79bd5d549102b997556655ae21",
+      "currentSha256": "c3b9cab2e4416338e108abaf80a202fd7f4e37ac489d348181e6c118d5b48305",
+      "changed": true
+    },
+    {
+      "id": "02-map",
+      "originalTitle": "Карта — Первый рубеж",
+      "currentTitle": "Карта",
+      "file": "screens/02-map.png",
+      "originalSha256": "1116777973506b25944fc8edad89d39c3d6a4ff6a7a2904ebee6bded480e1b13",
+      "currentSha256": "9e1a8916060e84641862352e8c71ce029b9dd203e50442db923aebb83822fce1",
+      "changed": true
+    },
+    {
+      "id": "03-preparation",
+      "originalTitle": "Подготовка к защите",
+      "currentTitle": "Подготовка",
+      "file": "screens/03-preparation.png",
+      "originalSha256": "967eb2a10cee2834d27df539c748b3d65babc5b39c5a98f1625ddae31a85ee07",
+      "currentSha256": "3284aa75dd44a16b8a2fb573322c01882f516f5ca4b6fb5ed7ce8accc5cad614",
+      "changed": true
+    },
+    {
+      "id": "04-foundation",
+      "originalTitle": "Мастерская — Основа",
+      "currentTitle": "Мастерская — Основа",
+      "file": "screens/04-foundation.png",
+      "originalSha256": "e622d11b7fc2afa09fe346b4dcef8bb8fa0fdfb0b65ea12ca79e8aa741e1c680",
+      "currentSha256": "9180154b909dd512afea969def6509a0b0220b972ff7f56a5699dbbc1723285c",
+      "changed": true
+    },
+    {
+      "id": "05-weapons",
+      "originalTitle": "Мастерская — Оружие",
+      "currentTitle": "Мастерская — Оружие",
+      "file": "screens/05-weapons.png",
+      "originalSha256": "766dac5bd02e9463b1d2b7fb7965e397e9feb5f91a66ec1109b3008e12e7c7c6",
+      "currentSha256": "2f0893c31272c3e20e6a79b873c8db17770f3c92f89a22cba2b271a20421f638",
+      "changed": true
+    },
+    {
+      "id": "06-drawing",
+      "originalTitle": "Мастерская — Рисунок",
+      "currentTitle": "Сборка оружия из частей",
+      "file": "screens/06-drawing.png",
+      "originalSha256": "c238e9c397ff41dbd7aef5186a2aebf1f08cf56a756bbd3c58e5d61c3ed555e9",
+      "currentSha256": "edba0bc718e2c896c7854442f269855aa16f22b8cb456994c61bb25410126930",
+      "changed": true
+    },
+    {
+      "id": "07-details",
+      "originalTitle": "Рабочая геометрия",
+      "currentTitle": "Сравнение деталей",
+      "file": "screens/07-details.png",
+      "originalSha256": "2901319ab89876829355e741192c74ca7d3e506193a7b68278cc5c072cb569b3",
+      "currentSha256": "1e5a9f29331f889237c0e85b9ec6c842039f6655612cdd3a2bb89967270914d9",
+      "changed": true
+    },
+    {
+      "id": "08-review",
+      "originalTitle": "Мастерская — Проверка",
+      "currentTitle": "Проверка сборки",
+      "file": "screens/08-review.png",
+      "originalSha256": "70ed26c3ae9945888ff633f86cc20af5639de2828c42ed0bb424315b307cc045",
+      "currentSha256": "77ec8626b7444519e8c635d44ff07ba496e180bc5f20bc76ab72750db568522b",
+      "changed": true
+    },
+    {
+      "id": "09-album",
+      "originalTitle": "Альбом чертежей",
+      "currentTitle": "Альбом рисунков",
+      "file": "screens/09-album.png",
+      "originalSha256": "e463863e9c644e25c29a6da5d57245e7a7f852af3a8b63061ce2ed1d47e63c14",
+      "currentSha256": "f85732485ee24e51bbf780898baa5ea822a875b31ae0da345bcdd7ac5cbe19be",
+      "changed": true
+    },
+    {
+      "id": "10-trial",
+      "originalTitle": "Полигон игрока",
+      "currentTitle": "Полигон",
+      "file": "screens/10-trial.png",
+      "originalSha256": "fae1caf46b278c05af16653529744af2c62675207328732ac93621510431abf3",
+      "currentSha256": "d1aaa46bd7bab368e74d0ff16c43628c63045537402d6742abbd2c19605beb1f",
+      "changed": true
+    },
+    {
+      "id": "11-stencils",
+      "originalTitle": "Заготовки",
+      "currentTitle": "Каталог деталей",
+      "file": "screens/11-stencils.png",
+      "originalSha256": "8c000c9bdff93d0bf2b49857ede797acfaa365d107ebc881f6994c827f0dba0e",
+      "currentSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "changed": true
+    },
+    {
+      "id": "12-mortar",
+      "originalTitle": "Отпечаток мортиры",
+      "currentTitle": "Мортира — выбор ствола",
+      "file": "screens/12-mortar.png",
+      "originalSha256": "671b5c9715ddbaaff0ca00ecaa95c3fea81c6d496b6d58bee25c66c4f32f30df",
+      "currentSha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c",
+      "changed": true
+    },
+    {
+      "id": "13-fan",
+      "originalTitle": "Направления веера",
+      "currentTitle": "Веер — фиксированная атака",
+      "file": "screens/13-fan.png",
+      "originalSha256": "aba584b90530d84396b428e640f929eb60f7f1a230a9613536897fc18e4366c9",
+      "currentSha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61",
+      "changed": true
+    },
+    {
+      "id": "14-armor",
+      "originalTitle": "Направленное усиление корпуса",
+      "currentTitle": "Броня — готовые комплекты",
+      "file": "screens/14-armor.png",
+      "originalSha256": "243a50470e50850d2a7d12c061afd465edc96b0fee75c225902ce02e9977fca6",
+      "currentSha256": "1cd621482759ce147f1aa4513f11753f0b3510b9c8af1459acb9d999a0e88e45",
+      "changed": true
+    },
+    {
+      "id": "15-planning",
+      "originalTitle": "Бой — расстановка до волны",
+      "currentTitle": "Бой — расстановка",
+      "file": "screens/15-planning.png",
+      "originalSha256": "adfde3fd4423be1a547a7b2dfc848b42f400f5850dcee18e18646519327894c5",
+      "currentSha256": "c3092df9aebf37cc989d0f99076e465704febc5641c53a3cc29fdae8c0803205",
+      "changed": true
+    },
+    {
+      "id": "16-battle",
+      "originalTitle": "Бой — активная волна",
+      "currentTitle": "Бой — активная волна",
+      "file": "screens/16-battle.png",
+      "originalSha256": "aa3906280182b2af5eaa83413820f2c472537d6e03b7dde40ac0fdccd74c680c",
+      "currentSha256": "bfafea38bdade0cc00e1a83467dbe63bb9e4326cd0c5bc848c9792e660bf1bb7",
+      "changed": true
+    },
+    {
+      "id": "17-tower",
+      "originalTitle": "Бой — выбранная башня",
+      "currentTitle": "Бой — выбранная башня",
+      "file": "screens/17-tower.png",
+      "originalSha256": "5a237bceb8e7c218340065d5955a436d9e4bb5526471636c65cb07417e78c81f",
+      "currentSha256": "e385f0141f7238fa99ab3239cf0311ca26430c7b81952997947e66c09724b5c7",
+      "changed": true
+    },
+    {
+      "id": "18-pause",
+      "originalTitle": "Пауза",
+      "currentTitle": "Пауза",
+      "file": "screens/18-pause.png",
+      "originalSha256": "632a0625c6d5846eb690f2adfeb04d1a50aa0517203945f75e38859d391838e6",
+      "currentSha256": "a37b1ec4059c5abdf37ef6f5695ecc549360bac90f383fc1f6b1ae3917695bc3",
+      "changed": true
+    },
+    {
+      "id": "19-upgrades",
+      "originalTitle": "Межволновое усиление",
+      "currentTitle": "Межволновое усиление",
+      "file": "screens/19-upgrades.png",
+      "originalSha256": "fa5e45b69cb96316d81006ef6539c6d57ee22ced192d93a0b7ca26c9369c6019",
+      "currentSha256": "c2fe6a273598a2a7fe5310a4c0860f5855e54a1767e4391b9e1dda73791870ff",
+      "changed": true
+    },
+    {
+      "id": "20-victory",
+      "originalTitle": "Победа",
+      "currentTitle": "Победа",
+      "file": "screens/20-victory.png",
+      "originalSha256": "03cd9a65324b3cea257971e8aa973bdeb1fc7cf641ed7a3068a855d4dd614484",
+      "currentSha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+      "changed": true
+    },
+    {
+      "id": "21-defeat",
+      "originalTitle": "Поражение",
+      "currentTitle": "Поражение",
+      "file": "screens/21-defeat.png",
+      "originalSha256": "50d9dd56e28028957c8263124bd86889bb67b9687cd38d814d198c6ee7b9bf55",
+      "currentSha256": "4c842f460848bc0b2820590486a9c12488ea84e10abbcc59cc02b02c56ee2e6e",
+      "changed": true
+    },
+    {
+      "id": "22-settings",
+      "originalTitle": "Настройки",
+      "currentTitle": "Настройки",
+      "file": "screens/22-settings.png",
+      "originalSha256": "39b94f1371b2a440ceca115c7c9b0425704842bb1c833481516ce2e0d08eaf71",
+      "currentSha256": "395c7d5afb47b7189886e29853dcc699a81139038216c429cc1342055dea1f8a",
+      "changed": true
+    },
+    {
+      "id": "23-help",
+      "originalTitle": "Помощь и управление",
+      "currentTitle": "Помощь и управление",
+      "file": "screens/23-help.png",
+      "originalSha256": "2554a4439932e4876122e827566410c435b9211f99af9d79d05dc7ecfaaece36",
+      "currentSha256": "80e9e894c092a8cd7e22c1feead5609630bbb043ab3f1af6a3c3efb997d18f47",
+      "changed": true
+    },
+    {
+      "id": "24-empty",
+      "originalTitle": "Альбом — пустое состояние",
+      "currentTitle": "Альбом — нет своих сборок",
+      "file": "screens/24-empty.png",
+      "originalSha256": "53e3be279093970c2d7b235b0188bc2c0d7c54c871d95641828f8b1a88c9298a",
+      "currentSha256": "6a5fb645b1529e2f2102bc111da1a81204f53c96276084a0783c51f196b8b073",
+      "changed": true
+    },
+    {
+      "id": "25-purchase",
+      "originalTitle": "Открытие детали",
+      "currentTitle": "Покупка детали",
+      "file": "screens/25-purchase.png",
+      "originalSha256": "95ec3fb133db134fbc53a97ef0ed09047bbd5fe7d4fd2de438171ded45ee82b2",
+      "currentSha256": "05b7ab824ddcc1ac63d718b871bd4907e2192a7aac3aaf985d9eb6064fb332b4",
+      "changed": true
+    },
+    {
+      "id": "26-save-error",
+      "originalTitle": "Ошибка сохранения",
+      "currentTitle": "Ошибка сохранения",
+      "file": "screens/26-save-error.png",
+      "originalSha256": "fe1143d92eb32ae0c0b0fb18e8a72e2830bc646012512d119d7647995cf83325",
+      "currentSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea",
+      "changed": true
+    },
+    {
+      "id": "27-invalid",
+      "originalTitle": "Незаконченный рисунок",
+      "currentTitle": "Несовместимая сборка",
+      "file": "screens/27-invalid.png",
+      "originalSha256": "8f70c18f6b4c329ec0d010a8faf13141e3a4ade89d149c9255554f83105246a5",
+      "currentSha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f",
+      "changed": true
+    },
+    {
+      "id": "28-leave",
+      "originalTitle": "Выход из незаконченного боя",
+      "currentTitle": "Выход из боя",
+      "file": "screens/28-leave.png",
+      "originalSha256": "b618c8198d728b22f5be62ab22fe03fd28dc62e45681e4c6c205eb51e427b20d",
+      "currentSha256": "d280c9dc11d916756a5ca6b695d2cf2020009df3085d6b55d41dd5dd09ece7b2",
+      "changed": true
+    }
+  ]
+}

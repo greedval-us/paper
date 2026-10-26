@@ -1,0 +1,18 @@
+{
+  "success": true,
+  "message": "Retrieved 12 log entries.",
+  "data": [
+    "Assets\\PaperDefense\\Tests\\EditMode\\ProfileMigrationV8Tests.cs(30,26): error CS0103: The name 'ProfileMigrationV8' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\ProfileMigrationV8Tests.cs(46,26): error CS0103: The name 'ProfileMigrationV8' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\ProfileMigrationV8Tests.cs(51,43): error CS0103: The name 'ProfileMigrationV8' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\ProfileMigrationV8Tests.cs(56,41): error CS0117: 'WorkshopProfile' does not contain a definition for 'CreateNew'\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\ProfileMigrationV8Tests.cs(69,29): error CS0103: The name 'ProfileMigrationV8' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\ProfileMigrationV8Tests.cs(84,29): error CS0103: The name 'ProfileMigrationV8' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\ProfileMigrationV8Tests.cs(92,26): error CS0103: The name 'ProfileMigrationV8' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\ProfileMigrationV8Tests.cs(99,41): error CS0117: 'WorkshopProfile' does not contain a definition for 'CreateNew'\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\ProfileMigrationV8Tests.cs(103,34): error CS1061: 'WorkshopProfile' does not contain a definition for 'TotalXp' and no accessible extension method 'TotalXp' accepting a first argument of type 'WorkshopProfile' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\ProfileMigrationV8Tests.cs(107,43): error CS1061: 'WorkshopProfileData' does not contain a definition for 'Rewards' and no accessible extension method 'Rewards' accepting a first argument of type 'WorkshopProfileData' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\ProfileMigrationV8Tests.cs(112,40): error CS0117: 'WorkshopProfile' does not contain a definition for 'CreateNew'\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\ProfileMigrationV8Tests.cs(115,36): error CS0117: 'WorkshopProfile' does not contain a definition for 'CreateNew'\n"
+  ]
+}

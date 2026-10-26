@@ -1,0 +1,100 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "2e64be102b9b451cbe7271a94feeff16",
+      "status": "failed",
+      "mode": "EditMode",
+      "started_unix_ms": 1792715327655,
+      "finished_unix_ms": 1792715333673,
+      "last_update_unix_ms": 1792715333673,
+      "progress": {
+        "completed": 4,
+        "total": 4,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(57,27)",
+        "last_finished_unix_ms": 1792715333507,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": true,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [
+          {
+            "full_name": "PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(38,35)",
+            "message": "  Visible pine ground must be real reserved terrain: (38, 35)\r\n  Expected: False\r\n  But was:  True\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(57,35)",
+            "message": "  Visible pine ground must be real reserved terrain: (57, 35)\r\n  Expected: False\r\n  But was:  True\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(38,27)",
+            "message": "  Visible pine ground must be real reserved terrain: (38, 27)\r\n  Expected: False\r\n  But was:  True\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(57,27)",
+            "message": "  Visible pine ground must be real reserved terrain: (57, 27)\r\n  Expected: False\r\n  But was:  True\r\n"
+          }
+        ],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "EditMode",
+        "summary": {
+          "total": 4,
+          "passed": 0,
+          "failed": 4,
+          "skipped": 0,
+          "durationSeconds": 0.7888615,
+          "resultState": "Failed(Child)"
+        },
+        "results": [
+          {
+            "name": "MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(38,35)",
+            "fullName": "PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(38,35)",
+            "state": "Failed",
+            "durationSeconds": 0.1437028,
+            "message": "  Visible pine ground must be real reserved terrain: (38, 35)\r\n  Expected: False\r\n  But was:  True\r\n",
+            "stackTrace": "at PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk (System.Int32 x, System.Int32 y) [0x0006c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\TowerDefenseRulesTests.cs:232\r\n",
+            "output": ""
+          },
+          {
+            "name": "MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(57,35)",
+            "fullName": "PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(57,35)",
+            "state": "Failed",
+            "durationSeconds": 0.0080322,
+            "message": "  Visible pine ground must be real reserved terrain: (57, 35)\r\n  Expected: False\r\n  But was:  True\r\n",
+            "stackTrace": "at PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk (System.Int32 x, System.Int32 y) [0x0006c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\TowerDefenseRulesTests.cs:232\r\n",
+            "output": ""
+          },
+          {
+            "name": "MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(38,27)",
+            "fullName": "PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(38,27)",
+            "state": "Failed",
+            "durationSeconds": 0.0069327,
+            "message": "  Visible pine ground must be real reserved terrain: (38, 27)\r\n  Expected: False\r\n  But was:  True\r\n",
+            "stackTrace": "at PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk (System.Int32 x, System.Int32 y) [0x0006c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\TowerDefenseRulesTests.cs:232\r\n",
+            "output": ""
+          },
+          {
+            "name": "MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(57,27)",
+            "fullName": "PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk(57,27)",
+            "state": "Failed",
+            "durationSeconds": 0.0074805,
+            "message": "  Visible pine ground must be real reserved terrain: (57, 27)\r\n  Expected: False\r\n  But was:  True\r\n",
+            "stackTrace": "at PaperDefense.Tests.TowerDefenseRulesTests.MainClearingIslandsRejectTheirWholeFootprintWithoutSpendingInk (System.Int32 x, System.Int32 y) [0x0006c] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\EditMode\\TowerDefenseRulesTests.cs:232\r\n",
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

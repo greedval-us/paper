@@ -1,0 +1,457 @@
+{
+  "revision": "modular-full-catalog-2026-10-24-v8",
+  "sourceSheets": [
+    {
+      "file": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "file": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "file": "ArtSource/Notebook/NewStyle/StandardFoundation-v10.png",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "file": "ArtSource/Notebook/NewStyle/BatteryFoundation-v4.png",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "file": "ArtSource/Notebook/NewStyle/TurnHub-v1.png",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "file": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "file": "ArtSource/Notebook/NewStyle/RepairParts-v1.png",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "file": "ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png",
+      "width": 1254,
+      "height": 1254
+    }
+  ],
+  "definitions": 54,
+  "note": "The original RGBA PNGs are copied without pixel changes. Alpha inspection trims import rectangles only; full cell canvases and manually authored mechanical anchors remain stable.",
+  "sprites": [
+    {
+      "id": "part.full.core.piercer",
+      "source": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "x": 20,
+      "y": 947,
+      "width": 296,
+      "height": 271
+    },
+    {
+      "id": "part.full.head.piercer",
+      "source": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "x": 428,
+      "y": 941,
+      "width": 91,
+      "height": 307
+    },
+    {
+      "id": "part.full.core.mortar",
+      "source": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "x": 642,
+      "y": 937,
+      "width": 283,
+      "height": 228
+    },
+    {
+      "id": "part.full.head.mortar",
+      "source": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "x": 1026,
+      "y": 943,
+      "width": 182,
+      "height": 273
+    },
+    {
+      "id": "part.full.core.fan",
+      "source": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "x": 21,
+      "y": 646,
+      "width": 290,
+      "height": 215
+    },
+    {
+      "id": "part.full.head.fan",
+      "source": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "x": 332,
+      "y": 631,
+      "width": 287,
+      "height": 303
+    },
+    {
+      "id": "part.full.core.ricochet",
+      "source": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "x": 651,
+      "y": 651,
+      "width": 264,
+      "height": 187
+    },
+    {
+      "id": "part.full.head.ricochet",
+      "source": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "x": 940,
+      "y": 646,
+      "width": 303,
+      "height": 246
+    },
+    {
+      "id": "part.full.core.stapler",
+      "source": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "x": 43,
+      "y": 335,
+      "width": 260,
+      "height": 266
+    },
+    {
+      "id": "part.full.head.stapler",
+      "source": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "x": 333,
+      "y": 356,
+      "width": 290,
+      "height": 228
+    },
+    {
+      "id": "part.full.core.blotter",
+      "source": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "x": 684,
+      "y": 344,
+      "width": 209,
+      "height": 247
+    },
+    {
+      "id": "part.full.head.blotter",
+      "source": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "x": 982,
+      "y": 344,
+      "width": 249,
+      "height": 269
+    },
+    {
+      "id": "part.full.head.short",
+      "source": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "x": 126,
+      "y": 11,
+      "width": 82,
+      "height": 279
+    },
+    {
+      "id": "part.full.head.long",
+      "source": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "x": 441,
+      "y": 8,
+      "width": 76,
+      "height": 340
+    },
+    {
+      "id": "part.full.head.wide",
+      "source": "ArtSource/Notebook/NewStyle/FullWeaponParts-v1.png",
+      "x": 684,
+      "y": 24,
+      "width": 200,
+      "height": 286
+    },
+    {
+      "id": "part.full.frame.heavy",
+      "source": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "x": 27,
+      "y": 916,
+      "width": 325,
+      "height": 238
+    },
+    {
+      "id": "part.full.frame.precision",
+      "source": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "x": 364,
+      "y": 951,
+      "width": 240,
+      "height": 181
+    },
+    {
+      "id": "part.full.frame.standard",
+      "source": "ArtSource/Notebook/NewStyle/StandardFoundation-v10.png",
+      "x": 19,
+      "y": 260,
+      "width": 1499,
+      "height": 475
+    },
+    {
+      "id": "part.full.frame.battery",
+      "source": "ArtSource/Notebook/NewStyle/BatteryFoundation-v4.png",
+      "x": 31,
+      "y": 810,
+      "width": 566,
+      "height": 197
+    },
+    {
+      "id": "part.full.turn.standard",
+      "source": "ArtSource/Notebook/NewStyle/TurnHub-v1.png",
+      "x": 351,
+      "y": 398,
+      "width": 553,
+      "height": 448
+    },
+    {
+      "id": "part.full.hull.light",
+      "source": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "x": 949,
+      "y": 940,
+      "width": 287,
+      "height": 162
+    },
+    {
+      "id": "part.full.hull.reinforced",
+      "source": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "x": 38,
+      "y": 647,
+      "width": 300,
+      "height": 210
+    },
+    {
+      "id": "part.full.hull.light.back",
+      "source": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "x": 340,
+      "y": 62,
+      "width": 272,
+      "height": 155
+    },
+    {
+      "id": "part.full.hull.reinforced.back",
+      "source": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "x": 642,
+      "y": 53,
+      "width": 288,
+      "height": 188
+    },
+    {
+      "id": "part.full.armor.front",
+      "source": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "x": 391,
+      "y": 634,
+      "width": 203,
+      "height": 252
+    },
+    {
+      "id": "part.full.feed.boost",
+      "source": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "x": 612,
+      "y": 622,
+      "width": 299,
+      "height": 223
+    },
+    {
+      "id": "part.full.turn.quick",
+      "source": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "x": 937,
+      "y": 641,
+      "width": 291,
+      "height": 192
+    },
+    {
+      "id": "part.full.sight.scope",
+      "source": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "x": 74,
+      "y": 304,
+      "width": 195,
+      "height": 301
+    },
+    {
+      "id": "part.full.sight.tracking",
+      "source": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "x": 378,
+      "y": 312,
+      "width": 204,
+      "height": 256
+    },
+    {
+      "id": "part.full.magazine.drum",
+      "source": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "x": 635,
+      "y": 307,
+      "width": 274,
+      "height": 220
+    },
+    {
+      "id": "part.full.magazine.belt",
+      "source": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "x": 920,
+      "y": 313,
+      "width": 316,
+      "height": 267
+    },
+    {
+      "id": "part.full.trigger.burst",
+      "source": "ArtSource/Notebook/NewStyle/FullVariantParts-v1.png",
+      "x": 46,
+      "y": 46,
+      "width": 259,
+      "height": 223
+    },
+    {
+      "id": "part.full.site.wall",
+      "source": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "x": 10,
+      "y": 926,
+      "width": 307,
+      "height": 204
+    },
+    {
+      "id": "part.full.function.wall",
+      "source": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "x": 352,
+      "y": 942,
+      "width": 272,
+      "height": 233
+    },
+    {
+      "id": "part.full.shell.standard.wall",
+      "source": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "x": 667,
+      "y": 920,
+      "width": 267,
+      "height": 203
+    },
+    {
+      "id": "part.full.utility.armor.wall",
+      "source": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "x": 982,
+      "y": 918,
+      "width": 224,
+      "height": 259
+    },
+    {
+      "id": "part.full.site.slow",
+      "source": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "x": 7,
+      "y": 654,
+      "width": 320,
+      "height": 191
+    },
+    {
+      "id": "part.full.function.slow",
+      "source": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "x": 340,
+      "y": 665,
+      "width": 307,
+      "height": 172
+    },
+    {
+      "id": "part.full.shell.standard.slow",
+      "source": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "x": 658,
+      "y": 677,
+      "width": 294,
+      "height": 146
+    },
+    {
+      "id": "part.full.site.repair",
+      "source": "ArtSource/Notebook/NewStyle/RepairParts-v1.png",
+      "x": 54,
+      "y": 648,
+      "width": 540,
+      "height": 300
+    },
+    {
+      "id": "part.full.function.repair",
+      "source": "ArtSource/Notebook/NewStyle/RepairParts-v1.png",
+      "x": 674,
+      "y": 635,
+      "width": 535,
+      "height": 445
+    },
+    {
+      "id": "part.full.shell.standard.repair",
+      "source": "ArtSource/Notebook/NewStyle/RepairParts-v1.png",
+      "x": 80,
+      "y": 97,
+      "width": 533,
+      "height": 343
+    },
+    {
+      "id": "part.full.function.repair.toolbox",
+      "source": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "x": 1020,
+      "y": 332,
+      "width": 217,
+      "height": 228
+    },
+    {
+      "id": "part.full.site.generator",
+      "source": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "x": 11,
+      "y": 26,
+      "width": 332,
+      "height": 202
+    },
+    {
+      "id": "part.full.function.generator",
+      "source": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "x": 368,
+      "y": 16,
+      "width": 310,
+      "height": 272
+    },
+    {
+      "id": "part.full.shell.standard.generator",
+      "source": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "x": 728,
+      "y": 35,
+      "width": 210,
+      "height": 240
+    },
+    {
+      "id": "part.full.utility.economy",
+      "source": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "x": 987,
+      "y": 30,
+      "width": 238,
+      "height": 265
+    },
+    {
+      "id": "part.full.shell.light.panel.wall",
+      "source": "ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png",
+      "x": 44,
+      "y": 797,
+      "width": 562,
+      "height": 316
+    },
+    {
+      "id": "part.full.shell.reinforced.panel.wall",
+      "source": "ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png",
+      "x": 656,
+      "y": 700,
+      "width": 570,
+      "height": 460
+    },
+    {
+      "id": "part.full.utility.range",
+      "source": "ArtSource/Notebook/NewStyle/RepairParts-v1.png",
+      "x": 734,
+      "y": 97,
+      "width": 466,
+      "height": 396
+    },
+    {
+      "id": "part.full.utility.economy.pump",
+      "source": "ArtSource/Notebook/NewStyle/FullSupportAttachments-v1.png",
+      "x": 871,
+      "y": 77,
+      "width": 349,
+      "height": 537
+    }
+  ]
+}

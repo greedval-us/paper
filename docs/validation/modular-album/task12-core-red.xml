@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="28" result="Failed(Child)" total="28" passed="0" failed="28" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 23:17:10Z" end-time="2026-10-18 23:17:11Z" duration="1,0605457">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1467" result="Failed" site="Child" start-time="2026-10-18 23:17:10Z" end-time="2026-10-18 23:17:11Z" duration="1.060546" total="28" passed="0" failed="28" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="2535" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="1297" result="Failed" site="Child" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.952421" total="28" passed="0" failed="28" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39156" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="2536" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="1297" result="Failed" site="Child" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.850303" total="28" passed="0" failed="28" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="2537" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="1297" result="Failed" site="Child" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.740514" total="28" passed="0" failed="28" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1224" name="AssemblyTrialTests" fullname="PaperDefense.Tests.AssemblyTrialTests" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" testcasecount="28" result="Failed" site="Child" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.651057" total="28" passed="0" failed="28" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1245" name="BlotterReportsRealCleaningWithoutAnInventedDamageMetric" fullname="PaperDefense.Tests.AssemblyTrialTests.BlotterReportsRealCleaningWithoutAnInventedDamageMetric" methodname="BlotterReportsRealCleaningWithoutAnInventedDamageMetric" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1611410394" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.032054" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.BlotterReportsRealCleaningWithoutAnInventedDamageMetric () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:225
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1231" name="BudgetIncludesOnlyWholeLegalCopies" fullname="PaperDefense.Tests.AssemblyTrialTests.BudgetIncludesOnlyWholeLegalCopies" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" testcasecount="6" result="Failed" site="Child" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.110628" total="6" passed="0" failed="6" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1225" name="BudgetIncludesOnlyWholeLegalCopies(0,40,10,400)" fullname="PaperDefense.Tests.AssemblyTrialTests.BudgetIncludesOnlyWholeLegalCopies(0,40,10,400)" methodname="BudgetIncludesOnlyWholeLegalCopies" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="362378983" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.009568" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.BudgetIncludesOnlyWholeLegalCopies (System.Int32 index, System.Int32 price, System.Int32 copies, System.Int32 cost) [0x0001c] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:71
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1226" name="BudgetIncludesOnlyWholeLegalCopies(1,64,6,384)" fullname="PaperDefense.Tests.AssemblyTrialTests.BudgetIncludesOnlyWholeLegalCopies(1,64,6,384)" methodname="BudgetIncludesOnlyWholeLegalCopies" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="703780568" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.008022" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.BudgetIncludesOnlyWholeLegalCopies (System.Int32 index, System.Int32 price, System.Int32 copies, System.Int32 cost) [0x0001c] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:71
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1227" name="BudgetIncludesOnlyWholeLegalCopies(4,16,25,400)" fullname="PaperDefense.Tests.AssemblyTrialTests.BudgetIncludesOnlyWholeLegalCopies(4,16,25,400)" methodname="BudgetIncludesOnlyWholeLegalCopies" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="963446222" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.004933" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.BudgetIncludesOnlyWholeLegalCopies (System.Int32 index, System.Int32 price, System.Int32 copies, System.Int32 cost) [0x0001c] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:71
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1228" name="BudgetIncludesOnlyWholeLegalCopies(5,22,18,396)" fullname="PaperDefense.Tests.AssemblyTrialTests.BudgetIncludesOnlyWholeLegalCopies(5,22,18,396)" methodname="BudgetIncludesOnlyWholeLegalCopies" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1904918320" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.003775" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.BudgetIncludesOnlyWholeLegalCopies (System.Int32 index, System.Int32 price, System.Int32 copies, System.Int32 cost) [0x0001c] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:71
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1229" name="BudgetIncludesOnlyWholeLegalCopies(6,65,6,390)" fullname="PaperDefense.Tests.AssemblyTrialTests.BudgetIncludesOnlyWholeLegalCopies(6,65,6,390)" methodname="BudgetIncludesOnlyWholeLegalCopies" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="771665800" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.003807" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.BudgetIncludesOnlyWholeLegalCopies (System.Int32 index, System.Int32 price, System.Int32 copies, System.Int32 cost) [0x0001c] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:71
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1230" name="BudgetIncludesOnlyWholeLegalCopies(7,60,2,120)" fullname="PaperDefense.Tests.AssemblyTrialTests.BudgetIncludesOnlyWholeLegalCopies(7,60,2,120)" methodname="BudgetIncludesOnlyWholeLegalCopies" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="368117624" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.007850" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.BudgetIncludesOnlyWholeLegalCopies (System.Int32 index, System.Int32 price, System.Int32 copies, System.Int32 cost) [0x0001c] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:71
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1240" name="EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage" fullname="PaperDefense.Tests.AssemblyTrialTests.EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.097879" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1236" name="EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage(&quot;Single&quot;)" fullname="PaperDefense.Tests.AssemblyTrialTests.EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage(&quot;Single&quot;)" methodname="EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1094666914" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.007702" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage (System.String scenario) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:168
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1237" name="EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage(&quot;Line&quot;)" fullname="PaperDefense.Tests.AssemblyTrialTests.EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage(&quot;Line&quot;)" methodname="EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="2020067035" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.009275" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage (System.String scenario) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:168
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1238" name="EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage(&quot;Crowd&quot;)" fullname="PaperDefense.Tests.AssemblyTrialTests.EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage(&quot;Crowd&quot;)" methodname="EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="2040820525" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.008064" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage (System.String scenario) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:168
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1239" name="EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage(&quot;Armored&quot;)" fullname="PaperDefense.Tests.AssemblyTrialTests.EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage(&quot;Armored&quot;)" methodname="EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="719520971" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.004770" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.EveryTargetArrangementHasRecordedLiveTargetsAndMeasuredDamage (System.String scenario) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:168
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="1243" name="GeneratorReportsIncomeOnlyForEightCompletedLocalWavesAndHonorsTwoInstanceLimit" fullname="PaperDefense.Tests.AssemblyTrialTests.GeneratorReportsIncomeOnlyForEightCompletedLocalWavesAndHonorsTwoInstanceLimit" methodname="GeneratorReportsIncomeOnlyForEightCompletedLocalWavesAndHonorsTwoInstanceLimit" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="948311368" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.004358" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.GeneratorReportsIncomeOnlyForEightCompletedLocalWavesAndHonorsTwoInstanceLimit () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:200
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1249" name="InvalidBudgetIsRejectedBeforeSimulation" fullname="PaperDefense.Tests.AssemblyTrialTests.InvalidBudgetIsRejectedBeforeSimulation" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.072844" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1247" name="InvalidBudgetIsRejectedBeforeSimulation(-1)" fullname="PaperDefense.Tests.AssemblyTrialTests.InvalidBudgetIsRejectedBeforeSimulation(-1)" methodname="InvalidBudgetIsRejectedBeforeSimulation" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1126004592" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.000683" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.InvalidBudgetIsRejectedBeforeSimulation (System.Int32 budget) [0x0000c] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:246
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1248" name="InvalidBudgetIsRejectedBeforeSimulation(20001)" fullname="PaperDefense.Tests.AssemblyTrialTests.InvalidBudgetIsRejectedBeforeSimulation(20001)" methodname="InvalidBudgetIsRejectedBeforeSimulation" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="135817905" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.000256" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.InvalidBudgetIsRejectedBeforeSimulation (System.Int32 budget) [0x0000c] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:246
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="1255" name="NullEntryAndBalanceAreRejected" fullname="PaperDefense.Tests.AssemblyTrialTests.NullEntryAndBalanceAreRejected" methodname="NullEntryAndBalanceAreRejected" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1680253814" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.000286" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.NullEntryAndBalanceAreRejected () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:269
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1242" name="OverlappingRepairPostsDoNotMultiplyOneTargetsHealing" fullname="PaperDefense.Tests.AssemblyTrialTests.OverlappingRepairPostsDoNotMultiplyOneTargetsHealing" methodname="OverlappingRepairPostsDoNotMultiplyOneTargetsHealing" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1998758810" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.005268" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.OverlappingRepairPostsDoNotMultiplyOneTargetsHealing () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:192
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1256" name="OverloadedEntryDoesNotRun" fullname="PaperDefense.Tests.AssemblyTrialTests.OverloadedEntryDoesNotRun" methodname="OverloadedEntryDoesNotRun" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="2095376934" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.000733" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.OverloadedEntryDoesNotRun () [0x00006] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:277
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1235" name="RecordingUsesProductionMagazineSequenceForTheSameStationaryTarget" fullname="PaperDefense.Tests.AssemblyTrialTests.RecordingUsesProductionMagazineSequenceForTheSameStationaryTarget" methodname="RecordingUsesProductionMagazineSequenceForTheSameStationaryTarget" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="985614963" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.011183" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.RecordingUsesProductionMagazineSequenceForTheSameStationaryTarget () [0x00080] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:139
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1241" name="RepairMeasuresHealthActuallyRestoredByProductionSupport" fullname="PaperDefense.Tests.AssemblyTrialTests.RepairMeasuresHealthActuallyRestoredByProductionSupport" methodname="RepairMeasuresHealthActuallyRestoredByProductionSupport" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1522946655" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.010463" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.RepairMeasuresHealthActuallyRestoredByProductionSupport () [0x00006] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:177
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1233" name="SameSeedAndEntryPreserveAllMeasuredValuesAndRecordedShots" fullname="PaperDefense.Tests.AssemblyTrialTests.SameSeedAndEntryPreserveAllMeasuredValuesAndRecordedShots" methodname="SameSeedAndEntryPreserveAllMeasuredValuesAndRecordedShots" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1390423099" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.009172" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.SameSeedAndEntryPreserveAllMeasuredValuesAndRecordedShots () [0x00011] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:108
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1254" name="ScenarioMustApplyToTheEntry" fullname="PaperDefense.Tests.AssemblyTrialTests.ScenarioMustApplyToTheEntry" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.072417" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1251" name="ScenarioMustApplyToTheEntry(0,&quot;Repair&quot;)" fullname="PaperDefense.Tests.AssemblyTrialTests.ScenarioMustApplyToTheEntry(0,&quot;Repair&quot;)" methodname="ScenarioMustApplyToTheEntry" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="290440821" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.001247" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.ScenarioMustApplyToTheEntry (System.Int32 index, System.String scenario) [0x00013] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:262
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1252" name="ScenarioMustApplyToTheEntry(6,&quot;Generator&quot;)" fullname="PaperDefense.Tests.AssemblyTrialTests.ScenarioMustApplyToTheEntry(6,&quot;Generator&quot;)" methodname="ScenarioMustApplyToTheEntry" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1208192199" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.000504" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.ScenarioMustApplyToTheEntry (System.Int32 index, System.String scenario) [0x00013] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:262
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1253" name="ScenarioMustApplyToTheEntry(7,&quot;Crowd&quot;)" fullname="PaperDefense.Tests.AssemblyTrialTests.ScenarioMustApplyToTheEntry(7,&quot;Crowd&quot;)" methodname="ScenarioMustApplyToTheEntry" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1244472154" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.000328" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.ScenarioMustApplyToTheEntry (System.Int32 index, System.String scenario) [0x00013] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:262
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="1246" name="SlowMeasuresProductionMovementControlWithoutPretendingToShoot" fullname="PaperDefense.Tests.AssemblyTrialTests.SlowMeasuresProductionMovementControlWithoutPretendingToShoot" methodname="SlowMeasuresProductionMovementControlWithoutPretendingToShoot" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1321787193" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.009102" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.SlowMeasuresProductionMovementControlWithoutPretendingToShoot () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:236
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1234" name="TowerUsesTheEstablishedProductionFiringLaneWithoutSyntheticDps" fullname="PaperDefense.Tests.AssemblyTrialTests.TowerUsesTheEstablishedProductionFiringLaneWithoutSyntheticDps" methodname="TowerUsesTheEstablishedProductionFiringLaneWithoutSyntheticDps" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1689361292" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.071555" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.TowerUsesTheEstablishedProductionFiringLaneWithoutSyntheticDps () [0x00023] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:124
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1232" name="TrialResolutionMatchesPreviewAndBuiltEntityWithoutChangingBalance" fullname="PaperDefense.Tests.AssemblyTrialTests.TrialResolutionMatchesPreviewAndBuiltEntityWithoutChangingBalance" methodname="TrialResolutionMatchesPreviewAndBuiltEntityWithoutChangingBalance" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1694797150" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.015257" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.TrialResolutionMatchesPreviewAndBuiltEntityWithoutChangingBalance () [0x00071] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:88
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1244" name="UnaffordableGeneratorDoesNotInventIncomeOrPaidWaves" fullname="PaperDefense.Tests.AssemblyTrialTests.UnaffordableGeneratorDoesNotInventIncomeOrPaidWaves" methodname="UnaffordableGeneratorDoesNotInventIncomeOrPaidWaves" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="476262583" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.010804" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.Run (PaperDefense.Core.AlbumEntry entry, PaperDefense.Core.GameBalance balance, System.String scenario, System.Int32 budget, System.Int32 seed) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:24
+at PaperDefense.Tests.AssemblyTrialTests.UnaffordableGeneratorDoesNotInventIncomeOrPaidWaves () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:215
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1250" name="UnknownScenarioIsRejectedBeforeSimulation" fullname="PaperDefense.Tests.AssemblyTrialTests.UnknownScenarioIsRejectedBeforeSimulation" methodname="UnknownScenarioIsRejectedBeforeSimulation" classname="PaperDefense.Tests.AssemblyTrialTests" runstate="Runnable" seed="1403400942" result="Failed" start-time="2026-10-18 23:17:11Z" end-time="2026-10-18 23:17:11Z" duration="0.000607" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The shared assembly trial runner is missing.
+  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyTrialTests.get_Runner () [0x00019] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:18
+at PaperDefense.Tests.AssemblyTrialTests.UnknownScenarioIsRejectedBeforeSimulation () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyTrialTests.cs:253
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: D:/Projekt Unity/paper/docs/validation/modular-album/task12-core-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

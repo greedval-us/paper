@@ -10,6 +10,7 @@ namespace PaperDefense.Presentation
 
         void Settings()
         {
+            bool assembly = game.Run.AssemblyCatalog != null;
             NotebookPageBackdrop("Art/Player/SettingsLandscape");
             float s = Mathf.Min(W / 1600f, H / 900f);
             var composition = ui.Panel(page, "Settings composition",
@@ -27,7 +28,14 @@ namespace PaperDefense.Presentation
                     Mathf.RoundToInt(24 * s), alignment: TextAnchor.MiddleCenter);
             }
 
-            var panel = ui.Panel(composition, "Display settings sheet", new Rect(375 * s, 246 * s, 850 * s, 428 * s), PlayerUi.Card);
+            var panel = ui.Panel(composition, "Display settings sheet", new Rect(375 * s, 246 * s, 850 * s, 428 * s), Color.clear);
+            var paper = PlayerUi.Graphic<NotebookHelpPaperGraphic>(panel, "Settings loose paper", new Rect(0, 0, 850 * s, 428 * s));
+            if (NotebookPaperArt.Apply(panel, "Settings illustrated paper")) paper.enabled = false;
+            foreach (float ruleY in new[] { 109f, 219f, 319f })
+            {
+                var rule = PlayerUi.Graphic<Image>(panel, "Settings divider", new Rect(20 * s, ruleY * s, 810 * s, s));
+                rule.color = new Color(PlayerUi.Blue.r, PlayerUi.Blue.g, PlayerUi.Blue.b, .34f);
+            }
             settingsFullscreen = Screen.fullScreen;
             SettingsToggleRow(panel, "Toggle fullscreen", "Полный экран", "Развернуть игру на весь экран",
                 new Rect(20 * s, 14 * s, 810 * s, 88 * s), PlayerIcon.Target, settingsFullscreen,
@@ -62,16 +70,20 @@ namespace PaperDefense.Presentation
             if (game.DisplaySettings.HasPendingChange && !canApply)
                 apply.GetComponent<PlayerTooltip>().Message = "Монитор не сообщил этот полный экранный режим. Выключи полный экран, чтобы применить размер окна.";
 
-            SettingsToggleRow(panel, "Toggle ranges", "Радиусы башен", "Показывать дальность построек",
+            SettingsToggleRow(panel, "Toggle ranges", assembly ? JourneyCopy("settings.ranges_title") : "Радиусы башен", assembly ? JourneyCopy("settings.ranges_body") : "Показывать дальность построек",
                 new Rect(20 * s, 226 * s, 810 * s, 88 * s), PlayerIcon.Target, game.World.ShowRanges,
                 () => game.World.ShowRanges = !game.World.ShowRanges, s);
             SettingsToggleRow(panel, "Reduce motion", "Меньше движения", "Спокойные рисунки и панели",
                 new Rect(20 * s, 324 * s, 810 * s, 88 * s), PlayerIcon.Pause, game.ReducedMotion,
                 () => game.SetReducedMotion(!game.ReducedMotion), s);
-            NotebookAction(composition, "Open help", new Rect(375 * s, 690 * s, 850 * s, 64 * s),
-                PlayerIcon.Help, "Управление", () => game.OpenSettings(true));
-            SettingsTextAction(composition, "Close settings", "Готово", new Rect(650 * s, 788 * s, 300 * s, 70 * s),
+            var help = NotebookAction(composition, "Open help", new Rect(375 * s, 690 * s, 850 * s, 64 * s),
+                PlayerIcon.Help, assembly ? "Управление · " + JourneyCopy("settings.controls_body") : "Управление", () => game.OpenSettings(true));
+            var nextHelp = PlayerUi.Graphic<PlayerIconGraphic>(help.transform, "Help navigation chevron", new Rect(800 * s, 19 * s, 24 * s, 27 * s));
+            nextHelp.Icon = PlayerIcon.Next; nextHelp.Sketch = true; nextHelp.color = PlayerUi.Ink;
+            help.GetComponentInChildren<Text>().rectTransform.offsetMax = new Vector2(-54 * s, -6 * s);
+            var close = SettingsTextAction(composition, "Close settings", "Готово", new Rect(630 * s, 780 * s, 340 * s, 78 * s),
                 game.CloseSettings, Mathf.RoundToInt(44 * s), true, s);
+            UnityEngine.EventSystems.EventSystem.current?.SetSelectedGameObject(close.gameObject);
         }
 
         void SettingsToggleRow(Transform parent, string name, string title, string description, Rect bounds,
@@ -79,6 +91,7 @@ namespace PaperDefense.Presentation
         {
             var button = ui.IconButton(parent, name, bounds, icon, title + ": " + (value ? "включено" : "выключено"),
                 () => { change(); Show(PlayerPage.Settings); });
+            button.targetGraphic.color = Color.clear;
             var symbol = button.GetComponentInChildren<PlayerIconGraphic>();
             if (monitor)
             {

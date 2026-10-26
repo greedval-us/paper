@@ -1,0 +1,568 @@
+{
+  "schemaVersion": 1,
+  "revision": "modular-full-catalog-2026-10-22-v7",
+  "foundation": "StandardFoundation-v9",
+  "reviewer": "Codex visual_intake13",
+  "reviewedOn": "2026-10-22",
+  "method": "Physically opened all 45 final PNGs with view_image, compared with all nine concept PNGs opened during this review task. Metadata and hashes supplement manual visual inspection; file presence alone is not a visual pass.",
+  "verdictMeaning": "PASS_WITH_DIFFERENCES means no P1/P2 defect found in this review scope, with explicit differences from concept art. It does not mean pixel equality or human user approval.",
+  "inspected": {
+    "sourceCount": 9,
+    "captureCount": 45,
+    "stateCount": 9,
+    "sizes": [
+      "1024x768",
+      "1280x720",
+      "1280x960",
+      "1600x900",
+      "1920x1080"
+    ]
+  },
+  "findings": [],
+  "states": [
+    {
+      "id": "01",
+      "slug": "home",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Logo, illustrated castle defence, six menu actions and profile remain readable in all five sizes. No text or action clipping found."
+      ],
+      "residuals": [
+        "At 4:3 the 16:9 illustration retains proportions with ivory fields above and below.",
+        "Menu icons, typeface and profile badge are runtime UI and differ from hand-lettered concept details."
+      ],
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/01-home.png",
+        "sha256": "c3b9cab2e4416338e108abaf80a202fd7f4e37ac489d348181e6c118d5b48305",
+        "manuallyInspected": true
+      },
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-01-home-1024x768.png",
+          "sha256": "a02b0242615b5886d947882501f3be526b14a89ef1661dca93d6b768b009d04c",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-01-home-1280x720.png",
+          "sha256": "df58eea120529d5108caab982a91e22dd527cca04c098290db869ee1d3b10785",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-01-home-1280x960.png",
+          "sha256": "7b6b5a4d6ac98423d1b31664f7b9b7c46b5ba149444b26a1e18a4ea4bde85946",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-01-home-1600x900.png",
+          "sha256": "91bd9023449a0d4f5c153e69481ddc3db9a624fb32b61637b704e64017cc8d18",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-01-home-1920x1080.png",
+          "sha256": "2d76c965563d21c4e7243dc75ac287fa9a62aecb09d746c0db43de0f4692ecf1",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "02",
+      "slug": "map",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Castle, map directions, three ink colours, wave count, starting strokes and preparation action remain visible in all five sizes. At 1024 the preparation label wraps into two complete lines."
+      ],
+      "residuals": [
+        "At 4:3 the map illustration has ivory fields while the right information panel uses full height.",
+        "Runtime header separates XP/level and gold rather than reproducing the exact source badge arrangement."
+      ],
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/02-map.png",
+        "sha256": "9e1a8916060e84641862352e8c71ce029b9dd203e50442db923aebb83822fce1",
+        "manuallyInspected": true
+      },
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-02-map-1024x768.png",
+          "sha256": "cb61ba2b792f0cc5c276d6343a8d1423967c1ceae878d3225834980d9a54f349",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-02-map-1280x720.png",
+          "sha256": "a1617ad48954ba92fd74734b7aa518cdc3922eaeea5498f5f1b7eec07708ca2a",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-02-map-1280x960.png",
+          "sha256": "305aca133ecb51df7d85172ed9643826b488a34093ea4077035c4c46411f0575",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-02-map-1600x900.png",
+          "sha256": "1041e295ce732d8d3ccc1939e028427f95f0e569059a9380b6d11da2baec5f85",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-02-map-1920x1080.png",
+          "sha256": "53a71da8b4560e13f8f31fc46f20dce65af751c6d2ab1886bfd51f9cfa1b6ff9",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "03",
+      "slug": "preparation",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Eight cards, complete names and prices, material options, replacement/removal controls and start action fit all five sizes.",
+        "The low plate leaves the gun, piercer and mortar silhouettes clearly visible; double gun seats show contact without a visible floating gap."
+      ],
+      "residuals": [
+        "Modern modular assets replace the earlier round-base concept drawings.",
+        "A single-weapon foundation retains its second empty mounting disk, reflecting the actual assembly.",
+        "At 1024 the footer uses two rows; the source shows one wide row."
+      ],
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/03-preparation.png",
+        "sha256": "3284aa75dd44a16b8a2fb573322c01882f516f5ca4b6fb5ed7ce8accc5cad614",
+        "manuallyInspected": true
+      },
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-03-preparation-1024x768.png",
+          "sha256": "1eec329c85578d9a7d8b82d30a41cd18827847ddbf5c9e25d3b9ac71c8e8b753",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-03-preparation-1280x720.png",
+          "sha256": "9ecf747ce3344e751e84f584851340cab527d1f0aef09ccfffe17ba7af928962",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-03-preparation-1280x960.png",
+          "sha256": "4da5d4208034a66ada22d193a123ba04ecd4be03182cd1811aab7628aa6f41e4",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-03-preparation-1600x900.png",
+          "sha256": "40f954a2493dbae8f01b74c4c8ce51a33f5580f9e33670b709c55304c1c4d5ad",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-03-preparation-1920x1080.png",
+          "sha256": "8b5c82dcc02c01427a6c1d5e4a565e8915eb2b2761c57f322519e0af06f4a39d",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "09",
+      "slug": "album",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "All eight cards, selected highlight, eight-slot composition, inspector prices/HP/load and actions are readable at all five sizes.",
+        "Low foundations visibly improve weapon readability in both cards and large inspector; no detached seating or clipping observed."
+      ],
+      "residuals": [
+        "Runtime inspector offers edit, save variant and delete actions instead of the exact source action arrangement.",
+        "At 1024 current slots become text buttons on two rows instead of eight illustration cards.",
+        "Modern modular parts and an empty second mounting disk differ from old concept towers."
+      ],
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/09-album.png",
+        "sha256": "f85732485ee24e51bbf780898baa5ea822a875b31ae0da345bcdd7ac5cbe19be",
+        "manuallyInspected": true
+      },
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-09-album-1024x768.png",
+          "sha256": "f2538c0d9a65bdd96e245ccd7c1b97dfde3e1b5eccd005fb3c37e9a62e30196e",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-09-album-1280x720.png",
+          "sha256": "750f2f8a95cf675f4f894c5f24721c7b3c526651e91b423ceab8f0d9559df86a",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-09-album-1280x960.png",
+          "sha256": "4d9184575843ecefbd3c90bcaccc0624022e36295de6939cf621184146acf1f6",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-09-album-1600x900.png",
+          "sha256": "a08e80dcae748038ecfd2fd3641e84558da6e5adaae164d4bbb26fbd5b86ca55",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-09-album-1920x1080.png",
+          "sha256": "3416a811240419c68b8b9a432e67a02bb7ab923a075562db9b40c02e4c782271",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "slug": "victory",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Victory ribbon, wave/gold/XP summary, actual level bar, castle/recipe cluster, three finance rows, saved reward and navigation actions are visible at all five sizes.",
+        "Weapon silhouettes in the central cluster remain distinct above the thin plate."
+      ],
+      "residuals": [
+        "The central cluster uses frozen runtime modular recipes rather than the exact illustrated concept settlement.",
+        "Background terrain and fallen enemies are less dense than the source; ribbon/laurel lines and card surfaces are simpler.",
+        "In 4:3 the main composition retains its intended wide proportion with larger paper fields."
+      ],
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/20-victory.png",
+        "sha256": "b4214f39c7232a6f25b46f9deb3224753fcbb9c0e3d3477c4a88b74965af443e",
+        "manuallyInspected": true
+      },
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-20-victory-1024x768.png",
+          "sha256": "df8579ad3057f9087545803c7f29f8ec1904dedab10be825d42d3cf42e35323c",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-20-victory-1280x720.png",
+          "sha256": "e3ff3d98ea619f4be024d98b0aeb303db7a6e45afe315c2c70aba2814f03d62c",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-20-victory-1280x960.png",
+          "sha256": "79dcc399af70893f899d63afefe3aa0f40bf3265171a521e5d377da2c0f77a10",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-20-victory-1600x900.png",
+          "sha256": "219238d65985110052f095798821dd24d50b95199480f8c6e9e8ef35d10d2e14",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-20-victory-1920x1080.png",
+          "sha256": "5798f4b747f49c9d880a7e7038dd2138866cde087b1e8d62107ef1a3e4b44d97",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "21",
+      "slug": "defeat",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Ruined castle occupies the left, while completed waves, defeat wave, gold, XP, actual losses, save receipt and retry/album/map actions are clear on the right in all five sizes."
+      ],
+      "residuals": [
+        "Ruined-castle art closely follows the reference but is a separate native illustration; individual rubble and enemy positions differ.",
+        "Heading ribbon and runtime statistics panel have simpler geometry and use actual fixture values rather than source example losses.",
+        "4:3 keeps a centred wide main composition with larger paper fields."
+      ],
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/21-defeat.png",
+        "sha256": "4c842f460848bc0b2820590486a9c12488ea84e10abbcc59cc02b02c56ee2e6e",
+        "manuallyInspected": true
+      },
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-21-defeat-1024x768.png",
+          "sha256": "995fa62d0fe0601f614db9e8dd06e915188a77ae757300afec35d59053265db4",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-21-defeat-1280x720.png",
+          "sha256": "4454e858445f90326b98796e5aa36331a8fed323591e5e248fb696d24819a463",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-21-defeat-1280x960.png",
+          "sha256": "2c84d7116e54f7d1bc4473151f886a3a5b8a76b76367356d6a0fd2b10c06d876",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-21-defeat-1600x900.png",
+          "sha256": "2506e8d5f62b7efa7b07612e270b46b861e2736fb2e533af397c45076d809630",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-21-defeat-1920x1080.png",
+          "sha256": "82605188552aa1e5ba8163a0d454253099c978ee11f23eadcd746e5fa5f49e6f",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "22",
+      "slug": "settings",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Logo, two castle landscapes, fullscreen/radius/reduced-motion toggles, resolution controls, help and done action remain visible without clipping in all five sizes."
+      ],
+      "residuals": [
+        "Resolution controls and reduced-motion option add functionality absent from the source and make the central card taller.",
+        "Source peripheral slogans and wooden placards are omitted; runtime controls use reusable paper panels.",
+        "At 4:3 the source landscape remains proportional with paper fields."
+      ],
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/22-settings.png",
+        "sha256": "395c7d5afb47b7189886e29853dcc699a81139038216c429cc1342055dea1f8a",
+        "manuallyInspected": true
+      },
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-22-settings-1024x768.png",
+          "sha256": "c9cf4233e7b346953c735df7f7276d7aaa814c08f3ab8a3c51b650186923cecb",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-22-settings-1280x720.png",
+          "sha256": "295cde6f67a4e566d15242753b94e9e5ed82954c46e92150a556b0292a09dda0",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-22-settings-1280x960.png",
+          "sha256": "4020fc7cb4108ed222522f75cd933aa0ae8df1404aba8e217aff497406d6376d",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-22-settings-1600x900.png",
+          "sha256": "12b3f35be156435f57a06112b6a4dfb8fb0e291c6f98c35b41128ffe2bfeafa1",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-22-settings-1920x1080.png",
+          "sha256": "d2cde00ad12aa741922293f6863abc8df8eaca0abff271f4913d94c0897fecab",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "23",
+      "slug": "help",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "All four illustrated steps, four resource rows, twelve control labels, back and done action are visible in all five sizes.",
+        "The previously clipped pause label is now completely visible as 'Пробел / Esc' in all five final captures.",
+        "New low foundations are consistently used in save/eight-slot examples; no assembly clipping found."
+      ],
+      "residuals": [
+        "Peripheral terrain is much less dense than the source; step diagrams use actual modular parts and narrative text rather than exactly copying the source illustrations.",
+        "At 1280x720 keycaps are notably shallow and their glyphs small, although complete; this is a P3 readability/density residual.",
+        "Back is at the bottom left rather than at the source upper left."
+      ],
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/23-help.png",
+        "sha256": "80e9e894c092a8cd7e22c1feead5609630bbb043ab3f1af6a3c3efb997d18f47",
+        "manuallyInspected": true
+      },
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-23-help-1024x768.png",
+          "sha256": "b384d0287095a4eafd45ef689c981fb920d8debeb9a1679de220d6aae6a01453",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-23-help-1280x720.png",
+          "sha256": "3571c785c5d91521bab0370126c0fa17f84db5e493c94d6759301dbb989db293",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-23-help-1280x960.png",
+          "sha256": "36085cbebe8d1df5be16d80df80d4306178d192968be1d71a7bccec13d998200",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-23-help-1600x900.png",
+          "sha256": "2cd6c791193ab64309c047dcdeb9b19cd22b766829b7f407064d5c12d50e2a04",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-23-help-1920x1080.png",
+          "sha256": "018cca831a06ff626d266f917d090231d94edf4e2cc02db7f64d582202ba440d",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        }
+      ]
+    },
+    {
+      "id": "24",
+      "slug": "empty",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Empty-state title, description, broad illustrated book, low foundation and completed tower, ink bottle, current slots and starter-set action fit all five sizes.",
+        "Book/assembly edges do not overlap the action; weapon and mounting contacts are clear."
+      ],
+      "residuals": [
+        "The book shows foundation and completed assembly rather than the source exploded vertical component stack.",
+        "The standalone source composition is integrated into the regular album header, tabs and slot strip.",
+        "Modern modular parts and simpler paper outlines differ from the source pen-and-paper details."
+      ],
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/24-empty.png",
+        "sha256": "6a5fb645b1529e2f2102bc111da1a81204f53c96276084a0783c51f196b8b073",
+        "manuallyInspected": true
+      },
+      "captures": [
+        {
+          "size": "1024x768",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-24-empty-1024x768.png",
+          "sha256": "3f660cb1565b07ac20543603505cf09f600da61f07c8cc64de599efbc1016531",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x720",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-24-empty-1280x720.png",
+          "sha256": "c5c000917ff425bb34e7963c8bc5e2d0a35c4832d9af0afccc76460dd0dd8305",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1280x960",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-24-empty-1280x960.png",
+          "sha256": "e829a3feee23a92dc3cf0ca7bca99a1a5b4a5bbed0383da712117460d90d3263",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1600x900",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-24-empty-1600x900.png",
+          "sha256": "d697951aee43f38d6901bfdb19d06fd8fd67c721bd981baf352a0a52e8ba5680",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        },
+        {
+          "size": "1920x1080",
+          "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-24-empty-1920x1080.png",
+          "sha256": "f6b66b468edd6b65c43ef15c9c0e1c44f050c4993a540f53f26837fd5ae7b49c",
+          "revision": "modular-full-catalog-2026-10-22-v7",
+          "verdict": "PASS_WITH_DIFFERENCES",
+          "manuallyInspected": true
+        }
+      ]
+    }
+  ]
+}

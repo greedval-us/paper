@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "balanceRevision": "album-v1.0",
+  "rows": 486,
+  "campaigns": 18,
+  "campaignOutcomes": {
+    "Defeat": 3,
+    "Victory": 12,
+    "Timeout": 3
+  },
+  "universalDominance": [],
+  "editMode": {
+    "failed": 0,
+    "passed": 1598
+  },
+  "playMode": {
+    "failed": 0,
+    "passed": 865
+  },
+  "node": {
+    "failed": 0,
+    "passed": 14
+  },
+  "workbook": {
+    "desktopExcelRecalculation": false,
+    "formulaErrors": 0,
+    "sha256": "b55e88b39c402014e55d4cf2a8c22e7804933c0d3f126e6045a99f0f9a6d7ec5",
+    "cachedFormulas": 597,
+    "numericChecks": 1467,
+    "sheets": 11
+  },
+  "sourcesNormalizedUtf8LfSha256": {
+    "docs/balance/album-balance-v1.json": "4b6727d41ba8708ed96ccb5891280ef2945e62a5f8e18e18c2a6553d0b370428",
+    "docs/balance/assembly-runtime.json": "49abacfebbee5700b6e4325adb63a405a45842aceb53bc257ad612bc30646c80",
+    "docs/validation/modular-album/assembly-balance-results.json": "25878bee9eb674cac2b5dbbb83ba33fa8bdbac6f1d21cdbc9f8e47bc71b3f236",
+    "Assets/PaperDefense/Configuration/Game/PlayerBalance.asset": "d29ea98376c8f57cf9583c8195584d88cd9ca53c161f6789b75a3652ad4ab590",
+    "Assets/PaperDefense/Configuration/Game/PlayerRules.asset": "dcaf91b459e03bf7642ff5c3908815a2ec485f509cf3dafef988867758a43f7d",
+    "Assets/PaperDefense/Configuration/Game/PlayerContent.asset": "00335bf67a97f58d480a34430a82fca5ba78267e11c2a6832acbc7530087c394",
+    "Assets/PaperDefense/Configuration/Game/PlayerAssemblyCatalog.asset": "221e7fa6e31388040891515e829fa36a73c46bfcc243b5087af86e2b1b3c3e26",
+    "Assets/PaperDefense/Validation/AssemblyBalanceScenario.cs": "0ae9985eebe6a2f6ae59f3786a5f5f974548c63afb1fa660d5d9e2147d79f175",
+    "Assets/PaperDefense/Editor/AssemblyBalanceExport.cs": "ffcbf8a41819787a3925f6dbad79be613189e298a5a77d2487cdbf9a70e3b108",
+    "Tools/AlbumDesign2026/build-data.mjs": "ea5c8ef424aa536e22a7b79b252acad2c166af7cf1fffdec93edbd1e1d128c22",
+    "Tools/AlbumDesign2026/build-workbook.mjs": "1b8f5d28398b7d6523e0e677c218d77556f3c8d8f7299d907164dc9a3354be04",
+    "Tools/AlbumDesign2026/verify-balance.mjs": "26d71850001485d1c83f1b729bda979eb23f2e19b6f8877f51e8b6ce15751d59"
+  },
+  "notes": [
+    "Three console exceptions originate from expected TextResourceIntegrationTests negative cases, confirmed by stack traces and LogAssert.Expect.",
+    "Historical exporter retains exactly two configurations.",
+    "Matrix physics rows were retained; final dominance postprocessing includes measured blot cleaning."
+  ]
+}

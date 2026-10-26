@@ -1,0 +1,8 @@
+{
+  "started": true,
+  "alive_after_8_seconds": true,
+  "memory_only": true,
+  "graphics": "headless",
+  "log_written": true,
+  "runtime_errors": []
+}

@@ -1,0 +1,213 @@
+{
+  "status": "reviewed_plan_only",
+  "reviewSource": "agent",
+  "analyst": "/root/refine_visual_04_08",
+  "referenceResolution": [
+    1672,
+    941
+  ],
+  "evidence": "Analyst opened five source PNGs and both 1920x1080/1024x768 fidelity PNGs for each, then inspected owning code. No Unity calls or implementation in this handoff.",
+  "coordinateOrigin": "top-left; normalized to whole source image",
+  "scenes": [
+    {
+      "id": "04",
+      "owners": [
+        "CompositeWorkshopPanel.Foundation.cs"
+      ],
+      "regions": {
+        "options": [
+          0.0227,
+          0.1095,
+          0.5377,
+          0.7705
+        ],
+        "preview": [
+          0.5688,
+          0.1095,
+          0.4127,
+          0.8247
+        ],
+        "metrics": [
+          0.5748,
+          0.5845,
+          0.3971,
+          0.2072
+        ]
+      },
+      "repairs": [
+        "Readable 45px-equivalent selection/unlock action and selected frame.",
+        "Inline heading/hint at wide width; stack narrow.",
+        "Custom foundation action grouped with selected preview.",
+        "Strong icon/value metric strip without duplicate tiny cost."
+      ],
+      "preserve": [
+        "Unowned frame opens editor; does not directly purchase.",
+        "Real frame identity, capacity, price, rights and navigation."
+      ]
+    },
+    {
+      "id": "05",
+      "owners": [
+        "CompositeWorkshopPanel.Weapon.cs"
+      ],
+      "regions": {
+        "hero": [
+          0.0335,
+          0.1668,
+          0.3708,
+          0.5622
+        ],
+        "catalog": [
+          0.4139,
+          0.1573,
+          0.5754,
+          0.6111
+        ],
+        "details": [
+          0.1806,
+          0.8236,
+          0.6382,
+          0.1328
+        ]
+      },
+      "repairs": [
+        "Raise catalog and reserve framed details strip.",
+        "Larger five category icons and edit action; second action row narrow.",
+        "Real load/capacity meter and clear separate price.",
+        "Two-line card names with aligned costs, stronger unavailable badges."
+      ],
+      "preserve": [
+        "Selected mount, required first weapon, optional mount removal.",
+        "Inspect/install/purchase distinction and real component data."
+      ]
+    },
+    {
+      "id": "06",
+      "owners": [
+        "ComponentAssemblyPanel.cs",
+        "ComponentCatalogPanel.cs",
+        "ComponentCatalogPanel.Sketch.cs"
+      ],
+      "regions": {
+        "work": [
+          0.0132,
+          0.1541,
+          0.695,
+          0.7152
+        ],
+        "catalog": [
+          0.0179,
+          0.2455,
+          0.1489,
+          0.6036
+        ],
+        "diagram": [
+          0.1722,
+          0.237,
+          0.5299,
+          0.6249
+        ],
+        "stats": [
+          0.7129,
+          0.1573,
+          0.2745,
+          0.4176
+        ]
+      },
+      "repairs": [
+        "Frame stage and stats as distinct owned regions.",
+        "Increase local statistic row pitch/weight.",
+        "Reduce scenery competition at exploded mechanism.",
+        "Art-led part cards with compact ownership/contribution footer."
+      ],
+      "preserve": [
+        "CanTrial forbids trial while a component editor is open.",
+        "Actual parts and source-owned scroll/catalog, save/cancel/diagnostics/purchases."
+      ]
+    },
+    {
+      "id": "07",
+      "owners": [
+        "ComponentCatalogPanel.Sketch.cs"
+      ],
+      "regions": {
+        "comparison": [
+          0.0066,
+          0.0776,
+          0.6609,
+          0.8385
+        ],
+        "table": [
+          0.6794,
+          0.1541,
+          0.3098,
+          0.3826
+        ],
+        "apply": [
+          0.6794,
+          0.6217,
+          0.3098,
+          0.0712
+        ]
+      },
+      "repairs": [
+        "Two framed columns instead of single sheet.",
+        "Real resolved current/candidate table with aligned values and separate colored text objects.",
+        "Apply directly below decision evidence.",
+        "Framed art captions and quiet variant rail."
+      ],
+      "preserve": [
+        "Only owned alternate heads use this branch.",
+        "Inspect click must not install/spend/save.",
+        "Suggested, disabled, purchase and family branches."
+      ]
+    },
+    {
+      "id": "08",
+      "owners": [
+        "CompositeWorkshopPanel.Review.cs"
+      ],
+      "regions": {
+        "hero": [
+          0.1663,
+          0.2391,
+          0.3756,
+          0.5154
+        ],
+        "review": [
+          0.5975,
+          0.1987,
+          0.3008,
+          0.6536
+        ],
+        "checks": [
+          0.622,
+          0.3996,
+          0.256,
+          0.1647
+        ],
+        "metrics": [
+          0.6178,
+          0.5824,
+          0.2602,
+          0.1722
+        ]
+      },
+      "repairs": [
+        "Narrower shorter desktop review card with compact-width minimum.",
+        "Stronger checks and value hierarchy; framed editable name/banner.",
+        "Intentional hero margins with full real composition.",
+        "Quiet readable scroll-owned recipe details and real free-save note."
+      ],
+      "preserve": [
+        "CanSave/CanTrial, real validation failures and write failure feedback.",
+        "Captured-session name editing, variant/save actions, actual album capacity."
+      ]
+    }
+  ],
+  "sharedStyleReuse": [
+    "FoundationDetailGraphic.StepTab / ProgressCircle / GoldStack / GoldCoin / LoadMeter / Frame / SelectedCorner",
+    "WorkshopAssemblyDiagram / ComposePart / ComposeFoundation / ComposeWeapon",
+    "Existing callback owners only; no legacy wizard command substitution."
+  ]
+}

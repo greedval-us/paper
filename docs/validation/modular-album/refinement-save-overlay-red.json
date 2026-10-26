@@ -1,0 +1,72 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "5a0a29992b83498db2e6fc4aa9cd794d",
+    "status": "failed",
+    "mode": "PlayMode",
+    "started_unix_ms": 1792709965222,
+    "finished_unix_ms": 1792709973306,
+    "last_update_unix_ms": 1792709973306,
+    "progress": {
+      "completed": 2,
+      "total": 2,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": null,
+      "last_finished_test_full_name": "PaperDefense.Tests.CompositeWorkshopUiTests.DismissingWriteFailureSurvivesReflowAndRetryPreservesTheNamedDraft(True)",
+      "last_finished_unix_ms": 1792709973279,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "run_in_background": true,
+      "focus_nudge_attempts": null,
+      "focus_nudge_limit": null,
+      "focus_nudge_status": null,
+      "blocked_reason": null,
+      "failures_so_far": [
+        {
+          "full_name": "PaperDefense.Tests.CompositeWorkshopUiTests.DismissingWriteFailureSurvivesReflowAndRetryPreservesTheNamedDraft(False)",
+          "message": "  A refused write needs a dismissible error sheet over the unchanged recipe review.\r\n  Expected: not null\r\n  But was:  null\r\n"
+        },
+        {
+          "full_name": "PaperDefense.Tests.CompositeWorkshopUiTests.DismissingWriteFailureSurvivesReflowAndRetryPreservesTheNamedDraft(True)",
+          "message": "  A refused write needs a dismissible error sheet over the unchanged recipe review.\r\n  Expected: not null\r\n  But was:  null\r\n"
+        }
+      ],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "PlayMode",
+      "summary": {
+        "total": 2,
+        "passed": 0,
+        "failed": 2,
+        "skipped": 0,
+        "durationSeconds": 0.7060477,
+        "resultState": "Failed(Child)"
+      },
+      "results": [
+        {
+          "name": "DismissingWriteFailureSurvivesReflowAndRetryPreservesTheNamedDraft(False)",
+          "fullName": "PaperDefense.Tests.CompositeWorkshopUiTests.DismissingWriteFailureSurvivesReflowAndRetryPreservesTheNamedDraft(False)",
+          "state": "Failed",
+          "durationSeconds": 0.4958437,
+          "message": "  A refused write needs a dismissible error sheet over the unchanged recipe review.\r\n  Expected: not null\r\n  But was:  null\r\n",
+          "stackTrace": "at PaperDefense.Tests.CompositeWorkshopUiTests.DismissingWriteFailureSurvivesReflowAndRetryPreservesTheNamedDraft (System.Boolean variant) [0x000e9] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\CompositeWorkshopUiTests.cs:134\r\n",
+          "output": ""
+        },
+        {
+          "name": "DismissingWriteFailureSurvivesReflowAndRetryPreservesTheNamedDraft(True)",
+          "fullName": "PaperDefense.Tests.CompositeWorkshopUiTests.DismissingWriteFailureSurvivesReflowAndRetryPreservesTheNamedDraft(True)",
+          "state": "Failed",
+          "durationSeconds": 0.1731336,
+          "message": "  A refused write needs a dismissible error sheet over the unchanged recipe review.\r\n  Expected: not null\r\n  But was:  null\r\n",
+          "stackTrace": "at PaperDefense.Tests.CompositeWorkshopUiTests.DismissingWriteFailureSurvivesReflowAndRetryPreservesTheNamedDraft (System.Boolean variant) [0x000e9] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\CompositeWorkshopUiTests.cs:134\r\n",
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

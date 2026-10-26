@@ -23,8 +23,8 @@ namespace PaperDefense.Tests
             {
                 new WaveDefinition { Count = 1, SpawnInterval = 0.01f, Sides = 1 }
             };
-            foreach (StructureKind kind in Enum.GetValues(typeof(StructureKind)))
-                balance.Structure(kind).BuildSeconds = 0;
+            foreach (var definition in balance.StructureDefinitions)
+                definition.BuildSeconds = 0;
             foreach (EnemyKind kind in Enum.GetValues(typeof(EnemyKind)))
             {
                 balance.Enemy(kind).Speed = 0;

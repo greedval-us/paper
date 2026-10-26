@@ -1,0 +1,27 @@
+// Native Unity diagnostic canvas, memory-only snapshot. No compositing or pixel edits.
+var game=PaperDefense.Editor.FullGameUiCapture.Game;
+var catalog=UnityEditor.AssetDatabase.LoadAssetAtPath<PaperDefense.Application.AssemblyCatalogAsset>("Assets/PaperDefense/Configuration/Game/PlayerAssemblyCatalog.asset").CreateSnapshot();
+var entry=System.Linq.Enumerable.Single(catalog.Starters,e=>e.Id=="album.double");
+var f=entry.Snapshot.Recipe.Tower.Foundation;
+var recipe=new PaperDefense.Core.AssemblyRecipe(new PaperDefense.Core.TowerRecipe(new PaperDefense.Core.FoundationRecipe(f.Frame,f.Hull,new PaperDefense.Core.PartRef("armor.plate",1),f.Feed,f.Turn),entry.Snapshot.Recipe.Tower.Mounts));
+var snapshot=new PaperDefense.Core.RecipeSnapshot(recipe,catalog.BalanceRevision,catalog.Definitions);
+var paper=new UnityEngine.GameObject("Task 3 recipe pilot evidence",typeof(UnityEngine.RectTransform),typeof(UnityEngine.Canvas),typeof(UnityEngine.UI.CanvasScaler));
+paper.transform.SetParent(game.transform,false);paper.layer=5;
+var canvas=paper.GetComponent<UnityEngine.Canvas>();canvas.renderMode=UnityEngine.RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=32000;
+var scaler=paper.GetComponent<UnityEngine.UI.CanvasScaler>();scaler.uiScaleMode=UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;scaler.referenceResolution=new UnityEngine.Vector2(1600,1200);scaler.matchWidthOrHeight=.5f;
+System.Action<UnityEngine.RectTransform,float,float,float,float> place=(rect,x,y,w,h)=>{rect.anchorMin=rect.anchorMax=new UnityEngine.Vector2(.5f,.5f);rect.pivot=new UnityEngine.Vector2(.5f,.5f);rect.anchoredPosition=new UnityEngine.Vector2(x,y);rect.sizeDelta=new UnityEngine.Vector2(w,h);};
+var background=new UnityEngine.GameObject("Paper",typeof(UnityEngine.RectTransform),typeof(UnityEngine.UI.Image));background.layer=5;background.transform.SetParent(paper.transform,false);var back=background.GetComponent<UnityEngine.RectTransform>();back.anchorMin=UnityEngine.Vector2.zero;back.anchorMax=UnityEngine.Vector2.one;back.offsetMin=back.offsetMax=UnityEngine.Vector2.zero;background.GetComponent<UnityEngine.UI.Image>().color=new UnityEngine.Color(.969f,.957f,.915f,1);
+var font=UnityEngine.Resources.GetBuiltinResource<UnityEngine.Font>("LegacyRuntime.ttf");
+var names=new[]{"Карточка · 128 × 128","Крупный preview · исходная поза","Стволы навстречу · полный ход","Стволы наружу · полный ход","Разные углы · максимальная отдача","Обратный поворот · максимальная отдача"};
+var angles=new[]{0f,0f,-UnityEngine.Mathf.PI/2,UnityEngine.Mathf.PI/2,UnityEngine.Mathf.PI,UnityEngine.Mathf.PI/2};
+for(int i=0;i<6;i++){
+ float x=(i%3-1)*530,y=(.5f-i/3)*600;
+ var label=new UnityEngine.GameObject("Caption "+i,typeof(UnityEngine.RectTransform),typeof(UnityEngine.UI.Text));label.layer=5;label.transform.SetParent(paper.transform,false);place(label.GetComponent<UnityEngine.RectTransform>(),x,y+245,510,65);var text=label.GetComponent<UnityEngine.UI.Text>();text.font=font;text.fontSize=23;text.alignment=UnityEngine.TextAnchor.MiddleCenter;text.color=new UnityEngine.Color(.075f,.14f,.31f);text.text=names[i];
+ var art=new UnityEngine.GameObject("Recipe snapshot "+i,typeof(UnityEngine.RectTransform),typeof(PaperDefense.Presentation.WeaponAssemblyGraphic));art.layer=5;art.transform.SetParent(paper.transform,false);float size=i==0?128:460;place(art.GetComponent<UnityEngine.RectTransform>(),x,y-25,size,size);
+ var pose=new PaperDefense.Presentation.AssemblyVisualPose(new[]{new PaperDefense.Presentation.AssemblyMountPose(0,angles[i],i>=4?-.085f:0),new PaperDefense.Presentation.AssemblyMountPose(1,i==4?0:-angles[i],i>=4?-.085f:0)});
+ art.GetComponent<PaperDefense.Presentation.WeaponAssemblyGraphic>().SetRecipe(snapshot,pose);
+}
+PaperDefense.Editor.FullGameUiCapture.Enqueue("01-card-preview-boundaries",1600,1200,()=>{});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("01-card-preview-boundaries-4x3",1024,768,()=>{});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("cleanup-diagnostic",1600,900,()=>{UnityEngine.Object.Destroy(paper);});
+return new {snapshot="album.double + armor.plate@1",visualRevision=PaperDefense.Presentation.AssemblyVisualComposer.Revision,poses=6,recoilLimit=.085};

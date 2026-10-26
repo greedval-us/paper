@@ -1,0 +1,126 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "ffccacdfac71482ea6d02c70d5cf22fa",
+      "status": "failed",
+      "mode": "PlayMode",
+      "started_unix_ms": 1792713064933,
+      "finished_unix_ms": 1792713072714,
+      "last_update_unix_ms": 1792713072714,
+      "progress": {
+        "completed": 6,
+        "total": 6,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Bulwark)",
+        "last_finished_unix_ms": 1792713072683,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": true,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [
+          {
+            "full_name": "PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Doodle)",
+            "message": "  Doodle must stay attached to its current silhouette.\r\n  Expected: less than or equal to 0.180000007f\r\n  But was:  0.550568581f\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Runner)",
+            "message": "  Runner must stay attached to its current silhouette.\r\n  Expected: less than or equal to 0.180000007f\r\n  But was:  0.577280045f\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Gnawer)",
+            "message": "  Gnawer must stay attached to its current silhouette.\r\n  Expected: less than or equal to 0.180000007f\r\n  But was:  0.627869606f\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Spitter)",
+            "message": "  Spitter must stay attached to its current silhouette.\r\n  Expected: less than or equal to 0.180000007f\r\n  But was:  0.548341751f\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Brute)",
+            "message": "  Brute must stay attached to its current silhouette.\r\n  Expected: less than or equal to 0.180000007f\r\n  But was:  0.454533577f\r\n"
+          },
+          {
+            "full_name": "PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Bulwark)",
+            "message": "  Bulwark must stay attached to its current silhouette.\r\n  Expected: less than or equal to 0.180000007f\r\n  But was:  0.40067482f\r\n"
+          }
+        ],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "PlayMode",
+        "summary": {
+          "total": 6,
+          "passed": 0,
+          "failed": 6,
+          "skipped": 0,
+          "durationSeconds": 0.0663281,
+          "resultState": "Failed(Child)"
+        },
+        "results": [
+          {
+            "name": "EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Doodle)",
+            "fullName": "PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Doodle)",
+            "state": "Failed",
+            "durationSeconds": 0.0271909,
+            "message": "  Doodle must stay attached to its current silhouette.\r\n  Expected: less than or equal to 0.180000007f\r\n  But was:  0.550568581f\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale (PaperDefense.Core.EnemyKind kind) [0x0023f] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookTowerDefensePresentationTests.cs:190\r\n",
+            "output": ""
+          },
+          {
+            "name": "EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Runner)",
+            "fullName": "PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Runner)",
+            "state": "Failed",
+            "durationSeconds": 0.000654,
+            "message": "  Runner must stay attached to its current silhouette.\r\n  Expected: less than or equal to 0.180000007f\r\n  But was:  0.577280045f\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale (PaperDefense.Core.EnemyKind kind) [0x0023f] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookTowerDefensePresentationTests.cs:190\r\n",
+            "output": ""
+          },
+          {
+            "name": "EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Gnawer)",
+            "fullName": "PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Gnawer)",
+            "state": "Failed",
+            "durationSeconds": 0.0002896,
+            "message": "  Gnawer must stay attached to its current silhouette.\r\n  Expected: less than or equal to 0.180000007f\r\n  But was:  0.627869606f\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale (PaperDefense.Core.EnemyKind kind) [0x0023f] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookTowerDefensePresentationTests.cs:190\r\n",
+            "output": ""
+          },
+          {
+            "name": "EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Spitter)",
+            "fullName": "PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Spitter)",
+            "state": "Failed",
+            "durationSeconds": 0.0002604,
+            "message": "  Spitter must stay attached to its current silhouette.\r\n  Expected: less than or equal to 0.180000007f\r\n  But was:  0.548341751f\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale (PaperDefense.Core.EnemyKind kind) [0x0023f] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookTowerDefensePresentationTests.cs:190\r\n",
+            "output": ""
+          },
+          {
+            "name": "EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Brute)",
+            "fullName": "PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Brute)",
+            "state": "Failed",
+            "durationSeconds": 0.000256,
+            "message": "  Brute must stay attached to its current silhouette.\r\n  Expected: less than or equal to 0.180000007f\r\n  But was:  0.454533577f\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale (PaperDefense.Core.EnemyKind kind) [0x0023f] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookTowerDefensePresentationTests.cs:190\r\n",
+            "output": ""
+          },
+          {
+            "name": "EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Bulwark)",
+            "fullName": "PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(Bulwark)",
+            "state": "Failed",
+            "durationSeconds": 0.0002591,
+            "message": "  Bulwark must stay attached to its current silhouette.\r\n  Expected: less than or equal to 0.180000007f\r\n  But was:  0.40067482f\r\n",
+            "stackTrace": "at PaperDefense.Tests.NotebookTowerDefensePresentationTests.EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale (PaperDefense.Core.EnemyKind kind) [0x0023f] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookTowerDefensePresentationTests.cs:190\r\n",
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

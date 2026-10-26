@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-26",
+  "base": "952f7a99",
+  "retiredSourceFiles": 17,
+  "retired": [
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ArmorReinforcementGraphic.cs",
+      "guid": "071656b6cb97ef34996b35e9659b43d6",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ArmorReinforcementPanel.cs",
+      "guid": "2de34a9c9918e03438fb081f3e50eda9",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/DrawingCanvasGraphic.cs",
+      "guid": "bd4333b021560f24f94c7cdc2fb6ffd0",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/DrawingEditorPanel.cs",
+      "guid": "1186798878943a54ebca86e4ef4078bb",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/DrawingProbePanel.cs",
+      "guid": "50a461fef0ec6c94792ca71fa4bdc8bb",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/DrawingStencilBrowser.cs",
+      "guid": "3015bf3c41bf6704bbd8263cac0ff6c4",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/DrawingSummaryLayout.cs",
+      "guid": "b82cb1fb2cd14725a9b08b68d0f271e3",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/DrawingWorkbenchUi.cs",
+      "guid": "e26eeca89a396dc489ef6e95e050d9c8",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/FanVolleyGraphic.cs",
+      "guid": "e0a9ea4fa925e11429dd2b0e45e874d2",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/FanVolleyPanel.cs",
+      "guid": "26cf245f162c3ae4c9fdfa00e2cb63f9",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/FootprintCanvasGraphic.cs",
+      "guid": "46c19a47a949cba4b8a5fe731b5355cd",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/FootprintStudyPanel.cs",
+      "guid": "139e1d86105c84f4c8f0134bd5dc70f8",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/GuidedDrawingLayout.cs",
+      "guid": "35b7271327c4429a9d92803d46a9c47b",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/GuidedDrawingPanel.cs",
+      "guid": "e35a1c5df2b479c409344ac57374557e",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/MortarFootprintPanel.cs",
+      "guid": "e94b49f2f7104ddb85b3383eeaed7ca3",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WizardDrawingHeader.cs",
+      "guid": "f8607b5e52de43f18f5a9a2cd21aec16",
+      "remainingReferences": 0
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopSheetLayout.cs",
+      "guid": "7608347db9989214283c6e74163c2b56",
+      "remainingReferences": 0
+    }
+  ],
+  "coreAndProductionConfigurationChanged": false,
+  "gitDiffCheck": "passed",
+  "documents": [
+    "README.md",
+    "docs/Current-Mechanics.md",
+    "docs/Development-Guide.md",
+    "docs/Modular-Transition.md",
+    "docs/Content-Profile-Compatibility.md",
+    "docs/superpowers/plans/2026-10-18-modular-album-implementation.md",
+    "docs/validation/modular-album/release/acceptance.md"
+  ],
+  "localLinksChecked": 121,
+  "brokenLinks": [],
+  "balance": {
+    "nodeTestsPassed": 14,
+    "numericDifferences": [],
+    "errors": [],
+    "revision": "album-v1.0"
+  }
+}

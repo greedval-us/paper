@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-17",
+  "stage": 2,
+  "slice": "shared attachments for existing standard atlas sprites",
+  "stageComplete": false,
+  "branch": "codex/standard-workshop-stage1",
+  "personalProfileUsed": false,
+  "profileSchema": 7,
+  "editMode": {
+    "job": "f896e4f2e92b40d78210f5bcf4160ebf",
+    "total": 917,
+    "passed": 917,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 99.2666148,
+    "resultState": "Passed"
+  },
+  "playMode": {
+    "job": "85096e884a6a4922a3bb5646b518343b",
+    "total": 544,
+    "passed": 544,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 41.7211464,
+    "resultState": "Passed"
+  },
+  "build": {
+    "job_id": "build-04728222f1",
+    "result": "succeeded",
+    "platform": "StandaloneWindows64",
+    "output_path": "Builds/Stage2StandardMounts/PaperDefense.exe",
+    "started_at": "2026-10-17T16:40:52.793965Z",
+    "duration_seconds": 18.6967096,
+    "completed_at": "2026-10-17T16:41:11.4906746Z",
+    "total_size_mb": 222.98,
+    "errors": 0,
+    "warnings": 485
+  },
+  "visual": {
+    "captures": 16,
+    "engine": "Unity 6000.5.7f1",
+    "source": "native Unity capture",
+    "imageProcessing": false,
+    "uiResolutions": [
+      [
+        1600,
+        900
+      ],
+      [
+        1024,
+        768
+      ]
+    ],
+    "diagnosticSheetResolution": [
+      1600,
+      1200
+    ],
+    "diagnosticCloseupMagnification": 12,
+    "battleEvidence": [
+      "battle-evidence-1600.json",
+      "battle-evidence-1024.json"
+    ]
+  },
+  "sourceManifest": "source-manifest.json",
+  "screenshotsManifest": "screenshots.json",
+  "smoke": "player-smoke.json",
+  "deferred": [
+    "Separate fixed support and rotating/recoiling barrel fragments",
+    "Full A3/A4 component art, front/back layers and clearance pilot"
+  ]
+}

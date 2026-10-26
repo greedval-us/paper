@@ -1,8 +1,27 @@
 # Инструменты проекта
 
+## Локальные зависимости Node.js
+
+`node_modules`, Python `__pycache__`, `.previews` и генерируемые Unity solution-файлы не входят в исходники. Существующие локальные зависимости сохраняются. Обновление checkout не должно заменять их или общий кэш Codex.
+
+Для свежего клона используйте bundled Node.js и пакеты, пути которых возвращает `load_workspace_dependencies`. Приведённый ниже путь — стандартное размещение локального runtime Codex; при другом размещении подставьте возвращённый каталог пакетов. Выполнять из корня проекта:
+
+```powershell
+$taskModules = Join-Path $env:USERPROFILE '.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules'
+if (!(Test-Path -LiteralPath $taskModules)) { throw 'Сначала найдите доступный runtime через load_workspace_dependencies.' }
+foreach ($taskTool in @('AlbumDesign2026', 'BalanceWorkbook')) {
+    $taskLink = Join-Path (Join-Path $PWD.Path 'Tools') ($taskTool + '/node_modules')
+    if ($null -eq (Get-Item -LiteralPath $taskLink -Force -ErrorAction SilentlyContinue)) {
+        New-Item -ItemType Junction -Path $taskLink -Target $taskModules | Out-Null
+    }
+}
+```
+
+Junction нужна для bare imports Playwright и workbook-инструмента. `AlbumDesign2026/build-workbook.mjs` также умеет читать `CODEX_WORKSPACE_NODE_MODULES`; это не заменяет настройку остальных инструментов. `BalanceWorkbook/Build.ps1` создаёт отсутствующую junction самостоятельно. Для закрытого `@oai/artifact-tool` не предполагается установка через `npm install`. Версии bundled пакетов зависят от установленного runtime; перед новой приёмкой повторяйте проверки инструментов.
+
 [Общая документация](../docs/README.md) · [Разработка и тесты](../docs/Development-Guide.md)
 
-Команды ниже запускаются из корня проекта. Инструменты генерации меняют свои исходные файлы или ассеты; проверочные команды создают отчёты. Сценарии сравнения имеют собственные настройки и не представляют текущий PlayerRules. Главное меню, карта и подготовка уже оформлены по [эскизам](../docs/Game-Design.md); статус остальных экранов — в [порядке реализации](../docs/Implementation-Roadmap.md).
+Команды ниже запускаются из корня проекта. Инструменты генерации меняют свои исходные файлы или ассеты; проверочные команды создают отчёты. Сценарии сравнения имеют собственные настройки и не представляют текущий PlayerRules. В Unity перенесены предыдущие версии главного меню, карты и подготовки. Переход всех экранов к [обновлённым эскизам](../docs/design/game-concept-art-2026-10-16/index.html) описан в [плане реализации](../docs/superpowers/plans/2026-10-18-modular-album-implementation.md).
 
 ## Меню Unity
 
@@ -64,4 +83,8 @@ Runtime-измеритель `PressurePlayerProbe`, флаг `-paper-pressure` �
 | [ContentAcceptanceRunner](../Assets/PaperDefense/Validation/ContentAcceptanceRunner.cs) и [ContentAcceptanceManifestAsset](../Assets/PaperDefense/Validation/ContentAcceptanceManifestAsset.cs) | Editor-only приёмка данных `Content/Acceptance` через автоматические тесты; отдельная сцена удалена |
 | [PlayerVisualCapture](../Assets/PaperDefense/Editor/PlayerVisualCapture.cs) | API `Capture`: снимки игрового интерфейса; по умолчанию `Captures/PlayerGame` |
 
-Последняя проверка очистки и назначение сохранённых исторических JSON описаны в [указателе проверок](../docs/validation/README.md). Эти JSON остаются входами инструментов приёмки и не являются новым результатом текущего дерева. Канонические PNG, `sprites.source.json`, `animation.json` и редакторский `NotebookSpriteImportTools.Rebuild()` описаны в [ArtSource/Notebook](../ArtSource/Notebook/README.md). Актуальное обновление — в [отчёте графики и разрешения](../docs/validation/2026-10-17-art-resolution/report.md).
+Последняя проверка очистки и назначение сохранённых исторических JSON описаны в [указателе проверок](../docs/validation/README.md). Эти JSON остаются входами инструментов приёмки и не являются новым результатом текущего дерева. Канонические PNG, `sprites.source.json`, `animation.json` и редакторский `NotebookSpriteImportTools.Rebuild()` описаны в [ArtSource/Notebook](../ArtSource/Notebook/README.md). Актуальное обновление — в [отчёте графики и разрешения](../docs/validation/2026-10-17-art-resolution/).
+
+## Новый баланс составного альбома
+
+[AlbumDesign2026](AlbumDesign2026/README.md) строит актуальные 54 детали, Excel и данные эскизов. Старый BalanceWorkbook остаётся инструментом сравнения Historical/Target. Он не является источником новой основной модели.

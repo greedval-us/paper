@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "message": "Retrieved 7 log entries.",
+  "data": [
+    "Assets\\PaperDefense\\Tests\\EditMode\\WeaponCycleTests.cs(19,31): error CS0246: The type or namespace name 'WeaponCycleState' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\WeaponCycleTests.cs(19,56): error CS0246: The type or namespace name 'WeaponCycleState' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\WeaponCycleTests.cs(27,87): error CS0246: The type or namespace name 'WeaponCycleState' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\PlayMode\\CompositeWeaponIntegrationTests.cs(49,25): error CS1729: 'StructureState' does not contain a constructor that takes 1 arguments\n",
+    "Assets\\PaperDefense\\Tests\\PlayMode\\CompositeWeaponIntegrationTests.cs(77,41): error CS1503: Argument 1: cannot convert from 'PaperDefense.Core.AlbumEntry' to 'PaperDefense.Core.TowerBlueprint'\n",
+    "Assets\\PaperDefense\\Tests\\PlayMode\\CompositeWeaponIntegrationTests.cs(120,50): error CS1503: Argument 1: cannot convert from 'PaperDefense.Core.AlbumEntry' to 'PaperDefense.Core.TowerBlueprint'\n",
+    "Assets\\PaperDefense\\Tests\\PlayMode\\CompositeWeaponIntegrationTests.cs(120,56): error CS1503: Argument 2: cannot convert from 'PaperDefense.Core.AlbumEntry' to 'PaperDefense.Core.TowerBlueprint'\n"
+  ]
+}

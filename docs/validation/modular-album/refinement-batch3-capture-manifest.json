@@ -1,0 +1,2544 @@
+{
+  "captureBatch": "2026-10-23-final-refinement-10-30",
+  "technicalEvidence": "refinement-full-playmode.json",
+  "sourceFiles": [
+    {
+      "path": "Assets/PaperDefense/Presentation/PaperDefenseBootstrap.cs",
+      "sha256": "eb54ecbd8c002b7f20572d021ab8f9b65e53e5e6d725d9e2d2d3675442060f03"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Art/AssemblyPreviewPose.cs",
+      "sha256": "6d70bb0e29bdcc050a31367c6c22535f6a35aec7db2ba2f201e7520c5fc9c482"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Art/AssemblyVisualComposer.Catalog.cs",
+      "sha256": "c80730a46eccedabee533db4df718da1eacb1fbf43b9bcd6f43cb27ae30d9c4d"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Art/AssemblyVisualComposer.cs",
+      "sha256": "2386273795da707edd14a56464f4c278cb3e7e497c93f50341c8a078a222e74e"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Art/NotebookArtGraphic.cs",
+      "sha256": "75a3e2180377e0d8df80bdd9940f0b3f4e272383efe6e37adf96aef7e316baa2"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Art/NotebookArtRenderer.cs",
+      "sha256": "26865c6cbdf27954120806f3203ecc036079318e7d1ec7430b361a3580e6858c"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Art/NotebookMountLayout.cs",
+      "sha256": "c37da2d78a3780eabc0ee366e7a3be1a113bb4d71d02f77eaa26908172bc89f1"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Art/NotebookSpriteCatalog.cs",
+      "sha256": "61da96eb142643359b901a5a7bb4ca6b0334e0dbcfeff0c15e46e7cf146f5f61"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Art/NotebookVisualThemeAsset.cs",
+      "sha256": "09c22d6f264e2feb3ac3f972df651f906a5c6ab5adb6ad8d7116f7f8e12ffd9b"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Input/DrawingInput.cs",
+      "sha256": "5a5fb3189bc7a5c86ba1195a45a56ad99a1bcba50fac98a7035fb21cda8532a1"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Input/PointerEventPolicy.cs",
+      "sha256": "70b040cf7ef035546375058a03744f6ab2841a69464d2214da09b1ed19c7bb09"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/NotebookPaperSurface.cs",
+      "sha256": "05748e047dd5a2155711a70bd3d094f335a9898e738318baed192e0172a2066b"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerBattleHud.Album.cs",
+      "sha256": "1b5328e516edee42b1eb0c2669ed5590e0a16ff1780cac5e306b281bfbeb063c"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerBattleHud.cs",
+      "sha256": "9ed9f5a3ae2ecbd4927997855622dd7d9f40fc8b7867b83f9580ffdf6606f427"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerDisplaySettings.cs",
+      "sha256": "92cab05e43e996602e92d9962cca3ba0650cde671ff356063ed3fe2dfdd94428"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerGameRoot.cs",
+      "sha256": "5f67cc8367fa0898b34b6929995229411be6645a958c6459bd687f5ba24ad4d1"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerIconGraphic.cs",
+      "sha256": "6ae48f602424051af57a5fd6cdb8cad5171d6c461ec5f91b6e73e2cb846b7c58"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerLayout.cs",
+      "sha256": "240215cc06f5d5e33167440571421b70785a1fb091a206e5c5bf7db25629c5c5"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerPaperGraphic.cs",
+      "sha256": "edbfb51de64372434446e4d0219a2c3ea41db0469b5d8d546f7f9c69d9153392"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerSettingsGraphic.cs",
+      "sha256": "4eadb041ce567c2c9bfe9fd33bf1450d50c9a239f175a6ff96d58d2e70577980"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Album.cs",
+      "sha256": "219b35608ff0a8b9ab723a87692b15c6e3a819f28119bbae6eac0c947f9a6f37"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.cs",
+      "sha256": "abc5ea2cb7d316029eea263d577081cc55536aaf4a21abea45b05ffbb84f8fa4"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Dialogs.cs",
+      "sha256": "d7dc0b86ffdf15f16e423db104b4a26ec32fa219e34a97f4e4bf19037d6c0c7c"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Home.cs",
+      "sha256": "1174eb882a1f308b178519528f830996674c4cd733a64acd33e0cc410b134247"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Map.cs",
+      "sha256": "a0955d30bccbaef191fe0ee6cb10c5fb9e22628ccefb9d5ee8808cefb1390b61"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Notebook.cs",
+      "sha256": "2455cb02490b7d9bdb34c0a097c1e2882249ffbc7e61574df23cdcf37699090d"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Preparation.cs",
+      "sha256": "b4cabc54675fc32d0e552f5c1070014f2405426c73e752dd7e947c08fbc1d872"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.PreparationAssembly.cs",
+      "sha256": "b1d4ef8a3d00d1b954ea5314a55486121c39bc090462e033cad2c38f8d190253"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Result.cs",
+      "sha256": "1ef15574cac57db31fc82d887934ed56fde45b809cc2801794ef074f0540b37b"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Settings.cs",
+      "sha256": "50144432f169a6d32e25e8a2b0b25cc8ede51a0bc92e188ad4e3231b7b71119f"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerUi.cs",
+      "sha256": "85fba8f0f354be941d3871c52efd9e0b9975a3c4eac3d30400c86303e8b0d391"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerWorkshopActions.cs",
+      "sha256": "8b91f2aef414a64491efe69357bbc1676484b38048241ed7b53048707573f97f"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/AuthoredGeometryCache.cs",
+      "sha256": "4f363f7fb892c36aa136532145291ff42ce730c2dfc885b5132ff8abf3fcec93"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/DoodleGlyphs.cs",
+      "sha256": "d8d512ab944333fc69e07bcf39672a0ecb23721dd646aeeafbd065f6a9de8a8e"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/MeshPen.cs",
+      "sha256": "f3b90bed1257c9ad2646fa61dd40b2aff85303bb3664ea127fd50147f0070257"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/NotebookAnimationState.cs",
+      "sha256": "045ec411b3a45fbd25453a1b241a33f5e6b3caafa89c3a31c39ae2f59fb88971"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/NotebookAtlasGraphic.cs",
+      "sha256": "9ab3406df9d213b7599875ad06ebd304f443dc595722c641373e0336bcdb507f"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/NotebookBattlefieldRenderer.cs",
+      "sha256": "6bd66218b8f1fdc832bcc90aa8130113a1736344c583ab0ec7666268dc54f0aa"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/NotebookEffectRenderer.cs",
+      "sha256": "83d7e20d1c091bc092d840fe318acdb009490f69c76c5a567bcc45e86d48eda5"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/NotebookSceneryComposition.cs",
+      "sha256": "1669d8aa8dcbfb152f6eb7c00d62ac4c0c9adf13b753fcc69a45bd7fba1fde76"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/NotebookTowerComposition.cs",
+      "sha256": "e62443b73ff107f8b4bf01848cf4fcb13e5ba0e0bce17858371e8cf12fe13786"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/NotebookTrialPlayback.cs",
+      "sha256": "8fccadef9d3bd590fbde5c9ea8bc59f7f53fa2f34b66493073c338fa60b5215a"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/NotebookTrialRenderer.cs",
+      "sha256": "15c69ea11f7c2198c9e95ca4b17df011da3f9b2f870201d08b786d6e13d04e43"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/NotebookViewSettingsAsset.cs",
+      "sha256": "cc901c9f5506c9e0932a2b5f0dbe74acb01ee03d84b82118b94c4987b4bff914"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/NotebookWorldView.cs",
+      "sha256": "650d4e1fc47702bb5dcb7b8cef1ccf785d4c6a647a474bbdc90378195f0b372a"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/ReferenceDrawingCache.cs",
+      "sha256": "34c9c443472c66ca5e2fccac523a2a89b6398b554f3f207efc608d7a0b5f36d9"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/TrialLaneBatchGraphic.cs",
+      "sha256": "407951e484fad4aafd213a15b1115cc55cdecbd01a5e36bd06dd08b7fd509894"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Rendering/TrialLaneSketch.cs",
+      "sha256": "1ee40c834ba150a952b1107dc3f544c40b16b11e97f2440cc91bfb2f82d2f4c6"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/AlbumPanel.cs",
+      "sha256": "ee4c243ffa615325fe054d0f523442f088be2c0ec28803d3f2d5940068b707ef"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ArmorReinforcementGraphic.cs",
+      "sha256": "dde1878023ffaf70bd20c0131440f4938b38315b4022b0ba41eb87f534d0343f"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ArmorReinforcementPanel.cs",
+      "sha256": "7c856dd0f6ca03ec3f7bc038386051357501049f80c07d6d50f132fea0464b7a"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/CatalogScrollList.cs",
+      "sha256": "68faeb2cb1eeae13b160add3a934b9989d86dd3c6f0b2cc97808194c6263d729"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ComponentAssemblyPanel.cs",
+      "sha256": "96e8b89c92917f1096a7a4adb85307ca09b9ed81a37b1d9b5a76282520631097"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ComponentCatalogPanel.cs",
+      "sha256": "abf0cfe6d7167baeef1705f352f512a37f01af4434a057d514e6a7b596aa4356"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/ComponentCatalogPanel.Sketch.cs",
+      "sha256": "f39ebef9d17d983ddffb46c25acf43fb9d4e336a55a474bb89f81380a1730889"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/CompositeWorkshopPanel.cs",
+      "sha256": "2402fe9e5c1b09799fb2f3ae75005cf37c297331efbbb85961d710ec45846135"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/CompositeWorkshopPanel.Foundation.cs",
+      "sha256": "8bd32f3546ffb73edb72548c8690063e2195b4f4c9411a01743ab2f44ef64cad"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/CompositeWorkshopPanel.Review.cs",
+      "sha256": "2210167414339219eff671a2feea2e779e623b7c15c145e6f315b6b1d822cae0"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/CompositeWorkshopPanel.Trial.cs",
+      "sha256": "f0bbc1d590a692f38af3c687a35d3e12037eae4be6e72d6f5924287d2498b92e"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/CompositeWorkshopPanel.Weapon.cs",
+      "sha256": "98f6be106073a778521ac98148c040073dc9624a5258dcad0e24c50b32fa13fd"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/DrawingCanvasGraphic.cs",
+      "sha256": "dc033840f52fe807d1002bea3b709a2eab98974853bd6bda59c6b39f1a1dc2ab"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/DrawingEditorPanel.cs",
+      "sha256": "4f9e3fefec0b6f1d6addefe076c45c7ce8248973be484074244b3ddc5855614d"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/DrawingProbePanel.cs",
+      "sha256": "036372bed4d024daa857d96cc6ce0ff2510f6e1a5e0cba96a482221d6bbc2297"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/DrawingStencilBrowser.cs",
+      "sha256": "e17af6e63920c34a1b34f1e62390c00d1c237cb919a37a523245bbe9c2ff5e6c"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/DrawingSummaryLayout.cs",
+      "sha256": "c024aed7114792fa193abadabf47053b96c57b75c45972e6df5341389f12ad45"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/DrawingWorkbenchUi.cs",
+      "sha256": "8dfd111919f488141a80b275b99ba9b7492dec58d77c6394366e2a3056a6222d"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/FanVolleyGraphic.cs",
+      "sha256": "3256d81c3a2319d04ca889a53bcff53f1e248cb81c76400c984dfb43ed231886"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/FanVolleyPanel.cs",
+      "sha256": "57a231cf559cd9a573a72e17f76568bacc9dd51454beb7a294b6419744f64b0e"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/FootprintCanvasGraphic.cs",
+      "sha256": "981f25c4878ddd5ab20e378d322c9777fdf7e5c7d89d9fa1b338655a3063cf41"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/FootprintProbeSketch.cs",
+      "sha256": "4cb3725a7e6c963b5f18cd1958bfd38413bc75116ed897791e5087980fa741cd"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/FootprintStudyPanel.cs",
+      "sha256": "2748a6b7828888aed4719cc298dd4ba6e60536f6fd7ea03335d95e9fb4298a9a"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/FoundationDetailGraphic.cs",
+      "sha256": "53a4c746e8d34d3441eab5de6f254ff33aca94df0154744006016065126e97a0"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/GameText.cs",
+      "sha256": "5a7c9750601f49b6e5dcb7852788fe4f0b0cf0a0b59beecc62430a86b0105cbc"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/GuidedDrawingLayout.cs",
+      "sha256": "135370caf2c25349600f2c72034ba4bf3d460e27007641f2a71ae5ba7848bbc1"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/GuidedDrawingPanel.cs",
+      "sha256": "44b8d345508f752fd1da3b8e5a35eb2d1d98a854be1610f0bd49777bbe1855bf"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/MortarFootprintPanel.cs",
+      "sha256": "f008b9f87c36c617555ddc2de71e119c2e5811529c149518b900a7faa52e43a5"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/NotebookHud.cs",
+      "sha256": "9f0657d620524bbe5b7129f02d7a03ade30403a3a0a03de5aa436082139985ef"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/StructureAssemblyPanel.cs",
+      "sha256": "cf15e80ad327059b530e609318234bae377bf5eb4530a70d5b66d64b412b5b7c"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WeaponAssemblyGraphic.cs",
+      "sha256": "5e886dba147b89163c90d711268bcbf38cebc9b614d8edd31d275938984d043d"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WizardAlbumPanel.cs",
+      "sha256": "572cafbaaa49c734fdaf85e1744d628e574d972ddb0668c0b2248a2cfe0d93d2"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WizardAssemblyPanel.cs",
+      "sha256": "db57c03e71c49345b81ac8dec9ad284cb113f8bed63a63930ca95629de65aa8a"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WizardDrawingHeader.cs",
+      "sha256": "15b3758fa83fa7ab628eb4349166e670ab3d0e471b7b20a3cc95112b0d9d15ef"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WizardFoundationPanel.cs",
+      "sha256": "008aa1c164714998cdec5f9e0f174a4197374dbeff0d183c4fbbb6f5a0b4df25"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WizardTrialPanel.cs",
+      "sha256": "d36b477768bc94fbbde8da12a7cb3d946f47861ef1fc4357074b78eeec004b6e"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WizardWeaponHeader.cs",
+      "sha256": "e2b020b0f586fdcbf8b8cb34ad56c43eafef60150ec7522cc12ad6a9798accfd"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WizardWeaponPanel.cs",
+      "sha256": "7e8a7543958b9b5cd6dfcba2cf56466c0081b8b458636a1d7881276249f7afda"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkingGeometryOverlay.cs",
+      "sha256": "1eec9889f5e09a91379537988e2778ecb1865b397f13576fe3b6717e457dfe7a"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopAssemblyDiagram.cs",
+      "sha256": "37f63097d9a3455f31d803faf39ebf14db2cab645e88fe05cbddb42b393cfe03"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopConfirm.cs",
+      "sha256": "50b1dfd0d6f771501f90bb018cb0786a83e43d331dfc1af9ef45fb99f8c47d73"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopHud.cs",
+      "sha256": "f9af877f2851c8dbf19af6221ee799f01f907e8970058ecd7da01141b7309bf4"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopIconGraphic.cs",
+      "sha256": "ae160aa7dfc771736fee7b6ec28772cc9bf7c5091f709ee6ba6bac400ad3a287"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopMetricText.cs",
+      "sha256": "2993c4918c37be0b1ca72906e2b4a7805d1bbdee857b15dcfd3f49f2f5cd943e"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopModal.cs",
+      "sha256": "afcab2c58cd0ceaa253f8d9091704a964ca60142d772ed5fdbeb9577734768fa"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopOverlayLayout.cs",
+      "sha256": "f51c6e5bd2dede77090a3666e84157d037baecda09536ea7c9b1a018a1045ad2"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopResponsiveLayout.cs",
+      "sha256": "0df57abfaccdb6b70e84c7a6e49206436d2526d8a1f950ef92a2591aff527851"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopSheetLayout.cs",
+      "sha256": "7c50d6ec86561a0f7c5317be6a26bf58077ac9c8bdd0538ee9fee7ca5666ceb8"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopSpecialistStyle.cs",
+      "sha256": "fee5dc53caffc61c608cf7da64655451218c7dff5a4ac718d138ed1285c3451f"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopTooltip.cs",
+      "sha256": "05827cabe6fd5f7ca5b978730e2344462371434395f1ace9e7fee7493514aee0"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopUi.cs",
+      "sha256": "e55cd4bd0803bb5aef663d4fa57c8f432a1a9ab8822f7a5fd63ba40569806191"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/UI/WorkshopWizard.cs",
+      "sha256": "ffbd02df87fcb6cee455b56b6cdf4f27782f72222b25d0c7690d0573cd3dc7df"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/AlbumBattleCameraTests.cs",
+      "sha256": "747cbafa42e32d67576288c92091a859dcb62f90d92819969d526aed1ea12f9b"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/AlbumBattleHudTests.cs",
+      "sha256": "b5fef952d142dfaa9c09df60f57ef42654bfe20324b08363bdf8dc7376e04d58"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/AlbumNavigationTests.cs",
+      "sha256": "e6f9574836e796295d0a0057839c2215b174e5246dd8efc9933d053ce6f72484"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/AlbumPlayerControlsTests.cs",
+      "sha256": "deec3c746ed0b848423e1dbc9e50573a7635eabafd40fc13c28ee7a4f70d08f8"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/AlbumPlayerJourneyTests.cs",
+      "sha256": "f171ba6a973ad76026f50a880535ddab1904e4232005dd61ce574853292929e6"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/AlbumUiTests.cs",
+      "sha256": "239a13460d67a546e49804e3f3733777165f0daabd2af384a4cfb03334c3fd8a"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/ArmorReinforcementTests.cs",
+      "sha256": "a5710ff0879ea68006fbbfd58fc5d26658a9fbfbb40676aaff82e335dde19e79"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/AssemblyLoadoutTests.cs",
+      "sha256": "42b9303b1ef311d5839c739bd056f0294d1bf4022c3732c202218694d90ce9db"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/AssemblyProfilePersistenceTests.cs",
+      "sha256": "005eec4480d1aa239d39e44eb9751ef357d3007df29677e7cedc52c53c14c060"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/AssemblyRewardIntegrationTests.cs",
+      "sha256": "27f2cffba748fc7035478f5115e78c5acc28d5ce2fe0b4b16a32aa18e7bb049e"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/AssemblyRewardTests.cs",
+      "sha256": "1bff3ea03b3ec4e4d9c61e338b41d3b6ba34629c86b06565628a74fd00f761e5"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/AssemblyTransactionTests.cs",
+      "sha256": "bbc079030eff386af381b86c6f918efb8205eb9b5100ed9b8ab9dd1b08c51e4c"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/AssemblyTrialUiTests.cs",
+      "sha256": "a7279b64598e36cabe6db3ceb0af285f1f57d4737a3ce4e9ec7e1a620f761fa7"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/AuthoredRenderingTests.cs",
+      "sha256": "cae601078a3959ca4686f569f2e94b52e60f52bb64f1f6d9bf05279549845e67"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/AuthoredWorkshopTests.cs",
+      "sha256": "8d21436bd564dc067c581d8015c4a0218b2459013a039a969ea590bc44e68006"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/BlotterPersistenceTests.cs",
+      "sha256": "6a025bb83406285b5ad88871c7bb6456940788c367843479eb4ac759bab93721"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/BootstrapProfileIsolationTests.cs",
+      "sha256": "17b7ba9ec59a80410b49c2912b50480f47145ab40f47f67f0a110a4d6a868892"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/CatalogHudTests.cs",
+      "sha256": "3ce57741724609a32a95c6c22adc7ed4fdc2437ad87fa62f1b26fbd5b063488d"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/ComponentPurchaseUiTests.cs",
+      "sha256": "00fe43d25bd7dfa367b5f6c7b80102733c943a66ae901278d63183712ade4724"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/CompositeConstructionIntegrationTests.cs",
+      "sha256": "52d64803ebd8ca0e96f437781f72416d6c520fe45729d0491598ae11c2b05382"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/CompositeReferenceFidelityTests.cs",
+      "sha256": "a79cfb6f62a2dde4a483916747c142722c2040b635a8aaba7e0db247f0ee1e32"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/CompositeWeaponIntegrationTests.cs",
+      "sha256": "3ff777ff3fb968bd1aab478ccf9e7af93ac335e66206c9496b6e8c8d315052f2"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/CompositeWorkshopHostTests.cs",
+      "sha256": "b4deed0734a1e2d53b57e1516c1dab39cd1f6a89941992098e073a9a7abebd0f"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/CompositeWorkshopTests.cs",
+      "sha256": "d55c45c47c7cb084a91b6fc11d5aa3fd623f2780dc0ed0663c9d08533764252b"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/CompositeWorkshopUiTests.cs",
+      "sha256": "36301b06175fa135b02f0ccc75a578c2998ec2de3d9fe8991e2057be7a4b1f56"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/ConstructionBoundaryTests.cs",
+      "sha256": "c96b1851c90351341cff2429457f5e12b50ce582407d38f32f4ea8928943efb5"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/ConstructionRulesIntegrationTests.cs",
+      "sha256": "abab69bf0b1738e595875ddac86952a1102f83c36488ed2c36114809fe487d9a"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/ContentConfigurationBoundaryIntegrationTests.cs",
+      "sha256": "be69df164ed978567db913cfe611be887bd51f6489549519e1fc8f4f85505432"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/ContentDataOnlyAcceptanceTests.cs",
+      "sha256": "1a9923026517cdfac623d15f6d24329779ab7cc443a525d6bc46436449883d42"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/DataDrivenProfilePersistenceTests.cs",
+      "sha256": "f4e8dcae55af0eae32cc77d08bd786d184d62580037b5971bd92ea416190df4c"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/DataDrivenWorkshopUiTests.cs",
+      "sha256": "c8b5467f4c22adccfbaa6492a23507849b5a99d8c94a005b98eae2e527684905"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/DesignChangeFeedbackTests.cs",
+      "sha256": "ebe2673eb0fb01a5d4a68865fdb11e4d75aa9e88685fe1201f09ec403520d401"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/DrawingEditorFeedbackTests.cs",
+      "sha256": "1ac892a4ec827852fe1ce50512056c9d6f1ed8b7bc177913c5f7ac668ff37044"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/DrawingProbePanelTests.cs",
+      "sha256": "55a0e8cd49317fd57c7c33937bba1196d959c4bb96715e572e302c4367ef8329"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/DrawingQualityHudTests.cs",
+      "sha256": "6ead3f9fb67b02fb1fbcbb8f0ed1aaa9913482fdc6e94cb9aa74c5e83fdf508a"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/DrawingQualityIntegrationTests.cs",
+      "sha256": "340517f94e106dff38e026ca25be108d8ff10ce90555595985e21d40192396c7"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/DrawingRangeStateTests.cs",
+      "sha256": "3d48dd273709e3bef753dcf3519e5b00a671ea0e87565173eab98093b77832b7"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/DrawingUnlockTransactionTests.cs",
+      "sha256": "9df97cacd386d10c901fbf8b63deaa3fd033cc35304eb9675d95a0f24b694ef0"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/DrawingWorkbenchTests.cs",
+      "sha256": "87352b6bdde03c9d35dc5b86fe519d18815fd9986d9e0271710db3918cffd139"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/EffectsRulesIntegrationTests.cs",
+      "sha256": "cfc68dda1b7157b639fd4c1e7593b0556cdd7af76c4003234b2d3bcc77d240e4"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/EightSlotBattleTests.cs",
+      "sha256": "2a8543f52b1795e802bf5e5464b0a2c116519fb9c32f0f814276a3997125a7ac"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/EightSlotPreparationTests.cs",
+      "sha256": "e43b511645778c35682a34bd4223ac5bd0a75c76561fba15db742d98934cb23b"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/ExpandedCatalogHudTests.cs",
+      "sha256": "4f77c5c220de7108948916558142913b1f16ec0b8bf5b22c2ff8f49a3959ed9a"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/ExpandedMountRenderingTests.cs",
+      "sha256": "6a9c4c54388a3fb817a7ff262babcf66cdb961490d304fa1240d8898d9c76fde"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/ExpandedTrialHudTests.cs",
+      "sha256": "4233bf310470566d5e6a93049b2d82bf856a4c262e63eac6545b07b48304abf4"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/FanPersistenceTests.cs",
+      "sha256": "1bda411341d2a6136a79c57928e585ba7ed6b9c272a42d8c9f9760115664c356"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/FanVolleyHudTests.cs",
+      "sha256": "383e9831643cdde30735587d307990fab75f08cd7e38396e5a869c9bff25319b"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/FanVolleyPersistenceTests.cs",
+      "sha256": "d6e2da66c1286a13b4b11a6a77e6d80d689df859bbf025a3bf2790321cfc688e"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/FixedStepClockTests.cs",
+      "sha256": "2f9983db520b290cf667820063e55fbda7441dd6fd787dd119ac0ad89db32104"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/FootprintStudyHudTests.cs",
+      "sha256": "cbeeae496bc8fc08b36c7e69b1d1c8b87a73c7ed6a3194210cb4d2dbcc23a754"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/FreeformWorkshopTests.cs",
+      "sha256": "909c8cd79a298d9ae57a86255d43f7d2edfbf66d8667f2c0505edeae9adc3534"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/GameBalanceBoundaryIntegrationTests.cs",
+      "sha256": "a49a9d9d3cced09bfefb7b2595e4279f3481f8fa2868f69cce688003650a26ef"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/GoldPayoutTests.cs",
+      "sha256": "b2ddb68d81f64a4de792d6531d884322aa768d44677804d1f280f6da3d5490ff"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/GuidedDrawingPanelTests.cs",
+      "sha256": "cadba42370adda4c217ed086764cda658e30fc8cad1ad2568bacd246b7e8c4f6"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/HistoricalProfileTestData.cs",
+      "sha256": "c248320fb4531a2483b975ea9b32aca306d4adf939a52fe9a123e3ab03322038"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/MechanicsConfigurationIntegrationTests.cs",
+      "sha256": "a8cf65ffbc6a442c7692cb95b709058ac957da78710627571e3520ea1af241be"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/MechanicsHudBoundaryTests.cs",
+      "sha256": "028e5782e59f54b4f0dd66011afbf43acea624f32a4295c3eafc8f64584a823d"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintHudTests.cs",
+      "sha256": "fa8594cdcf6e87350beb52b58bbf8ec1299deeebd319b284a9d9eff9caf0caf2"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintPersistenceTests.cs",
+      "sha256": "1d2f1f1116ffc56b21f2376dae71d823384e7e9eda6527e083b8cdd122ceffc8"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintProbeIntegrationTests.cs",
+      "sha256": "6bc7bed6e81c2a6d6540cce1118d9c6c47068ed3fa66954e9d580e2ff75af6b1"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/MortarFootprintRenderingTests.cs",
+      "sha256": "62f98c4b0d7d463997e499c59fb9fde02e84d72008891c0e27a427b77f02acf1"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/NativeInputIsolation.cs",
+      "sha256": "ff046ef9459134d8466f9ddde8391768b68a2129ed546cfa14d412f5df12925e"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/NotebookAnimationRenderingTests.cs",
+      "sha256": "b2c53ab099ec1a63f9a1abb04a93c7613d813b1006583c3813f8c31c065c0dd8"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/NotebookArtPressureTests.cs",
+      "sha256": "7c3ff32a744c5eb973c5c3158ee2db4e2756c298cdc548e477147d13c32b1158"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/NotebookCameraReadabilityTests.cs",
+      "sha256": "2252d50dce195e7b6b4844ef56444ee595f74e32660396a6a551978aeb1f0954"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/NotebookIntegrationTests.cs",
+      "sha256": "d3f4932f46e858ad86f956e3afc85fdd31f0f89757dfb8c69e8c8e75fdfde571"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/NotebookTowerDefensePresentationTests.cs",
+      "sha256": "b9beeabad0d71763ab5fe0fd608c7cb6bd2d244dff639a39e6bf59a9b06758cf"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/PlayerDisplaySettingsTests.cs",
+      "sha256": "b9db0ad68fca26bae926225eee8a81bd33a16e634f0fb29315d07c43c749ff97"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/PlayerJourneyTests.cs",
+      "sha256": "4f9b1a1fb56d52ead73796e2d4d8b3a7b1adba7b2f79cc19852df9ae9be346ea"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/PlayerLayoutTests.cs",
+      "sha256": "628fd6e038031d8760e30282c566276a39dccd58b5ff969acb9f10684b8b293f"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/RailPersistenceTests.cs",
+      "sha256": "b5b7746dd877dbec06ae0a2e9116e5165219cb14984c12dfe59ad82eb1051b44"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/RailPresentationTests.cs",
+      "sha256": "6b3882aac139e4836f6d39b7fa0cd7fbc3617cb79175c0df42a131fe8c30d233"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/RicochetPersistenceTests.cs",
+      "sha256": "642fd0fbc75cad19451e3ec0bb2ebcc1973ca3564a894caf6037aeaef2e67df0"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/RunControllerTests.cs",
+      "sha256": "d06e2a73699143cf3a491ef30e6531bb0600654e190cb4e9e98ebc6964643d90"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/SharedTowerProductionIntegrationTests.cs",
+      "sha256": "1f8e22fafcb15963e7bc8c7a3deb7e0e0b14bd9fd2dac89f84f6e102f88996f1"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/StandardWorkshopFlowTests.cs",
+      "sha256": "82bae104f18e3859dd73463b725168e851c22406ce9b691cb851c9036e2b9ecf"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/StandardWorkshopPersistenceTests.cs",
+      "sha256": "51f8b6ba2cf4936fe2920ac4aa14627c781473dc41e332394d177ba575509b93"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/StaplerPersistenceTests.cs",
+      "sha256": "1c836dff01824df739c2e004fa302802eeb3761c3a09db8b7a67baf20e54ed1c"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/TargetPresetIntegrationTests.cs",
+      "sha256": "f3b9b422b510414ed71bf09957532b839be9db330dd0b5398fcf30a0d7ee3162"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/TextResourceIntegrationTests.cs",
+      "sha256": "502fba9b971fd58ef6eadce03114cce6e94afbec43ffd7f822dd18768f8aadd6"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/ToolPriceConsistencyTests.cs",
+      "sha256": "98cf6126a243d2a0aab674087c6894189fd58413f823cb565d308b1c600516f8"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/TrialBalanceIntegrationTests.cs",
+      "sha256": "38a5003a53f3ab4c0ce8710f80a57bebd43d11d75562632aab4a663fc6ec568b"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/TrialLaneBatchingTests.cs",
+      "sha256": "f1a33a942eb984c1c233b112e89babf22b6086e77fb069a7fd7b817b9840c5cf"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/WorkshopDrawingPersistenceTests.cs",
+      "sha256": "228922f22d7d606377c02fd067fd7cb7c2242eb42c3dedf15b1e7e7c9349f2d1"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/WorkshopDrawingScreenTests.cs",
+      "sha256": "ecc269744b77637f401f4c1bd2d6fc46d0f878e7a1c47f98efadea532bd2a5fa"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/WorkshopFoundationTests.cs",
+      "sha256": "5d6228ee384849b2b92fa72b08fec12b14bd3d67f0a70e908e455a764dad0b2a"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/WorkshopIntegrationTests.cs",
+      "sha256": "3a70969e946bb03c37fc64122c6b29b4a7cb4cd0a55cdd0f84bbd785e953f3f8"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/WorkshopPersistenceTests.cs",
+      "sha256": "472e94f35fa37d33f252ca05caa2e502e44816fd26e8f339cc81a00e82c83c3c"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/WorkshopReadabilityTests.cs",
+      "sha256": "57ace4c8aac242c8ccf20a26b41077d02185ebcf3143eeb8ff17bbf7be7d614c"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/WorkshopSaveFailureTests.cs",
+      "sha256": "4f3bfb3740bd36099e67795fcb6c57ea3ebc9f9bc91bbecdaa803e19959791b2"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/WorkshopStoreTests.cs",
+      "sha256": "783bb477385928d3b2f0a219c7473ee4ffeb3ddb1006c2cc7d82adb8f491438b"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/WorkshopUiTests.cs",
+      "sha256": "6d3d0e7607fe8762932d7e07dc3a98dd4295f7c3907ee48094036e27132d8a86"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/WorkshopWeaponScreenTests.cs",
+      "sha256": "bf5249c350c1c7f674b4d8b3f69c228f367ccc9b4b8d8864929983ab7c91d593"
+    },
+    {
+      "path": "Assets/PaperDefense/Tests/PlayMode/WorkshopWizardTests.cs",
+      "sha256": "e37520434460878ba84ac958caf50ffaf9cc9a9f3609758357c5439022a13092"
+    }
+  ],
+  "captureFiles": [
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1024x768.json",
+      "sha256": "f7a7afc1b86d05cd9de01f5cacc1d3151e9958653e0592036b8fce165124f310"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1024x768.png",
+      "sha256": "dcbd6573701f349e5cd3c4c54ad3f1a977e0131d0de5b227c5655147dff545de"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1280x720.json",
+      "sha256": "0824bb758205dc85c96e396ecbc5aa1cf7f8067aa032e27fd3958aad0f560257"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1280x720.png",
+      "sha256": "ad5e809addcbe438bf842c14e90f8e1ef5770adcf74d81a603ce58b880dcaf3f"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1280x960.json",
+      "sha256": "1c210e7b3aed29a14a508902c8c756e92e3f591ab435da5dc67700b999def03a"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1280x960.png",
+      "sha256": "5b9c95b608183e1616c0895318bad86aafaab1ced120a9835ba211f75dde4e2f"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1600x900.json",
+      "sha256": "bf0873e653126ce9367db011b30cf1dddf8c1c329c3b98a439df49a7e3f3effd"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1600x900.png",
+      "sha256": "92eb9568e9e03ef5121c96c8848c56c1db309c69db4b58437633bb61209f54da"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1920x1080.json",
+      "sha256": "b7fa5fc1a128cf450a121519e847279b8d4b9a5c053820e88ad989d836f7aa50"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1920x1080.png",
+      "sha256": "3b756dd9e144887be8d888730b9220b3a469055900cccc35de1230465a58c96c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1024x768.json",
+      "sha256": "630f009a4b69bd948b133bac5ad710fb609e41b2b2e8b22f1d40fc8c7b50454e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1024x768.png",
+      "sha256": "41a7d00945492076fe4f3d234843c107e10aae1117cfd9a9167bd42df7c8ac5f"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1280x720.json",
+      "sha256": "a548255e9477a8b136a267554112102db894b2055f2238b97bb6a854e652def7"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1280x720.png",
+      "sha256": "da9e4d3616f8d27c717f274fdc9e7e2194701f44066799aadb47b23744536598"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1280x960.json",
+      "sha256": "ae0e682d98a4fcf8acc416f98a79832e0bfbf414761e82d7cba9297dca791f73"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1280x960.png",
+      "sha256": "0d54aaf8418a5698cd0e0b7f2008abfde83e7ead3b36dd368fcd64e8a4ecd458"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1600x900.json",
+      "sha256": "4caf991c2fea5033f40062cb3a2205f15edce27087f4df319379bea8bd74a825"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1600x900.png",
+      "sha256": "999acf2b72dd15e3d3d906b0a5416bd8d7ff62161699a1d1f52179d1261f230c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1920x1080.json",
+      "sha256": "34946dc14fb63b3b2f38ea92021b896f6439549bb20ad188a124c9b91b2dbfdb"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1920x1080.png",
+      "sha256": "264144069a25ee8565f7091c4dd7efc2c6fb5b1be02a879af50ef0714741cafb"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1024x768.json",
+      "sha256": "95f9128a6dd6e3e55433119f83e0cdda82bccb11fc732ae81b67960b5594067e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1024x768.png",
+      "sha256": "6c3903b1c8a4b9c9001e8bfd0e2fb5aed8aee111ba033ce2f8fb138b291f1823"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1280x720.json",
+      "sha256": "a0105f3262eaaf0c221fa811842365eb9dd46950e557631e3818af08f6596f71"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1280x720.png",
+      "sha256": "47e02a79d98fa5d5f88bc8ffa579932fbfd0f8ca38d1fab1b8186356d101c978"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1280x960.json",
+      "sha256": "fc37ebb9a5579d5c2ae4802745ce07fce2c233066f301143a6d9d73a443133e3"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1280x960.png",
+      "sha256": "89d035f1d7370a3ab782bb8db1f3c83e4145d91e29c4dc11362ac7c9f2de69d6"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1600x900.json",
+      "sha256": "689066ed285009e0fbb47e0f74e88ab6319126e65f2129c83b5eb2abf2de77b0"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1600x900.png",
+      "sha256": "22855106bdd2c383cfd85c8a22ff8be1e93c36e585aa7638569f409b868519e7"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1920x1080.json",
+      "sha256": "9d569593012ed54ba0db14ee236bcdbdce112853db1f6f45b5b8ef5a5db28416"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1920x1080.png",
+      "sha256": "91073440bca38a242701026ab56d3d5e495d214553968ba3b7c170c416886d77"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1024x768.json",
+      "sha256": "bc65d534f1dec4b89845f00117125cb7d56baf0672d5892de499cc0db5a9ca43"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1024x768.png",
+      "sha256": "65db41515788b79b7ed3bcba5a6b3b26f0e6d5dec4b8c897837dabc70a7f6f63"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1280x720.json",
+      "sha256": "d4940a45123ad938e6e0c26233cd43a47887f953c65d3de4687df32e9eabaa64"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1280x720.png",
+      "sha256": "59836d2c856960ea3137ff9f8c7dbe8cb28ba6f78ebf6c94b578e7e4aa4e6e91"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1280x960.json",
+      "sha256": "2b74daabeeb014fe42a93e909d42e881bf6af4547b1948b86b59dd442e800b93"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1280x960.png",
+      "sha256": "f38c3531d16d6b9e76e8644dc63e43f44ff3953c513d2827ca28a654ec518707"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1600x900.json",
+      "sha256": "48f6848c4041cb2bebdc7fa846bcc8746cdfe94670402343679cdf352f2d9318"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1600x900.png",
+      "sha256": "45b3f60607e723d813bf3b4aff2b8fc846fa189bac84d7511ffd065519c0b5a8"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1920x1080.json",
+      "sha256": "ba41a282a4ce72a2cd3cb87e239c48a8d06afa2e44f229f5fdeff49552b46d30"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1920x1080.png",
+      "sha256": "377ae254f7a3cc37f03868d2798dc604865e1c2eb98d3ebb348dc3f84cfc042e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1024x768.json",
+      "sha256": "aa7605e1a5a78f5a153ef70599d0ebedb56f3739c4fb7831ba00c176938319b1"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1024x768.png",
+      "sha256": "50fc05943c9c5f16023c6a1111c73f38d651fb1e12e9dcc3c3fc200019dd2c66"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1280x720.json",
+      "sha256": "876e9263e91c0b0cff50528e9e05fbcb6efd56c5a0f79b4aacecec144bf772fa"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1280x720.png",
+      "sha256": "16c815f0b528ccfdec1d1d9f11f88eef8a0e6d60189009f4aceec337e087f488"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1280x960.json",
+      "sha256": "de6054daa42b837ea49b06b06b3580f736fe4b496a770078c91901232babaa00"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1280x960.png",
+      "sha256": "c5921333320c679a98efd1b38343d27103a998e5f7253f131fb3005aec96edaa"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1600x900.json",
+      "sha256": "b3baa08c24a721d615df8b7feb8e618b8df1cc6acc0399c69fe7025e471766ec"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1600x900.png",
+      "sha256": "c365f48ff206b3fea4ec260b26a29e6dec14a2a6f4d9bdb42dc9f2ee43ddae23"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1920x1080.json",
+      "sha256": "520cbe71e0400c5243c672e9f5287bd4a70c4580f73504c4b4add5e7c8d02d0c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1920x1080.png",
+      "sha256": "a9b151a8ff771db26acdf1d29013834d29c6d0edfa5bb645fe22337e9bb42a7e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1024x768.json",
+      "sha256": "18fc49c3ca1692f5abb31c298f17fb558abcf90448f3621de4c609e9b6fe1fb8"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1024x768.png",
+      "sha256": "31c6e1b9ea84d14166e7720eedf36cb567fc0959ad05de725afb9f05cccc6adb"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1280x720.json",
+      "sha256": "4f7f65eb76b046bf9392254074348344392dad3b06040fc8383d321f5506f0db"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1280x720.png",
+      "sha256": "a9e0830ca158927bab7a8a68ed52848fe63539bc5dd6948ff6066e3840567251"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1280x960.json",
+      "sha256": "6c669d9a3d592b90a6eab8fbbee8871f216b508c9496a541f99e8a9263b7e656"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1280x960.png",
+      "sha256": "302830d8918e32aeca1382991d247893e02649079081cfed9f74a698f4b23ae5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1600x900.json",
+      "sha256": "3da6cc283609fd226bf4fbe7c9a03167a0baa90982f39f9d43f572119644703c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1600x900.png",
+      "sha256": "38a0c5fffd5de4a70031cfef5ec0d32a7e7c37b111ec2b7c5ca9bb327cd9b283"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1920x1080.json",
+      "sha256": "097f08ad999e567c34ddc55282a1de9838124373890e43204beea5d14b4b6b69"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-06-drawing-1920x1080.png",
+      "sha256": "fc795cb54a4d6dd9c0b6a4e4ebd25b5366718d2a37135be33d294975b4ac7457"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1024x768.json",
+      "sha256": "88567458240fc5501d247607bb998b9c1ba9eb8929ef7ff5688c75da641d7351"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1024x768.png",
+      "sha256": "9bf5e794381e74776846bbcaf959898d2c0b732e9d998832a5673016fb3f43dc"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1280x720.json",
+      "sha256": "b4510e0bab5fe5b985b88dcef2c3ace97120843202402938b6b3de44ac168820"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1280x720.png",
+      "sha256": "16205f5bb4323edab5952fb6fae9b527c79741a635a45d6bbe5b57647e8be8d7"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1280x960.json",
+      "sha256": "ed7ab7622dfcf9ec097ae0556f7c4361901e89a4750cbb2d04ac34d46f897ff5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1280x960.png",
+      "sha256": "f642541dd5fd88bc1e7a41cf8dc3d9e69ff7b6aae7d8f3e067aca0bd01023e2f"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1600x900.json",
+      "sha256": "2ee7f435c5c16d49baa97d4e238215968e417af97c3586b2ffcdd5fbad3d0de6"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1600x900.png",
+      "sha256": "c78fececb9f515b64eb4773400b563f2e22335118f90c57cc3d0109eb7039407"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1920x1080.json",
+      "sha256": "a0b260983331ef2137f1b67f4081edb5962d0cfd64ff78cc587ac0d17ffdba5b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-07-details-1920x1080.png",
+      "sha256": "22752f669c0fc4653d371c49b48a2a3ac06a1e03745cd36400d98e1da597110d"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1024x768.json",
+      "sha256": "87d8be6dd5ff12c25918fa894e161aba3a650af2da0037fda09708afaaf32434"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1024x768.png",
+      "sha256": "279b7f03391854b271ca96bd4cb78c5e9328eb4f42eba780c94c19f2abe3c0f6"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1280x720.json",
+      "sha256": "986936092e8f085528a3e034401988022f3d2ccaed933f2be1ec92af4f886754"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1280x720.png",
+      "sha256": "232a7c70e69026fea46141baa221105930d03e5c9a9c85df3f2a683d02d07139"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1280x960.json",
+      "sha256": "957c2ca29040555c98bb6d40a7ceb97550f5b916770aef8877adc7687f267d05"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1280x960.png",
+      "sha256": "64a9965c622cf746073d4ffa6e0779ab71f3db7359662d992f2d72980c5b90b2"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1600x900.json",
+      "sha256": "6d7261da4e1af8e1cb2df47e97272052dd8564950fd04cc23bdb62db5d773c2c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1600x900.png",
+      "sha256": "e21f620aa0c065523a96a478e79cdc2a7b02a726eb4951c7863c3b2cf7ddbc13"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1920x1080.json",
+      "sha256": "f113e118694a6e151edb8acdee9322fb1b78769b5d1df5cb89657a7eb4d5f96b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1920x1080.png",
+      "sha256": "2feebc643ff4e1b987f4619b99b09f93568f6c1b2363a2b2f3a12ac1257adb24"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1024x768.json",
+      "sha256": "b1edad33f0613339d33f47708ac79bed1ea8f62bb38524128a34274fd0eb194c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1024x768.png",
+      "sha256": "b130a6f28375bf37337a64bbae9a13706b25e9b32006ca8993125be9a62f1b0d"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1280x720.json",
+      "sha256": "c4352a2268371025ea3b80961abfb03653c4ffc122c3e4e0122b13af585f428b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1280x720.png",
+      "sha256": "6e7d167d6712d0b90b1ed35e6e49782666ea8cfa6775fd8abdd64ee2c592cad1"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1280x960.json",
+      "sha256": "736c657a09b2bf5f1d383a7c002384cc49d69b0f2b28fdc8dca0d2ee2b0ef4e3"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1280x960.png",
+      "sha256": "b8c04295de8e9ef9cb7a394b84e81013bfe05938b7b0f182a74a1739eac9b5bd"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1600x900.json",
+      "sha256": "f84c70172ec41f3a97fa20e232c59af099c0e41361a62ca028c171c058fdb1f1"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1600x900.png",
+      "sha256": "c6b02329a55d4fcd660d99341ba0644a09c1d37c70b538027b84b53552893e66"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1920x1080.json",
+      "sha256": "a5d03acf63dd6d5d10b25e84083ee5b6f31ed7f3720196ad36490988b71c1ffe"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-09-album-1920x1080.png",
+      "sha256": "005de4d6983ef0a6f4d4078dc70c8b6fdcf44fda5102fc188b639ac37c1ce380"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-1024x768.json",
+      "sha256": "1bb0c2861a3408055b13c74a06cb92faf68b7770d17497b8339078c5adcdfc0c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-1024x768.png",
+      "sha256": "93a80d40df17b481417613cccfb445ad3e5b3f5b9e39614e92e51b95826705fc"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-1280x720.json",
+      "sha256": "5ebe3838ba9f9c56b381c7a4138ddb0eb790d6c100368c398433e81fea4d4220"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-1280x720.png",
+      "sha256": "19425646aff2a359a58eae1bfbcddf87a8a736435921afb6d1338ac061008e44"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-1280x960.json",
+      "sha256": "9151d5bec3a2519d4716dd12651b0d58e8d957ac216a7ffb5c8b17f7b8d88cb5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-1280x960.png",
+      "sha256": "879d4c4e3bfc2a0a78dc1b677e235d9c64fea57b98fe7521be491dd9434a7843"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-1600x900.json",
+      "sha256": "ce547a72a60ac4bd70d66d679ef85fda030456920d16d2b55f33abbe3fd5fe99"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-1600x900.png",
+      "sha256": "9f30bfaab0bed4b886d5d713c34b1e2f0cbcc45e816c527dee31f69e02fa1e51"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-1920x1080.json",
+      "sha256": "d4e15fb07fbdbcbb53d1ce7c432acd1313792e152bc0bb3447b927bea13ce4d9"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-1920x1080.png",
+      "sha256": "45b77b0daa7fbf1c3f39e54e9693a00b71c1cd09cca7b5139318225b925ed958"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-blots-comparison-1280x720.json",
+      "sha256": "9a3926c759bc57e388e61fdafca4a20f3bd5f67c83388b5acce37b1ca65f8439"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-blots-comparison-1280x720.png",
+      "sha256": "12204731002402886d401075b09288ca826adc36de92c4d6bec6666000fbdd7a"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-blots-single-1280x720.json",
+      "sha256": "a2e2224bec7bcd6cf7f295555887068b054a67e04e7e9768ee375ebf419cc47d"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-blots-single-1280x720.png",
+      "sha256": "0970ed24e97106611efed9e3f42c47f5c609eca982b0210d4a133ab76f4069c7"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-overview-1024x768.json",
+      "sha256": "29c839af460a9ef95bddbab89c88137bc58355a758098a8799444df8c3bec575"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-overview-1024x768.png",
+      "sha256": "03dcc72e3f76a827957803ef7ac6f2d15b2433ce845816afff1273ff5b433c87"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-overview-1280x720.json",
+      "sha256": "4fa6fe58c6039915081afdb40a5a17dc3427139d099b7dae4c3316cea5f4f660"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-overview-1280x720.png",
+      "sha256": "b92d2507c88a14a55298f6d9c739be3212afebe0ebe99b17203a07b6ba3e8952"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-overview-1280x960.json",
+      "sha256": "3d01a328908f73c9701919f8ce7a2bf5001ed2f8acff7b4c9df9ecd1b2bd9ac0"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-overview-1280x960.png",
+      "sha256": "180d153beadc3057aea0591495dc9e72cfd7c4a8bc49d18b5af5810378b25d22"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-overview-1600x900.json",
+      "sha256": "8724e64aeb15a85ebfb3e36be024e057a81adc9237deef2381efd8a7934a3d98"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-overview-1600x900.png",
+      "sha256": "0faa3c26db7ca3916a2524e8749fd7149472d2c5c4ddc7d0f71c63155dca7268"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-overview-1920x1080.json",
+      "sha256": "5a53cc07b589a6fddf347ab3ce1f30bf44fdbc13bb4ea922fbcc797af41791d3"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-10-trial-overview-1920x1080.png",
+      "sha256": "814a6a84f6ba11d2f923b1bc0eac85b2df94b2bd7a48fd435a4fbbca14286c96"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1024x768.json",
+      "sha256": "56d9e379026396e3d6a8b99b68b395d37ce10747d98bfc2a0e2107820c1b8a21"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1024x768.png",
+      "sha256": "d42a7faccf00958a1ba45c4b8352995fb41894e025ab47678e0d1deb51e1d2d6"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1280x720.json",
+      "sha256": "9b43514bbd4d13a145b6f0dcedfc904ab553e7e25b14d2de73d5e49e1eccb04d"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1280x720.png",
+      "sha256": "fd19084a9668aeb265024f09ac351fb0633553765e99f1049a97257e8cbf3d4b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1280x960.json",
+      "sha256": "63b359ee64cc21e0227e96195b42b05e5deb529da75b83cafb6404f8890f33b6"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1280x960.png",
+      "sha256": "53e929cf694e3c96a8f4f511e6aef39e3e2a3e6b2730f079fdfb573ba9508728"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1600x900.json",
+      "sha256": "f42414e6f38a1643b295852dfbb9980e562122ce05e3442b73da7589ad2d0b10"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1600x900.png",
+      "sha256": "5cf85351d9f31154134fe24f142dd2f4df562f4c5a729cc39a3d7df3cb5e9f0d"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1920x1080.json",
+      "sha256": "9ff59daa97a1a98a31eadaa2ea73b6f49a3fa7ebeb24912c02d8dd6ae4c14e9a"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-1920x1080.png",
+      "sha256": "d6dfa37b3c7c20b4e3e4041c2123d3583734f0220697310eecd8a562e1954b51"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1024x768.json",
+      "sha256": "f618d78a388a6e84875d3abf5b0a04da472ad38c2def2a472a7759d7d01ab5ca"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1024x768.png",
+      "sha256": "5b692cc3c6ded9bc733c3cd261ec197f7fd4a990f063819d7712dde8181a1e81"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1280x720.json",
+      "sha256": "7485aaef246a194856b1dd33c0b3f7a25cc42baf0c383bf67c8b6f4f046ca0be"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1280x720.png",
+      "sha256": "7ee1613ed94fbff24d6ce45630ba8486b72471f38336cfb9e7c51b8b16447b1b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1280x960.json",
+      "sha256": "d65521a5c66ddc1be4e50abe1eafdbdb490ea97efdcbf118b9935f69f123828d"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1280x960.png",
+      "sha256": "120a6b66cf2666985df1fc54229c06077ecec24240df03f600d4326939b5f991"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1600x900.json",
+      "sha256": "07a35e4a17606e16264292f61bc6d41e8f5768fbcd97bb87007b2072cd8f68f0"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1600x900.png",
+      "sha256": "4a7e0c3ff33b94d92ff589957c29358ef3bfc75c68c92d7e0d89ab2c559b011f"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1920x1080.json",
+      "sha256": "22efaf4d9ba0c8f21fa13fc480d178c38a28af8708a0aeb48b87fec4083cdf50"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-11-stencils-unaffordable-1920x1080.png",
+      "sha256": "271e7bb7433fcd5c93b87273e07a98ed70e228f22fb31452c17000b3799443a3"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1024x768.json",
+      "sha256": "29af2570dae795a80e59a7da31840d4a1262d7df1e1af2fd4351218e6e4f581d"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1024x768.png",
+      "sha256": "a4505405fc932e6caa0c322650643a378967457e20cae338f87f7f35744302a6"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1280x720.json",
+      "sha256": "2883ec10cbd13cece02f6924dfdceda76fe3b8ff83c6ede359f55c167f20d65e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1280x720.png",
+      "sha256": "8ba6b33c139797800aa40a018ee8cd4168b6fb8ea5ff7c0847c4f5db135e804e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1280x960.json",
+      "sha256": "8b7f7665688a1bc61fb62132b741a25ec42505659b772a3117beb4168b8c350b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1280x960.png",
+      "sha256": "c822629ed4c4d8cb53b04361f9096d3a182587445254145e31dd49d3900d7cd6"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1600x900.json",
+      "sha256": "bb560c818efc883e857d0fa7b4b3002358ccbd9f46579028a3b098337c8deffd"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1600x900.png",
+      "sha256": "efc12de50e92be4c1782697c3c8e5214bf737129aaa99afef3c4fda1f181c816"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1920x1080.json",
+      "sha256": "b7c4a76322a06df53632be0e9117ee7a0ead8757f1956dd78e0f8a842271a851"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-12-mortar-1920x1080.png",
+      "sha256": "86ebe7ba0afcdb0138e1934ac50c6617c0354c06e89e7ffcbe308a1c5e74ab07"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1024x768.json",
+      "sha256": "cbd1e4164f7ab7b84d0d5de5012de889d97f43d947636b96972bc02bce1fc190"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1024x768.png",
+      "sha256": "d466ad56ce05838565e60d21f205a9510fea390528b011ebe41ff461cec8504f"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1280x720.json",
+      "sha256": "d95b295ba6c2128e0b504eaca6c1519bb3d1cf84feb7f371ecaee4d32fab0b6f"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1280x720.png",
+      "sha256": "e0ca163355429f0af58765454237d8c6a177120fffea63146be2f8747cbce0f2"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1280x960.json",
+      "sha256": "1e211f12dc9cf7caacd2864aade7adfc8a1fa77b8269590206f4ab24e32dae83"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1280x960.png",
+      "sha256": "60565a6e4a9620dd0c9f7f2e93ae4ce01d5ea34e9efee13a38a3c922b4f28881"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1600x900.json",
+      "sha256": "2ec1c3cb30f48214a1157996251843211c178c5b9fddfcd235133df61fc7c367"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1600x900.png",
+      "sha256": "dd91f1c59fa9704be98cd485c829a97456a33e331e145602d99a0c543edabb0b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1920x1080.json",
+      "sha256": "b277320df57677676611b36caa004e1ba37fd087446911b2fd5e814ca3343355"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-13-fan-1920x1080.png",
+      "sha256": "1f3ff5f5afc597a608a4a81ea0c0aecc59e98b2d3eaf450e5f5805967e69f306"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1024x768.json",
+      "sha256": "93445511029f818333a91a1d3202edd753a78cff3bc7a6237c45f4ad86e16b5f"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1024x768.png",
+      "sha256": "cff4ad3a78279529f5492a796e0481811f09ee28320cc8da9d6368fab5fb6925"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1280x720.json",
+      "sha256": "24066024f27b6a2516df868957c7f44b5add86cd86fda6c5c53d74736c75eb8f"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1280x720.png",
+      "sha256": "411ce92b5e6e0e0a7830edc244a3a1550022dbd76c8204d073e6dd7a76c2ded0"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1280x960.json",
+      "sha256": "5ce3f5bf25554b74f06b27596331afec3ebc59b7bcfde1ff69fd46bfd30ab186"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1280x960.png",
+      "sha256": "fa1b69833d70ec8445f725e2afc338d61e0e36d4088883bab76e64b36df3ea96"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1600x900.json",
+      "sha256": "aaf7ec1e0fb6c19b5fe24a291c25d9d954cc49137dc99dafcb545374dff10bec"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1600x900.png",
+      "sha256": "b76331f9b63997e75666d8c80778b860abf7012e19eb6ee8d698d7fd29d6ea00"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1920x1080.json",
+      "sha256": "0ec060f52e1aed10b2ec6633f99c92653fe047d8292cceb3550df489c94197f1"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-1920x1080.png",
+      "sha256": "444acd9376242f26d4d028592635523e3db100cc681a7c1de238a895da4d5d70"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1024x768.json",
+      "sha256": "75e9707c8cdc1a0413ca2b7b179d381139d050e47f57914556907e9c15922684"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1024x768.png",
+      "sha256": "93a6295cab88de84ba40e9110f5decb9d7aa74abf37273b02be900e31e1796ac"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1280x720.json",
+      "sha256": "65cedb56b110644d6807c51f818bf9e2fc67165753c481c4f60a72c365ec5954"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1280x720.png",
+      "sha256": "de8f8fec3ab30a51d5775bb642f38910250e508c47e6edc44461adda46aac3bc"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1280x960.json",
+      "sha256": "40d9bdf35c5abbab6d35267a1f2475edfe6360cc91dac3864360262187fd3c9d"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1280x960.png",
+      "sha256": "6289d47401cbdff26d0e2a79c7680102ec5472965f22b9adda901081fbeb1dfd"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1600x900.json",
+      "sha256": "51ac8bf55d51a404b5212f777230c707f2a614e58ab4c31f2e67e528cea9dfd4"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1600x900.png",
+      "sha256": "e4f731b63eed43cb6dfa78153dab249ce5be9bd46d9341746af31a765d46c9bd"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1920x1080.json",
+      "sha256": "7b20504fb7eb3b34bfdaa65177dc0ad645cfee386af3cf480c5c8dfdec8bb4fe"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-14-armor-locked-1920x1080.png",
+      "sha256": "b4396bf65ac4dce336fb7f74ab53f071b1a116a2ddd7dd462a058b51c4d54c59"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-planning-1024x768.json",
+      "sha256": "998266fbfc800d04779087d4a39615dc46d04eeb5f2ff8bfabe84e8b8fa92398"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-planning-1024x768.png",
+      "sha256": "c64dd5af7cbd5208973afe03dd5f2eab19714cd1bdbafdd4d55e559d2e9da533"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-planning-1280x720.json",
+      "sha256": "d6ec0e8538a8a4d888e674ab5a40250ecdbaaccd90f8482b717f8696009c856b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-planning-1280x720.png",
+      "sha256": "8a6eb5da593a50eede5bc764494b9188d9fb5092a741e6ab2f618ad235dc9006"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-planning-1280x960.json",
+      "sha256": "dae6adb895a409060104108565fcafcf859f73e1ac731a07f56ced4c2148eee3"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-planning-1280x960.png",
+      "sha256": "9cb8c37f686eab504e048fe2ea950848493024556e9ad31e28f2617c0117558e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-planning-1600x900.json",
+      "sha256": "d6aa3734636e4cb6ae4c2d215bfa6feaa90578b5794de2cbc25e70c7ba9ffd78"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-planning-1600x900.png",
+      "sha256": "106cf32038db182ec8b814306bcecb791390d33729b260391092070692b5affa"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-planning-1920x1080.json",
+      "sha256": "63c27c7442e2e046f472c3a7799cc155d748cea44d2d07044e08971ff9c0db07"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-15-planning-1920x1080.png",
+      "sha256": "43033f4d951cb1f0d67a74ffab6e9bd1a09bf7e21b5f67810c3740cc6a6edeb5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-16-battle-1024x768.json",
+      "sha256": "cdc98ad0e2e267d31ff8ce399758541a3b852630dcc0f7357a296f56e400e6d7"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-16-battle-1024x768.png",
+      "sha256": "8632d601a87336bf6c53d5377f2ac6c067f5652ff0ea9d9c373df7a0716d4f80"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-16-battle-1280x720.json",
+      "sha256": "4aa25b2f211204ec37e5f9c4b82f159d77859ed816ed3742a47f29171d0199f1"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-16-battle-1280x720.png",
+      "sha256": "19c49f0d9ab2e4eced7e351f104b97aacfbcc3b0b5221ac2041fafe4a8fd96a9"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-16-battle-1280x960.json",
+      "sha256": "4232368fe3edb9f9f074693485d07558a1ef5f39dc005edea4894e1a6ee95601"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-16-battle-1280x960.png",
+      "sha256": "5e0dedaf76c25d8ff9a5b90ad17f952de304c559925589335535fa793c9ecd89"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-16-battle-1600x900.json",
+      "sha256": "367bfb346c9e9fc2aaee5fc483e382056165c5296b5f4efd4e2d5900fde2dc60"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-16-battle-1600x900.png",
+      "sha256": "6784157a1813fcdc82fd5a7412bccd05538bea55f432fb0852f1dd163e1ba21b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-16-battle-1920x1080.json",
+      "sha256": "67078647dcd172ecae42cbec32ddbf1a8a864b786091728475a124cd3f19505a"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-16-battle-1920x1080.png",
+      "sha256": "e5b9986c7835146eca85dc9049d1ff16086882b58f46cd7182ea917b255ffa6f"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-generator-1024x768.json",
+      "sha256": "141db05ed2831132a742817940789d03c1fbb58c8c9516d0531357de052abc25"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-generator-1024x768.png",
+      "sha256": "5ba60cfeef98ec9274f6fb5f836e371f51a0f2eac772086928abb5c587e69eb4"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-generator-1280x720.json",
+      "sha256": "2a1328efc438cc15d2fe49741ff5ad08707c54d77629c292691f1d06720f8406"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-generator-1280x720.png",
+      "sha256": "baf0231382467c4c4838a57c22ca1eea55c6dcd535997336481a00ffcd40761c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-generator-1280x960.json",
+      "sha256": "e00e85d32fa10c0ec5fcb9307e9097b0d4302c1f1aae85664564c35402d960c1"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-generator-1280x960.png",
+      "sha256": "034bbdac0ce115448cddb94d82556d49882390630ab94b952a953734fd7c0ace"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-generator-1600x900.json",
+      "sha256": "98ce080e374d8d9986ead18b8c48471bf3262125922124e6bd9b5b25ca9d0f22"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-generator-1600x900.png",
+      "sha256": "8897243ebe87bf6852cda16244539db2f8235dfebec5cc874b340dd20ff9776b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-generator-1920x1080.json",
+      "sha256": "61858193df39b5e2f21d6c0d0ea28b5fbbc9dd0c79480bdede816029865cff29"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-generator-1920x1080.png",
+      "sha256": "b94efaf08c869880a5e4235015a22c777facac70e841204e1e265697396d3f94"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-repair-1024x768.json",
+      "sha256": "adf34572ba1885c7d55c68e7726595ed14cd5af428165fc558fa7d0fb80124c5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-repair-1024x768.png",
+      "sha256": "d4ccbc25271ec4fa7b7c4bc38ca640ab82ce6abccf82927782661262e08b80e5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-repair-1280x720.json",
+      "sha256": "21e09e8472e1ba38f14b3f3750410ae8052d47eb9604f2e48e6ceff22ec78174"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-repair-1280x720.png",
+      "sha256": "ea05bd686e57ce391e1b8cb89a12b5c4e761b73ce42a9944e3a0cf7b06f7905e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-repair-1280x960.json",
+      "sha256": "f3bd546844e739e0a628502d5e0973b1546ab3dabf9d835baf80379c1ec4b726"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-repair-1280x960.png",
+      "sha256": "5f0fa6243089bceb137aa44fc4e6fa60fb63d776d1ea2d35fa3a6b95cfd0408f"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-repair-1600x900.json",
+      "sha256": "20ca4abce866a5eee560aa7a67f57bff73a2fbbfbc9e14d1aa6d96b76039377e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-repair-1600x900.png",
+      "sha256": "caadf42efe881745f8f9b9ec54f75b4609976a4fc8af7dddd455d2e4b0810271"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-repair-1920x1080.json",
+      "sha256": "c980469187619b0ae2085f71457e5bf8be546b255431f5316ea27ec811bf6d7a"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-repair-1920x1080.png",
+      "sha256": "ac89036a579a22d7bd4595db204d78aaa06d5b79be8cded55052a8ef4344fdc5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-tower-1024x768.json",
+      "sha256": "aa3f93110cbe001aa1b0cad3440cb43cdc8e9301fc2664f9931db194d3ce30bd"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-tower-1024x768.png",
+      "sha256": "d0c7088719149b8cca3faafd1f4cace92d7a3c0aba1392ae30d9bc2c9ca9c888"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-tower-1280x720.json",
+      "sha256": "21446862f81efb0bb84539e6a7fbac3800a50d2164043fa916f0cd7d873191b1"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-tower-1280x720.png",
+      "sha256": "c17f2b159c37f6a77e51c367c7c6cc6ec97adc717e3d8f3463c0e50978c647d9"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-tower-1280x960.json",
+      "sha256": "4be0ffab66604de6a835ec6c13bcf27a0470eaaf8ca990fa6e86530d61187380"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-tower-1280x960.png",
+      "sha256": "535db0a7f2238e96a0b6afef2b21fdfc80835135d36a61167e7019514ddb7692"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-tower-1600x900.json",
+      "sha256": "67df51aeb0df7bd0cd6d473044902d988b509496121622d8c7f9ddb91c312703"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-tower-1600x900.png",
+      "sha256": "ec8455b3bc6203fbb53257ac4fbc3abc1dc2e997395b0264d19666c9563de7f8"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-tower-1920x1080.json",
+      "sha256": "aaa2781a91eaf698253f1da0dea37c1c5acc4759e802857bfef808ece781a21f"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-17-tower-1920x1080.png",
+      "sha256": "60095582e95ce99d72c7ecc06c1cda7d6d8360d319eab9dfbdc65a8dfce24bea"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-18-pause-1024x768.json",
+      "sha256": "024aa2875565d4d1c40a060bd4bb602664c55b4b476f7d049c2474c896568e9c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-18-pause-1024x768.png",
+      "sha256": "5e3608d2caa7362055a6e0fecceef851db4918904a3b3698e3ef7b3380053ae8"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-18-pause-1280x720.json",
+      "sha256": "c503631aab4eeb54c93acba6b8d19f0faf955b1b70f47605446ccc09f65f480d"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-18-pause-1280x720.png",
+      "sha256": "09192de1d5e231c7b5d1aecb4034debb7e57f5a6df71edf06d33e0dcdac9f805"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-18-pause-1280x960.json",
+      "sha256": "77d47362f22ac1220a5f513512c4588f7359079f4a8339f9f449217b0ba07d0c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-18-pause-1280x960.png",
+      "sha256": "a47af3586b2619f2f52782b95f3f95df48b2582a0c46d0f07e3261893d83f8ee"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-18-pause-1600x900.json",
+      "sha256": "070447b278748bfb21232bb637b15c732281ea52bb3be47eda1f93b517f3eade"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-18-pause-1600x900.png",
+      "sha256": "cc95019864038b355bc3882fa7d66193d226858d8b2e7566ce0f94103f0229a4"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-18-pause-1920x1080.json",
+      "sha256": "994242a0cb67f0441b772fe3ed34f8435a5abef1210794cdaaf8d8319508c0ca"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-18-pause-1920x1080.png",
+      "sha256": "7daceac2a84c8eaa6c3bf3d877db7e20d37390b9863c9c1c1270c517d4b190fe"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1024x768.json",
+      "sha256": "0dc61a677a8fe9e6c5286e8392e3ec1beeaf5c60fe7cff26dbe70f8cf7fcd984"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1024x768.png",
+      "sha256": "fdd050d25cae234d9443db15f1d9bdf9f9782ef5792f7c80b07eadfa24e3a7b5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1280x720.json",
+      "sha256": "e6f290f9d911f3d7b068ceced40d61cd920f9830e9a067a3d56803c8580a6397"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1280x720.png",
+      "sha256": "608ee877e8a7a66b5ddba958e6a982a12e083db4ddae9c6d072d711d18ba7969"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1280x960.json",
+      "sha256": "309859ccf9b39ce9600d7e58a669277d24037669195a787fc74f86e0ba1cd3b2"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1280x960.png",
+      "sha256": "fc8a810f37e713238071d7fc66a746b962ee4f91ab69990c2993611ea8d0f2fb"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1600x900.json",
+      "sha256": "bd0068f37b305c78ce8d8e84fce81153031425fc9bc28dc8b47428b2d1173f0a"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1600x900.png",
+      "sha256": "20be0eed95b1bc214067e2226eb52d8bdf422d501753aab210ac81d08c29d4d9"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1920x1080.json",
+      "sha256": "c6949440340f2d1f62defdc8d44945364286886ce397f2a54d899454053bcbd9"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-19-upgrades-1920x1080.png",
+      "sha256": "5823991f1f12d8cb44093155c182c32029d19b49e42cea8e9e64b32da596bca4"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1024x768.json",
+      "sha256": "7527a127ae74e108ff8324baeb5cb166dc0d7ff5a0fe4a405891b23faf11f907"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1024x768.png",
+      "sha256": "78ec2491d83f8588e937907352b120755d561e495c4905c8b711e4b134fc2da9"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1280x720.json",
+      "sha256": "2eb1e8cb35be469cfa025e51fc5a9d982346acadff1b3cd40ca9ea3e4263544d"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1280x720.png",
+      "sha256": "f6b0322cd2ece911db774772fd33141facea0cbba484fae175bbacbe3177e4b1"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1280x960.json",
+      "sha256": "8decbde2da3a34b1797a14a134e2e0fb19edb89099b8196492ccf1a3b8588ae0"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1280x960.png",
+      "sha256": "7fc40e126e59043da166f5b76f556da5b5a479d7193c845fbe2083c505074b58"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1600x900.json",
+      "sha256": "3b168e601db61da0d694b604fa0ab8f282e2dfffa52ca3f6f584397065b9b642"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1600x900.png",
+      "sha256": "6b643ebd57085e6f37639a9ab3c3e8eb08673a5bac9373447b5fa6681184a836"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1920x1080.json",
+      "sha256": "beebdfb25c9f1c513a3bd86b41f9b31feb8acbe141e50356f1311bbc2f921529"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-pending-1920x1080.png",
+      "sha256": "b758b8e074e777cc27e0c9b8993206c0d9c8d1afedafaa19534f88f1746d5595"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1024x768.json",
+      "sha256": "5a6d15acfe1925e6f6b2bf0db0bfe363b37f8d6027bf5676da9cf8ffac9fa185"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1024x768.png",
+      "sha256": "6941dcf9dd8900cb552f2adb236aa9f81c986ed83cef7a015db83ae3e0206d69"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1280x720.json",
+      "sha256": "d53e3ece5e2cdf347d44a2561e10e980fdbb62552ef2d4b2de2396238a40e84b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1280x720.png",
+      "sha256": "15f3e61f94ec837b5eeda3036c73b4b7fe2df0da835976d1dbfbe934f4dc0493"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1280x960.json",
+      "sha256": "86e1c5e4e17ac09351c4ded8e375bc643f1694a8ed9af3ae1ef9f73119823f99"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1280x960.png",
+      "sha256": "3493b0c0e0a61f93cc25c4fcdcdc6087d0e29d56729789e368d0561db9400ec7"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1600x900.json",
+      "sha256": "2250d6c17ecae258d0c64f950d7842a689f6aed302c05a73b92de5606c4e8c72"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1600x900.png",
+      "sha256": "cba41ca7af3e0d1f97b611e344911b2c0844eaf43860c81a945bbf163b26d340"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1920x1080.json",
+      "sha256": "c19272f3e27eaa45f1b3c50b6a4a3cb94a885723342410411220c40e70a00901"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-statistics-1920x1080.png",
+      "sha256": "2dcee4348b88b229d763fac31bdd8d1843afc73d24b80d607241a38909bff5c5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1024x768.json",
+      "sha256": "fe1cec41242018f5a1d00395f85f3b3afaa11eb417636e97a101ab43acec4caf"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1024x768.png",
+      "sha256": "1a35da0cc0f613eabc4e2f2bb18d8adfec11071a3382feb4f840794506df902c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1280x720.json",
+      "sha256": "a95a6ee3b99f3e52e8587c5e899ce224c1693ea0266791dccf70e9702976f136"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1280x720.png",
+      "sha256": "a47be7b34e17a060c41eadcf621266bdcccc85650edc99007151891951fce436"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1280x960.json",
+      "sha256": "f72cafa99c8aa10c60b79272b5c3336bdee1f3f4085ccfd449ea9dbe3a3efa51"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1280x960.png",
+      "sha256": "8a68efefd6b26037b3de3c837f54649a457d98b0bd86fb1156b801bc58dd1260"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1600x900.json",
+      "sha256": "43179b2d60b4c781610e154ed8e7d3c3361b1b99a4405edc39b0f2e207a8fe45"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1600x900.png",
+      "sha256": "71ca85a2efcc1eafaccdf9e8e82552091bb907eb860d7981784c5e9870b5320b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1920x1080.json",
+      "sha256": "6abf3f0f09ba928f9f305dfa2b6e952805073cf3bc0a832720a68ed9be445414"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-20-victory-1920x1080.png",
+      "sha256": "b4d023cec589b5b316c0b0cd1efda7e2d4641f3d9961cc0d9ffba63095d8a7d9"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1024x768.json",
+      "sha256": "aed3be4095d29cb69827077b3a97b254f31619c4ab6956c4f0d780865367d1f3"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1024x768.png",
+      "sha256": "be4a920960ba009b8158613b62d67ee0da06a4272319bd12ab898c7116b57d8e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1280x720.json",
+      "sha256": "5390b751660b9656a82f8127e32cac12adcd988a311ddac3a2b127180359a7de"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1280x720.png",
+      "sha256": "da2a025147e32c2ce9abcfab860aebc5d19a8c9f9868fc8decdc023206db5e01"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1280x960.json",
+      "sha256": "ad68161f49d90aaf785724a344fdca687f4e9af9cf22ee53fb8befd93e0c34ca"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1280x960.png",
+      "sha256": "b7261de3ad800934f46ab80b548d0051142cf927ed77d7c9900e721b27c66289"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1600x900.json",
+      "sha256": "18b97c57f89639ec6ada629853b6b57a44ca471f03dfcd99a7a0f01d1725ca81"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1600x900.png",
+      "sha256": "bfcef10020e5a496dbad6448c6d99ab7175f1a5d84dd9588333ad9eb1356528e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1920x1080.json",
+      "sha256": "d6bec0ebd6fb07c47a4639a0883823692562e8e8eeb89fe5900de191dcd004a3"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-21-defeat-1920x1080.png",
+      "sha256": "23be5e1b5d1b5dcdf5f0a543f944008f25d5bea5ff080a646d87ec74429ce495"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1024x768.json",
+      "sha256": "7089606a0c6eacc241c64e944743f13c136ed7f04d1c0aeb6d722cb2ebf8099e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1024x768.png",
+      "sha256": "3dfecd87f763292f9edce7ca6a855136c1a59da3fbe3b68ee49d0f0d51afa7fa"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1280x720.json",
+      "sha256": "81965649df0482c0b086c6b69d20412e0c7750e394d64d16d46c2787c2892c5a"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1280x720.png",
+      "sha256": "184cb609b6aab566a3e13c93df6ef468b66d2cef78ff34f104564d581516bcd3"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1280x960.json",
+      "sha256": "443cf3f501e57784e8adcd7a30791f267b8836411665dcee5ddb328574985667"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1280x960.png",
+      "sha256": "8a59ce17ddade9cad6cbaa31bd0935712d61a316d6b53c36ba41bb2fd3d1ced2"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1600x900.json",
+      "sha256": "07e09450b861a13086efd7a7276c19c0b3dbc70cbff842f4186730cbbe7da3b6"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1600x900.png",
+      "sha256": "90be0afd0541cda3987fb547665bf2c6e38cd47cdadd31aabfdf2b9cf5819cc5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1920x1080.json",
+      "sha256": "39c9ae8e7af67d7d5f7e2eb5b6a2e72da748886d9a1769e04acfa9a71f934c70"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-22-settings-1920x1080.png",
+      "sha256": "006e5c4a3e8c6be0326041c5619149c44822bd6e59945c486bd40d5d19698029"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1024x768.json",
+      "sha256": "231bf0af19ef813c2fa18614f9f8c11e1958b5c999d6024325e5371a9da05d2f"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1024x768.png",
+      "sha256": "1030ebc00e4b0968c5c24254a83d8ea451a3a3c2218f87a4fc4e0f2f9a288f8a"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1280x720.json",
+      "sha256": "49b741bb7eb80aaba680b7b8623fde1855d99494ae5bb4017998a68d6c9e6dc3"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1280x720.png",
+      "sha256": "61e923e5732d8d11ad939479fc6eb24e797738df488a13e848f1d92ee475100b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1280x960.json",
+      "sha256": "af30532fdf45e1f356d305618b81f3ac9be28612b03af385c23ef4e136466ee4"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1280x960.png",
+      "sha256": "f1269902d529bb734b1fd3605f27e89c821f88afe0964a09cf99afdc2f66cbb1"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1600x900.json",
+      "sha256": "2d84829646c9b9110e224ef57687564987ed198670f8976152b76d3dbd9cf455"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1600x900.png",
+      "sha256": "1c6af126d872455bde56668171fd9bcc319a96dbad712f8129ec74207c14cfd3"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1920x1080.json",
+      "sha256": "35ef318c8da099e33793f6308cbbbec9dbf72f2f902826e93b07ae87bc0b41b1"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-23-help-1920x1080.png",
+      "sha256": "3123a0aef764485a5f951c012c5195c9f0cb9e090120ac8ea967956bf0a610ac"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1024x768.json",
+      "sha256": "0504dab615cf30a525810c95498332401498d55a18e3a34588e95d5eee636039"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1024x768.png",
+      "sha256": "681e63af9c8e6a3cc24d94221807e0a06bc61825fbdf1a3651ddcdf1bc656019"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1280x720.json",
+      "sha256": "0b466ffa2e85e63c5641b70d8ee69b3c54c54e750ed762ae67b9b4163f548cc8"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1280x720.png",
+      "sha256": "835503334bd3d2516a2c95602310ee1d645e6df244da6fc8e75216e43cb9ce65"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1280x960.json",
+      "sha256": "45cb7f106d9e64674ee79d3143bfc7515fae6b24c975d8c1f328da463ab741e1"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1280x960.png",
+      "sha256": "fc1caa8151ec261274f0d4994806f212114d7151a7343091a9d7806922dcbf53"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1600x900.json",
+      "sha256": "d080f1a3462feed56351626b52dc03f872e00377865e3621cc1fa2a689108862"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1600x900.png",
+      "sha256": "d26d1558eed98ca83062dc02b9d4feb5919a323c7d9e44fd4a14c450ee4f13aa"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1920x1080.json",
+      "sha256": "35179c1207f7e29a871d575476cccda78137ffdcde97e790f6f76d760fe838df"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-24-empty-1920x1080.png",
+      "sha256": "67f1012af11d9511cd03e7512c7b188e8e61adb71e47768bfae3dd28f1551914"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1024x768.json",
+      "sha256": "0603033dd5f5a9966903f9bc9e72279dcebd99dec1371edeaa92ab7a2052eecd"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1024x768.png",
+      "sha256": "845178fb2d9fc59afb8ababdc6e2d2628f0d78f2be6d1aafb749277888e1dfbf"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1280x720.json",
+      "sha256": "72a2df4e81f96d44a2dbafa9f6eeaca86cfc68e1dee5f95fda5e03ad9c81b011"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1280x720.png",
+      "sha256": "8dfe0456a746922a78a2e7ed65b0471fb219f3c3c4e52a614876b8dcdc20a720"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1280x960.json",
+      "sha256": "28353e2f88a5b6c50ae76f0fb36d039eee95ed561cd121e192094b3313dd00d6"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1280x960.png",
+      "sha256": "94aaa76db273e0a84675b45978fade82db8904cca898b9eace61ddc7306aa095"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1600x900.json",
+      "sha256": "417a2672bdf665620f173a488f021847c5f0ba55afcc4eb9c253216a498f3fcf"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1600x900.png",
+      "sha256": "22e6c4b3ee360221aee8b1eee02931ec3293b3dae852286eb058d2343f8947f6"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1920x1080.json",
+      "sha256": "7fe0ca295ca58f6275a68630aab3cf8a31badb5e2e70bc00ad39941fe6328da7"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-25-purchase-1920x1080.png",
+      "sha256": "157af209b59699e5609362d31aa2c911b0661d6b75ac7501f456c2fcf6057815"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-dismissed-1024x768.json",
+      "sha256": "39980c205c90782406c0c40b779babe3cf6bdd5798fb6a2db1be52414fa4d842"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-dismissed-1024x768.png",
+      "sha256": "b6409e6287a60fd4600bad44940645bda41d240934e305849a9699f57d250f7c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-dismissed-1280x720.json",
+      "sha256": "ba01c32fe5be37db7f52253f54f5eb6a101ca9a209c68055c6ef3e19f0cf9961"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-dismissed-1280x720.png",
+      "sha256": "648fde6cd62cbbdba5b86b94b8a2686a07536328e8dc38eb97c20918ae07ecc4"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-dismissed-1280x960.json",
+      "sha256": "737d04a951a499f9bfcfaa25a15c595b079e116ed055e3bad998c1ea4f521d80"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-dismissed-1280x960.png",
+      "sha256": "2fb47203b5357f1abf79e3661f56e58a0564b09c212f838a69b5e16ebf498b57"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-dismissed-1600x900.json",
+      "sha256": "495a6b271904ecb32493ad5ee62bc13a9a3b0a43680b8a3cb3e63d677694d330"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-dismissed-1600x900.png",
+      "sha256": "fdf8ec39409c28bc69d05b7b966b9e9f8969becfdcd93e42f4dfcea336adf73b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-dismissed-1920x1080.json",
+      "sha256": "e3e9687a1b8db805e04eb53138230a9f4b2c87d166868d065e184c59cd0d6aa6"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-dismissed-1920x1080.png",
+      "sha256": "9f361c50180ce2768e1f1717b1ab11fbc3ccd3d67eae3e15e566f06afe09e172"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-error-1024x768.json",
+      "sha256": "9ac3e35cec2c55e54e559fcebd705c7c06985810bb347354396fb8b291c567ac"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-error-1024x768.png",
+      "sha256": "b68feaedb8fb438b69030cb15f8d7b31243096ce8922691a827a418cc8a05895"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-error-1280x720.json",
+      "sha256": "73c74197659f188a6e644325df461c4e4c07488a95412ec424202399f6471478"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-error-1280x720.png",
+      "sha256": "b5704abb3c9f1b62c42261957bf6b787f6c1ec6f03ead5e707a96be94b567cd8"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-error-1280x960.json",
+      "sha256": "66d903839253cf933f7f2380d434a7f16a4635eb50b368da5cf9a65910bcffd9"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-error-1280x960.png",
+      "sha256": "abe1f7838967d927701a13d28c9d85044251fceb698f9ffd34944461d8cffdb5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-error-1600x900.json",
+      "sha256": "dc61aecf7fa9fd489c0ee4a5f044119662026cdc3bce9fb5f878bcff194676a5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-error-1600x900.png",
+      "sha256": "d487135954d00de57fdf7d90e8405f811038b84c32e6c58beba8376e7a99dd03"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-error-1920x1080.json",
+      "sha256": "6fb3f1074471bb001b822f2877484ef8700ff3b543bd94122ce39e2b3fd2bc55"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-error-1920x1080.png",
+      "sha256": "14e6069b89ca6d18c12c9af8f3c6ab48f28e33a211e08225ae2b173757beff61"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-retry-1024x768.json",
+      "sha256": "843b764e5fb90452edff05c58421d870a608152ec00e98122c8bca568adbed91"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-retry-1024x768.png",
+      "sha256": "626c8189a80727c197369b306b096686d379357c790190ad8f974be8d3ba517d"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-retry-1280x720.json",
+      "sha256": "6af0576971d1e42b547e2a81f4769ac533111d282f6c72ee0e90e4f32a74a48a"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-retry-1280x720.png",
+      "sha256": "b71b349398af64189175a707d6993df646fbc9d0a8423c7d2dfa0cfd5711b923"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-retry-1280x960.json",
+      "sha256": "4b9eb34ad459a5f8ca1ba8279ac91fb949ecf324fa09bbb9c9a960dd488c181d"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-retry-1280x960.png",
+      "sha256": "25c04c3a77b2210fbfb908755d793ae97ad6f98738fc590dc6b85c3318442009"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-retry-1600x900.json",
+      "sha256": "61963528949be64f1a17db531e1abb7767939fae4510468717d949eb31fc4af9"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-retry-1600x900.png",
+      "sha256": "2e0c70d6f22c6e006a0a4e260ea36b9254b87d3a978ded548e201647fda0c9e2"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-retry-1920x1080.json",
+      "sha256": "1de4e355e549a2cf4ae1d9aebd43ce00aacc50c71bef5db54fc24e152ffcf102"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-26-save-retry-1920x1080.png",
+      "sha256": "37b328890972b74ac1379dccd38160d148ff41bc8643a60fb17997a4ff263874"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1024x768.json",
+      "sha256": "01974755cb2c79e34b6a9c7ed947b7a89612aaa812c33ac3f0c2c7177d448620"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1024x768.png",
+      "sha256": "d200d1917a9128530db53fd04315984b38052ccac6cc629a54b408aecc272136"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1280x720.json",
+      "sha256": "2666beec38ba31d6a8a89b068e8a781a798daf8046cb84ce271b3a0d69eefdb7"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1280x720.png",
+      "sha256": "700d8277d9efa7e195d126354d19c7cf5ca2cf75592842f1c124192045a4f90a"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1280x960.json",
+      "sha256": "9545de3e8cf3c4c9a8bc4e7e6be5a921d4d067a10d5eee2b19ba3535a7552d98"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1280x960.png",
+      "sha256": "efd657f651dc0e3e1964b1fe944ee7233f5231630fc82ff420759d5fa34c0fa6"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1600x900.json",
+      "sha256": "5fcca603364e7a1163ee34fa0d5c355e7d6210cf1363176958a1a79c68dcede5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1600x900.png",
+      "sha256": "80eb63644ecead9df7c488b5acfa68fd07764bdec843b6499fef0a8057fd206a"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1920x1080.json",
+      "sha256": "25cba89c6d5aa63f2f226cb447fa74e321dcd93aef13434787ed7e7cb3b79f8c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-27-invalid-1920x1080.png",
+      "sha256": "9bc66658441bb414b73eb5aeace888a7878520098aacfac33c149d3f3b70c9be"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1024x768.json",
+      "sha256": "3a40a5c8d39385b0dd6c259fde1cdbf33d2d8f92b2cf00c6592116ae5e7ed0ad"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1024x768.png",
+      "sha256": "b21c0a911d13ff1bb0062523f2ffe83312cf30ed48062f73e0e8967e2432a6fd"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1280x720.json",
+      "sha256": "aeae7389dad1a513ee94e376601ceb0c3a588298612b5c988a8529b3c58fd62c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1280x720.png",
+      "sha256": "07878bf37d6cebf064850bb97b978f302f3fdf1420a3632cbb90b8a8695a56dd"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1280x960.json",
+      "sha256": "0d2c8fd452b2669ce5a63d79013282cf2b1fad08ac31cdf46adbdec2faefc93a"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1280x960.png",
+      "sha256": "05284dd459f400ddbea1aa082cb10aac360afa13b24baa6e39037f231406e68a"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1600x900.json",
+      "sha256": "df37ef491e46ab5e3a7066ef33ffd38a3e4a9fd381ca3a8aba0c194e93718e8e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1600x900.png",
+      "sha256": "8761b18184f645753646c686db860e96e100c86a9e7169f5c2bc5bdfbf218d19"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1920x1080.json",
+      "sha256": "22c2890e4d2f0f23140da6e83e8a7cd33cbc7147ae75c0d7e4288f4d3a5f94a8"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-28-leave-1920x1080.png",
+      "sha256": "6a32e5aa029c66c4cd357009c61eec8b1600fdfdbfb560149fe7ed7a8aa1271f"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1024x768.json",
+      "sha256": "626dae135679132c554a4ee7c6acb6ab75e14b2e813a926b74b02dd006175ad9"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1024x768.png",
+      "sha256": "9dafcca43fc1d8fd2d46dbbecd866b120532b8451586ac16b753e310d5b8b0ed"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1280x720.json",
+      "sha256": "96ec9077494cf1614202e85074a916cdc322fe0c6958f364df452e1c10d71cb6"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1280x720.png",
+      "sha256": "0b5eda92e8089ee891ca281fa4629a08cf56a405982d4ca39dd0bf9e9ae94e80"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1280x960.json",
+      "sha256": "4168db103aa31733356b6d94fdd8d560d6c1de11dad20b903d10b5d5b30eaf73"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1280x960.png",
+      "sha256": "36608ca74ece5565c0a4466f04c0481652a9f4988a40d08e1dc08858a3da0c39"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1600x900.json",
+      "sha256": "d81778dd6f583d507300691cbfd739393be18ba46b23ecf5bcd451e3243c620b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1600x900.png",
+      "sha256": "c98f9702d86b6a3f8d629f83e9e8240d258342756404b088ace1bf24e9fe78f5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1920x1080.json",
+      "sha256": "d5eef64add0bfb6a70c429a9f818250aba2f9281d1dc3966aad33e67d3ddb2b9"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-repair-1920x1080.png",
+      "sha256": "064526eac2e6516463f78e45b98cb2a33f48ef65777814a46a4be577cf366598"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1024x768.json",
+      "sha256": "f21f3975d992d14f61e6b77afe1d453f74248db843f8b87f6a0b7f4b7e525800"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1024x768.png",
+      "sha256": "b97180f2a26a21b8c6ab7a8b47cd9758211fbc862d99e3127d2a5038be06412b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1280x720.json",
+      "sha256": "ddfbd7108208138c3defa1087607136cb6ddf6136b47fd224b1faf679a355eb6"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1280x720.png",
+      "sha256": "d591f1ed429631fa655fe107cf56bb2f25e495ce3f4de9ce947c5e2ed2191192"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1280x960.json",
+      "sha256": "8e1ccc54baf1da9ebaf52df3ad452b2a4c83436cc9b8290b0a8e4fe22809a855"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1280x960.png",
+      "sha256": "88844708c1aa333a42c32bcdadfc722ef4b2af3a5399b7cc7cb90b5255900d4b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1600x900.json",
+      "sha256": "2eaf5ac2dc09044dcc03882bfbae297dd29df20590c636b51b1cc8e240ed168f"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1600x900.png",
+      "sha256": "9407d920c2994799cc4fe08d4324dd67819ffc82ff8727e8d2972f85846e4eb9"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1920x1080.json",
+      "sha256": "9259f4a78293389ef20b6fb1cdd7de342962a8a95c5c41023813b1d6a3faaa1c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-slow-1920x1080.png",
+      "sha256": "c9585ab0732c6bc24731a8c10d4d7a5849e1007136f1361098437e030eaa8cd2"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1024x768.json",
+      "sha256": "0fe731c42083311418b8151f6937cd7f60dae601abeccceb2c261c0c65a8a64b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1024x768.png",
+      "sha256": "1378f48e30112d2aac9d0b2d2f8278bdf841d0f62822bab274e4549b0e069b5e"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1280x720.json",
+      "sha256": "fe5556349d4ef6ff958bef82e04549e5c070253c6dd050e483b1f253c7f00198"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1280x720.png",
+      "sha256": "5a2e2582c7900e536416556d72918d5db5a44ef001a900f94728d1b933c207cb"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1280x960.json",
+      "sha256": "0e68c29a3420102175704a7fea9e1bb8c6f605bb6fd2613a60c021433481df7c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1280x960.png",
+      "sha256": "c574e65a05c8eb1308d963586d4d90e458142fc096fe46381c1474adecbf3cdf"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1600x900.json",
+      "sha256": "d585e464f9fb5b0aeefbd389db2362fa422859d6e5ba390c3bd05399489756e0"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1600x900.png",
+      "sha256": "138676137fd2d810648882eacd10a7fbd7f92c8090b8e70512b14ecdbd49ea2c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1920x1080.json",
+      "sha256": "cc4c8653faed27fc585e6777b8f1c25b719d8df0e0b2417462990b7ca65f17b6"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-structure-1920x1080.png",
+      "sha256": "7278c1d207a72e3d0ce9dce785070e26d52349e44e406c8d899bd67d9a350cf5"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1024x768.json",
+      "sha256": "34025db575e3e10dfd58d7373fe027484511d3eb8cebb42123553d508c965086"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1024x768.png",
+      "sha256": "8a19914b16c4d3874dfa950bafb5895c7c19e88caa2cd21633d1ec338658b954"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1280x720.json",
+      "sha256": "f72ea409fd3d030520471858c4686da4df109ede127909ce164024ca6586ead9"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1280x720.png",
+      "sha256": "492dfe30c391042baadad940337037c940811045da3a180674f95da041069a1a"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1280x960.json",
+      "sha256": "21bd633329ddce6dfbbcbbb99c4c9a36d47c7ddb2a897c01c696f818e539811c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1280x960.png",
+      "sha256": "ec487df5e9c9d4f7a7373562a3db62e0feb15903b1a5cc7ff9aa9628f11b297d"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1600x900.json",
+      "sha256": "eb824ab5d5e6bbf95477bdf8f30de583116705a2a3125002faadf6cc42b0163d"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1600x900.png",
+      "sha256": "6eb483248dd069ab969830a2af52d143e19e0aaddecbd997ddb0838a0d46a2b2"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1920x1080.json",
+      "sha256": "4aeb83d5a06829577a4fc106d52897b9ab5d841ded9921e3716e8c7d8a693826"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-29-wall-1920x1080.png",
+      "sha256": "672cdd066dcf81fde8b541be4094bd0e435e9ad0b0b6157c60d3b9ecd76da189"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1024x768.json",
+      "sha256": "23e00e5772e8bad7af5a1591d74c39b9d49fd568b621d9830c7f22a917320dac"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1024x768.png",
+      "sha256": "19d304665278d7d06d875dd64498124d1c23c9ed7e418551b87498c28a9d5514"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1280x720.json",
+      "sha256": "8a5833edf29b654b9aadb573044f9d13a026ce21fcccb4b6899086bb3189d345"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1280x720.png",
+      "sha256": "3fa679c0851218f6c93a4a5d748d81a334d8cd9c024b32b4a4e96159216c2886"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1280x960.json",
+      "sha256": "1ce6ea051da6250c5690ca0015a4da50d6b2c329ebfee721b617f87dec5b992a"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1280x960.png",
+      "sha256": "38c961f694ad3dd74722b4f47f7a35564314f2af59d9be9a37e6ec42d057f4df"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1600x900.json",
+      "sha256": "7d89309da170f8cffd035603676e129bd3551b593bcf51a002f0503bd055d536"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1600x900.png",
+      "sha256": "5f4b7e6460adbbf97f94fe701349e328d32e037ae064b8759b7477d4a8640a4c"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1920x1080.json",
+      "sha256": "4944b6ce6f39685be320dff57efcf86bc07d093447c92dabbb8b881f5b292683"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-30-foundation-parts-1920x1080.png",
+      "sha256": "29259727a91e7cccc2b7ebe79bf0a1db9dce36a43d3a6111a27b3ed32cb70455"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-pan6-1024x768.json",
+      "sha256": "f2c8e5a95d3685af07a3d88046a930a598ff6787e17d27b634edfd954a936ac2"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-pan6-1024x768.png",
+      "sha256": "531b25f78d1df2743fea005bc9cdd20ec0d36f228fefce869b33ce671504788b"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-pan6-1280x720.json",
+      "sha256": "efa10aacc85e7532b595899a9d03f56ff0f9ff53dd04f1b034bb193c03fe7214"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-pan6-1280x720.png",
+      "sha256": "986c37e59b50c6571db839c539857389680b5ec2a8ae8d83ec1772c3c08cfebb"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom1-1024x768.json",
+      "sha256": "38dcf1821d173926badd0bffb035b3036d9e8001e12d9a04336680d0362b7e49"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom1-1024x768.png",
+      "sha256": "56f785543b06fe5e6e5c84cf5efb775c81e1c8fa35477abb00781f781c84b555"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom1-1280x720.json",
+      "sha256": "52e134c0a95dec44d9c9718455baa2538392229187892c737da2c40f784c07d4"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom1-1280x720.png",
+      "sha256": "845f80013cad1fb9b8eeeb56e240d3dfbf8f287792ea23fcf2428b1e7fe57112"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom3-1024x768.json",
+      "sha256": "3632850ed57f8aff62a917d4fdfd07575e75d3d5a667d3e6c7aba05c534c32cf"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom3-1024x768.png",
+      "sha256": "8b5d560d0c910f81af7cce96fc775b548ce561fb77d081a55c3df96bd79ef472"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom3-1280x720.json",
+      "sha256": "48d5cda796428bb55ceaa4e06f8a8c549737e505787d239474a63ea2e440a649"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom3-1280x720.png",
+      "sha256": "f491be39d5dd5359c1b5dae12f728739617ad5eadd94d1180769532baf9297c4"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom6-1024x768.json",
+      "sha256": "8e7ff9109410420ddec9038529f61ea6b3be550ff1058b0ffa5f386fe3f21c89"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom6-1024x768.png",
+      "sha256": "ca92dba9dd0c7193ba9b66fa69ce5b891b098292920dc02a240c5d26c048ceec"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom6-1280x720.json",
+      "sha256": "41ee7955d60550272b85c63ca149e75181a127fbb4205de9c9981ac26e9b9118"
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-screenshots/refinement-terrain-zoom6-1280x720.png",
+      "sha256": "819e2d6977f30288f5e9a597e28c5463aed2bd6f6f32efbda106e2d341bbcf9d"
+    }
+  ]
+}

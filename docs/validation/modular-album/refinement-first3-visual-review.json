@@ -1,0 +1,444 @@
+{
+  "schema": "paper-defense/scoped-visual-review/v1",
+  "reviewedOn": "2026-10-23",
+  "workspaceRoot": "D:/Projekt Unity/paper",
+  "scope": "Scenes 01 Home, 02 Map, 03 Preparation only; visual and layout repair toward the supplied concepts while preserving live gameplay.",
+  "status": "complete_for_scoped_visual_review",
+  "verdict": "pass_with_documented_residuals",
+  "reviewer": {
+    "executor": "/root/refine_ui_01_03",
+    "roles": [
+      "scoped source implementer",
+      "visual reviewer"
+    ],
+    "reviewSource": "agent",
+    "skill": "C:/Users/Greedval/.codex/skills/unity-mcp-ui-layout/SKILL.md",
+    "capabilities": {
+      "artifactAccess": "verified: assigned source files, original concept PNGs, baseline PNGs, final PNGs and metadata read from the workspace",
+      "vision": "verified: original three concepts and all 15 final PNGs opened as images; all five Map PNGs reopened after the final metric patch",
+      "unityOperation": "not performed by this executor; root owns compilation, tests and captures",
+      "generation": "not performed by this executor; root supplied the accepted Home V2 image"
+    }
+  },
+  "layoutContract": {
+    "stack": "UGUI",
+    "changeMode": "repair",
+    "activeUiOwner": "PlayerShell runtime page composition",
+    "designSource": "Raster concepts at 1672x941; existing runtime hierarchy and gameplay remain authoritative.",
+    "intake": "Offline source and capture intake; root's shared ledger records Unity 6000.5.7f1, PaperDefenseGame scene, runtime UGUI owner, no selected object and baseline console state.",
+    "wholePageRule": "Home, Map and Preparation preserve complete illustrations without viewport cropping; Preparation locally top-aligns its unchanged full-size illustration.",
+    "sharedScope": "No global backdrop behavior changed. Notebook header coin is opt-in for the repaired Map/Preparation calls."
+  },
+  "evidenceOwnership": {
+    "technical": "/root",
+    "capture": "/root",
+    "visual": "/root/refine_ui_01_03",
+    "generatedHomeArt": "/root"
+  },
+  "technicalEvidence": [
+    {
+      "path": "docs/validation/modular-album/refinement-first3-green.json",
+      "sha256": "7ce9487660d065ac6598bf86c333e3409f4382ee3a2b6576928c6db8b5f6cd44",
+      "job": "f6bc03155a694de8afd7d12ac88f6f9c",
+      "result": {
+        "passed": 57,
+        "failed": 0,
+        "skipped": 0
+      },
+      "note": "After generator full-width price fix; result file read by reviewer."
+    },
+    {
+      "path": "docs/validation/modular-album/refinement-01-09-green.json",
+      "sha256": "9dd2229b2b0246d55cffeb7091c5811582471985943531f676e19b11cf6dcfda",
+      "job": "0e83c65ae42e4329921feddba33e836e",
+      "result": {
+        "passed": 141,
+        "failed": 0,
+        "skipped": 0
+      },
+      "note": "After final Map single-line metric fix; result file read by reviewer."
+    }
+  ],
+  "implementationFiles": [
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Home.cs",
+      "sha256": "1174eb882a1f308b178519528f830996674c4cd733a64acd33e0cc410b134247"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Map.cs",
+      "sha256": "a0955d30bccbaef191fe0ee6cb10c5fb9e22628ccefb9d5ee8808cefb1390b61"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.PreparationAssembly.cs",
+      "sha256": "b1d4ef8a3d00d1b954ea5314a55486121c39bc090462e033cad2c38f8d190253"
+    },
+    {
+      "path": "Assets/PaperDefense/Presentation/Player/PlayerShell.Notebook.cs",
+      "sha256": "2455cb02490b7d9bdb34c0a097c1e2882249ffbc7e61574df23cdcf37699090d"
+    }
+  ],
+  "assetInputs": [
+    {
+      "path": "Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscapeV2.png",
+      "sha256": "3106a953d1bd0e954458e965393f68cc0d7cf01f2862211da95c6d2948c8d62e"
+    },
+    {
+      "path": "Assets/PaperDefense/Resources/Art/Player/MapFieldIllustration.png",
+      "sha256": "9264ff1f03323d507cb78523e5fe2e240893068ef95aff4820b7aaeda895a273"
+    },
+    {
+      "path": "Assets/PaperDefense/Resources/Art/Player/PreparationLandscape.png",
+      "sha256": "4c6503f052759fc159e166e7d9abedd9328b3f9506181eca149e83148dc76174"
+    },
+    {
+      "path": "Assets/PaperDefense/Resources/Art/NotebookSprites.json",
+      "sha256": "4b86b216098d4105ba42544a7a5433b49c8ea7b2f74e77df4b513a5632a00ec9"
+    },
+    {
+      "path": "Assets/PaperDefense/Resources/Art/NotebookAtlas.png",
+      "sha256": "3df21476137d1e193b21cb86813ae55658d20d1fec9f63c87a9a5a8fb5fe55fa"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/HomeDefenseLandscape-v2.provenance.json",
+      "sha256": "d0b3d55d614832b9b1b3cfae85625368c64cf1aae893893a3d645165838e2152"
+    }
+  ],
+  "baselineEvidence": [
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-01-home-1024x768.png",
+      "sha256": "a02b0242615b5886d947882501f3be526b14a89ef1661dca93d6b768b009d04c"
+    },
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-01-home-1920x1080.png",
+      "sha256": "2d76c965563d21c4e7243dc75ac287fa9a62aecb09d746c0db43de0f4692ecf1"
+    },
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-02-map-1024x768.png",
+      "sha256": "cb61ba2b792f0cc5c276d6343a8d1423967c1ceae878d3225834980d9a54f349"
+    },
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-02-map-1920x1080.png",
+      "sha256": "53a71da8b4560e13f8f31fc46f20dce65af751c6d2ab1886bfd51f9cfa1b6ff9"
+    },
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-03-preparation-1024x768.png",
+      "sha256": "1eec329c85578d9a7d8b82d30a41cd18827847ddbf5c9e25d3b9ac71c8e8b753"
+    },
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-03-preparation-1920x1080.png",
+      "sha256": "8b5c82dcc02c01427a6c1d5e4a565e8915eb2b2761c57f322519e0af06f4a39d"
+    }
+  ],
+  "fixedFindings": [
+    {
+      "finding": "Generator cost plus pencil-only rule wrapped into three lines at 1280x720 after decorative price-group fitting narrowed the two-line label.",
+      "repair": "Keep generator's original full card width and 18px two-line caption; decorative price fitting applies only to non-generators.",
+      "verification": "57/57 then141/141 tests; both lines physically reviewed in all five final Preparation captures."
+    },
+    {
+      "finding": "Map1024x768 put the last denominator 8 on its own second line.",
+      "repair": "Center a single-line text band within each metric row so best-fit uses width rather than wrapping into the tall row; maintain a 15px physical font floor.",
+      "verification": "141/141 tests; all five Map recaptures physically reopened, including one-line8/8 at 1024x768."
+    }
+  ],
+  "scenes": [
+    {
+      "id": "01",
+      "title": "Home",
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/01-home.png",
+        "sha256": "c3b9cab2e4416338e108abaf80a202fd7f4e37ac489d348181e6c118d5b48305",
+        "width": 1672,
+        "height": 941
+      },
+      "status": "pass_with_documented_residuals",
+      "improvements": [
+        "Menu width now follows the source's roughly 24% page width instead of the previous 27%.",
+        "Accepted V2 artwork restores exploded notebook parts and arrows while retaining castle and battle composition.",
+        "Illustrated books replace bare fallback book outlines; secondary label sizes and exit proportions are closer to the source."
+      ],
+      "captures": [
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1024x768.png",
+          "sha256": "dcbd6573701f349e5cd3c4c54ad3f1a977e0131d0de5b227c5655147dff545de",
+          "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1024x768.json",
+          "metadataSha256": "f7a7afc1b86d05cd9de01f5cacc1d3151e9958653e0592036b8fce165124f310",
+          "width": 1024,
+          "height": 768,
+          "frame": 194565,
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "visuallyOpened": true,
+          "status": "pass",
+          "observation": "All six actions and the two-line capacity tagline are visible. The smaller exit button, illustrated books, full castle and complete exploded notebook drawing are clear. Paper bands above and below are deliberate whole-page containment."
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1280x720.png",
+          "sha256": "ad5e809addcbe438bf842c14e90f8e1ef5770adcf74d81a603ce58b880dcaf3f",
+          "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1280x720.json",
+          "metadataSha256": "0824bb758205dc85c96e396ecbc5aa1cf7f8067aa032e27fd3958aad0f560257",
+          "width": 1280,
+          "height": 720,
+          "frame": 194565,
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "visuallyOpened": true,
+          "status": "pass",
+          "observation": "Source-like 16:9 composition fills the frame. The narrower action column leaves the pen, exploded drawing and castle visible; no labels overlap icons."
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1920x1080.png",
+          "sha256": "3b756dd9e144887be8d888730b9220b3a469055900cccc35de1230465a58c96c",
+          "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1920x1080.json",
+          "metadataSha256": "b7fa5fc1a128cf450a121519e847279b8d4b9a5c053820e88ad989d836f7aa50",
+          "width": 1920,
+          "height": 1080,
+          "frame": 194565,
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "visuallyOpened": true,
+          "status": "pass",
+          "observation": "The dominant logo, narrower menu and exploded notebook drawing now match the source's three main visual masses. Both album/help books use the illustrated atlas art; the full page remains visible."
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1280x960.png",
+          "sha256": "5b9c95b608183e1616c0895318bad86aafaab1ced120a9835ba211f75dde4e2f",
+          "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1280x960.json",
+          "metadataSha256": "1c210e7b3aed29a14a508902c8c756e92e3f591ab435da5dc67700b999def03a",
+          "width": 1280,
+          "height": 960,
+          "frame": 194565,
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "visuallyOpened": true,
+          "status": "pass",
+          "observation": "The complete landscape is contained with paper above and below. All actions remain separate and readable, with the profile chip in the upper paper band."
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1600x900.png",
+          "sha256": "92eb9568e9e03ef5121c96c8848c56c1db309c69db4b58437633bb61209f54da",
+          "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-01-home-1600x900.json",
+          "metadataSha256": "bf0873e653126ce9367db011b30cf1dddf8c1c329c3b98a439df49a7e3f3effd",
+          "width": 1600,
+          "height": 900,
+          "frame": 194565,
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "visuallyOpened": true,
+          "status": "pass",
+          "observation": "Complete source-aspect landscape, balanced narrower menu, visible pen and all three exploded barrel alternatives. Play remains the dominant action."
+        }
+      ],
+      "residuals": [
+        "At4:3 the complete landscape retains paper bands above/below; removing them safely needs an alternate-aspect composition because the no-crop contract remains active.",
+        "The profile chip and two-line 'up to eight drawings' tagline reflect real profile/capacity data and differ from the static concept text."
+      ]
+    },
+    {
+      "id": "02",
+      "title": "Map",
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/02-map.png",
+        "sha256": "9e1a8916060e84641862352e8c71ce029b9dd203e50442db923aebb83822fce1",
+        "width": 1672,
+        "height": 941
+      },
+      "status": "pass_with_documented_residuals",
+      "improvements": [
+        "Castle, metrics, objective and inks occupy the sidebar's actual height instead of ending around mid-height at 4:3.",
+        "Sidebar text and ink hierarchy are larger at 4:3; all live values remain unchanged.",
+        "Native coin has the correct currency meaning, and illustrated album books match the source language."
+      ],
+      "captures": [
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1024x768.png",
+          "sha256": "41a7d00945492076fe4f3d234843c107e10aae1117cfd9a9167bd42df7c8ac5f",
+          "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1024x768.json",
+          "metadataSha256": "630f009a4b69bd948b133bac5ad710fb609e41b2b2e8b22f1d40fc8c7b50454e",
+          "width": 1024,
+          "height": 768,
+          "frame": 14769,
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "visuallyOpened": true,
+          "status": "pass",
+          "observation": "Final recapture: the complete 'Рисунков в наборе: 8 / 8' fits on one readable line. Castle, four metrics, objective, ink labels and action use the sidebar height. All map well landmarks remain visible; larger landscape paper bands are documented."
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1280x720.png",
+          "sha256": "da9e4d3616f8d27c717f274fdc9e7e2194701f44066799aadb47b23744536598",
+          "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1280x720.json",
+          "metadataSha256": "a548255e9477a8b136a267554112102db894b2055f2238b97bb6a854e652def7",
+          "width": 1280,
+          "height": 720,
+          "frame": 14769,
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "visuallyOpened": true,
+          "status": "pass",
+          "observation": "All four metric values fit on one line. Castle, objective, three ink bottles and preparation action are clear, with no overlap. The full map illustration remains visible."
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1920x1080.png",
+          "sha256": "264144069a25ee8565f7091c4dd7efc2c6fb5b1be02a879af50ef0714741cafb",
+          "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1920x1080.json",
+          "metadataSha256": "34946dc14fb63b3b2f38ea92021b896f6439549bb20ad188a124c9b91b2dbfdb",
+          "width": 1920,
+          "height": 1080,
+          "frame": 14769,
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "visuallyOpened": true,
+          "status": "pass",
+          "observation": "Castle and four ruled metric rows read in the source order, followed by the objective and ink bottles. Album books and native coin are visible. The preparation button clears all labels."
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1280x960.png",
+          "sha256": "0d54aaf8418a5698cd0e0b7f2008abfde83e7ead3b36dd368fcd64e8a4ecd458",
+          "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1280x960.json",
+          "metadataSha256": "ae0e682d98a4fcf8acc416f98a79832e0bfbf414761e82d7cba9297dca791f73",
+          "width": 1280,
+          "height": 960,
+          "frame": 14769,
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "visuallyOpened": true,
+          "status": "pass",
+          "observation": "Final recapture: the full count remains one line. The tall sidebar uses its height, while the full illustration retains every map landmark with visible top/bottom paper bands."
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1600x900.png",
+          "sha256": "999acf2b72dd15e3d3d906b0a5416bd8d7ff62161699a1d1f52179d1261f230c",
+          "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-02-map-1600x900.json",
+          "metadataSha256": "4caf991c2fea5033f40062cb3a2205f15edce27087f4df319379bea8bd74a825",
+          "width": 1600,
+          "height": 900,
+          "frame": 14769,
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "visuallyOpened": true,
+          "status": "pass",
+          "observation": "Final recapture: 8 waves, castle 250, starting 640 and 8/8 loadout are readable in single rows. All three ink labels and primary action remain clear."
+        }
+      ],
+      "residuals": [
+        "At4:3 the wider readable sidebar reduces contained-map width, increasing top/bottom paper bands. This accepted tradeoff preserves the complete castle, all three colored well rock landmarks and approach context.",
+        "The native coin is a small gold line drawing rather than the concept's shaded gold coin artwork.",
+        "The live count copy includes both occupied and maximum slots; it differs from the concept's simpler fixed eight-drawings caption."
+      ]
+    },
+    {
+      "id": "03",
+      "title": "Preparation",
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/03-preparation.png",
+        "sha256": "3284aa75dd44a16b8a2fb573322c01882f516f5ca4b6fb5ed7ce8accc5cad614",
+        "width": 1672,
+        "height": 941
+      },
+      "status": "pass_with_documented_residuals",
+      "improvements": [
+        "Scenery is top-aligned locally at 4:3, removing the previous broad blank top band.",
+        "Source-positioned narrower ribbon, stronger slot numbers/names and recovered card art height improve hierarchy.",
+        "Exact certified recipes and full foundations are retained; pencil costs and illustrated footer books improve source styling."
+      ],
+      "captures": [
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1024x768.png",
+          "sha256": "6c3903b1c8a4b9c9001e8bfd0e2fb5aed8aee111ba033ce2f8fb138b291f1823",
+          "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1024x768.json",
+          "metadataSha256": "95f9128a6dd6e3e55433119f83e0cdda82bccb11fc732ae81b67960b5594067e",
+          "width": 1024,
+          "height": 768,
+          "frame": 194565,
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "visuallyOpened": true,
+          "status": "pass",
+          "observation": "Eight complete cards, replace/clear actions and footer controls are visible. The recovered top band enlarges real assembly art; all tower foundations remain visible. Generator cost and pencil-only rule occupy two distinct lines."
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1280x720.png",
+          "sha256": "47e02a79d98fa5d5f88bc8ffa579932fbfd0f8ca38d1fab1b8186356d101c978",
+          "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1280x720.json",
+          "metadataSha256": "a0105f3262eaaf0c221fa811842365eb9dd46950e557631e3818af08f6596f71",
+          "width": 1280,
+          "height": 720,
+          "frame": 194565,
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "visuallyOpened": true,
+          "status": "pass",
+          "observation": "Generator displays '60 штрихов' and 'Только карандаш' on two complete lines. All four-by-two cards and every footer control fit. Actual foundation geometry is fully shown."
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1920x1080.png",
+          "sha256": "91073440bca38a242701026ab56d3d5e495d214553968ba3b7c170c416886d77",
+          "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1920x1080.json",
+          "metadataSha256": "9d569593012ed54ba0db14ee236bcdbdce112853db1f6f45b5b8ef5a5db28416",
+          "width": 1920,
+          "height": 1080,
+          "frame": 194565,
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "visuallyOpened": true,
+          "status": "pass",
+          "observation": "Source-like centered ribbon and four-by-two hierarchy. Larger numbered badges and names, illustrated pencil prices and footer books are clear. Generator retains both lines without colliding with actions."
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1280x960.png",
+          "sha256": "89d035f1d7370a3ab782bb8db1f3c83e4145d91e29c4dc11362ac7c9f2de69d6",
+          "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1280x960.json",
+          "metadataSha256": "fc37ebb9a5579d5c2ae4802745ce07fce2c233066f301143a6d9d73a443133e3",
+          "width": 1280,
+          "height": 960,
+          "frame": 194565,
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "visuallyOpened": true,
+          "status": "pass",
+          "observation": "Taller cards give substantial space to the real assemblies and support structures. Long mortar name and generator two-line rule are complete and separate from replace/clear controls."
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1600x900.png",
+          "sha256": "22855106bdd2c383cfd85c8a22ff8be1e93c36e585aa7638569f409b868519e7",
+          "metadataPath": "docs/validation/modular-album/refinement-screenshots/refinement-03-preparation-1600x900.json",
+          "metadataSha256": "689066ed285009e0fbb47e0f74e88ab6319126e65f2129c83b5eb2abf2de77b0",
+          "width": 1600,
+          "height": 900,
+          "frame": 194565,
+          "artRevision": "modular-full-catalog-2026-10-22-v7",
+          "visuallyOpened": true,
+          "status": "pass",
+          "observation": "All eight cards, full foundations, price groups, material selector and start action are visible. Generator price/rule remain two lines with a clear gap above its action."
+        }
+      ],
+      "residuals": [
+        "Real certified modular recipes have broad foundations and different silhouettes from the static concept's legacy tower illustrations; no fake skins or foundation cropping were used.",
+        "At 720px height the exact recipe art is necessarily smaller than the concept's illustrations because all eight slots, clear actions, material/status controls and generator rule remain available.",
+        "The existing landscape's castle base sits partly behind the ribbon. Its source artwork has a taller castle than the concept's open scenery strip; this is a decorative asset mismatch, not a hidden gameplay control."
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "check": "Source comparison and fresh whole-screen visual review at all five sizes",
+      "status": "pass",
+      "evidence": "Three original concepts, six baseline images and15 final captures physically opened; five Map recaptures reopened after final change."
+    },
+    {
+      "check": "Controls reachable without overlap or clipping",
+      "status": "pass",
+      "evidence": "All15 final frames inspected plus root's 141/141 runtime verification."
+    },
+    {
+      "check": "Long names, generator rule and live metric copy",
+      "status": "pass",
+      "evidence": "Existing maximum-name/generator test passed; generator two lines and final Map single-line count physically reviewed."
+    },
+    {
+      "check": "Real geometry and landmarks preserved",
+      "status": "pass",
+      "evidence": "All tower foundations and Map castle/colored well landmarks visible in final images; no decorative crop or fake tower replacement."
+    },
+    {
+      "check": "Shared backdrop regression",
+      "status": "not_applicable",
+      "reason": "Global NotebookPageBackdrop implementation unchanged; local Preparation positioning and opt-in header coin only."
+    },
+    {
+      "check": "Console state and final scene restoration",
+      "status": "owned_by_coordinator",
+      "reason": "Root owns live Editor state and final console/restoration evidence; this file is visual QA, not an independent Editor operation report."
+    }
+  ],
+  "blockingFindings": [],
+  "pendingVisualChecks": [],
+  "completionLimit": "This closes visual review for the three assigned scenes at the bound revisions. It does not claim pixel identity, completion of all 30 scenes, or independently executed Unity checks."
+}

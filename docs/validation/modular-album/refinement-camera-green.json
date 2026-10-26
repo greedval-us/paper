@@ -1,0 +1,261 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "1ea98b4733824f2faf7dfc21f8d028b2",
+    "status": "succeeded",
+    "mode": "PlayMode",
+    "started_unix_ms": 1792704442872,
+    "finished_unix_ms": 1792704454734,
+    "last_update_unix_ms": 1792704454734,
+    "progress": {
+      "completed": 24,
+      "total": 24,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": null,
+      "last_finished_test_full_name": "PaperDefense.Tests.NotebookIntegrationTests.UnchangedPreviewAndStaticBasesDoNotUploadEveryRenderFrame",
+      "last_finished_unix_ms": 1792704454705,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "run_in_background": true,
+      "focus_nudge_attempts": null,
+      "focus_nudge_limit": null,
+      "focus_nudge_status": null,
+      "blocked_reason": null,
+      "failures_so_far": [],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "PlayMode",
+      "summary": {
+        "total": 24,
+        "passed": 24,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 4.1481431,
+        "resultState": "Passed"
+      },
+      "results": [
+        {
+          "name": "EnemyBodyHealthAndDeathUseOnePresentationTransformWithoutChangingSimulation(True,0.7f)",
+          "fullName": "PaperDefense.Tests.AlbumBattleCameraTests.EnemyBodyHealthAndDeathUseOnePresentationTransformWithoutChangingSimulation(True,0.7f)",
+          "state": "Passed",
+          "durationSeconds": 0.7331453,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EnemyBodyHealthAndDeathUseOnePresentationTransformWithoutChangingSimulation(False,1.0f)",
+          "fullName": "PaperDefense.Tests.AlbumBattleCameraTests.EnemyBodyHealthAndDeathUseOnePresentationTransformWithoutChangingSimulation(False,1.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.1636377,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FocusedMapKeepsAllFourEnemyApproachesVisibleAtTheFieldEdges",
+          "fullName": "PaperDefense.Tests.AlbumBattleCameraTests.FocusedMapKeepsAllFourEnemyApproachesVisibleAtTheFieldEdges",
+          "state": "Passed",
+          "durationSeconds": 0.2402962,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ModernBattleOpensOnReadableCastleFocusWithAnOverviewControl",
+          "fullName": "PaperDefense.Tests.AlbumBattleCameraTests.ModernBattleOpensOnReadableCastleFocusWithAnOverviewControl",
+          "state": "Passed",
+          "durationSeconds": 0.1850594,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ModernTrialWithoutAffordableCopiesKeepsTheBattleEnemyPresentationTransform",
+          "fullName": "PaperDefense.Tests.AlbumBattleCameraTests.ModernTrialWithoutAffordableCopiesKeepsTheBattleEnemyPresentationTransform",
+          "state": "Passed",
+          "durationSeconds": 0.1739152,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "OverviewAndCastleFocusPreserveTheAttemptResourcesAndFrozenPages",
+          "fullName": "PaperDefense.Tests.AlbumBattleCameraTests.OverviewAndCastleFocusPreserveTheAttemptResourcesAndFrozenPages",
+          "state": "Passed",
+          "durationSeconds": 0.2193282,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RealAssaultRetiresOnlyTheInitialPlanningInstruction",
+          "fullName": "PaperDefense.Tests.AlbumBattleCameraTests.RealAssaultRetiresOnlyTheInitialPlanningInstruction",
+          "state": "Passed",
+          "durationSeconds": 0.1864762,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RetiringTooltipsDoesNotRedrawAnInactiveHudHierarchy",
+          "fullName": "PaperDefense.Tests.AlbumBattleCameraTests.RetiringTooltipsDoesNotRedrawAnInactiveHudHierarchy",
+          "state": "Passed",
+          "durationSeconds": 0.1933489,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CameraScaleRefreshesStaticGeometryButPanningDoesNot",
+          "fullName": "PaperDefense.Tests.NotebookCameraReadabilityTests.CameraScaleRefreshesStaticGeometryButPanningDoesNot",
+          "state": "Passed",
+          "durationSeconds": 0.0360768,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FractionalScrollAccumulatesAndZoomStopsAtBothLimits",
+          "fullName": "PaperDefense.Tests.NotebookCameraReadabilityTests.FractionalScrollAccumulatesAndZoomStopsAtBothLimits",
+          "state": "Passed",
+          "durationSeconds": 0.0052206,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NormalizedWheelNotchZoomsNoticeablyAndKeepsTheCursorAnchor",
+          "fullName": "PaperDefense.Tests.NotebookCameraReadabilityTests.NormalizedWheelNotchZoomsNoticeablyAndKeepsTheCursorAnchor",
+          "state": "Passed",
+          "durationSeconds": 0.0039254,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "OverviewHidesFineGridAndCloseZoomRestoresIt",
+          "fullName": "PaperDefense.Tests.NotebookCameraReadabilityTests.OverviewHidesFineGridAndCloseZoomRestoresIt",
+          "state": "Passed",
+          "durationSeconds": 0.0061962,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PlatformRangesNormalizeOnlyLegacyWindowsInput",
+          "fullName": "PaperDefense.Tests.NotebookCameraReadabilityTests.PlatformRangesNormalizeOnlyLegacyWindowsInput",
+          "state": "Passed",
+          "durationSeconds": 0.0035097,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"pan\")",
+          "fullName": "PaperDefense.Tests.NotebookCameraReadabilityTests.ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"pan\")",
+          "state": "Passed",
+          "durationSeconds": 0.0390533,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"zoom\")",
+          "fullName": "PaperDefense.Tests.NotebookCameraReadabilityTests.ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"zoom\")",
+          "state": "Passed",
+          "durationSeconds": 0.0365398,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"aspect\")",
+          "fullName": "PaperDefense.Tests.NotebookCameraReadabilityTests.ProductionMapSceneryRemainsAnchoredDuringCameraNavigation(\"aspect\")",
+          "state": "Passed",
+          "durationSeconds": 0.0321218,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ResourceAndAuthoredStrokesKeepScreenWidthWithoutChangingSourceGeometry",
+          "fullName": "PaperDefense.Tests.NotebookCameraReadabilityTests.ResourceAndAuthoredStrokesKeepScreenWidthWithoutChangingSourceGeometry",
+          "state": "Passed",
+          "durationSeconds": 0.0104463,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ScrollOutsideTheMapDoesNotZoomAndFocusClampsToMapEdges",
+          "fullName": "PaperDefense.Tests.NotebookCameraReadabilityTests.ScrollOutsideTheMapDoesNotZoomAndFocusClampsToMapEdges",
+          "state": "Passed",
+          "durationSeconds": 0.0047176,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FastMouseStrokeFillsEveryCellAndPauseKeepsItUnbuilt",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.FastMouseStrokeFillsEveryCellAndPauseKeepsItUnbuilt",
+          "state": "Passed",
+          "durationSeconds": 0.9892194,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HudClickStartsWaveWithoutDrawingThroughButton",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.HudClickStartsWaveWithoutDrawingThroughButton",
+          "state": "Passed",
+          "durationSeconds": 0.263494,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MortarLaunchDoesNotCreateAnExplosionAndVisualMarksAreBounded",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.MortarLaunchDoesNotCreateAnExplosionAndVisualMarksAreBounded",
+          "state": "Passed",
+          "durationSeconds": 0.103685,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RestartRebindsPresentationAndKeepsOneHud",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.RestartRebindsPresentationAndKeepsOneHud",
+          "state": "Passed",
+          "durationSeconds": 0.1553298,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ScriptableBalanceCopiesSettingsWithoutSharingSessionDefinitions",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.ScriptableBalanceCopiesSettingsWithoutSharingSessionDefinitions",
+          "state": "Passed",
+          "durationSeconds": 0.1079912,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UnchangedPreviewAndStaticBasesDoNotUploadEveryRenderFrame",
+          "fullName": "PaperDefense.Tests.NotebookIntegrationTests.UnchangedPreviewAndStaticBasesDoNotUploadEveryRenderFrame",
+          "state": "Passed",
+          "durationSeconds": 0.1868732,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

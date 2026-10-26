@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Failed(Child)" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 21:44:01Z" end-time="2026-10-18 21:44:02Z" duration="0,8157615">
+  <test-suite type="TestSuite" id="1916" name="paper" fullname="paper" runstate="Runnable" testcasecount="741" result="Failed" site="Child" start-time="2026-10-18 21:44:01Z" end-time="2026-10-18 21:44:02Z" duration="0.815762" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1910" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="741" result="Failed" site="Child" start-time="2026-10-18 21:44:01Z" end-time="2026-10-18 21:44:02Z" duration="0.807017" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39156" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1911" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="741" result="Failed" site="Child" start-time="2026-10-18 21:44:01Z" end-time="2026-10-18 21:44:02Z" duration="0.802807" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1912" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="741" result="Failed" site="Child" start-time="2026-10-18 21:44:01Z" end-time="2026-10-18 21:44:02Z" duration="0.798832" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1001" name="AlbumNavigationTests" fullname="PaperDefense.Tests.AlbumNavigationTests" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" testcasecount="10" result="Failed" site="Child" start-time="2026-10-18 21:44:01Z" end-time="2026-10-18 21:44:02Z" duration="0.796622" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1003" name="ClearingASlotWithTheKeyboardFocusesItsReplacementControl" fullname="PaperDefense.Tests.AlbumNavigationTests.ClearingASlotWithTheKeyboardFocusesItsReplacementControl" methodname="ClearingASlotWithTheKeyboardFocusesItsReplacementControl" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="129539739" result="Failed" start-time="2026-10-18 21:44:01Z" end-time="2026-10-18 21:44:02Z" duration="0.570358" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: <Replace album entry 6 (UnityEngine.GameObject)>
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AlbumNavigationTests+<ClearingASlotWithTheKeyboardFocusesItsReplacementControl>d__9.MoveNext () [0x00089] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumNavigationTests.cs:55
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1002" name="OpeningAlbumWithTheKeyboardChoosesAnActiveAlbumControl" fullname="PaperDefense.Tests.AlbumNavigationTests.OpeningAlbumWithTheKeyboardChoosesAnActiveAlbumControl" methodname="OpeningAlbumWithTheKeyboardChoosesAnActiveAlbumControl" classname="PaperDefense.Tests.AlbumNavigationTests" runstate="Runnable" seed="1056024754" result="Failed" start-time="2026-10-18 21:44:02Z" end-time="2026-10-18 21:44:02Z" duration="0.215513" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AlbumNavigationTests+<OpeningAlbumWithTheKeyboardChoosesAnActiveAlbumControl>d__8.MoveNext () [0x0007e] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumNavigationTests.cs:44
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task10-review-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -16,6 +16,7 @@ namespace PaperDefense.Presentation
             PlayerUi.Graphic<PlayerPaperGraphic>(page, "Notebook paper ruling", new Rect(0, 0, W, H));
             var sprite = Resources.Load<Sprite>(resource);
             var bounds = NotebookFitRect(sprite, new Rect(0, 0, W, H));
+            if (resource.EndsWith("FoundationPageDecor", StringComparison.Ordinal)) bounds.y = H - bounds.height;
             NotebookSprite(page, name, sprite, bounds);
             return bounds;
         }
@@ -67,7 +68,7 @@ namespace PaperDefense.Presentation
             symbol.enabled = false;
         }
 
-        void NotebookScreenHeader(string title, Action back, string mission = null, bool settings = false, Rect? frame = null)
+        void NotebookScreenHeader(string title, Action back, string mission = null, bool settings = false, Rect? frame = null, bool currencyCoin = false)
         {
             Rect bounds = frame ?? new Rect(0, 0, W, H);
             float width = bounds.width;
@@ -81,7 +82,16 @@ namespace PaperDefense.Presentation
             var currency = ui.Panel(header, "Notebook currency", new Rect(goldX, 6 * s, goldWidth, 50 * s), PlayerUi.Card);
             var coin = PlayerUi.Graphic<PlayerIconGraphic>(currency, "Gold symbol", new Rect(10 * s, 10 * s, 30 * s, 30 * s));
             coin.Icon = PlayerIcon.Drop; coin.Sketch = true; coin.color = new Color32(182, 116, 17, 255);
-            NotebookInkIcon(coin, "icon.gold");
+            if (currencyCoin)
+            {
+                // The atlas has no gold sprite. Use the existing native coin drawing on
+                // the repaired mission pages rather than rendering an ink drop as money.
+                coin.enabled = false;
+                var money = PlayerUi.Graphic<WorkshopIconGraphic>(currency, "Gold coin illustration", new Rect(10 * s, 10 * s, 30 * s, 30 * s));
+                money.Icon = WorkshopIcon.Cost; money.color = new Color32(182, 116, 17, 255);
+                money.raycastTarget = false;
+            }
+            else NotebookInkIcon(coin, "icon.gold");
             gold = NotebookLabel(currency, ui.T("gold", game.Run.Workshop.Gold), new Rect(47 * s, 0, goldWidth - 56 * s, 50 * s), Mathf.RoundToInt(25 * s));
             gold.name = "Player gold";
             if (mission != null)

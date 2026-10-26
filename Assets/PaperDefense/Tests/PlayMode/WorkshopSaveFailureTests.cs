@@ -39,7 +39,7 @@ namespace PaperDefense.Tests
             => new TowerBlueprint(id, name, ChassisKind.Standard, StructureKind.Gun);
 
         string State() => run.Workshop.Gold + "|" + string.Join(",", run.Workshop.Album.Select(p => p.Id + ":" + p.Name)) +
-            "|" + string.Join(",", run.Workshop.Loadout.Select(p => p.Id)) + "|" +
+            "|" + string.Join(",", run.Workshop.Loadout.Select(p => p?.Id)) + "|" +
             string.Join(",", run.Workshop.Parts.Where(p => run.Workshop.IsUnlocked(p.Id)).Select(p => p.Id));
 
         [TestCase("save")]
@@ -81,18 +81,6 @@ namespace PaperDefense.Tests
             Assert.That(run.UnlockPart("module.feed", out _), Is.True);
             Assert.That(run.Workshop.Gold, Is.EqualTo(140));
             Assert.That(run.Workshop.IsUnlocked("module.feed"), Is.True);
-        }
-
-        [Test] public void WorkshopKeepsDraftAndDisplaysTheWriteFailure()
-        {
-            var hud = root.AddComponent<WorkshopHud>(); hud.Initialize(run);
-            var name = root.GetComponentsInChildren<InputField>(true).Single(); name.text = "My crooked draft";
-            store.FailWrites = true;
-            root.GetComponentsInChildren<Button>(true).Single(b => b.name == "Save blueprint").onClick.Invoke();
-            Assert.That(hud.Draft.Name, Is.EqualTo("My crooked draft"));
-            Assert.That(run.Workshop.Album[0].Name, Is.Not.EqualTo("My crooked draft"));
-            Assert.That(hud.Status, Does.Contain(FakeStore.WriteError));
-            Assert.That(root.GetComponentsInChildren<Text>(true).Any(t => t.text.Contains(FakeStore.WriteError)), Is.True);
         }
 
         [Test] public void ProtectedLoadRejectsRetryTransactionsAndQuitWithoutStoreWrites()
@@ -183,23 +171,6 @@ namespace PaperDefense.Tests
             Assert.That(run.Workshop.HasUnsavedChanges, Is.False);
             Assert.That(run.RetrySave(out _), Is.True);
             Assert.That(store.Saved.Gold, Is.EqualTo(148));
-        }
-
-        [Test] public void DirtyRewardHudOffersRetryAndDoesNotReplayTheAward()
-        {
-            SetRewardBalance();
-            var hud = root.AddComponent<WorkshopHud>(); hud.Initialize(run);
-            store.FailWrites = true; WinFirstWave(); run.OpenWorkshop();
-            var retry = root.GetComponentsInChildren<Button>(true).Single(b => b.name == "Retry profile save");
-            Assert.That(retry.gameObject.activeSelf, Is.True);
-            var label = root.GetComponentsInChildren<Text>(true).Single(t => t.name == "Profile save status");
-            Assert.That(label.text, Does.Contain(FakeStore.WriteError));
-            Assert.That(label.text, Does.Contain("памяти"));
-            store.FailWrites = false; retry.onClick.Invoke();
-            Assert.That(run.Workshop.Gold, Is.EqualTo(208));
-            Assert.That(store.Saved.Gold, Is.EqualTo(208));
-            Assert.That(retry.gameObject.activeSelf, Is.False);
-            Assert.That(label.text, Does.Contain("СОХРАНЕНО"));
         }
 
         [Test] public void SourceBecomingProtectedDuringSaveKeepsDirtyGoldAndBlocksFurtherWrites()

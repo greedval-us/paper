@@ -44,7 +44,7 @@ namespace PaperDefense.Tests
             page=page.WithMortarFootprint(2,new MortarFootprint(2));
             var restored=new BlueprintData(page).ToBlueprint();
             Assert.That(restored.GetMortarFootprint(2).AspectRatio,Is.EqualTo(2));
-            Assert.That(WorkshopProfile.CurrentVersion,Is.EqualTo(7));
+            Assert.That(WorkshopProfile.CurrentVersion,Is.EqualTo(8));
         }
 
         [TestCase(TargetPriority.Nearest)] [TestCase(TargetPriority.Strongest)] [TestCase(TargetPriority.Siege)]
@@ -211,6 +211,8 @@ namespace PaperDefense.Tests
         [Test] public void OldVersionFiveAssessmentAndDrawingHashesStayExactAfterCurrentMigration()
         {
             var profile=new WorkshopProfile();var old=profile.ToData();old.Version=5;
+            System.Array.Resize(ref old.Loadout,ProfileLimits.HistoricalLoadoutSlotCount);
+            old.TotalXp=0;old.Entries=null;old.Library=null;old.Rewards=null;old.Operations=null;
             foreach(var page in old.Album){page.WeaponMountMetadataVersion=0;page.WeaponMounts=null;}
             var restored=WorkshopProfile.FromData(old).ToData();
             Assert.That(restored.Version,Is.EqualTo(WorkshopProfile.CurrentVersion));

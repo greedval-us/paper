@@ -1,0 +1,5 @@
+EntryId,Scenario,Budget,Seed,UnitCost,Copies,Cost,Damage,Leaks,UnresolvedEnemies,DurationSeconds
+album.guard,Single,400,1337,40,10,400,22,0,0,6.666667
+album.guard,Line,400,1337,40,10,400,528,0,0,18.16667
+album.guard,Crowd,400,1337,40,10,400,4890,21,0,36.9
+album.guard,Armored,400,1337,40,10,400,6775.833,41,0,47.26667

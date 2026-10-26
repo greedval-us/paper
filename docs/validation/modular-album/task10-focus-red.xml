@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 21:42:52Z" end-time="2026-10-18 21:42:53Z" duration="0,3320557">
+  <test-suite type="TestSuite" id="1914" name="paper" fullname="paper" runstate="Runnable" testcasecount="739" result="Failed" site="Child" start-time="2026-10-18 21:42:52Z" end-time="2026-10-18 21:42:53Z" duration="0.332056" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1908" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="739" result="Failed" site="Child" start-time="2026-10-18 21:42:52Z" end-time="2026-10-18 21:42:53Z" duration="0.323271" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39156" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1909" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="739" result="Failed" site="Child" start-time="2026-10-18 21:42:52Z" end-time="2026-10-18 21:42:53Z" duration="0.319265" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1910" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="739" result="Failed" site="Child" start-time="2026-10-18 21:42:52Z" end-time="2026-10-18 21:42:53Z" duration="0.315032" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1011" name="AlbumUiTests" fullname="PaperDefense.Tests.AlbumUiTests" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" testcasecount="15" result="Failed" site="Child" start-time="2026-10-18 21:42:52Z" end-time="2026-10-18 21:42:53Z" duration="0.312670" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1027" name="KeyboardSelectionRevealsTheLastCardInsideTheCatalogue" fullname="PaperDefense.Tests.AlbumUiTests.KeyboardSelectionRevealsTheLastCardInsideTheCatalogue" methodname="KeyboardSelectionRevealsTheLastCardInsideTheCatalogue" classname="PaperDefense.Tests.AlbumUiTests" runstate="Runnable" seed="1961478705" result="Failed" start-time="2026-10-18 21:42:52Z" end-time="2026-10-18 21:42:53Z" duration="0.301682" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: in range (-409,1)
+  But was:  -828.0f
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AlbumUiTests+<KeyboardSelectionRevealsTheLastCardInsideTheCatalogue>d__17.MoveNext () [0x0011a] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumUiTests.cs:211
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task10-focus-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

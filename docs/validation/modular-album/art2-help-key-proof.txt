@@ -1,0 +1,5 @@
+1024x768: 12/12 complete key labels, including Space/Esc; catalog modular-full-catalog-2026-10-22-v7
+1280x720: 12/12 complete key labels, including Space/Esc; catalog modular-full-catalog-2026-10-22-v7
+1920x1080: 12/12 complete key labels, including Space/Esc; catalog modular-full-catalog-2026-10-22-v7
+1280x960: 12/12 complete key labels, including Space/Esc; catalog modular-full-catalog-2026-10-22-v7
+1600x900: 12/12 complete key labels, including Space/Esc; catalog modular-full-catalog-2026-10-22-v7

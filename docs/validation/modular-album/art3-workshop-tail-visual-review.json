@@ -1,0 +1,689 @@
+{
+  "inspectionMethod": "Physical view_image original-detail inspection of every named final PNG and canonical source screens 26, 27 and 29; no montage substitution.",
+  "scope": "Exactly eight workshop/recovery states at five canonical resolutions. No other captures reviewed by this report.",
+  "reviewer": "art3_workshop_tail_qa",
+  "findings": "No blocking visual errors, major control overlaps or accidental floating/clipped assemblies observed. Source visual language is coherent; composition and compact scrolling residuals are explicitly retained. This is not a claim of exact source matching.",
+  "records": [
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "metadataSha256": "75169a5c58fcce9c9140012169e2dfed56034e50b5a36cdf971799196e3588f5",
+      "captureSha256": "658db95e0ae3766dbfb9c043cf108cb5fe6dd7e00c9a9650e08e7e502cc5cf7c",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-26-save-error-1024x768.png",
+      "residuals": [
+        "Composition is adapted from source 26: two separated gun mounts on a square platform replace the source integrated twin-barrel turret and workshop desk framing.",
+        "The dense bottom assembly-summary viewport clips lower text lines; active error recovery controls remain clear."
+      ],
+      "observations": [
+        "Physically opened in original detail: readable red save-error title, explanatory copy, retry and continue actions; background is correctly subdued.",
+        "Both gun mounts sit on the tiled foundation; no detached parts, clipped assembly or overlap among active modal controls."
+      ],
+      "inspected": true,
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "metadataSha256": "ace618fe233122cf2074eb7ebc86fe47386e27e1579813ad4267a32af42d6a76",
+      "captureSha256": "54baced7f3bd05003c461ce0da810d3c162f2386a9db6617dcdc2a24f5f8e847",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-26-save-error-1280x720.png",
+      "residuals": [
+        "Composition is adapted from source 26: two separated gun mounts on a square platform replace the source integrated twin-barrel turret and workshop desk framing.",
+        "The dense bottom assembly-summary viewport clips lower text lines; active error recovery controls remain clear."
+      ],
+      "observations": [
+        "Physically opened in original detail: readable red save-error title, explanatory copy, retry and continue actions; background is correctly subdued.",
+        "Both gun mounts sit on the tiled foundation; no detached parts, clipped assembly or overlap among active modal controls."
+      ],
+      "inspected": true,
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "metadataSha256": "45fdff831c047011481501d569bf7cf2e43d3cb44123e5c930cb5d9c8297a29d",
+      "captureSha256": "28bc75d0e67e8d025b860695bb494a59e0a0ed2e0c5bf2cdfe3649ab9efa8a67",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-26-save-error-1920x1080.png",
+      "residuals": [
+        "Composition is adapted from source 26: two separated gun mounts on a square platform replace the source integrated twin-barrel turret and workshop desk framing.",
+        "The dense bottom assembly-summary viewport clips lower text lines; active error recovery controls remain clear."
+      ],
+      "observations": [
+        "Physically opened in original detail: readable red save-error title, explanatory copy, retry and continue actions; background is correctly subdued.",
+        "Both gun mounts sit on the tiled foundation; no detached parts, clipped assembly or overlap among active modal controls."
+      ],
+      "inspected": true,
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "metadataSha256": "55973127136d9434a16e98b7d5645976f57198675abc18da43522714a8eea44e",
+      "captureSha256": "282516053741825d4886070bf93ab15b14dc4af06b4f3dfd92e9059223c39601",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-26-save-error-1280x960.png",
+      "residuals": [
+        "Composition is adapted from source 26: two separated gun mounts on a square platform replace the source integrated twin-barrel turret and workshop desk framing.",
+        "The dense bottom assembly-summary viewport clips lower text lines; active error recovery controls remain clear."
+      ],
+      "observations": [
+        "Physically opened in original detail: readable red save-error title, explanatory copy, retry and continue actions; background is correctly subdued.",
+        "Both gun mounts sit on the tiled foundation; no detached parts, clipped assembly or overlap among active modal controls."
+      ],
+      "inspected": true,
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "metadataSha256": "dac7ec12745b939bb7818c4024861b462ae6c16c18a57a68f9b7c465410b42e8",
+      "captureSha256": "53265a04ce59d00de83f4c4a234c7745d4db072eff79c4a4c715193365849b0b",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-26-save-error-1600x900.png",
+      "residuals": [
+        "Composition is adapted from source 26: two separated gun mounts on a square platform replace the source integrated twin-barrel turret and workshop desk framing.",
+        "The dense bottom assembly-summary viewport clips lower text lines; active error recovery controls remain clear."
+      ],
+      "observations": [
+        "Physically opened in original detail: readable red save-error title, explanatory copy, retry and continue actions; background is correctly subdued.",
+        "Both gun mounts sit on the tiled foundation; no detached parts, clipped assembly or overlap among active modal controls."
+      ],
+      "inspected": true,
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "metadataSha256": "bcc62449fe7a2bacc08a5bf89a326bc228fbab52d11e615768535c693066a65f",
+      "captureSha256": "f1d10e7e1b5a16df79c3c841ffc0e69adad48207530e2dc091427f4c6c34a3b5",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-26-save-dismissed-1024x768.png",
+      "residuals": [
+        "The source workshop desk vignette and integrated twin-barrel turret are simplified into a two-mount platform composition.",
+        "The assembly-summary viewport shows only part of its dense content; this does not obscure retry or continue editing controls."
+      ],
+      "observations": [
+        "Physically opened in original detail: error modal is absent, draft and compatibility checks remain visible, persistent failure copy and retry-save action are readable.",
+        "Navy pen contours, ivory grid paper and blue primary button treatment are consistent with the source visual language; mounted guns remain grounded."
+      ],
+      "inspected": true,
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "metadataSha256": "63c01f856e8700e6a7f95f9bebe7211f4f14cf8a2e32d03bc88945dcb3a39198",
+      "captureSha256": "e9617db296399d48e4f78a01e4e194713acea9ec0b76a39cb025da71a67ddaad",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-26-save-dismissed-1280x720.png",
+      "residuals": [
+        "The source workshop desk vignette and integrated twin-barrel turret are simplified into a two-mount platform composition.",
+        "The assembly-summary viewport shows only part of its dense content; this does not obscure retry or continue editing controls."
+      ],
+      "observations": [
+        "Physically opened in original detail: error modal is absent, draft and compatibility checks remain visible, persistent failure copy and retry-save action are readable.",
+        "Navy pen contours, ivory grid paper and blue primary button treatment are consistent with the source visual language; mounted guns remain grounded."
+      ],
+      "inspected": true,
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "metadataSha256": "ca8a6d0aa8c01c6df5baa4e2372d680be5192cd6f05d1bdb643e2ccc917b3ec9",
+      "captureSha256": "94aa23da7484f52b5e538240275e8ec3c537ff498cbf24036c7448a150fa1620",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-26-save-dismissed-1920x1080.png",
+      "residuals": [
+        "The source workshop desk vignette and integrated twin-barrel turret are simplified into a two-mount platform composition.",
+        "The assembly-summary viewport shows only part of its dense content; this does not obscure retry or continue editing controls."
+      ],
+      "observations": [
+        "Physically opened in original detail: error modal is absent, draft and compatibility checks remain visible, persistent failure copy and retry-save action are readable.",
+        "Navy pen contours, ivory grid paper and blue primary button treatment are consistent with the source visual language; mounted guns remain grounded."
+      ],
+      "inspected": true,
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "metadataSha256": "f785e55ff4c27f2a8ee133c895804075bd275d6f0c353d6fc7e0a03d58f100df",
+      "captureSha256": "b6e852c7beebc5a0cd95d6639e930ef01204ff5881ea6339078a88f0c88c835b",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-26-save-dismissed-1280x960.png",
+      "residuals": [
+        "The source workshop desk vignette and integrated twin-barrel turret are simplified into a two-mount platform composition.",
+        "The assembly-summary viewport shows only part of its dense content; this does not obscure retry or continue editing controls."
+      ],
+      "observations": [
+        "Physically opened in original detail: error modal is absent, draft and compatibility checks remain visible, persistent failure copy and retry-save action are readable.",
+        "Navy pen contours, ivory grid paper and blue primary button treatment are consistent with the source visual language; mounted guns remain grounded."
+      ],
+      "inspected": true,
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "metadataSha256": "38928309c400efa7b4364306d97e958b826d51ab9d6a136d01d3095cf7dcdea9",
+      "captureSha256": "706d420ff06bdec1cdd1d83383d335f5aa5fb616bf8a71c1a596c238f0854226",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-26-save-dismissed-1600x900.png",
+      "residuals": [
+        "The source workshop desk vignette and integrated twin-barrel turret are simplified into a two-mount platform composition.",
+        "The assembly-summary viewport shows only part of its dense content; this does not obscure retry or continue editing controls."
+      ],
+      "observations": [
+        "Physically opened in original detail: error modal is absent, draft and compatibility checks remain visible, persistent failure copy and retry-save action are readable.",
+        "Navy pen contours, ivory grid paper and blue primary button treatment are consistent with the source visual language; mounted guns remain grounded."
+      ],
+      "inspected": true,
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "metadataSha256": "e028585c46a3f157631e651a94db90d4e55c8140e5ae07496817b4333ce1157e",
+      "captureSha256": "5cd11b5dcb1b2505a91037ffe143987cc8b9b9e3b329e522de017d9307568a5e",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-26-save-retry-1024x768.png",
+      "residuals": [
+        "The current composition preserves pen-and-paper style but differs materially from the source integrated turret and desk vignette.",
+        "Lower assembly-summary lines require scrolling, and the successful-save message sits close below that viewport."
+      ],
+      "observations": [
+        "Physically opened in original detail: successful retry is visibly acknowledged by the saved-to-album message, restored save button and album capacity text; no error modal remains.",
+        "Compatibility checks, price, durability, DPS and trial action are readable and separated; the assembly has no obvious floating or cut-off pieces."
+      ],
+      "inspected": true,
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "metadataSha256": "61c11e61b71af4d87290af7ef712c0042521445618c4cc155ac86189b2077adf",
+      "captureSha256": "053c398970ea94fb00f2c77d7007f791e29b7fa71ad79228a5a0dceacaffd8c4",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-26-save-retry-1280x720.png",
+      "residuals": [
+        "The current composition preserves pen-and-paper style but differs materially from the source integrated turret and desk vignette.",
+        "Lower assembly-summary lines require scrolling, and the successful-save message sits close below that viewport."
+      ],
+      "observations": [
+        "Physically opened in original detail: successful retry is visibly acknowledged by the saved-to-album message, restored save button and album capacity text; no error modal remains.",
+        "Compatibility checks, price, durability, DPS and trial action are readable and separated; the assembly has no obvious floating or cut-off pieces."
+      ],
+      "inspected": true,
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "metadataSha256": "c160ff14806bef51eee857317173fbd5b8deaec26aad4fde8b68623bb3b1495c",
+      "captureSha256": "27e90269b85dd4f41622feb2dce2b7dc4e4b89a536e51a389e369fb1e6b21c91",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-26-save-retry-1920x1080.png",
+      "residuals": [
+        "The current composition preserves pen-and-paper style but differs materially from the source integrated turret and desk vignette.",
+        "Lower assembly-summary lines require scrolling, and the successful-save message sits close below that viewport."
+      ],
+      "observations": [
+        "Physically opened in original detail: successful retry is visibly acknowledged by the saved-to-album message, restored save button and album capacity text; no error modal remains.",
+        "Compatibility checks, price, durability, DPS and trial action are readable and separated; the assembly has no obvious floating or cut-off pieces."
+      ],
+      "inspected": true,
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "metadataSha256": "8106f0b9d6c7666a1f458d1b3cfe4025bdb1ec38b9ee2ef28508050987614641",
+      "captureSha256": "233837fa317302dd68e154f60a455cc319a11dcb69fdebd6aa6c94bf94b2e7d9",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-26-save-retry-1280x960.png",
+      "residuals": [
+        "The current composition preserves pen-and-paper style but differs materially from the source integrated turret and desk vignette.",
+        "Lower assembly-summary lines require scrolling, and the successful-save message sits close below that viewport."
+      ],
+      "observations": [
+        "Physically opened in original detail: successful retry is visibly acknowledged by the saved-to-album message, restored save button and album capacity text; no error modal remains.",
+        "Compatibility checks, price, durability, DPS and trial action are readable and separated; the assembly has no obvious floating or cut-off pieces."
+      ],
+      "inspected": true,
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/26-save-error.png",
+      "metadataSha256": "92e522a84b09a735679d5a723eaf68f5d9ee2b72bab28ede66c266036e3e82ac",
+      "captureSha256": "877da7b4a3fd8a2518b7527c443f02d6a89a7593b8f9b5c624c033b62a2ecb11",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-26-save-retry-1600x900.png",
+      "residuals": [
+        "The current composition preserves pen-and-paper style but differs materially from the source integrated turret and desk vignette.",
+        "Lower assembly-summary lines require scrolling, and the successful-save message sits close below that viewport."
+      ],
+      "observations": [
+        "Physically opened in original detail: successful retry is visibly acknowledged by the saved-to-album message, restored save button and album capacity text; no error modal remains.",
+        "Compatibility checks, price, durability, DPS and trial action are readable and separated; the assembly has no obvious floating or cut-off pieces."
+      ],
+      "inspected": true,
+      "sourceSha256": "b8bd48fbe41fb74f8401c19f9dbf71a27da5ac582b2774159e6ace7a265061ea"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/27-invalid.png",
+      "metadataSha256": "75ea9bf1c2d1d8244e43eeab432d47203cf8687c86b724cfdfc06650dcd328ad",
+      "captureSha256": "79b1f2274e43e6d927331404ab47a2b806de4ee513d78de092ac8cf1ea3e5368",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-27-invalid-1024x768.png",
+      "residuals": [
+        "Source 27 presents a complete turret with a left checklist; current screen instead uses a parts list and exploded weapon diagram.",
+        "The compact sizes omit some exploded-part labels; the conflict and correction text remain readable."
+      ],
+      "observations": [
+        "Physically opened in original detail: red incompatible-parts panel clearly identifies drum plus burst trigger, states the required standard magazine and presents a correction action; final save is visibly disabled.",
+        "Selected trigger card, exploded weapon components and connecting arrows are readable; detached components are intentional exploded-view elements, not broken assembly."
+      ],
+      "inspected": true,
+      "sourceSha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/27-invalid.png",
+      "metadataSha256": "f86d38c9263e701363d0f921d38bbfeb9516150034c56674ca854f6827bf2ef0",
+      "captureSha256": "8a3e975cccf4f6aa28f48099fee2861ee0e1dc48aa8167d3193a37f1f712276c",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-27-invalid-1280x720.png",
+      "residuals": [
+        "Source 27 presents a complete turret with a left checklist; current screen instead uses a parts list and exploded weapon diagram.",
+        "The compact sizes omit some exploded-part labels; the conflict and correction text remain readable."
+      ],
+      "observations": [
+        "Physically opened in original detail: red incompatible-parts panel clearly identifies drum plus burst trigger, states the required standard magazine and presents a correction action; final save is visibly disabled.",
+        "Selected trigger card, exploded weapon components and connecting arrows are readable; detached components are intentional exploded-view elements, not broken assembly."
+      ],
+      "inspected": true,
+      "sourceSha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/27-invalid.png",
+      "metadataSha256": "b098a268b60917cdf066a949d4f3449fcb21ac5faa0ecd1dce5963fc1def5a4c",
+      "captureSha256": "b9b7bf27578bb07e40c2351ccf95b56a73d733fd4e0e49d451d6f582b8959d31",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-27-invalid-1920x1080.png",
+      "residuals": [
+        "Source 27 presents a complete turret with a left checklist; current screen instead uses a parts list and exploded weapon diagram.",
+        "The compact sizes omit some exploded-part labels; the conflict and correction text remain readable."
+      ],
+      "observations": [
+        "Physically opened in original detail: red incompatible-parts panel clearly identifies drum plus burst trigger, states the required standard magazine and presents a correction action; final save is visibly disabled.",
+        "Selected trigger card, exploded weapon components and connecting arrows are readable; detached components are intentional exploded-view elements, not broken assembly."
+      ],
+      "inspected": true,
+      "sourceSha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/27-invalid.png",
+      "metadataSha256": "0f093161dd77f089da840a812f87d29cc05d45c4a9419f89b965cced334d1ffa",
+      "captureSha256": "3877d7129b0d97fe82b66d03ee68510bfb14ef82349a939a717de16b5a309bca",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-27-invalid-1280x960.png",
+      "residuals": [
+        "Source 27 presents a complete turret with a left checklist; current screen instead uses a parts list and exploded weapon diagram.",
+        "The compact sizes omit some exploded-part labels; the conflict and correction text remain readable."
+      ],
+      "observations": [
+        "Physically opened in original detail: red incompatible-parts panel clearly identifies drum plus burst trigger, states the required standard magazine and presents a correction action; final save is visibly disabled.",
+        "Selected trigger card, exploded weapon components and connecting arrows are readable; detached components are intentional exploded-view elements, not broken assembly."
+      ],
+      "inspected": true,
+      "sourceSha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/27-invalid.png",
+      "metadataSha256": "d63ddcb38aca82d8ba52562f3cd3e18f67e3bfbd3f42d564ec906445d2094f0a",
+      "captureSha256": "1e5409ddf2c80cdfdbe0f7e6280585fe0628953613118f93721c48d4cc6b3f06",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-27-invalid-1600x900.png",
+      "residuals": [
+        "Source 27 presents a complete turret with a left checklist; current screen instead uses a parts list and exploded weapon diagram.",
+        "The compact sizes omit some exploded-part labels; the conflict and correction text remain readable."
+      ],
+      "observations": [
+        "Physically opened in original detail: red incompatible-parts panel clearly identifies drum plus burst trigger, states the required standard magazine and presents a correction action; final save is visibly disabled.",
+        "Selected trigger card, exploded weapon components and connecting arrows are readable; detached components are intentional exploded-view elements, not broken assembly."
+      ],
+      "inspected": true,
+      "sourceSha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "884e879326797978d86fd3a14ad7e2b18106789799ea00fcc04a431409dd856e",
+      "captureSha256": "3fde872783acd5a50ec0886376d6d394909777d6243da99a34ce9d1705d36f8f",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-structure-1024x768.png",
+      "residuals": [
+        "The source family selector and illustrated full pump breakdown are simplified into a generic equipment-picker layout.",
+        "The unavailable-items toggle is vertically tight; the left list partially crops its third card inside a visible scroll region."
+      ],
+      "observations": [
+        "Physically opened in original detail: generator function, shell and foundation are separated with clear arrows; generator statistics, income, payback, placement rules and apply action are readable.",
+        "Navy linework, ivory paper, restrained gold details and blue selected state form a coherent adaptation of source 29."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "29d4463aebff51f54f04a795baca1cdc31043cb9ec06aad7a9a0322f5cc43c28",
+      "captureSha256": "25baaf0ab73e0421c5fe2b154bdedf6d6d4036b9e99f61f435e89692f925f6fb",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-structure-1280x720.png",
+      "residuals": [
+        "The source family selector and illustrated full pump breakdown are simplified into a generic equipment-picker layout.",
+        "The unavailable-items toggle is vertically tight; the left list partially crops its third card inside a visible scroll region."
+      ],
+      "observations": [
+        "Physically opened in original detail: generator function, shell and foundation are separated with clear arrows; generator statistics, income, payback, placement rules and apply action are readable.",
+        "Navy linework, ivory paper, restrained gold details and blue selected state form a coherent adaptation of source 29."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "73ea6c3c588580c3ffbd6559635af1f906f69207cef07f4397b701773b9fb167",
+      "captureSha256": "2d0aa467fcb5a71606bf67795a7ec48e5cf7b6112c66ff2aa4635198e0b52a69",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-structure-1920x1080.png",
+      "residuals": [
+        "The source family selector and illustrated full pump breakdown are simplified into a generic equipment-picker layout.",
+        "The unavailable-items toggle is vertically tight; the left list partially crops its third card inside a visible scroll region."
+      ],
+      "observations": [
+        "Physically opened in original detail: generator function, shell and foundation are separated with clear arrows; generator statistics, income, payback, placement rules and apply action are readable.",
+        "Navy linework, ivory paper, restrained gold details and blue selected state form a coherent adaptation of source 29."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "b36283a35cbe27c1d3d2498a2c6a741b63e2645451ddb6952cc1506392409d3c",
+      "captureSha256": "2ece7e5a06d34c10c98672058252a6a916ba4e79da53a6190a87e79587578e81",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-structure-1280x960.png",
+      "residuals": [
+        "The source family selector and illustrated full pump breakdown are simplified into a generic equipment-picker layout.",
+        "The unavailable-items toggle is vertically tight; the left list partially crops its third card inside a visible scroll region."
+      ],
+      "observations": [
+        "Physically opened in original detail: generator function, shell and foundation are separated with clear arrows; generator statistics, income, payback, placement rules and apply action are readable.",
+        "Navy linework, ivory paper, restrained gold details and blue selected state form a coherent adaptation of source 29."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "7fd95e8198f2c87745564b14ad13a1f2cad96511d41a65d3a86626a9bbb30db8",
+      "captureSha256": "f910fbeced79e71108621414b948b84cf60866a42df0770a7c4e41229548b2e4",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-structure-1600x900.png",
+      "residuals": [
+        "The source family selector and illustrated full pump breakdown are simplified into a generic equipment-picker layout.",
+        "The unavailable-items toggle is vertically tight; the left list partially crops its third card inside a visible scroll region."
+      ],
+      "observations": [
+        "Physically opened in original detail: generator function, shell and foundation are separated with clear arrows; generator statistics, income, payback, placement rules and apply action are readable.",
+        "Navy linework, ivory paper, restrained gold details and blue selected state form a coherent adaptation of source 29."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "e2e9e2f2837f7c900b7b21fb6a75ed037b356d0ece2b3fe06ecf76c7b95e1ff4",
+      "captureSha256": "d6f9ef62dc7effac486fc58bb48abe1493033d111cf7a948b3c247daaf2ca838",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-wall-1024x768.png",
+      "residuals": [
+        "Source 29 is a generator example; this barricade uses the same pen-and-paper visual system within a different generic picker layout.",
+        "The unavailable-items toggle text sits tightly inside its short outlined button."
+      ],
+      "observations": [
+        "Physically opened in original detail: barricade wall, shell panels and foundation are shown with deliberate exploded spacing and connecting arrows; no clipped parts or major control overlap.",
+        "Durability, price, load, route-blocking rule, install and apply controls remain readable at this resolution."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "4bb0310b7ece4dc21736e40534eecc1d7fb40bc69198599057c8d41c20f12872",
+      "captureSha256": "bdbb76f3d5b4c31ff552dcf99b8335104d079452fbdfc17c52d6cfc23d476688",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-wall-1280x720.png",
+      "residuals": [
+        "Source 29 is a generator example; this barricade uses the same pen-and-paper visual system within a different generic picker layout.",
+        "The unavailable-items toggle text sits tightly inside its short outlined button."
+      ],
+      "observations": [
+        "Physically opened in original detail: barricade wall, shell panels and foundation are shown with deliberate exploded spacing and connecting arrows; no clipped parts or major control overlap.",
+        "Durability, price, load, route-blocking rule, install and apply controls remain readable at this resolution."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "974e438058cd2c44192423dabcdc5310bc42b24413a8a964482a8454095887f9",
+      "captureSha256": "f281c3f2c2db4d5edd7caa0c892554904473b311d541027b87df07ebf21a6e74",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-wall-1920x1080.png",
+      "residuals": [
+        "Source 29 is a generator example; this barricade uses the same pen-and-paper visual system within a different generic picker layout.",
+        "The unavailable-items toggle text sits tightly inside its short outlined button."
+      ],
+      "observations": [
+        "Physically opened in original detail: barricade wall, shell panels and foundation are shown with deliberate exploded spacing and connecting arrows; no clipped parts or major control overlap.",
+        "Durability, price, load, route-blocking rule, install and apply controls remain readable at this resolution."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "a2802892cc676ba0c1bfe6fa5b052dd0db574fcc0f7f531115ac42247fb475b1",
+      "captureSha256": "8481bfa59ce869a7eaf2dd0984f6959771101cb2463bee11ed64d88716075d34",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-wall-1280x960.png",
+      "residuals": [
+        "Source 29 is a generator example; this barricade uses the same pen-and-paper visual system within a different generic picker layout.",
+        "The unavailable-items toggle text sits tightly inside its short outlined button."
+      ],
+      "observations": [
+        "Physically opened in original detail: barricade wall, shell panels and foundation are shown with deliberate exploded spacing and connecting arrows; no clipped parts or major control overlap.",
+        "Durability, price, load, route-blocking rule, install and apply controls remain readable at this resolution."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "a91c98be3d195d3cd5e5c5c5c1134ef1148843b4441a5f146d72eab5d66e9f97",
+      "captureSha256": "e477b22456ae70208eaa60198ea3cd213e46c1e9ff7089a996fc1b5377e753a0",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-wall-1600x900.png",
+      "residuals": [
+        "Source 29 is a generator example; this barricade uses the same pen-and-paper visual system within a different generic picker layout.",
+        "The unavailable-items toggle text sits tightly inside its short outlined button."
+      ],
+      "observations": [
+        "Physically opened in original detail: barricade wall, shell panels and foundation are shown with deliberate exploded spacing and connecting arrows; no clipped parts or major control overlap.",
+        "Durability, price, load, route-blocking rule, install and apply controls remain readable at this resolution."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "5dc04a09af90d6a23e28f852b3ddc76815894f60ce103b6f5b28110d306cad79",
+      "captureSha256": "cb50d36a36cb893997c8b0ac096f0841b3ba1bb1b3ae1583625b06e48f79e490",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-slow-1024x768.png",
+      "residuals": [
+        "This family-specific slowing device adapts the source generator screen rather than reproducing its exact composition.",
+        "The unavailable-items toggle is vertically tight; small views hide part captions while preserving the diagram and statistics."
+      ],
+      "observations": [
+        "Physically opened in original detail: slowing basin, grate and foundation remain fully visible, with intentional exploded spacing and arrows; no assembly collision or clipping.",
+        "Health, cost, enemy speed factor, radius, duration and slowing rule are readable; install/apply controls are separated."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "18933721342fbc1090741aec377b1ae2bc24af1471f27d094f089bda2d188ff3",
+      "captureSha256": "45cb6eee32c0ba583eda5cdd62f64589f32d0a8c3b020802e440f507e8ce0483",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-slow-1280x720.png",
+      "residuals": [
+        "This family-specific slowing device adapts the source generator screen rather than reproducing its exact composition.",
+        "The unavailable-items toggle is vertically tight; small views hide part captions while preserving the diagram and statistics."
+      ],
+      "observations": [
+        "Physically opened in original detail: slowing basin, grate and foundation remain fully visible, with intentional exploded spacing and arrows; no assembly collision or clipping.",
+        "Health, cost, enemy speed factor, radius, duration and slowing rule are readable; install/apply controls are separated."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "05653261773692a518c9cf6e01bb0fdeb9de89a4d0d11e5f290f09c8a485c424",
+      "captureSha256": "813a896aace06edabee7a71f2b5b397ed7b515f672c05d71bdd8af926b7c7346",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-slow-1920x1080.png",
+      "residuals": [
+        "This family-specific slowing device adapts the source generator screen rather than reproducing its exact composition.",
+        "The unavailable-items toggle is vertically tight; small views hide part captions while preserving the diagram and statistics."
+      ],
+      "observations": [
+        "Physically opened in original detail: slowing basin, grate and foundation remain fully visible, with intentional exploded spacing and arrows; no assembly collision or clipping.",
+        "Health, cost, enemy speed factor, radius, duration and slowing rule are readable; install/apply controls are separated."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "52a301a9b7a3eb7ebe562dd6cef30bd827db6a36cb624065ba9ddbdf508cfb4f",
+      "captureSha256": "0d41d6502ebf3ee380e6f20d507b68e17e5412c15461267e8fc8bd30509a6b4d",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-slow-1280x960.png",
+      "residuals": [
+        "This family-specific slowing device adapts the source generator screen rather than reproducing its exact composition.",
+        "The unavailable-items toggle is vertically tight; small views hide part captions while preserving the diagram and statistics."
+      ],
+      "observations": [
+        "Physically opened in original detail: slowing basin, grate and foundation remain fully visible, with intentional exploded spacing and arrows; no assembly collision or clipping.",
+        "Health, cost, enemy speed factor, radius, duration and slowing rule are readable; install/apply controls are separated."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "fa4cfa65e5819b959c8052c703c55995f53bb895f80254590feac23530b8bc0c",
+      "captureSha256": "9f486131680f137f5aba67c349dbb2140c1f0dd3df041afd6742acf870d200d7",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-slow-1600x900.png",
+      "residuals": [
+        "This family-specific slowing device adapts the source generator screen rather than reproducing its exact composition.",
+        "The unavailable-items toggle is vertically tight; small views hide part captions while preserving the diagram and statistics."
+      ],
+      "observations": [
+        "Physically opened in original detail: slowing basin, grate and foundation remain fully visible, with intentional exploded spacing and arrows; no assembly collision or clipping.",
+        "Health, cost, enemy speed factor, radius, duration and slowing rule are readable; install/apply controls are separated."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "6aaab0f40d7df0797dde8ce489db52251483434b7108fd77b4fa0cfe043e3d5c",
+      "captureSha256": "f45dd95663ef36bc4fa6e8881055d24ee85435760da00dda07ce2e4cbefa4053",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-repair-1024x768.png",
+      "residuals": [
+        "The repair-family illustration and generic parts-picker arrangement differ from the generator-specific source composition.",
+        "The third equipment card is partly cropped in its scroll region except at the largest view; the unavailable-items toggle has tight vertical text padding."
+      ],
+      "observations": [
+        "Physically opened in original detail: repair workshop, roof shell and foundation are fully visible with arrows and intentional exploded spacing; no detached-looking accidental pieces.",
+        "Repair rate, radius, health, cost, placement rule and apply/install actions are readable; no primary controls overlap."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "921a7e2aac9158fc6d8746e6fc1076983b35f1babe383c11e46e0ac54fb59e10",
+      "captureSha256": "0922d09b8494cc3ff1a8c8565a86837f05e2c429583b520c357c5b35622b188c",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-repair-1280x720.png",
+      "residuals": [
+        "The repair-family illustration and generic parts-picker arrangement differ from the generator-specific source composition.",
+        "The third equipment card is partly cropped in its scroll region except at the largest view; the unavailable-items toggle has tight vertical text padding."
+      ],
+      "observations": [
+        "Physically opened in original detail: repair workshop, roof shell and foundation are fully visible with arrows and intentional exploded spacing; no detached-looking accidental pieces.",
+        "Repair rate, radius, health, cost, placement rule and apply/install actions are readable; no primary controls overlap."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "7a756e6bcb254a618102b18dbd3c3a39b05d2e2e5067ece5450e49d4d37e120b",
+      "captureSha256": "5d8e992d129ad3f6dc79bc91dcd89fa345f44854a1315a7846777d3f5eb13b58",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-repair-1920x1080.png",
+      "residuals": [
+        "The repair-family illustration and generic parts-picker arrangement differ from the generator-specific source composition.",
+        "The third equipment card is partly cropped in its scroll region except at the largest view; the unavailable-items toggle has tight vertical text padding."
+      ],
+      "observations": [
+        "Physically opened in original detail: repair workshop, roof shell and foundation are fully visible with arrows and intentional exploded spacing; no detached-looking accidental pieces.",
+        "Repair rate, radius, health, cost, placement rule and apply/install actions are readable; no primary controls overlap."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "027a49f634368e67878019201292c2adf2097f531e0f3dfbf155c4403d4f4fdc",
+      "captureSha256": "63c1b2d9eebdee7f56176a0e7253b597c906e89cb6e79786a3af5a53700bf20b",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-repair-1280x960.png",
+      "residuals": [
+        "The repair-family illustration and generic parts-picker arrangement differ from the generator-specific source composition.",
+        "The third equipment card is partly cropped in its scroll region except at the largest view; the unavailable-items toggle has tight vertical text padding."
+      ],
+      "observations": [
+        "Physically opened in original detail: repair workshop, roof shell and foundation are fully visible with arrows and intentional exploded spacing; no detached-looking accidental pieces.",
+        "Repair rate, radius, health, cost, placement rule and apply/install actions are readable; no primary controls overlap."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    },
+    {
+      "verdict": "PASS_WITH_RESIDUALS",
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "metadataSha256": "caa28a34dbe71800eee7afb36bafe0752278fc5243bcdf0ebb408525438e2014",
+      "captureSha256": "0fd591a19f8ab46673a07c6e330663dad495c814204760418c2773649dc83847",
+      "capturePath": "docs/validation/modular-album/art3-screenshots/art3-29-repair-1600x900.png",
+      "residuals": [
+        "The repair-family illustration and generic parts-picker arrangement differ from the generator-specific source composition.",
+        "The third equipment card is partly cropped in its scroll region except at the largest view; the unavailable-items toggle has tight vertical text padding."
+      ],
+      "observations": [
+        "Physically opened in original detail: repair workshop, roof shell and foundation are fully visible with arrows and intentional exploded spacing; no detached-looking accidental pieces.",
+        "Repair rate, radius, health, cost, placement rule and apply/install actions are readable; no primary controls overlap."
+      ],
+      "inspected": true,
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc"
+    }
+  ],
+  "inspectedCount": 40
+}

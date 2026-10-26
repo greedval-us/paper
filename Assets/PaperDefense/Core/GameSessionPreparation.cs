@@ -66,6 +66,7 @@ namespace PaperDefense.Core
                     Kind = target.Kind, VisualScale=definition.VisualScale, DrawingTier = target.DrawingTier, SpeedScale = target.Stationary ? 0 : 1,
                     RewardBudget = Math.Max(0, definition.Reward), ObjectiveIndex = -1
                 });
+                session.Statistics.RecordSpawn(target.Kind, target.DrawingTier);
             }
             for (int i = 0; i < blotCount; i++)
             {

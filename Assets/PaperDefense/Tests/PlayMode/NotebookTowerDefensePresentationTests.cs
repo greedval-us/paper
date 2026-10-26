@@ -50,7 +50,7 @@ namespace PaperDefense.Tests
         }
         Button Card(int index) => root.GetComponentsInChildren<Button>(true).Single(button => button.name == "Tool " + index);
 
-        [Test] public void MainPresetShowsTwelveNonOverlappingIconCardsAndAllSixFamilies()
+        [Test] public void MainPresetShowsEightLoadoutAndEightToolCardsWithoutOverlapAndAllSixFamilies()
         {
             Open(true);
             Assert.That(run.Session.Battlefield, Is.Not.Null);
@@ -64,24 +64,34 @@ namespace PaperDefense.Tests
                 foreach (DrawingTier tier in Enum.GetValues(typeof(DrawingTier)))
                     foreach (NotebookEnemyMotion motion in Enum.GetValues(typeof(NotebookEnemyMotion)))
                         Assert.That(theme.FindClip(NotebookAnimationState.EnemyId(kind, tier, motion)), Is.Not.Null, kind + "/" + tier + "/" + motion);
-            var cards = Enumerable.Range(0, 12).Select(Card).ToArray();
+            var cards = Enumerable.Range(0, ProfileLimits.LoadoutSlotCount + icons.Length).Select(Card).ToArray();
             Assert.That(cards.All(card => card.gameObject.activeSelf), Is.True);
             var ordered = cards.Select(card => card.GetComponent<RectTransform>()).OrderBy(rect => rect.anchoredPosition.x).ToArray();
             for (int i = 0; i < ordered.Length; i++)
             {
+                Assert.That(ordered[i].anchoredPosition.x, Is.GreaterThanOrEqualTo(0));
                 Assert.That(ordered[i].anchoredPosition.x + ordered[i].rect.width, Is.LessThanOrEqualTo(1552));
                 if (i > 0) Assert.That(ordered[i].anchoredPosition.x, Is.GreaterThan(ordered[i - 1].anchoredPosition.x + ordered[i - 1].rect.width));
             }
-            Assert.That(cards.Take(4).All(card => card.GetComponentInChildren<BlueprintSketch>(true) != null), Is.True);
-            Assert.That(cards.Skip(4).All(card => card.GetComponentInChildren<NotebookArtGraphic>(true) != null), Is.True);
+            Assert.That(cards.Take(ProfileLimits.LoadoutSlotCount).All(card => card.GetComponentInChildren<BlueprintSketch>(true) != null), Is.True);
+            Assert.That(cards.Skip(ProfileLimits.LoadoutSlotCount).All(card => card.GetComponentInChildren<NotebookArtGraphic>(true) != null), Is.True);
+            foreach (var card in cards)
+            {
+                var bounds = card.GetComponent<RectTransform>();
+                foreach (var child in card.GetComponentsInChildren<RectTransform>(true).Where(child => child.parent == card.transform))
+                {
+                    Assert.That(child.anchoredPosition.x, Is.GreaterThanOrEqualTo(0), card.name + "/" + child.name);
+                    Assert.That(child.anchoredPosition.x + child.rect.width, Is.LessThanOrEqualTo(bounds.rect.width), card.name + "/" + child.name);
+                }
+            }
             var navigation = (Text)typeof(NotebookHud).GetField("navigationHint", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(hud);
             Assert.That(navigation.text, Does.Contain("дёготь").And.Contain("ремонт"));
         }
 
-        [TestCase(10, StructureKind.TarPit)]
-        [TestCase(11, StructureKind.RepairPost)]
-        [TestCase(4, StructureKind.Wall)]
-        [TestCase(5, StructureKind.Spikes)]
+        [TestCase(ProfileLimits.LoadoutSlotCount + 6, StructureKind.TarPit)]
+        [TestCase(ProfileLimits.LoadoutSlotCount + 7, StructureKind.RepairPost)]
+        [TestCase(ProfileLimits.LoadoutSlotCount, StructureKind.Wall)]
+        [TestCase(ProfileLimits.LoadoutSlotCount + 1, StructureKind.Spikes)]
         public void NewToolCardSelectionPriceAndLegalPlacementAgreeWithCore(int index, StructureKind kind)
         {
             Open(true); Card(index).onClick.Invoke();
@@ -114,7 +124,8 @@ namespace PaperDefense.Tests
             Assert.That(run.Session.Balance.HasStructure(StructureKind.RepairPost), Is.False);
             var navigation = (Text)typeof(NotebookHud).GetField("navigationHint", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(hud);
             Assert.That(navigation.text, Does.Not.Contain("дёготь").And.Not.Contain("ремонт"));
-            foreach (int index in new[] { 10, 11 }) Assert.That(Card(index).gameObject.activeSelf, Is.False);
+            foreach (int index in new[] { ProfileLimits.LoadoutSlotCount + 6, ProfileLimits.LoadoutSlotCount + 7 })
+                Assert.That(Card(index).gameObject.activeSelf, Is.False);
             foreach (bool constructionOnly in new[] { false, true })
             {
                 input.ConstructionOnly = constructionOnly;
@@ -145,7 +156,41 @@ namespace PaperDefense.Tests
                 Assert.That(mesh.colors32.Any(color => color.Equals((Color32)NotebookPalette.Green)), Is.True, "A full HP bar is visible before damage.");
                 pen.Clear(); DoodleGlyphs.Enemy(pen, Enemy(2.4f), 0, compact); pen.Upload();
                 Assert.That(mesh.bounds.size.x, Is.GreaterThan(first.size.x * 2));
-                Assert.That(mesh.bounds.max.y, Is.GreaterThan(first.max.y + 1));
+                Assert.That(mesh.bounds.max.y, Is.GreaterThan(first.max.y), "A scaled enemy and its attached bar grow together.");
+            }
+            finally { Object.DestroyImmediate(mesh); }
+        }
+
+        [TestCase(EnemyKind.Doodle)] [TestCase(EnemyKind.Runner)] [TestCase(EnemyKind.Gnawer)]
+        [TestCase(EnemyKind.Spitter)] [TestCase(EnemyKind.Brute)] [TestCase(EnemyKind.Bulwark)]
+        public void EnemyHealthBarFollowsAnimatedSilhouetteAtEveryPresentationScale(EnemyKind kind)
+        {
+            var mesh = new Mesh();
+            try
+            {
+                var pen = new MeshPen(mesh);
+                foreach (float scale in new[] { 1f, 2.4f })
+                foreach (float presentation in new[] { 1f, NotebookEnemyView.ModernScale })
+                foreach (float windup in new[] { 0f, .3f })
+                {
+                    var enemy = (EnemyView)typeof(EnemyView).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Single()
+                        .Invoke(new object[] { new EnemyState { Id = 7, Kind = kind, Health = 100, MaxHealth = 100,
+                            VisualScale = scale, Position = new Point2(10, 10), WindupRemaining = windup } });
+                    pen.Clear(); DoodleGlyphs.Enemy(pen, enemy, .21f, showHealth: false, uniformScale: presentation); pen.Upload();
+                    var body = mesh.bounds;
+                    pen.Clear();
+                    // An earlier actor in the shared batch must not affect this enemy's anchor.
+                    pen.Rect(-100, -100, 200, 200, Color.black);
+                    DoodleGlyphs.Enemy(pen, enemy, .21f, uniformScale: presentation); pen.Upload();
+                    var points = mesh.vertices; var colors = mesh.colors32;
+                    var bar = points.Where((point, index) => colors[index].Equals((Color32)NotebookPalette.Green)).ToArray();
+                    Assert.That(bar.Length, Is.EqualTo(4), kind + " retains its full health indicator.");
+                    float gap = bar.Min(point => point.y) - body.max.y;
+                    Assert.That(gap, Is.GreaterThan(.06f * presentation), kind + " must clear its visible head and border.");
+                    Assert.That(gap, Is.LessThanOrEqualTo(.18f * scale * presentation), kind + " must stay attached to its current silhouette.");
+                    Assert.That((bar.Min(point => point.x) + bar.Max(point => point.x)) * .5f,
+                        Is.EqualTo(body.center.x).Within(.001f), kind + " follows the animated body's center.");
+                }
             }
             finally { Object.DestroyImmediate(mesh); }
         }

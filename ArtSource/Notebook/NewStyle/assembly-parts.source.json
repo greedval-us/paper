@@ -1,0 +1,4690 @@
+{
+  "schemaVersion": 2,
+  "revision": "modular-full-catalog-2026-10-24-v8",
+  "foundations": [
+    {
+      "id": "chassis.standard",
+      "sockets": [
+        {
+          "slot": 0,
+          "order": 0,
+          "position": {
+            "x": 0.16,
+            "y": 0.78
+          },
+          "diameter": 0.29
+        },
+        {
+          "slot": 1,
+          "order": 1,
+          "position": {
+            "x": 0.84,
+            "y": 0.78
+          },
+          "diameter": 0.29
+        }
+      ]
+    },
+    {
+      "id": "chassis.heavy",
+      "sockets": [
+        {
+          "slot": 0,
+          "order": 0,
+          "position": {
+            "x": 0.34,
+            "y": 0.79
+          },
+          "diameter": 0.29
+        },
+        {
+          "slot": 1,
+          "order": 1,
+          "position": {
+            "x": 0.66,
+            "y": 0.79
+          },
+          "diameter": 0.29
+        }
+      ]
+    },
+    {
+      "id": "chassis.precision",
+      "sockets": [
+        {
+          "slot": 0,
+          "order": 0,
+          "position": {
+            "x": 0.5,
+            "y": 0.85
+          },
+          "diameter": 0.44
+        }
+      ]
+    },
+    {
+      "id": "chassis.battery",
+      "sockets": [
+        {
+          "slot": 0,
+          "order": 1,
+          "position": {
+            "x": 0.3,
+            "y": 0.755
+          },
+          "diameter": 0.23
+        },
+        {
+          "slot": 1,
+          "order": 0,
+          "position": {
+            "x": 0.5,
+            "y": 0.835
+          },
+          "diameter": 0.23
+        },
+        {
+          "slot": 2,
+          "order": 2,
+          "position": {
+            "x": 0.7,
+            "y": 0.755
+          },
+          "diameter": 0.23
+        }
+      ]
+    }
+  ],
+  "weapons": [
+    {
+      "id": "weapon.gun",
+      "canvas": {
+        "x": 211,
+        "y": 296
+      },
+      "attach": {
+        "x": 111.83,
+        "y": 23.68
+      },
+      "diameter": 164.58,
+      "muzzle": {
+        "x": 163,
+        "y": 267
+      },
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 211,
+        "height": 296
+      }
+    },
+    {
+      "id": "weapon.piercer",
+      "canvas": {
+        "x": 243,
+        "y": 314
+      },
+      "attach": {
+        "x": 94.77,
+        "y": 25.12
+      },
+      "diameter": 179.82,
+      "muzzle": {
+        "x": 229,
+        "y": 299
+      },
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 243,
+        "height": 314
+      }
+    },
+    {
+      "id": "weapon.mortar",
+      "canvas": {
+        "x": 240,
+        "y": 270
+      },
+      "attach": {
+        "x": 105.6,
+        "y": 21.6
+      },
+      "diameter": 201.6,
+      "muzzle": {
+        "x": 191,
+        "y": 219
+      },
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 240,
+        "height": 270
+      }
+    },
+    {
+      "id": "weapon.fan",
+      "canvas": {
+        "x": 256,
+        "y": 288
+      },
+      "attach": {
+        "x": 92.16,
+        "y": 23.04
+      },
+      "diameter": 174.08,
+      "muzzle": {
+        "x": 211,
+        "y": 213
+      },
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 256,
+        "height": 288
+      }
+    },
+    {
+      "id": "weapon.ricochet",
+      "canvas": {
+        "x": 262,
+        "y": 234
+      },
+      "attach": {
+        "x": 81.22,
+        "y": 18.72
+      },
+      "diameter": 154.58,
+      "muzzle": {
+        "x": 150,
+        "y": 183
+      },
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 262,
+        "height": 234
+      }
+    },
+    {
+      "id": "weapon.stapler",
+      "canvas": {
+        "x": 287,
+        "y": 248
+      },
+      "attach": {
+        "x": 117.67,
+        "y": 19.84
+      },
+      "diameter": 192.29,
+      "muzzle": {
+        "x": 261,
+        "y": 188
+      },
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 287,
+        "height": 248
+      }
+    },
+    {
+      "id": "weapon.blotter",
+      "canvas": {
+        "x": 243,
+        "y": 267
+      },
+      "attach": {
+        "x": 87.48,
+        "y": 21.36
+      },
+      "diameter": 167.67,
+      "muzzle": {
+        "x": 130,
+        "y": 158
+      },
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 243,
+        "height": 267
+      }
+    }
+  ],
+  "pilots": [
+    {
+      "chassisId": "chassis.standard",
+      "weaponId": "weapon.gun",
+      "revision": "modular-gun-pilot-2026-10-18-v1",
+      "muzzleFragment": "barrels",
+      "pivotOffset": {
+        "x": 0,
+        "y": 46
+      },
+      "muzzlePoint": {
+        "x": 444,
+        "y": 460
+      },
+      "fragments": [
+        {
+          "id": "support",
+          "spriteId": "part.gun.support",
+          "canvas": {
+            "x": 492,
+            "y": 278
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 492,
+            "height": 278
+          },
+          "attach": {
+            "x": 246,
+            "y": 90
+          },
+          "offset": {
+            "x": 0,
+            "y": 0
+          },
+          "scale": 0.3400413223140496,
+          "radians": 0,
+          "group": 0,
+          "layer": 1,
+          "componentId": "turn.standard"
+        },
+        {
+          "id": "cradle-back",
+          "spriteId": "part.gun.cradle-back",
+          "canvas": {
+            "x": 427,
+            "y": 542
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 427,
+            "height": 542
+          },
+          "attach": {
+            "x": 211,
+            "y": 34
+          },
+          "offset": {
+            "x": 0,
+            "y": 46
+          },
+          "scale": 0.22799999999999998,
+          "radians": 0.2818063761104834,
+          "group": 1,
+          "layer": 3,
+          "componentId": "core.gun"
+        },
+        {
+          "id": "barrels",
+          "spriteId": "part.gun.barrels",
+          "canvas": {
+            "x": 522,
+            "y": 554
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 522,
+            "height": 554
+          },
+          "attach": {
+            "x": 74,
+            "y": 60
+          },
+          "offset": {
+            "x": 3.5125574422285517,
+            "y": 102.6547779017361
+          },
+          "scale": 0.1824,
+          "radians": 0.7818063761104834,
+          "group": 2,
+          "layer": 2,
+          "componentId": "head.gun"
+        },
+        {
+          "id": "collar-front",
+          "spriteId": "part.gun.collar-front",
+          "canvas": {
+            "x": 413,
+            "y": 242
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 413,
+            "height": 242
+          },
+          "attach": {
+            "x": 206,
+            "y": 120
+          },
+          "offset": {
+            "x": -2.1530550988099506,
+            "y": 141.98334931508427
+          },
+          "scale": 0.11399999999999999,
+          "radians": -0.31819362388951655,
+          "group": 1,
+          "layer": 7,
+          "componentId": "core.gun"
+        },
+        {
+          "id": "sight",
+          "spriteId": "part.pilot.sight",
+          "componentId": "sight.iron",
+          "canvas": {
+            "x": 508,
+            "y": 419
+          },
+          "attach": {
+            "x": 257.5,
+            "y": 15.5
+          },
+          "offset": {
+            "x": -14.9675,
+            "y": 117.6025
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 508,
+            "height": 419
+          },
+          "scale": 0.0443996062992126,
+          "radians": 0,
+          "group": 1,
+          "layer": 4
+        },
+        {
+          "id": "magazine",
+          "spriteId": "part.pilot.magazine",
+          "componentId": "magazine.standard",
+          "canvas": {
+            "x": 375,
+            "y": 461
+          },
+          "attach": {
+            "x": 38.5,
+            "y": 169.5
+          },
+          "offset": {
+            "x": -32,
+            "y": 95
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 375,
+            "height": 461
+          },
+          "scale": 0.08008,
+          "radians": 0,
+          "group": 1,
+          "layer": 5
+        },
+        {
+          "id": "trigger",
+          "spriteId": "part.pilot.trigger",
+          "componentId": "trigger.standard",
+          "canvas": {
+            "x": 345,
+            "y": 423
+          },
+          "attach": {
+            "x": 149.5,
+            "y": 123.5
+          },
+          "offset": {
+            "x": 20,
+            "y": 84
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 345,
+            "height": 423
+          },
+          "scale": 0.0646231884057971,
+          "radians": 0,
+          "group": 1,
+          "layer": 6
+        },
+        {
+          "id": "bearing",
+          "spriteId": "part.pilot.bearing",
+          "componentId": "turn.standard",
+          "canvas": {
+            "x": 512,
+            "y": 395
+          },
+          "attach": {
+            "x": 260.5,
+            "y": 214.5
+          },
+          "offset": {
+            "x": 0,
+            "y": 35
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 512,
+            "height": 395
+          },
+          "scale": 0.2958984375,
+          "radians": 0,
+          "group": 0,
+          "layer": 0
+        }
+      ]
+    }
+  ],
+  "visualSchemaVersion": 1,
+  "frameBounds": {
+    "x": -0.34468,
+    "y": -0.28,
+    "width": 0.69936,
+    "height": 0.62
+  },
+  "fits": {
+    "SchemaVersion": 1,
+    "Revision": "modular-full-catalog-2026-10-24-v8",
+    "Parts": [
+      {
+        "Id": "frame.standard",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 0,
+        "AttachType": "assembly.Frame",
+        "ExpectedSocketType": "assembly.Frame"
+      },
+      {
+        "Id": "frame.heavy",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 0,
+        "AttachType": "assembly.Frame",
+        "ExpectedSocketType": "assembly.Frame"
+      },
+      {
+        "Id": "frame.precision",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 0,
+        "AttachType": "assembly.Frame",
+        "ExpectedSocketType": "assembly.Frame"
+      },
+      {
+        "Id": "frame.battery",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 0,
+        "AttachType": "assembly.Frame",
+        "ExpectedSocketType": "assembly.Frame"
+      },
+      {
+        "Id": "hull.standard",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 1,
+        "AttachType": "assembly.Hull",
+        "ExpectedSocketType": "assembly.Hull"
+      },
+      {
+        "Id": "hull.light",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 1,
+        "AttachType": "assembly.Hull",
+        "ExpectedSocketType": "assembly.Hull"
+      },
+      {
+        "Id": "hull.reinforced",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 1,
+        "AttachType": "assembly.Hull",
+        "ExpectedSocketType": "assembly.Hull"
+      },
+      {
+        "Id": "armor.none",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 2,
+        "AttachType": "assembly.Armor",
+        "ExpectedSocketType": "assembly.Armor"
+      },
+      {
+        "Id": "armor.plate",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 2,
+        "AttachType": "assembly.Armor",
+        "ExpectedSocketType": "assembly.Armor"
+      },
+      {
+        "Id": "armor.front",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 2,
+        "AttachType": "assembly.Armor",
+        "ExpectedSocketType": "assembly.Armor"
+      },
+      {
+        "Id": "feed.standard",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 3,
+        "AttachType": "assembly.Feed",
+        "ExpectedSocketType": "assembly.Feed"
+      },
+      {
+        "Id": "feed.boost",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 3,
+        "AttachType": "assembly.Feed",
+        "ExpectedSocketType": "assembly.Feed"
+      },
+      {
+        "Id": "turn.standard",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 4,
+        "AttachType": "assembly.Turn",
+        "ExpectedSocketType": "assembly.Turn"
+      },
+      {
+        "Id": "turn.quick",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 4,
+        "AttachType": "assembly.Turn",
+        "ExpectedSocketType": "assembly.Turn"
+      },
+      {
+        "Id": "core.gun",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 5,
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard"
+      },
+      {
+        "Id": "core.piercer",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 5,
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard"
+      },
+      {
+        "Id": "core.mortar",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 5,
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard"
+      },
+      {
+        "Id": "core.fan",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 5,
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard"
+      },
+      {
+        "Id": "core.ricochet",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 5,
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard"
+      },
+      {
+        "Id": "core.stapler",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 5,
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard"
+      },
+      {
+        "Id": "core.blotter",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 5,
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard"
+      },
+      {
+        "Id": "head.gun",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 6,
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head"
+      },
+      {
+        "Id": "head.piercer",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 6,
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head"
+      },
+      {
+        "Id": "head.mortar",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 6,
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head"
+      },
+      {
+        "Id": "head.fan",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 6,
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head"
+      },
+      {
+        "Id": "head.ricochet",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 6,
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head"
+      },
+      {
+        "Id": "head.stapler",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 6,
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head"
+      },
+      {
+        "Id": "head.blotter",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 6,
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head"
+      },
+      {
+        "Id": "head.short",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 6,
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head"
+      },
+      {
+        "Id": "head.long",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 6,
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head"
+      },
+      {
+        "Id": "head.wide",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 6,
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head"
+      },
+      {
+        "Id": "sight.iron",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 7,
+        "AttachType": "assembly.Sight",
+        "ExpectedSocketType": "assembly.Sight"
+      },
+      {
+        "Id": "sight.scope",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 7,
+        "AttachType": "assembly.Sight",
+        "ExpectedSocketType": "assembly.Sight"
+      },
+      {
+        "Id": "sight.tracking",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 7,
+        "AttachType": "assembly.Sight",
+        "ExpectedSocketType": "assembly.Sight"
+      },
+      {
+        "Id": "magazine.standard",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 8,
+        "AttachType": "assembly.Magazine",
+        "ExpectedSocketType": "assembly.Magazine"
+      },
+      {
+        "Id": "magazine.drum",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 8,
+        "AttachType": "assembly.Magazine",
+        "ExpectedSocketType": "assembly.Magazine"
+      },
+      {
+        "Id": "magazine.belt",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 8,
+        "AttachType": "assembly.Magazine",
+        "ExpectedSocketType": "assembly.Magazine"
+      },
+      {
+        "Id": "trigger.standard",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 9,
+        "AttachType": "assembly.Trigger",
+        "ExpectedSocketType": "assembly.Trigger"
+      },
+      {
+        "Id": "trigger.burst",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 9,
+        "AttachType": "assembly.Trigger",
+        "ExpectedSocketType": "assembly.Trigger"
+      },
+      {
+        "Id": "site.wall",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 10,
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site"
+      },
+      {
+        "Id": "site.slow",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 10,
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site"
+      },
+      {
+        "Id": "site.repair",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 10,
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site"
+      },
+      {
+        "Id": "site.generator",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 10,
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site"
+      },
+      {
+        "Id": "function.wall",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 11,
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function"
+      },
+      {
+        "Id": "function.slow",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 11,
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function"
+      },
+      {
+        "Id": "function.repair",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 11,
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function"
+      },
+      {
+        "Id": "function.generator",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 11,
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function"
+      },
+      {
+        "Id": "shell.standard",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 12,
+        "AttachType": "assembly.Shell",
+        "ExpectedSocketType": "assembly.Shell"
+      },
+      {
+        "Id": "shell.light",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 12,
+        "AttachType": "assembly.Shell",
+        "ExpectedSocketType": "assembly.Shell"
+      },
+      {
+        "Id": "shell.reinforced",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 12,
+        "AttachType": "assembly.Shell",
+        "ExpectedSocketType": "assembly.Shell"
+      },
+      {
+        "Id": "utility.none",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 13,
+        "AttachType": "assembly.Utility",
+        "ExpectedSocketType": "assembly.Utility"
+      },
+      {
+        "Id": "utility.armor",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 13,
+        "AttachType": "assembly.Utility",
+        "ExpectedSocketType": "assembly.Utility"
+      },
+      {
+        "Id": "utility.range",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 13,
+        "AttachType": "assembly.Utility",
+        "ExpectedSocketType": "assembly.Utility"
+      },
+      {
+        "Id": "utility.economy",
+        "Revision": 1,
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "SocketSchemaVersion": 1,
+        "Category": 13,
+        "AttachType": "assembly.Utility",
+        "ExpectedSocketType": "assembly.Utility"
+      }
+    ],
+    "Frames": [
+      {
+        "FrameId": "frame.standard",
+        "Revision": 1,
+        "Mounts": [
+          {
+            "SlotIndex": 0,
+            "SocketId": "mount.0",
+            "SocketType": "gun.standard",
+            "X": 0,
+            "Y": 0
+          },
+          {
+            "SlotIndex": 1,
+            "SocketId": "mount.1",
+            "SocketType": "gun.standard",
+            "X": 0,
+            "Y": 0
+          }
+        ],
+        "Keepouts": []
+      },
+      {
+        "FrameId": "frame.battery",
+        "Revision": 1,
+        "Mounts": [
+          {
+            "SlotIndex": 0,
+            "SocketId": "mount.0",
+            "SocketType": "gun.standard",
+            "X": -0.51,
+            "Y": 0.3889230769230769
+          },
+          {
+            "SlotIndex": 1,
+            "SocketId": "mount.1",
+            "SocketType": "gun.standard",
+            "X": -0.0595,
+            "Y": 0.7550769230769231
+          },
+          {
+            "SlotIndex": 2,
+            "SocketId": "mount.2",
+            "SocketType": "gun.standard",
+            "X": 0.42499999999999993,
+            "Y": 0.3889230769230769
+          }
+        ],
+        "Keepouts": [
+          {
+            "X": -0.8133846153846154,
+            "Y": -0.3747692307692308,
+            "Width": 1.6163076923076922,
+            "Height": 0.23350153846153845,
+            "ArmorOnly": false
+          },
+          {
+            "X": -0.8133846153846154,
+            "Y": -0.14126769230769232,
+            "Width": 1.6163076923076922,
+            "Height": 0.1816123076923077,
+            "ArmorOnly": false
+          }
+        ]
+      },
+      {
+        "FrameId": "frame.heavy",
+        "Revision": 1,
+        "Mounts": [
+          {
+            "SlotIndex": 0,
+            "SocketId": "mount.0",
+            "SocketType": "gun.standard",
+            "X": -0.24689162011173177,
+            "Y": 0.24346368715083788
+          },
+          {
+            "SlotIndex": 1,
+            "SocketId": "mount.1",
+            "SocketType": "gun.standard",
+            "X": 0.24910837988826828,
+            "Y": 0.24346368715083788
+          }
+        ],
+        "Keepouts": [
+          {
+            "X": -0.5749720670391061,
+            "Y": -0.33843575418994415,
+            "Width": 1.1256983240223464,
+            "Height": 0.14838435754189944,
+            "ArmorOnly": false
+          },
+          {
+            "X": -0.5749720670391061,
+            "Y": -0.1900513966480447,
+            "Width": 1.1256983240223464,
+            "Height": 0.11541005586592179,
+            "ArmorOnly": false
+          }
+        ]
+      },
+      {
+        "FrameId": "frame.precision",
+        "Revision": 1,
+        "Mounts": [
+          {
+            "SlotIndex": 0,
+            "SocketId": "mount.0",
+            "SocketType": "gun.standard",
+            "X": 0,
+            "Y": 0.2527782101167315
+          }
+        ],
+        "Keepouts": [
+          {
+            "X": -0.41945525291828795,
+            "Y": -0.2190661478599222,
+            "Width": 0.8217898832684825,
+            "Height": 0.11155797665369649,
+            "ArmorOnly": false
+          },
+          {
+            "X": -0.41945525291828795,
+            "Y": -0.10750817120622569,
+            "Width": 0.8217898832684825,
+            "Height": 0.08676731517509728,
+            "ArmorOnly": false
+          }
+        ]
+      }
+    ],
+    "Weapons": [
+      {
+        "MechanismId": "core.gun",
+        "Revision": 1,
+        "RequiredParts": [
+          {
+            "Id": "core.gun",
+            "Revision": 1
+          },
+          {
+            "Id": "head.gun",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          }
+        ],
+        "MountType": "gun.standard",
+        "PivotX": 0,
+        "PivotY": 0,
+        "MinRadians": -3.141592653589793,
+        "MaxRadians": 3.141592653589793,
+        "RecoilLimit": 0.085,
+        "Clearance": 0.01,
+        "Regions": []
+      }
+    ]
+  },
+  "foundationParts": [
+    {
+      "partId": "frame.standard",
+      "spriteId": "chassis.standard",
+      "canvas": {
+        "x": 282,
+        "y": 250
+      },
+      "position": {
+        "x": -0.34468,
+        "y": -0.28
+      },
+      "scale": 0.00248,
+      "layer": 1,
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 282,
+        "height": 250
+      },
+      "region": {
+        "x": 0,
+        "y": 0,
+        "width": 282,
+        "height": 45
+      },
+      "collisionMode": "solid"
+    },
+    {
+      "partId": "hull.standard",
+      "spriteId": "chassis.standard",
+      "canvas": {
+        "x": 282,
+        "y": 250
+      },
+      "position": {
+        "x": -0.34468,
+        "y": -0.28
+      },
+      "scale": 0.00248,
+      "layer": 0,
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 282,
+        "height": 250
+      },
+      "region": {
+        "x": 0,
+        "y": 120,
+        "width": 282,
+        "height": 130
+      },
+      "collisionMode": "mount-contact"
+    },
+    {
+      "partId": "hull.standard",
+      "spriteId": "chassis.standard",
+      "canvas": {
+        "x": 282,
+        "y": 250
+      },
+      "position": {
+        "x": -0.34468,
+        "y": -0.28
+      },
+      "scale": 0.00248,
+      "layer": 14,
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 282,
+        "height": 250
+      },
+      "region": {
+        "x": 0,
+        "y": 45,
+        "width": 282,
+        "height": 75
+      },
+      "collisionMode": "solid"
+    },
+    {
+      "partId": "feed.standard",
+      "spriteId": "part.pilot.feed",
+      "canvas": {
+        "x": 496,
+        "y": 372
+      },
+      "position": {
+        "x": -0.08,
+        "y": -0.14
+      },
+      "scale": 0.000324233870967742,
+      "layer": 2,
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 496,
+        "height": 372
+      },
+      "region": {
+        "x": 0,
+        "y": 0,
+        "width": 496,
+        "height": 372
+      },
+      "collisionMode": "solid"
+    },
+    {
+      "partId": "armor.plate",
+      "spriteId": "part.pilot.armor",
+      "canvas": {
+        "x": 324,
+        "y": 416
+      },
+      "position": {
+        "x": -0.135,
+        "y": -0.255
+      },
+      "scale": 0.0006453124999999999,
+      "layer": 15,
+      "trim": {
+        "x": 0,
+        "y": 0,
+        "width": 324,
+        "height": 416
+      },
+      "region": {
+        "x": 0,
+        "y": 0,
+        "width": 324,
+        "height": 416
+      },
+      "collisionMode": "armor"
+    }
+  ],
+  "visualParts": [
+    {
+      "partId": "frame.standard",
+      "revision": 1,
+      "category": 0,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.frame.standard",
+          "socketId": "frame.standard.root",
+          "motion": "fixed",
+          "collisionMode": "solid",
+          "layer": 1,
+          "family": 0,
+          "canvas": {
+            "x": 1536,
+            "y": 1024
+          },
+          "attach": {
+            "x": 0,
+            "y": 0
+          },
+          "position": {
+            "x": -0.4822571556263724,
+            "y": -0.43584730777451763
+          },
+          "trim": {
+            "x": 19,
+            "y": 260,
+            "width": 1499,
+            "height": 475
+          },
+          "region": {
+            "x": 19,
+            "y": 260,
+            "width": 1499,
+            "height": 124
+          },
+          "scale": 0.0006276353885315664,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ],
+      "hullBaseFraction": 0.26105263157894737,
+      "hullFrontFraction": 0.5284210526315789,
+      "mounts": [
+        {
+          "slot": 0,
+          "position": {
+            "x": 368,
+            "y": 640
+          }
+        },
+        {
+          "slot": 1,
+          "position": {
+            "x": 1163,
+            "y": 640
+          }
+        }
+      ]
+    },
+    {
+      "partId": "frame.heavy",
+      "revision": 1,
+      "category": 0,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.frame.heavy",
+          "socketId": "frame.heavy.root",
+          "motion": "fixed",
+          "collisionMode": "solid",
+          "layer": 1,
+          "family": 0,
+          "canvas": {
+            "x": 358,
+            "y": 350
+          },
+          "attach": {
+            "x": 0,
+            "y": 0
+          },
+          "position": {
+            "x": -0.6684916201117318,
+            "y": -0.38
+          },
+          "trim": {
+            "x": 27,
+            "y": 12,
+            "width": 325,
+            "height": 238
+          },
+          "region": {
+            "x": 27,
+            "y": 12,
+            "width": 325,
+            "height": 42.839999999999996
+          },
+          "scale": 0.003463687150837989,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ],
+      "mounts": [
+        {
+          "slot": 0,
+          "position": {
+            "x": 121.72000000000001,
+            "y": 179.99999999999997
+          }
+        },
+        {
+          "slot": 1,
+          "position": {
+            "x": 264.92,
+            "y": 179.99999999999997
+          }
+        }
+      ]
+    },
+    {
+      "partId": "frame.precision",
+      "revision": 1,
+      "category": 0,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.frame.precision",
+          "socketId": "frame.precision.root",
+          "motion": "fixed",
+          "collisionMode": "solid",
+          "layer": 1,
+          "family": 0,
+          "canvas": {
+            "x": 257,
+            "y": 350
+          },
+          "attach": {
+            "x": 0,
+            "y": 0
+          },
+          "position": {
+            "x": -0.44,
+            "y": -0.38
+          },
+          "trim": {
+            "x": 6,
+            "y": 47,
+            "width": 240,
+            "height": 181
+          },
+          "region": {
+            "x": 6,
+            "y": 47,
+            "width": 240,
+            "height": 32.58
+          },
+          "scale": 0.003424124513618677,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ],
+      "mounts": [
+        {
+          "slot": 0,
+          "position": {
+            "x": 128.5,
+            "y": 184.8
+          }
+        }
+      ]
+    },
+    {
+      "partId": "frame.battery",
+      "revision": 1,
+      "category": 0,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.frame.battery",
+          "socketId": "frame.battery.root",
+          "motion": "fixed",
+          "collisionMode": "solid",
+          "layer": 1,
+          "family": 0,
+          "canvas": {
+            "x": 627,
+            "y": 627
+          },
+          "attach": {
+            "x": 0,
+            "y": 0
+          },
+          "position": {
+            "x": -0.975,
+            "y": -0.88
+          },
+          "trim": {
+            "x": 31,
+            "y": 183,
+            "width": 566,
+            "height": 197
+          },
+          "region": {
+            "x": 31,
+            "y": 183,
+            "width": 566,
+            "height": 35.46
+          },
+          "scale": 0.003110047846889952,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ],
+      "hullBaseFraction": 0.18,
+      "hullFrontFraction": 0.35,
+      "mounts": [
+        {
+          "slot": 0,
+          "position": {
+            "x": 168,
+            "y": 292
+          }
+        },
+        {
+          "slot": 1,
+          "position": {
+            "x": 312,
+            "y": 344
+          }
+        },
+        {
+          "slot": 2,
+          "position": {
+            "x": 459,
+            "y": 290
+          }
+        }
+      ]
+    },
+    {
+      "partId": "hull.standard",
+      "revision": 1,
+      "category": 1,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.frame.standard",
+          "socketId": "hull.standard.0",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 0,
+          "family": 0,
+          "canvas": {
+            "x": 1536,
+            "y": 1024
+          },
+          "attach": {
+            "x": 0,
+            "y": 0
+          },
+          "position": {
+            "x": -0.4822571556263724,
+            "y": -0.43584730777451763
+          },
+          "trim": {
+            "x": 19,
+            "y": 260,
+            "width": 1499,
+            "height": 475
+          },
+          "region": {
+            "x": 19,
+            "y": 511,
+            "width": 1499,
+            "height": 224.00000000000003
+          },
+          "scale": 0.0006276353885315664,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.frame.standard",
+          "socketId": "hull.standard.14",
+          "motion": "fixed",
+          "collisionMode": "solid",
+          "layer": 14,
+          "family": 0,
+          "canvas": {
+            "x": 1536,
+            "y": 1024
+          },
+          "attach": {
+            "x": 0,
+            "y": 0
+          },
+          "position": {
+            "x": -0.4822571556263724,
+            "y": -0.43584730777451763
+          },
+          "trim": {
+            "x": 19,
+            "y": 260,
+            "width": 1499,
+            "height": 475
+          },
+          "region": {
+            "x": 19,
+            "y": 384,
+            "width": 1499,
+            "height": 126.99999999999997
+          },
+          "scale": 0.0006276353885315664,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "hull.light",
+      "revision": 1,
+      "category": 1,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.hull.light",
+          "socketId": "hull.light.root",
+          "motion": "fixed",
+          "collisionMode": "solid",
+          "layer": 14,
+          "family": 0,
+          "canvas": {
+            "x": 314,
+            "y": 350
+          },
+          "attach": {
+            "x": 157,
+            "y": 175
+          },
+          "position": {
+            "x": 0,
+            "y": -0.18
+          },
+          "trim": {
+            "x": 9,
+            "y": 36,
+            "width": 287,
+            "height": 162
+          },
+          "region": {
+            "x": 9,
+            "y": 36,
+            "width": 287,
+            "height": 162
+          },
+          "scale": 0.001182036560586845,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.hull.light.back",
+          "socketId": "hull.light.back",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 0,
+          "family": 0,
+          "canvas": {
+            "x": 300,
+            "y": 294
+          },
+          "attach": {
+            "x": 150,
+            "y": 147
+          },
+          "position": {
+            "x": 0,
+            "y": -0.1
+          },
+          "trim": {
+            "x": 15,
+            "y": 62,
+            "width": 272,
+            "height": 155
+          },
+          "region": {
+            "x": 15,
+            "y": 62,
+            "width": 272,
+            "height": 155
+          },
+          "scale": 0.0014885885852022579,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "hull.reinforced",
+      "revision": 1,
+      "category": 1,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.hull.reinforced",
+          "socketId": "hull.reinforced.root",
+          "motion": "fixed",
+          "collisionMode": "solid",
+          "layer": 14,
+          "family": 0,
+          "canvas": {
+            "x": 365,
+            "y": 285
+          },
+          "attach": {
+            "x": 182.5,
+            "y": 142.5
+          },
+          "position": {
+            "x": 0,
+            "y": -0.18
+          },
+          "trim": {
+            "x": 38,
+            "y": 28,
+            "width": 300,
+            "height": 210
+          },
+          "region": {
+            "x": 38,
+            "y": 28,
+            "width": 300,
+            "height": 210
+          },
+          "scale": 0.00124283117485269,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.hull.reinforced.back",
+          "socketId": "hull.reinforced.back",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 0,
+          "family": 0,
+          "canvas": {
+            "x": 314,
+            "y": 294
+          },
+          "attach": {
+            "x": 157,
+            "y": 147
+          },
+          "position": {
+            "x": 0,
+            "y": -0.1
+          },
+          "trim": {
+            "x": 17,
+            "y": 53,
+            "width": 288,
+            "height": 188
+          },
+          "region": {
+            "x": 17,
+            "y": 53,
+            "width": 288,
+            "height": 188
+          },
+          "scale": 0.0013688608735319058,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "armor.none",
+      "revision": 1,
+      "category": 2,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "Без брони",
+      "fragments": []
+    },
+    {
+      "partId": "armor.plate",
+      "revision": 1,
+      "category": 2,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.pilot.armor",
+          "socketId": "armor.plate.15",
+          "motion": "fixed",
+          "collisionMode": "armor",
+          "layer": 15,
+          "family": 0,
+          "canvas": {
+            "x": 324,
+            "y": 416
+          },
+          "attach": {
+            "x": 0,
+            "y": 0
+          },
+          "position": {
+            "x": -0.05200781249999999,
+            "y": -0.218
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 324,
+            "height": 416
+          },
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 324,
+            "height": 416
+          },
+          "scale": 0.00032265624999999997,
+          "radians": 0
+        }
+      ]
+    },
+    {
+      "partId": "armor.front",
+      "revision": 1,
+      "category": 2,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.armor.front",
+          "socketId": "armor.front.root",
+          "motion": "fixed",
+          "collisionMode": "armor",
+          "layer": 15,
+          "family": 0,
+          "canvas": {
+            "x": 242,
+            "y": 285
+          },
+          "attach": {
+            "x": 121,
+            "y": 142.5
+          },
+          "position": {
+            "x": 0,
+            "y": -0.20435853532773893
+          },
+          "trim": {
+            "x": 26,
+            "y": 15,
+            "width": 203,
+            "height": 252
+          },
+          "region": {
+            "x": 26,
+            "y": 15,
+            "width": 203,
+            "height": 252
+          },
+          "scale": 0.0005357142857142857,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "feed.standard",
+      "revision": 1,
+      "category": 3,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.pilot.feed",
+          "socketId": "feed.standard.2",
+          "motion": "fixed",
+          "collisionMode": "solid",
+          "layer": 16,
+          "family": 0,
+          "canvas": {
+            "x": 496,
+            "y": 372
+          },
+          "attach": {
+            "x": 0,
+            "y": 0
+          },
+          "position": {
+            "x": -0.04,
+            "y": -0.2075
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 496,
+            "height": 372
+          },
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 496,
+            "height": 372
+          },
+          "scale": 0.000162116935483871,
+          "radians": 0
+        }
+      ]
+    },
+    {
+      "partId": "feed.boost",
+      "revision": 1,
+      "category": 3,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.feed.boost",
+          "socketId": "feed.boost.root",
+          "motion": "fixed",
+          "collisionMode": "solid",
+          "layer": 16,
+          "family": 0,
+          "canvas": {
+            "x": 325,
+            "y": 285
+          },
+          "attach": {
+            "x": 162.5,
+            "y": 142.5
+          },
+          "position": {
+            "x": 0,
+            "y": -0.1
+          },
+          "trim": {
+            "x": 5,
+            "y": 3,
+            "width": 299,
+            "height": 223
+          },
+          "region": {
+            "x": 5,
+            "y": 3,
+            "width": 299,
+            "height": 223
+          },
+          "scale": 0.0004752940826496274,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "turn.standard",
+      "revision": 1,
+      "category": 4,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.turn.standard",
+          "socketId": "turn.standard.root",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 3,
+          "family": 0,
+          "canvas": {
+            "x": 1254,
+            "y": 1254
+          },
+          "attach": {
+            "x": 625.5,
+            "y": 405.49999999999994
+          },
+          "position": {
+            "x": 0,
+            "y": -0.158
+          },
+          "trim": {
+            "x": 351,
+            "y": 398,
+            "width": 553,
+            "height": 448
+          },
+          "region": {
+            "x": 351,
+            "y": 398,
+            "width": 553,
+            "height": 448
+          },
+          "scale": 0.000305672268907563,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "turn.quick",
+      "revision": 1,
+      "category": 4,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.turn.quick",
+          "socketId": "turn.quick.root",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 3,
+          "family": 0,
+          "canvas": {
+            "x": 322,
+            "y": 285
+          },
+          "attach": {
+            "x": 161,
+            "y": 142.5
+          },
+          "position": {
+            "x": 0,
+            "y": -0.025
+          },
+          "trim": {
+            "x": 5,
+            "y": 22,
+            "width": 291,
+            "height": 192
+          },
+          "region": {
+            "x": 5,
+            "y": 22,
+            "width": 291,
+            "height": 192
+          },
+          "scale": 0.0004058443877177331,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.turn.standard",
+          "socketId": "turn.quick.support",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 3,
+          "family": 0,
+          "canvas": {
+            "x": 1254,
+            "y": 1254
+          },
+          "attach": {
+            "x": 625.5,
+            "y": 405.49999999999994
+          },
+          "position": {
+            "x": 0,
+            "y": -0.158
+          },
+          "trim": {
+            "x": 351,
+            "y": 398,
+            "width": 553,
+            "height": 448
+          },
+          "region": {
+            "x": 351,
+            "y": 398,
+            "width": 553,
+            "height": 448
+          },
+          "scale": 0.000305672268907563,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "core.gun",
+      "revision": 1,
+      "category": 5,
+      "weaponFamilies": 1,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.core.piercer",
+          "socketId": "core.gun.shared-gearbox",
+          "motion": "rotating",
+          "collisionMode": "mount-contact",
+          "layer": 6,
+          "family": 0,
+          "canvas": {
+            "x": 340,
+            "y": 313
+          },
+          "attach": {
+            "x": 180.20000000000002,
+            "y": 31.3
+          },
+          "position": {
+            "x": -0.0004009368504305505,
+            "y": -0.07407388529424817
+          },
+          "trim": {
+            "x": 20,
+            "y": 6,
+            "width": 296,
+            "height": 271
+          },
+          "region": {
+            "x": 20,
+            "y": 6,
+            "width": 296,
+            "height": 271
+          },
+          "scale": 0.0005011710630381988,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "core.piercer",
+      "revision": 1,
+      "category": 5,
+      "weaponFamilies": 2,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.core.piercer",
+          "socketId": "core.piercer.root",
+          "motion": "rotating",
+          "collisionMode": "mount-contact",
+          "layer": 6,
+          "family": 0,
+          "canvas": {
+            "x": 340,
+            "y": 313
+          },
+          "attach": {
+            "x": 180.20000000000002,
+            "y": 31.3
+          },
+          "position": {
+            "x": -0.0004009368504305505,
+            "y": -0.07407388529424817
+          },
+          "trim": {
+            "x": 20,
+            "y": 6,
+            "width": 296,
+            "height": 271
+          },
+          "region": {
+            "x": 20,
+            "y": 6,
+            "width": 296,
+            "height": 271
+          },
+          "scale": 0.0005011710630381988,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "core.mortar",
+      "revision": 1,
+      "category": 5,
+      "weaponFamilies": 4,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.core.mortar",
+          "socketId": "core.mortar.root",
+          "motion": "rotating",
+          "collisionMode": "mount-contact",
+          "layer": 6,
+          "family": 0,
+          "canvas": {
+            "x": 313,
+            "y": 350
+          },
+          "attach": {
+            "x": 156.5,
+            "y": 42
+          },
+          "position": {
+            "x": -0.0002818943541457916,
+            "y": -0.08412242258341684
+          },
+          "trim": {
+            "x": 15,
+            "y": 33,
+            "width": 283,
+            "height": 228
+          },
+          "region": {
+            "x": 15,
+            "y": 33,
+            "width": 283,
+            "height": 228
+          },
+          "scale": 0.0005637887082915832,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "core.fan",
+      "revision": 1,
+      "category": 5,
+      "weaponFamilies": 8,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.core.fan",
+          "socketId": "core.fan.root",
+          "motion": "rotating",
+          "collisionMode": "mount-contact",
+          "layer": 6,
+          "family": 0,
+          "canvas": {
+            "x": 313,
+            "y": 314
+          },
+          "attach": {
+            "x": 162.76000000000002,
+            "y": 47.1
+          },
+          "position": {
+            "x": -0.00014789273707807812,
+            "y": -0.06916666484275771
+          },
+          "trim": {
+            "x": 21,
+            "y": 19,
+            "width": 290,
+            "height": 215
+          },
+          "region": {
+            "x": 21,
+            "y": 19,
+            "width": 290,
+            "height": 215
+          },
+          "scale": 0.0006162197378253751,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "core.ricochet",
+      "revision": 1,
+      "category": 5,
+      "weaponFamilies": 16,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.core.ricochet",
+          "socketId": "core.ricochet.root",
+          "motion": "rotating",
+          "collisionMode": "mount-contact",
+          "layer": 6,
+          "family": 0,
+          "canvas": {
+            "x": 313,
+            "y": 277
+          },
+          "attach": {
+            "x": 156.5,
+            "y": 41.55
+          },
+          "position": {
+            "x": -0.0003416958384266152,
+            "y": -0.0753066511017855
+          },
+          "trim": {
+            "x": 24,
+            "y": 24,
+            "width": 264,
+            "height": 187
+          },
+          "region": {
+            "x": 24,
+            "y": 24,
+            "width": 264,
+            "height": 187
+          },
+          "scale": 0.0006833916768532304,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "core.stapler",
+      "revision": 1,
+      "category": 5,
+      "weaponFamilies": 32,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.core.stapler",
+          "socketId": "core.stapler.root",
+          "motion": "rotating",
+          "collisionMode": "mount-contact",
+          "layer": 6,
+          "family": 0,
+          "canvas": {
+            "x": 313,
+            "y": 313
+          },
+          "attach": {
+            "x": 156.5,
+            "y": 31.3
+          },
+          "position": {
+            "x": -0.0002494109860957264,
+            "y": -0.0816085996030024
+          },
+          "trim": {
+            "x": 43,
+            "y": 21,
+            "width": 260,
+            "height": 266
+          },
+          "region": {
+            "x": 43,
+            "y": 21,
+            "width": 260,
+            "height": 266
+          },
+          "scale": 0.0004988219721914528,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "core.blotter",
+      "revision": 1,
+      "category": 5,
+      "weaponFamilies": 64,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.core.blotter",
+          "socketId": "core.blotter.root",
+          "motion": "rotating",
+          "collisionMode": "mount-contact",
+          "layer": 6,
+          "family": 0,
+          "canvas": {
+            "x": 313,
+            "y": 313
+          },
+          "attach": {
+            "x": 156.5,
+            "y": 31.3
+          },
+          "position": {
+            "x": -0.0002732384677088399,
+            "y": -0.08617901079021006
+          },
+          "trim": {
+            "x": 57,
+            "y": 30,
+            "width": 209,
+            "height": 247
+          },
+          "region": {
+            "x": 57,
+            "y": 30,
+            "width": 209,
+            "height": 247
+          },
+          "scale": 0.0005464769354176798,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "head.gun",
+      "revision": 1,
+      "category": 6,
+      "weaponFamilies": 1,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.gun.barrels",
+          "socketId": "head.gun.barrels",
+          "motion": "recoiling",
+          "collisionMode": "mount-contact",
+          "layer": 5,
+          "family": 0,
+          "canvas": {
+            "x": 522,
+            "y": 554
+          },
+          "attach": {
+            "x": 74,
+            "y": 60
+          },
+          "position": {
+            "x": 0.006060008033512975,
+            "y": 0.015
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 522,
+            "height": 554
+          },
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 522,
+            "height": 554
+          },
+          "scale": 0.0003146839542107181,
+          "radians": 0.7818063761104834,
+          "hasMuzzle": true,
+          "muzzle": {
+            "x": 444,
+            "y": 460
+          }
+        }
+      ]
+    },
+    {
+      "partId": "head.piercer",
+      "revision": 1,
+      "category": 6,
+      "weaponFamilies": 2,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.head.piercer",
+          "socketId": "head.piercer.root",
+          "motion": "recoiling",
+          "collisionMode": "mount-contact",
+          "layer": 5,
+          "family": 0,
+          "canvas": {
+            "x": 287,
+            "y": 313
+          },
+          "attach": {
+            "x": 132.881,
+            "y": 31.3
+          },
+          "position": {
+            "x": 0,
+            "y": 0.025
+          },
+          "trim": {
+            "x": 88,
+            "y": 0,
+            "width": 91,
+            "height": 307
+          },
+          "region": {
+            "x": 88,
+            "y": 0,
+            "width": 91,
+            "height": 307
+          },
+          "scale": 0.0006618233802012092,
+          "radians": 0,
+          "hasMuzzle": true,
+          "muzzle": {
+            "x": 132.881,
+            "y": 306.74
+          }
+        }
+      ]
+    },
+    {
+      "partId": "head.mortar",
+      "revision": 1,
+      "category": 6,
+      "weaponFamilies": 4,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.head.mortar",
+          "socketId": "head.mortar.root",
+          "motion": "recoiling",
+          "collisionMode": "mount-contact",
+          "layer": 5,
+          "family": 0,
+          "canvas": {
+            "x": 314,
+            "y": 313
+          },
+          "attach": {
+            "x": 173.95600000000002,
+            "y": 31.3
+          },
+          "position": {
+            "x": 0,
+            "y": 0.025
+          },
+          "trim": {
+            "x": 86,
+            "y": 2,
+            "width": 182,
+            "height": 273
+          },
+          "region": {
+            "x": 86,
+            "y": 2,
+            "width": 182,
+            "height": 273
+          },
+          "scale": 0.0007082252845972628,
+          "radians": 0,
+          "hasMuzzle": true,
+          "muzzle": {
+            "x": 173.95600000000002,
+            "y": 225.35999999999999
+          }
+        }
+      ]
+    },
+    {
+      "partId": "head.fan",
+      "revision": 1,
+      "category": 6,
+      "weaponFamilies": 8,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.head.fan",
+          "socketId": "head.fan.root",
+          "motion": "recoiling",
+          "collisionMode": "mount-contact",
+          "layer": 5,
+          "family": 0,
+          "canvas": {
+            "x": 314,
+            "y": 314
+          },
+          "attach": {
+            "x": 161.082,
+            "y": 37.68
+          },
+          "position": {
+            "x": 0,
+            "y": 0.025
+          },
+          "trim": {
+            "x": 19,
+            "y": 4,
+            "width": 287,
+            "height": 303
+          },
+          "region": {
+            "x": 19,
+            "y": 4,
+            "width": 287,
+            "height": 303
+          },
+          "scale": 0.0006049031403455899,
+          "radians": 0,
+          "hasMuzzle": true,
+          "muzzle": {
+            "x": 161.082,
+            "y": 303.952
+          }
+        }
+      ]
+    },
+    {
+      "partId": "head.ricochet",
+      "revision": 1,
+      "category": 6,
+      "weaponFamilies": 16,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.head.ricochet",
+          "socketId": "head.ricochet.root",
+          "motion": "recoiling",
+          "collisionMode": "mount-contact",
+          "layer": 5,
+          "family": 0,
+          "canvas": {
+            "x": 314,
+            "y": 314
+          },
+          "attach": {
+            "x": 174.89800000000002,
+            "y": 144.44
+          },
+          "position": {
+            "x": 0,
+            "y": 0.025
+          },
+          "trim": {
+            "x": 0,
+            "y": 19,
+            "width": 303,
+            "height": 246
+          },
+          "region": {
+            "x": 0,
+            "y": 19,
+            "width": 303,
+            "height": 246
+          },
+          "scale": 0.0007666171933640708,
+          "radians": 0,
+          "hasMuzzle": true,
+          "muzzle": {
+            "x": 174.89800000000002,
+            "y": 260.62
+          }
+        }
+      ]
+    },
+    {
+      "partId": "head.stapler",
+      "revision": 1,
+      "category": 6,
+      "weaponFamilies": 32,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.head.stapler",
+          "socketId": "head.stapler.root",
+          "motion": "recoiling",
+          "collisionMode": "mount-contact",
+          "layer": 5,
+          "family": 0,
+          "canvas": {
+            "x": 314,
+            "y": 277
+          },
+          "attach": {
+            "x": 54.007999999999996,
+            "y": 121.88
+          },
+          "position": {
+            "x": 0,
+            "y": 0.025
+          },
+          "trim": {
+            "x": 20,
+            "y": 6,
+            "width": 290,
+            "height": 228
+          },
+          "region": {
+            "x": 20,
+            "y": 6,
+            "width": 290,
+            "height": 228
+          },
+          "scale": 0.0006583668311603597,
+          "radians": 1.39686566172025,
+          "hasMuzzle": true,
+          "muzzle": {
+            "x": 282.6,
+            "y": 162.045
+          }
+        }
+      ]
+    },
+    {
+      "partId": "head.blotter",
+      "revision": 1,
+      "category": 6,
+      "weaponFamilies": 64,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.head.blotter",
+          "socketId": "head.blotter.root",
+          "motion": "recoiling",
+          "collisionMode": "mount-contact",
+          "layer": 5,
+          "family": 0,
+          "canvas": {
+            "x": 314,
+            "y": 313
+          },
+          "attach": {
+            "x": 174.89800000000002,
+            "y": 43.82000000000001
+          },
+          "position": {
+            "x": 0,
+            "y": 0.025
+          },
+          "trim": {
+            "x": 42,
+            "y": 30,
+            "width": 249,
+            "height": 269
+          },
+          "region": {
+            "x": 42,
+            "y": 30,
+            "width": 249,
+            "height": 269
+          },
+          "scale": 0.0006430021116881304,
+          "radians": 0,
+          "hasMuzzle": true,
+          "muzzle": {
+            "x": 174.89800000000002,
+            "y": 266.05
+          }
+        }
+      ]
+    },
+    {
+      "partId": "head.short",
+      "revision": 1,
+      "category": 6,
+      "weaponFamilies": 3,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.head.short",
+          "socketId": "head.short.root",
+          "motion": "recoiling",
+          "collisionMode": "mount-contact",
+          "layer": 5,
+          "family": 0,
+          "canvas": {
+            "x": 313,
+            "y": 314
+          },
+          "attach": {
+            "x": 168.08100000000002,
+            "y": 28.259999999999998
+          },
+          "position": {
+            "x": 0,
+            "y": 0.02
+          },
+          "trim": {
+            "x": 126,
+            "y": 11,
+            "width": 82,
+            "height": 279
+          },
+          "region": {
+            "x": 126,
+            "y": 11,
+            "width": 82,
+            "height": 279
+          },
+          "scale": 0.0004903787967520209,
+          "radians": 0,
+          "hasMuzzle": true,
+          "muzzle": {
+            "x": 168.08100000000002,
+            "y": 283.856
+          }
+        }
+      ]
+    },
+    {
+      "partId": "head.long",
+      "revision": 1,
+      "category": 6,
+      "weaponFamilies": 3,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.head.long",
+          "socketId": "head.long.root",
+          "motion": "recoiling",
+          "collisionMode": "mount-contact",
+          "layer": 5,
+          "family": 0,
+          "canvas": {
+            "x": 314,
+            "y": 350
+          },
+          "attach": {
+            "x": 163.28,
+            "y": 29.05
+          },
+          "position": {
+            "x": 0,
+            "y": 0.02
+          },
+          "trim": {
+            "x": 128,
+            "y": 8,
+            "width": 76,
+            "height": 340
+          },
+          "region": {
+            "x": 128,
+            "y": 8,
+            "width": 76,
+            "height": 340
+          },
+          "scale": 0.0006064586301900139,
+          "radians": 0,
+          "hasMuzzle": true,
+          "muzzle": {
+            "x": 163.28,
+            "y": 339.5
+          }
+        }
+      ]
+    },
+    {
+      "partId": "head.wide",
+      "revision": 1,
+      "category": 6,
+      "weaponFamilies": 4,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.head.wide",
+          "socketId": "head.wide.root",
+          "motion": "recoiling",
+          "collisionMode": "mount-contact",
+          "layer": 5,
+          "family": 0,
+          "canvas": {
+            "x": 313,
+            "y": 314
+          },
+          "attach": {
+            "x": 162.13400000000001,
+            "y": 34.54
+          },
+          "position": {
+            "x": 0,
+            "y": 0.02
+          },
+          "trim": {
+            "x": 57,
+            "y": 24,
+            "width": 200,
+            "height": 286
+          },
+          "region": {
+            "x": 57,
+            "y": 24,
+            "width": 200,
+            "height": 286
+          },
+          "scale": 0.0006613728313532727,
+          "radians": 0,
+          "hasMuzzle": true,
+          "muzzle": {
+            "x": 162.13400000000001,
+            "y": 263.76
+          }
+        }
+      ]
+    },
+    {
+      "partId": "sight.iron",
+      "revision": 1,
+      "category": 7,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.pilot.sight",
+          "socketId": "sight.iron.sight",
+          "motion": "rotating",
+          "collisionMode": "mount-contact",
+          "layer": 7,
+          "family": 0,
+          "canvas": {
+            "x": 508,
+            "y": 419
+          },
+          "attach": {
+            "x": 257.5,
+            "y": 15.5
+          },
+          "position": {
+            "x": -0.018444674516952236,
+            "y": 0.003277839810426541
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 508,
+            "height": 419
+          },
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 508,
+            "height": 419
+          },
+          "scale": 0.00005471430010822106,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "sight.scope",
+      "revision": 1,
+      "category": 7,
+      "weaponFamilies": 23,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.sight.scope",
+          "socketId": "sight.scope.root",
+          "motion": "rotating",
+          "collisionMode": "mount-contact",
+          "layer": 7,
+          "family": 0,
+          "canvas": {
+            "x": 330,
+            "y": 325
+          },
+          "attach": {
+            "x": 165,
+            "y": 58.5
+          },
+          "position": {
+            "x": -0.035,
+            "y": 0.005
+          },
+          "trim": {
+            "x": 74,
+            "y": 10,
+            "width": 195,
+            "height": 301
+          },
+          "region": {
+            "x": 74,
+            "y": 10,
+            "width": 195,
+            "height": 301
+          },
+          "scale": 0.00021788550643774395,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "sight.tracking",
+      "revision": 1,
+      "category": 7,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.sight.tracking",
+          "socketId": "sight.tracking.root",
+          "motion": "rotating",
+          "collisionMode": "mount-contact",
+          "layer": 7,
+          "family": 0,
+          "canvas": {
+            "x": 280,
+            "y": 325
+          },
+          "attach": {
+            "x": 140,
+            "y": 58.5
+          },
+          "position": {
+            "x": -0.035,
+            "y": 0.005
+          },
+          "trim": {
+            "x": 48,
+            "y": 18,
+            "width": 204,
+            "height": 256
+          },
+          "region": {
+            "x": 48,
+            "y": 18,
+            "width": 204,
+            "height": 256
+          },
+          "scale": 0.00024499032561630545,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "magazine.standard",
+      "revision": 1,
+      "category": 8,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.pilot.magazine",
+          "socketId": "magazine.standard.magazine",
+          "motion": "rotating",
+          "collisionMode": "mount-contact",
+          "layer": 8,
+          "family": 0,
+          "canvas": {
+            "x": 375,
+            "y": 461
+          },
+          "attach": {
+            "x": 38.5,
+            "y": 169.5
+          },
+          "position": {
+            "x": -0.039434079475027334,
+            "y": 0.02
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 375,
+            "height": 461
+          },
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 375,
+            "height": 461
+          },
+          "scale": 0.0000986837838862559,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "magazine.drum",
+      "revision": 1,
+      "category": 8,
+      "weaponFamilies": 33,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.magazine.drum",
+          "socketId": "magazine.drum.root",
+          "motion": "rotating",
+          "collisionMode": "mount-contact",
+          "layer": 8,
+          "family": 0,
+          "canvas": {
+            "x": 307,
+            "y": 325
+          },
+          "attach": {
+            "x": 199.55,
+            "y": 227.49999999999997
+          },
+          "position": {
+            "x": -0.045,
+            "y": 0.02
+          },
+          "trim": {
+            "x": 25,
+            "y": 13,
+            "width": 274,
+            "height": 220
+          },
+          "region": {
+            "x": 25,
+            "y": 13,
+            "width": 274,
+            "height": 220
+          },
+          "scale": 0.00021696172453972246,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "magazine.belt",
+      "revision": 1,
+      "category": 8,
+      "weaponFamilies": 1,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.magazine.belt",
+          "socketId": "magazine.belt.root",
+          "motion": "rotating",
+          "collisionMode": "mount-contact",
+          "layer": 8,
+          "family": 0,
+          "canvas": {
+            "x": 337,
+            "y": 325
+          },
+          "attach": {
+            "x": 219.05,
+            "y": 227.49999999999997
+          },
+          "position": {
+            "x": -0.045,
+            "y": 0.02
+          },
+          "trim": {
+            "x": 3,
+            "y": 19,
+            "width": 316,
+            "height": 267
+          },
+          "region": {
+            "x": 3,
+            "y": 19,
+            "width": 316,
+            "height": 267
+          },
+          "scale": 0.00019983370485795535,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "trigger.standard",
+      "revision": 1,
+      "category": 9,
+      "weaponFamilies": 127,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.pilot.trigger",
+          "socketId": "trigger.standard.trigger",
+          "motion": "rotating",
+          "collisionMode": "mount-contact",
+          "layer": 9,
+          "family": 0,
+          "canvas": {
+            "x": 345,
+            "y": 423
+          },
+          "attach": {
+            "x": 149.5,
+            "y": 123.5
+          },
+          "position": {
+            "x": 0.024646299671892084,
+            "y": 0.02
+          },
+          "trim": {
+            "x": 0,
+            "y": 0,
+            "width": 345,
+            "height": 423
+          },
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 345,
+            "height": 423
+          },
+          "scale": 0.00007963612336012087,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "trigger.burst",
+      "revision": 1,
+      "category": 9,
+      "weaponFamilies": 1,
+      "structureFamilies": 0,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.trigger.burst",
+          "socketId": "trigger.burst.root",
+          "motion": "rotating",
+          "collisionMode": "mount-contact",
+          "layer": 9,
+          "family": 0,
+          "canvas": {
+            "x": 325,
+            "y": 294
+          },
+          "attach": {
+            "x": 130,
+            "y": 205.79999999999998
+          },
+          "position": {
+            "x": 0.04,
+            "y": 0.02
+          },
+          "trim": {
+            "x": 46,
+            "y": 46,
+            "width": 259,
+            "height": 223
+          },
+          "region": {
+            "x": 46,
+            "y": 46,
+            "width": 259,
+            "height": 223
+          },
+          "scale": 0.00025107264335355725,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "site.wall",
+      "revision": 1,
+      "category": 10,
+      "weaponFamilies": 0,
+      "structureFamilies": 1,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.site.wall",
+          "socketId": "site.wall.root",
+          "motion": "fixed",
+          "collisionMode": "solid",
+          "layer": 0,
+          "family": 1,
+          "canvas": {
+            "x": 330,
+            "y": 360
+          },
+          "attach": {
+            "x": 165,
+            "y": 125.99999999999999
+          },
+          "position": {
+            "x": 0,
+            "y": -0.2
+          },
+          "trim": {
+            "x": 10,
+            "y": 32,
+            "width": 307,
+            "height": 204
+          },
+          "region": {
+            "x": 10,
+            "y": 32,
+            "width": 307,
+            "height": 204
+          },
+          "scale": 0.0021045345670586252,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "site.slow",
+      "revision": 1,
+      "category": 10,
+      "weaponFamilies": 0,
+      "structureFamilies": 2,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.site.slow",
+          "socketId": "site.slow.root",
+          "motion": "fixed",
+          "collisionMode": "solid",
+          "layer": 0,
+          "family": 2,
+          "canvas": {
+            "x": 331,
+            "y": 267
+          },
+          "attach": {
+            "x": 165.5,
+            "y": 93.44999999999999
+          },
+          "position": {
+            "x": 0,
+            "y": -0.2
+          },
+          "trim": {
+            "x": 7,
+            "y": 27,
+            "width": 320,
+            "height": 191
+          },
+          "region": {
+            "x": 7,
+            "y": 27,
+            "width": 320,
+            "height": 191
+          },
+          "scale": 0.001961280340117702,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "site.repair",
+      "revision": 1,
+      "category": 10,
+      "weaponFamilies": 0,
+      "structureFamilies": 4,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.site.repair",
+          "socketId": "site.repair.root",
+          "motion": "fixed",
+          "collisionMode": "solid",
+          "layer": 0,
+          "family": 4,
+          "canvas": {
+            "x": 627,
+            "y": 627
+          },
+          "attach": {
+            "x": 313.5,
+            "y": 219.45
+          },
+          "position": {
+            "x": 0,
+            "y": -0.2
+          },
+          "trim": {
+            "x": 54,
+            "y": 21,
+            "width": 540,
+            "height": 300
+          },
+          "region": {
+            "x": 54,
+            "y": 21,
+            "width": 540,
+            "height": 300
+          },
+          "scale": 0.0011641360095109568,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "site.generator",
+      "revision": 1,
+      "category": 10,
+      "weaponFamilies": 0,
+      "structureFamilies": 8,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.site.generator",
+          "socketId": "site.generator.root",
+          "motion": "fixed",
+          "collisionMode": "solid",
+          "layer": 0,
+          "family": 8,
+          "canvas": {
+            "x": 350,
+            "y": 274
+          },
+          "attach": {
+            "x": 175,
+            "y": 95.89999999999999
+          },
+          "position": {
+            "x": 0,
+            "y": -0.2
+          },
+          "trim": {
+            "x": 11,
+            "y": 26,
+            "width": 332,
+            "height": 202
+          },
+          "region": {
+            "x": 11,
+            "y": 26,
+            "width": 332,
+            "height": 202
+          },
+          "scale": 0.0018716451719706362,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "function.wall",
+      "revision": 1,
+      "category": 11,
+      "weaponFamilies": 0,
+      "structureFamilies": 1,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.function.wall",
+          "socketId": "function.wall.root",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 5,
+          "family": 1,
+          "canvas": {
+            "x": 315,
+            "y": 313
+          },
+          "attach": {
+            "x": 157.5,
+            "y": 37.559999999999995
+          },
+          "position": {
+            "x": 0,
+            "y": -0.1
+          },
+          "trim": {
+            "x": 22,
+            "y": 1,
+            "width": 272,
+            "height": 233
+          },
+          "region": {
+            "x": 22,
+            "y": 1,
+            "width": 272,
+            "height": 233
+          },
+          "scale": 0.001964809395483507,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "function.slow",
+      "revision": 1,
+      "category": 11,
+      "weaponFamilies": 0,
+      "structureFamilies": 2,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.function.slow",
+          "socketId": "function.slow.root",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 5,
+          "family": 2,
+          "canvas": {
+            "x": 320,
+            "y": 314
+          },
+          "attach": {
+            "x": 160,
+            "y": 37.68
+          },
+          "position": {
+            "x": 0,
+            "y": -0.1
+          },
+          "trim": {
+            "x": 9,
+            "y": 38,
+            "width": 307,
+            "height": 172
+          },
+          "region": {
+            "x": 9,
+            "y": 38,
+            "width": 307,
+            "height": 172
+          },
+          "scale": 0.00202199296898943,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "function.repair",
+      "revision": 1,
+      "category": 11,
+      "weaponFamilies": 0,
+      "structureFamilies": 4,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.function.repair",
+          "socketId": "function.repair.root",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 5,
+          "family": 4,
+          "canvas": {
+            "x": 627,
+            "y": 627
+          },
+          "attach": {
+            "x": 313.5,
+            "y": 75.24
+          },
+          "position": {
+            "x": 0.011048412314564268,
+            "y": -0.35201472968382497
+          },
+          "trim": {
+            "x": 47,
+            "y": 8,
+            "width": 535,
+            "height": 445
+          },
+          "region": {
+            "x": 47,
+            "y": 8,
+            "width": 535,
+            "height": 445
+          },
+          "scale": 0.0011750157853007788,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.function.repair.toolbox",
+          "socketId": "function.repair.toolbox",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 7,
+          "family": 4,
+          "canvas": {
+            "x": 247,
+            "y": 313
+          },
+          "attach": {
+            "x": 123.5,
+            "y": 78.25
+          },
+          "position": {
+            "x": 0.28,
+            "y": -0.18
+          },
+          "trim": {
+            "x": 13,
+            "y": 18,
+            "width": 217,
+            "height": 228
+          },
+          "region": {
+            "x": 13,
+            "y": 18,
+            "width": 217,
+            "height": 228
+          },
+          "scale": 0.0007467372357480501,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "function.generator",
+      "revision": 1,
+      "category": 11,
+      "weaponFamilies": 0,
+      "structureFamilies": 8,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.function.generator",
+          "socketId": "function.generator.root",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 5,
+          "family": 8,
+          "canvas": {
+            "x": 360,
+            "y": 294
+          },
+          "attach": {
+            "x": 180,
+            "y": 35.28
+          },
+          "position": {
+            "x": 0,
+            "y": -0.1
+          },
+          "trim": {
+            "x": 18,
+            "y": 16,
+            "width": 310,
+            "height": 272
+          },
+          "region": {
+            "x": 18,
+            "y": 16,
+            "width": 310,
+            "height": 272
+          },
+          "scale": 0.0015656979871518705,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "shell.standard",
+      "revision": 1,
+      "category": 12,
+      "weaponFamilies": 0,
+      "structureFamilies": 15,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.shell.standard.wall",
+          "socketId": "shell.standard.wall",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 8,
+          "family": 1,
+          "canvas": {
+            "x": 310,
+            "y": 360
+          },
+          "attach": {
+            "x": 155,
+            "y": 72
+          },
+          "position": {
+            "x": 0,
+            "y": -0.13
+          },
+          "trim": {
+            "x": 22,
+            "y": 26,
+            "width": 267,
+            "height": 203
+          },
+          "region": {
+            "x": 22,
+            "y": 26,
+            "width": 267,
+            "height": 203
+          },
+          "scale": 0.0018409979792062185,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.standard.slow",
+          "socketId": "shell.standard.slow",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 8,
+          "family": 2,
+          "canvas": {
+            "x": 307,
+            "y": 267
+          },
+          "attach": {
+            "x": 153.5,
+            "y": 133.5
+          },
+          "position": {
+            "x": 0.003032989453484145,
+            "y": 0.11194530300947204
+          },
+          "trim": {
+            "x": 7,
+            "y": 50,
+            "width": 294,
+            "height": 146
+          },
+          "region": {
+            "x": 7,
+            "y": 50,
+            "width": 294,
+            "height": 146
+          },
+          "scale": 0.00202199296898943,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.standard.repair",
+          "socketId": "shell.standard.repair",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 8,
+          "family": 4,
+          "canvas": {
+            "x": 627,
+            "y": 627
+          },
+          "attach": {
+            "x": 313.5,
+            "y": 125.4
+          },
+          "position": {
+            "x": -0.002524787949856694,
+            "y": -0.10745739833840848
+          },
+          "trim": {
+            "x": 80,
+            "y": 97,
+            "width": 533,
+            "height": 343
+          },
+          "region": {
+            "x": 80,
+            "y": 97,
+            "width": 533,
+            "height": 343
+          },
+          "scale": 0.0009635129439466385,
+          "radians": 0.09,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.standard.generator",
+          "socketId": "shell.standard.generator",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 8,
+          "family": 8,
+          "canvas": {
+            "x": 250,
+            "y": 294
+          },
+          "attach": {
+            "x": 125,
+            "y": 58.800000000000004
+          },
+          "position": {
+            "x": 0,
+            "y": 0.16
+          },
+          "trim": {
+            "x": 18,
+            "y": 35,
+            "width": 210,
+            "height": 240
+          },
+          "region": {
+            "x": 18,
+            "y": 35,
+            "width": 210,
+            "height": 240
+          },
+          "scale": 0.0010778139388097619,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "shell.light",
+      "revision": 1,
+      "category": 12,
+      "weaponFamilies": 0,
+      "structureFamilies": 15,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.shell.standard.wall",
+          "socketId": "shell.light.wall",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 8,
+          "family": 1,
+          "canvas": {
+            "x": 310,
+            "y": 360
+          },
+          "attach": {
+            "x": 155,
+            "y": 72
+          },
+          "position": {
+            "x": 0,
+            "y": -0.13
+          },
+          "trim": {
+            "x": 22,
+            "y": 26,
+            "width": 267,
+            "height": 203
+          },
+          "region": {
+            "x": 22,
+            "y": 26,
+            "width": 267,
+            "height": 203
+          },
+          "scale": 0.0018409979792062185,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.standard.slow",
+          "socketId": "shell.light.slow",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 8,
+          "family": 2,
+          "canvas": {
+            "x": 307,
+            "y": 267
+          },
+          "attach": {
+            "x": 153.5,
+            "y": 133.5
+          },
+          "position": {
+            "x": 0.003032989453484145,
+            "y": 0.11194530300947204
+          },
+          "trim": {
+            "x": 7,
+            "y": 50,
+            "width": 294,
+            "height": 146
+          },
+          "region": {
+            "x": 7,
+            "y": 50,
+            "width": 294,
+            "height": 146
+          },
+          "scale": 0.00202199296898943,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.standard.repair",
+          "socketId": "shell.light.repair",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 8,
+          "family": 4,
+          "canvas": {
+            "x": 627,
+            "y": 627
+          },
+          "attach": {
+            "x": 313.5,
+            "y": 125.4
+          },
+          "position": {
+            "x": -0.002524787949856694,
+            "y": -0.10745739833840848
+          },
+          "trim": {
+            "x": 80,
+            "y": 97,
+            "width": 533,
+            "height": 343
+          },
+          "region": {
+            "x": 80,
+            "y": 97,
+            "width": 533,
+            "height": 343
+          },
+          "scale": 0.0009635129439466385,
+          "radians": 0.09,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.standard.generator",
+          "socketId": "shell.light.generator",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 8,
+          "family": 8,
+          "canvas": {
+            "x": 250,
+            "y": 294
+          },
+          "attach": {
+            "x": 125,
+            "y": 58.800000000000004
+          },
+          "position": {
+            "x": 0,
+            "y": 0.16
+          },
+          "trim": {
+            "x": 18,
+            "y": 35,
+            "width": 210,
+            "height": 240
+          },
+          "region": {
+            "x": 18,
+            "y": 35,
+            "width": 210,
+            "height": 240
+          },
+          "scale": 0.0010778139388097619,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.light.panel.wall",
+          "socketId": "shell.light.wall.light",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 9,
+          "family": 1,
+          "canvas": {
+            "x": 627,
+            "y": 627
+          },
+          "attach": {
+            "x": 313.5,
+            "y": 313.5
+          },
+          "position": {
+            "x": 0,
+            "y": -0.19
+          },
+          "trim": {
+            "x": 44,
+            "y": 170,
+            "width": 562,
+            "height": 316
+          },
+          "region": {
+            "x": 44,
+            "y": 170,
+            "width": 562,
+            "height": 316
+          },
+          "scale": 0.0009129006155520648,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.light.panel.wall",
+          "socketId": "shell.light.slow.light",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 9,
+          "family": 2,
+          "canvas": {
+            "x": 627,
+            "y": 627
+          },
+          "attach": {
+            "x": 313.5,
+            "y": 313.5
+          },
+          "position": {
+            "x": 0,
+            "y": -0.19
+          },
+          "trim": {
+            "x": 44,
+            "y": 170,
+            "width": 562,
+            "height": 316
+          },
+          "region": {
+            "x": 44,
+            "y": 170,
+            "width": 562,
+            "height": 316
+          },
+          "scale": 0.0009129006155520648,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.light.panel.wall",
+          "socketId": "shell.light.repair.light",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 9,
+          "family": 4,
+          "canvas": {
+            "x": 627,
+            "y": 627
+          },
+          "attach": {
+            "x": 313.5,
+            "y": 313.5
+          },
+          "position": {
+            "x": 0,
+            "y": -0.19
+          },
+          "trim": {
+            "x": 44,
+            "y": 170,
+            "width": 562,
+            "height": 316
+          },
+          "region": {
+            "x": 44,
+            "y": 170,
+            "width": 562,
+            "height": 316
+          },
+          "scale": 0.0009129006155520648,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.light.panel.wall",
+          "socketId": "shell.light.generator.light",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 9,
+          "family": 8,
+          "canvas": {
+            "x": 627,
+            "y": 627
+          },
+          "attach": {
+            "x": 313.5,
+            "y": 313.5
+          },
+          "position": {
+            "x": 0,
+            "y": -0.19
+          },
+          "trim": {
+            "x": 44,
+            "y": 170,
+            "width": 562,
+            "height": 316
+          },
+          "region": {
+            "x": 44,
+            "y": 170,
+            "width": 562,
+            "height": 316
+          },
+          "scale": 0.0009129006155520648,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "shell.reinforced",
+      "revision": 1,
+      "category": 12,
+      "weaponFamilies": 0,
+      "structureFamilies": 15,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.shell.standard.wall",
+          "socketId": "shell.reinforced.wall",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 8,
+          "family": 1,
+          "canvas": {
+            "x": 310,
+            "y": 360
+          },
+          "attach": {
+            "x": 155,
+            "y": 72
+          },
+          "position": {
+            "x": 0,
+            "y": -0.13
+          },
+          "trim": {
+            "x": 22,
+            "y": 26,
+            "width": 267,
+            "height": 203
+          },
+          "region": {
+            "x": 22,
+            "y": 26,
+            "width": 267,
+            "height": 203
+          },
+          "scale": 0.0018409979792062185,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.standard.slow",
+          "socketId": "shell.reinforced.slow",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 8,
+          "family": 2,
+          "canvas": {
+            "x": 307,
+            "y": 267
+          },
+          "attach": {
+            "x": 153.5,
+            "y": 133.5
+          },
+          "position": {
+            "x": 0.003032989453484145,
+            "y": 0.11194530300947204
+          },
+          "trim": {
+            "x": 7,
+            "y": 50,
+            "width": 294,
+            "height": 146
+          },
+          "region": {
+            "x": 7,
+            "y": 50,
+            "width": 294,
+            "height": 146
+          },
+          "scale": 0.00202199296898943,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.standard.repair",
+          "socketId": "shell.reinforced.repair",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 8,
+          "family": 4,
+          "canvas": {
+            "x": 627,
+            "y": 627
+          },
+          "attach": {
+            "x": 313.5,
+            "y": 125.4
+          },
+          "position": {
+            "x": -0.002524787949856694,
+            "y": -0.10745739833840848
+          },
+          "trim": {
+            "x": 80,
+            "y": 97,
+            "width": 533,
+            "height": 343
+          },
+          "region": {
+            "x": 80,
+            "y": 97,
+            "width": 533,
+            "height": 343
+          },
+          "scale": 0.0009635129439466385,
+          "radians": 0.09,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.standard.generator",
+          "socketId": "shell.reinforced.generator",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 8,
+          "family": 8,
+          "canvas": {
+            "x": 250,
+            "y": 294
+          },
+          "attach": {
+            "x": 125,
+            "y": 58.800000000000004
+          },
+          "position": {
+            "x": 0,
+            "y": 0.16
+          },
+          "trim": {
+            "x": 18,
+            "y": 35,
+            "width": 210,
+            "height": 240
+          },
+          "region": {
+            "x": 18,
+            "y": 35,
+            "width": 210,
+            "height": 240
+          },
+          "scale": 0.0010778139388097619,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.reinforced.panel.wall",
+          "socketId": "shell.reinforced.wall.reinforced",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 9,
+          "family": 1,
+          "canvas": {
+            "x": 627,
+            "y": 627
+          },
+          "attach": {
+            "x": 313.5,
+            "y": 313.5
+          },
+          "position": {
+            "x": 0,
+            "y": -0.19
+          },
+          "trim": {
+            "x": 29,
+            "y": 73,
+            "width": 570,
+            "height": 460
+          },
+          "region": {
+            "x": 29,
+            "y": 73,
+            "width": 570,
+            "height": 460
+          },
+          "scale": 0.000830438409839615,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.reinforced.panel.wall",
+          "socketId": "shell.reinforced.slow.reinforced",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 9,
+          "family": 2,
+          "canvas": {
+            "x": 627,
+            "y": 627
+          },
+          "attach": {
+            "x": 313.5,
+            "y": 313.5
+          },
+          "position": {
+            "x": 0,
+            "y": -0.19
+          },
+          "trim": {
+            "x": 29,
+            "y": 73,
+            "width": 570,
+            "height": 460
+          },
+          "region": {
+            "x": 29,
+            "y": 73,
+            "width": 570,
+            "height": 460
+          },
+          "scale": 0.000830438409839615,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.reinforced.panel.wall",
+          "socketId": "shell.reinforced.repair.reinforced",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 9,
+          "family": 4,
+          "canvas": {
+            "x": 627,
+            "y": 627
+          },
+          "attach": {
+            "x": 313.5,
+            "y": 313.5
+          },
+          "position": {
+            "x": 0,
+            "y": -0.19
+          },
+          "trim": {
+            "x": 29,
+            "y": 73,
+            "width": 570,
+            "height": 460
+          },
+          "region": {
+            "x": 29,
+            "y": 73,
+            "width": 570,
+            "height": 460
+          },
+          "scale": 0.000830438409839615,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.shell.reinforced.panel.wall",
+          "socketId": "shell.reinforced.generator.reinforced",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 9,
+          "family": 8,
+          "canvas": {
+            "x": 627,
+            "y": 627
+          },
+          "attach": {
+            "x": 313.5,
+            "y": 313.5
+          },
+          "position": {
+            "x": 0,
+            "y": -0.19
+          },
+          "trim": {
+            "x": 29,
+            "y": 73,
+            "width": 570,
+            "height": 460
+          },
+          "region": {
+            "x": 29,
+            "y": 73,
+            "width": 570,
+            "height": 460
+          },
+          "scale": 0.000830438409839615,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "utility.none",
+      "revision": 1,
+      "category": 13,
+      "weaponFamilies": 0,
+      "structureFamilies": 15,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "Без оснащения",
+      "fragments": []
+    },
+    {
+      "partId": "utility.armor",
+      "revision": 1,
+      "category": 13,
+      "weaponFamilies": 0,
+      "structureFamilies": 13,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.utility.armor.wall",
+          "socketId": "utility.armor.wall",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 10,
+          "family": 1,
+          "canvas": {
+            "x": 299,
+            "y": 360
+          },
+          "attach": {
+            "x": 149.5,
+            "y": 90
+          },
+          "position": {
+            "x": 0,
+            "y": -0.2
+          },
+          "trim": {
+            "x": 27,
+            "y": 24,
+            "width": 224,
+            "height": 259
+          },
+          "region": {
+            "x": 27,
+            "y": 24,
+            "width": 224,
+            "height": 259
+          },
+          "scale": 0.0010498959895776606,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.utility.armor.wall",
+          "socketId": "utility.armor.repair",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 10,
+          "family": 4,
+          "canvas": {
+            "x": 299,
+            "y": 360
+          },
+          "attach": {
+            "x": 149.5,
+            "y": 90
+          },
+          "position": {
+            "x": 0,
+            "y": -0.2
+          },
+          "trim": {
+            "x": 27,
+            "y": 24,
+            "width": 224,
+            "height": 259
+          },
+          "region": {
+            "x": 27,
+            "y": 24,
+            "width": 224,
+            "height": 259
+          },
+          "scale": 0.0010498959895776606,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.utility.armor.wall",
+          "socketId": "utility.armor.generator",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 10,
+          "family": 8,
+          "canvas": {
+            "x": 299,
+            "y": 360
+          },
+          "attach": {
+            "x": 149.5,
+            "y": 90
+          },
+          "position": {
+            "x": 0,
+            "y": -0.2
+          },
+          "trim": {
+            "x": 27,
+            "y": 24,
+            "width": 224,
+            "height": 259
+          },
+          "region": {
+            "x": 27,
+            "y": 24,
+            "width": 224,
+            "height": 259
+          },
+          "scale": 0.0010498959895776606,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "utility.range",
+      "revision": 1,
+      "category": 13,
+      "weaponFamilies": 0,
+      "structureFamilies": 4,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.utility.range",
+          "socketId": "utility.range.outboard-head",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 10,
+          "family": 4,
+          "canvas": {
+            "x": 627,
+            "y": 627
+          },
+          "attach": {
+            "x": 223.212,
+            "y": 144.21
+          },
+          "position": {
+            "x": 0.35,
+            "y": -0.13
+          },
+          "trim": {
+            "x": 107,
+            "y": 97,
+            "width": 466,
+            "height": 396
+          },
+          "region": {
+            "x": 107,
+            "y": 97,
+            "width": 466,
+            "height": 396
+          },
+          "scale": 0.0006478129545261818,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    },
+    {
+      "partId": "utility.economy",
+      "revision": 1,
+      "category": 13,
+      "weaponFamilies": 0,
+      "structureFamilies": 8,
+      "assetRevision": "modular-full-catalog-2026-10-24-v8",
+      "neutral": "",
+      "fragments": [
+        {
+          "spriteId": "part.full.utility.economy",
+          "socketId": "utility.economy.flywheel",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 10,
+          "family": 8,
+          "canvas": {
+            "x": 294,
+            "y": 314
+          },
+          "attach": {
+            "x": 147,
+            "y": 78.5
+          },
+          "position": {
+            "x": -0.25,
+            "y": -0.05
+          },
+          "trim": {
+            "x": 27,
+            "y": 30,
+            "width": 238,
+            "height": 265
+          },
+          "region": {
+            "x": 27,
+            "y": 30,
+            "width": 238,
+            "height": 265
+          },
+          "scale": 0.0010099691178384557,
+          "radians": 0,
+          "hasMuzzle": false
+        },
+        {
+          "spriteId": "part.full.utility.economy.pump",
+          "socketId": "utility.economy.thin-pump",
+          "motion": "fixed",
+          "collisionMode": "mount-contact",
+          "layer": 7,
+          "family": 8,
+          "canvas": {
+            "x": 434,
+            "y": 627
+          },
+          "attach": {
+            "x": 143.22,
+            "y": 100.32000000000001
+          },
+          "position": {
+            "x": 0.24,
+            "y": -0.04
+          },
+          "trim": {
+            "x": 51,
+            "y": 77,
+            "width": 349,
+            "height": 537
+          },
+          "region": {
+            "x": 51,
+            "y": 77,
+            "width": 349,
+            "height": 537
+          },
+          "scale": 0.00040049810190431946,
+          "radians": 0,
+          "hasMuzzle": false
+        }
+      ]
+    }
+  ],
+  "modernPivot": {
+    "x": 0,
+    "y": 0.158
+  }
+}

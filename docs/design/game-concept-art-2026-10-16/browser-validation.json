@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-18",
+  "cards": 33,
+  "decodedImages": 33,
+  "filters": [
+    "Все",
+    "Игровой маршрут",
+    "Мастерская",
+    "Бой",
+    "Меню и помощь",
+    "Результаты",
+    "Состояния",
+    "Листы объектов"
+  ],
+  "widths": [
+    1600,
+    1024,
+    390
+  ],
+  "captures": [
+    "gallery-1600",
+    "gallery-1024",
+    "gallery-390",
+    "01-home",
+    "02-map",
+    "16-battle",
+    "18-pause",
+    "22-settings",
+    "29-structure"
+  ],
+  "actions": [
+    "filter groups",
+    "open every tested modal",
+    "deep link",
+    "next",
+    "previous",
+    "Escape"
+  ],
+  "errors": []
+}

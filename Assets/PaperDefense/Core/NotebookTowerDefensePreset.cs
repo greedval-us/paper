@@ -48,7 +48,12 @@ namespace PaperDefense.Core
             {d.Entrances.Add(new BattlefieldCell(0,y));d.Entrances.Add(new BattlefieldCell(95,y));}
             foreach(int x in new[]{12,36,60,84})
             {d.Entrances.Add(new BattlefieldCell(x,63));d.Entrances.Add(new BattlefieldCell(x,0));}
+            // These small islands belong to the real open-terrain map, so their
+            // visible pine silhouettes and construction/navigation footprints agree.
+            // The central build field and five-cell cardinal approaches stay clear.
+            Pine(38,35);Pine(57,35);Pine(38,27);Pine(57,27);
             return d;
+            void Pine(int x,int y)=>d.Props.Add(new TerrainPropDefinition{Kind=TerrainPropKind.Pine,X=x,Y=y,Width=2,Height=3});
         }
         public static BattlefieldDefinition CreateFixedRoadBattlefield()
         {

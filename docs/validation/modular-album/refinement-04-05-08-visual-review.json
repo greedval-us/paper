@@ -1,0 +1,151 @@
+{
+  "schema": "paper-defense/scoped-visual-review/v1",
+  "reviewedOn": "2026-10-23",
+  "scope": "04 Foundation /05 Weapons /08 Review",
+  "reviewer": {
+    "executor": "/root",
+    "reviewSource": "agent",
+    "vision": "Root physically opened all15 final PNGs and all3 original concept PNGs; implementer also reviewed source/baseline and pre-fix captures."
+  },
+  "status": "reviewed_pass",
+  "technicalEvidence": "refinement-04-28-green.json",
+  "captureSourceManifest": "refinement-batch2-capture-manifest.json",
+  "fixedFindings": [
+    "Disabled active step stays readable white on blue without enabling navigation.",
+    "Gold stack and actual resource text grouped together.",
+    "Short weapon cards use side-by-side art/name/price at1280x720.",
+    "Preview-owned foundation action, real load meter, grouped review checks and live name preserved."
+  ],
+  "residuals": [
+    "Modern modular broad foundation and actual seven weapon identities supersede illustrative legacy round foundations/cannons.",
+    "At compact sizes auxiliary foundation captions and weapon-category captions are small; all values and actions remain visible.",
+    "Composition details remain in one genuine scroll viewport; only first rows are visible without scrolling.",
+    "Added route selection, preparation navigation and actual capacity note are required current gameplay controls absent from some concepts."
+  ],
+  "blockingFindings": [],
+  "scenes": [
+    {
+      "id": "04",
+      "name": "foundation",
+      "observations": "Four real frames and selection/unlock conditions remain visible at all5 sizes. Strong preview and separate metric region, custom action grouped below it. Mount sockets/whole foundations preserved.",
+      "captures": [
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1024x768.png",
+          "sha256": "65db41515788b79b7ed3bcba5a6b3b26f0e6d5dec4b8c897837dabc70a7f6f63",
+          "metadataSha256": "bc65d534f1dec4b89845f00117125cb7d56baf0672d5892de499cc0db5a9ca43",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1280x720.png",
+          "sha256": "59836d2c856960ea3137ff9f8c7dbe8cb28ba6f78ebf6c94b578e7e4aa4e6e91",
+          "metadataSha256": "d4940a45123ad938e6e0c26233cd43a47887f953c65d3de4687df32e9eabaa64",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1280x960.png",
+          "sha256": "f38c3531d16d6b9e76e8644dc63e43f44ff3953c513d2827ca28a654ec518707",
+          "metadataSha256": "2b74daabeeb014fe42a93e909d42e881bf6af4547b1948b86b59dd442e800b93",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1600x900.png",
+          "sha256": "45b3f60607e723d813bf3b4aff2b8fc846fa189bac84d7511ffd065519c0b5a8",
+          "metadataSha256": "48f6848c4041cb2bebdc7fa846bcc8746cdfe94670402343679cdf352f2d9318",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-04-foundation-1920x1080.png",
+          "sha256": "377ae254f7a3cc37f03868d2798dc604865e1c2eb98d3ebb348dc3f84cfc042e",
+          "metadataSha256": "ba41a282a4ce72a2cd3cb87e239c48a8d06afa2e44f229f5fdeff49552b46d30",
+          "visuallyOpened": true
+        }
+      ],
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/04-foundation.png",
+        "sha256": "9180154b909dd512afea969def6509a0b0220b972ff7f56a5699dbbc1723285c"
+      }
+    },
+    {
+      "id": "05",
+      "name": "weapons",
+      "observations": "Seven actual weapon cards, selected mount, true load/capacity and actual total price all visible. Adaptive short-card art prevents previous tiny illustrations at720. Full detail controls and edit action fit.",
+      "captures": [
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1024x768.png",
+          "sha256": "50fc05943c9c5f16023c6a1111c73f38d651fb1e12e9dcc3c3fc200019dd2c66",
+          "metadataSha256": "aa7605e1a5a78f5a153ef70599d0ebedb56f3739c4fb7831ba00c176938319b1",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1280x720.png",
+          "sha256": "16c815f0b528ccfdec1d1d9f11f88eef8a0e6d60189009f4aceec337e087f488",
+          "metadataSha256": "876e9263e91c0b0cff50528e9e05fbcb6efd56c5a0f79b4aacecec144bf772fa",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1280x960.png",
+          "sha256": "c5921333320c679a98efd1b38343d27103a998e5f7253f131fb3005aec96edaa",
+          "metadataSha256": "de6054daa42b837ea49b06b06b3580f736fe4b496a770078c91901232babaa00",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1600x900.png",
+          "sha256": "c365f48ff206b3fea4ec260b26a29e6dec14a2a6f4d9bdb42dc9f2ee43ddae23",
+          "metadataSha256": "b3baa08c24a721d615df8b7feb8e618b8df1cc6acc0399c69fe7025e471766ec",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-05-weapons-1920x1080.png",
+          "sha256": "a9b151a8ff771db26acdf1d29013834d29c6d0edfa5bb645fe22337e9bb42a7e",
+          "metadataSha256": "520cbe71e0400c5243c672e9f5287bd4a70c4580f73504c4b4add5e7c8d02d0c",
+          "visuallyOpened": true
+        }
+      ],
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/05-weapons.png",
+        "sha256": "2f0893c31272c3e20e6a79b873c8db17770f3c92f89a22cba2b271a20421f638"
+      }
+    },
+    {
+      "id": "08",
+      "name": "review",
+      "observations": "Whole double-gun recipe fits all5 frames. Live name,3 checks,3 values, trial, variant/save fit. Desktop hero margins and narrower right card approximate source while supporting real broad foundation.",
+      "captures": [
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1024x768.png",
+          "sha256": "279b7f03391854b271ca96bd4cb78c5e9328eb4f42eba780c94c19f2abe3c0f6",
+          "metadataSha256": "87d8be6dd5ff12c25918fa894e161aba3a650af2da0037fda09708afaaf32434",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1280x720.png",
+          "sha256": "232a7c70e69026fea46141baa221105930d03e5c9a9c85df3f2a683d02d07139",
+          "metadataSha256": "986936092e8f085528a3e034401988022f3d2ccaed933f2be1ec92af4f886754",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1280x960.png",
+          "sha256": "64a9965c622cf746073d4ffa6e0779ab71f3db7359662d992f2d72980c5b90b2",
+          "metadataSha256": "957c2ca29040555c98bb6d40a7ceb97550f5b916770aef8877adc7687f267d05",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1600x900.png",
+          "sha256": "e21f620aa0c065523a96a478e79cdc2a7b02a726eb4951c7863c3b2cf7ddbc13",
+          "metadataSha256": "6d7261da4e1af8e1cb2df47e97272052dd8564950fd04cc23bdb62db5d773c2c",
+          "visuallyOpened": true
+        },
+        {
+          "path": "docs/validation/modular-album/refinement-screenshots/refinement-08-review-1920x1080.png",
+          "sha256": "2feebc643ff4e1b987f4619b99b09f93568f6c1b2363a2b2f3a12ac1257adb24",
+          "metadataSha256": "f113e118694a6e151edb8acdee9322fb1b78769b5d1df5cb89657a7eb4d5f96b",
+          "visuallyOpened": true
+        }
+      ],
+      "source": {
+        "path": "docs/design/game-concept-art-2026-10-16/screens/08-review.png",
+        "sha256": "77ec8626b7444519e8c635d44ff07ba496e180bc5f20bc76ab72750db568522b"
+      }
+    }
+  ]
+}

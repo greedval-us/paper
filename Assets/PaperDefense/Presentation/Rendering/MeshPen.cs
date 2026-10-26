@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace PaperDefense.Presentation
 {
     /// <summary>Authored strokes and atlas illustrations share one reusable mesh and draw order.</summary>
-    internal sealed class MeshPen
+    public sealed class MeshPen
     {
         readonly List<Vector3> vertices;
         readonly List<Color32> colors;
@@ -46,6 +46,17 @@ namespace PaperDefense.Presentation
         }
 
         internal int VertexCount => vertices.Count;
+        internal bool TryGetBounds(out Rect bounds) => TryGetBounds(0, out bounds);
+        internal bool TryGetBounds(int firstVertex, out Rect bounds)
+        {
+            bounds = default;
+            if (firstVertex < 0 || firstVertex >= vertices.Count) return false;
+            Vector2 low = vertices[firstVertex], high = low;
+            for (int i = firstVertex + 1; i < vertices.Count; i++)
+            { low = Vector2.Min(low, vertices[i]); high = Vector2.Max(high, vertices[i]); }
+            bounds = UnityEngine.Rect.MinMaxRect(low.x, low.y, high.x, high.y);
+            return true;
+        }
         internal void ScaleFrom(int firstVertex, Vector2 pivot, float scale)
         {
             for (int i = firstVertex; i < vertices.Count; i++)
@@ -251,7 +262,7 @@ namespace PaperDefense.Presentation
         /// Copy one consecutive triangle slice without changing winding or draw order. Expanding corners
         /// also handles triangles sharing vertices across a boundary, without per-frame remap buffers.
         /// </summary>
-        internal void CopyUiBatchTo(VertexHelper target, Vector2 origin, float scale, int batchIndex)
+        internal void CopyUiBatchTo(VertexHelper target, Vector2 origin, float scale, int batchIndex, bool mirrorX = false)
         {
             int first = batchIndex * MaximumUiBatchVertices;
             int end = Math.Min(first + MaximumUiBatchVertices, indices.Count);
@@ -261,7 +272,7 @@ namespace PaperDefense.Presentation
                 for (int corner = 0; corner < 3; corner++)
                 {
                     int source = indices[i + corner];
-                    target.AddVert(origin + new Vector2(vertices[source].x, vertices[source].y) * scale,
+                    target.AddVert(origin + new Vector2(vertices[source].x * (mirrorX ? -1 : 1), vertices[source].y) * scale,
                         colors[source], atlasCoordinates[source]);
                 }
                 target.AddTriangle(start, start + 1, start + 2);

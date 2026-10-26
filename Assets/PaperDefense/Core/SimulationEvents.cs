@@ -25,6 +25,7 @@ namespace PaperDefense.Core
         public readonly int EntityId;
         public readonly int SourceStructureId, MountSlotIndex;
         public readonly long ActionId;
+        /// <summary>Actual action or impact time; composite cycles may emit several moments within one Tick.</summary>
         public readonly double SimulationSeconds;
         public readonly EnemyKind EnemyKind;
         public readonly DrawingTier EnemyDrawingTier;

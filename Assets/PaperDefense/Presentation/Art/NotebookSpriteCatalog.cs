@@ -85,6 +85,31 @@ namespace PaperDefense.Presentation
             return true;
         }
 
+        /// <summary>Maps an authored pixel canvas through a trimmed atlas frame without changing its anchors.</summary>
+        internal static bool TryDrawFrame(MeshPen pen, string id, Rect trim, Rect region, Vector2 pivot,
+            float scale, float radians, float opacity, Color tint)
+        {
+            EnsureLoaded();
+            if (pen == null || texture == null || id == null || !entries.TryGetValue(id, out var entry)) return false;
+            if (!Finite(scale) || scale <= 0 || !Finite(radians) || !Finite(pivot.x) || !Finite(pivot.y)
+                || !Finite(trim.x) || !Finite(trim.y) || !Finite(trim.width) || !Finite(trim.height)
+                || !Finite(region.x) || !Finite(region.y) || !Finite(region.width) || !Finite(region.height)) return false;
+            float left = Mathf.Max(trim.xMin, region.xMin), right = Mathf.Min(trim.xMax, region.xMax);
+            float bottom = Mathf.Max(trim.yMin, region.yMin), top = Mathf.Min(trim.yMax, region.yMax);
+            if (trim.width <= 0 || trim.height <= 0 || right <= left || top <= bottom) return false;
+            Rect atlas = UV(entry);
+            var uv = Rect.MinMaxRect(atlas.xMin + (left - trim.xMin) / trim.width * atlas.width,
+                atlas.yMin + (bottom - trim.yMin) / trim.height * atlas.height,
+                atlas.xMin + (right - trim.xMin) / trim.width * atlas.width,
+                atlas.yMin + (top - trim.yMin) / trim.height * atlas.height);
+            float cosine = Mathf.Cos(radians), sine = Mathf.Sin(radians); tint.a *= opacity;
+            pen.TexturedQuad(Transform(new Vector2(left, bottom), pivot, scale, Vector2.one, cosine, sine),
+                Transform(new Vector2(right, bottom), pivot, scale, Vector2.one, cosine, sine),
+                Transform(new Vector2(right, top), pivot, scale, Vector2.one, cosine, sine),
+                Transform(new Vector2(left, top), pivot, scale, Vector2.one, cosine, sine), uv, tint);
+            return true;
+        }
+
         public static bool TryDrawUI(VertexHelper target, string id, Vector2 pivot, float scale = 1,
             float radians = 0, float opacity = 1, Vector2? localScale = null, Color? tint = null)
         {

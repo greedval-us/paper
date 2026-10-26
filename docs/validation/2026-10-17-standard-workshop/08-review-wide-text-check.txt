@@ -1,0 +1,2 @@
+Caption: Сохранить как вариант [visible -1/21]
+Caption: Альбом [visible -1/6]

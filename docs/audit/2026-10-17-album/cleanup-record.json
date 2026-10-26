@@ -1,0 +1,84 @@
+{
+  "recordType": "historical-cleanup-record",
+  "status": "superseded-do-not-execute",
+  "note": "История прежней уборки, не план действий. Полная галерея game-concept-art-2026-10-16 впоследствии восстановлена и обновлена: 30 экранов и 3 листа объектов; удалять её повторно нельзя.",
+  "date": "2026-10-18",
+  "authorization": "Пользователь разрешил удалить старые материалы",
+  "targets": [
+    "D:\\Projekt Unity\\paper\\docs\\design\\game-concept-art-2026-10-16",
+    "D:\\Projekt Unity\\paper\\docs\\design\\game-concept-art-2026-10-17-modular",
+    "D:\\Projekt Unity\\paper\\docs\\Drawing-Workbench.md",
+    "D:\\Projekt Unity\\paper\\docs\\Guided-Workshop.md",
+    "D:\\Projekt Unity\\paper\\docs\\Modular-Towers.md",
+    "D:\\Projekt Unity\\paper\\docs\\Workshop-Guide.md",
+    "D:\\Projekt Unity\\paper\\docs\\Player-Game.md",
+    "D:\\Projekt Unity\\paper\\docs\\Charge-Imprint.md",
+    "D:\\Projekt Unity\\paper\\docs\\Fan-Volley.md",
+    "D:\\Projekt Unity\\paper\\docs\\Directional-Armor.md",
+    "D:\\Projekt Unity\\paper\\docs\\Footprint-Study.md",
+    "D:\\Projekt Unity\\paper\\docs\\design\\album-assembly-2026-10-17\\art\\04-album-concept.png"
+  ],
+  "preserved": [
+    {
+      "originalPath": "docs/design/game-concept-art-2026-10-17-modular/sheets/A4-weapon-components.png",
+      "preservedPath": "ArtSource/Notebook/References/2026-10-17/sheets/A4-weapon-components.png",
+      "sha256": "a993a4f1ec47950f631851282b0b03a5cd389a3cd7c96406e65622045d22ef1b"
+    },
+    {
+      "originalPath": "docs/design/game-concept-art-2026-10-17-modular/screens/05-weapons.png",
+      "preservedPath": "ArtSource/Notebook/References/2026-10-17/screens/05-weapons.png",
+      "sha256": "215a48eba26fc0c27124caeac975e3d3a0157e3fe37a171465ec3cae7bf289eb"
+    },
+    {
+      "originalPath": "docs/design/game-concept-art-2026-10-16/screens/01-home.png",
+      "preservedPath": "ArtSource/Notebook/References/2026-10-16/screens/01-home.png",
+      "sha256": "8f871da2ed12c1850046141a56600f566b0e5d79bd5d549102b997556655ae21"
+    },
+    {
+      "originalPath": "docs/design/game-concept-art-2026-10-16/screens/02-map.png",
+      "preservedPath": "ArtSource/Notebook/References/2026-10-16/screens/02-map.png",
+      "sha256": "1116777973506b25944fc8edad89d39c3d6a4ff6a7a2904ebee6bded480e1b13"
+    },
+    {
+      "originalPath": "docs/design/game-concept-art-2026-10-16/screens/03-preparation.png",
+      "preservedPath": "ArtSource/Notebook/References/2026-10-16/screens/03-preparation.png",
+      "sha256": "967eb2a10cee2834d27df539c748b3d65babc5b39c5a98f1625ddae31a85ee07"
+    },
+    {
+      "originalPath": "docs/design/game-concept-art-2026-10-17-modular/sheets/A1-standard-foundations.png",
+      "preservedPath": "ArtSource/Notebook/References/2026-10-17/sheets/A1-standard-foundations.png",
+      "sha256": "2d009837ed605518ca80ab399d3a76043cf9e4460bedbae0f39d73b16d2dd361"
+    },
+    {
+      "originalPath": "docs/design/game-concept-art-2026-10-17-modular/sheets/A2-standard-weapons.png",
+      "preservedPath": "ArtSource/Notebook/References/2026-10-17/sheets/A2-standard-weapons.png",
+      "sha256": "14eac7e7e6c06b79d3de7ad2072a10f20be6e1c8e250504604755a6c0aae157c"
+    },
+    {
+      "originalPath": "docs/design/game-concept-art-2026-10-16/screens/06-drawing.png",
+      "preservedPath": "ArtSource/Notebook/References/2026-10-16/screens/06-drawing.png",
+      "sha256": "c238e9c397ff41dbd7aef5186a2aebf1f08cf56a756bbd3c58e5d61c3ed555e9"
+    },
+    {
+      "originalPath": "docs/design/game-concept-art-2026-10-16/screens/04-foundation.png",
+      "preservedPath": "ArtSource/Notebook/References/2026-10-16/screens/04-foundation.png",
+      "sha256": "e622d11b7fc2afa09fe346b4dcef8bb8fa0fdfb0b65ea12ca79e8aa741e1c680"
+    },
+    {
+      "originalPath": "docs/design/game-concept-art-2026-10-16/screens/05-weapons.png",
+      "preservedPath": "ArtSource/Notebook/References/2026-10-16/screens/05-weapons.png",
+      "sha256": "766dac5bd02e9463b1d2b7fb7965e397e9feb5f91a66ec1109b3008e12e7c7c6"
+    },
+    {
+      "originalPath": "docs/design/game-concept-art-2026-10-16/screens/22-settings.png",
+      "preservedPath": "ArtSource/Notebook/References/2026-10-16/screens/22-settings.png",
+      "sha256": "39b94f1371b2a440ceca115c7c9b0425704842bb1c833481516ce2e0d08eaf71"
+    },
+    {
+      "originalPath": "docs/design/game-concept-art-2026-10-16/screens/16-battle.png",
+      "preservedPath": "ArtSource/Notebook/References/2026-10-16/screens/16-battle.png",
+      "sha256": "aa3906280182b2af5eaa83413820f2c472537d6e03b7dde40ac0fdccd74c680c"
+    }
+  ],
+  "scope": "Старые документы и галереи. Игровой код, сохранения и рабочие ассеты не удаляются."
+}

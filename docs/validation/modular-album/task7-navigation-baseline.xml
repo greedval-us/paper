@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="15" result="Passed" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 05:24:25Z" end-time="2026-10-18 05:24:26Z" duration="0,9889726">
+  <test-suite type="TestSuite" id="1748" name="paper" fullname="paper" runstate="Runnable" testcasecount="1262" result="Passed" start-time="2026-10-18 05:24:25Z" end-time="2026-10-18 05:24:26Z" duration="0.988973" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="3038" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="1092" result="Passed" start-time="2026-10-18 05:24:25Z" end-time="2026-10-18 05:24:26Z" duration="0.982529" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="3039" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="1092" result="Passed" start-time="2026-10-18 05:24:25Z" end-time="2026-10-18 05:24:26Z" duration="0.882438" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="3040" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="1092" result="Passed" start-time="2026-10-18 05:24:25Z" end-time="2026-10-18 05:24:26Z" duration="0.783245" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1764" name="ArmorCombatIntegrationTests" fullname="PaperDefense.Tests.ArmorCombatIntegrationTests" classname="PaperDefense.Tests.ArmorCombatIntegrationTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-18 05:24:25Z" end-time="2026-10-18 05:24:26Z" duration="0.305652" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1771" name="CounterfireTrialHonorsFixedFacing" fullname="PaperDefense.Tests.ArmorCombatIntegrationTests.CounterfireTrialHonorsFixedFacing" methodname="CounterfireTrialHonorsFixedFacing" classname="PaperDefense.Tests.ArmorCombatIntegrationTests" runstate="Runnable" seed="79992792" result="Passed" start-time="2026-10-18 05:24:25Z" end-time="2026-10-18 05:24:25Z" duration="0.066307" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1767" name="InterceptedGlobUsesItsLaunchSideEvenWhenItsDestinationIsBeyondTower" fullname="PaperDefense.Tests.ArmorCombatIntegrationTests.InterceptedGlobUsesItsLaunchSideEvenWhenItsDestinationIsBeyondTower" classname="PaperDefense.Tests.ArmorCombatIntegrationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:24:25Z" end-time="2026-10-18 05:24:25Z" duration="0.036865" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1765" name="InterceptedGlobUsesItsLaunchSideEvenWhenItsDestinationIsBeyondTower(3,40.0f)" fullname="PaperDefense.Tests.ArmorCombatIntegrationTests.InterceptedGlobUsesItsLaunchSideEvenWhenItsDestinationIsBeyondTower(3,40.0f)" methodname="InterceptedGlobUsesItsLaunchSideEvenWhenItsDestinationIsBeyondTower" classname="PaperDefense.Tests.ArmorCombatIntegrationTests" runstate="Runnable" seed="963069514" result="Passed" start-time="2026-10-18 05:24:25Z" end-time="2026-10-18 05:24:25Z" duration="0.005364" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1766" name="InterceptedGlobUsesItsLaunchSideEvenWhenItsDestinationIsBeyondTower(1,100.0f)" fullname="PaperDefense.Tests.ArmorCombatIntegrationTests.InterceptedGlobUsesItsLaunchSideEvenWhenItsDestinationIsBeyondTower(1,100.0f)" methodname="InterceptedGlobUsesItsLaunchSideEvenWhenItsDestinationIsBeyondTower" classname="PaperDefense.Tests.ArmorCombatIntegrationTests" runstate="Runnable" seed="1663667021" result="Passed" start-time="2026-10-18 05:24:25Z" end-time="2026-10-18 05:24:25Z" duration="0.000817" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1770" name="RealMeleeHitUsesAttackerSideRatherThanTurretAim" fullname="PaperDefense.Tests.ArmorCombatIntegrationTests.RealMeleeHitUsesAttackerSideRatherThanTurretAim" classname="PaperDefense.Tests.ArmorCombatIntegrationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:24:25Z" end-time="2026-10-18 05:24:26Z" duration="0.100743" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1768" name="RealMeleeHitUsesAttackerSideRatherThanTurretAim(3,10.8f)" fullname="PaperDefense.Tests.ArmorCombatIntegrationTests.RealMeleeHitUsesAttackerSideRatherThanTurretAim(3,10.8f)" methodname="RealMeleeHitUsesAttackerSideRatherThanTurretAim" classname="PaperDefense.Tests.ArmorCombatIntegrationTests" runstate="Runnable" seed="805290873" result="Passed" start-time="2026-10-18 05:24:26Z" end-time="2026-10-18 05:24:26Z" duration="0.006802" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1769" name="RealMeleeHitUsesAttackerSideRatherThanTurretAim(1,27.0f)" fullname="PaperDefense.Tests.ArmorCombatIntegrationTests.RealMeleeHitUsesAttackerSideRatherThanTurretAim(1,27.0f)" methodname="RealMeleeHitUsesAttackerSideRatherThanTurretAim" classname="PaperDefense.Tests.ArmorCombatIntegrationTests" runstate="Runnable" seed="1941612438" result="Passed" start-time="2026-10-18 05:24:26Z" end-time="2026-10-18 05:24:26Z" duration="0.001098" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="2671" name="NavigationTests" fullname="PaperDefense.Tests.NavigationTests" classname="PaperDefense.Tests.NavigationTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-18 05:24:26Z" end-time="2026-10-18 05:24:26Z" duration="0.381843" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="2678" name="EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows" fullname="PaperDefense.Tests.NavigationTests.EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows" classname="PaperDefense.Tests.NavigationTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-18 05:24:26Z" end-time="2026-10-18 05:24:26Z" duration="0.101687" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2672" name="EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows(4,19,4,18)" fullname="PaperDefense.Tests.NavigationTests.EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows(4,19,4,18)" methodname="EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows" classname="PaperDefense.Tests.NavigationTests" runstate="Runnable" seed="373993269" result="Passed" start-time="2026-10-18 05:24:26Z" end-time="2026-10-18 05:24:26Z" duration="0.000760" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2673" name="EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows(16,19,16,18)" fullname="PaperDefense.Tests.NavigationTests.EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows(16,19,16,18)" methodname="EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows" classname="PaperDefense.Tests.NavigationTests" runstate="Runnable" seed="30190800" result="Passed" start-time="2026-10-18 05:24:26Z" end-time="2026-10-18 05:24:26Z" duration="0.000202" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2674" name="EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows(4,0,4,1)" fullname="PaperDefense.Tests.NavigationTests.EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows(4,0,4,1)" methodname="EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows" classname="PaperDefense.Tests.NavigationTests" runstate="Runnable" seed="1637841175" result="Passed" start-time="2026-10-18 05:24:26Z" end-time="2026-10-18 05:24:26Z" duration="0.000194" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2675" name="EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows(16,0,16,1)" fullname="PaperDefense.Tests.NavigationTests.EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows(16,0,16,1)" methodname="EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows" classname="PaperDefense.Tests.NavigationTests" runstate="Runnable" seed="689167841" result="Passed" start-time="2026-10-18 05:24:26Z" end-time="2026-10-18 05:24:26Z" duration="0.000119" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2676" name="EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows(0,4,1,4)" fullname="PaperDefense.Tests.NavigationTests.EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows(0,4,1,4)" methodname="EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows" classname="PaperDefense.Tests.NavigationTests" runstate="Runnable" seed="760839214" result="Passed" start-time="2026-10-18 05:24:26Z" end-time="2026-10-18 05:24:26Z" duration="0.000093" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2677" name="EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows(19,4,18,4)" fullname="PaperDefense.Tests.NavigationTests.EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows(19,4,18,4)" methodname="EqualCostRoutesAdvanceTowardTheGoalInsteadOfFormingBorderRows" classname="PaperDefense.Tests.NavigationTests" runstate="Runnable" seed="2094846882" result="Passed" start-time="2026-10-18 05:24:26Z" end-time="2026-10-18 05:24:26Z" duration="0.000093" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2683" name="FlowUsesRemainingHealthAndIgnoresUnfinishedBlockers" fullname="PaperDefense.Tests.NavigationTests.FlowUsesRemainingHealthAndIgnoresUnfinishedBlockers" methodname="FlowUsesRemainingHealthAndIgnoresUnfinishedBlockers" classname="PaperDefense.Tests.NavigationTests" runstate="Runnable" seed="812592240" result="Passed" start-time="2026-10-18 05:24:26Z" end-time="2026-10-18 05:24:26Z" duration="0.000673" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2681" name="NorthAndSouthEnemiesLeaveTheBorderBeforeConvergingOnTheCenter" fullname="PaperDefense.Tests.NavigationTests.NorthAndSouthEnemiesLeaveTheBorderBeforeConvergingOnTheCenter" classname="PaperDefense.Tests.NavigationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:24:26Z" end-time="2026-10-18 05:24:26Z" duration="0.174682" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2679" name="NorthAndSouthEnemiesLeaveTheBorderBeforeConvergingOnTheCenter(4)" fullname="PaperDefense.Tests.NavigationTests.NorthAndSouthEnemiesLeaveTheBorderBeforeConvergingOnTheCenter(4)" methodname="NorthAndSouthEnemiesLeaveTheBorderBeforeConvergingOnTheCenter" classname="PaperDefense.Tests.NavigationTests" runstate="Runnable" seed="1450745549" result="Passed" start-time="2026-10-18 05:24:26Z" end-time="2026-10-18 05:24:26Z" duration="0.041681" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2680" name="NorthAndSouthEnemiesLeaveTheBorderBeforeConvergingOnTheCenter(8)" fullname="PaperDefense.Tests.NavigationTests.NorthAndSouthEnemiesLeaveTheBorderBeforeConvergingOnTheCenter(8)" methodname="NorthAndSouthEnemiesLeaveTheBorderBeforeConvergingOnTheCenter" classname="PaperDefense.Tests.NavigationTests" runstate="Runnable" seed="1323442102" result="Passed" start-time="2026-10-18 05:24:26Z" end-time="2026-10-18 05:24:26Z" duration="0.035131" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2682" name="SpatialQueriesMatchFullScanAtEdgesAndAfterDeaths" fullname="PaperDefense.Tests.NavigationTests.SpatialQueriesMatchFullScanAtEdgesAndAfterDeaths" methodname="SpatialQueriesMatchFullScanAtEdgesAndAfterDeaths" classname="PaperDefense.Tests.NavigationTests" runstate="Runnable" seed="433614434" result="Passed" start-time="2026-10-18 05:24:26Z" end-time="2026-10-18 05:24:26Z" duration="0.013082" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task7-navigation-baseline.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

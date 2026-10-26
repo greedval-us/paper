@@ -1,0 +1,28 @@
+{
+  "mode": "built-in image_gen",
+  "reference": "docs/design/game-concept-art-2026-10-16/screens/18-pause.png",
+  "prompt": "Use case: background-extraction / precise-object-edit. Asset type: standalone blank portrait notebook paper panel for a real Unity game, intended for nine-slice reuse. Input image1 is an approved blue-ballpoint game concept. Recreate ONLY the central pause paper card as a clean isolated blank object. Preserve its beautiful warm ivory paper fibers, very subtly mottled grain, slightly irregular rounded rectangular edges, thin double dark cobalt pen outline, tiny hand-drawn crosshatch shadow just inside lower/right edge. Remove ALL text, icons, controls, underline, dividers, and background scene. The entire paper interior must be clean blank pale ivory with no grid or marks, for live game text. Do not include a folded corner or a ribbon. Object aspect ratio about3:4 portrait, front-on with straight parallel edges and very small transparent padding about2percent around the entire panel. Make the outline and corners crisp dense authentic ballpoint hatching, not a flat vector stroke. Keep all border ornament within the outer6percent; central88percent is quiet blank opaque ivory. Transparent background outside the card, opaque paper inside. No text, numbers, symbols, buttons, landscape, drop shadows beyond the slim paper outline, or extraneous objects.",
+  "generated": "C:/Users/Greedval/.codex/generated_images/01a14cd7-7db2-7df0-8654-f50c4f801bf0/exec-03c20f63-17cf-4ddc-818d-f8241f6564cb.png",
+  "source": "ArtSource/Notebook/NewStyle/NotebookPaperCardV1.png",
+  "runtime": "Assets/PaperDefense/Resources/Art/Player/NotebookPaperCardV1.png",
+  "dimensions": [
+    1086,
+    1448
+  ],
+  "postprocessing": "none; native PNG copied unchanged",
+  "review": "Root physically inspected generated output: text-free, source-style ink/paper, usable live-content region",
+  "spriteRegionUnity": [
+    24,
+    48,
+    1038,
+    1328
+  ],
+  "slicingBorderPixels": [
+    96,
+    96,
+    96,
+    96
+  ],
+  "imagePixelsPerUnitMultiplier": 4,
+  "regionReason": "Remove surrounding transparent padding and isolated stray ink above paper; keep complete actual paper contour."
+}

@@ -99,9 +99,26 @@ namespace PaperDefense.Presentation
             {
                 Color color = MeshPen.Alpha(item.Attack == AttackKind.Line ? NotebookPalette.Marker : NotebookPalette.Blue, fade * .85f);
                 float width = item.Attack == AttackKind.Line ? .075f : item.Attack == AttackKind.Cone ? .025f : .04f;
-                Vector2 from = item.Attack == AttackKind.Line || item.Attack == AttackKind.Ricochet ? muzzle
-                    : Vector2.Lerp(muzzle, at, Mathf.Clamp01(t * .75f));
-                pen.Line(from, at, width, color);
+                if (item.Attack == AttackKind.Single)
+                {
+                    // Ordinary bullets read as moving ink marks rather than long beams.
+                    // The captured hit and its impact artwork keep their actual target.
+                    Vector2 path = at - muzzle;
+                    float distance = path.magnitude;
+                    if (distance > .0001f)
+                    {
+                        float length = Mathf.Min(.65f, distance);
+                        float tip = Mathf.Lerp(length, distance, t);
+                        Vector2 direction = path / distance;
+                        pen.Line(muzzle + direction * (tip - length), muzzle + direction * tip, width, color);
+                    }
+                }
+                else
+                {
+                    Vector2 from = item.Attack == AttackKind.Line || item.Attack == AttackKind.Ricochet ? muzzle
+                        : Vector2.Lerp(muzzle, at, Mathf.Clamp01(t * .75f));
+                    pen.Line(from, at, width, color);
+                }
             }
             DrawResource(pen, theme, id, at, age, fade);
         }

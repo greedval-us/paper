@@ -1,0 +1,53 @@
+{
+  "job_id": "9e9b2408de6344e2b9d9c443f9b27176",
+  "status": "failed",
+  "mode": "EditMode",
+  "started_unix_ms": 1792925537703,
+  "finished_unix_ms": 1792925543303,
+  "last_update_unix_ms": 1792925543303,
+  "progress": {
+    "completed": 1,
+    "total": 1,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": null,
+    "last_finished_test_full_name": "PaperDefense.Tests.AssemblyArtSilhouetteTests.ModernTurnHub_DoesNotCarryAClippedPatchOfTheBroadOldPlinth",
+    "last_finished_unix_ms": 1792925543159,
+    "stuck_suspected": false,
+    "editor_is_focused": false,
+    "run_in_background": true,
+    "focus_nudge_attempts": null,
+    "focus_nudge_limit": null,
+    "focus_nudge_status": null,
+    "blocked_reason": null,
+    "failures_so_far": [
+      {
+        "full_name": "PaperDefense.Tests.AssemblyArtSilhouetteTests.ModernTurnHub_DoesNotCarryAClippedPatchOfTheBroadOldPlinth",
+        "message": "  Outside the narrow front bolt, the hub's lower corners must be transparent, not a clipped ivory floor rectangle.\r\n  Expected: less than 8\r\n  But was:  254\r\n"
+      }
+    ],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "EditMode",
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "durationSeconds": 1.0985648,
+      "resultState": "Failed(Child)"
+    },
+    "results": [
+      {
+        "name": "ModernTurnHub_DoesNotCarryAClippedPatchOfTheBroadOldPlinth",
+        "fullName": "PaperDefense.Tests.AssemblyArtSilhouetteTests.ModernTurnHub_DoesNotCarryAClippedPatchOfTheBroadOldPlinth",
+        "state": "Failed",
+        "durationSeconds": 0.6114455,
+        "message": "  Outside the narrow front bolt, the hub's lower corners must be transparent, not a clipped ivory floor rectangle.\r\n  Expected: less than 8\r\n  But was:  254\r\n",
+        "stackTrace": "at PaperDefense.Tests.AssemblyArtSilhouetteTests.ModernTurnHub_DoesNotCarryAClippedPatchOfTheBroadOldPlinth () [0x0011d] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\Editor\\AssemblyArtSilhouetteTests.cs:163\r\n",
+        "output": ""
+      }
+    ]
+  }
+}

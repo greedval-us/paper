@@ -1,0 +1,105 @@
+{
+  "branch": "codex/standard-workshop-stage1",
+  "files": [
+    {
+      "file": "Assets/PaperDefense/Core/TowerBlueprint.cs",
+      "bytes": 18663,
+      "sha256": "81548b6e730db01138f03f3da00ad8d2381d4ba985d39f3543fa8fe7b9a49417"
+    },
+    {
+      "file": "Assets/PaperDefense/Editor/FullGameUiCapture.cs",
+      "bytes": 10004,
+      "sha256": "78d4983f10c860cc464ac5e6031230cc0b6e60fdd9ae01358f016555d243e901"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/Player/PlayerShell.Dialogs.cs",
+      "bytes": 10273,
+      "sha256": "187018554e670287e2acb37606a6e210766a9fb57c643f5b2ac6d5cc868a1128"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/Player/PlayerShell.Home.cs",
+      "bytes": 7309,
+      "sha256": "7f2886a9654c6cf70b3698343a983fc1dd01ee4b647d9b79964a14b92d479159"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/Player/PlayerShell.cs",
+      "bytes": 9062,
+      "sha256": "c1c9a977d7f13ffca81bf6e6afe28f25c6ca8f7e35d204cdb3c9b175258a4564"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/UI/WizardWeaponHeader.cs",
+      "bytes": 16782,
+      "sha256": "e2b020b0f586fdcbf8b8cb34ad56c43eafef60150ec7522cc12ad6a9798accfd"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/UI/WizardWeaponPanel.cs",
+      "bytes": 23877,
+      "sha256": "7e8a7543958b9b5cd6dfcba2cf56466c0081b8b458636a1d7881276249f7afda"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/UI/WorkshopResponsiveLayout.cs",
+      "bytes": 27999,
+      "sha256": "127d4da0ca877211e356c444980cca0b5d49cff0a2ca7bd65d510938802c85f1"
+    },
+    {
+      "file": "Assets/PaperDefense/Presentation/UI/WorkshopWizard.cs",
+      "bytes": 19144,
+      "sha256": "ffbd02df87fcb6cee455b56b6cdf4f27782f72222b25d0c7690d0573cd3dc7df"
+    },
+    {
+      "file": "Assets/PaperDefense/Resources/Text/ru.asset",
+      "bytes": 151497,
+      "sha256": "75da1092b5235e0acbf3a370fed8a1100200b0f2ffa547f034ef1c239dda364b"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/EditMode/WorkshopAssemblyStageTests.cs",
+      "bytes": 7183,
+      "sha256": "0d58136fa579c054e0b103eed3ebd94d10f64303984603330e7b29ee0f7a73c2"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/PlayMode/PlayerJourneyTests.cs",
+      "bytes": 64424,
+      "sha256": "6b96ab227fe2d86db59934190a38b4e4038a752ef0c42412b78522a8159795a3"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/PlayMode/StandardWorkshopFlowTests.cs",
+      "bytes": 13474,
+      "sha256": "8db31cae7e5eda4492437932f073c9467e5498a008f1c9c0475620539477793e"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/PlayMode/StandardWorkshopFlowTests.cs.meta",
+      "bytes": 60,
+      "sha256": "3556b256e86f6959280aa3053625ad78ae1d433268fa139a3df85475d4f341ca"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/PlayMode/StandardWorkshopPersistenceTests.cs",
+      "bytes": 18876,
+      "sha256": "b9d9deedf804cf48a58aa38ab10af50a9b3e51d6796d763084cb58a2a2723e6d"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/PlayMode/StandardWorkshopPersistenceTests.cs.meta",
+      "bytes": 60,
+      "sha256": "983fa3fcbb2485b5e473c7002d0ec3a3a3b21e259115614fcfefe3efbce3c5a4"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/PlayMode/WorkshopDrawingScreenTests.cs",
+      "bytes": 12961,
+      "sha256": "59cd46f5d25f008409f55951c9f7c1cc8e355b8274d028a86356b0a83f3547bc"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/PlayMode/WorkshopFoundationTests.cs",
+      "bytes": 9611,
+      "sha256": "f701dbffbfe375e1d41dac95c038f52e05ddfbc81dc6561a308c5f4f029a719a"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/PlayMode/WorkshopWeaponScreenTests.cs",
+      "bytes": 19910,
+      "sha256": "b5087e0b20e71bf06f3f82821786eb8031a33b641be78142de0a9253de9d6832"
+    },
+    {
+      "file": "Assets/PaperDefense/Tests/PlayMode/WorkshopWizardTests.cs",
+      "bytes": 11054,
+      "sha256": "e37520434460878ba84ac958caf50ffaf9cc9a9f3609758357c5439022a13092"
+    }
+  ]
+}

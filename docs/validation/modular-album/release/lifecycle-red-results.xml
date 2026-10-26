@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Failed(Child)" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-25 22:01:47Z" end-time="2026-10-25 22:01:56Z" duration="9,5020053">
+  <test-suite type="TestSuite" id="1940" name="paper" fullname="paper" runstate="Runnable" testcasecount="754" result="Failed" site="Child" start-time="2026-10-25 22:01:47Z" end-time="2026-10-25 22:01:56Z" duration="9.502005" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1934" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="754" result="Failed" site="Child" start-time="2026-10-25 22:01:47Z" end-time="2026-10-25 22:01:56Z" duration="9.491154" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="32340" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1935" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="754" result="Failed" site="Child" start-time="2026-10-25 22:01:47Z" end-time="2026-10-25 22:01:56Z" duration="9.477850" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1936" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="754" result="Failed" site="Child" start-time="2026-10-25 22:01:47Z" end-time="2026-10-25 22:01:56Z" duration="9.460915" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1054" name="AlbumReleaseLifecycleTests" fullname="PaperDefense.Tests.AlbumReleaseLifecycleTests" classname="PaperDefense.Tests.AlbumReleaseLifecycleTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-10-25 22:01:47Z" end-time="2026-10-25 22:01:56Z" duration="9.450938" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1056" name="ClosingAnAlbumReleasesItsTooltipObjectsWithThePage" fullname="PaperDefense.Tests.AlbumReleaseLifecycleTests.ClosingAnAlbumReleasesItsTooltipObjectsWithThePage" methodname="ClosingAnAlbumReleasesItsTooltipObjectsWithThePage" classname="PaperDefense.Tests.AlbumReleaseLifecycleTests" runstate="Runnable" seed="2094602391" result="Failed" start-time="2026-10-25 22:01:47Z" end-time="2026-10-25 22:01:49Z" duration="2.269002" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Settled scene objects retained by the player:
+1 -> 2 Album release lifecycle player/Player interface/WorkshopTooltip [PaperDefense.Presentation.WorkshopSurfaceGraphic,PaperDefense.Presentation.WorkshopTooltipOverlay,UnityEngine.CanvasGroup,UnityEngine.CanvasRenderer,UnityEngine.RectTransform]
+1 -> 2 Album release lifecycle player/Player interface/WorkshopTooltip/Hint [UnityEngine.CanvasRenderer,UnityEngine.RectTransform,UnityEngine.UI.Text]
+  Expected: <empty>
+  But was:  < "1 -> 2 Album release lifecycle player/Player interface/WorkshopTooltip [PaperDefense.Presentation.WorkshopSurfaceGraphic,PaperDefense.Presentation.WorkshopTooltipOverlay,UnityEngine.CanvasGroup,UnityEngine.CanvasRenderer,UnityEngine.RectTransform]", "1 -> 2 Album release lifecycle player/Player interface/WorkshopTooltip/Hint [UnityEngine.CanvasRenderer,UnityEngine.RectTransform,UnityEngine.UI.Text]" >
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AlbumReleaseLifecycleTests.AssertNoGrowth (System.Collections.Generic.Dictionary`2[TKey,TValue] before, System.Collections.Generic.Dictionary`2[TKey,TValue] after) [0x00091] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumReleaseLifecycleTests.cs:109
+at PaperDefense.Tests.AlbumReleaseLifecycleTests+<ClosingAnAlbumReleasesItsTooltipObjectsWithThePage>d__6.MoveNext () [0x00097] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumReleaseLifecycleTests.cs:56
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1055" name="RepeatedFullPlayerCycleDoesNotRetainSettledSceneObjects" fullname="PaperDefense.Tests.AlbumReleaseLifecycleTests.RepeatedFullPlayerCycleDoesNotRetainSettledSceneObjects" methodname="RepeatedFullPlayerCycleDoesNotRetainSettledSceneObjects" classname="PaperDefense.Tests.AlbumReleaseLifecycleTests" runstate="Runnable" seed="1457765609" result="Failed" start-time="2026-10-25 22:01:49Z" end-time="2026-10-25 22:01:56Z" duration="7.154861" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Settled scene objects retained by the player:
+4 -> 6 Album release lifecycle player/Player interface/WorkshopTooltip [PaperDefense.Presentation.WorkshopSurfaceGraphic,PaperDefense.Presentation.WorkshopTooltipOverlay,UnityEngine.CanvasGroup,UnityEngine.CanvasRenderer,UnityEngine.RectTransform]
+4 -> 6 Album release lifecycle player/Player interface/WorkshopTooltip/Hint [UnityEngine.CanvasRenderer,UnityEngine.RectTransform,UnityEngine.UI.Text]
+  Expected: <empty>
+  But was:  < "4 -> 6 Album release lifecycle player/Player interface/WorkshopTooltip [PaperDefense.Presentation.WorkshopSurfaceGraphic,PaperDefense.Presentation.WorkshopTooltipOverlay,UnityEngine.CanvasGroup,UnityEngine.CanvasRenderer,UnityEngine.RectTransform]", "4 -> 6 Album release lifecycle player/Player interface/WorkshopTooltip/Hint [UnityEngine.CanvasRenderer,UnityEngine.RectTransform,UnityEngine.UI.Text]" >
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AlbumReleaseLifecycleTests.AssertNoGrowth (System.Collections.Generic.Dictionary`2[TKey,TValue] before, System.Collections.Generic.Dictionary`2[TKey,TValue] after) [0x00091] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumReleaseLifecycleTests.cs:109
+at PaperDefense.Tests.AlbumReleaseLifecycleTests+<RepeatedFullPlayerCycleDoesNotRetainSettledSceneObjects>d__5.MoveNext () [0x00094] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumReleaseLifecycleTests.cs:46
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: C:/Users/Greedval/AppData/LocalLow/DefaultCompany/paper\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

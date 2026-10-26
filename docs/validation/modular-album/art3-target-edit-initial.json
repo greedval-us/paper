@@ -1,0 +1,602 @@
+{
+  "job_id": "eda0f54823ab41d3a6f28d89b19de214",
+  "status": "failed",
+  "mode": "EditMode",
+  "started_unix_ms": 1792920889930,
+  "finished_unix_ms": 1792921231418,
+  "last_update_unix_ms": 1792921231418,
+  "progress": {
+    "completed": 62,
+    "total": 62,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": null,
+    "last_finished_test_full_name": "PaperDefense.Tests.NotebookNativeAtlasTests.CompleteAtlasPng_FitsDeclaredNativeSizeWithFourPixelGuttersAndPreservesEveryNativeRgbaPixel",
+    "last_finished_unix_ms": 1792921231240,
+    "stuck_suspected": false,
+    "editor_is_focused": false,
+    "run_in_background": true,
+    "focus_nudge_attempts": null,
+    "focus_nudge_limit": null,
+    "focus_nudge_status": null,
+    "blocked_reason": null,
+    "failures_so_far": [
+      {
+        "full_name": "PaperDefense.Tests.AssemblyArtSilhouetteTests.BatteryFoundation_IsALowThreeDiskPlinthWithReadableMountedWeapons",
+        "message": "  A battery must use a low three-pad plinth; a tall empty block makes all three heads unreadable in the shared fit.\r\n  Expected: less than or equal to 0.600000024f\r\n  But was:  0.612679482f\r\n"
+      }
+    ],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "EditMode",
+    "summary": {
+      "total": 62,
+      "passed": 61,
+      "failed": 1,
+      "skipped": 0,
+      "durationSeconds": 334.6918135,
+      "resultState": "Failed(Child)"
+    },
+    "results": [
+      {
+        "name": "AllDefinitions_HaveVisualMapping",
+        "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.AllDefinitions_HaveVisualMapping",
+        "state": "Passed",
+        "durationSeconds": 0.2048847,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Bindings_HaveSpritesStableSocketsAndKnownRevisions",
+        "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.Bindings_HaveSpritesStableSocketsAndKnownRevisions",
+        "state": "Passed",
+        "durationSeconds": 0.0259624,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryStarter_ComposesOrderedPartsAndRealMuzzles",
+        "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.EveryStarter_ComposesOrderedPartsAndRealMuzzles",
+        "state": "Passed",
+        "durationSeconds": 0.0296813,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ExplodedStructureShell_UsesTheSameFamilyArtworkAsTheCompletedRecipe(Slow)",
+        "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.ExplodedStructureShell_UsesTheSameFamilyArtworkAsTheCompletedRecipe(Slow)",
+        "state": "Passed",
+        "durationSeconds": 0.0379609,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ExplodedStructureShell_UsesTheSameFamilyArtworkAsTheCompletedRecipe(Repair)",
+        "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.ExplodedStructureShell_UsesTheSameFamilyArtworkAsTheCompletedRecipe(Repair)",
+        "state": "Passed",
+        "durationSeconds": 0.0070818,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ExplodedStructureShell_UsesTheSameFamilyArtworkAsTheCompletedRecipe(Generator)",
+        "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.ExplodedStructureShell_UsesTheSameFamilyArtworkAsTheCompletedRecipe(Generator)",
+        "state": "Passed",
+        "durationSeconds": 0.0064422,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "FamilyCards_ShowCompleteWeaponsAndFoundationCardsKeepTheirEmptyMounts",
+        "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.FamilyCards_ShowCompleteWeaponsAndFoundationCardsKeepTheirEmptyMounts",
+        "state": "Passed",
+        "durationSeconds": 0.0153592,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "FourFramesAndSevenFamilies_CertifyIndependentBoundaryPosesIncludingThreeBarrels",
+        "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.FourFramesAndSevenFamilies_CertifyIndependentBoundaryPosesIncludingThreeBarrels",
+        "state": "Passed",
+        "durationSeconds": 0.1359395,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "FrameSpecificSolidRegions_MatchTheActualRenderedBaseAndFrontWall",
+        "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.FrameSpecificSolidRegions_MatchTheActualRenderedBaseAndFrontWall",
+        "state": "Passed",
+        "durationSeconds": 0.0145025,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "PartInspection_UsesRealPartsAndLeavesOnlyNeutralOptionsEmpty",
+        "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.PartInspection_UsesRealPartsAndLeavesOnlyNeutralOptionsEmpty",
+        "state": "Passed",
+        "durationSeconds": 0.0128956,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Reimport_PreservesGuidsSourceTransformsAndUnchangedPixels",
+        "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.Reimport_PreservesGuidsSourceTransformsAndUnchangedPixels",
+        "state": "Passed",
+        "durationSeconds": 29.3906919,
+        "message": null,
+        "stackTrace": null,
+        "output": "Blue pen atlas rebuilt: 140 sprites, 431 aliases, 465 shape bindings, 112 clips, 7 recoils; 4096x4352.\r\n"
+      },
+      {
+        "name": "MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"visual_revision\")",
+        "fullName": "PaperDefense.Tests.AssemblyArtImportValidationTests.MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"visual_revision\")",
+        "state": "Passed",
+        "durationSeconds": 24.8392286,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"both_revisions\")",
+        "fullName": "PaperDefense.Tests.AssemblyArtImportValidationTests.MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"both_revisions\")",
+        "state": "Passed",
+        "durationSeconds": 24.6595107,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"both_identities\")",
+        "fullName": "PaperDefense.Tests.AssemblyArtImportValidationTests.MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"both_identities\")",
+        "state": "Passed",
+        "durationSeconds": 25.1866493,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"both_categories\")",
+        "fullName": "PaperDefense.Tests.AssemblyArtImportValidationTests.MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"both_categories\")",
+        "state": "Passed",
+        "durationSeconds": 24.6397282,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"socket_mismatch\")",
+        "fullName": "PaperDefense.Tests.AssemblyArtImportValidationTests.MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"socket_mismatch\")",
+        "state": "Passed",
+        "durationSeconds": 25.4062405,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"socket_schema\")",
+        "fullName": "PaperDefense.Tests.AssemblyArtImportValidationTests.MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"socket_schema\")",
+        "state": "Passed",
+        "durationSeconds": 24.4257155,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"collision_mode\")",
+        "fullName": "PaperDefense.Tests.AssemblyArtImportValidationTests.MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"collision_mode\")",
+        "state": "Passed",
+        "durationSeconds": 24.6477002,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"layout_id\")",
+        "fullName": "PaperDefense.Tests.AssemblyArtImportValidationTests.MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"layout_id\")",
+        "state": "Passed",
+        "durationSeconds": 25.0384499,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"layout_dimension\")",
+        "fullName": "PaperDefense.Tests.AssemblyArtImportValidationTests.MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"layout_dimension\")",
+        "state": "Passed",
+        "durationSeconds": 24.1208156,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"layout_overlap\")",
+        "fullName": "PaperDefense.Tests.AssemblyArtImportValidationTests.MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"layout_overlap\")",
+        "state": "Passed",
+        "durationSeconds": 24.7363539,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"layout_missing_white\")",
+        "fullName": "PaperDefense.Tests.AssemblyArtImportValidationTests.MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"layout_missing_white\")",
+        "state": "Passed",
+        "durationSeconds": 24.8217782,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"layout_height\")",
+        "fullName": "PaperDefense.Tests.AssemblyArtImportValidationTests.MalformedFullSource_RejectsBeforePublishingAndPreservesTheAcceptedResources(\"layout_height\")",
+        "state": "Passed",
+        "durationSeconds": 24.8297752,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "BatteryFoundation_IsALowThreeDiskPlinthWithReadableMountedWeapons",
+        "fullName": "PaperDefense.Tests.AssemblyArtSilhouetteTests.BatteryFoundation_IsALowThreeDiskPlinthWithReadableMountedWeapons",
+        "state": "Failed",
+        "durationSeconds": 0.0356714,
+        "message": "  A battery must use a low three-pad plinth; a tall empty block makes all three heads unreadable in the shared fit.\r\n  Expected: less than or equal to 0.600000024f\r\n  But was:  0.612679482f\r\n",
+        "stackTrace": "at PaperDefense.Tests.AssemblyArtSilhouetteTests.BatteryFoundation_IsALowThreeDiskPlinthWithReadableMountedWeapons () [0x000c8] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\Editor\\AssemblyArtSilhouetteTests.cs:215\r\n",
+        "output": ""
+      },
+      {
+        "name": "ModernFourBarrelHead_DominatesItsMechanismRatherThanLookingLikeAMortar",
+        "fullName": "PaperDefense.Tests.AssemblyArtSilhouetteTests.ModernFourBarrelHead_DominatesItsMechanismRatherThanLookingLikeAMortar",
+        "state": "Passed",
+        "durationSeconds": 0.0018029,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ModernGunMechanism_UsesTheCleanSharedGearboxInsteadOfTheHistoricalMortarTube",
+        "fullName": "PaperDefense.Tests.AssemblyArtSilhouetteTests.ModernGunMechanism_UsesTheCleanSharedGearboxInsteadOfTheHistoricalMortarTube",
+        "state": "Passed",
+        "durationSeconds": 0.0014155,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ModernReceiverFeet_SeatOnTheOpaqueFrontInnerLipRatherThanHoverOverTheOpening",
+        "fullName": "PaperDefense.Tests.AssemblyArtSilhouetteTests.ModernReceiverFeet_SeatOnTheOpaqueFrontInnerLipRatherThanHoverOverTheOpening",
+        "state": "Passed",
+        "durationSeconds": 0.7987586,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ModernTurnHub_IsCompactAndSeatsItsActualFootOnTheAuthoredDisk",
+        "fullName": "PaperDefense.Tests.AssemblyArtSilhouetteTests.ModernTurnHub_IsCompactAndSeatsItsActualFootOnTheAuthoredDisk",
+        "state": "Passed",
+        "durationSeconds": 0.0021025,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ReceiverMountedIronSight_StaysOnOpaqueReceiverInAimAndMaximumRecoil",
+        "fullName": "PaperDefense.Tests.AssemblyArtSilhouetteTests.ReceiverMountedIronSight_StaysOnOpaqueReceiverInAimAndMaximumRecoil",
+        "state": "Passed",
+        "durationSeconds": 0.8935063,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "RepairRoofEaveAndFoot_UseTheirActualSharedPixelContacts",
+        "fullName": "PaperDefense.Tests.AssemblyArtSilhouetteTests.RepairRoofEaveAndFoot_UseTheirActualSharedPixelContacts",
+        "state": "Passed",
+        "durationSeconds": 0.0079579,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SevenModernWeapons_RemainReadableAboveTheirLowStandardFoundation",
+        "fullName": "PaperDefense.Tests.AssemblyArtSilhouetteTests.SevenModernWeapons_RemainReadableAboveTheirLowStandardFoundation",
+        "state": "Passed",
+        "durationSeconds": 0.0265465,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SlowGrate_ClosesOnTheActualBowlRimCentreInTheSameSourcePlane",
+        "fullName": "PaperDefense.Tests.AssemblyArtSilhouetteTests.SlowGrate_ClosesOnTheActualBowlRimCentreInTheSameSourcePlane",
+        "state": "Passed",
+        "durationSeconds": 0.0085748,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Supports_HaveOneDominantOpaqueSilhouette(\"album.slow\")",
+        "fullName": "PaperDefense.Tests.AssemblyArtSilhouetteTests.Supports_HaveOneDominantOpaqueSilhouette(\"album.slow\")",
+        "state": "Passed",
+        "durationSeconds": 0.8799349,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Supports_HaveOneDominantOpaqueSilhouette(\"album.repair\")",
+        "fullName": "PaperDefense.Tests.AssemblyArtSilhouetteTests.Supports_HaveOneDominantOpaqueSilhouette(\"album.repair\")",
+        "state": "Passed",
+        "durationSeconds": 0.8983957,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "BurstTrigger_HasADistinguishableVisibleSilhouetteInTheCompleteWeapon",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.BurstTrigger_HasADistinguishableVisibleSilhouetteInTheCompleteWeapon",
+        "state": "Passed",
+        "durationSeconds": 0.0317007,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.standard\",\"hull.standard\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.standard\",\"hull.standard\")",
+        "state": "Passed",
+        "durationSeconds": 0.004748,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.standard\",\"hull.light\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.standard\",\"hull.light\")",
+        "state": "Passed",
+        "durationSeconds": 0.0006305,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.standard\",\"hull.reinforced\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.standard\",\"hull.reinforced\")",
+        "state": "Passed",
+        "durationSeconds": 0.0002219,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.heavy\",\"hull.standard\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.heavy\",\"hull.standard\")",
+        "state": "Passed",
+        "durationSeconds": 0.0001805,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.heavy\",\"hull.light\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.heavy\",\"hull.light\")",
+        "state": "Passed",
+        "durationSeconds": 0.0001816,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.heavy\",\"hull.reinforced\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.heavy\",\"hull.reinforced\")",
+        "state": "Passed",
+        "durationSeconds": 0.0001767,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.precision\",\"hull.standard\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.precision\",\"hull.standard\")",
+        "state": "Passed",
+        "durationSeconds": 0.0001627,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.precision\",\"hull.light\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.precision\",\"hull.light\")",
+        "state": "Passed",
+        "durationSeconds": 0.0001949,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.precision\",\"hull.reinforced\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.precision\",\"hull.reinforced\")",
+        "state": "Passed",
+        "durationSeconds": 0.0001947,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.battery\",\"hull.standard\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.battery\",\"hull.standard\")",
+        "state": "Passed",
+        "durationSeconds": 0.0002838,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.battery\",\"hull.light\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.battery\",\"hull.light\")",
+        "state": "Passed",
+        "durationSeconds": 0.0002718,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.battery\",\"hull.reinforced\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.EveryHull_PreservesTheActualFrameBaseRoofAndFrontUnderItsSelectedOwner(\"frame.battery\",\"hull.reinforced\")",
+        "state": "Passed",
+        "durationSeconds": 0.0002376,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.standard\",\"feed.standard\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.standard\",\"feed.standard\")",
+        "state": "Passed",
+        "durationSeconds": 0.0193501,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.heavy\",\"feed.standard\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.heavy\",\"feed.standard\")",
+        "state": "Passed",
+        "durationSeconds": 0.0176162,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.precision\",\"feed.standard\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.precision\",\"feed.standard\")",
+        "state": "Passed",
+        "durationSeconds": 0.0155446,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.battery\",\"feed.standard\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.battery\",\"feed.standard\")",
+        "state": "Passed",
+        "durationSeconds": 0.0658018,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.standard\",\"feed.boost\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.standard\",\"feed.boost\")",
+        "state": "Passed",
+        "durationSeconds": 0.0068109,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.heavy\",\"feed.boost\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.heavy\",\"feed.boost\")",
+        "state": "Passed",
+        "durationSeconds": 0.006958,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.precision\",\"feed.boost\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.precision\",\"feed.boost\")",
+        "state": "Passed",
+        "durationSeconds": 0.0068173,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.battery\",\"feed.boost\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.Feeds_AttachToAnOpaqueFacadeAndRemainVisibleAfterForegroundLayers(\"frame.battery\",\"feed.boost\")",
+        "state": "Passed",
+        "durationSeconds": 0.0068517,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Optics_ExposeTheirRealShapeAboveTheMagazineInsteadOfOnlyHavingAHiddenBinding(\"sight.scope\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.Optics_ExposeTheirRealShapeAboveTheMagazineInsteadOfOnlyHavingAHiddenBinding(\"sight.scope\")",
+        "state": "Passed",
+        "durationSeconds": 0.0118811,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Optics_ExposeTheirRealShapeAboveTheMagazineInsteadOfOnlyHavingAHiddenBinding(\"sight.tracking\")",
+        "fullName": "PaperDefense.Tests.AssemblyFoundationVariantArtTests.Optics_ExposeTheirRealShapeAboveTheMagazineInsteadOfOnlyHavingAHiddenBinding(\"sight.tracking\")",
+        "state": "Passed",
+        "durationSeconds": 0.0104631,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "AuthoredBoundsFillTheAvailableRectangleWithoutStretchingOrOriginBias(\"object.castle\",500,240)",
+        "fullName": "PaperDefense.Tests.NotebookArtGraphicFitTests.AuthoredBoundsFillTheAvailableRectangleWithoutStretchingOrOriginBias(\"object.castle\",500,240)",
+        "state": "Passed",
+        "durationSeconds": 0.0186707,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "AuthoredBoundsFillTheAvailableRectangleWithoutStretchingOrOriginBias(\"terrain.pine\",240,360)",
+        "fullName": "PaperDefense.Tests.NotebookArtGraphicFitTests.AuthoredBoundsFillTheAvailableRectangleWithoutStretchingOrOriginBias(\"terrain.pine\",240,360)",
+        "state": "Passed",
+        "durationSeconds": 0.0004659,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "AuthoredBoundsFillTheAvailableRectangleWithoutStretchingOrOriginBias(\"ui.weapon.piercer\",320,110)",
+        "fullName": "PaperDefense.Tests.NotebookArtGraphicFitTests.AuthoredBoundsFillTheAvailableRectangleWithoutStretchingOrOriginBias(\"ui.weapon.piercer\",320,110)",
+        "state": "Passed",
+        "durationSeconds": 0.0042527,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "AuthoredBoundsFillTheAvailableRectangleWithoutStretchingOrOriginBias(\"object.repair\",360,140)",
+        "fullName": "PaperDefense.Tests.NotebookArtGraphicFitTests.AuthoredBoundsFillTheAvailableRectangleWithoutStretchingOrOriginBias(\"object.repair\",360,140)",
+        "state": "Passed",
+        "durationSeconds": 0.000381,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "CompleteAtlasPng_FitsDeclaredNativeSizeWithFourPixelGuttersAndPreservesEveryNativeRgbaPixel",
+        "fullName": "PaperDefense.Tests.NotebookNativeAtlasTests.CompleteAtlasPng_FitsDeclaredNativeSizeWithFourPixelGuttersAndPreservesEveryNativeRgbaPixel",
+        "state": "Passed",
+        "durationSeconds": 2.0343164,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      }
+    ]
+  }
+}

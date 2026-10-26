@@ -2,7 +2,7 @@
   "date": "2026-10-17",
   "skill": "imagegen",
   "mode": "built-in image_gen",
-  "reference": "docs/design/game-concept-art-2026-10-16/screens/04-foundation.png",
+  "reference": "ArtSource/Notebook/References/2026-10-16/screens/04-foundation.png",
   "assets": [
     {
       "source": "ArtSource/Notebook/NewStyle/FoundationPageDecor.png",

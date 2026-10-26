@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using PaperDefense.Core;
 using PaperDefense.Validation;
@@ -26,7 +27,7 @@ namespace PaperDefense.Tests
         {
             var balance=SuppliedBalance();var pages=new List<TowerBlueprint>();
             var expected=new HashSet<string>();
-            foreach(var page in new WorkshopProfile().GetLoadoutBlueprints())
+            foreach(var page in new WorkshopProfile().GetLoadoutBlueprints().Take(ProfileLimits.HistoricalLoadoutSlotCount))
             {var copy=page.AsVariant("supplied."+pages.Count,"Supplied "+pages.Count);pages.Add(copy);expected.Add(copy.Id);}
             var scenario=SuppliedScenario(balance,pages);
             pages[1]=new TowerBlueprint("mutated","Mutated",ChassisKind.Standard,StructureKind.Gun);
@@ -44,7 +45,7 @@ namespace PaperDefense.Tests
         [TestCase("count")] [TestCase("null")] [TestCase("invalid")]
         public void SuppliedCampaignRejectsIncompleteOrInvalidLoadout(string defect)
         {
-            var balance=SuppliedBalance();var pages=new List<TowerBlueprint>(new WorkshopProfile().GetLoadoutBlueprints());
+            var balance=SuppliedBalance();var pages=new List<TowerBlueprint>(new WorkshopProfile().GetLoadoutBlueprints().Take(ProfileLimits.HistoricalLoadoutSlotCount));
             if(defect=="count")pages.RemoveAt(3);
             if(defect=="null")pages[1]=null;
             if(defect=="invalid")pages[1]=new TowerBlueprint("invalid","Invalid",ChassisKind.Standard,StructureKind.Gun).WithWeaponMount(2,"weapon.gun");

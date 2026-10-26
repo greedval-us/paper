@@ -1,0 +1,39 @@
+{
+  "format": "paper-windows-player-checks-v1",
+  "hidden": true,
+  "gpuLimitationAccepted": true,
+  "results": [
+    {
+      "name": "performance-after",
+      "exitCode": 0,
+      "passed": true,
+      "journeyComplete": false,
+      "lifecycleStable": false,
+      "performanceComplete": false
+    },
+    {
+      "name": "journey-memory",
+      "exitCode": 0,
+      "passed": true,
+      "journeyComplete": true,
+      "lifecycleStable": true,
+      "performanceComplete": false
+    },
+    {
+      "name": "journey-temporary",
+      "exitCode": 0,
+      "passed": true,
+      "journeyComplete": true,
+      "lifecycleStable": true,
+      "performanceComplete": false
+    },
+    {
+      "name": "journey-restart",
+      "exitCode": 0,
+      "passed": true,
+      "journeyComplete": true,
+      "lifecycleStable": false,
+      "performanceComplete": false
+    }
+  ]
+}

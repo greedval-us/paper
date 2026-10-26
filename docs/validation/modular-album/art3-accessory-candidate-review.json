@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-25",
+  "file": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v2.png",
+  "sha256": "b1d11fa706b9a67ee27100ce1e0f6bae47ea2bb5adbc85609d790d70144c6372",
+  "dimensions": [
+    1536,
+    1024
+  ],
+  "reviewers": [
+    "/root/art3_style",
+    "/root"
+  ],
+  "method": "Actual native PNG visual inspection and read-only per-pixel RGBA samples. No image processing. Coordinates below are bottom-left in each native crop; annotation uncertainty approximately 3px.",
+  "reference": "docs/design/album-assembly-2026-10-17/art/02-weapon-parts.png",
+  "verdict": "PASS_WITH_RESIDUALS",
+  "observations": [
+    "Navy ballpoint hatching, ivory metal and rounded blue ink capsules replace brass pointed ammunition.",
+    "Six disjoint native crops; asymmetric gutters preserve the cradle beyond the nominal 512px column.",
+    "Original gameplay part IDs/revisions remain unchanged. Source images are copied natively without resampling."
+  ],
+  "residuals": [
+    "Detailed fasteners retain small bright highlights; the hand-drawn source sketch uses calmer accents.",
+    "A mechanical cradle represents the stock sight; optic alternatives retain their established distinct silhouettes."
+  ],
+  "crops": [
+    {
+      "id": "sight",
+      "cropBL": [
+        33,
+        530,
+        508,
+        419
+      ],
+      "foot": [
+        257.5,
+        15.5
+      ],
+      "sampleAlpha": 252,
+      "scaleFactor": 0.6830708661417323,
+      "modernContactWorld": [
+        -0.018444674516952236,
+        0.003277839810426541
+      ]
+    },
+    {
+      "id": "magazine",
+      "cropBL": [
+        662,
+        514,
+        375,
+        461
+      ],
+      "attach": [
+        38.5,
+        169.5
+      ],
+      "sampleAlpha": 252,
+      "scaleFactor": 0.728
+    },
+    {
+      "id": "trigger",
+      "cropBL": [
+        1150,
+        547,
+        345,
+        423
+      ],
+      "attach": [
+        149.5,
+        123.5
+      ],
+      "sampleAlpha": 253,
+      "scaleFactor": 0.9942028985507246
+    },
+    {
+      "id": "feed",
+      "cropBL": [
+        51,
+        75,
+        496,
+        372
+      ],
+      "facadeWitness": [
+        200.5,
+        250.5
+      ],
+      "sampleAlpha": 253,
+      "scaleFactor": 0.9536290322580645,
+      "modernPosition": [
+        -0.04,
+        -0.2075
+      ]
+    },
+    {
+      "id": "bearing",
+      "cropBL": [
+        574,
+        69,
+        512,
+        395
+      ],
+      "attach": [
+        260.5,
+        214.5
+      ],
+      "attachAlpha": 0,
+      "frontOpaqueSupport": [
+        260.5,
+        32.5
+      ],
+      "sampleAlpha": 252,
+      "note": "Rotation centre intentionally lies in the open hole; modern fixed support uses the separate TurnHub sprite."
+    },
+    {
+      "id": "armor",
+      "cropBL": [
+        1153,
+        74,
+        324,
+        416
+      ],
+      "opaqueFeet": [
+        [
+          97.5,
+          29.5
+        ],
+        [
+          237.5,
+          29.5
+        ]
+      ],
+      "sampleAlpha": [
+        253,
+        252
+      ],
+      "scaleFactor": 0.9927884615384616,
+      "note": "Final uniform scale is height-constrained, preserving the old maximum physical height and horizontal centre; preliminary width-match was not adopted."
+    }
+  ]
+}

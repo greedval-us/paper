@@ -1,0 +1,66 @@
+{
+  "job_id": "349fc9a52aab4402bfbfd3f89efbd384",
+  "status": "failed",
+  "mode": "EditMode",
+  "started_unix_ms": 1792958156968,
+  "finished_unix_ms": 1792958162356,
+  "last_update_unix_ms": 1792958162356,
+  "progress": {
+    "completed": 2,
+    "total": 2,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": null,
+    "last_finished_test_full_name": "PaperDefense.Tests.AssemblyBalanceAcceptanceTests.StarterRecipeAndProgressionDrift_CannotHideBehindUnchangedIds",
+    "last_finished_unix_ms": 1792958162202,
+    "stuck_suspected": false,
+    "editor_is_focused": false,
+    "run_in_background": true,
+    "focus_nudge_attempts": null,
+    "focus_nudge_limit": null,
+    "focus_nudge_status": null,
+    "blocked_reason": null,
+    "failures_so_far": [
+      {
+        "full_name": "PaperDefense.Tests.AssemblyBalanceAcceptanceTests.Dominance_ConsidersCleaningUtilityAcrossAllComparableScenarios",
+        "message": "  Greater damage alone cannot dominate a mixed tower that cleans blots.\r\n  Expected: <empty>\r\n  But was:  < \"attack > mixed\" >\r\n"
+      },
+      {
+        "full_name": "PaperDefense.Tests.AssemblyBalanceAcceptanceTests.StarterRecipeAndProgressionDrift_CannotHideBehindUnchangedIds",
+        "message": "  Expected: collection containing \"album.guard.dps\"\r\n  But was:  <empty>\r\n"
+      }
+    ],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "EditMode",
+    "summary": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "skipped": 0,
+      "durationSeconds": 0.7366176,
+      "resultState": "Failed(Child)"
+    },
+    "results": [
+      {
+        "name": "Dominance_ConsidersCleaningUtilityAcrossAllComparableScenarios",
+        "fullName": "PaperDefense.Tests.AssemblyBalanceAcceptanceTests.Dominance_ConsidersCleaningUtilityAcrossAllComparableScenarios",
+        "state": "Failed",
+        "durationSeconds": 0.0232346,
+        "message": "  Greater damage alone cannot dominate a mixed tower that cleans blots.\r\n  Expected: <empty>\r\n  But was:  < \"attack > mixed\" >\r\n",
+        "stackTrace": "at PaperDefense.Tests.AssemblyBalanceAcceptanceTests.Dominance_ConsidersCleaningUtilityAcrossAllComparableScenarios () [0x00067] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\Editor\\AssemblyBalanceAcceptanceTests.cs:133\r\n",
+        "output": ""
+      },
+      {
+        "name": "StarterRecipeAndProgressionDrift_CannotHideBehindUnchangedIds",
+        "fullName": "PaperDefense.Tests.AssemblyBalanceAcceptanceTests.StarterRecipeAndProgressionDrift_CannotHideBehindUnchangedIds",
+        "state": "Failed",
+        "durationSeconds": 0.2198686,
+        "message": "  Expected: collection containing \"album.guard.dps\"\r\n  But was:  <empty>\r\n",
+        "stackTrace": "at PaperDefense.Tests.AssemblyBalanceAcceptanceTests.StarterRecipeAndProgressionDrift_CannotHideBehindUnchangedIds () [0x0009e] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\Editor\\AssemblyBalanceAcceptanceTests.cs:121\r\n",
+        "output": ""
+      }
+    ]
+  }
+}

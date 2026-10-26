@@ -1,0 +1,5 @@
+1024x768: all workshop states captured; purchase 94-80=14; independent comparison has no IO; failed save retains draft; retry has one page; invalid queue/drum blocked.
+1280x720: all workshop states captured; purchase 94-80=14; independent comparison has no IO; failed save retains draft; retry has one page; invalid queue/drum blocked.
+1920x1080: all workshop states captured; purchase 94-80=14; independent comparison has no IO; failed save retains draft; retry has one page; invalid queue/drum blocked.
+1280x960: all workshop states captured; purchase 94-80=14; independent comparison has no IO; failed save retains draft; retry has one page; invalid queue/drum blocked.
+1600x900: all workshop states captured; purchase 94-80=14; independent comparison has no IO; failed save retains draft; retry has one page; invalid queue/drum blocked.

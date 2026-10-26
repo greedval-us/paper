@@ -134,16 +134,16 @@ namespace PaperDefense.Presentation
                 colorInks[i], () => input.SelectColor((InkColor)index), out colorLabels[i]); }
             MakeButton(footer, "Restart", new Rect(1152,8,179,34), UserText.Message("copy.d5335a42ec267095"), 15, Navy, () => run.Restart(), out _);
             MakeButton(footer, "Open workshop", new Rect(1342,8,188,34), UserText.Message("copy.b49ada27eb109bc1"), 15, Navy, () => run.OpenWorkshop(), out _);
-            string[] names = { UserText.Message("hud.tool.blueprint", 1), UserText.Message("hud.tool.blueprint", 2), UserText.Message("hud.tool.blueprint", 3), UserText.Message("hud.tool.blueprint", 4),
-                UserText.Message("copy.95a4ba0731bceb67"), UserText.Message("copy.d688530d0db50106"), UserText.Message("copy.e2469d7e62002b1f"),
+            string[] names = { UserText.Message("copy.95a4ba0731bceb67"), UserText.Message("copy.d688530d0db50106"), UserText.Message("copy.e2469d7e62002b1f"),
                 UserText.Message("copy.6e7d348fa6aaa5f3"), UserText.Message("hud.tool.blotter"), UserText.Message("copy.28c686dce839c9a7"),
                 UserText.Message("hud.tool.tar"), UserText.Message("hud.tool.repair") };
+            float cardStep = (footer.rect.width - 36) / tools.Length, cardWidth = cardStep - 8;
             for (int i = 0; i < tools.Length; i++)
             {
                 int index = i;
                 // Keep stable object identities for old hotkeys and scene automation, group construction cards visually.
-                int column = i < 6 ? i : i >= TarToolIndex ? i - 4 : i + 2;
-                tools[i] = MakeButton(footer, "Tool " + i, new Rect(18 + column * 127, 52, 119, 94), "", 17, Navy, () => {
+                int column = i < EraseToolIndex ? i : i >= TarToolIndex ? i - 4 : i + 2;
+                tools[i] = MakeButton(footer, "Tool " + i, new Rect(18 + column * cardStep, 52, cardWidth, 94), "", 17, Navy, () => {
                     if (index < ProfileLimits.LoadoutSlotCount) input.SelectSlot(index);
                     else if (TryConstructionTool(index, out var kind)) input.SelectTool(kind);
                     else input.SelectMode(index == EraseToolIndex ? DrawingMode.Erase : index == UpgradeToolIndex ? DrawingMode.Upgrade : index == BlotterToolIndex ? DrawingMode.Blotter : DrawingMode.Paint);
@@ -152,22 +152,26 @@ namespace PaperDefense.Presentation
                 {
                     var go = new GameObject("Blueprint illustration", typeof(RectTransform), typeof(CanvasRenderer), typeof(BlueprintSketch));
                     go.transform.SetParent(tools[i].transform, false);
-                    Place(go.GetComponent<RectTransform>(), new Rect(34, 4, 51, 45));
+                    Place(go.GetComponent<RectTransform>(), new Rect((cardWidth - 51) / 2, 4, 51, 45));
                     toolSketches[i] = go.GetComponent<BlueprintSketch>(); toolSketches[i].raycastTarget = false;
                 }
                 else
                 {
                     var go = new GameObject("Tool illustration", typeof(RectTransform), typeof(CanvasRenderer), typeof(NotebookArtGraphic));
                     go.transform.SetParent(tools[i].transform, false);
-                    Place(go.GetComponent<RectTransform>(), new Rect(37, 4, 45, 45));
+                    Place(go.GetComponent<RectTransform>(), new Rect((cardWidth - 45) / 2, 4, 45, 45));
                     var art = go.GetComponent<NotebookArtGraphic>(); art.raycastTarget = false;
                     string icon = i == WallToolIndex ? "wall" : i == SpikesToolIndex ? "spikes" : i == TarToolIndex ? "tar" :
                         i == RepairToolIndex ? "repair" : i == EraseToolIndex ? "erase" : i == UpgradeToolIndex ? "upgrade" : i == BlotterToolIndex ? "blotter" : "paint";
                     art.Bind("ui.tool." + icon);
                 }
-                toolNames[i] = Label(tools[i].transform, names[i], new Rect(3, 49, 113, 20), 14, Navy, FontStyle.Bold, TextAnchor.MiddleCenter);
+                string name = i < ProfileLimits.LoadoutSlotCount ? UserText.Message("hud.tool.blueprint", i + 1) : names[i - ProfileLimits.LoadoutSlotCount];
+                toolNames[i] = Label(tools[i].transform, name, new Rect(3, 49, cardWidth - 6, 20), 14, Navy, FontStyle.Bold, TextAnchor.MiddleCenter);
+                toolNames[i].resizeTextForBestFit = true; toolNames[i].resizeTextMinSize = 10; toolNames[i].resizeTextMaxSize = 14;
                 toolNames[i].verticalOverflow = VerticalWrapMode.Truncate;
-                toolPrices[i] = Label(tools[i].transform, "", new Rect(3, 71, 113, 20), 13, Blue, FontStyle.Normal, TextAnchor.MiddleCenter);
+                toolPrices[i] = Label(tools[i].transform, "", new Rect(3, 71, cardWidth - 6, 20), 13, Blue, FontStyle.Normal, TextAnchor.MiddleCenter);
+                toolPrices[i].resizeTextForBestFit = true; toolPrices[i].resizeTextMinSize = 9; toolPrices[i].resizeTextMaxSize = 13;
+                toolPrices[i].verticalOverflow = VerticalWrapMode.Truncate;
                 if (i == BlotterToolIndex) blotterPrice = toolPrices[i];
                 else if (i >= EraseToolIndex && i <= PaintToolIndex) toolPrices[i].text = Resolve(i == EraseToolIndex ? UserText.Message("copy.3337c8fa1eed04a4") : i == UpgradeToolIndex ? UserText.Message("copy.d7ba3d4cc2223633") : UserText.Message("copy.7e642f606c53837a"));
             }

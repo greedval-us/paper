@@ -1,0 +1,143 @@
+{
+  "date": "2026-10-18",
+  "method": "Перебор совместимости и независимая арифметика; не игровая симуляция",
+  "parts": 54,
+  "legalWeaponRecipes": 62,
+  "rejectedWeaponCombinations": 1198,
+  "legalHomogeneousTowers": 12283,
+  "rejectedOverloadedTowers": 5573,
+  "legalBuildings": 27,
+  "reachableParts": 54,
+  "starterCost": 426,
+  "baselineWeaponsPreserved": 7,
+  "generatorVariants": [
+    {
+      "ids": [
+        "site.generator",
+        "function.generator",
+        "shell.standard",
+        "utility.none"
+      ],
+      "cost": 60,
+      "rate": 12,
+      "breakEven": 5,
+      "eightWaveProfit": 36
+    },
+    {
+      "ids": [
+        "site.generator",
+        "function.generator",
+        "shell.standard",
+        "utility.armor"
+      ],
+      "cost": 72,
+      "rate": 12,
+      "breakEven": 6,
+      "eightWaveProfit": 24
+    },
+    {
+      "ids": [
+        "site.generator",
+        "function.generator",
+        "shell.standard",
+        "utility.economy"
+      ],
+      "cost": 72,
+      "rate": 15,
+      "breakEven": 5,
+      "eightWaveProfit": 48
+    },
+    {
+      "ids": [
+        "site.generator",
+        "function.generator",
+        "shell.light",
+        "utility.none"
+      ],
+      "cost": 56,
+      "rate": 12,
+      "breakEven": 5,
+      "eightWaveProfit": 40
+    },
+    {
+      "ids": [
+        "site.generator",
+        "function.generator",
+        "shell.light",
+        "utility.armor"
+      ],
+      "cost": 68,
+      "rate": 12,
+      "breakEven": 6,
+      "eightWaveProfit": 28
+    },
+    {
+      "ids": [
+        "site.generator",
+        "function.generator",
+        "shell.light",
+        "utility.economy"
+      ],
+      "cost": 68,
+      "rate": 15,
+      "breakEven": 5,
+      "eightWaveProfit": 52
+    },
+    {
+      "ids": [
+        "site.generator",
+        "function.generator",
+        "shell.reinforced",
+        "utility.none"
+      ],
+      "cost": 70,
+      "rate": 12,
+      "breakEven": 6,
+      "eightWaveProfit": 26
+    },
+    {
+      "ids": [
+        "site.generator",
+        "function.generator",
+        "shell.reinforced",
+        "utility.armor"
+      ],
+      "cost": 82,
+      "rate": 12,
+      "breakEven": 7,
+      "eightWaveProfit": 14
+    },
+    {
+      "ids": [
+        "site.generator",
+        "function.generator",
+        "shell.reinforced",
+        "utility.economy"
+      ],
+      "cost": 82,
+      "rate": 15,
+      "breakEven": 6,
+      "eightWaveProfit": 38
+    }
+  ],
+  "runtimeSource": {
+    "balance": "Assets/PaperDefense/Configuration/Game/PlayerBalance.asset",
+    "rules": "Assets/PaperDefense/Configuration/Game/PlayerRules.asset",
+    "content": "Assets/PaperDefense/Configuration/Game/PlayerContent.asset",
+    "assemblyCatalog": "Assets/PaperDefense/Configuration/Game/PlayerAssemblyCatalog.asset"
+  },
+  "balanceRevision": "album-v1.0",
+  "numericDifferences": [],
+  "controlledMutation": {
+    "field": "definitions.core.gun.numeric.damage",
+    "detected": true,
+    "differences": [
+      {
+        "path": "definitions.core.gun.numeric.damage",
+        "expected": 12,
+        "actual": 13
+      }
+    ]
+  },
+  "errors": []
+}

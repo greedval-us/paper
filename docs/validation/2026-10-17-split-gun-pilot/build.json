@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "message": "Build Succeeded.",
+  "data": {
+    "job_id": "build-40da4f64ed",
+    "result": "succeeded",
+    "platform": "StandaloneWindows64",
+    "output_path": "Builds/Stage2SplitGunPilot/PaperDefense.exe",
+    "started_at": "2026-10-17T20:30:29.0400325Z",
+    "duration_seconds": 15.325842699999999,
+    "completed_at": "2026-10-17T20:30:44.3658752Z",
+    "total_size_mb": 222.99,
+    "errors": 0,
+    "warnings": 485
+  }
+}

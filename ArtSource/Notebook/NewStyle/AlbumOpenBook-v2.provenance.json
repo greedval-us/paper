@@ -1,0 +1,12 @@
+{
+  "mode": "built-in image_gen",
+  "intent": "Concept-derived empty open notebook, transparent exterior, clean live-content pages",
+  "reference": "docs/design/game-concept-art-2026-10-16/screens/24-empty.png",
+  "prompt": "Use case: background-extraction / precise-object-edit. Asset type: transparent standalone open notebook illustration for the existing blue-ballpoint tower-defense game. Input image is the approved screen24 concept reference. Extract/recreate ONLY the large open spiral sketchbook in the center, with the same slightly angled perspective, gently curved page edges, dense dark blue ballpoint outlines and fine crosshatching, ivory graph-paper pages, rich ink shading under stacked page edges, central metal binding rings. Remove ALL drawings, towers, arrows, labels, text, buttons, pencil and surroundings. Both pages must be clean, empty ivory graph paper so live modular game illustrations can be drawn on top. Keep page geometry broad and usable, like the source: open book width approximately2.2 times height, straight-on slightly elevated view, open book filling canvas with small transparent padding. Preserve concept's hand-drawn craftsmanship, crisp fine blue pen linework, subtle pale blue square grid. Output actual transparent background outside book, no cast shadow beyond a slim ink outline, no text, no logos, no UI or decorative objects. The book itself is opaque ivory paper. Do not include any sketches or symbols on the pages.",
+  "generated": "C:/Users/Greedval/.codex/generated_images/01a14cd7-7db2-7df0-8654-f50c4f801bf0/exec-a7896ff7-929f-4d34-a264-5ca97dc63fe8.png",
+  "source": "ArtSource/Notebook/NewStyle/AlbumOpenBook-v2.png",
+  "runtime": "Assets/PaperDefense/Resources/Art/Player/AlbumOpenBookV2.png",
+  "transparencyPreserved": true,
+  "postprocessing": "none; copied unchanged",
+  "review": "Root inspected native generated image; approved as blank concept-style book. Live recipes remain runtime UI overlays."
+}

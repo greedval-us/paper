@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-22",
+  "reviewer": "Codex /root",
+  "revision": "modular-full-catalog-2026-10-22-v7",
+  "method": "All eight final parts-sheet PNGs and both final Blots PNGs were individually opened using view_image. SHA256 and sidecars bind this record to those inspected files; no verdict is inferred from file existence.",
+  "inspected": {
+    "partsSheets": 8,
+    "actualCompositions": 96,
+    "poses": [
+      "preview",
+      "rest",
+      "turn90",
+      "max-recoil"
+    ],
+    "sizes": [
+      "1920x1080",
+      "1024x768"
+    ],
+    "blotsReports": 2
+  },
+  "observations": [
+    "All seven weapon families remain recognizable above the low standard slab. Battery has three distinct weapons; static supports remain whole.",
+    "No visible seating gaps or sprite-edge clipping in preview, rest, turn90 or maximum recoil on the two parts-sheet sizes.",
+    "Corrected Blots comparison and single-report frames show all six result rows; the single report has 103/103 visible characters in a 122 px result area. Whole remote copies are omitted in focus; overview preserves the complete recorded groups."
+  ],
+  "residuals": [
+    "Dense native blue hatching remains grainier than the sketches at small display scales.",
+    "The unused second disk of a standard single-weapon assembly remains visible.",
+    "Marks/effects outside the focused simulation viewport may be clipped at its boundary; complete structural silhouettes do not straddle it."
+  ],
+  "geometry": {
+    "rows": 96,
+    "minimumPixelGap": 5.562492,
+    "proof": "fidelity-parts-geometry.csv"
+  },
+  "captures": [
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-parts-max-recoil-1024x768.png",
+      "sha256": "69c061a24413376b645841fa76420106efe1e46bee7c8b255cabbc828b56e2e1",
+      "revision": "modular-full-catalog-2026-10-22-v7",
+      "size": "1024x768",
+      "manuallyInspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-parts-max-recoil-1920x1080.png",
+      "sha256": "ccbb56dd9e98bdf3f1e210385d4043486e1fe5780dce86a85d34907cacb964a6",
+      "revision": "modular-full-catalog-2026-10-22-v7",
+      "size": "1920x1080",
+      "manuallyInspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-parts-preview-1024x768.png",
+      "sha256": "042a3dd3796d673f44a54523b73105d301733fc434ae178b87c767797554ab87",
+      "revision": "modular-full-catalog-2026-10-22-v7",
+      "size": "1024x768",
+      "manuallyInspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-parts-preview-1920x1080.png",
+      "sha256": "f77c1d05e023c61b18d999c12beb701aa4ce01c0310e956bb4663b62ae40bd7a",
+      "revision": "modular-full-catalog-2026-10-22-v7",
+      "size": "1920x1080",
+      "manuallyInspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-parts-rest-1024x768.png",
+      "sha256": "148b45da173b1569c4646d21027aee8b8af291d3ce9c1a7eba465ac6f0a22e67",
+      "revision": "modular-full-catalog-2026-10-22-v7",
+      "size": "1024x768",
+      "manuallyInspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-parts-rest-1920x1080.png",
+      "sha256": "84371d7ddc85ce3ec5e9565ef0dfaef11bc2bed64d5e35356e5f8022e12e6331",
+      "revision": "modular-full-catalog-2026-10-22-v7",
+      "size": "1920x1080",
+      "manuallyInspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-parts-turn90-1024x768.png",
+      "sha256": "639d905b27c705b5076085800fe63d87dd55b02b228f38cb388194e9c8392561",
+      "revision": "modular-full-catalog-2026-10-22-v7",
+      "size": "1024x768",
+      "manuallyInspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-parts-turn90-1920x1080.png",
+      "sha256": "c4ea85d8ea3bbb8303d80de34ac58575299177e4fb8d3c40316541c866d12706",
+      "revision": "modular-full-catalog-2026-10-22-v7",
+      "size": "1920x1080",
+      "manuallyInspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-blots-comparison-1280x720.png",
+      "sha256": "7941f836572b6b43956765871a7a40fd8d68a4a49c9852f9ef80cad3bc3526d3",
+      "revision": "modular-full-catalog-2026-10-22-v7",
+      "size": "1280x720",
+      "manuallyInspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES"
+    },
+    {
+      "path": "docs/validation/modular-album/fidelity-screenshots/fidelity-10-trial-blots-single-1280x720.png",
+      "sha256": "38ef7af9aee1b955b4c097cc1efdf8c3c904d562ec27f44c6c0ad499a9ee557a",
+      "revision": "modular-full-catalog-2026-10-22-v7",
+      "size": "1280x720",
+      "manuallyInspected": true,
+      "verdict": "PASS_WITH_DIFFERENCES"
+    }
+  ]
+}

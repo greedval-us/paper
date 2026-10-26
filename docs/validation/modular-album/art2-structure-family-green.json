@@ -1,0 +1,146 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "a0f84210ebec48149a67e0b3d5859cc7",
+      "status": "succeeded",
+      "mode": "EditMode",
+      "started_unix_ms": 1792717426164,
+      "finished_unix_ms": 1792717466244,
+      "last_update_unix_ms": 1792717466244,
+      "progress": {
+        "completed": 11,
+        "total": 11,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "PaperDefense.Tests.AssemblyArtCoverageTests.Reimport_PreservesGuidsSourceTransformsAndUnchangedPixels",
+        "last_finished_unix_ms": 1792717466075,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": true,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "EditMode",
+        "summary": {
+          "total": 11,
+          "passed": 11,
+          "failed": 0,
+          "skipped": 0,
+          "durationSeconds": 34.435425,
+          "resultState": "Passed"
+        },
+        "results": [
+          {
+            "name": "AllDefinitions_HaveVisualMapping",
+            "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.AllDefinitions_HaveVisualMapping",
+            "state": "Passed",
+            "durationSeconds": 0.1696196,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "Bindings_HaveSpritesStableSocketsAndKnownRevisions",
+            "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.Bindings_HaveSpritesStableSocketsAndKnownRevisions",
+            "state": "Passed",
+            "durationSeconds": 0.0215601,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "EveryStarter_ComposesOrderedPartsAndRealMuzzles",
+            "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.EveryStarter_ComposesOrderedPartsAndRealMuzzles",
+            "state": "Passed",
+            "durationSeconds": 0.0320194,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ExplodedStructureShell_UsesTheSameFamilyArtworkAsTheCompletedRecipe(Slow)",
+            "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.ExplodedStructureShell_UsesTheSameFamilyArtworkAsTheCompletedRecipe(Slow)",
+            "state": "Passed",
+            "durationSeconds": 0.0424028,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ExplodedStructureShell_UsesTheSameFamilyArtworkAsTheCompletedRecipe(Repair)",
+            "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.ExplodedStructureShell_UsesTheSameFamilyArtworkAsTheCompletedRecipe(Repair)",
+            "state": "Passed",
+            "durationSeconds": 0.0070049,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ExplodedStructureShell_UsesTheSameFamilyArtworkAsTheCompletedRecipe(Generator)",
+            "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.ExplodedStructureShell_UsesTheSameFamilyArtworkAsTheCompletedRecipe(Generator)",
+            "state": "Passed",
+            "durationSeconds": 0.007244,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "FamilyCards_ShowCompleteWeaponsAndFoundationCardsKeepTheirEmptyMounts",
+            "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.FamilyCards_ShowCompleteWeaponsAndFoundationCardsKeepTheirEmptyMounts",
+            "state": "Passed",
+            "durationSeconds": 0.0157378,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "FourFramesAndSevenFamilies_CertifyIndependentBoundaryPosesIncludingThreeBarrels",
+            "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.FourFramesAndSevenFamilies_CertifyIndependentBoundaryPosesIncludingThreeBarrels",
+            "state": "Passed",
+            "durationSeconds": 0.1088678,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "FrameSpecificSolidRegions_MatchTheActualRenderedBaseAndFrontWall",
+            "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.FrameSpecificSolidRegions_MatchTheActualRenderedBaseAndFrontWall",
+            "state": "Passed",
+            "durationSeconds": 0.0101017,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "PartInspection_UsesRealPartsAndLeavesOnlyNeutralOptionsEmpty",
+            "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.PartInspection_UsesRealPartsAndLeavesOnlyNeutralOptionsEmpty",
+            "state": "Passed",
+            "durationSeconds": 0.0103726,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "Reimport_PreservesGuidsSourceTransformsAndUnchangedPixels",
+            "fullName": "PaperDefense.Tests.AssemblyArtCoverageTests.Reimport_PreservesGuidsSourceTransformsAndUnchangedPixels",
+            "state": "Passed",
+            "durationSeconds": 33.4809458,
+            "message": null,
+            "stackTrace": null,
+            "output": "Blue pen atlas rebuilt: 140 sprites, 431 aliases, 465 shape bindings, 112 clips, 7 recoils; 4096x4352.\r\n"
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

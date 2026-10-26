@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 06:49:54Z" end-time="2026-10-18 06:49:55Z" duration="1,2428084">
+  <test-suite type="TestSuite" id="1872" name="paper" fullname="paper" runstate="Runnable" testcasecount="703" result="Failed" site="Child" start-time="2026-10-18 06:49:54Z" end-time="2026-10-18 06:49:55Z" duration="1.242808" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1866" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="703" result="Failed" site="Child" start-time="2026-10-18 06:49:54Z" end-time="2026-10-18 06:49:55Z" duration="1.131096" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1867" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="703" result="Failed" site="Child" start-time="2026-10-18 06:49:54Z" end-time="2026-10-18 06:49:55Z" duration="1.126275" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1868" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="703" result="Failed" site="Child" start-time="2026-10-18 06:49:54Z" end-time="2026-10-18 06:49:55Z" duration="1.109234" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1184" name="CompositeWorkshopHostTests" fullname="PaperDefense.Tests.CompositeWorkshopHostTests" classname="PaperDefense.Tests.CompositeWorkshopHostTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-10-18 06:49:54Z" end-time="2026-10-18 06:49:55Z" duration="1.094664" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1185" name="EditingANameSurvivesLiveHudUpdatesWithoutLosingFocusOrText" fullname="PaperDefense.Tests.CompositeWorkshopHostTests.EditingANameSurvivesLiveHudUpdatesWithoutLosingFocusOrText" methodname="EditingANameSurvivesLiveHudUpdatesWithoutLosingFocusOrText" classname="PaperDefense.Tests.CompositeWorkshopHostTests" runstate="Runnable" seed="743508310" result="Failed" start-time="2026-10-18 06:49:54Z" end-time="2026-10-18 06:49:55Z" duration="1.072231" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[Unhandled log message: '[Error] Cannot destroy GameObject while it is being activated or deactivated.'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                <stack-trace><![CDATA[UnityEngine.Object:DestroyImmediate (UnityEngine.Object)
+PaperDefense.Presentation.CompositeWorkshopPanel:Refresh () (at Assets/PaperDefense/Presentation/UI/CompositeWorkshopPanel.cs:66)
+PaperDefense.Presentation.CompositeWorkshopPanel:<Review>b__45_0 (string) (at Assets/PaperDefense/Presentation/UI/CompositeWorkshopPanel.cs:279)
+UnityEngine.Object:DestroyImmediate (UnityEngine.Object)
+PaperDefense.Presentation.CompositeWorkshopPanel:Refresh () (at Assets/PaperDefense/Presentation/UI/CompositeWorkshopPanel.cs:66)
+PaperDefense.Presentation.WorkshopHud:Refresh () (at Assets/PaperDefense/Presentation/UI/WorkshopHud.cs:537)
+PaperDefense.Presentation.WorkshopHud:Update () (at Assets/PaperDefense/Presentation/UI/WorkshopHud.cs:154)
+
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[Cannot destroy GameObject while it is being activated or deactivated.
+Cannot destroy GameObject while it is being activated or deactivated.
+Cannot destroy GameObject while it is being activated or deactivated.
+Cannot destroy GameObject while it's parent is being activated or deactivated.
+Cannot destroy GameObject while it's parent is being activated or deactivated.
+Cannot destroy GameObject while it's parent is being activated or deactivated.
+Cannot destroy GameObject while it's parent is being activated or deactivated.
+Cannot destroy GameObject while it's parent is being activated or deactivated.
+Cannot destroy GameObject while it's parent is being activated or deactivated.
+Cannot destroy GameObject while it's parent is being activated or deactivated.
+Cannot destroy GameObject while it's parent is being activated or deactivated.
+Cannot destroy GameObject while it's parent is being activated or deactivated.
+Cannot destroy GameObject while it's parent is being activated or deactivated.
+Cannot destroy GameObject while it's parent is being activated or deactivated.
+Cannot destroy GameObject while it's parent is being activated or deactivated.
+Cannot destroy GameObject while it's parent is being activated or deactivated.
+Cannot destroy GameObject while it's parent is being activated or deactivated.
+Cannot destroy GameObject while it is being activated or deactivated.
+Cannot set the parent of the GameObject 'Composite title' while activating or deactivating the parent GameObject 'Composite workshop'.
+Cannot set the parent of the GameObject 'Composite resources' while activating or deactivating the parent GameObject 'Composite workshop'.
+Cannot set the parent of the GameObject 'Composite route tower' while activating or deactivating the parent GameObject 'Composite workshop'.
+Cannot set the parent of the GameObject 'Composite route structure' while activating or deactivating the parent GameObject 'Composite workshop'.
+Cannot set the parent of the GameObject 'Composite library' while activating or deactivating the parent GameObject 'Composite workshop'.
+Cannot set the parent of the GameObject 'Composite step 0' while activating or deactivating the parent GameObject 'Composite workshop'.
+Cannot set the parent of the GameObject 'Composite step 1' while activating or deactivating the parent GameObject 'Composite workshop'.
+Cannot set the parent of the GameObject 'Composite step 2' while activating or deactivating the parent GameObject 'Composite workshop'.
+Cannot set the parent of the GameObject 'Composite content' while activating or deactivating the parent GameObject 'Composite workshop'.
+Cannot set the parent of the GameObject 'Composite notice' while activating or deactivating the parent GameObject 'Composite workshop'.
+Cannot set the parent of the GameObject 'Composite footer' while activating or deactivating the parent GameObject 'Composite workshop'.
+<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task9-focus-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Failed(Child)" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 22:56:53Z" end-time="2026-10-18 22:56:54Z" duration="0,6329405">
+  <test-suite type="TestSuite" id="1957" name="paper" fullname="paper" runstate="Runnable" testcasecount="777" result="Failed" site="Child" start-time="2026-10-18 22:56:53Z" end-time="2026-10-18 22:56:54Z" duration="0.632941" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1951" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="777" result="Failed" site="Child" start-time="2026-10-18 22:56:53Z" end-time="2026-10-18 22:56:54Z" duration="0.623472" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39156" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1952" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="777" result="Failed" site="Child" start-time="2026-10-18 22:56:53Z" end-time="2026-10-18 22:56:54Z" duration="0.618477" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1953" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="777" result="Failed" site="Child" start-time="2026-10-18 22:56:53Z" end-time="2026-10-18 22:56:54Z" duration="0.614785" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1001" name="AlbumBattleHudTests" fullname="PaperDefense.Tests.AlbumBattleHudTests" classname="PaperDefense.Tests.AlbumBattleHudTests" runstate="Runnable" testcasecount="9" result="Failed" site="Child" start-time="2026-10-18 22:56:53Z" end-time="2026-10-18 22:56:54Z" duration="0.612340" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1010" name="CardNamesAndGeneratorPencilPriceHaveRoomForTheirRenderedLinesAtEveryRequiredSize" fullname="PaperDefense.Tests.AlbumBattleHudTests.CardNamesAndGeneratorPencilPriceHaveRoomForTheirRenderedLinesAtEveryRequiredSize" methodname="CardNamesAndGeneratorPencilPriceHaveRoomForTheirRenderedLinesAtEveryRequiredSize" classname="PaperDefense.Tests.AlbumBattleHudTests" runstate="Runnable" seed="8720892" result="Failed" start-time="2026-10-18 22:56:53Z" end-time="2026-10-18 22:56:54Z" duration="0.424540" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Name 1 at (1024, 768): Двойной дозор
+  Expected: less than or equal to 30.0f
+  But was:  36.2666664f
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AlbumBattleHudTests+<CardNamesAndGeneratorPencilPriceHaveRoomForTheirRenderedLinesAtEveryRequiredSize>d__24.MoveNext () [0x000e3] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumBattleHudTests.cs:226
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1009" name="IdenticalRecipesKeepTheirOwnFrozenNameAndPreviewAfterMaterialUpgrade" fullname="PaperDefense.Tests.AlbumBattleHudTests.IdenticalRecipesKeepTheirOwnFrozenNameAndPreviewAfterMaterialUpgrade" methodname="IdenticalRecipesKeepTheirOwnFrozenNameAndPreviewAfterMaterialUpgrade" classname="PaperDefense.Tests.AlbumBattleHudTests" runstate="Runnable" seed="217850631" result="Failed" start-time="2026-10-18 22:56:54Z" end-time="2026-10-18 22:56:54Z" duration="0.176070" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The selected page identity must survive recipe resolution and material upgrades.
+  Expected string length 14 but was 7. Strings differ at index 0.
+  Expected: "Северный дозор"
+  But was:  "ПУЛЕМЁТ"
+  -----------^
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AlbumBattleHudTests+<IdenticalRecipesKeepTheirOwnFrozenNameAndPreviewAfterMaterialUpgrade>d__23.MoveNext () [0x0028b] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumBattleHudTests.cs:207
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: D:/Projekt Unity/paper/docs/validation/modular-album/task11-visual-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

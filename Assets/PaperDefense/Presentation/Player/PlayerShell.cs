@@ -14,10 +14,11 @@ namespace PaperDefense.Presentation
         RectTransform root, page, battleRoot;
         PlayerBattleHud battle;
         CanvasGroup battleInteraction;
-        Text status, tooltip, gold;
+        Text status, tooltip, gold, progress;
         float refresh;
         int screenWidth, screenHeight;
         bool statistics;
+        bool battleUsesAlbum;
         Action confirmAction;
         string confirmTitle, confirmMessage;
         GameObject confirmation;
@@ -40,7 +41,7 @@ namespace PaperDefense.Presentation
             ui.Tooltip = value =>
             {
                 if (game.Page == PlayerPage.Home || game.Page == PlayerPage.Map || game.Page == PlayerPage.Preparation) return;
-                if (game.Page == PlayerPage.Battle) battle.ShowHint(value);
+                if (game.Page == PlayerPage.Battle) battle?.ShowHint(value);
                 else if (tooltip != null) tooltip.text = value;
             };
         }
@@ -48,8 +49,11 @@ namespace PaperDefense.Presentation
         public void ApplyLayout(int width, int height)
         {
             screenWidth = width; screenHeight = height;
-            Layout = new PlayerLayout(width, height);
+            battleUsesAlbum = game.Run.UsesAlbumSlots;
+            Layout = new PlayerLayout(width, height, battleUsesAlbum);
             scaler.referenceResolution = new Vector2(W, H); root.sizeDelta = new Vector2(W, H);
+            // Retired tooltip callbacks must not refresh the HUD while its hierarchy is deactivating.
+            battle = null;
             if (battleRoot != null) { battleRoot.gameObject.SetActive(false); Destroy(battleRoot.gameObject); }
             battleRoot = ui.Panel(root, "Battle controls", new Rect(0, 0, W, H), Color.clear);
             battleInteraction = battleRoot.gameObject.AddComponent<CanvasGroup>();
@@ -59,6 +63,9 @@ namespace PaperDefense.Presentation
 
         public void Show(PlayerPage current)
         {
+            if (battleUsesAlbum != game.Run.UsesAlbumSlots) { ApplyLayout(screenWidth, screenHeight); return; }
+            ResetAlbumResult();
+            RememberAlbumView();
             if (page != null) { page.gameObject.SetActive(false); Destroy(page.gameObject); }
             bool battlefield = !game.Run.InWorkshop && current != PlayerPage.Workshop;
             battleRoot.gameObject.SetActive(battlefield);
@@ -66,7 +73,7 @@ namespace PaperDefense.Presentation
             battleInteraction.blocksRaycasts = current == PlayerPage.Battle && !HasConfirmation;
             UnityEngine.EventSystems.EventSystem.current?.SetSelectedGameObject(null);
             page = ui.Panel(root, "Page " + current, new Rect(0, 0, W, H), Color.clear);
-            status = tooltip = gold = null;
+            status = tooltip = gold = progress = null;
             if (!battlefield && current != PlayerPage.Workshop && current != PlayerPage.Home)
                 ui.Panel(page, "Paper", new Rect(0, 0, W, H), PlayerUi.Paper, true);
             switch (current)
@@ -74,6 +81,7 @@ namespace PaperDefense.Presentation
                 case PlayerPage.Home: Home(); break;
                 case PlayerPage.Map: Map(); break;
                 case PlayerPage.Preparation: Preparation(); break;
+                case PlayerPage.Album: BuildAlbum(); break;
                 case PlayerPage.Pause: Pause(); break;
                 case PlayerPage.Upgrades: Upgrades(); break;
                 case PlayerPage.Result: Result(); break;
@@ -150,6 +158,8 @@ namespace PaperDefense.Presentation
             if (game.Page == PlayerPage.Settings && settingsFullscreen != Screen.fullScreen) Show(PlayerPage.Settings);
             refresh -= Time.unscaledDeltaTime; if (refresh > 0) return; refresh = .12f;
             if (gold != null) gold.text = ui.T("gold", game.Run.Workshop.Gold);
+            if (progress != null) progress.text = ProgressCopy();
+            RefreshAlbumResult();
             if (battleRoot.gameObject.activeSelf) battle.Refresh();
         }
     }

@@ -106,7 +106,8 @@ namespace PaperDefense.Tests
             Assert.That(restored.Album.Select(page => page.Id), Is.EqualTo(new[] { "own.0", "own.1", "own.2", "own.3" }));
         }
 
-        [Test] public void FullAlbumWithMaximumDrawingDataRoundTripsBeyondOldOneMegabyteLimit()
+        [TestCase(false)] [TestCase(true)]
+        public void FullAlbumWithMaximumDrawingDataRoundTripsBeyondOldOneMegabyteLimit(bool migrateFromVersionSeven)
         {
             var strokes = new DrawingStroke[128];
             for (int s = 0; s < strokes.Length; s++)
@@ -125,12 +126,31 @@ namespace PaperDefense.Tests
                     Assert.That(profile.AssignSlot(i, page.Id, out _), Is.True); Assert.That(profile.RemoveBlueprint(old, out _), Is.True); }
                 else Assert.That(profile.SaveBlueprint(page, out _), Is.True);
             }
-            var store = new WorkshopProfileStore(path); Assert.That(store.Save(profile).Success, Is.True);
-            Assert.That(Encoding.UTF8.GetByteCount(File.ReadAllText(path)), Is.GreaterThan(1024 * 1024));
+            var store = new WorkshopProfileStore(path);
+            byte[] historicalBytes = null;
+            if (migrateFromVersionSeven)
+            {
+                var historical = profile.ToData(); historical.Version = 7;
+                historical.Loadout = historical.Loadout.Take(4).ToArray();
+                historical.Entries = null; historical.Library = null; historical.Rewards = null; historical.Operations = null;
+                File.WriteAllText(path, JsonUtility.ToJson(historical), new UnicodeEncoding(false, true));
+                historicalBytes = File.ReadAllBytes(path);
+                var loaded = store.Load();
+                Assert.That(loaded.CanWrite, Is.True, loaded.Message);
+                Assert.That(loaded.RequiresMigration, Is.True);
+                Assert.That(File.ReadAllBytes(path), Is.EqualTo(historicalBytes), "Reading the large historical album must leave its source untouched.");
+                profile = loaded.Profile;
+            }
+            Assert.That(store.Save(profile).Success, Is.True, store.LastDiagnostic);
+            int writtenBytes = Encoding.UTF8.GetByteCount(File.ReadAllText(path));
+            Assert.That(writtenBytes, Is.GreaterThan(1024 * 1024));
+            Assert.That(writtenBytes, Is.LessThanOrEqualTo(32 * 1024 * 1024), "The writer must stay within the reader's unchanged limit.");
+            if (migrateFromVersionSeven)
+                Assert.That(File.ReadAllBytes(path + ".v7-original"), Is.EqualTo(historicalBytes));
             var restored = new WorkshopProfileStore(path).Load();
             Assert.That(restored.CanWrite, Is.True, restored.Message); Assert.That(restored.Profile.Album.Count, Is.EqualTo(64));
-            Assert.That(restored.Profile.Album[63].Drawing.PointCount, Is.EqualTo(2048));
-            Assert.That(restored.Profile.Album[63].Drawing.GeometryHash, Is.EqualTo(maximum.GeometryHash));
+            Assert.That(restored.Profile.Album.Select(page => page.Drawing.PointCount), Is.All.EqualTo(2048));
+            Assert.That(restored.Profile.Album.Select(page => page.Drawing.GeometryHash), Is.All.EqualTo(maximum.GeometryHash));
         }
 
         static string LegacyJson() => "{\"Version\":1,\"Gold\":321,\"Unlocked\":[\"chassis.heavy\",\"module.tracking\"],\"Loadout\":[\"custom\",\"starter.double\",\"starter.piercer\",\"starter.mortar\"],\"Album\":[{\"Id\":\"custom\",\"Name\":\"Старая башня\",\"Chassis\":1,\"FirstWeapon\":2,\"Modules\":4}]}";

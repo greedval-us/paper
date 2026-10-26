@@ -204,6 +204,84 @@ namespace PaperDefense.Tests
             Assert.That(NotebookEffectRenderer.EffectId(events[0]), Is.EqualTo(effectId));
         }
 
+        [TestCase(.1f)] [TestCase(.5f)] [TestCase(.9f)]
+        public void SingleShotDrawsABoundedInkStreakThroughoutItsLifetime(float fraction)
+        {
+            var events=new SimulationEventBuffer();
+            events.Publish(1,SimulationEventKind.Shot,new Point2(-30,-40),new Point2(15,20),StructureKind.Gun,
+                attack:AttackKind.Single);
+            var mesh=new Mesh();
+            try
+            {
+                var pen=new MeshPen(mesh);
+                NotebookEffectRenderer.Draw(pen,events[0],new Vector2(3,4),NotebookEffectRenderer.Duration(events[0],theme)*fraction,theme);
+                pen.Upload();Assert.That(mesh.vertexCount,Is.GreaterThanOrEqualTo(4));
+                Vector2 tail=(mesh.vertices[0]+mesh.vertices[3])*.5f;
+                Vector2 tip=(mesh.vertices[1]+mesh.vertices[2])*.5f;
+                Assert.That(Vector2.Distance(tail,tip),Is.InRange(.05f,.8f),
+                    "An ordinary shot is a short ink mark, even when its captured target is twenty units away.");
+            }
+            finally{Object.DestroyImmediate(mesh);}
+        }
+
+        [Test] public void SingleShotInkStreakAdvancesFromTheActualMuzzleTowardItsCapturedTarget()
+        {
+            var events=new SimulationEventBuffer();
+            events.Publish(1,SimulationEventKind.Shot,new Point2(-30,-40),new Point2(15,20),StructureKind.Gun,
+                attack:AttackKind.Single);
+            var muzzle=new Vector2(3,4);var direction=new Vector2(.6f,.8f);var perpendicular=new Vector2(-.8f,.6f);
+            var mesh=new Mesh();
+            try
+            {
+                var pen=new MeshPen(mesh);float previous=-1;
+                foreach(float fraction in new[]{0f,.1f,.5f,.9f})
+                {
+                    pen.Clear();NotebookEffectRenderer.Draw(pen,events[0],muzzle,NotebookEffectRenderer.Duration(events[0],theme)*fraction,theme);pen.Upload();
+                    Assert.That(mesh.vertexCount,Is.GreaterThanOrEqualTo(4));
+                    Vector2 tail=(mesh.vertices[0]+mesh.vertices[3])*.5f;
+                    Vector2 tip=(mesh.vertices[1]+mesh.vertices[2])*.5f;
+                    float along=Vector2.Dot(tip-muzzle,direction);
+                    Assert.That(along,Is.GreaterThan(previous),"The ink mark advances rather than leaving a stationary target-side beam.");
+                    Assert.That(along,Is.InRange(0f,20f));
+                    Assert.That(Vector2.Dot(tail-muzzle,direction),Is.GreaterThanOrEqualTo(-.00001f));
+                    Assert.That(Vector2.Dot(tail-muzzle,perpendicular),Is.EqualTo(0).Within(.00001f));
+                    Assert.That(Vector2.Dot(tip-muzzle,perpendicular),Is.EqualTo(0).Within(.00001f));
+                    if(fraction==0)
+                    {
+                        Assert.That(Vector2.Distance(tail,muzzle),Is.LessThan(.00001f));
+                        Assert.That(along,Is.LessThan(1),"The first mark leaves the rendered muzzle, not the event's structure-centre source.");
+                    }
+                    if(fraction==.5f)Assert.That(along,Is.InRange(8f,12f));
+                    if(fraction==.9f)Assert.That(along,Is.GreaterThan(18f));
+                    previous=along;
+                }
+            }
+            finally{Object.DestroyImmediate(mesh);}
+        }
+
+        [TestCase(AttackKind.Line)] [TestCase(AttackKind.Ricochet)]
+        public void SpecialistShotPathsKeepTheirFullMuzzleToTargetGeometry(AttackKind attack)
+        {
+            var events=new SimulationEventBuffer();var muzzle=new Vector2(3,4);var target=new Vector2(15,20);
+            events.Publish(1,SimulationEventKind.Shot,new Point2(-30,-40),new Point2(target.x,target.y),(StructureKind)(-1),
+                attack:attack,weaponId:"weapon.custom");
+            var mesh=new Mesh();
+            try
+            {
+                var pen=new MeshPen(mesh);
+                foreach(float fraction in new[]{0f,.1f,.5f,.9f})
+                {
+                    pen.Clear();NotebookEffectRenderer.Draw(pen,events[0],muzzle,NotebookEffectRenderer.Duration(events[0],theme)*fraction,theme);pen.Upload();
+                    Vector2 from=(mesh.vertices[0]+mesh.vertices[3])*.5f;
+                    Vector2 to=(mesh.vertices[1]+mesh.vertices[2])*.5f;
+                    Assert.That(Vector2.Distance(from,muzzle),Is.LessThan(.00001f));
+                    Assert.That(Vector2.Distance(to,target),Is.LessThan(.00001f));
+                    Assert.That(Vector2.Distance(from,to),Is.EqualTo(20).Within(.00001f));
+                }
+            }
+            finally{Object.DestroyImmediate(mesh);}
+        }
+
         [Test] public void TrialDeathSuppressesTheStaleLiveSnapshotEvenAfterTheDeathTailExpiresAndSeekRestoresIt()
         {
             theme.Data.Shapes.Add(Shape("enemy.doodle.sketch.idle", Vector2.zero, Vector2.up));

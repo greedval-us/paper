@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="17" result="Failed(Child)" total="17" passed="13" failed="4" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 04:46:01Z" end-time="2026-10-18 04:46:02Z" duration="1,2192472">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1183" result="Failed" site="Child" start-time="2026-10-18 04:46:01Z" end-time="2026-10-18 04:46:02Z" duration="1.219247" total="17" passed="13" failed="4" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="2198" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="1013" result="Failed" site="Child" start-time="2026-10-18 04:46:01Z" end-time="2026-10-18 04:46:02Z" duration="1.087752" total="17" passed="13" failed="4" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="2199" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="1013" result="Failed" site="Child" start-time="2026-10-18 04:46:01Z" end-time="2026-10-18 04:46:02Z" duration="1.025554" total="17" passed="13" failed="4" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="2200" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="1013" result="Failed" site="Child" start-time="2026-10-18 04:46:01Z" end-time="2026-10-18 04:46:02Z" duration="0.922343" total="17" passed="13" failed="4" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1134" name="AssemblyProfileMutationTests" fullname="PaperDefense.Tests.AssemblyProfileMutationTests" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" testcasecount="17" result="Failed" site="Child" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.829091" total="17" passed="13" failed="4" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1149" name="AssigningSlot_MovesAnyOwnedEntryAndNullClears" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.AssigningSlot_MovesAnyOwnedEntryAndNullClears" methodname="AssigningSlot_MovesAnyOwnedEntryAndNullClears" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="810216616" result="Passed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.120913" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1148" name="DeletingLibraryComponent_DoesNotTouchSavedPageSnapshotOrReference" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.DeletingLibraryComponent_DoesNotTouchSavedPageSnapshotOrReference" methodname="DeletingLibraryComponent_DoesNotTouchSavedPageSnapshotOrReference" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="2007144485" result="Passed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.032620" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1147" name="DeletingSelectedEntry_ClearsSlotsAndCompatibilityProjection" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.DeletingSelectedEntry_ClearsSlotsAndCompatibilityProjection" methodname="DeletingSelectedEntry_ClearsSlotsAndCompatibilityProjection" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="1930036775" result="Passed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.009129" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1142" name="EditingEntry_UsesOptimisticRevisionAndLeavesOldSnapshotImmutable" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.EditingEntry_UsesOptimisticRevisionAndLeavesOldSnapshotImmutable" methodname="EditingEntry_UsesOptimisticRevisionAndLeavesOldSnapshotImmutable" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="1890649252" result="Passed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.010834" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1152" name="EmptyOperationIds_AreRejectedWithoutPublishingSave" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.EmptyOperationIds_AreRejectedWithoutPublishingSave" methodname="EmptyOperationIds_AreRejectedWithoutPublishingSave" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="500119949" result="Passed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.016068" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1151" name="FindOperationRecognizesAnUppercaseNReceiptAfterVersionEightRead" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.FindOperationRecognizesAnUppercaseNReceiptAfterVersionEightRead" methodname="FindOperationRecognizesAnUppercaseNReceiptAfterVersionEightRead" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="1725683727" result="Failed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.024603" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  N-format receipts accepted by the reader must retain their GUID identity regardless of letter case.
+  Expected: not null
+  But was:  null
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileMutationTests.FindOperationRecognizesAnUppercaseNReceiptAfterVersionEightRead () [0x0007a] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileMutationTests.cs:193
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1144" name="FullAlbum_AllowsEditButRejectsNewPageAndVariant" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.FullAlbum_AllowsEditButRejectsNewPageAndVariant" methodname="FullAlbum_AllowsEditButRejectsNewPageAndVariant" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="1886175350" result="Passed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.261177" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1145" name="LegacyPages_CannotBeSavedThroughModernMutator" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.LegacyPages_CannotBeSavedThroughModernMutator" methodname="LegacyPages_CannotBeSavedThroughModernMutator" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="1564201680" result="Passed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.011841" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1146" name="LibrarySave_EditAndVariantUseIndependentRevisions" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.LibrarySave_EditAndVariantUseIndependentRevisions" methodname="LibrarySave_EditAndVariantUseIndependentRevisions" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="291969138" result="Passed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.019656" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1136" name="PreviouslyOwnedPart_BypassesNewLevelAndPrice" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.PreviouslyOwnedPart_BypassesNewLevelAndPrice" methodname="PreviouslyOwnedPart_BypassesNewLevelAndPrice" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="1565315217" result="Passed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.060024" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1135" name="Purchase_RequiresLevelThenGoldAndDebitsOnce" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.Purchase_RequiresLevelThenGoldAndDebitsOnce" methodname="Purchase_RequiresLevelThenGoldAndDebitsOnce" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="857995431" result="Passed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.079239" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1150" name="Receipts_AreCopiedAndDuplicateOperationIsRejected" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.Receipts_AreCopiedAndDuplicateOperationIsRejected" methodname="Receipts_AreCopiedAndDuplicateOperationIsRejected" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="1693637555" result="Passed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.009890" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1137" name="SavingEntry_NormalizesNewRevisionAndRebuildsLegacyProjection" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.SavingEntry_NormalizesNewRevisionAndRebuildsLegacyProjection" methodname="SavingEntry_NormalizesNewRevisionAndRebuildsLegacyProjection" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="92869613" result="Passed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.012760" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1141" name="SavingEntry_RejectsInvalidStableIdentityBeforeChangingCandidate" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.SavingEntry_RejectsInvalidStableIdentityBeforeChangingCandidate" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.041815" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1138" name="SavingEntry_RejectsInvalidStableIdentityBeforeChangingCandidate(&quot;length&quot;)" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.SavingEntry_RejectsInvalidStableIdentityBeforeChangingCandidate(&quot;length&quot;)" methodname="SavingEntry_RejectsInvalidStableIdentityBeforeChangingCandidate" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="751341767" result="Failed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.014074" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: False
+  But was:  True
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileMutationTests.SavingEntry_RejectsInvalidStableIdentityBeforeChangingCandidate (System.String malformed) [0x00045] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileMutationTests.cs:68
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1139" name="SavingEntry_RejectsInvalidStableIdentityBeforeChangingCandidate(&quot;trim&quot;)" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.SavingEntry_RejectsInvalidStableIdentityBeforeChangingCandidate(&quot;trim&quot;)" methodname="SavingEntry_RejectsInvalidStableIdentityBeforeChangingCandidate" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="743004316" result="Failed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.012698" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: False
+  But was:  True
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileMutationTests.SavingEntry_RejectsInvalidStableIdentityBeforeChangingCandidate (System.String malformed) [0x00045] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileMutationTests.cs:68
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1140" name="SavingEntry_RejectsInvalidStableIdentityBeforeChangingCandidate(&quot;control&quot;)" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.SavingEntry_RejectsInvalidStableIdentityBeforeChangingCandidate(&quot;control&quot;)" methodname="SavingEntry_RejectsInvalidStableIdentityBeforeChangingCandidate" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="1380688965" result="Failed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.012736" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: False
+  But was:  True
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfileMutationTests.SavingEntry_RejectsInvalidStableIdentityBeforeChangingCandidate (System.String malformed) [0x00045] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\AssemblyProfileMutationTests.cs:68
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="1143" name="VariantEntry_UsesOperationIdentityAndRejectsUnreceiptedCollision" fullname="PaperDefense.Tests.AssemblyProfileMutationTests.VariantEntry_UsesOperationIdentityAndRejectsUnreceiptedCollision" methodname="VariantEntry_UsesOperationIdentityAndRejectsUnreceiptedCollision" classname="PaperDefense.Tests.AssemblyProfileMutationTests" runstate="Runnable" seed="982232262" result="Passed" start-time="2026-10-18 04:46:02Z" end-time="2026-10-18 04:46:02Z" duration="0.009105" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task5-identity-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

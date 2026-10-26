@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Passed" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 03:53:59Z" end-time="2026-10-18 03:54:00Z" duration="0,7799014">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1036" result="Passed" start-time="2026-10-18 03:53:59Z" end-time="2026-10-18 03:54:00Z" duration="0.779901" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="2024" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="866" result="Passed" start-time="2026-10-18 03:54:00Z" end-time="2026-10-18 03:54:00Z" duration="0.654894" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="2025" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="866" result="Passed" start-time="2026-10-18 03:54:00Z" end-time="2026-10-18 03:54:00Z" duration="0.586958" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="2026" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="866" result="Passed" start-time="2026-10-18 03:54:00Z" end-time="2026-10-18 03:54:00Z" duration="0.487478" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1102" name="AssemblySnapshotTests" fullname="PaperDefense.Tests.AssemblySnapshotTests" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-18 03:54:00Z" end-time="2026-10-18 03:54:00Z" duration="0.390928" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1108" name="LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication" fullname="PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 03:54:00Z" end-time="2026-10-18 03:54:00Z" duration="0.192700" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1106" name="LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication(False)" fullname="PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication(False)" methodname="LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" seed="2137545138" result="Passed" start-time="2026-10-18 03:54:00Z" end-time="2026-10-18 03:54:00Z" duration="0.085172" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1107" name="LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication(True)" fullname="PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication(True)" methodname="LegacyAdapter_DerivedOverflowIsDiagnosticBeforePublication" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" seed="2052434710" result="Passed" start-time="2026-10-18 03:54:00Z" end-time="2026-10-18 03:54:00Z" duration="0.003536" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1111" name="LegacyAdapter_IncompleteBalanceReturnsDiagnostics" fullname="PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_IncompleteBalanceReturnsDiagnostics" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 03:54:00Z" end-time="2026-10-18 03:54:00Z" duration="0.005670" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1109" name="LegacyAdapter_IncompleteBalanceReturnsDiagnostics(True,&quot;assembly.balance.missing&quot;)" fullname="PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_IncompleteBalanceReturnsDiagnostics(True,&quot;assembly.balance.missing&quot;)" methodname="LegacyAdapter_IncompleteBalanceReturnsDiagnostics" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" seed="116909276" result="Passed" start-time="2026-10-18 03:54:00Z" end-time="2026-10-18 03:54:00Z" duration="0.001236" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1110" name="LegacyAdapter_IncompleteBalanceReturnsDiagnostics(False,&quot;assembly.material.unknown&quot;)" fullname="PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_IncompleteBalanceReturnsDiagnostics(False,&quot;assembly.material.unknown&quot;)" methodname="LegacyAdapter_IncompleteBalanceReturnsDiagnostics" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" seed="2092569989" result="Passed" start-time="2026-10-18 03:54:00Z" end-time="2026-10-18 03:54:00Z" duration="0.000132" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1105" name="LegacyAdapter_PreservesExistingCostCooldownAndSequentialModifiers" fullname="PaperDefense.Tests.AssemblySnapshotTests.LegacyAdapter_PreservesExistingCostCooldownAndSequentialModifiers" methodname="LegacyAdapter_PreservesExistingCostCooldownAndSequentialModifiers" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" seed="199059520" result="Passed" start-time="2026-10-18 03:54:00Z" end-time="2026-10-18 03:54:00Z" duration="0.036723" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1104" name="ResolvedValues_DoNotRetainMutableBalanceOrAuthoringArrays" fullname="PaperDefense.Tests.AssemblySnapshotTests.ResolvedValues_DoNotRetainMutableBalanceOrAuthoringArrays" methodname="ResolvedValues_DoNotRetainMutableBalanceOrAuthoringArrays" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" seed="34608454" result="Passed" start-time="2026-10-18 03:54:00Z" end-time="2026-10-18 03:54:00Z" duration="0.048094" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1103" name="SavedRecipe_SurvivesLibraryEditsDeletionAndNewCatalogRevision" fullname="PaperDefense.Tests.AssemblySnapshotTests.SavedRecipe_SurvivesLibraryEditsDeletionAndNewCatalogRevision" methodname="SavedRecipe_SurvivesLibraryEditsDeletionAndNewCatalogRevision" classname="PaperDefense.Tests.AssemblySnapshotTests" runstate="Runnable" seed="1691992589" result="Passed" start-time="2026-10-18 03:54:00Z" end-time="2026-10-18 03:54:00Z" duration="0.007059" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task4-baseline.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

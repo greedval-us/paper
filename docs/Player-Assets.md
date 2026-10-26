@@ -1,49 +1,40 @@
 # Ресурсы игрового оформления
 
-Основная сцена — [PaperDefenseGame.unity](../Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity). Меню, карта, подготовка, основа башни, оружие, рисунок и настройки (01–06, 22) используют оформление эскизов. Новый набор охватывает также постройки, врагов, окружение и эффекты; композиции 07–21 и 23–28 ещё предстоят, включая полный HUD 15–17. Следующий экран — 07 «Рабочая геометрия и подробности». [Статус переноса](Implementation-Roadmap.md).
+Текущая ревизия исходных и runtime-каталогов — `modular-full-catalog-2026-10-24-v8`: 54 определения деталей, 141 родная растровая область и 431 alias, всего 572 записи runtime-каталога. Современные детали используют 10 PNG-источников, включая 51 область `part.full.*`. Фактический PNG атласа имеет размер 4096×4352. Эти числа проверены чтением JSON и заголовка PNG; они не являются результатом визуальной приёмки.
 
-## Источники и ресурсы
+Художественные первоисточники — три утверждённых листа: [башни и основы](design/album-assembly-2026-10-17/art/01-towers.png), [части оружия](design/album-assembly-2026-10-17/art/02-weapon-parts.png), [сооружения](design/album-assembly-2026-10-17/art/03-structures.png). Они задают силуэты, материалы, синюю ручку и тёплые светлые поверхности. Игровые PNG — отдельные прозрачные части с авторскими креплениями; полные концептные страницы в атлас не импортируются. [Контракт ресурсов](Modular-Asset-Contract.md).
 
-| Ресурс / код | Назначение |
+## Исходники
+
+| Документ или PNG | Назначение |
 |---|---|
-| [ArtSource/Notebook/NewStyle](../ArtSource/Notebook/NewStyle) | PNG-листы, иллюстрации, логотипы, `sprites.source.json` и `animation.json` |
-| `Resources/Art/NotebookAtlas.png` | Единая текстура деталей, врагов, окружения, эффектов и значков |
-| `Resources/Art/NotebookSprites.json` | Семантический каталог областей атласа и aliases |
-| [NotebookSpriteCatalog](../Assets/PaperDefense/Presentation/Art/NotebookSpriteCatalog.cs) | Загрузка спрайтов и общий атлас для UI и пакетных Mesh |
-| [NotebookVisualTheme.asset](../Assets/PaperDefense/Resources/Art/NotebookVisualTheme.asset) | Анимация, время кадров, палитра и отдача; стандартные `Marks` пусты |
-| `Resources/Art/Player/HomeDefenseLandscape` | Фон меню без запечённых игровых подписей и кнопок |
-| `Resources/Art/Player/MapFieldIllustration` | Целый рисунок поля карты |
-| `Resources/Art/Player/PreparationLandscape` | Декоративный фон подготовки |
-| `Resources/Art/Player/SettingsLandscape` | Фон настроек по эскизу 22 |
-| `Resources/Art/Player/FoundationPageDecor`, `FoundationPreviewScenery` | Прозрачный нижний пейзаж и окружение предпросмотра основы 04; отдельные PNG с сохранёнными пропорциями |
-| `Resources/Art/Player/DrawingWorkshopHouse` | Подробный домик шапки 06 по эскизу; прозрачный PNG, один Sprite с импортом до 512px; [промпт и происхождение](validation/2026-10-17-workshop-drawing/assets.md) |
-| [FoundationDetailGraphic](../Assets/PaperDefense/Presentation/UI/FoundationDetailGraphic.cs) | Тонкие рамки, круглые шаги, деления креплений, отметка выбора, стрелки и видимый фокус экранов 04–06 |
-| `logo.home`, `logo.settings` | Декоративные логотипы из общего каталога |
-| `tower.*`, `hero.castle`, `icon.ink-*` | Стандартные конструкции, замок и цветные чернильницы для страниц |
-| `chassis.standard`, `chassis.heavy`, `chassis.precision`, `chassis.battery` | Существующие рисунки корпусов из общего атласа для карточек и предпросмотра экрана 04 |
-| [NotebookPaperSurface](../Assets/PaperDefense/Presentation/Player/NotebookPaperSurface.cs) | Бумага, клетка, рамки, штриховка и состояния кнопок |
-| [PlayerShell.Home](../Assets/PaperDefense/Presentation/Player/PlayerShell.Home.cs) | Главное меню и пять действий |
-| [PlayerShell.Map](../Assets/PaperDefense/Presentation/Player/PlayerShell.Map.cs) | Карта с действующими условиями миссии и переходами |
-| [PlayerShell.Preparation](../Assets/PaperDefense/Presentation/Player/PlayerShell.Preparation.cs) | Четыре карточки, материал, готовность, замена и запуск |
-| [PlayerShell.Settings](../Assets/PaperDefense/Presentation/Player/PlayerShell.Settings.cs) | Полный экран, текущее и выбранное разрешение, применение, радиусы и уменьшение движения |
-| [WizardFoundationPanel](../Assets/PaperDefense/Presentation/UI/WizardFoundationPanel.cs) | Экран 04: каталог корпусов, выбранная основа, реальные параметры и отдельная покупка |
-| [WizardWeaponPanel](../Assets/PaperDefense/Presentation/UI/WizardWeaponPanel.cs), [WizardWeaponHeader](../Assets/PaperDefense/Presentation/UI/WizardWeaponHeader.cs) | Экран 05: текущая сборка, вертикальные крепления, семь карточек оружия, цены, нагрузка и доступ к действующим дополнениям |
-| [WeaponAssemblyGraphic](../Assets/PaperDefense/Presentation/UI/WeaponAssemblyGraphic.cs) | Целая сборка из спрайтов общего атласа для нового черновика; собственная геометрия принятого рисунка с сохранением пропорций |
-| [GuidedDrawingLayout](../Assets/PaperDefense/Presentation/UI/GuidedDrawingLayout.cs), [DrawingSummaryLayout](../Assets/PaperDefense/Presentation/UI/DrawingSummaryLayout.cs) | Экран 06: слои над настоящим холстом, шесть инструментов, нижняя строка, меню «···», бумажная сводка, цветные шкалы и действующая проба |
-| [DrawingCanvasGraphic](../Assets/PaperDefense/Presentation/UI/DrawingCanvasGraphic.cs), [FootprintProbeSketch](../Assets/PaperDefense/Presentation/UI/FootprintProbeSketch.cs) | Редактируемые авторские штрихи и запись настоящей пробы; окружение повторно использует общие рисунки |
-| [PlayerShell.Notebook](../Assets/PaperDefense/Presentation/Player/PlayerShell.Notebook.cs) | Полная видимость фонов и общие элементы страниц |
-| [player-ru.asset](../Assets/PaperDefense/Resources/Text/player-ru.asset) | Текст игрового интерфейса |
+| [sprites.source.json](../ArtSource/Notebook/NewStyle/sprites.source.json) | Области исходных PNG, физические bounds и aliases |
+| [assembly-parts.source.json](../ArtSource/Notebook/NewStyle/assembly-parts.source.json) | 54 определения, canvas/trim/region, крепления, слои, оси, muzzle и физические области; независимая историческая компоновка |
+| [full-catalog-layout.json](../ArtSource/Notebook/NewStyle/full-catalog-layout.json) | Листы и точные области полного каталога |
+| [StandardFoundation-v10.png](../ArtSource/Notebook/NewStyle/StandardFoundation-v10.png) | Современная двухместная основа, canvas 1536×1024 |
+| [BatteryFoundation-v4.png](../ArtSource/Notebook/NewStyle/BatteryFoundation-v4.png) | Современная трёхместная основа, canvas 1254×1254 |
+| [AssemblyAccessories-v2.png](../ArtSource/Notebook/NewStyle/AssemblyAccessories-v2.png) | Шесть групп принадлежностей, canvas 1536×1024 |
+| `TurnHub-v1.png` | Импортированный отдельный поворотный узел `part.full.turn.standard`; новый capture проверяется отдельно |
+| [animation.json](../ArtSource/Notebook/NewStyle/animation.json) | Формы, кадры, палитра и отдача; самостоятельная версия документа |
 
-Источник правок — PNG и JSON в `NewStyle`; редакторский `NotebookSpriteImportTools.Rebuild()` собирает runtime-ресурсы. [Порядок импорта](Notebook-Art.md), [формат источников](../ArtSource/Notebook/README.md).
+Промпты, роли референсов и выбранные изображения сохраняются в соседних `*.provenance.json`. Импорт v8 с отдельным узлом выполнен; source и runtime содержат 141 область и 431 alias. Импорт копирует родные RGBA-области без ресэмплинга и вращения, с промежутками 4 px. Alpha помогает выбрать trim, но не определяет механические крепления. [Сборка и проверка](../Tools/ArtAssembly13/README.md).
 
-Декорации основы созданы встроенным `image_gen` по эскизу 04 с использованием навыка `imagegen`. [Точные промпты и происхождение](../ArtSource/Notebook/NewStyle/foundation-generation.json). Это отдельные прозрачные спрайты вне атласа; текст и игровые значения в них отсутствуют.
+## Runtime и предпросмотр
 
-Стандартная иллюстрация назначается только подходящей конструкции. Стартовый набор содержит одиночное и двойное орудие, пробойник и бронированную мортиру; веер имеет собственный рисунок. Пользовательский чертёж отображается собственной геометрией, сохраняя пустые слои и точки креплений. Цены и характеристики читаются из игровых данных.
+Общие ресурсы — `Resources/Art/NotebookAtlas.png`, `NotebookSprites.json`, `NotebookMounts.json` и `NotebookVisualTheme.asset`. Современные альбом, подготовка, полигон и бой используют общие привязки составных деталей. Названия, цены, характеристики и состояния остаются живым текстом UI.
+
+[AssemblyVisualComposer](../Assets/PaperDefense/Presentation/Art/AssemblyVisualComposer.Catalog.cs) предоставляет `Compose`, `ComposeFoundation`, `ComposeWeapon` и `ComposePart`. [WeaponAssemblyGraphic](../Assets/PaperDefense/Presentation/UI/WeaponAssemblyGraphic.cs) показывает выбранный рецепт или деталь. [NotebookArtGraphic](../Assets/PaperDefense/Presentation/Art/NotebookArtGraphic.cs) для семи известных `ui.weapon.*` без animation clip вызывает `ComposeWeapon` с `AssemblyPreviewPose.ForWeapon()`: механизм и ствол семейства, стандартные прицел, магазин и спуск. Значок семейства и современный предпросмотр используют одни части и крепления; выбранные улучшения показывает сам рецепт. Поза и масштаб зависят от места показа.
+
+Текущий фон меню загружается ключом `Art/Player/HomeDefenseLandscapeV2`. Фоны карты, подготовки и настроек, декор основы, домик, книга альбома, справка, бумажная карточка и руины — самостоятельные изображения `Resources/Art/Player`. Сборка общего атласа их не создаёт; отсутствие в atlas manifest не означает, что они не используются.
+
+## Существующие профили
+
+`ModularSprites`, `PreparationTowers` и структурные области `ScenerySprites` ещё нужны совместимости. [ProfileMigrationV8](../Assets/PaperDefense/Core/ProfileMigrationV8.cs) переводит старую страницу в новый рецепт только при эквивалентности; остальные сохраняются как `Legacy`. Для них остаются исторические чертежи, собственная геометрия рисунка, адаптер пилота и совместимые `tower.*`-иллюстрации. Современная замена не позволяет удалить все старые семантические ID. В смешанном `ScenerySprites` также остаётся живое окружение.
+
+[Инвентаризация ART3](validation/modular-album/art3-assets-inventory.json) фиксирует состояние перед заменой. [План удаления](validation/modular-album/art3-retirement-plan.json) содержит точный список, хеши и условия; это не подтверждение выполненного удаления. Эскизы, provenance и исторические снимки сохраняются.
 
 ## Проверка
 
-Фоны показываются целиком с собственными пропорциями; дополнительное место окна заполняется бумагой. Имена, цены и состояния остаются живым текстом. Основные действия карты, подготовки и настроек не требуют прокрутки. Кнопки и области ввода остаются отдельными Unity-элементами.
+Новый импорт требует проверки родных пикселей, упаковки, креплений, физических габаритов, соседних оружий, вариантов и старых профилей. Визуальную приёмку проводят по фактическим кадрам текущей ревизии и их хешам, сравнивая с тремя исходными листами. Старый успешный прогон не подтверждает новый ресурс. Исправление cleanhub требует новых кадров; этот документ не объявляет его визуальную приёмку завершённой.
 
-Проверяйте основную игру при 16:9 и 4:3, длинные имена и клавиатурный фокус. `-paper-memory-only` позволяет пройти маршрут без личного профиля. Применение общей темы не завершает композиции оставшихся экранов.
-
-[Рисунок — экран 06](validation/2026-10-17-workshop-drawing/report.md) · [Оружие — экран 05](validation/2026-10-17-workshop-weapons/report.md) · [Основа башни — экран 04](validation/2026-10-17-workshop-foundation/report.md) · [Графика и разрешение](validation/2026-10-17-art-resolution/report.md) · [Дизайн](Game-Design.md) · [Порядок реализации](Implementation-Roadmap.md).
+Фоны показывают целиком с исходными пропорциями; UI проверяют в 16:9 и 4:3, с длинными именами и клавиатурным фокусом. `-paper-memory-only` позволяет пройти маршрут без личного профиля.

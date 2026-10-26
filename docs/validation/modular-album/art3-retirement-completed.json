@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-25",
+  "status": "RETIRED",
+  "baseline": "77e0e49",
+  "revision": "modular-full-catalog-2026-10-24-v8",
+  "evidencePlan": "art3-retirement-plan.json",
+  "validation": "Native atlas/geometry target checks, new runtime import and fresh actual captures; replacement refs checked before deletion.",
+  "files": [
+    {
+      "path": "ArtSource/Notebook/NewStyle/BatteryFoundation-v2.png",
+      "sha256": "3245D636CD970C6AB8A584CDA188C03DB0797A51EBA58BA15FED53CFC82EE110"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v2.png",
+      "sha256": "CE3FC203FAD1A7F0E592B29F881AFF24260835AFB8DD9372496E34811B43AC9D"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v3.png",
+      "sha256": "6E61C01DDE00506032223851252754BE0C0B5D9392FE589F3FD26C294E111C36"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v4.png",
+      "sha256": "9F803F5ECC4E7EDA7A102B9F5065C40401A9F507E19E48D2A210AD08E733D3DE"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v5.png",
+      "sha256": "CA1892BB27739BFC4D59E860E887953EBEB247783E4903785E4BBDE4D8243611"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v6.png",
+      "sha256": "960AFFFCC33B71582142E5F57E3D4929934BDF0193CF69AE3EBBD5113DBDB987"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v7.png",
+      "sha256": "710B564168402ECE9A55A0BA08C9298C3D700B29EA454577D20B1B54897AF237"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/StandardFoundation-v8.png",
+      "sha256": "6483230153074E924C876C76CCC0ED89F11ABE47C276AC4B757DD01557F3762D"
+    },
+    {
+      "path": "Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscape.png",
+      "sha256": "9AE945C48B714E6A68B904F6DC4AA2AE8FF820228D3FFD227A4F52348DE4EB23"
+    },
+    {
+      "path": "Assets/PaperDefense/Resources/Art/Player/HomeDefenseLandscape.png.meta",
+      "sha256": "B4DA93088D4EAECB4C41EA573D08B556DD16D657A4FC9250D73CC23BA324B045"
+    }
+  ]
+}

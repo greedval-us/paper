@@ -27,8 +27,8 @@ namespace PaperDefense.Presentation
         public WorkshopUi(UserTextResolver resolver = null)
         {
             this.resolver = resolver ?? TextResourcesAsset.Default;
-            BodyFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            HeadingFont = Resources.Load<Font>("NotebookHand") ?? BodyFont;
+            BodyFont = Resources.Load<Font>("NotebookNeucha") ?? Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            HeadingFont = BodyFont;
         }
 
         public string Resolve(string value) => GameText.Resolve(resolver, value);
@@ -38,6 +38,22 @@ namespace PaperDefense.Presentation
             rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0, 1);
             rect.anchoredPosition = new Vector2(bounds.x, -bounds.y);
             rect.sizeDelta = bounds.size;
+        }
+
+        public static void RemoveView(GameObject view)
+        {
+            if (view == null) return;
+            // Submit handlers finish after their command; keep the retired control alive until then.
+            view.transform.SetParent(null, false);
+            view.SetActive(false);
+            if (UnityEngine.Application.isPlaying) UnityEngine.Object.Destroy(view);
+            else UnityEngine.Object.DestroyImmediate(view);
+        }
+
+        public static void ClearViews(Transform parent)
+        {
+            for (int i = parent.childCount - 1; i >= 0; i--)
+                RemoveView(parent.GetChild(i).gameObject);
         }
 
         public static T Graphic<T>(Transform parent, string name, Rect bounds) where T : UnityEngine.UI.Graphic
@@ -64,6 +80,7 @@ namespace PaperDefense.Presentation
             if (heading) bounds.height = Mathf.Max(bounds.height, Mathf.Ceil(size * 1.5f));
             var label = Graphic<UnityEngine.UI.Text>(parent, name, bounds);
             label.font = heading ? HeadingFont : BodyFont;
+            label.fontStyle = FontStyle.Bold;
             label.text = Resolve(value);
             label.fontSize = size;
             label.color = color ?? Ink;
@@ -88,9 +105,10 @@ namespace PaperDefense.Presentation
                 new Rect(captionX, 4, Mathf.Max(0, bounds.width - captionX - padding), Mathf.Max(0, bounds.height - 8)),
                 19, color: primary ? Paper : Ink);
             label.alignment = icon == WorkshopIcon.None ? TextAnchor.MiddleCenter : TextAnchor.MiddleLeft;
+            label.fontStyle = FontStyle.Bold;
             label.resizeTextForBestFit = true;
             label.resizeTextMinSize = 15;
-            label.resizeTextMaxSize = 19;
+            label.resizeTextMaxSize = 22;
             label.rectTransform.anchorMin = Vector2.zero; label.rectTransform.anchorMax = Vector2.one;
             label.rectTransform.offsetMin = new Vector2(captionX, 4); label.rectTransform.offsetMax = new Vector2(-padding, -4);
             WorkshopIconGraphic symbol = null;
@@ -190,6 +208,7 @@ namespace PaperDefense.Presentation
         [SerializeField] float radius = 4;
         float outlineWidth;
         Color outlineColor;
+        internal bool IsControl, Chosen, Focused, Disabled, Hovered, Pressed;
 
         public float Radius { get => radius; set { if (radius == value) return; radius = value; SetVerticesDirty(); } }
         internal void Outline(float width, Color tint)
@@ -205,6 +224,11 @@ namespace PaperDefense.Presentation
             vh.Clear();
             Rect bounds = rectTransform.rect;
             if (bounds.width <= 0 || bounds.height <= 0) return;
+            if (IsControl && color.a >= .9f && bounds.width >= 8 && bounds.height >= 8)
+            {
+                NotebookPaperSurface.Draw(vh, bounds, color, true, Chosen, Focused, Disabled, Hovered, Pressed);
+                return;
+            }
             if (outlineWidth <= 0 && bounds.width > 250 && bounds.height > 150 && color.a > 0)
             { NotebookPaperSurface.Draw(vh, bounds, color); return; }
             float r = Mathf.Clamp(radius, 0, Mathf.Min(bounds.width, bounds.height) * .5f);
@@ -286,6 +310,7 @@ namespace PaperDefense.Presentation
         internal void Configure(WorkshopSurfaceGraphic surface, UnityEngine.UI.Text label, WorkshopIconGraphic icon, bool prominent)
         {
             background = surface;
+            background.IsControl = true;
             caption = label;
             symbol = icon;
             primary = prominent;
@@ -307,6 +332,11 @@ namespace PaperDefense.Presentation
             bool focused = state == SelectionState.Selected;
             bool hovered = state == SelectionState.Highlighted;
             bool pressed = state == SelectionState.Pressed;
+            background.Chosen = chosen;
+            background.Focused = focused;
+            background.Disabled = disabled;
+            background.Hovered = hovered;
+            background.Pressed = pressed;
             if (decoration != null) { decoration.Focused = !disabled && focused; decoration.Hovered = !disabled && hovered; }
             Color fill = primary ? WorkshopUi.Blue : chosen ? WorkshopUi.Selected : WorkshopUi.Surface;
             Color foreground = primary ? WorkshopUi.Paper : chosen ? WorkshopUi.Blue : WorkshopUi.Ink;
@@ -319,6 +349,7 @@ namespace PaperDefense.Presentation
             else if (hovered || focused) fill = primary ? new Color32(41, 83, 202, 255) : new Color32(224, 234, 251, 255);
             background.color = fill;
             background.Outline(!disabled && (focused || chosen) ? 2 : 0, WorkshopUi.Ink);
+            background.SetVerticesDirty();
             if (caption != null) caption.color = foreground;
             if (symbol != null) symbol.color = foreground;
         }

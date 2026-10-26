@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Failed(Child)" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 02:40:11Z" end-time="2026-10-18 02:40:12Z" duration="0,9717441">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="959" result="Failed" site="Child" start-time="2026-10-18 02:40:11Z" end-time="2026-10-18 02:40:12Z" duration="0.971744" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="2141" name="PaperDefense.Editor.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Editor.Tests.dll" runstate="Runnable" testcasecount="157" result="Failed" site="Child" start-time="2026-10-18 02:40:11Z" end-time="2026-10-18 02:40:12Z" duration="0.848998" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="2142" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="157" result="Failed" site="Child" start-time="2026-10-18 02:40:11Z" end-time="2026-10-18 02:40:12Z" duration="0.776088" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="2143" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="157" result="Failed" site="Child" start-time="2026-10-18 02:40:11Z" end-time="2026-10-18 02:40:12Z" duration="0.669585" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1948" name="AlbumBalanceImportTests" fullname="PaperDefense.Tests.AlbumBalanceImportTests" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" testcasecount="17" result="Failed" site="Child" start-time="2026-10-18 02:40:11Z" end-time="2026-10-18 02:40:12Z" duration="0.571009" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="1951" name="ImportNumbers_IsIndependentOfEditorCulture" fullname="PaperDefense.Tests.AlbumBalanceImportTests.ImportNumbers_IsIndependentOfEditorCulture" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-10-18 02:40:11Z" end-time="2026-10-18 02:40:12Z" duration="0.464677" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1949" name="ImportNumbers_IsIndependentOfEditorCulture(&quot;ru-RU&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.ImportNumbers_IsIndependentOfEditorCulture(&quot;ru-RU&quot;)" methodname="ImportNumbers_IsIndependentOfEditorCulture" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="110995162" result="Failed" label="Error" start-time="2026-10-18 02:40:11Z" end-time="2026-10-18 02:40:12Z" duration="0.039396" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[PaperDefense.Core.AssemblyCatalogException : Invalid assembly catalog.]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Editor.AlbumBalanceImport.Number (Newtonsoft.Json.Linq.JToken row, System.String key) [0x000f7] in D:\Projekt Unity\paper\Assets\PaperDefense\Editor\AlbumBalanceImport.cs:257
+  at PaperDefense.Editor.AlbumBalanceImport.ReadDefinition (Newtonsoft.Json.Linq.JToken row, System.String group) [0x00356] in D:\Projekt Unity\paper\Assets\PaperDefense\Editor\AlbumBalanceImport.cs:218
+  at PaperDefense.Editor.AlbumBalanceImport.Parse (System.String json) [0x000bd] in D:\Projekt Unity\paper\Assets\PaperDefense\Editor\AlbumBalanceImport.cs:136
+  at PaperDefense.Editor.AlbumBalanceImport.ReadValidated (System.String json) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Editor\AlbumBalanceImport.cs:126
+  at PaperDefense.Editor.AlbumBalanceImport.Import (System.String json, System.String assetPath) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Editor\AlbumBalanceImport.cs:90
+  at PaperDefense.Tests.AlbumBalanceImportTests.ImportNumbers_IsIndependentOfEditorCulture (System.String culture) [0x00011] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\Editor\AlbumBalanceImportTests.cs:30
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1950" name="ImportNumbers_IsIndependentOfEditorCulture(&quot;en-US&quot;)" fullname="PaperDefense.Tests.AlbumBalanceImportTests.ImportNumbers_IsIndependentOfEditorCulture(&quot;en-US&quot;)" methodname="ImportNumbers_IsIndependentOfEditorCulture" classname="PaperDefense.Tests.AlbumBalanceImportTests" runstate="Runnable" seed="1129312174" result="Passed" start-time="2026-10-18 02:40:12Z" end-time="2026-10-18 02:40:12Z" duration="0.311848" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task1-culture-red.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

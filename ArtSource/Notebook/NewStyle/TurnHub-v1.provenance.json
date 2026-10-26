@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-25",
+  "mode": "built-in image_gen reference edit",
+  "intent": "Remove the old broad plinth from the modern fixed hub to eliminate clipped ivory rectangle in actual UI previews.",
+  "references": [
+    "ArtSource/Notebook/NewStyle/GunPilotParts-v1.png",
+    "docs/design/album-assembly-2026-10-17/art/02-weapon-parts.png"
+  ],
+  "original": "C:/Users/Greedval/.codex/generated_images/01a14cd7-7db2-7df0-8654-f50c4f801bf0/exec-c1a5dc25-3137-4b32-adb6-a0be1c7d2fd7.png",
+  "saved": "ArtSource/Notebook/NewStyle/TurnHub-v1.png",
+  "prompt": "Use case: precise-object-edit. Asset type: one transparent modular game sprite. Image1 is the exact design reference: extract and redraw ONLY the small central hollow upright cylindrical turning hub with its rectangular front bolt plate from the UPPER LEFT object. Image2 supplies the approved navy ballpoint style. The broad flat disk/plinth beneath the little cylinder must be REMOVED ENTIRELY. Deliver just that same small short hollow cylinder with its upper elliptical rim, dark open inner cavity, navy hatched cylindrical wall, ivory rim and single small rectangular front bolt plate. Its lower cylinder edge must follow its natural curved ellipse; the front bolt plate can project slightly below it. There must be genuine alpha outside the entire cylinder and inside its hollow opening, including all space below and to either side of the front plate. No floor, rectangular ivory patch, horizontal plate, flat ground, broad supporting disk, pedestal, extra feet or backdrop. Preserve original three-quarter camera, ivory-and-navy crosshatching, matte small muted brass bolt. Face camera straight symmetrically so the little front bolt is centered under the opening. No weapon, tube, assembled tower, labels, grid, text, shadow, gradient or glow. Place one complete isolated object centered on a square 1024x1024 native RGBA canvas with wide transparent margins. Crisp fine hand-drawn navy/cobalt pen linework and warm ivory metal match the sketch. Original broad disk must never remain even as a clipped rectangular fragment below this hub.",
+  "postprocessing": "none; native RGBA copied unchanged",
+  "status": "integrated_and_reviewed",
+  "acceptedRevision": "modular-full-catalog-2026-10-24-v8",
+  "sha256": "6cb528ed48f39a23e532b5b219885f2bd1728e569bc12cce72f8387d7e9f535d",
+  "validationFolder": "docs/validation/modular-album/"
+}

@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "message": "Retrieved 15 log entries.",
+  "data": [
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyProfileDataTests.cs(27,38): error CS0246: The type or namespace name 'AlbumEntryData' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyProfileDataTests.cs(28,33): error CS1061: 'T' does not contain a definition for 'CreateSnapshot' and no accessible extension method 'CreateSnapshot' accepting a first argument of type 'T' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyProfileDataTests.cs(42,42): error CS0246: The type or namespace name 'AlbumEntryData' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyProfileDataTests.cs(54,42): error CS0246: The type or namespace name 'AlbumEntryData' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyProfileDataTests.cs(62,37): error CS0246: The type or namespace name 'AlbumEntryData' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyProfileDataTests.cs(63,17): error CS1061: 'T' does not contain a definition for 'LegacyBlueprint' and no accessible extension method 'LegacyBlueprint' accepting a first argument of type 'T' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyProfileDataTests.cs(64,17): error CS1061: 'T' does not contain a definition for 'Snapshot' and no accessible extension method 'Snapshot' accepting a first argument of type 'T' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyProfileDataTests.cs(68,29): error CS1061: 'T' does not contain a definition for 'CreateSnapshot' and no accessible extension method 'CreateSnapshot' accepting a first argument of type 'T' could be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyProfileDataTests.cs(73,27): error CS0246: The type or namespace name 'RecipeSnapshotData' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyProfileDataTests.cs(80,27): error CS0246: The type or namespace name 'AlbumEntryData' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyProfileDataTests.cs(96,42): error CS0246: The type or namespace name 'RecipeSnapshotData' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyProfileDataTests.cs(103,27): error CS0246: The type or namespace name 'RecipeSnapshotData' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyProfileDataTests.cs(112,33): error CS0246: The type or namespace name 'ComponentRecipeSnapshot' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyProfileDataTests.cs(115,31): error CS0246: The type or namespace name 'AlbumEntryData' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyProfileDataTests.cs(120,31): error CS0246: The type or namespace name 'RecipeSnapshotData' could not be found (are you missing a using directive or an assembly reference?)\n"
+  ]
+}

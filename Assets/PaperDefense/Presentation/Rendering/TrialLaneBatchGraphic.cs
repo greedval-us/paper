@@ -5,9 +5,8 @@ namespace PaperDefense.Presentation
 {
     /// <summary>A pooled continuation of one trial lane's triangle stream, in sibling draw order.</summary>
     [RequireComponent(typeof(CanvasRenderer))]
-    internal sealed class TrialLaneBatchGraphic : MaskableGraphic
+    internal sealed class TrialLaneBatchGraphic : NotebookAtlasGraphic
     {
-        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         TrialLaneSketch owner;
         int batchIndex;
 

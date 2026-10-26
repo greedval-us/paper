@@ -7,14 +7,32 @@ namespace PaperDefense.Presentation
 {
     /// <summary>Trial playback uses simulation timestamps, the shared composition and recorded interval events.</summary>
     [RequireComponent(typeof(CanvasRenderer))]
-    public sealed class TrialLaneSketch : MaskableGraphic
+    public sealed class TrialLaneSketch : NotebookAtlasGraphic
     {
-        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
         readonly NotebookTrialPlayback playback = new NotebookTrialPlayback();
         readonly MeshPen pen = new MeshPen(null, 8192);
         readonly List<TrialLaneBatchGraphic> batches = new List<TrialLaneBatchGraphic>();
         float started, duration, offset, lastSeconds = -1;
         bool playbackPaused, geometryDirty = true;
+        Rect recordingBounds = new Rect(8, 8, 42, 28);
+        Rect combatBounds = new Rect(8, 8, 42, 28);
+        bool combatFocus;
+        bool quietGrid;
+        public bool QuietGrid
+        {
+            get => quietGrid;
+            set { if (quietGrid == value) return; quietGrid = value; geometryDirty = true; RefreshGeometry(); }
+        }
+        /// <summary>The modern shared trial frames the recorded activity rather than unused fixture cells.</summary>
+        public bool FrameRecording { get; set; }
+        public Rect RecordingBounds => recordingBounds;
+        public bool CombatFocus
+        {
+            get => combatFocus;
+            set { if (combatFocus == value) return; combatFocus = value; geometryDirty = true; RefreshGeometry(); }
+        }
+        /// <summary>One uniform world viewport; only the camera changes between combat and the full recording.</summary>
+        public Rect ViewBounds => !FrameRecording ? new Rect(8, 8, 42, 28) : combatFocus ? combatBounds : recordingBounds;
         public bool HasRecording => playback.Report != null && playback.Report.Frames.Count > 0;
         public NotebookTrialPlayback Playback => playback;
         public float PlaybackSpeed { get; set; } = 4;
@@ -27,6 +45,8 @@ namespace PaperDefense.Presentation
         public void SetResult(TrialReport value, float startTime, float totalDuration)
         {
             playback.Bind(value); started = startTime; duration = totalDuration; offset = 0;
+            recordingBounds = NotebookTrialRenderer.RecordingBounds(value);
+            combatBounds = NotebookTrialRenderer.CombatBounds(value, recordingBounds);
             lastSeconds = -1; playbackPaused = false; geometryDirty = true;
             RefreshGeometry();
         }
@@ -77,7 +97,7 @@ namespace PaperDefense.Presentation
             if (HasRecording)
             {
                 playback.Seek(seconds);
-                NotebookTrialRenderer.Draw(pen, playback);
+                NotebookTrialRenderer.Draw(pen, playback, FrameRecording ? ViewBounds : (Rect?)null, quietGrid ? .035f : .12f);
             }
             else pen.Clear();
             lastSeconds = seconds; geometryDirty = false;
@@ -122,8 +142,18 @@ namespace PaperDefense.Presentation
             target.Clear();
             if (!isActiveAndEnabled || !HasRecording) return;
             float scale = DrawingScale(rect);
-            pen.CopyUiBatchTo(target, rect.center - new Vector2(29, 22) * scale, scale, batchIndex);
+            var center = ViewBounds.center;
+            // Source 10 places towers on the left. Reflect the complete recorded
+            // triangle stream, so bodies, muzzle positions, impacts and health bars
+            // retain exactly the same spatial relationships and timestamps.
+            if (FrameRecording) center.x = -center.x;
+            pen.CopyUiBatchTo(target, rect.center - center * scale, scale, batchIndex, FrameRecording);
         }
-        static float DrawingScale(Rect rect) => Mathf.Max(.1f, Mathf.Min((rect.width - 16) / 42, (rect.height - 14) / 28));
+        float DrawingScale(Rect rect)
+        {
+            var size = ViewBounds.size;
+            return Mathf.Max(.1f, Mathf.Min((rect.width - (FrameRecording ? 24 : 16)) / size.x,
+                (rect.height - (FrameRecording ? 24 : 14)) / size.y));
+        }
     }
 }

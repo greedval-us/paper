@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-17",
+  "stage": 1,
+  "branch": "codex/standard-workshop-stage1",
+  "baseline": "727ccc3",
+  "unity": "6000.5.7f1",
+  "profileSchema": 7,
+  "personalProfileUsed": false,
+  "editMode": {
+    "job": "5cfb2a28a80a4cd3a18374cb2431b034",
+    "summary": {
+      "total": 889,
+      "passed": 889,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 99.4205714,
+      "resultState": "Passed"
+    }
+  },
+  "playMode": {
+    "job": "3929f496ed5642fea6197584f26a0c12",
+    "summary": {
+      "total": 544,
+      "passed": 544,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 40.5635783,
+      "resultState": "Passed"
+    }
+  },
+  "build": {
+    "job_id": "build-2209875791",
+    "result": "succeeded",
+    "platform": "StandaloneWindows64",
+    "output_path": "Builds/Stage1StandardWorkshop/PaperDefense.exe",
+    "started_at": "2026-10-17T15:48:54.0865747Z",
+    "duration_seconds": 11.2173293,
+    "completed_at": "2026-10-17T15:49:05.303904Z",
+    "total_size_mb": 222.97,
+    "errors": 0,
+    "warnings": 0
+  },
+  "visual": {
+    "captures": 25,
+    "resolutions": [
+      [
+        1600,
+        900
+      ],
+      [
+        1024,
+        768
+      ]
+    ],
+    "source": "native Unity capture",
+    "knownIssue": "Existing whole-sprite attachment/pivot mismatch on the three-mount battery remains for stage 2."
+  },
+  "smoke": "player-smoke.json"
+}

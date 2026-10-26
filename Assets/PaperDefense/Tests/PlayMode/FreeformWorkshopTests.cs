@@ -21,7 +21,7 @@ namespace PaperDefense.Tests
             Assert.That(profile.AssignSlot(0,blueprint.Id,out reason),Is.True,reason);
             string json=JsonUtility.ToJson(profile.ToData());
             var data=JsonUtility.FromJson<WorkshopProfileData>(json);
-            Assert.That(data.Version,Is.EqualTo(7));
+            Assert.That(data.Version,Is.EqualTo(WorkshopProfile.CurrentVersion));
             var restored=WorkshopProfile.FromData(data).GetLoadoutBlueprints()[0];
             Assert.That(restored.IsFreeform,Is.True);
             Assert.That(restored.Drawing.GeometryHash,Is.EqualTo(blueprint.Drawing.GeometryHash));

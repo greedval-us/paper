@@ -7,6 +7,9 @@ namespace PaperDefense.Core
     public static class TowerCatalog
     {
         public const int MaximumGenericModuleBindings=DrawingSnapshot.MaximumParts-DrawingSnapshot.LegacyPartCount;
+        /// <summary>Explicit mixed-album entry point; legacy blueprints retain the existing calculation path.</summary>
+        public static AssemblyResolution ResolveEntry(AlbumEntry entry,GameBalance balance,MaterialTier material=MaterialTier.Pencil)
+            =>AssemblyResolver.ResolveEntry(entry,balance,material);
         sealed class AssemblyCache
         {
             readonly ConditionalWeakTable<ContentCatalogSnapshot,ResolvedTowerAssembly> assemblies=new ConditionalWeakTable<ContentCatalogSnapshot,ResolvedTowerAssembly>();

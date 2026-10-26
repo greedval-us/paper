@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Failed(Child)" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 23:19:13Z" end-time="2026-10-18 23:19:14Z" duration="0,6204387">
+  <test-suite type="TestSuite" id="1976" name="paper" fullname="paper" runstate="Runnable" testcasecount="792" result="Failed" site="Child" start-time="2026-10-18 23:19:13Z" end-time="2026-10-18 23:19:14Z" duration="0.620439" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1970" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="792" result="Failed" site="Child" start-time="2026-10-18 23:19:13Z" end-time="2026-10-18 23:19:14Z" duration="0.610560" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39156" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1971" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="792" result="Failed" site="Child" start-time="2026-10-18 23:19:13Z" end-time="2026-10-18 23:19:14Z" duration="0.606577" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1972" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="792" result="Failed" site="Child" start-time="2026-10-18 23:19:13Z" end-time="2026-10-18 23:19:14Z" duration="0.600952" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1155" name="AssemblyTrialUiTests" fullname="PaperDefense.Tests.AssemblyTrialUiTests" classname="PaperDefense.Tests.AssemblyTrialUiTests" runstate="Runnable" testcasecount="15" result="Failed" site="Child" start-time="2026-10-18 23:19:13Z" end-time="2026-10-18 23:19:14Z" duration="0.598657" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1164" name="BlotterTrialMeasuresCleaningWithoutInventingDamage" fullname="PaperDefense.Tests.AssemblyTrialUiTests.BlotterTrialMeasuresCleaningWithoutInventingDamage" methodname="BlotterTrialMeasuresCleaningWithoutInventingDamage" classname="PaperDefense.Tests.AssemblyTrialUiTests" runstate="Runnable" seed="1105561850" result="Failed" label="Error" start-time="2026-10-18 23:19:13Z" end-time="2026-10-18 23:19:14Z" duration="0.312232" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.InvalidOperationException : Sequence contains no matching element]]></message>
+                <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <fe644d7ad1cf499ebe4e7ad937bc03bf>:0
+  at PaperDefense.Tests.AssemblyTrialUiTests.BlotterTrialMeasuresCleaningWithoutInventingDamage () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AssemblyTrialUiTests.cs:180
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1163" name="TrialModalBlocksBackgroundSaveAndRestoresReviewFocusOnReturn" fullname="PaperDefense.Tests.AssemblyTrialUiTests.TrialModalBlocksBackgroundSaveAndRestoresReviewFocusOnReturn" methodname="TrialModalBlocksBackgroundSaveAndRestoresReviewFocusOnReturn" classname="PaperDefense.Tests.AssemblyTrialUiTests" runstate="Runnable" seed="1302778302" result="Passed" start-time="2026-10-18 23:19:14Z" end-time="2026-10-18 23:19:14Z" duration="0.274518" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: D:/Projekt Unity/paper/docs/validation/modular-album/task12-ui-extra-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

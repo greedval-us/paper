@@ -241,7 +241,10 @@ namespace PaperDefense.Tests
             Assert.That(TowerCatalog.Validate(allowed,balance,out var reason),Is.True,reason);
             selections.Add(new ModuleSelection("instance.extra","module.test.binding-limit"));var oversized=Blueprint(balance,"weapon.gun",modules:selections);
             Assert.That(TowerCatalog.ValidateParts(oversized,out _),Is.True);Assert.That(TowerCatalog.Validate(oversized,balance,out reason),Is.False);Assert.That(TestText.Resolve(reason),Does.Contain("blueprint.modules"));
-            var data=new WorkshopProfile(balance.Content).ToData();var pages=new List<BlueprintData>(data.Album);pages.Add(new BlueprintData(oversized));data.Album=pages.ToArray();
+            var data=new WorkshopProfile(balance.Content).ToData();data.Version=7;
+            System.Array.Resize(ref data.Loadout,ProfileLimits.HistoricalLoadoutSlotCount);
+            data.TotalXp=0;data.Entries=null;data.Library=null;data.Rewards=null;data.Operations=null;
+            var pages=new List<BlueprintData>(data.Album);pages.Add(new BlueprintData(oversized));data.Album=pages.ToArray();
             var loaded=WorkshopProfile.FromData(data);var retained=loaded.Album[loaded.Album.Count-1];
             Assert.That(retained.Id,Is.EqualTo(oversized.Id));Assert.That(retained.ModuleSelections.Count,Is.EqualTo(TowerCatalog.MaximumGenericModuleBindings+1));
             Assert.That(new BlueprintData(retained).ToBlueprint().ModuleSelections.Count,Is.EqualTo(retained.ModuleSelections.Count));

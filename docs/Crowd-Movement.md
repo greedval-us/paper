@@ -1,6 +1,6 @@
 # Настройки движения толпы
 
-Техническая справка по действующим системам игры. [Эскизы и целевой дизайн](Game-Design.md) задают визуальный ориентир; [статус переноса в Unity](Implementation-Roadmap.md) отделяет реализованные экраны от оставшейся работы.
+Техническая справка по действующим системам игры. [Эскизы и целевой дизайн](Game-Design.md) задают визуальный ориентир; [статус переноса в Unity](superpowers/plans/2026-10-18-modular-album-implementation.md) отделяет реализованные экраны от оставшейся работы.
 
 Настройки — `rules.Crowd` в [Target.asset](../Assets/PaperDefense/Configuration/Content/Target.asset) и отдельном игровом [PlayerRules.asset](../Assets/PaperDefense/Configuration/Game/PlayerRules.asset). На текущем срезе параметры толпы в этих assets совпадают. Общие правила карты и строительства описаны в [Tower-Defense](Tower-Defense.md).
 

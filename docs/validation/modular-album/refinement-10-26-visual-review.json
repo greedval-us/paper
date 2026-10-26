@@ -1,0 +1,608 @@
+{
+  "schema": "paper-defense.visual-review/v1",
+  "reviewId": "refinement-10-26-after-enemy-health-fix-2026-10-23",
+  "reviewer": "/root/implement_workshop_04_08",
+  "reviewedAt": "2026-10-23T02:59:44.8353752+03:00",
+  "status": "pass_scoped_with_explicit_residuals",
+  "roleResult": "complete_for_role",
+  "sourceFidelity": "Improved source-led grouping and hierarchy; not pixel-equivalent or a claim of one-to-one source art.",
+  "scope": {
+    "scenes": [
+      "10",
+      "26"
+    ],
+    "actualCaptureCount": 27,
+    "everyCapturePhysicallyOpenedWithViewImage": true,
+    "sourceSketchesPhysicallyInspected": true,
+    "unityCallsByReviewer": false,
+    "gitCallsByReviewer": false,
+    "assetsEditsDuringThisReview": false,
+    "wholeAlbumAcceptanceClaimed": false
+  },
+  "sourceImages": [
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\design\\game-concept-art-2026-10-16\\screens\\10-trial.png",
+      "sha256": "D1AAA46BD7BAB368E74D0FF16C43628C63045537402D6742ABBD2C19605BEB1F",
+      "reviewed": true,
+      "dimensions": [
+        1672,
+        941
+      ]
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\design\\game-concept-art-2026-10-16\\screens\\26-save-error.png",
+      "sha256": "B8BD48FBE41FB74F8401C19F9DBF71A27DA5AC582B2774159E6ACE7A265061EA",
+      "reviewed": true,
+      "dimensions": [
+        1672,
+        941
+      ]
+    }
+  ],
+  "captures": [
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-1920x1080.png",
+      "sha256": "0E12AD71041C1F69304EC9E0B2C8CC34C1A5A08531578A900782DBE928029E30",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-1920x1080.json",
+      "metadataSha256": "2361EBD0889BEF616BEA70C3AF7E8BB7CED2981DEE5A899944EA7FC3DD564027",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "Combat focus shows the true single/double-gun assemblies on the left and recorded enemy/shot lines on the right. Small native pines/rocks stay in the perimeter and no longer dominate the actor field.",
+        "Real names, cost64/40, copies6/10, spent384/400 and four measured rows are aligned and readable; theory remains separate. All scenario and playback controls stay contained. The lower enemy health bar is now close above its current rendered graphic; the former large vertical separation is gone in this capture.",
+        "Physically reopened after the shared EnemyHealth placement fix. Table, scenario controls and action bounds remain contained; no new clipping found."
+      ],
+      "width": 1920,
+      "height": 1080,
+      "captureFrame": 14427,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-1280x720.png",
+      "sha256": "F8F2C4C0C500C86C365F3931CF35540F89BB498B614662F4AE56ABB19AB024FC",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-1280x720.json",
+      "metadataSha256": "4F1BC4F6AB7A97DDCEA4B9B1D95191999C07102B03799EAEEDFF13B201688E31",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "Combat focus shows the true single/double-gun assemblies on the left and recorded enemy/shot lines on the right. Small native pines/rocks stay in the perimeter and no longer dominate the actor field.",
+        "Real names, cost64/40, copies6/10, spent384/400 and four measured rows are aligned and readable; theory remains separate. All scenario and playback controls stay contained. The lower enemy health bar is now close above its current rendered graphic; the former large vertical separation is gone in this capture.",
+        "Physically reopened after the shared EnemyHealth placement fix. Table, scenario controls and action bounds remain contained; no new clipping found."
+      ],
+      "width": 1280,
+      "height": 720,
+      "captureFrame": 14419,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-1024x768.png",
+      "sha256": "7388712BB4529ADB580BD616DE91545D997455EF7F53DD67996343C06BD5F490",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-1024x768.json",
+      "metadataSha256": "4932A38209292972FA891315AD7DC21CD0655411C23F05FA895A19A6FED2D37C",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "Combat focus shows the true single/double-gun assemblies on the left and recorded enemy/shot lines on the right. Small native pines/rocks stay in the perimeter and no longer dominate the actor field.",
+        "Real names, cost64/40, copies6/10, spent384/400 and four measured rows are aligned and readable; theory remains separate. All scenario and playback controls stay contained. The lower enemy health bar is now close above its current rendered graphic; the former large vertical separation is gone in this capture.",
+        "Physically reopened after the shared EnemyHealth placement fix. Table, scenario controls and action bounds remain contained; no new clipping found."
+      ],
+      "width": 1024,
+      "height": 768,
+      "captureFrame": 7256,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-1280x960.png",
+      "sha256": "EAD66A3E7154BCE87C726BD8E377EB5A7631D9725FD12A4BCDE5D9C8F36A5384",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-1280x960.json",
+      "metadataSha256": "0D5ED9381599938DE37E9F07916F1C1E32B77EA6D26F607C32ACF57772AC9899",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "Combat focus shows the true single/double-gun assemblies on the left and recorded enemy/shot lines on the right. Small native pines/rocks stay in the perimeter and no longer dominate the actor field.",
+        "Real names, cost64/40, copies6/10, spent384/400 and four measured rows are aligned and readable; theory remains separate. All scenario and playback controls stay contained. The lower enemy health bar is now close above its current rendered graphic; the former large vertical separation is gone in this capture.",
+        "Physically reopened after the shared EnemyHealth placement fix. Table, scenario controls and action bounds remain contained; no new clipping found."
+      ],
+      "width": 1280,
+      "height": 960,
+      "captureFrame": 14429,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-1600x900.png",
+      "sha256": "FC186E005684A903AE9E4F56920F815F08ED89B55E964B7E20B245114C486016",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-1600x900.json",
+      "metadataSha256": "EA55D37985AA4003A5494E0272037CFD616EDB668DC72C4D8414F2147B8A6360",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "Combat focus shows the true single/double-gun assemblies on the left and recorded enemy/shot lines on the right. Small native pines/rocks stay in the perimeter and no longer dominate the actor field.",
+        "Real names, cost64/40, copies6/10, spent384/400 and four measured rows are aligned and readable; theory remains separate. All scenario and playback controls stay contained. The lower enemy health bar is now close above its current rendered graphic; the former large vertical separation is gone in this capture.",
+        "Physically reopened after the shared EnemyHealth placement fix. Table, scenario controls and action bounds remain contained; no new clipping found."
+      ],
+      "width": 1600,
+      "height": 900,
+      "captureFrame": 14433,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-overview-1920x1080.png",
+      "sha256": "0F17F43BC839EE3C13D2683D91C8AA3326FD2D688D8B4BE67551A47E7C2BE860",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-overview-1920x1080.json",
+      "metadataSha256": "0EF5DBB4482E6FAF23400D193AE0752E6301A959D01922E96DF6CAE1EB48B330",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "Overview control reads Close-up; all real remote assemblies remain visible in the recorded layout: six double-gun copies in the upper lane and ten single-gun copies in the lower lane. Their small silhouettes are a consequence of fitting the complete recording.",
+        "Names, aligned quote/measurement cells, six scenario controls and grouped trial actions fit. The lower lane health bar now sits near its actual enemy rather than floating far above it. Real remote assemblies and shot geometry stay visible.",
+        "Physically reopened after the shared EnemyHealth placement fix. Table, scenario controls and action bounds remain contained; no new clipping found."
+      ],
+      "width": 1920,
+      "height": 1080,
+      "captureFrame": 14427,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-overview-1280x720.png",
+      "sha256": "A8D94CE80E6411B3054E7030D5F136BBAF184F9CCAB484958A9BE980D2544D12",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-overview-1280x720.json",
+      "metadataSha256": "0FBAA9C976B67027DEE076A6708C49C97A6DAFCBC120495A70495133C7AA9C4D",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "Overview control reads Close-up; all real remote assemblies remain visible in the recorded layout: six double-gun copies in the upper lane and ten single-gun copies in the lower lane. Their small silhouettes are a consequence of fitting the complete recording.",
+        "Names, aligned quote/measurement cells, six scenario controls and grouped trial actions fit. The lower lane health bar now sits near its actual enemy rather than floating far above it. Real remote assemblies and shot geometry stay visible.",
+        "Physically reopened after the shared EnemyHealth placement fix. Table, scenario controls and action bounds remain contained; no new clipping found."
+      ],
+      "width": 1280,
+      "height": 720,
+      "captureFrame": 14419,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-overview-1024x768.png",
+      "sha256": "565DCFE5771F79A69C605FA0814EA534EE24FEE2A1880736D8EC105255A00320",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-overview-1024x768.json",
+      "metadataSha256": "1F22E39B6B808E1EE0BBBB2EACC0D159D56EFA2DB2814DB2D834416E58905951",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "Overview control reads Close-up; all real remote assemblies remain visible in the recorded layout: six double-gun copies in the upper lane and ten single-gun copies in the lower lane. Their small silhouettes are a consequence of fitting the complete recording.",
+        "Names, aligned quote/measurement cells, six scenario controls and grouped trial actions fit. The lower lane health bar now sits near its actual enemy rather than floating far above it. Real remote assemblies and shot geometry stay visible.",
+        "Physically reopened after the shared EnemyHealth placement fix. Table, scenario controls and action bounds remain contained; no new clipping found."
+      ],
+      "width": 1024,
+      "height": 768,
+      "captureFrame": 7256,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-overview-1280x960.png",
+      "sha256": "D85E5AE9A854A548A660CB057E9038E4DD2A259E048EA90180D9406D40167657",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-overview-1280x960.json",
+      "metadataSha256": "50F6F6056E49A86036BE12BD20AE04D4E9FF5CAD91018BDF93FE14B1F13D271C",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "Overview control reads Close-up; all real remote assemblies remain visible in the recorded layout: six double-gun copies in the upper lane and ten single-gun copies in the lower lane. Their small silhouettes are a consequence of fitting the complete recording.",
+        "Names, aligned quote/measurement cells, six scenario controls and grouped trial actions fit. The lower lane health bar now sits near its actual enemy rather than floating far above it. Real remote assemblies and shot geometry stay visible.",
+        "Physically reopened after the shared EnemyHealth placement fix. Table, scenario controls and action bounds remain contained; no new clipping found."
+      ],
+      "width": 1280,
+      "height": 960,
+      "captureFrame": 14429,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-overview-1600x900.png",
+      "sha256": "09029C19D0281FDACBE45B9D7923D7583C24FC63AD0D83A58D40AB83D807713F",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-overview-1600x900.json",
+      "metadataSha256": "BF7CBC540FBAA0BF91135FFBAE90A5D1AD1F1023D69D1DFD992288B17C5F9E3E",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "Overview control reads Close-up; all real remote assemblies remain visible in the recorded layout: six double-gun copies in the upper lane and ten single-gun copies in the lower lane. Their small silhouettes are a consequence of fitting the complete recording.",
+        "Names, aligned quote/measurement cells, six scenario controls and grouped trial actions fit. The lower lane health bar now sits near its actual enemy rather than floating far above it. Real remote assemblies and shot geometry stay visible.",
+        "Physically reopened after the shared EnemyHealth placement fix. Table, scenario controls and action bounds remain contained; no new clipping found."
+      ],
+      "width": 1600,
+      "height": 900,
+      "captureFrame": 14433,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-error-1920x1080.png",
+      "sha256": "14E6069B89CA6D18C12C9AF8F3C6AB48F28E33A211E08225AE2B173757BEFF61",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-error-1920x1080.json",
+      "metadataSha256": "6FB3F1074471BB001B822F2877484EF8700FF3B543BD94122CE39E2B3FD2BC55",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "The red-edged error sheet floats over the normal real recipe review, with readable actual failure detail, focused Retry and Continue actions. Covered controls visibly dim and stay behind the modal.",
+        "At compact width the modal intentionally covers part of the review artwork/name; the modal itself stays entirely within the frame with no clipped title, diagnostic or actions."
+      ],
+      "width": 1920,
+      "height": 1080,
+      "captureFrame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-error-1280x720.png",
+      "sha256": "B5704ABB3C9F1B62C42261957BF6B787F6C1EC6F03EAD5E707A96BE94B567CD8",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-error-1280x720.json",
+      "metadataSha256": "73C74197659F188A6E644325DF461C4E4C07488A95412EC424202399F6471478",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "The red-edged error sheet floats over the normal real recipe review, with readable actual failure detail, focused Retry and Continue actions. Covered controls visibly dim and stay behind the modal.",
+        "At compact width the modal intentionally covers part of the review artwork/name; the modal itself stays entirely within the frame with no clipped title, diagnostic or actions."
+      ],
+      "width": 1280,
+      "height": 720,
+      "captureFrame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-error-1024x768.png",
+      "sha256": "B68FEAEDB8FB438B69030CB15F8D7B31243096CE8922691A827A418CC8A05895",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-error-1024x768.json",
+      "metadataSha256": "9AC3E35CEC2C55E54E559FCEBD705C7C06985810BB347354396FB8B291C567AC",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "The red-edged error sheet floats over the normal real recipe review, with readable actual failure detail, focused Retry and Continue actions. Covered controls visibly dim and stay behind the modal.",
+        "At compact width the modal intentionally covers part of the review artwork/name; the modal itself stays entirely within the frame with no clipped title, diagnostic or actions."
+      ],
+      "width": 1024,
+      "height": 768,
+      "captureFrame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-error-1280x960.png",
+      "sha256": "ABE1F7838967D927701A13D28C9D85044251FCEB698F9FFD34944461D8CFFDB5",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-error-1280x960.json",
+      "metadataSha256": "66D903839253CF933F7F2380D434A7F16A4635EB50B368DA5CF9A65910BCFFD9",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "The red-edged error sheet floats over the normal real recipe review, with readable actual failure detail, focused Retry and Continue actions. Covered controls visibly dim and stay behind the modal.",
+        "At compact width the modal intentionally covers part of the review artwork/name; the modal itself stays entirely within the frame with no clipped title, diagnostic or actions."
+      ],
+      "width": 1280,
+      "height": 960,
+      "captureFrame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-error-1600x900.png",
+      "sha256": "D487135954D00DE57FDF7D90E8405F811038B84C32E6C58BEBA8376E7A99DD03",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-error-1600x900.json",
+      "metadataSha256": "DC61AECF7FA9FD489C0EE4A5F044119662026CDC3BCE9FB5F878BCFF194676A5",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "The red-edged error sheet floats over the normal real recipe review, with readable actual failure detail, focused Retry and Continue actions. Covered controls visibly dim and stay behind the modal.",
+        "At compact width the modal intentionally covers part of the review artwork/name; the modal itself stays entirely within the frame with no clipped title, diagnostic or actions."
+      ],
+      "width": 1600,
+      "height": 900,
+      "captureFrame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-dismissed-1920x1080.png",
+      "sha256": "9F361C50180CE2768E1F1717B1AB11FBC3CCD3D67EAE3E15E566F06AFE09E172",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-dismissed-1920x1080.json",
+      "metadataSha256": "E3E9687A1B8DB805E04EB53138230A9F4B2C87D166868D065E184C59CD0D6AA6",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "The floating sheet is absent while the same name, true twin-gun recipe, checks and64-cost/55-health/45.71-DPS values remain. The actual failure diagnostic stays in the review and footer action still says Retry.",
+        "At1024 the diagnostic wraps into two visible lines above Trial; at720 it fits on one line. All bottom navigation/save actions remain contained."
+      ],
+      "width": 1920,
+      "height": 1080,
+      "captureFrame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-dismissed-1280x720.png",
+      "sha256": "648FDE6CD62CBBDBA5B86B94B8A2686A07536328E8DC38EB97C20918AE07ECC4",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-dismissed-1280x720.json",
+      "metadataSha256": "BA01C32FE5BE37DB7F52253F54F5EB6A101CA9A209C68055C6EF3E19F0CF9961",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "The floating sheet is absent while the same name, true twin-gun recipe, checks and64-cost/55-health/45.71-DPS values remain. The actual failure diagnostic stays in the review and footer action still says Retry.",
+        "At1024 the diagnostic wraps into two visible lines above Trial; at720 it fits on one line. All bottom navigation/save actions remain contained."
+      ],
+      "width": 1280,
+      "height": 720,
+      "captureFrame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-dismissed-1024x768.png",
+      "sha256": "B6409E6287A60FD4600BAD44940645BDA41D240934E305849A9699F57D250F7C",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-dismissed-1024x768.json",
+      "metadataSha256": "39980C205C90782406C0C40B779BABE3CF6BDD5798FB6A2DB1BE52414FA4D842",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "The floating sheet is absent while the same name, true twin-gun recipe, checks and64-cost/55-health/45.71-DPS values remain. The actual failure diagnostic stays in the review and footer action still says Retry.",
+        "At1024 the diagnostic wraps into two visible lines above Trial; at720 it fits on one line. All bottom navigation/save actions remain contained."
+      ],
+      "width": 1024,
+      "height": 768,
+      "captureFrame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-dismissed-1280x960.png",
+      "sha256": "2FB47203B5357F1ABF79E3661F56E58A0564B09C212F838A69B5E16EBF498B57",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-dismissed-1280x960.json",
+      "metadataSha256": "737D04A951A499F9BFCFAA25A15C595B079E116ED055E3BAD998C1EA4F521D80",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "The floating sheet is absent while the same name, true twin-gun recipe, checks and64-cost/55-health/45.71-DPS values remain. The actual failure diagnostic stays in the review and footer action still says Retry.",
+        "At1024 the diagnostic wraps into two visible lines above Trial; at720 it fits on one line. All bottom navigation/save actions remain contained."
+      ],
+      "width": 1280,
+      "height": 960,
+      "captureFrame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-dismissed-1600x900.png",
+      "sha256": "FDF8EC39409C28BC69D05B7B966B9E9F8969BECFDCD93E42F4DFCEA336ADF73B",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-dismissed-1600x900.json",
+      "metadataSha256": "495A6B271904ECB32493AD5EE62BC13A9A3B0A43680B8A3CB3E63D677694D330",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "The floating sheet is absent while the same name, true twin-gun recipe, checks and64-cost/55-health/45.71-DPS values remain. The actual failure diagnostic stays in the review and footer action still says Retry.",
+        "At1024 the diagnostic wraps into two visible lines above Trial; at720 it fits on one line. All bottom navigation/save actions remain contained."
+      ],
+      "width": 1600,
+      "height": 900,
+      "captureFrame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-retry-1920x1080.png",
+      "sha256": "37B328890972B74AC1379DCCD38160D148FF41BC8643A60FB17997A4FF263874",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-retry-1920x1080.json",
+      "metadataSha256": "1DE4E355E549A2CF4AE1D9AEBD43CE00AACC50C71BEF5DB54FC24E152FFCF102",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "After successful retry the same name and actual recipe remain; the failure sheet and diagnostic are absent, a saved notice is visible, the primary caption returns to Save to album, and the free-save note reports album9/64.",
+        "Name, checks, aligned metrics, trial and all footer actions fit at the supplied aspect ratio. Lower recipe details intentionally remain scroll-owned."
+      ],
+      "width": 1920,
+      "height": 1080,
+      "captureFrame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-retry-1280x720.png",
+      "sha256": "B71B349398AF64189175A707D6993DF646FBC9D0A8423C7D2DFA0CFD5711B923",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-retry-1280x720.json",
+      "metadataSha256": "6AF0576971D1E42B547E2A81F4769AC533111D282F6C72EE0E90E4F32A74A48A",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "After successful retry the same name and actual recipe remain; the failure sheet and diagnostic are absent, a saved notice is visible, the primary caption returns to Save to album, and the free-save note reports album9/64.",
+        "Name, checks, aligned metrics, trial and all footer actions fit at the supplied aspect ratio. Lower recipe details intentionally remain scroll-owned."
+      ],
+      "width": 1280,
+      "height": 720,
+      "captureFrame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-retry-1024x768.png",
+      "sha256": "626C8189A80727C197369B306B096686D379357C790190AD8F974BE8D3BA517D",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-retry-1024x768.json",
+      "metadataSha256": "843B764E5FB90452EDFF05C58421D870A608152EC00E98122C8BCA568ADBED91",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "After successful retry the same name and actual recipe remain; the failure sheet and diagnostic are absent, a saved notice is visible, the primary caption returns to Save to album, and the free-save note reports album9/64.",
+        "Name, checks, aligned metrics, trial and all footer actions fit at the supplied aspect ratio. Lower recipe details intentionally remain scroll-owned."
+      ],
+      "width": 1024,
+      "height": 768,
+      "captureFrame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-retry-1280x960.png",
+      "sha256": "25C04C3A77B2210FBFB908755D793AE97AD6F98738FC590DC6B85C3318442009",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-retry-1280x960.json",
+      "metadataSha256": "4B9EB34AD459A5F8CA1BA8279AC91FB949ECF324FA09BBB9C9A960DD488C181D",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "After successful retry the same name and actual recipe remain; the failure sheet and diagnostic are absent, a saved notice is visible, the primary caption returns to Save to album, and the free-save note reports album9/64.",
+        "Name, checks, aligned metrics, trial and all footer actions fit at the supplied aspect ratio. Lower recipe details intentionally remain scroll-owned."
+      ],
+      "width": 1280,
+      "height": 960,
+      "captureFrame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-retry-1600x900.png",
+      "sha256": "2E0C70D6F22C6E006A0A4E260EA36B9254B87D3A978DED548E201647FDA0C9E2",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-26-save-retry-1600x900.json",
+      "metadataSha256": "61963528949BE64F1A17DB531E1ABB7767939FAE4510468717D949EB31FC4AF9",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "After successful retry the same name and actual recipe remain; the failure sheet and diagnostic are absent, a saved notice is visible, the primary caption returns to Save to album, and the free-save note reports album9/64.",
+        "Name, checks, aligned metrics, trial and all footer actions fit at the supplied aspect ratio. Lower recipe details intentionally remain scroll-owned."
+      ],
+      "width": 1600,
+      "height": 900,
+      "captureFrame": 1,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-blots-comparison-1280x720.png",
+      "sha256": "12204731002402886D401075B09288CA826ADC36DE92C4D6BEC6666000FBDD7A",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-blots-comparison-1280x720.json",
+      "metadataSha256": "07FF5C6884D59A835AD27C647B8140CCAC304F01EE61045452E05D2AD8B333DD",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "All six displayed real measurement rows are readable through Duration60s, including Cleared0 and Remaining48; theory is separately disclosed as DPS28.57. No measurement row or action intersects another.",
+        "Both named value columns fit at1280x720. The two actual lanes show their own single/double-gun recipes; peripheral Blots cross viewport edges.",
+        "Physically reopened after the shared EnemyHealth placement fix. Table, scenario controls and action bounds remain contained; no new clipping found."
+      ],
+      "width": 1280,
+      "height": 720,
+      "captureFrame": 14436,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-blots-single-1280x720.png",
+      "sha256": "0970ED24E97106611EFED9E3F42C47F5C609ECA982B0210D4A133AB76F4069C7",
+      "metadataPath": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-screenshots\\refinement-10-trial-blots-single-1280x720.json",
+      "metadataSha256": "DBAFB143E6D5494D8D96D59B3483433A423C7FE7BCF75FF87C246673C333403A",
+      "reviewed": true,
+      "status": "pass_scoped_with_explicit_residuals",
+      "observations": [
+        "All six displayed real measurement rows are readable through Duration60s, including Cleared0 and Remaining48; theory is separately disclosed as DPS28.57. No measurement row or action intersects another.",
+        "Single-column results and the full real single-gun recipe are visible. Large peripheral ink shapes are cropped at the left and bottom viewport edges.",
+        "Physically reopened after the shared EnemyHealth placement fix. Table, scenario controls and action bounds remain contained; no new clipping found."
+      ],
+      "width": 1280,
+      "height": 720,
+      "captureFrame": 14436,
+      "artRevision": "modular-full-catalog-2026-10-22-v7"
+    }
+  ],
+  "capabilityEvidence": "Actual rendered PNG pixels were viewed individually. Specific proof: Blots comparison720 has two named columns and six rows ending60s; dismissed26 at1024 retains a two-line orange diagnostic; retry26 reports album9/64 with the same name and twin-gun drawing.",
+  "fitAt720And1024": [
+    "10 table labels/numbers and grouped controls stay inside their sheet at1280x720 and1024x768.",
+    "Both Blots720 frames visibly retain all six applicable measurement rows and duration.",
+    "26 modal title/detail/Retry/Continue fit; intentional modal overlap of covered review art is not uncontrolled clipping.",
+    "Dismissed26 keeps its real diagnostic readable, and retry restores normal save controls without changing the visible name."
+  ],
+  "comparisonToSource": [
+    "10 replaces oversized foundation-preview scenery with small native perimeter pines/rocks/shrubs and a quieter grid. Source reference depicts three illustrative combat rows; current screen truthfully shows two independent recorded recipes and actual scenarios.",
+    "10 table has separate actual labels and value columns. Scenario/playback controls preserve the real project controls rather than adding the source illustrated return-fire toggle.",
+    "26 restores a floating red error sheet and grouped retry/continue over normal review. Current sheet uses a simpler rounded double outline rather than the source torn paper, and the real tiled foundation differs from the source cylindrical hero."
+  ],
+  "residuals": [
+    {
+      "id": "overview_actor_scale",
+      "severity": "source_fidelity_residual",
+      "blockingForScopedChange": false,
+      "observation": "Real remote assemblies and enemies are small, especially at1024, because overview fits all six/ten copies and actual recorded geometry. No copied illustration or false actor scaling was introduced."
+    },
+    {
+      "id": "peripheral_blots_crop",
+      "severity": "viewport_crop_residual",
+      "blockingForScopedChange": false,
+      "observation": "Blots close-up crops portions of real peripheral ink shapes at viewport edges. The actual selected assembly and all six measurements remain visible; overview is available for the whole recording."
+    },
+    {
+      "id": "simplified_red_sheet",
+      "severity": "source_style_residual",
+      "blockingForScopedChange": false,
+      "observation": "26 uses a rounded red double edge rather than torn-edge source paper. The background retains a small real diagnostic even while the modal is open, so some larger frames show duplicated diagnostic copy behind the sheet."
+    },
+    {
+      "id": "scroll_owned_recipe_details",
+      "severity": "intentional_bounded_content",
+      "blockingForScopedChange": false,
+      "observation": "Review recipe details show a bounded subset and require scrolling for remaining lines. Still images do not prove interaction reachability; technical regressions provide separate behavior evidence."
+    }
+  ],
+  "technicalEvidence": {
+    "owner": "/root",
+    "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-full-playmode.json",
+    "sha256": "73F101AE443E23E6E66E77A717527A76940990CC8013951F6063550F823B6FA5",
+    "readByReviewer": true,
+    "jobId": "d58c6bc46f6a4f89bb3701ecc056212f",
+    "summary": {
+      "total": 843,
+      "passed": 843,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 154.7377295,
+      "resultState": "Passed"
+    },
+    "interpretation": "843 passed,0 failed,0 skipped before the later shared enemy-health placement fix. This remains technical evidence for10/26 UI state and logic, including new dismiss/reflow/retry and cross-route retry behavior; it is not final health-fix verification."
+  },
+  "sourceCodeHashes": [
+    {
+      "path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\CompositeWorkshopPanel.cs",
+      "sha256": "2402FE9E5C1B09799FB2F3AE75005CF37C297331EFBBB85961D710EC45846135"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\CompositeWorkshopPanel.Review.cs",
+      "sha256": "2210167414339219EFF671A2FEEA2E779E623B7C15C145E6F315B6B1D822CAE0"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\UI\\CompositeWorkshopPanel.Trial.cs",
+      "sha256": "F0BBC1D590A692F38AF3C687A35D3E12037EAE4BE6E72D6F5924287D2498B92E"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\TrialLaneSketch.cs",
+      "sha256": "1EE40C834BA150A952B1107DC3F544C40B16B11E97F2440CC91BFB2F82D2F4C6"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\NotebookTrialRenderer.cs",
+      "sha256": "15C69EA11F7C2198C9E95CA4B17DF011DA3F9B2F870201D08B786D6E13D04E43"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\CompositeWorkshopUiTests.cs",
+      "sha256": "36301B06175FA135B02F0CCC75A578C2998EC2DE3D9FE8991E2057BE7A4B1F56"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\AssemblyTrialUiTests.cs",
+      "sha256": "A7279B64598E36CABE6DB3CEB0AF285F1F57D4737A3CE4E9EC7E1A620F761FA7"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\DoodleGlyphs.cs",
+      "sha256": "92E29990CDAAE10BEB697E18D29DD4B52EE157B6566BF83E59544769B1660BDE"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Presentation\\Rendering\\MeshPen.cs",
+      "sha256": "4D1D52308B7FC18CAAEDFD05D0E88EAE5B55A4E7EA08BA530ED6F0D078CCFB32"
+    },
+    {
+      "path": "D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\NotebookTowerDefensePresentationTests.cs",
+      "sha256": "27E27D64ACF180320785AE1C0E3AB6BCF2CE2AC52EB59A94B6E32BDA18AFC0C1"
+    }
+  ],
+  "requiredAssetsFixesFound": [],
+  "historicalReview": {
+    "path": "D:\\Projekt Unity\\paper\\docs\\validation\\modular-album\\refinement-10-26-visual-review-before-health-fix.json",
+    "sha256": "3F26CE8C052DBF2FC8C3EC0F79AD4E6361FC6D732AC013B7A7EA00A0EE5497BF",
+    "reason": "Preserves the pre-fix27-frame review, including the separated health-bar finding, before refreshing the12 scene10 captures."
+  },
+  "healthFixReview": {
+    "capturesPhysicallyReopened": 12,
+    "unchanged26ImageAndMetadataPairsVerified": 15,
+    "result": "pass_scoped: former large HP gap is removed in fresh focus/overview frames at all5 sizes; both Blots720 tables remain complete.",
+    "acceptedTradeoffOwner": "/root",
+    "acceptedTradeoff": "Bounds intentionally include this enemy current body plus status/Spitter warning geometry before the common uniformScale. The HP bar may move when status or warning graphics appear, avoiding overlap with the warning. No claim of fixed placement across statuses is made.",
+    "implementationBoundary": "New-vertex bounds use atlas quad/native geometry, not a per-frame alpha-contour scan. Width, health ratio/color and shared presentation transform are preserved; indexed MeshPen range scan allocates no managed objects.",
+    "technicalBoundary": "Root reported27 targeted checks passed. The separate843-test artifact below predates the health placement fix and is not claimed as final technical verification of that later change.",
+    "sharedRendererRecaptureScope": [
+      "16-battle",
+      "17-tower",
+      "17-repair",
+      "17-generator",
+      "18-pause",
+      "28-leave",
+      "22-settings and23-help when opened over the live battle fixture"
+    ]
+  }
+}

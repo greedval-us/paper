@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-18",
+  "widths": [
+    1600,
+    1024
+  ],
+  "captures": [
+    "01-1600.png",
+    "02-1600.png",
+    "03-1600.png",
+    "04-1600.png",
+    "05-1600.png",
+    "06-1600.png",
+    "07-1600.png",
+    "08-1600.png",
+    "09-1600.png",
+    "01-1024.png",
+    "02-1024.png",
+    "03-1024.png",
+    "04-1024.png",
+    "05-1024.png",
+    "06-1024.png",
+    "07-1024.png",
+    "08-1024.png",
+    "09-1024.png"
+  ],
+  "states": 6,
+  "errors": [],
+  "actions": [
+    "variant comparison",
+    "incompatible combination",
+    "save error preserved draft",
+    "level gate",
+    "gold gate",
+    "purchase 94-80=14",
+    "empty album restore",
+    "8 slots",
+    "foundation stats 107.25 HP / 34 cost",
+    "review with burst weapon 68 cost"
+  ]
+}

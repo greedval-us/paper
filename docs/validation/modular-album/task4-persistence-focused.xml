@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="14" result="Failed(Child)" total="14" passed="13" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 04:14:16Z" end-time="2026-10-18 04:14:17Z" duration="1,6480278">
+  <test-suite type="TestSuite" id="1697" name="paper" fullname="paper" runstate="Runnable" testcasecount="558" result="Failed" site="Child" start-time="2026-10-18 04:14:16Z" end-time="2026-10-18 04:14:17Z" duration="1.648028" total="14" passed="13" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1689" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="558" result="Failed" site="Child" start-time="2026-10-18 04:14:16Z" end-time="2026-10-18 04:14:17Z" duration="1.643340" total="14" passed="13" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1690" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="558" result="Failed" site="Child" start-time="2026-10-18 04:14:16Z" end-time="2026-10-18 04:14:17Z" duration="1.621247" total="14" passed="13" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1691" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="558" result="Failed" site="Child" start-time="2026-10-18 04:14:16Z" end-time="2026-10-18 04:14:17Z" duration="1.604762" total="14" passed="13" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1005" name="AssemblyProfilePersistenceTests" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" testcasecount="14" result="Failed" site="Child" start-time="2026-10-18 04:14:16Z" end-time="2026-10-18 04:14:17Z" duration="1.590514" total="14" passed="13" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1015" name="ExistingHistoricalEvidenceWithAnotherEncodingDoesNotReplaceTheExactSourceBackup" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.ExistingHistoricalEvidenceWithAnotherEncodingDoesNotReplaceTheExactSourceBackup" methodname="ExistingHistoricalEvidenceWithAnotherEncodingDoesNotReplaceTheExactSourceBackup" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" seed="1872557767" result="Passed" start-time="2026-10-18 04:14:16Z" end-time="2026-10-18 04:14:16Z" duration="0.050211" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1020" name="FutureSchemaProtectsPrimaryAndBackupWithoutReset" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.FutureSchemaProtectsPrimaryAndBackupWithoutReset" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 04:14:16Z" end-time="2026-10-18 04:14:16Z" duration="0.652350" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1017" name="FutureSchemaProtectsPrimaryAndBackupWithoutReset(&quot;root&quot;)" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.FutureSchemaProtectsPrimaryAndBackupWithoutReset(&quot;root&quot;)" methodname="FutureSchemaProtectsPrimaryAndBackupWithoutReset" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" seed="115356467" result="Passed" start-time="2026-10-18 04:14:16Z" end-time="2026-10-18 04:14:16Z" duration="0.201537" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1018" name="FutureSchemaProtectsPrimaryAndBackupWithoutReset(&quot;entry&quot;)" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.FutureSchemaProtectsPrimaryAndBackupWithoutReset(&quot;entry&quot;)" methodname="FutureSchemaProtectsPrimaryAndBackupWithoutReset" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" seed="2138475817" result="Passed" start-time="2026-10-18 04:14:16Z" end-time="2026-10-18 04:14:16Z" duration="0.202501" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1019" name="FutureSchemaProtectsPrimaryAndBackupWithoutReset(&quot;snapshot&quot;)" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.FutureSchemaProtectsPrimaryAndBackupWithoutReset(&quot;snapshot&quot;)" methodname="FutureSchemaProtectsPrimaryAndBackupWithoutReset" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" seed="1715744529" result="Passed" start-time="2026-10-18 04:14:16Z" end-time="2026-10-18 04:14:16Z" duration="0.245411" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1014" name="HistoricalCommitFailureKeepsSourceAndBackupAndCanBeRetried" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.HistoricalCommitFailureKeepsSourceAndBackupAndCanBeRetried" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 04:14:16Z" end-time="2026-10-18 04:14:17Z" duration="0.380419" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1011" name="HistoricalCommitFailureKeepsSourceAndBackupAndCanBeRetried(&quot;copy&quot;)" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.HistoricalCommitFailureKeepsSourceAndBackupAndCanBeRetried(&quot;copy&quot;)" methodname="HistoricalCommitFailureKeepsSourceAndBackupAndCanBeRetried" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" seed="1480275168" result="Passed" start-time="2026-10-18 04:14:17Z" end-time="2026-10-18 04:14:17Z" duration="0.151912" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1012" name="HistoricalCommitFailureKeepsSourceAndBackupAndCanBeRetried(&quot;original-move&quot;)" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.HistoricalCommitFailureKeepsSourceAndBackupAndCanBeRetried(&quot;original-move&quot;)" methodname="HistoricalCommitFailureKeepsSourceAndBackupAndCanBeRetried" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" seed="1916871854" result="Passed" start-time="2026-10-18 04:14:17Z" end-time="2026-10-18 04:14:17Z" duration="0.100055" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1013" name="HistoricalCommitFailureKeepsSourceAndBackupAndCanBeRetried(&quot;replace&quot;)" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.HistoricalCommitFailureKeepsSourceAndBackupAndCanBeRetried(&quot;replace&quot;)" methodname="HistoricalCommitFailureKeepsSourceAndBackupAndCanBeRetried" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" seed="1607522943" result="Passed" start-time="2026-10-18 04:14:17Z" end-time="2026-10-18 04:14:17Z" duration="0.110633" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1009" name="HistoricalSourceLoadsWithoutWritingAndCommitKeepsExactOriginalBytes" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.HistoricalSourceLoadsWithoutWritingAndCommitKeepsExactOriginalBytes" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 04:14:17Z" end-time="2026-10-18 04:14:17Z" duration="0.119092" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1007" name="HistoricalSourceLoadsWithoutWritingAndCommitKeepsExactOriginalBytes(False)" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.HistoricalSourceLoadsWithoutWritingAndCommitKeepsExactOriginalBytes(False)" methodname="HistoricalSourceLoadsWithoutWritingAndCommitKeepsExactOriginalBytes" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" seed="763702402" result="Passed" start-time="2026-10-18 04:14:17Z" end-time="2026-10-18 04:14:17Z" duration="0.057101" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1008" name="HistoricalSourceLoadsWithoutWritingAndCommitKeepsExactOriginalBytes(True)" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.HistoricalSourceLoadsWithoutWritingAndCommitKeepsExactOriginalBytes(True)" methodname="HistoricalSourceLoadsWithoutWritingAndCommitKeepsExactOriginalBytes" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" seed="565146769" result="Passed" start-time="2026-10-18 04:14:17Z" end-time="2026-10-18 04:14:17Z" duration="0.059005" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1022" name="MigrationPendingOnPrimaryIsUnsavedAndQuitCommitsWithoutAnotherEdit" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.MigrationPendingOnPrimaryIsUnsavedAndQuitCommitsWithoutAnotherEdit" methodname="MigrationPendingOnPrimaryIsUnsavedAndQuitCommitsWithoutAnotherEdit" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" seed="579224369" result="Failed" start-time="2026-10-18 04:14:17Z" end-time="2026-10-18 04:14:17Z" duration="0.006219" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 1
+  But was:  0
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AssemblyProfilePersistenceTests.MigrationPendingOnPrimaryIsUnsavedAndQuitCommitsWithoutAnotherEdit () [0x0008f] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AssemblyProfilePersistenceTests.cs:256
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[SendMessage OnApplicationQuit has no receiver!
+]]></output>
+            </test-case>
+            <test-case id="1021" name="MissingLibraryEntryStillUsesThePagesOwnSnapshotAfterRestart" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.MissingLibraryEntryStillUsesThePagesOwnSnapshotAfterRestart" methodname="MissingLibraryEntryStillUsesThePagesOwnSnapshotAfterRestart" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" seed="1118872106" result="Passed" start-time="2026-10-18 04:14:17Z" end-time="2026-10-18 04:14:17Z" duration="0.068556" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1006" name="NewConfiguredStoreRoundTripPreservesAllEightOwnedStarterSnapshots" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.NewConfiguredStoreRoundTripPreservesAllEightOwnedStarterSnapshots" methodname="NewConfiguredStoreRoundTripPreservesAllEightOwnedStarterSnapshots" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" seed="1919674980" result="Passed" start-time="2026-10-18 04:14:17Z" end-time="2026-10-18 04:14:17Z" duration="0.048790" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1016" name="UnsupportedEmbeddedPartRevisionProtectsPrimaryWithoutRollingBackToValidBackup" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.UnsupportedEmbeddedPartRevisionProtectsPrimaryWithoutRollingBackToValidBackup" methodname="UnsupportedEmbeddedPartRevisionProtectsPrimaryWithoutRollingBackToValidBackup" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" seed="191250442" result="Passed" start-time="2026-10-18 04:14:17Z" end-time="2026-10-18 04:14:17Z" duration="0.195890" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1010" name="VersionEightRoundTripPreservesXpLibraryAndReceiptsTogether" fullname="PaperDefense.Tests.AssemblyProfilePersistenceTests.VersionEightRoundTripPreservesXpLibraryAndReceiptsTogether" methodname="VersionEightRoundTripPreservesXpLibraryAndReceiptsTogether" classname="PaperDefense.Tests.AssemblyProfilePersistenceTests" runstate="Runnable" seed="1620718567" result="Passed" start-time="2026-10-18 04:14:17Z" end-time="2026-10-18 04:14:17Z" duration="0.049462" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task4-persistence-focused.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

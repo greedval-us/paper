@@ -59,7 +59,8 @@ namespace PaperDefense.Core
         {
             if(damage<=0||float.IsNaN(damage)||float.IsInfinity(damage))return;
             if(index < -1)return;
-            if(index==-1){BaseHealth=Math.Max(0,BaseHealth-damage);
+            if(index==-1){float beforeDamage = BaseHealth; BaseHealth=Math.Max(0,BaseHealth-damage);
+                Statistics.RecordBaseDamage(beforeDamage - BaseHealth);
                 EventBuffer.Publish(TickIndex,SimulationEventKind.BaseHit,Center(BaseCell),Center(BaseCell),default,simulationSeconds:Elapsed);return;}
             if(index>=wells.Count||!wells[index].Active)return;
             var well=wells[index];well.Health=Math.Max(0,well.Health-damage);

@@ -12,12 +12,12 @@ namespace PaperDefense.Presentation
         CanvasScaler scaler;
         PlayerGameRoot player;
         WorkshopWizard wizard;
+        CompositeWorkshopPanel composite;
         int lastSignature;
         int visiblePage = -1;
         bool stencilWasOpen;
         bool foundationHeaderApplied;
         WizardWeaponHeader weaponHeader;
-        WizardDrawingHeader drawingHeader;
         readonly Dictionary<string, RectTransform> elements = new Dictionary<string, RectTransform>();
         readonly Dictionary<RectTransform, Vector2> sheetSizes = new Dictionary<RectTransform, Vector2>();
         readonly Dictionary<Graphic, HeaderGraphicState> headerStyles = new Dictionary<Graphic, HeaderGraphicState>();
@@ -33,10 +33,20 @@ namespace PaperDefense.Presentation
             board.GetComponent<Image>().color = PlayerUi.Paper;
             Apply();
         }
+        public void InitializeComposite(RectTransform root, CompositeWorkshopPanel panel)
+        {
+            board = root; composite = panel; scaler = GetComponent<CanvasScaler>();
+            Apply();
+        }
         void LateUpdate()
         {
             if (board == null) return;
             int signature = Screen.width * 397 ^ Screen.height;
+            if (composite != null)
+            {
+                if (signature != lastSignature) { lastSignature = signature; Apply(); }
+                return;
+            }
             signature = unchecked(signature * 31 + (wizard == null ? 0 : wizard.Step));
             signature = unchecked(signature * 31 + (wizard == null ? 0 : wizard.Status.GetHashCode()));
             foreach (Transform child in board) signature = unchecked(signature * 31 + child.GetEntityId().GetHashCode() + (child.gameObject.activeSelf ? 1 : 0));
@@ -56,23 +66,28 @@ namespace PaperDefense.Presentation
 
         public void Apply(int width, int height)
         {
+            if (composite != null)
+            {
+                var viewportLayout = new PlayerLayout(width, height);
+                scaler.referenceResolution = new Vector2(viewportLayout.Width, viewportLayout.Height);
+                board.sizeDelta = scaler.referenceResolution;
+                composite.Reflow(viewportLayout.Width, viewportLayout.Height);
+                return;
+            }
             elements.Clear();
             foreach (var item in board.GetComponentsInChildren<RectTransform>(true)) if (!elements.ContainsKey(item.name)) elements[item.name] = item;
             var layout = new PlayerLayout(width, height);
             bool weapons = wizard != null && wizard.Step == 1;
-            bool drawingPage = wizard != null && wizard.Step == 2;
-            float pageScale = drawingPage ? Mathf.Max(1, 1200 / layout.Width, 850 / layout.Height) :
-                weapons ? Mathf.Max(1, 1024 / layout.Width, 850 / layout.Height) : 1;
+            float pageScale = weapons ? Mathf.Max(1, 1024 / layout.Width, 850 / layout.Height) : 1;
             float fullWidth = layout.Width * pageScale;
             float w = Mathf.Min(1600, fullWidth), h = layout.Height * (fullWidth / layout.Width);
             float offset = (fullWidth - w) / 2;
             scaler.referenceResolution = new Vector2(fullWidth, h); board.sizeDelta = new Vector2(fullWidth, h);
             bool foundation = wizard != null && wizard.Step == 0;
             if (!weapons) weaponHeader?.Restore(wizard == null ? 0 : wizard.Step);
-            if (!drawingPage) drawingHeader?.Restore(wizard == null ? 0 : wizard.Step);
-            viewport.gameObject.SetActive(!foundation && !weapons && !drawingPage);
+            viewport.gameObject.SetActive(!foundation && !weapons);
             Visible("Wizard back", true);
-            Visible("Wizard navigation", !foundation && !weapons && !drawingPage);
+            Visible("Wizard navigation", !foundation && !weapons);
             if (foundation)
             {
                 Foundation(w, h, offset, fullWidth);
@@ -105,34 +120,6 @@ namespace PaperDefense.Presentation
                         control.gameObject.AddComponent<UiScrollFocus>();
                 return;
             }
-            if (drawingPage)
-            {
-                const float top = 144;
-                float drawingBodyHeight = h - top - 82;
-                Place("Guided workshop", new Rect(0, 0, fullWidth, h));
-                Visible("Wizard assembled thumbnail", false); Visible("Wizard thumbnail caption", false);
-                Visible("Wizard summary", false);
-                for (int i = 0; i < 3; i++) Visible("Wizard connector " + i, false);
-                if (drawingHeader == null) drawingHeader = new WizardDrawingHeader(board, Find, player);
-                drawingHeader.Apply(w, h, offset, w < 1350);
-                var drawingRoot = Find("Guided drawing");
-                if (drawingRoot != null)
-                {
-                    if (drawingRoot.parent != board) drawingRoot.SetParent(board, false);
-                    drawingRoot.localScale = Vector3.one;
-                    drawingRoot.SetSiblingIndex(2);
-                    wizard.Drawing.ReflowPage(w - 48, drawingBodyHeight);
-                    WorkshopUi.Place(drawingRoot, new Rect(offset + 24, top, w - 48, drawingBodyHeight));
-                }
-                var hiddenScroll = viewport.GetComponent<ScrollRect>();
-                hiddenScroll.StopMovement(); hiddenScroll.verticalNormalizedPosition = 1;
-                visiblePage = 2; stencilWasOpen = false;
-                AdaptSheets(fullWidth, h);
-                foreach (var control in board.GetComponentsInChildren<Selectable>(true))
-                    if (control.GetComponent<PlayerTooltip>() == null && control.GetComponent<WorkshopTooltip>() == null && control.GetComponent<UiScrollFocus>() == null)
-                        control.gameObject.AddComponent<UiScrollFocus>();
-                return;
-            }
             bool verticalSteps = w >= 1450;
             bool shortPage = h < 850;
             float navigationY = shortPage ? 76 : 88;
@@ -153,9 +140,9 @@ namespace PaperDefense.Presentation
             Place("Wizard gold", new Rect(w - (narrow ? 306 : 470), 24, narrow ? 130 : 200, 40));
             Place("Wizard album", new Rect(w - (narrow ? 166 : 250), 24, narrow ? 142 : 226, 48));
             Place("Wizard navigation", verticalSteps ? new Rect(24, 108, 172, h - 224) : new Rect(24, navigationY, w - 48, 56));
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < WorkshopWizard.StepCount; i++)
             {
-                float stepW = (w - 84) / 4;
+                float stepW = (w - 76) / WorkshopWizard.StepCount;
                 Place("Wizard step " + i, verticalSteps ? new Rect(32, 148 + i * 100, 156, 54) : new Rect(30 + i * (stepW + 8), navigationY + 4, stepW, 48));
                 Place("Wizard progress " + i, new Rect(40, 112 + i * 100, 30, 30));
                 Place("Wizard completed " + i, new Rect(40, 116 + i * 100, 24, 24));
@@ -177,26 +164,7 @@ namespace PaperDefense.Presentation
             Arrange("Wizard assembly", new Vector2(840, 760), mainScale, 0, 0);
             Arrange("Wizard review", new Vector2(840, 760), mainScale, 0, 0);
             Arrange("Wizard summary", new Vector2(400, 782), summaryScale, sideBySide ? mainW + 20 : 0, sideBySide ? 0 : 780 * mainScale + 20);
-            // Keep the drawing container as the owner so Hide/Open and input blocking keep their semantics.
-            var drawing = Find("Guided drawing");
-            var catalogue = Find("Guided drawing stencil catalogue");
-            bool stencilOpen = drawing != null && drawing.gameObject.activeSelf && catalogue != null && catalogue.gameObject.activeSelf;
-            if (drawing != null)
-            {
-                drawing.SetParent(content, false); WorkshopUi.Place(drawing, new Rect(0, 0, bodyW, extent));
-                float drawingScale = bodyH >= 400 ? Mathf.Min(mainScale, bodyH / 450) : mainScale;
-                ScalePanel("Guided drawing work area", new Vector2(840, 780), drawingScale, 0, 0);
-                ScalePanel("Guided drawing stencil catalogue", new Vector2(840, 780), mainScale, 0, 0);
-                wizard?.Drawing.Reflow(bodyH / drawingScale);
-                var workArea = Find("Guided drawing work area");
-                float workHeight = workArea.rect.height * drawingScale;
-                if (stencilOpen) workHeight = Mathf.Max(workHeight, catalogue.rect.height * mainScale);
-                float summaryY = sideBySide ? 0 : workHeight + 20;
-                ScalePanel("Guided drawing summary", new Vector2(400, 780), summaryScale, sideBySide ? mainW + 20 : 0, summaryY);
-                float drawingExtent = Mathf.Max(workHeight, summaryY + 780 * summaryScale);
-                drawing.sizeDelta = new Vector2(bodyW, drawingExtent);
-                if (drawing.gameObject.activeSelf) extent = drawingExtent;
-            }
+            bool stencilOpen = false;
             content.sizeDelta = new Vector2(bodyW, Mathf.Max(bodyH, extent));
             int page = wizard == null ? 0 : wizard.Step;
             if (visiblePage != page || stencilWasOpen != stencilOpen)
@@ -267,8 +235,8 @@ namespace PaperDefense.Presentation
             if (!foundationHeaderApplied)
             {
                 headerStyles.Clear();
-                string[] roots = { "Wizard back", "Wizard album", "Wizard gold", "Wizard progress 0", "Wizard progress 1", "Wizard progress 2", "Wizard progress 3",
-                    "Wizard step 0", "Wizard step 1", "Wizard step 2", "Wizard step 3", "Wizard completed 0", "Wizard completed 1", "Wizard completed 2", "Wizard completed 3", "Start run", "Wizard next" };
+                string[] roots = { "Wizard back", "Wizard album", "Wizard gold", "Wizard progress 0", "Wizard progress 1", "Wizard progress 2",
+                    "Wizard step 0", "Wizard step 1", "Wizard step 2", "Wizard completed 0", "Wizard completed 1", "Wizard completed 2", "Start run", "Wizard next" };
                 foreach (string name in roots)
                 {
                     var root = Find(name); if (root == null) continue;
@@ -299,15 +267,15 @@ namespace PaperDefense.Presentation
 
             float stepsX = compact ? offset + Mathf.Max(24, (w - 640) * .5f) : offset + 540;
             float stepsW = compact ? Mathf.Min(640, w - 48) : 528;
-            float stepW = stepsW / 4, stepY = compact ? 63 : 7;
+            float stepW = stepsW / WorkshopWizard.StepCount, stepY = compact ? 63 : 7;
             float diameter = compact ? 32 : 44, numberSize = compact ? 22 : 31;
             // A separate thin stroke sits behind every circle, so the labels remain independent hit targets.
             var connector = HeaderDetail(board, "Foundation header progress connector", FoundationDetailGraphic.Kind.Divider);
             WorkshopUi.Place(connector.rectTransform, new Rect(stepsX + stepW * .5f, stepY + diameter * .5f - 1,
-                stepW * 3, 2));
+                stepW * (WorkshopWizard.StepCount - 1), 2));
             connector.color = new Color(WorkshopUi.Ink.r, WorkshopUi.Ink.g, WorkshopUi.Ink.b, .76f);
             connector.StrokeWidth = 1.2f;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < WorkshopWizard.StepCount; i++)
             {
                 var step = Find("Wizard step " + i);
                 WorkshopUi.Place(step, new Rect(stepsX + i * stepW, stepY, stepW, compact ? 63 : 77));
@@ -377,10 +345,10 @@ namespace PaperDefense.Presentation
             if (!foundationHeaderApplied) return;
             foreach (var pair in headerStyles) if (pair.Key != null) pair.Value.Restore(pair.Key);
             foreach (var detail in headerDetails) if (detail != null) detail.gameObject.SetActive(false);
-            foreach (string name in new[] { "Wizard back", "Wizard album", "Start run", "Wizard next", "Wizard step 0", "Wizard step 1", "Wizard step 2", "Wizard step 3" })
+            foreach (string name in new[] { "Wizard back", "Wizard album", "Start run", "Wizard next", "Wizard step 0", "Wizard step 1", "Wizard step 2" })
                 Find(name)?.GetComponent<WorkshopButton>()?.SetDecoration(null);
             // Refresh the Selectable colors after restoring typography: the next step may already be chosen.
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < WorkshopWizard.StepCount; i++)
                 Find("Wizard step " + i)?.GetComponent<WorkshopButton>()?.SetChosen(wizard != null && wizard.Step == i);
             Find("Wizard back")?.GetComponent<WorkshopButton>()?.SetChosen(false);
             Find("Wizard album")?.GetComponent<WorkshopButton>()?.SetChosen(false);
@@ -440,13 +408,6 @@ namespace PaperDefense.Presentation
                     }
                     else FitSheet(sheet, w, h);
                 }
-            }
-            string[] specialists = { "Mortar footprint sheet", "Footprint study sheet", "Fan volley sheet", "Reinforcement sheet" };
-            foreach (string name in specialists)
-            {
-                var sheet = Find(name); if (sheet == null) continue;
-                var responsive = sheet.GetComponent<WorkshopSheetLayout>() ?? sheet.gameObject.AddComponent<WorkshopSheetLayout>();
-                responsive.Reflow(w, h);
             }
         }
         void FitSheet(RectTransform sheet, float w, float h)

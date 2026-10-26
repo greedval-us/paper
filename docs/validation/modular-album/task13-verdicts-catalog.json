@@ -1,0 +1,68 @@
+{
+  "4": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "5": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "8": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  }
+}

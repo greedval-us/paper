@@ -1,0 +1,1 @@
+Composite trial measured result length=103 visible=103 rows=6 renderedLines=6 height=122

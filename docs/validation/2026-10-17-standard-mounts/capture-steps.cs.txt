@@ -1,0 +1,59 @@
+// Execute in an empty Play Mode scene. The fixture and all profile writes are memory-only.
+PaperDefense.Editor.FullGameUiCapture.CreateFixture();
+PaperDefense.Editor.FullGameUiCapture.Folder="docs/validation/2026-10-17-standard-mounts";
+PaperDefense.Editor.FullGameUiCapture.AttachPreviewStore(false);
+var run=PaperDefense.Editor.FullGameUiCapture.Game.Run;
+foreach(var part in run.Content.AllParts) if(part.Enabled&&!part.InitiallyUnlocked&&!run.Workshop.IsUnlocked(part.Id)) {
+ string reason; if(!run.UnlockPart(part.Id,out reason)) throw new System.InvalidOperationException(reason);
+}
+System.Action<int,bool> battery=(step,sparse)=>{
+ PaperDefense.Editor.FullGameUiCapture.WorkshopStep(0);
+ var wizard=PaperDefense.Editor.FullGameUiCapture.Wizard;
+ if(!wizard.SelectChassis("chassis.battery")||!wizard.SelectWeapon(1,"weapon.mortar")||!wizard.SelectWeapon(2,"weapon.fan"))throw new System.InvalidOperationException("Battery selection failed");
+ if(sparse&&!wizard.SelectWeapon(1,null))throw new System.InvalidOperationException("Cannot remove middle mount");
+ for(int i=0;i<step;i++)if(!wizard.Next())throw new System.InvalidOperationException(wizard.Status);
+ typeof(PaperDefense.Presentation.WorkshopWizard).GetMethod("Rename",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).Invoke(wizard,new object[]{sparse?"Батарея — свободно среднее место":"Батарея — три крепления"});
+};
+System.Action standard=()=>{
+ PaperDefense.Editor.FullGameUiCapture.WorkshopStep(0);var wizard=PaperDefense.Editor.FullGameUiCapture.Wizard;
+ if(!wizard.SelectWeapon(1,"weapon.gun")||!wizard.ChangeModule("module.armor")||!wizard.Next())throw new System.InvalidOperationException("Two-mount standard failed");
+};
+System.Action trial=()=>{battery(2,false);PaperDefense.Editor.FullGameUiCapture.Click("Wizard full trial");PaperDefense.Editor.FullGameUiCapture.Wizard.RunTrial();};
+System.Action album=()=>{battery(2,false);if(!PaperDefense.Editor.FullGameUiCapture.Wizard.Save())throw new System.InvalidOperationException("Save failed");PaperDefense.Editor.FullGameUiCapture.Wizard.ShowAlbum(true);};
+System.Action battle=()=>{
+ battery(2,false);var game=PaperDefense.Editor.FullGameUiCapture.Game;var wizard=PaperDefense.Editor.FullGameUiCapture.Wizard;
+ if(!wizard.Save())throw new System.InvalidOperationException("Cannot save battery");string reason;
+ if(!game.Run.AssignBlueprint(3,wizard.Draft.Id,out reason))throw new System.InvalidOperationException(reason);
+ if(!game.StartBattle())throw new System.InvalidOperationException("Cannot start battle");
+ var session=(PaperDefense.Core.GameSession)typeof(PaperDefense.Application.RunController).GetField("session",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).GetValue(game.Run);
+ var home=session.BaseCell;int built=0;var batteryCell=home;int batteryId=0;
+ for(int side=0;side<4&&built<3;side++)for(int spread=-3;spread<=3&&built<3;spread++){
+  var cell=new PaperDefense.Core.Cell(home.X+(side<2?-5:5),home.Y+(side%2==0?-3:3)+spread);
+  if(!game.Run.BuildBlueprint(new[]{cell},built==0?3:built-1,PaperDefense.Core.MaterialTier.Pencil,PaperDefense.Core.InkColor.None,out reason))continue;
+  if(built==0){batteryCell=cell;batteryId=session.Structures[session.Structures.Count-1].Id;}built++;
+ }
+ if(built==0)throw new System.InvalidOperationException("No legal battery site: "+reason);
+ for(int tick=0;tick<360;tick++)game.Run.StepSimulation();game.Run.NextWave();
+ var fired=new System.Collections.Generic.HashSet<int>();var started=new System.Collections.Generic.HashSet<int>();int steps=0;
+ for(;steps<2400;steps++){
+  game.Run.StepSimulation();foreach(var item in session.EventBuffer)if(item.SourceStructureId==batteryId){if(item.Kind==PaperDefense.Core.SimulationEventKind.Shot)fired.Add(item.MountSlotIndex);if(item.Kind==PaperDefense.Core.SimulationEventKind.WeaponActionStarted)started.Add(item.MountSlotIndex);}
+  if(fired.Count>=2)break;
+ }
+ game.Drawing.Focus(batteryCell);float oldZoom=game.Drawing.Zoom;UnityEngine.Camera.main.orthographicSize*=oldZoom/4f;typeof(PaperDefense.Presentation.DrawingInput).GetProperty("Zoom").SetValue(game.Drawing,4f,null);
+ System.IO.File.WriteAllText(PaperDefense.Editor.FullGameUiCapture.Folder+"/battle-evidence-"+UnityEngine.Screen.width+".json","{\"memory_only\":true,\"built_via_run_controller\":"+built+",\"battery_id\":"+batteryId+",\"steps\":"+steps+",\"started_slots\":["+string.Join(",",started)+"],\"fired_slots\":["+string.Join(",",fired)+"]}");
+};
+PaperDefense.Editor.FullGameUiCapture.Enqueue("01-battery-weapons-wide",1600,900,()=>battery(1,false));
+PaperDefense.Editor.FullGameUiCapture.Enqueue("02-battery-sparse-wide",1600,900,()=>battery(1,true));
+PaperDefense.Editor.FullGameUiCapture.Enqueue("03-standard-two-mounts-wide",1600,900,standard);
+PaperDefense.Editor.FullGameUiCapture.Enqueue("04-battery-review-wide",1600,900,()=>battery(2,false));
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-battery-album-wide",1600,900,album);
+PaperDefense.Editor.FullGameUiCapture.Enqueue("06-battery-trial-wide",1600,900,trial);
+PaperDefense.Editor.FullGameUiCapture.Enqueue("07-battery-battle-wide",1600,900,battle);
+PaperDefense.Editor.FullGameUiCapture.Enqueue("01-battery-weapons-4x3",1024,768,()=>battery(1,false));
+PaperDefense.Editor.FullGameUiCapture.Enqueue("02-battery-sparse-4x3",1024,768,()=>battery(1,true));
+PaperDefense.Editor.FullGameUiCapture.Enqueue("03-standard-two-mounts-4x3",1024,768,standard);
+PaperDefense.Editor.FullGameUiCapture.Enqueue("04-battery-review-4x3",1024,768,()=>battery(2,false));
+PaperDefense.Editor.FullGameUiCapture.Enqueue("05-battery-album-4x3",1024,768,album);
+PaperDefense.Editor.FullGameUiCapture.Enqueue("06-battery-trial-4x3",1024,768,trial);
+PaperDefense.Editor.FullGameUiCapture.Enqueue("07-battery-battle-4x3",1024,768,battle);
+return new {queued=PaperDefense.Editor.FullGameUiCapture.Remaining,profile="memory-only"};

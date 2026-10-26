@@ -1,0 +1,1085 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "/root/art2_workshop_audit",
+  "scope": "11 workshop/component/album states x five supported landscape sizes; final 29 captures reviewed after the family-selection fix",
+  "sourceInspection": [
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/06-drawing.png",
+      "sha256": "edba0bc718e2c896c7854442f269855aa16f22b8cb456994c61bb25410126930",
+      "inspected": true,
+      "method": "Direct view_image visual inspection in this task"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "sha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "inspected": true,
+      "method": "Direct view_image visual inspection in this task"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/12-mortar.png",
+      "sha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c",
+      "inspected": true,
+      "method": "Direct view_image visual inspection in this task"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/13-fan.png",
+      "sha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61",
+      "inspected": true,
+      "method": "Direct view_image visual inspection in this task"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/24-empty.png",
+      "sha256": "6a5fb645b1529e2f2102bc111da1a81204f53c96276084a0783c51f196b8b073",
+      "inspected": true,
+      "method": "Direct view_image visual inspection in this task"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/27-invalid.png",
+      "sha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f",
+      "inspected": true,
+      "method": "Direct view_image visual inspection in this task"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "sha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "inspected": true,
+      "method": "Direct view_image visual inspection in this task"
+    },
+    {
+      "path": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "sha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "inspected": true,
+      "method": "Direct view_image visual inspection in this task"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/EnemySprites.png",
+      "sha256": "3940438c692db1965e38c64715e86f686230e82b9dd4f96df9081b363ecd7ca3",
+      "inspected": true,
+      "method": "Direct view_image visual inspection of native source artwork"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/FullStructureParts-v1.png",
+      "sha256": "7fc319ba1372c7c4ce6e8095470cf917974dc61c6639d1e06053878981be2d3d",
+      "inspected": true,
+      "method": "Direct view_image visual inspection of native source artwork"
+    },
+    {
+      "path": "ArtSource/Notebook/NewStyle/AssemblyAccessories-v1.png",
+      "sha256": "32cdaa7fb704d8d3fc33918a317e3f1047a0995e71282e422f58980a93e07648",
+      "inspected": true,
+      "method": "Direct view_image visual inspection of native source artwork"
+    }
+  ],
+  "records": [
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/06-drawing.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-06-drawing-1024x768.png",
+      "sourceSha256": "edba0bc718e2c896c7854442f269855aa16f22b8cb456994c61bb25410126930",
+      "captureSha256": "c170fd778380946760ddd376a99f99ba94674bfb773da3ee36dca71347fed7cd",
+      "metadataSha256": "af0668b85760712c81462a2849aaaf5e50f75e073b2b6c379b688d70f7b04a18",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "All five actual weapon parts remain distinct; four dashed connectors end visibly outside the receiving artwork.",
+        "The six resolved statistics and save/cancel remain clear; categories explain the full-size drawing.",
+        "Compact view omits category captions, retaining all native parts and assembly arrows."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/06-drawing.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-06-drawing-1280x720.png",
+      "sourceSha256": "edba0bc718e2c896c7854442f269855aa16f22b8cb456994c61bb25410126930",
+      "captureSha256": "6154ca1fc90718b5cf12aa2a45b65a6488b882b341f7c05b7a02d3358ae608f8",
+      "metadataSha256": "53edaf325953235fedb1969d07977f40946af668c09694b86b039884d39db874",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "All five actual weapon parts remain distinct; four dashed connectors end visibly outside the receiving artwork.",
+        "The six resolved statistics and save/cancel remain clear; categories explain the full-size drawing.",
+        "Compact view omits category captions, retaining all native parts and assembly arrows."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/06-drawing.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-06-drawing-1280x960.png",
+      "sourceSha256": "edba0bc718e2c896c7854442f269855aa16f22b8cb456994c61bb25410126930",
+      "captureSha256": "e1b56c396f71e9ecd657862b3202d4caa7890a7228fbd4801341e9a69240be10",
+      "metadataSha256": "8b674a647e5c469770733b4494784e15f04b1a43a796e1cf376a3e9336c6ae16",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "All five actual weapon parts remain distinct; four dashed connectors end visibly outside the receiving artwork.",
+        "The six resolved statistics and save/cancel remain clear; categories explain the full-size drawing.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/06-drawing.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-06-drawing-1600x900.png",
+      "sourceSha256": "edba0bc718e2c896c7854442f269855aa16f22b8cb456994c61bb25410126930",
+      "captureSha256": "af0f2e614571284191c3e4e20d0eb21343b1e164a593a4769e8c046b3a5f7710",
+      "metadataSha256": "7d88cc6088c85b6c4e74465b300ee93ce1f43c9a7545cd19d506dafb94df4bc7",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "All five actual weapon parts remain distinct; four dashed connectors end visibly outside the receiving artwork.",
+        "The six resolved statistics and save/cancel remain clear; categories explain the full-size drawing.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/06-drawing.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-06-drawing-1920x1080.png",
+      "sourceSha256": "edba0bc718e2c896c7854442f269855aa16f22b8cb456994c61bb25410126930",
+      "captureSha256": "9f113a293c6732f49870b4240316be3e65db2d6ae8c781d115dff548189986cd",
+      "metadataSha256": "f705a1cc61af158340e99418870384c3193f25e1534c8844f12ce9f41aaccabc",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "All five actual weapon parts remain distinct; four dashed connectors end visibly outside the receiving artwork.",
+        "The six resolved statistics and save/cancel remain clear; categories explain the full-size drawing.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-11-stencils-1024x768.png",
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "captureSha256": "fb33df8c859e6c653e5ff8728f8b021120007b69b94141b9067ee36565f6764a",
+      "metadataSha256": "283ac3a9a276427e61c0258be4ffaf7759d88b7ae71ae24358e61034ce6c7722",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The narrow background exploded study remains subordinate and unlabelled; all main catalogue illustrations, conditions and purchase action stay legible.",
+        "Visible connectors no longer disappear inside the opaque gearbox artwork."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The inset catalogue retains a deliberately quiet narrow background study rather than recreating the historical full workshop drawing."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-11-stencils-1280x720.png",
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "captureSha256": "05102eeee54e823dbb3c5942e93caae407d6e4aac318785344ff1cd8c4be0769",
+      "metadataSha256": "41f1ab909188c23ca05ed7aca8009e7b1707ca2e965fc13b64c956b5786ec222",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The narrow background exploded study remains subordinate and unlabelled; all main catalogue illustrations, conditions and purchase action stay legible.",
+        "Visible connectors no longer disappear inside the opaque gearbox artwork."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The inset catalogue retains a deliberately quiet narrow background study rather than recreating the historical full workshop drawing."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-11-stencils-1280x960.png",
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "captureSha256": "f8fc292cbf399d3ce282dea8532ce96014552de0b3ab3b284a60d297d59479a3",
+      "metadataSha256": "04f3c8289705a6a08ba00666516986f095eaeaad3976cb844f187520b909badf",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The narrow background exploded study remains subordinate and unlabelled; all main catalogue illustrations, conditions and purchase action stay legible.",
+        "Visible connectors no longer disappear inside the opaque gearbox artwork."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The inset catalogue retains a deliberately quiet narrow background study rather than recreating the historical full workshop drawing."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-11-stencils-1600x900.png",
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "captureSha256": "2c5ff9347b0a5140282b5dfbe7e6c30d20650310b6b548ef2e42a978ee77ca34",
+      "metadataSha256": "326ab2fbe9728e109f03d48098dabf53355281a44e554c9efb8ca0b5329cd70c",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The narrow background exploded study remains subordinate and unlabelled; all main catalogue illustrations, conditions and purchase action stay legible.",
+        "Visible connectors no longer disappear inside the opaque gearbox artwork."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The inset catalogue retains a deliberately quiet narrow background study rather than recreating the historical full workshop drawing."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/11-stencils.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-11-stencils-1920x1080.png",
+      "sourceSha256": "e3ac99cf330f3fd884e643e72bdf055d06041239666d19db334e9a209b8d359e",
+      "captureSha256": "9bfd1ffe1864c6cdde28ebfbe1a776954bee753bed3b7866bd61c0a29a7371b4",
+      "metadataSha256": "de40554bff84519630b92c998636410aeba417729914af26c667ce4c5cae1280",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The narrow background exploded study remains subordinate and unlabelled; all main catalogue illustrations, conditions and purchase action stay legible.",
+        "Visible connectors no longer disappear inside the opaque gearbox artwork."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The inset catalogue retains a deliberately quiet narrow background study rather than recreating the historical full workshop drawing."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/12-mortar.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-12-mortar-1024x768.png",
+      "sourceSha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c",
+      "captureSha256": "1fab893624c47048b96c4791aca34071c4d6d140c29fa70cc3a47345cee0cece",
+      "metadataSha256": "7d13b9d706ccbaf0560d898833bd43e16700c040c51175d8f5d5578fdbd83077",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Three native enemy illustrations replace primitive target glyphs; the dashed impact circle, light hatching and actual mortar remain readable.",
+        "There are no invented health bars; six actual metrics and install action remain visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The static enemy illustrations straddle the impact-circle perimeter; the circle itself retains the true resolved radius and the page remains explicitly a rule illustration."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/12-mortar.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-12-mortar-1280x720.png",
+      "sourceSha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c",
+      "captureSha256": "5fb5e96dbf5f518c3067c2b45d81544e22d1efed39fa5f4619b10cb27d04c990",
+      "metadataSha256": "c9b744b6ad7e209fb41618c383708688aacd02689448b07a7151c3c00122e573",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Three native enemy illustrations replace primitive target glyphs; the dashed impact circle, light hatching and actual mortar remain readable.",
+        "There are no invented health bars; six actual metrics and install action remain visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The static enemy illustrations straddle the impact-circle perimeter; the circle itself retains the true resolved radius and the page remains explicitly a rule illustration."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/12-mortar.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-12-mortar-1280x960.png",
+      "sourceSha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c",
+      "captureSha256": "60913844c43abe0a2edfff0ab3e29284df5218cd17c3ebd99f7ad0c9f9c1ab5d",
+      "metadataSha256": "88156096171f8a534f3103594f75e964175abba9f1a6cf3230368c2393ea1035",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Three native enemy illustrations replace primitive target glyphs; the dashed impact circle, light hatching and actual mortar remain readable.",
+        "There are no invented health bars; six actual metrics and install action remain visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The static enemy illustrations straddle the impact-circle perimeter; the circle itself retains the true resolved radius and the page remains explicitly a rule illustration."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/12-mortar.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-12-mortar-1600x900.png",
+      "sourceSha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c",
+      "captureSha256": "187112ac2f215d87afad52a6fcf6d7e6bf41a3eb28ed32dd6aad3e33be043afe",
+      "metadataSha256": "3f7d6105522c0c62e042e5d454b5382f2db11a60ddac324ee600fe5a7b96129d",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Three native enemy illustrations replace primitive target glyphs; the dashed impact circle, light hatching and actual mortar remain readable.",
+        "There are no invented health bars; six actual metrics and install action remain visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The static enemy illustrations straddle the impact-circle perimeter; the circle itself retains the true resolved radius and the page remains explicitly a rule illustration."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/12-mortar.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-12-mortar-1920x1080.png",
+      "sourceSha256": "48f70b372595e4baa8063361756cfce4d7dc364646ffeffe28264f4a4325a12c",
+      "captureSha256": "63cae57bb51ee69850649e6418f2933a6ca0ce1cb7fe45c0fb6d24b2e334edbb",
+      "metadataSha256": "3fb9295e4cb9aa6176464a687590f45a3e78e8132c86da770db91aa8476d9de8",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Three native enemy illustrations replace primitive target glyphs; the dashed impact circle, light hatching and actual mortar remain readable.",
+        "There are no invented health bars; six actual metrics and install action remain visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The static enemy illustrations straddle the impact-circle perimeter; the circle itself retains the true resolved radius and the page remains explicitly a rule illustration."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/13-fan.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-13-fan-1024x768.png",
+      "sourceSha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61",
+      "captureSha256": "e17ddc7c61b6276b658b321da4d1ce58b2f55be4b7c226535227d3b3df6f7073",
+      "metadataSha256": "c6a810c3dbca9639157c2126be8fbf936c8065a3875fc4f9d299c5774040ae63",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Eight native enemy illustrations remain identifiable inside the actual 90-degree study; the muzzle still meets the sector origin.",
+        "Light blue hatching preserves the notebook grid and actual six metrics, sight navigation and apply controls remain clear."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "Broad gnawer silhouettes slightly overlap adjacent enemy silhouettes in the tight compact group; all eight targets remain identifiable and no statistics or controls are covered."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/13-fan.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-13-fan-1280x720.png",
+      "sourceSha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61",
+      "captureSha256": "699d996254af3d7eefb257d03f739bfbd29969e359664fa0a3cc2ed7b2c25188",
+      "metadataSha256": "eb836d136bec2d068037e9df16a7a62fc87054dd36d87fc2d2da79bf7cad30e7",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Eight native enemy illustrations remain identifiable inside the actual 90-degree study; the muzzle still meets the sector origin.",
+        "Light blue hatching preserves the notebook grid and actual six metrics, sight navigation and apply controls remain clear."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "Broad gnawer silhouettes slightly overlap adjacent enemy silhouettes in the tight compact group; all eight targets remain identifiable and no statistics or controls are covered."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/13-fan.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-13-fan-1280x960.png",
+      "sourceSha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61",
+      "captureSha256": "d38d34b22e3ddc00ffbca6e38fdbef475e3c90c2b326d16470c9cae3edddb917",
+      "metadataSha256": "b5e4a6de2430ac00dae3f3cc1b2b722834df239b9e4ffdaf65185ef324bc7044",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Eight native enemy illustrations remain identifiable inside the actual 90-degree study; the muzzle still meets the sector origin.",
+        "Light blue hatching preserves the notebook grid and actual six metrics, sight navigation and apply controls remain clear."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The native enemy group replaces the concept's practice dummies, retaining the real target count."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/13-fan.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-13-fan-1600x900.png",
+      "sourceSha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61",
+      "captureSha256": "faaff84ada5ee1cd56a1770c9d0ed879d70e47f933a7cec2d25b1602dbd97d4a",
+      "metadataSha256": "76142f5f4389676ed79be5b253194838c366694ae361d1adb9a43d793b2d40a2",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Eight native enemy illustrations remain identifiable inside the actual 90-degree study; the muzzle still meets the sector origin.",
+        "Light blue hatching preserves the notebook grid and actual six metrics, sight navigation and apply controls remain clear."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The native enemy group replaces the concept's practice dummies, retaining the real target count."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/13-fan.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-13-fan-1920x1080.png",
+      "sourceSha256": "b2ac8b3d3b7b22d29807fbef01f2fe82e74e485e6467c0e64936b2e1e5b4bc61",
+      "captureSha256": "75733653de8add177fc844743edab52f48479aff2d853015e160c4b9121476ac",
+      "metadataSha256": "36b5f8a6ebca6950eee43bb31ac111113640211ab23ffd156ccca5ec8381439f",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Eight native enemy illustrations remain identifiable inside the actual 90-degree study; the muzzle still meets the sector origin.",
+        "Light blue hatching preserves the notebook grid and actual six metrics, sight navigation and apply controls remain clear."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The native enemy group replaces the concept's practice dummies, retaining the real target count."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/24-empty.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-24-empty-1024x768.png",
+      "sourceSha256": "6a5fb645b1529e2f2102bc111da1a81204f53c96276084a0783c51f196b8b073",
+      "captureSha256": "88a5e197e147a307d6a663baca87f322bf764c6c14a444e1f9adb6ac58e1471f",
+      "metadataSha256": "d61db3787a61c40d906e9d00883c5685c2c0c7aa27704cafedcacf2bdb95309f",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The left notebook page shows five real weapon parts with visible connector arrowheads; the right page preserves the actual starter tower.",
+        "Both pages and create/open-starter actions fit the empty state without labels crowding the book."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The book is smaller at short heights to preserve real filters, loadout and actions; its left page studies actual weapon parts rather than the old concept tower."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/24-empty.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-24-empty-1280x720.png",
+      "sourceSha256": "6a5fb645b1529e2f2102bc111da1a81204f53c96276084a0783c51f196b8b073",
+      "captureSha256": "0e20f237cb93ef42481a4c732adc2ecc5bc536b442a601ffb874482db62b68b7",
+      "metadataSha256": "e91f62bd081d4ef2adf38ba0b1336528ca31b8cadab2d48d7d64236024b07c8d",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The left notebook page shows five real weapon parts with visible connector arrowheads; the right page preserves the actual starter tower.",
+        "Both pages and create/open-starter actions fit the empty state without labels crowding the book."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The book is smaller at short heights to preserve real filters, loadout and actions; its left page studies actual weapon parts rather than the old concept tower."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/24-empty.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-24-empty-1280x960.png",
+      "sourceSha256": "6a5fb645b1529e2f2102bc111da1a81204f53c96276084a0783c51f196b8b073",
+      "captureSha256": "8d8ad58899bbc1444d3c11c5161570c1bcec93e4f6c84e0a58c60f0a79cb5269",
+      "metadataSha256": "ded8f5ee04cf806ae18dd39c339567d2a85e3f5ab0e250e6557a9ec5b671544e",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The left notebook page shows five real weapon parts with visible connector arrowheads; the right page preserves the actual starter tower.",
+        "Both pages and create/open-starter actions fit the empty state without labels crowding the book."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The book is smaller at short heights to preserve real filters, loadout and actions; its left page studies actual weapon parts rather than the old concept tower."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/24-empty.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-24-empty-1600x900.png",
+      "sourceSha256": "6a5fb645b1529e2f2102bc111da1a81204f53c96276084a0783c51f196b8b073",
+      "captureSha256": "b4f7246d620190898601f2e0a35a611e38e23ac6ebf0e386f5b143d70dd7f251",
+      "metadataSha256": "bdb8b057f432791bef5bb1a050c9a90e886719967eac4941fe1cab23ab128af6",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The left notebook page shows five real weapon parts with visible connector arrowheads; the right page preserves the actual starter tower.",
+        "Both pages and create/open-starter actions fit the empty state without labels crowding the book."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The book is smaller at short heights to preserve real filters, loadout and actions; its left page studies actual weapon parts rather than the old concept tower."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/24-empty.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-24-empty-1920x1080.png",
+      "sourceSha256": "6a5fb645b1529e2f2102bc111da1a81204f53c96276084a0783c51f196b8b073",
+      "captureSha256": "f35166e00c5c8c191e49f96b14b52531fdd411ac80b30fdec22115287f7ec261",
+      "metadataSha256": "d162d4866a44f824a58eb1c4a6bd958ca5e8495c908c77a613f27e46d683b892",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The left notebook page shows five real weapon parts with visible connector arrowheads; the right page preserves the actual starter tower.",
+        "Both pages and create/open-starter actions fit the empty state without labels crowding the book."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The book is smaller at short heights to preserve real filters, loadout and actions; its left page studies actual weapon parts rather than the old concept tower."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/27-invalid.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-27-invalid-1024x768.png",
+      "sourceSha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f",
+      "captureSha256": "b221a575d681093569dae610c0e0afe6aca7dcc8701292cacef52cefd4ea66fd",
+      "metadataSha256": "1912b8d2f9dda61bcdc392c08e4aed6ab82756b39b2a5bd91436092a60935f6d",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The actual selected magazine and burst trigger remain visible with the explicit conflict diagnosis, two correction/apply actions and disabled save.",
+        "All four exploded assembly arrows are visible; category captions do not overlap the parts on full-size views.",
+        "Compact view omits category captions, retaining all native parts and assembly arrows."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/27-invalid.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-27-invalid-1280x720.png",
+      "sourceSha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f",
+      "captureSha256": "42d70d723429eab233304519cde6971a738055dcf62955a08ce5722caa455098",
+      "metadataSha256": "a1c42e89b4797c164d3cb4f171bbb47ee966d1adfd43e7c3ec8bc1b7058f9625",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The actual selected magazine and burst trigger remain visible with the explicit conflict diagnosis, two correction/apply actions and disabled save.",
+        "All four exploded assembly arrows are visible; category captions do not overlap the parts on full-size views.",
+        "Compact view omits category captions, retaining all native parts and assembly arrows."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/27-invalid.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-27-invalid-1280x960.png",
+      "sourceSha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f",
+      "captureSha256": "dba3d44996067b45bb3a009dfac7dbdb1d44ff5caa6950d3374aa6f7b5ca1b95",
+      "metadataSha256": "f7aeb8b6dcacd2cf754c9d6ae19e9a9733c664cd09bf9b4d85702fafe12005f6",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The actual selected magazine and burst trigger remain visible with the explicit conflict diagnosis, two correction/apply actions and disabled save.",
+        "All four exploded assembly arrows are visible; category captions do not overlap the parts on full-size views.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/27-invalid.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-27-invalid-1600x900.png",
+      "sourceSha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f",
+      "captureSha256": "10fcae5f941d2515e6bb536618c91890fd8b52dbdee938edcb919ec095e2d4d7",
+      "metadataSha256": "4f678da20c494985a540e2153bcd1711c7750f4033b76cdcd6411e2752cbe168",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The actual selected magazine and burst trigger remain visible with the explicit conflict diagnosis, two correction/apply actions and disabled save.",
+        "All four exploded assembly arrows are visible; category captions do not overlap the parts on full-size views.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/27-invalid.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-27-invalid-1920x1080.png",
+      "sourceSha256": "21c3463ad3e5fea9805b744ca46b52ab396f89b64706419b0984245ac6ad595f",
+      "captureSha256": "4e95dd255ce9f7ea2c59dfe10fbcd6c8e8669e886e366c0fc5a7e5eef5526698",
+      "metadataSha256": "39d689474391ab6b81639cf26cc5d83e2005a1b6d3a142659d34ac7cbd32a1c1",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The actual selected magazine and burst trigger remain visible with the explicit conflict diagnosis, two correction/apply actions and disabled save.",
+        "All four exploded assembly arrows are visible; category captions do not overlap the parts on full-size views.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-structure-1024x768.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "6a378a44608537409cff909cf68ef7564262b614325ceb277d2d791d00f56a3e",
+      "metadataSha256": "d1e9e7ff66d08eed9e5de2c9f2b313f7863d04648345579b91bad0ac0ffc9477",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The generator shell is the correct native glass reservoir, with actual pump and generator site; generic wall panels are no longer substituted.",
+        "Two assembly connectors stay in clear gaps, while actual income/payback/placement text and apply action remain readable.",
+        "Compact view omits category captions, retaining all native parts and assembly arrows."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-structure-1280x720.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "c755242af6d534ca28088997982c8336e9ad99224ebe774d49255db207177005",
+      "metadataSha256": "934825389536ed1522a06db3d0a8d0b0829f6e50e0889d8138f2452e472457f2",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The generator shell is the correct native glass reservoir, with actual pump and generator site; generic wall panels are no longer substituted.",
+        "Two assembly connectors stay in clear gaps, while actual income/payback/placement text and apply action remain readable.",
+        "Compact view omits category captions, retaining all native parts and assembly arrows."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-structure-1280x960.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "de4bd19f2d0b3cb8754b265d2dc63b037a40a1665ccab8ff3c74ae0d74e1ea78",
+      "metadataSha256": "c426edae37d34989aebfd100a20426a539e807253b1e098262e111c2b7b7f7d5",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The generator shell is the correct native glass reservoir, with actual pump and generator site; generic wall panels are no longer substituted.",
+        "Two assembly connectors stay in clear gaps, while actual income/payback/placement text and apply action remain readable.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-structure-1600x900.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "dc974003483c41fa52bfbe1cb0ba3f1d8268b325293184dcf22cf5385d951f90",
+      "metadataSha256": "618cb730488870ff5ea57ddd9403238b5768889f65c55a112552d7bfced0f14e",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The generator shell is the correct native glass reservoir, with actual pump and generator site; generic wall panels are no longer substituted.",
+        "Two assembly connectors stay in clear gaps, while actual income/payback/placement text and apply action remain readable.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-structure-1920x1080.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "c3bf2c12297f75bfeca39f586173a46da8255f3c44f7783a51ca5285c447a6ec",
+      "metadataSha256": "c504870a2fa3ada97e919e7a47ccce2a93d9b7239e80635f6ec6bb2d347b1037",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The generator shell is the correct native glass reservoir, with actual pump and generator site; generic wall panels are no longer substituted.",
+        "Two assembly connectors stay in clear gaps, while actual income/payback/placement text and apply action remain readable.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-wall-1024x768.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "e03d54a65938e3ee0ce11da2f5b700e163e9d0cf30dbebe09a0b4af163a42132",
+      "metadataSha256": "7aaaa49819786e54bfe535061f44aef77de07ce68a6564b5b0e4ef067c333798",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The actual wall panels, wooden barrier and wall site remain distinct, with two clear assembly arrows.",
+        "Actual durability/cost/load and path-blocking placement rules stay readable.",
+        "Compact view omits category captions, retaining all native parts and assembly arrows."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-wall-1280x720.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "98bbd9c5b3f0ed060111231948280f1ad247c9ec2396485039fb016d05fb5902",
+      "metadataSha256": "05f3e42b56f4a35b8e597aacb524f478f90c808a062f412b499bc7da47444cf1",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The actual wall panels, wooden barrier and wall site remain distinct, with two clear assembly arrows.",
+        "Actual durability/cost/load and path-blocking placement rules stay readable.",
+        "Compact view omits category captions, retaining all native parts and assembly arrows."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-wall-1280x960.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "eaa119db102f113ff90191fae7d9a68bd18bed130be5886a5d3da50211329f9f",
+      "metadataSha256": "a87fcc852a175773ec60f957c570da028ec26bc860d3ddb8356e0c1edc556f22",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The actual wall panels, wooden barrier and wall site remain distinct, with two clear assembly arrows.",
+        "Actual durability/cost/load and path-blocking placement rules stay readable.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-wall-1600x900.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "8e034052aee865d0f8736eec30aa7734e15aebd2eb4cc3c828b879c62a681ecd",
+      "metadataSha256": "e364f9d2b6afa9087510b2207b4c74347c675dd9491b36571c19e7b237405b0d",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The actual wall panels, wooden barrier and wall site remain distinct, with two clear assembly arrows.",
+        "Actual durability/cost/load and path-blocking placement rules stay readable.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-wall-1920x1080.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "c4d6d9accb9ed6fbedfa65b331599ffcb9ef16022405b44229a773d9629997e9",
+      "metadataSha256": "79a4b1cb81c19bf6d17d9628bd4c9e7942f3062b354bb3d8ffc3824e9e5ed053",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The actual wall panels, wooden barrier and wall site remain distinct, with two clear assembly arrows.",
+        "Actual durability/cost/load and path-blocking placement rules stay readable.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-slow-1024x768.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "1bb255add3b93e1e1d912e334bcb7f4c98f17b4c40538bbc28500babf7536a08",
+      "metadataSha256": "e9f8f3eed6f25bbd72148196a36f25e565c0ea7b217e1b7ab54c9946e3866094",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The shell now shows the correct native grate over the actual liquid bowl and slow site; wall panels are absent.",
+        "Actual slowing multiplier/radius/duration and placement rule remain clear.",
+        "Compact view omits category captions, retaining all native parts and assembly arrows."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-slow-1280x720.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "98e6199ed965e782c49ceedd836a99ae171309e408000e478f47ffe9fab21bee",
+      "metadataSha256": "7c5b12a49a1ebf6585fe07d08fa9fdb3deb0febd804e2265a99c2727fb1cb193",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The shell now shows the correct native grate over the actual liquid bowl and slow site; wall panels are absent.",
+        "Actual slowing multiplier/radius/duration and placement rule remain clear.",
+        "Compact view omits category captions, retaining all native parts and assembly arrows."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-slow-1280x960.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "1367f52941b160a2dd98224b59d6c26cf0c1830ec933980bbe86a24beb560428",
+      "metadataSha256": "7eb5a79403124967bcbeb114cbf1628c3f25526c55f2b13fcc98eb1d38845f51",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The shell now shows the correct native grate over the actual liquid bowl and slow site; wall panels are absent.",
+        "Actual slowing multiplier/radius/duration and placement rule remain clear.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-slow-1600x900.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "79f25abbcb7e8b60557a73fa80dbfbfed49519273318abf04aa16d2bec48c69f",
+      "metadataSha256": "41866bdf04d526923301ed981ec934ee372355b5c29efde05420ffc226f26343",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The shell now shows the correct native grate over the actual liquid bowl and slow site; wall panels are absent.",
+        "Actual slowing multiplier/radius/duration and placement rule remain clear.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-slow-1920x1080.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "fb9f1fa63a8ae29806f3e8f24bd2c5f3d221b7948262e9ca90a8b3c231c9fb91",
+      "metadataSha256": "19dc4c7babd1128c7461e17939023e171b8d3a69ea3ea4428f46fd5321379577",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The shell now shows the correct native grate over the actual liquid bowl and slow site; wall panels are absent.",
+        "Actual slowing multiplier/radius/duration and placement rule remain clear.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-repair-1024x768.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "a9c0c3e7ef34da46dd17096f8955031010dead29d484780ba4d2501ccb83308a",
+      "metadataSha256": "26f19a9f235cfb7fa2f8dba8d20bf7bd73d2797d3d5e38f0b5a09f0d811904ac",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The shell now shows the correct native wrench roof over the actual repair workshop and repair site; wall panels are absent.",
+        "Actual healing/radius and no-stacking placement rule remain clear.",
+        "Compact view omits category captions, retaining all native parts and assembly arrows."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-repair-1280x720.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "8115962403170d92ce37c011919329a85c7c7477b0c6f638e60eb33537e556c3",
+      "metadataSha256": "eb2a283517c617830f42b9468873a2bcbf012034909195dc100523e5d5125bff",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The shell now shows the correct native wrench roof over the actual repair workshop and repair site; wall panels are absent.",
+        "Actual healing/radius and no-stacking placement rule remain clear.",
+        "Compact view omits category captions, retaining all native parts and assembly arrows."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-repair-1280x960.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "7e28949c053fe030e22fae6bcde2e864193932ded5ef8fa9371532ea3e299e1b",
+      "metadataSha256": "c0bd8a8c976eb17a8244c1d0c647c51722c4c59a037e9aa331278842b7c084fd",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The shell now shows the correct native wrench roof over the actual repair workshop and repair site; wall panels are absent.",
+        "Actual healing/radius and no-stacking placement rule remain clear.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-repair-1600x900.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "25058b43619c8be5eeb3e9f2517b3add4692ebec1ea3fbdb5155bc8d02b2abbc",
+      "metadataSha256": "45c5ad2422a5d156debe79075423007e48933f41e45dfffdc2d66d39b1afea24",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The shell now shows the correct native wrench roof over the actual repair workshop and repair site; wall panels are absent.",
+        "Actual healing/radius and no-stacking placement rule remain clear.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/29-structure.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-29-repair-1920x1080.png",
+      "sourceSha256": "15cc56dbc3d2efb89b70ab6351565cccf9cea74cb1c1bac0b320e60a9777e9fc",
+      "captureSha256": "0e3711c8efbcc8770598a953899cec06e8696d202a49586c2afd9d2bc3a94912",
+      "metadataSha256": "4a32df5863f2e9458324ad9a6dbaae1af6cdb47a8ba2b6f43cafe1a89c2a5cab",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "The shell now shows the correct native wrench roof over the actual repair workshop and repair site; wall panels are absent.",
+        "Actual healing/radius and no-stacking placement rule remain clear.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-30-foundation-parts-1024x768.png",
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "captureSha256": "bda74abb598e45d85dbca898da20cd7192060c996d5c3530b7b505ff62964923",
+      "metadataSha256": "5acc5a3afdd9de1262d7db8ba2cb2f448683f82060c6597ec236580bdec7a02f",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Actual feed, bearing, hull and authored thin frame strip remain distinct; all three dashed connectors end in visible gaps.",
+        "Category captions are outside artwork and the five actual foundation metrics remain readable.",
+        "Compact view omits category captions, retaining all native parts and assembly arrows."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The lower frame remains an intentionally thin authored strip, and the bearing preserves its supplied paper-coloured crop edge; no source region or physical scale was changed."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-30-foundation-parts-1280x720.png",
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "captureSha256": "4153d6df763109fc19aeb30db247494fb8475fdc49c2af4bccd14a287b4ebc5e",
+      "metadataSha256": "869cfb049208758fd45558b838a83657a5d69d07b4226c83f40f9f73d1af50f6",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Actual feed, bearing, hull and authored thin frame strip remain distinct; all three dashed connectors end in visible gaps.",
+        "Category captions are outside artwork and the five actual foundation metrics remain readable.",
+        "Compact view omits category captions, retaining all native parts and assembly arrows."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The lower frame remains an intentionally thin authored strip, and the bearing preserves its supplied paper-coloured crop edge; no source region or physical scale was changed."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-30-foundation-parts-1280x960.png",
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "captureSha256": "16ad2e12b9373b89c2cc9cdb534e6db55d3ca4000f3e1a393e562aa96067cb57",
+      "metadataSha256": "be763a02b38a9ca92f49c852d10066f6703722ff0830cd15baff195730b295fe",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Actual feed, bearing, hull and authored thin frame strip remain distinct; all three dashed connectors end in visible gaps.",
+        "Category captions are outside artwork and the five actual foundation metrics remain readable.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The lower frame remains an intentionally thin authored strip, and the bearing preserves its supplied paper-coloured crop edge; no source region or physical scale was changed."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-30-foundation-parts-1600x900.png",
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "captureSha256": "ffe5cb968b4d7f79a919014db82b171a75d5a6a2d2ac8e8b718028cd43e1c734",
+      "metadataSha256": "5d8abb4cc18f91771f40d3410fb63205b124fd39f1721480e70fd85f826e03b7",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Actual feed, bearing, hull and authored thin frame strip remain distinct; all three dashed connectors end in visible gaps.",
+        "Category captions are outside artwork and the five actual foundation metrics remain readable.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The lower frame remains an intentionally thin authored strip, and the bearing preserves its supplied paper-coloured crop edge; no source region or physical scale was changed."
+      ]
+    },
+    {
+      "sourcePath": "docs/design/game-concept-art-2026-10-16/screens/30-foundation-parts.png",
+      "capturePath": "docs/validation/modular-album/art2-screenshots/art2-30-foundation-parts-1920x1080.png",
+      "sourceSha256": "706531849bd3d719f4f2be7d22402c2ab3ac55cb8baf0499c51d06024b9629dd",
+      "captureSha256": "876acf12bc631a8b870ee4c79db17d290188b265c36e1faefa1be76e932d9909",
+      "metadataSha256": "6cb4e5bd32b8056da940163bb5f2a01e1dea0168603ad291dba9683ebf32b50f",
+      "inspected": true,
+      "reviewer": "/root/art2_workshop_audit",
+      "verdict": "PASS_WITH_DIFFERENCES",
+      "observations": [
+        "Actual feed, bearing, hull and authored thin frame strip remain distinct; all three dashed connectors end in visible gaps.",
+        "Category captions are outside artwork and the five actual foundation metrics remain readable.",
+        "Larger drawing preserves category captions when its owned area meets the display threshold; no text/arrow/art intersection is visible."
+      ],
+      "residuals": [
+        "Modern approved modular parts and adaptive gameplay layout intentionally differ from the historical round-foundation concept; this is not a pixel-identical reproduction.",
+        "The lower frame remains an intentionally thin authored strip, and the bearing preserves its supplied paper-coloured crop edge; no source region or physical scale was changed."
+      ]
+    }
+  ],
+  "summary": {
+    "expected": 55,
+    "inspected": 55,
+    "passWithDifferences": 55,
+    "failed": 0,
+    "mechanicalGeometryChanged": false,
+    "humanAcceptanceClaimed": false
+  },
+  "verificationOwner": {
+    "visual": "/root/art2_workshop_audit",
+    "UnityExecutionAndTests": "/root"
+  },
+  "requiredFuturePolish": [
+    "Reduce display-only native enemy silhouette size relative to row spacing in compact fan rule illustrations if pursuing cleaner visual separation."
+  ]
+}

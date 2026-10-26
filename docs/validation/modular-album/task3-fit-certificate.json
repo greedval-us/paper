@@ -1,0 +1,48 @@
+{
+  "revision": "modular-gun-pilot-2026-10-18-v1",
+  "angleRadians": [
+    -3.1415927410125732,
+    3.1415927410125732
+  ],
+  "recoilInterval": [
+    -0.08500000089406967,
+    0
+  ],
+  "mountSpacing": 0.47556479275226593,
+  "sweptRadius": 0.21957635015712607,
+  "freeGap": 0.0364120924380138,
+  "requiredClearance": 0.009999999776482582,
+  "bodyAndArmor": [
+    {
+      "X": -0.3446800112724304,
+      "Y": -0.2800000011920929,
+      "Width": 0.6993600130081177,
+      "Height": 0.11160000413656235,
+      "ArmorOnly": false
+    },
+    {
+      "X": -0.3446800112724304,
+      "Y": -0.16840000450611115,
+      "Width": 0.6993600130081177,
+      "Height": 0.1860000044107437,
+      "ArmorOnly": false
+    },
+    {
+      "X": -0.07999999821186066,
+      "Y": -0.14000000059604645,
+      "Width": 0.16081999242305756,
+      "Height": 0.1366799920797348,
+      "ArmorOnly": false
+    },
+    {
+      "X": -0.13500000536441803,
+      "Y": -0.2549999952316284,
+      "Width": 0.27105000615119934,
+      "Height": 0.268449991941452,
+      "ArmorOnly": true
+    }
+  ],
+  "sourceSha256": "4F4F2C3507BCE15F857C547D443451DE6C8771564BAC7F8B26BD54FAB2A3095A",
+  "runtimeSha256": "B14D20E2EF0F2F22DBA98218B1F6919E85548D8CEC7663F291F95E57B6473184",
+  "proof": "All transformed occupied corners at both recoil endpoints; full-circle sweep, fixed-neighbor checks, body/armor keepouts. Own support seating contact only."
+}

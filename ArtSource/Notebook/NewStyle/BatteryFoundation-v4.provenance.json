@@ -1,0 +1,15 @@
+{
+  "mode": "built-in image_gen reference edit",
+  "status": "integrated_and_reviewed",
+  "referenceImages": [
+    "ArtSource/Notebook/NewStyle/BatteryFoundation-v3.png",
+    "docs/design/album-assembly-2026-10-17/art/01-towers.png"
+  ],
+  "prompt": "Use case: style-transfer / precise-object-edit. Asset type: transparent game sprite sheet of four low three-seat battery foundations in2x2 cells. Image1 is the exact edit target and mechanical layout reference. Image2 is the authoritative style and masonry reference, especially BATTERY. Preserve Image1 square canvas, all four source objects at exactly the same positions, shape dimensions, view, low profile and generous transparent gutters. The top-left object is gameplay authoritative: keep its three mounting-pad centres, relative triangle, sizes and shared low stone outline exactly; all pads empty. Change ONLY material and hand-drawn style. Match the dense irregular navy/cobalt ballpoint hatching and warm ivory chipped stone of Image2: more visible small masonry chips, natural seams, short pen scratches and carefully hatched dark-blue edge brackets. Keep plinth low and mounting discs exposed, never add a raised ring/wall around any pad or fill a hole with weapons. Rivets should be flat small subdued brass, no shiny spherical gold or plastic highlights. Maintain the existing outer silhouette and front side band without enlarging height/width; this is a registration-locked style update, not a new foundation design. Genuine alpha transparency outside each object, opaque stone surfaces. No towers, guns, ground/scenery/shadow, paper, grid, labels, text, borders, numbers or watermark. Output native square PNG; preserve Image1 full-sheet arrangement, aim1254x1254.",
+  "generated": "C:\\Users\\Greedval\\.codex\\generated_images\\01a14cd7-7db2-7df0-8654-f50c4f801bf0\\exec-db1ffbf5-6e20-40b9-b988-6d4a7c0940d5.png",
+  "source": "ArtSource/Notebook/NewStyle/BatteryFoundation-v4.png",
+  "postprocessing": "none; native RGBA copied unchanged",
+  "acceptedRevision": "modular-full-catalog-2026-10-24-v8",
+  "sha256": "cf999a95a6b657454e6a5901f547a959913fa1379dc3106969d56fa0845255e4",
+  "validationFolder": "docs/validation/modular-album/"
+}

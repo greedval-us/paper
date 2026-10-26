@@ -1,0 +1,141 @@
+ M ArtSource/Notebook/NewStyle/sprites.source.json
+ M Assets/PaperDefense/Core/TowerBlueprint.cs
+ M Assets/PaperDefense/Editor/FullGameUiCapture.cs
+ M Assets/PaperDefense/Presentation/Art/NotebookArtRenderer.cs
+ M Assets/PaperDefense/Presentation/Art/NotebookSpriteCatalog.cs
+ M Assets/PaperDefense/Presentation/Player/PlayerShell.Dialogs.cs
+ M Assets/PaperDefense/Presentation/Player/PlayerShell.Home.cs
+ M Assets/PaperDefense/Presentation/Player/PlayerShell.cs
+ M Assets/PaperDefense/Presentation/Rendering/MeshPen.cs
+ M Assets/PaperDefense/Presentation/Rendering/NotebookTowerComposition.cs
+ M Assets/PaperDefense/Presentation/UI/WeaponAssemblyGraphic.cs
+ M Assets/PaperDefense/Presentation/UI/WizardWeaponHeader.cs
+ M Assets/PaperDefense/Presentation/UI/WizardWeaponPanel.cs
+ M Assets/PaperDefense/Presentation/UI/WorkshopHud.cs
+ M Assets/PaperDefense/Presentation/UI/WorkshopResponsiveLayout.cs
+ M Assets/PaperDefense/Presentation/UI/WorkshopWizard.cs
+ M Assets/PaperDefense/Resources/Art/NotebookAtlas.png
+ M Assets/PaperDefense/Resources/Art/NotebookSprites.json
+ M Assets/PaperDefense/Resources/Text/ru.asset
+ M Assets/PaperDefense/Tests/EditMode/WorkshopAssemblyStageTests.cs
+ M Assets/PaperDefense/Tests/PlayMode/ExpandedMountRenderingTests.cs
+ M Assets/PaperDefense/Tests/PlayMode/PlayerJourneyTests.cs
+ M Assets/PaperDefense/Tests/PlayMode/WorkshopDrawingScreenTests.cs
+ M Assets/PaperDefense/Tests/PlayMode/WorkshopFoundationTests.cs
+ M Assets/PaperDefense/Tests/PlayMode/WorkshopWeaponScreenTests.cs
+ M Assets/PaperDefense/Tests/PlayMode/WorkshopWizardTests.cs
+ M README.md
+ M Tools/BalanceWorkbook/node_modules/.modules.yaml
+ M Tools/BalanceWorkbook/node_modules/.pnpm-workspace-state-v1.json
+ M Tools/BalanceWorkbook/node_modules/@img/sharp-win32-x64/lib/libvips-42.dll
+ M Tools/BalanceWorkbook/node_modules/@img/sharp-win32-x64/lib/libvips-cpp-8.18.7.dll
+ M Tools/BalanceWorkbook/node_modules/@img/sharp-win32-x64/lib/sharp-win32-x64-0.35.5.node
+ M Tools/BalanceWorkbook/node_modules/@napi-rs/canvas-win32-x64-msvc/skia.win32-x64-msvc.node
+ M Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/dist/artifact-session/host-daemon.mjs
+ M Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/dist/artifact-session/index.mjs
+ M Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/dist/artifact-session/prepare.mjs
+ M Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/dist/artifact-session/service.mjs
+ M Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs
+ M Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/docs/presentations/api/references/charts.spec.md
+ M Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/docs/presentations/api/references/presentation.spec.md
+ M Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/.pnpm-workspace-state-v1.json
+ M Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/package.json
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/DocumentFormat.OpenXml.Framework.vsp3g6rq8c.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/DocumentFormat.OpenXml.tin55g1bkb.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/Google.Protobuf.ze35jf5cfr.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Collections.Concurrent.fv1xo90b4e.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Collections.NonGeneric.fizn4w82qi.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Collections.Specialized.35mqs569zd.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Collections.my3pqh5qks.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.ComponentModel.Primitives.1lm1rqemqq.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.ComponentModel.TypeConverter.hmoum3qawf.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.ComponentModel.fb6b35yifs.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Console.iaekx381qv.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Diagnostics.DiagnosticSource.wu8o7idmiu.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.IO.Compression.ous27n6au3.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.IO.Packaging.ejb20qp7p2.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Linq.5qhwogj18r.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Linq.Expressions.j0t0463l0v.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Memory.a6jd6cfkb1.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Net.Http.fro10fs6zt.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Net.Primitives.ndnk2jp0p4.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.ObjectModel.wvdbpj86i9.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Private.CoreLib.ekcb3829hn.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Private.Uri.f5ncrldlzr.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Private.Xml.Linq.djg9mjqiyi.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Private.Xml.fmldu235uf.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Runtime.InteropServices.JavaScript.p5jxanpmp7.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Security.Cryptography.cqaarzu8pm.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Text.RegularExpressions.uamgjk8gvb.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.Xml.Linq.f94siaol93.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/System.p0vf5aoex5.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/Walnut.lnfscp3nbt.wasm
+ M Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/blazor.boot.json
+ M Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/dotnet.js
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/dotnet.native.g0qvcu2x9f.wasm
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/dotnet.native.k09zdxq5tw.js
+ D Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/dotnet.runtime.8ha609180a.js
+ M Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/skia.node
+ M Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/package.json
+ M Tools/BalanceWorkbook/node_modules/pnpm/dist/node_modules/@reflink/reflink-win32-arm64-msvc/reflink.win32-arm64-msvc.node
+ M Tools/BalanceWorkbook/node_modules/pnpm/dist/node_modules/@reflink/reflink-win32-x64-msvc/reflink.win32-x64-msvc.node
+ M Tools/BalanceWorkbook/node_modules/pnpm/dist/vendor/fastlist-0.3.0-x64.exe
+ M Tools/BalanceWorkbook/node_modules/pnpm/dist/vendor/fastlist-0.3.0-x86.exe
+ M docs/Balance-Parameters.md
+ M docs/Charge-Imprint.md
+ M docs/Content-Architecture.md
+ M docs/Content-Profile-Compatibility.md
+ M docs/Current-Mechanics.md
+ D docs/Design-Change-Feedback.md
+ M docs/Development-Guide.md
+ M docs/Directional-Armor.md
+ D docs/Drawing-Probe.md
+ M docs/Drawing-Workbench.md
+ M docs/Extending-Mechanics.md
+ M docs/Fan-Volley.md
+ M docs/Footprint-Study.md
+ D docs/Freeform-Towers.md
+ M docs/Game-Design.md
+ M docs/Guided-Workshop.md
+ M docs/Implementation-Roadmap.md
+ M docs/Mechanics-Contracts.md
+ M docs/Modular-Towers.md
+ M docs/Notebook-Art.md
+ M docs/PaperDefense-Architecture.md
+ M docs/Player-Assets.md
+ M docs/Player-Game.md
+ M docs/README.md
+ M docs/Tower-Defense.md
+ M docs/Workshop-Guide.md
+ M docs/design/README.md
+ M docs/design/game-concept-art-2026-10-16/README.md
+ M docs/validation/2026-10-16-map-preparation/report.md
+ M docs/validation/README.md
+?? ArtSource/Notebook/NewStyle/GunPilotParts-v1.png
+?? ArtSource/Notebook/NewStyle/GunPilotParts-v1.provenance.json
+?? Assets/PaperDefense/Presentation/Art/NotebookMountLayout.cs
+?? Assets/PaperDefense/Presentation/Art/NotebookMountLayout.cs.meta
+?? Assets/PaperDefense/Resources/Art/NotebookMounts.json
+?? Assets/PaperDefense/Resources/Art/NotebookMounts.json.meta
+?? Assets/PaperDefense/Tests/Editor/SplitGunMountTests.cs
+?? Assets/PaperDefense/Tests/Editor/SplitGunMountTests.cs.meta
+?? Assets/PaperDefense/Tests/Editor/SplitMountMetadataTests.cs
+?? Assets/PaperDefense/Tests/Editor/SplitMountMetadataTests.cs.meta
+?? Assets/PaperDefense/Tests/Editor/StandardMountCompatibilityTests.cs
+?? Assets/PaperDefense/Tests/Editor/StandardMountCompatibilityTests.cs.meta
+?? Assets/PaperDefense/Tests/Editor/StandardMountLayoutTests.cs
+?? Assets/PaperDefense/Tests/Editor/StandardMountLayoutTests.cs.meta
+?? Assets/PaperDefense/Tests/Editor/StandardMountPreviewRegressionTests.cs
+?? Assets/PaperDefense/Tests/Editor/StandardMountPreviewRegressionTests.cs.meta
+?? Assets/PaperDefense/Tests/PlayMode/StandardWorkshopFlowTests.cs
+?? Assets/PaperDefense/Tests/PlayMode/StandardWorkshopFlowTests.cs.meta
+?? Assets/PaperDefense/Tests/PlayMode/StandardWorkshopPersistenceTests.cs
+?? Assets/PaperDefense/Tests/PlayMode/StandardWorkshopPersistenceTests.cs.meta
+?? docs/Component-Stats-and-Abilities.md
+?? docs/Modular-Asset-Contract.md
+?? docs/Modular-Transition.md
+?? docs/audit/
+?? docs/design/game-concept-art-2026-10-17-modular/
+?? docs/validation/2026-10-17-split-gun-pilot/
+?? docs/validation/2026-10-17-standard-mounts/
+?? docs/validation/2026-10-17-standard-workshop/

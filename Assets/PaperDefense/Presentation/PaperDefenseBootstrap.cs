@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using PaperDefense.Application;
 using PaperDefense.Core;
 using UnityEngine;
@@ -38,6 +40,27 @@ namespace PaperDefense.Presentation
             return false;
         }
 
+        internal static string ResolveTemporaryProfilePath(bool configuredMemory, IReadOnlyList<string> arguments, string temporaryRoot)
+        {
+            var args = arguments == null ? Array.Empty<string>() : arguments.ToArray();
+            if (args.Contains("-paper-release-probe"))
+            {
+                string error = AlbumReleaseProbe.ValidateArguments(args);
+                if (error != null) throw new ArgumentException(error);
+            }
+            if (ShouldUseMemoryOnlyProfile(configuredMemory,args)) return null;
+            var indices = Enumerable.Range(0,args.Length).Where(i => args[i] == "-paper-profile-path").ToArray();
+            if (indices.Length == 0) return null;
+            if (indices.Length != 1 || indices[0]+1 >= args.Length || args[indices[0]+1].StartsWith("-",StringComparison.Ordinal))
+                throw new ArgumentException("An explicit temporary profile needs one unambiguous path.");
+            string candidate = args[indices[0]+1];
+            if (!Path.IsPathRooted(candidate)) throw new ArgumentException("The temporary profile path must be absolute.");
+            string path = Path.GetFullPath(candidate);
+            string prefix = Path.GetFullPath(temporaryRoot).TrimEnd(Path.DirectorySeparatorChar,Path.AltDirectorySeparatorChar)+Path.DirectorySeparatorChar;
+            if (!path.StartsWith(prefix,StringComparison.OrdinalIgnoreCase)) throw new ArgumentException("An explicit acceptance profile must be inside the temporary directory.");
+            return path;
+        }
+
         void Awake()
         {
             // Validate text before opening any profile, including an isolated fixture store.
@@ -47,9 +70,13 @@ namespace PaperDefense.Presentation
             if (worldCamera == null) worldCamera = Camera.main;
             if (worldCamera == null)
             { var go = new GameObject("Notebook Camera"); worldCamera = go.AddComponent<Camera>(); go.tag = "MainCamera"; }
+            var arguments = ArgumentProvider();
+            string temporaryProfilePath = ResolveTemporaryProfilePath(memoryOnlyProfile,arguments,Path.GetTempPath());
             Controller = Child("Application — Run").AddComponent<RunController>(); Controller.balanceAsset = balance;
-            bool isolateProfile=ShouldUseMemoryOnlyProfile(memoryOnlyProfile,ArgumentProvider());
+            bool isolateProfile=ShouldUseMemoryOnlyProfile(memoryOnlyProfile,arguments);
             var selectedStore = ProfileStore ?? ProfileStoreOverride;
+            if (temporaryProfilePath != null) selectedStore = new WorkshopProfileStore(temporaryProfilePath,
+                catalog: Controller.AssemblyCatalog, legacyBalance: balance.CreateWorkshopBalance());
             if(!isolateProfile && selectedStore!=null) Controller.InitializeWorkshop(selectedStore);
             else Controller.InitializeWorkshop(!isolateProfile);
             var background=Child("Paper background camera").AddComponent<Camera>();background.depth=-10;background.cullingMask=0;

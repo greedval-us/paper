@@ -3,7 +3,7 @@
   "layout_contract": {
     "ui_stack": "UGUI",
     "mode": "build",
-    "mockup_source": "docs/design/game-concept-art-2026-10-16/screens/02-map.png",
+    "mockup_source": "ArtSource/Notebook/References/2026-10-16/screens/02-map.png",
     "mockup_resolution": "1672x941",
     "target_resolution": "1600x900",
     "root_owner": "Root",

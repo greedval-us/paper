@@ -1,0 +1,1655 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="152" result="Failed(Child)" total="152" passed="84" failed="68" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 05:31:48Z" end-time="2026-10-18 05:31:52Z" duration="3,5338563">
+  <test-suite type="TestSuite" id="1000" name="paper" fullname="paper" runstate="Runnable" testcasecount="1347" result="Failed" site="Child" start-time="2026-10-18 05:31:48Z" end-time="2026-10-18 05:31:52Z" duration="3.533856" total="152" passed="84" failed="68" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="2391" name="PaperDefense.Core.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Core.Tests.dll" runstate="Runnable" testcasecount="1177" result="Failed" site="Child" start-time="2026-10-18 05:31:48Z" end-time="2026-10-18 05:31:52Z" duration="3.427254" total="152" passed="84" failed="68" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="2392" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="1177" result="Failed" site="Child" start-time="2026-10-18 05:31:48Z" end-time="2026-10-18 05:31:52Z" duration="3.382586" total="152" passed="84" failed="68" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="2393" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="1177" result="Failed" site="Child" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:52Z" duration="3.282356" total="152" passed="84" failed="68" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1259" name="CombatContractTests" fullname="PaperDefense.Tests.CombatContractTests" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" testcasecount="22" result="Failed" site="Child" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.303713" total="22" passed="0" failed="22" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1277" name="BlueprintWeaponNeitherShootsNorAccumulatesIdleTime" fullname="PaperDefense.Tests.CombatContractTests.BlueprintWeaponNeitherShootsNorAccumulatesIdleTime" methodname="BlueprintWeaponNeitherShootsNorAccumulatesIdleTime" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="1267077356" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.007815" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.BlueprintWeaponNeitherShootsNorAccumulatesIdleTime () [0x0003a] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:283
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1275" name="CoolingWeaponStillCountsTimeWithoutAnAvailableTarget" fullname="PaperDefense.Tests.CombatContractTests.CoolingWeaponStillCountsTimeWithoutAnAvailableTarget" methodname="CoolingWeaponStillCountsTimeWithoutAnAvailableTarget" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="833388417" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000425" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.CoolingWeaponStillCountsTimeWithoutAnAvailableTarget () [0x00018] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:255
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1276" name="CoolingWeaponWithLiveTargetDoesNotCountIdleTime" fullname="PaperDefense.Tests.CombatContractTests.CoolingWeaponWithLiveTargetDoesNotCountIdleTime" methodname="CoolingWeaponWithLiveTargetDoesNotCountIdleTime" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="472310314" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000402" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.CoolingWeaponWithLiveTargetDoesNotCountIdleTime () [0x00018] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:268
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1274" name="DamageStatisticsCountOnlyHealthActuallyRemoved" fullname="PaperDefense.Tests.CombatContractTests.DamageStatisticsCountOnlyHealthActuallyRemoved" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.084858" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1270" name="DamageStatisticsCountOnlyHealthActuallyRemoved(Gun)" fullname="PaperDefense.Tests.CombatContractTests.DamageStatisticsCountOnlyHealthActuallyRemoved(Gun)" methodname="DamageStatisticsCountOnlyHealthActuallyRemoved" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="569494122" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000851" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.DamageStatisticsCountOnlyHealthActuallyRemoved (PaperDefense.Core.StructureKind kind) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:230
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1271" name="DamageStatisticsCountOnlyHealthActuallyRemoved(Piercer)" fullname="PaperDefense.Tests.CombatContractTests.DamageStatisticsCountOnlyHealthActuallyRemoved(Piercer)" methodname="DamageStatisticsCountOnlyHealthActuallyRemoved" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="1692062607" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000172" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.DamageStatisticsCountOnlyHealthActuallyRemoved (PaperDefense.Core.StructureKind kind) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:230
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1272" name="DamageStatisticsCountOnlyHealthActuallyRemoved(Spikes)" fullname="PaperDefense.Tests.CombatContractTests.DamageStatisticsCountOnlyHealthActuallyRemoved(Spikes)" methodname="DamageStatisticsCountOnlyHealthActuallyRemoved" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="835483421" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000127" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.DamageStatisticsCountOnlyHealthActuallyRemoved (PaperDefense.Core.StructureKind kind) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:230
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1273" name="DamageStatisticsCountOnlyHealthActuallyRemoved(Mortar)" fullname="PaperDefense.Tests.CombatContractTests.DamageStatisticsCountOnlyHealthActuallyRemoved(Mortar)" methodname="DamageStatisticsCountOnlyHealthActuallyRemoved" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="2050601531" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000127" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.DamageStatisticsCountOnlyHealthActuallyRemoved (PaperDefense.Core.StructureKind kind) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:230
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1281" name="DroppingVisualEventsDoesNotDropMortarDamage" fullname="PaperDefense.Tests.CombatContractTests.DroppingVisualEventsDoesNotDropMortarDamage" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.097660" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1279" name="DroppingVisualEventsDoesNotDropMortarDamage(1)" fullname="PaperDefense.Tests.CombatContractTests.DroppingVisualEventsDoesNotDropMortarDamage(1)" methodname="DroppingVisualEventsDoesNotDropMortarDamage" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="1301572054" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.001111" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.DroppingVisualEventsDoesNotDropMortarDamage (System.Int32 eventCapacity) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:319
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1280" name="DroppingVisualEventsDoesNotDropMortarDamage(512)" fullname="PaperDefense.Tests.CombatContractTests.DroppingVisualEventsDoesNotDropMortarDamage(512)" methodname="DroppingVisualEventsDoesNotDropMortarDamage" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="72037051" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000148" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.DroppingVisualEventsDoesNotDropMortarDamage (System.Int32 eventCapacity) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:319
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="1264" name="ErasingSourceMortarDoesNotCancelShell" fullname="PaperDefense.Tests.CombatContractTests.ErasingSourceMortarDoesNotCancelShell" methodname="ErasingSourceMortarDoesNotCancelShell" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="1417356784" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000291" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.ErasingSourceMortarDoesNotCancelShell () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:112
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1283" name="ExistingShellImpactResolvesBeforeNewWeaponTargetSelection" fullname="PaperDefense.Tests.CombatContractTests.ExistingShellImpactResolvesBeforeNewWeaponTargetSelection" methodname="ExistingShellImpactResolvesBeforeNewWeaponTargetSelection" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="881624866" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000445" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.ExistingShellImpactResolvesBeforeNewWeaponTargetSelection () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:359
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1266" name="FatalHitClampsHealthAtZero" fullname="PaperDefense.Tests.CombatContractTests.FatalHitClampsHealthAtZero" methodname="FatalHitClampsHealthAtZero" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="2093587737" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000306" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.FatalHitClampsHealthAtZero () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:140
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1263" name="HeadlessMortarKillAwardsRewardOnlyAfterImpact" fullname="PaperDefense.Tests.CombatContractTests.HeadlessMortarKillAwardsRewardOnlyAfterImpact" methodname="HeadlessMortarKillAwardsRewardOnlyAfterImpact" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="690206053" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000286" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.HeadlessMortarKillAwardsRewardOnlyAfterImpact () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:94
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1260" name="MortarDoesNotDamageAtLaunch" fullname="PaperDefense.Tests.CombatContractTests.MortarDoesNotDamageAtLaunch" methodname="MortarDoesNotDamageAtLaunch" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="2128337880" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000190" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.MortarDoesNotDamageAtLaunch () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:61
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1267" name="MortarImpactQueriesCurrentPositionsRatherThanLaunchVictims" fullname="PaperDefense.Tests.CombatContractTests.MortarImpactQueriesCurrentPositionsRatherThanLaunchVictims" methodname="MortarImpactQueriesCurrentPositionsRatherThanLaunchVictims" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="1137646094" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000377" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.MortarImpactQueriesCurrentPositionsRatherThanLaunchVictims () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:168
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1262" name="MortarImpactsWithoutAnyPresentation" fullname="PaperDefense.Tests.CombatContractTests.MortarImpactsWithoutAnyPresentation" methodname="MortarImpactsWithoutAnyPresentation" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="1069447037" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000198" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.MortarImpactsWithoutAnyPresentation () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:83
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1278" name="MortarPublishesSeparateLaunchAndImpactEvents" fullname="PaperDefense.Tests.CombatContractTests.MortarPublishesSeparateLaunchAndImpactEvents" methodname="MortarPublishesSeparateLaunchAndImpactEvents" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="1604088032" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.001006" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.MortarPublishesSeparateLaunchAndImpactEvents () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:294
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1269" name="MortarShellSnapshotsDamageAndFlightBeforeSourceChanges" fullname="PaperDefense.Tests.CombatContractTests.MortarShellSnapshotsDamageAndFlightBeforeSourceChanges" methodname="MortarShellSnapshotsDamageAndFlightBeforeSourceChanges" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="900209556" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000407" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.MortarShellSnapshotsDamageAndFlightBeforeSourceChanges () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:203
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1268" name="NewMortarShellKeepsFullFlightTimeOnItsLaunchStep" fullname="PaperDefense.Tests.CombatContractTests.NewMortarShellKeepsFullFlightTimeOnItsLaunchStep" methodname="NewMortarShellKeepsFullFlightTimeOnItsLaunchStep" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="984409008" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000338" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.NewMortarShellKeepsFullFlightTimeOnItsLaunchStep () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:189
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1261" name="RunnerLeavingMortarDestinationBeforeImpactTakesNoDamage" fullname="PaperDefense.Tests.CombatContractTests.RunnerLeavingMortarDestinationBeforeImpactTakesNoDamage" methodname="RunnerLeavingMortarDestinationBeforeImpactTakesNoDamage" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="152627351" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000195" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.RunnerLeavingMortarDestinationBeforeImpactTakesNoDamage () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:70
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1265" name="TwoFatalTowersAwardOneKillAndOneReward" fullname="PaperDefense.Tests.CombatContractTests.TwoFatalTowersAwardOneKillAndOneReward" methodname="TwoFatalTowersAwardOneKillAndOneReward" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="73481281" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000268" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.TwoFatalTowersAwardOneKillAndOneReward () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:124
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1282" name="WaveCompletionWaitsForShellEvenWhenAnotherWeaponKillsItsTarget" fullname="PaperDefense.Tests.CombatContractTests.WaveCompletionWaitsForShellEvenWhenAnotherWeaponKillsItsTarget" methodname="WaveCompletionWaitsForShellEvenWhenAnotherWeaponKillsItsTarget" classname="PaperDefense.Tests.CombatContractTests" runstate="Runnable" seed="219998904" result="Failed" label="Error" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.000248" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.CombatContractTests.Balance () [0x000a6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:27
+  at PaperDefense.Tests.CombatContractTests.WaveCompletionWaitsForShellEvenWhenAnotherWeaponKillsItsTarget () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CombatContractTests.cs:342
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1284" name="CompositeConstructionTests" fullname="PaperDefense.Tests.CompositeConstructionTests" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" testcasecount="41" result="Failed" site="Child" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:50Z" duration="0.801024" total="41" passed="30" failed="11" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1307" name="AColoredBatchDebitsItsStockOnceAndCopiesTheColorToEveryInstance" fullname="PaperDefense.Tests.CompositeConstructionTests.AColoredBatchDebitsItsStockOnceAndCopiesTheColorToEveryInstance" methodname="AColoredBatchDebitsItsStockOnceAndCopiesTheColorToEveryInstance" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="1201917049" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.177113" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1320" name="AnEnemyGlobDestroysACompletedBarricadeClearsItsCellAndRecordsItsRealInvestment" fullname="PaperDefense.Tests.CompositeConstructionTests.AnEnemyGlobDestroysACompletedBarricadeClearsItsCellAndRecordsItsRealInvestment" methodname="AnEnemyGlobDestroysACompletedBarricadeClearsItsCellAndRecordsItsRealInvestment" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="797608219" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.011653" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1292" name="AnEnemyInTheSecondCellRejectsTheWholeBatch" fullname="PaperDefense.Tests.CompositeConstructionTests.AnEnemyInTheSecondCellRejectsTheWholeBatch" methodname="AnEnemyInTheSecondCellRejectsTheWholeBatch" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="978693701" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.006928" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1290" name="AnInvalidCellRejectsTheWholeBatchWithoutChangingInkEntitiesOrStatistics" fullname="PaperDefense.Tests.CompositeConstructionTests.AnInvalidCellRejectsTheWholeBatchWithoutChangingInkEntitiesOrStatistics" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.022687" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1286" name="AnInvalidCellRejectsTheWholeBatchWithoutChangingInkEntitiesOrStatistics(&quot;occupied&quot;)" fullname="PaperDefense.Tests.CompositeConstructionTests.AnInvalidCellRejectsTheWholeBatchWithoutChangingInkEntitiesOrStatistics(&quot;occupied&quot;)" methodname="AnInvalidCellRejectsTheWholeBatchWithoutChangingInkEntitiesOrStatistics" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="1675588784" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.006441" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1287" name="AnInvalidCellRejectsTheWholeBatchWithoutChangingInkEntitiesOrStatistics(&quot;border&quot;)" fullname="PaperDefense.Tests.CompositeConstructionTests.AnInvalidCellRejectsTheWholeBatchWithoutChangingInkEntitiesOrStatistics(&quot;border&quot;)" methodname="AnInvalidCellRejectsTheWholeBatchWithoutChangingInkEntitiesOrStatistics" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="897045042" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.004661" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1288" name="AnInvalidCellRejectsTheWholeBatchWithoutChangingInkEntitiesOrStatistics(&quot;outside&quot;)" fullname="PaperDefense.Tests.CompositeConstructionTests.AnInvalidCellRejectsTheWholeBatchWithoutChangingInkEntitiesOrStatistics(&quot;outside&quot;)" methodname="AnInvalidCellRejectsTheWholeBatchWithoutChangingInkEntitiesOrStatistics" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="1792272512" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.005296" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1289" name="AnInvalidCellRejectsTheWholeBatchWithoutChangingInkEntitiesOrStatistics(&quot;castle&quot;)" fullname="PaperDefense.Tests.CompositeConstructionTests.AnInvalidCellRejectsTheWholeBatchWithoutChangingInkEntitiesOrStatistics(&quot;castle&quot;)" methodname="AnInvalidCellRejectsTheWholeBatchWithoutChangingInkEntitiesOrStatistics" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="672311219" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.004349" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1313" name="CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable" fullname="PaperDefense.Tests.CompositeConstructionTests.CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.111538" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1308" name="CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable(0,True)" fullname="PaperDefense.Tests.CompositeConstructionTests.CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable(0,True)" methodname="CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="77492630" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.010106" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1309" name="CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable(4,True)" fullname="PaperDefense.Tests.CompositeConstructionTests.CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable(4,True)" methodname="CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="475114633" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.005845" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1310" name="CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable(5,False)" fullname="PaperDefense.Tests.CompositeConstructionTests.CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable(5,False)" methodname="CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="468472311" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.005513" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1311" name="CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable(6,True)" fullname="PaperDefense.Tests.CompositeConstructionTests.CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable(6,True)" methodname="CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="935033316" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.006076" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1312" name="CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable(7,True)" fullname="PaperDefense.Tests.CompositeConstructionTests.CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable(7,True)" methodname="CompletedStructuresAffectNavigationWhileTheSlowSupportStaysPassable" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="1213926062" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.005507" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1297" name="ConstructionUsesTheResolvedMaterialCostHealthAndBuildTimeExactlyOnce" fullname="PaperDefense.Tests.CompositeConstructionTests.ConstructionUsesTheResolvedMaterialCostHealthAndBuildTimeExactlyOnce" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.082184" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1294" name="ConstructionUsesTheResolvedMaterialCostHealthAndBuildTimeExactlyOnce(Pencil,40,55.0f,1.4f)" fullname="PaperDefense.Tests.CompositeConstructionTests.ConstructionUsesTheResolvedMaterialCostHealthAndBuildTimeExactlyOnce(Pencil,40,55.0f,1.4f)" methodname="ConstructionUsesTheResolvedMaterialCostHealthAndBuildTimeExactlyOnce" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="907606921" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.006866" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1295" name="ConstructionUsesTheResolvedMaterialCostHealthAndBuildTimeExactlyOnce(Ink,72,115.5f,1.82f)" fullname="PaperDefense.Tests.CompositeConstructionTests.ConstructionUsesTheResolvedMaterialCostHealthAndBuildTimeExactlyOnce(Ink,72,115.5f,1.82f)" methodname="ConstructionUsesTheResolvedMaterialCostHealthAndBuildTimeExactlyOnce" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="1194744380" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.005524" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1296" name="ConstructionUsesTheResolvedMaterialCostHealthAndBuildTimeExactlyOnce(Marker,128,231.0f,2.45f)" fullname="PaperDefense.Tests.CompositeConstructionTests.ConstructionUsesTheResolvedMaterialCostHealthAndBuildTimeExactlyOnce(Marker,128,231.0f,2.45f)" methodname="ConstructionUsesTheResolvedMaterialCostHealthAndBuildTimeExactlyOnce" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="827517614" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:49Z" duration="0.004528" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1299" name="DeepInkBoostsExistingAndNewInstancesOnceWithoutChangingResolvedPriceOrConstructionTime" fullname="PaperDefense.Tests.CompositeConstructionTests.DeepInkBoostsExistingAndNewInstancesOnceWithoutChangingResolvedPriceOrConstructionTime" methodname="DeepInkBoostsExistingAndNewInstancesOnceWithoutChangingResolvedPriceOrConstructionTime" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="655991177" result="Passed" start-time="2026-10-18 05:31:49Z" end-time="2026-10-18 05:31:50Z" duration="0.013342" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1293" name="DuplicateStrokeCellsAreChargedAndBuiltOnlyOnce" fullname="PaperDefense.Tests.CompositeConstructionTests.DuplicateStrokeCellsAreChargedAndBuiltOnlyOnce" methodname="DuplicateStrokeCellsAreChargedAndBuiltOnlyOnce" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="739760007" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.005572" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1285" name="EightStarters_Cost426Ink" fullname="PaperDefense.Tests.CompositeConstructionTests.EightStarters_Cost426Ink" methodname="EightStarters_Cost426Ink" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="839197873" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.040173" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1319" name="ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy" fullname="PaperDefense.Tests.CompositeConstructionTests.ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.058451" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1314" name="ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy(0,16)" fullname="PaperDefense.Tests.CompositeConstructionTests.ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy(0,16)" methodname="ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="2050721874" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.008966" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1315" name="ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy(4,6)" fullname="PaperDefense.Tests.CompositeConstructionTests.ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy(4,6)" methodname="ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="1952324258" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.006684" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1316" name="ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy(5,8)" fullname="PaperDefense.Tests.CompositeConstructionTests.ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy(5,8)" methodname="ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="315417565" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.005520" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1317" name="ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy(6,26)" fullname="PaperDefense.Tests.CompositeConstructionTests.ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy(6,26)" methodname="ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="2068592878" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.007039" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1318" name="ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy(7,0)" fullname="PaperDefense.Tests.CompositeConstructionTests.ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy(7,0)" methodname="ErasingAnInstanceUsesItsPaidCostHealthFractionAndResolvedRefundPolicy" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="1092416987" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.005908" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1330" name="FrontAndGeneralDefenseUseTheirMaximumInsteadOfMultiplyingOrAddingReductions" fullname="PaperDefense.Tests.CompositeConstructionTests.FrontAndGeneralDefenseUseTheirMaximumInsteadOfMultiplyingOrAddingReductions" methodname="FrontAndGeneralDefenseUseTheirMaximumInsteadOfMultiplyingOrAddingReductions" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="2060547333" result="Failed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.010630" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 80 +/- 9.99999975E-05f
+  But was:  100.0f
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.CompositeConstructionTests.FrontAndGeneralDefenseUseTheirMaximumInsteadOfMultiplyingOrAddingReductions () [0x0007f] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CompositeConstructionTests.cs:333
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1329" name="FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims" fullname="PaperDefense.Tests.CompositeConstructionTests.FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" testcasecount="6" result="Failed" site="Child" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.086999" total="6" passed="3" failed="3" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1323" name="FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims(13.5f,10.5f,60.0f)" fullname="PaperDefense.Tests.CompositeConstructionTests.FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims(13.5f,10.5f,60.0f)" methodname="FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="434895958" result="Failed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.006576" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: 60.0f +/- 9.99999975E-05f
+  But was:  100.0f
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.CompositeConstructionTests.FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims (System.Single x, System.Single y, System.Single damage) [0x00098] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CompositeConstructionTests.cs:323
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1324" name="FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims(12.5f,12.5f,60.0f)" fullname="PaperDefense.Tests.CompositeConstructionTests.FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims(12.5f,12.5f,60.0f)" methodname="FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="2001409323" result="Failed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.004992" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: 60.0f +/- 9.99999975E-05f
+  But was:  100.0f
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.CompositeConstructionTests.FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims (System.Single x, System.Single y, System.Single damage) [0x00098] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CompositeConstructionTests.cs:323
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1325" name="FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims(12.5f,8.5f,60.0f)" fullname="PaperDefense.Tests.CompositeConstructionTests.FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims(12.5f,8.5f,60.0f)" methodname="FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="1967943067" result="Failed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.006418" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: 60.0f +/- 9.99999975E-05f
+  But was:  100.0f
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.CompositeConstructionTests.FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims (System.Single x, System.Single y, System.Single damage) [0x00098] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CompositeConstructionTests.cs:323
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1326" name="FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims(12.5f,12.51f,100.0f)" fullname="PaperDefense.Tests.CompositeConstructionTests.FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims(12.5f,12.51f,100.0f)" methodname="FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="1393796664" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.004570" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1327" name="FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims(10.5f,13.5f,100.0f)" fullname="PaperDefense.Tests.CompositeConstructionTests.FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims(10.5f,13.5f,100.0f)" methodname="FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="928788215" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.005190" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1328" name="FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims(7.5f,10.5f,100.0f)" fullname="PaperDefense.Tests.CompositeConstructionTests.FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims(7.5f,10.5f,100.0f)" methodname="FrontShieldUsesTheInclusiveNinetyDegreeFoundationSectorRatherThanMountAims" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="706561349" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.005067" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1305" name="GeneratorMaterialUpgradeIsRejectedBeforeSpendingInkOrChangingItsState" fullname="PaperDefense.Tests.CompositeConstructionTests.GeneratorMaterialUpgradeIsRejectedBeforeSpendingInkOrChangingItsState" methodname="GeneratorMaterialUpgradeIsRejectedBeforeSpendingInkOrChangingItsState" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="371310404" result="Failed" label="Error" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.007335" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Core.TowerCatalog.ToolCost (PaperDefense.Core.GameBalance balance, PaperDefense.Core.StructureKind kind, PaperDefense.Core.MaterialTier tier) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\TowerCatalog.cs:30
+  at PaperDefense.Core.GameSession.BuildCost (PaperDefense.Core.StructureKind kind, PaperDefense.Core.MaterialTier tier) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameSession.cs:605
+  at PaperDefense.Core.GameSession.StructureBuildCost (PaperDefense.Core.StructureState structure, PaperDefense.Core.MaterialTier material) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameSession.Construction.cs:137
+  at PaperDefense.Core.GameSession.TryUpgrade (PaperDefense.Core.Cell cell, System.String& reason) [0x0008a] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameSession.cs:179
+  at PaperDefense.Tests.CompositeConstructionTests.GeneratorMaterialUpgradeIsRejectedBeforeSpendingInkOrChangingItsState () [0x0007b] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CompositeConstructionTests.cs:217
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1306" name="InsufficientColorStockRejectsTheWholeBatchWithoutSpendingOrdinaryInk" fullname="PaperDefense.Tests.CompositeConstructionTests.InsufficientColorStockRejectsTheWholeBatchWithoutSpendingOrdinaryInk" methodname="InsufficientColorStockRejectsTheWholeBatchWithoutSpendingOrdinaryInk" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="864425267" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.006450" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1291" name="InsufficientInkRejectsTheWholeBatchRatherThanBuildingTheAffordablePrefix" fullname="PaperDefense.Tests.CompositeConstructionTests.InsufficientInkRejectsTheWholeBatchRatherThanBuildingTheAffordablePrefix" methodname="InsufficientInkRejectsTheWholeBatchRatherThanBuildingTheAffordablePrefix" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="1751731874" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.006647" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1298" name="MismatchedMaterialRejectsAnAlreadyResolvedEntryAtomically" fullname="PaperDefense.Tests.CompositeConstructionTests.MismatchedMaterialRejectsAnAlreadyResolvedEntryAtomically" methodname="MismatchedMaterialRejectsAnAlreadyResolvedEntryAtomically" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="152667367" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.005188" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1322" name="ResolvedGeneralDefenseIsCappedAtPointSixAndAppliesToOrdinaryAndDirectionalHits" fullname="PaperDefense.Tests.CompositeConstructionTests.ResolvedGeneralDefenseIsCappedAtPointSixAndAppliesToOrdinaryAndDirectionalHits" methodname="ResolvedGeneralDefenseIsCappedAtPointSixAndAppliesToOrdinaryAndDirectionalHits" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="58043319" result="Failed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.003797" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 40 +/- 9.99999975E-05f
+  But was:  100.0f
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.CompositeConstructionTests.ResolvedGeneralDefenseIsCappedAtPointSixAndAppliesToOrdinaryAndDirectionalHits () [0x00099] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CompositeConstructionTests.cs:310
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1331" name="ShootingUpdatesTheMountAimWithoutTurningTheShieldFoundation" fullname="PaperDefense.Tests.CompositeConstructionTests.ShootingUpdatesTheMountAimWithoutTurningTheShieldFoundation" methodname="ShootingUpdatesTheMountAimWithoutTurningTheShieldFoundation" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="2020633467" result="Failed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.010085" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 60 +/- 9.99999975E-05f
+  But was:  100.0f
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.CompositeConstructionTests.ShootingUpdatesTheMountAimWithoutTurningTheShieldFoundation () [0x0014f] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CompositeConstructionTests.cs:349
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1321" name="TheThirdGeneratorIsRejectedIncludingWhenAllThreeAreInOneBatch" fullname="PaperDefense.Tests.CompositeConstructionTests.TheThirdGeneratorIsRejectedIncludingWhenAllThreeAreInOneBatch" methodname="TheThirdGeneratorIsRejectedIncludingWhenAllThreeAreInOneBatch" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="1826375671" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.006200" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1300" name="UpgradingAModernGunChargesOnlyItsResolvedDifferenceAndPublishesANewOwnedSnapshot" fullname="PaperDefense.Tests.CompositeConstructionTests.UpgradingAModernGunChargesOnlyItsResolvedDifferenceAndPublishesANewOwnedSnapshot" methodname="UpgradingAModernGunChargesOnlyItsResolvedDifferenceAndPublishesANewOwnedSnapshot" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="1044100460" result="Failed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.006302" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: Ink
+  But was:  Pencil
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.CompositeConstructionTests.UpgradingAModernGunChargesOnlyItsResolvedDifferenceAndPublishesANewOwnedSnapshot () [0x0016d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CompositeConstructionTests.cs:166
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1301" name="UpgradingARepairSupportUsesThePagePriceAndPreservesItsMaterialIndependentRate" fullname="PaperDefense.Tests.CompositeConstructionTests.UpgradingARepairSupportUsesThePagePriceAndPreservesItsMaterialIndependentRate" methodname="UpgradingARepairSupportUsesThePagePriceAndPreservesItsMaterialIndependentRate" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="550858922" result="Failed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.005074" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 523
+  But was:  511
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.CompositeConstructionTests.UpgradingARepairSupportUsesThePagePriceAndPreservesItsMaterialIndependentRate () [0x00080] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CompositeConstructionTests.cs:180
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1304" name="UpgradingMaterialPreservesTheMountMagazineAndNormalizedIntervalOrReloadProgress" fullname="PaperDefense.Tests.CompositeConstructionTests.UpgradingMaterialPreservesTheMountMagazineAndNormalizedIntervalOrReloadProgress" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.020141" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1302" name="UpgradingMaterialPreservesTheMountMagazineAndNormalizedIntervalOrReloadProgress(False)" fullname="PaperDefense.Tests.CompositeConstructionTests.UpgradingMaterialPreservesTheMountMagazineAndNormalizedIntervalOrReloadProgress(False)" methodname="UpgradingMaterialPreservesTheMountMagazineAndNormalizedIntervalOrReloadProgress" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="1421134908" result="Failed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.007057" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: Ink
+  But was:  Pencil
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.CompositeConstructionTests.UpgradingMaterialPreservesTheMountMagazineAndNormalizedIntervalOrReloadProgress (System.Boolean reloading) [0x000fb] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CompositeConstructionTests.cs:202
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1303" name="UpgradingMaterialPreservesTheMountMagazineAndNormalizedIntervalOrReloadProgress(True)" fullname="PaperDefense.Tests.CompositeConstructionTests.UpgradingMaterialPreservesTheMountMagazineAndNormalizedIntervalOrReloadProgress(True)" methodname="UpgradingMaterialPreservesTheMountMagazineAndNormalizedIntervalOrReloadProgress" classname="PaperDefense.Tests.CompositeConstructionTests" runstate="Runnable" seed="261675501" result="Failed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.006302" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: Ink
+  But was:  Pencil
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.CompositeConstructionTests.UpgradingMaterialPreservesTheMountMagazineAndNormalizedIntervalOrReloadProgress (System.Boolean reloading) [0x000fb] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CompositeConstructionTests.cs:202
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="1332" name="CompositeSupportTests" fullname="PaperDefense.Tests.CompositeSupportTests" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" testcasecount="44" result="Failed" site="Child" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:51Z" duration="1.006949" total="44" passed="43" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1362" name="EachPostChoosesItsOwnNearestTargetFromTheSameHealthSnapshot" fullname="PaperDefense.Tests.CompositeSupportTests.EachPostChoosesItsOwnNearestTargetFromTheSameHealthSnapshot" methodname="EachPostChoosesItsOwnNearestTargetFromTheSameHealthSnapshot" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="597404754" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.017587" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1341" name="EqualRepairDistancesChooseLowerIdRegardlessOfInputOrder" fullname="PaperDefense.Tests.CompositeSupportTests.EqualRepairDistancesChooseLowerIdRegardlessOfInputOrder" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.107944" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1339" name="EqualRepairDistancesChooseLowerIdRegardlessOfInputOrder(False)" fullname="PaperDefense.Tests.CompositeSupportTests.EqualRepairDistancesChooseLowerIdRegardlessOfInputOrder(False)" methodname="EqualRepairDistancesChooseLowerIdRegardlessOfInputOrder" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1168451762" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.013931" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1340" name="EqualRepairDistancesChooseLowerIdRegardlessOfInputOrder(True)" fullname="PaperDefense.Tests.CompositeSupportTests.EqualRepairDistancesChooseLowerIdRegardlessOfInputOrder(True)" methodname="EqualRepairDistancesChooseLowerIdRegardlessOfInputOrder" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1289650063" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.011203" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1354" name="InactiveRepairPostsCannotProduceRates" fullname="PaperDefense.Tests.CompositeSupportTests.InactiveRepairPostsCannotProduceRates" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.097675" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1351" name="InactiveRepairPostsCannotProduceRates(&quot;dead&quot;)" fullname="PaperDefense.Tests.CompositeSupportTests.InactiveRepairPostsCannotProduceRates(&quot;dead&quot;)" methodname="InactiveRepairPostsCannotProduceRates" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="575780152" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.008146" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1352" name="InactiveRepairPostsCannotProduceRates(&quot;incomplete&quot;)" fullname="PaperDefense.Tests.CompositeSupportTests.InactiveRepairPostsCannotProduceRates(&quot;incomplete&quot;)" methodname="InactiveRepairPostsCannotProduceRates" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="50180633" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.007500" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1353" name="InactiveRepairPostsCannotProduceRates(&quot;pending&quot;)" fullname="PaperDefense.Tests.CompositeSupportTests.InactiveRepairPostsCannotProduceRates(&quot;pending&quot;)" methodname="InactiveRepairPostsCannotProduceRates" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1998116793" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.007532" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1374" name="InactiveSlowStructuresCannotProduceEffects" fullname="PaperDefense.Tests.CompositeSupportTests.InactiveSlowStructuresCannotProduceEffects" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.092235" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1371" name="InactiveSlowStructuresCannotProduceEffects(&quot;dead&quot;)" fullname="PaperDefense.Tests.CompositeSupportTests.InactiveSlowStructuresCannotProduceEffects(&quot;dead&quot;)" methodname="InactiveSlowStructuresCannotProduceEffects" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="828933221" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.009187" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1372" name="InactiveSlowStructuresCannotProduceEffects(&quot;incomplete&quot;)" fullname="PaperDefense.Tests.CompositeSupportTests.InactiveSlowStructuresCannotProduceEffects(&quot;incomplete&quot;)" methodname="InactiveSlowStructuresCannotProduceEffects" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1990784334" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.003795" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1373" name="InactiveSlowStructuresCannotProduceEffects(&quot;pending&quot;)" fullname="PaperDefense.Tests.CompositeSupportTests.InactiveSlowStructuresCannotProduceEffects(&quot;pending&quot;)" methodname="InactiveSlowStructuresCannotProduceEffects" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1896570693" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.003594" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1384" name="InvalidRepairTimeOrRateCannotPoisonHealth" fullname="PaperDefense.Tests.CompositeSupportTests.InvalidRepairTimeOrRateCannotPoisonHealth" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.102256" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1380" name="InvalidRepairTimeOrRateCannotPoisonHealth(-1.0f)" fullname="PaperDefense.Tests.CompositeSupportTests.InvalidRepairTimeOrRateCannotPoisonHealth(-1.0f)" methodname="InvalidRepairTimeOrRateCannotPoisonHealth" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="167161322" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.006607" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1381" name="InvalidRepairTimeOrRateCannotPoisonHealth(float.NaN)" fullname="PaperDefense.Tests.CompositeSupportTests.InvalidRepairTimeOrRateCannotPoisonHealth(float.NaN)" methodname="InvalidRepairTimeOrRateCannotPoisonHealth" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="2105508092" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.004381" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1382" name="InvalidRepairTimeOrRateCannotPoisonHealth(float.PositiveInfinity)" fullname="PaperDefense.Tests.CompositeSupportTests.InvalidRepairTimeOrRateCannotPoisonHealth(float.PositiveInfinity)" methodname="InvalidRepairTimeOrRateCannotPoisonHealth" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="517897186" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.004104" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1383" name="InvalidRepairTimeOrRateCannotPoisonHealth(float.NegativeInfinity)" fullname="PaperDefense.Tests.CompositeSupportTests.InvalidRepairTimeOrRateCannotPoisonHealth(float.NegativeInfinity)" methodname="InvalidRepairTimeOrRateCannotPoisonHealth" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1279383895" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.004585" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1355" name="LegacyRepairSourcesStayOutsideTheModernHelper" fullname="PaperDefense.Tests.CompositeSupportTests.LegacyRepairSourcesStayOutsideTheModernHelper" methodname="LegacyRepairSourcesStayOutsideTheModernHelper" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="799699434" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.004646" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1375" name="LegacySlowAndOtherModernFamiliesStayOutsideSlowSelection" fullname="PaperDefense.Tests.CompositeSupportTests.LegacySlowAndOtherModernFamiliesStayOutsideSlowSelection" methodname="LegacySlowAndOtherModernFamiliesStayOutsideSlowSelection" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1237769961" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.004507" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1368" name="MaterialColorAndBoostedSourceHealthDoNotMultiplyRepairRate" fullname="PaperDefense.Tests.CompositeSupportTests.MaterialColorAndBoostedSourceHealthDoNotMultiplyRepairRate" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.096060" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1365" name="MaterialColorAndBoostedSourceHealthDoNotMultiplyRepairRate(Pencil,Red)" fullname="PaperDefense.Tests.CompositeSupportTests.MaterialColorAndBoostedSourceHealthDoNotMultiplyRepairRate(Pencil,Red)" methodname="MaterialColorAndBoostedSourceHealthDoNotMultiplyRepairRate" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1615953670" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.010250" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1366" name="MaterialColorAndBoostedSourceHealthDoNotMultiplyRepairRate(Ink,Blue)" fullname="PaperDefense.Tests.CompositeSupportTests.MaterialColorAndBoostedSourceHealthDoNotMultiplyRepairRate(Ink,Blue)" methodname="MaterialColorAndBoostedSourceHealthDoNotMultiplyRepairRate" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="705846721" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.008069" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1367" name="MaterialColorAndBoostedSourceHealthDoNotMultiplyRepairRate(Marker,Green)" fullname="PaperDefense.Tests.CompositeSupportTests.MaterialColorAndBoostedSourceHealthDoNotMultiplyRepairRate(Marker,Green)" methodname="MaterialColorAndBoostedSourceHealthDoNotMultiplyRepairRate" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1701142455" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.008235" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1379" name="MissingRepairInputsAreRejected" fullname="PaperDefense.Tests.CompositeSupportTests.MissingRepairInputsAreRejected" methodname="MissingRepairInputsAreRejected" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="840671445" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.001149" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1358" name="RepairCanTargetBothLegacyAndModernStructures" fullname="PaperDefense.Tests.CompositeSupportTests.RepairCanTargetBothLegacyAndModernStructures" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.083837" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1356" name="RepairCanTargetBothLegacyAndModernStructures(False)" fullname="PaperDefense.Tests.CompositeSupportTests.RepairCanTargetBothLegacyAndModernStructures(False)" methodname="RepairCanTargetBothLegacyAndModernStructures" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="913290785" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.004880" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1357" name="RepairCanTargetBothLegacyAndModernStructures(True)" fullname="PaperDefense.Tests.CompositeSupportTests.RepairCanTargetBothLegacyAndModernStructures(True)" methodname="RepairCanTargetBothLegacyAndModernStructures" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1208232082" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.007892" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1363" name="RepairClampsAtTheTargetsActualMaximumHealth" fullname="PaperDefense.Tests.CompositeSupportTests.RepairClampsAtTheTargetsActualMaximumHealth" methodname="RepairClampsAtTheTargetsActualMaximumHealth" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="992894393" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.004061" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1342" name="RepairIncludesTheFiveCellBoundaryAndRejectsTargetsBeyondIt" fullname="PaperDefense.Tests.CompositeSupportTests.RepairIncludesTheFiveCellBoundaryAndRejectsTargetsBeyondIt" methodname="RepairIncludesTheFiveCellBoundaryAndRejectsTargetsBeyondIt" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1574579563" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:50Z" duration="0.011369" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1350" name="RepairRejectsIneligibleTargets" fullname="PaperDefense.Tests.CompositeSupportTests.RepairRejectsIneligibleTargets" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-18 05:31:50Z" end-time="2026-10-18 05:31:51Z" duration="0.134261" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1343" name="RepairRejectsIneligibleTargets(&quot;self&quot;)" fullname="PaperDefense.Tests.CompositeSupportTests.RepairRejectsIneligibleTargets(&quot;self&quot;)" methodname="RepairRejectsIneligibleTargets" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="280082836" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.008756" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1344" name="RepairRejectsIneligibleTargets(&quot;modernPost&quot;)" fullname="PaperDefense.Tests.CompositeSupportTests.RepairRejectsIneligibleTargets(&quot;modernPost&quot;)" methodname="RepairRejectsIneligibleTargets" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="140945458" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.010993" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1345" name="RepairRejectsIneligibleTargets(&quot;legacyPost&quot;)" fullname="PaperDefense.Tests.CompositeSupportTests.RepairRejectsIneligibleTargets(&quot;legacyPost&quot;)" methodname="RepairRejectsIneligibleTargets" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1300395120" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.008208" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1346" name="RepairRejectsIneligibleTargets(&quot;dead&quot;)" fullname="PaperDefense.Tests.CompositeSupportTests.RepairRejectsIneligibleTargets(&quot;dead&quot;)" methodname="RepairRejectsIneligibleTargets" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1751585754" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.007923" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1347" name="RepairRejectsIneligibleTargets(&quot;incomplete&quot;)" fullname="PaperDefense.Tests.CompositeSupportTests.RepairRejectsIneligibleTargets(&quot;incomplete&quot;)" methodname="RepairRejectsIneligibleTargets" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="538696181" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.008617" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1348" name="RepairRejectsIneligibleTargets(&quot;pending&quot;)" fullname="PaperDefense.Tests.CompositeSupportTests.RepairRejectsIneligibleTargets(&quot;pending&quot;)" methodname="RepairRejectsIneligibleTargets" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1748692076" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.009110" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1349" name="RepairRejectsIneligibleTargets(&quot;healthy&quot;)" fullname="PaperDefense.Tests.CompositeSupportTests.RepairRejectsIneligibleTargets(&quot;healthy&quot;)" methodname="RepairRejectsIneligibleTargets" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="2012204637" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.008490" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1338" name="RepairSelectsOnlyTheNearestDamagedStructureAtSixHealthPerSecond" fullname="PaperDefense.Tests.CompositeSupportTests.RepairSelectsOnlyTheNearestDamagedStructureAtSixHealthPerSecond" methodname="RepairSelectsOnlyTheNearestDamagedStructureAtSixHealthPerSecond" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="772112285" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.012880" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1377" name="RepeatedSlowDoesNotMultiplyAndTheStrongestRespectsThePointFourFloor" fullname="PaperDefense.Tests.CompositeSupportTests.RepeatedSlowDoesNotMultiplyAndTheStrongestRespectsThePointFourFloor" methodname="RepeatedSlowDoesNotMultiplyAndTheStrongestRespectsThePointFourFloor" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="422938514" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.011243" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1369" name="ReturnedRepairRatesAreOwnedAndReadOnly" fullname="PaperDefense.Tests.CompositeSupportTests.ReturnedRepairRatesAreOwnedAndReadOnly" methodname="ReturnedRepairRatesAreOwnedAndReadOnly" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="102446795" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.008251" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1336" name="SessionInkMaterialAndDeepInkKeepRepairAtSixForAColoredTower" fullname="PaperDefense.Tests.CompositeSupportTests.SessionInkMaterialAndDeepInkKeepRepairAtSixForAColoredTower" methodname="SessionInkMaterialAndDeepInkKeepRepairAtSixForAColoredTower" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1441942029" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.012036" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1335" name="SessionMixedRepairUsesEightPerSecondAndKeepsLegacyCoverageOfOtherTargets" fullname="PaperDefense.Tests.CompositeSupportTests.SessionMixedRepairUsesEightPerSecondAndKeepsLegacyCoverageOfOtherTargets" methodname="SessionMixedRepairUsesEightPerSecondAndKeepsLegacyCoverageOfOtherTargets" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="539067374" result="Failed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.013361" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  8 legacy and 6 modern must aggregate by maximum.
+  Expected: 24 +/- 9.99999975E-05f
+  But was:  27.0000076f
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.CompositeSupportTests.SessionMixedRepairUsesEightPerSecondAndKeepsLegacyCoverageOfOtherTargets () [0x000b0] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\CompositeSupportTests.cs:99
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1333" name="SessionRepairCompletesAndTicksOnlyTheNearestDamagedTarget" fullname="PaperDefense.Tests.CompositeSupportTests.SessionRepairCompletesAndTicksOnlyTheNearestDamagedTarget" methodname="SessionRepairCompletesAndTicksOnlyTheNearestDamagedTarget" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="851911342" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.013901" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1337" name="SessionSlowCompletesAndItsResolvedTailExpiresAfterTheEnemyLeaves" fullname="PaperDefense.Tests.CompositeSupportTests.SessionSlowCompletesAndItsResolvedTailExpiresAfterTheEnemyLeaves" methodname="SessionSlowCompletesAndItsResolvedTailExpiresAfterTheEnemyLeaves" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1559008324" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.013081" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1334" name="SessionTwoModernPostsRepairOneTargetAtSixPerSecond" fullname="PaperDefense.Tests.CompositeSupportTests.SessionTwoModernPostsRepairOneTargetAtSixPerSecond" methodname="SessionTwoModernPostsRepairOneTargetAtSixPerSecond" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="2009796719" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.011866" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1376" name="SlowDurationComesFromTheOwnedSupportSnapshot" fullname="PaperDefense.Tests.CompositeSupportTests.SlowDurationComesFromTheOwnedSupportSnapshot" methodname="SlowDurationComesFromTheOwnedSupportSnapshot" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1585089872" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.002903" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1370" name="SlowHasOneCellRadiusAndCapturesTheResolvedStrengthAndDuration" fullname="PaperDefense.Tests.CompositeSupportTests.SlowHasOneCellRadiusAndCapturesTheResolvedStrengthAndDuration" methodname="SlowHasOneCellRadiusAndCapturesTheResolvedStrengthAndDuration" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1974335168" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.007198" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1378" name="SlowKeepsItsResolvedTailAfterLeavingTheRadiusThenExpires" fullname="PaperDefense.Tests.CompositeSupportTests.SlowKeepsItsResolvedTailAfterLeavingTheRadiusThenExpires" methodname="SlowKeepsItsResolvedTailAfterLeavingTheRadiusThenExpires" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="845454927" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.006188" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1361" name="TwoPostsOnOneTargetUseTheStrongerRateWithoutAdding" fullname="PaperDefense.Tests.CompositeSupportTests.TwoPostsOnOneTargetUseTheStrongerRateWithoutAdding" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.040022" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1359" name="TwoPostsOnOneTargetUseTheStrongerRateWithoutAdding(False)" fullname="PaperDefense.Tests.CompositeSupportTests.TwoPostsOnOneTargetUseTheStrongerRateWithoutAdding(False)" methodname="TwoPostsOnOneTargetUseTheStrongerRateWithoutAdding" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="758901333" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.017647" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1360" name="TwoPostsOnOneTargetUseTheStrongerRateWithoutAdding(True)" fullname="PaperDefense.Tests.CompositeSupportTests.TwoPostsOnOneTargetUseTheStrongerRateWithoutAdding(True)" methodname="TwoPostsOnOneTargetUseTheStrongerRateWithoutAdding" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1413837943" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.021089" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1364" name="ZeroTimeOrZeroRateCannotAddHealth" fullname="PaperDefense.Tests.CompositeSupportTests.ZeroTimeOrZeroRateCannotAddHealth" methodname="ZeroTimeOrZeroRateCannotAddHealth" classname="PaperDefense.Tests.CompositeSupportTests" runstate="Runnable" seed="1929326854" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.007596" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1748" name="GameSessionTests" fullname="PaperDefense.Tests.GameSessionTests" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" testcasecount="33" result="Failed" site="Child" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.355346" total="33" passed="0" failed="33" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1756" name="BlueprintAllowsEntryAndWaitsForOccupantBeforeBecomingWall" fullname="PaperDefense.Tests.GameSessionTests.BlueprintAllowsEntryAndWaitsForOccupantBeforeBecomingWall" methodname="BlueprintAllowsEntryAndWaitsForOccupantBeforeBecomingWall" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1506188480" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001087" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.BlueprintAllowsEntryAndWaitsForOccupantBeforeBecomingWall () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:108
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1764" name="ClosedRingIsLegalAndEnemiesBreachBeforeEntering" fullname="PaperDefense.Tests.GameSessionTests.ClosedRingIsLegalAndEnemiesBreachBeforeEntering" methodname="ClosedRingIsLegalAndEnemiesBreachBeforeEntering" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1106324180" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001592" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.ClosedRingIsLegalAndEnemiesBreachBeforeEntering () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:240
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1770" name="CloserWaitingEnemyCannotReplaceCoolingFrontageOwner" fullname="PaperDefense.Tests.GameSessionTests.CloserWaitingEnemyCannotReplaceCoolingFrontageOwner" methodname="CloserWaitingEnemyCannotReplaceCoolingFrontageOwner" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="818621133" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.000750" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.CloserWaitingEnemyCannotReplaceCoolingFrontageOwner () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:365
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1753" name="CompatibleSegmentsAreSkippedAndAnExistingStrokeIsAFreeNoOp" fullname="PaperDefense.Tests.GameSessionTests.CompatibleSegmentsAreSkippedAndAnExistingStrokeIsAFreeNoOp" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.095330" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1751" name="CompatibleSegmentsAreSkippedAndAnExistingStrokeIsAFreeNoOp(Wall)" fullname="PaperDefense.Tests.GameSessionTests.CompatibleSegmentsAreSkippedAndAnExistingStrokeIsAFreeNoOp(Wall)" methodname="CompatibleSegmentsAreSkippedAndAnExistingStrokeIsAFreeNoOp" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="825562290" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.000859" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.CompatibleSegmentsAreSkippedAndAnExistingStrokeIsAFreeNoOp (PaperDefense.Core.StructureKind kind) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:66
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1752" name="CompatibleSegmentsAreSkippedAndAnExistingStrokeIsAFreeNoOp(Spikes)" fullname="PaperDefense.Tests.GameSessionTests.CompatibleSegmentsAreSkippedAndAnExistingStrokeIsAFreeNoOp(Spikes)" methodname="CompatibleSegmentsAreSkippedAndAnExistingStrokeIsAFreeNoOp" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1515465730" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.000292" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.CompatibleSegmentsAreSkippedAndAnExistingStrokeIsAFreeNoOp (PaperDefense.Core.StructureKind kind) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:66
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="1767" name="CompletingBlueprintInvalidatesEnemyDestination" fullname="PaperDefense.Tests.GameSessionTests.CompletingBlueprintInvalidatesEnemyDestination" methodname="CompletingBlueprintInvalidatesEnemyDestination" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1925250882" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.000658" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.CompletingBlueprintInvalidatesEnemyDestination () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:296
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1768" name="CrowdedBreachHasOnlyThreeFrontlineAttackersDuringCooldown" fullname="PaperDefense.Tests.GameSessionTests.CrowdedBreachHasOnlyThreeFrontlineAttackersDuringCooldown" methodname="CrowdedBreachHasOnlyThreeFrontlineAttackersDuringCooldown" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1420061600" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001726" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.CrowdedBreachHasOnlyThreeFrontlineAttackersDuringCooldown () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:315
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1760" name="DamagedEraseRefundsOnlyRemainingMaterial" fullname="PaperDefense.Tests.GameSessionTests.DamagedEraseRefundsOnlyRemainingMaterial" methodname="DamagedEraseRefundsOnlyRemainingMaterial" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="241778179" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001539" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.DamagedEraseRefundsOnlyRemainingMaterial () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:176
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1772" name="DestroyedDestinationIsReleasedWithoutWaitingForAnotherAttack" fullname="PaperDefense.Tests.GameSessionTests.DestroyedDestinationIsReleasedWithoutWaitingForAnotherAttack" methodname="DestroyedDestinationIsReleasedWithoutWaitingForAnotherAttack" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1305511537" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001391" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.DestroyedDestinationIsReleasedWithoutWaitingForAnotherAttack () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:420
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1757" name="DiscountedUpgradeRefundUsesOnlyActualInvestment" fullname="PaperDefense.Tests.GameSessionTests.DiscountedUpgradeRefundUsesOnlyActualInvestment" methodname="DiscountedUpgradeRefundUsesOnlyActualInvestment" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1834499710" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001902" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.DiscountedUpgradeRefundUsesOnlyActualInvestment () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:132
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1783" name="EarlyLaunchGrantIsBoundedAndCannotBeClaimedTwice" fullname="PaperDefense.Tests.GameSessionTests.EarlyLaunchGrantIsBoundedAndCannotBeClaimedTwice" methodname="EarlyLaunchGrantIsBoundedAndCannotBeClaimedTwice" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="842280126" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001834" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.EarlyLaunchGrantIsBoundedAndCannotBeClaimedTwice () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:535
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1763" name="EnemiesRouteAroundIsolatedWallsWithoutDamagingThem" fullname="PaperDefense.Tests.GameSessionTests.EnemiesRouteAroundIsolatedWallsWithoutDamagingThem" methodname="EnemiesRouteAroundIsolatedWallsWithoutDamagingThem" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="483075167" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.002075" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.EnemiesRouteAroundIsolatedWallsWithoutDamagingThem () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:224
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1754" name="ExecutionRechecksOccupancyAfterAnEarlierValidQuote" fullname="PaperDefense.Tests.GameSessionTests.ExecutionRechecksOccupancyAfterAnEarlierValidQuote" methodname="ExecutionRechecksOccupancyAfterAnEarlierValidQuote" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="146291651" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001996" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.ExecutionRechecksOccupancyAfterAnEarlierValidQuote () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:83
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1775" name="GnawersHaveStrongerBreachDamage" fullname="PaperDefense.Tests.GameSessionTests.GnawersHaveStrongerBreachDamage" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.087120" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1773" name="GnawersHaveStrongerBreachDamage(Doodle,90.0f)" fullname="PaperDefense.Tests.GameSessionTests.GnawersHaveStrongerBreachDamage(Doodle,90.0f)" methodname="GnawersHaveStrongerBreachDamage" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1345078666" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.003428" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.GnawersHaveStrongerBreachDamage (PaperDefense.Core.EnemyKind kind, System.Single remainingHealth) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:438
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1774" name="GnawersHaveStrongerBreachDamage(Gnawer,85.0f)" fullname="PaperDefense.Tests.GameSessionTests.GnawersHaveStrongerBreachDamage(Gnawer,85.0f)" methodname="GnawersHaveStrongerBreachDamage" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1688738540" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001807" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.GnawersHaveStrongerBreachDamage (PaperDefense.Core.EnemyKind kind, System.Single remainingHealth) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:438
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="1766" name="HealthBandsCoalesceNavigationRebuildsWithinOneStep" fullname="PaperDefense.Tests.GameSessionTests.HealthBandsCoalesceNavigationRebuildsWithinOneStep" methodname="HealthBandsCoalesceNavigationRebuildsWithinOneStep" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="442117464" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001412" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.HealthBandsCoalesceNavigationRebuildsWithinOneStep () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:273
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1755" name="IncompatibleTierRejectsWholeStroke" fullname="PaperDefense.Tests.GameSessionTests.IncompatibleTierRejectsWholeStroke" methodname="IncompatibleTierRejectsWholeStroke" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="586371954" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001434" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.IncompatibleTierRejectsWholeStroke () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:96
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1759" name="InsufficientInkDoesNotPartiallyBuildStroke" fullname="PaperDefense.Tests.GameSessionTests.InsufficientInkDoesNotPartiallyBuildStroke" methodname="InsufficientInkDoesNotPartiallyBuildStroke" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="775768208" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001298" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.InsufficientInkDoesNotPartiallyBuildStroke () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:164
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1749" name="InvalidCellRejectsEntireStrokeWithoutSpendingInk" fullname="PaperDefense.Tests.GameSessionTests.InvalidCellRejectsEntireStrokeWithoutSpendingInk" methodname="InvalidCellRejectsEntireStrokeWithoutSpendingInk" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1651259867" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001261" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.InvalidCellRejectsEntireStrokeWithoutSpendingInk () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:44
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1781" name="LastKillCompletesWaveAndFinalWaveWins" fullname="PaperDefense.Tests.GameSessionTests.LastKillCompletesWaveAndFinalWaveWins" methodname="LastKillCompletesWaveAndFinalWaveWins" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="535233630" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001286" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.LastKillCompletesWaveAndFinalWaveWins () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:501
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1761" name="MaterialUpgradeChargesDifferenceAndKeepsDamageFraction" fullname="PaperDefense.Tests.GameSessionTests.MaterialUpgradeChargesDifferenceAndKeepsDamageFraction" methodname="MaterialUpgradeChargesDifferenceAndKeepsDamageFraction" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1648907289" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001241" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.MaterialUpgradeChargesDifferenceAndKeepsDamageFraction () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:189
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1769" name="NearestContendersTakeFrontageAndDeathReleasesTheirPlace" fullname="PaperDefense.Tests.GameSessionTests.NearestContendersTakeFrontageAndDeathReleasesTheirPlace" methodname="NearestContendersTakeFrontageAndDeathReleasesTheirPlace" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1496847390" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001018" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.NearestContendersTakeFrontageAndDeathReleasesTheirPlace () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:336
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1765" name="NewlyDrawnWallRebuildsExistingEnemyRoute" fullname="PaperDefense.Tests.GameSessionTests.NewlyDrawnWallRebuildsExistingEnemyRoute" methodname="NewlyDrawnWallRebuildsExistingEnemyRoute" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1041377619" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.000890" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.NewlyDrawnWallRebuildsExistingEnemyRoute () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:257
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1771" name="QueueOccupancyStaysBoundedAcrossSpawnAndClosedWall" fullname="PaperDefense.Tests.GameSessionTests.QueueOccupancyStaysBoundedAcrossSpawnAndClosedWall" methodname="QueueOccupancyStaysBoundedAcrossSpawnAndClosedWall" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1834764629" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001442" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.QueueOccupancyStaysBoundedAcrossSpawnAndClosedWall () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:395
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1750" name="RepeatedCellsAreChargedAndBuiltOnce" fullname="PaperDefense.Tests.GameSessionTests.RepeatedCellsAreChargedAndBuiltOnce" methodname="RepeatedCellsAreChargedAndBuiltOnce" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="2105784734" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.000966" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.RepeatedCellsAreChargedAndBuiltOnce () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:54
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1784" name="SameSeedAndCommandsProduceIdenticalSimulation" fullname="PaperDefense.Tests.GameSessionTests.SameSeedAndCommandsProduceIdenticalSimulation" methodname="SameSeedAndCommandsProduceIdenticalSimulation" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="712421125" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001122" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.SameSeedAndCommandsProduceIdenticalSimulation () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:546
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1758" name="SpawnBorderAndEnemyOccupiedCellsCannotBeBuiltUpon" fullname="PaperDefense.Tests.GameSessionTests.SpawnBorderAndEnemyOccupiedCellsCannotBeBuiltUpon" methodname="SpawnBorderAndEnemyOccupiedCellsCannotBeBuiltUpon" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="201745047" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.000711" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.SpawnBorderAndEnemyOccupiedCellsCannotBeBuiltUpon () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:153
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1780" name="SpikesDamagePassingEnemiesWithoutBlockingFlow" fullname="PaperDefense.Tests.GameSessionTests.SpikesDamagePassingEnemiesWithoutBlockingFlow" methodname="SpikesDamagePassingEnemiesWithoutBlockingFlow" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="528852464" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.000838" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.SpikesDamagePassingEnemiesWithoutBlockingFlow () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:486
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1782" name="UpgradeChoiceAppearsAfterSecondWaveAndIsConsumedOnce" fullname="PaperDefense.Tests.GameSessionTests.UpgradeChoiceAppearsAfterSecondWaveAndIsConsumedOnce" methodname="UpgradeChoiceAppearsAfterSecondWaveAndIsConsumedOnce" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="957857373" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.000818" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.UpgradeChoiceAppearsAfterSecondWaveAndIsConsumedOnce () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:516
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1779" name="WeaponRolesDamageTheExpectedNumberOfTargets" fullname="PaperDefense.Tests.GameSessionTests.WeaponRolesDamageTheExpectedNumberOfTargets" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.073305" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1776" name="WeaponRolesDamageTheExpectedNumberOfTargets(Gun,1)" fullname="PaperDefense.Tests.GameSessionTests.WeaponRolesDamageTheExpectedNumberOfTargets(Gun,1)" methodname="WeaponRolesDamageTheExpectedNumberOfTargets" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1281042377" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001729" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.WeaponRolesDamageTheExpectedNumberOfTargets (PaperDefense.Core.StructureKind kind, System.Int32 damaged) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:458
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1777" name="WeaponRolesDamageTheExpectedNumberOfTargets(Piercer,3)" fullname="PaperDefense.Tests.GameSessionTests.WeaponRolesDamageTheExpectedNumberOfTargets(Piercer,3)" methodname="WeaponRolesDamageTheExpectedNumberOfTargets" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1255685438" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.000762" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.WeaponRolesDamageTheExpectedNumberOfTargets (PaperDefense.Core.StructureKind kind, System.Int32 damaged) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:458
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1778" name="WeaponRolesDamageTheExpectedNumberOfTargets(Mortar,3)" fullname="PaperDefense.Tests.GameSessionTests.WeaponRolesDamageTheExpectedNumberOfTargets(Mortar,3)" methodname="WeaponRolesDamageTheExpectedNumberOfTargets" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="692825497" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001041" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                  <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.WeaponRolesDamageTheExpectedNumberOfTargets (PaperDefense.Core.StructureKind kind, System.Int32 damaged) [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:458
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="1762" name="ZeroDeltaFreezesConstructionCountdownAndEconomy" fullname="PaperDefense.Tests.GameSessionTests.ZeroDeltaFreezesConstructionCountdownAndEconomy" methodname="ZeroDeltaFreezesConstructionCountdownAndEconomy" classname="PaperDefense.Tests.GameSessionTests" runstate="Runnable" seed="1273389472" result="Failed" label="Error" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.001155" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.ArgumentOutOfRangeException : Specified argument was out of the range of valid values.
+Parameter name: kind]]></message>
+                <stack-trace><![CDATA[  at PaperDefense.Core.GameBalance.Structure (PaperDefense.Core.StructureKind kind) [0x0003c] in D:\Projekt Unity\paper\Assets\PaperDefense\Core\GameTypes.cs:191
+  at PaperDefense.Tests.GameSessionTests.Balance (System.Int32 count) [0x000b1] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:26
+  at PaperDefense.Tests.GameSessionTests.ZeroDeltaFreezesConstructionCountdownAndEconomy () [0x00000] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\GameSessionTests.cs:205
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2245" name="TrialBalanceTests" fullname="PaperDefense.Tests.TrialBalanceTests" classname="PaperDefense.Tests.TrialBalanceTests" runstate="Runnable" testcasecount="12" result="Failed" site="Child" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:52Z" duration="0.716489" total="12" passed="11" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="2247" name="ConfiguredGunPriceIsChargedForEveryTrialCopy" fullname="PaperDefense.Tests.TrialBalanceTests.ConfiguredGunPriceIsChargedForEveryTrialCopy" methodname="ConfiguredGunPriceIsChargedForEveryTrialCopy" classname="PaperDefense.Tests.TrialBalanceTests" runstate="Runnable" seed="1311640768" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.133428" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2253" name="ConfiguredMaterialCostAndHealthReachTheTrialBattery" fullname="PaperDefense.Tests.TrialBalanceTests.ConfiguredMaterialCostAndHealthReachTheTrialBattery" methodname="ConfiguredMaterialCostAndHealthReachTheTrialBattery" classname="PaperDefense.Tests.TrialBalanceTests" runstate="Runnable" seed="1407543145" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.056825" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2254" name="ConfiguredMortarFlightAndRadiusReachRecordedProjectiles" fullname="PaperDefense.Tests.TrialBalanceTests.ConfiguredMortarFlightAndRadiusReachRecordedProjectiles" methodname="ConfiguredMortarFlightAndRadiusReachRecordedProjectiles" classname="PaperDefense.Tests.TrialBalanceTests" runstate="Runnable" seed="731713883" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:51Z" duration="0.031073" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2252" name="ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage" fullname="PaperDefense.Tests.TrialBalanceTests.ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage" classname="PaperDefense.Tests.TrialBalanceTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:52Z" duration="0.141268" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2249" name="ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage(&quot;damage&quot;)" fullname="PaperDefense.Tests.TrialBalanceTests.ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage(&quot;damage&quot;)" methodname="ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage" classname="PaperDefense.Tests.TrialBalanceTests" runstate="Runnable" seed="635795914" result="Passed" start-time="2026-10-18 05:31:51Z" end-time="2026-10-18 05:31:52Z" duration="0.048791" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2250" name="ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage(&quot;range&quot;)" fullname="PaperDefense.Tests.TrialBalanceTests.ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage(&quot;range&quot;)" methodname="ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage" classname="PaperDefense.Tests.TrialBalanceTests" runstate="Runnable" seed="1413334450" result="Passed" start-time="2026-10-18 05:31:52Z" end-time="2026-10-18 05:31:52Z" duration="0.039896" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2251" name="ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage(&quot;material damage&quot;)" fullname="PaperDefense.Tests.TrialBalanceTests.ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage(&quot;material damage&quot;)" methodname="ConfiguredWeaponAndMaterialParametersChangeRealTrialDamage" classname="PaperDefense.Tests.TrialBalanceTests" runstate="Runnable" seed="793035219" result="Passed" start-time="2026-10-18 05:31:52Z" end-time="2026-10-18 05:31:52Z" duration="0.050494" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2248" name="DefaultEqualBudgetComparisonKeepsTheEstablishedCopyCosts" fullname="PaperDefense.Tests.TrialBalanceTests.DefaultEqualBudgetComparisonKeepsTheEstablishedCopyCosts" methodname="DefaultEqualBudgetComparisonKeepsTheEstablishedCopyCosts" classname="PaperDefense.Tests.TrialBalanceTests" runstate="Runnable" seed="463416526" result="Passed" start-time="2026-10-18 05:31:52Z" end-time="2026-10-18 05:31:52Z" duration="0.141888" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2258" name="RunningBothLanesPreservesCallerBalanceIncludingRuleFlags" fullname="PaperDefense.Tests.TrialBalanceTests.RunningBothLanesPreservesCallerBalanceIncludingRuleFlags" classname="PaperDefense.Tests.TrialBalanceTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 05:31:52Z" end-time="2026-10-18 05:31:52Z" duration="0.072467" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2256" name="RunningBothLanesPreservesCallerBalanceIncludingRuleFlags(False)" fullname="PaperDefense.Tests.TrialBalanceTests.RunningBothLanesPreservesCallerBalanceIncludingRuleFlags(False)" methodname="RunningBothLanesPreservesCallerBalanceIncludingRuleFlags" classname="PaperDefense.Tests.TrialBalanceTests" runstate="Runnable" seed="1191119886" result="Passed" start-time="2026-10-18 05:31:52Z" end-time="2026-10-18 05:31:52Z" duration="0.038044" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2257" name="RunningBothLanesPreservesCallerBalanceIncludingRuleFlags(True)" fullname="PaperDefense.Tests.TrialBalanceTests.RunningBothLanesPreservesCallerBalanceIncludingRuleFlags(True)" methodname="RunningBothLanesPreservesCallerBalanceIncludingRuleFlags" classname="PaperDefense.Tests.TrialBalanceTests" runstate="Runnable" seed="2128496907" result="Passed" start-time="2026-10-18 05:31:52Z" end-time="2026-10-18 05:31:52Z" duration="0.033396" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2246" name="SnapshotOwnsEveryDefinitionAndWaveAndPreservesAllScalarTuning" fullname="PaperDefense.Tests.TrialBalanceTests.SnapshotOwnsEveryDefinitionAndWaveAndPreservesAllScalarTuning" methodname="SnapshotOwnsEveryDefinitionAndWaveAndPreservesAllScalarTuning" classname="PaperDefense.Tests.TrialBalanceTests" runstate="Runnable" seed="1944992740" result="Failed" start-time="2026-10-18 05:31:52Z" end-time="2026-10-18 05:31:52Z" duration="0.002225" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 12
+  But was:  11
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.TrialBalanceTests.SnapshotOwnsEveryDefinitionAndWaveAndPreservesAllScalarTuning () [0x00271] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\EditMode\TrialBalanceTests.cs:76
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2255" name="TrialHonorsTheProvidedEnemyMechanicsRuleForArmoredTargets" fullname="PaperDefense.Tests.TrialBalanceTests.TrialHonorsTheProvidedEnemyMechanicsRuleForArmoredTargets" methodname="TrialHonorsTheProvidedEnemyMechanicsRuleForArmoredTargets" classname="PaperDefense.Tests.TrialBalanceTests" runstate="Runnable" seed="546668050" result="Passed" start-time="2026-10-18 05:31:52Z" end-time="2026-10-18 05:31:52Z" duration="0.029252" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2259" name="TrialKeepsItsFiniteFixtureWhenCampaignEnemyAndWaveDataChanges" fullname="PaperDefense.Tests.TrialBalanceTests.TrialKeepsItsFiniteFixtureWhenCampaignEnemyAndWaveDataChanges" methodname="TrialKeepsItsFiniteFixtureWhenCampaignEnemyAndWaveDataChanges" classname="PaperDefense.Tests.TrialBalanceTests" runstate="Runnable" seed="2026272380" result="Passed" start-time="2026-10-18 05:31:52Z" end-time="2026-10-18 05:31:52Z" duration="0.014486" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task7-runtime-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

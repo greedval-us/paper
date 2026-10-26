@@ -118,6 +118,28 @@ namespace PaperDefense.Tests
         }
 
         [Test]
+        public void FramedRecordingFacesRightWithTheEntireRecordedSceneReflectedTogether()
+        {
+            CreateLane(); lane.FrameRecording = true; Show(Crowd(2));
+            Rect rect = lane.rectTransform.rect, bounds = lane.ViewBounds;
+            float scale = Mathf.Max(.1f, Mathf.Min((rect.width - 24) / bounds.width, (rect.height - 24) / bounds.height));
+            var reference = new MeshPen(null) { MinimumLineWidth = 1f / (scale * lane.canvas.scaleFactor) };
+            NotebookTrialRenderer.Draw(reference, lane.Playback, bounds);
+            using (var helper = new VertexHelper())
+            {
+                reference.CopyTo(helper, rect.center - bounds.center * scale, scale);
+                var expected = new List<UIVertex>(); helper.GetUIVertexStream(expected);
+                for (int i = 0; i < expected.Count; i++)
+                {
+                    var vertex = expected[i];
+                    vertex.position.x = rect.center.x * 2 - vertex.position.x;
+                    expected[i] = vertex;
+                }
+                AssertSameTriangles(expected, BoundedTriangles());
+            }
+        }
+
+        [Test]
         public void SmallTrialPreviewRetainsAtLeastOnePixelWideLines()
         {
             CreateLane(); lane.rectTransform.sizeDelta = new Vector2(570, 230);

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="12" result="Passed" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 23:14:46Z" end-time="2026-10-18 23:14:47Z" duration="1,2892366">
+  <test-suite type="TestSuite" id="1957" name="paper" fullname="paper" runstate="Runnable" testcasecount="777" result="Passed" start-time="2026-10-18 23:14:46Z" end-time="2026-10-18 23:14:47Z" duration="1.289237" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1951" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="777" result="Passed" start-time="2026-10-18 23:14:46Z" end-time="2026-10-18 23:14:47Z" duration="1.279058" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39156" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1952" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="777" result="Passed" start-time="2026-10-18 23:14:46Z" end-time="2026-10-18 23:14:47Z" duration="1.275022" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1953" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="777" result="Passed" start-time="2026-10-18 23:14:46Z" end-time="2026-10-18 23:14:47Z" duration="1.271273" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1473" name="ExpandedTrialHudTests" fullname="PaperDefense.Tests.ExpandedTrialHudTests" classname="PaperDefense.Tests.ExpandedTrialHudTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-10-18 23:14:46Z" end-time="2026-10-18 23:14:46Z" duration="0.318057" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1474" name="BlotTrainingIsExplicitAndShowsClearedAndUnresolvedMarks" fullname="PaperDefense.Tests.ExpandedTrialHudTests.BlotTrainingIsExplicitAndShowsClearedAndUnresolvedMarks" methodname="BlotTrainingIsExplicitAndShowsClearedAndUnresolvedMarks" classname="PaperDefense.Tests.ExpandedTrialHudTests" runstate="Runnable" seed="1798104968" result="Passed" start-time="2026-10-18 23:14:46Z" end-time="2026-10-18 23:14:46Z" duration="0.307670" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1806" name="TrialBalanceIntegrationTests" fullname="PaperDefense.Tests.TrialBalanceIntegrationTests" classname="PaperDefense.Tests.TrialBalanceIntegrationTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-18 23:14:46Z" end-time="2026-10-18 23:14:47Z" duration="0.487729" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1814" name="ChangedTrialBalanceStillLeavesProfileRunTickAndCurrencyUntouched" fullname="PaperDefense.Tests.TrialBalanceIntegrationTests.ChangedTrialBalanceStillLeavesProfileRunTickAndCurrencyUntouched" methodname="ChangedTrialBalanceStillLeavesProfileRunTickAndCurrencyUntouched" classname="PaperDefense.Tests.TrialBalanceIntegrationTests" runstate="Runnable" seed="1847149428" result="Passed" start-time="2026-10-18 23:14:46Z" end-time="2026-10-18 23:14:46Z" duration="0.028410" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1807" name="PreviewTrialAndBattleConstructionUseTheSameConfiguredPriceAndMaterialHealth" fullname="PaperDefense.Tests.TrialBalanceIntegrationTests.PreviewTrialAndBattleConstructionUseTheSameConfiguredPriceAndMaterialHealth" methodname="PreviewTrialAndBattleConstructionUseTheSameConfiguredPriceAndMaterialHealth" classname="PaperDefense.Tests.TrialBalanceIntegrationTests" runstate="Runnable" seed="1779217212" result="Passed" start-time="2026-10-18 23:14:46Z" end-time="2026-10-18 23:14:46Z" duration="0.078547" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1811" name="TrialFireUsesConfiguredShotInterval" fullname="PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredShotInterval" methodname="TrialFireUsesConfiguredShotInterval" classname="PaperDefense.Tests.TrialBalanceIntegrationTests" runstate="Runnable" seed="1529478902" result="Passed" start-time="2026-10-18 23:14:46Z" end-time="2026-10-18 23:14:47Z" duration="0.087749" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1810" name="TrialFireUsesConfiguredWeaponDamageAndRange" fullname="PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredWeaponDamageAndRange" classname="PaperDefense.Tests.TrialBalanceIntegrationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-18 23:14:47Z" end-time="2026-10-18 23:14:47Z" duration="0.076321" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1808" name="TrialFireUsesConfiguredWeaponDamageAndRange(&quot;damage&quot;)" fullname="PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredWeaponDamageAndRange(&quot;damage&quot;)" methodname="TrialFireUsesConfiguredWeaponDamageAndRange" classname="PaperDefense.Tests.TrialBalanceIntegrationTests" runstate="Runnable" seed="70169579" result="Passed" start-time="2026-10-18 23:14:47Z" end-time="2026-10-18 23:14:47Z" duration="0.043793" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1809" name="TrialFireUsesConfiguredWeaponDamageAndRange(&quot;range&quot;)" fullname="PaperDefense.Tests.TrialBalanceIntegrationTests.TrialFireUsesConfiguredWeaponDamageAndRange(&quot;range&quot;)" methodname="TrialFireUsesConfiguredWeaponDamageAndRange" classname="PaperDefense.Tests.TrialBalanceIntegrationTests" runstate="Runnable" seed="386751134" result="Passed" start-time="2026-10-18 23:14:47Z" end-time="2026-10-18 23:14:47Z" duration="0.026011" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1813" name="TrialMortarUsesConfiguredRadiusAndFlightDuration" fullname="PaperDefense.Tests.TrialBalanceIntegrationTests.TrialMortarUsesConfiguredRadiusAndFlightDuration" methodname="TrialMortarUsesConfiguredRadiusAndFlightDuration" classname="PaperDefense.Tests.TrialBalanceIntegrationTests" runstate="Runnable" seed="1856068629" result="Passed" start-time="2026-10-18 23:14:47Z" end-time="2026-10-18 23:14:47Z" duration="0.108944" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1812" name="TrialPiercerUsesConfiguredTargetLimit" fullname="PaperDefense.Tests.TrialBalanceIntegrationTests.TrialPiercerUsesConfiguredTargetLimit" methodname="TrialPiercerUsesConfiguredTargetLimit" classname="PaperDefense.Tests.TrialBalanceIntegrationTests" runstate="Runnable" seed="925618210" result="Passed" start-time="2026-10-18 23:14:47Z" end-time="2026-10-18 23:14:47Z" duration="0.099728" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1815" name="TrialLaneBatchingTests" fullname="PaperDefense.Tests.TrialLaneBatchingTests" classname="PaperDefense.Tests.TrialLaneBatchingTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-18 23:14:47Z" end-time="2026-10-18 23:14:47Z" duration="0.463180" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1818" name="BatchesAreReusedAfterSparseEmptyAndDisabledPlayback" fullname="PaperDefense.Tests.TrialLaneBatchingTests.BatchesAreReusedAfterSparseEmptyAndDisabledPlayback" methodname="BatchesAreReusedAfterSparseEmptyAndDisabledPlayback" classname="PaperDefense.Tests.TrialLaneBatchingTests" runstate="Runnable" seed="1154690569" result="Passed" start-time="2026-10-18 23:14:47Z" end-time="2026-10-18 23:14:47Z" duration="0.240272" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1817" name="DetailedCrowdAboveUiVertexLimitRetainsEveryTriangleInDrawOrder" fullname="PaperDefense.Tests.TrialLaneBatchingTests.DetailedCrowdAboveUiVertexLimitRetainsEveryTriangleInDrawOrder" methodname="DetailedCrowdAboveUiVertexLimitRetainsEveryTriangleInDrawOrder" classname="PaperDefense.Tests.TrialLaneBatchingTests" runstate="Runnable" seed="1595429422" result="Passed" start-time="2026-10-18 23:14:47Z" end-time="2026-10-18 23:14:47Z" duration="0.076788" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1819" name="PausedBatchesFollowResizingWithoutCanvasRebuildErrors" fullname="PaperDefense.Tests.TrialLaneBatchingTests.PausedBatchesFollowResizingWithoutCanvasRebuildErrors" methodname="PausedBatchesFollowResizingWithoutCanvasRebuildErrors" classname="PaperDefense.Tests.TrialLaneBatchingTests" runstate="Runnable" seed="1891301292" result="Passed" start-time="2026-10-18 23:14:47Z" end-time="2026-10-18 23:14:47Z" duration="0.136372" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1816" name="SmallTrialPreviewRetainsAtLeastOnePixelWideLines" fullname="PaperDefense.Tests.TrialLaneBatchingTests.SmallTrialPreviewRetainsAtLeastOnePixelWideLines" methodname="SmallTrialPreviewRetainsAtLeastOnePixelWideLines" classname="PaperDefense.Tests.TrialLaneBatchingTests" runstate="Runnable" seed="246524143" result="Passed" start-time="2026-10-18 23:14:47Z" end-time="2026-10-18 23:14:47Z" duration="0.000956" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: D:/Projekt Unity/paper/docs/validation/modular-album/task12-baseline-playmode.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

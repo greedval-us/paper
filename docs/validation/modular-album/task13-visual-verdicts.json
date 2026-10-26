@@ -1,0 +1,772 @@
+{
+  "1": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "2": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "3": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "4": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "5": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "6": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "7": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "8": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "9": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "10": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "11": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "12": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "13": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "14": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "15": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "16": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Ограничение кадра: все 26 живых врагов находятся за focused viewport (показаны четыре направления, counts 2/18/6/0), видны настоящий выстрел и состояние Assault. Читаемость тел и HP врагов именно этим PNG не доказана; она подтверждается свежими кадрами остальных четырёх размеров и mesh-регрессией. Это согласованный Focus/Overview; враги не перемещались ради снимка."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "17": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "18": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "19": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "20": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "21": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "22": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "23": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "24": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "25": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "26": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "27": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "28": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "29": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "30": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "19-upgrades2": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "19-upgrades4": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "19-upgrades6": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "20-statistics": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  },
+  "20-pending": {
+    "1024x768": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x720": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1920x1080": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1280x960": {
+      "status": "PASS",
+      "defect": "Нет."
+    },
+    "1600x900": {
+      "status": "PASS",
+      "defect": "Нет."
+    }
+  }
+}

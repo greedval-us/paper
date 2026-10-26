@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Passed" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 22:01:40Z" end-time="2026-10-18 22:01:40Z" duration="0,1453495">
+  <test-suite type="TestSuite" id="1917" name="paper" fullname="paper" runstate="Runnable" testcasecount="742" result="Passed" start-time="2026-10-18 22:01:40Z" end-time="2026-10-18 22:01:40Z" duration="0.145350" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1911" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="742" result="Passed" start-time="2026-10-18 22:01:40Z" end-time="2026-10-18 22:01:40Z" duration="0.136670" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39156" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1912" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="742" result="Passed" start-time="2026-10-18 22:01:40Z" end-time="2026-10-18 22:01:40Z" duration="0.132593" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1913" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="742" result="Passed" start-time="2026-10-18 22:01:40Z" end-time="2026-10-18 22:01:40Z" duration="0.129231" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1577" name="NotebookCameraReadabilityTests" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-18 22:01:40Z" end-time="2026-10-18 22:01:40Z" duration="0.127384" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1579" name="CameraScaleRefreshesStaticGeometryButPanningDoesNot" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests.CameraScaleRefreshesStaticGeometryButPanningDoesNot" methodname="CameraScaleRefreshesStaticGeometryButPanningDoesNot" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" seed="1850391479" result="Passed" start-time="2026-10-18 22:01:40Z" end-time="2026-10-18 22:01:40Z" duration="0.082663" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1580" name="FractionalScrollAccumulatesAndZoomStopsAtBothLimits" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests.FractionalScrollAccumulatesAndZoomStopsAtBothLimits" methodname="FractionalScrollAccumulatesAndZoomStopsAtBothLimits" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" seed="1168578609" result="Passed" start-time="2026-10-18 22:01:40Z" end-time="2026-10-18 22:01:40Z" duration="0.006659" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1578" name="NormalizedWheelNotchZoomsNoticeablyAndKeepsTheCursorAnchor" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests.NormalizedWheelNotchZoomsNoticeablyAndKeepsTheCursorAnchor" methodname="NormalizedWheelNotchZoomsNoticeablyAndKeepsTheCursorAnchor" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" seed="1794133673" result="Passed" start-time="2026-10-18 22:01:40Z" end-time="2026-10-18 22:01:40Z" duration="0.004157" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1583" name="OverviewHidesFineGridAndCloseZoomRestoresIt" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests.OverviewHidesFineGridAndCloseZoomRestoresIt" methodname="OverviewHidesFineGridAndCloseZoomRestoresIt" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" seed="1237894371" result="Passed" start-time="2026-10-18 22:01:40Z" end-time="2026-10-18 22:01:40Z" duration="0.005068" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1581" name="PlatformRangesNormalizeOnlyLegacyWindowsInput" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests.PlatformRangesNormalizeOnlyLegacyWindowsInput" methodname="PlatformRangesNormalizeOnlyLegacyWindowsInput" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" seed="430853862" result="Passed" start-time="2026-10-18 22:01:40Z" end-time="2026-10-18 22:01:40Z" duration="0.003297" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1584" name="ResourceAndAuthoredStrokesKeepScreenWidthWithoutChangingSourceGeometry" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests.ResourceAndAuthoredStrokesKeepScreenWidthWithoutChangingSourceGeometry" methodname="ResourceAndAuthoredStrokesKeepScreenWidthWithoutChangingSourceGeometry" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" seed="1309031251" result="Passed" start-time="2026-10-18 22:01:40Z" end-time="2026-10-18 22:01:40Z" duration="0.010831" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1582" name="ScrollOutsideTheMapDoesNotZoomAndFocusClampsToMapEdges" fullname="PaperDefense.Tests.NotebookCameraReadabilityTests.ScrollOutsideTheMapDoesNotZoomAndFocusClampsToMapEdges" methodname="ScrollOutsideTheMapDoesNotZoomAndFocusClampsToMapEdges" classname="PaperDefense.Tests.NotebookCameraReadabilityTests" runstate="Runnable" seed="1828506242" result="Passed" start-time="2026-10-18 22:01:40Z" end-time="2026-10-18 22:01:40Z" duration="0.003815" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task10-camera-isolation.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

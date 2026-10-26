@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="29" result="Failed(Child)" total="29" passed="3" failed="26" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-18 22:26:37Z" end-time="2026-10-18 22:26:46Z" duration="8,7764126">
+  <test-suite type="TestSuite" id="3663" name="paper" fullname="paper" runstate="Runnable" testcasecount="771" result="Failed" site="Child" start-time="2026-10-18 22:26:37Z" end-time="2026-10-18 22:26:46Z" duration="8.776413" total="29" passed="3" failed="26" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="3657" name="PaperDefense.Integration.Tests.dll" fullname="D:/Projekt Unity/paper/Library/ScriptAssemblies/PaperDefense.Integration.Tests.dll" runstate="Runnable" testcasecount="771" result="Failed" site="Child" start-time="2026-10-18 22:26:37Z" end-time="2026-10-18 22:26:46Z" duration="8.771337" total="29" passed="3" failed="26" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39156" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="3658" name="PaperDefense" fullname="PaperDefense" runstate="Runnable" testcasecount="771" result="Failed" site="Child" start-time="2026-10-18 22:26:37Z" end-time="2026-10-18 22:26:46Z" duration="8.767391" total="29" passed="3" failed="26" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="3659" name="Tests" fullname="PaperDefense.Tests" runstate="Runnable" testcasecount="771" result="Failed" site="Child" start-time="2026-10-18 22:26:37Z" end-time="2026-10-18 22:26:46Z" duration="8.763439" total="29" passed="3" failed="26" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="2714" name="AlbumBattleHudTests" fullname="PaperDefense.Tests.AlbumBattleHudTests" classname="PaperDefense.Tests.AlbumBattleHudTests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-10-18 22:26:37Z" end-time="2026-10-18 22:26:39Z" duration="1.234092" total="7" passed="0" failed="7" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="2715" name="EightCardsRemainVisibleWithoutHorizontalScrollAtEveryRequiredSize" fullname="PaperDefense.Tests.AlbumBattleHudTests.EightCardsRemainVisibleWithoutHorizontalScrollAtEveryRequiredSize" methodname="EightCardsRemainVisibleWithoutHorizontalScrollAtEveryRequiredSize" classname="PaperDefense.Tests.AlbumBattleHudTests" runstate="Runnable" seed="1136917812" result="Failed" start-time="2026-10-18 22:26:37Z" end-time="2026-10-18 22:26:38Z" duration="0.375862" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  (1024, 768)
+  Expected: 8
+  But was:  12
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AlbumBattleHudTests+<EightCardsRemainVisibleWithoutHorizontalScrollAtEveryRequiredSize>d__16.MoveNext () [0x000ea] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumBattleHudTests.cs:74
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2717" name="EmptyPositionsStayDisabledAndDoNotShiftTheFollowingCards" fullname="PaperDefense.Tests.AlbumBattleHudTests.EmptyPositionsStayDisabledAndDoNotShiftTheFollowingCards" methodname="EmptyPositionsStayDisabledAndDoNotShiftTheFollowingCards" classname="PaperDefense.Tests.AlbumBattleHudTests" runstate="Runnable" seed="1107785667" result="Failed" label="Error" start-time="2026-10-18 22:26:38Z" end-time="2026-10-18 22:26:38Z" duration="0.137711" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.InvalidOperationException : Sequence contains no matching element]]></message>
+                <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <fe644d7ad1cf499ebe4e7ad937bc03bf>:0
+  at PaperDefense.Tests.AlbumBattleHudTests.Copy (System.String name) [0x0000d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumBattleHudTests.cs:29
+  at PaperDefense.Tests.AlbumBattleHudTests+<EmptyPositionsStayDisabledAndDoNotShiftTheFollowingCards>d__18.MoveNext () [0x0008d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumBattleHudTests.cs:112
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2716" name="EveryCardUsesTheFrozenNameAndSelectsItsOwnSlot" fullname="PaperDefense.Tests.AlbumBattleHudTests.EveryCardUsesTheFrozenNameAndSelectsItsOwnSlot" methodname="EveryCardUsesTheFrozenNameAndSelectsItsOwnSlot" classname="PaperDefense.Tests.AlbumBattleHudTests" runstate="Runnable" seed="822253205" result="Failed" label="Error" start-time="2026-10-18 22:26:38Z" end-time="2026-10-18 22:26:38Z" duration="0.126790" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.InvalidOperationException : Sequence contains no matching element]]></message>
+                <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <fe644d7ad1cf499ebe4e7ad937bc03bf>:0
+  at PaperDefense.Tests.AlbumBattleHudTests.Copy (System.String name) [0x0000d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumBattleHudTests.cs:29
+  at PaperDefense.Tests.AlbumBattleHudTests+<EveryCardUsesTheFrozenNameAndSelectsItsOwnSlot>d__17.MoveNext () [0x0002e] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumBattleHudTests.cs:99
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2720" name="GeneratorInspectorShowsIncomeFullWaveRulePencilAndZeroRefund" fullname="PaperDefense.Tests.AlbumBattleHudTests.GeneratorInspectorShowsIncomeFullWaveRulePencilAndZeroRefund" methodname="GeneratorInspectorShowsIncomeFullWaveRulePencilAndZeroRefund" classname="PaperDefense.Tests.AlbumBattleHudTests" runstate="Runnable" seed="2000276858" result="Failed" label="Error" start-time="2026-10-18 22:26:38Z" end-time="2026-10-18 22:26:38Z" duration="0.154048" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.InvalidOperationException : Sequence contains no matching element]]></message>
+                <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <fe644d7ad1cf499ebe4e7ad937bc03bf>:0
+  at PaperDefense.Tests.AlbumBattleHudTests.Copy (System.String name) [0x0000d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumBattleHudTests.cs:29
+  at PaperDefense.Tests.AlbumBattleHudTests+<GeneratorInspectorShowsIncomeFullWaveRulePencilAndZeroRefund>d__21.MoveNext () [0x00094] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumBattleHudTests.cs:167
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2718" name="MaterialPricesComeFromEntryQuotesAndGeneratorSelectionUsesPencilOnly" fullname="PaperDefense.Tests.AlbumBattleHudTests.MaterialPricesComeFromEntryQuotesAndGeneratorSelectionUsesPencilOnly" methodname="MaterialPricesComeFromEntryQuotesAndGeneratorSelectionUsesPencilOnly" classname="PaperDefense.Tests.AlbumBattleHudTests" runstate="Runnable" seed="2035869411" result="Failed" label="Error" start-time="2026-10-18 22:26:38Z" end-time="2026-10-18 22:26:38Z" duration="0.178611" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.InvalidOperationException : Sequence contains no matching element]]></message>
+                <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <fe644d7ad1cf499ebe4e7ad937bc03bf>:0
+  at PaperDefense.Tests.AlbumBattleHudTests.Copy (System.String name) [0x0000d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumBattleHudTests.cs:29
+  at PaperDefense.Tests.AlbumBattleHudTests+<MaterialPricesComeFromEntryQuotesAndGeneratorSelectionUsesPencilOnly>d__19.MoveNext () [0x00170] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumBattleHudTests.cs:137
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2721" name="RepairInspectorExplainsOneTargetAndResolvedHealthPerSecond" fullname="PaperDefense.Tests.AlbumBattleHudTests.RepairInspectorExplainsOneTargetAndResolvedHealthPerSecond" methodname="RepairInspectorExplainsOneTargetAndResolvedHealthPerSecond" classname="PaperDefense.Tests.AlbumBattleHudTests" runstate="Runnable" seed="1465727423" result="Failed" label="Error" start-time="2026-10-18 22:26:38Z" end-time="2026-10-18 22:26:39Z" duration="0.126527" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.InvalidOperationException : Sequence contains no matching element]]></message>
+                <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <fe644d7ad1cf499ebe4e7ad937bc03bf>:0
+  at PaperDefense.Tests.AlbumBattleHudTests.Copy (System.String name) [0x0000d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumBattleHudTests.cs:29
+  at PaperDefense.Tests.AlbumBattleHudTests+<RepairInspectorExplainsOneTargetAndResolvedHealthPerSecond>d__22.MoveNext () [0x00099] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumBattleHudTests.cs:180
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2719" name="WeaponInspectorUsesResolvedMagazineAndTheLiveMountCycle" fullname="PaperDefense.Tests.AlbumBattleHudTests.WeaponInspectorUsesResolvedMagazineAndTheLiveMountCycle" methodname="WeaponInspectorUsesResolvedMagazineAndTheLiveMountCycle" classname="PaperDefense.Tests.AlbumBattleHudTests" runstate="Runnable" seed="1593913168" result="Failed" label="Error" start-time="2026-10-18 22:26:39Z" end-time="2026-10-18 22:26:39Z" duration="0.130654" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.InvalidOperationException : Sequence contains no matching element]]></message>
+                <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <fe644d7ad1cf499ebe4e7ad937bc03bf>:0
+  at PaperDefense.Tests.AlbumBattleHudTests.Copy (System.String name) [0x0000d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumBattleHudTests.cs:29
+  at PaperDefense.Tests.AlbumBattleHudTests+<WeaponInspectorUsesResolvedMagazineAndTheLiveMountCycle>d__20.MoveNext () [0x00145] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumBattleHudTests.cs:157
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44 ]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2735" name="AlbumPlayerJourneyTests" fullname="PaperDefense.Tests.AlbumPlayerJourneyTests" classname="PaperDefense.Tests.AlbumPlayerJourneyTests" runstate="Runnable" testcasecount="9" result="Failed" site="Child" start-time="2026-10-18 22:26:39Z" end-time="2026-10-18 22:26:42Z" duration="3.418550" total="9" passed="0" failed="9" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="2738" name="CancelledExitKeepsTheSameAttemptAndRestoresPauseKeyboardFocus" fullname="PaperDefense.Tests.AlbumPlayerJourneyTests.CancelledExitKeepsTheSameAttemptAndRestoresPauseKeyboardFocus" methodname="CancelledExitKeepsTheSameAttemptAndRestoresPauseKeyboardFocus" classname="PaperDefense.Tests.AlbumPlayerJourneyTests" runstate="Runnable" seed="1845164039" result="Failed" start-time="2026-10-18 22:26:39Z" end-time="2026-10-18 22:26:39Z" duration="0.512690" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: String containing "завершённые волны"
+  But was:  "Завершить эту попытку? Продолжить этот бой позже нельзя. Сохранённые чертежи и золото останутся в профиле. Остаться Продолжить"
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AlbumPlayerJourneyTests+<CancelledExitKeepsTheSameAttemptAndRestoresPauseKeyboardFocus>d__15.MoveNext () [0x0012f] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumPlayerJourneyTests.cs:116
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2739" name="ConfirmedExitDuringSixthRetainsFiveWaveReceiptAndTheEightAssignedPages" fullname="PaperDefense.Tests.AlbumPlayerJourneyTests.ConfirmedExitDuringSixthRetainsFiveWaveReceiptAndTheEightAssignedPages" methodname="ConfirmedExitDuringSixthRetainsFiveWaveReceiptAndTheEightAssignedPages" classname="PaperDefense.Tests.AlbumPlayerJourneyTests" runstate="Runnable" seed="1587745478" result="Failed" start-time="2026-10-18 22:26:39Z" end-time="2026-10-18 22:26:40Z" duration="0.441101" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[Unhandled log message: '[Exception] MissingReferenceException: The object of type 'PaperDefense.Presentation.PlayerNotebookButton' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                <stack-trace><![CDATA[UnityEngine.Object+MarshalledUnityObject.TryThrowEditorNullExceptionObject (UnityEngine.Object unityObj, System.String parameterName) (at <5ecefda573de420b8643923ab4ab8ab5>:0)
+UnityEngine.Bindings.ThrowHelper.ThrowNullReferenceException (System.Object obj) (at <5ecefda573de420b8643923ab4ab8ab5>:0)
+UnityEngine.Behaviour.get_isActiveAndEnabled () (at <5ecefda573de420b8643923ab4ab8ab5>:0)
+UnityEngine.EventSystems.UIBehaviour.IsActive () (at ./Library/PackageCache/com.unity.ugui@67707a67a4ab/Runtime/UGUI/EventSystem/UIBehaviour.cs:28)
+UnityEngine.UI.Button.OnSubmit (UnityEngine.EventSystems.BaseEventData eventData) (at ./Library/PackageCache/com.unity.ugui@67707a67a4ab/Runtime/UGUI/UI/Core/Button.cs:155)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISubmitHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at ./Library/PackageCache/com.unity.ugui@67707a67a4ab/Runtime/UGUI/EventSystem/ExecuteEvents.cs:134)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at ./Library/PackageCache/com.unity.ugui@67707a67a4ab/Runtime/UGUI/EventSystem/ExecuteEvents.cs:272)
+UnityEngine.EventSystems.ExecuteEvents:Execute(GameObject, BaseEventData, EventFunction`1)
+PaperDefense.Tests.AlbumPlayerJourneyTests:Submit(String) (at Assets/PaperDefense/Tests/PlayMode/AlbumPlayerJourneyTests.cs:47)
+PaperDefense.Tests.<ConfirmedExitDuringSixthRetainsFiveWaveReceiptAndTheEightAssignedPages>d__16:MoveNext() (at Assets/PaperDefense/Tests/PlayMode/AlbumPlayerJourneyTests.cs:128)
+UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[MissingReferenceException: The object of type 'PaperDefense.Presentation.PlayerNotebookButton' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+UnityEngine.Object+MarshalledUnityObject.TryThrowEditorNullExceptionObject (UnityEngine.Object unityObj, System.String parameterName) (at <5ecefda573de420b8643923ab4ab8ab5>:0)
+UnityEngine.Bindings.ThrowHelper.ThrowNullReferenceException (System.Object obj) (at <5ecefda573de420b8643923ab4ab8ab5>:0)
+UnityEngine.Behaviour.get_isActiveAndEnabled () (at <5ecefda573de420b8643923ab4ab8ab5>:0)
+UnityEngine.EventSystems.UIBehaviour.IsActive () (at ./Library/PackageCache/com.unity.ugui@67707a67a4ab/Runtime/UGUI/EventSystem/UIBehaviour.cs:28)
+UnityEngine.UI.Button.OnSubmit (UnityEngine.EventSystems.BaseEventData eventData) (at ./Library/PackageCache/com.unity.ugui@67707a67a4ab/Runtime/UGUI/UI/Core/Button.cs:155)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISubmitHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at ./Library/PackageCache/com.unity.ugui@67707a67a4ab/Runtime/UGUI/EventSystem/ExecuteEvents.cs:134)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at ./Library/PackageCache/com.unity.ugui@67707a67a4ab/Runtime/UGUI/EventSystem/ExecuteEvents.cs:272)
+UnityEngine.EventSystems.ExecuteEvents:Execute(GameObject, BaseEventData, EventFunction`1)
+PaperDefense.Tests.AlbumPlayerJourneyTests:Submit(String) (at Assets/PaperDefense/Tests/PlayMode/AlbumPlayerJourneyTests.cs:47)
+PaperDefense.Tests.<ConfirmedExitDuringSixthRetainsFiveWaveReceiptAndTheEightAssignedPages>d__16:MoveNext() (at Assets/PaperDefense/Tests/PlayMode/AlbumPlayerJourneyTests.cs:128)
+UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+
+]]></output>
+            </test-case>
+            <test-case id="2737" name="DefeatInSixthShowsOnlyFiveCompletedWaveRewardsAndReturnsToTheAlbum" fullname="PaperDefense.Tests.AlbumPlayerJourneyTests.DefeatInSixthShowsOnlyFiveCompletedWaveRewardsAndReturnsToTheAlbum" methodname="DefeatInSixthShowsOnlyFiveCompletedWaveRewardsAndReturnsToTheAlbum" classname="PaperDefense.Tests.AlbumPlayerJourneyTests" runstate="Runnable" seed="1853496744" result="Failed" label="Error" start-time="2026-10-18 22:26:40Z" end-time="2026-10-18 22:26:40Z" duration="0.497833" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.InvalidOperationException : Sequence contains no matching element]]></message>
+                <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <fe644d7ad1cf499ebe4e7ad937bc03bf>:0
+  at PaperDefense.Tests.AlbumPlayerJourneyTests.Text (System.String name) [0x0000d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumPlayerJourneyTests.cs:42
+  at PaperDefense.Tests.AlbumPlayerJourneyTests+<DefeatInSixthShowsOnlyFiveCompletedWaveRewardsAndReturnsToTheAlbum>d__14.MoveNext () [0x000c7] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumPlayerJourneyTests.cs:100
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2741" name="ModernHelpDescribesComponentsEightSlotsAndSeparateActions" fullname="PaperDefense.Tests.AlbumPlayerJourneyTests.ModernHelpDescribesComponentsEightSlotsAndSeparateActions" methodname="ModernHelpDescribesComponentsEightSlotsAndSeparateActions" classname="PaperDefense.Tests.AlbumPlayerJourneyTests" runstate="Runnable" seed="228545864" result="Failed" start-time="2026-10-18 22:26:40Z" end-time="2026-10-18 22:26:40Z" duration="0.193808" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: String containing "компонент" and containing "8" and containing "1–8" and containing "Q" and containing "C" and containing "E"
+  But was:  "Как держать линию 01  Собери свою башню Основа → Оружие → Проверить. Выбери готовые детали, проверь нагрузку и доступность. Испытай башню на полигоне и сохрани чертёж. Рисовать конструкцию не требуется. 02  Подготовь оборону Назначь четыре чертежа в набор. Выбери материал, размести башни и препятствия. Нельзя перекрывать все пути к замку. Цветные чернила и обычные штрихи — разные ресурсы. 03  Следи за боем Запускай волны, используй ремонт, улучшение, окраску и промокашку. Колодцы дают цветные чернила, но нуждаются в защите. Усиление действует до конца попытки. Esc / Пробел — пауза     N — следующая волна     F — скорость Вернуться "
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.AlbumPlayerJourneyTests+<ModernHelpDescribesComponentsEightSlotsAndSeparateActions>d__18.MoveNext () [0x0007a] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumPlayerJourneyTests.cs:162
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2736" name="NewProfileCompletesTheAlbumPlayerJourneyAndReloadsOneVictoryReceipt" fullname="PaperDefense.Tests.AlbumPlayerJourneyTests.NewProfileCompletesTheAlbumPlayerJourneyAndReloadsOneVictoryReceipt" methodname="NewProfileCompletesTheAlbumPlayerJourneyAndReloadsOneVictoryReceipt" classname="PaperDefense.Tests.AlbumPlayerJourneyTests" runstate="Runnable" seed="1794805933" result="Failed" label="Error" start-time="2026-10-18 22:26:40Z" end-time="2026-10-18 22:26:41Z" duration="0.823502" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.InvalidOperationException : Sequence contains no matching element]]></message>
+                <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <fe644d7ad1cf499ebe4e7ad937bc03bf>:0
+  at PaperDefense.Tests.AlbumPlayerJourneyTests.Text (System.String name) [0x0000d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumPlayerJourneyTests.cs:42
+  at PaperDefense.Tests.AlbumPlayerJourneyTests+<NewProfileCompletesTheAlbumPlayerJourneyAndReloadsOneVictoryReceipt>d__13.MoveNext () [0x002ad] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumPlayerJourneyTests.cs:85
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2745" name="PauseAndUpgradesKeepTheirActionsVisibleAndKeyboardFocusInsideTheSheet" fullname="PaperDefense.Tests.AlbumPlayerJourneyTests.PauseAndUpgradesKeepTheirActionsVisibleAndKeyboardFocusInsideTheSheet" classname="PaperDefense.Tests.AlbumPlayerJourneyTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-10-18 22:26:41Z" end-time="2026-10-18 22:26:42Z" duration="0.558457" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="2742" name="PauseAndUpgradesKeepTheirActionsVisibleAndKeyboardFocusInsideTheSheet(1024,768)" fullname="PaperDefense.Tests.AlbumPlayerJourneyTests.PauseAndUpgradesKeepTheirActionsVisibleAndKeyboardFocusInsideTheSheet(1024,768)" methodname="PauseAndUpgradesKeepTheirActionsVisibleAndKeyboardFocusInsideTheSheet" classname="PaperDefense.Tests.AlbumPlayerJourneyTests" runstate="Runnable" seed="1454149940" result="Failed" start-time="2026-10-18 22:26:41Z" end-time="2026-10-18 22:26:41Z" duration="0.166033" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <Resume (UnityEngine.GameObject)>
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AlbumPlayerJourneyTests.PauseAndUpgradesKeepTheirActionsVisibleAndKeyboardFocusInsideTheSheet (System.Int32 width, System.Int32 height) [0x0007e] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumPlayerJourneyTests.cs:175
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="2743" name="PauseAndUpgradesKeepTheirActionsVisibleAndKeyboardFocusInsideTheSheet(1280,720)" fullname="PaperDefense.Tests.AlbumPlayerJourneyTests.PauseAndUpgradesKeepTheirActionsVisibleAndKeyboardFocusInsideTheSheet(1280,720)" methodname="PauseAndUpgradesKeepTheirActionsVisibleAndKeyboardFocusInsideTheSheet" classname="PaperDefense.Tests.AlbumPlayerJourneyTests" runstate="Runnable" seed="937107036" result="Failed" start-time="2026-10-18 22:26:41Z" end-time="2026-10-18 22:26:42Z" duration="0.219073" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <Resume (UnityEngine.GameObject)>
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AlbumPlayerJourneyTests.PauseAndUpgradesKeepTheirActionsVisibleAndKeyboardFocusInsideTheSheet (System.Int32 width, System.Int32 height) [0x0007e] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumPlayerJourneyTests.cs:175
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="2744" name="PauseAndUpgradesKeepTheirActionsVisibleAndKeyboardFocusInsideTheSheet(1920,1080)" fullname="PaperDefense.Tests.AlbumPlayerJourneyTests.PauseAndUpgradesKeepTheirActionsVisibleAndKeyboardFocusInsideTheSheet(1920,1080)" methodname="PauseAndUpgradesKeepTheirActionsVisibleAndKeyboardFocusInsideTheSheet" classname="PaperDefense.Tests.AlbumPlayerJourneyTests" runstate="Runnable" seed="1949326819" result="Failed" start-time="2026-10-18 22:26:42Z" end-time="2026-10-18 22:26:42Z" duration="0.160035" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: <Resume (UnityEngine.GameObject)>
+  But was:  null
+]]></message>
+                  <stack-trace><![CDATA[at PaperDefense.Tests.AlbumPlayerJourneyTests.PauseAndUpgradesKeepTheirActionsVisibleAndKeyboardFocusInsideTheSheet (System.Int32 width, System.Int32 height) [0x0007e] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumPlayerJourneyTests.cs:175
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="2740" name="PendingResultCanRetrySavingWithoutDuplicatingRewardsOrRebuildingTheAttempt" fullname="PaperDefense.Tests.AlbumPlayerJourneyTests.PendingResultCanRetrySavingWithoutDuplicatingRewardsOrRebuildingTheAttempt" methodname="PendingResultCanRetrySavingWithoutDuplicatingRewardsOrRebuildingTheAttempt" classname="PaperDefense.Tests.AlbumPlayerJourneyTests" runstate="Runnable" seed="624720115" result="Failed" label="Error" start-time="2026-10-18 22:26:42Z" end-time="2026-10-18 22:26:42Z" duration="0.373449" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.InvalidOperationException : Sequence contains no matching element]]></message>
+                <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <fe644d7ad1cf499ebe4e7ad937bc03bf>:0
+  at PaperDefense.Tests.AlbumPlayerJourneyTests.Text (System.String name) [0x0000d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumPlayerJourneyTests.cs:42
+  at PaperDefense.Tests.AlbumPlayerJourneyTests+<PendingResultCanRetrySavingWithoutDuplicatingRewardsOrRebuildingTheAttempt>d__17.MoveNext () [0x000da] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\AlbumPlayerJourneyTests.cs:142
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44 ]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="3146" name="EightSlotBattleTests" fullname="PaperDefense.Tests.EightSlotBattleTests" classname="PaperDefense.Tests.EightSlotBattleTests" runstate="Runnable" testcasecount="13" result="Failed" site="Child" start-time="2026-10-18 22:26:42Z" end-time="2026-10-18 22:26:46Z" duration="4.108388" total="13" passed="3" failed="10" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="3149" name="AllEightSelectedPagesUseTheSameQuotePreviewAndActualPayment" fullname="PaperDefense.Tests.EightSlotBattleTests.AllEightSelectedPagesUseTheSameQuotePreviewAndActualPayment" methodname="AllEightSelectedPagesUseTheSameQuotePreviewAndActualPayment" classname="PaperDefense.Tests.EightSlotBattleTests" runstate="Runnable" seed="916213630" result="Failed" start-time="2026-10-18 22:26:42Z" end-time="2026-10-18 22:26:43Z" duration="0.584712" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 4
+  But was:  3
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.EightSlotBattleTests+<AllEightSelectedPagesUseTheSameQuotePreviewAndActualPayment>d__16.MoveNext () [0x000d6] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\EightSlotBattleTests.cs:119
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="3150" name="AnEmptySelectedSlotCannotBuildThePreviouslySelectedPageOrARawTool" fullname="PaperDefense.Tests.EightSlotBattleTests.AnEmptySelectedSlotCannotBuildThePreviouslySelectedPageOrARawTool" methodname="AnEmptySelectedSlotCannotBuildThePreviouslySelectedPageOrARawTool" classname="PaperDefense.Tests.EightSlotBattleTests" runstate="Runnable" seed="450212814" result="Failed" start-time="2026-10-18 22:26:43Z" end-time="2026-10-18 22:26:43Z" duration="0.308431" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 7
+  But was:  -1
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.EightSlotBattleTests+<AnEmptySelectedSlotCannotBuildThePreviouslySelectedPageOrARawTool>d__17.MoveNext () [0x000c8] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\EightSlotBattleTests.cs:137
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="3156" name="AnOpenModalBlocksHotkeysAndPointerEvenAwayFromTheModalGraphics" fullname="PaperDefense.Tests.EightSlotBattleTests.AnOpenModalBlocksHotkeysAndPointerEvenAwayFromTheModalGraphics" methodname="AnOpenModalBlocksHotkeysAndPointerEvenAwayFromTheModalGraphics" classname="PaperDefense.Tests.EightSlotBattleTests" runstate="Runnable" seed="1060729146" result="Failed" start-time="2026-10-18 22:26:43Z" end-time="2026-10-18 22:26:43Z" duration="0.215362" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 0
+  But was:  -1
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.EightSlotBattleTests+<AssertFocusedUiBlocks>d__23.MoveNext () [0x000e8] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\EightSlotBattleTests.cs:201
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="3154" name="ASelectedChildOfANameFieldStillBlocksBattleHotkeysAndConstruction" fullname="PaperDefense.Tests.EightSlotBattleTests.ASelectedChildOfANameFieldStillBlocksBattleHotkeysAndConstruction" methodname="ASelectedChildOfANameFieldStillBlocksBattleHotkeysAndConstruction" classname="PaperDefense.Tests.EightSlotBattleTests" runstate="Runnable" seed="1196076324" result="Failed" start-time="2026-10-18 22:26:43Z" end-time="2026-10-18 22:26:43Z" duration="0.215739" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 0
+  But was:  -1
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.EightSlotBattleTests+<AssertFocusedUiBlocks>d__23.MoveNext () [0x000e8] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\EightSlotBattleTests.cs:201
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="3157" name="ClosingAModalDoesNotReplayAPressStartedBehindIt" fullname="PaperDefense.Tests.EightSlotBattleTests.ClosingAModalDoesNotReplayAPressStartedBehindIt" methodname="ClosingAModalDoesNotReplayAPressStartedBehindIt" classname="PaperDefense.Tests.EightSlotBattleTests" runstate="Runnable" seed="1476360774" result="Failed" start-time="2026-10-18 22:26:43Z" end-time="2026-10-18 22:26:44Z" duration="0.248370" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 640
+  But was:  600
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.EightSlotBattleTests+<ClosingAModalDoesNotReplayAPressStartedBehindIt>d__25.MoveNext () [0x0014d] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\EightSlotBattleTests.cs:223
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="3147" name="DigitEight_SelectsSlotSeven" fullname="PaperDefense.Tests.EightSlotBattleTests.DigitEight_SelectsSlotSeven" methodname="DigitEight_SelectsSlotSeven" classname="PaperDefense.Tests.EightSlotBattleTests" runstate="Runnable" seed="1549520865" result="Failed" start-time="2026-10-18 22:26:44Z" end-time="2026-10-18 22:26:44Z" duration="0.215478" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 7
+  But was:  -1
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.EightSlotBattleTests+<DigitEight_SelectsSlotSeven>d__14.MoveNext () [0x00045] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\EightSlotBattleTests.cs:96
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="3148" name="EveryDigitSelectsItsOriginalFrozenPositionWithoutCallingLegacyTools" fullname="PaperDefense.Tests.EightSlotBattleTests.EveryDigitSelectsItsOriginalFrozenPositionWithoutCallingLegacyTools" methodname="EveryDigitSelectsItsOriginalFrozenPositionWithoutCallingLegacyTools" classname="PaperDefense.Tests.EightSlotBattleTests" runstate="Runnable" seed="2064206692" result="Failed" start-time="2026-10-18 22:26:44Z" end-time="2026-10-18 22:26:44Z" duration="0.482112" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Digit 5
+  Expected: 4
+  But was:  -1
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.EightSlotBattleTests+<EveryDigitSelectsItsOriginalFrozenPositionWithoutCallingLegacyTools>d__15.MoveNext () [0x00073] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\EightSlotBattleTests.cs:106
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="3152" name="FocusedNameFieldBlocksBattleHotkeysAndMapConstruction" fullname="PaperDefense.Tests.EightSlotBattleTests.FocusedNameFieldBlocksBattleHotkeysAndMapConstruction" methodname="FocusedNameFieldBlocksBattleHotkeysAndMapConstruction" classname="PaperDefense.Tests.EightSlotBattleTests" runstate="Runnable" seed="1792881369" result="Failed" start-time="2026-10-18 22:26:44Z" end-time="2026-10-18 22:26:45Z" duration="0.214892" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 0
+  But was:  -1
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.EightSlotBattleTests+<AssertFocusedUiBlocks>d__23.MoveNext () [0x000e8] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\EightSlotBattleTests.cs:201
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="3155" name="FocusedTmpNameFieldBlocksBattleHotkeysAndMapConstruction" fullname="PaperDefense.Tests.EightSlotBattleTests.FocusedTmpNameFieldBlocksBattleHotkeysAndMapConstruction" methodname="FocusedTmpNameFieldBlocksBattleHotkeysAndMapConstruction" classname="PaperDefense.Tests.EightSlotBattleTests" runstate="Runnable" seed="2134569424" result="Failed" start-time="2026-10-18 22:26:45Z" end-time="2026-10-18 22:26:45Z" duration="0.361016" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 0
+  But was:  -1
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.EightSlotBattleTests+<AssertFocusedUiBlocks>d__23.MoveNext () [0x000e8] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\EightSlotBattleTests.cs:201
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="3158" name="FrozenMaterialCostAndRangeSurviveAuthoringChangesUntilTheGestureIsPaid" fullname="PaperDefense.Tests.EightSlotBattleTests.FrozenMaterialCostAndRangeSurviveAuthoringChangesUntilTheGestureIsPaid" methodname="FrozenMaterialCostAndRangeSurviveAuthoringChangesUntilTheGestureIsPaid" classname="PaperDefense.Tests.EightSlotBattleTests" runstate="Runnable" seed="1233875103" result="Passed" start-time="2026-10-18 22:26:45Z" end-time="2026-10-18 22:26:45Z" duration="0.329392" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3153" name="GeneratorSelectionAndMaterialShortcutsStayPencilOnly" fullname="PaperDefense.Tests.EightSlotBattleTests.GeneratorSelectionAndMaterialShortcutsStayPencilOnly" methodname="GeneratorSelectionAndMaterialShortcutsStayPencilOnly" classname="PaperDefense.Tests.EightSlotBattleTests" runstate="Runnable" seed="490529431" result="Failed" start-time="2026-10-18 22:26:45Z" end-time="2026-10-18 22:26:46Z" duration="0.215456" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 7
+  But was:  -1
+]]></message>
+                <stack-trace><![CDATA[at PaperDefense.Tests.EightSlotBattleTests+<GeneratorSelectionAndMaterialShortcutsStayPencilOnly>d__20.MoveNext () [0x0006c] in D:\Projekt Unity\paper\Assets\PaperDefense\Tests\PlayMode\EightSlotBattleTests.cs:171
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="3159" name="LegacyFixtureKeepsTheOriginalFourSlotsAndFiveToEightConstructionTools" fullname="PaperDefense.Tests.EightSlotBattleTests.LegacyFixtureKeepsTheOriginalFourSlotsAndFiveToEightConstructionTools" methodname="LegacyFixtureKeepsTheOriginalFourSlotsAndFiveToEightConstructionTools" classname="PaperDefense.Tests.EightSlotBattleTests" runstate="Runnable" seed="956462612" result="Passed" start-time="2026-10-18 22:26:46Z" end-time="2026-10-18 22:26:46Z" duration="0.282805" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3151" name="MaterialColorAndEraseHaveSeparateActionsAndDigitsKeepTheirChoices" fullname="PaperDefense.Tests.EightSlotBattleTests.MaterialColorAndEraseHaveSeparateActionsAndDigitsKeepTheirChoices" methodname="MaterialColorAndEraseHaveSeparateActionsAndDigitsKeepTheirChoices" classname="PaperDefense.Tests.EightSlotBattleTests" runstate="Runnable" seed="23711783" result="Passed" start-time="2026-10-18 22:26:46Z" end-time="2026-10-18 22:26:46Z" duration="0.415146" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: docs/validation/modular-album/task11-runtime-red.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

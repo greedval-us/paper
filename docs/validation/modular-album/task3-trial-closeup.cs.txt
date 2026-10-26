@@ -1,0 +1,24 @@
+// Run after capture setup block 2. Uses the existing trial playback Graphic, enlarged only on a temporary diagnostic canvas.
+var game=PaperDefense.Editor.FullGameUiCapture.Game;
+foreach(var part in game.Run.Content.AllParts)if(part.Enabled&&!part.InitiallyUnlocked&&!game.Run.Workshop.IsUnlocked(part.Id)){string reason;if(!game.Run.UnlockPart(part.Id,out reason))throw new System.InvalidOperationException(reason);}
+PaperDefense.Editor.FullGameUiCapture.WorkshopStep(0);
+var wizard=PaperDefense.Editor.FullGameUiCapture.Wizard;
+if(!wizard.SelectWeapon(1,"weapon.gun")||!wizard.ChangeModule("module.armor"))throw new System.InvalidOperationException("Pilot unavailable");
+for(int i=0;i<2;i++)if(!wizard.Next())throw new System.InvalidOperationException(wizard.Status);
+PaperDefense.Editor.FullGameUiCapture.Click("Wizard full trial");wizard.RunTrial();
+var original=System.Linq.Enumerable.First(game.GetComponentsInChildren<PaperDefense.Presentation.TrialLaneSketch>(true),s=>s.HasRecording);
+var report=original.Playback.Report;
+var frame=System.Linq.Enumerable.First(report.Frames,f=>f.Towers.Count>0);
+var tower=frame.Towers[0];
+var paper=new UnityEngine.GameObject("Task 3 existing trial renderer closeup",typeof(UnityEngine.RectTransform),typeof(UnityEngine.Canvas),typeof(UnityEngine.UI.CanvasScaler));paper.layer=5;paper.transform.SetParent(game.transform,false);
+var canvas=paper.GetComponent<UnityEngine.Canvas>();canvas.renderMode=UnityEngine.RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=32000;
+var scaler=paper.GetComponent<UnityEngine.UI.CanvasScaler>();scaler.uiScaleMode=UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;scaler.referenceResolution=new UnityEngine.Vector2(1600,900);scaler.matchWidthOrHeight=.5f;
+var background=new UnityEngine.GameObject("Paper",typeof(UnityEngine.RectTransform),typeof(UnityEngine.UI.Image));background.layer=5;background.transform.SetParent(paper.transform,false);var back=background.GetComponent<UnityEngine.RectTransform>();back.anchorMin=UnityEngine.Vector2.zero;back.anchorMax=UnityEngine.Vector2.one;back.offsetMin=back.offsetMax=UnityEngine.Vector2.zero;background.GetComponent<UnityEngine.UI.Image>().color=new UnityEngine.Color(.969f,.957f,.915f,1);
+var art=new UnityEngine.GameObject("Existing TrialLaneSketch · original recorded recipe",typeof(UnityEngine.RectTransform));art.layer=5;art.transform.SetParent(paper.transform,false);
+var rect=art.GetComponent<UnityEngine.RectTransform>();rect.anchorMin=rect.anchorMax=rect.pivot=new UnityEngine.Vector2(.5f,.5f);rect.sizeDelta=new UnityEngine.Vector2(800,600);
+float scale=UnityEngine.Mathf.Min((800-16f)/42,(600-14f)/28),zoom=16;
+rect.localScale=UnityEngine.Vector3.one*zoom;rect.anchoredPosition=-new UnityEngine.Vector2(tower.Cell.X+.5f-29,tower.Cell.Y+.5f-22)*scale*zoom;
+var graphic=art.AddComponent<PaperDefense.Presentation.TrialLaneSketch>();graphic.SetResult(report,UnityEngine.Time.unscaledTime,120);graphic.PlaybackPaused=true;
+PaperDefense.Editor.FullGameUiCapture.Enqueue("09-trial-diagnostic-closeup",1600,900,()=>{});
+PaperDefense.Editor.FullGameUiCapture.Enqueue("09-trial-diagnostic-closeup-4x3",1024,768,()=>{});
+return new{adapter="existing TrialLaneSketch -> NotebookTrialRenderer",towerId=tower.Id,cell=tower.Cell.ToString(),diagnosticZoom=zoom,source="actual trial report"};

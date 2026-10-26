@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using PaperDefense.Application;
 using PaperDefense.Presentation;
 using UnityEditor;
 using UnityEngine;
@@ -13,9 +15,13 @@ namespace PaperDefense.Editor
     {
         public const string SourcePath = "ArtSource/Notebook/NewStyle/sprites.source.json";
         public const string AnimationPath = "ArtSource/Notebook/NewStyle/animation.json";
+        public const string AssemblyPath = "ArtSource/Notebook/NewStyle/assembly-parts.source.json";
         public const string AtlasPath = "Assets/PaperDefense/Resources/Art/NotebookAtlas.png";
         public const string CatalogPath = "Assets/PaperDefense/Resources/Art/NotebookSprites.json";
+        public const string MountsPath = "Assets/PaperDefense/Resources/Art/NotebookMounts.json";
         public const string ThemePath = "Assets/PaperDefense/Resources/Art/NotebookVisualTheme.asset";
+        public const string AssemblyCatalogPath = "Assets/PaperDefense/Configuration/Game/PlayerAssemblyCatalog.asset";
+        public const string PackingPath = "Tools/ArtAssembly13/packing-4096.json";
 
         [Serializable] public sealed class SpriteBounds { public float x, y, width, height; }
         [Serializable] public sealed class SpriteSource
@@ -32,6 +38,17 @@ namespace PaperDefense.Editor
             public SpriteAlias[] aliases = Array.Empty<SpriteAlias>();
         }
         [Serializable] sealed class Pixel { public int x, y; }
+        [Serializable] sealed class NativePacking
+        {
+            public int atlas, height, gutter;
+            public int Height => height > 0 ? height : atlas;
+            public NativeRectangle[] rectangles;
+        }
+        [Serializable] sealed class NativeRectangle
+        {
+            public string id;
+            public int index, x, y, width, height;
+        }
         [Serializable] sealed class PackedSprite
         {
             public string id, alias;
@@ -53,12 +70,17 @@ namespace PaperDefense.Editor
             var source = ParseSource(File.ReadAllText(SourcePath));
             var semanticIds = SemanticIds(source);
             var animation = ParseAnimation(File.ReadAllText(AnimationPath), semanticIds);
+            var catalog = AssetDatabase.LoadAssetAtPath<AssemblyCatalogAsset>(AssemblyCatalogPath);
+            if (catalog == null) throw new FormatException("The production component catalog is required before art import.");
+            string mountsJson = AssemblyVisualComposer.BuildRuntimeJson(File.ReadAllText(AssemblyPath), semanticIds,
+                source.sprites.ToDictionary(s => s.id, s => new Rect(s.bounds.x, s.bounds.y, s.bounds.width, s.bounds.height)), catalog.CreateSnapshot().Definitions);
+            NotebookMountLayout.Validate(mountsJson);
             var theme = AssetDatabase.LoadAssetAtPath<NotebookVisualThemeAsset>(ThemePath);
             if (theme == null) throw Error(ThemePath, "theme", "the existing visual asset is required to preserve its GUID");
+            var packing = ReadNativePacking(source);
 
             var images = new Dictionary<string, Texture2D>(StringComparer.OrdinalIgnoreCase);
-            var crops = new List<Texture2D>();
-            Texture2D packed = null, atlas = null;
+            Texture2D atlas = null;
             try
             {
                 foreach (var sprite in source.sprites)
@@ -74,36 +96,38 @@ namespace PaperDefense.Editor
                     var image = images[ResolveSourcePath(path)];
                     return new Vector2Int(image.width, image.height);
                 });
-                foreach (var sprite in source.sprites)
+                var imagePixels = images.ToDictionary(pair => pair.Key, pair => pair.Value.GetPixels32(), StringComparer.OrdinalIgnoreCase);
+                var atlasPixels = new Color32[packing.atlas * packing.Height];
+                for (int i = 0; i < source.sprites.Length; i++)
                 {
-                    var crop = new Texture2D(sprite.width, sprite.height, TextureFormat.RGBA32, false);
-                    crops.Add(crop);
-                    crop.SetPixels(images[ResolveSourcePath(sprite.source)].GetPixels(sprite.x, sprite.y, sprite.width, sprite.height));
-                    crop.Apply(false, false);
+                    var sprite = source.sprites[i]; var rect = packing.rectangles[i]; string path = ResolveSourcePath(sprite.source);
+                    // Integer row copies preserve every original RGBA byte, including
+                    // transparent pixels. The cleared array supplies all four-pixel gutters.
+                    var pixels = imagePixels[path]; int imageWidth = images[path].width;
+                    for (int y = 0; y < sprite.height; y++)
+                        Array.Copy(pixels, (sprite.y + y) * imageWidth + sprite.x,
+                            atlasPixels, (rect.y + y) * packing.atlas + rect.x, sprite.width);
                 }
-                packed = new Texture2D(2, 2, TextureFormat.RGBA32, false);
-                Rect[] rectangles = packed.PackTextures(crops.ToArray(), 4, 4096, false);
-                if (rectangles.Length != source.sprites.Length) throw Error(SourcePath, "atlas", "packing lost source sprites");
-                atlas = new Texture2D(packed.width + 32, packed.height + 32, TextureFormat.RGBA32, false);
-                atlas.SetPixels32(new Color32[atlas.width * atlas.height]);
-                atlas.SetPixels32(16, 16, packed.width, packed.height, packed.GetPixels32());
-                var white = new Color32[81];
-                for (int i = 0; i < white.Length; i++) white[i] = new Color32(255, 255, 255, 255);
-                atlas.SetPixels32(0, 0, 9, 9, white);
+                var pen = packing.rectangles[packing.rectangles.Length - 1];
+                for (int y = 0; y < 9; y++) for (int x = 0; x < 9; x++)
+                    atlasPixels[(pen.y + y) * packing.atlas + pen.x + x] = new Color32(255, 255, 255, 255);
+                atlas = new Texture2D(packing.atlas, packing.Height, TextureFormat.RGBA32, false);
+                atlas.SetPixels32(atlasPixels);
                 atlas.Apply(false, false);
 
                 var entries = new List<PackedSprite>();
-                for (int i = 0; i < rectangles.Length; i++)
+                for (int i = 0; i < source.sprites.Length; i++)
                 {
-                    Rect rect = rectangles[i]; var sprite = source.sprites[i];
+                    var rect = packing.rectangles[i]; var sprite = source.sprites[i];
                     entries.Add(new PackedSprite {
-                        id = sprite.id, x = 16 + Mathf.RoundToInt(rect.x * packed.width), y = 16 + Mathf.RoundToInt(rect.y * packed.height),
-                        width = Mathf.RoundToInt(rect.width * packed.width), height = Mathf.RoundToInt(rect.height * packed.height), bounds = sprite.bounds
+                        id = sprite.id, x = rect.x, y = rect.y,
+                        width = rect.width, height = rect.height, bounds = sprite.bounds
                     });
                 }
                 foreach (var alias in source.aliases) entries.Add(new PackedSprite { id = alias.id, alias = alias.alias });
                 string json = JsonUtility.ToJson(new RuntimeManifest {
-                    revision = source.revision, whitePixel = new Pixel { x = 4, y = 4 }, sprites = entries.ToArray()
+                    revision = source.revision, whitePixel = new Pixel {
+                        x = pen.x + 4, y = pen.y + 4 }, sprites = entries.ToArray()
                 }, true);
                 NotebookSpriteCatalog.Validate(json, atlas.width, atlas.height);
                 byte[] png = atlas.EncodeToPNG();
@@ -111,17 +135,20 @@ namespace PaperDefense.Editor
 
                 // No project asset is touched until the detached packed atlas and every binding pass.
                 Directory.CreateDirectory(Path.GetDirectoryName(AtlasPath));
-                File.WriteAllBytes(AtlasPath, png);
-                File.WriteAllText(CatalogPath, json);
+                PublishResources(new[] { AtlasPath, CatalogPath, MountsPath }, new[] {
+                    png, new UTF8Encoding(false).GetBytes(json), new UTF8Encoding(false).GetBytes(mountsJson) });
                 AssetDatabase.ImportAsset(AtlasPath, ImportAssetOptions.ForceSynchronousImport);
                 ConfigureAtlasImporter();
                 AssetDatabase.ImportAsset(CatalogPath, ImportAssetOptions.ForceSynchronousImport);
+                AssetDatabase.ImportAsset(MountsPath, ImportAssetOptions.ForceSynchronousImport);
                 theme.ReplaceData(animation);
                 EditorUtility.SetDirty(theme);
                 // Save only this visual asset; unrelated dirty presets must remain untouched.
                 AssetDatabase.SaveAssetIfDirty(theme);
                 NotebookVisualThemeAsset.ResetDefaultCache();
                 NotebookSpriteCatalog.ResetCache();
+                NotebookMountLayout.ResetCache();
+                AssemblyVisualComposer.ResetCache();
                 string summary = $"Blue pen atlas rebuilt: {source.sprites.Length} sprites, {source.aliases.Length} aliases, " +
                     $"{animation.Shapes.Count} shape bindings, {animation.Clips.Count} clips, {animation.Recoils.Count} recoils; {atlas.width}x{atlas.height}.";
                 Debug.Log(summary);
@@ -130,9 +157,93 @@ namespace PaperDefense.Editor
             finally
             {
                 foreach (var image in images.Values) UnityEngine.Object.DestroyImmediate(image);
-                foreach (var crop in crops) UnityEngine.Object.DestroyImmediate(crop);
-                if (packed != null) UnityEngine.Object.DestroyImmediate(packed);
                 if (atlas != null) UnityEngine.Object.DestroyImmediate(atlas);
+            }
+        }
+
+        static NativePacking ReadNativePacking(SourceManifest source)
+        {
+            FormatException Stale(string reason) => new FormatException(PackingPath + ": " + reason
+                + ". Regenerate the native layout with: node Tools/ArtAssembly13/pack-catalog.mjs 0");
+            if (!File.Exists(PackingPath)) throw Stale("missing committed packing layout");
+            NativePacking layout;
+            try { layout = JsonUtility.FromJson<NativePacking>(File.ReadAllText(PackingPath)); }
+            catch (Exception error) { throw Stale("invalid layout JSON: " + error.Message); }
+            if (layout == null || layout.atlas != 4096 || (layout.Height != 4096 && layout.Height != 4352)
+                || layout.gutter != 4 || layout.rectangles == null
+                || layout.rectangles.Length != source.sprites.Length + 1) throw Stale("stale atlas size, gutter or native crop count");
+            var ids = new HashSet<string>(StringComparer.Ordinal);
+            for (int i = 0; i < layout.rectangles.Length; i++)
+            {
+                var rect = layout.rectangles[i]; bool pen = i == source.sprites.Length;
+                string id = pen ? "$pen-white" : source.sprites[i].id;
+                int width = pen ? 9 : source.sprites[i].width, height = pen ? 9 : source.sprites[i].height;
+                if (rect == null || rect.index != i || rect.id != id || !ids.Add(rect.id)
+                    || rect.width != width || rect.height != height) throw Stale("native crop ID, order or dimensions changed at " + id);
+                if (rect.x < 0 || rect.y < 0 || rect.width <= 0 || rect.height <= 0
+                    || (long)rect.x + rect.width > layout.atlas || (long)rect.y + rect.height > layout.Height)
+                    throw Stale("native rectangle extends outside the declared atlas at " + id);
+                for (int j = 0; j < i; j++)
+                {
+                    var other = layout.rectangles[j];
+                    int dx = Math.Max(rect.x - other.x - other.width, other.x - rect.x - rect.width);
+                    int dy = Math.Max(rect.y - other.y - other.height, other.y - rect.y - rect.height);
+                    if (Math.Max(dx, dy) < layout.gutter) throw Stale("overlap or missing four-pixel gutter at " + id + " / " + other.id);
+                }
+            }
+            return layout;
+        }
+
+        // Unity may memory-map loaded TextAssets on Windows. Truncating those paths
+        // fails with Win32 1224; replacing a complete staged file preserves the old
+        // mapping until Unity imports the new resource. Staging also keeps a failed
+        // publication from leaving an atlas paired with another catalogue revision.
+        static void PublishResources(string[] targets, byte[][] bytes)
+        {
+            string staging = Path.GetFullPath(Path.Combine("Temp", "PaperDefenseArtImport", Guid.NewGuid().ToString("N")));
+            Directory.CreateDirectory(staging);
+            var staged = new string[targets.Length]; var backups = new string[targets.Length];
+            var existed = new bool[targets.Length]; bool preserveRecoveryFiles = false;
+            try
+            {
+                for (int i = 0; i < targets.Length; i++)
+                {
+                    staged[i] = Path.Combine(staging, i + ".new"); backups[i] = Path.Combine(staging, i + ".previous");
+                    File.WriteAllBytes(staged[i], bytes[i]); existed[i] = File.Exists(targets[i]);
+                    if (existed[i]) File.Copy(targets[i], backups[i]);
+                }
+                try
+                {
+                    for (int i = 0; i < targets.Length; i++)
+                    {
+                        if (existed[i]) FileUtil.ReplaceFile(staged[i], Path.GetFullPath(targets[i]));
+                        else File.Move(staged[i], targets[i]);
+                    }
+                }
+                catch (Exception publicationError)
+                {
+                    var errors = new List<Exception> { publicationError };
+                    for (int i = 0; i < targets.Length; i++)
+                    {
+                        try
+                        {
+                            if (existed[i]) FileUtil.ReplaceFile(backups[i], Path.GetFullPath(targets[i]));
+                            else if (File.Exists(targets[i])) File.Delete(targets[i]);
+                        }
+                        catch (Exception rollbackError) { errors.Add(rollbackError); }
+                    }
+                    preserveRecoveryFiles = errors.Count > 1;
+                    if (preserveRecoveryFiles) throw new AggregateException("Art publication failed; recovery files retained at " + staging, errors);
+                    throw;
+                }
+            }
+            finally
+            {
+                if (!preserveRecoveryFiles)
+                {
+                    foreach (string file in staged.Concat(backups)) if (file != null && File.Exists(file)) File.Delete(file);
+                    if (Directory.Exists(staging)) Directory.Delete(staging, false);
+                }
             }
         }
 
@@ -143,9 +254,13 @@ namespace PaperDefense.Editor
             importer.textureType = TextureImporterType.Default;
             importer.npotScale = TextureImporterNPOTScale.None;
             importer.maxTextureSize = 8192;
+            // Packed native crops have only four pixels of gutter. Full-atlas mipmaps
+            // would mix neighbouring illustrations at small sizes; the notebook shaders
+            // instead average four samples from mip zero inside a bounded footprint.
             importer.mipmapEnabled = false;
             importer.wrapMode = TextureWrapMode.Clamp;
             importer.filterMode = FilterMode.Bilinear;
+            importer.mipMapBias = 0;
             importer.textureCompression = TextureImporterCompression.Uncompressed;
             importer.alphaSource = TextureImporterAlphaSource.FromInput;
             importer.alphaIsTransparency = true;

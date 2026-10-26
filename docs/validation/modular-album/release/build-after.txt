@@ -1,0 +1,7 @@
+Result: Succeeded
+Scene: Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity
+Errors: 0
+Warnings: 3
+Size: 261506326
+Duration: 00:00:14.1802364
+Finished UTC: 2026-10-25T22:19:35.5884375Z

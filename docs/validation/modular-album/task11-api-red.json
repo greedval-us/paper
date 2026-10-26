@@ -1,0 +1,104 @@
+{
+  "expectedMissingApiErrors": [
+    {
+      "type": "Error",
+      "message": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs(23,31): error CS1061: 'StructureState' does not contain a definition for 'GeneratorPaidWaves' and no accessible extension method 'GeneratorPaidWaves' accepting a first argument of type 'StructureState' could be found (are you missing a using directive or an assembly reference?)\n",
+      "file": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs",
+      "line": 23,
+      "stackTrace": null
+    },
+    {
+      "type": "Error",
+      "message": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs(24,30): error CS1061: 'StructureState' does not contain a definition for 'GeneratorPaidWaves' and no accessible extension method 'GeneratorPaidWaves' accepting a first argument of type 'StructureState' could be found (are you missing a using directive or an assembly reference?)\n",
+      "file": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs",
+      "line": 24,
+      "stackTrace": null
+    },
+    {
+      "type": "Error",
+      "message": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs(26,31): error CS1061: 'StructureState' does not contain a definition for 'GeneratorPaidWaves' and no accessible extension method 'GeneratorPaidWaves' accepting a first argument of type 'StructureState' could be found (are you missing a using directive or an assembly reference?)\n",
+      "file": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs",
+      "line": 26,
+      "stackTrace": null
+    },
+    {
+      "type": "Error",
+      "message": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs(29,31): error CS1061: 'StructureState' does not contain a definition for 'GeneratorPaidWaves' and no accessible extension method 'GeneratorPaidWaves' accepting a first argument of type 'StructureState' could be found (are you missing a using directive or an assembly reference?)\n",
+      "file": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs",
+      "line": 29,
+      "stackTrace": null
+    },
+    {
+      "type": "Error",
+      "message": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs(30,30): error CS1061: 'StructureState' does not contain a definition for 'GeneratorPaidWaves' and no accessible extension method 'GeneratorPaidWaves' accepting a first argument of type 'StructureState' could be found (are you missing a using directive or an assembly reference?)\n",
+      "file": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs",
+      "line": 30,
+      "stackTrace": null
+    },
+    {
+      "type": "Error",
+      "message": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs(39,34): error CS1061: 'StructureState' does not contain a definition for 'GeneratorPaidWaves' and no accessible extension method 'GeneratorPaidWaves' accepting a first argument of type 'StructureState' could be found (are you missing a using directive or an assembly reference?)\n",
+      "file": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs",
+      "line": 39,
+      "stackTrace": null
+    },
+    {
+      "type": "Error",
+      "message": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs(40,37): error CS1061: 'StructureState' does not contain a definition for 'GeneratorPaidWaves' and no accessible extension method 'GeneratorPaidWaves' accepting a first argument of type 'StructureState' could be found (are you missing a using directive or an assembly reference?)\n",
+      "file": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs",
+      "line": 40,
+      "stackTrace": null
+    },
+    {
+      "type": "Error",
+      "message": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs(54,55): error CS1061: 'StructureView' does not contain a definition for 'GeneratorPaidWaves' and no accessible extension method 'GeneratorPaidWaves' accepting a first argument of type 'StructureView' could be found (are you missing a using directive or an assembly reference?)\n",
+      "file": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs",
+      "line": 54,
+      "stackTrace": null
+    },
+    {
+      "type": "Error",
+      "message": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs(57,31): error CS1061: 'StructureView' does not contain a definition for 'GeneratorPaidWaves' and no accessible extension method 'GeneratorPaidWaves' accepting a first argument of type 'StructureView' could be found (are you missing a using directive or an assembly reference?)\n",
+      "file": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs",
+      "line": 57,
+      "stackTrace": null
+    },
+    {
+      "type": "Error",
+      "message": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs(59,55): error CS1061: 'StructureView' does not contain a definition for 'GeneratorPaidWaves' and no accessible extension method 'GeneratorPaidWaves' accepting a first argument of type 'StructureView' could be found (are you missing a using directive or an assembly reference?)\n",
+      "file": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs",
+      "line": 59,
+      "stackTrace": null
+    },
+    {
+      "type": "Error",
+      "message": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs(60,31): error CS1061: 'StructureView' does not contain a definition for 'GeneratorPaidWaves' and no accessible extension method 'GeneratorPaidWaves' accepting a first argument of type 'StructureView' could be found (are you missing a using directive or an assembly reference?)\n",
+      "file": "Assets\\PaperDefense\\Tests\\EditMode\\GeneratorWaveReadModelTests.cs",
+      "line": 60,
+      "stackTrace": null
+    }
+  ],
+  "testFixtureCompileErrors": [
+    {
+      "type": "Error",
+      "message": "Assets\\PaperDefense\\Tests\\PlayMode\\AlbumPlayerJourneyTests.cs(82,13): error CS0191: A readonly field cannot be assigned to (except in a constructor or init-only setter of the type in which the field is defined or a variable initializer)\n",
+      "file": "Assets\\PaperDefense\\Tests\\PlayMode\\AlbumPlayerJourneyTests.cs",
+      "line": 82,
+      "stackTrace": null
+    },
+    {
+      "type": "Error",
+      "message": "Assets\\PaperDefense\\Tests\\PlayMode\\AlbumPlayerJourneyTests.cs(137,13): error CS0191: A readonly field cannot be assigned to (except in a constructor or init-only setter of the type in which the field is defined or a variable initializer)\n",
+      "file": "Assets\\PaperDefense\\Tests\\PlayMode\\AlbumPlayerJourneyTests.cs",
+      "line": 137,
+      "stackTrace": null
+    },
+    {
+      "type": "Error",
+      "message": "Assets\\PaperDefense\\Tests\\PlayMode\\AlbumPlayerJourneyTests.cs(138,55): error CS0191: A readonly field cannot be assigned to (except in a constructor or init-only setter of the type in which the field is defined or a variable initializer)\n",
+      "file": "Assets\\PaperDefense\\Tests\\PlayMode\\AlbumPlayerJourneyTests.cs",
+      "line": 138,
+      "stackTrace": null
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "engine": "Unity 6000.5.7f1",
+  "memory_only": true,
+  "image_processing": false,
+  "count": 16,
+  "screens": [
+    {
+      "file": "01-battery-weapons-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 490585,
+      "sha256": "f531aa0b2e066e28e1b9cc84bd001fd0ccf2952d8de6276e6a1c4d6bacfaca19"
+    },
+    {
+      "file": "01-battery-weapons-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 956681,
+      "sha256": "4c63ac01859d4ad4896835e9b7992b747ca032829e23243540b06b15da284cd6"
+    },
+    {
+      "file": "02-battery-sparse-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 483342,
+      "sha256": "a102f233e6754dcb45345f01a991e13c712d326679cef5b3408b61942ed298ad"
+    },
+    {
+      "file": "02-battery-sparse-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 944475,
+      "sha256": "8f33c9b760e0189e679ce73cccb8a8d53ef19a65543bbaff9a5f231f0c0e6ecb"
+    },
+    {
+      "file": "03-standard-two-mounts-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 485192,
+      "sha256": "6da2e653c32ae155936049b02c4ebe84af7946710dadf7fddbfad6938383bc67"
+    },
+    {
+      "file": "03-standard-two-mounts-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 941339,
+      "sha256": "b3e391ed532231b76360128153ee7a8ab3e0f9489b6e197a45304d801efffb50"
+    },
+    {
+      "file": "04-battery-review-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 254602,
+      "sha256": "9335e4ec61d6f0fead055cd83642d17ce85e5b506e61ed9d554ace6176cfdd7d"
+    },
+    {
+      "file": "04-battery-review-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 366747,
+      "sha256": "0447390fdb1d92aa15b9464abef0baebec26557210b9c46c8447c121f0aeb4f1"
+    },
+    {
+      "file": "05-battery-album-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 107090,
+      "sha256": "f0e9840d1c5dc0a22211f6b05e48606b3b822c97ccc8ed69d904203bd698275b"
+    },
+    {
+      "file": "05-battery-album-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 199091,
+      "sha256": "dc46a88a57e5ab3f75c85dc65f9336b6065357d6e6172dff67fffb530317a428"
+    },
+    {
+      "file": "06-battery-trial-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 59159,
+      "sha256": "bf1e19cc3a1795f3eb76095e69729bc3e3ce8b9366f961e110c8aa3920c3c13b"
+    },
+    {
+      "file": "06-battery-trial-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 110878,
+      "sha256": "ce787d04fdb8bf7c6508499e42d6f82961111acc47a49a40b71e42c6d3b8470d"
+    },
+    {
+      "file": "07-battery-battle-4x3.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 198858,
+      "sha256": "6079415188382ad32a04b45629881fcc8dfb61e1794723b55c245b42bfd16307"
+    },
+    {
+      "file": "07-battery-battle-wide.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 309511,
+      "sha256": "8dd248165100dc3c429b971ad9359eaac48452e118e553e0eaa386ef94bc4e15"
+    },
+    {
+      "file": "08-common-mount-sheet.png",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 1104573,
+      "sha256": "eeee2a94ef97d3bb5357fdaea3b4e8eaae42a6e910e12ac8fb0e8b956bc0fb8e"
+    },
+    {
+      "file": "09-battery-battle-closeup.png",
+      "width": 1600,
+      "height": 900,
+      "bytes": 236499,
+      "sha256": "3a4d70b0a311520959ce9dab6ae85d6a2439768a042e27c60ca8e795c4d63f00"
+    }
+  ]
+}

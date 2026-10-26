@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace PaperDefense.Presentation
 {
     /// <summary>Small blue-pen details for the foundation page; all dimensions are local UI pixels.</summary>
-    public sealed class FoundationDetailGraphic : MaskableGraphic
+    public sealed class FoundationDetailGraphic : NotebookAtlasGraphic
     {
         public enum Kind { Frame, ProgressCircle, MountPips, Divider, SelectedCorner, GoldStack, Arrow, StepTab, GoldCoin, LoadMeter, Star }
 
@@ -24,7 +24,6 @@ namespace PaperDefense.Presentation
         public float StrokeWidth { get => strokeWidth; set { if (strokeWidth == value) return; strokeWidth = value; SetVerticesDirty(); } }
         public float Radius { get => radius; set { if (radius == value) return; radius = value; SetVerticesDirty(); } }
         public Color Fill { get => fill; set { if (fill == value) return; fill = value; SetVerticesDirty(); } }
-        public override Texture mainTexture => NotebookSpriteCatalog.Texture;
 
         protected override void OnPopulateMesh(VertexHelper vh)
         {

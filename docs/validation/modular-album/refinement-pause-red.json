@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "9a397f3f82064cd7b4178bee14bb4085",
+    "status": "failed",
+    "mode": "PlayMode",
+    "started_unix_ms": 1792707515667,
+    "finished_unix_ms": 1792707524158,
+    "last_update_unix_ms": 1792707524158,
+    "progress": {
+      "completed": 1,
+      "total": 1,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": null,
+      "last_finished_test_full_name": "PaperDefense.Tests.AlbumPlayerJourneyTests.ExitConfirmationHidesPauseAndCancelRestoresItWithoutResuming",
+      "last_finished_unix_ms": 1792707524130,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "run_in_background": true,
+      "focus_nudge_attempts": null,
+      "focus_nudge_limit": null,
+      "focus_nudge_status": null,
+      "blocked_reason": null,
+      "failures_so_far": [
+        {
+          "full_name": "PaperDefense.Tests.AlbumPlayerJourneyTests.ExitConfirmationHidesPauseAndCancelRestoresItWithoutResuming",
+          "message": "System.InvalidOperationException : Sequence contains no matching element"
+        }
+      ],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "PlayMode",
+      "summary": {
+        "total": 1,
+        "passed": 0,
+        "failed": 1,
+        "skipped": 0,
+        "durationSeconds": 0.7547937,
+        "resultState": "Failed(Child)"
+      },
+      "results": [
+        {
+          "name": "ExitConfirmationHidesPauseAndCancelRestoresItWithoutResuming",
+          "fullName": "PaperDefense.Tests.AlbumPlayerJourneyTests.ExitConfirmationHidesPauseAndCancelRestoresItWithoutResuming",
+          "state": "Failed:Error",
+          "durationSeconds": 0.7218338,
+          "message": "System.InvalidOperationException : Sequence contains no matching element",
+          "stackTrace": "  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <fe644d7ad1cf499ebe4e7ad937bc03bf>:0 \r\n  at PaperDefense.Tests.AlbumPlayerJourneyTests+<ExitConfirmationHidesPauseAndCancelRestoresItWithoutResuming>d__18.MoveNext () [0x00059] in D:\\Projekt Unity\\paper\\Assets\\PaperDefense\\Tests\\PlayMode\\AlbumPlayerJourneyTests.cs:162 \r\n  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@1405238725ab\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:44 ",
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

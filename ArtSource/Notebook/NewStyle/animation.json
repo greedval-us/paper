@@ -1,6 +1,6 @@
 {
   "SchemaVersion": 1,
-  "Revision": "blue-pen-2026-10-17",
+  "Revision": "modular-gun-pilot-2026-10-18-v1",
   "MaximumTerminalTailSeconds": 1.2,
   "MaximumEffects": 256,
   "MaximumDeaths": 128,

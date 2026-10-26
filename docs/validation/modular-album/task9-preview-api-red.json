@@ -1,0 +1,10 @@
+[
+  "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyPreviewMetricsTests.cs(16,48): error CS0117: 'AssemblyResolver' does not contain a definition for 'PreviewMetrics'\n",
+  "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyPreviewMetricsTests.cs(37,44): error CS0117: 'AssemblyResolver' does not contain a definition for 'PreviewMetrics'\n",
+  "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyPreviewMetricsTests.cs(54,44): error CS0117: 'AssemblyResolver' does not contain a definition for 'PreviewMetrics'\n",
+  "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyPreviewMetricsTests.cs(74,42): error CS0117: 'AssemblyResolver' does not contain a definition for 'PreviewMetrics'\n",
+  "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyPreviewMetricsTests.cs(80,42): error CS0117: 'AssemblyResolver' does not contain a definition for 'PreviewMetrics'\n",
+  "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyPreviewMetricsTests.cs(81,42): error CS0117: 'AssemblyResolver' does not contain a definition for 'PreviewMetrics'\n",
+  "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyPreviewMetricsTests.cs(82,42): error CS0117: 'AssemblyResolver' does not contain a definition for 'PreviewMetrics'\n",
+  "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyPreviewMetricsTests.cs(84,42): error CS0117: 'AssemblyResolver' does not contain a definition for 'PreviewMetrics'\n"
+]

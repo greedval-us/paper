@@ -48,6 +48,13 @@ namespace PaperDefense.Tests
             Canvas.ForceUpdateCanvases();
         }
 
+        void AssertNoDrawingEditors(string action = "")
+        {
+            var retired = new[] { "DrawingCanvasGraphic", "FootprintCanvasGraphic", "FootprintAxisGraphic", "FanVolleyGraphic", "ArmorReinforcementGraphic" };
+            Assert.That(root.GetComponentsInChildren<Component>(true).Where(component => component != null)
+                .Select(component => component.GetType().Name).Intersect(retired), Is.Empty, action);
+        }
+
         [TearDown] public void TearDown()
         {
             if (root != null) Object.DestroyImmediate(root);
@@ -80,6 +87,9 @@ namespace PaperDefense.Tests
 
         void AssertCurrentAssemblyPreview()
         {
+            Assert.That(wizard.Draft.Origin, Is.EqualTo(DrawingOrigin.LegacyStandard), "Every weapon or module choice must retain standard construction rules.");
+            Assert.That(wizard.Draft.Drawing.IsEmpty, Is.True);
+            Assert.That(wizard.Draft.FreeformDesign, Is.Null);
             var preview = root.GetComponentsInChildren<Graphic>(true)
                 .SingleOrDefault(value => value.name == "Weapon assembly illustration" &&
                     value.GetType().Name == "WeaponAssemblyGraphic" && value.gameObject.activeInHierarchy);
@@ -129,7 +139,7 @@ namespace PaperDefense.Tests
             }
         }
 
-        [Test] public void SmallerFoundationKeepsExcessMountsRemovableBeforeDrawing()
+        [Test] public void SmallerFoundationKeepsExcessMountsRemovableBeforeReview()
         {
             Open(allWeaponsOwned: true, allChassisOwned: true);
             wizard.Load(new TowerBlueprint("three-weapon-screen", "Three weapons", "chassis.battery", new[]
@@ -137,7 +147,7 @@ namespace PaperDefense.Tests
                 new WeaponMountSelection(0, "weapon.gun"),
                 new WeaponMountSelection(1, "weapon.gun"),
                 new WeaponMountSelection(2, "weapon.gun")
-            }, origin: DrawingOrigin.Freeform, content: run.Content));
+            }, content: run.Content));
             Assert.That(wizard.GoToStep(0), Is.True);
             Assert.That(wizard.SelectChassis("chassis.precision"), Is.True);
             Assert.That(wizard.Next(), Is.True);
@@ -168,8 +178,10 @@ namespace PaperDefense.Tests
             Assert.That(wizard.Draft, Is.SameAs(before));
             Assert.That(wizard.Draft.Drawing.IsEmpty, Is.True);
             AssertCurrentAssemblyPreview();
-            Assert.That(wizard.Next(), Is.True, "A valid assembly must reach drawing before it has any functional geometry.");
+            Assert.That(wizard.Next(), Is.True, "A valid standard assembly must reach review with an empty drawing.");
             Assert.That(wizard.Step, Is.EqualTo(2));
+            Assert.That(root.transform.Find("Wizard review"), Is.Not.Null);
+            AssertNoDrawingEditors();
             Assert.That(run.Workshop.Gold, Is.EqualTo(gold));
             Assert.That(store.Writes, Is.EqualTo(writes));
         }
@@ -249,7 +261,7 @@ namespace PaperDefense.Tests
             Assert.That(store.Writes, Is.EqualTo(writes + 2));
         }
 
-        [Test] public void MortarEditRefreshesCurrentAssemblyWithoutReplacingCoveredControlsOrLosingFocus()
+        [Test] public void StandardMortarDoesNotOfferTheRetiredFootprintEditor()
         {
             Open(allWeaponsOwned: true);
             Assert.That(wizard.Next(), Is.True);
@@ -258,47 +270,23 @@ namespace PaperDefense.Tests
             var page = root.transform.Find("Wizard weapons");
             var preview = page.GetComponentInChildren<WeaponAssemblyGraphic>();
             Assert.That(preview, Is.Not.Null);
-            var geometry = Button("Wizard weapon geometry");
             var next = Button("Wizard next");
-            var eventSystem = events.GetComponent<EventSystem>();
-            eventSystem.SetSelectedGameObject(geometry.gameObject);
             var before = wizard.Draft;
             int gold = run.Workshop.Gold, writes = store.Writes;
-
-            geometry.onClick.Invoke();
-            Assert.That(wizard.Mortar.IsOpen, Is.True);
-            Assert.That(next.IsInteractable(), Is.False, "The specialist must block navigation behind its sheet.");
-            Button("Footprint longitudinal").onClick.Invoke();
-
-            Assert.That(wizard.Draft, Is.Not.SameAs(before), "The real footprint command must commit a new draft.");
-            Assert.That(wizard.Draft.GetMortarFootprint(0).IsContour, Is.True);
-            Assert.That(root.transform.Find("Wizard weapons"), Is.SameAs(page),
-                "Refreshing specialist changes must retain the root covered by WorkshopModal.");
+            Assert.That(root.GetComponentsInChildren<Button>(true).Any(button =>
+                button.name == "Wizard weapon geometry" && button.gameObject.activeInHierarchy), Is.False,
+                "The standard route must not expose freeform footprint editing.");
+            var open = typeof(WorkshopWizard).GetMethod("OpenGeometry", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.That(open, Is.Not.Null);
+            open.Invoke(wizard, new object[] { 0 });
+            AssertNoDrawingEditors("The retired editor command must also reject direct invocation.");
+            Assert.That(wizard.Draft, Is.SameAs(before));
+            Assert.That(root.transform.Find("Wizard weapons"), Is.SameAs(page));
             Assert.That(page.GetComponentInChildren<WeaponAssemblyGraphic>(), Is.SameAs(preview));
-            AssertCurrentAssemblyPreview();
-            Assert.That(geometry.IsInteractable(), Is.False);
-            Assert.That(next.IsInteractable(), Is.False, "An edit must not recreate unblocked background controls.");
+            Assert.That(next.IsInteractable(), Is.True);
             Assert.That(wizard.Step, Is.EqualTo(1));
             Assert.That(run.Workshop.Gold, Is.EqualTo(gold));
             Assert.That(store.Writes, Is.EqualTo(writes));
-
-            Button("Footprint ellipse").onClick.Invoke();
-            var ellipse = wizard.Draft.GetMortarFootprint(0);
-            Assert.That(ellipse.IsContour, Is.False);
-            Assert.That(ellipse.IsCircle, Is.False);
-            Assert.That(geometry.GetComponentInChildren<Text>().text, Does.Contain("Эллипс"),
-                "A custom ellipse must not be presented as an unmodified footprint.");
-            Assert.That(root.transform.Find("Wizard weapons"), Is.SameAs(page));
-            Assert.That(page.GetComponentInChildren<WeaponAssemblyGraphic>(), Is.SameAs(preview));
-            AssertCurrentAssemblyPreview();
-            Assert.That(next.IsInteractable(), Is.False);
-
-            Button("Close footprint").onClick.Invoke();
-            Assert.That(wizard.Mortar.IsOpen, Is.False);
-            Assert.That(next.IsInteractable(), Is.True);
-            Assert.That(geometry.IsInteractable(), Is.True);
-            Assert.That(eventSystem.currentSelectedGameObject, Is.SameAs(geometry.gameObject),
-                "Closing the specialist must return keyboard focus to the retained geometry action.");
             AssertCurrentAssemblyPreview();
         }
 

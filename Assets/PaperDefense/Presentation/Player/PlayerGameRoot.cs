@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace PaperDefense.Presentation
 {
-    public enum PlayerPage { Home, Map, Preparation, Workshop, Battle, Pause, Upgrades, Result, Settings, Help }
+    public enum PlayerPage { Home, Map, Preparation, Workshop, Battle, Pause, Upgrades, Result, Settings, Help, Album }
 
     /// <summary>Player navigation owns presentation only. All gameplay and profile commands use RunController.</summary>
     [DefaultExecutionOrder(-100)]
@@ -22,6 +22,7 @@ namespace PaperDefense.Presentation
         PlayerShell shell;
         PlayerPage settingsReturn = PlayerPage.Home;
         PlayerPage helpReturn = PlayerPage.Home;
+        PlayerPage albumReturn = PlayerPage.Home, workshopReturn = PlayerPage.Preparation;
         public PlayerDisplaySettings DisplaySettings { get; private set; }
         NotebookVisualThemeAsset reducedTheme, originalTheme;
         public bool ReducedMotion { get; private set; }
@@ -49,7 +50,8 @@ namespace PaperDefense.Presentation
         public DrawingInput Drawing => bootstrap.Drawing;
         public NotebookWorldView World => bootstrap.View;
         public string Status { get; private set; } = "";
-        public bool CanBuild => Page == PlayerPage.Battle && !Run.Paused && !Run.Session.PendingUpgrade && !Finished;
+        public bool CanBuild => Page == PlayerPage.Battle && !Run.Paused && !Run.Session.PendingUpgrade && !Finished &&
+            !(shell?.HasConfirmation ?? false) && !Drawing.IsGameplayInputBlocked;
         public bool Finished => Run.Session.Phase == RunPhase.Victory || Run.Session.Phase == RunPhase.Defeat;
 
         public void Configure(GameBalanceAsset configuration, bool memoryOnly, bool useNotebookStyle = true)
@@ -79,7 +81,9 @@ namespace PaperDefense.Presentation
             workshop.transform.SetParent(transform, false); workshop.TextResolver = bootstrap.TextResolver;
             workshop.PresentationVisible = false; workshop.StartRequested = () => Navigate(PlayerPage.Preparation);
             workshop.UseGuidedFlow=true;
-            workshop.Initialize(Run); workshop.SetPlayerLayout(); workshop.PresentationVisible = false;
+            workshop.Initialize(Run);
+            if (workshop.Composite != null) workshop.Composite.BackRequested = ReturnFromWorkshop;
+            workshop.SetPlayerLayout(); workshop.PresentationVisible = false;
             shell = new GameObject("Player interface").AddComponent<PlayerShell>();
             shell.transform.SetParent(transform, false); shell.Initialize(this);
             Navigate(PlayerPage.Home);
@@ -101,14 +105,14 @@ namespace PaperDefense.Presentation
                 if (keyboard.escapeKey.wasPressedThisFrame)
                 {
                     if (shell.HasConfirmation) { shell.CancelConfirmation(); return; }
-                    if (Page == PlayerPage.Battle) Pause();
+                    if (Page == PlayerPage.Battle && !Drawing.IsGameplayInputBlocked) Pause();
                     else if (Page == PlayerPage.Pause) Resume();
                     else if (Page == PlayerPage.Settings) CloseSettings();
                     else if (Page == PlayerPage.Help) CloseHelp();
                 }
-                if (!shell.HasConfirmation && keyboard.spaceKey.wasPressedThisFrame)
+                if (!shell.HasConfirmation && (Page == PlayerPage.Pause || !Drawing.IsGameplayInputBlocked) && keyboard.spaceKey.wasPressedThisFrame)
                 { if (Page == PlayerPage.Battle) Pause(); else if (Page == PlayerPage.Pause) Resume(); }
-                if (Page == PlayerPage.Battle)
+                if (Page == PlayerPage.Battle && !shell.HasConfirmation && !Drawing.IsGameplayInputBlocked)
                 {
                     if (keyboard.nKey.wasPressedThisFrame) Run.NextWave();
                     if (keyboard.fKey.wasPressedThisFrame) Run.ToggleSpeed();
@@ -125,6 +129,7 @@ namespace PaperDefense.Presentation
 
         public void Navigate(PlayerPage page)
         {
+            if (page == PlayerPage.Workshop && Page != PlayerPage.Workshop) workshopReturn = Page;
             Page = page;
             workshop.PresentationVisible = page == PlayerPage.Workshop;
             Drawing.enabled = CanBuild;
@@ -132,11 +137,48 @@ namespace PaperDefense.Presentation
             shell.Show(page);
         }
 
+        public void OpenAlbum()
+        {
+            if (!Run.InWorkshop) return;
+            if (Page != PlayerPage.Album) albumReturn = Page == PlayerPage.Workshop ? workshopReturn : Page;
+            Navigate(PlayerPage.Album);
+        }
+        public void ShowAlbum() => OpenAlbum();
+        public void CloseAlbum() => Navigate(albumReturn);
+        public void EditAlbumEntry(AlbumEntry entry)
+        {
+            if (!Run.InWorkshop) return;
+            Navigate(PlayerPage.Workshop);
+            if (entry == null) workshop.Composite?.BeginNewEntry();
+            else workshop.Composite?.OpenEntry(entry);
+        }
+        public void ReturnFromWorkshop()
+        {
+            if (workshopReturn == PlayerPage.Album)
+                shell.SelectAlbumOnReturn(workshop.Composite?.DraftSession.Draft?.Id);
+            Navigate(workshopReturn);
+        }
+        public void AssignAlbumEntry(int slot, string id)
+        {
+            if (Page != PlayerPage.Preparation || !Run.InWorkshop) return;
+            var result = Run.AssemblyCommands.AssignSlot(slot, id, System.Guid.NewGuid());
+            Status = result.Success ? "" : GameText.Resolve(UserText.Message(result.Code));
+            shell.Show(PlayerPage.Preparation);
+            var replacement = shell.GetComponentsInChildren<UnityEngine.UI.Button>();
+            foreach (var button in replacement)
+                if (button.name == "Replace album entry " + slot)
+                { UnityEngine.EventSystems.EventSystem.current?.SetSelectedGameObject(button.gameObject); break; }
+        }
+
         public bool StartBattle()
         {
             if (!Run.InWorkshop) return false;
             if (!Run.StartRun(out var reason)) { Status = GameText.Resolve(reason); shell.SetStatus(Status); return false; }
-            Status = ""; Drawing.SelectSlot(0); Navigate(PlayerPage.Battle); return true;
+            Status = ""; Drawing.SelectSlot(0);
+            World.CastleVisualScale = Run.UsesAlbumSlots ? .55f : 1;
+            World.ModernEnemyPresentation = Run.UsesAlbumSlots;
+            if (Run.UsesAlbumSlots) Drawing.SetBattleView(false);
+            Navigate(PlayerPage.Battle); return true;
         }
 
         public void Pause()
@@ -157,6 +199,12 @@ namespace PaperDefense.Presentation
         {
             Run.OpenWorkshop(); Status = ""; Navigate(PlayerPage.Map);
         }
+
+        public void ReturnToHome()
+        { Run.OpenWorkshop(); Status = ""; Navigate(PlayerPage.Home); }
+
+        public void ReturnToAlbumFromResult()
+        { Run.OpenWorkshop(); Status = ""; albumReturn = PlayerPage.Map; Navigate(PlayerPage.Album); }
 
         public void Retry()
         { Run.OpenWorkshop(); StartBattle(); }

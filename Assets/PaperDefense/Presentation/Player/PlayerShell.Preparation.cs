@@ -10,6 +10,7 @@ namespace PaperDefense.Presentation
     {
         void Preparation()
         {
+            if (game.Run.AssemblyCatalog != null) { AssemblyPreparation(); return; }
             Rect composition = NotebookPageBackdrop("Art/Player/PreparationLandscape");
             NotebookScreenHeader("Подготовка", () => game.Navigate(PlayerPage.Map),
                 ui.T("mission") + " · " + game.Run.Session.Balance.Waves.Count + " волн", true, composition);

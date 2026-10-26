@@ -1,0 +1,276 @@
+{
+  "date": "2026-10-26",
+  "base": "0b6b6b7823be140bdd358e5a971848dac8d8791e",
+  "removed": {
+    "files": 3237.0,
+    "bytes": 2443219649.0,
+    "targets": [
+      {
+        "relative": "Builds/CombatAndDrawingFixes",
+        "files": 337,
+        "bytes": 208811247
+      },
+      {
+        "relative": "Builds/ContentAcceptance-20261012",
+        "files": 339,
+        "bytes": 209023603
+      },
+      {
+        "relative": "Builds/CoreRefactor",
+        "files": 337,
+        "bytes": 208808699
+      },
+      {
+        "relative": "Builds/FullAlbumTarget",
+        "files": 337,
+        "bytes": 208793151
+      },
+      {
+        "relative": "Builds/MechanicsCleanup",
+        "files": 337,
+        "bytes": 209779234
+      },
+      {
+        "relative": "Builds/MortarFootprint",
+        "files": 337,
+        "bytes": 208837039
+      },
+      {
+        "relative": "Builds/Stage1StandardWorkshop",
+        "files": 204,
+        "bytes": 234455530
+      },
+      {
+        "relative": "Builds/Stage2SplitGunPilot",
+        "files": 204,
+        "bytes": 234473913
+      },
+      {
+        "relative": "Builds/Stage2StandardMounts",
+        "files": 204,
+        "bytes": 234465673
+      },
+      {
+        "relative": "Builds/Task15-Baseline-20261026",
+        "files": 206,
+        "bytes": 262378312
+      },
+      {
+        "relative": "Builds/Windows",
+        "files": 330,
+        "bytes": 196171788
+      },
+      {
+        "relative": "outputs/task14-20261025",
+        "files": 20,
+        "bytes": 6069292
+      },
+      {
+        "relative": "docs/balance/PaperDefense-Album-Balance-v1.xlsx.inspect.ndjson",
+        "files": 1,
+        "bytes": 3562203
+      },
+      {
+        "relative": ".playwright-cli",
+        "files": 5,
+        "bytes": 39438
+      },
+      {
+        "relative": "Captures",
+        "files": 21,
+        "bytes": 15617970
+      },
+      {
+        "relative": "Tools/BalanceWorkbook/.previews",
+        "files": 15,
+        "bytes": 1920723
+      },
+      {
+        "relative": "Tools/__pycache__",
+        "files": 1,
+        "bytes": 4017
+      },
+      {
+        "relative": "Tools/tests/__pycache__",
+        "files": 1,
+        "bytes": 7637
+      },
+      {
+        "relative": "Assets/PaperDefense/Art",
+        "files": 0,
+        "bytes": 0
+      },
+      {
+        "relative": "Assets/PaperDefense/Art.meta",
+        "files": 1,
+        "bytes": 180
+      }
+    ]
+  },
+  "gitIndexRetirement": {
+    "nodeModulesFiles": 8584,
+    "nodeModulesHeadBytes": 508691370,
+    "generatedPreviewFiles": 15,
+    "pythonCacheFiles": 2,
+    "generatedSolution": "paper.slnx",
+    "localNodeDirectoriesPreserved": true,
+    "historyRewritten": false
+  },
+  "preservation": {
+    "runtimeSourceAndDataChanged": false,
+    "artSourceFiles": 72,
+    "artSourceBytes": 91027170,
+    "releaseZipSha256": "7804e8ece2a8f0eeb8d33ae345dcbaf40b679318d3bc2fe54c5906d6727db858",
+    "protectedDependencyStatesAndHashesPreserved": true,
+    "protectedDependencyBaseline": [
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/.modules.yaml",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/.pnpm-workspace-state-v1.json",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/@img/sharp-win32-x64/lib/libvips-42.dll",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/@img/sharp-win32-x64/lib/libvips-cpp-8.18.7.dll",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/@img/sharp-win32-x64/lib/sharp-win32-x64-0.35.5.node",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/@napi-rs/canvas-win32-x64-msvc/skia.win32-x64-msvc.node",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/dist/artifact-session/host-daemon.mjs",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/dist/artifact-session/index.mjs",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/dist/artifact-session/prepare.mjs",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/dist/artifact-session/service.mjs",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/docs/presentations/api/references/charts.spec.md",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/docs/presentations/api/references/presentation.spec.md",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/.pnpm-workspace-state-v1.json",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/package.json",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/blazor.boot.json",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "D",
+        "path": "Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/@oai/walnut/wasm/dotnet.js",
+        "exists": false,
+        "sha256": null
+      },
+      {
+        "status": "M",
+        "path": "Tools/BalanceWorkbook/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/skia.node",
+        "exists": true,
+        "sha256": "15DCB52EE0A7B0E6C672A2895B10E459460F36C3F750D3B93B6687737CF57801"
+      },
+      {
+        "status": "M",
+        "path": "Tools/BalanceWorkbook/node_modules/pnpm/dist/node_modules/@reflink/reflink-win32-arm64-msvc/reflink.win32-arm64-msvc.node",
+        "exists": true,
+        "sha256": "01F70922C03CA978C43D487ED736F2E107A2B74D372EDA5F72BFAFDED81A30BE"
+      },
+      {
+        "status": "M",
+        "path": "Tools/BalanceWorkbook/node_modules/pnpm/dist/node_modules/@reflink/reflink-win32-x64-msvc/reflink.win32-x64-msvc.node",
+        "exists": true,
+        "sha256": "A9243D865F5D00AE2103B6BB8ED1ED0BDE96283FD411085D8F0B121A5B1940F6"
+      },
+      {
+        "status": "M",
+        "path": "Tools/BalanceWorkbook/node_modules/pnpm/dist/vendor/fastlist-0.3.0-x64.exe",
+        "exists": true,
+        "sha256": "016539C025DBE8EE3BDEAA3034A7F00242E17422CCC39101A5EB0C6CE1DC5524"
+      },
+      {
+        "status": "M",
+        "path": "Tools/BalanceWorkbook/node_modules/pnpm/dist/vendor/fastlist-0.3.0-x86.exe",
+        "exists": true,
+        "sha256": "6A61BD0A0B90BDC7FBE1B31794D00B3E026C61195DBB54CF56E0580DEDD0AD21"
+      }
+    ],
+    "recoveryKept": true,
+    "extraProjectKept": true,
+    "activeUnityCachesKept": true
+  },
+  "checks": {
+    "nodeTestsPassed": 14,
+    "pythonTestsPassed": 8,
+    "balanceNumericDifferences": [],
+    "documentsChecked": 86,
+    "localLinksChecked": 1310,
+    "brokenLinks": [],
+    "unityRefresh": "completed",
+    "unityConsoleErrors": 0,
+    "excelGenerator": "not verified: pre-existing missing external artifact_tool.mjs",
+    "fullUnitySuiteRerun": false,
+    "buildRerun": false
+  }
+}

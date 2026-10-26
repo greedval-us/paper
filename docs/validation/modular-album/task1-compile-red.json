@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "message": "Retrieved 5 log entries.",
+  "data": [
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyCatalogTests.cs(18,57): error CS0246: The type or namespace name 'AssemblyCatalogAsset' could not be found (are you missing a using directive or an assembly reference?)\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyCatalogTests.cs(22,70): error CS0103: The name 'ComponentCategory' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyCatalogTests.cs(23,70): error CS0103: The name 'ComponentCategory' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyCatalogTests.cs(24,70): error CS0103: The name 'ComponentCategory' does not exist in the current context\n",
+    "Assets\\PaperDefense\\Tests\\EditMode\\AssemblyCatalogTests.cs(24,110): error CS0103: The name 'ComponentCategory' does not exist in the current context\n"
+  ]
+}

@@ -35,22 +35,24 @@ namespace PaperDefense.Editor
             try { queue.Dequeue()(); }
             catch (Exception e) { LastCapture = "ERROR: " + e; queue.Clear(); Debug.LogError(LastCapture); }
         }
-        public static WorkshopWizard Wizard => Game.GetComponentInChildren<WorkshopHud>(true).Guided;
-        public static void CompleteDrawing()
+        public static CompositeWorkshopPanel Assembly => Game.GetComponentInChildren<WorkshopHud>(true).Composite;
+        public static readonly Vector2Int[] AssemblyResolutions = {
+            new Vector2Int(1024, 768), new Vector2Int(1280, 720), new Vector2Int(1920, 1080),
+            new Vector2Int(1280, 960), new Vector2Int(1600, 900)
+        };
+
+        /// <summary>Reach the production album editor without the retired drawing wizard.</summary>
+        public static void AssemblyStep(int step, AlbumEntry entry = null)
         {
-            var drawing = Wizard.Drawing; var session = drawing.Session;
-            session.AddRectangle(DrawingBindings.Base, new DrawingPoint(-.35f,-.35f), new DrawingPoint(.35f,.35f), out _);
-            foreach (var mount in session.Blueprint.WeaponMounts)
-                session.AddRectangle(DrawingBindings.Mount(mount.SlotIndex), new DrawingPoint(-.0625f,0), new DrawingPoint(.0625f,.5f), out _);
-            drawing.Canvas.FinishStroke();
+            if (step < 0 || step > 2) throw new ArgumentOutOfRangeException(nameof(step));
+            Game.Run.OpenWorkshop(); Game.Navigate(PlayerPage.Workshop);
+            var panel = Assembly ?? throw new InvalidOperationException("The production assembly editor is unavailable.");
+            if (entry == null) panel.BeginNewEntry(); else panel.OpenEntry(entry);
+            var button = panel.Root.GetComponentsInChildren<Button>().Single(item => item.name == "Composite step " + step);
+            if (!button.IsInteractable()) throw new InvalidOperationException("The requested assembly stage is unavailable.");
+            button.onClick.Invoke();
         }
-        public static void WorkshopStep(int step, bool complete = false)
-        {
-            Game.Run.OpenWorkshop(); Game.Navigate(PlayerPage.Workshop); Wizard.NewDraft();
-            for (int i = 0; i < Mathf.Min(2, step); i++) Wizard.Next();
-            if (complete) CompleteDrawing();
-            if (step == 3) Wizard.Next();
-        }
+        public static void WorkshopStep(int step) => AssemblyStep(step);
         public static void Planning(bool wave = false)
         {
             Game.Run.OpenWorkshop(); Game.StartBattle();

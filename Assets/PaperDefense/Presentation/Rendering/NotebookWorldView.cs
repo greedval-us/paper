@@ -16,6 +16,18 @@ namespace PaperDefense.Presentation
         public NotebookViewSettingsAsset ViewSettings;
         public bool Paused { get; set; }
         public bool ShowEnemyHealthBars { get; set; } = true;
+        public bool ModernEnemyPresentation { get; set; }
+        float castleVisualScale = 1;
+        public float CastleVisualScale
+        {
+            get => castleVisualScale;
+            set
+            {
+                float next = Mathf.Max(.1f, value);
+                if (castleVisualScale == next) return;
+                castleVisualScale = next; staticDirty = true;
+            }
+        }
         public double VisualSeconds => visualClock.Seconds;
         public NotebookAnimationState AnimationState => animation;
         bool showRanges;
@@ -61,6 +73,7 @@ namespace PaperDefense.Presentation
         bool previewValid;
         float previewRange = -1;
         TowerBlueprint previewBlueprint;
+        RecipeSnapshot previewRecipe;
         int paperWidth, paperHeight;
         int visualVersion = -1, topologyVersion = -1, castleHealthBand = -1;
         RunPhase renderedPhase;
@@ -83,6 +96,7 @@ namespace PaperDefense.Presentation
             DroppedVisualEffects = 0;
             previewCells.Clear();
             previewBlueprint = null;
+            previewRecipe = null;
             staticDirty = true;
             visualVersion = topologyVersion = castleHealthBand = -1;
             if (session != null)
@@ -105,11 +119,11 @@ namespace PaperDefense.Presentation
         }
 
         public void SetPreview(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier, bool valid, float range = -1,
-            TowerBlueprint blueprint = null)
+            TowerBlueprint blueprint = null, RecipeSnapshot recipe = null)
         {
             int count = cells == null ? 0 : cells.Count;
             bool changed = previewKind != kind || previewTier != tier || previewValid != valid || previewCells.Count != count || previewRange != range
-                || !ReferenceEquals(previewBlueprint, blueprint);
+                || !ReferenceEquals(previewBlueprint, blueprint) || !ReferenceEquals(previewRecipe, recipe);
             for (int i = 0; !changed && i < count; i++) changed = previewCells[i] != cells[i];
             if (!changed) return;
             previewCells.Clear();
@@ -120,6 +134,7 @@ namespace PaperDefense.Presentation
             previewValid = valid;
             previewRange = range;
             previewBlueprint = blueprint;
+            previewRecipe = recipe;
             if (previewPen != null && session != null) DrawPreview();
         }
 
@@ -184,9 +199,10 @@ namespace PaperDefense.Presentation
             visualClock.Advance(session.Elapsed, session.Phase, Paused, Time.unscaledDeltaTime, Theme?.MaximumTerminalTailSeconds ?? 1.2f);
             animation.Prune(visualClock.Seconds, Theme);
             long started = System.Diagnostics.Stopwatch.GetTimestamp();
-            if (UpdateViewScale())
+            bool scaleChanged = UpdateViewScale();
+            if (scaleChanged) DrawPaper();
+            if (scaleChanged)
             {
-                DrawPaper();
                 if (previewCells.Count > 0) DrawPreview();
                 staticDirty = true;
             }
@@ -229,6 +245,18 @@ namespace PaperDefense.Presentation
             p.Clear();
             p.MinimumStrokePixels = 0;
             Color navy = NotebookPalette.Navy;
+            const float surround = 96;
+            // Wide windows reveal the scenery outside the playable sheet. Keep that space
+            // illustrated without adding blocked cells or changing the simulation map.
+            p.Rect(-surround, -surround, paperWidth + surround * 2, paperHeight + surround * 2,
+                PaperColor ?? NotebookPalette.Paper);
+            Color extensionGrid = new Color(.35f, .54f, .68f, .10f);
+            float extensionStroke = p.WorldUnitsPerPixel > 0 ? .7f * p.WorldUnitsPerPixel : .1f;
+            for (int x = -90; x <= paperWidth + 90; x += 5)
+                p.Line(new Vector2(x, -surround), new Vector2(x, paperHeight + surround), extensionStroke, extensionGrid);
+            for (int y = -90; y <= paperHeight + 90; y += 5)
+                p.Line(new Vector2(-surround, y), new Vector2(paperWidth + surround, y), extensionStroke, extensionGrid);
+            DrawSurroundingScenery(p);
             // The subtle page shadow and warm edge make the world feel like an actual sheet.
             p.Rect(-2.5f, -2.5f, paperWidth + 5, paperHeight + 5, PaperColor.HasValue ? new Color32(220, 229, 242, 255) : new Color(.89f, .88f, .82f));
             p.Rect(-1.75f, -1.75f, paperWidth + 3.5f, paperHeight + 3.5f, PaperColor ?? NotebookPalette.Paper);
@@ -250,6 +278,18 @@ namespace PaperDefense.Presentation
                 if (y % 5 != 0 && minorGridOpacity <= 0) continue;
                 p.Line(new Vector2(-1.5f, y), new Vector2(paperWidth + 1.5f, y),
                        y % 5 == 0 ? majorWidth : minorWidth, y % 5 == 0 ? major : minor);
+            }
+            if (ModernEnemyPresentation && minorGridOpacity > 0)
+            {
+                // Fine notebook ruling is decorative paper texture. The full-unit
+                // placement grid and every simulation coordinate retain their scale.
+                var fine = new Color(.35f, .54f, .68f, .105f * minorGridOpacity);
+                for (int column = -3; column <= (paperWidth + 1) * 3; column++)
+                    if (column % 3 != 0)
+                        p.Line(new Vector2(column / 3f, -1.5f), new Vector2(column / 3f, paperHeight + 1.5f), minorWidth, fine);
+                for (int row = -3; row <= (paperHeight + 1) * 3; row++)
+                    if (row % 3 != 0)
+                        p.Line(new Vector2(-1.5f, row / 3f), new Vector2(paperWidth + 1.5f, row / 3f), minorWidth, fine);
             }
             // Microtexture disappears before it becomes subpixel sparkle on the overview.
             for (int i = 0; minorGridOpacity > 0 && i < 700; i++)
@@ -303,8 +343,33 @@ namespace PaperDefense.Presentation
             p.Line(compass + Vector2.left * 1.05f, compass + Vector2.right * 1.05f, .04f, sketch);
             p.Triangle(compass + Vector2.up * .85f, compass + new Vector2(-.16f, -.14f), compass + new Vector2(.16f, -.14f), sketch);
             p.MinimumStrokePixels = terrainStrokePixels;
+            // The immutable battlefield owns every playable terrain prop. Camera-relative
+            // decoration would slide over buildable cells when panning or zooming.
             NotebookBattlefieldRenderer.Draw(p, session.Battlefield, Theme);
             p.Upload();
+        }
+
+        void DrawSurroundingScenery(MeshPen pen)
+        {
+            if (session.Battlefield == null) return;
+            for (int side = 0; side < 2; side++)
+            {
+                float sign = side == 0 ? -1 : 1;
+                float edge = side == 0 ? -8 : paperWidth + 8;
+                for (int band = 0; band < 4; band++)
+                for (int row = 0; row < 8; row++)
+                {
+                    int seed = side * 313 + band * 47 + row;
+                    var at = new Vector2(edge + sign * (band * 14 + MeshPen.Hash(seed + 17) * 5),
+                        -3 + row * 10 + MeshPen.Hash(seed + 99) * 6);
+                    bool mountain = band > 0 && row % 3 == 0;
+                    DoodleGlyphs.DrawResource(pen, mountain ? "terrain.mountain" : "terrain.pine", at,
+                        mountain ? 14 : 7 + MeshPen.Hash(seed + 11) * 5, opacity: .72f, theme: Theme);
+                    if (!mountain && row % 2 == 0)
+                        DoodleGlyphs.DrawResource(pen, "terrain.rock", at + new Vector2(sign * 4, -3), 5,
+                            opacity: .55f, theme: Theme);
+                }
+            }
         }
 
         void DrawStructureRanges(MeshPen p)
@@ -313,6 +378,20 @@ namespace PaperDefense.Presentation
             {
                 StructureView structure = session.Structures[i];
                 var origin = new Vector2(structure.Cell.X + .5f, structure.Cell.Y + .5f);
+                if (structure.ResolvedEntry != null)
+                {
+                    foreach (var weapon in structure.ResolvedEntry.Weapons)
+                    {
+                        if (weapon.Range > 1) p.Ring(origin, weapon.Range, .035f,
+                            MeshPen.Alpha(DoodleGlyphs.TierColor(structure.Tier), .16f), 96, 1, structure.Id + weapon.SlotIndex, true);
+                        if (weapon.MinimumRange > 0) p.Ring(origin, weapon.MinimumRange, .055f,
+                            MeshPen.Alpha(NotebookPalette.Red, .35f), 72, 1, structure.Id + weapon.SlotIndex, true);
+                    }
+                    float radius = structure.ResolvedEntry.Support?.Radius ?? 0;
+                    if (radius > 0) p.Ring(origin, radius, .035f,
+                        MeshPen.Alpha(DoodleGlyphs.TierColor(structure.Tier), .16f), 96, 1, structure.Id, true);
+                    continue;
+                }
                 if (structure.Blueprint == null)
                 {
                     float range = session.Balance.WeaponRange(null, structure.Kind);
@@ -371,11 +450,11 @@ namespace PaperDefense.Presentation
                 // without covering those actors with the three-cell decorative castle.
                 p.Ring(home, .38f, .025f, MeshPen.Alpha(NotebookPalette.Blue, .35f), 20);
             }
-            else DoodleGlyphs.Castle(p, home, session.BaseHealth / session.Balance.BaseHealth, (float)visualClock.Seconds, Theme);
+            else DoodleGlyphs.Castle(p, home, session.BaseHealth / session.Balance.BaseHealth, (float)visualClock.Seconds, Theme, castleVisualScale);
             if (session.Phase == RunPhase.Defeat)
             {
-                p.Line(home + new Vector2(-1.9f, -1.7f), home + new Vector2(1.9f, 1.7f), .13f, MeshPen.Alpha(NotebookPalette.Red, .7f));
-                p.Line(home + new Vector2(-1.9f, 1.7f), home + new Vector2(1.9f, -1.7f), .13f, MeshPen.Alpha(NotebookPalette.Red, .7f));
+                p.Line(home + new Vector2(-1.9f, -1.7f) * castleVisualScale, home + new Vector2(1.9f, 1.7f) * castleVisualScale, .13f, MeshPen.Alpha(NotebookPalette.Red, .7f));
+                p.Line(home + new Vector2(-1.9f, 1.7f) * castleVisualScale, home + new Vector2(1.9f, -1.7f) * castleVisualScale, .13f, MeshPen.Alpha(NotebookPalette.Red, .7f));
             }
             p.Upload();
             StaticGeometryRefreshCount++;
@@ -400,11 +479,12 @@ namespace PaperDefense.Presentation
             for (int i = 0; i < session.Structures.Count; i++)
             {
                 var structure = session.Structures[i];
-                float duration = structure.Blueprint != null ? session.Balance.BuildSeconds(structure.Blueprint, structure.Tier)
-                    : session.Balance.Structure(structure.Kind).BuildSeconds * session.Balance.Material(structure.Tier).BuildTimeMultiplier;
+                float duration = structure.ResolvedEntry?.BuildSeconds ?? (structure.Blueprint != null ? session.Balance.BuildSeconds(structure.Blueprint, structure.Tier)
+                    : session.Balance.Structure(structure.Kind).BuildSeconds * session.Balance.Material(structure.Tier).BuildTimeMultiplier);
                 DoodleGlyphs.StructureDynamic(p, structure, duration, visualClock.Seconds, animation, Theme);
             }
             float time = (float)visualClock.Seconds;
+            float enemyScale = NotebookEnemyView.ScaleFor(ModernEnemyPresentation);
             bool compactSwarm = session.Enemies.Count > 1000;
             bool cull = WorldCamera != null && WorldCamera.orthographic;
             Vector3 cameraPosition = cull ? WorldCamera.transform.position : Vector3.zero;
@@ -414,19 +494,19 @@ namespace PaperDefense.Presentation
             {
                 EnemyView enemy = session.Enemies[i];
                 // Include scaled art/status marks and the HP bar above the silhouette.
-                float margin = DoodleGlyphs.VisualScale(enemy.VisualScale) + .5f;
+                float margin = DoodleGlyphs.VisualScale(enemy.VisualScale) * enemyScale + .5f;
                 if (cull && (Mathf.Abs(enemy.Position.X - cameraPosition.x) > halfWidth + margin
                           || Mathf.Abs(enemy.Position.Y - cameraPosition.y) > halfHeight + margin)) continue;
                 DoodleGlyphs.Enemy(p, enemy, time, compactSwarm, animation, Theme, windupSeconds: session.Balance.Enemy(enemy.Kind).WindupSeconds,
-                    showHealth: ShowEnemyHealthBars);
+                    showHealth: ShowEnemyHealthBars, uniformScale: enemyScale);
             }
             foreach (var death in animation.Deaths)
             {
-                float margin = DoodleGlyphs.VisualScale(death.VisualScale) + .5f;
+                float margin = DoodleGlyphs.VisualScale(death.VisualScale) * enemyScale + .5f;
                 if (cull && (Mathf.Abs(death.Position.x - cameraPosition.x) > halfWidth + margin
                     || Mathf.Abs(death.Position.y - cameraPosition.y) > halfHeight + margin)) continue;
                 DoodleGlyphs.DrawResourceEnemy(p, death.Kind, death.Tier, death.Position, NotebookEnemyMotion.Death,
-                    (float)(visualClock.Seconds - death.Born), Theme, death.VisualScale);
+                    (float)(visualClock.Seconds - death.Born), Theme, death.VisualScale, enemyScale);
             }
             p.Upload();
         }
@@ -500,7 +580,10 @@ namespace PaperDefense.Presentation
             if (slot < 0) return fallback;
             for (int i = 0; i < session.Structures.Count; i++)
                 if (session.Structures[i].Id == structureId)
-                    return NotebookTowerComposition.SegmentOrigin(session.Structures[i], slot, aim, fallback, visualClock.Seconds, animation, Theme);
+                {
+                    var structure = session.Structures[i];
+                    return DoodleGlyphs.SegmentOrigin(structure, slot, aim, fallback, visualClock.Seconds, animation, Theme);
+                }
             return fallback;
         }
         static Vector2 FlightPoint(Vector2 from, Vector2 to, float t, float height)
@@ -518,7 +601,10 @@ namespace PaperDefense.Presentation
                 p.Box(center, new Vector2(.91f, .91f), MeshPen.Alpha(color, .15f), MeshPen.Alpha(color, .8f), .056f, cell.GetHashCode());
                 if (previewValid)
                 {
-                    if (NotebookTowerComposition.UsesComposition(previewBlueprint))
+                    if (previewRecipe != null)
+                        AssemblyVisualComposer.Compose(previewRecipe, new AssemblyVisualPose()).Draw(p, center, .65f,
+                            uniformScale: NotebookAssemblyView.ScaleFor(previewRecipe));
+                    else if (NotebookTowerComposition.UsesComposition(previewBlueprint))
                     {
                         NotebookTowerComposition.DrawStatic(p, previewBlueprint, center, previewTier, InkColor.None, .65f, Theme);
                         NotebookTowerComposition.DrawMounts(p, previewBlueprint, center, previewTier, InkColor.None,
@@ -558,9 +644,13 @@ namespace PaperDefense.Presentation
                 }
                 else
                 {
-                    var definition = session.Balance.Structure(previewKind);
-                    float range = previewRange >= 0 ? previewRange : previewKind == StructureKind.TarPit ? Mathf.Max(.5f, definition.Radius) : definition.Range;
-                    p.Ring(center, range, .045f, MeshPen.Alpha(color, .38f), 120, 1, 117, true);
+                    float range = previewRange;
+                    if (range < 0 && session.Balance.HasStructure(previewKind))
+                    {
+                        var definition = session.Balance.Structure(previewKind);
+                        range = previewKind == StructureKind.TarPit ? Mathf.Max(.5f, definition.Radius) : definition.Range;
+                    }
+                    if (range > 0) p.Ring(center, range, .045f, MeshPen.Alpha(color, .38f), 120, 1, 117, true);
                 }
             }
             p.Upload();

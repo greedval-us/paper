@@ -4,7 +4,7 @@
 
 Исходная сцена: `Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity`, Unity 6000.5.7f1, runtime uGUI, Screen Space Overlay, CanvasScaler Expand. Начальный снимок — `before-weapons.png`. Рабочая база — `bbebb37`. Выделение редактора пустое; игровых ошибок при начале нет.
 
-Источник — `docs/design/game-concept-art-2026-10-16/screens/05-weapons.png`, 1672×941. Игровые цифры не копируются из примеров PNG.
+Источник — `ArtSource/Notebook/References/2026-10-16/screens/05-weapons.png`, 1672×941. Игровые цифры не копируются из примеров PNG.
 
 | Регион | Нормализованный rect эскиза | Реализация |
 |---|---|---|
