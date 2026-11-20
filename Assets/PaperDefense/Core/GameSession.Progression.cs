@@ -36,6 +36,11 @@ namespace PaperDefense.Core
 
         private void CompleteWave()
         {
+            if (openHordeBreaches != null)
+            {
+                openHordeBreaches = null;
+                flowDirty = true;
+            }
             int generatorIncome = generatorLedger.CompleteWave(RunId, WaveIndex, structures);
             foreach (var payout in generatorLedger.LastPayouts)
                 EventBuffer.Publish(TickIndex, SimulationEventKind.GeneratorPaid, Center(payout.Source.Cell), Center(payout.Source.Cell),

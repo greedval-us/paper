@@ -97,7 +97,7 @@ namespace PaperDefense.Core
             well.Active=false;well.Threatened=false;well.EligibleWave=int.MaxValue;
             flowDirty=true;StructureVisualVersion++;
             foreach(var enemy in enemies)
-                if(enemy.ObjectiveIndex==index){enemy.ObjectiveIndex=-1;enemy.HasDestination=false;}
+                if(enemy.ObjectiveIndex==index){enemy.ObjectiveIndex=-1;enemy.HasDestination=false;enemy.AssaultWall=null;}
         }
 
         private bool ReservedObjective(Cell cell)
@@ -138,11 +138,16 @@ namespace PaperDefense.Core
             foreach(var well in wells)if(well.Active&&selection--==0){well.Threatened=true;return well.Id;}
             return -1;
         }
-        private void RebuildWellFlows(EnemyDefinition profile)
+        private bool IsHordeWave => WaveIndex > 0 && rules.Waves[WaveIndex - 1].IsHorde;
+
+        private void RebuildNavigation()
         {
-            foreach(var well in wells)
-                if(well.Active)wellFlows[well.Id].Rebuild(well.Cell,grid,profile.Speed,
-                    Math.Max(rules.Combat.MinimumPathDamage,profile.Damage)/Math.Max(rules.Combat.MinimumActionInterval,profile.AttackInterval));
+            var profile = rules.Enemy(EnemyKind.Doodle);
+            float breachDps = Math.Max(rules.Combat.MinimumPathDamage, profile.Damage) /
+                Math.Max(rules.Combat.MinimumActionInterval, profile.AttackInterval);
+            flow.Rebuild(BaseCell, grid, profile.Speed, breachDps, IsHordeWave, openHordeBreaches);
+            foreach (var well in wells)
+                if (well.Active) wellFlows[well.Id].Rebuild(well.Cell, grid, profile.Speed, breachDps, IsHordeWave, openHordeBreaches);
         }
         private void AwardWellResources()
         {

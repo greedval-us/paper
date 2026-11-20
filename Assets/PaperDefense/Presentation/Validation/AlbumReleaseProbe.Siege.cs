@@ -189,6 +189,8 @@ namespace PaperDefense.Presentation
                     buy("album.mortar", 2, 0, 180);
                     buy("album.guard", 2, -2, 180);
                     for (int y = -2; y <= 2; y++) buy("album.wall", -2, y, 180);
+                    // Cover the diagonal where the final ranged boss can stop outside the western battery.
+                    buy("album.guard", 3, -2, 315);
                     break;
                 case 2:
                     buy("album.piercer", -2, 0, 0);

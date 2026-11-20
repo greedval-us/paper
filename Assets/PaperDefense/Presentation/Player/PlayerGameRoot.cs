@@ -39,17 +39,7 @@ namespace PaperDefense.Presentation
                 var source = originalTheme != null ? originalTheme : NotebookVisualThemeAsset.Default;
                 var data = JsonUtility.FromJson<NotebookArtSource>(JsonUtility.ToJson(source.Data));
                 data.ReducedMotion = true;
-                foreach (var clip in data.Clips)
-                {
-                    string stillShape = clip.Frames.Count > 0 ? clip.Frames[0].ShapeId : null;
-                    foreach (var frame in clip.Frames)
-                    {
-                        frame.Offset = Vector2.zero; frame.Rotation = 0; frame.Scale = 1;
-                        // Authored limbs and splashes also move through different shape frames.
-                        // Keep event timing and alpha fades while holding a single drawn pose.
-                        if (stillShape != null) frame.ShapeId = stillShape;
-                    }
-                }
+                foreach (var clip in data.Clips) clip.HoldFirstPose();
                 foreach (var recoil in data.Recoils) recoil.Distance = 0;
                 reducedTheme.ReplaceData(data);
             }

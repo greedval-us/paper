@@ -85,13 +85,13 @@ namespace PaperDefense.Core
                     Id = nextProjectileId++, From = enemy.Position, To = enemy.RangedTarget,
                     Remaining = duration, Duration = duration, Damage = Math.Max(0, definition.Damage),
                     ObjectiveDamageScale = enemy.ObjectiveDamageScale, ObjectiveIndex = enemy.RangedObjectiveIndex,
-                    SourceEnemyKind = enemy.Kind, SourceEnemyDrawingTier = enemy.DrawingTier
+                    SourceEnemyKind = enemy.Kind, SourceEnemyDrawingTier = enemy.DrawingTier, Boss = enemy.Boss
                 };
                 projectiles.Add(glob);
                 PublishAttack(enemy, glob.To);
                 world.EventBuffer.Publish(world.TickIndex, SimulationEventKind.EnemyGlobLaunched, glob.From, glob.To, default,
                     entityId: glob.Id, travelSeconds: duration, simulationSeconds: world.Elapsed, enemyKind: enemy.Kind,
-                    enemyDrawingTier: enemy.DrawingTier, enemyVisualScale: enemy.VisualScale);
+                    enemyDrawingTier: enemy.DrawingTier, enemyVisualScale: enemy.VisualScale, boss: enemy.Boss);
                 enemy.WindingUp = false;
                 enemy.RangedCooldown = Math.Max(combat.MinimumActionInterval, definition.AttackInterval);
                 return true;
@@ -147,12 +147,12 @@ namespace PaperDefense.Core
         void PublishAttack(EnemyState enemy, Point2 target)
             => world.EventBuffer.Publish(world.TickIndex, SimulationEventKind.EnemyAttack, enemy.Position, target,
                 default, entityId: enemy.Id, simulationSeconds: world.Elapsed, enemyKind: enemy.Kind,
-                enemyDrawingTier: enemy.DrawingTier, enemyVisualScale: enemy.VisualScale);
+                enemyDrawingTier: enemy.DrawingTier, enemyVisualScale: enemy.VisualScale, boss: enemy.Boss);
 
         void PublishImpact(EnemyGlob glob, Point2 impact)
             => world.EventBuffer.Publish(world.TickIndex, SimulationEventKind.EnemyGlobImpact, glob.From, impact,
                 default, entityId: glob.Id, simulationSeconds: world.Elapsed, enemyKind: glob.SourceEnemyKind,
-                enemyDrawingTier: glob.SourceEnemyDrawingTier);
+                enemyDrawingTier: glob.SourceEnemyDrawingTier, boss: glob.Boss);
 
         static Point2 Center(Cell cell) => new Point2(cell.X + .5f, cell.Y + .5f);
 

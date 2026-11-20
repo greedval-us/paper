@@ -153,13 +153,7 @@ namespace PaperDefense.Core
             generatorLedger.BeginWave(RunId, WaveIndex, Array.Empty<StructureState>());
             generatorLedger.CompleteWave(RunId, WaveIndex, Array.Empty<StructureState>());
             flowDirty = data.FlowDirty;
-            if (!flowDirty)
-            {
-                var profile = rules.Enemy(EnemyKind.Doodle);
-                flow.Rebuild(BaseCell, grid, profile.Speed, Math.Max(rules.Combat.MinimumPathDamage, profile.Damage) /
-                    Math.Max(rules.Combat.MinimumActionInterval, profile.AttackInterval));
-                RebuildWellFlows(profile);
-            }
+            if (!flowDirty) RebuildNavigation();
             TopologyVersion = data.TopologyVersion; StructureVisualVersion = data.StructureVisualVersion; FlowRebuildCount = data.FlowRebuildCount;
             random.RestoreDrawCount(data.RandomDrawCount); weapons.RestoreCheckpointClock(Elapsed, data.NextActionId);
             // Corpse reconstruction may have produced private candidate events. No saved or

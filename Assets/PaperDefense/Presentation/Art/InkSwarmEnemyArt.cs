@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using PaperDefense.Core;
 using UnityEngine;
 
 namespace PaperDefense.Presentation
@@ -7,7 +8,7 @@ namespace PaperDefense.Presentation
     /// <summary>Authored side profiles for the six ink creatures. Geometry is cached, never redrawn per frame.</summary>
     internal static partial class InkSwarmEnemyArt
     {
-        static readonly string[] Families = { "doodle", "runner", "gnawer", "spitter", "brute", "bulwark" };
+        internal static readonly string[] Roles = { "doodle", "runner", "gnawer", "spitter", "brute", "bulwark" };
         static readonly string[] Tiers = { "sketch", "outlined", "hatched" };
         static readonly string[] Motions = { "idle", "walk", "attack", "hit", "death" };
         static readonly Dictionary<string, NotebookArtShape> Shapes = new Dictionary<string, NotebookArtShape>(StringComparer.Ordinal);
@@ -15,22 +16,35 @@ namespace PaperDefense.Presentation
         internal static NotebookArtShape Create(string id)
         {
             if (id == null || !id.StartsWith("enemy.", StringComparison.Ordinal)) return null;
+            if (id.StartsWith("enemy.boss.", StringComparison.Ordinal)) return CreateBossPose(id);
             if (id.EndsWith(".compact", StringComparison.Ordinal))
                 return CreateCompact(id.Substring(0, id.Length - ".compact".Length));
-            if (Shapes.TryGetValue(id, out var cached)) return cached;
+            return CreatePose(id, false);
+        }
+
+        static NotebookArtShape CreatePose(string id, bool compact)
+        {
+            var cache = compact ? CompactShapes : Shapes;
+            if (cache.TryGetValue(id, out var cached)) return cached;
             string[] parts = id.Split('.');
-            if (parts.Length < 3 || parts.Length > 5) return null;
-            int family = Array.IndexOf(Families, parts[1]);
-            if (family < 0) return null;
-            // Catalogue previews also use enemy.<family>.idle.
-            bool shorthand = parts.Length == 3;
-            int tier = shorthand ? 0 : Array.IndexOf(Tiers, parts[2]);
-            int motion = Array.IndexOf(Motions, parts[shorthand ? 2 : 3]);
-            int phase = parts.Length == 5 ? parts[4] == "a" ? 1 : parts[4] == "b" ? 2 : -1 : 0;
-            if (tier < 0 || motion < 0 || phase < 0) return null;
-            var drawing = new BattleInkDrawing(id);
+            if (parts.Length < 3 || parts[0] != "enemy") return null;
+            EnemyFamily family = parts[1] == "undead" ? EnemyFamily.Undead :
+                parts[1] == "clockwork" ? EnemyFamily.Clockwork : EnemyFamily.Ink;
+            int roleIndex = family == EnemyFamily.Ink ? 1 : 2;
+            int suffixLength = parts.Length - roleIndex - 1;
+            if (suffixLength < 1 || suffixLength > 3) return null;
+            int role = Array.IndexOf(Roles, parts[roleIndex]);
+            // A catalogue thumbnail may omit the drawing tier.
+            int tier = suffixLength == 1 ? 0 : Array.IndexOf(Tiers, parts[roleIndex + 1]);
+            int motion = Array.IndexOf(Motions, parts[roleIndex + (suffixLength == 1 ? 1 : 2)]);
+            int phase = suffixLength != 3 ? 0 : parts[roleIndex + 3] == "a" ? 1 : parts[roleIndex + 3] == "b" ? 2 : -1;
+            if (role < 0 || tier < 0 || motion < 0 || phase < 0) return null;
+            var drawing = new BattleInkDrawing(compact ? id + ".compact" : id);
             var pose = new Pose((NotebookEnemyMotion)motion, phase, tier);
-            switch (family)
+            if (family == EnemyFamily.Undead) DrawUndead(drawing, role, pose, compact);
+            else if (family == EnemyFamily.Clockwork) DrawClockwork(drawing, role, pose, compact);
+            else if (compact) DrawCompactInk(drawing, role, pose);
+            else switch (role)
             {
                 case 0: Doodle(drawing, pose); break;
                 case 1: Runner(drawing, pose); break;
@@ -40,23 +54,35 @@ namespace PaperDefense.Presentation
                 default: Bulwark(drawing, pose); break;
             }
             FinishPose(drawing.Shape, pose);
-            Shapes.Add(id, drawing.Shape);
+            cache.Add(id, drawing.Shape);
             return drawing.Shape;
         }
 
         internal static void PopulateClips(NotebookArtSource data)
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
-            foreach (string family in Families)
-            foreach (string tier in Tiers)
+            foreach (EnemyFamily family in Enum.GetValues(typeof(EnemyFamily)))
+            foreach (EnemyKind role in Enum.GetValues(typeof(EnemyKind)))
+            foreach (DrawingTier tier in Enum.GetValues(typeof(DrawingTier)))
             for (int motion = 0; motion < Motions.Length; motion++)
             {
-                string id = "enemy." + family + "." + tier + "." + Motions[motion];
+                string id = NotebookAnimationState.EnemyId(role, tier, (NotebookEnemyMotion)motion, family);
                 var clip = new NotebookArtClip { Id = id,
-                    Duration = motion == 0 ? 1.2f : motion == 1 ? family == "runner" ? .36f : .52f : motion == 4 ? .6f : .24f,
+                    Duration = motion == 0 ? 1.2f : motion == 1 ? role == EnemyKind.Runner ? .36f : .52f : motion == 4 ? .6f : .24f,
                     Loop = motion == 0 || motion == 1 };
+                if (family == EnemyFamily.Clockwork && role == EnemyKind.Gnawer && motion == (int)NotebookEnemyMotion.Attack)
+                    clip.Duration = .38f;
+                if (family == EnemyFamily.Undead && role == EnemyKind.Spitter && motion == (int)NotebookEnemyMotion.Attack)
+                    clip.Duration = .42f;
                 if (motion == 0)
                     clip.Frames.Add(new NotebookArtFrame { ShapeId = id });
+                else if (motion == 1 && family == EnemyFamily.Clockwork && role == EnemyKind.Brute)
+                {
+                    // Three equally spaced spokes advance one turn of the pattern per cycle.
+                    Frame(clip, id + ".a", 0);
+                    Frame(clip, id, 1f / 3);
+                    Frame(clip, id + ".b", 2f / 3);
+                }
                 else if (motion == 1)
                 {
                     Frame(clip, id + ".a", 0);

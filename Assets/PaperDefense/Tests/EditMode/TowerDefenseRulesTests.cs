@@ -27,6 +27,46 @@ namespace PaperDefense.Tests
             b.Battlefield.Entrances.Add(new BattlefieldCell(10,0));
             b.Waves[0].Sides=15;return b;
         }
+        [Test]
+        public void FastHordeAttackerReachesMeleeRangeWithCellMovement()
+        {
+            var balance = Map();
+            balance.Crowd.Enabled = false;
+            balance.Enemy(EnemyKind.Doodle).Speed = 45;
+            balance.Waves[0].Horde = new HordeWaveSettings { Enabled = true, BodyScale = 1, HealthScale = 1, ObjectiveDamageScale = 1 };
+            var cell = new Cell(6, 8);
+            balance.Battlefield.BarricadeSites.Add(new BattlefieldCell(cell.X, cell.Y));
+            var game = GameSession.CreatePrepared(balance, 17, new[] { new PreparedEnemy(new Point2(1.5f, 8.5f), 100, stationary: false) });
+            Assert.That(game.TryBuild(new[] { cell }, StructureKind.Wall, MaterialTier.Pencil, out var reason), Is.True, reason);
+            var wall = game.StructureAt(cell);
+            game.Tick(5);
+            Assert.That(wall.Health, Is.LessThan(wall.MaxHealth), "A 1.5-cell step must stop within striking distance of the wall.");
+        }
+
+        [Test]
+        public void HordeLeavesVisibleBarricadeInRockDeadEndUntouched()
+        {
+            var balance = OpenMap();
+            balance.Crowd.Enabled = true;
+            balance.Waves[0].Horde = new HordeWaveSettings { Enabled = true, BodyScale = .42f, HealthScale = 1, ObjectiveDamageScale = 1 };
+            // The castle is east of the wall, but the only exit from this pocket faces west.
+            balance.Battlefield.Props.Add(new TerrainPropDefinition { X = 4, Y = 7, Width = 3, Height = 1 });
+            balance.Battlefield.Props.Add(new TerrainPropDefinition { X = 4, Y = 9, Width = 3, Height = 1 });
+            balance.Battlefield.Props.Add(new TerrainPropDefinition { X = 7, Y = 6, Width = 1, Height = 5 });
+            var group = new List<PreparedEnemy>();
+            for (int x = 1; x <= 3; x++)
+                group.Add(new PreparedEnemy(new Point2(x + .5f, 8.5f), 100, stationary: false));
+            var game = GameSession.CreatePrepared(balance, 17, group);
+            var cell = new Cell(6, 8);
+            Assert.That(game.TryBuild(new[] { cell }, StructureKind.Wall, MaterialTier.Pencil, out var reason), Is.True, reason);
+            var wall = game.StructureAt(cell);
+            for (int tick = 0; tick < 450; tick++) game.Tick(1f / 30);
+            Assert.That(wall.Health, Is.EqualTo(wall.MaxHealth));
+            foreach (var enemy in game.Enemies)
+                Assert.That(enemy.Position.X, Is.GreaterThan(8f), "Every mob must pass the ridge.");
+            Assert.That(game.BaseHealth, Is.LessThan(balance.BaseHealth));
+        }
+
         [Test] public void OpenTerrainAllowsFreeConstructionAndRejectsFullTerrainFootprintsAtomically()
         {
             var b=OpenMap();b.Battlefield.Props.Add(new TerrainPropDefinition{Kind=TerrainPropKind.Mountain,X=5,Y=3,Width=2,Height=3});

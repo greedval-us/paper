@@ -15,6 +15,7 @@ namespace PaperDefense.Core
         readonly Func<Cell, int> chooseObjective;
         WaveDefinition wave;
         WaveComposition composition;
+        EnemyDefinition bossStats;
         int waveNumber;
 
         internal EnemyWaveSpawner(GameBalance rules, MechanicsAvailability mechanics, BattlefieldView map,
@@ -36,12 +37,15 @@ namespace PaperDefense.Core
             this.wave = wave;
             waveNumber = number;
             composition = wave.ResolveComposition(mechanics);
+            bossStats = CampaignBosses.CreateStats(rules, wave.Boss);
         }
 
         internal bool TrySpawn(int id, int ordinal, out EnemyState enemy)
         {
-            var kind = composition.SelectKind(random.NextDouble());
-            var definition = rules.Enemy(kind);
+            var rolledKind = composition.SelectKind(random.NextDouble());
+            // The boss leads the column. An occupied entrance retries this same slot.
+            BossRank boss = ordinal == 1 ? wave.Boss : BossRank.None;
+            var definition = boss == BossRank.None ? rules.Enemy(rolledKind) : bossStats;
             float bodyScale = wave.IsHorde ? definition.VisualScale * wave.Horde.BodyScale : definition.VisualScale;
             if (!TrySelectEntrance(bodyScale, out var cell))
             {
@@ -52,11 +56,14 @@ namespace PaperDefense.Core
             Point2 position = occupancy.Add(cell);
             if (motion != null) position = Center(cell);
             var tier = mechanics.EnemyDrawingTiers ? composition.SelectTier(random.NextDouble()) : DrawingTier.Sketch;
+            if (boss != BossRank.None && mechanics.EnemyDrawingTiers)
+                tier = boss == BossRank.Midpoint ? DrawingTier.Outlined : DrawingTier.Hatched;
             float health = StartingHealth(definition, tier);
             enemy = new EnemyState {
-                Id = id, Kind = kind, Position = position, VisualScale = bodyScale,
+                Id = id, Kind = definition.Kind, Boss = boss, BossStats = boss == BossRank.None ? null : bossStats,
+                Position = position, VisualScale = bodyScale,
                 Health = health, MaxHealth = health, DrawingTier = tier,
-                ObjectiveDamageScale = wave.IsHorde ? wave.Horde.ObjectiveDamageScale : 1,
+                ObjectiveDamageScale = wave.IsHorde ? wave.Horde.ObjectiveDamageScale * (boss == BossRank.None ? 1 : 8) : 1,
                 SpeedScale = rules.Progression.EnemySpeedScaleMinimum +
                     (float)random.NextDouble() * rules.Progression.EnemySpeedScaleVariation,
                 ObjectiveIndex = chooseObjective(cell),

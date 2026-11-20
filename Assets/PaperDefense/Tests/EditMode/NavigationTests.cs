@@ -43,6 +43,48 @@ namespace PaperDefense.Tests
         }
 
         [Test]
+        public void AlternatingWavesChangeTheirRouteAroundTheSameWall()
+        {
+            var balance = GameBalance.CreateDefault();
+            balance.Width = 20;
+            balance.Height = 16;
+            balance.Battlefield = new BattlefieldDefinition { Enabled = true, Mode = BattlefieldMode.OpenTerrain };
+            balance.Battlefield.Entrances.Add(new BattlefieldCell(0, 8));
+            balance.Crowd.Enabled = true;
+            balance.Crowd.EntranceHalfWidth = 0;
+            balance.Progression.UpgradeEveryWaves = 0;
+            balance.Structure(StructureKind.Wall).BuildSeconds = 0;
+            var horde = new HordeWaveSettings { Enabled = true, BodyScale = 1, HealthScale = 1, ObjectiveDamageScale = 1 };
+            balance.Waves = new List<WaveDefinition> {
+                new WaveDefinition { Count = 1 }, new WaveDefinition { Count = 1, Horde = horde }, new WaveDefinition { Count = 1 }
+            };
+            var game = new GameSession(balance, 17, false);
+            var cell = new Cell(4, 8);
+            Assert.That(game.TryBuild(new[] { cell }, StructureKind.Wall, MaterialTier.Pencil, out var reason), Is.True, reason);
+            var wall = game.StructureAt(cell);
+
+            foreach (var wave in balance.Waves)
+            {
+                int rebuilds = game.FlowRebuildCount;
+                float health = wall.Health;
+                bool passed = false;
+                game.StartNextWave();
+                for (int tick = 0; tick < 600 && !passed && wall.Health == health; tick++)
+                {
+                    game.Tick(1f / 30);
+                    passed = game.Enemies.Count > 0 && game.Enemies[0].Position.X >= cell.X + 1;
+                }
+                Assert.That(game.FlowRebuildCount, Is.EqualTo(rebuilds + 1));
+                Assert.That(wall.Health < health, Is.EqualTo(wave.IsHorde), "Only the horde should attack this wall.");
+                Assert.That(passed, Is.EqualTo(!wave.IsHorde), "Ordinary enemies should reach the other side via the open flank.");
+                // End this wave after observing its route, preserving the barricade for the next wave.
+                game.Enemies[0].Health = 0;
+                game.Tick(1f / 30);
+            }
+            Assert.That(game.Phase, Is.EqualTo(RunPhase.Victory));
+        }
+
+        [Test]
         public void SpatialQueriesMatchFullScanAtEdgesAndAfterDeaths()
         {
             var random = new Random(704);

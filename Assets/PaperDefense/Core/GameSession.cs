@@ -221,6 +221,7 @@ namespace PaperDefense.Core
             CreditInk(Math.Min(Math.Max(0, rules.MaxEarlyLaunchInk), (int)Math.Floor(Math.Max(0, Countdown) * Math.Max(0, rules.EarlyLaunchInkPerSecond))));
             WaveIndex++;
             var wave = rules.Waves[WaveIndex - 1];
+            if (WaveIndex > 1 && rules.Waves[WaveIndex - 2].IsHorde != wave.IsHorde) flowDirty = true;
             RemainingToSpawn = Math.Max(0, wave.Count);
             spawner.BeginWave(wave, WaveIndex);
             Countdown = 0;
@@ -303,10 +304,8 @@ namespace PaperDefense.Core
             SpawnEnemies(delta);
             if (flowDirty)
             {
-                var profile = rules.Enemy(EnemyKind.Doodle);
                 long rebuildStarted = System.Diagnostics.Stopwatch.GetTimestamp();
-                flow.Rebuild(BaseCell, grid, profile.Speed, Math.Max(rules.Combat.MinimumPathDamage, profile.Damage) / Math.Max(rules.Combat.MinimumActionInterval, profile.AttackInterval));
-                RebuildWellFlows(profile);
+                RebuildNavigation();
                 Statistics.RecordNavigation((System.Diagnostics.Stopwatch.GetTimestamp() - rebuildStarted) *
                     1000.0 / System.Diagnostics.Stopwatch.Frequency);
                 flowDirty = false;
@@ -345,26 +344,25 @@ namespace PaperDefense.Core
 
         private void MoveEnemies(float delta)
         {
-            bool hordeAtWalls = rules.Waves[WaveIndex - 1].IsHorde && structures.Exists(s => s.Kind == StructureKind.Wall && s.IsComplete);
+            bool hordeAtWalls = IsHordeWave && structures.Exists(s => s.Kind == StructureKind.Wall && s.IsComplete);
             // Destinations are refreshed before validating persistent frontage ownership.
             foreach (var enemy in enemies)
             {
                 if (enemy.Health <= 0) continue;
                 if (enemy.HasDestination && DistanceSquared(enemy.Position, enemy.Destination) > rules.Combat.DestinationRepathDistanceSquared)
                     enemy.HasDestination = false;
-                if (!enemy.HasDestination || crowdMotion != null)
+                if (!enemy.HasDestination || crowdMotion != null || enemy.AssaultWall != null)
                 {
                     enemy.Destination = Center(EnemyFlow(enemy).Next(CellOf(enemy.Position)));
                     enemy.HasDestination = true;
                 }
+                if (hordeAtWalls || enemy.AssaultWall != null) UpdateBarricadeApproach(enemy, hordeAtWalls);
                 if (crowdMotion != null)
                 {
                     enemy.NavigationDirection = CrowdPreferredDirection(enemy);
                     enemy.NavigationCost = EnemyFlow(enemy).Cost(CellOf(enemy.Position));
                 }
                 enemy.FrontlineTarget = StructureAt(CellOf(enemy.Destination));
-                if (hordeAtWalls && !IsBlocker(enemy.FrontlineTarget))
-                    enemy.FrontlineTarget = ContactWallAhead(enemy);
             }
             RetainFrontlineOwners();
             // Fill vacancies with the nearest contenders. A closer newcomer cannot rotate
@@ -380,18 +378,14 @@ namespace PaperDefense.Core
             foreach (var enemy in enemies)
             {
                 if (enemy.Health <= 0) continue;
-                var definition = rules.Enemy(enemy.Kind);
+                var definition = enemy.BossStats ?? rules.Enemy(enemy.Kind);
                 enemy.CrowdHoldingPosition = definition.Speed <= 0 || enemy.SpeedScale <= 0;
                 if (enemyAttacks.TryEngage(enemy, definition, delta))
                 {
                     enemy.CrowdHoldingPosition = true;
                     continue;
                 }
-                Cell destination = CellOf(enemy.Destination);
-                var obstacle = StructureAt(destination);
-                // An open detour remains available to everyone outside the wall's three melee slots.
-                if (enemy.FrontlineTarget != obstacle && IsBlocker(enemy.FrontlineTarget) && OwnsFrontage(enemy.FrontlineTarget, enemy))
-                    obstacle = enemy.FrontlineTarget;
+                var obstacle = enemy.FrontlineTarget;
                 if (IsBlocker(obstacle))
                 {
                     float contactDistance = DistanceSquared(enemy.Position, Center(obstacle.Cell));
@@ -408,6 +402,10 @@ namespace PaperDefense.Core
                 float movement = Math.Max(0, definition.Speed) * enemy.SpeedScale *
                     EnemyEffects.MovementMultiplier(enemy, enemyEffects, Mechanics.CorpseBlots ? rules.BlotSpeedBonus : 0) * delta;
                 if (crowdMotion != null) { MoveInCrowd(enemy, movement); continue; }
+                // The legacy mover can now have a wall several cells ahead as its waypoint.
+                // Land within melee reach even when one full step would end inside the wall.
+                if (enemy.AssaultWall != null && IsBlocker(obstacle))
+                    movement = Math.Min(movement, Math.Max(0, distance - .99f * rules.Combat.StructureContactDistance));
                 bool reached = distance <= movement + 0.00001f;
                 var nextPosition = reached ? enemy.Destination : distance > 0.00001f ?
                     new Point2(enemy.Position.X + dx / distance * movement, enemy.Position.Y + dy / distance * movement) : enemy.Position;
@@ -538,7 +536,6 @@ namespace PaperDefense.Core
             int firstSlot = (structure.Cell.Y * rules.Width + structure.Cell.X) * 3;
             for (int slot = firstSlot; slot < firstSlot + 3; slot++)
             { frontline[slot] = null; reservedFrontline[slot] = false; }
-            navigationBands[structure.Cell.Y * rules.Width + structure.Cell.X] = 0;
             MarkStructureChanged(structure, structure.IsComplete);
         }
 
@@ -548,8 +545,21 @@ namespace PaperDefense.Core
         private void MarkStructureChanged(StructureState structure, bool topologyChanged)
         {
             StructureVisualVersion++;
+            int index = structure.Cell.Y * rules.Width + structure.Cell.X;
+            if (topologyChanged && IsHordeWave && Phase == RunPhase.Assault)
+            {
+                if (IsBlocker(grid[index]))
+                {
+                    if (openHordeBreaches != null) openHordeBreaches[index] = false;
+                }
+                else if (structure.Kind == StructureKind.Wall)
+                {
+                    if (openHordeBreaches == null) openHordeBreaches = new bool[grid.Length];
+                    openHordeBreaches[index] = true;
+                }
+            }
             if (topologyChanged && structure.Kind != StructureKind.Spikes && structure.Kind != StructureKind.TarPit) { TopologyVersion++; flowDirty = true; }
-            navigationBands[structure.Cell.Y * rules.Width + structure.Cell.X] = IsBlocker(structure) ? WeightedFlowField.HealthBand(structure) : 0;
+            navigationBands[index] = IsBlocker(grid[index]) ? WeightedFlowField.HealthBand(grid[index]) : 0;
         }
 
         private void RefreshHealthBand(StructureState structure)
@@ -559,7 +569,8 @@ namespace PaperDefense.Core
             if (navigationBands[index] == band) return;
             navigationBands[index] = band;
             StructureVisualVersion++;
-            if (structure.IsComplete && structure.Kind != StructureKind.Spikes && structure.Kind != StructureKind.TarPit) flowDirty = true;
+            if (structure.IsComplete && structure.Kind != StructureKind.Spikes && structure.Kind != StructureKind.TarPit &&
+                !(IsHordeWave && structure.Kind == StructureKind.Wall)) flowDirty = true;
         }
 
         private int BuildCost(StructureKind kind, MaterialTier tier) => TowerCatalog.ToolCost(rules, kind, tier);

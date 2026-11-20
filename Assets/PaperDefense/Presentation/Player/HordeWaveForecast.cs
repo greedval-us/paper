@@ -8,39 +8,45 @@ namespace PaperDefense.Presentation
     {
         static int Percent(float fraction) => (int)Math.Round(100 * fraction);
 
-        internal static string Headline(WaveThreatForecast forecast)
+        internal static string Headline(WaveThreatForecast forecast, EnemyFamily family)
         {
             switch (forecast.Primary)
             {
                 case WaveThreat.Armor: return "Броня ≈" + Percent(forecast.PrimaryFraction) + "%";
-                case WaveThreat.Runners: return "Бегуны ≈" + Percent(forecast.PrimaryFraction) + "%";
-                case WaveThreat.Breach: return "Грызуны ≈" + Percent(forecast.PrimaryFraction) + "%";
-                case WaveThreat.Ranged: return (forecast.OnlySpittersFireGlobs ? "Плевуны ≈" : "Стрелки ≈") +
-                    Percent(forecast.PrimaryFraction) + "%";
+                case WaveThreat.Runners: return EnemyFamilyNames.Plural(family, EnemyKind.Runner) + " ≈" + Percent(forecast.PrimaryFraction) + "%";
+                case WaveThreat.Breach: return EnemyFamilyNames.Plural(family, EnemyKind.Gnawer) + " ≈" + Percent(forecast.PrimaryFraction) + "%";
+                case WaveThreat.Ranged: return (forecast.OnlySpittersFireGlobs ? EnemyFamilyNames.Plural(family, EnemyKind.Spitter) : "Стрелки") +
+                    " ≈" + Percent(forecast.PrimaryFraction) + "%";
                 default: return "Плотная толпа";
             }
         }
 
-        internal static string Advice(WaveThreatForecast forecast, MechanicsAvailability mechanics)
-            => Advice(forecast.Primary, mechanics, forecast.OnlySpittersFireGlobs);
+        internal static string Advice(WaveThreatForecast forecast, GameBalanceView balance)
+            => Advice(forecast.Primary, balance, forecast.OnlySpittersFireGlobs);
 
-        static string Advice(WaveThreat threat, MechanicsAvailability mechanics, bool onlySpitters)
+        static string Advice(WaveThreat threat, GameBalanceView balance, bool onlySpitters)
         {
             switch (threat)
             {
                 case WaveThreat.Armor: return "Пробивная пушка обходит половину брони." +
-                    (mechanics.ColorCartridges ? " Зелёная краска ослабляет защиту." : "");
+                    (balance.Mechanics.ColorCartridges ? " Зелёная краска ослабляет защиту." : "");
                 case WaveThreat.Runners: return "Повысь темп огня пулемёта. Быстрый указатель ускорит наведение.";
                 case WaveThreat.Breach: return "Прикрой стены огнём и поставь за ними ремонтный пост.";
-                case WaveThreat.Ranged: return onlySpitters ? "Увеличь дальность, чтобы достать плевунов за передним рядом." :
-                    "Увеличь дальность, чтобы достать стрелков за передним рядом.";
+                case WaveThreat.Ranged:
+                    string target = onlySpitters ? balance.EnemyFamily switch
+                    {
+                        EnemyFamily.Undead => "звонарей",
+                        EnemyFamily.Clockwork => "метателей",
+                        _ => "плевунов"
+                    } : "стрелков";
+                    return "Увеличь дальность, чтобы достать " + target + " за передним рядом.";
                 default: return "Поставь мортиру у прохода. Широкий ствол увеличит радиус взрыва.";
             }
         }
 
         internal static string MissionBriefing(GameBalanceView balance, Func<WaveView, string> direction)
         {
-            var text = new StringBuilder();
+            var text = new StringBuilder(EnemyFamilyNames.Title(balance.EnemyFamily)).AppendLine();
             var threats = new System.Collections.Generic.List<WaveThreat>();
             bool onlySpitters = true;
             for (int i = 0; i < balance.Waves.Count; i++)
@@ -49,18 +55,21 @@ namespace PaperDefense.Presentation
                 if (!wave.IsHorde) continue;
                 var forecast = wave.Forecast;
                 text.Append(i + 1).Append(". ").Append(wave.Count).Append(" ").Append(direction(wave))
-                    .Append(" · ").Append(Headline(forecast));
+                    .Append(" · ").Append(Headline(forecast, balance.EnemyFamily));
                 int runners = Percent(forecast.RunnerFraction), armor = Percent(forecast.ArmoredFraction);
                 var threat = forecast.Primary;
                 if (threat == WaveThreat.Crowd && wave.Count > 0)
                     text.Append(" · до ").Append((int)Math.Round(forecast.MaximumArrivalsPerSecond)).Append(" врагов/с");
-                if (runners >= 20 && threat != WaveThreat.Runners) text.Append(" · бегуны ≈").Append(runners).Append("%");
+                if (runners >= 20 && threat != WaveThreat.Runners)
+                    text.Append(" · ").Append(EnemyFamilyNames.Plural(balance.EnemyFamily, EnemyKind.Runner).ToLowerInvariant())
+                        .Append(" ≈").Append(runners).Append("%");
                 if (armor >= 20 && threat != WaveThreat.Armor) text.Append(" · броня ≈").Append(armor).Append("%");
+                if (wave.Boss != BossRank.None) text.Append(" · Босс ").Append(EnemyFamilyNames.BossName(balance.EnemyFamily, wave.Boss));
                 text.AppendLine();
                 if (!threats.Contains(threat)) threats.Add(threat);
                 if (threat == WaveThreat.Ranged && !forecast.OnlySpittersFireGlobs) onlySpitters = false;
             }
-            foreach (var threat in threats) text.AppendLine().Append(Advice(threat, balance.Mechanics, onlySpitters)).AppendLine();
+            foreach (var threat in threats) text.AppendLine().Append(Advice(threat, balance, onlySpitters)).AppendLine();
             return text.ToString().TrimEnd();
         }
 

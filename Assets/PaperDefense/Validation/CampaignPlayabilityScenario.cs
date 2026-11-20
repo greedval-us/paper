@@ -55,6 +55,7 @@ namespace PaperDefense.Validation
         public const int MaximumTicksPerWave = 18000;
         public const double MaximumWallSeconds = 120;
         public const string Policy = "field-mixed-v2";
+        const int FourFieldsEastBatteryOffset = 10;
         static readonly InkColor[] FlaskColors = { InkColor.Green, InkColor.Red, InkColor.Blue };
 
         public static CampaignPlayabilityResult Run(GameBalance baseline, ComponentCatalog catalog,
@@ -332,6 +333,7 @@ namespace PaperDefense.Validation
             int x = cell.X - session.BaseCell.X, y = cell.Y - session.BaseCell.Y;
             if (entry.Kind == AlbumEntryKind.Tower)
             {
+                if (mission == 5 && x == FourFieldsEastBatteryOffset && y == 0) return 0;
                 if (mission == 8 || mission == 5 && entry.Weapons[0].Family != AssemblyWeaponFamily.Mortar)
                     return (float)(Math.Atan2(-y, -x) * 180 / Math.PI);
                 if (mission == 1) return 90;
@@ -453,6 +455,13 @@ namespace PaperDefense.Validation
                 foreach (var d in directions)
                 {
                     string id = ring % 3 == 0 ? "album.mortar" : ring % 3 == 1 ? "album.piercer" : "album.guard";
+                    // Four Fields already has a southern battery. Fund the eastern one before the fourth assault,
+                    // where ranged enemies can stop beyond the castle ring.
+                    if (mission.Index == 5 && ring == 0 && d.Y == -1)
+                    {
+                        yield return (id, new Cell(center.X + FourFieldsEastBatteryOffset, center.Y));
+                        continue;
+                    }
                     int radius = 3 + ring / 2;
                     yield return (id, new Cell(center.X + d.X * radius + d.Y * (ring % 3 - 1) * 2,
                         center.Y + d.Y * radius - d.X * (ring % 3 - 1) * 2));

@@ -42,6 +42,7 @@ namespace PaperDefense.Presentation
         public int RoleMarkerCount { get; private set; }
         public int ThreatBracketCount { get; private set; }
         public int NearCastleCount { get; private set; }
+        public EnemyView? ActiveBoss { get; private set; }
         public bool LowCastleHealth { get; private set; }
         public float WorldUnitsPerPixel { get; private set; }
         public BattleReadabilityMark GetRoleMarker(int index)
@@ -52,6 +53,7 @@ namespace PaperDefense.Presentation
         public void Refresh(IRunReadModel session, Rect worldViewport, float worldUnitsPerPixel)
         {
             RoleMarkerCount = ThreatBracketCount = NearCastleCount = candidateCount = 0;
+            ActiveBoss = null;
             LowCastleHealth = showCastle = false;
             RunId = session?.RunId ?? Guid.Empty;
             WorldUnitsPerPixel = Finite(worldUnitsPerPixel) && worldUnitsPerPixel > 0 ? worldUnitsPerPixel : 0;
@@ -66,6 +68,7 @@ namespace PaperDefense.Presentation
             {
                 var enemy = session.Enemies[i];
                 if (!(enemy.Health > 0) || !Finite(enemy.Position.X) || !Finite(enemy.Position.Y)) continue;
+                if (enemy.Boss != BossRank.None) ActiveBoss = enemy;
                 var at = new Vector2(enemy.Position.X, enemy.Position.Y);
                 float distance = (at - castle).sqrMagnitude;
                 bool near = distance <= NearCastleRadius * NearCastleRadius;

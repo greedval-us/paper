@@ -54,6 +54,102 @@ namespace PaperDefense.Tests
         }
 
         [Test]
+        public void EachNotebookKeepsItsEnemyFamilyThroughPreviewBattleAndContinuation()
+        {
+            var baseline = NotebookTowerDefensePreset.Create();
+            var expected = new[] { EnemyFamily.Ink, EnemyFamily.Undead, EnemyFamily.Clockwork };
+            foreach (var mission in CampaignCatalog.Default.Missions)
+            {
+                var family = expected[mission.NotebookIndex - 1];
+                var balance = MissionBalanceFactory.Create(baseline, mission);
+                Assert.That(mission.EnemyFamily, Is.EqualTo(family), mission.Id);
+                // Skip the first assault to reach a genuine intermission at minimal test cost.
+                balance.Waves[0].Count = 0;
+                var session = new GameSession(balance, mission.Seed, false);
+                Assert.That(new RunReadModel(session).Balance.EnemyFamily, Is.EqualTo(family), mission.Id);
+                session.StartNextWave();
+                session.Tick(balance.SimulationStep);
+                Assert.That(session.TryCaptureIntermissionCheckpoint(out var saved, out var reason), Is.True, reason);
+                var restoredBalance = MissionBalanceFactory.Create(baseline, mission);
+                restoredBalance.Waves[0].Count = 0;
+                Assert.That(GameSession.TryRestoreIntermissionCheckpoint(restoredBalance, saved, out var restored, out reason), Is.True, reason);
+                Assert.That(new RunReadModel(restored).Balance.EnemyFamily, Is.EqualTo(family), mission.Id);
+            }
+            Assert.That(baseline.EnemyFamily, Is.EqualTo(EnemyFamily.Ink));
+        }
+
+        [Test]
+        public void EachPageFieldsOneBossAtTheMidpointAndOneAtTheFinale()
+        {
+            var baseline = NotebookTowerDefensePreset.Create();
+            Assert.That(baseline.Waves.All(wave => wave.Boss == BossRank.None), Is.True);
+            foreach (var mission in CampaignCatalog.Default.Missions)
+            {
+                var balance = MissionBalanceFactory.Create(baseline, mission);
+                // Keep every scheduled wave but use a small escort so we can inspect every admission.
+                foreach (var wave in balance.Waves) wave.Count = 3;
+                var game = new GameSession(balance, mission.Seed, false);
+                var model = new RunReadModel(game);
+                for (int number = 1; number <= mission.WaveCount; number++)
+                {
+                    var expected = number == mission.WaveCount ? BossRank.Finale :
+                        number == (mission.WaveCount + 1) / 2 ? BossRank.Midpoint : BossRank.None;
+                    Assert.That(model.Balance.Waves[number - 1].Boss, Is.EqualTo(expected), mission.Id);
+                    if (game.PendingUpgrade) game.ChooseUpgrade(RunUpgrade.RapidFire);
+                    game.StartNextWave();
+                    for (int i = 0; i < 240 && game.RemainingToSpawn > 0; i++) game.Tick(.1f);
+                    Assert.That(model.Enemies.Count, Is.EqualTo(3), mission.Id);
+                    Assert.That(model.Enemies[0].Boss, Is.EqualTo(expected), mission.Id);
+                    Assert.That(model.Enemies.Skip(1).All(e => e.Boss == BossRank.None), Is.True, mission.Id);
+                    if (expected != BossRank.None)
+                    {
+                        var leader = game.Enemies[0];
+                        var ordinary = balance.Enemy(leader.Kind);
+                        Assert.That(leader.BossStats.MaxHealth, Is.GreaterThan(ordinary.MaxHealth));
+                        Assert.That(leader.VisualScale, Is.GreaterThan(ordinary.VisualScale * balance.Waves[number - 1].Horde.BodyScale));
+                        Assert.That(leader.Kind, Is.EqualTo(expected == BossRank.Finale ? EnemyKind.Spitter : EnemyKind.Gnawer));
+                        EnemyEffects.ApplyHit(leader, leader.MaxHealth * 10, default, game.Statistics,
+                            StructureKind.Gun, balance.Effects, events: game.EventBuffer);
+                        Assert.That(game.EventBuffer.Last(e => e.Kind == SimulationEventKind.EnemyHit).Boss, Is.EqualTo(expected));
+                        Assert.That(game.EventBuffer.Last(e => e.Kind == SimulationEventKind.EnemyDied).Boss, Is.EqualTo(expected));
+                    }
+                    foreach (var enemy in game.Enemies) enemy.Health = 0;
+                    game.Tick(balance.SimulationStep);
+                    if (number == 1)
+                    {
+                        Assert.That(game.TryCaptureIntermissionCheckpoint(out var saved, out var reason), Is.True, reason);
+                        Assert.That(GameSession.TryRestoreIntermissionCheckpoint(balance, saved, out game, out reason), Is.True, reason);
+                        model = new RunReadModel(game);
+                    }
+                }
+                Assert.That(game.Phase, Is.EqualTo(RunPhase.Victory), mission.Id);
+            }
+        }
+
+        [TestCase("notebook-1-page-1")]
+        [TestCase("notebook-2-page-1")]
+        [TestCase("notebook-3-page-1")]
+        public void FinaleBossLandsItsRangedAttackWhileStillOutsideContactRange(string missionId)
+        {
+            var mission = CampaignCatalog.Default.Find(missionId);
+            var balance = MissionBalanceFactory.Create(NotebookTowerDefensePreset.Create(), mission);
+            balance.Waves.RemoveRange(0, balance.Waves.Count - 1);
+            balance.Waves[0].Count = 1;
+            var game = new GameSession(balance, mission.Seed, false);
+            game.StartNextWave();
+            game.Tick(balance.SimulationStep);
+            var boss = game.Enemies.Single();
+            boss.ObjectiveIndex = -1;
+            boss.Position = new Point2(game.BaseCell.X - 4.5f, game.BaseCell.Y + .5f);
+            var start = boss.Position;
+            for (int i = 0; i < 180 && game.BaseHealth == balance.BaseHealth; i++) game.Tick(balance.SimulationStep);
+            Assert.That(boss.Position, Is.EqualTo(start), missionId);
+            Assert.That(game.BaseHealth, Is.LessThan(balance.BaseHealth), missionId);
+            foreach (var kind in new[] { SimulationEventKind.EnemyAttack, SimulationEventKind.EnemyGlobLaunched, SimulationEventKind.EnemyGlobImpact })
+                Assert.That(game.EventBuffer.Any(item => item.Kind == kind && item.Boss == BossRank.Finale), Is.True, kind.ToString());
+        }
+
+        [Test]
         public void NineAuthoredPagesOwnDifferentConnectedMapsAndTheMixedWaveSchedule()
         {
             var missions = CampaignCatalog.Default.Missions;

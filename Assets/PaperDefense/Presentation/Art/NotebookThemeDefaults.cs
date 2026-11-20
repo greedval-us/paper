@@ -52,6 +52,7 @@ namespace PaperDefense.Presentation
                 case NotebookInkChannel.GlassInk: return NotebookInkChannel.Blue;
                 case NotebookInkChannel.Copper: return channels > (int)NotebookInkChannel.Amber ? NotebookInkChannel.Amber : NotebookInkChannel.Red;
                 case NotebookInkChannel.BladeSteel: return NotebookInkChannel.Pencil;
+                case NotebookInkChannel.Violet: return NotebookInkChannel.Blue;
                 case NotebookInkChannel.Clean: return NotebookInkChannel.White;
                 case NotebookInkChannel.NotebookPaper: return channels > (int)NotebookInkChannel.Surface
                     ? NotebookInkChannel.Surface : NotebookInkChannel.Paper;

@@ -22,7 +22,7 @@ namespace PaperDefense.Tests
         DrawingInput input;
         NotebookHud hud;
 
-        void Open(bool main)
+        void Open(bool main, bool purchaseSpikes = false)
         {
             root = new GameObject("Memory-only tower defense presentation"); root.SetActive(false);
             asset = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameBalanceAsset>(
@@ -37,7 +37,16 @@ namespace PaperDefense.Tests
                 asset.dataPreset = transientPreset;
                 asset.legacyAuthoringAdapter = false;
             }
-            run = root.AddComponent<RunController>(); run.balanceAsset = asset; run.InitializeWorkshop(false);
+            run = root.AddComponent<RunController>(); run.balanceAsset = asset;
+            if (purchaseSpikes)
+            {
+                var rules = asset.CreateWorkshopBalance();
+                var profile = WorkshopProfile.CreateNew(run.AssemblyCatalog, rules.Content, rules);
+                profile.GrantGold(profile.GetStructureOffer(AssemblyStructureFamily.Spikes).GoldCost);
+                Assert.That(profile.TryPurchaseStructureFamily(AssemblyStructureFamily.Spikes, out var code), Is.True, code);
+                run.InitializeWorkshop(new MemoryWorkshopProfileStore(profile));
+            }
+            else run.InitializeWorkshop(false);
             Assert.That(run.StartRun(out string reason), Is.True, reason);
             input = root.AddComponent<DrawingInput>(); input.Initialize(run, null, null);
             hud = root.AddComponent<NotebookHud>(); hud.Initialize(run, input);
@@ -112,7 +121,7 @@ namespace PaperDefense.Tests
         [TestCase(ProfileLimits.LoadoutSlotCount + 1, StructureKind.Spikes)]
         public void NewToolCardSelectionPriceAndLegalPlacementAgreeWithCore(int index, StructureKind kind)
         {
-            Open(true); Card(index).onClick.Invoke();
+            Open(true, purchaseSpikes: kind == StructureKind.Spikes); Card(index).onClick.Invoke();
             Assert.That(input.Mode, Is.EqualTo(DrawingMode.Build)); Assert.That(input.Tool, Is.EqualTo(kind));
             Assert.That(input.BlueprintSlot, Is.EqualTo(-1));
             string description = (string)typeof(NotebookHud).GetMethod("BuildDescription", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(hud, null);

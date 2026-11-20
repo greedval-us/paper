@@ -8,6 +8,73 @@ namespace PaperDefense.Tests
 {
     public sealed class CampaignPlayabilityTests
     {
+        [Test]
+        public void EachPageCanBuyACompleteOpeningDefenseBeforeTheFirstWave()
+        {
+            AssemblyBalanceScenario.LoadRuntime(out var baseline, out var catalog);
+            var basket = new[] { "album.guard", "album.guard", "album.piercer", "album.mortar",
+                "album.wall", "album.wall", "album.wall", "album.wall", "album.slow" };
+            foreach (var mission in CampaignCatalog.Default.Missions)
+            {
+                var balance = MissionBalanceFactory.Create(baseline, mission);
+                var session = new GameSession(balance, mission.Seed, false);
+                var starters = catalog.Starters.ToDictionary(entry => entry.Id,
+                    entry => TowerCatalog.ResolveEntry(entry, balance).Value);
+                int priorOpening = MissionBalanceFactory.CreatePreviousOpeningSnapshot(balance, mission).StartingInk;
+                int extraGuards = mission.NotebookIndex + 2;
+                Assert.That(session.Ink - priorOpening, Is.GreaterThanOrEqualTo(extraGuards * starters["album.guard"].Cost), mission.Id);
+                int expected = balance.StartingInk;
+                foreach (var id in basket)
+                {
+                    var entry = starters[id];
+                    Assert.That(session.Ink, Is.GreaterThanOrEqualTo(entry.Cost), mission.Id + " opening purchase " + id);
+                    var cell = Enumerable.Range(0, balance.Width * balance.Height)
+                        .Select(i => new Cell(i % balance.Width, i / balance.Width))
+                        .First(c => session.QuoteEntry(new[] { c }, entry, MaterialTier.Pencil, InkColor.None).Valid);
+                    Assert.That(session.TryBuildEntry(new[] { cell }, entry, MaterialTier.Pencil, InkColor.None, out var reason), Is.True, reason);
+                    expected -= entry.Cost;
+                }
+                Assert.That(session.WaveIndex, Is.Zero, mission.Id);
+                Assert.That(session.Structures.Count, Is.EqualTo(basket.Length), mission.Id);
+                Assert.That(session.Ink, Is.EqualTo(expected), mission.Id);
+            }
+        }
+
+        [Test]
+        public void EveryCampaignIntermissionGrantPaysForEitherAStarterBatteryOrAFortifiedLine()
+        {
+            AssemblyBalanceScenario.LoadRuntime(out var baseline, out var catalog);
+            foreach (var mission in CampaignCatalog.Default.Missions)
+            {
+                var balance = MissionBalanceFactory.Create(baseline, mission);
+                var prices = catalog.Starters.ToDictionary(entry => entry.Id,
+                    entry => TowerCatalog.ResolveEntry(entry, balance).Value.Cost);
+                int battery = prices["album.guard"] + prices["album.piercer"] + prices["album.mortar"];
+                int fortifiedLine = 2 * prices["album.guard"] + prices["album.piercer"] +
+                    3 * prices["album.wall"] + prices["album.slow"];
+                for (int wave = 0; wave < balance.Waves.Count - 1; wave++)
+                {
+                    int grant = balance.Waves[wave].InkGrant;
+                    Assert.That(grant, Is.GreaterThanOrEqualTo(battery), $"{mission.Id}, after wave {wave + 1}: three different guns.");
+                    Assert.That(grant, Is.GreaterThanOrEqualTo(fortifiedLine), $"{mission.Id}, after wave {wave + 1}: guns, barricades and slowing support.");
+                }
+            }
+        }
+
+        [Test]
+        public void PreparingTwoFrontsPaysMoreThanHoldingOneFrontAtTheSameStage()
+        {
+            AssemblyBalanceScenario.LoadRuntime(out var baseline, out _);
+            var missions = CampaignCatalog.Default.Missions;
+            var encirclement = MissionBalanceFactory.Create(baseline, missions[0]).Waves;
+            var northPass = MissionBalanceFactory.Create(baseline, missions[1]).Waves;
+            // The second clear funds the third assault. The castle faces north and south on
+            // the first map, while both mountain passes on the second map lead south from one edge.
+            Assert.That(encirclement[2].Sides, Is.EqualTo(4 | 8));
+            Assert.That(northPass[2].Sides, Is.EqualTo(4));
+            Assert.That(encirclement[1].InkGrant, Is.GreaterThan(northPass[1].InkGrant));
+        }
+
         [TestCase(0)] [TestCase(1)] [TestCase(2)]
         [TestCase(3)] [TestCase(4)] [TestCase(5)]
         [TestCase(6)] [TestCase(7)] [TestCase(8)]

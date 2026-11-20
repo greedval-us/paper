@@ -32,12 +32,13 @@ namespace PaperDefense.Presentation
     {
         public readonly int Id;
         public readonly EnemyKind Kind;
+        public readonly BossRank Boss;
         public readonly DrawingTier Tier;
         public readonly Vector2 Position;
         public readonly double Born;
         public readonly float VisualScale;
         public NotebookDeathVisual(SimulationEvent item)
-        { Id = item.EntityId; Kind = item.EnemyKind; Tier = item.EnemyDrawingTier; Position = new Vector2(item.To.X, item.To.Y); Born = item.SimulationSeconds; VisualScale = item.EnemyVisualScale; }
+        { Id = item.EntityId; Kind = item.EnemyKind; Boss = item.Boss; Tier = item.EnemyDrawingTier; Position = new Vector2(item.To.X, item.To.Y); Born = item.SimulationSeconds; VisualScale = item.EnemyVisualScale; }
     }
 
     /// <summary>Bounded presentation records. Events cannot cause gameplay or modify author geometry.</summary>
@@ -52,7 +53,7 @@ namespace PaperDefense.Presentation
         readonly List<int> expiredEnemies = new List<int>(128);
         readonly List<int> expiredStructures = new List<int>(128);
         long sequence;
-        static readonly string[,,] enemyIds = CreateEnemyIds();
+        static readonly string[,,,] enemyIds = CreateEnemyIds();
         public int MountCount => mounts.Count;
         public int EnemyCount => enemies.Count;
         public int StructurePulseCount => structures.Count;
@@ -127,7 +128,12 @@ namespace PaperDefense.Presentation
             {
                 if (!enemies.TryGetValue(item.EntityId, out var state) && enemies.Count >= MaximumEnemies)
                 { DroppedRecords++; return true; }
-                if (item.Kind == SimulationEventKind.EnemyHit) { state.Hit = item.SimulationSeconds; state.HasHit = true; }
+                if (item.Kind == SimulationEventKind.EnemyHit)
+                {
+                    // Sustained tower fire should leave time to see a boss's stride and windup.
+                    if (item.Boss == BossRank.None || !state.HasHit || item.SimulationSeconds - state.Hit >= .8)
+                    { state.Hit = item.SimulationSeconds; state.HasHit = true; }
+                }
                 else { state.Attack = item.SimulationSeconds; state.HasAttack = true; }
                 enemies[item.EntityId] = state;
             }
@@ -149,7 +155,7 @@ namespace PaperDefense.Presentation
             return -.085f * (1 - age / .2f);
         }
         public NotebookEnemyMotion Observe(EnemyView enemy, double now, out float phase, NotebookVisualThemeAsset theme = null,
-            double sampleSeconds = double.NaN, float windupSeconds = 0)
+            double sampleSeconds = double.NaN, float windupSeconds = 0, EnemyFamily family = EnemyFamily.Ink)
         {
             Vector2 position = new Vector2(enemy.Position.X, enemy.Position.Y);
             bool tracked = enemies.TryGetValue(enemy.Id, out var state);
@@ -162,20 +168,27 @@ namespace PaperDefense.Presentation
                 state.Position = position; state.Observed = observed; state.HasPosition = true;
                 enemies[enemy.Id] = state;
             }
-            if (state.HasHit && now - state.Hit < ClipDuration(enemy.Kind, enemy.DrawingTier, NotebookEnemyMotion.Hit, theme))
+            bool hit = state.HasHit && now - state.Hit < ClipDuration(enemy.Kind, enemy.DrawingTier, NotebookEnemyMotion.Hit, theme, family, enemy.Boss);
+            if (hit && enemy.Boss == BossRank.None)
             { phase = (float)(now - state.Hit); return NotebookEnemyMotion.Hit; }
             if (enemy.WindupRemaining > 0)
             {
-                float duration = ClipDuration(enemy.Kind, enemy.DrawingTier, NotebookEnemyMotion.Attack, theme);
+                float duration = ClipDuration(enemy.Kind, enemy.DrawingTier, NotebookEnemyMotion.Attack, theme, family, enemy.Boss);
                 phase = Mathf.Clamp01(1 - enemy.WindupRemaining / Mathf.Max(.001f, windupSeconds > 0 ? windupSeconds : duration)) * duration * .7f;
                 return NotebookEnemyMotion.Attack;
             }
-            if (state.HasAttack && now - state.Attack < ClipDuration(enemy.Kind, enemy.DrawingTier, NotebookEnemyMotion.Attack, theme))
-            { phase = (float)(now - state.Attack); return NotebookEnemyMotion.Attack; }
+            if (state.HasAttack)
+            {
+                float duration = ClipDuration(enemy.Kind, enemy.DrawingTier, NotebookEnemyMotion.Attack, theme, family, enemy.Boss);
+                // Ranged bosses already showed the windup. Release the feather, ring or card on the firing tick.
+                phase = (float)(now - state.Attack) + (enemy.Boss == BossRank.Finale ? duration * .7f : 0);
+                if (phase < duration) return NotebookEnemyMotion.Attack;
+            }
+            if (hit) { phase = (float)(now - state.Hit); return NotebookEnemyMotion.Hit; }
             phase = (float)now + enemy.Id * .137f;
             return state.Moving ? NotebookEnemyMotion.Walk : NotebookEnemyMotion.Idle;
         }
-        public void Prune(double now, NotebookVisualThemeAsset theme = null)
+        public void Prune(double now, NotebookVisualThemeAsset theme = null, EnemyFamily family = EnemyFamily.Ink)
         {
             expiredMounts.Clear();
             foreach (var item in mounts)
@@ -194,22 +207,31 @@ namespace PaperDefense.Presentation
                     expiredStructures.Add(item.Key);
             foreach (int id in expiredStructures) structures.Remove(id);
             for (int i = deaths.Count - 1; i >= 0; i--)
-                if (now - deaths[i].Born >= ClipDuration(deaths[i].Kind, deaths[i].Tier, NotebookEnemyMotion.Death, theme)) deaths.RemoveAt(i);
+                if (now - deaths[i].Born >= ClipDuration(deaths[i].Kind, deaths[i].Tier, NotebookEnemyMotion.Death, theme, family, deaths[i].Boss)) deaths.RemoveAt(i);
         }
-        internal static string EnemyId(EnemyKind kind, DrawingTier tier, NotebookEnemyMotion motion)
-            => enemyIds[Mathf.Clamp((int)kind, 0, enemyIds.GetLength(0) - 1), Mathf.Clamp((int)tier, 0, 2), Mathf.Clamp((int)motion, 0, 4)];
-        static string[,,] CreateEnemyIds()
+        internal static string EnemyId(EnemyKind kind, DrawingTier tier, NotebookEnemyMotion motion, EnemyFamily family = EnemyFamily.Ink,
+            BossRank boss = BossRank.None)
+            => boss != BossRank.None ? InkSwarmEnemyArt.BossId(family, boss, motion) :
+                enemyIds[(int)family, Mathf.Clamp((int)kind, 0, enemyIds.GetLength(1) - 1), Mathf.Clamp((int)tier, 0, 2), Mathf.Clamp((int)motion, 0, 4)];
+        static string[,,,] CreateEnemyIds()
         {
-            int families = Enum.GetValues(typeof(EnemyKind)).Length;
-            var values = new string[families, 3, 5];
-            for (int kind = 0; kind < families; kind++) for (int tier = 0; tier < 3; tier++) for (int motion = 0; motion < 5; motion++)
-                values[kind, tier, motion] = "enemy." + Family((EnemyKind)kind) + "." + Tier((DrawingTier)tier) + "." + Motion((NotebookEnemyMotion)motion);
+            var roles = InkSwarmEnemyArt.Roles;
+            var families = (EnemyFamily[])Enum.GetValues(typeof(EnemyFamily));
+            var values = new string[families.Length, roles.Length, 3, 5];
+            foreach (EnemyFamily family in families)
+            {
+                string prefix = family == EnemyFamily.Undead ? "enemy.undead." : family == EnemyFamily.Clockwork ? "enemy.clockwork." : "enemy.";
+                for (int kind = 0; kind < roles.Length; kind++)
+                for (int tier = 0; tier < 3; tier++)
+                for (int motion = 0; motion < 5; motion++)
+                    values[(int)family, kind, tier, motion] = prefix + roles[kind] + "." + Tier((DrawingTier)tier) + "." + Motion((NotebookEnemyMotion)motion);
+            }
             return values;
         }
-        static string Family(EnemyKind kind) => kind == EnemyKind.Runner ? "runner" : kind == EnemyKind.Gnawer ? "gnawer" : kind == EnemyKind.Spitter ? "spitter" : kind == EnemyKind.Brute ? "brute" : kind == EnemyKind.Bulwark ? "bulwark" : "doodle";
         static string Tier(DrawingTier tier) => tier == DrawingTier.Hatched ? "hatched" : tier == DrawingTier.Outlined ? "outlined" : "sketch";
         static string Motion(NotebookEnemyMotion motion) => motion == NotebookEnemyMotion.Walk ? "walk" : motion == NotebookEnemyMotion.Attack ? "attack" : motion == NotebookEnemyMotion.Hit ? "hit" : motion == NotebookEnemyMotion.Death ? "death" : "idle";
-        internal static float ClipDuration(EnemyKind kind, DrawingTier tier, NotebookEnemyMotion motion, NotebookVisualThemeAsset theme)
-            => (theme ?? NotebookVisualThemeAsset.Default)?.FindClip(EnemyId(kind, tier, motion))?.Duration ?? (motion == NotebookEnemyMotion.Death ? .6f : .24f);
+        internal static float ClipDuration(EnemyKind kind, DrawingTier tier, NotebookEnemyMotion motion, NotebookVisualThemeAsset theme,
+            EnemyFamily family = EnemyFamily.Ink, BossRank boss = BossRank.None)
+            => (theme ?? NotebookVisualThemeAsset.Default)?.FindClip(EnemyId(kind, tier, motion, family, boss))?.Duration ?? (motion == NotebookEnemyMotion.Death ? .6f : .24f);
     }
 }

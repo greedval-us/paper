@@ -9,7 +9,7 @@ namespace PaperDefense.Presentation
         static readonly string[] EventIds = {
             "fx.muzzle", "fx.tracer", "fx.piercer", "fx.fan", "fx.ricochet", "fx.stapler",
             "fx.mortar.explosion", "fx.structure.destroy", "fx.blot.birth", "fx.blot.expire",
-            "fx.blot.cleanse", "fx.blot.absorb", "fx.spitter.impact", "fx.castle.hit",
+            "fx.blot.cleanse", "fx.blot.absorb", "fx.spitter.impact", "fx.bell.impact", "fx.chad.impact", "fx.castle.hit",
             "fx.well.hit", "fx.well.activate", "fx.structure.hit", "fx.support.repair", "fx.support.slow", "fx.generator.paid",
             "fx.support.spikes", "fx.support.beacon", "fx.support.prism"
         };
@@ -46,6 +46,40 @@ namespace PaperDefense.Presentation
                 case "fx.mortar.explosion": Explosion(p, phase); break;
                 case "fx.spitter.projectile": SpitterProjectile(p); break;
                 case "fx.spitter.impact": SpitterImpact(p, phase); break;
+                case "fx.bell.projectile":
+                    // The broad front and two narrow echoes point along the flight path.
+                    p.Ellipse(NotebookInkChannel.Ivory, .09f, 0, .067f, 2.9f, .035f, 1, 14);
+                    p.Ellipse(NotebookInkChannel.Violet, -.10f, 0, .053f, 2.5f, .032f, 1, 12);
+                    p.Ellipse(NotebookInkChannel.Ivory, -.235f, 0, .035f, 1.9f, .025f, .82f, 10);
+                    break;
+                case "fx.bell.impact":
+                    float front = .21f + .06f * phase;
+                    p.Ellipse(NotebookInkChannel.Ivory, 0, 0, front, .93f, .032f, 1, 22);
+                    p.Ellipse(NotebookInkChannel.Violet, 0, 0, front - .10f, .93f, .037f, .96f, 18);
+                    break;
+                case "fx.chad.projectile":
+                    PaperChad(p, .035f, 0, .15f);
+                    PaperChad(p, -.17f, .09f, .055f);
+                    break;
+                case "fx.quill.projectile":
+                    p.Path(NotebookInkChannel.Ivory,.043f,1,-.34f,-.045f,-.15f,.005f,.27f,.028f);
+                    p.Fill(NotebookInkChannel.Danger,1,-.31f,-.027f,-.35f,.12f,-.14f,.079f,-.06f,.01f);
+                    p.Fill(NotebookInkChannel.Ivory,1,.055f,.025f,.16f,.103f,.37f,.028f,.16f,-.064f);
+                    p.Line(NotebookInkChannel.Surface,.158f,.023f,.318f,.027f,.022f);
+                    break;
+                case "fx.indexcard.projectile":
+                    p.Fill(NotebookInkChannel.Ivory,1,-.238f,-.135f,.237f,-.135f,.237f,.141f,-.238f,.141f);
+                    p.Fill(NotebookInkChannel.Copper,1,-.205f,.127f,-.19f,.194f,-.042f,.194f,-.022f,.127f);
+                    p.Line(NotebookInkChannel.Surface,-.164f,.050f,.16f,.050f,.028f);
+                    p.Line(NotebookInkChannel.Sketch,-.164f,-.035f,.070f,-.035f,.021f);
+                    break;
+                case "fx.chad.impact":
+                    float spread = .12f + .055f * phase;
+                    PaperChad(p, -.95f * spread, .65f * spread, .082f);
+                    PaperChad(p, .7f * spread, .95f * spread, .089f);
+                    PaperChad(p, .56f * spread, -.85f * spread, .066f);
+                    if (phase < 2) PaperChad(p, -.6f * spread, -.46f * spread, .047f);
+                    break;
                 case "fx.structure.destroy": Destroy(p, phase); break;
                 case "fx.blot.birth": BlotBirth(p, phase); break;
                 case "fx.blot.expire": BlotExpire(p, phase); break;
@@ -241,6 +275,14 @@ namespace PaperDefense.Presentation
                 p.Line(NotebookInkChannel.Amber, -.025f, -.11f, .07f, .07f, .027f, .85f);
                 p.Ellipse(NotebookInkChannel.Amber, .02f, -.015f, .04f, .75f, 0, .6f, 8);
             }
+        }
+
+        static void PaperChad(BattleInkDrawing p, float x, float y, float r)
+        {
+            // A punched paper disc bent at a crease, with its copper-lit reverse showing.
+            p.Fill(NotebookInkChannel.Ivory, 1, x-r, y, x-r*.63f, y+r*.69f, x+r*.50f, y+r*.72f,
+                x+r, y+r*.10f, x+r*.43f, y-r*.62f, x-r*.51f, y-r*.59f);
+            p.Fill(NotebookInkChannel.Copper, 1, x-r*.51f, y-r*.59f, x+r, y+r*.10f, x+r*.43f, y-r*.62f);
         }
 
         static void SpitterProjectile(BattleInkDrawing p)

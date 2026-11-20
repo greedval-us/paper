@@ -113,6 +113,117 @@ namespace PaperDefense.Tests
             foreach (var enemy in game.Enemies) Assert.That(enemy.Position.X, Is.GreaterThan(10), "The queue must drain through the gap.");
         }
 
+        static GameBalance HordeFromWest(int count)
+        {
+            var b = Main(count, 1);
+            b.Width = 40;
+            b.Height = 20;
+            b.StartingInk = 1000;
+            b.Crowd.EntranceHalfWidth = 0;
+            b.Waves[0].Horde = new HordeWaveSettings { Enabled = true, BodyScale = .42f, HealthScale = 1, ObjectiveDamageScale = 1 };
+            b.Battlefield = new BattlefieldDefinition { Enabled = true, Mode = BattlefieldMode.OpenTerrain };
+            b.Battlefield.Entrances.Add(new BattlefieldCell(0, 10));
+            b.Structure(StructureKind.Wall).BuildSeconds = 0;
+            return b;
+        }
+
+        [TestCase(false)]
+        [TestCase(true)]
+        public void HordeBreaksBarricadeBeforeCrossingAndDrainsThroughItsBreach(bool rockOutcrops)
+        {
+            var b = HordeFromWest(12);
+            var wall = new Cell(10, 10);
+            if (rockOutcrops)
+            {
+                // The pass leads straight to the castle. Both rock outcrops also have an open flank.
+                b.Battlefield.Props.Add(new TerrainPropDefinition { X = wall.X, Y = 7, Width = 1, Height = 3 });
+                b.Battlefield.Props.Add(new TerrainPropDefinition { X = wall.X, Y = 11, Width = 1, Height = 3 });
+            }
+            var game = new GameSession(b, 17, false);
+            Assert.That(game.TryBuild(new[] { wall }, StructureKind.Wall, MaterialTier.Pencil, out var reason), Is.True, reason);
+            game.StartNextWave();
+
+            var usedBreach = new HashSet<int>();
+            var crossed = new HashSet<int>();
+            for (int tick = 0; tick < 1800 && (crossed.Count < b.Waves[0].Count || game.BaseHealth == b.BaseHealth); tick++)
+            {
+                game.Tick(1f / 30);
+                bool wallIntact = game.StructureAt(wall) != null;
+                foreach (var enemy in game.Enemies)
+                {
+                    var cell = new Cell((int)enemy.Position.X, (int)enemy.Position.Y);
+                    if (cell == wall)
+                    {
+                        Assert.That(wallIntact, Is.False, "An intact wall must still block movement.");
+                        usedBreach.Add(enemy.Id);
+                    }
+                    if (cell.X > wall.X && crossed.Add(enemy.Id))
+                        Assert.That(wallIntact, Is.False, "An enemy went past the barricade while the frontline was still fighting.");
+                }
+            }
+            Assert.That(game.StructureAt(wall), Is.Null, "The horde must break the barricade on its route.");
+            Assert.That(crossed.Count, Is.EqualTo(b.Waves[0].Count), "The entire queue must emerge on the castle side.");
+            if (rockOutcrops)
+                Assert.That(usedBreach.Count, Is.EqualTo(crossed.Count), "The queue must drain through the opened pass.");
+            else
+                Assert.That(usedBreach, Is.Not.Empty, "The horde must advance into the cell vacated by the barricade.");
+            Assert.That(game.BaseHealth, Is.LessThan(b.BaseHealth));
+        }
+
+        [Test]
+        public void HordeEnemyPassesParallelWallWithoutAttackingIt()
+        {
+            var b = HordeFromWest(1);
+            var row = new[] { new Cell(9, 11), new Cell(10, 11), new Cell(11, 11) };
+            var game = new GameSession(b, 17, false);
+            Assert.That(game.TryBuild(row, StructureKind.Wall, MaterialTier.Pencil, out var reason), Is.True, reason);
+            game.StartNextWave();
+            for (int tick = 0; tick < 1200 && game.BaseHealth == b.BaseHealth; tick++)
+                game.Tick(1f / 30);
+            Assert.That(game.BaseHealth, Is.LessThan(b.BaseHealth));
+            foreach (var cell in row)
+            {
+                var wall = game.StructureAt(cell);
+                Assert.That(wall, Is.Not.Null);
+                Assert.That(wall.Health, Is.EqualTo(wall.MaxHealth), "The road beside this wall was clear.");
+            }
+        }
+
+        [TestCase(false)]
+        [TestCase(true)]
+        public void HordeSwitchesFromStandingWallToNewAdjacentBreach(bool upgrade)
+        {
+            var b = HordeFromWest(6);
+            b.Structure(StructureKind.Wall).MaxHealth = 10000;
+            b.Structure(StructureKind.Wall).BuildSeconds = 1;
+            b.Material(MaterialTier.Ink).BuildTimeMultiplier = 100;
+            var standing = new Cell(10, 10);
+            var opening = new Cell(10, 11);
+            b.Battlefield.Props.Add(new TerrainPropDefinition { X = 10, Y = 0, Width = 1, Height = 10 });
+            b.Battlefield.Props.Add(new TerrainPropDefinition { X = 10, Y = 12, Width = 1, Height = 8 });
+            var game = new GameSession(b, 17, false);
+            Assert.That(game.TryBuild(new[] { standing, opening }, StructureKind.Wall, MaterialTier.Pencil, out var reason), Is.True, reason);
+            var wall = game.StructureAt(standing);
+            game.StartNextWave();
+            for (int tick = 0; tick < 450 && wall.Health == wall.MaxHealth; tick++)
+                game.Tick(1f / 30);
+            Assert.That(wall.Health, Is.LessThan(wall.MaxHealth), "The frontline must already be fighting when the opening appears.");
+            if (upgrade)
+                Assert.That(game.TryUpgrade(opening, out reason), Is.True, reason);
+            else
+                Assert.That(game.TryErase(opening, out _), Is.True);
+
+            var crossed = new HashSet<int>();
+            for (int tick = 0; tick < 900 && crossed.Count < b.Waves[0].Count; tick++)
+            {
+                game.Tick(1f / 30);
+                foreach (var enemy in game.Enemies)
+                    if (enemy.Position.X >= opening.X + 1) crossed.Add(enemy.Id);
+            }
+            Assert.That(game.StructureAt(standing), Is.SameAs(wall));
+            Assert.That(crossed.Count, Is.EqualTo(b.Waves[0].Count), "Every fighter must leave the standing wall and cross the open gap.");
+        }
+
         [Test]
         public void CrowdsReplayDeterministicallyAndOwnTheirConfiguration()
         {

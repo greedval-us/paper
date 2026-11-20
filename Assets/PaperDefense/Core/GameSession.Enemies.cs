@@ -92,6 +92,9 @@ namespace PaperDefense.Core
 
         /// <summary>Grid DDA checks only cells crossed this step, including new interception walls.</summary>
         bool IEnemyAttackWorld.TraceBlocker(Point2 from, Point2 to, out StructureState blocker, out Point2 impact)
+            => TraceBlocker(from, to, false, out blocker, out impact);
+
+        bool TraceBlocker(Point2 from, Point2 to, bool stopAtTerrain, out StructureState blocker, out Point2 impact)
         {
             blocker = null;
             impact = to;
@@ -105,6 +108,7 @@ namespace PaperDefense.Core
             float nextY = sy == 0 ? float.PositiveInfinity : ((sy > 0 ? cell.Y + 1 : cell.Y) - from.Y) / dy;
             for (int visited = 0; visited <= rules.Width + rules.Height + 2; visited++)
             {
+                if (stopAtTerrain && Battlefield != null && !Battlefield.IsWalkable(cell)) return false;
                 var structure = StructureAt(cell);
                 if (IsBlocker(structure))
                 {

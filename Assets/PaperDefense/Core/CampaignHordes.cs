@@ -72,6 +72,40 @@ namespace PaperDefense.Core
         static readonly int[] OpeningRewards = { 14, 20, 26, 40 };
         static readonly int[] OpeningGrants = { 96, 120, 144, 78 };
 
+        // Two guards, a piercer, three wall sections and a slowing tile at starter album prices.
+        const int ReinforcementInk = 210;
+        const int InkPerGate = 8;
+        const int InkPerPressureStep = 8;
+        const int EnemiesPerPressureStep = 120;
+
+        static int ModernizationReserve(GameBalance balance, int page) =>
+            page >= 4 && balance.Mechanics.FieldModernization ? 40 : 0;
+
+        internal static int PreviousGrant(GameBalance balance, int page, int wave) => page == 0 ? OpeningGrants[wave] :
+            Math.Min(280, 96 + page * 8 + wave * 12) + ModernizationReserve(balance, page);
+
+        internal static void FundReinforcements(GameBalance balance, CampaignMissionDefinition mission, BattlefieldView map)
+        {
+            // The final wave has no construction break. Fund the real entrances announced for
+            // the next assault, including a change of gate along the same edge of the map.
+            for (int i = 0; i + 1 < balance.Waves.Count; i++)
+            {
+                var current = balance.Waves[i];
+                var next = balance.Waves[i + 1];
+                int gates = 0, newGates = 0;
+                for (int gate = 0; gate < map.Entrances.Count; gate++)
+                {
+                    if (!map.IsWaveEntrance(gate, next.Sides, next.EntranceBands)) continue;
+                    gates++;
+                    if (!map.IsWaveEntrance(gate, current.Sides, current.EntranceBands)) newGates++;
+                }
+                int pressureSteps = Math.Max(0, next.Count - 300) / EnemiesPerPressureStep;
+                int grant = ReinforcementInk + InkPerGate * (gates - 1 + newGates) +
+                    InkPerPressureStep * pressureSteps + ModernizationReserve(balance, mission.Index);
+                current.InkGrant = Math.Max(current.InkGrant, grant);
+            }
+        }
+
         public static void Populate(GameBalance balance, CampaignMissionDefinition mission)
         {
             int page = mission.Index;
@@ -83,13 +117,17 @@ namespace PaperDefense.Core
                 int count = FirstCount[page] + i * Growth[page];
                 var assault = assaults[i];
                 var wave = assault.Roster.Wave(count, assault.Sides, Title(page, i));
+                // The northern runners at the crossroads arrive together against the new second battery.
+                if (page == 2 && i == 1) wave.SpawnInterval = 17f / count;
                 wave.Horde = new HordeWaveSettings {
                     Enabled = true, BodyScale = .42f, HealthScale = .075f + Math.Max(0, page - 2) * .005f,
                     ObjectiveDamageScale = page == 0 ? (i == 0 ? .06f : i == 3 ? .03f : .035f) : (page == 2 ? .05f : .035f),
                     KillInkBudget = page == 0 ? OpeningRewards[i] : 18 + 4 * i
                 };
-                wave.InkGrant = page == 0 ? OpeningGrants[i] :
-                    Math.Min(280, 96 + page * 8 + i * 12) + (page >= 4 && balance.Mechanics.FieldModernization ? 40 : 0);
+                wave.InkGrant = PreviousGrant(balance, page, i);
+                int number = i + 1;
+                if (number == mission.WaveCount) wave.Boss = BossRank.Finale;
+                else if (number == (mission.WaveCount + 1) / 2) wave.Boss = BossRank.Midpoint;
                 if (page == 1 || page == 7) wave.EntranceBands = (page == 1 ? NorthGates : EastGates)[i];
                 balance.Waves.Add(wave);
             }

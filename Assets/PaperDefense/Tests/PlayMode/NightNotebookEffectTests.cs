@@ -36,6 +36,22 @@ namespace PaperDefense.Tests
             return Vertices(pen);
         }
 
+        [TestCase(EnemyFamily.Ink, "fx.quill.projectile")]
+        [TestCase(EnemyFamily.Clockwork, "fx.indexcard.projectile")]
+        public void BossProjectileFollowsItsAuthoredSilhouetteAndHeading(EnemyFamily family, string artId)
+        {
+            var theme = NotebookVisualThemeAsset.Default;
+            var from = new Vector2(1, 2); var to = new Vector2(5, 5);
+            var path = new MeshPen(null); var expected = new MeshPen(null); var grunt = new MeshPen(null);
+            NotebookEffectRenderer.DrawEnemyProjectile(path, from, to, .3f, family, theme, true, BossRank.Finale);
+            NightNotebookEffectPalette.DrawResource(expected, artId, Vector2.Lerp(from, to, .3f), theme, true,
+                radians: Mathf.Atan2(to.y - from.y, to.x - from.x));
+            NotebookEffectRenderer.DrawEnemyProjectile(grunt, from, to, .3f, family, theme, true);
+            var boss = Vertices(path);
+            AssertSameGeometryAndAlpha(boss, Vertices(expected));
+            Assert.That(boss.Select(v => v.position), Is.Not.EqualTo(Vertices(grunt).Select(v => v.position)));
+        }
+
         static void AssertSameGeometryAndAlpha(UIVertex[] light, UIVertex[] dark)
         {
             Assert.That(light, Is.Not.Empty);
@@ -92,6 +108,52 @@ namespace PaperDefense.Tests
             var repeated = new MeshPen(null);
             DoodleGlyphs.DrawResource(repeated, id, new Vector2(3, 4), theme: theme);
             Assert.That(Vertices(repeated).Select(vertex => vertex.color), Is.EqualTo(light.Select(vertex => vertex.color)));
+        }
+
+        [TestCase(EnemyFamily.Undead, "fx.bell.impact")]
+        [TestCase(EnemyFamily.Clockwork, "fx.chad.impact")]
+        public void FamilyProjectilesFollowTheFlightAndReducedImpactsHoldTheirShape(EnemyFamily family, string impactId)
+        {
+            var theme = ScriptableObject.CreateInstance<NotebookVisualThemeAsset>();
+            try
+            {
+                theme.Data.Palette = NotebookVisualThemeAsset.Default.Data.Palette;
+                InkSwarmEffectArt.PopulateClips(theme.Data);
+                var item = Event(SimulationEventKind.EnemyGlobImpact, AttackKind.Single);
+                Assert.That(NotebookEffectRenderer.EffectId(item, theme, family), Is.EqualTo(impactId));
+                Assert.That(NotebookEffectRenderer.Duration(item, theme, family),
+                    Is.EqualTo(NotebookEffectRenderer.Duration(item, theme, EnemyFamily.Ink)));
+                var pen = new MeshPen(null);
+                UIVertex[] Impact(float age)
+                {
+                    pen.Clear();
+                    NotebookEffectRenderer.Draw(pen, item, Vector2.zero, age, theme, true, family);
+                    return Vertices(pen);
+                }
+                var early = Impact(.04f);
+                Assert.That(early.Length, Is.GreaterThan(0));
+                Assert.That(Impact(.31f).Select(v => v.position), Is.Not.EqualTo(early.Select(v => v.position)));
+                Assert.That(Impact(.5f), Is.Empty);
+                theme.Data.ReducedMotion = true;
+                var still = Impact(.04f);
+                var fading = Impact(.31f);
+                Assert.That(fading.Select(v => v.position), Is.EqualTo(still.Select(v => v.position)));
+                Assert.That(fading.Max(v => v.color.a), Is.LessThan(still.Max(v => v.color.a)));
+                Vector3[] Flight(float fraction)
+                {
+                    pen.Clear();
+                    NotebookEffectRenderer.DrawEnemyProjectile(pen, Vector2.zero, Vector2.right * 8, fraction, family, theme, true);
+                    return Vertices(pen).Select(v => v.position).ToArray();
+                }
+                var quarter = Flight(.25f);
+                var landing = Flight(1);
+                Assert.That(quarter, Is.Not.Empty);
+                Assert.That(quarter.All(v => Mathf.Abs(v.x - 2) < .4f), Is.True);
+                Assert.That(landing.Length, Is.EqualTo(quarter.Length));
+                for (int i = 0; i < quarter.Length; i++)
+                    Assert.That(Vector3.Distance(quarter[i] + Vector3.right * 6, landing[i]), Is.LessThan(.00001f));
+            }
+            finally { Object.DestroyImmediate(theme); }
         }
 
         [Test] public void ExplicitThemeColorsArePreservedOnBothSurfaces()

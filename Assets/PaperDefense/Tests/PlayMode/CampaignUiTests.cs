@@ -31,9 +31,19 @@ namespace PaperDefense.Tests
             AssertReadableLabel(button.GetComponentInChildren<Text>());
             Press("Campaign wave scout");
             string report = Copy("Context help text").text;
+            Assert.That(report, Does.StartWith("Механизмы"));
+            var lines = report.Split('\n');
+            Assert.That(lines.Single(line => line.StartsWith("3. ")), Does.Contain("Босс Пресс-паук"));
+            Assert.That(lines.Single(line => line.StartsWith("6. ")), Does.Contain("Босс Архивариус"));
             Assert.That(report, Does.Contain("1. " + armorWaves[0].Count + " справа снизу · " + Armor(0)));
             Assert.That(report, Does.Contain("2. " + armorWaves[1].Count + " справа сверху · " + Armor(1)));
             Assert.That(report, Does.Contain("Зелёная краска"));
+            Press("Close context help");
+
+            Press("Campaign notebook 2"); Press("Campaign page notebook-2-page-3");
+            Assert.That(Action("Campaign wave scout").GetComponentInChildren<Text>().text, Does.Contain("Костегоны"));
+            Press("Campaign wave scout");
+            Assert.That(Copy("Context help text").text, Does.StartWith("Нежить").And.Contain("Костегоны"));
             Press("Close context help");
 
             Press("Campaign notebook 1"); Press("Campaign page notebook-1-page-1"); Press("Open mission"); Press("Prepare mission");
@@ -50,6 +60,7 @@ namespace PaperDefense.Tests
             Assert.That(session.Phase, Is.EqualTo(RunPhase.Intermission));
             string runners = "Бегуны ≈" + Mathf.RoundToInt(session.Balance.Waves[1].RunnerFraction * 100) + "%";
             Assert.That(phase.text, Does.Contain(runners));
+            Assert.That(phase.text, Does.Contain("Перокус"));
             AssertReadableLabel(phase);
             var hint = Action("Launch wave").GetComponent<PlayerTooltip>().Message;
             Assert.That(hint, Does.Contain("с востока"));

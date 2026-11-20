@@ -27,6 +27,8 @@ namespace PaperDefense.Core
     public enum MaterialTier { Pencil = 0, Ink = 1, Marker = 2 }
     public enum StructureKind { Wall = 0, Gun = 1, Piercer = 2, Mortar = 3, Spikes = 4, Fan = 5, Ricochet = 6, Stapler = 7, Blotter = 8, TarPit = 9, RepairPost = 10, Generator = 11, Beacon = 12, Prism = 13 }
     public enum EnemyKind { Doodle = 0, Runner = 1, Gnawer = 2, Spitter = 3, Brute = 4, Bulwark = 5 }
+    public enum EnemyFamily { Ink = 0, Undead = 1, Clockwork = 2 }
+    public enum BossRank { None = 0, Midpoint = 1, Finale = 2 }
     public enum DrawingTier { Sketch = 0, Outlined = 1, Hatched = 2 }
     public enum InkColor { None = 0, Red = 1, Blue = 2, Green = 3 }
     public enum RunPhase { Planning = 0, Assault = 1, Intermission = 2, Victory = 3, Defeat = 4 }
@@ -62,6 +64,7 @@ namespace PaperDefense.Core
         public float StructureDamageMultiplier = 1;
         public float VisualScale = 1;
         public int Reward;
+        internal EnemyDefinition CreateSnapshot() => (EnemyDefinition)MemberwiseClone();
     }
 
     [Serializable] public struct HordeWaveSettings
@@ -77,6 +80,8 @@ namespace PaperDefense.Core
 
     [Serializable] public sealed class WaveDefinition
     {
+        // Rebuilt from the campaign page, including when a saved intermission resumes.
+        [field: NonSerialized] public BossRank Boss { get; internal set; }
         public int InkGrant = -1;
         public int Count = 80;
         public HordeWaveSettings Horde;
@@ -96,6 +101,8 @@ namespace PaperDefense.Core
     public sealed partial class GameBalance
     {
         [NonSerialized] public ContentCatalogSnapshot Content;
+        // A mission supplies this presentation choice again when restoring a checkpoint.
+        [field: NonSerialized] public EnemyFamily EnemyFamily { get; internal set; }
         public ContentCatalogSnapshot ResolveContent() => Content ?? LegacyContentCatalog.Create(this);
         public GameBalancePreset Preset;
         public MechanicsConfiguration Mechanics = new MechanicsConfiguration();
@@ -187,14 +194,7 @@ namespace PaperDefense.Core
                 DamageMultiplier = definition.DamageMultiplier, RefundFraction = definition.RefundFraction,
                 BuildTimeMultiplier = definition.BuildTimeMultiplier
             });
-            copy.EnemyDefinitions = EnemyDefinitions.ConvertAll(definition => new EnemyDefinition
-            {
-                Kind = definition.Kind, Attack = definition.Attack, MaxHealth = definition.MaxHealth, Speed = definition.Speed,
-                Damage = definition.Damage, AttackInterval = definition.AttackInterval,
-                StructureDamageMultiplier = definition.StructureDamageMultiplier, VisualScale = definition.VisualScale,
-                Range = definition.Range, WindupSeconds = definition.WindupSeconds,
-                ProjectileSeconds = definition.ProjectileSeconds, Reward = definition.Reward
-            });
+            copy.EnemyDefinitions = EnemyDefinitions.ConvertAll(definition => definition.CreateSnapshot());
             copy.Waves = Waves.ConvertAll(definition => definition.CreateSnapshot());
             return copy;
         }
@@ -354,6 +354,8 @@ namespace PaperDefense.Core
     {
         public int Id;
         public EnemyKind Kind;
+        public BossRank Boss { get; internal set; }
+        internal EnemyDefinition BossStats;
         public Point2 Position;
         public float Health, MaxHealth;
         public float VisualScale = 1;
@@ -381,6 +383,8 @@ namespace PaperDefense.Core
         internal float NavigationCost;
         internal bool YieldingToNeighbor;
         internal bool CrowdHoldingPosition;
+        internal StructureState AssaultWall;
+        internal Point2 AssaultDirection;
         internal StructureState FrontlineTarget;
         internal bool HasDestination;
         internal bool VisualDeathPublished;

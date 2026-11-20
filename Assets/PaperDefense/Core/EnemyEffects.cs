@@ -192,7 +192,7 @@ namespace PaperDefense.Core
             if(events==null||enemy==null||enemy.Health>=previousHealth)return;
             events.Publish(tick,SimulationEventKind.EnemyHit,enemy.Position,enemy.Position,weapon,entityId:enemy.Id,weaponId:weaponId,
                 sourceStructureId:sourceStructureId,mountSlotIndex:mountSlotIndex,actionId:actionId,simulationSeconds:simulationSeconds,
-                enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier,enemyVisualScale:enemy.VisualScale,colorEffect:colorEffect);
+                enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier,enemyVisualScale:enemy.VisualScale,colorEffect:colorEffect,boss:enemy.Boss);
             PublishDeath(enemy,events,tick,simulationSeconds,weapon,weaponId,sourceStructureId,mountSlotIndex,actionId,colorEffect);
         }
 
@@ -203,7 +203,7 @@ namespace PaperDefense.Core
             enemy.VisualDeathPublished=true;
             events.Publish(tick,SimulationEventKind.EnemyDied,enemy.Position,enemy.Position,weapon,entityId:enemy.Id,weaponId:weaponId,
                 sourceStructureId:sourceStructureId,mountSlotIndex:mountSlotIndex,actionId:actionId,simulationSeconds:simulationSeconds,
-                enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier,enemyVisualScale:enemy.VisualScale,colorEffect:colorEffect);
+                enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier,enemyVisualScale:enemy.VisualScale,colorEffect:colorEffect,boss:enemy.Boss);
         }
 
         static void SyncRed(EnemyState enemy)

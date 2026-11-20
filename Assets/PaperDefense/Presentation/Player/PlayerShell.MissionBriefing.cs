@@ -26,11 +26,12 @@ namespace PaperDefense.Presentation
         {
             var first = balance.Waves[0];
             var forecast = first.Forecast;
-            string caption = "Волна 1 · " + HordeWaveForecast.Headline(forecast);
+            string caption = "Волна 1 · " + HordeWaveForecast.Headline(forecast, balance.EnemyFamily);
             var button = CompactMenuAction(parent, name, bounds, PlayerIcon.Flag, caption, () =>
                 UiHelp.Show(page, "Разведка по волнам", HordeWaveForecast.MissionBriefing(balance,
                     wave => HordeWaveForecast.Directions(ui, wave))));
-            contextHints.Tip(button.gameObject, "Посмотреть состав всех волн\n" + HordeWaveForecast.Advice(forecast, balance.Mechanics));
+            contextHints.Tip(button.gameObject, EnemyFamilyNames.Title(balance.EnemyFamily) + " · состав волн\n" +
+                HordeWaveForecast.Advice(forecast, balance));
         }
 
         void MissionRewardSummary(Transform parent, string prefix, CampaignMissionDefinition mission, bool completed, Rect bounds)

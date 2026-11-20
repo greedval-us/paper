@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PaperDefense.Presentation
 {
     public enum NotebookArtPrimitive { Polyline, Polygon, Circle, Ring }
-    public enum NotebookInkChannel { Navy, Pencil, Paper, Red, Blue, Green, Wash, White, Ivory, Sketch, Surface, Amber, Danger, Clean, NotebookPaper, Body, GlassInk, Copper, BladeSteel }
+    public enum NotebookInkChannel { Navy, Pencil, Paper, Red, Blue, Green, Wash, White, Ivory, Sketch, Surface, Amber, Danger, Clean, NotebookPaper, Body, GlassInk, Copper, BladeSteel, Violet }
 
     [Serializable] public sealed class NotebookArtMark
     {
@@ -45,6 +45,18 @@ namespace PaperDefense.Presentation
             float time = Loop && Duration > 0 ? Mathf.Repeat(Mathf.Max(0, elapsed), Duration) : Mathf.Clamp(elapsed, 0, Duration);
             for (int i = Frames.Count - 1; i >= 0; i--) if (time >= Frames[i].Time) return Frames[i];
             return Frames[0];
+        }
+        internal void HoldFirstPose()
+        {
+            if (Frames.Count == 0) return;
+            string still = Frames[0].ShapeId;
+            foreach (var frame in Frames)
+            {
+                frame.ShapeId = still;
+                frame.Offset = Vector2.zero;
+                frame.Rotation = 0;
+                frame.Scale = 1;
+            }
         }
     }
     [Serializable] public sealed class NotebookRecoilKey
@@ -89,6 +101,7 @@ namespace PaperDefense.Presentation
     {
         public NotebookArtSource Data = new NotebookArtSource();
         Dictionary<string, NotebookArtShape> shapes;
+        Dictionary<string, NotebookArtShape> compactOverrides;
         Dictionary<string, NotebookArtClip> clips;
         Dictionary<string, NotebookWeaponRecoil> recoils;
         static NotebookVisualThemeAsset defaultTheme;
@@ -120,6 +133,26 @@ namespace PaperDefense.Presentation
         public float MaximumTerminalTailSeconds => Data.MaximumTerminalTailSeconds;
         public int MaximumEffects => Data.MaximumEffects;
         public int MaximumDeaths => Data.MaximumDeaths;
+        internal bool UsesNativeCrowdGeometry => Data.Revision == InkSwarmArt.Revision &&
+            Data.Palette?.Length > (int)NotebookInkChannel.Violet && Data.Shapes.Count == 0;
+
+        internal NotebookArtShape FindCompactEnemy(string id)
+        {
+            if (Data.Revision != InkSwarmArt.Revision || id == null) return null;
+            if (UsesNativeCrowdGeometry) return InkSwarmEnemyArt.CreateCompact(id);
+            Index();
+            if (compactOverrides == null) compactOverrides = new Dictionary<string, NotebookArtShape>(StringComparer.Ordinal);
+            if (compactOverrides.TryGetValue(id, out var found)) return found;
+            string compactId = id + ".compact";
+            foreach (var authored in Data.Shapes)
+            {
+                if (authored.Id == compactId) { found = authored; break; }
+                if (authored.Id == id) found = authored;
+            }
+            found = found ?? FindShape(compactId);
+            compactOverrides.Add(id, found);
+            return found;
+        }
         public NotebookArtShape FindShape(string id)
         {
             Index();
@@ -133,23 +166,41 @@ namespace PaperDefense.Presentation
                 value = InkSwarmArt.Shape(id);
                 // The active battle cache owns its compact poses. Preserve that identity;
                 // only caller-owned/short palettes need an isolated remapped copy.
-                if (Data.Revision != InkSwarmArt.Revision || paletteSize < 14)
+                if (Data.Revision != InkSwarmArt.Revision || paletteSize <= (int)NotebookInkChannel.Violet)
                     value = NotebookThemeDefaults.ForPalette(value, paletteSize);
             }
             if (value != null) { value.Id = id; shapes.Add(id, value); }
             return value;
         }
-        public NotebookArtClip FindClip(string id) { Index(); return id != null && clips.TryGetValue(id, out var value) ? value : null; }
+        public NotebookArtClip FindClip(string id)
+        {
+            Index();
+            if (id == null) return null;
+            if (clips.TryGetValue(id, out var clip)) return clip;
+            if (!(id.StartsWith("enemy.undead.", StringComparison.Ordinal) || id.StartsWith("enemy.clockwork.", StringComparison.Ordinal) ||
+                id.StartsWith("enemy.boss.", StringComparison.Ordinal)) ||
+                this == Default) return null;
+            clip = Default.FindClip(id);
+            if (clip == null) return null;
+            if (Data.ReducedMotion)
+            {
+                // Theme-owned copy retains event duration and death fades for older saved palettes.
+                clip = JsonUtility.FromJson<NotebookArtClip>(JsonUtility.ToJson(clip));
+                clip.HoldFirstPose();
+            }
+            clips.Add(id, clip);
+            return clip;
+        }
         public NotebookWeaponRecoil FindRecoil(string weaponId) { Index(); return weaponId != null && recoils.TryGetValue(weaponId, out var value) ? value : null; }
         public Color Color(NotebookInkChannel channel)
             => Data.Palette != null && (int)channel < Data.Palette.Length ? Data.Palette[(int)channel] : UnityEngine.Color.white;
         public void ReplaceData(NotebookArtSource value)
         {
             Data = value ?? throw new ArgumentNullException(nameof(value));
-            shapes = null; clips = null; recoils = null;
+            shapes = null; clips = null; recoils = null; compactOverrides = null;
             if (ReferenceEquals(this, defaultTheme)) NotebookSpriteCatalog.ResetCache();
         }
-        void OnEnable() { shapes = null; clips = null; recoils = null; }
+        void OnEnable() { shapes = null; clips = null; recoils = null; compactOverrides = null; }
         void Index()
         {
             if (shapes != null) return;

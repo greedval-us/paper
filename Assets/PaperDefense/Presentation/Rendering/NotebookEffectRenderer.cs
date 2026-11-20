@@ -6,7 +6,7 @@ namespace PaperDefense.Presentation
     /// <summary>Shared event visuals for the live battlefield and recorded trials.</summary>
     internal static class NotebookEffectRenderer
     {
-        internal static string EffectId(SimulationEvent item, NotebookVisualThemeAsset theme = null)
+        internal static string EffectId(SimulationEvent item, NotebookVisualThemeAsset theme = null, EnemyFamily family = EnemyFamily.Ink)
         {
             switch (item.Kind)
             {
@@ -17,7 +17,8 @@ namespace PaperDefense.Presentation
                 case SimulationEventKind.BlotExpired: return "fx.blot.expire";
                 case SimulationEventKind.BlotCleared: return "fx.blot.cleanse";
                 case SimulationEventKind.BlotAbsorbed: return "fx.blot.absorb";
-                case SimulationEventKind.EnemyGlobImpact: return "fx.spitter.impact";
+                case SimulationEventKind.EnemyGlobImpact: return family == EnemyFamily.Undead ? "fx.bell.impact" :
+                    family == EnemyFamily.Clockwork ? "fx.chad.impact" : "fx.spitter.impact";
                 case SimulationEventKind.BaseHit: return "fx.castle.hit";
                 case SimulationEventKind.InkWellHit: return "fx.well.hit";
                 case SimulationEventKind.InkWellActivated: return "fx.well.activate";
@@ -39,9 +40,9 @@ namespace PaperDefense.Presentation
             }
         }
 
-        internal static float Duration(SimulationEvent item, NotebookVisualThemeAsset theme)
+        internal static float Duration(SimulationEvent item, NotebookVisualThemeAsset theme, EnemyFamily family = EnemyFamily.Ink)
         {
-            float? authored = theme?.FindClip(EffectId(item, theme))?.Duration;
+            float? authored = theme?.FindClip(EffectId(item, theme, family))?.Duration;
             // Live effects and recorded playback share this lifetime. Even a short
             // theme clip must leave enough time to recognise the completion stamp.
             if (item.Kind == SimulationEventKind.ModernizationCompleted) return Mathf.Max(.9f, authored ?? .9f);
@@ -50,15 +51,21 @@ namespace PaperDefense.Presentation
         }
 
         internal static void Draw(MeshPen pen, SimulationEvent item, Vector2 muzzle, float age,
-            NotebookVisualThemeAsset theme, bool darkSurface = false)
+            NotebookVisualThemeAsset theme, bool darkSurface = false, EnemyFamily family = EnemyFamily.Ink)
         {
             theme = theme ?? NotebookVisualThemeAsset.Default;
-            float duration = Duration(item, theme);
+            float duration = Duration(item, theme, family);
             if (age < 0 || age >= duration) return;
             float t = Mathf.Clamp01(age / duration), fade = 1 - t;
             var at = new Vector2(item.To.X, item.To.Y);
-            string id = EffectId(item, theme);
+            string id = EffectId(item, theme, family);
             int seed = (int)item.Sequence;
+            if (item.Kind == SimulationEventKind.EnemyGlobImpact && family != EnemyFamily.Ink)
+            {
+                DrawResource(pen, theme, id, at, theme.Data.ReducedMotion ? 0 : age, fade,
+                    theme.Data.ReducedMotion ? 1 : .8f + t * .5f, darkSurface: darkSurface);
+                return;
+            }
             if (item.Kind == SimulationEventKind.PrismPulsed)
             {
                 var color = item.ColorEffect.Color;
@@ -250,6 +257,38 @@ namespace PaperDefense.Presentation
             NightNotebookEffectPalette.DrawResource(pen, frame?.ShapeId ?? id, at + (frame?.Offset ?? Vector2.zero),
                 theme, darkSurface, scale * (frame?.Scale ?? 1), radians + (frame?.Rotation ?? 0),
                 opacity: fade * (frame?.Alpha ?? 1), localScale: localScale, inkColor: inkColor);
+        }
+
+        internal static void DrawEnemyProjectile(MeshPen pen, Vector2 from, Vector2 to, float progress,
+            EnemyFamily family, NotebookVisualThemeAsset theme, bool darkSurface, BossRank boss = BossRank.None)
+        {
+            Vector2 point = Vector2.Lerp(from, to, progress);
+            Vector2 direction = to - from;
+            float heading = Mathf.Atan2(direction.y, direction.x);
+            if (boss == BossRank.Finale && family == EnemyFamily.Ink)
+            {
+                NightNotebookEffectPalette.DrawResource(pen, "fx.quill.projectile", point, theme, darkSurface, radians: heading);
+                return;
+            }
+            if (boss == BossRank.Finale && family == EnemyFamily.Clockwork)
+            {
+                NightNotebookEffectPalette.DrawResource(pen, "fx.indexcard.projectile", point, theme, darkSurface, radians: heading);
+                return;
+            }
+            if (family == EnemyFamily.Ink)
+            {
+                Color trail = NightNotebookEffectPalette.Tone(NotebookPalette.Marker, NightNotebookArt.Accent, theme, darkSurface);
+                pen.Line(Vector2.Lerp(from, to, Mathf.Max(0, progress - .12f)), point, .09f, MeshPen.Alpha(trail, .55f));
+                NightNotebookEffectPalette.DrawResource(pen, "fx.spitter.projectile", point, theme, darkSurface);
+                return;
+            }
+            bool reduced = (theme ?? NotebookVisualThemeAsset.Default).Data.ReducedMotion;
+            if (family == EnemyFamily.Undead)
+                NightNotebookEffectPalette.DrawResource(pen, "fx.bell.projectile", point, theme, darkSurface,
+                    reduced ? 1 : Mathf.Lerp(.86f, 1.12f, progress), heading);
+            else
+                NightNotebookEffectPalette.DrawResource(pen, "fx.chad.projectile", point, theme, darkSurface,
+                    radians: reduced ? heading : heading + progress * Mathf.PI);
         }
 
         // Both live combat and trial playback draw the same launch-owned color and

@@ -12,26 +12,39 @@ namespace PaperDefense.Core
         private readonly float[] traversal;
         private readonly List<HeapEntry> heap = new List<HeapEntry>();
         private Cell goal;
+        private float walkingSeconds;
         private static readonly int[] OffsetX = { 1, -1, 0, 0 };
         private static readonly int[] OffsetY = { 0, 0, 1, -1 };
 
         internal WeightedFlowField(int width, int height, BattlefieldView battlefield = null)
         { this.width = width; this.height = height; this.battlefield=battlefield; distance = new float[width * height]; traversal = new float[width * height]; }
 
-        internal void Rebuild(Cell goal, StructureState[] grid, float movementSpeed = 1, float breachDamagePerSecond = 50)
+        internal void Rebuild(Cell goal, StructureState[] grid, float movementSpeed = 1, float breachDamagePerSecond = 50,
+            bool hordeAssault = false, bool[] openBreaches = null)
         {
             this.goal = goal;
             heap.Clear();
-            float walkingSeconds = 1 / Math.Max(0.01f, movementSpeed);
+            walkingSeconds = 1 / Math.Max(0.01f, movementSpeed);
             float breachDps = Math.Max(0.01f, breachDamagePerSecond);
             for (int i = 0; i < distance.Length; i++)
             {
                 distance[i] = float.MaxValue;
                 var structure = grid[i];
                 bool blocker = structure != null && structure.IsComplete && structure.Health > 0 && structure.Kind != StructureKind.Spikes && structure.Kind != StructureKind.TarPit;
-                // Four remaining-health bands avoid a full rebuild for every individual hit.
-                float estimatedHealth = blocker ? Math.Max(1, structure.MaxHealth) * HealthBand(structure) / 4f : 0;
-                traversal[i] = walkingSeconds + estimatedHealth / breachDps;
+                traversal[i] = walkingSeconds;
+                if (!blocker) continue;
+                if (hordeAssault && structure.Kind == StructureKind.Wall)
+                {
+                    // A step aside and back into lane costs two steps. Prefer a nearby opening.
+                    if (openBreaches != null && HasAdjacentBreach(structure.Cell, openBreaches))
+                        traversal[i] += 3 * walkingSeconds;
+                }
+                else
+                {
+                    // Four remaining-health bands avoid a full rebuild for every individual hit.
+                    float estimatedHealth = Math.Max(1, structure.MaxHealth) * HealthBand(structure) / 4f;
+                    traversal[i] += estimatedHealth / breachDps;
+                }
             }
             int origin = goal.Y * width + goal.X;
             distance[origin] = 0;
@@ -108,6 +121,23 @@ namespace PaperDefense.Core
         }
 
         internal float Cost(Cell cell) => distance[cell.Y * width + cell.X];
+
+        internal bool OnShortestApproach(Cell from, Cell wall)
+        {
+            // The caller checks line of sight. Walking to this wall and continuing from it
+            // must cost no more than the best route, or the visible wall is off the approach.
+            int steps = Math.Abs(from.X - wall.X) + Math.Abs(from.Y - wall.Y);
+            int index = wall.Y * width + wall.X;
+            float viaWall = distance[index] + traversal[index] + (steps - 1) * walkingSeconds;
+            return viaWall <= Cost(from) + .001f;
+        }
+
+        private bool HasAdjacentBreach(Cell cell, bool[] breaches)
+        {
+            int i = cell.Y * width + cell.X;
+            return (cell.X > 0 && breaches[i - 1]) || (cell.X + 1 < width && breaches[i + 1]) ||
+                (cell.Y > 0 && breaches[i - width]) || (cell.Y + 1 < height && breaches[i + width]);
+        }
 
         private void Push(HeapEntry entry)
         {

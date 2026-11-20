@@ -200,8 +200,19 @@ namespace PaperDefense.Application
                 var balance = CreateConfiguredBalance(true, legacyFixtureDefaults);
                 balance.Mechanics.MaximumModernizationRank = data.MaximumModernizationRank;
                 balance = MissionBalanceFactory.Create(balance, mission); balance.Content = balance.ResolveContent();
-                if (data.StartingBaseHealth != balance.BaseHealth || data.Fingerprint != ContinuationFingerprint(balance, mission))
+                string currentFingerprint = ContinuationFingerprint(balance, mission);
+                bool matchingRules = data.Fingerprint == currentFingerprint;
+                if (!matchingRules)
+                {
+                    var oldOpening = MissionBalanceFactory.CreatePreviousOpeningSnapshot(balance, mission);
+                    matchingRules = data.Fingerprint == ContinuationFingerprint(oldOpening, mission) ||
+                        data.Fingerprint == ContinuationFingerprint(MissionBalanceFactory.CreatePreviousReinforcementSnapshot(balance, mission), mission);
+                }
+                if (data.StartingBaseHealth != balance.BaseHealth || !matchingRules)
                 { reason = "Правила или детали игры изменились после сохранения. Можно удалить сохранение и начать новую попытку."; return false; }
+                // Keep previously earned ink and the remaining countdown from the checkpoint.
+                // The resumed attempt uses today's wave payouts and saves their fingerprint.
+                data.Fingerprint = currentFingerprint;
                 var receipt = profile.FindCampaignRunReward(saved.RunId);
                 if (receipt == null || receipt.MissionId != saved.MissionId || receipt.CompletedWaves != saved.CompletedWaves ||
                     receipt.WaveCount != mission.WaveCount || receipt.Victory)

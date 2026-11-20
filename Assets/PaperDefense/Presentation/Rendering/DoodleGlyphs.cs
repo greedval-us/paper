@@ -403,24 +403,25 @@ namespace PaperDefense.Presentation
 
         public static void Enemy(MeshPen pen, EnemyView enemy, float time, bool compact = false,
             NotebookAnimationState animation = null, NotebookVisualThemeAsset theme = null, double sampleSeconds = double.NaN, float windupSeconds = 0,
-            bool showHealth = true, float uniformScale = 1, HordeView horde = HordeView.None)
+            bool showHealth = true, float uniformScale = 1, HordeView horde = HordeView.None, EnemyFamily family = EnemyFamily.Ink)
         {
             int first = pen.VertexCount;
             float phase = time + enemy.Id * .137f;
-            NotebookEnemyMotion motion = animation != null ? animation.Observe(enemy, time, out phase, theme, sampleSeconds, windupSeconds)
+            NotebookEnemyMotion motion = animation != null ? animation.Observe(enemy, time, out phase, theme, sampleSeconds, windupSeconds, family)
                 : enemy.WindupRemaining > 0 ? NotebookEnemyMotion.Attack : NotebookEnemyMotion.Idle;
             // Large crowds keep the same role and clip phase through a cached native detail level.
             var position = new Vector2(enemy.Position.X, enemy.Position.Y);
-            bool distantDoodle = horde == HordeView.Overview && enemy.Kind == EnemyKind.Doodle && enemy.DrawingTier == DrawingTier.Sketch &&
-                enemy.VisualScale * uniformScale <= 24 * pen.WorldUnitsPerPixel && theme?.Data.Revision == InkSwarmArt.Revision;
+            bool distantDoodle = enemy.Boss == BossRank.None && horde == HordeView.Overview && enemy.Kind == EnemyKind.Doodle && enemy.DrawingTier == DrawingTier.Sketch &&
+                enemy.VisualScale * uniformScale <= 24 * pen.WorldUnitsPerPixel && theme != null && theme.UsesNativeCrowdGeometry;
             if (distantDoodle)
-                InkSwarmEnemyArt.DrawDistantDoodle(pen, position, enemy.VisualScale, motion, phase, theme);
+                InkSwarmEnemyArt.DrawDistantDoodle(pen, position, enemy.VisualScale, motion, phase, theme, family);
             else
-                DrawResourceEnemy(pen, enemy.Kind, enemy.DrawingTier, position, motion, phase, theme, enemy.VisualScale, compact: compact);
+                DrawResourceEnemy(pen, enemy.Kind, enemy.DrawingTier, position, motion, phase, theme, enemy.VisualScale, compact: compact, family: family, boss: enemy.Boss);
             EnemyMarks(pen, enemy, time, theme);
             if (showHealth)
             {
-                bool grunt = horde != HordeView.None && (enemy.Kind == EnemyKind.Doodle || enemy.Kind == EnemyKind.Runner || enemy.Kind == EnemyKind.Gnawer);
+                bool grunt = enemy.Boss == BossRank.None && horde != HordeView.None &&
+                    (enemy.Kind == EnemyKind.Doodle || enemy.Kind == EnemyKind.Runner || enemy.Kind == EnemyKind.Gnawer);
                 bool wounded = enemy.Health > 0 && enemy.Health < enemy.MaxHealth;
                 if ((!grunt || (horde == HordeView.Close && wounded)) && pen.TryGetBounds(first, out var silhouette))
                 {
@@ -458,20 +459,23 @@ namespace PaperDefense.Presentation
             float ratio = EnemyHealthRatio(enemy.Health, enemy.MaxHealth);
             if (ratio > 0) pen.Rect(at.x - width * .5f, at.y, width * ratio, height,
                 ratio > .35f ? NotebookPalette.Green : NotebookPalette.Red);
+            if (enemy.Boss != BossRank.None)
+                for (int i = 1; i < 4; i++)
+                    pen.Rect(at.x + width * (i * .25f - .5f), at.y, Mathf.Max(.018f, pen.WorldUnitsPerPixel), height, NotebookPalette.Navy);
         }
         internal static bool DrawResourceEnemy(MeshPen pen, EnemyKind kind, DrawingTier tier, Vector2 position,
-            NotebookEnemyMotion motion, float phase, NotebookVisualThemeAsset theme = null, float visualScale = 1, float uniformScale = 1, bool compact = false)
+            NotebookEnemyMotion motion, float phase, NotebookVisualThemeAsset theme = null, float visualScale = 1, float uniformScale = 1,
+            bool compact = false, EnemyFamily family = EnemyFamily.Ink, BossRank boss = BossRank.None)
         {
             int first = pen.VertexCount;
             theme = theme ?? NotebookVisualThemeAsset.Default;
             visualScale = VisualScale(visualScale);
-            Vector2 silhouette = kind == EnemyKind.Runner ? new Vector2(1.16f, .86f)
+            Vector2 silhouette = boss != BossRank.None ? Vector2.one : kind == EnemyKind.Runner ? new Vector2(1.16f, .86f)
                 : kind == EnemyKind.Brute ? new Vector2(1.18f, 1.12f)
                 : kind == EnemyKind.Bulwark ? new Vector2(1.08f, 1.05f) : Vector2.one;
-            string id = NotebookAnimationState.EnemyId(kind, tier, motion);
+            string id = NotebookAnimationState.EnemyId(kind, tier, motion, family, boss);
             var frame = theme?.FindClip(id)?.Sample(Mathf.Max(0, phase));
-            var compactShape = compact && theme != null && theme.Data.Revision == InkSwarmArt.Revision
-                ? InkSwarmEnemyArt.CreateCompact(frame?.ShapeId ?? id) : null;
+            var compactShape = compact && boss == BossRank.None ? theme.FindCompactEnemy(frame?.ShapeId ?? id) : null;
             Vector2 at = position + (frame?.Offset ?? Vector2.zero) * visualScale;
             float scale = (frame?.Scale ?? 1) * visualScale;
             bool drawn = compactShape != null

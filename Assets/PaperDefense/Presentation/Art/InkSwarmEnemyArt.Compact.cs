@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using PaperDefense.Core;
 using UnityEngine;
 
 namespace PaperDefense.Presentation
@@ -11,7 +12,7 @@ namespace PaperDefense.Presentation
         // At a few pixels tall the hood, light face and two marching feet carry the
         // imp silhouette. Solid facets avoid repeatedly tracing subpixel outlines.
         internal static void DrawDistantDoodle(MeshPen pen, Vector2 at, float size,
-            NotebookEnemyMotion motion, float phase, NotebookVisualThemeAsset theme)
+            NotebookEnemyMotion motion, float phase, NotebookVisualThemeAsset theme, EnemyFamily family = EnemyFamily.Ink)
         {
             float step = motion == NotebookEnemyMotion.Walk && !theme.Data.ReducedMotion
                 ? Mathf.Sin(phase * (2 * Mathf.PI / .52f)) : 0;
@@ -24,6 +25,33 @@ namespace PaperDefense.Presentation
             var crest = motion == NotebookEnemyMotion.Hit ? theme.Color(NotebookInkChannel.Danger) : edge;
             Vector2 Point(float x, float y) => at + new Vector2(x * 1.30f, (y + rise) * 1.10f) * size;
 
+            if (family == EnemyFamily.Undead)
+            {
+                pen.Triangle(Point(-.10f,-.09f), Point(-.035f,-.10f), Point(-.14f-.10f*step,-.39f), edge);
+                pen.Triangle(Point(.025f,-.10f), Point(.10f,-.09f), Point(.16f+.10f*step,-.36f), edge);
+                pen.Quad(Point(-.14f,.105f), Point(.12f,.12f), Point(.06f,-.13f), Point(-.055f,-.14f), body);
+                pen.Triangle(Point(-.14f,.08f), Point(.11f,.09f), Point(-.01f,.02f), edge);
+                pen.Triangle(Point(-.11f,-.012f), Point(.08f,-.005f), Point(-.015f,-.07f), edge);
+                pen.Quad(Point(head-.16f,.36f), Point(head+.14f,.36f), Point(head+.11f,.16f), Point(head-.11f,.14f), crest);
+                pen.Triangle(Point(head-.025f,.28f), Point(head+.12f,.28f), Point(head+.045f,.215f), shade);
+                pen.Triangle(Point(-.12f,.12f), Point(-.08f,.03f), Point(-.25f,-.07f), theme.Color(NotebookInkChannel.Violet));
+                return;
+            }
+            if (family == EnemyFamily.Clockwork)
+            {
+                float stride = .09f * step;
+                pen.Quad(Point(-.14f,-.12f), Point(-.055f,-.11f), Point(-.09f-stride,-.33f), Point(-.22f-stride,-.33f), body);
+                pen.Quad(Point(.05f,-.12f), Point(.14f,-.12f), Point(.22f+stride,-.30f), Point(.09f+stride,-.30f), edge);
+                // The press descends onto the front pad at the strike key, while its feet stay planted.
+                if (motion == NotebookEnemyMotion.Attack && !theme.Data.ReducedMotion)
+                    rise += phase < .24f * .7f ? .035f : -.10f;
+                pen.Quad(Point(-.16f,.13f), Point(.17f,.13f), Point(.21f,-.14f), Point(-.19f,-.14f), theme.Color(NotebookInkChannel.Copper));
+                pen.Quad(Point(-.22f,-.11f), Point(.24f,-.11f), Point(.24f,-.175f), Point(-.22f,-.175f), crest);
+                pen.Quad(Point(-.045f,.14f), Point(.02f,.14f), Point(.02f,.31f), Point(-.045f,.31f), edge);
+                pen.Quad(Point(-.16f,.35f), Point(.14f,.35f), Point(.105f,.26f), Point(-.13f,.26f), theme.Color(NotebookInkChannel.Amber));
+                pen.Triangle(Point(.055f,.06f), Point(.17f,.06f), Point(.105f,-.01f), shade);
+                return;
+            }
             pen.Triangle(Point(-.13f,-.10f), Point(.00f,-.11f), Point(-.17f - .075f * step,-.38f), body);
             pen.Triangle(Point(-.01f,-.13f), Point(.13f,-.09f), Point(.16f + .075f * step,-.35f), edge);
             pen.Triangle(Point(-.09f,.10f), Point(-.04f,.01f), Point(-.27f,-.12f), body);
@@ -37,18 +65,12 @@ namespace PaperDefense.Presentation
         internal static NotebookArtShape CreateCompact(string id)
         {
             if (id == null || id.EndsWith(".compact", StringComparison.Ordinal)) return null;
-            if (CompactShapes.TryGetValue(id, out var cached)) return cached;
-            // Validate against the same finite ID vocabulary before creating or caching anything.
-            if (Create(id) == null) return null;
-            string[] parts = id.Split('.');
-            int family = Array.IndexOf(Families, parts[1]);
-            bool shorthand = parts.Length == 3;
-            int tier = shorthand ? 0 : Array.IndexOf(Tiers, parts[2]);
-            int motion = Array.IndexOf(Motions, parts[shorthand ? 2 : 3]);
-            int phase = parts.Length == 5 ? parts[4] == "a" ? 1 : 2 : 0;
-            var p = new Pose((NotebookEnemyMotion)motion, phase, tier);
-            var d = new BattleInkDrawing(id + ".compact");
-            switch (family)
+            return CreatePose(id, true);
+        }
+
+        static void DrawCompactInk(BattleInkDrawing d, int role, Pose p)
+        {
+            switch (role)
             {
                 case 0: CompactDoodle(d, p); break;
                 case 1: CompactRunner(d, p); break;
@@ -57,9 +79,6 @@ namespace PaperDefense.Presentation
                 case 4: CompactBrute(d, p); break;
                 default: CompactBulwark(d, p); break;
             }
-            FinishPose(d.Shape, p);
-            CompactShapes.Add(id, d.Shape);
-            return d.Shape;
         }
 
         static void CompactDoodle(BattleInkDrawing d, Pose p)

@@ -27,11 +27,17 @@ namespace PaperDefense.Tests
         static bool Has(RunController run) => Value<bool>(run, "HasMissionCheckpoint");
         static GameSession Session(RunController run) => (GameSession)typeof(RunController).GetField("session", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(run);
         static void SetSession(RunController run, string property, object value) => typeof(GameSession).GetProperty(property).SetValue(Session(run), value);
-        static void StartIntermission(AssemblyCommandFixture fixture)
+        static void StartIntermission(AssemblyCommandFixture fixture, int missionIndex = 0)
         {
             // This fixture verifies the transaction boundary; omit enemy spawns but use a real completed-wave step.
             Assert.That(typeof(RunController).GetMethod("TrySuspendMission"), Is.Not.Null, "Missing suspend transaction.");
             fixture.BalanceAsset.campaignEnabled = true; fixture.Restart();
+            if (missionIndex > 0)
+            {
+                foreach (var prior in CampaignCatalog.Default.Missions.Take(missionIndex))
+                    Assert.That(fixture.Run.RunRewards.ApplyMission(prior, Guid.NewGuid(), prior.WaveCount, true, 2).Success, Is.True);
+                Assert.That(fixture.Run.SelectMission(CampaignCatalog.Default.Missions[missionIndex].Id, out var selection), Is.True, selection);
+            }
             Assert.That(fixture.Run.StartRun(out var reason), Is.True, reason);
             fixture.Run.NextWave(); SetSession(fixture.Run, "RemainingToSpawn", 0);
             fixture.Store.RefuseWrites = true; fixture.Run.StepSimulation(); fixture.Store.RefuseWrites = false;
@@ -182,6 +188,51 @@ namespace PaperDefense.Tests
                 Assert.That(Has(fixture.Run), Is.True); Assert.That(fixture.Store.SaveCalls, Is.EqualTo(writes)); Assert.That(fixture.SavedBytes, Is.EqualTo(bytes));
                 Assert.That(fixture.Commands.AssignSlot(7, null, Guid.NewGuid()).Success, Is.True);
                 Assert.That(Call(fixture.Run, "TryDiscardMissionCheckpoint", out _), Is.True);
+            }
+        }
+
+        [TestCase(0, 220, true)] [TestCase(2, 268, true)]
+        [TestCase(0, 220, false)] [TestCase(4, 520, false)] [TestCase(8, 960, false)]
+        public void PreviousCampaignEconomyResumesWithEarnedInkAndRemainingTime(int missionIndex, int oldStartingInk, bool oldReinforcements)
+        {
+            using (var fixture = new AssemblyCommandFixture())
+            {
+                StartIntermission(fixture, missionIndex);
+                SetSession(fixture.Run, "Countdown", 7.5f);
+                var previous = Session(fixture.Run).Balance;
+                Assert.That(previous.StartingInk, Is.GreaterThan(oldStartingInk));
+                previous.StartingInk = oldStartingInk;
+                int nextGrant = previous.Waves[1].InkGrant;
+                float nextSpawnInterval = previous.Waves[1].SpawnInterval;
+                if (oldReinforcements)
+                {
+                    int[] priorGrants = missionIndex == 0 ? new[] { 96, 120, 144, 78 } :
+                        new[] { 112, 124, 136, 148, 160, 172, 184, 196 };
+                    if (missionIndex == 2)
+                    {
+                        previous.Waves[1].SpawnInterval = 19f / previous.Waves[1].Count;
+                        Assert.That(nextSpawnInterval, Is.LessThan(previous.Waves[1].SpawnInterval));
+                    }
+                    previous.IntermissionSeconds = 16;
+                    for (int i = 0; i < priorGrants.Length; i++) previous.Waves[i].InkGrant = priorGrants[i];
+                }
+                var flags = BindingFlags.Instance | BindingFlags.NonPublic;
+                var fingerprint = typeof(RunController).GetField("continuationFingerprint", flags);
+                string currentHash = (string)fingerprint.GetValue(fixture.Run);
+                string previousHash = (string)typeof(RunController).GetMethod("ContinuationFingerprint", flags)
+                    .Invoke(fixture.Run, new object[] { previous, fixture.Run.ActiveMission });
+                Assert.That(previousHash, Is.Not.EqualTo(currentHash));
+                fingerprint.SetValue(fixture.Run, previousHash);
+                Suspend(fixture);
+                fixture.Restart();
+
+                Assert.That(fixture.Run.TryResumeMission(out var reason), Is.True, reason);
+                Assert.That(fixture.Run.Session.Ink, Is.EqualTo(123));
+                Assert.That(fixture.Run.Session.Countdown, Is.EqualTo(7.5f));
+                Assert.That(Session(fixture.Run).Balance.Waves[1].InkGrant, Is.EqualTo(nextGrant));
+                Assert.That(Session(fixture.Run).Balance.Waves[1].SpawnInterval, Is.EqualTo(nextSpawnInterval));
+                Suspend(fixture);
+                Assert.That(fixture.Run.MissionCheckpoint.PayloadJson, Does.Contain(currentHash));
             }
         }
 

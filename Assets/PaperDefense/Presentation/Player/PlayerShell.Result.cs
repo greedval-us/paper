@@ -342,8 +342,8 @@ namespace PaperDefense.Presentation
                 for (int fallen = 0; fallen < 4; fallen++)
                 {
                     float y = 336 + fallen * 116;
-                    ResultFallen(parent, fallen % 2 == 0 ? "doodle" : "brute", R(180 + fallen % 2 * 64, y, 100, 64), -78);
-                    ResultFallen(parent, fallen % 2 == 0 ? "runner" : "doodle", R(1292 + fallen % 2 * 64, y + 24, 100, 64), 82);
+                    ResultFallen(parent, fallen % 2 == 0 ? EnemyKind.Doodle : EnemyKind.Brute, R(180 + fallen % 2 * 64, y, 100, 64), -78);
+                    ResultFallen(parent, fallen % 2 == 0 ? EnemyKind.Runner : EnemyKind.Doodle, R(1292 + fallen % 2 * 64, y + 24, 100, 64), 82);
                 }
             }
             else
@@ -365,12 +365,14 @@ namespace PaperDefense.Presentation
             symbol.Icon = icon; symbol.color = FieldMenuSkin.Ink;
         }
 
-        void ResultFallen(Transform parent, string family, Rect bounds, float fallbackRoll)
+        void ResultFallen(Transform parent, EnemyKind kind, Rect bounds, float fallbackRoll)
         {
-            string baseShape = "enemy." + family + ".sketch.idle", deathClip = "enemy." + family + ".sketch.death";
+            var family = game.Run.Session.Balance.EnemyFamily;
+            string baseShape = NotebookAnimationState.EnemyId(kind, DrawingTier.Sketch, NotebookEnemyMotion.Idle, family);
+            string deathClip = NotebookAnimationState.EnemyId(kind, DrawingTier.Sketch, NotebookEnemyMotion.Death, family);
             var clip = NotebookVisualThemeAsset.Default?.FindClip(deathClip);
             var art = ui.Art(parent, baseShape, bounds);
-            art.name = "Result fallen " + family;
+            art.name = "Result fallen " + kind.ToString().ToLowerInvariant();
             art.Bind(baseShape, deathClip);
             art.SetTime((clip?.Duration ?? 0) * .7f);
             // Authored death clips currently fade upright figures. The epilogue's static

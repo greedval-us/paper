@@ -221,6 +221,8 @@ namespace PaperDefense.Presentation
                 forecast.text = next.IsHorde ? NextWaveForecast(s) : "Далее: " + next.Count + " · " + GameText.Resolve(next.Title);
             }
             else forecast.text = ui.T("final_wave");
+            string bossStatus = ActiveBossStatus(s);
+            if (bossStatus != null) forecast.text = bossStatus;
             fieldStats.text = ui.T("field_stats", s.Enemies.Count, s.Kills, s.Structures.Count);
             var inspected = input.InspectedCell.HasValue ? s.StructureAt(input.InspectedCell.Value) : null;
             context.gameObject.SetActive(!input.IsPlacingTower && (showSummary || inspected.HasValue));

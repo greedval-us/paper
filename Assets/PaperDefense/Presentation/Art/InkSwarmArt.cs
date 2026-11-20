@@ -14,7 +14,7 @@ namespace PaperDefense.Presentation
             var data = theme.Data;
             data.Revision = Revision;
             data.NightInkOnDarkSurfaces = true;
-            var palette = new Color[(int)NotebookInkChannel.BladeSteel + 1];
+            var palette = new Color[(int)NotebookInkChannel.Violet + 1];
             Array.Copy(data.Palette, palette, data.Palette.Length);
             palette[(int)NotebookInkChannel.Ivory] = NightNotebookArt.Ink;
             palette[(int)NotebookInkChannel.Sketch] = NightNotebookArt.Pencil;
@@ -27,9 +27,11 @@ namespace PaperDefense.Presentation
             palette[(int)NotebookInkChannel.GlassInk] = NightNotebookArt.GlassInk;
             palette[(int)NotebookInkChannel.Copper] = NightNotebookArt.Copper;
             palette[(int)NotebookInkChannel.BladeSteel] = NightNotebookArt.BladeSteel;
+            palette[(int)NotebookInkChannel.Violet] = new Color32(151, 135, 168, 255);
             data.Palette = palette;
             data.Clips.Clear();
             InkSwarmEnemyArt.PopulateClips(data);
+            InkSwarmEnemyArt.PopulateBossClips(data);
             InkSwarmEffectArt.PopulateClips(data);
             theme.ReplaceData(data);
             return theme;

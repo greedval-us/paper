@@ -24,7 +24,12 @@ namespace PaperDefense.Presentation
         GameBalanceView forecastBalance;
         int forecastWaveIndex = -1;
         string forecastSummary, forecastDetails, forecastDirection, forecastHeadline;
-        const string EnemyRoleLegend = "Метки врагов: щит — броня рисунка; капля — плевун; двойная стрелка — бегун. Скобки — враг рядом с замком.";
+        static string EnemyRoleLegend(EnemyFamily family) => family switch
+        {
+            EnemyFamily.Undead => "Щит — броня рисунка, капля — звонарь, двойная стрелка — костегон. Скобки отмечают врага у замка.",
+            EnemyFamily.Clockwork => "Щит — броня рисунка, капля — метатель, двойная стрелка — пружинник. Скобки отмечают врага у замка.",
+            _ => "Метки врагов: щит — броня рисунка; капля — плевун; двойная стрелка — бегун. Скобки — враг рядом с замком."
+        };
         Text albumInk, albumHealth, albumWave, albumPhase, albumForecast, albumSpeed, albumMessage, albumSelection;
         Text albumStructureName, albumDetails, albumFieldSummary, albumStructureHealth, albumStructureState, albumObjective;
         readonly Text[] albumStatValues = new Text[4];
@@ -257,7 +262,7 @@ namespace PaperDefense.Presentation
             }
             albumOverviewCaption.text = BattleCopy(focused ? "overview" : "castle_focus");
             albumOverview.interactable = game.CanBuild;
-            albumOverview.GetComponent<PlayerTooltip>().Message = BattleCopy("overview_hint") + "\n" + EnemyRoleLegend;
+            albumOverview.GetComponent<PlayerTooltip>().Message = BattleCopy("overview_hint") + "\n" + EnemyRoleLegend(session.Balance.EnemyFamily);
         }
 
         void RefreshCastleReadability(IRunReadModel session)
@@ -268,10 +273,26 @@ namespace PaperDefense.Presentation
             albumHealth.fontSize = modernizationHud ? (low ? 13 : 16) : (low ? 14 : 19);
             albumHealth.color = low ? NotebookPalette.Red : PlayerUi.Ink;
             if (low) albumHealth.text += "\nМало HP";
+            string bossStatus = ActiveBossStatus(session);
+            if (bossStatus != null)
+            {
+                if (modernizationHud) albumPhase.text += "\n" + bossStatus;
+                else albumForecast.text = bossStatus;
+            }
             if (!current || feedback.NearCastleCount == 0) return;
             string cue = "Рядом с замком: " + feedback.NearCastleCount;
             if (modernizationHud) albumPhase.text += "\n" + cue;
-            else albumForecast.text = cue;
+            else albumForecast.text = bossStatus == null ? cue : bossStatus + "\n" + cue;
+        }
+
+        string ActiveBossStatus(IRunReadModel session)
+        {
+            if (session.Phase != RunPhase.Assault) return null;
+            var feedback = game.World?.Readability;
+            if (feedback == null || session.RunId != feedback.RunId || !feedback.ActiveBoss.HasValue) return null;
+            var boss = feedback.ActiveBoss.Value;
+            return EnemyFamilyNames.BossName(session.Balance.EnemyFamily, boss.Boss) + " · " +
+                Mathf.CeilToInt(100 * DoodleGlyphs.EnemyHealthRatio(boss.Health, boss.MaxHealth)) + "%";
         }
 
         string NextWaveForecast(IRunReadModel session, bool detailed = false)
@@ -288,10 +309,17 @@ namespace PaperDefense.Presentation
             {
                 forecastDirection = HordeWaveForecast.Directions(ui, next);
                 var forecast = next.Forecast;
-                forecastHeadline = HordeWaveForecast.Headline(forecast);
+                string composition = HordeWaveForecast.Headline(forecast, forecastBalance.EnemyFamily);
+                forecastHeadline = composition;
                 forecastSummary += " · " + forecastDirection;
-                forecastDetails = forecastSummary + "\n" + forecastHeadline + ". " +
-                    HordeWaveForecast.Advice(forecast, forecastBalance.Mechanics);
+                if (next.Boss != BossRank.None)
+                {
+                    string name = EnemyFamilyNames.BossName(forecastBalance.EnemyFamily, next.Boss);
+                    forecastSummary += " · Босс " + name;
+                    forecastHeadline += " · " + name;
+                }
+                forecastDetails = forecastSummary + "\n" + composition + ". " +
+                    HordeWaveForecast.Advice(forecast, forecastBalance);
             }
             return detailed ? forecastDetails : forecastSummary;
         }

@@ -216,7 +216,7 @@ namespace PaperDefense.Presentation
             LastMeshBuildMilliseconds = 0;
             if (session == null || worldPen == null) return;
             visualClock.Advance(session.Elapsed, session.Phase, Paused, Time.unscaledDeltaTime, Theme?.MaximumTerminalTailSeconds ?? 1.2f);
-            animation.Prune(visualClock.Seconds, Theme);
+            animation.Prune(visualClock.Seconds, Theme, session.Balance.EnemyFamily);
             long started = System.Diagnostics.Stopwatch.GetTimestamp();
             bool scaleChanged = UpdateViewScale();
             if (scaleChanged || paperHordeSides != HordeWaveForecast.DisplayedSides(session)
@@ -607,6 +607,8 @@ namespace PaperDefense.Presentation
             var hordeView = !horde ? HordeView.None : cull && halfHeight * 2 >= session.Balance.Height / 3f ? HordeView.Overview : HordeView.Close;
             bool compactSwarm = session.Enemies.Count > 1000 || (horde && session.Enemies.Count >= 160);
             var theme = Theme;
+            var family = session.Balance.EnemyFamily;
+            EnemyView? visibleBoss = null;
             for (int i = 0; i < session.Enemies.Count; i++)
             {
                 EnemyView enemy = session.Enemies[i];
@@ -614,9 +616,17 @@ namespace PaperDefense.Presentation
                 float margin = DoodleGlyphs.VisualScale(enemy.VisualScale) * enemyScale + .5f;
                 if (cull && (Mathf.Abs(enemy.Position.X - cameraPosition.x) > halfWidth + margin
                           || Mathf.Abs(enemy.Position.Y - cameraPosition.y) > halfHeight + margin)) continue;
+                // Keep the boss and its health bar above overlapping ranks of the horde.
+                if (enemy.Boss != BossRank.None) visibleBoss = enemy;
+                else DrawEnemy(enemy);
+            }
+            if (visibleBoss.HasValue) DrawEnemy(visibleBoss.Value);
+
+            void DrawEnemy(EnemyView enemy)
+            {
                 DoodleGlyphs.Enemy(p, enemy, time, compactSwarm, animation, theme,
                     windupSeconds: enemy.WindupRemaining > 0 ? session.Balance.Enemy(enemy.Kind).WindupSeconds : 0,
-                    showHealth: ShowEnemyHealthBars, uniformScale: enemyScale, horde: hordeView);
+                    showHealth: ShowEnemyHealthBars, uniformScale: enemyScale, horde: hordeView, family: family);
             }
             foreach (var death in animation.Deaths)
             {
@@ -624,7 +634,7 @@ namespace PaperDefense.Presentation
                 if (cull && (Mathf.Abs(death.Position.x - cameraPosition.x) > halfWidth + margin
                     || Mathf.Abs(death.Position.y - cameraPosition.y) > halfHeight + margin)) continue;
                 DoodleGlyphs.DrawResourceEnemy(p, death.Kind, death.Tier, death.Position, NotebookEnemyMotion.Death,
-                    (float)(visualClock.Seconds - death.Born), Theme, death.VisualScale, enemyScale);
+                    (float)(visualClock.Seconds - death.Born), Theme, death.VisualScale, enemyScale, family: family, boss: death.Boss);
             }
             p.Upload();
         }
@@ -652,7 +662,7 @@ namespace PaperDefense.Presentation
             p.Clear();
             bool darkSurface = DarkSurface;
             var theme = Theme;
-            Color trailInk = NightNotebookEffectPalette.Tone(NotebookPalette.Marker, NightNotebookArt.Accent, theme, darkSurface);
+            var family = session.Balance.EnemyFamily;
             for (int i = 0; i < session.Blots.Count; i++)
             {
                 var blot = session.Blots[i]; Vector2 center = new Vector2(blot.Cell.X + .5f, blot.Cell.Y + .5f);
@@ -664,9 +674,7 @@ namespace PaperDefense.Presentation
                 var glob = session.EnemyProjectiles[i];
                 Vector2 from = new Vector2(glob.From.X, glob.From.Y), to = new Vector2(glob.To.X, glob.To.Y);
                 float progress = Mathf.Clamp01(1 - glob.Remaining / Mathf.Max(.001f, glob.Duration));
-                Vector2 point = Vector2.Lerp(from, to, progress);
-                p.Line(Vector2.Lerp(from, to, Mathf.Max(0, progress - .12f)), point, .09f, MeshPen.Alpha(trailInk, .55f));
-                NightNotebookEffectPalette.DrawResource(p, "fx.spitter.projectile", point, theme, darkSurface);
+                NotebookEffectRenderer.DrawEnemyProjectile(p, from, to, progress, family, theme, darkSurface, glob.Boss);
                 p.Ring(to, .36f, .035f, MeshPen.Alpha(NotebookPalette.Red, .5f), 12, 1, glob.Id, true);
             }
             for (int i = 0; i < session.Projectiles.Count; i++)
@@ -684,9 +692,9 @@ namespace PaperDefense.Presentation
             {
                 var mark = firingMarks[i];
                 float age = (float)(time - mark.SimulationSeconds);
-                if (age >= NotebookEffectRenderer.Duration(mark, Theme)) { firingMarks.RemoveAt(i); continue; }
+                if (age >= NotebookEffectRenderer.Duration(mark, theme, family)) { firingMarks.RemoveAt(i); continue; }
                 Vector2 muzzle = VisualMuzzle(mark.SourceStructureId, mark.MountSlotIndex, mark.To, new Vector2(mark.From.X, mark.From.Y));
-                NotebookEffectRenderer.Draw(p, mark, muzzle, age, theme, darkSurface);
+                NotebookEffectRenderer.Draw(p, mark, muzzle, age, theme, darkSurface, family);
             }
             RefreshReadability();
             if (ModernEnemyPresentation) Readability.Draw(p, theme);

@@ -5,38 +5,51 @@ namespace PaperDefense.Core
     public sealed partial class GameSession
     {
         readonly EnemyCrowdMotion crowdMotion;
+        bool[] openHordeBreaches;
         // Symmetric alternatives; stable per-enemy handedness resolves identical scores.
         static readonly float[] CrowdAngles = { 0, .5235988f, -.5235988f, 1.0471976f, -1.0471976f, 1.5707963f, -1.5707963f };
 
 
-        Point2 CrowdPreferredDirection(EnemyState enemy) => IsBlocker(StructureAt(CellOf(enemy.Destination))) ?
+        Point2 CrowdPreferredDirection(EnemyState enemy) => enemy.AssaultWall != null || IsBlocker(StructureAt(CellOf(enemy.Destination))) ?
                 EnemyCrowdMotion.Unit(new Point2(enemy.Destination.X - enemy.Position.X, enemy.Destination.Y - enemy.Position.Y)) :
                 EnemyFlow(enemy).Direction(enemy.Position);
 
-        StructureState ContactWallAhead(EnemyState enemy)
+        // Commit before local separation pushes the back ranks sideways past the wall.
+        // Once it falls, those ranks keep the opening as their waypoint until they enter it.
+        void UpdateBarricadeApproach(EnemyState enemy, bool wallsPresent)
         {
-            var position = enemy.Position;
-            var goal = TargetPoint(enemy);
-            float reach = rules.Combat.StructureContactDistance;
-            float nearest = reach * reach;
-            int minX = Math.Max(0, (int)Math.Ceiling(position.X - .5f - reach));
-            int maxX = Math.Min(rules.Width - 1, (int)Math.Floor(position.X - .5f + reach));
-            int minY = Math.Max(0, (int)Math.Ceiling(position.Y - .5f - reach));
-            int maxY = Math.Min(rules.Height - 1, (int)Math.Floor(position.Y - .5f + reach));
-            StructureState best = null;
-            for (int y = minY; y <= maxY; y++)
-            for (int x = minX; x <= maxX; x++)
+            var wall = enemy.AssaultWall;
+            var cell = CellOf(enemy.Position);
+            if (wall != null && (cell == wall.Cell ||
+                (IsBlocker(wall) && StructureAt(wall.Cell) == wall && !EnemyFlow(enemy).OnShortestApproach(cell, wall.Cell)) ||
+                !CanTraverseCrowd(enemy.Position, Center(wall.Cell), wall)))
+                wall = null;
+            if (wall == null && wallsPresent)
             {
-                var wall = grid[y * rules.Width + x];
-                if (wall?.Kind != StructureKind.Wall || !IsBlocker(wall)) continue;
-                float dx = x + .5f - position.X, dy = y + .5f - position.Y;
-                if (dx * (goal.X - position.X) + dy * (goal.Y - position.Y) <= 0) continue;
-                float distance = dx * dx + dy * dy;
-                if (distance > nearest || (distance == nearest && best != null && best.Id < wall.Id)) continue;
-                nearest = distance;
-                best = wall;
+                var next = StructureAt(CellOf(enemy.Destination));
+                if (IsBlocker(next))
+                {
+                    if (next.Kind == StructureKind.Wall) wall = next;
+                }
+                else
+                {
+                    const float lookAhead = 5;
+                    var goal = TargetPoint(enemy);
+                    float distance = (float)Math.Sqrt(DistanceSquared(enemy.Position, goal));
+                    var ahead = Point2.Lerp(enemy.Position, goal, distance > lookAhead ? lookAhead / distance : 1);
+                    if (TraceBlocker(enemy.Position, ahead, true, out var hit, out _) && hit.Kind == StructureKind.Wall &&
+                        EnemyFlow(enemy).OnShortestApproach(cell, hit.Cell) && CanTraverseCrowd(enemy.Position, Center(hit.Cell), hit))
+                        wall = hit;
+                }
             }
-            return best;
+            if (wall != null)
+            {
+                enemy.Destination = Center(wall.Cell);
+                if (enemy.AssaultWall != wall)
+                    enemy.AssaultDirection = EnemyCrowdMotion.Unit(new Point2(
+                        enemy.Destination.X - enemy.Position.X, enemy.Destination.Y - enemy.Position.Y));
+            }
+            enemy.AssaultWall = wall;
         }
 
         void MoveInCrowd(EnemyState enemy, float movement)
@@ -48,6 +61,7 @@ namespace PaperDefense.Core
             Point2 best = enemy.Position;
             float bestScore = float.MinValue;
             int handedness = (enemy.Id & 1) == 0 ? 1 : -1;
+            bool waitingForBreach = IsBlocker(enemy.AssaultWall) && StructureAt(enemy.AssaultWall.Cell) == enemy.AssaultWall;
             // Half-steps let queues approach smoothly without violating the swept body test.
             for (int speed = 0; speed < 2 && bestScore == float.MinValue; speed++)
             {
@@ -78,6 +92,10 @@ namespace PaperDefense.Core
                         rules.Crowd.DirectionMemory * (direction.X * enemy.MovementDirection.X + direction.Y * enemy.MovementDirection.Y);
                     if (score <= bestScore) continue;
                     var next = new Point2(enemy.Position.X + direction.X * travel, enemy.Position.Y + direction.Y * travel);
+                    // Queue on the approach side. Separation may spread the ranks along the
+                    // frontage, but must not carry a committed attacker behind the intact wall.
+                    if (waitingForBreach && (next.X - enemy.Destination.X) * enemy.AssaultDirection.X +
+                        (next.Y - enemy.Destination.Y) * enemy.AssaultDirection.Y > 0) continue;
                     if (!CanTraverseCrowd(enemy.Position, next) || !crowdMotion.CanMove(enemy, next)) continue;
                     if (CellOf(next) != CellOf(enemy.Position) && !crowd.CanEnter(CellOf(next))) continue;
                     best = next; bestScore = score;
@@ -91,7 +109,7 @@ namespace PaperDefense.Core
             crowdMotion.Moved(enemy, previous);
         }
 
-        bool CanTraverseCrowd(Point2 from, Point2 to)
+        bool CanTraverseCrowd(Point2 from, Point2 to, StructureState approachWall = null)
         {
             float padding = rules.Crowd.ObstacleClearance;
             if (to.X < padding || to.Y < padding || to.X >= rules.Width - padding || to.Y >= rules.Height - padding) return false;
@@ -103,7 +121,8 @@ namespace PaperDefense.Core
                 for (int x = minX; x <= maxX; x++)
                 {
                     var cell = new Cell(x, y);
-                    if ((Battlefield == null || Battlefield.IsWalkable(cell)) && !IsBlocker(StructureAt(cell))) continue;
+                    var structure = StructureAt(cell);
+                    if ((Battlefield == null || Battlefield.IsWalkable(cell)) && (structure == approachWall || !IsBlocker(structure))) continue;
                     float enter = 0, exit = 1;
                     if (ClipCrowdAxis(from.X, to.X - from.X, x - padding, x + 1 + padding, ref enter, ref exit) &&
                         ClipCrowdAxis(from.Y, to.Y - from.Y, y - padding, y + 1 + padding, ref enter, ref exit)) return false;

@@ -17,6 +17,7 @@ namespace PaperDefense.Core
         internal float ObjectiveDamageScale = 1;
         public int ObjectiveIndex { get; internal set; }
         public EnemyKind SourceEnemyKind { get; internal set; }
+        public BossRank Boss { get; internal set; }
         public DrawingTier SourceEnemyDrawingTier { get; internal set; }
         public bool TargetsStructure => ObjectiveIndex < -1;
     }

@@ -40,6 +40,74 @@ namespace PaperDefense.Tests
             return false;
         }
 
+        [TestCase("notebook-2-page-1", EnemyFamily.Undead, BossRank.None)]
+        [TestCase("notebook-3-page-1", EnemyFamily.Clockwork, BossRank.None)]
+        [TestCase("notebook-1-page-1", EnemyFamily.Ink, BossRank.Midpoint)]
+        [TestCase("notebook-1-page-1", EnemyFamily.Ink, BossRank.Finale)]
+        [TestCase("notebook-2-page-1", EnemyFamily.Undead, BossRank.Midpoint)]
+        [TestCase("notebook-2-page-1", EnemyFamily.Undead, BossRank.Finale)]
+        [TestCase("notebook-3-page-1", EnemyFamily.Clockwork, BossRank.Midpoint)]
+        [TestCase("notebook-3-page-1", EnemyFamily.Clockwork, BossRank.Finale)]
+        public void CampaignBattleRendersItsFirstSpawnWithTheNotebookFamily(string missionId, EnemyFamily family, BossRank boss)
+        {
+            var mission = CampaignCatalog.Default.Find(missionId);
+            var configured = AssetDatabase.LoadAssetAtPath<GameBalanceAsset>("Assets/PaperDefense/Configuration/TargetNotebookBalance.asset");
+            var balance = MissionBalanceFactory.Create(configured.CreateBalance(), mission);
+            if (boss != BossRank.None) balance.Waves.RemoveAll(w => w.Boss != boss);
+            var session = new GameSession(balance, mission.Seed, false);
+            session.StartNextWave();
+            for (int i = 0; i < 200 && session.Enemies.Count == 0; i++) session.Tick(balance.SimulationStep);
+            Assert.That(session.Enemies.Count, Is.Positive, missionId);
+
+            var model = new RunReadModel(session);
+            var root = new GameObject("Campaign enemy family sample");
+            var expectedMesh = new Mesh();
+            try
+            {
+                var view = root.AddComponent<NotebookWorldView>();
+                view.ModernEnemyPresentation = true;
+                view.Paused = true;
+                var theme = NotebookVisualThemeAsset.Default;
+                view.Initialize(model);
+                view.SendMessage("LateUpdate");
+                var worldPen = (MeshPen)typeof(NotebookWorldView).GetField("worldPen",
+                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(view);
+                var expectedPen = new MeshPen(expectedMesh)
+                {
+                    WorldUnitsPerPixel = worldPen.WorldUnitsPerPixel,
+                    MinimumStrokePixels = worldPen.MinimumStrokePixels
+                };
+                var enemy = model.Enemies[0];
+                Assert.That(enemy.Boss, Is.EqualTo(boss));
+                Assert.That(view.Readability.ActiveBoss?.Boss ?? BossRank.None, Is.EqualTo(boss));
+                var motion = view.AnimationState.Observe(enemy, view.VisualSeconds, out float phase, theme, family: family);
+                Vector3[] Body(EnemyFamily expected, BossRank expectedBoss)
+                {
+                    expectedPen.Clear();
+                    Assert.That(DoodleGlyphs.DrawResourceEnemy(expectedPen, enemy.Kind, enemy.DrawingTier,
+                        new Vector2(enemy.Position.X, enemy.Position.Y), motion, phase, theme, enemy.VisualScale,
+                        NotebookEnemyView.ModernScale, family: expected, boss: expectedBoss), Is.True);
+                    expectedPen.Upload();
+                    return expectedMesh.vertices;
+                }
+                var drawn = WorldMesh(root).vertices;
+                Assert.That(ContainsBody(drawn, Body(family, boss)), Is.True, missionId);
+                Assert.That(ContainsBody(drawn, Body(EnemyFamily.Ink, BossRank.None)), Is.False, missionId);
+                if (boss == BossRank.Finale)
+                {
+                    var events = new SimulationEventBuffer(8);
+                    events.Publish(1, SimulationEventKind.EnemyAttack, enemy.Position, enemy.Position, default,
+                        entityId: enemy.Id, simulationSeconds: view.VisualSeconds, boss: boss);
+                    foreach (var item in events) view.AnimationState.AddEvent(item, 8);
+                    var strike = view.AnimationState.Observe(enemy, view.VisualSeconds, out float releasedAt, theme, family: family);
+                    Assert.That(strike, Is.EqualTo(NotebookEnemyMotion.Attack));
+                    var id = InkSwarmEnemyArt.BossId(family, boss, strike);
+                    Assert.That(theme.FindClip(id).Sample(releasedAt).ShapeId, Is.EqualTo(id + ".b"));
+                }
+            }
+            finally { Object.DestroyImmediate(root); Object.DestroyImmediate(expectedMesh); }
+        }
+
         [UnityTest, Timeout(120000)]
         public IEnumerator ConfiguredNotebookArtRendersTheNaturalThreeThousandEnemyPeakWithoutChangingTheBattle()
         {

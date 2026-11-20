@@ -96,19 +96,25 @@ namespace PaperDefense.Presentation
                     "Мастерская", () => game.Navigate(PlayerPage.Workshop));
         }
 
-        static readonly (EnemyKind kind, string name)[] MissionEnemyLabels = {
-            (EnemyKind.Doodle, "каракули"), (EnemyKind.Runner, "бегуны"), (EnemyKind.Gnawer, "грызуны"),
-            (EnemyKind.Spitter, "плевуны"), (EnemyKind.Brute, "громилы"), (EnemyKind.Bulwark, "щитоносцы")
-        };
+        static readonly EnemyKind[] MissionEnemyKinds = (EnemyKind[])System.Enum.GetValues(typeof(EnemyKind));
 
-        static List<(EnemyKind kind, string name)> MissionEnemies(GameBalanceView balance)
-            => MissionEnemyLabels.Where(enemy => balance.Waves.Any(wave =>
-                wave.Count > 0 && wave.Composition.Fraction(enemy.kind) > 0)).ToList();
+        static List<(string shape, string name)> MissionEnemies(GameBalanceView balance)
+        {
+            var enemies = MissionEnemyKinds.Where(kind => balance.Waves.Any(wave => wave.Count > 0 && wave.Composition.Fraction(kind) > 0))
+                .Select(kind => (NotebookAnimationState.EnemyId(kind, DrawingTier.Sketch, NotebookEnemyMotion.Idle, balance.EnemyFamily),
+                    EnemyFamilyNames.Plural(balance.EnemyFamily, kind).ToLowerInvariant())).ToList();
+            foreach (var wave in balance.Waves)
+                if (wave.Boss != BossRank.None)
+                    enemies.Add((InkSwarmEnemyArt.BossId(balance.EnemyFamily, wave.Boss, NotebookEnemyMotion.Idle),
+                        EnemyFamilyNames.BossName(balance.EnemyFamily, wave.Boss)));
+            return enemies;
+        }
 
         static string MissionThreats(GameBalanceView balance)
         {
             var enemies = MissionEnemies(balance);
-            return enemies.Count == 0 ? "" : "Враги: " + string.Join(", ", enemies.Select(enemy => enemy.name)) + ".";
+            return enemies.Count == 0 ? "" : EnemyFamilyNames.Title(balance.EnemyFamily) + " · " +
+                string.Join(", ", enemies.Select(enemy => enemy.name)) + ".";
         }
 
         Text MissionSectionTitle(Transform parent, string text, Rect bounds, int size = 20)
@@ -121,7 +127,7 @@ namespace PaperDefense.Presentation
         float MissionOpposition(Transform parent, GameBalanceView balance, float x, float y, float width)
         {
             var enemies = MissionEnemies(balance);
-            MissionSectionTitle(parent, "Противники", new Rect(x, y, width, 28));
+            MissionSectionTitle(parent, EnemyFamilyNames.Title(balance.EnemyFamily), new Rect(x, y, width, 28));
             if (enemies.Count == 0) return 32;
             int columns = Mathf.Min(enemies.Count, Mathf.Max(2, Mathf.FloorToInt(width / 84)));
             float cell = width / columns;
@@ -129,8 +135,7 @@ namespace PaperDefense.Presentation
             {
                 var enemy = enemies[i];
                 float left = x + i % columns * cell, top = y + 32 + i / columns * 62;
-                ui.Art(parent, NotebookAnimationState.EnemyId(enemy.kind, DrawingTier.Sketch, NotebookEnemyMotion.Idle),
-                    new Rect(left + 4, top, cell - 8, 38));
+                ui.Art(parent, enemy.shape, new Rect(left + 4, top, cell - 8, 38));
                 NotebookLabel(parent, enemy.name, new Rect(left, top + 38, cell, 22), 14, PlayerUi.Muted, TextAnchor.MiddleCenter);
             }
             return 32 + Mathf.CeilToInt(enemies.Count / (float)columns) * 62;

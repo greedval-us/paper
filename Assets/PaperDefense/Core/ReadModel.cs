@@ -103,12 +103,13 @@ namespace PaperDefense.Core
     {
         public readonly int Id;
         public readonly EnemyKind Kind;
+        public readonly BossRank Boss;
         public readonly Point2 Position;
         public readonly float Health,MaxHealth;
         public readonly DrawingTier DrawingTier;
         public readonly float VisualScale;
         public readonly float BlotRemaining,RedRemaining,BlueRemaining,GreenRemaining,WindupRemaining;
-        internal EnemyView(EnemyState s){Id=s.Id;Kind=s.Kind;Position=s.Position;Health=s.Health;MaxHealth=s.MaxHealth;
+        internal EnemyView(EnemyState s){Id=s.Id;Kind=s.Kind;Boss=s.Boss;Position=s.Position;Health=s.Health;MaxHealth=s.MaxHealth;
             VisualScale=s.VisualScale;DrawingTier=s.DrawingTier;BlotRemaining=s.BlotRemaining;RedRemaining=s.RedRemaining;BlueRemaining=s.BlueRemaining;
             GreenRemaining=s.GreenRemaining;WindupRemaining=s.WindupRemaining;}
     }
@@ -121,7 +122,8 @@ namespace PaperDefense.Core
     public readonly struct EnemyGlobView
     {
         public readonly int Id;public readonly Point2 From,To;public readonly float Remaining,Duration;
-        internal EnemyGlobView(EnemyGlob g){Id=g.Id;From=g.From;To=g.To;Remaining=g.Remaining;Duration=g.Duration;}
+        public readonly BossRank Boss;
+        internal EnemyGlobView(EnemyGlob g){Id=g.Id;From=g.From;To=g.To;Remaining=g.Remaining;Duration=g.Duration;Boss=g.Boss;}
     }
     public readonly struct InkWellView
     {
@@ -222,6 +224,7 @@ namespace PaperDefense.Core
     public readonly struct WaveView
     {
         public readonly bool IsHorde;
+        public readonly BossRank Boss;
         public readonly WaveComposition Composition;
         public readonly float EffectiveSpawnInterval;
         public readonly WaveThreatForecast Forecast;
@@ -229,7 +232,7 @@ namespace PaperDefense.Core
         internal WaveView(WaveDefinition d, MechanicsAvailability mechanics, float minimumSpawnInterval,
             IReadOnlyList<EnemyDefinition> enemies)
         {
-            IsHorde = d.IsHorde; Count = d.Count; Sides = d.Sides; EntranceBands = d.EntranceBands;
+            IsHorde = d.IsHorde; Boss = d.Boss; Count = d.Count; Sides = d.Sides; EntranceBands = d.EntranceBands;
             InkGrant = d.InkGrant; SpawnInterval = d.SpawnInterval; Title = d.Title;
             RunnerFraction = d.RunnerFraction; GnawerFraction = d.GnawerFraction; SpitterFraction = d.SpitterFraction;
             BruteFraction = d.BruteFraction; BulwarkFraction = d.BulwarkFraction;
@@ -272,6 +275,7 @@ namespace PaperDefense.Core
         }
         public int Width=>source.Width;public int Height=>source.Height;public int StartingInk=>source.StartingInk;
         public int EntranceHalfWidth => source.Crowd.EntranceHalfWidth;
+        public EnemyFamily EnemyFamily => source.EnemyFamily;
         public float BaseHealth=>source.BaseHealth;public float PlanningSeconds=>source.PlanningSeconds;public float IntermissionSeconds=>source.IntermissionSeconds;
         public float SimulationStep=>source.SimulationStep;public int MaxEnemiesPerCell=>source.MaxEnemiesPerCell;
         public float PassiveInkPerSecond=>source.PassiveInkPerSecond;public int WaveInkGrant=>source.WaveInkGrant;

@@ -17,7 +17,7 @@ namespace PaperDefense.Tests
         {
             var root = new GameObject("Construction rules controller"); root.SetActive(false); owned.Insert(0, root);
             var run = root.AddComponent<RunController>(); run.balanceAsset = asset;
-            if (profile == null) run.InitializeWorkshop(false); else run.InitializeWorkshop(new MemoryStore(profile));
+            if (profile == null) run.InitializeWorkshop(false); else run.InitializeWorkshop(new MemoryWorkshopProfileStore(profile));
             return run;
         }
         [Test] public void AssetConstructionRulesAreOwnedAndSharedByPreviewTrialAndBattle()
@@ -76,12 +76,13 @@ namespace PaperDefense.Tests
             asset.ResetToDefaults();
             Assert.That(asset.enemies.Single(e => e.kind == EnemyKind.Gnawer).structureDamageMultiplier, Is.EqualTo(1.5f));
         }
-        sealed class MemoryStore : IWorkshopProfileStore
-        {
-            WorkshopProfile profile;
-            public MemoryStore(WorkshopProfile profile) { this.profile = profile; }
-            public ProfileLoadResult Load() => new ProfileLoadResult(profile, ProfileLoadSource.Primary, "", true);
-            public ProfileSaveResult Save(WorkshopProfile candidate) { profile = candidate; return new ProfileSaveResult(true, ""); }
-        }
+    }
+
+    internal sealed class MemoryWorkshopProfileStore : IWorkshopProfileStore
+    {
+        WorkshopProfile profile;
+        public MemoryWorkshopProfileStore(WorkshopProfile profile) { this.profile = profile; }
+        public ProfileLoadResult Load() => new ProfileLoadResult(profile, ProfileLoadSource.Primary, "", true);
+        public ProfileSaveResult Save(WorkshopProfile candidate) { profile = candidate; return new ProfileSaveResult(true, ""); }
     }
 }
