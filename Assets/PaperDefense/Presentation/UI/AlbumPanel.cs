@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using PaperDefense.Application;
 using PaperDefense.Core;
 using UnityEngine;
@@ -22,19 +24,51 @@ namespace PaperDefense.Presentation
         string feedback = "";
         bool refreshing;
         GameObject confirmation;
+        RectTransform workspace;
+        InputField search;
+        Button clearSearch;
+        float searchPosition = 1;
+        ScrollRect catalogScroll;
+        AlbumFilter renderedFilter;
+        readonly Dictionary<AlbumFilter, float> catalogPositions = new Dictionary<AlbumFilter, float>();
         public RectTransform Root { get; }
         public AlbumFilter Filter { get; private set; }
         public string SelectedId { get; private set; }
+        public string ReferenceId { get; private set; }
+        public string SearchQuery { get; private set; }
+        public float CatalogScrollPosition
+        {
+            get => ReadCatalogPosition();
+            set
+            {
+                float position = catalogScroll != null && catalogScroll.content.rect.height <= catalogScroll.viewport.rect.height + 1 ? 1 : Mathf.Clamp01(value);
+                if (HasQuery) searchPosition = position; else catalogPositions[Filter] = position;
+                if (catalogScroll != null && renderedFilter == Filter) catalogScroll.verticalNormalizedPosition = position;
+            }
+        }
         string T(string key, params object[] args) => ui.Resolve(UserText.Message("assembly.album." + key, args));
         AlbumEntry Selected => run.Workshop.Entries.FirstOrDefault(entry => entry.Id == SelectedId);
-        float PageInset => width >= 1250 ? Mathf.Min(112, width * .075f) : 24;
+        AlbumEntry Reference => run.Workshop.Entries.FirstOrDefault(entry => entry.Id == ReferenceId);
+        float PageInset => Mathf.Min(28, Mathf.Max(12, width * .02f));
+        bool HasQuery => !string.IsNullOrWhiteSpace(SearchQuery);
+        float SavedCatalogPosition => HasQuery ? searchPosition : catalogPositions.TryGetValue(Filter, out float position) ? position : 1;
+        float ReadCatalogPosition() => catalogScroll == null ? SavedCatalogPosition :
+            catalogScroll.content.rect.height <= catalogScroll.viewport.rect.height + 1 ? 1 : catalogScroll.verticalNormalizedPosition;
+        internal void HideHints() => ui.HideTooltip();
+        bool Wide => width >= 1150;
+        float HeaderHeight => Wide ? 78 : 66;
+        float DockHeight => Wide ? 90 : 72;
+        float DockTop => height - DockHeight - 58;
 
         public AlbumPanel(Transform parent, RunController run, UserTextResolver resolver,
-            Action<AlbumEntry> edit, Action close, Action assigned = null, int? destinationSlot = null)
+            Action<AlbumEntry> edit, Action close, Action assigned = null, int? destinationSlot = null, string initialQuery = null)
         {
             this.run = run ?? throw new ArgumentNullException(nameof(run));
             if (destinationSlot.HasValue && (destinationSlot < 0 || destinationSlot > 7)) throw new ArgumentOutOfRangeException(nameof(destinationSlot));
             ui = new WorkshopUi(resolver); this.edit = edit; this.close = close; this.assigned = assigned; this.destinationSlot = destinationSlot;
+            SearchQuery = initialQuery ?? "";
+            SelectedId = (destinationSlot.HasValue ? run.Workshop.LoadoutEntries[destinationSlot.Value] : null)?.Id
+                ?? run.Workshop.Entries.FirstOrDefault(Matches)?.Id;
             Root = ui.Panel(parent, "Album panel", new Rect(0, 0, width, height), WorkshopUi.Paper, true);
             // Album refreshes replace Root's children; the disposable host page owns its hint overlay.
             ui.EnsureTooltip(parent);
@@ -43,11 +77,16 @@ namespace PaperDefense.Presentation
 
         public void Reflow(float width, float height)
         {
-            this.width = Mathf.Max(800, width); this.height = Mathf.Max(600, height);
+            this.width = Mathf.Max(1, width); this.height = Mathf.Max(1, height);
             WorkshopUi.Place(Root, new Rect(0, 0, this.width, this.height)); Refresh();
         }
 
-        public void SetFilter(AlbumFilter value) { Filter = value; feedback = ""; Refresh(); }
+        public void SetFilter(AlbumFilter value)
+        {
+            Filter = value; feedback = "";
+            if (Selected == null || !Matches(Selected)) SelectedId = run.Workshop.Entries.FirstOrDefault(Matches)?.Id;
+            Refresh();
+        }
         public void SelectEntry(string id)
         {
             SelectedId = run.Workshop.Entries.Any(entry => entry.Id == id) ? id : null;
@@ -57,6 +96,7 @@ namespace PaperDefense.Presentation
         bool IsStandard(AlbumEntry entry) => run.AssemblyCatalog?.Starters.Any(starter => starter.Id == entry.Id) == true;
         bool Matches(AlbumEntry entry)
         {
+            if (HasQuery && ui.Resolve(entry.Name).IndexOf(SearchQuery.Trim(), StringComparison.CurrentCultureIgnoreCase) < 0) return false;
             switch (Filter)
             {
                 case AlbumFilter.Towers: return entry.Kind != AlbumEntryKind.Structure;
@@ -75,123 +115,179 @@ namespace PaperDefense.Presentation
             {
                 var previous = EventSystem.current?.currentSelectedGameObject;
                 string focus = previous != null && previous.transform.IsChildOf(Root) ? previous.name : null;
-                if (SelectedId != null && Selected == null) SelectedId = null;
-                WorkshopUi.ClearViews(Root); confirmation = null;
-                Periphery(); Header(); Slots(); Filters();
-                float bodyY = 232, bodyHeight = height - bodyY - 92;
-                float innerWidth = width - PageInset * 2;
-                float catalogWidth = (innerWidth - 16) * .72f;
-                var entries = run.Workshop.Entries.Where(Matches).ToArray();
-                if (entries.Length == 0) Empty(new Rect(PageInset, bodyY, innerWidth, bodyHeight));
-                else
+                if (catalogScroll != null)
                 {
-                    Cards(entries, new Rect(PageInset, bodyY, catalogWidth, bodyHeight));
-                    Inspector(new Rect(PageInset + catalogWidth + 16, bodyY, innerWidth - catalogWidth - 16, bodyHeight));
+                    if (HasQuery) searchPosition = ReadCatalogPosition();
+                    else catalogPositions[renderedFilter] = ReadCatalogPosition();
                 }
-                Footer();
+                if (SelectedId != null && Selected == null) SelectedId = null;
+                if (ReferenceId != null && Reference == null) ReferenceId = null;
+                WorkshopUi.ClearViews(Root); confirmation = null;
+                catalogScroll = null; workspace = null;
+                Header(); BuildWorkspace();
+                FieldMenuTheme.ApplyTo(Root);
                 if (focus != null && EventSystem.current != null)
                 {
                     var next = Root.GetComponentsInChildren<Selectable>().FirstOrDefault(control => control.name == focus && control.IsInteractable());
                     if (next != null) EventSystem.current.SetSelectedGameObject(next.gameObject);
                 }
+                // Recreated keyboard focus may reveal its card. The user's existing viewport wins;
+                // ordinary keyboard movement already revealed the control before this refresh.
+                if (catalogScroll != null) catalogScroll.verticalNormalizedPosition = SavedCatalogPosition;
+                ui.HideTooltip();
             }
             finally { refreshing = false; }
         }
 
-        void Header()
+        void BuildWorkspace()
         {
+            if (workspace != null) WorkshopUi.RemoveView(workspace.gameObject);
+            catalogScroll = null;
+            workspace = ui.Panel(Root, "Album workspace", new Rect(0, 0, width, height), Color.clear);
             float innerWidth = width - PageInset * 2;
-            ui.Label(Root, "Album title", destinationSlot.HasValue ? T("destination", destinationSlot.Value + 1) : T("title"),
-                new Rect(PageInset, 10, innerWidth * .33f, 48), 32, true);
-            var resources = ui.Label(Root, "Album resources", T("resources", run.Workshop.Gold, run.Workshop.Level, run.Workshop.TotalXp),
-                new Rect(PageInset + innerWidth * .34f, 16, innerWidth * .4f - 12, 40), 19, color: WorkshopUi.Muted);
-            resources.alignment = TextAnchor.MiddleCenter;
-            ui.Button(Root, "Album new", new Rect(PageInset + innerWidth * .75f, 14, innerWidth * .25f, 44),
-                T("new"), () => edit?.Invoke(null), WorkshopIcon.Plus, true).interactable = edit != null;
+            float inspectorWidth = Mathf.Clamp(innerWidth * (Wide ? .33f : .40f), 230, 520);
+            float gap = Wide ? 18 : 10;
+            float catalogWidth = innerWidth - inspectorWidth - gap;
+            float bodyY = HeaderHeight + 48;
+            float bottom = DockTop - 12;
+            var entries = run.Workshop.Entries.Where(Matches).ToArray();
+            Filters(Wide ? catalogWidth : innerWidth, entries.Length);
+            if (entries.Length == 0) Empty(new Rect(PageInset, bodyY, innerWidth, Mathf.Max(40, bottom - bodyY)));
+            else
+            {
+                Cards(entries, new Rect(PageInset, bodyY, catalogWidth, Mathf.Max(40, bottom - bodyY)));
+                float inspectorTop = Wide ? HeaderHeight : bodyY;
+                Inspector(new Rect(PageInset + catalogWidth + gap, inspectorTop, inspectorWidth, Mathf.Max(40, bottom - inspectorTop)));
+            }
+            Slots(); Footer();
         }
 
-        void Periphery()
+        void Header()
         {
-            float edge = Mathf.Max(58, PageInset + 12);
-            void Art(string id, Rect bounds)
-            {
-                var art = WorkshopUi.Graphic<NotebookArtGraphic>(Root, "Album margin " + id, bounds);
-                art.Bind(id); art.color = new Color(1, 1, 1, .95f);
-            }
-            for (int side = 0; side < 2; side++)
-            {
-                float x = side == 0 ? -edge * .27f : width - edge * .78f;
-                for (int tree = 0; tree < 5; tree++)
-                {
-                    float treeWidth = edge * (tree % 2 == 0 ? 1.02f : .72f);
-                    float y = 188 + tree * (height - 270) / 5;
-                    Art("terrain.pine", new Rect(x + tree % 2 * edge * .18f, y, treeWidth, treeWidth * 1.48f));
-                    if (tree % 2 == 1) Art("terrain.rock", new Rect(x, y + treeWidth, edge, edge * .56f));
-                }
-            }
-            if (PageInset >= 64)
-            {
-                var house = WorkshopUi.Graphic<Image>(Root, "Album workshop in margin", new Rect(4, 60, PageInset - 12, 122));
-                house.sprite = Resources.Load<Sprite>("Art/Player/DrawingWorkshopHouse"); house.preserveAspect = true;
-            }
-            Art("object.castle", new Rect(width - 192, 60, 188, 118));
-            Art("icon.flag", new Rect(width - edge + 8, height * .57f, edge * .6f, edge));
-            Art("terrain.shrub", new Rect(0, height - 100, edge * 1.55f, 92));
-            Art("terrain.rock", new Rect(width - edge * 1.4f, height - 92, edge * 1.45f, 88));
+            float right = width - PageInset;
+            float searchWidth = Mathf.Clamp(width * .24f, 154, 330);
+            float searchX = right - 188 - searchWidth;
+            float titleWidth = Mathf.Max(80, searchX - PageInset - 10);
+            var title = ui.Label(Root, "Album title", destinationSlot.HasValue ? T("destination", destinationSlot.Value + 1) : T("title"),
+                new Rect(PageInset, 3, titleWidth, 40), Wide ? 32 : 25, true);
+            FitAlbumSummary(title, Wide ? 32 : 25);
+            ui.Label(Root, "Album resources", T("resources", run.Workshop.Gold, run.Workshop.Level, run.Workshop.TotalXp),
+                new Rect(PageInset, Wide ? 48 : 39, titleWidth, 23), 15, color: WorkshopUi.Muted);
+            var field = ui.Panel(Root, "Album search", new Rect(searchX, 12, searchWidth, 40), WorkshopUi.Surface, true);
+            var shortcuts = field.gameObject.AddComponent<AlbumSearchInput>();
+            search = shortcuts;
+            search.targetGraphic = field.GetComponent<Graphic>(); search.lineType = InputField.LineType.SingleLine;
+            search.characterLimit = ProfileLimits.MaximumBlueprintNameLength;
+            WorkshopUi.Graphic<AlbumSearchLens>(field, "Album search symbol", new Rect(10, 10, 20, 20));
+            var inputRect = new Rect(37, 4, searchWidth - 75, 32);
+            search.textComponent = ui.Label(field, "Album search text", "", inputRect, 16);
+            search.placeholder = ui.Label(field, "Album search placeholder", searchWidth >= 200 ? "Поиск  ·  Ctrl+F" : "Поиск", inputRect, 15, color: WorkshopUi.Muted);
+            search.SetTextWithoutNotify(SearchQuery);
+            shortcuts.RestoreFocus = () => workspace?.GetComponentsInChildren<Button>()
+                .FirstOrDefault(button => button.name == "Album filter " + Filter)?.gameObject;
+            clearSearch = ui.IconButton(field, "Album clear search", new Rect(searchWidth - 33, 4, 30, 32),
+                WorkshopIcon.Close, "Очистить поиск", () => { search.text = ""; shortcuts.Focus(); });
+            clearSearch.gameObject.SetActive(SearchQuery.Length > 0);
+            search.onValueChanged.AddListener(ChangeSearch);
+            var create = ui.CompactButton(Root, "Album new", new Rect(width - PageInset - 176, 8, 128, 40),
+                "Создать", () => edit?.Invoke(null), WorkshopIcon.Plus, true);
+            create.interactable = edit != null;
+            ui.Tip(create.gameObject, T("new"));
+            ui.IconButton(Root, "Album help", new Rect(width - PageInset - 40, 8, 40, 40), WorkshopIcon.Help,
+                "Как пользоваться альбомом", () => UiHelp.Show(Root, "Альбом",
+                    "Выбери страницу в каталоге. Затем нажми место в текущем наборе, чтобы назначить её для боя.\n\n" +
+                    "Одна страница занимает одно место. Перенос между местами требует подтверждения.\n\n" +
+                    "Закрепи выбранную сборку кнопкой «Сравнить», затем выбери другую. Слева в числах — образец, справа — выбранная сборка; Δ показывает разницу. Сравнение ничего не меняет в наборе.\n\n" +
+                    "Фильтры отделяют башни, сооружения, стандартные и твои страницы. Подробности показывают полный состав и характеристики.\n\n" +
+                    "Изменить открывает мастерскую. Копия сохраняет отдельную страницу. Удаление требует подтверждения."));
+        }
+
+        void ChangeSearch(string value)
+        {
+            if (refreshing || SearchQuery == value) return;
+            if (!HasQuery && catalogScroll != null) catalogPositions[renderedFilter] = ReadCatalogPosition();
+            SearchQuery = value; searchPosition = 1; feedback = "";
+            if (Selected == null || !Matches(Selected)) SelectedId = run.Workshop.Entries.FirstOrDefault(Matches)?.Id;
+            clearSearch.gameObject.SetActive(value.Length > 0);
+            BuildWorkspace();
+            FieldMenuTheme.ApplyTo(Root);
+            if (catalogScroll != null) catalogScroll.verticalNormalizedPosition = SavedCatalogPosition;
+            ui.HideTooltip();
         }
 
         void Slots()
         {
-            int columns = width < 1250 ? 4 : 8;
-            float gap = 8, slotStart = PageInset + (columns == 8 ? 190 : 170);
-            float slotEnd = width - PageInset - (columns == 8 ? 120 : 100);
-            float slotWidth = (slotEnd - slotStart - gap * (columns - 1)) / columns;
-            float slotHeight = columns == 4 ? 48 : 104;
-            ui.Label(Root, "Album current loadout", "Текущий набор:", new Rect(PageInset, 86, slotStart - PageInset - 12, 58), 23, true);
+            float dockWidth = width - PageInset * 2;
+            var dock = ui.Panel(workspace, "Album loadout dock", new Rect(PageInset, DockTop, dockWidth, DockHeight), WorkshopUi.Paper);
+            float gap = Wide ? 8 : 4, slotStart = Wide ? 158 : 78;
+            float slotWidth = (dockWidth - slotStart - 10 - gap * 7) / 8;
+            float slotHeight = DockHeight - 16;
+            var loadout = run.Workshop.LoadoutEntries;
+            ui.Label(dock, "Album current loadout", Wide ? "Боевой набор" : "Набор", new Rect(12, 9, slotStart - 18, 30), Wide ? 19 : 16, true);
+            ui.Label(dock, "Album filled slots", loadout.Count(entry => entry != null) + " / 8", new Rect(12, 38, slotStart - 18, 22), 15, color: WorkshopUi.Muted);
             for (int index = 0; index < 8; index++)
             {
-                int slot = index; var entry = run.Workshop.LoadoutEntries[index];
+                int slot = index; var entry = loadout[index];
                 string caption = entry == null ? T("slot_empty", index + 1) : T("slot", index + 1, ui.Resolve(entry.Name));
-                var button = ui.Button(Root, "Album assign " + index,
-                    new Rect(slotStart + index % columns * (slotWidth + gap), 72 + index / columns * 56, slotWidth, slotHeight),
-                    caption, () => RequestAssign(slot), WorkshopIcon.Book);
-                if (columns == 8 && entry != null)
+                var button = ui.Button(dock, "Album assign " + index,
+                    new Rect(slotStart + index * (slotWidth + gap), 8, slotWidth, slotHeight),
+                    (index + 1) + ".", () => RequestAssign(slot));
+                var number = button.GetComponentInChildren<Text>();
+                WorkshopUi.Place(number.rectTransform, new Rect(5, 3, 25, 22));
+                number.resizeTextMinSize = number.resizeTextMaxSize = 15;
+                if (entry != null)
                 {
-                    WorkshopUi.RemoveView(button.GetComponentInChildren<WorkshopIconGraphic>().gameObject);
-                    var name = button.GetComponentInChildren<Text>();
-                    WorkshopUi.Place(name.rectTransform, new Rect(6, 64, slotWidth - 12, 36));
-                    name.text = ui.Resolve(entry.Name); name.fontSize = 14;
-                    name.resizeTextForBestFit = true; name.resizeTextMinSize = 13; name.resizeTextMaxSize = 14;
-                    name.alignment = TextAnchor.MiddleCenter;
-                    DrawEntry(button.transform, entry, new Rect(8, 3, slotWidth - 16, 58));
-                    var number = ui.Label(button.transform, "Album slot number " + index, (index + 1).ToString(), new Rect(6, 2, 22, 22), 15);
-                    number.alignment = TextAnchor.UpperLeft;
+                    DrawEntry(button.transform, entry, new Rect(25, 4, slotWidth - 31, Wide ? slotHeight - 31 : slotHeight - 9));
+                    if (Wide)
+                    {
+                        var captionLabel = ui.Label(button.transform, "Album equipped name", entry.Name,
+                            new Rect(7, slotHeight - 26, slotWidth - 14, 23), 15);
+                        FitAlbumSummary(captionLabel, 15);
+                    }
                 }
+                else
+                {
+                    var empty = WorkshopUi.Graphic<WorkshopIconGraphic>(button.transform, "Album slot empty " + index,
+                        new Rect((slotWidth - 20) * .5f, 28, 20, 20));
+                    empty.Icon = WorkshopIcon.Plus; empty.color = WorkshopUi.Muted;
+                }
+                ui.Tip(button.gameObject, caption);
                 button.interactable = !destinationSlot.HasValue && Selected != null;
                 ui.SetSelected(button, destinationSlot == index || SelectedId != null && entry?.Id == SelectedId);
             }
         }
 
-        void Filters()
+        void Filters(float areaWidth, int count)
         {
             string[] keys = { "all", "towers", "structures", "standard", "mine" };
-            float gap = 8, tabWidth = (width - PageInset * 2 - gap * 4) * .72f / 5;
+            float gap = 3;
+            float tabWidth = Mathf.Min(Wide ? 150 : 175, (areaWidth - gap * 4) / 5);
             for (int index = 0; index < keys.Length; index++)
             {
                 var filter = (AlbumFilter)index;
-                var button = ui.Button(Root, "Album filter " + filter,
-                    new Rect(PageInset + index * (tabWidth + gap), 186, tabWidth, 38), T("filter." + keys[index]), () => SetFilter(filter));
+                var button = ui.CompactButton(workspace, "Album filter " + filter,
+                    new Rect(PageInset + index * (tabWidth + gap), HeaderHeight, tabWidth, 38), T("filter." + keys[index]), () => SetFilter(filter));
+                button.GetComponentInChildren<Text>().resizeTextMaxSize = 18;
+                FieldMenuSkin.Tab(button);
                 ui.SetSelected(button, Filter == filter);
+            }
+            if (Wide && areaWidth - (tabWidth + gap) * 5 > 85)
+            {
+                var total = ui.Label(workspace, "Album filtered count", count + " / " + run.Workshop.Entries.Count,
+                    new Rect(PageInset + areaWidth - 79, HeaderHeight, 72, 38), 16, color: WorkshopUi.Muted);
+                total.alignment = TextAnchor.MiddleRight;
             }
         }
 
         void Cards(AlbumEntry[] entries, Rect bounds)
         {
-            int columns = width >= 1024 ? 4 : 2;
-            const float gap = 12;
+            float gap = Wide ? 12 : 8;
+            int columns = Mathf.Clamp(Mathf.FloorToInt((bounds.width - 8 + gap) / (192 + gap)), 1, 4);
             float cardWidth = (bounds.width - gap * (columns - 1) - 8) / columns;
-            float cardHeight = Mathf.Clamp((bounds.height - gap) / 2, 168, 340);
-            var list = new CatalogScrollList(Root, "Album catalogue", bounds, entries.Length, columns, cardHeight, gap);
+            int rows = Mathf.CeilToInt(entries.Length / (float)columns);
+            float cardHeight = Wide ? Mathf.Clamp((bounds.height - gap * (rows - 1)) / rows, 142, 248) : 138;
+            var list = new CatalogScrollList(workspace, "Album catalogue", bounds, entries.Length, columns, cardHeight, gap);
+            catalogScroll = list.Scroll; renderedFilter = Filter;
             for (int index = 0; index < entries.Length; index++)
             {
                 var entry = entries[index];
@@ -210,153 +306,489 @@ namespace PaperDefense.Presentation
                 card.gameObject.AddComponent<UiScrollFocus>();
                 button.name = "Album choose " + entry.Id;
                 button.onClick.AddListener(() => { SelectedId = entry.Id; feedback = ""; if (destinationSlot.HasValue) RequestAssign(destinationSlot.Value); else Refresh(); });
-                var title = ui.Label(card, "Album card name", entry.Name, new Rect(10, 4, cardWidth - 20, 38), 21, true);
-                title.resizeTextForBestFit = true; title.resizeTextMinSize = 15; title.resizeTextMaxSize = 19;
-                var rule = WorkshopUi.Graphic<Image>(card, "Album card title rule", new Rect(10, 43, cardWidth - 20, 1));
-                rule.color = new Color(.12f, .28f, .52f, .55f);
-                DrawEntry(card, entry, new Rect(5, 48, cardWidth - 10, cardHeight - 82));
+                float footerHeight = Wide ? 77 : 65;
+                float previewHeight = cardHeight - footerHeight - 8;
+                DrawEntry(card, entry, new Rect(7, 6, cardWidth - 14, previewHeight));
+                float titleY = cardHeight - footerHeight;
+                var title = ui.Label(card, "Album card name", entry.Name, new Rect(12, titleY + 2, cardWidth - 24, Wide ? 39 : 34), Wide ? 20 : 17);
+                title.fontStyle = FontStyle.Bold;
+                FitAlbumSummary(title, Wide ? 20 : 17);
+                ui.Tip(card.gameObject, entry.Name);
                 var resolved = run.PreviewAlbumEntry(entry, MaterialTier.Pencil);
-                AlbumIcon(card, "Album card pencil", "icon.pencil", new Rect(10, cardHeight - 34, 25, 28));
+                var pencil = WorkshopUi.Graphic<WorkshopIconGraphic>(card, "Album card pencil", new Rect(10, cardHeight - 29, 20, 20));
+                pencil.Icon = WorkshopIcon.Pencil; pencil.color = WorkshopUi.Ink;
                 var price = ui.Label(card, "Album card price", resolved.Valid ? T("price", resolved.Value.Cost) : T("unavailable"),
-                    new Rect(40, cardHeight - 34, cardWidth - 48, 28), 18);
-                price.resizeTextForBestFit = true; price.resizeTextMinSize = 14; price.resizeTextMaxSize = 18;
+                    new Rect(36, cardHeight - 32, cardWidth - 70, 26), 16, color: WorkshopUi.Muted);
+                price.resizeTextForBestFit = true; price.resizeTextMinSize = 14; price.resizeTextMaxSize = 16;
                 price.horizontalOverflow = HorizontalWrapMode.Overflow;
+                if (ReferenceId == entry.Id)
+                {
+                    var pin = WorkshopUi.Graphic<WorkshopIconGraphic>(card, "Album reference marker", new Rect(cardWidth - 30, cardHeight - 29, 20, 20));
+                    pin.Icon = WorkshopIcon.Pin; pin.color = WorkshopUi.Blue;
+                    ui.Tip(card.gameObject, ui.Resolve(entry.Name) + " · образец для сравнения");
+                }
+            }
+        }
+
+        static void FitAlbumSummary(Text label, int maximumSize)
+        {
+            const int minimumSize = 15;
+            label.resizeTextForBestFit = true;
+            label.resizeTextMinSize = minimumSize; label.resizeTextMaxSize = maximumSize;
+            string full = label.text;
+            var settings = label.GetGenerationSettings(label.rectTransform.rect.size);
+            settings.scaleFactor = 1; settings.fontSize = minimumSize;
+            settings.resizeTextForBestFit = false; settings.generateOutOfBounds = false;
+            using (var generated = new TextGenerator())
+            {
+                bool Fits(string value)
+                {
+                    generated.Populate(value, settings);
+                    return generated.characterCountVisible >= value.Length;
+                }
+                if (Fits(full)) return;
+                int low = 0, high = full.Length;
+                while (low < high)
+                {
+                    int middle = (low + high + 1) / 2;
+                    if (Fits(full.Substring(0, middle).TrimEnd() + "…")) low = middle;
+                    else high = middle - 1;
+                }
+                label.text = full.Substring(0, low).TrimEnd() + "…";
             }
         }
 
         void Empty(Rect bounds)
         {
-            var sheet = ui.Panel(Root, "Album empty sheet", bounds, Color.clear);
-            float imageHeight = Mathf.Max(120, Mathf.Min(430, bounds.height - 200));
-            float imageWidth = Mathf.Min(imageHeight * (1862f / 845f), bounds.width * .88f);
-            imageHeight = imageWidth * (845f / 1862f);
-            float imageX = (bounds.width - imageWidth) * .5f;
-            var title = ui.Label(sheet, "Album empty", T(Filter == AlbumFilter.Mine ? "empty_mine" : "empty"),
-                new Rect(24, 0, bounds.width - 48, 50), 34, true); title.alignment = TextAnchor.MiddleCenter;
-            var hint = ui.Label(sheet, "Album empty explanation", T("empty_hint"), new Rect(24, 44, bounds.width - 48, 42), 19, color: WorkshopUi.Muted);
+            var sheet = ui.Panel(workspace, "Album empty sheet", bounds, WorkshopUi.Paper);
+            const float contentHeight = 240;
+            Transform content = sheet;
+            if (bounds.height < contentHeight)
+                content = new CatalogScrollList(sheet, "Album empty scroll", new Rect(0, 0, bounds.width, bounds.height), 1, 1, contentHeight, 0).Content;
+            var title = ui.Label(sheet, "Album empty", HasQuery ? "Ничего не найдено" : T(Filter == AlbumFilter.Mine ? "empty_mine" : "empty"),
+                new Rect(24, 0, bounds.width - 48, 44), 26, true); title.alignment = TextAnchor.MiddleCenter;
+            if (content != sheet) title.transform.SetParent(content, false);
+            var hint = ui.Label(content, "Album empty explanation", HasQuery ? "Попробуй другое название или выбери другой фильтр." : T("empty_hint"), new Rect(24, 50, bounds.width - 48, 64), 19, color: WorkshopUi.Muted);
             hint.alignment = TextAnchor.MiddleCenter;
-            var illustration = WorkshopUi.Graphic<Image>(sheet, "Album empty notebook", new Rect(imageX, 80, imageWidth, imageHeight));
-            illustration.sprite = Resources.Load<Sprite>("Art/Player/AlbumOpenBookV2"); illustration.preserveAspect = true;
-            illustration.rectTransform.pivot = new Vector2(.5f, .5f);
-            illustration.rectTransform.anchoredPosition = new Vector2(imageX + imageWidth * .5f, -80 - imageHeight * .5f);
-            var starter = run.AssemblyCatalog?.Starters.FirstOrDefault(entry => entry.Kind == AlbumEntryKind.Tower);
-            if (starter != null)
-            {
-                var left = WorkshopUi.Graphic<WorkshopAssemblyDiagram>(illustration.transform, "Album empty foundation study",
-                    new Rect(imageWidth * .10f, imageHeight * .12f, imageWidth * .34f, imageHeight * .70f));
-                left.Configure(starter.Snapshot.Recipe, WorkshopComponentKind.Weapon, starter.Snapshot.Recipe.Tower.Mounts[0].SlotIndex);
-                var right = WorkshopUi.Graphic<WeaponAssemblyGraphic>(illustration.transform, "Album empty assembled study",
-                    new Rect(imageWidth * .55f, imageHeight * .16f, imageWidth * .34f, imageHeight * .66f));
-                right.SetRecipe(starter.Snapshot);
-            }
-            if (NotebookSpriteCatalog.TryGet("icon.ink-blue", out var inkBottle))
-            {
-                var ink = WorkshopUi.Graphic<Image>(sheet, "Album empty ink bottle",
-                    new Rect(Mathf.Max(16, imageX - 24), 84 + imageHeight - 56, 62, 76));
-                ink.sprite = inkBottle; ink.preserveAspect = true;
-            }
             float actionWidth = Mathf.Min(320, bounds.width - 48);
-            ui.Button(sheet, "Album empty create", new Rect((bounds.width - actionWidth) / 2, bounds.height - 110, actionWidth, 48),
+            ui.Button(content, "Album empty create", new Rect((bounds.width - actionWidth) / 2, 128, actionWidth, 44),
                 T("new"), () => edit?.Invoke(null), WorkshopIcon.Pencil, true).interactable = edit != null;
-            ui.Button(sheet, "Album show standard", new Rect((bounds.width - actionWidth) / 2, bounds.height - 58, actionWidth, 44),
-                T("show_standard"), () => SetFilter(AlbumFilter.Standard), WorkshopIcon.Book);
+            if (HasQuery)
+                ui.Button(content, "Album reset query", new Rect((bounds.width - actionWidth) / 2, 184, actionWidth, 44),
+                    "Очистить поиск", () => { search.text = ""; search.Select(); search.ActivateInputField(); }, WorkshopIcon.Close);
+            else
+                ui.Button(content, "Album show standard", new Rect((bounds.width - actionWidth) / 2, 184, actionWidth, 44),
+                    T("show_standard"), () => SetFilter(AlbumFilter.Standard), WorkshopIcon.Book);
         }
 
         void Inspector(Rect bounds)
         {
-            var sheet = ui.Panel(Root, "Album inspector", bounds, Color.white);
+            var sheet = ui.Panel(workspace, "Album inspector", bounds, WorkshopUi.Paper);
             var entry = Selected;
             if (entry == null)
             {
-                ui.Label(sheet, "Album selection hint", T("choose"), new Rect(16, 18, bounds.width - 32, 80), 25, true);
+                ui.Label(sheet, "Album selection hint", "Выбери сборку", new Rect(16, 18, bounds.width - 32, 56), 20, true);
                 return;
             }
-            float w = bounds.width, h = bounds.height;
-            ui.Label(sheet, "Album selected name", entry.Name, new Rect(16, 4, w - 32, 46), 27, true);
-            var rule = WorkshopUi.Graphic<Image>(sheet, "Album selected title rule", new Rect(16, 51, w - 32, 1));
-            rule.color = new Color(.12f, .28f, .52f, .55f);
-            float statisticsY = h - 254;
-            float artHeight = Mathf.Max(68, statisticsY - 64);
-            DrawEntry(sheet, entry, new Rect(8, 56, w - 16, artHeight));
+            float w = bounds.width;
+            float inset = Wide ? 18 : 12;
+            float titleY = Wide ? 32 : 6;
+            var name = ui.Label(sheet, "Album selected name", entry.Name, new Rect(inset, titleY, w - 2 * inset - 8, 30), Wide ? 27 : 21, true);
+            float nameHeight = Mathf.Max(28, Mathf.Ceil(name.preferredHeight) + 4);
+            WorkshopUi.Place(name.rectTransform, new Rect(inset, titleY, w - 2 * inset - 8, nameHeight));
+            var reference = Reference;
             var resolved = run.PreviewAlbumEntry(entry, MaterialTier.Pencil);
+            var baseline = reference == null ? null : run.PreviewAlbumEntry(reference, MaterialTier.Pencil);
+            bool comparing = reference != null && reference.Id != entry.Id && resolved.Valid && baseline.Valid;
+            var metrics = new List<AlbumMetric>();
+            string comparisonStatus = "";
+            if (resolved.Valid) BuildMetrics(resolved.Value, comparing ? baseline.Value : null, metrics, out comparisonStatus);
+            if (reference != null && reference.Id != entry.Id && !baseline.Valid)
+                comparisonStatus = "Образец недоступен. Показаны параметры выбранной сборки.";
+            if (reference == null && resolved.Valid) AddRoleSummary(resolved.Value, metrics);
+            int summaryRows = Wide && reference == null ? metrics.Count : 3;
+            float contextHeight = reference == null ? 0 : 46;
+            float coreHeight = resolved.Valid ? metrics.Take(summaryRows).Sum(metric => metric.Height) : 56;
+            float viewportHeight = Mathf.Max(36, bounds.height - 58);
+            // Comparisons keep their first three rows above the fold even on a compact display.
+            float artY = titleY + nameHeight + 5;
+            float free = viewportHeight - artY - 40 - contextHeight - coreHeight - 12;
+            float artHeight = free >= 62 ? Mathf.Min(free, Wide ? 248 : 108) : 0;
+            float pinY = artY + artHeight + (artHeight > 0 ? 8 : 0);
+            float statisticsY = pinY + 40 + contextHeight;
+            float extrasY = statisticsY + coreHeight + 8;
+            float statusHeight = comparisonStatus.Length > 0 ? 50 : 0;
+            float contentHeight = extrasY + statusHeight + metrics.Skip(summaryRows).Sum(metric => metric.Height) + 8;
+            Transform content = sheet;
+            if (viewportHeight < contentHeight)
+                content = new CatalogScrollList(sheet, "Album inspector scroll", new Rect(0, 0, w, viewportHeight), 1, 1, contentHeight, 0).Content;
+            if (content != sheet) name.transform.SetParent(content, false);
+            ui.Tip(name.gameObject, entry.Name);
+            if (Wide)
+            {
+                string kind = entry.Kind == AlbumEntryKind.Structure ? "Сооружение" : "Башня";
+                var type = ui.Label(content, "Album selected category", kind, new Rect(inset, 7, w - 2 * inset, 24), 15, color: WorkshopUi.Muted);
+                type.fontStyle = FontStyle.Bold;
+            }
+            if (artHeight > 0)
+                StandardAssemblyIllustration.Draw(content, entry, new Rect(inset, artY, w - 2 * inset - 5, artHeight),
+                    "Album inspected drawing");
+            bool pinned = ReferenceId == entry.Id;
+            float pinWidth = w - 28 - (reference != null && !pinned ? 42 : 0);
+            var pin = ui.CompactButton(content, "Album compare", new Rect(12, pinY, pinWidth, 36),
+                reference == null ? "Сравнить" : pinned ? "Снять образец" : "Заменить образец", ToggleComparison, WorkshopIcon.Pin);
+            ui.SetSelected(pin, pinned);
+            ui.Tip(pin.gameObject, pinned ? "Снять образец «" + ui.Resolve(entry.Name) + "»" :
+                "Закрепить «" + ui.Resolve(entry.Name) + "» как образец, затем выбрать другую сборку для сравнения");
+            if (reference != null && !pinned)
+                ui.IconButton(content, "Album compare clear", new Rect(w - 52, pinY, 36, 36), WorkshopIcon.Close,
+                    "Снять образец «" + ui.Resolve(reference.Name) + "»", () => { ReferenceId = null; Refresh(); });
+            if (reference != null)
+            {
+                var referenceName = ui.Label(content, "Album comparison reference", ui.Resolve(reference.Name),
+                    new Rect(12, pinY + 37, w - 28, 25), 15);
+                FitAlbumSummary(referenceName, 15);
+                ui.Tip(referenceName.gameObject, "Образец: " + ui.Resolve(reference.Name));
+                bool commonOnly = comparisonStatus.StartsWith("Разные типы", StringComparison.Ordinal);
+                var direction = ui.Label(content, "Album comparison direction", pinned ? "Выбери другую сборку" :
+                    commonOnly ? "Общие: образец → выбранная" : "Образец → выбранная",
+                    new Rect(12, pinY + 62, w - 28, 20), 14, color: WorkshopUi.Muted);
+                if (commonOnly) ui.Tip(direction.gameObject, comparisonStatus);
+            }
+            var rule = WorkshopUi.Graphic<Image>(content, "Album selected title rule", new Rect(12, statisticsY - 4, w - 28, 1));
+            rule.color = new Color(.12f, .28f, .52f, .55f);
             if (resolved.Valid)
             {
-                InspectorMetric(sheet, "Health", "icon.heart", null, resolved.Value.Health.ToString("0.##"), statisticsY, w);
-                InspectorMetric(sheet, "Load", null, WorkshopIcon.Shield, resolved.Value.Load + " / " + resolved.Value.Capacity, statisticsY + 40, w);
-                InspectorMetric(sheet, "Cost", "icon.pencil", null, T("price", resolved.Value.Cost), statisticsY + 80, w);
+                float y = statisticsY;
+                foreach (var metric in metrics.Take(summaryRows)) { InspectorMetric(content, metric, y, w); y += metric.Height; }
             }
-            else ui.Label(sheet, "Album selected statistics", T("unavailable"), new Rect(16, statisticsY, w - 32, 112), 19, color: WorkshopUi.Warning);
-            var editButton = ui.Button(sheet, "Album edit", new Rect(16, h - 120, w - 32, 36), T("edit"), () => edit?.Invoke(Selected), WorkshopIcon.Pencil);
+            else ui.Label(content, "Album selected statistics", T("unavailable"), new Rect(16, statisticsY, w - 32, 56), 16, color: WorkshopUi.Warning);
+            const float actionSize = 36, actionGap = 6;
+            var actions = ui.Panel(sheet, "Album inspector actions", new Rect(0, bounds.height - 48, w, 40), Color.clear);
+            float editWidth = w - 24 - (actionSize + actionGap) * 3;
+            var editButton = ui.CompactButton(actions, "Album edit", new Rect(12, 0, editWidth, 38), "Изменить",
+                () => edit?.Invoke(Selected), WorkshopIcon.Pencil);
+            ui.Tip(editButton.gameObject, "Изменить «" + ui.Resolve(entry.Name) + "» в мастерской");
             editButton.interactable = edit != null;
-            ui.Button(sheet, "Album variant", new Rect(16, h - 80, w - 32, 36), T("variant"), () => {
+            float toolsX = 12 + editWidth + actionGap;
+            ui.IconButton(actions, "Album details", new Rect(toolsX, 0, actionSize, 38), WorkshopIcon.Help,
+                "Полный состав и характеристики «" + ui.Resolve(entry.Name) + "»", ShowDetails);
+            ui.IconButton(actions, "Album variant", new Rect(toolsX + actionSize + actionGap, 0, actionSize, 38),
+                WorkshopIcon.Copy, "Сохранить отдельную копию «" + ui.Resolve(entry.Name) + "»", () => {
                 var result = run.AssemblyCommands.SaveEntryAsVariant(Selected, Guid.NewGuid());
                 if (result.Success) SelectedId = result.ResultId;
                 feedback = ResultText(result, "variant_saved"); Refresh();
-            }, WorkshopIcon.Copy).interactable = entry.Kind != AlbumEntryKind.Legacy;
-            ui.Button(sheet, "Album delete", new Rect(16, h - 40, w - 32, 36), T("delete"), RequestDelete, WorkshopIcon.Trash);
+            }).interactable = entry.Kind != AlbumEntryKind.Legacy;
+            ui.IconButton(actions, "Album delete", new Rect(toolsX + (actionSize + actionGap) * 2, 0, actionSize, 38),
+                WorkshopIcon.Trash, "Удалить «" + ui.Resolve(entry.Name) + "» · потребуется подтверждение", RequestDelete);
+            if (comparisonStatus.Length > 0)
+                ui.Label(content, "Album comparison status", comparisonStatus, new Rect(12, extrasY, w - 28, statusHeight), 14, color: WorkshopUi.Muted);
+            float detailsY = extrasY + statusHeight;
+            foreach (var metric in metrics.Skip(summaryRows)) { InspectorMetric(content, metric, detailsY, w); detailsY += metric.Height; }
         }
 
-        void InspectorMetric(Transform parent, string stat, string artId, WorkshopIcon? symbol, string value, float y, float w)
+        void ToggleComparison()
         {
-            if (artId != null)
+            if (Selected == null) return;
+            ReferenceId = ReferenceId == SelectedId ? null : SelectedId;
+            Refresh();
+        }
+
+        void ShowDetails()
+        {
+            var entry = Selected; if (entry == null) return;
+            var copy = new StringBuilder(ui.Resolve(entry.Name)).Append("\n\n");
+            var resolved = run.PreviewAlbumEntry(entry, MaterialTier.Pencil);
+            if (resolved.Valid)
             {
-                AlbumIcon(parent, "Album metric icon " + stat, artId, new Rect(14, y + 5, 30, 29));
+                var value = resolved.Value;
+                copy.Append("Карандаш · ").Append(T("price", value.Cost)).Append("\n")
+                    .Append("Прочность: ").Append(Number(value.Health)).Append(" HP\n")
+                    .Append("Нагрузка: ").Append(value.Load).Append(" / ").Append(value.Capacity).Append("\n")
+                    .Append("Постройка: ").Append(Number(value.BuildSeconds)).Append(" с\n")
+                    .Append("Защита: ").Append(Number(value.Defense * 100)).Append("%\n");
+                if (value.FrontDefense > 0)
+                    copy.Append("Защита спереди: ").Append(Number(value.FrontDefense * 100)).Append("% · сектор ").Append(Number(value.FrontDefenseDegrees)).Append("°\n");
+                if (value.Weapons.Count > 0)
+                {
+                    copy.Append("\nПодача при работе всех орудий: ×").Append(Number(value.FeedMultiplier)).Append("\n");
+                    foreach (var weapon in value.Weapons.OrderBy(item => item.SlotIndex))
+                    {
+                        copy.Append("\nОружие ").Append(weapon.SlotIndex + 1).Append(weapon.Attack == AttackKind.Cleanup ? " · очистка\n" : "\n");
+                        if (weapon.Attack != AttackKind.Cleanup) copy.Append("Урон: ").Append(Number(weapon.Damage)).Append("\n");
+                        copy.Append("Дальность: ").Append(Number(weapon.Range)).Append(" кл.");
+                        if (weapon.Attack != AttackKind.Radial)
+                            copy.Append(" · сектор обстрела: ").Append(Number(weapon.FiringArcDegrees)).Append("°");
+                        if (weapon.MinimumRange > 0) copy.Append(" · мёртвая зона ").Append(Number(weapon.MinimumRange));
+                        copy.Append("\nМежду выстрелами: ").Append(Number(weapon.IntervalAtFeed(value.FeedMultiplier))).Append(" с\n")
+                            .Append("Наведение: ").Append(Number(weapon.AcquisitionSeconds)).Append(" с\n");
+                        if (!weapon.LegacyContinuous)
+                            copy.Append("Обойма: ").Append(weapon.MagazineSize).Append(" · смена: ")
+                                .Append(Number(weapon.ReloadAtFeed(value.FeedMultiplier))).Append(" с\n");
+                        if (weapon.TargetLimit > 1) copy.Append("Целей: ").Append(weapon.TargetLimit).Append("\n");
+                        if (weapon.Radius > 0) copy.Append("Радиус действия: ").Append(Number(weapon.Radius)).Append("\n");
+                        if (weapon.JumpRange > 0) copy.Append("Дальность рикошета: ").Append(Number(weapon.JumpRange)).Append("\n");
+                        if (weapon.ConeDegrees > 0) copy.Append("Угол залпа: ").Append(Number(weapon.ConeDegrees)).Append("°\n");
+                        if (weapon.FlightSeconds > 0) copy.Append("Полёт снаряда: ").Append(Number(weapon.FlightSeconds)).Append(" с\n");
+                        if (weapon.SlowSeconds > 0)
+                            copy.Append("Скорость врага: ").Append(Number(weapon.SlowSpeedMultiplier * 100)).Append("% · ")
+                                .Append(Number(weapon.SlowSeconds)).Append(" с\n");
+                    }
+                }
+                if (value.Support != null)
+                {
+                    var support = value.Support;
+                    if (GameText.TrapOrBeaconEffect(support) is string fieldEffect) copy.AppendLine(ui.Resolve(fieldEffect));
+                    else if (support.Radius > 0) copy.Append("Радиус поддержки: ").Append(Number(support.Radius)).Append("\n");
+                    if (support.Kind == AssemblyStructureFamily.Repair)
+                        copy.Append("Ремонт: ").Append(Number(support.RepairPerSecond)).Append(" HP/с\n");
+                    if (support.Kind == AssemblyStructureFamily.Slow)
+                        copy.Append("Скорость врага: ").Append(Number(support.SlowSpeedMultiplier * 100)).Append("% · ")
+                            .Append(Number(support.SlowSeconds)).Append(" с\n");
+                    if (support.Kind == AssemblyStructureFamily.Generator)
+                        copy.Append("Доход: ").Append(support.IncomePerWave).Append(" штр. за полную волну\n")
+                            .Append("Окупаемость: ").Append(support.PaybackWaves(value.Cost)).Append(" волн\n")
+                            .Append("Не более ").Append(support.MaximumInstances).Append(" генераторов · только карандаш\n");
+                }
             }
             else
             {
-                var icon = WorkshopUi.Graphic<WorkshopIconGraphic>(parent, "Album metric icon " + stat, new Rect(17, y + 8, 24, 24)); icon.Icon = symbol.Value; icon.color = WorkshopUi.Blue;
+                copy.Append(T("unavailable")).Append("\n");
+                foreach (var diagnostic in resolved.Diagnostics)
+                    copy.Append(ui.Resolve(UserText.Message(diagnostic.Code, diagnostic.Arguments.Select(argument => (object)argument).ToArray()))).Append("\n");
             }
-            float valueWidth = Mathf.Clamp(w * .42f, 86, 166);
-            var label = ui.Label(parent, "Album metric label " + stat, UserText.Message("assembly.component.stat." + stat), new Rect(50, y + 2, w - valueWidth - 68, 36), 21);
-            label.resizeTextForBestFit = true; label.resizeTextMinSize = 16; label.resizeTextMaxSize = 21;
-            var number = ui.Label(parent, "Album metric value " + stat, value, new Rect(w - valueWidth - 16, y + 2, valueWidth, 36), 25);
-            number.alignment = TextAnchor.MiddleRight; number.resizeTextForBestFit = true; number.resizeTextMinSize = 17; number.resizeTextMaxSize = 25;
-            var rule = WorkshopUi.Graphic<Image>(parent, "Album metric rule " + stat, new Rect(16, y + 39, w - 32, 1)); rule.color = new Color(.12f, .28f, .52f, .35f);
+            if (entry.Snapshot != null)
+            {
+                copy.Append("\nСостав:\n");
+                foreach (var reference in entry.Snapshot.Recipe.Parts)
+                {
+                    var definition = entry.Snapshot.Definitions.FirstOrDefault(part => part.Id == reference.Id && part.Revision == reference.Revision);
+                    copy.Append("• ").Append(definition == null ? reference.Id : ui.Resolve(definition.Name)).Append("\n");
+                }
+            }
+            copy.Append("\nЦена строительства расходуется в бою. Открытые детали доступны во всех подходящих сборках.");
+            UiHelp.Show(Root, "Подробности страницы", copy.ToString());
         }
 
-        static void AlbumIcon(Transform parent, string name, string id, Rect bounds)
+        sealed class AlbumMetric
         {
-            var image = WorkshopUi.Graphic<Image>(parent, name, bounds);
-            if (NotebookSpriteCatalog.TryGet(id, out var sprite)) image.sprite = sprite; else image.enabled = false;
-            image.preserveAspect = true;
-            image.rectTransform.pivot = new Vector2(.5f, .5f);
-            image.rectTransform.anchoredPosition = new Vector2(bounds.center.x, -bounds.center.y);
+            public string Id, Label, Value, Delta;
+            public WorkshopIcon Icon;
+            public bool? Improved;
+            public float Height => Delta == null ? 34 : 48;
+        }
+
+        string Number(double value) => value.ToString("0.###", ui.TextResolver.Culture);
+        string Delta(double value) => value.ToString("+0.###;−0.###;0", ui.TextResolver.Culture);
+
+        AlbumMetric Metric(string id, string label, WorkshopIcon icon, double value, double? before = null,
+            bool lowerIsBetter = false, string unit = "")
+        {
+            double difference = before.HasValue ? value - before.Value : 0;
+            return new AlbumMetric {
+                Id = id, Label = label, Icon = icon,
+                Value = before.HasValue ? Number(before.Value) + " → " + Number(value) : Number(value) + unit,
+                Delta = before.HasValue ? "Δ " + Delta(difference) + unit : null,
+                Improved = !before.HasValue || Math.Abs(difference) < .0001 ? (bool?)null : lowerIsBetter ? difference < 0 : difference > 0
+            };
+        }
+
+        void AddRoleSummary(ResolvedEntry value, List<AlbumMetric> rows)
+        {
+            var support = value.Support;
+            if (support == null && value.Weapons.Count > 0)
+            {
+                var offensive = value.Weapons.Where(weapon => weapon.Attack != AttackKind.Cleanup).ToArray();
+                if (offensive.Length > 0)
+                {
+                    rows.Add(WeaponSpan("Range", "Дальность огня", WorkshopIcon.Range, offensive.Select(weapon => weapon.Range), " кл."));
+                    var directional = value.Weapons.Where(weapon => weapon.Attack != AttackKind.Radial).ToArray();
+                    if (directional.Length > 0)
+                        rows.Add(WeaponSpan("FiringArc", "Сектор обстрела", WorkshopIcon.FiringArc, directional.Select(weapon => weapon.FiringArcDegrees), "°"));
+                    rows.Add(Metric("Dps", "Расчётный урон/с", WorkshopIcon.Damage, value.Dps));
+                }
+                else
+                {
+                    rows.Add(WeaponSpan("Range", "Дальность очистки", WorkshopIcon.Range, value.Weapons.Select(weapon => weapon.Range), " кл."));
+                    rows.Add(WeaponSpan("FiringArc", "Сектор обстрела", WorkshopIcon.FiringArc, value.Weapons.Select(weapon => weapon.FiringArcDegrees), "°"));
+                    rows.Add(Metric("Cleanup Radius", "Радиус очистки", WorkshopIcon.Eraser, value.Weapons.Max(weapon => weapon.Radius), unit: " кл."));
+                }
+                return;
+            }
+            switch (support?.Kind)
+            {
+                case AssemblyStructureFamily.Generator:
+                    rows.Add(Metric("Support Income", "Доход за волну", WorkshopIcon.Pencil, support.IncomePerWave, unit: " штр."));
+                    rows.Add(Metric("Support Payback", "Волн до окупаемости", WorkshopIcon.Clock, support.PaybackWaves(value.Cost)));
+                    break;
+                case AssemblyStructureFamily.Repair:
+                    rows.Add(Metric("Support Repair", "Ремонт", WorkshopIcon.Heart, support.RepairPerSecond, unit: " HP/с"));
+                    rows.Add(Metric("Support Radius", "Радиус ремонта", WorkshopIcon.Range, support.Radius, unit: " кл."));
+                    break;
+                case AssemblyStructureFamily.Slow:
+                    rows.Add(Metric("Support Slow", "Замедление", WorkshopIcon.Target, (1 - support.SlowSpeedMultiplier) * 100, unit: "%"));
+                    rows.Add(Metric("Support Radius", "Радиус действия", WorkshopIcon.Range, support.Radius, unit: " кл."));
+                    break;
+                case AssemblyStructureFamily.Spikes:
+                    rows.Add(Metric("Spike Damage", "Урон за удар", WorkshopIcon.Damage, support.SpikeDamage));
+                    rows.Add(Metric("Support Radius", "Радиус удара", WorkshopIcon.Range, support.Radius, unit: " кл."));
+                    break;
+                case AssemblyStructureFamily.Prism:
+                    rows.Add(Metric("Prism Burn", "Ожог", WorkshopIcon.Damage, support.BurnDamagePerSecond, unit: " HP/с"));
+                    rows.Add(Metric("Prism Slow", "Замедление", WorkshopIcon.Target, (1 - support.SlowSpeedMultiplier) * 100, unit: "%"));
+                    rows.Add(Metric("Prism Armor", "Ослабление брони", WorkshopIcon.Armor, support.ArmorReduction * 100, unit: " п. п."));
+                    rows.Add(Metric("Support Radius", "Радиус", WorkshopIcon.Range, support.Radius, unit: " кл."));
+                    break;
+                case AssemblyStructureFamily.Beacon:
+                    rows.Add(Metric("Armor Reduction", "Снижение защиты", WorkshopIcon.Armor, support.ArmorReduction * 100, unit: " п. п."));
+                    rows.Add(Metric("Support Radius", "Радиус метки", WorkshopIcon.Range, support.Radius, unit: " кл."));
+                    break;
+                default:
+                    rows.Add(Metric("BuildSeconds", "Постройка", WorkshopIcon.Clock, value.BuildSeconds, unit: " с"));
+                    rows.Add(Metric("Defense", "Защита", WorkshopIcon.Armor, value.Defense * 100, unit: "%"));
+                    break;
+            }
+        }
+
+        void BuildMetrics(ResolvedEntry value, ResolvedEntry before, List<AlbumMetric> rows, out string comparisonStatus)
+        {
+            comparisonStatus = "";
+            rows.Add(Metric("Health", "Прочность", WorkshopIcon.Heart, value.Health, before?.Health));
+            rows.Add(new AlbumMetric {
+                Id = "Load", Label = "Вес / предел", Icon = WorkshopIcon.Weight,
+                Value = before == null ? value.Load + " / " + value.Capacity : before.Load + "/" + before.Capacity + " → " + value.Load + "/" + value.Capacity,
+                Delta = before == null ? null : "Δ веса " + Delta(value.Load - before.Load) + " · предела " + Delta(value.Capacity - before.Capacity)
+            });
+            rows.Add(Metric("Cost", "Цена", WorkshopIcon.Pencil, value.Cost, before?.Cost, true, " штр."));
+            if (before == null) return;
+
+            rows.Add(Metric("BuildSeconds", "Постройка, с", WorkshopIcon.Clock, value.BuildSeconds, before.BuildSeconds, true));
+            rows.Add(Metric("Defense", "Защита, %", WorkshopIcon.Armor, value.Defense * 100, before.Defense * 100));
+            if (value.FrontDefense > 0 || before.FrontDefense > 0)
+                rows.Add(Metric("FrontDefense", "Спереди, %", WorkshopIcon.Shield, value.FrontDefense * 100, before.FrontDefense * 100));
+            if (value.Support != null || before.Support != null)
+            {
+                if (value.Support == null || before.Support == null || value.Support.Kind != before.Support.Kind)
+                {
+                    comparisonStatus = "Разные типы сборок: сравниваются только общие параметры.";
+                    return;
+                }
+                var currentSupport = value.Support; var oldSupport = before.Support;
+                if (currentSupport.Kind != AssemblyStructureFamily.Wall && currentSupport.Kind != AssemblyStructureFamily.Generator)
+                    rows.Add(Metric("Support Radius", "Радиус", WorkshopIcon.Range, currentSupport.Radius, oldSupport.Radius));
+                if (currentSupport.Kind == AssemblyStructureFamily.Repair)
+                    rows.Add(Metric("Support Repair", "Ремонт, HP/с", WorkshopIcon.Heart, currentSupport.RepairPerSecond, oldSupport.RepairPerSecond));
+                if (currentSupport.Kind == AssemblyStructureFamily.Spikes)
+                    rows.Add(Metric("Spike Damage", "Урон за удар", WorkshopIcon.Damage, currentSupport.SpikeDamage, oldSupport.SpikeDamage));
+                if (currentSupport.Kind == AssemblyStructureFamily.Prism)
+                {
+                    rows.Add(Metric("Prism Burn", "Ожог, HP/с", WorkshopIcon.Damage, currentSupport.BurnDamagePerSecond, oldSupport.BurnDamagePerSecond));
+                    rows.Add(Metric("Prism Slow", "Скорость, %", WorkshopIcon.Target, currentSupport.SlowSpeedMultiplier * 100, oldSupport.SlowSpeedMultiplier * 100, true));
+                }
+                if (currentSupport.Kind == AssemblyStructureFamily.Beacon || currentSupport.Kind == AssemblyStructureFamily.Prism)
+                    rows.Add(Metric("Armor Reduction", "Снижение защиты, п. п.", WorkshopIcon.Armor, currentSupport.ArmorReduction * 100, oldSupport.ArmorReduction * 100));
+                if (currentSupport.Kind == AssemblyStructureFamily.Slow)
+                {
+                    rows.Add(Metric("Support Slow", "Скорость, %", WorkshopIcon.Target, currentSupport.SlowSpeedMultiplier * 100, oldSupport.SlowSpeedMultiplier * 100, true));
+                    rows.Add(Metric("Support Duration", "Действие, с", WorkshopIcon.Clock, currentSupport.SlowSeconds, oldSupport.SlowSeconds));
+                    comparisonStatus = "Скорость врага после замедления: меньше — сильнее эффект.";
+                }
+                if (currentSupport.Kind == AssemblyStructureFamily.Generator)
+                {
+                    rows.Add(Metric("Support Income", "Штрихов/волну", WorkshopIcon.Pencil, currentSupport.IncomePerWave, oldSupport.IncomePerWave));
+                    rows.Add(Metric("Support Payback", "Окупаемость", WorkshopIcon.Clock, currentSupport.PaybackWaves(value.Cost), oldSupport.PaybackWaves(before.Cost), true, " волн"));
+                    comparisonStatus = "Доход за полную волну. Окупаемость округляется вверх.";
+                }
+                return;
+            }
+
+            var weaponCount = Metric("WeaponCount", "Орудия", WorkshopIcon.Weapon, value.Weapons.Count, before.Weapons.Count);
+            weaponCount.Improved = null;
+            rows.Add(weaponCount);
+            int matched = 0;
+            foreach (var weapon in value.Weapons.OrderBy(item => item.SlotIndex))
+            {
+                var oldWeapon = before.Weapons.FirstOrDefault(item => item.SlotIndex == weapon.SlotIndex &&
+                    item.Family == weapon.Family && item.Attack == weapon.Attack && item.LegacyContinuous == weapon.LegacyContinuous);
+                if (oldWeapon == null) continue;
+                matched++;
+                string id = "Weapon " + weapon.SlotIndex + " ";
+                string label = (weapon.SlotIndex + 1) + " · ";
+                if (weapon.Attack != AttackKind.Cleanup)
+                    rows.Add(Metric(id + "Damage", label + "Урон", WorkshopIcon.Damage, weapon.Damage, oldWeapon.Damage));
+                rows.Add(Metric(id + "Range", label + "Дальность", WorkshopIcon.Range, weapon.Range, oldWeapon.Range));
+                if (weapon.Attack != AttackKind.Radial)
+                    rows.Add(Metric(id + "FiringArc", label + "Сектор обстрела, °", WorkshopIcon.FiringArc, weapon.FiringArcDegrees, oldWeapon.FiringArcDegrees));
+                if (weapon.MinimumRange > 0 || oldWeapon.MinimumRange > 0)
+                    rows.Add(Metric(id + "MinimumRange", label + "Мин. радиус", WorkshopIcon.Range, weapon.MinimumRange, oldWeapon.MinimumRange, true));
+                if (weapon.Radius > 0 || oldWeapon.Radius > 0)
+                    rows.Add(Metric(id + "Radius", label + "Радиус", WorkshopIcon.Target, weapon.Radius, oldWeapon.Radius));
+                rows.Add(Metric(id + "Interval", label + "Интервал, с", WorkshopIcon.Clock,
+                    weapon.IntervalAtFeed(value.FeedMultiplier), oldWeapon.IntervalAtFeed(before.FeedMultiplier), true));
+                rows.Add(Metric(id + "Acquisition", label + "Прицел, с", WorkshopIcon.Target,
+                    weapon.AcquisitionSeconds, oldWeapon.AcquisitionSeconds, true));
+                if (weapon.TargetLimit > 1 || oldWeapon.TargetLimit > 1)
+                    rows.Add(Metric(id + "Targets", label + "Целей", WorkshopIcon.Target, weapon.TargetLimit, oldWeapon.TargetLimit));
+                if (weapon.JumpRange > 0 || oldWeapon.JumpRange > 0)
+                    rows.Add(Metric(id + "JumpRange", label + "Рикошет", WorkshopIcon.Range, weapon.JumpRange, oldWeapon.JumpRange));
+                if (weapon.ConeDegrees > 0 || oldWeapon.ConeDegrees > 0)
+                    rows.Add(Metric(id + "Cone", label + "Угол залпа, °", WorkshopIcon.Target, weapon.ConeDegrees, oldWeapon.ConeDegrees));
+                if (!weapon.LegacyContinuous)
+                {
+                    rows.Add(Metric(id + "Magazine", label + "Обойма", WorkshopIcon.Magazine, weapon.MagazineSize, oldWeapon.MagazineSize));
+                    rows.Add(Metric(id + "Reload", label + "Смена, с", WorkshopIcon.Reload,
+                        weapon.ReloadAtFeed(value.FeedMultiplier), oldWeapon.ReloadAtFeed(before.FeedMultiplier), true));
+                }
+            }
+            bool allMatched = matched == value.Weapons.Count && matched == before.Weapons.Count;
+            comparisonStatus = matched == 0 ? "Разные типы оружия: сравниваются только общие параметры." :
+                (allMatched ? "" : "Несовпадающие орудия не сравниваются. ") + "Номер — место оружия. Подача при работе всех орудий.";
+        }
+
+        AlbumMetric WeaponSpan(string id, string label, WorkshopIcon icon, IEnumerable<float> values, string unit)
+        {
+            float min = values.Min(), max = values.Max();
+            var row = Metric(id, label, icon, min, unit: unit);
+            if (!Mathf.Approximately(min, max)) row.Value = Number(min) + "–" + Number(max) + unit;
+            return row;
+        }
+
+        void InspectorMetric(Transform parent, AlbumMetric metric, float y, float w)
+        {
+            var icon = WorkshopUi.Graphic<WorkshopIconGraphic>(parent, "Album metric icon " + metric.Id, new Rect(12, y + 5, 20, 20));
+            icon.Icon = metric.Icon; icon.color = WorkshopUi.Blue;
+            float valueWidth = Mathf.Max(96, w * .48f);
+            float valueX = w - valueWidth - 16;
+            var label = ui.Label(parent, "Album metric label " + metric.Id, metric.Label, new Rect(38, y + 1, valueX - 44, 28), 15);
+            label.resizeTextForBestFit = true; label.resizeTextMinSize = 14; label.resizeTextMaxSize = 15;
+            var number = ui.Label(parent, "Album metric value " + metric.Id, metric.Value, new Rect(valueX, y + 1, valueWidth, 28), metric.Delta == null ? 18 : 16);
+            number.alignment = TextAnchor.MiddleRight; number.resizeTextForBestFit = true; number.resizeTextMinSize = 14;
+            number.resizeTextMaxSize = metric.Delta == null ? 18 : 16;
+            if (metric.Delta != null)
+            {
+                var delta = ui.Label(parent, "Album metric delta " + metric.Id, metric.Delta,
+                    new Rect(38, y + 27, w - 54, 18), 14,
+                    color: metric.Improved.HasValue ? metric.Improved.Value ? WorkshopUi.Success : WorkshopUi.Warning : WorkshopUi.Muted);
+                delta.alignment = TextAnchor.MiddleRight;
+            }
+            var rule = WorkshopUi.Graphic<Image>(parent, "Album metric rule " + metric.Id, new Rect(12, y + metric.Height - 1, w - 28, 1));
+            rule.color = new Color(.12f, .28f, .52f, .35f);
         }
 
         void DrawEntry(Transform parent, AlbumEntry entry, Rect bounds)
-        {
-            if (entry.Kind == AlbumEntryKind.Legacy)
-            {
-                var legacy = WorkshopUi.Graphic<BlueprintSketch>(parent, "Album legacy illustration", bounds); legacy.SetBlueprint(entry.LegacyBlueprint); return;
-            }
-            if (entry.Kind == AlbumEntryKind.Tower || entry.Kind == AlbumEntryKind.Structure)
-            {
-                var exact = WorkshopUi.Graphic<WeaponAssemblyGraphic>(parent, "Album certified illustration", bounds);
-                try { exact.SetRecipe(entry.Snapshot); return; }
-                catch (ArgumentException) { }
-                catch (InvalidOperationException) { }
-                catch (NotSupportedException) { }
-                WorkshopUi.RemoveView(exact.gameObject);
-            }
-            string art = entry.Kind == AlbumEntryKind.Structure ? entry.Snapshot.Recipe.Structure.Family switch {
-                AssemblyStructureFamily.Wall => "ui.tool.wall", AssemblyStructureFamily.Slow => "ui.tool.tar",
-                AssemblyStructureFamily.Repair => "ui.tool.repair", _ => "ui.material.pencil" }
-                : "ui.weapon." + entry.Snapshot.Recipe.Tower.Mounts[0].Weapon.Mechanism.Id.Substring("core.".Length);
-            var schematic = WorkshopUi.Graphic<NotebookArtGraphic>(parent, "Album family illustration", new Rect(bounds.x, bounds.y, bounds.width, Mathf.Max(16, bounds.height - 22)));
-            schematic.Bind(art);
-            var caption = ui.Label(parent, "Album schematic caption", T("schematic"), new Rect(bounds.x, bounds.yMax - 22, bounds.width, 22), 15, color: WorkshopUi.Muted);
-            caption.alignment = TextAnchor.MiddleCenter;
-        }
+            => StandardAssemblyIllustration.Draw(parent, entry, bounds,
+                entry.Kind == AlbumEntryKind.Legacy ? "Album legacy illustration" : "Album certified illustration");
 
         void Footer()
         {
             string status = feedback;
-            if (string.IsNullOrEmpty(status) && Selected != null && Matches(Selected) && !destinationSlot.HasValue) status = T("choose_slot");
-            ui.Label(Root, "Album status", status, new Rect(PageInset, height - 86, width - PageInset * 2, 30), 17, color: WorkshopUi.Warning);
-            ui.Button(Root, "Album restore", new Rect(PageInset, height - 52, 310, 42), T("restore"), () => {
+            if (string.IsNullOrEmpty(status) && Selected != null && Matches(Selected) && !destinationSlot.HasValue) status = "Выбери место в наборе";
+            ui.Label(workspace, "Album status", status, new Rect(PageInset + 50, height - 50, width - PageInset * 2 - 190, 36), 16,
+                color: feedback.Length > 0 ? WorkshopUi.Warning : WorkshopUi.Muted);
+            ui.IconButton(workspace, "Album restore", new Rect(PageInset, height - 48, 38, 38), WorkshopIcon.Undo, T("restore"), () => {
                 feedback = ResultText(run.AssemblyCommands.RestoreStarterEntries(Guid.NewGuid()), "restored"); Refresh();
-            }, WorkshopIcon.Undo);
-            ui.Button(Root, "Album close", new Rect(width - PageInset - 220, height - 52, 220, 42), T("close"), close, WorkshopIcon.Back);
+            });
+            ui.CompactButton(workspace, "Album close", new Rect(width - PageInset - 128, height - 48, 128, 38), T("close"), close, WorkshopIcon.Back);
         }
 
         string ResultText(AssemblyCommandResult result, string success)
@@ -389,6 +821,8 @@ namespace PaperDefense.Presentation
             var entry = Selected; if (entry == null) return;
             var slots = Enumerable.Range(0, 8).Where(slot => run.Workshop.LoadoutEntries[slot]?.Id == entry.Id).Select(slot => (slot + 1).ToString()).ToArray();
             string message = slots.Length == 0 ? T("delete_unused", ui.Resolve(entry.Name)) : T("delete_message", ui.Resolve(entry.Name), string.Join(", ", slots));
+            int savedSets = run.Workshop.NamedLoadouts.Count(set => set.Slots.Contains(entry.Id));
+            if (savedSets > 0) message += "\n\n" + T("delete_saved_sets", savedSets);
             Confirm("delete", T("delete_title"), message, T("delete"), () => {
                 var result = run.AssemblyCommands.DeleteEntry(entry.Id, Guid.NewGuid());
                 if (result.Success) SelectedId = null;

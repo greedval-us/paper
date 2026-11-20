@@ -10,6 +10,7 @@ namespace PaperDefense.Presentation
     {
         PlayerGameRoot game;
         PlayerUi ui;
+        WorkshopUi contextHints;
         CanvasScaler scaler;
         RectTransform root, page, battleRoot;
         PlayerBattleHud battle;
@@ -19,6 +20,7 @@ namespace PaperDefense.Presentation
         int screenWidth, screenHeight;
         bool statistics;
         bool battleUsesAlbum;
+        PlayerPage? shownPage;
         Action confirmAction;
         string confirmTitle, confirmMessage;
         GameObject confirmation;
@@ -30,7 +32,7 @@ namespace PaperDefense.Presentation
 
         public void Initialize(PlayerGameRoot owner)
         {
-            game = owner; ui = new PlayerUi(owner.NotebookStyle);
+            game = owner; ui = new PlayerUi(owner.NotebookStyle); contextHints = new WorkshopUi();
             var canvas = gameObject.AddComponent<Canvas>(); canvas.renderMode = RenderMode.ScreenSpaceOverlay; canvas.sortingOrder = 200;
             gameObject.AddComponent<GraphicRaycaster>();
             scaler = gameObject.AddComponent<CanvasScaler>(); scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
@@ -40,7 +42,7 @@ namespace PaperDefense.Presentation
             ApplyLayout(Screen.width, Screen.height);
             ui.Tooltip = value =>
             {
-                if (game.Page == PlayerPage.Home || game.Page == PlayerPage.Map || game.Page == PlayerPage.Preparation) return;
+                if (game.Page == PlayerPage.Home || game.Page == PlayerPage.Campaign || game.Page == PlayerPage.Map || game.Page == PlayerPage.Preparation) return;
                 if (game.Page == PlayerPage.Battle) battle?.ShowHint(value);
                 else if (tooltip != null) tooltip.text = value;
             };
@@ -48,9 +50,17 @@ namespace PaperDefense.Presentation
 
         public void ApplyLayout(int width, int height)
         {
+            UiMenuMotion.FinishIn(root);
+            using (UiMenuMotion.SuppressOpenings()) ApplyLayoutImmediately(width, height);
+        }
+
+        void ApplyLayoutImmediately(int width, int height)
+        {
             screenWidth = width; screenHeight = height;
             battleUsesAlbum = game.Run.UsesAlbumSlots;
-            Layout = new PlayerLayout(width, height, battleUsesAlbum);
+            Rect previousField = Layout.Field;
+            Layout = new PlayerLayout(width, height, battleUsesAlbum, game.Run.Session.Balance.Mechanics.FieldModernization);
+            if (Layout.Field != previousField) game.Drawing.UpdateHordeFraming(Layout.Field);
             scaler.referenceResolution = new Vector2(W, H); root.sizeDelta = new Vector2(W, H);
             // Retired tooltip callbacks must not refresh the HUD while its hierarchy is deactivating.
             battle = null;
@@ -58,13 +68,22 @@ namespace PaperDefense.Presentation
             battleRoot = ui.Panel(root, "Battle controls", new Rect(0, 0, W, H), Color.clear);
             battleInteraction = battleRoot.gameObject.AddComponent<CanvasGroup>();
             battle = new PlayerBattleHud(game, ui, battleRoot, Layout);
+            BattleHudTheme.ApplyTo(battleRoot);
             Show(game.Page);
         }
 
         public void Show(PlayerPage current)
         {
             if (battleUsesAlbum != game.Run.UsesAlbumSlots) { ApplyLayout(screenWidth, screenHeight); return; }
+            bool changed = shownPage.HasValue && shownPage.Value != current;
+            shownPage = current;
+            using (UiMenuMotion.SuppressOpenings(!changed)) BuildPage(current, changed);
+        }
+
+        void BuildPage(PlayerPage current, bool changed)
+        {
             ResetAlbumResult();
+            contextHints.HideTooltip();
             RememberAlbumView();
             if (page != null) { page.gameObject.SetActive(false); Destroy(page.gameObject); }
             bool battlefield = !game.Run.InWorkshop && current != PlayerPage.Workshop;
@@ -80,6 +99,7 @@ namespace PaperDefense.Presentation
             {
                 case PlayerPage.Home: Home(); break;
                 case PlayerPage.Map: Map(); break;
+                case PlayerPage.Campaign: Campaign(); break;
                 case PlayerPage.Preparation: Preparation(); break;
                 case PlayerPage.Album: BuildAlbum(); break;
                 case PlayerPage.Pause: Pause(); break;
@@ -92,6 +112,14 @@ namespace PaperDefense.Presentation
             SetStatus(game.Status);
             if (battlefield) battle.Refresh();
             if (HasConfirmation) BuildConfirmation();
+            if (current != PlayerPage.Battle && current != PlayerPage.Workshop)
+            {
+                if (current != PlayerPage.Album) contextHints.EnsureTooltip(page);
+                FieldMenuTheme.ApplyTo(page, current != PlayerPage.Pause && current != PlayerPage.Upgrades);
+            }
+            ConfigureContextHints(current);
+            if (current != PlayerPage.Battle && current != PlayerPage.Workshop)
+                UiMenuMotion.PlayScreen(page, changed && page.GetComponentInChildren<WorkshopModal>() == null);
         }
 
         void Header(string title, Action back)
@@ -150,6 +178,7 @@ namespace PaperDefense.Presentation
         public void SetStatus(string message) { if (status != null) status.text = message; }
         void Update()
         {
+            if (game.Page == PlayerPage.Battle) battle?.HandleFlaskKeys();
             if (screenWidth != Screen.width || screenHeight != Screen.height)
             {
                 game.DisplaySettings.RefreshCurrentSize(Screen.width, Screen.height);
@@ -160,7 +189,8 @@ namespace PaperDefense.Presentation
             if (gold != null) gold.text = ui.T("gold", game.Run.Workshop.Gold);
             if (progress != null) progress.text = ProgressCopy();
             RefreshAlbumResult();
-            if (battleRoot.gameObject.activeSelf) battle.Refresh();
+            RefreshBattleHud();
         }
+        internal void RefreshBattleHud() { if (battleRoot.gameObject.activeSelf) battle.Refresh(); }
     }
 }

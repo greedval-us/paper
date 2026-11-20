@@ -1,21 +1,25 @@
-# Материалы альбома 2026
+# Баланс составного альбома
 
-Исходник проектного баланса — build-data.mjs. Реальная база — docs/audit/2026-10-17-album/current-runtime.json, экспортированная через Unity из PlayerBalance.asset. Игровые assets эти скрипты не изменяют.
+`build-data.mjs` задаёт 91 определение деталей, включая 36 частей сооружений, и расчётные рецепты. Он записывает `docs/balance/album-balance-v1.json`. Игровой каталог обновляется при импорте в Unity.
 
-Используется Node.js 24, @oai/artifact-tool и Playwright из bundled runtime Codex. `node_modules` — локальный каталог или junction, исключённый из Git. Для свежего клона сначала настройте [локальные зависимости](../README.md#локальные-зависимости-nodejs). Существующие каталоги не заменяются автоматически. Для снимков установлен Microsoft Edge, отдельный временный профиль.
+После изменения параметров выполните по порядку:
+
+1. Из корня проекта: `node Tools/AlbumDesign2026/build-data.mjs`.
+2. В Unity импортируйте JSON через `AlbumBalanceImport` в PlayerAssemblyCatalog.
+3. Вызовите `BalanceWorkbookExport.ExportPlayerAssembly()`, чтобы обновить фактические значения resolver в `docs/balance/assembly-runtime.json`.
+4. Запустите независимые проверки:
 
 ```powershell
-node Tools/AlbumDesign2026/build-data.mjs
-node Tools/AlbumDesign2026/build-workbook.mjs
+node --test Tools/AlbumDesign2026/verify-balance.test.mjs
 node Tools/AlbumDesign2026/verify-balance.mjs
-node Tools/AlbumDesign2026/check-gallery.mjs
-node Tools/AlbumDesign2026/package-materials.mjs
-node Tools/AlbumDesign2026/package-full-gallery.mjs
-node docs/design/game-concept-art-2026-10-16/verify.cjs
-node Tools/AlbumDesign2026/check-full-gallery.mjs
-node Tools/AlbumDesign2026/verify-delivery.mjs
 ```
 
-Последовательность важна: данные → Excel и проверки → снимки галереи. check-gallery не запускает Unity. Excel проверяется расчётом библиотекой и сканированием ошибок; настольный Excel отдельно не запускался. Одноразовые редакторские скрипты подготовки комплекта не входят в процесс пересборки.
+Верификатор сравнивает числа и идентичности рецептов с runtime-экспортом, проверяет совместимость деталей и целочисленный доход генераторов. Результат записывается в `docs/balance/analytical-validation.json`. Успех на сохранённом экспорте не подтверждает изменённые после экспорта assets и не заменяет игровые тесты. [Результаты проверок](../../docs/validation/README.md).
 
-Полная художественная галерея находится в [game-concept-art-2026-10-16](../../docs/design/game-concept-art-2026-10-16/index.html): 30 экранов и 3 листа объектов. package-full-gallery собирает манифест и сопоставление всех 28 исходных экранов; verify.cjs проверяет неизменность файлов после упаковки; check-full-gallery проверяет просмотр в Edge. PNG редактируются через image_gen, а не пересоздаются этими скриптами. Интерактивная gallery остаётся дополнением.
+Перед импортом `node Tools/AlbumDesign2026/verify-balance.mjs --design-only` проверяет арифметику и достижимость всех деталей каталога и записывает `runtimeVerified:false`. Для приёмки выполните обычный запуск после свежего Unity-экспорта. Текущая версия — `album-v1.4`. Сумма цен открытия деталей составляет 3793 золота. Цены семейств задаёт `WorkshopProfile.GetStructureOffer`. Шипы, маяк и призма стоят в сумме ещё 245 золота.
+
+## Excel
+
+`node Tools/AlbumDesign2026/build-workbook.mjs` создаёт книгу, протоколы и числовые превью из двух JSON: `album-balance-v1.json` и `assembly-runtime.json`. Требуется bundled `@oai/artifact-tool`; путь можно задать через `CODEX_WORKSPACE_NODE_MODULES`. `ALBUM_WORKBOOK_OUTPUT_DIR` задаёт отдельный каталог результата; по умолчанию это `docs/balance`. Старые Excel и PNG не являются входами генератора. Изменения книги не переносятся в игру.
+
+Файл `docs/validation/modular-album/assembly-balance-results.json` читается только при наличии как дополнительные измерения. Без него книга собирается без измерительного отчёта; старые измерения не подтверждают текущую игру. Для включения измерений получите новый результат из игровой симуляции.

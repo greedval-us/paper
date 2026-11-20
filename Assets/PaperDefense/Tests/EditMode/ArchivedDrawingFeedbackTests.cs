@@ -5,6 +5,7 @@ using PaperDefense.Core;
 
 namespace PaperDefense.Tests
 {
+    [Category("HistoricalProfileCompatibility")]
     public sealed class ArchivedDrawingFeedbackTests
     {
         static UserTextResolver Resolver()=>new UserTextResolver(new[]{

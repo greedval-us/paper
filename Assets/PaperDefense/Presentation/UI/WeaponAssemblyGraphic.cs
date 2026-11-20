@@ -78,7 +78,8 @@ namespace PaperDefense.Presentation
             if (Part.HasValue || standalone != null)
             {
                 partPen.Clear();
-                (standalone ?? AssemblyVisualComposer.ComposePart(Part.Value)).Draw(partPen, Vector2.zero);
+                using (partPen.WithUiDetail(scale))
+                    (standalone ?? AssemblyVisualComposer.ComposePart(Part.Value)).Draw(partPen, Vector2.zero);
                 partPen.CopyTo(target, center, scale);
             }
             else if (Recipe != null) NotebookTowerComposition.DrawRecipeUI(target, Recipe, Pose, center, scale);

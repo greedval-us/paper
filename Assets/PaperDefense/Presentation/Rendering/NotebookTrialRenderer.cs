@@ -34,7 +34,7 @@ namespace PaperDefense.Presentation
         static Vector2 Center(StructureView tower) => new Vector2(tower.Cell.X + .5f, tower.Cell.Y + .5f);
         static Vector2 Point(Point2 point) => new Vector2(point.X, point.Y);
         static Rect SourceBounds(StructureView tower) => tower.ResolvedEntry?.Snapshot != null
-            ? NotebookAssemblyView.Bounds(Center(tower), tower.ResolvedEntry.Snapshot)
+            ? NotebookAssemblyView.Bounds(Center(tower), tower.ResolvedEntry.Snapshot, NotebookMountLayout.BodyRadians(tower))
             : new Rect(Center(tower) - Vector2.one * .6f, Vector2.one * 1.2f);
         static void Include(ref Rect bounds, Vector2 point) => bounds = Rect.MinMaxRect(Mathf.Min(bounds.xMin, point.x),
             Mathf.Min(bounds.yMin, point.y), Mathf.Max(bounds.xMax, point.x), Mathf.Max(bounds.yMax, point.y));
@@ -143,7 +143,8 @@ namespace PaperDefense.Presentation
                             { bounds = SourceBounds(support); Include(ref bounds, SourceBounds(target)); return true; }
                     }
             }
-            else if (family == AssemblyStructureFamily.Slow)
+            else if (family == AssemblyStructureFamily.Slow || family == AssemblyStructureFamily.Spikes ||
+                family == AssemblyStructureFamily.Beacon || family == AssemblyStructureFamily.Prism)
             {
                 foreach (var frame in report.Frames)
                     foreach (var support in frame.Towers)
@@ -189,6 +190,7 @@ namespace PaperDefense.Presentation
                 case SimulationEventKind.WeaponActionStarted: case SimulationEventKind.EnemyAttack: case SimulationEventKind.EnemyHit: case SimulationEventKind.EnemyDied:
                 case SimulationEventKind.EnemyGlobLaunched: case SimulationEventKind.EnemyGlobImpact:
                 case SimulationEventKind.StructureCompleted: case SimulationEventKind.StructureDestroyed: case SimulationEventKind.StructureErased:
+                case SimulationEventKind.ModernizationStarted: case SimulationEventKind.ModernizationCompleted:
                 case SimulationEventKind.BlotSpawned: case SimulationEventKind.BlotExpired: case SimulationEventKind.BlotCleared: case SimulationEventKind.BlotAbsorbed:
                 case SimulationEventKind.BaseHit: case SimulationEventKind.InkWellHit: case SimulationEventKind.InkWellActivated:
                     return true;
@@ -217,7 +219,7 @@ namespace PaperDefense.Presentation
                     Include(at.x, at.y);
                     var snapshot = tower.ResolvedEntry?.Snapshot;
                     if (snapshot == null) continue;
-                    var silhouette = NotebookAssemblyView.Bounds(at, snapshot);
+                    var silhouette = SourceBounds(tower);
                     Include(silhouette.xMin, silhouette.yMin); Include(silhouette.xMax, silhouette.yMax);
                 }
                 foreach (var enemy in frame.Enemies)
@@ -244,7 +246,8 @@ namespace PaperDefense.Presentation
             return Rect.MinMaxRect(left - 2, bottom - 2, right + 2, top + 3);
         }
 
-        internal static void Draw(MeshPen pen, NotebookTrialPlayback playback, Rect? framing = null, float gridOpacity = .12f)
+        internal static void Draw(MeshPen pen, NotebookTrialPlayback playback, Rect? framing = null,
+            float gridOpacity = .12f, bool darkSurface = false)
         {
             pen.Clear();
             var theme = NotebookVisualThemeAsset.Default;
@@ -253,16 +256,16 @@ namespace PaperDefense.Presentation
             var bounds = framing ?? new Rect(8, 8, 42, 28);
             int grid = framing.HasValue ? 2 : 4;
             for (int y = Mathf.CeilToInt(bounds.yMin / grid) * grid; y <= bounds.yMax; y += grid)
-                pen.Line(new Vector2(bounds.xMin, y), new Vector2(bounds.xMax, y), .04f, MeshPen.Alpha(NotebookPalette.Blue, gridOpacity));
+                pen.Line(new Vector2(bounds.xMin, y), new Vector2(bounds.xMax, y), .04f, MeshPen.Alpha(NightNotebookArt.Grid, gridOpacity));
             for (int x = Mathf.CeilToInt(bounds.xMin / grid) * grid; x <= bounds.xMax; x += grid)
-                pen.Line(new Vector2(x, bounds.yMin), new Vector2(x, bounds.yMax), .04f, MeshPen.Alpha(NotebookPalette.Blue, gridOpacity));
+                pen.Line(new Vector2(x, bounds.yMin), new Vector2(x, bounds.yMax), .04f, MeshPen.Alpha(NightNotebookArt.Grid, gridOpacity));
             if (!framing.HasValue)
                 pen.Line(new Vector2(48, 8), new Vector2(48, 36), .09f, MeshPen.Alpha(NotebookPalette.Red, .65f));
             foreach (var blot in frame.Blots)
             {
                 if (playback.IsBlotEnded(blot.Cell)) continue;
                 Vector2 at = new Vector2(blot.Cell.X + .5f, blot.Cell.Y + .5f);
-                DoodleGlyphs.DrawResource(pen, "object.blot", at, theme: theme);
+                NightNotebookEffectPalette.DrawResource(pen, "object.blot", at, theme, darkSurface);
             }
             foreach (var tower in frame.Towers)
             {
@@ -277,8 +280,8 @@ namespace PaperDefense.Presentation
                 DoodleGlyphs.StructureDynamic(pen, tower, 1, seconds, playback.Animation, theme);
             }
             DrawEnemies(pen, playback, theme, framing.HasValue);
-            DrawProjectiles(pen, playback, theme);
-            DrawEffects(pen, playback, theme);
+            DrawProjectiles(pen, playback, theme, darkSurface);
+            DrawEffects(pen, playback, theme, darkSurface);
         }
         internal static void DrawEnemies(MeshPen pen, NotebookTrialPlayback playback, NotebookVisualThemeAsset theme = null, bool modernPresentation = false)
         {
@@ -293,7 +296,8 @@ namespace PaperDefense.Presentation
                 DoodleGlyphs.DrawResourceEnemy(pen, death.Kind, death.Tier, death.Position,
                     NotebookEnemyMotion.Death, (float)(playback.Seconds - death.Born), theme, death.VisualScale, enemyScale);
         }
-        internal static void DrawProjectiles(MeshPen pen, NotebookTrialPlayback playback, NotebookVisualThemeAsset theme = null)
+        internal static void DrawProjectiles(MeshPen pen, NotebookTrialPlayback playback,
+            NotebookVisualThemeAsset theme = null, bool darkSurface = false)
         {
             theme = theme ?? NotebookVisualThemeAsset.Default;
             var frame = playback.Report.Frames[playback.FrameIndex];
@@ -304,10 +308,10 @@ namespace PaperDefense.Presentation
                 float progress = Mathf.Clamp01((seconds - (float)launch.SimulationSeconds) / Mathf.Max(.001f, launch.TravelSeconds));
                 Vector2 from = Muzzle(frame, launch, playback, theme), to = new Vector2(launch.To.X, launch.To.Y);
                 bool mortar = launch.Kind == SimulationEventKind.ProjectileLaunched;
-                Vector2 point = Vector2.Lerp(from, to, progress) + (mortar ? Vector2.up * Mathf.Sin(progress * Mathf.PI) * Mathf.Min(3, Vector2.Distance(from, to) * .22f) : Vector2.zero);
-                DoodleGlyphs.DrawResource(pen, mortar ? "fx.mortar.projectile" : "fx.spitter.projectile", point, theme: theme);
-                if (mortar) NotebookEffectRenderer.DrawFootprint(pen, to, launch.ImpactFootprint, launch.Radius, 1, .025f,
-                    MeshPen.Alpha(NotebookPalette.Marker, .2f), 24, launch.EntityId, true);
+                if (mortar)
+                    NotebookEffectRenderer.DrawProjectile(pen, from, to, progress, launch.ImpactFootprint,
+                        launch.Radius, launch.EntityId, launch.ColorEffect.Color, theme, darkSurface);
+                else NightNotebookEffectPalette.DrawResource(pen, "fx.spitter.projectile", Vector2.Lerp(from, to, progress), theme, darkSurface);
             }
             // Historical recordings retain the snapshot path when they predate semantic launch events.
             foreach (var projectile in frame.Projectiles)
@@ -319,24 +323,26 @@ namespace PaperDefense.Presentation
                 if (recorded) continue;
                 float progress = Mathf.Clamp01(1 - (projectile.Remaining - (seconds - frame.Seconds)) / Mathf.Max(.001f, projectile.Duration));
                 Vector2 from = new Vector2(projectile.From.X, projectile.From.Y), to = new Vector2(projectile.To.X, projectile.To.Y);
-                Vector2 point = Vector2.Lerp(from, to, progress) + Vector2.up * Mathf.Sin(progress * Mathf.PI) * Mathf.Min(3, Vector2.Distance(from, to) * .22f);
-                DoodleGlyphs.DrawResource(pen, "fx.mortar.projectile", point, theme: theme);
-                NotebookEffectRenderer.DrawFootprint(pen, to, projectile.ImpactFootprint, projectile.Radius, 1, .025f,
-                    MeshPen.Alpha(NotebookPalette.Marker, .2f), 24, projectile.Id, true);
+                NotebookEffectRenderer.DrawProjectile(pen, from, to, progress, projectile.ImpactFootprint,
+                    projectile.Radius, projectile.Id, projectile.ColorEffect.Color, theme, darkSurface);
             }
         }
-        internal static void DrawEffects(MeshPen pen, NotebookTrialPlayback playback, NotebookVisualThemeAsset theme = null)
+        internal static void DrawEffects(MeshPen pen, NotebookTrialPlayback playback,
+            NotebookVisualThemeAsset theme = null, bool darkSurface = false)
         {
             theme = theme ?? NotebookVisualThemeAsset.Default;
             var frame = playback.Report.Frames[playback.FrameIndex];
             foreach (var item in playback.Effects)
             {
                 float age = (float)(playback.Seconds - item.SimulationSeconds);
-                NotebookEffectRenderer.Draw(pen, item, Muzzle(frame, item, playback, theme), age, theme);
+                NotebookEffectRenderer.Draw(pen, item, Muzzle(frame, item, playback, theme), age, theme, darkSurface);
             }
             if (frame.Events.Count == 0)
                 foreach (var shot in frame.Shots)
-                    pen.Line(new Vector2(shot.From.X, shot.From.Y), new Vector2(shot.To.X, shot.To.Y), .035f, MeshPen.Alpha(NotebookPalette.Blue, .5f));
+                    pen.Line(new Vector2(shot.From.X, shot.From.Y), new Vector2(shot.To.X, shot.To.Y), .035f,
+                        MeshPen.Alpha(shot.ColorEffect.Color == InkColor.None
+                            ? NightNotebookEffectPalette.Tone(NotebookPalette.Blue, NightNotebookArt.Ink, theme, darkSurface)
+                            : NightNotebookEffectPalette.ColorInk(shot.ColorEffect.Color, theme, darkSurface), .5f));
         }
         static Vector2 Muzzle(TrialFrame frame, SimulationEvent item, NotebookTrialPlayback playback, NotebookVisualThemeAsset theme)
         {

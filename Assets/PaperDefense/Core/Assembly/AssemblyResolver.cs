@@ -13,7 +13,7 @@ namespace PaperDefense.Core
             return ComponentCost(foundation.Parts, ComponentCategory.Frame, catalog, balance, material);
         }
 
-        /// <summary>The selected five weapon parts are quoted independently, using the authoritative cost fold.</summary>
+        /// <summary>The selected weapon parts are quoted independently, using the authoritative cost fold.</summary>
         public static int WeaponCost(WeaponRecipe weapon, ComponentCatalog catalog, GameBalance balance, MaterialTier material)
         {
             if (weapon == null) throw new ArgumentNullException(nameof(weapon));
@@ -25,14 +25,18 @@ namespace PaperDefense.Core
             if (catalog == null) throw new ArgumentNullException(nameof(catalog));
             if (balance == null) throw new ArgumentNullException(nameof(balance));
             AssemblyValidation.ValidateBalance(balance, material);
-            int category = (int)firstCategory;
+            var categories = firstCategory == ComponentCategory.Mechanism
+                ? new[] { ComponentCategory.Mechanism, ComponentCategory.Head, ComponentCategory.Sight, ComponentCategory.Magazine, ComponentCategory.Trigger, ComponentCategory.Mount }
+                : new[] { ComponentCategory.Frame, ComponentCategory.Hull, ComponentCategory.Armor, ComponentCategory.Feed, ComponentCategory.Turn };
+            int index = 0;
             foreach (var reference in references)
             {
                 if (!catalog.TryGet(reference.Id, reference.Revision, out var part))
-                    throw AssemblyCatalogException.At("assembly.part.missing", "component.parts[" + category + "]");
-                if (part.Category != (ComponentCategory)category++)
+                    throw AssemblyCatalogException.At("assembly.part.missing", "component.parts[" + index + "]");
+                if (index >= categories.Length || part.Category != categories[index++])
                     throw new ArgumentException("A component part uses the wrong category.", nameof(references));
             }
+            if (index < 5) throw new ArgumentException("A component is missing a required part.", nameof(references));
             return Cost(Parts(references, catalog), balance.Material(material).CostMultiplier);
         }
 
@@ -112,7 +116,7 @@ namespace PaperDefense.Core
                 AssemblyValidation.Positive(feedCapacity, "foundation.feed"), AssemblyValidation.Positive(Product(foundation, AssemblyStat.Feed), "foundation.feedModifier"),
                 m.RefundFraction, weapons);
         }
-        static ResolvedWeapon ResolveWeapon(int slot, ComponentDefinition[] parts, ComponentDefinition[] foundation, GameBalance balance, MaterialDefinition material)
+        internal static ResolvedWeapon ResolveWeapon(int slot, ComponentDefinition[] parts, ComponentDefinition[] foundation, GameBalance balance, MaterialDefinition material)
         {
             var core = parts[0]; string path = "mounts[" + slot + "]"; var family = core.WeaponFamilies;
             double size = Fold(core, parts, AssemblyStat.MagazineSize);
@@ -125,6 +129,11 @@ namespace PaperDefense.Core
             float reload = AssemblyValidation.Positive(Fold(core, parts, AssemblyStat.ReloadSeconds), path + ".reload");
             float damage = AssemblyValidation.NonNegative(Fold(core, parts, AssemblyStat.Damage), path + ".damage");
             float range = AssemblyValidation.NonNegative(Fold(core, parts, AssemblyStat.Range), path + ".range");
+            var attack = Attack(family);
+            double arc = Fold(core, parts, AssemblyStat.FiringArcDegrees,
+                WeaponDefinition.DefaultFiringArc(attack, family == AssemblyWeaponFamily.Stapler));
+            if (!(arc >= WeaponDefinition.MinimumFiringArc && arc <= WeaponDefinition.MaximumFiringArc))
+                throw AssemblyCatalogException.At("assembly.number.range", path + ".firingArcDegrees");
             float minimum = AssemblyValidation.NonNegative(Fold(core, parts, AssemblyStat.MinimumRange), path + ".minimumRange");
             if (family == AssemblyWeaponFamily.Mortar) minimum = Math.Max(6, minimum);
             if (minimum > 0 && range <= minimum) throw AssemblyCatalogException.At("assembly.range.minimum", path + ".range");
@@ -132,14 +141,14 @@ namespace PaperDefense.Core
             int cap = family == AssemblyWeaponFamily.Piercer ? 7 : family == AssemblyWeaponFamily.Fan ? 8 : family == AssemblyWeaponFamily.Ricochet ? 4 : 1;
             targetLimit = family == AssemblyWeaponFamily.Mortar || family == AssemblyWeaponFamily.Blotter ? 0 : Math.Min(cap, targetLimit);
             float acquisition = AssemblyValidation.NonNegative(Fold(null, parts.Concat(foundation), AssemblyStat.AcquisitionSeconds, balance.Construction.AcquisitionSeconds), path + ".acquisition");
-            var w = new ResolvedWeapon(slot, core.Id, family, Attack(family),
+            var w = new ResolvedWeapon(slot, core.Id, family, attack,
                 family == AssemblyWeaponFamily.Blotter ? 0 : AssemblyValidation.NonNegative(damage * (double)material.DamageMultiplier, path + ".damage"),
                 range, minimum, interval, magazine, reload, acquisition, targetLimit,
                 AssemblyValidation.NonNegative(Fold(core, parts, AssemblyStat.Radius), path + ".radius"),
                 AssemblyValidation.NonNegative(Fold(core, parts, AssemblyStat.FlightSeconds), path + ".flight"),
                 Math.Min(family == AssemblyWeaponFamily.Ricochet ? 3 : float.MaxValue, AssemblyValidation.NonNegative(Fold(core, parts, AssemblyStat.JumpRange), path + ".jump")),
                 AssemblyValidation.NonNegative(Fold(core, parts, AssemblyStat.ConeDegrees), path + ".cone"), Slow(parts),
-                AssemblyValidation.NonNegative(Fold(core, parts, AssemblyStat.SlowSeconds), path + ".slowSeconds"), floor);
+                AssemblyValidation.NonNegative(Fold(core, parts, AssemblyStat.SlowSeconds), path + ".slowSeconds"), floor, (float)arc);
             _ = w.CycleSeconds; _ = w.NominalDps;
             return w;
         }
@@ -153,7 +162,11 @@ namespace PaperDefense.Core
             float radius = AssemblyValidation.NonNegative(Fold(function, parts, AssemblyStat.Range), "structure.radius");
             var support = new ResolvedSupport(s.Family, radius, s.Family == AssemblyStructureFamily.Repair ? rate : 0, Slow(parts),
                 s.Family == AssemblyStructureFamily.Slow ? AssemblyValidation.NonNegative(Fold(function, parts, AssemblyStat.SlowSeconds, .6f), "structure.slowSeconds") : 0,
-                s.Family == AssemblyStructureFamily.Generator ? AssemblyValidation.Integer(rate, "structure.income", true) : 0, m.RefundFraction);
+                s.Family == AssemblyStructureFamily.Generator ? AssemblyValidation.Integer(rate, "structure.income", true) : 0, m.RefundFraction,
+                s.Family == AssemblyStructureFamily.Spikes ? AssemblyValidation.NonNegative(rate * (double)m.DamageMultiplier, "structure.spikeDamage") : 0,
+                s.Family == AssemblyStructureFamily.Beacon ? AssemblyValidation.Fraction(rate, "structure.armorReduction") :
+                    s.Family == AssemblyStructureFamily.Prism ? .15f : 0,
+                s.Family == AssemblyStructureFamily.Prism ? AssemblyValidation.NonNegative(rate * (double)m.DamageMultiplier, "structure.burnDamagePerSecond") : 0);
             return new ResolvedEntry(AlbumEntryKind.Structure, material, Snapshot(recipe, catalog, parts), Cost(parts, m.CostMultiplier),
                 AssemblyValidation.Positive(Fold(site, parts, AssemblyStat.Health) * m.HealthMultiplier, "structure.health"), load, capacity,
                 AssemblyValidation.NonNegative(Fold(null, parts, AssemblyStat.BuildSeconds) * m.BuildTimeMultiplier, "structure.build"),
@@ -164,7 +177,7 @@ namespace PaperDefense.Core
             => parts.Select(p => { catalog.TryGet(p.Id, p.Revision, out var d); return d; }).ToArray();
         static RecipeSnapshot Snapshot(AssemblyRecipe recipe, ComponentCatalog catalog, IEnumerable<ComponentDefinition> parts)
             => new RecipeSnapshot(recipe, catalog.BalanceRevision, parts.GroupBy(d => (d.Id, d.Revision)).Select(g => g.First()));
-        static double Fold(ComponentDefinition primary, IEnumerable<ComponentDefinition> parts, AssemblyStat stat, double fallback = 0)
+        internal static double Fold(ComponentDefinition primary, IEnumerable<ComponentDefinition> parts, AssemblyStat stat, double fallback = 0)
         {
             var owned = parts.OrderBy(d => d.Id, StringComparer.Ordinal).ThenBy(d => d.Revision).ToArray();
             double initial = primary?.Get(stat, ModifierOperation.Set, (float)fallback) ?? fallback;
@@ -174,7 +187,7 @@ namespace PaperDefense.Core
         { double sum = 0; foreach (var p in parts) sum += p.Get(stat, ModifierOperation.Add); return sum; }
         static double Product(IEnumerable<ComponentDefinition> parts, AssemblyStat stat)
         { double product = 1; foreach (var p in parts) product *= p.Get(stat, ModifierOperation.Multiply, 1); return product; }
-        static int Cost(IEnumerable<ComponentDefinition> parts, float material)
+        internal static int Cost(IEnumerable<ComponentDefinition> parts, float material)
         {
             decimal sum = 0, product = 1;
             foreach (var p in parts.OrderBy(d => d.Id, StringComparer.Ordinal).ThenBy(d => d.Revision))

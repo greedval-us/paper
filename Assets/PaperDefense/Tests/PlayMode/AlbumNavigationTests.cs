@@ -85,7 +85,7 @@ namespace PaperDefense.Tests
             var composite = root.GetComponentInChildren<WorkshopHud>(true).Composite;
             Assert.That(composite.DraftSession.Draft.Id, Is.EqualTo("album.guard"));
             var field = composite.Root.GetComponentInChildren<InputField>();
-            field.text = "Новый дозор"; field.onEndEdit.Invoke(field.text); Click("Composite save");
+            field.text = "Новый дозор"; field.onEndEdit.Invoke(field.text); Click("Sequence save");
             Click("Composite return");
             Assert.That(game.Page, Is.EqualTo(PlayerPage.Album));
             Assert.That(shell.Album.Filter, Is.EqualTo(AlbumFilter.Towers));
@@ -139,7 +139,9 @@ namespace PaperDefense.Tests
             {
                 game.Navigate(destination); shell.ApplyLayout(width, height); Canvas.ForceUpdateCanvases();
                 var page = root.GetComponentsInChildren<RectTransform>().Single(r => r.name == "Page " + destination);
-                Assert.That(page.GetComponentsInChildren<ScrollRect>(), Is.Empty);
+                var scrolls = page.GetComponentsInChildren<ScrollRect>();
+                Assert.That(scrolls.Length, Is.EqualTo(destination == PlayerPage.Map ? 1 : 0),
+                    "Only the map briefing may scroll; home actions remain fixed.");
                 var progress = page.GetComponentsInChildren<Text>().Single(t => t.name == "Player progress");
                 Assert.That(progress.text, Does.Contain("4").And.Contain("390"));
                 if (destination == PlayerPage.Map)
@@ -147,14 +149,30 @@ namespace PaperDefense.Tests
                     Assert.That(page.GetComponentsInChildren<Button>().Any(b => b.name == "Map album"), Is.True);
                     var metric = page.GetComponentsInChildren<Text>().Single(t => t.name == "Mission album loadout");
                     Assert.That(metric.text, Does.Contain("8"));
-                    var colors = page.GetComponentsInChildren<Text>().Where(t => t.text == "Красная" || t.text == "Синяя" || t.text == "Зелёная").ToArray();
-                    Assert.That(colors.Length, Is.EqualTo(3));
-                    var prepare = page.GetComponentsInChildren<Button>().Single(b => b.name == "Prepare mission");
-                    var prepareCorners = new Vector3[4]; prepare.GetComponent<RectTransform>().GetWorldCorners(prepareCorners);
+                    string[] colorNames = game.Run.Session.Balance.Mechanics.WaveInkFlasks
+                        ? new[] { "Красный", "Синий", "Зелёный" } : new[] { "Красная", "Синяя", "Зелёная" };
+                    var colors = page.GetComponentsInChildren<Text>().Where(t => colorNames.Contains(t.text)).ToArray();
+                    CollectionAssert.AreEquivalent(colorNames, colors.Select(t => t.text).ToArray());
+                    var briefing = scrolls.Single();
+                    Assert.That(briefing.name, Is.EqualTo("Mission details"));
+                    Assert.That(briefing.horizontal, Is.False);
+                    Assert.That(briefing.viewport.GetComponent<RectMask2D>(), Is.Not.Null);
+                    var viewportBounds = BoundsInPage(page, briefing.viewport);
+                    Assert.That(viewportBounds.xMin, Is.GreaterThanOrEqualTo(page.rect.xMin - 1));
+                    Assert.That(viewportBounds.xMax, Is.LessThanOrEqualTo(page.rect.xMax + 1));
+                    Assert.That(viewportBounds.yMin, Is.GreaterThanOrEqualTo(page.rect.yMin - 1));
+                    Assert.That(viewportBounds.yMax, Is.LessThanOrEqualTo(page.rect.yMax + 1));
                     foreach (var color in colors)
+                        Assert.That(color.transform.IsChildOf(briefing.content), Is.True,
+                            "Inkwell labels belong to the clipped mission briefing.");
+                    foreach (var name in new[] { "Prepare mission", "Map album", "Back" })
                     {
-                        var colorCorners = new Vector3[4]; color.rectTransform.GetWorldCorners(colorCorners);
-                        Assert.That(colorCorners[0].y, Is.GreaterThanOrEqualTo(prepareCorners[1].y), "Inkwell label overlaps preparation action");
+                        var action = page.GetComponentsInChildren<Button>().Single(b => b.name == name);
+                        Assert.That(action.IsInteractable(), Is.True, name);
+                        Assert.That(action.transform.IsChildOf(briefing.content), Is.False,
+                            name + " must remain fixed outside the scrolling briefing.");
+                        Assert.That(viewportBounds.Overlaps(BoundsInPage(page, (RectTransform)action.transform)), Is.False,
+                            name + " overlaps the visible mission briefing.");
                     }
                 }
                 foreach (var button in page.GetComponentsInChildren<Button>())
@@ -168,6 +186,19 @@ namespace PaperDefense.Tests
                     }
                 }
             }
+        }
+
+        static Rect BoundsInPage(RectTransform page, RectTransform target)
+        {
+            var corners = new Vector3[4]; target.GetWorldCorners(corners);
+            var min = new Vector2(float.PositiveInfinity, float.PositiveInfinity);
+            var max = new Vector2(float.NegativeInfinity, float.NegativeInfinity);
+            foreach (var corner in corners)
+            {
+                var point = (Vector2)page.InverseTransformPoint(corner);
+                min = Vector2.Min(min, point); max = Vector2.Max(max, point);
+            }
+            return Rect.MinMaxRect(min.x, min.y, max.x, max.y);
         }
     }
 }

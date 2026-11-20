@@ -92,7 +92,8 @@ namespace PaperDefense.Presentation
             {
                 if (previewPen == null) previewPen = new MeshPen(null, 32);
                 previewPen.Clear();
-                weaponPreview.Draw(previewPen, Vector2.zero, color.a);
+                using (previewPen.WithUiDetail(scale))
+                    weaponPreview.Draw(previewPen, Vector2.zero, color.a);
                 previewPen.CopyTo(vh, rectTransform.rect.center - drawingBounds.center * scale, scale);
                 return;
             }
@@ -103,24 +104,6 @@ namespace PaperDefense.Presentation
             NotebookArtRenderer.DrawUI(vh, shape,
                 rectTransform.rect.center - drawingBounds.center * scale + (frame?.Offset ?? Vector2.zero) * scale,
                 scale * (frame?.Scale ?? 1), frame?.Rotation ?? 0, opacity: (frame?.Alpha ?? 1) * color.a);
-        }
-        public static void Attach(Button button, string partId)
-        {
-            if (button == null) return;
-            var bounds = button.GetComponent<RectTransform>().rect;
-            float size = Mathf.Min(36, bounds.height - 8);
-            var go = new GameObject("Part illustration", typeof(RectTransform), typeof(CanvasRenderer), typeof(NotebookArtGraphic));
-            go.transform.SetParent(button.transform, false);
-            var rect = go.GetComponent<RectTransform>(); rect.anchorMin = rect.anchorMax = new Vector2(0, .5f);
-            rect.pivot = new Vector2(0, .5f); rect.anchoredPosition = new Vector2(6, 0); rect.sizeDelta = new Vector2(size, size);
-            var graphic = go.GetComponent<NotebookArtGraphic>(); graphic.raycastTarget = false; graphic.Bind("ui." + partId);
-            var label = button.GetComponentInChildren<Text>();
-            if (label != null)
-            {
-                var labelRect = label.rectTransform;
-                labelRect.anchoredPosition = new Vector2(size + 12, labelRect.anchoredPosition.y);
-                labelRect.sizeDelta = new Vector2(bounds.width - size - 18, labelRect.sizeDelta.y);
-            }
         }
     }
 }

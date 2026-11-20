@@ -39,7 +39,8 @@ namespace PaperDefense.Presentation
             if (!draft.CompatibleParts.Any(p => p.Id == id)) return;
             inspectedId = id; revealInspected = true; Refresh();
         }
-        ComponentDefinition Definition(string id) => draft.PreviewEntry?.Snapshot?.Definitions.FirstOrDefault(p => p.Id == id)
+        ComponentDefinition Definition(string id) => Definition(draft, id);
+        static ComponentDefinition Definition(WorkshopDraftSession draft, string id) => draft.PreviewEntry?.Snapshot?.Definitions.FirstOrDefault(p => p.Id == id)
             ?? draft.Catalog?.Definitions.Where(p => p.Id == id).OrderByDescending(p => p.Revision).FirstOrDefault();
         IEnumerable<PartRef> ActiveParts()
         {
@@ -53,12 +54,14 @@ namespace PaperDefense.Presentation
         static string Signed(float number) => number.ToString("+0.##;-0.##;0", System.Globalization.CultureInfo.GetCultureInfo("ru-RU"));
         string Contribution(ComponentDefinition part, bool compact = false) => Copy(compact ? "contribution_short" : "contribution", Signed(part.Get(AssemblyStat.Cost, ModifierOperation.Add)), Signed(part.Get(AssemblyStat.Load, ModifierOperation.Add)));
 
-        ResolvedEntry InspectedResolution(ComponentDefinition part)
+        ResolvedEntry InspectedResolution(ComponentDefinition part) => QuotePart(run, draft, part);
+
+        internal static ResolvedEntry QuotePart(RunController run, WorkshopDraftSession draft, ComponentDefinition part)
         {
             var recipe = draft.PreviewRecipe;
             if (recipe == null) return null;
             var replacement = new PartRef(part.Id, part.Revision);
-            PartRef[] Replace(IEnumerable<PartRef> parts) => parts.Select(reference => Definition(reference.Id)?.Category == part.Category ? replacement : reference).ToArray();
+            PartRef[] Replace(IEnumerable<PartRef> parts) => parts.Select(reference => Definition(draft, reference.Id)?.Category == part.Category ? replacement : reference).ToArray();
             AssemblyRecipe candidate;
             if (recipe.Structure != null)
             {
@@ -78,7 +81,7 @@ namespace PaperDefense.Presentation
                     // Match SelectPart's compatible replacement choice without installing it.
                     for (int i = 1; i < parts.Length; i++)
                     {
-                        var attached = Definition(parts[i].Id);
+                        var attached = Definition(draft, parts[i].Id);
                         if ((attached.WeaponFamilies & part.WeaponFamilies) != 0) continue;
                         var compatible = draft.Catalog.Definitions.Where(definition => definition.Category == attached.Category &&
                             (definition.WeaponFamilies & part.WeaponFamilies) != 0 && draft.IsOwned(definition.Id))
@@ -88,7 +91,8 @@ namespace PaperDefense.Presentation
                         parts[i] = new PartRef(compatible.Id, compatible.Revision);
                     }
                 }
-                var weapon = new WeaponRecipe(parts[0], parts[1], parts[2], parts[3], parts[4]);
+                var weapon = new WeaponRecipe(parts[0], parts[1], parts[2], parts[3], parts[4],
+                    part.Category == ComponentCategory.Mount ? replacement : parts.Length > 5 ? (PartRef?)parts[5] : old.Mount);
                 candidate = new AssemblyRecipe(new TowerRecipe(recipe.Tower.Foundation, recipe.Tower.Mounts.Select(mount =>
                     mount.SlotIndex == draft.ActiveMount ? new WeaponMountRecipe(mount.SlotIndex, weapon) : mount)));
             }
@@ -109,6 +113,16 @@ namespace PaperDefense.Presentation
             string Number(float value) => value.ToString("0.###", ui.TextResolver.Culture);
             var before = current.Weapons.FirstOrDefault(weapon => weapon.SlotIndex == draft.ActiveMount);
             var after = candidate.Weapons.FirstOrDefault(weapon => weapon.SlotIndex == draft.ActiveMount);
+            if (current.Support?.Kind == AssemblyStructureFamily.Spikes && candidate.Support?.Kind == AssemblyStructureFamily.Spikes)
+                return Copy("comparison_spikes", current.Health, candidate.Health, current.Support.Radius, candidate.Support.Radius,
+                    current.Support.SpikeDamage, candidate.Support.SpikeDamage, current.Cost, candidate.Cost);
+            if (current.Support?.Kind == AssemblyStructureFamily.Beacon && candidate.Support?.Kind == AssemblyStructureFamily.Beacon)
+                return Copy("comparison_beacon", current.Health, candidate.Health, current.Support.Radius, candidate.Support.Radius,
+                    current.Support.ArmorReduction * 100, candidate.Support.ArmorReduction * 100, current.Cost, candidate.Cost);
+            if (current.Support?.Kind == AssemblyStructureFamily.Prism && candidate.Support?.Kind == AssemblyStructureFamily.Prism)
+                return Copy("comparison_prism", current.Health, candidate.Health, current.Support.Radius, candidate.Support.Radius,
+                    current.Support.BurnDamagePerSecond, candidate.Support.BurnDamagePerSecond,
+                    current.Support.SlowSpeedMultiplier * 100, candidate.Support.SlowSpeedMultiplier * 100, current.Cost, candidate.Cost);
             if (current.Support != null && candidate.Support != null)
                 return Copy("comparison_support", Number(current.Health), Number(candidate.Health), Number(current.Support.Radius), Number(candidate.Support.Radius),
                     Number(current.Support.RepairPerSecond), Number(candidate.Support.RepairPerSecond), Number(current.Support.SlowSpeedMultiplier), Number(candidate.Support.SlowSpeedMultiplier),
@@ -225,6 +239,7 @@ namespace PaperDefense.Presentation
                 revealInspected = false;
             }
             ApplySketchLayout(inspected, candidate, familyLayout, comparisonLayout, catalogueLayout);
+            Root.GetComponentInParent<FieldMenuTheme>(true)?.Refresh();
         }
 
         void Details(ComponentDefinition part, Rect bounds, bool familyLayout, ResolvedEntry candidate)
@@ -248,7 +263,7 @@ namespace PaperDefense.Presentation
             string inspectedName = part.Name;
             if (draft.PreviewRecipe.Structure != null)
             {
-                var family = draft.Catalog.Starters.First(entry => entry.Kind == AlbumEntryKind.Structure && entry.Snapshot.Recipe.Structure.Family == draft.PreviewRecipe.Structure.Family);
+                var family = draft.Catalog.Templates.First(entry => entry.Kind == AlbumEntryKind.Structure && entry.Snapshot.Recipe.Structure.Family == draft.PreviewRecipe.Structure.Family);
                 inspectedName = ui.Resolve(family.Name) + " · " + ui.Resolve(part.Name);
             }
             var inspectedTitle = ui.Label(details, "Component inspected name", inspectedName, new Rect(16, 4, (familyLayout ? artWidth : w) - 32, 42), 26, true);
@@ -309,6 +324,11 @@ namespace PaperDefense.Presentation
                     case AssemblyStructureFamily.Generator: summary = Copy("generator_stats", resolved.Health, resolved.Cost, support.IncomePerWave, support.PaybackWaves(resolved.Cost), support.MaximumInstances); break;
                     case AssemblyStructureFamily.Repair: summary = Copy("repair_stats", resolved.Health, resolved.Cost, support.RepairPerSecond, support.Radius); break;
                     case AssemblyStructureFamily.Slow: summary = Copy("slow_stats", resolved.Health, resolved.Cost, support.SlowSpeedMultiplier, support.Radius, support.SlowSeconds); break;
+                    case AssemblyStructureFamily.Spikes: summary = Copy("spikes_stats", resolved.Health, resolved.Cost, support.SpikeDamage, support.Radius); break;
+                    case AssemblyStructureFamily.Beacon: summary = Copy("beacon_stats", resolved.Health, resolved.Cost, support.ArmorReduction * 100, support.Radius); break;
+                    case AssemblyStructureFamily.Prism:
+                        summary = GameText.Resolve(GameText.TrapOrBeaconEffect(support));
+                        break;
                     default: summary = Copy("wall_stats", resolved.Health, resolved.Cost, resolved.Load, resolved.Capacity); break;
                 }
             }
@@ -317,8 +337,8 @@ namespace PaperDefense.Presentation
                 summary = magazine ? (visualWeapon.Family == AssemblyWeaponFamily.Mortar
                     ? Copy("magazine_mortar_effect", visualWeapon.Range, visualWeapon.Radius, (candidate ?? resolved).Cost)
                     : Copy("magazine_fan_effect", visualWeapon.Range, visualWeapon.TargetLimit, (candidate ?? resolved).Cost)) : visualWeapon.Family == AssemblyWeaponFamily.Mortar
-                    ? Copy("mechanic_mortar_stats", visualWeapon.Damage, visualWeapon.Range, visualWeapon.MinimumRange, visualWeapon.Radius, visualWeapon.Interval, (candidate ?? resolved).Cost)
-                    : Copy("mechanic_fan_stats", visualWeapon.Damage, visualWeapon.Range, visualWeapon.Interval, visualWeapon.TargetLimit, visualWeapon.ConeDegrees, (candidate ?? resolved).Cost);
+                    ? Copy("mechanic_mortar_stats", visualWeapon.Damage, visualWeapon.Range, visualWeapon.MinimumRange, visualWeapon.Radius, visualWeapon.Interval, (candidate ?? resolved).Cost, visualWeapon.FiringArcDegrees)
+                    : Copy("mechanic_fan_stats", visualWeapon.Damage, visualWeapon.Range, visualWeapon.Interval, visualWeapon.TargetLimit, visualWeapon.ConeDegrees, (candidate ?? resolved).Cost, visualWeapon.FiringArcDegrees);
             }
             else if (resolved != null && draft.ActiveComponent == WorkshopComponentKind.Foundation)
             {
@@ -333,7 +353,7 @@ namespace PaperDefense.Presentation
                 string Number(float value) => value.ToString("0.###",ui.TextResolver.Culture);
                 summary = magazine ? Copy("magazine_weapon_effect", Number(weapon.Damage),Number(weapon.Range),Number(weapon.NominalDps),run.PreviewWeaponCost(resolved.Snapshot,draft.ActiveMount))
                     : Copy("weapon_stats", Number(weapon.Damage), Number(weapon.Range), weapon.MagazineSize,
-                        Number(weapon.ReloadSeconds), resolved.Load, run.PreviewWeaponCost(resolved.Snapshot,draft.ActiveMount));
+                        Number(weapon.ReloadSeconds), resolved.Load, run.PreviewWeaponCost(resolved.Snapshot,draft.ActiveMount), Number(weapon.FiringArcDegrees));
             }
             else if (draft.PreviewMetrics != null)
             {
@@ -402,8 +422,7 @@ namespace PaperDefense.Presentation
             if (draft.PreviewMetrics?.Overloaded != true && draft.Diagnostics.Count == 0)
             {
                 var scenery = WorkshopUi.Graphic<UnityEngine.UI.Image>(parent, "Component preview scenery", rect);
-                scenery.sprite = Resources.Load<Sprite>("Art/Player/FoundationPreviewScenery");
-                scenery.preserveAspect = !mechanic; scenery.raycastTarget = false; scenery.color = new Color(1, 1, 1, mechanic ? .55f : .85f);
+                scenery.raycastTarget = false; scenery.color = new Color(.93f, .95f, .97f, mechanic ? .55f : .85f);
             }
             if (mechanic)
             {
@@ -572,7 +591,8 @@ namespace PaperDefense.Presentation
                 diagram.Disc(point, 3, blue);
             }
             diagram.CopyTo(target, Vector2.zero, 1);
-            assembly.Clear(); composition.Draw(assembly, Vector2.zero);
+            assembly.Clear();
+            using (assembly.WithUiDetail(scale)) composition.Draw(assembly, Vector2.zero);
             var artOrigin=muzzleDestination.HasValue && composition.Anchors.Count>0
                 ? muzzleDestination.Value-composition.Anchors[0].Muzzle*scale : artCenter-artBounds.center*scale;
             assembly.CopyTo(target,artOrigin,scale);

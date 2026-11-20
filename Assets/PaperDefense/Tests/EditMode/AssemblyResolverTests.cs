@@ -44,6 +44,56 @@ namespace PaperDefense.Tests
 
     public sealed class AssemblyResolverTests
     {
+        [TestCase("gun", 8f, 160f)]
+        [TestCase("piercer", 12.5f, 135f)]
+        [TestCase("mortar", 18f, 120f)]
+        [TestCase("fan", 6f, 180f)]
+        [TestCase("ricochet", 10f, 145f)]
+        [TestCase("stapler", 9f, 170f)]
+        [TestCase("blotter", 9f, 180f)]
+        public void CurrentAndPreSectorRecipesUseTheCoverageOfTheirOwnMechanism(string id, float range, float arc)
+        {
+            var recipe = AssemblyResolverFixture.Tower(AssemblyResolverFixture.Weapon(id));
+            var data = AssemblyResolverFixture.Input();
+            var core = data.Definitions.Single(part => part.Id == "core." + id);
+            Assert.That(core.Modifiers.Single(modifier => modifier.Stat == AssemblyStat.FiringArcDegrees).Value, Is.EqualTo(arc));
+            var weapon = AssemblyResolverFixture.Resolve(recipe, AssemblyResolverFixture.Modified(data)).Weapons.Single();
+            Assert.That(weapon.FiringArcDegrees, Is.EqualTo(arc));
+            Assert.That(weapon.Range, Is.EqualTo(range));
+
+            core.Modifiers = core.Modifiers.Where(modifier => modifier.Stat != AssemblyStat.FiringArcDegrees).ToArray();
+            var frozen = AssemblyResolverFixture.Resolve(recipe, AssemblyResolverFixture.Modified(data)).Snapshot;
+            var restored = AssemblyResolver.Resolve(frozen, GameBalance.CreateDefault(), MaterialTier.Pencil).Value.Weapons.Single();
+            Assert.That(restored.FiringArcDegrees, Is.EqualTo(arc));
+            Assert.That(restored.Range, Is.EqualTo(range));
+        }
+
+        [Test]
+        public void BarrelAndFieldRangeUpgradesPreserveEachMountsAuthoredSector()
+        {
+            var data = AssemblyResolverFixture.Input();
+            AssemblyResolverFixture.Set(data, "core.gun", AssemblyStat.FiringArcDegrees, ModifierOperation.Set, 154);
+            var recipe = AssemblyResolverFixture.Tower(AssemblyResolverFixture.Weapon(head: "long"),
+                AssemblyResolverFixture.Weapon("stapler"));
+            var baseline = AssemblyResolverFixture.Resolve(recipe, AssemblyResolverFixture.Modified(data));
+            var upgraded = ModernizationRules.Resolve(baseline, new ModernizationRanks(range: 1));
+            Assert.That(baseline.Weapons.Select(w => w.Range), Is.EqualTo(new[] { 10f, 9f }));
+            Assert.That(upgraded.Weapons.Select(w => w.FiringArcDegrees), Is.EqualTo(new[] { 154f, 170f }));
+            Assert.That(upgraded.Weapons[0].Range, Is.GreaterThan(baseline.Weapons[0].Range));
+        }
+
+        [TestCase(119f)]
+        [TestCase(181f)]
+        public void OutOfBoundsFiringSectorsRejectTheRecipe(float degrees)
+        {
+            var data = AssemblyResolverFixture.Input();
+            AssemblyResolverFixture.Set(data, "core.gun", AssemblyStat.FiringArcDegrees, ModifierOperation.Set, degrees);
+            var result = AssemblyResolver.Resolve(AssemblyResolverFixture.Tower(), AssemblyResolverFixture.Modified(data),
+                GameBalance.CreateDefault(), MaterialTier.Pencil);
+            Assert.That(result.Valid, Is.False);
+            Assert.That(result.Diagnostics.Single().Path, Does.EndWith(".firingArcDegrees"));
+        }
+
         static int FoundationQuote(FoundationRecipe foundation, ComponentCatalog catalog, GameBalance balance, MaterialTier material)
         {
             var method = typeof(AssemblyResolver).GetMethod("FoundationCost", new[] { typeof(FoundationRecipe), typeof(ComponentCatalog), typeof(GameBalance), typeof(MaterialTier) });
@@ -99,21 +149,21 @@ namespace PaperDefense.Tests
             Assert.That(entries.Skip(4).Select(e => e.BuildSeconds), Is.EqualTo(new[] { .35f, .8f, 2f, 2.2f }).Within(.0001f));
         }
 
-        [TestCase("gun", 40, 12, 8, .42f)]
-        [TestCase("short", 36, 10.8f, 6.4f, .357f)]
-        [TestCase("long", 52, 13.2f, 10, .504f)]
-        public void GunHeads_ResolveWithoutSubtractingCreditTwice(string head, int cost, float damage, float range, float interval)
+        [TestCase("gun", 40, 12, 8, .42f, .42f)]
+        [TestCase("short", 36, 11.04f, 6.4f, .3192f, .336f)]
+        [TestCase("long", 52, 13.2f, 10, .504f, .504f)]
+        public void GunHeads_ResolveWithoutSubtractingCreditTwice(string head, int cost, float damage, float range, float interval, float reload)
         {
             var result = AssemblyResolverFixture.Resolve(AssemblyResolverFixture.Tower(AssemblyResolverFixture.Weapon(head: head)));
             var weapon = result.Weapons.Single();
             Assert.That(result.Cost, Is.EqualTo(cost)); Assert.That(weapon.Damage, Is.EqualTo(damage).Within(.0001f));
             Assert.That(weapon.Range, Is.EqualTo(range).Within(.0001f)); Assert.That(weapon.Interval, Is.EqualTo(interval).Within(.0001f));
-            Assert.That(weapon.ReloadSeconds, Is.EqualTo(interval).Within(.0001f)); Assert.That(weapon.MagazineSize, Is.EqualTo(6));
+            Assert.That(weapon.ReloadSeconds, Is.EqualTo(reload).Within(.0001f)); Assert.That(weapon.MagazineSize, Is.EqualTo(6));
         }
 
         [TestCase("standard", "standard", 6, .42f, .42f, 2.52f)]
         [TestCase("standard", "burst", 3, .189f, .882f, 1.26f)]
-        [TestCase("drum", "standard", 12, .357f, 1.26f, 5.187f)]
+        [TestCase("drum", "standard", 12, .3024f, .798f, 4.1244f)]
         public void MagazineAndTrigger_KeepBothTimesAndExactCycle(string magazine, string trigger, int size, float interval, float reload, float cycle)
         {
             var w = AssemblyResolverFixture.Resolve(AssemblyResolverFixture.Tower(AssemblyResolverFixture.Weapon(magazine: magazine, trigger: trigger))).Weapons.Single();
@@ -208,7 +258,7 @@ namespace PaperDefense.Tests
         }
 
         [TestCase(false, 80, 70, 6.5f, 4.8f, 0)]
-        [TestCase(true, 72, 68, 0, 0, 15)]
+        [TestCase(true, 72, 68, 0, 0, 27)]
         public void SupportVariants_PreserveFunctionalBaselinesAndMultipliers(bool generator, int cost, float health, float radius, float repair, int income)
         {
             string family = generator ? "generator" : "repair";
@@ -229,9 +279,9 @@ namespace PaperDefense.Tests
             Assert.That(repair.Support.Radius, Is.EqualTo(5)); Assert.That(repair.Support.RepairPerSecond, Is.EqualTo(6));
             Assert.That(repair.Health, Is.EqualTo(147).Within(.0001f)); Assert.That(repair.Capacity, Is.EqualTo(6));
             var generator = AssemblyResolverFixture.Resolve(catalog.Starters[7].Snapshot.Recipe, catalog);
-            Assert.That(generator.Support.IncomePerWave, Is.EqualTo(12)); Assert.That(generator.Support.RefundFraction, Is.Zero);
+            Assert.That(generator.Support.IncomePerWave, Is.EqualTo(18)); Assert.That(generator.Support.RefundFraction, Is.Zero);
             Assert.That(generator.Support.MaximumInstances, Is.EqualTo(2)); Assert.That(generator.Support.AllowedMaterials, Is.EqualTo(new[] { MaterialTier.Pencil }));
-            Assert.That(generator.Support.PaybackWaves(generator.Cost), Is.EqualTo(5));
+            Assert.That(generator.Support.PaybackWaves(generator.Cost), Is.EqualTo(4));
             var slow = AssemblyResolverFixture.Resolve(catalog.Starters[5].Snapshot.Recipe, catalog).Support;
             Assert.That(slow.SlowSpeedMultiplier, Is.EqualTo(.6f)); Assert.That(slow.SlowSeconds, Is.EqualTo(.6f));
         }

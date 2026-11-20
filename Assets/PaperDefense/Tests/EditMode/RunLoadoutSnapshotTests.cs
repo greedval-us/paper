@@ -188,7 +188,7 @@ namespace PaperDefense.Tests
         {
             var snapshot = new RunLoadoutSnapshot(AssemblyResolverFixture.Catalog().Starters, GameBalance.CreateDefault());
             Assert.Throws<ArgumentException>(() => snapshot.ResolveSlot(7, MaterialTier.Marker));
-            Assert.That(snapshot.ResolveSlot(7, MaterialTier.Pencil).Support.IncomePerWave, Is.EqualTo(12));
+            Assert.That(snapshot.ResolveSlot(7, MaterialTier.Pencil).Support.IncomePerWave, Is.EqualTo(18));
         }
     }
 }

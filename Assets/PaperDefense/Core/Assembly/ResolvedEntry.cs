@@ -19,11 +19,20 @@ namespace PaperDefense.Core
         public AssemblyStructureFamily Kind { get; }
         public float Radius { get; } public float RepairPerSecond { get; }
         public float SlowSpeedMultiplier { get; } public float SlowSeconds { get; }
+        public float SpikeDamage { get; }
+        public float ArmorReduction { get; }
+        public float BurnDamagePerSecond { get; }
+        public const float SpikeIntervalSeconds = 1f;
+        public const float BeaconLingerSeconds = 1f;
+        public const float PrismIntervalSeconds = 2f;
+        public const float PrismEffectSeconds = 2f;
         public int IncomePerWave { get; } public float RefundFraction { get; } public int MaximumInstances { get; }
         public IReadOnlyList<MaterialTier> AllowedMaterials { get; }
-        internal ResolvedSupport(AssemblyStructureFamily kind, float radius, float repairPerSecond, float slow, float slowSeconds, int income, float refund)
+        internal ResolvedSupport(AssemblyStructureFamily kind, float radius, float repairPerSecond, float slow, float slowSeconds, int income, float refund,
+            float spikeDamage = 0, float armorReduction = 0, float burnDamagePerSecond = 0)
         {
             Kind = kind; Radius = radius; RepairPerSecond = repairPerSecond; SlowSpeedMultiplier = slow; SlowSeconds = slowSeconds;
+            SpikeDamage = spikeDamage; ArmorReduction = armorReduction; BurnDamagePerSecond = burnDamagePerSecond;
             IncomePerWave = income; RefundFraction = kind == AssemblyStructureFamily.Generator ? 0 : refund;
             MaximumInstances = kind == AssemblyStructureFamily.Generator ? 2 : 0;
             AllowedMaterials = Array.AsReadOnly(kind == AssemblyStructureFamily.Generator ? new[] { MaterialTier.Pencil } : new[] { MaterialTier.Pencil, MaterialTier.Ink, MaterialTier.Marker });
@@ -49,6 +58,8 @@ namespace PaperDefense.Core
         public float RefundFraction { get; }
         public IReadOnlyList<ResolvedWeapon> Weapons { get; }
         public ResolvedSupport Support { get; }
+        // Effective battle values are inspectable, but cannot become a fresh paid recipe.
+        internal bool HasFieldModernization { get; }
         public float Dps
         {
             get
@@ -60,12 +71,14 @@ namespace PaperDefense.Core
         }
         internal ResolvedEntry(AlbumEntryKind kind, MaterialTier material, RecipeSnapshot snapshot, int cost, float health,
             int load, int capacity, float buildSeconds, float defense, float frontDefense, float feedCapacity,
-            float feedModifier, float refundFraction, IEnumerable<ResolvedWeapon> weapons, ResolvedSupport support = null)
+            float feedModifier, float refundFraction, IEnumerable<ResolvedWeapon> weapons, ResolvedSupport support = null,
+            bool hasFieldModernization = false)
         {
             Kind = kind; Material = material; Snapshot = snapshot; Cost = cost; Health = health; Load = load; Capacity = capacity;
             BuildSeconds = buildSeconds; Defense = defense; FrontDefense = frontDefense; FeedCapacity = feedCapacity;
             FeedModifier = feedModifier; RefundFraction = refundFraction;
             Weapons = new List<ResolvedWeapon>(weapons).AsReadOnly(); Support = support;
+            HasFieldModernization = hasFieldModernization;
         }
         public float FeedForActiveMounts(int activeMounts)
         {

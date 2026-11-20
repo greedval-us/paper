@@ -25,6 +25,7 @@ namespace PaperDefense.Core
             if(!TowerCatalog.Validate(source,balance,out string reason))throw new ArgumentException(reason);
             var rules=balance.CreateSnapshot();source=source.WithContent(rules.ResolveContent());
             var tower=new StructureState{Cell=new Cell(10,10),Blueprint=source,Health=TowerCatalog.Health(source,rules,MaterialTier.Pencil)};
+            tower.InitializePlacementFacing(90); // The workshop probe uses the drawing's upright orientation.
             float initial=tower.Health;var hits=new List<ArmorProbeHit>();
             for(int side=0;side<ArmorDistribution.SectorCount;side++)
             {

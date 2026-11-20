@@ -19,13 +19,13 @@ namespace PaperDefense.Tests
             var ledger = new GeneratorWaveLedger(); var run = Guid.NewGuid();
             var first = Entity(1); var late = Entity(2);
             ledger.BeginWave(run, 1, new[] { first });
-            Assert.That(ledger.CompleteWave(run, 1, new[] { first, late }), Is.EqualTo(12));
+            Assert.That(ledger.CompleteWave(run, 1, new[] { first, late }), Is.EqualTo(18));
             Assert.That(first.GeneratorPaidWaves, Is.EqualTo(1));
             Assert.That(late.GeneratorPaidWaves, Is.Zero);
             Assert.That(ledger.CompleteWave(run, 1, new[] { first, late }), Is.Zero);
             Assert.That(first.GeneratorPaidWaves, Is.EqualTo(1));
             ledger.BeginWave(run, 2, new[] { first, late });
-            Assert.That(ledger.CompleteWave(run, 2, new[] { first, late }), Is.EqualTo(24));
+            Assert.That(ledger.CompleteWave(run, 2, new[] { first, late }), Is.EqualTo(36));
             Assert.That(first.GeneratorPaidWaves, Is.EqualTo(2));
             Assert.That(late.GeneratorPaidWaves, Is.EqualTo(1));
         }

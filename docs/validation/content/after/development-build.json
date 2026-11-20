@@ -2,7 +2,7 @@
   "Success": true,
   "Result": "Succeeded",
   "UnityVersion": "6000.5.7f1",
-  "OutputPath": "D:/Projekt Unity/paper/Builds/ContentAcceptance-20261012/PaperDefense.exe",
+  "OutputPath": "Builds/ContentAcceptance/PaperDefense.exe",
   "Platform": "StandaloneWindows64",
   "Options": "ForceOptimizeScriptCompilation, Il2CPP, CompressTextures, StripDebugSymbols, ShaderLivelinkSupport, Development, DetailedBuildReport",
   "StartedUtc": "2026-10-12T18:00:28.7936384Z",

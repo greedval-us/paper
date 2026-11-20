@@ -21,7 +21,8 @@ namespace PaperDefense.Tests
             balance.WaveInkGrant = 0;
             balance.Waves = new List<WaveDefinition>
             {
-                new WaveDefinition { Count = 1, SpawnInterval = 0.01f, Sides = 1 }
+                // The stationary target is placed east of both firing positions.
+                new WaveDefinition { Count = 1, SpawnInterval = 0.01f, Sides = 2 }
             };
             foreach (var definition in balance.StructureDefinitions)
                 definition.BuildSeconds = 0;

@@ -7,8 +7,12 @@ namespace PaperDefense.Core
     {
         public BuildQuote QuoteEntry(IReadOnlyList<Cell> cells, ResolvedEntry entry, MaterialTier material, InkColor color)
         {
+            if (Mechanics.FieldModernization && entry?.Kind == AlbumEntryKind.Tower && (material != MaterialTier.Pencil || color != InkColor.None))
+                return RejectedEntryQuote("Новые башни строятся карандашными и без цвета.");
             if (entry == null || entry.Kind == AlbumEntryKind.Legacy)
                 return RejectedEntryQuote(UserText.Message("copy.48635af5e97f1a11"));
+            if (entry.HasFieldModernization)
+                return RejectedEntryQuote("Стройте базовый чертёж; боевые улучшения принадлежат установленной башне.");
             if (!Enum.IsDefined(typeof(MaterialTier), material) || entry.Material != material)
                 return RejectedEntryQuote(UserText.Message("assembly.material.unsupported"));
             if (!Enum.IsDefined(typeof(InkColor), color))
@@ -32,10 +36,10 @@ namespace PaperDefense.Core
             return quote;
         }
 
-        public bool TryBuildEntry(IReadOnlyList<Cell> cells, ResolvedEntry entry, MaterialTier material, InkColor color, out string reason, string sourceAlbumEntryId = null)
+        public bool TryBuildEntry(IReadOnlyList<Cell> cells, ResolvedEntry entry, MaterialTier material, InkColor color, out string reason, string sourceAlbumEntryId = null, float? facingDegrees = null)
         {
             var quote = QuoteEntry(cells, entry, material, color); reason = quote.Reason;
-            if (!quote.Valid) return false;
+            if (!quote.Valid || !ValidPlacementFacing(facingDegrees, ref reason)) return false;
             // Prepare every entity before publishing the resource payment or changing occupancy.
             var prepared = new List<StructureState>(quote.Cells.Count);
             float health = TowerCatalog.FiniteStat(entry.Health * healthMultiplier, "health");
@@ -51,6 +55,7 @@ namespace PaperDefense.Core
             nextStructureId += prepared.Count;
             foreach (var structure in prepared)
             {
+                if (structure.HasDirectionalWeapon) structure.InitializePlacementFacing(facingDegrees ?? DefaultFacingDegrees(structure.Cell, structure.Kind, entry));
                 structures.Add(structure); grid[structure.Cell.Y * rules.Width + structure.Cell.X] = structure;
                 MarkStructureChanged(structure, structure.IsComplete);
             }
@@ -96,6 +101,8 @@ namespace PaperDefense.Core
 
         public BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,TowerBlueprint blueprint,MaterialTier material,InkColor color)
         {
+            if (Mechanics.FieldModernization && (material != MaterialTier.Pencil || color != InkColor.None))
+                return RejectedEntryQuote("Новые башни строятся карандашными и без цвета.");
             if (!TowerCatalog.Validate(blueprint,rules,out string invalid))
                 return new BuildQuote{Cells=Array.Empty<Cell>(),Reason=invalid};
             if (!Enum.IsDefined(typeof(InkColor),color))
@@ -115,19 +122,22 @@ namespace PaperDefense.Core
             return quote;
         }
 
-        public bool TryBuildBlueprint(IReadOnlyList<Cell> cells,TowerBlueprint blueprint,MaterialTier material,InkColor color,out string reason)
+        public bool TryBuildBlueprint(IReadOnlyList<Cell> cells,TowerBlueprint blueprint,MaterialTier material,InkColor color,out string reason, float? facingDegrees=null, string sourceAlbumEntryId=null)
         {
             var quote=QuoteBlueprint(cells,blueprint,material,color);reason=quote.Reason;
-            if(!quote.Valid)return false;
-            Ink-=quote.Cost;
-            if(color!=InkColor.None)coloredInk[(int)color]-=ColorCost(blueprint,material)*quote.Cells.Count;
+            if(!quote.Valid || !ValidPlacementFacing(facingDegrees, ref reason))return false;
             int cost=TowerCatalog.Cost(blueprint,rules,material);
             blueprint=blueprint.WithContent(rules.Content);
             var assembly=TowerCatalog.Resolve(blueprint,rules.Content);
+            var fieldEntry=Mechanics.FieldModernization?assembly.CreateLegacySnapshot(rules,material):null;
+            Ink-=quote.Cost;
+            if(color!=InkColor.None)coloredInk[(int)color]-=ColorCost(blueprint,material)*quote.Cells.Count;
             foreach(var cell in quote.Cells)
             {
-                AddStructure(cell,blueprint.FirstWeapon,material,cost,false,assembly.First.Numeric,assembly.First.Id);
-                var structure=StructureAt(cell);structure.Blueprint=blueprint;structure.Assembly=assembly;structure.Color=color;
+                AddStructure(cell,blueprint.FirstWeapon,material,cost,false,assembly.First.Numeric,assembly.First.Id,blueprint,assembly,facingDegrees);
+                var structure=StructureAt(cell);structure.Color=color;
+                structure.LegacyFieldEntry=fieldEntry;
+                structure.SourceAlbumEntryId=sourceAlbumEntryId;
                 structure.MaxHealth=TowerCatalog.Health(blueprint,rules,material)*healthMultiplier;
                 structure.Health=structure.MaxHealth;
                 structure.BuildRemaining=TowerCatalog.BuildSeconds(blueprint,rules,material);
@@ -148,6 +158,7 @@ namespace PaperDefense.Core
             if(tower==null||ConstructionToolRules.IsTool(tower.Kind)||tower.ResolvedEntry?.Kind==AlbumEntryKind.Structure)
             {reason=UserText.Message("copy.a8ce8499831aa26c");return false;}
             if(tower.Color==color)return true;
+            if(Mechanics.FieldModernization){reason="Выбор и усиление закреплённого цвета доступны через модернизацию.";return false;}
             int cost=tower.ResolvedEntry==null?ColorCost(tower.Blueprint,tower.Tier):EntryColorCost(tower.ResolvedEntry);
             if(color!=InkColor.None&&ColoredInk(color)<cost){reason=UserText.Message("copy.e9d0f96d16c02def", cost);return false;}
             if(color!=InkColor.None)coloredInk[(int)color]-=cost;

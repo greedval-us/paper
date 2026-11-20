@@ -16,7 +16,7 @@ namespace PaperDefense.Core
     /// <summary>Permanent options, never a stockpile of consumable weapon instances.</summary>
     public sealed partial class WorkshopProfile
     {
-        public const int CurrentVersion = 8;
+        public const int CurrentVersion = 11;
         private static readonly IReadOnlyList<PartUnlock> parts = PartCatalog.HistoricalParts;
         private ContentCatalogSnapshot content;
         private readonly HashSet<string> unlocked = new HashSet<string>(StringComparer.Ordinal);
@@ -167,7 +167,8 @@ namespace PaperDefense.Core
             foreach (string selected in loadout) if (selected == id) { reason = UserText.Message("copy.c254f33cb940ff85"); return false; }
             TowerBlueprint blueprint = Find(id);
             if (blueprint == null) { reason = UserText.Message("copy.5850704bbcf92fc2"); return false; }
-            album.Remove(blueprint); entries.RemoveAll(e => e.Id == id); return true;
+            album.Remove(blueprint); entries.RemoveAll(e => e.Id == id);
+            ClearNamedLoadoutReferences(id); return true;
         }
         public bool AssignSlot(int slot, string id, out string reason, GameBalance balance = null)
         {
@@ -188,6 +189,9 @@ namespace PaperDefense.Core
             data.Unlocked = ordered.ToArray();
             for (int i = 0; i < album.Count; i++) data.Album[i] = new BlueprintData(album[i]);
             WriteAssemblyData(data);
+            WriteCampaignData(data);
+            WriteNamedLoadoutData(data);
+            WriteMissionCheckpointData(data);
             return data;
         }
         /// <summary>Copy current valid state exactly; loader repairs never run during a transaction.</summary>
@@ -203,6 +207,9 @@ namespace PaperDefense.Core
             Array.Copy(loadout, copy.loadout, loadout.Length);
             copy.content = content;
             CopyAssemblyStateTo(copy);
+            CopyCampaignStateTo(copy);
+            CopyNamedLoadoutsTo(copy);
+            copy.MissionCheckpoint = MissionCheckpoint;
             return copy;
         }
         internal static WorkshopProfile ReadHistorical(WorkshopProfileData data)
@@ -296,5 +303,10 @@ namespace PaperDefense.Core
         public ComponentLibraryEntryData[] Library;
         public RunRewardReceiptData[] Rewards;
         public OperationReceiptData[] Operations;
+        public CampaignStateData Campaign = new CampaignStateData();
+        public CampaignRunRewardData[] CampaignRewards = Array.Empty<CampaignRunRewardData>();
+        public NamedLoadoutData[] NamedLoadouts;
+        public MissionCheckpointData MissionCheckpoint;
+        public bool HasMissionCheckpoint;
     }
 }

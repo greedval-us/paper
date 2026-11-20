@@ -17,6 +17,12 @@ namespace PaperDefense.Presentation
         Rect recordingBounds = new Rect(8, 8, 42, 28);
         Rect combatBounds = new Rect(8, 8, 42, 28);
         bool combatFocus;
+        bool darkSurface;
+        public bool DarkSurface
+        {
+            get => darkSurface;
+            set { if (darkSurface == value) return; darkSurface = value; geometryDirty = true; RefreshGeometry(); }
+        }
         bool quietGrid;
         public bool QuietGrid
         {
@@ -97,7 +103,7 @@ namespace PaperDefense.Presentation
             if (HasRecording)
             {
                 playback.Seek(seconds);
-                NotebookTrialRenderer.Draw(pen, playback, FrameRecording ? ViewBounds : (Rect?)null, quietGrid ? .035f : .12f);
+                NotebookTrialRenderer.Draw(pen, playback, FrameRecording ? ViewBounds : (Rect?)null, quietGrid ? .035f : .12f, darkSurface);
             }
             else pen.Clear();
             lastSeconds = seconds; geometryDirty = false;

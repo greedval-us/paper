@@ -11,6 +11,7 @@ namespace PaperDefense.Core
         public AttackKind Attack { get; }
         public bool LegacyContinuous { get; }
         public float Damage { get; } public float Range { get; } public float MinimumRange { get; }
+        public float FiringArcDegrees { get; }
         public float Interval { get; } public int MagazineSize { get; } public float ReloadSeconds { get; }
         public float AcquisitionSeconds { get; } public int TargetLimit { get; }
         public float Radius { get; } public float FlightSeconds { get; } public float JumpRange { get; } public float ConeDegrees { get; }
@@ -21,10 +22,11 @@ namespace PaperDefense.Core
         internal ResolvedWeapon(int slotIndex, string sourceId, AssemblyWeaponFamily family, AttackKind attack,
             float damage, float range, float minimumRange, float interval, int magazineSize, float reloadSeconds,
             float acquisitionSeconds, int targetLimit, float radius, float flightSeconds, float jumpRange,
-            float coneDegrees, float slowSpeedMultiplier, float slowSeconds, float minimumActionInterval, bool legacyContinuous = false)
+            float coneDegrees, float slowSpeedMultiplier, float slowSeconds, float minimumActionInterval, float firingArcDegrees, bool legacyContinuous = false)
         {
             SlotIndex = slotIndex; SourceId = sourceId; Family = family; Attack = attack; LegacyContinuous = legacyContinuous;
-            Damage = damage; Range = range; MinimumRange = minimumRange; Interval = interval; MagazineSize = magazineSize;
+            Damage = damage; Range = range; MinimumRange = minimumRange; FiringArcDegrees = firingArcDegrees;
+            Interval = interval; MagazineSize = magazineSize;
             ReloadSeconds = reloadSeconds; AcquisitionSeconds = acquisitionSeconds; TargetLimit = targetLimit;
             Radius = radius; FlightSeconds = flightSeconds; JumpRange = jumpRange; ConeDegrees = coneDegrees;
             SlowSpeedMultiplier = slowSpeedMultiplier; SlowSeconds = slowSeconds; MinimumActionInterval = minimumActionInterval;

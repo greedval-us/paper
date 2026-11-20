@@ -215,7 +215,7 @@ namespace PaperDefense.Tests
         {
             internal int Remaining { get; private set; } = 1;
             internal int FindCalls { get; private set; }
-            public bool TryFindNearest(Point2 origin, float range, out Cell cell)
+            public bool TryFindNearest(Point2 origin, float minimumRange, float range, FiringSector sector, out Cell cell)
             {
                 FindCalls++; cell = new Cell(12, 10); return Remaining > 0;
             }

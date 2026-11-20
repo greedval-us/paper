@@ -148,7 +148,7 @@ namespace PaperDefense.Tests
                 new[] { new ComponentLibraryReference(component.Id, 1, ComponentLibraryKind.Foundation, -1) });
             Assert.That(profile.TrySaveAssemblyEntry(input, false, Guid.NewGuid(), out var saved, out code), Is.True, code);
             Assert.That(profile.TryDeleteLibraryComponent(component.Id, out code), Is.True, code);
-            Assert.That(profile.Library.Count, Is.Zero); Assert.That(profile.Entries.Single(e => e.Id == saved.Id), Is.SameAs(saved));
+            Assert.That(profile.Library.Count, Is.EqualTo(4)); Assert.That(profile.Entries.Single(e => e.Id == saved.Id), Is.SameAs(saved));
             Assert.That(saved.LibraryReferences[0].Id, Is.EqualTo(component.Id));
             Assert.That(AssemblyResolver.Resolve(saved.Snapshot, GameBalance.CreateDefault(), MaterialTier.Pencil).Value.Cost, Is.EqualTo(40));
         }
@@ -200,7 +200,7 @@ namespace PaperDefense.Tests
             Assert.That(profile.TrySaveAssemblyEntry(Page("page.rejected"), false, Guid.Empty, out _, out var code), Is.False);
             Assert.That(code, Is.EqualTo("profile.operation.invalid")); Assert.That(profile.Entries.Count, Is.EqualTo(8));
             Assert.That(profile.TrySaveLibraryComponent(Component("library.rejected"), false, Guid.Empty, out _, out code), Is.False);
-            Assert.That(code, Is.EqualTo("profile.operation.invalid")); Assert.That(profile.Library.Count, Is.Zero);
+            Assert.That(code, Is.EqualTo("profile.operation.invalid")); Assert.That(profile.Library.Count, Is.EqualTo(4));
         }
     }
 }

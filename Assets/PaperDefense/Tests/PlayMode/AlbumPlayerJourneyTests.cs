@@ -49,18 +49,14 @@ namespace PaperDefense.Tests
         IEnumerator CompleteWave()
         {
             game.Run.NextWave(); game.Run.AdvanceFrame(1f / 30, false, 1); yield return null;
-            if (game.Run.Session.PendingUpgrade)
-            {
-                Assert.That(game.Page, Is.EqualTo(PlayerPage.Upgrades));
-                Click("Choose upgrade 0"); yield return null;
-            }
+            Assert.That(game.Run.Session.PendingUpgrade, Is.False, "Production waves cannot offer free global upgrades.");
         }
         IEnumerator CompleteFive()
         { for (int i = 0; i < 5; i++) yield return CompleteWave(); }
         void KillObjective()
         {
             var session = typeof(RunController).GetField("session", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(game.Run);
-            typeof(GameSession).GetMethod("DamageObjective", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(session, new object[] { -1, 100000f });
+            typeof(GameSession).GetMethod("DamageObjective", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(session, new object[] { -1, 100000f, null });
             game.Run.AdvanceFrame(1f / 30, false, 1);
         }
 
@@ -82,7 +78,7 @@ namespace PaperDefense.Tests
             // The configured empty waves still publish through the production reward service.
             for (int i = 0; i < 8; i++) yield return CompleteWave();
             Assert.That(game.Page, Is.EqualTo(PlayerPage.Result));
-            Assert.That(session.Statistics.Upgrades.Count, Is.EqualTo(3));
+            Assert.That(session.Statistics.Upgrades.Count, Is.Zero);
             Assert.That(Text("Result gold reward").text, Does.Contain("94"));
             Assert.That(Text("Result XP reward").text, Does.Contain("120"));
             Assert.That(Text("Result reward status").text, Does.Contain("сохранена"));
@@ -119,8 +115,10 @@ namespace PaperDefense.Tests
             Assert.That(Text("Result lost supports").text, Does.EndWith("2"));
             Assert.That(Text("Result gold reward").isActiveAndEnabled, Is.True);
             Assert.That(Text("Result XP reward").isActiveAndEnabled, Is.True);
-            var rubble = root.GetComponentsInChildren<Image>().Single(image => image.name == "Defeat castle rubble illustration");
-            Assert.That(rubble.sprite, Is.Not.Null); Assert.That(rubble.sprite.name, Is.EqualTo("DefeatCastleRubble"));
+            var rubble = root.GetComponentsInChildren<NotebookArtGraphic>().Single(image => image.name == "Defeat castle rubble illustration");
+            Assert.That(rubble.isActiveAndEnabled, Is.True);
+            Assert.That(rubble.rectTransform.rect.size.x, Is.GreaterThan(0));
+            Assert.That(rubble.rectTransform.rect.size.y, Is.GreaterThan(0));
             for (int i = 0; i < 35; i++)
                 actual.Statistics.RecordLoss(new Cell(1, 1), i + 2, 0, StructureKind.Wall, MaterialTier.Pencil, 2);
             shell.Show(PlayerPage.Result);
@@ -204,24 +202,27 @@ namespace PaperDefense.Tests
         {
             game.OpenSettings(true); yield return null;
             string copy = string.Join(" ", root.GetComponentsInChildren<Text>().Select(t => t.text));
-            Assert.That(copy, Does.Contain("компонент").And.Contain("8").And.Contain("1–8").And.Contain("Q").And.Contain("C").And.Contain("E"));
-            Assert.That(copy, Does.Contain("Материал").And.Contain("Цвет").And.Contain("Снос"));
+            Assert.That(copy, Does.Contain("компонент").And.Contain("8").And.Contain("1–8").And.Contain("E"));
+            Assert.That(copy, Does.Contain("тактическая пауза").And.Contain("шесть").And.Contain("цвет"));
+            Assert.That(copy, Does.Not.Contain("Q —").And.Not.Contain("C —"));
             Assert.That(copy, Does.Not.Contain("четыре чертежа"));
             Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(Button("Close help").gameObject));
             Click("Close help"); Assert.That(game.Page, Is.EqualTo(PlayerPage.Home));
         }
 
         [TestCase(1024, 768)] [TestCase(1280, 720)] [TestCase(1920, 1080)]
-        public void PauseAndUpgradesKeepTheirActionsVisibleAndKeyboardFocusInsideTheSheet(int width, int height)
+        public void PauseActionsFitAndReturningKeepsTacticalPauseWithoutGlobalOffers(int width, int height)
         {
-            Assert.That(game.StartBattle(), Is.True); game.Pause(); shell.ApplyLayout(width, height); Canvas.ForceUpdateCanvases();
+            Assert.That(game.StartBattle(), Is.True); game.Run.TogglePause(); game.Pause(); shell.ApplyLayout(width, height); Canvas.ForceUpdateCanvases();
             foreach (string name in new[] { "Resume", "Pause settings", "Restart battle", "Leave battle" })
                 AssertInsideActivePage(Button(name).GetComponent<RectTransform>(), PlayerPage.Pause);
             Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(Button("Resume").gameObject));
-            game.Resume(); game.Run.NextWave(); game.Run.AdvanceFrame(1f / 30, false, 1);
-            game.Run.NextWave(); game.Run.AdvanceFrame(1f / 30, false, 1); game.Navigate(PlayerPage.Upgrades); Canvas.ForceUpdateCanvases();
-            for (int i = 0; i < 3; i++) AssertInsideActivePage(Button("Choose upgrade " + i).GetComponent<RectTransform>(), PlayerPage.Upgrades);
-            Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(Button("Choose upgrade 0").gameObject));
+            game.Resume(); Assert.That(game.Run.TacticalPaused, Is.True); Assert.That(game.CanBuild, Is.True);
+            game.Run.TogglePause();
+            game.Run.NextWave(); game.Run.AdvanceFrame(1f / 30, false, 1);
+            game.Run.NextWave(); game.Run.AdvanceFrame(1f / 30, false, 1); Canvas.ForceUpdateCanvases();
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Battle)); Assert.That(game.Run.Session.PendingUpgrade, Is.False);
+            Assert.That(root.GetComponentsInChildren<Button>().Any(b => b.name.StartsWith("Choose upgrade ")), Is.False);
         }
 
         void AssertInsideActivePage(RectTransform control, PlayerPage destination)

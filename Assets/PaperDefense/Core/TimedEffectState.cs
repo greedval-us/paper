@@ -49,9 +49,9 @@ namespace PaperDefense.Core
             return true;
         }
 
-        internal (StructureKind Weapon, string WeaponId) Advance(float delta, EnemyState enemy, EffectsRules rules, RunStatistics statistics, float blotReduction)
+        internal (StructureKind Weapon, string WeaponId, ColorEffectPayload ColorEffect) Advance(float delta, EnemyState enemy, EffectsRules rules, RunStatistics statistics, float blotReduction)
         {
-            var source = (Weapon, WeaponId);
+            var source = (Weapon, WeaponId, Active);
             if (color != InkColor.Red)
             {
                 foreach (Entry entry in entries) entry.Remaining = Math.Max(0, entry.Remaining - delta);
@@ -75,7 +75,7 @@ namespace PaperDefense.Core
                     float actual = Math.Min(enemy.Health, damage);
                     enemy.Health = Math.Max(0, enemy.Health - actual);
                     statistics?.RecordDamage(active.WeaponId, actual);
-                    if (actual > 0) source = (active.Weapon, active.WeaponId);
+                    if (actual > 0) source = (active.Weapon, active.WeaponId, active.Payload);
                 }
                 foreach (Entry entry in entries)
                     if (entry.TickRemaining <= Epsilon) entry.TickRemaining += entry.Payload.TickSeconds;

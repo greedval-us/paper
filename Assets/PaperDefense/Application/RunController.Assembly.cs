@@ -42,6 +42,7 @@ namespace PaperDefense.Application
         public bool CanStartAlbumRun(out string reason)
         {
             if (!Editing(out reason)) return false;
+            if(CampaignEnabled&&!IsMissionUnlocked(SelectedMission.Id)){reason="Миссия ещё не открыта.";return false;}
             try
             {
                 var balance = CreateWorkshopBalance(); balance.Content = balance.ResolveContent();
@@ -51,23 +52,44 @@ namespace PaperDefense.Application
             { LastConfigurationDiagnostic = error.ToString(); reason = UserText.Message("run.error.configuration"); return false; }
         }
 
-        bool StartAssemblyRun(out string reason)
+        bool StartAssemblyRun(out string reason, bool replaceCheckpoint = false)
+        {
+            if (continuationTransition) { reason = "Дождись завершения сохранения миссии."; return false; }
+            continuationTransition = true;
+            try { return StartAssemblyRunCore(out reason, replaceCheckpoint); }
+            finally { continuationTransition = false; }
+        }
+
+        bool StartAssemblyRunCore(out string reason, bool replaceCheckpoint)
         {
             if (!Editing(out reason)) return false;
+            if (HasMissionCheckpoint && !replaceCheckpoint)
+            { reason = "Есть сохранённая миссия. Продолжи её или подтверди начало новой попытки."; return false; }
+            if(CampaignEnabled&&!IsMissionUnlocked(SelectedMission.Id)){reason="Миссия ещё не открыта.";return false;}
             GameBalance balance;
             GameSession preparedSession;
+            var mission = CampaignEnabled ? SelectedMission : null;
+            bool replacing = HasMissionCheckpoint;
+            string fingerprint;
             try
             {
                 balance = CreateWorkshopBalance();
                 balance.Content = balance.ResolveContent();
-                preparedSession = new GameSession(balance, starterDefenses: false);
+                preparedSession = new GameSession(balance, CampaignEnabled?SelectedMission.Seed:1337, starterDefenses: false);
+                fingerprint = mission == null ? null : ContinuationFingerprint(balance, mission);
             }
             catch (ArgumentException error)
             { LastConfigurationDiagnostic = error.ToString(); reason = UserText.Message("run.error.configuration"); return false; }
             if (!PrepareAlbumLoadout(balance, out var snapshot, out var prepared, out var requireSlots, out reason)) return false;
+            if (replacing && !CommitCheckpointReplacement(out reason)) return false;
+            BindContinuationMission(preparedSession, mission, preparedSession.Balance.BaseHealth);
+            continuationFingerprint = fingerprint;
             runLoadout = Array.AsReadOnly(prepared); RunLoadout = snapshot; runRequiresSlots = requireSlots; InWorkshop = false;
-            Initialize(preparedSession);
-            reason = ""; WorkshopChanged?.Invoke(); return true;
+            Initialize(preparedSession, false, replacing);
+            reason = "";
+            if (replacing) NotifyContinuationWorkshopChanged();
+            else WorkshopChanged?.Invoke();
+            return true;
         }
 
         bool PrepareAlbumLoadout(GameBalance balance, out RunLoadoutSnapshot snapshot, out TowerBlueprint[] prepared,
@@ -82,6 +104,8 @@ namespace PaperDefense.Application
                     entries.Any(entry => entry != null && entry.Kind != AlbumEntryKind.Legacy);
                 foreach (var entry in entries.Where(e => e != null))
                 {
+                    if (!candidate.OwnsStructureRecipe(entry.Snapshot?.Recipe))
+                    { reason = UserText.Message("profile.structure.locked"); return false; }
                     if (entry.Kind == AlbumEntryKind.Legacy)
                     { if (!candidate.ValidateOwned(entry.LegacyBlueprint, out reason, balance)) return false; }
                     else foreach (var part in entry.Snapshot.Recipe.Parts)

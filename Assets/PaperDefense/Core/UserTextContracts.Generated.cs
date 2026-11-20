@@ -8,6 +8,34 @@ namespace PaperDefense.Core
         public static void Validate(UserTextResolver resolver)
         {
             if (resolver == null) throw new ArgumentNullException(nameof(resolver));
+            resolver.RequireContract("assembly.effect.spikes", 3, new[] { 0, 1 });
+            resolver.RequireFormatContract("assembly.effect.spikes", 0, "0.##");
+            resolver.RequireFormatContract("assembly.effect.spikes", 1, "0.##");
+            resolver.RequireContract("assembly.effect.beacon", 3, new[] { 0, 1 });
+            resolver.RequireFormatContract("assembly.effect.beacon", 0, "0.##");
+            resolver.RequireFormatContract("assembly.effect.beacon", 1, "0.##");
+            resolver.RequireContract("assembly.component.spikes_stats", 4, new[] { 0, 2, 3 });
+            resolver.RequireFormatContract("assembly.component.spikes_stats", 0, "0.##");
+            resolver.RequireFormatContract("assembly.component.spikes_stats", 2, "0.##");
+            resolver.RequireFormatContract("assembly.component.spikes_stats", 3, "0.##");
+            resolver.RequireContract("assembly.component.beacon_stats", 4, new[] { 0, 2, 3 });
+            resolver.RequireFormatContract("assembly.component.beacon_stats", 0, "0.##");
+            resolver.RequireFormatContract("assembly.component.beacon_stats", 2, "0.##");
+            resolver.RequireFormatContract("assembly.component.beacon_stats", 3, "0.##");
+            resolver.RequireContract("assembly.component.comparison_spikes", 8, new[] { 0, 1, 2, 3, 4, 5 });
+            resolver.RequireFormatContract("assembly.component.comparison_spikes", 0, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_spikes", 1, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_spikes", 2, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_spikes", 3, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_spikes", 4, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_spikes", 5, "0.##");
+            resolver.RequireContract("assembly.component.comparison_beacon", 8, new[] { 0, 1, 2, 3, 4, 5 });
+            resolver.RequireFormatContract("assembly.component.comparison_beacon", 0, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_beacon", 1, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_beacon", 2, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_beacon", 3, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_beacon", 4, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_beacon", 5, "0.##");
             resolver.RequireContract("assembly.trial.title", 0, Array.Empty<int>());
             resolver.RequireContract("assembly.trial.return", 0, Array.Empty<int>());
             resolver.RequireContract("assembly.trial.comparison", 0, Array.Empty<int>());
@@ -181,6 +209,7 @@ namespace PaperDefense.Core
             resolver.RequireContract("assembly.album.delete_title", 0, Array.Empty<int>());
             resolver.RequireContract("assembly.album.delete_message", 2, Array.Empty<int>());
             resolver.RequireContract("assembly.album.delete_unused", 1, Array.Empty<int>());
+            resolver.RequireContract("assembly.album.delete_saved_sets", 1, Array.Empty<int>());
             resolver.RequireContract("assembly.album.deleted", 0, Array.Empty<int>());
             resolver.RequireContract("assembly.album.variant_saved", 0, Array.Empty<int>());
             resolver.RequireContract("assembly.album.restored", 0, Array.Empty<int>());
@@ -248,6 +277,12 @@ namespace PaperDefense.Core
             resolver.RequireContract("profile.entry.missing", 0, Array.Empty<int>());
             resolver.RequireContract("profile.entry.unavailable", 0, Array.Empty<int>());
             resolver.RequireContract("profile.entry.full", 0, Array.Empty<int>());
+            resolver.RequireContract("profile.loadout.missing", 0, Array.Empty<int>());
+            resolver.RequireContract("profile.loadout.identity", 0, Array.Empty<int>());
+            resolver.RequireContract("profile.loadout.name", 0, Array.Empty<int>());
+            resolver.RequireContract("profile.loadout.duplicate_name", 0, Array.Empty<int>());
+            resolver.RequireContract("profile.loadout.full", 0, Array.Empty<int>());
+            resolver.RequireContract("profile.loadout.slots", 0, Array.Empty<int>());
             resolver.RequireContract("profile.entry.revision", 0, Array.Empty<int>());
             resolver.RequireContract("profile.entry.identity", 0, Array.Empty<int>());
             resolver.RequireContract("profile.entry.conflict", 0, Array.Empty<int>());
@@ -260,6 +295,10 @@ namespace PaperDefense.Core
             resolver.RequireContract("profile.part.locked", 0, Array.Empty<int>());
             resolver.RequireContract("profile.part.level", 0, Array.Empty<int>());
             resolver.RequireContract("profile.part.gold", 0, Array.Empty<int>());
+            resolver.RequireContract("profile.structure.gold", 0, Array.Empty<int>());
+            resolver.RequireContract("profile.structure.level", 0, Array.Empty<int>());
+            resolver.RequireContract("profile.structure.locked", 0, Array.Empty<int>());
+            resolver.RequireContract("profile.structure.unknown", 0, Array.Empty<int>());
             resolver.RequireContract("profile.write_failed", 0, Array.Empty<int>());
             resolver.RequireContract("assembly.workshop.title", 0, Array.Empty<int>());
             resolver.RequireContract("assembly.workshop.resources", 3, Array.Empty<int>());
@@ -1888,6 +1927,20 @@ namespace PaperDefense.Core
             resolver.RequireContract("workshop.unlock_button", 2, Array.Empty<int>());
             resolver.RequireContract("workshop.upgrade_slots", 2, Array.Empty<int>());
             resolver.RequireContract("workshop.weapon_pair", 2, Array.Empty<int>());
+            resolver.RequireContract("assembly.effect.prism", 5, new[] { 1, 2, 3, 4 });
+            resolver.RequireFormatContract("assembly.effect.prism", 1, "0.##");
+            resolver.RequireFormatContract("assembly.effect.prism", 2, "0.##");
+            resolver.RequireFormatContract("assembly.effect.prism", 3, "0.#");
+            resolver.RequireFormatContract("assembly.effect.prism", 4, "0.#");
+            resolver.RequireContract("assembly.component.comparison_prism", 10, new[] { 0, 1, 2, 3, 4, 5, 6, 7 });
+            resolver.RequireFormatContract("assembly.component.comparison_prism", 0, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_prism", 1, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_prism", 2, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_prism", 3, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_prism", 4, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_prism", 5, "0.##");
+            resolver.RequireFormatContract("assembly.component.comparison_prism", 6, "0.#");
+            resolver.RequireFormatContract("assembly.component.comparison_prism", 7, "0.#");
         }
     }
 }

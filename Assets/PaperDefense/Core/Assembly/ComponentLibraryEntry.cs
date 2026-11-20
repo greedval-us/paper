@@ -48,8 +48,10 @@ namespace PaperDefense.Core
             var parts = new List<PartRef>(foundation != null ? foundation.Parts : weapon.Parts);
             var categories = foundation != null
                 ? new[] { ComponentCategory.Frame, ComponentCategory.Hull, ComponentCategory.Armor, ComponentCategory.Feed, ComponentCategory.Turn }
-                : new[] { ComponentCategory.Mechanism, ComponentCategory.Head, ComponentCategory.Sight, ComponentCategory.Magazine, ComponentCategory.Trigger };
-            if (owned.Count != categories.Length) throw new ArgumentException("A component snapshot requires exactly its five selected definitions.");
+                : weapon.Mount.HasValue
+                    ? new[] { ComponentCategory.Mechanism, ComponentCategory.Head, ComponentCategory.Sight, ComponentCategory.Magazine, ComponentCategory.Trigger, ComponentCategory.Mount }
+                    : new[] { ComponentCategory.Mechanism, ComponentCategory.Head, ComponentCategory.Sight, ComponentCategory.Magazine, ComponentCategory.Trigger };
+            if (owned.Count != categories.Length) throw new ArgumentException("A component snapshot requires exactly its selected definitions.");
             var selected = new HashSet<(string, int)>();
             for (int i = 0; i < parts.Count; i++)
             {

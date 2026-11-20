@@ -23,7 +23,7 @@ namespace PaperDefense.Application
             if (entry == null) { Cancel(); return; }
             var support = entry.Support?.Kind;
             Begin(cell, entry.Kind == AlbumEntryKind.Structure &&
-                (support == AssemblyStructureFamily.Wall || support == AssemblyStructureFamily.Slow));
+                (support == AssemblyStructureFamily.Wall || support == AssemblyStructureFamily.Slow || support == AssemblyStructureFamily.Spikes));
         }
 
         public void Begin(Cell cell, bool continuous)

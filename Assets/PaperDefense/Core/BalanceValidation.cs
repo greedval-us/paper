@@ -44,7 +44,16 @@ namespace PaperDefense.Core
                 if(wave.BruteFraction>0&&!balance.EnemyDefinitions.Exists(d=>d.Kind==EnemyKind.Brute))throw new ArgumentException("Wave needs Brute definition.");
                 if(wave.BulwarkFraction>0&&!balance.EnemyDefinitions.Exists(d=>d.Kind==EnemyKind.Bulwark))throw new ArgumentException("Wave needs Bulwark definition.");
                 int effectiveSides=wave.Sides==0?1:wave.Sides;
-                if(map!=null)for(int side=1;side<=8;side<<=1)if((effectiveSides&side)!=0&&!map.HasEntrance(side))throw new ArgumentException("Wave has no configured entrance for side "+side);
+                if (map == null && wave.EntranceBands != 0) throw new ArgumentException("Wave gate selection requires a battlefield.");
+                if (map == null) continue;
+                for (int side = 1; side <= 8; side <<= 1)
+                {
+                    if ((effectiveSides & side) == 0) continue;
+                    bool hasGate = false;
+                    for (int gate = 0; gate < map.Entrances.Count && !hasGate; gate++)
+                        hasGate = map.IsWaveEntrance(gate, side, wave.EntranceBands);
+                    if (!hasGate) throw new ArgumentException("Wave has no configured entrance for side " + side);
+                }
             }
         }
 
@@ -97,6 +106,8 @@ namespace PaperDefense.Core
                 if (item == null || !Enum.IsDefined(typeof(EnemyKind), item.Kind) || !seen.Add(item.Kind))
                     throw new ArgumentException(UserText.Message("copy.a815a97fbc3ef9ea"), nameof(definitions));
                 string name = "EnemyDefinitions." + item.Kind + ".";
+                if (!Enum.IsDefined(typeof(EnemyAttackMode), item.Attack))
+                    throw new ArgumentOutOfRangeException(name + nameof(item.Attack));
                 Positive(item.MaxHealth, name + nameof(item.MaxHealth)); NonNegative(item.Speed, name + nameof(item.Speed));
                 NonNegative(item.Damage, name + nameof(item.Damage)); NonNegative(item.AttackInterval, name + nameof(item.AttackInterval));
                 NonNegative(item.StructureDamageMultiplier, name + nameof(item.StructureDamageMultiplier)); NonNegative(item.Reward, name + nameof(item.Reward));
@@ -115,10 +126,18 @@ namespace PaperDefense.Core
                 if (item == null) throw new ArgumentException(UserText.Message("copy.74b59870962157a2"), nameof(definitions));
                 if (item.InkGrant < -1) throw new ArgumentOutOfRangeException(nameof(item.InkGrant));
                 NonNegative(item.Count, nameof(item.Count)); NonNegative(item.SpawnInterval, nameof(item.SpawnInterval));
+                if (item.IsHorde)
+                {
+                    Positive(item.Horde.BodyScale, nameof(item.Horde.BodyScale));
+                    Positive(item.Horde.HealthScale, nameof(item.Horde.HealthScale));
+                    Positive(item.Horde.ObjectiveDamageScale, nameof(item.Horde.ObjectiveDamageScale));
+                    NonNegative(item.Horde.KillInkBudget, nameof(item.Horde.KillInkBudget));
+                }
                 Fraction(item.RunnerFraction, nameof(item.RunnerFraction)); Fraction(item.GnawerFraction, nameof(item.GnawerFraction));
                 Fraction(item.SpitterFraction, nameof(item.SpitterFraction)); Fraction(item.OutlinedFraction, nameof(item.OutlinedFraction));
                 Fraction(item.HatchedFraction, nameof(item.HatchedFraction));
                 Fraction(item.BruteFraction,nameof(item.BruteFraction));Fraction(item.BulwarkFraction,nameof(item.BulwarkFraction));
+                if ((item.EntranceBands & ~3) != 0) throw new ArgumentOutOfRangeException(nameof(item.EntranceBands));
                 if ((item.Sides & ~15) != 0) throw new ArgumentOutOfRangeException(nameof(item.Sides));
                 // Overlapping fractions, zero sides and zero intervals keep the existing simulation clamps/priority.
             }

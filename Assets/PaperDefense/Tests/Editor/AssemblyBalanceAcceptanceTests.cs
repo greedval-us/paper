@@ -18,7 +18,7 @@ namespace PaperDefense.Tests
             var design = JObject.Parse(File.ReadAllText(AlbumBalanceImport.SourcePath));
             var runtime = BalanceWorkbookExport.CreatePlayerAssembly();
             Assert.That(BalanceWorkbookExport.NumericDifferences(design,runtime), Is.Empty);
-            Assert.That(runtime["definitions"].Count(), Is.EqualTo(54));
+            Assert.That(runtime["definitions"].Count(), Is.EqualTo(91));
             Assert.That(runtime["starters"].Count(), Is.EqualTo(8));
             Assert.That((string)runtime["source"]["balance"], Is.EqualTo(BalanceWorkbookExport.PlayerPath));
             Assert.That((string)runtime["source"]["rules"], Does.EndWith("PlayerRules.asset"));
@@ -83,7 +83,7 @@ namespace PaperDefense.Tests
             }
         }
 
-        [Test] public void Campaign_RepeatsActualEightWavesAndAccountsForPaidSupport()
+        [Test] public void HistoricalEightWaveFixtureRepeatsAndAccountsForPaidSupport()
         {
             AssemblyBalanceScenario.LoadRuntime(out var balance,out var catalog);
             var first = AssemblyBalanceScenario.RunCampaign(balance,catalog,1337,2,true);
@@ -96,7 +96,7 @@ namespace PaperDefense.Tests
             Assert.That(first.SpawnedByKind.Sum(), Is.EqualTo(first.SpawnedEnemies));
             Assert.That(first.SpawnedByDrawingTier.Sum(), Is.EqualTo(first.SpawnedEnemies));
             Assert.That(first.BaseDamageTaken, Is.EqualTo(first.StartingBaseHealth-first.BaseHealth).Within(.001f));
-            Assert.That(first.Income, Is.LessThanOrEqualTo(2*8*12));
+            Assert.That(first.Income, Is.LessThanOrEqualTo(2*8*18));
             Assert.That(first.NetResource, Is.EqualTo(first.Income-first.Placements.Where(p => p.EntryId == "album.generator").Sum(p => p.Cost)));
             Assert.That(first.LeaksApplicable, Is.False);
         }
@@ -121,6 +121,72 @@ namespace PaperDefense.Tests
             Assert.That(BalanceWorkbookExport.NumericDifferences(design,runtime), Does.Contain("album.guard.dps"));
             runtime = BalanceWorkbookExport.CreatePlayerAssembly(); runtime["levels"][1]["xp"] = 999;
             Assert.That(BalanceWorkbookExport.NumericDifferences(design,runtime), Does.Contain("levels.1.xp"));
+        }
+
+        [TestCase(AssemblyTrialScenario.Crowd, "head.wide")]
+        [TestCase(AssemblyTrialScenario.Armored, "magazine.mortar.pair")]
+        public void MortarModulesStopMoreOfTheirIntendedTargetsOnTheSameBudget(AssemblyTrialScenario lane, string upgrade)
+        {
+            AssemblyBalanceScenario.LoadRuntime(out var rules, out var catalog);
+            var starter = catalog.Starters.Single(entry => entry.Id == "album.mortar").Snapshot.Recipe.Tower;
+            var mount = starter.Mounts.Single();
+            var frame = starter.Foundation;
+            var heavy = new FoundationRecipe(new PartRef("frame.heavy", 1), frame.Hull, frame.Armor, frame.Feed, frame.Turn);
+            var weapon = mount.Weapon;
+
+            AssemblyTrialReport Trial(PartRef head, PartRef magazine)
+            {
+                var candidate = new WeaponRecipe(weapon.Mechanism, head, weapon.Sight, magazine, weapon.Trigger, weapon.Mount);
+                var recipe = new AssemblyRecipe(new TowerRecipe(heavy, new[] { new WeaponMountRecipe(mount.SlotIndex, candidate) }));
+                var resolved = AssemblyResolver.Resolve(recipe, catalog, rules, MaterialTier.Pencil, AssemblyFitResources.Load());
+                Assert.That(resolved.Valid, Is.True, upgrade);
+                var entry = new AlbumEntry("trial.mortar", "Мортира", 1, resolved.Value.Snapshot);
+                return AssemblyTrialRunner.Run(entry, rules, lane, budget: 400, seed: 1337);
+            }
+            var stock = Trial(weapon.Head, weapon.Magazine);
+            var part = new PartRef(upgrade, 1);
+            var modified = lane == AssemblyTrialScenario.Crowd ? Trial(part, weapon.Magazine) : Trial(weapon.Head, part);
+            Assert.That(modified.Copies, Is.EqualTo(stock.Copies).And.EqualTo(3));
+            Assert.That(modified.Cost, Is.LessThanOrEqualTo(400));
+            Assert.That(modified.Leaks, Is.LessThan(stock.Leaks));
+            Assert.That(modified.Damage, Is.GreaterThan(stock.Damage));
+        }
+
+        [TestCase(AssemblyTrialScenario.Fast)]
+        [TestCase(AssemblyTrialScenario.Armored)]
+        public void FasterAcquisitionAndArmorRemovalPayOffAgainstDifferentHordes(AssemblyTrialScenario lane)
+        {
+            AssemblyBalanceScenario.LoadRuntime(out var rules, out var catalog);
+            // Match body counts while preserving each lane's speed, spacing, health and drawing tier.
+            foreach (var fixture in rules.Trials.Scenarios)
+                if (fixture.Scenario != TrialScenario.Blots) fixture.Count = 160;
+            rules.Trials.MaximumTicks = 3600;
+            var guard = catalog.Starters.Single(entry => entry.Id == "album.guard");
+            var tower = guard.Snapshot.Recipe.Tower;
+            var mount = tower.Mounts.Single();
+            var weapon = mount.Weapon;
+            var aiming = new WeaponRecipe(weapon.Mechanism, weapon.Head, new PartRef("sight.snap", 1),
+                weapon.Magazine, weapon.Trigger, weapon.Mount);
+            var recipe = new AssemblyRecipe(new TowerRecipe(tower.Foundation, new[] { new WeaponMountRecipe(mount.SlotIndex, aiming) }));
+            var resolved = AssemblyResolver.Resolve(recipe, catalog, rules, MaterialTier.Pencil, AssemblyFitResources.Load());
+            Assert.That(resolved.Valid, Is.True);
+            var quickGuard = new AlbumEntry("test.snap", guard.Name, 1, resolved.Value.Snapshot);
+            var green = new TrialModernizationConfiguration(new ModernizationRanks(color: InkColor.Green, colorRank: 1));
+            var stock = AssemblyTrialRunner.Run(guard, rules, lane, budget: 240, seed: 1337);
+            var marked = AssemblyTrialRunner.Run(guard, rules, lane, green, budget: 240, seed: 1337);
+            var quick = AssemblyTrialRunner.Run(quickGuard, rules, lane, budget: 240, seed: 1337);
+            foreach (var report in new[] { stock, marked, quick })
+                Assert.That(report.UnresolvedEnemies, Is.Zero);
+            if (lane == AssemblyTrialScenario.Fast)
+            {
+                Assert.That(quick.Leaks, Is.LessThan(stock.Leaks));
+                Assert.That(marked.Leaks, Is.EqualTo(stock.Leaks));
+            }
+            else
+            {
+                Assert.That(marked.Leaks, Is.LessThan(stock.Leaks));
+                Assert.That(marked.Leaks, Is.LessThan(quick.Leaks));
+            }
         }
 
         [Test] public void Dominance_ConsidersCleaningUtilityAcrossAllComparableScenarios()

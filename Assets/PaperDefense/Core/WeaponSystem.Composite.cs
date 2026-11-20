@@ -16,7 +16,7 @@ namespace PaperDefense.Core
             var input = new WeaponDefinitionInput
             {
                 Id = LegacyContentIds.Weapon(kind), Name = weapon.SourceId, LegacyKind = kind,
-                Attack = weapon.Attack, MinimumRange = weapon.MinimumRange,
+                Attack = weapon.Attack, MinimumRange = weapon.MinimumRange, FiringArcDegrees = weapon.FiringArcDegrees,
                 Stats = new StructureDefinition
                 {
                     Kind = kind, MaxHealth = 1, Range = weapon.Range, Damage = weapon.Damage,
@@ -63,10 +63,11 @@ namespace PaperDefense.Core
         bool CompositeTarget(StructureState structure, Point2 origin, ResolvedWeapon weapon, out EnemyState target, out Cell blot)
         {
             target = null; blot = default;
+            var sector = new FiringSector(structure, weapon.FiringArcDegrees);
             if (weapon.Attack == AttackKind.Cleanup)
-                return TryFindBlot(origin, weapon.MinimumRange, weapon.Range, out blot);
+                return TryFindBlot(origin, weapon.MinimumRange, weapon.Range, sector, out blot);
             spatial.Query(origin, weapon.Range, targets);
-            FilterRange(origin, weapon.MinimumRange, weapon.Range, targets);
+            FilterRange(origin, weapon.MinimumRange, weapon.Range, sector, targets);
             target = PickTarget(structure, origin, targets);
             return target != null;
         }
@@ -78,18 +79,18 @@ namespace PaperDefense.Core
         {
             if (delta <= 0) return;
             compositeMounts.Clear();
+            readySpikeTraps.Clear();
             bool found = isolatedMount < 0;
             foreach (var structure in structures)
             {
-                if (structure.ResolvedEntry == null || !CanOperate(structure)) continue;
-                ColorEffectPayload payload = mechanics.ColorCartridges ? ColorPayload(structure.Color) : default;
-                TowerColorBudget budget = null;
-                if (balance.Effects.LimitTowerColor && payload.Color != InkColor.None)
+                if (structure.ResolvedEntry?.Support != null)
                 {
-                    if (structure.ColorBudget == null)
-                        structure.ColorBudget = new TowerColorBudget(balance.Effects.ColorWindowSeconds, balance.Effects.ColorTargetsPerWindow);
-                    budget = structure.ColorBudget;
+                    PrepareFieldDefense(structure, damageMultiplier, statistics);
+                    continue;
                 }
+                if (structure.ResolvedEntry == null || !CanOperate(structure)) continue;
+                ColorEffectPayload payload = mechanics.ColorCartridges ? ColorPayload(structure) : default;
+                var budget = ColorBudget(structure,payload);
                 foreach (var weapon in structure.ResolvedEntry.Weapons)
                 {
                     if (isolatedMount >= 0 && weapon.SlotIndex != isolatedMount) continue;
@@ -103,6 +104,8 @@ namespace PaperDefense.Core
                 }
             }
             if (!found) throw new ArgumentOutOfRangeException(nameof(isolatedMount));
+            // Every beacon has now marked its targets, regardless of build order.
+            foreach (var trap in readySpikeTraps) FireSpikeTrap(trap, damageMultiplier, statistics);
 
             double end = clockSeconds, start = end - delta, elapsed = 0;
             float remaining = delta;
@@ -110,16 +113,8 @@ namespace PaperDefense.Core
             {
                 RefreshCompositeTargets();
                 // Impacts at this instant precede target selection for a ready action.
-                int impact = -1;
-                for (int i = 0; i < projectiles.Count; i++)
-                    if (projectiles[i].CompositeCycle && projectiles[i].Remaining <= .000001f) { impact = i; break; }
-                if (impact >= 0)
-                {
-                    clockSeconds = start + elapsed;
-                    ImpactProjectile(projectiles[impact], tick, statistics, events);
-                    projectiles.RemoveAt(impact);
+                if (attacks.ResolveNextCompositeImpact(tick, start + elapsed, statistics, events))
                     continue;
-                }
                 int ready = -1;
                 for (int i = 0; i < compositeMounts.Count; i++)
                 {
@@ -143,8 +138,7 @@ namespace PaperDefense.Core
                     if (mount.State.AcquisitionRemaining > 0) step = Math.Min(step, mount.State.AcquisitionRemaining);
                     step = Math.Min(step, CompositeBoundary(mount.State, mount.Weapon, CompositeFeed(mount, fireMultiplier)));
                 }
-                foreach (var projectile in projectiles)
-                    if (projectile.CompositeCycle) step = Math.Min(step, projectile.Remaining);
+                step = attacks.NextCompositeImpact(step);
                 foreach (var mount in compositeMounts)
                 {
                     var state = mount.State;
@@ -154,8 +148,7 @@ namespace PaperDefense.Core
                     if (!mount.HasTarget) statistics.RecordIdle(mount.Definition.Id, step);
                     SyncCompositeReadiness(state, mount.Weapon, feed);
                 }
-                foreach (var projectile in projectiles)
-                    if (projectile.CompositeCycle) projectile.Remaining = Math.Max(0, projectile.Remaining - step);
+                attacks.AdvanceCompositeProjectiles(step);
                 remaining = Math.Max(0, remaining - step); elapsed += step;
             }
             foreach (var mount in compositeMounts)
@@ -173,7 +166,8 @@ namespace PaperDefense.Core
                 int id = !mount.HasTarget ? 0 : mount.Target != null ? mount.Target.Id : -(mount.Blot.Y * balance.Width + mount.Blot.X + 1);
                 if (id != state.TargetId) state.AcquisitionRemaining = id == 0 ? 0 : mount.Weapon.AcquisitionSeconds;
                 state.TargetId = id;
-                if (mount.HasTarget) state.Aim = mount.Target != null ? mount.Target.Position : new Point2(mount.Blot.X + .5f, mount.Blot.Y + .5f);
+                state.Aim = !mount.HasTarget ? mount.Structure.RestAim :
+                    mount.Target != null ? mount.Target.Position : new Point2(mount.Blot.X + .5f, mount.Blot.Y + .5f);
                 if (!activeCompositeMounts.ContainsKey(mount.Structure)) activeCompositeMounts.Add(mount.Structure, 0);
                 if (state.Cycle.RemainingWork > 0 || mount.HasTarget && state.AcquisitionRemaining <= 0)
                     activeCompositeMounts[mount.Structure]++;
@@ -197,42 +191,22 @@ namespace PaperDefense.Core
         {
             var structure = mount.Structure; var weapon = mount.Weapon; var state = mount.State;
             // Refreshing all mounts overwrote the shared query buffer. The chosen mount must
-            // restore its candidates before the shared piercer/fan geometry consumes them.
+            // restore its candidates before the attack resolver consumes them.
             CompositeTarget(structure, mount.Origin, weapon, out var target, out var blot);
             Point2 aim = state.Aim;
             int cleared = weapon.Attack == AttackKind.Cleanup ? blotContext.Clear(blot, weapon.Radius) : 0;
             var cycle = WeaponCycleRules.Step(state.Cycle, weapon, float.Epsilon, true, feed);
             state.Cycle = cycle.StatesAfterShots[0];
             if (weapon.Attack == AttackKind.Cleanup && cleared <= 0) return;
-            BeginVisualAction(structure, weapon.SlotIndex, mount.Origin, aim, mount.Definition, tick, events);
-            statistics.RecordLaunch(mount.Definition.Id);
             float damage = TowerCatalog.FiniteStat(Math.Max(0, weapon.Damage * damageMultiplier), "damage");
-            switch (weapon.Attack)
-            {
-                case AttackKind.Cleanup:
-                    statistics.RecordBlotsCleared(cleared);
-                    PublishShot(mount.Origin, aim, mount.Definition, weapon.Radius, structure.Id, shots, tick, events);
-                    break;
-                case AttackKind.Line:
-                    FirePiercer(mount.Origin, aim, weapon.Range, weapon.Radius, weapon.TargetLimit, damage,
-                        mount.Definition, mount.Payload, mount.ColorBudget, statistics);
-                    PublishShot(mount.Origin, RayEnd(mount.Origin, aim, weapon.Range), mount.Definition, weapon.Radius, structure.Id, shots, tick, events);
-                    break;
-                case AttackKind.AreaProjectile:
-                    LaunchMortar(mount.Origin, aim, mount.Definition, damage, mount.Payload, mount.ColorBudget,
-                        MortarFootprint.Circle, tick, events, compositeCycle: true);
-                    break;
-                case AttackKind.Cone:
-                    FireFan(structure, mount.Origin, aim, mount.Definition, damage, mount.Payload, mount.ColorBudget, shots, tick, statistics, events);
-                    break;
-                case AttackKind.Ricochet:
-                    FireRicochet(structure, mount.Origin, target, mount.Definition, damage, mount.Payload, mount.ColorBudget, shots, tick, statistics, events);
-                    break;
-                default:
-                    ApplyDamage(target, damage, mount.Definition, mount.Payload, mount.ColorBudget, statistics);
-                    PublishShot(mount.Origin, aim, mount.Definition, weapon.Radius, structure.Id, shots, tick, events);
-                    break;
-            }
+            var shot = new WeaponAttack {
+                Source = structure, Mount = weapon.SlotIndex, Weapon = mount.Definition, Origin = mount.Origin,
+                Aim = aim, Target = target, Range = weapon.Range, Damage = damage,
+                Payload = weapon.Attack == AttackKind.Cleanup ? default : mount.Payload,
+                ColorBudget = mount.ColorBudget, ClearedBlots = cleared,
+                PierceLimit = weapon.TargetLimit, CompositeTimeline = true
+            };
+            attacks.Fire(shot, shots, tick, clockSeconds, statistics, events);
         }
 
         void ReloadComposite(StructureState structure, float fireMultiplier, float delta)

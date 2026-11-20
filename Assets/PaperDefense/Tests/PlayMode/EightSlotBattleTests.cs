@@ -121,6 +121,13 @@ namespace PaperDefense.Tests
                 Assert.That(drawing.PreviewCost, Is.EqualTo(quote.Cost), "Preview slot " + slot);
                 Assert.That(drawing.PreviewReason, Is.Empty);
                 yield return Pointer(cell, true); yield return Pointer(cell, false);
+                if (Run.RunLoadout.ResolveSlot(slot, MaterialTier.Pencil).Weapons.Any(w => w.Attack != AttackKind.Radial))
+                {
+                    Assert.That(drawing.PlacementCell, Is.EqualTo(cell));
+                    Assert.That(Run.Session.Ink, Is.EqualTo(ink));
+                    var direction = new Cell(cell.X + 1, cell.Y + 1);
+                    yield return Pointer(direction, true); yield return Pointer(direction, false);
+                }
                 var built = Run.Session.StructureAt(cell);
                 Assert.That(built.HasValue, Is.True, "Slot " + slot + ": " + drawing.Message);
                 Assert.That(built.Value.ResolvedEntry, Is.SameAs(Run.RunLoadout.ResolveSlot(slot, MaterialTier.Pencil)));
@@ -143,17 +150,17 @@ namespace PaperDefense.Tests
             Assert.That(Run.Session.StructureAt(cell), Is.Null);
         }
 
-        [UnityTest] public IEnumerator MaterialColorAndEraseHaveSeparateActionsAndDigitsKeepTheirChoices()
+        [UnityTest] public IEnumerator ModernizationRejectsOldMaterialAndPaintShortcutsWhileKeepingSelectionAndErase()
         {
             drawing.SelectSlot(0); yield return Keys(Key.Q);
-            Assert.That(drawing.Tier, Is.EqualTo(MaterialTier.Ink));
+            Assert.That(drawing.Tier, Is.EqualTo(MaterialTier.Pencil));
             drawing.SelectColor(InkColor.Red);
-            Assert.That(drawing.Color, Is.EqualTo(InkColor.Red));
+            Assert.That(drawing.Color, Is.EqualTo(InkColor.None));
             yield return Keys(Key.E); Assert.That(drawing.Mode, Is.EqualTo(DrawingMode.Erase));
             yield return Keys(Key.Digit3);
             Assert.That(drawing.BlueprintSlot, Is.EqualTo(2)); Assert.That(drawing.Mode, Is.EqualTo(DrawingMode.Build));
-            Assert.That(drawing.Tier, Is.EqualTo(MaterialTier.Ink)); Assert.That(drawing.Color, Is.EqualTo(InkColor.Red));
-            yield return Keys(Key.C); Assert.That(drawing.Mode, Is.EqualTo(DrawingMode.Paint));
+            Assert.That(drawing.Tier, Is.EqualTo(MaterialTier.Pencil)); Assert.That(drawing.Color, Is.EqualTo(InkColor.None));
+            yield return Keys(Key.C, Key.U); Assert.That(drawing.Mode, Is.EqualTo(DrawingMode.Build));
             Assert.That(drawing.BlueprintSlot, Is.EqualTo(2));
         }
 
@@ -244,16 +251,19 @@ namespace PaperDefense.Tests
 
         [UnityTest] public IEnumerator FrozenMaterialCostAndRangeSurviveAuthoringChangesUntilTheGestureIsPaid()
         {
-            var frozen = Run.RunLoadout; var expected = frozen.ResolveSlot(0, MaterialTier.Ink);
-            fixture.Preset.rules.MaterialDefinitions[(int)MaterialTier.Ink].CostMultiplier = 100;
+            var frozen = Run.RunLoadout; var expected = frozen.ResolveSlot(0, MaterialTier.Pencil);
+            fixture.Preset.rules.MaterialDefinitions[(int)MaterialTier.Pencil].CostMultiplier = 100;
             fixture.AssemblyAsset.catalog.Definitions.Single(part => part.Id == "core.gun").Modifiers
                 .Single(modifier => modifier.Stat == AssemblyStat.Range).Value = 200;
-            drawing.SelectSlot(0); drawing.SelectTier(MaterialTier.Ink); var cell = ClearCell(0, MaterialTier.Ink);
+            drawing.SelectSlot(0); var cell = ClearCell(0);
             int ink = Run.Session.Ink; yield return Pointer(cell, false);
             Assert.That(drawing.PreviewCost, Is.EqualTo(expected.Cost));
             var range = (float)typeof(NotebookWorldView).GetField("previewRange", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(view);
             Assert.That(range, Is.EqualTo(expected.Weapons.Max(weapon => weapon.Range)));
             yield return Pointer(cell, true); yield return Pointer(cell, false);
+            Assert.That(Run.Session.Ink, Is.EqualTo(ink));
+            var direction = new Cell(cell.X + 1, cell.Y);
+            yield return Pointer(direction, true); yield return Pointer(direction, false);
             Assert.That(Run.RunLoadout, Is.SameAs(frozen));
             Assert.That(Run.Session.StructureAt(cell).Value.ResolvedEntry.Cost, Is.EqualTo(expected.Cost));
             Assert.That(ink - Run.Session.Ink, Is.EqualTo(expected.Cost));

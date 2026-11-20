@@ -79,7 +79,7 @@ namespace PaperDefense.Tests
             Assert.That(restarted.RequiresMigration, Is.False);
             Assert.That(restarted.Source, Is.EqualTo(ProfileLoadSource.Primary));
             Assert.That(JsonUtility.ToJson(restarted.Profile.ToData()), Is.EqualTo(expected));
-            Assert.That(restarted.Profile.ToData().Version, Is.EqualTo(8));
+            Assert.That(restarted.Profile.ToData().Version, Is.EqualTo(WorkshopProfile.CurrentVersion));
         }
 
         [TestCase(false)] [TestCase(true)]
@@ -129,7 +129,7 @@ namespace PaperDefense.Tests
             var restarted = Store().Load();
             Assert.That(restarted.CanWrite, Is.True, restarted.Message);
             Assert.That(restarted.Profile.TotalXp, Is.EqualTo(390));
-            Assert.That(restarted.Profile.Library.Count, Is.EqualTo(1));
+            Assert.That(restarted.Profile.Library.Count, Is.EqualTo(5));
             Assert.That(JsonUtility.ToJson(restarted.Profile.ToData()), Is.EqualTo(expected));
         }
 

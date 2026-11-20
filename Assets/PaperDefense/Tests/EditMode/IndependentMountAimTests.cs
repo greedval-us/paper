@@ -28,6 +28,7 @@ namespace PaperDefense.Tests
         {
             var balance = GameBalance.CreateDefault(); balance.Structure(StructureKind.Gun).Damage = 100;
             var tower = Tower();
+            tower.InitializePlacementFacing(45);
             var first = Enemy(1, 11.5f, 10.5f, 1); var second = Enemy(2, 10.5f, 15.5f, 100);
             Fire(balance, tower, new List<EnemyState> { first, second });
             Assert.That(first.Health, Is.Zero);
@@ -51,13 +52,13 @@ namespace PaperDefense.Tests
             Assert.That(tower.Cooldown, Is.EqualTo(1)); Assert.That(tower.SecondaryCooldown, Is.EqualTo(2));
         }
 
-        [Test] public void MissingTargetClearsOnlyItsTrackingIdAndKeepsLastOrientation()
+        [Test] public void MissingTargetsReleaseBothLocksAndReturnToTheChosenFacing()
         {
             var tower = Tower(); tower.PrimaryAim = new Point2(7, 8); tower.SecondaryAim = new Point2(9, 11);
             tower.PrimaryTargetId = 42; tower.SecondaryTargetId = 43;
             Fire(GameBalance.CreateDefault(), tower, new List<EnemyState>());
             Assert.That(tower.PrimaryTargetId, Is.Zero); Assert.That(tower.SecondaryTargetId, Is.Zero);
-            Assert.That(tower.PrimaryAim.X, Is.EqualTo(7)); Assert.That(tower.SecondaryAim.X, Is.EqualTo(9));
+            Assert.That(tower.PrimaryAim, Is.EqualTo(tower.RestAim)); Assert.That(tower.SecondaryAim, Is.EqualTo(tower.RestAim));
         }
 
         [Test] public void ReadSnapshotAndTrialRecordingPreserveBothDirections()

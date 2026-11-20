@@ -10,7 +10,7 @@ namespace PaperDefense.Tests
     {
         static ResolvedWeapon Weapon(int rounds = 6, float interval = .42f, float reload = .42f, float floor = .05f)
             => new ResolvedWeapon(0, "core.gun", AssemblyWeaponFamily.Gun, AttackKind.Single, 12, 8, 0,
-                interval, rounds, reload, 0, 1, 0, 0, 0, 0, 1, 0, floor);
+                interval, rounds, reload, 0, 1, 0, 0, 0, 0, 1, 0, floor, 160);
 
         static ResolvedWeapon CatalogWeapon(string magazine = "standard", string trigger = "standard")
             => AssemblyResolverFixture.Resolve(AssemblyResolverFixture.Tower(
@@ -67,12 +67,12 @@ namespace PaperDefense.Tests
             Assert.That(result.ShotOffsets[3], Is.EqualTo(1.26f).Within(.0001f));
         }
 
-        [Test] public void DrumMagazine_RepeatsAt5187Seconds()
+        [Test] public void DrumMagazine_FiresTwelveRoundsBeforeItsLongerReload()
         {
-            var result = WeaponCycleRules.Step(new WeaponCycleState(), CatalogWeapon(magazine: "drum"), 5.187f, true, 1);
+            var result = WeaponCycleRules.Step(new WeaponCycleState(), CatalogWeapon(magazine: "drum"), 4.1244f, true, 1);
             Assert.That(result.ShotOffsets.Count, Is.EqualTo(13));
-            Assert.That(result.ShotOffsets[1], Is.EqualTo(.357f).Within(.0001f));
-            Assert.That(result.ShotOffsets[12], Is.EqualTo(5.187f).Within(.0001f));
+            Assert.That(result.ShotOffsets[1], Is.EqualTo(.3024f).Within(.0001f));
+            Assert.That(result.ShotOffsets[12], Is.EqualTo(4.1244f).Within(.0001f));
         }
 
         [Test] public void SingleRoundMagazineWaitsOnlyForReload()
@@ -187,7 +187,7 @@ namespace PaperDefense.Tests
 
         [TestCase("standard", 2.52f, 252)]
         [TestCase("burst", 1.26f, 126)]
-        [TestCase("drum", 5.187f, 5187)]
+        [TestCase("drum", 4.1244f, 4124)]
         public void CoarseAndFineStepsProduceTheSameShotsAndFinalState(string kind, float duration, int steps)
         {
             var weapon = kind == "burst" ? CatalogWeapon(trigger: "burst") : kind == "drum" ? CatalogWeapon(magazine: "drum") : CatalogWeapon();

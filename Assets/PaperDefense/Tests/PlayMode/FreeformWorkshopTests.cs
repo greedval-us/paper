@@ -7,7 +7,7 @@ namespace PaperDefense.Tests
 {
     public sealed class FreeformWorkshopTests
     {
-        static TowerBlueprint Drawing()
+        internal static TowerBlueprint Drawing()
         {
             var body=new DrawingStroke(new[]{new DrawingPoint(-.4f,-.35f),new DrawingPoint(.4f,-.35f),new DrawingPoint(.4f,.35f),new DrawingPoint(-.4f,.35f),new DrawingPoint(-.4f,-.35f)});
             var barrel=new DrawingStroke(new[]{new DrawingPoint(-.1f,0),new DrawingPoint(.1f,0),new DrawingPoint(.1f,.8f),new DrawingPoint(-.1f,.8f),new DrawingPoint(-.1f,0)});

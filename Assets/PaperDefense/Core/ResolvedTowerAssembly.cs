@@ -76,19 +76,31 @@ namespace PaperDefense.Core
         {
             var weapons=new List<ResolvedWeapon>();float feed=TowerCatalog.FeedMultiplier(Blueprint,balance);
             foreach(var mount in Blueprint.WeaponMounts)
-            {
-                var w=Weapons[mount.SlotIndex];var stats=w.Stats;
-                float interval=TowerCatalog.ActionInterval(this,w,mount.SlotIndex,balance,feed);
-                weapons.Add(new ResolvedWeapon(mount.SlotIndex,w.Id,AssemblyWeaponFamily.None,w.Attack,
-                    TowerCatalog.WeaponDamage(this,w,balance,material,mount.SlotIndex),TowerCatalog.WeaponRange(this,w,mount.SlotIndex),w.MinimumRange,
-                    interval,1,interval,TowerCatalog.AcquisitionSeconds(this,balance,mount.SlotIndex),
-                    w.Attack==AttackKind.Line?stats.MaxPierce:stats.MaxTargets,stats.Radius,stats.FlightSeconds,stats.JumpRange,stats.ConeAngleDegrees,
-                    stats.SlowSpeedMultiplier,stats.SlowDuration,balance.Combat.MinimumActionInterval,true));
-            }
+                weapons.Add(CaptureWeapon(this,Weapons[mount.SlotIndex],mount.SlotIndex,balance,material,feed));
             return new ResolvedEntry(AlbumEntryKind.Legacy,material,null,TowerCatalog.Cost(Blueprint,balance,material),
                 TowerCatalog.Health(this,balance,material),TowerCatalog.Load(Blueprint,balance),TowerCatalog.Capacity(Blueprint,balance),
                 TowerCatalog.BuildSeconds(this,balance,material),DamageRules.EffectiveDefense(TowerCatalog.Defense(Blueprint,balance),balance.Effects.MaximumDefense),
                 0,0,1,balance.Material(material).RefundFraction,weapons);
+        }
+
+        internal static ResolvedEntry CaptureDirectTower(WeaponDefinition weapon,StructureDefinition structure,GameBalance balance,MaterialTier tier)
+        {
+            var material=balance.Material(tier);
+            return new ResolvedEntry(AlbumEntryKind.Legacy,tier,null,TowerCatalog.ToolCost(balance,structure.Kind,tier),
+                Math.Max(1,structure.MaxHealth*material.HealthMultiplier),0,0,Math.Max(0,structure.BuildSeconds*material.BuildTimeMultiplier),
+                0,0,0,1,material.RefundFraction,new[]{CaptureWeapon(null,weapon,0,balance,tier,1)});
+        }
+
+        static ResolvedWeapon CaptureWeapon(ResolvedTowerAssembly assembly,WeaponDefinition weapon,int slot,
+            GameBalance balance,MaterialTier material,float feed)
+        {
+            var stats=weapon.Stats;
+            float interval=TowerCatalog.ActionInterval(assembly,weapon,slot,balance,feed);
+            return new ResolvedWeapon(slot,weapon.Id,AssemblyWeaponFamily.None,weapon.Attack,
+                TowerCatalog.WeaponDamage(assembly,weapon,balance,material,slot),TowerCatalog.WeaponRange(assembly,weapon,slot),weapon.MinimumRange,
+                interval,1,interval,assembly==null?0:TowerCatalog.AcquisitionSeconds(assembly,balance,slot),
+                weapon.Attack==AttackKind.Line?stats.MaxPierce:stats.MaxTargets,stats.Radius,stats.FlightSeconds,stats.JumpRange,stats.ConeAngleDegrees,
+                stats.SlowSpeedMultiplier,stats.SlowDuration,balance.Combat.MinimumActionInterval,weapon.FiringArcDegrees,true);
         }
     }
 }

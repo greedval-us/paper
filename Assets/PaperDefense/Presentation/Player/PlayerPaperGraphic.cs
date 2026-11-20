@@ -82,15 +82,21 @@ namespace PaperDefense.Presentation
     {
         public float Radius = 4;
         public bool NotebookStyle;
+        public bool FieldStyle;
+        public bool FieldPrimary;
+        internal bool FieldTab;
         public bool Selected;
         public bool Focused;
         public bool Control;
         public bool Disabled;
         public bool Hovered;
         public bool Pressed;
+        [System.NonSerialized] internal UiInteractionFeedback InteractionFeedback;
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear(); Rect r = rectTransform.rect;
+            if (FieldStyle)
+            { FieldMenuSkin.Draw(vh, r, color, Control, FieldPrimary, Selected, Focused, Disabled, Hovered, Pressed, InteractionFeedback, FieldTab); return; }
             if (NotebookStyle && color.a >= .9f && r.width >= 8 && r.height >= 8)
             { NotebookPaperSurface.Draw(vh, r, color, Control, Selected, Focused, Disabled, Hovered, Pressed); return; }
             float radius = Mathf.Min(Radius, r.width * .5f, r.height * .5f);

@@ -59,9 +59,11 @@ namespace PaperDefense.Tests
             var mortar = balance.Structure(StructureKind.Mortar);
             mortar.Radius = 2; mortar.Range = 20; mortar.Damage = 5; mortar.FlightSeconds = .5f;
             var tower = new StructureState { Id = 1, Cell = new Cell(10, 10), Kind = StructureKind.Mortar,
-                Tier = MaterialTier.Pencil, IsComplete = true, Health = 100, Color = InkColor.Blue, PrimaryTargetId = 1, SecondaryTargetId = 1,
+                Tier = MaterialTier.Pencil, IsComplete = true, Health = 100, Color = InkColor.Blue,
                 Blueprint = new TowerBlueprint("dual", "Dual", ChassisKind.Heavy, StructureKind.Mortar, StructureKind.Mortar,
                     firstFootprint: MortarFootprint.Circle, secondFootprint: new MortarFootprint(3)) };
+            tower.InitializePlacementFacing(90);
+            tower.PrimaryTargetId = tower.SecondaryTargetId = 1;
             var structures = new List<StructureState> { tower };
             // Target is closest to tower; the other points move into place during flight.
             var enemies = new List<EnemyState> { Enemy(1, 10.5f, 13.5f), Enemy(2, 10.5f, 17), Enemy(3, 14, 13.5f), Enemy(4, 14, 17) };
@@ -92,9 +94,11 @@ namespace PaperDefense.Tests
             var mortar = balance.Structure(StructureKind.Mortar);
             mortar.Radius = 2; mortar.Range = 20; mortar.Damage = 5; mortar.FlightSeconds = .5f;
             var tower = new StructureState { Id = 1, Cell = new Cell(10, 10), Kind = StructureKind.Mortar,
-                Tier = MaterialTier.Pencil, IsComplete = true, Health = 100, PrimaryTargetId = 1,
+                Tier = MaterialTier.Pencil, IsComplete = true, Health = 100,
                 Blueprint = new TowerBlueprint("ellipse", "Ellipse", ChassisKind.Standard, StructureKind.Mortar,
                     firstFootprint: new MortarFootprint(3)) };
+            tower.InitializePlacementFacing(90);
+            tower.PrimaryTargetId = 1;
             var structures = new List<StructureState> { tower };
             var enemies = new List<EnemyState> { Enemy(1, 10.5f, 13.5f), Enemy(2, 10.5f, 20) };
             var weapons = new WeaponSystem(balance); var stats = new RunStatistics(); var events = new SimulationEventBuffer();

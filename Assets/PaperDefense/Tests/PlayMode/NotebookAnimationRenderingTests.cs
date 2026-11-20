@@ -124,7 +124,8 @@ namespace PaperDefense.Tests
             MortarProjectile[] projectiles = null, SimulationEvent[] events = null)
             => (TrialFrame)typeof(TrialFrame).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Single().Invoke(new object[] {
                 seconds, enemies ?? System.Array.Empty<EnemyState>(), towers ?? System.Array.Empty<StructureState>(),
-                projectiles ?? System.Array.Empty<MortarProjectile>(), System.Array.Empty<ShotEvent>(), null, null, events, 0L });
+                projectiles ?? System.Array.Empty<MortarProjectile>(), System.Array.Empty<ShotEvent>(), null, null, events, 0L,
+                TrialModernizationConfiguration.Baseline });
         static TrialReport Recording(params TrialFrame[] frames)
         {
             var report = new TrialReport();
@@ -327,9 +328,18 @@ namespace PaperDefense.Tests
             try
             {
                 var pen = new MeshPen(mesh); NotebookTrialRenderer.DrawProjectiles(pen, playback, theme); pen.Upload();
-                Assert.That(mesh.vertexCount, Is.EqualTo(4), "Only the new glob atlas illustration remains; the stale mortar cannot be redrawn.");
+                Assert.That(mesh.vertexCount, Is.GreaterThan(4), "The surviving glob must render complete native geometry.");
                 var atlas = new List<Vector2>(); mesh.GetUVs(1, atlas);
-                Assert.That(atlas.Distinct().Count(), Is.EqualTo(4), "The surviving glob retains its new artwork.");
+                Assert.That(atlas, Is.All.EqualTo(new Vector2(.5f, .5f)), "The surviving glob must not sample a removed texture.");
+                var expected = new Mesh();
+                try
+                {
+                    var expectedPen = new MeshPen(expected);
+                    // At .06 seconds, the .01 launch is 5% along the captured (10,10) -> (20,20) segment.
+                    DoodleGlyphs.DrawResource(expectedPen, "fx.spitter.projectile", new Vector2(10.5f, 10.5f), theme: theme); expectedPen.Upload();
+                    Assert.That(mesh.vertices, Is.EqualTo(expected.vertices), "No stale mortar geometry may accompany the independent surviving glob.");
+                }
+                finally { Object.DestroyImmediate(expected); }
                 playback.Seek(1, theme); Assert.That(playback.IsProjectileEnded(1), Is.False);
                 playback.Seek(0, theme); Assert.That(playback.IsProjectileEnded(1), Is.False);
             }
@@ -388,7 +398,6 @@ namespace PaperDefense.Tests
                 var balance = GameBalance.CreateDefault(); balance.EnableInkWells = true;
                 var game = new GameSession(balance, starterDefenses: false);
                 const BindingFlags privateInstance = BindingFlags.Instance | BindingFlags.NonPublic;
-                void Set(object item, string property, object value) => item.GetType().GetProperty(property).SetValue(item, value);
                 if (path == "blot")
                 {
                     var blots = typeof(GameSession).GetMethod("GetCorpseBlots", privateInstance).Invoke(game, null);
@@ -396,17 +405,18 @@ namespace PaperDefense.Tests
                 }
                 else if (path == "glob")
                 {
-                    var glob = new EnemyGlob(); Set(glob, "Id", 1); Set(glob, "From", new Point2(10, 10));
-                    Set(glob, "To", new Point2(14, 10)); Set(glob, "Duration", 1f); Set(glob, "Remaining", .5f);
-                    ((List<EnemyGlob>)typeof(GameSession).GetField("enemyGlobs", privateInstance).GetValue(game)).Add(glob);
+                    balance.EnableEnemyMechanics = true;
+                    var definition = balance.Enemy(EnemyKind.Spitter);
+                    definition.WindupSeconds = .05f;
+                    definition.ProjectileSeconds = 1;
+                    var shooter = new PreparedEnemy(new Point2(game.BaseCell.X - 3, game.BaseCell.Y), 100, EnemyKind.Spitter);
+                    game = GameSession.CreatePrepared(balance, 17, new[] { shooter });
+                    game.Tick(.5f);
+                    Assert.That(game.EnemyProjectiles.Count, Is.EqualTo(1));
                 }
                 else if (path == "mortar")
                 {
-                    var projectile = new MortarProjectile(); Set(projectile, "Id", 1); Set(projectile, "From", new Point2(10, 10));
-                    Set(projectile, "To", new Point2(14, 10)); Set(projectile, "Duration", 1f); Set(projectile, "Remaining", .5f);
-                    Set(projectile, "Radius", 1f);
-                    var weapons = typeof(GameSession).GetField("weapons", privateInstance).GetValue(game);
-                    ((List<MortarProjectile>)weapons.GetType().GetField("projectiles", privateInstance).GetValue(weapons)).Add(projectile);
+                    game = MortarRenderingFixture.Fire(balance);
                 }
                 var readModel = new RunReadModel(game);
                 var view = root.AddComponent<NotebookWorldView>(); view.VisualTheme = customTheme; view.Initialize(readModel);

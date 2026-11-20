@@ -45,6 +45,7 @@ namespace PaperDefense.Presentation
             Resource(assembly, "Weapon assembly scenery", "FoundationPreviewScenery", new Rect(0, 45, 400, 430));
             var illustration = WorkshopUi.Graphic<WeaponAssemblyGraphic>(assembly, "Weapon assembly illustration", new Rect(50, 45, 300, 390));
             illustration.SetBlueprint(draft);
+            StandardAssemblyIllustration.EnsureStandardPaper(illustration, illustration.name);
             Label(assembly, "Weapon assembly name", run.Content.GetChassis(draft.ChassisId).Name, new Rect(12, 440, 390, 38), 23, true, TextAnchor.MiddleCenter);
             var stats = run.PreviewBlueprint(draft);
             var load = Sheet(assembly, "Weapon load bar", new Rect(12, 482, 390, 48));
@@ -302,12 +303,26 @@ namespace PaperDefense.Presentation
         static FoundationDetailGraphic Detail(Transform owner, string name, FoundationDetailGraphic.Kind kind, Rect bounds)
         { var detail = WorkshopUi.Graphic<FoundationDetailGraphic>(owner, name, bounds); detail.Shape = kind; detail.color = WorkshopUi.Blue; return detail; }
         static void Illustration(Transform owner, string name, string id, Rect bounds)
-        { var image = WorkshopUi.Graphic<Image>(owner, name, bounds); if (NotebookSpriteCatalog.TryGet(id, out var sprite)) image.sprite = sprite; else image.enabled = false; image.preserveAspect = true; Center(image.rectTransform, bounds); }
+        {
+            if (id == "icon.pencil")
+            {
+                var icon = WorkshopUi.Graphic<WorkshopIconGraphic>(owner, name, bounds);
+                icon.Icon = WorkshopIcon.Pencil; icon.color = WorkshopUi.Ink; Center(icon.rectTransform, bounds); return;
+            }
+            var image = WorkshopUi.Graphic<NotebookArtGraphic>(owner, name, bounds);
+            image.Bind(id); Center(image.rectTransform, bounds);
+            StandardAssemblyIllustration.EnsureStandardPaper(image, name);
+        }
         static void Resource(Transform owner, string name, string resource, Rect bounds)
-        { var image = WorkshopUi.Graphic<Image>(owner, name, bounds); image.sprite = Resources.Load<Sprite>("Art/Player/" + resource); image.preserveAspect = true; Center(image.rectTransform, bounds); }
+        { var image = WorkshopUi.Graphic<WorkshopIconGraphic>(owner, name, bounds); image.Icon = WorkshopIcon.Weapon; image.color = WorkshopUi.Muted; Center(image.rectTransform, bounds); }
         static void Center(RectTransform item, Rect bounds)
         { item.pivot = new Vector2(.5f, .5f); item.anchoredPosition = new Vector2(bounds.center.x, -bounds.center.y); }
         static void Place(Transform owner, string name, Rect bounds)
-        { var item = owner.Find(name) as RectTransform; if (item == null) return; WorkshopUi.Place(item, bounds); if (item.GetComponent<Image>() != null) Center(item, bounds); }
+        {
+            var item = owner.Find(name) as RectTransform; if (item == null) return;
+            WorkshopUi.Place(item, bounds); if (item.GetComponent<NotebookArtGraphic>() != null) Center(item, bounds);
+            var drawing = item.GetComponent<Graphic>();
+            if (StandardAssemblyIllustration.HasPaper(drawing)) StandardAssemblyIllustration.SyncPaper(drawing);
+        }
     }
 }

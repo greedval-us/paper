@@ -29,7 +29,7 @@ namespace PaperDefense.Editor
         {
             { "Рамка", ComponentCategory.Frame }, { "Корпус", ComponentCategory.Hull }, { "Броня", ComponentCategory.Armor },
             { "Подача", ComponentCategory.Feed }, { "Поворот", ComponentCategory.Turn }, { "Ствол / головка", ComponentCategory.Head },
-            { "Прицел", ComponentCategory.Sight }, { "Магазин", ComponentCategory.Magazine }, { "Спуск", ComponentCategory.Trigger },
+            { "Прицел", ComponentCategory.Sight }, { "Магазин", ComponentCategory.Magazine }, { "Спуск", ComponentCategory.Trigger }, { "Крепление", ComponentCategory.Mount },
             { "Основание", ComponentCategory.Site }, { "Функция", ComponentCategory.Function }, { "Оболочка", ComponentCategory.Shell }, { "Оснащение", ComponentCategory.Utility }
         };
         static readonly Dictionary<string, AssemblyWeaponFamily> Weapons = new Dictionary<string, AssemblyWeaponFamily>(StringComparer.Ordinal)
@@ -40,7 +40,9 @@ namespace PaperDefense.Editor
         static readonly Dictionary<string, AssemblyStructureFamily> Structures = new Dictionary<string, AssemblyStructureFamily>(StringComparer.Ordinal)
         {
             { "wall", AssemblyStructureFamily.Wall }, { "slow", AssemblyStructureFamily.Slow },
-            { "repair", AssemblyStructureFamily.Repair }, { "generator", AssemblyStructureFamily.Generator }
+            { "repair", AssemblyStructureFamily.Repair }, { "generator", AssemblyStructureFamily.Generator },
+            { "spikes", AssemblyStructureFamily.Spikes }, { "beacon", AssemblyStructureFamily.Beacon },
+            { "prism", AssemblyStructureFamily.Prism }
         };
         internal static readonly (string key, AssemblyStat stat, ModifierOperation operation)[] NumericFields =
         {
@@ -52,6 +54,7 @@ namespace PaperDefense.Editor
             ("acquisitionMult", AssemblyStat.AcquisitionSeconds, ModifierOperation.Multiply), ("damage", AssemblyStat.Damage, ModifierOperation.Set),
             ("damageMult", AssemblyStat.Damage, ModifierOperation.Multiply), ("interval", AssemblyStat.Interval, ModifierOperation.Set), ("intervalMult", AssemblyStat.Interval, ModifierOperation.Multiply),
             ("range", AssemblyStat.Range, ModifierOperation.Set), ("rangeMult", AssemblyStat.Range, ModifierOperation.Multiply), ("minRange", AssemblyStat.MinimumRange, ModifierOperation.Set),
+            ("firingArcDegrees", AssemblyStat.FiringArcDegrees, ModifierOperation.Set),
             ("targets", AssemblyStat.TargetLimit, ModifierOperation.Set), ("radius", AssemblyStat.Radius, ModifierOperation.Set), ("radiusMult", AssemblyStat.Radius, ModifierOperation.Multiply),
             ("clip", AssemblyStat.MagazineSize, ModifierOperation.Set), ("clipMult", AssemblyStat.MagazineSize, ModifierOperation.Multiply), ("clipOverride", AssemblyStat.MagazineOverride, ModifierOperation.Set),
             ("reload", AssemblyStat.ReloadSeconds, ModifierOperation.Set), ("reloadMult", AssemblyStat.ReloadSeconds, ModifierOperation.Multiply),
@@ -130,15 +133,24 @@ namespace PaperDefense.Editor
         {
             if (string.IsNullOrWhiteSpace(json)) throw AssemblyCatalogException.At("assembly.source.json", "source");
             var root = JObject.Parse(json, new JsonLoadSettings { DuplicatePropertyNameHandling = DuplicatePropertyNameHandling.Error });
-            if (root["version"]?.Type != JTokenType.String || (string)root["version"] != "album-v1.0") throw AssemblyCatalogException.At("assembly.balance.version", "version");
+            string version = root["version"]?.Type == JTokenType.String ? (string)root["version"] : null;
+            int[] counts;
+            switch (version)
+            {
+                case "album-v1.0": counts = new[] { 14, 7, 21, 24 }; break;
+                case "album-v1.1": counts = new[] { 18, 7, 29, 24 }; break;
+                case "album-v1.2": counts = new[] { 18, 7, 29, 32 }; break;
+                case "album-v1.3": counts = new[] { 18, 7, 29, 36 }; break;
+                case "album-v1.4": counts = new[] { 18, 7, 30, 36 }; break;
+                default: throw AssemblyCatalogException.At("assembly.balance.version", "version");
+            }
             var definitions = new List<ComponentDefinitionInput>();
             string[] groups = { "foundations", "cores", "weaponParts", "buildingParts" };
             foreach (var group in groups) foreach (var row in RequiredArray(root, group)) definitions.Add(ReadDefinition(row, group));
             foreach (ComponentCategory category in Enum.GetValues(typeof(ComponentCategory)))
                 if (!definitions.Any(d => d.Category == category)) throw AssemblyCatalogException.At("assembly.category.missing", "definitions", category.ToString());
-            var initial = new AssemblyCatalogInput { BalanceRevision = "album-v1.0", Definitions = definitions.ToArray() };
+            var initial = new AssemblyCatalogInput { BalanceRevision = version, Definitions = definitions.ToArray() };
             var catalog = initial.CreateSnapshot(); // Duplicate exact revisions rejected before recipe lookup.
-            int[] counts = { 14, 7, 18, 15 };
             for (int i = 0; i < groups.Length; i++) if (RequiredArray(root, groups[i]).Count != counts[i]) throw AssemblyCatalogException.At("assembly.source.count", groups[i], counts[i].ToString());
             var weapons = RequiredArray(root, "weapons").Select(ReadWeapon).ToArray();
             var entries = new List<AssemblyStarterInput>(); var entryIds = new HashSet<string>(StringComparer.Ordinal);
@@ -165,7 +177,8 @@ namespace PaperDefense.Editor
                 };
                 CheckEntry(b, entry, catalog, entryIds, entries);
             }
-            if (entries.Count != 8) throw AssemblyCatalogException.At("assembly.starter.count", "starters", "8");
+            if (entries.Count(entry => !entry.WorkshopOnly) != ProfileLimits.LoadoutSlotCount)
+                throw AssemblyCatalogException.At("assembly.starter.count", "starters", ProfileLimits.LoadoutSlotCount.ToString());
             initial.Starters = entries.ToArray(); initial.CreateSnapshot(); return initial;
         }
         static void CheckEntry(JToken row, AssemblyStarterInput entry, ComponentCatalog catalog, HashSet<string> ids, List<AssemblyStarterInput> starters)
@@ -174,10 +187,13 @@ namespace PaperDefense.Editor
             var issues = catalog.ValidateRecipe(entry.CreateRecipe());
             if (issues.Count != 0) throw new AssemblyCatalogException(issues);
             if (row["starter"]?.Type != JTokenType.Boolean) throw AssemblyCatalogException.At("assembly.source.field", row.Path + ".starter");
-            if ((bool)row["starter"]) starters.Add(entry);
+            if (row["workshop"] != null && row["workshop"].Type != JTokenType.Boolean)
+                throw AssemblyCatalogException.At("assembly.source.field", row.Path + ".workshop");
+            entry.WorkshopOnly = !(bool)row["starter"] && (bool?)row["workshop"] == true;
+            if ((bool)row["starter"] || entry.WorkshopOnly) starters.Add(entry);
         }
         static WeaponRecipeInput ReadWeapon(JToken row) => new WeaponRecipeInput
-        { Mechanism = Ref(row, "core"), Head = Ref(row, "head"), Sight = Ref(row, "sight"), Magazine = Ref(row, "magazine"), Trigger = Ref(row, "trigger") };
+        { Mechanism = Ref(row, "core"), Head = Ref(row, "head"), Sight = Ref(row, "sight"), Magazine = Ref(row, "magazine"), Trigger = Ref(row, "trigger"), Mount = row["mount"] == null ? null : Ref(row, "mount") };
 
         static ComponentDefinitionInput ReadDefinition(JToken row, string group)
         {
@@ -185,7 +201,7 @@ namespace PaperDefense.Editor
             ComponentCategory category;
             if (group == "cores") category = ComponentCategory.Mechanism;
             else if (!Categories.TryGetValue(Text(row, "slot"), out category)) throw AssemblyCatalogException.At("assembly.category.unknown", row.Path + ".slot");
-            bool validGroup = group == "foundations" ? category <= ComponentCategory.Turn : group == "cores" ? category == ComponentCategory.Mechanism : group == "weaponParts" ? category >= ComponentCategory.Head && category <= ComponentCategory.Trigger : category >= ComponentCategory.Site;
+            bool validGroup = group == "foundations" ? category <= ComponentCategory.Turn : group == "cores" ? category == ComponentCategory.Mechanism : group == "weaponParts" ? category >= ComponentCategory.Head && category <= ComponentCategory.Trigger || category == ComponentCategory.Mount : category >= ComponentCategory.Site && category <= ComponentCategory.Utility;
             if (!validGroup) throw AssemblyCatalogException.At("assembly.category.unknown", row.Path + ".slot");
             var d = new ComponentDefinitionInput { Id = id, Name = Text(row, "name"), Revision = 1, Category = category, RequiredLevel = Integer(row, "level"), UnlockGold = Integer(row, "gold") };
             if (d.UnlockGold < 0) throw AssemblyCatalogException.At("assembly.unlock.negative", row.Path + ".gold");
@@ -216,7 +232,11 @@ namespace PaperDefense.Editor
             {
                 if (row[field.key] == null) continue;
                 float value = Number(row, field.key);
-                bool signedDelta = field.key == "capacityAdd" || ((field.key == "cost" || field.key == "load" || field.key == "build") && (category == ComponentCategory.Hull || category == ComponentCategory.Head || category == ComponentCategory.Shell));
+                if (field.stat == AssemblyStat.FiringArcDegrees && (category != ComponentCategory.Mechanism ||
+                    value < WeaponDefinition.MinimumFiringArc || value > WeaponDefinition.MaximumFiringArc))
+                    throw AssemblyCatalogException.At("assembly.number.range", row.Path + "." + field.key);
+                bool signedDelta = field.key == "capacityAdd" || ((field.key == "cost" || field.key == "load" || field.key == "build") && (category == ComponentCategory.Hull || category == ComponentCategory.Head || category == ComponentCategory.Shell))
+                    || ((field.key == "cost" || field.key == "load") && (category == ComponentCategory.Mount || category == ComponentCategory.Trigger));
                 bool integral = field.key == "cost" || field.key == "load" || field.key == "capacity" || field.key == "capacityAdd" || field.key == "mounts" || field.key == "clip" || field.key == "clipMult" || field.key == "clipOverride" || field.key == "targets";
                 if ((!signedDelta && value < 0) || (field.operation == ModifierOperation.Multiply && value <= 0) || (integral && value != Math.Truncate(value)) || ((field.key == "clip" || field.key == "interval" || field.key == "reload") && value <= 0) || ((field.key == "slow" || field.key == "defense" || field.key == "frontDefense") && value > 1))
                     throw AssemblyCatalogException.At("assembly.number.range", row.Path + "." + field.key);

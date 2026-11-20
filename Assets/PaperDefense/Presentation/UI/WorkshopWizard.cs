@@ -242,6 +242,7 @@ namespace PaperDefense.Presentation
             if(Draft==null)return;
             if(Step==1)assembly.RefreshWeapons(Draft);
             gold.text=ui.Resolve(Copy("gold",run.Workshop.Gold));smallPreview.ShowReference=preview.ShowReference=false;smallPreview.SetBlueprint(Draft);preview.SetBlueprint(Draft);if(reviewDrawing!=null)reviewDrawing.SetBlueprint(Draft);
+            StandardAssemblyIllustration.EnsureBlueprintPaper(smallPreview,Draft);StandardAssemblyIllustration.EnsureBlueprintPaper(preview,Draft);StandardAssemblyIllustration.EnsureBlueprintPaper(reviewDrawing,Draft);
             summaryTitle.text=ui.Resolve(Copy(Draft.Drawing.IsEmpty?"assembly_preview":"your_tower"));
             for(int i=0;i<StepCount;i++){ui.SetSelected(steps[i],i==Step);steps[i].interactable=i<=reached&&(!IsReadOnly||i==ReviewStep);stepNumbers[i].gameObject.SetActive(i>=Step);stepChecks[i].gameObject.SetActive(i<Step);}
             next.interactable=back.interactable=!IsReadOnly;

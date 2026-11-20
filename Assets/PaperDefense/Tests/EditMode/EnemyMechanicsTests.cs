@@ -173,6 +173,40 @@ namespace PaperDefense.Tests
             Assert.That(game.Blots, Is.Empty);
         }
 
+        [TestCase(EnemyKind.Runner, EnemyAttackMode.Glob, true, true)]
+        [TestCase(EnemyKind.Spitter, EnemyAttackMode.Contact, true, false)]
+        [TestCase(EnemyKind.Runner, EnemyAttackMode.Glob, false, false)]
+        public void AttackProfileUsesTheSessionSnapshotAndRangedMechanic(EnemyKind kind,
+            EnemyAttackMode attack, bool rangedEnabled, bool expectGlob)
+        {
+            var balance = MechanicsBalance(1);
+            balance.Mechanics.RangedEnemies = rangedEnabled;
+            var definition = balance.Enemy(kind);
+            definition.Attack = attack;
+            definition.Damage = 7;
+            definition.AttackInterval = 3;
+            definition.WindupSeconds = .05f;
+            definition.ProjectileSeconds = .5f;
+            var target = new PreparedEnemy(new Point2(20.5f, 12.5f), 100, kind);
+            var game = GameSession.CreatePrepared(balance, 171, new[] { target });
+            definition.Attack = attack == EnemyAttackMode.Glob ? EnemyAttackMode.Contact : EnemyAttackMode.Glob;
+
+            game.Tick(.15f);
+            Assert.That(game.EnemyProjectiles.Count, Is.EqualTo(expectGlob ? 1 : 0));
+            Assert.That(game.BaseHealth, Is.EqualTo(expectGlob ? 500 : 493));
+            if (expectGlob) Assert.That(game.EnemyProjectiles[0].SourceEnemyKind, Is.EqualTo(kind));
+            game.Tick(.55f);
+            Assert.That(game.BaseHealth, Is.EqualTo(493));
+        }
+
+        [Test]
+        public void BalanceRejectsUnknownEnemyAttackProfile()
+        {
+            var balance = MechanicsBalance(1);
+            balance.Enemy(EnemyKind.Runner).Attack = (EnemyAttackMode)233;
+            Assert.Throws<ArgumentOutOfRangeException>(() => new GameSession(balance));
+        }
+
         [Test]
         public void SpitterTelegraphsThenFirstCompletedBlockerAbsorbsGlob()
         {
@@ -267,6 +301,33 @@ namespace PaperDefense.Tests
             Assert.That(impact.To.X,Is.EqualTo(14).Within(.00001),"The visual impact belongs to the actual wall entry boundary.");
             Assert.That(impact.To.Y,Is.EqualTo(12.5f).Within(.00001));
             Assert.That(impact.EntityId,Is.EqualTo(game.EventBuffer.Single(e=>e.Kind==SimulationEventKind.EnemyGlobLaunched).EntityId));
+        }
+
+        [TestCase(false)]
+        [TestCase(true)]
+        public void HordeGlobRetainsObjectiveDamageScaleButHitsAnInterceptingWallAtFullStrength(bool intercept)
+        {
+            var balance = MechanicsBalance(1);
+            balance.Waves[0].Horde = new HordeWaveSettings { Enabled = true, BodyScale = 1, HealthScale = 1, ObjectiveDamageScale = .25f };
+            balance.Waves[0].SpitterFraction = 1;
+            var spitter = balance.Enemy(EnemyKind.Spitter);
+            spitter.Speed = 0; spitter.Damage = 10; spitter.Range = 12.5f;
+            spitter.WindupSeconds = .01f; spitter.ProjectileSeconds = .2f;
+            balance.Structure(StructureKind.Wall).MaxHealth = 100;
+            var game = new GameSession(balance, starterDefenses: false);
+            game.StartNextWave(); game.Tick(.02f);
+            var enemy = game.Enemies.Single();
+            enemy.Position = new Point2(8.5f, 12.5f);
+            game.Tick(.07f);
+            Assert.That(game.EnemyProjectiles.Count, Is.EqualTo(1));
+            var wallCell = new Cell(14, 12);
+            if (intercept)
+                Assert.That(game.TryBuild(new[] { wallCell }, StructureKind.Wall, MaterialTier.Pencil, out _), Is.True);
+            enemy.Health = 0;
+            game.Tick(.25f);
+            Assert.That(game.BaseHealth, Is.EqualTo(intercept ? 500 : 497.5f));
+            if (intercept) Assert.That(game.StructureAt(wallCell).Health, Is.EqualTo(90));
+            Assert.That(game.EnemyProjectiles, Is.Empty);
         }
 
         [Test]

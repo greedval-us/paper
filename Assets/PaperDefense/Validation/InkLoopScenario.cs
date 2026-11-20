@@ -28,9 +28,10 @@ namespace PaperDefense.Validation
             Session = new GameSession(balance, seed, false);
             loadout = suppliedLoadout == null ? new WorkshopProfile().GetLoadoutBlueprints() : PrepareLoadout(suppliedLoadout, Session.Balance);
             Report.Seed=seed;Report.Width=balance.Width;Report.Height=balance.Height;Report.Preset=balance.Preset.ToString();
-            Report.Strategy=balance.Preset==GameBalancePreset.Target?"TargetProtectedPursuitV4":"HistoricalBattery";
+            Report.Strategy=balance.Preset==GameBalancePreset.Target?"TargetProtectedPursuitV5":"HistoricalBattery";
             if(balance.Preset==GameBalancePreset.Target)
                 Report.Scope="Target workshop balance supplied by caller, unchanged; zero starter structures. Public commands only; default four blueprints. Compact mixed battery inside a repaired pencil wall ring. After spawning ends, a small enemy tail or an entirely ranged tail receives paid pursuit guns only for spitters outside every existing tower's range. Pursuit construction takes priority over recurring wall repairs. The blue point is initially exposed until actual enemy destruction, then recaptured only after fourteen base towers and a fully funded wall ring plus four cardinal dual-gun defenders and four diagonal mortars covering the ranged siege standoff. Missing well walls and paid intermission reactivation take priority over further base expansion. Additional towers use finite earned ink. One manual cleanup demonstrates the tool; blue cartridges use earned well payouts and are fitted to completed non-mortar towers with a living enemy in range. Every wave launches immediately. WaveInkGrant is only the historical fallback; each WaveTuning/Waves InkGrant resolves its ConfiguredInkGrant. This strategy chooses no Salvage reward multiplier. Fixed-step headless evidence; not a frame-time benchmark.";
+            Report.Scope+=" Perimeter towers face outward when built. A pursuit gun faces its selected spitter at placement.";
             if(suppliedLoadout!=null)Report.Scope=(Report.Scope??"Public commands only; default four blueprints.")
                 .Replace("default four blueprints.","caller-supplied four blueprints.")
                 .Replace("four cardinal dual-gun defenders and four diagonal mortars covering the ranged siege standoff","four cardinal slot-1 defenders and four diagonal slot-3 defenders")
@@ -236,7 +237,7 @@ namespace PaperDefense.Validation
                     var origin=new Point2(cell.X+.5f,cell.Y+.5f);
                     if(!MountCanReach(loadout[0],balance,origin,enemy.Position))continue;
                     if(!Session.QuoteBlueprint(new[]{cell},loadout[0],MaterialTier.Pencil,InkColor.None).Valid)continue;
-                    if(Build(cell,0,"Paid pursuit gun for a surviving spitter outside every battery range"))
+                    if(Build(cell,0,"Paid pursuit gun for a surviving spitter outside every battery range",BattleFacingOrders.Toward(cell,enemy.Position)))
                         Report.PursuitTowersBuilt++;
                     return;
                 }
@@ -250,18 +251,23 @@ namespace PaperDefense.Validation
             {
                 if(tower.Blueprint==null||tower.Health<=0)continue;
                 // Pending construction also reserves coverage so one order cannot duplicate the response.
-                if(MountCanReach(tower.Blueprint,balance,new Point2(tower.Cell.X+.5f,tower.Cell.Y+.5f),enemy))return true;
+                if(MountCanReach(tower.Blueprint,balance,new Point2(tower.Cell.X+.5f,tower.Cell.Y+.5f),enemy,facingDegrees:tower.FacingDegrees))return true;
             }
             return false;
         }
 
-        static bool MountCanReach(TowerBlueprint blueprint,GameBalance balance,Point2 origin,Point2 target,bool forPaint=false)
+        static bool MountCanReach(TowerBlueprint blueprint,GameBalance balance,Point2 origin,Point2 target,bool forPaint=false,float? facingDegrees=null)
         {
             float distance=DistanceSquared(origin,target);
             foreach(var mount in blueprint.WeaponMounts)
             {
                 var weapon=balance.Content.GetWeapon(mount.WeaponId);
                 if(!weapon.IsCombatMount||(forPaint&&weapon.Attack==AttackKind.AreaProjectile))continue;
+                if(facingDegrees.HasValue && weapon.Attack!=AttackKind.Radial && distance>0)
+                {
+                    double angle=Math.Atan2(target.Y-origin.Y,target.X-origin.X)*180/Math.PI;
+                    if(Math.Abs((angle-facingDegrees.Value+540)%360-180)>weapon.FiringArcDegrees*.5f+.0001f)continue;
+                }
                 float maximum=TowerCatalog.WeaponRange(blueprint,balance,mount.WeaponId,mount.SlotIndex);
                 if(maximum>0&&distance>=weapon.MinimumRange*weapon.MinimumRange&&distance<=maximum*maximum)return true;
             }
@@ -282,7 +288,7 @@ namespace PaperDefense.Validation
                 int slot=i<ProtectedWellSlots.Length?ProtectedWellSlots[i]:CompactSlots[wellPurchases%CompactSlots.Length];
                 if(Session.Ink<BlueprintCost(slot)+reserve)break;
                 if(!Session.QuoteBlueprint(new[]{cell},loadout[slot],MaterialTier.Pencil,InkColor.None).Valid)continue;
-                if(Build(cell,slot,"Protected blue-point garrison from finite earned ink")){wellPurchases++;existing++;}
+                if(Build(cell,slot,"Protected blue-point garrison from finite earned ink",defendedObjective: Session.Wells[1].Cell)){wellPurchases++;existing++;}
             }
         }
 
@@ -318,7 +324,7 @@ namespace PaperDefense.Validation
                 bool hasTarget=false;
                 Point2 origin=new Point2(tower.Cell.X+.5f,tower.Cell.Y+.5f);
                 foreach(var enemy in Session.Enemies)
-                    if(enemy.Health>0&&MountCanReach(tower.Blueprint,balance,origin,enemy.Position,true)){hasTarget=true;break;}
+                    if(enemy.Health>0&&MountCanReach(tower.Blueprint,balance,origin,enemy.Position,true,tower.FacingDegrees)){hasTarget=true;break;}
                 if(!hasTarget)continue;
                 int before=Session.ColoredInk(InkColor.Blue);
                 bool success=Session.TryPaint(tower.Cell,InkColor.Blue,out string reason);
@@ -359,7 +365,7 @@ namespace PaperDefense.Validation
                 if(wellPurchases>=wellLimit||Session.Ink<108)break;
                 if(Session.StructureAt(cell)!=null)continue;
                 int slot=wellPurchases%4==3?1:3;
-                if(Build(cell,slot,"Reinforce recaptured blue point with earned ink"))wellPurchases++;
+                if(Build(cell,slot,"Reinforce recaptured blue point with earned ink",defendedObjective: Session.Wells[1].Cell))wellPurchases++;
             }
         }
 
@@ -373,11 +379,14 @@ namespace PaperDefense.Validation
             Record("BuildWalls",success,before-Session.Ink,condition,center,null,reason);return success;
         }
 
-        bool Build(Cell cell,int slot,string condition)
+        bool Build(Cell cell,int slot,string condition,float? facingDegrees=null,Cell? defendedObjective=null)
         {
             int before=Session.Ink;
-            bool success=Session.TryBuildBlueprint(new[]{cell},loadout[slot],MaterialTier.Pencil,InkColor.None,out string reason);
-            Record("BuildBlueprint",success,before-Session.Ink,condition,cell,loadout[slot].Id,reason);
+            // From inside the repaired ring, cover attackers before they reach its outer face.
+            float heading=facingDegrees??(BattleFacingOrders.Toward(cell,defendedObjective??Session.BaseCell)+180);
+            bool success=Session.TryBuildBlueprint(new[]{cell},loadout[slot],MaterialTier.Pencil,InkColor.None,out string reason,
+                facingDegrees:heading);
+            Record("BuildBlueprint",success,before-Session.Ink,condition,cell,loadout[slot].Id,reason,heading);
             return success;
         }
 
@@ -447,10 +456,10 @@ namespace PaperDefense.Validation
         static int ResolvedInkGrant(WaveDefinition wave,GameBalance balance)
             => Math.Max(0,wave.InkGrant>=0?wave.InkGrant:balance.WaveInkGrant);
 
-        void Record(string action,bool success,int cost,string condition,Cell cell=default,string blueprint=null,string reason=null)
+        void Record(string action,bool success,int cost,string condition,Cell cell=default,string blueprint=null,string reason=null,float facingDegrees=0)
         {
             Report.Commands.Add(new InkLoopCommand{Tick=Session.TickIndex,Wave=Session.WaveIndex,Action=action,Success=success,
-                OrdinaryInkSpent=cost,InkAfter=Session.Ink,Condition=condition,X=cell.X,Y=cell.Y,Blueprint=blueprint,Reason=reason});
+                OrdinaryInkSpent=cost,InkAfter=Session.Ink,Condition=condition,X=cell.X,Y=cell.Y,Blueprint=blueprint,Reason=reason,FacingDegrees=facingDegrees});
             if(!success)Report.FailedCommands++;
         }
         void Finish()
@@ -468,7 +477,8 @@ namespace PaperDefense.Validation
             add(Session.TickIndex);add((int)Session.Phase);add(Session.Kills);add(Session.Ink);add(Session.GoldEarned);
             add(BitConverter.ToInt32(BitConverter.GetBytes(Session.BaseHealth),0));
             foreach(var command in Report.Commands)
-            {add(command.Tick);add(command.X);add(command.Y);add(command.Success?1:0);add(command.OrdinaryInkSpent);add(command.ColoredInkSpent);add(command.InkAfter);}
+            {add(command.Tick);add(command.X);add(command.Y);add(command.Success?1:0);add(command.OrdinaryInkSpent);add(command.ColoredInkSpent);add(command.InkAfter);
+                if(command.Action=="BuildBlueprint")add(BitConverter.ToInt32(BitConverter.GetBytes(command.FacingDegrees),0));}
             Report.Fingerprint=hash.ToString("x16");
         }
     }
@@ -492,6 +502,7 @@ namespace PaperDefense.Validation
     [Serializable] public sealed class InkLoopCommand
     {
         public long Tick;public int Wave,X,Y,OrdinaryInkSpent,ColoredInkSpent,InkAfter;
+        public float FacingDegrees;
         public string Action,Condition,Blueprint,Reason;public bool Success;
     }
     [Serializable] public sealed class InkLoopWave

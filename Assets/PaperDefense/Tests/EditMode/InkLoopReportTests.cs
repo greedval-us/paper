@@ -83,7 +83,7 @@ namespace PaperDefense.Tests
             var balance=IndexedCampaignBalance();var scenario=new InkLoopScenario(balance);
             var page=new TowerBlueprint("coverage","Coverage","chassis.heavy",new[]{new WeaponMountSelection(0,"weapon.gun"),new WeaponMountSelection(2,"weapon.mortar")},
                 new[]{new ModuleSelection("rail","module.rail")},content:balance.Content);
-            Assert.That(scenario.Session.TryBuildBlueprint(new[]{new Cell(10,10)},page,MaterialTier.Pencil,InkColor.None,out string reason),Is.True,reason);
+            Assert.That(scenario.Session.TryBuildBlueprint(new[]{new Cell(10,10)},page,MaterialTier.Pencil,InkColor.None,out string reason, facingDegrees:0),Is.True,reason);
             Assert.That(Covered(scenario,new Point2(33,10.5f)),Is.True,"The third mount reaches its scoped maximum of22.5 cells.");
             Assert.That(Covered(scenario,new Point2(33.01f,10.5f)),Is.False);
         }
@@ -91,9 +91,10 @@ namespace PaperDefense.Tests
         {
             var balance=IndexedCampaignBalance();var scenario=new InkLoopScenario(balance);
             var page=new TowerBlueprint("deadzone","Deadzone","chassis.heavy","weapon.mortar",content:balance.Content);
-            Assert.That(scenario.Session.TryBuildBlueprint(new[]{new Cell(10,10)},page,MaterialTier.Pencil,InkColor.None,out string reason),Is.True,reason);
+            Assert.That(scenario.Session.TryBuildBlueprint(new[]{new Cell(10,10)},page,MaterialTier.Pencil,InkColor.None,out string reason, facingDegrees:0),Is.True,reason);
             Assert.That(Covered(scenario,new Point2(16.49f,10.5f)),Is.False);
             Assert.That(Covered(scenario,new Point2(16.5f,10.5f)),Is.True);
+            Assert.That(Covered(scenario,new Point2(4.5f,10.5f)),Is.False,"The same distance behind a fixed mortar is uncovered.");
         }
         [TestCase(5f,false)] [TestCase(7f,true)]
         public void CampaignPaintFindsEligibleThirdMountAfterMortarAndRespectsItsDeadzone(float distance,bool paint)
@@ -102,7 +103,7 @@ namespace PaperDefense.Tests
             scenario.Session.StartNextWave();scenario.Session.Tick(1f/30);
             var page=new TowerBlueprint("paint","Paint","chassis.heavy",new[]{new WeaponMountSelection(0,"weapon.mortar"),new WeaponMountSelection(2,"weapon.gun")},content:balance.Content);
             var cell=new Cell(10,10);
-            Assert.That(scenario.Session.TryBuildBlueprint(new[]{cell},page,MaterialTier.Pencil,InkColor.None,out string reason),Is.True,reason);
+            Assert.That(scenario.Session.TryBuildBlueprint(new[]{cell},page,MaterialTier.Pencil,InkColor.None,out string reason, facingDegrees:0),Is.True,reason);
             ((List<EnemyState>)scenario.Session.Enemies).Add(new EnemyState{Id=1,Health=100,MaxHealth=100,Position=new Point2(10.5f+distance,10.5f)});
             typeof(InkLoopScenario).GetMethod("TargetPaintAndBlotter",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).Invoke(scenario,null);
             Assert.That(scenario.Session.StructureAt(cell).Color,Is.EqualTo(paint?InkColor.Blue:InkColor.None));

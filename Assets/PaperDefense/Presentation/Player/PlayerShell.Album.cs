@@ -11,11 +11,12 @@ namespace PaperDefense.Presentation
     {
         public AlbumPanel Album { get; private set; }
         AlbumFilter albumFilter;
-        string albumSelected;
+        string albumSelected, albumQuery;
+        float albumScroll = 1;
 
         void RememberAlbumView()
         {
-            if (Album?.Root != null) { albumFilter = Album.Filter; albumSelected = Album.SelectedId; }
+            if (Album?.Root != null) { albumFilter = Album.Filter; albumSelected = Album.SelectedId; albumQuery = Album.SearchQuery; albumScroll = Album.CatalogScrollPosition; }
             Album = null;
         }
         public void SelectAlbumOnReturn(string id)
@@ -23,6 +24,8 @@ namespace PaperDefense.Presentation
             if (id == null || !game.Run.Workshop.Entries.Any(e => e.Id == id)) return;
             albumSelected = id;
             var entry = game.Run.Workshop.Entries.First(e => e.Id == id);
+            if (!string.IsNullOrWhiteSpace(albumQuery) && GameText.Resolve(entry.Name).IndexOf(albumQuery.Trim(), System.StringComparison.CurrentCultureIgnoreCase) < 0)
+                albumQuery = "";
             bool standard = game.Run.AssemblyCatalog.Starters.Any(e => e.Id == id);
             if (albumFilter == AlbumFilter.Mine && standard || albumFilter == AlbumFilter.Standard && !standard ||
                 albumFilter == AlbumFilter.Towers && entry.Kind == AlbumEntryKind.Structure ||
@@ -31,12 +34,15 @@ namespace PaperDefense.Presentation
         }
         void BuildAlbum()
         {
-            Album = new AlbumPanel(page, game.Run, TextResourcesAsset.Default, game.EditAlbumEntry, game.CloseAlbum);
-            Album.Reflow(W, H); Album.SetFilter(albumFilter); Album.SelectEntry(albumSelected);
+            Album = new AlbumPanel(page, game.Run, TextResourcesAsset.Default, game.EditAlbumEntry, game.CloseAlbum, initialQuery: albumQuery);
+            Album.Reflow(W, H); Album.SetFilter(albumFilter);
+            if (albumSelected != null) Album.SelectEntry(albumSelected);
             var controls = Album.Root.GetComponentsInChildren<Selectable>();
             var focus = controls.FirstOrDefault(c => c.name == "Album choose " + Album.SelectedId && c.IsInteractable())
                 ?? controls.FirstOrDefault(c => c.name == "Album filter " + Album.Filter && c.IsInteractable());
             if (focus != null) EventSystem.current?.SetSelectedGameObject(focus.gameObject);
+            Album.CatalogScrollPosition = albumScroll;
+            Album.HideHints();
         }
         void OpenAssemblyPicker(int slot)
         {
@@ -56,10 +62,5 @@ namespace PaperDefense.Presentation
 
         string ProgressCopy() => GameText.Resolve(UserText.Message("assembly.player.progress",
             game.Run.Workshop.Level, game.Run.Workshop.TotalXp));
-        void PlayerProgress(Rect bounds)
-        {
-            progress = NotebookLabel(page, ProgressCopy(), bounds, 20, alignment: TextAnchor.MiddleRight);
-            progress.name = "Player progress";
-        }
     }
 }

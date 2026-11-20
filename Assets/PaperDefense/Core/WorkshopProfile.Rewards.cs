@@ -19,6 +19,7 @@ namespace PaperDefense.Core
             if (runId == Guid.Empty) { code = "profile.reward.run"; return false; }
             if (completedWaves < 0 || completedWaves > 8) { code = "profile.reward.waves"; return false; }
             if (victory && completedWaves != 8) { code = "profile.reward.victory"; return false; }
+            if (FindCampaignRunReward(runId) != null) { code = "profile.reward.mission_mismatch"; return false; }
 
             int index = RunRewardIndex(runId);
             var previous = index < 0 ? null : rewards[index];

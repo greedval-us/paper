@@ -3,13 +3,11 @@ using System.Collections.Generic;
 
 namespace PaperDefense.Core
 {
-    public sealed partial class GameSession
+    public sealed partial class GameSession : IEnemyAttackWorld
     {
         private CorpseBlotSystem corpseBlots;
-        private readonly List<EnemyGlob> enemyGlobs = new List<EnemyGlob>(64);
-        private int nextEnemyGlobId = 1;
         public IReadOnlyList<BlotState> Blots => corpseBlots == null ? (IReadOnlyList<BlotState>)Array.Empty<BlotState>() : corpseBlots.Blots;
-        public IReadOnlyList<EnemyGlob> EnemyProjectiles => enemyGlobs;
+        public IReadOnlyList<EnemyGlob> EnemyProjectiles => enemyAttacks.Projectiles;
         public float BlotterCooldownRemaining { get; private set; }
         internal IBlotContext CreateBlotContext() => Mechanics.CorpseBlots ? GetCorpseBlots() : null;
 
@@ -21,10 +19,6 @@ namespace PaperDefense.Core
 
         private void PublishBlotEvent(SimulationEventKind kind,Cell cell)
             => EventBuffer.Publish(TickIndex,kind,Center(cell),Center(cell),default,simulationSeconds:Elapsed);
-
-        private void PublishEnemyAttack(EnemyState enemy,Point2 to)
-            => EventBuffer.Publish(TickIndex,SimulationEventKind.EnemyAttack,enemy.Position,to,default,entityId:enemy.Id,
-                simulationSeconds:Elapsed,enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier,enemyVisualScale:enemy.VisualScale);
 
         public bool TryBlotter(Cell cell, out string reason)
         {
@@ -84,97 +78,24 @@ namespace PaperDefense.Core
             GetCorpseBlots().Add(CellOf(enemy.Position), rules.BlotLifetime);
         }
 
-        private bool TryRangedAttack(EnemyState enemy, float delta)
+        Point2 IEnemyAttackWorld.ObjectivePosition(EnemyState enemy) => TargetPoint(enemy);
+        void IEnemyAttackWorld.HitObjective(int index, float damage, Point2 source) => DamageObjective(index, damage, source);
+
+        void IEnemyAttackWorld.HitStructure(StructureState blocker, Point2 source, float rawDamage)
         {
-            if (!Mechanics.RangedEnemies || enemy.Kind != EnemyKind.Spitter) return false;
-            var definition = rules.Enemy(EnemyKind.Spitter);
-            enemy.RangedCooldown = Math.Max(0, enemy.RangedCooldown - delta);
-            if (enemy.WindingUp)
-            {
-                enemy.WindupRemaining = Math.Max(0, enemy.WindupRemaining - delta);
-                if (enemy.WindupRemaining > .000001f) return true;
-                // Admission bounds live glob state even under extreme custom firing rates.
-                if (enemyGlobs.Count >= grid.Length * Math.Max(1, rules.MaxEnemiesPerCell)) return true;
-                float duration = Math.Max(0, definition.ProjectileSeconds);
-                var glob=new EnemyGlob
-                {
-                    Id = nextEnemyGlobId++, From = enemy.Position, To = enemy.RangedTarget,
-                    Remaining = duration, Duration = duration, Damage = Math.Max(0, definition.Damage),
-                    ObjectiveIndex = enemy.RangedObjectiveIndex,
-                    SourceEnemyKind=enemy.Kind,SourceEnemyDrawingTier=enemy.DrawingTier
-                };
-                enemyGlobs.Add(glob);
-                PublishEnemyAttack(enemy,glob.To);
-                EventBuffer.Publish(TickIndex,SimulationEventKind.EnemyGlobLaunched,glob.From,glob.To,default,
-                    entityId:glob.Id,travelSeconds:duration,simulationSeconds:Elapsed,enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier,enemyVisualScale:enemy.VisualScale);
-                enemy.WindingUp = false;
-                enemy.RangedCooldown = Math.Max(rules.Combat.MinimumActionInterval, definition.AttackInterval);
-                return true;
-            }
-            Point2 target = TargetPoint(enemy);
-            int objective = enemy.ObjectiveIndex;
-            if (TraceGlobBlocker(enemy.Position, target, out var targetBlocker))
-            {
-                target = Center(targetBlocker.Cell);
-                objective = int.MinValue;
-            }
-            float range = Math.Max(rules.Combat.MinimumRangedDistance, definition.Range);
-            if (DistanceSquared(enemy.Position, target) > range * range) return false;
-            if (enemy.RangedCooldown <= 0)
-            {
-                enemy.RangedTarget = target;
-                enemy.RangedObjectiveIndex = objective;
-                enemy.WindingUp = true;
-                enemy.WindupRemaining = Math.Max(0, definition.WindupSeconds);
-            }
-            return true;
+            float previousHealth = blocker.Health;
+            blocker.Health = Math.Max(0, blocker.Health - DamageRules.StructureDamage(rawDamage, blocker, rules, source));
+            PublishStructureHit(blocker, source, previousHealth);
+            if (blocker.Health <= 0) RemoveStructure(blocker, true);
+            else RefreshHealthBand(blocker);
         }
-
-        private void AdvanceEnemyGlobs(float delta)
-        {
-            int write = 0;
-            for (int read = 0; read < enemyGlobs.Count; read++)
-            {
-                var glob = enemyGlobs[read];
-                float previous = glob.Duration <= .000001f ? 0 : 1 - glob.Remaining / glob.Duration;
-                glob.Remaining = Math.Max(0, glob.Remaining - delta);
-                float current = glob.Duration <= .000001f ? 1 : 1 - glob.Remaining / glob.Duration;
-                var from = LerpPoint(glob.From, glob.To, previous);
-                var to = LerpPoint(glob.From, glob.To, current);
-                if (TraceGlobBlocker(from, to, out var blocker,out var impact))
-                {
-                    PublishGlobImpact(glob,impact);
-                    blocker.Health = Math.Max(0, blocker.Health - DamageRules.StructureDamage(glob.Damage, blocker, rules, glob.From));
-                    if (blocker.Health <= 0) RemoveStructure(blocker, true);
-                    else RefreshHealthBand(blocker);
-                    continue;
-                }
-                if (glob.Remaining <= .000001f)
-                {
-                    PublishGlobImpact(glob,glob.To);
-                    if (!glob.TargetsStructure) DamageObjective(glob.ObjectiveIndex, glob.Damage);
-                    continue;
-                }
-                enemyGlobs[write++] = glob;
-            }
-            if (write < enemyGlobs.Count) enemyGlobs.RemoveRange(write, enemyGlobs.Count - write);
-        }
-
-        private void PublishGlobImpact(EnemyGlob glob,Point2 point)
-            =>EventBuffer.Publish(TickIndex,SimulationEventKind.EnemyGlobImpact,glob.From,point,default,entityId:glob.Id,
-                simulationSeconds:Elapsed,enemyKind:glob.SourceEnemyKind,enemyDrawingTier:glob.SourceEnemyDrawingTier);
-
-        private static Point2 LerpPoint(Point2 from, Point2 to, float fraction) =>
-            new Point2(from.X + (to.X - from.X) * fraction, from.Y + (to.Y - from.Y) * fraction);
 
         /// <summary>Grid DDA checks only cells crossed this step, including new interception walls.</summary>
-        private bool TraceGlobBlocker(Point2 from, Point2 to, out StructureState blocker)
-            =>TraceGlobBlocker(from,to,out blocker,out _);
-
-        private bool TraceGlobBlocker(Point2 from, Point2 to, out StructureState blocker,out Point2 impact)
+        bool IEnemyAttackWorld.TraceBlocker(Point2 from, Point2 to, out StructureState blocker, out Point2 impact)
         {
             blocker = null;
-            impact=to;float entry=0;
+            impact = to;
+            float entry = 0;
             Cell cell = CellOf(from), end = CellOf(to);
             float dx = to.X - from.X, dy = to.Y - from.Y;
             int sx = dx > 0 ? 1 : dx < 0 ? -1 : 0, sy = dy > 0 ? 1 : dy < 0 ? -1 : 0;
@@ -185,18 +106,23 @@ namespace PaperDefense.Core
             for (int visited = 0; visited <= rules.Width + rules.Height + 2; visited++)
             {
                 var structure = StructureAt(cell);
-                if (IsBlocker(structure)) { blocker = structure;impact=LerpPoint(from,to,Math.Max(0,Math.Min(1,entry))); return true; }
+                if (IsBlocker(structure))
+                {
+                    blocker = structure;
+                    impact = Point2.Lerp(from, to, Math.Max(0, Math.Min(1, entry)));
+                    return true;
+                }
                 if (cell == end) return false;
                 if (nextX < nextY)
                 {
                     if (nextX > 1.000001f) return false;
-                    entry=nextX;
+                    entry = nextX;
                     cell = new Cell(cell.X + sx, cell.Y); nextX += deltaX;
                 }
                 else
                 {
                     if (nextY > 1.000001f) return false;
-                    entry=nextY;
+                    entry = nextY;
                     cell = new Cell(cell.X, cell.Y + sy); nextY += deltaY;
                 }
             }

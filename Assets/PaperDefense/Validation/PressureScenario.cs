@@ -208,7 +208,7 @@ namespace PaperDefense.Validation
                 hash.Add((int)structure.Kind); hash.Add((int)structure.Tier); hash.Add(structure.Health);
                 hash.Add(structure.MaxHealth); hash.Add(structure.BuildRemaining); hash.Add(structure.Cooldown);
                 hash.Add(structure.IsComplete ? 1 : 0); hash.Add(structure.WaitingForClearance ? 1 : 0);
-                hash.Add(structure.Aim.X); hash.Add(structure.Aim.Y); hash.Add((int)structure.Priority);
+                hash.Add(structure.FacingDegrees); hash.Add(structure.Aim.X); hash.Add(structure.Aim.Y); hash.Add((int)structure.Priority);
             }
             foreach (EnemyState enemy in Session.Enemies)
             { hash.Add(enemy.Id); hash.Add((int)enemy.Kind); hash.Add(enemy.Health); hash.Add(enemy.Position.X); hash.Add(enemy.Position.Y); }

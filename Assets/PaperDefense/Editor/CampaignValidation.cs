@@ -1,148 +1,78 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using PaperDefense.Core;
+using PaperDefense.Validation;
 using UnityEditor;
 using UnityEngine;
 
 namespace PaperDefense.Editor
 {
-    /// <summary>Replays a complete campaign using only public commands and earned resources.</summary>
+    /// <summary>Exercises all nine authored missions with paid starter assemblies and paired undefended controls.</summary>
     public static class CampaignValidation
     {
-        private const int Seed = 1337;
-        private const float DeltaSeconds = 1f / 30f;
-        private const int MaxTicksPerWave = 18000;
-        private static readonly int[] Radii = { 3, 4, 6, 7, 8, 9 };
-        private static readonly Cell[] Directions =
-        {
-            new Cell(-1, 0), new Cell(1, 0), new Cell(0, -1), new Cell(0, 1),
-            new Cell(-1, -1), new Cell(1, -1), new Cell(-1, 1), new Cell(1, 1)
-        };
+        public const string ReportPath = "docs/validation/campaign-playability.json";
 
-        [MenuItem("Paper Defense/Проверить все 8 волн")]
+        [Serializable]
+        public sealed class Report
+        {
+            public int SchemaVersion = 5;
+            public string RunAtUtc, UnityVersion, Source, Strategy;
+            public float StepSeconds;
+            public int MaximumTicksPerWave;
+            public double MaximumWallSecondsPerMission;
+            public bool Passed, RoleComparisonsPassed;
+            public List<CampaignPlayabilityResult> Missions = new List<CampaignPlayabilityResult>();
+            public List<CampaignPlayabilityResult> StrategyComparisons = new List<CampaignPlayabilityResult>();
+        }
+
+        [MenuItem("Paper Defense/Проверить кампанию · 9 страниц")]
         public static void Run()
         {
-            var balance = GameBalance.CreateDefault();
-            var game = new GameSession(balance, Seed, true);
-            var candidates = CandidateCells(game.BaseCell);
-            var report = new CampaignReport
-            {
-                runAtUtc = DateTime.UtcNow.ToString("O"),
-                unityVersion = UnityEngine.Application.unityVersion,
-                seed = Seed,
-                fixedDeltaSeconds = DeltaSeconds,
-                maxTicksPerWave = MaxTicksPerWave,
-                startingInk = game.Ink,
-                startingBaseHealth = game.BaseHealth,
-                starterStructures = game.Structures.Count,
-                radii = Radii,
-                strategy = "Before each wave, choose DeepInk if offered. Visit radii 3,4,6,7,8,9 around the base in W,E,S,N,SW,SE,NW,NE order. Skip occupied cells. Buy three pencil mortars then one pencil piercer, repeating by cumulative successful purchase count. Stop purchasing when ink is below 90, including before a piercer. Launch immediately. Spend only the default starting ink, passive supply, kills, wave grants, and bounded early-launch grants."
+            AssemblyBalanceScenario.LoadRuntime(out var baseline, out var catalog);
+            var report = new Report {
+                RunAtUtc = DateTime.UtcNow.ToString("O"), UnityVersion = UnityEngine.Application.unityVersion,
+                Source = "PlayerBalance -> PlayerRules -> PlayerContent -> PlayerAssemblyCatalog -> MissionBalanceFactory",
+                StepSeconds = CampaignPlayabilityScenario.StepSeconds,
+                MaximumTicksPerWave = CampaignPlayabilityScenario.MaximumTicksPerWave,
+                MaximumWallSecondsPerMission = CampaignPlayabilityScenario.MaximumWallSeconds,
+                Strategy = "Each defense uses the eight starter album pages, the mission seed and its first-traversal technology rank. Every structure and rank costs the ordinary player price. After each cleared wave the player claims an earned flask, cycling green, red and blue. The mixed strategy uses its ink for tower color upgrades, builds new positions and buys ordinary ranks. Expansion buys basic copies. Concentration develops its initial positions. Each policy launches after ten seconds of planning. The report records purchases, work completions and flask payouts."
             };
-            var timer = Stopwatch.StartNew();
-            int purchasedWeapons = 0;
-            for (int waveNumber = 1; waveNumber <= balance.Waves.Count; waveNumber++)
+            report.Passed = true;
+            report.RoleComparisonsPassed = true;
+            foreach (var mission in CampaignCatalog.Default.Missions)
             {
-                if (game.PendingUpgrade)
+                foreach (bool defend in new[] { true, false })
                 {
-                    report.upgradeAfterWaves.Add(game.WaveIndex);
-                    game.ChooseUpgrade(RunUpgrade.DeepInk);
+                    var result = CampaignPlayabilityScenario.Run(baseline, catalog, mission, defend);
+                    report.Missions.Add(result);
+                    report.Passed &= result.Passed;
+                    Debug.Log($"Campaign {mission.Id}/{result.Policy}: {result.Outcome}, waves={result.CompletedWaves}/{result.PlannedWaves}, HP={result.BaseHealth:F1}, ink={result.Ink}, paid={result.PaidInk}, builds={result.Builds.Count}");
                 }
-                foreach (var cell in candidates)
-                {
-                    if (game.Ink < 90) break;
-                    if (game.StructureAt(cell) != null) continue;
-                    var kind = purchasedWeapons % 4 == 3 ? StructureKind.Piercer : StructureKind.Mortar;
-                    int beforeInk = game.Ink;
-                    if (!game.TryBuild(new[] { cell }, kind, MaterialTier.Pencil, out _)) continue;
-                    purchasedWeapons++;
-                    report.purchases.Add(new PurchaseRecord
-                    {
-                        beforeWave = waveNumber, x = cell.X, y = cell.Y, kind = kind.ToString(),
-                        tier = MaterialTier.Pencil.ToString(), cost = beforeInk - game.Ink, inkAfter = game.Ink
-                    });
-                }
-                game.StartNextWave();
-                int ticks = 0;
-                while (ticks < MaxTicksPerWave && game.Phase == RunPhase.Assault)
-                { game.Tick(DeltaSeconds); ticks++; }
-                report.waves.Add(new WaveRecord
-                {
-                    wave = waveNumber, title = balance.Waves[waveNumber - 1].Title,
-                    phase = game.Phase.ToString(), baseHealth = game.BaseHealth, kills = game.Kills,
-                    purchasedWeapons = purchasedWeapons, survivingStructures = game.Structures.Count,
-                    ink = game.Ink, elapsedSeconds = game.Elapsed, ticks = ticks,
-                    timedOut = game.Phase == RunPhase.Assault
-                });
-                if (game.Phase != RunPhase.Intermission) break;
+                foreach (var policy in new[] { CampaignDefensePolicy.Expansion, CampaignDefensePolicy.Concentrated })
+                    report.StrategyComparisons.Add(CampaignPlayabilityScenario.Run(baseline, catalog, mission, policy: policy));
             }
-            timer.Stop();
-            int expectedKills = 0;
-            foreach (var wave in balance.Waves) expectedKills += wave.Count;
-            report.phase = game.Phase.ToString();
-            report.kills = game.Kills;
-            report.expectedKills = expectedKills;
-            report.baseHealth = game.BaseHealth;
-            report.elapsedSeconds = game.Elapsed;
-            report.purchasedWeapons = purchasedWeapons;
-            report.survivingStructures = game.Structures.Count;
-            report.ink = game.Ink;
-            report.wallTimeMilliseconds = timer.Elapsed.TotalMilliseconds;
-            report.passed = game.Phase == RunPhase.Victory && game.BaseHealth > 0 &&
-                game.Kills == expectedKills && report.waves.Count == balance.Waves.Count;
+            var firstExpansion = report.StrategyComparisons.First(r => r.MissionId == "notebook-1-page-2" && r.Policy == "field-expansion-v2");
+            var firstConcentration = report.StrategyComparisons.First(r => r.MissionId == "notebook-1-page-2" && r.Policy == "field-concentrated-v2");
+            var coverageExpansion = report.StrategyComparisons.First(r => r.MissionId == "notebook-1-page-3" && r.Policy == "field-expansion-v2");
+            var coverageConcentration = report.StrategyComparisons.First(r => r.MissionId == "notebook-1-page-3" && r.Policy == "field-concentrated-v2");
+            report.RoleComparisonsPassed = firstConcentration.Passed && firstExpansion.Passed &&
+                firstConcentration.PaidInk < firstExpansion.PaidInk && firstConcentration.Builds.Count < firstExpansion.Builds.Count &&
+                coverageExpansion.CompletedWaves > coverageConcentration.CompletedWaves &&
+                report.Missions.Where(r => r.Outcome == "Victory").All(r => r.Waves.All(w => w.PeakAlive >= 200) &&
+                    r.Flasks.Count == r.CompletedWaves - 1 &&
+                    r.Flasks.All(f => f.Amount == 12) && r.Flasks.Select(f => f.Color).Distinct().Count() == 3) &&
+                report.Missions.Where(r => r.Outcome == "Victory").SelectMany(r => r.Modernizations)
+                    .Where(u => u.IsColor && u.CompletedAt >= 0).Select(u => u.Color).Distinct().Count() == 3 &&
+                report.Missions.Concat(report.StrategyComparisons).All(r => r.GlobalUpgradeChoices == 0 && r.FieldModernization);
 
-            string path = Path.GetFullPath(Path.Combine(UnityEngine.Application.dataPath, "..", "docs", "validation", "campaign-smoke.json"));
+            report.Passed &= report.RoleComparisonsPassed;
+            string path = Path.GetFullPath(Path.Combine(UnityEngine.Application.dataPath, "..", ReportPath));
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             File.WriteAllText(path, JsonUtility.ToJson(report, true));
-            string message = $"Paper Defense campaign validation: passed={report.passed}, phase={report.phase}, " +
-                $"kills={report.kills}/{report.expectedKills}, base={report.baseHealth}, seconds={report.elapsedSeconds:F1}. Report: {path}";
-            if (!report.passed)
-            {
-                UnityEngine.Debug.LogError(message);
-                throw new InvalidOperationException(message);
-            }
-            UnityEngine.Debug.Log(message);
-        }
-
-        private static List<Cell> CandidateCells(Cell center)
-        {
-            var cells = new List<Cell>();
-            foreach (int radius in Radii)
-                foreach (var direction in Directions)
-                    cells.Add(new Cell(center.X + direction.X * radius, center.Y + direction.Y * radius));
-            return cells;
-        }
-
-        [Serializable]
-        private sealed class CampaignReport
-        {
-            public string runAtUtc, unityVersion, strategy, phase;
-            public int seed, maxTicksPerWave, startingInk, starterStructures, expectedKills;
-            public int kills, purchasedWeapons, survivingStructures, ink;
-            public float fixedDeltaSeconds, startingBaseHealth, baseHealth, elapsedSeconds;
-            public double wallTimeMilliseconds;
-            public bool passed;
-            public int[] radii;
-            public List<int> upgradeAfterWaves = new List<int>();
-            public List<WaveRecord> waves = new List<WaveRecord>();
-            public List<PurchaseRecord> purchases = new List<PurchaseRecord>();
-        }
-
-        [Serializable]
-        private sealed class WaveRecord
-        {
-            public int wave, kills, purchasedWeapons, survivingStructures, ink, ticks;
-            public string title, phase;
-            public float baseHealth, elapsedSeconds;
-            public bool timedOut;
-        }
-
-        [Serializable]
-        private sealed class PurchaseRecord
-        {
-            public int beforeWave, x, y, cost, inkAfter;
-            public string kind, tier;
+            if (!report.Passed) throw new InvalidOperationException("Campaign playability failed. Report: " + path);
+            Debug.Log("Nine paid-assembly victories and nine undefended defeats verified. Report: " + path);
         }
     }
 }

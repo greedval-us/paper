@@ -23,9 +23,10 @@ namespace PaperDefense.Core
     public sealed class WeaponRecipe
     {
         public PartRef Mechanism { get; } public PartRef Head { get; } public PartRef Sight { get; } public PartRef Magazine { get; } public PartRef Trigger { get; }
-        public WeaponRecipe(PartRef mechanism, PartRef head, PartRef sight, PartRef magazine, PartRef trigger)
-        { Mechanism = mechanism; Head = head; Sight = sight; Magazine = magazine; Trigger = trigger; }
-        public IEnumerable<PartRef> Parts { get { yield return Mechanism; yield return Head; yield return Sight; yield return Magazine; yield return Trigger; } }
+        public PartRef? Mount { get; }
+        public WeaponRecipe(PartRef mechanism, PartRef head, PartRef sight, PartRef magazine, PartRef trigger, PartRef? mount = null)
+        { Mechanism = mechanism; Head = head; Sight = sight; Magazine = magazine; Trigger = trigger; Mount = mount; }
+        public IEnumerable<PartRef> Parts { get { yield return Mechanism; yield return Head; yield return Sight; yield return Magazine; yield return Trigger; if (Mount.HasValue) yield return Mount.Value; } }
     }
     public sealed class WeaponMountRecipe
     {
@@ -60,10 +61,12 @@ namespace PaperDefense.Core
         public PartRef Site { get; } public PartRef Function { get; } public PartRef Shell { get; } public PartRef Utility { get; }
         public StructureRecipe(AssemblyStructureFamily family, PartRef site, PartRef function, PartRef shell, PartRef utility)
         {
-            if (family != AssemblyStructureFamily.Wall && family != AssemblyStructureFamily.Slow && family != AssemblyStructureFamily.Repair && family != AssemblyStructureFamily.Generator)
+            if (!IsKnownFamily(family))
                 throw AssemblyCatalogException.At("assembly.compatibility.unknown", "structure.family");
             Family = family; Site = site; Function = function; Shell = shell; Utility = utility;
         }
+        internal static bool IsKnownFamily(AssemblyStructureFamily family)
+            => family != AssemblyStructureFamily.None && family != AssemblyStructureFamily.All && Enum.IsDefined(typeof(AssemblyStructureFamily), family);
         public IEnumerable<PartRef> Parts { get { yield return Site; yield return Function; yield return Shell; yield return Utility; } }
     }
     public sealed class AssemblyRecipe
@@ -90,6 +93,8 @@ namespace PaperDefense.Core
     {
         public string Id; public int Revision = 1;
         public PartRef CreateSnapshot() => new PartRef(Id, Revision);
+        // Unity inline serialization may materialize a missing optional reference as an empty object.
+        internal PartRef? CreateOptionalSnapshot() => string.IsNullOrEmpty(Id) && (Revision == 0 || Revision == 1) ? (PartRef?)null : CreateSnapshot();
     }
     [Serializable] public sealed class FoundationRecipeInput
     {
@@ -98,8 +103,8 @@ namespace PaperDefense.Core
     }
     [Serializable] public sealed class WeaponRecipeInput
     {
-        public PartRefInput Mechanism, Head, Sight, Magazine, Trigger;
-        public WeaponRecipe CreateSnapshot() => new WeaponRecipe(Mechanism.CreateSnapshot(), Head.CreateSnapshot(), Sight.CreateSnapshot(), Magazine.CreateSnapshot(), Trigger.CreateSnapshot());
+        public PartRefInput Mechanism, Head, Sight, Magazine, Trigger, Mount;
+        public WeaponRecipe CreateSnapshot() => new WeaponRecipe(Mechanism.CreateSnapshot(), Head.CreateSnapshot(), Sight.CreateSnapshot(), Magazine.CreateSnapshot(), Trigger.CreateSnapshot(), Mount?.CreateOptionalSnapshot());
     }
     [Serializable] public sealed class WeaponMountRecipeInput
     {
@@ -115,6 +120,7 @@ namespace PaperDefense.Core
     {
         public string Id, Name; public int Revision = 1;
         public AlbumEntryKind Kind;
+        public bool WorkshopOnly;
         public FoundationRecipeInput Foundation;
         public WeaponMountRecipeInput[] Mounts = Array.Empty<WeaponMountRecipeInput>();
         public StructureRecipeInput Structure;

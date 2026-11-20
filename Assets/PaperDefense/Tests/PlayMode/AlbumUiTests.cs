@@ -52,6 +52,33 @@ namespace PaperDefense.Tests
             }
         }
 
+        [Test] public void SearchingKeepsTheCyrillicInputAndFocusAliveAcrossResultsAndAnEmptyView()
+        {
+            using (var fixture = new AssemblyCommandFixture())
+            {
+                var events = new GameObject("Album search events", typeof(EventSystem));
+                try
+                {
+                    var panel = Panel(fixture);
+                    var input = panel.Root.GetComponentInChildren<AlbumSearchInput>();
+                    EventSystem.current.SetSelectedGameObject(input.gameObject);
+                    input.text = "рЕмОнТ";
+                    Assert.That(CardCount, Is.EqualTo(1));
+                    Assert.That(panel.SelectedId, Is.EqualTo("album.repair"));
+                    Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(input.gameObject));
+                    input.text = "несуществующий чертёж";
+                    Assert.That(CardCount, Is.Zero);
+                    Assert.That(panel.Root.GetComponentInChildren<AlbumSearchInput>(), Is.SameAs(input));
+                    Assert.That(AlbumSearchInput.ConsumeEscape(panel.Root), Is.True);
+                    Assert.That(panel.SearchQuery, Is.Empty);
+                    Assert.That(CardCount, Is.EqualTo(8));
+                    Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(Button("Album filter All").gameObject));
+                    Assert.That(fixture.Store.SaveCalls, Is.Zero);
+                }
+                finally { Object.DestroyImmediate(events); }
+            }
+        }
+
         [Test] public void FilteredCardEditsItsIdentityAndVariantBecomesSelectedByIdentity()
         {
             using (var fixture = new AssemblyCommandFixture())
@@ -194,16 +221,23 @@ namespace PaperDefense.Tests
 
         [UnityTest] public IEnumerator KeyboardSelectionRevealsTheLastCardInsideTheCatalogue()
         {
-            using (var fixture = new AssemblyCommandFixture())
+            using (var fixture = new AssemblyCommandFixture(configure: data => {
+                var source = data.Entries[0].CreateSnapshot();
+                data.Entries = Enumerable.Range(0, 40).Select(index => new AlbumEntryData(
+                    new AlbumEntry("keyboard." + index, "Страница " + index, 1, source.Snapshot))).ToArray();
+                data.Album = Array.Empty<BlueprintData>(); data.Loadout = new string[8];
+            }))
             {
                 Panel(fixture); var events = new GameObject("Isolated album scroll events", typeof(EventSystem));
                 try
                 {
                     Canvas.ForceUpdateCanvases();
-                    var last = Button("Album choose album.generator").GetComponent<RectTransform>();
+                    var catalogue = canvas.GetComponentsInChildren<ScrollRect>().Single(item => item.name == "Album catalogue");
+                    Assert.That(catalogue.content.rect.height, Is.GreaterThan(catalogue.viewport.rect.height));
+                    var last = Button("Album choose keyboard.39").GetComponent<RectTransform>();
                     EventSystem.current.SetSelectedGameObject(last.gameObject);
                     yield return null; Canvas.ForceUpdateCanvases();
-                    var scroll = canvas.GetComponentsInChildren<ScrollRect>().Single();
+                    var scroll = canvas.GetComponentsInChildren<ScrollRect>().Single(item => item.name == "Album catalogue");
                     var corners = new Vector3[4]; last.GetWorldCorners(corners);
                     foreach (var corner in corners)
                     {
@@ -211,8 +245,8 @@ namespace PaperDefense.Tests
                         Assert.That(point.y, Is.InRange(scroll.viewport.rect.yMin - 1, scroll.viewport.rect.yMax + 1));
                     }
                     ExecuteEvents.Execute(last.gameObject, new BaseEventData(EventSystem.current), ExecuteEvents.submitHandler);
-                    last = Button("Album choose album.generator").GetComponent<RectTransform>();
-                    scroll = canvas.GetComponentsInChildren<ScrollRect>().Single();
+                    last = Button("Album choose keyboard.39").GetComponent<RectTransform>();
+                    scroll = canvas.GetComponentsInChildren<ScrollRect>().Single(item => item.name == "Album catalogue");
                     last.GetWorldCorners(corners);
                     foreach (var corner in corners)
                     {

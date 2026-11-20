@@ -60,7 +60,7 @@ namespace PaperDefense.Editor
                 weapons.Add(new JObject { ["id"] = row["id"].Value<string>(), ["resolved"] = new JObject {
                     ["damage"] = w.Damage, ["interval"] = w.Interval, ["reload"] = w.ReloadSeconds,
                     ["clip"] = w.MagazineSize, ["cycle"] = w.CycleSeconds, ["dps"] = w.NominalDps,
-                    ["range"] = w.Range, ["minRange"] = w.MinimumRange,
+                    ["range"] = w.Range, ["minRange"] = w.MinimumRange, ["firingArcDegrees"] = w.FiringArcDegrees,
                     ["cost"] = AssemblyResolver.WeaponCost(weapon, catalog, balance, MaterialTier.Pencil),
                     ["load"] = parts.Sum(p => p.Get(AssemblyStat.Load, ModifierOperation.Add)),
                     ["level"] = parts.Max(p => p.RequiredLevel), ["acquisition"] = w.AcquisitionSeconds,
@@ -83,7 +83,10 @@ namespace PaperDefense.Editor
                 var recipe = new AssemblyRecipe(new StructureRecipe(family, Ref(row,"site"),Ref(row,"function"),Ref(row,"shell"),Ref(row,"utility")));
                 var resolved = ResolveNamed((string)row["id"],recipe,catalog,balance); var numbers = EntryNumbers(resolved,catalog);
                 numbers["range"] = resolved.Support.Radius;
-                numbers["rate"] = family == AssemblyStructureFamily.Generator ? resolved.Support.IncomePerWave : resolved.Support.RepairPerSecond;
+                numbers["rate"] = family == AssemblyStructureFamily.Generator ? resolved.Support.IncomePerWave
+                    : family == AssemblyStructureFamily.Spikes ? resolved.Support.SpikeDamage
+                    : family == AssemblyStructureFamily.Prism ? resolved.Support.BurnDamagePerSecond
+                    : family == AssemblyStructureFamily.Beacon ? resolved.Support.ArmorReduction : resolved.Support.RepairPerSecond;
                 numbers["slow"] = resolved.Support.SlowSpeedMultiplier; numbers["build"] = resolved.BuildSeconds;
                 buildings.Add(new JObject { ["id"] = (string)row["id"], ["resolved"] = numbers, ["parts"] = References(resolved.Snapshot.Recipe) });
             }
@@ -179,7 +182,7 @@ namespace PaperDefense.Editor
         { var result = AssemblyResolver.Resolve(recipe,catalog,balance,MaterialTier.Pencil); if (!result.Valid) throw new AssemblyCatalogException(result.Diagnostics); return result.Value; }
         static ResolvedEntry ResolveNamed(string id, AssemblyRecipe fallback, ComponentCatalog catalog, GameBalance balance)
         {
-            var starter = catalog.Starters.FirstOrDefault(e => e.Id == id);
+            var starter = catalog.Templates.FirstOrDefault(e => e.Id == id);
             if (starter == null) return Resolve(fallback,catalog,balance);
             var result = AssemblyResolver.ResolveEntry(starter,balance,MaterialTier.Pencil);
             if (!result.Valid) throw new AssemblyCatalogException(result.Diagnostics);
@@ -187,7 +190,7 @@ namespace PaperDefense.Editor
         }
         static JArray References(AssemblyRecipe recipe) => new JArray(recipe.Parts.Select(p => new JObject { ["id"] = p.Id, ["revision"] = p.Revision }));
         static PartRef Ref(JToken row,string key) => new PartRef((string)row[key],1);
-        static WeaponRecipe Weapon(JToken row) => new WeaponRecipe(Ref(row,"core"),Ref(row,"head"),Ref(row,"sight"),Ref(row,"magazine"),Ref(row,"trigger"));
+        static WeaponRecipe Weapon(JToken row) => new WeaponRecipe(Ref(row,"core"),Ref(row,"head"),Ref(row,"sight"),Ref(row,"magazine"),Ref(row,"trigger"),row["mount"] == null ? (PartRef?)null : Ref(row,"mount"));
         static FoundationRecipe StandardFoundation() => new FoundationRecipe(new PartRef("frame.standard",1),new PartRef("hull.standard",1),new PartRef("armor.none",1),new PartRef("feed.standard",1),new PartRef("turn.standard",1));
     }
 }

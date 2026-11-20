@@ -61,6 +61,52 @@ namespace PaperDefense.Tests
             Assert.That(tower.BuildRemaining, Is.EqualTo(1.4f).Within(.00001f));
         }
 
+        [TestCase(-1, true)] [TestCase(1, true)] [TestCase(-1.002f, false)] [TestCase(1.002f, false)]
+        public void TraversalIncludesBothEdgesAndRejectsTargetsBeyondThemAcrossNorth(float edge, bool canFire)
+        {
+            var balance = Balance();
+            var entry = Resolve("gun", balance);
+            var combat = new Combat(entry, balance);
+            combat.Tower.InitializePlacementFacing(355);
+            double angle = (355 + edge * entry.Weapons[0].FiringArcDegrees * .5) * Math.PI / 180;
+            combat.Enemies.Add(Enemy(1, 10.5f + 4 * (float)Math.Cos(angle), 10.5f + 4 * (float)Math.Sin(angle)));
+            combat.Step(.01f);
+            Assert.That(combat.Shots.Count, Is.EqualTo(canFire ? 1 : 0));
+            Assert.That(combat.Tower.PrimaryTargetId, Is.EqualTo(canFire ? 1 : 0));
+        }
+
+        [Test] public void MultimountUsesEachWeaponsOwnSectorAndReleasesATargetThatLeavesIt()
+        {
+            var balance = Balance();
+            var entry = Resolve(AssemblyResolverFixture.Tower(AssemblyResolverFixture.Weapon("gun"), AssemblyResolverFixture.Weapon("piercer")), balance);
+            var combat = new Combat(entry, balance);
+            var wide = entry.Weapons[0];
+            var narrow = entry.Weapons[1];
+            Assert.That(wide.FiringArcDegrees, Is.GreaterThan(narrow.FiringArcDegrees));
+            double angle = (wide.FiringArcDegrees + narrow.FiringArcDegrees) * .25 * Math.PI / 180;
+            var side = Enemy(1, 10.5f + 4 * (float)Math.Cos(angle), 10.5f + 4 * (float)Math.Sin(angle));
+            combat.Enemies.Add(side);
+            combat.Enemies.Add(Enemy(2, 8.5f));
+            combat.Step(.01f);
+            Assert.That(combat.Shots.Select(shot => shot.MountSlotIndex), Is.EqualTo(new[] { 0 }));
+            side.Position = new Point2(8.5f, 10.5f);
+            combat.Step(.01f);
+            Assert.That(combat.Tower.PrimaryTargetId, Is.Zero);
+            Assert.That(combat.Tower.PrimaryAim.X, Is.EqualTo(11.5f));
+            Assert.That(combat.Tower.FacingDegrees, Is.Zero);
+        }
+
+        [Test] public void CleanupCanSelectAnInSectorMarkBehindANearerOutOfSectorMark()
+        {
+            var marks = new[] {
+                new BlotState { Cell = new Cell(9, 10), Remaining = 5 },
+                new BlotState { Cell = new Cell(13, 10), Remaining = 5 }
+            };
+            var sector = new FiringSector(new StructureState(), 180);
+            Assert.That(BlotQueries.TryFindNearest(marks, new Point2(10.5f, 10.5f), 0, 4, sector, out Cell selected), Is.True);
+            Assert.That(selected, Is.EqualTo(new Cell(13, 10)));
+        }
+
         [TestCase("gun", 12)] [TestCase("piercer", 20)] [TestCase("mortar", 28)]
         [TestCase("fan", 14)] [TestCase("ricochet", 12)] [TestCase("stapler", 5)] [TestCase("blotter", 0)]
         public void EveryFamilyUsesOwnedDamageAndPublishesItsExistingEventAlias(string family, float damage)
@@ -88,6 +134,26 @@ namespace PaperDefense.Tests
             Assert.That(combat.Enemies.Take(7).Select(e => e.Health), Is.All.EqualTo(980));
             Assert.That(combat.Enemies.Skip(7).Select(e => e.Health), Is.All.EqualTo(1000));
             Assert.That(combat.Statistics.Damage("weapon.piercer"), Is.EqualTo(140));
+        }
+
+        [Test] public void LineShotBypassesHalfOfEachVictimsRemainingArmor()
+        {
+            var balance = Balance();
+            balance.EnableEnemyMechanics = true;
+            var combat = new Combat(Resolve("piercer", balance), balance);
+            var sketch = Enemy(1, 12.5f);
+            var hatched = Enemy(2, 13.5f);
+            var marked = Enemy(3, 14.5f);
+            hatched.DrawingTier = marked.DrawingTier = DrawingTier.Hatched;
+            marked.BlotRemaining = 3;
+            EnemyEffects.ApplyHit(marked, 0, InkColor.Green, combat.Statistics, StructureKind.Gun);
+            combat.Enemies.AddRange(new[] { sketch, hatched, marked });
+            combat.Step(.01f);
+            // Raw shot is 20; their remaining defenses are 0%, 15%, and (15%+15%-20%) respectively.
+            Assert.That(sketch.Health, Is.EqualTo(980).Within(.001f));
+            Assert.That(hatched.Health, Is.EqualTo(981.5f).Within(.001f));
+            Assert.That(marked.Health, Is.EqualTo(981).Within(.001f));
+            Assert.That(EnemyEffects.Defense(marked), Is.EqualTo(.10f).Within(.001f));
         }
 
         [Test] public void FanUsesNinetyDegreeConeAndItsRangeBoundaries()
@@ -216,6 +282,11 @@ namespace PaperDefense.Tests
             Assert.That(combat.Statistics.Damage("weapon.mortar"), Is.Zero);
             var gun = combat.Events.Single(e => e.Kind == SimulationEventKind.Shot && e.WeaponId == "weapon.gun");
             var impact = combat.Events.Single(e => e.Kind == SimulationEventKind.ProjectileImpact);
+            var launch = combat.Events.Single(e => e.Kind == SimulationEventKind.ProjectileLaunched);
+            Assert.That(impact.ActionId, Is.EqualTo(launch.ActionId));
+            Assert.That(impact.SourceStructureId, Is.EqualTo(7));
+            Assert.That(gun.ActionId, Is.GreaterThan(launch.ActionId));
+            Assert.That(gun.SourceStructureId, Is.EqualTo(modern.Id));
             Assert.That(gun.SimulationSeconds, Is.EqualTo(.01).Within(.00001));
             Assert.That(gun.SimulationSeconds, Is.LessThan(impact.SimulationSeconds));
             Assert.That(gun.Sequence, Is.LessThan(impact.Sequence));
@@ -311,14 +382,22 @@ namespace PaperDefense.Tests
 
         [Test] public void TargetLossDoesNotRefillAnUnfinishedDrumMagazine()
         {
-            var balance = Balance(); var combat = new Combat(Resolve("gun", balance, magazine: "drum"), balance);
-            var enemy = Enemy(1, 12.5f); combat.Enemies.Add(enemy); combat.Steps(100);
+            var balance = Balance();
+            var entry = Resolve("gun", balance, magazine: "drum");
+            var drum = entry.Weapons[0];
+            float feed = entry.FeedForActiveMounts(1);
+            var combat = new Combat(entry, balance);
+            var enemy = Enemy(1, 12.5f);
+            combat.Enemies.Add(enemy);
+            combat.Step(2.5f * drum.IntervalAtFeed(feed));
             Assert.That(combat.AllShots.Count, Is.EqualTo(3));
-            combat.Enemies.Clear(); combat.Steps(500); Assert.That(combat.AllShots.Count, Is.EqualTo(3));
+            combat.Enemies.Clear(); combat.Steps(500);
+            Assert.That(combat.AllShots.Count, Is.EqualTo(3));
+            Assert.That(combat.Tower.GetMountState(0).Cycle.RoundsRemaining, Is.EqualTo(drum.MagazineSize - 3));
             combat.Enemies.Add(enemy); combat.Steps(800);
-            Assert.That(combat.AllShots.Count, Is.GreaterThan(12));
-            Assert.That(combat.AllShots[12].SimulationSeconds - combat.AllShots[11].SimulationSeconds,
-                Is.EqualTo(1.26).Within(.02), "The twelfth overall shot exhausts the original drum despite temporary target loss.");
+            Assert.That(combat.AllShots.Count, Is.GreaterThan(drum.MagazineSize));
+            Assert.That(combat.AllShots[drum.MagazineSize].SimulationSeconds - combat.AllShots[drum.MagazineSize - 1].SimulationSeconds,
+                Is.EqualTo(drum.ReloadAtFeed(feed)).Within(.02), "The last round of the original drum must still trigger the full reload.");
         }
 
         [Test] public void CoarseStepDoesNotSpendPredictedRoundsAfterTheOnlyTargetDiesOrRefillForItsReplacement()
@@ -373,13 +452,13 @@ namespace PaperDefense.Tests
         {
             internal readonly List<Cell> Cells;
             internal Blots(params Cell[] cells) { Cells = new List<Cell>(cells); }
-            public bool TryFindNearest(Point2 origin, float range, out Cell cell)
+            public bool TryFindNearest(Point2 origin, float minimumRange, float range, FiringSector sector, out Cell cell)
             {
                 cell = default; bool found = false; double nearest = range * range;
                 foreach (var candidate in Cells)
                 {
                     double dx = candidate.X + .5 - origin.X, dy = candidate.Y + .5 - origin.Y, square = dx * dx + dy * dy;
-                    if (square > nearest) continue;
+                    if (square > nearest || square < minimumRange * minimumRange || !sector.Contains(dx, dy)) continue;
                     if (!found || square < nearest || candidate.Y < cell.Y || (candidate.Y == cell.Y && candidate.X < cell.X))
                     { cell = candidate; nearest = square; found = true; }
                 }

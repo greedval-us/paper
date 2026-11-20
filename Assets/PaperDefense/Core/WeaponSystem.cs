@@ -3,10 +3,7 @@ using System.Collections.Generic;
 
 namespace PaperDefense.Core
 {
-    /// <summary>
-    /// Target selection and weapon geometry live here, independently of wave and construction rules.
-    /// Add new weapon effects in this system; all queries share its reusable spatial buckets.
-    /// </summary>
+    /// <summary>Schedules mount acquisition, feed, reloads and firing for each tower in the simulation step.</summary>
     internal sealed partial class WeaponSystem
     {
         private readonly GameBalance balance;
@@ -18,18 +15,14 @@ namespace PaperDefense.Core
         private readonly IBlotContext blotContext;
         private readonly EnemySpatialIndex spatial;
         private readonly List<EnemyState> targets = new List<EnemyState>(128);
-        private readonly List<EnemyState> splashTargets = new List<EnemyState>(64);
-        private readonly List<MortarProjectile> projectiles = new List<MortarProjectile>(32);
-        private readonly HashSet<int> ricochetVictims = new HashSet<int>();
-        private readonly EnemyDistanceComparer targetOrder = new EnemyDistanceComparer();
-        private int nextProjectileId = 1;
+        private readonly WeaponAttackResolver attacks;
         private double clockSeconds;
-        private long nextActionId, visualTick, visualActionId;
-        private int visualSourceStructureId, visualMountSlotIndex = -1;
+        private long visualTick;
         private SimulationEventBuffer visualEvents;
 
-        internal IReadOnlyList<MortarProjectile> Projectiles => projectiles;
-        internal bool HasPendingProjectiles => projectiles.Count != 0;
+        internal IReadOnlyList<MortarProjectile> Projectiles => attacks.Projectiles;
+        internal bool HasPendingProjectiles => attacks.Projectiles.Count != 0;
+        internal bool TryGetDirectWeapon(StructureKind kind, out WeaponDefinition weapon) => directWeapons.TryGetValue(kind, out weapon);
 
         internal WeaponSystem(GameBalance balance, IBlotContext blotContext = null)
         {
@@ -48,6 +41,7 @@ namespace PaperDefense.Core
             // An injected fixture may provide marks without campaign corpse generation.
             this.blotContext = balance.Mechanics.CorpseBlots ? blotContext : null;
             spatial = new EnemySpatialIndex(balance.Width, balance.Height);
+            attacks = new WeaponAttackResolver(spatial, targets, mechanics, effects, balance.BlotReduction);
         }
 
         internal void Fire(List<StructureState> structures, List<EnemyState> enemies, List<ShotEvent> shots,
@@ -57,10 +51,14 @@ namespace PaperDefense.Core
             clockSeconds = timeSeconds ?? clockSeconds + delta;
             visualEvents=events;visualTick=tick;
             spatial.Rebuild(enemies);
+            // One exposure measurement per operable attacking tower, independent of its mount count.
+            foreach (var structure in structures)
+                if (CanOperate(structure) && HasDamagingWeapon(structure))
+                    statistics.RecordPositionActive(structure.Id, structure.Cell, structure.ContentId, delta);
             // Composite actions retain their moments inside the step. Historical shells and
             // weapon actions retain their original cadence at the end of the simulation tick.
             FireComposites(structures, shots, fireMultiplier, damageMultiplier, delta, tick, statistics, events);
-            AdvanceProjectiles(delta, tick, statistics, events, legacyOnly: true);
+            attacks.AdvanceLegacyProjectiles(delta, tick, clockSeconds, statistics, events);
             foreach (var structure in structures)
             {
                 if (!CanOperate(structure)) continue;
@@ -77,14 +75,8 @@ namespace PaperDefense.Core
                         if(assembly.Weapons[mount]!=null&&ConsumesProduction(structure,origin,assembly.Weapons[mount],mount,delta))activeMounts++;
                 }
                 float feed = blueprint == null ? 1 : TowerCatalog.FeedMultiplier(assembly, balance, activeMounts);
-                ColorEffectPayload payload = mechanics.ColorCartridges ? ColorPayload(structure.Color) : default;
-                TowerColorBudget colorBudget = null;
-                if (balance.Effects.LimitTowerColor && payload.Color != InkColor.None)
-                {
-                    if (structure.ColorBudget == null)
-                        structure.ColorBudget = new TowerColorBudget(balance.Effects.ColorWindowSeconds, balance.Effects.ColorTargetsPerWindow);
-                    colorBudget = structure.ColorBudget;
-                }
+                ColorEffectPayload payload = mechanics.ColorCartridges ? ColorPayload(structure) : default;
+                var colorBudget = ColorBudget(structure, payload);
                 if(assembly==null)FireMount(structure,origin,directWeapons[structure.Kind],0,shots,
                         fireMultiplier * feed, dynamic, damageMultiplier, payload, colorBudget, delta, tick, statistics, events);
                 else for(int mount=0;mount<assembly.Weapons.Length;mount++)if(assembly.Weapons[mount]!=null)
@@ -102,7 +94,7 @@ namespace PaperDefense.Core
             if(structure?.ResolvedEntry!=null&&CanOperate(structure))isolatedComposite.Add(structure);
             // Shells own their launch parameters and keep flying after their source is removed.
             FireComposites(isolatedComposite,shots,1,1,delta,tick,statistics,events,isolatedComposite.Count==0?-1:mount);
-            AdvanceProjectiles(delta,tick,statistics,events,legacyOnly:true);
+            attacks.AdvanceLegacyProjectiles(delta, tick, clockSeconds, statistics, events);
             if(structure==null||!CanOperate(structure)||structure.ResolvedEntry!=null)return;
             var assembly=Assembly(structure);var weapon=mount>=0&&mount<assembly.Weapons.Length?assembly.Weapons[mount]:null;
             if(weapon==null)throw new ArgumentOutOfRangeException(nameof(mount));
@@ -114,9 +106,32 @@ namespace PaperDefense.Core
         }
 
         bool CanOperate(StructureState structure)
-            => structure.Health > 0 && structure.IsComplete && structure.BuildRemaining <= 0 && (structure.ResolvedEntry == null || structure.ResolvedEntry.Weapons.Count > 0) && structure.Kind != StructureKind.Wall && structure.Kind != StructureKind.TarPit && structure.Kind != StructureKind.RepairPost
+            => !structure.Modernization.IsWorking && !structure.ModernizationBlockedThisStep && structure.Health > 0 && structure.IsComplete && structure.BuildRemaining <= 0 && (structure.ResolvedEntry == null || structure.ResolvedEntry.Weapons.Count > 0) && structure.Kind != StructureKind.Wall && structure.Kind != StructureKind.TarPit && structure.Kind != StructureKind.RepairPost
                 && (structure.Blueprint==null || (Assembly(structure).FreeformDesign?.IsUsable ?? true));
+        bool HasDamagingWeapon(StructureState structure)
+        {
+            if (structure.ResolvedEntry != null) return ModernizationRules.HasAttack(structure.ResolvedEntry);
+            if (structure.Blueprint == null && ConstructionToolRules.IsTool(structure.Kind)) return false;
+            var assembly = Assembly(structure);
+            if (assembly != null)
+            {
+                foreach (var weapon in assembly.Weapons)
+                    if (weapon != null && weapon.Attack != AttackKind.Cleanup && weapon.Numeric.Damage > 0) return true;
+                return false;
+            }
+            return directWeapons.TryGetValue(structure.Kind, out var direct) && direct.Attack != AttackKind.Cleanup && direct.Numeric.Damage > 0;
+        }
+        ColorEffectPayload ColorPayload(StructureState tower) => mechanics.FieldModernization ? ModernizationRules.ResolveColor(ColorPayload(tower.Color),tower.Modernization.ColorRank) : ColorPayload(tower.Color);
         ColorEffectPayload ColorPayload(InkColor color)=>color==InkColor.Red?redPayload:color==InkColor.Blue?bluePayload:color==InkColor.Green?greenPayload:default;
+
+        TowerColorBudget ColorBudget(StructureState tower,ColorEffectPayload payload)
+        {
+            if (payload.Color == InkColor.None || (!mechanics.FieldModernization && !balance.Effects.LimitTowerColor)) return null;
+            if (tower.ColorBudget == null)
+                tower.ColorBudget = new TowerColorBudget(mechanics.FieldModernization ? 1 : balance.Effects.ColorWindowSeconds,
+                    mechanics.FieldModernization ? 3 + Math.Max(0,tower.Modernization.ColorRank-1) : balance.Effects.ColorTargetsPerWindow);
+            return tower.ColorBudget;
+        }
 
         // Production is shared by unfinished reloads and acquired working mounts. A ready idle
         // mount releases its share. This preview never mutates tracking: each barrel revalidates
@@ -126,9 +141,10 @@ namespace PaperDefense.Core
             var state=structure.GetMountState(mount);
             if (state.ActionRemaining > 0) return true;
             float range = MountRange(structure, weapon, mount);
-            if(weapon.Attack==AttackKind.Cleanup) return TryFindBlot(origin,weapon.MinimumRange,range,out _);
+            var sector = SectorFor(structure, weapon);
+            if(weapon.Attack==AttackKind.Cleanup) return TryFindBlot(origin,weapon.MinimumRange,range,sector,out _);
             spatial.Query(origin, range, targets);
-            FilterRange(origin,weapon.MinimumRange,range,targets);
+            FilterRange(origin,weapon.MinimumRange,range,sector,targets);
             EnemyState target = PickTarget(structure, origin, targets);
             if (target == null) return false;
             int previousId = state.TargetId;
@@ -144,10 +160,9 @@ namespace PaperDefense.Core
             RunStatistics statistics, SimulationEventBuffer events)
         {
             var definition = weapon.Numeric;
-            StructureKind kind = weapon.LegacyKind ?? (StructureKind)(-1);
             var state=structure.GetMountState(mount);
             float range = MountRange(structure, weapon, mount);
-            float interval = TowerCatalog.ActionInterval(Assembly(structure),weapon,mount,balance,fireMultiplier);
+            float interval = MountInterval(structure,weapon,mount,fireMultiplier);
             if (dynamic) AdvanceReload(structure, mount, interval, delta);
             if(weapon.Attack==AttackKind.Cleanup)
             {
@@ -155,46 +170,25 @@ namespace PaperDefense.Core
                 return;
             }
             spatial.Query(origin, range, targets);
-            FilterRange(origin,weapon.MinimumRange,range,targets);
+            FilterRange(origin,weapon.MinimumRange,range,SectorFor(structure, weapon),targets);
             EnemyState target = PickTarget(structure, origin, targets);
             bool acquired = TrackTarget(structure, target, mount, delta);
-            if(target!=null)state.Aim=target.Position;
+            state.Aim = target == null ? structure.RestAim : target.Position;
             if (target == null) { statistics.RecordIdle(weapon.Id, delta); return; }
             if (!acquired) return;
             if(!TryBeginAction(structure,mount,interval,dynamic)) return;
-            BeginVisualAction(structure,mount,origin,target.Position,weapon,tick,events);
             float damage = TowerCatalog.FiniteStat(Math.Max(0,definition.Damage*balance.Material(structure.Tier).DamageMultiplier*damageMultiplier
                 *(Assembly(structure)?.FreeformDesign?.GetBarrel(mount)?.DamageMultiplier??1)),"damage");
+            if (structure.ModernizationState != null) damage *= ModernizationRules.DamageMultiplier(structure.ModernizationState.Ranks);
             structure.Aim = target.Position;
-            statistics.RecordLaunch(weapon.Id);
-            switch (weapon.Attack)
-            {
-                case AttackKind.Line:
-                    FirePiercer(origin, target.Position, range, Math.Max(weapon.MinimumLineRadius, definition.Radius),
-                        Math.Max(1, definition.MaxPierce), damage, weapon, payload, colorBudget, statistics);
-                    break;
-                case AttackKind.AreaProjectile:
-                    LaunchMortar(origin, target.Position, weapon, damage, payload, colorBudget,
-                        structure.Blueprint == null ? MortarFootprint.Circle : structure.Blueprint.GetMortarFootprint(mount), tick, events);
-                    return;
-                case AttackKind.Cone:
-                    var volley=structure.Blueprint?.GetWeaponMount(mount)?.Volley;
-                    if(volley!=null)FireVolley(structure,origin,target.Position,range,volley,weapon,damage,payload,colorBudget,shots,tick,statistics,events);
-                    else FireFan(structure, origin, target.Position, weapon, damage, payload, colorBudget, shots, tick, statistics, events);
-                    return;
-                case AttackKind.Ricochet:
-                    FireRicochet(structure, origin, target, weapon, damage, payload, colorBudget, shots, tick, statistics, events);
-                    return;
-                case AttackKind.Radial:
-                    if (colorBudget != null) SortTargets(origin, targets);
-                    foreach (var victim in targets) ApplyDamage(victim, damage, weapon, payload, colorBudget, statistics);
-                    break;
-                default:
-                    ApplyDamage(target, damage, weapon, payload, colorBudget, statistics);
-                    break;
-            }
-            Point2 shotEnd = weapon.Attack == AttackKind.Line ? RayEnd(origin, structure.Aim, range) : structure.Aim;
-            PublishShot(origin, shotEnd, weapon, definition.Radius, structure.Id, shots, tick, events);
+            var shot = new WeaponAttack {
+                Source = structure, Mount = mount, Weapon = weapon, Origin = origin, Aim = target.Position,
+                Target = target, Range = range, Damage = damage, Payload = payload, ColorBudget = colorBudget,
+                PierceLimit = Math.Max(1, definition.MaxPierce),
+                Footprint = weapon.SupportsFootprint ? structure.Blueprint?.GetMortarFootprint(mount) : null,
+                Volley = weapon.SupportsVolley ? structure.Blueprint?.GetWeaponMount(mount)?.Volley : null
+            };
+            attacks.Fire(shot, shots, tick, clockSeconds, statistics, events);
         }
 
         ResolvedTowerAssembly Assembly(StructureState structure)
@@ -204,23 +198,17 @@ namespace PaperDefense.Core
             return structure.Assembly;
         }
         float MountRange(StructureState structure,WeaponDefinition weapon,int mount)
-            => TowerCatalog.WeaponRange(Assembly(structure),weapon,mount);
-        void BeginVisualAction(StructureState structure,int mount,Point2 from,Point2 to,WeaponDefinition weapon,long tick,SimulationEventBuffer events)
         {
-            visualSourceStructureId=structure.Id;visualMountSlotIndex=mount;visualActionId=++nextActionId;
-            events.Publish(tick,SimulationEventKind.WeaponActionStarted,from,to,weapon.LegacyKind??(StructureKind)(-1),
-                entityId:structure.Id,weaponId:weapon.Id,sourceStructureId:structure.Id,mountSlotIndex:mount,
-                actionId:visualActionId,simulationSeconds:clockSeconds,attack:weapon.Attack);
+            float range=TowerCatalog.WeaponRange(Assembly(structure),weapon,mount);
+            return structure.ModernizationState==null?range:range*ModernizationRules.RangeMultiplier(structure.ModernizationState.Ranks);
         }
-
-        void PublishShot(Point2 from,Point2 to,WeaponDefinition weapon,float radius,int structureId,List<ShotEvent> shots,long tick,SimulationEventBuffer events)
+        float MountInterval(StructureState structure,WeaponDefinition weapon,int mount,float production)
         {
-            StructureKind legacy = weapon.LegacyKind ?? (StructureKind)(-1);
-            shots.Add(new ShotEvent(from,to,legacy,radius,weapon.Id,structureId,visualMountSlotIndex,visualActionId,clockSeconds));
-            events.Publish(tick,SimulationEventKind.Shot,from,to,legacy,radius,structureId,weaponId:weapon.Id,
-                sourceStructureId:structureId,mountSlotIndex:visualMountSlotIndex,actionId:visualActionId,simulationSeconds:clockSeconds,attack:weapon.Attack);
+            float interval=TowerCatalog.ActionInterval(Assembly(structure),weapon,mount,balance,production);
+            return structure.ModernizationState==null?interval:ModernizationRules.WorkInterval(interval,structure.ModernizationState.Ranks,balance.Combat.MinimumActionInterval);
         }
-
+        static FiringSector SectorFor(StructureState structure, WeaponDefinition weapon)
+            => weapon.Attack == AttackKind.Radial ? default : new FiringSector(structure, weapon.FiringArcDegrees);
         private bool TrackTarget(StructureState structure, EnemyState target, int mount, float delta)
         {
             var state=structure.GetMountState(mount);
@@ -263,7 +251,7 @@ namespace PaperDefense.Core
                 for(int mount=0;mount<(assembly==null?1:assembly.Weapons.Length);mount++)
                 {
                     var weapon=assembly==null?directWeapons[structure.Kind]:assembly.Weapons[mount];if(weapon==null)continue;
-                    AdvanceReload(structure,mount,TowerCatalog.ActionInterval(assembly,weapon,mount,balance,production),delta);
+                    AdvanceReload(structure,mount,MountInterval(structure,weapon,mount,production),delta);
                     var state=structure.GetMountState(mount);state.TargetId=0;state.AcquisitionRemaining=0;
                 }
             }
@@ -288,9 +276,9 @@ namespace PaperDefense.Core
         {
             var definition=weapon.Numeric;
             var state=structure.GetMountState(mount);
-            if(!TryFindBlot(origin,weapon.MinimumRange,range,out Cell cell))
+            if(!TryFindBlot(origin,weapon.MinimumRange,range,SectorFor(structure, weapon),out Cell cell))
             {
-                state.TargetId=0;state.AcquisitionRemaining=0;
+                state.TargetId=0;state.AcquisitionRemaining=0;state.Aim=structure.RestAim;
                 statistics.RecordIdle(weapon.Id,delta); return;
             }
             Point2 target=new Point2(cell.X+.5f,cell.Y+.5f);
@@ -300,190 +288,18 @@ namespace PaperDefense.Core
             float radius=Math.Max(0,definition.Radius);
             int cleared=blotContext.Clear(cell,radius);
             if(cleared<=0) return;
-            BeginVisualAction(structure,mount,origin,target,weapon,tick,events);
-            structure.Aim=target;
-            statistics.RecordBlotsCleared(cleared); statistics.RecordLaunch(weapon.Id);
-            PublishShot(origin, target, weapon, radius, structure.Id, shots, tick, events);
+            structure.Aim = target;
+            var shot = new WeaponAttack {
+                Source = structure, Mount = mount, Weapon = weapon, Origin = origin, Aim = target,
+                Range = range, ClearedBlots = cleared
+            };
+            attacks.Fire(shot, shots, tick, clockSeconds, statistics, events);
         }
 
-        bool TryFindBlot(Point2 origin,float minimumRange,float maximumRange,out Cell cell)
+        bool TryFindBlot(Point2 origin,float minimumRange,float maximumRange,FiringSector sector,out Cell cell)
         {
             cell=default;if(blotContext==null||maximumRange<=0)return false;
-            if(blotContext is IBlotRangeContext ranged)return ranged.TryFindNearest(origin,minimumRange,maximumRange,out cell);
-            if(!blotContext.TryFindNearest(origin,maximumRange,out cell))return false;
-            var target=new Point2(cell.X+.5f,cell.Y+.5f);return DistanceSquared(origin,target)>=minimumRange*minimumRange;
-        }
-
-        private void LaunchMortar(Point2 from, Point2 to, WeaponDefinition weapon, float damage,
-            ColorEffectPayload payload, TowerColorBudget colorBudget, MortarFootprint footprint,
-            long tick, SimulationEventBuffer events, bool compositeCycle = false)
-        {
-            var definition=weapon.Numeric;
-            float duration = Math.Max(0, definition.FlightSeconds);
-            var projectile = new MortarProjectile
-            {
-                Id = nextProjectileId++, From = from, To = to, Duration = duration,
-                Remaining = duration, Radius = Math.Max(0, definition.Radius),
-                Damage = damage, Weapon = weapon.LegacyKind ?? (StructureKind)(-1), WeaponId = weapon.Id, Definition=weapon, Color = payload.Color, CompositeCycle=compositeCycle,
-                EffectPayload = payload, ColorBudget = colorBudget,
-                SourceStructureId=visualSourceStructureId,MountSlotIndex=visualMountSlotIndex,ActionId=visualActionId,
-                ImpactFootprint = FootprintGeometry.Resolve(footprint, definition.Radius, from, to)
-            };
-            projectiles.Add(projectile);
-            events.Publish(tick, SimulationEventKind.ProjectileLaunched, from, to, projectile.Weapon,
-                projectile.Radius, projectile.Id, duration, projectile.ImpactFootprint, projectile.WeaponId,
-                projectile.SourceStructureId,projectile.MountSlotIndex,projectile.ActionId,clockSeconds,attack:weapon.Attack);
-        }
-
-        private void FireVolley(StructureState structure,Point2 origin,Point2 aim,float range,FanVolley volley,WeaponDefinition weapon,
-            float damage,ColorEffectPayload payload,TowerColorBudget colorBudget,List<ShotEvent> shots,long tick,RunStatistics statistics,SimulationEventBuffer events)
-        {
-            volley.Validate(weapon);var counts=volley.Allocate(weapon.VolleyPellets);
-            var victims=new EnemyState[counts.Length];var ends=new Point2[counts.Length];
-            // Resolve the entire volley against the same live targets before applying damage.
-            for(int guide=0;guide<counts.Length;guide++)
-            {
-                var direction=volley.Direction(guide,origin,aim);double best=range;
-                foreach(var enemy in targets)
-                {
-                    if(enemy.Health<=0)continue;
-                    double x=(double)enemy.Position.X-origin.X,y=(double)enemy.Position.Y-origin.Y;
-                    double along=x*direction.X+y*direction.Y,side=x*direction.Y-y*direction.X;
-                    double radius=weapon.VolleyHitRadius,inside=radius*radius-side*side;
-                    if(inside<0||along<0)continue;
-                    double distance=Math.Max(0,along-Math.Sqrt(inside));
-                    if(distance>best||distance==best&&victims[guide]!=null&&enemy.Id>=victims[guide].Id)continue;
-                    best=distance;victims[guide]=enemy;
-                }
-                ends[guide]=new Point2(origin.X+direction.X*(float)best,origin.Y+direction.Y*(float)best);
-            }
-            for(int guide=0;guide<counts.Length;guide++)for(int pellet=0;pellet<counts[guide];pellet++)
-            {
-                if(victims[guide]!=null)ApplyDamage(victims[guide],damage,weapon,payload,colorBudget,statistics);
-                PublishShot(origin,ends[guide],weapon,weapon.VolleyHitRadius,structure.Id,shots,tick,events);
-            }
-        }
-
-        private void FireFan(StructureState structure, Point2 origin, Point2 aim, WeaponDefinition weapon,
-            float damage, ColorEffectPayload payload, TowerColorBudget colorBudget, List<ShotEvent> shots,
-            long tick, RunStatistics statistics, SimulationEventBuffer events)
-        {
-            var definition=weapon.Numeric;
-            float dx = aim.X - origin.X, dy = aim.Y - origin.Y;
-            float length = (float)Math.Sqrt(dx * dx + dy * dy);
-            if (length <= .00001f) { dx = 1; dy = 0; }
-            else { dx /= length; dy /= length; }
-            float cosine = (float)Math.Cos(Math.Max(0, Math.Min(360, definition.ConeAngleDegrees)) * Math.PI / 360);
-            SortTargets(origin, targets);
-            int hit = 0, limit = Math.Max(0, definition.MaxTargets);
-            foreach (EnemyState victim in targets)
-            {
-                if (hit >= limit) break;
-                if (victim.Health <= 0) continue;
-                float vx = victim.Position.X - origin.X, vy = victim.Position.Y - origin.Y;
-                float distance = (float)Math.Sqrt(vx * vx + vy * vy);
-                if (distance > .00001f && (vx * dx + vy * dy) / distance + .000001f < cosine) continue;
-                ApplyDamage(victim, damage, weapon, payload, colorBudget, statistics);
-                PublishShot(origin, victim.Position, weapon, 0, structure.Id, shots, tick, events);
-                hit++;
-            }
-        }
-
-        private void FireRicochet(StructureState structure, Point2 origin, EnemyState victim, WeaponDefinition weapon,
-            float damage, ColorEffectPayload payload, TowerColorBudget colorBudget, List<ShotEvent> shots,
-            long tick, RunStatistics statistics, SimulationEventBuffer events)
-        {
-            var definition=weapon.Numeric;
-            ricochetVictims.Clear();
-            Point2 from=origin;
-            int limit=Math.Max(0,definition.MaxTargets);
-            float jumpRange=Math.Max(0,definition.JumpRange);
-            for(int hit=0;victim!=null && hit<limit;hit++)
-            {
-                ricochetVictims.Add(victim.Id);
-                Point2 impact=victim.Position;
-                ApplyDamage(victim,damage,weapon,payload,colorBudget,statistics);
-                PublishShot(from, impact, weapon, 0, structure.Id, shots, tick, events);
-                if(hit+1>=limit) break;
-                spatial.Query(impact,jumpRange,splashTargets);
-                EnemyState next=null; float nearest=float.MaxValue;
-                foreach(var candidate in splashTargets)
-                {
-                    if(candidate.Health<=0 || ricochetVictims.Contains(candidate.Id)) continue;
-                    float distance=DistanceSquared(impact,candidate.Position);
-                    if(next==null || distance<nearest || (distance==nearest && candidate.Id<next.Id))
-                    {next=candidate;nearest=distance;}
-                }
-                from=impact; victim=next;
-            }
-        }
-
-        private void AdvanceProjectiles(float delta, long tick, RunStatistics statistics, SimulationEventBuffer events, bool legacyOnly = false)
-        {
-            int write = 0;
-            for (int read = 0; read < projectiles.Count; read++)
-            {
-                var projectile = projectiles[read];
-                if (legacyOnly && projectile.CompositeCycle) { projectiles[write++] = projectile; continue; }
-                projectile.Remaining = Math.Max(0, projectile.Remaining - delta);
-                if (projectile.Remaining > 0.000001f) { projectiles[write++] = projectile; continue; }
-                ImpactProjectile(projectile,tick,statistics,events);
-            }
-            if (write < projectiles.Count) projectiles.RemoveRange(write, projectiles.Count - write);
-        }
-
-        // Both historical and composite shells use this one impact operation.
-        void ImpactProjectile(MortarProjectile projectile,long tick,RunStatistics statistics,SimulationEventBuffer events)
-        {
-            visualSourceStructureId=projectile.SourceStructureId;visualMountSlotIndex=projectile.MountSlotIndex;visualActionId=projectile.ActionId;
-            FootprintGeometry? geometry = projectile.ImpactFootprint;
-            bool shaped = geometry.HasValue && !geometry.Value.IsCircle;
-            // Contains includes a small normalized boundary tolerance. Keep the broad phase
-            // conservative under world-coordinate rounding, without changing circle queries.
-            float queryRadius = shaped
-                ? (float)Math.Min(float.MaxValue, (double)geometry.Value.BoundingRadius * 1.000001)
-                : projectile.Radius;
-            spatial.Query(projectile.To, queryRadius, splashTargets);
-            if (projectile.ColorBudget != null) SortTargets(projectile.To, splashTargets);
-            foreach (var victim in splashTargets)
-            {
-                if (shaped && !geometry.Value.Contains(projectile.To, victim.Position)) continue;
-                ApplyDamage(victim, projectile.Damage, projectile.Definition, projectile.EffectPayload, projectile.ColorBudget, statistics);
-            }
-            events.Publish(tick, SimulationEventKind.ProjectileImpact, projectile.From, projectile.To,
-                projectile.Weapon, projectile.Radius, projectile.Id, impactFootprint: projectile.ImpactFootprint,weaponId:projectile.WeaponId,
-                sourceStructureId:projectile.SourceStructureId,mountSlotIndex:projectile.MountSlotIndex,actionId:projectile.ActionId,simulationSeconds:clockSeconds,attack:AttackKind.AreaProjectile);
-        }
-
-        private void ApplyDamage(EnemyState victim, float damage, WeaponDefinition weapon, ColorEffectPayload payload,
-            TowerColorBudget colorBudget, RunStatistics statistics)
-        {
-            if (victim.Health <= 0 || damage < 0) return;
-            // An intrinsic support effect is independent of direct damage (the old stapler also slowed at zero damage).
-            if (damage == 0) { ApplyIntrinsicEffects(victim,weapon,statistics); return; }
-            if (mechanics.EnemyDrawingTiers || mechanics.CorpseBlots || payload.Color != InkColor.None)
-            {
-                if (payload.Color != InkColor.None && colorBudget != null && !colorBudget.TryApply(victim.Id, clockSeconds)) payload = default;
-                EnemyEffects.ApplyHit(victim, damage, payload, statistics, weapon.LegacyKind ?? (StructureKind)(-1), effects, mechanics.CorpseBlots ? balance.BlotReduction : 0,weapon.Id,
-                    visualEvents,visualTick,clockSeconds,visualSourceStructureId,visualMountSlotIndex,visualActionId);
-                ApplyIntrinsicEffects(victim,weapon,statistics); return;
-            }
-            float actualDamage = Math.Min(victim.Health, damage);
-            victim.Health -= actualDamage;
-            statistics.RecordDamage(weapon.Id, actualDamage);
-            EnemyEffects.PublishDamage(victim,victim.Health+actualDamage,visualEvents,visualTick,clockSeconds,
-                weapon.LegacyKind??(StructureKind)(-1),weapon.Id,visualSourceStructureId,visualMountSlotIndex,visualActionId);
-            ApplyIntrinsicEffects(victim,weapon,statistics);
-        }
-
-        void ApplyIntrinsicEffects(EnemyState victim,WeaponDefinition weapon,RunStatistics statistics)
-        {
-            if (weapon.Effects==null) return;
-            foreach(var effect in weapon.Effects)
-            {
-                if(effect.Kind==EffectKind.Slow) EnemyEffects.ApplySlow(victim,effect.Strength,effect.Duration);
-                else EnemyEffects.ApplyHit(victim,0,ColorEffectPayload.Capture(effect),statistics,weapon.LegacyKind ?? (StructureKind)(-1),effects,mechanics.CorpseBlots?balance.BlotReduction:0,weapon.Id);
-            }
+            return blotContext.TryFindNearest(origin,minimumRange,maximumRange,sector,out cell);
         }
 
         private static EnemyState PickTarget(StructureState structure, Point2 origin, List<EnemyState> candidates)
@@ -508,7 +324,7 @@ namespace PaperDefense.Core
             return best;
         }
 
-        static void FilterRange(Point2 origin,float minimum,float maximum,List<EnemyState> candidates)
+        static void FilterRange(Point2 origin,float minimum,float maximum,FiringSector sector,List<EnemyState> candidates)
         {
             if(maximum<=0){candidates.Clear();return;}
             float minSquared=minimum*minimum,maxSquared=maximum*maximum;
@@ -516,54 +332,14 @@ namespace PaperDefense.Core
             for(int read=0;read<candidates.Count;read++)
             {
                 var enemy=candidates[read];float distance=DistanceSquared(origin,enemy.Position);
-                if(distance<minSquared||distance>maxSquared)continue;
+                if(distance<minSquared||distance>maxSquared||!sector.Contains(enemy.Position.X-origin.X,enemy.Position.Y-origin.Y))continue;
                 candidates[write++]=enemy;
             }
             if(write<candidates.Count)candidates.RemoveRange(write,candidates.Count-write);
         }
 
-        private void FirePiercer(Point2 origin, Point2 target, float range, float radius, int maxPierce,
-            float damage, WeaponDefinition weapon, ColorEffectPayload payload, TowerColorBudget colorBudget, RunStatistics statistics)
-        {
-            float dx = target.X - origin.X, dy = target.Y - origin.Y;
-            float length = (float)Math.Sqrt(dx * dx + dy * dy);
-            if (length <= 0.00001f) return;
-            dx /= length; dy /= length;
-            splashTargets.Clear();
-            foreach (var enemy in targets)
-            {
-                if (enemy.Health <= 0) continue;
-                float ex = enemy.Position.X - origin.X, ey = enemy.Position.Y - origin.Y;
-                float along = ex * dx + ey * dy;
-                float across = Math.Abs(ex * dy - ey * dx);
-                if (along >= 0 && along <= range && across <= radius) splashTargets.Add(enemy);
-            }
-            SortTargets(origin, splashTargets);
-            for (int i = 0; i < splashTargets.Count && i < maxPierce; i++)
-                ApplyDamage(splashTargets[i], damage, weapon, payload, colorBudget, statistics);
-        }
-
-        private void SortTargets(Point2 origin, List<EnemyState> list)
-        { targetOrder.Origin = origin; list.Sort(targetOrder); }
-
-        private sealed class EnemyDistanceComparer : IComparer<EnemyState>
-        {
-            internal Point2 Origin;
-            public int Compare(EnemyState a, EnemyState b)
-            {
-                int result = DistanceSquared(Origin, a.Position).CompareTo(DistanceSquared(Origin, b.Position));
-                return result != 0 ? result : a.Id.CompareTo(b.Id);
-            }
-        }
-
         private static float DistanceSquared(Point2 a, Point2 b)
         { float dx = a.X - b.X, dy = a.Y - b.Y; return dx * dx + dy * dy; }
 
-        private static Point2 RayEnd(Point2 from, Point2 to, float range)
-        {
-            float dx = to.X - from.X, dy = to.Y - from.Y;
-            float length = (float)Math.Sqrt(dx * dx + dy * dy);
-            return length <= 0.00001f ? to : new Point2(from.X + dx / length * range, from.Y + dy / length * range);
-        }
     }
 }

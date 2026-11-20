@@ -48,6 +48,61 @@ namespace PaperDefense.Tests
             Assert.That(game.Structures, Is.Empty);
         }
 
+        [TestCase(false)] [TestCase(true)]
+        public void PlacementCoversTheReachableTurnInTheRoadBeforeAnyEnemySpawns(bool legacyBlueprint)
+        {
+            var balance = Balance();
+            balance.Mechanics.InkWells = false;
+            balance.Structure(StructureKind.Gun).Range = 2.3f;
+            balance.Structure(StructureKind.Piercer).Range = 1;
+            var map = balance.Battlefield = new BattlefieldDefinition { Enabled = true };
+            map.Entrances.Add(new BattlefieldCell(0, 2));
+            for (int x = 0; x <= 16; x++) map.Roads.Add(new BattlefieldCell(x, 2));
+            for (int y = 3; y <= 8; y++) map.Roads.Add(new BattlefieldCell(16, y));
+            for (int x = 15; x >= 10; x--) map.Roads.Add(new BattlefieldCell(x, 8));
+
+            var session = new GameSession(balance, starterDefenses: false);
+            var view = new RunReadModel(session);
+            var cell = new Cell(14, 5);
+            var blueprint = legacyBlueprint ? new TowerBlueprint("guard", "Guard", ChassisKind.Standard, StructureKind.Gun) : null;
+            var slot = blueprint == null ? null : LegacyAlbumAdapter.Resolve(new AlbumEntry("guard", "Guard", 1, blueprint), balance).Value;
+            float preview = view.DefaultFacingDegrees(cell, StructureKind.Gun, slot, blueprint);
+            float towardEntrance = FiringSector.Heading(-14, -3);
+            Assert.That(view.DefaultFacingDegrees(cell, StructureKind.Piercer), Is.EqualTo(towardEntrance),
+                "A weapon that cannot reach the road uses the entrance bearing.");
+            string reason;
+            bool built = legacyBlueprint
+                ? session.TryBuildBlueprint(new[] {cell}, blueprint, MaterialTier.Pencil, InkColor.None, out reason)
+                : session.TryBuild(new[] {cell}, StructureKind.Gun, MaterialTier.Pencil, out reason);
+            Assert.That(built, Is.True, reason);
+            var tower = session.StructureAt(cell);
+            Assert.That(tower.FacingDegrees, Is.EqualTo(preview));
+            var sector = new FiringSector(tower, balance.ResolveContent().GetWeapon("weapon.gun").FiringArcDegrees);
+            Assert.That(sector.Contains(2, 0), Is.True, "The column reaches the gun from the east after the road bends.");
+            Assert.That(sector.Contains(-14, -3), Is.False);
+            session.StartNextWave();
+            session.Tick(.2f);
+            Assert.That(tower.FacingDegrees, Is.EqualTo(preview));
+        }
+
+        [TestCase(false)] [TestCase(true)]
+        public void BothBuildPathsRejectInvalidBearingAtomicallyAndUseOneBearingForTheStroke(bool legacyBlueprint)
+        {
+            var balance = Balance();
+            var session = new GameSession(balance, starterDefenses: false);
+            var cells = new[] {new Cell(4, 4), new Cell(6, 4)};
+            var blueprint = new TowerBlueprint("guard", "Guard", ChassisKind.Standard, StructureKind.Gun);
+            bool Build(float bearing) => legacyBlueprint
+                ? session.TryBuildBlueprint(cells, blueprint, MaterialTier.Pencil, InkColor.None, out _, bearing)
+                : session.TryBuild(cells, StructureKind.Gun, MaterialTier.Pencil, out _, bearing);
+            int before = session.Ink;
+            Assert.That(Build(float.PositiveInfinity), Is.False);
+            Assert.That(session.Ink, Is.EqualTo(before));
+            Assert.That(session.Structures, Is.Empty);
+            Assert.That(Build(405), Is.True);
+            foreach (var placed in session.Structures) Assert.That(placed.FacingDegrees, Is.EqualTo(45));
+        }
+
         [Test]
         public void RepeatedCellsAreChargedAndBuiltOnce()
         {
@@ -467,7 +522,7 @@ namespace PaperDefense.Tests
             game.StartNextWave();
             game.Tick(0.05f);
             for (int i = 0; i < 3; i++) game.Enemies[i].Position = new Point2(5.5f + i, 4.5f);
-            game.TryBuild(new[] { new Cell(3, 4) }, kind, MaterialTier.Pencil, out _);
+            Assert.That(game.TryBuild(new[] { new Cell(3, 4) }, kind, MaterialTier.Pencil, out _, facingDegrees: 0), Is.True);
             game.Tick(0.02f);
             if (kind == StructureKind.Mortar)
             {

@@ -1,0 +1,6027 @@
+{
+  "fits": {
+    "SchemaVersion": 1,
+    "Revision": "modular-full-catalog-2026-10-24-v8",
+    "Parts": [
+      {
+        "Id": "frame.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Frame",
+        "ExpectedSocketType": "assembly.Frame",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 0
+      },
+      {
+        "Id": "frame.heavy",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Frame",
+        "ExpectedSocketType": "assembly.Frame",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 0
+      },
+      {
+        "Id": "frame.precision",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Frame",
+        "ExpectedSocketType": "assembly.Frame",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 0
+      },
+      {
+        "Id": "frame.battery",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Frame",
+        "ExpectedSocketType": "assembly.Frame",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 0
+      },
+      {
+        "Id": "hull.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Hull",
+        "ExpectedSocketType": "assembly.Hull",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 1
+      },
+      {
+        "Id": "hull.light",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Hull",
+        "ExpectedSocketType": "assembly.Hull",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 1
+      },
+      {
+        "Id": "hull.reinforced",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Hull",
+        "ExpectedSocketType": "assembly.Hull",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 1
+      },
+      {
+        "Id": "armor.none",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Armor",
+        "ExpectedSocketType": "assembly.Armor",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 2
+      },
+      {
+        "Id": "armor.plate",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Armor",
+        "ExpectedSocketType": "assembly.Armor",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 2
+      },
+      {
+        "Id": "armor.front",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Armor",
+        "ExpectedSocketType": "assembly.Armor",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 2
+      },
+      {
+        "Id": "feed.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Feed",
+        "ExpectedSocketType": "assembly.Feed",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 3
+      },
+      {
+        "Id": "feed.boost",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Feed",
+        "ExpectedSocketType": "assembly.Feed",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 3
+      },
+      {
+        "Id": "turn.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Turn",
+        "ExpectedSocketType": "assembly.Turn",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 4
+      },
+      {
+        "Id": "turn.quick",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Turn",
+        "ExpectedSocketType": "assembly.Turn",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 4
+      },
+      {
+        "Id": "core.gun",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 5
+      },
+      {
+        "Id": "core.piercer",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 5
+      },
+      {
+        "Id": "core.mortar",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 5
+      },
+      {
+        "Id": "core.fan",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 5
+      },
+      {
+        "Id": "core.ricochet",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 5
+      },
+      {
+        "Id": "core.stapler",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 5
+      },
+      {
+        "Id": "core.blotter",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 5
+      },
+      {
+        "Id": "head.gun",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.piercer",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.mortar",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.fan",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.ricochet",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.stapler",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.blotter",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.short",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.long",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.wide",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "sight.iron",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Sight",
+        "ExpectedSocketType": "assembly.Sight",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 7
+      },
+      {
+        "Id": "sight.scope",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Sight",
+        "ExpectedSocketType": "assembly.Sight",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 7
+      },
+      {
+        "Id": "sight.tracking",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Sight",
+        "ExpectedSocketType": "assembly.Sight",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 7
+      },
+      {
+        "Id": "magazine.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Magazine",
+        "ExpectedSocketType": "assembly.Magazine",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 8
+      },
+      {
+        "Id": "magazine.mortar.pair",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Magazine",
+        "ExpectedSocketType": "assembly.Magazine",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 8
+      },
+      {
+        "Id": "magazine.drum",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Magazine",
+        "ExpectedSocketType": "assembly.Magazine",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 8
+      },
+      {
+        "Id": "magazine.belt",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Magazine",
+        "ExpectedSocketType": "assembly.Magazine",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 8
+      },
+      {
+        "Id": "trigger.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Trigger",
+        "ExpectedSocketType": "assembly.Trigger",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 9
+      },
+      {
+        "Id": "trigger.burst",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Trigger",
+        "ExpectedSocketType": "assembly.Trigger",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 9
+      },
+      {
+        "Id": "site.wall",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "site.slow",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "site.repair",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "site.generator",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "function.wall",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "function.slow",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "function.repair",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "function.generator",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "shell.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Shell",
+        "ExpectedSocketType": "assembly.Shell",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 12
+      },
+      {
+        "Id": "shell.light",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Shell",
+        "ExpectedSocketType": "assembly.Shell",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 12
+      },
+      {
+        "Id": "shell.reinforced",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Shell",
+        "ExpectedSocketType": "assembly.Shell",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 12
+      },
+      {
+        "Id": "utility.none",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Utility",
+        "ExpectedSocketType": "assembly.Utility",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 13
+      },
+      {
+        "Id": "utility.armor",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Utility",
+        "ExpectedSocketType": "assembly.Utility",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 13
+      },
+      {
+        "Id": "utility.range",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Utility",
+        "ExpectedSocketType": "assembly.Utility",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 13
+      },
+      {
+        "Id": "utility.economy",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Utility",
+        "ExpectedSocketType": "assembly.Utility",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 13
+      },
+      {
+        "Id": "mount.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 14
+      },
+      {
+        "Id": "mount.light",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 14
+      },
+      {
+        "Id": "mount.stabilized",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 14
+      },
+      {
+        "Id": "site.wall.compact",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "site.slow.compact",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "site.repair.compact",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "site.generator.compact",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "function.wall.braced",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "function.slow.diluted",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "function.repair.focused",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "function.generator.quick",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "utility.concentrate",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Utility",
+        "ExpectedSocketType": "assembly.Utility",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 13
+      },
+      {
+        "Id": "frame.outpost",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Frame",
+        "ExpectedSocketType": "assembly.Frame",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 0
+      },
+      {
+        "Id": "frame.siege",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Frame",
+        "ExpectedSocketType": "assembly.Frame",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 0
+      },
+      {
+        "Id": "hull.ribbed",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Hull",
+        "ExpectedSocketType": "assembly.Hull",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 1
+      },
+      {
+        "Id": "turn.deliberate",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Turn",
+        "ExpectedSocketType": "assembly.Turn",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 4
+      },
+      {
+        "Id": "head.fan.focus",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.ricochet.long",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.absorb",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "sight.snap",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Sight",
+        "ExpectedSocketType": "assembly.Sight",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 7
+      },
+      {
+        "Id": "sight.survey",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Sight",
+        "ExpectedSocketType": "assembly.Sight",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 7
+      },
+      {
+        "Id": "magazine.quick",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Magazine",
+        "ExpectedSocketType": "assembly.Magazine",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 8
+      },
+      {
+        "Id": "magazine.reserve",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Magazine",
+        "ExpectedSocketType": "assembly.Magazine",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 8
+      },
+      {
+        "Id": "trigger.economy",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Trigger",
+        "ExpectedSocketType": "assembly.Trigger",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 9
+      },
+      {
+        "Id": "site.spikes",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "function.spikes",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "site.beacon",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "site.prism",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "function.beacon",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "function.prism",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "site.spikes.compact",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "function.spikes.barbed",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "site.beacon.compact",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "site.prism.compact",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "function.beacon.focused",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "function.prism.focused",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      }
+    ],
+    "Frames": [
+      {
+        "FrameId": "frame.standard",
+        "Revision": 1,
+        "Mounts": [
+          {
+            "SlotIndex": 0,
+            "SocketId": "mount.0",
+            "SocketType": "gun.standard",
+            "X": -0.2512873411178589,
+            "Y": -0.03416064381599426
+          },
+          {
+            "SlotIndex": 1,
+            "SocketId": "mount.1",
+            "SocketType": "gun.standard",
+            "X": 0.24768278002738953,
+            "Y": -0.03416064381599426
+          }
+        ],
+        "Keepouts": [
+          {
+            "X": -0.4703320860862732,
+            "Y": -0.27266210317611694,
+            "Width": 0.9408254623413086,
+            "Height": 0.07782678306102753,
+            "ArmorOnly": false,
+            "PartId": "frame.standard"
+          },
+          {
+            "X": -0.4703320860862732,
+            "Y": -0.19483532011508942,
+            "Width": 0.9408254623413086,
+            "Height": 0.07970969378948212,
+            "ArmorOnly": false,
+            "PartId": "hull.standard"
+          },
+          {
+            "X": -0.4703320860862732,
+            "Y": -0.19483532011508942,
+            "Width": 0.9408254623413086,
+            "Height": 0.07970969378948212,
+            "ArmorOnly": false,
+            "PartId": "hull.light"
+          },
+          {
+            "X": -0.4703320860862732,
+            "Y": -0.19483532011508942,
+            "Width": 0.9408254623413086,
+            "Height": 0.07970969378948212,
+            "ArmorOnly": false,
+            "PartId": "hull.reinforced"
+          },
+          {
+            "X": -0.17494142055511475,
+            "Y": -0.34430307149887085,
+            "Width": 0.3392444849014282,
+            "Height": 0.19148990511894226,
+            "ArmorOnly": false,
+            "PartId": "hull.light"
+          },
+          {
+            "X": -0.17958910763263702,
+            "Y": -0.3223041892051697,
+            "Width": 0.37284934520721436,
+            "Height": 0.260994553565979,
+            "ArmorOnly": false,
+            "PartId": "hull.reinforced"
+          },
+          {
+            "X": -0.05200781300663948,
+            "Y": -0.21799999475479126,
+            "Width": 0.1045406237244606,
+            "Height": 0.134224995970726,
+            "ArmorOnly": false,
+            "PartId": "armor.plate"
+          },
+          {
+            "X": -0.05089285597205162,
+            "Y": -0.27266210317611694,
+            "Width": 0.10875000059604645,
+            "Height": 0.13499999046325684,
+            "ArmorOnly": false,
+            "PartId": "armor.front"
+          },
+          {
+            "X": -0.03999999910593033,
+            "Y": -0.20749999582767487,
+            "Width": 0.08041000366210938,
+            "Height": 0.06030750274658203,
+            "ArmorOnly": false,
+            "PartId": "feed.standard"
+          },
+          {
+            "X": -0.07485881447792053,
+            "Y": -0.16630351543426514,
+            "Width": 0.14211292564868927,
+            "Height": 0.10599057376384735,
+            "ArmorOnly": false,
+            "PartId": "feed.boost"
+          },
+          {
+            "X": -0.4703320860862732,
+            "Y": -0.19483532011508942,
+            "Width": 0.9408254623413086,
+            "Height": 0.07970969378948212,
+            "ArmorOnly": false,
+            "PartId": "hull.ribbed"
+          },
+          {
+            "X": -0.17958910763263702,
+            "Y": -0.3223041892051697,
+            "Width": 0.37284934520721436,
+            "Height": 0.260994553565979,
+            "ArmorOnly": false,
+            "PartId": "hull.ribbed"
+          }
+        ]
+      },
+      {
+        "FrameId": "frame.battery",
+        "Revision": 1,
+        "Mounts": [
+          {
+            "SlotIndex": 0,
+            "SocketId": "mount.0",
+            "SocketType": "gun.standard",
+            "X": -0.4525119662284851,
+            "Y": 0.02813398838043213
+          },
+          {
+            "SlotIndex": 1,
+            "SocketId": "mount.1",
+            "SocketType": "gun.standard",
+            "X": -0.004665076732635498,
+            "Y": 0.18985652923583984
+          },
+          {
+            "SlotIndex": 2,
+            "SocketId": "mount.2",
+            "SocketType": "gun.standard",
+            "X": 0.45251190662384033,
+            "Y": 0.021913886070251465
+          }
+        ],
+        "Keepouts": [
+          {
+            "X": -0.8785885572433472,
+            "Y": -0.3108612298965454,
+            "Width": 1.7602871656417847,
+            "Height": 0.11028224229812622,
+            "ArmorOnly": false,
+            "PartId": "frame.battery"
+          },
+          {
+            "X": -0.8785885572433472,
+            "Y": -0.20057892799377441,
+            "Width": 1.7602871656417847,
+            "Height": 0.1041555404663086,
+            "ArmorOnly": false,
+            "PartId": "hull.standard"
+          },
+          {
+            "X": -0.8785885572433472,
+            "Y": -0.20057892799377441,
+            "Width": 1.7602871656417847,
+            "Height": 0.1041555404663086,
+            "ArmorOnly": false,
+            "PartId": "hull.light"
+          },
+          {
+            "X": -0.8785885572433472,
+            "Y": -0.20057892799377441,
+            "Width": 1.7602871656417847,
+            "Height": 0.1041555404663086,
+            "ArmorOnly": false,
+            "PartId": "hull.reinforced"
+          },
+          {
+            "X": -0.17494142055511475,
+            "Y": -0.34430307149887085,
+            "Width": 0.3392444849014282,
+            "Height": 0.19148990511894226,
+            "ArmorOnly": false,
+            "PartId": "hull.light"
+          },
+          {
+            "X": -0.17958910763263702,
+            "Y": -0.3223041892051697,
+            "Width": 0.37284934520721436,
+            "Height": 0.260994553565979,
+            "ArmorOnly": false,
+            "PartId": "hull.reinforced"
+          },
+          {
+            "X": -0.05200781300663948,
+            "Y": -0.21799999475479126,
+            "Width": 0.1045406237244606,
+            "Height": 0.134224995970726,
+            "ArmorOnly": false,
+            "PartId": "armor.plate"
+          },
+          {
+            "X": -0.05089285597205162,
+            "Y": -0.27266210317611694,
+            "Width": 0.10875000059604645,
+            "Height": 0.13499999046325684,
+            "ArmorOnly": false,
+            "PartId": "armor.front"
+          },
+          {
+            "X": -0.03999999910593033,
+            "Y": -0.20749999582767487,
+            "Width": 0.08041000366210938,
+            "Height": 0.06030750274658203,
+            "ArmorOnly": false,
+            "PartId": "feed.standard"
+          },
+          {
+            "X": -0.07485881447792053,
+            "Y": -0.16630351543426514,
+            "Width": 0.14211292564868927,
+            "Height": 0.10599057376384735,
+            "ArmorOnly": false,
+            "PartId": "feed.boost"
+          },
+          {
+            "X": -0.8785885572433472,
+            "Y": -0.20057892799377441,
+            "Width": 1.7602871656417847,
+            "Height": 0.1041555404663086,
+            "ArmorOnly": false,
+            "PartId": "hull.ribbed"
+          },
+          {
+            "X": -0.17958910763263702,
+            "Y": -0.3223041892051697,
+            "Width": 0.37284934520721436,
+            "Height": 0.260994553565979,
+            "ArmorOnly": false,
+            "PartId": "hull.ribbed"
+          }
+        ]
+      },
+      {
+        "FrameId": "frame.heavy",
+        "Revision": 1,
+        "Mounts": [
+          {
+            "SlotIndex": 0,
+            "SocketId": "mount.0",
+            "SocketType": "gun.standard",
+            "X": -0.246891587972641,
+            "Y": 0.2434636950492859
+          },
+          {
+            "SlotIndex": 1,
+            "SocketId": "mount.1",
+            "SocketType": "gun.standard",
+            "X": 0.2491084337234497,
+            "Y": 0.2434636950492859
+          }
+        ],
+        "Keepouts": [
+          {
+            "X": -0.5749720335006714,
+            "Y": -0.33843573927879333,
+            "Width": 1.1256983280181885,
+            "Height": 0.14838434755802155,
+            "ArmorOnly": false,
+            "PartId": "frame.heavy"
+          },
+          {
+            "X": -0.5749720335006714,
+            "Y": -0.1900513917207718,
+            "Width": 1.1256983280181885,
+            "Height": 0.11541004478931427,
+            "ArmorOnly": false,
+            "PartId": "hull.standard"
+          },
+          {
+            "X": -0.5749720335006714,
+            "Y": -0.1900513917207718,
+            "Width": 1.1256983280181885,
+            "Height": 0.11541004478931427,
+            "ArmorOnly": false,
+            "PartId": "hull.light"
+          },
+          {
+            "X": -0.5749720335006714,
+            "Y": -0.1900513917207718,
+            "Width": 1.1256983280181885,
+            "Height": 0.11541004478931427,
+            "ArmorOnly": false,
+            "PartId": "hull.reinforced"
+          },
+          {
+            "X": -0.17494142055511475,
+            "Y": -0.34430307149887085,
+            "Width": 0.3392444849014282,
+            "Height": 0.19148990511894226,
+            "ArmorOnly": false,
+            "PartId": "hull.light"
+          },
+          {
+            "X": -0.17958910763263702,
+            "Y": -0.3223041892051697,
+            "Width": 0.37284934520721436,
+            "Height": 0.260994553565979,
+            "ArmorOnly": false,
+            "PartId": "hull.reinforced"
+          },
+          {
+            "X": -0.05200781300663948,
+            "Y": -0.21799999475479126,
+            "Width": 0.1045406237244606,
+            "Height": 0.134224995970726,
+            "ArmorOnly": false,
+            "PartId": "armor.plate"
+          },
+          {
+            "X": -0.05089285597205162,
+            "Y": -0.27266210317611694,
+            "Width": 0.10875000059604645,
+            "Height": 0.13499999046325684,
+            "ArmorOnly": false,
+            "PartId": "armor.front"
+          },
+          {
+            "X": -0.03999999910593033,
+            "Y": -0.20749999582767487,
+            "Width": 0.08041000366210938,
+            "Height": 0.06030750274658203,
+            "ArmorOnly": false,
+            "PartId": "feed.standard"
+          },
+          {
+            "X": -0.07485881447792053,
+            "Y": -0.16630351543426514,
+            "Width": 0.14211292564868927,
+            "Height": 0.10599057376384735,
+            "ArmorOnly": false,
+            "PartId": "feed.boost"
+          },
+          {
+            "X": -0.5749720335006714,
+            "Y": -0.1900513917207718,
+            "Width": 1.1256983280181885,
+            "Height": 0.11541004478931427,
+            "ArmorOnly": false,
+            "PartId": "hull.ribbed"
+          },
+          {
+            "X": -0.17958910763263702,
+            "Y": -0.3223041892051697,
+            "Width": 0.37284934520721436,
+            "Height": 0.260994553565979,
+            "ArmorOnly": false,
+            "PartId": "hull.ribbed"
+          }
+        ]
+      },
+      {
+        "FrameId": "frame.precision",
+        "Revision": 1,
+        "Mounts": [
+          {
+            "SlotIndex": 0,
+            "SocketId": "mount.0",
+            "SocketType": "gun.standard",
+            "X": 0.0,
+            "Y": 0.25277823209762573
+          }
+        ],
+        "Keepouts": [
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.21906614303588867,
+            "Width": 0.8217898607254028,
+            "Height": 0.1115579903125763,
+            "ArmorOnly": false,
+            "PartId": "frame.precision"
+          },
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.10750815272331238,
+            "Width": 0.8217898607254028,
+            "Height": 0.0867672860622406,
+            "ArmorOnly": false,
+            "PartId": "hull.standard"
+          },
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.10750815272331238,
+            "Width": 0.8217898607254028,
+            "Height": 0.0867672860622406,
+            "ArmorOnly": false,
+            "PartId": "hull.light"
+          },
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.10750815272331238,
+            "Width": 0.8217898607254028,
+            "Height": 0.0867672860622406,
+            "ArmorOnly": false,
+            "PartId": "hull.reinforced"
+          },
+          {
+            "X": -0.17494142055511475,
+            "Y": -0.34430307149887085,
+            "Width": 0.3392444849014282,
+            "Height": 0.19148990511894226,
+            "ArmorOnly": false,
+            "PartId": "hull.light"
+          },
+          {
+            "X": -0.17958910763263702,
+            "Y": -0.3223041892051697,
+            "Width": 0.37284934520721436,
+            "Height": 0.260994553565979,
+            "ArmorOnly": false,
+            "PartId": "hull.reinforced"
+          },
+          {
+            "X": -0.05200781300663948,
+            "Y": -0.21799999475479126,
+            "Width": 0.1045406237244606,
+            "Height": 0.134224995970726,
+            "ArmorOnly": false,
+            "PartId": "armor.plate"
+          },
+          {
+            "X": -0.05089285597205162,
+            "Y": -0.27266210317611694,
+            "Width": 0.10875000059604645,
+            "Height": 0.13499999046325684,
+            "ArmorOnly": false,
+            "PartId": "armor.front"
+          },
+          {
+            "X": -0.03999999910593033,
+            "Y": -0.20749999582767487,
+            "Width": 0.08041000366210938,
+            "Height": 0.06030750274658203,
+            "ArmorOnly": false,
+            "PartId": "feed.standard"
+          },
+          {
+            "X": -0.07485881447792053,
+            "Y": -0.16630351543426514,
+            "Width": 0.14211292564868927,
+            "Height": 0.10599057376384735,
+            "ArmorOnly": false,
+            "PartId": "feed.boost"
+          },
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.10750815272331238,
+            "Width": 0.8217898607254028,
+            "Height": 0.0867672860622406,
+            "ArmorOnly": false,
+            "PartId": "hull.ribbed"
+          },
+          {
+            "X": -0.17958910763263702,
+            "Y": -0.3223041892051697,
+            "Width": 0.37284934520721436,
+            "Height": 0.260994553565979,
+            "ArmorOnly": false,
+            "PartId": "hull.ribbed"
+          }
+        ]
+      },
+      {
+        "FrameId": "frame.outpost",
+        "Revision": 1,
+        "Mounts": [
+          {
+            "SlotIndex": 0,
+            "SocketId": "mount.0",
+            "SocketType": "gun.standard",
+            "X": 0.0,
+            "Y": 0.25277823209762573
+          }
+        ],
+        "Keepouts": [
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.21906614303588867,
+            "Width": 0.8217898607254028,
+            "Height": 0.1115579903125763,
+            "ArmorOnly": false,
+            "PartId": "frame.outpost"
+          },
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.10750815272331238,
+            "Width": 0.8217898607254028,
+            "Height": 0.0867672860622406,
+            "ArmorOnly": false,
+            "PartId": "hull.standard"
+          },
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.10750815272331238,
+            "Width": 0.8217898607254028,
+            "Height": 0.0867672860622406,
+            "ArmorOnly": false,
+            "PartId": "hull.light"
+          },
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.10750815272331238,
+            "Width": 0.8217898607254028,
+            "Height": 0.0867672860622406,
+            "ArmorOnly": false,
+            "PartId": "hull.reinforced"
+          },
+          {
+            "X": -0.17494142055511475,
+            "Y": -0.34430307149887085,
+            "Width": 0.3392444849014282,
+            "Height": 0.19148990511894226,
+            "ArmorOnly": false,
+            "PartId": "hull.light"
+          },
+          {
+            "X": -0.17958910763263702,
+            "Y": -0.3223041892051697,
+            "Width": 0.37284934520721436,
+            "Height": 0.260994553565979,
+            "ArmorOnly": false,
+            "PartId": "hull.reinforced"
+          },
+          {
+            "X": -0.05200781300663948,
+            "Y": -0.21799999475479126,
+            "Width": 0.1045406237244606,
+            "Height": 0.134224995970726,
+            "ArmorOnly": false,
+            "PartId": "armor.plate"
+          },
+          {
+            "X": -0.05089285597205162,
+            "Y": -0.27266210317611694,
+            "Width": 0.10875000059604645,
+            "Height": 0.13499999046325684,
+            "ArmorOnly": false,
+            "PartId": "armor.front"
+          },
+          {
+            "X": -0.03999999910593033,
+            "Y": -0.20749999582767487,
+            "Width": 0.08041000366210938,
+            "Height": 0.06030750274658203,
+            "ArmorOnly": false,
+            "PartId": "feed.standard"
+          },
+          {
+            "X": -0.07485881447792053,
+            "Y": -0.16630351543426514,
+            "Width": 0.14211292564868927,
+            "Height": 0.10599057376384735,
+            "ArmorOnly": false,
+            "PartId": "feed.boost"
+          },
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.10750815272331238,
+            "Width": 0.8217898607254028,
+            "Height": 0.0867672860622406,
+            "ArmorOnly": false,
+            "PartId": "hull.ribbed"
+          },
+          {
+            "X": -0.17958910763263702,
+            "Y": -0.3223041892051697,
+            "Width": 0.37284934520721436,
+            "Height": 0.260994553565979,
+            "ArmorOnly": false,
+            "PartId": "hull.ribbed"
+          }
+        ]
+      },
+      {
+        "FrameId": "frame.siege",
+        "Revision": 1,
+        "Mounts": [
+          {
+            "SlotIndex": 0,
+            "SocketId": "mount.0",
+            "SocketType": "gun.standard",
+            "X": 0.0,
+            "Y": 0.25277823209762573
+          }
+        ],
+        "Keepouts": [
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.21906614303588867,
+            "Width": 0.8217898607254028,
+            "Height": 0.1115579903125763,
+            "ArmorOnly": false,
+            "PartId": "frame.siege"
+          },
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.10750815272331238,
+            "Width": 0.8217898607254028,
+            "Height": 0.0867672860622406,
+            "ArmorOnly": false,
+            "PartId": "hull.standard"
+          },
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.10750815272331238,
+            "Width": 0.8217898607254028,
+            "Height": 0.0867672860622406,
+            "ArmorOnly": false,
+            "PartId": "hull.light"
+          },
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.10750815272331238,
+            "Width": 0.8217898607254028,
+            "Height": 0.0867672860622406,
+            "ArmorOnly": false,
+            "PartId": "hull.reinforced"
+          },
+          {
+            "X": -0.17494142055511475,
+            "Y": -0.34430307149887085,
+            "Width": 0.3392444849014282,
+            "Height": 0.19148990511894226,
+            "ArmorOnly": false,
+            "PartId": "hull.light"
+          },
+          {
+            "X": -0.17958910763263702,
+            "Y": -0.3223041892051697,
+            "Width": 0.37284934520721436,
+            "Height": 0.260994553565979,
+            "ArmorOnly": false,
+            "PartId": "hull.reinforced"
+          },
+          {
+            "X": -0.05200781300663948,
+            "Y": -0.21799999475479126,
+            "Width": 0.1045406237244606,
+            "Height": 0.134224995970726,
+            "ArmorOnly": false,
+            "PartId": "armor.plate"
+          },
+          {
+            "X": -0.05089285597205162,
+            "Y": -0.27266210317611694,
+            "Width": 0.10875000059604645,
+            "Height": 0.13499999046325684,
+            "ArmorOnly": false,
+            "PartId": "armor.front"
+          },
+          {
+            "X": -0.03999999910593033,
+            "Y": -0.20749999582767487,
+            "Width": 0.08041000366210938,
+            "Height": 0.06030750274658203,
+            "ArmorOnly": false,
+            "PartId": "feed.standard"
+          },
+          {
+            "X": -0.07485881447792053,
+            "Y": -0.16630351543426514,
+            "Width": 0.14211292564868927,
+            "Height": 0.10599057376384735,
+            "ArmorOnly": false,
+            "PartId": "feed.boost"
+          },
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.10750815272331238,
+            "Width": 0.8217898607254028,
+            "Height": 0.0867672860622406,
+            "ArmorOnly": false,
+            "PartId": "hull.ribbed"
+          },
+          {
+            "X": -0.17958910763263702,
+            "Y": -0.3223041892051697,
+            "Width": 0.37284934520721436,
+            "Height": 0.260994553565979,
+            "ArmorOnly": false,
+            "PartId": "hull.ribbed"
+          }
+        ]
+      }
+    ],
+    "Weapons": [
+      {
+        "MechanismId": "core.gun",
+        "MountType": "gun.standard",
+        "Revision": 1,
+        "RequiredParts": [
+          {
+            "Id": "core.gun",
+            "Revision": 1
+          },
+          {
+            "Id": "head.gun",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          }
+        ],
+        "CompatibleParts": [
+          {
+            "Id": "core.gun",
+            "Revision": 1
+          },
+          {
+            "Id": "head.gun",
+            "Revision": 1
+          },
+          {
+            "Id": "head.short",
+            "Revision": 1
+          },
+          {
+            "Id": "head.long",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.scope",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.tracking",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.drum",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.belt",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.burst",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.light",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.stabilized",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.snap",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.survey",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.quick",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.reserve",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.economy",
+            "Revision": 1
+          }
+        ],
+        "PivotX": 0.0,
+        "PivotY": 0.15800000727176666,
+        "MinRadians": -3.1415927410125732,
+        "MaxRadians": 3.1415927410125732,
+        "RecoilLimit": 0.08500000089406967,
+        "Clearance": 0.009999999776482582,
+        "Regions": [
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.08068853616714478,
+                "Y": -0.08675351738929749
+              },
+              {
+                "X": 0.06765808910131454,
+                "Y": -0.08675351738929749
+              },
+              {
+                "X": 0.06765808910131454,
+                "Y": 0.04906383901834488
+              },
+              {
+                "X": -0.08068853616714478,
+                "Y": 0.04906383901834488
+              }
+            ]
+          },
+          {
+            "Motion": "recoiling",
+            "Points": [
+              {
+                "X": 0.0028377182316035032,
+                "Y": -0.014805649407207966
+              },
+              {
+                "X": 0.11940707266330719,
+                "Y": 0.10092931240797043
+              },
+              {
+                "X": -0.0034227510914206505,
+                "Y": 0.22464469075202942
+              },
+              {
+                "X": -0.11999210715293884,
+                "Y": 0.1089097261428833
+              }
+            ]
+          },
+          {
+            "Motion": "recoiling",
+            "Points": [
+              {
+                "X": -0.02063562721014023,
+                "Y": 0.011536060832440853
+              },
+              {
+                "X": 0.019575435668230057,
+                "Y": 0.011536060832440853
+              },
+              {
+                "X": 0.019575435668230057,
+                "Y": 0.1483517438173294
+              },
+              {
+                "X": -0.02063562721014023,
+                "Y": 0.1483517438173294
+              }
+            ]
+          },
+          {
+            "Motion": "recoiling",
+            "Points": [
+              {
+                "X": -0.021395860239863396,
+                "Y": 0.0072340453043580055
+              },
+              {
+                "X": 0.02469499595463276,
+                "Y": 0.0072340453043580055
+              },
+              {
+                "X": 0.02469499595463276,
+                "Y": 0.2134299874305725
+              },
+              {
+                "X": -0.021395860239863396,
+                "Y": 0.2134299874305725
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.03253360837697983,
+                "Y": 0.0024297682102769613
+              },
+              {
+                "X": -0.004738742485642433,
+                "Y": 0.0024297682102769613
+              },
+              {
+                "X": -0.004738742485642433,
+                "Y": 0.025355059653520584
+              },
+              {
+                "X": -0.03253360837697983,
+                "Y": 0.025355059653520584
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.05482758209109306,
+                "Y": -0.005567447282373905
+              },
+              {
+                "X": -0.012339906767010689,
+                "Y": -0.005567447282373905
+              },
+              {
+                "X": -0.012339906767010689,
+                "Y": 0.06001608818769455
+              },
+              {
+                "X": -0.05482758209109306,
+                "Y": 0.06001608818769455
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.05753910914063454,
+                "Y": -0.004922107793390751
+              },
+              {
+                "X": -0.007561085745692253,
+                "Y": -0.004922107793390751
+              },
+              {
+                "X": -0.007561085745692253,
+                "Y": 0.057795412838459015
+              },
+              {
+                "X": -0.05753910914063454,
+                "Y": 0.057795412838459015
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.003273097798228264
+              },
+              {
+                "X": -0.006226986646652222,
+                "Y": 0.003273097798228264
+              },
+              {
+                "X": -0.006226986646652222,
+                "Y": 0.04876632243394852
+              },
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.04876632243394852
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.08287066966295242,
+                "Y": -0.026538290083408356
+              },
+              {
+                "X": -0.02342315949499607,
+                "Y": -0.026538290083408356
+              },
+              {
+                "X": -0.02342315949499607,
+                "Y": 0.021193288266658783
+              },
+              {
+                "X": -0.08287066966295242,
+                "Y": 0.021193288266658783
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.08817407488822937,
+                "Y": -0.02166532725095749
+              },
+              {
+                "X": -0.025026623159646988,
+                "Y": -0.02166532725095749
+              },
+              {
+                "X": -0.025026623159646988,
+                "Y": 0.03169026970863342
+              },
+              {
+                "X": -0.08817407488822937,
+                "Y": 0.03169026970863342
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.010164938867092133
+              },
+              {
+                "X": 0.04021516069769859,
+                "Y": 0.010164938867092133
+              },
+              {
+                "X": 0.04021516069769859,
+                "Y": 0.04385101795196533
+              },
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.04385101795196533
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": 0.018909897655248642,
+                "Y": -0.020121406763792038
+              },
+              {
+                "X": 0.08393770456314087,
+                "Y": -0.020121406763792038
+              },
+              {
+                "X": 0.08393770456314087,
+                "Y": 0.03586778789758682
+              },
+              {
+                "X": 0.018909897655248642,
+                "Y": 0.03586778789758682
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.02335137128829956
+              },
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.02335137128829956
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.06331172585487366,
+                "Y": -0.07390424609184265
+              },
+              {
+                "X": 0.054788991808891296,
+                "Y": -0.07390424609184265
+              },
+              {
+                "X": 0.054788991808891296,
+                "Y": 0.0040178727358579636
+              },
+              {
+                "X": -0.06331172585487366,
+                "Y": 0.0040178727358579636
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.02335137128829956
+              },
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.02335137128829956
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "MechanismId": "core.piercer",
+        "MountType": "gun.standard",
+        "Revision": 1,
+        "RequiredParts": [
+          {
+            "Id": "core.piercer",
+            "Revision": 1
+          },
+          {
+            "Id": "head.piercer",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          }
+        ],
+        "CompatibleParts": [
+          {
+            "Id": "core.piercer",
+            "Revision": 1
+          },
+          {
+            "Id": "head.piercer",
+            "Revision": 1
+          },
+          {
+            "Id": "head.short",
+            "Revision": 1
+          },
+          {
+            "Id": "head.long",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.scope",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.tracking",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.light",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.stabilized",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.snap",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.survey",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.quick",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.economy",
+            "Revision": 1
+          }
+        ],
+        "PivotX": 0.0,
+        "PivotY": 0.15800000727176666,
+        "MinRadians": -3.1415927410125732,
+        "MaxRadians": 3.1415927410125732,
+        "RecoilLimit": 0.08500000089406967,
+        "Clearance": 0.009999999776482582,
+        "Regions": [
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.08068853616714478,
+                "Y": -0.08675351738929749
+              },
+              {
+                "X": 0.06765808910131454,
+                "Y": -0.08675351738929749
+              },
+              {
+                "X": 0.06765808910131454,
+                "Y": 0.04906383901834488
+              },
+              {
+                "X": -0.08068853616714478,
+                "Y": 0.04906383901834488
+              }
+            ]
+          },
+          {
+            "Motion": "recoiling",
+            "Points": [
+              {
+                "X": -0.0297032929956913,
+                "Y": 0.004284929484128952
+              },
+              {
+                "X": 0.030522635206580162,
+                "Y": 0.004284929484128952
+              },
+              {
+                "X": 0.030522635206580162,
+                "Y": 0.20746472477912903
+              },
+              {
+                "X": -0.0297032929956913,
+                "Y": 0.20746472477912903
+              }
+            ]
+          },
+          {
+            "Motion": "recoiling",
+            "Points": [
+              {
+                "X": -0.02063562721014023,
+                "Y": 0.011536060832440853
+              },
+              {
+                "X": 0.019575435668230057,
+                "Y": 0.011536060832440853
+              },
+              {
+                "X": 0.019575435668230057,
+                "Y": 0.1483517438173294
+              },
+              {
+                "X": -0.02063562721014023,
+                "Y": 0.1483517438173294
+              }
+            ]
+          },
+          {
+            "Motion": "recoiling",
+            "Points": [
+              {
+                "X": -0.021395860239863396,
+                "Y": 0.0072340453043580055
+              },
+              {
+                "X": 0.02469499595463276,
+                "Y": 0.0072340453043580055
+              },
+              {
+                "X": 0.02469499595463276,
+                "Y": 0.2134299874305725
+              },
+              {
+                "X": -0.021395860239863396,
+                "Y": 0.2134299874305725
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.03253360837697983,
+                "Y": 0.0024297682102769613
+              },
+              {
+                "X": -0.004738742485642433,
+                "Y": 0.0024297682102769613
+              },
+              {
+                "X": -0.004738742485642433,
+                "Y": 0.025355059653520584
+              },
+              {
+                "X": -0.03253360837697983,
+                "Y": 0.025355059653520584
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.05482758209109306,
+                "Y": -0.005567447282373905
+              },
+              {
+                "X": -0.012339906767010689,
+                "Y": -0.005567447282373905
+              },
+              {
+                "X": -0.012339906767010689,
+                "Y": 0.06001608818769455
+              },
+              {
+                "X": -0.05482758209109306,
+                "Y": 0.06001608818769455
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.05753910914063454,
+                "Y": -0.004922107793390751
+              },
+              {
+                "X": -0.007561085745692253,
+                "Y": -0.004922107793390751
+              },
+              {
+                "X": -0.007561085745692253,
+                "Y": 0.057795412838459015
+              },
+              {
+                "X": -0.05753910914063454,
+                "Y": 0.057795412838459015
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.003273097798228264
+              },
+              {
+                "X": -0.006226986646652222,
+                "Y": 0.003273097798228264
+              },
+              {
+                "X": -0.006226986646652222,
+                "Y": 0.04876632243394852
+              },
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.04876632243394852
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.010164938867092133
+              },
+              {
+                "X": 0.04021516069769859,
+                "Y": 0.010164938867092133
+              },
+              {
+                "X": 0.04021516069769859,
+                "Y": 0.04385101795196533
+              },
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.04385101795196533
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.02335137128829956
+              },
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.02335137128829956
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.06331172585487366,
+                "Y": -0.07390424609184265
+              },
+              {
+                "X": 0.054788991808891296,
+                "Y": -0.07390424609184265
+              },
+              {
+                "X": 0.054788991808891296,
+                "Y": 0.0040178727358579636
+              },
+              {
+                "X": -0.06331172585487366,
+                "Y": 0.0040178727358579636
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.02335137128829956
+              },
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.02335137128829956
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "MechanismId": "core.mortar",
+        "MountType": "gun.standard",
+        "Revision": 1,
+        "RequiredParts": [
+          {
+            "Id": "core.mortar",
+            "Revision": 1
+          },
+          {
+            "Id": "head.mortar",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          }
+        ],
+        "CompatibleParts": [
+          {
+            "Id": "core.mortar",
+            "Revision": 1
+          },
+          {
+            "Id": "head.mortar",
+            "Revision": 1
+          },
+          {
+            "Id": "head.wide",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.scope",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.tracking",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.light",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.stabilized",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.snap",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.survey",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.quick",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.mortar.pair",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.economy",
+            "Revision": 1
+          }
+        ],
+        "PivotX": 0.0,
+        "PivotY": 0.15800000727176666,
+        "MinRadians": -3.1415927410125732,
+        "MaxRadians": 3.1415927410125732,
+        "RecoilLimit": 0.08500000089406967,
+        "Clearance": 0.009999999776482582,
+        "Regions": [
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.08005799353122711,
+                "Y": -0.08919651806354523
+              },
+              {
+                "X": 0.07949420809745789,
+                "Y": -0.08919651806354523
+              },
+              {
+                "X": 0.07949420809745789,
+                "Y": 0.03934730589389801
+              },
+              {
+                "X": -0.08005799353122711,
+                "Y": 0.03934730589389801
+              }
+            ]
+          },
+          {
+            "Motion": "recoiling",
+            "Points": [
+              {
+                "X": -0.062292661517858505,
+                "Y": 0.004248999059200287
+              },
+              {
+                "X": 0.06660434603691101,
+                "Y": 0.004248999059200287
+              },
+              {
+                "X": 0.06660434603691101,
+                "Y": 0.1975945085287094
+              },
+              {
+                "X": -0.062292661517858505,
+                "Y": 0.1975945085287094
+              }
+            ]
+          },
+          {
+            "Motion": "recoiling",
+            "Points": [
+              {
+                "X": -0.06953277438879013,
+                "Y": 0.01302912924438715
+              },
+              {
+                "X": 0.06274179369211197,
+                "Y": 0.01302912924438715
+              },
+              {
+                "X": 0.06274179369211197,
+                "Y": 0.20218175649642944
+              },
+              {
+                "X": -0.06953277438879013,
+                "Y": 0.20218175649642944
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.03253360837697983,
+                "Y": 0.0024297682102769613
+              },
+              {
+                "X": -0.004738742485642433,
+                "Y": 0.0024297682102769613
+              },
+              {
+                "X": -0.004738742485642433,
+                "Y": 0.025355059653520584
+              },
+              {
+                "X": -0.03253360837697983,
+                "Y": 0.025355059653520584
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.05482758209109306,
+                "Y": -0.005567447282373905
+              },
+              {
+                "X": -0.012339906767010689,
+                "Y": -0.005567447282373905
+              },
+              {
+                "X": -0.012339906767010689,
+                "Y": 0.06001608818769455
+              },
+              {
+                "X": -0.05482758209109306,
+                "Y": 0.06001608818769455
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.05753910914063454,
+                "Y": -0.004922107793390751
+              },
+              {
+                "X": -0.007561085745692253,
+                "Y": -0.004922107793390751
+              },
+              {
+                "X": -0.007561085745692253,
+                "Y": 0.057795412838459015
+              },
+              {
+                "X": -0.05753910914063454,
+                "Y": 0.057795412838459015
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.003273097798228264
+              },
+              {
+                "X": -0.006226986646652222,
+                "Y": 0.003273097798228264
+              },
+              {
+                "X": -0.006226986646652222,
+                "Y": 0.04876632243394852
+              },
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.04876632243394852
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.010164938867092133
+              },
+              {
+                "X": 0.04021516069769859,
+                "Y": 0.010164938867092133
+              },
+              {
+                "X": 0.04021516069769859,
+                "Y": 0.04385101795196533
+              },
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.04385101795196533
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.02335137128829956
+              },
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.02335137128829956
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.06331172585487366,
+                "Y": -0.07390424609184265
+              },
+              {
+                "X": 0.054788991808891296,
+                "Y": -0.07390424609184265
+              },
+              {
+                "X": 0.054788991808891296,
+                "Y": 0.0040178727358579636
+              },
+              {
+                "X": -0.06331172585487366,
+                "Y": 0.0040178727358579636
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.02335137128829956
+              },
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.02335137128829956
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "MechanismId": "core.fan",
+        "MountType": "gun.standard",
+        "Revision": 1,
+        "RequiredParts": [
+          {
+            "Id": "core.fan",
+            "Revision": 1
+          },
+          {
+            "Id": "head.fan",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          }
+        ],
+        "CompatibleParts": [
+          {
+            "Id": "core.fan",
+            "Revision": 1
+          },
+          {
+            "Id": "head.fan",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.tracking",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.light",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.stabilized",
+            "Revision": 1
+          },
+          {
+            "Id": "head.fan.focus",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.snap",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.quick",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.economy",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.survey",
+            "Revision": 1
+          }
+        ],
+        "PivotX": 0.0,
+        "PivotY": 0.15800000727176666,
+        "MinRadians": -3.1415927410125732,
+        "MaxRadians": 3.1415927410125732,
+        "RecoilLimit": 0.08500000089406967,
+        "Clearance": 0.009999999776482582,
+        "Regions": [
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.08750319480895996,
+                "Y": -0.0864824429154396
+              },
+              {
+                "X": 0.09120051562786102,
+                "Y": -0.0864824429154396
+              },
+              {
+                "X": 0.09120051562786102,
+                "Y": 0.04600479453802109
+              },
+              {
+                "X": -0.08750319480895996,
+                "Y": 0.04600479453802109
+              }
+            ]
+          },
+          {
+            "Motion": "recoiling",
+            "Points": [
+              {
+                "X": -0.08594585210084915,
+                "Y": 0.004626862704753876
+              },
+              {
+                "X": 0.08766135573387146,
+                "Y": 0.004626862704753876
+              },
+              {
+                "X": 0.08766135573387146,
+                "Y": 0.18791252374649048
+              },
+              {
+                "X": -0.08594585210084915,
+                "Y": 0.18791252374649048
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.03253360837697983,
+                "Y": 0.0024297682102769613
+              },
+              {
+                "X": -0.004738742485642433,
+                "Y": 0.0024297682102769613
+              },
+              {
+                "X": -0.004738742485642433,
+                "Y": 0.025355059653520584
+              },
+              {
+                "X": -0.03253360837697983,
+                "Y": 0.025355059653520584
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.05753910914063454,
+                "Y": -0.004922107793390751
+              },
+              {
+                "X": -0.007561085745692253,
+                "Y": -0.004922107793390751
+              },
+              {
+                "X": -0.007561085745692253,
+                "Y": 0.057795412838459015
+              },
+              {
+                "X": -0.05753910914063454,
+                "Y": 0.057795412838459015
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.003273097798228264
+              },
+              {
+                "X": -0.006226986646652222,
+                "Y": 0.003273097798228264
+              },
+              {
+                "X": -0.006226986646652222,
+                "Y": 0.04876632243394852
+              },
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.04876632243394852
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.010164938867092133
+              },
+              {
+                "X": 0.04021516069769859,
+                "Y": 0.010164938867092133
+              },
+              {
+                "X": 0.04021516069769859,
+                "Y": 0.04385101795196533
+              },
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.04385101795196533
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.02335137128829956
+              },
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.02335137128829956
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.06331172585487366,
+                "Y": -0.07390424609184265
+              },
+              {
+                "X": 0.054788991808891296,
+                "Y": -0.07390424609184265
+              },
+              {
+                "X": 0.054788991808891296,
+                "Y": 0.0040178727358579636
+              },
+              {
+                "X": -0.06331172585487366,
+                "Y": 0.0040178727358579636
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.02335137128829956
+              },
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.02335137128829956
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "MechanismId": "core.ricochet",
+        "MountType": "gun.standard",
+        "Revision": 1,
+        "RequiredParts": [
+          {
+            "Id": "core.ricochet",
+            "Revision": 1
+          },
+          {
+            "Id": "head.ricochet",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          }
+        ],
+        "CompatibleParts": [
+          {
+            "Id": "core.ricochet",
+            "Revision": 1
+          },
+          {
+            "Id": "head.ricochet",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.scope",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.tracking",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.light",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.stabilized",
+            "Revision": 1
+          },
+          {
+            "Id": "head.ricochet.long",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.snap",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.survey",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.quick",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.economy",
+            "Revision": 1
+          }
+        ],
+        "PivotX": 0.0,
+        "PivotY": 0.15800000727176666,
+        "MinRadians": -3.1415927410125732,
+        "MaxRadians": 3.1415927410125732,
+        "RecoilLimit": 0.08500000089406967,
+        "Clearance": 0.009999999776482582,
+        "Regions": [
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.09089110046625137,
+                "Y": -0.08730018138885498
+              },
+              {
+                "X": 0.08952430635690689,
+                "Y": -0.08730018138885498
+              },
+              {
+                "X": 0.08952430635690689,
+                "Y": 0.04049406945705414
+              },
+              {
+                "X": -0.09089110046625137,
+                "Y": 0.04049406945705414
+              }
+            ]
+          },
+          {
+            "Motion": "recoiling",
+            "Points": [
+              {
+                "X": -0.13407981395721436,
+                "Y": -0.07116446644067764
+              },
+              {
+                "X": 0.09820520132780075,
+                "Y": -0.07116446644067764
+              },
+              {
+                "X": 0.09820520132780075,
+                "Y": 0.11742336302995682
+              },
+              {
+                "X": -0.13407981395721436,
+                "Y": 0.11742336302995682
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.03253360837697983,
+                "Y": 0.0024297682102769613
+              },
+              {
+                "X": -0.004738742485642433,
+                "Y": 0.0024297682102769613
+              },
+              {
+                "X": -0.004738742485642433,
+                "Y": 0.025355059653520584
+              },
+              {
+                "X": -0.03253360837697983,
+                "Y": 0.025355059653520584
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.05482758209109306,
+                "Y": -0.005567447282373905
+              },
+              {
+                "X": -0.012339906767010689,
+                "Y": -0.005567447282373905
+              },
+              {
+                "X": -0.012339906767010689,
+                "Y": 0.06001608818769455
+              },
+              {
+                "X": -0.05482758209109306,
+                "Y": 0.06001608818769455
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.05753910914063454,
+                "Y": -0.004922107793390751
+              },
+              {
+                "X": -0.007561085745692253,
+                "Y": -0.004922107793390751
+              },
+              {
+                "X": -0.007561085745692253,
+                "Y": 0.057795412838459015
+              },
+              {
+                "X": -0.05753910914063454,
+                "Y": 0.057795412838459015
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.003273097798228264
+              },
+              {
+                "X": -0.006226986646652222,
+                "Y": 0.003273097798228264
+              },
+              {
+                "X": -0.006226986646652222,
+                "Y": 0.04876632243394852
+              },
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.04876632243394852
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.010164938867092133
+              },
+              {
+                "X": 0.04021516069769859,
+                "Y": 0.010164938867092133
+              },
+              {
+                "X": 0.04021516069769859,
+                "Y": 0.04385101795196533
+              },
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.04385101795196533
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.02335137128829956
+              },
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.02335137128829956
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.06331172585487366,
+                "Y": -0.07390424609184265
+              },
+              {
+                "X": 0.054788991808891296,
+                "Y": -0.07390424609184265
+              },
+              {
+                "X": 0.054788991808891296,
+                "Y": 0.0040178727358579636
+              },
+              {
+                "X": -0.06331172585487366,
+                "Y": 0.0040178727358579636
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.02335137128829956
+              },
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.02335137128829956
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "MechanismId": "core.stapler",
+        "MountType": "gun.standard",
+        "Revision": 1,
+        "RequiredParts": [
+          {
+            "Id": "core.stapler",
+            "Revision": 1
+          },
+          {
+            "Id": "head.stapler",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          }
+        ],
+        "CompatibleParts": [
+          {
+            "Id": "core.stapler",
+            "Revision": 1
+          },
+          {
+            "Id": "head.stapler",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.tracking",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.drum",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.light",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.stabilized",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.snap",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.quick",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.reserve",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.economy",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.survey",
+            "Revision": 1
+          }
+        ],
+        "PivotX": 0.0,
+        "PivotY": 0.15800000727176666,
+        "MinRadians": -3.1415927410125732,
+        "MaxRadians": 3.1415927410125732,
+        "RecoilLimit": 0.08500000089406967,
+        "Clearance": 0.009999999776482582,
+        "Regions": [
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.05686570331454277,
+                "Y": -0.0867464691400528
+              },
+              {
+                "X": 0.072828009724617,
+                "Y": -0.0867464691400528
+              },
+              {
+                "X": 0.072828009724617,
+                "Y": 0.04594016820192337
+              },
+              {
+                "X": -0.05686570331454277,
+                "Y": 0.04594016820192337
+              }
+            ]
+          },
+          {
+            "Motion": "recoiling",
+            "Points": [
+              {
+                "X": 0.0712658166885376,
+                "Y": -0.010254567489027977
+              },
+              {
+                "X": 0.10430660098791122,
+                "Y": 0.17779116332530975
+              },
+              {
+                "X": -0.0435362383723259,
+                "Y": 0.2037680447101593
+              },
+              {
+                "X": -0.07657702267169952,
+                "Y": 0.015722326934337616
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.03253360837697983,
+                "Y": 0.0024297682102769613
+              },
+              {
+                "X": -0.004738742485642433,
+                "Y": 0.0024297682102769613
+              },
+              {
+                "X": -0.004738742485642433,
+                "Y": 0.025355059653520584
+              },
+              {
+                "X": -0.03253360837697983,
+                "Y": 0.025355059653520584
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.05753910914063454,
+                "Y": -0.004922107793390751
+              },
+              {
+                "X": -0.007561085745692253,
+                "Y": -0.004922107793390751
+              },
+              {
+                "X": -0.007561085745692253,
+                "Y": 0.057795412838459015
+              },
+              {
+                "X": -0.05753910914063454,
+                "Y": 0.057795412838459015
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.003273097798228264
+              },
+              {
+                "X": -0.006226986646652222,
+                "Y": 0.003273097798228264
+              },
+              {
+                "X": -0.006226986646652222,
+                "Y": 0.04876632243394852
+              },
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.04876632243394852
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.08287066966295242,
+                "Y": -0.026538290083408356
+              },
+              {
+                "X": -0.02342315949499607,
+                "Y": -0.026538290083408356
+              },
+              {
+                "X": -0.02342315949499607,
+                "Y": 0.021193288266658783
+              },
+              {
+                "X": -0.08287066966295242,
+                "Y": 0.021193288266658783
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.010164938867092133
+              },
+              {
+                "X": 0.04021516069769859,
+                "Y": 0.010164938867092133
+              },
+              {
+                "X": 0.04021516069769859,
+                "Y": 0.04385101795196533
+              },
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.04385101795196533
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.02335137128829956
+              },
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.02335137128829956
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.06331172585487366,
+                "Y": -0.07390424609184265
+              },
+              {
+                "X": 0.054788991808891296,
+                "Y": -0.07390424609184265
+              },
+              {
+                "X": 0.054788991808891296,
+                "Y": 0.0040178727358579636
+              },
+              {
+                "X": -0.06331172585487366,
+                "Y": 0.0040178727358579636
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.02335137128829956
+              },
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.02335137128829956
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "MechanismId": "core.blotter",
+        "MountType": "gun.standard",
+        "Revision": 1,
+        "RequiredParts": [
+          {
+            "Id": "core.blotter",
+            "Revision": 1
+          },
+          {
+            "Id": "head.blotter",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          }
+        ],
+        "CompatibleParts": [
+          {
+            "Id": "core.blotter",
+            "Revision": 1
+          },
+          {
+            "Id": "head.blotter",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.tracking",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.light",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.stabilized",
+            "Revision": 1
+          },
+          {
+            "Id": "head.absorb",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.snap",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.quick",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.economy",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.survey",
+            "Revision": 1
+          }
+        ],
+        "PivotX": 0.0,
+        "PivotY": 0.15800000727176666,
+        "MinRadians": -3.1415927410125732,
+        "MaxRadians": 3.1415927410125732,
+        "RecoilLimit": 0.08500000089406967,
+        "Clearance": 0.009999999776482582,
+        "Regions": [
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.054647691547870636,
+                "Y": -0.08688943088054657
+              },
+              {
+                "X": 0.05956598371267319,
+                "Y": -0.08688943088054657
+              },
+              {
+                "X": 0.05956598371267319,
+                "Y": 0.048090361058712006
+              },
+              {
+                "X": -0.054647691547870636,
+                "Y": 0.048090361058712006
+              }
+            ]
+          },
+          {
+            "Motion": "recoiling",
+            "Points": [
+              {
+                "X": -0.08545368909835815,
+                "Y": 0.016113711521029472
+              },
+              {
+                "X": 0.07465383410453796,
+                "Y": 0.016113711521029472
+              },
+              {
+                "X": 0.07465383410453796,
+                "Y": 0.18908128142356873
+              },
+              {
+                "X": -0.08545368909835815,
+                "Y": 0.18908128142356873
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.03253360837697983,
+                "Y": 0.0024297682102769613
+              },
+              {
+                "X": -0.004738742485642433,
+                "Y": 0.0024297682102769613
+              },
+              {
+                "X": -0.004738742485642433,
+                "Y": 0.025355059653520584
+              },
+              {
+                "X": -0.03253360837697983,
+                "Y": 0.025355059653520584
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.05753910914063454,
+                "Y": -0.004922107793390751
+              },
+              {
+                "X": -0.007561085745692253,
+                "Y": -0.004922107793390751
+              },
+              {
+                "X": -0.007561085745692253,
+                "Y": 0.057795412838459015
+              },
+              {
+                "X": -0.05753910914063454,
+                "Y": 0.057795412838459015
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.003273097798228264
+              },
+              {
+                "X": -0.006226986646652222,
+                "Y": 0.003273097798228264
+              },
+              {
+                "X": -0.006226986646652222,
+                "Y": 0.04876632243394852
+              },
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.04876632243394852
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.010164938867092133
+              },
+              {
+                "X": 0.04021516069769859,
+                "Y": 0.010164938867092133
+              },
+              {
+                "X": 0.04021516069769859,
+                "Y": 0.04385101795196533
+              },
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.04385101795196533
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.02335137128829956
+              },
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.02335137128829956
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.06331172585487366,
+                "Y": -0.07390424609184265
+              },
+              {
+                "X": 0.054788991808891296,
+                "Y": -0.07390424609184265
+              },
+              {
+                "X": 0.054788991808891296,
+                "Y": 0.0040178727358579636
+              },
+              {
+                "X": -0.06331172585487366,
+                "Y": 0.0040178727358579636
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.16029255092144012
+              },
+              {
+                "X": 0.08512972295284271,
+                "Y": -0.02335137128829956
+              },
+              {
+                "X": -0.08390703797340393,
+                "Y": -0.02335137128829956
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Structures": [
+      {
+        "Family": 1,
+        "RequiredParts": [
+          {
+            "Id": "site.wall",
+            "Revision": 1
+          },
+          {
+            "Id": "function.wall",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.none",
+            "Revision": 1
+          }
+        ],
+        "CompatibleParts": [
+          {
+            "Id": "site.wall",
+            "Revision": 1
+          },
+          {
+            "Id": "function.wall",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.light",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.reinforced",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.none",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.armor",
+            "Revision": 1
+          },
+          {
+            "Id": "site.wall.compact",
+            "Revision": 1
+          },
+          {
+            "Id": "function.wall.braced",
+            "Revision": 1
+          }
+        ],
+        "Regions": [
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.3262028396129608,
+                "Y": -0.39782625436782837
+              },
+              {
+                "X": 0.31988924741744995,
+                "Y": -0.39782625436782837
+              },
+              {
+                "X": 0.31988924741744995,
+                "Y": 0.03149878978729248
+              },
+              {
+                "X": -0.3262028396129608,
+                "Y": 0.03149878978729248
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.2662316560745239,
+                "Y": -0.17183342576026917
+              },
+              {
+                "X": 0.2681964933872223,
+                "Y": -0.17183342576026917
+              },
+              {
+                "X": 0.2681964933872223,
+                "Y": 0.2859671711921692
+              },
+              {
+                "X": -0.2662316560745239,
+                "Y": 0.2859671711921692
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.2448527216911316,
+                "Y": -0.21468590199947357
+              },
+              {
+                "X": 0.24669373035430908,
+                "Y": -0.21468590199947357
+              },
+              {
+                "X": 0.24669373035430908,
+                "Y": 0.15903669595718384
+              },
+              {
+                "X": -0.2448527216911316,
+                "Y": 0.15903669595718384
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.2448527216911316,
+                "Y": -0.21468590199947357
+              },
+              {
+                "X": 0.24669373035430908,
+                "Y": -0.21468590199947357
+              },
+              {
+                "X": 0.24669373035430908,
+                "Y": 0.15903669595718384
+              },
+              {
+                "X": -0.2448527216911316,
+                "Y": 0.15903669595718384
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.24602670967578888,
+                "Y": -0.32100123167037964
+              },
+              {
+                "X": 0.2670234143733978,
+                "Y": -0.32100123167037964
+              },
+              {
+                "X": 0.2670234143733978,
+                "Y": -0.03252464532852173
+              },
+              {
+                "X": -0.24602670967578888,
+                "Y": -0.03252464532852173
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.2448527216911316,
+                "Y": -0.21468590199947357
+              },
+              {
+                "X": 0.24669373035430908,
+                "Y": -0.21468590199947357
+              },
+              {
+                "X": 0.24669373035430908,
+                "Y": 0.15903669595718384
+              },
+              {
+                "X": -0.2448527216911316,
+                "Y": 0.15903669595718384
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.23625972867012024,
+                "Y": -0.38972043991088867
+              },
+              {
+                "X": 0.23709015548229218,
+                "Y": -0.38972043991088867
+              },
+              {
+                "X": 0.23709015548229218,
+                "Y": -0.007718771696090698
+              },
+              {
+                "X": -0.23625972867012024,
+                "Y": -0.007718771696090698
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.12861226499080658,
+                "Y": -0.2692931294441223
+              },
+              {
+                "X": 0.10656444728374481,
+                "Y": -0.2692931294441223
+              },
+              {
+                "X": 0.10656444728374481,
+                "Y": 0.0026299208402633667
+              },
+              {
+                "X": -0.12861226499080658,
+                "Y": 0.0026299208402633667
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Family": 2,
+        "RequiredParts": [
+          {
+            "Id": "site.slow",
+            "Revision": 1
+          },
+          {
+            "Id": "function.slow",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.none",
+            "Revision": 1
+          }
+        ],
+        "CompatibleParts": [
+          {
+            "Id": "site.slow",
+            "Revision": 1
+          },
+          {
+            "Id": "function.slow",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.light",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.reinforced",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.none",
+            "Revision": 1
+          },
+          {
+            "Id": "site.slow.compact",
+            "Revision": 1
+          },
+          {
+            "Id": "function.slow.diluted",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.concentrate",
+            "Revision": 1
+          }
+        ],
+        "Regions": [
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.3108629286289215,
+                "Y": -0.3303270936012268
+              },
+              {
+                "X": 0.3167467713356018,
+                "Y": -0.3303270936012268
+              },
+              {
+                "X": 0.3167467713356018,
+                "Y": 0.04427747428417206
+              },
+              {
+                "X": -0.3108629286289215,
+                "Y": 0.04427747428417206
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.30532094836235046,
+                "Y": -0.09935296326875687
+              },
+              {
+                "X": 0.3154309093952179,
+                "Y": -0.09935296326875687
+              },
+              {
+                "X": 0.3154309093952179,
+                "Y": 0.24842986464500427
+              },
+              {
+                "X": -0.30532094836235046,
+                "Y": 0.24842986464500427
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.29318898916244507,
+                "Y": -0.05689111351966858
+              },
+              {
+                "X": 0.30127695202827454,
+                "Y": -0.05689111351966858
+              },
+              {
+                "X": 0.30127695202827454,
+                "Y": 0.23831987380981445
+              },
+              {
+                "X": -0.29318898916244507,
+                "Y": 0.23831987380981445
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.29318898916244507,
+                "Y": -0.05689111351966858
+              },
+              {
+                "X": 0.30127695202827454,
+                "Y": -0.05689111351966858
+              },
+              {
+                "X": 0.30127695202827454,
+                "Y": 0.23831987380981445
+              },
+              {
+                "X": -0.29318898916244507,
+                "Y": 0.23831987380981445
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.24602670967578888,
+                "Y": -0.32100123167037964
+              },
+              {
+                "X": 0.2670234143733978,
+                "Y": -0.32100123167037964
+              },
+              {
+                "X": 0.2670234143733978,
+                "Y": -0.03252464532852173
+              },
+              {
+                "X": -0.24602670967578888,
+                "Y": -0.03252464532852173
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.29318898916244507,
+                "Y": -0.05689111351966858
+              },
+              {
+                "X": 0.30127695202827454,
+                "Y": -0.05689111351966858
+              },
+              {
+                "X": 0.30127695202827454,
+                "Y": 0.23831987380981445
+              },
+              {
+                "X": -0.29318898916244507,
+                "Y": 0.23831987380981445
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.23625972867012024,
+                "Y": -0.38972043991088867
+              },
+              {
+                "X": 0.23709015548229218,
+                "Y": -0.38972043991088867
+              },
+              {
+                "X": 0.23709015548229218,
+                "Y": -0.007718771696090698
+              },
+              {
+                "X": -0.23625972867012024,
+                "Y": -0.007718771696090698
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Family": 4,
+        "RequiredParts": [
+          {
+            "Id": "site.repair",
+            "Revision": 1
+          },
+          {
+            "Id": "function.repair",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.none",
+            "Revision": 1
+          }
+        ],
+        "CompatibleParts": [
+          {
+            "Id": "site.repair",
+            "Revision": 1
+          },
+          {
+            "Id": "function.repair",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.light",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.reinforced",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.none",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.armor",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.range",
+            "Revision": 1
+          },
+          {
+            "Id": "site.repair.compact",
+            "Revision": 1
+          },
+          {
+            "Id": "function.repair.focused",
+            "Revision": 1
+          }
+        ],
+        "Regions": [
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.3020932972431183,
+                "Y": -0.4310227930545807
+              },
+              {
+                "X": 0.32654014229774475,
+                "Y": -0.4310227930545807
+              },
+              {
+                "X": 0.32654014229774475,
+                "Y": -0.08178199082612991
+              },
+              {
+                "X": -0.3020932972431183,
+                "Y": -0.08178199082612991
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.3020932972431183,
+                "Y": -0.4310227632522583
+              },
+              {
+                "X": 0.32654014229774475,
+                "Y": -0.4310227632522583
+              },
+              {
+                "X": 0.32654014229774475,
+                "Y": 0.09185925126075745
+              },
+              {
+                "X": -0.3020932972431183,
+                "Y": 0.09185925126075745
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": 0.1974855363368988,
+                "Y": -0.22499093413352966
+              },
+              {
+                "X": 0.3595275282859802,
+                "Y": -0.22499093413352966
+              },
+              {
+                "X": 0.3595275282859802,
+                "Y": -0.054734840989112854
+              },
+              {
+                "X": 0.1974855363368988,
+                "Y": -0.054734840989112854
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.22413508594036102,
+                "Y": -0.15493132174015045
+              },
+              {
+                "X": 0.28733882308006287,
+                "Y": -0.10877397656440735
+              },
+              {
+                "X": 0.25763532519340515,
+                "Y": 0.22037342190742493
+              },
+              {
+                "X": -0.25383859872817993,
+                "Y": 0.17421606183052063
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.22413508594036102,
+                "Y": -0.15493132174015045
+              },
+              {
+                "X": 0.28733882308006287,
+                "Y": -0.10877397656440735
+              },
+              {
+                "X": 0.25763532519340515,
+                "Y": 0.22037342190742493
+              },
+              {
+                "X": -0.25383859872817993,
+                "Y": 0.17421606183052063
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.24602670967578888,
+                "Y": -0.32100123167037964
+              },
+              {
+                "X": 0.2670234143733978,
+                "Y": -0.32100123167037964
+              },
+              {
+                "X": 0.2670234143733978,
+                "Y": -0.03252464532852173
+              },
+              {
+                "X": -0.24602670967578888,
+                "Y": -0.03252464532852173
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.22413508594036102,
+                "Y": -0.15493132174015045
+              },
+              {
+                "X": 0.28733882308006287,
+                "Y": -0.10877397656440735
+              },
+              {
+                "X": 0.25763532519340515,
+                "Y": 0.22037342190742493
+              },
+              {
+                "X": -0.25383859872817993,
+                "Y": 0.17421606183052063
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.23625972867012024,
+                "Y": -0.38972043991088867
+              },
+              {
+                "X": 0.23709015548229218,
+                "Y": -0.38972043991088867
+              },
+              {
+                "X": 0.23709015548229218,
+                "Y": -0.007718771696090698
+              },
+              {
+                "X": -0.23625972867012024,
+                "Y": -0.007718771696090698
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.12861226499080658,
+                "Y": -0.2692931294441223
+              },
+              {
+                "X": 0.10656444728374481,
+                "Y": -0.2692931294441223
+              },
+              {
+                "X": 0.10656444728374481,
+                "Y": 0.0026299208402633667
+              },
+              {
+                "X": -0.12861226499080658,
+                "Y": 0.0026299208402633667
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": 0.2747163474559784,
+                "Y": -0.1605832576751709
+              },
+              {
+                "X": 0.5765972137451172,
+                "Y": -0.1605832576751709
+              },
+              {
+                "X": 0.5765972137451172,
+                "Y": 0.09595067799091339
+              },
+              {
+                "X": 0.2747163474559784,
+                "Y": 0.09595067799091339
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Family": 8,
+        "RequiredParts": [
+          {
+            "Id": "site.generator",
+            "Revision": 1
+          },
+          {
+            "Id": "function.generator",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.none",
+            "Revision": 1
+          }
+        ],
+        "CompatibleParts": [
+          {
+            "Id": "site.generator",
+            "Revision": 1
+          },
+          {
+            "Id": "function.generator",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.light",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.reinforced",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.none",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.armor",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.economy",
+            "Revision": 1
+          },
+          {
+            "Id": "site.generator.compact",
+            "Revision": 1
+          },
+          {
+            "Id": "function.generator.quick",
+            "Revision": 1
+          }
+        ],
+        "Regions": [
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.30694982409477234,
+                "Y": -0.3308280110359192
+              },
+              {
+                "X": 0.3144364058971405,
+                "Y": -0.3308280110359192
+              },
+              {
+                "X": 0.3144364058971405,
+                "Y": 0.04724434018135071
+              },
+              {
+                "X": -0.30694982409477234,
+                "Y": 0.04724434018135071
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.25364306569099426,
+                "Y": -0.13018666207790375
+              },
+              {
+                "X": 0.23172329366207123,
+                "Y": -0.13018666207790375
+              },
+              {
+                "X": 0.23172329366207123,
+                "Y": 0.29568320512771606
+              },
+              {
+                "X": -0.25364306569099426,
+                "Y": 0.29568320512771606
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.11532609164714813,
+                "Y": 0.13434801995754242
+              },
+              {
+                "X": 0.11101483553647995,
+                "Y": 0.13434801995754242
+              },
+              {
+                "X": 0.11101483553647995,
+                "Y": 0.39302337169647217
+              },
+              {
+                "X": -0.11532609164714813,
+                "Y": 0.39302337169647217
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.11532609164714813,
+                "Y": 0.13434801995754242
+              },
+              {
+                "X": 0.11101483553647995,
+                "Y": 0.13434801995754242
+              },
+              {
+                "X": 0.11101483553647995,
+                "Y": 0.39302337169647217
+              },
+              {
+                "X": -0.11532609164714813,
+                "Y": 0.39302337169647217
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.24602670967578888,
+                "Y": -0.32100123167037964
+              },
+              {
+                "X": 0.2670234143733978,
+                "Y": -0.32100123167037964
+              },
+              {
+                "X": 0.2670234143733978,
+                "Y": -0.03252464532852173
+              },
+              {
+                "X": -0.24602670967578888,
+                "Y": -0.03252464532852173
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.11532609164714813,
+                "Y": 0.13434801995754242
+              },
+              {
+                "X": 0.11101483553647995,
+                "Y": 0.13434801995754242
+              },
+              {
+                "X": 0.11101483553647995,
+                "Y": 0.39302337169647217
+              },
+              {
+                "X": -0.11532609164714813,
+                "Y": 0.39302337169647217
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.23625972867012024,
+                "Y": -0.38972043991088867
+              },
+              {
+                "X": 0.23709015548229218,
+                "Y": -0.38972043991088867
+              },
+              {
+                "X": 0.23709015548229218,
+                "Y": -0.007718771696090698
+              },
+              {
+                "X": -0.23625972867012024,
+                "Y": -0.007718771696090698
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.12861226499080658,
+                "Y": -0.2692931294441223
+              },
+              {
+                "X": 0.10656444728374481,
+                "Y": -0.2692931294441223
+              },
+              {
+                "X": 0.10656444728374481,
+                "Y": 0.0026299208402633667
+              },
+              {
+                "X": -0.12861226499080658,
+                "Y": 0.0026299208402633667
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.37119629979133606,
+                "Y": -0.09898350387811661
+              },
+              {
+                "X": -0.13082364201545715,
+                "Y": -0.09898350387811661
+              },
+              {
+                "X": -0.13082364201545715,
+                "Y": 0.1686583310365677
+              },
+              {
+                "X": -0.37119629979133606,
+                "Y": 0.1686583310365677
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": 0.20306605100631714,
+                "Y": -0.04933961480855942
+              },
+              {
+                "X": 0.34283989667892456,
+                "Y": -0.04933961480855942
+              },
+              {
+                "X": 0.34283989667892456,
+                "Y": 0.16572785377502441
+              },
+              {
+                "X": 0.20306605100631714,
+                "Y": 0.16572785377502441
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Family": 16,
+        "RequiredParts": [
+          {
+            "Id": "site.spikes",
+            "Revision": 1
+          },
+          {
+            "Id": "function.spikes",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.none",
+            "Revision": 1
+          }
+        ],
+        "CompatibleParts": [
+          {
+            "Id": "shell.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.light",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.reinforced",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.none",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.range",
+            "Revision": 1
+          },
+          {
+            "Id": "site.spikes",
+            "Revision": 1
+          },
+          {
+            "Id": "function.spikes",
+            "Revision": 1
+          },
+          {
+            "Id": "site.spikes.compact",
+            "Revision": 1
+          },
+          {
+            "Id": "function.spikes.barbed",
+            "Revision": 1
+          }
+        ],
+        "Regions": [
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.4,
+                "Y": -0.35
+              },
+              {
+                "X": 0.4,
+                "Y": -0.35
+              },
+              {
+                "X": 0.4,
+                "Y": 0.14
+              },
+              {
+                "X": -0.4,
+                "Y": 0.14
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.32,
+                "Y": 0.14
+              },
+              {
+                "X": 0.32,
+                "Y": 0.14
+              },
+              {
+                "X": 0.32,
+                "Y": 0.25
+              },
+              {
+                "X": -0.32,
+                "Y": 0.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Family": 32,
+        "RequiredParts": [
+          {
+            "Id": "site.beacon",
+            "Revision": 1
+          },
+          {
+            "Id": "function.beacon",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.none",
+            "Revision": 1
+          }
+        ],
+        "CompatibleParts": [
+          {
+            "Id": "shell.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.light",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.reinforced",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.none",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.range",
+            "Revision": 1
+          },
+          {
+            "Id": "site.beacon",
+            "Revision": 1
+          },
+          {
+            "Id": "function.beacon",
+            "Revision": 1
+          },
+          {
+            "Id": "site.beacon.compact",
+            "Revision": 1
+          },
+          {
+            "Id": "function.beacon.focused",
+            "Revision": 1
+          }
+        ],
+        "Regions": [
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.38,
+                "Y": -0.35
+              },
+              {
+                "X": 0.38,
+                "Y": -0.35
+              },
+              {
+                "X": 0.38,
+                "Y": 0.05
+              },
+              {
+                "X": -0.38,
+                "Y": 0.05
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.2,
+                "Y": 0.05
+              },
+              {
+                "X": 0.2,
+                "Y": 0.05
+              },
+              {
+                "X": 0.2,
+                "Y": 0.25
+              },
+              {
+                "X": -0.2,
+                "Y": 0.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Family": 64,
+        "RequiredParts": [
+          {
+            "Id": "site.prism",
+            "Revision": 1
+          },
+          {
+            "Id": "function.prism",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.none",
+            "Revision": 1
+          }
+        ],
+        "CompatibleParts": [
+          {
+            "Id": "shell.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.light",
+            "Revision": 1
+          },
+          {
+            "Id": "shell.reinforced",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.none",
+            "Revision": 1
+          },
+          {
+            "Id": "utility.range",
+            "Revision": 1
+          },
+          {
+            "Id": "site.prism",
+            "Revision": 1
+          },
+          {
+            "Id": "function.prism",
+            "Revision": 1
+          },
+          {
+            "Id": "site.prism.compact",
+            "Revision": 1
+          },
+          {
+            "Id": "function.prism.focused",
+            "Revision": 1
+          }
+        ],
+        "Regions": [
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.38,
+                "Y": -0.35
+              },
+              {
+                "X": 0.38,
+                "Y": -0.35
+              },
+              {
+                "X": 0.38,
+                "Y": 0.05
+              },
+              {
+                "X": -0.38,
+                "Y": 0.05
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.2,
+                "Y": 0.05
+              },
+              {
+                "X": 0.2,
+                "Y": 0.05
+              },
+              {
+                "X": 0.2,
+                "Y": 0.25
+              },
+              {
+                "X": -0.2,
+                "Y": 0.25
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "legacyFits": {
+    "SchemaVersion": 1,
+    "Revision": "modular-full-catalog-2026-10-24-v8",
+    "Parts": [
+      {
+        "Id": "frame.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Frame",
+        "ExpectedSocketType": "assembly.Frame",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 0
+      },
+      {
+        "Id": "frame.heavy",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Frame",
+        "ExpectedSocketType": "assembly.Frame",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 0
+      },
+      {
+        "Id": "frame.precision",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Frame",
+        "ExpectedSocketType": "assembly.Frame",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 0
+      },
+      {
+        "Id": "frame.battery",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Frame",
+        "ExpectedSocketType": "assembly.Frame",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 0
+      },
+      {
+        "Id": "hull.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Hull",
+        "ExpectedSocketType": "assembly.Hull",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 1
+      },
+      {
+        "Id": "hull.light",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Hull",
+        "ExpectedSocketType": "assembly.Hull",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 1
+      },
+      {
+        "Id": "hull.reinforced",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Hull",
+        "ExpectedSocketType": "assembly.Hull",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 1
+      },
+      {
+        "Id": "armor.none",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Armor",
+        "ExpectedSocketType": "assembly.Armor",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 2
+      },
+      {
+        "Id": "armor.plate",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Armor",
+        "ExpectedSocketType": "assembly.Armor",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 2
+      },
+      {
+        "Id": "armor.front",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Armor",
+        "ExpectedSocketType": "assembly.Armor",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 2
+      },
+      {
+        "Id": "feed.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Feed",
+        "ExpectedSocketType": "assembly.Feed",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 3
+      },
+      {
+        "Id": "feed.boost",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Feed",
+        "ExpectedSocketType": "assembly.Feed",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 3
+      },
+      {
+        "Id": "turn.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Turn",
+        "ExpectedSocketType": "assembly.Turn",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 4
+      },
+      {
+        "Id": "turn.quick",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Turn",
+        "ExpectedSocketType": "assembly.Turn",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 4
+      },
+      {
+        "Id": "core.gun",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 5
+      },
+      {
+        "Id": "core.piercer",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 5
+      },
+      {
+        "Id": "core.mortar",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 5
+      },
+      {
+        "Id": "core.fan",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 5
+      },
+      {
+        "Id": "core.ricochet",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 5
+      },
+      {
+        "Id": "core.stapler",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 5
+      },
+      {
+        "Id": "core.blotter",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 5
+      },
+      {
+        "Id": "head.gun",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.piercer",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.mortar",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.fan",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.ricochet",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.stapler",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.blotter",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.short",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.long",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "head.wide",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Head",
+        "ExpectedSocketType": "assembly.Head",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 6
+      },
+      {
+        "Id": "sight.iron",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Sight",
+        "ExpectedSocketType": "assembly.Sight",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 7
+      },
+      {
+        "Id": "sight.scope",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Sight",
+        "ExpectedSocketType": "assembly.Sight",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 7
+      },
+      {
+        "Id": "sight.tracking",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Sight",
+        "ExpectedSocketType": "assembly.Sight",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 7
+      },
+      {
+        "Id": "magazine.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Magazine",
+        "ExpectedSocketType": "assembly.Magazine",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 8
+      },
+      {
+        "Id": "magazine.drum",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Magazine",
+        "ExpectedSocketType": "assembly.Magazine",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 8
+      },
+      {
+        "Id": "magazine.belt",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Magazine",
+        "ExpectedSocketType": "assembly.Magazine",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 8
+      },
+      {
+        "Id": "trigger.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Trigger",
+        "ExpectedSocketType": "assembly.Trigger",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 9
+      },
+      {
+        "Id": "trigger.burst",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Trigger",
+        "ExpectedSocketType": "assembly.Trigger",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 9
+      },
+      {
+        "Id": "site.wall",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "site.slow",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "site.repair",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "site.generator",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Site",
+        "ExpectedSocketType": "assembly.Site",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 10
+      },
+      {
+        "Id": "function.wall",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "function.slow",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "function.repair",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "function.generator",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Function",
+        "ExpectedSocketType": "assembly.Function",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 11
+      },
+      {
+        "Id": "shell.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Shell",
+        "ExpectedSocketType": "assembly.Shell",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 12
+      },
+      {
+        "Id": "shell.light",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Shell",
+        "ExpectedSocketType": "assembly.Shell",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 12
+      },
+      {
+        "Id": "shell.reinforced",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Shell",
+        "ExpectedSocketType": "assembly.Shell",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 12
+      },
+      {
+        "Id": "utility.none",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Utility",
+        "ExpectedSocketType": "assembly.Utility",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 13
+      },
+      {
+        "Id": "utility.armor",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Utility",
+        "ExpectedSocketType": "assembly.Utility",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 13
+      },
+      {
+        "Id": "utility.range",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Utility",
+        "ExpectedSocketType": "assembly.Utility",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 13
+      },
+      {
+        "Id": "utility.economy",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "assembly.Utility",
+        "ExpectedSocketType": "assembly.Utility",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 13
+      },
+      {
+        "Id": "mount.standard",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 14
+      },
+      {
+        "Id": "mount.light",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 14
+      },
+      {
+        "Id": "mount.stabilized",
+        "AssetRevision": "modular-full-catalog-2026-10-24-v8",
+        "AttachType": "gun.standard",
+        "ExpectedSocketType": "gun.standard",
+        "Revision": 1,
+        "SocketSchemaVersion": 1,
+        "Category": 14
+      }
+    ],
+    "Frames": [
+      {
+        "FrameId": "frame.standard",
+        "Revision": 1,
+        "Mounts": [
+          {
+            "SlotIndex": 0,
+            "SocketId": "mount.0",
+            "SocketType": "gun.standard",
+            "X": -0.23278240859508514,
+            "Y": 0.2035999894142151
+          },
+          {
+            "SlotIndex": 1,
+            "SocketId": "mount.1",
+            "SocketType": "gun.standard",
+            "X": 0.2427823841571808,
+            "Y": 0.2035999894142151
+          }
+        ],
+        "Keepouts": [
+          {
+            "X": -0.3446800112724304,
+            "Y": -0.2800000011920929,
+            "Width": 0.6993600130081177,
+            "Height": 0.11160000413656235,
+            "ArmorOnly": false,
+            "PartId": ""
+          },
+          {
+            "X": -0.3446800112724304,
+            "Y": -0.16840000450611115,
+            "Width": 0.6993600130081177,
+            "Height": 0.1860000044107437,
+            "ArmorOnly": false,
+            "PartId": ""
+          },
+          {
+            "X": -0.07999999821186066,
+            "Y": -0.14000000059604645,
+            "Width": 0.16082000732421875,
+            "Height": 0.12061499804258347,
+            "ArmorOnly": false,
+            "PartId": ""
+          },
+          {
+            "X": -0.13500000536441803,
+            "Y": -0.2549999952316284,
+            "Width": 0.2090812474489212,
+            "Height": 0.268449991941452,
+            "ArmorOnly": true,
+            "PartId": ""
+          }
+        ]
+      },
+      {
+        "FrameId": "frame.battery",
+        "Revision": 1,
+        "Mounts": [
+          {
+            "SlotIndex": 0,
+            "SocketId": "mount.0",
+            "SocketType": "gun.standard",
+            "X": -0.5099999904632568,
+            "Y": 0.3889230787754059
+          },
+          {
+            "SlotIndex": 1,
+            "SocketId": "mount.1",
+            "SocketType": "gun.standard",
+            "X": -0.05950000137090683,
+            "Y": 0.7550769448280334
+          },
+          {
+            "SlotIndex": 2,
+            "SocketId": "mount.2",
+            "SocketType": "gun.standard",
+            "X": 0.42500001192092896,
+            "Y": 0.3889230787754059
+          }
+        ],
+        "Keepouts": [
+          {
+            "X": -0.8133845925331116,
+            "Y": -0.3747692406177521,
+            "Width": 1.6163077354431152,
+            "Height": 0.23350153863430023,
+            "ArmorOnly": false,
+            "PartId": ""
+          },
+          {
+            "X": -0.8133845925331116,
+            "Y": -0.14126768708229065,
+            "Width": 1.6163077354431152,
+            "Height": 0.1816123127937317,
+            "ArmorOnly": false,
+            "PartId": ""
+          }
+        ]
+      },
+      {
+        "FrameId": "frame.heavy",
+        "Revision": 1,
+        "Mounts": [
+          {
+            "SlotIndex": 0,
+            "SocketId": "mount.0",
+            "SocketType": "gun.standard",
+            "X": -0.24689161777496338,
+            "Y": 0.2434636801481247
+          },
+          {
+            "SlotIndex": 1,
+            "SocketId": "mount.1",
+            "SocketType": "gun.standard",
+            "X": 0.24910837411880493,
+            "Y": 0.2434636801481247
+          }
+        ],
+        "Keepouts": [
+          {
+            "X": -0.5749720931053162,
+            "Y": -0.3384357690811157,
+            "Width": 1.1256983280181885,
+            "Height": 0.14838436245918274,
+            "ArmorOnly": false,
+            "PartId": ""
+          },
+          {
+            "X": -0.5749720931053162,
+            "Y": -0.1900513917207718,
+            "Width": 1.1256983280181885,
+            "Height": 0.11541005223989487,
+            "ArmorOnly": false,
+            "PartId": ""
+          }
+        ]
+      },
+      {
+        "FrameId": "frame.precision",
+        "Revision": 1,
+        "Mounts": [
+          {
+            "SlotIndex": 0,
+            "SocketId": "mount.0",
+            "SocketType": "gun.standard",
+            "X": 0.0,
+            "Y": 0.25277820229530334
+          }
+        ],
+        "Keepouts": [
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.21906614303588867,
+            "Width": 0.8217898607254028,
+            "Height": 0.1115579754114151,
+            "ArmorOnly": false,
+            "PartId": ""
+          },
+          {
+            "X": -0.41945526003837585,
+            "Y": -0.10750816762447357,
+            "Width": 0.8217898607254028,
+            "Height": 0.08676731586456299,
+            "ArmorOnly": false,
+            "PartId": ""
+          }
+        ]
+      }
+    ],
+    "Weapons": [
+      {
+        "MechanismId": "core.gun",
+        "MountType": "gun.standard",
+        "Revision": 1,
+        "RequiredParts": [
+          {
+            "Id": "core.gun",
+            "Revision": 1
+          },
+          {
+            "Id": "head.gun",
+            "Revision": 1
+          },
+          {
+            "Id": "sight.iron",
+            "Revision": 1
+          },
+          {
+            "Id": "magazine.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "trigger.standard",
+            "Revision": 1
+          }
+        ],
+        "CompatibleParts": [
+          {
+            "Id": "mount.standard",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.light",
+            "Revision": 1
+          },
+          {
+            "Id": "mount.stabilized",
+            "Revision": 1
+          }
+        ],
+        "PivotX": 0.0,
+        "PivotY": 0.056686487048864365,
+        "MinRadians": -3.1415927410125732,
+        "MaxRadians": 3.1415927410125732,
+        "RecoilLimit": 0.08500000089406967,
+        "Clearance": 0.009999999776482582,
+        "Regions": [
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.10308334976434708,
+                "Y": -0.09439990669488907
+              },
+              {
+                "X": 0.10308334976434708,
+                "Y": -0.09439990669488907
+              },
+              {
+                "X": 0.10308334976434708,
+                "Y": 0.022092653438448906
+              },
+              {
+                "X": -0.10308334976434708,
+                "Y": 0.022092653438448906
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.05428914725780487,
+                "Y": -0.025662505999207497
+              },
+              {
+                "X": 0.06095172464847565,
+                "Y": 0.007701003924012184
+              },
+              {
+                "X": 0.018602730706334114,
+                "Y": 0.153978630900383
+              },
+              {
+                "X": -0.09663815051317215,
+                "Y": 0.12061513215303421
+              }
+            ]
+          },
+          {
+            "Motion": "recoiling",
+            "Points": [
+              {
+                "X": 0.00202694209292531,
+                "Y": 0.04852678254246712
+              },
+              {
+                "X": 0.08529077470302582,
+                "Y": 0.131194606423378
+              },
+              {
+                "X": -0.002444817451760173,
+                "Y": 0.21956273913383484
+              },
+              {
+                "X": -0.08570864796638489,
+                "Y": 0.13689489662647247
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.03541428595781326,
+                "Y": 0.11132370680570602
+              },
+              {
+                "X": 0.01969309337437153,
+                "Y": 0.0931721180677414
+              },
+              {
+                "X": 0.030329134315252304,
+                "Y": 0.1254626363515854
+              },
+              {
+                "X": -0.024778245016932487,
+                "Y": 0.14361423254013062
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.03253360465168953,
+                "Y": 0.08738876134157181
+              },
+              {
+                "X": -0.0047387415543198586,
+                "Y": 0.08738876134157181
+              },
+              {
+                "X": -0.0047387415543198586,
+                "Y": 0.11031405627727509
+              },
+              {
+                "X": -0.03253360465168953,
+                "Y": 0.11031405627727509
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.04365652799606323
+              },
+              {
+                "X": -0.006226985715329647,
+                "Y": 0.04365652799606323
+              },
+              {
+                "X": -0.006226985715329647,
+                "Y": 0.08914975821971893
+              },
+              {
+                "X": -0.04323340579867363,
+                "Y": 0.08914975821971893
+              }
+            ]
+          },
+          {
+            "Motion": "rotating",
+            "Points": [
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.03699290752410889
+              },
+              {
+                "X": 0.04021516442298889,
+                "Y": 0.03699290752410889
+              },
+              {
+                "X": 0.04021516442298889,
+                "Y": 0.07067898660898209
+              },
+              {
+                "X": 0.012740698643028736,
+                "Y": 0.07067898660898209
+              }
+            ]
+          },
+          {
+            "Motion": "fixed",
+            "Points": [
+              {
+                "X": -0.09498874098062515,
+                "Y": -0.09177076071500778
+              },
+              {
+                "X": 0.09170697629451752,
+                "Y": -0.09177076071500778
+              },
+              {
+                "X": 0.09170697629451752,
+                "Y": 0.052262067794799805
+              },
+              {
+                "X": -0.09498874098062515,
+                "Y": 0.052262067794799805
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Structures": []
+  }
+}

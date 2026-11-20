@@ -1,5 +1,5 @@
+#if UNITY_EDITOR
 using System.Linq;
-using System.Reflection;
 using NUnit.Framework;
 using PaperDefense.Application;
 using PaperDefense.Core;
@@ -26,10 +26,6 @@ namespace PaperDefense.Tests
         [TearDown]
         public void TearDown() { Object.DestroyImmediate(root); Object.DestroyImmediate(asset); }
 
-        Button Button(string name) => root.GetComponentsInChildren<Button>(true).Single(button => button.name == name);
-        static string TextField(object owner, string name) => ((Text)owner.GetType()
-            .GetField(name, BindingFlags.Instance | BindingFlags.NonPublic).GetValue(owner)).text;
-
         [TestCase(DrawingMode.Paint)]
         [TestCase(DrawingMode.Blotter)]
         public void NewRunResetsUnavailableSelectionsAndKeyboardCommandsCannotRestoreThem(DrawingMode oldMode)
@@ -49,28 +45,36 @@ namespace PaperDefense.Tests
         }
 
         [Test]
-        public void NotebookHidesUnavailableActionsAndForecastsOnlyAvailableThreats()
+        public void AlbumBattleDisablesUnavailableActionsAndHidesAbsentInkWells()
         {
-            asset.mechanics.CorpseBlots = asset.mechanics.ColorCartridges = asset.mechanics.InkWells = false;
-            asset.mechanics.RangedEnemies = asset.mechanics.EnemyDrawingTiers = false;
-            asset.waves[0].spitters = asset.waves[0].hatched = 1;
-            run.InitializeWorkshop(false);
-            var input = root.AddComponent<DrawingInput>(); input.Initialize(run, null, null);
-            var hud = root.AddComponent<NotebookHud>(); hud.Initialize(run, input);
-
-            Assert.That(Button("Tool " + (ProfileLimits.LoadoutSlotCount + 4)).gameObject.activeSelf, Is.False);
-            Assert.That(Button("Tool " + (ProfileLimits.LoadoutSlotCount + 5)).gameObject.activeSelf, Is.False);
-            for (int i = 0; i < 4; i++) Assert.That(Button("Ink color " + i).gameObject.activeSelf, Is.False);
-            for (int i = 0; i < 3; i++)
+            using (var fixture = new AssemblyCommandFixture())
             {
-                Assert.That(Button("Activate well " + i).gameObject.activeSelf, Is.False);
-                Assert.That(Button("Focus well " + i).gameObject.activeSelf, Is.False);
+                fixture.Preset.rules.Mechanics.CorpseBlots = false;
+                fixture.Preset.rules.Mechanics.ColorCartridges = false;
+                fixture.Preset.rules.Mechanics.InkWells = false;
+                var owner = new GameObject("Released mechanics HUD"); owner.SetActive(false);
+                try
+                {
+                    var game = owner.AddComponent<PlayerGameRoot>(); game.Configure(fixture.BalanceAsset, true);
+                    owner.SetActive(true); game.Run.AutomaticSimulation = false;
+                    Assert.That(game.StartBattle(), Is.True);
+                    Canvas.ForceUpdateCanvases();
+                    Button Action(string name) => owner.GetComponentsInChildren<Button>().Single(button => button.name == name);
+                    Assert.That(Action("Album battle blotter").IsInteractable(), Is.False);
+                    Assert.That(owner.GetComponentsInChildren<Button>().Any(button => button.name == "Album battle paint" ||
+                        button.name.StartsWith("Material ") || button.name.StartsWith("Ink ") && !button.name.StartsWith("Ink well ")), Is.False,
+                        "Production construction has no prebuild material or color controls.");
+                    Assert.That(owner.GetComponentsInChildren<Button>(true)
+                        .Where(button => button.name.StartsWith("Ink well "))
+                        .All(button => !button.gameObject.activeInHierarchy), Is.True);
+                    Assert.That(Action("Album battle erase").IsInteractable(), Is.True);
+                    Assert.That(Action("Build tool 0").IsInteractable(), Is.True);
+                    Assert.That(owner.GetComponentsInChildren<NotebookHud>(true), Is.Empty);
+                }
+                finally { Object.DestroyImmediate(owner); }
             }
-            Assert.That(Button("Tool " + ProfileLimits.LoadoutSlotCount).gameObject.activeSelf, Is.True);
-            Assert.That(Button("Focus base").gameObject.activeSelf, Is.True);
-            Assert.That(TextField(hud, "forecast"), Does.Not.Contain("Плевуны").And.Not.Contain("штриховка"));
-            Assert.That(TextField(hud, "navigationHint"), Does.Not.Contain("окраску"));
         }
 
     }
 }
+#endif

@@ -32,6 +32,7 @@ namespace PaperDefense.Presentation
         readonly Text[] toolPrices = new Text[RepairToolIndex + 1], toolNames = new Text[RepairToolIndex + 1], wellLabels = new Text[3], colorLabels = new Text[4];
         readonly Button[] wellActions = new Button[3], wellFocus = new Button[3], colors = new Button[4];
         readonly BlueprintSketch[] toolSketches = new BlueprintSketch[ProfileLimits.LoadoutSlotCount];
+        readonly NightNotebookPaperGraphic[] toolPapers = new NightNotebookPaperGraphic[ProfileLimits.LoadoutSlotCount];
         readonly Button[] tiers = new Button[3];
         GameObject upgradePanel, outcomePanel, pauseBadge;
         Text outcomeTitle, outcomeBody;
@@ -41,7 +42,7 @@ namespace PaperDefense.Presentation
         public void Initialize(RunController controller, DrawingInput drawing)
         {
             run = controller; input = drawing;
-            font = Resources.Load<Font>("NotebookHand") ?? Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             canvasObject = new GameObject("Notebook HUD", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
             canvasObject.transform.SetParent(transform, false);
             var canvas = canvasObject.GetComponent<Canvas>(); canvas.renderMode = RenderMode.ScreenSpaceOverlay;
@@ -150,20 +151,31 @@ namespace PaperDefense.Presentation
                 }, out _);
                 if (i < ProfileLimits.LoadoutSlotCount)
                 {
+                    toolPapers[i] = PlayerUi.Graphic<NightNotebookPaperGraphic>(tools[i].transform, "Blueprint dark reference paper",
+                        new Rect((cardWidth - 51) / 2, 4, 51, 45));
                     var go = new GameObject("Blueprint illustration", typeof(RectTransform), typeof(CanvasRenderer), typeof(BlueprintSketch));
                     go.transform.SetParent(tools[i].transform, false);
                     Place(go.GetComponent<RectTransform>(), new Rect((cardWidth - 51) / 2, 4, 51, 45));
                     toolSketches[i] = go.GetComponent<BlueprintSketch>(); toolSketches[i].raycastTarget = false;
                 }
-                else
+                else if (TryConstructionTool(i, out _))
                 {
+                    PlayerUi.Graphic<NightNotebookPaperGraphic>(tools[i].transform, "Construction dark reference paper",
+                        new Rect((cardWidth - 45) / 2, 4, 45, 45));
                     var go = new GameObject("Tool illustration", typeof(RectTransform), typeof(CanvasRenderer), typeof(NotebookArtGraphic));
                     go.transform.SetParent(tools[i].transform, false);
                     Place(go.GetComponent<RectTransform>(), new Rect((cardWidth - 45) / 2, 4, 45, 45));
                     var art = go.GetComponent<NotebookArtGraphic>(); art.raycastTarget = false;
-                    string icon = i == WallToolIndex ? "wall" : i == SpikesToolIndex ? "spikes" : i == TarToolIndex ? "tar" :
-                        i == RepairToolIndex ? "repair" : i == EraseToolIndex ? "erase" : i == UpgradeToolIndex ? "upgrade" : i == BlotterToolIndex ? "blotter" : "paint";
+                    string icon = i == WallToolIndex ? "wall" : i == SpikesToolIndex ? "spikes" : i == TarToolIndex ? "tar" : "repair";
                     art.Bind("ui.tool." + icon);
+                }
+                else
+                {
+                    var icon = PlayerUi.Graphic<PlayerIconGraphic>(tools[i].transform, "Action illustration",
+                        new Rect((cardWidth - 45) / 2, 4, 45, 45));
+                    icon.Icon = i == EraseToolIndex ? PlayerIcon.Trash : i == UpgradeToolIndex ? PlayerIcon.Plus
+                        : i == BlotterToolIndex ? PlayerIcon.Drop : PlayerIcon.Pencil;
+                    icon.Sketch = true; icon.color = Navy;
                 }
                 string name = i < ProfileLimits.LoadoutSlotCount ? UserText.Message("hud.tool.blueprint", i + 1) : names[i - ProfileLimits.LoadoutSlotCount];
                 toolNames[i] = Label(tools[i].transform, name, new Rect(3, 49, cardWidth - 6, 20), 14, Navy, FontStyle.Bold, TextAnchor.MiddleCenter);
@@ -210,6 +222,20 @@ namespace PaperDefense.Presentation
             kind = index == WallToolIndex ? StructureKind.Wall : index == SpikesToolIndex ? StructureKind.Spikes :
                 index == TarToolIndex ? StructureKind.TarPit : StructureKind.RepairPost;
             return index == WallToolIndex || index == SpikesToolIndex || index == TarToolIndex || index == RepairToolIndex;
+        }
+
+        // This HUD names one specialist present, even when its share is too small to dominate the wave.
+        static string SpecialistWarning(WaveView wave)
+        {
+            var composition = wave.Composition;
+            if (composition.Fraction(EnemyKind.Brute) > 0) return UserText.Message("hud.threat.brute");
+            if (composition.Fraction(EnemyKind.Bulwark) > 0) return UserText.Message("hud.threat.bulwark");
+            if (wave.Forecast.RangedFraction > 0)
+                return wave.Forecast.OnlySpittersFireGlobs ? UserText.Message("copy.0dc97464c8838d7d") : "Стрелки: следи за замахом!";
+            if (composition.Fraction(EnemyKind.Gnawer) > 0) return UserText.Message("copy.5fc321a6caf6a1ae");
+            if (composition.Fraction(EnemyKind.Runner) > 0) return UserText.Message("copy.807e868e6de58bea");
+            if (composition.Fraction(EnemyKind.Spitter) > 0) return "Плевуны идут в ближний бой";
+            return UserText.Message("copy.e5540bf1c3261b6e");
         }
 
         string BuildDescription()
@@ -267,12 +293,14 @@ namespace PaperDefense.Presentation
                     if (!assigned)
                     {
                         toolSketches[i].SetBlueprint(null);
+                        toolPapers[i].gameObject.SetActive(false);
                         toolNames[i].text = Resolve(UserText.Message("hud.tool.blueprint", i + 1));
                         toolPrices[i].text = Resolve(UserText.Message("copy.dbf292d621b20c3c"));
                         continue;
                     }
                     var bp = loadout[i]; var preview = run.PreviewBlueprint(bp, input.Tier);
                     toolSketches[i].SetBlueprint(bp);
+                    toolPapers[i].gameObject.SetActive(!bp.HasPlayerDrawing);
                     toolNames[i].text = Resolve(UserText.Message("hud.tool.blueprint", i + 1));
                     toolPrices[i].text = Resolve(UserText.Message("copy.75ee45ea828ded7b", preview.Cost, (input.Color == InkColor.None ? "" : UserText.Message("copy.9a6907b592de7b89", preview.ColorCost))));
                 }
@@ -319,7 +347,11 @@ namespace PaperDefense.Presentation
                 var w = s.Balance.Waves[next];
                 string directions = ((w.Sides&1)!=0 ? UserText.Message("copy.5df048b6711a3c36") : "") + ((w.Sides&2)!=0 ? UserText.Message("copy.1560b116b94f7915") : "") +
                     ((w.Sides&4)!=0 ? UserText.Message("copy.6b3d6f077552e970") : "") + ((w.Sides&8)!=0 ? UserText.Message("copy.fe10822f38def82b") : "");
-                forecast.text = Resolve(UserText.Message("copy.53c30c8509f69f84", w.Title, directions, w.Count, (w.BruteFraction > 0 ? UserText.Message("hud.threat.brute") : w.BulwarkFraction > 0 ? UserText.Message("hud.threat.bulwark") : mechanics.RangedEnemies && w.SpitterFraction > 0 ? UserText.Message("copy.0dc97464c8838d7d") : w.GnawerFraction>0 ? UserText.Message("copy.5fc321a6caf6a1ae") : w.RunnerFraction>0 ? UserText.Message("copy.807e868e6de58bea") : UserText.Message("copy.e5540bf1c3261b6e")), (mechanics.EnemyDrawingTiers ? (w.HatchedFraction > 0 ? UserText.Message("copy.861f99b195ee6f6f") : w.OutlinedFraction > 0 ? UserText.Message("copy.146f1f40157f1f06") : "") : "")));
+                var composition = w.Composition;
+                string tierWarning = composition.Fraction(DrawingTier.Hatched) > 0 ? UserText.Message("copy.861f99b195ee6f6f") :
+                    composition.Fraction(DrawingTier.Outlined) > 0 ? UserText.Message("copy.146f1f40157f1f06") : "";
+                forecast.text = Resolve(UserText.Message("copy.53c30c8509f69f84", w.Title, directions, w.Count,
+                    SpecialistWarning(w), tierWarning));
             }
             else forecast.text = Resolve(UserText.Message("copy.01dd83e7e64f7ca1"));
             launch.interactable = (s.Phase == RunPhase.Planning || s.Phase == RunPhase.Intermission) && !s.PendingUpgrade;

@@ -11,9 +11,9 @@ namespace PaperDefense.Presentation
         void Preparation()
         {
             if (game.Run.AssemblyCatalog != null) { AssemblyPreparation(); return; }
-            Rect composition = NotebookPageBackdrop("Art/Player/PreparationLandscape");
+            Rect composition = NotebookPageBackdrop();
             NotebookScreenHeader("Подготовка", () => game.Navigate(PlayerPage.Map),
-                ui.T("mission") + " · " + game.Run.Session.Balance.Waves.Count + " волн", true, composition);
+                ui.T("mission") + " · " + WaveCountLabel(game.Run.Session.Balance.Waves.Count), true, composition);
 
             // Keep all four choices, materials and navigation on one notebook page. When height
             // is tight, decoration yields first, followed by illustration and description space.
@@ -240,7 +240,7 @@ namespace PaperDefense.Presentation
                 switch (weapon.Attack)
                 {
                     case AttackKind.Single: return "Быстрая стрельба по одиночным целям";
-                    case AttackKind.Line: return "Пробивает врагов на одной линии";
+                    case AttackKind.Line: return "Бьёт по линии, обходит половину брони";
                     case AttackKind.AreaProjectile: return "Урон по площади";
                     case AttackKind.Cone: return "Атакует несколько целей сектором";
                     case AttackKind.Ricochet: return "Рикошетит между целями";

@@ -23,6 +23,34 @@ namespace PaperDefense.Core
         public IReadOnlyList<InkWellState> Wells=>wells;
         public int GoldEarned {get;private set;}
         public int ColoredInk(InkColor color)=>Enum.IsDefined(typeof(InkColor),color)?coloredInk[(int)color]:0;
+        int claimedInkFlasks;
+        public int InkPerFlask => Mechanics.InkPerFlask;
+        public int PendingInkFlasks => Mechanics.WaveInkFlasks && Phase != RunPhase.Victory && Phase != RunPhase.Defeat
+            ? Math.Max(0, Math.Min(CompletedWaves, rules.Waves.Count - 1) - claimedInkFlasks) : 0;
+        public int NextInkFlaskId => PendingInkFlasks > 0 ? claimedInkFlasks + 1 : 0;
+
+        public bool TryClaimInkFlask(Guid runId, int flaskId, InkColor color, out string reason)
+        {
+            if (runId != RunId || flaskId <= 0 || flaskId != NextInkFlaskId)
+            {
+                reason = "Этот флакон недоступен.";
+                return false;
+            }
+            if (color != InkColor.Red && color != InkColor.Blue && color != InkColor.Green)
+            {
+                reason = "Выбери цвет чернил.";
+                return false;
+            }
+            if (coloredInk[(int)color] > int.MaxValue - InkPerFlask)
+            {
+                reason = "Запас этих чернил полон.";
+                return false;
+            }
+            coloredInk[(int)color] += InkPerFlask;
+            claimedInkFlasks++;
+            reason = "";
+            return true;
+        }
 
         void InitializeObjectives()
         {
@@ -55,12 +83,12 @@ namespace PaperDefense.Core
             return true;
         }
 
-        internal void DamageObjective(int index,float damage)
+        internal void DamageObjective(int index,float damage,Point2? source = null)
         {
             if(damage<=0||float.IsNaN(damage)||float.IsInfinity(damage))return;
             if(index < -1)return;
             if(index==-1){float beforeDamage = BaseHealth; BaseHealth=Math.Max(0,BaseHealth-damage);
-                Statistics.RecordBaseDamage(beforeDamage - BaseHealth);
+                Statistics.RecordBaseDamage(beforeDamage - BaseHealth, WaveIndex, source);
                 EventBuffer.Publish(TickIndex,SimulationEventKind.BaseHit,Center(BaseCell),Center(BaseCell),default,simulationSeconds:Elapsed);return;}
             if(index>=wells.Count||!wells[index].Active)return;
             var well=wells[index];well.Health=Math.Max(0,well.Health-damage);
@@ -88,7 +116,10 @@ namespace PaperDefense.Core
 
         private int ChooseObjective(Cell spawn)
         {
-            if(wells.Count==0||random.NextDouble()>=Clamp(rules.Progression.WellThreatFraction,0,1))return -1;
+            // The campaign previously rolled for a well target even with every well inactive.
+            // Retain that seeded draw when flasks replace the objectives on the same battlefield.
+            if(wells.Count==0 && !(Mechanics.WaveInkFlasks && rules.EnableInkWells && rules.Mechanics.InkWells && rules.WellPlacements.Count>0))return -1;
+            if(random.NextDouble()>=Clamp(rules.Progression.WellThreatFraction,0,1)||wells.Count==0)return -1;
             if(Battlefield!=null&&!Battlefield.IsOpenTerrain)
             {
                 // Fixed roads use one immutable forward route. Picking another branch's well

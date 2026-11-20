@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
 using PaperDefense.Core;
@@ -56,18 +57,17 @@ namespace PaperDefense.Tests
 
         static Vector2 FoundationOrigin(List<UIVertex> vertices, string chassis)
         {
-            Assert.That(NotebookSpriteCatalog.TryGet(chassis, out var sprite), Is.True);
-            Assert.That(NotebookSpriteCatalog.TryGetBounds(chassis, out var local), Is.True);
-            var points = new List<Vector2>();
-            foreach (var vertex in vertices)
-            {
-                var pixel = new Vector2(vertex.uv0.x * sprite.texture.width, vertex.uv0.y * sprite.texture.height);
-                if (pixel.x >= sprite.rect.xMin - .001f && pixel.x <= sprite.rect.xMax + .001f
-                    && pixel.y >= sprite.rect.yMin - .001f && pixel.y <= sprite.rect.yMax + .001f)
-                    points.Add(vertex.position);
-            }
-            // Recover the actual foundation transform from its atlas quad, rather than assuming
-            // that either the viewport center or the assembly's bounding-box center is its origin.
+            var theme = NotebookVisualThemeAsset.Default;
+            var fill = theme.FindShape(chassis).Marks.First(mark => mark.Primitive == NotebookArtPrimitive.Polygon &&
+                mark.Channel == NotebookInkChannel.Body);
+            // Palette identity and authored opacity together define the emitted material color.
+            Color material = theme.Color(fill.Channel); material.a *= fill.Alpha;
+            Color32 fillColor = material;
+            int first = vertices.FindIndex(vertex => vertex.color.Equals(fillColor) && (Vector2)vertex.uv0 == new Vector2(.5f, .5f));
+            Assert.That(first, Is.GreaterThanOrEqualTo(0), "The actual foundation fill must be present after reinforcement sectors.");
+            var points = vertices.Skip(first).Take((fill.Points.Length - 2) * 3).Select(vertex => (Vector2)vertex.position).ToList();
+            var local = Bounds(fill.Points.ToList());
+            // Recover the native foundation's emitted transform independently of viewport centering.
             var displayed = Bounds(points);
             float scale = displayed.width / local.width;
             Assert.That(scale, Is.GreaterThan(0));
@@ -199,7 +199,7 @@ namespace PaperDefense.Tests
                 var balance = GameBalance.CreateDefault(); balance.StartingInk = 10000;
                 var game = new GameSession(balance, starterDefenses: false);
                 Assert.That(game.TryBuildBlueprint(new[] { new Cell(10, 10) }, Standard(), MaterialTier.Pencil,
-                    InkColor.None, out string reason), Is.True, reason);
+                    InkColor.None, out string reason, facingDegrees: 90), Is.True, reason);
                 var tower = new RunReadModel(game).Structures[0];
                 Vector2 muzzle = NotebookTowerComposition.Muzzle(tower, 0, new Point2(20, 10.54f), 1.1,
                     Recoiling(tower.Id), theme);

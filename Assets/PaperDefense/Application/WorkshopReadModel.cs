@@ -12,6 +12,8 @@ namespace PaperDefense.Application
         public IReadOnlyList<AlbumEntry> Entries => source.Entries;
         public IReadOnlyList<ComponentLibraryEntry> Library => source.Library;
         public IReadOnlyList<AlbumEntry> LoadoutEntries => source.GetLoadoutEntries();
+        public IReadOnlyList<NamedLoadout> NamedLoadouts => source.NamedLoadouts;
+        public MissionCheckpoint MissionCheckpoint => source.MissionCheckpoint;
         public IReadOnlyList<TowerBlueprint> Album { get; private set; }
         public IReadOnlyList<PartUnlock> Parts { get; private set; }
         public IReadOnlyList<DrawingUnlockDefinition> DrawingUnlocks { get; private set; }
@@ -22,6 +24,7 @@ namespace PaperDefense.Application
         public bool HasUnsavedChanges { get; internal set; }
         public string LastWriteError { get; internal set; } = "";
         public bool IsUnlocked(string id)=>source.IsUnlocked(id);
+        public StructureFamilyOffer GetStructureOffer(AssemblyStructureFamily family) => source.GetStructureOffer(family);
         public RunRewardReceipt FindRunReward(System.Guid runId) => source.FindRunReward(runId);
         /// <summary>Composite previews consume the page's owned snapshot; legacy pages keep historical resolution.</summary>
         public AssemblyResolution PreviewAssembly(AlbumEntry entry,GameBalance balance,MaterialTier material=MaterialTier.Pencil)

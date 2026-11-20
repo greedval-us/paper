@@ -57,6 +57,37 @@ namespace PaperDefense.Tests
             Assert.That(session.Statistics.TotalStructuresBuilt, Is.EqualTo(8));
         }
 
+        [Test] public void PlacementLocksTheChosenBearingBeforeConstructionAndKeepsItDuringTheWave()
+        {
+            var balance = Rules(); balance.Waves[0].Sides = 1;
+            var session = new GameSession(balance, starterDefenses: false);
+            var cell = new Cell(4, 4);
+            var entry = Starter(0, balance);
+            var view = new RunReadModel(session);
+            Assert.That(view.DefaultFacingDegrees(cell), Is.EqualTo(180));
+            int ink = session.Ink;
+            var cells = new[] { cell, new Cell(6, 4) };
+            Assert.That(session.TryBuildEntry(cells, entry, entry.Material, InkColor.None, out _, facingDegrees: float.NaN), Is.False);
+            Assert.That(session.Ink, Is.EqualTo(ink));
+            Assert.That(session.Structures, Is.Empty);
+            Assert.That(session.TryBuildEntry(cells, entry, entry.Material, InkColor.None, out var reason, facingDegrees: -90), Is.True, reason);
+            Assert.That(session.Ink, Is.EqualTo(ink - 2 * entry.Cost));
+            var tower = session.StructureAt(cell);
+            Assert.That(tower.IsComplete, Is.False);
+            var mount = tower.GetMountState(0);
+            Assert.That(view.StructureAt(cell).Value.FacingDegrees, Is.EqualTo(270));
+            Assert.That(mount.Aim.X, Is.EqualTo(4.5f).Within(.0001f));
+            Assert.That(mount.Aim.Y, Is.EqualTo(3.5f).Within(.0001f));
+            Assert.Throws<InvalidOperationException>(() => tower.InitializePlacementFacing(15));
+            session.StartNextWave();
+            session.Tick(entry.BuildSeconds + .1f);
+            foreach (var placed in session.Structures)
+            {
+                Assert.That(placed.IsComplete, Is.True);
+                Assert.That(placed.FacingDegrees, Is.EqualTo(270));
+            }
+        }
+
         [TestCase("occupied")] [TestCase("border")] [TestCase("outside")] [TestCase("castle")]
         public void AnInvalidCellRejectsTheWholeBatchWithoutChangingInkEntitiesOrStatistics(string invalid)
         {
@@ -342,12 +373,12 @@ namespace PaperDefense.Tests
         {
             var balance = Rules(); var entry = AssemblyResolverFixture.Resolve(
                 AssemblyResolverFixture.Tower(foundation: AssemblyResolverFixture.Foundation(armor: "front")), balance: balance);
-            var tower = new StructureState(entry) { Id = 1, Cell = new Cell(10, 10), IsComplete = true, BuildRemaining = 0,
-                Aim = new Point2(10.5f, 20.5f) };
-            var enemy = new EnemyState { Id = 1, Position = new Point2(12.5f, 10.5f), Health = 1000, MaxHealth = 1000 };
+            var tower = new StructureState(entry) { Id = 1, Cell = new Cell(10, 10), IsComplete = true, BuildRemaining = 0 };
+            tower.InitializePlacementFacing(90);
+            var enemy = new EnemyState { Id = 1, Position = new Point2(12.5f, 11.5f), Health = 1000, MaxHealth = 1000 };
             new WeaponSystem(balance).Fire(new List<StructureState> { tower }, new List<EnemyState> { enemy }, new List<ShotEvent>(),
                 1, 1, .01f, 1, new RunStatistics(), new SimulationEventBuffer(), .01);
-            Assert.That(tower.Aim, Is.EqualTo(new Point2(10.5f, 20.5f)));
+            Assert.That(tower.FacingDegrees, Is.EqualTo(90));
             Assert.That(tower.GetMountState(0).Aim, Is.EqualTo(enemy.Position));
             Assert.That(DamageRules.StructureDamage(100, tower, balance, new Point2(10.5f, 13.5f)), Is.EqualTo(60).Within(.0001f));
             Assert.That(DamageRules.StructureDamage(100, tower, balance, new Point2(13.5f, 10.5f)), Is.EqualTo(100).Within(.0001f));
@@ -356,6 +387,7 @@ namespace PaperDefense.Tests
         [Test] public void CompositeTrialStartsWithTheSameFoundationFacingAndShieldProtectionAsBattle()
         {
             var balance = Rules(); balance.Trials.StepSeconds = .05f; balance.Trials.MaximumTicks = 100;
+            balance.Waves[0].Sides = 2;
             balance.Trials.SpawnX = 34.5f; balance.Trials.SpawnY = 10.5f; balance.Trials.SpawnYVariation = 0;
             balance.Trials.CloseTowerX = 32; balance.Trials.CloseTowerY = 10;
             var crowd = balance.Trials.For(TrialScenario.Crowd); crowd.Count = 1; crowd.Health = 1000000; crowd.Speed = .00001f;
@@ -376,7 +408,8 @@ namespace PaperDefense.Tests
             var balance = Rules(); var entry = Starter(0, balance);
             var session = GameSession.CreatePrepared(balance, 7,
                 new[] { new PreparedEnemy(new Point2(12.5f, 10.5f), 1000000) });
-            Build(session, entry, new Cell(10, 10)); session.Tick(entry.BuildSeconds + .1f);
+            Assert.That(session.TryBuildEntry(new[] { new Cell(10, 10) }, entry, entry.Material, InkColor.None, out var reason, facingDegrees: 0), Is.True, reason);
+            session.Tick(entry.BuildSeconds + .1f);
             Assert.That(session.Statistics.BuiltCount(StructureKind.Gun, MaterialTier.Pencil), Is.EqualTo(1));
             Assert.That(session.Statistics.Launches(StructureKind.Gun), Is.GreaterThan(0));
             Assert.That(session.Statistics.WeaponIds, Is.EqualTo(new[] { "weapon.gun" }));

@@ -19,11 +19,13 @@ namespace PaperDefense.Core
     {
         public readonly float X, Y;
         public Point2(float x, float y) { X = x; Y = y; }
+        internal static Point2 Lerp(Point2 from, Point2 to, float fraction)
+            => new Point2(from.X + (to.X - from.X) * fraction, from.Y + (to.Y - from.Y) * fraction);
         public override string ToString() => $"({X:0.00}, {Y:0.00})";
     }
 
     public enum MaterialTier { Pencil = 0, Ink = 1, Marker = 2 }
-    public enum StructureKind { Wall = 0, Gun = 1, Piercer = 2, Mortar = 3, Spikes = 4, Fan = 5, Ricochet = 6, Stapler = 7, Blotter = 8, TarPit = 9, RepairPost = 10, Generator = 11 }
+    public enum StructureKind { Wall = 0, Gun = 1, Piercer = 2, Mortar = 3, Spikes = 4, Fan = 5, Ricochet = 6, Stapler = 7, Blotter = 8, TarPit = 9, RepairPost = 10, Generator = 11, Beacon = 12, Prism = 13 }
     public enum EnemyKind { Doodle = 0, Runner = 1, Gnawer = 2, Spitter = 3, Brute = 4, Bulwark = 5 }
     public enum DrawingTier { Sketch = 0, Outlined = 1, Hatched = 2 }
     public enum InkColor { None = 0, Red = 1, Blue = 2, Green = 3 }
@@ -54,6 +56,7 @@ namespace PaperDefense.Core
     [Serializable] public sealed class EnemyDefinition
     {
         public EnemyKind Kind;
+        public EnemyAttackMode Attack;
         public float MaxHealth, Speed, Damage, AttackInterval;
         public float Range = 12.5f, WindupSeconds = .8f, ProjectileSeconds = .65f;
         public float StructureDamageMultiplier = 1;
@@ -61,13 +64,31 @@ namespace PaperDefense.Core
         public int Reward;
     }
 
+    [Serializable] public struct HordeWaveSettings
+    {
+        public bool Enabled;
+        public float BodyScale, HealthScale, ObjectiveDamageScale;
+        public int KillInkBudget;
+
+        // Space the reward evenly over admitted bodies, retaining exact integer totals.
+        internal int RewardForSpawn(int ordinal, int count)
+            => (int)(((long)ordinal * KillInkBudget) / count - (((long)ordinal - 1) * KillInkBudget) / count);
+    }
+
     [Serializable] public sealed class WaveDefinition
     {
         public int InkGrant = -1;
         public int Count = 80;
+        public HordeWaveSettings Horde;
+        public bool IsHorde => Horde.Enabled;
         public float SpawnInterval = 0.14f, RunnerFraction, GnawerFraction, SpitterFraction, BruteFraction, BulwarkFraction, OutlinedFraction, HatchedFraction;
+        public WaveComposition ResolveComposition(MechanicsAvailability mechanics) => new WaveComposition(this, mechanics);
+        internal float EffectiveSpawnInterval(float minimum) => Math.Max(minimum, SpawnInterval);
+        internal WaveDefinition CreateSnapshot() => (WaveDefinition)MemberwiseClone();
         /// <summary>Spawn edges: west 1, east 2, north 4, south 8.</summary>
         public int Sides = 1;
+        /// <summary>Within each active edge: zero selects all gates, bit 1 the first authored gate, bit 2 the second.</summary>
+        public int EntranceBands;
         public string Title = UserText.Message("copy.a2d0b3c493f760f6");
     }
 
@@ -168,20 +189,13 @@ namespace PaperDefense.Core
             });
             copy.EnemyDefinitions = EnemyDefinitions.ConvertAll(definition => new EnemyDefinition
             {
-                Kind = definition.Kind, MaxHealth = definition.MaxHealth, Speed = definition.Speed,
+                Kind = definition.Kind, Attack = definition.Attack, MaxHealth = definition.MaxHealth, Speed = definition.Speed,
                 Damage = definition.Damage, AttackInterval = definition.AttackInterval,
                 StructureDamageMultiplier = definition.StructureDamageMultiplier, VisualScale = definition.VisualScale,
                 Range = definition.Range, WindupSeconds = definition.WindupSeconds,
                 ProjectileSeconds = definition.ProjectileSeconds, Reward = definition.Reward
             });
-            copy.Waves = Waves.ConvertAll(definition => new WaveDefinition
-            {
-                Count = definition.Count, SpawnInterval = definition.SpawnInterval,
-                InkGrant = definition.InkGrant,
-                RunnerFraction = definition.RunnerFraction, GnawerFraction = definition.GnawerFraction,
-                SpitterFraction = definition.SpitterFraction, BruteFraction = definition.BruteFraction, BulwarkFraction = definition.BulwarkFraction, OutlinedFraction = definition.OutlinedFraction,
-                HatchedFraction = definition.HatchedFraction, Sides = definition.Sides, Title = definition.Title
-            });
+            copy.Waves = Waves.ConvertAll(definition => definition.CreateSnapshot());
             return copy;
         }
 
@@ -208,7 +222,49 @@ namespace PaperDefense.Core
 
     public sealed class StructureState
     {
+        public float FacingDegrees { get; private set; }
+        public bool HasDirectionalWeapon
+        {
+            get
+            {
+                if (ResolvedEntry != null)
+                {
+                    foreach (var weapon in ResolvedEntry.Weapons)
+                        if (weapon.Attack != AttackKind.Radial) return true;
+                    return false;
+                }
+                if (Assembly != null)
+                {
+                    foreach (var weapon in Assembly.Weapons)
+                        if (weapon != null && weapon.Attack != AttackKind.Radial) return true;
+                    return false;
+                }
+                return !ConstructionToolRules.IsTool(Kind);
+            }
+        }
+        internal Point2 Forward { get; private set; } = new Point2(1, 0);
+        internal Point2 RestAim => new Point2(Cell.X + .5f + Forward.X, Cell.Y + .5f + Forward.Y);
+
+        bool placementFacingAssigned;
+        internal void InitializePlacementFacing(float degrees)
+        {
+            if (placementFacingAssigned) throw new InvalidOperationException("The tower already has a placement heading.");
+            placementFacingAssigned = true;
+            FacingDegrees = FiringSector.Normalize(degrees);
+            double radians = FacingDegrees * Math.PI / 180;
+            Forward = new Point2((float)Math.Cos(radians), (float)Math.Sin(radians));
+            Aim = RestAim;
+            foreach (var mount in mounts)
+                mount.Aim = Aim;
+        }
+
+        internal ModernizationState ModernizationState;
+        internal bool ModernizationBlockedThisStep;
+        public ModernizationView Modernization => ModernizationState == null ? default : new ModernizationView(ModernizationState);
         public ResolvedEntry ResolvedEntry { get; internal set; }
+        // Legacy drawings use their original weapon simulation. This snapshot is for field upgrades only.
+        internal ResolvedEntry LegacyFieldEntry;
+        public ResolvedEntry ModernizationEntry => ResolvedEntry?.Kind == AlbumEntryKind.Tower ? ResolvedEntry : LegacyFieldEntry;
         public StructureState() { }
         public StructureState(ResolvedEntry entry)
         {
@@ -231,6 +287,9 @@ namespace PaperDefense.Core
                     case AssemblyStructureFamily.Slow: return StructureKind.TarPit;
                     case AssemblyStructureFamily.Repair: return StructureKind.RepairPost;
                     case AssemblyStructureFamily.Generator: return StructureKind.Generator;
+                    case AssemblyStructureFamily.Spikes: return StructureKind.Spikes;
+                    case AssemblyStructureFamily.Beacon: return StructureKind.Beacon;
+                    case AssemblyStructureFamily.Prism: return StructureKind.Prism;
                 }
             throw new ArgumentException("A composite structure requires a modern tower or support entry.", nameof(entry));
         }
@@ -278,6 +337,17 @@ namespace PaperDefense.Core
         internal TowerColorBudget ColorBudget;
         internal int PaidInk;
         internal int FrontageUsed;
+        // Visual feedback is throttled per live source, never per enemy or global tick.
+        internal double nextSupportFeedbackAt;
+        internal bool CanPublishSupportFeedback(double now)
+        {
+            if (now + .000001 < nextSupportFeedbackAt) return false;
+            nextSupportFeedbackAt = now + .25;
+            return true;
+        }
+        internal double NextSpikePulseAt;
+        internal double NextPrismPulseAt;
+        internal InkColor NextPrismColor = InkColor.Red;
     }
 
     public sealed class EnemyState
@@ -294,6 +364,7 @@ namespace PaperDefense.Core
         internal string RedSourceWeaponId;
         internal int RewardBudget = -1;
         internal TimedEffectState RedEffect, BlueEffect, GreenEffect;
+        internal bool CountedArmorMark, CountedPrismSlow;
         internal int ObjectiveIndex = -1;
         internal int RangedObjectiveIndex = -1;
         internal Point2 RangedTarget;
@@ -301,6 +372,7 @@ namespace PaperDefense.Core
         internal bool WindingUp;
         internal float AttackCooldown;
         internal float SpeedScale = 1;
+        internal float ObjectiveDamageScale = 1;
         internal Point2 Destination;
         internal Point2 MovementDirection;
         internal int AvoidanceNeighborId;
@@ -309,6 +381,7 @@ namespace PaperDefense.Core
         internal float NavigationCost;
         internal bool YieldingToNeighbor;
         internal bool CrowdHoldingPosition;
+        internal StructureState FrontlineTarget;
         internal bool HasDestination;
         internal bool VisualDeathPublished;
     }
@@ -322,11 +395,12 @@ namespace PaperDefense.Core
         public readonly int SourceStructureId, MountSlotIndex;
         public readonly long ActionId;
         public readonly double SimulationSeconds;
+        public readonly ColorEffectPayload ColorEffect;
         public ShotEvent(Point2 from, Point2 to, StructureKind kind, float radius)
             : this(from,to,kind,radius,LegacyContentIds.Weapon(kind)) { }
         public ShotEvent(Point2 from,Point2 to,StructureKind kind,float radius,string weaponId,
-            int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0,double simulationSeconds=0)
-        {From=from;To=to;Kind=kind;Radius=radius;WeaponId=weaponId;SourceStructureId=sourceStructureId;MountSlotIndex=mountSlotIndex;ActionId=actionId;SimulationSeconds=simulationSeconds;}
+            int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0,double simulationSeconds=0,ColorEffectPayload colorEffect=default)
+        {From=from;To=to;Kind=kind;Radius=radius;WeaponId=weaponId;SourceStructureId=sourceStructureId;MountSlotIndex=mountSlotIndex;ActionId=actionId;SimulationSeconds=simulationSeconds;ColorEffect=colorEffect;}
     }
 
     public sealed class BuildQuote

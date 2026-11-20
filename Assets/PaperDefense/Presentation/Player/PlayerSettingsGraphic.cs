@@ -3,47 +3,56 @@ using UnityEngine.UI;
 
 namespace PaperDefense.Presentation
 {
-    /// <summary>Ballpoint switch used by the settings sketch, without a baked caption.</summary>
+    /// <summary>Enamel slider on the field notebook's display and accessibility controls.</summary>
     public sealed class PlayerSettingsToggleGraphic : MaskableGraphic
     {
         public bool Value;
+        static readonly MeshPen pen = new MeshPen(null, 768);
+
         protected override void OnPopulateMesh(VertexHelper vh)
         {
-            vh.Clear(); Rect r = rectTransform.rect;
+            vh.Clear();
+            Rect r = rectTransform.rect;
             if (r.width <= 0 || r.height <= 0) return;
-            var pen = new MeshPen(null, 1024);
-            float radius = r.height * .43f, travel = Mathf.Max(0, r.width * .5f - radius - 2);
-            Color fill = Value ? new Color32(35, 139, 77, 255) : new Color32(183, 193, 207, 255);
-            Vector2 left = new Vector2(-travel, 0), right = new Vector2(travel, 0);
-            pen.Line(left, right, radius * 2, fill);
-            pen.Disc(left, radius, fill, 32); pen.Disc(right, radius, fill, 32);
-            for (float x = -travel + 3; x < travel; x += 5)
-                pen.Line(new Vector2(x - 5, -radius * .75f), new Vector2(x + 5, radius * .75f), .6f,
-                    Value ? new Color32(10, 88, 51, 110) : new Color32(68, 91, 127, 100));
-            Vector2 previous = new Vector2(travel + radius, 0);
-            for (int i = 1; i <= 48; i++)
+            pen.Clear();
+            float radius = Mathf.Min(r.height, r.width) * .46f;
+            float travel = Mathf.Max(0, r.width * .5f - radius - 1);
+            Vector2 left = Vector2.left * travel, right = Vector2.right * travel;
+            void Track(float capRadius, Color ink)
             {
-                float a = i * Mathf.PI * 2 / 48;
-                Vector2 next = new Vector2((Mathf.Cos(a) >= 0 ? travel : -travel) + Mathf.Cos(a) * radius, Mathf.Sin(a) * radius);
-                pen.Line(previous, next, 1.6f, PlayerUi.Ink); previous = next;
+                pen.Line(left, right, capRadius * 2, ink);
+                pen.Disc(left, capRadius, ink, 16);
+                pen.Disc(right, capRadius, ink, 16);
             }
-            Vector2 knob = Value ? right : left;
-            pen.Disc(knob, radius * .85f, PlayerUi.Card, 32);
-            pen.Ring(knob, radius * .85f, 1.1f, PlayerUi.Ink, 32);
+            Track(radius, Value ? FieldMenuSkin.Accent : FieldMenuSkin.Border);
+            Track(radius * .87f, FieldMenuSkin.Background);
+            Vector2 knob = Value ? right : left, empty = -knob;
+            pen.Line(empty + Vector2.left * 3, empty + Vector2.right * 3, 1.6f, FieldMenuSkin.Border);
+            pen.Disc(knob, radius * .70f, Value ? FieldMenuSkin.Accent : FieldMenuSkin.Muted, 20);
+            if (Value)
+            {
+                pen.Line(knob + new Vector2(-4, 0), knob + new Vector2(-1.2f, -2.8f), 1.8f, FieldMenuSkin.AccentInk);
+                pen.Line(knob + new Vector2(-1.2f, -2.8f), knob + new Vector2(4.3f, 3), 1.8f, FieldMenuSkin.AccentInk);
+            }
+            else pen.Line(knob + Vector2.left * 3.5f, knob + Vector2.right * 3.5f, 1.8f, FieldMenuSkin.Background);
             pen.CopyTo(vh, r.center, 1);
         }
     }
 
     public sealed class PlayerSettingsDisplayGraphic : MaskableGraphic
     {
+        static readonly MeshPen pen = new MeshPen(null, 128);
+
         protected override void OnPopulateMesh(VertexHelper vh)
         {
-            vh.Clear(); var pen = new MeshPen(null, 128);
-            pen.Box(new Vector2(0, .175f), new Vector2(1.52f, 1.05f), Color.clear, color, .07f, 22);
-            pen.Box(new Vector2(0, .17f), new Vector2(1.28f, .82f), Color.clear, color, .03f, 33);
-            pen.Line(new Vector2(-.22f, -.4f), new Vector2(-.22f, -.65f), .07f, color);
-            pen.Line(new Vector2(.22f, -.4f), new Vector2(.22f, -.65f), .07f, color);
-            pen.Line(new Vector2(-.48f, -.67f), new Vector2(.48f, -.67f), .08f, color);
+            vh.Clear(); pen.Clear();
+            pen.Rect(-.78f, -.41f, 1.56f, 1.08f, FieldMenuSkin.Ink);
+            pen.Rect(-.65f, -.20f, 1.30f, .75f, FieldMenuSkin.Background);
+            pen.Line(new Vector2(-.53f, .10f), new Vector2(-.21f, .42f), .08f, FieldMenuSkin.Muted);
+            pen.Line(new Vector2(-.31f, .08f), new Vector2(-.09f, .30f), .045f, FieldMenuSkin.Muted);
+            pen.Disc(new Vector2(.55f, -.31f), .06f, FieldMenuSkin.AccentInk, 8);
+            pen.Rect(-.14f, -.62f, .28f, .25f, FieldMenuSkin.Muted);
+            pen.Rect(-.45f, -.68f, .90f, .10f, FieldMenuSkin.Ink);
             pen.CopyTo(vh, rectTransform.rect.center, Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .48f);
         }
     }

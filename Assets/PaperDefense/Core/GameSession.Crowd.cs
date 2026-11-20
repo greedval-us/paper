@@ -8,39 +8,36 @@ namespace PaperDefense.Core
         // Symmetric alternatives; stable per-enemy handedness resolves identical scores.
         static readonly float[] CrowdAngles = { 0, .5235988f, -.5235988f, 1.0471976f, -1.0471976f, 1.5707963f, -1.5707963f };
 
-        bool TryCrowdSpawn(int side, float visualScale, out Point2 position)
-        {
-            int entrances = Battlefield == null ? 1 : Battlefield.Entrances.Count;
-            int start = random.Next(entrances);
-            int extent = side <= 2 ? rules.Height : rules.Width;
-            for (int i = 0; i < entrances; i++)
-            {
-                Cell entrance = Battlefield == null ? default : Battlefield.Entrances[(start + i) % entrances];
-                if (Battlefield != null && Battlefield.Side(entrance) != side) continue;
-                int center = side <= 2 ? entrance.Y : entrance.X;
-                int half = Battlefield != null && !Battlefield.IsOpenTerrain ? 0 : rules.Crowd.EntranceHalfWidth;
-                int low = Battlefield == null ? 1 : Math.Max(1, center - half);
-                int high = Battlefield == null ? extent - 2 : Math.Min(extent - 2, center + half);
-                int count = high - low + 1;
-                if (count <= 0) continue;
-                int offset = random.Next(count);
-                for (int attempt = 0; attempt < count; attempt++)
-                {
-                    int tangent = low + (offset + attempt) % count;
-                    var cell = side == 1 ? new Cell(0, tangent) : side == 2 ? new Cell(rules.Width - 1, tangent) :
-                        side == 4 ? new Cell(tangent, rules.Height - 1) : new Cell(tangent, 0);
-                    var candidate = Center(cell);
-                    if (!crowd.CanEnter(cell) || (Battlefield != null && !Battlefield.IsWalkable(cell)) || IsBlocker(StructureAt(cell))) continue;
-                    if (!crowdMotion.CanSpawn(candidate, visualScale)) continue;
-                    position = candidate; return true;
-                }
-            }
-            position = default; return false;
-        }
 
         Point2 CrowdPreferredDirection(EnemyState enemy) => IsBlocker(StructureAt(CellOf(enemy.Destination))) ?
                 EnemyCrowdMotion.Unit(new Point2(enemy.Destination.X - enemy.Position.X, enemy.Destination.Y - enemy.Position.Y)) :
                 EnemyFlow(enemy).Direction(enemy.Position);
+
+        StructureState ContactWallAhead(EnemyState enemy)
+        {
+            var position = enemy.Position;
+            var goal = TargetPoint(enemy);
+            float reach = rules.Combat.StructureContactDistance;
+            float nearest = reach * reach;
+            int minX = Math.Max(0, (int)Math.Ceiling(position.X - .5f - reach));
+            int maxX = Math.Min(rules.Width - 1, (int)Math.Floor(position.X - .5f + reach));
+            int minY = Math.Max(0, (int)Math.Ceiling(position.Y - .5f - reach));
+            int maxY = Math.Min(rules.Height - 1, (int)Math.Floor(position.Y - .5f + reach));
+            StructureState best = null;
+            for (int y = minY; y <= maxY; y++)
+            for (int x = minX; x <= maxX; x++)
+            {
+                var wall = grid[y * rules.Width + x];
+                if (wall?.Kind != StructureKind.Wall || !IsBlocker(wall)) continue;
+                float dx = x + .5f - position.X, dy = y + .5f - position.Y;
+                if (dx * (goal.X - position.X) + dy * (goal.Y - position.Y) <= 0) continue;
+                float distance = dx * dx + dy * dy;
+                if (distance > nearest || (distance == nearest && best != null && best.Id < wall.Id)) continue;
+                nearest = distance;
+                best = wall;
+            }
+            return best;
+        }
 
         void MoveInCrowd(EnemyState enemy, float movement)
         {

@@ -306,8 +306,14 @@ namespace PaperDefense.Tests
             b.Waves=new List<WaveDefinition>{new WaveDefinition{Count=90,Sides=7,SpawnInterval=.05f}};
             b.Enemy(EnemyKind.Doodle).Speed=4;var gun=b.Structure(StructureKind.Gun);gun.Damage=100;gun.ShotInterval=.05f;gun.Range=10;gun.BuildSeconds=0;
             var game=new GameSession(b,17,false);for(int i=0;i<game.Wells.Count;i++)Assert.That(game.TryActivateWell(i,out _),Is.True);
-            Assert.That(game.TryBuild(new[]{new Cell(44,32),new Cell(52,32)},StructureKind.Gun,MaterialTier.Pencil,out _),Is.True);
-            game.StartNextWave();for(int i=0;i<600&&game.Phase==RunPhase.Assault;i++)game.Tick(.25f);
+            foreach(var cell in new[]{new Cell(44,32),new Cell(52,32)})
+                Assert.That(game.TryBuild(new[]{cell},StructureKind.Gun,MaterialTier.Pencil,out _,
+                    facingDegrees:PaperDefense.Validation.BattleFacingOrders.Toward(cell,game.BaseCell)),Is.True);
+            game.StartNextWave();
+            for(int i=0;i<600&&game.Phase==RunPhase.Assault;i++)
+            {
+                game.Tick(.25f);
+            }
             Assert.That(game.Phase,Is.EqualTo(RunPhase.Victory));Assert.That(game.Kills,Is.EqualTo(90));
         }
     }

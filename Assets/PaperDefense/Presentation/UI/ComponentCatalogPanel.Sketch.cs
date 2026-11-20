@@ -340,7 +340,7 @@ namespace PaperDefense.Presentation
             MoveDetail(details, "Component inspected contribution", new Rect(right + 12, 72, w - right - 24, 28));
             HideDetail(details, "Component inspected modifiers");
             MetricRegion(details, VisibleStatistics(details), new Rect(right + 8, 110, w - right - 16, 162), 27, 21);
-            ui.Label(details, "Component fan rule caption", "Схема сектора", new Rect(16, h - 42, 180, 30), 18, true, WorkshopUi.Muted);
+            ui.Label(details, "Component fan rule caption", "Угол залпа", new Rect(16, h - 42, 180, 30), 18, true, WorkshopUi.Muted);
             ui.Button(details, "Component fan sight navigation", new Rect(right - 216, h - 42, 196, 32), ui.Resolve(UserText.Message("assembly.component.category.Sight")), () => { draft.SelectCategory(ComponentCategory.Sight); Refresh(); }, WorkshopIcon.Target);
         }
         void LayoutArmor(RectTransform details, ResolvedEntry candidate, float w, float h)
@@ -417,6 +417,9 @@ namespace PaperDefense.Presentation
             string ruleText = string.Join("\n", rows.Skip(metricCount));
             if (support.Kind == AssemblyStructureFamily.Generator) ruleText += "\nДоход за полную пережитую волну";
             if (support.Kind == AssemblyStructureFamily.Slow) ruleText = "Замедляет врагов в указанном радиусе";
+            if (support.Kind == AssemblyStructureFamily.Spikes) ruleText = "Поставьте на пути группы. Враги могут пройти через ловушку.";
+            if (support.Kind == AssemblyStructureFamily.Prism) ruleText = "Поставьте у поворота или переправы, чтобы колонна попала под несколько импульсов.";
+            if (support.Kind == AssemblyStructureFamily.Beacon) ruleText = "Поставьте у сектора обстрела башни. В перекрывающихся полях действует сильнейшая метка.";
             if (!string.IsNullOrWhiteSpace(ruleText) && stats?.name != "Component comparison")
             {
                 float rulesY = bottom + 20;

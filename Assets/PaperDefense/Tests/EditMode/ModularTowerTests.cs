@@ -44,7 +44,7 @@ namespace PaperDefense.Tests
             page=page.WithMortarFootprint(2,new MortarFootprint(2));
             var restored=new BlueprintData(page).ToBlueprint();
             Assert.That(restored.GetMortarFootprint(2).AspectRatio,Is.EqualTo(2));
-            Assert.That(WorkshopProfile.CurrentVersion,Is.EqualTo(8));
+            Assert.That(WorkshopProfile.CurrentVersion,Is.EqualTo(11));
         }
 
         [TestCase(TargetPriority.Nearest)] [TestCase(TargetPriority.Strongest)] [TestCase(TargetPriority.Siege)]

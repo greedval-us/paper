@@ -161,12 +161,8 @@ namespace PaperDefense.Tests
                     theme: view.VisualTheme, windupSeconds: read.Balance.Enemy(enemy.Kind).WindupSeconds);
                 pen.Upload();
                 Assert.That(expectedMesh.vertexCount, Is.GreaterThan(4), "The baseline includes the body and the full HP bar.");
-                var baselineUv = new List<Vector2>(); var actualUv = new List<Vector2>();
-                expectedMesh.GetUVs(1, baselineUv); actualMesh.GetUVs(1, actualUv);
-                int first = -1;
-                for (int offset = 0; offset + baselineUv.Count <= actualUv.Count; offset++)
-                    if (actualUv.Skip(offset).Take(baselineUv.Count).SequenceEqual(baselineUv)) { first = offset; break; }
-                Assert.That(first, Is.GreaterThanOrEqualTo(0), "Locate this actual atlas body followed by its unchanged HP geometry.");
+                int first = FindTransformedGeometry(actualMesh, expectedMesh, origin, expectedScale);
+                Assert.That(first, Is.GreaterThanOrEqualTo(0), "Locate this actual native body followed by its HP geometry using its transformed positions.");
                 var actual = actualMesh.vertices; var baseline = expectedMesh.vertices;
                 for (int i = 0; i < baseline.Length; i++)
                     Assert.That(Vector3.Distance(actual[first + i], origin + (baseline[i] - origin) * expectedScale), Is.LessThan(.0001f),
@@ -182,7 +178,7 @@ namespace PaperDefense.Tests
                 DoodleGlyphs.DrawResourceEnemy(pen, enemy.Kind, enemy.DrawingTier, new Vector2(origin.x, origin.y),
                     NotebookEnemyMotion.Death, 0, view.VisualTheme, enemy.VisualScale); pen.Upload();
                 actual = actualMesh.vertices; baseline = expectedMesh.vertices;
-                Assert.That(baseline.Length, Is.EqualTo(4), "The death pose remains one atlas illustration.");
+                Assert.That(baseline.Length, Is.GreaterThan(4), "The death tail must contain the complete native symbol.");
                 for (int i = 0; i < baseline.Length; i++)
                     Assert.That(Vector3.Distance(actual[actual.Length - baseline.Length + i], origin + (baseline[i] - origin) * expectedScale), Is.LessThan(.0001f),
                         "The death tail must retain the same whole-enemy presentation scale.");
@@ -214,11 +210,7 @@ namespace PaperDefense.Tests
                 var expectedPen = new MeshPen(expectedMesh);
                 DoodleGlyphs.Enemy(expectedPen, enemy, (float)playback.Seconds, animation: playback.Animation,
                     sampleSeconds: frame.Seconds); expectedPen.Upload();
-                var expectedUv = new List<Vector2>(); var actualUv = new List<Vector2>();
-                expectedMesh.GetUVs(1, expectedUv); actualMesh.GetUVs(1, actualUv);
-                int first = -1;
-                for (int offset = 0; offset + expectedUv.Count <= actualUv.Count; offset++)
-                    if (actualUv.Skip(offset).Take(expectedUv.Count).SequenceEqual(expectedUv)) { first = offset; break; }
+                int first = FindTransformedGeometry(actualMesh, expectedMesh, origin, .7f);
                 Assert.That(first, Is.GreaterThanOrEqualTo(0));
                 var actual = actualMesh.vertices; var baseline = expectedMesh.vertices;
                 Assert.That(baseline.Length, Is.GreaterThan(4), "Body and health must both be present in the real recorded lane.");
@@ -229,6 +221,20 @@ namespace PaperDefense.Tests
                 Assert.That(frame.Enemies[0].VisualScale, Is.EqualTo(enemy.VisualScale));
             }
             finally { Object.DestroyImmediate(actualMesh); Object.DestroyImmediate(expectedMesh); }
+        }
+
+        static int FindTransformedGeometry(Mesh actualMesh, Mesh baselineMesh, Vector3 pivot, float scale)
+        {
+            var actual = actualMesh.vertices; var baseline = baselineMesh.vertices;
+            for (int offset = 0; offset + baseline.Length <= actual.Length; offset++)
+            {
+                bool matches = true;
+                for (int vertex = 0; vertex < baseline.Length; vertex++)
+                    if (Vector3.Distance(actual[offset + vertex], pivot + (baseline[vertex] - pivot) * scale) >= .0001f)
+                    { matches = false; break; }
+                if (matches) return offset;
+            }
+            return -1;
         }
     }
 }

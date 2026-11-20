@@ -46,6 +46,16 @@ namespace PaperDefense.Tests
         }
 
         [Test]
+        public void OpeningHordeMeasurementUsesAnIsolatedMemoryProfileAndRunsByItself()
+        {
+            const string flag = "-paper-release-horde";
+            Assert.That(Validate("game.exe", "-paper-release-probe", "report.json", flag, "-paper-memory-only"), Is.Null);
+            string file = Path.Combine(Path.GetTempPath(), "PaperDefense-release", "profile.json");
+            Assert.That(Validate("game.exe", "-paper-release-probe", "report.json", flag, "-paper-profile-path", file), Is.Not.Null);
+            Assert.That(Validate("game.exe", "-paper-release-probe", "report.json", flag, "-paper-memory-only", "-paper-release-measure-only"), Is.Not.Null);
+        }
+
+        [Test]
         public void MainThreadAllocationReaderMustPassARealAllocationSanityCheck()
         {
             var factory = Probe.GetMethod("CreateVerifiedAllocationReader", BindingFlags.Public | BindingFlags.Static);

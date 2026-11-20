@@ -18,6 +18,7 @@ namespace PaperDefense.Tests
             var balance = GameBalance.CreateDefault();
             var tower = new StructureState { Id = 7, Cell = new Cell(10, 10), Kind = kind,
                 Tier = MaterialTier.Pencil, IsComplete = true, Health = 55, Color = InkColor.Blue };
+            tower.InitializePlacementFacing(90);
             var enemies = new List<EnemyState>
             {
                 new EnemyState { Id = 1, Position = new Point2(10.5f,12.5f), Health = 100, MaxHealth = 100 },

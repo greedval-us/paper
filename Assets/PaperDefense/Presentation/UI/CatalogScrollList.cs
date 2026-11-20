@@ -8,6 +8,7 @@ namespace PaperDefense.Presentation
     {
         public RectTransform Content { get; }
         public ScrollRect Scroll { get; }
+        Scrollbar scrollbar;
         public CatalogScrollList(Transform parent, string name, Rect bounds, int count, int columns, float rowHeight, float gap)
         {
             var viewport = new GameObject(name, typeof(RectTransform), typeof(Image), typeof(RectMask2D), typeof(ScrollRect));
@@ -19,24 +20,33 @@ namespace PaperDefense.Presentation
             Content.anchorMin = new Vector2(0, 1); Content.anchorMax = new Vector2(1, 1); Content.pivot = new Vector2(0, 1);
             Content.anchoredPosition = Vector2.zero;
             int rows = Mathf.CeilToInt(count / (float)Mathf.Max(1, columns));
-            Content.sizeDelta = new Vector2(0, Mathf.Max(bounds.height, rows * (rowHeight + gap) - gap));
             Scroll = viewport.GetComponent<ScrollRect>(); Scroll.viewport = rect; Scroll.content = Content;
             Scroll.horizontal = false; Scroll.vertical = true; Scroll.movementType = ScrollRect.MovementType.Clamped;
             Scroll.scrollSensitivity = rowHeight; Scroll.inertia = false;
-            if (Content.sizeDelta.y > bounds.height)
+            SetContentHeight(rows * (rowHeight + gap) - gap);
+            Scroll.verticalNormalizedPosition = 1;
+        }
+
+        public void SetContentHeight(float height)
+        {
+            var rect = Scroll.viewport;
+            bool overflow = height > rect.rect.height + .1f;
+            Content.sizeDelta = new Vector2(0, Mathf.Max(rect.rect.height, height));
+            if (overflow && scrollbar == null)
             {
-                var track = new GameObject(name + " scrollbar", typeof(RectTransform), typeof(Image), typeof(Scrollbar));
+                var track = new GameObject(Scroll.name + " scrollbar", typeof(RectTransform), typeof(Image), typeof(Scrollbar));
                 track.transform.SetParent(rect, false); var trackRect = track.GetComponent<RectTransform>();
                 trackRect.anchorMin = new Vector2(1, 0); trackRect.anchorMax = new Vector2(1, 1); trackRect.pivot = new Vector2(1, 1);
                 trackRect.anchoredPosition = Vector2.zero; trackRect.sizeDelta = new Vector2(6, 0); track.GetComponent<Image>().color = new Color(.2f, .35f, .55f, .1f);
                 var handle = new GameObject("Handle", typeof(RectTransform), typeof(Image)); handle.transform.SetParent(trackRect, false);
                 var handleRect = handle.GetComponent<RectTransform>(); handleRect.anchorMin = Vector2.zero; handleRect.anchorMax = Vector2.one; handleRect.sizeDelta = Vector2.zero;
                 handle.GetComponent<Image>().color = new Color(.2f, .35f, .55f, .55f);
-                var scrollbar = track.GetComponent<Scrollbar>(); scrollbar.handleRect = handleRect; scrollbar.targetGraphic = handle.GetComponent<Image>(); scrollbar.direction = Scrollbar.Direction.BottomToTop;
+                scrollbar = track.GetComponent<Scrollbar>(); scrollbar.handleRect = handleRect; scrollbar.targetGraphic = handle.GetComponent<Image>(); scrollbar.direction = Scrollbar.Direction.BottomToTop;
                 scrollbar.value = 1;
-                Scroll.verticalScrollbar = scrollbar;
             }
-            Scroll.verticalNormalizedPosition = 1;
+            if (scrollbar == null) return;
+            Scroll.verticalScrollbar = overflow ? scrollbar : null;
+            scrollbar.gameObject.SetActive(overflow);
         }
         static void Place(RectTransform rect, Rect box)
         { rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0, 1); rect.anchoredPosition = new Vector2(box.x, -box.y); rect.sizeDelta = box.size; }

@@ -37,7 +37,12 @@ namespace PaperDefense.Presentation
                 presentationVisible = value;
                 if (canvasObject != null) canvasObject.SetActive(value && run.InWorkshop);
                 if (!changed || Composite == null) return;
-                if (value) Composite.Resume(); else Composite.Suspend();
+                if (value)
+                {
+                    Composite.Resume();
+                    UiMenuMotion.PlayScreen(Composite.Root);
+                }
+                else Composite.Suspend();
             }
         }
 
@@ -57,7 +62,7 @@ namespace PaperDefense.Presentation
             paper.GetComponent<Image>().color = NotebookPalette.Paper; paper.GetComponent<Image>().raycastTarget = true;
             Draft = run.Workshop.Album.Count > 0 ? run.Workshop.Album[0] : null;
             if (run.AssemblyCatalog != null)
-                Composite = new CompositeWorkshopPanel(board, run, TextResolver, Prepare);
+                Composite = new CompositeWorkshopPanel(board, run, TextResolver, Prepare, sequentialFlow: true);
             else
             {
                 // Historical content can still be read and rendered, but cannot reopen retired editors.
@@ -65,6 +70,7 @@ namespace PaperDefense.Presentation
                 new WorkshopUi(TextResolver).Label(board, "Album unavailable", Status, new Rect(160, 360, 1280, 180), 32);
             }
             run.WorkshopChanged += Refresh;
+            if (Composite != null) UiMenuMotion.PlayScreen(Composite.Root, false);
             Refresh();
         }
 
@@ -121,22 +127,15 @@ namespace PaperDefense.Presentation
             if (!ShowReference)
             {
                 float size = Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .68f;
-                if (NotebookMountLayout.Supports(blueprint) && NotebookTowerComposition.TryGetBounds(blueprint, out var bounds))
-                {
-                    size = .9f * Mathf.Min(rectTransform.rect.width / Mathf.Max(.001f, bounds.width),
-                        rectTransform.rect.height / Mathf.Max(.001f, bounds.height));
-                    center -= bounds.center * size;
-                }
                 if (ShowReinforcement && blueprint.Reinforcement != null)
-                    DrawSectors(vh, center, NotebookMountLayout.Supports(blueprint)
-                        ? size * .625f : Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .42f, blueprint.Reinforcement);
+                    DrawSectors(vh, center, Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .42f, blueprint.Reinforcement);
                 if (previewAnimation != null)
                     NotebookTowerComposition.DrawPreviewUI(vh, blueprint, center, size, previewAnimation, 1, previewSeconds, previewAim);
                 else NotebookTowerComposition.DrawUI(vh, blueprint, center, size);
                 return;
             }
             // Historical profile previews retain their reference contours. Runtime battlefield
-            // objects and released album assemblies use the atlas illustrations.
+            // objects and released stock assemblies use the standard native illustrations.
             float scale = Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .68f;
             if (ShowReinforcement && blueprint.Reinforcement != null)
                 DrawSectors(vh, center, Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) * .42f, blueprint.Reinforcement);

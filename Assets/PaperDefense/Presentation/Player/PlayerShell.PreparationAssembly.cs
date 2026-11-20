@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using PaperDefense.Core;
 using UnityEngine;
@@ -13,197 +12,255 @@ namespace PaperDefense.Presentation
 
         void AssemblyPreparation()
         {
-            Rect landscape = NotebookPageBackdrop("Art/Player/PreparationLandscape");
-            // Keep the whole illustration, but align this screen's scenery to the header.
-            // Centering a 16:9 page in 4:3 otherwise leaves a blank band above the castle.
-            landscape.y = 0;
-            PlayerUi.Place(page.Find("Notebook landscape").GetComponent<RectTransform>(), landscape);
-            NotebookScreenHeader(PreparationCopy("title"), () => game.Navigate(PlayerPage.Map),
-                ProgressCopy(), true, currencyCoin: true);
-            progress = page.Find("Notebook header/Mission heading").GetComponentInChildren<Text>();
-            progress.name = "Player progress";
-
-            float scale = Mathf.Min(W / 1600f, H / 900f);
-            float margin = Mathf.Max(16, 28 * scale), gap = Mathf.Max(8, 12 * scale);
-            float width = W - margin * 2;
-            bool inlineFooter = W >= 1250;
-            float footerHeight = inlineFooter ? Mathf.Max(62, 68 * scale) : Mathf.Max(44, 56 * scale);
-            float footerY = H - margin - footerHeight;
-            float materialHeight = Mathf.Max(58, 72 * scale), materialY = inlineFooter ? footerY : footerY - gap - materialHeight;
-            float ribbonHeight = Mathf.Max(36, 56 * scale), ribbonY = landscape.height * (207f / 941f);
+            NotebookPageBackdrop();
+            string mission = game.Run.CampaignEnabled ? game.Run.SelectedMission.Title : "Боевой набор";
+            CompactMenuHeader(PreparationCopy("title"), () => game.Navigate(PlayerPage.Map),
+                mission + " · " + WaveCountLabel(game.Run.Session.Balance.Waves.Count),
+                "Выбери до восьми башен и сооружений. Нужна хотя бы одна атакующая башня.\n\nКруговая стрелка меняет чертёж, плюс заполняет пустое место, корзина освобождает его. Пустые места можно оставить свободными. В мастерской можно собрать новый вариант.\n\n" +
+                (game.Run.Session.Balance.Mechanics.FieldModernization
+                    ? "Все копии начинают бой с базовыми параметрами. Развивай выбранную башню на поле за ресурсы; цвет закрепляется при первой установке. Полный состав доступен в альбоме."
+                    : "Материал меняет цену и свойства строительства. Генератор строится только карандашом. Полный состав и характеристики доступны в альбоме."));
+            bool desktop = W >= 1180 && H >= 660;
+            float margin = Mathf.Min(40, W * .025f), gap = desktop ? 12 : 8;
+            float availableWidth = W - margin * 2;
+            float side = desktop ? Mathf.Clamp(availableWidth * .25f, 300, 390) : 0;
+            float width = desktop ? availableWidth - side - gap * 2 : availableWidth, left = margin;
+            bool ready = game.Run.CanStartAlbumRun(out var reason);
+            bool modernization = game.Run.Session.Balance.Mechanics.FieldModernization;
+            float footerHeight = desktop ? 52 : 44;
+            float materialHeight = modernization ? 64 : 76;
+            float ribbonHeight = desktop ? 48 : 40, top = W >= 1120 ? 88 : 72;
+            int columns = 4;
+            int rows = Mathf.CeilToInt(ProfileLimits.LoadoutSlotCount / (float)columns);
+            float availableHeight = H - top - margin;
+            float cardHeight = desktop ? (availableHeight - ribbonHeight - footerHeight - gap * (rows + 1)) / rows :
+                Mathf.Clamp((availableHeight - ribbonHeight - materialHeight - footerHeight - gap * (rows + 2)) / rows, 144, 184);
+            float extent = rows * (cardHeight + gap) - gap;
+            float blockHeight = ribbonHeight + extent + materialHeight + footerHeight + gap * 3;
+            float ribbonY = desktop ? top : top + Mathf.Max(0, (availableHeight - blockHeight) * .5f);
             float gridY = ribbonY + ribbonHeight + gap;
-            float gridHeight = materialY - gap - gridY;
-            float cardWidth = (width - gap * 3) / 4, cardHeight = (gridHeight - gap) / 2;
-
-            float ribbonWidth = width * .46f;
-            var ribbon = ui.Panel(page, "Assembly preparation ribbon", new Rect((W - ribbonWidth) * .5f, ribbonY, ribbonWidth, ribbonHeight), PlayerUi.Card);
-            NotebookLabel(ribbon, PreparationCopy("ribbon"), new Rect(8, 0, ribbonWidth - 16, ribbonHeight),
-                Mathf.Max(25, Mathf.RoundToInt(37 * scale)), alignment: TextAnchor.MiddleCenter);
-            var grid = ui.Panel(page, "Assembly preparation loadout", new Rect(margin, gridY, width, gridHeight), Color.clear);
+            float gridHeight = desktop ? extent : Mathf.Min(extent, Mathf.Max(80, H - margin - footerHeight - materialHeight - gap * 2 - gridY));
+            float materialY = gridY + gridHeight + gap, footerY = desktop ? H - margin - footerHeight : materialY + materialHeight + gap;
+            int count = game.Run.Workshop.LoadoutEntries.Count(entry => entry != null);
+            var ribbon = ui.Panel(page, "Assembly preparation ribbon", new Rect(left, ribbonY, width, ribbonHeight), Color.clear);
+            var sets = ui.IconButton(ribbon, "Preparation named loadouts", new Rect(0, 0, 174, ribbonHeight),
+                PlayerIcon.Next, "Сохранённые боевые наборы: сохранить или заменить все восемь мест", OpenNamedLoadouts);
+            PlayerUi.Place(sets.GetComponentInChildren<PlayerIconGraphic>().rectTransform, new Rect(150, (ribbonHeight - 16) * .5f, 16, 16));
+            var countLabel = NotebookLabel(sets.transform, "Набор · " + count + " / " + ProfileLimits.LoadoutSlotCount,
+                new Rect(8, 0, 138, ribbonHeight), 20);
+            countLabel.name = "Preparation loadout count"; countLabel.resizeTextMinSize = 16;
+            countLabel.fontStyle = FontStyle.Bold;
+            float readyX = 186;
+            var balance = game.Run.Session.Balance;
+            bool scout = balance.Waves.Count > 0 && balance.Waves[0].IsHorde;
+            if (desktop)
+            {
+                int structures = game.Run.Workshop.LoadoutEntries.Count(entry => entry?.Kind == AlbumEntryKind.Structure);
+                NotebookLabel(ribbon, "Башни · " + (count - structures) + "     Сооружения · " + structures,
+                    new Rect(186, 0, 258, ribbonHeight), 16, PlayerUi.Muted);
+                readyX = 456;
+            }
+            else if (scout)
+            {
+                readyX = width - 190;
+                MissionScoutButton(ribbon, "Preparation wave scout", new Rect(180, 2, readyX - 190, ribbonHeight - 4), balance);
+            }
+            string readinessCopy = ready ? "Готово к защите" :
+                reason == UserText.Message("run.error.configuration") ? "Проверь чертежи набора" : GameText.Resolve(reason);
+            var readiness = NotebookLabel(ribbon, readinessCopy,
+                new Rect(readyX, 0, width - readyX, ribbonHeight), 16,
+                ready ? FieldMenuSkin.Accent : NotebookPalette.Red, TextAnchor.MiddleRight);
+            readiness.name = "Preparation readiness"; readiness.resizeTextMinSize = Mathf.CeilToInt(14 / Layout.Scale);
+            contextHints.Tip(readiness.gameObject, ready ? "Можно начать защиту. Свободные места заполнять не обязательно." : GameText.Resolve(reason));
+            var content = ui.Scroll(page, "Preparation loadout scroll", new Rect(left, gridY, width, gridHeight), extent);
+            if (extent <= gridHeight + 1)
+                content.GetComponentInParent<ScrollRect>().verticalScrollbar.gameObject.SetActive(false);
+            var grid = ui.Panel(content, "Assembly preparation loadout", new Rect(0, 0, width - 10, extent), Color.clear);
             var flow = grid.gameObject.AddComponent<GridLayoutGroup>();
+            float cardWidth = (width - 10 - gap * (columns - 1)) / columns;
             flow.cellSize = new Vector2(cardWidth, cardHeight); flow.spacing = new Vector2(gap, gap);
-            flow.constraint = GridLayoutGroup.Constraint.FixedColumnCount; flow.constraintCount = 4;
+            flow.constraint = GridLayoutGroup.Constraint.FixedColumnCount; flow.constraintCount = columns;
             flow.startCorner = GridLayoutGroup.Corner.UpperLeft; flow.startAxis = GridLayoutGroup.Axis.Horizontal;
             flow.childAlignment = TextAnchor.UpperLeft;
             for (int slot = 0; slot < ProfileLimits.LoadoutSlotCount; slot++)
-                PreparationAssemblyCard(grid, slot, cardWidth, cardHeight, scale);
+                PreparationAssemblyCard(grid, slot, cardWidth, cardHeight);
 
-            bool ready = game.Run.CanStartAlbumRun(out var reason);
-            int count = game.Run.Workshop.LoadoutEntries.Count(entry => entry != null);
-            var footer = ui.Panel(page, "Preparation navigation", new Rect(margin, footerY, width, footerHeight), Color.clear);
-            float workshopWidth = Mathf.Max(180, 246 * scale), albumWidth = Mathf.Max(136, 178 * scale);
-            float startWidth = Mathf.Max(225, 300 * scale);
-            float statusX = workshopWidth + albumWidth + gap * 2;
-            float materialX = inlineFooter ? margin + statusX : margin;
-            float materialWidth = inlineFooter ? width - statusX - startWidth - gap : width;
-            PreparationAssemblyMaterials(new Rect(materialX, materialY, materialWidth, inlineFooter ? footerHeight : materialHeight),
-                scale, count, ready ? "" : GameText.Resolve(reason));
-            PreparationFooterCaption(NotebookAction(footer, "Edit album", new Rect(0, 0, workshopWidth, footerHeight), PlayerIcon.Pencil,
-                "В мастерскую", () => game.Navigate(PlayerPage.Workshop)));
-            var album = NotebookAction(footer, "Open preparation album", new Rect(workshopWidth + gap, 0, albumWidth, footerHeight), PlayerIcon.Book,
-                "Альбом", game.ShowAlbum);
-            PreparationFooterCaption(album);
-            NotebookControlIcon(album, "icon.help");
-            status = NotebookLabel(page, "", new Rect(margin, ribbonY - 26, width, 24),
-                17, NotebookPalette.Red, TextAnchor.MiddleCenter); status.name = "Preparation status";
-            var start = NotebookAction(footer, "Start battle", new Rect(width - startWidth, 0, startWidth, footerHeight), PlayerIcon.Play,
+            var footer = ui.Panel(page, "Preparation navigation", new Rect(left, footerY, availableWidth, footerHeight), Color.clear);
+            float startWidth = desktop ? side : Mathf.Min(224, width * .40f);
+            if (desktop)
+            {
+                float sideX = W - margin - side;
+                float summaryTop = footerY - gap - 72;
+                float materialsTop = summaryTop - gap - materialHeight;
+                var missionSheet = ui.Panel(page, "Preparation mission", new Rect(sideX, gridY, side, materialsTop - gridY - gap), PlayerUi.Paper);
+                float sheetHeight = materialsTop - gridY - gap;
+                MissionSectionTitle(missionSheet, game.Run.CampaignEnabled ? game.Run.SelectedMission.Title : ui.T("mission"),
+                    new Rect(14, 8, side - 28, 40), 23);
+                var field = PlayerUi.Graphic<NeutralMissionMapGraphic>(missionSheet, "Preparation mission map",
+                    new Rect(8, 52, side - 16, sheetHeight - 106 - (scout ? 40 : 0)));
+                field.Bind(game.Run.Session);
+                if (scout) MissionScoutButton(missionSheet, "Preparation wave scout",
+                    new Rect(12, sheetHeight - 82, side - 24, 34), balance);
+                float half = (side - 28) * .5f;
+                CampaignMetric(missionSheet, "Preparation waves", PlayerIcon.Flag, WaveCountLabel(game.Run.Session.Balance.Waves.Count), new Rect(14, sheetHeight - 42, half, 28));
+                CampaignMetric(missionSheet, "Preparation castle", PlayerIcon.Shield, game.Run.Session.Balance.BaseHealth + " HP", new Rect(14 + half, sheetHeight - 42, half, 28));
+                PreparationAssemblyMaterials(new Rect(sideX, materialsTop, side, materialHeight), new Rect(sideX, summaryTop, side, 72));
+            }
+            else
+                PreparationAssemblyMaterials(new Rect(left, materialY, width - 238, materialHeight), new Rect(left + width - 230, materialY, 230, materialHeight));
+            float secondaryWidth = desktop ? 164 : footerHeight;
+            if (desktop)
+            {
+                CompactMenuAction(footer, "Edit album", new Rect(0, 0, secondaryWidth, footerHeight), PlayerIcon.Pencil, "Мастерская", () => game.Navigate(PlayerPage.Workshop));
+                CompactMenuAction(footer, "Open preparation album", new Rect(secondaryWidth + gap, 0, secondaryWidth, footerHeight), PlayerIcon.Book, "Альбом", game.ShowAlbum);
+            }
+            else
+            {
+                ui.IconButton(footer, "Edit album", new Rect(0, 0, secondaryWidth, footerHeight), PlayerIcon.Pencil, "Открыть мастерскую", () => game.Navigate(PlayerPage.Workshop));
+                ui.IconButton(footer, "Open preparation album", new Rect(secondaryWidth + gap, 0, secondaryWidth, footerHeight), PlayerIcon.Book, "Открыть альбом чертежей", game.ShowAlbum);
+            }
+            float statusX = secondaryWidth * 2 + gap * 2;
+            status = NotebookLabel(footer, "", new Rect(statusX, 0, availableWidth - startWidth - statusX - gap, footerHeight),
+                14, NotebookPalette.Red); status.name = "Preparation status"; status.resizeTextMinSize = 14;
+            var start = CompactMenuAction(footer, "Start battle", new Rect(availableWidth - startWidth, 0, startWidth, footerHeight), PlayerIcon.Play,
                 "Начать защиту", () => { if (game.Run.CanStartAlbumRun(out _)) game.StartBattle(); }, true);
-            PreparationFooterCaption(start, true);
             start.interactable = ready;
             if (!ready) start.GetComponent<PlayerTooltip>().Message = GameText.Resolve(reason);
+            if (namedLoadoutsOpen) BuildNamedLoadouts();
         }
 
-        void PreparationFooterCaption(Button button, bool primary = false)
-        {
-            var bounds = ((RectTransform)button.transform).rect;
-            float symbolSize = Mathf.Min(36, bounds.height * .56f);
-            var symbol = button.GetComponentInChildren<PlayerIconGraphic>();
-            PlayerUi.Place(symbol.rectTransform, new Rect(10, (bounds.height - symbolSize) * .5f, symbolSize, symbolSize));
-            foreach (var illustration in symbol.GetComponentsInChildren<Image>())
-                PlayerUi.Place(illustration.rectTransform, NotebookFitRect(illustration.sprite, new Rect(0, 0, symbolSize, symbolSize)));
-            var copy = button.GetComponentInChildren<Text>();
-            float lineHeight = Mathf.Min(30, bounds.height - 10);
-            PlayerUi.Place(copy.rectTransform, new Rect(symbolSize + 18, (bounds.height - lineHeight) * .5f,
-                bounds.width - symbolSize - 26, lineHeight));
-            copy.resizeTextMinSize = Mathf.CeilToInt(15 / Layout.Scale);
-            copy.resizeTextMaxSize = primary ? 26 : 22;
-        }
-
-        void PreparationAssemblyCard(Transform parent, int slot, float width, float height, float scale)
+        void PreparationAssemblyCard(Transform parent, int slot, float width, float height)
         {
             var entry = game.Run.Workshop.LoadoutEntries[slot];
             var card = ui.Panel(parent, "Album loadout " + slot, new Rect(0, 0, width, height), PlayerUi.Card);
             string caption = entry == null ? PreparationCopy("empty") : GameText.Resolve(entry.Name);
             bool generator = entry?.Snapshot?.Recipe.Structure?.Family == AssemblyStructureFamily.Generator;
-            float actionHeight = Mathf.Max(32, 34 * scale);
-            float nameHeight = caption.Length > 26 ? Mathf.Max(54, 58 * scale) : Mathf.Max(28, 34 * scale);
-            float costHeight = generator ? 50 : 24;
-            float artHeight = Mathf.Max(16, height - actionHeight - nameHeight - costHeight - 18);
-            PreparationAssemblyIllustration(card, entry, new Rect(4, 5, width - 8, artHeight));
-            float numberSize = Mathf.Max(28, 40 * scale);
+            float actionHeight = height >= 176 ? 36 : 32;
+            float nameHeight = generator ? 26 : 38;
+            float costHeight = generator ? 48 : 22;
+            float actionY = height - actionHeight - 8, priceY = actionY - costHeight - 4;
+            float nameY = priceY - nameHeight - 2, artHeight = Mathf.Max(24, nameY - 8);
+            bool largeCard = height >= 198;
+            bool inlineControls = largeCard && width >= (generator ? 272 : 244);
+            float actionX = inlineControls ? width - 2 * actionHeight - 20 : (width - actionHeight * 2 - 8) * .5f;
+            float priceWidth = inlineControls ? actionX - 16 : width - 16;
+            if (inlineControls) priceY = actionY + (actionHeight - costHeight) * .5f;
+            Rect illustration = largeCard ? new Rect(8, 56, width - 16, priceY - 68) : new Rect(4, 4, width - 8, artHeight);
+            PreparationAssemblyIllustration(card, entry, illustration);
+            const float numberSize = 22;
             var number = ui.Panel(card, "Album loadout number " + slot, new Rect(8, 6, numberSize, numberSize), PlayerUi.Card);
-            NotebookLabel(number, (slot + 1).ToString(), new Rect(0, 0, numberSize, numberSize),
-                Mathf.Max(21, Mathf.RoundToInt(29 * scale)), alignment: TextAnchor.MiddleCenter);
-            var name = NotebookLabel(card, caption,
-                new Rect(8, artHeight + 7, width - 16, nameHeight), Mathf.Max(23, Mathf.RoundToInt(27 * scale)), alignment: TextAnchor.MiddleCenter);
+            var position = NotebookLabel(number, (slot + 1).ToString(), new Rect(0, 0, numberSize, numberSize),
+                16, alignment: TextAnchor.MiddleCenter);
+            position.resizeTextMinSize = 14;
+            var name = NotebookLabel(card, caption, largeCard ? new Rect(40, 6, width - 50, 44) : new Rect(8, nameY, width - 16, nameHeight),
+                largeCard ? 18 : 16, alignment: largeCard ? TextAnchor.MiddleLeft : TextAnchor.MiddleCenter);
             name.name = "Album loadout name " + slot; name.fontStyle = FontStyle.Bold;
-            name.resizeTextMinSize = Mathf.CeilToInt(15 / Layout.Scale);
-            name.verticalOverflow = VerticalWrapMode.Truncate; name.horizontalOverflow = HorizontalWrapMode.Wrap;
+            name.resizeTextForBestFit = false;
+            PreparationAssemblyFitName(name, caption);
+            contextHints.Tip(name.gameObject, "Место " + (slot + 1) + ": " + caption);
 
             var quote = entry == null ? null : game.Run.PreviewAlbumEntry(entry, generator ? MaterialTier.Pencil : game.Drawing.Tier);
             string cost = entry == null ? "—" : quote.Valid ? PreparationCopy("cost", quote.Value.Cost) : PreparationCopy("unavailable");
             if (generator) cost += "\n" + PreparationCopy("pencil_only");
-            var price = NotebookLabel(card, cost, new Rect(8, artHeight + nameHeight + 7, width - 16, costHeight), 20,
-                quote != null && !quote.Valid ? NotebookPalette.Red : PlayerUi.Ink, TextAnchor.MiddleCenter);
+            var price = NotebookLabel(card, cost, new Rect(8, priceY, priceWidth, costHeight), 15,
+                quote != null && !quote.Valid ? NotebookPalette.Red : PlayerUi.Ink, inlineControls ? TextAnchor.MiddleLeft : TextAnchor.MiddleCenter);
             price.name = "Album loadout cost " + slot; price.resizeTextMinSize = Mathf.CeilToInt(15 / Layout.Scale);
-            if (generator) { price.resizeTextForBestFit = false; price.fontSize = 18; }
+            if (generator) { price.resizeTextForBestFit = false; price.fontSize = 15; }
             // The generator's second line is a construction rule. Keep the full card
             // width for it rather than fitting both lines to a measured price caption.
             if (entry != null && !generator)
             {
-                float textWidth = Mathf.Min(width - 48, price.preferredWidth + 4);
-                float priceX = (width - textWidth + 26) * .5f;
-                float priceY = artHeight + nameHeight + 7;
+                float textWidth = Mathf.Min(priceWidth - 24, price.preferredWidth + 4);
+                float priceX = inlineControls ? 32 : (width - textWidth + 22) * .5f;
                 PlayerUi.Place(price.rectTransform, new Rect(priceX, priceY, textWidth, costHeight));
                 var pencil = PlayerUi.Graphic<PlayerIconGraphic>(card, "Album loadout price pencil " + slot,
-                    new Rect(priceX - 26, priceY + 1, 22, 22));
+                    new Rect(priceX - 22, priceY + 2, 18, 18));
                 pencil.Icon = PlayerIcon.Pencil; pencil.Sketch = true; pencil.color = PlayerUi.Ink;
                 NotebookInkIcon(pencil, "icon.pencil");
             }
+            contextHints.Tip(price.gameObject, cost);
 
-            float clearWidth = actionHeight, replaceWidth = width - 24 - clearWidth;
-            NotebookAction(card, "Replace album entry " + slot, new Rect(8, height - actionHeight - 8, replaceWidth, actionHeight),
-                PlayerIcon.Restart, PreparationCopy(entry == null ? "choose" : "replace"), () => OpenAssemblyPicker(slot));
+            string slotHint = "Место " + (slot + 1) + ": ";
+            ui.IconButton(card, "Replace album entry " + slot, new Rect(actionX, actionY, actionHeight, actionHeight),
+                entry == null ? PlayerIcon.Plus : PlayerIcon.Restart,
+                slotHint + (entry == null ? "выбрать чертёж из альбома" : "заменить «" + caption + "»") +
+                (generator ? "\nГенератор строится только карандашом." : ""), () => OpenAssemblyPicker(slot));
             var clear = ui.IconButton(card, "Clear album entry " + slot,
-                new Rect(width - clearWidth - 8, height - actionHeight - 8, clearWidth, actionHeight), PlayerIcon.Trash,
-                PreparationCopy("clear"), () => game.AssignAlbumEntry(slot, null));
+                new Rect(actionX + actionHeight + 8, actionY, actionHeight, actionHeight), PlayerIcon.Trash,
+                slotHint + "убрать чертёж из боевого набора", () => game.AssignAlbumEntry(slot, null));
             clear.interactable = entry != null;
         }
 
-        void PreparationAssemblyMaterials(Rect bounds, float scale, int count, string readiness)
+        void PreparationAssemblyFitName(Text text, string fullName)
         {
-            float summaryWidth = Mathf.Max(170, 230 * scale), gap = Mathf.Max(8, 12 * scale);
-            float materialWidth = bounds.width - summaryWidth - gap;
-            var materials = ui.Panel(page, "Preparation material", new Rect(bounds.x, bounds.y, materialWidth, bounds.height), PlayerUi.Card);
-            float buttonHeight = Mathf.Max(32, bounds.height - 26);
+            text.text = fullName;
+            var settings = text.GetGenerationSettings(text.rectTransform.rect.size);
+            settings.scaleFactor = 1; settings.resizeTextForBestFit = false; settings.generateOutOfBounds = false;
+            var pixels = text.GetGenerationSettings(text.rectTransform.rect.size * Layout.Scale);
+            pixels.scaleFactor = 1; pixels.fontSize = Mathf.RoundToInt(text.fontSize * Layout.Scale);
+            pixels.resizeTextForBestFit = false; pixels.generateOutOfBounds = false;
+            using (var generated = new TextGenerator())
+            {
+                bool Fits(string value)
+                {
+                    // Preferred height can still accept a final line whose glyphs are clipped.
+                    // Check the actual bounded glyph output at logical and displayed pixel sizes.
+                    generated.Populate(value, settings);
+                    if (generated.characterCountVisible < value.Length) return false;
+                    generated.Populate(value, pixels);
+                    return generated.characterCountVisible >= value.Length;
+                }
+                if (Fits(fullName)) return;
+                for (int length = fullName.Length - 1; length >= 0; length--)
+                {
+                    text.text = fullName.Substring(0, length).TrimEnd() + "…";
+                    if (Fits(text.text)) return;
+                }
+            }
+        }
+
+        void PreparationAssemblyMaterials(Rect bounds, Rect summaryBounds)
+        {
+            float summaryWidth = summaryBounds.width, materialWidth = bounds.width;
+            var materials = ui.Panel(page, "Preparation material", bounds, PlayerUi.Card);
+            const float buttonHeight = 36;
+            bool modernization = game.Run.Session.Balance.Mechanics.FieldModernization;
             var description = NotebookLabel(materials, PreparationCopy("material") + " " + ui.T("material_" + (int)game.Drawing.Tier),
-                new Rect(10, 0, materialWidth - 20, 23), 17);
+                new Rect(10, 0, materialWidth - 20, 23), 14);
             description.name = "Preparation material description";
-            description.resizeTextMinSize = Mathf.CeilToInt(15 / Layout.Scale);
+            description.resizeTextMinSize = Mathf.CeilToInt(14 / Layout.Scale);
+            if (modernization)
+            {
+                description.text = "Базовое строительство · карандаш\nРазвитие и цвет — на поле.";
+                PlayerUi.Place(description.rectTransform, new Rect(12, 8, materialWidth - 24, bounds.height - 16));
+                description.resizeTextForBestFit = false; description.fontSize = 15;
+            }
             float buttonWidth = (materialWidth - 28) / 3;
             string[] names = { "Карандаш", "Ручка", "Фломастер" };
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < (modernization ? 0 : 3); i++)
             {
                 int tier = i;
-                var button = NotebookAction(materials, "Starting material " + i,
+                var button = CompactMenuAction(materials, "Starting material " + i,
                     new Rect(8 + i * (buttonWidth + 6), 24, buttonWidth, buttonHeight), PlayerIcon.Pencil, names[i],
                     () => SelectPreparationMaterial((MaterialTier)tier));
+                if (buttonWidth < 128)
+                {
+                    button.GetComponentInChildren<PlayerIconGraphic>().enabled = false;
+                    var caption = button.GetComponentInChildren<Text>();
+                    PlayerUi.Place(caption.rectTransform, new Rect(4, 2, buttonWidth - 8, buttonHeight - 4));
+                    caption.alignment = TextAnchor.MiddleCenter;
+                }
                 ui.MarkSelected(button, (int)game.Drawing.Tier == i);
             }
-            var summary = ui.Panel(page, "Preparation summary", new Rect(bounds.xMax - summaryWidth, bounds.y, summaryWidth, bounds.height), PlayerUi.Card);
-            NotebookLabel(summary, PreparationCopy("starting_ink", game.Run.Session.Balance.StartingInk),
-                new Rect(8, 1, summaryWidth - 16, readiness.Length > 0 ? 18 : 28), 20).name = "Preparation starting ink";
-            NotebookLabel(summary, PreparationCopy("count", count), new Rect(8, readiness.Length > 0 ? 18 : 30, summaryWidth - 16, readiness.Length > 0 ? 20 : 24), 19).name = "Preparation loadout count";
-            if (readiness.Length > 0)
-                NotebookLabel(summary, readiness, new Rect(8, 38, summaryWidth - 16, bounds.height - 38), 16,
-                    NotebookPalette.Red).name = "Preparation readiness";
+            var summary = ui.Panel(page, "Preparation summary", summaryBounds, PlayerUi.Card);
+            var ink = NotebookLabel(summary, PreparationCopy("starting_ink", game.Run.Session.Balance.StartingInk),
+                new Rect(10, 6, summaryWidth - 20, 26), 17);
+            ink.name = "Preparation starting ink"; ink.resizeTextMinSize = 15;
+            var inkHint = NotebookLabel(summary, "В начале боя", new Rect(10, 32, summaryWidth - 20, 22), 14, PlayerUi.Muted);
+            inkHint.resizeTextMinSize = 14;
         }
 
         void PreparationAssemblyIllustration(Transform parent, AlbumEntry entry, Rect bounds)
-        {
-            if (entry == null) return;
-            if (entry.Kind == AlbumEntryKind.Legacy)
-            { NotebookBlueprintIllustration(parent, entry.LegacyBlueprint, bounds); return; }
-            if (entry.Kind == AlbumEntryKind.Tower || entry.Kind == AlbumEntryKind.Structure)
-            {
-                var exact = PlayerUi.Graphic<WeaponAssemblyGraphic>(parent, "Preparation certified assembly", bounds);
-                try { exact.SetRecipe(entry.Snapshot); return; }
-                catch (ArgumentException) { }
-                catch (InvalidOperationException) { }
-                catch (NotSupportedException) { }
-                WorkshopUi.RemoveView(exact.gameObject);
-            }
-            var schematicBounds = new Rect(bounds.x, bounds.y, bounds.width, Mathf.Max(1, bounds.height - 18));
-            if (entry.Kind == AlbumEntryKind.Tower)
-            {
-                string mechanism = entry.Snapshot.Recipe.Tower.Mounts[0].Weapon.Mechanism.Id;
-                string family = mechanism.StartsWith("core.", StringComparison.Ordinal) ? mechanism.Substring("core.".Length) : mechanism;
-                var art = PlayerUi.Graphic<NotebookArtGraphic>(parent, "Preparation weapon family schematic", schematicBounds);
-                art.Bind("ui.weapon." + family);
-            }
-            else if (entry.Kind == AlbumEntryKind.Structure && entry.Snapshot.Recipe.Structure.Family != AssemblyStructureFamily.Generator)
-            {
-                var family = entry.Snapshot.Recipe.Structure.Family;
-                var art = PlayerUi.Graphic<NotebookArtGraphic>(parent, "Preparation support schematic", schematicBounds);
-                art.Bind(family == AssemblyStructureFamily.Wall ? "object.barricade-site" : family == AssemblyStructureFamily.Repair ? "object.repair" : "object.tar");
-            }
-            else
-            {
-                var icon = PlayerUi.Graphic<WorkshopIconGraphic>(parent, "Preparation family schematic", schematicBounds);
-                icon.Icon = entry.Kind == AlbumEntryKind.Tower ? WorkshopIcon.Tower : WorkshopIcon.Ink; icon.color = PlayerUi.Blue;
-            }
-            NotebookLabel(parent, PreparationCopy("neutral"), new Rect(bounds.x, bounds.yMax - 18, bounds.width, 18), 15,
-                PlayerUi.Muted, TextAnchor.MiddleCenter).name = "Preparation schematic caption";
-        }
+            => StandardAssemblyIllustration.Draw(parent, entry, bounds, "Preparation certified assembly");
     }
 }

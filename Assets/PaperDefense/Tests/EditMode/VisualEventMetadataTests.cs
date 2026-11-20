@@ -27,8 +27,12 @@ namespace PaperDefense.Tests
             Assert.That(session.EventBuffer.Count(e => e.Kind.ToString() == "StructureCompleted"), Is.EqualTo(1));
         }
 
-        static StructureState Tower(StructureKind kind=StructureKind.Gun)=>new StructureState
-        {Id=7,Cell=new Cell(10,10),Kind=kind,Tier=MaterialTier.Pencil,Health=100,MaxHealth=100,IsComplete=true};
+        static StructureState Tower(StructureKind kind=StructureKind.Gun)
+        {
+            var tower=new StructureState {Id=7,Cell=new Cell(10,10),Kind=kind,Tier=MaterialTier.Pencil,Health=100,MaxHealth=100,IsComplete=true};
+            tower.InitializePlacementFacing(90);
+            return tower;
+        }
         static EnemyState Enemy(int id=1,float health=1000,float y=12.5f)=>new EnemyState
         {Id=id,Kind=EnemyKind.Runner,DrawingTier=DrawingTier.Hatched,Position=new Point2(10.5f,y),Health=health,MaxHealth=health};
         static void Fire(WeaponSystem weapons,StructureState tower,List<EnemyState> enemies,SimulationEventBuffer events,List<ShotEvent> shots=null,

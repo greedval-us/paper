@@ -181,6 +181,7 @@ MonoBehaviour:
       MinimumLineRadius: 0
       MinimumRadialRange: 0
       MinimumRange: 0
+      FiringArcDegrees: 160
       MaximumFootprintAspectRatio: 3
       EffectIds: []
       LegacyKind: 1
@@ -221,6 +222,7 @@ MonoBehaviour:
       MinimumLineRadius: 0.2
       MinimumRadialRange: 0
       MinimumRange: 0
+      FiringArcDegrees: 135
       MaximumFootprintAspectRatio: 3
       EffectIds: []
       LegacyKind: 2
@@ -261,6 +263,7 @@ MonoBehaviour:
       MinimumLineRadius: 0
       MinimumRadialRange: 0
       MinimumRange: 0
+      FiringArcDegrees: 120
       MaximumFootprintAspectRatio: 3
       EffectIds: []
       LegacyKind: 3
@@ -301,6 +304,7 @@ MonoBehaviour:
       MinimumLineRadius: 0
       MinimumRadialRange: 0
       MinimumRange: 0
+      FiringArcDegrees: 180
       MaximumFootprintAspectRatio: 3
       EffectIds: []
       LegacyKind: 5
@@ -343,6 +347,7 @@ MonoBehaviour:
       MinimumLineRadius: 0
       MinimumRadialRange: 0
       MinimumRange: 0
+      FiringArcDegrees: 145
       MaximumFootprintAspectRatio: 3
       EffectIds: []
       LegacyKind: 6
@@ -385,6 +390,7 @@ MonoBehaviour:
       MinimumLineRadius: 0
       MinimumRadialRange: 0
       MinimumRange: 0
+      FiringArcDegrees: 170
       MaximumFootprintAspectRatio: 3
       EffectIds:
       - effect.stapler.slow
@@ -429,6 +435,7 @@ MonoBehaviour:
       MinimumLineRadius: 0
       MinimumRadialRange: 0
       MinimumRange: 0
+      FiringArcDegrees: 180
       MaximumFootprintAspectRatio: 3
       EffectIds: []
       LegacyKind: 8

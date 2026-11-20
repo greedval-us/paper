@@ -53,6 +53,31 @@ namespace PaperDefense.Tests
             Assert.That(actions, Is.EqualTo(1)); Assert.That(results, Is.GreaterThan(0));
         }
 
+        [TestCase(AttackKind.Line, .925f)]
+        [TestCase(AttackKind.Single, .85f)]
+        [TestCase(AttackKind.Cone, .85f)]
+        [TestCase(AttackKind.Ricochet, .85f)]
+        [TestCase(AttackKind.Radial, .85f)]
+        [TestCase(AttackKind.AreaProjectile, .85f)]
+        public void OnlyLineGeometryPiercesArmorIncludingWeaponsWithCustomIds(AttackKind attack, float fraction)
+        {
+            var balance = GameBalance.CreateDefault();
+            balance.EnableEnemyMechanics = true;
+            var input = Catalog(balance);
+            var weapon = AddWeapon(input, "weapon.test.armor", attack);
+            weapon.Stats.Radius = 4;
+            balance.Content = input.CreateSnapshot();
+            var enemy = Enemy(1, 12, 10.5f);
+            enemy.DrawingTier = DrawingTier.Hatched;
+            var enemies = new List<EnemyState> { enemy };
+            var system = new WeaponSystem(balance);
+            var stats = new RunStatistics();
+            var events = new SimulationEventBuffer();
+            Fire(system, Tower(Blueprint(balance, weapon.Id)), enemies, stats, events);
+            system.Fire(new List<StructureState>(), enemies, new List<ShotEvent>(), 1, 1, 1, 2, stats, events);
+            Assert.That(stats.Damage(weapon.Id), Is.EqualTo(weapon.Stats.Damage * fraction).Within(.001f));
+        }
+
         [Test]
         public void NewSingleWeaponUsesItsIdForRealDamageAndIndependentSlow()
         {
@@ -120,7 +145,7 @@ namespace PaperDefense.Tests
             foreach(var definition in balance.EnemyDefinitions){definition.MaxHealth=100;definition.Speed=definition.Damage=0;}
             balance.Waves=new List<WaveDefinition>{new WaveDefinition{Count=1}};
             var session=new GameSession(balance,starterDefenses:false);session.StartNextWave();session.Tick(.01f);session.Enemies[0].Position=new Point2(12,10.5f);
-            Assert.That(session.TryBuild(new[]{new Cell(10,10)},StructureKind.Gun,MaterialTier.Pencil,out _),Is.True);
+            Assert.That(session.TryBuild(new[]{new Cell(10,10)},StructureKind.Gun,MaterialTier.Pencil,out _,facingDegrees:0),Is.True);
             var exposed=session.Balance;exposed.Structure(StructureKind.Gun).Damage=999;exposed.Progression.DeepInkDamageMultiplier=999;exposed.Content=null;
             session.Tick(.01f);
             Assert.That(session.Enemies[0].Health,Is.EqualTo(88));Assert.That(session.Balance.Structure(StructureKind.Gun).Damage,Is.EqualTo(12));Assert.That(session.Balance.Content,Is.Not.Null);
@@ -227,9 +252,10 @@ namespace PaperDefense.Tests
                 new StatModifierInput{Stat=ModifierStat.WeaponRange,Operation=ModifierOperation.Add,Scope=ModifierScope.AllWeapons,Value=2}}});balance.Content=input.CreateSnapshot();
             var blueprint=Blueprint(balance,weapon.Id,modules:new[]{new ModuleSelection("radial","module.test.radial")});
             Assert.That(TowerCatalog.WeaponRange(blueprint,balance,weapon.Id),Is.EqualTo(3));
-            var enemies=new List<EnemyState>{Enemy(1,13,10.5f),Enemy(2,14,10.5f)};
+            var enemies=new List<EnemyState>{Enemy(1,13,10.5f),Enemy(2,14,10.5f),Enemy(3,8,10.5f)};
             Fire(new WeaponSystem(balance),Tower(blueprint),enemies,new RunStatistics(),new SimulationEventBuffer());
             Assert.That(enemies[0].Health,Is.EqualTo(89));Assert.That(enemies[1].Health,Is.EqualTo(100));
+            Assert.That(enemies[2].Health,Is.EqualTo(89),"A radial trap also hits behind its foundation.");
         }
         [Test]
         public void TooManyGenericModuleBindingsBlockAssemblyWithoutDeletingTheStoredPage()

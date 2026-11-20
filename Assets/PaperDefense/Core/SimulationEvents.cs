@@ -10,7 +10,9 @@ namespace PaperDefense.Core
         WeaponActionStarted = 4, EnemyAttack = 5, EnemyHit = 6, EnemyDied = 7,
         BlotSpawned = 8, BlotExpired = 9, BlotCleared = 10, BlotAbsorbed = 11,
         EnemyGlobLaunched = 12, EnemyGlobImpact = 13, BaseHit = 14, InkWellHit = 15, InkWellActivated = 16,
-        StructureErased = 17, StructureCompleted = 18
+        StructureErased = 17, StructureCompleted = 18,
+        StructureHit = 19, RepairApplied = 20, GeneratorPaid = 21, SlowApplied = 22, ModernizationStarted = 23, ModernizationCompleted = 24,
+        SpikesTriggered = 25, BeaconMarked = 26, PrismPulsed = 27
     }
 
     public readonly struct SimulationEvent
@@ -22,6 +24,8 @@ namespace PaperDefense.Core
         public readonly string WeaponId;
         public readonly AttackKind Attack;
         public readonly float Radius, TravelSeconds;
+        /// <summary>Actual damage, restored health, paid ink or applied speed multiplier.</summary>
+        public readonly float Magnitude;
         public readonly int EntityId;
         public readonly int SourceStructureId, MountSlotIndex;
         public readonly long ActionId;
@@ -31,12 +35,14 @@ namespace PaperDefense.Core
         public readonly DrawingTier EnemyDrawingTier;
         public readonly float EnemyVisualScale;
         public readonly FootprintGeometry? ImpactFootprint;
+        /// <summary>Immutable active color captured by this action, launch or hit; never inferred from its current source.</summary>
+        public readonly ColorEffectPayload ColorEffect;
         internal SimulationEvent(long sequence,long tick,SimulationEventKind kind,Point2 from,Point2 to,
             StructureKind weapon,float radius,int entityId,float travelSeconds,FootprintGeometry? impactFootprint = null,string weaponId=null,
             int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0,double simulationSeconds=0,
-            EnemyKind enemyKind=default,DrawingTier enemyDrawingTier=default,float enemyVisualScale=1,AttackKind? attack=null)
+            EnemyKind enemyKind=default,DrawingTier enemyDrawingTier=default,float enemyVisualScale=1,AttackKind? attack=null,float magnitude=0,ColorEffectPayload colorEffect=default)
         {Sequence=sequence;Tick=tick;Kind=kind;From=from;To=to;Weapon=weapon;WeaponId=weaponId??LegacyContentIds.Weapon(weapon);Radius=radius;EntityId=entityId;TravelSeconds=travelSeconds;ImpactFootprint=impactFootprint;
-            SourceStructureId=sourceStructureId;MountSlotIndex=mountSlotIndex;ActionId=actionId;SimulationSeconds=simulationSeconds;EnemyKind=enemyKind;EnemyDrawingTier=enemyDrawingTier;EnemyVisualScale=enemyVisualScale;Attack=attack??LegacyContentCatalog.Attack(weapon);}
+            SourceStructureId=sourceStructureId;MountSlotIndex=mountSlotIndex;ActionId=actionId;SimulationSeconds=simulationSeconds;EnemyKind=enemyKind;EnemyDrawingTier=enemyDrawingTier;EnemyVisualScale=enemyVisualScale;Attack=attack??LegacyContentCatalog.Attack(weapon);Magnitude=magnitude;ColorEffect=colorEffect;}
     }
 
     /// <summary>Bounded visual history. Losing old marks never changes simulation outcomes.</summary>
@@ -50,15 +56,21 @@ namespace PaperDefense.Core
         public int Capacity=>items.Length;
         public IReadOnlyList<SimulationEvent> Items=>this;
         public SimulationEventBuffer(int capacity=512) {items=new SimulationEvent[Math.Max(1,capacity)];}
+        internal void RestoreCheckpointSequence(long latest, long dropped)
+        {
+            if (latest < 0 || dropped < 0 || dropped > latest) throw new ArgumentOutOfRangeException(nameof(latest));
+            Array.Clear(items, 0, items.Length); start = count = 0;
+            LatestSequence = latest; DroppedEventCount = dropped;
+        }
         public SimulationEvent this[int index]
         {get {if(index<0||index>=count)throw new ArgumentOutOfRangeException(nameof(index));return items[(start+index)%items.Length];}}
         public void Publish(long tick,SimulationEventKind kind,Point2 from,Point2 to,StructureKind weapon,
             float radius=0,int entityId=0,float travelSeconds=0,FootprintGeometry? impactFootprint = null,string weaponId=null,
             int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0,double simulationSeconds=0,
-            EnemyKind enemyKind=default,DrawingTier enemyDrawingTier=default,float enemyVisualScale=1,AttackKind? attack=null)
+            EnemyKind enemyKind=default,DrawingTier enemyDrawingTier=default,float enemyVisualScale=1,AttackKind? attack=null,float magnitude=0,ColorEffectPayload colorEffect=default)
         {
             var value=new SimulationEvent(++LatestSequence,tick,kind,from,to,weapon,radius,entityId,travelSeconds,impactFootprint,weaponId,
-                sourceStructureId,mountSlotIndex,actionId,simulationSeconds,enemyKind,enemyDrawingTier,enemyVisualScale,attack);
+                sourceStructureId,mountSlotIndex,actionId,simulationSeconds,enemyKind,enemyDrawingTier,enemyVisualScale,attack,magnitude,colorEffect);
             if(count<items.Length) items[(start+count++)%items.Length]=value;
             else {items[start]=value;start=(start+1)%items.Length;DroppedEventCount++;}
         }

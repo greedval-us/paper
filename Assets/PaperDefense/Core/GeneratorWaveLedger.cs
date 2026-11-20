@@ -6,6 +6,14 @@ namespace PaperDefense.Core
     /// <summary>One run's current wave eligibility. Retired waves cannot reopen, so no payout history accumulates.</summary>
     public sealed class GeneratorWaveLedger
     {
+        internal readonly struct GeneratorPayout
+        {
+            internal readonly StructureState Source;
+            internal readonly int Ink;
+            internal GeneratorPayout(StructureState source, int ink) { Source = source; Ink = ink; }
+        }
+        readonly List<GeneratorPayout> payouts = new List<GeneratorPayout>(2);
+        internal IReadOnlyList<GeneratorPayout> LastPayouts => payouts;
         readonly struct GeneratorAtStart
         {
             public StructureState Entity { get; }
@@ -35,6 +43,7 @@ namespace PaperDefense.Core
         public int CompleteWave(Guid runId, int waveIndex, IReadOnlyList<StructureState> structures)
         {
             Validate(runId, waveIndex, structures);
+            payouts.Clear();
             if (runId != boundRun || waveIndex != latestWave || completed) return 0;
 
             long income = 0;
@@ -45,7 +54,9 @@ namespace PaperDefense.Core
                     !eligible.TryGetValue(structure.Id, out var original) || !ReferenceEquals(original.Entity, structure)) continue;
                 paid.Add(structure.Id);
                 if (structure.GeneratorPaidWaves < int.MaxValue) structure.GeneratorPaidWaves++;
-                income = Math.Min(int.MaxValue, income + original.Income);
+                int amount = (int)Math.Min(int.MaxValue - income, original.Income);
+                income += amount;
+                if (amount > 0) payouts.Add(new GeneratorPayout(structure, amount));
             }
             completed = true; eligible.Clear();
             return (int)income;

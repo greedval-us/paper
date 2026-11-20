@@ -49,7 +49,7 @@ namespace PaperDefense.Core
             }
             if (Kind != AlbumEntryKind.Structure || Structure == null || AssemblyProfileDataCopy.HasFoundation(Foundation) || (Mounts != null && Mounts.Length != 0))
                 throw new ArgumentException("Invalid assembly recipe payload.");
-            if (!Enum.IsDefined(typeof(AssemblyStructureFamily), Structure.Family) || Structure.Family == AssemblyStructureFamily.All)
+            if (Structure.Family != AssemblyStructureFamily.None && !StructureRecipe.IsKnownFamily(Structure.Family))
                 throw new NotSupportedException("Unknown structure family.");
             return new AssemblyRecipe(new StructureRecipe(Structure.Family,
                 AssemblyProfileDataCopy.ReadPart(Structure.Site), AssemblyProfileDataCopy.ReadPart(Structure.Function),
@@ -232,6 +232,17 @@ namespace PaperDefense.Core
         {
             if (data == null) return;
             FutureVersion(data.Version, WorkshopProfile.CurrentVersion);
+            if (data.MissionCheckpoint != null) FutureVersion(data.MissionCheckpoint.Version, 1);
+            if(data.Campaign!=null)
+            {
+                FutureVersion(data.Campaign.Version,1);
+                foreach(var mission in data.Campaign.Missions??Array.Empty<CampaignMissionStateData>())
+                    if(mission!=null)FutureVersion(mission.Version,1);
+            }
+            foreach(var receipt in data.CampaignRewards??Array.Empty<CampaignRunRewardData>())
+                if(receipt!=null)FutureVersion(receipt.Version,1);
+            foreach (var loadout in data.NamedLoadouts ?? Array.Empty<NamedLoadoutData>())
+                if (loadout != null) FutureVersion(loadout.Version, 1);
             // This pass deliberately ignores missing fields, invalid amounts and malformed
             // siblings. Every collection must be scanned before structural reading can fail.
             foreach (var entry in data.Entries ?? Array.Empty<AlbumEntryData>()) GuardFuture(entry);
@@ -260,9 +271,7 @@ namespace PaperDefense.Core
         {
             if (data == null) return;
             EntryKind(data.Kind);
-            if (data.Structure != null && data.Structure.Family != AssemblyStructureFamily.None &&
-                data.Structure.Family != AssemblyStructureFamily.Wall && data.Structure.Family != AssemblyStructureFamily.Slow &&
-                data.Structure.Family != AssemblyStructureFamily.Repair && data.Structure.Family != AssemblyStructureFamily.Generator)
+            if (data.Structure != null && data.Structure.Family != AssemblyStructureFamily.None && !StructureRecipe.IsKnownFamily(data.Structure.Family))
                 throw new NotSupportedException("Unknown structure family.");
         }
         internal static void GuardFuture(ComponentLibraryEntryData data)
@@ -300,6 +309,7 @@ namespace PaperDefense.Core
         {
             if (recipe == null) yield break;
             yield return recipe.Mechanism; yield return recipe.Head; yield return recipe.Sight; yield return recipe.Magazine; yield return recipe.Trigger;
+            yield return recipe.Mount;
         }
         static void GuardUnknownParts(IEnumerable<PartRefInput> parts, ComponentDefinitionInput[] definitions)
         {
@@ -368,7 +378,7 @@ namespace PaperDefense.Core
         internal static FoundationRecipeInput Foundation(FoundationRecipe recipe) => new FoundationRecipeInput
         { Frame = Part(recipe.Frame), Hull = Part(recipe.Hull), Armor = Part(recipe.Armor), Feed = Part(recipe.Feed), Turn = Part(recipe.Turn) };
         internal static WeaponRecipeInput Weapon(WeaponRecipe recipe) => new WeaponRecipeInput
-        { Mechanism = Part(recipe.Mechanism), Head = Part(recipe.Head), Sight = Part(recipe.Sight), Magazine = Part(recipe.Magazine), Trigger = Part(recipe.Trigger) };
+        { Mechanism = Part(recipe.Mechanism), Head = Part(recipe.Head), Sight = Part(recipe.Sight), Magazine = Part(recipe.Magazine), Trigger = Part(recipe.Trigger), Mount = recipe.Mount.HasValue ? Part(recipe.Mount.Value) : null };
         internal static FoundationRecipe ReadFoundation(FoundationRecipeInput recipe)
         {
             if (recipe == null) throw new ArgumentException("Missing foundation recipe.");
@@ -377,7 +387,7 @@ namespace PaperDefense.Core
         internal static WeaponRecipe ReadWeapon(WeaponRecipeInput recipe)
         {
             if (recipe == null) throw new ArgumentException("Missing weapon recipe.");
-            return new WeaponRecipe(ReadPart(recipe.Mechanism), ReadPart(recipe.Head), ReadPart(recipe.Sight), ReadPart(recipe.Magazine), ReadPart(recipe.Trigger));
+            return new WeaponRecipe(ReadPart(recipe.Mechanism), ReadPart(recipe.Head), ReadPart(recipe.Sight), ReadPart(recipe.Magazine), ReadPart(recipe.Trigger), recipe.Mount?.CreateOptionalSnapshot());
         }
         // Unity may materialize empty inline variant objects on a JSON round trip.
         static bool HasPart(params PartRefInput[] parts)
@@ -385,7 +395,7 @@ namespace PaperDefense.Core
         internal static bool HasFoundation(FoundationRecipeInput recipe)
             => recipe != null && HasPart(recipe.Frame, recipe.Hull, recipe.Armor, recipe.Feed, recipe.Turn);
         internal static bool HasWeapon(WeaponRecipeInput recipe)
-            => recipe != null && HasPart(recipe.Mechanism, recipe.Head, recipe.Sight, recipe.Magazine, recipe.Trigger);
+            => recipe != null && HasPart(recipe.Mechanism, recipe.Head, recipe.Sight, recipe.Magazine, recipe.Trigger, recipe.Mount);
         internal static bool HasStructure(StructureRecipeInput recipe)
             => recipe != null && (recipe.Family != AssemblyStructureFamily.None || HasPart(recipe.Site, recipe.Function, recipe.Shell, recipe.Utility));
         internal static bool HasSnapshot(RecipeSnapshotData snapshot)

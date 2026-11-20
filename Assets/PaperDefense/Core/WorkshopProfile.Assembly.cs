@@ -25,6 +25,8 @@ namespace PaperDefense.Core
             code = "";
             if (part == null) { code = "profile.part.missing"; return false; }
             if (unlocked.Contains(part.Id)) return true;
+            var family = GetStructureOffer(part.StructureFamilies);
+            if (family.RightId != null && !family.Owned) { code = "profile.structure.locked"; return false; }
             if (MetaProgression.LevelForXp(TotalXp) < part.RequiredLevel) { code = "profile.part.level"; return false; }
             if (Gold < part.UnlockGold) { code = "profile.part.gold"; return false; }
             Gold -= part.UnlockGold;
@@ -38,6 +40,7 @@ namespace PaperDefense.Core
             if (operationId == Guid.Empty) { code = "profile.operation.invalid"; return false; }
             if (input == null) { code = "profile.entry.missing"; return false; }
             if (input.Kind == AlbumEntryKind.Legacy) { code = "profile.entry.legacy_readonly"; return false; }
+            if (!OwnsStructureRecipe(input.Snapshot.Recipe)) { code = "profile.structure.locked"; return false; }
             string targetId = asVariant ? operationId.ToString("N") : input.Id;
             if (!ValidAssemblyEntryId(targetId)) { code = "profile.entry.identity"; return false; }
             int index = entries.FindIndex(e => e.Id == targetId);
@@ -107,6 +110,7 @@ namespace PaperDefense.Core
             entries.RemoveAt(index);
             album.RemoveAll(blueprint => blueprint.Id == id);
             for (int slot = 0; slot < loadout.Length; slot++) if (loadout[slot] == id) loadout[slot] = null;
+            ClearNamedLoadoutReferences(id);
             return true;
         }
 
@@ -123,7 +127,9 @@ namespace PaperDefense.Core
             code = "";
             if (slot < 0 || slot >= loadout.Length) { code = "profile.slot.invalid"; return false; }
             if (id == null) { loadout[slot] = null; return true; }
-            if (!entries.Exists(entry => entry.Id == id)) { code = "profile.entry.missing"; return false; }
+            var entry = entries.Find(value => value.Id == id);
+            if (entry == null) { code = "profile.entry.missing"; return false; }
+            if (!OwnsStructureRecipe(entry.Snapshot?.Recipe)) { code = "profile.structure.locked"; return false; }
             for (int previous = 0; previous < loadout.Length; previous++) if (loadout[previous] == id) loadout[previous] = null;
             loadout[slot] = id;
             return true;

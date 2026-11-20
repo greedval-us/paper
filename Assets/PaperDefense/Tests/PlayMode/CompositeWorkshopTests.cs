@@ -109,7 +109,7 @@ namespace PaperDefense.Tests
             }
         }
 
-        [TestCase("foundation", 5)] [TestCase("weapon", 5)] [TestCase("structure", 4)]
+        [TestCase("foundation", 5)] [TestCase("weapon", 6)] [TestCase("structure", 4)]
         public void NestedEditorHasTheRequiredCategoriesAndSharedPreview(string component, int count)
         {
             using (var fixture = new AssemblyCommandFixture())
@@ -170,7 +170,7 @@ namespace PaperDefense.Tests
                 Assert.That(fixture.State(), Is.EqualTo(profile)); Assert.That(fixture.SavedBytes, Is.EqualTo(disk));
                 fixture.Store.RefuseWrites = false;
                 Assert.That(draft.SaveComponent(operation).Success, Is.True);
-                Assert.That(fixture.Run.Workshop.Library.Count, Is.EqualTo(1));
+                Assert.That(fixture.Run.Workshop.Library.Count, Is.EqualTo(5));
             }
         }
 
@@ -183,7 +183,7 @@ namespace PaperDefense.Tests
                 draft.OpenStructure(); Assert.That(draft.SelectPart("utility.none"), Is.True);
                 Assert.That(draft.SaveComponent(Guid.NewGuid()).Success, Is.True);
                 Assert.That(draft.IsComponentOpen, Is.False); Assert.That(draft.Draft.Kind, Is.EqualTo(AlbumEntryKind.Structure));
-                Assert.That(fixture.Store.SaveCalls, Is.Zero); Assert.That(fixture.Run.Workshop.Library, Is.Empty);
+                Assert.That(fixture.Store.SaveCalls, Is.Zero); Assert.That(fixture.Run.Workshop.Library.Count, Is.EqualTo(4));
             }
         }
 
@@ -227,7 +227,7 @@ namespace PaperDefense.Tests
             {
                 var component = fixture.Foundation("library.copy", plated: true);
                 Assert.That(fixture.Commands.SaveLibraryEntry(component, Guid.NewGuid()).Success, Is.True);
-                component = fixture.Run.Workshop.Library.Single();
+                component = fixture.Run.Workshop.Library.Single(entry => entry.Id == component.Id);
                 var draft = new WorkshopDraftSession(fixture.Run); draft.Begin(fixture.Gun());
                 int writes = fixture.Store.SaveCalls;
                 Assert.That(draft.ApplyLibrary(component, -1), Is.True);

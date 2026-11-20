@@ -37,6 +37,7 @@ namespace PaperDefense.Presentation
         {
             board = root; composite = panel; scaler = GetComponent<CanvasScaler>();
             Apply();
+            lastSignature = Screen.width * 397 ^ Screen.height;
         }
         void LateUpdate()
         {
@@ -206,7 +207,7 @@ namespace PaperDefense.Presentation
             float rightW = (w - 66) * .44f, actionW = (rightW - 14) / 2;
             Place("Start run", new Rect(offset + w - 24 - rightW, h - 74, actionW, 50));
             Place("Wizard next", new Rect(offset + w - 24 - actionW, h - 74, actionW, 50));
-            var hand = Resources.Load<Font>("NotebookHand");
+            var hand = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             StyleHeaderButton("Start run", null, hand, compact ? 24 : 29);
             var nextButton = Find("Wizard next");
             var nextCaption = nextButton.Find("Caption").GetComponent<Text>();
@@ -246,7 +247,7 @@ namespace PaperDefense.Presentation
                 foundationHeaderApplied = true;
             }
             Visible("Wizard title", false);
-            var hand = Resources.Load<Font>("NotebookHand");
+            var hand = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             Place("Wizard back", new Rect(offset + 24, 8, 238, 52));
             StyleHeaderButton("Wizard back", "Мастерская", hand, 31);
             Place("Wizard album", new Rect(offset + w - 224, 8, 200, 52));

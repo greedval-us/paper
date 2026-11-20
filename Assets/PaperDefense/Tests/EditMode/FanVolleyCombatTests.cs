@@ -29,6 +29,16 @@ namespace PaperDefense.Tests
             Assert.That(shots.Count,Is.EqualTo(6));Assert.That(enemies[0].Health,Is.EqualTo(100));
             foreach(var shot in shots){Assert.That(shot.MountSlotIndex,Is.EqualTo(1));float x=shot.To.X-shot.From.X,y=shot.To.Y-shot.From.Y;Assert.That(x*x+y*y,Is.EqualTo(36).Within(.0001));}
         }
+        [Test] public void GuidesAtTheTraverseStopCannotFireBehindTheTower()
+        {
+            var edgeTarget = Enemy(1, 10.5f, 13.5f);
+            var behind = Enemy(2, 9.5f, 12.5f);
+            var enemies = new List<EnemyState> { edgeTarget, behind };
+            var shots = Fire(new FanVolley(new[] { FanGuide.FromAngle(-30), FanGuide.FromAngle(30) }), enemies);
+            Assert.That(shots, Has.Count.EqualTo(6));
+            Assert.That(shots.All(shot => shot.To.X >= shot.From.X - .00001f), Is.True);
+            Assert.That(behind.Health, Is.EqualTo(100));
+        }
         [Test] public void KillingFrontTargetDoesNotMakeSimultaneousPelletsPierceIt()
         {
             var enemies=new List<EnemyState>{Enemy(1,12.5f,10.5f,10),Enemy(2,14.5f,10.5f)};

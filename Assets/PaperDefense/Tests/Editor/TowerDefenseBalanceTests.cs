@@ -76,7 +76,8 @@ namespace PaperDefense.Tests
             }
             var game=new GameSession(b,17,false);
             foreach(var cell in new[]{new Cell(44,28),new Cell(52,28),new Cell(44,36),new Cell(52,36),new Cell(48,26),new Cell(48,38),new Cell(42,32),new Cell(54,32)})
-                Assert.That(game.TryBuildBlueprint(new[]{cell},loadout[0],MaterialTier.Pencil,InkColor.None,out string reason),Is.True,reason);
+                Assert.That(game.TryBuildBlueprint(new[]{cell},loadout[0],MaterialTier.Pencil,InkColor.None,out string reason,
+                    facingDegrees:BattleFacingOrders.Toward(cell,game.BaseCell)),Is.True,reason);
             Assert.That(b.StartingInk-game.Ink,Is.EqualTo(320));
             game.Tick(3);CompleteWave(game,b);
             Assert.That(game.Phase,Is.EqualTo(RunPhase.Intermission));
@@ -140,7 +141,8 @@ namespace PaperDefense.Tests
                             var artilleryQuote = game.QuoteBlueprint(new[] { artilleryCell }, loadout[3], MaterialTier.Pencil, InkColor.None);
                             if (!artilleryQuote.Valid && artilleryQuote.Cost > game.Ink) continue;
                             Assert.That(artilleryQuote.Valid, Is.True, artilleryQuote.Reason);
-                            Assert.That(game.TryBuildBlueprint(new[] { artilleryCell }, loadout[3], MaterialTier.Pencil, InkColor.None, out string artilleryReason), Is.True, artilleryReason);
+                            Assert.That(game.TryBuildBlueprint(new[] { artilleryCell }, loadout[3], MaterialTier.Pencil, InkColor.None, out string artilleryReason,
+                                facingDegrees:artilleryCell.Y<game.BaseCell.Y?270:90), Is.True, artilleryReason);
                             Assert.That(game.Ink, Is.GreaterThanOrEqualTo(0));
                         }
                     }
@@ -152,7 +154,8 @@ namespace PaperDefense.Tests
                     var quote=game.QuoteBlueprint(new[]{cell},bp,MaterialTier.Pencil,InkColor.None);
                     if(!quote.Valid&&quote.Cost>game.Ink)break;
                     Assert.That(quote.Valid,Is.True,$"Plan cell {cell}: {quote.Reason}");
-                    Assert.That(game.TryBuildBlueprint(new[]{cell},bp,MaterialTier.Pencil,InkColor.None,out string reason),Is.True,reason);
+                    Assert.That(game.TryBuildBlueprint(new[]{cell},bp,MaterialTier.Pencil,InkColor.None,out string reason,
+                        facingDegrees:BattleFacingOrders.Toward(cell,game.BaseCell)+(cursor>=8?180:0)),Is.True,reason);
                     Assert.That(game.Ink,Is.GreaterThanOrEqualTo(0));
                 }
                 game.Tick(3);CompleteWave(game,b,loadout);expectedKills+=b.Waves[wave].Count;
@@ -180,9 +183,9 @@ namespace PaperDefense.Tests
             {
                 game.Tick(balance.SimulationStep);
                 // Broad fronts require player responses during the wave as well as a fixed
-                // opening. Spend only earned ink, at most four ordinary towers per wave.
-                bool needsResponse = (game.RemainingToSpawn == 0 && game.Enemies.Count <= 3) || game.BaseHealth < balance.BaseHealth;
-                if (reinforcementLoadout != null && game.WaveIndex >= 3 && needsResponse && steps % 900 == 0 && reinforcements < 4 &&
+                // opening. Pay for ordinary reinforcements covering the surviving attackers.
+                bool needsResponse = game.RemainingToSpawn == 0 || game.BaseHealth < balance.BaseHealth;
+                if (reinforcementLoadout != null && game.WaveIndex >= 3 && needsResponse && steps % 240 == 0 && reinforcements < 12 &&
                     ReinforceThreat(game, reinforcementLoadout)) reinforcements++;
             }
             if (game.Phase == RunPhase.Assault)
@@ -216,7 +219,7 @@ namespace PaperDefense.Tests
             // damaged-health refund. Never grant ink or remove an enemy to end the wave.
             for(int salvage=0;TowerCatalog.Cost(blueprint,balance,MaterialTier.Pencil)>game.Ink&&salvage<3;salvage++)
             {
-                if(game.RemainingToSpawn!=0||game.Enemies.Count>3||threat.Kind!=EnemyKind.Spitter)return false;
+                if(game.RemainingToSpawn!=0||threat.Kind!=EnemyKind.Spitter)return false;
                 StructureState candidate=null;float farthest=0;
                 foreach(var structure in game.Structures)
                 {
@@ -246,7 +249,8 @@ namespace PaperDefense.Tests
                 var quote=game.QuoteBlueprint(cells,blueprint,MaterialTier.Pencil,InkColor.None);
                 if(!quote.Valid)continue;
                 int before=game.Ink;
-                Assert.That(game.TryBuildBlueprint(cells,blueprint,MaterialTier.Pencil,InkColor.None,out string reason),Is.True,reason);
+                Assert.That(game.TryBuildBlueprint(cells,blueprint,MaterialTier.Pencil,InkColor.None,out string reason,
+                    facingDegrees:BattleFacingOrders.Toward(cells[0],threat.Position)),Is.True,reason);
                 Assert.That(game.Ink,Is.EqualTo(before-quote.Cost).And.GreaterThanOrEqualTo(0));
                 TestContext.WriteLine($"Wave {game.WaveIndex}: reinforce {cells[0]} for {quote.Cost} earned ink.");
                 return true;

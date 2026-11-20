@@ -59,7 +59,8 @@ namespace PaperDefense.Tests
                 Assert.That(run.Session.Battlefield.Entrances.Count(cell => run.Session.Battlefield.Side(cell) == side), Is.GreaterThanOrEqualTo(3));
             var theme = NotebookVisualThemeAsset.Default;
             string[] icons = { "wall", "spikes", "erase", "upgrade", "blotter", "paint", "tar", "repair" };
-            foreach (string icon in icons) Assert.That(theme.FindShape("ui.tool." + icon), Is.Not.Null, icon);
+            foreach (string icon in new[] { "wall", "spikes", "tar", "repair" })
+                Assert.That(theme.FindShape("ui.tool." + icon), Is.Not.Null, icon);
             foreach (EnemyKind kind in Enum.GetValues(typeof(EnemyKind)))
                 foreach (DrawingTier tier in Enum.GetValues(typeof(DrawingTier)))
                     foreach (NotebookEnemyMotion motion in Enum.GetValues(typeof(NotebookEnemyMotion)))
@@ -74,7 +75,24 @@ namespace PaperDefense.Tests
                 if (i > 0) Assert.That(ordered[i].anchoredPosition.x, Is.GreaterThan(ordered[i - 1].anchoredPosition.x + ordered[i - 1].rect.width));
             }
             Assert.That(cards.Take(ProfileLimits.LoadoutSlotCount).All(card => card.GetComponentInChildren<BlueprintSketch>(true) != null), Is.True);
-            Assert.That(cards.Skip(ProfileLimits.LoadoutSlotCount).All(card => card.GetComponentInChildren<NotebookArtGraphic>(true) != null), Is.True);
+            root.SetActive(true); Canvas.ForceUpdateCanvases();
+            var actionRoles = new[] { PlayerIcon.Trash, PlayerIcon.Plus, PlayerIcon.Drop, PlayerIcon.Pencil };
+            for (int index = 0; index < actionRoles.Length; index++)
+            {
+                var action = cards[ProfileLimits.LoadoutSlotCount + 2 + index];
+                var symbol = action.GetComponentInChildren<PlayerIconGraphic>(true);
+                Assert.That(symbol, Is.Not.Null, "An action command needs a native control symbol.");
+                Assert.That(symbol.Icon, Is.EqualTo(actionRoles[index]));
+                Assert.That(symbol.canvasRenderer.GetMesh()?.vertexCount ?? 0, Is.GreaterThan(0));
+                Assert.That(BattleHudThemeEvidence.Contrast(symbol.color, action.GetComponent<Image>().color), Is.GreaterThanOrEqualTo(4.5f));
+            }
+            foreach (int index in new[] { ProfileLimits.LoadoutSlotCount, ProfileLimits.LoadoutSlotCount + 1,
+                ProfileLimits.LoadoutSlotCount + 6, ProfileLimits.LoadoutSlotCount + 7 })
+            {
+                Assert.That(cards[index].GetComponentInChildren<NotebookArtGraphic>(true), Is.Not.Null);
+                Assert.That(cards[index].GetComponentInChildren<NightNotebookPaperGraphic>(), Is.Not.Null,
+                    "Standard light ink needs a local dark sheet on the historical pale controls.");
+            }
             foreach (var card in cards)
             {
                 var bounds = card.GetComponent<RectTransform>();
@@ -142,17 +160,18 @@ namespace PaperDefense.Tests
             .Invoke(new object[] { new EnemyState { Id = 1, Kind = EnemyKind.Brute, Health = 100, MaxHealth = 100, VisualScale = scale, Position = new Point2(10, 10) } });
 
         [TestCase(false)] [TestCase(true)]
-        public void LiveAndCrowdEnemiesUseAtlasArtworkPreserveScaleAndRenderFullHealthBars(bool compact)
+        public void LiveAndCrowdEnemiesUseNativeGeometryPreserveScaleAndRenderFullHealthBars(bool compact)
         {
             var mesh = new Mesh();
             try
             {
-                Assert.That(NotebookSpriteCatalog.Available, Is.True);
+                Assert.That(NotebookVisualThemeAsset.Default.FindShape("enemy.brute.sketch.idle"), Is.Not.Null);
                 var pen = new MeshPen(mesh); DoodleGlyphs.Enemy(pen, Enemy(1), 0, compact); pen.Upload();
                 var first = mesh.bounds;
                 var atlas = new System.Collections.Generic.List<Vector2>(); mesh.GetUVs(1, atlas);
-                Assert.That(atlas.Count(value => value != NotebookSpriteCatalog.WhiteUV), Is.GreaterThanOrEqualTo(4),
-                    "Large crowds must retain the same new enemy artwork as individual enemies.");
+                Assert.That(atlas.Count, Is.GreaterThan(4));
+                Assert.That(atlas, Is.All.EqualTo(new Vector2(.5f, .5f)),
+                    "Large crowds and individual enemies use the same texture-free symbols.");
                 Assert.That(mesh.colors32.Any(color => color.Equals((Color32)NotebookPalette.Green)), Is.True, "A full HP bar is visible before damage.");
                 pen.Clear(); DoodleGlyphs.Enemy(pen, Enemy(2.4f), 0, compact); pen.Upload();
                 Assert.That(mesh.bounds.size.x, Is.GreaterThan(first.size.x * 2));

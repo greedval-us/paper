@@ -50,10 +50,7 @@ namespace PaperDefense.Tests
                 Assert.That(Vector2.Distance(actual.Anchors.Single().Muzzle, expected.Anchors.Single().Muzzle), Is.LessThan(.000001f));
                 Assert.That(actual.Anchors.Single().Muzzle.x, Is.GreaterThan(actual.Anchors.Single().RotationCenter.x));
                 Assert.That(actual.Anchors.Single().Muzzle.y, Is.GreaterThan(actual.Anchors.Single().RotationCenter.y));
-                var manifest = JsonUtility.FromJson<AssemblyVisualComposer.Manifest>(Resources.Load<TextAsset>("Art/NotebookMounts").text);
-                foreach (var fixedPart in rest.Fragments.Where(fragment => fragment.SlotIndex < 0 ||
-                    manifest.visualParts.Single(part => part.partId == fragment.PartId).fragments
-                        .Single(source => source.spriteId == fragment.SpriteId).motion == "fixed"))
+                foreach (var fixedPart in rest.Fragments.Where(fragment => fragment.SlotIndex < 0))
                 {
                     var shown = actual.Fragments.Single(fragment => Key(fragment) == Key(fixedPart));
                     Assert.That(shown.Origin, Is.EqualTo(fixedPart.Origin), fixedPart.PartId);
@@ -70,9 +67,7 @@ namespace PaperDefense.Tests
         {
             var snapshot = Snapshot(family); var weapon = snapshot.Recipe.Tower.Mounts.Single().Weapon;
             var pose = new AssemblyVisualPose(new[] { new AssemblyMountPose(0, DisplayAngle) });
-            var overload = typeof(AssemblyVisualComposer).GetMethod("ComposeWeapon", new[] { typeof(WeaponRecipe), typeof(AssemblyVisualPose) });
-            Assert.That(overload, Is.Not.Null, "Standalone cards need the same explicit pose as complete recipes.");
-            var actual = (AssemblyVisualComposition)overload.Invoke(null, new object[] { weapon, pose });
+            var actual = AssemblyVisualComposer.ComposeWeapon(weapon, pose);
             var full = AssemblyVisualComposer.Compose(snapshot, pose); var anchor = full.Anchors.Single();
             Assert.That(actual.Fragments.Count, Is.EqualTo(full.Fragments.Count(fragment => fragment.SlotIndex == 0)));
             foreach (var fragment in actual.Fragments)
@@ -112,13 +107,14 @@ namespace PaperDefense.Tests
             finally { UnityEngine.Object.DestroyImmediate(go); }
         }
 
-        [Test] public void StaticFit_UsesTheDrawnTrimRegionIntersectionOfTheWholeTree()
+        [Test] public void StaticFit_UsesTheActualPenBoundsOfTheWholeTree()
         {
             var snapshot = Snapshot("gun");
             var pose = new AssemblyVisualPose(new[] { new AssemblyMountPose(0, DisplayAngle) });
             var composition = AssemblyVisualComposer.Compose(snapshot, pose);
             Rect expected = DrawnBounds(composition);
-            Assert.That(composition.Bounds.height, Is.GreaterThan(expected.height + .005f), "The fixture must include unused swept motion space.");
+            Assert.That(expected.width, Is.GreaterThan(0));
+            Assert.That(expected.height, Is.GreaterThan(0));
             var go = new GameObject("Tight full tree", typeof(RectTransform), typeof(CanvasRenderer), typeof(WeaponAssemblyGraphic));
             try
             {
@@ -135,19 +131,10 @@ namespace PaperDefense.Tests
 
         static Rect DrawnBounds(AssemblyVisualComposition composition)
         {
-            bool any = false; Vector2 min = Vector2.zero, max = Vector2.zero;
-            foreach (var fragment in composition.Fragments)
-            {
-                var area = Rect.MinMaxRect(Mathf.Max(fragment.Trim.xMin, fragment.Region.xMin), Mathf.Max(fragment.Trim.yMin, fragment.Region.yMin),
-                    Mathf.Min(fragment.Trim.xMax, fragment.Region.xMax), Mathf.Min(fragment.Trim.yMax, fragment.Region.yMax));
-                if (area.width <= 0 || area.height <= 0) continue;
-                foreach (var corner in new[] { area.min, new Vector2(area.xMax, area.yMin), area.max, new Vector2(area.xMin, area.yMax) })
-                {
-                    var point = fragment.Transform(corner);
-                    if (!any) { min = max = point; any = true; } else { min = Vector2.Min(min, point); max = Vector2.Max(max, point); }
-                }
-            }
-            Assert.That(any, Is.True); return Rect.MinMaxRect(min.x, min.y, max.x, max.y);
+            var pen = new MeshPen(null);
+            composition.Draw(pen, Vector2.zero);
+            Assert.That(pen.TryGetBounds(out var bounds), Is.True);
+            return bounds;
         }
         static string Key(AssemblyVisualFragment fragment) => fragment.PartId + "/" + fragment.SpriteId + "/" + fragment.SlotIndex + "/" + fragment.Layer;
         static void SameFragments(AssemblyVisualComposition actual, AssemblyVisualComposition expected)

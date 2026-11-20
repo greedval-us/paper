@@ -33,7 +33,7 @@ namespace PaperDefense.Presentation
             {
                 int index=page*4+i;if(index>=count)break;var bp=matches[index];
                 var card=ui.Panel(sheet,"Wizard album card "+index,new Rect(32+i%2*637,100+i/2*214,615,195),selected==bp.Id?WorkshopUi.Selected:Color.white,true);
-                var sketch=WorkshopUi.Graphic<BlueprintSketch>(card,"Album thumbnail",new Rect(16,12,150,160));sketch.SetBlueprint(bp);
+                var sketch=WorkshopUi.Graphic<BlueprintSketch>(card,"Album thumbnail",new Rect(16,12,150,160));sketch.SetBlueprint(bp);StandardAssemblyIllustration.EnsureBlueprintPaper(sketch,bp);
                 ui.Label(card,"Album page name",bp.Name,new Rect(186,18,410,40),23);
                 var stats=run.PreviewBlueprint(bp);
                 ui.Label(card,"Album page price",T("album_price",stats.Cost),new Rect(186,65,404,36),18,color:WorkshopUi.Muted);

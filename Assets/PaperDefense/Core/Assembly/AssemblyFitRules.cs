@@ -66,6 +66,9 @@ namespace PaperDefense.Core
                 { issues.Add(new AssemblyDiagnostic("assembly.fit.coverage", path)); continue; }
                 if (socket.SocketType != weapon.MountType)
                 { issues.Add(new AssemblyDiagnostic("assembly.fit.socket_type", path, socket.SocketType, weapon.MountType)); continue; }
+                if (selected.Weapon.Mount.HasValue && fits.TryGetPart(selected.Weapon.Mount.Value.Id, selected.Weapon.Mount.Value.Revision, out var mounting)
+                    && mounting.AttachType != socket.SocketType)
+                { issues.Add(new AssemblyDiagnostic("assembly.fit.socket_type", path + ".mount", socket.SocketType, mounting.AttachType)); continue; }
                 float pivotX = socket.Position.X + weapon.Pivot.X, pivotY = socket.Position.Y + weapon.Pivot.Y;
                 if (float.IsInfinity(pivotX) || float.IsInfinity(pivotY))
                 { issues.Add(new AssemblyDiagnostic("assembly.fit.number", path)); continue; }
@@ -101,11 +104,19 @@ namespace PaperDefense.Core
             return issues.AsReadOnly();
         }
 
-        static bool Covers(IEnumerable<PartRef> recipe, IReadOnlyList<PartRef> required, IReadOnlyList<PartRef> compatible, AssemblyFitCatalog fits)
+        internal static bool Covers(IEnumerable<PartRef> recipe, IReadOnlyList<PartRef> required, IReadOnlyList<PartRef> compatible, AssemblyFitCatalog fits)
         {
             int index = 0;
             foreach (var reference in recipe)
             {
+                if (fits.TryGetPart(reference.Id, reference.Revision, out var optional) && optional.Category == ComponentCategory.Mount)
+                {
+                    bool covered = false;
+                    foreach (var allowed in compatible)
+                        if (reference.Id == allowed.Id && reference.Revision == allowed.Revision) { covered = true; break; }
+                    if (!covered) return false;
+                    continue;
+                }
                 if (index >= required.Count) return false;
                 var standard = required[index++]; bool found = reference.Id == standard.Id && reference.Revision == standard.Revision;
                 if (!fits.TryGetPart(reference.Id, reference.Revision, out var selectedPart)

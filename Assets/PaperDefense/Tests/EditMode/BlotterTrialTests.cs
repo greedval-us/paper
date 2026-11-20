@@ -70,7 +70,7 @@ namespace PaperDefense.Tests
         {
             var session = new GameSession(LiveBalance(), starterDefenses: false);
             IBlotContext context = session.CreateBlotContext();
-            Assert.That(context.TryFindNearest(new Point2(5.5f, 5.5f), 5, out _), Is.False);
+            Assert.That(context.TryFindNearest(new Point2(5.5f, 5.5f), 0, 5, default, out _), Is.False);
             session.StartNextWave(); session.Tick(.02f);
             session.Enemies[0].Position = new Point2(5.5f, 5.5f);
             session.Enemies[1].Position = new Point2(6.5f, 5.5f);
@@ -78,7 +78,7 @@ namespace PaperDefense.Tests
             session.Enemies[0].Health = session.Enemies[1].Health = 0;
             session.Tick(1f / 30);
             Assert.That(session.Blots.Count, Is.EqualTo(2));
-            Assert.That(context.TryFindNearest(new Point2(5.5f, 5.5f), 0, out Cell center), Is.True);
+            Assert.That(context.TryFindNearest(new Point2(5.5f, 5.5f), 0, 0, default, out Cell center), Is.True);
             int ink = session.Ink;
             Assert.That(context.Clear(center, 1), Is.EqualTo(2));
             Assert.That(session.Blots, Is.Empty);
@@ -90,7 +90,7 @@ namespace PaperDefense.Tests
         public void LiveAutomaticSupportCleansNearbyCorpsesWithNoEnemyInItsRange()
         {
             var session = new GameSession(LiveBalance(), starterDefenses: false);
-            Assert.That(session.TryBuildBlueprint(new[] { new Cell(8, 6) }, Support, MaterialTier.Pencil, InkColor.None, out string reason),
+            Assert.That(session.TryBuildBlueprint(new[] { new Cell(8, 6) }, Support, MaterialTier.Pencil, InkColor.None, out string reason, facingDegrees: 0),
                 Is.True, reason);
             session.StartNextWave(); session.Tick(.02f);
             session.Enemies[0].Position = new Point2(9.5f, 6.5f);

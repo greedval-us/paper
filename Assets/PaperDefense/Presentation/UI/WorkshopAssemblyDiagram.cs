@@ -42,7 +42,7 @@ namespace PaperDefense.Presentation
             else
             {
                 parts = recipe.Tower.Mounts.Single(value => value.SlotIndex == mount).Weapon.Parts.ToArray();
-                slots = new[] { new Rect(.30f,.24f,.40f,.35f), new Rect(.35f,.70f,.31f,.25f), new Rect(.77f,.72f,.21f,.20f), new Rect(.01f,.34f,.24f,.29f), new Rect(.77f,.15f,.21f,.29f) };
+                slots = new[] { new Rect(.30f,.28f,.40f,.30f), new Rect(.35f,.70f,.31f,.25f), new Rect(.77f,.72f,.21f,.20f), new Rect(.01f,.34f,.24f,.29f), new Rect(.77f,.26f,.21f,.24f), new Rect(.36f,.02f,.28f,.20f) };
             }
             drawings.Clear();
             foreach (var reference in parts) drawings.Add(component == WorkshopComponentKind.Structure
@@ -59,8 +59,8 @@ namespace PaperDefense.Presentation
             var categories = componentKind == WorkshopComponentKind.Structure
                 ? new[] { "Site", "Function", "Shell", "Utility" }
                 : foundationDiagram ? new[] { "Frame", "Hull", "Armor", "Feed", "Turn" }
-                : new[] { "Mechanism", "Head", "Sight", "Magazine", "Trigger" };
-            captions = categories.Select((category, index) => {
+                : new[] { "Mechanism", "Head", "Sight", "Magazine", "Trigger", "Mount" };
+            captions = categories.Take(parts.Length).Select((category, index) => {
                 var text = ui.Label(transform, "Assembly diagram category " + index,
                     ui.Resolve(UserText.Message("assembly.component.category." + category)), new Rect(0, 0, 140, 24), 18, color: WorkshopUi.Blue);
                 text.alignment = TextAnchor.MiddleCenter; text.resizeTextForBestFit = true;
@@ -140,16 +140,18 @@ namespace PaperDefense.Presentation
                     if (length < 4) continue;
                     int steps = Mathf.Max(2, Mathf.CeilToInt(length / 8));
                     for (int dash = 0; dash < steps; dash += 2)
-                        arrows.Line(Vector2.Lerp(start,end,(float)dash/steps), Vector2.Lerp(start,end,Mathf.Min(1,(dash+1f)/steps)), 1.6f, MeshPen.Alpha(WorkshopUi.Blue, Opacity));
+                        arrows.Line(Vector2.Lerp(start,end,(float)dash/steps), Vector2.Lerp(start,end,Mathf.Min(1,(dash+1f)/steps)), 1.6f, MeshPen.Alpha(NightNotebookArt.Pencil, Opacity));
                     var side = new Vector2(-along.y, along.x); float tip = Mathf.Min(8, length * .6f);
-                    arrows.Line(end, end-along*tip+side*tip*.5f, 1.7f, MeshPen.Alpha(WorkshopUi.Blue, Opacity)); arrows.Line(end, end-along*tip-side*tip*.5f, 1.7f, MeshPen.Alpha(WorkshopUi.Blue, Opacity));
+                    arrows.Line(end, end-along*tip+side*tip*.5f, 1.7f, MeshPen.Alpha(NightNotebookArt.Accent, Opacity)); arrows.Line(end, end-along*tip-side*tip*.5f, 1.7f, MeshPen.Alpha(NightNotebookArt.Accent, Opacity));
                 }
             }
             for (int i = 0; i < drawings.Count; i++)
             {
                 var drawing = drawings[i]; if (drawing.Fragments.Count == 0) continue;
                 var visible = AssemblyPreviewPose.VisibleBounds(drawing);
-                part.Clear(); drawing.Draw(part, Vector2.zero, Opacity); part.CopyTo(target, fitted[i].center-visible.center*scales[i], scales[i]);
+                part.Clear();
+                using (part.WithUiDetail(scales[i])) drawing.Draw(part, Vector2.zero, Opacity);
+                part.CopyTo(target, fitted[i].center-visible.center*scales[i], scales[i]);
             }
             arrows.CopyTo(target, Vector2.zero, 1);
         }

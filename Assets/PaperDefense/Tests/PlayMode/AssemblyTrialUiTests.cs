@@ -29,7 +29,7 @@ namespace PaperDefense.Tests
             canvas.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
             canvas.GetComponent<RectTransform>().sizeDelta = new Vector2(1280, 720);
             events = new GameObject("Isolated assembly trial events", typeof(EventSystem));
-            panel = new CompositeWorkshopPanel(canvas.transform, fixture.Run, null, null);
+            panel = new CompositeWorkshopPanel(canvas.transform, fixture.Run, null, null, sequentialFlow: true);
             panel.Reflow(1280, 720);
         }
 
@@ -87,7 +87,7 @@ namespace PaperDefense.Tests
             foreach (string condition in new[] { "Scenario", "Budget", "Seed" })
                 Assert.That(Value(comparison, condition), Is.EqualTo(Value(Report, condition)), condition);
             Assert.That(panel.Root.GetComponentsInChildren<TrialLaneSketch>().Count(), Is.EqualTo(2));
-            Assert.That(Text("Composite trial measured row 0 label").text, Does.Contain("Измеренный"));
+            Assert.That(Text("Composite trial measured row 0 label").text, Is.EqualTo("Урон"));
             Assert.That(MeasuredCells(true)[0].text, Is.EqualTo(panel.LastAssemblyTrialComparison.Damage.Value.ToString("0.##")));
             Assert.That(fixture.State(), Is.EqualTo(before));
             Assert.That(fixture.Store.SaveCalls, Is.EqualTo(writes));
@@ -124,6 +124,52 @@ namespace PaperDefense.Tests
             }
         }
 
+        [TestCase(true)] [TestCase(false)]
+        public void CompactTrialReportShowsRealMeasurementsWithoutMovingItsActions(bool comparing)
+        {
+            panel.Reflow(800, 600); Open(fixture.Gun()); Click("Composite trial scenario Blots");
+            if (!comparing)
+                for (int i = 0; i < 20 && Text("Composite trial comparison entry name") != null; i++)
+                    Click("Composite trial compare");
+            Assert.That(Text("Composite trial comparison entry name") != null, Is.EqualTo(comparing));
+            var scroll = panel.Root.GetComponentsInChildren<ScrollRect>()
+                .SingleOrDefault(item => item.name == "Composite trial report scroll");
+            Assert.That(scroll, Is.Not.Null, "Compact reports need a bounded scroll above the pinned actions.");
+            Assert.That(scroll.vertical, Is.True); Assert.That(scroll.horizontal, Is.False);
+            Assert.That(scroll.viewport.GetComponent<RectMask2D>(), Is.Not.Null);
+            var actions = new[] { "Composite trial compare", "Composite trial run", "Composite trial pause",
+                "Composite trial restart", "Composite trial header return" }.Select(Button).ToArray();
+            var actionBounds = actions.Select(button => BattleHudThemeEvidence.Bounds(panel.Root, (RectTransform)button.transform)).ToArray();
+            var viewportBounds = BattleHudThemeEvidence.Bounds(panel.Root, scroll.viewport);
+            foreach (var button in actions)
+            {
+                Assert.That(button.transform.IsChildOf(scroll.content), Is.False, button.name);
+                Assert.That(viewportBounds.Overlaps(BattleHudThemeEvidence.Bounds(panel.Root, (RectTransform)button.transform)), Is.False, button.name);
+            }
+            Click("Composite trial run");
+            scroll = panel.Root.GetComponentsInChildren<ScrollRect>().Single(item => item.name == "Composite trial report scroll");
+            Assert.That(panel.LastAssemblyTrial, Is.Not.Null);
+            var cells = MeasuredCells(); Assert.That(cells.Length, Is.EqualTo(6));
+            foreach (var cell in cells.Concat(MeasuredCells(true)))
+            {
+                Assert.That(cell.transform.IsChildOf(scroll.content), Is.True);
+                Assert.That(cell.rectTransform.rect.height, Is.GreaterThanOrEqualTo(28));
+                Assert.That(cell.fontSize, Is.GreaterThanOrEqualTo(14));
+                Contains(scroll.viewport.rect, BattleHudThemeEvidence.Bounds(scroll.viewport, cell.rectTransform), cell.name);
+                Assert.That(cell.cachedTextGenerator.characterCountVisible, Is.EqualTo(cell.text.Length), cell.name);
+            }
+            Assert.That(cells.Last().text, Does.Contain(panel.LastAssemblyTrial.DurationSeconds.ToString("0.##")));
+            Contains(scroll.viewport.rect, BattleHudThemeEvidence.Bounds(scroll.viewport,
+                Text("Composite trial quote row 0 label").rectTransform), "The compact report keeps its cost and measurements visible together.");
+            scroll.verticalNormalizedPosition = 1; Canvas.ForceUpdateCanvases();
+            Contains(scroll.viewport.rect, BattleHudThemeEvidence.Bounds(scroll.viewport,
+                Text("Composite trial quote row 0 label").rectTransform), "The quote remains available above the measurements.");
+            scroll.verticalNormalizedPosition = 0; Canvas.ForceUpdateCanvases();
+            Contains(scroll.viewport.rect, BattleHudThemeEvidence.Bounds(scroll.viewport, cells.Last().rectTransform), "The last measurement remains reachable.");
+            for (int i = 0; i < actions.Length; i++)
+                Assert.That(BattleHudThemeEvidence.Bounds(panel.Root, (RectTransform)actions[i].transform), Is.EqualTo(actionBounds[i]), actions[i].name);
+        }
+
         [Test] public void FocusedTrialOmitsWholeRemoteCopyInsteadOfShowingItsClippedEdge()
         {
             var entry = fixture.Catalog.Starters.First(value => value.Kind == AlbumEntryKind.Tower && value.Snapshot.Recipe.Tower.Mounts.Count == 2);
@@ -138,7 +184,7 @@ namespace PaperDefense.Tests
             int partialCopies = 0;
             foreach (var tower in frame.Towers.Where(value => value.Health > 0 && value.ResolvedEntry?.Snapshot != null))
             {
-                var bounds = NotebookAssemblyView.Bounds(Center(tower), tower.ResolvedEntry.Snapshot);
+                var bounds = NotebookAssemblyView.Bounds(Center(tower), tower.ResolvedEntry.Snapshot, NotebookMountLayout.BodyRadians(tower));
                 var view = lane.ViewBounds;
                 if (!view.Overlaps(bounds) || bounds.xMin >= view.xMin && bounds.xMax <= view.xMax && bounds.yMin >= view.yMin && bounds.yMax <= view.yMax) continue;
                 partialCopies++;
@@ -228,7 +274,7 @@ namespace PaperDefense.Tests
                 {
                     Assert.That(lane.ViewBounds.Contains(Center(tower)), Is.True, "Every actual copy stays in the overview.");
                     if (tower.ResolvedEntry?.Snapshot != null)
-                        Contains(lane.ViewBounds, NotebookAssemblyView.Bounds(Center(tower), tower.ResolvedEntry.Snapshot), "The overview retains the whole shared assembly envelope.");
+                        Contains(lane.ViewBounds, NotebookAssemblyView.Bounds(Center(tower), tower.ResolvedEntry.Snapshot, NotebookMountLayout.BodyRadians(tower)), "The overview retains the whole shared assembly envelope.");
                 }
                 foreach (var enemy in frame.Enemies.Where(enemy => enemy.Health > 0))
                     Assert.That(lane.ViewBounds.Contains(Point(enemy.Position)), Is.True, "Every actual living enemy stays in the overview.");
@@ -260,7 +306,7 @@ namespace PaperDefense.Tests
                 var source = first.frame.Towers.Single(tower => tower.Id == first.action.SourceStructureId);
                 var muzzle = DoodleGlyphs.SegmentOrigin(source, first.action.MountSlotIndex, first.action.To, Point(first.action.From),
                     first.action.SimulationSeconds, null, NotebookVisualThemeAsset.Default);
-                var engagement = NotebookAssemblyView.Bounds(Center(source), source.ResolvedEntry.Snapshot);
+                var engagement = NotebookAssemblyView.Bounds(Center(source), source.ResolvedEntry.Snapshot, NotebookMountLayout.BodyRadians(source));
                 engagement = Include(Include(Include(engagement, muzzle), Point(first.action.From)), Point(first.action.To));
                 if (first.action.Kind == SimulationEventKind.ProjectileLaunched)
                 {
@@ -287,91 +333,19 @@ namespace PaperDefense.Tests
             Assert.That(fixture.Store.SaveCalls, Is.EqualTo(writes));
         }
 
-        [TestCase(AssemblyStructureFamily.Wall)] [TestCase(AssemblyStructureFamily.Slow)]
-        [TestCase(AssemblyStructureFamily.Repair)] [TestCase(AssemblyStructureFamily.Generator)]
-        public void SupportFocusUsesARealEffectAndItsBeneficiaryWithoutDiscardingTheOverview(AssemblyStructureFamily family)
-        {
-            string before = fixture.State(); int writes = fixture.Store.SaveCalls;
-            Open(Support(family)); Click("Composite trial run");
-            var report = panel.LastAssemblyTrial; var comparison = panel.LastAssemblyTrialComparison;
-            var lane = panel.Root.GetComponentsInChildren<TrialLaneSketch>().First(field => ReferenceEquals(field.Playback.Report, report.Recording));
-            var recording = lane.Playback.Report;
-            StructureView source = default; Vector2 beneficiary = default; TrialFrame effectFrame = null;
-            if (family == AssemblyStructureFamily.Wall)
-            {
-                // A walkable fixture can route around the walls without an EnemyAttack.
-                // Frame the actual closest recorded approach to the first real wall instead.
-                source = recording.Frames[0].Towers.First(tower => tower.ResolvedEntry?.Support?.Kind == family);
-                Vector2 origin = Center(source);
-                var closest = recording.Frames.SelectMany(frame => frame.Enemies.Where(enemy => enemy.Health > 0).Select(enemy => new { frame, enemy }))
-                    .OrderBy(value => Vector2.SqrMagnitude(origin - Point(value.enemy.Position)))
-                    .ThenBy(value => value.frame.Seconds).ThenBy(value => value.enemy.Id).First();
-                beneficiary = Point(closest.enemy.Position); effectFrame = closest.frame;
-            }
-            else if (family == AssemblyStructureFamily.Repair)
-            {
-                var initial = recording.Frames[0].Towers.First(tower => tower.Health < tower.MaxHealth && tower.ResolvedEntry?.Support?.Kind != family);
-                effectFrame = recording.Frames.First(frame => frame.Towers.Any(tower => tower.Id == initial.Id && tower.Health > initial.Health));
-                var repaired = effectFrame.Towers.Single(tower => tower.Id == initial.Id);
-                source = effectFrame.Towers.Where(tower => tower.ResolvedEntry?.Support?.Kind == family &&
-                    Vector2.Distance(Center(tower), Center(repaired)) <= tower.ResolvedEntry.Support.Radius).OrderBy(tower => tower.Id).First();
-                beneficiary = Center(repaired);
-                Assert.That(report.RepairedHealth, Is.GreaterThan(0), "The beneficiary actually gained health in this recording.");
-            }
-            else if (family == AssemblyStructureFamily.Generator)
-            {
-                var initial = recording.Frames[0].Towers.First(tower => tower.ResolvedEntry?.Support?.Kind == family);
-                effectFrame = recording.Frames.First(frame => frame.Towers.Any(tower => tower.Id == initial.Id && tower.GeneratorPaidWaves > initial.GeneratorPaidWaves));
-                source = effectFrame.Towers.Single(tower => tower.Id == initial.Id); beneficiary = Center(source);
-                Assert.That(report.Income, Is.GreaterThan(0), "The selected generator really produced income.");
-            }
-            else
-            {
-                foreach (var frame in recording.Frames)
-                {
-                    foreach (var support in frame.Towers.Where(tower => tower.ResolvedEntry?.Support?.Kind == family).OrderBy(tower => tower.Id))
-                    {
-                        var affected = frame.Enemies.Where(enemy => enemy.Health > 0 && Vector2.Distance(Center(support), Point(enemy.Position)) <= support.ResolvedEntry.Support.Radius).ToArray();
-                        if (affected.Length == 0) continue;
-                        source = support; beneficiary = Point(affected[0].Position); effectFrame = frame; break;
-                    }
-                    if (effectFrame != null) break;
-                }
-                Assert.That(effectFrame, Is.Not.Null, "A real enemy must enter the support's effect radius.");
-                Assert.That(report.PreventedMovement, Is.GreaterThan(0), "The recorded slow actually prevented movement.");
-            }
-            var focus = lane.ViewBounds;
-            var engagement = Include(NotebookAssemblyView.Bounds(Center(source), source.ResolvedEntry.Snapshot), beneficiary);
-            if (family == AssemblyStructureFamily.Wall || family == AssemblyStructureFamily.Slow)
-            {
-                var target = effectFrame.Enemies.Where(enemy => enemy.Health > 0)
-                    .OrderBy(enemy => Vector2.SqrMagnitude(Point(enemy.Position) - beneficiary)).ThenBy(enemy => enemy.Id).First();
-                var pen = new MeshPen(null);
-                DoodleGlyphs.Enemy(pen, target, (float)effectFrame.Seconds, sampleSeconds: effectFrame.Seconds,
-                    uniformScale: NotebookEnemyView.ScaleFor(true));
-                Assert.That(pen.TryGetBounds(out var targetVisual), Is.True);
-                Contains(focus, targetVisual, "The selected real support beneficiary's entire enemy drawing remains visible.");
-                engagement = Include(Include(engagement, targetVisual.min), targetVisual.max);
-            }
-            TightEngagement(focus, engagement);
-            Assert.That(focus.width * focus.height, Is.LessThan(lane.RecordingBounds.width * lane.RecordingBounds.height), "A support close-up cannot silently reuse the entire recording.");
-            Click("Composite trial overview");
-            foreach (var field in panel.Root.GetComponentsInChildren<TrialLaneSketch>()) CompleteOverview(field);
-            Assert.That(panel.LastAssemblyTrial, Is.SameAs(report)); Assert.That(panel.LastAssemblyTrialComparison, Is.SameAs(comparison));
-            Assert.That(fixture.State(), Is.EqualTo(before)); Assert.That(fixture.Store.SaveCalls, Is.EqualTo(writes));
-        }
-
-        [Test] public void GeneratorTrial_DoesNotAwardProfile()
+        [Test] public void GeneratorTrialServiceDoesNotAwardOrWriteTheProfile()
         {
             var before = fixture.SavedData;
             string state = fixture.State(); byte[] bytes = fixture.SavedBytes;
             int writes = fixture.Store.SaveCalls, loads = fixture.Store.LoadCalls;
-            Open(Support(AssemblyStructureFamily.Generator)); Click("Composite trial run");
-            Assert.That(Report, Is.Not.Null);
-            Assert.That(Value(Report, "Income"), Is.GreaterThan(0));
-            Assert.That(Value(Report, "PaidWaves"), Is.GreaterThan(0));
-            Assert.That(Value(Report, "Damage"), Is.Null, "Generator income is not DPS.");
-            Click("Composite trial pause"); Click("Composite trial restart"); Click("Composite close trial");
+            var entry = Support(AssemblyStructureFamily.Generator);
+            var report = fixture.Run.RunAssemblyTrial(entry, AssemblyTrialScenario.Generator);
+            Assert.That(report, Is.Not.Null);
+            Assert.That(report.Income, Is.GreaterThan(0));
+            Assert.That(report.PaidWaves, Is.GreaterThan(0));
+            Assert.That(report.Damage, Is.Null, "Generator income is not DPS.");
+            Assert.That(fixture.Run.RunAssemblyTrial(entry, AssemblyTrialScenario.Generator), Is.Not.Null,
+                "Repeating the service call cannot publish local trial income as a real reward.");
             var after = fixture.Run.Workshop;
             Assert.That(after.Gold, Is.EqualTo(before.Gold));
             Assert.That(after.TotalXp, Is.EqualTo(before.TotalXp));
@@ -387,17 +361,40 @@ namespace PaperDefense.Tests
         {
             panel.OpenEntry(fixture.Gun()); panel.DraftSession.Rename("Имя без сохранения"); panel.RefreshStatus();
             var session = panel.DraftSession; var draft = session.Draft;
-            string before = Json(draft), state = fixture.State(); int writes = fixture.Store.SaveCalls;
+            string before = Json(draft), state = fixture.State(); byte[] saved = fixture.SavedBytes; int writes = fixture.Store.SaveCalls;
             Click("Composite trial"); Click("Composite trial run");
-            var report = Report; var recording = panel.LastTrial;
+            var report = Report; var recording = panel.LastTrial; var comparison = panel.LastAssemblyTrialComparison;
+            Assert.That(comparison, Is.Not.Null);
             Assert.That(Value(report, "Seed"), Is.EqualTo(1337));
             Click("Composite trial pause");
-            Assert.That(Lane.PlaybackPaused, Is.True);
-            float frozen = Lane.PlaybackSeconds;
+            var lanes = panel.Root.GetComponentsInChildren<TrialLaneSketch>();
+            Assert.That(lanes.Length, Is.EqualTo(2));
+            Assert.That(lanes.All(lane => lane.PlaybackPaused), Is.True);
+            var frozen = lanes.Select(lane => lane.PlaybackSeconds).ToArray();
             yield return new WaitForSecondsRealtime(.035f);
-            Assert.That(Lane.PlaybackSeconds, Is.EqualTo(frozen).Within(.0001f));
+            for (int i = 0; i < lanes.Length; i++) Assert.That(lanes[i].PlaybackSeconds, Is.EqualTo(frozen[i]).Within(.0001f));
+            // The independent recordings can wrap at different durations. Restore distinct real-recording
+            // positions directly so camera/resize persistence does not depend on a long wall-clock wait.
+            float sharedWindow = lanes.Min(lane => lane.Playback.Report.DurationSeconds);
+            for (int i = 0; i < lanes.Length; i++)
+            {
+                var laneRecording = lanes[i].Playback.Report;
+                float seconds = (i == 0 ? .2f : .7f) * sharedWindow;
+                lanes[i].SetResult(laneRecording, Time.unscaledTime - seconds / lanes[i].PlaybackSpeed, laneRecording.DurationSeconds);
+                lanes[i].PlaybackPaused = true;
+            }
+            frozen = lanes.Select(lane => lane.PlaybackSeconds).ToArray();
+            Assert.That(Mathf.Abs(frozen[0] - frozen[1]), Is.GreaterThan(.001f), "The fixture must expose a reset of the second cursor to the first.");
+            Click("Composite trial overview"); panel.Reflow(800, 600); Canvas.ForceUpdateCanvases();
+            lanes = panel.Root.GetComponentsInChildren<TrialLaneSketch>();
+            for (int i = 0; i < lanes.Length; i++)
+            {
+                Assert.That(lanes[i].PlaybackPaused, Is.True);
+                Assert.That(lanes[i].PlaybackSeconds, Is.EqualTo(frozen[i]).Within(.001f), lanes[i].name);
+            }
+            Assert.That(Report, Is.SameAs(report)); Assert.That(panel.LastAssemblyTrialComparison, Is.SameAs(comparison));
             Click("Composite trial pause");
-            Assert.That(Lane.PlaybackPaused, Is.False);
+            Assert.That(lanes.All(lane => !lane.PlaybackPaused), Is.True);
             Click("Composite trial restart");
             Assert.That(Report, Is.Not.SameAs(report));
             Assert.That(Value(Report, "Seed"), Is.EqualTo(1337));
@@ -405,46 +402,51 @@ namespace PaperDefense.Tests
             Assert.That(panel.LastTrial.Damage, Is.EqualTo(recording.Damage));
             Assert.That(panel.LastTrial.Frames.SelectMany(frame => frame.Events).Select(item => item.Kind + ":" + item.SimulationSeconds + ":" + item.SourceStructureId),
                 Is.EqualTo(recording.Frames.SelectMany(frame => frame.Events).Select(item => item.Kind + ":" + item.SimulationSeconds + ":" + item.SourceStructureId)));
-            Click("Composite close trial");
+            Assert.That(panel.LastAssemblyTrialComparison, Is.Not.SameAs(comparison));
+            Assert.That(panel.LastAssemblyTrialComparison.Damage, Is.EqualTo(comparison.Damage));
+            Assert.That(panel.LastAssemblyTrialComparison.Recording.Frames.SelectMany(frame => frame.Events).Select(item => item.Kind + ":" + item.SimulationSeconds + ":" + item.SourceStructureId),
+                Is.EqualTo(comparison.Recording.Frames.SelectMany(frame => frame.Events).Select(item => item.Kind + ":" + item.SimulationSeconds + ":" + item.SourceStructureId)));
+            Click("Composite trial header return");
             Assert.That(panel.DraftSession, Is.SameAs(session));
             Assert.That(panel.DraftSession.Draft, Is.SameAs(draft));
             Assert.That(Json(draft), Is.EqualTo(before));
             Assert.That(panel.DraftSession.Name, Is.EqualTo("Имя без сохранения"));
-            Assert.That(panel.Step, Is.EqualTo(2));
+            Assert.That(panel.Step, Is.EqualTo(3));
             Assert.That(fixture.State(), Is.EqualTo(state));
+            Assert.That(fixture.SavedBytes, Is.EqualTo(saved));
             Assert.That(fixture.Store.SaveCalls, Is.EqualTo(writes));
         }
 
-        [Test] public void ChangingScenarioOrBudgetClearsThePreviousMeasurement()
+        [Test] public void ChangingScenarioBudgetOrComparisonClearsBothPreviousMeasurements()
         {
             Open(fixture.Gun()); Click("Composite trial run");
             Assert.That(Report, Is.Not.Null);
             Click("Composite trial scenario Armored");
-            Assert.That(Report, Is.Null); Assert.That(Lane.HasRecording, Is.False);
+            AssertTrialMeasurementsInvalidated();
             Click("Composite trial run");
             Assert.That(Value(Report, "Scenario").ToString(), Is.EqualTo("Armored"));
             Click("Composite trial budget");
-            Assert.That(Report, Is.Null); Assert.That(panel.LastTrial, Is.Null);
+            AssertTrialMeasurementsInvalidated();
             Click("Composite trial run");
             Assert.That(Value(Report, "Budget"), Is.EqualTo(800));
             Assert.That((int)Value(Report, "Cost"), Is.LessThanOrEqualTo(800));
+            Click("Composite trial compare"); AssertTrialMeasurementsInvalidated();
         }
 
-        [TestCase(AssemblyStructureFamily.Repair, "RepairedHealth")]
-        [TestCase(AssemblyStructureFamily.Generator, "Income")]
-        public void SupportResultsShowTheirApplicableProductionMetric(AssemblyStructureFamily family, string metric)
+        void AssertTrialMeasurementsInvalidated()
         {
-            Open(Support(family)); Click("Composite trial run");
-            Assert.That(Value(Report, metric), Is.GreaterThan(0));
-            Assert.That(Value(Report, "Damage"), Is.Null);
-            Assert.That(panel.Root.GetComponentsInChildren<Text>().Where(label => label.name.StartsWith("Composite trial measured row ")).Any(label => label.text.Contains("DPS")), Is.False);
-            Assert.That(Text("Composite trial conditions").text, Does.Contain("400").And.Contain("1337"));
+            Assert.That(panel.LastAssemblyTrial, Is.Null); Assert.That(panel.LastAssemblyTrialComparison, Is.Null);
+            Assert.That(panel.LastTrial, Is.Null);
+            Assert.That(panel.Root.GetComponentsInChildren<TrialLaneSketch>().All(lane => !lane.HasRecording), Is.True);
+            Assert.That(MeasuredCells(), Is.Empty); Assert.That(MeasuredCells(true), Is.Empty);
+            Assert.That(Button("Composite trial pause").IsInteractable(), Is.False);
+            Assert.That(Button("Composite trial restart").IsInteractable(), Is.False);
         }
 
         [Test] public void TrialModalBlocksBackgroundSaveAndRestoresReviewFocusOnReturn()
         {
             panel.OpenEntry(fixture.Gun());
-            var save = Button("Composite save");
+            var save = Button("Sequence save");
             Click("Composite trial");
             Assert.That(save.IsInteractable(), Is.False);
             var modal = Lane.GetComponentInParent<WorkshopModal>();
@@ -452,8 +454,8 @@ namespace PaperDefense.Tests
             var selected = EventSystem.current.currentSelectedGameObject;
             Assert.That(selected, Is.Not.Null);
             Assert.That(selected.transform.IsChildOf(modal.transform), Is.True);
-            Click("Composite close trial");
-            Assert.That(Button("Composite save").IsInteractable(), Is.True);
+            Click("Composite trial header return");
+            Assert.That(Button("Sequence save").IsInteractable(), Is.True);
             Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(Button("Composite trial").gameObject));
         }
 
@@ -511,7 +513,7 @@ namespace PaperDefense.Tests
             if (kind == "invalid") panel.DraftSession.Rename("");
             if (kind == "clearance")
             {
-                var input = JsonUtility.FromJson<FitEnvelope>(Resources.Load<TextAsset>("Art/NotebookMounts").text).fits;
+                var input = AssemblyFitResources.ReadInput();
                 var frame = input.Frames.Single(item => item.FrameId == entry.Snapshot.Recipe.Tower.Foundation.Frame.Id);
                 frame.Keepouts = new[] { new AssemblyFitKeepoutInput { X = -.5f, Y = -.5f, Width = 1, Height = 1 } };
                 var session = new WorkshopDraftSession(fixture.Run, fixture.Catalog, new AssemblyFitCatalog(input)); session.Begin(entry);
@@ -526,7 +528,7 @@ namespace PaperDefense.Tests
         }
 
         [TestCase(false)] [TestCase(true)]
-        public void SupportTrialStillRejectsLockedOrInvalidStats(bool locked)
+        public void SupportTrialServiceRejectsLockedOrInvalidStatsWithoutWriting(bool locked)
         {
             var repair = Support(AssemblyStructureFamily.Repair).Snapshot.Recipe.Structure;
             var recipe = new AssemblyRecipe(new StructureRecipe(AssemblyStructureFamily.Repair, repair.Site,
@@ -543,9 +545,8 @@ namespace PaperDefense.Tests
             if (locked) Assert.That(fixture.Run.Workshop.IsUnlocked("shell.reinforced"), Is.False);
             else Assert.That(TowerCatalog.ResolveEntry(entry, fixture.Balance).Valid, Is.False);
             int writes = fixture.Store.SaveCalls;
-            panel.OpenEntry(entry);
-            Assert.That(panel.DraftSession.CanTrial, Is.False);
-            Assert.That(Button("Composite trial").IsInteractable(), Is.False);
+            var draft = new WorkshopDraftSession(fixture.Run); draft.Begin(entry);
+            Assert.That(draft.CanTrial, Is.False);
             Assert.That(fixture.Run.RunAssemblyTrial(entry, AssemblyTrialScenario.Repair), Is.Null);
             Assert.That(fixture.Store.SaveCalls, Is.EqualTo(writes));
         }
@@ -567,7 +568,7 @@ namespace PaperDefense.Tests
                 }
             }
             Assert.That(Button("Composite trial run"), Is.Not.Null);
-            Assert.That(Button("Composite close trial"), Is.Not.Null);
+            Assert.That(Button("Composite trial header return"), Is.Not.Null);
             Assert.That(Lane.rectTransform.rect.width, Is.GreaterThan(400));
             Assert.That(Lane.rectTransform.rect.height, Is.GreaterThan(250));
         }

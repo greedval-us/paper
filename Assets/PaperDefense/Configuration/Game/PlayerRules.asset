@@ -232,6 +232,8 @@ MonoBehaviour:
       CorpseBlots: 1
       RangedEnemies: 1
       InkWells: 1
+      WaveInkFlasks: 1
+      InkPerFlask: 12
       ColorCartridges: 1
       RunUpgrades: 1
     Construction:

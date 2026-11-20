@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PaperDefense.Presentation
 {
     public enum NotebookArtPrimitive { Polyline, Polygon, Circle, Ring }
-    public enum NotebookInkChannel { Navy, Pencil, Paper, Red, Blue, Green, Wash, White }
+    public enum NotebookInkChannel { Navy, Pencil, Paper, Red, Blue, Green, Wash, White, Ivory, Sketch, Surface, Amber, Danger, Clean, NotebookPaper, Body, GlassInk, Copper, BladeSteel }
 
     [Serializable] public sealed class NotebookArtMark
     {
@@ -71,6 +71,10 @@ namespace PaperDefense.Presentation
     {
         public int SchemaVersion = 1;
         public string Revision;
+        public bool ReducedMotion;
+        // An explicit semantic policy survives runtime accessibility copies.
+        // Caller-authored themes retain their own colors unless they opt in.
+        public bool NightInkOnDarkSurfaces;
         public float MaximumTerminalTailSeconds = 1.2f;
         public int MaximumEffects = 256, MaximumDeaths = 128;
         public Color[] Palette = Array.Empty<Color>();
@@ -79,7 +83,7 @@ namespace PaperDefense.Presentation
         public List<NotebookWeaponRecoil> Recoils = new List<NotebookWeaponRecoil>();
     }
 
-    /// <summary>Shared, immutable-at-runtime visual data. Geometry and timing belong to the authored source.</summary>
+    /// <summary>Code-only visual contract shared by standard drawings, animation and caller-owned themes.</summary>
     [CreateAssetMenu(menuName = "Paper Defense/Notebook Visual Theme")]
     public sealed class NotebookVisualThemeAsset : ScriptableObject
     {
@@ -88,17 +92,63 @@ namespace PaperDefense.Presentation
         Dictionary<string, NotebookArtClip> clips;
         Dictionary<string, NotebookWeaponRecoil> recoils;
         static NotebookVisualThemeAsset defaultTheme;
-        public static NotebookVisualThemeAsset Default => defaultTheme != null ? defaultTheme : defaultTheme = Resources.Load<NotebookVisualThemeAsset>("Art/NotebookVisualTheme");
-        public static void ResetDefaultCache() { defaultTheme = null; }
+        public static NotebookVisualThemeAsset Default => defaultTheme != null ? defaultTheme : defaultTheme = InkSwarmArt.CreateTheme();
+        static NotebookVisualThemeAsset()
+        {
+#if UNITY_EDITOR
+            UnityEditor.AssemblyReloadEvents.beforeAssemblyReload += ReleaseBeforeAssemblyReload;
+#endif
+        }
+        public static void ResetDefaultCache()
+        {
+            var owned = defaultTheme;
+            defaultTheme = null;
+            NotebookSpriteCatalog.ResetCache();
+            if (owned == null) return;
+            if (UnityEngine.Application.isPlaying) Destroy(owned); else DestroyImmediate(owned);
+        }
+#if UNITY_EDITOR
+        static void ReleaseBeforeAssemblyReload()
+        {
+            // Reload discards managed statics before a deferred Destroy can run.
+            var owned = defaultTheme;
+            defaultTheme = null;
+            NotebookSpriteCatalog.ResetCache();
+            if (owned != null) DestroyImmediate(owned);
+        }
+#endif
         public float MaximumTerminalTailSeconds => Data.MaximumTerminalTailSeconds;
         public int MaximumEffects => Data.MaximumEffects;
         public int MaximumDeaths => Data.MaximumDeaths;
-        public NotebookArtShape FindShape(string id) { Index(); return id != null && shapes.TryGetValue(id, out var value) ? value : null; }
+        public NotebookArtShape FindShape(string id)
+        {
+            Index();
+            if (id == null) return null;
+            if (shapes.TryGetValue(id, out var value)) return value;
+            value = StandardNotebookArt.Shape(id);
+            int paletteSize = Data.Palette?.Length ?? 0;
+            if (value != null) value = NotebookThemeDefaults.ForPalette(value, paletteSize);
+            else
+            {
+                value = InkSwarmArt.Shape(id);
+                // The active battle cache owns its compact poses. Preserve that identity;
+                // only caller-owned/short palettes need an isolated remapped copy.
+                if (Data.Revision != InkSwarmArt.Revision || paletteSize < 14)
+                    value = NotebookThemeDefaults.ForPalette(value, paletteSize);
+            }
+            if (value != null) { value.Id = id; shapes.Add(id, value); }
+            return value;
+        }
         public NotebookArtClip FindClip(string id) { Index(); return id != null && clips.TryGetValue(id, out var value) ? value : null; }
         public NotebookWeaponRecoil FindRecoil(string weaponId) { Index(); return weaponId != null && recoils.TryGetValue(weaponId, out var value) ? value : null; }
         public Color Color(NotebookInkChannel channel)
             => Data.Palette != null && (int)channel < Data.Palette.Length ? Data.Palette[(int)channel] : UnityEngine.Color.white;
-        public void ReplaceData(NotebookArtSource value) { Data = value ?? throw new ArgumentNullException(nameof(value)); shapes = null; clips = null; recoils = null; }
+        public void ReplaceData(NotebookArtSource value)
+        {
+            Data = value ?? throw new ArgumentNullException(nameof(value));
+            shapes = null; clips = null; recoils = null;
+            if (ReferenceEquals(this, defaultTheme)) NotebookSpriteCatalog.ResetCache();
+        }
         void OnEnable() { shapes = null; clips = null; recoils = null; }
         void Index()
         {

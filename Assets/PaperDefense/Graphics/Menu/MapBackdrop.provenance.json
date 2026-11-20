@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-27",
+  "mode": "built-in image_gen",
+  "use": "production menu background",
+  "prompt": "Use case: precise-object-edit. Asset type: production background texture for a responsive Unity game menu, landscape 16:9, no UI baked into the image.\nInput image is the selected Field Headquarters style reference and edit target. Keep its dark charcoal-forest matte map surface, subtle paper/paint grain, fine muted brass topographic contours and the elegant drawn fortress along the far right edge. Preserve low-contrast illustrated outer margins and the very quiet large central negative space.\nREMOVE ALL interface elements completely: title, subtitle, every button and its frame/shadow/icon, exit button, top-right resource badge, footer route caption, every word, number, letter and compass label. Inpaint those regions naturally with the same clean dark map texture. Remove all text and UI boxes; no replacement interface, no extra objects, no watermark. Background only. Keep the centered half of the image low contrast and uncluttered for future live game controls. No bright hotspots behind the menu. Edge map lines and fortress remain quiet but visible. Orthographic flat graphic background, not an angled physical scene. Retain the selected palette and illustration craftsmanship. Output opaque image, wide 16:9.",
+  "reference": "docs/design/menu-art-directions-2026-10-27/02-field-headquarters.png",
+  "output": "Assets/PaperDefense/Graphics/Menu/Resources/FieldHeadquarters/MapBackdrop.png",
+  "transparent_background": false,
+  "notes": "Edit removes all baked interface and text. Live Unity controls remain separate. Background shown with center-cover cropping."
+}

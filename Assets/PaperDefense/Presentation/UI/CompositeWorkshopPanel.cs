@@ -15,11 +15,15 @@ namespace PaperDefense.Presentation
         readonly RunController run;
         readonly WorkshopUi ui;
         readonly Action prepare;
+        readonly bool sequentialFlow;
         readonly Dictionary<AlbumEntryKind, RouteDraft> routes = new Dictionary<AlbumEntryKind, RouteDraft>();
         sealed class RouteDraft
         {
             public WorkshopDraftSession Session;
             public int Step, Mount;
+            public int SequenceReached;
+            public bool SequenceVariant;
+            public string SequenceInspected, SequenceBaseline;
             public bool SaveFailureDismissed, SaveFailureVariant;
         }
         float width = 1600, height = 1000;
@@ -42,22 +46,34 @@ namespace PaperDefense.Presentation
         string NoticeCopy => HasStatusFailure && !DraftSession.IsComponentOpen && !libraryOpen && (Step == 2 || Route == AlbumEntryKind.Legacy) ? "" : Status;
         string SaveCaption => T(HasWriteFailure ? "retry_save" : "save");
 
-        public CompositeWorkshopPanel(Transform parent, RunController run, UserTextResolver resolver, Action prepare)
+        public CompositeWorkshopPanel(Transform parent, RunController run, UserTextResolver resolver, Action prepare, bool sequentialFlow = false)
         {
             this.run = run ?? throw new ArgumentNullException(nameof(run));
-            this.prepare = prepare; ui = new WorkshopUi(resolver);
+            this.prepare = prepare; this.sequentialFlow = sequentialFlow; ui = new WorkshopUi(resolver);
             Root = ui.Panel(parent, "Composite workshop", new Rect(0, 0, width, height), WorkshopUi.Paper, true);
             DraftSession = new WorkshopDraftSession(run);
             NewEntry(AlbumEntryKind.Tower);
         }
 
-        public void OpenEntry(AlbumEntry entry)
+        public void OpenEntry(AlbumEntry entry) => OpenEntry(entry, null, 0);
+
+        internal void OpenEntry(AlbumEntry entry, ComponentDefinition inspect, int inspectSlot)
         {
             if (entry == null) return;
+            if (entry.Id != firstRefitDraftId) ClearFirstRefit();
             ResetAssemblyTrial();
             RememberRoute();
+            inspectedStructureOffer = null;
             DraftSession = new WorkshopDraftSession(run, DraftSession.Catalog);
-            DraftSession.Begin(entry); Step = 2; mount = 0; feedback = ""; libraryOpen = false; LastTrial = null; saveFailureDismissed = saveFailureVariant = false;
+            DraftSession.Begin(entry); Step = sequentialFlow && entry.Kind == AlbumEntryKind.Tower ? 3 : 2; sequenceReached = Step; mount = 0; feedback = ""; libraryOpen = false; LastTrial = null; saveFailureDismissed = saveFailureVariant = false;
+            if (inspect != null && sequentialFlow && entry.Kind == AlbumEntryKind.Tower)
+            {
+                Step = inspect.Category <= ComponentCategory.Turn ? 0 : 1;
+                mount = inspectSlot;
+                OpenSequenceComponent();
+                DraftSession.SelectCategory(inspect.Category);
+                sequenceInspected = inspect.Id;
+            }
             Root.gameObject.SetActive(true); Refresh();
         }
         public void Suspend() { ui.HideTooltip(); Root.gameObject.SetActive(false); }
@@ -65,32 +81,39 @@ namespace PaperDefense.Presentation
         internal void ResumeWithFeedback(string message) { feedback = ui.Resolve(message); Resume(); }
         public void Reflow(float width, float height)
         {
+            UiMenuMotion.FinishIn(Root);
             this.width = Mathf.Max(800, width); this.height = Mathf.Max(600, height);
-            WorkshopUi.Place(Root, new Rect(0, 0, this.width, this.height)); Refresh();
+            WorkshopUi.Place(Root, new Rect(0, 0, this.width, this.height));
+            using (UiMenuMotion.SuppressOpenings()) Refresh();
         }
-        void NewEntry(AlbumEntryKind kind)
+        void NewEntry(AlbumEntryKind kind, bool preserveFirstRefit = false)
         {
+            if (!preserveFirstRefit) ClearFirstRefit();
             ResetAssemblyTrial();
+            if (kind == AlbumEntryKind.Structure) inspectedStructureOffer = null;
             var source = DraftSession.Catalog.Starters.First(entry => entry.Kind == kind);
             DraftSession = new WorkshopDraftSession(run, DraftSession.Catalog);
             DraftSession.Begin(new AlbumEntry("entry." + Guid.NewGuid().ToString("N"),
                 T(kind == AlbumEntryKind.Tower ? "new_tower" : "new_structure"), 1, source.Snapshot));
-            Step = 0; mount = 0; feedback = ""; libraryOpen = false; LastTrial = null; saveFailureDismissed = saveFailureVariant = false; Refresh();
+            Step = 0; sequenceReached = 0; sequenceVariant = true; mount = 0; feedback = ""; libraryOpen = false; LastTrial = null; saveFailureDismissed = saveFailureVariant = false; Refresh();
         }
         void RememberRoute()
         {
             if (DraftSession.Draft != null && Route != AlbumEntryKind.Legacy)
                 routes[Route] = new RouteDraft { Session = DraftSession, Step = Step, Mount = mount,
+                    SequenceReached = sequenceReached, SequenceVariant = sequenceVariant, SequenceInspected = sequenceInspected, SequenceBaseline = sequenceComponentBaseline,
                     SaveFailureDismissed = saveFailureDismissed, SaveFailureVariant = saveFailureVariant };
         }
         void SwitchRoute(AlbumEntryKind kind)
         {
-            if (DraftSession.IsComponentOpen) return;
+            if (DraftSession.IsComponentOpen && !sequentialFlow) return;
             if (Route == kind) { libraryOpen = false; Refresh(); return; }
             ResetAssemblyTrial();
             RememberRoute();
-            if (!routes.TryGetValue(kind, out var previous)) { NewEntry(kind); return; }
+            if (!routes.TryGetValue(kind, out var previous)) { NewEntry(kind, preserveFirstRefit: true); return; }
             DraftSession = previous.Session; Step = previous.Step; mount = previous.Mount;
+            sequenceReached = previous.SequenceReached; sequenceVariant = previous.SequenceVariant;
+            sequenceInspected = previous.SequenceInspected; sequenceComponentBaseline = previous.SequenceBaseline;
             saveFailureDismissed = previous.SaveFailureDismissed; saveFailureVariant = previous.SaveFailureVariant;
             libraryOpen = false; feedback = ""; LastTrial = null; Refresh();
         }
@@ -98,6 +121,8 @@ namespace PaperDefense.Presentation
         public void Refresh()
         {
             if (rebuilding) return;
+            if (sequentialFlow && Route == AlbumEntryKind.Tower) { RefreshSequence(); return; }
+            if (sequentialFlow && Route == AlbumEntryKind.Structure) { RefreshStructureSequence(); return; }
             rebuilding = true;
             try
             {
@@ -107,8 +132,7 @@ namespace PaperDefense.Presentation
             ui.HideTooltip();
             WorkshopUi.ClearViews(Root);
             var pageDecor = WorkshopUi.Graphic<Image>(Root, "Composite page landscape", new Rect(-12, height - 228, width + 24, 228));
-            pageDecor.sprite = Resources.Load<Sprite>("Art/Player/FoundationPageDecor");
-            pageDecor.raycastTarget = false; pageDecor.color = new Color(1, 1, 1, .75f);
+            pageDecor.raycastTarget = false; pageDecor.color = new Color(.93f, .95f, .97f, .75f);
             Header();
             float bodyY = 124, bodyHeight = height - 232;
             var body = ui.Panel(Root, "Composite content", new Rect(24, bodyY, width - 48, bodyHeight), Color.clear);
@@ -147,6 +171,7 @@ namespace PaperDefense.Presentation
             if (HasWriteFailure && !saveFailureDismissed && !DraftSession.IsComponentOpen && !libraryOpen && Step == 2) BuildSaveFailureSurface();
             if (assemblyTrialOpen) BuildAssemblyTrialSurface();
             ui.EnsureTooltip(Root);
+            FieldMenuTheme.ApplyTo(Root);
             if (focusName != null && EventSystem.current != null)
             {
                 var controls = Root.GetComponentsInChildren<Selectable>();
@@ -162,6 +187,8 @@ namespace PaperDefense.Presentation
         public void RefreshStatus()
         {
             if (Root == null || rebuilding) return;
+            if (sequentialFlow && Route == AlbumEntryKind.Tower) { RefreshSequenceStatus(); return; }
+            if (sequentialFlow && Route == AlbumEntryKind.Structure) { RefreshStructureSequenceStatus(); return; }
             var resources = Root.Find("Composite resources")?.GetComponent<Text>();
             if (resources != null) resources.text = T("resources", run.Workshop.Gold, run.Workshop.Level, run.Workshop.TotalXp);
             Status = StatusText();
@@ -300,14 +327,15 @@ namespace PaperDefense.Presentation
                     .OrderBy(item => item.UnlockGold).ThenBy(item => item.RequiredLevel).First();
                 return new PartRef(part.Id, part.Revision);
             }
-            return new WeaponRecipe(new PartRef(mechanism.Id, mechanism.Revision), Part(ComponentCategory.Head), Part(ComponentCategory.Sight), Part(ComponentCategory.Magazine), Part(ComponentCategory.Trigger));
+            PartRef? mountPart = DraftSession.Catalog.Definitions.Any(item => item.Category == ComponentCategory.Mount) ? Part(ComponentCategory.Mount) : (PartRef?)null;
+            return new WeaponRecipe(new PartRef(mechanism.Id, mechanism.Revision), Part(ComponentCategory.Head), Part(ComponentCategory.Sight), Part(ComponentCategory.Magazine), Part(ComponentCategory.Trigger), mountPart);
         }
 
         void Structures(Transform parent, float w, float h)
         {
             ui.Label(parent, "Composite structure heading", T(Step == 0 ? "family" : "composition"), new Rect(18, 8, w - 36, 44), 28, true);
             ui.Label(parent, "Composite structure hint", T("structure_hint"), new Rect(18, 54, w - 36, 44), 18);
-            var starters = DraftSession.Catalog.Starters.Where(entry => entry.Kind == AlbumEntryKind.Structure).ToArray();
+            var starters = DraftSession.Catalog.Templates.Where(entry => entry.Kind == AlbumEntryKind.Structure).ToArray();
             float cardHeight = Mathf.Max(180, (h - 192) * .5f);
             var list = new CatalogScrollList(parent, "Composite structure families", new Rect(18, 108, w - 36, h - 184), starters.Length, 2, cardHeight, 12);
             float cardWidth = (w - 60) / 2;
@@ -316,12 +344,14 @@ namespace PaperDefense.Presentation
                 var source = starters[i]; var card = ui.Panel(list.Content, "Composite family " + source.Snapshot.Recipe.Structure.Family, new Rect(i % 2 * (cardWidth + 12), i / 2 * (cardHeight + 12), cardWidth, cardHeight), WorkshopUi.Paper);
                 ui.Label(card, "Composite family name", source.Name, new Rect(12, 6, cardWidth - 24, 40), 24, true);
                 RecipePicture(card, source.Snapshot, "Composite structure illustration", new Rect(12, 48, cardWidth - 24, cardHeight - 98));
-                ui.Button(card, "Composite choose family " + source.Snapshot.Recipe.Structure.Family, new Rect(12, cardHeight - 42, cardWidth - 24, 34), T("choose"), () => {
-                    var old = DraftSession.Draft;
-                    string pendingName = DraftSession.Name;
-                    DraftSession.Begin(new AlbumEntry(old.Id, old.Name, old.Revision, source.Snapshot));
-                    DraftSession.Rename(pendingName); feedback = ""; Refresh();
-                }, WorkshopIcon.Check);
+                var offer = run.Workshop.GetStructureOffer(source.Snapshot.Recipe.Structure.Family);
+                string caption = offer.Owned ? T("choose") : "Купить · " + offer.GoldCost + " зол. · ур. " + offer.RequiredLevel;
+                var action = ui.Button(card, "Composite choose family " + source.Snapshot.Recipe.Structure.Family,
+                    new Rect(12, cardHeight - 42, cardWidth - 24, 34), caption, () => {
+                        if (offer.Owned) InspectStructureFamily(source);
+                        else PurchaseStructureOffer(source);
+                    }, offer.Owned ? WorkshopIcon.Check : WorkshopIcon.Cost);
+                action.interactable = offer.Owned || offer.CanPurchase;
             }
             ui.Button(parent, "Composite edit structure", new Rect(18, h - 60, w - 36, 44), T("composition"), () => { DraftSession.OpenStructure(); Refresh(); }, WorkshopIcon.Settings);
         }
@@ -331,23 +361,7 @@ namespace PaperDefense.Presentation
             var bounds = new Rect(14, 58, w - 28, imageHeight);
             WorkshopScenery(parent, "Composite preview scenery", bounds, .55f);
             if (recipe.Tower != null && Step == 0 && FoundationPicture(parent, recipe.Tower.Foundation, "Composite certified foundation preview", bounds)) return;
-            if (RecipePicture(parent, DraftSession.PreviewEntry.Snapshot, "Composite certified recipe preview", new Rect(14, 58, w - 28, imageHeight))) return;
-            if (recipe.Tower != null)
-            {
-                var exact = WorkshopUi.Graphic<WeaponAssemblyGraphic>(parent, "Composite certified recipe preview", new Rect(14, 58, w - 28, imageHeight));
-                bool supported = false;
-                try { exact.SetRecipe(DraftSession.PreviewEntry.Snapshot); supported = true; }
-                catch (ArgumentException) { }
-                catch (InvalidOperationException) { }
-                catch (NotSupportedException) { }
-                if (supported) return;
-                WorkshopUi.RemoveView(exact.gameObject);
-                var schematic = WorkshopUi.Graphic<BlueprintSketch>(parent, "Composite family schematic", new Rect(14, 58, w - 28, imageHeight - 30));
-                schematic.SetBlueprint(PreviewBlueprint(recipe.Tower));
-            }
-            else StructurePicture(parent, recipe.Structure.Family, new Rect(14, 58, w - 28, imageHeight - 30));
-            var caption = ui.Label(parent, "Composite schematic caption", T("neutral"), new Rect(18, 58 + imageHeight - 28, w - 36, 26), 17, color: WorkshopUi.Muted);
-            caption.alignment = TextAnchor.MiddleCenter;
+            StandardAssemblyIllustration.Draw(parent, DraftSession.PreviewEntry, bounds, "Composite certified recipe preview");
         }
 
         bool RecipePicture(Transform parent, RecipeSnapshot snapshot, string name, Rect bounds)
@@ -390,28 +404,7 @@ namespace PaperDefense.Presentation
         static void WorkshopScenery(Transform parent, string name, Rect bounds, float opacity)
         {
             var scenery = WorkshopUi.Graphic<Image>(parent, name, bounds);
-            scenery.sprite = Resources.Load<Sprite>("Art/Player/FoundationPreviewScenery");
-            scenery.preserveAspect = true; scenery.raycastTarget = false; scenery.color = new Color(1, 1, 1, opacity);
-        }
-
-        TowerBlueprint PreviewBlueprint(TowerRecipe tower)
-        {
-            string frame = "chassis." + tower.Foundation.Frame.Id.Substring("frame.".Length);
-            var weapons = tower.Mounts.Select(item => new WeaponMountSelection(item.SlotIndex, "weapon." + item.Weapon.Mechanism.Id.Substring("core.".Length)));
-            var modules = tower.Foundation.Armor.Id == "armor.none" ? Array.Empty<ModuleSelection>() : new[] { new ModuleSelection("preview.armor", "module.armor") };
-            return new TowerBlueprint("preview.assembly", "Preview", frame, weapons, modules, content: run.Content);
-        }
-        void StructurePicture(Transform parent, AssemblyStructureFamily family, Rect bounds)
-        {
-            if (family == AssemblyStructureFamily.Generator)
-            {
-                var icon = WorkshopUi.Graphic<WorkshopIconGraphic>(parent, "Composite generator schematic", bounds); icon.Icon = WorkshopIcon.Ink; icon.color = WorkshopUi.Blue;
-            }
-            else
-            {
-                var image = WorkshopUi.Graphic<NotebookArtGraphic>(parent, "Composite structure illustration", bounds);
-                image.Bind(family == AssemblyStructureFamily.Wall ? "object.barricade-site" : family == AssemblyStructureFamily.Repair ? "object.repair" : "object.tar");
-            }
+            scenery.raycastTarget = false; scenery.color = new Color(.93f, .95f, .97f, opacity);
         }
 
         string CompositionText(bool activeOnly = false)

@@ -27,8 +27,8 @@ namespace PaperDefense.Presentation
         public WorkshopUi(UserTextResolver resolver = null)
         {
             this.resolver = resolver ?? TextResourcesAsset.Default;
-            BodyFont = Resources.Load<Font>("NotebookNeucha") ?? Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            HeadingFont = BodyFont;
+            BodyFont = FieldTypography.Regular;
+            HeadingFont = FieldTypography.Semibold;
         }
 
         public string Resolve(string value) => GameText.Resolve(resolver, value);
@@ -80,7 +80,7 @@ namespace PaperDefense.Presentation
             if (heading) bounds.height = Mathf.Max(bounds.height, Mathf.Ceil(size * 1.5f));
             var label = Graphic<UnityEngine.UI.Text>(parent, name, bounds);
             label.font = heading ? HeadingFont : BodyFont;
-            label.fontStyle = FontStyle.Bold;
+            label.fontStyle = FontStyle.Normal;
             label.text = Resolve(value);
             label.fontSize = size;
             label.color = color ?? Ink;
@@ -99,16 +99,16 @@ namespace PaperDefense.Presentation
             background.Radius = 12;
             var button = surface.gameObject.AddComponent<WorkshopButton>();
             float padding = Mathf.Min(16, bounds.width * .08f);
-            float iconSize = icon == WorkshopIcon.None ? 0 : Mathf.Min(24, Mathf.Max(0, bounds.height - 16));
+            float iconSize = icon == WorkshopIcon.None ? 0 : Mathf.Min(PlayerUi.ActionIconSize, Mathf.Max(0, bounds.height - 16));
             float captionX = padding + (iconSize > 0 ? iconSize + 9 : 0);
             var label = Label(surface, "Caption", caption,
                 new Rect(captionX, 4, Mathf.Max(0, bounds.width - captionX - padding), Mathf.Max(0, bounds.height - 8)),
-                19, color: primary ? Paper : Ink);
+                PlayerUi.ActionCaptionSize, color: primary ? Paper : Ink);
             label.alignment = icon == WorkshopIcon.None ? TextAnchor.MiddleCenter : TextAnchor.MiddleLeft;
-            label.fontStyle = FontStyle.Bold;
+            label.font = HeadingFont;
             label.resizeTextForBestFit = true;
             label.resizeTextMinSize = 15;
-            label.resizeTextMaxSize = 22;
+            label.resizeTextMaxSize = PlayerUi.ActionCaptionMaxSize;
             label.rectTransform.anchorMin = Vector2.zero; label.rectTransform.anchorMax = Vector2.one;
             label.rectTransform.offsetMin = new Vector2(captionX, 4); label.rectTransform.offsetMax = new Vector2(-padding, -4);
             WorkshopIconGraphic symbol = null;
@@ -124,6 +124,25 @@ namespace PaperDefense.Presentation
             return button;
         }
 
+        /// <summary>Dense desktop controls retain the regular button's focus, submit and hint behavior.</summary>
+        public UnityEngine.UI.Button CompactButton(Transform parent, string name, Rect bounds, string caption,
+            Action action, WorkshopIcon icon = WorkshopIcon.None, bool primary = false)
+        {
+            var button = Button(parent, name, bounds, caption, action, icon, primary);
+            var label = button.transform.Find("Caption").GetComponent<UnityEngine.UI.Text>();
+            float padding = Mathf.Min(8, bounds.width * .08f);
+            float iconSize = icon == WorkshopIcon.None ? 0 : Mathf.Min(20, Mathf.Max(0, bounds.height - 12));
+            float captionX = padding + (iconSize > 0 ? iconSize + 6 : 0);
+            label.fontSize = 16;
+            label.resizeTextMinSize = 14;
+            label.resizeTextMaxSize = 16;
+            label.rectTransform.offsetMin = new Vector2(captionX, 3);
+            label.rectTransform.offsetMax = new Vector2(-padding, -3);
+            var symbol = button.transform.Find("Icon");
+            if (symbol != null) Place((RectTransform)symbol, new Rect(padding, (bounds.height - iconSize) * .5f, iconSize, iconSize));
+            return button;
+        }
+
         public UnityEngine.UI.Button IconButton(Transform parent, string name, Rect bounds, WorkshopIcon icon,
             string hint, Action action)
         {
@@ -131,7 +150,7 @@ namespace PaperDefense.Presentation
             var background = surface.GetComponent<WorkshopSurfaceGraphic>();
             background.Radius = 11;
             var button = surface.gameObject.AddComponent<WorkshopButton>();
-            float size = Mathf.Clamp(Mathf.Min(bounds.width, bounds.height) - 16, 0, 27);
+            float size = Mathf.Clamp(Mathf.Min(bounds.width, bounds.height) - 16, 0, PlayerUi.ActionIconSize);
             var symbol = Graphic<WorkshopIconGraphic>(surface, "Icon",
                 new Rect((bounds.width - size) * .5f, (bounds.height - size) * .5f, size, size));
             symbol.Icon = icon;
@@ -209,6 +228,10 @@ namespace PaperDefense.Presentation
         float outlineWidth;
         Color outlineColor;
         internal bool IsControl, Chosen, Focused, Disabled, Hovered, Pressed;
+        public bool FieldStyle;
+        public bool FieldPrimary;
+        internal bool FieldTab;
+        [System.NonSerialized] internal UiInteractionFeedback InteractionFeedback;
 
         public float Radius { get => radius; set { if (radius == value) return; radius = value; SetVerticesDirty(); } }
         internal void Outline(float width, Color tint)
@@ -224,6 +247,11 @@ namespace PaperDefense.Presentation
             vh.Clear();
             Rect bounds = rectTransform.rect;
             if (bounds.width <= 0 || bounds.height <= 0) return;
+            if (FieldStyle)
+            {
+                FieldMenuSkin.Draw(vh, bounds, color, IsControl, FieldPrimary, Chosen, Focused, Disabled, Hovered, Pressed, InteractionFeedback, FieldTab);
+                return;
+            }
             if (IsControl && color.a >= .9f && bounds.width >= 8 && bounds.height >= 8)
             {
                 NotebookPaperSurface.Draw(vh, bounds, color, true, Chosen, Focused, Disabled, Hovered, Pressed);
@@ -314,6 +342,7 @@ namespace PaperDefense.Presentation
             caption = label;
             symbol = icon;
             primary = prominent;
+            background.FieldPrimary = prominent;
             targetGraphic = surface;
             transition = Transition.None;
             DoStateTransition(currentSelectionState, true);
@@ -324,6 +353,8 @@ namespace PaperDefense.Presentation
             chosen = value;
             DoStateTransition(currentSelectionState, true);
         }
+
+        internal void RefreshFieldStyle() => DoStateTransition(currentSelectionState, true);
 
         protected override void DoStateTransition(SelectionState state, bool instant)
         {
@@ -340,6 +371,16 @@ namespace PaperDefense.Presentation
             if (decoration != null) { decoration.Focused = !disabled && focused; decoration.Hovered = !disabled && hovered; }
             Color fill = primary ? WorkshopUi.Blue : chosen ? WorkshopUi.Selected : WorkshopUi.Surface;
             Color foreground = primary ? WorkshopUi.Paper : chosen ? WorkshopUi.Blue : WorkshopUi.Ink;
+            if (background.FieldStyle)
+            {
+                background.FieldPrimary = primary;
+                background.color = fill;
+                background.SetVerticesDirty();
+                foreground = FieldMenuSkin.TextColor(foreground, primary, disabled);
+                if (caption != null) caption.color = foreground;
+                if (symbol != null) symbol.color = foreground;
+                return;
+            }
             if (disabled)
             {
                 fill = WorkshopUi.Surface;

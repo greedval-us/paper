@@ -9,19 +9,11 @@ namespace PaperDefense.Presentation
     public static class NotebookTowerComposition
     {
         static readonly MeshPen uiPen = new MeshPen(null, 4096);
-        public static bool UsesResourceArt(TowerBlueprint blueprint)
-            => blueprint != null && !blueprint.HasPlayerDrawing;
         internal static bool UsesComposition(TowerBlueprint blueprint)
             => blueprint != null;
 
         public static bool TryGetBounds(TowerBlueprint blueprint, out Rect bounds)
         {
-            if (AssemblyVisualComposer.Supports(blueprint))
-            {
-                bounds = AssemblyVisualComposer.ComposeLegacy(blueprint, null, Vector2.zero, null).Bounds;
-                if (blueprint.Reinforcement != null) bounds = Union(bounds, new Rect(-.65f, -.65f, 1.3f, 1.3f));
-                return true;
-            }
             uiPen.Clear();
             if (blueprint != null)
             {
@@ -29,34 +21,11 @@ namespace PaperDefense.Presentation
                 DrawMounts(uiPen, blueprint, Vector2.zero, MaterialTier.Ink, InkColor.None, default, false, null, 0, 0);
             }
             bool found = uiPen.TryGetBounds(out bounds);
-            if (found && NotebookMountLayout.Supports(blueprint))
-            {
-                // Reserve the whole rotation/recoil envelope once, so aiming never clips or pumps the UI scale.
-                foreach (var selected in blueprint.WeaponMounts)
-                {
-                    var mount = NotebookMountLayout.Resolve(blueprint, selected.SlotIndex);
-                    float radius = mount.MotionRadius(NotebookVisualThemeAsset.Default?.FindRecoil(mount.WeaponId)?.Distance ?? 0);
-                    bounds = Union(bounds, new Rect(mount.RotationCenter - Vector2.one * radius, Vector2.one * radius * 2));
-                }
-                if (blueprint.Reinforcement != null) bounds = Union(bounds, new Rect(-.65f, -.65f, 1.3f, 1.3f));
-            }
+            if (found && blueprint.Reinforcement != null) bounds = Union(bounds, new Rect(-.65f, -.65f, 1.3f, 1.3f));
             return found;
         }
         static Rect Union(Rect left, Rect right) => Rect.MinMaxRect(Mathf.Min(left.xMin, right.xMin),
             Mathf.Min(left.yMin, right.yMin), Mathf.Max(left.xMax, right.xMax), Mathf.Max(left.yMax, right.yMax));
-        static bool UsesStandardLayout(TowerBlueprint blueprint, NotebookVisualThemeAsset theme)
-        {
-            if (!NotebookMountLayout.Supports(blueprint)) return false;
-            foreach (var selected in blueprint.WeaponMounts)
-            {
-                var shape = theme?.FindShape(selected.WeaponId);
-                if (shape != null && NotebookArtRenderer.IsNativeUtility(shape)) return false;
-            }
-            return true;
-        }
-        static bool UsesAssemblyComposition(TowerBlueprint blueprint, NotebookVisualThemeAsset theme)
-            => AssemblyVisualComposer.Supports(blueprint) && UsesStandardLayout(blueprint, theme);
-
         public static void DrawUI(VertexHelper target, TowerBlueprint blueprint, Vector2 center, float scale,
             MaterialTier tier = MaterialTier.Ink, InkColor ink = InkColor.None)
         {
@@ -72,7 +41,7 @@ namespace PaperDefense.Presentation
         {
             if (recipe == null) return;
             uiPen.Clear();
-            AssemblyVisualComposer.Compose(recipe, pose).Draw(uiPen, Vector2.zero);
+            using (uiPen.WithUiDetail(scale)) AssemblyVisualComposer.Compose(recipe, pose).Draw(uiPen, Vector2.zero);
             uiPen.CopyTo(target, center, scale);
         }
 
@@ -90,25 +59,23 @@ namespace PaperDefense.Presentation
         }
 
         internal static void DrawStatic(MeshPen pen, TowerBlueprint blueprint, Vector2 at, MaterialTier tier,
-            InkColor ink, float opacity = 1, NotebookVisualThemeAsset theme = null)
+            InkColor ink, float opacity = 1, NotebookVisualThemeAsset theme = null, float body = 0)
         {
             theme = theme ?? NotebookVisualThemeAsset.Default;
-            // The complete modular tree shares one batch so front panels can cover moving weapons.
-            if (UsesAssemblyComposition(blueprint, theme)) return;
             Color tint = MeshPen.Alpha(DoodleGlyphs.TierColor(tier), opacity);
             bool authored = blueprint.HasPlayerDrawing;
             var geometry = authored ? AuthoredGeometryCache.For(blueprint.Drawing) : null;
             foreach (var template in DrawingTemplateCatalog.Create(blueprint))
             {
                 if (template.Role == DrawingPartRole.Mount) continue;
-                Vector2 pivot = at + new Vector2(template.Pivot.X, template.Pivot.Y);
-                if (authored) { pen.Append(geometry.GetPart(template.BindingId), pivot, 0, tint); continue; }
+                Vector2 pivot = at + NotebookMountLayout.Rotate(new Vector2(template.Pivot.X, template.Pivot.Y), body);
+                if (authored) { pen.Append(geometry.GetPart(template.BindingId), pivot, body, tint); continue; }
                 string id = template.Role == DrawingPartRole.Base ? blueprint.ChassisId : null;
                 if (template.Role == DrawingPartRole.Module)
                     foreach (var module in blueprint.ModuleSelections)
                         if (DrawingBindings.Module(module.InstanceId) == template.BindingId) { id = module.DefinitionId; break; }
                 if (id == null) continue;
-                DoodleGlyphs.DrawResource(pen, id, pivot, opacity: opacity, theme: theme);
+                DoodleGlyphs.DrawResource(pen, id, pivot, radians: body, opacity: opacity, theme: theme);
             }
         }
 
@@ -116,10 +83,11 @@ namespace PaperDefense.Presentation
             double seconds = 0, NotebookAnimationState animation = null, NotebookVisualThemeAsset theme = null)
         {
             var blueprint = structure.Blueprint;
+            float body = NotebookMountLayout.BodyRadians(structure);
             if (!blueprint.HasPlayerDrawing)
             {
                 float opacity = Mathf.Lerp(.2f, 1, Mathf.Clamp01(fraction));
-                DrawStatic(pen, blueprint, origin, structure.Tier, structure.Color, opacity, theme);
+                DrawStatic(pen, blueprint, origin, structure.Tier, structure.Color, opacity, theme, body);
                 DrawMounts(pen, blueprint, origin, structure.Tier, structure.Color, structure, true,
                     animation, structure.Id, seconds, opacity, theme);
                 return;
@@ -127,51 +95,29 @@ namespace PaperDefense.Presentation
             var geometry = AuthoredGeometryCache.For(blueprint.Drawing);
             foreach (var template in DrawingTemplateCatalog.Create(blueprint))
             {
-                Vector2 pivot = origin + new Vector2(template.Pivot.X, template.Pivot.Y);
-                pen.AppendRevealed(geometry.GetPart(template.BindingId), pivot, 0,
+                Vector2 pivot = origin + NotebookMountLayout.Rotate(new Vector2(template.Pivot.X, template.Pivot.Y), body);
+                pen.AppendRevealed(geometry.GetPart(template.BindingId), pivot, body,
                     DoodleGlyphs.TierColor(structure.Tier), fraction);
             }
         }
 
         internal static void DrawMounts(MeshPen pen, TowerBlueprint blueprint, Vector2 origin, MaterialTier tier,
             InkColor ink, StructureView structure, bool aimed, NotebookAnimationState animation, int structureId,
-            double seconds, float opacity = 1, NotebookVisualThemeAsset theme = null, Func<int, Point2> overrideAim = null)
+            double seconds, float opacity = 1, NotebookVisualThemeAsset theme = null, Func<int, Point2> overrideAim = null,
+            float previewHeading = 90)
         {
             theme = theme ?? NotebookVisualThemeAsset.Default;
-            if (UsesAssemblyComposition(blueprint, theme))
-            {
-                var composition = AssemblyVisualComposer.ComposeLegacy(blueprint,
-                    slot => overrideAim != null ? overrideAim(slot) : aimed ? structure.GetMountAim(slot) : default,
-                    origin, slot => animation?.Recoil(structureId, slot, seconds, theme) ?? 0);
-                composition.Draw(pen, origin, opacity, NotebookArtRenderer.RasterTint(theme));
-                return;
-            }
             Color tint = MeshPen.Alpha(blueprint.HasPlayerDrawing || ink == InkColor.None
                 ? DoodleGlyphs.TierColor(tier) : DoodleGlyphs.InkTone(ink), opacity);
             var authored = blueprint.HasPlayerDrawing ? AuthoredGeometryCache.For(blueprint.Drawing) : null;
-            if (UsesStandardLayout(blueprint, theme))
-            {
-                // Draw order is independent of slot identity; a missing neighbour never renumbers a socket.
-                for (int layer = 0; layer < 16; layer++)
-                for (int order = 0; order < 3; order++)
-                    foreach (var mount in blueprint.WeaponMounts)
-                    {
-                        var resolved = NotebookMountLayout.Resolve(blueprint, mount.SlotIndex);
-                        if (resolved.DrawOrder != order) continue;
-                        Point2 target = overrideAim != null ? overrideAim(mount.SlotIndex)
-                            : aimed ? structure.GetMountAim(mount.SlotIndex) : default;
-                        resolved.Draw(pen, origin, resolved.AimAngle(target, origin),
-                            animation?.Recoil(structureId, mount.SlotIndex, seconds, theme) ?? 0,
-                            opacity, NotebookArtRenderer.RasterTint(theme), layer);
-                    }
-                return;
-            }
+            float body = aimed ? NotebookMountLayout.BodyRadians(structure) : NotebookMountLayout.BodyRadians(previewHeading);
             foreach (var mount in blueprint.WeaponMounts)
             {
                 Point2 local = DrawingTemplateCatalog.Pivot(blueprint, DrawingBindings.Mount(mount.SlotIndex));
-                Vector2 pivot = origin + new Vector2(local.X, local.Y);
-                Point2 aim = overrideAim != null ? overrideAim(mount.SlotIndex) : aimed ? structure.GetMountAim(mount.SlotIndex) : default;
-                Vector2 forward = Direction(aim, pivot);
+                Vector2 pivot = origin + NotebookMountLayout.Rotate(new Vector2(local.X, local.Y), body);
+                var live = aimed ? structure.GetMountState(mount.SlotIndex) : default;
+                Point2 aim = overrideAim != null ? overrideAim(mount.SlotIndex) : live.HasAimPoint ? live.Aim : default;
+                Vector2 forward = AimDirection(aim, pivot, aimed ? structure.FacingDegrees : previewHeading);
                 float angle = Mathf.Atan2(forward.y, forward.x) - Mathf.PI * .5f;
                 // A quiet mounting ring separates the rotating weapon from the authored body.
                 if (aimed && pen.WorldUnitsPerPixel > 0)
@@ -186,27 +132,10 @@ namespace PaperDefense.Presentation
             NotebookAnimationState animation, NotebookVisualThemeAsset theme)
         {
             Vector2 origin = new Vector2(structure.Cell.X + .5f, structure.Cell.Y + .5f);
-            if (UsesAssemblyComposition(structure.Blueprint, theme))
-            {
-                var composition = AssemblyVisualComposer.ComposeLegacy(structure.Blueprint,
-                    mountSlot => structure.GetMountAim(mountSlot), origin,
-                    mountSlot => animation?.Recoil(structure.Id, mountSlot, seconds, theme) ?? 0);
-                foreach (var anchor in composition.Anchors)
-                    if (anchor.SlotIndex == slot) return origin + anchor.Muzzle;
-                throw new ArgumentException("Missing occupied assembly mount.", nameof(slot));
-            }
-            if (UsesStandardLayout(structure.Blueprint, theme))
-            {
-                var mount = NotebookMountLayout.Resolve(structure.Blueprint, slot);
-                // Effect endpoints may be individual fan rays or an extended piercer ray.
-                // Their origin follows the rendered mount pose, not the direction of that segment.
-                return origin + mount.Transform(mount.Muzzle, mount.AimAngle(structure.GetMountAim(slot), origin),
-                    animation?.Recoil(structure.Id, slot, seconds, theme) ?? 0);
-            }
             Point2 point = structure.Blueprint == null ? new Point2(0, .04f)
                 : DrawingTemplateCatalog.Pivot(structure.Blueprint, DrawingBindings.Mount(slot));
-            Vector2 pivot = origin + new Vector2(point.X, point.Y);
-            Vector2 forward = Direction(aim, pivot), side = new Vector2(forward.y, -forward.x);
+            Vector2 pivot = origin + NotebookMountLayout.Rotate(new Vector2(point.X, point.Y), NotebookMountLayout.BodyRadians(structure));
+            Vector2 forward = AimDirection(aim, pivot, structure.FacingDegrees), side = new Vector2(forward.y, -forward.x);
             string weapon = structure.Blueprint?.GetWeaponId(slot) ?? structure.ContentId;
             var recoil = theme?.FindRecoil(weapon);
             Vector2 muzzle = recoil == null ? new Vector2(0, .5f) : recoil.Muzzle;
@@ -224,11 +153,12 @@ namespace PaperDefense.Presentation
             return (recordedFrom - source).sqrMagnitude <= .00000001f
                 ? Muzzle(structure, slot, aim, seconds, animation, theme) : recordedFrom;
         }
-        static Vector2 Direction(Point2 aim, Vector2 pivot)
+        internal static Vector2 AimDirection(Point2 aim, Vector2 pivot, float facingDegrees)
         {
-            if (aim.X == 0 && aim.Y == 0) return Vector2.up;
             Vector2 direction = new Vector2(aim.X, aim.Y) - pivot;
-            return direction.sqrMagnitude < .00001f ? Vector2.up : direction.normalized;
+            if ((aim.X != 0 || aim.Y != 0) && direction.sqrMagnitude >= .00001f) return direction.normalized;
+            float radians = facingDegrees * Mathf.Deg2Rad;
+            return new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
         }
     }
 }

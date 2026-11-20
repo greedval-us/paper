@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PaperDefense.Core
 {
     /// <summary>Owns bounded corpse marks and their lifecycle; callers own buffs, costs and cooldowns.</summary>
-    internal sealed class CorpseBlotSystem : IBlotRangeContext
+    internal sealed class CorpseBlotSystem : IBlotContext
     {
         readonly int width, height, cellCount;
         readonly List<BlotState> blots;
@@ -99,10 +99,8 @@ namespace PaperDefense.Core
             Compact();
         }
 
-        public bool TryFindNearest(Point2 origin, float range, out Cell cell)
-            => BlotQueries.TryFindNearest(blots, origin, range, out cell);
-        public bool TryFindNearest(Point2 origin,float minimumRange,float maximumRange,out Cell cell)
-            =>BlotQueries.TryFindNearest(blots,origin,minimumRange,maximumRange,out cell);
+        public bool TryFindNearest(Point2 origin,float minimumRange,float maximumRange,FiringSector sector,out Cell cell)
+            =>BlotQueries.TryFindNearest(blots,origin,minimumRange,maximumRange,sector,out cell);
 
         public int Clear(Cell center, float radius)
         {

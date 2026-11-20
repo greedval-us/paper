@@ -38,7 +38,7 @@ namespace PaperDefense.Tests
         static StructureState BuildGun(GameSession session)
         {
             var cell = new Cell(session.BaseCell.X + 4, session.BaseCell.Y + 4);
-            Assert.That(session.TryBuild(new[] { cell }, StructureKind.Gun, MaterialTier.Pencil, out string reason), Is.True, reason);
+            Assert.That(session.TryBuild(new[] { cell }, StructureKind.Gun, MaterialTier.Pencil, out string reason, facingDegrees: 0), Is.True, reason);
             return session.StructureAt(cell);
         }
 

@@ -27,7 +27,7 @@ namespace PaperDefense.Core
             {
                 AssemblyProfileDataCopy.GuardFuture(source);
                 if (source == null) return new ProfileMigrationResult(WorkshopProfile.CreateNew(catalog), Array.Empty<AssemblyDiagnostic>());
-                if (source.Version == WorkshopProfile.CurrentVersion)
+                if (source.Version >= 8)
                     return new ProfileMigrationResult(WorkshopProfile.ReadVersionEight(source, catalog, legacyBalance), Array.Empty<AssemblyDiagnostic>());
                 var candidate = WorkshopProfile.ReadHistorical(source);
                 candidate.PrepareMigratedEntries(catalog, legacyBalance);
@@ -83,7 +83,7 @@ namespace PaperDefense.Core
             {
                 var x = a.Weapons[i]; var y = b.Weapons[i];
                 if (x.SlotIndex != y.SlotIndex || x.Attack != y.Attack || x.TargetLimit != y.TargetLimit || !Near(x.Damage,y.Damage)
-                    || !Near(x.Range,y.Range) || !Near(x.MinimumRange,y.MinimumRange) || !Near(x.AcquisitionSeconds,y.AcquisitionSeconds)
+                    || !Near(x.Range,y.Range) || !Near(x.MinimumRange,y.MinimumRange) || !Near(x.FiringArcDegrees,y.FiringArcDegrees) || !Near(x.AcquisitionSeconds,y.AcquisitionSeconds)
                     || !Near(x.IntervalAtFeed(a.FeedMultiplier),y.IntervalAtFeed(b.FeedMultiplier)) || !Near(x.Radius,y.Radius)
                     || !Near(x.FlightSeconds,y.FlightSeconds) || !Near(x.JumpRange,y.JumpRange) || !Near(x.ConeDegrees,y.ConeDegrees)
                     || !Near(x.SlowSpeedMultiplier,y.SlowSpeedMultiplier) || !Near(x.SlowSeconds,y.SlowSeconds)) return false;
@@ -118,6 +118,7 @@ namespace PaperDefense.Core
         {
             var profile = new WorkshopProfile(content, preparedBalance);
             if (catalog == null) return profile;
+            profile.unlocked.Add(StructureShopMarker);
             if (catalog.Starters.Count != ProfileLimits.LoadoutSlotCount) throw new ArgumentException("Eight assembly starter pages are required.");
             profile.entries.Clear(); profile.album.Clear(); Array.Clear(profile.loadout, 0, profile.loadout.Length);
             profile.GrantInitialComponents(catalog);
@@ -134,7 +135,7 @@ namespace PaperDefense.Core
         }
         internal static WorkshopProfile ReadVersionEight(WorkshopProfileData data, ComponentCatalog catalog, GameBalance balance)
         {
-            if (data.Version != CurrentVersion || data.Gold < 0 || data.TotalXp < 0 || data.Entries == null || data.Entries.Length > ProfileLimits.MaximumAlbumPages
+            if (data.Version < 8 || data.Version > CurrentVersion || data.Gold < 0 || data.TotalXp < 0 || data.Entries == null || data.Entries.Length > ProfileLimits.MaximumAlbumPages
                 || data.Unlocked == null || data.Loadout == null || data.Loadout.Length != ProfileLimits.LoadoutSlotCount
                 || data.Library == null || data.Rewards == null || data.Operations == null) throw new ArgumentException("Invalid version eight profile.");
             var profile = new WorkshopProfile(); profile.entries.Clear(); profile.album.Clear(); profile.unlocked.Clear();
@@ -187,6 +188,12 @@ namespace PaperDefense.Core
                 profile.operations.Add(Copy(saved));
             }
             profile.content = balance?.ResolveContent();
+            if (catalog != null || profile.entries.Any(e => e.Kind == AlbumEntryKind.Structure) || profile.unlocked.Contains("site.spikes"))
+                profile.MigrateStructureShop();
+            profile.GrantInitialComponents(catalog);
+            profile.ReadCampaignData(data);
+            profile.ReadNamedLoadoutData(data);
+            profile.ReadMissionCheckpointData(data);
             return profile;
         }
         static Guid ReceiptGuid(string id)
@@ -194,9 +201,14 @@ namespace PaperDefense.Core
         static RunRewardReceiptData Copy(RunRewardReceiptData r) => new RunRewardReceiptData { Version=r.Version, RunId=r.RunId, Waves=r.Waves, VictoryBonus=r.VictoryBonus };
         static OperationReceiptData Copy(OperationReceiptData r) => new OperationReceiptData { Version=r.Version, OperationId=r.OperationId, Type=r.Type, ResultId=string.IsNullOrEmpty(r.ResultId) ? null : r.ResultId };
         void GrantInitialComponents(ComponentCatalog catalog)
-        { if (catalog != null) foreach (var part in catalog.Definitions) if (part.RequiredLevel == 1 && part.UnlockGold == 0) unlocked.Add(part.Id); }
+        {
+            if (catalog == null) return;
+            foreach (var part in catalog.Definitions) if (part.RequiredLevel == 1 && part.UnlockGold == 0) unlocked.Add(part.Id);
+            EnsureStarterLibraryComponents(catalog);
+        }
         internal void PrepareMigratedEntries(ComponentCatalog catalog, GameBalance balance)
         {
+            if (catalog != null) unlocked.Add(StructureShopMarker);
             GrantInitialComponents(catalog);
             // Explicit right aliases retain purchased capabilities; historical IDs and drawing aids remain owned.
             var aliases = new Dictionary<string,string>(StringComparer.Ordinal) {

@@ -14,6 +14,7 @@ namespace PaperDefense.Core
         public float Remaining { get; internal set; }
         public float Duration { get; internal set; }
         public float Damage { get; internal set; }
+        internal float ObjectiveDamageScale = 1;
         public int ObjectiveIndex { get; internal set; }
         public EnemyKind SourceEnemyKind { get; internal set; }
         public DrawingTier SourceEnemyDrawingTier { get; internal set; }

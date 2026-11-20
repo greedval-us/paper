@@ -208,7 +208,7 @@ namespace PaperDefense.Core
                     regions.Add(new AssemblyFitRegion(r.Motion, points)); moving |= r.Motion != "fixed";
                 }
                 Require(moving, "coverage", w.MechanismId);
-                var compatible = Compatible(w.CompatibleParts, ComponentCategory.Mechanism, ComponentCategory.Trigger, w.MechanismId);
+                var compatible = Compatible(w.CompatibleParts, ComponentCategory.Mechanism, ComponentCategory.Trigger, w.MechanismId, true);
                 var weapon = new AssemblyFitWeapon(w, required, regions, compatible);
                 AssemblyFitRules.SweptRadius(weapon); // Reject finite author coordinates whose derived radius overflows U.
                 weapons.Add((w.MechanismId, w.Revision), weapon); ownedWeapons.Add(weapon);
@@ -216,8 +216,7 @@ namespace PaperDefense.Core
             var ownedStructures = new List<AssemblyFitStructure>();
             foreach (var s in input.Structures ?? Array.Empty<AssemblyFitStructureInput>())
             {
-                Require(s != null && (s.Family == AssemblyStructureFamily.Wall || s.Family == AssemblyStructureFamily.Slow
-                    || s.Family == AssemblyStructureFamily.Repair || s.Family == AssemblyStructureFamily.Generator)
+                Require(s != null && StructureRecipe.IsKnownFamily(s.Family)
                     && !structures.ContainsKey(s.Family) && s.RequiredParts != null && s.RequiredParts.Length == 4
                     && s.Regions != null && s.Regions.Length > 0, "coverage", "structures");
                 var required = Compatible(s.RequiredParts, ComponentCategory.Site, ComponentCategory.Utility, "structures");
@@ -242,7 +241,7 @@ namespace PaperDefense.Core
             }
             Parts = ownedParts.AsReadOnly(); Frames = ownedFrames.AsReadOnly(); Weapons = ownedWeapons.AsReadOnly(); Structures = ownedStructures.AsReadOnly();
         }
-        List<PartRef> Compatible(PartRefInput[] source, ComponentCategory min, ComponentCategory max, string path)
+        List<PartRef> Compatible(PartRefInput[] source, ComponentCategory min, ComponentCategory max, string path, bool allowMount = false)
         {
             var list = new List<PartRef>(); var seen = new HashSet<(string, int)>();
             foreach (var p in source ?? Array.Empty<PartRefInput>())
@@ -250,7 +249,7 @@ namespace PaperDefense.Core
                 Require(p != null && p.Id != null && TryGetPart(p.Id, p.Revision, out var _)
                     && seen.Add((p.Id, p.Revision)), "coverage", path);
                 var category = parts[(p.Id, p.Revision)].Category;
-                Require(category >= min && category <= max, "coverage", path); list.Add(new PartRef(p.Id, p.Revision));
+                Require(category >= min && category <= max || allowMount && category == ComponentCategory.Mount, "coverage", path); list.Add(new PartRef(p.Id, p.Revision));
             }
             return list;
         }

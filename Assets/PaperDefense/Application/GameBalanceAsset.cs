@@ -9,6 +9,8 @@ namespace PaperDefense.Application
     {
         [Tooltip("Источник подготовленного каталога и правил. Старые поля ниже используются только ассетами без ссылки, для миграции v1–v4 и legacy fixtures.")]
         public BalancePresetAsset dataPreset;
+        [Tooltip("Запускать выбранную страницу тетрадной кампании. Выключено для отдельных balance fixtures и испытаний.")]
+        public bool campaignEnabled;
         [Tooltip("Явный адаптер старых fixtures/миграции. Для рабочих мигрированных ассетов выключен: потерянная ссылка на пресет — ошибка.")]
         public bool legacyAuthoringAdapter = true;
         [Header("Страница")]
@@ -49,7 +51,7 @@ namespace PaperDefense.Application
 
         public GameBalance CreateBalance()
         {
-            if (dataPreset != null) return dataPreset.CreateBalance();
+            if (dataPreset != null) return ApplyFieldDevelopment(dataPreset.CreateBalance());
             if (!legacyAuthoringAdapter) throw new ArgumentException(UserText.Message("copy.7a045f879970f558", name));
             Finite(baseHealth, nameof(baseHealth)); Finite(planningSeconds, nameof(planningSeconds)); Finite(intermissionSeconds, nameof(intermissionSeconds));
             Finite(passiveInkPerSecond, nameof(passiveInkPerSecond)); Finite(earlyLaunchInkPerSecond, nameof(earlyLaunchInkPerSecond));
@@ -143,7 +145,7 @@ namespace PaperDefense.Application
 
         public GameBalance CreateWorkshopBalance()
         {
-            if (dataPreset != null) return dataPreset.CreateBalance();
+            if (dataPreset != null) return ApplyFieldDevelopment(dataPreset.CreateBalance());
             if (!legacyAuthoringAdapter) throw new ArgumentException(UserText.Message("copy.7a045f879970f558", name));
             Finite(wellHealth, nameof(wellHealth)); Finite(blotterRadius, nameof(blotterRadius)); Finite(blotterCooldown, nameof(blotterCooldown));
             Finite(blotLifetime, nameof(blotLifetime)); Finite(blotBuffSeconds, nameof(blotBuffSeconds));
@@ -160,6 +162,18 @@ namespace PaperDefense.Application
             if(generateNewThreats)AddWorkshopThreats(result);
             if (useTargetWorkshopPreset) result = GameBalancePresets.ApplyTargetWorkshop(result,targetSettings);
             BalanceValidation.Validate(result);
+            return result;
+        }
+
+        GameBalance ApplyFieldDevelopment(GameBalance result)
+        {
+            // These session rules belong to the player configuration, independent of the parts preset.
+            if (mechanics != null && mechanics.FieldModernization)
+            {
+                result.Mechanics.FieldModernization = true;
+                result.Mechanics.MaximumModernizationRank = mechanics.MaximumModernizationRank;
+                result.Mechanics.RunUpgrades = false;
+            }
             return result;
         }
 

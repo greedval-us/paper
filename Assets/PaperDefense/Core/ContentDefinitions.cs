@@ -37,6 +37,7 @@ namespace PaperDefense.Core
         public StructureDefinition Stats = new StructureDefinition();
         public int Load, AssemblyCredit;
         public float MinimumLineRadius, MinimumRadialRange, MinimumRange;
+        public float FiringArcDegrees;
         public float MaximumFootprintAspectRatio = 3;
         public int VolleyPellets = 6;
         public float VolleyHitRadius = .18f;
@@ -164,6 +165,21 @@ namespace PaperDefense.Core
         internal StructureDefinition Numeric { get; }
         public StructureSpec Stats { get; } public AttackKind Attack { get; } public int Load { get; } public int AssemblyCredit { get; }
         public float MinimumLineRadius { get; } public float MinimumRadialRange { get; } public float MinimumRange { get; }
+        public float FiringArcDegrees { get; }
+        public const float MinimumFiringArc = 120f, MaximumFiringArc = 180f;
+
+        // Numerical snapshots from before directional fire only contain an attack family.
+        public static float DefaultFiringArc(AttackKind attack, bool stapler = false)
+        {
+            switch (attack)
+            {
+                case AttackKind.Single: return stapler ? 170f : 160f;
+                case AttackKind.Line: return 135f;
+                case AttackKind.AreaProjectile: return MinimumFiringArc;
+                case AttackKind.Ricochet: return 145f;
+                default: return MaximumFiringArc;
+            }
+        }
         public float MaximumFootprintAspectRatio { get; }
         public IReadOnlyList<string> EffectIds { get; }
         public IReadOnlyList<EffectDefinition> Effects { get; }
@@ -189,6 +205,11 @@ namespace PaperDefense.Core
             float maximum=input.Attack==AttackKind.Radial?Math.Max(input.MinimumRadialRange,Numeric.Radius):Numeric.Range;
             if(input.MinimumRange>=maximum&&(input.MinimumRange!=0||maximum!=0))throw new ArgumentException(UserText.Message("copy.2a0c9766160d6e89", Id));
             MinimumRange=input.MinimumRange;
+            FiringArcDegrees = input.FiringArcDegrees == 0
+                ? DefaultFiringArc(input.Attack, input.LegacyKind == StructureKind.Stapler)
+                : input.FiringArcDegrees;
+            if (!(FiringArcDegrees >= MinimumFiringArc && FiringArcDegrees <= MaximumFiringArc))
+                throw new ArgumentOutOfRangeException(Id + ".firingArcDegrees", "Firing arc must be 120–180 degrees.");
             Stats = new StructureSpec(Numeric); Attack = input.Attack; Load = input.Load; AssemblyCredit = input.AssemblyCredit; MinimumLineRadius = input.MinimumLineRadius; MinimumRadialRange = input.MinimumRadialRange;
             EffectIds = Array.AsReadOnly((input.EffectIds ?? throw new ArgumentException(UserText.Message("copy.697ca00931ccc35a", Id))).ToArray());
             var resolved=new List<EffectDefinition>();

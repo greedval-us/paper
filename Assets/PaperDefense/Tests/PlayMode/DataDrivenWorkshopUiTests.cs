@@ -6,7 +6,6 @@ using PaperDefense.Core;
 using PaperDefense.Presentation;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
 namespace PaperDefense.Tests
@@ -51,8 +50,6 @@ namespace PaperDefense.Tests
             if (profile == null) run.InitializeWorkshop(false); else run.InitializeWorkshop(new MemoryStore(profile));
         }
 
-        Button Button(string name) => root.GetComponentsInChildren<Button>(true).Single(value => value.name == name);
-
         [Test] public void HistoricalRemovedWeaponResolvesAgainstCurrentCatalogWithoutLosingRetainedBaseLines()
         {
             Initialize();
@@ -88,10 +85,9 @@ namespace PaperDefense.Tests
             preset.database=database;preset.rules=GlobalBalanceSettings.From(GameBalance.CreateDefault());
             Assert.DoesNotThrow(()=>Initialize(preset));
             var input=root.AddComponent<DrawingInput>();input.Initialize(run,null,null);
-            var notebook=root.AddComponent<NotebookHud>();Assert.DoesNotThrow(()=>notebook.Initialize(run,input));
             for(int slot=0;slot<ProfileLimits.LoadoutSlotCount;slot++)
-                Assert.That(Button("Tool "+slot).interactable,Is.EqualTo(assignOne&&slot==2));
-            Assert.DoesNotThrow(()=>Button("Tool 0").onClick.Invoke());
+                Assert.That(run.Workshop.Loadout[slot]!=null,Is.EqualTo(assignOne&&slot==2));
+            Assert.DoesNotThrow(()=>input.SelectSlot(0));
             Assert.That(input.BlueprintSlot,Is.EqualTo(-1));Assert.That(input.Message,Does.Contain("Назначь чертёж"));
             var session=run.Session;bool started=run.StartRun(out _);
             Assert.That(started,Is.EqualTo(assignOne));Assert.That(run.InWorkshop,Is.EqualTo(!assignOne));
@@ -102,7 +98,8 @@ namespace PaperDefense.Tests
             if(assignOne)Assert.That(empty.GetLoadoutBlueprints()[2],Is.Not.Null);
             Assert.DoesNotThrow(()=>run.InitializeWorkshop(new MemoryStore(empty)));
             Assert.That(input.BlueprintSlot,Is.EqualTo(-1));Assert.That(input.Tool,Is.EqualTo(StructureKind.Wall));
-            Assert.That(Button("Tool 0").interactable,Is.False);
+            Assert.DoesNotThrow(()=>input.SelectSlot(0));
+            Assert.That(input.BlueprintSlot,Is.EqualTo(-1));
         }
 
         sealed class MemoryStore : IWorkshopProfileStore

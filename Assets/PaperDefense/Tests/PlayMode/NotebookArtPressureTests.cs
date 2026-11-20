@@ -130,9 +130,9 @@ namespace PaperDefense.Tests
                     "A textured body and its bounded health/status marks must retain a small per-enemy vertex budget.");
                 var atlasCoordinates = new List<Vector2>();
                 WorldMesh(root).GetUVs(1, atlasCoordinates);
-                Assert.That(atlasCoordinates.Count(value => value != NotebookSpriteCatalog.WhiteUV),
-                    Is.GreaterThanOrEqualTo(scenario.ReadModel.Enemies.Count * 4),
-                    "Every crowd body must retain the new atlas illustration; the large crowd cannot restore retired fallback glyphs.");
+                Assert.That(atlasCoordinates.Count, Is.EqualTo(compactVertices));
+                Assert.That(atlasCoordinates, Is.All.EqualTo(new Vector2(.5f, .5f)),
+                    "Every crowd body must remain texture-free native geometry at the natural peak.");
                 for (int frame = 0; frame < 30; frame++)
                 {
                     yield return null;

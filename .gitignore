@@ -15,10 +15,65 @@ __pycache__/
 *.py[cod]
 
 # Local tooling and reproducible capture/staging output
-/Tools/**/node_modules/
+node_modules/
 /.playwright-cli/
 /Captures/
 /outputs/
+/.superpowers/
+/docs/superpowers/
+/PaperDefense-Publish/
+/.codex/
+/.agents/
+/.idea/
+/.vscode/
+/.vsconfig
+.DS_Store
+Thumbs.db
+
+# Developer credentials and local MCP configuration
+.env
+.env.*
+!.env.example
+.npmrc
+.mcp.json
+.mcp.local.json
+.aws/
+.ssh/
+id_rsa
+id_ed25519
+credentials.json
+service-account*.json
+*.sln.DotSettings.user
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.mobileprovision
+
+# Runtime captures, test-run evidence and generated workbooks
+/TestResults/
+/docs/validation/*
+!/docs/validation/README.md
+!/docs/validation/content/
+/docs/validation/content/*
+!/docs/validation/content/before/
+!/docs/validation/content/after/
+!/docs/validation/content/data-only-diff.json
+/docs/validation/content/before/*
+!/docs/validation/content/before/templates.json
+/docs/validation/content/after/*
+!/docs/validation/content/after/baseline-comparison.json
+!/docs/validation/content/after/development-build.json
+!/docs/validation/content/after/editor-acceptance.json
+!/docs/validation/content/after/editmode-tests.json
+!/docs/validation/content/after/player-acceptance.json
+!/docs/validation/content/after/playmode-tests.json
+/docs/balance/*.xlsx
+/docs/balance/preview/
+/docs/balance/formula-scan.json
+/docs/balance/workbook-validation.json
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data

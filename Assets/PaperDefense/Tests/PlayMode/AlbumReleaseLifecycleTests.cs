@@ -21,6 +21,7 @@ namespace PaperDefense.Tests
         [UnitySetUp] public IEnumerator SetUp()
         {
             fixture = new AssemblyCommandFixture();
+            fixture.BalanceAsset.campaignEnabled = true;
             root = new GameObject("Album release lifecycle player"); root.SetActive(false);
             game = root.AddComponent<PlayerGameRoot>(); game.Configure(fixture.BalanceAsset, true);
             root.SetActive(true);
@@ -59,14 +60,16 @@ namespace PaperDefense.Tests
         IEnumerator FullCycle()
         {
             Click("Open album"); Click("Album filter All"); Click("Album choose album.guard"); Click("Album edit");
-            Click("Composite library"); Click("Composite library back"); Click("Composite step 2");
+            Click("Sequence step 2"); Click("Sequence step 3");
             Click("Composite trial"); Click("Composite trial run");
             Assert.That(game.GetComponentInChildren<WorkshopHud>(true).Composite.LastAssemblyTrial, Is.Not.Null);
             yield return Settle();
-            Click("Composite close trial"); Click("Composite return"); Click("Album close");
-            Click("Open campaign"); Click("Prepare mission"); Click("Start battle"); Click("Launch wave");
+            Click("Composite trial header return"); Click("Composite return"); Click("Album close");
+            Click("Open campaign"); Click("Open mission"); Click("Prepare mission"); Click("Start battle"); Click("Launch wave");
             yield return Settle();
             Click("Battle pause"); Click("Leave battle"); Click("Confirm action"); Click("Back");
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Campaign));
+            Click("Back");
             Assert.That(game.Page, Is.EqualTo(PlayerPage.Home));
             Assert.That(game.Run.InWorkshop, Is.True);
             yield return Settle();

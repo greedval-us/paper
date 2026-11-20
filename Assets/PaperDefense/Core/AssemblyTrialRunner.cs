@@ -16,6 +16,7 @@ namespace PaperDefense.Core
         public string EntryName { get; internal set; }
         public AssemblyTrialScenario Scenario { get; internal set; }
         public ResolvedEntry Resolved { get; internal set; }
+        public TrialModernizationConfiguration Modernization { get; internal set; } = TrialModernizationConfiguration.Baseline;
         public TrialReport Recording { get; internal set; }
         public IReadOnlyList<TrialFrame> Frames => Recording.Frames;
         public int Budget { get; internal set; }
@@ -28,6 +29,8 @@ namespace PaperDefense.Core
         public float? IdleSeconds { get; internal set; }
         public float? RepairedHealth { get; internal set; }
         public float? PreventedMovement { get; internal set; }
+        public int? MarkedEnemies { get; internal set; }
+        public int? SlowedEnemies { get; internal set; }
         public int? Leaks { get; internal set; }
         public int? UnresolvedEnemies { get; internal set; }
         public int? BlotsCleared { get; internal set; }
@@ -48,6 +51,7 @@ namespace PaperDefense.Core
             AssemblyTrialScenario.Single, AssemblyTrialScenario.Line });
         static readonly IReadOnlyList<AssemblyTrialScenario> repairScenarios = Array.AsReadOnly(new[] { AssemblyTrialScenario.Repair });
         static readonly IReadOnlyList<AssemblyTrialScenario> generatorScenarios = Array.AsReadOnly(new[] { AssemblyTrialScenario.Generator });
+        static readonly IReadOnlyList<AssemblyTrialScenario> beaconScenarios = Array.AsReadOnly(new[] { AssemblyTrialScenario.Armored });
 
         public static IReadOnlyList<AssemblyTrialScenario> ScenariosFor(AlbumEntry entry)
         {
@@ -57,12 +61,21 @@ namespace PaperDefense.Core
             {
                 case AssemblyStructureFamily.Repair: return repairScenarios;
                 case AssemblyStructureFamily.Generator: return generatorScenarios;
+                case AssemblyStructureFamily.Beacon: return beaconScenarios;
                 default: return supportScenarios;
             }
         }
 
         public static AssemblyTrialReport Run(AlbumEntry entry, GameBalance balance, AssemblyTrialScenario scenario,
             int budget = 400, int seed = 1337)
+            => RunConfigured(entry, balance, scenario, null, budget, seed);
+
+        public static AssemblyTrialReport Run(AlbumEntry entry, GameBalance balance, AssemblyTrialScenario scenario,
+            TrialModernizationConfiguration modernization, int budget = 400, int seed = 1337)
+            => RunConfigured(entry, balance, scenario, modernization ?? throw new ArgumentNullException(nameof(modernization)), budget, seed);
+
+        static AssemblyTrialReport RunConfigured(AlbumEntry entry, GameBalance balance, AssemblyTrialScenario scenario,
+            TrialModernizationConfiguration modernization, int budget, int seed)
         {
             if (entry == null) throw new ArgumentNullException(nameof(entry));
             BalanceValidation.Validate(balance);
@@ -74,20 +87,30 @@ namespace PaperDefense.Core
             if (!resolution.Valid) throw new ArgumentException(string.Join(",", resolution.Diagnostics.Select(d => d.Code + ":" + d.Path)), nameof(entry));
             var report = new AssemblyTrialReport { EntryId = entry.Id, EntryName = entry.Name, Scenario = scenario,
                 Resolved = resolution.Value, Budget = budget, Seed = seed, UnitCost = resolution.Value.Cost };
+            if (modernization != null)
+            {
+                if (entry.Kind != AlbumEntryKind.Tower) throw new ArgumentException("Modernization trials require a composite tower.", nameof(entry));
+                ModernizationRules.InitializeModernizationForTrial(new StructureState(resolution.Value), modernization.Ranks,
+                    modernization.MaximumRank, rules);
+                report.Modernization = modernization;
+                report.Resolved = ModernizationRules.Resolve(resolution.Value, modernization.Ranks);
+                report.UnitCost = checked(report.UnitCost + modernization.OrdinaryInvestment(report.UnitCost));
+            }
             if (entry.Kind == AlbumEntryKind.Structure) RunSupport(entry, rules, report);
-            else RunTower(entry, rules, report);
+            else RunTower(entry, rules, report, modernization);
             report.Copies = report.Recording.Copies; report.Cost = report.Recording.Cost;
             report.DurationSeconds = report.Recording.DurationSeconds;
             return report;
         }
 
-        static void RunTower(AlbumEntry entry, GameBalance rules, AssemblyTrialReport report)
+        static void RunTower(AlbumEntry entry, GameBalance rules, AssemblyTrialReport report, TrialModernizationConfiguration modernization)
         {
             TrialScenario legacyScenario = LegacyScenario(report.Scenario);
             if (report.Scenario == AssemblyTrialScenario.Single || report.Scenario == AssemblyTrialScenario.Line)
                 report.Recording = TrialRunner.RunAssemblyFixture(entry, rules, legacyScenario, report.Budget,
-                    report.Seed, TargetFixture(rules, report.Scenario), 0);
-            else report.Recording = TrialRunner.Run(entry, rules, legacyScenario, report.Budget, report.Seed);
+                    report.Seed, TargetFixture(rules, report.Scenario), 0, modernization);
+            else report.Recording = modernization == null ? TrialRunner.Run(entry, rules, legacyScenario, report.Budget, report.Seed)
+                : TrialRunner.Run(entry, rules, legacyScenario, modernization, report.Budget, report.Seed);
             bool cleanerOnly = report.Resolved.Weapons.Count > 0 && report.Resolved.Weapons.All(w => w.Family == AssemblyWeaponFamily.Blotter);
             report.Damage = cleanerOnly ? (float?)null : report.Recording.Damage;
             report.IdleSeconds = report.Recording.IdleSeconds;
@@ -194,6 +217,15 @@ namespace PaperDefense.Core
             recording.SurvivingTowers = session.Structures.Count(s => s.SourceAlbumEntryId == entry.Id && s.Health > 0);
             if (repair) report.RepairedHealth = target.Health - initialHealth;
             if (reference != null) report.PreventedMovement = prevented;
+            var family = report.Resolved.Support.Kind;
+            if (family == AssemblyStructureFamily.Prism) report.SlowedEnemies = session.Statistics.TotalEnemiesSlowedByPrism;
+            if (family == AssemblyStructureFamily.Beacon || family == AssemblyStructureFamily.Prism)
+                report.MarkedEnemies = session.Statistics.TotalEnemiesMarked;
+            if (family == AssemblyStructureFamily.Spikes || family == AssemblyStructureFamily.Prism)
+            {
+                recording.Damage = session.Statistics.Damage(report.Resolved.Snapshot.Recipe.Structure.Function.Id);
+                report.Damage = recording.Damage;
+            }
             if (generator)
             {
                 report.CompletedWaves = session.CompletedWaves;

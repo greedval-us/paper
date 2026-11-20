@@ -16,17 +16,18 @@ namespace PaperDefense.Presentation
 {
     /// <summary>
     /// Explicit built-player acceptance instrumentation. Ordinary launches create no probe.
-    /// UI actions submit the production Button through EventSystem; no balance, rewards,
-    /// profile data or simulation internals are patched by this probe.
+    /// Battle actions use production controllers and buttons. The atlas uses a separate
+    /// memory-only profile with campaign pages unlocked for visual and timing checks.
     /// </summary>
-    public sealed class AlbumReleaseProbe : MonoBehaviour
+    public sealed partial class AlbumReleaseProbe : MonoBehaviour
     {
         const string Flag = "-paper-release-probe";
         const int WarmupFrames = 60, SampleFrames = 300, SettleFrames = 30;
         string[] arguments;
         string output;
         PlayerGameRoot game;
-        Report report;
+        RunReport report;
+        Report AlbumReport => (Report)report;
         readonly List<string> actions = new List<string>();
 
         [Serializable] public sealed class Metric
@@ -59,13 +60,18 @@ namespace PaperDefense.Presentation
             public string saveState;
             public string[] ownedParts, slots, entries, library;
         }
-        [Serializable] public sealed class Report
+        [Serializable] public abstract class RunReport
         {
-            public string format = "paper-album-release-probe-v1", utc, unity, version, operatingSystem, cpu, gpu, graphicsApi;
-            public string mode, error = "", observationScope = "EventSystem submit actions; scene objects/components; four named controller/input C# events. Does not count every possible subscription.";
-            public bool passed, journeyComplete, lifecycleStable, performanceComplete, isEditor, developmentBuild, focused;
+            public string format, utc, unity, version, operatingSystem, cpu, gpu, graphicsApi;
+            public string mode, error = "";
+            public bool passed, performanceComplete, isEditor, developmentBuild, focused;
             public int width, height, quality, vSyncCount, targetFrameRate;
             public string[] actions;
+        }
+        [Serializable] public sealed class Report : RunReport
+        {
+            public string observationScope = "EventSystem submit actions; scene objects/components; four named controller/input C# events. Does not count every possible subscription.";
+            public bool journeyComplete, lifecycleStable;
             public Measurement measurement;
             public Lifecycle[] lifecycle;
             public ProfileSnapshot profile;
@@ -102,6 +108,10 @@ namespace PaperDefense.Presentation
             }
             if (Has(args, "-paper-release-verify-restart") && Has(args, "-paper-memory-only")) return "Restart verification requires the same explicit temporary profile store.";
             if (Has(args, "-paper-release-verify-restart") && Has(args, "-paper-release-measure-only")) return "Choose restart verification or measurement mode.";
+            if (new[] { HordeFlag, SiegeFlag, AtlasFlag }.Count(flag => Has(args, flag)) > 1) return "Choose a single horde measurement.";
+            if ((Has(args, HordeFlag) || Has(args, SiegeFlag) || Has(args, AtlasFlag)) && (!Has(args, "-paper-memory-only") || Has(args, "-paper-profile-path") ||
+                Has(args, "-paper-release-verify-restart") || Has(args, "-paper-release-measure-only")))
+                return "Horde measurement runs by itself with -paper-memory-only.";
             return null;
         }
 
@@ -140,21 +150,31 @@ namespace PaperDefense.Presentation
 
         IEnumerator Start()
         {
-            report = new Report {
-                utc = DateTime.UtcNow.ToString("O"), unity = UnityEngine.Application.unityVersion, version = UnityEngine.Application.version,
-                operatingSystem = SystemInfo.operatingSystem, cpu = SystemInfo.processorType, gpu = SystemInfo.graphicsDeviceName,
-                graphicsApi = SystemInfo.graphicsDeviceType.ToString(), isEditor = UnityEngine.Application.isEditor,
-                developmentBuild = Debug.isDebugBuild, mode = Has(arguments, "-paper-release-verify-restart") ? "restart" : Has(arguments, "-paper-release-measure-only") ? "measurement" : "journey"
-            };
+            bool horde = Has(arguments, HordeFlag);
+            bool siege = Has(arguments, SiegeFlag);
+            bool atlas = Has(arguments, AtlasFlag);
+            report = atlas ? (RunReport)new AtlasReport() : siege ? (RunReport)new SiegeReport() : horde ? (RunReport)new HordeReport() : new Report();
+            report.format = atlas ? "paper-campaign-atlas-v1" : siege ? "paper-siege-release-probe-v1" : horde ? "paper-horde-release-probe-v1" : "paper-album-release-probe-v1";
+            report.mode = atlas ? "atlas" : siege ? "siege" : horde ? "horde" : Has(arguments, "-paper-release-verify-restart") ? "restart" :
+                Has(arguments, "-paper-release-measure-only") ? "measurement" : "journey";
+            report.utc = DateTime.UtcNow.ToString("O");
+            report.unity = UnityEngine.Application.unityVersion;
+            report.version = UnityEngine.Application.version;
+            report.operatingSystem = SystemInfo.operatingSystem;
+            report.cpu = SystemInfo.processorType;
+            report.gpu = SystemInfo.graphicsDeviceName;
+            report.graphicsApi = SystemInfo.graphicsDeviceType.ToString();
+            report.isEditor = UnityEngine.Application.isEditor;
+            report.developmentBuild = Debug.isDebugBuild;
             Directory.CreateDirectory(Path.GetDirectoryName(output));
-            float deadline = Time.realtimeSinceStartup + 240;
+            float deadline = Time.realtimeSinceStartup + (siege || atlas ? 720 : 240);
             var routine = Execute();
             while (true)
             {
                 object current;
                 try
                 {
-                    if (Time.realtimeSinceStartup > deadline) throw new TimeoutException("Release probe exceeded240 real seconds.");
+                    if (Time.realtimeSinceStartup > deadline) throw new TimeoutException("Release probe exceeded its real-time limit.");
                     if (!routine.MoveNext()) break;
                     current = routine.Current;
                 }
@@ -179,20 +199,35 @@ namespace PaperDefense.Presentation
             report.width = Screen.width; report.height = Screen.height; report.quality = QualitySettings.GetQualityLevel();
             report.vSyncCount = QualitySettings.vSyncCount; report.targetFrameRate = UnityEngine.Application.targetFrameRate; report.focused = UnityEngine.Application.isFocused;
             foreach (var frame in Settle()) yield return frame;
+            if (report.mode == "atlas")
+            {
+                foreach (var frame in CaptureCampaignMaps()) yield return frame;
+                yield break;
+            }
+            if (report.mode == "siege")
+            {
+                foreach (var frame in MeasureCampaignHordes()) yield return frame;
+                yield break;
+            }
+            if (report.mode == "horde")
+            {
+                foreach (var frame in MeasureOpeningHorde()) yield return frame;
+                yield break;
+            }
             if (report.mode == "restart")
             {
                 var previous = JsonUtility.FromJson<Report>(File.ReadAllText(Path.GetFullPath(Value(arguments, "-paper-release-verify-restart"))));
                 Require(previous != null && previous.passed && previous.journeyComplete && previous.profile != null, "Prior successful full journey report is required.");
-                report.profile = SnapshotProfile();
-                Require(JsonUtility.ToJson(report.profile) == JsonUtility.ToJson(previous.profile), "Restarted store differs in Gold/XP, owned catalog parts, entries, library or eight slots.");
+                AlbumReport.profile = SnapshotProfile();
+                Require(JsonUtility.ToJson(AlbumReport.profile) == JsonUtility.ToJson(previous.profile), "Restarted store differs in Gold/XP, owned catalog parts, entries, library or eight slots.");
                 actions.Add("Separate process restart restored the complete prior profile snapshot.");
                 Click("Open album"); Screenshot("restart-album"); foreach (var frame in Settle()) yield return frame;
-                report.journeyComplete = true; yield break;
+                AlbumReport.journeyComplete = true; yield break;
             }
             if (report.mode == "journey") foreach (var frame in InitialJourney()) yield return frame;
             foreach (var frame in MeasureBattle()) yield return frame;
             if (report.mode == "journey") foreach (var frame in RepeatedLifecycle()) yield return frame;
-            report.profile = SnapshotProfile();
+            AlbumReport.profile = SnapshotProfile();
         }
 
         IEnumerable InitialJourney()
@@ -250,7 +285,7 @@ namespace PaperDefense.Presentation
             Require(game.Run.Workshop.LoadoutEntries.All(entry => entry != null), "All eight slots must be populated.");
             Screenshot("eight-slots"); foreach (var frame in Settle()) yield return frame;
             Click("Album close"); Require(game.Page == PlayerPage.Home, "Album did not return home.");
-            report.journeyComplete = true;
+            AlbumReport.journeyComplete = true;
         }
 
         IEnumerable Trial()
@@ -262,13 +297,13 @@ namespace PaperDefense.Presentation
             Require(panel.LastAssemblyTrial.Frames.Count > 0, "Trial recording has no rendered frames.");
             Screenshot("trial");
             foreach (var frame in Settle()) yield return frame;
-            Click("Composite close trial");
+            Click("Composite trial header return");
             Require(game.Run.Workshop.Gold == gold && game.Run.Workshop.TotalXp == xp, "The trial must not grant progression rewards.");
         }
 
         IEnumerable MeasureBattle()
         {
-            Click("Open campaign"); Click("Prepare mission"); Click("Start battle");
+            OpenBattleFromHome();
             Require(game.Page == PlayerPage.Battle && game.Run.UsesAlbumSlots, "Production battle did not use album slots.");
             Click("Launch wave");
             using (var gc = ProfilerRecorder.StartNew(ProfilerCategory.Memory, "GC Allocated In Frame", 1))
@@ -281,7 +316,7 @@ namespace PaperDefense.Presentation
                 var allocationReader = CreateVerifiedAllocationReader();
                 int allocationThreadId = System.Threading.Thread.CurrentThread.ManagedThreadId;
                 for (int i = 0; i < WarmupFrames; i++) { FrameTimingManager.CaptureFrameTimings(); yield return null; }
-                var m = report.measurement = new Measurement { frameTimingEnabled = FrameTimingManager.IsFeatureEnabled(), firstTick = game.Run.Session.TickIndex, firstEnemyCount = game.Run.Session.Enemies.Count,
+                var m = AlbumReport.measurement = new Measurement { frameTimingEnabled = FrameTimingManager.IsFeatureEnabled(), firstTick = game.Run.Session.TickIndex, firstEnemyCount = game.Run.Session.Enemies.Count,
                     allocationCounterSanityVerified = allocationReader != null, allocationCounterThreadId = allocationThreadId };
                 int gen0 = GC.CollectionCount(0), gen1 = GC.CollectionCount(1), gen2 = GC.CollectionCount(2);
                 long previousAllocated = allocationReader?.Invoke() ?? 0;
@@ -331,7 +366,13 @@ namespace PaperDefense.Presentation
         {
             Click("Battle pause"); Click("Leave battle"); Click("Confirm action");
             Require(game.Page == PlayerPage.Map && game.Run.InWorkshop, "Confirmed exit did not return to the map.");
-            Click("Back"); Require(game.Page == PlayerPage.Home, "Map did not return home.");
+            Click("Back");
+            if (game.Run.CampaignEnabled)
+            {
+                Require(game.Page == PlayerPage.Campaign, "Map did not return to the campaign.");
+                Click("Back");
+            }
+            Require(game.Page == PlayerPage.Home, "Mission navigation did not return home.");
             foreach (var frame in Settle()) yield return frame;
         }
 
@@ -345,16 +386,23 @@ namespace PaperDefense.Presentation
                 Click("Composite library"); Click("Composite library back"); Click("Composite step 2");
                 foreach (var frame in Trial()) yield return frame;
                 Click("Composite return"); Click("Album close");
-                Click("Open campaign"); Click("Prepare mission"); Click("Start battle"); Click("Launch wave");
+                OpenBattleFromHome(); Click("Launch wave");
                 foreach (var frame in Settle()) yield return frame;
                 foreach (var frame in LeaveBattle()) yield return frame;
                 if (cycle >= 2) snapshots.Add(SnapshotLifecycle(cycle - 2));
             }
-            report.lifecycle = snapshots.ToArray();
+            AlbumReport.lifecycle = snapshots.ToArray();
             var first = snapshots[0];
-            report.lifecycleStable = snapshots.All(item => item.eventObservationAvailable && item.sceneGameObjects <= first.sceneGameObjects && item.sceneComponents <= first.sceneComponents &&
+            AlbumReport.lifecycleStable = snapshots.All(item => item.eventObservationAvailable && item.sceneGameObjects <= first.sceneGameObjects && item.sceneComponents <= first.sceneComponents &&
                 item.workshopChanged == first.workshopChanged && item.sessionChanged == first.sessionChanged && item.simulationEvents == first.simulationEvents && item.selectionChanged == first.selectionChanged);
-            Require(report.lifecycleStable, "Settled objects/components or observed C# subscriptions grew across five cycles after two warmups.");
+            Require(AlbumReport.lifecycleStable, "Settled objects/components or observed C# subscriptions grew across five cycles after two warmups.");
+        }
+
+        void OpenBattleFromHome()
+        {
+            Click("Open campaign");
+            if (game.Run.CampaignEnabled) Click("Open mission");
+            Click("Prepare mission"); Click("Start battle");
         }
 
         ProfileSnapshot SnapshotProfile() => new ProfileSnapshot {

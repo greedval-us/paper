@@ -74,6 +74,11 @@ namespace PaperDefense.Presentation
     /// <summary>Uses the normal uGUI button lifecycle to redraw ink states without moving the control.</summary>
     public sealed class PlayerNotebookButton : UnityEngine.UI.Button
     {
+        readonly System.Collections.Generic.Dictionary<Graphic, Color> fieldForegrounds =
+            new System.Collections.Generic.Dictionary<Graphic, Color>();
+
+        public void RefreshFieldStyle() => DoStateTransition(currentSelectionState, true);
+
         protected override void DoStateTransition(SelectionState state, bool instant)
         {
             base.DoStateTransition(state, instant);
@@ -81,6 +86,18 @@ namespace PaperDefense.Presentation
             bool disabled = state == SelectionState.Disabled;
             bool hovered = state == SelectionState.Highlighted;
             bool pressed = state == SelectionState.Pressed;
+            if (card.FieldStyle)
+            {
+                // The graphic keeps its semantic source color; interaction is rendered by the field skin.
+                card.CrossFadeColor(Color.white, 0, true, true);
+                if (!BattleHudTheme.Owns(transform)) foreach (var graphic in GetComponentsInChildren<Graphic>(true))
+                {
+                    if (!(graphic is Text) && !(graphic is PlayerIconGraphic)) continue;
+                    if (!fieldForegrounds.TryGetValue(graphic, out Color source))
+                    { source = graphic.color; fieldForegrounds.Add(graphic, source); }
+                    graphic.color = FieldMenuSkin.TextColor(source, card.FieldPrimary, disabled);
+                }
+            }
             if (card.Disabled == disabled && card.Hovered == hovered && card.Pressed == pressed) return;
             card.Disabled = disabled; card.Hovered = hovered; card.Pressed = pressed;
             card.SetVerticesDirty();
@@ -90,14 +107,17 @@ namespace PaperDefense.Presentation
     /// <summary>Shared visual primitives for the player screens. Copy lives in a dedicated text asset.</summary>
     public sealed class PlayerUi
     {
-        public static readonly Color Ink = new Color32(21, 48, 105, 255);
+        public static readonly Color Ink = NotebookThemeDefaults.Ink;
         public static readonly Color Blue = new Color32(31, 70, 146, 255);
-        public static readonly Color Paper = new Color32(247, 241, 222, 255);
-        public static readonly Color Card = new Color32(252, 247, 231, 255);
+        public static readonly Color Paper = NotebookThemeDefaults.Surface;
+        public static readonly Color Card = Color.white;
         public static readonly Color Muted = new Color32(45, 68, 108, 255);
         public static readonly Color Wash = new Color32(235, 230, 211, 255);
         public static readonly Color Selected = new Color32(224, 234, 245, 255);
         public static readonly Color Grid = new Color32(104, 143, 174, 42);
+        public const int ActionCaptionSize = 20;
+        public const int ActionCaptionMaxSize = 22;
+        public const float ActionIconSize = 24;
         readonly Font font, heading;
         readonly UserTextResolver copy;
         public bool NotebookStyle { get; }
@@ -105,8 +125,8 @@ namespace PaperDefense.Presentation
         public PlayerUi(bool notebookStyle = true)
         {
             NotebookStyle = notebookStyle;
-            font = Resources.Load<Font>("NotebookNeucha") ?? Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            heading = font;
+            font = FieldTypography.Regular;
+            heading = FieldTypography.Semibold;
             copy = Resources.Load<TextResourcesAsset>("Text/player-ru").CreateResolver();
         }
         public string T(string key, params object[] args) => copy.Resolve(UserText.Message("player." + key, args));
@@ -131,7 +151,7 @@ namespace PaperDefense.Presentation
         {
             if (title) bounds.height = Mathf.Max(bounds.height, Mathf.Ceil(size * 1.5f));
             var label = Graphic<Text>(parent, "Copy", bounds); label.text = text; label.font = title ? heading : font;
-            label.fontStyle = NotebookStyle || title ? FontStyle.Bold : FontStyle.Normal;
+            label.fontStyle = FontStyle.Normal;
             label.fontSize = size; label.color = color ?? Ink; label.alignment = alignment;
             label.horizontalOverflow = HorizontalWrapMode.Wrap; label.verticalOverflow = VerticalWrapMode.Truncate;
             return label;
@@ -146,7 +166,7 @@ namespace PaperDefense.Presentation
             colors.selectedColor = Color.white; colors.disabledColor = new Color(.72f, .75f, .82f);
             colors.fadeDuration = 0; button.colors = colors;
             button.onClick.AddListener(() => { Tooltip?.Invoke(""); action?.Invoke(); });
-            float size = Mathf.Min(bounds.width, bounds.height) * .62f;
+            float size = Mathf.Min(Mathf.Min(bounds.width, bounds.height) * .62f, ActionIconSize);
             Rect iconBounds = new Rect((bounds.width - size) / 2, (bounds.height - size) / 2, size, size);
             if (art != null) Art(panel, art, iconBounds);
             else { var symbol = Graphic<PlayerIconGraphic>(panel, "Icon", iconBounds); symbol.Icon = icon; symbol.Sketch = NotebookStyle; symbol.color = primary ? Card : Ink; }
@@ -157,11 +177,10 @@ namespace PaperDefense.Presentation
         {
             var button = IconButton(parent, name, bounds, icon, caption, action, primary);
             var symbol = button.GetComponentInChildren<PlayerIconGraphic>();
-            Place(symbol.rectTransform, new Rect(16, (bounds.height - 22) / 2, 22, 22));
-            var label = Label(button.transform, caption, new Rect(50, 6, bounds.width - 62, bounds.height - 12), 18, primary ? Card : Ink);
-            if (NotebookStyle) label.font = heading;
-            label.fontStyle = FontStyle.Bold;
-            label.resizeTextForBestFit = true; label.resizeTextMinSize = 16; label.resizeTextMaxSize = 22;
+            Place(symbol.rectTransform, new Rect(16, (bounds.height - ActionIconSize) / 2, ActionIconSize, ActionIconSize));
+            var label = Label(button.transform, caption, new Rect(50, 6, bounds.width - 62, bounds.height - 12), ActionCaptionSize, primary ? Card : Ink);
+            label.font = heading;
+            label.resizeTextForBestFit = true; label.resizeTextMinSize = 16; label.resizeTextMaxSize = ActionCaptionMaxSize;
             label.rectTransform.anchorMin = Vector2.zero; label.rectTransform.anchorMax = Vector2.one;
             label.rectTransform.offsetMin = new Vector2(50, 6); label.rectTransform.offsetMax = new Vector2(-12, -6);
             return button;

@@ -62,6 +62,7 @@ namespace PaperDefense.Presentation
                 var definition=run.Content.GetModule(modules[i].Id);string id=definition.Id;int count=draft.ModuleSelections.Count(m=>m.DefinitionId==id);bool owned=wizard.Owned(definition);
                 var card=ui.Panel(list.Content,"Wizard module "+id,new Rect(i%2*450,i/2*162,432,150),count>0?WorkshopUi.Selected:Color.white,true);
                 var art=WorkshopUi.Graphic<NotebookArtGraphic>(card,"Module illustration",new Rect(12,16,55,55));art.Bind(id);
+                StandardAssemblyIllustration.EnsureStandardPaper(art,art.name);
                 ui.Label(card,"Module name",definition.ButtonLabel,new Rect(82,12,330,32),21);
                 ui.Label(card,"Module info",T("module_value",definition.Load,count),new Rect(82,52,330,32),17,color:WorkshopUi.Muted);ui.Tip(card.gameObject,definition.Description);
                 int price=Price(id);

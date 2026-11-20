@@ -7,10 +7,25 @@ namespace PaperDefense.Core
     /// <summary>Calculates modern support effects without publishing changes to simulation state.</summary>
     public static class StructureSupportRules
     {
+        public readonly struct RepairContribution
+        {
+            public StructureState Source { get; }
+            public float Rate { get; }
+            public RepairContribution(StructureState source, float rate) { Source = source; Rate = rate; }
+        }
+
         public static IReadOnlyDictionary<StructureState, float> RepairRates(IReadOnlyList<StructureState> structures)
         {
-            if (structures == null) throw new ArgumentNullException(nameof(structures));
             var rates = new Dictionary<StructureState, float>();
+            foreach (var pair in RepairContributions(structures)) rates.Add(pair.Key, pair.Value.Rate);
+            return new ReadOnlyDictionary<StructureState, float>(rates);
+        }
+
+        /// <summary>Preserves the winning source as well as its rate; equal repair rates use the lowest source ID.</summary>
+        public static IReadOnlyDictionary<StructureState, RepairContribution> RepairContributions(IReadOnlyList<StructureState> structures)
+        {
+            if (structures == null) throw new ArgumentNullException(nameof(structures));
+            var rates = new Dictionary<StructureState, RepairContribution>();
             foreach (var source in structures)
             {
                 var support = ActiveSupport(source, AssemblyStructureFamily.Repair);
@@ -33,10 +48,11 @@ namespace PaperDefense.Core
                 }
 
                 if (nearest == null) continue;
-                rates.TryGetValue(nearest, out float current);
-                rates[nearest] = Math.Max(current, support.RepairPerSecond);
+                if (!rates.TryGetValue(nearest, out var current) || support.RepairPerSecond > current.Rate ||
+                    support.RepairPerSecond == current.Rate && source.Id < current.Source.Id)
+                    rates[nearest] = new RepairContribution(source, support.RepairPerSecond);
             }
-            return new ReadOnlyDictionary<StructureState, float>(rates);
+            return new ReadOnlyDictionary<StructureState, RepairContribution>(rates);
         }
 
         public static float RepairedHealth(StructureState target, float rate, float delta)

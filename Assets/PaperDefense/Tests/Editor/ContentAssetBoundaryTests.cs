@@ -22,7 +22,7 @@ namespace PaperDefense.Tests
         {
             sourceDatabase = AssetDatabase.LoadAssetAtPath<ContentDatabaseAsset>(ContentDatabaseMigration.DatabasePath);
             sourcePreset = AssetDatabase.LoadAssetAtPath<BalancePresetAsset>(ContentDatabaseMigration.DirectoryPath + "/Historical.asset");
-            Assert.That(sourceDatabase, Is.Not.Null, "Migrate the real catalog before running its boundary tests.");
+            Assert.That(sourceDatabase, Is.Not.Null, "The shipped content catalog must be available.");
             Assert.That(sourcePreset, Is.Not.Null);
             sourceCatalogJson = JsonUtility.ToJson(sourceDatabase.catalog);
             sourceRulesJson = JsonUtility.ToJson(sourcePreset.rules);
@@ -298,7 +298,7 @@ namespace PaperDefense.Tests
         }
 
         [TestCase("Chassis")] [TestCase("Weapons")]
-        public void ProductionWorkshopRequiresAnEnabledChoiceForNewDrawing(string category)
+        public void ContentSnapshotRequiresEnabledChassisAndWeaponDefinitions(string category)
         {
             database.catalog.StartingPages.Clear();
             if (category == "Chassis") foreach (var item in database.catalog.Chassis) item.Enabled = false;

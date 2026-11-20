@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Reflection;
 using NUnit.Framework;
 using PaperDefense.Application;
 using PaperDefense.Core;
@@ -13,22 +12,16 @@ namespace PaperDefense.Tests
     public sealed class AssemblyWorldArtTests
     {
         static AssemblyVisualComposition Compose(StructureView structure)
-        {
-            var method = typeof(NotebookWorldView).Assembly.GetType("PaperDefense.Presentation.DoodleGlyphs")
-                .GetMethod("ComposeAssembly", BindingFlags.Static | BindingFlags.NonPublic);
-            Assert.That(method, Is.Not.Null, "World and trial require the same frozen recipe composition as the album.");
-            return (AssemblyVisualComposition)method.Invoke(null, new object[] { structure, 0d, null, null });
-        }
+            => DoodleGlyphs.ComposeAssembly(structure);
 
-        static GameSession Session(RecipeSnapshot snapshot)
+        static GameSession Session(RecipeSnapshot snapshot, float heading = 90)
         {
             var balance = GameBalance.CreateDefault(); balance.StartingInk = 10000;
             var session = new GameSession(balance, starterDefenses: false);
             var resolution = AssemblyResolver.Resolve(snapshot, balance, MaterialTier.Pencil);
             Assert.That(resolution.Valid, Is.True);
             Assert.That(session.TryBuildEntry(new[] { new Cell(12, 12) }, resolution.Value, MaterialTier.Pencil,
-                InkColor.None, out string reason), Is.True, reason);
-            for (int slot = 0; slot < 3; slot++) session.StructureAt(new Cell(12, 12)).GetMountState(slot).Aim = default;
+                InkColor.None, out string reason, facingDegrees: heading), Is.True, reason);
             return session;
         }
 
@@ -40,7 +33,7 @@ namespace PaperDefense.Tests
                 var session = Session(entry.Snapshot);
                 var view = new RunReadModel(session).Structures[0];
                 var actual = Compose(view);
-                var expected = AssemblyVisualComposer.Compose(view.ResolvedEntry.Snapshot, AssemblyPreviewPose.For(view.ResolvedEntry.Snapshot));
+                var expected = AssemblyVisualComposer.Compose(view.ResolvedEntry.Snapshot, null);
                 Assert.That(actual.Fragments.Select(f => (f.PartId, f.SpriteId, f.Layer)),
                     Is.EqualTo(expected.Fragments.Select(f => (f.PartId, f.SpriteId, f.Layer))), entry.Id);
                 Assert.That(actual.Bounds, Is.EqualTo(expected.Bounds), entry.Id);
@@ -48,18 +41,29 @@ namespace PaperDefense.Tests
             }
         }
 
-        [Test] public void IdleWorldWeaponsUseTheSameForwardRightDisplayPoseUntilTheyAcquireARealAim()
+        [TestCase(0f)][TestCase(90f)][TestCase(180f)][TestCase(270f)]
+        public void IdleWorldWeaponsShowThePlayersHeadingOnEveryMount(float heading)
         {
             var catalog = AssetDatabase.LoadAssetAtPath<AssemblyCatalogAsset>("Assets/PaperDefense/Configuration/Game/PlayerAssemblyCatalog.asset").CreateSnapshot();
             foreach (var entry in catalog.Starters.Where(value => value.Kind == AlbumEntryKind.Tower))
             {
-                var session = Session(entry.Snapshot);
+                var session = Session(entry.Snapshot, heading);
                 var view = new RunReadModel(session).Structures[0];
                 var actual = Compose(view);
-                var expected = AssemblyVisualComposer.Compose(entry.Snapshot, AssemblyPreviewPose.For(entry.Snapshot));
-                Assert.That(actual.Fragments.Select(fragment => (fragment.Origin, fragment.Radians)),
-                    Is.EqualTo(expected.Fragments.Select(fragment => (fragment.Origin, fragment.Radians))), entry.Id);
-                Assert.That(actual.Anchors.Select(anchor => anchor.Muzzle), Is.EqualTo(expected.Anchors.Select(anchor => anchor.Muzzle)), entry.Id);
+                var rest = AssemblyVisualComposer.Compose(entry.Snapshot, null);
+                var rotation = Quaternion.Euler(0, 0, heading - 90);
+                foreach (var f in actual.Fragments.Where(f => f.SlotIndex < 0))
+                {
+                    var original = rest.Fragments.First(b => b.PartId == f.PartId && b.Region == f.Region);
+                    Assert.That(Mathf.DeltaAngle(f.Radians * Mathf.Rad2Deg, original.Radians * Mathf.Rad2Deg + heading - 90),
+                        Is.EqualTo(0).Within(.001f), f.PartId);
+                }
+                foreach (var anchor in actual.Anchors)
+                {
+                    var original = rest.Anchors.Single(a => a.SlotIndex == anchor.SlotIndex);
+                    Assert.That(Vector2.Distance(anchor.RotationCenter, rotation * original.RotationCenter), Is.LessThan(.00001f), entry.Id);
+                    Assert.That(Vector2.Distance(anchor.Muzzle, rotation * original.Muzzle), Is.LessThan(.00001f), entry.Id);
+                }
             }
         }
 
@@ -75,11 +79,17 @@ namespace PaperDefense.Tests
             foreach (var anchor in native.Anchors)
             {
                 var actual = DoodleGlyphs.SegmentOrigin(tower, anchor.SlotIndex, tower.GetMountAim(anchor.SlotIndex), origin, 0, null, null);
-                Assert.That(Vector2.Distance(actual, origin + anchor.Muzzle * 2), Is.LessThan(.00001f),
+                var expected = NotebookAssemblyView.Point(origin, anchor.Muzzle, tower.ResolvedEntry.Snapshot);
+                Assert.That(Vector2.Distance(actual, expected), Is.LessThan(.00001f),
                     "The live muzzle must follow the same whole-tree view transform as every visible fragment.");
                 Vector2 continuation = origin + new Vector2(1, 2);
                 Assert.That(DoodleGlyphs.SegmentOrigin(tower, anchor.SlotIndex, default, continuation, 0, null, null), Is.EqualTo(continuation));
             }
+            var recordedAim = tower.GetMountAim(0);
+            var originalMuzzle = DoodleGlyphs.SegmentOrigin(tower, 0, recordedAim, origin, 0, null, null);
+            state.PrimaryAim = new Point2(12, 24);
+            var turned = new RunReadModel(session).Structures[0];
+            Assert.That(DoodleGlyphs.SegmentOrigin(turned, 0, recordedAim, origin, 0, null, null), Is.EqualTo(originalMuzzle));
             Assert.That(state.Cell, Is.EqualTo(new Cell(12, 12)), "Presentation magnification must preserve logical placement.");
         }
 

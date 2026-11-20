@@ -10,16 +10,19 @@ namespace PaperDefense.Presentation
         readonly PlayerGameRoot game;
         readonly PlayerUi ui;
         readonly RectTransform renderRoot;
+        readonly BattleHudTheme theme;
         readonly Text ink, health, wave, phase, message, selection, speedValue, forecast, fieldStats, towerInfo;
         readonly Button launch;
         readonly Button[] tools = new Button[12], materials = new Button[3], colors = new Button[4];
         readonly Text[] prices = new Text[12], colorAmounts = new Text[4];
-        readonly BlueprintSketch[] sketches = new BlueprintSketch[4];
+        readonly RectTransform[] legacyPreviews = new RectTransform[4];
+        readonly TowerBlueprint[] legacyDisplayedBlueprints = new TowerBlueprint[4];
         readonly Button[] wells = new Button[3];
         readonly Text[] wellAmounts = new Text[3];
         readonly PlayerIconGraphic[] wellSymbols = new PlayerIconGraphic[3];
         static readonly StructureKind[] Construction = { StructureKind.Wall, StructureKind.Spikes, StructureKind.TarPit, StructureKind.RepairPost };
-        static readonly string[] ToolIds = { "wall", "spikes", "tar", "repair", "erase", "upgrade", "blotter", "paint" };
+        static readonly PlayerIcon[] ToolIcons = { PlayerIcon.Home, PlayerIcon.Target, PlayerIcon.Drop, PlayerIcon.Plus,
+            PlayerIcon.Trash, PlayerIcon.Plus, PlayerIcon.Drop, PlayerIcon.Pencil };
 
         readonly RectTransform context;
         bool showSummary;
@@ -32,6 +35,9 @@ namespace PaperDefense.Presentation
         public PlayerBattleHud(PlayerGameRoot owner, PlayerUi style, RectTransform root, PlayerLayout layout)
         {
             game = owner; ui = style; renderRoot = root;
+            theme = root.GetComponent<BattleHudTheme>() ?? root.gameObject.AddComponent<BattleHudTheme>();
+            var binding = PlayerUi.Graphic<BattlePageFrameGraphic>(root, "Battle page binding", new Rect(0, 0, layout.Width, layout.Height));
+            binding.SetField(layout.Field);
             if (game.Run.UsesAlbumSlots) { BuildAlbumHud(root, layout); return; }
             float w = layout.Header.width;
             bool narrow = layout.Width < 1050;
@@ -52,9 +58,10 @@ namespace PaperDefense.Presentation
             ui.IconButton(top, "Battle pause", new Rect(controlX + 252, controlY, 40, 40), PlayerIcon.Pause, ui.T("pause"), game.Pause);
 
             var dock = ui.Panel(root, "Construction dock", layout.Dock, PlayerUi.Card, true);
-            float contentW = Mathf.Max(w - 24, 1040);
+            float contentW = Mathf.Max(w - 24, PlayerLayout.LegacyToolMinimumWidth);
+            bool scrollTools = contentW > w - 24;
             Transform toolParent = dock;
-            if (narrow)
+            if (scrollTools)
             {
                 var row = ui.Scroll(dock, "Tools horizontal scroll", new Rect(12, 6, w - 24, 106), 106);
                 var scroll = row.parent.GetComponent<ScrollRect>();
@@ -62,7 +69,7 @@ namespace PaperDefense.Presentation
                 scroll.vertical = false; scroll.horizontal = true; row.sizeDelta = new Vector2(contentW, 106);
                 PlayerUi.HorizontalScrollbar(scroll); toolParent = row;
             }
-            float startX = narrow ? 0 : 12, startY = narrow ? 0 : 8;
+            float startX = scrollTools ? 0 : 12, startY = scrollTools ? 0 : 8;
             float blueprintsW = contentW * .48f, groupW = (contentW - blueprintsW - 24) / 2;
             var blueprints = ui.Panel(toolParent, "Blueprint tools", new Rect(startX, startY, blueprintsW, 96), Color.clear);
             var construction = ui.Panel(toolParent, "Construction tools", new Rect(startX + blueprintsW + 12, startY, groupW, 96), Color.clear);
@@ -75,12 +82,13 @@ namespace PaperDefense.Presentation
                 int local = blueprint ? i : (i - 4) % 4;
                 var bounds = blueprint ? new Rect(local * (tw + 6), 0, tw, 96)
                     : new Rect(local % 2 * (tw + 8), local / 2 * 50, tw, 46);
-                tools[i] = ui.IconButton(parent, "Build tool " + i, bounds, PlayerIcon.Book,
-                    Keys[i] + " · " + ui.T("tool_" + i), () => Select(index), art: blueprint ? null : "ui.tool." + ToolIds[i - 4]);
+                tools[i] = ui.IconButton(parent, "Build tool " + i, bounds, blueprint ? PlayerIcon.Book : ToolIcons[i - 4],
+                    Keys[i] + " · " + ui.T("tool_" + i), () => Select(index));
                 if (blueprint)
                 {
                     Object.Destroy(tools[i].GetComponentInChildren<PlayerIconGraphic>().gameObject);
-                    sketches[i] = ui.Blueprint(tools[i].transform, null, new Rect(22, 4, tw - 44, 62));
+                    legacyPreviews[i] = ui.Panel(tools[i].transform, "Legacy battle blueprint preview " + i,
+                        new Rect(22, 4, tw - 44, 62), Color.clear);
                     ui.Label(tools[i].transform, Keys[i], new Rect(8, 5, 20, 22), 15, PlayerUi.Muted);
                     names[i] = ui.Label(tools[i].transform, Captions[i], new Rect(6, 66, tw - 12, 24), 14, alignment: TextAnchor.MiddleCenter);
                     names[i].horizontalOverflow = HorizontalWrapMode.Overflow;
@@ -88,21 +96,20 @@ namespace PaperDefense.Presentation
                 }
                 else
                 {
-                    PlayerUi.Place(tools[i].GetComponentInChildren<NotebookArtGraphic>().rectTransform, new Rect(6, 8, 29, 29));
+                    PlayerUi.Place(tools[i].GetComponentInChildren<PlayerIconGraphic>().rectTransform, new Rect(6, 8, 29, 29));
                     var caption = ui.Label(tools[i].transform, Keys[i] + "  " + Captions[i], new Rect(40, 3, tw - 44, 23), 14);
                     FitCaption(caption, Keys[i] + "  " + Captions[i]);
                     prices[i] = ui.Label(tools[i].transform, "", new Rect(40, 24, tw - 44, 19), 14, PlayerUi.Muted);
                 }
             }
-            float stripY = narrow ? 116 : 108;
-            string[] ids = { "pencil", "pen", "marker" };
+            float stripY = scrollTools ? 116 : 108;
             string[] materialNames = { "Карандаш", "Ручка", "Маркер" };
             for (int i = 0; i < 3; i++)
             {
                 int index = i;
-                materials[i] = ui.IconButton(dock, "Material " + i, new Rect(12 + i * 108, stripY, 102, 30), PlayerIcon.Drop,
-                    ui.T("material_" + i) + " · Q", () => game.Drawing.SelectTier((MaterialTier)index), art: "ui.material." + ids[i]);
-                PlayerUi.Place(materials[i].GetComponentInChildren<NotebookArtGraphic>().rectTransform, new Rect(5, 4, 22, 22));
+                materials[i] = ui.IconButton(dock, "Material " + i, new Rect(12 + i * 108, stripY, 102, 30), PlayerIcon.Pencil,
+                    ui.T("material_" + i) + " · Q", () => game.Drawing.SelectTier((MaterialTier)index));
+                PlayerUi.Place(materials[i].GetComponentInChildren<PlayerIconGraphic>().rectTransform, new Rect(5, 4, 22, 22));
                 ui.Label(materials[i].transform, materialNames[i], new Rect(28, 2, 72, 26), 14);
             }
             for (int i = 0; i < 4; i++)
@@ -114,17 +121,17 @@ namespace PaperDefense.Presentation
                 symbol.color = i == 1 ? NotebookPalette.Red : i == 2 ? NotebookPalette.Blue : i == 3 ? NotebookPalette.Green : PlayerUi.Ink;
                 colorAmounts[i] = ui.Label(colors[i].transform, "", new Rect(25, 2, 31, 26), 14);
             }
-            for (int i = 0; i < 3; i++)
+            if (game.Run.Session.Balance.Mechanics.WaveInkFlasks) BuildInkFlasks(root, layout);
+            else for (int i = 0; i < wells.Length; i++)
             {
                 int index = i;
-                wells[i] = ui.IconButton(dock, "Ink well " + i, new Rect(narrow ? 12 + i * 78 : w - 310 + i * 78, narrow ? 150 : stripY, 72, 30), PlayerIcon.Drop, ui.T("well"), () => ActivateWell(index));
+                wells[i] = ui.IconButton(dock, "Ink well " + i, new Rect(scrollTools ? 12 + i * 78 : w - 310 + i * 78, scrollTools ? 150 : stripY, 72, 30), PlayerIcon.Drop, ui.T("well"), () => ActivateWell(index));
                 wellAmounts[i] = ui.Label(wells[i].transform, "", new Rect(28, 2, 40, 26), 14);
                 wellSymbols[i] = wells[i].GetComponentInChildren<PlayerIconGraphic>();
                 PlayerUi.Place(wellSymbols[i].rectTransform, new Rect(5, 5, 22, 22));
             }
-            ui.IconButton(dock, "Battle context toggle", new Rect(w - 64, narrow ? 150 : stripY, 48, 30), PlayerIcon.Help, "Сводка поля", () => { showSummary = !showSummary; Refresh(); });
-            selection = ui.Label(root, "", new Rect(24, layout.Dock.y - 28, layout.Width - 48, 24), 15, PlayerUi.Ink, alignment: TextAnchor.MiddleCenter);
-            selection.name = "Battle tool hint";
+            ui.IconButton(dock, "Battle context toggle", new Rect(w - 64, scrollTools ? 150 : stripY, 48, 30), PlayerIcon.Help, "Сводка поля", () => { showSummary = !showSummary; Refresh(); });
+            selection = CreateToolHint(root, layout);
             message = ui.Label(root, "", new Rect(40, layout.Field.y + 4, layout.Width - 80, 26), 16, PlayerUi.Ink, alignment: TextAnchor.MiddleCenter);
             float contextH = Mathf.Min(252, layout.Field.height - 16);
             context = ui.Panel(root, "Battle context", new Rect(layout.Field.xMax - 288, layout.Field.y + 8, 280, contextH), PlayerUi.Card, true);
@@ -147,7 +154,18 @@ namespace PaperDefense.Presentation
                 label.text = value.Substring(0, --length).TrimEnd() + "…";
         }
 
-        public void ShowHint(string value) { toolHint = value ?? ""; Refresh(); }
+        public void ShowHint(string value)
+        {
+            toolHint = value ?? "";
+            if (UnityEngine.EventSystems.EventSystem.current?.alreadySelecting == true)
+            {
+                // Selection callbacks are synchronous. Updating a disabled Button here would try to clear focus again.
+                if (modernizationHud && !refreshing && albumSelection != null && renderRoot.gameObject.activeInHierarchy)
+                    RefreshMinimalHint(toolHint);
+                return;
+            }
+            Refresh();
+        }
 
         void Select(int index)
         {
@@ -165,28 +183,47 @@ namespace PaperDefense.Presentation
             else game.Drawing.SetMessage(game.Run.ActivateWell(well.Id, out var reason) ? ui.T("well_active") : reason);
         }
 
+        string AssaultEnemyCount(IRunReadModel session, bool compact = false)
+        {
+            if (session.WaveIndex > 0 && session.Balance.Waves[session.WaveIndex - 1].IsHorde)
+                return ui.T("horde_on_field", session.Enemies.Count);
+            int remaining = session.Enemies.Count + session.RemainingToSpawn;
+            return compact ? remaining + " врагов" : ui.T("enemies", remaining);
+        }
+
+        bool refreshing;
         public void Refresh()
+        {
+            // Hiding an inspector row retires its tooltip synchronously. That callback
+            // clears the hint but must not re-enter SetActive on the retiring row.
+            if (refreshing) return;
+            refreshing = true;
+            try { RefreshContents(); }
+            finally { refreshing = false; }
+        }
+
+        void RefreshContents()
         {
             // Tooltip retirement clears the cached hint through ShowHint, including during
             // parent deactivation. Rebuilding that hierarchy would reactivate child controls
             // from inside OnDisable (and is invalid during scene/fixture destruction).
             if (game == null || renderRoot == null || !renderRoot.gameObject.activeInHierarchy) return;
-            if (albumHud) { RefreshAlbumHud(); return; }
+            if (albumHud) { RefreshAlbumHud(); theme.SyncColors(); return; }
             var s = game.Run.Session; var input = game.Drawing;
             ink.text = s.Ink + " штрихов"; health.text = "Замок  " + Mathf.CeilToInt(s.BaseHealth) + " / " + Mathf.CeilToInt(s.Balance.BaseHealth);
             wave.text = ui.T("wave", s.WaveIndex, s.Balance.Waves.Count);
             phase.text = game.Finished ? "Миссия завершена" : s.PendingUpgrade ? "Выбери усиление" :
-                s.Phase == RunPhase.Assault ? ui.T("enemies", s.Enemies.Count + s.RemainingToSpawn) : ui.T("planning", Mathf.CeilToInt(s.Countdown));
+                s.Phase == RunPhase.Assault ? AssaultEnemyCount(s) : ui.T("planning", Mathf.CeilToInt(s.Countdown));
             int nextWave = s.WaveIndex;
             if (nextWave < s.Balance.Waves.Count)
             {
                 var next = s.Balance.Waves[nextWave];
-                forecast.text = "Далее: " + next.Count + " · " + GameText.Resolve(next.Title);
+                forecast.text = next.IsHorde ? NextWaveForecast(s) : "Далее: " + next.Count + " · " + GameText.Resolve(next.Title);
             }
             else forecast.text = ui.T("final_wave");
             fieldStats.text = ui.T("field_stats", s.Enemies.Count, s.Kills, s.Structures.Count);
             var inspected = input.InspectedCell.HasValue ? s.StructureAt(input.InspectedCell.Value) : null;
-            context.gameObject.SetActive(showSummary || inspected.HasValue);
+            context.gameObject.SetActive(!input.IsPlacingTower && (showSummary || inspected.HasValue));
             fieldStats.gameObject.SetActive(showSummary);
             towerInfo.text = inspected.HasValue
                 ? (inspected.Value.Blueprint == null ? GameText.Resolve(WorkshopHud.WeaponName(inspected.Value.Kind)) : GameText.Resolve(inspected.Value.Blueprint.Name)) +
@@ -203,19 +240,30 @@ namespace PaperDefense.Presentation
             speedValue.text = "×" + game.Run.Speed;
             bool active = game.Page == PlayerPage.Battle;
             launch.interactable = active && !s.PendingUpgrade && (s.Phase == RunPhase.Planning || s.Phase == RunPhase.Intermission);
-            message.text = game.Run.Workshop.HasUnsavedChanges ? GameText.Resolve(game.Run.Workshop.SaveMessage) : input.Message;
+            message.text = !input.IsPlacingTower && game.Run.Workshop.HasUnsavedChanges ? GameText.Resolve(game.Run.Workshop.SaveMessage) : input.Message;
             int selected = input.Mode == DrawingMode.Erase ? 8 : input.Mode == DrawingMode.Upgrade ? 9 : input.Mode == DrawingMode.Blotter ? 10 : input.Mode == DrawingMode.Paint ? 11 : input.BlueprintSlot >= 0 ? input.BlueprintSlot : -1;
             if (selected < 0) for (int i = 0; i < Construction.Length; i++) if (input.Tool == Construction[i]) selected = i + 4;
             string selectedName = selected >= 0 && selected < 4 && selected < game.Run.BuildLoadout.Count
                 ? GameText.Resolve(game.Run.BuildLoadout[selected].Name) : ui.T("tool_" + Mathf.Max(0, selected));
-            selection.text = input.PreviewReason.Length > 0 ? input.PreviewReason : ui.T("selection", selectedName, ui.T("material_" + (int)input.Tier));
+            string selectionCopy = input.PreviewReason.Length > 0 ? input.PreviewReason : ui.T("selection", selectedName, ui.T("material_" + (int)input.Tier));
             for (int i = 0; i < tools.Length; i++)
             {
                 bool available = true; int cost = 0;
                 if (i < 4)
                 {
                     var bp = i < game.Run.BuildLoadout.Count ? game.Run.BuildLoadout[i] : null;
-                    sketches[i].SetBlueprint(bp); available = bp != null;
+                    if (!ReferenceEquals(legacyDisplayedBlueprints[i], bp))
+                    {
+                        legacyDisplayedBlueprints[i] = bp;
+                        WorkshopUi.ClearViews(legacyPreviews[i]);
+                        if (bp != null)
+                        {
+                            var preview = legacyPreviews[i];
+                            StandardAssemblyIllustration.Draw(preview, new AlbumEntry(bp.Id, GameText.Resolve(bp.Name), 1, bp),
+                                new Rect(0, 0, preview.rect.width, preview.rect.height), "Legacy battle blueprint " + i);
+                        }
+                    }
+                    available = bp != null;
                     cost = bp == null ? 0 : game.Run.PreviewBlueprint(bp, input.Tier).Cost;
                     prices[i].text = bp == null ? "—" : cost.ToString();
                     string name = bp == null ? ui.T("empty") : GameText.Resolve(bp.Name);
@@ -233,17 +281,18 @@ namespace PaperDefense.Presentation
                 string reason = !available ? "Недоступно в этой миссии" : cost > s.Ink ? "Не хватает " + (cost - s.Ink) + " штрихов" : "";
                 tools[i].GetComponent<PlayerTooltip>().Message = (i < 4 ? Keys[i] + " · " + displayedNames[i] : ui.T("tool_" + i)) + (reason.Length > 0 ? " · " + reason : "");
                 prices[i].color = cost > s.Ink ? PlayerUi.Muted : PlayerUi.Ink;
-                if (selected == i && cost > s.Ink && input.PreviewReason.Length == 0) selection.text = reason;
+                if (selected == i && cost > s.Ink && input.PreviewReason.Length == 0) selectionCopy = reason;
                 tools[i].interactable = active && available; ui.MarkSelected(tools[i], selected == i);
             }
-            FitCaption(selection, toolHint.Length > 0 ? toolHint : selection.text);
+            WriteToolHint(selection, toolHint.Length > 0 ? toolHint : selectionCopy);
             for (int i = 0; i < materials.Length; i++) { ui.MarkSelected(materials[i], (int)input.Tier == i); materials[i].interactable = active; }
             for (int i = 0; i < colors.Length; i++)
             {
                 ui.MarkSelected(colors[i], (int)input.Color == i); colors[i].interactable = active && (i == 0 || s.Balance.Mechanics.ColorCartridges);
                 colorAmounts[i].text = i == 0 ? "—" : s.ColoredInk((InkColor)i).ToString();
             }
-            for (int i = 0; i < wells.Length; i++)
+            if (flaskReward != null) RefreshInkFlasks(s);
+            else for (int i = 0; i < wells.Length; i++)
             {
                 bool exists = s.Balance.Mechanics.InkWells && i < s.Wells.Count;
                 wells[i].gameObject.SetActive(exists); if (!exists) continue;
@@ -252,6 +301,7 @@ namespace PaperDefense.Presentation
                 wellAmounts[i].color = s.Wells[i].Threatened ? NotebookPalette.Red : PlayerUi.Blue;
                 wellAmounts[i].text = s.Wells[i].Active ? Mathf.CeilToInt(s.Wells[i].Health).ToString() : s.Balance.WellActivationCost.ToString();
             }
+            theme.SyncColors();
         }
     }
 }

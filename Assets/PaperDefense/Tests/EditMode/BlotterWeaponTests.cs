@@ -90,7 +90,7 @@ namespace PaperDefense.Tests
         [Test] public void CleanupCadenceUsesTheConfiguredIntervalWithoutDealingDamage()
         {
             var balance=Balance(); balance.Structure(StructureKind.Blotter).Range=100; balance.Structure(StructureKind.Blotter).Radius=0;
-            var cells=new Cell[20]; for(int i=0;i<cells.Length;i++) cells[i]=new Cell(i,5);
+            var cells=new Cell[20]; for(int i=0;i<cells.Length;i++) cells[i]=new Cell(11+i,10);
             var result=Run(balance,Tower(),new BlotFixture(cells),new List<EnemyState>(),900);
             Assert.That(result.BlotsCleared,Is.EqualTo(15));
             Assert.That(result.Launches(StructureKind.Blotter),Is.EqualTo(15));
@@ -106,7 +106,7 @@ namespace PaperDefense.Tests
             var wide=Fire(balance,Tower(),new BlotFixture(new Cell(12,10),new Cell(13,10)),new List<EnemyState>(),out _);
             Assert.That(narrow.BlotsCleared,Is.EqualTo(1)); Assert.That(wide.BlotsCleared,Is.EqualTo(2));
             weapon.Range=100; weapon.Radius=0;
-            var cells=new Cell[40]; for(int i=0;i<cells.Length;i++) cells[i]=new Cell(i,5);
+            var cells=new Cell[40]; for(int i=0;i<cells.Length;i++) cells[i]=new Cell(11+i,10);
             var slow=Run(balance,Tower(),new BlotFixture(cells),new List<EnemyState>(),900);
             weapon.ShotInterval=1;
             var fast=Run(balance,Tower(),new BlotFixture(cells),new List<EnemyState>(),900);
@@ -152,13 +152,13 @@ namespace PaperDefense.Tests
             readonly List<Cell> cells;
             internal BlotFixture(params Cell[] source){cells=new List<Cell>(source);}
             internal bool Contains(Cell cell)=>cells.Contains(cell);
-            public bool TryFindNearest(Point2 origin,float range,out Cell cell)
+            public bool TryFindNearest(Point2 origin,float minimumRange,float range,FiringSector sector,out Cell cell)
             {
                 cell=default; bool found=false; float nearest=range*range;
                 foreach(var candidate in cells)
                 {
                     float dx=candidate.X+.5f-origin.X,dy=candidate.Y+.5f-origin.Y,distance=dx*dx+dy*dy;
-                    if(distance>nearest) continue;
+                    if(distance>nearest || distance<minimumRange*minimumRange || !sector.Contains(dx,dy)) continue;
                     if(!found || distance<nearest || candidate.Y<cell.Y || (candidate.Y==cell.Y && candidate.X<cell.X))
                     {cell=candidate;nearest=distance;found=true;}
                 }

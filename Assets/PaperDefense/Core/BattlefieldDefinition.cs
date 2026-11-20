@@ -11,8 +11,9 @@ namespace PaperDefense.Core
         internal Cell Cell=>new Cell(X,Y);
         internal BattlefieldCell Copy()=>new BattlefieldCell(X,Y);
     }
-    public enum TerrainPropKind { Mountain=0,Pine=1,Broadleaf=2,Rock=3,Shrub=4 }
+    public enum TerrainPropKind { Mountain=0,Pine=1,Broadleaf=2,Rock=3,Shrub=4,Water=5,Rampart=6 }
     public enum BattlefieldMode { FixedRoads=0, OpenTerrain=1 }
+    public enum CampaignTerrainStyle { Plain, NorthPass, Crossroads, RiverBridges, Redoubt, FourFields, Fold, StoneGate, Citadel }
     [Serializable] public sealed class TerrainPropDefinition
     {
         public TerrainPropKind Kind;
@@ -31,6 +32,9 @@ namespace PaperDefense.Core
     {
         public bool Enabled;
         public BattlefieldMode Mode;
+        public CampaignTerrainStyle Style;
+        public bool OverrideCastle;
+        public int CastleX, CastleY;
         public int TowerRoadDistance = 6;
         public List<BattlefieldCell> Roads=new List<BattlefieldCell>();
         public List<BattlefieldCell> Entrances=new List<BattlefieldCell>();
@@ -39,7 +43,8 @@ namespace PaperDefense.Core
         public BattlefieldDefinition CreateSnapshot()
         {
             if(Roads==null||Entrances==null||BarricadeSites==null||Props==null)throw new ArgumentException("Battlefield lists are required.");
-            var copy=new BattlefieldDefinition{Enabled=Enabled,Mode=Mode,TowerRoadDistance=TowerRoadDistance};
+            var copy=new BattlefieldDefinition{Enabled=Enabled,Mode=Mode,Style=Style,OverrideCastle=OverrideCastle,
+                CastleX=CastleX,CastleY=CastleY,TowerRoadDistance=TowerRoadDistance};
             foreach(var c in Roads)copy.Roads.Add(c?.Copy()??throw new ArgumentException("Battlefield.Roads contains null."));
             foreach(var c in Entrances)copy.Entrances.Add(c?.Copy()??throw new ArgumentException("Battlefield.Entrances contains null."));
             foreach(var c in BarricadeSites)copy.BarricadeSites.Add(c?.Copy()??throw new ArgumentException("Battlefield.BarricadeSites contains null."));
@@ -47,15 +52,17 @@ namespace PaperDefense.Core
             return copy;
         }
         public BattlefieldView Resolve(int width,int height,Cell castle,IReadOnlyList<Cell> objectives=null)
-            => Enabled?new BattlefieldView(this,width,height,castle,objectives):null;
+            => Enabled?new BattlefieldView(this,width,height,OverrideCastle?new Cell(CastleX,CastleY):castle,objectives):null;
     }
     /// <summary>Immutable resolved grid; presentation and simulation consume the same placement data.</summary>
     public sealed class BattlefieldView
     {
         readonly int width,height;
         readonly bool[] roads,terrain,barricades,buildGround;
-        readonly int[] castleDistance;
+        readonly int[] castleDistance, entranceBands;
         public BattlefieldMode Mode {get;}
+        public CampaignTerrainStyle Style {get;}
+        public Cell Castle {get;}
         public bool IsOpenTerrain=>Mode==BattlefieldMode.OpenTerrain;
         public IReadOnlyList<Cell> Roads {get;}
         public IReadOnlyList<Cell> Entrances {get;}
@@ -67,9 +74,18 @@ namespace PaperDefense.Core
             this.width=width;this.height=height;roads=new bool[width*height];buildGround=new bool[roads.Length];terrain=new bool[roads.Length];barricades=new bool[roads.Length];
             var d=input.CreateSnapshot();
             if(!Enum.IsDefined(typeof(BattlefieldMode),d.Mode))throw new ArgumentException("Invalid battlefield mode.");
-            Mode=d.Mode;
+            if(!Enum.IsDefined(typeof(CampaignTerrainStyle),d.Style))throw new ArgumentException("Invalid battlefield style.");
+            if(d.OverrideCastle&&(castle.X<1||castle.X>=width-1||castle.Y<1||castle.Y>=height-1))throw new ArgumentException("Castle footprint must fit inside the map.");
+            Mode=d.Mode;Style=d.Style;Castle=castle;
             if(!IsOpenTerrain&&(d.TowerRoadDistance<1||d.TowerRoadDistance>Math.Max(width,height)))throw new ArgumentException("Invalid tower distance from roads.");
             Roads=ReadCells(d.Roads,roads,"Roads");Entrances=ReadCells(d.Entrances,null,"Entrances");BarricadeSites=ReadCells(d.BarricadeSites,barricades,"BarricadeSites");
+            entranceBands = new int[Entrances.Count];
+            var gateCount = new int[9];
+            for (int i = 0; i < Entrances.Count; i++)
+            {
+                int order = gateCount[Side(Entrances[i])]++;
+                entranceBands[i] = order < 2 ? 1 << order : 0;
+            }
             var props=new List<TerrainPropView>();
             foreach(var p in d.Props)
             {
@@ -138,6 +154,8 @@ namespace PaperDefense.Core
             void Consider(Cell neighbor){int value=DistanceToCastle(neighbor);if(value<distance){distance=value;best=neighbor;}}
         }
         public int Side(Cell c)=>c.X==0?1:c.X==width-1?2:c.Y==height-1?4:c.Y==0?8:0;
+        public bool IsWaveEntrance(int index, int sides, int bands)
+            => (Side(Entrances[index]) & sides) != 0 && (bands == 0 || (entranceBands[index] & bands) != 0);
         public bool HasEntrance(int side){foreach(var c in Entrances)if(Side(c)==side)return true;return false;}
     }
     public sealed partial class GameBalance

@@ -9,6 +9,7 @@ namespace PaperDefense.Core
         public string BalanceRevision { get; }
         public IReadOnlyList<ComponentDefinition> Definitions { get; }
         public IReadOnlyList<AlbumEntry> Starters { get; }
+        public IReadOnlyList<AlbumEntry> Templates { get; }
         public ComponentCatalog(string balanceRevision, IEnumerable<ComponentDefinition> definitions, IEnumerable<AssemblyStarterInput> starters = null)
         {
             if (string.IsNullOrWhiteSpace(balanceRevision)) throw new ArgumentException(nameof(balanceRevision));
@@ -21,7 +22,8 @@ namespace PaperDefense.Core
                 owned.Add(d);
             }
             Definitions = owned.AsReadOnly();
-            var entries = new List<AlbumEntry>(); var ids = new HashSet<string>(StringComparer.Ordinal);
+            var entries = new List<AlbumEntry>(); var templates = new List<AlbumEntry>();
+            var ids = new HashSet<string>(StringComparer.Ordinal);
             foreach (var s in starters ?? Array.Empty<AssemblyStarterInput>())
             {
                 if (s == null || !ids.Add(s.Id ?? "")) throw AssemblyCatalogException.At("assembly.entry.duplicate", "starters");
@@ -34,9 +36,12 @@ namespace PaperDefense.Core
                     if (d.UnlockGold != 0 || d.RequiredLevel != 1) throw AssemblyCatalogException.At("assembly.starter.locked", s.Id, d.Id);
                     if (seen.Add((part.Id, part.Revision))) used.Add(d);
                 }
-                entries.Add(new AlbumEntry(s.Id, s.Name, s.Revision, new RecipeSnapshot(recipe, balanceRevision, used)));
+                var entry = new AlbumEntry(s.Id, s.Name, s.Revision, new RecipeSnapshot(recipe, balanceRevision, used));
+                templates.Add(entry);
+                if (!s.WorkshopOnly) entries.Add(entry);
             }
             Starters = entries.AsReadOnly();
+            Templates = templates.AsReadOnly();
         }
         public bool TryGet(string id, int revision, out ComponentDefinition definition)
         {
@@ -69,6 +74,7 @@ namespace PaperDefense.Core
                     var w = m.Weapon; string path = "mounts[" + m.SlotIndex + "]";
                     Check(w.Mechanism, ComponentCategory.Mechanism, path + ".mechanism"); Check(w.Head, ComponentCategory.Head, path + ".head");
                     Check(w.Sight, ComponentCategory.Sight, path + ".sight"); Check(w.Magazine, ComponentCategory.Magazine, path + ".magazine"); Check(w.Trigger, ComponentCategory.Trigger, path + ".trigger");
+                    if (w.Mount.HasValue) Check(w.Mount.Value, ComponentCategory.Mount, path + ".mount");
                     if (!TryGet(w.Mechanism.Id, w.Mechanism.Revision, out var core)) continue;
                     foreach (var p in w.Parts) if (TryGet(p.Id, p.Revision, out var d))
                     {

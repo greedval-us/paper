@@ -8,5 +8,7 @@ namespace PaperDefense.Core
         public const int HistoricalLoadoutSlotCount = 4;
         public const int MaximumBlueprintIdLength = 64;
         public const int MaximumBlueprintNameLength = 48;
+        public const int MaximumNamedLoadouts = 12;
+        public const int MaximumLoadoutNameLength = 48;
     }
 }

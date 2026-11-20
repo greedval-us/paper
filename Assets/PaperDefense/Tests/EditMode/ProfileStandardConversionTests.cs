@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace PaperDefense.Tests
 {
+    [Category("HistoricalProfileCompatibility")]
     public sealed class ProfileStandardConversionTests
     {
         // Armor keeps the historical material costs away from integer boundaries: 58 / 105 / 186.

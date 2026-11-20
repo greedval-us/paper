@@ -36,7 +36,7 @@ namespace PaperDefense.Tests
         [TestCase("feed", DrawingPartKey.Feed, "bd1ffbfff8865229")]
         [TestCase("tracking", DrawingPartKey.Tracking, "e583295cebaec9ab")]
         [TestCase("rail", DrawingPartKey.Rail, "899949a009d7430f")]
-        public void BothAssemblyEditorsClearOnlyTheChangedPart(string change, DrawingPartKey removed, string expectedHash)
+        public void BlueprintAndDrawingSessionClearOnlyTheChangedPart(string change, DrawingPartKey removed, string expectedHash)
         {
             TowerBlueprint original = Page();
             ChassisKind chassis = change == "chassis" ? ChassisKind.Heavy : ChassisKind.Standard;

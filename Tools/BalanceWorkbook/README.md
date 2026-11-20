@@ -1,19 +1,27 @@
-# Excel механик и баланса
+# Сравнительная книга совместимости
 
-[Инструменты проекта](../README.md) · [Словарь параметров](../../docs/Balance-Parameters.md) · [Каталог контента](../../docs/Content-Architecture.md)
+Инструмент оставлен для сравнения прежних пресетов Historical и Target и проверки совместимости их экспорта. Основная игра использует PlayerRules и составной каталог; значения Target не заменяют её баланс. Для текущего каталога используйте [AlbumDesign2026](../AlbumDesign2026/README.md) и свежий [Player runtime-экспорт](../../docs/balance/assembly-runtime.json).
 
-Книга экспортирует **Historical и Target**, а основная игра использует отдельный [PlayerRules.asset](../../Assets/PaperDefense/Configuration/Game/PlayerRules.asset). Значения PlayerRules сверяйте с его assets; их нельзя выводить из столбца Target. Прежние сгенерированные файлы `docs/balance` удалены при очистке: перед созданием новой книги обязателен новый экспорт из Unity.
+Если нужна сравнительная книга:
 
-1. В Unity выполните `Paper Defense > Export mechanics and balance JSON` или вызовите `PaperDefense.Editor.BalanceWorkbookExport.Export()`.
-2. Настройте [локальные зависимости](../README.md#локальные-зависимости-nodejs), затем в корне проекта выполните `Tools/BalanceWorkbook/Build.ps1`.
-3. Проверьте `docs/balance/PaperDefense-Mechanics-Balance.xlsx`. `workbook-validation.json` сохраняет хэш данных, результат сверки формул и ограничения проверки.
+1. В Unity выполните `Paper Defense > Export mechanics and balance JSON` или `PaperDefense.Editor.BalanceWorkbookExport.Export()` для свежего `docs/balance/balance-data.json`.
+2. Настройте bundled `@oai/artifact-tool` по [инструкции инструментов](../README.md#excel-и-зависимости).
+3. Из корня проекта выполните `Tools/BalanceWorkbook/Build.ps1`.
 
-Экспорт читает обе настройки через `CreateWorkshopBalance()`: рабочие `Historical.asset` и `Target.asset` уже содержат конечные правила и overrides. Повторное применение Target или генерация legacy-угроз не нужны. Экспорт не меняет настройки, профиль или текущую партию. JSON версии 2 содержит глобальные правила, эффективные каталоги по ID, configured/effective механики и эталоны `TowerCatalog`. Для каждой записи каталога сохранены источник и факт переопределения пресетом. Отдельный каталог приёмки не включается в основной баланс.
+Результат — `docs/balance/PaperDefense-Mechanics-Balance.xlsx`, `workbook-validation.json` рядом с ним и превью в `Tools/BalanceWorkbook/.previews`. Старые книги, протоколы и PNG не читаются как входы. Excel не импортируется в Unity. При изменении исходников или assets после экспорта проверка хешей требует повторного экспорта.
 
-Девять листов показывают границы механик, формулы сборки, оружие, основания, модули и эффекты, материалы и врагов, волны, глобальные параметры, полные поля каталога с контурами и источники. Новые записи отображаются автоматически. Числа боя, испытаний и оценки рисунка поступают из подготовленных данных Unity.
+## Обязательные данные совместимости
 
-Генератор использует только `@oai/artifact-tool` из bundled workspace runtime. `node_modules` — локальная junction, исключённая из Git. Если код, content assets, пресеты или сам генератор изменились после экспорта, генератор останавливается и требует новый экспорт Unity. Числа баланса не копируются в генератор. Сохранённые JSON в `docs/validation/content/after`, включая `editmode-tests.json` и `playmode-tests.json`, помечены как историческая проверка рефакторинга каталога от 2026-10-12 и нужны инструменту; они не подтверждают текущий код. Дополнительный `-CurrentEvidence` можно опустить. Если добавляете его, передайте существующие машинные JSON свежего прогона: их пути и SHA256 попадут в книгу и `workbook-validation.json`. [Последний отчёт очистки](../../docs/validation/2026-10-16-main-game-cleanup/report.md) — Markdown, он не подходит как машинный JSON для этого параметра.
+Текущая реализация `build.mjs` безусловно читает следующие JSON. Они сохранены как входные данные инструмента, а не как актуальные доказательства качества игры:
 
-Экспорт содержит ограничения креплений, слотов улучшений и брони, подачу каждого основания, координаты креплений, тип слота модуля и все крепления стартовых страниц с формой площадного снаряда. `FullMountPivots` содержит разрешённые координаты при полном числе креплений, старые координаты также сохранены для совместимости. «Оружие» показывает минимальную и эффективную максимальную дистанции до оборудования; исходный `Stats.Range` сохранён отдельно. Для радиального оружия эффективная дистанция определяется радиусом.
+- `docs/validation/content/after/editmode-tests.json`
+- `docs/validation/content/after/playmode-tests.json`
+- `docs/validation/content/after/baseline-comparison.json`
+- `docs/validation/content/after/editor-acceptance.json`
+- `docs/validation/content/after/player-acceptance.json`
+- `docs/validation/content/after/development-build.json`
+- `docs/validation/content/data-only-diff.json`
 
-В книге нет игрового переключателя механик. Лист «Механики» описывает developer configuration для следующего запуска. Значения Excel не импортируются обратно в Unity.
+Удаление любого из этих файлов останавливает генератор. Свежий экспорт баланса не заменяет их. Дополнительный параметр `-CurrentEvidence` принимает существующие машинные JSON свежих проверок; их пути и SHA256 попадут в книгу и протокол. Markdown-отчёты для этого параметра не подходят. [Сохранённые проверки и их ограничения](../../docs/validation/README.md).
+
+`Tools/Validate-ContentDataOnly.ps1` создаёт новый `content/code-freeze.json` в режиме `Freeze`, а `Verify` читает этот снимок и записывает `data-only-diff.json`. Старый freeze не нужен для нового эксперимента; результаты прежнего эксперимента не следует выдавать за свежую проверку.

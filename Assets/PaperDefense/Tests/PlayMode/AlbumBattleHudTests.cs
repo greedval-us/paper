@@ -11,6 +11,7 @@ using PaperDefense.Presentation;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
@@ -47,8 +48,26 @@ namespace PaperDefense.Tests
         [UnityTearDown] public IEnumerator TearDown()
         { Object.Destroy(owner); Object.Destroy(balance); yield return null; }
 
+        void OpenDetails()
+        {
+            Button("Battle details toggle").onClick.Invoke(); Hud.Refresh(); Canvas.ForceUpdateCanvases();
+            Assert.That(Copy("Album battle structure details").gameObject.activeInHierarchy, Is.True);
+        }
+
         void StartBattle()
         { Assert.That(game.StartBattle(), Is.True); Canvas.ForceUpdateCanvases(); Hud.Refresh(); }
+
+        [UnityTest] public IEnumerator HordeHeaderCountsBodiesThatHaveEnteredTheField()
+        {
+            StartBattle();
+            game.Run.NextWave();
+            game.Run.StepSimulation();
+            Hud.Refresh();
+            Assert.That(Session.RemainingToSpawn, Is.GreaterThan(0));
+            var caption = (Text)typeof(PlayerBattleHud).GetField("albumPhase", Private).GetValue(Hud);
+            Assert.That(caption.text, Is.EqualTo("На поле " + Session.Enemies.Count));
+            yield return null;
+        }
 
         Cell Build(int slot)
         {
@@ -66,7 +85,7 @@ namespace PaperDefense.Tests
         [UnityTest] public IEnumerator EightCardsRemainVisibleWithoutHorizontalScrollAtEveryRequiredSize()
         {
             StartBattle();
-            foreach (var size in new[] { new Vector2Int(1024, 768), new Vector2Int(1280, 720), new Vector2Int(1920, 1080) })
+            foreach (var size in new[] { new Vector2Int(800, 600), new Vector2Int(1024, 768), new Vector2Int(1280, 720), new Vector2Int(1920, 1080) })
             {
                 shell.ApplyLayout(size.x, size.y); Canvas.ForceUpdateCanvases(); Hud.Refresh();
                 var dock = Rect("Construction dock");
@@ -85,7 +104,7 @@ namespace PaperDefense.Tests
                     foreach (var previous in occupied) Assert.That(bounds.Overlaps(previous), Is.False);
                     occupied.Add(bounds);
                 }
-                foreach (string action in new[] { "Album battle erase", "Material 0", "Material 1", "Material 2", "Ink 0", "Ink 1", "Ink 2", "Ink 3" })
+                foreach (string action in new[] { "Album battle erase", "Album battle blotter", "Tactical pause" })
                     Assert.That(Button(action).gameObject.activeInHierarchy, Is.True);
             }
             yield return null;
@@ -96,7 +115,13 @@ namespace PaperDefense.Tests
             StartBattle();
             for (int slot = 0; slot < 8; slot++)
             {
-                Assert.That(Copy("Album battle name " + slot).text, Is.EqualTo(GameText.Resolve(game.Run.RunLoadout.Entries[slot].Name)));
+                EventSystem.current.SetSelectedGameObject(Button("Build tool " + slot).gameObject);
+                Canvas.ForceUpdateCanvases();
+                Assert.That(Copy("Battle tool hint").text, Does.Contain(GameText.Resolve(game.Run.RunLoadout.Entries[slot].Name)));
+                Assert.That(Button("Build tool " + slot).GetComponent<PlayerTooltip>().Message,
+                    Does.Contain(GameText.Resolve(game.Run.RunLoadout.Entries[slot].Name)));
+                Assert.That(Copy("Album battle price " + slot).text,
+                    Is.EqualTo(game.Run.RunLoadout.ResolveSlot(slot, MaterialTier.Pencil).Cost.ToString()));
                 Button("Build tool " + slot).onClick.Invoke(); Hud.Refresh();
                 Assert.That(game.Drawing.BlueprintSlot, Is.EqualTo(slot));
                 Assert.That(game.Drawing.Mode, Is.EqualTo(DrawingMode.Build));
@@ -116,33 +141,6 @@ namespace PaperDefense.Tests
             yield return null;
         }
 
-        [UnityTest] public IEnumerator MaterialPricesComeFromEntryQuotesAndGeneratorSelectionUsesPencilOnly()
-        {
-            StartBattle();
-            foreach (var tier in new[] { MaterialTier.Pencil, MaterialTier.Ink, MaterialTier.Marker })
-            {
-                Button("Material " + (int)tier).onClick.Invoke(); Hud.Refresh();
-                for (int slot = 0; slot < 8; slot++)
-                {
-                    bool generator = game.Run.RunLoadout.Resolved[slot].Support?.Kind == AssemblyStructureFamily.Generator;
-                    if (generator)
-                    {
-                        Assert.That(Button("Build tool " + slot).interactable, Is.True);
-                        Assert.That(Copy("Album battle price " + slot).text,
-                            Does.Contain(game.Run.RunLoadout.ResolveSlot(slot, MaterialTier.Pencil).Cost.ToString()));
-                        Assert.That(Copy("Album battle price " + slot).text, Does.Contain("карандаш").IgnoreCase);
-                        continue;
-                    }
-                    var expected = game.Run.RunLoadout.ResolveSlot(slot, tier);
-                    Assert.That(Copy("Album battle price " + slot).text, Does.Contain(expected.Cost.ToString()));
-                }
-            }
-            int generatorSlot = Enumerable.Range(0, 8).Single(index => game.Run.RunLoadout.Resolved[index].Support?.Kind == AssemblyStructureFamily.Generator);
-            Button("Build tool " + generatorSlot).onClick.Invoke(); Hud.Refresh();
-            Assert.That(game.Drawing.BlueprintSlot, Is.EqualTo(generatorSlot));
-            Assert.That(game.Drawing.Tier, Is.EqualTo(MaterialTier.Pencil));
-            yield return null;
-        }
 
         [UnityTest] public IEnumerator WeaponInspectorUsesResolvedMagazineAndTheLiveMountCycle()
         {
@@ -152,9 +150,9 @@ namespace PaperDefense.Tests
             var cycle = (WeaponCycleState)Activator.CreateInstance(typeof(WeaponCycleState), BindingFlags.Instance | BindingFlags.NonPublic, null,
                 new object[] { 2, true, .5d }, null);
             typeof(WeaponMountState).GetProperty("Cycle").SetValue(entity.GetMountState(0), cycle);
-            game.Drawing.Inspect(cell); Hud.Refresh();
+            game.Drawing.Inspect(cell); Hud.Refresh(); OpenDetails();
             var weapon = game.Run.Session.StructureAt(cell).Value.ResolvedEntry.Weapons[0];
-            Assert.That(Copy("Album battle structure details").text, Does.Contain("2 / " + weapon.MagazineSize));
+            Assert.That(Copy("Album battle structure details").text, Does.Contain("2/" + weapon.MagazineSize));
             Assert.That(Copy("Album battle structure details").text, Does.Contain("Смена обоймы"));
             yield return null;
         }
@@ -162,7 +160,7 @@ namespace PaperDefense.Tests
         [UnityTest] public IEnumerator GeneratorInspectorShowsIncomeFullWaveRulePencilAndZeroRefund()
         {
             StartBattle(); int slot = Enumerable.Range(0, 8).Single(index => game.Run.RunLoadout.Resolved[index].Support?.Kind == AssemblyStructureFamily.Generator);
-            var cell = Build(slot); game.Drawing.Inspect(cell); Hud.Refresh();
+            var cell = Build(slot); game.Drawing.Inspect(cell); Hud.Refresh(); OpenDetails();
             var support = game.Run.Session.StructureAt(cell).Value.ResolvedEntry.Support;
             string text = Copy("Album battle structure details").text;
             Assert.That(text, Does.Contain(support.IncomePerWave.ToString()));
@@ -175,7 +173,7 @@ namespace PaperDefense.Tests
         [UnityTest] public IEnumerator RepairInspectorExplainsOneTargetAndResolvedHealthPerSecond()
         {
             StartBattle(); int slot = Enumerable.Range(0, 8).Single(index => game.Run.RunLoadout.Resolved[index].Support?.Kind == AssemblyStructureFamily.Repair);
-            var cell = Build(slot); game.Drawing.Inspect(cell); Hud.Refresh();
+            var cell = Build(slot); game.Drawing.Inspect(cell); Hud.Refresh(); OpenDetails();
             float amount = game.Run.Session.StructureAt(cell).Value.ResolvedEntry.Support.RepairPerSecond;
             string text = Copy("Album battle structure details").text;
             Assert.That(text, Does.Contain("одна цель").IgnoreCase);
@@ -184,7 +182,7 @@ namespace PaperDefense.Tests
             yield return null;
         }
 
-        [UnityTest] public IEnumerator IdenticalRecipesKeepTheirOwnFrozenNameAndPreviewAfterMaterialUpgrade()
+        [UnityTest] public IEnumerator IdenticalRecipesKeepTheirOwnFrozenNameAfterDifferentPaidModernizations()
         {
             var source = game.Run.Workshop.LoadoutEntries[0];
             var first = new AlbumEntry("draft.hud.first", "Северный дозор", 1, source.Snapshot);
@@ -202,19 +200,23 @@ namespace PaperDefense.Tests
             {
                 foreach (bool upgrade in new[] { false, true })
                 {
-                    if (upgrade) Assert.That(game.Run.Upgrade(cells[slot], out var reason), Is.True, reason);
+                    if (upgrade)
+                    {
+                        var structure = game.Run.Session.StructureAt(cells[slot]).Value;
+                        var quote = game.Run.QuoteModernization(structure.Id, slot == 0 ? ModernizationDirection.Power : ModernizationDirection.Range);
+                        Assert.That(game.Run.Modernize(quote, out var reason), Is.True, reason);
+                        for (int tick = 0; tick < 140; tick++) game.Run.StepSimulation();
+                    }
                     game.Drawing.Inspect(cells[slot]); Hud.Refresh(); Canvas.ForceUpdateCanvases(); yield return null;
                     Assert.That(Copy("Album battle structure name").text, Is.EqualTo(game.Run.RunLoadout.Entries[slot].Name),
-                        "The selected page identity must survive recipe resolution and material upgrades.");
-                    var preview = Rect("Album battle inspected preview").GetComponentInChildren<WeaponAssemblyGraphic>();
-                    Assert.That(preview, Is.Not.Null, "The selected frozen page must supply its certified preview.");
-                    var mesh = preview.GetComponent<CanvasRenderer>().GetMesh();
-                    Assert.That(mesh, Is.Not.Null); Assert.That(mesh.vertexCount, Is.GreaterThan(0));
+                        "The selected page identity must survive recipe resolution and paid per-copy development.");
+                    Assert.That(game.Run.Session.StructureAt(cells[slot]).Value.SourceAlbumEntryId,
+                        Is.EqualTo(game.Run.RunLoadout.Entries[slot].Id));
                 }
             }
         }
 
-        [UnityTest] public IEnumerator CardNamesAndGeneratorPencilPriceHaveRoomForTheirRenderedLinesAtEveryRequiredSize()
+        [UnityTest] public IEnumerator CardNamesAndBasePricesHaveRoomForTheirRenderedLinesAtEveryRequiredSize()
         {
             string longName = new string('Ш', 48);
             var longPage = new AlbumEntry("draft.hud.long", longName, 1, game.Run.Workshop.LoadoutEntries[0].Snapshot);
@@ -222,32 +224,36 @@ namespace PaperDefense.Tests
             Assert.That(saved.Success, Is.True, saved.Code);
             Assert.That(game.Run.AssemblyCommands.AssignSlot(0, saved.ResultId, Guid.NewGuid()).Success, Is.True);
             StartBattle();
-            foreach (var size in new[] { new Vector2Int(1024, 768), new Vector2Int(1280, 720), new Vector2Int(1920, 1080) })
+            foreach (var size in new[] { new Vector2Int(800, 600), new Vector2Int(1024, 768), new Vector2Int(1280, 720), new Vector2Int(1920, 1080) })
             {
                 shell.ApplyLayout(size.x, size.y); Hud.Refresh(); Canvas.ForceUpdateCanvases();
                 for (int slot = 0; slot < 8; slot++)
                 {
-                    var name = Copy("Album battle name " + slot); var price = Copy("Album battle price " + slot);
+                    EventSystem.current.SetSelectedGameObject(Button("Build tool " + slot).gameObject);
+                    Canvas.ForceUpdateCanvases();
+                    var name = Copy("Battle tool hint"); var price = Copy("Album battle price " + slot);
+                    Assert.That(name.text, Does.Contain(GameText.Resolve(game.Run.RunLoadout.Entries[slot].Name)));
+                    Assert.That(name.cachedTextGenerator.characterCountVisible, Is.GreaterThanOrEqualTo(name.text.Length));
                     Assert.That(name.preferredHeight, Is.LessThanOrEqualTo(name.rectTransform.rect.height + 1),
                         "Name " + slot + " at " + size + ": " + name.text);
                     Assert.That(price.preferredHeight, Is.LessThanOrEqualTo(price.rectTransform.rect.height + 1),
                         "Price " + slot + " at " + size + ": " + price.text);
                     Assert.That(name.cachedTextGenerator.lineCount, Is.GreaterThan(0));
                     Assert.That(price.cachedTextGenerator.lineCount, Is.GreaterThan(0));
-                    Assert.That(Bounds((RectTransform)Button("Build tool " + slot).transform, name.rectTransform)
-                        .Overlaps(Bounds((RectTransform)Button("Build tool " + slot).transform, price.rectTransform)), Is.False);
+                    var card = (RectTransform)Button("Build tool " + slot).transform;
+                    var nameBounds = Bounds(card, name.rectTransform); var priceBounds = Bounds(card, price.rectTransform);
+                    var thumbnail = Button("Build tool " + slot).GetComponentInChildren<WeaponAssemblyGraphic>();
+                    Assert.That(thumbnail, Is.Not.Null);
+                    Assert.That(Bounds(card, thumbnail.rectTransform).Overlaps(priceBounds), Is.False, "Thumbnail must not cover the exact price.");
+                    Assert.That(nameBounds.Overlaps(priceBounds), Is.False,
+                        "Slot " + slot + " at " + size + ": name \"" + name.text + "\" " + nameBounds.ToString("F6") +
+                        "; price \"" + price.text + "\" " + priceBounds.ToString("F6"));
                 }
                 int generator = Enumerable.Range(0, 8).Single(slot => game.Run.RunLoadout.Resolved[slot].Support?.Kind == AssemblyStructureFamily.Generator);
-                Assert.That(Copy("Album battle price " + generator).cachedTextGenerator.lineCount, Is.EqualTo(2));
+                Assert.That(Copy("Album battle price " + generator).cachedTextGenerator.lineCount, Is.EqualTo(1));
                 Assert.That(Button("Build tool 0").GetComponent<PlayerTooltip>().Message, Does.Contain(longName),
                     "The full frozen name must remain available to keyboard and pointer users.");
-                for (int tier = 0; tier < 3; tier++)
-                {
-                    var label = Button("Material " + tier).GetComponentInChildren<Text>();
-                    Assert.That(label.preferredWidth, Is.LessThanOrEqualTo(label.rectTransform.rect.width + 1),
-                        "Material " + tier + " must remain a complete single-line caption at " + size);
-                    Assert.That(label.cachedTextGenerator.lineCount, Is.EqualTo(1));
-                }
+                Assert.That(owner.GetComponentsInChildren<Button>().Any(button => button.name.StartsWith("Material ") || button.name.StartsWith("Ink ") && !button.name.StartsWith("Ink well ")), Is.False);
             }
             yield return null;
         }

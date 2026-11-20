@@ -6,20 +6,56 @@ using UnityEngine;
 
 namespace PaperDefense.Presentation
 {
+    /// <summary>Observed mechanical work only; it never changes recipe identity or fit anchors.</summary>
+    public readonly struct AssemblyMechanicsPose
+    {
+        public readonly bool Reloading;
+        public readonly float Reload, Fire, Activity, Hit;
+        public AssemblyMechanicsPose(bool reloading = false, float reload = 0, float fire = 0, float activity = 0, float hit = 0)
+        { Reloading = reloading; Reload = Unit(reload); Fire = Unit(fire); Activity = Unit(activity); Hit = Unit(hit); }
+        static float Unit(float value) => float.IsNaN(value) || float.IsInfinity(value) ? 0 : Mathf.Clamp01(value);
+        internal AssemblyMechanicsPose Overlay(AssemblyMechanicsPose value)
+            => new AssemblyMechanicsPose(Reloading, Reload, Fire, Mathf.Max(Activity, value.Activity), Mathf.Max(Hit, value.Hit));
+    }
+
     public readonly struct AssemblyMountPose
     {
         public readonly int SlotIndex;
         public readonly float Radians, Recoil;
-        public AssemblyMountPose(int slotIndex, float radians, float recoil = 0)
-        { SlotIndex = slotIndex; Radians = radians; Recoil = recoil; }
+        public readonly AssemblyMechanicsPose Mechanics;
+        public AssemblyMountPose(int slotIndex, float radians, float recoil = 0, AssemblyMechanicsPose mechanics = default)
+        { SlotIndex = slotIndex; Radians = radians; Recoil = recoil; Mechanics = mechanics; }
+    }
+    /// <summary>Completed cosmetic equipment only; never participates in recipe resolution or mechanical fits.</summary>
+    public readonly struct AssemblyDevelopmentPose
+    {
+        public readonly int Power, Mechanics, Range, Resilience, ColorRank;
+        public readonly InkColor Color;
+        public readonly Color WeaponInk;
+        public AssemblyDevelopmentPose(int power = 0, int mechanics = 0, int range = 0, int resilience = 0,
+            InkColor color = InkColor.None, int colorRank = 0, Color? weaponInk = null)
+        {
+            Power = Mathf.Clamp(power, 0, 3); Mechanics = Mathf.Clamp(mechanics, 0, 3);
+            Range = Mathf.Clamp(range, 0, 3); Resilience = Mathf.Clamp(resilience, 0, 3);
+            ColorRank = color == InkColor.None ? 0 : Mathf.Clamp(colorRank, 0, 3);
+            Color = ColorRank > 0 ? color : InkColor.None;
+            WeaponInk = weaponInk ?? NightNotebookEffectPalette.ColorInk(Color);
+        }
+        internal AssemblyDevelopmentPose ForWeapon(AssemblyWeaponFamily family)
+            => family == AssemblyWeaponFamily.None || family == AssemblyWeaponFamily.Blotter
+                ? new AssemblyDevelopmentPose(mechanics: Mechanics, range: Range, resilience: Resilience)
+                : this;
     }
     public sealed class AssemblyVisualPose
     {
         public string VisualRevision { get; }
         public IReadOnlyList<AssemblyMountPose> Mounts { get; }
-        public AssemblyVisualPose(IEnumerable<AssemblyMountPose> mounts = null, string visualRevision = null)
+        public AssemblyDevelopmentPose Development { get; }
+        public AssemblyVisualPose(IEnumerable<AssemblyMountPose> mounts = null, string visualRevision = null,
+            AssemblyDevelopmentPose development = default)
         {
             VisualRevision = visualRevision;
+            Development = development;
             var copy = new List<AssemblyMountPose>(); var slots = new HashSet<int>();
             foreach (var m in mounts ?? Array.Empty<AssemblyMountPose>())
             {
@@ -47,14 +83,18 @@ namespace PaperDefense.Presentation
         public readonly Rect Trim, Region;
         public readonly Vector2 Origin;
         public readonly float Scale, Radians;
-        internal AssemblyVisualFragment(string part, string sprite, int slot, int layer, Rect trim, Rect region, Vector2 origin, float scale, float radians)
+        public readonly AssemblyMechanicsPose Mechanics;
+        public readonly AssemblyWeaponFamily WeaponFamily;
+        internal AssemblyVisualFragment(string part, string sprite, int slot, int layer, Rect trim, Rect region, Vector2 origin, float scale, float radians,
+            AssemblyMechanicsPose mechanics = default, AssemblyWeaponFamily weaponFamily = AssemblyWeaponFamily.None)
         { PartId = part; SpriteId = sprite; SlotIndex = slot; Layer = layer; Trim = trim; Region = region;
-            Origin = origin; Scale = scale; Radians = radians; }
+            Origin = origin; Scale = scale; Radians = radians; Mechanics = mechanics; WeaponFamily = weaponFamily; }
         public Vector2 Transform(Vector2 pixel) => Origin + NotebookMountLayout.Rotate(pixel * Scale, Radians);
-        internal void Draw(MeshPen pen, Vector2 at, float opacity, Color tint, float uniformScale = 1)
+        internal void Draw(MeshPen pen, Vector2 at, float opacity, Color tint, float uniformScale = 1,
+            AssemblyMechanicsPose? overlay = null, AssemblyDevelopmentPose development = default)
         {
-            if (!NotebookSpriteCatalog.TryDrawFrame(pen, SpriteId, Trim, Region, at + Origin * uniformScale, Scale * uniformScale, Radians, opacity, tint))
-                throw new InvalidOperationException("Missing assembly sprite: " + SpriteId);
+            NightNotebookArt.DrawPart(this, pen, at, opacity, tint, uniformScale, overlay.HasValue ? Mechanics.Overlay(overlay.Value) : Mechanics);
+            NightNotebookArt.DrawDevelopment(this, development, pen, at, opacity, tint, uniformScale);
         }
     }
     public sealed class AssemblyVisualComposition
@@ -63,228 +103,257 @@ namespace PaperDefense.Presentation
         public IReadOnlyList<AssemblyVisualFragment> Fragments { get; }
         public IReadOnlyList<AssemblyVisualAnchor> Anchors { get; }
         public Rect Bounds { get; }
-        internal AssemblyVisualComposition(string revision, List<AssemblyVisualFragment> fragments, List<AssemblyVisualAnchor> anchors, Rect bounds)
-        { Revision = revision; Fragments = fragments.AsReadOnly(); Anchors = anchors.AsReadOnly(); Bounds = bounds; }
-        public void Draw(MeshPen pen, Vector2 at, float opacity = 1, Color? tint = null, float uniformScale = 1)
+        public AssemblyDevelopmentPose Development { get; }
+        internal AssemblyVisualComposition(string revision, List<AssemblyVisualFragment> fragments, List<AssemblyVisualAnchor> anchors,
+            Rect bounds, AssemblyDevelopmentPose development = default)
+        { Revision = revision; Fragments = fragments.AsReadOnly(); Anchors = anchors.AsReadOnly(); Bounds = bounds; Development = development; }
+        public void Draw(MeshPen pen, Vector2 at, float opacity = 1, Color? tint = null, float uniformScale = 1,
+            AssemblyMechanicsPose? mechanics = null, float construction = 1)
         {
             if (float.IsNaN(uniformScale) || float.IsInfinity(uniformScale) || uniformScale <= 0)
                 throw new ArgumentOutOfRangeException(nameof(uniformScale));
-            foreach (var f in Fragments) f.Draw(pen, at, opacity, tint ?? Color.white, uniformScale);
+            foreach (var f in Fragments)
+            {
+                float reveal = ConstructionVisibility(f, construction);
+                if (reveal > 0) f.Draw(pen, at, opacity * reveal, tint ?? Color.white, uniformScale, mechanics, Development);
+            }
+        }
+        static float ConstructionVisibility(AssemblyVisualFragment fragment, float progress)
+        {
+            if (progress >= 1) return 1;
+            int category = fragment.SlotIndex < 0 ? fragment.Layer : fragment.Layer == 5 ? (int)ComponentCategory.Turn : fragment.Layer - 6;
+            float start = category == (int)ComponentCategory.Frame || category == (int)ComponentCategory.Site ? 0 :
+                category == (int)ComponentCategory.Hull || category == (int)ComponentCategory.Shell ? .12f :
+                category == (int)ComponentCategory.Armor || category == (int)ComponentCategory.Feed ? .28f :
+                category == (int)ComponentCategory.Turn || category == (int)ComponentCategory.Mount ? .40f :
+                category == (int)ComponentCategory.Mechanism || category == (int)ComponentCategory.Function ? .52f :
+                category == (int)ComponentCategory.Head ? .68f : .80f;
+            return Mathf.SmoothStep(0, 1, Mathf.InverseLerp(start, Mathf.Min(1, start + .20f), progress));
         }
     }
 
-    /// <summary>One ordered, immutable visual result for recipe previews and legacy pilot adapters.
-    /// Author pixels, trim and packing affect UVs only; Core receives the same transformed occupied corners.</summary>
+    /// <summary>Shared notebook drawings. Mechanical fits remain the authority for
+    /// socket positions, admissible recipes and motion limits; no art manifest is loaded.</summary>
     public static partial class AssemblyVisualComposer
     {
-        [Serializable] public sealed class FoundationPart
-        {
-            public string partId, spriteId, collisionMode;
-            public int layer;
-            public Vector2 canvas, position;
-            public NotebookMountLayout.PixelRect trim, region;
-            public float scale;
-        }
-        [Serializable] public sealed class Manifest : NotebookMountLayout.Source
-        {
-            public int visualSchemaVersion;
-            public NotebookMountLayout.PixelRect frameBounds;
-            public AssemblyFitCatalogInput fits;
-            public FoundationPart[] foundationParts;
-            public VisualPart[] visualParts;
-            public Vector2 modernPivot;
-            public AssemblyFitCatalogInput legacyFits;
-        }
-        static Manifest manifest;
         static AssemblyFitCatalog fits;
-        static AssemblyFitCatalog historicalFits;
-        static NotebookMountLayout.Source mounts;
-        public static AssemblyFitCatalog Fits { get { EnsureLoaded(); return fits; } }
-        public static string Revision { get { EnsureLoaded(); return manifest.revision; } }
+        public static AssemblyFitCatalog Fits => fits ?? (fits = PaperDefense.Application.AssemblyFitResources.Load());
+        public static string Revision => NightNotebookArt.Revision;
 
         public static AssemblyVisualComposition Compose(RecipeSnapshot snapshot, AssemblyVisualPose pose)
+            => ComposePlaced(snapshot, pose, 0);
+
+        internal static AssemblyVisualComposition ComposePlaced(RecipeSnapshot snapshot, AssemblyVisualPose pose, float bodyRadians)
         {
             if (snapshot == null) throw new ArgumentNullException(nameof(snapshot));
-            pose = pose ?? new AssemblyVisualPose(); EnsureLoaded();
+            pose = pose ?? new AssemblyVisualPose();
             if (pose.VisualRevision != null && pose.VisualRevision != Revision) throw new FormatException("Unknown assembly visual revision: " + pose.VisualRevision);
-            var diagnostics = AssemblyFitRules.Validate(snapshot.Recipe, fits);
-            if (diagnostics.Count != 0) throw new AssemblyCatalogException(diagnostics);
-            foreach (var p in pose.Mounts)
-                if (snapshot.Recipe.Tower == null || !snapshot.Recipe.Tower.Mounts.Any(m => m.SlotIndex == p.SlotIndex)) throw new ArgumentException("Pose references an unoccupied socket.");
-            return ComposeCatalog(snapshot.Recipe, pose);
-        }
-
-        static AssemblyVisualComposition ComposePilot(AssemblyRecipe recipe, TowerBlueprint blueprint, AssemblyVisualPose pose)
-        {
+            var issues = AssemblyFitRules.Validate(snapshot.Recipe, Fits);
+            if (issues.Count != 0) throw new AssemblyCatalogException(issues);
             var fragments = new List<AssemblyVisualFragment>(); var anchors = new List<AssemblyVisualAnchor>();
-            bool armor = recipe.Tower.Foundation.Armor.Id == "armor.plate";
-            foreach (var p in manifest.foundationParts)
+            if (snapshot.Recipe.Structure != null)
             {
-                if (p.partId == "armor.plate" && !armor) continue;
-                fragments.Add(new AssemblyVisualFragment(p.partId, p.spriteId, -1, p.layer, p.trim.Rect, p.region.Rect, p.position, p.scale, 0));
+                if (pose.Mounts.Count > 0) throw new ArgumentException("A support structure has no weapon sockets.", nameof(pose));
+                AppendStructure(snapshot.Recipe.Structure, fragments);
             }
-            foreach (var selected in recipe.Tower.Mounts)
+            else
             {
-                var mount = NotebookMountLayout.Resolve(blueprint, selected.SlotIndex);
-                var motion = pose.For(selected.SlotIndex);
-                historicalFits.TryGetWeapon(selected.Weapon.Mechanism.Id, selected.Weapon.Mechanism.Revision, out var fit);
-                if (motion.Radians < fit.MinRadians - .00001f || motion.Radians > fit.MaxRadians + .00001f || motion.Recoil > 0 || motion.Recoil < -fit.RecoilLimit - .00001f)
-                    throw new ArgumentOutOfRangeException(nameof(pose), "Pose exceeds certified angle or recoil range.");
-                var source = mounts.pilots.Single(p => p.chassisId == blueprint.ChassisId && p.weaponId == mount.WeaponId);
-                foreach (var f in mount.Fragments)
+                var tower = snapshot.Recipe.Tower;
+                foreach (var motion in pose.Mounts)
+                    if (!tower.Mounts.Any(m => m.SlotIndex == motion.SlotIndex)) throw new ArgumentException("Pose references an unoccupied socket.");
+                AppendFoundation(tower.Foundation, fragments, false);
+                float? supportY = FoundationSupportY(fragments);
+                Fits.TryGetFrame(tower.Foundation.Frame.Id, tower.Foundation.Frame.Revision, out var frame);
+                foreach (var selected in tower.Mounts)
                 {
-                    string part = source.fragments.Single(s => s.id == f.Id).componentId;
-                    float angle = f.Motion == NotebookMountLayout.FragmentMotion.Fixed ? 0 : motion.Radians;
-                    fragments.Add(new AssemblyVisualFragment(part, f.SpriteId, mount.SlotIndex, 3 + f.Layer, f.Trim,
-                        new Rect(Vector2.zero, f.Canvas), mount.TransformFragment(f, Vector2.zero, motion.Radians, motion.Recoil),
-                        mount.Scale * f.Scale, angle + f.Radians));
+                    var socket = frame.Mounts.Single(m => m.SlotIndex == selected.SlotIndex);
+                    Fits.TryGetWeapon(selected.Weapon.Mechanism.Id, selected.Weapon.Mechanism.Revision, out var weapon);
+                    var root = new Vector2(socket.Position.X + weapon.Pivot.X, socket.Position.Y + weapon.Pivot.Y);
+                    var mechanism = snapshot.Definitions.Single(d => d.Id == selected.Weapon.Mechanism.Id && d.Revision == selected.Weapon.Mechanism.Revision);
+                    AppendWeapon(selected.Weapon, selected.SlotIndex, root, pose.For(selected.SlotIndex), fragments, anchors,
+                        tower.Foundation.Turn, supportY, mechanism.WeaponFamilies);
                 }
-                anchors.Add(new AssemblyVisualAnchor(mount.SlotIndex, mount.Socket, mount.RotationCenter,
-                    mount.Transform(mount.Muzzle, motion.Radians, motion.Recoil)));
+                // Weapon poses are relative to the chassis. Turn the complete drawing around
+                // its cell, including its off-centre sockets and the projectile launch anchors.
+                if (bodyRadians != 0)
+                {
+                    for (int i = 0; i < fragments.Count; i++)
+                    {
+                        var f = fragments[i];
+                        fragments[i] = new AssemblyVisualFragment(f.PartId, f.SpriteId, f.SlotIndex, f.Layer, f.Trim,
+                            f.Region, NotebookMountLayout.Rotate(f.Origin, bodyRadians), f.Scale, f.Radians + bodyRadians,
+                            f.Mechanics, f.WeaponFamily);
+                    }
+                    for (int i = 0; i < anchors.Count; i++)
+                    {
+                        var a = anchors[i];
+                        anchors[i] = new AssemblyVisualAnchor(a.SlotIndex, NotebookMountLayout.Rotate(a.Attach, bodyRadians),
+                            NotebookMountLayout.Rotate(a.RotationCenter, bodyRadians), NotebookMountLayout.Rotate(a.Muzzle, bodyRadians));
+                    }
+                }
             }
+            return Finish(fragments, anchors, pose.Development);
+        }
+
+        public static bool HasVisualMapping(PartRef reference) => Fits.TryGetPart(reference.Id, reference.Revision, out _);
+        public static AssemblyVisualComposition ComposePart(PartRef reference) => ComposePart(reference, AssemblyStructureFamily.None);
+        public static AssemblyVisualComposition ComposePart(PartRef reference, AssemblyStructureFamily family)
+        {
+            var part = RequiredPart(reference);
+            var fragments = new List<AssemblyVisualFragment>();
+            if (!IsEmpty(reference)) Add(fragments, reference, -1, (int)part.Category,
+                PartRect(part.Category), Vector2.zero, 0);
+            return Finish(fragments, new List<AssemblyVisualAnchor>());
+        }
+        public static AssemblyVisualComposition ComposeFoundation(FoundationRecipe recipe)
+        {
+            if (recipe == null) throw new ArgumentNullException(nameof(recipe));
+            var fragments = new List<AssemblyVisualFragment>(); AppendFoundation(recipe, fragments, true);
+            return Finish(fragments, new List<AssemblyVisualAnchor>());
+        }
+        public static AssemblyVisualComposition ComposeWeapon(WeaponRecipe recipe) => ComposeWeapon(recipe, new AssemblyVisualPose());
+        public static AssemblyVisualComposition ComposeWeapon(WeaponRecipe recipe, AssemblyVisualPose pose, ComponentDefinition mechanism = null)
+        {
+            if (recipe == null) throw new ArgumentNullException(nameof(recipe));
+            if (mechanism != null && (mechanism.Id != recipe.Mechanism.Id || mechanism.Revision != recipe.Mechanism.Revision
+                || mechanism.Category != ComponentCategory.Mechanism)) throw new ArgumentException("The mechanism definition must belong to this weapon.", nameof(mechanism));
+            pose = pose ?? new AssemblyVisualPose();
+            if (pose.Mounts.Any(m => m.SlotIndex != 0)) throw new ArgumentException("A standalone weapon has only socket zero.", nameof(pose));
+            var fragments = new List<AssemblyVisualFragment>(); var anchors = new List<AssemblyVisualAnchor>();
+            AppendWeapon(recipe, 0, Vector2.zero, pose.For(0), fragments, anchors, P("turn.standard"),
+                weaponFamily: mechanism?.WeaponFamilies ?? AssemblyWeaponFamily.None);
+            return Finish(fragments, anchors, pose.Development);
+        }
+
+        static void AppendFoundation(FoundationRecipe recipe, List<AssemblyVisualFragment> fragments, bool vacantMounts)
+        {
+            if (!Fits.TryGetFrame(recipe.Frame.Id, recipe.Frame.Revision, out var frame)) throw new ArgumentException("Unknown foundation frame.");
+            int category = 0;
+            foreach (var reference in recipe.Parts)
+            {
+                var part = RequiredPart(reference);
+                if (part.Category != (ComponentCategory)category++) throw new ArgumentException("A foundation part uses the wrong socket category.");
+                if (part.Category == ComponentCategory.Turn || IsEmpty(reference)) continue;
+                bool any = false;
+                foreach (var region in frame.Keepouts)
+                {
+                    if (region.PartId != reference.Id) continue;
+                    Add(fragments, reference, -1, (int)part.Category,
+                        new Rect(region.X, region.Y, region.Width, region.Height), Vector2.zero, 0);
+                    any = true;
+                }
+                if (!any) Add(fragments, reference, -1, (int)part.Category, PartRect(part.Category), Vector2.zero, 0);
+            }
+            if (vacantMounts)
+            {
+                float? supportY = FoundationSupportY(fragments);
+                foreach (var socket in frame.Mounts)
+                    AddTurn(fragments, recipe.Turn, socket.SlotIndex,
+                        new Vector2(socket.Position.X, socket.Position.Y + .158f), supportY);
+            }
+        }
+
+        static void AppendWeapon(WeaponRecipe recipe, int slot, Vector2 root, AssemblyMountPose motion,
+            List<AssemblyVisualFragment> fragments, List<AssemblyVisualAnchor> anchors, PartRef turn, float? supportY = null,
+            AssemblyWeaponFamily weaponFamily = AssemblyWeaponFamily.None)
+        {
+            if (!Fits.TryGetWeapon(recipe.Mechanism.Id, recipe.Mechanism.Revision, out var weapon)) throw new ArgumentException("Unknown weapon mechanism.");
+            if (motion.Radians < weapon.MinRadians - .00001f || motion.Radians > weapon.MaxRadians + .00001f
+                || motion.Recoil > 0 || motion.Recoil < -weapon.RecoilLimit - .00001f)
+                throw new ArgumentOutOfRangeException(nameof(motion), "Pose exceeds mechanical angle or recoil range.");
+            AddTurn(fragments, turn, slot, root, supportY);
+            foreach (var reference in recipe.Parts)
+            {
+                var part = RequiredPart(reference);
+                if (IsEmpty(reference)) continue;
+                var at = root + NotebookMountLayout.Rotate(Vector2.up * (part.Category == ComponentCategory.Head ? motion.Recoil : 0), motion.Radians);
+                Add(fragments, reference, slot, 6 + (int)part.Category, PartRect(part.Category), at, motion.Radians, motion.Mechanics, weaponFamily);
+            }
+            Vector2 attach = root - new Vector2(weapon.Pivot.X, weapon.Pivot.Y);
+            anchors.Add(new AssemblyVisualAnchor(slot, attach, root,
+                root + NotebookMountLayout.Rotate(new Vector2(0, .30f + motion.Recoil), motion.Radians)));
+        }
+
+        static void AppendStructure(StructureRecipe recipe, List<AssemblyVisualFragment> fragments)
+        {
+            foreach (var reference in recipe.Parts)
+            {
+                var part = RequiredPart(reference);
+                if (IsEmpty(reference)) continue;
+                // Optional equipment bolts to the right foot, leaving the working head visible.
+                var mount = part.Category == ComponentCategory.Utility ? new Vector2(.23f, -.09f) : Vector2.zero;
+                Add(fragments, reference, -1, (int)part.Category, PartRect(part.Category), mount, 0);
+            }
+        }
+        static AssemblyFitPart RequiredPart(PartRef reference)
+        {
+            if (!Fits.TryGetPart(reference.Id, reference.Revision, out var part)) throw new ArgumentException("Unknown component: " + reference.Id);
+            return part;
+        }
+        static bool IsEmpty(PartRef reference) => reference.Id.EndsWith(".none", StringComparison.Ordinal);
+        static Rect PartRect(ComponentCategory category)
+        {
+            switch (category)
+            {
+                case ComponentCategory.Frame: return new Rect(-.45f, -.3f, .9f, .12f);
+                case ComponentCategory.Hull: return new Rect(-.38f, -.22f, .76f, .2f);
+                case ComponentCategory.Armor: return new Rect(-.2f, -.22f, .4f, .12f);
+                case ComponentCategory.Feed: return new Rect(-.05f, -.22f, .1f, .13f);
+                case ComponentCategory.Turn: case ComponentCategory.Mount: return new Rect(-.065f, -.065f, .13f, .13f);
+                case ComponentCategory.Mechanism: return new Rect(-.09f, -.07f, .18f, .16f);
+                case ComponentCategory.Head: return new Rect(-.035f, .04f, .07f, .26f);
+                case ComponentCategory.Sight: return new Rect(-.13f, .03f, .055f, .055f);
+                case ComponentCategory.Magazine: return new Rect(-.12f, -.09f, .09f, .08f);
+                case ComponentCategory.Trigger: return new Rect(.07f, -.04f, .04f, .07f);
+                case ComponentCategory.Site: return new Rect(-.4f, -.35f, .8f, .13f);
+                case ComponentCategory.Function: return new Rect(-.25f, -.2f, .5f, .45f);
+                case ComponentCategory.Shell: return new Rect(-.3f, -.25f, .6f, .11f);
+                default: return new Rect(-.12f, -.12f, .24f, .24f);
+            }
+        }
+        static void Add(List<AssemblyVisualFragment> fragments, PartRef part, int slot, int layer, Rect area, Vector2 root, float radians,
+            AssemblyMechanicsPose mechanics = default, AssemblyWeaponFamily weaponFamily = AssemblyWeaponFamily.None)
+            => fragments.Add(new AssemblyVisualFragment(part.Id, "notebook." + part.Id, slot, layer, area, area, root, 1, radians, mechanics, weaponFamily));
+        static float? FoundationSupportY(List<AssemblyVisualFragment> fragments)
+        {
+            float? top = null;
+            foreach (var fragment in fragments)
+                if (fragment.SlotIndex < 0 && fragment.Layer == (int)ComponentCategory.Hull)
+                    foreach (var corner in Corners(fragment.Region))
+                    {
+                        float y = fragment.Transform(corner).y;
+                        top = top.HasValue ? Mathf.Max(top.Value, y) : y;
+                    }
+            return top;
+        }
+        static void AddTurn(List<AssemblyVisualFragment> fragments, PartRef part, int slot, Vector2 root, float? supportY)
+        {
+            var hub = new Rect(-.065f, -.065f, .13f, .13f);
+            float bottom = supportY.HasValue ? Mathf.Min(hub.yMin, supportY.Value - root.y) : hub.yMin;
+            var region = Rect.MinMaxRect(hub.xMin, bottom, hub.xMax, hub.yMax);
+            // The stem shares its hub's visual fragment; no socket, layer, trim or mechanical anchor changes.
+            fragments.Add(new AssemblyVisualFragment(part.Id, "notebook." + part.Id, slot, 5, hub, region, root, 1, 0));
+        }
+        static AssemblyVisualComposition Finish(List<AssemblyVisualFragment> fragments, List<AssemblyVisualAnchor> anchors,
+            AssemblyDevelopmentPose development = default)
+        {
             fragments = fragments.OrderBy(f => f.Layer).ThenBy(f => f.SlotIndex).ToList();
-            bool first = true; Rect bounds = default;
-            foreach (var f in fragments)
-                foreach (var p in Corners(f.Region))
-                { Vector2 point = f.Transform(p); var b = new Rect(point, Vector2.zero); bounds = first ? b : Union(bounds, b); first = false; }
-            // Reserve the entire certified motion envelope: UI scale stays constant across poses.
-            foreach (var a in anchors)
-            {
-                historicalFits.TryGetWeapon("core.gun", 1, out var fit); float r = AssemblyFitRules.SweptRadius(fit);
-                bounds = Union(bounds, new Rect(a.RotationCenter - Vector2.one * r, Vector2.one * 2 * r));
-            }
-            return new AssemblyVisualComposition(Revision, fragments, anchors, bounds);
+            bool any = false; Vector2 low = Vector2.zero, high = Vector2.zero;
+            foreach (var fragment in fragments)
+                foreach (var corner in Corners(NightNotebookArt.DevelopmentBounds(fragment, development)))
+                {
+                    Vector2 point = fragment.Transform(corner);
+                    if (!any) { low = high = point; any = true; }
+                    else { low = Vector2.Min(low, point); high = Vector2.Max(high, point); }
+                }
+            return new AssemblyVisualComposition(Revision, fragments, anchors,
+                any ? Rect.MinMaxRect(low.x, low.y, high.x, high.y) : default, development);
         }
-
-        internal static bool Supports(TowerBlueprint blueprint) => blueprint != null && !blueprint.HasPlayerDrawing
-            && blueprint.ChassisId == "chassis.standard" && blueprint.WeaponMounts.Count > 0 && blueprint.WeaponMounts.Count <= 2
-            && blueprint.WeaponMounts.All(m => m.SlotIndex < 2 && m.WeaponId == "weapon.gun")
-            && blueprint.ModuleSelections.All(m => m.DefinitionId == "module.armor");
-
-        // Compatibility bridge until profile recipe migration (task 4). No saved blueprint is mutated.
-        internal static AssemblyVisualComposition ComposeLegacy(TowerBlueprint blueprint, Func<int, Point2> aim,
-            Vector2 origin, Func<int, float> recoil)
-        {
-            EnsureLoaded();
-            var foundation = new FoundationRecipe(P("frame.standard"), P("hull.standard"), P(blueprint.ModuleSelections.Any(m => m.DefinitionId == "module.armor") ? "armor.plate" : "armor.none"), P("feed.standard"), P("turn.standard"));
-            var weapon = new WeaponRecipe(P("core.gun"), P("head.gun"), P("sight.iron"), P("magazine.standard"), P("trigger.standard"));
-            var recipe = new AssemblyRecipe(new TowerRecipe(foundation, blueprint.WeaponMounts.Select(m => new WeaponMountRecipe(m.SlotIndex, weapon))));
-            var issues = AssemblyFitRules.Validate(recipe, historicalFits); if (issues.Count != 0) throw new AssemblyCatalogException(issues);
-            var poses = blueprint.WeaponMounts.Select(m => {
-                var mount = NotebookMountLayout.Resolve(blueprint, m.SlotIndex);
-                float angle = mount.AimAngle(aim?.Invoke(m.SlotIndex) ?? default, origin);
-                angle = Mathf.Atan2(Mathf.Sin(angle), Mathf.Cos(angle));
-                return new AssemblyMountPose(m.SlotIndex, angle, recoil?.Invoke(m.SlotIndex) ?? 0);
-            });
-            return ComposePilot(recipe, blueprint, new AssemblyVisualPose(poses));
-        }
-        static PartRef P(string id) => new PartRef(id, 1);
-
-        /// <summary>Import transaction preparation. Derive fit positions and swept regions from the visual source.</summary>
-        public static string BuildRuntimeJson(string json, ISet<string> spriteIds, IReadOnlyDictionary<string, Rect> spriteBounds = null,
-            IReadOnlyList<ComponentDefinition> authoritativeDefinitions = null)
-        {
-            var data = JsonUtility.FromJson<Manifest>(json); var layout = NotebookMountLayout.Parse(json);
-            if (data == null || data.visualSchemaVersion != 1 || data.fits == null || data.fits.SchemaVersion != 1
-                || data.foundationParts == null || data.foundationParts.Length == 0 || data.revision != data.fits.Revision)
-                throw new FormatException("Invalid assembly visual schema or revision.");
-            Rect frameBounds = data.frameBounds?.Rect ?? default;
-            if (spriteBounds != null && (!spriteBounds.TryGetValue("chassis.standard", out var actualBounds)
-                || Vector2.Distance(actualBounds.min, frameBounds.min) > .000001f || Vector2.Distance(actualBounds.size, frameBounds.size) > .000001f))
-                throw new FormatException("Pilot frame bounds disagree with sprite source bounds.");
-            var pilot = layout.pilots.Single(p => p.chassisId == "chassis.standard" && p.weaponId == "weapon.gun");
-            var foundation = layout.foundations.Single(f => f.id == "chassis.standard");
-            var weapon = layout.weapons.Single(w => w.id == "weapon.gun");
-            var frame = data.fits.Frames.Single(f => f.FrameId == "frame.standard");
-            if (frame.Mounts.Length != foundation.sockets.Length || frameBounds.width <= 0 || frameBounds.height <= 0) throw new FormatException("Invalid pilot foundation sockets.");
-            foreach (var socket in foundation.sockets)
-            {
-                var fitSocket = frame.Mounts.Single(m => m.SlotIndex == socket.slot);
-                if (fitSocket.SocketType != "gun.standard" || fitSocket.SocketId != "mount." + socket.slot) throw new FormatException("Unknown pilot socket.");
-                fitSocket.X = frameBounds.xMin + frameBounds.width * socket.position.x;
-                fitSocket.Y = frameBounds.yMin + frameBounds.height * socket.position.y;
-            }
-            float units = frameBounds.width * foundation.sockets[0].diameter / weapon.diameter;
-            var gunFit = data.fits.Weapons.Single(w => w.MechanismId == "core.gun");
-            if (gunFit.MountType != "gun.standard" || foundation.sockets.Any(s => Mathf.Abs(frameBounds.width * s.diameter / weapon.diameter - units) > .000001f))
-                throw new FormatException("Pilot sockets must share the certified diameter.");
-            gunFit.PivotX = pilot.pivotOffset.x * units; gunFit.PivotY = pilot.pivotOffset.y * units;
-            var regions = new List<AssemblyFitRegionInput>();
-            foreach (var f in pilot.fragments)
-            {
-                if (!data.fits.Parts.Any(p => p.Id == f.componentId) || (spriteIds != null && !spriteIds.Contains(f.spriteId))) throw new FormatException("Unknown pilot fragment binding.");
-                regions.Add(new AssemblyFitRegionInput {
-                    Motion = f.group == 0 ? "fixed" : f.group == 1 ? "rotating" : "recoiling",
-                    Points = Corners(f.trim.Rect).Select(p => {
-                        Vector2 v = (f.offset - pilot.pivotOffset + NotebookMountLayout.Rotate((p - f.attach) * f.scale, f.radians)) * units;
-                        return new AssemblyFitPointInput { X = v.x, Y = v.y };
-                    }).ToArray()
-                });
-            }
-            gunFit.Regions = regions.ToArray();
-            var muzzle = pilot.fragments.Single(f => f.id == pilot.muzzleFragment);
-            Vector2 axis = muzzle.offset - pilot.pivotOffset + NotebookMountLayout.Rotate((pilot.muzzlePoint - muzzle.attach) * muzzle.scale, muzzle.radians);
-            if (Mathf.Abs(axis.normalized.x) > .00001f || axis.y <= 0) throw new FormatException("Pilot rest muzzle must point +Y for Core recoil certification.");
-            var keepouts = new List<AssemblyFitKeepoutInput>();
-            foreach (var p in data.foundationParts)
-            {
-                if (p == null || !data.fits.Parts.Any(part => part.Id == p.partId) || p.scale <= 0 || !Finite(p.scale) || p.trim == null || p.region == null
-                    || !Finite(p.position.x) || !Finite(p.position.y) || !Finite(p.canvas.x) || !Finite(p.canvas.y)
-                    || !Finite(p.trim.x) || !Finite(p.trim.y) || !Finite(p.trim.width) || !Finite(p.trim.height)
-                    || !Finite(p.region.x) || !Finite(p.region.y) || !Finite(p.region.width) || !Finite(p.region.height)
-                    || (p.collisionMode != "solid" && p.collisionMode != "mount-contact" && p.collisionMode != "armor")
-                    || (p.collisionMode == "armor") != (p.partId == "armor.plate")
-                    || p.trim.width <= 0 || p.trim.height <= 0 || p.region.width <= 0 || p.region.height <= 0
-                    || p.region.x < p.trim.x || p.region.y < p.trim.y || p.region.x + p.region.width > p.trim.x + p.trim.width + .001f
-                    || p.region.y + p.region.height > p.trim.y + p.trim.height + .001f || (spriteIds != null && !spriteIds.Contains(p.spriteId)))
-                    throw new FormatException("Invalid foundation fragment binding.");
-                if (p.spriteId == "chassis.standard" && (Vector2.Distance(p.position, frameBounds.min) > .000001f
-                    || Vector2.Distance(p.canvas * p.scale, frameBounds.size) > .000001f))
-                    throw new FormatException("Foundation fragment disagrees with certified frame bounds.");
-                // The roof is the authored seating/occlusion band. Every solid body/feed/armor
-                // region is exported from its actual visual transform, never a separately sized box.
-                if (p.collisionMode != "mount-contact")
-                    keepouts.Add(new AssemblyFitKeepoutInput { X = p.position.x + p.region.x * p.scale,
-                        Y = p.position.y + p.region.y * p.scale, Width = p.region.width * p.scale,
-                        Height = p.region.height * p.scale, ArmorOnly = p.collisionMode == "armor" });
-            }
-            frame.Keepouts = keepouts.ToArray();
-            foreach (var p in data.fits.Parts)
-                if (p.AssetRevision != data.revision) throw new FormatException("Unknown part asset revision.");
-            data.legacyFits = JsonUtility.FromJson<AssemblyFitCatalogInput>(JsonUtility.ToJson(data.fits));
-            var legacy = new AssemblyFitCatalog(data.legacyFits);
-            PrepareFullCatalog(data, spriteIds, authoritativeDefinitions);
-            var certified = new AssemblyFitCatalog(data.fits);
-            foreach (bool armor in new[] { false, true })
-            {
-                var f = new FoundationRecipe(P("frame.standard"), P("hull.standard"), P(armor ? "armor.plate" : "armor.none"), P("feed.standard"), P("turn.standard"));
-                var w = new WeaponRecipe(P("core.gun"), P("head.gun"), P("sight.iron"), P("magazine.standard"), P("trigger.standard"));
-                var recipe = new AssemblyRecipe(new TowerRecipe(f, new[] { new WeaponMountRecipe(0, w), new WeaponMountRecipe(1, w) }));
-                var issues = AssemblyFitRules.Validate(recipe, certified);
-                if (issues.Count != 0) throw new AssemblyCatalogException(issues);
-                var historicalIssues = AssemblyFitRules.Validate(recipe, legacy);
-                if (historicalIssues.Count != 0) throw new AssemblyCatalogException(historicalIssues);
-            }
-            return JsonUtility.ToJson(data, true);
-        }
-
-        static bool Finite(float v) => !float.IsNaN(v) && !float.IsInfinity(v);
         static IEnumerable<Vector2> Corners(Rect r)
         { yield return r.min; yield return new Vector2(r.xMax, r.yMin); yield return r.max; yield return new Vector2(r.xMin, r.yMax); }
-        static Rect Union(Rect a, Rect b) => Rect.MinMaxRect(Mathf.Min(a.xMin,b.xMin),Mathf.Min(a.yMin,b.yMin),Mathf.Max(a.xMax,b.xMax),Mathf.Max(a.yMax,b.yMax));
-        static void EnsureLoaded()
-        {
-            if (manifest != null) return;
-            var asset = Resources.Load<TextAsset>("Art/NotebookMounts");
-            if (asset == null) throw new InvalidOperationException("Missing assembly visual catalogue.");
-            if (!NotebookSpriteCatalog.TryGetBounds("chassis.standard", out var bounds)) throw new FormatException("Missing pilot frame sprite.");
-            var parsed = JsonUtility.FromJson<Manifest>(BuildRuntimeJson(asset.text, null,
-                new Dictionary<string, Rect> { { "chassis.standard", bounds } }));
-            if (parsed == null || parsed.visualSchemaVersion != 1) throw new FormatException("Unsupported assembly visual version.");
-            fits = new AssemblyFitCatalog(parsed.fits); historicalFits = new AssemblyFitCatalog(parsed.legacyFits ?? parsed.fits);
-            mounts = NotebookMountLayout.Parse(asset.text); manifest = parsed;
-        }
+        static PartRef P(string id) => new PartRef(id, 1);
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        public static void ResetCache() { manifest = null; mounts = null; fits = null; historicalFits = null; }
+        public static void ResetCache() { fits = null; }
     }
 }

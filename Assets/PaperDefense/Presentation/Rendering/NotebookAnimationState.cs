@@ -46,17 +46,21 @@ namespace PaperDefense.Presentation
         public const int MaximumMounts = 512, MaximumEnemies = 2048;
         readonly Dictionary<long, MountAction> mounts = new Dictionary<long, MountAction>(128);
         readonly Dictionary<int, EnemyMotion> enemies = new Dictionary<int, EnemyMotion>(1024);
+        readonly Dictionary<int, StructurePulse> structures = new Dictionary<int, StructurePulse>(128);
         readonly List<NotebookDeathVisual> deaths = new List<NotebookDeathVisual>(128);
         readonly List<long> expiredMounts = new List<long>(128);
         readonly List<int> expiredEnemies = new List<int>(128);
+        readonly List<int> expiredStructures = new List<int>(128);
         long sequence;
         static readonly string[,,] enemyIds = CreateEnemyIds();
         public int MountCount => mounts.Count;
         public int EnemyCount => enemies.Count;
+        public int StructurePulseCount => structures.Count;
         public IReadOnlyList<NotebookDeathVisual> Deaths => deaths;
         public int RecoilStartCount { get; private set; }
         public long DroppedRecords { get; private set; }
         struct MountAction { public long Action; public double Born; public string Weapon; }
+        struct StructurePulse { public double Hit, Work; public bool HasHit, HasWork; }
         struct EnemyMotion
         {
             public Vector2 Position;
@@ -65,7 +69,36 @@ namespace PaperDefense.Presentation
         }
         static long Key(int structure, int slot) => ((long)structure << 32) | (uint)slot;
         public void Clear()
-        { mounts.Clear(); enemies.Clear(); deaths.Clear(); sequence = 0; RecoilStartCount = 0; DroppedRecords = 0; }
+        { mounts.Clear(); enemies.Clear(); structures.Clear(); deaths.Clear(); sequence = 0; RecoilStartCount = 0; DroppedRecords = 0; }
+        internal void ObserveStructureWork(int id, double seconds) => StructureMoment(id, seconds, false);
+        internal void ObserveStructureHit(int id, double seconds) => StructureMoment(id, seconds, true);
+        void StructureMoment(int id, double seconds, bool hit)
+        {
+            if (id <= 0 || double.IsNaN(seconds) || double.IsInfinity(seconds)) return;
+            if (!structures.TryGetValue(id, out var pulse) && structures.Count >= MaximumMounts)
+            {
+                int oldest = 0; double born = double.MaxValue;
+                foreach (var item in structures)
+                {
+                    double last = Math.Max(item.Value.HasHit ? item.Value.Hit : double.MinValue,
+                        item.Value.HasWork ? item.Value.Work : double.MinValue);
+                    if (last < born) { born = last; oldest = item.Key; }
+                }
+                structures.Remove(oldest); DroppedRecords++;
+            }
+            if (hit) { pulse.Hit = seconds; pulse.HasHit = true; }
+            else { pulse.Work = seconds; pulse.HasWork = true; }
+            structures[id] = pulse;
+        }
+        internal AssemblyMechanicsPose StructureMechanics(int id, double now, bool reducedMotion)
+        {
+            if (!structures.TryGetValue(id, out var pulse)) return default;
+            float hit = pulse.HasHit ? Pulse(now - pulse.Hit, .18) : 0;
+            float work = !reducedMotion && pulse.HasWork ? Pulse(now - pulse.Work, .45) : 0;
+            return new AssemblyMechanicsPose(activity: work, hit: hit);
+        }
+        static float Pulse(double age, double duration)
+            => age < 0 || age >= duration ? 0 : (float)(1 - age / duration);
         public bool AddEvent(SimulationEvent item, int maximumDeaths = 128)
         {
             if (item.Sequence > 0 && item.Sequence <= sequence) return false;
@@ -83,6 +116,13 @@ namespace PaperDefense.Presentation
                 mounts[key] = new MountAction { Action = item.ActionId, Born = item.SimulationSeconds, Weapon = item.WeaponId };
                 RecoilStartCount++;
             }
+            else if (item.Kind == SimulationEventKind.StructureHit)
+            { if (item.Magnitude > 0) ObserveStructureHit(item.EntityId, item.SimulationSeconds); }
+            else if (item.Kind == SimulationEventKind.SpikesTriggered || item.Kind == SimulationEventKind.PrismPulsed)
+            { if (item.Radius > 0) ObserveStructureWork(item.SourceStructureId, item.SimulationSeconds); }
+            else if (item.Kind == SimulationEventKind.RepairApplied || item.Kind == SimulationEventKind.GeneratorPaid ||
+                item.Kind == SimulationEventKind.SlowApplied || item.Kind == SimulationEventKind.BeaconMarked)
+            { if (item.Magnitude > 0) ObserveStructureWork(item.SourceStructureId, item.SimulationSeconds); }
             else if (item.Kind == SimulationEventKind.EnemyAttack || item.Kind == SimulationEventKind.EnemyHit)
             {
                 if (!enemies.TryGetValue(item.EntityId, out var state) && enemies.Count >= MaximumEnemies)
@@ -147,6 +187,12 @@ namespace PaperDefense.Presentation
             expiredEnemies.Clear();
             foreach (var item in enemies) if (now - Math.Max(item.Value.Observed, Math.Max(item.Value.Hit, item.Value.Attack)) > 2) expiredEnemies.Add(item.Key);
             foreach (int id in expiredEnemies) enemies.Remove(id);
+            expiredStructures.Clear();
+            foreach (var item in structures)
+                if (now - Math.Max(item.Value.HasHit ? item.Value.Hit : double.MinValue,
+                    item.Value.HasWork ? item.Value.Work : double.MinValue) > .5)
+                    expiredStructures.Add(item.Key);
+            foreach (int id in expiredStructures) structures.Remove(id);
             for (int i = deaths.Count - 1; i >= 0; i--)
                 if (now - deaths[i].Born >= ClipDuration(deaths[i].Kind, deaths[i].Tier, NotebookEnemyMotion.Death, theme)) deaths.RemoveAt(i);
         }

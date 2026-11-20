@@ -4,7 +4,7 @@ namespace PaperDefense.Core
 {
     public static class MetaProgression
     {
-        static readonly int[] thresholds = { 0, 100, 230, 390, 580, 800, 1050, 1330 };
+        static readonly int[] thresholds = { 0, 100, 230, 390, 540, 720, 890, 1050 };
 
         public static int LevelForXp(int totalXp)
         {

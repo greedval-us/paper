@@ -5,6 +5,8 @@ using UnityEngine;
 
 namespace PaperDefense.Presentation
 {
+    public enum HordeView { None, Close, Overview }
+
     /// <summary>One whole-enemy view transform; recorded simulation size and position remain untouched.</summary>
     public static class NotebookEnemyView
     {
@@ -27,10 +29,14 @@ namespace PaperDefense.Presentation
         public static Rect Bounds(Vector2 origin, Rect local) => new Rect(Point(origin, local.min), local.size * Scale);
         public static float ScaleFor(RecipeSnapshot snapshot) => snapshot == null ? Scale : Fit(snapshot).Scale;
         public static Vector2 Point(Vector2 origin, Vector2 local, RecipeSnapshot snapshot) => origin + local * ScaleFor(snapshot);
-        public static Rect Bounds(Vector2 origin, RecipeSnapshot snapshot)
+        public static Rect Bounds(Vector2 origin, RecipeSnapshot snapshot, float radians = 0)
         {
             var fit = Fit(snapshot);
-            return new Rect(origin + fit.Envelope.min * fit.Scale, fit.Envelope.size * fit.Scale);
+            var rect = fit.Envelope;
+            Vector2 center = origin + NotebookMountLayout.Rotate(rect.center * fit.Scale, radians);
+            float c = Mathf.Abs(Mathf.Cos(radians)), s = Mathf.Abs(Mathf.Sin(radians));
+            Vector2 size = new Vector2(rect.width * c + rect.height * s, rect.width * s + rect.height * c) * fit.Scale;
+            return new Rect(center - size * .5f, size);
         }
 
         static ViewFit Fit(RecipeSnapshot snapshot)
@@ -85,7 +91,7 @@ namespace PaperDefense.Presentation
         static string assemblyRevision;
 
         internal static AssemblyVisualComposition ComposeAssembly(StructureView state, double seconds = 0,
-            NotebookAnimationState animation = null, NotebookVisualThemeAsset theme = null)
+            NotebookAnimationState animation = null, NotebookVisualThemeAsset theme = null, int firingSlot = -1, Point2 shotAim = default)
         {
             var snapshot = state.ResolvedEntry?.Snapshot;
             if (snapshot == null || state.ResolvedEntry.Kind == AlbumEntryKind.Legacy) return null;
@@ -100,12 +106,14 @@ namespace PaperDefense.Presentation
             if (snapshot.Recipe.Tower == null) return rest;
             var poses = new List<AssemblyMountPose>(rest.Anchors.Count);
             Vector2 at = new Vector2(state.Cell.X + .5f, state.Cell.Y + .5f);
+            float body = NotebookMountLayout.BodyRadians(state);
             foreach (var anchor in rest.Anchors)
             {
-                var aim = state.GetMountAim(anchor.SlotIndex);
-                Vector2 delta = new Vector2(aim.X, aim.Y) - NotebookAssemblyView.Point(at, anchor.RotationCenter, snapshot);
-                float angle = aim.X == 0 && aim.Y == 0 || delta.sqrMagnitude < .000001f ? AssemblyPreviewPose.Radians :
-                    Mathf.Atan2(delta.y, delta.x) - Mathf.PI * .5f;
+                var mount = state.GetMountState(anchor.SlotIndex);
+                var aim = anchor.SlotIndex == firingSlot ? shotAim : mount.HasAimPoint ? mount.Aim : default;
+                var pivot = NotebookAssemblyView.Point(at, NotebookMountLayout.Rotate(anchor.RotationCenter, body), snapshot);
+                Vector2 forward = NotebookTowerComposition.AimDirection(aim, pivot, state.FacingDegrees);
+                float angle = Mathf.Atan2(forward.y, forward.x) - Mathf.PI * .5f - body;
                 angle = Mathf.Atan2(Mathf.Sin(angle), Mathf.Cos(angle));
                 var weapon = snapshot.Recipe.Tower.Mounts;
                 for (int i = 0; i < weapon.Count; i++)
@@ -113,14 +121,26 @@ namespace PaperDefense.Presentation
                     if (weapon[i].SlotIndex != anchor.SlotIndex) continue;
                     var part = weapon[i].Weapon.Mechanism;
                     AssemblyVisualComposer.Fits.TryGetWeapon(part.Id, part.Revision, out var fit);
-                    float recoil = animation?.Recoil(state.Id, anchor.SlotIndex, seconds, theme) ?? 0;
+                    bool reduced = (theme ?? NotebookVisualThemeAsset.Default).Data.ReducedMotion;
+                    float recoil = reduced ? 0 : animation?.Recoil(state.Id, anchor.SlotIndex, seconds, theme) ?? 0;
+                    var mechanics = MountMechanics(mount, fit.RecoilLimit > 0 ? -recoil / fit.RecoilLimit : 0,
+                        reduced);
                     poses.Add(new AssemblyMountPose(anchor.SlotIndex, Mathf.Clamp(angle, fit.MinRadians, fit.MaxRadians),
-                        Mathf.Clamp(recoil, -fit.RecoilLimit, 0)));
+                        Mathf.Clamp(recoil, -fit.RecoilLimit, 0), mechanics));
                     break;
                 }
             }
-            return AssemblyVisualComposer.Compose(snapshot, new AssemblyVisualPose(poses));
+            var ranks = state.Modernization;
+            var development = new AssemblyDevelopmentPose(ranks.Rank(ModernizationDirection.Power),
+                ranks.Rank(ModernizationDirection.Mechanics), ranks.Rank(ModernizationDirection.Range),
+                ranks.Rank(ModernizationDirection.Resilience), state.Color, ranks.ColorRank,
+                NightNotebookEffectPalette.ColorInk(state.Color, theme));
+            return AssemblyVisualComposer.ComposePlaced(snapshot, new AssemblyVisualPose(poses, development: development), body);
         }
+
+        internal static AssemblyMechanicsPose MountMechanics(WeaponMountView mount, float fire, bool reducedMotion)
+            => reducedMotion ? default : new AssemblyMechanicsPose(mount.Cycle != null && mount.IsReloading,
+                mount.Cycle != null ? (float)(1 - mount.CycleRemainingWork) : 0, fire);
 
         internal static Vector2 SegmentOrigin(StructureView structure, int slot, Point2 aim, Vector2 recordedFrom,
             double seconds, NotebookAnimationState animation, NotebookVisualThemeAsset theme)
@@ -131,7 +151,8 @@ namespace PaperDefense.Presentation
             if (slot < 0 || (recordedFrom - source).sqrMagnitude > .00000001f) return recordedFrom;
             if (structure.ResolvedEntry != null && structure.ResolvedEntry.Kind != AlbumEntryKind.Legacy)
             {
-                var composition = ComposeAssembly(structure, seconds, animation, theme);
+                // Use the aim at launch, even if the mount is tracking another target now.
+                var composition = ComposeAssembly(structure, seconds, animation, theme, slot, aim);
                 foreach (var anchor in composition.Anchors)
                     if (anchor.SlotIndex == slot) return NotebookAssemblyView.Point(source, anchor.Muzzle, structure.ResolvedEntry.Snapshot);
                 return recordedFrom;
@@ -167,27 +188,36 @@ namespace PaperDefense.Presentation
             bool building = !state.IsComplete;
             if (building && NotebookTowerComposition.UsesComposition(state.Blueprint)) return;
             bool modern = state.ResolvedEntry != null && state.ResolvedEntry.Kind != AlbumEntryKind.Legacy;
-            Rect artwork = modern ? NotebookAssemblyView.Bounds(p, state.ResolvedEntry.Snapshot)
+            float body = NotebookMountLayout.BodyRadians(state);
+            Rect artwork = modern ? NotebookAssemblyView.Bounds(p, state.ResolvedEntry.Snapshot, body)
                 : new Rect(p - Vector2.one * .5f, Vector2.one);
             float alpha = building ? .48f : 1;
             Color color = MeshPen.Alpha(TierColor(state.Tier), alpha);
             Color edge = MeshPen.Alpha(NotebookPalette.Navy, alpha);
+            if (state.Kind == StructureKind.Wall && !building && wallMask != 0)
+                WallRails(pen, p, wallMask);
             if (modern)
             {
-                // The complete modern tree is ordered in one dynamic batch, including
-                // front hull panels that must cover rotating weapon fragments.
+                // The parts themselves stay in the shared dynamic composition. Contact
+                // shadows and joining rails sit on the page below all the moving parts.
+                if (state.ResolvedEntry.Support != null && !building)
+                    pen.Disc(new Vector2(p.x + .06f, artwork.yMin + .11f), artwork.width * .44f,
+                        new Color32(4, 15, 12, 125), 12, .19f);
             }
             else if (NotebookTowerComposition.UsesComposition(state.Blueprint))
-                NotebookTowerComposition.DrawStatic(pen, state.Blueprint, p, state.Tier, state.Color, alpha, theme);
+                NotebookTowerComposition.DrawStatic(pen, state.Blueprint, p, state.Tier, state.Color, alpha, theme, body);
             else
             {
                 string id = state.Kind == StructureKind.Wall ? "object.wall." + wallMask
                     : state.Kind == StructureKind.Spikes ? "object.spikes"
                     : state.Kind == StructureKind.TarPit ? "object.tar"
-                    : state.Kind == StructureKind.RepairPost ? "object.repair" : "chassis.standard";
-                DrawResource(pen, id, p, opacity: alpha, theme: theme);
+                    : state.Kind == StructureKind.RepairPost ? "object.repair"
+                    : state.Kind == StructureKind.Generator ? "object.generator"
+                    : state.Kind == StructureKind.Beacon ? "object.beacon"
+                    : state.Kind == StructureKind.Prism ? "object.prism" : "chassis.standard";
+                DrawResource(pen, id, p, radians: body, opacity: alpha, theme: theme);
             }
-            if (state.Blueprint?.Reinforcement != null) Reinforcement(pen, p, state.Blueprint.Reinforcement, edge);
+            if (state.Blueprint?.Reinforcement != null) Reinforcement(pen, p, state.Blueprint.Reinforcement, edge, body);
             if (state.Color != InkColor.None)
             {
                 pen.Box(p + new Vector2(0, -.33f), new Vector2(.29f, .16f), InkTone(state.Color), edge, .025f, state.Id);
@@ -214,7 +244,21 @@ namespace PaperDefense.Presentation
             }
         }
 
-        static void Reinforcement(MeshPen pen,Vector2 center,ArmorDistribution armor,Color color)
+        static void WallRails(MeshPen pen, Vector2 center, int mask)
+        {
+            // Adjacent occupied cells meet exactly at their shared border.
+            var foot = center + new Vector2(0, -.13f);
+            for (int edge = 0; edge < 4; edge++)
+            {
+                if ((mask & (1 << edge)) == 0) continue;
+                Vector2 axis = edge == 0 ? Vector2.up : edge == 1 ? Vector2.right : edge == 2 ? Vector2.down : Vector2.left;
+                var join = foot + axis*.5f;
+                pen.Line(foot, join, .16f, NightNotebookArt.Paper);
+                pen.Line(foot, join, .085f, NightNotebookArt.Body);
+            }
+        }
+
+        static void Reinforcement(MeshPen pen,Vector2 center,ArmorDistribution armor,Color color,float body)
         {
             for(int sector=0;sector<4;sector++)
             {
@@ -224,13 +268,13 @@ namespace PaperDefense.Presentation
                     float radius=.55f+line*.014f;Vector2 previous=default;
                     for(int step=0;step<=8;step++)
                     {
-                        float angle=((sector+armor.FacingQuarterTurns)*90-37+74*step/8)*Mathf.Deg2Rad;
+                        float angle=((sector+armor.FacingQuarterTurns)*90-37+74*step/8)*Mathf.Deg2Rad-body;
                         var next=center+new Vector2(Mathf.Sin(angle),Mathf.Cos(angle))*radius;
                         if(step>0)pen.Line(previous,next,.012f,color);previous=next;
                     }
                 }
             }
-            var front=ArmorProbe.Direction(armor.FacingQuarterTurns);var d=new Vector2(front.X,front.Y);var tip=center+d*.49f;
+            var front=ArmorProbe.Direction(armor.FacingQuarterTurns);var d=NotebookMountLayout.Rotate(new Vector2(front.X,front.Y),body);var tip=center+d*.49f;
             pen.Line(center+d*.34f,tip,.025f,color);var side=new Vector2(-d.y,d.x);
             pen.Line(tip,tip-d*.07f+side*.04f,.02f,color);pen.Line(tip,tip-d*.07f-side*.04f,.02f,color);
         }
@@ -242,8 +286,21 @@ namespace PaperDefense.Presentation
             Color color = state.Color == InkColor.None ? TierColor(state.Tier) : InkTone(state.Color);
             float fraction = 1 - Mathf.Clamp01(state.BuildRemaining / Mathf.Max(.01f, buildDuration));
             if (state.ResolvedEntry != null && state.ResolvedEntry.Kind != AlbumEntryKind.Legacy)
-                ComposeAssembly(state, seconds, animation, theme).Draw(pen, p, state.IsComplete ? 1 : .48f,
-                    uniformScale: NotebookAssemblyView.ScaleFor(state.ResolvedEntry.Snapshot));
+            {
+                var mechanics = animation?.StructureMechanics(state.Id, seconds,
+                    (theme ?? NotebookVisualThemeAsset.Default).Data.ReducedMotion) ?? default;
+                ComposeAssembly(state, seconds, animation, theme).Draw(pen, p,
+                    uniformScale: NotebookAssemblyView.ScaleFor(state.ResolvedEntry.Snapshot),
+                    mechanics: mechanics, construction: state.IsComplete ? 1 : fraction);
+                if (mechanics.Activity > 0 && state.ResolvedEntry.Support?.Kind == AssemblyStructureFamily.Generator)
+                {
+                    // Work pulses are launched only by an actual payment event.
+                    var receipt = p + new Vector2(.18f, .42f + (1-mechanics.Activity)*.25f);
+                    var paidInk = MeshPen.Alpha(NightNotebookArt.Accent, mechanics.Activity);
+                    pen.Line(receipt + new Vector2(-.055f, -.035f), receipt + new Vector2(.055f, .035f), .025f, paidInk);
+                    pen.Line(receipt + new Vector2(-.055f, .035f), receipt + new Vector2(.055f, .105f), .025f, paidInk);
+                }
+            }
             else if (!state.IsComplete && NotebookTowerComposition.UsesComposition(state.Blueprint))
                 NotebookTowerComposition.DrawConstruction(pen, state, p, fraction, seconds, animation, theme);
             else if (NotebookTowerComposition.UsesComposition(state.Blueprint))
@@ -254,22 +311,24 @@ namespace PaperDefense.Presentation
                 string weapon = LegacyContentIds.Weapon(state.Kind);
                 if (weapon != null)
                 {
-                    Vector2 pivot = p + new Vector2(0, .04f);
-                    Vector2 forward = Direction(state.PrimaryAim, pivot);
+                    Vector2 pivot = p + NotebookMountLayout.Rotate(new Vector2(0, .04f), NotebookMountLayout.BodyRadians(state));
+                    var primary = state.GetMountState(0);
+                    Vector2 forward = NotebookTowerComposition.AimDirection(primary.HasAimPoint ? primary.Aim : default, pivot, state.FacingDegrees);
                     pivot += forward * (animation?.Recoil(state.Id, 0, seconds, theme) ?? 0);
                     DrawResource(pen, weapon, pivot, radians: Mathf.Atan2(forward.y, forward.x) - Mathf.PI * .5f,
                         opacity: state.IsComplete ? 1 : .48f, theme: theme);
                 }
             }
+            DrawModernization(pen, state, theme);
             if (state.IsComplete) return;
             bool modern = state.ResolvedEntry != null && state.ResolvedEntry.Kind != AlbumEntryKind.Legacy;
-            Rect artwork = modern ? NotebookAssemblyView.Bounds(p, state.ResolvedEntry.Snapshot)
+            Rect artwork = modern ? NotebookAssemblyView.Bounds(p, state.ResolvedEntry.Snapshot, NotebookMountLayout.BodyRadians(state))
                 : new Rect(p - Vector2.one * .5f, Vector2.one);
-            float progress = Mathf.Repeat((float)seconds * .45f + state.Id * .13f, 1);
-            float angle = progress * Mathf.PI * 2;
-            float radius = modern ? Mathf.Max(.48f, artwork.size.magnitude * .5f) : .48f;
-            pen.Disc(p + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius, .065f,
-                state.WaitingForClearance ? NotebookPalette.Red : color, 8);
+            // The nib follows actual completed work; waiting for clearance cannot
+            // keep pretending to assemble a structure through an unrelated orbit.
+            Vector2 nib = new Vector2(Mathf.Lerp(artwork.xMin, artwork.xMax, fraction), artwork.yMin - .3f);
+            pen.Line(nib + new Vector2(-.07f,-.11f), nib + new Vector2(.04f,.06f), .035f,
+                state.WaitingForClearance ? NotebookPalette.Red : NightNotebookArt.Accent);
             Vector2 left = modern ? new Vector2(artwork.xMin, artwork.yMin - .3f) : p + new Vector2(-.35f, -.6f);
             float width = modern ? Mathf.Max(.7f, artwork.width) : .7f;
             pen.Line(left, left + Vector2.right * width, .06f, MeshPen.Alpha(NotebookPalette.Navy, .16f));
@@ -277,32 +336,114 @@ namespace PaperDefense.Presentation
                 state.WaitingForClearance ? NotebookPalette.Red : color);
         }
 
-        static Vector2 Direction(Point2 aim, Vector2 pivot)
+        /// <summary>State-only marks, wholly inside the occupied cell. Never alter certified art or weapon poses.</summary>
+        internal static void DrawModernization(MeshPen pen, StructureView state, NotebookVisualThemeAsset theme = null)
         {
-            if (aim.X == 0 && aim.Y == 0) return Vector2.up;
-            Vector2 direction = new Vector2(aim.X, aim.Y) - pivot;
-            return direction.sqrMagnitude > .01f ? direction.normalized : Vector2.up;
+            var work = state.Modernization;
+            if (!state.IsComplete || (work.StepsUsed == 0 && work.ColorRank == 0 && !work.IsWorking)) return;
+            var p = new Vector2(state.Cell.X + .5f, state.Cell.Y + .5f);
+            // Four fixed columns read left to right like the direction controls: power, mechanics, range, resilience.
+            // Position, shape and tick count carry information even with no movement or color perception.
+            pen.Box(p + new Vector2(0, -.29f), new Vector2(.78f, .24f),
+                MeshPen.Alpha(NotebookPalette.Paper, .94f), MeshPen.Alpha(NotebookPalette.Navy, .6f), .015f, state.Id);
+            for (int direction = 0; direction < 4; direction++)
+            {
+                var at = p + new Vector2(-.29f + direction * .19f, -.29f);
+                var rank = work.Rank((ModernizationDirection)direction);
+                var ink = rank > 0 ? NotebookPalette.Navy : MeshPen.Alpha(NotebookPalette.Navy, .3f);
+                if (direction == 0)
+                {
+                    pen.Line(at + new Vector2(-.035f, .015f), at + new Vector2(0, .065f), .018f, ink);
+                    pen.Line(at + new Vector2(0, .065f), at + new Vector2(.035f, .015f), .018f, ink);
+                }
+                else if (direction == 1)
+                {
+                    pen.Line(at + new Vector2(-.035f, .02f), at + new Vector2(.035f, .02f), .018f, ink);
+                    pen.Line(at + new Vector2(-.035f, .06f), at + new Vector2(.035f, .06f), .018f, ink);
+                }
+                else if (direction == 2)
+                {
+                    pen.Line(at + new Vector2(-.04f, .02f), at + new Vector2(.04f, .06f), .018f, ink);
+                    pen.Line(at + new Vector2(.005f, .07f), at + new Vector2(.04f, .06f), .018f, ink);
+                    pen.Line(at + new Vector2(.04f, .06f), at + new Vector2(.03f, .025f), .018f, ink);
+                }
+                else
+                {
+                    pen.Line(at + new Vector2(-.035f, .065f), at + new Vector2(0, .015f), .018f, ink);
+                    pen.Line(at + new Vector2(0, .015f), at + new Vector2(.035f, .065f), .018f, ink);
+                }
+                for (int tick = 0; tick < rank; tick++)
+                {
+                    var from = at + new Vector2(-.04f + tick * .04f, -.065f);
+                    pen.Line(from, from + Vector2.up * .045f, .02f, ink);
+                }
+                if (work.IsWorking && work.PendingDirection == (ModernizationDirection)direction)
+                    pen.Line(at + new Vector2(-.06f, .09f), at + new Vector2(.06f, .09f), .02f, NightNotebookArt.Accent);
+            }
+            if (state.Color != InkColor.None)
+            {
+                var at = p + new Vector2(.32f, -.08f);
+                pen.Disc(at, .065f, InkTone(state.Color), 10);
+                for (int tick = 0; tick < work.ColorRank; tick++)
+                {
+                    var from = at + new Vector2(-.04f + tick * .04f, -.025f);
+                    pen.Line(from, from + Vector2.up * .05f, .014f, NotebookPalette.Paper);
+                }
+            }
+            if (!work.IsWorking) return;
+            float progress = 1 - Mathf.Clamp01(work.WorkRemaining / Mathf.Max(.001f, work.WorkDuration));
+            var left = p + new Vector2(-.35f, -.445f);
+            pen.Line(left, left + Vector2.right * .7f, .04f, MeshPen.Alpha(NotebookPalette.Navy, .22f));
+            pen.Line(left, left + Vector2.right * (.7f * progress), .04f,
+                work.PendingColor != InkColor.None ? InkTone(work.PendingColor) : NightNotebookArt.Accent);
+            // A stationary diagonal nib identifies unfinished work even at exactly zero progress.
+            var nib = left + Vector2.right * (.7f * progress);
+            pen.Line(nib + new Vector2(-.02f, -.025f), nib + new Vector2(.02f, .025f), .018f, NotebookPalette.Navy);
         }
 
         public static void Enemy(MeshPen pen, EnemyView enemy, float time, bool compact = false,
             NotebookAnimationState animation = null, NotebookVisualThemeAsset theme = null, double sampleSeconds = double.NaN, float windupSeconds = 0,
-            bool showHealth = true, float uniformScale = 1)
+            bool showHealth = true, float uniformScale = 1, HordeView horde = HordeView.None)
         {
             int first = pen.VertexCount;
             float phase = time + enemy.Id * .137f;
             NotebookEnemyMotion motion = animation != null ? animation.Observe(enemy, time, out phase, theme, sampleSeconds, windupSeconds)
                 : enemy.WindupRemaining > 0 ? NotebookEnemyMotion.Attack : NotebookEnemyMotion.Idle;
-            // Four atlas vertices are cheaper than the retired compact glyph. Preserve the same
-            // silhouette and animation for individual enemies and the largest crowds.
-            DrawResourceEnemy(pen, enemy.Kind, enemy.DrawingTier, new Vector2(enemy.Position.X, enemy.Position.Y), motion, phase, theme, enemy.VisualScale);
+            // Large crowds keep the same role and clip phase through a cached native detail level.
+            var position = new Vector2(enemy.Position.X, enemy.Position.Y);
+            bool distantDoodle = horde == HordeView.Overview && enemy.Kind == EnemyKind.Doodle && enemy.DrawingTier == DrawingTier.Sketch &&
+                enemy.VisualScale * uniformScale <= 24 * pen.WorldUnitsPerPixel && theme?.Data.Revision == InkSwarmArt.Revision;
+            if (distantDoodle)
+                InkSwarmEnemyArt.DrawDistantDoodle(pen, position, enemy.VisualScale, motion, phase, theme);
+            else
+                DrawResourceEnemy(pen, enemy.Kind, enemy.DrawingTier, position, motion, phase, theme, enemy.VisualScale, compact: compact);
             EnemyMarks(pen, enemy, time, theme);
-            if (showHealth && pen.TryGetBounds(first, out var silhouette)) EnemyHealth(pen, enemy, silhouette);
+            if (showHealth)
+            {
+                bool grunt = horde != HordeView.None && (enemy.Kind == EnemyKind.Doodle || enemy.Kind == EnemyKind.Runner || enemy.Kind == EnemyKind.Gnawer);
+                bool wounded = enemy.Health > 0 && enemy.Health < enemy.MaxHealth;
+                if ((!grunt || (horde == HordeView.Close && wounded)) && pen.TryGetBounds(first, out var silhouette))
+                {
+                    if (grunt) HordeWoundBar(pen, enemy, silhouette, theme ?? NotebookVisualThemeAsset.Default);
+                    else EnemyHealth(pen, enemy, silhouette);
+                }
+            }
             float presentationScale = VisualScale(uniformScale);
             if (presentationScale != 1) pen.ScaleFrom(first, new Vector2(enemy.Position.X, enemy.Position.Y), presentationScale);
         }
         internal static float VisualScale(float value) => float.IsNaN(value) || float.IsInfinity(value) || value <= 0 ? 1 : value;
         internal static float EnemyHealthRatio(float health, float maximum)
             => maximum > 0 && !float.IsNaN(health) && !float.IsNaN(maximum) ? Mathf.Clamp01(health / maximum) : 0;
+        static void HordeWoundBar(MeshPen pen, EnemyView enemy, Rect silhouette, NotebookVisualThemeAsset theme)
+        {
+            float scale = VisualScale(enemy.VisualScale);
+            float width = Mathf.Min(silhouette.width, .46f * scale);
+            float height = Mathf.Max(.04f * scale, 2 * pen.WorldUnitsPerPixel);
+            float x = silhouette.center.x - width * .5f, y = silhouette.yMax + .07f * scale;
+            float ratio = EnemyHealthRatio(enemy.Health, enemy.MaxHealth);
+            pen.Rect(x, y, width, height, theme.Color(NotebookInkChannel.Surface));
+            pen.Rect(x, y, width * ratio, height, theme.Color(ratio > .35f ? NotebookInkChannel.Sketch : NotebookInkChannel.Danger));
+        }
         static void EnemyHealth(MeshPen pen, EnemyView enemy, Rect silhouette)
         {
             float scale = VisualScale(enemy.VisualScale), width = Mathf.Max(.72f, .72f * scale);
@@ -319,7 +460,7 @@ namespace PaperDefense.Presentation
                 ratio > .35f ? NotebookPalette.Green : NotebookPalette.Red);
         }
         internal static bool DrawResourceEnemy(MeshPen pen, EnemyKind kind, DrawingTier tier, Vector2 position,
-            NotebookEnemyMotion motion, float phase, NotebookVisualThemeAsset theme = null, float visualScale = 1, float uniformScale = 1)
+            NotebookEnemyMotion motion, float phase, NotebookVisualThemeAsset theme = null, float visualScale = 1, float uniformScale = 1, bool compact = false)
         {
             int first = pen.VertexCount;
             theme = theme ?? NotebookVisualThemeAsset.Default;
@@ -329,8 +470,14 @@ namespace PaperDefense.Presentation
                 : kind == EnemyKind.Bulwark ? new Vector2(1.08f, 1.05f) : Vector2.one;
             string id = NotebookAnimationState.EnemyId(kind, tier, motion);
             var frame = theme?.FindClip(id)?.Sample(Mathf.Max(0, phase));
-            bool drawn = DrawResource(pen, frame?.ShapeId ?? id, position + (frame?.Offset ?? Vector2.zero) * visualScale,
-                (frame?.Scale ?? 1) * visualScale, frame?.Rotation ?? 0, frame?.Alpha ?? 1, silhouette, theme);
+            var compactShape = compact && theme != null && theme.Data.Revision == InkSwarmArt.Revision
+                ? InkSwarmEnemyArt.CreateCompact(frame?.ShapeId ?? id) : null;
+            Vector2 at = position + (frame?.Offset ?? Vector2.zero) * visualScale;
+            float scale = (frame?.Scale ?? 1) * visualScale;
+            bool drawn = compactShape != null
+                ? NotebookArtRenderer.Draw(pen, compactShape, at, scale, frame?.Rotation ?? 0,
+                    opacity: frame?.Alpha ?? 1, localScale: silhouette, theme: theme)
+                : DrawResource(pen, frame?.ShapeId ?? id, at, scale, frame?.Rotation ?? 0, frame?.Alpha ?? 1, silhouette, theme);
             float presentationScale = VisualScale(uniformScale);
             if (presentationScale != 1) pen.ScaleFrom(first, position, presentationScale);
             return drawn;
@@ -344,9 +491,9 @@ namespace PaperDefense.Presentation
             if (enemy.BlueRemaining > 0) DrawResource(pen, "fx.status.blue", p, theme: theme);
             if (enemy.GreenRemaining > 0) DrawResource(pen, "fx.status.green", p, theme: theme);
             if (enemy.RedRemaining > 0) DrawResource(pen, "fx.status.red", p, theme: theme);
-            if (enemy.Kind == EnemyKind.Spitter && enemy.WindupRemaining > 0)
+            if (enemy.WindupRemaining > 0)
             {
-                float pulse = .6f + .4f * Mathf.Sin(time * 18);
+                float pulse = (theme ?? NotebookVisualThemeAsset.Default).Data.ReducedMotion ? 1 : .6f + .4f * Mathf.Sin(time * 18);
                 pen.Ring(p, .54f, .055f + pulse * .035f, MeshPen.Alpha(NotebookPalette.Red, .6f + .4f * pulse), 16);
                 pen.Line(p + new Vector2(0, .56f), p + new Vector2(0, .85f), .095f, NotebookPalette.Red);
                 pen.Disc(p + new Vector2(0, .48f), .05f, NotebookPalette.Red, 6);
@@ -355,7 +502,7 @@ namespace PaperDefense.Presentation
         }
 
         public static void Castle(MeshPen pen, Vector2 p, float healthFraction, float seconds = 0, NotebookVisualThemeAsset theme = null, float uniformScale = 1)
-            => DrawResource(pen, healthFraction < .6f ? "object.castle.damaged" : "object.castle", p, 3 * uniformScale, theme: theme);
+            => DrawResource(pen, healthFraction <= 0 ? "object.castle.ruined" : healthFraction < .6f ? "object.castle.damaged" : "object.castle", p, 3 * uniformScale, theme: theme);
         public static void Tree(MeshPen pen, Vector2 p, float size, Color color, int seed)
             => DrawResource(pen, "terrain.pine", p + Vector2.up * size * .5f, size, opacity: color.a);
         public static void Rock(MeshPen pen, Vector2 p, float size, Color color, int seed)

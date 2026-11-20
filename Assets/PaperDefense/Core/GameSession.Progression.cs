@@ -37,6 +37,10 @@ namespace PaperDefense.Core
         private void CompleteWave()
         {
             int generatorIncome = generatorLedger.CompleteWave(RunId, WaveIndex, structures);
+            foreach (var payout in generatorLedger.LastPayouts)
+                EventBuffer.Publish(TickIndex, SimulationEventKind.GeneratorPaid, Center(payout.Source.Cell), Center(payout.Source.Cell),
+                    payout.Source.Kind, entityId: payout.Source.Id, sourceStructureId: payout.Source.Id,
+                    weaponId: payout.Source.ContentId, simulationSeconds: Elapsed, magnitude: payout.Ink);
             CreditInk(generatorIncome);
             Statistics.RecordGeneratorIncome(generatorIncome);
             CompletedWaves = WaveIndex;

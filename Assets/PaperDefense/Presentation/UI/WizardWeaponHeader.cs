@@ -30,7 +30,7 @@ namespace PaperDefense.Presentation
             WorkshopUi.Place(layer, new Rect(0, 0, board.sizeDelta.x, height));
             find("Wizard title")?.gameObject.SetActive(false);
             find("Start run")?.gameObject.SetActive(false);
-            var hand = Resources.Load<Font>("NotebookHand");
+            var hand = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
 
             var header = Detail(layer, "Weapons top frame", FoundationDetailGraphic.Kind.Frame, new Rect(offset, 1, width, 58));
             header.Fill = WorkshopUi.Paper; header.Radius = 8; header.color = WorkshopUi.Ink;
@@ -38,7 +38,7 @@ namespace PaperDefense.Presentation
             Label(layer, "Weapons brand lettering", "ДЕРЖИ ЛИНИЮ", new Rect(offset + 77, 5, compact ? 212 : 255, 49), hand, compact ? 29 : 32);
             float titleWidth = compact ? 234 : 290;
             float titleX = offset + (width - titleWidth) * .5f - (compact ? 30 : 0);
-            Illustration(layer, "Weapons workshop tools", "icon.workshop", new Rect(titleX, 6, 44, 46));
+            Icon(layer, "Weapons workshop tools", WorkshopIcon.Settings, new Rect(titleX, 6, 44, 46));
             Label(layer, "Weapons workshop lettering", "Мастерская", new Rect(titleX + 54, 4, titleWidth - 54, 51), hand, compact ? 32 : 37);
 
             float albumWidth = compact ? 164 : 192, goldWidth = compact ? 174 : 205;
@@ -206,15 +206,6 @@ namespace PaperDefense.Presentation
 
         WorkshopIconGraphic Icon(Transform parent, string name, WorkshopIcon icon, Rect bounds, Color? tint = null)
         { var graphic = Own<WorkshopIconGraphic>(parent, name, bounds); graphic.Icon = icon; graphic.color = tint ?? WorkshopUi.Ink; return graphic; }
-
-        void Illustration(Transform parent, string name, string id, Rect bounds)
-        {
-            var image = Own<Image>(parent, name, bounds);
-            if (NotebookSpriteCatalog.TryGet(id, out var sprite)) image.sprite = sprite;
-            image.preserveAspect = true;
-            image.rectTransform.pivot = new Vector2(.5f, .5f);
-            image.rectTransform.anchoredPosition += new Vector2(bounds.width * .5f, -bounds.height * .5f);
-        }
 
         void Label(Transform parent, string name, string value, Rect bounds, Font hand, int size,
             Color? tint = null, TextAnchor alignment = TextAnchor.MiddleLeft)

@@ -24,7 +24,7 @@ namespace PaperDefense.Tests
             return data;
         }
 
-        [Test] public void V7_PreservesFourSlotsAndAddsFourEmpty()
+        [Test, Category("HistoricalProfileCompatibility")] public void VersionSevenPreservesFourSlotsAndAddsFourEmpty()
         {
             var source = Historical(); string before = JsonUtility.ToJson(source);
             var result = ProfileMigrationV8.Migrate(source, Catalog());
@@ -41,12 +41,13 @@ namespace PaperDefense.Tests
         }
 
         [TestCase(1)] [TestCase(2)] [TestCase(3)] [TestCase(4)] [TestCase(5)] [TestCase(6)] [TestCase(7)]
+        [Category("HistoricalProfileCompatibility")]
         public void HistoricalReadersUseExactlyFourSlots(int version)
         {
             var result = ProfileMigrationV8.Migrate(Historical(version), Catalog());
             Assert.That(result.Success, Is.True, string.Join(",", result.Diagnostics.Select(d => d.Code)));
             Assert.That(result.Candidate.Loadout.Skip(4), Is.All.Null);
-            Assert.That(result.Candidate.ToData().Version, Is.EqualTo(8));
+            Assert.That(result.Candidate.ToData().Version, Is.EqualTo(WorkshopProfile.CurrentVersion));
             var malformed = Historical(version); malformed.Loadout = new string[8];
             if (version >= 2) Assert.That(ProfileMigrationV8.Migrate(malformed, Catalog()).Success, Is.False);
         }
@@ -58,7 +59,7 @@ namespace PaperDefense.Tests
             Assert.That(fresh.Loadout, Is.EqualTo(fresh.Entries.Select(e => e.Id)));
             Assert.That(fresh.Entries.Count(e => e.Kind == AlbumEntryKind.Structure), Is.EqualTo(4));
             Assert.That(fresh.Gold, Is.Zero); Assert.That(fresh.TotalXp, Is.Zero);
-            Assert.That(fresh.Library, Is.Empty);
+            Assert.That(fresh.Library.Count, Is.EqualTo(4));
         }
 
         [Test] public void LegacySaveCannotReplaceAnOwnedAssemblySnapshot()
@@ -73,7 +74,9 @@ namespace PaperDefense.Tests
             Assert.That(fresh.Entries[0].Snapshot, Is.Not.Null);
         }
 
-        [TestCase(1)] [TestCase(7)] public void SixtyFourPagesArePreservedAndFreeImportWaitsForSpace(int version)
+        [TestCase(1)] [TestCase(7)]
+        [Category("HistoricalProfileCompatibility")]
+        public void SixtyFourPagesArePreservedAndFreeImportWaitsForSpace(int version)
         {
             var source = Historical(version);
             source.Album = Enumerable.Range(0,64).Select(i => new BlueprintData(new TowerBlueprint("page." + i, "Page " + i, ChassisKind.Standard, StructureKind.Gun))).ToArray();
@@ -91,7 +94,7 @@ namespace PaperDefense.Tests
             Assert.That(candidate.Entries.Last().Id, Is.EqualTo(freeId));
         }
 
-        [Test] public void HistoricalStandardWithDifferentNumbersRemainsLegacy()
+        [Test, Category("HistoricalProfileCompatibility")] public void HistoricalStandardWithDifferentNumbersRemainsLegacy()
         {
             var candidate = ProfileMigrationV8.Migrate(Historical(), Catalog(), GameBalance.CreateDefault()).Candidate;
             Assert.That(candidate.Entries, Is.All.Matches<AlbumEntry>(e => e.Kind == AlbumEntryKind.Legacy));

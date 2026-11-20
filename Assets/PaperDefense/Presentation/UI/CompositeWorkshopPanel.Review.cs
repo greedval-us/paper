@@ -17,8 +17,8 @@ namespace PaperDefense.Presentation
             float illustrationHeight = Mathf.Max(190, h - (reference ? 166 : 158));
             if (Route == AlbumEntryKind.Legacy)
             {
-                var picture = WorkshopUi.Graphic<BlueprintSketch>(parent, "Composite assembled preview", new Rect(14, 58, w - 28, illustrationHeight));
-                picture.SetBlueprint(DraftSession.Draft.LegacyBlueprint);
+                StandardAssemblyIllustration.Draw(parent, DraftSession.Draft,
+                    new Rect(14, 58, w - 28, illustrationHeight), "Composite assembled preview");
             }
             else if (reference)
             {
@@ -111,6 +111,7 @@ namespace PaperDefense.Presentation
                 if (support.Kind == AssemblyStructureFamily.Generator) effect = T("generator", support.IncomePerWave, support.PaybackWaves(resolved.Cost));
                 else if (support.Kind == AssemblyStructureFamily.Repair) effect = T("repair", support.RepairPerSecond, support.Radius);
                 else if (support.Kind == AssemblyStructureFamily.Slow) effect = T("slow", support.SlowSpeedMultiplier, support.Radius, support.SlowSeconds);
+                else if (GameText.TrapOrBeaconEffect(support) is string fieldEffect) effect = ui.Resolve(fieldEffect);
                 else effect = T("wall");
             }
             else if (resolved != null) effect = T("dps", resolved.Dps.ToString("0.##"));

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace PaperDefense.Presentation
 {
-    /// <summary>Production illustrations use the shared atlas; explicit utility shapes retain exact native geometry.</summary>
+    /// <summary>Renders native geometry with one shared world/UI transform.</summary>
     public static class NotebookArtRenderer
     {
         struct Vertex { public Vector2 Point; public NotebookInkChannel Channel; public float Alpha; }
@@ -20,11 +20,10 @@ namespace PaperDefense.Presentation
         public static int GeometryBuildCount { get; private set; }
 
         internal static bool Draw(MeshPen pen, NotebookArtShape shape, Vector2 pivot, float scale = 1,
-            float radians = 0, Color? strokeTint = null, float opacity = 1, Vector2? localScale = null, NotebookVisualThemeAsset theme = null)
+            float radians = 0, Color? strokeTint = null, float opacity = 1, Vector2? localScale = null, NotebookVisualThemeAsset theme = null,
+            Color? effectTint = null)
         {
             if (pen == null || shape == null) return false;
-            if (!IsNativeUtility(shape))
-                return NotebookSpriteCatalog.TryDraw(pen, shape.Id, pivot, scale, radians, opacity, localScale, RasterTint(theme));
             var geometry = cache.GetValue(shape, Prepare);
             float cosine = Mathf.Cos(radians), sine = Mathf.Sin(radians);
             theme = theme ?? NotebookVisualThemeAsset.Default;
@@ -35,7 +34,7 @@ namespace PaperDefense.Presentation
                 {
                     Vector2 a = Transform(Vector2.Scale(command.Ink.Point, stretch), pivot, scale, cosine, sine);
                     Vector2 b = Transform(Vector2.Scale(command.B, stretch), pivot, scale, cosine, sine);
-                    Color color = Tone(theme, command.Ink, strokeTint, opacity);
+                    Color color = Tone(theme, command.Ink, strokeTint, opacity, effectTint);
                     if (command.Width > 0)
                     {
                         Vector2 delta = command.B - command.Ink.Point;
@@ -51,7 +50,7 @@ namespace PaperDefense.Presentation
             {
                 var a = geometry.Vertices[i]; var b = geometry.Vertices[i + 1]; var c = geometry.Vertices[i + 2];
                 pen.Triangle(Transform(Vector2.Scale(a.Point, stretch), pivot, scale, cosine, sine), Transform(Vector2.Scale(b.Point, stretch), pivot, scale, cosine, sine),
-                    Transform(Vector2.Scale(c.Point, stretch), pivot, scale, cosine, sine), Tone(theme, a, strokeTint, opacity));
+                    Transform(Vector2.Scale(c.Point, stretch), pivot, scale, cosine, sine), Tone(theme, a, strokeTint, opacity, effectTint));
             }
             return true;
         }
@@ -59,8 +58,6 @@ namespace PaperDefense.Presentation
             float radians = 0, Color? strokeTint = null, float opacity = 1, Vector2? localScale = null, NotebookVisualThemeAsset theme = null)
         {
             if (target == null || shape == null) return false;
-            if (!IsNativeUtility(shape))
-                return NotebookSpriteCatalog.TryDrawUI(target, shape.Id, center, scale, radians, opacity, localScale, RasterTint(theme));
             var geometry = cache.GetValue(shape, Prepare);
             float cosine = Mathf.Cos(radians), sine = Mathf.Sin(radians);
             theme = theme ?? NotebookVisualThemeAsset.Default;
@@ -74,24 +71,17 @@ namespace PaperDefense.Presentation
             for (int i = 0; i < geometry.Vertices.Count; i += 3) target.AddTriangle(offset + i, offset + i + 1, offset + i + 2);
             return true;
         }
-        internal static bool IsNativeUtility(NotebookArtShape shape)
-            => shape.Marks != null && shape.Marks.Count > 0
-                && !ReferenceEquals(NotebookVisualThemeAsset.Default?.FindShape(shape.Id), shape);
-        internal static Color RasterTint(NotebookVisualThemeAsset theme)
-        {
-            var original = NotebookVisualThemeAsset.Default;
-            if (theme == null || ReferenceEquals(theme, original) || original == null) return Color.white;
-            // A cloned reduced-motion theme keeps the original finished ink colour. Explicit palette
-            // overrides still reach the vertices for alternate themes and their diagnostic previews.
-            return theme.Color(NotebookInkChannel.Navy) == original.Color(NotebookInkChannel.Navy)
-                ? Color.white : theme.Color(NotebookInkChannel.Navy);
-        }
         static Vector2 Transform(Vector2 point, Vector2 center, float scale, float cosine, float sine)
             => center + new Vector2(cosine * point.x - sine * point.y, sine * point.x + cosine * point.y) * scale;
-        static Color Tone(NotebookVisualThemeAsset theme, Vertex vertex, Color? tint, float opacity)
+        static Color Tone(NotebookVisualThemeAsset theme, Vertex vertex, Color? tint, float opacity, Color? effectTint = null)
         {
             var color = tint.HasValue && (vertex.Channel == NotebookInkChannel.Navy || vertex.Channel == NotebookInkChannel.Pencil)
                 ? tint.Value : theme == null ? UnityEngine.Color.white : theme.Color(vertex.Channel);
+            // Effect ink is captured per shot. Preserve the opaque projectile body and
+            // paper cutouts; never rewrite a shared shape, palette, or cached geometry.
+            if (effectTint.HasValue && vertex.Channel != NotebookInkChannel.Surface &&
+                vertex.Channel != NotebookInkChannel.Paper && vertex.Channel != NotebookInkChannel.NotebookPaper)
+                color = effectTint.Value;
             color.a *= vertex.Alpha * opacity;
             return color;
         }

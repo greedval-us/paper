@@ -130,13 +130,20 @@ namespace PaperDefense.Tests
         }
 
         [TestCase(MaterialTier.Pencil)] [TestCase(MaterialTier.Ink)] [TestCase(MaterialTier.Marker)]
-        public void MaterialPriceHealthAndConstructionTimeComeFromTheFrozenResolvedEntry(MaterialTier material)
+        public void OnlyBaseMaterialBuildsUsingFrozenPriceHealthAndConstructionTime(MaterialTier material)
         {
             using (var fixture = new AssemblyCommandFixture())
             {
-                Start(fixture); var expected = fixture.Run.RunLoadout.ResolveSlot(0, material);
-                var cell = ClearCell(fixture.Run, 0, material); int ink = fixture.Run.Session.Ink;
+                Start(fixture); var expected = fixture.Run.RunLoadout.ResolveSlot(0, MaterialTier.Pencil);
+                var cell = ClearCell(fixture.Run, 0); int ink = fixture.Run.Session.Ink;
                 var quote = fixture.Run.QuoteEntry(new[] { cell }, 0, material, InkColor.None);
+                if (material != MaterialTier.Pencil)
+                {
+                    Assert.That(quote.Valid, Is.False, "A new field copy must start at its basic material.");
+                    Assert.That(fixture.Run.BuildEntry(new[] { cell }, 0, material, InkColor.None, out _), Is.False);
+                    Assert.That(fixture.Run.Session.Ink, Is.EqualTo(ink)); Assert.That(fixture.Run.Session.Structures, Is.Empty);
+                    return;
+                }
                 Assert.That(quote.Cost, Is.EqualTo(expected.Cost));
                 Assert.That(fixture.Run.BuildEntry(new[] { cell }, 0, material, InkColor.None, out var reason), Is.True, reason);
                 var built = fixture.Run.Session.StructureAt(cell).Value;
@@ -149,22 +156,34 @@ namespace PaperDefense.Tests
             }
         }
 
-        [Test] public void ColoredTowerUsesPencilCartridgePriceEvenWhenBuiltWithMarker()
+        [Test] public void PrecoloredMarkerConstructionCannotPayAndColorIsInstalledOnTheCompletedBaseCopy()
         {
             using (var fixture = new AssemblyCommandFixture())
             {
+                fixture.Preset.rules.PlanningSeconds = 1000;
                 Start(fixture); FundColor(fixture.Run, InkColor.Red, 100);
-                var rules = fixture.Run.RunLoadout.Balance.Construction;
                 int pencilCost = fixture.Run.RunLoadout.ResolveSlot(0, MaterialTier.Pencil).Cost;
-                int expectedColor = Math.Max(rules.ColorMinimum, (pencilCost + rules.ColorCostDivisor - 1) / rules.ColorCostDivisor);
-                var cell = ClearCell(fixture.Run, 0, MaterialTier.Marker);
+                int expectedColor = ModernizationRules.ColorCost(pencilCost, 1);
+                var cell = ClearCell(fixture.Run, 0);
                 int ink = fixture.Run.Session.Ink, color = fixture.Run.Session.ColoredInk(InkColor.Red);
                 var quote = fixture.Run.QuoteEntry(new[] { cell }, 0, MaterialTier.Marker, InkColor.Red);
-                Assert.That(quote.Valid, Is.True, quote.Reason);
-                Assert.That(fixture.Run.BuildEntry(new[] { cell }, 0, MaterialTier.Marker, InkColor.Red, out var reason), Is.True, reason);
-                Assert.That(ink - fixture.Run.Session.Ink, Is.EqualTo(quote.Cost));
+                Assert.That(quote.Valid, Is.False);
+                Assert.That(fixture.Run.BuildEntry(new[] { cell }, 0, MaterialTier.Marker, InkColor.Red, out _), Is.False);
+                Assert.That(fixture.Run.Session.Ink, Is.EqualTo(ink)); Assert.That(fixture.Run.Session.ColoredInk(InkColor.Red), Is.EqualTo(color));
+                Assert.That(fixture.Run.Session.Structures, Is.Empty);
+                Assert.That(fixture.Run.BuildEntry(new[] { cell }, 0, MaterialTier.Pencil, InkColor.None, out var reason), Is.True, reason);
+                Assert.That(ink - fixture.Run.Session.Ink, Is.EqualTo(pencilCost));
+                for (int tick = 0; tick < 600 && !fixture.Run.Session.StructureAt(cell).Value.IsComplete; tick++) fixture.Run.StepSimulation();
+                var built = fixture.Run.Session.StructureAt(cell).Value;
+                Assert.That(built.IsComplete, Is.True); Assert.That(built.Color, Is.EqualTo(InkColor.None));
+                var install = fixture.Run.QuoteColorModernization(built.Id, InkColor.Red);
+                Assert.That(install.Cost, Is.EqualTo(expectedColor));
+                Assert.That(fixture.Run.Modernize(install, out reason), Is.True, reason);
                 Assert.That(color - fixture.Run.Session.ColoredInk(InkColor.Red), Is.EqualTo(expectedColor));
-                Assert.That(fixture.Run.Session.StructureAt(cell).Value.Color, Is.EqualTo(InkColor.Red));
+                for (int tick = 0; tick < 90; tick++) fixture.Run.StepSimulation();
+                var colored = fixture.Run.Session.StructureAt(cell).Value;
+                Assert.That(colored.Color, Is.EqualTo(InkColor.Red)); Assert.That(colored.Modernization.ColorRank, Is.EqualTo(1));
+                Assert.That(fixture.Run.QuoteColorModernization(built.Id, InkColor.Blue).Valid, Is.False);
             }
         }
 
@@ -230,8 +249,8 @@ namespace PaperDefense.Tests
             using (var fixture = new AssemblyCommandFixture())
             {
                 Start(fixture); var snapshot = fixture.Run.RunLoadout;
-                var expected = snapshot.ResolveSlot(0, MaterialTier.Marker);
-                var cell = ClearCell(fixture.Run, 0, MaterialTier.Marker);
+                var expected = snapshot.ResolveSlot(0, MaterialTier.Pencil);
+                var cell = ClearCell(fixture.Run, 0);
                 var profileField = typeof(RunController).GetField("profile", PrivateInstance);
                 var profile = (WorkshopProfile)profileField.GetValue(fixture.Run);
                 var data = profile.ToData();
@@ -240,13 +259,13 @@ namespace PaperDefense.Tests
                 Assert.That(changedProfile.GetLoadoutEntries()[0].Kind, Is.EqualTo(AlbumEntryKind.Structure));
                 profileField.SetValue(fixture.Run, changedProfile);
                 fixture.AssemblyAsset.catalog.Definitions.Single(part => part.Id == "core.gun").Modifiers.Single(modifier => modifier.Stat == AssemblyStat.Cost).Value = 999;
-                fixture.Preset.rules.MaterialDefinitions[(int)MaterialTier.Marker].CostMultiplier = 100;
-                fixture.Preset.rules.MaterialDefinitions[(int)MaterialTier.Marker].HealthMultiplier = 100;
-                fixture.Preset.rules.MaterialDefinitions[(int)MaterialTier.Marker].BuildTimeMultiplier = 100;
+                fixture.Preset.rules.MaterialDefinitions[(int)MaterialTier.Pencil].CostMultiplier = 100;
+                fixture.Preset.rules.MaterialDefinitions[(int)MaterialTier.Pencil].HealthMultiplier = 100;
+                fixture.Preset.rules.MaterialDefinitions[(int)MaterialTier.Pencil].BuildTimeMultiplier = 100;
 
-                var quote = fixture.Run.QuoteEntry(new[] { cell }, 0, MaterialTier.Marker, InkColor.None);
+                var quote = fixture.Run.QuoteEntry(new[] { cell }, 0, MaterialTier.Pencil, InkColor.None);
                 Assert.That(quote.Valid, Is.True, quote.Reason); Assert.That(quote.Cost, Is.EqualTo(expected.Cost));
-                Assert.That(fixture.Run.BuildEntry(new[] { cell }, 0, MaterialTier.Marker, InkColor.None, out var reason), Is.True, reason);
+                Assert.That(fixture.Run.BuildEntry(new[] { cell }, 0, MaterialTier.Pencil, InkColor.None, out var reason), Is.True, reason);
                 var built = fixture.Run.Session.StructureAt(cell).Value;
                 Assert.That(fixture.Run.RunLoadout, Is.SameAs(snapshot));
                 Assert.That(built.ResolvedEntry.Kind, Is.EqualTo(AlbumEntryKind.Tower));

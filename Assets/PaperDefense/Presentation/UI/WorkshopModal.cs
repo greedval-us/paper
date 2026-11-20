@@ -15,6 +15,18 @@ namespace PaperDefense.Presentation
         Action close;
         bool active;
 
+        public static bool TryCloseTop(Transform root)
+        {
+            var scopes = root.GetComponentsInChildren<WorkshopModal>();
+            for (int i = scopes.Length - 1; i >= 0; i--)
+            {
+                if (!scopes[i].active || !scopes[i].isActiveAndEnabled) continue;
+                scopes[i].close?.Invoke();
+                return true;
+            }
+            return false;
+        }
+
         public static void Open(GameObject sheet, Action close, GameObject previousFocus = null)
         {
             if (!sheet.TryGetComponent<WorkshopModal>(out var scope)) scope = sheet.AddComponent<WorkshopModal>();
@@ -31,6 +43,7 @@ namespace PaperDefense.Presentation
             }
             foreach (var control in sheet.GetComponentsInChildren<Selectable>())
                 if (control.IsInteractable()) { EventSystem.current?.SetSelectedGameObject(control.gameObject); break; }
+            UiMenuMotion.PlayWindow(sheet);
         }
 
         void Update()
@@ -38,7 +51,7 @@ namespace PaperDefense.Presentation
             var keyboard = UnityEngine.InputSystem.Keyboard.current;
             var selected = EventSystem.current?.currentSelectedGameObject;
             if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame &&
-                (selected == null || selected.transform.IsChildOf(transform))) close?.Invoke();
+                (selected == null || selected.transform.IsChildOf(transform)) && !AlbumSearchInput.ConsumeEscape(transform)) close?.Invoke();
         }
 
         void OnDisable() => Release();

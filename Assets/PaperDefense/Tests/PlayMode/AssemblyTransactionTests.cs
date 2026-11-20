@@ -32,7 +32,7 @@ namespace PaperDefense.Tests
             Directory.CreateDirectory(DirectoryPath); ProfilePath = Path.Combine(DirectoryPath, "profile.json");
             var source = AssetDatabase.LoadAssetAtPath<GameBalanceAsset>("Assets/PaperDefense/Configuration/Game/PlayerBalance.asset");
             Assert.That(source, Is.Not.Null);
-            BalanceAsset = Object.Instantiate(source); Preset = Object.Instantiate(source.dataPreset);
+            BalanceAsset = Object.Instantiate(source); BalanceAsset.campaignEnabled = false; Preset = Object.Instantiate(source.dataPreset);
             Database = Object.Instantiate(Preset.database); AssemblyAsset = Object.Instantiate(Database.assemblyCatalog);
             BalanceAsset.dataPreset = Preset; Preset.database = Database; Database.assemblyCatalog = AssemblyAsset;
             Catalog = AssemblyAsset.CreateSnapshot(); Balance = BalanceAsset.CreateWorkshopBalance();
@@ -117,6 +117,168 @@ namespace PaperDefense.Tests
 
     public sealed class AssemblyTransactionTests
     {
+        [Test] public void PreExpansionV9CanBuyAndSaveNewStructureWithoutDisplacingSlotsOrRewritingOldSnapshots()
+        {
+            using (var fixture = new AssemblyCommandFixture(gold: 117, xp: 100))
+            {
+                var old = fixture.SavedData;
+                old.Version = 9; // Exercise the actual pre-expansion reader, independently of the current writer.
+                string[] newRights = { "site.spikes", "function.spikes", "site.beacon", "function.beacon" };
+                old.Unlocked = old.Unlocked.Except(newRights.Concat(new[] { "shop.structures.v1" })).ToArray();
+                Array.Reverse(old.Loadout);
+                foreach (var page in old.Entries)
+                {
+                    page.Snapshot.BalanceRevision = "album-v1.1";
+                    foreach (var part in page.Snapshot.Definitions)
+                        part.StructureFamilies &= (AssemblyStructureFamily)15;
+                }
+                foreach (var component in old.Library) component.Snapshot.BalanceRevision = "album-v1.1";
+                File.WriteAllText(fixture.ProfilePath, JsonUtility.ToJson(old));
+                fixture.Restart();
+
+                Assert.That(fixture.Run.Workshop.LoadoutEntries.Select(entry => entry.Id), Is.EqualTo(old.Loadout));
+                Assert.That(newRights.All(fixture.Run.Workshop.IsUnlocked), Is.True);
+                Assert.That(fixture.Run.Workshop.IsUnlocked("function.beacon.focused"), Is.False);
+                var beacon = fixture.Catalog.Templates.Single(e => e.Id == "album.beacon");
+                Assert.That(fixture.Commands.SaveEntry(beacon, Guid.NewGuid()).Code, Is.EqualTo("profile.structure.locked"));
+                Assert.That(fixture.Commands.PurchaseStructureFamily(AssemblyStructureFamily.Beacon, Guid.NewGuid()).Success, Is.True);
+                var save = fixture.Commands.SaveEntry(beacon, Guid.NewGuid());
+                Assert.That(save.Success, Is.True, save.Code);
+                var written = JsonUtility.FromJson<WorkshopProfileData>(File.ReadAllText(fixture.ProfilePath));
+                Assert.That(written.Unlocked, Is.SupersetOf(newRights));
+                Assert.That(written.Loadout, Is.EqualTo(old.Loadout));
+                Assert.That(written.Gold, Is.EqualTo(37));
+
+                fixture.Restart();
+                Assert.That(fixture.Run.Workshop.Entries.Count, Is.EqualTo(9));
+                foreach (var page in old.Entries)
+                {
+                    var entry = fixture.Run.Workshop.Entries.Single(e => e.Id == page.Id);
+                    Assert.That(JsonUtility.ToJson(new RecipeSnapshotData(entry.Snapshot)), Is.EqualTo(JsonUtility.ToJson(page.Snapshot)), page.Id);
+                    Assert.That(TowerCatalog.ResolveEntry(entry, fixture.Balance).Valid, Is.True, page.Id);
+                }
+                var restored = fixture.Run.Workshop.Entries.Single(e => e.Id == beacon.Id);
+                Assert.That(restored.Snapshot.Definitions.Single(p => p.Id == "shell.standard").StructureFamilies.HasFlag(AssemblyStructureFamily.Beacon), Is.True);
+                Assert.That(TowerCatalog.ResolveEntry(restored, fixture.Balance).Value.Support.ArmorReduction, Is.EqualTo(.1f));
+            }
+        }
+
+        [Test] public void OldSavedStructureAndPurchasedSpecialistPartKeepFamilyAccessAfterDeletingTheDesign()
+        {
+            using (var fixture = new AssemblyCommandFixture(gold: 17))
+            {
+                var old = fixture.SavedData;
+                var spikes = fixture.Catalog.Templates.Single(e => e.Id == "album.spikes");
+                var custom = new AlbumEntry("my.trap", "Моя ловушка", 2, spikes.Snapshot);
+                old.Entries = old.Entries.Concat(new[] { new AlbumEntryData(custom) }).ToArray();
+                old.Loadout[7] = custom.Id;
+                old.Unlocked = old.Unlocked.Where(id => id != "shop.structures.v1").Concat(new[] { "function.beacon.focused" }).ToArray();
+                File.WriteAllText(fixture.ProfilePath, JsonUtility.ToJson(old));
+                fixture.Restart();
+                Assert.That(fixture.Run.Workshop.GetStructureOffer(AssemblyStructureFamily.Spikes).Owned, Is.True);
+                Assert.That(fixture.Run.Workshop.GetStructureOffer(AssemblyStructureFamily.Beacon).Owned, Is.True);
+                Assert.That(fixture.Run.Workshop.GetStructureOffer(AssemblyStructureFamily.Prism).Owned, Is.False);
+                Assert.That(fixture.Run.Workshop.LoadoutEntries[7].Id, Is.EqualTo(custom.Id));
+                Assert.That(fixture.Commands.DeleteEntry(custom.Id, Guid.NewGuid()).Success, Is.True);
+                fixture.Restart();
+                Assert.That(fixture.Run.Workshop.GetStructureOffer(AssemblyStructureFamily.Spikes).Owned, Is.True);
+                Assert.That(fixture.Run.Workshop.Gold, Is.EqualTo(17));
+            }
+        }
+
+        [Test] public void FamilyPurchaseCanBeRetriedAfterWriteFailureAndSurvivesReload()
+        {
+            using (var fixture = new AssemblyCommandFixture(gold: 120, xp: 230))
+            {
+                const AssemblyStructureFamily prism = AssemblyStructureFamily.Prism;
+                var operation = Guid.NewGuid();
+                var slots = fixture.SavedData.Loadout;
+                var page = fixture.Catalog.Templates.Single(e => e.Snapshot.Recipe.Structure?.Family == prism);
+                Assert.That(fixture.Run.Workshop.GetStructureOffer(prism).CanPurchase, Is.True);
+                Assert.That(fixture.Commands.SaveEntryAsVariant(page, Guid.NewGuid()).Code, Is.EqualTo("profile.structure.locked"));
+                var draft = new WorkshopDraftSession(fixture.Run);
+                draft.Begin(page);
+                Assert.That(draft.CanTrial || draft.CanSave, Is.False);
+                var bytes = fixture.SavedBytes;
+                fixture.Store.RefuseWrites = true;
+                Assert.That(draft.PurchaseStructureFamily(prism, operation).Code, Is.EqualTo("profile.write_failed"));
+                Assert.That(fixture.Run.Workshop.GetStructureOffer(prism).Owned, Is.False);
+                Assert.That(fixture.Run.Workshop.Gold, Is.EqualTo(120));
+                CollectionAssert.AreEqual(bytes, fixture.SavedBytes);
+                fixture.Store.RefuseWrites = false;
+                Assert.That(draft.PurchaseStructureFamily(prism, operation).Success, Is.True);
+                Assert.That(draft.CanSave && draft.CanTrial, Is.True);
+                Assert.That(fixture.Commands.PurchaseStructureFamily(prism, operation).Success, Is.True);
+                Assert.That(fixture.Commands.PurchaseStructureFamily(AssemblyStructureFamily.Beacon, operation).Code, Is.EqualTo("profile.operation.conflict"));
+                Assert.That(fixture.Commands.PurchaseStructureFamily(prism, Guid.NewGuid()).Success, Is.True);
+                var saved = fixture.Commands.SaveEntryAsVariant(page, Guid.NewGuid());
+                Assert.That(saved.Success, Is.True, saved.Code);
+                CollectionAssert.AreEqual(slots, fixture.SavedData.Loadout);
+                Assert.That(fixture.Commands.AssignSlot(7, saved.ResultId, Guid.NewGuid()).Success, Is.True);
+                fixture.Restart();
+                Assert.That(fixture.Run.Workshop.Gold, Is.Zero);
+                Assert.That(fixture.Run.Workshop.GetStructureOffer(prism).Owned, Is.True);
+                Assert.That(fixture.Run.Workshop.LoadoutEntries[7].Id, Is.EqualTo(saved.ResultId));
+                Assert.That(fixture.Run.CanStartAlbumRun(out string reason), Is.True, reason);
+            }
+        }
+
+        [Test] public void UnownedSavedPageCannotBeAssignedOrStartedThroughAnOccupiedSlot()
+        {
+            using (var fixture = new AssemblyCommandFixture())
+            {
+                var data = fixture.SavedData;
+                var beacon = fixture.Catalog.Templates.Single(e => e.Id == "album.beacon");
+                data.Entries = data.Entries.Concat(new[] { new AlbumEntryData(beacon) }).ToArray();
+                data.Loadout[7] = beacon.Id;
+                File.WriteAllText(fixture.ProfilePath, JsonUtility.ToJson(data));
+                fixture.Restart();
+                Assert.That(fixture.Run.Workshop.GetStructureOffer(AssemblyStructureFamily.Beacon).Owned, Is.False);
+                Assert.That(fixture.Commands.AssignSlot(6, beacon.Id, Guid.NewGuid()).Code, Is.EqualTo("profile.structure.locked"));
+                Assert.That(fixture.Run.CanStartAlbumRun(out _), Is.False);
+                Assert.That(fixture.Run.StartRun(out _), Is.False);
+                Assert.That(fixture.Commands.AssignSlot(7, null, Guid.NewGuid()).Success, Is.True);
+                Assert.That(fixture.Run.StartRun(out var reason), Is.True, reason);
+                var cell = new[] { new Cell(4, 4) };
+                Assert.That(fixture.Run.BuildEntry(cell, 7, MaterialTier.Pencil, InkColor.None, out _), Is.False);
+                Assert.That(fixture.Run.Build(cell, StructureKind.Beacon, MaterialTier.Pencil, out _), Is.False);
+            }
+        }
+
+        [TestCase(AssemblyStructureFamily.Spikes, 44, 0, "profile.structure.gold")]
+        [TestCase(AssemblyStructureFamily.Beacon, 80, 99, "profile.structure.level")]
+        [TestCase(AssemblyStructureFamily.Prism, 120, 229, "profile.structure.level")]
+        [TestCase(AssemblyStructureFamily.Prism, 119, 230, "profile.structure.gold")]
+        public void LockedFamilyRejectsPurchaseWithoutWriting(AssemblyStructureFamily family, int gold, int xp, string expected)
+        {
+            using (var fixture = new AssemblyCommandFixture(gold, xp))
+            {
+                Assert.That(fixture.Run.Workshop.GetStructureOffer(family).CanPurchase, Is.False);
+                Assert.That(fixture.Commands.PurchaseStructureFamily(family, Guid.NewGuid()).Code, Is.EqualTo(expected));
+                Assert.That(fixture.Commands.PurchasePart("function.spikes.barbed", Guid.NewGuid()).Code, Is.EqualTo("profile.structure.locked"));
+                Assert.That(fixture.Run.Workshop.Gold, Is.EqualTo(gold));
+                Assert.That(fixture.Store.SaveCalls, Is.Zero);
+            }
+        }
+
+        [Test] public void FirstNotebookRewardsFundOneNewFamilyAfterEachVictory()
+        {
+            using (var fixture = new AssemblyCommandFixture())
+            {
+                var profile = WorkshopProfile.CreateNew(fixture.Catalog, fixture.Balance.ResolveContent(), fixture.Balance);
+                var families = new[] { AssemblyStructureFamily.Spikes, AssemblyStructureFamily.Beacon, AssemblyStructureFamily.Prism };
+                for (int page = 0; page < families.Length; page++)
+                {
+                    var mission = CampaignCatalog.Default.Missions[page];
+                    Assert.That(profile.GetStructureOffer(families[page]).CanPurchase, Is.False);
+                    Assert.That(profile.TryApplyMissionReward(mission, Guid.NewGuid(), mission.WaveCount, true, 1, out var reason), Is.True, reason);
+                    Assert.That(profile.GetStructureOffer(families[page]).CanPurchase, Is.True);
+                    Assert.That(profile.TryPurchaseStructureFamily(families[page], out reason), Is.True, reason);
+                }
+                Assert.That(profile.Gold, Is.EqualTo(4));
+            }
+        }
+
         [Test] public void BuyLongBarrelTwice_ChargesOnce()
         {
             using (var fixture = new AssemblyCommandFixture(gold: 94, xp: 390))
@@ -242,7 +404,7 @@ namespace PaperDefense.Tests
                     entry.Snapshot.Recipe.Tower.Mounts[0].Weapon.Mechanism.Id == "core.piercer");
                 Assert.That(AssemblyFitRules.Validate(unsupported.Snapshot.Recipe, AssemblyVisualComposer.Fits), Is.Empty,
                     "The production catalog now includes the piercer; simulate missing coverage in a detached fixture.");
-                var incomplete = JsonUtility.FromJson<AssemblyVisualComposer.Manifest>(Resources.Load<TextAsset>("Art/NotebookMounts").text).fits;
+                var incomplete = AssemblyFitResources.ReadInput();
                 incomplete.Weapons = incomplete.Weapons.Where(weapon => weapon.MechanismId != "core.piercer").ToArray();
                 var missingFits = new AssemblyFitCatalog(incomplete);
                 var guardedCommands = new AssemblyCommands(fixture.Run, fixture.Catalog, missingFits);

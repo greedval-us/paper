@@ -5,15 +5,15 @@ namespace PaperDefense.Core
 {
     // Separate from the persisted legacy PartCategory enum. Categories are semantic sockets;
     // physical sockets and swept clearance are supplied by the later fit catalog.
-    public enum ComponentCategory { Frame, Hull, Armor, Feed, Turn, Mechanism, Head, Sight, Magazine, Trigger, Site, Function, Shell, Utility }
+    public enum ComponentCategory { Frame, Hull, Armor, Feed, Turn, Mechanism, Head, Sight, Magazine, Trigger, Site, Function, Shell, Utility, Mount }
     [Flags] public enum AssemblyWeaponFamily { None = 0, Gun = 1, Piercer = 2, Mortar = 4, Fan = 8, Ricochet = 16, Stapler = 32, Blotter = 64, All = 127 }
-    [Flags] public enum AssemblyStructureFamily { None = 0, Wall = 1, Slow = 2, Repair = 4, Generator = 8, All = 15 }
+    [Flags] public enum AssemblyStructureFamily { None = 0, Wall = 1, Slow = 2, Repair = 4, Generator = 8, Spikes = 16, Beacon = 32, Prism = 64, All = 127 }
     public enum AssemblyStat
     {
         Cost, Load, BuildSeconds, Health, Capacity, MountCount, Feed, Defense, FrontDefense,
         AcquisitionSeconds, Damage, Interval, Range, MinimumRange, TargetLimit, EvaluationTargets,
         Radius, MagazineSize, MagazineOverride, ReloadSeconds, Slow, SlowSeconds, FlightSeconds,
-        JumpRange, SupportRate, ConeDegrees
+        JumpRange, SupportRate, ConeDegrees, FiringArcDegrees
     }
 
     public sealed class ComponentModifier

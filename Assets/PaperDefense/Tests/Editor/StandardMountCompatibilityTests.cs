@@ -37,7 +37,7 @@ namespace PaperDefense.Tests
             balance.StartingInk = 10000;
             var game = new GameSession(balance, starterDefenses: false);
             Assert.That(game.TryBuildBlueprint(new[] { new Cell(10, 10) }, blueprint,
-                MaterialTier.Pencil, InkColor.None, out string reason), Is.True, reason);
+                MaterialTier.Pencil, InkColor.None, out string reason, facingDegrees: 90), Is.True, reason);
             game.Structures[0].IsComplete = true;
             game.Structures[0].BuildRemaining = 0;
             return new RunReadModel(game).Structures[0];
@@ -321,14 +321,14 @@ namespace PaperDefense.Tests
                 new WeaponMountSelection(0, "weapon.gun"), new WeaponMountSelection(1, "weapon.gun"),
                 new WeaponMountSelection(2, "weapon.gun") }, content: balance.ResolveContent());
 
-        static GameSession BuildPlayerSession(TowerBlueprint blueprint, GameBalance balance)
+        static GameSession BuildPlayerSession(TowerBlueprint blueprint, GameBalance balance, float? facing = null)
         {
             var buildBalance = balance.CreateSnapshot();
             buildBalance.StartingInk = 10000;
             var game = new GameSession(buildBalance, starterDefenses: false);
             for (int y = 2; y < buildBalance.Height - 2; y++)
                 for (int x = 2; x < buildBalance.Width - 2; x++)
-                    if (game.TryBuildBlueprint(new[] { new Cell(x, y) }, blueprint, MaterialTier.Pencil, InkColor.None, out _))
+                    if (game.TryBuildBlueprint(new[] { new Cell(x, y) }, blueprint, MaterialTier.Pencil, InkColor.None, out _, facing))
                     {
                         game.Structures[0].IsComplete = true;
                         game.Structures[0].BuildRemaining = 0;
@@ -338,96 +338,73 @@ namespace PaperDefense.Tests
             return null;
         }
 
-        // Invert the emitted quad's UV mapping using hand-measured pixels from the 211 x 296 gun canvas.
-        // This deliberately does not use Mount.Muzzle or Mount.Transform as the expected result.
-        static Vector2 GunPixelInWorld(Mesh mesh, int first, Vector2 sourcePixel)
+        static Vector2 NativeBarrelTip(Mesh mesh, Vector2 forward, int first = 0, int count = -1)
         {
-            Assert.That(NotebookSpriteCatalog.TryGet("weapon.gun", out var sprite), Is.True);
-            Rect atlas = sprite.rect;
-            var uv = new List<Vector2>(); mesh.GetUVs(1, uv);
-            Vector2 wantedUv = new Vector2((atlas.x + atlas.width * sourcePixel.x / 211f) / sprite.texture.width,
-                (atlas.y + atlas.height * sourcePixel.y / 296f) / sprite.texture.height);
-            float along = (wantedUv.x - uv[first].x) / (uv[first + 1].x - uv[first].x);
-            float across = (wantedUv.y - uv[first].y) / (uv[first + 3].y - uv[first].y);
-            var vertices = mesh.vertices;
-            return vertices[first] + (vertices[first + 1] - vertices[first]) * along
-                + (vertices[first + 3] - vertices[first]) * across;
+            var vertices = mesh.vertices; var colors = mesh.colors32;
+            Color32 ink = NightNotebookArt.Ink;
+            var side = new Vector2(forward.y, -forward.x);
+            float furthest = float.NegativeInfinity;
+            int end = count < 0 ? vertices.Length : first + count;
+            for (int i = first; i < end; i++)
+                if (colors[i].Equals(ink)) furthest = Mathf.Max(furthest, Vector2.Dot(vertices[i], forward));
+            Assert.That(float.IsNegativeInfinity(furthest), Is.False, "The standard barrel must have a visible structural outline.");
+            float low = float.PositiveInfinity, high = float.NegativeInfinity;
+            for (int i = first; i < end; i++)
+                if (colors[i].Equals(ink) && Mathf.Abs(Vector2.Dot(vertices[i], forward) - furthest) < .00001f)
+                { float across = Vector2.Dot(vertices[i], side); low = Mathf.Min(low, across); high = Mathf.Max(high, across); }
+            return forward * furthest + side * ((low + high) * .5f);
         }
 
-        // The standard pilot has its own authored barrel canvas; battery guns keep the whole frame above.
-        static Vector2 SplitGunBarrelPixelInWorld(Mesh mesh, Vector2 sourcePixel)
+        static NotebookVisualThemeAsset NeutralRecoilTheme()
         {
-            Assert.That(NotebookSpriteCatalog.TryGet("part.gun.barrels", out var sprite), Is.True);
-            Rect atlas = sprite.rect;
-            var uv = new List<Vector2>(); mesh.GetUVs(1, uv);
-            Vector2 low = new Vector2(atlas.xMin / sprite.texture.width, atlas.yMin / sprite.texture.height);
-            Vector2 high = new Vector2(atlas.xMax / sprite.texture.width, atlas.yMax / sprite.texture.height);
-            var corners = new[] { low, new Vector2(high.x, low.y), high, new Vector2(low.x, high.y) };
-            int barrel = -1;
-            for (int first = 0; first + 3 < uv.Count; first += 4)
-            {
-                bool matches = true;
-                for (int corner = 0; corner < 4; corner++)
-                    if (Vector2.Distance(uv[first + corner], corners[corner]) > .000001f) matches = false;
-                if (!matches) continue;
-                Assert.That(barrel, Is.EqualTo(-1), "A single gun must draw exactly one barrel fragment.");
-                barrel = first;
-            }
-            Assert.That(barrel, Is.GreaterThanOrEqualTo(0), "The split barrel atlas quad was not emitted.");
-            Vector2 wantedUv = new Vector2((atlas.x + atlas.width * sourcePixel.x / 522f) / sprite.texture.width,
-                (atlas.y + atlas.height * sourcePixel.y / 554f) / sprite.texture.height);
-            float along = (wantedUv.x - uv[barrel].x) / (uv[barrel + 1].x - uv[barrel].x);
-            float across = (wantedUv.y - uv[barrel].y) / (uv[barrel + 3].y - uv[barrel].y);
-            var vertices = mesh.vertices;
-            return vertices[barrel] + (vertices[barrel + 1] - vertices[barrel]) * along
-                + (vertices[barrel + 3] - vertices[barrel]) * across;
+            var theme = RecoilTheme();
+            theme.Data.Palette = NotebookVisualThemeAsset.Default.Data.Palette;
+            theme.Data.Recoils[0].Muzzle = new Vector2(0, .35f);
+            return theme;
         }
 
         [TestCase(5f, 0f, .04f, -.08f)]
         [TestCase(0f, -5f, .12f, -.04f)]
-        public void ProductionGunMuzzleMatchesTheAuthoredPixelTipInTheAimedWorldMesh(float dx, float dy, float age, float recoil)
+        public void ProductionGunMuzzleMatchesTheStandardNativeBarrelTipIncludingAimAndRecoil(float dx, float dy, float age, float recoil)
         {
             var balance = PlayerBalance();
             var blueprint = new TowerBlueprint("production.gun-tip", "Production gun tip", "chassis.standard", "weapon.gun",
                 content: balance.ResolveContent());
-            Assert.That(NotebookMountLayout.Supports(blueprint), Is.True);
-            var game = BuildPlayerSession(blueprint, balance);
+            var game = BuildPlayerSession(blueprint, balance, facing: 90);
             var state = game.Structures[0];
             Vector2 origin = new Vector2(state.Cell.X + .5f, state.Cell.Y + .5f);
-            Vector2 socket = origin + NotebookMountLayout.Resolve(blueprint, 0).RotationCenter;
-            var aim = new Point2(socket.x + dx, socket.y + dy);
+            var local = DrawingTemplateCatalog.Pivot(blueprint, DrawingBindings.Mount0);
+            var aim = new Point2(origin.x + local.X + dx, origin.y + local.Y + dy);
             state.GetMountState(0).Aim = aim;
             var tower = new RunReadModel(game).Structures[0];
-            var theme = RecoilTheme();
+            var theme = NeutralRecoilTheme();
             var mesh = new Mesh();
             try
             {
-                var pen = new MeshPen(mesh) { WorldUnitsPerPixel = .01f };
-                DoodleGlyphs.StructureDynamic(pen, tower, 1, 1 + age, null, theme);
-                pen.Upload();
-                Assert.That(mesh.vertexCount, Is.EqualTo(48), "Eight weapon fragments plus four foundation layers share the dynamic batch.");
-                Vector2 restingTip = SplitGunBarrelPixelInWorld(mesh, new Vector2(444, 460));
+                var forward = new Vector2(dx, dy).normalized;
+                var pen = new MeshPen(mesh);
+                DoodleGlyphs.StructureDynamic(pen, tower, 1, 1 + age, null, theme); pen.Upload();
+                Assert.That(mesh.vertexCount, Is.GreaterThan(0));
+                AssertNativeStrokes(mesh);
+                Vector2 restingTip = NativeBarrelTip(mesh, forward);
                 var animation = Recoiling(tower);
                 pen.Clear();
-                DoodleGlyphs.StructureDynamic(pen, tower, 1, 1 + age, animation, theme);
-                pen.Upload();
-                Vector2 renderedTip = SplitGunBarrelPixelInWorld(mesh, new Vector2(444, 460));
+                DoodleGlyphs.StructureDynamic(pen, tower, 1, 1 + age, animation, theme); pen.Upload();
+                Vector2 renderedTip = NativeBarrelTip(mesh, forward);
                 Vector2 muzzle = NotebookTowerComposition.Muzzle(tower, 0, aim, 1 + age, animation, theme);
                 Assert.That(Vector2.Distance(muzzle, renderedTip), Is.LessThan(.00001f),
-                    "Shot effects must start at authored barrel pixel (444,460), including aim and recoil.");
-                Vector2 expectedRecoil = new Vector2(dx, dy).normalized * recoil;
-                Assert.That(Vector2.Distance(renderedTip - restingTip, expectedRecoil), Is.LessThan(.00001f));
+                    "Effects must begin at the actual native barrel endpoint after aiming and recoil.");
+                Assert.That(Vector2.Distance(renderedTip - restingTip, forward * recoil), Is.LessThan(.00001f));
             }
             finally { Object.DestroyImmediate(mesh); Object.DestroyImmediate(theme); }
         }
 
         [Test]
-        public void ProductionBatteryDrawOrderKeepsRecoilAttachedToSlotsOneZeroTwo()
+        public void ProductionBatteryKeepsIndependentRecoilAttachedToAllThreeLogicalSlots()
         {
             var blueprint = PlayerBattery(PlayerBalance());
-            Assert.That(NotebookMountLayout.Supports(blueprint), Is.True);
-            var theme = RecoilTheme();
-            var mesh = new Mesh();
+            var theme = NeutralRecoilTheme();
+            var restMesh = new Mesh(); var recoilingMesh = new Mesh();
             try
             {
                 var events = new SimulationEventBuffer();
@@ -436,36 +413,39 @@ namespace PaperDefense.Tests
                     events.Publish(1, SimulationEventKind.WeaponActionStarted, default, default, StructureKind.Gun,
                         sourceStructureId: 74, mountSlotIndex: slot, actionId: 100 + slot, simulationSeconds: 1 + slot * .05);
                 foreach (var item in events) animation.AddEvent(item);
-                var pen = new MeshPen(mesh) { WorldUnitsPerPixel = .01f };
                 var origin = new Vector2(5, 6);
-                NotebookTowerComposition.DrawMounts(pen, blueprint, origin, MaterialTier.Pencil, InkColor.None,
-                    default, true, animation, 74, 1.12, theme: theme);
-                pen.Upload();
-                Assert.That(mesh.vertexCount, Is.EqualTo(12));
-                Assert.That(NotebookSpriteCatalog.TryGetBounds("chassis.battery", out Rect chassis), Is.True);
-                var roof = new[] { new Vector2(.5f, .835f), new Vector2(.3f, .755f), new Vector2(.7f, .755f) };
-                var slots = new[] { 1, 0, 2 };
-                var distances = new[] { -.065f, -.04f, -.09f };
-                Vector2 authorForward = new Vector2(163 - 111.83f, 267 - 23.68f).normalized;
-                for (int order = 0; order < 3; order++)
+                var restPen = new MeshPen(restMesh);
+                var movedPen = new MeshPen(recoilingMesh);
+                NotebookTowerComposition.DrawMounts(restPen, blueprint, origin, MaterialTier.Pencil, InkColor.None,
+                    default, false, null, 74, 1.12, theme: theme); restPen.Upload();
+                NotebookTowerComposition.DrawMounts(movedPen, blueprint, origin, MaterialTier.Pencil, InkColor.None,
+                    default, false, animation, 74, 1.12, theme: theme); movedPen.Upload();
+                Assert.That(blueprint.WeaponMounts.Select(mount => mount.SlotIndex), Is.EqualTo(new[] { 0, 1, 2 }));
+                Assert.That(recoilingMesh.vertexCount, Is.EqualTo(restMesh.vertexCount));
+                Assert.That(restMesh.vertexCount, Is.GreaterThan(0));
+                Assert.That(restMesh.vertexCount % 3, Is.Zero);
+                int perMount = restMesh.vertexCount / 3;
+                var still = restMesh.vertices; var moved = recoilingMesh.vertices;
+                float[] distances = { -.04f, -.065f, -.09f };
+                for (int slot = 0; slot < 3; slot++)
                 {
-                    Assert.That(NotebookMountLayout.Resolve(blueprint, slots[order]).DrawOrder, Is.EqualTo(order));
-                    Vector2 expected = origin + chassis.min + Vector2.Scale(chassis.size, roof[order])
-                        + authorForward * distances[order];
-                    Vector2 rendered = GunPixelInWorld(mesh, order * 4, new Vector2(111.83f, 23.68f));
-                    Assert.That(Vector2.Distance(rendered, expected), Is.LessThan(.00001f),
-                        "Draw order " + order + " must retain recoil from slot " + slots[order]);
+                    var pivot = DrawingTemplateCatalog.Pivot(blueprint, DrawingBindings.Mount(slot));
+                    var restTip = NativeBarrelTip(restMesh, Vector2.up, slot * perMount, perMount);
+                    Assert.That(Vector2.Distance(restTip, origin + new Vector2(pivot.X, pivot.Y + .35f)), Is.LessThan(.00001f));
+                    for (int vertex = slot * perMount; vertex < (slot + 1) * perMount; vertex++)
+                        Assert.That(Vector2.Distance(moved[vertex] - still[vertex], Vector2.up * distances[slot]), Is.LessThan(.00001f),
+                            "Each emitted vertex must retain recoil from logical slot " + slot);
                 }
+                AssertNativeStrokes(recoilingMesh);
             }
-            finally { Object.DestroyImmediate(mesh); Object.DestroyImmediate(theme); }
+            finally { Object.DestroyImmediate(restMesh); Object.DestroyImmediate(recoilingMesh); Object.DestroyImmediate(theme); }
         }
-
         [Test]
         public void ProductionBatterySaveLoadAndRenderingPreserveAllThreeCoreShotSlots()
         {
             var balance = PlayerBalance();
             var original = PlayerBattery(balance);
-            Assert.That(NotebookMountLayout.Supports(original), Is.True);
+            Assert.That(NotebookTowerComposition.TryGetBounds(original, out _), Is.True);
             var profile = new WorkshopProfile(balance.ResolveContent(), balance);
             profile.GrantGold(1000);
             Assert.That(profile.Unlock("chassis.battery", out string reason, balance), Is.True, reason);
@@ -488,7 +468,7 @@ namespace PaperDefense.Tests
                 loaded.Profile.ConfigureContent(balance.ResolveContent());
                 var restored = loaded.Profile.GetLoadoutBlueprints()[3].WithContent(balance.ResolveContent());
                 Assert.That(Saved(restored), Is.EqualTo(savedPage));
-                Assert.That(NotebookMountLayout.Supports(restored), Is.True);
+                Assert.That(NotebookTowerComposition.TryGetBounds(restored, out _), Is.True);
                 var graphic = root.GetComponent<WeaponAssemblyGraphic>();
                 graphic.rectTransform.sizeDelta = new Vector2(300, 200);
                 graphic.SetBlueprint(restored);

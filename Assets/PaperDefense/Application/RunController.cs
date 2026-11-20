@@ -10,7 +10,11 @@ namespace PaperDefense.Application
         public GameBalanceAsset balanceAsset;
         GameSession session;
         public IRunReadModel Session { get; private set; }
-        public bool Paused { get; private set; }
+        public bool TacticalPaused { get; private set; }
+        public bool MenuSuspended { get; private set; }
+        public bool ModalSuspended { get; private set; }
+        public bool CommandsSuspended => MenuSuspended || ModalSuspended;
+        public bool Paused => TacticalPaused || CommandsSuspended;
         public bool AutomaticSimulation { get; set; } = true;
         public int Speed { get; private set; } = 1;
         public bool InWorkshop {get;private set;}
@@ -64,7 +68,7 @@ namespace PaperDefense.Application
             persistence.Reset();workshopMode=true;
             profile=preparedProfile;Workshop=new WorkshopReadModel(profile);
             runLoadout=profile.GetLoadoutBlueprints();
-            Initialize(preparedSession);
+            Initialize(PrepareCampaignPreview(preparedSession));
             InWorkshop=true;WorkshopChanged?.Invoke();
         }
 
@@ -82,7 +86,7 @@ namespace PaperDefense.Application
             profile=loaded.Source==ProfileLoadSource.NewProfile ? freshProfile : loaded.Profile??freshProfile;
             Workshop=new WorkshopReadModel(profile);RefreshSaveInfo();
             runLoadout=profile.GetLoadoutBlueprints();
-            Initialize(preparedSession);
+            Initialize(PrepareCampaignPreview(preparedSession));
             InWorkshop=true;WorkshopChanged?.Invoke();
         }
 
@@ -107,9 +111,24 @@ namespace PaperDefense.Application
                     throw new InvalidOperationException(string.IsNullOrEmpty(reason) ? UserText.Message("run.reward.pending") : reason);
             }
             runRewards = null;
+            ResetMissionAttempt();
         }
 
-        GameBalance CreateWorkshopBalance() => CreateConfiguredBalance(true, legacyFixtureDefaults);
+        GameBalance CreateWorkshopBalance()
+        {
+            var baseline=CreateConfiguredBalance(true,legacyFixtureDefaults);
+            FreezeModernizationTechnology(baseline);
+            return CampaignEnabled?MissionBalanceFactory.Create(baseline,SelectedMission):baseline;
+        }
+        // Published profile candidates are accepted only after their atomic save succeeds.
+        // The session takes its own snapshot; a victory cannot alter technology mid-attempt.
+        public int UnlockedModernizationRank => profile?.MissionWins("notebook-1-page-3") > 0 ? 3 :
+            profile?.MissionWins("notebook-1-page-1") > 0 ? 2 : 1;
+        void FreezeModernizationTechnology(GameBalance balance)
+        {
+            if (balance.Mechanics.FieldModernization)
+                balance.Mechanics.MaximumModernizationRank = UnlockedModernizationRank;
+        }
         ComponentCatalog ConfiguredAssemblies() => balanceAsset?.dataPreset?.database?.assemblyCatalog?.CreateSnapshot();
         WorkshopProfile FreshProfile(GameBalance balance) => WorkshopProfile.CreateNew(ConfiguredAssemblies(), balance.Content, balance);
 
@@ -124,20 +143,24 @@ namespace PaperDefense.Application
 
         // Only the dedicated Validation assembly can attach a replay; Presentation cannot.
         internal void Initialize(GameSession replay)
+            => Initialize(replay, false);
+
+        void Initialize(GameSession replay, bool resuming, bool isolateObservers = false, bool workshopPreview = false)
         {
             session = replay ?? throw new ArgumentNullException(nameof(replay));
             contentSnapshot = session.Balance.ResolveContent();
-            InWorkshop=false;
+            InWorkshop=workshopPreview;
             if(profile==null){profile=new WorkshopProfile();Workshop=new WorkshopReadModel(profile);runLoadout=profile.GetLoadoutBlueprints();}
             if (profile.ConfigureContent(contentSnapshot)) persistence.ContentChanged();
-            depositedGold=0;
-            submittedRewardWaves=0;submittedVictoryBonus=false;
+            depositedGold=resuming ? replay.GoldEarned : 0;
+            submittedRewardWaves=resuming ? replay.CompletedWaves : 0;submittedVictoryBonus=false;
             Session = new RunReadModel(session);
             Workshop.Refresh(session.Balance);
             RefreshSaveInfo();
-            Paused = false; Speed = 1; clock.Reset();
-            lastEventSequence = 0; SkippedVisualEvents = 0;
-            SessionChanged?.Invoke(Session);
+            TacticalPaused = resuming; MenuSuspended = ModalSuspended = false; Speed = 1; clock.Reset();
+            lastEventSequence = resuming ? replay.EventBuffer.LatestSequence : 0; SkippedVisualEvents = 0;
+            if (isolateObservers) NotifyContinuationSessionChanged();
+            else SessionChanged?.Invoke(Session);
         }
 
         void Update()
@@ -148,7 +171,7 @@ namespace PaperDefense.Application
         /// <summary>A validation stand owns time explicitly; one press advances exactly one simulation tick.</summary>
         public int StepSimulation()
         {
-            if (session == null || InWorkshop) return 0;
+            if (session == null || InWorkshop || continuationTransition) return 0;
             clock.ClearDebt();
             session.Tick(FixedStepClock.Step);
             DrainEvents();
@@ -164,8 +187,8 @@ namespace PaperDefense.Application
         /// <summary>Same deterministic frame boundary used by Update and integration tests.</summary>
         public int AdvanceFrame(float realDelta, bool paused, int speed)
         {
-            if (session == null || InWorkshop) {clock.ClearDebt();return 0;}
-            int steps = clock.AdvanceFrame(realDelta, paused, speed);
+            if (session == null || InWorkshop || continuationTransition) {clock.ClearDebt();return 0;}
+            int steps = clock.AdvanceFrame(realDelta, paused || Paused, speed);
             for (int i = 0; i < steps; i++)
             {
                 session.Tick(FixedStepClock.Step);
@@ -189,14 +212,16 @@ namespace PaperDefense.Application
             }
         }
 
-        public void TogglePause() { Paused = !Paused; clock.ClearDebt(); }
-        public void ToggleSpeed() => Speed = Speed == 1 ? 2 : 1;
-        public void NextWave() { if (session != null && !InWorkshop) session.StartNextWave(); }
+        public void TogglePause() { if (CommandsSuspended) return; TacticalPaused = !TacticalPaused; clock.ClearDebt(); }
+        public void SetMenuSuspended(bool value) { MenuSuspended = value; clock.ClearDebt(); }
+        public void SetModalSuspended(bool value) { ModalSuspended = value; clock.ClearDebt(); }
+        public void ToggleSpeed() { if (!CommandsSuspended) Speed = Speed == 1 ? 2 : 1; }
+        public void NextWave() { if (session != null && !InWorkshop && !CommandsSuspended && !continuationTransition) session.StartNextWave(); }
         public void Restart() {if(workshopMode)OpenWorkshop();else Initialize(legacyFixtureDefaults);}
-        public bool Build(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier, out string reason)
+        public bool Build(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier, out string reason, float? facingDegrees = null)
         {
             if (!CanBuildTool(kind, out reason)) return false;
-            return session.TryBuild(cells,kind,tier,out reason);
+            return session.TryBuild(cells,kind,tier,out reason,facingDegrees);
         }
         public BuildQuote QuoteBuild(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier)
             => CanBuildTool(kind, out var reason) ? session.QuoteBuild(cells, kind, tier) : RejectedQuote(reason);
@@ -204,18 +229,36 @@ namespace PaperDefense.Application
         bool CanBuildTool(StructureKind kind, out string reason)
         {
             reason = "";
-            if (session == null || InWorkshop) { reason = UserText.Message("copy.e6a1f147d46938e5"); return false; }
+            if (session == null || InWorkshop || CommandsSuspended) { reason = UserText.Message("copy.e6a1f147d46938e5"); return false; }
             if (runRequiresSlots)
             { reason = UserText.Message("copy.48635af5e97f1a11"); return false; }
             if (workshopMode && !ConstructionToolRules.IsTool(kind))
             { reason = UserText.Message("copy.65fd0a869c823b56"); return false; }
+            if (workshopMode)
+            {
+                var family = kind switch {
+                    StructureKind.Spikes => AssemblyStructureFamily.Spikes,
+                    StructureKind.Beacon => AssemblyStructureFamily.Beacon,
+                    StructureKind.Prism => AssemblyStructureFamily.Prism,
+                    _ => AssemblyStructureFamily.None
+                };
+                if (family != AssemblyStructureFamily.None && !profile.GetStructureOffer(family).Owned)
+                { reason = UserText.Message("profile.structure.locked"); return false; }
+            }
             return true;
         }
 
         static BuildQuote RejectedQuote(string reason) => new BuildQuote { Cells = Array.Empty<Cell>(), Reason = reason };
-        public bool Erase(Cell cell, out int refund) {refund=0;return !InWorkshop&&session.TryErase(cell,out refund);}
-        public bool Upgrade(Cell cell, out string reason) {reason=UserText.Message("copy.e6a1f147d46938e5");return !InWorkshop&&session.TryUpgrade(cell,out reason);}
-        public bool SetPriority(Cell cell, TargetPriority priority) => !InWorkshop&&session.SetPriority(cell, priority);
+        public bool Erase(Cell cell, out int refund) {refund=0;return !InWorkshop&&!CommandsSuspended&&session!=null&&session.TryErase(cell,out refund);}
+        public bool Upgrade(Cell cell, out string reason) {reason=UserText.Message("copy.e6a1f147d46938e5");return !InWorkshop&&!CommandsSuspended&&session!=null&&session.TryUpgrade(cell,out reason);}
+        public bool SetPriority(Cell cell, TargetPriority priority) => !InWorkshop&&!CommandsSuspended&&session!=null&&session.SetPriority(cell, priority);
+        public ModernizationQuote QuoteModernization(int structureId, ModernizationDirection direction) => session?.QuoteModernization(structureId, direction);
+        public ModernizationQuote QuoteColorModernization(int structureId, InkColor color) => session?.QuoteColorModernization(structureId, color);
+        public bool Modernize(ModernizationQuote quote, out string reason)
+        {
+            reason = CommandsSuspended ? "Закройте меню или подтверждение." : "Бой недоступен.";
+            return session != null && !InWorkshop && !CommandsSuspended && session.TryModernize(quote, out reason);
+        }
         public void ChooseUpgrade(RunUpgrade upgrade) {if(!InWorkshop)session.ChooseUpgrade(upgrade);}
 
         bool Editing(out string reason){reason=InWorkshop?"":UserText.Message("copy.8873645dd56497ed");return InWorkshop;}
@@ -227,11 +270,14 @@ namespace PaperDefense.Application
             candidate=profile.CreateWorkingCopy();return true;
         }
         bool CommitCandidate(WorkshopProfile candidate,out string reason)
+            => CommitCandidate(candidate, out reason, true);
+
+        bool CommitCandidate(WorkshopProfile candidate, out string reason, bool notify)
         {
             reason="";
             if(!persistence.SaveCandidate(candidate,out reason)){RefreshSaveInfo();return false;}
             profile=candidate;Workshop=new WorkshopReadModel(profile,session.Balance);RefreshSaveInfo();
-            WorkshopChanged?.Invoke();return true;
+            if (notify) WorkshopChanged?.Invoke();return true;
         }
         void OnApplicationQuit()
         {
@@ -240,6 +286,7 @@ namespace PaperDefense.Application
         }
         void DepositGold()
         {
+            if(activeMission!=null&&session.RunId==activeMissionRunId){DepositMissionReward();return;}
             if (runRequiresSlots)
             {
                 int completed = session.CompletedWaves;
@@ -289,13 +336,25 @@ namespace PaperDefense.Application
         }
         public void OpenWorkshop()
         {
+            if (continuationTransition) return;
+            OpenWorkshopCore();
+        }
+
+        void OpenWorkshopCore()
+        {
             var preparedSession = new GameSession(CreateWorkshopBalance(),starterDefenses:false);
+            OpenWorkshopCore(preparedSession, false);
+        }
+
+        void OpenWorkshopCore(GameSession preparedSession, bool isolateObservers)
+        {
             if(session!=null)DepositGold();
             RunLoadout = null; runRequiresSlots = false;
             workshopMode=true;InWorkshop=true;
-            Initialize(preparedSession);
+            Initialize(preparedSession, false, isolateObservers, isolateObservers);
             InWorkshop=true;
-            WorkshopChanged?.Invoke();
+            if (isolateObservers) NotifyContinuationWorkshopChanged();
+            else WorkshopChanged?.Invoke();
         }
         public TowerPreview PreviewBlueprint(TowerBlueprint blueprint,MaterialTier material=MaterialTier.Pencil)
             =>new TowerPreview(blueprint,session.Balance,material);
@@ -310,18 +369,18 @@ namespace PaperDefense.Application
                 : session.QuoteEntry(cells, resolved, material, color);
         }
 
-        public bool BuildEntry(IReadOnlyList<Cell> cells, int slot, MaterialTier material, InkColor color, out string reason)
+        public bool BuildEntry(IReadOnlyList<Cell> cells, int slot, MaterialTier material, InkColor color, out string reason, float? facingDegrees = null)
         {
             if (!TryResolveBuildSlot(slot, material, out var entry, out var resolved, out reason)) return false;
             return entry.Kind == AlbumEntryKind.Legacy
-                ? session.TryBuildBlueprint(cells, entry.LegacyBlueprint, material, color, out reason)
-                : session.TryBuildEntry(cells, resolved, material, color, out reason, entry.Id);
+                ? session.TryBuildBlueprint(cells, entry.LegacyBlueprint, material, color, out reason, facingDegrees, entry.Id)
+                : session.TryBuildEntry(cells, resolved, material, color, out reason, entry.Id, facingDegrees);
         }
 
         bool TryResolveBuildSlot(int slot, MaterialTier material, out AlbumEntry entry, out ResolvedEntry resolved, out string reason)
         {
             entry = null; resolved = null; reason = UserText.Message("copy.e6a1f147d46938e5");
-            if (session == null || InWorkshop) return false;
+            if (session == null || InWorkshop || CommandsSuspended) return false;
             reason = UserText.Message("copy.48635af5e97f1a11");
             if (RunLoadout == null || slot < 0 || slot >= RunLoadout.Entries.Count) return false;
             entry = RunLoadout.Entries[slot];
@@ -343,23 +402,28 @@ namespace PaperDefense.Application
         public BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,int slot,MaterialTier material,InkColor color)
         {
             if (RunLoadout != null) return QuoteEntry(cells, slot, material, color);
-            if (session == null || InWorkshop) return RejectedQuote(UserText.Message("copy.e6a1f147d46938e5"));
+            if (session == null || InWorkshop || CommandsSuspended) return RejectedQuote(UserText.Message("copy.e6a1f147d46938e5"));
             if(runLoadout==null||slot<0||slot>=runLoadout.Count)return new BuildQuote{Cells=Array.Empty<Cell>(),Reason=UserText.Message("copy.48635af5e97f1a11")};
             return session.QuoteBlueprint(cells,runLoadout[slot],material,color);
         }
-        public bool BuildBlueprint(IReadOnlyList<Cell> cells,int slot,MaterialTier material,InkColor color,out string reason)
+        public bool BuildBlueprint(IReadOnlyList<Cell> cells,int slot,MaterialTier material,InkColor color,out string reason, float? facingDegrees = null)
         {
-            if (RunLoadout != null) return BuildEntry(cells, slot, material, color, out reason);
-            reason=UserText.Message("copy.e6a1f147d46938e5");if(session == null || InWorkshop)return false;
+            if (RunLoadout != null) return BuildEntry(cells, slot, material, color, out reason, facingDegrees);
+            reason=UserText.Message("copy.e6a1f147d46938e5");if(session == null || InWorkshop || CommandsSuspended)return false;
             if(runLoadout==null||slot<0||slot>=runLoadout.Count){reason=UserText.Message("copy.48635af5e97f1a11");return false;}
-            return session.TryBuildBlueprint(cells,runLoadout[slot],material,color,out reason);
+            return session.TryBuildBlueprint(cells,runLoadout[slot],material,color,out reason,facingDegrees);
         }
         public bool Paint(Cell cell,InkColor color,out string reason)
-        {reason=UserText.Message("copy.e6a1f147d46938e5");return !InWorkshop&&session.TryPaint(cell,color,out reason);}
+        {reason=UserText.Message("copy.e6a1f147d46938e5");return !InWorkshop&&!CommandsSuspended&&session!=null&&session.TryPaint(cell,color,out reason);}
         public bool Blotter(Cell cell,out string reason)
-        {reason=UserText.Message("copy.e6a1f147d46938e5");return !InWorkshop&&session.TryBlotter(cell,out reason);}
+        {reason=UserText.Message("copy.e6a1f147d46938e5");return !InWorkshop&&!CommandsSuspended&&session!=null&&session.TryBlotter(cell,out reason);}
         public bool ActivateWell(int index,out string reason)
-        {reason=UserText.Message("copy.e6a1f147d46938e5");return !InWorkshop&&session.TryActivateWell(index,out reason);}
+        {reason=UserText.Message("copy.e6a1f147d46938e5");return !InWorkshop&&!CommandsSuspended&&session!=null&&session.TryActivateWell(index,out reason);}
+        public bool ClaimInkFlask(Guid runId, int flaskId, InkColor color, out string reason)
+        {
+            reason = UserText.Message("copy.e6a1f147d46938e5");
+            return !InWorkshop && !CommandsSuspended && session != null && session.TryClaimInkFlask(runId, flaskId, color, out reason);
+        }
         public FootprintProbeComparison CompareMortarFootprints(TowerBlueprint blueprint,int mount,MortarFootprint first,MortarFootprint second,FootprintFormation formation)
             => MortarFootprintProbe.Compare(blueprint,mount,first,second,session.Balance,formation);
         public FootprintStudyReport CompareMortarForms(TowerBlueprint blueprint,int mount)

@@ -144,11 +144,13 @@ namespace PaperDefense.Tests
                     new GameBalanceAsset.WaveSettings { count = 1, spawnInterval = .005f, sides = 1, spitters = 1, hatched = 1 } };
                 var run = root.AddComponent<RunController>(); run.balanceAsset = asset; run.InitializeWorkshop(false);
                 Assert.That(run.StartRun(out string reason), Is.True, reason);
-                Assert.That(run.BuildBlueprint(new[] { new Cell(6, 6) }, 0, MaterialTier.Pencil, InkColor.None, out reason), Is.True, reason);
+                var gun = new Cell(run.Session.Balance.Width * 3 / 4, run.Session.Balance.Height / 2);
+                Assert.That(run.BuildBlueprint(new[] { gun }, 0, MaterialTier.Pencil, InkColor.None, out reason, facingDegrees: 180), Is.True, reason);
                 for (int wave = 1; wave <= 3; wave++)
                 {
                     run.NextWave();
-                    for (int frame = 0; frame < 12; frame++) run.AdvanceFrame(FixedStepClock.Step, false, 1);
+                    run.AdvanceFrame(FixedStepClock.Step, false, 1);
+                    for (int frame = 1; frame < 12; frame++) run.AdvanceFrame(FixedStepClock.Step, false, 1);
                     Assert.That(run.Session.WaveIndex, Is.EqualTo(wave));
                     Assert.That(run.Session.Kills, Is.EqualTo(wave));
                     Assert.That(run.Session.PendingUpgrade, Is.False);

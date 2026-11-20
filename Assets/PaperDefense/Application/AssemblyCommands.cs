@@ -7,24 +7,18 @@ using UnityEngine;
 namespace PaperDefense.Application
 {
     /// <summary>One candidate, one durable receipt and one publication after the existing persistence gate.</summary>
-    public sealed class AssemblyCommands
+    public sealed partial class AssemblyCommands
     {
         readonly RunController owner;
         readonly ComponentCatalog catalog;
         readonly AssemblyFitCatalog fits;
-        [Serializable] sealed class FitEnvelope { public AssemblyFitCatalogInput fits; }
 
         public AssemblyCommands(RunController owner, ComponentCatalog catalog = null, AssemblyFitCatalog fits = null)
         {
             this.owner = owner ?? throw new ArgumentNullException(nameof(owner));
             this.catalog = catalog ?? owner.ConfiguredAssemblyCatalog;
             if (fits != null) this.fits = fits;
-            else
-            {
-                var asset = Resources.Load<TextAsset>("Art/NotebookMounts");
-                var data = asset == null ? null : JsonUtility.FromJson<FitEnvelope>(asset.text);
-                this.fits = data?.fits == null ? null : new AssemblyFitCatalog(data.fits);
-            }
+            else this.fits = AssemblyFitResources.Load();
         }
 
         public AssemblyCommandResult PurchasePart(string partId, Guid operationId)
@@ -34,6 +28,15 @@ namespace PaperDefense.Application
             });
 
         public AssemblyCommandResult SaveEntry(AlbumEntry entry, Guid operationId) => Save(entry, operationId, false);
+        public AssemblyCommandResult PurchaseStructureFamily(AssemblyStructureFamily family, Guid operationId)
+            => Execute("PurchaseStructureFamily." + family, operationId, candidate => {
+                if (catalog == null || !catalog.Templates.Any(t => t.Snapshot.Recipe.Structure?.Family == family))
+                    return AssemblyCommandResult.Fail("profile.structure.unknown");
+                return candidate.TryPurchaseStructureFamily(family, out var code)
+                    ? AssemblyCommandResult.Ok(candidate.GetStructureOffer(family).RightId)
+                    : AssemblyCommandResult.Fail(code);
+            });
+
         public AssemblyCommandResult SaveEntryAsVariant(AlbumEntry entry, Guid operationId) => Save(entry, operationId, true);
         AssemblyCommandResult Save(AlbumEntry entry, Guid operationId, bool variant)
             => Execute(variant ? "SaveEntryAsVariant" : "SaveEntry", operationId, candidate => Save(candidate, entry, operationId, variant));
@@ -56,12 +59,12 @@ namespace PaperDefense.Application
         AssemblyCommandResult SaveLibrary(ComponentLibraryEntry entry, Guid operationId, bool variant)
             => Execute(variant ? "SaveLibraryEntryAsVariant" : "SaveLibraryEntry", operationId, candidate => {
                 if (entry == null) return AssemblyCommandResult.Fail("profile.library.missing");
-                var foundation = entry.Snapshot.Foundation ?? DefaultFoundation();
-                var weapon = entry.Snapshot.Weapon ?? DefaultWeapon();
-                var recipe = new AssemblyRecipe(new TowerRecipe(foundation, new[] { new WeaponMountRecipe(0, weapon) }));
-                var valid = Prepare(candidate, recipe, out _);
-                if (!valid.Success) return valid;
                 var parts = entry.Kind == ComponentLibraryKind.Foundation ? entry.Snapshot.Foundation.Parts : entry.Snapshot.Weapon.Parts;
+                if (catalog == null) return AssemblyCommandResult.Fail("assembly.catalog.missing");
+                foreach (var part in parts)
+                    if (!candidate.IsUnlocked(part.Id)) return AssemblyCommandResult.Fail("profile.part.locked", part.Id);
+                var issues = WorkshopComponentValidation.Validate(entry.Snapshot, catalog, owner.AssemblyBalance, fits);
+                if (issues.Count != 0) return new AssemblyCommandResult(false, issues[0].Code, diagnostics: issues);
                 var definitions = Definitions(parts);
                 var snapshot = entry.Kind == ComponentLibraryKind.Foundation
                     ? new ComponentRecipeSnapshot(entry.Snapshot.Foundation, catalog.BalanceRevision, definitions)
@@ -154,6 +157,7 @@ namespace PaperDefense.Application
             if (catalog == null) return AssemblyCommandResult.Fail("assembly.catalog.missing");
             var issues = catalog.ValidateRecipe(recipe);
             if (issues.Count != 0) return new AssemblyCommandResult(false, issues[0].Code, diagnostics: issues);
+            if (!candidate.OwnsStructureRecipe(recipe)) return AssemblyCommandResult.Fail("profile.structure.locked");
             foreach (var part in recipe.Parts)
                 if (!candidate.IsUnlocked(part.Id)) return AssemblyCommandResult.Fail("profile.part.locked", part.Id);
             var balance = owner.AssemblyBalance;
@@ -184,13 +188,11 @@ namespace PaperDefense.Application
             if (entry.Kind == AlbumEntryKind.Legacy)
                 return candidate.ValidateOwned(entry.LegacyBlueprint, out var reason, owner.AssemblyBalance)
                     ? AssemblyCommandResult.Ok(entry.Id) : AssemblyCommandResult.Fail("profile.entry.unavailable", entry.Id, reason);
+            if (!candidate.OwnsStructureRecipe(entry.Snapshot.Recipe)) return AssemblyCommandResult.Fail("profile.structure.locked");
             foreach (var part in entry.Snapshot.Recipe.Parts)
                 if (!candidate.IsUnlocked(part.Id)) return AssemblyCommandResult.Fail("profile.part.locked", part.Id);
             var resolved = TowerCatalog.ResolveEntry(entry, owner.AssemblyBalance);
             return resolved.Valid ? AssemblyCommandResult.Ok(entry.Id) : new AssemblyCommandResult(false, resolved.Diagnostics[0].Code, diagnostics: resolved.Diagnostics);
         }
-        static PartRef P(string id) => new PartRef(id, 1);
-        static FoundationRecipe DefaultFoundation() => new FoundationRecipe(P("frame.standard"), P("hull.standard"), P("armor.none"), P("feed.standard"), P("turn.standard"));
-        static WeaponRecipe DefaultWeapon() => new WeaponRecipe(P("core.gun"), P("head.gun"), P("sight.iron"), P("magazine.standard"), P("trigger.standard"));
     }
 }

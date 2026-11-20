@@ -46,7 +46,7 @@ namespace PaperDefense.Tests
                     DrawingTier = DrawingTier.Sketch });
             var frame = (TrialFrame)typeof(TrialFrame).GetConstructors(PrivateInstance)[0].Invoke(new object[] {
                 0f, enemies, Array.Empty<StructureState>(), Array.Empty<MortarProjectile>(),
-                Array.Empty<ShotEvent>(), null, null, null, 0L });
+                Array.Empty<ShotEvent>(), null, null, null, 0L, TrialModernizationConfiguration.Baseline });
             var report = new TrialReport { DurationSeconds = 10 };
             typeof(TrialReport).GetProperty(nameof(TrialReport.Frames)).SetValue(report, new[] { frame });
             return report;

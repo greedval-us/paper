@@ -85,7 +85,7 @@ namespace PaperDefense.Tests
                 fixture.Run.NextWave();
                 var session = (GameSession)typeof(RunController).GetField("session", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(fixture.Run);
                 typeof(GameSession).GetMethod("DamageObjective", BindingFlags.Instance | BindingFlags.NonPublic)
-                    .Invoke(session, new object[] { -1, 100000f });
+                    .Invoke(session, new object[] { -1, 100000f, null });
                 fixture.Run.AdvanceFrame(1f / 30, false, 1);
                 Assert.That(fixture.Run.Session.Phase, Is.EqualTo(RunPhase.Defeat));
                 AssertReward(fixture, 40, 50, runId, 5, false);

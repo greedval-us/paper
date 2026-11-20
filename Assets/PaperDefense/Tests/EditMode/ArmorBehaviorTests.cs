@@ -11,7 +11,9 @@ namespace PaperDefense.Tests
         {
             var rules=GameBalance.CreateDefault();rules.Construction.ArmorDefense=.25f;rules.Effects.MaximumDefense=.6f;
             var page=Page().WithReinforcement(new ArmorDistribution(new[]{12,0,0,0}));
-            var tower=new StructureState{Cell=new Cell(10,10),Blueprint=page,PrimaryAim=new Point2(0,-100)};
+            var tower=new StructureState{Cell=new Cell(10,10),Blueprint=page};
+            tower.InitializePlacementFacing(90);
+            tower.PrimaryAim=new Point2(0,-100);
             Assert.That(DamageRules.StructureDamage(100,tower,rules,new Point2(10.5f,20)),Is.EqualTo(40).Within(.001));
             Assert.That(DamageRules.StructureDamage(100,tower,rules,new Point2(10.5f,0)),Is.EqualTo(100));
             Assert.That(DamageRules.StructureDamage(100,tower,rules,new Point2(10.5f,10.5f)),Is.EqualTo(100));

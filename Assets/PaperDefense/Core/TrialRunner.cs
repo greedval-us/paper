@@ -44,6 +44,15 @@ namespace PaperDefense.Core
             return RunEntryFixture(entry, balance.CreateSnapshot(), scenario, budget, seed, counterfire, color);
         }
 
+        public static TrialReport Run(AlbumEntry entry, GameBalance balance, TrialScenario scenario,
+            TrialModernizationConfiguration modernization, int budget = 400, int seed = 1337, bool counterfire = false)
+        {
+            if (modernization == null) throw new ArgumentNullException(nameof(modernization));
+            BalanceValidation.Validate(balance);
+            return RunEntryFixture(entry, balance.CreateSnapshot(), scenario, budget, seed, counterfire,
+                modernization.Ranks.Color, modernization: modernization);
+        }
+
         public static TrialComparison Compare(AlbumEntry first, AlbumEntry second, GameBalance balance,
             TrialScenario scenario, int budget = 400, int seed = 1337, bool counterfire = false, InkColor color = InkColor.None)
         {
@@ -54,18 +63,28 @@ namespace PaperDefense.Core
         }
 
         internal static TrialReport RunAssemblyFixture(AlbumEntry entry, GameBalance balance, TrialScenario scenario,
-            int budget, int seed, TrialScenarioDefinition fixture, float spawnYVariation)
-            => RunEntryFixture(entry, balance, scenario, budget, seed, false, InkColor.None, fixture, spawnYVariation);
+            int budget, int seed, TrialScenarioDefinition fixture, float spawnYVariation, TrialModernizationConfiguration modernization = null)
+            => RunEntryFixture(entry, balance, scenario, budget, seed, false, modernization?.Ranks.Color ?? InkColor.None,
+                fixture, spawnYVariation, modernization);
 
         static TrialReport RunEntryFixture(AlbumEntry entry, GameBalance balance, TrialScenario scenario,
-            int budget, int seed, bool counterfire, InkColor color, TrialScenarioDefinition fixture = null, float? spawnYVariation = null)
+            int budget, int seed, bool counterfire, InkColor color, TrialScenarioDefinition fixture = null, float? spawnYVariation = null,
+            TrialModernizationConfiguration modernization = null)
         {
             if (entry == null) throw new ArgumentNullException(nameof(entry));
+            if (modernization != null && entry.Kind != AlbumEntryKind.Tower)
+                throw new ArgumentException("Modernization trials require a composite tower.", nameof(entry));
+            if (modernization != null)
+            {
+                // This balance is already owned by the isolated run. Production rules and profiles stay untouched.
+                balance.Mechanics.FieldModernization = true;
+                balance.Mechanics.MaximumModernizationRank = modernization.MaximumRank;
+            }
             if (entry.Kind == AlbumEntryKind.Legacy)
                 return RunFixture(entry.LegacyBlueprint, balance, scenario, budget, seed, counterfire, color,
                     fixtureOverride: fixture, spawnYVariationOverride: spawnYVariation);
             if (entry.Kind != AlbumEntryKind.Tower) throw new ArgumentException("A firing lane requires a tower page.", nameof(entry));
-            return RunFixture(null, balance, scenario, budget, seed, counterfire, color, entry, fixture, spawnYVariation);
+            return RunFixture(null, balance, scenario, budget, seed, counterfire, color, entry, fixture, spawnYVariation, modernization);
         }
 
         // Historical overloads are explicitly the standard fixture, including its original tier effects.
@@ -78,7 +97,8 @@ namespace PaperDefense.Core
 
         static TrialReport RunFixture(TowerBlueprint blueprint, GameBalance balance, TrialScenario scenario,
             int budget, int seed, bool counterfire, InkColor color, AlbumEntry compositeEntry = null,
-            TrialScenarioDefinition fixtureOverride = null, float? spawnYVariationOverride = null)
+            TrialScenarioDefinition fixtureOverride = null, float? spawnYVariationOverride = null,
+            TrialModernizationConfiguration modernization = null)
         {
             ResolvedEntry resolvedEntry = null;
             if (compositeEntry != null)
@@ -92,28 +112,50 @@ namespace PaperDefense.Core
             if (!Enum.IsDefined(typeof(InkColor), color)) throw new ArgumentOutOfRangeException(nameof(color));
             if (budget < 0 || budget > TrialRules.MaximumBudget) throw new ArgumentOutOfRangeException(nameof(budget));
             var mechanics = MechanicsAvailability.Resolve(balance);
+            if (modernization != null && modernization.Ranks.Color != InkColor.None && !mechanics.ColorCartridges)
+                throw new ArgumentException("Color cartridges are disabled in this trial.", nameof(modernization));
             var effects = balance.Effects.ForEnemyDrawingTiers(mechanics.EnemyDrawingTiers);
             if (!mechanics.ColorCartridges) color = InkColor.None;
             var trial = balance.Trials;
             if (balance.Content != null && blueprint != null) blueprint = blueprint.WithContent(balance.Content);
             int unitCost = Math.Max(1, resolvedEntry?.Cost ?? TowerCatalog.Cost(blueprint, balance, MaterialTier.Pencil));
+            if (modernization != null)
+            {
+                // Validate even a zero-copy trial; budget cannot hide an illegal role/rank setup.
+                ModernizationRules.InitializeModernizationForTrial(new StructureState(resolvedEntry), modernization.Ranks,
+                    modernization.MaximumRank, balance);
+                unitCost = checked(unitCost + modernization.OrdinaryInvestment(unitCost));
+            }
             int copies = budget / unitCost;
             var towers = new List<StructureState>(copies);
+            var assembly = blueprint == null ? null : TowerCatalog.Resolve(blueprint, balance);
             for (int i = 0; i < copies; i++)
             {
                 float health = resolvedEntry?.Health ?? TowerCatalog.Health(blueprint, balance, MaterialTier.Pencil);
                 // Keep the small-budget battery near the lane and assign every extra copy a unique cell.
                 Cell cell = i < trial.CloseTowerCount ? new Cell(trial.CloseTowerX + i % trial.CloseTowerColumns * trial.CloseTowerSpacing, trial.CloseTowerY + i / trial.CloseTowerColumns * trial.CloseTowerSpacing) : new Cell(trial.OverflowTowerX + (i - trial.CloseTowerCount) % trial.OverflowTowerColumns, trial.OverflowTowerY + (i - trial.CloseTowerCount) / trial.OverflowTowerColumns);
-                var tower = resolvedEntry == null ? new StructureState { Kind = blueprint.FirstWeapon, Blueprint = blueprint }
+                var tower = resolvedEntry == null ? new StructureState { Kind = blueprint.FirstWeapon, Blueprint = blueprint, Assembly = assembly }
                     : new StructureState(resolvedEntry);
                 tower.Id = i + 1; tower.Cell = cell; tower.Color = color; tower.IsComplete = true; tower.BuildRemaining = 0;
                 tower.Health = health; tower.MaxHealth = health; tower.Tier = MaterialTier.Pencil;
-                if (resolvedEntry != null) tower.Aim = new Point2(cell.X + 1.5f, cell.Y + .5f);
+                if (modernization != null)
+                    ModernizationRules.InitializeModernizationForTrial(tower, modernization.Ranks, modernization.MaximumRank, balance);
+                if (tower.HasDirectionalWeapon)
+                {
+                    float approachX = scenario == TrialScenario.Blots ? trial.FirstBlotX + .5f : trial.SpawnX;
+                    float approachY = scenario == TrialScenario.Blots ? trial.FirstBlotY + .5f : trial.SpawnY + (spawnYVariationOverride ?? trial.SpawnYVariation) * .5f;
+                    tower.InitializePlacementFacing(FiringSector.Heading(approachX - cell.X - .5f, approachY - cell.Y - .5f));
+                }
                 towers.Add(tower);
             }
             var report = new TrialReport { BlueprintId = compositeEntry?.Id ?? blueprint.Id, Scenario = scenario, Budget = budget,
                 Seed = seed, Counterfire = counterfire, Color = color, Copies = copies, Cost = copies * unitCost,
-                DrawingQuality = compositeEntry != null || blueprint.Origin == DrawingOrigin.LegacyStandard ? 100 : blueprint.Assessment.Quality };
+                DrawingQuality = compositeEntry != null || blueprint.Origin == DrawingOrigin.LegacyStandard ? 100 : blueprint.Assessment.Quality,
+                Modernization = modernization ?? TrialModernizationConfiguration.Baseline };
+            if (modernization != null)
+                for (int rank = 1; rank <= modernization.Ranks.ColorRank; rank++)
+                    report.ModernizationColoredCost = checked(report.ModernizationColoredCost +
+                        copies * ModernizationRules.ColorCost(resolvedEntry.Cost, rank));
             report.Scope = UserText.Message("trial.scope.lane", trial.MaximumTicks * trial.StepSeconds,
                 trial.CounterfireDamage, trial.CounterfireInterval, trial.CounterfireRange);
             var random = new Random(seed);
@@ -122,6 +164,9 @@ namespace PaperDefense.Core
                 report.Scope = UserText.Message("trial.scope.blots_disabled");
             if (blotContext != null)
                 report.Scope = UserText.Message("trial.scope.blots", trial.MaximumTicks * trial.StepSeconds, trial.BlotCount);
+            if (modernization != null)
+                report.Scope += " Изолированная настройка боевых рангов; башни начинают уже готовыми. " +
+                    "Цветных чернил на настройку: " + report.ModernizationColoredCost + ". Профиль и технологии игрока не изменяются.";
             var weapons = new WeaponSystem(balance, blotContext); var stats = new RunStatistics();
             var events = new SimulationEventBuffer(MaximumFrameEvents); var shots = new List<ShotEvent>();
             if(blotContext!=null)blotContext.Events=events;
@@ -131,7 +176,7 @@ namespace PaperDefense.Core
             var frameImpacts = new List<SimulationEvent>();
             var frameEvents = new List<SimulationEvent>();
             long eventCursor=0,frameDroppedEvents=0;
-            frames.Add(new TrialFrame(0, enemies, towers, weapons.Projectiles, frameShots, blotContext?.Marks));
+            frames.Add(new TrialFrame(0, enemies, towers, weapons.Projectiles, frameShots, blotContext?.Marks, modernization: report.Modernization));
             TrialScenarioDefinition fixture = fixtureOverride ?? trial.For(scenario);
             int count = fixture.Count;
             float delta = trial.StepSeconds;
@@ -204,7 +249,7 @@ namespace PaperDefense.Core
                     (blotContext == null || blotContext.Marks.Count == 0);
                 if ((tick + 1) % TrialRules.RecordingStrideTicks == 0 || finished || tick == trial.MaximumTicks - 1)
                 {
-                    frames.Add(new TrialFrame(report.DurationSeconds, enemies, towers, weapons.Projectiles, frameShots, blotContext?.Marks, frameImpacts,frameEvents,frameDroppedEvents));
+                    frames.Add(new TrialFrame(report.DurationSeconds, enemies, towers, weapons.Projectiles, frameShots, blotContext?.Marks, frameImpacts,frameEvents,frameDroppedEvents, report.Modernization));
                     frameShots.Clear();
                     frameImpacts.Clear();
                     frameEvents.Clear();frameDroppedEvents=0;
@@ -221,7 +266,7 @@ namespace PaperDefense.Core
             return report;
         }
 
-        sealed class TrialBlotContext : IBlotRangeContext
+        sealed class TrialBlotContext : IBlotContext
         {
             readonly List<BlotState> marks = new List<BlotState>();
             internal IReadOnlyList<BlotState> Marks => marks;
@@ -251,10 +296,8 @@ namespace PaperDefense.Core
                 }
             }
 
-            public bool TryFindNearest(Point2 origin, float range, out Cell cell)
-                => BlotQueries.TryFindNearest(marks, origin, range, out cell);
-            public bool TryFindNearest(Point2 origin,float minimumRange,float maximumRange,out Cell cell)
-                =>BlotQueries.TryFindNearest(marks,origin,minimumRange,maximumRange,out cell);
+            public bool TryFindNearest(Point2 origin,float minimumRange,float maximumRange,FiringSector sector,out Cell cell)
+                =>BlotQueries.TryFindNearest(marks,origin,minimumRange,maximumRange,sector,out cell);
 
             public int Clear(Cell center, float radius)
             {
@@ -284,8 +327,10 @@ namespace PaperDefense.Core
         public InkColor Color;
         public int Budget, Seed, Cost, Copies, Leaks, SurvivingTowers, UnresolvedEnemies;
         public int BlotsCleared, UnresolvedBlots;
+        public int ModernizationColoredCost { get; internal set; }
         public bool Counterfire;
         public float Damage, IdleSeconds, DurationSeconds;
+        public TrialModernizationConfiguration Modernization { get; internal set; } = TrialModernizationConfiguration.Baseline;
         public IReadOnlyList<TrialFrame> Frames { get; internal set; } = Array.AsReadOnly(Array.Empty<TrialFrame>());
     }
 
@@ -302,12 +347,14 @@ namespace PaperDefense.Core
         /// <summary>Events since the previous snapshot, each retaining its own simulation timestamp.</summary>
         public IReadOnlyList<SimulationEvent> Events { get; }
         public long DroppedEventCount { get; }
+        public TrialModernizationConfiguration Modernization { get; }
 
         internal TrialFrame(float seconds, IReadOnlyList<EnemyState> enemies, IReadOnlyList<StructureState> towers,
             IReadOnlyList<MortarProjectile> projectiles, IReadOnlyList<ShotEvent> shots, IReadOnlyList<BlotState> blots = null, IReadOnlyList<SimulationEvent> impacts = null,
-            IReadOnlyList<SimulationEvent> events=null,long droppedEventCount=0)
+            IReadOnlyList<SimulationEvent> events=null,long droppedEventCount=0, TrialModernizationConfiguration modernization = null)
         {
             Seconds = seconds;
+            Modernization = modernization ?? TrialModernizationConfiguration.Baseline;
             var enemyValues = new EnemyView[enemies.Count];
             for (int i = 0; i < enemyValues.Length; i++) enemyValues[i] = new EnemyView(enemies[i]);
             var towerValues = new StructureView[towers.Count];

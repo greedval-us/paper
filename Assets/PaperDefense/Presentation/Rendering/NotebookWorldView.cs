@@ -30,6 +30,7 @@ namespace PaperDefense.Presentation
         }
         public double VisualSeconds => visualClock.Seconds;
         public NotebookAnimationState AnimationState => animation;
+        public BattleReadability Readability { get; } = new BattleReadability();
         bool showRanges;
         bool compactBaseMarker;
         public bool CompactBaseMarker
@@ -66,6 +67,7 @@ namespace PaperDefense.Presentation
         readonly NotebookAnimationState animation = new NotebookAnimationState();
         readonly HashSet<Cell> wallCells = new HashSet<Cell>();
         NotebookVisualThemeAsset Theme => VisualTheme != null ? VisualTheme : NotebookVisualThemeAsset.Default;
+        bool DarkSurface => PaperColor.HasValue && PaperColor.Value.grayscale < .3f;
         NotebookViewSettingsAsset Settings => ViewSettings != null ? ViewSettings : NotebookViewSettingsAsset.Default;
         float minorGridOpacity = 1, terrainStrokePixels = 1, towerMarkerPixels;
         StructureKind previewKind;
@@ -74,7 +76,10 @@ namespace PaperDefense.Presentation
         float previewRange = -1;
         TowerBlueprint previewBlueprint;
         RecipeSnapshot previewRecipe;
-        int paperWidth, paperHeight;
+        ResolvedEntry previewEntry;
+        Cell? inspectedSector;
+        float? previewFacing;
+        int paperWidth, paperHeight, paperHordeSides, paperHordeBands;
         int visualVersion = -1, topologyVersion = -1, castleHealthBand = -1;
         RunPhase renderedPhase;
         bool staticDirty = true;
@@ -90,6 +95,7 @@ namespace PaperDefense.Presentation
             EnsureMeshes();
             if (worldPen == null) return;
             session = newSession;
+            RefreshReadability();
             firingMarks.Clear();
             animation.Clear();
             visualClock.Reset(session?.Elapsed ?? 0);
@@ -97,6 +103,9 @@ namespace PaperDefense.Presentation
             previewCells.Clear();
             previewBlueprint = null;
             previewRecipe = null;
+            previewEntry = null;
+            inspectedSector = null;
+            previewFacing = null;
             staticDirty = true;
             visualVersion = topologyVersion = castleHealthBand = -1;
             if (session != null)
@@ -119,11 +128,12 @@ namespace PaperDefense.Presentation
         }
 
         public void SetPreview(IReadOnlyList<Cell> cells, StructureKind kind, MaterialTier tier, bool valid, float range = -1,
-            TowerBlueprint blueprint = null, RecipeSnapshot recipe = null)
+            TowerBlueprint blueprint = null, RecipeSnapshot recipe = null, ResolvedEntry entry = null, float? facingDegrees = null)
         {
             int count = cells == null ? 0 : cells.Count;
             bool changed = previewKind != kind || previewTier != tier || previewValid != valid || previewCells.Count != count || previewRange != range
-                || !ReferenceEquals(previewBlueprint, blueprint) || !ReferenceEquals(previewRecipe, recipe);
+                || !ReferenceEquals(previewBlueprint, blueprint) || !ReferenceEquals(previewRecipe, recipe) || !ReferenceEquals(previewEntry, entry)
+                || previewFacing != facingDegrees;
             for (int i = 0; !changed && i < count; i++) changed = previewCells[i] != cells[i];
             if (!changed) return;
             previewCells.Clear();
@@ -135,6 +145,8 @@ namespace PaperDefense.Presentation
             previewRange = range;
             previewBlueprint = blueprint;
             previewRecipe = recipe;
+            previewEntry = entry;
+            previewFacing = facingDegrees;
             if (previewPen != null && session != null) DrawPreview();
         }
 
@@ -142,7 +154,15 @@ namespace PaperDefense.Presentation
         {
             if (previewCells.Count == 0) return;
             previewCells.Clear();
-            if (previewPen != null) { previewPen.Clear(); previewPen.Upload(); PreviewGeometryRefreshCount++; }
+            if (previewPen != null && session != null) DrawPreview();
+        }
+
+        public void SetInspectedSector(Cell? cell)
+        {
+            if (inspectedSector == cell) return;
+            if (showRanges) staticDirty = true;
+            inspectedSector = cell;
+            if (session != null && previewPen != null) DrawPreview();
         }
 
         /// <summary>Launches are represented by live projectiles; explosions only by impact events.</summary>
@@ -168,7 +188,6 @@ namespace PaperDefense.Presentation
                 return;
             }
             inkMaterial = new Material(shader) { name = "Notebook ink (runtime)" };
-            inkMaterial.mainTexture = NotebookSpriteCatalog.Texture;
             paperPen = CreatePen("Graph paper", 0, 12000);
             structurePen = CreatePen("Castle, walls and weapon bases", 5, 30000);
             worldPen = CreatePen("Swarm, aiming weapons and construction", 10, 180000);
@@ -200,12 +219,12 @@ namespace PaperDefense.Presentation
             animation.Prune(visualClock.Seconds, Theme);
             long started = System.Diagnostics.Stopwatch.GetTimestamp();
             bool scaleChanged = UpdateViewScale();
-            if (scaleChanged) DrawPaper();
-            if (scaleChanged)
-            {
-                if (previewCells.Count > 0) DrawPreview();
-                staticDirty = true;
-            }
+            if (scaleChanged || paperHordeSides != HordeWaveForecast.DisplayedSides(session)
+                || paperHordeBands != HordeWaveForecast.DisplayedBands(session)) DrawPaper();
+            if (scaleChanged) staticDirty = true;
+            if ((previewCells.Count > 0 && (scaleChanged || renderedPhase != session.Phase)) ||
+                (scaleChanged && inspectedSector.HasValue) ||
+                (inspectedSector.HasValue && visualVersion != session.StructureVisualVersion)) DrawPreview();
             int band = CastleHealthBand();
             if (staticDirty || visualVersion != session.StructureVisualVersion || topologyVersion != session.TopologyVersion
                 || castleHealthBand != band || renderedPhase != session.Phase) DrawStructures();
@@ -244,13 +263,14 @@ namespace PaperDefense.Presentation
             MeshPen p = paperPen;
             p.Clear();
             p.MinimumStrokePixels = 0;
-            Color navy = NotebookPalette.Navy;
+            bool night = DarkSurface;
+            Color navy = night ? NightNotebookArt.Ink : NotebookPalette.Navy;
             const float surround = 96;
             // Wide windows reveal the scenery outside the playable sheet. Keep that space
             // illustrated without adding blocked cells or changing the simulation map.
             p.Rect(-surround, -surround, paperWidth + surround * 2, paperHeight + surround * 2,
                 PaperColor ?? NotebookPalette.Paper);
-            Color extensionGrid = new Color(.35f, .54f, .68f, .10f);
+            Color extensionGrid = night ? MeshPen.Alpha(NightNotebookArt.Grid, .075f) : new Color(.35f, .54f, .68f, .10f);
             float extensionStroke = p.WorldUnitsPerPixel > 0 ? .7f * p.WorldUnitsPerPixel : .1f;
             for (int x = -90; x <= paperWidth + 90; x += 5)
                 p.Line(new Vector2(x, -surround), new Vector2(x, paperHeight + surround), extensionStroke, extensionGrid);
@@ -258,13 +278,13 @@ namespace PaperDefense.Presentation
                 p.Line(new Vector2(-surround, y), new Vector2(paperWidth + surround, y), extensionStroke, extensionGrid);
             DrawSurroundingScenery(p);
             // The subtle page shadow and warm edge make the world feel like an actual sheet.
-            p.Rect(-2.5f, -2.5f, paperWidth + 5, paperHeight + 5, PaperColor.HasValue ? new Color32(220, 229, 242, 255) : new Color(.89f, .88f, .82f));
+            p.Rect(-2.5f, -2.5f, paperWidth + 5, paperHeight + 5, night ? new Color32(12, 27, 23, 255) : PaperColor.HasValue ? new Color32(220, 229, 242, 255) : new Color(.89f, .88f, .82f));
             p.Rect(-1.75f, -1.75f, paperWidth + 3.5f, paperHeight + 3.5f, PaperColor ?? NotebookPalette.Paper);
-            p.Rect(-1.7f, -1.7f, .22f, paperHeight + 3.4f, PaperColor.HasValue ? Color.white : new Color(.95f, .92f, .84f));
+            p.Rect(-1.7f, -1.7f, .22f, paperHeight + 3.4f, night ? MeshPen.Alpha(NightNotebookArt.Grid, .18f) : PaperColor.HasValue ? Color.white : new Color(.95f, .92f, .84f));
             // A single pale stroke stays quiet at the full-map overview. Overlapping
             // subpixel cores make alternating dark bands as the grid crosses pixels.
-            Color minor = new Color(.35f, .54f, .68f, .07f * minorGridOpacity);
-            Color major = new Color(.30f, .48f, .65f, .18f);
+            Color minor = night ? MeshPen.Alpha(NightNotebookArt.Grid, .075f * minorGridOpacity) : new Color(.35f, .54f, .68f, .07f * minorGridOpacity);
+            Color major = night ? MeshPen.Alpha(NightNotebookArt.Grid, .17f) : new Color(.30f, .48f, .65f, .18f);
             float majorWidth = p.WorldUnitsPerPixel > 0 ? .9f * p.WorldUnitsPerPixel : .14f;
             float minorWidth = p.WorldUnitsPerPixel > 0 ? .65f * p.WorldUnitsPerPixel : .12f;
             for (int x = -1; x <= paperWidth + 1; x++)
@@ -283,7 +303,7 @@ namespace PaperDefense.Presentation
             {
                 // Fine notebook ruling is decorative paper texture. The full-unit
                 // placement grid and every simulation coordinate retain their scale.
-                var fine = new Color(.35f, .54f, .68f, .105f * minorGridOpacity);
+                var fine = night ? MeshPen.Alpha(NightNotebookArt.Grid, .05f * minorGridOpacity) : new Color(.35f, .54f, .68f, .105f * minorGridOpacity);
                 for (int column = -3; column <= (paperWidth + 1) * 3; column++)
                     if (column % 3 != 0)
                         p.Line(new Vector2(column / 3f, -1.5f), new Vector2(column / 3f, paperHeight + 1.5f), minorWidth, fine);
@@ -299,7 +319,7 @@ namespace PaperDefense.Presentation
                 p.Line(new Vector2(x, y), new Vector2(x + .045f + MeshPen.Hash(i) * .08f, y + .018f),
                        .015f, new Color(.55f, .47f, .32f, .045f * minorGridOpacity));
             }
-            Color margin = new Color(.77f, .32f, .35f, .38f);
+            Color margin = night ? MeshPen.Alpha(NightNotebookArt.Accent, .42f) : new Color(.77f, .32f, .35f, .38f);
             p.Stroke(new Vector2(4, -1.4f), new Vector2(4, paperHeight + 1.4f), .045f, margin, 71, .025f);
             p.Stroke(new Vector2(4.18f, -1.4f), new Vector2(4.18f, paperHeight + 1.4f), .02f, MeshPen.Alpha(margin, .22f), 72);
             // Double-line map boundary reads as an ink frame drawn on graph paper.
@@ -308,7 +328,7 @@ namespace PaperDefense.Presentation
             p.Box(new Vector2(paperWidth * .5f + .08f, paperHeight * .5f - .08f), new Vector2(paperWidth - .26f, paperHeight - .26f),
                   MeshPen.Alpha(NotebookPalette.Paper, 0), MeshPen.Alpha(navy, .14f), .025f, 988);
 
-            Color sketch = new Color(.35f, .45f, .48f, .43f);
+            Color sketch = night ? MeshPen.Alpha(NightNotebookArt.Pencil, .30f) : new Color(.35f, .45f, .48f, .43f);
             for (int i = 0; session.Battlefield == null && i < 46; i++)
             {
                 float x, y;
@@ -345,29 +365,38 @@ namespace PaperDefense.Presentation
             p.MinimumStrokePixels = terrainStrokePixels;
             // The immutable battlefield owns every playable terrain prop. Camera-relative
             // decoration would slide over buildable cells when panning or zooming.
-            NotebookBattlefieldRenderer.Draw(p, session.Battlefield, Theme);
+            paperHordeSides = HordeWaveForecast.DisplayedSides(session);
+            paperHordeBands = HordeWaveForecast.DisplayedBands(session);
+            NotebookBattlefieldRenderer.Draw(p, session.Battlefield, Theme, night, paperHordeSides, paperHordeBands);
             p.Upload();
         }
 
         void DrawSurroundingScenery(MeshPen pen)
         {
             if (session.Battlefield == null) return;
+            var style = session.Battlefield.Style;
+            bool cliffs = style == CampaignTerrainStyle.Crossroads || style == CampaignTerrainStyle.StoneGate ||
+                style == CampaignTerrainStyle.Fold || style == CampaignTerrainStyle.NorthPass;
+            bool orchard = style == CampaignTerrainStyle.FourFields || style == CampaignTerrainStyle.Redoubt;
             for (int side = 0; side < 2; side++)
             {
                 float sign = side == 0 ? -1 : 1;
                 float edge = side == 0 ? -8 : paperWidth + 8;
-                for (int band = 0; band < 4; band++)
-                for (int row = 0; row < 8; row++)
+                // Scenery frames the playable sheet; it must not compete with enemies and towers.
+                for (int band = 0; band < 2; band++)
+                for (int row = 0; row < 5; row++)
                 {
-                    int seed = side * 313 + band * 47 + row;
+                    int seed = side * 313 + band * 47 + row + (int)style * 143;
                     var at = new Vector2(edge + sign * (band * 14 + MeshPen.Hash(seed + 17) * 5),
-                        -3 + row * 10 + MeshPen.Hash(seed + 99) * 6);
+                        -3 + row * 16 + MeshPen.Hash(seed + 99) * 6);
                     bool mountain = band > 0 && row % 3 == 0;
-                    DoodleGlyphs.DrawResource(pen, mountain ? "terrain.mountain" : "terrain.pine", at,
-                        mountain ? 14 : 7 + MeshPen.Hash(seed + 11) * 5, opacity: .72f, theme: Theme);
+                    string id = mountain ? (cliffs ? "terrain.ridge" : "terrain.mountain") :
+                        cliffs && row % 2 == 0 ? "terrain.rock" : orchard ? "terrain.oak" : "terrain.pine";
+                    DoodleGlyphs.DrawResource(pen, id, at,
+                        mountain ? 7 : 3.5f + MeshPen.Hash(seed + 11) * 2.5f, opacity: .20f, theme: Theme);
                     if (!mountain && row % 2 == 0)
                         DoodleGlyphs.DrawResource(pen, "terrain.rock", at + new Vector2(sign * 4, -3), 5,
-                            opacity: .55f, theme: Theme);
+                            opacity: .16f, theme: Theme);
                 }
             }
         }
@@ -376,38 +405,112 @@ namespace PaperDefense.Presentation
         {
             for (int i = 0; i < session.Structures.Count; i++)
             {
-                StructureView structure = session.Structures[i];
-                var origin = new Vector2(structure.Cell.X + .5f, structure.Cell.Y + .5f);
-                if (structure.ResolvedEntry != null)
+                var structure = session.Structures[i];
+                if (structure.Cell == inspectedSector) continue;
+                DrawCoverage(p, structure, RangeInk(structure.Tier), false);
+            }
+        }
+
+        Color RangeInk(MaterialTier tier) => DarkSurface ? NightNotebookArt.Pencil : DoodleGlyphs.TierColor(tier);
+
+        void DrawCoverage(MeshPen p, StructureView tower, Color ink, bool highlighted)
+        {
+            DrawCoverage(p, tower.Cell, tower.Kind, tower.ModernizationEntry ?? tower.ResolvedEntry, tower.Blueprint,
+                tower.FacingDegrees, ink, highlighted, tower.ContentId);
+        }
+
+        void DrawCoverage(MeshPen p, Cell cell, StructureKind kind, ResolvedEntry entry, TowerBlueprint blueprint,
+            float facing, Color ink, bool highlighted, string directId = null, float fallbackRange = -1)
+        {
+            Vector2 origin = new Vector2(cell.X + .5f, cell.Y + .5f);
+            var balance = session.Balance;
+            if (entry != null)
+            {
+                foreach (var weapon in entry.Weapons)
                 {
-                    foreach (var weapon in structure.ResolvedEntry.Weapons)
-                    {
-                        if (weapon.Range > 1) p.Ring(origin, weapon.Range, .035f,
-                            MeshPen.Alpha(DoodleGlyphs.TierColor(structure.Tier), .16f), 96, 1, structure.Id + weapon.SlotIndex, true);
-                        if (weapon.MinimumRange > 0) p.Ring(origin, weapon.MinimumRange, .055f,
-                            MeshPen.Alpha(NotebookPalette.Red, .35f), 72, 1, structure.Id + weapon.SlotIndex, true);
-                    }
-                    float radius = structure.ResolvedEntry.Support?.Radius ?? 0;
-                    if (radius > 0) p.Ring(origin, radius, .035f,
-                        MeshPen.Alpha(DoodleGlyphs.TierColor(structure.Tier), .16f), 96, 1, structure.Id, true);
-                    continue;
+                    if (weapon.Attack == AttackKind.Radial) DrawSupportRadius(p, origin, weapon.Range, ink, highlighted);
+                    else DrawWeaponSector(p, origin, facing, weapon.FiringArcDegrees, weapon.MinimumRange, weapon.Range, ink, highlighted);
                 }
-                if (structure.Blueprint == null)
+                DrawSupportRadius(p, origin, entry.Support?.Radius ?? 0, ink, highlighted);
+                return;
+            }
+            if (blueprint != null && blueprint.WeaponMounts.Count > 0)
+            {
+                foreach (var mount in blueprint.WeaponMounts)
                 {
-                    float range = session.Balance.WeaponRange(null, structure.Kind);
-                    if (range > 1) p.Ring(origin, range, .035f,
-                        MeshPen.Alpha(DoodleGlyphs.TierColor(structure.Tier), .16f), 96, 1, structure.Id, true);
-                    continue;
+                    var definition = balance.Content.GetWeapon(mount.WeaponId);
+                    float range = balance.WeaponRange(blueprint, mount.WeaponId, mount.SlotIndex);
+                    if (definition.Attack == AttackKind.Radial)
+                        DrawSupportRadius(p, origin, range, ink, highlighted);
+                    else
+                        DrawWeaponSector(p, origin, facing, definition.FiringArcDegrees, definition.MinimumRange, range, ink, highlighted);
                 }
-                foreach (var mount in structure.Blueprint.WeaponMounts)
+                return;
+            }
+            if (!balance.HasStructure(kind)) return;
+            if (ConstructionToolRules.IsTool(kind))
+            {
+                var spec = balance.Structure(kind);
+                float radius = kind == StructureKind.RepairPost ? spec.Range : kind == StructureKind.TarPit ? Mathf.Max(.5f, spec.Radius) : 0;
+                if (kind == StructureKind.Spikes && balance.Content.TryGetWeapon(LegacyContentIds.Weapon(kind), out var trap))
+                    radius = Mathf.Max(trap.MinimumRadialRange, trap.Stats.Radius);
+                DrawSupportRadius(p, origin, radius, ink, highlighted);
+                return;
+            }
+            string weaponId = directId ?? LegacyContentIds.Weapon(kind);
+            if (balance.Content.TryGetWeapon(weaponId, out var direct))
+                DrawWeaponSector(p, origin, facing, direct.FiringArcDegrees, direct.MinimumRange,
+                    fallbackRange >= 0 ? fallbackRange : balance.WeaponRange(null, weaponId), ink, highlighted);
+            else
+                DrawWeaponSector(p, origin, facing, WeaponDefinition.DefaultFiringArc(LegacyContentCatalog.Attack(kind), kind == StructureKind.Stapler),
+                    0, fallbackRange >= 0 ? fallbackRange : balance.Structure(kind).Range, ink, highlighted);
+        }
+
+        static void DrawSupportRadius(MeshPen p, Vector2 origin, float radius, Color ink, bool highlighted)
+        {
+            if (radius > 0) p.Ring(origin, radius, .04f, MeshPen.Alpha(ink, highlighted ? .72f : .27f), 96, dashed: true);
+        }
+
+        // One annular sector per mount. The hollow band follows the real minimum range of a mortar.
+        internal static void DrawWeaponSector(MeshPen p, Vector2 origin, float facing, float arc, float minimum, float outer,
+            Color ink, bool highlighted)
+        {
+            if (outer <= 0 || minimum >= outer) return;
+            int segments = Mathf.CeilToInt(arc / 4);
+            float start = (facing - arc * .5f) * Mathf.Deg2Rad, step = arc * Mathf.Deg2Rad / segments;
+            var direction = new Vector2(Mathf.Cos(start), Mathf.Sin(start));
+            var firstInner = origin + direction * minimum;
+            var firstOuter = origin + direction * outer;
+            var previousInner = firstInner; var previousOuter = firstOuter;
+            var edge = MeshPen.Alpha(ink, highlighted ? .86f : .38f);
+            var deadZone = MeshPen.Alpha(NotebookPalette.Red, highlighted ? .70f : .32f);
+            var fill = MeshPen.Alpha(ink, .075f);
+            float width = highlighted ? .055f : .035f;
+            p.Line(firstInner, firstOuter, width, edge);
+            for (int i = 1; i <= segments; i++)
+            {
+                float radians = start + step * i;
+                direction = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
+                Vector2 inner = origin + direction * minimum, end = origin + direction * outer;
+                if (highlighted)
                 {
-                    float range = session.Balance.WeaponRange(structure.Blueprint, mount.WeaponId, mount.SlotIndex);
-                    float minimum = session.Balance.WeaponMinimumRange(structure.Blueprint, mount.WeaponId, mount.SlotIndex);
-                    if (range > 1) p.Ring(origin, range, .035f,
-                        MeshPen.Alpha(DoodleGlyphs.TierColor(structure.Tier), .16f), 96, 1, structure.Id + mount.SlotIndex, true);
-                    if (minimum > 0) p.Ring(origin, minimum, .055f,
-                        MeshPen.Alpha(NotebookPalette.Red, .35f), 72, 1, structure.Id + mount.SlotIndex, true);
+                    if (minimum > 0) p.Quad(previousInner, previousOuter, end, inner, fill);
+                    else p.Triangle(origin, previousOuter, end, fill);
                 }
+                if (highlighted || i % 3 != 0) p.Line(previousOuter, end, width, edge);
+                if (minimum > 0 && i % 3 != 0) p.Line(previousInner, inner, width, deadZone);
+                previousInner = inner; previousOuter = end;
+            }
+            p.Line(previousInner, previousOuter, width, edge);
+            if (highlighted)
+            {
+                float bearing = facing * Mathf.Deg2Rad;
+                var forward = new Vector2(Mathf.Cos(bearing), Mathf.Sin(bearing));
+                var tangent = new Vector2(-forward.y, forward.x);
+                float arm = Mathf.Min(.65f, outer * .18f);
+                var tip = origin + forward * (outer - .1f);
+                p.Line(tip - (forward + tangent * .59f) * arm, tip, width, edge);
+                p.Line(tip - (forward - tangent * .59f) * arm, tip, width, edge);
             }
         }
 
@@ -419,8 +522,17 @@ namespace PaperDefense.Presentation
             float opacity = Mathf.Clamp01((diameter - 1) / .7f) * (structure.IsComplete ? 1 : .45f);
             if (opacity <= 0) return;
             var at = new Vector2(structure.Cell.X + .5f, structure.Cell.Y + .5f);
-            pen.Disc(at, diameter * .5f, MeshPen.Alpha(NotebookPalette.Paper, opacity * .92f), 20);
-            pen.Ring(at, diameter * .5f, pen.WorldUnitsPerPixel, MeshPen.Alpha(NotebookPalette.Blue, opacity * .75f), 20);
+            // The old opaque disc covered the actual body on a full-page view.
+            // Quiet open corner marks locate it without replacing its silhouette.
+            float half=diameter*.5f, arm=diameter*.18f;
+            Color ink=MeshPen.Alpha(NightNotebookArt.Grid,opacity*.28f);
+            for(int corner=0;corner<4;corner++)
+            {
+                float x=corner<2?-half:half,y=corner%2==0?-half:half;
+                var point=at+new Vector2(x,y);
+                pen.Line(point,point+new Vector2(x<0?arm:-arm,0),pen.WorldUnitsPerPixel*.7f,ink);
+                pen.Line(point,point+new Vector2(0,y<0?arm:-arm),pen.WorldUnitsPerPixel*.7f,ink);
+            }
         }
 
         void DrawStructures()
@@ -432,7 +544,8 @@ namespace PaperDefense.Presentation
             for (int i = 0; i < session.Structures.Count; i++)
             {
                 DrawOverviewMarker(p, session.Structures[i]);
-                if (session.Structures[i].Kind == StructureKind.Wall) wallCells.Add(session.Structures[i].Cell);
+                if (session.Structures[i].Kind == StructureKind.Wall && session.Structures[i].IsComplete)
+                    wallCells.Add(session.Structures[i].Cell);
             }
             for (int i = 0; i < session.Structures.Count; i++)
             {
@@ -485,11 +598,15 @@ namespace PaperDefense.Presentation
             }
             float time = (float)visualClock.Seconds;
             float enemyScale = NotebookEnemyView.ScaleFor(ModernEnemyPresentation);
-            bool compactSwarm = session.Enemies.Count > 1000;
             bool cull = WorldCamera != null && WorldCamera.orthographic;
             Vector3 cameraPosition = cull ? WorldCamera.transform.position : Vector3.zero;
             float halfHeight = cull ? WorldCamera.orthographicSize : 0;
             float halfWidth = cull ? WorldCamera.orthographicSize * WorldCamera.aspect : 0;
+            int wave = session.WaveIndex - 1;
+            bool horde = ModernEnemyPresentation && wave >= 0 && wave < session.Balance.Waves.Count && session.Balance.Waves[wave].IsHorde;
+            var hordeView = !horde ? HordeView.None : cull && halfHeight * 2 >= session.Balance.Height / 3f ? HordeView.Overview : HordeView.Close;
+            bool compactSwarm = session.Enemies.Count > 1000 || (horde && session.Enemies.Count >= 160);
+            var theme = Theme;
             for (int i = 0; i < session.Enemies.Count; i++)
             {
                 EnemyView enemy = session.Enemies[i];
@@ -497,8 +614,9 @@ namespace PaperDefense.Presentation
                 float margin = DoodleGlyphs.VisualScale(enemy.VisualScale) * enemyScale + .5f;
                 if (cull && (Mathf.Abs(enemy.Position.X - cameraPosition.x) > halfWidth + margin
                           || Mathf.Abs(enemy.Position.Y - cameraPosition.y) > halfHeight + margin)) continue;
-                DoodleGlyphs.Enemy(p, enemy, time, compactSwarm, animation, Theme, windupSeconds: session.Balance.Enemy(enemy.Kind).WindupSeconds,
-                    showHealth: ShowEnemyHealthBars, uniformScale: enemyScale);
+                DoodleGlyphs.Enemy(p, enemy, time, compactSwarm, animation, theme,
+                    windupSeconds: enemy.WindupRemaining > 0 ? session.Balance.Enemy(enemy.Kind).WindupSeconds : 0,
+                    showHealth: ShowEnemyHealthBars, uniformScale: enemyScale, horde: hordeView);
             }
             foreach (var death in animation.Deaths)
             {
@@ -532,11 +650,14 @@ namespace PaperDefense.Presentation
         {
             MeshPen p = effectsPen;
             p.Clear();
+            bool darkSurface = DarkSurface;
+            var theme = Theme;
+            Color trailInk = NightNotebookEffectPalette.Tone(NotebookPalette.Marker, NightNotebookArt.Accent, theme, darkSurface);
             for (int i = 0; i < session.Blots.Count; i++)
             {
                 var blot = session.Blots[i]; Vector2 center = new Vector2(blot.Cell.X + .5f, blot.Cell.Y + .5f);
                 float fade = Mathf.Clamp01(blot.Remaining / Mathf.Max(.01f, session.Balance.BlotLifetime));
-                DoodleGlyphs.DrawResource(p, "object.blot", center, opacity: .3f + fade * .7f, theme: Theme);
+                NightNotebookEffectPalette.DrawResource(p, "object.blot", center, theme, darkSurface, opacity: .3f + fade * .7f);
             }
             for (int i = 0; i < session.EnemyProjectiles.Count; i++)
             {
@@ -544,8 +665,8 @@ namespace PaperDefense.Presentation
                 Vector2 from = new Vector2(glob.From.X, glob.From.Y), to = new Vector2(glob.To.X, glob.To.Y);
                 float progress = Mathf.Clamp01(1 - glob.Remaining / Mathf.Max(.001f, glob.Duration));
                 Vector2 point = Vector2.Lerp(from, to, progress);
-                p.Line(Vector2.Lerp(from, to, Mathf.Max(0, progress - .12f)), point, .09f, MeshPen.Alpha(NotebookPalette.Marker, .55f));
-                DoodleGlyphs.DrawResource(p, "fx.spitter.projectile", point, theme: Theme);
+                p.Line(Vector2.Lerp(from, to, Mathf.Max(0, progress - .12f)), point, .09f, MeshPen.Alpha(trailInk, .55f));
+                NightNotebookEffectPalette.DrawResource(p, "fx.spitter.projectile", point, theme, darkSurface);
                 p.Ring(to, .36f, .035f, MeshPen.Alpha(NotebookPalette.Red, .5f), 12, 1, glob.Id, true);
             }
             for (int i = 0; i < session.Projectiles.Count; i++)
@@ -555,13 +676,8 @@ namespace PaperDefense.Presentation
                 Vector2 to = new Vector2(projectile.To.X, projectile.To.Y);
                 from = VisualMuzzle(projectile.SourceStructureId, projectile.MountSlotIndex, projectile.To, from);
                 float flight = Mathf.Clamp01(1 - projectile.Remaining / Mathf.Max(.001f, projectile.Duration));
-                float height = Mathf.Min(3, Vector2.Distance(from, to) * .22f);
-                Vector2 point = FlightPoint(from, to, flight, height);
-                Vector2 trail = FlightPoint(from, to, Mathf.Max(0, flight - .1f), height);
-                p.Line(trail, point, .045f, MeshPen.Alpha(NotebookPalette.Marker, .6f));
-                DoodleGlyphs.DrawResource(p, "fx.mortar.projectile", point, theme: Theme);
-                NotebookEffectRenderer.DrawFootprint(p, to, projectile.ImpactFootprint, projectile.Radius, 1, .025f,
-                    MeshPen.Alpha(NotebookPalette.Marker, .2f), 24, projectile.Id, true);
+                NotebookEffectRenderer.DrawProjectile(p, from, to, flight, projectile.ImpactFootprint,
+                    projectile.Radius, projectile.Id, projectile.ColorEffect.Color, theme, darkSurface);
             }
             double time = visualClock.Seconds;
             for (int i = firingMarks.Count - 1; i >= 0; i--)
@@ -570,9 +686,22 @@ namespace PaperDefense.Presentation
                 float age = (float)(time - mark.SimulationSeconds);
                 if (age >= NotebookEffectRenderer.Duration(mark, Theme)) { firingMarks.RemoveAt(i); continue; }
                 Vector2 muzzle = VisualMuzzle(mark.SourceStructureId, mark.MountSlotIndex, mark.To, new Vector2(mark.From.X, mark.From.Y));
-                NotebookEffectRenderer.Draw(p, mark, muzzle, age, Theme);
+                NotebookEffectRenderer.Draw(p, mark, muzzle, age, theme, darkSurface);
             }
+            RefreshReadability();
+            if (ModernEnemyPresentation) Readability.Draw(p, theme);
             p.Upload();
+        }
+
+        void RefreshReadability()
+        {
+            if (WorldCamera == null || !WorldCamera.orthographic || WorldCamera.pixelHeight <= 0)
+            { Readability.Refresh(session, default, 0); return; }
+            float halfHeight = WorldCamera.orthographicSize;
+            float halfWidth = halfHeight * WorldCamera.aspect;
+            Vector3 center = WorldCamera.transform.position;
+            Readability.Refresh(session, new Rect(center.x - halfWidth, center.y - halfHeight, halfWidth * 2, halfHeight * 2),
+                halfHeight * 2 / WorldCamera.pixelHeight);
         }
 
         Vector2 VisualMuzzle(int structureId, int slot, Point2 aim, Vector2 fallback)
@@ -586,14 +715,14 @@ namespace PaperDefense.Presentation
                 }
             return fallback;
         }
-        static Vector2 FlightPoint(Vector2 from, Vector2 to, float t, float height)
-            => Vector2.Lerp(from, to, t) + Vector2.up * (Mathf.Sin(t * Mathf.PI) * height);
 
         void DrawPreview()
         {
             MeshPen p = previewPen;
             p.Clear();
             Color color = previewValid ? DoodleGlyphs.TierColor(previewTier) : NotebookPalette.Red;
+            float opacity = previewFacing.HasValue ? 1 : .65f;
+            float heading = 0;
             for (int i = 0; i < previewCells.Count; i++)
             {
                 Cell cell = previewCells[i];
@@ -601,14 +730,17 @@ namespace PaperDefense.Presentation
                 p.Box(center, new Vector2(.91f, .91f), MeshPen.Alpha(color, .15f), MeshPen.Alpha(color, .8f), .056f, cell.GetHashCode());
                 if (previewValid)
                 {
+                    heading = NotebookMountLayout.HasDirectionalMount(previewKind, previewEntry, previewBlueprint, session.Balance.Content)
+                        ? previewFacing ?? session.DefaultFacingDegrees(cell, previewKind, previewEntry, previewBlueprint) : 90;
+                    float radians = NotebookMountLayout.BodyRadians(heading);
                     if (previewRecipe != null)
-                        AssemblyVisualComposer.Compose(previewRecipe, new AssemblyVisualPose()).Draw(p, center, .65f,
+                        AssemblyVisualComposer.ComposePlaced(previewRecipe, null, radians).Draw(p, center, opacity,
                             uniformScale: NotebookAssemblyView.ScaleFor(previewRecipe));
                     else if (NotebookTowerComposition.UsesComposition(previewBlueprint))
                     {
-                        NotebookTowerComposition.DrawStatic(p, previewBlueprint, center, previewTier, InkColor.None, .65f, Theme);
+                        NotebookTowerComposition.DrawStatic(p, previewBlueprint, center, previewTier, InkColor.None, opacity, Theme, radians);
                         NotebookTowerComposition.DrawMounts(p, previewBlueprint, center, previewTier, InkColor.None,
-                            default, false, null, 0, 0, .65f, Theme);
+                            default, false, null, 0, 0, opacity, Theme, previewHeading: heading);
                     }
                     else if (ConstructionToolRules.IsTool(previewKind))
                         DoodleGlyphs.DrawResource(p,
@@ -616,9 +748,9 @@ namespace PaperDefense.Presentation
                             : previewKind == StructureKind.Spikes ? "object.spikes" : "object.wall.0", center, opacity: .65f, theme: Theme);
                     else
                     {
-                        DoodleGlyphs.DrawResource(p, "chassis.standard", center, opacity: .65f, theme: Theme);
-                        DoodleGlyphs.DrawResource(p, LegacyContentIds.Weapon(previewKind), center + Vector2.up * .04f,
-                            opacity: .65f, theme: Theme);
+                        DoodleGlyphs.DrawResource(p, "chassis.standard", center, radians: radians, opacity: opacity, theme: Theme);
+                        DoodleGlyphs.DrawResource(p, LegacyContentIds.Weapon(previewKind), center + NotebookMountLayout.Rotate(Vector2.up * .04f, radians),
+                            radians: radians, opacity: opacity, theme: Theme);
                     }
                 }
                 else
@@ -627,31 +759,17 @@ namespace PaperDefense.Presentation
                     p.Line(center + new Vector2(-.18f, .18f), center + new Vector2(.18f, -.18f), .05f, color);
                 }
             }
-            if (previewCells.Count == 1 && previewKind != StructureKind.Wall && previewKind != StructureKind.Spikes)
+            var inspected = inspectedSector.HasValue ? session.StructureAt(inspectedSector.Value) : null;
+            if (inspected.HasValue)
             {
-                Cell cell = previewCells[0];
-                Vector2 center = new Vector2(cell.X + .5f, cell.Y + .5f);
-                if (previewBlueprint != null)
-                {
-                    foreach (var mount in previewBlueprint.WeaponMounts)
-                    {
-                        float range = session.Balance.WeaponRange(previewBlueprint, mount.WeaponId, mount.SlotIndex);
-                        float minimum = session.Balance.WeaponMinimumRange(previewBlueprint, mount.WeaponId, mount.SlotIndex);
-                        p.Ring(center, range, .045f, MeshPen.Alpha(color, .38f), 120, 1, 117 + mount.SlotIndex, true);
-                        if (minimum > 0)
-                            p.Ring(center, minimum, .045f, MeshPen.Alpha(NotebookPalette.Red, .45f), 80, 1, 217 + mount.SlotIndex, true);
-                    }
-                }
-                else
-                {
-                    float range = previewRange;
-                    if (range < 0 && session.Balance.HasStructure(previewKind))
-                    {
-                        var definition = session.Balance.Structure(previewKind);
-                        range = previewKind == StructureKind.TarPit ? Mathf.Max(.5f, definition.Radius) : definition.Range;
-                    }
-                    if (range > 0) p.Ring(center, range, .045f, MeshPen.Alpha(color, .38f), 120, 1, 117, true);
-                }
+                var structure = inspected.Value;
+                DrawCoverage(p, structure, DarkSurface ? FieldMenuSkin.Accent : NotebookPalette.Blue, true);
+            }
+            else if (previewValid && previewCells.Count == 1)
+            {
+                var cell = previewCells[0];
+                DrawCoverage(p, cell, previewKind, previewEntry, previewBlueprint, heading,
+                    previewFacing.HasValue && DarkSurface ? FieldMenuSkin.Accent : RangeInk(previewTier), true, fallbackRange: previewRange);
             }
             p.Upload();
             PreviewGeometryRefreshCount++;

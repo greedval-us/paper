@@ -232,6 +232,17 @@ namespace PaperDefense.Tests
         {
             BuildWall(35);
             drawing.SelectMode(DrawingMode.Erase);
+            var overlay = BlockFieldWithUi();
+            yield return Pointer(ScreenCell(35, 20), true);
+            Assert.That(drawing.HasHover, Is.False, "The UI must own the initial press.");
+            overlay.SetActive(false);
+            yield return Pointer(ScreenCell(35, 20), true);
+            yield return Pointer(ScreenCell(35, 20), false);
+            Assert.That(controller.Session.StructureAt(new Cell(35, 20)).HasValue, Is.True);
+        }
+
+        GameObject BlockFieldWithUi()
+        {
             if (EventSystem.current == null)
             {
                 var events = new GameObject("Input test event system", typeof(EventSystem));
@@ -246,12 +257,7 @@ namespace PaperDefense.Tests
             rect.anchorMin = Vector2.zero; rect.anchorMax = Vector2.one;
             rect.offsetMin = rect.offsetMax = Vector2.zero;
             Canvas.ForceUpdateCanvases();
-            yield return Pointer(ScreenCell(35, 20), true);
-            Assert.That(drawing.HasHover, Is.False, "The UI must own the initial press.");
-            overlay.SetActive(false);
-            yield return Pointer(ScreenCell(35, 20), true);
-            yield return Pointer(ScreenCell(35, 20), false);
-            Assert.That(controller.Session.StructureAt(new Cell(35, 20)).HasValue, Is.True);
+            return overlay;
         }
 
         [UnityTest] public IEnumerator DisablingInputDiscardsAnUnpaidConstructionGesture()
@@ -318,6 +324,106 @@ namespace PaperDefense.Tests
             Assert.That(controller.Session.StructureAt(second).Value.Priority, Is.Not.EqualTo(initial));
             InputSystem.QueueStateEvent(keyboard, new KeyboardState());
             yield return null;
+        }
+
+        [UnityTest] public IEnumerator SecondClickPaysForTheAnchoredTowerAtThePointerBearing()
+        {
+            var tower = new Cell(35, 20); var wall = new Cell(39, 20);
+            Assert.That(controller.Build(new[] { wall }, StructureKind.Wall, MaterialTier.Pencil, out var reason), Is.True, reason);
+            drawing.SelectTool(StructureKind.Gun);
+            var quote = controller.QuoteBuild(new[] { tower }, StructureKind.Gun, MaterialTier.Pencil);
+            int ink = controller.Session.Ink, structures = controller.Session.Structures.Count;
+            yield return Pointer(ScreenCell(tower.X, tower.Y), true);
+            yield return Pointer(ScreenCell(tower.X, tower.Y), false);
+            Assert.That(drawing.PlacementCell, Is.EqualTo(tower));
+            Assert.That(controller.Session.Structures.Count, Is.EqualTo(structures));
+            Assert.That(controller.Session.Ink, Is.EqualTo(ink));
+            var target = worldCamera.WorldToScreenPoint(new Vector3(wall.X + .85f, wall.Y + .17f, 0));
+            yield return Pointer(target, false);
+            Assert.That(drawing.PreviewCost, Is.EqualTo(quote.Cost));
+            Assert.That(drawing.PreviewReason, Is.Empty, "Only the anchored cell is being bought.");
+            Assert.That(controller.Session.StructureAt(tower).HasValue, Is.False);
+            yield return Pointer(target, true);
+            yield return Pointer(target, false);
+            float expected = Mathf.Atan2(wall.Y + .17f - tower.Y - .5f, wall.X + .85f - tower.X - .5f) * Mathf.Rad2Deg;
+            Assert.That(Mathf.DeltaAngle(expected, controller.Session.StructureAt(tower).Value.FacingDegrees), Is.EqualTo(0).Within(.02f));
+            Assert.That(drawing.IsPlacingTower, Is.False);
+            Assert.That(controller.Session.Ink, Is.EqualTo(ink - quote.Cost));
+            Assert.That(controller.Session.Structures.Count, Is.EqualTo(structures + 1));
+            Assert.That(controller.Session.StructureAt(wall).HasValue, Is.True);
+            yield return Pointer(ScreenCell(tower.X, tower.Y), true); yield return Pointer(ScreenCell(tower.X, tower.Y), false);
+            InputSystem.QueueStateEvent(keyboard, new KeyboardState(Key.R));
+            yield return null; yield return null;
+            Assert.That(drawing.InspectedCell, Is.EqualTo(tower)); Assert.That(drawing.IsPlacingTower, Is.False);
+            Assert.That(Mathf.DeltaAngle(expected, controller.Session.StructureAt(tower).Value.FacingDegrees), Is.EqualTo(0).Within(.02f));
+        }
+
+        [UnityTest] public IEnumerator EscapeRightClickAndSwitchingPagesDiscardUnpaidBlueprintPlacement()
+        {
+            drawing.SelectSlot(0);
+            var anchor = ScreenCell(35, 20);
+            int ink = controller.Session.Ink, structures = controller.Session.Structures.Count;
+            for (int cancel = 0; cancel < 3; cancel++)
+            {
+                yield return Pointer(anchor, true); yield return Pointer(anchor, false);
+                Assert.That(drawing.IsPlacingTower, Is.True);
+                if (cancel == 0) InputSystem.QueueStateEvent(keyboard, new KeyboardState(Key.Escape));
+                if (cancel == 1) InputSystem.QueueStateEvent(mouse, new MouseState { position = anchor }.WithButton(MouseButton.Right));
+                if (cancel == 2) drawing.SelectSlot(1);
+                yield return null; yield return null;
+                Assert.That(drawing.IsPlacingTower, Is.False);
+                Assert.That(controller.Session.Ink, Is.EqualTo(ink));
+                Assert.That(controller.Session.Structures.Count, Is.EqualTo(structures));
+                InputSystem.QueueStateEvent(keyboard, new KeyboardState());
+                yield return Pointer(anchor, false);
+            }
+        }
+
+        [UnityTest] public IEnumerator OutsideConfirmationAndChangedAnchorCannotSpendInkOrRelocateTheTower()
+        {
+            drawing.SelectTool(StructureKind.Gun);
+            var cell = new Cell(35, 20); var anchor = ScreenCell(cell.X, cell.Y);
+            yield return Pointer(anchor, true); yield return Pointer(anchor, false);
+            var overlay = BlockFieldWithUi();
+            yield return Pointer(ScreenCell(39, 20), true);
+            Assert.That(drawing.HasHover, Is.False);
+            overlay.SetActive(false);
+            yield return Pointer(ScreenCell(39, 20), true); yield return Pointer(ScreenCell(39, 20), false);
+            yield return Pointer(new Vector2(-100, -100), true);
+            yield return Pointer(ScreenCell(39, 20), false);
+            Assert.That(drawing.PlacementCell, Is.EqualTo(cell));
+            Assert.That(controller.Session.StructureAt(cell).HasValue, Is.False);
+            BuildWall(cell.X);
+            int ink = controller.Session.Ink;
+            yield return Pointer(ScreenCell(39, 20), true); yield return Pointer(ScreenCell(39, 20), false);
+            Assert.That(drawing.PreviewReason, Is.Not.Empty);
+            Assert.That(controller.Session.StructureAt(cell).Value.Kind, Is.EqualTo(StructureKind.Wall));
+            Assert.That(controller.Session.StructureAt(new Cell(39, 20)).HasValue, Is.False);
+            Assert.That(controller.Session.Ink, Is.EqualTo(ink));
+        }
+
+        [TestCase(0, 120)] [TestCase(155, 180)]
+        public void HighlightedSectorOutlineFollowsBearingAndBothRangeLimits(float bearing, float arc)
+        {
+            var mesh = new Mesh();
+            try
+            {
+                var pen = new MeshPen(mesh);
+                NotebookWorldView.DrawWeaponSector(pen, Vector2.zero, bearing, arc, 2, 9, Color.white, true);
+                pen.Upload();
+                float left = 180, right = -180, near = 9, far = 0;
+                foreach (var point in mesh.vertices)
+                {
+                    float offset = Mathf.DeltaAngle(bearing, Mathf.Atan2(point.y, point.x) * Mathf.Rad2Deg);
+                    left = Mathf.Min(left, offset); right = Mathf.Max(right, offset);
+                    near = Mathf.Min(near, point.magnitude); far = Mathf.Max(far, point.magnitude);
+                }
+                Assert.That(left, Is.EqualTo(-arc * .5f).Within(1));
+                Assert.That(right, Is.EqualTo(arc * .5f).Within(1));
+                Assert.That(near, Is.EqualTo(2).Within(.1f));
+                Assert.That(far, Is.EqualTo(9).Within(.1f));
+            }
+            finally { Object.DestroyImmediate(mesh); }
         }
 
         [Test] public void PrecisePointerSettingIsRestoredOnlyAfterTheLastInputDisables()

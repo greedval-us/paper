@@ -9,6 +9,23 @@ namespace PaperDefense.Tests
 {
     public sealed class AssemblySnapshotTests
     {
+        [Test]
+        public void OldBalanceGeneratorSnapshotKeepsItsIncomeWhileNewCatalogUsesTheNewBalance()
+        {
+            var data = AssemblyResolverFixture.Input();
+            var current = data.CreateSnapshot();
+            data.BalanceRevision = "album-v1.0";
+            AssemblyResolverFixture.Set(data, "function.generator", AssemblyStat.SupportRate, ModifierOperation.Set, 12);
+            var saved = data.CreateSnapshot().Starters.Single(e => e.Id == "album.generator");
+            var oldResolution = TowerCatalog.ResolveEntry(saved, GameBalance.CreateDefault());
+            var newResolution = TowerCatalog.ResolveEntry(current.Starters.Single(e => e.Id == "album.generator"), GameBalance.CreateDefault());
+            Assert.That(oldResolution.Value.Support.IncomePerWave, Is.EqualTo(12));
+            Assert.That(oldResolution.Value.Snapshot.BalanceRevision, Is.EqualTo("album-v1.0"));
+            Assert.That(newResolution.Value.Support.IncomePerWave, Is.EqualTo(18));
+            Assert.That(newResolution.Value.Snapshot.BalanceRevision, Is.EqualTo("album-v1.4"));
+            Assert.That(oldResolution.Value.Cost, Is.EqualTo(newResolution.Value.Cost));
+        }
+
         [Test] public void SavedRecipe_SurvivesLibraryEditsDeletionAndNewCatalogRevision()
         {
             var data = AssemblyResolverFixture.Input();
@@ -21,7 +38,7 @@ namespace PaperDefense.Tests
             Assert.That(current.TryGet("core.gun", 1, out _), Is.False);
             var resolved = AssemblyResolver.Resolve(saved, GameBalance.CreateDefault(), MaterialTier.Pencil);
             Assert.That(resolved.Valid, Is.True); Assert.That(resolved.Value.Cost, Is.EqualTo(40));
-            Assert.That(resolved.Value.Snapshot.BalanceRevision, Is.EqualTo("album-v1.0"));
+            Assert.That(resolved.Value.Snapshot.BalanceRevision, Is.EqualTo("album-v1.4"));
             Assert.That(resolved.Value.Weapons[0].Damage, Is.EqualTo(12));
         }
 

@@ -48,20 +48,21 @@ namespace PaperDefense.Core
             if(balance==null)throw new ArgumentNullException(nameof(balance));
             if(structure.Assembly==null)structure.Assembly=TowerCatalog.Resolve(structure.Blueprint,balance);
             float defense=structure.Assembly.Modify(ModifierStat.FoundationDefense,0);
-            var offset=new Point2(source.X-structure.Cell.X-.5f,source.Y-structure.Cell.Y-.5f);
-            defense*=structure.Blueprint.Reinforcement.Multiplier(offset);
+            float dx = source.X - structure.Cell.X - .5f, dy = source.Y - structure.Cell.Y - .5f;
+            var forward = structure.Forward;
+            // Armour is authored with its front pointing up on the workshop drawing.
+            var local = new Point2(dx * forward.Y - dy * forward.X, dx * forward.X + dy * forward.Y);
+            defense*=structure.Blueprint.Reinforcement.Multiplier(local);
             return Apply(raw,defense,balance.Effects.MaximumDefense);
         }
 
         static bool InsideFoundationFront(StructureState structure, Point2 source)
         {
             double centerX = structure.Cell.X + .5, centerY = structure.Cell.Y + .5;
-            double aimX = structure.Aim.X - centerX, aimY = structure.Aim.Y - centerY;
             double sourceX = source.X - centerX, sourceY = source.Y - centerY;
-            double aimLengthSquared = aimX * aimX + aimY * aimY;
             double sourceLengthSquared = sourceX * sourceX + sourceY * sourceY;
-            if (aimLengthSquared == 0 || sourceLengthSquared == 0) return false;
-            double cosine = (aimX * sourceX + aimY * sourceY) / Math.Sqrt(aimLengthSquared * sourceLengthSquared);
+            if (sourceLengthSquared == 0) return false;
+            double cosine = (structure.Forward.X * sourceX + structure.Forward.Y * sourceY) / Math.Sqrt(sourceLengthSquared);
             return cosine + .0000001 >= Math.Sqrt(.5);
         }
     }

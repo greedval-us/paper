@@ -14,6 +14,89 @@ namespace PaperDefense.Tests
             return b;
         }
         static TowerBlueprint Double()=>new TowerBlueprint("double","Два",ChassisKind.Standard,StructureKind.Gun,StructureKind.Gun);
+
+        [Test] public void ClearingWavesBanksFlasksAndEachClaimPaysItsChosenWalletOnce()
+        {
+            var rules = Balance();
+            rules.Mechanics.WaveInkFlasks = true;
+            rules.Mechanics.RunUpgrades = false;
+            var game = new GameSession(rules, starterDefenses: false);
+            var read = new RunReadModel(game);
+            Assert.That(game.Wells, Is.Empty);
+            Assert.That(game.TryActivateWell(0, out _), Is.False);
+            Assert.That(read.PendingInkFlasks, Is.Zero);
+            Assert.That(game.TryClaimInkFlask(game.RunId, 1, InkColor.Red, out _), Is.False);
+            game.StartNextWave(); game.Tick(.05f);
+            int first = read.NextInkFlaskId;
+            Assert.That(read.PendingInkFlasks, Is.EqualTo(1));
+            game.StartNextWave(); game.Tick(.05f);
+            Assert.That(read.CompletedWaves, Is.EqualTo(2));
+            Assert.That(read.PendingInkFlasks, Is.EqualTo(2));
+            int cashBeforeClaim = read.Ink;
+            game.StartNextWave();
+            Assert.That(game.TryClaimInkFlask(System.Guid.NewGuid(), first, InkColor.Blue, out _), Is.False);
+            Assert.That(game.TryClaimInkFlask(game.RunId, first, InkColor.None, out _), Is.False);
+            Assert.That(game.TryClaimInkFlask(game.RunId, first, (InkColor)77, out _), Is.False);
+            Assert.That(read.NextInkFlaskId, Is.EqualTo(first));
+            Assert.That(game.TryClaimInkFlask(game.RunId, first, InkColor.Blue, out _), Is.True);
+            Assert.That(game.TryClaimInkFlask(game.RunId, first, InkColor.Red, out _), Is.False);
+            Assert.That(read.PendingInkFlasks, Is.EqualTo(1));
+            Assert.That(game.TryClaimInkFlask(game.RunId, read.NextInkFlaskId, InkColor.Green, out _), Is.True);
+            Assert.That(read.ColoredInk(InkColor.Red), Is.Zero);
+            Assert.That(read.ColoredInk(InkColor.Blue), Is.EqualTo(12));
+            Assert.That(read.ColoredInk(InkColor.Green), Is.EqualTo(12));
+            Assert.That(read.Ink, Is.EqualTo(cashBeforeClaim));
+            Assert.That(read.NextInkFlaskId, Is.Zero);
+        }
+
+        [TestCase(true)] [TestCase(false)]
+        public void OutstandingFlasksExpireWithTheRun(bool victory)
+        {
+            var rules = Balance();
+            rules.Mechanics.WaveInkFlasks = true;
+            rules.Mechanics.RunUpgrades = false;
+            var game = new GameSession(rules, starterDefenses: false);
+            game.StartNextWave(); game.Tick(.05f);
+            game.StartNextWave(); game.Tick(.05f);
+            int first = game.NextInkFlaskId;
+            Assert.That(game.PendingInkFlasks, Is.EqualTo(2));
+            game.StartNextWave();
+            if (!victory) game.DamageObjective(-1, game.BaseHealth);
+            game.Tick(.05f);
+            Assert.That(game.Phase, Is.EqualTo(victory ? RunPhase.Victory : RunPhase.Defeat));
+            Assert.That(game.PendingInkFlasks, Is.Zero);
+            Assert.That(game.TryClaimInkFlask(game.RunId, first, InkColor.Red, out _), Is.False);
+            var replay = new GameSession(rules, starterDefenses: false);
+            replay.StartNextWave(); replay.Tick(.05f);
+            Assert.That(replay.TryClaimInkFlask(game.RunId, first, InkColor.Green, out _), Is.False);
+            Assert.That(replay.ColoredInk(InkColor.Green), Is.Zero);
+        }
+
+        [Test] public void HistoricalWellModeRetainsItsSpawnSequenceAndOffersNoFlasks()
+        {
+            var rules = Balance();
+            rules.Waves[0].Count = 3;
+            rules.Waves[0].SpawnInterval = .02f;
+            rules.Waves[0].RunnerFraction = .65f;
+            var historical = new GameSession(rules, 421, false);
+            rules.Mechanics.WaveInkFlasks = true;
+            var flasks = new GameSession(rules, 421, false);
+            Assert.That(historical.Wells.Count, Is.GreaterThan(0));
+            Assert.That(flasks.Wells, Is.Empty);
+            historical.StartNextWave(); flasks.StartNextWave();
+            historical.Tick(.4f); flasks.Tick(.4f);
+            Assert.That(flasks.Enemies.Count, Is.EqualTo(3));
+            for (int i = 0; i < flasks.Enemies.Count; i++)
+            {
+                Assert.That(flasks.Enemies[i].Kind, Is.EqualTo(historical.Enemies[i].Kind));
+                Assert.That(flasks.Enemies[i].SpeedScale, Is.EqualTo(historical.Enemies[i].SpeedScale));
+                Assert.That(flasks.Enemies[i].Position, Is.EqualTo(historical.Enemies[i].Position));
+                historical.Enemies[i].Health = 0;
+            }
+            historical.Tick(.05f);
+            Assert.That(historical.CompletedWaves, Is.EqualTo(1));
+            Assert.That(historical.PendingInkFlasks, Is.Zero);
+        }
         [Test] public void ColorCartridgeCostDependsOnAssemblyAndNotDrawingMaterial()
         {
             var game=new GameSession(Balance(),starterDefenses:false);var bp=Double();

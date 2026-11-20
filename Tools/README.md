@@ -1,90 +1,40 @@
 # Инструменты проекта
 
-## Локальные зависимости Node.js
+Команды выполняются из корня проекта. Редактор — Unity 6000.5.7f1; независимые числовые проверки используют Node.js.
 
-`node_modules`, Python `__pycache__`, `.previews` и генерируемые Unity solution-файлы не входят в исходники. Существующие локальные зависимости сохраняются. Обновление checkout не должно заменять их или общий кэш Codex.
-
-Для свежего клона используйте bundled Node.js и пакеты, пути которых возвращает `load_workspace_dependencies`. Приведённый ниже путь — стандартное размещение локального runtime Codex; при другом размещении подставьте возвращённый каталог пакетов. Выполнять из корня проекта:
+## Игровой баланс
 
 ```powershell
-$taskModules = Join-Path $env:USERPROFILE '.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules'
-if (!(Test-Path -LiteralPath $taskModules)) { throw 'Сначала найдите доступный runtime через load_workspace_dependencies.' }
-foreach ($taskTool in @('AlbumDesign2026', 'BalanceWorkbook')) {
-    $taskLink = Join-Path (Join-Path $PWD.Path 'Tools') ($taskTool + '/node_modules')
-    if ($null -eq (Get-Item -LiteralPath $taskLink -Force -ErrorAction SilentlyContinue)) {
-        New-Item -ItemType Junction -Path $taskLink -Target $taskModules | Out-Null
-    }
-}
+node Tools/AlbumDesign2026/build-data.mjs
 ```
 
-Junction нужна для bare imports Playwright и workbook-инструмента. `AlbumDesign2026/build-workbook.mjs` также умеет читать `CODEX_WORKSPACE_NODE_MODULES`; это не заменяет настройку остальных инструментов. `BalanceWorkbook/Build.ps1` создаёт отсутствующую junction самостоятельно. Для закрытого `@oai/artifact-tool` не предполагается установка через `npm install`. Версии bundled пакетов зависят от установленного runtime; перед новой приёмкой повторяйте проверки инструментов.
-
-[Общая документация](../docs/README.md) · [Разработка и тесты](../docs/Development-Guide.md)
-
-Команды ниже запускаются из корня проекта. Инструменты генерации меняют свои исходные файлы или ассеты; проверочные команды создают отчёты. Сценарии сравнения имеют собственные настройки и не представляют текущий PlayerRules. В Unity перенесены предыдущие версии главного меню, карты и подготовки. Переход всех экранов к [обновлённым эскизам](../docs/design/game-concept-art-2026-10-16/index.html) описан в [плане реализации](../docs/superpowers/plans/2026-10-18-modular-album-implementation.md).
-
-## Меню Unity
-
-Все пути начинаются с **Paper Defense**. Реализация находится в [Editor](../Assets/PaperDefense/Editor).
-
-| Меню | Действие |
-|---|---|
-| `Game → Open player game` | Открывает сохранённую игровую сцену |
-| `Game → Build player game` | Собирает Windows x64 и пишет `Builds/PlayerGame/build-report.txt` |
-| `Открыть игру` | Открывает ту же основную сцену `Game/PaperDefenseGame.unity` |
-| `Art → Rebuild blue pen atlas` | Собирает PNG-атлас, каталог спрайтов и анимационную тему из `ArtSource/Notebook/NewStyle` |
-| `Content → Validate all databases and presets` | Проверяет базы и пресеты |
-| `Content → Migrate legacy balance assets once` | Историческая миграция старой конфигурации в каталог |
-| `Content → Apply modular tower preset` | Применяет модульный пресет к предусмотренным инструментом данным |
-| `Content → Apply notebook tower defense rules` | Применяет правила тетрадной обороны к Target |
-| `Export mechanics and balance JSON` | Экспортирует Historical/Target для книги баланса |
-| `Проверить орду 3000` / `Проверить естественный пролом · 3000 врагов` | Один PressureValidation: детерминированный сценарий, отчёт `docs/validation/pressure-replay.json` |
-| `Проверить историческую мастерскую и чернильные рубежи` / `Проверить целевую мастерскую и чернильные рубежи` | InkLoopValidation для Historical / Target, отчёты с префиксами `ink-loop-historical` / `ink-loop-target` |
-| `Проверить все 8 волн` | Исторический CampaignValidation на `GameBalance.CreateDefault()`, отчёт `campaign-smoke.json`; не проверка PlayerRules |
-
-Миграция, Apply и импорт изменяют данные; это не необходимые шаги перед каждым запуском. Меню генерации и открытия тестовых сцен удалены вместе со стендами. Точные источники и границы изменения данных — в [каталоге контента](../docs/Content-Architecture.md) и [оформлении](../docs/Notebook-Art.md).
-
-## Русские тексты
-
-[user-texts.json](user-texts.json) — канонический словарь общих текстов. [Extract-UserText.py](Extract-UserText.py) извлекает видимые строки C#, сохраняет устойчивые ключи и генерирует `Resources/Text/ru.asset` и `Core/UserTextContracts.Generated.cs`. Комментарии, атрибуты и техническая диагностика по умолчанию исключены; английские строки требуют отдельной проверки.
+`build-data.mjs` записывает `docs/balance/album-balance-v1.json`. После изменения параметров импортируйте его через `AlbumBalanceImport`, затем вызовите `BalanceWorkbookExport.ExportPlayerAssembly()` в Unity, чтобы обновить `docs/balance/assembly-runtime.json`. Затем запустите:
 
 ```powershell
-# Только аудит; код возврата 1 означает найденные неизвлечённые строки.
-python Tools/Extract-UserText.py --audit Assets/PaperDefense/Presentation/UI
-
-# После проверки текста: заменить выбранные литералы и обновить ресурсы.
-python Tools/Extract-UserText.py --write Assets/PaperDefense/Presentation/UI
-
-# Перегенерировать ресурсы из существующего словаря без обхода C#.
-python Tools/Extract-UserText.py --write
+node --test Tools/AlbumDesign2026/verify-balance.test.mjs
+node Tools/AlbumDesign2026/verify-balance.mjs
 ```
 
-`--merge <путь.json>` объединяет проверенный словарь и **пишет** сгенерированные файлы даже без `--write`. `--include-diagnostics` явно включает диагностические строки. Пути разрешаются относительно корня проекта.
+Тесты и верификатор сравнивают независимый расчёт с экспортом; он должен соответствовать проверяемым игровым assets. [Подробный порядок](AlbumDesign2026/README.md).
 
-Игровая оболочка использует отдельный [player-ru.asset](../Assets/PaperDefense/Resources/Text/player-ru.asset): `PlayerUi.T` добавляет префикс `player.`. Генератор общего словаря не создаёт этот файл. Названия/описания деталей также живут в каталоге контента. Не добавляйте текст прямо в сгенерированный файл контрактов.
+## Unity и проверка инструментов
 
-## Запуск и нагрузочная проверка
+Главная сцена — `Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity`; меню `Paper Defense → Game → Open player game` открывает её. Test Runner содержит сборки Core, Editor и Integration. Тесты сцен могут менять открытую сцену; перед запуском сохраните свою работу. `PlayerVisualCapture.Capture` снимает производственные Canvas. [Запуск, сборка и ручной маршрут](../docs/Development-Guide.md), [сохранённые результаты](../docs/validation/README.md).
 
-Основная сборка находится в `Builds/PlayerGame/PaperDefense.exe`. Флаг `-paper-memory-only` запускает обычный игровой маршрут с профилем в памяти.
+Python-инструменты проверяются командой:
 
-Runtime-измеритель `PressurePlayerProbe`, флаг `-paper-pressure` и скрипты `Measure-Pressure.ps1` / `Run-FullAlbumPressure.ps1` удалены. Детерминированные сценарии Pressure, NumericBalance и InkLoop сохранены в Editor-only сборке Validation; их вызывают редакторские команды выше и автоматические проверки. Для измерения кадров основной игры используйте Unity Profiler и фиксируйте условия устройства и разрешение окна.
+```powershell
+python -m unittest discover -s Tools/tests -p 'test_*.py'
+```
 
-## Экспорт, приёмка и исторические сравнения
+## Excel и зависимости
 
-| Инструмент | Назначение и ограничения |
-|---|---|
-| [BalanceWorkbook/Build.ps1](BalanceWorkbook/Build.ps1) и [build.mjs](BalanceWorkbook/build.mjs) | JSON из Unity → Excel; проверяют свежесть экспорта и формулы. [Инструкция](BalanceWorkbook/README.md) |
-| [Validate-ContentDataOnly.ps1](Validate-ContentDataOnly.ps1) | `-Mode Freeze` фиксирует хэши кода/ассетов, `Verify` проверяет изменения только допустимых assets в `Assets/PaperDefense/Content`. Использует `rg` и Git; не заменяет Unity-тесты. Перед новым изменением данных выполните новый Freeze; старая фиксация удалена при очистке. Существующую фиксацию не перезаписывает |
-| [Reconstruct-OriginalCoreBaseline.ps1](Reconstruct-OriginalCoreBaseline.ps1) | PowerShell 7, локальный .NET SDK и Unity Editor/Data; извлекает указанный Git commit (по умолчанию `b759182`) в новый каталог `Temp`, компилирует историческое ядро. Не скачивает commit и не переключает рабочее дерево |
-| [OriginalCoreValidation](OriginalCoreValidation) | Явный адаптер и описание адаптации сценария для исторического baseline |
-| [FullLoopValidation](../Assets/PaperDefense/Editor/FullLoopValidation.cs) | API `RunPressureJson` и `RunAuthoredCopiesJson`: полный альбом/нагрузка и копии авторской геометрии |
-| [RefactorValidation](../Assets/PaperDefense/Editor/RefactorValidation.cs) | API снимков правил, испытаний, replay и измерений; исторические сравнения |
-| [NumericBalanceScenario](../Assets/PaperDefense/Validation/NumericBalanceScenario.cs) | Матрица сборок, полос, бюджетов и seeds; отдельные ситуационные проверки; вызывается тестами/кодом |
-| [ContentAcceptanceRunner](../Assets/PaperDefense/Validation/ContentAcceptanceRunner.cs) и [ContentAcceptanceManifestAsset](../Assets/PaperDefense/Validation/ContentAcceptanceManifestAsset.cs) | Editor-only приёмка данных `Content/Acceptance` через автоматические тесты; отдельная сцена удалена |
-| [PlayerVisualCapture](../Assets/PaperDefense/Editor/PlayerVisualCapture.cs) | API `Capture`: снимки игрового интерфейса; по умолчанию `Captures/PlayerGame` |
+Числовые проверки не требуют `@oai/artifact-tool`. Для генерации Excel нужен bundled runtime; его расположение сообщает `load_workspace_dependencies`. Текущий генератор — `Tools/AlbumDesign2026/build-workbook.mjs`. [BalanceWorkbook](BalanceWorkbook/README.md) предназначен для сравнения пресетов и совместимости; он не является источником текущего баланса Player.
 
-Последняя проверка очистки и назначение сохранённых исторических JSON описаны в [указателе проверок](../docs/validation/README.md). Эти JSON остаются входами инструментов приёмки и не являются новым результатом текущего дерева. Канонические PNG, `sprites.source.json`, `animation.json` и редакторский `NotebookSpriteImportTools.Rebuild()` описаны в [ArtSource/Notebook](../ArtSource/Notebook/README.md). Актуальное обновление — в [отчёте графики и разрешения](../docs/validation/2026-10-17-art-resolution/).
+## Графика
 
-## Новый баланс составного альбома
+Детали рисует `NightNotebookArt` (`paper-mechanisms-v4`), композицию собирает `AssemblyVisualComposer`, бой оформляет `InkSwarmArt` (`ink-swarm-v1`), меню — `FieldMenuSkin`. Внешние ресурсы находятся в `Assets/PaperDefense/Graphics`; физические ограничения — в `Assets/PaperDefense/Resources/Configuration/AssemblyFits.json`. [Действующий графический стандарт](../Assets/PaperDefense/Graphics/README.md).
 
-[AlbumDesign2026](AlbumDesign2026/README.md) строит актуальные 54 детали, Excel и данные эскизов. Старый BalanceWorkbook остаётся инструментом сравнения Historical/Target. Он не является источником новой основной модели.
+Перед удалением данных проверяйте чтение файлов из кода, GUID сериализованных assets и загрузки Resources. Старый путь вывода кадров не требует сохранения ранее созданных изображений; входные JSON миграции и сравнительных инструментов могут быть необходимы даже после очистки отчётов.
+
+[Документация](../docs/README.md)

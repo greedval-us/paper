@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace PaperDefense.Core
 {
@@ -18,7 +19,7 @@ namespace PaperDefense.Core
     }
 
     /// <summary>Fixed-size aggregates plus the last 32 breaches, never a per-hit journal.</summary>
-    public sealed class RunStatistics
+    public sealed partial class RunStatistics
     {
         public int NavigationRebuilds { get; private set; }
         public double NavigationTotalMilliseconds { get; private set; }
@@ -36,18 +37,34 @@ namespace PaperDefense.Core
         public float TotalDamage {get;private set;} public float TotalIdleSeconds {get;private set;}
         public float TotalRepairedHealth { get; private set; }
         public int TotalGeneratorIncome { get; private set; }
+        public int TotalEnemiesMarked { get; private set; }
+        public int TotalEnemiesSlowedByPrism { get; private set; }
         public int TotalSpawnedEnemies { get; private set; }
         public int BaseHits { get; private set; }
         public float BaseDamageTaken { get; private set; }
-        readonly int[] spawnedByKind = new int[6], spawnedByDrawingTier = new int[3];
-        public IReadOnlyList<int> SpawnedByKind => Array.AsReadOnly(spawnedByKind);
-        public IReadOnlyList<int> SpawnedByDrawingTier => Array.AsReadOnly(spawnedByDrawingTier);
+        static readonly int kindSlots = ((EnemyKind[])Enum.GetValues(typeof(EnemyKind))).Max(kind => (int)kind) + 1;
+        static readonly int tierSlots = ((DrawingTier[])Enum.GetValues(typeof(DrawingTier))).Max(tier => (int)tier) + 1;
+        readonly int[] spawnedByKind = new int[kindSlots], spawnedByDrawingTier = new int[tierSlots];
+        public IReadOnlyList<int> SpawnedByKind { get; }
+        public IReadOnlyList<int> SpawnedByDrawingTier { get; }
         static int AddCount(int value, int amount) => (int)Math.Min(int.MaxValue, (long)value + Math.Max(0, amount));
         static float AddMeasurement(float value, float amount) =>
             amount > 0 && !float.IsNaN(amount) && !float.IsInfinity(amount)
                 ? (float)Math.Min(float.MaxValue, (double)value + amount) : value;
         public void RecordRepair(float actual) => TotalRepairedHealth = AddMeasurement(TotalRepairedHealth, actual);
         public void RecordGeneratorIncome(int actual) => TotalGeneratorIncome = AddCount(TotalGeneratorIncome, actual);
+        internal void RecordArmorMark(EnemyState enemy)
+        {
+            if (enemy.CountedArmorMark) return;
+            enemy.CountedArmorMark = true;
+            TotalEnemiesMarked = AddCount(TotalEnemiesMarked, 1);
+        }
+        internal void RecordPrismSlow(EnemyState enemy)
+        {
+            if (enemy.CountedPrismSlow) return;
+            enemy.CountedPrismSlow = true;
+            TotalEnemiesSlowedByPrism = AddCount(TotalEnemiesSlowedByPrism, 1);
+        }
         public void RecordSpawn(EnemyKind kind, DrawingTier tier)
         {
             if (!Enum.IsDefined(typeof(EnemyKind), kind) || !Enum.IsDefined(typeof(DrawingTier), tier)) return;
@@ -55,12 +72,7 @@ namespace PaperDefense.Core
             spawnedByKind[(int)kind] = AddCount(spawnedByKind[(int)kind], 1);
             spawnedByDrawingTier[(int)tier] = AddCount(spawnedByDrawingTier[(int)tier], 1);
         }
-        public void RecordBaseDamage(float actual)
-        {
-            if (!(actual > 0) || float.IsNaN(actual) || float.IsInfinity(actual)) return;
-            BaseHits = AddCount(BaseHits, 1);
-            BaseDamageTaken = AddMeasurement(BaseDamageTaken, actual);
-        }
+        public void RecordBaseDamage(float actual) => RecordBaseDamage(actual, 0, null);
         WeaponMetrics Metrics(string id,bool create)
         {
             if(id==null)return null;
@@ -84,7 +96,13 @@ namespace PaperDefense.Core
         {if(count>0) BlotsCleared=(int)Math.Min(int.MaxValue,(long)BlotsCleared+count);}
         public IReadOnlyList<BreachRecord> Breaches=>breachView;
         public IReadOnlyList<RunUpgrade> Upgrades=>upgradeView;
-        public RunStatistics(){breachView=breaches.AsReadOnly();upgradeView=upgrades.AsReadOnly();}
+        public RunStatistics()
+        {
+            breachView = breaches.AsReadOnly();
+            upgradeView = upgrades.AsReadOnly();
+            SpawnedByKind = Array.AsReadOnly(spawnedByKind);
+            SpawnedByDrawingTier = Array.AsReadOnly(spawnedByDrawingTier);
+        }
         public float Damage(StructureKind kind)=>Damage(LegacyContentIds.Weapon(kind));
         public float Damage(string id)=>Metrics(id,false)?.Damage??0;
         public float IdleSeconds(StructureKind kind)=>IdleSeconds(LegacyContentIds.Weapon(kind));
@@ -104,9 +122,10 @@ namespace PaperDefense.Core
         {BuildInvestment+=Math.Max(0,cost);segments=Math.Max(0,segments);TotalStructuresBuilt+=segments;var value=Metrics(id,true);if(value!=null){value.Built.TryGetValue(tier,out int count);value.Built[tier]=count+segments;}}
         public void RecordUpgrade(int cost)=>UpgradeInvestment+=Math.Max(0,cost);
         public void RecordRefund(int refund)=>RefundedInk+=Math.Max(0,refund);
-        public void RecordLoss(Cell cell,long tick,float elapsed,StructureKind kind,MaterialTier tier,int investment,string contentId=null)
+        public void RecordLoss(Cell cell,long tick,float elapsed,StructureKind kind,MaterialTier tier,int investment,string contentId=null,int waveIndex=0)
         {
             LostInvestment+=Math.Max(0,investment);DestroyedStructures++;
+            RecordWaveStructureLoss(waveIndex, investment);
             if(breaches.Count==32)breaches.RemoveAt(0);
             breaches.Add(new BreachRecord(cell,tick,elapsed,kind,tier,Math.Max(0,investment),contentId));
         }
@@ -114,7 +133,7 @@ namespace PaperDefense.Core
         public void ObserveEnemies(int alive)=>PeakAliveEnemies=Math.Max(PeakAliveEnemies,alive);
     }
 
-    public sealed class RunStatisticsView
+    public sealed partial class RunStatisticsView
     {
         readonly RunStatistics source;
         internal RunStatisticsView(RunStatistics source){this.source=source;}

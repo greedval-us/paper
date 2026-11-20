@@ -21,7 +21,10 @@ namespace PaperDefense.Presentation
         readonly RectTransform[] albumApproaches = new RectTransform[4];
         readonly Text[] albumApproachCounts = new Text[4];
         readonly int[] albumOffscreenCounts = new int[4];
-        readonly bool[] albumApproachSides = new bool[4];
+        GameBalanceView forecastBalance;
+        int forecastWaveIndex = -1;
+        string forecastSummary, forecastDetails, forecastDirection, forecastHeadline;
+        const string EnemyRoleLegend = "Метки врагов: щит — броня рисунка; капля — плевун; двойная стрелка — бегун. Скобки — враг рядом с замком.";
         Text albumInk, albumHealth, albumWave, albumPhase, albumForecast, albumSpeed, albumMessage, albumSelection;
         Text albumStructureName, albumDetails, albumFieldSummary, albumStructureHealth, albumStructureState, albumObjective;
         readonly Text[] albumStatValues = new Text[4];
@@ -32,7 +35,7 @@ namespace PaperDefense.Presentation
         Text albumOverviewCaption;
         RectTransform albumContext, albumContextContent, albumPreview, albumMessageBadge, albumObjectiveBadge, albumHealthStrip;
         int albumPreviewId = -1;
-        float albumContextWidth;
+        float albumContextWidth, albumStatTop;
 
         static string BattleCopy(string key, params object[] args)
             => GameText.Resolve(UserText.Message("assembly.battle." + key, args));
@@ -40,16 +43,25 @@ namespace PaperDefense.Presentation
 
         static void FitAlbumName(Text label, string fullName)
         {
-            label.text = fullName;
-            int length = fullName.Length;
+            var words = fullName.Split(' ');
+            for (int i = 0; i < words.Length; i++)
+            {
+                FitCaption(label, words[i]);
+                words[i] = label.text;
+            }
+            label.horizontalOverflow = HorizontalWrapMode.Wrap;
+            string fittedName = string.Join(" ", words);
+            label.text = fittedName;
+            int length = fittedName.Length;
             while (length > 1 && label.preferredHeight > label.rectTransform.rect.height + .5f)
-                label.text = fullName.Substring(0, --length).TrimEnd() + "…";
+                label.text = fittedName.Substring(0, --length).TrimEnd() + "…";
         }
 
         void BuildAlbumHud(RectTransform parent, PlayerLayout layout)
         {
+            if (game.Run.Session.Balance.Mechanics.FieldModernization) { BuildModernizationHud(parent, layout); return; }
             albumHud = true;
-            float w = layout.Header.width; bool narrow = layout.Width < 1050;
+            float w = layout.Header.width; bool narrow = layout.Width < 1280;
             var header = ui.Panel(parent, "Battle header", layout.Header, PlayerUi.Card, true);
             var inkChip = ui.Panel(header, "Battle live ink chip", new Rect(5, 3, 164, 44), PlayerUi.Card);
             AlbumAtlasIcon(inkChip, "icon.pencil", new Rect(8, 5, 33, 34));
@@ -57,13 +69,12 @@ namespace PaperDefense.Presentation
             var healthChip = ui.Panel(header, "Battle live castle chip", new Rect(175, 3, 202, 44), PlayerUi.Card);
             AlbumAtlasIcon(healthChip, "icon.shield", new Rect(7, 5, 32, 34));
             albumHealth = ui.Label(healthChip, "", new Rect(43, 2, 156, 40), 19);
-            float ribbonWidth = narrow ? 242 : 280, ribbonX = (w - ribbonWidth) * .5f;
-            var ribbon = PlayerUi.Graphic<DrawingSummaryDetailGraphic>(header, "Battle wave ribbon", new Rect(ribbonX, 1, ribbonWidth, 50));
-            ribbon.Shape = DrawingSummaryDetailGraphic.Kind.Ribbon;
-            albumWave = ui.Label(ribbon.transform, "", new Rect(10, 1, ribbonWidth - 20, 26), 21, alignment: TextAnchor.MiddleCenter);
-            float controlX = w - 310, controlY = narrow ? 48 : 6;
-            albumPhase = ui.Label(ribbon.transform, "", new Rect(10, 27, ribbonWidth - 20, 22), 16, PlayerUi.Muted, alignment: TextAnchor.MiddleCenter);
-            albumForecast = ui.Label(header, "", narrow ? new Rect(14, 58, controlX - 28, 30) : new Rect(ribbonX + ribbonWidth + 16, 6, Mathf.Max(10, controlX - ribbonX - ribbonWidth - 28), 38), 15, PlayerUi.Muted);
+            float ribbonWidth = narrow ? 242 : 280, ribbonX = narrow ? w - ribbonWidth - 8 : (w - ribbonWidth) * .5f;
+            var ribbon = ui.Panel(header, "Battle wave ribbon", new Rect(ribbonX, 1, ribbonWidth, 50), FieldMenuSkin.Panel);
+            albumWave = ui.Label(ribbon, "", new Rect(10, 1, ribbonWidth - 20, 26), 21, alignment: TextAnchor.MiddleCenter);
+            float controlX = w - 310, controlY = narrow ? 52 : 6;
+            albumPhase = ui.Label(ribbon, "", new Rect(10, 27, ribbonWidth - 20, 22), 16, PlayerUi.Muted, alignment: TextAnchor.MiddleCenter);
+            albumForecast = ui.Label(header, "", narrow ? new Rect(14, 54, controlX - 28, 36) : new Rect(ribbonX + ribbonWidth + 16, 6, controlX - ribbonX - ribbonWidth - 28, 38), 15, PlayerUi.Muted);
             albumLaunch = AlbumTextButton(header, "Launch wave", new Rect(controlX, controlY, 118, 40), BattleCopy("launch"), () => game.Run.NextWave(), true);
             albumLaunch.GetComponent<PlayerTooltip>().Message = BattleCopy("launch_hint");
             ui.IconButton(header, "Battle speed", new Rect(controlX + 124, controlY, 42, 40), PlayerIcon.Fast, ui.T("speed"), () => game.Run.ToggleSpeed());
@@ -85,22 +96,26 @@ namespace PaperDefense.Presentation
                 ui.Label(albumCards[slot].transform, (slot + 1).ToString(), new Rect(5, 3, 22, 22), 16, PlayerUi.Ink);
                 albumNames[slot] = ui.Label(albumCards[slot].transform, "", new Rect(5, 64, cardWidth - 10, 36), 15, alignment: TextAnchor.MiddleCenter);
                 albumNames[slot].name = "Album battle name " + slot;
-                albumPrices[slot] = ui.Label(albumCards[slot].transform, "", new Rect(4, 100, cardWidth - 8, 34), 14, alignment: TextAnchor.MiddleCenter);
+                // Separate the text boxes so canvas transform rounding cannot overlap their edges.
+                albumPrices[slot] = ui.Label(albumCards[slot].transform, "", new Rect(4, 101, cardWidth - 8, 34), 14, alignment: TextAnchor.MiddleCenter);
                 albumPrices[slot].name = "Album battle price " + slot;
             }
             float stripY = 148, availableWidth = w - inset * 2;
             float materialWidth = availableWidth * .32f, colorsWidth = availableWidth * .28f;
-            string[] materialIds = { "pencil", "pen", "marker" };
             for (int i = 0; i < albumMaterials.Length; i++)
             {
                 int index = i; float width = (materialWidth - gap * 2) / 3;
                 var button = ui.IconButton(dock, "Material " + i, new Rect(inset + i * (width + gap), stripY, width, 44), PlayerIcon.Pencil, ui.T("material_" + i), () => {
                     if (!game.CanBuild) return; game.Drawing.SelectTier((MaterialTier)index); Refresh();
-                }, art: "ui.material." + materialIds[i]);
+                });
                 albumMaterials[i] = button;
-                PlayerUi.Place(button.GetComponentInChildren<NotebookArtGraphic>().rectTransform, new Rect(5, 11, 22, 22));
-                var materialLabel = ui.Label(button.transform, BattleCopy("material_" + i), new Rect(27, 2, width - 28, 40), 14, alignment: TextAnchor.MiddleCenter);
-                materialLabel.horizontalOverflow = HorizontalWrapMode.Overflow;
+                var materialIcon = button.GetComponentInChildren<PlayerIconGraphic>();
+                PlayerUi.Place(materialIcon.rectTransform, new Rect(4, 13, 18, 18));
+                materialIcon.gameObject.SetActive(!narrow);
+                var materialLabel = ui.Label(button.transform, BattleCopy("material_" + i), new Rect(narrow ? 4 : 24, 2, width - (narrow ? 8 : 25), 40), 14, alignment: TextAnchor.MiddleCenter);
+                materialLabel.resizeTextForBestFit = true;
+                materialLabel.resizeTextMinSize = 12; materialLabel.resizeTextMaxSize = 14;
+                materialLabel.horizontalOverflow = HorizontalWrapMode.Wrap;
             }
             float colorX = inset + materialWidth + gap;
             for (int i = 0; i < albumColors.Length; i++)
@@ -110,21 +125,21 @@ namespace PaperDefense.Presentation
                     if (!game.CanBuild) return; game.Drawing.SelectColor((InkColor)index); Refresh();
                 });
                 var icon = albumColors[i].GetComponentInChildren<PlayerIconGraphic>();
-                PlayerUi.Place(icon.rectTransform, new Rect(4, 12, 19, 19));
+                bool stacked = width < 64;
+                PlayerUi.Place(icon.rectTransform, stacked ? new Rect((width - 16) * .5f, 4, 16, 16) : new Rect(4, 12, 19, 19));
                 icon.color = i == 1 ? NotebookPalette.Red : i == 2 ? NotebookPalette.Blue : i == 3 ? NotebookPalette.Green : PlayerUi.Ink;
-                albumColorAmounts[i] = ui.Label(albumColors[i].transform, "", new Rect(24, 2, width - 27, 40), 15, alignment: TextAnchor.MiddleCenter);
+                albumColorAmounts[i] = ui.Label(albumColors[i].transform, "", stacked ? new Rect(4, 21, width - 8, 20) : new Rect(24, 2, width - 27, 40), 15, alignment: TextAnchor.MiddleCenter);
             }
             float actionX = colorX + colorsWidth + gap;
             float actionWidth = (w - inset - actionX - gap * 4) / 5;
-            albumErase = AlbumAction(dock, "Album battle erase", new Rect(actionX, stripY, actionWidth, 44), PlayerIcon.Trash, "erase", DrawingMode.Erase, "ui.tool.erase");
-            albumUpgrade = AlbumAction(dock, "Album battle upgrade", new Rect(actionX + (actionWidth + gap), stripY, actionWidth, 44), PlayerIcon.Plus, "upgrade", DrawingMode.Upgrade, "ui.tool.upgrade");
-            albumBlotter = AlbumAction(dock, "Album battle blotter", new Rect(actionX + (actionWidth + gap) * 2, stripY, actionWidth, 44), PlayerIcon.Drop, "blotter", DrawingMode.Blotter, "ui.tool.blotter");
-            albumPaint = AlbumAction(dock, "Album battle paint", new Rect(actionX + (actionWidth + gap) * 3, stripY, actionWidth, 44), PlayerIcon.Pencil, "paint", DrawingMode.Paint, "ui.tool.paint");
+            albumErase = AlbumAction(dock, "Album battle erase", new Rect(actionX, stripY, actionWidth, 44), PlayerIcon.Trash, "erase", DrawingMode.Erase);
+            albumUpgrade = AlbumAction(dock, "Album battle upgrade", new Rect(actionX + (actionWidth + gap), stripY, actionWidth, 44), PlayerIcon.Plus, "upgrade", DrawingMode.Upgrade);
+            albumBlotter = AlbumAction(dock, "Album battle blotter", new Rect(actionX + (actionWidth + gap) * 2, stripY, actionWidth, 44), PlayerIcon.Drop, "blotter", DrawingMode.Blotter);
+            albumPaint = AlbumAction(dock, "Album battle paint", new Rect(actionX + (actionWidth + gap) * 3, stripY, actionWidth, 44), PlayerIcon.Pencil, "paint", DrawingMode.Paint);
             ui.IconButton(dock, "Battle context toggle", new Rect(actionX + (actionWidth + gap) * 4, stripY, actionWidth, 44), PlayerIcon.Help, BattleCopy("summary"), () => { albumShowSummary = !albumShowSummary; Refresh(); });
-            albumSelection = ui.Label(parent, "", new Rect(180, layout.Dock.y - 20, layout.Width - 360, 20), 15, PlayerUi.Ink, alignment: TextAnchor.MiddleCenter);
-            albumSelection.name = "Battle tool hint";
+            albumSelection = CreateToolHint(parent, layout);
             float objectiveWidth = Mathf.Min(430, layout.Field.width * .48f);
-            albumObjectiveBadge = ui.Panel(parent, "Battle planning objective", new Rect((layout.Width - objectiveWidth) * .5f, layout.Dock.y - 54, objectiveWidth, 32), PlayerUi.Card);
+            albumObjectiveBadge = ui.Panel(parent, "Battle planning objective", new Rect((layout.Width - objectiveWidth) * .5f, layout.Dock.y - 66, objectiveWidth, 32), PlayerUi.Card);
             albumObjective = ui.Label(albumObjectiveBadge, BattleCopy("planning_hint"), new Rect(10, 1, objectiveWidth - 20, 30), 18, PlayerUi.Ink, alignment: TextAnchor.MiddleCenter);
             float messageWidth = Mathf.Min(430, layout.Field.width * .42f);
             albumMessageBadge = ui.Panel(parent, "Battle message paper", new Rect(layout.Field.x + 8, layout.Field.y + 44, messageWidth, 48), PlayerUi.Card);
@@ -134,7 +149,8 @@ namespace PaperDefense.Presentation
             albumOverview.GetComponent<PlayerTooltip>().Message = BattleCopy("overview_hint");
             albumOverviewCaption = albumOverview.GetComponentInChildren<Text>();
             BuildApproachIndicators(parent, layout.Field);
-            for (int i = 0; i < albumWells.Length; i++)
+            if (game.Run.Session.Balance.Mechanics.WaveInkFlasks) BuildInkFlasks(parent, layout);
+            else for (int i = 0; i < albumWells.Length; i++)
             {
                 int index = i;
                 albumWells[i] = ui.IconButton(parent, "Ink well " + i, new Rect(layout.Field.x + 6 + i * 78, layout.Field.y + 4, 72, 32), PlayerIcon.Drop, ui.T("well"), () => ActivateWell(index));
@@ -145,7 +161,7 @@ namespace PaperDefense.Presentation
             albumContextWidth = Mathf.Min(340, layout.Field.width * .34f);
             float contextHeight = Mathf.Min(540, layout.Field.height - 16);
             albumContext = ui.Panel(parent, "Battle context", new Rect(layout.Field.xMax - albumContextWidth - 8, layout.Field.y + 8, albumContextWidth, contextHeight), PlayerUi.Card, true);
-            albumStructureName = ui.Label(albumContext, "", new Rect(12, 4, albumContextWidth - 64, 44), 22, title: true);
+            albumStructureName = ui.Label(albumContext, "", new Rect(12, 4, albumContextWidth - 100, 44), 22, title: true);
             albumStructureName.name = "Album battle structure name";
             albumStructureName.resizeTextForBestFit = true; albumStructureName.resizeTextMinSize = 16; albumStructureName.resizeTextMaxSize = 22;
             var closeContext = AlbumTextButton(albumContext, "Close battle context", new Rect(albumContextWidth - 44, 8, 32, 32), "×", () => {
@@ -155,8 +171,10 @@ namespace PaperDefense.Presentation
             var closeCaption = closeContext.GetComponentInChildren<Text>();
             closeCaption.fontSize = closeCaption.resizeTextMaxSize = 27;
             albumContextContent = ui.Scroll(albumContext, "Selected structure details", new Rect(10, 52, albumContextWidth - 20, Mathf.Max(1, contextHeight - 112)), 360);
-            albumPreview = ui.Panel(albumContextContent, "Album battle inspected preview", new Rect(4, 0, albumContextWidth - 44, 112), Color.clear);
-            albumHealthStrip = ui.Panel(albumContextContent, "Album battle live health", new Rect(4, 116, albumContextWidth - 48, 58), Color.clear);
+            float previewHeight = contextHeight < 320 ? 48 : 112;
+            albumStatTop = previewHeight + 74;
+            albumPreview = ui.Panel(albumContextContent, "Album battle inspected preview", new Rect(4, 0, albumContextWidth - 44, previewHeight), Color.clear);
+            albumHealthStrip = ui.Panel(albumContextContent, "Album battle live health", new Rect(4, previewHeight + 4, albumContextWidth - 48, 65), Color.clear);
             var healthTrack = ui.Panel(albumHealthStrip, "Album battle HP track", new Rect(6, 6, albumContextWidth - 60, 12), PlayerUi.Ink);
             albumHealthFill = PlayerUi.Graphic<Image>(healthTrack, "Album battle HP fill", new Rect(2, 2, albumContextWidth - 64, 8));
             albumHealthFill.color = NotebookPalette.Green;
@@ -166,15 +184,15 @@ namespace PaperDefense.Presentation
             PlayerIcon[] statIcons = { PlayerIcon.Pencil, PlayerIcon.Drop, PlayerIcon.Pencil, PlayerIcon.Book };
             for (int i = 0; i < albumStatRows.Length; i++)
             {
-                var row = ui.Panel(albumContextContent, "Album battle " + statLabels[i] + " row", new Rect(4, 186 + i * 36, albumContextWidth - 48, 34), i % 2 == 0 ? PlayerUi.Selected : PlayerUi.Card);
+                var row = ui.Panel(albumContextContent, "Album battle " + statLabels[i] + " row", new Rect(4, albumStatTop + i * 36, albumContextWidth - 48, 34), i % 2 == 0 ? PlayerUi.Selected : PlayerUi.Card);
                 albumStatRows[i] = row;
                 Icon(row, statIcons[i], new Rect(7, 8, 19, 19), PlayerUi.Blue);
                 ui.Label(row, statLabels[i], new Rect(32, 2, (albumContextWidth - 90) * .46f, 30), 16);
                 albumStatValues[i] = ui.Label(row, "", new Rect((albumContextWidth - 48) * .52f, 2, (albumContextWidth - 48) * .48f - 8, 30), 16, alignment: TextAnchor.MiddleCenter);
             }
-            albumDetails = ui.Label(albumContextContent, "", new Rect(8, 338, albumContextWidth - 56, 200), 17);
+            albumDetails = ui.Label(albumContextContent, "", new Rect(8, albumStatTop + 152, albumContextWidth - 56, 200), 17);
             albumDetails.name = "Album battle structure details";
-            albumFieldSummary = ui.Label(albumContextContent, "", new Rect(4, 320, albumContextWidth - 48, 100), 16, PlayerUi.Muted);
+            albumFieldSummary = ui.Label(albumContextContent, "", new Rect(4, albumStatTop + 134, albumContextWidth - 48, 100), 16, PlayerUi.Muted);
             float priorityWidth = (albumContextWidth - 32) / 3;
             for (int i = 0; i < albumPriorities.Length; i++)
             {
@@ -184,29 +202,27 @@ namespace PaperDefense.Presentation
                         if (!game.CanBuild || !game.Drawing.InspectedCell.HasValue) return;
                         game.Run.SetPriority(game.Drawing.InspectedCell.Value, (TargetPriority)index); Refresh();
                     });
+                if (priorityWidth < 96)
+                {
+                    var caption = albumPriorities[i].GetComponentInChildren<Text>();
+                    caption.resizeTextForBestFit = false; caption.fontSize = 15;
+                    FitCaption(caption, BattleCopy("priority_" + i));
+                }
             }
             albumContext.gameObject.SetActive(false);
         }
 
         static void AlbumAtlasIcon(Transform parent, string id, Rect bounds)
         {
-            NotebookSpriteCatalog.TryGet(id, out var sprite);
-            var icon = PlayerUi.Graphic<Image>(parent, id + " illustration", bounds);
-            icon.sprite = sprite; icon.preserveAspect = true; icon.color = sprite == null ? Color.clear : Color.white;
+            var icon = PlayerUi.Graphic<PlayerIconGraphic>(parent, id + " illustration", bounds);
+            icon.Icon = id == "icon.pencil" ? PlayerIcon.Pencil : PlayerIcon.Home;
+            icon.Sketch = true; icon.color = PlayerUi.Ink;
         }
 
         void BuildApproachIndicators(Transform parent, Rect field)
         {
-            if (game.Run.Session.Battlefield != null)
-                foreach (var cell in game.Run.Session.Battlefield.Entrances)
-                {
-                    if (cell.X == 0) albumApproachSides[0] = true;
-                    if (cell.X == game.Run.Session.Balance.Width - 1) albumApproachSides[1] = true;
-                    if (cell.Y == game.Run.Session.Balance.Height - 1) albumApproachSides[2] = true;
-                    if (cell.Y == 0) albumApproachSides[3] = true;
-                }
             var positions = new[] { new Vector2(field.x + 8, field.center.y - 15), new Vector2(field.xMax - 72, field.center.y - 15),
-                new Vector2(field.center.x - 32, field.y + 8), new Vector2(field.center.x - 32, field.yMax - 78) };
+                new Vector2(field.center.x - 32, field.y + 8), new Vector2(field.center.x - 32, field.yMax - 90) };
             for (int side = 0; side < 4; side++)
             {
                 var panel = ui.Panel(parent, "Battle approach " + side, new Rect(positions[side], new Vector2(64, 30)), PlayerUi.Card);
@@ -231,19 +247,59 @@ namespace PaperDefense.Presentation
                     if (side >= 0) albumOffscreenCounts[side]++;
                 }
             bool focused = game.Drawing.Zoom > 1.01f;
+            int hordeSides = HordeWaveForecast.DisplayedSides(session);
             for (int side = 0; side < 4; side++)
             {
-                albumApproaches[side].gameObject.SetActive(focused && (albumApproachSides[side] || albumOffscreenCounts[side] > 0));
+                int edge = 1 << side;
+                bool entrance = session.Battlefield?.HasEntrance(edge) == true && (hordeSides == 0 || (hordeSides & edge) != 0);
+                albumApproaches[side].gameObject.SetActive(focused && (entrance || albumOffscreenCounts[side] > 0));
                 albumApproachCounts[side].text = albumOffscreenCounts[side] > 0 ? albumOffscreenCounts[side].ToString() : "";
             }
             albumOverviewCaption.text = BattleCopy(focused ? "overview" : "castle_focus");
             albumOverview.interactable = game.CanBuild;
+            albumOverview.GetComponent<PlayerTooltip>().Message = BattleCopy("overview_hint") + "\n" + EnemyRoleLegend;
         }
 
-        Button AlbumAction(Transform parent, string name, Rect bounds, PlayerIcon icon, string copy, DrawingMode mode, string art)
+        void RefreshCastleReadability(IRunReadModel session)
+        {
+            var feedback = game.World.Readability;
+            bool current = session.Phase == RunPhase.Assault && feedback.RunId == session.RunId;
+            bool low = current && feedback.LowCastleHealth;
+            albumHealth.fontSize = modernizationHud ? (low ? 13 : 16) : (low ? 14 : 19);
+            albumHealth.color = low ? NotebookPalette.Red : PlayerUi.Ink;
+            if (low) albumHealth.text += "\nМало HP";
+            if (!current || feedback.NearCastleCount == 0) return;
+            string cue = "Рядом с замком: " + feedback.NearCastleCount;
+            if (modernizationHud) albumPhase.text += "\n" + cue;
+            else albumForecast.text = cue;
+        }
+
+        string NextWaveForecast(IRunReadModel session, bool detailed = false)
+        {
+            if (forecastBalance == session.Balance && forecastWaveIndex == session.WaveIndex)
+                return detailed ? forecastDetails : forecastSummary;
+            forecastBalance = session.Balance;
+            forecastWaveIndex = session.WaveIndex;
+            forecastDirection = forecastHeadline = "";
+            if (forecastWaveIndex >= forecastBalance.Waves.Count) return forecastSummary = forecastDetails = ui.T("final_wave");
+            var next = forecastBalance.Waves[forecastWaveIndex];
+            forecastSummary = forecastDetails = BattleCopy("next_wave", next.Count, GameText.Resolve(next.Title));
+            if (next.IsHorde)
+            {
+                forecastDirection = HordeWaveForecast.Directions(ui, next);
+                var forecast = next.Forecast;
+                forecastHeadline = HordeWaveForecast.Headline(forecast);
+                forecastSummary += " · " + forecastDirection;
+                forecastDetails = forecastSummary + "\n" + forecastHeadline + ". " +
+                    HordeWaveForecast.Advice(forecast, forecastBalance.Mechanics);
+            }
+            return detailed ? forecastDetails : forecastSummary;
+        }
+
+        Button AlbumAction(Transform parent, string name, Rect bounds, PlayerIcon icon, string copy, DrawingMode mode)
             => ui.IconButton(parent, name, bounds, icon, BattleCopy(copy), () => {
                 if (!game.CanBuild) return; game.Drawing.SelectMode(mode); Refresh();
-            }, art: art);
+            });
 
         Button AlbumTextButton(Transform parent, string name, Rect bounds, string copy, Action action, bool primary = false)
         {
@@ -255,40 +311,11 @@ namespace PaperDefense.Presentation
         }
 
         void AlbumIllustration(Transform parent, AlbumEntry entry, Rect bounds, string identity)
-        {
-            if (entry == null) return;
-            if (entry.Kind == AlbumEntryKind.Tower || entry.Kind == AlbumEntryKind.Structure)
-            {
-                var exact = PlayerUi.Graphic<WeaponAssemblyGraphic>(parent, identity + " certified assembly", bounds);
-                try { exact.SetRecipe(entry.Snapshot); return; }
-                catch (ArgumentException) { }
-                catch (InvalidOperationException) { }
-                catch (NotSupportedException) { }
-                WorkshopUi.RemoveView(exact.gameObject);
-            }
-            var artBounds = new Rect(bounds.x, bounds.y, bounds.width, Mathf.Max(1, bounds.height - 16));
-            if (entry.Kind == AlbumEntryKind.Legacy) ui.Blueprint(parent, entry.LegacyBlueprint, artBounds);
-            else if (entry.Kind == AlbumEntryKind.Tower)
-            {
-                string mechanism = entry.Snapshot.Recipe.Tower.Mounts[0].Weapon.Mechanism.Id;
-                ui.Art(parent, "ui.weapon." + (mechanism.StartsWith("core.", StringComparison.Ordinal) ? mechanism.Substring(5) : mechanism), artBounds);
-            }
-            else if (entry.Snapshot.Recipe.Structure.Family == AssemblyStructureFamily.Generator)
-            {
-                var symbol = PlayerUi.Graphic<WorkshopIconGraphic>(parent, identity + " generator schematic", artBounds);
-                symbol.Icon = WorkshopIcon.Ink; symbol.color = PlayerUi.Blue;
-            }
-            else
-            {
-                var family = entry.Snapshot.Recipe.Structure.Family;
-                ui.Art(parent, family == AssemblyStructureFamily.Wall ? "object.barricade-site" : family == AssemblyStructureFamily.Repair ? "object.repair" : "object.tar", artBounds);
-            }
-            var caption = ui.Label(parent, BattleCopy("schematic"), new Rect(bounds.x, bounds.yMax - 16, bounds.width, 16), 12, PlayerUi.Muted, alignment: TextAnchor.MiddleCenter);
-            caption.name = identity + " schematic caption";
-        }
+            => StandardAssemblyIllustration.Draw(parent, entry, bounds, identity + " certified assembly");
 
         void RefreshAlbumHud()
         {
+            if (modernizationHud) { RefreshModernizationHud(); return; }
             if (!albumTypographyReady)
             {
                 albumTypographyReady = true;
@@ -300,30 +327,32 @@ namespace PaperDefense.Presentation
             RefreshApproachIndicators(s);
             albumInk.text = BattleCopy("ink", s.Ink); albumHealth.text = BattleCopy("castle", Mathf.CeilToInt(s.BaseHealth), Mathf.CeilToInt(s.Balance.BaseHealth));
             albumWave.text = ui.T("wave", s.WaveIndex, s.Balance.Waves.Count);
-            albumPhase.text = game.Finished ? BattleCopy("completed") : s.PendingUpgrade ? BattleCopy("upgrade_choice") : s.Phase == RunPhase.Assault ? ui.T("enemies", s.Enemies.Count + s.RemainingToSpawn) : ui.T("planning", Mathf.CeilToInt(s.Countdown));
-            albumForecast.text = s.WaveIndex < s.Balance.Waves.Count ? BattleCopy("next_wave", s.Balance.Waves[s.WaveIndex].Count, GameText.Resolve(s.Balance.Waves[s.WaveIndex].Title)) : ui.T("final_wave");
+            albumPhase.text = game.Finished ? BattleCopy("completed") : s.PendingUpgrade ? BattleCopy("upgrade_choice") : s.Phase == RunPhase.Assault ? AssaultEnemyCount(s) : ui.T("planning", Mathf.CeilToInt(s.Countdown));
+            albumForecast.text = NextWaveForecast(s);
+            RefreshCastleReadability(s);
+            albumLaunch.GetComponent<PlayerTooltip>().Message = "Следующая волна · N\n" + NextWaveForecast(s, detailed: true);
             albumSpeed.text = "×" + game.Run.Speed;
             albumLaunch.interactable = active && !s.PendingUpgrade && (s.Phase == RunPhase.Planning || s.Phase == RunPhase.Intermission);
             albumLaunch.targetGraphic.color = albumLaunch.interactable ? PlayerUi.Blue : PlayerUi.Card;
             albumLaunch.GetComponentInChildren<Text>().color = albumLaunch.interactable ? PlayerUi.Card : PlayerUi.Muted;
             albumPhase.color = s.Phase == RunPhase.Assault ? PlayerUi.Ink : PlayerUi.Muted;
             albumObjectiveBadge.gameObject.SetActive(active && (s.Phase == RunPhase.Planning || s.Phase == RunPhase.Intermission));
-            string notice = game.Run.Workshop.HasUnsavedChanges ? GameText.Resolve(game.Run.Workshop.SaveMessage) : input.Message;
-            albumMessage.text = notice == BattleCopy("planning_hint") ? "" : notice;
+            albumMessage.text = !input.IsPlacingTower && game.Run.Workshop.HasUnsavedChanges ? GameText.Resolve(game.Run.Workshop.SaveMessage)
+                : input.HasInitialPlanningInstruction ? "" : input.Message;
             albumMessageBadge.gameObject.SetActive(!string.IsNullOrEmpty(albumMessage.text));
             string selectedName = input.BlueprintSlot >= 0 && input.BlueprintSlot < game.Run.RunLoadout.Entries.Count && game.Run.RunLoadout.Entries[input.BlueprintSlot] != null
                 ? GameText.Resolve(game.Run.RunLoadout.Entries[input.BlueprintSlot].Name) : ui.T("empty");
             if (input.Mode != DrawingMode.Build) selectedName = BattleCopy(input.Mode == DrawingMode.Erase ? "erase" : input.Mode == DrawingMode.Upgrade ? "upgrade" : input.Mode == DrawingMode.Paint ? "paint" : "blotter");
-            albumSelection.text = toolHint.Length > 0 ? toolHint : input.PreviewReason.Length > 0 ? input.PreviewReason : ui.T("selection", selectedName, BattleCopy("material_" + (int)input.Tier));
+            WriteToolHint(albumSelection, toolHint.Length > 0 ? toolHint : input.PreviewReason.Length > 0 ? input.PreviewReason : ui.T("selection", selectedName, BattleCopy("material_" + (int)input.Tier)));
             for (int i = 0; i < albumCards.Length; i++)
             {
                 var entry = game.Run.RunLoadout.Entries[i]; var resolved = game.Run.RunLoadout.Resolved[i];
                 bool generator = resolved?.Support?.Kind == AssemblyStructureFamily.Generator;
                 MaterialTier tier = generator ? MaterialTier.Pencil : input.Tier;
                 int cost = entry == null ? 0 : game.Run.RunLoadout.ResolveSlot(i, tier).Cost;
-                if (entry != null && input.HasHover)
+                if (entry != null && (input.HasHover || input.IsPlacingTower))
                 {
-                    albumQuoteCell[0] = input.HoverCell;
+                    albumQuoteCell[0] = input.PlacementCell ?? input.HoverCell;
                     var quote = game.Run.QuoteEntry(albumQuoteCell, i, tier, entry.Kind == AlbumEntryKind.Structure ? InkColor.None : input.Color);
                     if (quote.Cost > 0) cost = quote.Cost;
                 }
@@ -337,7 +366,8 @@ namespace PaperDefense.Presentation
                     albumNameGeometry[i] = geometry;
                     FitAlbumName(albumNames[i], name);
                 }
-                albumPrices[i].text = entry == null ? "—" : BattleCopy("cost", cost) + (generator ? "\n" + BattleCopy("pencil_card") : "");
+                bool pencilCaptionFits = albumPrices[i].rectTransform.rect.width >= 100;
+                albumPrices[i].text = entry == null ? "—" : BattleCopy("cost", cost) + (generator && pencilCaptionFits ? "\n" + BattleCopy("pencil_card") : "");
                 albumPrices[i].color = cost > s.Ink ? NotebookPalette.Red : PlayerUi.Ink;
                 string reason = entry == null ? BattleCopy("unavailable") : cost > s.Ink ? BattleCopy("shortage", cost - s.Ink) : "";
                 albumCards[i].GetComponent<PlayerTooltip>().Message = (i + 1) + " · " + name + (generator ? " · " + BattleCopy("pencil_only") : "") + (reason.Length > 0 ? " · " + reason : "");
@@ -348,13 +378,17 @@ namespace PaperDefense.Presentation
             for (int i = 0; i < albumColors.Length; i++)
             {
                 albumColors[i].interactable = active && (i == 0 || s.Balance.Mechanics.ColorCartridges);
-                ui.MarkSelected(albumColors[i], (int)input.Color == i); albumColorAmounts[i].text = i == 0 ? "—" : s.ColoredInk((InkColor)i).ToString();
+                ui.MarkSelected(albumColors[i], (int)input.Color == i);
+                string amount = i == 0 ? "—" : s.ColoredInk((InkColor)i).ToString();
+                albumColorAmounts[i].text = amount;
+                albumColors[i].GetComponent<PlayerTooltip>().Message = BattleCopy("color_" + i) + " · " + amount;
             }
             albumErase.interactable = albumUpgrade.interactable = active;
             albumPaint.interactable = active && s.Balance.Mechanics.ColorCartridges; albumBlotter.interactable = active && s.Balance.Mechanics.CorpseBlots;
             ui.MarkSelected(albumErase, input.Mode == DrawingMode.Erase); ui.MarkSelected(albumUpgrade, input.Mode == DrawingMode.Upgrade);
             ui.MarkSelected(albumPaint, input.Mode == DrawingMode.Paint); ui.MarkSelected(albumBlotter, input.Mode == DrawingMode.Blotter);
-            for (int i = 0; i < albumWells.Length; i++)
+            if (flaskReward != null) RefreshInkFlasks(s);
+            else for (int i = 0; i < albumWells.Length; i++)
             {
                 bool exists = s.Balance.Mechanics.InkWells && i < s.Wells.Count; albumWells[i].gameObject.SetActive(exists); if (!exists) continue;
                 var well = s.Wells[i]; albumWells[i].interactable = active; ui.MarkSelected(albumWells[i], well.Active);
@@ -368,7 +402,7 @@ namespace PaperDefense.Presentation
         void RefreshAlbumInspector(IRunReadModel s)
         {
             var inspected = game.Drawing.InspectedCell.HasValue ? s.StructureAt(game.Drawing.InspectedCell.Value) : null;
-            albumContext.gameObject.SetActive(albumShowSummary || inspected.HasValue);
+            albumContext.gameObject.SetActive(!game.Drawing.IsPlacingTower && (albumShowSummary || inspected.HasValue));
             if (!albumContext.gameObject.activeSelf) return;
             albumStructureName.text = BattleCopy("summary");
             string text = BattleCopy("inspect_hint"); bool tower = false;
@@ -382,7 +416,7 @@ namespace PaperDefense.Presentation
                 if (albumPreviewId != structure.Id)
                 {
                     for (int child = albumPreview.childCount - 1; child >= 0; child--) WorkshopUi.RemoveView(albumPreview.GetChild(child).gameObject);
-                    AlbumIllustration(albumPreview, frozen, new Rect(0, 0, albumContextWidth - 44, 112), "Battle inspected");
+                    AlbumIllustration(albumPreview, frozen, new Rect(0, 0, albumPreview.rect.width, albumPreview.rect.height), "Battle inspected");
                     albumPreviewId = structure.Id;
                     albumContextContent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 1;
                 }
@@ -407,7 +441,7 @@ namespace PaperDefense.Presentation
                             int rounds = cycle != null && cycle.Initialized ? cycle.RoundsRemaining : weapon.MagazineSize;
                             copy.AppendLine(BattleCopy("weapon", weapon.SlotIndex + 1, rounds, weapon.MagazineSize));
                             copy.AppendLine(BattleCopy(cycle != null && cycle.IsReloading ? "reload" : "interval", Number(mount.Cooldown)));
-                            copy.AppendLine(BattleCopy("range", Number(weapon.Range)));
+                            copy.AppendLine(BattleCopy("range", Number(weapon.Range)) + " · сектор " + Number(weapon.FiringArcDegrees) + "°");
                         }
                     }
                     else if (entry.Support != null)
@@ -424,6 +458,8 @@ namespace PaperDefense.Presentation
                         { copy.AppendLine(BattleCopy("repair", Number(support.RepairPerSecond))); copy.AppendLine(BattleCopy("radius", Number(support.Radius))); }
                         else if (support.Kind == AssemblyStructureFamily.Slow)
                         { copy.AppendLine(BattleCopy("slow", Number(support.SlowSpeedMultiplier), Number(support.SlowSeconds))); copy.AppendLine(BattleCopy("radius", Number(support.Radius))); }
+                        else if (GameText.TrapOrBeaconEffect(support) is string effect)
+                            copy.AppendLine(GameText.Resolve(effect));
                     }
                 }
                 text = copy.ToString().TrimEnd();
@@ -433,7 +469,7 @@ namespace PaperDefense.Presentation
             albumHealthStrip.gameObject.SetActive(inspected.HasValue);
             for (int i = 0; i < albumStatRows.Length; i++) albumStatRows[i].gameObject.SetActive(inspected.HasValue && (i < 3 || tower));
             albumDetails.text = text;
-            float y = inspected.HasValue ? 192 + (tower ? 4 : 3) * 36 : 0, height = Mathf.Ceil(albumDetails.preferredHeight);
+            float y = inspected.HasValue ? albumStatTop + (tower ? 4 : 3) * 36 + 6 : 0, height = Mathf.Ceil(albumDetails.preferredHeight);
             PlayerUi.Place(albumDetails.rectTransform, new Rect(8, y, albumContextWidth - 56, height));
             albumFieldSummary.gameObject.SetActive(albumShowSummary);
             albumFieldSummary.text = ui.T("field_stats", s.Enemies.Count, s.Kills, s.Structures.Count);

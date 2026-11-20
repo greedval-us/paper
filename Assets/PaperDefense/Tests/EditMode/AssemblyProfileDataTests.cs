@@ -44,7 +44,7 @@ namespace PaperDefense.Tests
             Assert.That(restored.Snapshot.Recipe.Tower, Is.Null);
             Assert.That(restored.Snapshot.Recipe.Structure.Family, Is.EqualTo(AssemblyStructureFamily.Generator));
             Assert.That(AssemblyResolver.Resolve(restored.Snapshot, GameBalance.CreateDefault(), MaterialTier.Pencil).Value.Support.IncomePerWave,
-                Is.EqualTo(12));
+                Is.EqualTo(18));
         }
 
         [Test] public void LegacyEntry_RoundTripsHistoricalBlueprintWithoutConversion()

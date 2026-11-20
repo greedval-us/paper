@@ -8,10 +8,24 @@ namespace PaperDefense.Core
 
         public static float ApplyHit(EnemyState enemy, float raw, ColorEffectPayload payload, RunStatistics statistics,
             StructureKind weapon, EffectsRules defenseRules, float blotReduction = .15f,string weaponId=null,
-            SimulationEventBuffer events=null,long tick=0,double simulationSeconds=0,int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0)
+            SimulationEventBuffer events=null,long tick=0,double simulationSeconds=0,int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0,
+            AttackKind attack = AttackKind.Single)
         {
             if (defenseRules == null) throw new ArgumentNullException(nameof(defenseRules));
             if (enemy == null || enemy.Health <= 0 || raw < 0 || float.IsNaN(raw) || float.IsInfinity(raw)) return 0;
+            ApplyStatus(enemy, payload, weapon, weaponId);
+            float defense = Defense(enemy, defenseRules, blotReduction);
+            // A line shot bypasses half the remaining armor for this impact only.
+            if (attack == AttackKind.Line) defense *= .5f;
+            float actual = Math.Min(enemy.Health, DamageRules.Apply(raw, defense, defenseRules.MaximumDefense));
+            enemy.Health = Math.Max(0, enemy.Health - actual);
+            statistics?.RecordDamage(weaponId??LegacyContentIds.Weapon(weapon), actual);
+            PublishDamage(enemy,enemy.Health+actual,events,tick,simulationSeconds,weapon,weaponId,sourceStructureId,mountSlotIndex,actionId,payload);
+            return actual;
+        }
+
+        internal static void ApplyStatus(EnemyState enemy, ColorEffectPayload payload, StructureKind weapon, string weaponId)
+        {
             switch (payload.Color)
             {
                 case InkColor.Red:
@@ -25,16 +39,16 @@ namespace PaperDefense.Core
                     enemy.BlueRemaining = enemy.BlueEffect.Remaining;
                     break;
                 case InkColor.Green:
-                    if (enemy.GreenEffect == null) enemy.GreenEffect = new TimedEffectState(InkColor.Green);
-                    enemy.GreenEffect.TryApply(payload, weapon,weaponId);
-                    enemy.GreenRemaining = enemy.GreenEffect.Remaining;
+                    ApplyArmorReduction(enemy, payload, weapon, weaponId);
                     break;
             }
-            float actual = Math.Min(enemy.Health, DamageRules.Apply(raw, Defense(enemy, defenseRules, blotReduction), defenseRules.MaximumDefense));
-            enemy.Health = Math.Max(0, enemy.Health - actual);
-            statistics?.RecordDamage(weaponId??LegacyContentIds.Weapon(weapon), actual);
-            PublishDamage(enemy,enemy.Health+actual,events,tick,simulationSeconds,weapon,weaponId,sourceStructureId,mountSlotIndex,actionId);
-            return actual;
+        }
+
+        internal static void ApplyArmorReduction(EnemyState enemy, ColorEffectPayload effect, StructureKind source, string sourceId)
+        {
+            if (enemy.GreenEffect == null) enemy.GreenEffect = new TimedEffectState(InkColor.Green);
+            enemy.GreenEffect.TryApply(effect, source, sourceId);
+            enemy.GreenRemaining = enemy.GreenEffect.Remaining;
         }
 
         public static void ApplySlow(EnemyState enemy, float speedMultiplier, float duration)
@@ -61,13 +75,18 @@ namespace PaperDefense.Core
         {
             if (rules == null) throw new ArgumentNullException(nameof(rules));
             if (enemy == null) return 0;
-            float defense = enemy.DrawingTier == DrawingTier.Hatched ? rules.HatchedDefense :
-                enemy.DrawingTier == DrawingTier.Outlined ? rules.OutlinedDefense : 0;
-            if (enemy.BlotRemaining > 0) defense += Math.Max(0, blotReduction);
+            float defense = ArmorBeforeReduction(enemy, rules, blotReduction);
             if (enemy.GreenEffect != null)
             { if (enemy.GreenEffect.HasActive) defense -= enemy.GreenEffect.Active.Strength; }
             else if (enemy.GreenRemaining > 0) defense -= rules.GreenDefenseReduction;
             return DamageRules.EffectiveDefense(defense, rules.MaximumDefense);
+        }
+
+        internal static float ArmorBeforeReduction(EnemyState enemy, EffectsRules rules, float blotReduction)
+        {
+            float defense = enemy.DrawingTier == DrawingTier.Hatched ? rules.HatchedDefense :
+                enemy.DrawingTier == DrawingTier.Outlined ? rules.OutlinedDefense : 0;
+            return enemy.BlotRemaining > 0 ? defense + Math.Max(0, blotReduction) : defense;
         }
 
         public static float MovementMultiplier(EnemyState enemy, float blotSpeedBonus = .15f)
@@ -142,7 +161,7 @@ namespace PaperDefense.Core
             {
                 var source = enemy.RedEffect.Advance(delta, enemy, rules, statistics, blotReduction);
                 SyncRed(enemy);
-                PublishDamage(enemy,previousHealth,events,tick,simulationSeconds,source.Weapon,source.WeaponId);
+                PublishDamage(enemy,previousHealth,events,tick,simulationSeconds,source.Weapon,source.WeaponId,colorEffect:source.ColorEffect);
                 return;
             }
             // Directly initialized historical fixtures still use their explicit scalar timers.
@@ -163,27 +182,28 @@ namespace PaperDefense.Core
             }
             if (enemy.Health <= 0) enemy.RedRemaining = 0;
             if (enemy.RedRemaining <= 0) enemy.RedTickRemaining = 0;
-            PublishDamage(enemy,previousHealth,events,tick,simulationSeconds,enemy.RedSourceWeapon,enemy.RedSourceWeaponId);
+            PublishDamage(enemy,previousHealth,events,tick,simulationSeconds,enemy.RedSourceWeapon,enemy.RedSourceWeaponId,
+                colorEffect:ColorEffectPayload.Capture(InkColor.Red,rules));
         }
 
         internal static void PublishDamage(EnemyState enemy,float previousHealth,SimulationEventBuffer events,long tick,double simulationSeconds,
-            StructureKind weapon=default,string weaponId=null,int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0)
+            StructureKind weapon=default,string weaponId=null,int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0,ColorEffectPayload colorEffect=default)
         {
             if(events==null||enemy==null||enemy.Health>=previousHealth)return;
             events.Publish(tick,SimulationEventKind.EnemyHit,enemy.Position,enemy.Position,weapon,entityId:enemy.Id,weaponId:weaponId,
                 sourceStructureId:sourceStructureId,mountSlotIndex:mountSlotIndex,actionId:actionId,simulationSeconds:simulationSeconds,
-                enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier,enemyVisualScale:enemy.VisualScale);
-            PublishDeath(enemy,events,tick,simulationSeconds,weapon,weaponId,sourceStructureId,mountSlotIndex,actionId);
+                enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier,enemyVisualScale:enemy.VisualScale,colorEffect:colorEffect);
+            PublishDeath(enemy,events,tick,simulationSeconds,weapon,weaponId,sourceStructureId,mountSlotIndex,actionId,colorEffect);
         }
 
         internal static void PublishDeath(EnemyState enemy,SimulationEventBuffer events,long tick,double simulationSeconds,
-            StructureKind weapon=default,string weaponId=null,int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0)
+            StructureKind weapon=default,string weaponId=null,int sourceStructureId=0,int mountSlotIndex=-1,long actionId=0,ColorEffectPayload colorEffect=default)
         {
             if(events==null||enemy==null||enemy.Health>0||enemy.VisualDeathPublished)return;
             enemy.VisualDeathPublished=true;
             events.Publish(tick,SimulationEventKind.EnemyDied,enemy.Position,enemy.Position,weapon,entityId:enemy.Id,weaponId:weaponId,
                 sourceStructureId:sourceStructureId,mountSlotIndex:mountSlotIndex,actionId:actionId,simulationSeconds:simulationSeconds,
-                enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier,enemyVisualScale:enemy.VisualScale);
+                enemyKind:enemy.Kind,enemyDrawingTier:enemy.DrawingTier,enemyVisualScale:enemy.VisualScale,colorEffect:colorEffect);
         }
 
         static void SyncRed(EnemyState enemy)

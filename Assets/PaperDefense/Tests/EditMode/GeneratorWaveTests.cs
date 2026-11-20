@@ -43,20 +43,20 @@ namespace PaperDefense.Tests
         static void CompleteEmptyWave(GameSession session)
         { session.StartNextWave(); session.Tick(.01f); }
 
-        [TestCase(false, 60, 80, 12)] [TestCase(true, 72, 68, 15)]
-        public void AGeneratorPaysItsResolvedIncomeAfterEachFullySurvivedWave(bool economy, int cost, float health, int income)
+        [TestCase(false, 60, 80, 18, 4)] [TestCase(true, 72, 68, 27, 3)]
+        public void AGeneratorPaysItsResolvedIncomeAfterEachFullySurvivedWave(bool economy, int cost, float health, int income, int payback)
         {
             var generator = Generator(economy: economy); var ledger = new GeneratorWaveLedger(); var run = Guid.NewGuid();
             Assert.That(generator.ResolvedEntry.Cost, Is.EqualTo(cost)); Assert.That(generator.MaxHealth, Is.EqualTo(health));
-            Assert.That(generator.ResolvedEntry.Support.PaybackWaves(cost), Is.EqualTo(5));
+            Assert.That(generator.ResolvedEntry.Support.PaybackWaves(cost), Is.EqualTo(payback));
             int earned = 0;
-            for (int wave = 1; wave <= 5; wave++)
+            for (int wave = 1; wave <= payback; wave++)
             {
                 ledger.BeginWave(run, wave, new[] { generator });
                 Assert.That(ledger.CompleteWave(run, wave, new[] { generator }), Is.EqualTo(income));
                 Assert.That(ledger.CompleteWave(run, wave, new[] { generator }), Is.Zero);
                 earned += income;
-                if (wave < 5) Assert.That(earned, Is.LessThan(cost));
+                if (wave < payback) Assert.That(earned, Is.LessThan(cost));
             }
             Assert.That(earned, Is.GreaterThanOrEqualTo(cost));
         }
@@ -67,7 +67,7 @@ namespace PaperDefense.Tests
             var standard = Generator(); var economy = Generator(2, true);
             var duplicated = new[] { standard, economy, standard, economy };
             ledger.BeginWave(run, 1, duplicated);
-            Assert.That(ledger.CompleteWave(run, 1, duplicated), Is.EqualTo(27));
+            Assert.That(ledger.CompleteWave(run, 1, duplicated), Is.EqualTo(45));
             Assert.That(standard.Health, Is.EqualTo(80)); Assert.That(economy.Health, Is.EqualTo(68));
             Assert.That(standard.IsComplete && economy.IsComplete, Is.True);
         }
@@ -126,7 +126,7 @@ namespace PaperDefense.Tests
             var ledger = new GeneratorWaveLedger(); var run = Guid.NewGuid();
             ledger.BeginWave(run, 1, structures); structures.Add(late);
             ledger.BeginWave(run, 1, structures);
-            Assert.That(ledger.CompleteWave(run, 1, structures), Is.EqualTo(12));
+            Assert.That(ledger.CompleteWave(run, 1, structures), Is.EqualTo(18));
         }
 
         [Test] public void BeginningTheSameWaveTwiceCannotReplaceItsOriginalEmptySnapshot()
@@ -141,7 +141,7 @@ namespace PaperDefense.Tests
         {
             var ledger = new GeneratorWaveLedger(); var run = Guid.NewGuid(); var generator = Generator();
             ledger.BeginWave(run, 1, new[] { generator }); generator.ResolvedEntry = GeneratorEntry(true);
-            Assert.That(ledger.CompleteWave(run, 1, new[] { generator }), Is.EqualTo(12));
+            Assert.That(ledger.CompleteWave(run, 1, new[] { generator }), Is.EqualTo(18));
         }
 
         [Test] public void CompletionWithoutABeginDoesNotInventAPlayedWave()
@@ -149,7 +149,7 @@ namespace PaperDefense.Tests
             var ledger = new GeneratorWaveLedger(); var run = Guid.NewGuid(); var generator = Generator();
             Assert.That(ledger.CompleteWave(run, 1, new[] { generator }), Is.Zero);
             ledger.BeginWave(run, 1, new[] { generator });
-            Assert.That(ledger.CompleteWave(run, 1, new[] { generator }), Is.EqualTo(12));
+            Assert.That(ledger.CompleteWave(run, 1, new[] { generator }), Is.EqualTo(18));
         }
 
         [Test] public void CompletingAnotherWaveDoesNotConsumeTheActiveSnapshot()
@@ -158,7 +158,7 @@ namespace PaperDefense.Tests
             ledger.BeginWave(run, 2, new[] { generator });
             Assert.That(ledger.CompleteWave(run, 1, new[] { generator }), Is.Zero);
             Assert.That(ledger.CompleteWave(run, 3, new[] { generator }), Is.Zero);
-            Assert.That(ledger.CompleteWave(run, 2, new[] { generator }), Is.EqualTo(12));
+            Assert.That(ledger.CompleteWave(run, 2, new[] { generator }), Is.EqualTo(18));
         }
 
         [Test] public void ANewerWaveRetiresAnAbandonedWaveAndOldEventsCannotReopenIt()
@@ -166,12 +166,12 @@ namespace PaperDefense.Tests
             var ledger = new GeneratorWaveLedger(); var run = Guid.NewGuid(); var generator = Generator();
             ledger.BeginWave(run, 1, new[] { generator }); ledger.BeginWave(run, 2, new[] { generator });
             Assert.That(ledger.CompleteWave(run, 1, new[] { generator }), Is.Zero);
-            Assert.That(ledger.CompleteWave(run, 2, new[] { generator }), Is.EqualTo(12));
+            Assert.That(ledger.CompleteWave(run, 2, new[] { generator }), Is.EqualTo(18));
             ledger.BeginWave(run, 1, new[] { generator }); ledger.BeginWave(run, 2, new[] { generator });
             Assert.That(ledger.CompleteWave(run, 1, new[] { generator }), Is.Zero);
             Assert.That(ledger.CompleteWave(run, 2, new[] { generator }), Is.Zero);
             ledger.BeginWave(run, 3, new[] { generator });
-            Assert.That(ledger.CompleteWave(run, 3, new[] { generator }), Is.EqualTo(12));
+            Assert.That(ledger.CompleteWave(run, 3, new[] { generator }), Is.EqualTo(18));
         }
 
         [Test] public void OneSessionLedgerCannotBeReboundByEventsFromAnotherRun()
@@ -179,11 +179,11 @@ namespace PaperDefense.Tests
             var ledger = new GeneratorWaveLedger(); var run = Guid.NewGuid(); var other = Guid.NewGuid(); var generator = Generator();
             ledger.BeginWave(run, 1, new[] { generator }); ledger.BeginWave(other, 1, new[] { generator });
             Assert.That(ledger.CompleteWave(other, 1, new[] { generator }), Is.Zero);
-            Assert.That(ledger.CompleteWave(run, 1, new[] { generator }), Is.EqualTo(12));
+            Assert.That(ledger.CompleteWave(run, 1, new[] { generator }), Is.EqualTo(18));
             ledger.BeginWave(other, 2, new[] { generator });
             Assert.That(ledger.CompleteWave(other, 2, new[] { generator }), Is.Zero);
             ledger.BeginWave(run, 2, new[] { generator });
-            Assert.That(ledger.CompleteWave(run, 2, new[] { generator }), Is.EqualTo(12));
+            Assert.That(ledger.CompleteWave(run, 2, new[] { generator }), Is.EqualTo(18));
         }
 
         [Test] public void LedgerDoesNotImposeAnEightWaveCampaignLimit()
@@ -192,7 +192,7 @@ namespace PaperDefense.Tests
             for (int wave = 1; wave <= 100; wave++)
             {
                 ledger.BeginWave(run, wave, new[] { generator });
-                Assert.That(ledger.CompleteWave(run, wave, new[] { generator }), Is.EqualTo(12));
+                Assert.That(ledger.CompleteWave(run, wave, new[] { generator }), Is.EqualTo(18));
             }
             ledger.BeginWave(run, 1, new[] { generator });
             Assert.That(ledger.CompleteWave(run, 1, new[] { generator }), Is.Zero);
@@ -210,7 +210,7 @@ namespace PaperDefense.Tests
             Assert.Throws<ArgumentNullException>(() => call(run, 1, null));
             ledger.BeginWave(run, 1, new[] { generator });
             Assert.Throws<ArgumentNullException>(() => call(run, 1, null));
-            Assert.That(ledger.CompleteWave(run, 1, new[] { generator }), Is.EqualTo(12));
+            Assert.That(ledger.CompleteWave(run, 1, new[] { generator }), Is.EqualTo(18));
         }
 
         [Test] public void EachNewSessionGetsANewRunIdentityAndOnlyActuallyCompletedWavesAreCounted()
@@ -228,7 +228,7 @@ namespace PaperDefense.Tests
             Assert.That(second.CompletedWaves, Is.Zero);
         }
 
-        [TestCase(false, 12)] [TestCase(true, 15)]
+        [TestCase(false, 18)] [TestCase(true, 27)]
         public void SessionPaysGeneratorsOncePerCompleteWaveWithoutChangingMetaGold(bool economy, int income)
         {
             var balance = SessionRules(); var session = new GameSession(balance, starterDefenses: false);
@@ -247,7 +247,7 @@ namespace PaperDefense.Tests
             var balance = SessionRules(); var session = new GameSession(balance, starterDefenses: false);
             session.StartNextWave(); Build(session, GeneratorEntry(balance: balance), new Cell(4, 4)); FinishConstruction(session);
             Assert.That(session.CompletedWaves, Is.EqualTo(1)); Assert.That(session.Ink, Is.EqualTo(940));
-            CompleteEmptyWave(session); Assert.That(session.Ink, Is.EqualTo(952));
+            CompleteEmptyWave(session); Assert.That(session.Ink, Is.EqualTo(958));
         }
 
         [Test] public void FinishingConstructionOnTheCompletionTickDoesNotEarnAFullWave()
@@ -256,7 +256,7 @@ namespace PaperDefense.Tests
             var generator = Build(session, GeneratorEntry(balance: balance), new Cell(4, 4)); generator.BuildRemaining = .001f;
             session.StartNextWave(); session.Tick(.01f);
             Assert.That(generator.IsComplete, Is.True); Assert.That(session.Ink, Is.EqualTo(940));
-            CompleteEmptyWave(session); Assert.That(session.Ink, Is.EqualTo(952));
+            CompleteEmptyWave(session); Assert.That(session.Ink, Is.EqualTo(958));
         }
 
         [Test] public void SellingAGeneratorBeforeCompletionPaysNeitherIncomeNorRefund()
@@ -293,9 +293,9 @@ namespace PaperDefense.Tests
             var session = new GameSession(balance, starterDefenses: false); var cell = new Cell(4, 4);
             Build(session, GeneratorEntry(balance: balance), cell); FinishConstruction(session);
             CompleteEmptyWave(session); Assert.That(session.PendingUpgrade, Is.True); session.ChooseUpgrade(RunUpgrade.DeepInk);
-            int ink = session.Ink; CompleteEmptyWave(session); Assert.That(session.Ink, Is.EqualTo(ink + 12));
+            int ink = session.Ink; CompleteEmptyWave(session); Assert.That(session.Ink, Is.EqualTo(ink + 18));
             Assert.That(session.PendingUpgrade, Is.True); session.ChooseUpgrade(RunUpgrade.Salvage); ink = session.Ink;
-            CompleteEmptyWave(session); Assert.That(session.Ink, Is.EqualTo(ink + 12));
+            CompleteEmptyWave(session); Assert.That(session.Ink, Is.EqualTo(ink + 18));
             Assert.That(session.TryErase(cell, out int refund), Is.True); Assert.That(refund, Is.Zero);
         }
 

@@ -7,18 +7,10 @@ namespace PaperDefense.Tests
     {
         const string PlayerScene = "Assets/PaperDefense/Scenes/Game/PaperDefenseGame.unity";
 
-        [Test] public void PlayerEntryIsTheOnlySavedGameScene()
+        [Test] public void DefaultBuildContainsOnlyTheEnabledPlayerJourney()
         {
             Assert.That(AssetDatabase.LoadAssetAtPath<SceneAsset>(PlayerScene), Is.Not.Null,
                 "The player journey needs its own entry scene.");
-            var sceneGuids = AssetDatabase.FindAssets("t:Scene", new[] { "Assets/PaperDefense/Scenes" });
-            var scenePaths = System.Array.ConvertAll(sceneGuids, AssetDatabase.GUIDToAssetPath);
-            Assert.That(scenePaths, Is.EquivalentTo(new[] { PlayerScene }),
-                "The project must keep only the player game scene, without development stands or legacy entry scenes.");
-        }
-
-        [Test] public void DefaultBuildContainsOnlyTheEnabledPlayerJourney()
-        {
             Assert.That(EditorBuildSettings.scenes, Has.Length.EqualTo(1));
             Assert.That(EditorBuildSettings.scenes[0].path, Is.EqualTo(PlayerScene));
             Assert.That(EditorBuildSettings.scenes[0].enabled, Is.True);

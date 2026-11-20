@@ -157,9 +157,8 @@ namespace PaperDefense.Presentation
 
         static void ResourceIllustration(Transform parent, string name, string resource, Rect bounds)
         {
-            var image = WorkshopUi.Graphic<Image>(parent, name, bounds);
-            image.sprite = Resources.Load<Sprite>("Art/Player/" + resource);
-            image.preserveAspect = true; CenterImage(image.rectTransform, bounds);
+            var image = WorkshopUi.Graphic<WorkshopIconGraphic>(parent, name, bounds);
+            image.Icon = WorkshopIcon.Tower; image.color = WorkshopUi.Muted; CenterImage(image.rectTransform, bounds);
         }
 
         Text Label(Transform parent, string name, string text, Rect bounds, int size, bool heading = false,
@@ -174,10 +173,35 @@ namespace PaperDefense.Presentation
 
         static void Illustration(Transform parent, string name, string id, Rect bounds)
         {
-            var image = WorkshopUi.Graphic<Image>(parent, name, bounds);
-            if (NotebookSpriteCatalog.TryGet(id, out var sprite)) image.sprite = sprite;
-            image.preserveAspect = true;
+            if (id == "icon.settings" || id == "icon.shield")
+            {
+                var symbol = WorkshopUi.Graphic<WorkshopIconGraphic>(parent, name, bounds);
+                symbol.Icon = id == "icon.settings" ? WorkshopIcon.Settings : WorkshopIcon.Shield;
+                symbol.color = WorkshopUi.Ink;
+                CenterImage(symbol.rectTransform, bounds);
+                return;
+            }
+            bool known = NotebookVisualThemeAsset.Default.FindShape(id) != null;
+            if (!known && !id.StartsWith("chassis.", StringComparison.Ordinal))
+            {
+                var unavailable = WorkshopUi.Graphic<WorkshopIconGraphic>(parent, name, bounds);
+                unavailable.Icon = WorkshopIcon.Help; unavailable.color = WorkshopUi.Ink;
+                return;
+            }
+            var image = WorkshopUi.Graphic<NotebookArtGraphic>(parent, name, bounds);
+            image.Bind(known ? id : "chassis.standard");
             CenterImage(image.rectTransform, bounds);
+            StandardAssemblyIllustration.EnsureStandardPaper(image, name);
+            if (!known)
+            {
+                var caption = new PlayerUi().Label(image.transform, "Схема основы", default, 14, FieldMenuSkin.Ink,
+                    alignment: TextAnchor.MiddleCenter);
+                caption.name = name + " family fallback caption";
+                var rect = caption.rectTransform;
+                rect.anchorMin = new Vector2(0, 0); rect.anchorMax = new Vector2(1, 0); rect.pivot = new Vector2(.5f, 0);
+                rect.offsetMin = new Vector2(4, 4); rect.offsetMax = new Vector2(-4, 28);
+                caption.resizeTextForBestFit = true; caption.resizeTextMinSize = 12; caption.resizeTextMaxSize = 14;
+            }
         }
 
         static void Place(Transform parent, string name, Rect bounds)
@@ -187,6 +211,8 @@ namespace PaperDefense.Presentation
             {
                 WorkshopUi.Place(item, bounds);
                 if (item.GetComponent<Image>() != null) CenterImage(item, bounds);
+                var drawing = item.GetComponent<Graphic>();
+                if (StandardAssemblyIllustration.HasPaper(drawing)) StandardAssemblyIllustration.SyncPaper(drawing);
             }
         }
 

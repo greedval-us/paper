@@ -96,13 +96,13 @@ namespace PaperDefense.Tests
             var read = new RunReadModel(session);
             var map = read.Battlefield;
             Assert.That(map, Is.Not.Null);
-            Assert.That(NotebookSpriteCatalog.Available, Is.True, "Use the real imported terrain illustrations.");
+            Assert.That(NotebookVisualThemeAsset.Default.FindShape("terrain.pine"), Is.Not.Null);
             camera.aspect = 16f / 9f; camera.orthographicSize = 20;
             camera.transform.position = new Vector3(48.5f, 32.5f, -10);
             view.ModernEnemyPresentation = true; view.Bind(read);
             typeof(NotebookWorldView).GetMethod("LateUpdate", Private).Invoke(view, null);
 
-            var before = PaperAtlas();
+            var before = TerrainFillGeometry();
             var pineBefore = ProjectMapPine(before.Vertices);
             var runId = read.RunId;
             long tick = read.TickIndex;
@@ -127,7 +127,7 @@ namespace PaperDefense.Tests
             else if (navigation == "zoom") camera.orthographicSize = 24;
             else camera.aspect = 4f / 3f;
             typeof(NotebookWorldView).GetMethod("LateUpdate", Private).Invoke(view, null);
-            var after = PaperAtlas();
+            var after = TerrainFillGeometry();
 
             Assert.That(read.RunId, Is.EqualTo(runId));
             Assert.That(read.TickIndex, Is.EqualTo(tick)); Assert.That(read.Elapsed, Is.EqualTo(elapsed));
@@ -144,7 +144,7 @@ namespace PaperDefense.Tests
             Assert.That(afterFree.Valid, Is.EqualTo(freeQuote.Valid)); Assert.That(afterFree.Cost, Is.EqualTo(freeQuote.Cost));
             Assert.That(afterTerrain.Valid, Is.EqualTo(terrainQuote.Valid)); Assert.That(afterTerrain.Reason, Is.EqualTo(terrainQuote.Reason));
 
-            AssertPaperAtlasUnchanged(before, after, navigation);
+            AssertTerrainFillGeometryUnchanged(before, after, navigation);
             var pineAfter = ProjectMapPine(after.Vertices);
             if (navigation == "pan")
             {
@@ -160,33 +160,35 @@ namespace PaperDefense.Tests
                 Assert.That(pineAfter.height, Is.EqualTo(pineBefore.height * 20f / 24f).Within(.01f));
                 camera.orthographicSize = 10;
                 typeof(NotebookWorldView).GetMethod("LateUpdate", Private).Invoke(view, null);
-                var close = PaperAtlas();
-                AssertPaperAtlasUnchanged(before, close, "close zoom");
+                var close = TerrainFillGeometry();
+                AssertTerrainFillGeometryUnchanged(before, close, "close zoom");
                 Assert.That(ProjectMapPine(close.Vertices).height, Is.EqualTo(pineBefore.height * 2).Within(.01f),
                     "Zoom enlarges the same tree instead of resizing it to a fixed screen height.");
             }
         }
 
-        (Vector3[] Vertices, Vector2[] Uvs) PaperAtlas()
+        (Vector3[] Vertices, Vector2[] Uvs) TerrainFillGeometry()
         {
             var filter = root.transform.Find("Graph paper").GetComponent<MeshFilter>();
             var mesh = filter.sharedMesh;
             var source = mesh.vertices;
+            var colors = mesh.colors32;
             var sourceUv = new List<Vector2>(); mesh.GetUVs(1, sourceUv);
             var vertices = new List<Vector3>(); var uv = new List<Vector2>();
+            Color32 terrainFill = NotebookVisualThemeAsset.Default.Color(NotebookInkChannel.Surface);
             for (int index = 0; index < source.Length; index++)
             {
-                // Grid strokes have a white atlas coordinate and may legitimately
-                // change their widths or disappear at overview scale.
-                if (sourceUv[index] == NotebookSpriteCatalog.WhiteUV) continue;
+                // Native terrain fills stay fixed; grid and outline stroke widths may change with camera scale.
+                if (colors[index].r != terrainFill.r || colors[index].g != terrainFill.g || colors[index].b != terrainFill.b) continue;
                 vertices.Add(filter.transform.TransformPoint(source[index])); uv.Add(sourceUv[index]);
             }
-            Assert.That(vertices.Count, Is.GreaterThan(4), "Actual terrain artwork must remain present.");
-            Assert.That(vertices.Count % 4, Is.Zero, "Terrain atlas illustrations are complete quads.");
+            Assert.That(vertices.Count, Is.GreaterThan(3), "Actual native terrain fills must remain present.");
+            Assert.That(vertices.Count % 3, Is.Zero, "Terrain fill triangles must remain complete.");
+            Assert.That(uv, Is.All.EqualTo(new Vector2(.5f, .5f)));
             return (vertices.ToArray(), uv.ToArray());
         }
 
-        static void AssertPaperAtlasUnchanged((Vector3[] Vertices, Vector2[] Uvs) before,
+        static void AssertTerrainFillGeometryUnchanged((Vector3[] Vertices, Vector2[] Uvs) before,
             (Vector3[] Vertices, Vector2[] Uvs) after, string navigation)
         {
             Assert.That(after.Vertices.Length, Is.EqualTo(before.Vertices.Length),
@@ -199,23 +201,25 @@ namespace PaperDefense.Tests
 
         Rect ProjectMapPine(Vector3[] vertices)
         {
-            // This authored two-by-three-cell pine occupies (7,32), with its
-            // illustration centred at (8,33.5), independently of the camera.
-            for (int index = 0; index < vertices.Length; index += 4)
+            // This two-by-three-cell pine occupies (7,32). Its native silhouette has several
+            // convex fills, so project their combined geometry rather than one centred triangle.
+            var footprint = new Rect(7, 32, 2, 3);
+            Vector2 low = default, high = default;
+            int corners = 0;
+            for (int index = 0; index < vertices.Length; index += 3)
             {
-                Vector3 center = (vertices[index] + vertices[index + 2]) * .5f;
-                if (Vector3.Distance(center, new Vector3(8, 33.5f, 0)) > .001f) continue;
-                Vector2 low = camera.WorldToScreenPoint(vertices[index]);
-                Vector2 high = low;
-                for (int corner = 1; corner < 4; corner++)
+                if (!footprint.Contains(vertices[index]) || !footprint.Contains(vertices[index + 1])
+                    || !footprint.Contains(vertices[index + 2])) continue;
+                for (int corner = 0; corner < 3; corner++)
                 {
                     Vector2 point = camera.WorldToScreenPoint(vertices[index + corner]);
-                    low = Vector2.Min(low, point); high = Vector2.Max(high, point);
+                    if (corners++ == 0) low = high = point;
+                    else { low = Vector2.Min(low, point); high = Vector2.Max(high, point); }
                 }
-                return Rect.MinMaxRect(low.x, low.y, high.x, high.y);
             }
-            Assert.Fail("The actual authored pine must remain rendered at its reserved map footprint.");
-            return default;
+            Assert.That(corners, Is.GreaterThanOrEqualTo(3),
+                "The actual authored pine must remain rendered at its reserved map footprint.");
+            return Rect.MinMaxRect(low.x, low.y, high.x, high.y);
         }
 
         [Test] public void FractionalScrollAccumulatesAndZoomStopsAtBothLimits()

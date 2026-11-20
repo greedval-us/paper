@@ -9,7 +9,7 @@ namespace PaperDefense.Core
         public readonly float Duration, Strength, TickSeconds;
         public readonly bool IgnoresDefense;
 
-        ColorEffectPayload(InkColor color, float duration, float strength, float tickSeconds, bool ignoresDefense)
+        internal ColorEffectPayload(InkColor color, float duration, float strength, float tickSeconds, bool ignoresDefense)
         { Color = color; Duration = duration; Strength = strength; TickSeconds = tickSeconds; IgnoresDefense = ignoresDefense; }
 
         public static ColorEffectPayload Capture(InkColor color, EffectsRules rules)

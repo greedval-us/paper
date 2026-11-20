@@ -20,20 +20,15 @@ namespace PaperDefense.Application
         string componentId;
         int componentRevision;
         Guid completedComponentOperation;
+        bool completedComponentVariant;
         AssemblyCommandResult completedComponentResult;
         IReadOnlyList<string> replacements = Array.Empty<string>();
-        [Serializable] sealed class FitEnvelope { public AssemblyFitCatalogInput fits; }
 
         public WorkshopDraftSession(RunController owner, ComponentCatalog catalog = null, AssemblyFitCatalog fits = null)
         {
             this.owner = owner ?? throw new ArgumentNullException(nameof(owner));
             Catalog = catalog ?? owner.ConfiguredAssemblyCatalog;
-            if (fits == null)
-            {
-                var asset = Resources.Load<TextAsset>("Art/NotebookMounts");
-                var input = asset == null ? null : JsonUtility.FromJson<FitEnvelope>(asset.text);
-                fits = input?.fits == null ? null : new AssemblyFitCatalog(input.fits);
-            }
+            if (fits == null) fits = AssemblyFitResources.Load();
             this.fits = fits;
             commands = new AssemblyCommands(owner, Catalog, fits);
         }
@@ -43,6 +38,7 @@ namespace PaperDefense.Application
         public AlbumEntry PreviewEntry => IsComponentOpen ? componentPreview : Draft;
         public AssemblyRecipe PreviewRecipe => IsComponentOpen ? componentRecipe : Draft?.Snapshot?.Recipe;
         public string Name { get; private set; }
+        public string ComponentName { get; private set; }
         public WorkshopComponentKind ActiveComponent { get; private set; }
         public int ActiveMount { get; private set; } = -1;
         public bool IsComponentOpen => ActiveComponent != WorkshopComponentKind.None;
@@ -56,7 +52,10 @@ namespace PaperDefense.Application
                 switch (ActiveComponent)
                 {
                     case WorkshopComponentKind.Foundation: return Array.AsReadOnly(new[] { ComponentCategory.Frame, ComponentCategory.Hull, ComponentCategory.Armor, ComponentCategory.Feed, ComponentCategory.Turn });
-                    case WorkshopComponentKind.Weapon: return Array.AsReadOnly(new[] { ComponentCategory.Mechanism, ComponentCategory.Head, ComponentCategory.Sight, ComponentCategory.Magazine, ComponentCategory.Trigger });
+                    case WorkshopComponentKind.Weapon:
+                        var categories = new List<ComponentCategory> { ComponentCategory.Mechanism, ComponentCategory.Head, ComponentCategory.Sight, ComponentCategory.Magazine, ComponentCategory.Trigger };
+                        if (Catalog != null && Catalog.Definitions.Any(d => d.Category == ComponentCategory.Mount)) categories.Add(ComponentCategory.Mount);
+                        return categories.AsReadOnly();
                     case WorkshopComponentKind.Structure: return Array.AsReadOnly(new[] { ComponentCategory.Site, ComponentCategory.Function, ComponentCategory.Shell, ComponentCategory.Utility });
                     default: return Array.Empty<ComponentCategory>();
                 }
@@ -88,6 +87,7 @@ namespace PaperDefense.Application
                 else
                 {
                     issues.AddRange(Resolution.Diagnostics);
+                    if (!OwnsStructureFamily) issues.Add(new AssemblyDiagnostic("profile.structure.locked", Draft.Id));
                     foreach (var part in PreviewRecipe.Parts)
                         if (!IsOwned(part.Id)) issues.Add(new AssemblyDiagnostic("profile.part.locked", part.Id));
                 }
@@ -99,11 +99,40 @@ namespace PaperDefense.Application
             .Where(d => d.Code == "assembly.part.required").SelectMany(d => d.Arguments.Skip(1))
             .FirstOrDefault(id => id == "magazine.standard");
         bool ValidName => !string.IsNullOrWhiteSpace(Name) && Name.Length <= ProfileLimits.MaximumBlueprintNameLength;
-        bool OwnedRecipe => PreviewRecipe != null && PreviewRecipe.Parts.All(p => IsOwned(p.Id));
+        bool OwnsStructureFamily => PreviewRecipe?.Structure == null || owner.Workshop.GetStructureOffer(PreviewRecipe.Structure.Family).Owned;
+        bool OwnedRecipe => PreviewRecipe != null && OwnsStructureFamily && PreviewRecipe.Parts.All(p => IsOwned(p.Id));
         bool ValidParent => Draft != null && Draft.Kind != AlbumEntryKind.Legacy && ValidName && OwnedRecipe && Resolution.Valid;
         public bool CanSave => !IsComponentOpen && ValidParent && (owner.Workshop.Entries.Count < ProfileLimits.MaximumAlbumPages || owner.Workshop.Entries.Any(e => e.Id == Draft.Id));
         public bool CanTrial => !IsComponentOpen && ValidParent;
-        public bool CanSaveComponent => IsComponentOpen && ValidParent;
+        public IReadOnlyList<AssemblyDiagnostic> ComponentDiagnostics
+        {
+            get
+            {
+                if (!IsComponentOpen) return new[] { new AssemblyDiagnostic("assembly.component.closed", "component") };
+                if (ActiveComponent == WorkshopComponentKind.Structure) return Diagnostics;
+                var issues = new List<AssemblyDiagnostic>();
+                if (Catalog == null) return new[] { new AssemblyDiagnostic("assembly.catalog.missing", "catalog") };
+                if (!ValidComponentName) issues.Add(new AssemblyDiagnostic("assembly.entry.name", "component.name", ProfileLimits.MaximumBlueprintNameLength.ToString()));
+                var parts = ActiveParts.ToArray();
+                foreach (var part in parts)
+                    if (!IsOwned(part.Id)) issues.Add(new AssemblyDiagnostic("profile.part.locked", part.Id));
+                try { issues.AddRange(WorkshopComponentValidation.Validate(ComponentSnapshot(), Catalog, owner.AssemblyBalance, fits)); }
+                catch (AssemblyCatalogException error) { issues.AddRange(error.Diagnostics); }
+                catch (ArgumentException error) { issues.Add(new AssemblyDiagnostic("assembly.invalid", "component", error.Message)); }
+                return issues.AsReadOnly();
+            }
+        }
+        bool ValidComponentName => !string.IsNullOrWhiteSpace(ComponentName) && ComponentName.Length <= ProfileLimits.MaximumBlueprintNameLength;
+        IEnumerable<PartRef> ActiveParts => ActiveComponent == WorkshopComponentKind.Foundation
+            ? componentRecipe.Tower.Foundation.Parts : componentRecipe.Tower.Mounts.Single(m => m.SlotIndex == ActiveMount).Weapon.Parts;
+        ComponentRecipeSnapshot ComponentSnapshot()
+        {
+            var definitions = SelectedDefinitions(ActiveParts, componentDefinitions);
+            return ActiveComponent == WorkshopComponentKind.Foundation
+                ? new ComponentRecipeSnapshot(componentRecipe.Tower.Foundation, Catalog.BalanceRevision, definitions)
+                : new ComponentRecipeSnapshot(componentRecipe.Tower.Mounts.Single(m => m.SlotIndex == ActiveMount).Weapon, Catalog.BalanceRevision, definitions);
+        }
+        public bool CanSaveComponent => IsComponentOpen && (ActiveComponent == WorkshopComponentKind.Structure ? ValidParent : ComponentDiagnostics.Count == 0);
 
         public void Begin(AlbumEntry source)
         {
@@ -117,6 +146,14 @@ namespace PaperDefense.Application
             Name = name;
             LastResult = ValidName ? AssemblyCommandResult.Ok(Draft?.Id) : AssemblyCommandResult.Fail("assembly.entry.name", "name");
             return ValidName;
+        }
+
+        public bool RenameComponent(string name)
+        {
+            if (!IsComponentOpen) return Reject("assembly.component.closed");
+            ComponentName = name;
+            LastResult = ValidComponentName ? AssemblyCommandResult.Ok(componentId) : AssemblyCommandResult.Fail("assembly.entry.name", "component.name");
+            return ValidComponentName;
         }
 
         public void OpenFoundation() => Open(WorkshopComponentKind.Foundation, -1);
@@ -136,6 +173,7 @@ namespace PaperDefense.Application
                 (kind == WorkshopComponentKind.Foundation ? r.Kind == ComponentLibraryKind.Foundation : r.Kind == ComponentLibraryKind.Weapon));
             var existing = reference == null ? null : owner.Workshop.Library.FirstOrDefault(c => c.Id == reference.Id && c.Revision == reference.Revision);
             componentId = existing?.Id ?? Guid.NewGuid().ToString("N"); componentRevision = existing?.Revision ?? 1;
+            ComponentName = existing?.Name ?? (Name.Length <= 39 ? Name + (kind == WorkshopComponentKind.Foundation ? " · основа" : " · оружие") : Name);
             completedComponentOperation = Guid.Empty; completedComponentResult = null; replacements = Array.Empty<string>();
             LastResult = AssemblyCommandResult.Ok(Draft.Id);
         }
@@ -170,7 +208,9 @@ namespace PaperDefense.Application
             else
             {
                 var old = componentRecipe.Tower.Mounts.Single(m => m.SlotIndex == ActiveMount).Weapon;
-                var parts = old.Parts.Select(p => Category(p) == selected.Category ? Ref(selected) : p).ToArray();
+                var parts = new[] { old.Mechanism, old.Head, old.Sight, old.Magazine, old.Trigger }
+                    .Select(p => Category(p) == selected.Category ? Ref(selected) : p).ToArray();
+                PartRef? mount = selected.Category == ComponentCategory.Mount ? Ref(selected) : old.Mount;
                 var changed = new List<string>();
                 if (selected.Category == ComponentCategory.Mechanism)
                 {
@@ -184,8 +224,16 @@ namespace PaperDefense.Application
                         if (replacement == null) return Reject("assembly.part.incompatible", selected.Id);
                         parts[i] = Ref(replacement); selectedDefinitions.Add(replacement); changed.Add(replacement.Id);
                     }
+                    if (mount.HasValue && (Definition(mount.Value).WeaponFamilies & selected.WeaponFamilies) == 0)
+                    {
+                        var replacement = Catalog.Definitions.Where(d => d.Category == ComponentCategory.Mount &&
+                            (d.WeaponFamilies & selected.WeaponFamilies) != 0 && IsOwned(d.Id))
+                            .OrderBy(d => d.Get(AssemblyStat.Cost, ModifierOperation.Add)).ThenBy(d => d.Id, StringComparer.Ordinal).FirstOrDefault();
+                        if (replacement == null) return Reject("assembly.part.incompatible", selected.Id);
+                        mount = Ref(replacement); selectedDefinitions.Add(replacement); changed.Add(replacement.Id);
+                    }
                 }
-                var weapon = new WeaponRecipe(parts[0], parts[1], parts[2], parts[3], parts[4]);
+                var weapon = new WeaponRecipe(parts[0], parts[1], parts[2], parts[3], parts[4], mount);
                 next = new AssemblyRecipe(new TowerRecipe(componentRecipe.Tower.Foundation,
                     componentRecipe.Tower.Mounts.Select(m => m.SlotIndex == ActiveMount ? new WeaponMountRecipe(ActiveMount, weapon) : m)));
                 replacements = changed.AsReadOnly();
@@ -224,15 +272,21 @@ namespace PaperDefense.Application
             componentDefinitions = null; componentPreview = null; replacements = Array.Empty<string>();
         }
 
-        public AssemblyCommandResult SaveComponent(Guid operationId)
+        public AssemblyCommandResult SaveComponent(Guid operationId, bool asVariant = false)
         {
-            if (operationId != Guid.Empty && operationId == completedComponentOperation) return completedComponentResult;
+            if (operationId != Guid.Empty && operationId == completedComponentOperation)
+                return asVariant == completedComponentVariant ? completedComponentResult : LastResult = AssemblyCommandResult.Fail("profile.operation.conflict");
             if (operationId == Guid.Empty) return LastResult = AssemblyCommandResult.Fail("profile.operation.invalid");
-            if (!CanSaveComponent) return LastResult = InvalidCandidate();
+            if (!CanSaveComponent)
+            {
+                var issues = ComponentDiagnostics;
+                return LastResult = issues.Count == 0 ? AssemblyCommandResult.Fail("assembly.invalid")
+                    : new AssemblyCommandResult(false, issues[0].Code, diagnostics: issues);
+            }
             if (ActiveComponent == WorkshopComponentKind.Structure)
             {
                 Draft = Entry(componentRecipe, componentDefinitions, Draft.LibraryReferences);
-                completedComponentResult = AssemblyCommandResult.Ok(Draft.Id); completedComponentOperation = operationId;
+                completedComponentResult = AssemblyCommandResult.Ok(Draft.Id); completedComponentOperation = operationId; completedComponentVariant = asVariant;
                 CloseComponent(); return LastResult = completedComponentResult;
             }
             var kind = ActiveComponent == WorkshopComponentKind.Foundation ? ComponentLibraryKind.Foundation : ComponentLibraryKind.Weapon;
@@ -243,9 +297,8 @@ namespace PaperDefense.Application
             var snapshot = kind == ComponentLibraryKind.Foundation
                 ? new ComponentRecipeSnapshot(foundation, Catalog.BalanceRevision, definitions)
                 : new ComponentRecipeSnapshot(weapon, Catalog.BalanceRevision, definitions);
-            var libraryName = Name.Length <= 39 ? Name + (kind == ComponentLibraryKind.Foundation ? " · основа" : " · оружие") : Name;
-            var component = new ComponentLibraryEntry(componentId, libraryName, componentRevision, snapshot);
-            var result = commands.SaveLibraryEntry(component, operationId);
+            var component = new ComponentLibraryEntry(componentId, ComponentName, componentRevision, snapshot);
+            var result = asVariant ? commands.SaveLibraryEntryAsVariant(component, operationId) : commands.SaveLibraryEntry(component, operationId);
             LastResult = result;
             if (!result.Success) return result;
             var saved = owner.Workshop.Library.Single(c => c.Id == result.ResultId);
@@ -253,7 +306,7 @@ namespace PaperDefense.Application
             references.Add(new ComponentLibraryReference(saved.Id, saved.Revision, saved.Kind, ActiveMount));
             var canonical = ReplaceComponent(componentRecipe, saved.Snapshot.Foundation, saved.Snapshot.Weapon, ActiveMount);
             Draft = Entry(canonical, MergeDefinitions(componentDefinitions, saved.Snapshot.Definitions), references);
-            completedComponentResult = result; completedComponentOperation = operationId; CloseComponent();
+            completedComponentResult = result; completedComponentOperation = operationId; completedComponentVariant = asVariant; CloseComponent();
             return result;
         }
 
@@ -268,6 +321,8 @@ namespace PaperDefense.Application
             return result;
         }
         public AssemblyCommandResult PurchasePart(string id, Guid operationId) => LastResult = commands.PurchasePart(id, operationId);
+        public AssemblyCommandResult PurchaseStructureFamily(AssemblyStructureFamily family, Guid operationId)
+            => LastResult = commands.PurchaseStructureFamily(family, operationId);
         public TrialReport RunTrial(TrialScenario scenario = TrialScenario.Crowd, int budget = 400, int seed = 1337)
         {
             if (!CanTrial || !Enum.IsDefined(typeof(TrialScenario), scenario)) return null;
@@ -284,6 +339,44 @@ namespace PaperDefense.Application
             var references = Draft.LibraryReferences.Where(r => r.SlotIndex != slotIndex).ToList();
             references.Add(new ComponentLibraryReference(component.Id, component.Revision, component.Kind, slotIndex));
             return ApplyLocal(recipe, component.Snapshot.Definitions, references);
+        }
+
+        /// <summary>Quotes a final join from authoritative definitions without changing draft, status or profile.</summary>
+        public IReadOnlyList<AssemblyDiagnostic> LibraryCompatibility(ComponentLibraryEntry component, int slotIndex)
+        {
+            var issues = new List<AssemblyDiagnostic>();
+            if (component == null || IsComponentOpen || Draft?.Kind != AlbumEntryKind.Tower ||
+                (component.Kind == ComponentLibraryKind.Foundation ? slotIndex != -1 : slotIndex < 0 || slotIndex > 2))
+            { issues.Add(new AssemblyDiagnostic("profile.library.slot", "component")); return issues.AsReadOnly(); }
+            if (Catalog == null) { issues.Add(new AssemblyDiagnostic("assembly.catalog.missing", "catalog")); return issues.AsReadOnly(); }
+            try
+            {
+                var recipe = ReplaceComponent(Draft.Snapshot.Recipe, component.Snapshot.Foundation, component.Snapshot.Weapon, slotIndex);
+                issues.AddRange(Catalog.ValidateRecipe(recipe));
+                foreach (var part in recipe.Parts)
+                    if (!IsOwned(part.Id)) issues.Add(new AssemblyDiagnostic("profile.part.locked", part.Id));
+                foreach (MaterialTier material in Enum.GetValues(typeof(MaterialTier)))
+                    issues.AddRange(AssemblyResolver.Resolve(recipe, Catalog, owner.AssemblyBalance, material, fits).Diagnostics);
+            }
+            catch (AssemblyCatalogException error) { issues.AddRange(error.Diagnostics); }
+            catch (ArgumentException error) { issues.Add(new AssemblyDiagnostic("assembly.invalid", "component", error.Message)); }
+            return issues.GroupBy(d => d.Code + "\n" + d.Path + "\n" + string.Join("\n", d.Arguments)).Select(group => group.First()).ToList().AsReadOnly();
+        }
+
+        public bool TryApplyCompatibleLibrary(ComponentLibraryEntry component, int slotIndex)
+        {
+            var issues = LibraryCompatibility(component, slotIndex);
+            if (issues.Count != 0)
+            { LastResult = new AssemblyCommandResult(false, issues[0].Code, diagnostics: issues); return false; }
+            var recipe = ReplaceComponent(Draft.Snapshot.Recipe, component.Snapshot.Foundation, component.Snapshot.Weapon, slotIndex);
+            var references = Draft.LibraryReferences.Where(r => r.SlotIndex != slotIndex).ToList();
+            references.Add(new ComponentLibraryReference(component.Id, component.Revision, component.Kind, slotIndex));
+            var definitions = recipe.Parts.Select(part => {
+                Catalog.TryGet(part.Id, part.Revision, out var definition); return definition;
+            }).GroupBy(d => (d.Id, d.Revision)).Select(group => group.First());
+            Draft = new AlbumEntry(Draft.Id, Draft.Name, Draft.Revision,
+                new RecipeSnapshot(recipe, Catalog.BalanceRevision, definitions), references);
+            LastResult = AssemblyCommandResult.Ok(component.Id); return true;
         }
         public bool ApplyPreset(AlbumEntry source, int slotIndex = -1)
         {

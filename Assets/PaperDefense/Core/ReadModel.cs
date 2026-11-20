@@ -27,26 +27,42 @@ namespace PaperDefense.Core
         RunPhase Phase {get;}
         bool PendingUpgrade {get;}
         int GoldEarned {get;}
+        int PendingInkFlasks {get;}
+        int NextInkFlaskId {get;}
+        int InkPerFlask {get;}
         Guid RunId {get;}
         int CompletedWaves {get;}
         float BlotterCooldown {get;}
         int ColoredInk(InkColor color);
+        float DefaultFacingDegrees(Cell cell);
+        float DefaultFacingDegrees(Cell cell, StructureKind kind, ResolvedEntry entry = null, TowerBlueprint blueprint = null);
         StructureView? StructureAt(Cell cell);
         BuildQuote QuoteBuild(IReadOnlyList<Cell> cells,StructureKind kind,MaterialTier tier);
         BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,TowerBlueprint blueprint,MaterialTier tier,InkColor color);
         BuildQuote QuoteEntry(IReadOnlyList<Cell> cells,ResolvedEntry entry,MaterialTier tier,InkColor color);
+        ModernizationQuote QuoteModernization(int structureId,ModernizationDirection direction);
+        ModernizationQuote QuoteColorModernization(int structureId,InkColor color);
     }
 
     public readonly struct WeaponMountView
     {
         public readonly Point2 Aim;
+        public readonly bool HasAimPoint;
         public readonly int TargetId;
         public readonly float Cooldown,ActionRemaining,AcquisitionRemaining;
         public readonly WeaponCycleState Cycle;
         public int RoundsRemaining => Cycle.RoundsRemaining;
         public bool IsReloading => Cycle.IsReloading;
         public double CycleRemainingWork => Cycle.RemainingWork;
-        internal WeaponMountView(WeaponMountState state){Aim=state.Aim;TargetId=state.TargetId;Cooldown=state.Cooldown;ActionRemaining=state.ActionRemaining;AcquisitionRemaining=state.AcquisitionRemaining;Cycle=state.Cycle;}
+        internal WeaponMountView(WeaponMountState state, Point2 restAim)
+        {
+            Aim = state.Aim; TargetId = state.TargetId;
+            // The idle heading is parallel for every barrel. Its reference point is measured
+            // from the cell centre, whereas a tracked target is measured from each socket.
+            HasAimPoint = TargetId != 0 || ((Aim.X != 0 || Aim.Y != 0) && (Aim.X != restAim.X || Aim.Y != restAim.Y));
+            Cooldown = state.Cooldown; ActionRemaining = state.ActionRemaining;
+            AcquisitionRemaining = state.AcquisitionRemaining; Cycle = state.Cycle;
+        }
     }
     public readonly struct StructureView
     {
@@ -59,12 +75,16 @@ namespace PaperDefense.Core
         public readonly MaterialTier Tier;
         public readonly float Health,MaxHealth,BuildRemaining,Cooldown;
         public readonly bool IsComplete,WaitingForClearance;
+        public readonly bool HasDirectionalWeapon;
+        public readonly float FacingDegrees;
         public readonly Point2 Aim;
         public readonly Point2 PrimaryAim, SecondaryAim;
         public readonly int PrimaryTargetId, SecondaryTargetId;
         public readonly TargetPriority Priority;
         public readonly TowerBlueprint Blueprint;
         public readonly ResolvedEntry ResolvedEntry;
+        public readonly ResolvedEntry ModernizationEntry;
+        public readonly ModernizationView Modernization;
         public readonly InkColor Color;
         readonly WeaponMountView mount0,mount1,mount2;
         public WeaponMountView GetMountState(int mount)=>mount==0?mount0:mount==1?mount1:mount==2?mount2:throw new ArgumentOutOfRangeException(nameof(mount));
@@ -73,9 +93,11 @@ namespace PaperDefense.Core
         internal StructureView(StructureState s)
         {Id=s.Id;Cell=s.Cell;GeneratorPaidWaves=s.GeneratorPaidWaves;Kind=s.Kind;ContentId=s.ContentId??LegacyContentIds.Weapon(s.Kind);SourceAlbumEntryId=s.SourceAlbumEntryId;Tier=s.Tier;Health=s.Health;MaxHealth=s.MaxHealth;BuildRemaining=s.BuildRemaining;
             Cooldown=s.Cooldown;IsComplete=s.IsComplete;WaitingForClearance=s.WaitingForClearance;Aim=s.Aim;Priority=s.Priority;
-            Blueprint=s.Blueprint;ResolvedEntry=s.ResolvedEntry;Color=s.Color;PrimaryAim=s.PrimaryAim;SecondaryAim=s.SecondaryAim;
+            HasDirectionalWeapon=s.HasDirectionalWeapon;FacingDegrees=s.FacingDegrees;
+            Blueprint=s.Blueprint;ResolvedEntry=s.ResolvedEntry;ModernizationEntry=s.ModernizationEntry;Modernization=s.Modernization;Color=s.Color;PrimaryAim=s.PrimaryAim;SecondaryAim=s.SecondaryAim;
             PrimaryTargetId=s.PrimaryTargetId;SecondaryTargetId=s.SecondaryTargetId;
-            mount0=new WeaponMountView(s.GetMountState(0));mount1=new WeaponMountView(s.GetMountState(1));mount2=new WeaponMountView(s.GetMountState(2));}
+            var restAim=s.RestAim;
+            mount0=new WeaponMountView(s.GetMountState(0),restAim);mount1=new WeaponMountView(s.GetMountState(1),restAim);mount2=new WeaponMountView(s.GetMountState(2),restAim);}
     }
     public readonly struct EnemyView
     {
@@ -117,8 +139,9 @@ namespace PaperDefense.Core
         public readonly int SourceStructureId,MountSlotIndex;
         public readonly long ActionId;
         public readonly FootprintGeometry? ImpactFootprint;
+        public readonly ColorEffectPayload ColorEffect;
         internal ProjectileView(MortarProjectile p)
-        {Id=p.Id;From=p.From;To=p.To;Remaining=p.Remaining;Duration=p.Duration;Radius=p.Radius;Weapon=p.Weapon;WeaponId=p.WeaponId;ImpactFootprint=p.ImpactFootprint;SourceStructureId=p.SourceStructureId;MountSlotIndex=p.MountSlotIndex;ActionId=p.ActionId;}
+        {Id=p.Id;From=p.From;To=p.To;Remaining=p.Remaining;Duration=p.Duration;Radius=p.Radius;Weapon=p.Weapon;WeaponId=p.WeaponId;ImpactFootprint=p.ImpactFootprint;SourceStructureId=p.SourceStructureId;MountSlotIndex=p.MountSlotIndex;ActionId=p.ActionId;ColorEffect=p.EffectPayload;}
     }
 
     public sealed class RunReadModel : IRunReadModel
@@ -151,8 +174,16 @@ namespace PaperDefense.Core
         public float BaseHealth=>source.BaseHealth;public float Countdown=>source.Countdown;public float Elapsed=>source.Elapsed;
         public long TickIndex=>source.TickIndex;public RunPhase Phase=>source.Phase;public bool PendingUpgrade=>source.PendingUpgrade;
         public int GoldEarned=>source.GoldEarned;public float BlotterCooldown=>source.BlotterCooldownRemaining;
+        public int PendingInkFlasks=>source.PendingInkFlasks;
+        public int NextInkFlaskId=>source.NextInkFlaskId;
+        public int InkPerFlask=>source.InkPerFlask;
         public Guid RunId=>source.RunId;public int CompletedWaves=>source.CompletedWaves;
         public int ColoredInk(InkColor color)=>source.ColoredInk(color);
+        public ModernizationQuote QuoteModernization(int structureId,ModernizationDirection direction)=>source.QuoteModernization(structureId,direction);
+        public ModernizationQuote QuoteColorModernization(int structureId,InkColor color)=>source.QuoteColorModernization(structureId,color);
+        public float DefaultFacingDegrees(Cell cell) => source.DefaultFacingDegrees(cell);
+        public float DefaultFacingDegrees(Cell cell, StructureKind kind, ResolvedEntry entry = null, TowerBlueprint blueprint = null)
+            => source.DefaultFacingDegrees(cell, kind, entry, blueprint);
         public StructureView? StructureAt(Cell cell){var value=source.StructureAt(cell);return value==null?(StructureView?)null:new StructureView(value);}
         public BuildQuote QuoteBuild(IReadOnlyList<Cell> cells,StructureKind kind,MaterialTier tier)=>source.QuoteBuild(cells,kind,tier);
         public BuildQuote QuoteBlueprint(IReadOnlyList<Cell> cells,TowerBlueprint blueprint,MaterialTier tier,InkColor color)=>source.QuoteBlueprint(cells,blueprint,tier,color);
@@ -190,8 +221,23 @@ namespace PaperDefense.Core
     }
     public readonly struct WaveView
     {
-        public readonly int Count,Sides,InkGrant;public readonly float SpawnInterval,RunnerFraction,GnawerFraction,SpitterFraction,BruteFraction,BulwarkFraction,OutlinedFraction,HatchedFraction;public readonly string Title;
-        internal WaveView(WaveDefinition d){Count=d.Count;Sides=d.Sides;InkGrant=d.InkGrant;SpawnInterval=d.SpawnInterval;RunnerFraction=d.RunnerFraction;GnawerFraction=d.GnawerFraction;SpitterFraction=d.SpitterFraction;BruteFraction=d.BruteFraction;BulwarkFraction=d.BulwarkFraction;OutlinedFraction=d.OutlinedFraction;HatchedFraction=d.HatchedFraction;Title=d.Title;}
+        public readonly bool IsHorde;
+        public readonly WaveComposition Composition;
+        public readonly float EffectiveSpawnInterval;
+        public readonly WaveThreatForecast Forecast;
+        public readonly int Count,Sides,EntranceBands,InkGrant;public readonly float SpawnInterval,RunnerFraction,GnawerFraction,SpitterFraction,BruteFraction,BulwarkFraction,OutlinedFraction,HatchedFraction;public readonly string Title;
+        internal WaveView(WaveDefinition d, MechanicsAvailability mechanics, float minimumSpawnInterval,
+            IReadOnlyList<EnemyDefinition> enemies)
+        {
+            IsHorde = d.IsHorde; Count = d.Count; Sides = d.Sides; EntranceBands = d.EntranceBands;
+            InkGrant = d.InkGrant; SpawnInterval = d.SpawnInterval; Title = d.Title;
+            RunnerFraction = d.RunnerFraction; GnawerFraction = d.GnawerFraction; SpitterFraction = d.SpitterFraction;
+            BruteFraction = d.BruteFraction; BulwarkFraction = d.BulwarkFraction;
+            OutlinedFraction = d.OutlinedFraction; HatchedFraction = d.HatchedFraction;
+            Composition = d.ResolveComposition(mechanics);
+            EffectiveSpawnInterval = d.EffectiveSpawnInterval(minimumSpawnInterval);
+            Forecast = new WaveThreatForecast(Composition, EffectiveSpawnInterval, enemies, mechanics.RangedEnemies);
+        }
     }
     public readonly struct RunUpgradeRulesView
     {
@@ -215,8 +261,17 @@ namespace PaperDefense.Core
         public TrialRules Trials {get;}
         public IReadOnlyList<WaveView> Waves {get;}
         internal GameBalanceView(GameBalance source, MechanicsAvailability? mechanics = null)
-        {this.source=source;Battlefield=source.ResolveBattlefield();Content=source.ResolveContent();Trials=source.Trials.CreateSnapshot();Mechanics=mechanics??MechanicsAvailability.Resolve(source);Waves=new ProjectedList<WaveDefinition,WaveView>(source.Waves,w=>new WaveView(w));}
+        {
+            this.source = source;
+            Battlefield = source.ResolveBattlefield();
+            Content = source.ResolveContent();
+            Trials = source.Trials.CreateSnapshot();
+            Mechanics = mechanics ?? MechanicsAvailability.Resolve(source);
+            Waves = source.Waves.ConvertAll(wave => new WaveView(wave, Mechanics,
+                source.Combat.MinimumSpawnInterval, source.EnemyDefinitions)).AsReadOnly();
+        }
         public int Width=>source.Width;public int Height=>source.Height;public int StartingInk=>source.StartingInk;
+        public int EntranceHalfWidth => source.Crowd.EntranceHalfWidth;
         public float BaseHealth=>source.BaseHealth;public float PlanningSeconds=>source.PlanningSeconds;public float IntermissionSeconds=>source.IntermissionSeconds;
         public float SimulationStep=>source.SimulationStep;public int MaxEnemiesPerCell=>source.MaxEnemiesPerCell;
         public float PassiveInkPerSecond=>source.PassiveInkPerSecond;public int WaveInkGrant=>source.WaveInkGrant;

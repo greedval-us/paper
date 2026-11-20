@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using System.Collections;
+using System.Linq;
 using NUnit.Framework;
 using PaperDefense.Application;
 using PaperDefense.Core;
@@ -53,6 +54,45 @@ namespace PaperDefense.Tests
             yield return null; yield return null;
             InputSystem.QueueStateEvent(keyboard, new KeyboardState()); yield return null;
         }
+        [UnityTest] public IEnumerator CtrlFFocusesAlbumSearchAndEscapeClearsBeforeClosingThePageOrPicker()
+        {
+            game.ReturnToMap();
+            game.Navigate(PlayerPage.Preparation);
+            game.OpenAlbum();
+            var search = shell.Album.Root.GetComponentInChildren<AlbumSearchInput>();
+            yield return Keys(Key.LeftCtrl, Key.F);
+            Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(search.gameObject));
+            Assert.That(search.isFocused, Is.True);
+            search.text = "ремонт";
+            Assert.That(shell.Album.SelectedId, Is.EqualTo("album.repair"));
+            yield return Keys(Key.Escape);
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Album));
+            Assert.That(search.text, Is.Empty);
+            Assert.That(EventSystem.current.currentSelectedGameObject.name, Is.EqualTo("Album filter All"));
+            yield return Keys(Key.Escape);
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Preparation));
+
+            var replace = shell.GetComponentsInChildren<Button>().Single(button => button.name == "Replace album entry 2");
+            EventSystem.current.SetSelectedGameObject(replace.gameObject);
+            replace.onClick.Invoke();
+            var picker = shell.GetComponentsInChildren<WorkshopModal>().Single(modal => modal.name == "Assembly album picker");
+            search = picker.GetComponentInChildren<AlbumSearchInput>();
+            var tab = picker.GetComponentsInChildren<Button>().Single(button => button.name == "Album filter All");
+            EventSystem.current.SetSelectedGameObject(tab.gameObject);
+            yield return Keys(Key.LeftCtrl, Key.F);
+            Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(search.gameObject));
+            Assert.That(search.isFocused, Is.True);
+            search.text = "дозор";
+            yield return Keys(Key.Escape);
+            Assert.That(search.text, Is.Empty);
+            Assert.That(picker.isActiveAndEnabled, Is.True);
+            Assert.That(EventSystem.current.currentSelectedGameObject.name, Is.EqualTo("Album filter All"));
+            yield return Keys(Key.Escape);
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Preparation));
+            Assert.That(shell.GetComponentInChildren<AlbumSearchInput>(), Is.Null);
+            Assert.That(EventSystem.current.currentSelectedGameObject, Is.EqualTo(replace.gameObject));
+        }
+
         [UnityTest] public IEnumerator FocusedNameInputBlocksThePlayerRootsBattleHotkeysAndBuildGate()
         {
             var field = new GameObject("Focused player name", typeof(RectTransform), typeof(InputField));
@@ -71,12 +111,20 @@ namespace PaperDefense.Tests
             Assert.That(game.Run.Session.WaveIndex, Is.Zero); Assert.That(game.Run.Speed, Is.EqualTo(1));
             shell.CancelConfirmation(); Assert.That(game.CanBuild, Is.True);
         }
-        [UnityTest] public IEnumerator SpaceResumesTheSamePausedBattleWithItsModalOpen()
+        [UnityTest] public IEnumerator SpacePausesFieldButCannotCloseThePauseMenu()
         {
-            var session = game.Run.Session; game.Pause();
+            var session = game.Run.Session;
             yield return Keys(Key.Space);
             Assert.That(game.Page, Is.EqualTo(PlayerPage.Battle));
-            Assert.That(game.Run.Paused, Is.False); Assert.That(game.Run.Session, Is.SameAs(session));
+            Assert.That(game.Run.TacticalPaused, Is.True); Assert.That(game.CanBuild, Is.True);
+            game.Pause();
+            yield return Keys(Key.Space);
+            Assert.That(game.Page, Is.EqualTo(PlayerPage.Pause));
+            Assert.That(game.Run.Paused, Is.True); Assert.That(game.Run.Session, Is.SameAs(session));
+            game.Resume();
+            Assert.That(game.Run.TacticalPaused, Is.True); Assert.That(game.CanBuild, Is.True);
+            yield return Keys(Key.Space);
+            Assert.That(game.Run.Paused, Is.False);
         }
     }
 }

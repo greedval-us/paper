@@ -131,7 +131,8 @@ namespace PaperDefense.Tests
         {
             internal readonly List<BlotState> Blots=new List<BlotState>();
             internal BlotFixture(IEnumerable<Cell> cells){foreach(var cell in cells) Blots.Add(new BlotState{Cell=cell,Remaining=100});}
-            public bool TryFindNearest(Point2 origin,float range,out Cell cell)=>BlotQueries.TryFindNearest(Blots,origin,range,out cell);
+            public bool TryFindNearest(Point2 origin,float minimumRange,float range,FiringSector sector,out Cell cell)
+                =>BlotQueries.TryFindNearest(Blots,origin,minimumRange,range,sector,out cell);
             public int Clear(Cell cell,float radius)=>BlotQueries.Clear(Blots,cell,radius);
         }
     }

@@ -4,7 +4,7 @@
     "Manifest": "ContentAcceptanceManifest",
     "Utc": "2026-10-12T18:05:16.8557550Z",
     "UnityVersion": "6000.5.7f1",
-    "IsolatedProfile": "C:\\Users\\Greedval\\AppData\\Local\\Temp\\PaperContentSmoke-5a19907ebea24002a8f95bc0c5a94f0c\\profile.json",
+    "IsolatedProfile": "Temp/ContentAcceptance/player-profile.json",
     "Error": "",
     "BattleLaunches": 6,
     "ChassisPrimaryActions": 1,

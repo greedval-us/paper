@@ -20,6 +20,21 @@ namespace PaperDefense.Presentation
         internal float MinimumStrokePixels { get; set; } = 1.25f;
         // UI previews use a solid line floor, without the world shader's antialiasing fringe.
         internal float MinimumLineWidth { get; set; }
+        // A detail hint only: UI still uses authored geometry and never gains world stroke floors.
+        internal float ArtUnitsPerPixel { get; private set; }
+        internal UiDetailScope WithUiDetail(float scale) => new UiDetailScope(this, scale);
+
+        internal readonly struct UiDetailScope : IDisposable
+        {
+            readonly MeshPen pen;
+            readonly float previous;
+            internal UiDetailScope(MeshPen pen, float scale)
+            {
+                this.pen = pen; previous = pen.ArtUnitsPerPixel;
+                pen.ArtUnitsPerPixel = 1 / Mathf.Max(.000001f, Mathf.Abs(scale));
+            }
+            public void Dispose() { pen.ArtUnitsPerPixel = previous; }
+        }
 
         // VertexHelper rejects 65,000 vertices. Keep each slice triangle-aligned and strictly below it.
         internal const int MaximumUiBatchVertices = 64998;

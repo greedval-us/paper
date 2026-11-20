@@ -18,8 +18,8 @@ namespace PaperDefense.Tests
             new DrawingPart(DrawingPartKey.Decoration, new[] { Stroke(new DrawingPoint(-.3f, .2f), new DrawingPoint(-.2f, .3f)) })
         });
 
-        [TestCase(.25f)] [TestCase(.75f)]
-        public void FreeformProjectileOriginFollowsTheDrawnBarrelTip(float length)
+        [TestCase(.25f, 90f)] [TestCase(.75f, 90f)] [TestCase(.75f, 215f)]
+        public void FreeformProjectileOriginFollowsTheDrawnBarrelTip(float length, float heading)
         {
             var balance = GameBalance.CreateDefault(); balance.StartingInk = 1000;
             var drawing = new DrawingSnapshot(new[] {
@@ -28,13 +28,14 @@ namespace PaperDefense.Tests
             var blueprint = TowerBlueprint.NewDraft("muzzle", "Muzzle", ChassisKind.Standard, StructureKind.Gun).WithFreeformDrawing(drawing);
             var game = new GameSession(balance, starterDefenses: false);
             var cell = new Cell(10, 10);
-            Assert.That(game.TryBuildBlueprint(new[] { cell }, blueprint, MaterialTier.Pencil, InkColor.None, out var reason), Is.True, reason);
+            Assert.That(game.TryBuildBlueprint(new[] { cell }, blueprint, MaterialTier.Pencil, InkColor.None, out var reason, facingDegrees: heading), Is.True, reason);
             var view = new RunReadModel(game).Structures[0];
-            var method = typeof(NotebookTowerComposition).GetMethod("Muzzle", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
-            var rendered = (Vector2)method.Invoke(null, new object[] { view, 0, default(Point2), 0d, null, null });
+            var rendered = NotebookTowerComposition.Muzzle(view, 0, default, 0, null, null);
             var pivot = DrawingTemplateCatalog.Pivot(blueprint, DrawingBindings.Mount0);
-            Assert.That(rendered.x, Is.EqualTo(cell.X + .5f + pivot.X).Within(.00001f));
-            Assert.That(rendered.y, Is.EqualTo(cell.Y + .5f + pivot.Y + new DrawingPoint(0, length).Y).Within(.00001f), "Rendered shot origin must follow the short or long invented barrel, not the catalog muzzle.");
+            var forward = new Vector2(Mathf.Cos(heading * Mathf.Deg2Rad), Mathf.Sin(heading * Mathf.Deg2Rad));
+            var socket = NotebookMountLayout.Rotate(new Vector2(pivot.X, pivot.Y), (heading - 90) * Mathf.Deg2Rad);
+            var expected = new Vector2(cell.X + .5f, cell.Y + .5f) + socket + forward * new DrawingPoint(0, length).Y;
+            Assert.That(Vector2.Distance(rendered, expected), Is.LessThan(.00001f), "The shot starts at the tip of the player's drawn barrel.");
         }
 
         [SetUp] public void SetUp() { AuthoredGeometryCache.Clear(); }
@@ -97,7 +98,7 @@ namespace PaperDefense.Tests
             var game = new GameSession(balance, starterDefenses: false);
             var blueprint = new TowerBlueprint("authored", "Crooked double", ChassisKind.Standard, StructureKind.Gun, StructureKind.Gun,
                 drawing: drawing, origin: DrawingOrigin.PlayerDrawing);
-            Assert.That(game.TryBuildBlueprint(new[] { cell }, blueprint, MaterialTier.Pencil, InkColor.None, out var reason), Is.True, reason);
+            Assert.That(game.TryBuildBlueprint(new[] { cell }, blueprint, MaterialTier.Pencil, InkColor.None, out var reason, facingDegrees: 90), Is.True, reason);
             for (int i = 0; i < 30; i++) game.Tick(1f / 30);
             var state = game.Structures[0];
             Assert.That(state.IsComplete, Is.True, "Render the completed silhouette separately from construction indicators.");

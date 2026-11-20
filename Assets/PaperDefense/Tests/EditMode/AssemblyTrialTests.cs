@@ -173,6 +173,33 @@ namespace PaperDefense.Tests
             Assert.That(Read<float>(report, "DurationSeconds"), Is.GreaterThan(0));
         }
 
+        [TestCase(AssemblyStructureFamily.Spikes, AssemblyTrialScenario.Single)]
+        [TestCase(AssemblyStructureFamily.Beacon, AssemblyTrialScenario.Armored)]
+        public void SavedFieldDefenseProducesItsOwnMeasuredTrialResult(AssemblyStructureFamily family, AssemblyTrialScenario scenario)
+        {
+            var rules = Rules(150);
+            string name = family.ToString().ToLowerInvariant();
+            var recipe = new AssemblyRecipe(new StructureRecipe(family, AssemblyResolverFixture.Part("site." + name),
+                AssemblyResolverFixture.Part("function." + name), AssemblyResolverFixture.Part("shell.standard"),
+                AssemblyResolverFixture.Part("utility.none")));
+            var resolved = AssemblyResolverFixture.Resolve(recipe, balance: rules);
+            var entry = new AlbumEntry("trial." + name, name, 1, resolved.Snapshot);
+            string json = UnityEngine.JsonUtility.ToJson(new AlbumEntryData(entry));
+            var restored = UnityEngine.JsonUtility.FromJson<AlbumEntryData>(json).CreateSnapshot();
+            var report = AssemblyTrialRunner.Run(restored, rules, scenario, resolved.Cost);
+            Assert.That(report.Copies, Is.EqualTo(1));
+            if (family == AssemblyStructureFamily.Spikes)
+            {
+                Assert.That(report.Damage, Is.GreaterThan(0));
+                Assert.That(report.MarkedEnemies, Is.Null);
+            }
+            else
+            {
+                Assert.That(report.MarkedEnemies, Is.InRange(1, rules.Trials.For(TrialScenario.Armored).Count));
+                Assert.That(report.Damage, Is.Null);
+            }
+        }
+
         [Test]
         public void RepairMeasuresHealthActuallyRestoredByProductionSupport()
         {
@@ -204,7 +231,7 @@ namespace PaperDefense.Tests
             Assert.That(Read<int>(report, "Cost"), Is.EqualTo(120));
             Assert.That(Read<int?>(report, "CompletedWaves"), Is.EqualTo(8));
             Assert.That(Read<int?>(report, "PaidWaves"), Is.EqualTo(8));
-            Assert.That(Read<int?>(report, "Income"), Is.EqualTo(192));
+            Assert.That(Read<int?>(report, "Income"), Is.EqualTo(288));
             Assert.That(Read<float?>(report, "Damage"), Is.Null);
             var final = Read<TrialReport>(report, "Recording").Frames.Last();
             Assert.That(final.Towers.Select(t => t.GeneratorPaidWaves), Is.All.EqualTo(8));
