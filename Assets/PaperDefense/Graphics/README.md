@@ -22,7 +22,8 @@
 - `NotebookWorldView`: боевой экран.
 - `PlayerShell` и `WorkshopUi`: оболочка и мастерская.
 - `FieldMenuSkin`, `FieldMenuTheme`, `BattleHudTheme`: поверхности и независимые области оформления меню и боя.
-- `NightNotebookArt`, `.Foundation`, `.Weapons`: модульные детали, ревизия `paper-mechanisms-v5`.
+- `NightNotebookArt.Foundation` рисует рамы и опоры. На собранной башне пробойное орудие опирается на две направляющие, мортира — на широкий постамент с перехватом, веер — на расходящуюся вилку. Выбранная ступица поворота видна над опорой.
+- `NightNotebookArt.Weapons` и `NightNotebookArt.Attachments` рисуют механизмы, головки, прицелы, магазины, спуски и крепления. На миниатюрах сохраняются просветы между створками веера и направляющими пробойного орудия. Обзорный прицел узнаётся по поперечным линзам, запасная кассета — по двум бобинам.
 - `InkSwarmArt` и фабрики Enemy/Scenery/Effect: боевая тема `ink-swarm-v1`.
 - `NightNotebookPaperGraphic` и `NightNotebookEffectPalette`: бумага и контраст на тёмной поверхности.
 

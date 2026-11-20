@@ -162,7 +162,6 @@ namespace PaperDefense.Presentation
                 foreach (var motion in pose.Mounts)
                     if (!tower.Mounts.Any(m => m.SlotIndex == motion.SlotIndex)) throw new ArgumentException("Pose references an unoccupied socket.");
                 AppendFoundation(tower.Foundation, fragments, false);
-                float? supportY = FoundationSupportY(fragments);
                 Fits.TryGetFrame(tower.Foundation.Frame.Id, tower.Foundation.Frame.Revision, out var frame);
                 foreach (var selected in tower.Mounts)
                 {
@@ -171,7 +170,7 @@ namespace PaperDefense.Presentation
                     var root = new Vector2(socket.Position.X + weapon.Pivot.X, socket.Position.Y + weapon.Pivot.Y);
                     var mechanism = snapshot.Definitions.Single(d => d.Id == selected.Weapon.Mechanism.Id && d.Revision == selected.Weapon.Mechanism.Revision);
                     AppendWeapon(selected.Weapon, selected.SlotIndex, root, pose.For(selected.SlotIndex), fragments, anchors,
-                        tower.Foundation.Turn, supportY, mechanism.WeaponFamilies);
+                        tower.Foundation.Turn, FoundationSupportY(fragments, root.x), mechanism.WeaponFamilies);
                 }
                 // Weapon poses are relative to the chassis. Turn the complete drawing around
                 // its cell, including its off-centre sockets and the projectile launch anchors.
@@ -246,10 +245,9 @@ namespace PaperDefense.Presentation
             }
             if (vacantMounts)
             {
-                float? supportY = FoundationSupportY(fragments);
                 foreach (var socket in frame.Mounts)
                     AddTurn(fragments, recipe.Turn, socket.SlotIndex,
-                        new Vector2(socket.Position.X, socket.Position.Y + .158f), supportY);
+                        new Vector2(socket.Position.X, socket.Position.Y + .158f), FoundationSupportY(fragments, socket.Position.X));
             }
         }
 
@@ -261,7 +259,7 @@ namespace PaperDefense.Presentation
             if (motion.Radians < weapon.MinRadians - .00001f || motion.Radians > weapon.MaxRadians + .00001f
                 || motion.Recoil > 0 || motion.Recoil < -weapon.RecoilLimit - .00001f)
                 throw new ArgumentOutOfRangeException(nameof(motion), "Pose exceeds mechanical angle or recoil range.");
-            AddTurn(fragments, turn, slot, root, supportY);
+            AddTurn(fragments, turn, slot, root, supportY, weaponFamily);
             foreach (var reference in recipe.Parts)
             {
                 var part = RequiredPart(reference);
@@ -314,25 +312,30 @@ namespace PaperDefense.Presentation
         static void Add(List<AssemblyVisualFragment> fragments, PartRef part, int slot, int layer, Rect area, Vector2 root, float radians,
             AssemblyMechanicsPose mechanics = default, AssemblyWeaponFamily weaponFamily = AssemblyWeaponFamily.None)
             => fragments.Add(new AssemblyVisualFragment(part.Id, "notebook." + part.Id, slot, layer, area, area, root, 1, radians, mechanics, weaponFamily));
-        static float? FoundationSupportY(List<AssemblyVisualFragment> fragments)
+        static float? FoundationSupportY(List<AssemblyVisualFragment> fragments, float socketX)
         {
             float? top = null;
+            // Hull regions are in chassis space here. A raised central housing
+            // does not support an outboard socket beside it.
             foreach (var fragment in fragments)
-                if (fragment.SlotIndex < 0 && fragment.Layer == (int)ComponentCategory.Hull)
-                    foreach (var corner in Corners(fragment.Region))
-                    {
-                        float y = fragment.Transform(corner).y;
-                        top = top.HasValue ? Mathf.Max(top.Value, y) : y;
-                    }
+            {
+                var region = fragment.Region;
+                if (fragment.SlotIndex >= 0 || fragment.Layer != (int)ComponentCategory.Hull ||
+                    socketX < region.xMin || socketX > region.xMax) continue;
+                float y = fragment.PartId == "hull.ribbed" ? region.yMin + region.height * NightNotebookArt.RibbedDeckTop : region.yMax;
+                top = top.HasValue ? Mathf.Max(top.Value, y) : y;
+            }
             return top;
         }
-        static void AddTurn(List<AssemblyVisualFragment> fragments, PartRef part, int slot, Vector2 root, float? supportY)
+        static void AddTurn(List<AssemblyVisualFragment> fragments, PartRef part, int slot, Vector2 root, float? supportY,
+            AssemblyWeaponFamily weaponFamily = AssemblyWeaponFamily.None)
         {
             var hub = new Rect(-.065f, -.065f, .13f, .13f);
             float bottom = supportY.HasValue ? Mathf.Min(hub.yMin, supportY.Value - root.y) : hub.yMin;
             var region = Rect.MinMaxRect(hub.xMin, bottom, hub.xMax, hub.yMax);
             // The stem shares its hub's visual fragment; no socket, layer, trim or mechanical anchor changes.
-            fragments.Add(new AssemblyVisualFragment(part.Id, "notebook." + part.Id, slot, 5, hub, region, root, 1, 0));
+            fragments.Add(new AssemblyVisualFragment(part.Id, "notebook." + part.Id, slot, 5, hub, region, root, 1, 0,
+                weaponFamily: weaponFamily));
         }
         static AssemblyVisualComposition Finish(List<AssemblyVisualFragment> fragments, List<AssemblyVisualAnchor> anchors,
             AssemblyDevelopmentPose development = default)

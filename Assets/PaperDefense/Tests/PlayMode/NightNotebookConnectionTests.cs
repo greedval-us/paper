@@ -58,6 +58,19 @@ namespace PaperDefense.Tests
             int weaponParts = Gun().Parts.Count(p => !p.Id.EndsWith(".none", System.StringComparison.Ordinal));
             Assert.That(c.Fragments.Count, Is.EqualTo(c.Fragments.Count(f => f.SlotIndex < 0) + turns.Length * (weaponParts + 1)));
         }
+        [Test] public void OutboardSocketsMeetTheRibbedDeckBesideTheRaisedCenterHousing()
+        {
+            var foundation = new FoundationRecipe(P("frame.heavy"), P("hull.ribbed"), P("armor.none"),
+                P("feed.standard"), P("turn.standard"));
+            var drawing = AssemblyVisualComposer.ComposeFoundation(foundation);
+            var deck = drawing.Fragments.Where(f => f.PartId == "hull.ribbed").OrderByDescending(f => f.Region.width).First();
+            float contact = deck.Region.yMin + deck.Region.height * NightNotebookArt.RibbedDeckTop;
+            var supports = drawing.Fragments.Where(f => f.Layer == 5).ToArray();
+            Assert.That(supports.Length, Is.EqualTo(2));
+            foreach (var support in supports)
+                Assert.That(support.Origin.y + support.Region.yMin, Is.EqualTo(contact).Within(.00001f));
+        }
+
         [Test] public void VacantFoundationSupportsStayInsideTheOriginalAggregateEnvelopeAndStandaloneHubsRemainCompact()
         {
             var c = AssemblyVisualComposer.ComposeFoundation(Foundation("frame.battery"));

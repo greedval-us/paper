@@ -41,8 +41,6 @@ namespace PaperDefense.Presentation
             if (pen == null || fragment.Region.width <= 0 || fragment.Region.height <= 0) return;
             var p = new Drawing(fragment, pen, at, opacity, tint, uniformScale, mechanics);
             string id = fragment.PartId ?? "";
-            if (p.Tiny && Category(fragment) == ComponentCategory.Mechanism) { DrawTinyMechanism(p,id); return; }
-            if (p.Tiny && Category(fragment) == ComponentCategory.Head) { DrawTinyHead(p,id); return; }
             switch (Category(fragment))
             {
                 case ComponentCategory.Frame: DrawFrame(p, id); break;
@@ -133,6 +131,7 @@ namespace PaperDefense.Presentation
             internal float Activity => mechanics.Activity;
             internal float Reload => mechanics.Reload;
             internal bool Reloading => mechanics.Reloading;
+            internal AssemblyWeaponFamily WeaponFamily => fragment.WeaponFamily;
             internal bool Tiny { get; }
 
             internal Drawing(AssemblyVisualFragment fragment, MeshPen pen, Vector2 at, float opacity, Color tint, float uniformScale,
@@ -346,6 +345,16 @@ namespace PaperDefense.Presentation
                 MaterialPanel(LocalPoint(x,y),LocalPoint(x+w,y),LocalPoint(x+w,y+h),LocalPoint(x,y+h),dark);
                 LocalLine(x,y,x+w,y,dark);LocalLine(x+w,y,x+w,y+h,dark);
                 LocalLine(x+w,y+h,x,y+h,dark);LocalLine(x,y+h,x,y,dark);
+            }
+            internal void TaperedSupport(float y0, float left0, float right0, float y1, float left1, float right1)
+            {
+                var a = LocalPoint(left0, y0);
+                var b = LocalPoint(right0, y0);
+                var c = LocalPoint(right1, y1);
+                var d = LocalPoint(left1, y1);
+                MaterialPanel(a, b, c, d, false);
+                StrokePoints(a, b, ink, 1); StrokePoints(b, c, ink, 1);
+                StrokePoints(c, d, ink, 1); StrokePoints(d, a, ink, 1);
             }
             internal void LocalDisc(float cx,float cy,float rx,float ry,bool dark=false)
             {

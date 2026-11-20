@@ -38,6 +38,14 @@ namespace PaperDefense.Tests
                     Is.EqualTo(expected.Fragments.Select(f => (f.PartId, f.SpriteId, f.Layer))), entry.Id);
                 Assert.That(actual.Bounds, Is.EqualTo(expected.Bounds), entry.Id);
                 Assert.That(actual.Anchors.Count, Is.EqualTo(entry.Kind == AlbumEntryKind.Tower ? entry.Snapshot.Recipe.Tower.Mounts.Count : 0), entry.Id);
+                if (entry.Kind == AlbumEntryKind.Tower)
+                    foreach (var mount in entry.Snapshot.Recipe.Tower.Mounts)
+                    {
+                        var core = mount.Weapon.Mechanism;
+                        var family = entry.Snapshot.Definitions.Single(d => d.Id == core.Id && d.Revision == core.Revision).WeaponFamilies;
+                        var support = actual.Fragments.Single(f => f.SlotIndex == mount.SlotIndex && f.Layer == 5);
+                        Assert.That(support.WeaponFamily, Is.EqualTo(family), entry.Id);
+                    }
             }
         }
 
